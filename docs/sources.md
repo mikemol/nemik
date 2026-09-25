@@ -97,3 +97,9 @@ mtools accepted A1 as their W26: order Ask3 (write refusals) → Ask1 (ledger.pa
 
 ## A2 live (2026-09-25)
 luthen relay: host/metrics_relays.json runs nemik-metrics every 5m (luthen-metrics-relay.timer, 120 CPU-s, nemik_* only) → vmagent. Keep it idempotent and fast. Sent luthen: nemik-check exit semantics for LOCAL_CHECKS, plus 5 panel specs (effort by class, interrupts by repo, waypoints by state, violations, blocked).
+
+## S4 slice 1 (2026-09-25)
+- Pin mtools 1b799bc (ledger.read/parse). adapter.ledger_graph: each parsed line is a prov:Activity, prov:used its waypoint, with nemik:kind and nemik:effortClass (KIND_CLASS: tick/arm forecast; manual/msg/peer/op/main/swarm interrupt; else unclassified).
+- Totals across all ledgers: forecast 2320, interrupt 524, unclassified 341, unparsed (legacy) 1158. nemik-metrics adds nemik_ledger_lines{repo,class,kind} and nemik_ledger_unparsed{repo}. Run cost 1.82 s user CPU.
+- mtools parse accepted stamp "2026-09-24T" (linux-sources and its gate worktree): kept as nemik:rawStamp. Report to mtools.
+- Still missing: what caused each waypoint (Ask 2).

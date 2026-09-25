@@ -19,3 +19,8 @@ nemik:Working skos:broader oslc_cm:state .
 nemik:Blocked skos:broader oslc_cm:state .
 nemik:Done skos:broader oslc_cm:state .
 nemik:Dropped a rdfs:Class ; rdfs:comment "A residue entry: a symbol that was issued and dropped, still resolvable." .
+nemik:kind a rdf:Property ; rdfs:comment "The ledger line's raw kind column (free text upstream)." .
+nemik:effortClass a rdf:Property ; rdfs:comment "forecast | interrupt | unclassified, from nemik's KIND_CLASS reading of kind." .
+nemik:outcome a rdf:Property ; rdfs:comment "The ledger line's outcome column." .
+nemik:mechanism a rdf:Property ; rdfs:comment "The ledger line's mechanism column." .
+nemik:rawStamp a rdf:Property ; rdfs:comment "A ledger stamp mtools parsed that is not a valid xsd:dateTime." .

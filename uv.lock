@@ -14,7 +14,7 @@ wheels = [
 [[package]]
 name = "mikemol-pathsforward"
 version = "0.1.0"
-source = { git = "https://github.com/mikemol/mtools.git?subdirectory=pathsforward&rev=6857d33d9d43eee291d7d4f805ee5df064893b92#6857d33d9d43eee291d7d4f805ee5df064893b92" }
+source = { git = "https://github.com/mikemol/mtools.git?subdirectory=pathsforward&rev=1b799bcd0161274965bd7781b281f7fc3a07d922#1b799bcd0161274965bd7781b281f7fc3a07d922" }
 
 [[package]]
 name = "nemik"
@@ -28,7 +28,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "mikemol-pathsforward", git = "https://github.com/mikemol/mtools.git?subdirectory=pathsforward&rev=6857d33d9d43eee291d7d4f805ee5df064893b92" },
+    { name = "mikemol-pathsforward", git = "https://github.com/mikemol/mtools.git?subdirectory=pathsforward&rev=1b799bcd0161274965bd7781b281f7fc3a07d922" },
     { name = "pyshacl", specifier = ">=0.26" },
     { name = "rdflib", specifier = ">=7" },
 ]

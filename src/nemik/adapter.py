@@ -6,11 +6,12 @@ reader, so schema drift across repos is mtools' problem to absorb, not a second 
 
 from __future__ import annotations
 
+from datetime import datetime
 from pathlib import Path
 
-from mikemol.pathsforward import model, store
+from mikemol.pathsforward import ledger, model, store
 from rdflib import RDF, Graph, Literal, Namespace, URIRef
-from rdflib.namespace import DCTERMS, XSD
+from rdflib.namespace import DCTERMS, PROV, RDFS, XSD
 
 OSLC_CM = Namespace("http://open-services.net/ns/cm#")
 NEMIK = Namespace("https://github.com/mikemol/nemik/ns#")
@@ -78,3 +79,51 @@ def queue_graph(repo: str, state_path: Path) -> Graph:
         g.add((node, NEMIK.symbol, Literal(symbol)))
         g.add((node, DCTERMS.title, Literal(model.text(r, "title"))))
     return g
+
+
+# Ledger kind -> effort class. Only `tick` has a defined meaning upstream (see the friction report
+# on summit's floor); the rest is nemik's reading of observed use, kept explicit so it can be argued.
+KIND_CLASS = {
+    "tick": "forecast",
+    "arm": "forecast",
+    "manual": "interrupt",
+    "msg": "interrupt",
+    "peer": "interrupt",
+    "op": "interrupt",
+    "main": "interrupt",
+    "swarm": "interrupt",
+}
+
+
+def ledger_graph(repo: str, ledger_path: Path) -> tuple[Graph, int]:
+    """Translate one ledger into PROV activities; return (graph, unparsed line count).
+
+    Read through mtools' `ledger.read`, never re-split here. Each parsed line is a prov:Activity
+    that, when it names a symbol, prov:used that waypoint, so interrupt and forecast effort land on
+    the same nodes the dependency edges join.
+    """
+    g = bind(Graph())
+    g.bind("prov", PROV)
+    unparsed = 0
+    ws = workstream_uri(repo)
+    for n, rec in enumerate(ledger.read(ledger_path)):
+        if isinstance(rec, ledger.Unparsed):
+            unparsed += 1
+            continue
+        e = rec.entry
+        node = URIRef(f"{ws}/ledger/{n}")
+        g.add((node, RDF.type, PROV.Activity))
+        g.add((node, NEMIK.workstream, ws))
+        try:
+            datetime.fromisoformat(rec.stamp)
+            g.add((node, PROV.startedAtTime, Literal(rec.stamp, datatype=XSD.dateTime)))
+        except ValueError:
+            g.add((node, NEMIK.rawStamp, Literal(rec.stamp)))  # parsed upstream, not a dateTime
+        g.add((node, NEMIK.kind, Literal(e.kind)))
+        g.add((node, NEMIK.effortClass, Literal(KIND_CLASS.get(e.kind, "unclassified"))))
+        g.add((node, NEMIK.outcome, Literal(e.outcome)))
+        g.add((node, NEMIK.mechanism, Literal(e.mechanism)))
+        g.add((node, RDFS.comment, Literal(e.note)))
+        if e.symbol != model.NO_SYMBOL:
+            g.add((node, PROV.used, waypoint_uri(repo, e.symbol)))
+    return g, unparsed

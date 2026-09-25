@@ -7,6 +7,8 @@
                                              interrupt (operator, peer), or internal (subagent
                                              hand-backs, background notices: the session's own work returning)
     nemik_turns_total{repo}                  turns ended (Stop events)
+    nemik_ledger_lines{repo,class,kind}      parsed ledger lines (mtools ledger.read) by effort class
+    nemik_ledger_unparsed{repo}              legacy/malformed ledger lines mtools returned unparsed
 
 Pushing is not nemik's job: luthen hosts the push path, which admits metric names only when
 its policy entails them. This command prints, and the host decides what to import.
@@ -21,8 +23,9 @@ from collections import Counter
 from pathlib import Path
 
 from rdflib import RDF
+from rdflib.namespace import PROV
 
-from nemik.adapter import NEMIK, OSLC_CM
+from nemik.adapter import NEMIK, OSLC_CM, ledger_graph
 from nemik.check import survey
 
 CLASS = {
@@ -81,6 +84,19 @@ def main() -> None:
     out.append("# TYPE nemik_turns_total counter")
     for repo, n in sorted(turns.items()):
         out.append(f"nemik_turns_total{label(repo=repo)} {n}")
+    out += ["# TYPE nemik_ledger_lines gauge", "# TYPE nemik_ledger_unparsed gauge"]
+    for path in sorted(args.root.glob("*/.claude/paths-forward.ledger")):
+        repo = path.parents[1].name
+        g, unparsed = ledger_graph(repo, path)
+        lines = Counter(
+            (str(c), str(k))
+            for a in g.subjects(RDF.type, PROV.Activity)
+            for c in g.objects(a, NEMIK.effortClass)
+            for k in g.objects(a, NEMIK.kind)
+        )
+        for (cls, kind), n in sorted(lines.items()):
+            out.append(f"nemik_ledger_lines{label(repo=repo, kind=kind, **{'class': cls})} {n}")
+        out.append(f"nemik_ledger_unparsed{label(repo=repo)} {unparsed}")
     print("\n".join(out))
 
 
