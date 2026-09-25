@@ -106,3 +106,8 @@ luthen relay: host/metrics_relays.json runs nemik-metrics every 5m (luthen-metri
 
 ## T3 slice 1 (2026-09-25)
 nemik-serve: / (cytoscape+dagre dependency view: repo compounds, state colours, border = interrupt share), /graph.json, /graph.ttl. Rebuilds only on queue/ledger mtime change. 687 nodes, 220 edges, 440 with ledger effort. Containerfile added; hosting ask to luthen.
+
+## T3 per luthen review (W82)
+- NEMIK_ROOT (default ~/github); reads either <root>/<repo>/.claude/paths-forward.* or export layout <root>/<repo>/paths-forward.*. Pod mounts luthen host-side export read-only at /export (never all of ~/github: amr-skills corpora, .venvs, inboxes).
+- cytoscape/dagre/cytoscape-dagre vendored in src/nemik/web/vendor (SHA256SUMS); page makes no external requests.
+- /metrics: nemik_build_info, nemik_graph_{nodes,edges,workstreams}, nemik_graph_rebuilds_total, nemik_graph_rebuild_cpu_seconds (policy D14).

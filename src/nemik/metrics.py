@@ -26,7 +26,7 @@ from rdflib import RDF
 from rdflib.namespace import PROV
 
 from nemik.adapter import NEMIK, OSLC_CM, ledger_graph
-from nemik.check import survey
+from nemik.check import LEDGER, default_root, survey, workstream_files
 
 CLASS = {
     "tick": "forecast",
@@ -49,7 +49,7 @@ def label(**kv: str) -> str:
 
 def main() -> None:
     ap = argparse.ArgumentParser(prog="nemik-metrics", description=(__doc__ or "").splitlines()[0])
-    ap.add_argument("--root", type=Path, default=Path.home() / "github")
+    ap.add_argument("--root", type=Path, default=default_root())
     ap.add_argument("--spool", type=Path, default=spool_path())
     args = ap.parse_args()
 
@@ -85,8 +85,7 @@ def main() -> None:
     for repo, n in sorted(turns.items()):
         out.append(f"nemik_turns_total{label(repo=repo)} {n}")
     out += ["# TYPE nemik_ledger_lines gauge", "# TYPE nemik_ledger_unparsed gauge"]
-    for path in sorted(args.root.glob("*/.claude/paths-forward.ledger")):
-        repo = path.parents[1].name
+    for repo, path in workstream_files(args.root, LEDGER):
         g, unparsed = ledger_graph(repo, path)
         lines = Counter(
             (str(c), str(k))

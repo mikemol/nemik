@@ -8,6 +8,7 @@ are printed but do not fail the check: divergence is reported to summit's floor,
 from __future__ import annotations
 
 import argparse
+import os
 import sys
 from collections.abc import Iterator
 from importlib.resources import files
@@ -20,7 +21,23 @@ from rdflib.namespace import SH
 
 from nemik.adapter import bind, queue_graph
 
-STATE_FILE = Path(".claude/paths-forward.json")
+QUEUE, LEDGER = "paths-forward.json", "paths-forward.ledger"
+
+
+def default_root() -> Path:
+    """$NEMIK_ROOT, else ~/github."""
+    return Path(os.environ.get("NEMIK_ROOT") or Path.home() / "github")
+
+
+def workstream_files(root: Path, name: str) -> list[tuple[str, Path]]:
+    """(repo, path) for `name` under either layout, keyed by repo.
+
+    ~/github layout: <root>/<repo>/.claude/<name>. Export layout (luthen's host-side copy, which
+    carries only these two files per repo): <root>/<repo>/<name>.
+    """
+    found = {p.parents[1].name: p for p in root.glob(f"*/.claude/{name}")}
+    found |= {p.parent.name: p for p in root.glob(f"*/{name}")}
+    return sorted(found.items())
 
 
 def shapes() -> Graph:
@@ -35,8 +52,7 @@ Finding = tuple[str, str, str]  # (severity, focus symbol, message)
 def survey(root: Path) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
     """Yield (repo, graph, findings) per queue; graph is None when mtools refuses the file."""
     shacl = shapes()
-    for state_path in sorted(root.glob(f"*/{STATE_FILE}")):
-        repo = state_path.parents[1].name
+    for repo, state_path in workstream_files(root, QUEUE):
         try:
             g = queue_graph(repo, state_path)
         except UnreadableStateError as exc:
@@ -55,7 +71,7 @@ def survey(root: Path) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
 
 def main() -> None:
     ap = argparse.ArgumentParser(prog="nemik-check", description=(__doc__ or "").splitlines()[0])
-    ap.add_argument("--root", type=Path, default=Path.home() / "github")
+    ap.add_argument("--root", type=Path, default=default_root())
     ap.add_argument("--dump", type=Path, help="write the merged graph as Turtle")
     args = ap.parse_args()
 

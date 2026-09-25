@@ -3,6 +3,8 @@
     /             the dependency view (static page; draws /graph.json)
     /graph.json   waypoints, enables edges, and per-waypoint effort by class, for the page
     /graph.ttl    the merged RDF graph (OSLC CM ChangeRequests + PROV ledger activities)
+    /vendor/*     cytoscape, dagre, cytoscape-dagre, vendored so the page never leaves the host
+    /metrics      Prometheus text: graph size, last rebuild cost, build info
 
 The graph is rebuilt only when a queue or ledger file changes (mtime key), so a page poll costs
 a stat walk, not a SHACL pass.
@@ -12,6 +14,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import time
+from importlib.metadata import PackageNotFoundError, version
 from collections import Counter, defaultdict
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from importlib.resources import files
@@ -21,7 +25,10 @@ from rdflib import RDF, Graph
 from rdflib.namespace import DCTERMS, PROV
 
 from nemik.adapter import NEMIK, OSLC_CM, bind, ledger_graph
-from nemik.check import survey
+from nemik.check import LEDGER, QUEUE, default_root, survey, workstream_files
+
+
+VENDOR = {"cytoscape.min.js", "dagre.min.js", "cytoscape-dagre.js"}
 
 
 class Model:
@@ -30,26 +37,53 @@ class Model:
         self.key: tuple = ()
         self.graph = bind(Graph())
         self.payload = b"{}"
+        self.rebuilds = 0
+        self.rebuild_cpu = 0.0
+        self.nodes = self.edges = self.workstreams = 0
 
     def sources(self) -> list[Path]:
-        return sorted(
-            [*self.root.glob("*/.claude/paths-forward.json"), *self.root.glob("*/.claude/paths-forward.ledger")]
-        )
+        return [p for name in (QUEUE, LEDGER) for _, p in workstream_files(self.root, name)]
 
     def refresh(self) -> None:
         key = tuple((str(p), p.stat().st_mtime_ns) for p in self.sources())
         if key == self.key:
             return
+        cpu0 = time.process_time()
         g, findings = bind(Graph()), {}
         for repo, qg, fs in survey(self.root):
             findings[repo] = fs
             if qg is not None:
                 g += qg
-        for path in self.root.glob("*/.claude/paths-forward.ledger"):
-            lg, _ = ledger_graph(path.parents[1].name, path)
+        for repo, path in workstream_files(self.root, LEDGER):
+            lg, _ = ledger_graph(repo, path)
             g += lg
         self.graph, self.key = g, key
-        self.payload = json.dumps(to_json(g, findings)).encode()
+        self.rebuilds += 1
+        self.rebuild_cpu = time.process_time() - cpu0
+        doc = to_json(g, findings)
+        self.nodes, self.edges, self.workstreams = len(doc["nodes"]), len(doc["edges"]), len(findings)
+        self.payload = json.dumps(doc).encode()
+
+    def metrics(self) -> bytes:
+        try:
+            ver = version("nemik")
+        except PackageNotFoundError:
+            ver = "unknown"
+        return "\n".join([
+            "# TYPE nemik_build_info gauge",
+            f'nemik_build_info{{version="{ver}"}} 1',
+            "# TYPE nemik_graph_nodes gauge",
+            f"nemik_graph_nodes {self.nodes}",
+            "# TYPE nemik_graph_edges gauge",
+            f"nemik_graph_edges {self.edges}",
+            "# TYPE nemik_graph_workstreams gauge",
+            f"nemik_graph_workstreams {self.workstreams}",
+            "# TYPE nemik_graph_rebuilds_total counter",
+            f"nemik_graph_rebuilds_total {self.rebuilds}",
+            "# TYPE nemik_graph_rebuild_cpu_seconds gauge",
+            f"nemik_graph_rebuild_cpu_seconds {self.rebuild_cpu:.3f}",
+            "",
+        ]).encode()
 
 
 def local(term) -> str:
@@ -91,14 +125,24 @@ def to_json(g: Graph, findings: dict) -> dict:
 
 def handler(model: Model) -> type[BaseHTTPRequestHandler]:
     page = files("nemik.web").joinpath("index.html").read_bytes()
+    vendor = files("nemik.web").joinpath("vendor")
 
     class H(BaseHTTPRequestHandler):
         def do_GET(self) -> None:  # noqa: N802 - http.server's name
             if self.path in ("/", "/index.html"):
                 self.send(200, "text/html; charset=utf-8", page)
                 return
+            if self.path.startswith("/vendor/"):
+                name = self.path.removeprefix("/vendor/")
+                if name in VENDOR:
+                    self.send(200, "text/javascript", vendor.joinpath(name).read_bytes())
+                else:
+                    self.send(404, "text/plain", b"not found")
+                return
             model.refresh()
-            if self.path == "/graph.json":
+            if self.path == "/metrics":
+                self.send(200, "text/plain; version=0.0.4", model.metrics())
+            elif self.path == "/graph.json":
                 self.send(200, "application/json", model.payload)
             elif self.path == "/graph.ttl":
                 self.send(200, "text/turtle", model.graph.serialize(format="turtle").encode())
@@ -120,7 +164,7 @@ def handler(model: Model) -> type[BaseHTTPRequestHandler]:
 
 def main() -> None:
     ap = argparse.ArgumentParser(prog="nemik-serve", description=(__doc__ or "").splitlines()[0])
-    ap.add_argument("--root", type=Path, default=Path.home() / "github")
+    ap.add_argument("--root", type=Path, default=default_root())
     ap.add_argument("--bind", default="127.0.0.1")
     ap.add_argument("--port", type=int, default=8750)
     args = ap.parse_args()
