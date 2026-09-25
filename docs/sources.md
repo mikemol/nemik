@@ -94,3 +94,6 @@ mtools accepted A1 as their W26: order Ask3 (write refusals) → Ask1 (ledger.pa
 ## A2 slice (2026-09-25)
 - Hook now tags source=tick for mtools payload prompts ("[paths-forward tick]") and operator-tick for a bare "tick". Spool lines before this change count scheduled ticks as operator.
 - nemik-metrics prints nemik_waypoints{repo,state}, nemik_findings{repo,severity}, nemik_prompts_total{repo,source,class=forecast|interrupt|internal}, nemik_turns_total{repo}. Push is luthen's (policy-admitted names).
+
+## A2 live (2026-09-25)
+luthen relay: host/metrics_relays.json runs nemik-metrics every 5m (luthen-metrics-relay.timer, 120 CPU-s, nemik_* only) → vmagent. Keep it idempotent and fast. Sent luthen: nemik-check exit semantics for LOCAL_CHECKS, plus 5 panel specs (effort by class, interrupts by repo, waypoints by state, violations, blocked).
