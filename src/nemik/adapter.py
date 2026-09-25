@@ -64,6 +64,14 @@ def queue_graph(repo: str, state_path: Path) -> Graph:
             g.add((node, NEMIK.blockedKind, Literal(kind)))
         for tag in model.strlist(w, "touches"):
             g.add((node, NEMIK.touches, Literal(tag)))
+        if issued := model.text(w, "issued_at"):
+            g.add((node, DCTERMS.created, Literal(issued)))
+        # mtools 2e21902: derived from the tick lock at mint time, never by the agent.
+        if during := model.text(w, "minted_during"):
+            g.add((node, NEMIK.mintedDuring, Literal(during)))
+        if cause := model.text(w, "caused_by"):
+            cause_ref = waypoint_uri(repo, cause) if model.symbol_number(cause) is not None else Literal(cause)
+            g.add((node, PROV.wasInformedBy, cause_ref))
     for r in state.residue:
         symbol = model.text(r, "symbol")
         node = waypoint_uri(repo, symbol)

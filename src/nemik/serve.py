@@ -113,6 +113,8 @@ def to_json(g: Graph, findings: dict) -> dict:
                 "blocked_kind": str(g.value(n, NEMIK.blockedKind) or ""),
                 "effort": dict(effort.get(str(n), {})),
                 "last_activity": last.get(str(n), ""),
+                "minted_during": str(g.value(n, NEMIK.mintedDuring) or ""),
+                "caused_by": str(g.value(n, PROV.wasInformedBy) or ""),
             })
     for s, _, o in g.triples((None, NEMIK.enables, None)):
         edges.append({"source": str(s), "target": str(o)})

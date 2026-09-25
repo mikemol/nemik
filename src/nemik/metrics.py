@@ -1,6 +1,8 @@
 """nemik-metrics: print nemik's state as Prometheus text exposition (for vmagent's import).
 
     nemik_waypoints{repo,state}              waypoints per OSLC state (ready|working|blocked|done|dropped)
+    nemik_waypoints_minted{repo,during}      waypoints by mtools' minted_during (tick|interrupt);
+                                             absent on waypoints minted before mtools 2e21902
     nemik_findings{repo,severity}            SHACL results per severity (Violation|Warning|Unreadable)
     nemik_prompts_total{repo,source,class}   prompts recorded by the global hook, where class is
                                              forecast (scheduled or operator-typed tick),
@@ -53,7 +55,7 @@ def main() -> None:
     ap.add_argument("--spool", type=Path, default=spool_path())
     args = ap.parse_args()
 
-    out = ["# TYPE nemik_waypoints gauge", "# TYPE nemik_findings gauge"]
+    out = ["# TYPE nemik_waypoints gauge", "# TYPE nemik_waypoints_minted gauge", "# TYPE nemik_findings gauge"]
     for repo, g, findings in survey(args.root):
         states = Counter()
         if g is not None:
@@ -62,6 +64,9 @@ def main() -> None:
             states["dropped"] = sum(1 for _ in g.subjects(RDF.type, NEMIK.Dropped))
         for st, n in sorted(states.items()):
             out.append(f"nemik_waypoints{label(repo=repo, state=st)} {n}")
+        if g is not None:
+            for during, n in sorted(Counter(str(o) for o in g.objects(None, NEMIK.mintedDuring)).items()):
+                out.append(f"nemik_waypoints_minted{label(repo=repo, during=during)} {n}")
         for sev, n in sorted(Counter(sev for sev, _, _ in findings).items()):
             out.append(f"nemik_findings{label(repo=repo, severity=sev)} {n}")
 

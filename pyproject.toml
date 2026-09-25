@@ -6,7 +6,7 @@ requires-python = ">=3.13"
 dependencies = [
     "rdflib>=7",
     "pyshacl>=0.26",
-    "mikemol-pathsforward @ git+https://github.com/mikemol/mtools.git@1b799bcd0161274965bd7781b281f7fc3a07d922#subdirectory=pathsforward",
+    "mikemol-pathsforward @ git+https://github.com/mikemol/mtools.git@2e219026bcae3a0a4bc13acc2848be8adc5a9ddd#subdirectory=pathsforward",
 ]
 
 [project.scripts]

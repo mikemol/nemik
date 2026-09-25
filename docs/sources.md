@@ -113,3 +113,6 @@ nemik-serve: / (cytoscape+dagre dependency view: repo compounds, state colours, 
 - /metrics: nemik_build_info, nemik_graph_{nodes,edges,workstreams}, nemik_graph_rebuilds_total, nemik_graph_rebuild_cpu_seconds (policy D14).
 
 luthen accepted 54c7b88 (W82): export timer (incl. .linux-sources-gate-wt), then image pinned, then Deployment/Service via tofu. They will say when nemik-http answers. Deferred: vendor the mikemol-pathsforward wheel so the image build is hermetic (H1).
+
+## S4b (2026-09-25)
+Pin mtools 2e21902. Waypoint issued_at → dcterms:created; minted_during → nemik:mintedDuring (tick|interrupt, from the lock); caused_by → prov:wasInformedBy (waypoint URI if W<n>, else literal). View: diamond = minted during interrupt; detail shows caused by. Metric nemik_waypoints_minted{repo,during}. No live queue has these fields yet (only new --add calls write them). Tested on a scratch copy: W90 interrupt, caused_by operator.

@@ -51,7 +51,7 @@ dt { color: var(--muted); }
   <div id="cy"></div>
   <aside>
     <div class="legend" id="legend"></div>
-    <p class="stat">Border thickness: interrupt share of ledger activity on that waypoint.</p>
+    <p class="stat">Border thickness: interrupt share of ledger activity on that waypoint. Diamond: minted during an interrupt (no tick lock held).</p>
     <h2>Selected</h2>
     <div id="detail" class="stat">Click a waypoint.</div>
     <h2>Findings</h2>
@@ -93,6 +93,7 @@ function draw() {
       { selector: "node", style: { "background-color": "data(fill)", label: "data(label)", color: css("--ink"),
         "font-size": 10, "text-valign": "center", "text-halign": "right", "text-margin-x": 4,
         width: 16, height: 16, "border-width": "data(border)", "border-color": css("--interrupt") } },
+      { selector: 'node[minted_during = "interrupt"]', style: { shape: "diamond", width: 20, height: 20 } },
       { selector: ".repo", style: { "background-opacity": 0.04, "background-color": css("--ink"), "border-width": 1,
         "border-color": css("--line"), label: "data(label)", "text-valign": "top", "text-halign": "center",
         "font-size": 12, color: css("--muted") } },
@@ -113,6 +114,8 @@ function detail(n) {
     <dt>waypoint</dt><dd>${esc(n.repo)} ${esc(n.symbol)}</dd>
     <dt>title</dt><dd>${esc(n.title)}</dd>
     <dt>state</dt><dd>${esc(n.state)}</dd>
+    ${n.minted_during ? `<dt>minted during</dt><dd>${esc(n.minted_during)}</dd>` : ""}
+    ${n.caused_by ? `<dt>caused by</dt><dd>${esc(n.caused_by.replace(/^urn:nemik:/, ""))}</dd>` : ""}
     ${n.blocked_on.length ? `<dt>blocked on</dt><dd>${esc(n.blocked_on.join(", "))} (${esc(n.blocked_kind)})</dd>` : ""}
     <dt>forecast</dt><dd>${e.forecast || 0}</dd>
     <dt>interrupt</dt><dd>${e.interrupt || 0}</dd>
