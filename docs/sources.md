@@ -86,3 +86,11 @@ Hook fixes per luthen: repo from walking up for .git (no subprocess/wall-clock t
 ## A1 sent (2026-09-25)
 mtools inbox/2026-09-25-nemik-pathsforward-provenance-and-ledger-reader.md: ledger reader; --add provenance (minted_at, minted_during, --caused-by); write-time refusals. S4 waits on the ledger reader.
 mtools accepted A1 as their W26: order Ask3 (write refusals) → Ask1 (ledger.parse) → Ask2 (--add provenance). One commit per ask, sha to nemik. Compat: new fields optional on read, 6857d33 still loads. After their current pycodemod step.
+
+## 2026-09-25 later
+- Public remote: https://github.com/mikemol/nemik (first commit fe72d56).
+- mtools Ask3 landed b46475f: add refuses when counter lags a claimed symbol (the rosettapkg W6 path). Comma-joined enables was already refused, so el-openglo entries predate the guard or came from another writer. mtools --check reports them as edges findings.
+
+## A2 slice (2026-09-25)
+- Hook now tags source=tick for mtools payload prompts ("[paths-forward tick]") and operator-tick for a bare "tick". Spool lines before this change count scheduled ticks as operator.
+- nemik-metrics prints nemik_waypoints{repo,state}, nemik_findings{repo,severity}, nemik_prompts_total{repo,source,class=forecast|interrupt|internal}, nemik_turns_total{repo}. Push is luthen's (policy-admitted names).

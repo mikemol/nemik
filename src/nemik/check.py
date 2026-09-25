@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import sys
+from collections.abc import Iterator
 from importlib.resources import files
 from pathlib import Path
 
@@ -28,22 +29,20 @@ def shapes() -> Graph:
     return g
 
 
-def main() -> None:
-    ap = argparse.ArgumentParser(prog="nemik-check", description=(__doc__ or "").splitlines()[0])
-    ap.add_argument("--root", type=Path, default=Path.home() / "github")
-    ap.add_argument("--dump", type=Path, help="write the merged graph as Turtle")
-    args = ap.parse_args()
+Finding = tuple[str, str, str]  # (severity, focus symbol, message)
 
-    merged, failed = bind(Graph()), 0
-    for state_path in sorted(args.root.glob(f"*/{STATE_FILE}")):
+
+def survey(root: Path) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
+    """Yield (repo, graph, findings) per queue; graph is None when mtools refuses the file."""
+    shacl = shapes()
+    for state_path in sorted(root.glob(f"*/{STATE_FILE}")):
         repo = state_path.parents[1].name
         try:
             g = queue_graph(repo, state_path)
         except UnreadableStateError as exc:
-            print(f"UNREADABLE {repo}: {exc}")
-            failed += 1
+            yield repo, None, [("Unreadable", "--", str(exc))]
             continue
-        _, results, _ = validate(g, shacl_graph=shapes())
+        _, results, _ = validate(g, shacl_graph=shacl)
         findings = sorted(
             (str(sev).rsplit("#", 1)[-1], str(focus).rsplit("/", 1)[-1], str(msg))
             for focus, sev, msg in results.query(
@@ -51,6 +50,21 @@ def main() -> None:
                 initNs={"sh": SH},
             )
         )
+        yield repo, g, findings
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser(prog="nemik-check", description=(__doc__ or "").splitlines()[0])
+    ap.add_argument("--root", type=Path, default=Path.home() / "github")
+    ap.add_argument("--dump", type=Path, help="write the merged graph as Turtle")
+    args = ap.parse_args()
+
+    merged, failed = bind(Graph()), 0
+    for repo, g, findings in survey(args.root):
+        if g is None:
+            print(f"UNREADABLE {repo}: {findings[0][2]}")
+            failed += 1
+            continue
         violates = any(sev == "Violation" for sev, _, _ in findings)
         print(f"{'VIOLATES  ' if violates else 'OK        '}{repo}")
         for sev, focus, msg in findings:

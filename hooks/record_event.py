@@ -1,7 +1,7 @@
 """Global Claude Code hook (UserPromptSubmit, Stop, SessionStart): append one raw fact per event.
 
 Records facts only: when, which session, which repo, which event, and who the prompt came from
-(operator / peer session / subagent hand-back / background notice). No classification here:
+(scheduled tick / operator / operator-typed tick / peer session / subagent hand-back / background notice). No classification here:
 forecast-vs-interrupt is decided downstream by joining with the paths-forward ledger through
 mtools, so the hook never needs to understand a ledger schema. Prompt text is never stored.
 
@@ -14,6 +14,7 @@ import sys
 import time
 
 SOURCES = (
+    ("[paths-forward tick]", "tick"),  # mtools payload.py: the scheduled (forecast) tick prompt
     ("<cross-session-message", "peer"),
     ("<agent-message", "subagent"),
     ("<task-notification", "background"),
@@ -23,6 +24,8 @@ SOURCES = (
 
 def prompt_source(prompt: str) -> str:
     head = prompt.lstrip()[:200]
+    if head.strip().lower() == "tick":
+        return "operator-tick"  # the operator asking for one forecast tick by hand
     for prefix, source in SOURCES:
         if prefix in head:
             return source
