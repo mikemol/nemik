@@ -116,3 +116,6 @@ luthen accepted 54c7b88 (W82): export timer (incl. .linux-sources-gate-wt), then
 
 ## S4b (2026-09-25)
 Pin mtools 2e21902. Waypoint issued_at → dcterms:created; minted_during → nemik:mintedDuring (tick|interrupt, from the lock); caused_by → prov:wasInformedBy (waypoint URI if W<n>, else literal). View: diamond = minted during interrupt; detail shows caused by. Metric nemik_waypoints_minted{repo,during}. No live queue has these fields yet (only new --add calls write them). Tested on a scratch copy: W90 interrupt, caused_by operator.
+
+## W82 live (2026-09-25)
+nemik-http (resolve by name via luthen endpoints_query) serves a823b95 in k3s; 5 panels live in read-only Grafana. Ship = send luthen a commit. Local server stopped.
