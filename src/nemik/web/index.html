@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>nemik</title>
+<script src="https://cdn.jsdelivr.net/npm/cytoscape@3.30.2/dist/cytoscape.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dagre@0.8.5/dist/dagre.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/cytoscape-dagre@2.5.0/cytoscape-dagre.js"></script>
+<style>
+:root {
+  --bg: #f7f7f5; --panel: #ffffff; --ink: #1d1d1b; --muted: #6b6b66; --line: #d9d9d4;
+  --ready: #2f7d4f; --working: #2b62c0; --blocked: #b8452c; --done: #9a9a94; --dropped: #c8c8c2;
+  --other: #8a5cc2; --interrupt: #d08a1a;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #161615; --panel: #1f1f1d; --ink: #ecece8; --muted: #9a9a94; --line: #34342f;
+    --ready: #5cc088; --working: #6d9cf0; --blocked: #ef7a5c; --done: #6b6b66; --dropped: #45453f;
+    --other: #b38ae8; --interrupt: #f0b045;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.4 system-ui, sans-serif; }
+header { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; padding: 10px 16px; border-bottom: 1px solid var(--line); }
+header h1 { font-size: 16px; margin: 0 8px 0 0; }
+select, label { font: inherit; color: inherit; }
+select { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 4px 6px; }
+.stat { color: var(--muted); }
+main { display: grid; grid-template-columns: 1fr 340px; height: calc(100vh - 50px); }
+#cy { min-height: 400px; }
+aside { border-left: 1px solid var(--line); background: var(--panel); overflow: auto; padding: 12px 16px; }
+aside h2 { font-size: 14px; margin: 16px 0 6px; }
+.legend span { display: inline-flex; align-items: center; gap: 4px; margin-right: 10px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.finding { font-size: 12px; margin: 2px 0; }
+.Violation { color: var(--blocked); } .Warning { color: var(--interrupt); }
+dl { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; margin: 0; }
+dt { color: var(--muted); }
+@media (max-width: 800px) { main { grid-template-columns: 1fr; height: auto; } #cy { height: 70vh; } aside { border-left: 0; border-top: 1px solid var(--line); } }
+</style>
+</head>
+<body>
+<header>
+  <h1>nemik</h1>
+  <label>Repo <select id="repo"><option value="">all</option></select></label>
+  <label><input type="checkbox" id="showDone"> show done/dropped</label>
+  <span class="stat" id="stat"></span>
+</header>
+<main>
+  <div id="cy"></div>
+  <aside>
+    <div class="legend" id="legend"></div>
+    <p class="stat">Border thickness: interrupt share of ledger activity on that waypoint.</p>
+    <h2>Selected</h2>
+    <div id="detail" class="stat">Click a waypoint.</div>
+    <h2>Findings</h2>
+    <div id="findings"></div>
+  </aside>
+</main>
+<script>
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const STATES = ["ready", "working", "blocked", "done", "dropped"];
+const color = s => css("--" + (STATES.includes(s) ? s : "other"));
+let data = null, cy = null;
+
+document.getElementById("legend").innerHTML = [...STATES, "other"].map(s =>
+  `<span><i class="dot" style="background:${color(s)}"></i>${s}</span>`).join("");
+
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+
+function draw() {
+  const repo = document.getElementById("repo").value;
+  const showDone = document.getElementById("showDone").checked;
+  const keep = new Set(data.nodes.filter(n =>
+    (!repo || n.repo === repo) && (showDone || !["done", "dropped"].includes(n.state))).map(n => n.id));
+  const repos = [...new Set(data.nodes.filter(n => keep.has(n.id)).map(n => n.repo))];
+  const els = [
+    ...repos.map(r => ({ data: { id: "repo:" + r, label: r }, classes: "repo" })),
+    ...data.nodes.filter(n => keep.has(n.id)).map(n => {
+      const e = n.effort || {}, total = (e.forecast || 0) + (e.interrupt || 0) + (e.unclassified || 0);
+      return { data: { ...n, parent: "repo:" + n.repo, label: n.symbol,
+        fill: color(n.state), border: total ? 1 + 6 * (e.interrupt || 0) / total : 1 } };
+    }),
+    ...data.edges.filter(e => keep.has(e.source) && keep.has(e.target))
+      .map((e, i) => ({ data: { id: "e" + i, source: e.source, target: e.target } })),
+  ];
+  if (cy) cy.destroy();
+  cy = cytoscape({
+    container: document.getElementById("cy"), elements: els,
+    layout: { name: "dagre", rankDir: "LR", nodeSep: 12, rankSep: 40 },
+    style: [
+      { selector: "node", style: { "background-color": "data(fill)", label: "data(label)", color: css("--ink"),
+        "font-size": 10, "text-valign": "center", "text-halign": "right", "text-margin-x": 4,
+        width: 16, height: 16, "border-width": "data(border)", "border-color": css("--interrupt") } },
+      { selector: ".repo", style: { "background-opacity": 0.04, "background-color": css("--ink"), "border-width": 1,
+        "border-color": css("--line"), label: "data(label)", "text-valign": "top", "text-halign": "center",
+        "font-size": 12, color: css("--muted") } },
+      { selector: "edge", style: { width: 1, "line-color": css("--line"), "target-arrow-color": css("--line"),
+        "target-arrow-shape": "triangle", "curve-style": "bezier", "arrow-scale": 0.7 } },
+      { selector: ":selected", style: { "overlay-opacity": 0.15 } },
+    ],
+  });
+  cy.on("tap", "node[symbol]", ev => detail(ev.target.data()));
+  const shown = data.nodes.filter(n => keep.has(n.id));
+  const blocked = shown.filter(n => n.state === "blocked").length;
+  document.getElementById("stat").textContent = `${shown.length} waypoints · ${blocked} blocked · ${repos.length} repos`;
+}
+
+function detail(n) {
+  const e = n.effort || {};
+  document.getElementById("detail").innerHTML = `<dl>
+    <dt>waypoint</dt><dd>${esc(n.repo)} ${esc(n.symbol)}</dd>
+    <dt>title</dt><dd>${esc(n.title)}</dd>
+    <dt>state</dt><dd>${esc(n.state)}</dd>
+    ${n.blocked_on.length ? `<dt>blocked on</dt><dd>${esc(n.blocked_on.join(", "))} (${esc(n.blocked_kind)})</dd>` : ""}
+    <dt>forecast</dt><dd>${e.forecast || 0}</dd>
+    <dt>interrupt</dt><dd>${e.interrupt || 0}</dd>
+    <dt>unclassified</dt><dd>${e.unclassified || 0}</dd>
+    <dt>last activity</dt><dd>${esc(n.last_activity || "none")}</dd></dl>`;
+}
+
+function findings() {
+  const repo = document.getElementById("repo").value;
+  const rows = Object.entries(data.findings).filter(([r]) => !repo || r === repo)
+    .flatMap(([r, fs]) => fs.map(([sev, sym, msg]) =>
+      `<div class="finding ${esc(sev)}">${esc(sev)} · ${esc(r)} ${esc(sym)} · ${esc(msg)}</div>`));
+  document.getElementById("findings").innerHTML = rows.join("") || '<span class="stat">none</span>';
+}
+
+async function load() {
+  data = await (await fetch("graph.json")).json();
+  const sel = document.getElementById("repo"), cur = sel.value;
+  const repos = [...new Set(data.nodes.map(n => n.repo))].sort();
+  sel.innerHTML = '<option value="">all</option>' + repos.map(r => `<option${r === cur ? " selected" : ""}>${esc(r)}</option>`).join("");
+  draw(); findings();
+}
+document.getElementById("repo").onchange = () => { draw(); findings(); };
+document.getElementById("showDone").onchange = draw;
+load();
+setInterval(load, 60000);
+</script>
+</body>
+</html>

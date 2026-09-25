@@ -12,6 +12,7 @@ dependencies = [
 [project.scripts]
 nemik-check = "nemik.check:main"
 nemik-metrics = "nemik.metrics:main"
+nemik-serve = "nemik.serve:main"
 
 [build-system]
 requires = ["hatchling"]

@@ -103,3 +103,6 @@ luthen relay: host/metrics_relays.json runs nemik-metrics every 5m (luthen-metri
 - Totals across all ledgers: forecast 2320, interrupt 524, unclassified 341, unparsed (legacy) 1158. nemik-metrics adds nemik_ledger_lines{repo,class,kind} and nemik_ledger_unparsed{repo}. Run cost 1.82 s user CPU.
 - mtools parse accepted stamp "2026-09-24T" (linux-sources and its gate worktree): kept as nemik:rawStamp. Report to mtools.
 - Still missing: what caused each waypoint (Ask 2).
+
+## T3 slice 1 (2026-09-25)
+nemik-serve: / (cytoscape+dagre dependency view: repo compounds, state colours, border = interrupt share), /graph.json, /graph.ttl. Rebuilds only on queue/ledger mtime change. 687 nodes, 220 edges, 440 with ledger effort. Containerfile added; hosting ask to luthen.
