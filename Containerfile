@@ -1,5 +1,6 @@
 # nemik-serve: read-only graph view. Mount the export (<repo>/paths-forward.{json,ledger}) read-only at /export.
-FROM ghcr.io/astral-sh/uv:python3.13-bookworm-slim
+ARG BASE=ghcr.io/astral-sh/uv:python3.13-bookworm-slim
+FROM ${BASE}
 # git: uv fetches mikemol-pathsforward from its pinned git sha at build time
 RUN apt-get update && apt-get install -y --no-install-recommends git && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
