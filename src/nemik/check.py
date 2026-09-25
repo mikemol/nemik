@@ -36,7 +36,9 @@ def workstream_files(root: Path, name: str) -> list[tuple[str, Path]]:
     carries only these two files per repo): <root>/<repo>/<name>.
     """
     found = {p.parents[1].name: p for p in root.glob(f"*/.claude/{name}")}
-    found |= {p.parent.name: p for p in root.glob(f"*/{name}")}
+    found |= {p.parent.name: p for p in root.glob(f"*/{name}") if p.parent.name != ".claude"}
+    if not found and (root / ".claude" / name).exists():  # --root pointed at one repo
+        found = {root.name: root / ".claude" / name}
     return sorted(found.items())
 
 

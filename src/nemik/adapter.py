@@ -86,6 +86,11 @@ def queue_graph(repo: str, state_path: Path, known: frozenset[str] = frozenset()
         g.add((node, DCTERMS.title, Literal(model.text(w, "title"))))
         g.add((node, OSLC_CM.state, STATE.get(status, Literal(status))))
         g.add((node, OSLC_CM.closed, Literal(status == "done", datatype=XSD.boolean)))
+        # strlist reads a bare string as one element, which hid el-openglo's 45 comma-joined
+        # fields; record the raw shape so the shapes can see it.
+        for field in ("enables", "touches", "blocked_on"):
+            if isinstance(w.get(field), str):
+                g.add((node, NEMIK.stringNotList, Literal(field)))
         for target in model.strlist(w, "enables"):
             g.add((node, NEMIK.enables, waypoint_uri(repo, target)))
         for who in model.strlist(w, "blocked_on"):

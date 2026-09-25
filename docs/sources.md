@@ -126,3 +126,6 @@ View: dashed red waits edges to waypoints, per-repo actor nodes, operator node. 
 
 ## mtools W27 (accepted 2026-09-25)
 --update will set enables (repairs el-openglo); modes refuse flags they do not apply (exit 2). repo:W<n> becomes legal in enables and ledger symbols. nemik follow-up when it lands: adapter must map repo:W<n> in enables to the foreign waypoint URI, and SHACL must validate foreign targets against the merged graph (per-repo validation would flag them as dangling).
+
+## 2026-09-25 el-openglo fixed
+el-openglo repaired 45 fields (its own writer scripts/paths_forward.py stored lists as strings; a second writer beside mtools). nemik missed 41 of them because mtools strlist reads a bare string as one element: added nemik:stringNotList + ListFieldShape (Warning). --root pointed at one repo now labels it by repo name. Pin mtools dce1dbe (--update sets enables; unused flags refused).

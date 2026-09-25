@@ -25,3 +25,4 @@ nemik:outcome a rdf:Property ; rdfs:comment "The ledger line's outcome column." 
 nemik:mechanism a rdf:Property ; rdfs:comment "The ledger line's mechanism column." .
 nemik:mintedDuring a rdf:Property ; rdfs:comment "tick | interrupt: whether a live tick lock was held when mtools minted the waypoint." .
 nemik:waitsFor a rdf:Property ; rdfs:comment "An edge nemik resolved from free-text blocked_on: to a waypoint (local or repo:W<n>), a workstream, or the operator." .
+nemik:stringNotList a rdf:Property ; rdfs:comment "Names a list field (enables, touches, blocked_on) the queue stores as a bare string." .

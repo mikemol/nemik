@@ -36,3 +36,9 @@ nemik:BlockedShape a sh:NodeShape ;
                        [ sh:path nemik:blockedKind ; sh:minCount 1 ] ) ] ) ;
     sh:severity sh:Warning ;
     sh:message "a blocked waypoint must carry blockedOn and blockedKind" .
+
+# A list field stored as a bare string reads as one element, however many symbols it holds.
+nemik:ListFieldShape a sh:NodeShape ;
+    sh:targetSubjectsOf nemik:stringNotList ;
+    sh:property [ sh:path nemik:stringNotList ; sh:maxCount 0 ; sh:severity sh:Warning ;
+                  sh:message "a list field (enables, touches or blocked_on) is stored as a bare string" ] .
