@@ -6,7 +6,6 @@ reader, so schema drift across repos is mtools' problem to absorb, not a second 
 
 from __future__ import annotations
 
-from datetime import datetime
 from pathlib import Path
 
 from mikemol.pathsforward import ledger, model, store
@@ -122,11 +121,7 @@ def ledger_graph(repo: str, ledger_path: Path) -> tuple[Graph, int]:
         node = URIRef(f"{ws}/ledger/{n}")
         g.add((node, RDF.type, PROV.Activity))
         g.add((node, NEMIK.workstream, ws))
-        try:
-            datetime.fromisoformat(rec.stamp)
-            g.add((node, PROV.startedAtTime, Literal(rec.stamp, datatype=XSD.dateTime)))
-        except ValueError:
-            g.add((node, NEMIK.rawStamp, Literal(rec.stamp)))  # parsed upstream, not a dateTime
+        g.add((node, PROV.startedAtTime, Literal(rec.stamp, datatype=XSD.dateTime)))  # is_stamp since 2293751
         g.add((node, NEMIK.kind, Literal(e.kind)))
         g.add((node, NEMIK.effortClass, Literal(KIND_CLASS.get(e.kind, "unclassified"))))
         g.add((node, NEMIK.outcome, Literal(e.outcome)))

@@ -23,5 +23,4 @@ nemik:kind a rdf:Property ; rdfs:comment "The ledger line's raw kind column (fre
 nemik:effortClass a rdf:Property ; rdfs:comment "forecast | interrupt | unclassified, from nemik's KIND_CLASS reading of kind." .
 nemik:outcome a rdf:Property ; rdfs:comment "The ledger line's outcome column." .
 nemik:mechanism a rdf:Property ; rdfs:comment "The ledger line's mechanism column." .
-nemik:rawStamp a rdf:Property ; rdfs:comment "A ledger stamp mtools parsed that is not a valid xsd:dateTime." .
 nemik:mintedDuring a rdf:Property ; rdfs:comment "tick | interrupt: whether a live tick lock was held when mtools minted the waypoint." .
