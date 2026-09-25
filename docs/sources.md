@@ -123,3 +123,6 @@ nemik-http (resolve by name via luthen endpoints_query) serves a823b95 in k3s; 5
 ## X1 slice 1 (2026-09-25)
 blocked_on is free text; measured 79 values: 7 bare repo names, ~25 session names (<repo>-<hh>) or repo-led text, ~21 operator variants, a few local W<n>, 0 repo:W<n> (ledgers do use luthen-observability:W55). adapter.resolve_blocker reads the unambiguous shapes into nemik:waitsFor (local W<n>, repo:W<n>, repo or session name, operator words); 52 of 79 resolve (21 operator, 19 cross-repo workstream, 12 local waypoint). Rest stay literal.
 View: dashed red waits edges to waypoints, per-repo actor nodes, operator node. Overview layout: dagre per repo, repos tiled in rows (a global dagre or cose layout was unreadable; verified by headless Chrome screenshots).
+
+## mtools W27 (accepted 2026-09-25)
+--update will set enables (repairs el-openglo); modes refuse flags they do not apply (exit 2). repo:W<n> becomes legal in enables and ledger symbols. nemik follow-up when it lands: adapter must map repo:W<n> in enables to the foreign waypoint URI, and SHACL must validate foreign targets against the merged graph (per-repo validation would flag them as dangling).
