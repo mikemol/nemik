@@ -51,7 +51,7 @@ dt { color: var(--muted); }
   <div id="cy"></div>
   <aside>
     <div class="legend" id="legend"></div>
-    <p class="stat">Border thickness: interrupt share of ledger activity on that waypoint. Diamond: minted during an interrupt (no tick lock held).</p>
+    <p class="stat">Border thickness: interrupt share of ledger activity on that waypoint. Diamond: minted during an interrupt (no tick lock held). Dashed red: waits for (read from blocked_on), to a waypoint, a repo, or the operator.</p>
     <h2>Selected</h2>
     <div id="detail" class="stat">Click a waypoint.</div>
     <h2>Findings</h2>
@@ -74,6 +74,16 @@ function draw() {
   const showDone = document.getElementById("showDone").checked;
   const keep = new Set(data.nodes.filter(n =>
     (!repo || n.repo === repo) && (showDone || !["done", "dropped"].includes(n.state))).map(n => n.id));
+  // waits-for edges (resolved from blocked_on) may point at another repo, a waypoint there, or the operator:
+  // pull the target repo in so a cross-repo dependency is visible even under a repo filter.
+  // A repo target is drawn as its own "ws:" node, not the repo's compound box: dagre cannot lay
+  // out edges into compound parents.
+  const byId = new Map(data.nodes.map(n => [n.id, n]));
+  const waits = data.edges.filter(e => e.kind === "waits" && keep.has(e.source)
+      && (e.target === "operator" || e.target.startsWith("repo:") || byId.has(e.target)))
+    .map(e => ({ ...e, target: e.target.startsWith("repo:") ? "ws:" + e.target.slice(5) : e.target }));
+  waits.forEach(e => { if (byId.has(e.target)) keep.add(e.target); });
+  const actors = [...new Set(waits.map(e => e.target).filter(t => t === "operator" || t.startsWith("ws:")))];
   const repos = [...new Set(data.nodes.filter(n => keep.has(n.id)).map(n => n.repo))];
   const els = [
     ...repos.map(r => ({ data: { id: "repo:" + r, label: r }, classes: "repo" })),
@@ -82,14 +92,16 @@ function draw() {
       return { data: { ...n, parent: "repo:" + n.repo, label: n.symbol,
         fill: color(n.state), border: total ? 1 + 6 * (e.interrupt || 0) / total : 1 } };
     }),
-    ...data.edges.filter(e => keep.has(e.source) && keep.has(e.target))
+    ...actors.map(a => ({ data: { id: a, label: a === "operator" ? "operator" : a.slice(3) },
+      classes: a === "operator" ? "actor operator" : "actor" })),
+    ...data.edges.filter(e => e.kind === "enables" && keep.has(e.source) && keep.has(e.target))
       .map((e, i) => ({ data: { id: "e" + i, source: e.source, target: e.target } })),
+    ...waits.map((e, i) => ({ data: { id: "w" + i, source: e.source, target: e.target }, classes: "waits" })),
   ];
   if (cy) cy.destroy();
   cy = cytoscape({
     container: document.getElementById("cy"), elements: els,
-    layout: { name: "dagre", rankDir: "LR", nodeSep: 12, rankSep: 40 },
-    style: [
+    layout: { name: "preset" },    style: [
       { selector: "node", style: { "background-color": "data(fill)", label: "data(label)", color: css("--ink"),
         "font-size": 10, "text-valign": "center", "text-halign": "right", "text-margin-x": 4,
         width: 16, height: 16, "border-width": "data(border)", "border-color": css("--interrupt") } },
@@ -99,13 +111,45 @@ function draw() {
         "font-size": 12, color: css("--muted") } },
       { selector: "edge", style: { width: 1, "line-color": css("--line"), "target-arrow-color": css("--line"),
         "target-arrow-shape": "triangle", "curve-style": "bezier", "arrow-scale": 0.7 } },
+      { selector: "edge.waits", style: { "line-style": "dashed", "line-color": css("--blocked"),
+        "target-arrow-color": css("--blocked"), width: 1.5 } },
+      { selector: ".actor", style: { shape: "round-rectangle", "background-color": css("--other"),
+        label: "data(label)", width: "label", height: 20, padding: 6, "text-halign": "center",
+        "text-margin-x": 0, color: css("--bg"), "font-size": 11, "border-width": 0 } },
+      { selector: ".operator", style: { "background-color": css("--blocked") } },
       { selector: ":selected", style: { "overlay-opacity": 0.15 } },
     ],
   });
+  tile();
   cy.on("tap", "node[symbol]", ev => detail(ev.target.data()));
   const shown = data.nodes.filter(n => keep.has(n.id));
   const blocked = shown.filter(n => n.state === "blocked").length;
   document.getElementById("stat").textContent = `${shown.length} waypoints · ${blocked} blocked · ${repos.length} repos`;
+}
+
+// Lay each repo out on its own (dagre, top-down), then tile the repos in rows, widest first, so the
+// all-repos overview stays readable: most waypoints have no edges, which a single global layout
+// stretches into one long line.
+function tile() {
+  const GAP = 60, rowWidth = Math.max(1200, cy.width() * 1.6);
+  let x = 0, y = 0, rowH = 0;
+  const actors = cy.nodes(".actor");
+  if (actors.length) {
+    actors.forEach((a, i) => a.position({ x: i * 140, y: 0 }));
+    y = 80;
+  }
+  const boxes = cy.nodes(".repo").map(r => {
+    const kids = r.children();
+    kids.union(kids.edgesWith(kids)).layout({ name: "dagre", rankDir: "TB", nodeSep: 14, rankSep: 36 }).run();
+    return { r, bb: kids.boundingBox() };
+  }).sort((a, b) => b.bb.w * b.bb.h - a.bb.w * a.bb.h);
+  for (const { r, bb } of boxes) {
+    if (x > 0 && x + bb.w > rowWidth) { x = 0; y += rowH + GAP; rowH = 0; }
+    r.children().shift({ x: x - bb.x1, y: y - bb.y1 });
+    x += bb.w + GAP;
+    rowH = Math.max(rowH, bb.h);
+  }
+  cy.fit(undefined, 20);
 }
 
 function detail(n) {

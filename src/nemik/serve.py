@@ -24,7 +24,7 @@ from pathlib import Path
 from rdflib import RDF, Graph
 from rdflib.namespace import DCTERMS, PROV
 
-from nemik.adapter import NEMIK, OSLC_CM, bind, ledger_graph
+from nemik.adapter import NEMIK, OPERATOR, OSLC_CM, bind, ledger_graph
 from nemik.check import LEDGER, QUEUE, default_root, survey, workstream_files
 
 
@@ -87,7 +87,8 @@ class Model:
 
 
 def local(term) -> str:
-    return str(term).rsplit("#", 1)[-1].rsplit("/", 1)[-1]
+    """The last segment of a nemik:/oslc IRI: after '#', '/', or the urn:nemik: prefix."""
+    return str(term).removeprefix("urn:nemik:").rsplit("#", 1)[-1].rsplit("/", 1)[-1]
 
 
 def to_json(g: Graph, findings: dict) -> dict:
@@ -117,7 +118,15 @@ def to_json(g: Graph, findings: dict) -> dict:
                 "caused_by": str(g.value(n, PROV.wasInformedBy) or ""),
             })
     for s, _, o in g.triples((None, NEMIK.enables, None)):
-        edges.append({"source": str(s), "target": str(o)})
+        edges.append({"source": str(s), "target": str(o), "kind": "enables"})
+    for s, _, o in g.triples((None, NEMIK.waitsFor, None)):
+        if o == OPERATOR:
+            target = "operator"
+        elif (o, RDF.type, NEMIK.Workstream) in g:
+            target = "repo:" + local(o)
+        else:
+            target = str(o)
+        edges.append({"source": str(s), "target": target, "kind": "waits"})
     return {
         "nodes": nodes,
         "edges": edges,

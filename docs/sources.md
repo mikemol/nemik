@@ -119,3 +119,7 @@ Pin mtools 2e21902. Waypoint issued_at → dcterms:created; minted_during → ne
 
 ## W82 live (2026-09-25)
 nemik-http (resolve by name via luthen endpoints_query) serves a823b95 in k3s; 5 panels live in read-only Grafana. Ship = send luthen a commit. Local server stopped.
+
+## X1 slice 1 (2026-09-25)
+blocked_on is free text; measured 79 values: 7 bare repo names, ~25 session names (<repo>-<hh>) or repo-led text, ~21 operator variants, a few local W<n>, 0 repo:W<n> (ledgers do use luthen-observability:W55). adapter.resolve_blocker reads the unambiguous shapes into nemik:waitsFor (local W<n>, repo:W<n>, repo or session name, operator words); 52 of 79 resolve (21 operator, 19 cross-repo workstream, 12 local waypoint). Rest stay literal.
+View: dashed red waits edges to waypoints, per-repo actor nodes, operator node. Overview layout: dagre per repo, repos tiled in rows (a global dagre or cose layout was unreadable; verified by headless Chrome screenshots).

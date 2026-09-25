@@ -6,6 +6,7 @@ reader, so schema drift across repos is mtools' problem to absorb, not a second 
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 from mikemol.pathsforward import ledger, model, store
@@ -39,7 +40,37 @@ def waypoint_uri(repo: str, symbol: str) -> URIRef:
     return URIRef(f"{BASE}{repo}/{symbol}")
 
 
-def queue_graph(repo: str, state_path: Path) -> Graph:
+OPERATOR = URIRef(f"{BASE}operator")
+_SESSION = re.compile(r"^(?P<repo>.+)-[0-9a-f]{2}$")  # a ListAgents session name: <repo>-<2 hex>
+_QUALIFIED = re.compile(r"^(?P<repo>[\w.-]+):(?P<sym>W\d+)$")
+_OPERATOR_WORDS = ("operator", "user", "mikemol", "human")
+
+
+def resolve_blocker(repo: str, text: str, known: frozenset[str]) -> URIRef | None:
+    """Read a free-text blocked_on value as an edge, when it unambiguously names one.
+
+    blocked_on is free text upstream (see the friction report on summit's floor); these are the
+    shapes agents actually write, measured 2026-09-25. Anything else stays a literal only.
+      W<n>                 a waypoint in the same workstream
+      <repo>:W<n>          a waypoint in another workstream (the form ledgers already use)
+      <repo>, <repo>-<hh>  that workstream (a repo name, or a session name for it)
+      operator|user|...    the operator
+    """
+    t = text.strip()
+    if model.symbol_number(t) is not None:
+        return waypoint_uri(repo, t)
+    if (m := _QUALIFIED.match(t)) and m["repo"] in known:
+        return waypoint_uri(m["repo"], m["sym"])
+    head = t.split()[0] if t.split() else ""
+    for cand in (head, (m := _SESSION.match(head)) and m["repo"]):
+        if cand and cand in known:
+            return workstream_uri(cand)
+    if head.lower().split("(")[0] in _OPERATOR_WORDS:
+        return OPERATOR
+    return None
+
+
+def queue_graph(repo: str, state_path: Path, known: frozenset[str] = frozenset()) -> Graph:
     """Translate one repo's queue. Raises store.UnreadableStateError if mtools refuses it."""
     state = store.load(state_path)
     g = bind(Graph())
@@ -59,6 +90,8 @@ def queue_graph(repo: str, state_path: Path) -> Graph:
             g.add((node, NEMIK.enables, waypoint_uri(repo, target)))
         for who in model.strlist(w, "blocked_on"):
             g.add((node, NEMIK.blockedOn, Literal(who)))
+            if target := resolve_blocker(repo, who, known):
+                g.add((node, NEMIK.waitsFor, target))
         if kind := model.text(w, "blocked_kind"):
             g.add((node, NEMIK.blockedKind, Literal(kind)))
         for tag in model.strlist(w, "touches"):

@@ -52,9 +52,11 @@ Finding = tuple[str, str, str]  # (severity, focus symbol, message)
 def survey(root: Path) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
     """Yield (repo, graph, findings) per queue; graph is None when mtools refuses the file."""
     shacl = shapes()
-    for repo, state_path in workstream_files(root, QUEUE):
+    queues = workstream_files(root, QUEUE)
+    known = frozenset(repo for repo, _ in queues)
+    for repo, state_path in queues:
         try:
-            g = queue_graph(repo, state_path)
+            g = queue_graph(repo, state_path, known)
         except UnreadableStateError as exc:
             yield repo, None, [("Unreadable", "--", str(exc))]
             continue
