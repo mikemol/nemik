@@ -1,0 +1,4 @@
+/inbox/*
+!/inbox/archive/
+.venv/
+__pycache__/

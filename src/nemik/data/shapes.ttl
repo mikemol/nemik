@@ -1,0 +1,38 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix oslc_cm: <http://open-services.net/ns/cm#> .
+@prefix nemik: <https://github.com/mikemol/nemik/ns#> .
+
+nemik:WaypointShape a sh:NodeShape ;
+    sh:targetClass oslc_cm:ChangeRequest ;
+    sh:property [ sh:path nemik:workstream ; sh:minCount 1 ; sh:maxCount 1 ; sh:class nemik:Workstream ] ;
+    sh:property [ sh:path nemik:symbol ; sh:minCount 1 ; sh:maxCount 1 ; sh:pattern "^W[0-9]+$" ] ;
+    sh:property [ sh:path dcterms:title ; sh:minCount 1 ; sh:maxCount 1 ; sh:minLength 1 ;
+                  sh:message "one title per symbol: two means the symbol is both live and in residue (or duplicated)" ] ;
+    sh:property [ sh:path oslc_cm:state ; sh:minCount 1 ; sh:maxCount 1 ;
+                  sh:in ( nemik:Ready nemik:Working nemik:Blocked nemik:Done ) ;
+                  sh:severity sh:Warning ;
+                  sh:message "status outside mtools' four (vocabulary divergence, not yet agreed)" ] ;
+    sh:property [ sh:path oslc_cm:closed ; sh:maxCount 1 ; sh:datatype xsd:boolean ] ;
+    sh:property [ sh:path nemik:enables ; sh:or ( [ sh:class oslc_cm:ChangeRequest ] [ sh:class nemik:Dropped ] ) ;
+                  sh:message "enables names a symbol that is neither a waypoint nor residue in this workstream" ] ;
+    sh:property [ sh:path nemik:blockedKind ; sh:maxCount 1 ; sh:in ( "agent" "human" ) ;
+                  sh:severity sh:Warning ;
+                  sh:message "blocked_kind outside agent|human (vocabulary divergence, not yet agreed)" ] .
+
+# An edge into residue resolves, but is stale: the dropped item cannot be enabled any more.
+nemik:EdgeIntoDroppedShape a sh:NodeShape ;
+    sh:targetObjectsOf nemik:enables ;
+    sh:not [ sh:class nemik:Dropped ] ;
+    sh:severity sh:Warning ;
+    sh:message "edge into a dropped item (stale enables)" .
+
+# A blocked waypoint must say what it is blocked on and whose kind of block it is.
+nemik:BlockedShape a sh:NodeShape ;
+    sh:targetSubjectsOf oslc_cm:state ;
+    sh:or ( [ sh:not [ sh:path oslc_cm:state ; sh:hasValue nemik:Blocked ] ]
+            [ sh:and ( [ sh:path nemik:blockedOn ; sh:minCount 1 ]
+                       [ sh:path nemik:blockedKind ; sh:minCount 1 ] ) ] ) ;
+    sh:severity sh:Warning ;
+    sh:message "a blocked waypoint must carry blockedOn and blockedKind" .

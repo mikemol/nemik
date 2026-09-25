@@ -1,0 +1,21 @@
+@prefix nemik: <https://github.com/mikemol/nemik/ns#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix oslc_cm: <http://open-services.net/ns/cm#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+# Extension vocabulary for what OSLC CM 3.0 and ForgeFed do not carry (docs/specs-survey.md).
+
+nemik:Workstream a rdfs:Class ; rdfs:comment "One repo's agent-run paths-forward queue (an OSLC ServiceProvider / ForgeFed actor)." .
+nemik:workstream a rdf:Property ; rdfs:comment "The workstream that owns this waypoint." .
+nemik:symbol a rdf:Property ; rdfs:comment "The waypoint's W<n> symbol, never reused within its workstream." .
+nemik:enables a rdf:Property ; rdfs:comment "This waypoint unblocks the object waypoint (inverse of depends-on)." .
+nemik:blockedOn a rdf:Property ; rdfs:comment "Free-text name of what the waypoint waits on." .
+nemik:blockedKind a rdf:Property ; rdfs:comment "agent | human." .
+nemik:touches a rdf:Property ; rdfs:comment "A tag naming an area the waypoint touches." .
+
+nemik:Ready skos:broader oslc_cm:state .
+nemik:Working skos:broader oslc_cm:state .
+nemik:Blocked skos:broader oslc_cm:state .
+nemik:Done skos:broader oslc_cm:state .
+nemik:Dropped a rdfs:Class ; rdfs:comment "A residue entry: a symbol that was issued and dropped, still resolvable." .
