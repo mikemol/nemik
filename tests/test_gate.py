@@ -92,6 +92,19 @@ def test_provenance_reads_exported_commit_json(root: Path) -> None:
     assert "provenance: queue beta uncommitted@0000deadbeef" in lines
 
 
+def test_long_title_warns_to_decompose(tmp_path: Path) -> None:
+    write_queue(tmp_path, "alpha", waypoint("W1", title="x" * 151))
+    r = run("check", tmp_path)
+    assert r.returncode == 0, r.stdout + r.stderr  # a Warning, not a Violation
+    assert any("title over 150 chars" in l for l in r.stdout.splitlines())
+
+
+def test_short_title_does_not_warn(tmp_path: Path) -> None:
+    write_queue(tmp_path, "alpha", waypoint("W1", title="x" * 150))
+    r = run("check", tmp_path)
+    assert not any("title over 150 chars" in l for l in r.stdout.splitlines())
+
+
 def test_operator_categories(tmp_path: Path) -> None:
     write_queue(tmp_path, "alpha",
                 waypoint("W1", status="blocked", blocked_on=["operator: decide ship A or B"], blocked_kind="human"),

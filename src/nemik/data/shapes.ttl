@@ -10,6 +10,8 @@ nemik:WaypointShape a sh:NodeShape ;
     sh:property [ sh:path nemik:symbol ; sh:minCount 1 ; sh:maxCount 1 ; sh:pattern "^W[0-9]+$" ] ;
     sh:property [ sh:path dcterms:title ; sh:minCount 1 ; sh:maxCount 1 ; sh:minLength 1 ;
                   sh:message "one title per symbol: two means the symbol is both live and in residue (or duplicated)" ] ;
+    sh:property [ sh:path dcterms:title ; sh:maxLength 150 ; sh:severity sh:Warning ;
+                  sh:message "title over 150 chars: often several steps bundled into one flat waypoint (a 760-char title has been seen); consider decomposing into waypoints joined by real enables edges, trialed per operator 2026-09-26" ] ;
     sh:property [ sh:path oslc_cm:state ; sh:minCount 1 ; sh:maxCount 1 ;
                   sh:in ( nemik:Ready nemik:Working nemik:Blocked nemik:Done ) ;
                   sh:severity sh:Warning ;
