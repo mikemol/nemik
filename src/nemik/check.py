@@ -11,6 +11,7 @@ are printed but do not fail the check: divergence is reported to summit's floor,
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import subprocess
 import sys
@@ -104,11 +105,28 @@ def _git(cwd: Path, *argv: str) -> str | None:
     return out.stdout.strip()
 
 
+def exported_commit(queue_dir: Path) -> tuple[str, str] | None:
+    """Read `commit.json` beside an exported queue (nemik:W7): {"sha": str, "dirty": bool}.
+
+    luthen's nemik_export.py writes this so the pod can report real provenance instead of a
+    blanket `untracked-source` for every repo (the export tree has no .git of its own to read).
+    Returns (state, sha) or None if the file is absent, unreadable, or malformed -- callers then
+    fall back to the untracked-source reading.
+    """
+    try:
+        data = json.loads((queue_dir / "commit.json").read_text())
+        sha = str(data["sha"])
+        return ("uncommitted" if data["dirty"] else "committed", sha)
+    except (OSError, json.JSONDecodeError, KeyError, TypeError, ValueError):
+        return None
+
+
 def provenance(root: Path) -> list[str]:
     """What this verdict rests on: nemik's own commit, and each queue's committed-or-not state.
 
     One line per fact, prefixed `provenance:`, so a reader can grep them. A queue outside any git
-    tree (luthen's export) reads `untracked-source`: its commit state is not observable from here.
+    tree (luthen's export) reads `untracked-source`, unless the exporter also wrote `commit.json`
+    beside it (nemik:W7), in which case the real state and sha are reported, suffixed `@<sha>`.
     """
     here = Path(__file__).resolve().parent
     sha = _git(here, "rev-parse", "--short=12", "HEAD")
@@ -117,7 +135,8 @@ def provenance(root: Path) -> list[str]:
     for repo, path in workstream_files(root, QUEUE):
         top = _git(path.parent, "rev-parse", "--show-toplevel")
         if top is None:
-            state = "untracked-source"
+            exported = exported_commit(path.parent)
+            state = f"{exported[0]}@{exported[1]}" if exported else "untracked-source"
         else:
             changed = _git(path.parent, "status", "--porcelain", "--", str(path), str(path.with_name(LEDGER)))
             state = "uncommitted" if changed else "committed"

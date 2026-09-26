@@ -77,6 +77,21 @@ def test_inbound_keeps_unclaimed_column_and_hint(root: Path) -> None:
     assert rows["alpha:W2"].endswith("-- waiting on you, claim with --enables alpha:W2")
 
 
+def test_provenance_untracked_by_default_for_export_layout(root: Path) -> None:
+    r = run("check", root)
+    assert "provenance: queue alpha untracked-source" in r.stdout.splitlines()
+
+
+def test_provenance_reads_exported_commit_json(root: Path) -> None:
+    # nemik:W7: luthen's exporter writes commit.json beside the export-layout queue.
+    (root / "alpha" / "commit.json").write_text('{"sha": "abc123def456", "dirty": false}')
+    (root / "beta" / "commit.json").write_text('{"sha": "0000deadbeef", "dirty": true}')
+    r = run("check", root)
+    lines = r.stdout.splitlines()
+    assert "provenance: queue alpha committed@abc123def456" in lines
+    assert "provenance: queue beta uncommitted@0000deadbeef" in lines
+
+
 def test_operator_categories(tmp_path: Path) -> None:
     write_queue(tmp_path, "alpha",
                 waypoint("W1", status="blocked", blocked_on=["operator: decide ship A or B"], blocked_kind="human"),
