@@ -154,20 +154,18 @@
     {
       "symbol": "W10",
       "title": "M2: mtools gaps found bootstrapping this queue: no create mode, no way to clear enables (W4->W2 is backwards), '--' unpassable as ledger symbol",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "mtools:W43"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-09-26: Second instance of the W40 gap: W16's stray --enables W15 cannot be removed | 2026-09-26: commit a6538cf: adopted mtools 8a279a1 (mtools:W40 fixed -- --update --enables with no symbols clears the list). Verified by clearing W16's stray enables W15 edge directly. Still blocked on mtools:W42 (--init) and mtools:W43 ('--' as ledger symbol) | 2026-09-26: commit a79b2de: adopted mtools 3cb24fb (mtools:W42, --init). Verified --init writes fresh empty state and refuses over an existing one. Now blocked only on mtools:W43 ('--' as ledger symbol -- I hit this myself live twice this session)",
+      "evidence": "2026-09-26: Second instance of the W40 gap: W16's stray --enables W15 cannot be removed | 2026-09-26: commit a6538cf: adopted mtools 8a279a1 (mtools:W40 fixed -- --update --enables with no symbols clears the list). Verified by clearing W16's stray enables W15 edge directly. Still blocked on mtools:W42 (--init) and mtools:W43 ('--' as ledger symbol) | 2026-09-26: commit a79b2de: adopted mtools 3cb24fb (mtools:W42, --init). Verified --init writes fresh empty state and refuses over an existing one. Now blocked only on mtools:W43 ('--' as ledger symbol -- I hit this myself live twice this session) | 2026-09-26: commit eee1f9f: adopted mtools 33005c1, mtools:W43 landed. All three W10 gaps now fixed (W40 --enables clear, W42 --init, W43 -- as ledger symbol). Verified: mikemol-paths-forward --ledger - ... stores a literal '--' line, no reader change needed",
       "issued_at": "2026-09-26T18:23:49Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-09-26T21:55:15Z",
-      "ticks_blocked": 1
+      "last_worked": "2026-09-26T22:25:24Z",
+      "ticks_blocked": 0
     },
     {
       "symbol": "W12",
