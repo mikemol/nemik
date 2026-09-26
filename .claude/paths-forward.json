@@ -175,37 +175,37 @@
     {
       "symbol": "W12",
       "title": "Copy taskboard's tools-installed-per-repo memory into nemik's project memory dir",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "memory"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "cp ~/.claude/projects/-home-mikemol-github-taskboard/memory/tools-installed-per-repo.md into nemik memory + MEMORY.md pointer",
-      "evidence": "",
+      "next_bounded_step": "",
+      "evidence": "2026-09-26: copied to ~/.claude/projects/-home-mikemol-github-nemik/memory/tools-installed-per-repo.md, indexed in that project's MEMORY.md",
       "issued_at": "2026-09-26T18:30:50Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-26T21:08:28Z",
       "ticks_blocked": 0
     },
     {
       "symbol": "W13",
       "title": "Loop durability: the 15m cron is session-only and expires 2026-10-03; re-arm on session restart or expiry",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "loop"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "On restart/expiry: --payload, CronCreate, --armed <id>",
-      "evidence": "",
+      "next_bounded_step": "",
+      "evidence": "2026-09-26: saved as project memory loop-durability-cron-is-session-only.md (job id, re-arm procedure), so the re-arm procedure survives even if a tick prompt's own gotchas text gets truncated or dropped",
       "issued_at": "2026-09-26T18:30:50Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-26T21:08:29Z",
       "ticks_blocked": 0
     },
     {
