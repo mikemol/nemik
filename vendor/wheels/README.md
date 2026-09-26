@@ -1,6 +1,6 @@
 # Vendored wheels
 
-`mikemol_pathsforward-0.1.0+3cb24fb-py3-none-any.whl` is built from mtools' pathsforward at the
+`mikemol_pathsforward-0.1.0+33005c1-py3-none-any.whl` is built from mtools' pathsforward at the
 exact commit nemik pins (`8a279a1`; local version segment names it, since mtools does not bump its
 own version per commit), via:
 
@@ -13,4 +13,5 @@ bump the pin, rebuild the wheel the same way at the new commit, name it
 pyproject.toml's `tool.uv.sources` path to match.
 
 History: 9236d5e (nemik:W6, superseded) -> 8a279a1 (nemik:W10: --enables clear, mtools:W40) ->
-3cb24fb (nemik:W10: --init, mtools:W42).
+3cb24fb (nemik:W10: --init, mtools:W42) -> 33005c1 (nemik:W10: --ledger accepts `-` as
+the queue-level symbol, since argparse eats a bare -- itself; mtools:W43).
