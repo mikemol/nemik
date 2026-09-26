@@ -90,17 +90,17 @@
     {
       "symbol": "W6",
       "title": "H1: vendor the mikemol-pathsforward wheel so the image build is hermetic (luthen: a network fetch is where a cache miss hides)",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-26: wheel built from mtools pathsforward @ 9236d5e (exact pin) via git archive + uv build --wheel; vendored at vendor/wheels/; pyproject tool.uv.sources path entry; uv lock has no git+https source; local tests pass, nemik-check runs. Containerfile: dropped RUN apt-get install git (nemik-serve never shells to git), COPY vendor. Local buildctl build running to verify before push. | 2026-09-26: commit 88a5883: vendored wheel, tool.uv.sources, Containerfile no-git. Verified with full local buildctl build: rc=0, '4 passed in 5.12s', no apt-get/git step, ~2min vs ~19min before",
       "issued_at": "2026-09-26T18:21:27Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-26T20:36:03Z",
       "ticks_blocked": 0
     },
     {
