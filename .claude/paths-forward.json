@@ -19,7 +19,7 @@
       "minted_during": "interrupt",
       "caused_by": "summit:W105",
       "last_worked": "2026-09-26T22:09:44Z",
-      "ticks_blocked": 2
+      "ticks_blocked": 3
     },
     {
       "symbol": "W2",
@@ -337,7 +337,7 @@
       "minted_during": "tick",
       "caused_by": "substrate",
       "last_worked": "2026-09-26T22:10:21Z",
-      "ticks_blocked": 1
+      "ticks_blocked": 2
     },
     {
       "symbol": "W22",
@@ -361,17 +361,17 @@
     {
       "symbol": "W23",
       "title": "W22 trial has ~50% false-positive rate on sampled titles: raw length flags verbose-but-atomic sentences same as genuinely bundled steps",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Sampled 8 of 260 fleet titles >150 chars (seed=1 across all repos): ~half (el-openglo W32/W70, rosettapkg W10, luthen-observability W119) are genuinely several steps bundled flat; ~half (nemik W9, luthen-observability W20, summit W96) are one atomic idea stated verbosely -- not decomposition candidates. Raw sh:maxLength can't tell these apart. Refine before recommending fleet-wide decomposition: candidate heuristics are counting imperative/independent clauses (semicolon- or em-dash-joined steps) or counting cited sub-refs (W-symbols/repo names) inside the title as a proxy for 'names more than one thing'. Prototype against the same 8-title sample so precision is comparable before/after.",
-      "evidence": "2026-09-26: nemik-check --root ~/github: 259/926 fleet waypoints (28%) trip the >150 warning",
+      "next_bounded_step": "",
+      "evidence": "2026-09-26: nemik-check --root ~/github: 259/926 fleet waypoints (28%) trip the >150 warning | 2026-09-26: Shipped: shapes.ttl now requires a clause separator (';', em-dash, or ' -- ') alongside length>150, not length alone. Fleet-wide flagged count dropped 259->215 (17%); sample false-positive rate dropped from ~50% to ~12% (1/8, W87 borderline). Tests: renamed test_long_title_warns_to_decompose -> test_long_bundled_title_warns_to_decompose, added test_long_atomic_title_does_not_warn. 17/17 tests pass.",
       "issued_at": "2026-09-26T22:47:44Z",
       "minted_during": "tick",
       "caused_by": "nemik:W22",
-      "last_worked": "2026-09-26T22:48:05Z",
+      "last_worked": "2026-09-26T22:52:15Z",
       "ticks_blocked": 0
     }
   ],
@@ -393,6 +393,9 @@
   ],
   "job_id": "0400586f",
   "heartbeat": "2026-09-26T22:42:42Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-09-26T22:49:07Z"
+  },
   "predecessor_job_id": "dfd86d51"
 }

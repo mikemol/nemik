@@ -92,8 +92,10 @@ def test_provenance_reads_exported_commit_json(root: Path) -> None:
     assert "provenance: queue beta uncommitted@0000deadbeef" in lines
 
 
-def test_long_title_warns_to_decompose(tmp_path: Path) -> None:
-    write_queue(tmp_path, "alpha", waypoint("W1", title="x" * 151))
+def test_long_bundled_title_warns_to_decompose(tmp_path: Path) -> None:
+    # nemik:W23: length alone isn't the signal -- a long title with a clause separator
+    # (';', em-dash, or ' -- ') reads as several steps bundled flat.
+    write_queue(tmp_path, "alpha", waypoint("W1", title="x" * 80 + "; " + "y" * 80))
     r = run("check", tmp_path)
     assert r.returncode == 0, r.stdout + r.stderr  # a Warning, not a Violation
     assert any("title over 150 chars" in l for l in r.stdout.splitlines())
@@ -101,6 +103,14 @@ def test_long_title_warns_to_decompose(tmp_path: Path) -> None:
 
 def test_short_title_does_not_warn(tmp_path: Path) -> None:
     write_queue(tmp_path, "alpha", waypoint("W1", title="x" * 150))
+    r = run("check", tmp_path)
+    assert not any("title over 150 chars" in l for l in r.stdout.splitlines())
+
+
+def test_long_atomic_title_does_not_warn(tmp_path: Path) -> None:
+    # nemik:W23: a long title with no clause separator is one verbose idea, not a
+    # decomposition candidate -- the length-only rule's ~50% false-positive case.
+    write_queue(tmp_path, "alpha", waypoint("W1", title="x" * 200))
     r = run("check", tmp_path)
     assert not any("title over 150 chars" in l for l in r.stdout.splitlines())
 
