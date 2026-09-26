@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 18,
+  "counter": 19,
   "waypoints": [
     {
       "symbol": "W1",
@@ -211,7 +211,7 @@
     {
       "symbol": "W14",
       "title": "Adopter guide: one page (docs/adopting.md, cited from paths-forward-loop skill) on writing a queue nemik reads: writer install, --ledger grammar, kind classes, minted_during, cross-repo refs",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "docs",
@@ -219,12 +219,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Draft docs/adopting.md from the reply sent to el-openglo-8c; ask operator before editing the global skill to cite it",
-      "evidence": "2026-09-26: Include (luthen 2026-09-26): on this host (luthen) ~/github/cassian-observability is a synced copy of the laptop's repo; its resolvers (series-history, store-migration.tsv) describe cassian's stores only. Resolve luthen stores by name: luthen-observability checks/endpoints_query.py (vmsingle-http etc.)",
+      "next_bounded_step": "",
+      "evidence": "2026-09-26: Include (luthen 2026-09-26): on this host (luthen) ~/github/cassian-observability is a synced copy of the laptop's repo; its resolvers (series-history, store-migration.tsv) describe cassian's stores only. Resolve luthen stores by name: luthen-observability checks/endpoints_query.py (vmsingle-http etc.) | 2026-09-26: commit b40f7b7: docs/adopting.md, 6 sections. Operator OK'd editing the global skill directly in-conversation (2026-09-26) rather than filing it as a separate ask -- cites it from ~/.claude/skills/paths-forward-loop/SKILL.md's writer section (outside this repo, no commit needed there)",
       "issued_at": "2026-09-26T18:44:46Z",
       "minted_during": "interrupt",
       "caused_by": "el-openglo",
-      "last_worked": "2026-09-26T19:14:40Z",
+      "last_worked": "2026-09-26T21:10:41Z",
       "ticks_blocked": 0
     },
     {
@@ -299,6 +299,25 @@
       "next_bounded_step": "Read luthen checks/waker.py's REWAKE_S=30min + seen-timestamp bookkeeping; port the shape into nemik.wake as should_nudge(repo, verdict, last_tick, now) -> bool, age computed from last_tick",
       "evidence": "",
       "issued_at": "2026-09-26T20:36:17Z",
+      "minted_during": "tick",
+      "caused_by": "luthen-observability",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W19",
+      "title": "nemik-serve wedge: pod stayed k8s state=running but stopped accepting connections for 10+min (readiness timeout -> flat connection refused, 40 failed probes); one BrokenPipeError at serve.py:215 (self.wfile.write) in a request thread, ThreadingHTTPServer so shouldn't take down the accept loop on its own. luthen deleted the pod rather than diagnose further; root cause open. Add a k8s liveness probe (luthen's manifest) so this self-heals regardless of cause; separately look at whether serve.py leaks fds/sockets on a broken pipe",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "serve",
+        "reliability"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Ask luthen for the pod's full log around the wedge (not just the BrokenPipeError line) and whether a liveness probe is easy to add now that replicas=2 already covers the per-rollout gap",
+      "evidence": "",
+      "issued_at": "2026-09-26T21:10:07Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability",
       "last_worked": null,
