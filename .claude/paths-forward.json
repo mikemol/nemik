@@ -249,8 +249,8 @@
     }
   ],
   "residue": [],
-  "job_id": "476d5581",
-  "heartbeat": "2026-09-26T18:38:45Z",
+  "job_id": "02c025ba",
+  "heartbeat": "2026-09-26T18:54:37Z",
   "lock": null,
-  "predecessor_job_id": "1f6763c0"
+  "predecessor_job_id": "476d5581"
 }
