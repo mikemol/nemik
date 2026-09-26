@@ -160,16 +160,15 @@
       "enables": [],
       "touches": [],
       "blocked_on": [
-        "mtools:W42",
         "mtools:W43"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "2026-09-26: Second instance of the W40 gap: W16's stray --enables W15 cannot be removed | 2026-09-26: commit a6538cf: adopted mtools 8a279a1 (mtools:W40 fixed -- --update --enables with no symbols clears the list). Verified by clearing W16's stray enables W15 edge directly. Still blocked on mtools:W42 (--init) and mtools:W43 ('--' as ledger symbol)",
+      "evidence": "2026-09-26: Second instance of the W40 gap: W16's stray --enables W15 cannot be removed | 2026-09-26: commit a6538cf: adopted mtools 8a279a1 (mtools:W40 fixed -- --update --enables with no symbols clears the list). Verified by clearing W16's stray enables W15 edge directly. Still blocked on mtools:W42 (--init) and mtools:W43 ('--' as ledger symbol) | 2026-09-26: commit a79b2de: adopted mtools 3cb24fb (mtools:W42, --init). Verified --init writes fresh empty state and refuses over an existing one. Now blocked only on mtools:W43 ('--' as ledger symbol -- I hit this myself live twice this session)",
       "issued_at": "2026-09-26T18:23:49Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-09-26T20:50:59Z",
+      "last_worked": "2026-09-26T21:55:15Z",
       "ticks_blocked": 0
     },
     {
