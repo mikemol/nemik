@@ -7,3 +7,4 @@
 2026-09-26T20:39:38Z  tick  W7   advanced  unblock   "read side for exported commit.json pushed (25aa9b0); asked luthen for the write side"  evidence=commit 25aa9b0
 2026-09-26T20:45:08Z  tick  W7   done      unblock   "confirmed live: nemik-check against the export shows committed@<sha> for all repos"  evidence=EXPORT/nemik/commit.json, EXPORT/luthen-observability/commit.json
 2026-09-26T20:50:59Z  tick  W10  advanced  unblock   "adopted mtools 8a279a1 fixing --enables clear (W40); cleared W16's stray edge as proof; still blocked on mtools W42/W43"  evidence=commit a6538cf
+2026-09-26T20:56:42Z  tick  W8   advanced  unblock   "metric already exists; proposed concrete rego alert block to luthen, whose surface owns alerts.rego"  evidence=msg e36dcc1c

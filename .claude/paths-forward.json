@@ -122,17 +122,19 @@
     {
       "symbol": "W8",
       "title": "W2: alert when something waits on an asleep repo for more than N hours (nemik_waiting_on{state=asleep}); rule and panel through luthen's panels/rego",
-      "status": "ready",
+      "status": "blocked",
       "enables": [],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "blocked_on": [
+        "luthen-observability"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "When luthen adds the rule (or pushes back on severity/threshold), verify it fires against a synthetic asleep+waiting series if possible, else confirm the declaration matches what was proposed",
+      "evidence": "2026-09-26: nemik_waiting_on{repo,state} already exists (nemik-metrics) and is already relayed (metrics_relay.keep_prefixed passes nemik_*). alerts.rego is entirely luthen's declaration surface (its own header: nothing else may carry an alert). Proposed a concrete rego block (4h threshold, matching paths-forward-loop's own 16-tick/4h escalation) via msg e36dcc1c",
       "issued_at": "2026-09-26T18:21:28Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-26T20:56:41Z",
       "ticks_blocked": 0
     },
     {
