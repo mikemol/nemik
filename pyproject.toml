@@ -12,7 +12,7 @@ dependencies = [
 [tool.uv.sources]
 # Vendored wheel (nemik:W6, H1): built from mtools' pathsforward at the pinned commit; see
 # vendor/wheels/README.md. No network fetch at build time.
-mikemol-pathsforward = { path = "vendor/wheels/mikemol_pathsforward-0.1.0-py3-none-any.whl" }
+mikemol-pathsforward = { path = "vendor/wheels/mikemol_pathsforward-0.1.0+8a279a1-py3-none-any.whl" }
 
 [project.scripts]
 nemik-check = "nemik.check:main"
