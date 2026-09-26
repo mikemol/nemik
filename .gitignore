@@ -2,3 +2,4 @@
 !/inbox/archive/
 .venv/
 __pycache__/
+.claude/paths-forward.flock
