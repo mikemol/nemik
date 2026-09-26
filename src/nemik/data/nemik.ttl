@@ -34,3 +34,4 @@ nemik:stringNotList a rdf:Property ; rdfs:comment "Names a list field (enables, 
 nemik:unclaimedBlockOn a rdf:Property ; rdfs:comment "This open waypoint waits on the object workstream, and no waypoint of that workstream enables it or was caused by it." .
 nemik:operatorAsk a rdf:Property ; rdfs:comment "needs-you | answered | condition | unstated: nemik's reading of a block on the operator (nemik.blocks.operator_category)." .
 nemik:ticksBlocked a rdf:Property ; rdfs:comment "mtools' ticks_blocked counter." .
+nemik:unresolvedBlocker a rdf:Property ; rdfs:comment "A blocked_on value on a blocked waypoint that resolves to no workstream, waypoint or operator." .

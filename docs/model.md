@@ -52,10 +52,13 @@ writing (2026-09-25), and leaves everything else as a literal:
 |---|---|
 | `W<n>` | to that waypoint in the same workstream |
 | `repo:W<n>` | to that waypoint in another workstream |
-| `repo`, or a session name `repo-<2 hex>` | to that workstream |
+| `repo`, or a session name `repo-<2 hex>`, as the leading word (also `repo:`, `repo,`, `repo's`) | to that workstream |
 | `operator`, `user`, `mikemol`, `human` | to `urn:nemik:operator` |
 
-On first measurement, 52 of 79 values resolved.
+On first measurement, 52 of 79 values resolved. A blocked waypoint none of whose values
+resolves (and that is not `blocked_kind: human`, which is drawn to an operator lane) draws no
+edge at all. It is marked `nemik:unresolvedBlocker`, and `UnresolvedBlockerShape` warns on it.
+The operator ruled on 2026-09-26 that a blocked card without an edge is a defect.
 
 ### Cross-workstream blocks, from both sides
 

@@ -56,3 +56,9 @@ nemik:OperatorAskShape a sh:NodeShape ;
                   sh:message "blocked on the operator with no stated ask: write blocked_on as 'operator: decide <question>' or 'operator: act <what only the operator can do>'" ] ;
     sh:property [ sh:path nemik:operatorAsk ; sh:not [ sh:in ( "answered" ) ] ; sh:severity sh:Warning ;
                   sh:message "blocked on the operator, but blocked_on records the operator's answer already: lift the block, or re-file it against the condition it waits on" ] .
+
+# Blocked, but on nothing the graph can reach: no edge can be drawn and no one can be nudged.
+nemik:UnresolvedBlockerShape a sh:NodeShape ;
+    sh:targetSubjectsOf nemik:unresolvedBlocker ;
+    sh:property [ sh:path nemik:unresolvedBlocker ; sh:maxCount 0 ; sh:severity sh:Warning ;
+                  sh:message "blocked on no resolvable party: name a repo, a <repo>:W<n>, or 'operator: decide/act ...'" ] .

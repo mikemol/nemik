@@ -67,7 +67,9 @@ def resolve_blocker(repo: str, text: str, known: frozenset[str]) -> URIRef | Non
         return waypoint_uri(repo, t)
     if (foreign := model.foreign_symbol(t)) and foreign[0] in known:
         return waypoint_uri(foreign[0], f"W{foreign[1]}")
-    head = t.split()[0] if t.split() else ""
+    # the leading token, less a trailing ":" / "," / possessive "'s" ("luthen-observability: ...",
+    # "substrate's fixture pair", "substrate-de: settle ...")
+    head = re.sub(r"(['’]s|[:,])$", "", t.split()[0]) if t.split() else ""
     for cand in (head, (m := _SESSION.match(head)) and m["repo"]):
         if cand and cand in known:
             return workstream_uri(cand)

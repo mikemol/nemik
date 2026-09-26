@@ -60,8 +60,16 @@ def inbound(g: Graph) -> list[dict]:
 
 
 def annotate(g: Graph) -> None:
-    """Mark each unclaimed block, and each operator block by category, so the shapes can report them."""
+    """Mark unclaimed blocks, operator blocks by category, and blocks that resolve to no party."""
     from rdflib import Literal
+
+    # A blocked waypoint whose blocked_on names nothing nemik can resolve (no workstream, waypoint
+    # or operator) draws no edge at all; the operator ruled that a defect (2026-09-26).
+    for node in g.subjects(OSLC_CM.state, NEMIK.Blocked):
+        human = str(g.value(node, NEMIK.blockedKind) or "") == "human"  # drawn to an operator lane
+        if (node, NEMIK.waitsFor, None) not in g and not human:
+            for text in g.objects(node, NEMIK.blockedOn):
+                g.add((node, NEMIK.unresolvedBlocker, text))
 
     for a in operator_asks(g):
         repo, _, sym = a["ref"].partition(":")
