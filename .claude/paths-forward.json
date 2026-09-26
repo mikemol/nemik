@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 9,
+  "counter": 10,
   "waypoints": [
     {
       "symbol": "W1",
@@ -151,6 +151,24 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-26T18:21:28Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W10",
+      "title": "M2: mtools gaps found bootstrapping this queue: no create mode, no way to clear enables (W4->W2 is backwards), '--' unpassable as ledger symbol",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "mtools"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-26T18:23:49Z",
+      "minted_during": "interrupt",
+      "caused_by": null,
+      "last_worked": "2026-09-26T18:23:49Z",
       "ticks_blocked": 0
     }
   ],
