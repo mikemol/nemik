@@ -138,19 +138,17 @@
     {
       "symbol": "W9",
       "title": "Move this session to ~/github/nemik: it runs from ~/github/taskboard, so liveness and the hook spool record it as 'taskboard' and nemik reads as asleep",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "operator: act restart the nemik session from ~/github/nemik (then remove the empty ~/github/taskboard)"
-      ],
-      "blocked_kind": "human",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-26: 2026-09-26: nemik-bb session running from ~/github/nemik took over from taskboard-1f with full handoff",
       "issued_at": "2026-09-26T18:21:28Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-09-26T18:21:28Z",
+      "last_worked": "2026-09-26T18:24:36Z",
       "ticks_blocked": 0
     },
     {
