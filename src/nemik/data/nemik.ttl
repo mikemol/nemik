@@ -14,10 +14,15 @@ nemik:blockedOn a rdf:Property ; rdfs:comment "Free-text name of what the waypoi
 nemik:blockedKind a rdf:Property ; rdfs:comment "agent | human." .
 nemik:touches a rdf:Property ; rdfs:comment "A tag naming an area the waypoint touches." .
 
-nemik:Ready skos:broader oslc_cm:state .
-nemik:Working skos:broader oslc_cm:state .
-nemik:Blocked skos:broader oslc_cm:state .
-nemik:Done skos:broader oslc_cm:state .
+# The four waypoint states, as a SKOS scheme. OSLC CM 3.0 leaves oslc_cm:state's values to the
+# provider; these are the values nemik's provider uses (mtools' STATUSES).
+nemik:WaypointStates a skos:ConceptScheme ;
+    skos:prefLabel "paths-forward waypoint states" ;
+    skos:hasTopConcept nemik:Ready, nemik:Working, nemik:Blocked, nemik:Done .
+nemik:Ready a skos:Concept ; skos:inScheme nemik:WaypointStates ; skos:prefLabel "ready" .
+nemik:Working a skos:Concept ; skos:inScheme nemik:WaypointStates ; skos:prefLabel "working" .
+nemik:Blocked a skos:Concept ; skos:inScheme nemik:WaypointStates ; skos:prefLabel "blocked" .
+nemik:Done a skos:Concept ; skos:inScheme nemik:WaypointStates ; skos:prefLabel "done" .
 nemik:Dropped a rdfs:Class ; rdfs:comment "A residue entry: a symbol that was issued and dropped, still resolvable." .
 nemik:kind a rdf:Property ; rdfs:comment "The ledger line's raw kind column (free text upstream)." .
 nemik:effortClass a rdf:Property ; rdfs:comment "forecast | interrupt | unclassified, from nemik's KIND_CLASS reading of kind." .

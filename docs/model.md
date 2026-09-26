@@ -32,7 +32,7 @@ Node IRIs are `urn:nemik:<repo>` for a workstream, `urn:nemik:<repo>/W<n>` for a
 | repo | `nemik:workstream <urn:nemik:repo>` |
 | `symbol` | `nemik:symbol "W<n>"` |
 | `title` | `dcterms:title` |
-| `status` ready / working / blocked / done | `oslc_cm:state nemik:Ready`, `nemik:Working`, `nemik:Blocked`, `nemik:Done`. Any other value is kept as a literal and flagged. |
+| `status` ready / working / blocked / done | `oslc_cm:state nemik:Ready`, `nemik:Working`, `nemik:Blocked`, `nemik:Done`: SKOS concepts in `nemik:WaypointStates`. Any other value is kept as a literal and flagged. |
 | done | also `oslc_cm:closed true` |
 | `enables` | `nemik:enables` a waypoint: local `W<n>`, or `repo:W<n>` in another workstream (mtools 9236d5e) |
 | `blocked_on` (free text) | `nemik:blockedOn "text"`, plus `nemik:waitsFor` when unambiguous (see below) |
@@ -121,9 +121,6 @@ than enforced: `friction-the-queue-vocabulary-has-one-owner-and-six-dialects` an
 
 ## Known residue
 
-- `nemik:Ready` and the other states are declared `skos:broader oslc_cm:state`, but
-  `oslc_cm:state` is a property, not a concept. They should be SKOS concepts in a scheme
-  referenced by the state property's range.
 - `effortClass` for ledger kinds is nemik's reading. It becomes definitional only if mtools
   closes the `kind` vocabulary.
 - About 1,000 legacy ledger lines are unparsed and stay unclassified.
