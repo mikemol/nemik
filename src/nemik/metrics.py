@@ -6,8 +6,11 @@
     nemik_findings{repo,severity}            SHACL results per severity (Violation|Warning|Unreadable)
     nemik_prompts_total{repo,source,class}   prompts recorded by the global hook, where class is
                                              forecast (scheduled or operator-typed tick),
-                                             interrupt (operator, peer), or internal (subagent
-                                             hand-backs, background notices: the session's own work returning)
+                                             interrupt (operator, peer), internal (subagent
+                                             hand-backs, background notices: the session's own
+                                             work returning), or unknown (a source string not in
+                                             this module's own CLASS map -- a new hook source,
+                                             not yet classified here)
     nemik_turns_total{repo}                  turns ended (Stop events)
     nemik_ledger_lines{repo,class,kind}      parsed ledger lines (mtools ledger.read) by effort class
     nemik_blocks_inbound{repo,claimed}       open waypoints in OTHER workstreams waiting on repo;

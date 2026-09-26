@@ -1,7 +1,7 @@
 <!-- DERIVED from the state file by mikemol-paths-forward --render. NEVER EDIT. -->
 # paths-forward — /home/mikemol/github/nemik/.claude/paths-forward.json
 
-counter 27 · heartbeat 2026-09-26T23:28:57Z · job `8cca3e73` · hash `v2:2098f7b898cc22e2`
+counter 28 · heartbeat 2026-09-26T23:45:05Z · job `d591e532` · hash `v2:b7c0c2d83e7acb64`
 
 | # | symbol | status | title | blocked on | next bounded step |
 |---|---|---|---|---|---|
@@ -30,6 +30,7 @@ counter 27 · heartbeat 2026-09-26T23:28:57Z · job `8cca3e73` · hash `v2:2098f
 | 23 | W25 | done | CLI ergonomics: --root and --json had no help text on 3 of 5 CLIs while newer flags (--liveness, --all, --nudge) did -- inconsistent --help output | — | n/a |
 | 24 | W26 | done | Dash UI: the 60s poll redraw destroyed and rebuilt the cytoscape graph without re-selecting the user's previously-focused node | — | n/a |
 | 25 | W27 | done | operator_category's free-text fallback contradicted docs/adopting.md: docs said any decide/act-verb-less text lands unstated; code actually reads >=3-word free text as needs-you regardless | — | n/a |
+| 26 | W28 | done | metrics.py review: nemik_prompts_total's docstring didn't document the 'unknown' class fallback (a source string not in CLASS), even though the code can emit it | — | n/a |
 
 ## residue
 

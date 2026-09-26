@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 27,
+  "counter": 28,
   "waypoints": [
     {
       "symbol": "W1",
@@ -19,7 +19,7 @@
       "minted_during": "interrupt",
       "caused_by": "summit:W105",
       "last_worked": "2026-09-26T22:09:44Z",
-      "ticks_blocked": 7
+      "ticks_blocked": 8
     },
     {
       "symbol": "W2",
@@ -337,7 +337,7 @@
       "minted_during": "tick",
       "caused_by": "substrate",
       "last_worked": "2026-09-26T22:10:21Z",
-      "ticks_blocked": 6
+      "ticks_blocked": 7
     },
     {
       "symbol": "W22",
@@ -445,6 +445,24 @@
       "caused_by": null,
       "last_worked": "2026-09-26T23:44:35Z",
       "ticks_blocked": 0
+    },
+    {
+      "symbol": "W28",
+      "title": "metrics.py review: nemik_prompts_total's docstring didn't document the 'unknown' class fallback (a source string not in CLASS), even though the code can emit it",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "metrics"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "n/a",
+      "evidence": "2026-09-26: checked the live spool (~/.local/state/nemik/events.jsonl, 1884 UserPromptSubmit events): all sources map cleanly into CLASS today, so this was a documentation completeness gap, not a live miscount. Fixed the docstring. Also reviewed metrics.py's full label set against serve.py's Model.metrics(): the two are intentionally separate surfaces (fleet-data metrics vs. this web service's own health/graph-size metrics), no overlap expected, no gap found there. adapter.py and check.py's survey/SHACL path were skimmed but not found to have anything concrete -- noted as still-open in the next tick's targets rather than claiming a finding that isn't there.",
+      "issued_at": "2026-09-26T23:59:12Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-09-26T23:59:19Z",
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -465,6 +483,9 @@
   ],
   "job_id": "d591e532",
   "heartbeat": "2026-09-26T23:45:05Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-09-26T23:58:21Z"
+  },
   "predecessor_job_id": "8cca3e73"
 }
