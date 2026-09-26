@@ -193,6 +193,13 @@ The exit code carries only the verdict (0 conforms, 1 violates). A reader that g
 
 ## Designed, not implemented
 
+- **summit asks as waypoints** (operator, 2026-09-26). The direction: summit routes asks
+  through waypoints rather than its own protocol. Each open ask is a waypoint in the asker's
+  queue, blocked on the owner and linked from the ask record. The owner claims it like any
+  block, and summit's computed ask state stays authoritative, with the waypoint following it.
+  nemik then shows asks with no summit-specific reader. Proposed to summit; the design is
+  summit's.
+
 - **ForgeFed between workstreams.** Each repo's agent is an Actor, `<repo>/inbox/` is its inbox,
   and summit is the hub. A waypoint is a Ticket, and `enables` is a TicketDependency (unverified
   as still current in the ForgeFed draft). A summit ask is an Offer of a Ticket, with Accept,
