@@ -155,6 +155,11 @@ def operator_asks(g: Graph) -> list[dict]:
         if (node, OSLC_CM.state, NEMIK.Done) in g:
             continue
         texts = [str(o) for o in g.objects(node, NEMIK.blockedOn)]
+        title = str(g.value(node, DCTERMS.title) or "")
+        # A bare "operator" with the ask carried in a title that starts "OPERATOR: ..." (summit's
+        # convention) states the ask there; read it rather than calling the block unstated.
+        if all(BARE.match(t) for t in texts) and re.match(r"^\s*operator\b[^:]{0,60}:", title, re.I):
+            texts = [title]
         text = " | ".join(texts)
         cats = [operator_category(t) for t in texts] or ["unstated"]
         # the most actionable reading wins across several blocked_on values

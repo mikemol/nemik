@@ -88,6 +88,9 @@ already legal in mtools, so claiming needs no new vocabulary.
 | `condition` | waits on an event or condition, not the operator | "event: next watchdog abort" |
 | `unstated` | names only the operator | "operator" |
 
+A bare `operator` whose waypoint title begins `OPERATOR:` or `OPERATOR (…):` (summit's
+convention) is read from the title instead, so the ask stated there counts.
+
 `needs-you` asks that normalise to the same text, or that name another blocked waypoint
 (`linux-sources W24`), are grouped with `same_ask`, so one decision shows once. The categories
 are nemik's reading of free text. The durable fix is the `operator: decide …` /
