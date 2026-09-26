@@ -35,3 +35,4 @@ nemik:unclaimedBlockOn a rdf:Property ; rdfs:comment "This open waypoint waits o
 nemik:operatorAsk a rdf:Property ; rdfs:comment "needs-you | answered | condition | unstated: nemik's reading of a block on the operator (nemik.blocks.operator_category)." .
 nemik:ticksBlocked a rdf:Property ; rdfs:comment "mtools' ticks_blocked counter." .
 nemik:unresolvedBlocker a rdf:Property ; rdfs:comment "A blocked_on value on a blocked waypoint that resolves to no workstream, waypoint or operator." .
+nemik:pathsforwardAdoption a rdf:Property ; rdfs:comment "declared | owner | missing | no-pyproject | unobservable: whether the workstream runs mikemol-paths-forward from its own environment (nemik.adoption)." .

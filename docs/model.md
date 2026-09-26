@@ -168,6 +168,16 @@ fails `nemik-check`. Vocabulary divergence is reported to summit's floor rather
 than enforced: `friction-the-queue-vocabulary-has-one-owner-and-six-dialects` and
 `friction-a-lenient-reader-hides-a-writer-bug`.
 
+## Writer adoption
+
+The operator's intent is for each repo to install `mikemol-pathsforward` as its own
+sha-pinned dependency and run it from its own `.venv`. `nemik.adoption` reads each repo's
+`pyproject.toml` (project, optional and dependency-groups dependencies) and records
+`nemik:pathsforwardAdoption` on the workstream: `declared`, `owner` (mtools ships it),
+`missing`, `no-pyproject`, or `unobservable` (a queue read from luthen's export, which has no
+repo tree beside it). `AdoptionShape` warns on `missing` and `no-pyproject`, and
+`nemik_pathsforward_adoption{repo,state}` shows adoption fleet-wide.
+
 ## Provenance of a verdict
 
 Every `nemik-check` run begins with `provenance:` lines, so that a green which rests on

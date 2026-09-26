@@ -20,10 +20,11 @@ from pathlib import Path
 
 from mikemol.pathsforward.store import UnreadableStateError
 from pyshacl import validate
-from rdflib import Graph
+from rdflib import Graph, Literal
 from rdflib.namespace import SH
 
-from nemik.adapter import BASE, bind, queue_graph
+from nemik.adapter import BASE, NEMIK, bind, queue_graph, workstream_uri
+from nemik.adoption import adoption
 from nemik.blocks import annotate
 
 QUEUE, LEDGER = "paths-forward.json", "paths-forward.ledger"
@@ -75,6 +76,7 @@ def survey(root: Path) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
     for repo, state_path in queues:
         try:
             graphs[repo] = queue_graph(repo, state_path, known)
+            graphs[repo].add((workstream_uri(repo), NEMIK.pathsforwardAdoption, Literal(adoption(state_path))))
             merged += graphs[repo]
         except UnreadableStateError as exc:
             graphs[repo], refused[repo] = None, str(exc)

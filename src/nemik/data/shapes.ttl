@@ -62,3 +62,10 @@ nemik:UnresolvedBlockerShape a sh:NodeShape ;
     sh:targetSubjectsOf nemik:unresolvedBlocker ;
     sh:property [ sh:path nemik:unresolvedBlocker ; sh:maxCount 0 ; sh:severity sh:Warning ;
                   sh:message "blocked on no resolvable party: name a repo, a <repo>:W<n>, or 'operator: decide/act ...'" ] .
+
+# The operator's intent: each repo installs mikemol-pathsforward and runs it from its own .venv.
+nemik:AdoptionShape a sh:NodeShape ;
+    sh:targetSubjectsOf nemik:pathsforwardAdoption ;
+    sh:property [ sh:path nemik:pathsforwardAdoption ; sh:not [ sh:in ( "missing" "no-pyproject" ) ] ;
+                  sh:severity sh:Warning ;
+                  sh:message "the queue's writer is not this repo's own dependency: uv add a sha-pinned mikemol-pathsforward (mtools INSTALL.md) and run .venv/bin/mikemol-paths-forward" ] .
