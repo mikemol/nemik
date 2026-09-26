@@ -158,17 +158,16 @@
       "enables": [],
       "touches": [],
       "blocked_on": [
-        "mtools:W40",
         "mtools:W42",
         "mtools:W43"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "2026-09-26: Second instance of the W40 gap: W16's stray --enables W15 cannot be removed",
+      "evidence": "2026-09-26: Second instance of the W40 gap: W16's stray --enables W15 cannot be removed | 2026-09-26: commit a6538cf: adopted mtools 8a279a1 (mtools:W40 fixed -- --update --enables with no symbols clears the list). Verified by clearing W16's stray enables W15 edge directly. Still blocked on mtools:W42 (--init) and mtools:W43 ('--' as ledger symbol)",
       "issued_at": "2026-09-26T18:23:49Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-09-26T18:57:16Z",
+      "last_worked": "2026-09-26T20:50:59Z",
       "ticks_blocked": 0
     },
     {
@@ -251,9 +250,7 @@
       "symbol": "W16",
       "title": "Containerfile test stage: run the gate tests in a stage the final stage depends on, so the image build is nemik's gate (luthen ships on push)",
       "status": "done",
-      "enables": [
-        "W15"
-      ],
+      "enables": [],
       "touches": [
         "gate",
         "deploy"
@@ -265,7 +262,7 @@
       "issued_at": "2026-09-26T18:57:05Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability",
-      "last_worked": "2026-09-26T19:56:39Z",
+      "last_worked": "2026-09-26T20:50:37Z",
       "ticks_blocked": 0
     },
     {
