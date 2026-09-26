@@ -1,7 +1,7 @@
 <!-- DERIVED from the state file by mikemol-paths-forward --render. NEVER EDIT. -->
 # paths-forward — /home/mikemol/github/nemik/.claude/paths-forward.json
 
-counter 25 · heartbeat 2026-09-26T23:00:17Z · job `cfebcc56` · hash `v2:c3c1b2ce64e66703`
+counter 26 · heartbeat 2026-09-26T23:14:46Z · job `a6f5481c` · hash `v2:5f42673b0f9e72b0`
 
 | # | symbol | status | title | blocked on | next bounded step |
 |---|---|---|---|---|---|
@@ -28,6 +28,7 @@ counter 25 · heartbeat 2026-09-26T23:00:17Z · job `cfebcc56` · hash `v2:c3c1b
 | 21 | W23 | done | W22 trial has ~50% false-positive rate on sampled titles: raw length flags verbose-but-atomic sentences same as genuinely bundled steps | — | — |
 | 22 | W24 | done | Dash UI: load() had no error handling (unlike wake()) -- a transient server miss silently blanked the page | — | n/a |
 | 23 | W25 | done | CLI ergonomics: --root and --json had no help text on 3 of 5 CLIs while newer flags (--liveness, --all, --nudge) did -- inconsistent --help output | — | n/a |
+| 24 | W26 | done | Dash UI: the 60s poll redraw destroyed and rebuilt the cytoscape graph without re-selecting the user's previously-focused node | — | n/a |
 
 ## residue
 

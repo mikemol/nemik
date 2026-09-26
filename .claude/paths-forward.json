@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 25,
+  "counter": 26,
   "waypoints": [
     {
       "symbol": "W1",
@@ -19,7 +19,7 @@
       "minted_during": "interrupt",
       "caused_by": "summit:W105",
       "last_worked": "2026-09-26T22:09:44Z",
-      "ticks_blocked": 5
+      "ticks_blocked": 6
     },
     {
       "symbol": "W2",
@@ -337,7 +337,7 @@
       "minted_during": "tick",
       "caused_by": "substrate",
       "last_worked": "2026-09-26T22:10:21Z",
-      "ticks_blocked": 4
+      "ticks_blocked": 5
     },
     {
       "symbol": "W22",
@@ -409,6 +409,24 @@
       "caused_by": null,
       "last_worked": "2026-09-26T23:14:14Z",
       "ticks_blocked": 0
+    },
+    {
+      "symbol": "W26",
+      "title": "Dash UI: the 60s poll redraw destroyed and rebuilt the cytoscape graph without re-selecting the user's previously-focused node",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "web-ui"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "n/a",
+      "evidence": "2026-09-26: tracked the selected node's id in a module-level selectedId var, set on tap; after draw() rebuilds cy (destroy+recreate for the poll), re-select it if it still exists (mirrors the existing focusCite pattern already in use) and refresh its detail panel; if the node no longer exists (filtered out), clear selectedId rather than leaving a stale reference. No JS runtime available in this environment to execute-check; reviewed against the existing tested cy.getElementById/.select() call already used in focusCite(). 17/17 pytest pass (unaffected, this is pure frontend JS).",
+      "issued_at": "2026-09-26T23:27:49Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-09-26T23:28:19Z",
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -429,6 +447,9 @@
   ],
   "job_id": "a6f5481c",
   "heartbeat": "2026-09-26T23:14:46Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-09-26T23:26:58Z"
+  },
   "predecessor_job_id": "cfebcc56"
 }
