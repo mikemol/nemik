@@ -19,7 +19,7 @@ from pyshacl import validate
 from rdflib import Graph
 from rdflib.namespace import SH
 
-from nemik.adapter import bind, queue_graph
+from nemik.adapter import BASE, bind, queue_graph
 
 QUEUE, LEDGER = "paths-forward.json", "paths-forward.ledger"
 
@@ -52,25 +52,36 @@ Finding = tuple[str, str, str]  # (severity, focus symbol, message)
 
 
 def survey(root: Path) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
-    """Yield (repo, graph, findings) per queue; graph is None when mtools refuses the file."""
-    shacl = shapes()
+    """Yield (repo, graph, findings) per queue; graph is None when mtools refuses the file.
+
+    Validation runs ONCE over the merged graph, so an `enables` edge into another workstream
+    (`repo:W<n>`, legal since mtools 9236d5e) resolves against that workstream's waypoints.
+    Each finding is attributed to the workstream of its focus node.
+    """
     queues = workstream_files(root, QUEUE)
     known = frozenset(repo for repo, _ in queues)
+    graphs: dict[str, Graph | None] = {}
+    refused: dict[str, str] = {}
+    merged = Graph()
     for repo, state_path in queues:
         try:
-            g = queue_graph(repo, state_path, known)
+            graphs[repo] = queue_graph(repo, state_path, known)
+            merged += graphs[repo]
         except UnreadableStateError as exc:
-            yield repo, None, [("Unreadable", "--", str(exc))]
-            continue
-        _, results, _ = validate(g, shacl_graph=shacl)
-        findings = sorted(
-            (str(sev).rsplit("#", 1)[-1], str(focus).rsplit("/", 1)[-1], str(msg))
-            for focus, sev, msg in results.query(
-                "SELECT ?f ?s ?m WHERE { ?r sh:focusNode ?f ; sh:resultSeverity ?s ; sh:resultMessage ?m }",
-                initNs={"sh": SH},
-            )
-        )
-        yield repo, g, findings
+            graphs[repo], refused[repo] = None, str(exc)
+    _, results, _ = validate(merged, shacl_graph=shapes())
+    by_repo: dict[str, list[Finding]] = {repo: [] for repo in graphs}
+    for focus, sev, msg in results.query(
+        "SELECT ?f ?s ?m WHERE { ?r sh:focusNode ?f ; sh:resultSeverity ?s ; sh:resultMessage ?m }",
+        initNs={"sh": SH},
+    ):
+        repo, _, sym = str(focus).removeprefix(BASE).partition("/")
+        by_repo.setdefault(repo, []).append((str(sev).rsplit("#", 1)[-1], sym or "--", str(msg)))
+    for repo, g in graphs.items():
+        if g is None:
+            yield repo, None, [("Unreadable", "--", refused[repo])]
+        else:
+            yield repo, g, sorted(by_repo[repo])
 
 
 def main() -> None:

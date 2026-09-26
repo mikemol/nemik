@@ -40,9 +40,15 @@ def waypoint_uri(repo: str, symbol: str) -> URIRef:
     return URIRef(f"{BASE}{repo}/{symbol}")
 
 
+def reference_uri(repo: str, ref: str) -> URIRef:
+    """A local `W<n>` or a foreign `<repo>:W<n>` (mtools 9236d5e) as a waypoint IRI."""
+    if foreign := model.foreign_symbol(ref):
+        return waypoint_uri(foreign[0], f"W{foreign[1]}")
+    return waypoint_uri(repo, ref)
+
+
 OPERATOR = URIRef(f"{BASE}operator")
 _SESSION = re.compile(r"^(?P<repo>.+)-[0-9a-f]{2}$")  # a ListAgents session name: <repo>-<2 hex>
-_QUALIFIED = re.compile(r"^(?P<repo>[\w.-]+):(?P<sym>W\d+)$")
 _OPERATOR_WORDS = ("operator", "user", "mikemol", "human")
 
 
@@ -59,8 +65,8 @@ def resolve_blocker(repo: str, text: str, known: frozenset[str]) -> URIRef | Non
     t = text.strip()
     if model.symbol_number(t) is not None:
         return waypoint_uri(repo, t)
-    if (m := _QUALIFIED.match(t)) and m["repo"] in known:
-        return waypoint_uri(m["repo"], m["sym"])
+    if (foreign := model.foreign_symbol(t)) and foreign[0] in known:
+        return waypoint_uri(foreign[0], f"W{foreign[1]}")
     head = t.split()[0] if t.split() else ""
     for cand in (head, (m := _SESSION.match(head)) and m["repo"]):
         if cand and cand in known:
@@ -92,7 +98,7 @@ def queue_graph(repo: str, state_path: Path, known: frozenset[str] = frozenset()
             if isinstance(w.get(field), str):
                 g.add((node, NEMIK.stringNotList, Literal(field)))
         for target in model.strlist(w, "enables"):
-            g.add((node, NEMIK.enables, waypoint_uri(repo, target)))
+            g.add((node, NEMIK.enables, reference_uri(repo, target)))
         for who in model.strlist(w, "blocked_on"):
             g.add((node, NEMIK.blockedOn, Literal(who)))
             if target := resolve_blocker(repo, who, known):
@@ -107,7 +113,7 @@ def queue_graph(repo: str, state_path: Path, known: frozenset[str] = frozenset()
         if during := model.text(w, "minted_during"):
             g.add((node, NEMIK.mintedDuring, Literal(during)))
         if cause := model.text(w, "caused_by"):
-            cause_ref = waypoint_uri(repo, cause) if model.symbol_number(cause) is not None else Literal(cause)
+            cause_ref = reference_uri(repo, cause) if model.is_reference(cause) else Literal(cause)
             g.add((node, PROV.wasInformedBy, cause_ref))
     for r in state.residue:
         symbol = model.text(r, "symbol")
@@ -166,5 +172,5 @@ def ledger_graph(repo: str, ledger_path: Path) -> tuple[Graph, int]:
         g.add((node, NEMIK.mechanism, Literal(e.mechanism)))
         g.add((node, RDFS.comment, Literal(e.note)))
         if e.symbol != model.NO_SYMBOL:
-            g.add((node, PROV.used, waypoint_uri(repo, e.symbol)))
+            g.add((node, PROV.used, reference_uri(repo, e.symbol)))
     return g, unparsed

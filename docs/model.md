@@ -34,13 +34,13 @@ Node IRIs are `urn:nemik:<repo>` for a workstream, `urn:nemik:<repo>/W<n>` for a
 | `title` | `dcterms:title` |
 | `status` ready / working / blocked / done | `oslc_cm:state nemik:Ready`, `nemik:Working`, `nemik:Blocked`, `nemik:Done`. Any other value is kept as a literal and flagged. |
 | done | also `oslc_cm:closed true` |
-| `enables` | `nemik:enables` another waypoint |
+| `enables` | `nemik:enables` a waypoint: local `W<n>`, or `repo:W<n>` in another workstream (mtools 9236d5e) |
 | `blocked_on` (free text) | `nemik:blockedOn "text"`, plus `nemik:waitsFor` when unambiguous (see below) |
 | `blocked_kind` | `nemik:blockedKind "agent" \| "human"` |
 | `touches` | `nemik:touches "tag"` |
 | `issued_at` | `dcterms:created` |
 | `minted_during` (mtools 2e21902+) | `nemik:mintedDuring "tick" \| "interrupt"`, derived by mtools from the tick lock |
-| `caused_by` (mtools 2e21902+) | `prov:wasInformedBy` a waypoint when the value is `W<n>`, otherwise a literal |
+| `caused_by` (mtools 2e21902+) | `prov:wasInformedBy` a waypoint when the value is `W<n>` or `repo:W<n>`, otherwise a literal |
 | residue entry | `a nemik:Dropped`, with the same symbol and title |
 
 ### Resolving `blocked_on`
@@ -65,7 +65,7 @@ Each line that `ledger.read` parses becomes one activity:
 |---|---|
 | stamp | `prov:startedAtTime` (`xsd:dateTime`; mtools validates it from 2293751) |
 | kind | `nemik:kind` (raw) and `nemik:effortClass` |
-| symbol | `prov:used` the waypoint, unless the symbol is `--` |
+| symbol | `prov:used` the waypoint (local or `repo:W<n>`), unless the symbol is `--` |
 | outcome, mechanism | `nemik:outcome`, `nemik:mechanism` |
 | note | `rdfs:comment` |
 
@@ -103,7 +103,9 @@ In `src/nemik/data/shapes.ttl`:
 | `EdgeIntoDroppedShape` | an `enables` edge into residue (stale) | Warning |
 | `ListFieldShape` | a list field is stored as a bare string | Warning |
 
-Only a Violation fails `nemik-check`. Vocabulary divergence is reported to summit's floor rather
+Validation runs once over the merged graph of every workstream, so a cross-workstream edge
+resolves, and a finding is attributed to the workstream of its focus node. Only a Violation
+fails `nemik-check`. Vocabulary divergence is reported to summit's floor rather
 than enforced: `friction-the-queue-vocabulary-has-one-owner-and-six-dialects` and
 `friction-a-lenient-reader-hides-a-writer-bug`.
 
@@ -116,8 +118,6 @@ than enforced: `friction-the-queue-vocabulary-has-one-owner-and-six-dialects` an
   `prov:wasInformedBy` cites.
 - **Tracked Resource Set.** The ledger is already append-only. Publishing it as a `trs:ChangeLog`
   per workstream would let other consumers sync incrementally.
-- **Cross-workstream `enables`.** mtools W27 part 2 makes `repo:W<n>` legal in `enables`.
-  nemik must then validate those edges against the merged graph, not per repo.
 
 ## Known residue
 
