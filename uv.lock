@@ -32,7 +32,10 @@ wheels = [
 [[package]]
 name = "mikemol-pathsforward"
 version = "0.1.0"
-source = { git = "https://github.com/mikemol/mtools.git?subdirectory=pathsforward&rev=9236d5e525dc074ef73a779ca55478e7ece3dd32#9236d5e525dc074ef73a779ca55478e7ece3dd32" }
+source = { path = "vendor/wheels/mikemol_pathsforward-0.1.0-py3-none-any.whl" }
+wheels = [
+    { filename = "mikemol_pathsforward-0.1.0-py3-none-any.whl", hash = "sha256:1a50e32904fb3bcbc8e28fee0046d62c0a5bc3344fff7107cb3ab54101842704" },
+]
 
 [[package]]
 name = "nemik"
@@ -51,7 +54,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "mikemol-pathsforward", git = "https://github.com/mikemol/mtools.git?subdirectory=pathsforward&rev=9236d5e525dc074ef73a779ca55478e7ece3dd32" },
+    { name = "mikemol-pathsforward", path = "vendor/wheels/mikemol_pathsforward-0.1.0-py3-none-any.whl" },
     { name = "pyshacl", specifier = ">=0.26" },
     { name = "rdflib", specifier = ">=7" },
 ]

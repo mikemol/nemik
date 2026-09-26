@@ -1,10 +1,12 @@
 # nemik-serve: read-only graph view. Mount the export (<repo>/paths-forward.{json,ledger}) read-only at /export.
 ARG BASE=ghcr.io/astral-sh/uv:python3.13-bookworm-slim
 FROM ${BASE} AS base
-# git: uv fetches mikemol-pathsforward from its pinned git sha at build time
-RUN apt-get update && apt-get install -y --no-install-recommends git && rm -rf /var/lib/apt/lists/*
+# nemik:W6/H1: mikemol-pathsforward is a vendored wheel (vendor/wheels), not a build-time git+https
+# fetch, so the build has no egress to github.com. No git binary needed: nemik-serve never shells
+# out to git (only nemik-check does, for provenance, and it isn't run from inside the image).
 WORKDIR /app
 COPY pyproject.toml uv.lock ./
+COPY vendor ./vendor
 COPY src ./src
 RUN uv sync --frozen --no-dev
 
