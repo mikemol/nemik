@@ -44,7 +44,11 @@ def workstream_files(root: Path, name: str) -> list[tuple[str, Path]]:
     found |= {p.parent.name: p for p in root.glob(f"*/{name}") if p.parent.name != ".claude"}
     if not found and (root / ".claude" / name).exists():  # --root pointed at one repo
         found = {root.name: root / ".claude" / name}
-    return sorted(found.items())
+    # A dot-named directory (e.g. .linux-sources-gate-wt, a git worktree of linux-sources) carries
+    # another workstream's queue at another commit, not a workstream of its own; it cannot be
+    # cited either, since mtools' <repo>:W<n> requires the repo to start alphanumeric. Counting it
+    # doubled every block it holds and left the copies unclaimable.
+    return sorted((repo, p) for repo, p in found.items() if not repo.startswith("."))
 
 
 def shapes() -> Graph:
