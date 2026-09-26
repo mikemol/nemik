@@ -105,7 +105,12 @@ def main() -> None:
 # sort each block into one category. They are a stated reading, not a verdict: the fix for an
 # "unstated" block is for its agent to state the ask.
 
-ANSWERED = re.compile(r"\b(ruled|ruling|keep holding|approved|go-ahead given|decided)\b", re.I)
+# The skill's explicit form ("operator: decide ..." / "operator: act ...") is the agent's own
+# statement of the ask, so it wins over every keyword reading below: "decide whether ... how
+# sourced records an operator ruling" is a question about rulings, not a recorded one.
+EXPLICIT = re.compile(r"^\s*operator\s*:\s*(decide|act)\b", re.I)
+# Past-tense forms only: a noun like "ruling" appears in questions about rulings too.
+ANSWERED = re.compile(r"\b(ruled|keep holding|approved|go-ahead given|decided)\b", re.I)
 CONDITION = re.compile(r"^\s*(event:|a green tree|once\b|when\b|after\b)|\bresume when\b|\bonce the\b", re.I)
 DECISION = re.compile(
     r"\b(approv\w*|go\b|go-ahead|choice|choose|decide|decision|which|whether|confirm|restart|act|acts|"
@@ -117,6 +122,8 @@ CATEGORIES = ("needs-you", "answered", "condition", "unstated")
 
 
 def operator_category(text: str) -> str:
+    if EXPLICIT.match(text):
+        return "needs-you"
     if ANSWERED.search(text):
         return "answered"
     if CONDITION.search(text):

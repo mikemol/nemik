@@ -88,6 +88,11 @@ already legal in mtools, so claiming needs no new vocabulary.
 | `condition` | waits on an event or condition, not the operator | "event: next watchdog abort" |
 | `unstated` | names only the operator | "operator" |
 
+The skill's explicit form, `operator: decide …` or `operator: act …`, is always `needs-you`:
+it is the agent's own statement and wins over the keyword rules. Only past-tense words
+("ruled", "approved", "keep holding", "decided") read as `answered`, so a question about a
+ruling is not mistaken for one.
+
 A bare `operator` whose waypoint title begins `OPERATOR:` or `OPERATOR (…):` (summit's
 convention) is read from the title instead, so the ask stated there counts.
 
