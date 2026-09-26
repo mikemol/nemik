@@ -24,17 +24,17 @@
     {
       "symbol": "W2",
       "title": "U2: say 'waiting on you, claim with --enables <ref>' in nemik-inbound and the Wake panel instead of bare 'unclaimed' (substrate-d9 read it as other repos' business)",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-26: commit f054c4abd5030975aee8619a55a26d6463fd53f5: blocks.py/wake.py/index.html wording; esprima parse ok; nemik-inbound sample shows hint. Not yet live: luthen hosts c9a1cca",
       "issued_at": "2026-09-26T18:21:27Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-26T18:30:40Z",
       "ticks_blocked": 0
     },
     {
@@ -174,5 +174,6 @@
   ],
   "residue": [],
   "job_id": "ba5e527e",
-  "heartbeat": "2026-09-26T18:29:26Z"
+  "heartbeat": "2026-09-26T18:29:26Z",
+  "lock": null
 }
