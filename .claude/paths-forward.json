@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 14,
+  "counter": 16,
   "waypoints": [
     {
       "symbol": "W1",
@@ -172,27 +172,6 @@
       "ticks_blocked": 0
     },
     {
-      "symbol": "W11",
-      "title": "Ship to luthen: send luthen-observability-1b the full pushed sha carrying W2 (and W3 if landed) so nemik-http rebuilds; live is c9a1cca",
-      "status": "blocked",
-      "enables": [],
-      "touches": [
-        "luthen",
-        "deploy"
-      ],
-      "blocked_on": [
-        "luthen-observability"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "When luthen replies with applied sha, confirm /wake wording on the live endpoint, mark done",
-      "evidence": "2026-09-26: 2026-09-26: sent sha 21251d0 to luthen-observability-dc (msg c4abe1d3); awaiting applied sha. Tick reconcile: payload b5bb86 vs file e98130 (W14 added out of tick), file won",
-      "issued_at": "2026-09-26T18:30:50Z",
-      "minted_during": "tick",
-      "caused_by": "nemik:W2",
-      "last_worked": "2026-09-26T18:54:23Z",
-      "ticks_blocked": 0
-    },
-    {
       "symbol": "W12",
       "title": "Copy taskboard's tools-installed-per-repo memory into nemik's project memory dir",
       "status": "ready",
@@ -246,9 +225,57 @@
       "caused_by": "el-openglo",
       "last_worked": null,
       "ticks_blocked": 0
+    },
+    {
+      "symbol": "W15",
+      "title": "Gate tests: nemik has no test suite; write pytest coverage for nemik-check exit/provenance lines, nemik-inbound UNCLAIMED column, blocks/operator categories, over a fixture ~/github tree",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "tests",
+        "gate"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Build a tiny fixture root with 2 repos + queues; test nemik-check exit 0/1 and nemik-inbound output",
+      "evidence": "",
+      "issued_at": "2026-09-26T18:57:05Z",
+      "minted_during": "tick",
+      "caused_by": "luthen-observability",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W16",
+      "title": "Containerfile test stage: run the gate tests in a stage the final stage depends on, so the image build is nemik's gate (luthen ships on push)",
+      "status": "ready",
+      "enables": [
+        "W15"
+      ],
+      "touches": [
+        "gate",
+        "deploy"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Blocked in practice on W15 tests existing; then add 'FROM ... AS test' + COPY --from=test marker",
+      "evidence": "",
+      "issued_at": "2026-09-26T18:57:05Z",
+      "minted_during": "tick",
+      "caused_by": "luthen-observability",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
-  "residue": [],
+  "residue": [
+    {
+      "symbol": "W11",
+      "title": "Ship to luthen: send luthen-observability-1b the full pushed sha carrying W2 (and W3 if landed) so nemik-http rebuilds; live is c9a1cca",
+      "dropped_at": "2026-09-26T18:57:05Z",
+      "reason": "Superseded by operator ruling 2026-09-26: luthen follows nemik origin/main (images.json nemik.follow) and ships on push; 21251d0 is an ancestor of b05c79f, now shipping. Push = deploy; never send shas. inbox/2026-09-26-luthen-ships-on-push.md",
+      "recoverable": true
+    }
+  ],
   "job_id": "02c025ba",
   "heartbeat": "2026-09-26T18:54:37Z",
   "lock": null,
