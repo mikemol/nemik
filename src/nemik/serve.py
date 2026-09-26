@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import threading
 import time
 from importlib.metadata import PackageNotFoundError, version
 from collections import Counter, defaultdict
@@ -46,6 +47,11 @@ class Model:
         self.rebuilds = 0
         self.rebuild_cpu = 0.0
         self.nodes = self.edges = self.workstreams = 0
+        # ThreadingHTTPServer: refresh() runs on every request (nemik:W19). Without this lock,
+        # several requests arriving as a queue file changes (e.g. luthen's once-a-minute export)
+        # each redo the full survey()+SHACL rebuild concurrently -- wasted CPU under the GIL that
+        # can starve the accept loop, not just a duplicated cache miss.
+        self._lock = threading.Lock()
 
     def sources(self) -> list[Path]:
         return [p for name in (QUEUE, LEDGER) for _, p in workstream_files(self.root, name)]
@@ -54,21 +60,24 @@ class Model:
         key = tuple((str(p), p.stat().st_mtime_ns) for p in self.sources())
         if key == self.key:
             return
-        cpu0 = time.process_time()
-        g, findings = bind(Graph()), {}
-        for repo, qg, fs in survey(self.root):
-            findings[repo] = fs
-            if qg is not None:
-                g += qg
-        for repo, path in workstream_files(self.root, LEDGER):
-            lg, _ = ledger_graph(repo, path)
-            g += lg
-        self.graph, self.key = g, key
-        self.rebuilds += 1
-        self.rebuild_cpu = time.process_time() - cpu0
-        doc = to_json(g, findings)
-        self.nodes, self.edges, self.workstreams = len(doc["nodes"]), len(doc["edges"]), len(findings)
-        self.payload = json.dumps(doc).encode()
+        with self._lock:
+            if key == self.key:  # someone else rebuilt while we waited for the lock
+                return
+            cpu0 = time.process_time()
+            g, findings = bind(Graph()), {}
+            for repo, qg, fs in survey(self.root):
+                findings[repo] = fs
+                if qg is not None:
+                    g += qg
+            for repo, path in workstream_files(self.root, LEDGER):
+                lg, _ = ledger_graph(repo, path)
+                g += lg
+            self.graph, self.key = g, key
+            self.rebuilds += 1
+            self.rebuild_cpu = time.process_time() - cpu0
+            doc = to_json(g, findings)
+            self.nodes, self.edges, self.workstreams = len(doc["nodes"]), len(doc["edges"]), len(findings)
+            self.payload = json.dumps(doc).encode()
 
     def metrics(self) -> bytes:
         try:
