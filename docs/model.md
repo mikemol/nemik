@@ -168,6 +168,19 @@ fails `nemik-check`. Vocabulary divergence is reported to summit's floor rather
 than enforced: `friction-the-queue-vocabulary-has-one-owner-and-six-dialects` and
 `friction-a-lenient-reader-hides-a-writer-bug`.
 
+## Provenance of a verdict
+
+Every `nemik-check` run begins with `provenance:` lines, so that a green which rests on
+uncommitted state says so:
+
+    provenance: nemik 3409f37d8bf1 +uncommitted
+    provenance: queue summit committed
+    provenance: queue aeternum uncommitted
+    provenance: queue aeternum untracked-source    (luthen's export: no git to ask)
+
+The exit code carries only the verdict (0 conforms, 1 violates). A reader that gets no
+`provenance:` lines should treat the result's basis as UNSTATED, not as green.
+
 ## Designed, not implemented
 
 - **ForgeFed between workstreams.** Each repo's agent is an Actor, `<repo>/inbox/` is its inbox,

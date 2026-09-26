@@ -1,6 +1,9 @@
 """nemik-check: validate every workstream's queue against nemik's SHACL shapes.
 
 Exit 0 when every queue under the root translates with no sh:Violation; exit 1 otherwise.
+Every run first prints `provenance:` lines: nemik's own commit (with `+uncommitted` when its
+tree is dirty), and per queue `committed`, `uncommitted` or `untracked-source`. The exit code
+means only the verdict.
 sh:Warning results (vocabulary divergence not yet agreed across repos, stale edges into residue)
 are printed but do not fail the check: divergence is reported to summit's floor, not enforced. This is the check summit registers the capability against.
 """
@@ -9,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 import os
+import subprocess
 import sys
 from collections.abc import Iterator
 from importlib.resources import files
@@ -86,12 +90,43 @@ def survey(root: Path) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
             yield repo, g, sorted(by_repo[repo])
 
 
+def _git(cwd: Path, *argv: str) -> str | None:
+    try:
+        out = subprocess.run(["git", "-C", str(cwd), *argv], capture_output=True, text=True, check=True)
+    except (OSError, subprocess.CalledProcessError):
+        return None
+    return out.stdout.strip()
+
+
+def provenance(root: Path) -> list[str]:
+    """What this verdict rests on: nemik's own commit, and each queue's committed-or-not state.
+
+    One line per fact, prefixed `provenance:`, so a reader can grep them. A queue outside any git
+    tree (luthen's export) reads `untracked-source`: its commit state is not observable from here.
+    """
+    here = Path(__file__).resolve().parent
+    sha = _git(here, "rev-parse", "--short=12", "HEAD")
+    dirty = _git(here, "status", "--porcelain", "--", ".")
+    lines = [f"provenance: nemik {sha or 'unknown'}{' +uncommitted' if dirty else ''}"]
+    for repo, path in workstream_files(root, QUEUE):
+        top = _git(path.parent, "rev-parse", "--show-toplevel")
+        if top is None:
+            state = "untracked-source"
+        else:
+            changed = _git(path.parent, "status", "--porcelain", "--", str(path), str(path.with_name(LEDGER)))
+            state = "uncommitted" if changed else "committed"
+        lines.append(f"provenance: queue {repo} {state}")
+    return lines
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(prog="nemik-check", description=(__doc__ or "").splitlines()[0])
     ap.add_argument("--root", type=Path, default=default_root())
     ap.add_argument("--dump", type=Path, help="write the merged graph as Turtle")
     args = ap.parse_args()
 
+    for line in provenance(args.root):
+        print(line)
     merged, failed = bind(Graph()), 0
     for repo, g, findings in survey(args.root):
         if g is None:
