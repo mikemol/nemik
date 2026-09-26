@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 16,
+  "counter": 17,
   "waypoints": [
     {
       "symbol": "W1",
@@ -56,7 +56,7 @@
     {
       "symbol": "W4",
       "title": "N2: send each repo its blocks on the operator with no ask stated, and the 'operator: decide/act' form",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W2"
       ],
@@ -64,11 +64,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-26: 2026-09-26: 8 unstated operator blocks (was 14) sent as inbox letters: amr-skills(4: W54,W63,W68,W74), aeternum(1: W26), gabion(2: W11,W14), sre-troubleshooting(1: W3); file <repo>/inbox/2026-09-26-nemik-operator-blocks-with-no-ask.md (uncommitted in their repos). Source: nemik-operator --json",
       "issued_at": "2026-09-26T18:21:27Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-09-26T18:21:28Z",
+      "last_worked": "2026-09-26T19:07:38Z",
       "ticks_blocked": 0
     },
     {
@@ -266,6 +266,24 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability",
       "last_worked": "2026-09-26T18:57:16Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W17",
+      "title": "Follow up nemik:W4: re-run nemik-operator; nudge any repo whose unstated blocks remain when that repo is next awake",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "operator"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Next tick after those repos wake: nemik-operator | unstated section; compare against the 8 refs in W4 evidence",
+      "evidence": "",
+      "issued_at": "2026-09-26T19:07:38Z",
+      "minted_during": "tick",
+      "caused_by": "nemik:W4",
+      "last_worked": null,
       "ticks_blocked": 0
     }
   ],
