@@ -239,10 +239,27 @@ async function wake() {
   try { w = await (await fetch("wake")).json(); } catch (e) { el.textContent = "unavailable"; return; }
   const sleepers = w.roster.filter(r => r.state !== "awake");
   const rows = sleepers.map(r => `<dt><b>${esc(r.repo)}</b> <span class="stat">${esc(r.state)}</span></dt>
-    <dd>${r.waiting.map(x => `<code>${esc(x.blocked)}</code>${x.claimed_by.length ? "" : ` (waiting on ${esc(r.repo)}: claim with <code>--enables ${esc(x.blocked)}</code>)`}`).join(", ")}</dd>`);
+    <dd>${r.waiting.map(x => `${citeLink(x.blocked)}${x.claimed_by.length ? "" : ` (waiting on ${esc(r.repo)}: claim with <code>--enables ${esc(x.blocked)}</code>)`}`).join(", ")}</dd>`);
   el.innerHTML = (rows.length ? `<dl>${rows.join("")}</dl>` : "Everything waited on is awake.")
-    + `<p class="stat">${w.operator.waiting.length} need you. Liveness: ${esc(w.liveness)}.</p>`;
+    + `<p><b>${w.operator.waiting.length} need you:</b> ${w.operator.waiting.map(x => citeLink(x.blocked)).join(", ") || "none"}</p>`
+    + `<p class="stat">Liveness: ${esc(w.liveness)}.</p>`;
 }
+
+// A cite in the Wake panel is a link: it selects that waypoint in the graph and shows its detail.
+function citeLink(cite) {
+  return `<a href="#" data-cite="${esc(cite)}"><code>${esc(cite)}</code></a>`;
+}
+function focusCite(cite) {
+  const n = data.nodes.find(x => x.cite === cite);
+  if (!n) return;
+  const el = cy && cy.getElementById(n.id);
+  if (el && el.length) { cy.elements().unselect(); el.select(); cy.animate({ center: { eles: el }, zoom: Math.max(cy.zoom(), 1.2) }); }
+  detail(n);
+}
+document.getElementById("wake").addEventListener("click", ev => {
+  const a = ev.target.closest("[data-cite]");
+  if (a) { ev.preventDefault(); focusCite(a.dataset.cite); }
+});
 document.getElementById("repo").onchange = () => { draw(); findings(); };
 document.getElementById("showDone").onchange = draw;
 document.getElementById("showNoise").onchange = draw;
