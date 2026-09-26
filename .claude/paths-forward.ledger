@@ -22,3 +22,4 @@
 2026-09-26T22:03:09Z  tick  W21  dropped   sweep     "duplicate of W22 from a misread CLI error; cleaned up in the same tick rather than leaving both live"  evidence=--drop W21
 2026-09-26T22:09:35Z  tick  W1   nudged    unblock   "bumped ticks_blocked (tool flagged NUDGE at tick 1 on W1/W8/W10); sent light first check-ins to summit/luthen/mtools. Also fixed W20, mislabeled ready when it's been blocked on mtools since filing. W17: aeternum/gabion/sre-troubleshooting still dormant, no change"  evidence=msgs 301e7d6f, 00122bff, f9544fc8
 2026-09-26T22:10:11Z  tick  W8   done      unblock   "luthen confirmed the rego alert has been live since before the containerd incident; closed"  evidence=luthen commit 3766c0e
+2026-09-26T22:10:21Z  tick  W20  advanced  unblock   "mtools claimed this as mtools:W51 with a real enables edge back to us; re-filed blocked_on from bare 'mtools' to the citable waypoint"  evidence=mtools msg, mtools:W51

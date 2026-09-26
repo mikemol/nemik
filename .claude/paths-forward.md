@@ -1,7 +1,7 @@
 <!-- DERIVED from the state file by mikemol-paths-forward --render. NEVER EDIT. -->
 # paths-forward — /home/mikemol/github/nemik/.claude/paths-forward.json
 
-counter 22 · heartbeat 2026-09-26T22:03:37Z · job `39e9aa1d` · hash `v2:ea337289da5da2ef`
+counter 22 · heartbeat 2026-09-26T22:03:37Z · job `39e9aa1d` · hash `v2:6a9318a0aac5bcf7`
 
 | # | symbol | status | title | blocked on | next bounded step |
 |---|---|---|---|---|---|
@@ -9,7 +9,7 @@ counter 22 · heartbeat 2026-09-26T22:03:37Z · job `39e9aa1d` · hash `v2:ea337
 | 2 | W22 | ready | Trial: SHACL Warning when a waypoint title exceeds 150 chars (decomposition signal, operator request re el-openglo:W45). Fires 256 times across ~/github today (commit f235c4f). Watch whether repos act on it or just accumulate the warning; 150 is a first guess, not measured | — | After it's been live a while, check whether any repo actually decomposed a waypoint because of it |
 | 3 | W1 | blocked | S6: check that every OPEN summit ask's waypoint appears in nemik-inbound for its owner | summit:W105 | — |
 | 4 | W10 | blocked | M2: mtools gaps found bootstrapping this queue: no create mode, no way to clear enables (W4->W2 is backwards), '--' unpassable as ledger symbol | mtools:W43 | — |
-| 5 | W20 | blocked | mikemol-pathsforward's rank_reason is read (render.py) but never written; ordered() only sorts by status bucket at file order, no leverage computation over enables/blocked_on (substrate-c6 found this; confirmed against our vendored copy). Relayed to mtools (mtools/inbox/2026-09-26-substrate-rank-reason-unwritten.md), not nemik's to fix. Every tick's §3 judgment is currently done by hand in the turn because of this -- exactly the failure mode the operator called out on this queue | mtools | Watch mtools/summit for a response; when rank_reason is populated upstream, bump the vendored wheel and stop hand-deriving §3 each tick |
+| 5 | W20 | blocked | mikemol-pathsforward's rank_reason is read (render.py) but never written; ordered() only sorts by status bucket at file order, no leverage computation over enables/blocked_on (substrate-c6 found this; confirmed against our vendored copy). Relayed to mtools (mtools/inbox/2026-09-26-substrate-rank-reason-unwritten.md), not nemik's to fix. Every tick's §3 judgment is currently done by hand in the turn because of this -- exactly the failure mode the operator called out on this queue | mtools:W51 | Watch mtools/summit for a response; when rank_reason is populated upstream, bump the vendored wheel and stop hand-deriving §3 each tick |
 | 6 | W2 | done | U2: say 'waiting on you, claim with --enables <ref>' in nemik-inbound and the Wake panel instead of bare 'unclaimed' (substrate-d9 read it as other repos' business) | — | — |
 | 7 | W3 | done | U1: make unclaimed '?' placeholders visible: larger, labelled with the blocked card, counted on the blocker's box | — | — |
 | 8 | W4 | done | N2: send each repo its blocks on the operator with no ask stated, and the 'operator: decide/act' form | — | — |
