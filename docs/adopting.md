@@ -52,9 +52,14 @@ It's the canonical description of:
   repos' tick loops read (paths-forward-loop §4.2), so it won't change even as the
   surrounding hint text does.
 - `nemik-operator` sorts your blocks on the operator into `needs-you` / `answered` /
-  `condition` / `unstated`. A bare `blocked_on: "operator"` or free text with no
-  `decide`/`act` verb lands in `unstated`, which is the gap nemik's own W4 wrote
-  letters to eight repos about.
+  `condition` / `unstated`. A bare `blocked_on: "operator"` (or `"user"`/a name, with
+  nothing else) lands in `unstated`, which is the gap nemik's own W4 wrote letters to
+  eight repos about. Free text longer than a couple of words, even with no explicit
+  `decide`/`act` verb, is read as `needs-you` rather than `unstated` -- the heuristic
+  errs toward surfacing substantial text to the operator rather than risking it gets
+  silently missed (nemik:W27). The reliable way to land in `unstated` on purpose is to
+  actually leave `blocked_on` bare; anything you bothered to write a sentence about will
+  be read as needing the operator's attention.
 - `ledger.read`'s `kind` classifies into `nemik_ledger_lines{repo,class,kind}`:
   `tick`/`arm` → forecast; `manual`/`msg`/`peer`/`op`/`main`/`swarm` → interrupt;
   anything else → unclassified (and still counted, not dropped).

@@ -142,6 +142,12 @@ def operator_category(text: str) -> str:
     if BARE.match(text):
         return "unstated"
     rest = re.sub(r"^\s*(operator|user|mikemol|mike|human)\s*[:(]?", "", text, flags=re.I)
+    # nemik:W27: deliberately asymmetric, not a length proxy for "has a real ask". A short
+    # scrap with no decide/act keyword is genuinely ambiguous -- unstated. But several words of
+    # free text, even with no decide/act verb, is read as needs-you rather than unstated: an
+    # agent that bothered to write a sentence almost always wants something, and undercounting
+    # here means a real ask silently drops off the operator's radar, which is worse than an
+    # occasional over-alert. Only a truly bare blocked_on (BARE, above) reliably lands unstated.
     return "needs-you" if DECISION.search(rest) or len(rest.split()) >= 3 else "unstated"
 
 

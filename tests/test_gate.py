@@ -125,3 +125,17 @@ def test_operator_categories(tmp_path: Path) -> None:
     asks = asks if isinstance(asks, list) else asks["asks"]
     cat = {a["ref"]: a["category"] for a in asks}
     assert cat == {"alpha:W1": "needs-you", "alpha:W2": "unstated"}
+
+
+def test_operator_long_free_text_reads_as_needs_you(tmp_path: Path) -> None:
+    # nemik:W27: docs/adopting.md previously implied any free text with no decide/act verb
+    # lands in unstated. It doesn't -- only a truly bare blocked_on does; several words of
+    # free text with no decide/act keyword is still read as needs-you. Fixed the docs to match
+    # the code rather than the reverse, since undercounting a real ask is the worse failure.
+    write_queue(tmp_path, "alpha",
+                waypoint("W1", status="blocked",
+                          blocked_on=["schema.py needs a full cleanroom, not a patch"], blocked_kind="human"))
+    r = run("operator", tmp_path, "--json")
+    asks = json.loads(r.stdout)
+    asks = asks if isinstance(asks, list) else asks["asks"]
+    assert {a["ref"]: a["category"] for a in asks} == {"alpha:W1": "needs-you"}
