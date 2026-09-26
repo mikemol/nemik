@@ -10,3 +10,4 @@
 2026-09-26T20:56:42Z  tick  W8   advanced  unblock   "metric already exists; proposed concrete rego alert block to luthen, whose surface owns alerts.rego"  evidence=msg e36dcc1c
 2026-09-26T21:08:37Z  tick  W12  swept     sweep     "batched W12+W13 (mtools:W43 blocks '--' as the symbol here) instead of two separate unblock ticks: copied taskboard's tools memory; saved loop re-arm procedure to project memory"  evidence=memory/tools-installed-per-repo.md, memory/loop-durability-cron-is-session-only.md; also W13
 2026-09-26T21:10:49Z  tick  W14  done      unblock   "wrote docs/adopting.md, cited from the global skill with operator's live OK"  evidence=commit b40f7b7
+2026-09-26T21:13:41Z  tick  W19  advanced  unblock   "found the likely mechanism (unlocked concurrent rebuild under refresh(), matches luthen's timing) and fixed it with double-checked locking + concurrency test"  evidence=commit 458a5e8

@@ -307,20 +307,22 @@
     {
       "symbol": "W19",
       "title": "nemik-serve wedge: pod stayed k8s state=running but stopped accepting connections for 10+min (readiness timeout -> flat connection refused, 40 failed probes); one BrokenPipeError at serve.py:215 (self.wfile.write) in a request thread, ThreadingHTTPServer so shouldn't take down the accept loop on its own. luthen deleted the pod rather than diagnose further; root cause open. Add a k8s liveness probe (luthen's manifest) so this self-heals regardless of cause; separately look at whether serve.py leaks fds/sockets on a broken pipe",
-      "status": "ready",
+      "status": "blocked",
       "enables": [],
       "touches": [
         "serve",
         "reliability"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "Ask luthen for the pod's full log around the wedge (not just the BrokenPipeError line) and whether a liveness probe is easy to add now that replicas=2 already covers the per-rollout gap",
-      "evidence": "",
+      "blocked_on": [
+        "luthen-observability"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Watch for a recurrence after this ships; if it recurs with this fix live, the mechanism is disproven and needs another look. Ask luthen whether a liveness probe is still worth adding regardless (cheap orthogonal safety net)",
+      "evidence": "2026-09-26: commit 458a5e8: found and fixed a real mechanism matching luthen's timing -- model.refresh() ran unlocked on every request (including /metrics), so concurrent requests during a file-change window each redid the full survey()+pyshacl rebuild at once (real CPU contention under the GIL). Added double-checked locking; 2 new tests (5 concurrent refreshes -> exactly 1 rebuild). Not a confirmed root cause (no repro of the actual wedge), but closes off the mechanism the timing points at",
       "issued_at": "2026-09-26T21:10:07Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability",
-      "last_worked": null,
+      "last_worked": "2026-09-26T21:13:41Z",
       "ticks_blocked": 0
     }
   ],
