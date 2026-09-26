@@ -13,6 +13,7 @@ dependencies = [
 nemik-check = "nemik.check:main"
 nemik-metrics = "nemik.metrics:main"
 nemik-serve = "nemik.serve:main"
+nemik-inbound = "nemik.blocks:main"
 
 [build-system]
 requires = ["hatchling"]

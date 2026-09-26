@@ -11,13 +11,13 @@
 :root {
   --bg: #f7f7f5; --panel: #ffffff; --ink: #1d1d1b; --muted: #6b6b66; --line: #d9d9d4;
   --ready: #2f7d4f; --working: #2b62c0; --blocked: #b8452c; --done: #9a9a94; --dropped: #c8c8c2;
-  --other: #8a5cc2; --interrupt: #d08a1a;
+  --other: #8a5cc2; --interrupt: #d08a1a; --unclaimed: #d0453a;
 }
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #161615; --panel: #1f1f1d; --ink: #ecece8; --muted: #9a9a94; --line: #34342f;
     --ready: #5cc088; --working: #6d9cf0; --blocked: #ef7a5c; --done: #6b6b66; --dropped: #45453f;
-    --other: #b38ae8; --interrupt: #f0b045;
+    --other: #b38ae8; --interrupt: #f0b045; --unclaimed: #ff6b5c;
   }
 }
 * { box-sizing: border-box; }
@@ -51,7 +51,7 @@ dt { color: var(--muted); }
   <div id="cy"></div>
   <aside>
     <div class="legend" id="legend"></div>
-    <p class="stat">Border thickness: interrupt share of ledger activity on that waypoint. Diamond: minted during an interrupt (no tick lock held). Dashed red: waits for (read from blocked_on), to a waypoint, a repo, or the operator.</p>
+    <p class="stat">Border thickness: interrupt share of ledger activity on that waypoint. Diamond: minted during an interrupt (no tick lock held). Dashed red: waits for (read from blocked_on), ending at the blocker's claiming waypoint, or at a dashed "?" in the blocker's box when nothing there claims it yet.</p>
     <h2>Selected</h2>
     <div id="detail" class="stat">Click a waypoint.</div>
     <h2>Findings</h2>
@@ -60,7 +60,7 @@ dt { color: var(--muted); }
 </main>
 <script>
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-const STATES = ["ready", "working", "blocked", "done", "dropped"];
+const STATES = ["ready", "working", "blocked", "done", "dropped", "unclaimed"];
 const color = s => css("--" + (STATES.includes(s) ? s : "other"));
 let data = null, cy = null;
 
@@ -79,11 +79,12 @@ function draw() {
   // A repo target is drawn as its own "ws:" node, not the repo's compound box: dagre cannot lay
   // out edges into compound parents.
   const byId = new Map(data.nodes.map(n => [n.id, n]));
+  // A block ends at the blocker's claiming waypoint, or at an "unclaimed" placeholder in the
+  // blocker's box; pull that end in even when its repo is filtered out, so the block stays visible.
   const waits = data.edges.filter(e => e.kind === "waits" && keep.has(e.source)
-      && (e.target === "operator" || e.target.startsWith("repo:") || byId.has(e.target)))
-    .map(e => ({ ...e, target: e.target.startsWith("repo:") ? "ws:" + e.target.slice(5) : e.target }));
+      && (e.target === "operator" || byId.has(e.target)));
   waits.forEach(e => { if (byId.has(e.target)) keep.add(e.target); });
-  const actors = [...new Set(waits.map(e => e.target).filter(t => t === "operator" || t.startsWith("ws:")))];
+  const actors = waits.some(e => e.target === "operator") ? ["operator"] : [];
   const repos = [...new Set(data.nodes.filter(n => keep.has(n.id)).map(n => n.repo))];
   const els = [
     ...repos.map(r => ({ data: { id: "repo:" + r, label: r }, classes: "repo" })),
@@ -92,8 +93,7 @@ function draw() {
       return { data: { ...n, parent: "repo:" + n.repo, label: n.symbol,
         fill: color(n.state), border: total ? 1 + 6 * (e.interrupt || 0) / total : 1 } };
     }),
-    ...actors.map(a => ({ data: { id: a, label: a === "operator" ? "operator" : a.slice(3) },
-      classes: a === "operator" ? "actor operator" : "actor" })),
+    ...actors.map(a => ({ data: { id: a, label: a }, classes: "actor operator" })),
     ...data.edges.filter(e => e.kind === "enables" && keep.has(e.source) && keep.has(e.target))
       .map((e, i) => ({ data: { id: "e" + i, source: e.source, target: e.target } })),
     ...waits.map((e, i) => ({ data: { id: "w" + i, source: e.source, target: e.target }, classes: "waits" })),
@@ -105,6 +105,9 @@ function draw() {
       { selector: "node", style: { "background-color": "data(fill)", label: "data(label)", color: css("--ink"),
         "font-size": 10, "text-valign": "center", "text-halign": "right", "text-margin-x": 4,
         width: 16, height: 16, "border-width": "data(border)", "border-color": css("--interrupt") } },
+      { selector: 'node[state = "unclaimed"]', style: { shape: "round-rectangle", width: 18, height: 18,
+        "border-style": "dashed", "border-width": 2, "border-color": css("--unclaimed"),
+        "background-opacity": 0.15, color: css("--unclaimed"), "font-weight": "bold" } },
       { selector: 'node[minted_during = "interrupt"]', style: { shape: "diamond", width: 20, height: 20 } },
       { selector: ".repo", style: { "background-opacity": 0.04, "background-color": css("--ink"), "border-width": 1,
         "border-color": css("--line"), label: "data(label)", "text-valign": "top", "text-halign": "center",
@@ -131,7 +134,7 @@ function draw() {
 // all-repos overview stays readable: most waypoints have no edges, which a single global layout
 // stretches into one long line.
 function tile() {
-  const GAP = 60, rowWidth = Math.max(1200, cy.width() * 1.6);
+  const GAP = 60;
   let x = 0, y = 0, rowH = 0;
   const actors = cy.nodes(".actor");
   if (actors.length) {
@@ -143,6 +146,10 @@ function tile() {
     kids.union(kids.edgesWith(kids)).layout({ name: "dagre", rankDir: "TB", nodeSep: 14, rankSep: 36 }).run();
     return { r, bb: kids.boundingBox() };
   }).sort((a, b) => b.bb.w * b.bb.h - a.bb.w * a.bb.h);
+  // Aim for the viewport's aspect ratio rather than one long row.
+  const area = boxes.reduce((t, { bb }) => t + (bb.w + GAP) * (bb.h + GAP), 0);
+  const aspect = Math.max(cy.width(), 1) / Math.max(cy.height(), 1);
+  const rowWidth = Math.max(Math.sqrt(area * aspect), ...boxes.map(({ bb }) => bb.w));
   for (const { r, bb } of boxes) {
     if (x > 0 && x + bb.w > rowWidth) { x = 0; y += rowH + GAP; rowH = 0; }
     r.children().shift({ x: x - bb.x1, y: y - bb.y1 });
@@ -154,7 +161,20 @@ function tile() {
 
 function detail(n) {
   const e = n.effort || {};
+  if (n.state === "unclaimed") {
+    document.getElementById("detail").innerHTML = `<dl>
+      <dt>waiting</dt><dd><code>${esc(n.for)}</code> is blocked on <b>${esc(n.repo)}</b></dd>
+      <dt>blocked on</dt><dd>${esc(n.blocked_on.join(", "))}</dd>
+      <dt>claimed by</dt><dd>nothing yet</dd></dl>
+      <p class="stat">To make it citable: ${esc(n.repo)} adds a waypoint with
+      <code>--enables ${esc(n.for)}</code>, or the blocked side writes that waypoint as
+      <code>${esc(n.repo)}:W&lt;n&gt;</code> in blocked_on. ${esc(n.repo)}'s agent can list these with
+      <code>nemik-inbound ${esc(n.repo)}</code> or <code>/inbound/${esc(n.repo)}</code>.</p>`;
+    return;
+  }
+  const inb = (data.inbound || []).filter(b => b.claimed_by.includes(n.cite) || b.blocked === n.cite);
   document.getElementById("detail").innerHTML = `<dl>
+    <dt>cite as</dt><dd><code>${esc(n.cite)}</code></dd>
     <dt>waypoint</dt><dd>${esc(n.repo)} ${esc(n.symbol)}</dd>
     <dt>title</dt><dd>${esc(n.title)}</dd>
     <dt>state</dt><dd>${esc(n.state)}</dd>
@@ -164,7 +184,10 @@ function detail(n) {
     <dt>forecast</dt><dd>${e.forecast || 0}</dd>
     <dt>interrupt</dt><dd>${e.interrupt || 0}</dd>
     <dt>unclassified</dt><dd>${e.unclassified || 0}</dd>
-    <dt>last activity</dt><dd>${esc(n.last_activity || "none")}</dd></dl>`;
+    <dt>last activity</dt><dd>${esc(n.last_activity || "none")}</dd>
+    ${inb.filter(b => b.blocked !== n.cite).map(b => `<dt>is the block for</dt><dd><code>${esc(b.blocked)}</code></dd>`).join("")}
+    ${inb.filter(b => b.blocked === n.cite).map(b => `<dt>waits on</dt><dd>${b.claimed_by.length
+      ? b.claimed_by.map(c => `<code>${esc(c)}</code>`).join(", ") : `${esc(b.blocker)} (unclaimed)`}</dd>`).join("")}</dl>`;
 }
 
 function findings() {

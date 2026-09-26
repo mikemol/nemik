@@ -35,7 +35,8 @@ of the format:
 |---|---|
 | `nemik-check` | Validates every queue against `src/nemik/data/shapes.ttl`. Exits 1 on a `sh:Violation` (a dangling edge, a duplicated symbol, or an unreadable queue). Warnings, such as vocabulary divergence, are printed and do not fail. |
 | `nemik-metrics` | Prints Prometheus text: waypoints by state, findings, prompts and ledger lines by effort class. |
-| `nemik-serve` | The web view: `/` (dependency graph), `/graph.json`, `/graph.ttl`, `/metrics`. |
+| `nemik-inbound [repo]` | What in other workstreams is blocked on `repo`, each blocked waypoint as a citable `<repo>:W<n>`, and which of `repo`'s waypoints claims it, or `UNCLAIMED`. |
+| `nemik-serve` | The web view: `/` (dependency graph), `/graph.json`, `/graph.ttl`, `/inbound/<repo>`, `/metrics`. |
 
 The root defaults to `~/github` and can be set with `$NEMIK_ROOT` or `--root`. It accepts
 `<root>/<repo>/.claude/paths-forward.*` or a flat export, `<root>/<repo>/paths-forward.*`.

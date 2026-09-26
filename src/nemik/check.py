@@ -20,6 +20,7 @@ from rdflib import Graph
 from rdflib.namespace import SH
 
 from nemik.adapter import BASE, bind, queue_graph
+from nemik.blocks import annotate
 
 QUEUE, LEDGER = "paths-forward.json", "paths-forward.ledger"
 
@@ -69,6 +70,7 @@ def survey(root: Path) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
             merged += graphs[repo]
         except UnreadableStateError as exc:
             graphs[repo], refused[repo] = None, str(exc)
+    annotate(merged)
     _, results, _ = validate(merged, shacl_graph=shapes())
     by_repo: dict[str, list[Finding]] = {repo: [] for repo in graphs}
     for focus, sev, msg in results.query(

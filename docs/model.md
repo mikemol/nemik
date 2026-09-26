@@ -57,6 +57,25 @@ writing (2026-09-25), and leaves everything else as a literal:
 
 On first measurement, 52 of 79 values resolved.
 
+### Cross-workstream blocks, from both sides
+
+A block that names only another workstream (a repo or session) gives neither agent a symbol to
+cite. `nemik.blocks` looks for a waypoint in the blocker's workstream that CLAIMS the block: one
+that `nemik:enables` the blocked waypoint (`--enables <repo>:W<n>`) or was `caused_by` it. A
+block written as `<repo>:W<n>` is claimed by that waypoint.
+
+- An unclaimed block gets `nemik:unclaimedBlockOn` and a Warning from `UnclaimedBlockShape`.
+- In the view, the block's edge ends at the claiming waypoint, or at a dashed "?" inside the
+  blocker's box.
+- The blocker's agent reads what is waiting on it with `nemik-inbound <repo>` or
+  `GET /inbound/<repo>`. Each entry gives the blocked waypoint's citable `<repo>:W<n>` and the
+  claiming waypoints, or none.
+- `nemik_blocks_inbound{repo,claimed}` counts them.
+
+To claim a block, the blocker adds or updates a waypoint with
+`--enables <blocked-repo>:W<n>`, or mints it with `--caused-by <blocked-repo>:W<n>`. Both are
+already legal in mtools, so claiming needs no new vocabulary.
+
 ## Ledger line: effort
 
 Each line that `ledger.read` parses becomes one activity:

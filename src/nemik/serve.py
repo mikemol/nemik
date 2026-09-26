@@ -5,6 +5,8 @@
     /graph.ttl    the merged RDF graph (OSLC CM ChangeRequests + PROV ledger activities)
     /vendor/*     cytoscape, dagre, cytoscape-dagre, vendored so the page never leaves the host
     /metrics      Prometheus text: graph size, last rebuild cost, build info
+    /inbound[/<repo>]  open waypoints waiting on <repo> (or anyone), each with the blocker's
+                  claiming waypoints: what an agent reads to learn "I am the block, and on what"
 
 The graph is rebuilt only when a queue or ledger file changes (mtime key), so a page poll costs
 a stat walk, not a SHACL pass.
@@ -21,10 +23,11 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from importlib.resources import files
 from pathlib import Path
 
-from rdflib import RDF, Graph
+from rdflib import RDF, Graph, URIRef
 from rdflib.namespace import DCTERMS, PROV
 
-from nemik.adapter import NEMIK, OPERATOR, OSLC_CM, bind, ledger_graph
+from nemik.adapter import BASE, NEMIK, OPERATOR, OSLC_CM, bind, ledger_graph
+from nemik.blocks import inbound, ref
 from nemik.check import LEDGER, QUEUE, default_root, survey, workstream_files
 
 
@@ -119,17 +122,41 @@ def to_json(g: Graph, findings: dict) -> dict:
             })
     for s, _, o in g.triples((None, NEMIK.enables, None)):
         edges.append({"source": str(s), "target": str(o), "kind": "enables"})
+    # A block on another workstream ends at the blocker's waypoint that claims it, or at an
+    # "unclaimed" placeholder inside the blocker's box, never at a bare repo label.
+    blocks = inbound(g)
+    by_blocked = {(b["blocked"], b["blocker"]): b for b in blocks}
     for s, _, o in g.triples((None, NEMIK.waitsFor, None)):
         if o == OPERATOR:
-            target = "operator"
-        elif (o, RDF.type, NEMIK.Workstream) in g:
-            target = "repo:" + local(o)
+            edges.append({"source": str(s), "target": "operator", "kind": "waits"})
+            continue
+        if (o, RDF.type, NEMIK.Workstream) not in g:
+            edges.append({"source": str(s), "target": str(o), "kind": "waits"})
+            continue
+        b = by_blocked.get((ref(s), local(o)))
+        if b is None:  # done, or a block on its own workstream
+            continue
+        if b["claimed_by"]:
+            for c in b["claimed_by"]:
+                repo, _, sym = c.partition(":")
+                edges.append({"source": str(s), "target": f"{BASE}{repo}/{sym}", "kind": "waits"})
         else:
-            target = str(o)
-        edges.append({"source": str(s), "target": target, "kind": "waits"})
+            ask = f"ask:{b['blocked']}@{b['blocker']}"
+            nodes.append({
+                "id": ask, "repo": b["blocker"], "symbol": "?", "state": "unclaimed",
+                "title": f"nothing in {b['blocker']} claims {b['blocked']} yet",
+                "blocked_on": b["blocked_on"], "blocked_kind": "", "effort": {},
+                "last_activity": "", "minted_during": "", "caused_by": "", "cite": "",
+                "for": b["blocked"],
+            })
+            edges.append({"source": str(s), "target": ask, "kind": "waits"})
+    for n in nodes:
+        if n["id"].startswith(BASE):
+            n["cite"] = ref(URIRef(n["id"]))
     return {
         "nodes": nodes,
         "edges": edges,
+        "inbound": blocks,
         "findings": {r: [list(f) for f in fs] for r, fs in findings.items()},
     }
 
@@ -151,7 +178,12 @@ def handler(model: Model) -> type[BaseHTTPRequestHandler]:
                     self.send(404, "text/plain", b"not found")
                 return
             model.refresh()
-            if self.path == "/metrics":
+            if self.path.startswith("/inbound"):
+                repo = self.path.removeprefix("/inbound").strip("/").removesuffix(".json")
+                doc = json.loads(model.payload)["inbound"]
+                body = [b for b in doc if not repo or b["blocker"] == repo]
+                self.send(200, "application/json", json.dumps(body, indent=1).encode())
+            elif self.path == "/metrics":
                 self.send(200, "text/plain; version=0.0.4", model.metrics())
             elif self.path == "/graph.json":
                 self.send(200, "application/json", model.payload)

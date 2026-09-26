@@ -10,6 +10,8 @@
                                              hand-backs, background notices: the session's own work returning)
     nemik_turns_total{repo}                  turns ended (Stop events)
     nemik_ledger_lines{repo,class,kind}      parsed ledger lines (mtools ledger.read) by effort class
+    nemik_blocks_inbound{repo,claimed}       open waypoints in OTHER workstreams waiting on repo;
+                                             claimed="false" when no waypoint of repo names them
     nemik_ledger_unparsed{repo}              legacy/malformed ledger lines mtools returned unparsed
 
 Pushing is not nemik's job: luthen hosts the push path, which admits metric names only when
@@ -24,10 +26,11 @@ import os
 from collections import Counter
 from pathlib import Path
 
-from rdflib import RDF
+from rdflib import RDF, Graph
 from rdflib.namespace import PROV
 
 from nemik.adapter import NEMIK, OSLC_CM, ledger_graph
+from nemik.blocks import inbound
 from nemik.check import LEDGER, default_root, survey, workstream_files
 
 CLASS = {
@@ -69,6 +72,15 @@ def main() -> None:
                 out.append(f"nemik_waypoints_minted{label(repo=repo, during=during)} {n}")
         for sev, n in sorted(Counter(sev for sev, _, _ in findings).items()):
             out.append(f"nemik_findings{label(repo=repo, severity=sev)} {n}")
+
+    merged = Graph()
+    for _, g, _ in survey(args.root):
+        if g is not None:
+            merged += g
+    out.append("# TYPE nemik_blocks_inbound gauge")
+    inb = Counter((b["blocker"], str(bool(b["claimed_by"])).lower()) for b in inbound(merged))
+    for (repo, claimed), n in sorted(inb.items()):
+        out.append(f"nemik_blocks_inbound{label(repo=repo, claimed=claimed)} {n}")
 
     prompts, turns = Counter(), Counter()
     if args.spool.exists():

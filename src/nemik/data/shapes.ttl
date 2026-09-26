@@ -42,3 +42,9 @@ nemik:ListFieldShape a sh:NodeShape ;
     sh:targetSubjectsOf nemik:stringNotList ;
     sh:property [ sh:path nemik:stringNotList ; sh:maxCount 0 ; sh:severity sh:Warning ;
                   sh:message "a list field (enables, touches or blocked_on) is stored as a bare string" ] .
+
+# A block on another workstream that neither side can cite by symbol.
+nemik:UnclaimedBlockShape a sh:NodeShape ;
+    sh:targetSubjectsOf nemik:unclaimedBlockOn ;
+    sh:property [ sh:path nemik:unclaimedBlockOn ; sh:maxCount 0 ; sh:severity sh:Warning ;
+                  sh:message "blocked on another workstream, and no waypoint there claims it: cite <repo>:W<n> in blocked_on, or the blocker adds a waypoint with --enables <this repo>:W<n>" ] .
