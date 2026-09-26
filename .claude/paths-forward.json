@@ -219,11 +219,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Draft docs/adopting.md from the reply sent to el-openglo-8c; ask operator before editing the global skill to cite it",
-      "evidence": "",
+      "evidence": "2026-09-26: Include (luthen 2026-09-26): on this host (luthen) ~/github/cassian-observability is a synced copy of the laptop's repo; its resolvers (series-history, store-migration.tsv) describe cassian's stores only. Resolve luthen stores by name: luthen-observability checks/endpoints_query.py (vmsingle-http etc.)",
       "issued_at": "2026-09-26T18:44:46Z",
       "minted_during": "interrupt",
       "caused_by": "el-openglo",
-      "last_worked": null,
+      "last_worked": "2026-09-26T19:14:40Z",
       "ticks_blocked": 0
     },
     {
