@@ -14,6 +14,7 @@ nemik-check = "nemik.check:main"
 nemik-metrics = "nemik.metrics:main"
 nemik-serve = "nemik.serve:main"
 nemik-inbound = "nemik.blocks:main"
+nemik-operator = "nemik.blocks:operator_main"
 
 [build-system]
 requires = ["hatchling"]

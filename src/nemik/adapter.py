@@ -49,7 +49,7 @@ def reference_uri(repo: str, ref: str) -> URIRef:
 
 OPERATOR = URIRef(f"{BASE}operator")
 _SESSION = re.compile(r"^(?P<repo>.+)-[0-9a-f]{2}$")  # a ListAgents session name: <repo>-<2 hex>
-_OPERATOR_WORDS = ("operator", "user", "mikemol", "human")
+_OPERATOR_WORDS = ("operator", "user", "mikemol", "mike", "human")
 
 
 def resolve_blocker(repo: str, text: str, known: frozenset[str]) -> URIRef | None:
@@ -71,7 +71,7 @@ def resolve_blocker(repo: str, text: str, known: frozenset[str]) -> URIRef | Non
     for cand in (head, (m := _SESSION.match(head)) and m["repo"]):
         if cand and cand in known:
             return workstream_uri(cand)
-    if head.lower().split("(")[0] in _OPERATOR_WORDS:
+    if head.lower().split("(")[0].rstrip(":,") in _OPERATOR_WORDS:
         return OPERATOR
     return None
 
@@ -107,6 +107,8 @@ def queue_graph(repo: str, state_path: Path, known: frozenset[str] = frozenset()
             g.add((node, NEMIK.blockedKind, Literal(kind)))
         for tag in model.strlist(w, "touches"):
             g.add((node, NEMIK.touches, Literal(tag)))
+        if (tb := model.ticks(w)):
+            g.add((node, NEMIK.ticksBlocked, Literal(tb)))
         if issued := model.text(w, "issued_at"):
             g.add((node, DCTERMS.created, Literal(issued)))
         # mtools 2e21902: derived from the tick lock at mint time, never by the agent.

@@ -48,3 +48,11 @@ nemik:UnclaimedBlockShape a sh:NodeShape ;
     sh:targetSubjectsOf nemik:unclaimedBlockOn ;
     sh:property [ sh:path nemik:unclaimedBlockOn ; sh:maxCount 0 ; sh:severity sh:Warning ;
                   sh:message "blocked on another workstream, and no waypoint there claims it: cite <repo>:W<n> in blocked_on, or the blocker adds a waypoint with --enables <this repo>:W<n>" ] .
+
+# Blocks on the operator that do not ask the operator for anything.
+nemik:OperatorAskShape a sh:NodeShape ;
+    sh:targetSubjectsOf nemik:operatorAsk ;
+    sh:property [ sh:path nemik:operatorAsk ; sh:not [ sh:in ( "unstated" ) ] ; sh:severity sh:Warning ;
+                  sh:message "blocked on the operator with no stated ask: write blocked_on as 'operator: decide <question>' or 'operator: act <what only the operator can do>'" ] ;
+    sh:property [ sh:path nemik:operatorAsk ; sh:not [ sh:in ( "answered" ) ] ; sh:severity sh:Warning ;
+                  sh:message "blocked on the operator, but blocked_on records the operator's answer already: lift the block, or re-file it against the condition it waits on" ] .

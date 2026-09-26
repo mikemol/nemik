@@ -32,3 +32,5 @@ nemik:mintedDuring a rdf:Property ; rdfs:comment "tick | interrupt: whether a li
 nemik:waitsFor a rdf:Property ; rdfs:comment "An edge nemik resolved from free-text blocked_on: to a waypoint (local or repo:W<n>), a workstream, or the operator." .
 nemik:stringNotList a rdf:Property ; rdfs:comment "Names a list field (enables, touches, blocked_on) the queue stores as a bare string." .
 nemik:unclaimedBlockOn a rdf:Property ; rdfs:comment "This open waypoint waits on the object workstream, and no waypoint of that workstream enables it or was caused by it." .
+nemik:operatorAsk a rdf:Property ; rdfs:comment "needs-you | answered | condition | unstated: nemik's reading of a block on the operator (nemik.blocks.operator_category)." .
+nemik:ticksBlocked a rdf:Property ; rdfs:comment "mtools' ticks_blocked counter." .

@@ -5,6 +5,7 @@
     /graph.ttl    the merged RDF graph (OSLC CM ChangeRequests + PROV ledger activities)
     /vendor/*     cytoscape, dagre, cytoscape-dagre, vendored so the page never leaves the host
     /metrics      Prometheus text: graph size, last rebuild cost, build info
+    /operator     open waypoints blocked on the operator: needs-you / answered / condition / unstated
     /inbound[/<repo>]  open waypoints waiting on <repo> (or anyone), each with the blocker's
                   claiming waypoints: what an agent reads to learn "I am the block, and on what"
 
@@ -27,7 +28,7 @@ from rdflib import RDF, Graph, URIRef
 from rdflib.namespace import DCTERMS, PROV
 
 from nemik.adapter import BASE, NEMIK, OPERATOR, OSLC_CM, bind, ledger_graph
-from nemik.blocks import inbound, ref
+from nemik.blocks import inbound, operator_asks, ref
 from nemik.check import LEDGER, QUEUE, default_root, survey, workstream_files
 
 
@@ -128,8 +129,7 @@ def to_json(g: Graph, findings: dict) -> dict:
     by_blocked = {(b["blocked"], b["blocker"]): b for b in blocks}
     for s, _, o in g.triples((None, NEMIK.waitsFor, None)):
         if o == OPERATOR:
-            edges.append({"source": str(s), "target": "operator", "kind": "waits"})
-            continue
+            continue  # drawn from operator_asks below, one lane per category
         if (o, RDF.type, NEMIK.Workstream) not in g:
             edges.append({"source": str(s), "target": str(o), "kind": "waits"})
             continue
@@ -150,6 +150,10 @@ def to_json(g: Graph, findings: dict) -> dict:
                 "for": b["blocked"],
             })
             edges.append({"source": str(s), "target": ask, "kind": "waits"})
+    asks = operator_asks(g)
+    for a in asks:
+        edges.append({"source": f"{BASE}{a['ref'].replace(':', '/', 1)}", "target": f"operator:{a['category']}",
+                      "kind": "waits"})
     for n in nodes:
         if n["id"].startswith(BASE):
             n["cite"] = ref(URIRef(n["id"]))
@@ -157,6 +161,7 @@ def to_json(g: Graph, findings: dict) -> dict:
         "nodes": nodes,
         "edges": edges,
         "inbound": blocks,
+        "operator": asks,
         "findings": {r: [list(f) for f in fs] for r, fs in findings.items()},
     }
 
@@ -178,7 +183,10 @@ def handler(model: Model) -> type[BaseHTTPRequestHandler]:
                     self.send(404, "text/plain", b"not found")
                 return
             model.refresh()
-            if self.path.startswith("/inbound"):
+            if self.path in ("/operator", "/operator.json"):
+                body = json.dumps(json.loads(model.payload)["operator"], indent=1).encode()
+                self.send(200, "application/json", body)
+            elif self.path.startswith("/inbound"):
                 repo = self.path.removeprefix("/inbound").strip("/").removesuffix(".json")
                 doc = json.loads(model.payload)["inbound"]
                 body = [b for b in doc if not repo or b["blocker"] == repo]

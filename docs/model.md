@@ -76,6 +76,25 @@ To claim a block, the blocker adds or updates a waypoint with
 `--enables <blocked-repo>:W<n>`, or mints it with `--caused-by <blocked-repo>:W<n>`. Both are
 already legal in mtools, so claiming needs no new vocabulary.
 
+### Blocks on the operator
+
+`nemik.blocks.operator_asks` sorts every open waypoint blocked on the operator (resolved to
+`urn:nemik:operator`, or `blocked_kind: human`) by the text of its `blocked_on`:
+
+| Category | Reads as | Example |
+|---|---|---|
+| `needs-you` | a decision or act only the operator can do | "operator: agent choice (Alloy vs Parca …)" |
+| `answered` | records the operator's answer already (ruled, approved, keep holding) | "operator RULED 'Keep holding' …" |
+| `condition` | waits on an event or condition, not the operator | "event: next watchdog abort" |
+| `unstated` | names only the operator | "operator" |
+
+`needs-you` asks that normalise to the same text, or that name another blocked waypoint
+(`linux-sources W24`), are grouped with `same_ask`, so one decision shows once. The categories
+are nemik's reading of free text. The durable fix is the `operator: decide …` /
+`operator: act …` form, now in the paths-forward-loop skill. `nemik-operator` and
+`GET /operator` list them. `OperatorAskShape` warns on `unstated` and `answered`, and the view
+shows only `needs-you` unless you tick "show operator blocks that don't need you".
+
 ## Ledger line: effort
 
 Each line that `ledger.read` parses becomes one activity:
