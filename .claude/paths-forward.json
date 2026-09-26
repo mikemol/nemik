@@ -74,17 +74,17 @@
     {
       "symbol": "W5",
       "title": "N3: tell rosettapkg (W13, W14) and substrate (W37) their blocked cards name no resolvable party",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-26: 2026-09-26: checked all three. rosettapkg:W13/W14 blocked_on='mtools' (bare repo name) IS resolvable — nemik draws waitsFor edge + unclaimed placeholder; no action needed, handoff item stale. substrate:W37 blocked_on is free text (store.py hardcode), genuinely unresolvable per nemik-check Warning; sent substrate/inbox/2026-09-26-nemik-w37-no-resolvable-party.md (uncommitted, substrate's repo)",
       "issued_at": "2026-09-26T18:21:27Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-26T20:15:24Z",
       "ticks_blocked": 0
     },
     {
