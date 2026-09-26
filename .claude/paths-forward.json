@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 13,
+  "counter": 14,
   "waypoints": [
     {
       "symbol": "W1",
@@ -223,6 +223,25 @@
       "issued_at": "2026-09-26T18:30:50Z",
       "minted_during": "tick",
       "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W14",
+      "title": "Adopter guide: one page (docs/adopting.md, cited from paths-forward-loop skill) on writing a queue nemik reads: writer install, --ledger grammar, kind classes, minted_during, cross-repo refs",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "docs",
+        "adoption"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Draft docs/adopting.md from the reply sent to el-openglo-8c; ask operator before editing the global skill to cite it",
+      "evidence": "",
+      "issued_at": "2026-09-26T18:44:46Z",
+      "minted_during": "interrupt",
+      "caused_by": "el-openglo",
       "last_worked": null,
       "ticks_blocked": 0
     }
