@@ -141,10 +141,10 @@ def main() -> None:
     from nemik.check import default_root, survey
 
     ap = argparse.ArgumentParser(prog="nemik-wake", description=(__doc__ or "").splitlines()[0])
-    ap.add_argument("--root", type=Path, default=default_root())
+    ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
     ap.add_argument("--liveness", help="loop_liveness JSON file, or - for stdin")
     ap.add_argument("--all", action="store_true", help="include awake workstreams")
-    ap.add_argument("--json", action="store_true")
+    ap.add_argument("--json", action="store_true", help="machine-readable output")
     ap.add_argument("--nudge", action="store_true",
                      help="print only rows due a nudge now (backoff/dedup via --nudges-state)")
     ap.add_argument("--nudges-state", type=Path, default=nudges_path())

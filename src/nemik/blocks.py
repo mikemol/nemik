@@ -90,8 +90,8 @@ def main() -> None:
 
     ap = argparse.ArgumentParser(prog="nemik-inbound", description=(main.__doc__ or "").splitlines()[0])
     ap.add_argument("repo", nargs="?", help="only blocks on this workstream")
-    ap.add_argument("--root", type=Path, default=default_root())
-    ap.add_argument("--json", action="store_true")
+    ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
+    ap.add_argument("--json", action="store_true", help="machine-readable output")
     args = ap.parse_args()
     g = Graph()
     for _, qg, _ in survey(args.root):
@@ -226,8 +226,8 @@ def operator_main() -> None:
     from nemik.check import LEDGER, default_root, survey, workstream_files
 
     ap = argparse.ArgumentParser(prog="nemik-operator", description=(operator_main.__doc__ or "").splitlines()[0])
-    ap.add_argument("--root", type=Path, default=default_root())
-    ap.add_argument("--json", action="store_true")
+    ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
+    ap.add_argument("--json", action="store_true", help="machine-readable output")
     args = ap.parse_args()
 
     root = Path(args.root)

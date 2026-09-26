@@ -231,7 +231,7 @@ def handler(model: Model) -> type[BaseHTTPRequestHandler]:
 
 def main() -> None:
     ap = argparse.ArgumentParser(prog="nemik-serve", description=(__doc__ or "").splitlines()[0])
-    ap.add_argument("--root", type=Path, default=default_root())
+    ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
     ap.add_argument("--bind", default="127.0.0.1")
     ap.add_argument("--port", type=int, default=8750)
     args = ap.parse_args()

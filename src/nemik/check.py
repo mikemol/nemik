@@ -146,7 +146,7 @@ def provenance(root: Path) -> list[str]:
 
 def main() -> None:
     ap = argparse.ArgumentParser(prog="nemik-check", description=(__doc__ or "").splitlines()[0])
-    ap.add_argument("--root", type=Path, default=default_root())
+    ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
     ap.add_argument("--dump", type=Path, help="write the merged graph as Turtle")
     args = ap.parse_args()
 
