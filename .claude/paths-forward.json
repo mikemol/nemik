@@ -122,20 +122,18 @@
     {
       "symbol": "W8",
       "title": "W2: alert when something waits on an asleep repo for more than N hours (nemik_waiting_on{state=asleep}); rule and panel through luthen's panels/rego",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "luthen-observability"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "When luthen adds the rule (or pushes back on severity/threshold), verify it fires against a synthetic asleep+waiting series if possible, else confirm the declaration matches what was proposed",
-      "evidence": "2026-09-26: nemik_waiting_on{repo,state} already exists (nemik-metrics) and is already relayed (metrics_relay.keep_prefixed passes nemik_*). alerts.rego is entirely luthen's declaration surface (its own header: nothing else may carry an alert). Proposed a concrete rego block (4h threshold, matching paths-forward-loop's own 16-tick/4h escalation) via msg e36dcc1c",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-09-26: nemik_waiting_on{repo,state} already exists (nemik-metrics) and is already relayed (metrics_relay.keep_prefixed passes nemik_*). alerts.rego is entirely luthen's declaration surface (its own header: nothing else may carry an alert). Proposed a concrete rego block (4h threshold, matching paths-forward-loop's own 16-tick/4h escalation) via msg e36dcc1c | 2026-09-26: luthen confirmed live (commit 3766c0e, applied same batch as the replica bump, before the containerd incident): alerts[\"nemik_waiting_on_asleep\"] fires on sum by (repo)(nemik_waiting_on{state=\"asleep\"})>0 for 4h, severity info -- exactly as proposed. My tracking was stale because nemik has no witness into alerts.rego or cluster state; luthen flagged this as a structural gap, not a delay on their part",
       "issued_at": "2026-09-26T18:21:28Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-09-26T20:56:41Z",
-      "ticks_blocked": 1
+      "last_worked": "2026-09-26T22:10:04Z",
+      "ticks_blocked": 0
     },
     {
       "symbol": "W9",
