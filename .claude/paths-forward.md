@@ -1,7 +1,7 @@
 <!-- DERIVED from the state file by mikemol-paths-forward --render. NEVER EDIT. -->
 # paths-forward — /home/mikemol/github/nemik/.claude/paths-forward.json
 
-counter 23 · heartbeat 2026-09-26T22:42:42Z · job `0400586f` · hash `v2:c54ec0c9887f4876`
+counter 24 · heartbeat 2026-09-26T22:52:59Z · job `aaf61ad6` · hash `v2:7b85aa651518b7d0`
 
 | # | symbol | status | title | blocked on | next bounded step |
 |---|---|---|---|---|---|
@@ -26,6 +26,7 @@ counter 23 · heartbeat 2026-09-26T22:42:42Z · job `0400586f` · hash `v2:c54ec
 | 19 | W18 | done | should_nudge() library function (+ maybe --nudge on nemik-wake): owns the staleness threshold + backoff/dedup decision that luthen's checks/waker.py currently reinvents per-repo (loop_liveness verdict + last_tick -> nudge now yes/no); luthen keeps the SendMessage act, nemik owns the decision. luthen W117 | — | — |
 | 20 | W19 | done | nemik-serve wedge: pod stayed k8s state=running but stopped accepting connections for 10+min (readiness timeout -> flat connection refused, 40 failed probes); one BrokenPipeError at serve.py:215 (self.wfile.write) in a request thread, ThreadingHTTPServer so shouldn't take down the accept loop on its own. luthen deleted the pod rather than diagnose further; root cause open. Add a k8s liveness probe (luthen's manifest) so this self-heals regardless of cause; separately look at whether serve.py leaks fds/sockets on a broken pipe | — | — |
 | 21 | W23 | done | W22 trial has ~50% false-positive rate on sampled titles: raw length flags verbose-but-atomic sentences same as genuinely bundled steps | — | — |
+| 22 | W24 | done | Dash UI: load() had no error handling (unlike wake()) -- a transient server miss silently blanked the page | — | n/a |
 
 ## residue
 

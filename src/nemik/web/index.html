@@ -226,7 +226,14 @@ function findings() {
 }
 
 async function load() {
-  data = await (await fetch("graph.json")).json();
+  try {
+    data = await (await fetch("graph.json")).json();
+  } catch (e) {
+    // A blank page looks the same as "still loading" -- say what actually happened, and keep
+    // whatever was last rendered rather than tearing the graph down over a transient miss.
+    document.getElementById("stat").textContent = data ? "graph refresh failed, showing last-known data" : "graph unavailable";
+    return;
+  }
   const sel = document.getElementById("repo"), cur = sel.value;
   const repos = [...new Set(data.nodes.map(n => n.repo))].sort();
   sel.innerHTML = '<option value="">all</option>' + repos.map(r => `<option${r === cur ? " selected" : ""}>${esc(r)}</option>`).join("");
