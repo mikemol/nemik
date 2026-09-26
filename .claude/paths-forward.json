@@ -277,12 +277,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Next tick after those repos wake: nemik-operator | unstated section; compare against the 8 refs in W4 evidence",
-      "evidence": "",
+      "next_bounded_step": "Re-check amr-skills next time it's awake or ticks; keep watching for aeternum/gabion/sre-troubleshooting to wake",
+      "evidence": "2026-09-26: 2026-09-26: checked all 4 recipients' liveness (luthen loop_liveness). amr-skills is awake (last tick 396s ago) and its 4 blocks (W54,W63,W68,W74) are still unstated -- nudged directly (msg 7cd82f79). aeternum, gabion, sre-troubleshooting are dormant; nothing to do until they wake. Letters (inbox/2026-09-26-nemik-operator-blocks-with-no-ask.md) still sit unread in all four repos",
       "issued_at": "2026-09-26T19:07:38Z",
       "minted_during": "tick",
       "caused_by": "nemik:W4",
-      "last_worked": null,
+      "last_worked": "2026-09-26T21:44:39Z",
       "ticks_blocked": 0
     },
     {
