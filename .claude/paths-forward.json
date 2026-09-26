@@ -174,20 +174,22 @@
     {
       "symbol": "W11",
       "title": "Ship to luthen: send luthen-observability-1b the full pushed sha carrying W2 (and W3 if landed) so nemik-http rebuilds; live is c9a1cca",
-      "status": "ready",
+      "status": "blocked",
       "enables": [],
       "touches": [
         "luthen",
         "deploy"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "Send luthen-observability-1b sha 21251d0522db3efe2f2464d01b87b32823fa2972 (carries W2 f054c4a + W3); they rebuild nemik-http at it",
-      "evidence": "",
+      "blocked_on": [
+        "luthen-observability"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "When luthen replies with applied sha, confirm /wake wording on the live endpoint, mark done",
+      "evidence": "2026-09-26: 2026-09-26: sent sha 21251d0 to luthen-observability-dc (msg c4abe1d3); awaiting applied sha. Tick reconcile: payload b5bb86 vs file e98130 (W14 added out of tick), file won",
       "issued_at": "2026-09-26T18:30:50Z",
       "minted_during": "tick",
       "caused_by": "nemik:W2",
-      "last_worked": "2026-09-26T18:38:31Z",
+      "last_worked": "2026-09-26T18:54:23Z",
       "ticks_blocked": 0
     },
     {
