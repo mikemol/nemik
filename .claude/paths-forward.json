@@ -229,7 +229,7 @@
     {
       "symbol": "W15",
       "title": "Gate tests: nemik has no test suite; write pytest coverage for nemik-check exit/provenance lines, nemik-inbound UNCLAIMED column, blocks/operator categories, over a fixture ~/github tree",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W16"
       ],
@@ -239,12 +239,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Build a tiny fixture root with 2 repos + queues; test nemik-check exit 0/1 and nemik-inbound output",
-      "evidence": "",
+      "next_bounded_step": "",
+      "evidence": "2026-09-26: commit 2a25c05: tests/test_gate.py, 4 passed (.venv/bin/pytest -q tests); also fixed nemik-inbound/-operator --root str bug (luthen inbox letter, reported by el-openglo)",
       "issued_at": "2026-09-26T18:57:05Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability",
-      "last_worked": "2026-09-26T18:57:16Z",
+      "last_worked": "2026-09-26T19:23:57Z",
       "ticks_blocked": 0
     },
     {
@@ -260,12 +260,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Blocked in practice on W15 tests existing; then add 'FROM ... AS test' + COPY --from=test marker",
+      "next_bounded_step": "Containerfile: add 'FROM <base> AS test' that uv syncs with dev deps and runs pytest -q tests; final stage COPY --from=test a marker so it depends on the test stage",
       "evidence": "2026-09-26: Edge W16->W15 is a mistake (added by nemik-bb 2026-09-26; true order is W15->W16). It cannot be cleared: mtools:W40. Cycle cut: W15->W16 is authoritative; ignore W16->W15 when sorting",
       "issued_at": "2026-09-26T18:57:05Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability",
-      "last_worked": "2026-09-26T18:57:16Z",
+      "last_worked": "2026-09-26T19:23:57Z",
       "ticks_blocked": 0
     },
     {
