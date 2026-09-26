@@ -250,7 +250,7 @@
     {
       "symbol": "W16",
       "title": "Containerfile test stage: run the gate tests in a stage the final stage depends on, so the image build is nemik's gate (luthen ships on push)",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W15"
       ],
@@ -260,12 +260,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Containerfile: add 'FROM <base> AS test' that uv syncs with dev deps and runs pytest -q tests; final stage COPY --from=test a marker so it depends on the test stage",
-      "evidence": "2026-09-26: Edge W16->W15 is a mistake (added by nemik-bb 2026-09-26; true order is W15->W16). It cannot be cleared: mtools:W40. Cycle cut: W15->W16 is authoritative; ignore W16->W15 when sorting",
+      "next_bounded_step": "",
+      "evidence": "2026-09-26: Edge W16->W15 is a mistake (added by nemik-bb 2026-09-26; true order is W15->W16). It cannot be cleared: mtools:W40. Cycle cut: W15->W16 is authoritative; ignore W16->W15 when sorting | 2026-09-26: Containerfile test stage written (uncommitted); local buildctl build running to verify before push | 2026-09-26: commit b7242cd7b55d50db85498306303fab34475af8a3: Containerfile test stage; local buildctl build DONE 0.0s..713s, test stage '4 passed in 1.39s', rc=0",
       "issued_at": "2026-09-26T18:57:05Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability",
-      "last_worked": "2026-09-26T19:23:57Z",
+      "last_worked": "2026-09-26T19:56:39Z",
       "ticks_blocked": 0
     },
     {

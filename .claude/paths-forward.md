@@ -1,7 +1,7 @@
 <!-- DERIVED from the state file by mikemol-paths-forward --render. NEVER EDIT. -->
 # paths-forward — /home/mikemol/github/nemik/.claude/paths-forward.json
 
-counter 17 · heartbeat 2026-09-26T19:24:11Z · job `226ba8e1` · hash `v2:9615974d0aeaa319`
+counter 17 · heartbeat 2026-09-26T19:24:11Z · job `226ba8e1` · hash `v2:03d1d63bc17b3e3a`
 
 | # | symbol | status | title | blocked on | next bounded step |
 |---|---|---|---|---|---|
@@ -12,15 +12,15 @@ counter 17 · heartbeat 2026-09-26T19:24:11Z · job `226ba8e1` · hash `v2:96159
 | 5 | W12 | ready | Copy taskboard's tools-installed-per-repo memory into nemik's project memory dir | — | cp ~/.claude/projects/-home-mikemol-github-taskboard/memory/tools-installed-per-repo.md into nemik memory + MEMORY.md pointer |
 | 6 | W13 | ready | Loop durability: the 15m cron is session-only and expires 2026-10-03; re-arm on session restart or expiry | — | On restart/expiry: --payload, CronCreate, --armed <id> |
 | 7 | W14 | ready | Adopter guide: one page (docs/adopting.md, cited from paths-forward-loop skill) on writing a queue nemik reads: writer install, --ledger grammar, kind classes, minted_during, cross-repo refs | — | Draft docs/adopting.md from the reply sent to el-openglo-8c; ask operator before editing the global skill to cite it |
-| 8 | W16 | ready | Containerfile test stage: run the gate tests in a stage the final stage depends on, so the image build is nemik's gate (luthen ships on push) | — | Containerfile: add 'FROM <base> AS test' that uv syncs with dev deps and runs pytest -q tests; final stage COPY --from=test a marker so it depends on the test stage |
-| 9 | W17 | ready | Follow up nemik:W4: re-run nemik-operator; nudge any repo whose unstated blocks remain when that repo is next awake | — | Next tick after those repos wake: nemik-operator \| unstated section; compare against the 8 refs in W4 evidence |
-| 10 | W1 | blocked | S6: check that every OPEN summit ask's waypoint appears in nemik-inbound for its owner | summit:W105 | — |
-| 11 | W10 | blocked | M2: mtools gaps found bootstrapping this queue: no create mode, no way to clear enables (W4->W2 is backwards), '--' unpassable as ledger symbol | mtools:W40, mtools:W42, mtools:W43 | — |
-| 12 | W2 | done | U2: say 'waiting on you, claim with --enables <ref>' in nemik-inbound and the Wake panel instead of bare 'unclaimed' (substrate-d9 read it as other repos' business) | — | — |
-| 13 | W3 | done | U1: make unclaimed '?' placeholders visible: larger, labelled with the blocked card, counted on the blocker's box | — | — |
-| 14 | W4 | done | N2: send each repo its blocks on the operator with no ask stated, and the 'operator: decide/act' form | — | — |
-| 15 | W9 | done | Move this session to ~/github/nemik: it runs from ~/github/taskboard, so liveness and the hook spool record it as 'taskboard' and nemik reads as asleep | — | — |
-| 16 | W15 | done | Gate tests: nemik has no test suite; write pytest coverage for nemik-check exit/provenance lines, nemik-inbound UNCLAIMED column, blocks/operator categories, over a fixture ~/github tree | — | — |
+| 8 | W17 | ready | Follow up nemik:W4: re-run nemik-operator; nudge any repo whose unstated blocks remain when that repo is next awake | — | Next tick after those repos wake: nemik-operator \| unstated section; compare against the 8 refs in W4 evidence |
+| 9 | W1 | blocked | S6: check that every OPEN summit ask's waypoint appears in nemik-inbound for its owner | summit:W105 | — |
+| 10 | W10 | blocked | M2: mtools gaps found bootstrapping this queue: no create mode, no way to clear enables (W4->W2 is backwards), '--' unpassable as ledger symbol | mtools:W40, mtools:W42, mtools:W43 | — |
+| 11 | W2 | done | U2: say 'waiting on you, claim with --enables <ref>' in nemik-inbound and the Wake panel instead of bare 'unclaimed' (substrate-d9 read it as other repos' business) | — | — |
+| 12 | W3 | done | U1: make unclaimed '?' placeholders visible: larger, labelled with the blocked card, counted on the blocker's box | — | — |
+| 13 | W4 | done | N2: send each repo its blocks on the operator with no ask stated, and the 'operator: decide/act' form | — | — |
+| 14 | W9 | done | Move this session to ~/github/nemik: it runs from ~/github/taskboard, so liveness and the hook spool record it as 'taskboard' and nemik reads as asleep | — | — |
+| 15 | W15 | done | Gate tests: nemik has no test suite; write pytest coverage for nemik-check exit/provenance lines, nemik-inbound UNCLAIMED column, blocks/operator categories, over a fixture ~/github tree | — | — |
+| 16 | W16 | done | Containerfile test stage: run the gate tests in a stage the final stage depends on, so the image build is nemik's gate (luthen ships on push) | — | — |
 
 ## residue
 
