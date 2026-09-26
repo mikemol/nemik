@@ -11,6 +11,7 @@ are the ones nobody can reference yet.
 from __future__ import annotations
 
 import re
+from pathlib import Path
 
 from rdflib import RDF, Graph, URIRef
 from rdflib.namespace import DCTERMS, PROV
@@ -89,7 +90,7 @@ def main() -> None:
 
     ap = argparse.ArgumentParser(prog="nemik-inbound", description=(main.__doc__ or "").splitlines()[0])
     ap.add_argument("repo", nargs="?", help="only blocks on this workstream")
-    ap.add_argument("--root", default=default_root())
+    ap.add_argument("--root", type=Path, default=default_root())
     ap.add_argument("--json", action="store_true")
     args = ap.parse_args()
     g = Graph()
@@ -225,10 +226,9 @@ def operator_main() -> None:
     from nemik.check import LEDGER, default_root, survey, workstream_files
 
     ap = argparse.ArgumentParser(prog="nemik-operator", description=(operator_main.__doc__ or "").splitlines()[0])
-    ap.add_argument("--root", default=default_root())
+    ap.add_argument("--root", type=Path, default=default_root())
     ap.add_argument("--json", action="store_true")
     args = ap.parse_args()
-    from pathlib import Path
 
     root = Path(args.root)
     g = Graph()
