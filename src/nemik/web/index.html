@@ -92,10 +92,14 @@ function draw() {
   const actors = [...new Set(waits.map(e => e.target).filter(t => t.startsWith("operator:")))].sort();
   const repos = [...new Set(data.nodes.filter(n => keep.has(n.id)).map(n => n.repo))];
   const els = [
-    ...repos.map(r => ({ data: { id: "repo:" + r, label: r }, classes: "repo" })),
+    // A repo box counts the unclaimed blocks inside it: each one is that repo's move.
+    ...repos.map(r => {
+      const k = data.nodes.filter(n => keep.has(n.id) && n.repo === r && n.state === "unclaimed").length;
+      return { data: { id: "repo:" + r, label: k ? `${r} · ${k} unclaimed` : r }, classes: "repo" };
+    }),
     ...data.nodes.filter(n => keep.has(n.id)).map(n => {
       const e = n.effort || {}, total = (e.forecast || 0) + (e.interrupt || 0) + (e.unclassified || 0);
-      return { data: { ...n, parent: "repo:" + n.repo, label: n.symbol,
+      return { data: { ...n, parent: "repo:" + n.repo, label: n.state === "unclaimed" ? `? ${n.for}` : n.symbol,
         fill: color(n.state), border: total ? 1 + 6 * (e.interrupt || 0) / total : 1 } };
     }),
     ...actors.map(a => {
@@ -113,8 +117,8 @@ function draw() {
       { selector: "node", style: { "background-color": "data(fill)", label: "data(label)", color: css("--ink"),
         "font-size": 10, "text-valign": "center", "text-halign": "right", "text-margin-x": 4,
         width: 16, height: 16, "border-width": "data(border)", "border-color": css("--interrupt") } },
-      { selector: 'node[state = "unclaimed"]', style: { shape: "round-rectangle", width: 18, height: 18,
-        "border-style": "dashed", "border-width": 2, "border-color": css("--unclaimed"),
+      { selector: 'node[state = "unclaimed"]', style: { shape: "round-rectangle", width: 28, height: 28,
+        "font-size": 12, "border-style": "dashed", "border-width": 3, "border-color": css("--unclaimed"),
         "background-opacity": 0.15, color: css("--unclaimed"), "font-weight": "bold" } },
       { selector: 'node[minted_during = "interrupt"]', style: { shape: "diamond", width: 20, height: 20 } },
       { selector: ".repo", style: { "background-opacity": 0.04, "background-color": css("--ink"), "border-width": 1,
