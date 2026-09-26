@@ -102,7 +102,9 @@ def main() -> None:
         return
     for b in blocks:
         claim = ", ".join(b["claimed_by"]) or "UNCLAIMED"
-        print(f"{b['blocker']:24} <- {b['blocked']:28} {claim:28} {b['title'][:60]}")
+        # UNCLAIMED stays as the column token other repos' ticks read; the hint says whose move it is.
+        hint = "" if b["claimed_by"] else f"  -- waiting on you, claim with --enables {b['blocked']}"
+        print(f"{b['blocker']:24} <- {b['blocked']:28} {claim:28} {b['title'][:60]}{hint}")
 
 
 # ---- Blocks on the operator -------------------------------------------------------------------

@@ -97,7 +97,7 @@ def main() -> None:
     for r in rows:
         print(f"\n{r['state'].upper():7} {r['repo']}  ({len(r['waiting'])} waiting; last tick {r['last_tick'] or 'none'})")
         for w in r["waiting"]:
-            claim = ", ".join(w["claimed_by"]) or "unclaimed"
+            claim = ", ".join(w["claimed_by"]) or f"waiting on {r['repo']}: claim with --enables {w['blocked']}"
             print(f"          {w['blocked']:28} {claim:22} {w['title'][:60]}")
     op = operator_row(g)
     print(f"\nYOU     operator  ({len(op['waiting'])} need you: nemik-operator)")

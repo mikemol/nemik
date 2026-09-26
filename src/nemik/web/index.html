@@ -210,7 +210,7 @@ function detail(n) {
     <dt>last activity</dt><dd>${esc(n.last_activity || "none")}</dd>
     ${inb.filter(b => b.blocked !== n.cite).map(b => `<dt>is the block for</dt><dd><code>${esc(b.blocked)}</code></dd>`).join("")}
     ${inb.filter(b => b.blocked === n.cite).map(b => `<dt>waits on</dt><dd>${b.claimed_by.length
-      ? b.claimed_by.map(c => `<code>${esc(c)}</code>`).join(", ") : `${esc(b.blocker)} (unclaimed)`}</dd>`).join("")}</dl>`;
+      ? b.claimed_by.map(c => `<code>${esc(c)}</code>`).join(", ") : `${esc(b.blocker)} (waiting on ${esc(b.blocker)}: claim with <code>--enables ${esc(b.blocked)}</code>)`}</dd>`).join("")}</dl>`;
 }
 
 function findings() {
@@ -235,7 +235,7 @@ async function wake() {
   try { w = await (await fetch("wake")).json(); } catch (e) { el.textContent = "unavailable"; return; }
   const sleepers = w.roster.filter(r => r.state !== "awake");
   const rows = sleepers.map(r => `<dt><b>${esc(r.repo)}</b> <span class="stat">${esc(r.state)}</span></dt>
-    <dd>${r.waiting.map(x => `<code>${esc(x.blocked)}</code>${x.claimed_by.length ? "" : " (unclaimed)"}`).join(", ")}</dd>`);
+    <dd>${r.waiting.map(x => `<code>${esc(x.blocked)}</code>${x.claimed_by.length ? "" : ` (waiting on ${esc(r.repo)}: claim with <code>--enables ${esc(x.blocked)}</code>)`}`).join(", ")}</dd>`);
   el.innerHTML = (rows.length ? `<dl>${rows.join("")}</dl>` : "Everything waited on is awake.")
     + `<p class="stat">${w.operator.waiting.length} need you. Liveness: ${esc(w.liveness)}.</p>`;
 }
