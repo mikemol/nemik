@@ -14,11 +14,11 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-26: summit replied to the nudge: W105 is real, queued behind two in-flight verifications, not forgotten",
       "issued_at": "2026-09-26T18:21:18Z",
       "minted_during": "interrupt",
       "caused_by": "summit:W105",
-      "last_worked": "2026-09-26T18:21:27Z",
+      "last_worked": "2026-09-26T22:09:44Z",
       "ticks_blocked": 1
     },
     {
