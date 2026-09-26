@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 19,
+  "counter": 20,
   "waypoints": [
     {
       "symbol": "W1",
@@ -321,6 +321,25 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability",
       "last_worked": "2026-09-26T21:24:32Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W20",
+      "title": "mikemol-pathsforward's rank_reason is read (render.py) but never written; ordered() only sorts by status bucket at file order, no leverage computation over enables/blocked_on (substrate-c6 found this; confirmed against our vendored copy). Relayed to mtools (mtools/inbox/2026-09-26-substrate-rank-reason-unwritten.md), not nemik's to fix. Every tick's §3 judgment is currently done by hand in the turn because of this -- exactly the failure mode the operator called out on this queue",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "paths-forward-loop",
+        "upstream"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Watch mtools/summit for a response; when rank_reason is populated upstream, bump the vendored wheel and stop hand-deriving §3 each tick",
+      "evidence": "",
+      "issued_at": "2026-09-26T21:34:31Z",
+      "minted_during": "tick",
+      "caused_by": "substrate",
+      "last_worked": null,
       "ticks_blocked": 0
     }
   ],
