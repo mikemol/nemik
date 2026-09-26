@@ -342,25 +342,6 @@
       "ticks_blocked": 0
     },
     {
-      "symbol": "W21",
-      "title": "Trial: SHACL Warning when a waypoint title exceeds 150 chars (decomposition signal, operator request re el-openglo:W45). Fires 256 times across ~/github today. Watch: is this useful signal or noise at that threshold; revisit if repos start complaining or ignoring it",
-      "status": "ready",
-      "enables": [],
-      "touches": [
-        "shapes",
-        "trial"
-      ],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "After it's been live a while, check whether any repo actually decomposed a waypoint because of it, vs. just living with the warning",
-      "evidence": "",
-      "issued_at": "2026-09-26T22:02:51Z",
-      "minted_during": "tick",
-      "caused_by": "el-openglo",
-      "last_worked": null,
-      "ticks_blocked": 0
-    },
-    {
       "symbol": "W22",
       "title": "Trial: SHACL Warning when a waypoint title exceeds 150 chars (decomposition signal, operator request re el-openglo:W45). Fires 256 times across ~/github today (commit f235c4f). Watch whether repos act on it or just accumulate the warning; 150 is a first guess, not measured",
       "status": "ready",
@@ -386,6 +367,13 @@
       "title": "Ship to luthen: send luthen-observability-1b the full pushed sha carrying W2 (and W3 if landed) so nemik-http rebuilds; live is c9a1cca",
       "dropped_at": "2026-09-26T18:57:05Z",
       "reason": "Superseded by operator ruling 2026-09-26: luthen follows nemik origin/main (images.json nemik.follow) and ships on push; 21251d0 is an ancestor of b05c79f, now shipping. Push = deploy; never send shas. inbox/2026-09-26-luthen-ships-on-push.md",
+      "recoverable": true
+    },
+    {
+      "symbol": "W21",
+      "title": "Trial: SHACL Warning when a waypoint title exceeds 150 chars (decomposition signal, operator request re el-openglo:W45). Fires 256 times across ~/github today. Watch: is this useful signal or noise at that threshold; revisit if repos start complaining or ignoring it",
+      "dropped_at": "2026-09-26T22:03:08Z",
+      "reason": "duplicate of W22: my first --add call actually succeeded despite a trailing invalid --enables (no symbols given), which I mistook for a full failure and re-ran. W22 is the live one, correctly worded and evidenced",
       "recoverable": true
     }
   ],
