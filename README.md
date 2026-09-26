@@ -37,7 +37,8 @@ of the format:
 | `nemik-metrics` | Prints Prometheus text: waypoints by state, findings, prompts and ledger lines by effort class. |
 | `nemik-inbound [repo]` | What in other workstreams is blocked on `repo`, each blocked waypoint as a citable `<repo>:W<n>`, and which of `repo`'s waypoints claims it, or `UNCLAIMED`. |
 | `nemik-operator` | Blocks on the operator, sorted into needs-you, answered, condition and unstated, with duplicate asks grouped. |
-| `nemik-serve` | The web view: `/` (dependency graph), `/graph.json`, `/graph.ttl`, `/inbound/<repo>`, `/operator`, `/metrics`. |
+| `nemik-wake` | The wake roster: each workstream something is waiting on, with whether it has a live session (asleep / idle / awake), what waits on it, and how many blocks need you. Liveness comes from luthen-observability's `loop_liveness`. |
+| `nemik-serve` | The web view: `/` (dependency graph), `/graph.json`, `/graph.ttl`, `/inbound/<repo>`, `/operator`, `/wake`, `/metrics`. |
 
 The root defaults to `~/github` and can be set with `$NEMIK_ROOT` or `--root`. It accepts
 `<root>/<repo>/.claude/paths-forward.*` or a flat export, `<root>/<repo>/paths-forward.*`.

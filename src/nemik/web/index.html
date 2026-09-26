@@ -53,6 +53,8 @@ dt { color: var(--muted); }
   <aside>
     <div class="legend" id="legend"></div>
     <p class="stat">Border thickness: interrupt share of ledger activity on that waypoint. Diamond: minted during an interrupt (no tick lock held). Dashed red: waits for (read from blocked_on), ending at the blocker's claiming waypoint, or at a dashed "?" in the blocker's box when nothing there claims it yet.</p>
+    <h2>Wake</h2>
+    <div id="wake" class="stat">…</div>
     <h2>Selected</h2>
     <div id="detail" class="stat">Click a waypoint.</div>
     <h2>Findings</h2>
@@ -224,7 +226,18 @@ async function load() {
   const sel = document.getElementById("repo"), cur = sel.value;
   const repos = [...new Set(data.nodes.map(n => n.repo))].sort();
   sel.innerHTML = '<option value="">all</option>' + repos.map(r => `<option${r === cur ? " selected" : ""}>${esc(r)}</option>`).join("");
-  draw(); findings();
+  draw(); findings(); wake();
+}
+
+async function wake() {
+  const el = document.getElementById("wake");
+  let w;
+  try { w = await (await fetch("wake")).json(); } catch (e) { el.textContent = "unavailable"; return; }
+  const sleepers = w.roster.filter(r => r.state !== "awake");
+  const rows = sleepers.map(r => `<dt><b>${esc(r.repo)}</b> <span class="stat">${esc(r.state)}</span></dt>
+    <dd>${r.waiting.map(x => `<code>${esc(x.blocked)}</code>${x.claimed_by.length ? "" : " (unclaimed)"}`).join(", ")}</dd>`);
+  el.innerHTML = (rows.length ? `<dl>${rows.join("")}</dl>` : "Everything waited on is awake.")
+    + `<p class="stat">${w.operator.waiting.length} need you. Liveness: ${esc(w.liveness)}.</p>`;
 }
 document.getElementById("repo").onchange = () => { draw(); findings(); };
 document.getElementById("showDone").onchange = draw;

@@ -6,6 +6,7 @@
     /vendor/*     cytoscape, dagre, cytoscape-dagre, vendored so the page never leaves the host
     /metrics      Prometheus text: graph size, last rebuild cost, build info
     /operator     open waypoints blocked on the operator: needs-you / answered / condition / unstated
+    /wake         blocked-on workstreams with their liveness: which must be woken, and for what
     /inbound[/<repo>]  open waypoints waiting on <repo> (or anyone), each with the blocker's
                   claiming waypoints: what an agent reads to learn "I am the block, and on what"
 
@@ -29,6 +30,7 @@ from rdflib.namespace import DCTERMS, PROV
 
 from nemik.adapter import BASE, NEMIK, OPERATOR, OSLC_CM, bind, ledger_graph
 from nemik.blocks import inbound, operator_asks, ref
+from nemik.wake import operator_row, read_liveness, roster
 from nemik.check import LEDGER, QUEUE, default_root, survey, workstream_files
 
 
@@ -183,7 +185,12 @@ def handler(model: Model) -> type[BaseHTTPRequestHandler]:
                     self.send(404, "text/plain", b"not found")
                 return
             model.refresh()
-            if self.path in ("/operator", "/operator.json"):
+            if self.path in ("/wake", "/wake.json"):
+                g = model.graph
+                live, source = read_liveness(model.root, None)
+                body = {"liveness": source, "roster": roster(g, live), "operator": operator_row(g)}
+                self.send(200, "application/json", json.dumps(body, indent=1).encode())
+            elif self.path in ("/operator", "/operator.json"):
                 body = json.dumps(json.loads(model.payload)["operator"], indent=1).encode()
                 self.send(200, "application/json", body)
             elif self.path.startswith("/inbound"):

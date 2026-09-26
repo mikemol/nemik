@@ -95,6 +95,16 @@ are nemik's reading of free text. The durable fix is the `operator: decide …` 
 `GET /operator` list them. `OperatorAskShape` warns on `unstated` and `answered`, and the view
 shows only `needs-you` unless you tick "show operator blocks that don't need you".
 
+### Wake roster
+
+`nemik.wake.roster` joins `inbound` with luthen-observability's `loop_liveness` JSON: per repo,
+whether a session is alive (`pids`) and whether its loop is ticking (`verdict`). A blocked-on
+workstream is `asleep` (no session, verdict `dormant`), `idle` (a session whose loop is not
+ticking), `awake` (`ok`), or `unknown` (no reading). nemik never detects liveness itself.
+Liveness is read from `--liveness`, then `<root>/liveness.json` (written by luthen into the
+pod's export), then luthen's module run in place. `nemik-wake`, `GET /wake`, the page's Wake
+panel and `nemik_waiting_on{repo,state}` all show it.
+
 ## Ledger line: effort
 
 Each line that `ledger.read` parses becomes one activity:

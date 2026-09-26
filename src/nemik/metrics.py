@@ -12,6 +12,8 @@
     nemik_ledger_lines{repo,class,kind}      parsed ledger lines (mtools ledger.read) by effort class
     nemik_blocks_inbound{repo,claimed}       open waypoints in OTHER workstreams waiting on repo;
                                              claimed="false" when no waypoint of repo names them
+    nemik_waiting_on{repo,state}             open waypoints elsewhere waiting on repo, by repo's
+                                             liveness (asleep|idle|awake|unknown)
     nemik_ledger_unparsed{repo}              legacy/malformed ledger lines mtools returned unparsed
 
 Pushing is not nemik's job: luthen hosts the push path, which admits metric names only when
@@ -31,6 +33,7 @@ from rdflib.namespace import PROV
 
 from nemik.adapter import NEMIK, OSLC_CM, ledger_graph
 from nemik.blocks import inbound
+from nemik.wake import read_liveness, roster
 from nemik.check import LEDGER, default_root, survey, workstream_files
 
 CLASS = {
@@ -81,6 +84,11 @@ def main() -> None:
     inb = Counter((b["blocker"], str(bool(b["claimed_by"])).lower()) for b in inbound(merged))
     for (repo, claimed), n in sorted(inb.items()):
         out.append(f"nemik_blocks_inbound{label(repo=repo, claimed=claimed)} {n}")
+
+    out.append("# TYPE nemik_waiting_on gauge")
+    live, _ = read_liveness(args.root, None)
+    for r in roster(merged, live):
+        out.append(f"nemik_waiting_on{label(repo=r['repo'], state=r['state'])} {len(r['waiting'])}")
 
     prompts, turns = Counter(), Counter()
     if args.spool.exists():
