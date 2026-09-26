@@ -106,17 +106,19 @@
     {
       "symbol": "W7",
       "title": "E2: ask luthen to carry each repo's commit state in the export, so the pod can report provenance, not untracked-source",
-      "status": "ready",
+      "status": "blocked",
       "enables": [],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "blocked_on": [
+        "luthen-observability"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "When luthen writes commit.json in the export, confirm via nemik-check --root against the export path (or the live pod) that provenance lines show committed@<sha>/uncommitted@<sha>, then mark done",
+      "evidence": "2026-09-26: commit 25aa9b0: read side (exported_commit(), provenance() reads EXPORT/<repo>/commit.json {sha,dirty} additively; 2 new tests, 6 passed). Asked luthen to add the write side to checks/nemik_export.py (msg 52480361)",
       "issued_at": "2026-09-26T18:21:27Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-26T20:39:37Z",
       "ticks_blocked": 0
     },
     {

@@ -4,3 +4,4 @@
 2026-09-26T20:30:34Z  tick  W6   advanced  unblock   "vendored mikemol-pathsforward wheel; hermetic build in progress, local buildctl verify running"  evidence=vendor/wheels/, pyproject tool.uv.sources
 2026-09-26T20:36:03Z  tick  W6   advanced  unblock   "vendored mikemol-pathsforward wheel; build has no build-time egress to github.com; verified with full local build, rc=0, ~2min (was ~19min)"  evidence=commit 88a5883
 2026-09-26T20:36:43Z  tick  W18  filed     unblock   "queued nemik:W18 (should_nudge library fn), luthen agreed to hold its own bookkeeping until it's ready"  evidence=commit history; luthen-observability-dc msg ack
+2026-09-26T20:39:38Z  tick  W7   advanced  unblock   "read side for exported commit.json pushed (25aa9b0); asked luthen for the write side"  evidence=commit 25aa9b0
