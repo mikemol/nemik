@@ -1,20 +1,20 @@
 <!-- DERIVED from the state file by mikemol-paths-forward --render. NEVER EDIT. -->
 # paths-forward — /home/mikemol/github/nemik/.claude/paths-forward.json
 
-counter 40 · heartbeat 2026-09-27T13:45:14Z · job `b211f0a1` · hash `v2:2b759fe16141d8dd`
+counter 40 · heartbeat 2026-09-27T13:45:14Z · job `b211f0a1` · hash `v2:2853782df288a22d`
 
 | # | symbol | status | title | blocked on | next bounded step |
 |---|---|---|---|---|---|
-| 1 | W36 | ready | Compute transitive downstream weight for one waypoint IRI over merged fleet graph (enables closure + peer blocked_on) | — | Pure function over rdflib graph from blocks.py; test on a 3-repo fixture chain vs a leaf |
-| 2 | W37 | ready | nemik-rank <repo> CLI: list ready items with weight, sorted | — | Wire entry point in pyproject; print symbol weight title |
-| 3 | W38 | ready | Validate nemik-rank on luthen queue: W120-W127 chains outrank W91/W65 | — | Run nemik-rank luthen-observability; record output as evidence |
-| 4 | W39 | ready | Drift witness: fail when a queue's top ready item is outranked on cross-repo weight | — | Add check mode to nemik-rank returning exit 1 on drift; test both outcomes |
-| 5 | W17 | ready | Follow up nemik:W4: re-run nemik-operator; nudge any repo whose unstated blocks remain when that repo is next awake | — | Watch aeternum/gabion/sre-troubleshooting for wake |
-| 6 | W22 | ready | Trial: SHACL Warning when a waypoint title exceeds 150 chars (decomposition signal, operator request re el-openglo:W45). Fires 256 times across ~/github today (commit f235c4f). Watch whether repos act on it or just accumulate the warning; 150 is a first guess, not measured | — | After it's been live a while, check whether any repo actually decomposed a waypoint because of it |
-| 7 | W34 | blocked | nemik-rank: cross-repo transitive downstream weight per ready item, peer edges weighted by declared data, plus drift witness | W35, W36, W37, W38, W39 | Umbrella: done when W35-W39 are done |
-| 8 | W1 | blocked | S6: check that every OPEN summit ask's waypoint appears in nemik-inbound for its owner | summit:W105 | — |
-| 9 | W40 | blocked | Ask mtools: pathsforward flags a ready item that stays top of queue across ticks (from ledger) as ATOMIZE | mtools:W111 | When mtools sends the W111 sha: repin vendored wheel, update vendor/wheels/README history, run pytest, verify --check prints ATOMIZE |
-| 10 | W35 | done | Declare peer-edge weight as data (src/nemik/data/rank-weights.toml: local=1, peer=N) | — | — |
+| 1 | W37 | ready | nemik-rank <repo> CLI: list ready items with weight, sorted | — | Wire entry point in pyproject; print symbol weight title |
+| 2 | W38 | ready | Validate nemik-rank on luthen queue: W120-W127 chains outrank W91/W65 | — | Trace W45's and W79's downstream sets on the live graph; find why linux-sources:W124/el-openglo:W127 contribute no peer_blocked weight; fix data edge or traversal |
+| 3 | W39 | ready | Drift witness: fail when a queue's top ready item is outranked on cross-repo weight | — | Add check mode to nemik-rank returning exit 1 on drift; test both outcomes |
+| 4 | W17 | ready | Follow up nemik:W4: re-run nemik-operator; nudge any repo whose unstated blocks remain when that repo is next awake | — | Watch aeternum/gabion/sre-troubleshooting for wake |
+| 5 | W22 | ready | Trial: SHACL Warning when a waypoint title exceeds 150 chars (decomposition signal, operator request re el-openglo:W45). Fires 256 times across ~/github today (commit f235c4f). Watch whether repos act on it or just accumulate the warning; 150 is a first guess, not measured | — | After it's been live a while, check whether any repo actually decomposed a waypoint because of it |
+| 6 | W34 | blocked | nemik-rank: cross-repo transitive downstream weight per ready item, peer edges weighted by declared data, plus drift witness | W35, W36, W37, W38, W39 | Umbrella: done when W35-W39 are done |
+| 7 | W1 | blocked | S6: check that every OPEN summit ask's waypoint appears in nemik-inbound for its owner | summit:W105 | — |
+| 8 | W40 | blocked | Ask mtools: pathsforward flags a ready item that stays top of queue across ticks (from ledger) as ATOMIZE | mtools:W111 | When mtools sends the W111 sha: repin vendored wheel, update vendor/wheels/README history, run pytest, verify --check prints ATOMIZE |
+| 9 | W35 | done | Declare peer-edge weight as data (src/nemik/data/rank-weights.toml: local=1, peer=N) | — | — |
+| 10 | W36 | done | Compute transitive downstream weight for one waypoint IRI over merged fleet graph (enables closure + peer blocked_on) | — | — |
 | 11 | W4 | done | N2: send each repo its blocks on the operator with no ask stated, and the 'operator: decide/act' form | — | — |
 | 12 | W15 | done | Gate tests: nemik has no test suite; write pytest coverage for nemik-check exit/provenance lines, nemik-inbound UNCLAIMED column, blocks/operator categories, over a fixture ~/github tree | — | — |
 | 13 | W2 | done | U2: say 'waiting on you, claim with --enables <ref>' in nemik-inbound and the Wake panel instead of bare 'unclaimed' (substrate-d9 read it as other repos' business) | — | — |

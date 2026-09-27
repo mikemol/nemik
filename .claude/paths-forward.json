@@ -19,7 +19,7 @@
       "minted_during": "interrupt",
       "caused_by": "summit:W105",
       "last_worked": "2026-09-27T13:27:48Z",
-      "ticks_blocked": 15
+      "ticks_blocked": 16
     },
     {
       "symbol": "W2",
@@ -574,7 +574,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W117",
       "last_worked": "2026-09-27T13:32:28Z",
-      "ticks_blocked": 1
+      "ticks_blocked": 2
     },
     {
       "symbol": "W35",
@@ -597,19 +597,19 @@
     {
       "symbol": "W36",
       "title": "Compute transitive downstream weight for one waypoint IRI over merged fleet graph (enables closure + peer blocked_on)",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W34"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Pure function over rdflib graph from blocks.py; test on a 3-repo fixture chain vs a leaf",
-      "evidence": "2026-09-27: Design input from W38's acceptance case: a flat per-peer-node weight (W35's peer=3) ranks a long, mostly-local chain (W79→W70→W128-W135) above a short chain that blocked peer sessions are waiting on. Weight must distinguish a peer waypoint whose status is blocked on this chain (a stalled session) from a peer that is merely reachable through enables. Likely a third class in rank-weights.toml (e.g. peer_blocked), not just a bigger peer number. Decide in W36 and amend W35's toml, keeping the old values recorded.",
+      "next_bounded_step": "",
+      "evidence": "2026-09-27: Design input from W38's acceptance case: a flat per-peer-node weight (W35's peer=3) ranks a long, mostly-local chain (W79→W70→W128-W135) above a short chain that blocked peer sessions are waiting on. Weight must distinguish a peer waypoint whose status is blocked on this chain (a stalled session) from a peer that is merely reachable through enables. Likely a third class in rank-weights.toml (e.g. peer_blocked), not just a bigger peer number. Decide in W36 and amend W35's toml, keeping the old values recorded. | 2026-09-27: commit 0b8b06b: rank.downstream_weight(g,node,Weights); successors = enables + inverse waitsFor; done pruned; cycles safe; weights local=1 peer=2 peer_blocked=8 (W35 history kept in toml); pytest 24 passed",
       "issued_at": "2026-09-27T13:32:23Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-09-27T13:49:45Z",
+      "last_worked": "2026-09-27T13:58:15Z",
       "ticks_blocked": 0
     },
     {
@@ -640,12 +640,12 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Run nemik-rank luthen-observability; record output as evidence",
-      "evidence": "2026-09-27: ACCEPTANCE (luthen-observability-81, 13:4x): luthen's W45 chain must rank above W79. The operator's expectation: linux-sources:W124 and el-openglo:W127 are sessions sitting blocked. luthen's stopgap with a flat 3x peer weight gave W79=16 > W45=13, which is wrong. W122 landed at 77c08d4; W123 is applied, with its admission check pending.",
+      "next_bounded_step": "Trace W45's and W79's downstream sets on the live graph; find why linux-sources:W124/el-openglo:W127 contribute no peer_blocked weight; fix data edge or traversal",
+      "evidence": "2026-09-27: ACCEPTANCE (luthen-observability-81, 13:4x): luthen's W45 chain must rank above W79. The operator's expectation: linux-sources:W124 and el-openglo:W127 are sessions sitting blocked. luthen's stopgap with a flat 3x peer weight gave W79=16 > W45=13, which is wrong. W122 landed at 77c08d4; W123 is applied, with its admission check pending. | 2026-09-27: LIVE PREVIEW at 0b8b06b (not yet validation): W79=16, W45=7, W122=8, W120=7, W123=7, W91=0, W65=1. The acceptance case (W45>W79) still FAILS on real data even though the synthetic fixture passes, so the live graph lacks the edge a stalled peer should contribute. First step: trace which of W45's downstream nodes are peers, and whether linux-sources:W124 / el-openglo:W127 reach W45 via waitsFor or only via free text.",
       "issued_at": "2026-09-27T13:32:23Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-09-27T13:49:45Z",
+      "last_worked": "2026-09-27T13:58:15Z",
       "ticks_blocked": 0
     },
     {
@@ -682,7 +682,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T13:36:00Z",
-      "ticks_blocked": 1
+      "ticks_blocked": 2
     }
   ],
   "residue": [
