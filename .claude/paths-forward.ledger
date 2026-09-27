@@ -169,3 +169,4 @@
 2026-09-27T20:09:12Z  tick  W77  done      sweep     "operator ask: labels no longer beside nodes; not browser-verified"
 2026-09-27T20:23:41Z  tick  W71  atomized  collapse  "W71 -> W79 (goals CLI), W80 (dashboard); filed W78 playwright test"
 2026-09-27T20:39:11Z  tick  W79  done      unblock   "goals CLI; W80 dashboard next"
+2026-09-27T20:55:17Z  tick  W80  done      unblock   "goals on the dashboard; W71 closed (W79+W80)"
