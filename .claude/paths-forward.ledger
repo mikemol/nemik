@@ -48,3 +48,4 @@
 2026-09-27T13:44:48Z  nudge W38  nudged    -         "from W34 (umbrella, ticks_blocked=1): waiting on W38; W35 done"  evidence=W34 NUDGE flag, bump-blocked 13:3x
 2026-09-27T13:44:48Z  nudge W39  nudged    -         "from W34 (umbrella, ticks_blocked=1): waiting on W39; W35 done"  evidence=W34 NUDGE flag, bump-blocked 13:3x
 2026-09-27T13:44:48Z  tick  W34  nudged    -         "NUDGE delivered to children W36-W39 (visitor: waypoints are agents; owner still nemik)"  evidence=ledger nudge lines
+2026-09-27T13:49:45Z  peer  W38  acknowledged -         "peer test case recorded: W45 chain > W79 (flat peer=3 fails it)"  evidence=msg from luthen-observability-81

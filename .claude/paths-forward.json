@@ -605,11 +605,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Pure function over rdflib graph from blocks.py; test on a 3-repo fixture chain vs a leaf",
-      "evidence": "",
+      "evidence": "2026-09-27: Design input from W38's acceptance case: a flat per-peer-node weight (W35's peer=3) ranks a long, mostly-local chain (W79→W70→W128-W135) above a short chain that blocked peer sessions are waiting on. Weight must distinguish a peer waypoint whose status is blocked on this chain (a stalled session) from a peer that is merely reachable through enables. Likely a third class in rank-weights.toml (e.g. peer_blocked), not just a bigger peer number. Decide in W36 and amend W35's toml, keeping the old values recorded.",
       "issued_at": "2026-09-27T13:32:23Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-27T13:49:45Z",
       "ticks_blocked": 0
     },
     {
@@ -641,11 +641,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Run nemik-rank luthen-observability; record output as evidence",
-      "evidence": "",
+      "evidence": "2026-09-27: ACCEPTANCE (luthen-observability-81, 13:4x): luthen's W45 chain must rank above W79. The operator's expectation: linux-sources:W124 and el-openglo:W127 are sessions sitting blocked. luthen's stopgap with a flat 3x peer weight gave W79=16 > W45=13, which is wrong. W122 landed at 77c08d4; W123 is applied, with its admission check pending.",
       "issued_at": "2026-09-27T13:32:23Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-27T13:49:45Z",
       "ticks_blocked": 0
     },
     {
