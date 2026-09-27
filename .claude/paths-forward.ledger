@@ -142,3 +142,4 @@
 2026-09-27T18:24:36Z  nudge W62  nudged    -         "from W58"
 2026-09-27T18:24:59Z  tick  W68  refiled   -         "luthen W145: kube-state-metrics into vmsingle (operator reviews ClusterRole plan)"
 2026-09-27T18:43:33Z  tick  W67  done      unblock   "mtools:W133 landed; witnessed never workable"  evidence=345c06c
+2026-09-27T18:44:09Z  tick  W69  filed     -         "luthen W146: OOMKilled at 512Mi, /metrics >1s"

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 68,
+  "counter": 70,
   "waypoints": [
     {
       "symbol": "W1",
@@ -1231,6 +1231,42 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T18:24:59Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W69",
+      "title": "nemik-serve: rebuild off the request path (background, stale-while-rebuilding); /metrics and probes never block on the rebuild lock",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "serve"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T18:44:08Z",
+      "minted_during": "interrupt",
+      "caused_by": "luthen-observability:W146",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W70",
+      "title": "nemik-serve: RSS grows 5-25MB per rebuild on identical data; find and fix (probe running)",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "serve"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T18:44:08Z",
+      "minted_during": "interrupt",
+      "caused_by": "luthen-observability:W146",
+      "last_worked": null,
       "ticks_blocked": 0
     }
   ],
