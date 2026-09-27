@@ -76,3 +76,5 @@
 2026-09-27T15:27:47Z  nudge W46  nudged    -         "from W17 (umbrella, ticks_blocked=1): waiting on W46"  evidence=bump-blocked NUDGE
 2026-09-27T15:27:47Z  nudge W47  nudged    -         "from W17 (umbrella, ticks_blocked=1): waiting on W47"  evidence=bump-blocked NUDGE
 2026-09-27T15:27:47Z  tick  W45  advanced  unblock   "amr-skills dormant (not awake): W76 misfiled-on-operator letter left in its inbox (W4 channel); verification folded into W47"  evidence=inbox/2026-09-27-nemik-W76-unstated-block.md
+2026-09-27T15:42:23Z  nudge W47  nudged    -         "from W17 (umbrella, ticks_blocked=2): waiting on W47"  evidence=bump-blocked NUDGE
+2026-09-27T15:42:23Z  tick  W46  advanced  unblock   "luthen W124 unstated cause: blocked_on local W123 + kind human; fixes sent to live session"  evidence=luthen paths-forward.json W124; msg to luthen-observability-81

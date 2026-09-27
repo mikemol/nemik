@@ -1,14 +1,14 @@
 <!-- DERIVED from the state file by mikemol-paths-forward --render. NEVER EDIT. -->
 # paths-forward — /home/mikemol/github/nemik/.claude/paths-forward.json
 
-counter 48 · heartbeat 2026-09-27T15:18:28Z · job `aa155f49` · hash `v2:1b9b745b9fc44caf`
+counter 48 · heartbeat 2026-09-27T15:18:28Z · job `aa155f49` · hash `v2:ea689bc19f0a596c`
 
 | # | symbol | status | title | blocked on | next bounded step |
 |---|---|---|---|---|---|
-| 1 | W46 | ready | Nudge luthen-observability (awake): its W124 is blocked on the operator with no stated ask | — | SendMessage luthen-observability-81 citing luthen-observability:W124; verify via nemik-operator --json |
-| 2 | W47 | ready | Dormant watch: when aeternum (W26), gabion (W11, W14), sre-troubleshooting (W3) or amr-skills (W76, letter in inbox) wakes, nudge or verify its unstated operator blocks | — | Each tick: nemik-wake --json; on a wake event for one of the three, message it citing its <repo>:W<n> |
-| 3 | W22 | ready | Trial: SHACL Warning when a waypoint title exceeds 150 chars (decomposition signal, operator request re el-openglo:W45). Fires 256 times across ~/github today (commit f235c4f). Watch whether repos act on it or just accumulate the warning; 150 is a first guess, not measured | — | After it's been live a while, check whether any repo actually decomposed a waypoint because of it |
-| 4 | W42 | ready | Witness: every summit ask carrying a waypoint field names a waypoint that exists in its owner's queue and is not dropped (first real case is the first post-W105 ask) | — | Script over summit/floor/*.bib: parse waypoint=<repo>:W<n>, resolve against the merged graph (ChangeRequest or Dropped); report unresolved/dropped; wire as a nemik-check Warning or a nemik-operator column; fixture test |
+| 1 | W47 | ready | Dormant watch: when aeternum (W26), gabion (W11, W14), sre-troubleshooting (W3) or amr-skills (W76, letter in inbox) wakes, nudge or verify its unstated operator blocks | — | Each tick: nemik-wake --json; on a wake event for one of the three, message it citing its <repo>:W<n> |
+| 2 | W22 | ready | Trial: SHACL Warning when a waypoint title exceeds 150 chars (decomposition signal, operator request re el-openglo:W45). Fires 256 times across ~/github today (commit f235c4f). Watch whether repos act on it or just accumulate the warning; 150 is a first guess, not measured | — | After it's been live a while, check whether any repo actually decomposed a waypoint because of it |
+| 3 | W42 | ready | Witness: every summit ask carrying a waypoint field names a waypoint that exists in its owner's queue and is not dropped (first real case is the first post-W105 ask) | — | Script over summit/floor/*.bib: parse waypoint=<repo>:W<n>, resolve against the merged graph (ChangeRequest or Dropped); report unresolved/dropped; wire as a nemik-check Warning or a nemik-operator column; fixture test |
+| 4 | W46 | blocked | Nudge luthen-observability (awake): its W124 is blocked on the operator with no stated ask | luthen-observability:W124 | When luthen replies or edits: re-run nemik-operator --json; done when luthen-observability:W124 leaves 'unstated' |
 | 5 | W17 | blocked | Follow up nemik:W4: re-run nemik-operator; nudge any repo whose unstated blocks remain when that repo is next awake | W45, W46, W47 | Umbrella: done when W45-W47 are done |
 | 6 | W45 | done | Nudge amr-skills (awake): its W76 is blocked on the operator with no stated ask | — | — |
 | 7 | W4 | done | N2: send each repo its blocks on the operator with no ask stated, and the 'operator: decide/act' form | — | — |

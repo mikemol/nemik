@@ -280,7 +280,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 1
+      "ticks_blocked": 2
     },
     {
       "symbol": "W18",
@@ -770,19 +770,21 @@
     {
       "symbol": "W46",
       "title": "Nudge luthen-observability (awake): its W124 is blocked on the operator with no stated ask",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W17"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "SendMessage luthen-observability-81 citing luthen-observability:W124; verify via nemik-operator --json",
-      "evidence": "",
+      "blocked_on": [
+        "luthen-observability:W124"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "When luthen replies or edits: re-run nemik-operator --json; done when luthen-observability:W124 leaves 'unstated'",
+      "evidence": "2026-09-27: 15:4x: diagnosed. W124 has blocked_on=[W123] (a local waypoint) with blocked_kind=human, so nemik routes it to the operator lane with no ask; its next step says 'awaiting operator approval'. Sent luthen-observability-81 two fixes (kind agent, or an 'operator: act approve ...' ask), plus the staleness option.",
       "issued_at": "2026-09-27T15:13:28Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-27T15:42:23Z",
       "ticks_blocked": 0,
       "weight": 1
     },
