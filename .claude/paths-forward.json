@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 65,
+  "counter": 66,
   "waypoints": [
     {
       "symbol": "W1",
@@ -1178,6 +1178,24 @@
       "last_worked": null,
       "ticks_blocked": 0,
       "weight": 3
+    },
+    {
+      "symbol": "W66",
+      "title": "nemik-rank: a ready item with open (non-done) enablers is implicitly blocked; exclude from rank and flag in --check (deferred enablers excepted: define 'deferred')",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "cli"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T18:15:00Z",
+      "minted_during": "interrupt",
+      "caused_by": "luthen-observability:W70",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
