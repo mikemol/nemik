@@ -59,3 +59,4 @@
 2026-09-27T14:15:00Z  peer  W38  acknowledged -         "cycle broken upstream; chain now scores by position, W121 19 > W79 16"  evidence=live downstream_weight rerun
 2026-09-27T14:27:57Z  nudge W39  nudged    -         "from W34 (umbrella, ticks_blocked=4): waiting on W39 (W35-W38 done)"  evidence=bump-blocked NUDGE
 2026-09-27T14:27:57Z  tick  W37  advanced  unblock   "nemik-rank CLI shipped; luthen pinged"  evidence=commit fa462db; pytest 25
+2026-09-27T14:28:38Z  peer  --   acknowledged -         "luthen finding: linux-sources W46/W47 block on umbrella luthen:W43, inflating W112 to 58; real pairs W46<-W115, W47<-W111. Repoint is linux-sources' (asleep; operator route, luthen's to raise). Registered umbrella-edge witness as W41"  evidence=msg luthen-observability-81

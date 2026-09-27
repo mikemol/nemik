@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 40,
+  "counter": 41,
   "waypoints": [
     {
       "symbol": "W1",
@@ -683,6 +683,24 @@
       "caused_by": null,
       "last_worked": "2026-09-27T13:36:00Z",
       "ticks_blocked": 4
+    },
+    {
+      "symbol": "W41",
+      "title": "Witness: flag a peer blocked_on/waitsFor edge that lands on an umbrella (a waypoint that its own repo's children enable, or whose next_bounded_step starts with COMPOSITE) instead of the child step",
+      "status": "ready",
+      "enables": [
+        "luthen-observability:W117"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Add to nemik-check as a SHACL/SPARQL Warning (never a Violation: W27 pattern, since it's live on other repos' data); detect umbrellas structurally (same-repo children enable the target), with COMPOSITE text as a secondary signal; fixture test; expect linux-sources:W46/W47 -> luthen:W43 to fire",
+      "evidence": "",
+      "issued_at": "2026-09-27T14:28:38Z",
+      "minted_during": "tick",
+      "caused_by": "luthen-observability:W117",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
