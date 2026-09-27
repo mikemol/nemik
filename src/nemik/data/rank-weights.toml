@@ -1,0 +1,11 @@
+# Edge weights for nemik-rank's cross-repo downstream weight (nemik:W34, luthen-observability:W117).
+#
+# ⚑ DECLARED AS DATA, NOT HARD-CODED: how much more a waypoint in ANOTHER repo waiting on this one
+# counts than a local successor is a policy choice, not a fact about the graph -- so it lives
+# here, where changing it is a reviewed diff, not a constant buried in a traversal.
+#
+# local: a downstream waypoint in the same repo (reached through `enables` or `blocked_on`).
+# peer:  a downstream waypoint in another repo -- another session is stalled on it, so it
+#        outweighs local work by default (luthen-observability-81's ask).
+local = 1
+peer = 3
