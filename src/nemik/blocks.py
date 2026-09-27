@@ -92,7 +92,7 @@ def annotate(g: Graph) -> None:
             g.add((URIRef(f"{BASE}{repo}/{sym}"), NEMIK.unclaimedBlockOn, URIRef(f"{BASE}{b['blocker']}")))
 
 
-def main() -> None:
+def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     """nemik-inbound [REPO]: what is waiting on REPO (or on everyone), and which waypoint claims it."""
     import argparse
     import json
@@ -103,11 +103,12 @@ def main() -> None:
     ap.add_argument("repo", nargs="?", help="only blocks on this workstream")
     ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
     ap.add_argument("--json", action="store_true", help="machine-readable output")
-    args = ap.parse_args()
-    g = Graph()
-    for _, qg, _ in survey(args.root):
-        if qg is not None:
-            g += qg
+    args = ap.parse_args(argv)
+    if g is None:
+        g = Graph()
+        for _, qg, _ in survey(args.root):
+            if qg is not None:
+                g += qg
     blocks = [b for b in inbound(g) if not args.repo or b["blocker"] == args.repo]
     if args.json:
         print(json.dumps(blocks, indent=2))
@@ -234,7 +235,7 @@ def operator_asks(g: Graph) -> list[dict]:
     return sorted(out, key=lambda a: (order[a["category"]], -a["ticks_blocked"], a["ref"]))
 
 
-def operator_main() -> None:
+def operator_main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     """nemik-operator: blocks on the operator, sorted into needs-you / answered / condition / unstated."""
     import argparse
     import json
@@ -245,15 +246,16 @@ def operator_main() -> None:
     ap = argparse.ArgumentParser(prog="nemik-operator", description=(operator_main.__doc__ or "").splitlines()[0])
     ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
     ap.add_argument("--json", action="store_true", help="machine-readable output")
-    args = ap.parse_args()
+    args = ap.parse_args(argv)
 
     root = Path(args.root)
-    g = Graph()
-    for _, qg, _ in survey(root):
-        if qg is not None:
-            g += qg
-    for repo, path in workstream_files(root, LEDGER):
-        g += ledger_graph(repo, path)[0]
+    if g is None:
+        g = Graph()
+        for _, qg, _ in survey(root):
+            if qg is not None:
+                g += qg
+        for repo, path in workstream_files(root, LEDGER):
+            g += ledger_graph(repo, path)[0]
     asks = operator_asks(g)
     if args.json:
         print(json.dumps(asks, indent=2))

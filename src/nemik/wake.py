@@ -135,7 +135,7 @@ def due_nudges(rows: list[dict], seen: dict, now: datetime | None = None) -> lis
     return due
 
 
-def main() -> None:
+def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     import argparse
 
     from nemik.check import default_root, survey
@@ -148,11 +148,12 @@ def main() -> None:
     ap.add_argument("--nudge", action="store_true",
                      help="print only rows due a nudge now (backoff/dedup via --nudges-state)")
     ap.add_argument("--nudges-state", type=Path, default=nudges_path())
-    args = ap.parse_args()
-    g = Graph()
-    for _, qg, _ in survey(args.root):
-        if qg is not None:
-            g += qg
+    args = ap.parse_args(argv)
+    if g is None:
+        g = Graph()
+        for _, qg, _ in survey(args.root):
+            if qg is not None:
+                g += qg
     live, source = read_liveness(args.root, args.liveness)
     rows = [r for r in roster(g, live) if args.all or r["state"] != "awake"]
     if args.nudge:

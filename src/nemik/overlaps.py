@@ -26,7 +26,7 @@ def overlaps(g: Graph, cross: bool = False) -> dict[str, list[str]]:
     return out
 
 
-def main() -> None:
+def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     import argparse
     from pathlib import Path
 
@@ -35,10 +35,11 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
     ap.add_argument("--cross", action="store_true", help="only tags shared across repos")
-    args = ap.parse_args()
-    g = Graph()
-    for _, qg, _ in survey(args.root):
-        if qg is not None:
-            g += qg
+    args = ap.parse_args(argv)
+    if g is None:
+        g = Graph()
+        for _, qg, _ in survey(args.root):
+            if qg is not None:
+                g += qg
     for tag, refs in overlaps(g, args.cross).items():
         print(f"OVERLAP {tag}: {','.join(refs)}")

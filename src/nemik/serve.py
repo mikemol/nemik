@@ -234,6 +234,19 @@ def handler(model: Model) -> type[BaseHTTPRequestHandler]:
                 doc = model.doc["inbound"]
                 body = [b for b in doc if not repo or b["blocker"] == repo]
                 self.send(200, "application/json", json.dumps(body, indent=1).encode())
+            elif self.path.startswith("/cmd/"):
+                # nemik:W81: a read-only CLI's exact output over the cached graph.
+                from urllib.parse import parse_qs, urlparse
+
+                from nemik.tools import run
+                u = urlparse(self.path)
+                repo = (parse_qs(u.query).get("repo") or [None])[0]
+                try:
+                    code, out = run(u.path.removeprefix("/cmd/"), model.graph, str(model.root), repo)
+                except ValueError as e:
+                    self.send(400, "text/plain; charset=utf-8", str(e).encode())
+                    return
+                self.send(200, "text/plain; charset=utf-8", f"# exit {code}\n{out}".encode())
             elif self.path.startswith("/goals/"):
                 # nemik:W80: the W79 goal view, computed on the cached graph.
                 from nemik.rank import goals, load_weights

@@ -168,7 +168,7 @@ def rank(g: Graph, repo: str, weights: Weights) -> list[dict]:
     return sorted(rows, key=lambda r: (-r["weight"], int(r["symbol"].lstrip("W"))))
 
 
-def main() -> None:
+def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     """nemik-rank REPO: REPO's ready waypoints ordered by cross-repo downstream weight."""
     import argparse
     import json
@@ -184,11 +184,12 @@ def main() -> None:
     ap.add_argument("--json", action="store_true", help="machine-readable output")
     ap.add_argument("--check", action="store_true",
                     help="exit 1 if the ready item mtools works next is outweighed by another (drift witness)")
-    args = ap.parse_args()
-    g = Graph()
-    for _, qg, _ in survey(args.root):
-        if qg is not None:
-            g += qg
+    args = ap.parse_args(argv)
+    if g is None:
+        g = Graph()
+        for _, qg, _ in survey(args.root):
+            if qg is not None:
+                g += qg
     weights = load_weights()
     if args.check:
         ums = umbrellas(g, args.repo)
