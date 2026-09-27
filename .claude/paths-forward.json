@@ -280,7 +280,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 1
     },
     {
       "symbol": "W18",
@@ -751,19 +751,19 @@
     {
       "symbol": "W45",
       "title": "Nudge amr-skills (awake): its W76 is blocked on the operator with no stated ask",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W17"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "SendMessage amr-skills session citing amr-skills:W76 and the decide/act form; verify via nemik-operator --json after reply",
-      "evidence": "",
+      "next_bounded_step": "",
+      "evidence": "2026-09-27: amr-skills turned out to be dormant, not awake: no live session in ListAgents, absent from the nemik-wake roster, last commit d415129 16h ago. Delivered through the nemik:W4 channel as ~/github/amr-skills/inbox/2026-09-27-nemik-W76-unstated-block.md (the file is uncommitted there; their loop reads the inbox). Content: W76's title says it waits on luthen, so re-file it as blocked_on luthen-observability (agent), or 'operator: decide ...'. Also, blocked_kind 'decide' is not a valid kind. Verifying the fix moves to W47's dormant watch.",
       "issued_at": "2026-09-27T15:13:28Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-27T15:27:47Z",
       "ticks_blocked": 0,
       "weight": 1
     },
@@ -788,7 +788,7 @@
     },
     {
       "symbol": "W47",
-      "title": "Dormant watch: when aeternum (W26), gabion (W11, W14) or sre-troubleshooting (W3) wakes, nudge its unstated operator blocks",
+      "title": "Dormant watch: when aeternum (W26), gabion (W11, W14), sre-troubleshooting (W3) or amr-skills (W76, letter in inbox) wakes, nudge or verify its unstated operator blocks",
       "status": "ready",
       "enables": [
         "W17"

@@ -73,3 +73,6 @@
 2026-09-27T15:07:50Z  peer  W44  advanced  unblock   "repinned f945d43; weight sync verified metadata-only ({weight:49})"  evidence=commit 630fc06; scratch field diff
 2026-09-27T15:13:28Z  tick  W17  collapsed collapse  "ATOMIZE fired (first live): W17 split into W45/W46 (awake nudges) + W47 (dormant watch); W48 minted for proposal (f)"  evidence=--check ATOMIZE W17; nemik-operator --json
 2026-09-27T15:18:06Z  peer  W48  advanced  sweep     "own queue now stores nemik-rank weights via one bulk call; step added to tick recipe"  evidence=commit f796baf; field diff weight-only
+2026-09-27T15:27:47Z  nudge W46  nudged    -         "from W17 (umbrella, ticks_blocked=1): waiting on W46"  evidence=bump-blocked NUDGE
+2026-09-27T15:27:47Z  nudge W47  nudged    -         "from W17 (umbrella, ticks_blocked=1): waiting on W47"  evidence=bump-blocked NUDGE
+2026-09-27T15:27:47Z  tick  W45  advanced  unblock   "amr-skills dormant (not awake): W76 misfiled-on-operator letter left in its inbox (W4 channel); verification folded into W47"  evidence=inbox/2026-09-27-nemik-W76-unstated-block.md
