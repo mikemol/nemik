@@ -43,3 +43,8 @@
 2026-09-27T13:30:39Z  interrupt --   advanced  collapse  "peer ask (luthen-observability-81) registered; layers cross-repo transitive weight over mtools:W51 local leverage (out+in degree, non-transitive)"  evidence=mtools model.leverage source read
 2026-09-27T13:32:24Z  interrupt W34  collapsed collapse  "operator rule: top-of-queue >1 tick => atomize; W34 split into 5 children"  evidence=see W35-W39
 2026-09-27T13:40:15Z  tick  W35  advanced  unblock   "edge weights as data + loader; first of W34's chain (W36 traversal next)"  evidence=commit 0295563; pytest 21 passed; nemik-check exit 0
+2026-09-27T13:44:48Z  nudge W36  nudged    -         "from W34 (umbrella, ticks_blocked=1): waiting on W36; W35 done"  evidence=W34 NUDGE flag, bump-blocked 13:3x
+2026-09-27T13:44:48Z  nudge W37  nudged    -         "from W34 (umbrella, ticks_blocked=1): waiting on W37; W35 done"  evidence=W34 NUDGE flag, bump-blocked 13:3x
+2026-09-27T13:44:48Z  nudge W38  nudged    -         "from W34 (umbrella, ticks_blocked=1): waiting on W38; W35 done"  evidence=W34 NUDGE flag, bump-blocked 13:3x
+2026-09-27T13:44:48Z  nudge W39  nudged    -         "from W34 (umbrella, ticks_blocked=1): waiting on W39; W35 done"  evidence=W34 NUDGE flag, bump-blocked 13:3x
+2026-09-27T13:44:48Z  tick  W34  nudged    -         "NUDGE delivered to children W36-W39 (visitor: waypoints are agents; owner still nemik)"  evidence=ledger nudge lines
