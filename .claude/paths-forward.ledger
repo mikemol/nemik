@@ -93,3 +93,4 @@
 2026-09-27T16:30:29Z  tick  W50  filed     -         "--update rejects --touches; asked mtools to extend W121"
 2026-09-27T16:30:42Z  tick  W50  refiled   -         "blocker is mtools:W122 (update --touches), not W121"
 2026-09-27T16:47:28Z  tick  W50  done      sweep     "comma-joined tags split via mtools:W122"  evidence=836f20e
+2026-09-27T17:01:02Z  tick  W51  filed     -         "summit-da: pathsforward source conflict blocks declaring nemik"

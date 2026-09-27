@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 50,
+  "counter": 51,
   "waypoints": [
     {
       "symbol": "W1",
@@ -864,6 +864,24 @@
       "minted_during": "interrupt",
       "caused_by": "mtools:W121",
       "last_worked": "2026-09-27T16:47:28Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W51",
+      "title": "Make nemik installable as a declared dependency in repos that pin pathsforward at another sha (uv refuses two sources; summit 572b2f7 fell back to uv pip install)",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "packaging"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T17:01:02Z",
+      "minted_during": "interrupt",
+      "caused_by": "summit:W105",
+      "last_worked": null,
       "ticks_blocked": 0
     }
   ],
