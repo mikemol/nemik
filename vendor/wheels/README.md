@@ -1,10 +1,10 @@
 # Vendored wheels
 
-`mikemol_pathsforward-0.1.0+33005c1-py3-none-any.whl` is built from mtools' pathsforward at the
-exact commit nemik pins (`8a279a1`; local version segment names it, since mtools does not bump its
+`mikemol_pathsforward-0.1.0+e4f478b-py3-none-any.whl` is built from mtools' pathsforward at the
+exact commit nemik pins (`e4f478b`; local version segment names it, since mtools does not bump its
 own version per commit), via:
 
-    git -C ~/github/mtools archive 8a279a1 -- pathsforward \
+    git -C ~/github/mtools archive e4f478b -- pathsforward \
       | tar -x -C <tmp> && cd <tmp>/pathsforward && uv build --wheel -o <out>
 
 This is nemik:H1 (nemik:W6): the image build no longer fetches from github.com at build time. To
@@ -17,4 +17,4 @@ History: 9236d5e (nemik:W6, superseded) -> 8a279a1 (nemik:W10: --enables clear, 
 the queue-level symbol, since argparse eats a bare -- itself; mtools:W43) -> 8c24617
 (nemik:W20: model.leverage()/describe_rank() added; ordered() sorts by (status, -leverage,
 file order); render.queue() falls back to describe_rank when rank_reason is unset;
-mtools:W51).
+mtools:W51) -> e4f478b (nemik:W40: ATOMIZE W<n> (top for k ticks) in --check/--check-evidence/--payload when the top workable waypoint was advanced by a prior tick; mtools:W111/W113).
