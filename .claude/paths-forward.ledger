@@ -111,3 +111,4 @@
 2026-09-27T17:31:57Z  tick  W59  asked     -         "rev-2 witness-field ask sent; mtools had filed W129/W130 for rev 1, asked to reshape"
 2026-09-27T17:32:12Z  tick  W59  refiled   -         "blocked on mtools:W131 (witness field), W132 (--check working)"
 2026-09-27T17:32:43Z  tick  W58  revised   collapse  "operator: Rego rule, not executable; observers closed+trusted, predicate declared"
+2026-09-27T17:39:03Z  tick  W60  advanced  unblock   "witness core + 2 observers"  evidence=aa00300

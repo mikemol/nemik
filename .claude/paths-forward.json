@@ -280,7 +280,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 8
+      "ticks_blocked": 9
     },
     {
       "symbol": "W18",
@@ -812,7 +812,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "weight": 1
     },
     {
@@ -944,7 +944,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T17:25:45Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "weight": 0
     },
     {
@@ -965,7 +965,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T17:20:42Z",
-      "ticks_blocked": 2
+      "ticks_blocked": 3
     },
     {
       "symbol": "W56",
@@ -1005,7 +1005,8 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W58",
@@ -1028,7 +1029,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T17:31:15Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 1
     },
     {
       "symbol": "W59",
@@ -1052,12 +1053,12 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T17:32:12Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 1
     },
     {
       "symbol": "W60",
       "title": "nemik-witnesses: closed observers gather input facts; opa eval the witness Rego; true=done (facts as evidence), undefined=can't-observe finding; fixture-first",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W58",
         "W61"
@@ -1067,13 +1068,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": "Add git-ref and time observers, then the runner (nemik-witnesses [--apply]) reading waypoint.witness once mtools:W131 lands; k8s/alert/promql via luthen endpoints_query after",
+      "evidence": "2026-09-27: step 1 aa00300: witnesses.py evaluate true/false/undefined via opa eval; pid(localhost, starttime guard)+file observers; tests/test_witnesses.py; pytest 35",
       "issued_at": "2026-09-27T17:31:04Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-09-27T17:39:03Z",
+      "ticks_blocked": 0,
+      "weight": 2
     },
     {
       "symbol": "W61",
@@ -1093,7 +1095,8 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W62",
@@ -1113,7 +1116,8 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     }
   ],
   "residue": [
