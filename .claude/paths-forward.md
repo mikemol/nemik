@@ -1,15 +1,15 @@
 <!-- DERIVED from the state file by mikemol-paths-forward --render. NEVER EDIT. -->
 # paths-forward — /home/mikemol/github/nemik/.claude/paths-forward.json
 
-counter 48 · heartbeat 2026-09-27T15:18:28Z · job `aa155f49` · hash `v2:b81631e3819d54a2`
+counter 48 · heartbeat 2026-09-27T15:18:28Z · job `aa155f49` · hash `v2:8be95130e26a74ec`
 
 | # | symbol | status | title | blocked on | next bounded step |
 |---|---|---|---|---|---|
 | 1 | W42 | ready | Witness: every summit ask carrying a waypoint field names a waypoint that exists in its owner's queue and is not dropped (first real case is the first post-W105 ask) | — | Script over summit/floor/*.bib: parse waypoint=<repo>:W<n>, resolve against the merged graph (ChangeRequest or Dropped); report unresolved/dropped; wire as a nemik-check Warning or a nemik-operator column; fixture test |
-| 2 | W46 | blocked | Nudge luthen-observability (awake): its W124 is blocked on the operator with no stated ask | luthen-observability:W124 | When luthen replies or edits: re-run nemik-operator --json; done when luthen-observability:W124 leaves 'unstated' |
-| 3 | W47 | blocked | Dormant watch: when aeternum (W26), gabion (W11, W14), sre-troubleshooting (W3) or amr-skills (W76, letter in inbox) wakes, nudge or verify its unstated operator blocks | aeternum, gabion, sre-troubleshooting, amr-skills | Each tick: nemik-wake --json; on a wake event for one of the three, message it citing its <repo>:W<n> |
-| 4 | W17 | blocked | Follow up nemik:W4: re-run nemik-operator; nudge any repo whose unstated blocks remain when that repo is next awake | W45, W46, W47 | Umbrella: done when W45-W47 are done |
-| 5 | W45 | done | Nudge amr-skills (awake): its W76 is blocked on the operator with no stated ask | — | — |
+| 2 | W47 | blocked | Dormant watch: when aeternum (W26), gabion (W11, W14), sre-troubleshooting (W3) or amr-skills (W76, letter in inbox) wakes, nudge or verify its unstated operator blocks | aeternum, gabion, sre-troubleshooting, amr-skills | Each tick: nemik-wake --json; on a wake event for one of the three, message it citing its <repo>:W<n> |
+| 3 | W17 | blocked | Follow up nemik:W4: re-run nemik-operator; nudge any repo whose unstated blocks remain when that repo is next awake | W45, W46, W47 | Umbrella: done when W45-W47 are done |
+| 4 | W45 | done | Nudge amr-skills (awake): its W76 is blocked on the operator with no stated ask | — | — |
+| 5 | W46 | done | Nudge luthen-observability (awake): its W124 is blocked on the operator with no stated ask | — | — |
 | 6 | W4 | done | N2: send each repo its blocks on the operator with no ask stated, and the 'operator: decide/act' form | — | — |
 | 7 | W15 | done | Gate tests: nemik has no test suite; write pytest coverage for nemik-check exit/provenance lines, nemik-inbound UNCLAIMED column, blocks/operator categories, over a fixture ~/github tree | — | — |
 | 8 | W34 | done | nemik-rank: cross-repo transitive downstream weight per ready item, peer edges weighted by declared data, plus drift witness | — | — |

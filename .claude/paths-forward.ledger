@@ -84,3 +84,4 @@
 2026-09-27T16:12:25Z  nudge W47  nudged    -         "from W17 (umbrella, ticks_blocked=4): waiting on W47"  evidence=bump-blocked NUDGE
 2026-09-27T16:12:25Z  tick  W47  acknowledged -         "tick-1 NUDGE: all 4 dormant by operator's budget choice; inbox letters already there (W4, W45); nothing further to send until a wake"  evidence=memory operator-wakes-repos-selectively
 2026-09-27T16:12:25Z  tick  W22  advanced  sweep     "title-length trial watch concluded: 233 warnings, no decomposition observed; shape kept, watch ended to save ticks"  evidence=nemik-check grep 150 = 233
+2026-09-27T16:12:51Z  peer  W46  advanced  unblock   "luthen W124 now states an operator act; verified in nemik-operator"  evidence=nemik-operator
