@@ -1009,7 +1009,7 @@
     },
     {
       "symbol": "W58",
-      "title": "FFI waypoints: a waypoint with a witness command is done when it exits 0 (paperkit witness shape); blockers stay <repo>:W<n>; design .claude/design/W58-mechanical-blockers.md",
+      "title": "FFI waypoints: witness is a declared Rego rule over facts from nemik's closed observer set (pid, k8s job, alert, promql, git, file, time); no executed code; design .claude/design/W58-mechanical-blockers.md rev 3",
       "status": "blocked",
       "enables": [],
       "touches": [
@@ -1056,7 +1056,7 @@
     },
     {
       "symbol": "W60",
-      "title": "nemik-witness library (pid-gone, k8s-job-done, alert-state, promql-nonempty, git-ref, file-exists, after-time; exit 0/1/2) + nemik-witnesses --apply marks passes done; fixture-first",
+      "title": "nemik-witnesses: closed observers gather input facts; opa eval the witness Rego; true=done (facts as evidence), undefined=can't-observe finding; fixture-first",
       "status": "ready",
       "enables": [
         "W58",

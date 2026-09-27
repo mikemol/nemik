@@ -4,7 +4,43 @@ Operator ask, 2026-09-27: "a way to declare blockers/waiters/waypoints on, e.g. 
 vmalert condition or k8s job; something that can be mechanically waited on to automatically
 wake/unblock, rather than force a polling action by a token-consuming agent."
 
-## Revision 2 (operator, same day): "This might look like an FFI waypoint. Something like a paperkit witness"
+## Revision 3 (operator): "I'd suggest not executing arbitrary code, but instead declare a rego rule or some such."
+
+Revision 2 made the witness a command, so any string in any repo's queue would become code that
+`nemik-witnesses --apply` runs on a timer. That makes the queue file an execution surface, and
+nothing the witness does can be audited from the queue.
+
+Revisions 1 and 2 were each half right:
+- rev 1 had a **closed, typed set of observers** (pid, k8s job, alert, promql, git, file, time),
+  but encoded the test inside a URI;
+- rev 2 had the **waypoint shape** (blockers stay `<repo>:W<n>`, W125 prunes, wake follows).
+
+Combined: **observation is fixed, trusted code nemik owns, and the predicate is declared data.**
+
+- **Observers (nemik, closed set).** Each FFI waypoint names what to look at in the `observe`
+  part of its witness. `nemik-witnesses` gathers exactly those facts into an input document,
+  e.g. `{"pid": {"localhost/41233": {"alive": false, "start": "..."}}, "k8s_job": {...},
+  "alert": {...}, "git_ref": {...}, "file": {...}, "now": "..."}`. An observer can only read,
+  and it touches only the hosts and endpoints that nemik configuration allows (luthen by name,
+  per endpoints_query).
+- **Witness = a Rego rule (declared).** `witness` holds a Rego query over `input`, e.g.
+  `not input.pid["localhost/41233@<start>"].alive` or
+  `input.k8s_job["ns/trace"].succeeded > 0`. `opa eval` (installed at /usr/bin/opa) decides it.
+  Rego is side-effect free, so the queue carries a predicate rather than a program.
+- **Which facts to gather** comes from the query's own references (`input.pid[...]` keys), or
+  from an explicit `observe` list if parsing proves brittle. That is an open question below.
+- Outcomes are true (done), false (not yet) and undefined (a fact is missing, i.e. can't
+  observe). Undefined is the repeated-exit-2 finding from rev 2, now structural.
+- Everything after is unchanged from rev 2: mark done with the fact snapshot as evidence, W125
+  prunes, wake follows.
+
+Open: is the observe set derived from the query or declared beside it? Derived keeps one field
+and is the leading option. Should mtools validate Rego syntax (`opa parse`)? That needs opa at
+check time, so probably not: nemik-check can do it.
+
+## Residue: revision 2 (witness = executable command; rejected: queue becomes an execution surface)
+
+### (rev 2 heading) (operator, same day): "This might look like an FFI waypoint. Something like a paperkit witness"
 
 The URI-scheme design below is kept as residue. Its flaw is that it adds a third *kind of
 blocker*. Blockers already have a single uniform shape, `<repo>:W<n>`, and every tool reads it:
