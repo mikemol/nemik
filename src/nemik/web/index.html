@@ -198,34 +198,66 @@ function rankEdges(kids) {
   return enables.union(cy.add(extra));
 }
 
-// Lay each repo out on its own (dagre, top-down), then tile the repos in rows, widest first, so the
-// all-repos overview stays readable: most waypoints have no edges, which a single global layout
-// stretches into one long line.
+// The same rule one level up (operator: apply it recursively). Each repo box is laid out on its own
+// by rankEdges() above; then the boxes (and operator lanes) are themselves ranked by the edges that
+// cross between them, oriented downstream: a box another box waits on sits above it. Cycles are cut
+// at DFS back edges (the edge is still drawn, just not ranked). Units with no cross edges go in a
+// last row, since nothing orders them.
 function tile() {
   const GAP = 60;
-  let x = 0, y = 0, rowH = 0;
-  const actors = cy.nodes(".actor");
-  if (actors.length) {
-    actors.forEach((a, i) => a.position({ x: i * 140, y: 0 }));
-    y = 80;
-  }
-  const boxes = cy.nodes(".repo").map(r => {
+  const units = new Map();  // unit id -> { el: collection to shift, bb }
+  cy.nodes(".repo").forEach(r => {
     const kids = r.children();
     kids.union(rankEdges(kids)).layout({ name: "dagre", rankDir: "TB", nodeSep: 10, rankSep: 30,
       nodeDimensionsIncludeLabels: true }).run();
     cy.remove(cy.edges(".rank"));
-    return { r, bb: kids.boundingBox() };
-  }).sort((a, b) => b.bb.w * b.bb.h - a.bb.w * a.bb.h);
-  // Aim for the viewport's aspect ratio rather than one long row.
-  const area = boxes.reduce((t, { bb }) => t + (bb.w + GAP) * (bb.h + GAP), 0);
-  const aspect = Math.max(cy.width(), 1) / Math.max(cy.height(), 1);
-  const rowWidth = Math.max(Math.sqrt(area * aspect), ...boxes.map(({ bb }) => bb.w));
-  for (const { r, bb } of boxes) {
-    if (x > 0 && x + bb.w > rowWidth) { x = 0; y += rowH + GAP; rowH = 0; }
-    r.children().shift({ x: x - bb.x1, y: y - bb.y1 });
-    x += bb.w + GAP;
-    rowH = Math.max(rowH, bb.h);
+    units.set(r.id(), { el: kids, bb: kids.boundingBox() });
+  });
+  cy.nodes(".actor").forEach(a => units.set(a.id(), { el: a, bb: a.boundingBox() }));
+  const unitOf = n => (n.isChild() ? n.parent().id() : n.id());
+  const down = new Map([...units.keys()].map(k => [k, new Set()]));
+  const linked = new Set();
+  cy.edges().forEach(e => {
+    let [u, v] = [unitOf(e.source()), unitOf(e.target())];
+    if (u === v || !down.has(u) || !down.has(v)) return;
+    if (e.hasClass("waits")) [u, v] = [v, u];  // waiter -> blocker points upstream
+    down.get(u).add(v); linked.add(u); linked.add(v);
+  });
+  // Longest-path ranks over the DAG left after dropping DFS back edges.
+  const state = new Map(), order = [];
+  const visit = u => {
+    state.set(u, 1);
+    for (const v of down.get(u)) {
+      if (state.get(v) === 1) down.get(u).delete(v);  // back edge: cut the cycle here
+      else if (!state.has(v)) visit(v);
+    }
+    state.set(u, 2); order.push(u);
+  };
+  [...linked].sort().forEach(u => state.has(u) || visit(u));
+  const rank = new Map();
+  for (const u of order.reverse()) {
+    rank.set(u, rank.get(u) || 0);
+    for (const v of down.get(u)) rank.set(v, Math.max(rank.get(v) || 0, rank.get(u) + 1));
   }
+  const last = Math.max(-1, ...rank.values()) + 1;
+  for (const u of units.keys()) if (!rank.has(u)) rank.set(u, last);
+  // Rows by rank; within a row, order by the mean x of the units above that feed it.
+  const cx = new Map(), rows = [];
+  for (const [u, k] of rank) (rows[k] ||= []).push(u);
+  let y = 0;
+  rows.forEach((row, k) => {
+    const up = u => [...units.keys()].filter(p => down.get(p).has(u) && cx.has(p)).map(p => cx.get(p));
+    const key = u => { const xs = up(u); return xs.length ? xs.reduce((a, b) => a + b) / xs.length : Infinity; };
+    row.sort((a, b) => key(a) - key(b) || units.get(b).bb.w - units.get(a).bb.w);
+    let x = 0, h = 0;
+    for (const u of row) {
+      const { el, bb } = units.get(u);
+      el.shift({ x: x - bb.x1, y: y - bb.y1 });
+      cx.set(u, x + bb.w / 2);
+      x += bb.w + GAP; h = Math.max(h, bb.h);
+    }
+    y += h + GAP;
+  });
   cy.fit(undefined, 20);
 }
 
