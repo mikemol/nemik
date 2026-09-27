@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 39,
+  "counter": 40,
   "waypoints": [
     {
       "symbol": "W1",
@@ -664,6 +664,24 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W40",
+      "title": "Ask mtools: pathsforward flags a ready item that stays top of queue across ticks (from ledger) as ATOMIZE",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "mtools"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "When mtools mints its waypoint, repoint blocked_on to mtools:W<n>; then adopt via vendored wheel repin",
+      "evidence": "",
+      "issued_at": "2026-09-27T13:35:28Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-09-27T13:35:28Z",
       "ticks_blocked": 0
     }
   ],
