@@ -553,26 +553,20 @@
     {
       "symbol": "W34",
       "title": "nemik-rank: cross-repo transitive downstream weight per ready item, peer edges weighted by declared data, plus drift witness",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "luthen-observability:W117"
       ],
       "touches": [],
-      "blocked_on": [
-        "W35",
-        "W36",
-        "W37",
-        "W38",
-        "W39"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Umbrella: done when W35-W39 are done",
-      "evidence": "2026-09-27: atomized per operator rule (top >1 tick requires atomization)",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-09-27: atomized per operator rule (top >1 tick requires atomization) | 2026-09-27: W35-W39 all done; nemik-rank [--json|--check] shipped; luthen acceptance passed",
       "issued_at": "2026-09-27T13:30:39Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W117",
-      "last_worked": "2026-09-27T13:32:28Z",
-      "ticks_blocked": 4
+      "last_worked": "2026-09-27T14:38:18Z",
+      "ticks_blocked": 0
     },
     {
       "symbol": "W35",
@@ -649,19 +643,19 @@
     {
       "symbol": "W39",
       "title": "Drift witness: fail when a queue's top ready item is outranked on cross-repo weight",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W34"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Add check mode to nemik-rank returning exit 1 on drift; test both outcomes",
-      "evidence": "",
+      "next_bounded_step": "",
+      "evidence": "2026-09-27: commit 78f7131: adapter emits nemik:queuePosition from mtools model.ordered() (single reader kept); rank.drift(); nemik-rank <repo> --check exits 1 on drift. pytest 26. Live: nemik OK exit 0; luthen DRIFT exit 1 (next W80=6 vs W111=58)",
       "issued_at": "2026-09-27T13:32:24Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-27T14:38:18Z",
       "ticks_blocked": 0
     },
     {
@@ -680,7 +674,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T13:36:00Z",
-      "ticks_blocked": 4
+      "ticks_blocked": 5
     },
     {
       "symbol": "W41",
