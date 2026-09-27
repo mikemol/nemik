@@ -106,3 +106,4 @@
 2026-09-27T17:24:26Z  tick  W53  done      unblock   "nemik-overlaps; closes W49"  evidence=7cb9d19
 2026-09-27T17:25:45Z  tick  W54  atomized  collapse  "ATOMIZE: W56 data, W57 render"
 2026-09-27T17:26:35Z  tick  W56  done      unblock   "satisfied edges + open_blockers in graph.json"  evidence=f98a672
+2026-09-27T17:31:15Z  tick  W58  filed     -         "operator ask: mechanically-waitable blockers; design + W59-W62"

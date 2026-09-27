@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 57,
+  "counter": 62,
   "waypoints": [
     {
       "symbol": "W1",
@@ -1003,6 +1003,111 @@
       "evidence": "",
       "issued_at": "2026-09-27T17:25:45Z",
       "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W58",
+      "title": "Mechanical blockers: blocked_kind=condition with URI schemes (pid, k8s job, vmalert alert, promql, git, file, time); design .claude/design/W58-mechanical-blockers.md",
+      "status": "blocked",
+      "enables": [],
+      "touches": [
+        "conditions"
+      ],
+      "blocked_on": [
+        "W59",
+        "W60",
+        "W61",
+        "W62"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T17:31:04Z",
+      "minted_during": "interrupt",
+      "caused_by": null,
+      "last_worked": "2026-09-27T17:31:15Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W59",
+      "title": "Ask mtools: accept --blocked-kind condition with a parseable condition URI; --check flags unknown schemes",
+      "status": "ready",
+      "enables": [
+        "W58",
+        "W60"
+      ],
+      "touches": [
+        "conditions"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T17:31:04Z",
+      "minted_during": "interrupt",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W60",
+      "title": "nemik-conditions: no-LLM evaluator per scheme; --apply unblocks via PF with outcome in evidence; fixture-first (file/time/pid local)",
+      "status": "ready",
+      "enables": [
+        "W58",
+        "W61"
+      ],
+      "touches": [
+        "conditions"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T17:31:04Z",
+      "minted_during": "interrupt",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W61",
+      "title": "Wake path: resolved condition in a dormant repo surfaces in nemik-wake; armed session gets inbox/message",
+      "status": "ready",
+      "enables": [
+        "W58"
+      ],
+      "touches": [
+        "conditions"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T17:31:04Z",
+      "minted_during": "interrupt",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W62",
+      "title": "paths-forward-loop skill: a lock held across a background process waits via Monitor, not ticks",
+      "status": "ready",
+      "enables": [
+        "W58"
+      ],
+      "touches": [
+        "conditions"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T17:31:04Z",
+      "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": null,
       "ticks_blocked": 0
