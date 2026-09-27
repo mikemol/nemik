@@ -19,7 +19,7 @@
       "minted_during": "interrupt",
       "caused_by": "summit:W105",
       "last_worked": "2026-09-27T13:27:48Z",
-      "ticks_blocked": 14
+      "ticks_blocked": 15
     },
     {
       "symbol": "W2",
@@ -574,24 +574,24 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W117",
       "last_worked": "2026-09-27T13:32:28Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 1
     },
     {
       "symbol": "W35",
       "title": "Declare peer-edge weight as data (src/nemik/data/rank-weights.toml: local=1, peer=N)",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W34"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Write the toml and a loader returning {local,peer}; unit test the defaults",
-      "evidence": "",
+      "next_bounded_step": "",
+      "evidence": "2026-09-27: commit 0295563; src/nemik/data/rank-weights.toml local=1 peer=3; rank.load_weights; pytest 21 passed",
       "issued_at": "2026-09-27T13:32:23Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-27T13:40:15Z",
       "ticks_blocked": 0
     },
     {
@@ -682,7 +682,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T13:36:00Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 1
     }
   ],
   "residue": [
