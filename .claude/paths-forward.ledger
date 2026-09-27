@@ -64,3 +64,4 @@
 2026-09-27T14:32:48Z  peer  W42  acknowledged -         "summit: no back-fill; will ping on first ask carrying waypoint"  evidence=msg summit-da
 2026-09-27T14:38:18Z  tick  W39  advanced  unblock   "drift witness shipped; W34 umbrella closed; live luthen drift found (W80 next, W111 heavier)"  evidence=commit 78f7131; pytest 26; nemik-check exit 0
 2026-09-27T14:39:18Z  peer  W43  advanced  collapse  "two queue orders (loop's vs mtools ordered()) collapse to one: stored weight field written through mtools, computed by nemik; (a)/(b) kept as residue in evidence"  evidence=msg luthen-observability-81; mtools model.ordered source
+2026-09-27T14:39:47Z  peer  --   acknowledged -         "mtools minted W115 (+W116 bulk) for W43; W111 split, W40 repointed to mtools:W113"  evidence=msg mtools-65

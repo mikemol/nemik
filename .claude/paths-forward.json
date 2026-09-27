@@ -665,16 +665,16 @@
       "enables": [],
       "touches": [],
       "blocked_on": [
-        "mtools:W111"
+        "mtools:W113"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "When mtools sends the W111 sha: repin vendored wheel, update vendor/wheels/README history, run pytest, verify --check prints ATOMIZE",
-      "evidence": "2026-09-27: mtools-65 minted mtools:W111 (enables nemik:W40); will send sha on landing",
+      "evidence": "2026-09-27: mtools-65 minted mtools:W111 (enables nemik:W40); will send sha on landing | 2026-09-27: mtools:W111 is part-landed (library at 8aca534). The --check/payload wiring is mtools:W113 and the refusal hint is W114. The repin sha arrives when W113 lands, so blocked_on is repointed to W113.",
       "issued_at": "2026-09-27T13:35:28Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-09-27T13:36:00Z",
-      "ticks_blocked": 5
+      "last_worked": "2026-09-27T14:39:47Z",
+      "ticks_blocked": 0
     },
     {
       "symbol": "W41",
@@ -719,15 +719,15 @@
       ],
       "touches": [],
       "blocked_on": [
-        "mtools"
+        "mtools:W115"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "When mtools mints its waypoint, set blocked_on to mtools:W<n>. Then repin the wheel, and have nemik-rank --check compare the stored weight to the live weight too",
-      "evidence": "2026-09-27: luthen finding 14:4x: re-sorting the file cannot clear the drift check, because ordered() keys on (status, -leverage, file order) and file order is only the tiebreak. Rejected (a) 'mtools computes nemik's weight': it inverts the dependency, since mtools is single-repo and has no fleet view. Rejected (b) 'check compares against file order': the witness would then trust whatever the loop wrote, and would stay green on a stale sort. Chose (c): nemik computes the weight, mtools stores and orders by it, so one order is computed in one place and nemik stays read-only (the no-write-path claim holds).",
+      "evidence": "2026-09-27: luthen finding 14:4x: re-sorting the file cannot clear the drift check, because ordered() keys on (status, -leverage, file order) and file order is only the tiebreak. Rejected (a) 'mtools computes nemik's weight': it inverts the dependency, since mtools is single-repo and has no fleet view. Rejected (b) 'check compares against file order': the witness would then trust whatever the loop wrote, and would stay green on a stale sort. Chose (c): nemik computes the weight, mtools stores and orders by it, so one order is computed in one place and nemik stays read-only (the no-write-path claim holds). | 2026-09-27: mtools-65 minted mtools:W115 (--weight N; ordered keys (status,-weight,-leverage,file); missing=0, test pins unweighted order) and mtools:W116 (bulk --weights-from, all-or-nothing). Blocked on W115 only; W116 is convenience, adopt when it lands but don't wait for it.",
       "issued_at": "2026-09-27T14:39:18Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W117",
-      "last_worked": "2026-09-27T14:39:18Z",
+      "last_worked": "2026-09-27T14:39:47Z",
       "ticks_blocked": 0
     }
   ],

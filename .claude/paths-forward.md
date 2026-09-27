@@ -1,7 +1,7 @@
 <!-- DERIVED from the state file by mikemol-paths-forward --render. NEVER EDIT. -->
 # paths-forward — /home/mikemol/github/nemik/.claude/paths-forward.json
 
-counter 43 · heartbeat 2026-09-27T14:38:36Z · job `c499900c` · hash `v2:2051459b713f634b`
+counter 43 · heartbeat 2026-09-27T14:38:36Z · job `c499900c` · hash `v2:2de3a55a6f9bb838`
 
 | # | symbol | status | title | blocked on | next bounded step |
 |---|---|---|---|---|---|
@@ -9,8 +9,8 @@ counter 43 · heartbeat 2026-09-27T14:38:36Z · job `c499900c` · hash `v2:20514
 | 2 | W17 | ready | Follow up nemik:W4: re-run nemik-operator; nudge any repo whose unstated blocks remain when that repo is next awake | — | Watch aeternum/gabion/sre-troubleshooting for wake |
 | 3 | W22 | ready | Trial: SHACL Warning when a waypoint title exceeds 150 chars (decomposition signal, operator request re el-openglo:W45). Fires 256 times across ~/github today (commit f235c4f). Watch whether repos act on it or just accumulate the warning; 150 is a first guess, not measured | — | After it's been live a while, check whether any repo actually decomposed a waypoint because of it |
 | 4 | W42 | ready | Witness: every summit ask carrying a waypoint field names a waypoint that exists in its owner's queue and is not dropped (first real case is the first post-W105 ask) | — | Script over summit/floor/*.bib: parse waypoint=<repo>:W<n>, resolve against the merged graph (ChangeRequest or Dropped); report unresolved/dropped; wire as a nemik-check Warning or a nemik-operator column; fixture test |
-| 5 | W43 | blocked | Ask mtools: stored per-waypoint 'weight' field (set via $PF --update --weight N, sole writer) that model.ordered() keys on (status, -weight, -leverage, file order); loop copies nemik-rank --json into it; drift check then measures staleness of stored weight | mtools | When mtools mints its waypoint, set blocked_on to mtools:W<n>. Then repin the wheel, and have nemik-rank --check compare the stored weight to the live weight too |
-| 6 | W40 | blocked | Ask mtools: pathsforward flags a ready item that stays top of queue across ticks (from ledger) as ATOMIZE | mtools:W111 | When mtools sends the W111 sha: repin vendored wheel, update vendor/wheels/README history, run pytest, verify --check prints ATOMIZE |
+| 5 | W43 | blocked | Ask mtools: stored per-waypoint 'weight' field (set via $PF --update --weight N, sole writer) that model.ordered() keys on (status, -weight, -leverage, file order); loop copies nemik-rank --json into it; drift check then measures staleness of stored weight | mtools:W115 | When mtools mints its waypoint, set blocked_on to mtools:W<n>. Then repin the wheel, and have nemik-rank --check compare the stored weight to the live weight too |
+| 6 | W40 | blocked | Ask mtools: pathsforward flags a ready item that stays top of queue across ticks (from ledger) as ATOMIZE | mtools:W113 | When mtools sends the W111 sha: repin vendored wheel, update vendor/wheels/README history, run pytest, verify --check prints ATOMIZE |
 | 7 | W4 | done | N2: send each repo its blocks on the operator with no ask stated, and the 'operator: decide/act' form | — | — |
 | 8 | W15 | done | Gate tests: nemik has no test suite; write pytest coverage for nemik-check exit/provenance lines, nemik-inbound UNCLAIMED column, blocks/operator categories, over a fixture ~/github tree | — | — |
 | 9 | W34 | done | nemik-rank: cross-repo transitive downstream weight per ready item, peer edges weighted by declared data, plus drift witness | — | — |
