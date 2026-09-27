@@ -571,9 +571,6 @@
   ],
   "job_id": "a6186ffd",
   "heartbeat": "2026-09-27T13:15:23Z",
-  "lock": {
-    "holder": "agent-nemik-bb",
-    "taken_at": "2026-09-27T13:26:58Z"
-  },
+  "lock": null,
   "predecessor_job_id": "3f3df8d6"
 }
