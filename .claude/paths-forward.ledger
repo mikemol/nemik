@@ -156,3 +156,4 @@
 2026-09-27T19:23:44Z  tick  W62  done      unblock   "skill: Monitor / FFI waypoint guidance"
 2026-09-27T19:23:44Z  nudge W47  nudged    -         "from W17 (tick 8); W47's blockers are dormant repos: inbox letters only, no escalation"
 2026-09-27T19:23:44Z  nudge W68  nudged    -         "from W58; luthen:W145 owned, needs operator's ClusterRole review; no message"
+2026-09-27T19:29:49Z  tick  W71  filed     -         "operator: can't see a repo's on-deck item or whether its path is clear between ticks"

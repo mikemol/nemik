@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 70,
+  "counter": 71,
   "waypoints": [
     {
       "symbol": "W1",
@@ -1262,6 +1262,24 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W146",
       "last_worked": "2026-09-27T18:51:28Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W71",
+      "title": "Per-repo on-deck view: first workable item by nemik:queuePosition, 'path clear' vs 'waiting on X'; derived, not a stored 'queued' status (residue: stored status only if weight can't express an agent's chosen next)",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "web-ui"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T19:29:49Z",
+      "minted_during": "interrupt",
+      "caused_by": null,
+      "last_worked": null,
       "ticks_blocked": 0
     }
   ],
