@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 66,
+  "counter": 67,
   "waypoints": [
     {
       "symbol": "W1",
@@ -1029,7 +1029,7 @@
     {
       "symbol": "W59",
       "title": "Ask mtools: waypoint witness field (--add/--update --witness CMD); --check flags a witnessed waypoint marked working",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W58",
         "W60"
@@ -1037,17 +1037,14 @@
       "touches": [
         "conditions"
       ],
-      "blocked_on": [
-        "mtools:W132",
-        "mtools:W133"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: mtools:W131 (4de0da4) witness field + W132 (8d9ea4e) --check audit; nemik pinned at 8d9ea4e",
       "issued_at": "2026-09-27T17:31:04Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-09-27T18:09:11Z",
+      "last_worked": "2026-09-27T18:18:12Z",
       "ticks_blocked": 0
     },
     {
@@ -1195,6 +1192,26 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W70",
       "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W67",
+      "title": "Repin pathsforward for mtools:W133 (ordered/workable skip witnessed waypoints)",
+      "status": "blocked",
+      "enables": [],
+      "touches": [
+        "packaging"
+      ],
+      "blocked_on": [
+        "mtools:W133"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T18:18:12Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-09-27T18:18:12Z",
       "ticks_blocked": 0
     }
   ],
