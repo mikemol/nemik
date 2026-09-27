@@ -1874,11 +1874,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: Operator clarification 2026-09-27: bazel builds the .venv as a build OUTPUT; that output is then the build INPUT for every later target needing .venv material (tests, hooks, lint, host use). So every such target takes //:.venv in its inputs and runs its bin/, nothing assembles its own Python closure.",
       "issued_at": "2026-09-27T23:03:28Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-27T23:04:05Z",
       "ticks_blocked": 0
     }
   ],
