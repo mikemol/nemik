@@ -72,3 +72,4 @@
 2026-09-27T15:04:28Z  peer  W44  acknowledged -         "luthen keeps direct weight write: $PF was never its writer (own scripts edit the state file), ledgered on their side; adopting $PF as sole writer is an operator question luthen will raise after the W115 fix"  evidence=msg luthen-observability-81
 2026-09-27T15:07:50Z  peer  W44  advanced  unblock   "repinned f945d43; weight sync verified metadata-only ({weight:49})"  evidence=commit 630fc06; scratch field diff
 2026-09-27T15:13:28Z  tick  W17  collapsed collapse  "ATOMIZE fired (first live): W17 split into W45/W46 (awake nudges) + W47 (dormant watch); W48 minted for proposal (f)"  evidence=--check ATOMIZE W17; nemik-operator --json
+2026-09-27T15:18:06Z  peer  W48  advanced  sweep     "own queue now stores nemik-rank weights via one bulk call; step added to tick recipe"  evidence=commit f796baf; field diff weight-only

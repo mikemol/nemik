@@ -356,7 +356,8 @@
       "minted_during": "tick",
       "caused_by": "el-openglo",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 0
     },
     {
       "symbol": "W23",
@@ -710,7 +711,8 @@
       "minted_during": "tick",
       "caused_by": "summit:W105",
       "last_worked": "2026-09-27T14:32:48Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 0
     },
     {
       "symbol": "W43",
@@ -762,7 +764,8 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W46",
@@ -780,7 +783,8 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W47",
@@ -798,23 +802,25 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W48",
       "title": "nemik's own loop stores nemik-rank weights each tick via $PF --update --weight (or --weights-from, mtools:W116), so its own ordered() cannot drift",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Add a per-tick step: nemik-rank nemik --json then --update --weight per ready item; confirm nemik-rank nemik --check stays OK and last_worked untouched",
-      "evidence": "",
+      "next_bounded_step": "",
+      "evidence": "2026-09-27: commit f796baf: repinned to mtools d491475 (W116). Per-tick step: 'nemik-rank nemik --json > F; $PF --weights-from F'; the nemik-rank --json output is accepted as-is. First live sync: field diff is weight only, last_worked untouched; nemik-rank nemik --check OK.",
       "issued_at": "2026-09-27T15:13:28Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-09-27T15:18:06Z",
+      "ticks_blocked": 0,
+      "weight": 0
     }
   ],
   "residue": [
