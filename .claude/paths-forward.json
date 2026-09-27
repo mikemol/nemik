@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 2
+      "ticks_blocked": 3
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "weight": 1
     },
     {
@@ -941,7 +941,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T17:25:45Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "weight": 0
     },
     {
@@ -1024,7 +1024,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T17:31:15Z",
-      "ticks_blocked": 3
+      "ticks_blocked": 4
     },
     {
       "symbol": "W59",
@@ -1047,7 +1047,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T18:06:57Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 1
     },
     {
       "symbol": "W60",
@@ -1061,7 +1061,6 @@
         "conditions"
       ],
       "blocked_on": [
-        "W63",
         "W64",
         "W65"
       ],
@@ -1072,7 +1071,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T17:53:34Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "weight": 2
     },
     {
@@ -1140,7 +1139,7 @@
     {
       "symbol": "W64",
       "title": "nemik-witnesses [--apply] runner: read waypoint.witness fleet-wide, mark true done with facts as evidence, report undefined",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W60"
       ],
@@ -1149,13 +1148,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Build nemik-witnesses [--apply] over waypoint.witness (mtools 4de0da4)",
-      "evidence": "",
+      "next_bounded_step": "",
+      "evidence": "2026-09-27: commit f2afc42; runner marks holding witnesses done via PF with facts as evidence; fixture test; pytest 38; fleet dry-run: 0 witnessed waypoints",
       "issued_at": "2026-09-27T17:53:34Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-09-27T18:06:57Z",
-      "ticks_blocked": 0
+      "last_worked": "2026-09-27T18:09:05Z",
+      "ticks_blocked": 0,
+      "weight": 3
     },
     {
       "symbol": "W65",
@@ -1175,7 +1175,8 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 3
     }
   ],
   "residue": [

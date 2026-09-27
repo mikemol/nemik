@@ -124,3 +124,11 @@
 2026-09-27T17:53:34Z  nudge W57  nudged    -         "from W54"
 2026-09-27T17:54:04Z  tick  W63  done      unblock   "git_ref + time witnesses"  evidence=68717e8
 2026-09-27T18:06:57Z  tick  W64  unblocked -         "mtools:W131 landed 4de0da4"
+2026-09-27T18:09:05Z  tick  W64  done      unblock   "witness runner"  evidence=f2afc42
+2026-09-27T18:09:05Z  nudge W59  nudged    -         "from W58"
+2026-09-27T18:09:05Z  nudge W60  nudged    -         "from W58"
+2026-09-27T18:09:05Z  nudge W61  nudged    -         "from W58"
+2026-09-27T18:09:06Z  nudge W62  nudged    -         "from W58"
+2026-09-27T18:09:06Z  nudge W64  nudged    -         "from W60"
+2026-09-27T18:09:06Z  nudge W65  nudged    -         "from W60"
+2026-09-27T18:09:06Z  nudge W59  nudged    -         "mtools:W132: owner reported it next; sent scope input instead of a nudge"
