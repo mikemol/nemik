@@ -44,3 +44,7 @@ dev = [
     "playwright>=1.63.0",
     "pytest>=9.1.1",
 ]
+
+[tool.pytest.ini_options]
+# bazel-* are output symlinks into the Bazel cache; collecting them would run every test twice.
+testpaths = ["tests"]

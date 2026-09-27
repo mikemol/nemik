@@ -1,0 +1,31 @@
+"""nemik on Bazel (nemik:W85, W90): which tests run is the build graph's call, not a tick's.
+
+Each tests/test_*.py is its own cached py_test, so an unchanged tree costs nothing to re-verify
+and a change re-runs exactly what depends on it. The pattern is mtools' (pytest_main as the entry
+point, so a module is collected rather than run as a script).
+"""
+
+module(name = "nemik", version = "0.1")
+
+bazel_dep(name = "rules_python", version = "2.3.3")
+
+python = use_extension("@rules_python//python/extensions:python.bzl", "python")
+python.toolchain(python_version = "3.13", is_default = True)
+
+# The dev closure, exported from uv.lock (`uv export --group dev --no-emit-project`), minus the one
+# package uv.lock sources from a local path: mikemol-pathsforward, vendored so the image build never
+# fetches github.com (nemik:W6). pip.parse reads index and git sources only; the vendored wheel
+# comes in through //bazel:wheel.bzl instead.
+pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
+pip.parse(
+    hub_name = "nemik_dev",
+    python_version = "3.13",
+    requirements_lock = "//:requirements-dev.txt",
+)
+use_repo(pip, "nemik_dev")
+
+vendored_wheel = use_repo_rule("//bazel:wheel.bzl", "vendored_wheel")
+vendored_wheel(
+    name = "pathsforward",
+    wheel = "//:vendor/wheels/mikemol_pathsforward-0.1.0+345c06c-py3-none-any.whl",
+)

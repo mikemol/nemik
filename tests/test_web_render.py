@@ -30,8 +30,8 @@ def server(tmp_path):
     with socket.socket() as s:
         s.bind(("127.0.0.1", 0))
         port = s.getsockname()[1]
-    exe = Path(sys.executable).parent / "nemik-serve"
-    proc = subprocess.Popen([str(exe), "--root", str(tmp_path), "--port", str(port)],
+    proc = subprocess.Popen([sys.executable, "-c", "import sys; from nemik.serve import main; sys.argv[0] = 'nemik-serve'; main()",
+                             "--root", str(tmp_path), "--port", str(port)],
                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     for _ in range(50):
         try:

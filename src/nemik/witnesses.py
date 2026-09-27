@@ -201,7 +201,6 @@ def wake(root: Path, repo: str, sym: str, query: str, now: str) -> list[Path]:
 
 def main(argv: list[str] | None = None) -> None:
     import argparse
-    import shutil
     import sys
 
     from nemik.check import default_root
@@ -210,15 +209,20 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
     ap.add_argument("--apply", action="store_true", help="mark waypoints whose witness holds as done")
     args = ap.parse_args(argv)
-    pf = shutil.which("mikemol-paths-forward", path=str(Path(sys.executable).parent))
+    from mikemol.pathsforward.cli import main as pf_main  # in-process: no console script to find (Bazel has none)
     for repo, path, sym, query in open_witnesses(args.root):
         verdict, doc, missing = witness(query)
         note = f"  cannot observe {','.join(missing)}" if missing else ""
         print(f"WITNESS {repo}:{sym} {verdict}{note}")
-        if args.apply and verdict == "true" and pf:
+        if args.apply and verdict == "true":
             observed = {k: v for k, v in doc.items() if k != "now"}
-            subprocess.run([pf, "--state", str(path), "--update", sym, "--status", "done", "--evidence-append",
-                            f"witness held at {doc['now']}: {json.dumps(observed, sort_keys=True)}"],
-                           check=True, capture_output=True)
+            import contextlib
+            import io
+            with contextlib.redirect_stdout(io.StringIO()):
+                rc = pf_main(["--state", str(path), "--update", sym, "--status", "done", "--evidence-append",
+                              f"witness held at {doc['now']}: {json.dumps(observed, sort_keys=True)}"])
+            if rc:
+                print(f"APPLY FAILED {repo}:{sym} (mikemol-paths-forward exit {rc})", file=sys.stderr)
+                continue
             for letter in wake(args.root, repo, sym, query, doc["now"]):
                 print(f"WOKE {letter}")

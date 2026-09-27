@@ -1,0 +1,36 @@
+load("@nemik_dev//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library", "py_test")
+
+exports_files(["pyproject.toml"])
+
+py_library(
+    name = "nemik",
+    srcs = glob(["src/nemik/**/*.py"]),
+    data = glob(["src/nemik/**/*"], exclude = ["src/nemik/**/*.py", "**/__pycache__/**"]),
+    imports = ["src"],
+    deps = [
+        "@pathsforward//:lib",
+        requirement("rdflib"),
+        requirement("pyshacl"),
+    ],
+)
+
+# One target per test module, so a failure is located and an unchanged module is a cache hit.
+[
+    py_test(
+        name = src.removeprefix("tests/").removesuffix(".py"),
+        srcs = [src, "tests/pytest_main.py"],
+        main = "tests/pytest_main.py",
+        args = ["$(location " + src + ")", "-q", "-c", "$(location pyproject.toml)"],
+        data = ["pyproject.toml"],
+        deps = [
+            ":nemik",
+            requirement("pytest"),
+            requirement("playwright"),
+        ],
+    )
+    # test_architecture gates ARCHITECTURE.md through paperkit, which is not in the dev closure yet:
+    # here it could only skip, and a skip reads like a pass. It runs under the host venv until
+    # nemik:W91 declares paperkit as an input.
+    for src in glob(["tests/test_*.py"], exclude = ["tests/test_architecture.py"])
+]

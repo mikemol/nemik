@@ -36,7 +36,8 @@ def test_cmd_output_is_the_cli_output(name, tmp_path) -> None:
                     "wake": "nemik.wake:main", "check": "nemik.check:main", "metrics": "nemik.metrics:main",
                     "floor-asks": "nemik.floorasks:main", "witnesses": "nemik.witnesses:main"}.get(name, "")
     if name.startswith("pf-"):  # mtools' CLI, pointed at the same queue file
-        cli = subprocess.run([str(Path(sys.executable).parent / "mikemol-paths-forward"), "--state",
+        cli = subprocess.run([sys.executable, "-c", "import sys; from mikemol.pathsforward.cli import main;"
+                              " sys.exit(main(sys.argv[1:]))", "--state",
                               str(tmp_path / "a" / ".claude" / "paths-forward.json"), "--" + name[3:]],
                              capture_output=True, text=True)
         assert (code, out) == (cli.returncode, cli.stdout)
