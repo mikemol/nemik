@@ -871,7 +871,7 @@
     {
       "symbol": "W51",
       "title": "Make nemik installable as a declared dependency in repos that pin pathsforward at another sha (uv refuses two sources; summit 572b2f7 fell back to uv pip install)",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "packaging"
@@ -879,11 +879,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: commit 0aefb9b README recipe; scratch consumer with summit pin fc74848: uv lock fails without override, resolves with; floor-asks 9/9, nemik-check runs",
       "issued_at": "2026-09-27T17:01:02Z",
       "minted_during": "interrupt",
       "caused_by": "summit:W105",
-      "last_worked": null,
+      "last_worked": "2026-09-27T17:16:55Z",
       "ticks_blocked": 0,
       "weight": 0
     },
