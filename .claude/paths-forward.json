@@ -1253,8 +1253,8 @@
     },
     {
       "symbol": "W70",
-      "title": "nemik-serve: RSS grows 5-25MB per rebuild on identical data; find and fix (probe running)",
-      "status": "ready",
+      "title": "nemik-serve memory: no leak (flat gc objects, RSS plateau ~200MB); per-request payload parsing removed",
+      "status": "done",
       "enables": [],
       "touches": [
         "serve"
@@ -1262,11 +1262,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: commit bffcd2d; 12 forced rebuilds: objs 271573->271606, rss plateau 183MB; fresh-thread rebuilds 205MB default vs 203MB MALLOC_ARENA_MAX=2; malloc_trim 183->166",
       "issued_at": "2026-09-27T18:44:08Z",
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W146",
-      "last_worked": null,
+      "last_worked": "2026-09-27T18:51:28Z",
       "ticks_blocked": 0
     }
   ],

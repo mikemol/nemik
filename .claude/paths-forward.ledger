@@ -144,3 +144,4 @@
 2026-09-27T18:43:33Z  tick  W67  done      unblock   "mtools:W133 landed; witnessed never workable"  evidence=345c06c
 2026-09-27T18:44:09Z  tick  W69  filed     -         "luthen W146: OOMKilled at 512Mi, /metrics >1s"
 2026-09-27T18:44:42Z  tick  W69  done      unblock   "serve latency: stale-while-rebuilding"  evidence=e512a98
+2026-09-27T18:51:29Z  tick  W70  done      unblock   "memory: plateau not leak; shared parsed doc"  evidence=bffcd2d
