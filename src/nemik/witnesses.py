@@ -22,7 +22,8 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 # input.<observer>["<key>"], the only fact shape a witness may reference.
-_REF = re.compile(r'input\.(\w+)\["([^"]+)"\]')
+# The key is a Rego string literal, so it may carry escaped quotes (a promql label matcher).
+_REF = re.compile(r'input\.(\w+)\["((?:[^"\\]|\\.)*)"\]')
 
 
 def _pid(key: str) -> dict | None:
@@ -61,16 +62,59 @@ def _git_ref(key: str) -> dict | None:
     return {"exists": out.returncode == 0, "sha": out.stdout.strip()}
 
 
+def _get(env: str, path: str, params: dict) -> dict | None:
+    """GET <$env><path> as JSON; None when the endpoint is unset or unreachable (cannot observe).
+
+    The address comes from the environment, not from here: on luthen,
+    `luthen-observability/checks/endpoints_query --side host vmalert-http|vmsingle-http`.
+    """
+    import urllib.parse
+    import urllib.request
+
+    base = os.environ.get(env)
+    if not base:
+        return None
+    url = f"{base.rstrip('/')}{path}?{urllib.parse.urlencode(params)}"
+    try:
+        with urllib.request.urlopen(url, timeout=5) as r:
+            body = json.load(r)
+    except (OSError, ValueError):
+        return None
+    return body if body.get("status") == "success" else None
+
+
+def _alert(key: str) -> dict | None:
+    """`<alertname>[{label="v",...}]`: firing | pending | inactive (absent from vmalert's list)."""
+    m = re.fullmatch(r'(\w+)(?:\{(.*)\})?', key)
+    body = _get("NEMIK_VMALERT_URL", "/api/v1/alerts", {}) if m else None
+    if body is None:
+        return None
+    want = dict(re.findall(r'(\w+)="([^"]*)"', m.group(2) or ""))
+    states = [a["state"] for a in body["data"]["alerts"]
+              if a["name"] == m.group(1) and all(a["labels"].get(k) == v for k, v in want.items())]
+    return {"state": "firing" if "firing" in states else "pending" if states else "inactive"}
+
+
+def _promql(key: str) -> dict | None:
+    """An instant query: its sample values, and whether the result is empty."""
+    body = _get("NEMIK_VM_URL", "/api/v1/query", {"query": key})
+    if body is None:
+        return None
+    values = [float(r["value"][1]) for r in body["data"]["result"]]
+    return {"values": values, "empty": not values}
+
+
 # `input.now` (RFC 3339, UTC) is always present, so a time witness needs no observer:
 # `time.parse_rfc3339_ns(input.now) >= time.parse_rfc3339_ns("2026-10-01T00:00:00Z")`.
-OBSERVERS = {"pid": _pid, "file": _file, "git_ref": _git_ref}
+OBSERVERS = {"pid": _pid, "file": _file, "git_ref": _git_ref, "alert": _alert, "promql": _promql}
 
 
 def facts(query: str, now: datetime | None = None) -> tuple[dict, list[str]]:
     """(input document, unobservable refs) for exactly the facts `query` references."""
     doc: dict = {"now": (now or datetime.now(UTC)).isoformat()}
     missing = []
-    for obs, key in _REF.findall(query):
+    for obs, raw in _REF.findall(query):
+        key = json.loads(f'"{raw}"')  # Rego and JSON share string escapes
         fn = OBSERVERS.get(obs)
         fact = fn(key) if fn else None
         if fact is None:

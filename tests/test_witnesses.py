@@ -83,3 +83,47 @@ def test_runner_applies_only_holding_witnesses(tmp_path, monkeypatch, capsys) ->
     after = {w["symbol"]: w for w in json.loads(state.read_text())["waypoints"]}
     assert after["W1"]["status"] == "done" and "witness held" in after["W1"]["evidence"]
     assert after["W2"]["status"] == "blocked"
+
+
+def _serve(monkeypatch, routes: dict) -> None:
+    import json
+    import threading
+    from http.server import BaseHTTPRequestHandler, HTTPServer
+    from urllib.parse import parse_qs, urlparse
+
+    class H(BaseHTTPRequestHandler):
+        def do_GET(self):
+            u = urlparse(self.path)
+            body = routes[u.path](parse_qs(u.query))
+            self.send_response(200)
+            self.end_headers()
+            self.wfile.write(json.dumps(body).encode())
+
+        def log_message(self, *a):
+            pass
+
+    srv = HTTPServer(("127.0.0.1", 0), H)
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    base = f"http://127.0.0.1:{srv.server_port}"
+    monkeypatch.setenv("NEMIK_VMALERT_URL", base)
+    monkeypatch.setenv("NEMIK_VM_URL", base)
+
+
+def test_alert_and_promql_witnesses(monkeypatch) -> None:
+    alerts = [{"name": "Trace", "state": "firing", "labels": {"repo": "a"}},
+              {"name": "Trace", "state": "pending", "labels": {"repo": "b"}}]
+    _serve(monkeypatch, {
+        "/api/v1/alerts": lambda q: {"status": "success", "data": {"alerts": alerts}},
+        "/api/v1/query": lambda q: {"status": "success", "data": {"result": (
+            [{"value": [0, "3"]}] if q["query"] == ['kube_job_status_succeeded{job_name="t"}'] else [])}},
+    })
+    assert witness('input.alert["Trace{repo=\\"a\\"}"].state == "firing"')[0] == "true"
+    assert witness('input.alert["Trace{repo=\\"b\\"}"].state == "firing"')[0] == "false"
+    assert witness('input.alert["Other"].state == "inactive"')[0] == "true"
+    assert witness('input.promql["kube_job_status_succeeded{job_name=\\"t\\"}"].values[0] > 0')[0] == "true"
+    assert witness('input.promql["absent_metric"].empty')[0] == "true"
+
+
+def test_unset_endpoint_is_undefined(monkeypatch) -> None:
+    monkeypatch.delenv("NEMIK_VM_URL", raising=False)
+    assert witness('input.promql["up"].empty')[0] == "undefined"
