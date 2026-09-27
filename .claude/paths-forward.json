@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 5
+      "ticks_blocked": 6
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "weight": 1
     },
     {
@@ -941,7 +941,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T17:25:45Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "weight": 0
     },
     {
@@ -985,7 +985,7 @@
     {
       "symbol": "W57",
       "title": "web view draws satisfied edges faded",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W54"
       ],
@@ -995,11 +995,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: commit ee77a66; edge.satisfied opacity .25 for enables+waits; legend updated; live /graph.json: W45->W17, W46->W17 satisfied, W47->W17 open. JS not syntax-checked (no node on host)",
       "issued_at": "2026-09-27T17:25:45Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-27T18:54:05Z",
       "ticks_blocked": 0,
       "weight": 1
     },
@@ -1023,7 +1023,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T18:51:55Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 1
     },
     {
       "symbol": "W59",
@@ -1229,7 +1229,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T18:24:59Z",
-      "ticks_blocked": 1
+      "ticks_blocked": 2
     },
     {
       "symbol": "W69",

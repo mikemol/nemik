@@ -147,3 +147,6 @@
 2026-09-27T18:51:29Z  tick  W70  done      unblock   "memory: plateau not leak; shared parsed doc"  evidence=bffcd2d
 2026-09-27T18:51:55Z  tick  W60  done      collapse  "umbrella closed on its done children; W68 retargeted to W58 (live instance of W66's case)"
 2026-09-27T18:52:00Z  nudge W68  nudged    -         "from W58; foreign blocker luthen-observability:W145 accepted last tick, no nudge sent"
+2026-09-27T18:54:05Z  tick  W57  done      unblock   "faded satisfied edges; closes W54 via prune"  evidence=ee77a66
+2026-09-27T18:54:06Z  nudge W61  nudged    -         "from W58"
+2026-09-27T18:54:06Z  nudge W62  nudged    -         "from W58"
