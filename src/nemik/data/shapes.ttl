@@ -61,6 +61,12 @@ nemik:OperatorAskShape a sh:NodeShape ;
     sh:property [ sh:path nemik:operatorAsk ; sh:not [ sh:in ( "answered" ) ] ; sh:severity sh:Warning ;
                   sh:message "blocked on the operator, but blocked_on records the operator's answer already: lift the block, or re-file it against the condition it waits on" ] .
 
+# Blocked on another workstream's umbrella rather than on the child step doing the work (W41).
+nemik:UmbrellaBlockShape a sh:NodeShape ;
+    sh:targetSubjectsOf nemik:umbrellaBlockOn ;
+    sh:property [ sh:path nemik:umbrellaBlockOn ; sh:maxCount 0 ; sh:severity sh:Warning ;
+                  sh:message "blocked on another workstream's umbrella waypoint (its own children enable it): cite the child step that actually unblocks you, <repo>:W<n>" ] .
+
 # Blocked, but on nothing the graph can reach: no edge can be drawn and no one can be nudged.
 nemik:UnresolvedBlockerShape a sh:NodeShape ;
     sh:targetSubjectsOf nemik:unresolvedBlocker ;

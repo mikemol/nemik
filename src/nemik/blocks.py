@@ -72,6 +72,17 @@ def annotate(g: Graph) -> None:
             for text in g.objects(node, NEMIK.blockedOn):
                 g.add((node, NEMIK.unresolvedBlocker, text))
 
+    # A peer block that lands on an UMBRELLA -- a waypoint its own repo's open children enable --
+    # rather than on the child step doing the work (nemik:W41, luthen-observability's finding):
+    # every child then inherits the waiter's weight in nemik-rank, and the umbrella itself can
+    # never be the thing that lands.
+    for node, _, target in g.triples((None, NEMIK.waitsFor, None)):
+        if _repo(target) == _repo(node) or (node, OSLC_CM.state, NEMIK.Done) in g:
+            continue
+        if any(_repo(c) == _repo(target) and (c, OSLC_CM.state, NEMIK.Done) not in g
+               for c in g.subjects(NEMIK.enables, target)):
+            g.add((node, NEMIK.umbrellaBlockOn, target))
+
     for a in operator_asks(g):
         repo, _, sym = a["ref"].partition(":")
         g.add((URIRef(f"{BASE}{repo}/{sym}"), NEMIK.operatorAsk, Literal(a["category"])))
