@@ -729,19 +729,17 @@
     {
       "symbol": "W44",
       "title": "Repin mikemol-pathsforward once mtools fixes --weight's last_worked side effect (W115 defect found by luthen)",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "mtools"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "On mtools' sha: rebuild vendored wheel, README history, pytest; scratch probe that --update --weight leaves last_worked unchanged; tell luthen to drop its direct-write workaround",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-09-27: commit 630fc06: repinned to mtools f945d43 (mtools:W117); pytest 28. Scratch probe: --update <sym> --weight 7 over luthen's 49 ready items; the field diff is exactly {weight: 49}, with last_worked untouched.",
       "issued_at": "2026-09-27T15:04:14Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W117",
-      "last_worked": "2026-09-27T15:04:14Z",
+      "last_worked": "2026-09-27T15:07:50Z",
       "ticks_blocked": 0
     }
   ],
