@@ -1,0 +1,9 @@
+#!/bin/sh
+# nemik:W92: the commit gate. Whether tests need to run is the build graph's call, not the committer's:
+# bazel re-runs exactly the test targets whose inputs changed and answers the rest from cache, so a
+# queue-only commit costs a cache lookup. Enable once per clone: git config core.hooksPath .githooks
+#
+# It tests the working tree, not the staged index: unstaged edits count. Stash them to gate the index alone.
+set -e
+cd "$(git rev-parse --show-toplevel)"
+exec bazel test //... --noshow_progress

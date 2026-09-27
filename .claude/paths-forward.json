@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 38
+      "ticks_blocked": 39
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 44,
+      "ticks_blocked": 45,
       "weight": 1
     },
     {
@@ -1359,7 +1359,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:54:01Z",
-      "ticks_blocked": 28,
+      "ticks_blocked": 29,
       "weight": 0
     },
     {
@@ -1382,7 +1382,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:43:45Z",
-      "ticks_blocked": 29
+      "ticks_blocked": 30
     },
     {
       "symbol": "W77",
@@ -1403,7 +1403,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:13:38Z",
-      "ticks_blocked": 22,
+      "ticks_blocked": 23,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1554,23 +1554,20 @@
     {
       "symbol": "W85",
       "title": "Bazel build graph for nemik (MODULE.bazel, py_test per tests/*.py, cached) as the commit gate: which tests run is the graph's call, not a tick's judgment ('no code changed, so no pytest'). Precedent: mtools, paperkit, luthen-observability MODULE.bazel",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [
         "build"
       ],
-      "blocked_on": [
-        "W91",
-        "W92"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: W90 bazel skeleton, W91 hashed inputs (W98-W100), W92 commit gate: test selection is bazel's",
       "issued_at": "2026-09-27T20:58:22Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-09-27T22:08:39Z",
-      "ticks_blocked": 7,
+      "last_worked": "2026-09-27T23:03:02Z",
+      "ticks_blocked": 0,
       "weight": 0
     },
     {
@@ -1675,7 +1672,7 @@
     {
       "symbol": "W92",
       "title": "Commit gate: .githooks/pre-commit runs bazel test //... (cached), replacing the tick's judgment of when to run tests",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W85"
       ],
@@ -1685,11 +1682,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: .githooks/pre-commit execs bazel test //...; core.hooksPath set here, README says how per clone. Mutation: a staged 'assert False' in test_editable was refused (1 fails locally; HEAD stayed 7fc0a96). Caveat: gates the working tree, not the index",
       "issued_at": "2026-09-27T22:08:39Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-27T23:03:02Z",
       "ticks_blocked": 0,
       "weight": 1
     },

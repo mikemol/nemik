@@ -192,3 +192,4 @@
 2026-09-27T22:40:46Z  tick  W98  done      unblock   "W91 atomized W98/W99; opa is a pinned input"
 2026-09-27T22:55:38Z  tick  W99  done      unblock   "Chromium pinned; paperkit split to W100"
 2026-09-27T23:00:30Z  tick  W100 done      unblock   "paperkit vendored; test_architecture under bazel; W91 closed"
+2026-09-27T23:03:02Z  tick  W92  done      unblock   "commit gate is bazel test //...; W85 closed"

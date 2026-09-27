@@ -47,6 +47,7 @@ The root defaults to `~/github` and can be set with `$NEMIK_ROOT` or `--root`. I
 
 ```console
 $ uv sync --no-editable   # a package, not the working tree; nemik warns otherwise (W94)
+$ git config core.hooksPath .githooks   # commits gate on bazel test //... (W92)
 $ .venv/bin/nemik-check
 $ .venv/bin/nemik-serve --port 8750
 ```
