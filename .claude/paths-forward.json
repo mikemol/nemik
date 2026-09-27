@@ -954,7 +954,7 @@
         "upstream"
       ],
       "blocked_on": [
-        "mtools"
+        "mtools:W125"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
@@ -962,7 +962,7 @@
       "issued_at": "2026-09-27T17:20:18Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-09-27T17:20:28Z",
+      "last_worked": "2026-09-27T17:20:42Z",
       "ticks_blocked": 0
     }
   ],
