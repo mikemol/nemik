@@ -170,3 +170,4 @@
 2026-09-27T20:23:41Z  tick  W71  atomized  collapse  "W71 -> W79 (goals CLI), W80 (dashboard); filed W78 playwright test"
 2026-09-27T20:39:11Z  tick  W79  done      unblock   "goals CLI; W80 dashboard next"
 2026-09-27T20:55:17Z  tick  W80  done      unblock   "goals on the dashboard; W71 closed (W79+W80)"
+2026-09-27T20:56:22Z  tick  W72  atomized  collapse  "W72 -> W81 graph cmds, W82 file cmds, W83 mtools, W84 panel"
