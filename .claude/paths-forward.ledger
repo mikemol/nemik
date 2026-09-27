@@ -57,3 +57,5 @@
 2026-09-27T14:12:46Z  tick  W38  advanced  unblock   "traced W79>W45: peer-stall edges missing in luthen data (children enable the umbrella; stalls named only in titles); asked luthen for the enables edges, no title inference"  evidence=luthen paths-forward.json W45/W120-W127 fields; nemik-inbound luthen-observability
 2026-09-27T14:13:44Z  peer  W38  advanced  unblock   "acceptance PASSES on live data: W125 22 > W79 16 via el-openglo:W70 stall edge; luthen's W45<->children cycle flagged"  evidence=live downstream_weight preview
 2026-09-27T14:15:00Z  peer  W38  acknowledged -         "cycle broken upstream; chain now scores by position, W121 19 > W79 16"  evidence=live downstream_weight rerun
+2026-09-27T14:27:57Z  nudge W39  nudged    -         "from W34 (umbrella, ticks_blocked=4): waiting on W39 (W35-W38 done)"  evidence=bump-blocked NUDGE
+2026-09-27T14:27:57Z  tick  W37  advanced  unblock   "nemik-rank CLI shipped; luthen pinged"  evidence=commit fa462db; pytest 25

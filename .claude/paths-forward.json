@@ -19,7 +19,7 @@
       "minted_during": "interrupt",
       "caused_by": "summit:W105",
       "last_worked": "2026-09-27T13:27:48Z",
-      "ticks_blocked": 17
+      "ticks_blocked": 18
     },
     {
       "symbol": "W2",
@@ -574,7 +574,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W117",
       "last_worked": "2026-09-27T13:32:28Z",
-      "ticks_blocked": 3
+      "ticks_blocked": 4
     },
     {
       "symbol": "W35",
@@ -615,19 +615,19 @@
     {
       "symbol": "W37",
       "title": "nemik-rank <repo> CLI: list ready items with weight, sorted",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W34"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Wire entry point in pyproject; print symbol weight title",
-      "evidence": "",
+      "next_bounded_step": "",
+      "evidence": "2026-09-27: commit fa462db: nemik-rank <repo> [--json]; rank.rank(); pytest 25 passed. Live luthen top: W111/W112/W115=58, W43=57, W121=19, W79=16",
       "issued_at": "2026-09-27T13:32:23Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-27T14:27:57Z",
       "ticks_blocked": 0
     },
     {
@@ -682,7 +682,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T13:36:00Z",
-      "ticks_blocked": 3
+      "ticks_blocked": 4
     }
   ],
   "residue": [
