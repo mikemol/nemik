@@ -1042,7 +1042,8 @@
         "conditions"
       ],
       "blocked_on": [
-        "mtools"
+        "mtools:W131",
+        "mtools:W132"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
@@ -1050,7 +1051,7 @@
       "issued_at": "2026-09-27T17:31:04Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-09-27T17:31:57Z",
+      "last_worked": "2026-09-27T17:32:12Z",
       "ticks_blocked": 0
     },
     {

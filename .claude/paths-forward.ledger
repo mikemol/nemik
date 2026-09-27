@@ -109,3 +109,4 @@
 2026-09-27T17:31:15Z  tick  W58  filed     -         "operator ask: mechanically-waitable blockers; design + W59-W62"
 2026-09-27T17:31:45Z  tick  W58  revised   collapse  "operator: FFI waypoint w/ witness replaces blocked_kind=condition; one blocker shape"
 2026-09-27T17:31:57Z  tick  W59  asked     -         "rev-2 witness-field ask sent; mtools had filed W129/W130 for rev 1, asked to reshape"
+2026-09-27T17:32:12Z  tick  W59  refiled   -         "blocked on mtools:W131 (witness field), W132 (--check working)"
