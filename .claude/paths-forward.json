@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 24
+      "ticks_blocked": 25
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 30,
+      "ticks_blocked": 31,
       "weight": 1
     },
     {
@@ -1004,22 +1004,20 @@
     {
       "symbol": "W58",
       "title": "FFI waypoints: witness is a declared Rego rule over facts from nemik's closed observer set (pid, k8s job, alert, promql, git, file, time); no executed code; design .claude/design/W58-mechanical-blockers.md rev 3",
-      "status": "blocked",
+      "status": "ready",
       "enables": [],
       "touches": [
         "conditions"
       ],
-      "blocked_on": [
-        "W68"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-09-27T17:31:04Z",
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T18:51:55Z",
-      "ticks_blocked": 16
+      "ticks_blocked": 0
     },
     {
       "symbol": "W59",
@@ -1210,24 +1208,22 @@
     {
       "symbol": "W68",
       "title": "witnesses: k8s job status observable from host (kube-state-metrics scraped into vmsingle, or a host kubeconfig)",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W58"
       ],
       "touches": [
         "conditions"
       ],
-      "blocked_on": [
-        "luthen-observability:W145"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: luthen W145 landed (kube-state-metrics in vmsingle). Live: witness input.promql[\"kube_job_status_succeeded{job_name=\\\"bao-snapshot-pre-9a\\\"}\"].values[0] > 0 -> true via the existing promql observer; no new observer needed",
       "issued_at": "2026-09-27T18:24:35Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-09-27T18:24:59Z",
-      "ticks_blocked": 20
+      "last_worked": "2026-09-27T21:48:17Z",
+      "ticks_blocked": 0
     },
     {
       "symbol": "W69",
@@ -1362,7 +1358,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:54:01Z",
-      "ticks_blocked": 14,
+      "ticks_blocked": 15,
       "weight": 0
     },
     {
@@ -1385,7 +1381,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:43:45Z",
-      "ticks_blocked": 15
+      "ticks_blocked": 16
     },
     {
       "symbol": "W77",
@@ -1406,7 +1402,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:13:38Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1610,7 +1606,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:23:37Z",
-      "ticks_blocked": 2
+      "ticks_blocked": 3
     },
     {
       "symbol": "W88",

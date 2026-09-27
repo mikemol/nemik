@@ -178,3 +178,4 @@
 2026-09-27T21:22:32Z  tick  W87  advanced  unblock   "operator: recurse the constraint rule to the box level"
 2026-09-27T21:23:37Z  tick  W87  atomized  collapse  "W87 remainder -> W88 hover/fade, W89 bundling (box layering done)"
 2026-09-27T21:39:00Z  tick  W83  done      unblock   "mtools views in Tools panel; W72 children all done"
+2026-09-27T21:48:17Z  tick  W68  done      unblock   "k8s job witness works live via promql (luthen W145)"
