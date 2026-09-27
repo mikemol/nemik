@@ -123,7 +123,9 @@ function draw() {
     container: document.getElementById("cy"), elements: els,
     layout: { name: "preset" },    style: [
       { selector: "node", style: { "background-color": "data(fill)", label: "data(label)", color: css("--ink"),
-        "font-size": 10, "text-valign": "center", "text-halign": "right", "text-margin-x": 4,
+        "font-size": 10, "text-valign": "bottom", "text-halign": "center", "text-margin-y": 2,
+        // A backed label stays legible where edges cross it; dagre reserves its space (tile()).
+        "text-background-color": css("--bg"), "text-background-opacity": 0.85, "text-background-padding": 1,
         width: 16, height: 16, "border-width": "data(border)", "border-color": css("--interrupt") } },
       { selector: 'node[state = "unclaimed"]', style: { shape: "round-rectangle", width: 28, height: 28,
         "font-size": 12, "border-style": "dashed", "border-width": 3, "border-color": css("--unclaimed"),
@@ -177,7 +179,8 @@ function tile() {
   }
   const boxes = cy.nodes(".repo").map(r => {
     const kids = r.children();
-    kids.union(kids.edgesWith(kids)).layout({ name: "dagre", rankDir: "TB", nodeSep: 14, rankSep: 36 }).run();
+    kids.union(kids.edgesWith(kids)).layout({ name: "dagre", rankDir: "TB", nodeSep: 10, rankSep: 30,
+      nodeDimensionsIncludeLabels: true }).run();
     return { r, bb: kids.boundingBox() };
   }).sort((a, b) => b.bb.w * b.bb.h - a.bb.w * a.bb.h);
   // Aim for the viewport's aspect ratio rather than one long row.
