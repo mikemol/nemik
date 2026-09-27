@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 11
+      "ticks_blocked": 13
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 19,
       "weight": 1
     },
     {
@@ -1019,7 +1019,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T18:51:55Z",
-      "ticks_blocked": 3
+      "ticks_blocked": 5
     },
     {
       "symbol": "W59",
@@ -1171,7 +1171,7 @@
     {
       "symbol": "W66",
       "title": "frontier(G) in nemik-rank: open leaves under a goal; a 'ready' item with a nonempty frontier is an umbrella, excluded from rank and flagged by --check (first step of W71)",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W71"
       ],
@@ -1181,11 +1181,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: fully covered by its children W73 (868f0c7 frontier) and W74 (umbrellas excluded/flagged)",
       "issued_at": "2026-09-27T18:15:00Z",
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W70",
-      "last_worked": "2026-09-27T19:38:35Z",
+      "last_worked": "2026-09-27T20:08:35Z",
       "ticks_blocked": 0,
       "weight": 1
     },
@@ -1227,7 +1227,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T18:24:59Z",
-      "ticks_blocked": 7
+      "ticks_blocked": 9
     },
     {
       "symbol": "W69",
@@ -1268,22 +1268,20 @@
     {
       "symbol": "W71",
       "title": "Per-repo priority view: top goal G (no in-repo downstream, ranked by cross-repo weight), its frontier dG (open leaves; on-deck = top workable leaf), and dDG (what frontier leaves wait on outside the repo); path clear iff dDG is empty",
-      "status": "blocked",
+      "status": "ready",
       "enables": [],
       "touches": [
         "web-ui"
       ],
-      "blocked_on": [
-        "W66"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-09-27T19:29:49Z",
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T19:54:01Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 0,
       "weight": 0
     },
     {
@@ -1364,7 +1362,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:54:01Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 3,
       "weight": 0
     },
     {
@@ -1387,7 +1385,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:43:45Z",
-      "ticks_blocked": 2
+      "ticks_blocked": 4
     }
   ],
   "residue": [
