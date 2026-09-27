@@ -87,3 +87,4 @@
 2026-09-27T16:12:51Z  peer  W46  advanced  unblock   "luthen W124 now states an operator act; verified in nemik-operator"  evidence=nemik-operator
 2026-09-27T16:13:09Z  interrupt --   acknowledged -         "operator rule (h): loop live iff a ready/working item exists; suspend otherwise, re-arm on message/wake. W42 workable, so loop stays live"  evidence=memory loop-live-iff-workable
 2026-09-27T16:13:37Z  peer  W46  acknowledged -         "luthen re-filed W124 to linux-sources (agent): gone from nemik-operator; nemik-inbound linux-sources shows it UNCLAIMED (linux-sources dormant, letter in its inbox)"  evidence=nemik-operator; nemik-inbound linux-sources
+2026-09-27T16:25:59Z  tick  W42  done      sweep     "floor-ask pointer witness; 9/9 live"  evidence=commit 33f9937

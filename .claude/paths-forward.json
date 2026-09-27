@@ -280,7 +280,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 4
+      "ticks_blocked": 5
     },
     {
       "symbol": "W18",
@@ -700,17 +700,17 @@
     {
       "symbol": "W42",
       "title": "Witness: every summit ask carrying a waypoint field names a waypoint that exists in its owner's queue and is not dropped (first real case is the first post-W105 ask)",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Script over summit/floor/*.bib: parse waypoint=<repo>:W<n>, resolve against the merged graph (ChangeRequest or Dropped); report unresolved/dropped; wire as a nemik-check Warning or a nemik-operator column; fixture test",
-      "evidence": "2026-09-27: summit-da 14:3x: no back-fill planned. The field gets added as asks are filed or touched, and summit will ping when the first one carries it. The witness can still be built against a fixture before that.",
+      "next_bounded_step": "",
+      "evidence": "2026-09-27: summit-da 14:3x: no back-fill planned. The field gets added as asks are filed or touched, and summit will ping when the first one carries it. The witness can still be built against a fixture before that. | 2026-09-27: commit 33f9937; nemik-floor-asks: 9 of 9 resolve; tests/test_floorasks.py",
       "issued_at": "2026-09-27T14:32:36Z",
       "minted_during": "tick",
       "caused_by": "summit:W105",
-      "last_worked": "2026-09-27T14:32:48Z",
+      "last_worked": "2026-09-27T16:25:59Z",
       "ticks_blocked": 0,
       "weight": 0
     },
@@ -807,7 +807,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "weight": 1
     },
     {
