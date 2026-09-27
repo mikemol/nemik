@@ -166,3 +166,4 @@
 2026-09-27T19:42:23Z  tick  W76  asked     -         "sent to luthen-observability-81"
 2026-09-27T19:54:01Z  tick  W74  done      unblock   "rank excludes umbrellas; W71,W75 re-filed blocked on their children"
 2026-09-27T20:08:37Z  tick  W66  done      collapse  "W66 = W73+W74, both done; closed"
+2026-09-27T20:09:12Z  tick  W77  done      sweep     "operator ask: labels no longer beside nodes; not browser-verified"

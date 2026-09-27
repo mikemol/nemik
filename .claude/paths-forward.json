@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 76,
+  "counter": 77,
   "waypoints": [
     {
       "symbol": "W1",
@@ -1386,6 +1386,24 @@
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:43:45Z",
       "ticks_blocked": 4
+    },
+    {
+      "symbol": "W77",
+      "title": "Graph labels occluded by neighbouring shapes (operator ask)",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "web"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-09-27: 40fc94b: text-valign bottom + text-background; dagre nodeDimensionsIncludeLabels",
+      "issued_at": "2026-09-27T20:09:11Z",
+      "minted_during": "interrupt",
+      "caused_by": null,
+      "last_worked": "2026-09-27T20:09:12Z",
+      "ticks_blocked": 0
     }
   ],
   "residue": [
