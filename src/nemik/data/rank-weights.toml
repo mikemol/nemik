@@ -4,8 +4,15 @@
 # counts than a local successor is a policy choice, not a fact about the graph -- so it lives
 # here, where changing it is a reviewed diff, not a constant buried in a traversal.
 #
-# local: a downstream waypoint in the same repo (reached through `enables` or `blocked_on`).
-# peer:  a downstream waypoint in another repo -- another session is stalled on it, so it
-#        outweighs local work by default (luthen-observability-81's ask).
+# local:        a downstream waypoint in the same repo.
+# peer:         a downstream waypoint in another repo, reachable but not (yet) stalled on this chain.
+# peer_blocked: a downstream waypoint in another repo whose status is `blocked` -- a session is
+#               sitting idle on it now.
+#
+# ⚑ HISTORY (residue, not deletion): W35 shipped a two-class {local=1, peer=3}. luthen's case
+# (nemik:W38) showed a flat peer multiplier ranks a long, mostly-local reach (luthen W79) above a
+# short chain that stalled sessions wait on (luthen W45 -> linux-sources:W124, el-openglo:W127).
+# Which repo a waypoint lives in is not the signal; whether someone is stalled on it is (nemik:W36).
 local = 1
-peer = 3
+peer = 2
+peer_blocked = 8
