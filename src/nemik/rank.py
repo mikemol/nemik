@@ -111,6 +111,36 @@ def ref_of(node: URIRef) -> str:
     return f"{r}:{sym}"
 
 
+def goals(g: Graph, repo: str, weights: Weights) -> list[dict]:
+    """nemik:W79 (first half of W71): `repo`'s goals, heaviest cross-repo weight first.
+
+    A goal G is an open waypoint that nothing open in its own repo is waiting to follow: its
+    purpose lies outside the repo, or it is an end in itself. For each goal: its frontier dG, the
+    on-deck leaf (the heaviest ready leaf), and ddG, what the leaves wait on from outside. The path
+    to G is clear exactly when ddG is empty.
+    """
+    ws = workstream_uri(repo)
+    out = []
+    for n in g.subjects(NEMIK.workstream, ws):
+        if not _open(g, n):
+            continue
+        if any(_repo(s) == repo and _open(g, s) for s in successors(g, n)):
+            continue
+        leaves, outside = frontier(g, n)
+        ready = sorted((x for x in leaves if (x, OSLC_CM.state, NEMIK.Ready) in g),
+                       key=lambda x: (-downstream_weight(g, x, weights), str(g.value(x, NEMIK.symbol))))
+        out.append({
+            "goal": str(g.value(n, NEMIK.symbol)),
+            "title": str(g.value(n, DCTERMS.title) or ""),
+            "weight": downstream_weight(g, n, weights),
+            "frontier": sorted(ref_of(x) for x in leaves),
+            "on_deck": ref_of(ready[0]) if ready else None,
+            "outside": sorted(outside),
+            "clear": not outside,
+        })
+    return sorted(out, key=lambda r: (-r["weight"], int(r["goal"].lstrip("W"))))
+
+
 def is_umbrella(g: Graph, n: URIRef) -> bool:
     """A ready item with open work under it (nemik:W74): its frontier is not itself, so it is not a leaf."""
     return frontier(g, n)[0] != {n}
@@ -149,6 +179,8 @@ def main() -> None:
     ap = argparse.ArgumentParser(prog="nemik-rank", description=(main.__doc__ or "").splitlines()[0])
     ap.add_argument("repo", help="the workstream whose ready items to rank")
     ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
+    ap.add_argument("--goals", action="store_true",
+                    help="each goal with its frontier, on-deck leaf, and outside waits (path clear iff none)")
     ap.add_argument("--json", action="store_true", help="machine-readable output")
     ap.add_argument("--check", action="store_true",
                     help="exit 1 if the ready item mtools works next is outweighed by another (drift witness)")
@@ -173,6 +205,15 @@ def main() -> None:
         print(f"rank: DRIFT {args.repo}: next is {nxt['symbol']} ({nxt['weight']}) "
               f"but {top['symbol']} carries {top['weight']}")
         raise SystemExit(1)
+    if args.goals:
+        gs = goals(g, args.repo, weights)
+        if args.json:
+            print(json.dumps(gs, indent=2))
+            return
+        for r in gs:
+            path = "clear" if r["clear"] else "waits on " + ", ".join(r["outside"])
+            print(f"{r['goal']:6} {r['weight']:4}  on deck {r['on_deck'] or '-'}; path {path}  {r['title'][:60]}")
+        return
     rows = rank(g, args.repo, weights)
     if args.json:
         print(json.dumps(rows, indent=2))

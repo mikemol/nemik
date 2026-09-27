@@ -46,3 +46,19 @@ def test_ready_item_with_open_feeder_is_an_umbrella() -> None:
     assert is_umbrella(g, U) and not is_umbrella(g, L)
     g.set((L, OSLC_CM.state, STATE["done"]))
     assert not is_umbrella(g, U)
+
+
+def test_goals_pick_terminal_items_with_on_deck_leaf_and_outside_waits() -> None:
+    from nemik.adapter import workstream_uri
+    from nemik.rank import goals, load_weights
+
+    g = Graph()
+    G, L1, L2 = _wp(g, "a", "W1", "blocked", ["W2", "W3"]), _wp(g, "a", "W2"), _wp(g, "a", "W3", "blocked", ["b:W9"])
+    H = _wp(g, "a", "W4")
+    for n, s in ((G, "W1"), (L1, "W2"), (L2, "W3"), (H, "W4")):
+        g.add((n, NEMIK.workstream, workstream_uri("a")))
+        g.add((n, NEMIK.symbol, Literal(s)))
+    rows = {r["goal"]: r for r in goals(g, "a", load_weights())}
+    assert set(rows) == {"W1", "W4"}
+    assert rows["W1"]["on_deck"] == "a:W2" and rows["W1"]["outside"] == ["b:W9"] and not rows["W1"]["clear"]
+    assert rows["W4"]["frontier"] == ["a:W4"] and rows["W4"]["clear"]
