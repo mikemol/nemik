@@ -280,7 +280,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 6
+      "ticks_blocked": 7
     },
     {
       "symbol": "W18",
@@ -812,7 +812,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "weight": 1
     },
     {
@@ -835,20 +835,17 @@
     {
       "symbol": "W49",
       "title": "Render cross-repo touches[] overlap (grouped by tag) once mtools emits OVERLAP",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "W52",
-        "W53"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Repin pathsforward to mtools 49ac0ff; then render cross-repo OVERLAP grouped by tag from nemik:touches (same line shape as --overlaps)",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-09-27: children W52+W53 done; nemik-overlaps is the renderer",
       "issued_at": "2026-09-27T16:29:09Z",
       "minted_during": "interrupt",
       "caused_by": "mtools:W102",
-      "last_worked": "2026-09-27T17:08:33Z",
+      "last_worked": "2026-09-27T17:24:26Z",
       "ticks_blocked": 0,
       "weight": 0
     },
@@ -910,7 +907,7 @@
     {
       "symbol": "W53",
       "title": "nemik-overlaps: cross-repo OVERLAP <tag>: <repo>:W<a>,... over live nemik:touches, fixture-tested",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W49"
       ],
@@ -920,12 +917,13 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: commit 7cb9d19; live: 55 OVERLAP lines fleet-wide, 10 with --cross; tests/test_overlaps.py; pytest 30",
       "issued_at": "2026-09-27T17:08:33Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-09-27T17:24:26Z",
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W54",
@@ -943,7 +941,8 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 0
     },
     {
       "symbol": "W55",
@@ -963,7 +962,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T17:20:42Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 1
     }
   ],
   "residue": [
