@@ -55,3 +55,31 @@ def test_git_ref_witness(tmp_path, monkeypatch) -> None:
     assert witness('input.git_ref["absent@main"].exists')[0] == "undefined"
     assert witness('input.git_ref["r@--output=x"].exists')[0] == "undefined"
     assert witness('input.git_ref["../r@main"].exists')[0] == "undefined"
+
+
+def test_runner_applies_only_holding_witnesses(tmp_path, monkeypatch, capsys) -> None:
+    import json
+    import sys
+
+    from nemik import witnesses
+
+    flag = tmp_path / "flag"
+    flag.write_text("")
+    q = tmp_path / "r" / ".claude"
+    q.mkdir(parents=True)
+    state = q / "paths-forward.json"
+    wps = [
+        {"symbol": "W1", "title": "flag exists", "status": "blocked", "blocked_on": ["nemik-witnesses"],
+         "blocked_kind": "agent", "witness": f'input.file["{flag}"].exists'},
+        {"symbol": "W2", "title": "never", "status": "blocked", "blocked_on": ["nemik-witnesses"],
+         "blocked_kind": "agent", "witness": f'input.file["{tmp_path}/nope"].exists'},
+    ]
+    state.write_text(json.dumps({"version": 1, "project_root": str(tmp_path / "r"), "counter": 2,
+                                 "waypoints": wps, "residue": []}))
+    monkeypatch.setattr(sys, "argv", ["nemik-witnesses", "--root", str(tmp_path), "--apply"])
+    witnesses.main()
+    out = capsys.readouterr().out
+    assert "WITNESS r:W1 true" in out and "WITNESS r:W2 false" in out
+    after = {w["symbol"]: w for w in json.loads(state.read_text())["waypoints"]}
+    assert after["W1"]["status"] == "done" and "witness held" in after["W1"]["evidence"]
+    assert after["W2"]["status"] == "blocked"

@@ -97,3 +97,42 @@ def evaluate(query: str, doc: dict, missing: list[str]) -> str:
 def witness(query: str, now: datetime | None = None) -> tuple[str, dict, list[str]]:
     doc, missing = facts(query, now)
     return evaluate(query, doc, missing), doc, missing
+
+
+def open_witnesses(root: Path) -> list[tuple[str, Path, str, str]]:
+    """(repo, queue path, symbol, query) for every witnessed waypoint not yet done, fleet-wide."""
+    from nemik.check import QUEUE, workstream_files
+
+    out = []
+    for repo, path in workstream_files(root, QUEUE):
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        for w in data.get("waypoints", []):
+            if w.get("witness") and w.get("status") != "done":
+                out.append((repo, path, w["symbol"], w["witness"]))
+    return out
+
+
+def main() -> None:
+    import argparse
+    import shutil
+    import sys
+
+    from nemik.check import default_root
+
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
+    ap.add_argument("--apply", action="store_true", help="mark waypoints whose witness holds as done")
+    args = ap.parse_args()
+    pf = shutil.which("mikemol-paths-forward", path=str(Path(sys.executable).parent))
+    for repo, path, sym, query in open_witnesses(args.root):
+        verdict, doc, missing = witness(query)
+        note = f"  cannot observe {','.join(missing)}" if missing else ""
+        print(f"WITNESS {repo}:{sym} {verdict}{note}")
+        if args.apply and verdict == "true" and pf:
+            observed = {k: v for k, v in doc.items() if k != "now"}
+            subprocess.run([pf, "--state", str(path), "--update", sym, "--status", "done", "--evidence-append",
+                            f"witness held at {doc['now']}: {json.dumps(observed, sort_keys=True)}"],
+                           check=True, capture_output=True)
