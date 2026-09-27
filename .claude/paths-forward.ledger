@@ -164,3 +164,4 @@
 2026-09-27T19:39:13Z  nudge W68  nudged    -         "from W58; owned by luthen:W145, no message"
 2026-09-27T19:42:13Z  tick  W75  filed     -         "operator: the weather is part of the dependency graph (paperkit W111 on BES)"
 2026-09-27T19:42:23Z  tick  W76  asked     -         "sent to luthen-observability-81"
+2026-09-27T19:54:01Z  tick  W74  done      unblock   "rank excludes umbrellas; W71,W75 re-filed blocked on their children"
