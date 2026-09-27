@@ -948,19 +948,21 @@
     {
       "symbol": "W55",
       "title": "Ask mtools: --bump-blocked drops done local symbols from blocked_on; empty list returns item to ready",
-      "status": "ready",
+      "status": "blocked",
       "enables": [],
       "touches": [
         "upstream"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "mtools"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-09-27T17:20:18Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-27T17:20:28Z",
       "ticks_blocked": 0
     }
   ],
