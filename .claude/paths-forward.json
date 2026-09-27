@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 101,
+  "counter": 104,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 39
+      "ticks_blocked": 40
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 46,
       "weight": 1
     },
     {
@@ -1359,7 +1359,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:54:01Z",
-      "ticks_blocked": 29,
+      "ticks_blocked": 30,
       "weight": 0
     },
     {
@@ -1382,7 +1382,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:43:45Z",
-      "ticks_blocked": 30
+      "ticks_blocked": 31
     },
     {
       "symbol": "W77",
@@ -1403,7 +1403,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:13:38Z",
-      "ticks_blocked": 23,
+      "ticks_blocked": 24,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1864,21 +1864,88 @@
     {
       "symbol": "W101",
       "title": "The Bazel-built //:.venv is the build input everything consumes (operator: 'build their .venv as a build input that the rest of the build uses'): py_tests run in it rather than per-target deps; the host .venv is that artifact, not a uv-synced sibling; deps (paperkit, pathsforward) come from the lock into it, not from hand-vendored wheels. First step: read how mtools wires tests and hooks to its built venv; revert the W100 paperkit wheel vendoring",
-      "status": "ready",
+      "status": "blocked",
       "enables": [],
       "touches": [
         "bazel",
         "venv",
         "packaging"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W102",
+        "W103",
+        "W104"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "2026-09-27: Operator clarification 2026-09-27: bazel builds the .venv as a build OUTPUT; that output is then the build INPUT for every later target needing .venv material (tests, hooks, lint, host use). So every such target takes //:.venv in its inputs and runs its bin/, nothing assembles its own Python closure.",
+      "evidence": "2026-09-27: Operator clarification 2026-09-27: bazel builds the .venv as a build OUTPUT; that output is then the build INPUT for every later target needing .venv material (tests, hooks, lint, host use). So every such target takes //:.venv in its inputs and runs its bin/, nothing assembles its own Python closure. | 2026-09-27: Read mtools: dev hubs pip.parse(uv_lock=...) so host and bazel resolve one lock (MODULE.bazel:150-170); git sources (paperkit) need patches/rules_python-uv-lock-git-kind.patch via single_version_override; setup.sh arms core.hooksPath and links root .venv; hooks/BUILD.bazel feeds :.venv as data. pathsforward stays a vendored wheel for now (nemik:H1, image build has no github fetch)",
       "issued_at": "2026-09-27T23:03:28Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-09-27T23:04:05Z",
+      "last_worked": "2026-09-27T23:08:46Z",
+      "ticks_blocked": 0,
+      "weight": 0
+    },
+    {
+      "symbol": "W102",
+      "title": "W101a: pip.parse reads uv.lock (uv_lock=) with mtools' patches/rules_python-uv-lock-git-kind.patch, so paperkit's git source resolves in Bazel; revert the W100 paperkit wheel + pyproject path; drop requirements-dev.txt",
+      "status": "ready",
+      "enables": [
+        "W101"
+      ],
+      "touches": [
+        "bazel",
+        "venv"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T23:08:46Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W103",
+      "title": "W101b: every test consumes //:.venv as its input and runs under its bin/python3 (not per-target py_test deps)",
+      "status": "ready",
+      "enables": [
+        "W101"
+      ],
+      "touches": [
+        "bazel",
+        "venv"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T23:08:46Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W104",
+      "title": "W101c: host .venv is the bazel output (setup.sh: arm hooks, link .venv -> bazel-bin/.venv), not a uv sync; README",
+      "status": "ready",
+      "enables": [
+        "W101"
+      ],
+      "touches": [
+        "venv"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T23:08:46Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": null,
       "ticks_blocked": 0
     }
   ],
