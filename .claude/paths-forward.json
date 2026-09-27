@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 31,
+  "counter": 32,
   "waypoints": [
     {
       "symbol": "W1",
@@ -515,6 +515,24 @@
       "caused_by": null,
       "last_worked": "2026-09-27T00:41:20Z",
       "ticks_blocked": 0
+    },
+    {
+      "symbol": "W32",
+      "title": "Operator direct ask: build a paperkit project documenting nemik's guarantees, modularity (and its gaps), and the standards it's derived from",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "paperkit,docs"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-09-27: Installed paperkit (per operator's explicit steer: package dependency, not sibling checkout) as an optional docs dep pinned to git+https://github.com/mikemol/paperkit.git@b5877102af3b48005fde814416bff5b8f06ba5cd. Wrote paper.toml/rubric.tsv/warrants.bib (19 claims, 4 sections: guarantees/standards/modularity/limits) + checks/claims.py (19 real functional/grep witnesses against src/nemik/*.py, pyproject.toml, shapes.ttl -- import-graph traversal, cross-repo IRI resolution, Prometheus label format, OSLC/PROV vocabulary, and two honest modularity gaps: rdflib not centralized behind adapter.py, check.py's direct UnreadableStateError import). paperkit-gate . : PASS, 19/19 claims resolve, coverage complete, ARCHITECTURE.md == projection. pytest 18/18 still green.",
+      "issued_at": "2026-09-27T01:10:49Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-09-27T01:10:57Z",
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -535,6 +553,9 @@
   ],
   "job_id": "39928715",
   "heartbeat": "2026-09-27T00:59:14Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-09-27T01:10:48Z"
+  },
   "predecessor_job_id": "cbafe836"
 }

@@ -1,0 +1,7 @@
+# rubric.tsv -- the sections of this paper, in document order. The coverage gate
+# requires each heading to appear and each section-tagged claim to be cited in it.
+# key	heading title
+guarantees	What nemik Guarantees
+standards	Standards It Is Derived From
+modularity	Modularity: What Is, and Is Not, Isolated
+limits	Honest Limits

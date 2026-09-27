@@ -1,0 +1,25 @@
+[paper]
+title = "nemik"
+subtitle = "Standards-first project management over federated agent workstreams: what it guarantees, where its architecture is (and is not) modular, and the standards it is derived from -- every sentence below is the projection of a claim a check verified."
+warrants = ["warrants.bib"]
+rubric = "rubric.tsv"
+out = "ARCHITECTURE.md"
+numbered = false
+references = false
+
+# THE Δ SANDBOX ROOT, DECLARED -- without this, layout._sandbox_root infers this project's
+# PARENT (~/github, dozens of sibling repos), because paperkit is installed as a package here
+# rather than living as a sibling checkout, so there is nothing else for it to infer from. The
+# checks below read only files under this repo (src/nemik, pyproject.toml), so the bound is the
+# repo itself, matching the convention every other paperkit-consuming repo in this fleet uses
+# (see paper.toml in gcalculus, summit, el-openglo: "root = \".\"").
+root = "."
+
+# Custom check type: `claim:<key>` runs the per-claim witness in checks/claims.py, which
+# asserts the specific proposition that claim makes about nemik's source -- grep/import-graph
+# assertions against src/nemik/*.py and pyproject.toml, not prose restating what the code says
+# it does. Each claim gets its own function, so a claim that goes false as the code changes
+# fails its own check rather than a shared one standing in for several claims.
+[checks.claim]
+cmd = "python3 checks/claims.py {target}"
+witness = "checks/claims.py"

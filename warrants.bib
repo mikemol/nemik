@@ -1,0 +1,148 @@
+% warrants.bib -- nemik's own claims about itself. ARCHITECTURE.md is the PROJECTION of this
+% file; never hand-edit the projection, edit here and re-project with `paperkit-project .`.
+% Every claim's check is a witness in checks/claims.py, run against src/nemik/*.py and
+% pyproject.toml as they stand right now -- a claim that goes false as the code changes fails
+% its own check, rather than reading as prose nobody re-verifies.
+
+@misc{single-writer-boundary,
+  section = {guarantees},
+  claim   = {every workstream's queue has exactly one reader in this codebase --- adapter.py's queue_graph() is the only function that calls mtools' store.load(), so a schema change in the state file's shape is mtools' problem to absorb once, not a second parser's problem to notice},
+  check   = {claim:single-writer-boundary}
+}
+
+@misc{exit-code-is-the-verdict,
+  section = {guarantees},
+  from    = {single-writer-boundary},
+  join    = {. },
+  claim   = {nemik-check's exit code means exactly one thing --- 1 if and only if some workstream's queue produced an sh:Violation, 0 otherwise --- which is what luthen's own witness (W81) parses, so the exit code is a contract other repos' automation already depends on, not an implementation detail free to drift},
+  check   = {claim:exit-code-is-the-verdict}
+}
+
+@misc{provenance-lines-are-stable,
+  section = {guarantees},
+  from    = {exit-code-is-the-verdict},
+  join    = {. },
+  claim   = {every run of nemik-check first prints grep-stable provenance --- one line per fact, prefixed literally `provenance: nemik` and `provenance: queue <repo>`, naming nemik's own commit and each queue's committed/uncommitted/untracked state --- so a verdict can be traced back to the source it was computed from},
+  check   = {claim:provenance-lines-are-stable}
+}
+
+@misc{unclaimed-is-a-literal,
+  section = {guarantees},
+  from    = {provenance-lines-are-stable},
+  join    = {. },
+  claim   = {an unclaimed cross-repo block prints the literal token UNCLAIMED, and that token is read by other repos' own tick loops (paths-forward-loop skill §4.2) as their signal to mint a claiming waypoint --- so nemik-inbound's output format is itself part of the fleet's coordination protocol, not just a human-readable report},
+  check   = {claim:unclaimed-is-a-literal}
+}
+
+@misc{symbol-pattern-is-enforced,
+  section = {guarantees},
+  from    = {unclaimed-is-a-literal},
+  join    = {. },
+  claim   = {a waypoint symbol matching anything other than W followed by digits is flagged by SHACL as nonconforming, which is how nemik enforces mtools' own invariant that a symbol is an identity, never a position, and never reused},
+  check   = {claim:symbol-pattern-is-enforced}
+}
+
+@misc{hermetic-vendoring,
+  section = {guarantees},
+  from    = {symbol-pattern-is-enforced},
+  join    = {. },
+  claim   = {nemik's own build fetches nothing from the network --- the mikemol-pathsforward dependency it writes the queue through resolves to a wheel vendored in this repo at a pinned commit, not a git URL resolved at build time (nemik:W6, H1)},
+  check   = {claim:hermetic-vendoring}
+}
+
+@misc{cross-repo-citation-form,
+  section = {guarantees},
+  from    = {hermetic-vendoring},
+  join    = {. },
+  claim   = {a cross-repo reference is always the two-part form <repo>:W<n>, and adapter.py resolves both that form and a bare local W<n> to the same kind of IRI, so a citation reads identically whether it names this workstream or another one},
+  check   = {claim:cross-repo-citation-form}
+}
+
+@misc{oslc-cm-state-vocabulary,
+  section = {standards},
+  claim   = {every waypoint's status is asserted through the OSLC Change Management oslc_cm:state property, with nemik's own four-valued vocabulary (Ready, Working, Blocked, Done) as its range --- OSLC CM supplies the property, not the values, since mtools' status strings have no standard state URIs of their own to map onto},
+  check   = {claim:oslc-cm-state-vocabulary}
+}
+
+@misc{prov-activity-shape,
+  section = {standards},
+  from    = {oslc-cm-state-vocabulary},
+  join    = {. },
+  claim   = {every parsed ledger line becomes a W3C PROV Activity --- carrying prov:startedAtTime and, when the line names a symbol, prov:used pointing at the waypoint it acted on --- so interrupt effort and forecast effort land on the same graph the enables/blockedOn edges already join, queryable by the one vocabulary rather than a bespoke one},
+  check   = {claim:prov-activity-shape}
+}
+
+@misc{prometheus-label-format,
+  section = {standards},
+  from    = {prov-activity-shape},
+  join    = {. },
+  claim   = {nemik-metrics emits the Prometheus text exposition format exactly --- brace-delimited, comma-separated, double-quoted label values --- so vmagent's importer (or any other Prometheus-compatible scraper) reads it with no translation layer},
+  check   = {claim:prometheus-label-format}
+}
+
+@misc{shacl-is-the-one-validator,
+  section = {standards},
+  from    = {prometheus-label-format},
+  join    = {. },
+  claim   = {SHACL is the one conformance language nemik enforces the fleet's queues against --- pyshacl is imported nowhere but check.py, so there is exactly one place a shape can be added, relaxed, or read, not several independently-drifting validators},
+  check   = {claim:shacl-is-the-one-validator}
+}
+
+@misc{adapter-is-the-foundation-layer,
+  section = {modularity},
+  claim   = {adapter.py imports no other nemik module --- it is the base of the dependency order, translating mtools' queue and ledger objects into RDF and nothing else, so every other module's behavior can change without adapter.py needing to know},
+  check   = {claim:adapter-is-the-foundation-layer}
+}
+
+@misc{adoption-has-no-internal-coupling,
+  section = {modularity},
+  from    = {adapter-is-the-foundation-layer},
+  join    = {. },
+  claim   = {adoption.py --- the module that reads whether a repo has adopted mikemol-pathsforward as its own pinned dependency --- imports no other nemik module and no RDF library at all; it is pure tomllib and Path, fully independent of the graph-building machinery the rest of the package is built around},
+  check   = {claim:adoption-has-no-internal-coupling}
+}
+
+@misc{hub-modules-depend-on-everything-below,
+  section = {modularity},
+  from    = {adoption-has-no-internal-coupling},
+  join    = {. },
+  claim   = {nemik-metrics and nemik-serve are the two hub modules --- each imports adapter, blocks, wake, and check, the full lower stack --- which is the honest shape of "read-only view over everything": neither is modular with respect to the rest of the package, and no third module reaches that same width},
+  check   = {claim:hub-modules-depend-on-everything-below}
+}
+
+@misc{import-graph-is-acyclic,
+  section = {modularity},
+  from    = {hub-modules-depend-on-everything-below},
+  join    = {. },
+  claim   = {the import graph among nemik's own modules has no cycle --- adapter, then {blocks, adoption}, then check, then wake, then {metrics, serve} is a strict layering, checked by traversal rather than asserted by convention}, check = {claim:import-graph-is-acyclic}
+}
+
+@misc{rdf-is-not-centralized-behind-adapter,
+  section = {modularity},
+  from    = {import-graph-is-acyclic},
+  join    = {, but this is the modularity gap: },
+  claim   = {rdflib itself is not encapsulated behind adapter.py --- blocks.py, check.py, wake.py, metrics.py, and serve.py all import rdflib directly to build or query graphs of their own, so adapter.py is the sole boundary onto mtools' data model but NOT a boundary onto RDF as a technology; swapping the graph library would touch every module, not one},
+  check   = {claim:rdf-is-not-centralized-behind-adapter}
+}
+
+@misc{check-py-bypasses-the-adapter-boundary,
+  section = {modularity},
+  from    = {rdf-is-not-centralized-behind-adapter},
+  join    = {. And even the mtools boundary has one crack: },
+  claim   = {check.py imports mtools' UnreadableStateError directly rather than through a re-export adapter.py provides, so the single-writer claim above holds for parsing the queue but not for naming what happens when parsing fails --- a second, smaller seam onto the same upstream package, left open rather than silently claimed closed},
+  check   = {claim:check-py-bypasses-the-adapter-boundary}
+}
+
+@misc{no-versioned-schema,
+  section = {limits},
+  claim   = {nemik has no schema version negotiated between itself and the workstreams it reads --- shapes.ttl changes (like the September 2026 title-length refinement, nemik:W23) take effect fleet-wide the moment this repo's shapes.ttl is edited, with no way for an individual workstream to pin an older ruleset or be warned it is about to see new Warnings; conformance drift is discovered by running nemik-check, not declared in advance},
+  check   = {claim:no-versioned-schema}
+}
+
+@misc{no-write-path,
+  section = {limits},
+  from    = {no-versioned-schema},
+  join    = {. },
+  claim   = {nemik itself never writes a queue or a ledger --- every script in this package is a reader; the only writer of paths-forward.json and .ledger in the entire fleet is mikemol-pathsforward, invoked directly by each repo's own agent --- so nemik's guarantees are guarantees about what it can SEE, not about what it can enforce at write time},
+  check   = {claim:nemik-never-writes-a-queue}
+}

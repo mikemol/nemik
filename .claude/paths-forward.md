@@ -1,7 +1,7 @@
 <!-- DERIVED from the state file by mikemol-paths-forward --render. NEVER EDIT. -->
 # paths-forward — /home/mikemol/github/nemik/.claude/paths-forward.json
 
-counter 31 · heartbeat 2026-09-27T00:43:14Z · job `cbafe836` · hash `v2:2305f710723f83fd`
+counter 32 · heartbeat 2026-09-27T00:59:14Z · job `39928715` · hash `v2:34547d4c98f2f4eb`
 
 | # | symbol | status | title | blocked on | next bounded step |
 |---|---|---|---|---|---|
@@ -34,6 +34,7 @@ counter 31 · heartbeat 2026-09-27T00:43:14Z · job `cbafe836` · hash `v2:2305f
 | 27 | W29 | done | Dash UI FR (operator, direct): repo boxes should be color-coded by liveliness state | — | n/a |
 | 28 | W30 | done | adapter.py review: queue_graph()'s residue-translation loop was duplicated verbatim (dead code, harmless since RDF triples dedupe, but confusing on read) | — | — |
 | 29 | W31 | done | check.py deep read: verified survey()'s focus-node-to-repo attribution (by_repo.setdefault) can never actually see an unknown repo given current shapes.ttl targets and adapter.py's URI minting -- defensive but dead code, not a live bug | — | — |
+| 30 | W32 | done | Operator direct ask: build a paperkit project documenting nemik's guarantees, modularity (and its gaps), and the standards it's derived from | — | — |
 
 ## residue
 
