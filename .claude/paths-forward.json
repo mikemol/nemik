@@ -1,25 +1,23 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 41,
+  "counter": 42,
   "waypoints": [
     {
       "symbol": "W1",
       "title": "S6: check that every OPEN summit ask's waypoint appears in nemik-inbound for its owner",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "summit:W105"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-09-26: summit replied to the nudge: W105 is real, queued behind two in-flight verifications, not forgotten | 2026-09-27: 2026-09-27: summit woke (nemik-wake asleep->idle; session summit-da reachable, started ~8m before this tick). Sent the overdue tick-8 nudge (skipped then: no summit session reachable). summit:W105 still status=ready, last_worked 2026-09-26T21:07Z, blocked_on=[] -- nothing blocks it but priority. | 2026-09-27: 2026-09-27: summit-da replied: W105 unchanged (not split/reprioritized), next in its queue after a board-gate commit; prior summit session died mid-tick (why the tick-8 nudge landed nowhere). Committed to ping on LANDED, not started. So the ticks_blocked=16 escalate-to-human is moot while this commitment is live: an actively-owned blocker is not a stuck one.",
+      "evidence": "2026-09-26: summit replied to the nudge: W105 is real, queued behind two in-flight verifications, not forgotten | 2026-09-27: 2026-09-27: summit woke (nemik-wake asleep->idle; session summit-da reachable, started ~8m before this tick). Sent the overdue tick-8 nudge (skipped then: no summit session reachable). summit:W105 still status=ready, last_worked 2026-09-26T21:07Z, blocked_on=[] -- nothing blocks it but priority. | 2026-09-27: 2026-09-27: summit-da replied: W105 unchanged (not split/reprioritized), next in its queue after a board-gate commit; prior summit session died mid-tick (why the tick-8 nudge landed nowhere). Committed to ping on LANDED, not started. So the ticks_blocked=16 escalate-to-human is moot while this commitment is live: an actively-owned blocker is not a stuck one. | 2026-09-27: summit:W105 landed at summit 3700ff8 (summit-da 14:3x): 'waypoint' is now a top-level field in floor/*.bib, validated as <repo>:W<n> at placement and not back-filled. CHECK: floor/asks.bib has 39 asks and 0 carry a waypoint field (all predate W105; summit calls them undecidable, not malformed). So 'every open ask's waypoint appears in nemik-inbound' holds vacuously today. The real test is the first ask filed with the field; tracked as W42.",
       "issued_at": "2026-09-26T18:21:18Z",
       "minted_during": "interrupt",
       "caused_by": "summit:W105",
-      "last_worked": "2026-09-27T13:27:48Z",
-      "ticks_blocked": 18
+      "last_worked": "2026-09-27T14:32:36Z",
+      "ticks_blocked": 0
     },
     {
       "symbol": "W2",
@@ -699,6 +697,22 @@
       "issued_at": "2026-09-27T14:28:38Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W117",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W42",
+      "title": "Witness: every summit ask carrying a waypoint field names a waypoint that exists in its owner's queue and is not dropped (first real case is the first post-W105 ask)",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Script over summit/floor/*.bib: parse waypoint=<repo>:W<n>, resolve against the merged graph (ChangeRequest or Dropped); report unresolved/dropped; wire as a nemik-check Warning or a nemik-operator column; fixture test",
+      "evidence": "",
+      "issued_at": "2026-09-27T14:32:36Z",
+      "minted_during": "tick",
+      "caused_by": "summit:W105",
       "last_worked": null,
       "ticks_blocked": 0
     }

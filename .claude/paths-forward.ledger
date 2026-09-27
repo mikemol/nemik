@@ -60,3 +60,4 @@
 2026-09-27T14:27:57Z  nudge W39  nudged    -         "from W34 (umbrella, ticks_blocked=4): waiting on W39 (W35-W38 done)"  evidence=bump-blocked NUDGE
 2026-09-27T14:27:57Z  tick  W37  advanced  unblock   "nemik-rank CLI shipped; luthen pinged"  evidence=commit fa462db; pytest 25
 2026-09-27T14:28:38Z  peer  --   acknowledged -         "luthen finding: linux-sources W46/W47 block on umbrella luthen:W43, inflating W112 to 58; real pairs W46<-W115, W47<-W111. Repoint is linux-sources' (asleep; operator route, luthen's to raise). Registered umbrella-edge witness as W41"  evidence=msg luthen-observability-81
+2026-09-27T14:32:36Z  peer  W1   advanced  unblock   "summit:W105 landed; W1 closed; check vacuous (0/39 asks carry waypoint yet), real verification minted as W42"  evidence=summit 3700ff8; grep waypoint floor/*.bib = 0
