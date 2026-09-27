@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 86,
+  "counter": 87,
   "waypoints": [
     {
       "symbol": "W1",
@@ -1592,6 +1592,24 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:20:26Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W87",
+      "title": "Graph: tame cross-repo edges in the all view (the operator-actor fan, long waits across boxes): e.g. order repo boxes by cross-repo dependency, bundle or hide cross-repo edges until hover",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "web"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T21:20:44Z",
+      "minted_during": "interrupt",
+      "caused_by": null,
+      "last_worked": null,
       "ticks_blocked": 0
     }
   ],
