@@ -269,8 +269,6 @@
         "operator"
       ],
       "blocked_on": [
-        "W45",
-        "W46",
         "W47"
       ],
       "blocked_kind": "agent",
@@ -280,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 9
+      "ticks_blocked": 1
     },
     {
       "symbol": "W18",
@@ -812,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "weight": 1
     },
     {
@@ -934,7 +932,6 @@
         "web-ui"
       ],
       "blocked_on": [
-        "W56",
         "W57"
       ],
       "blocked_kind": "agent",
@@ -950,22 +947,20 @@
     {
       "symbol": "W55",
       "title": "Ask mtools: --bump-blocked drops done local symbols from blocked_on; empty list returns item to ready",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [
         "upstream"
       ],
-      "blocked_on": [
-        "mtools:W125"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: repinned to mtools 6f81801; --bump-blocked pruned W17 [W45,W46,W47]->[W47], W54 [W56,W57]->[W57]",
       "issued_at": "2026-09-27T17:20:18Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-09-27T17:20:42Z",
-      "ticks_blocked": 3
+      "last_worked": "2026-09-27T17:47:55Z",
+      "ticks_blocked": 0
     },
     {
       "symbol": "W56",
@@ -1029,7 +1024,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T17:31:15Z",
-      "ticks_blocked": 1
+      "ticks_blocked": 2
     },
     {
       "symbol": "W59",
@@ -1053,7 +1048,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T17:32:12Z",
-      "ticks_blocked": 1
+      "ticks_blocked": 2
     },
     {
       "symbol": "W60",
