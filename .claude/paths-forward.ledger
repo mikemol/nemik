@@ -80,3 +80,7 @@
 2026-09-27T15:42:23Z  tick  W46  advanced  unblock   "luthen W124 unstated cause: blocked_on local W123 + kind human; fixes sent to live session"  evidence=luthen paths-forward.json W124; msg to luthen-observability-81
 2026-09-27T15:57:25Z  tick  W46  acknowledged -         "tick-1 NUDGE held: the fix message to luthen-observability-81 went 1 tick ago (15:42); tick 2 delivers if no edit"  evidence=bump-blocked NUDGE
 2026-09-27T15:57:25Z  tick  W47  advanced  sweep     "no wake events; watch re-filed as blocked on the 4 dormant repos so it paces by backoff instead of occupying top"  evidence=ListAgents; nemik-wake roster; git log ages
+2026-09-27T16:12:25Z  nudge W46  nudged    -         "from W17 (umbrella, ticks_blocked=4): waiting on W46"  evidence=bump-blocked NUDGE
+2026-09-27T16:12:25Z  nudge W47  nudged    -         "from W17 (umbrella, ticks_blocked=4): waiting on W47"  evidence=bump-blocked NUDGE
+2026-09-27T16:12:25Z  tick  W47  acknowledged -         "tick-1 NUDGE: all 4 dormant by operator's budget choice; inbox letters already there (W4, W45); nothing further to send until a wake"  evidence=memory operator-wakes-repos-selectively
+2026-09-27T16:12:25Z  tick  W22  advanced  sweep     "title-length trial watch concluded: 233 warnings, no decomposition observed; shape kept, watch ended to save ticks"  evidence=nemik-check grep 150 = 233

@@ -280,7 +280,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 3
+      "ticks_blocked": 4
     },
     {
       "symbol": "W18",
@@ -342,7 +342,7 @@
     {
       "symbol": "W22",
       "title": "Trial: SHACL Warning when a waypoint title exceeds 150 chars (decomposition signal, operator request re el-openglo:W45). Fires 256 times across ~/github today (commit f235c4f). Watch whether repos act on it or just accumulate the warning; 150 is a first guess, not measured",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "shapes",
@@ -350,12 +350,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "After it's been live a while, check whether any repo actually decomposed a waypoint because of it",
-      "evidence": "",
+      "next_bounded_step": "",
+      "evidence": "2026-09-27: CONCLUDED 2026-09-27 16:1x. The Warning count went 225 -> 227 -> 233 in about a day, and no repo decomposed a flagged title: repos accumulate the warning and don't act on it. The shape stays; a Warning is free to emit and visible when someone looks. The WATCH ends: it had no event to wait on and would only spend ticks, and the operator is token-constrained, waking repos selectively. Reopen if the operator wants the threshold tuned or the warning dropped.",
       "issued_at": "2026-09-26T22:02:52Z",
       "minted_during": "tick",
       "caused_by": "el-openglo",
-      "last_worked": null,
+      "last_worked": "2026-09-27T16:12:25Z",
       "ticks_blocked": 0,
       "weight": 0
     },
@@ -785,7 +785,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:42:23Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "weight": 1
     },
     {
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "weight": 1
     },
     {
