@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 34
+      "ticks_blocked": 35
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 40,
+      "ticks_blocked": 41,
       "weight": 1
     },
     {
@@ -1359,7 +1359,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:54:01Z",
-      "ticks_blocked": 24,
+      "ticks_blocked": 25,
       "weight": 0
     },
     {
@@ -1382,7 +1382,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:43:45Z",
-      "ticks_blocked": 25
+      "ticks_blocked": 26
     },
     {
       "symbol": "W77",
@@ -1403,7 +1403,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:13:38Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1570,7 +1570,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T22:08:39Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "weight": 0
     },
     {
@@ -1696,25 +1696,22 @@
     {
       "symbol": "W93",
       "title": "Bazel builds nemik's .venv as an artifact (mtools venv.bzl pattern): nemik + vendored pathsforward installed as packages with console scripts; tests and nemik-witnesses --apply call mikemol-paths-forward/nemik-serve from that venv; revert the in-process pf and sys.executable -c workarounds from W90",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [
         "bazel",
         "venv",
         "packaging"
       ],
-      "blocked_on": [
-        "W96",
-        "W97"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: W95+W96+W97 done",
       "issued_at": "2026-09-27T22:19:59Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-09-27T22:24:48Z",
-      "ticks_blocked": 1,
+      "last_worked": "2026-09-27T22:39:31Z",
+      "ticks_blocked": 0,
       "weight": 0
     },
     {
@@ -1783,7 +1780,7 @@
     {
       "symbol": "W97",
       "title": "W93c: tests and witnesses --apply use the venv's console scripts; revert W90 in-process/sys.executable workarounds",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W93"
       ],
@@ -1794,12 +1791,13 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: tests/installed.py runs console scripts from the installed venv (host .venv/bin, or //:.venv in runfiles with PYTHONHOME); test_gate/test_tools/test_web_render/test_witnesses --apply use it; witnesses.py writes via the installed mikemol-paths-forward beside sys.executable, APPLY FAILED if absent; host 64 passed, bazel 13/13",
       "issued_at": "2026-09-27T22:24:43Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-09-27T22:39:31Z",
+      "ticks_blocked": 0,
+      "weight": 1
     }
   ],
   "residue": [

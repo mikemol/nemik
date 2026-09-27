@@ -9,10 +9,11 @@ from __future__ import annotations
 
 import json
 import subprocess
-import sys
 from pathlib import Path
 
 import pytest
+
+import installed
 
 
 def waypoint(sym: str, **kw) -> dict:
@@ -34,10 +35,7 @@ def write_queue(root: Path, repo: str, *wps: dict) -> None:
 
 
 def run(tool: str, root: Path, *argv: str) -> subprocess.CompletedProcess:
-    mod, fn = {"check": ("nemik.check", "main"), "inbound": ("nemik.blocks", "main"),
-               "operator": ("nemik.blocks", "operator_main")}[tool]
-    return subprocess.run([sys.executable, "-c", f"from {mod} import {fn}; {fn}()", "--root", str(root), *argv],
-                          capture_output=True, text=True)
+    return installed.run(f"nemik-{tool}", "--root", str(root), *argv)
 
 
 @pytest.fixture

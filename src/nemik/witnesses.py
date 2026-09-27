@@ -18,6 +18,7 @@ import json
 import os
 import re
 import subprocess
+import sys
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -209,18 +210,22 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
     ap.add_argument("--apply", action="store_true", help="mark waypoints whose witness holds as done")
     args = ap.parse_args(argv)
-    from mikemol.pathsforward.cli import main as pf_main  # in-process: no console script to find (Bazel has none)
+    # nemik:W97: the queue's one writer is the installed mikemol-paths-forward, beside this interpreter
+    # in the same .venv (host, or bazel's //:.venv). Missing is a failure, reported, never a skip.
+    pf = Path(sys.executable).parent / "mikemol-paths-forward"
     for repo, path, sym, query in open_witnesses(args.root):
         verdict, doc, missing = witness(query)
         note = f"  cannot observe {','.join(missing)}" if missing else ""
         print(f"WITNESS {repo}:{sym} {verdict}{note}")
         if args.apply and verdict == "true":
             observed = {k: v for k, v in doc.items() if k != "now"}
-            import contextlib
-            import io
-            with contextlib.redirect_stdout(io.StringIO()):
-                rc = pf_main(["--state", str(path), "--update", sym, "--status", "done", "--evidence-append",
-                              f"witness held at {doc['now']}: {json.dumps(observed, sort_keys=True)}"])
+            if not pf.exists():
+                print(f"APPLY FAILED {repo}:{sym} ({pf} is not installed)", file=sys.stderr)
+                continue
+            rc = subprocess.run([str(pf), "--state", str(path), "--update", sym, "--status", "done",
+                                 "--evidence-append",
+                                 f"witness held at {doc['now']}: {json.dumps(observed, sort_keys=True)}"],
+                                capture_output=True, text=True).returncode
             if rc:
                 print(f"APPLY FAILED {repo}:{sym} (mikemol-paths-forward exit {rc})", file=sys.stderr)
                 continue

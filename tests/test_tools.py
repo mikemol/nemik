@@ -1,5 +1,3 @@
-import subprocess
-import sys
 from pathlib import Path
 
 import pytest
@@ -7,6 +5,14 @@ from rdflib import Graph
 
 from nemik.check import survey
 from nemik.tools import COMMANDS, FILE_COMMANDS, run
+
+import installed
+
+# module:function -> the console script pyproject installs for it
+SCRIPTS = {"nemik.rank:main": "nemik-rank", "nemik.overlaps:main": "nemik-overlaps", "nemik.blocks:main": "nemik-inbound",
+           "nemik.blocks:operator_main": "nemik-operator", "nemik.wake:main": "nemik-wake", "nemik.check:main": "nemik-check",
+           "nemik.metrics:main": "nemik-metrics", "nemik.floorasks:main": "nemik-floor-asks",
+           "nemik.witnesses:main": "nemik-witnesses"}
 
 
 
@@ -36,15 +42,11 @@ def test_cmd_output_is_the_cli_output(name, tmp_path) -> None:
                     "wake": "nemik.wake:main", "check": "nemik.check:main", "metrics": "nemik.metrics:main",
                     "floor-asks": "nemik.floorasks:main", "witnesses": "nemik.witnesses:main"}.get(name, "")
     if name.startswith("pf-"):  # mtools' CLI, pointed at the same queue file
-        cli = subprocess.run([sys.executable, "-c", "import sys; from mikemol.pathsforward.cli import main;"
-                              " sys.exit(main(sys.argv[1:]))", "--state",
-                              str(tmp_path / "a" / ".claude" / "paths-forward.json"), "--" + name[3:]],
-                             capture_output=True, text=True)
+        cli = installed.run("mikemol-paths-forward", "--state",
+                            str(tmp_path / "a" / ".claude" / "paths-forward.json"), "--" + name[3:])
         assert (code, out) == (cli.returncode, cli.stdout)
         return
-    mod, _, attr = mod.partition(":")
-    cli = subprocess.run([sys.executable, "-c", f"import sys; from {mod} import {attr}; {attr}(sys.argv[1:])",
-                          *argv("a"), "--root", str(tmp_path)], capture_output=True, text=True)
+    cli = installed.run(SCRIPTS[mod], *argv("a"), "--root", str(tmp_path))
     assert (code, out) == (cli.returncode, cli.stdout)
 
 

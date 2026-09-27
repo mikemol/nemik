@@ -4,11 +4,12 @@ by another waypoint's shape (the operator's occlusion report, nemik:W77)."""
 import json
 import socket
 import subprocess
-import sys
 import time
 from pathlib import Path
 
 import pytest
+
+import installed
 
 sync_api = pytest.importorskip("playwright.sync_api")
 
@@ -30,8 +31,7 @@ def server(tmp_path):
     with socket.socket() as s:
         s.bind(("127.0.0.1", 0))
         port = s.getsockname()[1]
-    proc = subprocess.Popen([sys.executable, "-c", "import sys; from nemik.serve import main; sys.argv[0] = 'nemik-serve'; main()",
-                             "--root", str(tmp_path), "--port", str(port)],
+    proc = installed.popen("nemik-serve", "--root", str(tmp_path), "--port", str(port),
                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     for _ in range(50):
         try:

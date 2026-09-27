@@ -76,9 +76,11 @@ def test_runner_applies_only_holding_witnesses(tmp_path, monkeypatch, capsys) ->
     ]
     state.write_text(json.dumps({"version": 1, "project_root": str(tmp_path / "r"), "counter": 2,
                                  "waypoints": wps, "residue": []}))
-    monkeypatch.setattr(sys, "argv", ["nemik-witnesses", "--root", str(tmp_path), "--apply"])
-    witnesses.main()
-    out = capsys.readouterr().out
+    import installed  # nemik:W97: as installed, so --apply reaches the installed mikemol-paths-forward
+
+    r = installed.run("nemik-witnesses", "--root", str(tmp_path), "--apply")
+    assert r.returncode == 0 and "APPLY FAILED" not in r.stderr, r.stderr
+    out = r.stdout
     assert "WITNESS r:W1 true" in out and "WITNESS r:W2 false" in out
     after = {w["symbol"]: w for w in json.loads(state.read_text())["waypoints"]}
     assert after["W1"]["status"] == "done" and "witness held" in after["W1"]["evidence"]
@@ -152,9 +154,11 @@ def test_apply_writes_letters_to_waiting_repos(tmp_path, monkeypatch, capsys) ->
     queue("b", [{"symbol": "W5", "title": "foreign waiter", "status": "blocked", "blocked_on": ["a:W1"],
                  "blocked_kind": "agent"}])
     queue("c", [{"symbol": "W7", "title": "unrelated", "status": "ready"}])
-    monkeypatch.setattr(sys, "argv", ["nemik-witnesses", "--root", str(tmp_path), "--apply"])
-    witnesses.main()
-    out = capsys.readouterr().out
+    import installed  # nemik:W97: as installed, so --apply reaches the installed mikemol-paths-forward
+
+    r = installed.run("nemik-witnesses", "--root", str(tmp_path), "--apply")
+    assert r.returncode == 0 and "APPLY FAILED" not in r.stderr, r.stderr
+    out = r.stdout
     assert out.count("WOKE ") == 2
     (la,), (lb,) = list((tmp_path / "a" / "inbox").iterdir()), list((tmp_path / "b" / "inbox").iterdir())
     assert "W2" in la.read_text() and "a:W1" in lb.read_text() and "W5" in lb.read_text()
