@@ -30,11 +30,18 @@ def test_cmd_output_is_the_cli_output(name, tmp_path) -> None:
                        "touches": ["x"]}], "residue": []}))
     fn, argv, _ = {**COMMANDS, **FILE_COMMANDS}[name]
     code, out = run(name, _graph(tmp_path), str(tmp_path), "a")
-    mod, _, attr = {"rank": "nemik.rank:main", "goals": "nemik.rank:main", "rank-check": "nemik.rank:main",
+    mod = {"rank": "nemik.rank:main", "goals": "nemik.rank:main", "rank-check": "nemik.rank:main",
                     "overlaps": "nemik.overlaps:main", "overlaps-cross": "nemik.overlaps:main",
                     "inbound": "nemik.blocks:main", "operator": "nemik.blocks:operator_main",
                     "wake": "nemik.wake:main", "check": "nemik.check:main", "metrics": "nemik.metrics:main",
-                    "floor-asks": "nemik.floorasks:main", "witnesses": "nemik.witnesses:main"}[name].partition(":")
+                    "floor-asks": "nemik.floorasks:main", "witnesses": "nemik.witnesses:main"}.get(name, "")
+    if name.startswith("pf-"):  # mtools' CLI, pointed at the same queue file
+        cli = subprocess.run([str(Path(sys.executable).parent / "mikemol-paths-forward"), "--state",
+                              str(tmp_path / "a" / ".claude" / "paths-forward.json"), "--" + name[3:]],
+                             capture_output=True, text=True)
+        assert (code, out) == (cli.returncode, cli.stdout)
+        return
+    mod, _, attr = mod.partition(":")
     cli = subprocess.run([sys.executable, "-c", f"import sys; from {mod} import {attr}; {attr}(sys.argv[1:])",
                           *argv("a"), "--root", str(tmp_path)], capture_output=True, text=True)
     assert (code, out) == (cli.returncode, cli.stdout)

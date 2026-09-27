@@ -361,9 +361,10 @@ async function goals() {
 // Repo picker above.
 const TOOLS = { rank: true, goals: true, "rank-check": true, overlaps: false, "overlaps-cross": false,
                 inbound: false, operator: false, wake: false,
-                check: false, metrics: false, "floor-asks": false, witnesses: false };
+                check: false, metrics: false, "floor-asks": false, witnesses: false,
+                "pf-queue": true, "pf-check": true, "pf-overlaps": true };
 document.getElementById("tool").innerHTML += Object.entries(TOOLS).map(([t, r]) =>
-  `<option value="${t}">nemik-${t}${r ? " (repo)" : ""}</option>`).join("");
+  `<option value="${t}">${t.startsWith("pf-") ? "mikemol-paths-forward --" + t.slice(3) : "nemik-" + t}${r ? " (repo)" : ""}</option>`).join("");
 async function tool() {
   const t = document.getElementById("tool").value, repo = document.getElementById("repo").value;
   const out = document.getElementById("toolout"), note = document.getElementById("toolnote");

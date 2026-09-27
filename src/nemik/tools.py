@@ -41,6 +41,34 @@ FILE_COMMANDS: dict[str, tuple[Callable[..., None], Callable[[str | None], list[
     "witnesses": (witnesses.main, lambda r: [], False),
 }
 
+
+def _pf(flag: str) -> Callable[..., None]:
+    """nemik:W83: mtools' own read-only view of one repo's queue, through the pinned library (the same
+    code as the mikemol-paths-forward CLI, no subprocess). argv arrives as [repo, "--root", root]."""
+
+    def run_pf(argv: list[str]) -> None:
+        from pathlib import Path
+
+        from mikemol.pathsforward.cli import main as pf_main
+
+        from nemik.check import QUEUE, workstream_files
+
+        repo, root = argv[0], Path(argv[2])
+        paths = [p for r, p in workstream_files(root, QUEUE) if r == repo]
+        if not paths:
+            print(f"no queue for {repo} under {root}")
+            raise SystemExit(2)
+        raise SystemExit(pf_main(["--state", str(paths[0]), flag]))
+
+    return run_pf
+
+
+FILE_COMMANDS.update({
+    "pf-queue": (_pf("--queue"), lambda r: [r or ""], True),
+    "pf-check": (_pf("--check"), lambda r: [r or ""], True),
+    "pf-overlaps": (_pf("--overlaps"), lambda r: [r or ""], True),
+})
+
 # redirect_stdout swaps a process-wide object, so two requests at once would interleave.
 _stdout = threading.Lock()
 
