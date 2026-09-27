@@ -66,8 +66,12 @@ dependencies = ["nemik", "mikemol-pathsforward @ git+https://github.com/mikemol/
 nemik = { path = "../nemik" }
 
 [tool.uv]
-override-dependencies = ["mikemol-pathsforward @ git+https://github.com/mikemol/mtools.git@<sha>#subdirectory=pathsforward"]
+override-dependencies = ["mikemol-pathsforward @ git+https://github.com/mikemol/mtools.git@<sha>#subdirectory=pathsforward ; python_full_version >= '3.13'"]
 ```
+
+Keep the marker if your project supports Python below 3.13. Overrides apply to every
+Python version your project resolves for, and pathsforward itself requires 3.13 or later, so
+without the marker the lock fails for the older versions (summit 3abbe17).
 
 Checked with summit's pin, fc74848, which is older than nemik's: `uv lock` resolves, and
 `nemik-check` and `nemik-floor-asks` both run.

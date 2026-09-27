@@ -32,9 +32,9 @@ wheels = [
 [[package]]
 name = "mikemol-pathsforward"
 version = "0.1.0"
-source = { path = "vendor/wheels/mikemol_pathsforward-0.1.0+8d9ea4e-py3-none-any.whl" }
+source = { path = "vendor/wheels/mikemol_pathsforward-0.1.0+345c06c-py3-none-any.whl" }
 wheels = [
-    { filename = "mikemol_pathsforward-0.1.0+8d9ea4e-py3-none-any.whl", hash = "sha256:4d4cad2c29998ef197cc7920fd370c00d265d1385126c59d58ea4b811ad2ff11" },
+    { filename = "mikemol_pathsforward-0.1.0+345c06c-py3-none-any.whl", hash = "sha256:b276ecbe8193b30261a2761e7de669bc299edd91d10f0232c719cb001dad68c1" },
 ]
 
 [[package]]
@@ -59,7 +59,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "mikemol-pathsforward", path = "vendor/wheels/mikemol_pathsforward-0.1.0+8d9ea4e-py3-none-any.whl" },
+    { name = "mikemol-pathsforward", path = "vendor/wheels/mikemol_pathsforward-0.1.0+345c06c-py3-none-any.whl" },
     { name = "paperkit", marker = "extra == 'docs'", git = "https://github.com/mikemol/paperkit.git?rev=b5877102af3b48005fde814416bff5b8f06ba5cd" },
     { name = "pyshacl", specifier = ">=0.26" },
     { name = "rdflib", specifier = ">=7" },
