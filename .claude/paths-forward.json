@@ -1038,7 +1038,6 @@
         "conditions"
       ],
       "blocked_on": [
-        "mtools:W131",
         "mtools:W132"
       ],
       "blocked_kind": "agent",
@@ -1047,8 +1046,8 @@
       "issued_at": "2026-09-27T17:31:04Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-09-27T17:32:12Z",
-      "ticks_blocked": 3
+      "last_worked": "2026-09-27T18:06:57Z",
+      "ticks_blocked": 0
     },
     {
       "symbol": "W60",
@@ -1141,23 +1140,21 @@
     {
       "symbol": "W64",
       "title": "nemik-witnesses [--apply] runner: read waypoint.witness fleet-wide, mark true done with facts as evidence, report undefined",
-      "status": "blocked",
+      "status": "ready",
       "enables": [
         "W60"
       ],
       "touches": [
         "conditions"
       ],
-      "blocked_on": [
-        "mtools:W131"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Build nemik-witnesses [--apply] over waypoint.witness (mtools 4de0da4)",
       "evidence": "",
       "issued_at": "2026-09-27T17:53:34Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-09-27T17:53:34Z",
+      "last_worked": "2026-09-27T18:06:57Z",
       "ticks_blocked": 0
     },
     {
