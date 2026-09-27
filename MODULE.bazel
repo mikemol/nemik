@@ -51,3 +51,9 @@ http_archive(
     build_file_content = """filegroup(name = "files", srcs = glob(["**"]), visibility = ["//visibility:public"])
 exports_files(["chrome-headless-shell"])""",
 )
+
+# nemik:W100: paperkit, which gates ARCHITECTURE.md, vendored the same way (vendor/wheels/README.md).
+vendored_wheel(
+    name = "paperkit",
+    wheel = "//:vendor/wheels/paperkit-0.1.0+b587710-py3-none-any.whl",
+)

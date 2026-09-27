@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 37
+      "ticks_blocked": 38
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 43,
+      "ticks_blocked": 44,
       "weight": 1
     },
     {
@@ -1359,7 +1359,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:54:01Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 28,
       "weight": 0
     },
     {
@@ -1382,7 +1382,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:43:45Z",
-      "ticks_blocked": 28
+      "ticks_blocked": 29
     },
     {
       "symbol": "W77",
@@ -1403,7 +1403,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:13:38Z",
-      "ticks_blocked": 21,
+      "ticks_blocked": 22,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1570,7 +1570,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T22:08:39Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "weight": 0
     },
     {
@@ -1654,23 +1654,21 @@
     {
       "symbol": "W91",
       "title": "Bazel: declare opa and headless Chromium as hashed http_archive inputs, so witness and render tests run in the sandbox instead of skipping (mtools pandoc precedent)",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W85"
       ],
       "touches": [
         "build"
       ],
-      "blocked_on": [
-        "W100"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-09-27: measured in W90: sandbox currently reaches host opa + host playwright cache; also paperkit for test_architecture",
+      "evidence": "2026-09-27: measured in W90: sandbox currently reaches host opa + host playwright cache; also paperkit for test_architecture | 2026-09-27: W98 opa, W99 chromium, W100 paperkit all hashed inputs",
       "issued_at": "2026-09-27T22:08:39Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-09-27T22:55:36Z",
+      "last_worked": "2026-09-27T23:00:30Z",
       "ticks_blocked": 0,
       "weight": 1
     },
@@ -1847,7 +1845,7 @@
     {
       "symbol": "W100",
       "title": "W91c: paperkit as a Bazel input so test_architecture runs under bazel test instead of being excluded",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W91"
       ],
@@ -1858,12 +1856,13 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: vendor/wheels/paperkit-0.1.0+b587710 built at the pinned commit (README records how); pyproject source switched from git to the vendored path; MODULE.bazel vendored_wheel @paperkit; test_architecture no longer excluded: bazel 14/14, its log '1 passed' (not skipped)",
       "issued_at": "2026-09-27T22:55:34Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-09-27T23:00:29Z",
+      "ticks_blocked": 0,
+      "weight": 2
     }
   ],
   "residue": [

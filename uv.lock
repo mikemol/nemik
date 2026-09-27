@@ -118,7 +118,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "mikemol-pathsforward", path = "vendor/wheels/mikemol_pathsforward-0.1.0+345c06c-py3-none-any.whl" },
-    { name = "paperkit", marker = "extra == 'docs'", git = "https://github.com/mikemol/paperkit.git?rev=b5877102af3b48005fde814416bff5b8f06ba5cd" },
+    { name = "paperkit", marker = "extra == 'docs'", path = "vendor/wheels/paperkit-0.1.0+b587710-py3-none-any.whl" },
     { name = "pyshacl", specifier = ">=0.26" },
     { name = "rdflib", specifier = ">=7" },
 ]
@@ -154,7 +154,18 @@ wheels = [
 [[package]]
 name = "paperkit"
 version = "0.1.0"
-source = { git = "https://github.com/mikemol/paperkit.git?rev=b5877102af3b48005fde814416bff5b8f06ba5cd#b5877102af3b48005fde814416bff5b8f06ba5cd" }
+source = { path = "vendor/wheels/paperkit-0.1.0+b587710-py3-none-any.whl" }
+wheels = [
+    { filename = "paperkit-0.1.0+b587710-py3-none-any.whl", hash = "sha256:e3b529f2ee8e53751bdaa08765c3ddc7e73f6d0bf8d3c256fb8d97e1bdc95db6" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "pikepdf", marker = "extra == 'render'", specifier = ">=10.12" },
+    { name = "pillow", marker = "extra == 'render'", specifier = ">=12.3" },
+    { name = "python-docx", marker = "extra == 'render'", specifier = ">=1.2" },
+]
+provides-extras = ["render"]
 
 [[package]]
 name = "playwright"
