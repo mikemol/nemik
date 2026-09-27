@@ -104,3 +104,5 @@
 2026-09-27T17:20:28Z  tick  W55  asked     -         "sent to mtools-65; awaiting their waypoint"
 2026-09-27T17:20:42Z  tick  W55  refiled   -         "mtools filed it as mtools:W125"
 2026-09-27T17:24:26Z  tick  W53  done      unblock   "nemik-overlaps; closes W49"  evidence=7cb9d19
+2026-09-27T17:25:45Z  tick  W54  atomized  collapse  "ATOMIZE: W56 data, W57 render"
+2026-09-27T17:26:35Z  tick  W56  done      unblock   "satisfied edges + open_blockers in graph.json"  evidence=f98a672

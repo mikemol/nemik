@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 55,
+  "counter": 57,
   "waypoints": [
     {
       "symbol": "W1",
@@ -280,7 +280,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 7
+      "ticks_blocked": 8
     },
     {
       "symbol": "W18",
@@ -812,7 +812,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "weight": 1
     },
     {
@@ -928,19 +928,22 @@
     {
       "symbol": "W54",
       "title": "nemik views: render satisfied (done) blockers as faded edges; count only open blockers",
-      "status": "ready",
+      "status": "blocked",
       "enables": [],
       "touches": [
         "web-ui"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W56",
+        "W57"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-09-27T17:20:18Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-27T17:25:45Z",
       "ticks_blocked": 0,
       "weight": 0
     },
@@ -962,7 +965,47 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T17:20:42Z",
-      "ticks_blocked": 1
+      "ticks_blocked": 2
+    },
+    {
+      "symbol": "W56",
+      "title": "graph.json: edges carry satisfied (upstream end done); nodes carry open_blockers count",
+      "status": "done",
+      "enables": [
+        "W54"
+      ],
+      "touches": [
+        "serve"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-09-27: commit f98a672; live: W17 open_blockers=1 (W47), 378/775 fleet edges satisfied; tests/test_satisfied_edges.py; pytest 31",
+      "issued_at": "2026-09-27T17:25:45Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-09-27T17:26:35Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W57",
+      "title": "web view draws satisfied edges faded",
+      "status": "ready",
+      "enables": [
+        "W54"
+      ],
+      "touches": [
+        "web-ui"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T17:25:45Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
