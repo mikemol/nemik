@@ -1236,7 +1236,7 @@
     {
       "symbol": "W69",
       "title": "nemik-serve: rebuild off the request path (background, stale-while-rebuilding); /metrics and probes never block on the rebuild lock",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "serve"
@@ -1244,11 +1244,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: commit e512a98; Model.poke(): first request builds, later changes rebuild in a daemon thread and requests serve the last payload; /metrics skips poke; test_poke_serves_stale_while_rebuilding; pytest 41",
       "issued_at": "2026-09-27T18:44:08Z",
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W146",
-      "last_worked": null,
+      "last_worked": "2026-09-27T18:44:42Z",
       "ticks_blocked": 0
     },
     {
