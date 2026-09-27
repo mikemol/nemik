@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 20
+      "ticks_blocked": 21
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 26,
+      "ticks_blocked": 27,
       "weight": 1
     },
     {
@@ -1019,7 +1019,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T18:51:55Z",
-      "ticks_blocked": 12
+      "ticks_blocked": 13
     },
     {
       "symbol": "W59",
@@ -1227,7 +1227,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T18:24:59Z",
-      "ticks_blocked": 16
+      "ticks_blocked": 17
     },
     {
       "symbol": "W69",
@@ -1293,10 +1293,8 @@
         "web-ui"
       ],
       "blocked_on": [
-        "W81",
         "W82",
-        "W83",
-        "W84"
+        "W83"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
@@ -1367,7 +1365,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:54:01Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "weight": 0
     },
     {
@@ -1390,7 +1388,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:43:45Z",
-      "ticks_blocked": 11
+      "ticks_blocked": 12
     },
     {
       "symbol": "W77",
@@ -1411,7 +1409,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T20:43:50Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1499,7 +1497,7 @@
     {
       "symbol": "W82",
       "title": "/cmd for file-reading commands: check, metrics, floor-asks (when summit present), witnesses dry-run (on click only; observers hit the network)",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W72"
       ],
@@ -1509,11 +1507,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: 2249c04: FILE_COMMANDS; parity test now 12 commands; 59 passed; smoke: check/floor-asks/witnesses/metrics exit 0. witnesses shows undefined unless NEMIK_VM_URL is set in the server env",
       "issued_at": "2026-09-27T20:56:22Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-27T21:09:23Z",
       "ticks_blocked": 0,
       "weight": 1
     },
@@ -1575,7 +1573,8 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 0
     }
   ],
   "residue": [
