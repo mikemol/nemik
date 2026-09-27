@@ -32,9 +32,9 @@ wheels = [
 [[package]]
 name = "mikemol-pathsforward"
 version = "0.1.0"
-source = { path = "vendor/wheels/mikemol_pathsforward-0.1.0+33005c1-py3-none-any.whl" }
+source = { path = "vendor/wheels/mikemol_pathsforward-0.1.0+8c24617-py3-none-any.whl" }
 wheels = [
-    { filename = "mikemol_pathsforward-0.1.0+33005c1-py3-none-any.whl", hash = "sha256:9ac1891edec5a859b8ea6f1d7f63622a247e2fd92238c4c35c82de9de7b9ba40" },
+    { filename = "mikemol_pathsforward-0.1.0+8c24617-py3-none-any.whl", hash = "sha256:44975d072d7238ef6d3d9ca3982524e371b441b6c54a37b9e702422ec9781c92" },
 ]
 
 [[package]]
@@ -54,7 +54,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "mikemol-pathsforward", path = "vendor/wheels/mikemol_pathsforward-0.1.0+33005c1-py3-none-any.whl" },
+    { name = "mikemol-pathsforward", path = "vendor/wheels/mikemol_pathsforward-0.1.0+8c24617-py3-none-any.whl" },
     { name = "pyshacl", specifier = ">=0.26" },
     { name = "rdflib", specifier = ">=7" },
 ]

@@ -19,7 +19,7 @@
       "minted_during": "interrupt",
       "caused_by": "summit:W105",
       "last_worked": "2026-09-26T22:09:44Z",
-      "ticks_blocked": 8
+      "ticks_blocked": 9
     },
     {
       "symbol": "W2",
@@ -321,23 +321,21 @@
     {
       "symbol": "W20",
       "title": "mikemol-pathsforward's rank_reason is read (render.py) but never written; ordered() only sorts by status bucket at file order, no leverage computation over enables/blocked_on (substrate-c6 found this; confirmed against our vendored copy). Relayed to mtools (mtools/inbox/2026-09-26-substrate-rank-reason-unwritten.md), not nemik's to fix. Every tick's §3 judgment is currently done by hand in the turn because of this -- exactly the failure mode the operator called out on this queue",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [
         "paths-forward-loop",
         "upstream"
       ],
-      "blocked_on": [
-        "mtools:W51"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Watch mtools/summit for a response; when rank_reason is populated upstream, bump the vendored wheel and stop hand-deriving §3 each tick",
-      "evidence": "2026-09-26: correction: this was left status=ready despite being described as blocked in every tick prompt since filing; fixed now | 2026-09-26: mtools claimed this as mtools:W51 (enables nemik:W20), confirmed independently against source, queued to test against substrate's 62-waypoint state before shipping",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-09-26: correction: this was left status=ready despite being described as blocked in every tick prompt since filing; fixed now | 2026-09-26: mtools claimed this as mtools:W51 (enables nemik:W20), confirmed independently against source, queued to test against substrate's 62-waypoint state before shipping | 2026-09-27: mtools-65 reports W51 landed at 8c24617 on origin/main; 285 pytest/ruff/mypy clean, full preflight green | 2026-09-27: Rebuilt vendor wheel at mtools 8c24617 (mikemol_pathsforward-0.1.0+8c24617-py3-none-any.whl), pyproject.toml + vendor/wheels/README.md updated, uv sync clean, nemik-check --render OK, pytest 18/18 green. Unblocked and closed same tick as mtools' landing report.",
       "issued_at": "2026-09-26T21:34:31Z",
       "minted_during": "tick",
       "caused_by": "substrate",
-      "last_worked": "2026-09-26T22:10:21Z",
-      "ticks_blocked": 7
+      "last_worked": "2026-09-27T00:16:21Z",
+      "ticks_blocked": 0
     },
     {
       "symbol": "W22",
@@ -501,6 +499,9 @@
   ],
   "job_id": "bc056492",
   "heartbeat": "2026-09-27T00:04:47Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-09-27T00:12:37Z"
+  },
   "predecessor_job_id": "69c7ac3d"
 }

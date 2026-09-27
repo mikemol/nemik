@@ -14,4 +14,7 @@ pyproject.toml's `tool.uv.sources` path to match.
 
 History: 9236d5e (nemik:W6, superseded) -> 8a279a1 (nemik:W10: --enables clear, mtools:W40) ->
 3cb24fb (nemik:W10: --init, mtools:W42) -> 33005c1 (nemik:W10: --ledger accepts `-` as
-the queue-level symbol, since argparse eats a bare -- itself; mtools:W43).
+the queue-level symbol, since argparse eats a bare -- itself; mtools:W43) -> 8c24617
+(nemik:W20: model.leverage()/describe_rank() added; ordered() sorts by (status, -leverage,
+file order); render.queue() falls back to describe_rank when rank_reason is unset;
+mtools:W51).
