@@ -90,14 +90,43 @@ def main() -> None:
     ap.add_argument("repo", help="the workstream whose ready items to rank")
     ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
     ap.add_argument("--json", action="store_true", help="machine-readable output")
+    ap.add_argument("--check", action="store_true",
+                    help="exit 1 if the ready item mtools works next is outweighed by another (drift witness)")
     args = ap.parse_args()
     g = Graph()
     for _, qg, _ in survey(args.root):
         if qg is not None:
             g += qg
-    rows = rank(g, args.repo, load_weights())
+    weights = load_weights()
+    if args.check:
+        d = drift(g, args.repo, weights)
+        if d is None:
+            print(f"rank: OK {args.repo}: next ready item carries the top cross-repo weight")
+            raise SystemExit(0)
+        nxt, top = d
+        print(f"rank: DRIFT {args.repo}: next is {nxt['symbol']} ({nxt['weight']}) "
+              f"but {top['symbol']} carries {top['weight']}")
+        raise SystemExit(1)
+    rows = rank(g, args.repo, weights)
     if args.json:
         print(json.dumps(rows, indent=2))
         return
     for r in rows:
         print(f"{r['symbol']:6} {r['weight']:4}  {r['title'][:80]}")
+
+
+def drift(g: Graph, repo: str, weights: Weights) -> tuple[dict, dict] | None:
+    """(next, heavier) when the ready item mtools puts first is outweighed by another ready item.
+
+    ⚑ "Next" is mtools' own order (`nemik:queuePosition`, from `model.ordered`), not this
+    module's: the witness compares what the session WILL work against what nemik-rank says it
+    should, so it fails exactly when the two disagree on the top item.
+    """
+    rows = rank(g, repo, weights)
+    if not rows:
+        return None
+    ws = workstream_uri(repo)
+    pos = {str(g.value(n, NEMIK.symbol)): int(g.value(n, NEMIK.queuePosition))
+           for n in g.subjects(NEMIK.workstream, ws) if g.value(n, NEMIK.queuePosition) is not None}
+    nxt = min(rows, key=lambda r: pos.get(r["symbol"], 1 << 30))
+    return (nxt, rows[0]) if rows[0]["weight"] > nxt["weight"] else None

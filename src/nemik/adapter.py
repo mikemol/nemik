@@ -84,9 +84,13 @@ def queue_graph(repo: str, state_path: Path, known: frozenset[str] = frozenset()
     g = bind(Graph())
     ws = workstream_uri(repo)
     g.add((ws, RDF.type, NEMIK.Workstream))
+    # ⚑ mtools' own order (what the session works next), carried as data so nemik-rank can compare
+    # it to cross-repo weight without a second reader of the state file (nemik:W39).
+    position = {id(w): i for i, w in enumerate(model.ordered(state.waypoints))}
     for w in state.waypoints:
         symbol = model.text(w, "symbol")
         node = waypoint_uri(repo, symbol)
+        g.add((node, NEMIK.queuePosition, Literal(position[id(w)])))
         status = model.text(w, "status")
         g.add((node, RDF.type, OSLC_CM.ChangeRequest))
         g.add((node, NEMIK.workstream, ws))

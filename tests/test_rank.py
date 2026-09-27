@@ -69,3 +69,26 @@ def test_rank_orders_ready_items_by_weight_then_symbol() -> None:
     rows = rank(g, "a", W)
     assert [r["symbol"] for r in rows] == ["W9", "W2"]  # blocked W3 excluded
     assert rows[0]["weight"] == 8
+
+
+def _ready(g: Graph, repo: str, sym: str, pos: int):
+    from nemik.adapter import workstream_uri
+    n = _wp(g, repo, sym)
+    g.add((n, NEMIK.workstream, workstream_uri(repo)))
+    g.add((n, NEMIK.symbol, Literal(sym)))
+    g.add((n, NEMIK.queuePosition, Literal(pos)))
+    return n
+
+
+def test_drift_fires_when_next_item_is_outweighed_and_clears_when_it_leads() -> None:
+    from nemik.rank import drift
+
+    g = Graph()
+    first, heavy = _ready(g, "a", "W1", 0), _ready(g, "a", "W2", 1)
+    stalled = _wp(g, "b", "W9", "blocked")
+    g.add((stalled, NEMIK.waitsFor, heavy))
+    nxt, top = drift(g, "a", W)
+    assert (nxt["symbol"], top["symbol"]) == ("W1", "W2")
+    g.remove((stalled, NEMIK.waitsFor, heavy))
+    g.add((stalled, NEMIK.waitsFor, first))
+    assert drift(g, "a", W) is None
