@@ -1398,16 +1398,18 @@
         "web"
       ],
       "blocked_on": [
-        "luthen-observability"
+        "nemik-witnesses",
+        "luthen-observability:W152"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "2026-09-27: 40fc94b: text-valign bottom + text-background; dagre nodeDimensionsIncludeLabels | 2026-09-27: verified in headless Chromium (playwright): substrate row at 3x, every label below its node and clear of neighbours | 2026-09-27: operator saw it unfixed: deployed image pins aad664d (20 behind 40fc94b); asked luthen to rebuild | 2026-09-27: luthen: ship classifier-denied in their session, routed to operator; follower not stalled | 2026-09-27: operator: push=deploy (luthen ships on push, inbox 2026-09-26); not an operator act. No luthen_image_follow_ship{nemik} series at 20:45Z; asked luthen to make the follow run outside a Claude turn",
+      "evidence": "2026-09-27: 40fc94b: text-valign bottom + text-background; dagre nodeDimensionsIncludeLabels | 2026-09-27: verified in headless Chromium (playwright): substrate row at 3x, every label below its node and clear of neighbours | 2026-09-27: operator saw it unfixed: deployed image pins aad664d (20 behind 40fc94b); asked luthen to rebuild | 2026-09-27: luthen: ship classifier-denied in their session, routed to operator; follower not stalled | 2026-09-27: operator: push=deploy (luthen ships on push, inbox 2026-09-26); not an operator act. No luthen_image_follow_ship{nemik} series at 20:45Z; asked luthen to make the follow run outside a Claude turn | 2026-09-27: luthen W152: image_follow as an unattended unit (operator reviews before enable); any nemik rollout from now ships main, which contains 40fc94b",
       "issued_at": "2026-09-27T20:09:11Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-09-27T20:43:11Z",
-      "ticks_blocked": 0
+      "last_worked": "2026-09-27T20:43:50Z",
+      "ticks_blocked": 0,
+      "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
       "symbol": "W78",
