@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 77,
+  "counter": 80,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 13
+      "ticks_blocked": 14
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "weight": 1
     },
     {
@@ -1019,7 +1019,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T18:51:55Z",
-      "ticks_blocked": 5
+      "ticks_blocked": 6
     },
     {
       "symbol": "W59",
@@ -1227,7 +1227,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T18:24:59Z",
-      "ticks_blocked": 9
+      "ticks_blocked": 10
     },
     {
       "symbol": "W69",
@@ -1268,19 +1268,22 @@
     {
       "symbol": "W71",
       "title": "Per-repo priority view: top goal G (no in-repo downstream, ranked by cross-repo weight), its frontier dG (open leaves; on-deck = top workable leaf), and dDG (what frontier leaves wait on outside the repo); path clear iff dDG is empty",
-      "status": "ready",
+      "status": "blocked",
       "enables": [],
       "touches": [
         "web-ui"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W79",
+        "W80"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-09-27T19:29:49Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-09-27T19:54:01Z",
+      "last_worked": "2026-09-27T20:23:40Z",
       "ticks_blocked": 0,
       "weight": 0
     },
@@ -1362,7 +1365,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:54:01Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "weight": 0
     },
     {
@@ -1385,7 +1388,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:43:45Z",
-      "ticks_blocked": 4
+      "ticks_blocked": 5
     },
     {
       "symbol": "W77",
@@ -1403,6 +1406,64 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T20:11:35Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W78",
+      "title": "Playwright dev dep + screenshot regression test for the web view (labels clear of nodes)",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "web"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T20:23:29Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W79",
+      "title": "rank.goals(repo): top goal G (no in-repo downstream, by cross-repo weight) with dG, on-deck leaf, dDG; nemik-rank --goals prints it",
+      "status": "ready",
+      "enables": [
+        "W71"
+      ],
+      "touches": [
+        "cli"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T20:23:40Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W80",
+      "title": "Dashboard: /goals/<repo> + per-repo on-deck/path-clear line in the view",
+      "status": "ready",
+      "enables": [
+        "W71"
+      ],
+      "touches": [
+        "web"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T20:23:40Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": null,
       "ticks_blocked": 0
     }
   ],
