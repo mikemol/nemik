@@ -1038,7 +1038,8 @@
         "conditions"
       ],
       "blocked_on": [
-        "mtools:W132"
+        "mtools:W132",
+        "mtools:W133"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
@@ -1046,8 +1047,8 @@
       "issued_at": "2026-09-27T17:31:04Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-09-27T18:06:57Z",
-      "ticks_blocked": 1
+      "last_worked": "2026-09-27T18:09:11Z",
+      "ticks_blocked": 0
     },
     {
       "symbol": "W60",
