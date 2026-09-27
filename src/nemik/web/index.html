@@ -37,6 +37,11 @@ aside h2 { font-size: 14px; margin: 16px 0 6px; }
 .Violation { color: var(--blocked); } .Warning { color: var(--interrupt); }
 dl { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; margin: 0; }
 dt { color: var(--muted); }
+/* Links sat at the browser's default dark blue, unreadable on the dark panel. */
+aside a { color: var(--ink); text-decoration: underline dotted var(--muted); }
+/* A goal's title is too long for the two-column grid: stack title over its status. */
+#goals dl { display: block; }
+#goals dd { margin: 0 0 8px 12px; }
 @media (max-width: 800px) { main { grid-template-columns: 1fr; height: auto; } #cy { height: 70vh; } aside { border-left: 0; border-top: 1px solid var(--line); } }
 </style>
 </head>
@@ -58,6 +63,8 @@ dt { color: var(--muted); }
       <span style="color:var(--interrupt)">idle</span>,
       <span style="color:var(--blocked)">asleep</span>,
       unmarked if nothing is waiting on it (no roster row).</p>
+    <h2>Goals</h2>
+    <div id="goals" class="stat">Pick a repo.</div>
     <h2>Wake</h2>
     <div id="wake" class="stat">…</div>
     <h2>Selected</h2>
@@ -260,7 +267,7 @@ async function load() {
   const repos = [...new Set(data.nodes.map(n => n.repo))].sort();
   sel.innerHTML = '<option value="">all</option>' + repos.map(r => `<option${r === cur ? " selected" : ""}>${esc(r)}</option>`).join("");
   await wake();  // draw() reads `liveness`, populated by wake() -- fetch it first, not alongside.
-  draw(); findings();
+  draw(); findings(); goals();
 }
 
 // Also feeds `liveness` (repo -> asleep/idle/awake) that draw() uses to color repo boxes, so the
@@ -278,6 +285,20 @@ async function wake() {
     + `<p class="stat">Liveness: ${esc(w.liveness)}.</p>`;
 }
 
+// nemik:W80: the selected repo's goals, each with its on-deck leaf and whether its path is clear
+// (nothing outside the repo left to wait on).
+async function goals() {
+  const el = document.getElementById("goals"), repo = document.getElementById("repo").value;
+  if (!repo) { el.textContent = "Pick a repo."; return; }
+  let gs;
+  try { gs = await (await fetch("goals/" + encodeURIComponent(repo))).json(); } catch (e) { el.textContent = "unavailable"; return; }
+  el.innerHTML = gs.length ? "<dl>" + gs.map(g => `<dt>${citeLink(repo + ":" + g.goal)} ${esc(g.title.slice(0, 60))}</dt>
+    <dd>on deck ${g.on_deck ? citeLink(g.on_deck) : "none"}; path ${g.clear
+      ? '<span style="color:var(--ready)">clear</span>'
+      : '<span style="color:var(--blocked)">waits on</span> ' + g.outside.map(o => /^[\w.-]+:W\d+$/.test(o) ? citeLink(o) : esc(o)).join(", ")}</dd>`).join("") + "</dl>"
+    : "No open goals.";
+}
+
 // A cite in the Wake panel is a link: it selects that waypoint in the graph and shows its detail.
 function citeLink(cite) {
   return `<a href="#" data-cite="${esc(cite)}"><code>${esc(cite)}</code></a>`;
@@ -289,11 +310,11 @@ function focusCite(cite) {
   if (el && el.length) { cy.elements().unselect(); el.select(); cy.animate({ center: { eles: el }, zoom: Math.max(cy.zoom(), 1.2) }); }
   detail(n);
 }
-document.getElementById("wake").addEventListener("click", ev => {
+for (const id of ["wake", "goals"]) document.getElementById(id).addEventListener("click", ev => {
   const a = ev.target.closest("[data-cite]");
   if (a) { ev.preventDefault(); focusCite(a.dataset.cite); }
 });
-document.getElementById("repo").onchange = () => { draw(); findings(); };
+document.getElementById("repo").onchange = () => { draw(); findings(); goals(); };
 document.getElementById("showDone").onchange = draw;
 document.getElementById("showNoise").onchange = draw;
 load();

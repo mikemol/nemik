@@ -234,6 +234,12 @@ def handler(model: Model) -> type[BaseHTTPRequestHandler]:
                 doc = model.doc["inbound"]
                 body = [b for b in doc if not repo or b["blocker"] == repo]
                 self.send(200, "application/json", json.dumps(body, indent=1).encode())
+            elif self.path.startswith("/goals/"):
+                # nemik:W80: the W79 goal view, computed on the cached graph.
+                from nemik.rank import goals, load_weights
+                repo = self.path.removeprefix("/goals/").strip("/").removesuffix(".json")
+                body = goals(model.graph, repo, load_weights())
+                self.send(200, "application/json", json.dumps(body, indent=1).encode())
             elif self.path == "/metrics":
                 self.send(200, "text/plain; version=0.0.4", model.metrics())
             elif self.path == "/graph.json":
