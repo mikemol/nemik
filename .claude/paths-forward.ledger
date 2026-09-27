@@ -159,3 +159,6 @@
 2026-09-27T19:29:49Z  tick  W71  filed     -         "operator: can't see a repo's on-deck item or whether its path is clear between ticks"
 2026-09-27T19:32:04Z  tick  W71  revised   collapse  "operator: next item is a leaf; view priority G, frontier dG, boundary-of-frontier dDG; W66 is W71's frontier function"
 2026-09-27T19:33:48Z  tick  W72  filed     -         "operator: read-only command outputs from the dashboard"
+2026-09-27T19:38:35Z  tick  W66  atomized  collapse  "ATOMIZE: W73 frontier fn, W74 rank/check use"
+2026-09-27T19:39:13Z  tick  W73  done      unblock   "frontier function"  evidence=868f0c7
+2026-09-27T19:39:13Z  nudge W68  nudged    -         "from W58; owned by luthen:W145, no message"
