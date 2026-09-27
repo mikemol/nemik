@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 84,
+  "counter": 85,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 19
+      "ticks_blocked": 20
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 25,
+      "ticks_blocked": 26,
       "weight": 1
     },
     {
@@ -1019,7 +1019,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T18:51:55Z",
-      "ticks_blocked": 11
+      "ticks_blocked": 12
     },
     {
       "symbol": "W59",
@@ -1227,7 +1227,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T18:24:59Z",
-      "ticks_blocked": 15
+      "ticks_blocked": 16
     },
     {
       "symbol": "W69",
@@ -1305,7 +1305,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T20:56:22Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "weight": 0
     },
     {
@@ -1367,7 +1367,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:54:01Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 10,
       "weight": 0
     },
     {
@@ -1390,7 +1390,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:43:45Z",
-      "ticks_blocked": 10
+      "ticks_blocked": 11
     },
     {
       "symbol": "W77",
@@ -1411,7 +1411,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T20:43:50Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1478,7 +1478,7 @@
     {
       "symbol": "W81",
       "title": "/cmd/<name>?repo= framework + graph-only commands (rank, rank --goals, overlaps, inbound, operator, wake): factor each CLI's printer off main so serve renders the exact text from the cached graph",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W72"
       ],
@@ -1488,12 +1488,13 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: dd1dd3f: nemik/tools.py + /cmd; tests/test_tools.py parity per command; 55 passed",
       "issued_at": "2026-09-27T20:56:21Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-09-27T20:58:22Z",
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W82",
@@ -1513,7 +1514,8 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W83",
@@ -1533,7 +1535,8 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W84",
@@ -1550,6 +1553,25 @@
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-09-27T20:56:22Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 1
+    },
+    {
+      "symbol": "W85",
+      "title": "Bazel build graph for nemik (MODULE.bazel, py_test per tests/*.py, cached) as the commit gate: which tests run is the graph's call, not a tick's judgment ('no code changed, so no pytest'). Precedent: mtools, paperkit, luthen-observability MODULE.bazel",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "build"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T20:58:22Z",
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": null,
