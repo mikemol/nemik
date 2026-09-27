@@ -7,6 +7,7 @@ downstream waypoint weighted by `data/rank-weights.toml`.
 
 from __future__ import annotations
 
+import re
 import tomllib
 from dataclasses import dataclass
 from importlib.resources import files
@@ -64,6 +65,50 @@ def downstream_weight(g: Graph, node: URIRef, weights: Weights) -> int:
             else:
                 total += weights.peer
     return total
+
+
+def _open(g: Graph, n: URIRef) -> bool:
+    return (n, OSLC_CM.state, NEMIK.Done) not in g and (n, OSLC_CM.state, None) in g
+
+
+def frontier(g: Graph, goal: URIRef) -> tuple[set[URIRef], set[str]]:
+    """(dG, ddG) for a goal (nemik:W71, W73).
+
+    dG: the open leaves under `goal` within its repo, found by walking back through what enables
+    it and what it waits on. A leaf is an open waypoint that nothing open in the repo feeds. The
+    goal is its own frontier when nothing feeds it.
+    ddG: what those leaves wait on from outside the repo. That is each leaf's blocked_on entries
+    that are not local symbols, plus open enablers from another repo. The path to `goal` is clear
+    exactly when ddG is empty: every remaining obstacle is work this repo can do itself.
+    """
+    repo = _repo(goal)
+    seen, stack, leaves, outside = {goal}, [goal], set(), set()
+    while stack:
+        n = stack.pop()
+        feeders = set(g.subjects(NEMIK.enables, n)) | {
+            t for t in g.objects(n, NEMIK.waitsFor) if str(t).startswith(BASE) and "/" in str(t)[len(BASE):]}
+        local_open = set()
+        for f in feeders:
+            if not _open(g, f):
+                continue
+            if _repo(f) == repo:
+                local_open.add(f)
+            else:
+                outside.add(ref_of(f))
+        if not local_open:
+            leaves.add(n)
+            for lit in g.objects(n, NEMIK.blockedOn):
+                if not re.fullmatch(r"W\d+", str(lit).strip()):
+                    outside.add(str(lit))
+        for f in local_open - seen:
+            seen.add(f)
+            stack.append(f)
+    return leaves, outside
+
+
+def ref_of(node: URIRef) -> str:
+    r, _, sym = str(node).removeprefix(BASE).partition("/")
+    return f"{r}:{sym}"
 
 
 def rank(g: Graph, repo: str, weights: Weights) -> list[dict]:
