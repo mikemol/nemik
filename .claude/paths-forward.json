@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 93,
+  "counter": 94,
   "waypoints": [
     {
       "symbol": "W1",
@@ -1709,6 +1709,27 @@
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-09-27T22:19:59Z",
+      "minted_during": "interrupt",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W94",
+      "title": "nemik warns on invocation when it is running from an editable install (direct_url.json dir_info.editable), naming the fix (uv sync --no-editable); covered by a test",
+      "status": "ready",
+      "enables": [
+        "W93"
+      ],
+      "touches": [
+        "venv",
+        "packaging"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T22:21:03Z",
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": null,
