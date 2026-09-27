@@ -1033,7 +1033,7 @@
     {
       "symbol": "W59",
       "title": "Ask mtools: waypoint witness field (--add/--update --witness CMD); --check flags a witnessed waypoint marked working",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W58",
         "W60"
@@ -1041,14 +1041,16 @@
       "touches": [
         "conditions"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "mtools"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-09-27T17:31:04Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-27T17:31:57Z",
       "ticks_blocked": 0
     },
     {
