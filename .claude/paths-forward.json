@@ -677,19 +677,19 @@
     {
       "symbol": "W41",
       "title": "Witness: flag a peer blocked_on/waitsFor edge that lands on an umbrella (a waypoint that its own repo's children enable, or whose next_bounded_step starts with COMPOSITE) instead of the child step",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "luthen-observability:W117"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Add to nemik-check as a SHACL/SPARQL Warning (never a Violation: W27 pattern, since it's live on other repos' data); detect umbrellas structurally (same-repo children enable the target), with COMPOSITE text as a secondary signal; fixture test; expect linux-sources:W46/W47 -> luthen:W43 to fire",
-      "evidence": "",
+      "next_bounded_step": "",
+      "evidence": "2026-09-27: commit d089a5a: blocks.annotate derives nemik:umbrellaBlockOn when the peer target has open same-repo children that enable it; UmbrellaBlockShape reports it as a Warning (exit code unchanged); pytest 28; nemik-check exit 0. Live hits (6): linux-sources:W46/W47 -> luthen:W43 (expected); linux-sources:W40 and summit:W95 -> mtools:W24; el-openglo:W94 -> mtools:W50; el-openglo:W80 -> paperkit:W45. RESIDUE: the COMPOSITE next_bounded_step signal was not built, because the graph doesn't carry next_bounded_step; the structural signal covers every umbrella that has child edges.",
       "issued_at": "2026-09-27T14:28:38Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W117",
-      "last_worked": null,
+      "last_worked": "2026-09-27T14:58:35Z",
       "ticks_blocked": 0
     },
     {
@@ -726,7 +726,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W117",
       "last_worked": "2026-09-27T14:39:47Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 1
     }
   ],
   "residue": [
