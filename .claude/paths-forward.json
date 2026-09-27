@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 31
+      "ticks_blocked": 32
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 37,
+      "ticks_blocked": 38,
       "weight": 1
     },
     {
@@ -1359,7 +1359,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:54:01Z",
-      "ticks_blocked": 21,
+      "ticks_blocked": 22,
       "weight": 0
     },
     {
@@ -1382,7 +1382,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:43:45Z",
-      "ticks_blocked": 22
+      "ticks_blocked": 23
     },
     {
       "symbol": "W77",
@@ -1403,7 +1403,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:13:38Z",
-      "ticks_blocked": 15,
+      "ticks_blocked": 16,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1560,7 +1560,6 @@
         "build"
       ],
       "blocked_on": [
-        "W90",
         "W91",
         "W92"
       ],
@@ -1717,7 +1716,7 @@
     {
       "symbol": "W94",
       "title": "nemik warns on invocation when it is running from an editable install (direct_url.json dir_info.editable), naming the fix (uv sync --no-editable); covered by a test",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W93"
       ],
@@ -1728,12 +1727,13 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: src/nemik/__init__.py editable_install() via PEP 610 direct_url.json; warns on stderr at import; live: nemik-rank on this host prints the warning (host is editable until W93); tests/test_editable.py; 64 passed",
       "issued_at": "2026-09-27T22:21:03Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-09-27T22:23:53Z",
+      "ticks_blocked": 0,
+      "weight": 1
     }
   ],
   "residue": [
