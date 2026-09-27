@@ -127,3 +127,35 @@ def test_alert_and_promql_witnesses(monkeypatch) -> None:
 def test_unset_endpoint_is_undefined(monkeypatch) -> None:
     monkeypatch.delenv("NEMIK_VM_URL", raising=False)
     assert witness('input.promql["up"].empty')[0] == "undefined"
+
+
+def test_apply_writes_letters_to_waiting_repos(tmp_path, monkeypatch, capsys) -> None:
+    import json
+    import sys
+
+    from nemik import witnesses
+
+    flag = tmp_path / "flag"
+    flag.write_text("")
+
+    def queue(repo, wps):
+        d = tmp_path / repo / ".claude"
+        d.mkdir(parents=True)
+        (tmp_path / repo / "inbox").mkdir()
+        (d / "paths-forward.json").write_text(json.dumps(
+            {"version": 1, "project_root": str(tmp_path / repo), "counter": 9, "waypoints": wps, "residue": []}))
+
+    queue("a", [{"symbol": "W1", "title": "flag", "status": "blocked", "blocked_on": ["nemik-witnesses"],
+                 "blocked_kind": "agent", "witness": f'input.file["{flag}"].exists'},
+                {"symbol": "W2", "title": "local waiter", "status": "blocked", "blocked_on": ["W1"],
+                 "blocked_kind": "agent"}])
+    queue("b", [{"symbol": "W5", "title": "foreign waiter", "status": "blocked", "blocked_on": ["a:W1"],
+                 "blocked_kind": "agent"}])
+    queue("c", [{"symbol": "W7", "title": "unrelated", "status": "ready"}])
+    monkeypatch.setattr(sys, "argv", ["nemik-witnesses", "--root", str(tmp_path), "--apply"])
+    witnesses.main()
+    out = capsys.readouterr().out
+    assert out.count("WOKE ") == 2
+    (la,), (lb,) = list((tmp_path / "a" / "inbox").iterdir()), list((tmp_path / "b" / "inbox").iterdir())
+    assert "W2" in la.read_text() and "a:W1" in lb.read_text() and "W5" in lb.read_text()
+    assert not list((tmp_path / "c" / "inbox").iterdir())

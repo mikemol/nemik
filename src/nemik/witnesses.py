@@ -159,6 +159,46 @@ def open_witnesses(root: Path) -> list[tuple[str, Path, str, str]]:
     return out
 
 
+def waiters(root: Path, repo: str, sym: str) -> dict[str, list[str]]:
+    """{repo: [W<n>, ...]} for every open waypoint blocked on repo:sym (or on sym within repo)."""
+    from nemik.check import QUEUE, workstream_files
+
+    out: dict[str, list[str]] = {}
+    for other, path in workstream_files(root, QUEUE):
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        for w in data.get("waypoints", []):
+            on = w.get("blocked_on") or []
+            if w.get("status") == "blocked" and (f"{repo}:{sym}" in on or (other == repo and sym in on)):
+                out.setdefault(other, []).append(w["symbol"])
+    return out
+
+
+def wake(root: Path, repo: str, sym: str, query: str, now: str) -> list[Path]:
+    """nemik:W61: a letter in each waiting repo's inbox (the nemik:W4 channel). A letter reaches a
+    dormant repo at no token cost until someone wakes it. A live loop reads it on its next tick,
+    where --bump-blocked (local) or the named foreign blocker shows the work is now free."""
+    written = []
+    for other, syms in sorted(waiters(root, repo, sym).items()):
+        inbox = root / other / "inbox"
+        if not inbox.is_dir():
+            continue
+        letter = inbox / f"{now[:10]}-nemik-witness-{repo}-{sym}.md"
+        cite = sym if other == repo else f"{repo}:{sym}"
+        letter.write_text(
+            f"# nemik → {other}: {repo}:{sym} is done (its witness held)\n\n"
+            f"`nemik-witnesses --apply` observed at {now}:\n\n    {query}\n\n"
+            f"Waiting on it here: {', '.join(syms)}. Each is blocked on `{cite}`, which is now done.\n"
+            + ("A tick's `--bump-blocked` prunes it.\n" if other == repo else
+               f"Lift the block: `mikemol-paths-forward --state .claude/paths-forward.json --update <W> ...`.\n"),
+            encoding="utf-8",
+        )
+        written.append(letter)
+    return written
+
+
 def main() -> None:
     import argparse
     import shutil
@@ -180,3 +220,5 @@ def main() -> None:
             subprocess.run([pf, "--state", str(path), "--update", sym, "--status", "done", "--evidence-append",
                             f"witness held at {doc['now']}: {json.dumps(observed, sort_keys=True)}"],
                            check=True, capture_output=True)
+            for letter in wake(args.root, repo, sym, query, doc["now"]):
+                print(f"WOKE {letter}")
