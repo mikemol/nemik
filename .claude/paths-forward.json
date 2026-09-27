@@ -1171,9 +1171,11 @@
     },
     {
       "symbol": "W66",
-      "title": "nemik-rank: a ready item with open (non-done) enablers is implicitly blocked; exclude from rank and flag in --check (deferred enablers excepted: define 'deferred')",
+      "title": "frontier(G) in nemik-rank: open leaves under a goal; a 'ready' item with a nonempty frontier is an umbrella, excluded from rank and flagged by --check (first step of W71)",
       "status": "ready",
-      "enables": [],
+      "enables": [
+        "W71"
+      ],
       "touches": [
         "cli"
       ],
@@ -1266,7 +1268,7 @@
     },
     {
       "symbol": "W71",
-      "title": "Per-repo on-deck view: first workable item by nemik:queuePosition, 'path clear' vs 'waiting on X'; derived, not a stored 'queued' status (residue: stored status only if weight can't express an agent's chosen next)",
+      "title": "Per-repo priority view: top goal G (no in-repo downstream, ranked by cross-repo weight), its frontier dG (open leaves; on-deck = top workable leaf), and dDG (what frontier leaves wait on outside the repo); path clear iff dDG is empty",
       "status": "ready",
       "enables": [],
       "touches": [
