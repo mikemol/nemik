@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 25
+      "ticks_blocked": 26
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 31,
+      "ticks_blocked": 32,
       "weight": 1
     },
     {
@@ -1004,7 +1004,7 @@
     {
       "symbol": "W58",
       "title": "FFI waypoints: witness is a declared Rego rule over facts from nemik's closed observer set (pid, k8s job, alert, promql, git, file, time); no executed code; design .claude/design/W58-mechanical-blockers.md rev 3",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "conditions"
@@ -1012,12 +1012,13 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: = W59..W62 + W68 all done: Rego witnesses over pid/file/git_ref/alert/promql(+k8s via kube-state-metrics)/time; --apply wakes waiters by letter",
       "issued_at": "2026-09-27T17:31:04Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-09-27T18:51:55Z",
-      "ticks_blocked": 0
+      "last_worked": "2026-09-27T21:50:13Z",
+      "ticks_blocked": 0,
+      "weight": 0
     },
     {
       "symbol": "W59",
@@ -1283,7 +1284,7 @@
     {
       "symbol": "W72",
       "title": "Dashboard Tools panel: /cmd/<name>?repo= returns each read-only CLI's exact output (check, metrics, inbound, operator, wake, rank, overlaps, witnesses dry-run on click, floor-asks where summit present, mtools --queue/--check/--overlaps per repo), in-process on the cached graph",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "web-ui"
@@ -1291,11 +1292,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: = W81..W84 all done: /cmd for 15 commands + Tools panel",
       "issued_at": "2026-09-27T19:33:48Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-09-27T20:56:22Z",
+      "last_worked": "2026-09-27T21:50:18Z",
       "ticks_blocked": 0,
       "weight": 0
     },
@@ -1358,7 +1359,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:54:01Z",
-      "ticks_blocked": 15,
+      "ticks_blocked": 16,
       "weight": 0
     },
     {
@@ -1381,7 +1382,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:43:45Z",
-      "ticks_blocked": 16
+      "ticks_blocked": 17
     },
     {
       "symbol": "W77",
@@ -1402,7 +1403,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:13:38Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 10,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1606,7 +1607,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:23:37Z",
-      "ticks_blocked": 3
+      "ticks_blocked": 4
     },
     {
       "symbol": "W88",
