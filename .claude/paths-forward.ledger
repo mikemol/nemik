@@ -175,3 +175,4 @@
 2026-09-27T21:06:57Z  tick  W84  done      unblock   "operator ask: Tools panel reachable (live once W152 ships)"
 2026-09-27T21:09:23Z  tick  W82  done      unblock   "file-reading CLIs in /cmd + panel"
 2026-09-27T21:20:37Z  tick  W86  done      unblock   "operator ask: constraint=false for upstream edges"
+2026-09-27T21:22:32Z  tick  W87  advanced  unblock   "operator: recurse the constraint rule to the box level"
