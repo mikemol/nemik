@@ -1224,7 +1224,7 @@
         "conditions"
       ],
       "blocked_on": [
-        "luthen-observability"
+        "luthen-observability:W145"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
@@ -1232,7 +1232,7 @@
       "issued_at": "2026-09-27T18:24:35Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-09-27T18:24:36Z",
+      "last_worked": "2026-09-27T18:24:59Z",
       "ticks_blocked": 0
     }
   ],

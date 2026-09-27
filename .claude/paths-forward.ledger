@@ -140,3 +140,4 @@
 2026-09-27T18:24:36Z  nudge W57  nudged    -         "from W54"
 2026-09-27T18:24:36Z  nudge W61  nudged    -         "from W58"
 2026-09-27T18:24:36Z  nudge W62  nudged    -         "from W58"
+2026-09-27T18:24:59Z  tick  W68  refiled   -         "luthen W145: kube-state-metrics into vmsingle (operator reviews ClusterRole plan)"
