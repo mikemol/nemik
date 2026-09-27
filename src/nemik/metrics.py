@@ -59,11 +59,11 @@ def label(**kv: str) -> str:
     return "{" + ",".join(f'{k}="{v}"' for k, v in kv.items()) + "}"
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(prog="nemik-metrics", description=(__doc__ or "").splitlines()[0])
     ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
     ap.add_argument("--spool", type=Path, default=spool_path())
-    args = ap.parse_args()
+    args = ap.parse_args(argv)
 
     out = ["# TYPE nemik_waypoints gauge", "# TYPE nemik_waypoints_minted gauge", "# TYPE nemik_findings gauge"]
     for repo, g, findings in survey(args.root):

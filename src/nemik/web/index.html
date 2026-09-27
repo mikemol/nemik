@@ -308,7 +308,8 @@ async function goals() {
 // nemik:W84: each read-only CLI's exact output (/cmd, W81). A command that takes a repo uses the
 // Repo picker above.
 const TOOLS = { rank: true, goals: true, "rank-check": true, overlaps: false, "overlaps-cross": false,
-                inbound: false, operator: false, wake: false };
+                inbound: false, operator: false, wake: false,
+                check: false, metrics: false, "floor-asks": false, witnesses: false };
 document.getElementById("tool").innerHTML += Object.entries(TOOLS).map(([t, r]) =>
   `<option value="${t}">nemik-${t}${r ? " (repo)" : ""}</option>`).join("");
 async function tool() {

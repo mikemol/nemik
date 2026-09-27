@@ -199,7 +199,7 @@ def wake(root: Path, repo: str, sym: str, query: str, now: str) -> list[Path]:
     return written
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> None:
     import argparse
     import shutil
     import sys
@@ -209,7 +209,7 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
     ap.add_argument("--apply", action="store_true", help="mark waypoints whose witness holds as done")
-    args = ap.parse_args()
+    args = ap.parse_args(argv)
     pf = shutil.which("mikemol-paths-forward", path=str(Path(sys.executable).parent))
     for repo, path, sym, query in open_witnesses(args.root):
         verdict, doc, missing = witness(query)

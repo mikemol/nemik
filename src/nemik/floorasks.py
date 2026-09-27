@@ -54,11 +54,11 @@ def unresolved(root: Path, floor: Path) -> list[tuple[str, str, str]]:
     return bad
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
     ap.add_argument("--floor", type=Path, help="default: <root>/summit/floor")
-    args = ap.parse_args()
+    args = ap.parse_args(argv)
     floor = args.floor or args.root / "summit" / "floor"
     n = len(floor_asks(floor))
     bad = unresolved(args.root, floor)

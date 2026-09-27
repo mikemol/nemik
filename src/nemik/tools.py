@@ -17,7 +17,7 @@ from collections.abc import Callable
 
 from rdflib import Graph
 
-from nemik import blocks, overlaps, rank, wake
+from nemik import blocks, check, floorasks, metrics, overlaps, rank, wake, witnesses
 
 # name -> (main, argv for a repo or None, whether a repo is required)
 COMMANDS: dict[str, tuple[Callable[..., None], Callable[[str | None], list[str]], bool]] = {
@@ -31,15 +31,26 @@ COMMANDS: dict[str, tuple[Callable[..., None], Callable[[str | None], list[str]]
     "wake": (wake.main, lambda r: ["--all"], False),
 }
 
+# nemik:W82: commands that read the queue files themselves (they need more than the graph).
+# Same fixed-argv rule; `witnesses` is the dry run, never --apply, and its observers may reach the
+# network, so the panel runs it only on an explicit pick.
+FILE_COMMANDS: dict[str, tuple[Callable[..., None], Callable[[str | None], list[str]], bool]] = {
+    "check": (check.main, lambda r: [], False),
+    "metrics": (metrics.main, lambda r: [], False),
+    "floor-asks": (floorasks.main, lambda r: [], False),
+    "witnesses": (witnesses.main, lambda r: [], False),
+}
+
 # redirect_stdout swaps a process-wide object, so two requests at once would interleave.
 _stdout = threading.Lock()
 
 
 def run(name: str, g: Graph, root: str, repo: str | None = None) -> tuple[int, str]:
     """(exit code, stdout) of command `name` over `g`; ValueError for an unknown command or bad repo."""
-    if name not in COMMANDS:
-        raise ValueError(f"unknown command {name!r}; one of {', '.join(COMMANDS)}")
-    fn, argv, needs_repo = COMMANDS[name]
+    table = COMMANDS if name in COMMANDS else FILE_COMMANDS
+    if name not in table:
+        raise ValueError(f"unknown command {name!r}; one of {', '.join([*COMMANDS, *FILE_COMMANDS])}")
+    fn, argv, needs_repo = table[name]
     if repo is not None and not re.fullmatch(r"[\w.-]+", repo):
         raise ValueError(f"bad repo {repo!r}")
     if needs_repo and not repo:
@@ -48,7 +59,8 @@ def run(name: str, g: Graph, root: str, repo: str | None = None) -> tuple[int, s
     code = 0
     with _stdout, contextlib.redirect_stdout(buf):
         try:
-            fn([*argv(repo), "--root", root], g=g)
+            args = [*argv(repo), "--root", root]
+            fn(args, g=g) if table is COMMANDS else fn(args)
         except SystemExit as e:
             code = e.code if isinstance(e.code, int) else 1
     return code, buf.getvalue()
