@@ -20,6 +20,11 @@ root = "."
 # assertions against src/nemik/*.py and pyproject.toml, not prose restating what the code says
 # it does. Each claim gets its own function, so a claim that goes false as the code changes
 # fails its own check rather than a shared one standing in for several claims.
+#
+# ⚑ THE INTERPRETER IS PINNED, NOT AMBIENT. `python3` here resolved to /usr/bin/python3, which has
+# no rdflib, so the three witnesses that IMPORT nemik (rather than read its source) failed -- after
+# having passed once under a different ambient interpreter. A verdict that depends on which python
+# the environment hands the check is not a verdict (nemik:W33).
 [checks.claim]
-cmd = "python3 checks/claims.py {target}"
+cmd = ".venv/bin/python checks/claims.py {target}"
 witness = "checks/claims.py"

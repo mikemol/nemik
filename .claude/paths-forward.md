@@ -1,7 +1,7 @@
 <!-- DERIVED from the state file by mikemol-paths-forward --render. NEVER EDIT. -->
 # paths-forward — /home/mikemol/github/nemik/.claude/paths-forward.json
 
-counter 32 · heartbeat 2026-09-27T00:59:14Z · job `39928715` · hash `v2:34547d4c98f2f4eb`
+counter 33 · heartbeat 2026-09-27T01:12:21Z · job `3f3df8d6` · hash `v2:98616fdda6b8b90c`
 
 | # | symbol | status | title | blocked on | next bounded step |
 |---|---|---|---|---|---|
@@ -35,6 +35,7 @@ counter 32 · heartbeat 2026-09-27T00:59:14Z · job `39928715` · hash `v2:34547
 | 28 | W30 | done | adapter.py review: queue_graph()'s residue-translation loop was duplicated verbatim (dead code, harmless since RDF triples dedupe, but confusing on read) | — | — |
 | 29 | W31 | done | check.py deep read: verified survey()'s focus-node-to-repo attribution (by_repo.setdefault) can never actually see an unknown repo given current shapes.ttl targets and adapter.py's URI minting -- defensive but dead code, not a live bug | — | — |
 | 30 | W32 | done | Operator direct ask: build a paperkit project documenting nemik's guarantees, modularity (and its gaps), and the standards it's derived from | — | — |
+| 31 | W33 | done | ARCHITECTURE.md gate went red on its first maintenance run: paper.toml's claim witness ran bare python3 (/usr/bin, no rdflib), so the 3 witnesses importing nemik failed -- verdict depended on the ambient interpreter | — | — |
 
 ## residue
 
