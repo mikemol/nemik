@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 4
+      "ticks_blocked": 5
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "weight": 1
     },
     {
@@ -941,7 +941,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T17:25:45Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "weight": 0
     },
     {
@@ -1012,9 +1012,9 @@
         "conditions"
       ],
       "blocked_on": [
-        "W60",
         "W61",
-        "W62"
+        "W62",
+        "W68"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
@@ -1022,8 +1022,8 @@
       "issued_at": "2026-09-27T17:31:04Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-09-27T17:31:15Z",
-      "ticks_blocked": 1
+      "last_worked": "2026-09-27T18:51:55Z",
+      "ticks_blocked": 0
     },
     {
       "symbol": "W59",
@@ -1049,7 +1049,7 @@
     {
       "symbol": "W60",
       "title": "nemik-witnesses: closed observers gather input facts; opa eval the witness Rego; true=done (facts as evidence), undefined=can't-observe finding; fixture-first",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W58",
         "W61"
@@ -1057,17 +1057,15 @@
       "touches": [
         "conditions"
       ],
-      "blocked_on": [
-        "W65"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Add git-ref and time observers, then the runner (nemik-witnesses [--apply]) reading waypoint.witness once mtools:W131 lands; k8s/alert/promql via luthen endpoints_query after",
-      "evidence": "2026-09-27: step 1 aa00300: witnesses.py evaluate true/false/undefined via opa eval; pid(localhost, starttime guard)+file observers; tests/test_witnesses.py; pytest 35",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-09-27: step 1 aa00300: witnesses.py evaluate true/false/undefined via opa eval; pid(localhost, starttime guard)+file observers; tests/test_witnesses.py; pytest 35 | 2026-09-27: children done: W63 (git/time), W64 (runner), W65 (alert/promql); k8s gap carried by W68, now enabling W58 directly",
       "issued_at": "2026-09-27T17:31:04Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-09-27T17:53:34Z",
-      "ticks_blocked": 1,
+      "last_worked": "2026-09-27T18:51:55Z",
+      "ticks_blocked": 0,
       "weight": 2
     },
     {
@@ -1216,7 +1214,7 @@
       "title": "witnesses: k8s job status observable from host (kube-state-metrics scraped into vmsingle, or a host kubeconfig)",
       "status": "blocked",
       "enables": [
-        "W60"
+        "W58"
       ],
       "touches": [
         "conditions"
@@ -1231,7 +1229,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T18:24:59Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 1
     },
     {
       "symbol": "W69",

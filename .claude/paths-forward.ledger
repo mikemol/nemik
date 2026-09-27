@@ -145,3 +145,5 @@
 2026-09-27T18:44:09Z  tick  W69  filed     -         "luthen W146: OOMKilled at 512Mi, /metrics >1s"
 2026-09-27T18:44:42Z  tick  W69  done      unblock   "serve latency: stale-while-rebuilding"  evidence=e512a98
 2026-09-27T18:51:29Z  tick  W70  done      unblock   "memory: plateau not leak; shared parsed doc"  evidence=bffcd2d
+2026-09-27T18:51:55Z  tick  W60  done      collapse  "umbrella closed on its done children; W68 retargeted to W58 (live instance of W66's case)"
+2026-09-27T18:52:00Z  nudge W68  nudged    -         "from W58; foreign blocker luthen-observability:W145 accepted last tick, no nudge sent"
