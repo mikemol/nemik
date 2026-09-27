@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 43,
+  "counter": 44,
   "waypoints": [
     {
       "symbol": "W1",
@@ -724,6 +724,24 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W117",
       "last_worked": "2026-09-27T15:04:06Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W44",
+      "title": "Repin mikemol-pathsforward once mtools fixes --weight's last_worked side effect (W115 defect found by luthen)",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "mtools"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "On mtools' sha: rebuild vendored wheel, README history, pytest; scratch probe that --update --weight leaves last_worked unchanged; tell luthen to drop its direct-write workaround",
+      "evidence": "",
+      "issued_at": "2026-09-27T15:04:14Z",
+      "minted_during": "tick",
+      "caused_by": "luthen-observability:W117",
+      "last_worked": "2026-09-27T15:04:14Z",
       "ticks_blocked": 0
     }
   ],
