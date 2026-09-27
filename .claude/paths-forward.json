@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 85,
+  "counter": 86,
   "waypoints": [
     {
       "symbol": "W1",
@@ -1575,6 +1575,24 @@
       "last_worked": null,
       "ticks_blocked": 0,
       "weight": 0
+    },
+    {
+      "symbol": "W86",
+      "title": "Graph layout: waits edges non-constraining (operator: enables ranks, blocked_by draws)",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "web"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-09-27: 7a50f06: rankEdges(); headless Chromium paperkit view: prerequisites above dependents, no page errors",
+      "issued_at": "2026-09-27T21:20:22Z",
+      "minted_during": "interrupt",
+      "caused_by": null,
+      "last_worked": "2026-09-27T21:20:26Z",
+      "ticks_blocked": 0
     }
   ],
   "residue": [
