@@ -1541,7 +1541,7 @@
     {
       "symbol": "W84",
       "title": "Tools panel in the web view: pick a command (+repo), show its text output in a pre",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W72"
       ],
@@ -1551,11 +1551,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: 94637ee: sidebar Tools select + pre, link to /cmd URL; headless Chromium shows nemik-goals output, no page errors",
       "issued_at": "2026-09-27T20:56:22Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-27T21:06:57Z",
       "ticks_blocked": 0,
       "weight": 1
     },
