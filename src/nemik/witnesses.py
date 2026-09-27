@@ -46,7 +46,24 @@ def _file(key: str) -> dict | None:
     return {"exists": os.path.exists(key)}
 
 
-OBSERVERS = {"pid": _pid, "file": _file}
+def _git_ref(key: str) -> dict | None:
+    """`<repo>@<ref>` in the local clone under the nemik root: whether it resolves, and to what."""
+    from nemik.check import default_root
+
+    repo, sep, rev = key.partition("@")
+    path = default_root() / repo
+    # Queue data, not trusted: a plain repo name, and a ref git cannot read as an option.
+    if not sep or not re.fullmatch(r"[\w.-]+", repo) or repo in {".", ".."} or rev.startswith("-") \
+            or not (path / ".git").exists():
+        return None
+    out = subprocess.run(["git", "-C", str(path), "rev-parse", "--verify", "--quiet", f"{rev}^{{commit}}"],
+                         capture_output=True, text=True, check=False)
+    return {"exists": out.returncode == 0, "sha": out.stdout.strip()}
+
+
+# `input.now` (RFC 3339, UTC) is always present, so a time witness needs no observer:
+# `time.parse_rfc3339_ns(input.now) >= time.parse_rfc3339_ns("2026-10-01T00:00:00Z")`.
+OBSERVERS = {"pid": _pid, "file": _file, "git_ref": _git_ref}
 
 
 def facts(query: str, now: datetime | None = None) -> tuple[dict, list[str]]:

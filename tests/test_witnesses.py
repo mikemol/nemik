@@ -32,3 +32,26 @@ def test_unobservable_fact_is_undefined_not_false() -> None:
     verdict, _, missing = witness('not input.pid["otherhost/1"].alive')
     assert verdict == "undefined" and missing == ['pid["otherhost/1"]']
     assert witness('input.nosuch["x"].ok')[0] == "undefined"
+
+
+def test_time_witness_uses_input_now() -> None:
+    from datetime import UTC, datetime
+
+    q = 'time.parse_rfc3339_ns(input.now) >= time.parse_rfc3339_ns("2026-10-01T00:00:00Z")'
+    assert witness(q, now=datetime(2026, 9, 30, tzinfo=UTC))[0] == "false"
+    assert witness(q, now=datetime(2026, 10, 2, tzinfo=UTC))[0] == "true"
+
+
+def test_git_ref_witness(tmp_path, monkeypatch) -> None:
+    import subprocess
+
+    repo = tmp_path / "r"
+    subprocess.run(["git", "init", "-q", "-b", "main", str(repo)], check=True)
+    subprocess.run(["git", "-C", str(repo), "-c", "user.name=t", "-c", "user.email=t@t",
+                    "commit", "-q", "--allow-empty", "-m", "x"], check=True)
+    monkeypatch.setenv("NEMIK_ROOT", str(tmp_path))
+    assert witness('input.git_ref["r@main"].exists')[0] == "true"
+    assert witness('input.git_ref["r@nope"].exists')[0] == "false"
+    assert witness('input.git_ref["absent@main"].exists')[0] == "undefined"
+    assert witness('input.git_ref["r@--output=x"].exists')[0] == "undefined"
+    assert witness('input.git_ref["../r@main"].exists')[0] == "undefined"
