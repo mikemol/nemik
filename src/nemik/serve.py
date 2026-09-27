@@ -165,7 +165,18 @@ def to_json(g: Graph, findings: dict) -> dict:
     for a in asks:
         edges.append({"source": f"{BASE}{a['ref'].replace(':', '/', 1)}", "target": f"operator:{a['category']}",
                       "kind": "waits"})
+    # nemik:W56: an edge whose upstream end is done no longer holds anything back. For `enables`
+    # that end is the source; for `waits` it is the target. open_blockers counts what still does.
+    done = {n["id"] for n in nodes if n["state"] == "done"}
+    # Distinct upstream items, since W3 enables W1 and W1 waits on W3 name one blocker.
+    open_blockers: dict[str, set] = defaultdict(set)
+    for e in edges:
+        up, down = (e["source"], e["target"]) if e["kind"] == "enables" else (e["target"], e["source"])
+        e["satisfied"] = up in done
+        if not e["satisfied"]:
+            open_blockers[down].add(up)
     for n in nodes:
+        n["open_blockers"] = len(open_blockers.get(n["id"], ()))
         if n["id"].startswith(BASE):
             n["cite"] = ref(URIRef(n["id"]))
     return {
