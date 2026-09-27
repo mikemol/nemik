@@ -1,4 +1,4 @@
-from rdflib import Graph
+from rdflib import Graph, Literal
 
 from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri
 from nemik.rank import Weights, downstream_weight, load_weights
@@ -53,3 +53,19 @@ def test_cycle_terminates_and_counts_each_node_once() -> None:
     g.add((x, NEMIK.enables, y))
     g.add((y, NEMIK.enables, x))
     assert downstream_weight(g, x, W) == 1
+
+
+def test_rank_orders_ready_items_by_weight_then_symbol() -> None:
+    from nemik.adapter import workstream_uri
+    from nemik.rank import rank
+
+    g = Graph()
+    ws = workstream_uri("a")
+    lo, hi, blk = _wp(g, "a", "W2"), _wp(g, "a", "W9"), _wp(g, "a", "W3", "blocked")
+    for n, s in ((lo, "W2"), (hi, "W9"), (blk, "W3")):
+        g.add((n, NEMIK.workstream, ws))
+        g.add((n, NEMIK.symbol, Literal(s)))
+    g.add((_wp(g, "b", "W1", "blocked"), NEMIK.waitsFor, hi))
+    rows = rank(g, "a", W)
+    assert [r["symbol"] for r in rows] == ["W9", "W2"]  # blocked W3 excluded
+    assert rows[0]["weight"] == 8

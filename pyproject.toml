@@ -22,6 +22,7 @@ nemik-serve = "nemik.serve:main"
 nemik-inbound = "nemik.blocks:main"
 nemik-operator = "nemik.blocks:operator_main"
 nemik-wake = "nemik.wake:main"
+nemik-rank = "nemik.rank:main"
 
 [project.optional-dependencies]
 docs = [

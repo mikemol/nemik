@@ -12,8 +12,9 @@ from dataclasses import dataclass
 from importlib.resources import files
 
 from rdflib import Graph, URIRef
+from rdflib.namespace import DCTERMS
 
-from nemik.adapter import BASE, NEMIK, OSLC_CM
+from nemik.adapter import BASE, NEMIK, OSLC_CM, workstream_uri
 
 
 @dataclass(frozen=True)
@@ -63,3 +64,40 @@ def downstream_weight(g: Graph, node: URIRef, weights: Weights) -> int:
             else:
                 total += weights.peer
     return total
+
+
+def rank(g: Graph, repo: str, weights: Weights) -> list[dict]:
+    """Every ready waypoint in `repo`, highest cross-repo downstream weight first (lower symbol on ties)."""
+    ws = workstream_uri(repo)
+    ready = [n for n in g.subjects(NEMIK.workstream, ws) if (n, OSLC_CM.state, NEMIK.Ready) in g]
+    rows = [{
+        "symbol": str(g.value(n, NEMIK.symbol)),
+        "weight": downstream_weight(g, n, weights),
+        "title": str(g.value(n, DCTERMS.title) or ""),
+    } for n in ready]
+    return sorted(rows, key=lambda r: (-r["weight"], int(r["symbol"].lstrip("W"))))
+
+
+def main() -> None:
+    """nemik-rank REPO: REPO's ready waypoints ordered by cross-repo downstream weight."""
+    import argparse
+    import json
+    from pathlib import Path
+
+    from nemik.check import default_root, survey
+
+    ap = argparse.ArgumentParser(prog="nemik-rank", description=(main.__doc__ or "").splitlines()[0])
+    ap.add_argument("repo", help="the workstream whose ready items to rank")
+    ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
+    ap.add_argument("--json", action="store_true", help="machine-readable output")
+    args = ap.parse_args()
+    g = Graph()
+    for _, qg, _ in survey(args.root):
+        if qg is not None:
+            g += qg
+    rows = rank(g, args.repo, load_weights())
+    if args.json:
+        print(json.dumps(rows, indent=2))
+        return
+    for r in rows:
+        print(f"{r['symbol']:6} {r['weight']:4}  {r['title'][:80]}")
