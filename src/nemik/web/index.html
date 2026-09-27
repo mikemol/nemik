@@ -162,6 +162,7 @@ function draw() {
       { selector: ".operator", style: { "background-color": css("--blocked") } },
       { selector: ".operator.answered, .operator.condition", style: { "background-color": css("--done") } },
       { selector: ".operator.unstated", style: { "background-color": css("--interrupt") } },
+      { selector: "edge.rank", style: { display: "none" } },
       { selector: ":selected", style: { "overlay-opacity": 0.15 } },
     ],
   });
@@ -179,6 +180,24 @@ function draw() {
   document.getElementById("stat").textContent = `${shown.length} waypoints · ${blocked} blocked · ${repos.length} repos`;
 }
 
+// Only edges that point downstream (prerequisite above dependent) may rank the layout, as with
+// Graphviz's constraint=false. An `enables` edge already points that way. A `waits` edge points the
+// other way (waiter -> blocker): drawn, but never given to dagre. If no `enables` edge already
+// carries the same dependency, a hidden reversed copy (blocker -> waiter) ranks it instead, and
+// tile() removes it after the layout.
+function rankEdges(kids) {
+  const inner = kids.edgesWith(kids);
+  const enables = inner.filter(e => !e.hasClass("waits"));
+  const have = new Set(enables.map(e => e.source().id() + ">" + e.target().id()));
+  const extra = [];
+  inner.filter(e => e.hasClass("waits")).forEach(e => {
+    const key = e.target().id() + ">" + e.source().id();
+    if (!have.has(key)) { have.add(key); extra.push({ group: "edges", classes: "rank",
+      data: { id: "rank:" + key, source: e.target().id(), target: e.source().id() } }); }
+  });
+  return enables.union(cy.add(extra));
+}
+
 // Lay each repo out on its own (dagre, top-down), then tile the repos in rows, widest first, so the
 // all-repos overview stays readable: most waypoints have no edges, which a single global layout
 // stretches into one long line.
@@ -192,8 +211,9 @@ function tile() {
   }
   const boxes = cy.nodes(".repo").map(r => {
     const kids = r.children();
-    kids.union(kids.edgesWith(kids)).layout({ name: "dagre", rankDir: "TB", nodeSep: 10, rankSep: 30,
+    kids.union(rankEdges(kids)).layout({ name: "dagre", rankDir: "TB", nodeSep: 10, rankSep: 30,
       nodeDimensionsIncludeLabels: true }).run();
+    cy.remove(cy.edges(".rank"));
     return { r, bb: kids.boundingBox() };
   }).sort((a, b) => b.bb.w * b.bb.h - a.bb.w * a.bb.h);
   // Aim for the viewport's aspect ratio rather than one long row.
