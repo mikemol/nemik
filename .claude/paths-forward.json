@@ -633,21 +633,19 @@
     {
       "symbol": "W38",
       "title": "Validate nemik-rank on luthen queue: W120-W127 chains outrank W91/W65",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W34"
       ],
       "touches": [],
-      "blocked_on": [
-        "luthen-observability:W117"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "When luthen adds the peer enables edges: rerun the preview; the acceptance test is that the W45 children (W123/W125/W121) outrank W79",
-      "evidence": "2026-09-27: ACCEPTANCE (luthen-observability-81, 13:4x): luthen's W45 chain must rank above W79. The operator's expectation: linux-sources:W124 and el-openglo:W127 are sessions sitting blocked. luthen's stopgap with a flat 3x peer weight gave W79=16 > W45=13, which is wrong. W122 landed at 77c08d4; W123 is applied, with its admission check pending. | 2026-09-27: LIVE PREVIEW at 0b8b06b (not yet validation): W79=16, W45=7, W122=8, W120=7, W123=7, W91=0, W65=1. The acceptance case (W45>W79) still FAILS on real data even though the synthetic fixture passes, so the live graph lacks the edge a stalled peer should contribute. First step: trace which of W45's downstream nodes are peers, and whether linux-sources:W124 / el-openglo:W127 reach W45 via waitsFor or only via free text. | 2026-09-27: TRACE 14:0x: this is a data gap, not a traversal bug. luthen's W120-W127 each enable W45 (children enable the umbrella), so W45's downstream holds no peer. The stalled peers show up only in titles (W124 'linux-sources' apt-sourc...', W127 'el-openglo's VM...'); neither has an enables edge to a peer waypoint. el-openglo:W70 is blocked on the bare 'luthen-observability' and claimed by luthen W94, not W45's chain. nemik will not infer edges from titles (W27 pattern: don't guess on another repo's live data). Fix: luthen adds W124 --enables linux-sources:W<n> and W127 --enables el-openglo:W70 (or W83). Then the children inherit peer_blocked weight through those edges. Asked luthen-observability-81.",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-09-27: ACCEPTANCE (luthen-observability-81, 13:4x): luthen's W45 chain must rank above W79. The operator's expectation: linux-sources:W124 and el-openglo:W127 are sessions sitting blocked. luthen's stopgap with a flat 3x peer weight gave W79=16 > W45=13, which is wrong. W122 landed at 77c08d4; W123 is applied, with its admission check pending. | 2026-09-27: LIVE PREVIEW at 0b8b06b (not yet validation): W79=16, W45=7, W122=8, W120=7, W123=7, W91=0, W65=1. The acceptance case (W45>W79) still FAILS on real data even though the synthetic fixture passes, so the live graph lacks the edge a stalled peer should contribute. First step: trace which of W45's downstream nodes are peers, and whether linux-sources:W124 / el-openglo:W127 reach W45 via waitsFor or only via free text. | 2026-09-27: TRACE 14:0x: this is a data gap, not a traversal bug. luthen's W120-W127 each enable W45 (children enable the umbrella), so W45's downstream holds no peer. The stalled peers show up only in titles (W124 'linux-sources' apt-sourc...', W127 'el-openglo's VM...'); neither has an enables edge to a peer waypoint. el-openglo:W70 is blocked on the bare 'luthen-observability' and claimed by luthen W94, not W45's chain. nemik will not infer edges from titles (W27 pattern: don't guess on another repo's live data). Fix: luthen adds W124 --enables linux-sources:W<n> and W127 --enables el-openglo:W70 (or W83). Then the children inherit peer_blocked weight through those edges. Asked luthen-observability-81. | 2026-09-27: PASS 14:2x after luthen added W127/W94 --enables el-openglo:W70 (blocked): W45 chain W123/W125/W121/W126/W127=22 > W79=16 = W94=16 > W65=1 > W91=0 (ready: W125 22 tops W79 16). Note: luthen W45 enables W120-W127 AND each child enables W45, a 2-way cycle, so the whole chain shares one downstream set (identical 22s). Traversal is cycle-safe; the cycle is luthen's data to break (skill §3), reported to them.",
       "issued_at": "2026-09-27T13:32:23Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-09-27T14:12:46Z",
+      "last_worked": "2026-09-27T14:13:44Z",
       "ticks_blocked": 0
     },
     {
