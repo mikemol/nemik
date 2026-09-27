@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 48,
+  "counter": 49,
   "waypoints": [
     {
       "symbol": "W1",
@@ -826,6 +826,24 @@
       "last_worked": "2026-09-27T15:18:06Z",
       "ticks_blocked": 0,
       "weight": 0
+    },
+    {
+      "symbol": "W49",
+      "title": "Render cross-repo touches[] overlap (grouped by tag) once mtools emits OVERLAP",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "mtools:W118"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T16:29:09Z",
+      "minted_during": "interrupt",
+      "caused_by": "mtools:W102",
+      "last_worked": "2026-09-27T16:29:13Z",
+      "ticks_blocked": 0
     }
   ],
   "residue": [
