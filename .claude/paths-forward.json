@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 30
+      "ticks_blocked": 31
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 36,
+      "ticks_blocked": 37,
       "weight": 1
     },
     {
@@ -1359,7 +1359,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:54:01Z",
-      "ticks_blocked": 20,
+      "ticks_blocked": 21,
       "weight": 0
     },
     {
@@ -1382,7 +1382,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:43:45Z",
-      "ticks_blocked": 21
+      "ticks_blocked": 22
     },
     {
       "symbol": "W77",
@@ -1403,7 +1403,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:13:38Z",
-      "ticks_blocked": 14,
+      "ticks_blocked": 15,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1571,7 +1571,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T22:08:39Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "weight": 0
     },
     {
@@ -1634,7 +1634,7 @@
     {
       "symbol": "W90",
       "title": "Bazel skeleton: MODULE.bazel (rules_python 3.13, pip hub from uv.lock incl. the vendored pathsforward wheel), py_library, one py_test per tests/test_*.py via a pytest_main (mtools pattern); bazel test //... green",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W85"
       ],
@@ -1643,13 +1643,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "First obstacle, measured: uv.lock sources mikemol-pathsforward from a PATH (vendor/wheels/*.whl) and pip.parse(uv_lock=) handles index/git only. Git-pinning is out: the wheel is vendored so the image build never fetches github.com (nemik:W6, vendor/wheels/README.md). So: a small repo rule / genrule unpacking the vendored wheel into a py_library, and pip.parse over the lock minus that one package",
-      "evidence": "",
+      "next_bounded_step": "",
+      "evidence": "2026-09-27: 12ae590: bazel test //... 12/12, rerun 0 executed (cached); host pytest 63 passed. Undeclared host inputs found: test_web_render and test_witnesses PASS in the sandbox by reaching ~/.cache/ms-playwright and /usr/bin/opa; W91 must declare them (else a host without them skips = false green)",
       "issued_at": "2026-09-27T22:08:38Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-09-27T22:08:55Z",
-      "ticks_blocked": 0
+      "last_worked": "2026-09-27T22:16:50Z",
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W91",
@@ -1664,12 +1665,13 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: measured in W90: sandbox currently reaches host opa + host playwright cache; also paperkit for test_architecture",
       "issued_at": "2026-09-27T22:08:39Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-09-27T22:16:50Z",
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W92",
@@ -1689,7 +1691,8 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     }
   ],
   "residue": [
