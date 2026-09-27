@@ -79,6 +79,20 @@ class Model:
             self.nodes, self.edges, self.workstreams = len(doc["nodes"]), len(doc["edges"]), len(findings)
             self.payload = json.dumps(doc).encode()
 
+    def poke(self) -> None:
+        """Keep requests off the rebuild path (nemik:W69, luthen-observability:W146).
+
+        Only the very first request builds synchronously, because there is nothing to serve yet.
+        After that, a changed export starts one background rebuild and the request is served the
+        last good payload at once, so probes and /metrics never wait on a multi-second survey.
+        """
+        if self.rebuilds == 0:
+            self.refresh()
+            return
+        key = tuple((str(p), p.stat().st_mtime_ns) for p in self.sources())
+        if key != self.key and not self._lock.locked():
+            threading.Thread(target=self.refresh, daemon=True).start()
+
     def metrics(self) -> bytes:
         try:
             ver = version("nemik")
@@ -204,7 +218,8 @@ def handler(model: Model) -> type[BaseHTTPRequestHandler]:
                 else:
                     self.send(404, "text/plain", b"not found")
                 return
-            model.refresh()
+            if self.path != "/metrics":  # a scrape reports the model; it never drives a rebuild
+                model.poke()
             if self.path in ("/wake", "/wake.json"):
                 g = model.graph
                 live, source = read_liveness(model.root, None)
