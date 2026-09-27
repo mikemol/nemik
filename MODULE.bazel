@@ -39,3 +39,15 @@ http_file(
     executable = True,
     downloaded_file_path = "opa",
 )
+
+# nemik:W99: the render test's headless Chromium as a hashed input (Playwright's own build of
+# chromium_headless_shell-1243, the revision the pinned playwright wheel expects), not ~/.cache.
+http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+http_archive(
+    name = "chromium",
+    url = "https://cdn.playwright.dev/builds/cft/153.0.8010.12/linux64/chrome-headless-shell-linux64.zip",
+    sha256 = "a9da028861a0cf789ff25c2fed45f5f1aaf969ed9247835b6a7821a4f7af9d1d",
+    strip_prefix = "chrome-headless-shell-linux64",
+    build_file_content = """filegroup(name = "files", srcs = glob(["**"]), visibility = ["//visibility:public"])
+exports_files(["chrome-headless-shell"])""",
+)

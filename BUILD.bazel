@@ -24,8 +24,11 @@ py_library(
         imports = ["tests"],
         main = "tests/pytest_main.py",
         args = ["$(location " + src + ")", "-q", "-c", "$(location pyproject.toml)"],
-        data = ["pyproject.toml", ":.venv", "@opa//file"],
-        env = {"NEMIK_OPA": "$(rootpath @opa//file)"},
+        data = ["pyproject.toml", ":.venv", "@opa//file", "@chromium//:files", "@chromium//:chrome-headless-shell"],
+        env = {
+            "NEMIK_OPA": "$(rootpath @opa//file)",
+            "NEMIK_CHROMIUM": "$(rootpath @chromium//:chrome-headless-shell)",
+        },
         deps = [
             ":nemik",
             requirement("pytest"),

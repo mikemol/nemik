@@ -2,6 +2,7 @@
 by another waypoint's shape (the operator's occlusion report, nemik:W77)."""
 
 import json
+import os
 import socket
 import subprocess
 import time
@@ -62,7 +63,9 @@ OVERLAPS = """() => {
 def test_labels_are_not_covered_by_other_nodes(server) -> None:
     with sync_api.sync_playwright() as p:
         try:
-            browser = p.chromium.launch()
+            # nemik:W99: Bazel hands a pinned headless shell as $NEMIK_CHROMIUM; the host uses Playwright's cache.
+            exe = os.environ.get("NEMIK_CHROMIUM")
+            browser = p.chromium.launch(executable_path=os.path.abspath(exe) if exe else None)
         except Exception as e:  # noqa: BLE001 - no browser installed here
             pytest.skip(f"chromium unavailable: {e}")
         page = browser.new_page(viewport={"width": 1400, "height": 900})

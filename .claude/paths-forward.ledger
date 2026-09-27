@@ -190,3 +190,4 @@
 2026-09-27T22:27:44Z  tick  W96  done      unblock   "Bazel-built .venv with packages + console scripts"
 2026-09-27T22:39:31Z  tick  W97  done      collapse  "installed scripts replace W90 workarounds; W93 closed"
 2026-09-27T22:40:46Z  tick  W98  done      unblock   "W91 atomized W98/W99; opa is a pinned input"
+2026-09-27T22:55:38Z  tick  W99  done      unblock   "Chromium pinned; paperkit split to W100"
