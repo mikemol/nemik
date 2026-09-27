@@ -46,7 +46,7 @@ The root defaults to `~/github` and can be set with `$NEMIK_ROOT` or `--root`. I
 `<root>/<repo>/.claude/paths-forward.*` or a flat export, `<root>/<repo>/paths-forward.*`.
 
 ```console
-$ uv sync
+$ uv sync --no-editable   # a package, not the working tree; nemik warns otherwise (W94)
 $ .venv/bin/nemik-check
 $ .venv/bin/nemik-serve --port 8750
 ```

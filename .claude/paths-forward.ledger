@@ -186,3 +186,4 @@
 2026-09-27T22:08:55Z  tick  W85  atomized  collapse  "W85 -> W90 skeleton, W91 opa/chromium inputs, W92 pre-commit gate; W90 first obstacle: path-sourced wheel in uv.lock"
 2026-09-27T22:16:50Z  tick  W90  done      unblock   "bazel skeleton green; found real bug: witnesses --apply silently no-op without a console script"
 2026-09-27T22:23:53Z  tick  W94  done      unblock   "editable-install warning on every nemik invocation (operator ask)"
+2026-09-27T22:24:48Z  tick  W95  done      unblock   "W93 atomized W95-W97; host venv non-editable"
