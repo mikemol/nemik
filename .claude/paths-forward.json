@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 22
+      "ticks_blocked": 24
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 28,
+      "ticks_blocked": 30,
       "weight": 1
     },
     {
@@ -1019,7 +1019,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T18:51:55Z",
-      "ticks_blocked": 14
+      "ticks_blocked": 16
     },
     {
       "symbol": "W59",
@@ -1227,7 +1227,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T18:24:59Z",
-      "ticks_blocked": 18
+      "ticks_blocked": 20
     },
     {
       "symbol": "W69",
@@ -1287,22 +1287,20 @@
     {
       "symbol": "W72",
       "title": "Dashboard Tools panel: /cmd/<name>?repo= returns each read-only CLI's exact output (check, metrics, inbound, operator, wake, rank, overlaps, witnesses dry-run on click, floor-asks where summit present, mtools --queue/--check/--overlaps per repo), in-process on the cached graph",
-      "status": "blocked",
+      "status": "ready",
       "enables": [],
       "touches": [
         "web-ui"
       ],
-      "blocked_on": [
-        "W83"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-09-27T19:33:48Z",
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T20:56:22Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 0,
       "weight": 0
     },
     {
@@ -1364,7 +1362,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:54:01Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 14,
       "weight": 0
     },
     {
@@ -1387,7 +1385,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:43:45Z",
-      "ticks_blocked": 13
+      "ticks_blocked": 15
     },
     {
       "symbol": "W77",
@@ -1408,7 +1406,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:13:38Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 8,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1517,7 +1515,7 @@
     {
       "symbol": "W83",
       "title": "/cmd for mtools per repo: --queue, --check, --overlaps via the pinned pathsforward API, not a subprocess",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W72"
       ],
@@ -1527,11 +1525,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: 11881a2: tools._pf; parity vs mikemol-paths-forward CLI; 62 passed; smoke on nemik exit 0, state file unchanged",
       "issued_at": "2026-09-27T20:56:22Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-27T21:39:00Z",
       "ticks_blocked": 0,
       "weight": 1
     },
@@ -1612,7 +1610,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:23:37Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 2
     },
     {
       "symbol": "W88",
@@ -1632,7 +1630,8 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W89",
@@ -1652,7 +1651,8 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     }
   ],
   "residue": [
