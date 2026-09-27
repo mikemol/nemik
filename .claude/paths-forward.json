@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 74,
+  "counter": 76,
   "waypoints": [
     {
       "symbol": "W1",
@@ -1343,6 +1343,44 @@
       "issued_at": "2026-09-27T19:38:35Z",
       "minted_during": "tick",
       "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W75",
+      "title": "Weather: one outage = one monotone FFI waypoint (minted by the blocked repo, witness over a probe fact); identical witness queries group as one weather item in views and ddG; design note in W58 doc",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "conditions"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T19:42:13Z",
+      "minted_during": "interrupt",
+      "caused_by": "paperkit:W111",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W76",
+      "title": "Ask luthen: blackbox probe for buildbuddy-bes (and other shared endpoints) so outages have an observable fact (probe_success)",
+      "status": "ready",
+      "enables": [
+        "W75"
+      ],
+      "touches": [
+        "conditions"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T19:42:13Z",
+      "minted_during": "interrupt",
+      "caused_by": "paperkit:W111",
       "last_worked": null,
       "ticks_blocked": 0
     }

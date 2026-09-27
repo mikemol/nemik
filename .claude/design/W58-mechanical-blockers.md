@@ -116,3 +116,19 @@ out whether it happened. So the evaluator records *which* outcome occurred in ev
 - Remote PIDs need host reachability. Should `pid:` be restricted to the evaluator's own host at first?
 - Should alert/promql probes go through luthen's endpoints_query rather than hard-coded URLs? (see
   memory luthen-stores-resolve-by-name). Probably yes.
+
+## Weather (nemik:W75, operator: "The weather is part of our dependency graph")
+
+Environmental conditions such as an endpoint being up are not monotone, but waypoints are.
+So **one outage = one FFI waypoint**, e.g. "buildbuddy-bes accepts uploads again", whose
+witness is over a probe fact (`input.promql["probe_success{target=\"buildbuddy-bes\"}"].values[0] == 1`).
+The blocked repo mints it locally and blocks on it, rather than on free text (paperkit W111's
+`blocked_on: ["buildbuddy-bes remote endpoint"]`). The next outage mints a new one, and done
+never reopens.
+
+Shared weather needs no shared queue: **the witness query is its identity.** Waypoints in
+several repos with identical witnesses are one weather item. nemik groups them in views and in
+ddG, and one `--apply` pass wakes every waiter.
+
+Observable fact: this needs blackbox probes of shared endpoints (luthen, nemik:W76). `up` for a
+metrics port is not the same claim as "BES accepts uploads".
