@@ -95,3 +95,4 @@
 2026-09-27T16:47:28Z  tick  W50  done      sweep     "comma-joined tags split via mtools:W122"  evidence=836f20e
 2026-09-27T17:01:02Z  tick  W51  filed     -         "summit-da: pathsforward source conflict blocks declaring nemik"
 2026-09-27T17:01:16Z  tick  --   rearmed   -         "W51 ready; job 2c987931"
+2026-09-27T17:02:49Z  tick  W49  unblocked -         "mtools:W118 landed 49ac0ff (--overlaps)"

@@ -835,19 +835,17 @@
     {
       "symbol": "W49",
       "title": "Render cross-repo touches[] overlap (grouped by tag) once mtools emits OVERLAP",
-      "status": "blocked",
+      "status": "ready",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "mtools:W118"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Repin pathsforward to mtools 49ac0ff; then render cross-repo OVERLAP grouped by tag from nemik:touches (same line shape as --overlaps)",
       "evidence": "",
       "issued_at": "2026-09-27T16:29:09Z",
       "minted_during": "interrupt",
       "caused_by": "mtools:W102",
-      "last_worked": "2026-09-27T16:29:13Z",
+      "last_worked": "2026-09-27T17:02:49Z",
       "ticks_blocked": 0
     },
     {
