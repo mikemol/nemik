@@ -99,3 +99,5 @@
 2026-09-27T17:08:33Z  tick  W49  atomized  collapse  "ATOMIZE: split into W52 (repin) + W53 (renderer)"
 2026-09-27T17:08:49Z  tick  W52  done      unblock   "repinned to 49ac0ff; enables W49 via W53"  evidence=49ac0ff
 2026-09-27T17:16:55Z  tick  W51  done      unblock   "operator-prioritized; consumer override recipe verified"  evidence=0aefb9b
+2026-09-27T17:20:18Z  tick  W54  filed     -         "operator: blocked parents with done children read as stuck (W17, W49)"
+2026-09-27T17:20:18Z  tick  W55  filed     -         "data-side fix for stale blocked_on"

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 53,
+  "counter": 55,
   "waypoints": [
     {
       "symbol": "W1",
@@ -923,6 +923,42 @@
       "evidence": "",
       "issued_at": "2026-09-27T17:08:33Z",
       "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W54",
+      "title": "nemik views: render satisfied (done) blockers as faded edges; count only open blockers",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "web-ui"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T17:20:18Z",
+      "minted_during": "interrupt",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W55",
+      "title": "Ask mtools: --bump-blocked drops done local symbols from blocked_on; empty list returns item to ready",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "upstream"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T17:20:18Z",
+      "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": null,
       "ticks_blocked": 0
