@@ -709,11 +709,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Script over summit/floor/*.bib: parse waypoint=<repo>:W<n>, resolve against the merged graph (ChangeRequest or Dropped); report unresolved/dropped; wire as a nemik-check Warning or a nemik-operator column; fixture test",
-      "evidence": "",
+      "evidence": "2026-09-27: summit-da 14:3x: no back-fill planned. The field gets added as asks are filed or touched, and summit will ping when the first one carries it. The witness can still be built against a fixture before that.",
       "issued_at": "2026-09-27T14:32:36Z",
       "minted_during": "tick",
       "caused_by": "summit:W105",
-      "last_worked": null,
+      "last_worked": "2026-09-27T14:32:48Z",
       "ticks_blocked": 0
     }
   ],
