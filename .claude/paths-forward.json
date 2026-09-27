@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 6
+      "ticks_blocked": 7
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 13,
       "weight": 1
     },
     {
@@ -926,22 +926,20 @@
     {
       "symbol": "W54",
       "title": "nemik views: render satisfied (done) blockers as faded edges; count only open blockers",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [
         "web-ui"
       ],
-      "blocked_on": [
-        "W57"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: children W56 (graph.json satisfied/open_blockers) + W57 (faded edges) done",
       "issued_at": "2026-09-27T17:20:18Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-09-27T17:25:45Z",
-      "ticks_blocked": 6,
+      "last_worked": "2026-09-27T19:08:41Z",
+      "ticks_blocked": 0,
       "weight": 0
     },
     {
@@ -1023,7 +1021,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T18:51:55Z",
-      "ticks_blocked": 1
+      "ticks_blocked": 2
     },
     {
       "symbol": "W59",
@@ -1071,7 +1069,7 @@
     {
       "symbol": "W61",
       "title": "Wake path: resolved condition in a dormant repo surfaces in nemik-wake; armed session gets inbox/message",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W58"
       ],
@@ -1081,11 +1079,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: commit b5dc871; waiters() finds local+foreign blocked_on; wake() writes <inbox>/<date>-nemik-witness-<repo>-<W>.md (W4 channel, costs a dormant repo nothing); fixture test 3 repos; pytest 42",
       "issued_at": "2026-09-27T17:31:04Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-27T19:09:10Z",
       "ticks_blocked": 0,
       "weight": 1
     },
@@ -1229,7 +1227,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T18:24:59Z",
-      "ticks_blocked": 2
+      "ticks_blocked": 3
     },
     {
       "symbol": "W69",
