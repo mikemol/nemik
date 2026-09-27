@@ -51,6 +51,7 @@ aside a { color: var(--ink); text-decoration: underline dotted var(--muted); }
   <label>Repo <select id="repo"><option value="">all</option></select></label>
   <label><input type="checkbox" id="showDone"> show done/dropped</label>
   <label><input type="checkbox" id="showNoise"> show operator blocks that don't need you</label>
+  <label><input type="checkbox" id="showCross"> show all cross-repo edges</label>
   <span class="stat" id="stat"></span>
 </header>
 <main>
@@ -163,10 +164,25 @@ function draw() {
       { selector: ".operator.answered, .operator.condition", style: { "background-color": css("--done") } },
       { selector: ".operator.unstated", style: { "background-color": css("--interrupt") } },
       { selector: "edge.rank", style: { display: "none" } },
+      { selector: "edge.cross", style: { opacity: 0.08 } },
+      { selector: "edge.cross.lit", style: { opacity: 1, "z-index": 10 } },
       { selector: ":selected", style: { "overlay-opacity": 0.15 } },
     ],
   });
   tile();
+  // nemik:W88: an edge between two boxes is faint until one of its ends is hovered or selected,
+  // or "show all cross-repo edges" is on. Inside a box, edges stay as they are.
+  const unit = n => (n.isChild() ? n.parent().id() : n.id());
+  cy.edges().filter(e => unit(e.source()) !== unit(e.target())).addClass("cross");
+  const light = () => {
+    cy.edges(".cross").removeClass("lit");
+    if (document.getElementById("showCross").checked) { cy.edges(".cross").addClass("lit"); return; }
+    cy.nodes(":selected").connectedEdges(".cross").addClass("lit");
+  };
+  cy.on("mouseover", "node", ev => ev.target.connectedEdges(".cross").addClass("lit"));
+  cy.on("mouseout", "node", light);
+  cy.on("select unselect", "node", light);
+  light();
   cy.on("tap", "node[symbol]", ev => { selectedId = ev.target.id(); detail(ev.target.data()); });
   cy.on("tap", "node[lane]", ev => lane(ev.target.data("lane")));
   // The 60s poll rebuilds the graph from scratch (cy.destroy() above), which silently drops
@@ -394,6 +410,9 @@ for (const id of ["wake", "goals"]) document.getElementById(id).addEventListener
 document.getElementById("repo").onchange = () => { draw(); findings(); goals(); tool(); };
 document.getElementById("showDone").onchange = draw;
 document.getElementById("showNoise").onchange = draw;
+document.getElementById("showCross").onchange = () => cy && cy.edges(".cross").length && (
+  document.getElementById("showCross").checked ? cy.edges(".cross").addClass("lit")
+  : (cy.edges(".cross").removeClass("lit"), cy.nodes(":selected").connectedEdges(".cross").addClass("lit")));
 load();
 setInterval(load, 60000);
 </script>
