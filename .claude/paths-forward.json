@@ -673,15 +673,15 @@
       "enables": [],
       "touches": [],
       "blocked_on": [
-        "mtools"
+        "mtools:W111"
       ],
       "blocked_kind": "agent",
-      "next_bounded_step": "When mtools mints its waypoint, repoint blocked_on to mtools:W<n>; then adopt via vendored wheel repin",
-      "evidence": "",
+      "next_bounded_step": "When mtools sends the W111 sha: repin vendored wheel, update vendor/wheels/README history, run pytest, verify --check prints ATOMIZE",
+      "evidence": "2026-09-27: mtools-65 minted mtools:W111 (enables nemik:W40); will send sha on landing",
       "issued_at": "2026-09-27T13:35:28Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-09-27T13:35:28Z",
+      "last_worked": "2026-09-27T13:36:00Z",
       "ticks_blocked": 0
     }
   ],

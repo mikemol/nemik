@@ -1,7 +1,7 @@
 <!-- DERIVED from the state file by mikemol-paths-forward --render. NEVER EDIT. -->
 # paths-forward — /home/mikemol/github/nemik/.claude/paths-forward.json
 
-counter 40 · heartbeat 2026-09-27T13:28:10Z · job `5a40cc03` · hash `v2:b7a02d551f2321d4`
+counter 40 · heartbeat 2026-09-27T13:28:10Z · job `5a40cc03` · hash `v2:7b31c4477ee7cea2`
 
 | # | symbol | status | title | blocked on | next bounded step |
 |---|---|---|---|---|---|
@@ -14,7 +14,7 @@ counter 40 · heartbeat 2026-09-27T13:28:10Z · job `5a40cc03` · hash `v2:b7a02
 | 7 | W22 | ready | Trial: SHACL Warning when a waypoint title exceeds 150 chars (decomposition signal, operator request re el-openglo:W45). Fires 256 times across ~/github today (commit f235c4f). Watch whether repos act on it or just accumulate the warning; 150 is a first guess, not measured | — | After it's been live a while, check whether any repo actually decomposed a waypoint because of it |
 | 8 | W34 | blocked | nemik-rank: cross-repo transitive downstream weight per ready item, peer edges weighted by declared data, plus drift witness | W35, W36, W37, W38, W39 | Umbrella: done when W35-W39 are done |
 | 9 | W1 | blocked | S6: check that every OPEN summit ask's waypoint appears in nemik-inbound for its owner | summit:W105 | — |
-| 10 | W40 | blocked | Ask mtools: pathsforward flags a ready item that stays top of queue across ticks (from ledger) as ATOMIZE | mtools | When mtools mints its waypoint, repoint blocked_on to mtools:W<n>; then adopt via vendored wheel repin |
+| 10 | W40 | blocked | Ask mtools: pathsforward flags a ready item that stays top of queue across ticks (from ledger) as ATOMIZE | mtools:W111 | When mtools sends the W111 sha: repin vendored wheel, update vendor/wheels/README history, run pytest, verify --check prints ATOMIZE |
 | 11 | W4 | done | N2: send each repo its blocks on the operator with no ask stated, and the 'operator: decide/act' form | — | — |
 | 12 | W15 | done | Gate tests: nemik has no test suite; write pytest coverage for nemik-check exit/provenance lines, nemik-inbound UNCLAIMED column, blocks/operator categories, over a fixture ~/github tree | — | — |
 | 13 | W2 | done | U2: say 'waiting on you, claim with --enables <ref>' in nemik-inbound and the Wake panel instead of bare 'unclaimed' (substrate-d9 read it as other repos' business) | — | — |
