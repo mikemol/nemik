@@ -1,4 +1,5 @@
-load("@nemik_dev//:requirements.bzl", "requirement")
+load("@nemik_dev//:requirements.bzl", "all_requirements", "requirement")
+load("//bazel:venv.bzl", "venv_from_hub")
 load("@rules_python//python:defs.bzl", "py_library", "py_test")
 
 exports_files(["pyproject.toml"])
@@ -34,3 +35,27 @@ py_library(
     # nemik:W91 declares paperkit as an input.
     for src in glob(["tests/test_*.py"], exclude = ["tests/test_architecture.py"])
 ]
+
+# nemik:W96: the distribution's .venv as a build artifact (operator: "install as a package into
+# their .venv"): the dev closure, the vendored pathsforward wheel, nemik's own sources, and every
+# console script, the same entries as pyproject's [project.scripts] plus pathsforward's own.
+venv_from_hub(
+    name = ".venv",
+    hub_requirements = all_requirements + ["@pathsforward//:pkg"],
+    python_version = "3.13",
+    python_version_short = "3.13",
+    srcs = glob(["src/nemik/**"], exclude = ["**/__pycache__/**"]),
+    console_scripts = {
+        "nemik-check": "nemik.check:main",
+        "nemik-metrics": "nemik.metrics:main",
+        "nemik-serve": "nemik.serve:main",
+        "nemik-inbound": "nemik.blocks:main",
+        "nemik-operator": "nemik.blocks:operator_main",
+        "nemik-wake": "nemik.wake:main",
+        "nemik-rank": "nemik.rank:main",
+        "nemik-floor-asks": "nemik.floorasks:main",
+        "nemik-overlaps": "nemik.overlaps:main",
+        "nemik-witnesses": "nemik.witnesses:main",
+        "mikemol-paths-forward": "mikemol.pathsforward.cli:main",
+    },
+)

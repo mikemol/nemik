@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 33
+      "ticks_blocked": 34
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 39,
+      "ticks_blocked": 40,
       "weight": 1
     },
     {
@@ -1359,7 +1359,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:54:01Z",
-      "ticks_blocked": 23,
+      "ticks_blocked": 24,
       "weight": 0
     },
     {
@@ -1382,7 +1382,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:43:45Z",
-      "ticks_blocked": 24
+      "ticks_blocked": 25
     },
     {
       "symbol": "W77",
@@ -1403,7 +1403,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:13:38Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1570,7 +1570,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T22:08:39Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "weight": 0
     },
     {
@@ -1704,7 +1704,6 @@
         "packaging"
       ],
       "blocked_on": [
-        "W95",
         "W96",
         "W97"
       ],
@@ -1715,7 +1714,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T22:24:48Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "weight": 0
     },
     {
@@ -1763,7 +1762,7 @@
     {
       "symbol": "W96",
       "title": "W93b: Bazel venv artifact (mtools venv.bzl): nemik + pathsforward installed with console scripts",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W93"
       ],
@@ -1774,11 +1773,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: bazel/venv.bzl vendored from mtools; bazel/wheel.bzl extracts to site-packages/ and exposes :extracted_whl_files; BUILD.bazel //:.venv with nemik srcs + all console scripts incl mikemol-paths-forward. Measured: bazel-bin/.venv/bin/{nemik-rank,mikemol-paths-forward,nemik-witnesses} run; bazel test //... 13/13 pass",
       "issued_at": "2026-09-27T22:24:43Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-27T22:27:44Z",
       "ticks_blocked": 0
     },
     {

@@ -187,3 +187,4 @@
 2026-09-27T22:16:50Z  tick  W90  done      unblock   "bazel skeleton green; found real bug: witnesses --apply silently no-op without a console script"
 2026-09-27T22:23:53Z  tick  W94  done      unblock   "editable-install warning on every nemik invocation (operator ask)"
 2026-09-27T22:24:48Z  tick  W95  done      unblock   "W93 atomized W95-W97; host venv non-editable"
+2026-09-27T22:27:44Z  tick  W96  done      unblock   "Bazel-built .venv with packages + console scripts"
