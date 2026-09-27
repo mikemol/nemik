@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 62,
+  "counter": 65,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 1
+      "ticks_blocked": 2
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "weight": 1
     },
     {
@@ -941,7 +941,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T17:25:45Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "weight": 0
     },
     {
@@ -1024,7 +1024,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T17:31:15Z",
-      "ticks_blocked": 2
+      "ticks_blocked": 3
     },
     {
       "symbol": "W59",
@@ -1048,12 +1048,12 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T17:32:12Z",
-      "ticks_blocked": 2
+      "ticks_blocked": 3
     },
     {
       "symbol": "W60",
       "title": "nemik-witnesses: closed observers gather input facts; opa eval the witness Rego; true=done (facts as evidence), undefined=can't-observe finding; fixture-first",
-      "status": "working",
+      "status": "blocked",
       "enables": [
         "W58",
         "W61"
@@ -1061,14 +1061,18 @@
       "touches": [
         "conditions"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W63",
+        "W64",
+        "W65"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Add git-ref and time observers, then the runner (nemik-witnesses [--apply]) reading waypoint.witness once mtools:W131 lands; k8s/alert/promql via luthen endpoints_query after",
       "evidence": "2026-09-27: step 1 aa00300: witnesses.py evaluate true/false/undefined via opa eval; pid(localhost, starttime guard)+file observers; tests/test_witnesses.py; pytest 35",
       "issued_at": "2026-09-27T17:31:04Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-09-27T17:39:03Z",
+      "last_worked": "2026-09-27T17:53:34Z",
       "ticks_blocked": 0,
       "weight": 2
     },
@@ -1113,6 +1117,68 @@
       "last_worked": null,
       "ticks_blocked": 0,
       "weight": 1
+    },
+    {
+      "symbol": "W63",
+      "title": "witnesses: git-ref and time observers, fixture-tested",
+      "status": "done",
+      "enables": [
+        "W60"
+      ],
+      "touches": [
+        "conditions"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-09-27: commit 68717e8; git_ref observer + input.now time witness; injection guards tested; pytest 37",
+      "issued_at": "2026-09-27T17:53:34Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-09-27T17:54:04Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W64",
+      "title": "nemik-witnesses [--apply] runner: read waypoint.witness fleet-wide, mark true done with facts as evidence, report undefined",
+      "status": "blocked",
+      "enables": [
+        "W60"
+      ],
+      "touches": [
+        "conditions"
+      ],
+      "blocked_on": [
+        "mtools:W131"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T17:53:34Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-09-27T17:53:34Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W65",
+      "title": "witnesses: k8s_job, alert, promql observers resolved through luthen endpoints_query",
+      "status": "ready",
+      "enables": [
+        "W60"
+      ],
+      "touches": [
+        "conditions"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T17:53:34Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [

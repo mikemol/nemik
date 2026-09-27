@@ -119,3 +119,7 @@
 2026-09-27T17:47:55Z  nudge W61  nudged    -         "from W58 (waits on W61)"
 2026-09-27T17:47:55Z  nudge W62  nudged    -         "from W58 (waits on W62)"
 2026-09-27T17:47:56Z  tick  W55  done      unblock   "mtools:W125 landed; done blockers now pruned"  evidence=6f81801
+2026-09-27T17:53:34Z  tick  W60  atomized  collapse  "ATOMIZE: W63 git/time, W64 runner (on mtools:W131), W65 luthen observers"
+2026-09-27T17:53:34Z  nudge W47  nudged    -         "from W17"
+2026-09-27T17:53:34Z  nudge W57  nudged    -         "from W54"
+2026-09-27T17:54:04Z  tick  W63  done      unblock   "git_ref + time witnesses"  evidence=68717e8
