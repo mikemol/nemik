@@ -85,3 +85,4 @@
 2026-09-27T16:12:25Z  tick  W47  acknowledged -         "tick-1 NUDGE: all 4 dormant by operator's budget choice; inbox letters already there (W4, W45); nothing further to send until a wake"  evidence=memory operator-wakes-repos-selectively
 2026-09-27T16:12:25Z  tick  W22  advanced  sweep     "title-length trial watch concluded: 233 warnings, no decomposition observed; shape kept, watch ended to save ticks"  evidence=nemik-check grep 150 = 233
 2026-09-27T16:12:51Z  peer  W46  advanced  unblock   "luthen W124 now states an operator act; verified in nemik-operator"  evidence=nemik-operator
+2026-09-27T16:13:09Z  interrupt --   acknowledged -         "operator rule (h): loop live iff a ready/working item exists; suspend otherwise, re-arm on message/wake. W42 workable, so loop stays live"  evidence=memory loop-live-iff-workable
