@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 28,
+  "counter": 29,
   "waypoints": [
     {
       "symbol": "W1",
@@ -463,6 +463,24 @@
       "caused_by": null,
       "last_worked": "2026-09-26T23:59:19Z",
       "ticks_blocked": 0
+    },
+    {
+      "symbol": "W29",
+      "title": "Dash UI FR (operator, direct): repo boxes should be color-coded by liveliness state",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "web-ui"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "n/a",
+      "evidence": "2026-09-27: repo boxes' cytoscape border now reads liveness (asleep/idle/awake) from the same wake.json roster the Wake panel already renders, reusing one fetch instead of adding a second. Repos absent from the roster (nothing waiting on them) stay unmarked -- a real limitation (roster() only covers workstreams something is blocked on), noted in the new legend line rather than hidden. Verified the roster JSON shape live against a running server (6 entries, repo+state fields match what the new code reads). 18/18 tests pass (backend unaffected; no JS runtime available here to execute-check the frontend change, reviewed against the file's existing patterns).",
+      "issued_at": "2026-09-27T00:04:02Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-09-27T00:04:08Z",
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -483,6 +501,9 @@
   ],
   "job_id": "69c7ac3d",
   "heartbeat": "2026-09-26T23:59:59Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-09-27T00:03:59Z"
+  },
   "predecessor_job_id": "d591e532"
 }

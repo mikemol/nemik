@@ -53,6 +53,11 @@ dt { color: var(--muted); }
   <aside>
     <div class="legend" id="legend"></div>
     <p class="stat">Border thickness: interrupt share of ledger activity on that waypoint. Diamond: minted during an interrupt (no tick lock held). Dashed red: waits for (read from blocked_on), ending at the blocker's claiming waypoint, or at a dashed "?" in the blocker's box when nothing there claims it yet.</p>
+    <p class="stat">Repo box border: liveness, from the Wake panel's roster --
+      <span style="color:var(--ready)">awake</span>,
+      <span style="color:var(--interrupt)">idle</span>,
+      <span style="color:var(--blocked)">asleep</span>,
+      unmarked if nothing is waiting on it (no roster row).</p>
     <h2>Wake</h2>
     <div id="wake" class="stat">…</div>
     <h2>Selected</h2>
@@ -66,7 +71,7 @@ const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).
 const LANE = { "needs-you": "needs you", answered: "already answered", condition: "waiting on a condition", unstated: "no ask stated" };
 const STATES = ["ready", "working", "blocked", "done", "dropped", "unclaimed"];
 const color = s => css("--" + (STATES.includes(s) ? s : "other"));
-let data = null, cy = null, selectedId = null;
+let data = null, cy = null, selectedId = null, liveness = {};
 
 document.getElementById("legend").innerHTML = [...STATES, "other"].map(s =>
   `<span><i class="dot" style="background:${color(s)}"></i>${s}</span>`).join("");
@@ -93,9 +98,11 @@ function draw() {
   const repos = [...new Set(data.nodes.filter(n => keep.has(n.id)).map(n => n.repo))];
   const els = [
     // A repo box counts the unclaimed blocks inside it: each one is that repo's move.
+    // Its border reads liveness (asleep/idle/awake), from the same roster the Wake panel
+    // shows -- a repo nothing is waiting on has no roster row and stays "unknown".
     ...repos.map(r => {
       const k = data.nodes.filter(n => keep.has(n.id) && n.repo === r && n.state === "unclaimed").length;
-      return { data: { id: "repo:" + r, label: k ? `${r} · ${k} unclaimed` : r }, classes: "repo" };
+      return { data: { id: "repo:" + r, label: k ? `${r} · ${k} unclaimed` : r, live: liveness[r] || "unknown" }, classes: "repo" };
     }),
     ...data.nodes.filter(n => keep.has(n.id)).map(n => {
       const e = n.effort || {}, total = (e.forecast || 0) + (e.interrupt || 0) + (e.unclassified || 0);
@@ -124,6 +131,9 @@ function draw() {
       { selector: ".repo", style: { "background-opacity": 0.04, "background-color": css("--ink"), "border-width": 1,
         "border-color": css("--line"), label: "data(label)", "text-valign": "top", "text-halign": "center",
         "font-size": 12, color: css("--muted") } },
+      { selector: '.repo[live = "asleep"]', style: { "border-width": 2, "border-color": css("--blocked") } },
+      { selector: '.repo[live = "idle"]', style: { "border-width": 2, "border-color": css("--interrupt") } },
+      { selector: '.repo[live = "awake"]', style: { "border-width": 2, "border-color": css("--ready") } },
       { selector: "edge", style: { width: 1, "line-color": css("--line"), "target-arrow-color": css("--line"),
         "target-arrow-shape": "triangle", "curve-style": "bezier", "arrow-scale": 0.7 } },
       { selector: "edge.waits", style: { "line-style": "dashed", "line-color": css("--blocked"),
@@ -243,13 +253,17 @@ async function load() {
   const sel = document.getElementById("repo"), cur = sel.value;
   const repos = [...new Set(data.nodes.map(n => n.repo))].sort();
   sel.innerHTML = '<option value="">all</option>' + repos.map(r => `<option${r === cur ? " selected" : ""}>${esc(r)}</option>`).join("");
-  draw(); findings(); wake();
+  await wake();  // draw() reads `liveness`, populated by wake() -- fetch it first, not alongside.
+  draw(); findings();
 }
 
+// Also feeds `liveness` (repo -> asleep/idle/awake) that draw() uses to color repo boxes, so the
+// graph doesn't fetch this a second time.
 async function wake() {
   const el = document.getElementById("wake");
   let w;
   try { w = await (await fetch("wake")).json(); } catch (e) { el.textContent = "unavailable"; return; }
+  liveness = Object.fromEntries(w.roster.map(r => [r.repo, r.state]));
   const sleepers = w.roster.filter(r => r.state !== "awake");
   const rows = sleepers.map(r => `<dt><b>${esc(r.repo)}</b> <span class="stat">${esc(r.state)}</span></dt>
     <dd>${r.waiting.map(x => `${citeLink(x.blocked)}${x.claimed_by.length ? "" : ` (waiting on ${esc(r.repo)}: claim with <code>--enables ${esc(x.blocked)}</code>)`}`).join(", ")}</dd>`);
