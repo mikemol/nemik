@@ -4,6 +4,37 @@ Operator ask, 2026-09-27: "a way to declare blockers/waiters/waypoints on, e.g. 
 vmalert condition or k8s job; something that can be mechanically waited on to automatically
 wake/unblock, rather than force a polling action by a token-consuming agent."
 
+## Revision 2 (operator, same day): "This might look like an FFI waypoint. Something like a paperkit witness"
+
+The URI-scheme design below is kept as residue. Its flaw is that it adds a third *kind of
+blocker*. Blockers already have a single uniform shape, `<repo>:W<n>`, and every tool reads it:
+nemik-inbound, `--bump-blocked` pruning (mtools:W125), enables/waitsFor, and wake. So the
+mechanical thing should be a **waypoint**, not a blocker kind.
+
+**An FFI waypoint** is an ordinary waypoint with a `witness` field, a command stored as data.
+It is done when the witness exits 0, the same contract as paperkit's `witness = "checks/arch.py"`.
+It is the boundary where the queue calls out to the world instead of to a mind:
+
+    W70  "trace W109 finishes"   witness = "nemik-witness pid-gone localhost 41233@<starttime>"
+    W69  blocked_on = [W70]      (plain local block; W125 prunes it the moment W70 is done)
+
+- **mtools** (one writer): a `witness` string on waypoints, set with `--add/--update --witness CMD`.
+  `--check` flags a witnessed waypoint that is `working` (no mind works it). Nothing else changes:
+  `blocked_kind` stays agent|human.
+- **nemik-witness** (nemik): the standard witness library, one subcommand per observer: `pid-gone`,
+  `k8s-job-done`, `alert-state`, `promql-nonempty`, `git-ref`, `file-exists`, `after-time`.
+  Each exits 0/1/2 (holds, doesn't hold yet, can't observe). Output is one line of evidence.
+  Any executable also works, so it is an FFI rather than a closed enum.
+- **nemik-witnesses --apply**: runs every open witnessed waypoint across the fleet with no LLM,
+  and marks passes done with the witness's line as evidence. After that it is ordinary
+  machinery: W125 prunes blockers, the parent turns ready, and `live iff workable` / nemik-wake
+  wake whoever now has work. It runs from a timer or a luthen CronJob.
+- A witness that keeps exiting 2 (can't observe) is itself a finding, surfaced like an unstated ask.
+
+The scheme table below survives as the witness subcommand list.
+
+## Residue: revision 1 (blocked_kind=condition with URI schemes)
+
 ## The shared structure
 
 `agent` and `human` blockers need a mind to decide they are resolved. Some blockers do not: an

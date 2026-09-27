@@ -107,3 +107,4 @@
 2026-09-27T17:25:45Z  tick  W54  atomized  collapse  "ATOMIZE: W56 data, W57 render"
 2026-09-27T17:26:35Z  tick  W56  done      unblock   "satisfied edges + open_blockers in graph.json"  evidence=f98a672
 2026-09-27T17:31:15Z  tick  W58  filed     -         "operator ask: mechanically-waitable blockers; design + W59-W62"
+2026-09-27T17:31:45Z  tick  W58  revised   collapse  "operator: FFI waypoint w/ witness replaces blocked_kind=condition; one blocker shape"
