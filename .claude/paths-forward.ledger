@@ -67,3 +67,4 @@
 2026-09-27T14:39:47Z  peer  --   acknowledged -         "mtools minted W115 (+W116 bulk) for W43; W111 split, W40 repointed to mtools:W113"  evidence=msg mtools-65
 2026-09-27T14:49:06Z  peer  W40  advanced  unblock   "repinned to mtools e4f478b; ATOMIZE flag verified by scratch probe; sticky-top rule now mechanical"  evidence=commit 1b09ec1
 2026-09-27T14:58:35Z  tick  W41  advanced  unblock   "umbrella-edge Warning shipped; 6 live hits incl. expected linux-sources W46/W47; W43 tick-1 NUDGE to mtools held: mtools-65 messaged 10 min ago with active W115 commitment (W1 precedent)"  evidence=commit d089a5a; pytest 28
+2026-09-27T15:03:06Z  peer  W43  advanced  collapse  "two queue orders collapsed to one: stored weight honored by ordered(); drift clears end-to-end on scratch fleet copy"  evidence=commit eb0d652; scratch probe DRIFT->OK
