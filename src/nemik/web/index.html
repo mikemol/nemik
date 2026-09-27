@@ -52,7 +52,7 @@ dt { color: var(--muted); }
   <div id="cy"></div>
   <aside>
     <div class="legend" id="legend"></div>
-    <p class="stat">Border thickness: interrupt share of ledger activity on that waypoint. Diamond: minted during an interrupt (no tick lock held). Dashed red: waits for (read from blocked_on), ending at the blocker's claiming waypoint, or at a dashed "?" in the blocker's box when nothing there claims it yet.</p>
+    <p class="stat">Border thickness: interrupt share of ledger activity on that waypoint. Diamond: minted during an interrupt (no tick lock held). Dashed red: waits for (read from blocked_on), ending at the blocker's claiming waypoint, or at a dashed "?" in the blocker's box when nothing there claims it yet. Faded: satisfied, because the upstream end is done and no longer holds anything back.</p>
     <p class="stat">Repo box border: liveness, from the Wake panel's roster --
       <span style="color:var(--ready)">awake</span>,
       <span style="color:var(--interrupt)">idle</span>,
@@ -114,8 +114,9 @@ function draw() {
       return { data: { id: a, label: `${LANE[cat]} (${n})`, lane: cat }, classes: "actor operator " + cat };
     }),
     ...data.edges.filter(e => e.kind === "enables" && keep.has(e.source) && keep.has(e.target))
-      .map((e, i) => ({ data: { id: "e" + i, source: e.source, target: e.target } })),
-    ...waits.map((e, i) => ({ data: { id: "w" + i, source: e.source, target: e.target }, classes: "waits" })),
+      .map((e, i) => ({ data: { id: "e" + i, source: e.source, target: e.target }, classes: e.satisfied ? "satisfied" : "" })),
+    ...waits.map((e, i) => ({ data: { id: "w" + i, source: e.source, target: e.target },
+      classes: "waits" + (e.satisfied ? " satisfied" : "") })),
   ];
   if (cy) cy.destroy();
   cy = cytoscape({
@@ -138,6 +139,8 @@ function draw() {
         "target-arrow-shape": "triangle", "curve-style": "bezier", "arrow-scale": 0.7 } },
       { selector: "edge.waits", style: { "line-style": "dashed", "line-color": css("--blocked"),
         "target-arrow-color": css("--blocked"), width: 1.5 } },
+      // nemik:W56/W57: the upstream end is done, so this edge no longer holds anything back.
+      { selector: "edge.satisfied", style: { opacity: 0.25, "line-style": "solid" } },
       { selector: ".actor", style: { shape: "round-rectangle", "background-color": css("--other"),
         label: "data(label)", width: "label", height: 20, padding: 6, "text-halign": "center",
         "text-margin-x": 0, color: css("--bg"), "font-size": 11, "border-width": 0 } },
