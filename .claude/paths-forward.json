@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 100,
+  "counter": 101,
   "waypoints": [
     {
       "symbol": "W1",
@@ -1860,6 +1860,26 @@
       "last_worked": "2026-09-27T23:00:29Z",
       "ticks_blocked": 0,
       "weight": 2
+    },
+    {
+      "symbol": "W101",
+      "title": "The Bazel-built //:.venv is the build input everything consumes (operator: 'build their .venv as a build input that the rest of the build uses'): py_tests run in it rather than per-target deps; the host .venv is that artifact, not a uv-synced sibling; deps (paperkit, pathsforward) come from the lock into it, not from hand-vendored wheels. First step: read how mtools wires tests and hooks to its built venv; revert the W100 paperkit wheel vendoring",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "bazel",
+        "venv",
+        "packaging"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T23:03:28Z",
+      "minted_during": "interrupt",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
