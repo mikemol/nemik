@@ -54,3 +54,4 @@
 2026-09-27T13:58:15Z  nudge W39  nudged    -         "from W34 (umbrella, ticks_blocked=2): waiting on W39"  evidence=bump-blocked NUDGE
 2026-09-27T13:58:15Z  tick  W1   acknowledged -         "ESCALATE flag at 16 stood down: summit-da committed to ping on W105 landing (operator-stated policy)"  evidence=bump-blocked ESCALATE; summit-da commitment 13:27
 2026-09-27T13:58:15Z  tick  W36  advanced  unblock   "traversal + stalled-peer class; live preview shows W38 acceptance still failing (W79 16 > W45 7)"  evidence=commit 0b8b06b; pytest 24 passed
+2026-09-27T14:12:46Z  tick  W38  advanced  unblock   "traced W79>W45: peer-stall edges missing in luthen data (children enable the umbrella; stalls named only in titles); asked luthen for the enables edges, no title inference"  evidence=luthen paths-forward.json W45/W120-W127 fields; nemik-inbound luthen-observability

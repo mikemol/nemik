@@ -1,15 +1,15 @@
 <!-- DERIVED from the state file by mikemol-paths-forward --render. NEVER EDIT. -->
 # paths-forward — /home/mikemol/github/nemik/.claude/paths-forward.json
 
-counter 40 · heartbeat 2026-09-27T13:45:14Z · job `b211f0a1` · hash `v2:2853782df288a22d`
+counter 40 · heartbeat 2026-09-27T13:45:14Z · job `b211f0a1` · hash `v2:f1cfb35ed4e585d7`
 
 | # | symbol | status | title | blocked on | next bounded step |
 |---|---|---|---|---|---|
 | 1 | W37 | ready | nemik-rank <repo> CLI: list ready items with weight, sorted | — | Wire entry point in pyproject; print symbol weight title |
-| 2 | W38 | ready | Validate nemik-rank on luthen queue: W120-W127 chains outrank W91/W65 | — | Trace W45's and W79's downstream sets on the live graph; find why linux-sources:W124/el-openglo:W127 contribute no peer_blocked weight; fix data edge or traversal |
-| 3 | W39 | ready | Drift witness: fail when a queue's top ready item is outranked on cross-repo weight | — | Add check mode to nemik-rank returning exit 1 on drift; test both outcomes |
-| 4 | W17 | ready | Follow up nemik:W4: re-run nemik-operator; nudge any repo whose unstated blocks remain when that repo is next awake | — | Watch aeternum/gabion/sre-troubleshooting for wake |
-| 5 | W22 | ready | Trial: SHACL Warning when a waypoint title exceeds 150 chars (decomposition signal, operator request re el-openglo:W45). Fires 256 times across ~/github today (commit f235c4f). Watch whether repos act on it or just accumulate the warning; 150 is a first guess, not measured | — | After it's been live a while, check whether any repo actually decomposed a waypoint because of it |
+| 2 | W39 | ready | Drift witness: fail when a queue's top ready item is outranked on cross-repo weight | — | Add check mode to nemik-rank returning exit 1 on drift; test both outcomes |
+| 3 | W17 | ready | Follow up nemik:W4: re-run nemik-operator; nudge any repo whose unstated blocks remain when that repo is next awake | — | Watch aeternum/gabion/sre-troubleshooting for wake |
+| 4 | W22 | ready | Trial: SHACL Warning when a waypoint title exceeds 150 chars (decomposition signal, operator request re el-openglo:W45). Fires 256 times across ~/github today (commit f235c4f). Watch whether repos act on it or just accumulate the warning; 150 is a first guess, not measured | — | After it's been live a while, check whether any repo actually decomposed a waypoint because of it |
+| 5 | W38 | blocked | Validate nemik-rank on luthen queue: W120-W127 chains outrank W91/W65 | luthen-observability:W117 | When luthen adds the peer enables edges: rerun the preview; the acceptance test is that the W45 children (W123/W125/W121) outrank W79 |
 | 6 | W34 | blocked | nemik-rank: cross-repo transitive downstream weight per ready item, peer edges weighted by declared data, plus drift witness | W35, W36, W37, W38, W39 | Umbrella: done when W35-W39 are done |
 | 7 | W1 | blocked | S6: check that every OPEN summit ask's waypoint appears in nemik-inbound for its owner | summit:W105 | — |
 | 8 | W40 | blocked | Ask mtools: pathsforward flags a ready item that stays top of queue across ticks (from ledger) as ATOMIZE | mtools:W111 | When mtools sends the W111 sha: repin vendored wheel, update vendor/wheels/README history, run pytest, verify --check prints ATOMIZE |
