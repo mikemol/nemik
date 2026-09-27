@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 34,
+  "counter": 39,
   "waypoints": [
     {
       "symbol": "W1",
@@ -555,18 +555,114 @@
     {
       "symbol": "W34",
       "title": "nemik-rank: cross-repo transitive downstream weight per ready item, peer edges weighted by declared data, plus drift witness",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "luthen-observability:W117"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "Build nemik-rank <repo> over merged graph (enables closure + inbound peers); peer weight in data file; validate luthen W120-W127 chain outranks W91/W65",
-      "evidence": "",
+      "blocked_on": [
+        "W35",
+        "W36",
+        "W37",
+        "W38",
+        "W39"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Umbrella: done when W35-W39 are done",
+      "evidence": "2026-09-27: atomized per operator rule (top >1 tick requires atomization)",
       "issued_at": "2026-09-27T13:30:39Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W117",
+      "last_worked": "2026-09-27T13:32:28Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W35",
+      "title": "Declare peer-edge weight as data (src/nemik/data/rank-weights.toml: local=1, peer=N)",
+      "status": "ready",
+      "enables": [
+        "W34"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Write the toml and a loader returning {local,peer}; unit test the defaults",
+      "evidence": "",
+      "issued_at": "2026-09-27T13:32:23Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W36",
+      "title": "Compute transitive downstream weight for one waypoint IRI over merged fleet graph (enables closure + peer blocked_on)",
+      "status": "ready",
+      "enables": [
+        "W34"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Pure function over rdflib graph from blocks.py; test on a 3-repo fixture chain vs a leaf",
+      "evidence": "",
+      "issued_at": "2026-09-27T13:32:23Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W37",
+      "title": "nemik-rank <repo> CLI: list ready items with weight, sorted",
+      "status": "ready",
+      "enables": [
+        "W34"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Wire entry point in pyproject; print symbol weight title",
+      "evidence": "",
+      "issued_at": "2026-09-27T13:32:23Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W38",
+      "title": "Validate nemik-rank on luthen queue: W120-W127 chains outrank W91/W65",
+      "status": "ready",
+      "enables": [
+        "W34"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Run nemik-rank luthen-observability; record output as evidence",
+      "evidence": "",
+      "issued_at": "2026-09-27T13:32:23Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W39",
+      "title": "Drift witness: fail when a queue's top ready item is outranked on cross-repo weight",
+      "status": "ready",
+      "enables": [
+        "W34"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Add check mode to nemik-rank returning exit 1 on drift; test both outcomes",
+      "evidence": "",
+      "issued_at": "2026-09-27T13:32:24Z",
+      "minted_during": "tick",
+      "caused_by": null,
       "last_worked": null,
       "ticks_blocked": 0
     }
