@@ -35,3 +35,14 @@ def test_clear_path_has_empty_outside_and_lone_goal_is_its_own_frontier() -> Non
     assert frontier(g, G) == ({L}, set())
     solo = _wp(g, "a", "W8")
     assert frontier(g, solo) == ({solo}, set())
+
+
+def test_ready_item_with_open_feeder_is_an_umbrella() -> None:
+    from nemik.rank import is_umbrella
+
+    g = Graph()
+    U, L = _wp(g, "a", "W1"), _wp(g, "a", "W2")
+    g.add((L, NEMIK.enables, U))
+    assert is_umbrella(g, U) and not is_umbrella(g, L)
+    g.set((L, OSLC_CM.state, STATE["done"]))
+    assert not is_umbrella(g, U)

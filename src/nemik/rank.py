@@ -111,10 +111,25 @@ def ref_of(node: URIRef) -> str:
     return f"{r}:{sym}"
 
 
-def rank(g: Graph, repo: str, weights: Weights) -> list[dict]:
-    """Every ready waypoint in `repo`, highest cross-repo downstream weight first (lower symbol on ties)."""
+def is_umbrella(g: Graph, n: URIRef) -> bool:
+    """A ready item with open work under it (nemik:W74): its frontier is not itself, so it is not a leaf."""
+    return frontier(g, n)[0] != {n}
+
+
+def umbrellas(g: Graph, repo: str) -> list[URIRef]:
     ws = workstream_uri(repo)
-    ready = [n for n in g.subjects(NEMIK.workstream, ws) if (n, OSLC_CM.state, NEMIK.Ready) in g]
+    return [n for n in g.subjects(NEMIK.workstream, ws)
+            if (n, OSLC_CM.state, NEMIK.Ready) in g and is_umbrella(g, n)]
+
+
+def rank(g: Graph, repo: str, weights: Weights) -> list[dict]:
+    """Every ready leaf in `repo`, highest cross-repo downstream weight first (lower symbol on ties).
+
+    Umbrellas are left out: their open children are what can be worked (nemik:W74).
+    """
+    ws = workstream_uri(repo)
+    ready = [n for n in g.subjects(NEMIK.workstream, ws)
+             if (n, OSLC_CM.state, NEMIK.Ready) in g and not is_umbrella(g, n)]
     rows = [{
         "symbol": str(g.value(n, NEMIK.symbol)),
         "weight": downstream_weight(g, n, weights),
@@ -144,8 +159,14 @@ def main() -> None:
             g += qg
     weights = load_weights()
     if args.check:
+        ums = umbrellas(g, args.repo)
+        for u in ums:
+            print(f"rank: UMBRELLA {ref_of(u)} is ready with open work under it: "
+                  + ", ".join(sorted(ref_of(x) for x in frontier(g, u)[0])))
         d = drift(g, args.repo, weights)
         if d is None:
+            if ums:
+                raise SystemExit(1)
             print(f"rank: OK {args.repo}: next ready item carries the top cross-repo weight")
             raise SystemExit(0)
         nxt, top = d
