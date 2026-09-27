@@ -1,7 +1,7 @@
 <!-- DERIVED from the state file by mikemol-paths-forward --render. NEVER EDIT. -->
 # paths-forward — /home/mikemol/github/nemik/.claude/paths-forward.json
 
-counter 30 · heartbeat 2026-09-27T00:18:07Z · job `6fcfcdf4` · hash `v2:1ecf8950c1483306`
+counter 31 · heartbeat 2026-09-27T00:26:23Z · job `71733aa9` · hash `v2:b2c4a1d1ec383e9b`
 
 | # | symbol | status | title | blocked on | next bounded step |
 |---|---|---|---|---|---|
@@ -33,6 +33,7 @@ counter 30 · heartbeat 2026-09-27T00:18:07Z · job `6fcfcdf4` · hash `v2:1ecf8
 | 26 | W28 | done | metrics.py review: nemik_prompts_total's docstring didn't document the 'unknown' class fallback (a source string not in CLASS), even though the code can emit it | — | n/a |
 | 27 | W29 | done | Dash UI FR (operator, direct): repo boxes should be color-coded by liveliness state | — | n/a |
 | 28 | W30 | done | adapter.py review: queue_graph()'s residue-translation loop was duplicated verbatim (dead code, harmless since RDF triples dedupe, but confusing on read) | — | — |
+| 29 | W31 | done | check.py deep read: verified survey()'s focus-node-to-repo attribution (by_repo.setdefault) can never actually see an unknown repo given current shapes.ttl targets and adapter.py's URI minting -- defensive but dead code, not a live bug | — | — |
 
 ## residue
 

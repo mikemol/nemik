@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 30,
+  "counter": 31,
   "waypoints": [
     {
       "symbol": "W1",
@@ -19,7 +19,7 @@
       "minted_during": "interrupt",
       "caused_by": "summit:W105",
       "last_worked": "2026-09-26T22:09:44Z",
-      "ticks_blocked": 10
+      "ticks_blocked": 11
     },
     {
       "symbol": "W2",
@@ -497,6 +497,24 @@
       "caused_by": null,
       "last_worked": "2026-09-27T00:25:49Z",
       "ticks_blocked": 0
+    },
+    {
+      "symbol": "W31",
+      "title": "check.py deep read: verified survey()'s focus-node-to-repo attribution (by_repo.setdefault) can never actually see an unknown repo given current shapes.ttl targets and adapter.py's URI minting -- defensive but dead code, not a live bug",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "check,verification"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-09-27: Traced every SHACL shape target (targetClass oslc_cm:ChangeRequest, targetSubjectsOf/targetObjectsOf on nemik:* props) against every place adapter.py mints a waypoint/workstream URI; all focus nodes are always minted on a repo already present in graphs/known. by_repo.setdefault(repo, []) at check.py:92 is unreachable defensively, not a silent-drop bug. No code change; check.py's output attribution is correct as-is.",
+      "issued_at": "2026-09-27T00:41:19Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-09-27T00:41:20Z",
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -517,6 +535,9 @@
   ],
   "job_id": "71733aa9",
   "heartbeat": "2026-09-27T00:26:23Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-09-27T00:40:24Z"
+  },
   "predecessor_job_id": "6fcfcdf4"
 }
