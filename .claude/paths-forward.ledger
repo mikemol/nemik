@@ -78,3 +78,5 @@
 2026-09-27T15:27:47Z  tick  W45  advanced  unblock   "amr-skills dormant (not awake): W76 misfiled-on-operator letter left in its inbox (W4 channel); verification folded into W47"  evidence=inbox/2026-09-27-nemik-W76-unstated-block.md
 2026-09-27T15:42:23Z  nudge W47  nudged    -         "from W17 (umbrella, ticks_blocked=2): waiting on W47"  evidence=bump-blocked NUDGE
 2026-09-27T15:42:23Z  tick  W46  advanced  unblock   "luthen W124 unstated cause: blocked_on local W123 + kind human; fixes sent to live session"  evidence=luthen paths-forward.json W124; msg to luthen-observability-81
+2026-09-27T15:57:25Z  tick  W46  acknowledged -         "tick-1 NUDGE held: the fix message to luthen-observability-81 went 1 tick ago (15:42); tick 2 delivers if no edit"  evidence=bump-blocked NUDGE
+2026-09-27T15:57:25Z  tick  W47  advanced  sweep     "no wake events; watch re-filed as blocked on the 4 dormant repos so it paces by backoff instead of occupying top"  evidence=ListAgents; nemik-wake roster; git log ages

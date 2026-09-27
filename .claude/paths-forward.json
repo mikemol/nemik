@@ -280,7 +280,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 2
+      "ticks_blocked": 3
     },
     {
       "symbol": "W18",
@@ -785,25 +785,30 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:42:23Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "weight": 1
     },
     {
       "symbol": "W47",
       "title": "Dormant watch: when aeternum (W26), gabion (W11, W14), sre-troubleshooting (W3) or amr-skills (W76, letter in inbox) wakes, nudge or verify its unstated operator blocks",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W17"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "aeternum",
+        "gabion",
+        "sre-troubleshooting",
+        "amr-skills"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Each tick: nemik-wake --json; on a wake event for one of the three, message it citing its <repo>:W<n>",
-      "evidence": "",
+      "evidence": "2026-09-27: 15:5x: no wake events; none of the four is live or in the wake roster. Re-filed from ready to blocked-on-the-repos: a watch waiting on an event is a block, not work, and at the top of the queue as 'ready' it would set off ATOMIZE with nothing to split. nudge backoff now paces the re-checks.",
       "issued_at": "2026-09-27T15:13:28Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-27T15:57:25Z",
       "ticks_blocked": 0,
       "weight": 1
     },
