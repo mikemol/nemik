@@ -153,3 +153,6 @@
 2026-09-27T19:08:41Z  tick  W54  done      sweep     "umbrella closed after prune"
 2026-09-27T19:09:10Z  tick  W61  done      unblock   "wake path via inbox letters"  evidence=b5dc871
 2026-09-27T19:09:10Z  nudge W62  nudged    -         "from W58"
+2026-09-27T19:23:44Z  tick  W62  done      unblock   "skill: Monitor / FFI waypoint guidance"
+2026-09-27T19:23:44Z  nudge W47  nudged    -         "from W17 (tick 8); W47's blockers are dormant repos: inbox letters only, no escalation"
+2026-09-27T19:23:44Z  nudge W68  nudged    -         "from W58; luthen:W145 owned, needs operator's ClusterRole review; no message"

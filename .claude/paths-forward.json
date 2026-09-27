@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 7
+      "ticks_blocked": 8
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 13,
+      "ticks_blocked": 14,
       "weight": 1
     },
     {
@@ -1010,7 +1010,6 @@
         "conditions"
       ],
       "blocked_on": [
-        "W61",
         "W62",
         "W68"
       ],
@@ -1021,7 +1020,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T18:51:55Z",
-      "ticks_blocked": 2
+      "ticks_blocked": 1
     },
     {
       "symbol": "W59",
@@ -1090,7 +1089,7 @@
     {
       "symbol": "W62",
       "title": "paths-forward-loop skill: a lock held across a background process waits via Monitor, not ticks",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W58"
       ],
@@ -1100,11 +1099,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: ~/.claude/skills/paths-forward-loop/SKILL.md §4.4: world-waits use Monitor in-session, FFI witness waypoint across sessions (user-level skill; not in this repo's git)",
       "issued_at": "2026-09-27T17:31:04Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-27T19:23:44Z",
       "ticks_blocked": 0,
       "weight": 1
     },
@@ -1227,7 +1226,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T18:24:59Z",
-      "ticks_blocked": 3
+      "ticks_blocked": 4
     },
     {
       "symbol": "W69",
