@@ -661,19 +661,17 @@
     {
       "symbol": "W40",
       "title": "Ask mtools: pathsforward flags a ready item that stays top of queue across ticks (from ledger) as ATOMIZE",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "mtools:W113"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "When mtools sends the W111 sha: repin vendored wheel, update vendor/wheels/README history, run pytest, verify --check prints ATOMIZE",
-      "evidence": "2026-09-27: mtools-65 minted mtools:W111 (enables nemik:W40); will send sha on landing | 2026-09-27: mtools:W111 is part-landed (library at 8aca534). The --check/payload wiring is mtools:W113 and the refusal hint is W114. The repin sha arrives when W113 lands, so blocked_on is repointed to W113.",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-09-27: mtools-65 minted mtools:W111 (enables nemik:W40); will send sha on landing | 2026-09-27: mtools:W111 is part-landed (library at 8aca534). The --check/payload wiring is mtools:W113 and the refusal hint is W114. The repin sha arrives when W113 lands, so blocked_on is repointed to W113. | 2026-09-27: commit 1b09ec1: vendored wheel 0.1.0+e4f478b, README history updated, pytest 26. Live --check prints no ATOMIZE (correct: top W41 not yet advanced). Scratch probe (a copy of the state plus a ledger tick on W41) prints 'ATOMIZE W41 (top for 2 ticks)' with exit 0.",
       "issued_at": "2026-09-27T13:35:28Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-09-27T14:39:47Z",
+      "last_worked": "2026-09-27T14:49:06Z",
       "ticks_blocked": 0
     },
     {
