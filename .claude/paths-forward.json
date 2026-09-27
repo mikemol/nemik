@@ -701,8 +701,8 @@
       "recoverable": true
     }
   ],
-  "job_id": "ebe174f2",
-  "heartbeat": "2026-09-27T13:40:35Z",
+  "job_id": "b211f0a1",
+  "heartbeat": "2026-09-27T13:45:14Z",
   "lock": null,
-  "predecessor_job_id": "5a40cc03"
+  "predecessor_job_id": "ebe174f2"
 }
