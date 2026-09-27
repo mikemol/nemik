@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 71,
+  "counter": 72,
   "waypoints": [
     {
       "symbol": "W1",
@@ -1279,6 +1279,24 @@
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-09-27T19:29:49Z",
+      "minted_during": "interrupt",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W72",
+      "title": "Dashboard Tools panel: /cmd/<name>?repo= returns each read-only CLI's exact output (check, metrics, inbound, operator, wake, rank, overlaps, witnesses dry-run on click, floor-asks where summit present, mtools --queue/--check/--overlaps per repo), in-process on the cached graph",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "web-ui"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T19:33:48Z",
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": null,
