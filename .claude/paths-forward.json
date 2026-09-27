@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 67,
+  "counter": 68,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 3
+      "ticks_blocked": 4
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 10,
       "weight": 1
     },
     {
@@ -941,7 +941,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T17:25:45Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "weight": 0
     },
     {
@@ -1012,7 +1012,6 @@
         "conditions"
       ],
       "blocked_on": [
-        "W59",
         "W60",
         "W61",
         "W62"
@@ -1024,7 +1023,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T17:31:15Z",
-      "ticks_blocked": 4
+      "ticks_blocked": 1
     },
     {
       "symbol": "W59",
@@ -1059,7 +1058,6 @@
         "conditions"
       ],
       "blocked_on": [
-        "W64",
         "W65"
       ],
       "blocked_kind": "agent",
@@ -1157,8 +1155,8 @@
     },
     {
       "symbol": "W65",
-      "title": "witnesses: k8s_job, alert, promql observers resolved through luthen endpoints_query",
-      "status": "ready",
+      "title": "witnesses: alert and promql observers (k8s_job split to W68)",
+      "status": "done",
       "enables": [
         "W60"
       ],
@@ -1168,11 +1166,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: commit 49ba48d; fixture HTTP tests; live luthen: alert nemik_waiting_on_asleep{repo=substrate} pending=true, promql up{job=alertmanager} true; pytest 40. k8s: host kubectl unconfigured, kube_job_* absent from vmsingle",
       "issued_at": "2026-09-27T17:53:34Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-27T18:24:36Z",
       "ticks_blocked": 0,
       "weight": 3
     },
@@ -1192,7 +1190,8 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W70",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 0
     },
     {
       "symbol": "W67",
@@ -1212,6 +1211,28 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T18:18:12Z",
+      "ticks_blocked": 1
+    },
+    {
+      "symbol": "W68",
+      "title": "witnesses: k8s job status observable from host (kube-state-metrics scraped into vmsingle, or a host kubeconfig)",
+      "status": "blocked",
+      "enables": [
+        "W60"
+      ],
+      "touches": [
+        "conditions"
+      ],
+      "blocked_on": [
+        "luthen-observability"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T18:24:35Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-09-27T18:24:36Z",
       "ticks_blocked": 0
     }
   ],

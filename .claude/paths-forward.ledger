@@ -135,3 +135,8 @@
 2026-09-27T18:09:12Z  tick  W59  refiled   -         "mtools: W132 widened (ready|working audit), W133 new (ordered/workable skip witnessed)"
 2026-09-27T18:15:00Z  tick  W66  filed     -         "luthen: umbrella W70 ranked top-ready with all children blocked"
 2026-09-27T18:18:12Z  tick  W59  done      unblock   "mtools W131+W132 landed; W133 tracked as W67"  evidence=8d9ea4e
+2026-09-27T18:24:36Z  tick  W65  done      unblock   "alert+promql observers live on luthen; k8s split W68"  evidence=49ba48d
+2026-09-27T18:24:36Z  nudge W47  nudged    -         "from W17"
+2026-09-27T18:24:36Z  nudge W57  nudged    -         "from W54"
+2026-09-27T18:24:36Z  nudge W61  nudged    -         "from W58"
+2026-09-27T18:24:36Z  nudge W62  nudged    -         "from W58"
