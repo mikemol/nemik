@@ -44,6 +44,7 @@ class Model:
         self.key: tuple = ()
         self.graph = bind(Graph())
         self.payload = b"{}"
+        self.doc: dict = {"operator": [], "inbound": []}  # parsed once per rebuild, shared by requests
         self.rebuilds = 0
         self.rebuild_cpu = 0.0
         self.nodes = self.edges = self.workstreams = 0
@@ -77,7 +78,7 @@ class Model:
             self.rebuild_cpu = time.process_time() - cpu0
             doc = to_json(g, findings)
             self.nodes, self.edges, self.workstreams = len(doc["nodes"]), len(doc["edges"]), len(findings)
-            self.payload = json.dumps(doc).encode()
+            self.doc, self.payload = doc, json.dumps(doc).encode()
 
     def poke(self) -> None:
         """Keep requests off the rebuild path (nemik:W69, luthen-observability:W146).
@@ -226,11 +227,11 @@ def handler(model: Model) -> type[BaseHTTPRequestHandler]:
                 body = {"liveness": source, "roster": roster(g, live), "operator": operator_row(g)}
                 self.send(200, "application/json", json.dumps(body, indent=1).encode())
             elif self.path in ("/operator", "/operator.json"):
-                body = json.dumps(json.loads(model.payload)["operator"], indent=1).encode()
+                body = json.dumps(model.doc["operator"], indent=1).encode()
                 self.send(200, "application/json", body)
             elif self.path.startswith("/inbound"):
                 repo = self.path.removeprefix("/inbound").strip("/").removesuffix(".json")
-                doc = json.loads(model.payload)["inbound"]
+                doc = model.doc["inbound"]
                 body = [b for b in doc if not repo or b["blocker"] == repo]
                 self.send(200, "application/json", json.dumps(body, indent=1).encode())
             elif self.path == "/metrics":
