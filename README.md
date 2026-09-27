@@ -38,6 +38,8 @@ of the format:
 | `nemik-inbound [repo]` | What in other workstreams is blocked on `repo`, each blocked waypoint as a citable `<repo>:W<n>`, and which of `repo`'s waypoints claims it, or `UNCLAIMED`. |
 | `nemik-operator` | Blocks on the operator, sorted into needs-you, answered, condition and unstated, with duplicate asks grouped. |
 | `nemik-wake` | The wake roster: each workstream something is waiting on, with whether it has a live session (asleep / idle / awake), what waits on it, and how many blocks need you. Liveness comes from luthen-observability's `loop_liveness`. |
+| `nemik-rank repo` | Ready items by cross-repo downstream weight; `--check` exits 1 when the queue's next item is outweighed, `--json` feeds `mikemol-paths-forward --weights-from`. |
+| `nemik-floor-asks` | Exits 1 when a `summit/floor/*.bib` ask's `waypoint` field names a missing or dropped waypoint. |
 | `nemik-serve` | The web view: `/` (dependency graph), `/graph.json`, `/graph.ttl`, `/inbound/<repo>`, `/operator`, `/wake`, `/metrics`. |
 
 The root defaults to `~/github` and can be set with `$NEMIK_ROOT` or `--root`. It accepts
@@ -48,6 +50,27 @@ $ uv sync
 $ .venv/bin/nemik-check
 $ .venv/bin/nemik-serve --port 8750
 ```
+
+### Depending on nemik from another repo
+
+nemik pins `mikemol-pathsforward` to its vendored wheel, and uv carries that pin into any project
+that depends on nemik by path. A project that pins pathsforward itself will then fail to lock,
+because uv refuses two sources for one package. The consumer's own pin should win, so declare it
+as an override as well as a dependency (nemik:W51):
+
+```toml
+[project]
+dependencies = ["nemik", "mikemol-pathsforward @ git+https://github.com/mikemol/mtools.git@<sha>#subdirectory=pathsforward"]
+
+[tool.uv.sources]
+nemik = { path = "../nemik" }
+
+[tool.uv]
+override-dependencies = ["mikemol-pathsforward @ git+https://github.com/mikemol/mtools.git@<sha>#subdirectory=pathsforward"]
+```
+
+Checked with summit's pin, fc74848, which is older than nemik's: `uv lock` resolves, and
+`nemik-check` and `nemik-floor-asks` both run.
 
 ## The event hook
 
