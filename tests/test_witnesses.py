@@ -1,11 +1,13 @@
 import os
+import os
 import shutil
 
 import pytest
 
 from nemik.witnesses import witness
 
-pytestmark = pytest.mark.skipif(shutil.which("opa") is None, reason="opa not installed")
+# nemik:W98: Bazel hands the test a pinned opa as $NEMIK_OPA; the host falls back to PATH.
+pytestmark = pytest.mark.skipif(shutil.which(os.environ.get("NEMIK_OPA", "opa")) is None, reason="opa not installed")
 
 
 def test_file_witness_true_false(tmp_path) -> None:

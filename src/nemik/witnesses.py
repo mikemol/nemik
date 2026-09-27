@@ -130,7 +130,7 @@ def evaluate(query: str, doc: dict, missing: list[str]) -> str:
     if missing:
         return "undefined"
     out = subprocess.run(
-        ["opa", "eval", "--format", "json", "--stdin-input", query],
+        [os.environ.get("NEMIK_OPA", "opa"), "eval", "--format", "json", "--stdin-input", query],
         input=json.dumps(doc), capture_output=True, text=True, check=False,
     )
     if out.returncode != 0:

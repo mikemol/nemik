@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 97,
+  "counter": 99,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 35
+      "ticks_blocked": 36
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 41,
+      "ticks_blocked": 42,
       "weight": 1
     },
     {
@@ -1359,7 +1359,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:54:01Z",
-      "ticks_blocked": 25,
+      "ticks_blocked": 26,
       "weight": 0
     },
     {
@@ -1382,7 +1382,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:43:45Z",
-      "ticks_blocked": 26
+      "ticks_blocked": 27
     },
     {
       "symbol": "W77",
@@ -1403,7 +1403,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:13:38Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1570,7 +1570,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T22:08:39Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "weight": 0
     },
     {
@@ -1654,21 +1654,24 @@
     {
       "symbol": "W91",
       "title": "Bazel: declare opa and headless Chromium as hashed http_archive inputs, so witness and render tests run in the sandbox instead of skipping (mtools pandoc precedent)",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W85"
       ],
       "touches": [
         "build"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W98",
+        "W99"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "",
       "evidence": "2026-09-27: measured in W90: sandbox currently reaches host opa + host playwright cache; also paperkit for test_architecture",
       "issued_at": "2026-09-27T22:08:39Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-09-27T22:16:50Z",
+      "last_worked": "2026-09-27T22:40:45Z",
       "ticks_blocked": 0,
       "weight": 1
     },
@@ -1798,6 +1801,48 @@
       "last_worked": "2026-09-27T22:39:31Z",
       "ticks_blocked": 0,
       "weight": 1
+    },
+    {
+      "symbol": "W98",
+      "title": "W91a: opa pinned as a hashed Bazel http_file, handed to tests as NEMIK_OPA",
+      "status": "done",
+      "enables": [
+        "W91"
+      ],
+      "touches": [
+        "bazel",
+        "opa"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-09-27: MODULE.bazel http_file @opa v1.20.2 sha256 69da51...670f; witnesses.py uses $NEMIK_OPA else PATH opa; BUILD env NEMIK_OPA=$(rootpath @opa//file); test_witnesses 10 passed under bazel, 13/13 overall. Not measured: a PATH-less run (--test_env=PATH=/nonexistent broke the build itself)",
+      "issued_at": "2026-09-27T22:40:45Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-09-27T22:40:45Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W99",
+      "title": "W91b: headless Chromium (and paperkit for test_architecture) as hashed Bazel inputs",
+      "status": "ready",
+      "enables": [
+        "W91"
+      ],
+      "touches": [
+        "bazel",
+        "chromium"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T22:40:45Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
