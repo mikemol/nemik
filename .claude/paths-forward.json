@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 51,
+  "counter": 53,
   "waypoints": [
     {
       "symbol": "W1",
@@ -280,7 +280,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 5
+      "ticks_blocked": 6
     },
     {
       "symbol": "W18",
@@ -812,7 +812,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "weight": 1
     },
     {
@@ -835,18 +835,22 @@
     {
       "symbol": "W49",
       "title": "Render cross-repo touches[] overlap (grouped by tag) once mtools emits OVERLAP",
-      "status": "ready",
+      "status": "blocked",
       "enables": [],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W52",
+        "W53"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Repin pathsforward to mtools 49ac0ff; then render cross-repo OVERLAP grouped by tag from nemik:touches (same line shape as --overlaps)",
       "evidence": "",
       "issued_at": "2026-09-27T16:29:09Z",
       "minted_during": "interrupt",
       "caused_by": "mtools:W102",
-      "last_worked": "2026-09-27T17:02:49Z",
-      "ticks_blocked": 0
+      "last_worked": "2026-09-27T17:08:33Z",
+      "ticks_blocked": 0,
+      "weight": 0
     },
     {
       "symbol": "W50",
@@ -879,6 +883,47 @@
       "issued_at": "2026-09-27T17:01:02Z",
       "minted_during": "interrupt",
       "caused_by": "summit:W105",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 0
+    },
+    {
+      "symbol": "W52",
+      "title": "Repin pathsforward wheel to mtools 49ac0ff (--overlaps)",
+      "status": "done",
+      "enables": [
+        "W49"
+      ],
+      "touches": [
+        "packaging"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-09-27: wheel +49ac0ff; --overlaps prints 'OVERLAP packaging: W51,W52'; pytest 29",
+      "issued_at": "2026-09-27T17:08:32Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-09-27T17:08:49Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W53",
+      "title": "nemik-overlaps: cross-repo OVERLAP <tag>: <repo>:W<a>,... over live nemik:touches, fixture-tested",
+      "status": "ready",
+      "enables": [
+        "W49"
+      ],
+      "touches": [
+        "cli"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-27T17:08:33Z",
+      "minted_during": "tick",
+      "caused_by": null,
       "last_worked": null,
       "ticks_blocked": 0
     }
