@@ -63,6 +63,12 @@ aside a { color: var(--ink); text-decoration: underline dotted var(--muted); }
       <span style="color:var(--interrupt)">idle</span>,
       <span style="color:var(--blocked)">asleep</span>,
       unmarked if nothing is waiting on it (no roster row).</p>
+    <h2>Tools</h2>
+    <div class="stat">
+      <select id="tool"><option value="">run a command…</option></select>
+      <span id="toolnote"></span>
+      <pre id="toolout" style="white-space:pre-wrap; overflow:auto; max-height:40vh; font-size:11px"></pre>
+    </div>
     <h2>Goals</h2>
     <div id="goals" class="stat">Pick a repo.</div>
     <h2>Wake</h2>
@@ -299,6 +305,23 @@ async function goals() {
     : "No open goals.";
 }
 
+// nemik:W84: each read-only CLI's exact output (/cmd, W81). A command that takes a repo uses the
+// Repo picker above.
+const TOOLS = { rank: true, goals: true, "rank-check": true, overlaps: false, "overlaps-cross": false,
+                inbound: false, operator: false, wake: false };
+document.getElementById("tool").innerHTML += Object.entries(TOOLS).map(([t, r]) =>
+  `<option value="${t}">nemik-${t}${r ? " (repo)" : ""}</option>`).join("");
+async function tool() {
+  const t = document.getElementById("tool").value, repo = document.getElementById("repo").value;
+  const out = document.getElementById("toolout"), note = document.getElementById("toolnote");
+  if (!t) { out.textContent = ""; note.textContent = ""; return; }
+  if (TOOLS[t] && !repo) { out.textContent = ""; note.textContent = "pick a repo first"; return; }
+  const url = `cmd/${t}` + (repo ? `?repo=${encodeURIComponent(repo)}` : "");
+  note.innerHTML = `<a href="${esc(url)}" target="_blank">${esc(url)}</a>`;
+  try { out.textContent = await (await fetch(url)).text(); } catch (e) { out.textContent = "unavailable"; }
+}
+document.getElementById("tool").onchange = tool;
+
 // A cite in the Wake panel is a link: it selects that waypoint in the graph and shows its detail.
 function citeLink(cite) {
   return `<a href="#" data-cite="${esc(cite)}"><code>${esc(cite)}</code></a>`;
@@ -314,7 +337,7 @@ for (const id of ["wake", "goals"]) document.getElementById(id).addEventListener
   const a = ev.target.closest("[data-cite]");
   if (a) { ev.preventDefault(); focusCite(a.dataset.cite); }
 });
-document.getElementById("repo").onchange = () => { draw(); findings(); goals(); };
+document.getElementById("repo").onchange = () => { draw(); findings(); goals(); tool(); };
 document.getElementById("showDone").onchange = draw;
 document.getElementById("showNoise").onchange = draw;
 load();
