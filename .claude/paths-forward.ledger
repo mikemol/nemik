@@ -182,3 +182,4 @@
 2026-09-27T21:50:20Z  tick  --   swept     sweep     "closed umbrellas W58, W72 (all children done)"
 2026-09-27T21:54:11Z  tick  W88  done      unblock   "cross-repo edges faded by default"
 2026-09-27T22:06:41Z  tick  W89  rejected  collapse  "bundling dropped: W88 fade covers the tangle; W87 closed"
+2026-09-27T22:07:57Z  tick  W78  done      unblock   "render regression test for label occlusion"
