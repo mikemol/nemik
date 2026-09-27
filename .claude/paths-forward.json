@@ -489,7 +489,8 @@
       "status": "done",
       "enables": [],
       "touches": [
-        "adapter,cleanup"
+        "adapter",
+        "cleanup"
       ],
       "blocked_on": [],
       "blocked_kind": null,
@@ -507,7 +508,8 @@
       "status": "done",
       "enables": [],
       "touches": [
-        "check,verification"
+        "check",
+        "verification"
       ],
       "blocked_on": [],
       "blocked_kind": null,
@@ -525,7 +527,8 @@
       "status": "done",
       "enables": [],
       "touches": [
-        "paperkit,docs"
+        "paperkit",
+        "docs"
       ],
       "blocked_on": [],
       "blocked_kind": null,
@@ -543,7 +546,9 @@
       "status": "done",
       "enables": [],
       "touches": [
-        "paperkit,docs,tests"
+        "paperkit",
+        "docs",
+        "tests"
       ],
       "blocked_on": [],
       "blocked_kind": null,
@@ -848,19 +853,17 @@
     {
       "symbol": "W50",
       "title": "Split comma-joined touches tags on W30-W33 (adapter,cleanup etc.)",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "mtools:W122"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-27: wheel repinned to mtools 836f20e; W30-W33 touches split; --check OK",
       "issued_at": "2026-09-27T16:30:28Z",
       "minted_during": "interrupt",
       "caused_by": "mtools:W121",
-      "last_worked": "2026-09-27T16:30:42Z",
+      "last_worked": "2026-09-27T16:47:28Z",
       "ticks_blocked": 0
     }
   ],

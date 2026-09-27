@@ -92,3 +92,4 @@
 2026-09-27T16:29:13Z  tick  W49  filed     -         "mtools:W102 review answered; render blocked on mtools:W118"
 2026-09-27T16:30:29Z  tick  W50  filed     -         "--update rejects --touches; asked mtools to extend W121"
 2026-09-27T16:30:42Z  tick  W50  refiled   -         "blocker is mtools:W122 (update --touches), not W121"
+2026-09-27T16:47:28Z  tick  W50  done      sweep     "comma-joined tags split via mtools:W122"  evidence=836f20e
