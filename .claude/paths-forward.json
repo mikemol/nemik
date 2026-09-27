@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 33,
+  "counter": 34,
   "waypoints": [
     {
       "symbol": "W1",
@@ -550,6 +550,24 @@
       "minted_during": "tick",
       "caused_by": "W32",
       "last_worked": "2026-09-27T13:14:57Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W34",
+      "title": "nemik-rank: cross-repo transitive downstream weight per ready item, peer edges weighted by declared data, plus drift witness",
+      "status": "ready",
+      "enables": [
+        "luthen-observability:W117"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Build nemik-rank <repo> over merged graph (enables closure + inbound peers); peer weight in data file; validate luthen W120-W127 chain outranks W91/W65",
+      "evidence": "",
+      "issued_at": "2026-09-27T13:30:39Z",
+      "minted_during": "tick",
+      "caused_by": "luthen-observability:W117",
+      "last_worked": null,
       "ticks_blocked": 0
     }
   ],
