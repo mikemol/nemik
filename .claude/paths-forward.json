@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 29,
+  "counter": 30,
   "waypoints": [
     {
       "symbol": "W1",
@@ -19,7 +19,7 @@
       "minted_during": "interrupt",
       "caused_by": "summit:W105",
       "last_worked": "2026-09-26T22:09:44Z",
-      "ticks_blocked": 9
+      "ticks_blocked": 10
     },
     {
       "symbol": "W2",
@@ -479,6 +479,24 @@
       "caused_by": null,
       "last_worked": "2026-09-27T00:04:08Z",
       "ticks_blocked": 0
+    },
+    {
+      "symbol": "W30",
+      "title": "adapter.py review: queue_graph()'s residue-translation loop was duplicated verbatim (dead code, harmless since RDF triples dedupe, but confusing on read)",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "adapter,cleanup"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-09-27: Removed duplicate loop, src/nemik/adapter.py queue_graph(): 122-135 -> single copy. pytest 18/18 green. No behavior change (RDF add() is idempotent per triple), pure dead-code sweep found during the queued adapter.py deep read.",
+      "issued_at": "2026-09-27T00:25:44Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-09-27T00:25:49Z",
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -499,6 +517,9 @@
   ],
   "job_id": "6fcfcdf4",
   "heartbeat": "2026-09-27T00:18:07Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-09-27T00:25:20Z"
+  },
   "predecessor_job_id": "bc056492"
 }

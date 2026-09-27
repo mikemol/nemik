@@ -1,7 +1,7 @@
 <!-- DERIVED from the state file by mikemol-paths-forward --render. NEVER EDIT. -->
 # paths-forward — /home/mikemol/github/nemik/.claude/paths-forward.json
 
-counter 29 · heartbeat 2026-09-27T00:04:47Z · job `bc056492` · hash `v2:1a14fcec7236d4cb`
+counter 30 · heartbeat 2026-09-27T00:18:07Z · job `6fcfcdf4` · hash `v2:1ecf8950c1483306`
 
 | # | symbol | status | title | blocked on | next bounded step |
 |---|---|---|---|---|---|
@@ -32,6 +32,7 @@ counter 29 · heartbeat 2026-09-27T00:04:47Z · job `bc056492` · hash `v2:1a14f
 | 25 | W27 | done | operator_category's free-text fallback contradicted docs/adopting.md: docs said any decide/act-verb-less text lands unstated; code actually reads >=3-word free text as needs-you regardless | — | n/a |
 | 26 | W28 | done | metrics.py review: nemik_prompts_total's docstring didn't document the 'unknown' class fallback (a source string not in CLASS), even though the code can emit it | — | n/a |
 | 27 | W29 | done | Dash UI FR (operator, direct): repo boxes should be color-coded by liveliness state | — | n/a |
+| 28 | W30 | done | adapter.py review: queue_graph()'s residue-translation loop was duplicated verbatim (dead code, harmless since RDF triples dedupe, but confusing on read) | — | — |
 
 ## residue
 

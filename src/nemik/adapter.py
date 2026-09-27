@@ -126,13 +126,6 @@ def queue_graph(repo: str, state_path: Path, known: frozenset[str] = frozenset()
         g.add((node, NEMIK.workstream, ws))
         g.add((node, NEMIK.symbol, Literal(symbol)))
         g.add((node, DCTERMS.title, Literal(model.text(r, "title"))))
-    for r in state.residue:
-        symbol = model.text(r, "symbol")
-        node = waypoint_uri(repo, symbol)
-        g.add((node, RDF.type, NEMIK.Dropped))
-        g.add((node, NEMIK.workstream, ws))
-        g.add((node, NEMIK.symbol, Literal(symbol)))
-        g.add((node, DCTERMS.title, Literal(model.text(r, "title"))))
     return g
 
 
