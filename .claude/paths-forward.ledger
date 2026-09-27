@@ -63,3 +63,4 @@
 2026-09-27T14:32:36Z  peer  W1   advanced  unblock   "summit:W105 landed; W1 closed; check vacuous (0/39 asks carry waypoint yet), real verification minted as W42"  evidence=summit 3700ff8; grep waypoint floor/*.bib = 0
 2026-09-27T14:32:48Z  peer  W42  acknowledged -         "summit: no back-fill; will ping on first ask carrying waypoint"  evidence=msg summit-da
 2026-09-27T14:38:18Z  tick  W39  advanced  unblock   "drift witness shipped; W34 umbrella closed; live luthen drift found (W80 next, W111 heavier)"  evidence=commit 78f7131; pytest 26; nemik-check exit 0
+2026-09-27T14:39:18Z  peer  W43  advanced  collapse  "two queue orders (loop's vs mtools ordered()) collapse to one: stored weight field written through mtools, computed by nemik; (a)/(b) kept as residue in evidence"  evidence=msg luthen-observability-81; mtools model.ordered source
