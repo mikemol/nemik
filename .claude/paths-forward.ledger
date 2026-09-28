@@ -200,3 +200,4 @@
 2026-09-28T13:28:05Z  tick  --   ack       collapse  "luthen ack: W106 deprioritized (host buildkitd reaches github), W107 blocked on mtools vector field"
 2026-09-28T13:46:55Z  tick  --   fixed     collapse  "enables luthen:W185/W190 -> luthen-observability:W185/W190 (workstream = repo dir); nemik-check --root ~/github: no VIOLATES. caused_by on W105/W107 still says luthen: (--update cannot set it)"
 2026-09-28T13:47:34Z  tick  --   minted    collapse  "luthen follow-up: caused_by unchecked; W108 (check), W109 (mtools ask + repoint)"
+2026-09-28T14:30:21Z  tick  --   triaged   collapse  "inbox: 6 letters. Archived as handled: linux-sources payload (mtools shipped --payload/state_hash), luthen ships-on-push (push-is-deploy), enables-prefix (91467a9), mtools W10 (W10 done). Minted W110 (stale blocked_on check, paperkit) and W111 (operator-caused rank, luthen)"

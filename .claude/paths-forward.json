@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 109,
+  "counter": 111,
   "waypoints": [
     {
       "symbol": "W1",
@@ -2050,6 +2050,43 @@
       "issued_at": "2026-09-28T13:47:34Z",
       "minted_during": "tick",
       "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W110",
+      "title": "nemik-check: flag blocked_on entries naming a same-repo waypoint that is done (all done: should be ready; some: stale subset), and entries not a clean symbol/<repo>:W<n>/operator ask (paperkit letter 2026-09-28)",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "nemik-check",
+        "blocked-on"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-28T14:30:21Z",
+      "minted_during": "tick",
+      "caused_by": "paperkit",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W111",
+      "title": "nemik-rank: caused_by=operator waypoints rank at the top (standing rule: operator ask beats backlog); --check refuses one ranked below ordinary work (luthen-observability letter 2026-09-27, its W157)",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "nemik-rank"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-28T14:30:21Z",
+      "minted_during": "tick",
+      "caused_by": "luthen-observability",
       "last_worked": null,
       "ticks_blocked": 0
     }
