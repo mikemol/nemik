@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 111,
+  "counter": 113,
   "waypoints": [
     {
       "symbol": "W1",
@@ -2083,6 +2083,47 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability",
       "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W112",
+      "title": "nemik-rank --check UMBRELLA names direct children (what DECOMPOSE puts in blocked_on) as well as transitive leaves (paperkit letter: 2 of 5 leaf sets read as wrong)",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "nemik-rank"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-09-28: Cause was not touches overlap: frontier() lists transitive leaves (W59 <- W60 <- W132,W78), and paperkit read them as direct children. rank.children() added; UMBRELLA line prints 'children ...; leaves ...'. test_rank: test_umbrella_children_are_direct_feeders_not_transitive_leaves. bazel 14/14.",
+      "issued_at": "2026-09-28T15:05:07Z",
+      "minted_during": "tick",
+      "caused_by": "paperkit",
+      "last_worked": "2026-09-28T15:05:07Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W113",
+      "title": "life ask: operator calendars as a nemik source (~/.config/nemik/calendars.toml, Akonadi collections on luthen via mtools' calendar reader; events as nodes, waypoint 'at' cal:<label>/<uid>; nemik-operator shows next N days); credentials never in graph/metrics/export",
+      "status": "blocked",
+      "enables": [
+        "life:W13"
+      ],
+      "touches": [
+        "nemik-operator",
+        "sources"
+      ],
+      "blocked_on": [
+        "mtools"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "2026-09-28: Needs mtools' calendar reader (mtools/inbox/2026-09-28-life-ask-calendar-reader.md) and luthen's Akonadi declaration.",
+      "issued_at": "2026-09-28T15:05:07Z",
+      "minted_during": "tick",
+      "caused_by": "life",
+      "last_worked": "2026-09-28T15:05:07Z",
       "ticks_blocked": 0
     }
   ],

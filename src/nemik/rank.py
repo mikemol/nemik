@@ -141,6 +141,12 @@ def goals(g: Graph, repo: str, weights: Weights) -> list[dict]:
     return sorted(out, key=lambda r: (-r["weight"], int(r["goal"].lstrip("W"))))
 
 
+def children(g: Graph, n: URIRef) -> set[URIRef]:
+    """The open waypoints in n's own repo that directly feed it (enable it, or it waits for them)."""
+    feeders = set(g.subjects(NEMIK.enables, n)) | set(g.objects(n, NEMIK.waitsFor))
+    return {f for f in feeders if _repo(f) == _repo(n) and _open(g, f)}
+
+
 def is_umbrella(g: Graph, n: URIRef) -> bool:
     """A ready item with open work under it (nemik:W74): its frontier is not itself, so it is not a leaf."""
     return frontier(g, n)[0] != {n}
@@ -194,8 +200,12 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     if args.check:
         ums = umbrellas(g, args.repo)
         for u in ums:
+            # nemik:W112: DECOMPOSE puts the DIRECT open children in blocked_on; the frontier is the
+            # transitive leaves beneath them (paperkit read the leaves as children and found 2 of 5
+            # "wrong": W59 <- W60 <- W132, W78 listed W132, W78, not W60).
             print(f"rank: UMBRELLA {ref_of(u)} is ready with open work under it: "
-                  + ", ".join(sorted(ref_of(x) for x in frontier(g, u)[0])))
+                  f"children {', '.join(sorted(ref_of(x) for x in children(g, u)))}; "
+                  f"leaves {', '.join(sorted(ref_of(x) for x in frontier(g, u)[0]))}")
         d = drift(g, args.repo, weights)
         if d is None:
             if ums:

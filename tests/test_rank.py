@@ -92,3 +92,16 @@ def test_drift_fires_when_next_item_is_outweighed_and_clears_when_it_leads() -> 
     g.remove((stalled, NEMIK.waitsFor, heavy))
     g.add((stalled, NEMIK.waitsFor, first))
     assert drift(g, "a", W) is None
+
+
+def test_umbrella_children_are_direct_feeders_not_transitive_leaves() -> None:
+    # paperkit's W59 (nemik:W112): W59 waits on W60, which W132 and W78 enable.
+    from nemik.rank import children, frontier
+
+    g = Graph()
+    w59, w60, w132, w78 = (_wp(g, "p", s) for s in ("W59", "W60", "W132", "W78"))
+    g.add((w59, NEMIK.waitsFor, w60))
+    for leaf in (w132, w78):
+        g.add((leaf, NEMIK.enables, w60))
+    assert children(g, w59) == {w60}
+    assert frontier(g, w59)[0] == {w132, w78}
