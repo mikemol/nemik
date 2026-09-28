@@ -1,0 +1,26 @@
+# nemik:W105: which image tag is current is nemik's policy; recording it is luthen's
+# (ImageUpdateAutomation commits it into nemik/deploy-state, declared by luthen beside that repo).
+# spec.image is luthen's registry-http, pod side (`checks.endpoints_query registry-http --side pod`
+# in luthen-observability; registry.buildbuddy.svc.cluster.local:5000 as of 2026-09-28), plain
+# HTTP, hence insecure. deploy-state's seed pins newName to the same address.
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: nemik
+spec:
+  image: registry.buildbuddy.svc.cluster.local:5000/nemik
+  insecure: true
+  interval: 5m
+---
+# Tags are <unix-seconds>-<sha> (.forgejo/workflows/build.yml); the newest build wins.
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: nemik
+spec:
+  imageRepositoryRef: {name: nemik}
+  filterTags:
+    pattern: '^(?P<ts>[0-9]+)-[0-9a-f]{40}$'
+    extract: '$ts'
+  policy:
+    numerical: {order: asc}

@@ -31,7 +31,8 @@ spec:
             - {name: http, containerPort: 8750}
           # The dashboard's witness tools read these (nemik-45, 2026-09-27). vmsingle and vmalert
           # live in namespace buildbuddy (luthen endpoints.json, read 2026-09-28), so they are named
-          # by FQDN now that nemik runs in its own namespace.
+          # by FQDN now that nemik runs in its own namespace. Re-derive: luthen-observability
+          # `checks.endpoints_query vmsingle-http --side pod` (and vmalert-http).
           env:
             - {name: NEMIK_VM_URL, value: "http://vmsingle.buildbuddy.svc.cluster.local:8428"}
             - {name: NEMIK_VMALERT_URL, value: "http://vmalert.buildbuddy.svc.cluster.local:8880"}

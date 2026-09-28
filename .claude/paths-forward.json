@@ -1948,7 +1948,7 @@
     {
       "symbol": "W105",
       "title": "luthen:W185 Flux tenant: write deploy/ (kustomization, deployment restricted+PVC nemik-export ro at /export, service 8750, ImageRepository+ImagePolicy) and .forgejo/workflows/build.yml (runs-on luthen-build)",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "luthen-observability:W185"
       ],
@@ -1958,12 +1958,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "image-automation.yaml (ImageRepository+ImagePolicy) and .forgejo/workflows/build.yml: need luthen's registry host/repository value for ImageRepository.spec.image and the push target (asked).",
-      "evidence": "2026-09-28: luthen declares deploy-state repo, its GitRepository, ImageUpdateAutomation (write cred scoped to deploy-state) and the Kustomization over ./deploy, suspended until W105 lands. | 2026-09-28: Step 1 (this tick): deploy/{kustomization,deployment,service}.yaml; kubectl kustomize deploy renders 2 objects. Carried from luthen terraform/nemik.tf: 2 replicas, 512Mi/1cpu Guaranteed, probes, tmp emptyDir, VM env (now FQDN into ns buildbuddy). Changed: PVC nemik-export ro at /export, image bare 'nemik', restricted securityContext. Not validated against the live cluster (no kubectl context here).",
+      "next_bounded_step": "",
+      "evidence": "2026-09-28: luthen declares deploy-state repo, its GitRepository, ImageUpdateAutomation (write cred scoped to deploy-state) and the Kustomization over ./deploy, suspended until W105 lands. | 2026-09-28: Step 1 (this tick): deploy/{kustomization,deployment,service}.yaml; kubectl kustomize deploy renders 2 objects. Carried from luthen terraform/nemik.tf: 2 replicas, 512Mi/1cpu Guaranteed, probes, tmp emptyDir, VM env (now FQDN into ns buildbuddy). Changed: PVC nemik-export ro at /export, image bare 'nemik', restricted securityContext. Not validated against the live cluster (no kubectl context here). | 2026-09-28: Step 2: deploy/image-automation.yaml (ImageRepository registry.buildbuddy.svc.cluster.local:5000/nemik insecure, per luthen endpoints_query registry-http --side pod; ImagePolicy numerical on <unix-ts>-<sha> tags; image.toolkit.fluxcd.io/v1 as luthen uses) and .forgejo/workflows/build.yml (git clone + buildctl, push to vars.REGISTRY/nemik:<ts>-<sha>), modelled on luthen's forgejo/witness workflow. kubectl kustomize deploy renders 4 objects. Not yet run on the runner.",
       "issued_at": "2026-09-28T13:25:06Z",
       "minted_during": "tick",
       "caused_by": "luthen:W185",
-      "last_worked": "2026-09-28T16:49:40Z",
+      "last_worked": "2026-09-28T16:51:01Z",
       "ticks_blocked": 0,
       "weight": 33
     },
@@ -1981,13 +1981,13 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-09-28: luthen 2026-09-28: buildkitd is a host process on luthen's host network, which reaches github.com; the git fetch is likely fine (not yet witnessed). No-egress covers derived data leaving, not pinned sources coming in. Urgency dropped; kept for GitHub-down resilience.",
+      "evidence": "2026-09-28: luthen 2026-09-28: buildkitd is a host process on luthen's host network, which reaches github.com; the git fetch is likely fine (not yet witnessed). No-egress covers derived data leaving, not pinned sources coming in. Urgency dropped; kept for GitHub-down resilience. | 2026-09-28: Now a prerequisite for the first Forgejo build: the base image (uv python3.13-bookworm-slim) has no git binary, so the test stage's uv sync cannot fetch paperkit's git source; also the test stage does not COPY ARCHITECTURE.md, which test_architecture reads. Expected, not yet run.",
       "issued_at": "2026-09-28T13:25:08Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-09-28T13:28:05Z",
+      "last_worked": "2026-09-28T16:51:01Z",
       "ticks_blocked": 0,
-      "weight": 33
+      "weight": 50
     },
     {
       "symbol": "W107",

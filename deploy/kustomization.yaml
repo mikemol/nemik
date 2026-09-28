@@ -8,3 +8,4 @@ namespace: nemik
 resources:
   - deployment.yaml
   - service.yaml
+  - image-automation.yaml

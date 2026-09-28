@@ -1,0 +1,24 @@
+# nemik:W105 (luthen-observability:W185): push -> build -> push image; Flux takes it from there.
+# Runner luthen-build has git and buildctl, no node or curl: plain run steps, no JS actions.
+# ⚑ NO ADDRESS HERE: vars.REGISTRY is luthen's Forgejo org variable, projected from its
+# endpoints.json registry-http (`checks.endpoints_query registry-http --side pod`).
+# ⚑ THE TAG IS <unix-seconds>-<sha>: a bare sha has no order, and deploy/image-automation.yaml's
+# ImagePolicy picks the newest by the numeric prefix.
+# The Containerfile's test stage is the gate: a red commit builds no image.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: luthen-build
+    steps:
+      - name: checkout
+        run: >-
+          git -c "http.extraHeader=Authorization: token ${{ github.token }}"
+          clone --depth 1 "${{ github.server_url }}/${{ github.repository }}.git" src
+      - name: build and push
+        run: >-
+          buildctl build --frontend dockerfile.v0
+          --local context=src --local dockerfile=src --opt filename=Containerfile
+          --output "type=image,name=${{ vars.REGISTRY }}/nemik:$(date -u +%s)-${{ github.sha }},push=true"
