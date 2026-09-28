@@ -101,7 +101,10 @@ through luthen. Everything else above is a Warning.
 
 - **Letters** go in the other repo's `inbox/` as `YYYY-MM-DD-<from>-<topic>.md`, first line
   `<from> → <to>: <what this is>`. Cite waypoints as `<repo>:W<n>` on both sides.
-- **Live sessions**: `ListAgents`, then `SendMessage` to the session name (`<repo>-<hex>`). The first
+- **Live sessions**: `ListAgents`, then `SendMessage` to the session name (`<repo>-<hex>`). Before
+  concluding a repo has no live session (and holding an ask for later), run `ListAgents`: it is a
+  reading, not a recollection, and sessions start all the time. A repo with no `inbox/` can still
+  be messaged live. The first
   line must stand alone. Send the commit hash only after the commit prints it.
 - An ask you receive becomes a waypoint in your queue (`--caused-by <their-repo>:W<n>`), not a
   chat promise. Reply saying which symbol took it.
