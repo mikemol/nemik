@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 107,
+  "counter": 109,
   "waypoints": [
     {
       "symbol": "W1",
@@ -2013,6 +2013,44 @@
       "minted_during": "tick",
       "caused_by": "luthen:W190",
       "last_worked": "2026-09-28T13:28:05Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W108",
+      "title": "nemik-check: caused_by must resolve like enables (a Warning naming the unresolved <repo>:W<n>), so a wrong workstream prefix cannot recur unseen",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "nemik-check",
+        "caused-by"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-28T13:47:34Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W109",
+      "title": "Ask mtools: --update --caused-by (re-cite an interrupt's origin); then repoint W105/W107 caused_by to luthen-observability:W185/W190",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "caused-by",
+        "pathsforward"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-28T13:47:34Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": null,
       "ticks_blocked": 0
     }
   ],
