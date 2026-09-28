@@ -2000,15 +2000,16 @@
         "nemik-rank"
       ],
       "blocked_on": [
-        "mtools:W248"
+        "mtools:W256",
+        "mtools:W257"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "2026-09-28: luthen W190 waits on mtools taking the waypoint vector field; nemik-score starts after. | 2026-09-28: mtools W248 split: mtools stores+validates vector (WV:1/R/C/I/A/X/S/F/W) and vector_source; nemik owns bands, composition, unscored default and guarantees (answered yes 2026-09-28). Alphabet is luthen's call.",
+      "evidence": "2026-09-28: luthen W190 waits on mtools taking the waypoint vector field; nemik-score starts after. | 2026-09-28: mtools W248 split: mtools stores+validates vector (WV:1/R/C/I/A/X/S/F/W) and vector_source; nemik owns bands, composition, unscored default and guarantees (answered yes 2026-09-28). Alphabet is luthen's call. | 2026-09-28: mtools 6809ab5: vector grammar (pathsforward vector.py), luthen W218 alphabet WV,R,E,C,I,A,X,S,F,W, all nine required. Field not writable until mtools W256 (--update --vector) and W257 (--check revalidation).",
       "issued_at": "2026-09-28T13:25:10Z",
       "minted_during": "tick",
       "caused_by": "luthen:W190",
-      "last_worked": "2026-09-28T16:53:01Z",
+      "last_worked": "2026-09-28T17:19:31Z",
       "ticks_blocked": 0
     },
     {
