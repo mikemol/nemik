@@ -204,3 +204,4 @@
 2026-09-28T14:32:04Z  tick  W110 done      sweep     "stale and malformed blocked_on now a fleet-wide nemik-check Warning (paperkit ask)"
 2026-09-28T14:32:42Z  tick  W76  done      sweep     "W110's check found W76 blocked on landed luthen:W148; closed; W101 pruned to W104"
 2026-09-28T15:05:07Z  tick  --   triaged   collapse  "inbox: 3 letters. life new workstream (picked up by nemik-check, no action); paperkit umbrella leaves -> W112 done (children vs leaves, not touches); life calendar -> W113 blocked on mtools reader"
+2026-09-28T16:49:40Z  tick  W105 advanced  unblock   "deploy/ Deployment+Service+kustomization written (restricted, PVC, bare image)"

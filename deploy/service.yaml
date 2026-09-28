@@ -1,0 +1,13 @@
+# Service `nemik`, port 8750: luthen's endpoints.json nemik-http (consumers: the operator's browser,
+# vmagent's /metrics scrape).
+apiVersion: v1
+kind: Service
+metadata:
+  name: nemik
+  labels: {app.kubernetes.io/name: nemik}
+spec:
+  selector: {app.kubernetes.io/name: nemik}
+  ports:
+    - name: http
+      port: 8750
+      targetPort: http

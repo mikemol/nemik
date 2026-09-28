@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 44
+      "ticks_blocked": 45
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 50,
+      "ticks_blocked": 51,
       "weight": 1
     },
     {
@@ -1399,7 +1399,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:13:38Z",
-      "ticks_blocked": 28,
+      "ticks_blocked": 29,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1877,7 +1877,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T23:08:46Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "weight": 0
     },
     {
@@ -1958,13 +1958,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-09-28: luthen declares deploy-state repo, its GitRepository, ImageUpdateAutomation (write cred scoped to deploy-state) and the Kustomization over ./deploy, suspended until W105 lands.",
+      "next_bounded_step": "image-automation.yaml (ImageRepository+ImagePolicy) and .forgejo/workflows/build.yml: need luthen's registry host/repository value for ImageRepository.spec.image and the push target (asked).",
+      "evidence": "2026-09-28: luthen declares deploy-state repo, its GitRepository, ImageUpdateAutomation (write cred scoped to deploy-state) and the Kustomization over ./deploy, suspended until W105 lands. | 2026-09-28: Step 1 (this tick): deploy/{kustomization,deployment,service}.yaml; kubectl kustomize deploy renders 2 objects. Carried from luthen terraform/nemik.tf: 2 replicas, 512Mi/1cpu Guaranteed, probes, tmp emptyDir, VM env (now FQDN into ns buildbuddy). Changed: PVC nemik-export ro at /export, image bare 'nemik', restricted securityContext. Not validated against the live cluster (no kubectl context here).",
       "issued_at": "2026-09-28T13:25:06Z",
       "minted_during": "tick",
       "caused_by": "luthen:W185",
-      "last_worked": "2026-09-28T13:28:05Z",
-      "ticks_blocked": 0
+      "last_worked": "2026-09-28T16:49:40Z",
+      "ticks_blocked": 0,
+      "weight": 33
     },
     {
       "symbol": "W106",
@@ -1986,7 +1987,7 @@
       "caused_by": null,
       "last_worked": "2026-09-28T13:28:05Z",
       "ticks_blocked": 0,
-      "weight": -5
+      "weight": 33
     },
     {
       "symbol": "W107",
@@ -2008,7 +2009,7 @@
       "minted_during": "tick",
       "caused_by": "luthen:W190",
       "last_worked": "2026-09-28T13:28:05Z",
-      "ticks_blocked": 2
+      "ticks_blocked": 3
     },
     {
       "symbol": "W108",
@@ -2027,7 +2028,8 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 0
     },
     {
       "symbol": "W109",
@@ -2046,7 +2048,8 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 0
     },
     {
       "symbol": "W110",
@@ -2083,7 +2086,8 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 0
     },
     {
       "symbol": "W112",
@@ -2124,7 +2128,7 @@
       "minted_during": "tick",
       "caused_by": "life",
       "last_worked": "2026-09-28T15:05:07Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 1
     }
   ],
   "residue": [

@@ -1,0 +1,10 @@
+# nemik:W105 (luthen-observability:W185): nemik's own deploy, applied by luthen's Flux Kustomization
+# (path ./deploy, serviceAccountName flux-reconciler, targetNamespace nemik). The image's registry,
+# name and tag are NOT here: luthen's nemik/deploy-state layers a kustomize `images:` pin over this
+# directory, and Flux's ImageUpdateAutomation commits new tags there. This repo stays pure source.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: nemik
+resources:
+  - deployment.yaml
+  - service.yaml
