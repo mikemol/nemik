@@ -15,7 +15,14 @@ RUN uv sync --frozen --no-dev
 FROM base AS test
 COPY tests ./tests
 COPY skills ./skills
-RUN uv sync --frozen && .venv/bin/pytest -q tests && touch /app/.tested
+# nemik:W122: test_architecture gates ARCHITECTURE.md against the source, so the image gate carries
+# the paper and its checks, and the docs extra (paperkit) that runs them. -rs names every skip.
+COPY ARCHITECTURE.md paper.toml warrants.bib rubric.tsv ./
+COPY checks ./checks
+# paperkit is a pinned git source (nemik:W102), and uv needs a git binary to fetch it. The test stage
+# only: the final image never carries git.
+RUN apt-get update && apt-get install -y --no-install-recommends git ca-certificates && rm -rf /var/lib/apt/lists/*
+RUN uv sync --frozen --extra docs && .venv/bin/pytest -q -rs tests && touch /app/.tested
 
 FROM base
 COPY --from=test /app/.tested /app/.tested
