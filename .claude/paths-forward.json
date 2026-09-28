@@ -1991,24 +1991,21 @@
     {
       "symbol": "W107",
       "title": "luthen:W190 CVSS-shaped ranking: nemik-score module (vector parse, bands, policy rules) consumed by nemik-rank; --check refuses band inversion and policy-block pairs; vector field in the pf schema via mtools",
-      "status": "blocked",
+      "status": "ready",
       "enables": [
         "luthen-observability:W190"
       ],
       "touches": [
         "nemik-rank"
       ],
-      "blocked_on": [
-        "mtools:W256",
-        "mtools:W257"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-09-28: luthen W190 waits on mtools taking the waypoint vector field; nemik-score starts after. | 2026-09-28: mtools W248 split: mtools stores+validates vector (WV:1/R/C/I/A/X/S/F/W) and vector_source; nemik owns bands, composition, unscored default and guarantees (answered yes 2026-09-28). Alphabet is luthen's call. | 2026-09-28: mtools 6809ab5: vector grammar (pathsforward vector.py), luthen W218 alphabet WV,R,E,C,I,A,X,S,F,W, all nine required. Field not writable until mtools W256 (--update --vector) and W257 (--check revalidation).",
+      "evidence": "2026-09-28: luthen W190 waits on mtools taking the waypoint vector field; nemik-score starts after. | 2026-09-28: mtools W248 split: mtools stores+validates vector (WV:1/R/C/I/A/X/S/F/W) and vector_source; nemik owns bands, composition, unscored default and guarantees (answered yes 2026-09-28). Alphabet is luthen's call. | 2026-09-28: mtools 6809ab5: vector grammar (pathsforward vector.py), luthen W218 alphabet WV,R,E,C,I,A,X,S,F,W, all nine required. Field not writable until mtools W256 (--update --vector) and W257 (--check revalidation). | 2026-09-28: mtools W248 landed: writer 0d31908, checker 23f1223. Fields vector (WV:1/R/E/C/I/A/X/S/F/W, fixed order, all required) + vector_source (default|signal|agent), written together; --check flags bad grammar, prints UNSCORED <n> (census, exit unchanged). First step: re-vendor the pathsforward wheel at 23f1223 (vendor/wheels, README history), then nemik-score reads vector via store.load.",
       "issued_at": "2026-09-28T13:25:10Z",
       "minted_during": "tick",
       "caused_by": "luthen:W190",
-      "last_worked": "2026-09-28T17:19:31Z",
+      "last_worked": "2026-09-28T17:50:04Z",
       "ticks_blocked": 0
     },
     {
