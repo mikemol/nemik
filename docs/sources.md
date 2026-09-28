@@ -5,7 +5,7 @@
 - VictoriaMetrics: query `vmsingle-http` (Prom API); push `vmagent-http`. Series: luthen_check_state{check}, luthen_check_timestamp_seconds, ALERTS, node_*/container_* PSI.
 - VictoriaLogs: `victorialogs-http` (LogsQL /select/logsql/query): host journal + pod logs.
 - No trace store on luthen.
-- Cluster: k3s single node `luthen`, namespace `buildbuddy`, cluster DNS names, no ingress. Managed hosting: luthen deploys (terraform + policy gate); we hand over image, ports, storage, pg tenant.
+- Cluster: k3s single node `luthen`, namespace `nemik` (a Flux tenant, Pod Security `restricted`, since 2026-09-28, luthen-observability:W185), cluster DNS names, no ingress. nemik owns `deploy/` and `.forgejo/workflows/build.yml`; luthen owns where it may run (namespace, quota, the `nemik-export` PVC, the registry, deploy-state). The registry and vmsingle/vmalert still live in `buildbuddy`.
 - Dependency graph: per-repo `.claude/paths-forward.json` (symbol, status, blocked_on, blocked_kind, `enables` edges).
 - Activity ledger: `.claude/paths-forward.ledger`, `<ISO-UTC> <kind> <symbol> <verb> <mechanism> "summary"`. kind=tick → forecast; kind=manual → interrupt. Formats drifted before today: parse tolerantly.
 - Liveness: `python -m checks.loop_liveness` (per-repo JSON).

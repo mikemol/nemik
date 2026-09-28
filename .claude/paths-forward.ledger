@@ -217,3 +217,4 @@
 2026-09-28T18:09:54Z  tick  W117 done      unblock   "cross-box edge length -28% on live data"
 2026-09-28T18:19:18Z  tick  W119 done      collapse  "one cause (hash order) behind layout jumps, replica disagreement and a flickering edge"
 2026-09-28T18:23:46Z  tick  W120 done      unblock   "cross p95 2747->2268, intra p95 329->291 on a frozen snapshot"
+2026-09-28T19:13:13Z  tick  --   shipped   unblock   "luthen W185 cutover live (5a2cf43): Flux ships nemik 1790620913-4204699 in ns nemik, 2/2 Ready; image_follow retired for nemik; docs/sources.md updated"
