@@ -195,3 +195,4 @@
 2026-09-27T23:03:02Z  tick  W92  done      unblock   "commit gate is bazel test //...; W85 closed"
 2026-09-27T23:08:46Z  tick  W101 atomized  collapse  "read mtools wiring; split W102-W104"
 2026-09-28T12:59:55Z  tick  W102 done      collapse  "uv.lock is the one resolver for host and bazel; hand-vendored paperkit gone; second patch measured (key url missing on path wheel)"
+2026-09-28T13:02:06Z  tick  W103 done      unblock   "tests consume //:.venv as their interpreter; per-target deps gone"

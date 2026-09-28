@@ -1,40 +1,21 @@
-load("@nemik_dev//:requirements.bzl", "all_requirements", "requirement")
+load("@nemik_dev//:requirements.bzl", "all_requirements")
 load("//bazel:venv.bzl", "venv_from_hub")
-load("@rules_python//python:defs.bzl", "py_library", "py_test")
+load("@rules_shell//shell:sh_test.bzl", "sh_test")
 
 exports_files(["pyproject.toml"])
 
-py_library(
-    name = "nemik",
-    srcs = glob(["src/nemik/**/*.py"]),
-    data = glob(["src/nemik/**/*"], exclude = ["src/nemik/**/*.py", "**/__pycache__/**"]),
-    imports = ["src"],
-    deps = [
-        "@pathsforward//:lib",
-        requirement("rdflib"),
-        requirement("pyshacl"),
-    ],
-)
-
 # One target per test module, so a failure is located and an unchanged module is a cache hit.
+# nemik:W103: each runs under //:.venv's interpreter (tests/venv_pytest.sh); the venv is the input.
 [
-    py_test(
+    sh_test(
         name = src.removeprefix("tests/").removesuffix(".py"),
-        srcs = [src, "tests/pytest_main.py", "tests/installed.py"],
-        imports = ["tests"],
-        main = "tests/pytest_main.py",
-        args = ["$(location " + src + ")", "-q", "-c", "$(location pyproject.toml)"],
-        data = ["pyproject.toml", "ARCHITECTURE.md", ":.venv", "@opa//file", "@chromium//:files", "@chromium//:chrome-headless-shell"],
+        srcs = ["tests/venv_pytest.sh"],
+        args = ["$(rootpath " + src + ")", "-c", "$(rootpath pyproject.toml)"],
+        data = [src, "tests/installed.py", "pyproject.toml", "ARCHITECTURE.md", ":.venv", "@opa//file", "@chromium//:files", "@chromium//:chrome-headless-shell"],
         env = {
             "NEMIK_OPA": "$(rootpath @opa//file)",
             "NEMIK_CHROMIUM": "$(rootpath @chromium//:chrome-headless-shell)",
         },
-        deps = [
-            ":nemik",
-            requirement("pytest"),
-            requirement("playwright"),
-            "@nemik_dev//paperkit",
-        ],
     )
     for src in glob(["tests/test_*.py"])
 ]

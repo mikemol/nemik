@@ -1,13 +1,14 @@
 """nemik on Bazel (nemik:W85, W90): which tests run is the build graph's call, not a tick's.
 
-Each tests/test_*.py is its own cached py_test, so an unchanged tree costs nothing to re-verify
-and a change re-runs exactly what depends on it. The pattern is mtools' (pytest_main as the entry
-point, so a module is collected rather than run as a script).
+Each tests/test_*.py is its own cached test, so an unchanged tree costs nothing to re-verify
+and a change re-runs exactly what depends on it. Each runs under the built //:.venv's interpreter
+(nemik:W103, tests/venv_pytest.sh), so the venv is the input every test consumes.
 """
 
 module(name = "nemik", version = "0.1")
 
 bazel_dep(name = "rules_python", version = "2.3.3")
+bazel_dep(name = "rules_shell", version = "0.4.1")
 
 # nemik:W102: rules_python patched (mtools' patches/, same measurement) so pip.parse(uv_lock=)
 # hands a git source to pip as `name @ git+url@rev` instead of an index requirement.
