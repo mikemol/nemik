@@ -2056,7 +2056,7 @@
     {
       "symbol": "W110",
       "title": "nemik-check: flag blocked_on entries naming a same-repo waypoint that is done (all done: should be ready; some: stale subset), and entries not a clean symbol/<repo>:W<n>/operator ask (paperkit letter 2026-09-28)",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "nemik-check",
@@ -2065,11 +2065,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-28: blocks.annotate derives landedBlocker (waitsFor target done or dropped), allBlockersLanded (every blocked_on entry landed), malformedBlocker (symbol + trailing prose); three Warning shapes in shapes.ttl; vocab in nemik.ttl; 2 tests in test_umbrella_block.py. bazel test //... 14/14. Fleet run (nemik-check --root ~/github): 37 findings across repos, incl. paperkit W19's prose entry.",
       "issued_at": "2026-09-28T14:30:21Z",
       "minted_during": "tick",
       "caused_by": "paperkit",
-      "last_worked": null,
+      "last_worked": "2026-09-28T14:32:04Z",
       "ticks_blocked": 0
     },
     {

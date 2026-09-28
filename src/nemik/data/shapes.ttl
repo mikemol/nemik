@@ -73,6 +73,20 @@ nemik:UnresolvedBlockerShape a sh:NodeShape ;
     sh:property [ sh:path nemik:unresolvedBlocker ; sh:maxCount 0 ; sh:severity sh:Warning ;
                   sh:message "blocked on no resolvable party: name a repo, a <repo>:W<n>, or 'operator: decide/act ...'" ] .
 
+# Blocked on a waypoint that has already landed, done or dropped (nemik:W110, paperkit's letter).
+nemik:LandedBlockerShape a sh:NodeShape ;
+    sh:targetSubjectsOf nemik:landedBlocker ;
+    sh:property [ sh:path nemik:landedBlocker ; sh:maxCount 0 ; sh:severity sh:Warning ;
+                  sh:message "blocked_on names a waypoint that has already landed (done or dropped): trim it from blocked_on (--bump-blocked prunes local ones)" ] ;
+    sh:property [ sh:path nemik:allBlockersLanded ; sh:maxCount 0 ; sh:severity sh:Warning ;
+                  sh:message "every blocker in blocked_on has landed: this waypoint is ready, not blocked" ] .
+
+# A blocked_on entry that is a symbol with prose run on; it draws no edge, so it never lands.
+nemik:MalformedBlockerShape a sh:NodeShape ;
+    sh:targetSubjectsOf nemik:malformedBlocker ;
+    sh:property [ sh:path nemik:malformedBlocker ; sh:maxCount 0 ; sh:severity sh:Warning ;
+                  sh:message "blocked_on entry is a symbol with prose attached: write W<n> or <repo>:W<n> alone, and put the reason in evidence" ] .
+
 # The operator's intent: each repo installs mikemol-pathsforward and runs it from its own .venv.
 nemik:AdoptionShape a sh:NodeShape ;
     sh:targetSubjectsOf nemik:pathsforwardAdoption ;

@@ -29,6 +29,9 @@ nemik:effortClass a rdf:Property ; rdfs:comment "forecast | interrupt | unclassi
 nemik:outcome a rdf:Property ; rdfs:comment "The ledger line's outcome column." .
 nemik:mechanism a rdf:Property ; rdfs:comment "The ledger line's mechanism column." .
 nemik:umbrellaBlockOn a rdf:Property ; rdfs:comment "Derived: this waypoint waits on another workstream's waypoint that its own repo's open children enable (an umbrella)." .
+nemik:landedBlocker a rdf:Property ; rdfs:comment "Derived (nemik:W110): this open waypoint waits on the object waypoint, which has already landed (done or dropped)." .
+nemik:allBlockersLanded a rdf:Property ; rdfs:comment "Derived (nemik:W110): every blocked_on entry of this open waypoint names a waypoint that has landed; it is ready, not blocked." .
+nemik:malformedBlocker a rdf:Property ; rdfs:comment "Derived (nemik:W110): a blocked_on entry that is a symbol with prose attached, so it draws no edge." .
 nemik:queuePosition a rdf:Property ; rdfs:comment "0-based index of the waypoint in mtools' model.ordered(): the order its own session works the queue." .
 nemik:mintedDuring a rdf:Property ; rdfs:comment "tick | interrupt: whether a live tick lock was held when mtools minted the waypoint." .
 nemik:waitsFor a rdf:Property ; rdfs:comment "An edge nemik resolved from free-text blocked_on: to a waypoint (local or repo:W<n>), a workstream, or the operator." .

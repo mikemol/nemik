@@ -19,6 +19,10 @@ from rdflib.namespace import DCTERMS, PROV
 from nemik.adapter import BASE, NEMIK, OSLC_CM
 
 
+_SYMBOLISH = re.compile(r"^([A-Za-z0-9_.-]+:)?W\d+\b")
+_CLEAN_SYMBOL = re.compile(r"([A-Za-z0-9_.-]+:)?W\d+")
+
+
 def ref(node: URIRef) -> str:
     """The citable form of a waypoint IRI: `<repo>:W<n>`."""
     repo, _, sym = str(node).removeprefix(BASE).partition("/")
@@ -82,6 +86,26 @@ def annotate(g: Graph) -> None:
         if any(_repo(c) == _repo(target) and (c, OSLC_CM.state, NEMIK.Done) not in g
                for c in g.subjects(NEMIK.enables, target)):
             g.add((node, NEMIK.umbrellaBlockOn, target))
+
+    # A block on a waypoint that has already landed (done, or dropped to residue) is stale: the
+    # waiter should have been lifted to ready, or its blocked_on trimmed (nemik:W110, paperkit
+    # found 8 such in its own queue, some a day old). All of them landed means mis-stated as blocked.
+    for node in set(g.subjects(NEMIK.waitsFor, None)):
+        if (node, OSLC_CM.state, NEMIK.Done) in g:
+            continue
+        landed = [t for t in g.objects(node, NEMIK.waitsFor)
+                  if (t, OSLC_CM.state, NEMIK.Done) in g or (t, RDF.type, NEMIK.Dropped) in g]
+        for t in landed:
+            g.add((node, NEMIK.landedBlocker, t))
+        if landed and len(landed) == len(set(g.objects(node, NEMIK.blockedOn))):
+            g.add((node, NEMIK.allBlockersLanded, Literal(True)))
+
+    # A blocked_on entry that starts as a symbol and trails prose ("W8 (both rewrite the lock)")
+    # draws no edge, so it can never be seen to land (nemik:W110). Prose belongs in evidence.
+    for node, _, text in g.triples((None, NEMIK.blockedOn, None)):
+        t = str(text).strip()
+        if _SYMBOLISH.match(t) and not _CLEAN_SYMBOL.fullmatch(t):
+            g.add((node, NEMIK.malformedBlocker, text))
 
     for a in operator_asks(g):
         repo, _, sym = a["ref"].partition(":")
