@@ -798,19 +798,18 @@
       ],
       "touches": [],
       "blocked_on": [
-        "aeternum",
         "gabion",
         "sre-troubleshooting",
-        "amr-skills"
+        "amr-skills:W76"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "Each tick: nemik-wake --json; on a wake event for one of the three, message it citing its <repo>:W<n>",
-      "evidence": "2026-09-27: 15:5x: no wake events; none of the four is live or in the wake roster. Re-filed from ready to blocked-on-the-repos: a watch waiting on an event is a block, not work, and at the top of the queue as 'ready' it would set off ATOMIZE with nothing to split. nudge backoff now paces the re-checks.",
+      "evidence": "2026-09-27: 15:5x: no wake events; none of the four is live or in the wake roster. Re-filed from ready to blocked-on-the-repos: a watch waiting on an event is a block, not work, and at the top of the queue as 'ready' it would set off ATOMIZE with nothing to split. nudge backoff now paces the re-checks. | 2026-09-28: 2026-09-28: aeternum awake (aeternum-dd): its operator asks W48-W59 all stated (needs-you); coached via the nemik skill, dropped from the watch. amr-skills awake (amr-skills-2d): W76 still unstated, nudged, now cited as amr-skills:W76. gabion (W11, W14) and sre-troubleshooting still dormant.",
       "issued_at": "2026-09-27T15:13:28Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 51,
+      "last_worked": "2026-09-28T17:45:36Z",
+      "ticks_blocked": 0,
       "weight": 1
     },
     {

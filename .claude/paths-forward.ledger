@@ -210,3 +210,4 @@
 2026-09-28T16:53:01Z  tick  W107 answered  collapse  "mtools W248: nemik owns bands/guarantees; W107 blocked on mtools:W248"
 2026-09-28T17:40:04Z  tick  W114 done      collapse  "one skill replaces per-session re-derivation of the graph rules; drift test keeps it current"
 2026-09-28T17:43:17Z  tick  W115 done      unblock   "operator asks now show who waits behind them; skill teaches the relay chain"
+2026-09-28T17:45:37Z  tick  W47  advanced  unblock   "aeternum verified+coached; amr-skills:W76 nudged; watch narrowed to gabion, sre-troubleshooting"
