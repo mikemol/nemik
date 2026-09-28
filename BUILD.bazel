@@ -11,7 +11,7 @@ exports_files(["pyproject.toml"])
         name = src.removeprefix("tests/").removesuffix(".py"),
         srcs = ["tests/venv_pytest.sh"],
         args = ["$(rootpath " + src + ")", "-c", "$(rootpath pyproject.toml)"],
-        data = [src, "tests/installed.py", "pyproject.toml", "ARCHITECTURE.md", "skills/nemik/SKILL.md", "src/nemik/data/shapes.ttl", ":.venv", "@opa//file", "@chromium//:files", "@chromium//:chrome-headless-shell"],
+        data = [src, "tests/installed.py", "//tests/fixtures:fleet", "pyproject.toml", "ARCHITECTURE.md", "skills/nemik/SKILL.md", "src/nemik/data/shapes.ttl", ":.venv", "@opa//file", "@chromium//:files", "@chromium//:chrome-headless-shell"],
         env = {
             "NEMIK_OPA": "$(rootpath @opa//file)",
             "NEMIK_CHROMIUM": "$(rootpath @chromium//:chrome-headless-shell)",

@@ -145,15 +145,18 @@ function draw() {
   cy = cytoscape({
     container: document.getElementById("cy"), elements: els,
     layout: { name: "preset" },    style: [
-      { selector: "node", style: { "background-color": "data(fill)", label: "data(label)", color: css("--ink"),
-        "font-size": 10, "text-valign": "bottom", "text-halign": "center", "text-margin-y": 2,
-        // A backed label stays legible where edges cross it; dagre reserves its space (tile()).
-        "text-background-color": css("--bg"), "text-background-opacity": 0.85, "text-background-padding": 1,
-        width: 16, height: 16, "border-width": "data(border)", "border-color": css("--interrupt") } },
-      { selector: 'node[state = "unclaimed"]', style: { shape: "round-rectangle", width: 28, height: 28,
-        "font-size": 12, "border-style": "dashed", "border-width": 3, "border-color": css("--unclaimed"),
-        "background-opacity": 0.15, color: css("--unclaimed"), "font-weight": "bold" } },
-      { selector: 'node[minted_during = "interrupt"]', style: { shape: "diamond", width: 20, height: 20 } },
+      // nemik:W125: the label sits INSIDE its shape (operator 2026-09-28), sized to fit it, so no
+      // space below each node is reserved and nothing else can cover the text. Text is the page
+      // background colour, which contrasts with every state fill in both themes.
+      { selector: "node", style: { "background-color": "data(fill)", label: "data(label)", color: css("--bg"),
+        "font-size": 10, "font-weight": "bold", "text-valign": "center", "text-halign": "center",
+        width: "label", height: "label", padding: 4, shape: "round-rectangle",
+        "border-width": "data(border)", "border-color": css("--interrupt") } },
+      { selector: 'node[state = "dropped"]', style: { color: css("--ink") } },
+      { selector: 'node[state = "unclaimed"]', style: { "font-size": 11, "border-style": "dashed", "border-width": 3,
+        "border-color": css("--unclaimed"), "background-opacity": 0.15, color: css("--unclaimed") } },
+      // A diamond's text box is its middle half, so it needs more padding to hold the same label.
+      { selector: 'node[minted_during = "interrupt"]', style: { shape: "diamond", padding: 11 } },
       { selector: ".repo", style: { "background-opacity": 0.04, "background-color": css("--ink"), "border-width": 1,
         "border-color": css("--line"), label: "data(label)", "text-valign": "top", "text-halign": "center",
         "font-size": 12, color: css("--muted") } },
@@ -168,7 +171,7 @@ function draw() {
       { selector: "edge.satisfied", style: { opacity: 0.25, "line-style": "solid" } },
       { selector: ".actor", style: { shape: "round-rectangle", "background-color": css("--other"),
         label: "data(label)", width: "label", height: 20, padding: 6, "text-halign": "center",
-        "text-margin-x": 0, color: css("--bg"), "font-size": 11, "border-width": 0 } },
+        "text-valign": "center", "text-margin-x": 0, color: css("--bg"), "font-size": 11, "border-width": 0 } },
       { selector: ".operator", style: { "background-color": css("--blocked") } },
       { selector: ".operator.answered, .operator.condition", style: { "background-color": css("--done") } },
       { selector: ".operator.unstated", style: { "background-color": css("--interrupt") } },

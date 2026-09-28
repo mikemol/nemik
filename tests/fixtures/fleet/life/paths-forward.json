@@ -1,0 +1,255 @@
+{
+ "counter": 22,
+ "project_root": "/fixture/life",
+ "residue": [
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W18",
+   "title": "life W18"
+  }
+ ],
+ "version": 1,
+ "waypoints": [
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W1",
+   "title": "life W1"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W2",
+   "title": "life W2"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W1"
+   ],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W3",
+   "title": "life W3"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W4",
+   "title": "life W4"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "resumes",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W5",
+   "title": "life W5"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "mat260:W8",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W6",
+   "title": "life W6"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "resumes",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W7",
+   "title": "life W7"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "resumes",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W8",
+   "title": "life W8"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W9",
+   "title": "life W9"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W9",
+    "W21"
+   ],
+   "enables": [
+    "W11"
+   ],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W10",
+   "title": "life W10"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W10"
+   ],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W11",
+   "title": "life W11"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator: act (fixture)"
+   ],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W12",
+   "title": "life W12"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "nemik:W113"
+   ],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W13",
+   "title": "life W13"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "luthen-observability:W206"
+   ],
+   "caused_by": "operator",
+   "enables": [
+    "W13"
+   ],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W14",
+   "title": "life W14"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator: decide (fixture)"
+   ],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W15",
+   "title": "life W15"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "el-openglo:W116",
+    "el-openglo:W113",
+    "el-openglo:W43"
+   ],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W16",
+   "title": "life W16"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W15"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W17",
+   "title": "life W17"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "luthen-observability:W219"
+   ],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W19",
+   "title": "life W19"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "aeternum:W48",
+    "operator: decide (fixture)"
+   ],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W20",
+   "title": "life W20"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator: decide (fixture)"
+   ],
+   "caused_by": "resumes:W1",
+   "enables": [
+    "resumes:W1",
+    "W10"
+   ],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W21",
+   "title": "life W21"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "mtools:W253",
+   "enables": [
+    "mtools:W253",
+    "W13"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W22",
+   "title": "life W22"
+  }
+ ]
+}

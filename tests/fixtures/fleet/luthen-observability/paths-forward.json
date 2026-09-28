@@ -1,0 +1,2687 @@
+{
+ "counter": 234,
+ "project_root": "/fixture/luthen-observability",
+ "residue": [
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-venv",
+   "title": "luthen-observability R-venv"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-census",
+   "title": "luthen-observability R-census"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-mesh",
+   "title": "luthen-observability R-mesh"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-diverge-series",
+   "title": "luthen-observability R-diverge-series"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-amtool",
+   "title": "luthen-observability R-amtool"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-window-ingest",
+   "title": "luthen-observability R-window-ingest"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-emlink",
+   "title": "luthen-observability R-emlink"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-teardown-latency",
+   "title": "luthen-observability R-teardown-latency"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-config-token-renew",
+   "title": "luthen-observability R-config-token-renew"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-route-localnet",
+   "title": "luthen-observability R-route-localnet"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-rung-two-coverage",
+   "title": "luthen-observability R-rung-two-coverage"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-noqa",
+   "title": "luthen-observability R-noqa"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-census-period",
+   "title": "luthen-observability R-census-period"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-self-matching-witness",
+   "title": "luthen-observability R-self-matching-witness"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-shell-bytes",
+   "title": "luthen-observability R-shell-bytes"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-witness-staleness",
+   "title": "luthen-observability R-witness-staleness"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-notify-retract",
+   "title": "luthen-observability R-notify-retract"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-open-streams-store",
+   "title": "luthen-observability R-open-streams-store"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-hookspath-flip",
+   "title": "luthen-observability R-hookspath-flip"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-toolchain-stamp-staleness",
+   "title": "luthen-observability R-toolchain-stamp-staleness"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-cassian-salvage",
+   "title": "luthen-observability R-cassian-salvage"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-sched-idle-gate",
+   "title": "luthen-observability R-sched-idle-gate"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-cassian-invariants",
+   "title": "luthen-observability R-cassian-invariants"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-root-escape",
+   "title": "luthen-observability R-root-escape"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-md0-incident",
+   "title": "luthen-observability R-md0-incident"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-codel-writeback",
+   "title": "luthen-observability R-codel-writeback"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-md0-queue-latency",
+   "title": "luthen-observability R-md0-queue-latency"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-iocost",
+   "title": "luthen-observability R-iocost"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-tmpfs-scratch",
+   "title": "luthen-observability R-tmpfs-scratch"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-keep-filters",
+   "title": "luthen-observability R-keep-filters"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-pg-dumpall",
+   "title": "luthen-observability R-pg-dumpall"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "R-fstrim-vs-discard",
+   "title": "luthen-observability R-fstrim-vs-discard"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W87",
+   "title": "luthen-observability W87"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W58",
+   "title": "luthen-observability W58"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W68",
+   "title": "luthen-observability W68"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W54",
+   "title": "luthen-observability W54"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W8.unmerge",
+   "title": "luthen-observability W8.unmerge"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W208",
+   "title": "luthen-observability W208"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W214",
+   "title": "luthen-observability W214"
+  }
+ ],
+ "version": 1,
+ "waypoints": [
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "linux-sources:W46",
+    "W43"
+   ],
+   "status": "done",
+   "symbol": "W115",
+   "title": "luthen-observability W115"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W115"
+   ],
+   "enables": [
+    "linux-sources:W47",
+    "W43"
+   ],
+   "status": "blocked",
+   "symbol": "W111",
+   "title": "luthen-observability W111"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W43"
+   ],
+   "status": "done",
+   "symbol": "W112",
+   "title": "luthen-observability W112"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W112",
+    "W115"
+   ],
+   "enables": [
+    "W41"
+   ],
+   "status": "blocked",
+   "symbol": "W43",
+   "title": "luthen-observability W43"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator"
+   ],
+   "enables": [
+    "W45"
+   ],
+   "status": "blocked",
+   "symbol": "W121",
+   "title": "luthen-observability W121"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "el-openglo"
+   ],
+   "enables": [
+    "el-openglo:W70"
+   ],
+   "status": "blocked",
+   "symbol": "W94",
+   "title": "luthen-observability W94"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "mtools-65"
+   ],
+   "enables": [
+    "W70"
+   ],
+   "status": "blocked",
+   "symbol": "W79",
+   "title": "luthen-observability W79"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "el-openglo:W83"
+   ],
+   "status": "done",
+   "symbol": "W114",
+   "title": "luthen-observability W114"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W70"
+   ],
+   "status": "done",
+   "symbol": "W128",
+   "title": "luthen-observability W128"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "linux-sources"
+   ],
+   "enables": [
+    "W70"
+   ],
+   "status": "blocked",
+   "symbol": "W129",
+   "title": "luthen-observability W129"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W70"
+   ],
+   "status": "done",
+   "symbol": "W131",
+   "title": "luthen-observability W131"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W70"
+   ],
+   "status": "done",
+   "symbol": "W133",
+   "title": "luthen-observability W133"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W79"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W135",
+   "title": "luthen-observability W135"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W79"
+   ],
+   "enables": [
+    "W136",
+    "W137",
+    "W138",
+    "W139",
+    "W140",
+    "W141"
+   ],
+   "status": "blocked",
+   "symbol": "W80",
+   "title": "luthen-observability W80"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W79"
+   ],
+   "enables": [
+    "W80"
+   ],
+   "status": "blocked",
+   "symbol": "W136",
+   "title": "luthen-observability W136"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W79"
+   ],
+   "enables": [
+    "W80"
+   ],
+   "status": "blocked",
+   "symbol": "W137",
+   "title": "luthen-observability W137"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W79"
+   ],
+   "enables": [
+    "W80"
+   ],
+   "status": "blocked",
+   "symbol": "W138",
+   "title": "luthen-observability W138"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W79"
+   ],
+   "enables": [
+    "W80"
+   ],
+   "status": "blocked",
+   "symbol": "W140",
+   "title": "luthen-observability W140"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W79"
+   ],
+   "enables": [
+    "W80"
+   ],
+   "status": "blocked",
+   "symbol": "W141",
+   "title": "luthen-observability W141"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W209"
+   ],
+   "enables": [
+    "W103",
+    "W73"
+   ],
+   "status": "blocked",
+   "symbol": "W102",
+   "title": "luthen-observability W102"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W99",
+    "W8"
+   ],
+   "status": "done",
+   "symbol": "W97",
+   "title": "luthen-observability W97"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W101",
+    "W73"
+   ],
+   "status": "done",
+   "symbol": "W100",
+   "title": "luthen-observability W100"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W197",
+    "W198",
+    "W199"
+   ],
+   "enables": [
+    "W41",
+    "W91"
+   ],
+   "status": "blocked",
+   "symbol": "W113",
+   "title": "luthen-observability W113"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W54"
+   ],
+   "status": "ready",
+   "symbol": "W56",
+   "title": "luthen-observability W56"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W65",
+   "title": "luthen-observability W65"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W231",
+    "W232",
+    "W233"
+   ],
+   "enables": [
+    "W45"
+   ],
+   "status": "blocked",
+   "symbol": "W53",
+   "title": "luthen-observability W53"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W8"
+   ],
+   "status": "ready",
+   "symbol": "W98",
+   "title": "luthen-observability W98"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W85"
+   ],
+   "status": "ready",
+   "symbol": "W106",
+   "title": "luthen-observability W106"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W85"
+   ],
+   "status": "ready",
+   "symbol": "W107",
+   "title": "luthen-observability W107"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W85"
+   ],
+   "status": "ready",
+   "symbol": "W108",
+   "title": "luthen-observability W108"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W92"
+   ],
+   "status": "ready",
+   "symbol": "W109",
+   "title": "luthen-observability W109"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W92"
+   ],
+   "status": "ready",
+   "symbol": "W110",
+   "title": "luthen-observability W110"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W113"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W91",
+   "title": "luthen-observability W91"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W89",
+   "title": "luthen-observability W89"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W81",
+   "title": "luthen-observability W81"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W78",
+   "title": "luthen-observability W78"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W76",
+   "title": "luthen-observability W76"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W75",
+   "title": "luthen-observability W75"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W100",
+    "W102"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W73",
+   "title": "luthen-observability W73"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W72",
+   "title": "luthen-observability W72"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W66",
+   "title": "luthen-observability W66"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W51",
+   "title": "luthen-observability W51"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W52",
+   "title": "luthen-observability W52"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W121",
+    "W123",
+    "W53"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W45",
+   "title": "luthen-observability W45"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W97",
+    "W98"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W8",
+   "title": "luthen-observability W8"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W69",
+   "title": "luthen-observability W69"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W95",
+   "title": "luthen-observability W95"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W116",
+   "title": "luthen-observability W116"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W117",
+   "title": "luthen-observability W117"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W119",
+   "title": "luthen-observability W119"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W92",
+   "title": "luthen-observability W92"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W93",
+   "title": "luthen-observability W93"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W90",
+   "title": "luthen-observability W90"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W88",
+   "title": "luthen-observability W88"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W86",
+   "title": "luthen-observability W86"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W85",
+   "title": "luthen-observability W85"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W58",
+    "W61"
+   ],
+   "status": "done",
+   "symbol": "W83",
+   "title": "luthen-observability W83"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W84",
+   "title": "luthen-observability W84"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W82",
+   "title": "luthen-observability W82"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "gcalculus"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W74",
+   "title": "luthen-observability W74"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W77",
+   "title": "luthen-observability W77"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W129",
+    "W130"
+   ],
+   "enables": [
+    "W128",
+    "W129",
+    "W130",
+    "W131",
+    "W132",
+    "W133",
+    "W134",
+    "W135"
+   ],
+   "status": "blocked",
+   "symbol": "W70",
+   "title": "luthen-observability W70"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "event"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W71",
+   "title": "luthen-observability W71"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W67",
+   "title": "luthen-observability W67"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W65"
+   ],
+   "enables": [
+    "W63"
+   ],
+   "status": "blocked",
+   "symbol": "W64",
+   "title": "luthen-observability W64"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W63",
+   "title": "luthen-observability W63"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W58"
+   ],
+   "status": "done",
+   "symbol": "W60",
+   "title": "luthen-observability W60"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W59",
+   "title": "luthen-observability W59"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W57",
+   "title": "luthen-observability W57"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W54"
+   ],
+   "status": "done",
+   "symbol": "W55",
+   "title": "luthen-observability W55"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "linux-sources"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W50",
+   "title": "luthen-observability W50"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W48",
+   "title": "luthen-observability W48"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W49",
+   "title": "luthen-observability W49"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W46",
+   "title": "luthen-observability W46"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W44",
+   "title": "luthen-observability W44"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W36",
+   "title": "luthen-observability W36"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W12",
+   "title": "luthen-observability W12"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W42",
+   "title": "luthen-observability W42"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W113"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W41",
+   "title": "luthen-observability W41"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W38",
+   "title": "luthen-observability W38"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W40",
+   "title": "luthen-observability W40"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W39",
+   "title": "luthen-observability W39"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W35",
+   "title": "luthen-observability W35"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W37",
+   "title": "luthen-observability W37"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W34",
+   "title": "luthen-observability W34"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W33",
+   "title": "luthen-observability W33"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W31"
+   ],
+   "status": "done",
+   "symbol": "W32",
+   "title": "luthen-observability W32"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W23",
+    "W25"
+   ],
+   "status": "done",
+   "symbol": "W31",
+   "title": "luthen-observability W31"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W29",
+   "title": "luthen-observability W29"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W24"
+   ],
+   "status": "done",
+   "symbol": "W23",
+   "title": "luthen-observability W23"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W30",
+   "title": "luthen-observability W30"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W25"
+   ],
+   "status": "done",
+   "symbol": "W24",
+   "title": "luthen-observability W24"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W25",
+   "title": "luthen-observability W25"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W28"
+   ],
+   "enables": [
+    "W21",
+    "W22"
+   ],
+   "status": "done",
+   "symbol": "W19",
+   "title": "luthen-observability W19"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W23",
+    "W19"
+   ],
+   "status": "done",
+   "symbol": "W28",
+   "title": "luthen-observability W28"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W22"
+   ],
+   "status": "done",
+   "symbol": "W21",
+   "title": "luthen-observability W21"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W27"
+   ],
+   "status": "done",
+   "symbol": "W26",
+   "title": "luthen-observability W26"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W23"
+   ],
+   "status": "done",
+   "symbol": "W22",
+   "title": "luthen-observability W22"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W27",
+   "title": "luthen-observability W27"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W19",
+    "W20"
+   ],
+   "status": "done",
+   "symbol": "W18",
+   "title": "luthen-observability W18"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W21",
+    "W23"
+   ],
+   "status": "done",
+   "symbol": "W20",
+   "title": "luthen-observability W20"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [],
+   "enables": [
+    "W11"
+   ],
+   "status": "done",
+   "symbol": "W16",
+   "title": "luthen-observability W16"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W2",
+    "W3",
+    "W4"
+   ],
+   "status": "done",
+   "symbol": "W1",
+   "title": "luthen-observability W1"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W4",
+    "W5",
+    "W6"
+   ],
+   "status": "done",
+   "symbol": "W2",
+   "title": "luthen-observability W2"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W4",
+    "W6"
+   ],
+   "status": "done",
+   "symbol": "W3",
+   "title": "luthen-observability W3"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W5",
+    "W7"
+   ],
+   "status": "done",
+   "symbol": "W4",
+   "title": "luthen-observability W4"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W6",
+    "W7"
+   ],
+   "status": "done",
+   "symbol": "W13",
+   "title": "luthen-observability W13"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W14"
+   ],
+   "enables": [
+    "W7",
+    "W8"
+   ],
+   "status": "done",
+   "symbol": "W5",
+   "title": "luthen-observability W5"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator"
+   ],
+   "enables": [
+    "W5"
+   ],
+   "status": "done",
+   "symbol": "W14",
+   "title": "luthen-observability W14"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator"
+   ],
+   "enables": [
+    "W7"
+   ],
+   "status": "done",
+   "symbol": "W6",
+   "title": "luthen-observability W6"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W8",
+    "W12"
+   ],
+   "status": "done",
+   "symbol": "W7",
+   "title": "luthen-observability W7"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W9",
+   "title": "luthen-observability W9"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [],
+   "enables": [
+    "W11"
+   ],
+   "status": "done",
+   "symbol": "W10",
+   "title": "luthen-observability W10"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W11",
+   "title": "luthen-observability W11"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W15",
+   "title": "luthen-observability W15"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W17",
+   "title": "luthen-observability W17"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W47",
+   "title": "luthen-observability W47"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W62",
+   "title": "luthen-observability W62"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W58"
+   ],
+   "status": "done",
+   "symbol": "W61",
+   "title": "luthen-observability W61"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W99"
+   ],
+   "status": "done",
+   "symbol": "W96",
+   "title": "luthen-observability W96"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "event"
+   ],
+   "enables": [
+    "W8"
+   ],
+   "status": "blocked",
+   "symbol": "W99",
+   "title": "luthen-observability W99"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W100"
+   ],
+   "enables": [
+    "W73"
+   ],
+   "status": "blocked",
+   "symbol": "W101",
+   "title": "luthen-observability W101"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W102"
+   ],
+   "enables": [
+    "W104",
+    "W73"
+   ],
+   "status": "blocked",
+   "symbol": "W103",
+   "title": "luthen-observability W103"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W103"
+   ],
+   "enables": [
+    "W73"
+   ],
+   "status": "blocked",
+   "symbol": "W104",
+   "title": "luthen-observability W104"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "event"
+   ],
+   "enables": [
+    "W85"
+   ],
+   "status": "blocked",
+   "symbol": "W105",
+   "title": "luthen-observability W105"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W118",
+   "title": "luthen-observability W118"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W45"
+   ],
+   "status": "done",
+   "symbol": "W120",
+   "title": "luthen-observability W120"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W45"
+   ],
+   "status": "done",
+   "symbol": "W122",
+   "title": "luthen-observability W122"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W45"
+   ],
+   "status": "done",
+   "symbol": "W123",
+   "title": "luthen-observability W123"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "linux-sources",
+    "W123"
+   ],
+   "enables": [
+    "W45"
+   ],
+   "status": "blocked",
+   "symbol": "W124",
+   "title": "luthen-observability W124"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W45"
+   ],
+   "status": "done",
+   "symbol": "W125",
+   "title": "luthen-observability W125"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W121",
+    "W123"
+   ],
+   "enables": [
+    "W45"
+   ],
+   "status": "blocked",
+   "symbol": "W126",
+   "title": "luthen-observability W126"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W126"
+   ],
+   "enables": [
+    "W45",
+    "el-openglo:W70"
+   ],
+   "status": "blocked",
+   "symbol": "W127",
+   "title": "luthen-observability W127"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W128",
+    "W129"
+   ],
+   "enables": [
+    "W70"
+   ],
+   "status": "blocked",
+   "symbol": "W130",
+   "title": "luthen-observability W130"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W130"
+   ],
+   "enables": [
+    "W70"
+   ],
+   "status": "blocked",
+   "symbol": "W132",
+   "title": "luthen-observability W132"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W133",
+    "W130"
+   ],
+   "enables": [
+    "W70"
+   ],
+   "status": "blocked",
+   "symbol": "W134",
+   "title": "luthen-observability W134"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W79"
+   ],
+   "enables": [
+    "W80"
+   ],
+   "status": "blocked",
+   "symbol": "W139",
+   "title": "luthen-observability W139"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W142",
+   "title": "luthen-observability W142"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W149"
+   ],
+   "caused_by": "W118",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W143",
+   "title": "luthen-observability W143"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W133",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W144",
+   "title": "luthen-observability W144"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W145",
+   "title": "luthen-observability W145"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W146",
+   "title": "luthen-observability W146"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W147",
+   "title": "luthen-observability W147"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W148",
+   "title": "luthen-observability W148"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W143"
+   ],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W149",
+   "title": "luthen-observability W149"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W150",
+   "title": "luthen-observability W150"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W151",
+   "title": "luthen-observability W151"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W166",
+    "W167",
+    "W168",
+    "W169",
+    "W170"
+   ],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W152",
+   "title": "luthen-observability W152"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W153",
+   "title": "luthen-observability W153"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W154",
+   "title": "luthen-observability W154"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W155",
+   "title": "luthen-observability W155"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W156",
+   "title": "luthen-observability W156"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W157",
+   "title": "luthen-observability W157"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W158",
+   "title": "luthen-observability W158"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W112",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W159",
+   "title": "luthen-observability W159"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W112",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W160",
+   "title": "luthen-observability W160"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "mtools-65",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W161",
+   "title": "luthen-observability W161"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W112",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W162",
+   "title": "luthen-observability W162"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W41"
+   ],
+   "caused_by": "W123",
+   "enables": [
+    "W45"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W163",
+   "title": "luthen-observability W163"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W123",
+   "enables": [
+    "W45"
+   ],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W164",
+   "title": "luthen-observability W164"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W165",
+   "title": "luthen-observability W165"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W152"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W166",
+   "title": "luthen-observability W166"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W152"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W167",
+   "title": "luthen-observability W167"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W196"
+   ],
+   "enables": [
+    "W152"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W168",
+   "title": "luthen-observability W168"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W183",
+    "W184",
+    "W185"
+   ],
+   "enables": [
+    "W152"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W169",
+   "title": "luthen-observability W169"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W185"
+   ],
+   "enables": [
+    "W152"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W170",
+   "title": "luthen-observability W170"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W167"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W171",
+   "title": "luthen-observability W171"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W167"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W172",
+   "title": "luthen-observability W172"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W167"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W173",
+   "title": "luthen-observability W173"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W172",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W174",
+   "title": "luthen-observability W174"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W172",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W175",
+   "title": "luthen-observability W175"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W172",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W176",
+   "title": "luthen-observability W176"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W168",
+   "enables": [
+    "W168"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W177",
+   "title": "luthen-observability W177"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W168",
+   "enables": [
+    "W168"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W178",
+   "title": "luthen-observability W178"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W168",
+   "enables": [
+    "W168"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W179",
+   "title": "luthen-observability W179"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W41"
+   ],
+   "caused_by": "W177",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W180",
+   "title": "luthen-observability W180"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W179",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W181",
+   "title": "luthen-observability W181"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W182",
+   "title": "luthen-observability W182"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W169",
+    "W185"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W183",
+   "title": "luthen-observability W183"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W169",
+    "W185"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W184",
+   "title": "luthen-observability W184"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W169"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W185",
+   "title": "luthen-observability W185"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W186",
+   "title": "luthen-observability W186"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W185"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W187",
+   "title": "luthen-observability W187"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W188",
+   "title": "luthen-observability W188"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W189",
+   "title": "luthen-observability W189"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "mtools"
+   ],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W190",
+   "title": "luthen-observability W190"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W185"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W191",
+   "title": "luthen-observability W191"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W185"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W192",
+   "title": "luthen-observability W192"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W185"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W193",
+   "title": "luthen-observability W193"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W185"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W194",
+   "title": "luthen-observability W194"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W185"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W195",
+   "title": "luthen-observability W195"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W168"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W196",
+   "title": "luthen-observability W196"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W198"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W197",
+   "title": "luthen-observability W197"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W197"
+   ],
+   "enables": [
+    "W199"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W198",
+   "title": "luthen-observability W198"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W198"
+   ],
+   "enables": [
+    "W113"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W199",
+   "title": "luthen-observability W199"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W201",
+    "W202",
+    "W203"
+   ],
+   "caused_by": "inbox",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W200",
+   "title": "luthen-observability W200"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W204",
+    "W205",
+    "W206"
+   ],
+   "caused_by": "inbox",
+   "enables": [
+    "W200"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W201",
+   "title": "luthen-observability W201"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "inbox",
+   "enables": [
+    "W203"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W202",
+   "title": "luthen-observability W202"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "inbox",
+   "enables": [
+    "W200"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W203",
+   "title": "luthen-observability W203"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W201",
+   "enables": [
+    "W205",
+    "W206"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W204",
+   "title": "luthen-observability W204"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W201",
+   "enables": [
+    "W206"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W205",
+   "title": "luthen-observability W205"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W201",
+   "enables": [
+    "W201"
+   ],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W206",
+   "title": "luthen-observability W206"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W102",
+   "enables": [
+    "W209"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W207",
+   "title": "luthen-observability W207"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W215",
+    "W216"
+   ],
+   "caused_by": "W102",
+   "enables": [
+    "W102"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W209",
+   "title": "luthen-observability W209"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W211",
+    "W212",
+    "W213"
+   ],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W210",
+   "title": "luthen-observability W210"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "linux-sources"
+   ],
+   "caused_by": "W210",
+   "enables": [
+    "W213"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W211",
+   "title": "luthen-observability W211"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W210",
+   "enables": [
+    "W210"
+   ],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W212",
+   "title": "luthen-observability W212"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W211"
+   ],
+   "caused_by": "W210",
+   "enables": [
+    "W210"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W213",
+   "title": "luthen-observability W213"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W223",
+    "W224",
+    "W225"
+   ],
+   "caused_by": "W209",
+   "enables": [
+    "W216"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W215",
+   "title": "luthen-observability W215"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W215"
+   ],
+   "caused_by": "W209",
+   "enables": [
+    "W209"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W216",
+   "title": "luthen-observability W216"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W217",
+   "title": "luthen-observability W217"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W218",
+   "title": "luthen-observability W218"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W219",
+   "title": "luthen-observability W219"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W220",
+   "title": "luthen-observability W220"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W185",
+   "enables": [
+    "W185"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W221",
+   "title": "luthen-observability W221"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W185",
+   "enables": [
+    "W185"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W222",
+   "title": "luthen-observability W222"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W215",
+   "enables": [
+    "W225"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W223",
+   "title": "luthen-observability W223"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W228"
+   ],
+   "caused_by": "W215",
+   "enables": [
+    "W225"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W224",
+   "title": "luthen-observability W224"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W224"
+   ],
+   "caused_by": "W215",
+   "enables": [
+    "W215",
+    "W216"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W225",
+   "title": "luthen-observability W225"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W226",
+   "title": "luthen-observability W226"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W227",
+   "title": "luthen-observability W227"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "luthen-pvc-usage-walk"
+   ],
+   "caused_by": "W224",
+   "enables": [
+    "W224"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W228",
+   "title": "luthen-observability W228"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "mtools-W270",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W229",
+   "title": "luthen-observability W229"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "zram_near_limit",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W230",
+   "title": "luthen-observability W230"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W53"
+   ],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W231",
+   "title": "luthen-observability W231"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W231"
+   ],
+   "enables": [
+    "W53"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W232",
+   "title": "luthen-observability W232"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W53"
+   ],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W233",
+   "title": "luthen-observability W233"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "nemik:W121"
+   ],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W234",
+   "title": "luthen-observability W234"
+  }
+ ]
+}

@@ -1,0 +1,6 @@
+# nemik:W125: the fleet-shaped layout fixture (make_fleet.py writes it; test_layout reads it).
+filegroup(
+    name = "fleet",
+    srcs = glob(["fleet/**"]),
+    visibility = ["//visibility:public"],
+)

@@ -1,0 +1,1287 @@
+{
+ "counter": 124,
+ "project_root": "/fixture/nemik",
+ "residue": [
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W11",
+   "title": "nemik W11"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W21",
+   "title": "nemik W21"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W89",
+   "title": "nemik W89"
+  }
+ ],
+ "version": 1,
+ "waypoints": [
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "summit:W105",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W1",
+   "title": "nemik W1"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W2",
+   "title": "nemik W2"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W3",
+   "title": "nemik W3"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W2"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W4",
+   "title": "nemik W4"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W5",
+   "title": "nemik W5"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W6",
+   "title": "nemik W6"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W7",
+   "title": "nemik W7"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W8",
+   "title": "nemik W8"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W9",
+   "title": "nemik W9"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W10",
+   "title": "nemik W10"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W12",
+   "title": "nemik W12"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W13",
+   "title": "nemik W13"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "el-openglo",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W14",
+   "title": "nemik W14"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "luthen-observability",
+   "enables": [
+    "W16"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W15",
+   "title": "nemik W15"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "luthen-observability",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W16",
+   "title": "nemik W16"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W47"
+   ],
+   "caused_by": "nemik:W4",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W17",
+   "title": "nemik W17"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "luthen-observability",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W18",
+   "title": "nemik W18"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "luthen-observability",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W19",
+   "title": "nemik W19"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "substrate",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W20",
+   "title": "nemik W20"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "el-openglo",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W22",
+   "title": "nemik W22"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "nemik:W22",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W23",
+   "title": "nemik W23"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W24",
+   "title": "nemik W24"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W25",
+   "title": "nemik W25"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W26",
+   "title": "nemik W26"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W27",
+   "title": "nemik W27"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W28",
+   "title": "nemik W28"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W29",
+   "title": "nemik W29"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W30",
+   "title": "nemik W30"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W31",
+   "title": "nemik W31"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W32",
+   "title": "nemik W32"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W32",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W33",
+   "title": "nemik W33"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "luthen-observability:W117",
+   "enables": [
+    "luthen-observability:W117"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W34",
+   "title": "nemik W34"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W34"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W35",
+   "title": "nemik W35"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W34"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W36",
+   "title": "nemik W36"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W34"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W37",
+   "title": "nemik W37"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W34"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W38",
+   "title": "nemik W38"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W34"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W39",
+   "title": "nemik W39"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W40",
+   "title": "nemik W40"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "luthen-observability:W117",
+   "enables": [
+    "luthen-observability:W117"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W41",
+   "title": "nemik W41"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "summit:W105",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W42",
+   "title": "nemik W42"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "luthen-observability:W117",
+   "enables": [
+    "luthen-observability:W117"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W43",
+   "title": "nemik W43"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "luthen-observability:W117",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W44",
+   "title": "nemik W44"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W17"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W45",
+   "title": "nemik W45"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W17"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W46",
+   "title": "nemik W46"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "gabion",
+    "sre-troubleshooting",
+    "amr-skills:W76"
+   ],
+   "enables": [
+    "W17"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W47",
+   "title": "nemik W47"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W48",
+   "title": "nemik W48"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "mtools:W102",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W49",
+   "title": "nemik W49"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "mtools:W121",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W50",
+   "title": "nemik W50"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "summit:W105",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W51",
+   "title": "nemik W51"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W49"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W52",
+   "title": "nemik W52"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W49"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W53",
+   "title": "nemik W53"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W54",
+   "title": "nemik W54"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W55",
+   "title": "nemik W55"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W54"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W56",
+   "title": "nemik W56"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W54"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W57",
+   "title": "nemik W57"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W58",
+   "title": "nemik W58"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W58",
+    "W60"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W59",
+   "title": "nemik W59"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W58",
+    "W61"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W60",
+   "title": "nemik W60"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W58"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W61",
+   "title": "nemik W61"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W58"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W62",
+   "title": "nemik W62"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W60"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W63",
+   "title": "nemik W63"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W60"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W64",
+   "title": "nemik W64"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W60"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W65",
+   "title": "nemik W65"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "luthen-observability:W70",
+   "enables": [
+    "W71"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W66",
+   "title": "nemik W66"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W67",
+   "title": "nemik W67"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W58"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W68",
+   "title": "nemik W68"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "luthen-observability:W146",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W69",
+   "title": "nemik W69"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "luthen-observability:W146",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W70",
+   "title": "nemik W70"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W71",
+   "title": "nemik W71"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W72",
+   "title": "nemik W72"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W66"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W73",
+   "title": "nemik W73"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W66"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W74",
+   "title": "nemik W74"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "paperkit:W111",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W75",
+   "title": "nemik W75"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "paperkit:W111",
+   "enables": [
+    "W75"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W76",
+   "title": "nemik W76"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "nemik-witnesses",
+    "luthen-observability:W152"
+   ],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W77",
+   "title": "nemik W77"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W78",
+   "title": "nemik W78"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W71"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W79",
+   "title": "nemik W79"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W71"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W80",
+   "title": "nemik W80"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W72"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W81",
+   "title": "nemik W81"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W72"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W82",
+   "title": "nemik W82"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W72"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W83",
+   "title": "nemik W83"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W72"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W84",
+   "title": "nemik W84"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W85",
+   "title": "nemik W85"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W86",
+   "title": "nemik W86"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W87",
+   "title": "nemik W87"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W87"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W88",
+   "title": "nemik W88"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W85"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W90",
+   "title": "nemik W90"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W85"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W91",
+   "title": "nemik W91"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W85"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W92",
+   "title": "nemik W92"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W93",
+   "title": "nemik W93"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W93"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W94",
+   "title": "nemik W94"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W93"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W95",
+   "title": "nemik W95"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W93"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W96",
+   "title": "nemik W96"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W93"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W97",
+   "title": "nemik W97"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W91"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W98",
+   "title": "nemik W98"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W91"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W99",
+   "title": "nemik W99"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W91"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W100",
+   "title": "nemik W100"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W101",
+   "title": "nemik W101"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W101"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W102",
+   "title": "nemik W102"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W101"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W103",
+   "title": "nemik W103"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W101"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W104",
+   "title": "nemik W104"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "luthen:W185",
+   "enables": [
+    "luthen-observability:W185"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W105",
+   "title": "nemik W105"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W123",
+    "W124"
+   ],
+   "enables": [
+    "luthen-observability:W185"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W106",
+   "title": "nemik W106"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "luthen:W190",
+   "enables": [
+    "luthen-observability:W190"
+   ],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W107",
+   "title": "nemik W107"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W108",
+   "title": "nemik W108"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W109",
+   "title": "nemik W109"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "paperkit",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W110",
+   "title": "nemik W110"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "luthen-observability",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W111",
+   "title": "nemik W111"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "paperkit",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W112",
+   "title": "nemik W112"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "mtools"
+   ],
+   "caused_by": "life",
+   "enables": [
+    "life:W13"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W113",
+   "title": "nemik W113"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W114",
+   "title": "nemik W114"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W115",
+   "title": "nemik W115"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "aeternum",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W116",
+   "title": "nemik W116"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W117",
+   "title": "nemik W117"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W118",
+   "title": "nemik W118"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W119",
+   "title": "nemik W119"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W120",
+   "title": "nemik W120"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "luthen-observability:W234",
+   "enables": [
+    "luthen-observability:W234"
+   ],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W121",
+   "title": "nemik W121"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W106"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W122",
+   "title": "nemik W122"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W106"
+   ],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W123",
+   "title": "nemik W123"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W106"
+   ],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W124",
+   "title": "nemik W124"
+  }
+ ]
+}

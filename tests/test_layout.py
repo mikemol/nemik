@@ -1,0 +1,91 @@
+"""nemik:W125: the web view's layout quality, measured on a fixed fleet-shaped graph and held to
+budgets, in both colour schemes.
+
+The operator's objective (2026-09-28): minimize the 95th-percentile edge length, inside boxes and
+across them, with every label inside its shape. tests/fixtures/fleet/ is the fleet's real shape with
+its content removed (make_fleet.py). Metrics and screenshots are written as test outputs
+(bazel: bazel-testlogs/test_layout/test.outputs/; host: the pytest tmp dir), so a layout change
+is compared by reading two files, not by re-deriving a harness.
+"""
+
+import json
+import os
+import socket
+import subprocess
+import time
+from pathlib import Path
+
+import pytest
+
+import installed
+
+sync_api = pytest.importorskip("playwright.sync_api")
+
+FLEET = Path(__file__).parent / "fixtures" / "fleet"
+
+# Budgets from the fixture as generated 2026-09-28 (W120 + labels inside), plus ~10% slack.
+# Tighten them when the layout improves; a change that needs them loosened is a regression.
+BUDGET = {"cross_p95": 2800, "intra_p95": 430}
+
+METRICS = """() => {
+  const unit = n => n.isChild() ? n.parent().id() : n.id();
+  const X = [], I = [];
+  cy.edges().forEach(e => { if (!e.visible()) return;
+    const p = e.source().position(), q = e.target().position();
+    (unit(e.source()) === unit(e.target()) ? I : X).push(Math.hypot(p.x - q.x, p.y - q.y)); });
+  const q = (L, f) => { const s = [...L].sort((a, b) => a - b); return Math.round(s[Math.min(s.length - 1, Math.floor(f * s.length))] || 0); };
+  const sum = L => Math.round(L.reduce((a, b) => a + b, 0));
+  const bb = cy.elements().boundingBox();
+  // A label is inside its shape when its box lies within the node's own box (labels excluded).
+  const outside = cy.nodes("[symbol], .actor").filter(n => n.visible()).filter(n => {
+    const l = n.boundingBox({ includeNodes: false, includeLabels: true, includeOverlays: false });
+    const b = n.boundingBox({ includeLabels: false, includeOverlays: false });
+    return l.x1 < b.x1 - 1 || l.x2 > b.x2 + 1 || l.y1 < b.y1 - 1 || l.y2 > b.y2 + 1;
+  }).map(n => n.data("label"));
+  return { cross_n: X.length, cross_p50: q(X, .5), cross_p95: q(X, .95), cross_total: sum(X),
+           intra_n: I.length, intra_p50: q(I, .5), intra_p95: q(I, .95), intra_total: sum(I),
+           width: Math.round(bb.w), height: Math.round(bb.h), labels_outside: outside };
+}"""
+
+
+@pytest.fixture(scope="module")
+def server():
+    with socket.socket() as s:
+        s.bind(("127.0.0.1", 0))
+        port = s.getsockname()[1]
+    env = {**installed._bin()[1], "PYTHONHASHSEED": "0"}
+    proc = subprocess.Popen([*installed.script("nemik-serve"), "--root", str(FLEET), "--port", str(port)],
+                            env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    for _ in range(100):
+        try:
+            socket.create_connection(("127.0.0.1", port), timeout=0.2).close()
+            break
+        except OSError:
+            time.sleep(0.1)
+    yield f"http://127.0.0.1:{port}/"
+    proc.terminate()
+    proc.wait()
+
+
+@pytest.mark.parametrize("scheme", ["light", "dark"])
+def test_layout_meets_budgets_with_labels_inside(server, scheme, tmp_path) -> None:
+    out = Path(os.environ.get("TEST_UNDECLARED_OUTPUTS_DIR") or tmp_path)
+    with sync_api.sync_playwright() as p:
+        try:
+            exe = os.environ.get("NEMIK_CHROMIUM")
+            browser = p.chromium.launch(executable_path=os.path.abspath(exe) if exe else None)
+        except Exception as e:  # noqa: BLE001 - no browser installed here
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": 1700, "height": 1250}, color_scheme=scheme)
+        errors: list[str] = []
+        page.on("pageerror", lambda e: errors.append(str(e)))
+        page.goto(server)
+        page.wait_for_function("() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0", timeout=60000)
+        m = page.evaluate(METRICS)
+        page.screenshot(path=str(out / f"layout-{scheme}.png"))
+        browser.close()
+    (out / f"layout-{scheme}.json").write_text(json.dumps(m, indent=1))
+    assert errors == []
+    assert m["labels_outside"] == []
+    assert m["cross_p95"] <= BUDGET["cross_p95"], m
+    assert m["intra_p95"] <= BUDGET["intra_p95"], m

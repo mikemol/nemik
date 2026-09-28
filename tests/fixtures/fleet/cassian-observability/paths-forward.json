@@ -1,0 +1,95 @@
+{
+ "counter": 11,
+ "project_root": "/fixture/cassian-observability",
+ "residue": [
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W5",
+   "title": "cassian-observability W5"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W7",
+   "title": "cassian-observability W7"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W4",
+   "title": "cassian-observability W4"
+  }
+ ],
+ "version": 1,
+ "waypoints": [
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W1",
+   "title": "cassian-observability W1"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W2",
+   "title": "cassian-observability W2"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W3",
+   "title": "cassian-observability W3"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W6",
+   "title": "cassian-observability W6"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W8",
+   "title": "cassian-observability W8"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "linux-sources-ec"
+   ],
+   "enables": [],
+   "status": "done",
+   "symbol": "W9",
+   "title": "cassian-observability W9"
+  },
+  {
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W10",
+   "title": "cassian-observability W10"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W11",
+   "title": "cassian-observability W11"
+  }
+ ]
+}

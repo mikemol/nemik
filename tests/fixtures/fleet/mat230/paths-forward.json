@@ -1,0 +1,52 @@
+{
+ "counter": 6,
+ "project_root": "/fixture/mat230",
+ "residue": [
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W1",
+   "title": "mat230 W1"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W2",
+   "title": "mat230 W2"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W3",
+   "title": "mat230 W3"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W4",
+   "title": "mat230 W4"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W6",
+   "title": "mat230 W6"
+  }
+ ],
+ "version": 1,
+ "waypoints": [
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W5",
+   "title": "mat230 W5"
+  }
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "counter": 8,
+ "project_root": "/fixture/mat260",
+ "residue": [],
+ "version": 1,
+ "waypoints": [
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W8",
+   "title": "mat260 W8"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W3",
+   "title": "mat260 W3"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W6",
+   "title": "mat260 W6"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W2",
+   "title": "mat260 W2"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W2"
+   ],
+   "status": "done",
+   "symbol": "W1",
+   "title": "mat260 W1"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W4",
+   "title": "mat260 W4"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W5",
+   "title": "mat260 W5"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W7",
+   "title": "mat260 W7"
+  }
+ ]
+}

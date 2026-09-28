@@ -1,0 +1,3029 @@
+{
+ "counter": 274,
+ "project_root": "/fixture/mtools",
+ "residue": [
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W17",
+   "title": "mtools W17"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W13",
+   "title": "mtools W13"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W5",
+   "title": "mtools W5"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W6",
+   "title": "mtools W6"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W7",
+   "title": "mtools W7"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W130",
+   "title": "mtools W130"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W129",
+   "title": "mtools W129"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W241",
+   "title": "mtools W241"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W242",
+   "title": "mtools W242"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W245",
+   "title": "mtools W245"
+  }
+ ],
+ "version": 1,
+ "waypoints": [
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W2",
+    "W5",
+    "W6"
+   ],
+   "status": "done",
+   "symbol": "W1",
+   "title": "mtools W1"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W3"
+   ],
+   "status": "done",
+   "symbol": "W2",
+   "title": "mtools W2"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W3",
+   "title": "mtools W3"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W4",
+   "title": "mtools W4"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W8",
+   "title": "mtools W8"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W9",
+   "title": "mtools W9"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W18",
+   "title": "mtools W18"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W19",
+   "title": "mtools W19"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W21"
+   ],
+   "status": "done",
+   "symbol": "W20",
+   "title": "mtools W20"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W21",
+   "title": "mtools W21"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W22",
+   "title": "mtools W22"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W20"
+   ],
+   "status": "done",
+   "symbol": "W23",
+   "title": "mtools W23"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W36"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W24",
+   "title": "mtools W24"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W232",
+    "W233"
+   ],
+   "status": "done",
+   "symbol": "W10",
+   "title": "mtools W10"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W11",
+   "title": "mtools W11"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W8",
+    "W11"
+   ],
+   "status": "done",
+   "symbol": "W12",
+   "title": "mtools W12"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W14",
+   "title": "mtools W14"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W15",
+   "title": "mtools W15"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W16",
+   "title": "mtools W16"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W25",
+   "title": "mtools W25"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W26",
+   "title": "mtools W26"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "nemik",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W27",
+   "title": "mtools W27"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "summit-21",
+   "enables": [
+    "W45"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W28",
+   "title": "mtools W28"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "amr-skills-48",
+   "enables": [
+    "linux-sources:W35"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W29",
+   "title": "mtools W29"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "summit",
+   "enables": [
+    "W47"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W30",
+   "title": "mtools W30"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "linux-sources",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W31",
+   "title": "mtools W31"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W24",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W32",
+   "title": "mtools W32"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W24",
+   "enables": [
+    "W34"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W33",
+   "title": "mtools W33"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W24",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W34",
+   "title": "mtools W34"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W24",
+   "enables": [
+    "W36",
+    "linux-sources:W40"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W35",
+   "title": "mtools W35"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W108",
+    "W107"
+   ],
+   "caused_by": "W24",
+   "enables": [
+    "W24",
+    "summit:W95"
+   ],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W36",
+   "title": "mtools W36"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W24",
+   "enables": [
+    "W24"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W37",
+   "title": "mtools W37"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W30",
+   "enables": [
+    "W30"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W38",
+   "title": "mtools W38"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "rosettapkg",
+   "enables": [
+    "rosettapkg:W13"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W39",
+   "title": "mtools W39"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W24",
+   "enables": [
+    "W24",
+    "W44",
+    "nemik:W10"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W40",
+   "title": "mtools W40"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W28",
+   "enables": [
+    "W28"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W41",
+   "title": "mtools W41"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "taskboard-80",
+   "enables": [
+    "W44",
+    "nemik:W10"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W42",
+   "title": "mtools W42"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "taskboard-80",
+   "enables": [
+    "W44",
+    "nemik:W10"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W43",
+   "title": "mtools W43"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "taskboard-80",
+   "enables": [
+    "nemik:W10"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W44",
+   "title": "mtools W44"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "summit-21",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W45",
+   "title": "mtools W45"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "linux-sources",
+   "enables": [
+    "W33",
+    "linux-sources:W40"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W46",
+   "title": "mtools W46"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "summit",
+   "enables": [
+    "W48",
+    "W49"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W47",
+   "title": "mtools W47"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W30",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W48",
+   "title": "mtools W48"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "summit",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W49",
+   "title": "mtools W49"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "el-openglo-e8",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W50",
+   "title": "mtools W50"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "nemik-bb",
+   "enables": [
+    "nemik:W20"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W51",
+   "title": "mtools W51"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W52",
+   "title": "mtools W52"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W53",
+   "title": "mtools W53"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W54",
+   "title": "mtools W54"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W55",
+   "title": "mtools W55"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W56",
+   "title": "mtools W56"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W57",
+   "title": "mtools W57"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W58",
+   "title": "mtools W58"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W59",
+   "title": "mtools W59"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W60",
+   "title": "mtools W60"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W61",
+   "title": "mtools W61"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W62",
+   "title": "mtools W62"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W63",
+   "title": "mtools W63"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W64",
+   "title": "mtools W64"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W65",
+   "title": "mtools W65"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W66",
+   "title": "mtools W66"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W67",
+   "title": "mtools W67"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W68",
+   "title": "mtools W68"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W69",
+   "title": "mtools W69"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W70",
+   "title": "mtools W70"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W71",
+   "title": "mtools W71"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W72",
+   "title": "mtools W72"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W73",
+   "title": "mtools W73"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W74",
+   "title": "mtools W74"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W75",
+   "title": "mtools W75"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W76",
+   "title": "mtools W76"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W77",
+   "title": "mtools W77"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W78",
+   "title": "mtools W78"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W79",
+   "title": "mtools W79"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W80",
+   "title": "mtools W80"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W82"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W81",
+   "title": "mtools W81"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W82",
+   "title": "mtools W82"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W83",
+   "title": "mtools W83"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W84",
+   "title": "mtools W84"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W35"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W85",
+   "title": "mtools W85"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W55",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W86",
+   "title": "mtools W86"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W36"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W87",
+   "title": "mtools W87"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W72",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W88",
+   "title": "mtools W88"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W88",
+   "enables": [
+    "W90"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W89",
+   "title": "mtools W89"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W88",
+   "enables": [
+    "W91"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W90",
+   "title": "mtools W90"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W88",
+   "enables": [
+    "W88"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W91",
+   "title": "mtools W91"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W86",
+   "enables": [
+    "W93",
+    "W94",
+    "W95",
+    "W96"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W92",
+   "title": "mtools W92"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W86",
+   "enables": [
+    "W98"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W93",
+   "title": "mtools W93"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W86",
+   "enables": [
+    "W98"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W94",
+   "title": "mtools W94"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W86",
+   "enables": [
+    "W79",
+    "W86"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W95",
+   "title": "mtools W95"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W86",
+   "enables": [
+    "W80",
+    "W86"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W96",
+   "title": "mtools W96"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W86",
+   "enables": [
+    "W98"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W97",
+   "title": "mtools W97"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W86",
+   "enables": [
+    "W86"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W98",
+   "title": "mtools W98"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W50",
+   "enables": [
+    "W101"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W99",
+   "title": "mtools W99"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W50",
+   "enables": [
+    "W101"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W100",
+   "title": "mtools W100"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W50",
+   "enables": [
+    "W102",
+    "W118"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W101",
+   "title": "mtools W101"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W50",
+   "enables": [
+    "W103"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W102",
+   "title": "mtools W102"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W50",
+   "enables": [
+    "W50"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W103",
+   "title": "mtools W103"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W97",
+   "enables": [
+    "W97"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W104",
+   "title": "mtools W104"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W36",
+   "enables": [
+    "W106"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W105",
+   "title": "mtools W105"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W36",
+   "enables": [
+    "W108"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W106",
+   "title": "mtools W106"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W108"
+   ],
+   "caused_by": "W36",
+   "enables": [
+    "W36"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W107",
+   "title": "mtools W107"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W205",
+    "W206",
+    "W207",
+    "W208"
+   ],
+   "caused_by": "W105",
+   "enables": [
+    "W107"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W108",
+   "title": "mtools W108"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W108",
+   "enables": [
+    "W108"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W109",
+   "title": "mtools W109"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W108",
+   "enables": [
+    "W108",
+    "W107"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W110",
+   "title": "mtools W110"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "nemik-45",
+   "enables": [
+    "nemik:W40"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W111",
+   "title": "mtools W111"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W111",
+   "enables": [
+    "W111"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W112",
+   "title": "mtools W112"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W111",
+   "enables": [
+    "W111",
+    "nemik:W40"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W113",
+   "title": "mtools W113"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W111",
+   "enables": [
+    "W111"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W114",
+   "title": "mtools W114"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "nemik-45",
+   "enables": [
+    "nemik:W43"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W115",
+   "title": "mtools W115"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "nemik-45",
+   "enables": [
+    "nemik:W43"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W116",
+   "title": "mtools W116"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W115",
+   "enables": [
+    "W116",
+    "nemik:W43"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W117",
+   "title": "mtools W117"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W100",
+   "enables": [
+    "nemik:W49"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W118",
+   "title": "mtools W118"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W101",
+   "enables": [
+    "W103"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W119",
+   "title": "mtools W119"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W101",
+   "enables": [
+    "W103"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W120",
+   "title": "mtools W120"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W102",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W121",
+   "title": "mtools W121"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W121",
+   "enables": [
+    "nemik:W50"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W122",
+   "title": "mtools W122"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W118",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W123",
+   "title": "mtools W123"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W118",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W124",
+   "title": "mtools W124"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "nemik-45",
+   "enables": [
+    "nemik:W55"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W125",
+   "title": "mtools W125"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W108",
+   "enables": [
+    "W108"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W126",
+   "title": "mtools W126"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W108",
+   "enables": [
+    "W108"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W127",
+   "title": "mtools W127"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W108",
+   "enables": [
+    "W108"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W128",
+   "title": "mtools W128"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "nemik-45",
+   "enables": [
+    "nemik:W59"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W131",
+   "title": "mtools W131"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "nemik-45",
+   "enables": [
+    "nemik:W59"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W132",
+   "title": "mtools W132"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "nemik-45",
+   "enables": [
+    "nemik:W64"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W133",
+   "title": "mtools W133"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W123",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W134",
+   "title": "mtools W134"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W135",
+   "title": "mtools W135"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W136",
+   "title": "mtools W136"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W137",
+   "title": "mtools W137"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W138",
+   "title": "mtools W138"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W139",
+   "title": "mtools W139"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W140",
+   "title": "mtools W140"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W141",
+   "title": "mtools W141"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W142",
+   "title": "mtools W142"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W143",
+   "title": "mtools W143"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W144",
+   "title": "mtools W144"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W145",
+   "title": "mtools W145"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W146",
+   "title": "mtools W146"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W147",
+   "title": "mtools W147"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W148",
+   "title": "mtools W148"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W149",
+   "title": "mtools W149"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W150",
+   "title": "mtools W150"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W151",
+   "title": "mtools W151"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W152",
+   "title": "mtools W152"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W153",
+   "title": "mtools W153"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W154",
+   "title": "mtools W154"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W155",
+   "title": "mtools W155"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W156",
+   "title": "mtools W156"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W157",
+   "title": "mtools W157"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W158",
+   "title": "mtools W158"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W159",
+   "title": "mtools W159"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W160",
+   "title": "mtools W160"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W161",
+   "title": "mtools W161"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W162",
+   "title": "mtools W162"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W163",
+   "title": "mtools W163"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W164",
+   "title": "mtools W164"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W165",
+   "title": "mtools W165"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W166",
+   "title": "mtools W166"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W167",
+   "title": "mtools W167"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W168",
+   "title": "mtools W168"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W169",
+   "title": "mtools W169"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W170",
+   "title": "mtools W170"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W171",
+   "title": "mtools W171"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W172",
+   "title": "mtools W172"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W172",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W173",
+   "title": "mtools W173"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W103",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W174",
+   "title": "mtools W174"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W103",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W175",
+   "title": "mtools W175"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W103",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W176",
+   "title": "mtools W176"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W103",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W177",
+   "title": "mtools W177"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W103",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W178",
+   "title": "mtools W178"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W174",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W179",
+   "title": "mtools W179"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W173",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W180",
+   "title": "mtools W180"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W173",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W181",
+   "title": "mtools W181"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W47",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W182",
+   "title": "mtools W182"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W47",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W183",
+   "title": "mtools W183"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W183",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W184",
+   "title": "mtools W184"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "party",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W185",
+   "title": "mtools W185"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W128",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W186",
+   "title": "mtools W186"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W186",
+   "enables": [
+    "W108"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W187",
+   "title": "mtools W187"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "luthen-observability-81",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W188",
+   "title": "mtools W188"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W187",
+   "enables": [
+    "W108"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W189",
+   "title": "mtools W189"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W177",
+   "enables": [
+    "W50",
+    "W178"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W190",
+   "title": "mtools W190"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W189",
+   "enables": [
+    "W189"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W191",
+   "title": "mtools W191"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W189",
+   "enables": [
+    "W189"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W192",
+   "title": "mtools W192"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W189",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W193",
+   "title": "mtools W193"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W108",
+   "enables": [
+    "W108"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W194",
+   "title": "mtools W194"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W108",
+   "enables": [
+    "W108"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W195",
+   "title": "mtools W195"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W108",
+   "enables": [
+    "W108"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W196",
+   "title": "mtools W196"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W196",
+   "enables": [
+    "W108"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W197",
+   "title": "mtools W197"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W194",
+   "enables": [
+    "W194"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W198",
+   "title": "mtools W198"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W194",
+   "enables": [
+    "W194"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W199",
+   "title": "mtools W199"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W194",
+   "enables": [
+    "W194"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W200",
+   "title": "mtools W200"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W195",
+   "enables": [
+    "W195"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W201",
+   "title": "mtools W201"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W195",
+   "enables": [
+    "W195"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W202",
+   "title": "mtools W202"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W195",
+   "enables": [
+    "W195"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W203",
+   "title": "mtools W203"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "substrate-session"
+   ],
+   "caused_by": "W197",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W204",
+   "title": "mtools W204"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W108",
+   "enables": [
+    "W108"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W205",
+   "title": "mtools W205"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W108",
+   "enables": [
+    "W108"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W206",
+   "title": "mtools W206"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W226"
+   ],
+   "caused_by": "W108",
+   "enables": [
+    "W108"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W207",
+   "title": "mtools W207"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W207"
+   ],
+   "caused_by": "W108",
+   "enables": [
+    "W108"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W208",
+   "title": "mtools W208"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W237",
+    "W238"
+   ],
+   "caused_by": "W108",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W209",
+   "title": "mtools W209"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W197",
+   "enables": [
+    "W204"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W210",
+   "title": "mtools W210"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W207"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W211",
+   "title": "mtools W211"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W211",
+   "enables": [
+    "W207"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W212",
+   "title": "mtools W212"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W211",
+   "enables": [
+    "W207"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W213",
+   "title": "mtools W213"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W213",
+    "W212"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W214",
+   "title": "mtools W214"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W213"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W215",
+   "title": "mtools W215"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W213"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W216",
+   "title": "mtools W216"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W213"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W217",
+   "title": "mtools W217"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W213"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W218",
+   "title": "mtools W218"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W213"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W219",
+   "title": "mtools W219"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W213"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W220",
+   "title": "mtools W220"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W213",
+    "W212"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W221",
+   "title": "mtools W221"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W207"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W222",
+   "title": "mtools W222"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W207"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W223",
+   "title": "mtools W223"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W207"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W224",
+   "title": "mtools W224"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W207"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W225",
+   "title": "mtools W225"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W207"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W226",
+   "title": "mtools W226"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W227",
+   "title": "mtools W227"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W229",
+    "W230"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W228",
+   "title": "mtools W228"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W228",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W229",
+   "title": "mtools W229"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W228",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W230",
+   "title": "mtools W230"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W209",
+    "W235",
+    "W236",
+    "W237",
+    "W238"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W231",
+   "title": "mtools W231"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W10",
+   "enables": [
+    "W233",
+    "W234"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W232",
+   "title": "mtools W232"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W10",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W233",
+   "title": "mtools W233"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W232",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W234",
+   "title": "mtools W234"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W231",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W235",
+   "title": "mtools W235"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W231",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W236",
+   "title": "mtools W236"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W231",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W237",
+   "title": "mtools W237"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W237"
+   ],
+   "caused_by": "W231",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W238",
+   "title": "mtools W238"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W239",
+   "title": "mtools W239"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W237"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W240",
+   "title": "mtools W240"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W237"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W243",
+   "title": "mtools W243"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W237"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W244",
+   "title": "mtools W244"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W246",
+   "title": "mtools W246"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "life:W13"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W247",
+   "title": "mtools W247"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "luthen-observability:W190"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W248",
+   "title": "mtools W248"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W249",
+   "title": "mtools W249"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W250",
+   "title": "mtools W250"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W251",
+   "title": "mtools W251"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W252",
+   "title": "mtools W252"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W247"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W253",
+   "title": "mtools W253"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W247"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W254",
+   "title": "mtools W254"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W265"
+   ],
+   "enables": [
+    "life:W12"
+   ],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W255",
+   "title": "mtools W255"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W248"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W256",
+   "title": "mtools W256"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W248"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W257",
+   "title": "mtools W257"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W259"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W258",
+   "title": "mtools W258"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W260"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W259",
+   "title": "mtools W259"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W261"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W260",
+   "title": "mtools W260"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W247"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W261",
+   "title": "mtools W261"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W263"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W262",
+   "title": "mtools W262"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W264"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W263",
+   "title": "mtools W263"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W269"
+   ],
+   "enables": [
+    "W265"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W264",
+   "title": "mtools W264"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W264"
+   ],
+   "enables": [
+    "W255",
+    "life:W12"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W265",
+   "title": "mtools W265"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W263"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W266",
+   "title": "mtools W266"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W264",
+   "enables": [
+    "W268"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W267",
+   "title": "mtools W267"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W264",
+   "enables": [
+    "W269"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W268",
+   "title": "mtools W268"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W274"
+   ],
+   "caused_by": "W264",
+   "enables": [
+    "W264"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W269",
+   "title": "mtools W269"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "luthen:W229"
+   ],
+   "caused_by": "operator",
+   "enables": [
+    "W267",
+    "W269"
+   ],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W270",
+   "title": "mtools W270"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W269"
+   ],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W271",
+   "title": "mtools W271"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "luthen-observability-81",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W272",
+   "title": "mtools W272"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W268",
+   "enables": [
+    "W268"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W273",
+   "title": "mtools W273"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W268",
+   "enables": [
+    "W269"
+   ],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W274",
+   "title": "mtools W274"
+  }
+ ]
+}

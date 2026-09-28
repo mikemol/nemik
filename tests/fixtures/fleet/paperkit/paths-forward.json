@@ -1,0 +1,1403 @@
+{
+ "counter": 138,
+ "project_root": "/fixture/paperkit",
+ "residue": [
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W53",
+   "title": "paperkit W53"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W54",
+   "title": "paperkit W54"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W55",
+   "title": "paperkit W55"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W56",
+   "title": "paperkit W56"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W57",
+   "title": "paperkit W57"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W27",
+   "title": "paperkit W27"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W3",
+   "title": "paperkit W3"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W12",
+   "title": "paperkit W12"
+  }
+ ],
+ "version": 1,
+ "waypoints": [
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W58",
+   "title": "paperkit W58"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W83"
+   ],
+   "status": "ready",
+   "symbol": "W82",
+   "title": "paperkit W82"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W82"
+   ],
+   "enables": [
+    "W84"
+   ],
+   "status": "blocked",
+   "symbol": "W83",
+   "title": "paperkit W83"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W83"
+   ],
+   "enables": [
+    "W85"
+   ],
+   "status": "blocked",
+   "symbol": "W84",
+   "title": "paperkit W84"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W84"
+   ],
+   "enables": [
+    "W66"
+   ],
+   "status": "blocked",
+   "symbol": "W85",
+   "title": "paperkit W85"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W87"
+   ],
+   "status": "done",
+   "symbol": "W86",
+   "title": "paperkit W86"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W88"
+   ],
+   "status": "done",
+   "symbol": "W87",
+   "title": "paperkit W87"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W67"
+   ],
+   "status": "done",
+   "symbol": "W88",
+   "title": "paperkit W88"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W90"
+   ],
+   "status": "done",
+   "symbol": "W89",
+   "title": "paperkit W89"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W68"
+   ],
+   "status": "done",
+   "symbol": "W90",
+   "title": "paperkit W90"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W92"
+   ],
+   "status": "done",
+   "symbol": "W91",
+   "title": "paperkit W91"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W93"
+   ],
+   "status": "ready",
+   "symbol": "W92",
+   "title": "paperkit W92"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W92"
+   ],
+   "enables": [
+    "W73"
+   ],
+   "status": "blocked",
+   "symbol": "W93",
+   "title": "paperkit W93"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W64"
+   ],
+   "status": "done",
+   "symbol": "W94",
+   "title": "paperkit W94"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W70"
+   ],
+   "enables": [
+    "W71"
+   ],
+   "status": "blocked",
+   "symbol": "W95",
+   "title": "paperkit W95"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W70"
+   ],
+   "enables": [
+    "W71"
+   ],
+   "status": "blocked",
+   "symbol": "W96",
+   "title": "paperkit W96"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W70"
+   ],
+   "enables": [
+    "W71"
+   ],
+   "status": "blocked",
+   "symbol": "W97",
+   "title": "paperkit W97"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W112"
+   ],
+   "enables": [
+    "W40"
+   ],
+   "status": "blocked",
+   "symbol": "W98",
+   "title": "paperkit W98"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W98"
+   ],
+   "enables": [
+    "W40"
+   ],
+   "status": "blocked",
+   "symbol": "W99",
+   "title": "paperkit W99"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W101"
+   ],
+   "status": "ready",
+   "symbol": "W100",
+   "title": "paperkit W100"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W100"
+   ],
+   "enables": [
+    "W41"
+   ],
+   "status": "blocked",
+   "symbol": "W101",
+   "title": "paperkit W101"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W103"
+   ],
+   "status": "ready",
+   "symbol": "W102",
+   "title": "paperkit W102"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W102"
+   ],
+   "enables": [
+    "W49"
+   ],
+   "status": "blocked",
+   "symbol": "W103",
+   "title": "paperkit W103"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W105"
+   ],
+   "status": "ready",
+   "symbol": "W104",
+   "title": "paperkit W104"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W104"
+   ],
+   "enables": [
+    "W47"
+   ],
+   "status": "blocked",
+   "symbol": "W105",
+   "title": "paperkit W105"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W106",
+   "title": "paperkit W106"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W113",
+    "W98"
+   ],
+   "status": "ready",
+   "symbol": "W112",
+   "title": "paperkit W112"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W112"
+   ],
+   "enables": [
+    "W45"
+   ],
+   "status": "blocked",
+   "symbol": "W113",
+   "title": "paperkit W113"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W116"
+   ],
+   "status": "done",
+   "symbol": "W120",
+   "title": "paperkit W120"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W119"
+   ],
+   "status": "done",
+   "symbol": "W121",
+   "title": "paperkit W121"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W109",
+    "W119"
+   ],
+   "status": "done",
+   "symbol": "W122",
+   "title": "paperkit W122"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W116",
+    "W119"
+   ],
+   "status": "done",
+   "symbol": "W115",
+   "title": "paperkit W115"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W118",
+    "W119",
+    "W109"
+   ],
+   "status": "done",
+   "symbol": "W116",
+   "title": "paperkit W116"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W119"
+   ],
+   "status": "ready",
+   "symbol": "W117",
+   "title": "paperkit W117"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W119"
+   ],
+   "status": "ready",
+   "symbol": "W118",
+   "title": "paperkit W118"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W117",
+    "W118"
+   ],
+   "enables": [
+    "W109"
+   ],
+   "status": "blocked",
+   "symbol": "W119",
+   "title": "paperkit W119"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W109"
+   ],
+   "status": "done",
+   "symbol": "W114",
+   "title": "paperkit W114"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W109"
+   ],
+   "status": "done",
+   "symbol": "W108",
+   "title": "paperkit W108"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W134"
+   ],
+   "enables": [
+    "W80"
+   ],
+   "status": "blocked",
+   "symbol": "W109",
+   "title": "paperkit W109"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W136"
+   ],
+   "enables": [
+    "W109"
+   ],
+   "status": "blocked",
+   "symbol": "W134",
+   "title": "paperkit W134"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W134"
+   ],
+   "status": "ready",
+   "symbol": "W136",
+   "title": "paperkit W136"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W134"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W135",
+   "title": "paperkit W135"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W111"
+   ],
+   "status": "done",
+   "symbol": "W110",
+   "title": "paperkit W110"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W59",
+    "W78",
+    "W64",
+    "W117",
+    "W119",
+    "W109"
+   ],
+   "status": "done",
+   "symbol": "W111",
+   "title": "paperkit W111"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W111"
+   ],
+   "status": "done",
+   "symbol": "W124",
+   "title": "paperkit W124"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W111"
+   ],
+   "status": "done",
+   "symbol": "W125",
+   "title": "paperkit W125"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W111",
+    "W59"
+   ],
+   "status": "done",
+   "symbol": "W126",
+   "title": "paperkit W126"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W111",
+    "W78"
+   ],
+   "status": "done",
+   "symbol": "W127",
+   "title": "paperkit W127"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W108",
+    "W110"
+   ],
+   "status": "done",
+   "symbol": "W107",
+   "title": "paperkit W107"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W80"
+   ],
+   "status": "done",
+   "symbol": "W79",
+   "title": "paperkit W79"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W109"
+   ],
+   "enables": [
+    "W77",
+    "W81"
+   ],
+   "status": "blocked",
+   "symbol": "W80",
+   "title": "paperkit W80"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W80"
+   ],
+   "enables": [
+    "W77"
+   ],
+   "status": "blocked",
+   "symbol": "W81",
+   "title": "paperkit W81"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W80",
+    "W81"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W77",
+   "title": "paperkit W77"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W60"
+   ],
+   "status": "ready",
+   "symbol": "W78",
+   "title": "paperkit W78"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W63"
+   ],
+   "status": "done",
+   "symbol": "W62",
+   "title": "paperkit W62"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W64"
+   ],
+   "status": "done",
+   "symbol": "W63",
+   "title": "paperkit W63"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W59",
+    "W60"
+   ],
+   "status": "done",
+   "symbol": "W64",
+   "title": "paperkit W64"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W66",
+    "W68"
+   ],
+   "status": "done",
+   "symbol": "W65",
+   "title": "paperkit W65"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W82",
+    "W83",
+    "W84",
+    "W85"
+   ],
+   "enables": [
+    "W74"
+   ],
+   "status": "blocked",
+   "symbol": "W66",
+   "title": "paperkit W66"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W59"
+   ],
+   "status": "done",
+   "symbol": "W67",
+   "title": "paperkit W67"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W59"
+   ],
+   "status": "done",
+   "symbol": "W68",
+   "title": "paperkit W68"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W137"
+   ],
+   "enables": [
+    "W71",
+    "W97"
+   ],
+   "status": "blocked",
+   "symbol": "W123",
+   "title": "paperkit W123"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W123"
+   ],
+   "status": "ready",
+   "symbol": "W137",
+   "title": "paperkit W137"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W70",
+    "W123"
+   ],
+   "status": "done",
+   "symbol": "W69",
+   "title": "paperkit W69"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W123"
+   ],
+   "enables": [
+    "W71",
+    "W72"
+   ],
+   "status": "blocked",
+   "symbol": "W70",
+   "title": "paperkit W70"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W95",
+    "W96",
+    "W97"
+   ],
+   "enables": [
+    "W72"
+   ],
+   "status": "blocked",
+   "symbol": "W71",
+   "title": "paperkit W71"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W70",
+    "W71"
+   ],
+   "enables": [
+    "substrate:W48"
+   ],
+   "status": "blocked",
+   "symbol": "W72",
+   "title": "paperkit W72"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W92",
+    "W93"
+   ],
+   "enables": [
+    "W74"
+   ],
+   "status": "blocked",
+   "symbol": "W73",
+   "title": "paperkit W73"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W66",
+    "W73"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W74",
+   "title": "paperkit W74"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W75",
+   "title": "paperkit W75"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W76",
+   "title": "paperkit W76"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W70",
+    "W71",
+    "W72"
+   ],
+   "enables": [
+    "substrate:W48"
+   ],
+   "status": "blocked",
+   "symbol": "W61",
+   "title": "paperkit W61"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W60"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W59",
+   "title": "paperkit W59"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W132"
+   ],
+   "enables": [
+    "W59"
+   ],
+   "status": "blocked",
+   "symbol": "W60",
+   "title": "paperkit W60"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W66"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W44",
+   "title": "paperkit W44"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W73",
+    "W74"
+   ],
+   "enables": [
+    "W34"
+   ],
+   "status": "blocked",
+   "symbol": "W43",
+   "title": "paperkit W43"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W109",
+    "W77"
+   ],
+   "enables": [
+    "el-openglo:W78"
+   ],
+   "status": "blocked",
+   "symbol": "W52",
+   "title": "paperkit W52"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W102",
+    "W103"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W49",
+   "title": "paperkit W49"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W104",
+    "W105"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W47",
+   "title": "paperkit W47"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W112",
+    "W113"
+   ],
+   "enables": [
+    "el-openglo:W80"
+   ],
+   "status": "blocked",
+   "symbol": "W45",
+   "title": "paperkit W45"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W98",
+    "W99"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W40",
+   "title": "paperkit W40"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W100",
+    "W101"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W41",
+   "title": "paperkit W41"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W42",
+   "title": "paperkit W42"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W46",
+   "title": "paperkit W46"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W48",
+   "title": "paperkit W48"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W50",
+   "title": "paperkit W50"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W51",
+   "title": "paperkit W51"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W2"
+   ],
+   "status": "done",
+   "symbol": "W33",
+   "title": "paperkit W33"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W31",
+   "title": "paperkit W31"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W31"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W131",
+   "title": "paperkit W131"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W32",
+   "title": "paperkit W32"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W6",
+    "W7",
+    "W8",
+    "W9",
+    "W10",
+    "W25",
+    "W14",
+    "W20"
+   ],
+   "status": "done",
+   "symbol": "W2",
+   "title": "paperkit W2"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W2"
+   ],
+   "status": "done",
+   "symbol": "W24",
+   "title": "paperkit W24"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W25",
+   "title": "paperkit W25"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W14"
+   ],
+   "status": "ready",
+   "symbol": "W6",
+   "title": "paperkit W6"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W6",
+    "a",
+    "luthen"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W14",
+   "title": "paperkit W14"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W10",
+   "title": "paperkit W10"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W129",
+   "title": "paperkit W129"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W8"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W7",
+   "title": "paperkit W7"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W7"
+   ],
+   "status": "ready",
+   "symbol": "W8",
+   "title": "paperkit W8"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W9",
+   "title": "paperkit W9"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W128",
+   "title": "paperkit W128"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W30"
+   ],
+   "status": "ready",
+   "symbol": "W15",
+   "title": "paperkit W15"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W20",
+   "title": "paperkit W20"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W22",
+   "title": "paperkit W22"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W2",
+    "W8"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W19",
+   "title": "paperkit W19"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W19"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W130",
+   "title": "paperkit W130"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "substrate-de"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W21",
+   "title": "paperkit W21"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W29",
+   "title": "paperkit W29"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W26",
+   "title": "paperkit W26"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W28",
+   "title": "paperkit W28"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W9"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W16",
+   "title": "paperkit W16"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W8"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W17",
+   "title": "paperkit W17"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W18",
+   "title": "paperkit W18"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W23",
+   "title": "paperkit W23"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W15"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W30",
+   "title": "paperkit W30"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W1",
+   "title": "paperkit W1"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W4",
+   "title": "paperkit W4"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W5",
+   "title": "paperkit W5"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W11",
+   "title": "paperkit W11"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W13",
+   "title": "paperkit W13"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "W92"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W34",
+   "title": "paperkit W34"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "summit-6b"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W35",
+   "title": "paperkit W35"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W36",
+   "title": "paperkit W36"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W37",
+   "title": "paperkit W37"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W38",
+   "title": "paperkit W38"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W39",
+   "title": "paperkit W39"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W60"
+   ],
+   "status": "ready",
+   "symbol": "W132",
+   "title": "paperkit W132"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W133",
+   "title": "paperkit W133"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W138",
+   "title": "paperkit W138"
+  }
+ ]
+}

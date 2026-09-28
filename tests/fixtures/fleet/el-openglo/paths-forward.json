@@ -1,0 +1,1434 @@
+{
+ "counter": 140,
+ "project_root": "/fixture/el-openglo",
+ "residue": [
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W55",
+   "title": "el-openglo W55"
+  }
+ ],
+ "version": 1,
+ "waypoints": [
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W2"
+   ],
+   "status": "done",
+   "symbol": "W1",
+   "title": "el-openglo W1"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W11",
+   "title": "el-openglo W11"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W2",
+   "title": "el-openglo W2"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W8"
+   ],
+   "status": "done",
+   "symbol": "W3",
+   "title": "el-openglo W3"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W4",
+   "title": "el-openglo W4"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W9"
+   ],
+   "status": "done",
+   "symbol": "W5",
+   "title": "el-openglo W5"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W6",
+   "title": "el-openglo W6"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W7",
+   "title": "el-openglo W7"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W8",
+   "title": "el-openglo W8"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W9",
+   "title": "el-openglo W9"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W10",
+   "title": "el-openglo W10"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W70"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W12",
+   "title": "el-openglo W12"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W13",
+   "title": "el-openglo W13"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W14",
+   "title": "el-openglo W14"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W15",
+   "title": "el-openglo W15"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W16",
+   "title": "el-openglo W16"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W17",
+   "title": "el-openglo W17"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W18",
+   "title": "el-openglo W18"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W19",
+   "title": "el-openglo W19"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W20",
+   "title": "el-openglo W20"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W21",
+   "title": "el-openglo W21"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W22",
+   "title": "el-openglo W22"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W23",
+   "title": "el-openglo W23"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W24",
+   "title": "el-openglo W24"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W25",
+   "title": "el-openglo W25"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W26",
+   "title": "el-openglo W26"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W27",
+   "title": "el-openglo W27"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W28",
+   "title": "el-openglo W28"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W29",
+   "title": "el-openglo W29"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W30",
+   "title": "el-openglo W30"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W31",
+   "title": "el-openglo W31"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W32",
+   "title": "el-openglo W32"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W98"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W33",
+   "title": "el-openglo W33"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W34",
+   "title": "el-openglo W34"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W35",
+   "title": "el-openglo W35"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W36",
+   "title": "el-openglo W36"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W37",
+   "title": "el-openglo W37"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W38",
+   "title": "el-openglo W38"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W39",
+   "title": "el-openglo W39"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W40",
+   "title": "el-openglo W40"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W134",
+    "W135",
+    "W136",
+    "W137"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W41",
+   "title": "el-openglo W41"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W42",
+   "title": "el-openglo W42"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W62"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W43",
+   "title": "el-openglo W43"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W44",
+   "title": "el-openglo W44"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W45",
+   "title": "el-openglo W45"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W46",
+   "title": "el-openglo W46"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W47",
+   "title": "el-openglo W47"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W48",
+   "title": "el-openglo W48"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W46",
+    "W35"
+   ],
+   "status": "done",
+   "symbol": "W49",
+   "title": "el-openglo W49"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W46",
+    "W35",
+    "W44",
+    "W53"
+   ],
+   "status": "done",
+   "symbol": "W50",
+   "title": "el-openglo W50"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W46"
+   ],
+   "status": "done",
+   "symbol": "W51",
+   "title": "el-openglo W51"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W41",
+    "W13"
+   ],
+   "status": "done",
+   "symbol": "W52",
+   "title": "el-openglo W52"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W46"
+   ],
+   "status": "ready",
+   "symbol": "W53",
+   "title": "el-openglo W53"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W46",
+    "W47",
+    "W48"
+   ],
+   "status": "done",
+   "symbol": "W54",
+   "title": "el-openglo W54"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W54"
+   ],
+   "status": "done",
+   "symbol": "W56",
+   "title": "el-openglo W56"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W33"
+   ],
+   "status": "ready",
+   "symbol": "W57",
+   "title": "el-openglo W57"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W33"
+   ],
+   "status": "ready",
+   "symbol": "W58",
+   "title": "el-openglo W58"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W33",
+    "W57"
+   ],
+   "status": "done",
+   "symbol": "W59",
+   "title": "el-openglo W59"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W59"
+   ],
+   "status": "ready",
+   "symbol": "W60",
+   "title": "el-openglo W60"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W61",
+   "title": "el-openglo W61"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W99",
+    "W100",
+    "W101",
+    "W102"
+   ],
+   "enables": [
+    "W43"
+   ],
+   "status": "blocked",
+   "symbol": "W62",
+   "title": "el-openglo W62"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W63",
+   "title": "el-openglo W63"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W65"
+   ],
+   "status": "ready",
+   "symbol": "W64",
+   "title": "el-openglo W64"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W65",
+   "title": "el-openglo W65"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W66",
+   "title": "el-openglo W66"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W67",
+   "title": "el-openglo W67"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W68",
+   "title": "el-openglo W68"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W69",
+   "title": "el-openglo W69"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "luthen-observability:W127"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W70",
+   "title": "el-openglo W70"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W70"
+   ],
+   "status": "ready",
+   "symbol": "W71",
+   "title": "el-openglo W71"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W74"
+   ],
+   "status": "ready",
+   "symbol": "W72",
+   "title": "el-openglo W72"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W73",
+   "title": "el-openglo W73"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W74",
+   "title": "el-openglo W74"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W82"
+   ],
+   "status": "ready",
+   "symbol": "W75",
+   "title": "el-openglo W75"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W76",
+   "title": "el-openglo W76"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W77",
+   "title": "el-openglo W77"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "paperkit:W52"
+   ],
+   "enables": [
+    "W81"
+   ],
+   "status": "ready",
+   "symbol": "W78",
+   "title": "el-openglo W78"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W79",
+   "title": "el-openglo W79"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "paperkit:W45"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W80",
+   "title": "el-openglo W80"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W81",
+   "title": "el-openglo W81"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W82",
+   "title": "el-openglo W82"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "luthen-observability:W114"
+   ],
+   "enables": [
+    "W79"
+   ],
+   "status": "blocked",
+   "symbol": "W83",
+   "title": "el-openglo W83"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W84",
+   "title": "el-openglo W84"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W85",
+   "title": "el-openglo W85"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W86",
+   "title": "el-openglo W86"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W93"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W87",
+   "title": "el-openglo W87"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W89",
+    "W90",
+    "W87"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W88",
+   "title": "el-openglo W88"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W91"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W89",
+   "title": "el-openglo W89"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W91"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W90",
+   "title": "el-openglo W90"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W91",
+   "title": "el-openglo W91"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W79"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W92",
+   "title": "el-openglo W92"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W103",
+    "W104",
+    "W105"
+   ],
+   "enables": [
+    "W87"
+   ],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W93",
+   "title": "el-openglo W93"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "mtools:W50"
+   ],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W94",
+   "title": "el-openglo W94"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W95",
+   "title": "el-openglo W95"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W96",
+   "title": "el-openglo W96"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W97",
+   "title": "el-openglo W97"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W107",
+    "W108"
+   ],
+   "caused_by": "operator",
+   "enables": [
+    "W33"
+   ],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W98",
+   "title": "el-openglo W98"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W62",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W99",
+   "title": "el-openglo W99"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W62",
+   "enables": [
+    "W99",
+    "W101"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W100",
+   "title": "el-openglo W100"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W62",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W101",
+   "title": "el-openglo W101"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W62",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W102",
+   "title": "el-openglo W102"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W93",
+   "enables": [
+    "W93"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W103",
+   "title": "el-openglo W103"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W93",
+   "enables": [
+    "W93"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W104",
+   "title": "el-openglo W104"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W93",
+   "enables": [
+    "W93"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W105",
+   "title": "el-openglo W105"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W98",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W106",
+   "title": "el-openglo W106"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W98",
+   "enables": [
+    "W98"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W107",
+   "title": "el-openglo W107"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W98",
+   "enables": [
+    "W98"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W108",
+   "title": "el-openglo W108"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W107",
+   "enables": [
+    "W107"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W109",
+   "title": "el-openglo W109"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W107",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W110",
+   "title": "el-openglo W110"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W105",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W111",
+   "title": "el-openglo W111"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W117",
+    "W118",
+    "W119"
+   ],
+   "caused_by": "life:W16",
+   "enables": [
+    "life:W16",
+    "W41"
+   ],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W112",
+   "title": "el-openglo W112"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "life:W16",
+   "enables": [
+    "life:W16",
+    "W41"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W113",
+   "title": "el-openglo W113"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "luthen-observability",
+   "enables": [
+    "W108"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W114",
+   "title": "el-openglo W114"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W42"
+   ],
+   "caused_by": "aeternum:W62",
+   "enables": [
+    "aeternum:W62"
+   ],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W115",
+   "title": "el-openglo W115"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "life:W16",
+   "enables": [
+    "life:W16"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W116",
+   "title": "el-openglo W116"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W112",
+   "enables": [
+    "W112"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W117",
+   "title": "el-openglo W117"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W112",
+   "enables": [
+    "W112"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W118",
+   "title": "el-openglo W118"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W112",
+   "enables": [
+    "W112"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W119",
+   "title": "el-openglo W119"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W116"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W120",
+   "title": "el-openglo W120"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W108",
+   "enables": [
+    "W98"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W121",
+   "title": "el-openglo W121"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W42"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W122",
+   "title": "el-openglo W122"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W41"
+   ],
+   "caused_by": "operator",
+   "enables": [
+    "W42"
+   ],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W123",
+   "title": "el-openglo W123"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W41"
+   ],
+   "caused_by": "operator",
+   "enables": [
+    "W42"
+   ],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W124",
+   "title": "el-openglo W124"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W41"
+   ],
+   "caused_by": "operator",
+   "enables": [
+    "W42"
+   ],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W125",
+   "title": "el-openglo W125"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W41"
+   ],
+   "caused_by": "operator",
+   "enables": [
+    "W42",
+    "W127"
+   ],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W126",
+   "title": "el-openglo W126"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W126",
+    "W128"
+   ],
+   "caused_by": "operator",
+   "enables": [
+    "W42"
+   ],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W127",
+   "title": "el-openglo W127"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W41"
+   ],
+   "caused_by": "operator",
+   "enables": [
+    "W42",
+    "W127",
+    "W129",
+    "W130",
+    "W131"
+   ],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W128",
+   "title": "el-openglo W128"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W128"
+   ],
+   "caused_by": "operator",
+   "enables": [
+    "W42"
+   ],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W129",
+   "title": "el-openglo W129"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W128"
+   ],
+   "caused_by": "operator",
+   "enables": [
+    "W42"
+   ],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W130",
+   "title": "el-openglo W130"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W128"
+   ],
+   "caused_by": "operator",
+   "enables": [
+    "W42"
+   ],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W131",
+   "title": "el-openglo W131"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W128"
+   ],
+   "caused_by": "operator",
+   "enables": [
+    "W42"
+   ],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W132",
+   "title": "el-openglo W132"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W42"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W133",
+   "title": "el-openglo W133"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W41",
+   "enables": [
+    "W41"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W134",
+   "title": "el-openglo W134"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W41",
+   "enables": [
+    "W41"
+   ],
+   "minted_during": "interrupt",
+   "status": "working",
+   "symbol": "W135",
+   "title": "el-openglo W135"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "W135",
+    "operator: act (fixture)"
+   ],
+   "caused_by": "W41",
+   "enables": [
+    "W41"
+   ],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W136",
+   "title": "el-openglo W136"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "W134",
+    "operator: act (fixture)"
+   ],
+   "caused_by": "W41",
+   "enables": [
+    "W41"
+   ],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W137",
+   "title": "el-openglo W137"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W134",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W138",
+   "title": "el-openglo W138"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "mtools"
+   ],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W139",
+   "title": "el-openglo W139"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W139"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W140",
+   "title": "el-openglo W140"
+  }
+ ]
+}

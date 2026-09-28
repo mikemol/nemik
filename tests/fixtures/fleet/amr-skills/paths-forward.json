@@ -1,0 +1,684 @@
+{
+ "counter": 77,
+ "project_root": "/fixture/amr-skills",
+ "residue": [
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W9",
+   "title": "amr-skills W9"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W45",
+   "title": "amr-skills W45"
+  }
+ ],
+ "version": 1,
+ "waypoints": [
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W4",
+    "W1"
+   ],
+   "status": "done",
+   "symbol": "W3",
+   "title": "amr-skills W3"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator"
+   ],
+   "enables": [],
+   "status": "done",
+   "symbol": "W1",
+   "title": "amr-skills W1"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W1"
+   ],
+   "status": "done",
+   "symbol": "W2",
+   "title": "amr-skills W2"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W10"
+   ],
+   "status": "done",
+   "symbol": "W4",
+   "title": "amr-skills W4"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W5",
+   "title": "amr-skills W5"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W6",
+   "title": "amr-skills W6"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W7",
+   "title": "amr-skills W7"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W8",
+   "title": "amr-skills W8"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W10",
+   "title": "amr-skills W10"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W11",
+   "title": "amr-skills W11"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W12",
+   "title": "amr-skills W12"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W13",
+   "title": "amr-skills W13"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W14",
+   "title": "amr-skills W14"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W16"
+   ],
+   "status": "done",
+   "symbol": "W15",
+   "title": "amr-skills W15"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W17",
+    "W19",
+    "W20",
+    "W22",
+    "W23"
+   ],
+   "status": "done",
+   "symbol": "W16",
+   "title": "amr-skills W16"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W17",
+   "title": "amr-skills W17"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W18",
+   "title": "amr-skills W18"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W19",
+   "title": "amr-skills W19"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W20",
+   "title": "amr-skills W20"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W21",
+   "title": "amr-skills W21"
+  },
+  {
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W22",
+   "title": "amr-skills W22"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W23",
+   "title": "amr-skills W23"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W24",
+   "title": "amr-skills W24"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [],
+   "enables": [
+    "W26"
+   ],
+   "status": "done",
+   "symbol": "W25",
+   "title": "amr-skills W25"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W26",
+   "title": "amr-skills W26"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W27",
+   "title": "amr-skills W27"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W28",
+   "title": "amr-skills W28"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W29",
+   "title": "amr-skills W29"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W30",
+   "title": "amr-skills W30"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W31",
+   "title": "amr-skills W31"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [],
+   "enables": [],
+   "status": "working",
+   "symbol": "W32",
+   "title": "amr-skills W32"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [],
+   "enables": [
+    "W32"
+   ],
+   "status": "done",
+   "symbol": "W33",
+   "title": "amr-skills W33"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W34",
+   "title": "amr-skills W34"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W35",
+   "title": "amr-skills W35"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W35"
+   ],
+   "status": "working",
+   "symbol": "W36",
+   "title": "amr-skills W36"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "working",
+   "symbol": "W37",
+   "title": "amr-skills W37"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "working",
+   "symbol": "W38",
+   "title": "amr-skills W38"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [
+    "GPU"
+   ],
+   "enables": [],
+   "status": "done",
+   "symbol": "W39",
+   "title": "amr-skills W39"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W40",
+   "title": "amr-skills W40"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W32",
+    "W37",
+    "W38"
+   ],
+   "status": "done",
+   "symbol": "W41",
+   "title": "amr-skills W41"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W42",
+   "title": "amr-skills W42"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W43",
+   "title": "amr-skills W43"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W44",
+   "title": "amr-skills W44"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "luthen-observability"
+   ],
+   "enables": [],
+   "status": "done",
+   "symbol": "W46",
+   "title": "amr-skills W46"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "mtools-91"
+   ],
+   "enables": [],
+   "status": "done",
+   "symbol": "W47",
+   "title": "amr-skills W47"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W48",
+   "title": "amr-skills W48"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "working",
+   "symbol": "W49",
+   "title": "amr-skills W49"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W50",
+   "title": "amr-skills W50"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "mtools:W30"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W51",
+   "title": "amr-skills W51"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W52",
+   "title": "amr-skills W52"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "luthen-observability"
+   ],
+   "enables": [],
+   "status": "done",
+   "symbol": "W53",
+   "title": "amr-skills W53"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator: act (fixture)"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W54",
+   "title": "amr-skills W54"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator"
+   ],
+   "enables": [],
+   "status": "done",
+   "symbol": "W55",
+   "title": "amr-skills W55"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W53"
+   ],
+   "status": "done",
+   "symbol": "W56",
+   "title": "amr-skills W56"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W57",
+   "title": "amr-skills W57"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W58",
+   "title": "amr-skills W58"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W59",
+   "title": "amr-skills W59"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator"
+   ],
+   "enables": [],
+   "status": "done",
+   "symbol": "W60",
+   "title": "amr-skills W60"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W61",
+   "title": "amr-skills W61"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W62",
+   "title": "amr-skills W62"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator: decide (fixture)"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W63",
+   "title": "amr-skills W63"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W64",
+   "title": "amr-skills W64"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W65",
+   "title": "amr-skills W65"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W66",
+   "title": "amr-skills W66"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W71"
+   ],
+   "status": "done",
+   "symbol": "W67",
+   "title": "amr-skills W67"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator: decide (fixture)"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W68",
+   "title": "amr-skills W68"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W69",
+   "title": "amr-skills W69"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W72"
+   ],
+   "status": "done",
+   "symbol": "W70",
+   "title": "amr-skills W70"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W71",
+   "title": "amr-skills W71"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W72",
+   "title": "amr-skills W72"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W71",
+    "W77"
+   ],
+   "status": "done",
+   "symbol": "W73",
+   "title": "amr-skills W73"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator: decide (fixture)"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W74",
+   "title": "amr-skills W74"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W75",
+   "title": "amr-skills W75"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator: decide (fixture)"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W76",
+   "title": "amr-skills W76"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W76"
+   ],
+   "status": "done",
+   "symbol": "W77",
+   "title": "amr-skills W77"
+  }
+ ]
+}

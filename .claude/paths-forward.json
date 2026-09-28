@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 124,
+  "counter": 125,
   "waypoints": [
     {
       "symbol": "W1",
@@ -2343,6 +2343,26 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W125",
+      "title": "Web view: labels inside their shapes (operator 2026-09-28), readable in light and dark; layout metrics as a build test, not a scratch harness",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "web",
+        "layout",
+        "tests"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-09-28: Nodes are round-rectangles (diamond for interrupt-minted) sized to their label, text centred in the page-bg colour (contrasts every state fill in both themes; dropped uses ink). Operator chips were blank: they inherited text-valign bottom, drawing bg-coloured text under the chip; now centred. tests/fixtures/fleet = the fleet's shape with content removed (tests/fixtures/make_fleet.py regenerates it); tests/test_layout.py renders it light+dark under PYTHONHASHSEED=0, asserts no label outside its shape and cross p95 <= 2800, intra p95 <= 430, writes layout-{light,dark}.{json,png} to test.outputs. Measured: cross n=75 p95 2548 (old labels-below code on the same data 2938), intra p95 387 (was 365: wider nodes), area 4247x3351 vs 3716x3926 (-~2%). bazel 17/17.",
+      "issued_at": "2026-09-28T22:52:08Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": "2026-09-28T22:52:08Z",
       "ticks_blocked": 0
     }
   ],

@@ -1,0 +1,766 @@
+{
+ "counter": 76,
+ "project_root": "/fixture/substrate",
+ "residue": [
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W0",
+   "title": "substrate W0"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W22",
+   "title": "substrate W22"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W43",
+   "title": "substrate W43"
+  }
+ ],
+ "version": 1,
+ "waypoints": [
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "a"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W23",
+   "title": "substrate W23"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W3"
+   ],
+   "status": "done",
+   "symbol": "W24",
+   "title": "substrate W24"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W2"
+   ],
+   "status": "done",
+   "symbol": "W1",
+   "title": "substrate W1"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W2",
+   "title": "substrate W2"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W3",
+   "title": "substrate W3"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W5",
+    "W6"
+   ],
+   "status": "done",
+   "symbol": "W4",
+   "title": "substrate W4"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W6"
+   ],
+   "status": "done",
+   "symbol": "W5",
+   "title": "substrate W5"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W6",
+   "title": "substrate W6"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W7",
+   "title": "substrate W7"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W8",
+   "title": "substrate W8"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W26",
+   "title": "substrate W26"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W25",
+   "title": "substrate W25"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W9",
+   "title": "substrate W9"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W10",
+   "title": "substrate W10"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W14"
+   ],
+   "status": "done",
+   "symbol": "W12",
+   "title": "substrate W12"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W11",
+   "title": "substrate W11"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W14",
+   "title": "substrate W14"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W15",
+   "title": "substrate W15"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W9"
+   ],
+   "status": "done",
+   "symbol": "W16",
+   "title": "substrate W16"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W17",
+   "title": "substrate W17"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W18",
+   "title": "substrate W18"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W4"
+   ],
+   "status": "done",
+   "symbol": "W19",
+   "title": "substrate W19"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W20",
+   "title": "substrate W20"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W21",
+   "title": "substrate W21"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W13",
+   "title": "substrate W13"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W28"
+   ],
+   "status": "done",
+   "symbol": "W27",
+   "title": "substrate W27"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W28",
+   "title": "substrate W28"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W29",
+   "title": "substrate W29"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W28"
+   ],
+   "status": "done",
+   "symbol": "W30",
+   "title": "substrate W30"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W31",
+   "title": "substrate W31"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W32",
+   "title": "substrate W32"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W33",
+   "title": "substrate W33"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "mtools-91"
+   ],
+   "enables": [],
+   "status": "done",
+   "symbol": "W34",
+   "title": "substrate W34"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W37"
+   ],
+   "status": "ready",
+   "symbol": "W35",
+   "title": "substrate W35"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W36",
+   "title": "substrate W36"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "store"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W37",
+   "title": "substrate W37"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W38",
+   "title": "substrate W38"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W39",
+   "title": "substrate W39"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W44",
+    "W45"
+   ],
+   "status": "done",
+   "symbol": "W40",
+   "title": "substrate W40"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W46"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W41",
+   "title": "substrate W41"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W42",
+   "title": "substrate W42"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W44",
+   "title": "substrate W44"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W45",
+   "title": "substrate W45"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W41"
+   ],
+   "status": "ready",
+   "symbol": "W46",
+   "title": "substrate W46"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "mtools:W22",
+   "enables": [
+    "mtools:W22"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W47",
+   "title": "substrate W47"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "paperkit:W21",
+   "enables": [
+    "paperkit:W21",
+    "summit:W10",
+    "paperkit:W61"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W48",
+   "title": "substrate W48"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "luthen-observability:W66",
+   "enables": [
+    "luthen-observability:W66"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W49",
+   "title": "substrate W49"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "summit-W77",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W50",
+   "title": "substrate W50"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "W63"
+   ],
+   "caused_by": "gate-census-t93",
+   "enables": [
+    "W56"
+   ],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W51",
+   "title": "substrate W51"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "gate-census-t93",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W52",
+   "title": "substrate W52"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "an"
+   ],
+   "caused_by": "gate-census-t93",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W53",
+   "title": "substrate W53"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "W64"
+   ],
+   "caused_by": "gate-census-t93",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W54",
+   "title": "substrate W54"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "gate-census-t93",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W55",
+   "title": "substrate W55"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "W66-W76"
+   ],
+   "caused_by": "gate-census-t93",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W56",
+   "title": "substrate W56"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator"
+   ],
+   "caused_by": "gate-census-t93",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W57",
+   "title": "substrate W57"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "gate-census-t93",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W58",
+   "title": "substrate W58"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "gate-census-t93",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W59",
+   "title": "substrate W59"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "gate-census-t93",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W60",
+   "title": "substrate W60"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "gate-census-t93",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W61",
+   "title": "substrate W61"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "gate-census-t93",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W62",
+   "title": "substrate W62"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W51",
+   "enables": [
+    "W51"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W63",
+   "title": "substrate W63"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "gate-wall-census",
+   "enables": [
+    "W54"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W64",
+   "title": "substrate W64"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "gate-wall-census",
+   "enables": [
+    "W54"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W65",
+   "title": "substrate W65"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "gate-wall-census",
+   "enables": [
+    "W56"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W66",
+   "title": "substrate W66"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "gate-wall-census",
+   "enables": [
+    "W56"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W67",
+   "title": "substrate W67"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "gate-wall-census",
+   "enables": [
+    "W56"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W68",
+   "title": "substrate W68"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "gate-wall-census",
+   "enables": [
+    "W56"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W69",
+   "title": "substrate W69"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "gate-wall-census",
+   "enables": [
+    "W56"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W70",
+   "title": "substrate W70"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "gate-wall-census",
+   "enables": [
+    "W56"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W71",
+   "title": "substrate W71"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "gate-wall-census",
+   "enables": [
+    "W56"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W72",
+   "title": "substrate W72"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "gate-wall-census",
+   "enables": [
+    "W56"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W73",
+   "title": "substrate W73"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "gate-wall-census",
+   "enables": [
+    "W56"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W74",
+   "title": "substrate W74"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "gate-wall-census",
+   "enables": [
+    "W56"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W75",
+   "title": "substrate W75"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "gate-wall-census",
+   "enables": [
+    "W56"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W76",
+   "title": "substrate W76"
+  }
+ ]
+}

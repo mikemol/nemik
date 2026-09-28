@@ -1,0 +1,256 @@
+{
+ "counter": 27,
+ "project_root": "/fixture/gabion",
+ "residue": [],
+ "version": 1,
+ "waypoints": [
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "working",
+   "symbol": "W27",
+   "title": "gabion W27"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W2"
+   ],
+   "status": "done",
+   "symbol": "W26",
+   "title": "gabion W26"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W15",
+    "W21"
+   ],
+   "status": "working",
+   "symbol": "W20",
+   "title": "gabion W20"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W23",
+   "title": "gabion W23"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W24",
+   "title": "gabion W24"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W18"
+   ],
+   "status": "done",
+   "symbol": "W2",
+   "title": "gabion W2"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W2"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W18",
+   "title": "gabion W18"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W12",
+   "title": "gabion W12"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W14",
+   "title": "gabion W14"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W25",
+   "title": "gabion W25"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W20"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W21",
+   "title": "gabion W21"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W22",
+   "title": "gabion W22"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "working",
+   "symbol": "W10",
+   "title": "gabion W10"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "ready",
+   "symbol": "W19",
+   "title": "gabion W19"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W20"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W15",
+   "title": "gabion W15"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W11",
+   "title": "gabion W11"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W13",
+   "title": "gabion W13"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W2"
+   ],
+   "status": "done",
+   "symbol": "W16",
+   "title": "gabion W16"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W24",
+    "W25"
+   ],
+   "status": "done",
+   "symbol": "W5",
+   "title": "gabion W5"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W6",
+   "title": "gabion W6"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W23"
+   ],
+   "status": "done",
+   "symbol": "W17",
+   "title": "gabion W17"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W1",
+   "title": "gabion W1"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W16"
+   ],
+   "status": "done",
+   "symbol": "W4",
+   "title": "gabion W4"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W9",
+   "title": "gabion W9"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W17"
+   ],
+   "status": "done",
+   "symbol": "W3",
+   "title": "gabion W3"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "status": "done",
+   "symbol": "W7",
+   "title": "gabion W7"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W13",
+    "W14",
+    "W15"
+   ],
+   "status": "done",
+   "symbol": "W8",
+   "title": "gabion W8"
+  }
+ ]
+}
