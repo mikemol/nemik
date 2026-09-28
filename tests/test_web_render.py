@@ -60,6 +60,17 @@ OVERLAPS = """() => {
 }"""
 
 
+BOXES = """() => {
+  const units = cy.nodes(".repo, .actor").filter(n => n.visible());
+  const hit = (a, b) => a.x1 < b.x2 && b.x1 < a.x2 && a.y1 < b.y2 && b.y1 < a.y2;
+  const out = [];
+  units.forEach(a => units.forEach(b => {
+    if (a.id() < b.id() && hit(a.boundingBox(), b.boundingBox())) out.push(a.id() + " x " + b.id());
+  }));
+  return out;
+}"""
+
+
 def test_labels_are_not_covered_by_other_nodes(server) -> None:
     with sync_api.sync_playwright() as p:
         try:
@@ -74,7 +85,9 @@ def test_labels_are_not_covered_by_other_nodes(server) -> None:
         page.goto(server)
         page.wait_for_function("() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0", timeout=20000)
         count, overlaps = page.evaluate(OVERLAPS)
+        boxes = page.evaluate(BOXES)
         browser.close()
     assert errors == []
     assert count == 65
     assert overlaps == []
+    assert boxes == []  # nemik:W117: rows offset toward their neighbours must not overlap

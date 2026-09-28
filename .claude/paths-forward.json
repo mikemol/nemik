@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 116,
+  "counter": 117,
   "waypoints": [
     {
       "symbol": "W1",
@@ -2182,6 +2182,25 @@
       "last_worked": null,
       "ticks_blocked": 0,
       "weight": 0
+    },
+    {
+      "symbol": "W117",
+      "title": "Web view: prioritize shortening cross-box edges (operator 2026-09-28, screenshot)",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "web",
+        "layout"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-09-28: tile(): unit pairs weighted by edge count; 12 alternating down/up barycenter sweeps over all other rows, each row offset toward its neighbours, best total weighted centre distance kept. Live data (~/github, 15 repos, 91 cross-box edges), playwright: total cross-box edge length 139198 -> 99752 px (-28%); bbox 4809x2434 -> 4944x2434. test_web_render asserts repo/actor boxes never overlap. bazel 15/15. Not done: within-box placement of nodes with cross edges (dagre ranks inside each box ignore them).",
+      "issued_at": "2026-09-28T18:09:54Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": "2026-09-28T18:09:54Z",
+      "ticks_blocked": 0
     }
   ],
   "residue": [
