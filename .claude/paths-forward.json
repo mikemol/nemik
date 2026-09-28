@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 128,
+  "counter": 129,
   "waypoints": [
     {
       "symbol": "W1",
@@ -2418,11 +2418,36 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-09-28: life-79 accepted the shape 2026-09-28; life:W23 cites mtools:W276, mtools:W277, nemik:W128. SUMMARY's decide/act comes from the 'operator: decide|act' blocked_on prefix, the same rule mtools:W277 uses (nemik-operator's operator_category already reads it); no separate schema field. life is the first opt-in entry.",
+      "evidence": "2026-09-28: life-79 accepted the shape 2026-09-28; life:W23 cites mtools:W276, mtools:W277, nemik:W128. SUMMARY's decide/act comes from the 'operator: decide|act' blocked_on prefix, the same rule mtools:W277 uses (nemik-operator's operator_category already reads it); no separate schema field. life is the first opt-in entry. | 2026-09-28: Widened 2026-09-28 (operator via life-79: 'vcal has better support for time-based events and triggers'): VTODOs carry mtools:W276's RFC 5545 time fields through unchanged (DUE/DTSTART, RRULE, VALARM, PERCENT-COMPLETE), so a timed ask alerts via Akonadi and the W121 Google Tasks sink.",
       "issued_at": "2026-09-28T23:46:37Z",
       "minted_during": "tick",
       "caused_by": "life:W23",
-      "last_worked": "2026-09-28T23:47:20Z",
+      "last_worked": "2026-09-28T23:49:53Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W129",
+      "title": "Calendar as the loops' scheduler of record: nemik-wake reads due VALARMs on waypoints (Akonadi, host-side, via W113's reader) and nudges or wakes the owning workstream through the existing wake/nudge path; session cron becomes only a delivery path",
+      "status": "blocked",
+      "enables": [
+        "life:W23"
+      ],
+      "touches": [
+        "nemik-wake",
+        "vtodo"
+      ],
+      "blocked_on": [
+        "W113",
+        "W128",
+        "mtools:W276"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "2026-09-28: Bound: nemik can observe a due alarm and deliver a nudge (nemik-wake --nudge -> a live session; luthen's waker for sleeping repos), but it cannot start a session. 'Wake' for an asleep repo stays luthen's or the operator's act. Needs W113 (calendar reader), W128 (the VTODOs) and mtools:W276 (time fields).",
+      "issued_at": "2026-09-28T23:49:54Z",
+      "minted_during": "tick",
+      "caused_by": "life:W23",
+      "last_worked": "2026-09-28T23:49:54Z",
       "ticks_blocked": 0
     }
   ],
