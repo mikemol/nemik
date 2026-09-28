@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 115,
+  "counter": 116,
   "waypoints": [
     {
       "symbol": "W1",
@@ -2166,6 +2166,24 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-09-28T17:43:17Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W116",
+      "title": "nemik-check: the bundled-title Warning fires only on open waypoints (aeternum 2026-09-28: five of its title warnings were on done waypoints, where splitting finished work is noise)",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "nemik-check"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-28T17:46:13Z",
+      "minted_during": "tick",
+      "caused_by": "aeternum",
+      "last_worked": null,
       "ticks_blocked": 0
     }
   ],
