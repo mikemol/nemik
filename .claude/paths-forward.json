@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 104,
+  "counter": 107,
   "waypoints": [
     {
       "symbol": "W1",
@@ -1949,6 +1949,68 @@
       "last_worked": null,
       "ticks_blocked": 0,
       "weight": 1
+    },
+    {
+      "symbol": "W105",
+      "title": "luthen:W185 Flux tenant: write deploy/ (kustomization, deployment restricted+PVC nemik-export ro at /export, service 8750, ImageRepository+ImagePolicy) and .forgejo/workflows/build.yml (runs-on luthen-build)",
+      "status": "ready",
+      "enables": [
+        "luthen:W185"
+      ],
+      "touches": [
+        "deploy",
+        "containerfile"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-28T13:25:06Z",
+      "minted_during": "tick",
+      "caused_by": "luthen:W185",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W106",
+      "title": "Containerfile test stage: uv sync now fetches paperkit from github (W102 restored the git source) - an egress the luthen build may not have; build the test stage without that fetch (or from the bazel venv, W101)",
+      "status": "ready",
+      "enables": [
+        "luthen:W185"
+      ],
+      "touches": [
+        "containerfile",
+        "paperkit"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-28T13:25:08Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W107",
+      "title": "luthen:W190 CVSS-shaped ranking: nemik-score module (vector parse, bands, policy rules) consumed by nemik-rank; --check refuses band inversion and policy-block pairs; vector field in the pf schema via mtools",
+      "status": "ready",
+      "enables": [
+        "luthen:W190"
+      ],
+      "touches": [
+        "nemik-rank"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-28T13:25:10Z",
+      "minted_during": "tick",
+      "caused_by": "luthen:W190",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
