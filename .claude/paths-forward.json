@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 42
+      "ticks_blocked": 44
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-27T15:57:25Z",
-      "ticks_blocked": 48,
+      "ticks_blocked": 50,
       "weight": 1
     },
     {
@@ -1344,45 +1344,41 @@
     {
       "symbol": "W75",
       "title": "Weather: one outage = one monotone FFI waypoint (minted by the blocked repo, witness over a probe fact); identical witness queries group as one weather item in views and ddG; design note in W58 doc",
-      "status": "blocked",
+      "status": "ready",
       "enables": [],
       "touches": [
         "conditions"
       ],
-      "blocked_on": [
-        "W76"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-09-27T19:42:13Z",
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-09-27T19:54:01Z",
-      "ticks_blocked": 32,
+      "ticks_blocked": 0,
       "weight": 0
     },
     {
       "symbol": "W76",
       "title": "Ask luthen: blackbox probe for buildbuddy-bes (and other shared endpoints) so outages have an observable fact (probe_success)",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W75"
       ],
       "touches": [
         "conditions"
       ],
-      "blocked_on": [
-        "luthen-observability:W148"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-09-27: luthen took it as W148 (blackbox probe_success into vmsingle); 19:45Z reading: grpc-bes accepts TCP by name",
+      "evidence": "2026-09-27: luthen took it as W148 (blackbox probe_success into vmsingle); 19:45Z reading: grpc-bes accepts TCP by name | 2026-09-28: luthen-observability:W148 done (blackbox probe_success for shared endpoints incl. buildbuddy-bes); surfaced by W110's new landed-blocker warning.",
       "issued_at": "2026-09-27T19:42:13Z",
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
-      "last_worked": "2026-09-27T19:43:45Z",
-      "ticks_blocked": 33
+      "last_worked": "2026-09-28T14:32:42Z",
+      "ticks_blocked": 0
     },
     {
       "symbol": "W77",
@@ -1403,7 +1399,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:13:38Z",
-      "ticks_blocked": 26,
+      "ticks_blocked": 28,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1872,7 +1868,6 @@
         "packaging"
       ],
       "blocked_on": [
-        "W103",
         "W104"
       ],
       "blocked_kind": "agent",
@@ -1882,7 +1877,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T23:08:46Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "weight": 0
     },
     {
@@ -2013,7 +2008,7 @@
       "minted_during": "tick",
       "caused_by": "luthen:W190",
       "last_worked": "2026-09-28T13:28:05Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 2
     },
     {
       "symbol": "W108",
