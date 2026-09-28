@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 117,
+  "counter": 118,
   "waypoints": [
     {
       "symbol": "W1",
@@ -2200,6 +2200,27 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-09-28T18:09:54Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W118",
+      "title": "Web view: inside each box, pull nodes with cross-box edges toward the side facing their partner box (W117 only placed the boxes; dagre ignores cross edges)",
+      "status": "ready",
+      "enables": [
+        "W117"
+      ],
+      "touches": [
+        "web",
+        "layout"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-28T18:10:14Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": null,
       "ticks_blocked": 0
     }
   ],
