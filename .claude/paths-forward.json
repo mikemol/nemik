@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 113,
+  "counter": 114,
   "waypoints": [
     {
       "symbol": "W1",
@@ -2130,6 +2130,25 @@
       "caused_by": "life",
       "last_worked": "2026-09-28T15:05:07Z",
       "ticks_blocked": 1
+    },
+    {
+      "symbol": "W114",
+      "title": "nemik skill: how workstreams use nemik and the queue together (operator ask 2026-09-28), kept current by tests/test_skill.py",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "skill",
+        "docs"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-09-28: skills/nemik/SKILL.md (four rules: cite <repo>:W<n>, claim via nemik-inbound, blocked_kind human = operator only, operator asks stated; command table; every shape with its fix; letters/messages; resumes:W1 worked example). ~/.claude/skills/nemik -> repo dir. tests/test_skill.py fails if a nemik-* script or a *Shape is undocumented (mutation: removing MalformedBlockerShape -> FAILED). bazel 15/15. Containerfile test stage COPYs skills/.",
+      "issued_at": "2026-09-28T17:40:04Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": "2026-09-28T17:40:04Z",
+      "ticks_blocked": 0
     }
   ],
   "residue": [

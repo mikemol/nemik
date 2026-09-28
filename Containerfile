@@ -14,6 +14,7 @@ RUN uv sync --frozen --no-dev
 # on, so the final stage copies the marker this stage writes.
 FROM base AS test
 COPY tests ./tests
+COPY skills ./skills
 RUN uv sync --frozen && .venv/bin/pytest -q tests && touch /app/.tested
 
 FROM base
