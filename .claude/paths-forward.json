@@ -1964,11 +1964,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-28: luthen declares deploy-state repo, its GitRepository, ImageUpdateAutomation (write cred scoped to deploy-state) and the Kustomization over ./deploy, suspended until W105 lands.",
       "issued_at": "2026-09-28T13:25:06Z",
       "minted_during": "tick",
       "caused_by": "luthen:W185",
-      "last_worked": null,
+      "last_worked": "2026-09-28T13:28:05Z",
       "ticks_blocked": 0
     },
     {
@@ -1985,31 +1985,34 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-28: luthen 2026-09-28: buildkitd is a host process on luthen's host network, which reaches github.com; the git fetch is likely fine (not yet witnessed). No-egress covers derived data leaving, not pinned sources coming in. Urgency dropped; kept for GitHub-down resilience.",
       "issued_at": "2026-09-28T13:25:08Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-09-28T13:28:05Z",
+      "ticks_blocked": 0,
+      "weight": -5
     },
     {
       "symbol": "W107",
       "title": "luthen:W190 CVSS-shaped ranking: nemik-score module (vector parse, bands, policy rules) consumed by nemik-rank; --check refuses band inversion and policy-block pairs; vector field in the pf schema via mtools",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "luthen:W190"
       ],
       "touches": [
         "nemik-rank"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "mtools"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-28: luthen W190 waits on mtools taking the waypoint vector field; nemik-score starts after.",
       "issued_at": "2026-09-28T13:25:10Z",
       "minted_during": "tick",
       "caused_by": "luthen:W190",
-      "last_worked": null,
+      "last_worked": "2026-09-28T13:28:05Z",
       "ticks_blocked": 0
     }
   ],
