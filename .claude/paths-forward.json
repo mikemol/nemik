@@ -1981,13 +1981,13 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-09-28: luthen 2026-09-28: buildkitd is a host process on luthen's host network, which reaches github.com; the git fetch is likely fine (not yet witnessed). No-egress covers derived data leaving, not pinned sources coming in. Urgency dropped; kept for GitHub-down resilience. | 2026-09-28: Now a prerequisite for the first Forgejo build: the base image (uv python3.13-bookworm-slim) has no git binary, so the test stage's uv sync cannot fetch paperkit's git source; also the test stage does not COPY ARCHITECTURE.md, which test_architecture reads. Expected, not yet run.",
+      "evidence": "2026-09-28: luthen 2026-09-28: buildkitd is a host process on luthen's host network, which reaches github.com; the git fetch is likely fine (not yet witnessed). No-egress covers derived data leaving, not pinned sources coming in. Urgency dropped; kept for GitHub-down resilience. | 2026-09-28: Now a prerequisite for the first Forgejo build: the base image (uv python3.13-bookworm-slim) has no git binary, so the test stage's uv sync cannot fetch paperkit's git source; also the test stage does not COPY ARCHITECTURE.md, which test_architecture reads. Expected, not yet run. | 2026-09-28: MEASURED 2026-09-28 at 40543f3: buildctl build (luthen's /run/buildkit) of the Containerfile succeeds; test stage 55 passed, 12 skipped. My 'no git binary' prediction was wrong. The 12 skips (opa, chromium, likely architecture) are the open part: the image gate runs less than bazel.",
       "issued_at": "2026-09-28T13:25:08Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-09-28T16:51:01Z",
+      "last_worked": "2026-09-28T16:52:40Z",
       "ticks_blocked": 0,
-      "weight": 50
+      "weight": -5
     },
     {
       "symbol": "W107",
