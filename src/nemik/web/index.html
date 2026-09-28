@@ -108,7 +108,13 @@ function draw() {
   const waits = data.edges.filter(e => e.kind === "waits" && keep.has(e.source)
       && (e.target.startsWith("operator:") ? (showNoise || e.target === "operator:needs-you") : byId.has(e.target)));
   waits.forEach(e => { if (byId.has(e.target)) keep.add(e.target); });
-  const actors = [...new Set(waits.map(e => e.target).filter(t => t.startsWith("operator:")))].sort();
+  // nemik:W120: one operator lane per repo box, not one for the fleet. A single lane was a hub
+  // every ask converged on, so its edges were the longest on the page whatever the layout did
+  // (the top 5% of edge lengths, measured). A chip inside each box keeps those edges short; clicking
+  // any chip still opens the whole fleet's lane in the side panel.
+  const chip = e => `${e.target}@${byId.get(e.source).repo}`;
+  waits.forEach(e => { if (e.target.startsWith("operator:")) e.chip = chip(e); });
+  const actors = [...new Set(waits.filter(e => e.chip).map(e => e.chip))].sort();
   const repos = [...new Set(data.nodes.filter(n => keep.has(n.id)).map(n => n.repo))];
   const els = [
     // A repo box counts the unclaimed blocks inside it: each one is that repo's move.
@@ -124,12 +130,13 @@ function draw() {
         fill: color(n.state), border: total ? 1 + 6 * (e.interrupt || 0) / total : 1 } };
     }),
     ...actors.map(a => {
-      const cat = a.slice(9), n = (data.operator || []).filter(x => x.category === cat).length;
-      return { data: { id: a, label: `${LANE[cat]} (${n})`, lane: cat }, classes: "actor operator " + cat };
+      const [cat, r] = a.slice(9).split("@");
+      const n = (data.operator || []).filter(x => x.category === cat && x.ref.split(":")[0] === r).length;
+      return { data: { id: a, parent: "repo:" + r, label: `${LANE[cat]} (${n})`, lane: cat }, classes: "actor operator " + cat };
     }),
     ...data.edges.filter(e => e.kind === "enables" && keep.has(e.source) && keep.has(e.target))
       .map((e, i) => ({ data: { id: "e" + i, source: e.source, target: e.target }, classes: e.satisfied ? "satisfied" : "" })),
-    ...waits.map((e, i) => ({ data: { id: "w" + i, source: e.source, target: e.target },
+    ...waits.map((e, i) => ({ data: { id: "w" + i, source: e.source, target: e.chip || e.target },
       classes: "waits" + (e.satisfied ? " satisfied" : "") })),
   ];
   // Keep the reader's viewport across a redraw; only the first draw fits the graph (nemik:W119).
@@ -222,17 +229,35 @@ function rankEdges(kids) {
 // cross between them, oriented downstream: a box another box waits on sits above it. Cycles are cut
 // at DFS back edges (the edge is still drawn, just not ranked). Units with no cross edges go in a
 // last row, since nothing orders them.
+const dist = (p, q) => Math.hypot(p.x - q.x, p.y - q.y);
+const p95 = L => { if (!L.length) return 0; const s = [...L].sort((a, b) => a - b); return s[Math.min(s.length - 1, Math.floor(0.95 * s.length))]; };
+const lexLess = (a, b) => { for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return a[i] < b[i]; return false; };
+
 function tile() {
   const GAP = 60;
   const units = new Map();  // unit id -> { el: collection to shift, bb }
+  // Inside each box, try each dagre alignment and keep the layout whose 95th-percentile edge length is
+  // least (operator 2026-09-28: minimize p95, for intra- and cross-box edges alike), ties broken by
+  // total length, then area. p95, not the mean: the long outliers are what make the view unreadable.
   cy.nodes(".repo").forEach(r => {
-    const kids = r.children();
-    kids.union(rankEdges(kids)).layout({ name: "dagre", rankDir: "TB", nodeSep: 10, rankSep: 30,
-      nodeDimensionsIncludeLabels: true }).run();
-    cy.remove(cy.edges(".rank"));
+    const kids = r.children(), inner = kids.edgesWith(kids);
+    let best = null;
+    // Measured on an 18-repo snapshot: the tight-tree and longest-path rankers never won and tripled
+    // draw() time (1.0 s -> 3.0 s), so only dagre's alignment is varied.
+    for (const align of [undefined, "UL", "UR", "DL", "DR"]) {
+      kids.union(rankEdges(kids)).layout({ name: "dagre", rankDir: "TB", nodeSep: 10, rankSep: 30,
+        align, nodeDimensionsIncludeLabels: true }).run();
+      cy.remove(cy.edges(".rank"));
+      const L = inner.map(e => dist(e.source().position(), e.target().position()));
+      const bb = kids.boundingBox();
+      const score = [p95(L), L.reduce((a, b) => a + b, 0), bb.w * bb.h];
+      if (!best || lexLess(score, best.score))
+        best = { score, pos: new Map(kids.map(n => [n.id(), { ...n.position() }])) };
+    }
+    kids.forEach(n => n.position(best.pos.get(n.id())));
     units.set(r.id(), { el: kids, bb: kids.boundingBox() });
   });
-  cy.nodes(".actor").forEach(a => units.set(a.id(), { el: a, bb: a.boundingBox() }));
+  cy.nodes(".actor").orphans().forEach(a => units.set(a.id(), { el: a, bb: a.boundingBox() }));
   const unitOf = n => (n.isChild() ? n.parent().id() : n.id());
   const down = new Map([...units.keys()].map(k => [k, new Set()]));
   const linked = new Set();
@@ -301,11 +326,23 @@ function tile() {
       x += units.get(u).bb.w + GAP;
     }
   };
+  // Each cross-box edge's length as it will be drawn: its endpoints' offsets inside their boxes
+  // plus where the boxes are placed. Cost is [p95, total], compared in that order.
+  const crossEdges = [];
+  cy.edges().forEach(e => {
+    const [a, b] = [e.source(), e.target()], [u, v] = [unitOf(a), unitOf(b)];
+    if (u === v || !w.has(u) || !w.has(v)) return;
+    const rel = (n, k) => { const bb = units.get(k).bb, p = n.position(); return { k, x: p.x - bb.x1, y: p.y - bb.y1 }; };
+    crossEdges.push([u, rel(a, u), v, rel(b, v)]);
+  });
+  // A box may be mirrored left-right when that brings its cross-linked nodes nearer their partners
+  // (a dagre layout is as valid mirrored); `flip` holds the boxes that are.
+  const flip = new Set();
+  const at = (u, r) => ({ x: cx.get(u) - units.get(u).bb.w / 2 + (flip.has(u) ? units.get(u).bb.w - r.x : r.x),
+                          y: rowY[rank.get(u)] + r.y });
   const cost = () => {
-    let t = 0;
-    for (const [u, m] of w) for (const [v, c] of m)
-      if (u < v) t += c * Math.hypot(cx.get(u) - cx.get(v), cy_.get(u) - cy_.get(v));
-    return t;
+    const L = crossEdges.map(([u, ru, v, rv]) => dist(at(u, ru), at(v, rv)));
+    return [p95(L), L.reduce((a, b) => a + b, 0)];
   };
   rows.forEach((_, k) => place(k));
   let best = { cost: cost(), order: rows.map(r => [...r]), cx: new Map(cx) };
@@ -313,7 +350,22 @@ function tile() {
     const ks = rows.map((_, k) => k);
     (sweep % 2 ? ks.reverse() : ks).forEach(place);
     const c = cost();
-    if (c < best.cost - 1e-6) best = { cost: c, order: rows.map(r => [...r]), cx: new Map(cx) };
+    if (lexLess(c, best.cost)) best = { cost: c, order: rows.map(r => [...r]), cx: new Map(cx) };
+  }
+  rows.forEach((row, k) => { rows[k] = best.order[k]; });
+  for (const [u, x] of best.cx) cx.set(u, x);
+  // Mirror pass: flip any box whose mirror image lowers the cost; repeat until nothing improves.
+  for (let round = 0, better = true; better && round < 4; round++) {
+    better = false;
+    for (const u of [...units.keys()].sort()) {
+      const before = cost();
+      flip.add(u);
+      if (lexLess(cost(), before)) better = true; else flip.delete(u);
+    }
+  }
+  for (const u of flip) {
+    const { el, bb } = units.get(u);
+    el.forEach(n => n.position({ x: bb.x1 + bb.x2 - n.position().x, y: n.position().y }));
   }
   rows.forEach((row, k) => {
     for (const u of best.order[k]) {

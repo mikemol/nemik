@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 119,
+  "counter": 120,
   "waypoints": [
     {
       "symbol": "W1",
@@ -2239,6 +2239,25 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-09-28T18:19:18Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W120",
+      "title": "Web view: minimize p95 edge length, intra- and cross-box (operator 2026-09-28)",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "web",
+        "layout"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-09-28: Frozen 18-repo snapshot, PYTHONHASHSEED=1, playwright, all visible edges. Baseline (W117+W119): cross n=92 p50 1062 p95 2747 total 128866; intra n=406 p50 86 p95 329. (1) Box order/offset/sweeps now minimize [p95, total] of real cross-edge lengths (endpoint offsets inside boxes), not box-centre distance. (2) The fleet operator lane was a hub holding the top 5% of lengths (28 needs-you edges); now one chip per repo box (click still opens the fleet lane). (3) Mirror pass flips a box left-right when that lowers the cost. (4) Per box, dagre align in {default,UL,UR,DL,DR} chosen by [p95, total, area]; tight-tree/longest-path rankers never won and tripled time, dropped. Result: cross n=64 p50 997 p95 2268 total 73297; intra n=434 (chips) p50 89 p95 291. draw() 378 ms -> 1015 ms, paid only when graph.json changes (W119). bazel 16/16. Remaining top cross edges: vertical span between rows (mtools <-> life, linux-sources <-> mtools): row assignment, not order. W118 (pull cross-linked nodes toward their partner inside a box) still open.",
+      "issued_at": "2026-09-28T18:23:46Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": "2026-09-28T18:23:46Z",
       "ticks_blocked": 0
     }
   ],
