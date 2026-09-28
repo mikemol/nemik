@@ -194,6 +194,22 @@ def _ask_key(text: str) -> str:
     return " ".join(w for w in t.split() if w not in {"s", "approval", "approve"})[:40]
 
 
+def waiting_behind(g: Graph, node: URIRef) -> set[URIRef]:
+    """Every open waypoint, in any workstream, that waits on `node` directly or through others:
+    it waits for it (blocked_on) or `node` enables it. So an operator ask held by one repo shows
+    the work queued behind it in others (resumes:W1 behind life:W21, 2026-09-28)."""
+    seen: set[URIRef] = set()
+    stack = [node]
+    while stack:
+        n = stack.pop()
+        for w in set(g.subjects(NEMIK.waitsFor, n)) | set(g.objects(n, NEMIK.enables)):
+            if w not in seen and w != node and (w, OSLC_CM.state, None) in g \
+                    and (w, OSLC_CM.state, NEMIK.Done) not in g:
+                seen.add(w)
+                stack.append(w)
+    return seen
+
+
 def operator_asks(g: Graph) -> list[dict]:
     """Every open waypoint waiting on the operator, categorised, with duplicate asks grouped."""
     from nemik.adapter import OPERATOR
@@ -232,6 +248,7 @@ def operator_asks(g: Graph) -> list[dict]:
             "ticks_blocked": int(g.value(node, NEMIK.ticksBlocked) or 0),
             "last_activity": last.get(node, ""),
             "key": _ask_key(text) if cat == "needs-you" else "",
+            "waiting": sorted(ref(w) for w in waiting_behind(g, node)),
         })
     groups: dict[str, set[str]] = {}
     for a in out:
@@ -289,4 +306,5 @@ def operator_main(argv: list[str] | None = None, g: Graph | None = None) -> None
         print(f"\n{cat} ({len(rows)})")
         for a in rows:
             dup = f"  same ask as {', '.join(a['same_ask'])}" if a["same_ask"] else ""
-            print(f"  {a['ref']:28} {a['ask'][:70]}{dup}")
+            behind = f"  <- {', '.join(a['waiting'])}" if a["waiting"] else ""
+            print(f"  {a['ref']:28} {a['ask'][:70]}{dup}{behind}")

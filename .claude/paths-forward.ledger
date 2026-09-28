@@ -209,3 +209,4 @@
 2026-09-28T16:52:48Z  tick  W106 measured  unblock   "Containerfile builds (55 passed, 12 skipped); retracted the predicted test-stage failure to luthen"
 2026-09-28T16:53:01Z  tick  W107 answered  collapse  "mtools W248: nemik owns bands/guarantees; W107 blocked on mtools:W248"
 2026-09-28T17:40:04Z  tick  W114 done      collapse  "one skill replaces per-session re-derivation of the graph rules; drift test keeps it current"
+2026-09-28T17:43:17Z  tick  W115 done      unblock   "operator asks now show who waits behind them; skill teaches the relay chain"

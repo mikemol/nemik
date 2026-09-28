@@ -56,3 +56,20 @@ def test_symbol_with_prose_attached_is_malformed_and_clean_forms_are_not() -> No
         g.add((w, NEMIK.blockedOn, Literal(text)))
     annotate(g)
     assert set(g.objects(w, NEMIK.malformedBlocker)) == {Literal("W8 (both rewrite the lock)")}
+
+
+def test_operator_ask_lists_the_work_waiting_behind_it_across_repos() -> None:
+    # life:W21 holds the operator's approval; resumes:W1 waits on it, and resumes:W3 on W1.
+    from nemik.adapter import OPERATOR
+    from nemik.blocks import operator_asks
+
+    g = Graph()
+    ask = _wp(g, "life", "W21", "blocked")
+    g.add((ask, NEMIK.blockedOn, Literal("operator: decide approve the resume")))
+    g.add((ask, NEMIK.waitsFor, OPERATOR))
+    w1, w3, done = _wp(g, "resumes", "W1", "blocked"), _wp(g, "resumes", "W3", "blocked"), _wp(g, "resumes", "W4", "done")
+    g.add((w1, NEMIK.waitsFor, ask))
+    g.add((w3, NEMIK.waitsFor, w1))
+    g.add((ask, NEMIK.enables, done))
+    (a,) = [a for a in operator_asks(g) if a["ref"] == "life:W21"]
+    assert a["waiting"] == ["resumes:W1", "resumes:W3"]

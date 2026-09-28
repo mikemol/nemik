@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 114,
+  "counter": 115,
   "waypoints": [
     {
       "symbol": "W1",
@@ -2148,6 +2148,25 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-09-28T17:40:04Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W115",
+      "title": "nemik-operator and the web lane show, for each operator ask, the open work waiting behind it across repos (operator: sessions must make the relay visible on the dashboard)",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "nemik-operator",
+        "skill"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-09-28: blocks.waiting_behind (transitive waitsFor/enables, open only); operator_asks 'waiting'; CLI '<- ...'; index.html 'waiting behind this'. Test in test_umbrella_block.py. Live: life:W21 <- life:W10, life:W11, resumes:W1. Skill section 'Getting it onto the operator's dashboard'. bazel 15/15.",
+      "issued_at": "2026-09-28T17:43:17Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": "2026-09-28T17:43:17Z",
       "ticks_blocked": 0
     }
   ],

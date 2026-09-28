@@ -43,13 +43,33 @@ Tools (host): `~/github/nemik/.venv/bin/<tool>`. All take `--root` (default `~/g
    or re-file the block. If the same decision is asked elsewhere, cite that `<repo>:W<n>` so it
    is answered once.
 
+## Getting it onto the operator's dashboard
+
+The operator reads `nemik-operator` (and its lane on the web view), not your queue. An ask reaches
+them only as a chain the graph can walk:
+
+- **The session that holds the ask** keeps one waypoint blocked on
+  `operator: decide|act <the ask>` (blocked_kind `human`). That waypoint is the operator's to-do.
+- **Everyone whose work waits on that answer** blocks on that waypoint by citation
+  (`<repo>:W<n>`, blocked_kind `agent`), never on "operator" and never on a bare repo name. The
+  ask then lists them (`<- resumes:W1`, "waiting behind this"), so the operator sees what an
+  answer releases.
+- **Relaying an answer between sessions** ("life pings resumes once the operator approves") is
+  the holder's waypoint going `done`. Do not add a second operator ask downstream: it shows up as
+  a duplicate, and it lets the two copies drift apart.
+- If two repos really do need the same answer, each ask cites the other (`same ask as ...`) so the
+  operator answers it once.
+
+Witness: your ask appears under **needs-you** in `nemik-operator`, with the waypoints behind it
+listed. If it appears under *unstated*, or not at all, the chain is broken somewhere.
+
 ## Commands
 
 | command | what it answers | when |
 |---|---|---|
 | `nemik-check` | every queue against nemik's shapes; `VIOLATES` lines page luthen's operator, `Warning` lines are yours to fix | after editing your queue; when a peer says it is red |
 | `nemik-inbound [REPO]` | who is blocked on REPO, and which waypoint of REPO claims it (`UNCLAIMED` if none) | every tick, for your own repo |
-| `nemik-operator` | every block on the operator, sorted *needs-you / answered / condition / unstated* | before asking the operator anything; to see what they owe |
+| `nemik-operator` | every block on the operator, sorted *needs-you / answered / condition / unstated*, each with what waits behind it (`<- repo:W<n>`) | before asking the operator anything; to see what they owe |
 | `nemik-wake` | which blocked-on workstreams must be awake and are not; `--nudge` prints only rows due a nudge (backoff) | when idle and everything is blocked |
 | `nemik-rank REPO` | REPO's ready items by cross-repo weight; `--check` exits 1 if the item you work next is outweighed; flags an **UMBRELLA** (ready with open work under it) with its direct *children* (put those in blocked_on) and deepest *leaves* (work those first); `--goals` gives each goal's frontier | at the start of a tick; `nemik-rank REPO --json > f && $PF --weights-from f` syncs weights |
 | `nemik-overlaps` | fleet-wide `touches` overlap; `--cross` only tags shared across repos | before starting work that edits shared machinery |
