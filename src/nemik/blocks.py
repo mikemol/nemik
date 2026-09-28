@@ -57,11 +57,11 @@ def inbound(g: Graph) -> list[dict]:
         out.append({
             "blocked": ref(node),
             "title": str(g.value(node, DCTERMS.title) or ""),
-            "blocked_on": [str(o) for o in g.objects(node, NEMIK.blockedOn)],
+            "blocked_on": sorted(str(o) for o in g.objects(node, NEMIK.blockedOn)),
             "blocker": blocker,
             "claimed_by": sorted(ref(c) for c in claims),
         })
-    return sorted(out, key=lambda b: (b["blocker"], b["blocked"]))
+    return sorted(out, key=lambda b: (b["blocker"], b["blocked"], b["claimed_by"]))
 
 
 def annotate(g: Graph) -> None:
@@ -230,7 +230,7 @@ def operator_asks(g: Graph) -> list[dict]:
     for node in human:
         if (node, OSLC_CM.state, NEMIK.Done) in g:
             continue
-        texts = [str(o) for o in g.objects(node, NEMIK.blockedOn)]
+        texts = sorted(str(o) for o in g.objects(node, NEMIK.blockedOn))
         title = str(g.value(node, DCTERMS.title) or "")
         # A bare "operator" with the ask carried in a title that starts "OPERATOR: ..." (summit's
         # convention) states the ask there; read it rather than calling the block unstated.

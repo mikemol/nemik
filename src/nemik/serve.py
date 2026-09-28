@@ -142,7 +142,7 @@ def to_json(g: Graph, findings: dict) -> dict:
                 "state": state,
                 "blocked_on": [str(o) for o in g.objects(n, NEMIK.blockedOn)],
                 "blocked_kind": str(g.value(n, NEMIK.blockedKind) or ""),
-                "effort": dict(effort.get(str(n), {})),
+                "effort": dict(sorted(effort.get(str(n), {}).items())),
                 "last_activity": last.get(str(n), ""),
                 "minted_during": str(g.value(n, NEMIK.mintedDuring) or ""),
                 "caused_by": str(g.value(n, PROV.wasInformedBy) or ""),
@@ -152,7 +152,13 @@ def to_json(g: Graph, findings: dict) -> dict:
     # A block on another workstream ends at the blocker's waypoint that claims it, or at an
     # "unclaimed" placeholder inside the blocker's box, never at a bare repo label.
     blocks = inbound(g)
-    by_blocked = {(b["blocked"], b["blocker"]): b for b in blocks}
+    # One (blocked, blocker) pair can have several inbound rows (linux-sources:W40 waits on the mtools
+    # session AND mtools:W24 AND mtools:W46). Keeping only the last row made which claims got drawn
+    # depend on hash order (nemik:W119), so the claims are merged.
+    by_blocked: dict[tuple[str, str], dict] = {}
+    for b in blocks:
+        m = by_blocked.setdefault((b["blocked"], b["blocker"]), {**b, "claimed_by": []})
+        m["claimed_by"] = sorted(set(m["claimed_by"]) | set(b["claimed_by"]))
     for s, _, o in g.triples((None, NEMIK.waitsFor, None)):
         if o == OPERATOR:
             continue  # drawn from operator_asks below, one lane per category
@@ -194,6 +200,14 @@ def to_json(g: Graph, findings: dict) -> dict:
         n["open_blockers"] = len(open_blockers.get(n["id"], ()))
         if n["id"].startswith(BASE):
             n["cite"] = ref(URIRef(n["id"]))
+    # nemik:W119: a total order on everything drawn. rdflib iterates in hash order, and Python salts
+    # str hashes per process, so without this every server start (and every rebuild after an
+    # insertion) handed the layout the same graph in a different order, and dagre/cytoscape laid it
+    # out differently: the view "jumped around" with no data change (operator 2026-09-28).
+    nodes.sort(key=lambda n: n["id"])
+    for n in nodes:
+        n["blocked_on"] = sorted(n["blocked_on"])
+    edges.sort(key=lambda e: (e["source"], e["target"], e["kind"]))
     return {
         "nodes": nodes,
         "edges": edges,

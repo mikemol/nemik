@@ -132,6 +132,8 @@ function draw() {
     ...waits.map((e, i) => ({ data: { id: "w" + i, source: e.source, target: e.target },
       classes: "waits" + (e.satisfied ? " satisfied" : "") })),
   ];
+  // Keep the reader's viewport across a redraw; only the first draw fits the graph (nemik:W119).
+  const view = cy ? { zoom: cy.zoom(), pan: { ...cy.pan() } } : null;
   if (cy) cy.destroy();
   cy = cytoscape({
     container: document.getElementById("cy"), elements: els,
@@ -170,6 +172,7 @@ function draw() {
     ],
   });
   tile();
+  if (view) { cy.zoom(view.zoom); cy.pan(view.pan); }
   // nemik:W88: an edge between two boxes is faint until one of its ends is hovered or selected,
   // or "show all cross-repo edges" is on. Inside a box, edges stay as they are.
   const unit = n => (n.isChild() ? n.parent().id() : n.id());
@@ -372,9 +375,19 @@ function findings() {
   document.getElementById("findings").innerHTML = rows.join("") || '<span class="stat">none</span>';
 }
 
+let lastGraph = null;
 async function load() {
   try {
-    data = await (await fetch("graph.json")).json();
+    const text = await (await fetch("graph.json")).text();
+    // nemik:W119: the 60s poll redrew and re-fit even when nothing changed, so the view jumped
+    // and lost the reader's pan/zoom every minute. An unchanged graph is not redrawn.
+    if (text === lastGraph && data) {
+      await wake();  // liveness still refreshes: recolour the boxes in place, no relayout
+      cy.nodes(".repo").forEach(n => n.data("live", liveness[n.id().slice(5)] || "unknown"));
+      return;
+    }
+    lastGraph = text;
+    data = JSON.parse(text);
   } catch (e) {
     // A blank page looks the same as "still loading" -- say what actually happened, and keep
     // whatever was last rendered rather than tearing the graph down over a transient miss.

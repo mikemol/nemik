@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 118,
+  "counter": 119,
   "waypoints": [
     {
       "symbol": "W1",
@@ -2219,6 +2219,26 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-09-28T18:10:22Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W119",
+      "title": "Web view is deterministic: same data, same picture (operator 2026-09-28: 'things jumping around all the time')",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "web",
+        "serve",
+        "layout"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-09-28: Causes found: (1) serve.to_json emitted nodes/edges/blocked_on in rdflib hash order (str hashes salted per process; luthen's 2 replicas differ); (2) serve keyed inbound rows by (blocked,blocker), keeping the last in hash order, so which claim edge got drawn varied (linux-sources:W40 -> mtools:W24 present or absent, 91 vs 92 cross edges); (3) inbound sort ties; effort dict order; (4) the page's 60s poll destroyed, relaid out and re-fit even when unchanged, losing pan/zoom. Fixes: total order on nodes/edges/lists, merged claims, sort key with claimed_by; page skips redraw on identical graph.json (recolours liveness in place) and keeps pan/zoom on a real redraw. Witness: graph.json sha identical across PYTHONHASHSEED 1,2,3 on a frozen 18-repo snapshot; tests/test_deterministic.py (4 seeds) passes, FAILED with the fixes stashed. bazel 16/16.",
+      "issued_at": "2026-09-28T18:19:17Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": "2026-09-28T18:19:18Z",
       "ticks_blocked": 0
     }
   ],

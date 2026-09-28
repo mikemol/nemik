@@ -215,3 +215,4 @@
 2026-09-28T18:05:24Z  tick  W104 done      collapse  "host .venv is the bazel output; W101's last child (operator ask over rank)"
 2026-09-28T18:05:33Z  tick  W101 done      collapse  "venv is a build output and the input everything consumes (operator correction to W100) complete"
 2026-09-28T18:09:54Z  tick  W117 done      unblock   "cross-box edge length -28% on live data"
+2026-09-28T18:19:18Z  tick  W119 done      collapse  "one cause (hash order) behind layout jumps, replica disagreement and a flickering edge"
