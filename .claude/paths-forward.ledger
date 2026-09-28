@@ -221,3 +221,4 @@
 2026-09-28T22:46:47Z  tick  W106 collapse  collapse  "W106 atomized by measured skip cause; W122 done (architecture gate runs in the image); W121 claims luthen W234"
 2026-09-28T22:52:09Z  tick  W125 done      unblock   "labels inside; layout quality is now a budgeted build test with light/dark screenshots"
 2026-09-28T23:00:16Z  tick  W126 done      collapse  "area -24%, cross p95 -14%, intra p95 -4% on the fixture"
+2026-09-28T23:46:44Z  tick  W128 minted    collapse  "life:W23 calendar feed and W121 Google Tasks share one VTODO projection (W128 enables both)"

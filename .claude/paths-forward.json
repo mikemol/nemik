@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 127,
+  "counter": 128,
   "waypoints": [
     {
       "symbol": "W1",
@@ -2278,11 +2278,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-09-28: luthen-observability-db answers: (1) collection resolved by name, not id: child of akonadi_google_resource_0 with mimetype application/x-vnd.akonadi.calendar.todo, default list by name; health = AgentManager.agentInstanceStatus==0 and agentInstanceOnline. (2) luthen owns luthen-nemik-tasks.service/.timer beside luthen-nemik-export; wants argv + cadence from nemik. (3) link base = endpoints.json nemik-http via luthen checks.endpoints_query (now ns nemik).",
+      "evidence": "2026-09-28: luthen-observability-db answers: (1) collection resolved by name, not id: child of akonadi_google_resource_0 with mimetype application/x-vnd.akonadi.calendar.todo, default list by name; health = AgentManager.agentInstanceStatus==0 and agentInstanceOnline. (2) luthen owns luthen-nemik-tasks.service/.timer beside luthen-nemik-export; wants argv + cadence from nemik. (3) link base = endpoints.json nemik-http via luthen checks.endpoints_query (now ns nemik). | 2026-09-28: 2026-09-28: collapse with life:W23 (calendar feed). Both are the operator-ask VTODO projection with different sinks; the projection is W127's, W121 is the Akonadi/Google Tasks sink over it. | 2026-09-28: Correction: the projection waypoint is W128, not W127 (W127 is the viewport-aspect layout item).",
       "issued_at": "2026-09-28T22:44:18Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W234",
-      "last_worked": "2026-09-28T22:46:47Z",
+      "last_worked": "2026-09-28T23:46:44Z",
       "ticks_blocked": 0
     },
     {
@@ -2400,6 +2400,28 @@
       "issued_at": "2026-09-28T23:00:16Z",
       "minted_during": "tick",
       "caused_by": "operator",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W128",
+      "title": "Operator asks as VTODOs: one projection (nemik.vtodo: SUMMARY = stated decide/act ask, UID nemik:<repo>:W<n>, RELATED-TO the waypoints it releases, DUE from mtools' date field when present), host-side nemik-ics writing a local .ics; per-repo opt-in; never in the export or nemik-serve",
+      "status": "ready",
+      "enables": [
+        "life:W23",
+        "W121"
+      ],
+      "touches": [
+        "nemik-operator",
+        "vtodo"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-28T23:46:37Z",
+      "minted_during": "tick",
+      "caused_by": "life:W23",
       "last_worked": null,
       "ticks_blocked": 0
     }
