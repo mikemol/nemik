@@ -2000,16 +2000,16 @@
         "nemik-rank"
       ],
       "blocked_on": [
-        "mtools"
+        "mtools:W248"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "2026-09-28: luthen W190 waits on mtools taking the waypoint vector field; nemik-score starts after.",
+      "evidence": "2026-09-28: luthen W190 waits on mtools taking the waypoint vector field; nemik-score starts after. | 2026-09-28: mtools W248 split: mtools stores+validates vector (WV:1/R/C/I/A/X/S/F/W) and vector_source; nemik owns bands, composition, unscored default and guarantees (answered yes 2026-09-28). Alphabet is luthen's call.",
       "issued_at": "2026-09-28T13:25:10Z",
       "minted_during": "tick",
       "caused_by": "luthen:W190",
-      "last_worked": "2026-09-28T13:28:05Z",
-      "ticks_blocked": 3
+      "last_worked": "2026-09-28T16:53:01Z",
+      "ticks_blocked": 0
     },
     {
       "symbol": "W108",

@@ -206,3 +206,5 @@
 2026-09-28T15:05:07Z  tick  --   triaged   collapse  "inbox: 3 letters. life new workstream (picked up by nemik-check, no action); paperkit umbrella leaves -> W112 done (children vs leaves, not touches); life calendar -> W113 blocked on mtools reader"
 2026-09-28T16:49:40Z  tick  W105 advanced  unblock   "deploy/ Deployment+Service+kustomization written (restricted, PVC, bare image)"
 2026-09-28T16:51:01Z  tick  W105 done      unblock   "deploy/ complete (image automation + Forgejo build workflow); W106 is the first build's prerequisite"
+2026-09-28T16:52:48Z  tick  W106 measured  unblock   "Containerfile builds (55 passed, 12 skipped); retracted the predicted test-stage failure to luthen"
+2026-09-28T16:53:01Z  tick  W107 answered  collapse  "mtools W248: nemik owns bands/guarantees; W107 blocked on mtools:W248"
