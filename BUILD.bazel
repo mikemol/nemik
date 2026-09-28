@@ -33,7 +33,7 @@ py_library(
             ":nemik",
             requirement("pytest"),
             requirement("playwright"),
-            "@paperkit//:lib",  # nemik:W100: test_architecture gates ARCHITECTURE.md through it
+            "@nemik_dev//paperkit",
         ],
     )
     for src in glob(["tests/test_*.py"])

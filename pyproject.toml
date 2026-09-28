@@ -13,7 +13,7 @@ dependencies = [
 # Vendored wheel (nemik:W6, H1): built from mtools' pathsforward at the pinned commit; see
 # vendor/wheels/README.md. No network fetch at build time.
 mikemol-pathsforward = { path = "vendor/wheels/mikemol_pathsforward-0.1.0+345c06c-py3-none-any.whl" }
-paperkit = { path = "vendor/wheels/paperkit-0.1.0+b587710-py3-none-any.whl" }
+paperkit = { git = "https://github.com/mikemol/paperkit.git", rev = "b5877102af3b48005fde814416bff5b8f06ba5cd" }
 
 [project.scripts]
 nemik-check = "nemik.check:main"

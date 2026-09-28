@@ -1,0 +1,25 @@
+A local source in uv.lock (the project itself, or a path/directory wheel) is skipped, not fetched
+
+MEASURED in nemik 2026-09-28 (rules_python 2.3.3 plus rules_python-uv-lock-git-kind.patch,
+`pip.parse(uv_lock = "//:uv.lock")`): nemik's lock carries mikemol-pathsforward from
+`source = { path = "vendor/wheels/…whl" }`, whose `wheels` entry has `path` and no `url`, so
+`_parse_uv_lock_json` fails with `Error: key "url" not found in dictionary` (line 206). The
+project's own entry (`editable`/`virtual`) has no fetchable source either.
+
+Such a package is supplied by the consuming module's own rule (nemik: //bazel:wheel.bzl), so
+the lock parse skips it. Applied after the git-kind patch via single_version_override.
+
+--- a/python/private/pypi/parse_requirements.bzl
++++ b/python/private/pypi/parse_requirements.bzl
+@@ -169,6 +169,11 @@
+         fail("BUG: platforms must be configured")
+ 
+     for pkg in uv_lock["package"]:
++        # A local source (the project itself, or a path/directory wheel) has nothing for
++        # bazel or pip to fetch; the consuming module supplies it by its own rule.
++        local = pkg.get("source") or {}
++        if local.get("path") or local.get("editable") or local.get("virtual") or local.get("directory"):
++            continue
+         name = pkg["name"]
+         version = pkg["version"]
+         norm_name = normalize_name(name)

@@ -9,18 +9,29 @@ module(name = "nemik", version = "0.1")
 
 bazel_dep(name = "rules_python", version = "2.3.3")
 
+# nemik:W102: rules_python patched (mtools' patches/, same measurement) so pip.parse(uv_lock=)
+# hands a git source to pip as `name @ git+url@rev` instead of an index requirement.
+single_version_override(
+    module_name = "rules_python",
+    patch_strip = 1,
+    patches = [
+        "//patches:rules_python-uv-lock-git-kind.patch",
+        "//patches:rules_python-uv-lock-local-source.patch",  # nemik-only: path wheels come via wheel.bzl
+    ],
+)
+
 python = use_extension("@rules_python//python/extensions:python.bzl", "python")
 python.toolchain(python_version = "3.13", is_default = True)
 
-# The dev closure, exported from uv.lock (`uv export --group dev --no-emit-project`), minus the one
-# package uv.lock sources from a local path: mikemol-pathsforward, vendored so the image build never
-# fetches github.com (nemik:W6). pip.parse reads index and git sources only; the vendored wheel
-# comes in through //bazel:wheel.bzl instead.
+# nemik:W102: the dev closure is read from uv.lock itself, so the host and Bazel resolve one lock
+# (paperkit from its git pin via the patch above). mikemol-pathsforward is a local-path wheel in the
+# lock, vendored so the image build never fetches github.com (nemik:W6); it comes in through
+# //bazel:wheel.bzl.
 pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
 pip.parse(
     hub_name = "nemik_dev",
     python_version = "3.13",
-    requirements_lock = "//:requirements-dev.txt",
+    uv_lock = "//:uv.lock",
 )
 use_repo(pip, "nemik_dev")
 
@@ -52,8 +63,3 @@ http_archive(
 exports_files(["chrome-headless-shell"])""",
 )
 
-# nemik:W100: paperkit, which gates ARCHITECTURE.md, vendored the same way (vendor/wheels/README.md).
-vendored_wheel(
-    name = "paperkit",
-    wheel = "//:vendor/wheels/paperkit-0.1.0+b587710-py3-none-any.whl",
-)

@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
+
+# ⚑ PATCHES TO FETCHED MODULES LIVE HERE AND NOWHERE ELSE. A change made under ~/.cache/bazel/
+# external is host state that the next fetch erases and no cache key sees; a patch declared by
+# `single_version_override` in MODULE.bazel is an input. Each file carries its own measurement.
+exports_files(glob(["*.patch"], allow_empty = False))

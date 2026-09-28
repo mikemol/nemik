@@ -1,0 +1,72 @@
+A git source in uv.lock must reach pip as `name @ git+url@rev`, not as `name==version`
+
+MEASURED in mtools 2026-09-20 (rules_python 2.3.3, `pip.parse(uv_lock = ...)`): a dev group
+carrying `paperkit` from `source = { git = "https://github.com/mikemol/paperkit#<sha>" }`
+fails to fetch —
+
+    ERROR: No matching distribution found for paperkit==0.1.0
+
+`_parse_uv_lock_json` recognises the git source and builds a `git_struct` with `kind = "git"`,
+then (a) emits `requirement_line = "{name}=={version}"` regardless of kind, and (b) carries
+the git URL in `url`, so `hub_builder.bzl:649` skips the pip-installed fallback (`if not
+src.url`) and hands the URL to bazel's downloader, which fetches the repository's HTML page
+as a file named `paperkit`. pip is then asked for `paperkit==0.1.0` from `--find-links .`.
+
+The form `uv pip compile` writes for the same lock — `paperkit @ git+https://…@<sha>` — is
+what pip honours natively. So: for a git source, emit that line and leave `url` empty, which
+routes the package through the pip path that already builds sdists. The revision fragment
+uv.lock records after `#` is the resolved commit; a `?rev=` query is dropped because the
+fragment supersedes it.
+
+Applied by mtools' MODULE.bazel via single_version_override until upstream carries it.
+
+--- a/python/private/pypi/parse_requirements.bzl
++++ b/python/private/pypi/parse_requirements.bzl
+@@ -232,12 +232,20 @@
+             url_path, _, _ = url.partition("?")
+             url_path, _, _ = url_path.partition("#")
+             _, _, filename = url_path.rpartition("/")
++            # pip's direct-reference form: `git+<url>@<rev>`. uv.lock records the resolved
++            # commit as the URL fragment; a `?rev=` query, when present, is the request the
++            # fragment answers, so it is dropped rather than duplicated.
++            _, _, rev = url.partition("#")
++            pip_url = "git+" + url_path + ("@" + rev if rev else "")
+             git_struct = struct(
+                 filename = filename,
+-                url = url,
++                # Empty so hub_builder takes the pip-installed path: bazel's downloader cannot
++                # fetch a git repository and pip can.
++                url = "",
+                 digest = "",
+                 kind = "git",
+                 source = pkg["source"],
++                pip_url = pip_url,
+             )
+
+         plat_to_src = {}
+@@ -275,11 +283,20 @@
+         for key, val in src_to_plats.items():
+             src = val.src
+             plats = sorted(val.plats)
+-            requirement_line = "{name}{extras}=={version}".format(
+-                name = name,
+-                extras = extra_str,
+-                version = version,
+-            )
++            if getattr(src, "kind", None) == "git":
++                # A git source has no index version to ask for; pip resolves the
++                # direct reference itself.
++                requirement_line = "{name}{extras} @ {url}".format(
++                    name = name,
++                    extras = extra_str,
++                    url = src.pip_url,
++                )
++            else:
++                requirement_line = "{name}{extras}=={version}".format(
++                    name = name,
++                    extras = extra_str,
++                    version = version,
++                )
+             entry["resolved_srcs"].append(struct(
+                 distribution = name,
+                 extra_pip_args = extra_pip_args or [],
