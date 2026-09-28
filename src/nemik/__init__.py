@@ -24,5 +24,5 @@ def editable_install() -> bool:
 
 
 if editable_install():
-    print("nemik: WARNING running from an editable install; install it as a package: uv sync --no-editable",
+    print("nemik: WARNING running from an editable install; use the built venv: ./setup.sh (bazel build //:.venv)",
           file=sys.stderr)

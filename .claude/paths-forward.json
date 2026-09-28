@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 45
+      "ticks_blocked": 47
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 2,
       "weight": 1
     },
     {
@@ -1398,7 +1398,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:13:38Z",
-      "ticks_blocked": 29,
+      "ticks_blocked": 31,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1859,24 +1859,22 @@
     {
       "symbol": "W101",
       "title": "The Bazel-built //:.venv is the build input everything consumes (operator: 'build their .venv as a build input that the rest of the build uses'): py_tests run in it rather than per-target deps; the host .venv is that artifact, not a uv-synced sibling; deps (paperkit, pathsforward) come from the lock into it, not from hand-vendored wheels. First step: read how mtools wires tests and hooks to its built venv; revert the W100 paperkit wheel vendoring",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [
         "bazel",
         "venv",
         "packaging"
       ],
-      "blocked_on": [
-        "W104"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-09-27: Operator clarification 2026-09-27: bazel builds the .venv as a build OUTPUT; that output is then the build INPUT for every later target needing .venv material (tests, hooks, lint, host use). So every such target takes //:.venv in its inputs and runs its bin/, nothing assembles its own Python closure. | 2026-09-27: Read mtools: dev hubs pip.parse(uv_lock=...) so host and bazel resolve one lock (MODULE.bazel:150-170); git sources (paperkit) need patches/rules_python-uv-lock-git-kind.patch via single_version_override; setup.sh arms core.hooksPath and links root .venv; hooks/BUILD.bazel feeds :.venv as data. pathsforward stays a vendored wheel for now (nemik:H1, image build has no github fetch)",
+      "evidence": "2026-09-27: Operator clarification 2026-09-27: bazel builds the .venv as a build OUTPUT; that output is then the build INPUT for every later target needing .venv material (tests, hooks, lint, host use). So every such target takes //:.venv in its inputs and runs its bin/, nothing assembles its own Python closure. | 2026-09-27: Read mtools: dev hubs pip.parse(uv_lock=...) so host and bazel resolve one lock (MODULE.bazel:150-170); git sources (paperkit) need patches/rules_python-uv-lock-git-kind.patch via single_version_override; setup.sh arms core.hooksPath and links root .venv; hooks/BUILD.bazel feeds :.venv as data. pathsforward stays a vendored wheel for now (nemik:H1, image build has no github fetch) | 2026-09-28: All children done: W102 (bazel reads uv.lock), W103 (tests run under //:.venv), W104 (host .venv -> bazel-bin/.venv via setup.sh).",
       "issued_at": "2026-09-27T23:03:28Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-09-27T23:08:46Z",
-      "ticks_blocked": 3,
+      "last_worked": "2026-09-28T18:05:32Z",
+      "ticks_blocked": 0,
       "weight": 0
     },
     {
@@ -1926,7 +1924,7 @@
     {
       "symbol": "W104",
       "title": "W101c: host .venv is the bazel output (setup.sh: arm hooks, link .venv -> bazel-bin/.venv), not a uv sync; README",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W101"
       ],
@@ -1936,11 +1934,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-28: setup.sh: core.hooksPath, bazel build //:.venv, moves an old uv .venv aside, ln -sfn bazel-bin/.venv .venv, import check. Host: .venv -> bazel-bin/.venv; PF --check OK, nemik-check exit 0, host pytest under .venv/bin/python3 70 passed. Found+fixed: paper.toml ran .venv/bin/python (absent in the bazel venv; bazel's test_architecture had passed only by resolve() reaching the old uv .venv in the source tree) -> python3. README install section; editable warning points at setup.sh. Override: ranked below W106, taken as the operator's W101 correction.",
       "issued_at": "2026-09-27T23:08:46Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-28T18:05:24Z",
       "ticks_blocked": 0,
       "weight": 1
     },
@@ -1986,7 +1984,7 @@
       "caused_by": null,
       "last_worked": "2026-09-28T16:52:40Z",
       "ticks_blocked": 0,
-      "weight": -5
+      "weight": 33
     },
     {
       "symbol": "W107",
@@ -2006,7 +2004,8 @@
       "minted_during": "tick",
       "caused_by": "luthen:W190",
       "last_worked": "2026-09-28T17:50:04Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 8
     },
     {
       "symbol": "W108",
@@ -2125,7 +2124,7 @@
       "minted_during": "tick",
       "caused_by": "life",
       "last_worked": "2026-09-28T15:05:07Z",
-      "ticks_blocked": 1
+      "ticks_blocked": 3
     },
     {
       "symbol": "W114",
@@ -2181,7 +2180,8 @@
       "minted_during": "tick",
       "caused_by": "aeternum",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 0
     }
   ],
   "residue": [

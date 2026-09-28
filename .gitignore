@@ -4,3 +4,4 @@
 __pycache__/
 .claude/paths-forward.flock
 bazel-*
+.venv.uv-*/

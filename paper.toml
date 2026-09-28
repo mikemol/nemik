@@ -26,5 +26,5 @@ root = "."
 # having passed once under a different ambient interpreter. A verdict that depends on which python
 # the environment hands the check is not a verdict (nemik:W33).
 [checks.claim]
-cmd = ".venv/bin/python checks/claims.py {target}"
+cmd = ".venv/bin/python3 checks/claims.py {target}"
 witness = "checks/claims.py"

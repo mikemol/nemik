@@ -42,12 +42,14 @@ of the format:
 | `nemik-floor-asks` | Exits 1 when a `summit/floor/*.bib` ask's `waypoint` field names a missing or dropped waypoint. |
 | `nemik-serve` | The web view: `/` (dependency graph), `/graph.json`, `/graph.ttl`, `/inbound/<repo>`, `/operator`, `/wake`, `/metrics`. |
 
+`.venv` is the venv Bazel builds (`bazel build //:.venv`), the same one every test runs under;
+rebuild it after a source or lock change, and never `uv sync` into it (nemik:W101).
+
 The root defaults to `~/github` and can be set with `$NEMIK_ROOT` or `--root`. It accepts
 `<root>/<repo>/.claude/paths-forward.*` or a flat export, `<root>/<repo>/paths-forward.*`.
 
 ```console
-$ uv sync --no-editable   # a package, not the working tree; nemik warns otherwise (W94)
-$ git config core.hooksPath .githooks   # commits gate on bazel test //... (W92)
+$ ./setup.sh             # arms the pre-commit gate (W92); .venv -> bazel-bin/.venv (W104)
 $ .venv/bin/nemik-check
 $ .venv/bin/nemik-serve --port 8750
 ```
