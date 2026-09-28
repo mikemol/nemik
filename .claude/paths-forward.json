@@ -2418,11 +2418,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-09-28: life-79 accepted the shape 2026-09-28; life:W23 cites mtools:W276, mtools:W277, nemik:W128. SUMMARY's decide/act comes from the 'operator: decide|act' blocked_on prefix, the same rule mtools:W277 uses (nemik-operator's operator_category already reads it); no separate schema field. life is the first opt-in entry.",
       "issued_at": "2026-09-28T23:46:37Z",
       "minted_during": "tick",
       "caused_by": "life:W23",
-      "last_worked": null,
+      "last_worked": "2026-09-28T23:47:20Z",
       "ticks_blocked": 0
     }
   ],
