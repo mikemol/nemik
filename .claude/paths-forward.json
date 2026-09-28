@@ -1955,7 +1955,7 @@
       "title": "luthen:W185 Flux tenant: write deploy/ (kustomization, deployment restricted+PVC nemik-export ro at /export, service 8750, ImageRepository+ImagePolicy) and .forgejo/workflows/build.yml (runs-on luthen-build)",
       "status": "ready",
       "enables": [
-        "luthen:W185"
+        "luthen-observability:W185"
       ],
       "touches": [
         "deploy",
@@ -1976,7 +1976,7 @@
       "title": "Containerfile test stage: uv sync now fetches paperkit from github (W102 restored the git source) - an egress the luthen build may not have; build the test stage without that fetch (or from the bazel venv, W101)",
       "status": "ready",
       "enables": [
-        "luthen:W185"
+        "luthen-observability:W185"
       ],
       "touches": [
         "containerfile",
@@ -1998,7 +1998,7 @@
       "title": "luthen:W190 CVSS-shaped ranking: nemik-score module (vector parse, bands, policy rules) consumed by nemik-rank; --check refuses band inversion and policy-block pairs; vector field in the pf schema via mtools",
       "status": "blocked",
       "enables": [
-        "luthen:W190"
+        "luthen-observability:W190"
       ],
       "touches": [
         "nemik-rank"

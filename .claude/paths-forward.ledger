@@ -198,3 +198,4 @@
 2026-09-28T13:02:06Z  tick  W103 done      unblock   "tests consume //:.venv as their interpreter; per-target deps gone"
 2026-09-28T13:25:35Z  tick  --   answered  collapse  "luthen W185/W190 letters answered; minted W105 (deploy/), W106 (test-stage github egress from W102), W107 (nemik-score)"
 2026-09-28T13:28:05Z  tick  --   ack       collapse  "luthen ack: W106 deprioritized (host buildkitd reaches github), W107 blocked on mtools vector field"
+2026-09-28T13:46:55Z  tick  --   fixed     collapse  "enables luthen:W185/W190 -> luthen-observability:W185/W190 (workstream = repo dir); nemik-check --root ~/github: no VIOLATES. caused_by on W105/W107 still says luthen: (--update cannot set it)"
