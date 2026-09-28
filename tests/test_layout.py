@@ -23,9 +23,11 @@ sync_api = pytest.importorskip("playwright.sync_api")
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
 
-# Budgets from the fixture as generated 2026-09-28 (W120 + labels inside), plus ~10% slack.
-# Tighten them when the layout improves; a change that needs them loosened is a regression.
-BUDGET = {"cross_p95": 2800, "intra_p95": 430}
+# Budgets from the fixture as generated 2026-09-28, plus ~10% slack. Tighten them when the layout
+# improves; a change that needs them loosened is a regression. History (cross p95, intra p95, area):
+#   W125 labels inside:            2548, 387, 14.2M px^2
+#   W126 skyline packing, spacing: 2200, 370, 10.8M px^2
+BUDGET = {"cross_p95": 2450, "intra_p95": 410, "area": 11_900_000}
 
 METRICS = """() => {
   const unit = n => n.isChild() ? n.parent().id() : n.id();
@@ -89,3 +91,4 @@ def test_layout_meets_budgets_with_labels_inside(server, scheme, tmp_path) -> No
     assert m["labels_outside"] == []
     assert m["cross_p95"] <= BUDGET["cross_p95"], m
     assert m["intra_p95"] <= BUDGET["intra_p95"], m
+    assert m["width"] * m["height"] <= BUDGET["area"], m

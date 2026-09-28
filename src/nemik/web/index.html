@@ -239,21 +239,23 @@ const lexLess = (a, b) => { for (let i = 0; i < a.length; i++) if (a[i] !== b[i]
 function tile() {
   const GAP = 60;
   const units = new Map();  // unit id -> { el: collection to shift, bb }
-  // Inside each box, try each dagre alignment and keep the layout whose 95th-percentile edge length is
-  // least (operator 2026-09-28: minimize p95, for intra- and cross-box edges alike), ties broken by
-  // total length, then area. p95, not the mean: the long outliers are what make the view unreadable.
+  // Inside each box, try each dagre alignment and keep the one minimizing p95/p95_0 + area/area_0
+  // (operator 2026-09-28: minimize the 95th-percentile edge length, and the boxes' area), ties
+  // broken by total length. p95, not the mean: the long outliers are what make the view unreadable.
   cy.nodes(".repo").forEach(r => {
     const kids = r.children(), inner = kids.edgesWith(kids);
-    let best = null;
+    let best = null, first = null;
     // Measured on an 18-repo snapshot: the tight-tree and longest-path rankers never won and tripled
     // draw() time (1.0 s -> 3.0 s), so only dagre's alignment is varied.
     for (const align of [undefined, "UL", "UR", "DL", "DR"]) {
-      kids.union(rankEdges(kids)).layout({ name: "dagre", rankDir: "TB", nodeSep: 10, rankSep: 30,
+      kids.union(rankEdges(kids)).layout({ name: "dagre", rankDir: "TB", nodeSep: 8, rankSep: 20,
         align, nodeDimensionsIncludeLabels: true }).run();
       cy.remove(cy.edges(".rank"));
       const L = inner.map(e => dist(e.source().position(), e.target().position()));
       const bb = kids.boundingBox();
-      const score = [p95(L), L.reduce((a, b) => a + b, 0), bb.w * bb.h];
+      const m = { p95: p95(L) || 1, area: bb.w * bb.h };
+      first ||= m;
+      const score = [m.p95 / first.p95 + m.area / first.area, L.reduce((a, b) => a + b, 0)];
       if (!best || lexLess(score, best.score))
         best = { score, pos: new Map(kids.map(n => [n.id(), { ...n.position() }])) };
     }
@@ -288,11 +290,12 @@ function tile() {
   }
   const last = Math.max(-1, ...rank.values()) + 1;
   for (const u of units.keys()) if (!rank.has(u)) rank.set(u, last);
-  // Rows by rank. Within a row, order and offset units to shorten the edges that cross between
-  // boxes (operator 2026-09-28: "prioritize shortening cross-box edges"). Each pair of units is
-  // weighted by how many edges join them. Sweeps alternate down and up; each places a row at the
-  // weighted mean x of its neighbours in every other row (a barycenter pass, both directions), and
-  // the ordering with the least total weighted distance between unit centres is kept.
+  // Placement (operator 2026-09-28: shorten cross-box edges, minimize p95, and minimize the drawing's
+  // area). Rows by rank left a wide box's row mostly empty beside narrow ones, so boxes are packed
+  // skyline-style instead: in rank order, each goes as high as it can while staying below every box
+  // it depends on and clear of every box already placed, as near as it can to the mean x of its
+  // placed neighbours. Packing is tried at several target widths; the result kept minimizes
+  // area/area0 + p95/p95_0 (each relative to the first packing, so neither unit dominates).
   const w = new Map([...units.keys()].map(k => [k, new Map()]));
   cy.edges().forEach(e => {
     const [u, v] = [unitOf(e.source()), unitOf(e.target())];
@@ -300,82 +303,88 @@ function tile() {
     w.get(u).set(v, (w.get(u).get(v) || 0) + 1);
     w.get(v).set(u, (w.get(v).get(u) || 0) + 1);
   });
-  const rows = [];
-  for (const [u, k] of rank) (rows[k] ||= []).push(u);
-  for (const row of rows) row.sort((a, b) => units.get(b).bb.w - units.get(a).bb.w);
-  const rowY = [];
-  { let y = 0; rows.forEach((row, k) => { rowY[k] = y; y += Math.max(0, ...row.map(u => units.get(u).bb.h)) + GAP; }); }
-  const cx = new Map(), cy_ = new Map();
-  const want = u => {  // weighted mean centre x of u's neighbours in other rows
-    let s = 0, n = 0;
-    for (const [v, c] of w.get(u)) if (rank.get(v) !== rank.get(u) && cx.has(v)) { s += c * cx.get(v); n += c; }
-    return n ? s / n : null;
-  };
-  const place = k => {
-    const row = rows[k];
-    const keys = new Map(row.map(u => [u, want(u)]));
-    row.sort((a, b) => (keys.get(a) ?? Infinity) - (keys.get(b) ?? Infinity));
-    const width = row.reduce((t, u) => t + units.get(u).bb.w, 0) + GAP * (row.length - 1);
-    // offset the packed row so its linked units sit, on average, under their neighbours
-    let x = 0, s = 0, n = 0;
-    for (const u of row) {
-      const c = x + units.get(u).bb.w / 2, t = keys.get(u);
-      if (t !== null) { s += t - c; n++; }
-      x += units.get(u).bb.w + GAP;
-    }
-    x = n ? s / n : -width / 2;
-    for (const u of row) {
-      cx.set(u, x + units.get(u).bb.w / 2); cy_.set(u, rowY[k] + units.get(u).bb.h / 2);
-      x += units.get(u).bb.w + GAP;
-    }
-  };
-  // Each cross-box edge's length as it will be drawn: its endpoints' offsets inside their boxes
-  // plus where the boxes are placed. Cost is [p95, total], compared in that order.
+  const up = new Map([...units.keys()].map(k => [k, []]));
+  for (const [u, vs] of down) for (const v of vs) up.get(v).push(u);
+  const size = u => units.get(u).bb;
   const crossEdges = [];
   cy.edges().forEach(e => {
     const [a, b] = [e.source(), e.target()], [u, v] = [unitOf(a), unitOf(b)];
     if (u === v || !w.has(u) || !w.has(v)) return;
-    const rel = (n, k) => { const bb = units.get(k).bb, p = n.position(); return { k, x: p.x - bb.x1, y: p.y - bb.y1 }; };
+    const rel = (n, k) => { const bb = size(k), p = n.position(); return { x: p.x - bb.x1, y: p.y - bb.y1 }; };
     crossEdges.push([u, rel(a, u), v, rel(b, v)]);
   });
   // A box may be mirrored left-right when that brings its cross-linked nodes nearer their partners
   // (a dagre layout is as valid mirrored); `flip` holds the boxes that are.
-  const flip = new Set();
-  const at = (u, r) => ({ x: cx.get(u) - units.get(u).bb.w / 2 + (flip.has(u) ? units.get(u).bb.w - r.x : r.x),
-                          y: rowY[rank.get(u)] + r.y });
-  const cost = () => {
-    const L = crossEdges.map(([u, ru, v, rv]) => dist(at(u, ru), at(v, rv)));
-    return [p95(L), L.reduce((a, b) => a + b, 0)];
+  let pos = new Map(), flip = new Set();
+  const at = (u, r) => ({ x: pos.get(u).x + (flip.has(u) ? size(u).w - r.x : r.x), y: pos.get(u).y + r.y });
+  const cross = () => crossEdges.map(([u, ru, v, rv]) => dist(at(u, ru), at(v, rv)));
+  const area = () => {
+    let x1 = Infinity, y1 = Infinity, x2 = -Infinity, y2 = -Infinity;
+    for (const [u, p] of pos) { x1 = Math.min(x1, p.x); y1 = Math.min(y1, p.y);
+      x2 = Math.max(x2, p.x + size(u).w); y2 = Math.max(y2, p.y + size(u).h); }
+    return (x2 - x1) * (y2 - y1);
   };
-  rows.forEach((_, k) => place(k));
-  let best = { cost: cost(), order: rows.map(r => [...r]), cx: new Map(cx) };
-  for (let sweep = 0; sweep < 12; sweep++) {
-    const ks = rows.map((_, k) => k);
-    (sweep % 2 ? ks.reverse() : ks).forEach(place);
-    const c = cost();
-    if (lexLess(c, best.cost)) best = { cost: c, order: rows.map(r => [...r]), cx: new Map(cx) };
-  }
-  rows.forEach((row, k) => { rows[k] = best.order[k]; });
-  for (const [u, x] of best.cx) cx.set(u, x);
-  // Mirror pass: flip any box whose mirror image lowers the cost; repeat until nothing improves.
-  for (let round = 0, better = true; better && round < 4; round++) {
-    better = false;
-    for (const u of [...units.keys()].sort()) {
-      const before = cost();
-      flip.add(u);
-      if (lexLess(cost(), before)) better = true; else flip.delete(u);
+  const seq = [...units.keys()].sort((a, b) => rank.get(a) - rank.get(b) || size(b).w * size(b).h - size(a).w * size(a).h || (a < b ? -1 : 1));
+  // k: how far a box will drop to stay near its neighbours (score = y + k * |x - target|).
+  // prev: the previous packing, so a second pass also aims at neighbours not yet placed.
+  const pack = (W, k, prev) => {
+    pos = new Map();
+    const placed = [];
+    for (const u of seq) {
+      const { w: uw, h: uh } = size(u);
+      let minY = 0;
+      for (const v of up.get(u)) if (pos.has(v)) minY = Math.max(minY, pos.get(v).y + size(v).h + GAP);
+      let s = 0, n = 0;
+      for (const [v, c] of w.get(u)) {
+        const p = pos.get(v) || (prev && prev.get(v));
+        if (p) { s += c * (p.x + size(v).w / 2); n += c; }
+      }
+      const maxX = Math.max(0, W - uw);
+      const target = n ? Math.min(maxX, Math.max(0, s / n - uw / 2)) : 0;
+      const xs = new Set([target, 0, maxX]);
+      for (const r of placed) { xs.add(r.x2 + GAP); xs.add(r.x1 - uw - GAP); }
+      let best = null;
+      for (const x of xs) {
+        if (x < 0 || x > maxX) continue;
+        let y = minY, moved = true;
+        while (moved) {
+          moved = false;
+          for (const r of placed)
+            if (x < r.x2 + GAP && r.x1 < x + uw + GAP && y < r.y2 + GAP && r.y1 < y + uh + GAP) { y = r.y2 + GAP; moved = true; }
+        }
+        const score = y + k * Math.abs(x - target);
+        if (!best || score < best.score) best = { score, x, y };
+      }
+      pos.set(u, { x: best.x, y: best.y });
+      placed.push({ x1: best.x, y1: best.y, x2: best.x + uw, y2: best.y + uh });
     }
+  };
+  const widest = Math.max(...seq.map(u => size(u).w));
+  const side = Math.sqrt(seq.reduce((t, u) => t + (size(u).w + GAP) * (size(u).h + GAP), 0));
+  let best = null, base = null;
+  for (const f of [1, 1.25, 1.5, 1.75, 2, 2.5, 3]) for (const k of [0.25, 1, 4]) for (const again of [false, true]) {
+    pack(Math.max(widest, side * f), k, null);
+    if (again) pack(Math.max(widest, side * f), k, new Map(pos));
+    flip = new Set();
+    // Mirror pass: flip any box whose mirror image lowers the cross-edge p95 (then total).
+    const c = () => { const L = cross(); return [p95(L), L.reduce((a, b) => a + b, 0)]; };
+    for (let round = 0, better = true; better && round < 4; round++) {
+      better = false;
+      for (const u of seq) { const before = c(); flip.add(u); if (lexLess(c(), before)) better = true; else flip.delete(u); }
+    }
+    const m = { p95: p95(cross()) || 1, area: area() };
+    base ||= m;
+    const score = m.area / base.area + m.p95 / base.p95;
+    if (!best || score < best.score) best = { score, pos: new Map(pos), flip: new Set(flip) };
   }
-  for (const u of flip) {
+  for (const u of best.flip) {
     const { el, bb } = units.get(u);
     el.forEach(n => n.position({ x: bb.x1 + bb.x2 - n.position().x, y: n.position().y }));
   }
-  rows.forEach((row, k) => {
-    for (const u of best.order[k]) {
-      const { el, bb } = units.get(u);
-      el.shift({ x: best.cx.get(u) - bb.w / 2 - bb.x1, y: rowY[k] - bb.y1 });
-    }
-  });
+  for (const [u, p] of best.pos) {
+    const { el, bb } = units.get(u);
+    el.shift({ x: p.x - bb.x1, y: p.y - bb.y1 });
+  }
   cy.fit(undefined, 20);
 }
 

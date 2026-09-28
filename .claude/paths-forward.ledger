@@ -220,3 +220,4 @@
 2026-09-28T19:13:13Z  tick  --   shipped   unblock   "luthen W185 cutover live (5a2cf43): Flux ships nemik 1790620913-4204699 in ns nemik, 2/2 Ready; image_follow retired for nemik; docs/sources.md updated"
 2026-09-28T22:46:47Z  tick  W106 collapse  collapse  "W106 atomized by measured skip cause; W122 done (architecture gate runs in the image); W121 claims luthen W234"
 2026-09-28T22:52:09Z  tick  W125 done      unblock   "labels inside; layout quality is now a budgeted build test with light/dark screenshots"
+2026-09-28T23:00:16Z  tick  W126 done      collapse  "area -24%, cross p95 -14%, intra p95 -4% on the fixture"

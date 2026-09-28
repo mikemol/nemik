@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 125,
+  "counter": 127,
   "waypoints": [
     {
       "symbol": "W1",
@@ -2363,6 +2363,44 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-09-28T22:52:08Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W126",
+      "title": "Web view: minimize the drawing's area too (operator 2026-09-28: 'we don't seem to be optimizing the rectangles for minimum area')",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "web",
+        "layout"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-09-28: tile(): rank rows replaced by skyline packing (rank order; each box as high as it can below its upstream boxes and clear of placed ones, near its neighbours' weighted mean x; score y + k|x - target|), tried over 7 target widths x k in {0.25,1,4} x one/two passes (second aims at the first pass's positions), mirror pass each, kept by area/area0 + p95/p95_0. Inside boxes: dagre align chosen by p95/p95_0 + area/area_0; nodeSep 10->8, rankSep 30->20 (labels no longer below nodes). tests/test_layout fixture: cross p95 2548->2200, intra p95 387->370, area 14.2M->10.8M px^2 (-24%), total cross 97758->86381. Budgets tightened (2450/410) and an area budget added (11.9M). bazel 17/17. Open: the packing comes out portrait; the viewport is landscape, so fit-to-screen scale is width-limited.",
+      "issued_at": "2026-09-28T23:00:15Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": "2026-09-28T23:00:16Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W127",
+      "title": "Web view: pack to the viewport's aspect ratio (fit-to-screen scale), not only minimum area; the W126 packing comes out portrait on a landscape screen",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "web",
+        "layout"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-28T23:00:16Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": null,
       "ticks_blocked": 0
     }
   ],
