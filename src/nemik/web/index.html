@@ -233,7 +233,7 @@ function rankEdges(kids) {
 // cross between them, oriented downstream: a box another box waits on sits above it. Cycles are cut
 // at DFS back edges (the edge is still drawn, just not ranked). Units with no cross edges go in a
 // last row, since nothing orders them.
-// nemik:W136 (operator 2026-09-28: "a multi-headed overlapping dag/forest view ordered by
+// nemik:W135 (operator 2026-09-28: "a multi-headed overlapping dag/forest view ordered by
 // nemik-rank"). Inside one repo box: the HEADS are its goals (nothing open in the box follows
 // them); each hangs its prerequisites below it. Heads run left to right by the best nemik-rank
 // position (rank_pos, from the server's composed order) among the work beneath them. A waypoint

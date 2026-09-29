@@ -200,7 +200,7 @@ def to_json(g: Graph, findings: dict) -> dict:
         n["open_blockers"] = len(open_blockers.get(n["id"], ()))
         if n["id"].startswith(BASE):
             n["cite"] = ref(URIRef(n["id"]))
-    # nemik:W136: each ready waypoint's place in its repo's composed nemik-rank order (0 = work it
+    # nemik:W135: each ready waypoint's place in its repo's composed nemik-rank order (0 = work it
     # first), so the page can lay out a rank-ordered forest without re-deriving the ranking.
     from nemik.rank import load_composition, load_weights, rank
 
