@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 50
+      "ticks_blocked": 52
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 7,
       "weight": 1
     },
     {
@@ -1398,7 +1398,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:13:38Z",
-      "ticks_blocked": 34,
+      "ticks_blocked": 36,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1986,7 +1986,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T22:46:47Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 4,
       "weight": 0
     },
     {
@@ -2000,7 +2000,6 @@
         "nemik-rank"
       ],
       "blocked_on": [
-        "W130",
         "W131",
         "W132",
         "W133"
@@ -2132,7 +2131,7 @@
       "minted_during": "tick",
       "caused_by": "life",
       "last_worked": "2026-09-28T15:05:07Z",
-      "ticks_blocked": 6
+      "ticks_blocked": 8
     },
     {
       "symbol": "W114",
@@ -2288,7 +2287,8 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W234",
       "last_worked": "2026-09-28T23:46:44Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 8
     },
     {
       "symbol": "W122",
@@ -2457,12 +2457,12 @@
       "minted_during": "tick",
       "caused_by": "life:W23",
       "last_worked": "2026-09-29T00:28:20Z",
-      "ticks_blocked": 1
+      "ticks_blocked": 3
     },
     {
       "symbol": "W130",
       "title": "W107a: re-vendor the pathsforward wheel at mtools 23f1223 (vector + vector_source fields, vector.py grammar); vendor/wheels README history",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W107"
       ],
@@ -2472,18 +2472,19 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-09-29: vendor/wheels/mikemol_pathsforward-0.1.0+23f1223 built per the README recipe (git archive 23f1223 -- pathsforward; uv build); 345c06c wheel removed; MODULE.bazel + pyproject + uv.lock (sha256:2b9b1407...) + README history. //:.venv rebuilt: mikemol.pathsforward.vector exposes parse/METRICS/SOURCES/VERSION; .venv/bin/mikemol-paths-forward --state .claude/paths-forward.json --check prints 'UNSCORED 22' (new). bazel 18/18; nemik-check --root ~/github exit 0.",
       "issued_at": "2026-09-29T00:22:16Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-09-29T01:02:28Z",
+      "ticks_blocked": 0,
+      "weight": 12
     },
     {
       "symbol": "W131",
       "title": "W107b: adapter carries vector/vector_source into the graph (parsed by mtools' vector.py, never re-parsed); nemik-score module: declared band table (src/nemik/data/bands.toml) maps a vector to a band; unscored = the table's default band",
-      "status": "blocked",
+      "status": "ready",
       "enables": [
         "W107"
       ],
@@ -2491,17 +2492,15 @@
         "nemik-rank",
         "adapter"
       ],
-      "blocked_on": [
-        "W130"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-09-29T00:22:16Z",
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-29T00:22:17Z",
-      "ticks_blocked": 1
+      "ticks_blocked": 0
     },
     {
       "symbol": "W132",
@@ -2523,7 +2522,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-29T00:22:17Z",
-      "ticks_blocked": 1
+      "ticks_blocked": 3
     },
     {
       "symbol": "W133",
@@ -2545,7 +2544,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-29T00:22:17Z",
-      "ticks_blocked": 1
+      "ticks_blocked": 3
     },
     {
       "symbol": "W134",
@@ -2568,7 +2567,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-29T00:28:20Z",
-      "ticks_blocked": 1
+      "ticks_blocked": 3
     }
   ],
   "residue": [
@@ -2597,5 +2596,6 @@
   "job_id": "2c987931",
   "heartbeat": "2026-09-27T17:01:16Z",
   "lock": null,
-  "predecessor_job_id": "59bd16b3"
+  "predecessor_job_id": "59bd16b3",
+  "leases": []
 }
