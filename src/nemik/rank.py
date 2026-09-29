@@ -33,6 +33,67 @@ def load_weights(text: str | None = None) -> Weights:
     return Weights(local=int(data["local"]), peer=int(data["peer"]), peer_blocked=int(data["peer_blocked"]))
 
 
+OBJECTIVES = ("operator", "band", "weight")
+
+
+@dataclass(frozen=True)
+class Composition:
+    tiers: tuple[tuple[str, ...], ...]
+    scalarize: dict[str, float]
+
+
+def load_composition(text: str | None = None) -> Composition:
+    """Read [order] from the weights file (nemik:W132); `text` overrides it (for tests)."""
+    if text is None:
+        text = files("nemik.data").joinpath("rank-weights.toml").read_text()
+    o = tomllib.loads(text).get("order", {})
+    tiers = tuple(tuple(t) for t in o.get("tiers", [["weight"]]))
+    unknown = {x for t in tiers for x in t} - set(OBJECTIVES)
+    if unknown:
+        raise ValueError(f"rank-weights.toml [order]: unknown objectives {sorted(unknown)}")
+    return Composition(tiers, {k: float(v) for k, v in o.get("scalarize", {}).items()})
+
+
+def _dominates(a: dict, b: dict, objs: tuple[str, ...]) -> bool:
+    return all(a[o] >= b[o] for o in objs) and any(a[o] > b[o] for o in objs)
+
+
+def compose(rows: list[dict], comp: Composition) -> list[dict]:
+    """Order rows by the declared composition; each row gets `key` (equal keys are true ties).
+
+    Across tiers: lexicographic. Within a tier: Pareto fronts (non-dominated sorting), then the
+    tier's weighted sum inside a front, then the next tier on what is still tied.
+    """
+    def go(items: list[dict], tiers: tuple[tuple[str, ...], ...], prefix: tuple) -> list[dict]:
+        if not tiers:
+            for r in items:
+                r["key"] = prefix
+            return sorted(items, key=lambda r: int(r["symbol"].lstrip("W")))
+        objs, rest, out = tiers[0], tiers[1:], []
+        remaining, front_no = list(items), 0
+        while remaining:
+            front = [a for a in remaining if not any(_dominates(b, a, objs) for b in remaining)]
+            remaining = [a for a in remaining if a not in front]
+            scal = {id(a): sum(comp.scalarize.get(o, 1.0) * a[o] for o in objs) for a in front}
+            for v in sorted({scal[id(a)] for a in front}, reverse=True):
+                out += go([a for a in front if scal[id(a)] == v], rest, (*prefix, front_no, -v))
+            front_no += 1
+        return out
+    return go(list(rows), comp.tiers, ())
+
+
+def objectives(g: Graph, n: URIRef, weights: Weights, bands) -> dict:
+    from rdflib.namespace import PROV
+
+    from nemik.score import band
+
+    cause = str(g.value(n, PROV.wasInformedBy) or "").strip().lower()
+    b, why = band(str(g.value(n, NEMIK.vector) or "") or None, bands)
+    down = downstream_weight(g, n, weights)
+    return {"operator": int(cause == "operator" or cause.startswith("operator:")),
+            "band": -bands.rank(b), "band_name": b, "band_why": why, "weight": down, "downstream": down}
+
+
 def _repo(node: URIRef) -> str:
     return str(node).removeprefix(BASE).partition("/")[0]
 
@@ -158,20 +219,27 @@ def umbrellas(g: Graph, repo: str) -> list[URIRef]:
             if (n, OSLC_CM.state, NEMIK.Ready) in g and is_umbrella(g, n)]
 
 
-def rank(g: Graph, repo: str, weights: Weights) -> list[dict]:
-    """Every ready leaf in `repo`, highest cross-repo downstream weight first (lower symbol on ties).
+def rank(g: Graph, repo: str, weights: Weights, comp: Composition | None = None) -> list[dict]:
+    """Every ready leaf in `repo`, in the declared composed order (nemik:W132; lower symbol on ties).
 
     Umbrellas are left out: their open children are what can be worked (nemik:W74).
     """
     ws = workstream_uri(repo)
     ready = [n for n in g.subjects(NEMIK.workstream, ws)
              if (n, OSLC_CM.state, NEMIK.Ready) in g and not is_umbrella(g, n)]
-    rows = [{
-        "symbol": str(g.value(n, NEMIK.symbol)),
-        "weight": downstream_weight(g, n, weights),
-        "title": str(g.value(n, DCTERMS.title) or ""),
-    } for n in ready]
-    return sorted(rows, key=lambda r: (-r["weight"], int(r["symbol"].lstrip("W"))))
+    from nemik.score import load_bands
+
+    bands = load_bands()
+    rows = [{"symbol": str(g.value(n, NEMIK.symbol)), "title": str(g.value(n, DCTERMS.title) or ""),
+             **objectives(g, n, weights, bands)} for n in ready]
+    out = compose(rows, comp or load_composition())
+    # mtools sorts a queue by stored `weight` (--weights-from), so `weight` carries the COMPOSED
+    # order: highest first, distinct unless two rows truly tie. The raw sum stays in `downstream`.
+    keys = sorted({r["key"] for r in out}, reverse=True)
+    for r in out:
+        r["weight"] = keys.index(r["key"]) + 1
+        r["key"] = list(r["key"])
+    return out
 
 
 def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
@@ -230,7 +298,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         print(json.dumps(rows, indent=2))
         return
     for r in rows:
-        print(f"{r['symbol']:6} {r['weight']:4}  {r['title'][:80]}")
+        print(f"{r['symbol']:6} {r['band_name']:9} op={r['operator']} down={r['downstream']:<4} {r['title'][:70]}")
 
 
 def drift(g: Graph, repo: str, weights: Weights) -> tuple[dict, dict] | None:
@@ -247,4 +315,4 @@ def drift(g: Graph, repo: str, weights: Weights) -> tuple[dict, dict] | None:
     pos = {str(g.value(n, NEMIK.symbol)): int(g.value(n, NEMIK.queuePosition))
            for n in g.subjects(NEMIK.workstream, ws) if g.value(n, NEMIK.queuePosition) is not None}
     nxt = min(rows, key=lambda r: pos.get(r["symbol"], 1 << 30))
-    return (nxt, rows[0]) if rows[0]["weight"] > nxt["weight"] else None
+    return (nxt, rows[0]) if rows[0]["weight"] > nxt["weight"] else None  # composed order (W132)

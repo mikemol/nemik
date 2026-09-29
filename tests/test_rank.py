@@ -68,7 +68,8 @@ def test_rank_orders_ready_items_by_weight_then_symbol() -> None:
     g.add((_wp(g, "b", "W1", "blocked"), NEMIK.waitsFor, hi))
     rows = rank(g, "a", W)
     assert [r["symbol"] for r in rows] == ["W9", "W2"]  # blocked W3 excluded
-    assert rows[0]["weight"] == 8
+    assert rows[0]["downstream"] == 8  # the raw cross-repo sum
+    assert rows[0]["weight"] > rows[1]["weight"]  # `weight` carries the composed order (W132)
 
 
 def _ready(g: Graph, repo: str, sym: str, pos: int):
@@ -105,3 +106,44 @@ def test_umbrella_children_are_direct_feeders_not_transitive_leaves() -> None:
         g.add((leaf, NEMIK.enables, w60))
     assert children(g, w59) == {w60}
     assert frontier(g, w59)[0] == {w132, w78}
+
+
+def _row(sym, operator=0, band=-3, weight=0):
+    return {"symbol": sym, "operator": operator, "band": band, "weight": weight}
+
+
+def test_compose_lexicographic_is_one_objective_per_tier() -> None:
+    from nemik.rank import Composition, compose
+
+    rows = [_row("W1", band=-3, weight=50), _row("W2", band=-1, weight=0), _row("W3", operator=1, band=-4)]
+    lex = Composition((("operator",), ("band",), ("weight",)), {})
+    assert [r["symbol"] for r in compose(rows, lex)] == ["W3", "W2", "W1"]
+
+
+def test_compose_pareto_front_then_scalarized_within_it() -> None:
+    from nemik.rank import Composition, compose
+
+    # W1 (band -3, weight 50) and W2 (band -1, weight 0) are both on the first front of
+    # [band, weight]; W4 is dominated by W1. Inside the front, 100 per band step beats 50 weight.
+    rows = [_row("W1", band=-3, weight=50), _row("W2", band=-1, weight=0), _row("W4", band=-3, weight=10)]
+    comp = Composition((("operator",), ("band", "weight")), {"band": 100, "weight": 1})
+    assert [r["symbol"] for r in compose(rows, comp)] == ["W2", "W1", "W4"]
+    # Weight the trade the other way and the same front flips; the dominated W4 stays last.
+    comp = Composition((("operator",), ("band", "weight")), {"band": 10, "weight": 1})
+    assert [r["symbol"] for r in compose(rows, comp)] == ["W1", "W2", "W4"]
+
+
+def test_operator_asks_rank_first_under_the_packaged_composition() -> None:
+    from nemik.rank import compose, load_composition
+
+    rows = [_row("W1", band=0, weight=999), _row("W2", operator=1, band=-4, weight=0)]
+    assert [r["symbol"] for r in compose(rows, load_composition())] == ["W2", "W1"]
+
+
+def test_composition_refuses_an_unknown_objective() -> None:
+    import pytest
+
+    from nemik.rank import load_composition
+
+    with pytest.raises(ValueError, match="unknown objectives"):
+        load_composition('[order]\ntiers = [["age"]]\n')

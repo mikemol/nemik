@@ -227,3 +227,4 @@
 2026-09-29T00:28:21Z  tick  W128 done      unblock   "operator asks as VTODOs + nemik-ics; unblocks W121 and life:W23"
 2026-09-29T01:02:29Z  tick  W130 done      unblock   "pathsforward at 23f1223 (vector fields); W131 unblocked"
 2026-09-29T01:29:46Z  tick  W131 done      unblock   "vector -> declared band (nemik.score); W132 unblocked"
+2026-09-29T01:35:34Z  tick  W132 done      collapse  "parameterizable composition (tiers x Pareto x scalarize); W111 absorbed"

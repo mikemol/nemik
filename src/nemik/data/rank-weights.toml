@@ -16,3 +16,25 @@
 local = 1
 peer = 2
 peer_blocked = 8
+
+# nemik:W132 (luthen-observability:W190; operator 2026-09-28: "a parameterizable pareto function"):
+# how nemik-rank COMPOSES its objectives into one order. Every objective is maximized:
+#   operator  1 when the operator asked for the waypoint (caused_by = operator), else 0 (nemik:W111:
+#             "operator ask beats backlog")
+#   band      urgency from the vector (data/bands.toml): 0 for the most urgent band, -1 the next ...
+#   weight    cross-repo downstream weight (the edge weights above)
+# `tiers` are compared lexicographically, one after another. WITHIN a tier, items are split into
+# Pareto fronts: the first front is every item no other item in the tier beats on all of the tier's
+# objectives. Within a front, `scalarize` orders them by a weighted sum. Remaining ties go to the
+# next tier, then to the lower symbol.
+#   pure lexicographic: tiers = [["operator"], ["band"], ["weight"]]
+#   one Pareto tier:    tiers = [["operator", "band", "weight"]]
+# The default keeps the operator's ruling strict, then trades band against downstream weight: one
+# band step is worth 100 units of downstream weight within a front.
+[order]
+tiers = [["operator"], ["band", "weight"]]
+
+[order.scalarize]
+operator = 1
+band = 100
+weight = 1
