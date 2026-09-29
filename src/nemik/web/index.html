@@ -52,6 +52,7 @@ aside a { color: var(--ink); text-decoration: underline dotted var(--muted); }
   <label><input type="checkbox" id="showDone"> show done/dropped</label>
   <label><input type="checkbox" id="showNoise"> show operator blocks that don't need you</label>
   <label><input type="checkbox" id="showCross"> show all cross-repo edges</label>
+  <label title="Inside each repo: its goals left to right in nemik-rank order, each with the work beneath it"><input type="checkbox" id="forest"> rank forest</label>
   <span class="stat" id="stat"></span>
 </header>
 <main>
@@ -232,6 +233,99 @@ function rankEdges(kids) {
 // cross between them, oriented downstream: a box another box waits on sits above it. Cycles are cut
 // at DFS back edges (the edge is still drawn, just not ranked). Units with no cross edges go in a
 // last row, since nothing orders them.
+// nemik:W136 (operator 2026-09-28: "a multi-headed overlapping dag/forest view ordered by
+// nemik-rank"). Inside one repo box: the HEADS are its goals (nothing open in the box follows
+// them); each hangs its prerequisites below it. Heads run left to right by the best nemik-rank
+// position (rank_pos, from the server's composed order) among the work beneath them. A waypoint
+// several heads share is drawn once, under the highest-ranked of them; its edges to the others
+// cross over (the overlap). Within a layer, ready work sits in rank order.
+function forest(box) {
+  // Operator chips are not prerequisites: they are placed after, below the askers (see end).
+  const chips = box.filter(".actor"), kids = box.not(".actor");
+  const ids = new Set(kids.map(n => n.id()));
+  const feeds = new Map(kids.map(n => [n.id(), new Set()]));   // dependent -> its prerequisites
+  const follows = new Map(kids.map(n => [n.id(), new Set()])); // prerequisite -> its dependents
+  kids.edgesWith(kids).forEach(e => {
+    let [pre, dep] = [e.source().id(), e.target().id()];     // enables: prerequisite -> dependent
+    if (e.hasClass("waits")) [pre, dep] = [dep, pre];         // waits: waiter -> what it waits for
+    if (!ids.has(pre) || !ids.has(dep) || pre === dep) return;
+    feeds.get(dep).add(pre); follows.get(pre).add(dep);
+  });
+  const rp = id => { const v = cy.getElementById(id).data("rank_pos"); return v === undefined ? Infinity : v; };
+  const sym = id => cy.getElementById(id).data("label") || id;
+  const byRank = (a, b) => rp(a) - rp(b) || (sym(a) < sym(b) ? -1 : sym(a) > sym(b) ? 1 : 0);
+  const below = h => {  // everything under a head, following prerequisites
+    const seen = new Set([h]), stack = [h];
+    while (stack.length) for (const p of feeds.get(stack.pop())) if (!seen.has(p)) { seen.add(p); stack.push(p); }
+    return seen;
+  };
+  let heads = [...ids].filter(id => follows.get(id).size === 0);
+  if (!heads.length) heads = [...ids];  // a cycle with no exit: every member is its own head
+  const trees = new Map(heads.map(h => [h, below(h)]));
+  const best = h => Math.min(...[...trees.get(h)].map(rp));
+  heads.sort((a, b) => best(a) - best(b) || byRank(a, b));
+  const owner = new Map();
+  for (const h of heads) for (const n of trees.get(h)) if (!owner.has(n)) owner.set(n, h);
+  for (const n of ids) if (!owner.has(n)) owner.set(n, heads[0]);
+  // Layer = longest path down from a head, over the DAG left after a DFS drops back edges (a
+  // cycle is cut at one edge, still drawn; without the cut, depth ran around it to its bound).
+  const dag = new Map([...ids].map(n => [n, []])), mark = new Map();
+  const cut = n => {
+    mark.set(n, 1);
+    for (const p of [...feeds.get(n)].sort()) {
+      if (mark.get(p) === 1) continue;  // back edge
+      dag.get(n).push(p);
+      if (!mark.has(p)) cut(p);
+    }
+    mark.set(n, 2);
+  };
+  for (const h of heads) if (!mark.has(h)) cut(h);
+  for (const n of [...ids].sort()) if (!mark.has(n)) cut(n);
+  const topo = [], seen = new Set();
+  const visit = n => { if (seen.has(n)) return; seen.add(n); for (const p of dag.get(n)) visit(p); topo.push(n); };
+  for (const n of [...ids].sort()) visit(n);
+  const depth = new Map([...ids].map(n => [n, 0]));
+  for (const n of topo.reverse()) for (const p of dag.get(n)) depth.set(p, Math.max(depth.get(p), depth.get(n) + 1));
+  const SEP = 8, ROW = 20;
+  const h = kids.length ? Math.max(...kids.map(n => n.outerHeight())) : 20;
+  // Each head's column, laid out at the origin: layers down, rank order across.
+  const cols = [];
+  for (const head of heads) {
+    const layers = [];
+    for (const n of ids) if (owner.get(n) === head) (layers[depth.get(n)] ||= []).push(n);
+    const place = [];
+    let w = 0;
+    layers.forEach((layer, d) => {
+      if (!layer) return;
+      layer.sort(byRank);
+      let x = 0;
+      for (const id of layer) { const nw = cy.getElementById(id).outerWidth(); place.push([id, x + nw / 2, d * (h + ROW)]); x += nw + SEP; }
+      w = Math.max(w, x - SEP);
+    });
+    if (place.length) cols.push({ place, w, h: layers.length * (h + ROW) - ROW });
+  }
+  // Shelves: columns keep rank order, left to right then top to bottom, wrapping near sqrt(area)
+  // so one repo with many lone goals does not become a single very wide row.
+  const limit = Math.max(...cols.map(c => c.w), 1.6 * Math.sqrt(cols.reduce((t, c) => t + (c.w + 3 * SEP) * (c.h + ROW), 0)));
+  let x0 = 0, y0 = 0, shelfH = 0;
+  for (const c of cols) {
+    if (x0 > 0 && x0 + c.w > limit) { x0 = 0; y0 += shelfH + 2 * ROW; shelfH = 0; }
+    for (const [id, x, y] of c.place) cy.getElementById(id).position({ x: x0 + x, y: y0 + y });
+    x0 += c.w + 3 * SEP; shelfH = Math.max(shelfH, c.h);
+  }
+  // A chip goes below everything, under the mean x of the waypoints that ask it.
+  let cx = 0;
+  const floor = y0 + shelfH + h + 2 * ROW;
+  chips.forEach(c => {
+    const xs = c.connectedEdges().map(e => e.source().position().x).filter(Number.isFinite);
+    const w = c.outerWidth();
+    const want = xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : cx + w / 2;
+    const x = Math.max(cx + w / 2, want);
+    c.position({ x, y: floor });
+    cx = x + w / 2 + SEP;
+  });
+}
+
 const dist = (p, q) => Math.hypot(p.x - q.x, p.y - q.y);
 const p95 = L => { if (!L.length) return 0; const s = [...L].sort((a, b) => a - b); return s[Math.min(s.length - 1, Math.floor(0.95 * s.length))]; };
 const lexLess = (a, b) => { for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return a[i] < b[i]; return false; };
@@ -242,8 +336,10 @@ function tile() {
   // Inside each box, try each dagre alignment and keep the one minimizing p95/p95_0 + area/area_0
   // (operator 2026-09-28: minimize the 95th-percentile edge length, and the boxes' area), ties
   // broken by total length. p95, not the mean: the long outliers are what make the view unreadable.
+  const forestOn = document.getElementById("forest").checked;
   cy.nodes(".repo").forEach(r => {
     const kids = r.children(), inner = kids.edgesWith(kids);
+    if (forestOn) { forest(r.children()); units.set(r.id(), { el: kids, bb: kids.boundingBox() }); return; }
     let best = null, first = null;
     // Measured on an 18-repo snapshot: the tight-tree and longest-path rankers never won and tripled
     // draw() time (1.0 s -> 3.0 s), so only dagre's alignment is varied.
@@ -531,6 +627,12 @@ for (const id of ["wake", "goals"]) document.getElementById(id).addEventListener
 document.getElementById("repo").onchange = () => { draw(); findings(); goals(); tool(); };
 document.getElementById("showDone").onchange = draw;
 document.getElementById("showNoise").onchange = draw;
+// The forest toggle is a per-viewer preference; storage can be missing or throw (private window).
+try { document.getElementById("forest").checked = localStorage.getItem("nemik.forest") === "1"; } catch (e) { /* default off */ }
+document.getElementById("forest").onchange = () => {
+  try { localStorage.setItem("nemik.forest", document.getElementById("forest").checked ? "1" : "0"); } catch (e) { /* not remembered */ }
+  draw();
+};
 document.getElementById("showCross").onchange = () => cy && cy.edges(".cross").length && (
   document.getElementById("showCross").checked ? cy.edges(".cross").addClass("lit")
   : (cy.edges(".cross").removeClass("lit"), cy.nodes(":selected").connectedEdges(".cross").addClass("lit")));

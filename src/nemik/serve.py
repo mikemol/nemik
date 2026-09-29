@@ -200,6 +200,16 @@ def to_json(g: Graph, findings: dict) -> dict:
         n["open_blockers"] = len(open_blockers.get(n["id"], ()))
         if n["id"].startswith(BASE):
             n["cite"] = ref(URIRef(n["id"]))
+    # nemik:W136: each ready waypoint's place in its repo's composed nemik-rank order (0 = work it
+    # first), so the page can lay out a rank-ordered forest without re-deriving the ranking.
+    from nemik.rank import load_composition, load_weights, rank
+
+    weights, comp = load_weights(), load_composition()
+    by_id = {n["id"]: n for n in nodes}
+    for repo in sorted({n["repo"] for n in nodes if n["state"] == "ready"}):
+        for i, r in enumerate(rank(g, repo, weights, comp)):
+            if n := by_id.get(f"{BASE}{repo}/{r['symbol']}"):
+                n["rank_pos"], n["band"] = i, r["band_name"]
     # nemik:W119: a total order on everything drawn. rdflib iterates in hash order, and Python salts
     # str hashes per process, so without this every server start (and every rebuild after an
     # insertion) handed the layout the same graph in a different order, and dagre/cytoscape laid it

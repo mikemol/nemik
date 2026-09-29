@@ -69,6 +69,14 @@ def server():
     proc.wait()
 
 
+NODE_OVERLAPS = """() => {
+  const ns = cy.nodes("[symbol], .actor").filter(n => n.visible());
+  const hit = (a, b) => a.x1 < b.x2 && b.x1 < a.x2 && a.y1 < b.y2 && b.y1 < a.y2;
+  const out = [];
+  ns.forEach(a => ns.forEach(b => { if (a.id() < b.id() && hit(a.boundingBox(), b.boundingBox())) out.push(a.id() + " x " + b.id()); }));
+  return out;
+}"""
+
 @pytest.mark.parametrize("scheme", ["light", "dark"])
 def test_layout_meets_budgets_with_labels_inside(server, scheme, tmp_path) -> None:
     out = Path(os.environ.get("TEST_UNDECLARED_OUTPUTS_DIR") or tmp_path)
@@ -92,3 +100,33 @@ def test_layout_meets_budgets_with_labels_inside(server, scheme, tmp_path) -> No
     assert m["cross_p95"] <= BUDGET["cross_p95"], m
     assert m["intra_p95"] <= BUDGET["intra_p95"], m
     assert m["width"] * m["height"] <= BUDGET["area"], m
+
+
+def test_rank_forest_view(server, tmp_path) -> None:
+    out = Path(os.environ.get("TEST_UNDECLARED_OUTPUTS_DIR") or tmp_path)
+    with sync_api.sync_playwright() as p:
+        try:
+            exe = os.environ.get("NEMIK_CHROMIUM")
+            browser = p.chromium.launch(executable_path=os.path.abspath(exe) if exe else None)
+        except Exception as e:  # noqa: BLE001 - no browser installed here
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": 1700, "height": 1250}, color_scheme="dark")
+        errors: list[str] = []
+        page.on("pageerror", lambda e: errors.append(str(e)))
+        page.goto(server)
+        page.wait_for_function("() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0", timeout=60000)
+        ranked = page.evaluate("() => cy.nodes('[rank_pos]').length")
+        page.check("#forest")
+        page.wait_for_timeout(500)
+        m = page.evaluate(METRICS)
+        overlaps = page.evaluate(NODE_OVERLAPS)
+        page.screenshot(path=str(out / "forest-dark.png"))
+        page.evaluate("() => cy.fit(cy.getElementById('repo:life'), 20)")
+        page.wait_for_timeout(300)
+        page.screenshot(path=str(out / "forest-life.png"))
+        browser.close()
+    (out / "forest-dark.json").write_text(json.dumps(m, indent=1))
+    assert errors == []
+    assert ranked > 0  # the server ships nemik-rank's composed order
+    assert overlaps == []
+    assert m["labels_outside"] == []

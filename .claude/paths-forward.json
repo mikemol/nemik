@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 134,
+  "counter": 135,
   "waypoints": [
     {
       "symbol": "W1",
@@ -2564,6 +2564,26 @@
       "caused_by": null,
       "last_worked": "2026-09-29T00:28:20Z",
       "ticks_blocked": 6
+    },
+    {
+      "symbol": "W135",
+      "title": "Web view: multi-headed overlapping DAG/forest ordered by nemik-rank (operator 2026-09-28)",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "web",
+        "layout",
+        "nemik-rank"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-09-29: serve: graph.json nodes carry rank_pos (index in the repo's composed nemik-rank order, W132) and band. index.html 'rank forest' toggle (remembered per viewer, guarded storage): inside each repo box, heads = goals (nothing open in the box follows them), ordered by the best rank_pos beneath them; prerequisites hang below (enables pre->dep; waits waiter->blocker); a shared waypoint drawn once under its highest-ranked head, edges to others cross (overlap); layers by longest path over the DAG left after a DFS cuts back edges (without the cut, cycle members sank to depth |box|: 11758 px tall); layers sorted by rank_pos; head columns wrap onto shelves near 1.6*sqrt(area) in rank order; operator chips excluded from the forest and placed below their askers. test_layout.test_rank_forest_view: rank_pos present, no node overlaps, labels inside, forest-dark.{png,json} + forest-life.png outputs. Fixture: 2038x5352 (10.9M px^2, as the normal view), intra p95 377, cross p95 3654 (normal view 2200: the forest's narrower, taller boxes stack more). bazel 19/19.",
+      "issued_at": "2026-09-29T01:51:48Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": "2026-09-29T01:51:48Z",
+      "ticks_blocked": 0
     }
   ],
   "residue": [
