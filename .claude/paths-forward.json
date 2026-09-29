@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 133,
+  "counter": 134,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 49
+      "ticks_blocked": 50
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "weight": 1
     },
     {
@@ -1398,7 +1398,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:13:38Z",
-      "ticks_blocked": 33,
+      "ticks_blocked": 34,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1986,7 +1986,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T22:46:47Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "weight": 0
     },
     {
@@ -2012,7 +2012,7 @@
       "minted_during": "tick",
       "caused_by": "luthen:W190",
       "last_worked": "2026-09-29T00:22:17Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "weight": 8
     },
     {
@@ -2132,7 +2132,7 @@
       "minted_during": "tick",
       "caused_by": "life",
       "last_worked": "2026-09-28T15:05:07Z",
-      "ticks_blocked": 5
+      "ticks_blocked": 6
     },
     {
       "symbol": "W114",
@@ -2414,7 +2414,7 @@
     {
       "symbol": "W128",
       "title": "Operator asks as VTODOs: one projection (nemik.vtodo: SUMMARY = stated decide/act ask, UID nemik:<repo>:W<n>, RELATED-TO the waypoints it releases, DUE from mtools' date field when present), host-side nemik-ics writing a local .ics; per-repo opt-in; never in the export or nemik-serve",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "life:W23",
         "W121"
@@ -2426,11 +2426,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-09-28: life-79 accepted the shape 2026-09-28; life:W23 cites mtools:W276, mtools:W277, nemik:W128. SUMMARY's decide/act comes from the 'operator: decide|act' blocked_on prefix, the same rule mtools:W277 uses (nemik-operator's operator_category already reads it); no separate schema field. life is the first opt-in entry. | 2026-09-28: Widened 2026-09-28 (operator via life-79: 'vcal has better support for time-based events and triggers'): VTODOs carry mtools:W276's RFC 5545 time fields through unchanged (DUE/DTSTART, RRULE, VALARM, PERCENT-COMPLETE), so a timed ask alerts via Akonadi and the W121 Google Tasks sink.",
+      "evidence": "2026-09-28: life-79 accepted the shape 2026-09-28; life:W23 cites mtools:W276, mtools:W277, nemik:W128. SUMMARY's decide/act comes from the 'operator: decide|act' blocked_on prefix, the same rule mtools:W277 uses (nemik-operator's operator_category already reads it); no separate schema field. life is the first opt-in entry. | 2026-09-28: Widened 2026-09-28 (operator via life-79: 'vcal has better support for time-based events and triggers'): VTODOs carry mtools:W276's RFC 5545 time fields through unchanged (DUE/DTSTART, RRULE, VALARM, PERCENT-COMPLETE), so a timed ask alerts via Akonadi and the W121 Google Tasks sink. | 2026-09-29: src/nemik/vtodo.py + nemik-ics (pyproject, //:.venv). Needs-you asks from repos listed in ~/.config/nemik/ics.toml (missing file = none); UID nemik:<repo>:W<n>; SUMMARY '<decide|act>: <ask>' from the EXPLICIT prefix (same rule as nemik-operator, mtools:W277); DESCRIPTION title + ask + waiting/same-ask; RELATED-TO;RELTYPE=CHILD per waiting waypoint; CATEGORIES nemik,<repo>; URL with --link; DTSTAMP from last ledger activity (epoch if none), so output depends only on the queues; RFC 5545 escaping, 75-octet folding, CRLF; --out writes atomically. tests/test_vtodo.py (3); skill documents nemik-ics; bazel 18/18. Live (opt-in life, resumes): 7 VTODOs, parsed back by the icalendar package. Time fields split to W134 (blocked on mtools:W276).",
       "issued_at": "2026-09-28T23:46:37Z",
       "minted_during": "tick",
       "caused_by": "life:W23",
-      "last_worked": "2026-09-28T23:49:53Z",
+      "last_worked": "2026-09-29T00:28:21Z",
       "ticks_blocked": 0,
       "weight": 18
     },
@@ -2447,7 +2447,7 @@
       ],
       "blocked_on": [
         "W113",
-        "W128",
+        "W134",
         "mtools:W276"
       ],
       "blocked_kind": "agent",
@@ -2456,7 +2456,7 @@
       "issued_at": "2026-09-28T23:49:54Z",
       "minted_during": "tick",
       "caused_by": "life:W23",
-      "last_worked": "2026-09-28T23:49:54Z",
+      "last_worked": "2026-09-29T00:28:20Z",
       "ticks_blocked": 1
     },
     {
@@ -2501,7 +2501,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-29T00:22:17Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 1
     },
     {
       "symbol": "W132",
@@ -2523,7 +2523,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-29T00:22:17Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 1
     },
     {
       "symbol": "W133",
@@ -2545,7 +2545,30 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-29T00:22:17Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 1
+    },
+    {
+      "symbol": "W134",
+      "title": "W128 time fields: VTODOs carry mtools:W276's RFC 5545 fields through (DUE/DTSTART, RRULE, VALARM, PERCENT-COMPLETE), read via mtools' reader, never from prose",
+      "status": "blocked",
+      "enables": [
+        "life:W23",
+        "W129"
+      ],
+      "touches": [
+        "vtodo"
+      ],
+      "blocked_on": [
+        "mtools:W276"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-29T00:28:20Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-09-29T00:28:20Z",
+      "ticks_blocked": 1
     }
   ],
   "residue": [

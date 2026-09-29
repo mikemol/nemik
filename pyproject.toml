@@ -26,6 +26,7 @@ nemik-rank = "nemik.rank:main"
 nemik-floor-asks = "nemik.floorasks:main"
 nemik-overlaps = "nemik.overlaps:main"
 nemik-witnesses = "nemik.witnesses:main"
+nemik-ics = "nemik.vtodo:main"
 
 [project.optional-dependencies]
 docs = [
