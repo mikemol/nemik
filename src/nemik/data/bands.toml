@@ -1,0 +1,52 @@
+# nemik:W131 (luthen-observability:W190): how a waypoint's vector becomes a priority band.
+#
+# Declared data, not code: nemik owns composition (mtools stores and validates the WV:1 vector,
+# mtools:W248). Bands are listed most urgent first. A waypoint takes the FIRST band that has a rule
+# it matches; a rule matches when every metric it names has one of the listed values (AND within a
+# rule, OR across a band's rules). A vector no rule matches takes `unmatched`; a waypoint with no
+# vector takes `unscored` -- declared here, never a silent zero, and never written into the queue.
+#
+# Metrics (mtools vector.py, luthen W218): R reach L|T|C|H (local, tenant, cluster, host),
+# E egress Y|N, C/I/A impact N|L|H, X precondition N|P, S scope U|C (C = crosses a trust boundary),
+# F fix known K|U, W witness Y|N.
+#
+# These first rules are a starting calibration against luthen's live trust-boundary items (W188);
+# luthen, the first consumer, may propose changes by letter.
+
+order = ["critical", "high", "elevated", "normal", "low"]
+unscored = "normal"
+unmatched = "normal"
+
+# Host reach across a trust boundary, host integrity, or confidential data leaving the host.
+[[band.critical]]
+R = ["H"]
+S = ["C"]
+[[band.critical]]
+R = ["H"]
+I = ["H"]
+[[band.critical]]
+E = ["Y"]
+C = ["H"]
+
+# Cluster reach, any trust-boundary crossing, or high confidentiality/integrity impact.
+[[band.high]]
+R = ["C"]
+[[band.high]]
+S = ["C"]
+[[band.high]]
+C = ["H"]
+[[band.high]]
+I = ["H"]
+
+# Tenant reach, or availability at risk.
+[[band.elevated]]
+R = ["T"]
+[[band.elevated]]
+A = ["H"]
+
+# Local, and no impact at all.
+[[band.low]]
+R = ["L"]
+C = ["N"]
+I = ["N"]
+A = ["N"]

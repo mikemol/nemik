@@ -120,6 +120,12 @@ def queue_graph(repo: str, state_path: Path, known: frozenset[str] = frozenset()
         # mtools 2e21902: derived from the tick lock at mint time, never by the agent.
         if during := model.text(w, "minted_during"):
             g.add((node, NEMIK.mintedDuring, Literal(during)))
+        # mtools:W248: the WV:1 vector and who wrote it, carried as written; nemik.score reads it
+        # through mtools' own parser and owns the band (nemik:W131).
+        if vec := model.text(w, "vector"):
+            g.add((node, NEMIK.vector, Literal(vec)))
+        if src := model.text(w, "vector_source"):
+            g.add((node, NEMIK.vectorSource, Literal(src)))
         if cause := model.text(w, "caused_by"):
             cause_ref = reference_uri(repo, cause) if model.is_reference(cause) else Literal(cause)
             g.add((node, PROV.wasInformedBy, cause_ref))

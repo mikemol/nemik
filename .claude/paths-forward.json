@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 52
+      "ticks_blocked": 54
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 9,
       "weight": 1
     },
     {
@@ -1398,7 +1398,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:13:38Z",
-      "ticks_blocked": 36,
+      "ticks_blocked": 38,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1986,7 +1986,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T22:46:47Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 6,
       "weight": 0
     },
     {
@@ -2000,7 +2000,6 @@
         "nemik-rank"
       ],
       "blocked_on": [
-        "W131",
         "W132",
         "W133"
       ],
@@ -2131,7 +2130,7 @@
       "minted_during": "tick",
       "caused_by": "life",
       "last_worked": "2026-09-28T15:05:07Z",
-      "ticks_blocked": 8
+      "ticks_blocked": 10
     },
     {
       "symbol": "W114",
@@ -2457,7 +2456,7 @@
       "minted_during": "tick",
       "caused_by": "life:W23",
       "last_worked": "2026-09-29T00:28:20Z",
-      "ticks_blocked": 3
+      "ticks_blocked": 5
     },
     {
       "symbol": "W130",
@@ -2484,13 +2483,34 @@
     {
       "symbol": "W131",
       "title": "W107b: adapter carries vector/vector_source into the graph (parsed by mtools' vector.py, never re-parsed); nemik-score module: declared band table (src/nemik/data/bands.toml) maps a vector to a band; unscored = the table's default band",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W107"
       ],
       "touches": [
         "nemik-rank",
         "adapter"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-09-29: adapter: vector/vector_source -> nemik:vector, nemik:vectorSource (vocab in nemik.ttl). src/nemik/score.py: load_bands (data/bands.toml: order critical>high>elevated>normal>low; rules AND within, OR across; unscored + unmatched declared, validated against order) and band(vector) -> (band, why) using mtools' vector.parse only; invalid vector ranks as unscored with 'invalid: <mtools message>'. Calibration: critical = host reach across a boundary / host integrity / confidential egress; high = cluster reach, any boundary crossing, high C or I; elevated = tenant reach or high A; low = local with no impact. tests/test_score.py (10 incl. parametrized); bazel 19/19.",
+      "issued_at": "2026-09-29T00:22:16Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-09-29T01:29:45Z",
+      "ticks_blocked": 0,
+      "weight": 11
+    },
+    {
+      "symbol": "W132",
+      "title": "W107c: nemik-rank orders by band first, graph weight second (declared composition); --json carries band",
+      "status": "ready",
+      "enables": [
+        "W107"
+      ],
+      "touches": [
+        "nemik-rank"
       ],
       "blocked_on": [],
       "blocked_kind": null,
@@ -2501,28 +2521,6 @@
       "caused_by": null,
       "last_worked": "2026-09-29T00:22:17Z",
       "ticks_blocked": 0
-    },
-    {
-      "symbol": "W132",
-      "title": "W107c: nemik-rank orders by band first, graph weight second (declared composition); --json carries band",
-      "status": "blocked",
-      "enables": [
-        "W107"
-      ],
-      "touches": [
-        "nemik-rank"
-      ],
-      "blocked_on": [
-        "W131"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "",
-      "issued_at": "2026-09-29T00:22:16Z",
-      "minted_during": "tick",
-      "caused_by": null,
-      "last_worked": "2026-09-29T00:22:17Z",
-      "ticks_blocked": 3
     },
     {
       "symbol": "W133",
@@ -2544,7 +2542,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-29T00:22:17Z",
-      "ticks_blocked": 3
+      "ticks_blocked": 5
     },
     {
       "symbol": "W134",
@@ -2567,7 +2565,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-29T00:28:20Z",
-      "ticks_blocked": 3
+      "ticks_blocked": 5
     }
   ],
   "residue": [
