@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 129,
+  "counter": 133,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 48
+      "ticks_blocked": 49
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "weight": 1
     },
     {
@@ -1398,7 +1398,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:13:38Z",
-      "ticks_blocked": 32,
+      "ticks_blocked": 33,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1986,27 +1986,32 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T22:46:47Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "weight": 0
     },
     {
       "symbol": "W107",
       "title": "luthen:W190 CVSS-shaped ranking: nemik-score module (vector parse, bands, policy rules) consumed by nemik-rank; --check refuses band inversion and policy-block pairs; vector field in the pf schema via mtools",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "luthen-observability:W190"
       ],
       "touches": [
         "nemik-rank"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W130",
+        "W131",
+        "W132",
+        "W133"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "2026-09-28: luthen W190 waits on mtools taking the waypoint vector field; nemik-score starts after. | 2026-09-28: mtools W248 split: mtools stores+validates vector (WV:1/R/C/I/A/X/S/F/W) and vector_source; nemik owns bands, composition, unscored default and guarantees (answered yes 2026-09-28). Alphabet is luthen's call. | 2026-09-28: mtools 6809ab5: vector grammar (pathsforward vector.py), luthen W218 alphabet WV,R,E,C,I,A,X,S,F,W, all nine required. Field not writable until mtools W256 (--update --vector) and W257 (--check revalidation). | 2026-09-28: mtools W248 landed: writer 0d31908, checker 23f1223. Fields vector (WV:1/R/E/C/I/A/X/S/F/W, fixed order, all required) + vector_source (default|signal|agent), written together; --check flags bad grammar, prints UNSCORED <n> (census, exit unchanged). First step: re-vendor the pathsforward wheel at 23f1223 (vendor/wheels, README history), then nemik-score reads vector via store.load.",
+      "evidence": "2026-09-28: luthen W190 waits on mtools taking the waypoint vector field; nemik-score starts after. | 2026-09-28: mtools W248 split: mtools stores+validates vector (WV:1/R/C/I/A/X/S/F/W) and vector_source; nemik owns bands, composition, unscored default and guarantees (answered yes 2026-09-28). Alphabet is luthen's call. | 2026-09-28: mtools 6809ab5: vector grammar (pathsforward vector.py), luthen W218 alphabet WV,R,E,C,I,A,X,S,F,W, all nine required. Field not writable until mtools W256 (--update --vector) and W257 (--check revalidation). | 2026-09-28: mtools W248 landed: writer 0d31908, checker 23f1223. Fields vector (WV:1/R/E/C/I/A/X/S/F/W, fixed order, all required) + vector_source (default|signal|agent), written together; --check flags bad grammar, prints UNSCORED <n> (census, exit unchanged). First step: re-vendor the pathsforward wheel at 23f1223 (vendor/wheels, README history), then nemik-score reads vector via store.load. | 2026-09-29: Atomized 2026-09-28 (top 3 ticks): W130 wheel, W131 vector->band, W132 rank composition, W133 --check guarantees; chained in that order.",
       "issued_at": "2026-09-28T13:25:10Z",
       "minted_during": "tick",
       "caused_by": "luthen:W190",
-      "last_worked": "2026-09-28T17:50:04Z",
+      "last_worked": "2026-09-29T00:22:17Z",
       "ticks_blocked": 0,
       "weight": 8
     },
@@ -2127,7 +2132,7 @@
       "minted_during": "tick",
       "caused_by": "life",
       "last_worked": "2026-09-28T15:05:07Z",
-      "ticks_blocked": 4
+      "ticks_blocked": 5
     },
     {
       "symbol": "W114",
@@ -2323,7 +2328,8 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W124",
@@ -2343,7 +2349,8 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W125",
@@ -2401,7 +2408,8 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 0
     },
     {
       "symbol": "W128",
@@ -2423,7 +2431,8 @@
       "minted_during": "tick",
       "caused_by": "life:W23",
       "last_worked": "2026-09-28T23:49:53Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 18
     },
     {
       "symbol": "W129",
@@ -2448,6 +2457,94 @@
       "minted_during": "tick",
       "caused_by": "life:W23",
       "last_worked": "2026-09-28T23:49:54Z",
+      "ticks_blocked": 1
+    },
+    {
+      "symbol": "W130",
+      "title": "W107a: re-vendor the pathsforward wheel at mtools 23f1223 (vector + vector_source fields, vector.py grammar); vendor/wheels README history",
+      "status": "ready",
+      "enables": [
+        "W107"
+      ],
+      "touches": [
+        "pathsforward",
+        "vendor"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-29T00:22:16Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W131",
+      "title": "W107b: adapter carries vector/vector_source into the graph (parsed by mtools' vector.py, never re-parsed); nemik-score module: declared band table (src/nemik/data/bands.toml) maps a vector to a band; unscored = the table's default band",
+      "status": "blocked",
+      "enables": [
+        "W107"
+      ],
+      "touches": [
+        "nemik-rank",
+        "adapter"
+      ],
+      "blocked_on": [
+        "W130"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-29T00:22:16Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-09-29T00:22:17Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W132",
+      "title": "W107c: nemik-rank orders by band first, graph weight second (declared composition); --json carries band",
+      "status": "blocked",
+      "enables": [
+        "W107"
+      ],
+      "touches": [
+        "nemik-rank"
+      ],
+      "blocked_on": [
+        "W131"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-29T00:22:16Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-09-29T00:22:17Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W133",
+      "title": "W107d: nemik-rank --check guarantees: band inversion (top below band B while a ready item >= B exists, names the pair); UNSCORED count; policy block (ready item whose touches overlap an open trust-boundary item, names the pair and tag)",
+      "status": "blocked",
+      "enables": [
+        "W107"
+      ],
+      "touches": [
+        "nemik-rank"
+      ],
+      "blocked_on": [
+        "W132"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-09-29T00:22:17Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-09-29T00:22:17Z",
       "ticks_blocked": 0
     }
   ],
