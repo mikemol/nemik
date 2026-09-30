@@ -137,3 +137,41 @@ def test_operator_long_free_text_reads_as_needs_you(tmp_path: Path) -> None:
     asks = json.loads(r.stdout)
     asks = asks if isinstance(asks, list) else asks["asks"]
     assert {a["ref"]: a["category"] for a in asks} == {"alpha:W1": "needs-you"}
+
+
+def test_bundled_title_on_done_waypoint_does_not_warn(tmp_path: Path) -> None:
+    # nemik:W116: decomposing finished work is noise; only open waypoints take the advice.
+    bundled = "x" * 80 + "; " + "y" * 80
+    write_queue(tmp_path, "alpha", waypoint("W1", title=bundled, status="done"),
+                waypoint("W2", title=bundled))
+    r = run("check", tmp_path)
+    warned = [l.split()[1] for l in r.stdout.splitlines() if "title over 150 chars" in l]
+    assert warned == ["W2"], r.stdout
+
+
+def test_caused_by_unresolved_reference_warns_and_names_it(root: Path) -> None:
+    # nemik:W108: caused_by resolves like enables. A wrong repo prefix (luthen for
+    # luthen-observability) or a missing symbol is named; a resolving one, a dropped one and
+    # free text are not.
+    write_queue(root, "gamma",
+                waypoint("W1", caused_by="luthen:W190"),
+                waypoint("W2", caused_by="beta:W9"),
+                waypoint("W3", caused_by="beta:W1"),
+                waypoint("W4", caused_by="W1"),
+                waypoint("W5", caused_by="operator"))
+    r = run("check", root)
+    assert r.returncode == 0, r.stdout + r.stderr  # a Warning, not a Violation
+    named = {l.split()[1]: l for l in r.stdout.splitlines() if "caused_by names" in l}
+    assert set(named) == {"W1", "W2"}, r.stdout
+    assert "caused_by names luthen:W190," in named["W1"]
+    assert "caused_by names beta:W9," in named["W2"]
+
+
+def test_caused_by_into_residue_resolves(tmp_path: Path) -> None:
+    write_queue(tmp_path, "alpha", waypoint("W2", caused_by="W1"))
+    q = tmp_path / "alpha" / "paths-forward.json"
+    doc = json.loads(q.read_text())
+    doc["residue"] = [{"symbol": "W1", "title": "dropped cause", "reason": "superseded"}]
+    q.write_text(json.dumps(doc))
+    r = run("check", tmp_path)
+    assert not any("caused_by names" in l for l in r.stdout.splitlines()), r.stdout

@@ -229,3 +229,5 @@
 2026-09-29T01:29:46Z  tick  W131 done      unblock   "vector -> declared band (nemik.score); W132 unblocked"
 2026-09-29T01:35:34Z  tick  W132 done      collapse  "parameterizable composition (tiers x Pareto x scalarize); W111 absorbed"
 2026-09-29T01:51:48Z  tick  W135 done      unblock   "rank-ordered forest view"
+2026-09-30T21:19:13Z  op    W108 done      sweep     "caused_by resolves like enables; names the ref"
+2026-09-30T21:19:13Z  op    W116 done      sweep     "bundled-title warning on open waypoints only"

@@ -83,7 +83,9 @@ listed. If it appears under *unstated*, or not at all, the chain is broken somew
 
 | shape | means | fix |
 |---|---|---|
-| `WaypointShape` | status or blocked_kind outside the vocabulary; a title over 150 chars with several clauses (bundled steps); **`enables` naming nothing in any workstream (VIOLATES)** | ready/working/blocked/done and agent/human; split the title into waypoints joined by enables; fix the reference (rule 1) |
+| `WaypointShape` | status or blocked_kind outside the vocabulary; **`enables` naming nothing in any workstream (VIOLATES)** | ready/working/blocked/done and agent/human; fix the reference (rule 1) |
+| `BundledTitleShape` | an open waypoint's title is over 150 chars with several clauses (bundled steps); done waypoints are exempt | split the title into waypoints joined by enables |
+| `CausedByResolvesShape` | `caused_by` cites a `<repo>:W<n>` or `W<n>` that is nothing in any workstream; the message names it | fix the repo prefix or symbol |
 | `EdgeIntoDroppedShape` | an edge points at a dropped (residue) waypoint | retarget or clear the edge |
 | `BlockedShape` | `blocked` without blocked_on or blocked_kind | give both |
 | `ListFieldShape` | enables/touches/blocked_on stored as one string | store a list |

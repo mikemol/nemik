@@ -2015,7 +2015,7 @@
     {
       "symbol": "W108",
       "title": "nemik-check: caused_by must resolve like enables (a Warning naming the unresolved <repo>:W<n>), so a wrong workstream prefix cannot recur unseen",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "nemik-check",
@@ -2023,12 +2023,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-09-30: 2026-09-30: CausedByResolvesShape (SPARQL constraint, Warning) names the unresolved ref; on the fixture fleet it flags exactly nemik:W105 (luthen:W185) and W107 (luthen:W190), the two W109 exists to repoint. tests/test_gate.py.",
       "issued_at": "2026-09-28T13:47:34Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-09-30T21:19:13Z",
       "ticks_blocked": 0,
       "weight": 1
     },
@@ -2172,19 +2172,19 @@
     {
       "symbol": "W116",
       "title": "nemik-check: the bundled-title Warning fires only on open waypoints (aeternum 2026-09-28: five of its title warnings were on done waypoints, where splitting finished work is noise)",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "nemik-check"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-09-30: 2026-09-30: bundled-title rule moved to BundledTitleShape, sh:or with state Done; tests/test_gate.py pins done-silent, open-warns.",
       "issued_at": "2026-09-28T17:46:13Z",
       "minted_during": "tick",
       "caused_by": "aeternum",
-      "last_worked": null,
+      "last_worked": "2026-09-30T21:19:13Z",
       "ticks_blocked": 0,
       "weight": 1
     },
