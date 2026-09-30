@@ -50,3 +50,22 @@ R = ["L"]
 C = ["N"]
 I = ["N"]
 A = ["N"]
+
+# nemik:W133 (luthen-observability:W190 §3): ordering guarantees `nemik-rank --check` REFUSES on.
+# They are rules, not weights: the composed order above may break one (an operator ask outranks
+# any band, W111), and --check then names the rule and the pair of items that broke it.
+#
+# floor: nothing below this band may be the item the session works next while a ready item at
+# this band or above exists. Starts at the top band, the narrowest claim; luthen may lower it.
+[guarantee]
+floor = "critical"
+
+# A policy class blocks every ready waypoint in the same repo that shares a touches tag (a
+# surface) with one of the class's open members. A waypoint is in the class when its touches
+# carry `tag`, or its vector matches a `vector` rule (same grammar as a band rule). Members of the
+# class are never blocked by one another: they are the fix work itself.
+[[policy]]
+class = "trust-boundary"
+tag = "trust-boundary"
+[[policy.vector]]
+S = ["C"]

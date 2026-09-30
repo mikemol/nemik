@@ -54,6 +54,51 @@ def band(vector: str | None, bands: Bands) -> tuple[str, str]:
         return bands.unscored, f"invalid: {e}"
     for b in bands.order:
         for rule in bands.rules[b]:
-            if all(values[m] in allowed for m, allowed in rule.items()):
+            if _matches(values, rule):
                 return b, "/".join(f"{m}:{'|'.join(sorted(a))}" for m, a in rule.items())
     return bands.unmatched, "unmatched"
+
+
+def _matches(values: dict[str, str], rule: dict[str, frozenset[str]]) -> bool:
+    """A rule matches when every metric it names has one of the listed values."""
+    return all(values[m] in allowed for m, allowed in rule.items())
+
+
+@dataclass(frozen=True)
+class Policy:
+    """An item class that blocks the ready items sharing a surface with its open members (W133)."""
+    name: str
+    tag: str | None
+    rules: tuple[dict[str, frozenset[str]], ...]
+
+    def member(self, vector: str | None, touches: set[str]) -> bool:
+        """In the class when it carries the tag, or its vector matches one of the rules."""
+        if self.tag is not None and self.tag in touches:
+            return True
+        try:
+            values = parse(vector) if vector else None
+        except RefusedError:
+            values = None  # an invalid vector is unscored (band()); it proves no membership
+        return values is not None and any(_matches(values, r) for r in self.rules)
+
+
+@dataclass(frozen=True)
+class Guarantees:
+    floor: str | None
+    policies: tuple[Policy, ...]
+
+
+def load_guarantees(text: str | None = None, bands: Bands | None = None) -> Guarantees:
+    """Read [guarantee] and [[policy]] from bands.toml (nemik:W133); `text` overrides it."""
+    if text is None:
+        text = files("nemik.data").joinpath("bands.toml").read_text()
+    bands = bands or load_bands(text)
+    d = tomllib.loads(text)
+    floor = d.get("guarantee", {}).get("floor")
+    if floor is not None and floor not in bands.order:
+        raise ValueError(f"bands.toml: guarantee.floor = {floor!r} is not in order")
+    policies = tuple(
+        Policy(p["class"], p.get("tag"),
+               tuple({m: frozenset(v) for m, v in r.items()} for r in p.get("vector", [])))
+        for p in d.get("policy", []))
+    return Guarantees(floor, policies)

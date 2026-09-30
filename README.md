@@ -38,7 +38,7 @@ of the format:
 | `nemik-inbound [repo]` | What in other workstreams is blocked on `repo`, each blocked waypoint as a citable `<repo>:W<n>`, and which of `repo`'s waypoints claims it, or `UNCLAIMED`. |
 | `nemik-operator` | Blocks on the operator, sorted into needs-you, answered, condition and unstated, with duplicate asks grouped. |
 | `nemik-wake` | The wake roster: each workstream something is waiting on, with whether it has a live session (asleep / idle / awake), what waits on it, and how many blocks need you. Liveness comes from luthen-observability's `loop_liveness`. |
-| `nemik-rank repo` | Ready items by cross-repo downstream weight; `--check` exits 1 when the queue's next item is outweighed, `--json` feeds `mikemol-paths-forward --weights-from`. |
+| `nemik-rank repo` | Ready items by cross-repo downstream weight; `--check` exits 1 when the queue's next item is outweighed or breaks a guarantee declared in `bands.toml` (a band INVERSION below the floor, or a POLICY block by an open trust-boundary item on a shared surface), naming the pair, and prints an UNSCORED census; `--json` feeds `mikemol-paths-forward --weights-from`. |
 | `nemik-floor-asks` | Exits 1 when a `summit/floor/*.bib` ask's `waypoint` field names a missing or dropped waypoint. |
 | `nemik-serve` | The web view: `/` (dependency graph), `/graph.json`, `/graph.ttl`, `/inbound/<repo>`, `/operator`, `/wake`, `/metrics`. |
 

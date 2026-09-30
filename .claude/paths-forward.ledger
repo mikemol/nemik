@@ -231,3 +231,8 @@
 2026-09-29T01:51:48Z  tick  W135 done      unblock   "rank-ordered forest view"
 2026-09-30T21:19:13Z  op    W108 done      sweep     "caused_by resolves like enables; names the ref"
 2026-09-30T21:19:13Z  op    W116 done      sweep     "bundled-title warning on open waypoints only"
+2026-09-30T21:25:29Z  redact W108 redacted  --        "sha256:4a4f688efece n=1"
+2026-09-30T21:25:29Z  redact W116 redacted  --        "sha256:4a4f688efece n=1"
+2026-09-30T21:25:29Z  redact W133 redacted  --        "sha256:4a4f688efece n=1"
+2026-09-30T21:25:37Z  op    W133 done      unblock   "--check guarantees: INVERSION, POLICY, UNSCORED census; W107 unblocked"
+2026-09-30T21:25:37Z  op    W107 done      collapse  "atoms W130-W133 landed; hands luthen-observability:W190 the guarantees"

@@ -1992,24 +1992,22 @@
     {
       "symbol": "W107",
       "title": "luthen:W190 CVSS-shaped ranking: nemik-score module (vector parse, bands, policy rules) consumed by nemik-rank; --check refuses band inversion and policy-block pairs; vector field in the pf schema via mtools",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "luthen-observability:W190"
       ],
       "touches": [
         "nemik-rank"
       ],
-      "blocked_on": [
-        "W133"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "2026-09-28: luthen W190 waits on mtools taking the waypoint vector field; nemik-score starts after. | 2026-09-28: mtools W248 split: mtools stores+validates vector (WV:1/R/C/I/A/X/S/F/W) and vector_source; nemik owns bands, composition, unscored default and guarantees (answered yes 2026-09-28). Alphabet is luthen's call. | 2026-09-28: mtools 6809ab5: vector grammar (pathsforward vector.py), luthen W218 alphabet WV,R,E,C,I,A,X,S,F,W, all nine required. Field not writable until mtools W256 (--update --vector) and W257 (--check revalidation). | 2026-09-28: mtools W248 landed: writer 0d31908, checker 23f1223. Fields vector (WV:1/R/E/C/I/A/X/S/F/W, fixed order, all required) + vector_source (default|signal|agent), written together; --check flags bad grammar, prints UNSCORED <n> (census, exit unchanged). First step: re-vendor the pathsforward wheel at 23f1223 (vendor/wheels, README history), then nemik-score reads vector via store.load. | 2026-09-29: Atomized 2026-09-28 (top 3 ticks): W130 wheel, W131 vector->band, W132 rank composition, W133 --check guarantees; chained in that order.",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-09-28: luthen W190 waits on mtools taking the waypoint vector field; nemik-score starts after. | 2026-09-28: mtools W248 split: mtools stores+validates vector (WV:1/R/C/I/A/X/S/F/W) and vector_source; nemik owns bands, composition, unscored default and guarantees (answered yes 2026-09-28). Alphabet is luthen's call. | 2026-09-28: mtools 6809ab5: vector grammar (pathsforward vector.py), luthen W218 alphabet WV,R,E,C,I,A,X,S,F,W, all nine required. Field not writable until mtools W256 (--update --vector) and W257 (--check revalidation). | 2026-09-28: mtools W248 landed: writer 0d31908, checker 23f1223. Fields vector (WV:1/R/E/C/I/A/X/S/F/W, fixed order, all required) + vector_source (default|signal|agent), written together; --check flags bad grammar, prints UNSCORED <n> (census, exit unchanged). First step: re-vendor the pathsforward wheel at 23f1223 (vendor/wheels, README history), then nemik-score reads vector via store.load. | 2026-09-29: Atomized 2026-09-28 (top 3 ticks): W130 wheel, W131 vector->band, W132 rank composition, W133 --check guarantees; chained in that order. | 2026-09-30: every atom landed (W130 wheel, W131 vector->band, W132 composition, W133 --check guarantees) and mtools W248 carries the vector field; the band table, floor and trust-boundary policy in bands.toml are a starting calibration for luthen-observability:W190 to adjust by letter.",
       "issued_at": "2026-09-28T13:25:10Z",
       "minted_during": "tick",
       "caused_by": "luthen:W190",
-      "last_worked": "2026-09-29T00:22:17Z",
-      "ticks_blocked": 1,
+      "last_worked": "2026-09-30T21:25:37Z",
+      "ticks_blocked": 0,
       "weight": 8
     },
     {
@@ -2024,7 +2022,7 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": null,
-      "evidence": "2026-09-30: 2026-09-30: CausedByResolvesShape (SPARQL constraint, Warning) names the unresolved ref; on the fixture fleet it flags exactly nemik:W105 (luthen:W185) and W107 (luthen:W190), the two W109 exists to repoint. tests/test_gate.py.",
+      "evidence": "2026-09-30: CausedByResolvesShape (SPARQL constraint, Warning) names the unresolved ref; on the fixture fleet it flags exactly nemik:W105 (luthen:W185) and W107 (luthen:W190), the two W109 exists to repoint. tests/test_gate.py.",
       "issued_at": "2026-09-28T13:47:34Z",
       "minted_during": "tick",
       "caused_by": null,
@@ -2180,7 +2178,7 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": null,
-      "evidence": "2026-09-30: 2026-09-30: bundled-title rule moved to BundledTitleShape, sh:or with state Done; tests/test_gate.py pins done-silent, open-warns.",
+      "evidence": "2026-09-30: bundled-title rule moved to BundledTitleShape, sh:or with state Done; tests/test_gate.py pins done-silent, open-warns.",
       "issued_at": "2026-09-28T17:46:13Z",
       "minted_during": "tick",
       "caused_by": "aeternum",
@@ -2524,7 +2522,7 @@
     {
       "symbol": "W133",
       "title": "W107d: nemik-rank --check guarantees: band inversion (top below band B while a ready item >= B exists, names the pair); UNSCORED count; policy block (ready item whose touches overlap an open trust-boundary item, names the pair and tag)",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W107"
       ],
@@ -2533,12 +2531,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-09-30: bands.toml [guarantee] floor (critical: the narrowest claim; luthen may lower it) and [[policy]] trust-boundary (touches tag, or vector S:C). --check prints INVERSION <next> vs <urgent> and POLICY <ready> vs <member> on <surfaces>, exit 1; UNSCORED <n> census, exit unchanged. tests/test_guarantees.py. Uncalibrated: no fixture queue carries a vector or a trust-boundary tag yet.",
       "issued_at": "2026-09-29T00:22:17Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-09-29T00:22:17Z",
+      "last_worked": "2026-09-30T21:25:07Z",
       "ticks_blocked": 0,
       "weight": 4
     },
