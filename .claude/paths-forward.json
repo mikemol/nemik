@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 152,
+  "counter": 154,
   "waypoints": [
     {
       "symbol": "W1",
@@ -2916,6 +2916,49 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W176",
       "last_worked": "2026-10-01T15:37:29Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W153",
+      "title": "nemik-serve --static OUT/: the web view as static files (index.html, vendor/, graph.json, wake.json, goals/<repo>.json, inbound/<repo>.json precomputed from the same export), relative links so it works from a bucket subpath, no request-time logic; the Tools panel (/cmd) omitted in static mode",
+      "status": "ready",
+      "enables": [
+        "luthen-observability:W269"
+      ],
+      "touches": [
+        "serve",
+        "web",
+        "publish"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-10-01: Operator ruling 2026-10-01 via luthen-observability-6b: nemik's current view may be public (content is almost all in public repos; life holds nothing beyond what is posted socially); same privacy/egress rules on anything published; no Cloudflare; luthen gates the export (W270), publishes to a GCS bucket behind Cloud CDN (W271/W272), nothing connects back to luthen.",
+      "issued_at": "2026-10-01T16:30:23Z",
+      "minted_during": "tick",
+      "caused_by": "luthen-observability:W269",
+      "last_worked": "2026-10-01T16:30:23Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W154",
+      "title": "Field manifest for the static build: every export field it renders, per published file (machine-readable, emitted beside the build and checked by a test against what the build actually writes), for luthen's egress gate",
+      "status": "ready",
+      "enables": [
+        "luthen-observability:W270"
+      ],
+      "touches": [
+        "serve",
+        "publish"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-01T16:30:23Z",
+      "minted_during": "tick",
+      "caused_by": "luthen-observability:W269",
+      "last_worked": null,
       "ticks_blocked": 0
     }
   ],
