@@ -2670,7 +2670,7 @@
     {
       "symbol": "W140",
       "title": "Re-measure test_layout under bazel with the pinned Chromium 1243: the W118 and W127 budgets were set on Playwright's Chromium 1194",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "web-view",
@@ -2678,12 +2678,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-10-01: The cloud session that did W118 and W127 could not reach cdn.playwright.dev, so every layout number in those commits (fit 0.37 and 0.458, cross p95 2209 and 2009, intra p95 329) came from chromium_headless_shell-1194. Host: bazel test //:test_layout, then set the budgets to the pinned browser's numbers.",
+      "next_bounded_step": null,
+      "evidence": "2026-10-01: The cloud session that did W118 and W127 could not reach cdn.playwright.dev, so every layout number in those commits (fit 0.37 and 0.458, cross p95 2209 and 2009, intra p95 329) came from chromium_headless_shell-1194. Host: bazel test //:test_layout, then set the budgets to the pinned browser's numbers. | 2026-10-01: 2026-09-30, bazel test //... at e297a61: 20/20 pass. test_layout outputs under the pinned Chromium (chrome-headless-shell 1243) equal the values recorded on Playwright's 1194: normal view cross p95 2209, intra p95 329, 3634x2967, fit_zoom 0.37, intra_crossings 109, cross_upward 16 (light and dark identical); forest cross p95 2009, fit_zoom 0.458, 2319x2583, crossings 214, upward 17. No budget change needed.",
       "issued_at": "2026-10-01T01:27:31Z",
       "minted_during": "interrupt",
       "caused_by": "W127",
-      "last_worked": "2026-10-01T01:27:32Z",
+      "last_worked": "2026-10-01T03:24:17Z",
       "ticks_blocked": 0
     },
     {
