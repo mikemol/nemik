@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 175,
+  "counter": 176,
   "waypoints": [
     {
       "symbol": "W1",
@@ -3386,6 +3386,22 @@
       "last_worked": null,
       "ticks_blocked": 0,
       "weight": 2
+    },
+    {
+      "symbol": "W176",
+      "title": "Per-repo [order] override: a repo declares its own tiers (e.g. structure first) so DRIFT judges against it",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-01T19:55:48Z",
+      "minted_during": "interrupt",
+      "caused_by": "el-openglo-1c",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
