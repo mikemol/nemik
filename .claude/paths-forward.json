@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 63
+      "ticks_blocked": 64
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "weight": 1
     },
     {
@@ -1343,7 +1343,7 @@
     {
       "symbol": "W75",
       "title": "Weather: one outage = one monotone FFI waypoint, witness over a probe fact",
-      "status": "ready",
+      "status": "blocked",
       "enables": [],
       "touches": [
         "conditions"
@@ -1359,7 +1359,7 @@
       "issued_at": "2026-09-27T19:42:13Z",
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
-      "last_worked": "2026-10-01T19:51:45Z",
+      "last_worked": "2026-10-01T23:45:16Z",
       "ticks_blocked": 0,
       "weight": 1
     },
@@ -1401,7 +1401,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-01T19:50:19Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1990,8 +1990,8 @@
       "issued_at": "2026-09-28T13:25:08Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-01T19:51:44Z",
-      "ticks_blocked": 0,
+      "last_worked": "2026-10-01T23:45:16Z",
+      "ticks_blocked": 1,
       "weight": 0
     },
     {
@@ -2114,7 +2114,7 @@
     {
       "symbol": "W113",
       "title": "Operator calendars as a nemik source (life ask), credentials never exported",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "life:W13"
       ],
@@ -2135,7 +2135,7 @@
       "issued_at": "2026-09-28T15:05:07Z",
       "minted_during": "tick",
       "caused_by": "life",
-      "last_worked": "2026-10-01T19:51:44Z",
+      "last_worked": "2026-10-01T23:45:16Z",
       "ticks_blocked": 0,
       "weight": 3
     },
@@ -2462,7 +2462,7 @@
       "minted_during": "tick",
       "caused_by": "life:W23",
       "last_worked": "2026-10-01T19:49:18Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "weight": 3
     },
     {
@@ -2631,7 +2631,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 8
+      "ticks_blocked": 9
     },
     {
       "symbol": "W138",
@@ -2831,7 +2831,7 @@
     {
       "symbol": "W148",
       "title": "Google Tasks 'nemik' list grouped by repo: parent task per repo, asks as subtasks",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "life:W28"
       ],
@@ -2851,7 +2851,7 @@
       "issued_at": "2026-10-01T13:02:20Z",
       "minted_during": "tick",
       "caused_by": "life:W28",
-      "last_worked": "2026-10-01T19:51:44Z",
+      "last_worked": "2026-10-01T23:45:16Z",
       "ticks_blocked": 0,
       "weight": 3
     },
@@ -2879,7 +2879,7 @@
     {
       "symbol": "W150",
       "title": "W129b: deliver fired alarms once, deduped by (ref, RECURRENCE-ID, instant)",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W129"
       ],
@@ -2897,7 +2897,7 @@
       "issued_at": "2026-10-01T13:12:44Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-01T19:51:45Z",
+      "last_worked": "2026-10-01T23:45:16Z",
       "ticks_blocked": 0
     },
     {
@@ -2942,7 +2942,7 @@
     {
       "symbol": "W153",
       "title": "nemik-serve --static OUT/ --withheld FILE: the web view as static files",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "luthen-observability:W269"
       ],
@@ -2963,13 +2963,13 @@
       "issued_at": "2026-10-01T16:30:23Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W269",
-      "last_worked": "2026-10-01T19:51:45Z",
+      "last_worked": "2026-10-01T23:45:16Z",
       "ticks_blocked": 0
     },
     {
       "symbol": "W154",
       "title": "Field manifest for the static build: every export field it renders, per published file (machine-readable, emitted beside the build and checked by a test against what the build actually writes), for luthen's egress gate",
-      "status": "working",
+      "status": "done",
       "enables": [
         "luthen-observability:W270"
       ],
@@ -2979,12 +2979,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Enumerate every field the static build renders from the export and write the manifest file",
-      "evidence": "2026-10-01: Contract: the build FAILS if it renders a field absent from the manifest (new free text cannot slip in unexamined). luthen W270 cites W154.",
+      "next_bounded_step": null,
+      "evidence": "2026-10-01: Contract: the build FAILS if it renders a field absent from the manifest (new free text cannot slip in unexamined). luthen W270 cites W154. | 2026-10-01: 2026-10-01: src/nemik/data/field-manifest.json (graph.json, wake.json, goals/<repo>.json, each field classed ref/enum/count/flag/time/text) + nemik.manifest.unmanifested(name, doc) -> fields not manifested; tests/test_manifest.py checks the fleet fixture's real output, a planted field, and the class vocabulary; bazel test //... 23/23. The static build (W153) calls unmanifested and fails on any hit.",
       "issued_at": "2026-10-01T16:30:23Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W269",
-      "last_worked": "2026-10-01T20:03:33Z",
+      "last_worked": "2026-10-01T23:47:15Z",
       "ticks_blocked": 0,
       "weight": 6
     },
@@ -3086,7 +3086,7 @@
     {
       "symbol": "W160",
       "title": "nemik-operator shows the next N days of calendar events",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W113"
       ],
@@ -3102,7 +3102,7 @@
       "issued_at": "2026-10-01T19:51:38Z",
       "minted_during": "interrupt",
       "caused_by": "W113",
-      "last_worked": "2026-10-01T20:03:32Z",
+      "last_worked": "2026-10-01T23:45:16Z",
       "ticks_blocked": 0,
       "weight": 3
     },
@@ -3185,7 +3185,7 @@
     {
       "symbol": "W165",
       "title": "Tasks: complete a repo's parent when it has no open asks",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W148"
       ],
@@ -3201,7 +3201,7 @@
       "issued_at": "2026-10-01T19:51:39Z",
       "minted_during": "interrupt",
       "caused_by": "W148",
-      "last_worked": "2026-10-01T20:03:32Z",
+      "last_worked": "2026-10-01T23:45:16Z",
       "ticks_blocked": 0,
       "weight": 3
     },
@@ -3246,7 +3246,7 @@
     {
       "symbol": "W168",
       "title": "Alarm delivery: a live owner gets a SendMessage-ready line",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W150"
       ],
@@ -3261,7 +3261,7 @@
       "issued_at": "2026-10-01T19:51:39Z",
       "minted_during": "interrupt",
       "caused_by": "W150",
-      "last_worked": "2026-10-01T20:03:32Z",
+      "last_worked": "2026-10-01T23:45:16Z",
       "ticks_blocked": 0,
       "weight": 4
     },
@@ -3325,7 +3325,7 @@
     {
       "symbol": "W172",
       "title": "Static view: --withheld FILE gate, failing closed (luthen's v1 contract)",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W153"
       ],
@@ -3341,7 +3341,7 @@
       "issued_at": "2026-10-01T19:51:39Z",
       "minted_during": "interrupt",
       "caused_by": "W153",
-      "last_worked": "2026-10-01T20:03:32Z",
+      "last_worked": "2026-10-01T23:45:16Z",
       "ticks_blocked": 0,
       "weight": 5
     },
@@ -3405,7 +3405,7 @@
     {
       "symbol": "W177",
       "title": "nemik-check: one active (working) card per repo unless all open items are blocked; warn on none or several (operator 2026-10-01)",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
@@ -3415,7 +3415,7 @@
       "issued_at": "2026-10-01T20:03:32Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": null,
+      "last_worked": "2026-10-01T23:47:15Z",
       "ticks_blocked": 0,
       "weight": 7
     }

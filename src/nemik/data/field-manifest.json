@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "note": "nemik:W154. Every field the static build may publish, per file and record. A rendered field absent here fails the build (nemik.manifest.unmanifested), so a field added to the export cannot reach the public view unreviewed. class: ref = a repo:W<n> or id; enum = small fixed vocabulary; count/flag/time = numbers, booleans, instants; text = free text from a queue (an item withheld by luthen's list is dropped whole, so its text goes with it); list-* = the class of each element.",
+  "files": {
+    "graph.json": {
+      "nodes": {
+        "id": "ref", "repo": "enum", "symbol": "ref", "cite": "ref", "for": "ref", "state": "enum",
+        "title": "text", "blocked_on": "list-text", "blocked_kind": "enum", "caused_by": "text",
+        "minted_during": "text", "effort": "counts", "last_activity": "time", "open_blockers": "count",
+        "rank_pos": "count", "band": "enum"
+      },
+      "edges": {"source": "ref", "target": "ref", "kind": "enum", "satisfied": "flag"},
+      "inbound": {"blocked": "ref", "blocker": "enum", "claimed_by": "list-ref", "title": "text", "blocked_on": "list-text"},
+      "operator": {
+        "ref": "ref", "category": "enum", "title": "text", "ask": "text", "waiting": "list-ref",
+        "same_ask": "list-ref", "ticks_blocked": "count", "last_activity": "time", "dtstart": "time",
+        "due": "time", "rrule": "text", "exdates": "list-time", "alarms": "list-text"
+      },
+      "findings": {"*": "list-text"}
+    },
+    "wake.json": {
+      "top": {"liveness": "text", "roster": "records", "operator": "record"},
+      "roster": {"repo": "enum", "state": "enum", "last_tick": "time", "last_tick_age_s": "count", "waiting": "records"},
+      "waiting": {"blocked": "ref", "claimed_by": "list-ref", "title": "text"},
+      "operator": {"repo": "enum", "state": "enum", "last_tick": "time", "waiting": "records"}
+    },
+    "goals/<repo>.json": {
+      "goals": {
+        "goal": "ref", "title": "text", "weight": "count", "frontier": "list-ref", "on_deck": "ref",
+        "outside": "list-text", "clear": "flag"
+      }
+    }
+  }
+}
