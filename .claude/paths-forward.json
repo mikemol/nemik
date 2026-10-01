@@ -2852,11 +2852,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": null,
-      "evidence": "2026-10-01: wake.fired_alarms(g, start, end, liveness): every open waypoint with nemik:alarm, each trigger via alarm.fires_between (anchors, rrule, exdates, completed occurrences), owner liveness state; a malformed alarm becomes an 'error' row instead of hiding the rest. nemik-wake --alarms [--since] [--until] (default the last 15 min) [--json]. tests/test_wake_alarms.py: one-shot + weekly recurring with a completed occurrence skipped, done waypoint never fires, bad trigger reported; bazel 22/22. Live: no queue carries alarms yet (empty list).",
+      "evidence": "2026-10-01: wake.fired_alarms(g, start, end, liveness): every open waypoint with nemik:alarm, each trigger via alarm.fires_between (anchors, rrule, exdates, completed occurrences), owner liveness state; a malformed alarm becomes an 'error' row instead of hiding the rest. nemik-wake --alarms [--since] [--until] (default the last 15 min) [--json]. tests/test_wake_alarms.py: one-shot + weekly recurring with a completed occurrence skipped, done waypoint never fires, bad trigger reported; bazel 22/22. Live: no queue carries alarms yet (empty list). | 2026-10-01: Correction: 'no queue carries alarms yet' was written before the live run returned. Live (since 2026-09-01): life:W12 VALUE=DATE-TIME:20261001T130000Z fired 2026-10-01T13:00:00Z, owner life idle. The first real alarm, found by the tool.",
       "issued_at": "2026-10-01T13:12:44Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-01T13:19:38Z",
+      "last_worked": "2026-10-01T13:20:18Z",
       "ticks_blocked": 0,
       "weight": 4
     },
