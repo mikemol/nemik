@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 142,
+  "counter": 143,
   "waypoints": [
     {
       "symbol": "W1",
@@ -2269,7 +2269,7 @@
     {
       "symbol": "W121",
       "title": "Operator asks -> Google Tasks via Akonadi: host CLI nemik-tasks (one todo per open ask, UID nemik:<repo>:W<n>, full ask + link; closed ask completes its task; a ticked task becomes a done-claim letter to the asking repo, never an auto-close)",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "luthen-observability:W234"
       ],
@@ -2277,16 +2277,14 @@
         "nemik-operator",
         "akonadi"
       ],
-      "blocked_on": [
-        "operator: decide whether nemik may write your asks into Google Tasks (nemik-akonadi-tasks --apply), into which list (Default List as luthen proposed, or a new dedicated 'nemik' list), and which repos opt in (life first; same opt-in as life:W23)"
-      ],
-      "blocked_kind": "human",
-      "next_bounded_step": "",
-      "evidence": "2026-09-28: luthen-observability-db answers: (1) collection resolved by name, not id: child of akonadi_google_resource_0 with mimetype application/x-vnd.akonadi.calendar.todo, default list by name; health = AgentManager.agentInstanceStatus==0 and agentInstanceOnline. (2) luthen owns luthen-nemik-tasks.service/.timer beside luthen-nemik-export; wants argv + cadence from nemik. (3) link base = endpoints.json nemik-http via luthen checks.endpoints_query (now ns nemik). | 2026-09-28: 2026-09-28: collapse with life:W23 (calendar feed). Both are the operator-ask VTODO projection with different sinks; the projection is W127's, W121 is the Akonadi/Google Tasks sink over it. | 2026-09-28: Correction: the projection waypoint is W128, not W127 (W127 is the viewport-aspect layout item). | 2026-10-01: 2026-09-30: Akonadi D-Bus exposes agent control only; item writes need the Akonadi protocol (KF6 C++), and no Python bindings or CLI writer exist on luthen. Built tools/akonadi-tasks (cmake against system KPim6Akonadi + KF6CalendarCore; host tool, not bazel): reads nemik-ics on stdin; resolves the to-do collection of akonadi_google_resource_0 by name (--list when several); matches nemik tasks by UID nemik:<ref> or a 'nemik-ref: <ref>' description line; CREATE / UPDATE / COMPLETE (ask closed upstream) / DONE-CLAIM (operator ticked, ask still open: reported, never auto-closed); plans only unless --apply. Plan-only run against the live Akonadi (life opted in via a temp file): 4 task lists (School, Default List, Mobile List, RP stuff); --list 'Default List' -> 9 CREATE, nothing written. Remaining after the ruling: --apply, then the luthen timer's argv.",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-09-28: luthen-observability-db answers: (1) collection resolved by name, not id: child of akonadi_google_resource_0 with mimetype application/x-vnd.akonadi.calendar.todo, default list by name; health = AgentManager.agentInstanceStatus==0 and agentInstanceOnline. (2) luthen owns luthen-nemik-tasks.service/.timer beside luthen-nemik-export; wants argv + cadence from nemik. (3) link base = endpoints.json nemik-http via luthen checks.endpoints_query (now ns nemik). | 2026-09-28: 2026-09-28: collapse with life:W23 (calendar feed). Both are the operator-ask VTODO projection with different sinks; the projection is W127's, W121 is the Akonadi/Google Tasks sink over it. | 2026-09-28: Correction: the projection waypoint is W128, not W127 (W127 is the viewport-aspect layout item). | 2026-10-01: 2026-09-30: Akonadi D-Bus exposes agent control only; item writes need the Akonadi protocol (KF6 C++), and no Python bindings or CLI writer exist on luthen. Built tools/akonadi-tasks (cmake against system KPim6Akonadi + KF6CalendarCore; host tool, not bazel): reads nemik-ics on stdin; resolves the to-do collection of akonadi_google_resource_0 by name (--list when several); matches nemik tasks by UID nemik:<ref> or a 'nemik-ref: <ref>' description line; CREATE / UPDATE / COMPLETE (ask closed upstream) / DONE-CLAIM (operator ticked, ask still open: reported, never auto-closed); plans only unless --apply. Plan-only run against the live Akonadi (life opted in via a temp file): 4 task lists (School, Default List, Mobile List, RP stuff); --list 'Default List' -> 9 CREATE, nothing written. Remaining after the ruling: --apply, then the luthen timer's argv. | 2026-10-01: Operator 2026-09-30 (AskUserQuestion): a NEW dedicated 'nemik' list; ALL repos opt in. ~/.config/nemik/ics.toml repos=['*'] (vtodo.opted_in: '*' = every repo; test). Helper gained --create-list (CollectionCreateJob under the resource's top collection). Applied: CREATE-LIST nemik, 38 CREATE (every needs-you ask fleet-wide), APPLIED (0 failed). Idempotence: an immediate re-run planned nothing (all 38 matched back through the Google round trip). setup.sh builds the helper when KF6 Akonadi dev files exist. luthen timer argv sent.",
       "issued_at": "2026-09-28T22:44:18Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W234",
-      "last_worked": "2026-10-01T03:27:19Z",
+      "last_worked": "2026-10-01T03:34:14Z",
       "ticks_blocked": 0,
       "weight": 3
     },
@@ -2722,6 +2720,25 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-01T01:35:02Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W143",
+      "title": "Evaluate Google Keep as the operator-ask surface (operator 2026-09-30: 'Keep has Google Tasks integration... may be a better vector, even with a third-party lib'); after the Tasks sink (W121) is running; weigh any unofficial Keep client's credential model (e.g. gkeepapi's account master token) against Akonadi's scoped OAuth",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "akonadi",
+        "vtodo"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-01T03:34:15Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": null,
       "ticks_blocked": 0
     }
   ],

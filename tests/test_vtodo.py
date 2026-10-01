@@ -34,3 +34,12 @@ def test_calendar_is_crlf_folded_and_deterministic() -> None:
     for line in text.split("\r\n"):
         assert len(line.encode()) <= 75
     assert text.count("BEGIN:VTODO") == 2
+
+
+def test_star_opts_every_repo_in(tmp_path) -> None:
+    from nemik.vtodo import opted_in
+
+    f = tmp_path / "ics.toml"
+    f.write_text('repos = ["*"]\n')
+    assert len(vtodos(ASKS, opted_in(f))) == 2  # both needs-you asks, any repo
+    assert opted_in(tmp_path / "missing.toml") == set()

@@ -6,7 +6,7 @@ need the operator ("needs-you", nemik-operator's list) are projected.
 
 Privacy (life:W23, operator 2026-09-28): queues carry personal text, so this runs host-side only,
 never in nemik-serve or the export, and only for repos listed in the opt-in file
-(~/.config/nemik/ics.toml: `repos = ["life", ...]`). No file, no repos: nothing is written.
+(~/.config/nemik/ics.toml: `repos = ["life", ...]`, or `["*"]` for all). No file: nothing is written.
 
 Decide/act comes from the blocked_on prefix `operator: decide|act`, the same rule nemik-operator
 and mtools:W277 use, so the three never disagree. Time fields (DUE, VALARM, RRULE ...) pass through
@@ -25,11 +25,19 @@ PRODID = "-//nemik//operator asks//EN"
 DEFAULT_OPT_IN = Path.home() / ".config" / "nemik" / "ics.toml"
 
 
+class _Every(set):
+    """`repos = ["*"]`: every repo (operator 2026-09-30: "All repos")."""
+
+    def __contains__(self, _repo: object) -> bool:
+        return True
+
+
 def opted_in(path: Path) -> set[str]:
-    """Repos whose asks may be projected. A missing file opts nobody in."""
+    """Repos whose asks may be projected. A missing file opts nobody in; "*" opts every repo in."""
     if not path.exists():
         return set()
-    return set(tomllib.loads(path.read_text()).get("repos", []))
+    repos = set(tomllib.loads(path.read_text()).get("repos", []))
+    return _Every() if "*" in repos else repos
 
 
 def uid(ref: str) -> str:

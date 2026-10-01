@@ -1,16 +1,18 @@
 // nemik:W121 (luthen-observability:W234): sync nemik-ics's VTODOs into the operator's Google Tasks
 // list through Akonadi, so the OAuth token never leaves Akonadi/KWallet.
 //
-//   nemik-ics --opt-in ... | nemik-akonadi-tasks [--list NAME] [--apply]
+//   nemik-ics --opt-in ... | nemik-akonadi-tasks [--list NAME] [--create-list] [--apply]
 //
 // Without --apply it only PLANS (prints CREATE/UPDATE/COMPLETE lines) and writes nothing.
 // The collection is resolved by name, never by id (luthen): a child of akonadi_google_resource_0
 // whose content type is application/x-vnd.akonadi.calendar.todo; --list picks one by name when
-// there are several. A task is nemik's when its UID is nemik:<repo>:W<n> OR its description carries
+// there are several. --create-list (with --apply) creates the named list in the Google account when
+// no list has that name (operator 2026-09-30: a dedicated "nemik" list). A task is nemik's when its UID is nemik:<repo>:W<n> OR its description carries
 // "nemik-ref: <repo>:W<n>" (the Google resource may not keep our UID). The reverse direction is a
 // claim, never a fact: a nemik task the operator completed while its ask is still open prints
 // "DONE-CLAIM <repo>:W<n>", for the asking repo to verify from its own readings.
 #include <Akonadi/Collection>
+#include <Akonadi/CollectionCreateJob>
 #include <Akonadi/CollectionFetchJob>
 #include <Akonadi/Item>
 #include <Akonadi/ItemCreateJob>
@@ -66,6 +68,23 @@ int main(int argc, char **argv) {
         if (c.resource() == kResource && c.contentMimeTypes().contains(kTodoMime)
             && (listName.isEmpty() || c.displayName() == listName || c.name() == listName))
             lists << c;
+    const bool create = args.contains(QStringLiteral("--create-list"));
+    if (lists.isEmpty() && create && !listName.isEmpty()) {
+        // The resource's top collection is the account; a child with the to-do type is a task list.
+        Akonadi::Collection top;
+        for (const Akonadi::Collection &c : cj->collections())
+            if (c.resource() == kResource && c.parentCollection() == Akonadi::Collection::root()) top = c;
+        if (!top.isValid()) { out(QStringLiteral("ERROR: no top collection for ") + kResource); return 2; }
+        out(QStringLiteral("CREATE-LIST ") + listName);
+        if (!apply) { out(QStringLiteral("PLAN ONLY: rerun with --apply to write")); return 0; }
+        Akonadi::Collection c;
+        c.setParentCollection(top);
+        c.setName(listName);
+        c.setContentMimeTypes({kTodoMime});
+        auto *mk = new Akonadi::CollectionCreateJob(c);
+        if (!mk->exec()) { out(QStringLiteral("ERROR: create list: ") + mk->errorString()); return 2; }
+        lists << mk->collection();
+    }
     if (lists.size() != 1) {
         out(QStringLiteral("ERROR: %1 task lists match; name one with --list:").arg(lists.size()));
         for (const Akonadi::Collection &c : cj->collections())

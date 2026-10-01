@@ -24,3 +24,12 @@ fi
 ln -sfn bazel-bin/.venv .venv
 echo "setup: .venv -> $(readlink .venv)"
 .venv/bin/python3 -c "import nemik, mikemol.pathsforward; print('setup: .venv imports nemik and pathsforward')"
+
+# nemik:W121: the Google Tasks sink links the system's KF6 Akonadi, so it is a host build, not a
+# bazel target. Built when the KDE PIM development files are present; skipped (not failed) otherwise.
+if cmake -S tools/akonadi-tasks -B build/akonadi-tasks -DCMAKE_BUILD_TYPE=Release >/dev/null 2>&1 \
+    && cmake --build build/akonadi-tasks -j"$(nproc)" >/dev/null 2>&1; then
+    echo "setup: build/akonadi-tasks/nemik-akonadi-tasks built"
+else
+    echo "setup: nemik-akonadi-tasks not built (no KF6 Akonadi dev files?); the Tasks sink is unavailable"
+fi
