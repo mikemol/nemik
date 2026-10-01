@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 135,
+  "counter": 142,
   "waypoints": [
     {
       "symbol": "W1",
@@ -2032,21 +2032,23 @@
     },
     {
       "symbol": "W109",
-      "title": "Ask mtools: --update --caused-by (re-cite an interrupt's origin); then repoint W105/W107 caused_by to luthen-observability:W185/W190",
-      "status": "ready",
+      "title": "Repoint W105 and W107 caused_by to luthen-observability:W185 and W190 once mtools ships --update --caused-by (W136)",
+      "status": "blocked",
       "enables": [],
       "touches": [
         "caused-by",
         "pathsforward"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W136"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "2026-10-01: confirmed at the vendored 23f1223: '--update W107 --caused-by ...' is REFUSED (--caused-by does not apply to --update). W108 now warns on W105/W107's luthen: causes, so the ask has a witness. Letter drafted (2026-10-01-nemik-to-mtools-update-caused-by.md); not yet delivered to mtools' inbox: mtools is outside the session that drafted it.",
+      "evidence": "2026-10-01: confirmed at the vendored 23f1223: '--update W107 --caused-by ...' is REFUSED (--caused-by does not apply to --update). W108 now warns on W105/W107's luthen: causes, so the ask has a witness. Letter drafted (2026-10-01-nemik-to-mtools-update-caused-by.md); not yet delivered to mtools' inbox: mtools is outside the session that drafted it. | 2026-10-01: the ask moved to W136 (blocked on mtools, where nemik-inbound shows it); this waypoint is the repoint after it lands.",
       "issued_at": "2026-09-28T13:47:34Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-01T01:03:22Z",
+      "last_worked": "2026-10-01T01:27:40Z",
       "ticks_blocked": 0,
       "weight": 1
     },
@@ -2581,6 +2583,143 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-09-29T01:51:48Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W136",
+      "title": "Ask mtools: --update SYMBOL --caused-by REF, validated as --add validates it, so a mis-cited cause is corrected in place instead of re-minting",
+      "status": "blocked",
+      "enables": [
+        "W109"
+      ],
+      "touches": [
+        "caused-by",
+        "pathsforward"
+      ],
+      "blocked_on": [
+        "mtools"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "2026-10-01: THE ASK (mtools: claim it with --enables nemik:W136). caused_by can be set only at --add. At the pathsforward wheel nemik vendors (23f1223), '--update W107 --caused-by luthen-observability:W190' prints 'REFUSED: --caused-by does not apply to --update' (cli.py lists caused_by among the add fields only). WHY NOW: nemik:W108 (88db751) makes nemik-check warn on a caused_by <repo>:W<n> or W<n> that resolves nowhere, naming it; it flags nemik:W105 (luthen:W185) and W107 (luthen:W190), the wrong prefix luthen reported for enables on 2026-09-28. enables was fixed with --update --enables; caused_by has no equivalent, so today's only fix is drop and re-add, which re-mints the symbol and breaks every citation of the old one. WANTED: --update SYMBOL --caused-by REF under the same validation as --add, recorded like other updates; whether it can clear the field is mtools' call. WITNESS: after nemik re-vendors, '--update W105 --caused-by luthen-observability:W185' and '--update W107 --caused-by luthen-observability:W190' succeed, and nemik-check --root ~/github prints no 'caused_by names' line for nemik.",
+      "issued_at": "2026-10-01T01:27:31Z",
+      "minted_during": "interrupt",
+      "caused_by": "W108",
+      "last_worked": "2026-10-01T01:27:31Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W137",
+      "title": "Calibrate the bands.toml floor and trust-boundary policy (W133) against luthen's first vectored waypoints",
+      "status": "blocked",
+      "enables": [],
+      "touches": [
+        "nemik-rank",
+        "bands"
+      ],
+      "blocked_on": [
+        "luthen-observability"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "2026-10-01: W133 shipped floor=critical (the narrowest claim) and a trust-boundary class (touches tag, or vector S:C) with nothing to test them against: no fixture queue carries a vector or a trust-boundary tag. Waits on luthen-observability writing vectors (its W190; W188's trust-boundary items). Then: nemik-rank luthen-observability --check, and adjust the floor and class rules by letter.",
+      "issued_at": "2026-10-01T01:27:31Z",
+      "minted_during": "interrupt",
+      "caused_by": "W133",
+      "last_worked": "2026-10-01T01:27:31Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W138",
+      "title": "rank --check POLICY: an optional dependent filter, so a class blocks only named dependents (luthen's example: tenant-facing rollouts)",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "nemik-rank",
+        "bands"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-10-01: W133's [[policy]] blocks every ready item that shares a touches surface with an open member. luthen's letter (inbox/archive/2026-09-28-luthen-observability-cvss-ranking.md, section 3) scoped a block to named dependents or classes: no tenant-facing rollout is ready while an open trust-boundary item touches the same surface. Add an optional 'only' list of dependent tags; absent keeps today's behaviour.",
+      "issued_at": "2026-10-01T01:27:31Z",
+      "minted_during": "interrupt",
+      "caused_by": "W133",
+      "last_worked": "2026-10-01T01:27:31Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W139",
+      "title": "Layout metrics: count edge crossings inside boxes and cross-box edges pointing upward, and budget both in test_layout",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "web-view",
+        "layout"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-10-01: Neither is measured. W118 reorders rows after dagre has minimized crossings, so it may add some; W127's loose packing lets a downstream box sit beside the boxes it depends on, so a cross-box arrow may point up or sideways (rank forest view). Add both to METRICS and set budgets from the fixture.",
+      "issued_at": "2026-10-01T01:27:31Z",
+      "minted_during": "interrupt",
+      "caused_by": "W118",
+      "last_worked": "2026-10-01T01:27:31Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W140",
+      "title": "Re-measure test_layout under bazel with the pinned Chromium 1243: the W118 and W127 budgets were set on Playwright's Chromium 1194",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "web-view",
+        "layout"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-10-01: The cloud session that did W118 and W127 could not reach cdn.playwright.dev, so every layout number in those commits (fit 0.37 and 0.458, cross p95 2209 and 2009, intra p95 329) came from chromium_headless_shell-1194. Host: bazel test //:test_layout, then set the budgets to the pinned browser's numbers.",
+      "issued_at": "2026-10-01T01:27:31Z",
+      "minted_during": "interrupt",
+      "caused_by": "W127",
+      "last_worked": "2026-10-01T01:27:32Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W141",
+      "title": "Regenerate tests/fixtures/fleet from ~/github (make_fleet.py): the snapshot predates life:W23, so nemik's own W128/W129/W134 edges fail against it",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "fixtures"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-10-01: With nemik's current queue copied into the fixture fleet, nemik-check reports Violations on W128, W129 and W134 (enables life:W23 and similar) and caused_by warnings naming life:W23: the targets were minted after the snapshot. Host only: tests/fixtures/make_fleet.py reads ~/github.",
+      "issued_at": "2026-10-01T01:27:32Z",
+      "minted_during": "interrupt",
+      "caused_by": null,
+      "last_worked": "2026-10-01T01:27:32Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W142",
+      "title": "nemik-check --root . names the workstream '' (Path('.').name), so a one-repo run prints no repo name and cannot resolve its own <repo>:W<n> causes",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "nemik-check"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-10-01: workstream_files() keys a single-repo root by root.name, and Path('.').name is ''. Fix: root.resolve().name. Seen 2026-09-30: an 'OK' line with no repo, and nemik:W4 and nemik:W22 causes reported as unresolved.",
+      "issued_at": "2026-10-01T01:27:32Z",
+      "minted_during": "interrupt",
+      "caused_by": null,
+      "last_worked": "2026-10-01T01:27:32Z",
       "ticks_blocked": 0
     }
   ],
