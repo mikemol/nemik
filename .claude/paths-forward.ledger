@@ -262,3 +262,4 @@
 2026-10-01T19:52:11Z  tick  --  advanced  collapse-inverse  "atomized the 6 bundled waypoints into 21 children W155-W175 (W106,W113,W148,W150,W153,W75 now umbrellas); correcting the title-only trim"  by=agent-nemik-bb
 2026-10-01T19:55:58Z  tick  --  advanced  unblock  "answered el-openglo-1c DRIFT questions (composed order, sync step, no per-repo override); minted W176"  by=agent-nemik-bb
 2026-10-01T20:03:44Z  tick  W154  advanced  unblock  "chained W113/W148/W150/W153 children so one leaf is citable (fixes life/luthen umbrella warnings my atomization caused); W154 marked working; minted W177 one-active-card check"  by=agent-nemik-bb
+2026-10-01T20:49:20Z  tick  --  dropped  collapse  "W176 per-repo order override dropped: el-openglo adopted nemik's ranking"  by=agent-nemik-bb

@@ -3403,23 +3403,6 @@
       "weight": 2
     },
     {
-      "symbol": "W176",
-      "title": "Per-repo [order] override: a repo declares its own tiers (e.g. structure first) so DRIFT judges against it",
-      "status": "ready",
-      "enables": [],
-      "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
-      "issued_at": "2026-10-01T19:55:48Z",
-      "minted_during": "interrupt",
-      "caused_by": "el-openglo-1c",
-      "last_worked": null,
-      "ticks_blocked": 0,
-      "weight": 1
-    },
-    {
       "symbol": "W177",
       "title": "nemik-check: one active (working) card per repo unless all open items are blocked; warn on none or several (operator 2026-10-01)",
       "status": "ready",
@@ -3457,6 +3440,13 @@
       "title": "Graph: bundle parallel cross-repo edges between the same two boxes into one weighted edge (count label), expanding on selection",
       "dropped_at": "2026-09-27T22:06:41Z",
       "reason": "W88 hides cross-repo edges until an end is hovered/selected, so parallel edges no longer tangle by default; bundling would only help in 'show all' mode, at the cost of an expand/collapse model. Revisit if the operator finds show-all unreadable.",
+      "recoverable": true
+    },
+    {
+      "symbol": "W176",
+      "title": "Per-repo [order] override: a repo declares its own tiers (e.g. structure first) so DRIFT judges against it",
+      "dropped_at": "2026-10-01T20:49:20Z",
+      "reason": "el-openglo (its only asker) adopted nemik's composed order on 2026-10-01 and syncs weights each tick, so no per-repo override is needed; revisit if another repo asks for one",
       "recoverable": true
     }
   ],
