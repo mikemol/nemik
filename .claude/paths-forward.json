@@ -2042,11 +2042,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-10-01: confirmed at the vendored 23f1223: '--update W107 --caused-by ...' is REFUSED (--caused-by does not apply to --update). W108 now warns on W105/W107's luthen: causes, so the ask has a witness. Letter drafted (2026-10-01-nemik-to-mtools-update-caused-by.md); not yet delivered to mtools' inbox: mtools is outside the session that drafted it.",
       "issued_at": "2026-09-28T13:47:34Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-10-01T01:03:22Z",
       "ticks_blocked": 0,
       "weight": 1
     },
