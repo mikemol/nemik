@@ -2,6 +2,7 @@
 // list through Akonadi, so the OAuth token never leaves Akonadi/KWallet.
 //
 //   nemik-ics --opt-in ... | nemik-akonadi-tasks [--list NAME] [--create-list] [--apply]
+//   nemik-akonadi-tasks --export-calendar NAME --out FILE.ics      (read-only; nemik:W147)
 //
 // Without --apply it only PLANS (prints CREATE/UPDATE/COMPLETE lines) and writes nothing.
 // The collection is resolved by name, never by id (luthen): a child of akonadi_google_resource_0
@@ -21,7 +22,11 @@
 #include <Akonadi/ItemModifyJob>
 #include <KCalendarCore/ICalFormat>
 #include <KCalendarCore/MemoryCalendar>
+#include <KCalendarCore/Event>
 #include <KCalendarCore/Todo>
+#include <QDir>
+#include <QFile>
+#include <QSaveFile>
 #include <QCoreApplication>
 #include <QTextStream>
 #include <QTimeZone>
@@ -48,10 +53,50 @@ int main(int argc, char **argv) {
     const int li = args.indexOf(QStringLiteral("--list"));
     const QString listName = li > 0 && li + 1 < args.size() ? args.at(li + 1) : QString();
 
+    KCalendarCore::ICalFormat fmt;
+    // nemik:W147: export one calendar's events to an .ics file for mikemol-ics (mtools:W304 split:
+    // the Akonadi read is nemik's, so Qt stays out of mtools). Read-only on the account. The file
+    // holds personal data: it is written 0600, atomically, and its contents are never printed.
+    const int ei = args.indexOf(QStringLiteral("--export-calendar"));
+    if (ei > 0) {
+        const QString calName = ei + 1 < args.size() ? args.at(ei + 1) : QString();
+        const int oi = args.indexOf(QStringLiteral("--out"));
+        const QString outPath = oi > 0 && oi + 1 < args.size() ? args.at(oi + 1) : QString();
+        static const QString kEventMime = QStringLiteral("application/x-vnd.akonadi.calendar.event");
+        auto *ccj = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(), Akonadi::CollectionFetchJob::Recursive);
+        if (!ccj->exec()) { out(QStringLiteral("ERROR: collections: ") + ccj->errorString()); return 2; }
+        QList<Akonadi::Collection> cals;
+        for (const Akonadi::Collection &c : ccj->collections())
+            if (c.resource() == kResource && c.contentMimeTypes().contains(kEventMime)
+                && (c.displayName() == calName || c.name() == calName))
+                cals << c;
+        if (cals.size() != 1 || outPath.isEmpty()) {
+            out(QStringLiteral("ERROR: %1 calendars named %2 (and --out is %3); calendars:")
+                    .arg(cals.size()).arg(calName, outPath.isEmpty() ? QStringLiteral("missing") : QStringLiteral("set")));
+            for (const Akonadi::Collection &c : ccj->collections())
+                if (c.resource() == kResource && c.contentMimeTypes().contains(kEventMime)) out(QStringLiteral("  ") + c.displayName());
+            return 2;
+        }
+        auto *eij = new Akonadi::ItemFetchJob(cals.first());
+        eij->fetchScope().fetchFullPayload();
+        if (!eij->exec()) { out(QStringLiteral("ERROR: items: ") + eij->errorString()); return 2; }
+        auto cal = KCalendarCore::MemoryCalendar::Ptr(new KCalendarCore::MemoryCalendar(QTimeZone::utc()));
+        int n = 0;
+        for (const Akonadi::Item &it : eij->items())
+            if (it.hasPayload<KCalendarCore::Incidence::Ptr>()) { cal->addIncidence(it.payload<KCalendarCore::Incidence::Ptr>()); ++n; }
+        QDir().mkpath(QFileInfo(outPath).absolutePath());
+        QSaveFile f(outPath);
+        if (!f.open(QIODevice::WriteOnly)) { out(QStringLiteral("ERROR: cannot write ") + outPath); return 2; }
+        f.setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner);
+        f.write(fmt.toString(cal).toUtf8());
+        if (!f.commit()) { out(QStringLiteral("ERROR: cannot write ") + outPath); return 2; }
+        out(QStringLiteral("EXPORTED %1 incidences from %2").arg(n).arg(cals.first().displayName()));
+        return 0;
+    }
+
     // The feed: every VTODO nemik-ics wrote, keyed by ref; the description gains the ref tag.
     QTextStream in(stdin);
     auto feedCal = KCalendarCore::MemoryCalendar::Ptr(new KCalendarCore::MemoryCalendar(QTimeZone::utc()));
-    KCalendarCore::ICalFormat fmt;
     if (!fmt.fromString(feedCal, in.readAll())) { out(QStringLiteral("ERROR: stdin is not iCalendar")); return 2; }
     QHash<QString, Todo::Ptr> feed;
     for (const Todo::Ptr &t : feedCal->rawTodos()) {

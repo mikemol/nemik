@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 60
+      "ticks_blocked": 61
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 15,
+      "ticks_blocked": 16,
       "weight": 1
     },
     {
@@ -1398,7 +1398,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:13:38Z",
-      "ticks_blocked": 44,
+      "ticks_blocked": 45,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1986,7 +1986,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T22:46:47Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 13,
       "weight": 0
     },
     {
@@ -2109,7 +2109,7 @@
     {
       "symbol": "W113",
       "title": "life ask: operator calendars as a nemik source (~/.config/nemik/calendars.toml, Akonadi collections on luthen via mtools' calendar reader; events as nodes, waypoint 'at' cal:<label>/<uid>; nemik-operator shows next N days); credentials never in graph/metrics/export",
-      "status": "blocked",
+      "status": "ready",
       "enables": [
         "life:W13"
       ],
@@ -2117,17 +2117,15 @@
         "nemik-operator",
         "sources"
       ],
-      "blocked_on": [
-        "W147"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
       "evidence": "2026-09-28: Needs mtools' calendar reader (mtools/inbox/2026-09-28-life-ask-calendar-reader.md) and luthen's Akonadi declaration. | 2026-10-01: 2026-10-01 mtools-3d: claimed as mtools:W304 (what mtools supplies, e.g. icsstruct/mikemol-ics, vs luthen's Akonadi side). | 2026-10-01: 2026-10-01 mtools-3d: mtools:W304 answered: mtools' part exists (mikemol-icsstruct, mikemol-ics --window 14d --json SOURCE: per-occurrence records, RRULE/RDATE/EXDATE/overrides, tz-aware, lossless, URLs redacted). The Akonadi read is nemik's (Qt/KF stays out of mtools): W147 exports an .ics, then nemik reads it through mikemol-ics (add mikemol-icsstruct as a dependency when W113 is worked).",
       "issued_at": "2026-09-28T15:05:07Z",
       "minted_during": "tick",
       "caused_by": "life",
       "last_worked": "2026-10-01T10:56:21Z",
-      "ticks_blocked": 1
+      "ticks_blocked": 0
     },
     {
       "symbol": "W114",
@@ -2453,7 +2451,7 @@
       "minted_during": "tick",
       "caused_by": "life:W23",
       "last_worked": "2026-10-01T13:12:45Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "weight": 3
     },
     {
@@ -2622,7 +2620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 5
+      "ticks_blocked": 6
     },
     {
       "symbol": "W138",
@@ -2800,7 +2798,7 @@
     {
       "symbol": "W147",
       "title": "Akonadi helper export mode: write a calendar collection's events (by name, akonadi_google_resource_0, event mimetype) as one .ics file, for mikemol-ics to read; credential stays in KWallet",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W113"
       ],
@@ -2810,12 +2808,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-01: nemik-akonadi-tasks --export-calendar NAME --out FILE: event collections of akonadi_google_resource_0 resolved by name (unknown name lists them, exit 2); items with incidence payloads written as one iCalendar via KCalendarCore::ICalFormat, QSaveFile (atomic), 0600; prints only counts. Live, read-only: 'Holidays in United States' (chosen as the calendar with no personal content) -> EXPORTED 256 incidences, file mode 600, 120515 bytes; icalendar parses 256 VEVENTs; file deleted after. The operator's account has 11 event calendars. Next: W113 reads such files through mikemol-ics.",
       "issued_at": "2026-10-01T10:56:21Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-10-01T13:17:37Z",
       "ticks_blocked": 0,
       "weight": 4
     },
@@ -2881,7 +2879,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-01T13:12:45Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 1
     },
     {
       "symbol": "W151",
@@ -2903,7 +2901,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-01T13:12:45Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 1
     }
   ],
   "residue": [

@@ -254,3 +254,4 @@
 2026-10-01T08:34:45Z  tick  W145 done      unblock   "recurring alarms expand per occurrence, skipping EXDATEs and completed RIDs; W129 has everything it reads"
 2026-10-01T10:00:20Z  tick  W143 done      collapse  "Keep reminders are Google Tasks since 2025-10; no master-token Keep client"
 2026-10-01T13:12:45Z  tick  W129 atomized  collapse  "W129 -> W149, W150, W151"
+2026-10-01T13:17:37Z  tick  W147 done      unblock   "Akonadi calendar export; W113 unblocked"
