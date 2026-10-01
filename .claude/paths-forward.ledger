@@ -243,3 +243,4 @@
 2026-10-01T01:35:02Z  op    W142 done      sweep     "--root . names the workstream by its directory"
 2026-10-01T01:39:54Z  op    W139 done      sweep     "crossings and upward edges measured: W118 +4, W127 +1"
 2026-10-01T03:24:17Z  tick  W140 done      unblock   "bazel reproduces the 1194 layout numbers exactly; budgets stand"
+2026-10-01T03:27:19Z  tick  W121 advanced  unblock   "Akonadi writer built; plan verified read-only against the live Google resource; apply awaits the operator"
