@@ -2445,15 +2445,17 @@
       ],
       "blocked_on": [
         "W113",
-        "W134"
+        "W134",
+        "mtools:W278",
+        "mtools:W279"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "2026-09-28: Bound: nemik can observe a due alarm and deliver a nudge (nemik-wake --nudge -> a live session; luthen's waker for sleeping repos), but it cannot start a session. 'Wake' for an asleep repo stays luthen's or the operator's act. Needs W113 (calendar reader), W128 (the VTODOs) and mtools:W276 (time fields). | 2026-10-01: 2026-10-01: dropped mtools:W276 (umbrella); its need reaches mtools through W134 and W113.",
+      "evidence": "2026-09-28: Bound: nemik can observe a due alarm and deliver a nudge (nemik-wake --nudge -> a live session; luthen's waker for sleeping repos), but it cannot start a session. 'Wake' for an asleep repo stays luthen's or the operator's act. Needs W113 (calendar reader), W128 (the VTODOs) and mtools:W276 (time fields). | 2026-10-01: 2026-10-01: dropped mtools:W276 (umbrella); its need reaches mtools through W134 and W113. | 2026-10-01: 2026-10-01 mtools-3d: RRULE/EXDATE = mtools:W278 (done per occurrence, keyed by RECURRENCE-ID), VALARM = mtools:W279 (stored and projected; firing them is this waypoint). Both blocked on mtools:W300 and --enables nemik:W129.",
       "issued_at": "2026-09-28T23:49:54Z",
       "minted_during": "tick",
       "caused_by": "life:W23",
-      "last_worked": "2026-10-01T05:55:02Z",
+      "last_worked": "2026-10-01T05:55:57Z",
       "ticks_blocked": 0
     },
     {
