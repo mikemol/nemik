@@ -36,6 +36,9 @@ nemik:BundledTitleShape a sh:NodeShape ;
 # nor residue anywhere was cited wrong (nemik:W107 cited luthen:W190 for luthen-observability:W190).
 # A Warning, not a Violation: the cause is history, and nothing downstream waits on it. The message
 # names the unresolved reference, since the focus alone does not say which one.
+# It fires on done waypoints too. A reference that resolves nowhere is broken data, like a dangling
+# enables (which WaypointShape checks on every waypoint); only ADVICE about what to do next (decompose
+# a title, trim a landed blocker, cite the child of an umbrella) is limited to open work (W116).
 nemik:CausedByResolvesShape a sh:NodeShape ;
     sh:targetSubjectsOf prov:wasInformedBy ;
     sh:severity sh:Warning ;
