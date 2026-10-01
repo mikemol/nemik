@@ -247,3 +247,4 @@
 2026-10-01T03:34:15Z  tick  W121 done      unblock   "38 operator asks live in Google Tasks list 'nemik'; idempotent re-run"
 2026-10-01T05:55:02Z  tick  --   recited   collapse  "mtools claims: W113->mtools:W304, W136->mtools:W305; W134 cites W276's children W299/W300; W129 via W113/W134"
 2026-10-01T06:18:40Z  tick  W109 done      collapse  "caused_by fixed in place via mtools:W305 (a2b7b62); W136 done"
+2026-10-01T06:49:08Z  tick  W134 done      unblock   "DTSTART/DUE pass through to ics and Google Tasks"

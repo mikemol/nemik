@@ -249,6 +249,8 @@ def operator_asks(g: Graph) -> list[dict]:
             "last_activity": last.get(node, ""),
             "key": _ask_key(text) if cat == "needs-you" else "",
             "waiting": sorted(ref(w) for w in waiting_behind(g, node)),
+            "dtstart": str(g.value(node, NEMIK.dtstart) or ""),
+            "due": str(g.value(node, NEMIK.due) or ""),
         })
     groups: dict[str, set[str]] = {}
     for a in out:

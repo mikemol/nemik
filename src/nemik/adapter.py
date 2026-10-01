@@ -126,6 +126,11 @@ def queue_graph(repo: str, state_path: Path, known: frozenset[str] = frozenset()
             g.add((node, NEMIK.vector, Literal(vec)))
         if src := model.text(w, "vector_source"):
             g.add((node, NEMIK.vectorSource, Literal(src)))
+        # mtools:W300: RFC 5545 DTSTART/DUE values, kept exactly as written (a DATE, a UTC
+        # DATE-TIME, or TZID=Zone:local); nemik.vtodo renders them as properties (nemik:W134).
+        for field, pred in (("dtstart", NEMIK.dtstart), ("due", NEMIK.due)):
+            if val := model.text(w, field):
+                g.add((node, pred, Literal(val)))
         if cause := model.text(w, "caused_by"):
             cause_ref = reference_uri(repo, cause) if model.is_reference(cause) else Literal(cause)
             g.add((node, PROV.wasInformedBy, cause_ref))

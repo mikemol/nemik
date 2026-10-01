@@ -121,9 +121,14 @@ int main(int argc, char **argv) {
         Akonadi::Item item = mine.value(f.key());
         const Todo::Ptr have = item.payload<Todo::Ptr>();
         if (have->isCompleted()) { out(QStringLiteral("DONE-CLAIM ") + f.key()); continue; }
-        if (have->summary() == want->summary() && have->description() == want->description()) continue;
+        // nemik:W134: start and due times (mtools:W300) sync too, so a moved date moves the task.
+        if (have->summary() == want->summary() && have->description() == want->description()
+            && have->dtStart() == want->dtStart() && have->dtDue() == want->dtDue())
+            continue;
         have->setSummary(want->summary());
         have->setDescription(want->description());
+        have->setDtStart(want->dtStart());
+        have->setDtDue(want->dtDue());
         item.setPayload<Todo::Ptr>(have);
         out(QStringLiteral("UPDATE ") + f.key() + QStringLiteral("  ") + want->summary());
         run(new Akonadi::ItemModifyJob(item), f.key());

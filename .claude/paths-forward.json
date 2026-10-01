@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 56
+      "ticks_blocked": 57
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "weight": 1
     },
     {
@@ -1398,7 +1398,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:13:38Z",
-      "ticks_blocked": 40,
+      "ticks_blocked": 41,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1986,7 +1986,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T22:46:47Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "weight": 0
     },
     {
@@ -2127,7 +2127,7 @@
       "minted_during": "tick",
       "caused_by": "life",
       "last_worked": "2026-10-01T05:55:02Z",
-      "ticks_blocked": 1
+      "ticks_blocked": 2
     },
     {
       "symbol": "W114",
@@ -2443,7 +2443,6 @@
       ],
       "blocked_on": [
         "W113",
-        "W134",
         "mtools:W278",
         "mtools:W279"
       ],
@@ -2544,7 +2543,7 @@
     {
       "symbol": "W134",
       "title": "W128 time fields: VTODOs carry mtools:W276's RFC 5545 fields through (DUE/DTSTART, RRULE, VALARM, PERCENT-COMPLETE), read via mtools' reader, never from prose",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "life:W23",
         "W129"
@@ -2552,17 +2551,15 @@
       "touches": [
         "vtodo"
       ],
-      "blocked_on": [
-        "mtools:W300"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "2026-10-01: 2026-10-01: mtools:W276 is now an umbrella over W299 (reader), W300 (DTSTART/DUE), W301 (COMPLETED); W134 needs the reader and the date fields. No child covers VALARM or RRULE yet (asked). | 2026-10-01: Cites W300 alone (W299 enables it, so it is reached transitively).",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-01: 2026-10-01: mtools:W276 is now an umbrella over W299 (reader), W300 (DTSTART/DUE), W301 (COMPLETED); W134 needs the reader and the date fields. No child covers VALARM or RRULE yet (asked). | 2026-10-01: Cites W300 alone (W299 enables it, so it is reached transitively). | 2026-10-01: mtools:W300 landed 3f7bef6 (dtstart/due stored as written). adapter -> nemik:dtstart/due (vocab), operator_asks carries them, vtodo.time_property renders DATE as ;VALUE=DATE, UTC as-is, TZID=Zone:local as ;TZID=Zone; akonadi helper syncs dtStart/dtDue (a moved date moves the task). test_vtodo covers all three forms; bazel 20/20. No queue carries the fields yet, so the live feed is unchanged; live sync applied: COMPLETE linux-sources:W93 (ask closed). VALARM/RRULE remain mtools:W278/W279 -> W129.",
       "issued_at": "2026-09-29T00:28:20Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-01T05:55:41Z",
-      "ticks_blocked": 1
+      "last_worked": "2026-10-01T06:49:08Z",
+      "ticks_blocked": 0
     },
     {
       "symbol": "W135",
@@ -2624,7 +2621,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 1
+      "ticks_blocked": 2
     },
     {
       "symbol": "W138",

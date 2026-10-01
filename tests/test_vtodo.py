@@ -71,3 +71,16 @@ def test_nemik_tasks_feeds_the_helper_and_returns_its_exit_code(tmp_path) -> Non
     assert "ARGS --list nemik --apply TODOS 1" in r.stdout
     r = installed.run("nemik-tasks", *base, "--helper", str(tmp_path / "missing"))
     assert r.returncode == 2 and "setup.sh" in r.stdout
+
+
+def test_dtstart_and_due_pass_through_as_rfc5545_properties() -> None:
+    """nemik:W134: mtools:W300's three value forms each become the right property line."""
+    from nemik.vtodo import time_property
+
+    assert time_property("DUE", "20261001") == "DUE;VALUE=DATE:20261001"
+    assert time_property("DUE", "20261001T203000Z") == "DUE:20261001T203000Z"
+    assert time_property("DTSTART", "TZID=America/Detroit:20261001T163000") == "DTSTART;TZID=America/Detroit:20261001T163000"
+    assert time_property("DUE", "") == ""
+    ask = {**ASKS[0], "due": "TZID=America/Detroit:20261001T163000"}
+    (todo,) = vtodos([ask], {"life"})
+    assert "DUE;TZID=America/Detroit:20261001T163000" in todo

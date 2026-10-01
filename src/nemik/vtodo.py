@@ -10,7 +10,7 @@ never in nemik-serve or the export, and only for repos listed in the opt-in file
 
 Decide/act comes from the blocked_on prefix `operator: decide|act`, the same rule nemik-operator
 and mtools:W277 use, so the three never disagree. Time fields (DUE, VALARM, RRULE ...) pass through
-once mtools:W276 gives waypoints structured ones; until then a VTODO has none.
+DTSTART and DUE pass through from mtools:W300 (nemik:W134); VALARM and RRULE follow when mtools:W278/W279 land.
 """
 
 from __future__ import annotations
@@ -71,6 +71,22 @@ def _stamp(iso: str) -> str:
     return f"{digits[:8]}T{digits[8:14]}Z" if len(digits) == 14 else "19700101T000000Z"
 
 
+def time_property(name: str, value: str) -> str:
+    """An mtools:W300 value as an RFC 5545 property line, or "" when there is none (nemik:W134).
+
+    mtools stores the value as written: DATE `20261001`, UTC `20261001T203000Z`, or
+    `TZID=Zone/Name:20261001T163000` (floating times are refused at write, so none arrive here).
+    """
+    if not value:
+        return ""
+    if value.startswith("TZID="):
+        tz, _, local = value.partition(":")
+        return f"{name};{tz}:{local}"
+    if re.fullmatch(r"\d{8}", value):
+        return f"{name};VALUE=DATE:{value}"
+    return f"{name}:{value}"
+
+
 def stated_ask(ask: str) -> tuple[str, str]:
     """(verb, what) from an ask that may join several blocked_on values with ' | '."""
     for part in ask.split(" | "):
@@ -102,6 +118,8 @@ def vtodos(asks: list[dict], repos: set[str], link: str = "") -> list[list[str]]
             f"CATEGORIES:nemik,{_escape(repo)}",
         ]
         # The waypoints this ask releases, as RFC 5545 relations (RELTYPE=CHILD: they follow it).
+        lines += [prop for name, key in (("DTSTART", "dtstart"), ("DUE", "due"))
+                  if (prop := time_property(name, a.get(key, "")))]
         lines += [f"RELATED-TO;RELTYPE=CHILD:{uid(w)}" for w in a.get("waiting", [])]
         if link:
             lines.append(f"URL:{link.rstrip('/')}/#{a['ref']}")
