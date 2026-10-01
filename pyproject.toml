@@ -7,6 +7,7 @@ dependencies = [
     "rdflib>=7",
     "pyshacl>=0.26",
     "mikemol-pathsforward",
+    "python-dateutil>=2.9",  # nemik:W145: RRULE expansion (mtools:W309 stores the rule, nemik expands it)
 ]
 
 [tool.uv.sources]

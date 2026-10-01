@@ -137,6 +137,10 @@ def queue_graph(repo: str, state_path: Path, known: frozenset[str] = frozenset()
             g.add((node, NEMIK.rrule, Literal(rule)))
         for ex in model.strlist(w, "exdates"):
             g.add((node, NEMIK.exdate, Literal(ex)))
+        # mtools:W310: completed occurrences, {RECURRENCE-ID: COMPLETED}; the ids are what skip.
+        occ = w.get("occurrences")
+        for rid in sorted(occ) if isinstance(occ, dict) else ():
+            g.add((node, NEMIK.occurrenceDone, Literal(rid)))
         # mtools:W279: VALARM triggers, verbatim; nemik.alarm resolves them, nemik-wake fires them.
         for trig in model.strlist(w, "alarms"):
             g.add((node, NEMIK.alarm, Literal(trig)))

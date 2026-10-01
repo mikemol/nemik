@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 57
+      "ticks_blocked": 58
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 13,
       "weight": 1
     },
     {
@@ -1398,7 +1398,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:13:38Z",
-      "ticks_blocked": 41,
+      "ticks_blocked": 42,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1986,7 +1986,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T22:46:47Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 10,
       "weight": 0
     },
     {
@@ -2127,7 +2127,7 @@
       "minted_during": "tick",
       "caused_by": "life",
       "last_worked": "2026-10-01T05:55:02Z",
-      "ticks_blocked": 2
+      "ticks_blocked": 3
     },
     {
       "symbol": "W114",
@@ -2617,7 +2617,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 2
+      "ticks_blocked": 3
     },
     {
       "symbol": "W138",
@@ -2752,7 +2752,7 @@
     {
       "symbol": "W145",
       "title": "Recurring alarms: expand RRULE/EXDATE (mtools:W278) so a recurring waypoint's alarms fire per occurrence, done per RECURRENCE-ID",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W129"
       ],
@@ -2760,16 +2760,14 @@
         "nemik-wake",
         "vtodo"
       ],
-      "blocked_on": [
-        "mtools:W310"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "2026-10-01: 2026-10-01 mtools-3d: W278 is now an umbrella over W309 (--rrule/--exdate stored + validated) and W310 (--complete-occurrence RECURRENCE-ID map, blocked on W309). W145 needs both (it fires per occurrence and skips completed ones); cites W310, reaching W309 through it. | 2026-10-01: 2026-10-01 step 1 (needs no W310): mtools:W309 landed ffc7896; adapter carries rrule (nemik:rrule) and exdates (nemik:exdate), operator_asks carries them, VTODOs emit RRULE verbatim + EXDATE per stored value form. test_alarm covers it; bazel 21/21. Independent check: icalendar + recurring_ical_events expand a weekly-Monday rule from 2026-10-05 with 10-12 excluded to 10-05, 10-19, 10-26. recurring_ical_events is the candidate expander for firing (mtools suggests it or icsstruct). Remaining, after mtools:W310: expand occurrences in nemik-wake, skip completed RECURRENCE-IDs.",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-01: 2026-10-01 mtools-3d: W278 is now an umbrella over W309 (--rrule/--exdate stored + validated) and W310 (--complete-occurrence RECURRENCE-ID map, blocked on W309). W145 needs both (it fires per occurrence and skips completed ones); cites W310, reaching W309 through it. | 2026-10-01: 2026-10-01 step 1 (needs no W310): mtools:W309 landed ffc7896; adapter carries rrule (nemik:rrule) and exdates (nemik:exdate), operator_asks carries them, VTODOs emit RRULE verbatim + EXDATE per stored value form. test_alarm covers it; bazel 21/21. Independent check: icalendar + recurring_ical_events expand a weekly-Monday rule from 2026-10-05 with 10-12 excluded to 10-05, 10-19, 10-26. recurring_ical_events is the candidate expander for firing (mtools suggests it or icsstruct). Remaining, after mtools:W310: expand occurrences in nemik-wake, skip completed RECURRENCE-IDs. | 2026-10-01: mtools:W310 landed aac3a28. python-dateutil>=2.9 added (uv.lock 2.9.0.post0; bazel via uv.lock). alarm.fires_between(trigger, start, end, dtstart, due, rrule, exdates, done): no rule = the one instant; with a rule each occurrence (rrulestr from DTSTART) shifts the trigger by its distance from DTSTART, minus EXDATEs (compared as instants) and completed RECURRENCE-IDs (keys in DTSTART's form via recurrence_id); absolute triggers fire once. Adapter carries occurrences' ids (nemik:occurrenceDone). Tests: weekly Mondays 18:00 Detroit -PT15M over Oct-Nov: 10-05 21:45Z, (10-12 EXDATE, 10-19 done skipped), 10-26 21:45Z, 11-02 and 11-09 22:45Z across the DST change; one-shot and absolute cases; adapter carries rrule/exdate/occurrences/alarms. bazel 21/21.",
       "issued_at": "2026-10-01T07:10:11Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-01T08:20:10Z",
+      "last_worked": "2026-10-01T08:34:45Z",
       "ticks_blocked": 0
     },
     {
