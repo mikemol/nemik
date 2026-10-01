@@ -2734,19 +2734,19 @@
     {
       "symbol": "W144",
       "title": "nemik-check UmbrellaBlockShape: a target whose only open child is the step before it in a chain (mtools:W300 <- W299) is a sequence, not an umbrella; flag only targets with 2+ open children or ones that are themselves blocked on their children",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "nemik-check"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-01: blocks.annotate: umbrellaBlockOn only when 2+ open same-repo children enable the target; a single-child chain step (mtools:W300<-W299, W310<-W309) is a right citation. Shape message + skill row say so. tests: umbrella test now has two children; new chain-step test. bazel 21/21. Fleet: umbrella warnings now 1 (nemik:W77 -> luthen-observability:W152, a real umbrella); W145 -> mtools:W310 no longer flagged.",
       "issued_at": "2026-10-01T05:55:41Z",
       "minted_during": "tick",
       "caused_by": "mtools",
-      "last_worked": null,
+      "last_worked": "2026-10-01T07:56:53Z",
       "ticks_blocked": 0
     },
     {
@@ -2761,15 +2761,15 @@
         "vtodo"
       ],
       "blocked_on": [
-        "mtools:W278"
+        "mtools:W310"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-10-01: 2026-10-01 mtools-3d: W278 is now an umbrella over W309 (--rrule/--exdate stored + validated) and W310 (--complete-occurrence RECURRENCE-ID map, blocked on W309). W145 needs both (it fires per occurrence and skips completed ones); cites W310, reaching W309 through it.",
       "issued_at": "2026-10-01T07:10:11Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-01T07:10:11Z",
+      "last_worked": "2026-10-01T07:55:34Z",
       "ticks_blocked": 0
     },
     {

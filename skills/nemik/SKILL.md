@@ -92,7 +92,7 @@ listed. If it appears under *unstated*, or not at all, the chain is broken somew
 | `ListFieldShape` | enables/touches/blocked_on stored as one string | store a list |
 | `UnclaimedBlockShape` | blocked on a workstream and nothing there claims it | cite `<repo>:W<n>`, or ask them to mint a claiming waypoint (rule 2) |
 | `OperatorAskShape` | operator block with no stated ask, or one already answered | rule 4 |
-| `UmbrellaBlockShape` | blocked on another repo's umbrella, not the child step doing the work | cite the child `<repo>:W<n>` |
+| `UmbrellaBlockShape` | blocked on another repo's umbrella (2+ open children enable it), not the child step doing the work; a single-child chain step is fine to cite | cite the child `<repo>:W<n>` |
 | `UnresolvedBlockerShape` | blocked_on names no repo, waypoint or operator ask nemik can resolve | rewrite it as one of those |
 | `LandedBlockerShape` | a blocker is already done or dropped; if all are, the item is ready | trim it (`$PF --bump-blocked` prunes local ones) |
 | `MalformedBlockerShape` | a symbol with prose attached (`W8 (both ...)`) | symbol alone; prose goes in evidence |

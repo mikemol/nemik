@@ -12,8 +12,9 @@ def _wp(g, repo, sym, status="ready"):
 
 def test_peer_block_on_umbrella_is_flagged_and_on_child_is_not() -> None:
     g = Graph()
-    umbrella, child = _wp(g, "b", "W43"), _wp(g, "b", "W115")
+    umbrella, child, sibling = _wp(g, "b", "W43"), _wp(g, "b", "W115"), _wp(g, "b", "W116")
     g.add((child, NEMIK.enables, umbrella))
+    g.add((sibling, NEMIK.enables, umbrella))
     on_umbrella, on_child = _wp(g, "a", "W46", "blocked"), _wp(g, "a", "W47", "blocked")
     g.add((on_umbrella, NEMIK.waitsFor, umbrella))
     g.add((on_child, NEMIK.waitsFor, child))
@@ -73,3 +74,14 @@ def test_operator_ask_lists_the_work_waiting_behind_it_across_repos() -> None:
     g.add((ask, NEMIK.enables, done))
     (a,) = [a for a in operator_asks(g) if a["ref"] == "life:W21"]
     assert a["waiting"] == ["resumes:W1", "resumes:W3"]
+
+
+def test_a_chain_step_with_one_open_child_is_not_an_umbrella() -> None:
+    """nemik:W144: mtools:W310 <- W309 is a sequence; citing W310 is the right citation."""
+    g = Graph()
+    step, before = _wp(g, "m", "W310", "blocked"), _wp(g, "m", "W309")
+    g.add((before, NEMIK.enables, step))
+    waiter = _wp(g, "n", "W145", "blocked")
+    g.add((waiter, NEMIK.waitsFor, step))
+    annotate(g)
+    assert (waiter, NEMIK.umbrellaBlockOn, None) not in g

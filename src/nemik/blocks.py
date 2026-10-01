@@ -83,8 +83,12 @@ def annotate(g: Graph) -> None:
     for node, _, target in g.triples((None, NEMIK.waitsFor, None)):
         if _repo(target) == _repo(node) or (node, OSLC_CM.state, NEMIK.Done) in g:
             continue
-        if any(_repo(c) == _repo(target) and (c, OSLC_CM.state, NEMIK.Done) not in g
-               for c in g.subjects(NEMIK.enables, target)):
+        # nemik:W144: an umbrella splits into two or more open children. A target with exactly one
+        # open child is a step in a chain (mtools:W300 <- W299; W310 <- W309): citing it is right,
+        # and the work beneath it is reached through it.
+        kids = [c for c in g.subjects(NEMIK.enables, target)
+                if _repo(c) == _repo(target) and (c, OSLC_CM.state, NEMIK.Done) not in g]
+        if len(kids) >= 2:
             g.add((node, NEMIK.umbrellaBlockOn, target))
 
     # A block on a waypoint that has already landed (done, or dropped to residue) is stale: the
