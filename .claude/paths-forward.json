@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 55
+      "ticks_blocked": 56
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "weight": 1
     },
     {
@@ -1398,7 +1398,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:13:38Z",
-      "ticks_blocked": 39,
+      "ticks_blocked": 40,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1959,7 +1959,7 @@
       "evidence": "2026-09-28: luthen declares deploy-state repo, its GitRepository, ImageUpdateAutomation (write cred scoped to deploy-state) and the Kustomization over ./deploy, suspended until W105 lands. | 2026-09-28: Step 1 (this tick): deploy/{kustomization,deployment,service}.yaml; kubectl kustomize deploy renders 2 objects. Carried from luthen terraform/nemik.tf: 2 replicas, 512Mi/1cpu Guaranteed, probes, tmp emptyDir, VM env (now FQDN into ns buildbuddy). Changed: PVC nemik-export ro at /export, image bare 'nemik', restricted securityContext. Not validated against the live cluster (no kubectl context here). | 2026-09-28: Step 2: deploy/image-automation.yaml (ImageRepository registry.buildbuddy.svc.cluster.local:5000/nemik insecure, per luthen endpoints_query registry-http --side pod; ImagePolicy numerical on <unix-ts>-<sha> tags; image.toolkit.fluxcd.io/v1 as luthen uses) and .forgejo/workflows/build.yml (git clone + buildctl, push to vars.REGISTRY/nemik:<ts>-<sha>), modelled on luthen's forgejo/witness workflow. kubectl kustomize deploy renders 4 objects. Not yet run on the runner.",
       "issued_at": "2026-09-28T13:25:06Z",
       "minted_during": "tick",
-      "caused_by": "luthen:W185",
+      "caused_by": "luthen-observability:W185",
       "last_worked": "2026-09-28T16:51:01Z",
       "ticks_blocked": 0,
       "weight": 33
@@ -1986,7 +1986,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T22:46:47Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "weight": 0
     },
     {
@@ -2005,7 +2005,7 @@
       "evidence": "2026-09-28: luthen W190 waits on mtools taking the waypoint vector field; nemik-score starts after. | 2026-09-28: mtools W248 split: mtools stores+validates vector (WV:1/R/C/I/A/X/S/F/W) and vector_source; nemik owns bands, composition, unscored default and guarantees (answered yes 2026-09-28). Alphabet is luthen's call. | 2026-09-28: mtools 6809ab5: vector grammar (pathsforward vector.py), luthen W218 alphabet WV,R,E,C,I,A,X,S,F,W, all nine required. Field not writable until mtools W256 (--update --vector) and W257 (--check revalidation). | 2026-09-28: mtools W248 landed: writer 0d31908, checker 23f1223. Fields vector (WV:1/R/E/C/I/A/X/S/F/W, fixed order, all required) + vector_source (default|signal|agent), written together; --check flags bad grammar, prints UNSCORED <n> (census, exit unchanged). First step: re-vendor the pathsforward wheel at 23f1223 (vendor/wheels, README history), then nemik-score reads vector via store.load. | 2026-09-29: Atomized 2026-09-28 (top 3 ticks): W130 wheel, W131 vector->band, W132 rank composition, W133 --check guarantees; chained in that order. | 2026-09-30: every atom landed (W130 wheel, W131 vector->band, W132 composition, W133 --check guarantees) and mtools W248 carries the vector field; the band table, floor and trust-boundary policy in bands.toml are a starting calibration for luthen-observability:W190 to adjust by letter.",
       "issued_at": "2026-09-28T13:25:10Z",
       "minted_during": "tick",
-      "caused_by": "luthen:W190",
+      "caused_by": "luthen-observability:W190",
       "last_worked": "2026-09-30T21:25:37Z",
       "ticks_blocked": 0,
       "weight": 8
@@ -2033,22 +2033,20 @@
     {
       "symbol": "W109",
       "title": "Repoint W105 and W107 caused_by to luthen-observability:W185 and W190 once mtools ships --update --caused-by (W136)",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [
         "caused-by",
         "pathsforward"
       ],
-      "blocked_on": [
-        "W136"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "2026-10-01: confirmed at the vendored 23f1223: '--update W107 --caused-by ...' is REFUSED (--caused-by does not apply to --update). W108 now warns on W105/W107's luthen: causes, so the ask has a witness. Letter drafted (2026-10-01-nemik-to-mtools-update-caused-by.md); not yet delivered to mtools' inbox: mtools is outside the session that drafted it. | 2026-10-01: the ask moved to W136 (blocked on mtools, where nemik-inbound shows it); this waypoint is the repoint after it lands.",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-01: confirmed at the vendored 23f1223: '--update W107 --caused-by ...' is REFUSED (--caused-by does not apply to --update). W108 now warns on W105/W107's luthen: causes, so the ask has a witness. Letter drafted (2026-10-01-nemik-to-mtools-update-caused-by.md); not yet delivered to mtools' inbox: mtools is outside the session that drafted it. | 2026-10-01: the ask moved to W136 (blocked on mtools, where nemik-inbound shows it); this waypoint is the repoint after it lands. | 2026-10-01: 2026-10-01 with a2b7b62: --update W105 --caused-by luthen-observability:W185, --update W107 --caused-by luthen-observability:W190; --show confirms both. nemik-check: no caused_by finding on nemik.",
       "issued_at": "2026-09-28T13:47:34Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-01T01:27:40Z",
+      "last_worked": "2026-10-01T06:18:40Z",
       "ticks_blocked": 0,
       "weight": 1
     },
@@ -2129,7 +2127,7 @@
       "minted_during": "tick",
       "caused_by": "life",
       "last_worked": "2026-10-01T05:55:02Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 1
     },
     {
       "symbol": "W114",
@@ -2456,7 +2454,7 @@
       "minted_during": "tick",
       "caused_by": "life:W23",
       "last_worked": "2026-10-01T05:55:57Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 1
     },
     {
       "symbol": "W130",
@@ -2564,7 +2562,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-01T05:55:41Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 1
     },
     {
       "symbol": "W135",
@@ -2589,7 +2587,7 @@
     {
       "symbol": "W136",
       "title": "Ask mtools: --update SYMBOL --caused-by REF, validated as --add validates it, so a mis-cited cause is corrected in place instead of re-minting",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W109"
       ],
@@ -2597,16 +2595,14 @@
         "caused-by",
         "pathsforward"
       ],
-      "blocked_on": [
-        "mtools:W305"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "2026-10-01: THE ASK (mtools: claim it with --enables nemik:W136). caused_by can be set only at --add. At the pathsforward wheel nemik vendors (23f1223), '--update W107 --caused-by luthen-observability:W190' prints 'REFUSED: --caused-by does not apply to --update' (cli.py lists caused_by among the add fields only). WHY NOW: nemik:W108 (88db751) makes nemik-check warn on a caused_by <repo>:W<n> or W<n> that resolves nowhere, naming it; it flags nemik:W105 (luthen:W185) and W107 (luthen:W190), the wrong prefix luthen reported for enables on 2026-09-28. enables was fixed with --update --enables; caused_by has no equivalent, so today's only fix is drop and re-add, which re-mints the symbol and breaks every citation of the old one. WANTED: --update SYMBOL --caused-by REF under the same validation as --add, recorded like other updates; whether it can clear the field is mtools' call. WITNESS: after nemik re-vendors, '--update W105 --caused-by luthen-observability:W185' and '--update W107 --caused-by luthen-observability:W190' succeed, and nemik-check --root ~/github prints no 'caused_by names' line for nemik. | 2026-10-01: 2026-10-01 mtools-3d: claimed as mtools:W305.",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-01: THE ASK (mtools: claim it with --enables nemik:W136). caused_by can be set only at --add. At the pathsforward wheel nemik vendors (23f1223), '--update W107 --caused-by luthen-observability:W190' prints 'REFUSED: --caused-by does not apply to --update' (cli.py lists caused_by among the add fields only). WHY NOW: nemik:W108 (88db751) makes nemik-check warn on a caused_by <repo>:W<n> or W<n> that resolves nowhere, naming it; it flags nemik:W105 (luthen:W185) and W107 (luthen:W190), the wrong prefix luthen reported for enables on 2026-09-28. enables was fixed with --update --enables; caused_by has no equivalent, so today's only fix is drop and re-add, which re-mints the symbol and breaks every citation of the old one. WANTED: --update SYMBOL --caused-by REF under the same validation as --add, recorded like other updates; whether it can clear the field is mtools' call. WITNESS: after nemik re-vendors, '--update W105 --caused-by luthen-observability:W185' and '--update W107 --caused-by luthen-observability:W190' succeed, and nemik-check --root ~/github prints no 'caused_by names' line for nemik. | 2026-10-01: 2026-10-01 mtools-3d: claimed as mtools:W305. | 2026-10-01: mtools:W305 landed at a2b7b62; vendored wheel mikemol_pathsforward-0.1.0+a2b7b62 (README recipe; 23f1223 removed; MODULE.bazel, pyproject, uv.lock, README history); //:.venv rebuilt.",
       "issued_at": "2026-10-01T01:27:31Z",
       "minted_during": "interrupt",
       "caused_by": "W108",
-      "last_worked": "2026-10-01T05:55:02Z",
+      "last_worked": "2026-10-01T06:18:40Z",
       "ticks_blocked": 0
     },
     {
@@ -2628,7 +2624,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 1
     },
     {
       "symbol": "W138",
