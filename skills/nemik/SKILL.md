@@ -76,6 +76,7 @@ listed. If it appears under *unstated*, or not at all, the chain is broken somew
 | `nemik-floor-asks` | summit floor asks that point at waypoints which no longer exist | when filing to summit |
 | `nemik-witnesses` | waypoints with a declared Rego witness, evaluated; `--apply` marks those that hold as done | outage/"wait until X is true" waypoints |
 | `nemik-ics` | the operator's needs-you asks, from repos opted in via `~/.config/nemik/ics.toml` (`repos = [...]`), as an iCalendar file of VTODOs (UID `nemik:<repo>:W<n>`); host-side only, never in the export | to put your repo's operator asks on the operator's calendar/phone: opt in, and state the ask as `operator: decide|act ...` |
+| `nemik-tasks --list NAME [--apply]` | the same needs-you VTODOs synced into the operator's Google Tasks list through Akonadi (host helper built by `./setup.sh`); plans unless `--apply`; prints `DONE-CLAIM <repo>:W<n>` when the operator ticked a task whose ask is still open; exit 0/1/2 | luthen's timer runs it; a DONE-CLAIM about your waypoint is a claim to verify from your own readings, never a reason to mark it done unread |
 | `nemik-metrics` | the same state as Prometheus text | luthen scrapes it; rarely by hand |
 | `nemik-serve` | read-only web view of the merged graph | the operator's dashboard; luthen hosts it |
 

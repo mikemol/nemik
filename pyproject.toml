@@ -27,6 +27,7 @@ nemik-floor-asks = "nemik.floorasks:main"
 nemik-overlaps = "nemik.overlaps:main"
 nemik-witnesses = "nemik.witnesses:main"
 nemik-ics = "nemik.vtodo:main"
+nemik-tasks = "nemik.vtodo:tasks_main"
 
 [project.optional-dependencies]
 docs = [

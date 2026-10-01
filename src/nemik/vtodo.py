@@ -118,14 +118,69 @@ def calendar(todos: list[list[str]]) -> str:
     return "".join(_fold(line) + "\r\n" for line in lines)
 
 
+def feed(root: Path, opt_in: Path, link: str = "") -> str:
+    """The iCalendar text nemik-ics prints, built in-process."""
+    from rdflib import Graph
+
+    from nemik.adapter import ledger_graph
+    from nemik.blocks import operator_asks
+    from nemik.check import LEDGER, survey, workstream_files
+
+    g = Graph()
+    for _, qg, _ in survey(root):
+        if qg is not None:
+            g += qg
+    for repo, path in workstream_files(root, LEDGER):
+        g += ledger_graph(repo, path)[0]
+    return calendar(vtodos(operator_asks(g), opted_in(opt_in), link))
+
+
+DEFAULT_HELPER = Path.home() / "github" / "nemik" / "build" / "akonadi-tasks" / "nemik-akonadi-tasks"
+
+
+def tasks_main(argv: list[str] | None = None) -> None:
+    """nemik-tasks: sync the operator's needs-you asks into a Google Tasks list (via Akonadi).
+
+    One entry point for luthen's timer (luthen-observability:W234: no authored shell, so no pipe in
+    ExecStart). The feed is built in-process; the KF6 Akonadi helper (a host build, ./setup.sh) gets
+    it on stdin. Its stdout (CREATE/UPDATE/COMPLETE/DONE-CLAIM lines) passes through, and its exit
+    code is returned: 0 ok, 1 some writes failed, 2 no unique list or Akonadi unreachable. A missing
+    helper or a failed feed is also 2.
+    """
+    import argparse
+    import subprocess
+    import sys
+
+    from nemik.check import default_root
+
+    ap = argparse.ArgumentParser(prog="nemik-tasks", description=(tasks_main.__doc__ or "").splitlines()[0])
+    ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
+    ap.add_argument("--opt-in", type=Path, default=DEFAULT_OPT_IN, help="TOML with repos = [...]")
+    ap.add_argument("--link", default="", help="base URL of the nemik view, for each task's URL")
+    ap.add_argument("--helper", type=Path, default=DEFAULT_HELPER, help="the nemik-akonadi-tasks binary")
+    ap.add_argument("--list", required=True, help="the Google Tasks list, by name")
+    ap.add_argument("--create-list", action="store_true", help="create the list when none has that name")
+    ap.add_argument("--apply", action="store_true", help="write; without it, only print the plan")
+    args = ap.parse_args(argv)
+    if not args.helper.exists():
+        print(f"ERROR: {args.helper} is missing; build it with ./setup.sh", flush=True)
+        raise SystemExit(2)
+    try:
+        text = feed(args.root, args.opt_in, args.link)
+    except Exception as e:  # noqa: BLE001 - any feed failure is the 2 of the exit contract
+        print(f"ERROR: feed: {e}", flush=True)
+        raise SystemExit(2) from e
+    cmd = [str(args.helper), "--list", args.list]
+    cmd += ["--create-list"] * args.create_list + ["--apply"] * args.apply
+    sys.stdout.flush()
+    raise SystemExit(subprocess.run(cmd, input=text.encode(), check=False).returncode)
+
+
 def main(argv: list[str] | None = None) -> None:
     """nemik-ics: the operator's needs-you asks, from opted-in repos, as an iCalendar file of VTODOs."""
     import argparse
 
-    from nemik.adapter import ledger_graph
-    from nemik.blocks import operator_asks
-    from nemik.check import LEDGER, default_root, survey, workstream_files
-    from rdflib import Graph
+    from nemik.check import default_root
 
     ap = argparse.ArgumentParser(prog="nemik-ics", description=(main.__doc__ or "").splitlines()[0])
     ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
@@ -134,13 +189,7 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--out", type=Path, help="write here (atomically) instead of stdout")
     args = ap.parse_args(argv)
 
-    g = Graph()
-    for _, qg, _ in survey(args.root):
-        if qg is not None:
-            g += qg
-    for repo, path in workstream_files(args.root, LEDGER):
-        g += ledger_graph(repo, path)[0]
-    text = calendar(vtodos(operator_asks(g), opted_in(args.opt_in), args.link))
+    text = feed(args.root, args.opt_in, args.link)
     if args.out is None:
         print(text, end="")
         return

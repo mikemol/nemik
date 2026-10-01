@@ -41,6 +41,7 @@ venv_from_hub(
         "nemik-overlaps": "nemik.overlaps:main",
         "nemik-witnesses": "nemik.witnesses:main",
         "nemik-ics": "nemik.vtodo:main",
+        "nemik-tasks": "nemik.vtodo:tasks_main",
         "mikemol-paths-forward": "mikemol.pathsforward.cli:main",
     },
 )
