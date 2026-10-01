@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 58
+      "ticks_blocked": 59
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 13,
+      "ticks_blocked": 14,
       "weight": 1
     },
     {
@@ -1398,7 +1398,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:13:38Z",
-      "ticks_blocked": 42,
+      "ticks_blocked": 43,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1986,7 +1986,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T22:46:47Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "weight": 0
     },
     {
@@ -2127,7 +2127,7 @@
       "minted_during": "tick",
       "caused_by": "life",
       "last_worked": "2026-10-01T05:55:02Z",
-      "ticks_blocked": 3
+      "ticks_blocked": 4
     },
     {
       "symbol": "W114",
@@ -2449,7 +2449,8 @@
       "minted_during": "tick",
       "caused_by": "life:W23",
       "last_worked": "2026-10-01T07:10:11Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 3
     },
     {
       "symbol": "W130",
@@ -2617,7 +2618,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 3
+      "ticks_blocked": 4
     },
     {
       "symbol": "W138",
@@ -2636,7 +2637,8 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W139",
@@ -2692,7 +2694,8 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-01T01:27:32Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W142",
@@ -2715,7 +2718,7 @@
     {
       "symbol": "W143",
       "title": "Evaluate Google Keep as the operator-ask surface (operator 2026-09-30: 'Keep has Google Tasks integration... may be a better vector, even with a third-party lib'); after the Tasks sink (W121) is running; weigh any unofficial Keep client's credential model (e.g. gkeepapi's account master token) against Akonadi's scoped OAuth",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "akonadi",
@@ -2723,13 +2726,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-01: 2026-10-01 research: since Oct 2025 Keep reminders ARE Google Tasks (androidcentral; morgen.so 2026): view/edit/complete from Keep, Calendar, Tasks, Assistant. So Google Tasks is the shared store and W121's 'nemik' list already sits on the backend Keep reads; a dated task (due, W134) also appears on the calendar. The Keep client route (gkeepapi) uses Keep's PRIVATE mobile API via gpsoauth and an account master token that never expires and grants FULL account access (gkeepapi docs): far wider than Akonadi's OAuth grant in KWallet. Judgment: no Keep client; Tasks stays the vector. Unverified: whether Keep's UI lists tasks created outside Keep (not just Keep-made reminders); the operator can see it on the phone. Revisit only if Keep shows something Tasks cannot.",
       "issued_at": "2026-10-01T03:34:15Z",
       "minted_during": "tick",
       "caused_by": "operator",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-01T10:00:20Z",
+      "ticks_blocked": 0,
+      "weight": 4
     },
     {
       "symbol": "W144",
