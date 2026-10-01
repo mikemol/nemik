@@ -45,7 +45,9 @@ def workstream_files(root: Path, name: str) -> list[tuple[str, Path]]:
     found = {p.parents[1].name: p for p in root.glob(f"*/.claude/{name}")}
     found |= {p.parent.name: p for p in root.glob(f"*/{name}") if p.parent.name != ".claude"}
     if not found and (root / ".claude" / name).exists():  # --root pointed at one repo
-        found = {root.name: root / ".claude" / name}
+        # resolved: `--root .` has the name '' (nemik:W142), which left the workstream unnamed and
+        # its own <repo>:W<n> references unresolvable.
+        found = {root.resolve().name: root / ".claude" / name}
     # A dot-named directory (e.g. .linux-sources-gate-wt, a git worktree of linux-sources) carries
     # another workstream's queue at another commit, not a workstream of its own; it cannot be
     # cited either, since mtools' <repo>:W<n> requires the repo to start alphanumeric. Counting it

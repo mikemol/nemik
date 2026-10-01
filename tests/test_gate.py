@@ -175,3 +175,16 @@ def test_caused_by_into_residue_resolves(tmp_path: Path) -> None:
     q.write_text(json.dumps(doc))
     r = run("check", tmp_path)
     assert not any("caused_by names" in l for l in r.stdout.splitlines()), r.stdout
+
+
+def test_single_repo_root_given_as_dot_is_named_by_its_directory(tmp_path: Path) -> None:
+    # nemik:W142: Path(".").name is '', so `--root .` inside a repo left the workstream unnamed and
+    # its own alpha:W<n> causes unresolved.
+    repo = tmp_path / "alpha"
+    (repo / ".claude").mkdir(parents=True)
+    write_queue(tmp_path, "staging", waypoint("W1"), waypoint("W2", caused_by="alpha:W1"))
+    (tmp_path / "staging" / "paths-forward.json").rename(repo / ".claude" / "paths-forward.json")
+    r = installed.run("nemik-check", "--root", ".", cwd=repo)
+    lines = r.stdout.splitlines()
+    assert "OK        alpha" in lines, r.stdout + r.stderr
+    assert not any("caused_by names" in l for l in lines), r.stdout

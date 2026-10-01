@@ -2707,19 +2707,19 @@
     {
       "symbol": "W142",
       "title": "nemik-check --root . names the workstream '' (Path('.').name), so a one-repo run prints no repo name and cannot resolve its own <repo>:W<n> causes",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "nemik-check"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-10-01: workstream_files() keys a single-repo root by root.name, and Path('.').name is ''. Fix: root.resolve().name. Seen 2026-09-30: an 'OK' line with no repo, and nemik:W4 and nemik:W22 causes reported as unresolved.",
+      "next_bounded_step": null,
+      "evidence": "2026-10-01: workstream_files() keys a single-repo root by root.name, and Path('.').name is ''. Fix: root.resolve().name. Seen 2026-09-30: an 'OK' line with no repo, and nemik:W4 and nemik:W22 causes reported as unresolved. | 2026-10-01: check.workstream_files: root.resolve().name. tests/test_gate.py runs nemik-check --root . inside a repo dir: the repo is named and its own alpha:W1 cause resolves (fails before the fix).",
       "issued_at": "2026-10-01T01:27:32Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-10-01T01:27:32Z",
+      "last_worked": "2026-10-01T01:35:02Z",
       "ticks_blocked": 0
     }
   ],
