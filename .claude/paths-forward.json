@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 176,
+  "counter": 177,
   "waypoints": [
     {
       "symbol": "W1",
@@ -2969,7 +2969,7 @@
     {
       "symbol": "W154",
       "title": "Field manifest for the static build: every export field it renders, per published file (machine-readable, emitted beside the build and checked by a test against what the build actually writes), for luthen's egress gate",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "luthen-observability:W270"
       ],
@@ -2979,12 +2979,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
+      "next_bounded_step": "Enumerate every field the static build renders from the export and write the manifest file",
       "evidence": "2026-10-01: Contract: the build FAILS if it renders a field absent from the manifest (new free text cannot slip in unexamined). luthen W270 cites W154.",
       "issued_at": "2026-10-01T16:30:23Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W269",
-      "last_worked": "2026-10-01T16:30:53Z",
+      "last_worked": "2026-10-01T20:03:33Z",
       "ticks_blocked": 0,
       "weight": 6
     },
@@ -3043,7 +3043,7 @@
       "caused_by": "W113",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 4
     },
     {
       "symbol": "W158",
@@ -3062,7 +3062,7 @@
       "caused_by": "W113",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 4
     },
     {
       "symbol": "W159",
@@ -3081,7 +3081,7 @@
       "caused_by": "W113",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 4
     },
     {
       "symbol": "W160",
@@ -3091,14 +3091,18 @@
         "W113"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W157",
+        "W158",
+        "W159"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-01T19:51:38Z",
       "minted_during": "interrupt",
       "caused_by": "W113",
-      "last_worked": null,
+      "last_worked": "2026-10-01T20:03:32Z",
       "ticks_blocked": 0,
       "weight": 3
     },
@@ -3138,7 +3142,7 @@
       "caused_by": "W148",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 4
     },
     {
       "symbol": "W163",
@@ -3157,7 +3161,7 @@
       "caused_by": "W148",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 4
     },
     {
       "symbol": "W164",
@@ -3176,7 +3180,7 @@
       "caused_by": "W148",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 4
     },
     {
       "symbol": "W165",
@@ -3186,14 +3190,18 @@
         "W148"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W162",
+        "W163",
+        "W164"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-01T19:51:39Z",
       "minted_during": "interrupt",
       "caused_by": "W148",
-      "last_worked": null,
+      "last_worked": "2026-10-01T20:03:32Z",
       "ticks_blocked": 0,
       "weight": 3
     },
@@ -3214,7 +3222,7 @@
       "caused_by": "W150",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 5
     },
     {
       "symbol": "W167",
@@ -3233,7 +3241,7 @@
       "caused_by": "W150",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 5
     },
     {
       "symbol": "W168",
@@ -3243,14 +3251,17 @@
         "W150"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W166",
+        "W167"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-01T19:51:39Z",
       "minted_during": "interrupt",
       "caused_by": "W150",
-      "last_worked": null,
+      "last_worked": "2026-10-01T20:03:32Z",
       "ticks_blocked": 0,
       "weight": 4
     },
@@ -3271,7 +3282,7 @@
       "caused_by": "W153",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 6
     },
     {
       "symbol": "W170",
@@ -3290,7 +3301,7 @@
       "caused_by": "W153",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 6
     },
     {
       "symbol": "W171",
@@ -3309,7 +3320,7 @@
       "caused_by": "W153",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 6
     },
     {
       "symbol": "W172",
@@ -3319,14 +3330,18 @@
         "W153"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W169",
+        "W170",
+        "W171"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-01T19:51:39Z",
       "minted_during": "interrupt",
       "caused_by": "W153",
-      "last_worked": null,
+      "last_worked": "2026-10-01T20:03:32Z",
       "ticks_blocked": 0,
       "weight": 5
     },
@@ -3401,7 +3416,25 @@
       "minted_during": "interrupt",
       "caused_by": "el-openglo-1c",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
+    },
+    {
+      "symbol": "W177",
+      "title": "nemik-check: one active (working) card per repo unless all open items are blocked; warn on none or several (operator 2026-10-01)",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-01T20:03:32Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 7
     }
   ],
   "residue": [
