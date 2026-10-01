@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 145,
+  "counter": 146,
   "waypoints": [
     {
       "symbol": "W1",
@@ -2770,6 +2770,27 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-01T07:10:11Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W146",
+      "title": "Move nemik.alarm's trigger arithmetic onto mtools' timevalue resolver (mtools:W308) when it lands; keep nemik's tests as the witness that the instants do not change",
+      "status": "blocked",
+      "enables": [],
+      "touches": [
+        "nemik-wake",
+        "pathsforward"
+      ],
+      "blocked_on": [
+        "mtools:W308"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-01T07:14:29Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-10-01T07:14:29Z",
       "ticks_blocked": 0
     }
   ],
