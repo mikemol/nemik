@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 146,
+  "counter": 147,
   "waypoints": [
     {
       "symbol": "W1",
@@ -2118,16 +2118,16 @@
         "sources"
       ],
       "blocked_on": [
-        "mtools:W304"
+        "W147"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "2026-09-28: Needs mtools' calendar reader (mtools/inbox/2026-09-28-life-ask-calendar-reader.md) and luthen's Akonadi declaration. | 2026-10-01: 2026-10-01 mtools-3d: claimed as mtools:W304 (what mtools supplies, e.g. icsstruct/mikemol-ics, vs luthen's Akonadi side).",
+      "evidence": "2026-09-28: Needs mtools' calendar reader (mtools/inbox/2026-09-28-life-ask-calendar-reader.md) and luthen's Akonadi declaration. | 2026-10-01: 2026-10-01 mtools-3d: claimed as mtools:W304 (what mtools supplies, e.g. icsstruct/mikemol-ics, vs luthen's Akonadi side). | 2026-10-01: 2026-10-01 mtools-3d: mtools:W304 answered: mtools' part exists (mikemol-icsstruct, mikemol-ics --window 14d --json SOURCE: per-occurrence records, RRULE/RDATE/EXDATE/overrides, tz-aware, lossless, URLs redacted). The Akonadi read is nemik's (Qt/KF stays out of mtools): W147 exports an .ics, then nemik reads it through mikemol-ics (add mikemol-icsstruct as a dependency when W113 is worked).",
       "issued_at": "2026-09-28T15:05:07Z",
       "minted_during": "tick",
       "caused_by": "life",
-      "last_worked": "2026-10-01T05:55:02Z",
-      "ticks_blocked": 4
+      "last_worked": "2026-10-01T10:56:21Z",
+      "ticks_blocked": 0
     },
     {
       "symbol": "W114",
@@ -2791,6 +2791,27 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-01T07:33:09Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W147",
+      "title": "Akonadi helper export mode: write a calendar collection's events (by name, akonadi_google_resource_0, event mimetype) as one .ics file, for mikemol-ics to read; credential stays in KWallet",
+      "status": "ready",
+      "enables": [
+        "W113"
+      ],
+      "touches": [
+        "akonadi",
+        "calendars"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-01T10:56:21Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": null,
       "ticks_blocked": 0
     }
   ],
