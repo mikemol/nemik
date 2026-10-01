@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 143,
+  "counter": 144,
   "waypoints": [
     {
       "symbol": "W1",
@@ -2553,16 +2553,15 @@
         "vtodo"
       ],
       "blocked_on": [
-        "mtools:W299",
         "mtools:W300"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "2026-10-01: 2026-10-01: mtools:W276 is now an umbrella over W299 (reader), W300 (DTSTART/DUE), W301 (COMPLETED); W134 needs the reader and the date fields. No child covers VALARM or RRULE yet (asked).",
+      "evidence": "2026-10-01: 2026-10-01: mtools:W276 is now an umbrella over W299 (reader), W300 (DTSTART/DUE), W301 (COMPLETED); W134 needs the reader and the date fields. No child covers VALARM or RRULE yet (asked). | 2026-10-01: Cites W300 alone (W299 enables it, so it is reached transitively).",
       "issued_at": "2026-09-29T00:28:20Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-01T05:55:02Z",
+      "last_worked": "2026-10-01T05:55:41Z",
       "ticks_blocked": 0
     },
     {
@@ -2738,6 +2737,24 @@
       "issued_at": "2026-10-01T03:34:15Z",
       "minted_during": "tick",
       "caused_by": "operator",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W144",
+      "title": "nemik-check UmbrellaBlockShape: a target whose only open child is the step before it in a chain (mtools:W300 <- W299) is a sequence, not an umbrella; flag only targets with 2+ open children or ones that are themselves blocked on their children",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "nemik-check"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-01T05:55:41Z",
+      "minted_during": "tick",
+      "caused_by": "mtools",
       "last_worked": null,
       "ticks_blocked": 0
     }
