@@ -259,3 +259,4 @@
 2026-10-01T15:37:29Z  tick  W152 done      sweep     "band any vector or waypoint (el-openglo:W176)"
 2026-10-01T16:30:23Z  tick  --   minted    collapse  "public static view (luthen W269): W153 static build, W154 field manifest"
 2026-10-01T19:50:34Z  tick  --  advanced  sweep  "nemik warnings 9->2: 6 bundled titles trimmed (full text kept in evidence), W77 cites umbrella child luthen-observability:W170"  by=agent-nemik-bb
+2026-10-01T19:52:11Z  tick  --  advanced  collapse-inverse  "atomized the 6 bundled waypoints into 21 children W155-W175 (W106,W113,W148,W150,W153,W75 now umbrellas); correcting the title-only trim"  by=agent-nemik-bb
