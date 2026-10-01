@@ -492,7 +492,62 @@ function tile() {
     const { el, bb } = units.get(u);
     el.shift({ x: p.x - bb.x1, y: p.y - bb.y1 });
   }
+  if (!forestOn) pullRows(unitOf);
   cy.fit(undefined, 20);
+}
+
+// nemik:W118: dagre orders each rank inside a box by that box's own edges only, so a node whose
+// partner lies in another box may sit on the far side of its row. Once the boxes are placed, each
+// row that holds such a node is reordered by adjacent swaps, kept when they shorten the row's
+// edges (inside and across boxes alike). The row's slots keep their gaps, so its width is unchanged.
+// The whole pass is kept when it lowers p95/p95_0 summed over cross-box and in-box edges, the
+// packer's rule (fixture: cross p95 2200 -> 2209, in-box p95 370 -> 329, cross total -14%).
+function pullRows(unitOf) {
+  const len = e => dist(e.source().position(), e.target().position());
+  const isCross = e => unitOf(e.source()) !== unitOf(e.target());
+  const measure = () => {
+    const X = [], I = [];
+    cy.edges().forEach(e => (isCross(e) ? X : I).push(len(e)));
+    return { cross: p95(X) || 1, intra: p95(I) || 1 };
+  };
+  const before = measure(), saved = new Map(cy.nodes().map(n => [n.id(), { ...n.position() }]));
+  cy.nodes(".repo").forEach(r => {
+    const rows = new Map();
+    r.children().forEach(n => {
+      const y = Math.round(n.position().y);
+      if (!rows.has(y)) rows.set(y, []);
+      rows.get(y).push(n);
+    });
+    for (const row of rows.values()) {
+      if (row.length < 2 || !row.some(n => n.connectedEdges().some(isCross))) continue;
+      row.sort((a, b) => a.position().x - b.position().x);
+      const left = row[0].position().x - row[0].outerWidth() / 2;
+      const gaps = row.slice(1).map((n, i) =>
+        (n.position().x - n.outerWidth() / 2) - (row[i].position().x + row[i].outerWidth() / 2));
+      const edges = row.reduce((c, n) => c.union(n.connectedEdges()), cy.collection());
+      const place = order => {
+        let x = left;
+        order.forEach((n, i) => { n.position("x", x + n.outerWidth() / 2); x += n.outerWidth() + (gaps[i] || 0); });
+      };
+      // All the row's edges, not only the cross ones: counting only those pulled nodes away from
+      // their own box's edges (fixture: in-box p95 370 -> 791).
+      const cost = () => edges.reduce((t, e) => t + len(e), 0);
+      let order = row.slice(), c = cost();
+      for (let pass = 0, better = true; better && pass < row.length; pass++) {
+        better = false;
+        for (let i = 0; i + 1 < order.length; i++) {
+          [order[i], order[i + 1]] = [order[i + 1], order[i]];
+          place(order);
+          const c2 = cost();
+          if (c2 < c - 0.5) { c = c2; better = true; }
+          else { [order[i], order[i + 1]] = [order[i + 1], order[i]]; place(order); }
+        }
+      }
+    }
+  });
+  const after = measure();
+  if (after.cross / before.cross + after.intra / before.intra >= 2)
+    cy.nodes().forEach(n => n.position(saved.get(n.id())));
 }
 
 function lane(cat) {

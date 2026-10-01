@@ -237,3 +237,4 @@
 2026-09-30T21:25:37Z  op    W133 done      unblock   "--check guarantees: INVERSION, POLICY, UNSCORED census; W107 unblocked"
 2026-09-30T21:25:37Z  op    W107 done      collapse  "atoms W130-W133 landed; hands luthen-observability:W190 the guarantees"
 2026-10-01T00:55:21Z  op    W127 done      sweep     "pack to the viewport's aspect: forest fit 0.223 -> 0.458"
+2026-10-01T01:02:41Z  op    W118 done      sweep     "rows pulled toward partner boxes: cross total -14%, intra p95 -11%"

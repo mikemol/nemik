@@ -28,7 +28,8 @@ FLEET = Path(__file__).parent / "fixtures" / "fleet"
 #   W125 labels inside:            2548, 387, 14.2M px^2
 #   W126 skyline packing, spacing: 2200, 370, 10.8M px^2
 #   W127 fit zoom in the 1360x1200 graph pane: 0.37 (unchanged: the strict packing still wins here)
-BUDGET = {"cross_p95": 2450, "intra_p95": 410, "area": 11_900_000, "fit_zoom": 0.33}
+#   W118 rows reordered toward partners: 2209, 329 (cross total 86381 -> 74166, cross p50 1091 -> 761)
+BUDGET = {"cross_p95": 2450, "intra_p95": 365, "area": 11_900_000, "fit_zoom": 0.33}
 # The rank forest (W135), same rules. History (cross p95, fit zoom):
 #   W135 forest, strict packing:            3654, 0.223 (2038x5352: a column on a landscape pane)
 #   W127 packing may set a box beside the boxes it depends on: 2009, 0.458 (2319x2583)
@@ -99,10 +100,12 @@ def test_layout_meets_budgets_with_labels_inside(server, scheme, tmp_path) -> No
         page.goto(server)
         page.wait_for_function("() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0", timeout=60000)
         m = page.evaluate(METRICS)
+        overlaps = page.evaluate(NODE_OVERLAPS)
         page.screenshot(path=str(out / f"layout-{scheme}.png"))
         browser.close()
     (out / f"layout-{scheme}.json").write_text(json.dumps(m, indent=1))
     assert errors == []
+    assert overlaps == []  # nemik:W118 reorders rows after the layout
     assert m["labels_outside"] == []
     assert m["cross_p95"] <= BUDGET["cross_p95"], m
     assert m["intra_p95"] <= BUDGET["intra_p95"], m

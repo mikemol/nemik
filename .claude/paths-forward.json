@@ -2208,7 +2208,7 @@
     {
       "symbol": "W118",
       "title": "Web view: inside each box, pull nodes with cross-box edges toward the side facing their partner box (W117 only placed the boxes; dagre ignores cross edges)",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "web",
@@ -2216,12 +2216,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-09-28: Follows W117 (done); no enables edge, since W117 is not waiting on it.",
+      "next_bounded_step": null,
+      "evidence": "2026-09-28: Follows W117 (done); no enables edge, since W117 is not waiting on it. | 2026-10-01: pullRows(): after packing, each in-box dagre row holding a cross-linked node is reordered by adjacent swaps that shorten the row's edges (all of them: cross-only cost sent in-box p95 370 -> 791), slots keep their gaps; the pass is kept when cross p95/p95_0 + intra p95/p95_0 < 2 (the packer's rule). Fixture: cross p95 2200 -> 2209, cross p50 1091 -> 761, cross total 86381 -> 74166, intra p95 370 -> 329. Normal view only; the rank forest orders rows by rank. test_layout: intra budget 410 -> 365, node-overlap check on the normal view. Chromium 1194, not the pinned 1243. Unmeasured: edge crossings inside a box.",
       "issued_at": "2026-09-28T18:10:14Z",
       "minted_during": "tick",
       "caused_by": "operator",
-      "last_worked": "2026-09-28T18:10:22Z",
+      "last_worked": "2026-10-01T01:02:41Z",
       "ticks_blocked": 0,
       "weight": 5
     },
