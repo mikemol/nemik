@@ -249,3 +249,4 @@
 2026-10-01T06:18:40Z  tick  W109 done      collapse  "caused_by fixed in place via mtools:W305 (a2b7b62); W136 done"
 2026-10-01T06:49:08Z  tick  W134 done      unblock   "DTSTART/DUE pass through to ics and Google Tasks"
 2026-10-01T07:10:11Z  tick  W129 advanced  unblock   "alarms resolved + carried as VALARM; W113 dropped as prerequisite; recurrence split to W145"
+2026-10-01T07:33:09Z  tick  W146 done      collapse  "trigger arithmetic now mtools' alone; nemik keeps only the day-zone choice"
