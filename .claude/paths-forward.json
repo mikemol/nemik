@@ -2651,7 +2651,7 @@
     {
       "symbol": "W139",
       "title": "Layout metrics: count edge crossings inside boxes and cross-box edges pointing upward, and budget both in test_layout",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "web-view",
@@ -2659,12 +2659,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-10-01: Neither is measured. W118 reorders rows after dagre has minimized crossings, so it may add some; W127's loose packing lets a downstream box sit beside the boxes it depends on, so a cross-box arrow may point up or sideways (rank forest view). Add both to METRICS and set budgets from the fixture.",
+      "next_bounded_step": null,
+      "evidence": "2026-10-01: Neither is measured. W118 reorders rows after dagre has minimized crossings, so it may add some; W127's loose packing lets a downstream box sit beside the boxes it depends on, so a cross-box arrow may point up or sideways (rank forest view). Add both to METRICS and set budgets from the fixture. | 2026-10-01: METRICS gains intra_crossings (same-box edge pairs whose segments cross, shared ends excluded) and cross_upward (downstream end drawn above upstream; waits edges reversed). Fixture, Chromium 1194, pre-session ca6081c vs now: normal 105 -> 109 crossings (W118), upward 16 -> 16; forest 214 -> 214, upward 16 -> 17 (W127). The 16 predate both: cycles the packer cuts, and waits edges. Budgets ~10% over now: normal 120/18, forest 235/19.",
       "issued_at": "2026-10-01T01:27:31Z",
       "minted_during": "interrupt",
       "caused_by": "W118",
-      "last_worked": "2026-10-01T01:27:31Z",
+      "last_worked": "2026-10-01T01:39:54Z",
       "ticks_blocked": 0
     },
     {

@@ -29,14 +29,42 @@ FLEET = Path(__file__).parent / "fixtures" / "fleet"
 #   W126 skyline packing, spacing: 2200, 370, 10.8M px^2
 #   W127 fit zoom in the 1360x1200 graph pane: 0.37 (unchanged: the strict packing still wins here)
 #   W118 rows reordered toward partners: 2209, 329 (cross total 86381 -> 74166, cross p50 1091 -> 761)
-BUDGET = {"cross_p95": 2450, "intra_p95": 365, "area": 11_900_000, "fit_zoom": 0.33}
+#   W139 measured (in-box crossings, upward cross-box edges): before W118 105, 16; now 109, 16
+BUDGET = {"cross_p95": 2450, "intra_p95": 365, "area": 11_900_000, "fit_zoom": 0.33,
+          "intra_crossings": 120, "cross_upward": 18}
 # The rank forest (W135), same rules. History (cross p95, fit zoom):
 #   W135 forest, strict packing:            3654, 0.223 (2038x5352: a column on a landscape pane)
 #   W127 packing may set a box beside the boxes it depends on: 2009, 0.458 (2319x2583)
-FOREST_BUDGET = {"cross_p95": 2210, "fit_zoom": 0.41}
+#   W139 measured (in-box crossings, upward cross-box edges): strict 214, 16; loose (W127) 214, 17
+FOREST_BUDGET = {"cross_p95": 2210, "fit_zoom": 0.41, "intra_crossings": 235, "cross_upward": 19}
 
 METRICS = """() => {
   const unit = n => n.isChild() ? n.parent().id() : n.id();
+  // nemik:W139: what W118 and W127 could worsen unseen.
+  //   intra_crossings: pairs of edges in the same box whose straight segments cross (edges sharing
+  //     an end are not counted: they meet, they do not cross).
+  //   cross_upward: cross-box edges whose downstream end is drawn above its upstream end. An
+  //     enables edge points downstream; a waits edge points waiter -> blocker, i.e. upstream.
+  const shape = () => {
+    const seg = e => [e.source().position(), e.target().position()];
+    const turn = (a, b, c) => Math.sign((b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x));
+    const meets = ([p, q], [r, s]) => turn(p, q, r) * turn(p, q, s) < 0 && turn(r, s, p) * turn(r, s, q) < 0;
+    const byBox = new Map();
+    let up = 0;
+    cy.edges().forEach(e => { if (!e.visible()) return;
+      const [a, b] = [unit(e.source()), unit(e.target())];
+      if (a === b) { if (!byBox.has(a)) byBox.set(a, []); byBox.get(a).push(e); return; }
+      const [hi, lo] = e.hasClass("waits") ? [e.target(), e.source()] : [e.source(), e.target()];
+      if (lo.position().y < hi.position().y - 1) up++; });
+    let crossings = 0;
+    for (const L of byBox.values())
+      for (let i = 0; i < L.length; i++) for (let j = i + 1; j < L.length; j++) {
+        const [e, f] = [L[i], L[j]];
+        if (e.connectedNodes().intersection(f.connectedNodes()).length) continue;
+        if (meets(seg(e), seg(f))) crossings++;
+      }
+    return { intra_crossings: crossings, cross_upward: up };
+  };
   const X = [], I = [];
   cy.edges().forEach(e => { if (!e.visible()) return;
     const p = e.source().position(), q = e.target().position();
@@ -53,6 +81,7 @@ METRICS = """() => {
   return { cross_n: X.length, cross_p50: q(X, .5), cross_p95: q(X, .95), cross_total: sum(X),
            intra_n: I.length, intra_p50: q(I, .5), intra_p95: q(I, .95), intra_total: sum(I),
            width: Math.round(bb.w), height: Math.round(bb.h), labels_outside: outside,
+           ...shape(),
            // nemik:W127: the scale the first draw fits the whole graph to, in this viewport.
            fit_zoom: Math.round(1000 * Math.min(cy.width() / (bb.w + 40), cy.height() / (bb.h + 40))) / 1000 };
 }"""
@@ -111,6 +140,8 @@ def test_layout_meets_budgets_with_labels_inside(server, scheme, tmp_path) -> No
     assert m["intra_p95"] <= BUDGET["intra_p95"], m
     assert m["width"] * m["height"] <= BUDGET["area"], m
     assert m["fit_zoom"] >= BUDGET["fit_zoom"], m
+    assert m["intra_crossings"] <= BUDGET["intra_crossings"], m
+    assert m["cross_upward"] <= BUDGET["cross_upward"], m
 
 
 def test_rank_forest_view(server, tmp_path) -> None:
@@ -143,3 +174,5 @@ def test_rank_forest_view(server, tmp_path) -> None:
     assert m["labels_outside"] == []
     assert m["cross_p95"] <= FOREST_BUDGET["cross_p95"], m
     assert m["fit_zoom"] >= FOREST_BUDGET["fit_zoom"], m
+    assert m["intra_crossings"] <= FOREST_BUDGET["intra_crossings"], m
+    assert m["cross_upward"] <= FOREST_BUDGET["cross_upward"], m
