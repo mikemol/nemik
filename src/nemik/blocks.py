@@ -251,6 +251,7 @@ def operator_asks(g: Graph) -> list[dict]:
             "waiting": sorted(ref(w) for w in waiting_behind(g, node)),
             "dtstart": str(g.value(node, NEMIK.dtstart) or ""),
             "due": str(g.value(node, NEMIK.due) or ""),
+            "alarms": sorted(str(a) for a in g.objects(node, NEMIK.alarm)),
         })
     groups: dict[str, set[str]] = {}
     for a in out:

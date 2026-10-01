@@ -39,7 +39,7 @@ use_repo(pip, "nemik_dev")
 vendored_wheel = use_repo_rule("//bazel:wheel.bzl", "vendored_wheel")
 vendored_wheel(
     name = "pathsforward",
-    wheel = "//:vendor/wheels/mikemol_pathsforward-0.1.0+a2b7b62-py3-none-any.whl",
+    wheel = "//:vendor/wheels/mikemol_pathsforward-0.1.0+765c1f4-py3-none-any.whl",
 )
 
 # nemik:W98: opa, the witness evaluator, as a hashed input instead of whatever /usr/bin holds.

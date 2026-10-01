@@ -10,7 +10,7 @@ never in nemik-serve or the export, and only for repos listed in the opt-in file
 
 Decide/act comes from the blocked_on prefix `operator: decide|act`, the same rule nemik-operator
 and mtools:W277 use, so the three never disagree. Time fields (DUE, VALARM, RRULE ...) pass through
-DTSTART and DUE pass through from mtools:W300 (nemik:W134); VALARM and RRULE follow when mtools:W278/W279 land.
+DTSTART and DUE pass through from mtools:W300 (nemik:W134); VALARMs pass through from mtools:W279 (nemik:W129); RRULE follows mtools:W278.
 """
 
 from __future__ import annotations
@@ -123,6 +123,11 @@ def vtodos(asks: list[dict], repos: set[str], link: str = "") -> list[list[str]]
         lines += [f"RELATED-TO;RELTYPE=CHILD:{uid(w)}" for w in a.get("waiting", [])]
         if link:
             lines.append(f"URL:{link.rstrip('/')}/#{a['ref']}")
+        # mtools:W279: each alarm as a display VALARM, its TRIGGER exactly as stored (nemik:W129).
+        for trig in a.get("alarms", []):
+            lines += ["BEGIN:VALARM", "ACTION:DISPLAY", f"DESCRIPTION:{_escape(f'{verb}: {what}')}",
+                      f"TRIGGER;{trig}" if trig.startswith(("RELATED=", "VALUE=")) else f"TRIGGER:{trig}",
+                      "END:VALARM"]
         lines.append("END:VTODO")
         out.append(lines)
     return out

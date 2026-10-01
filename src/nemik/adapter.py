@@ -131,6 +131,9 @@ def queue_graph(repo: str, state_path: Path, known: frozenset[str] = frozenset()
         for field, pred in (("dtstart", NEMIK.dtstart), ("due", NEMIK.due)):
             if val := model.text(w, field):
                 g.add((node, pred, Literal(val)))
+        # mtools:W279: VALARM triggers, verbatim; nemik.alarm resolves them, nemik-wake fires them.
+        for trig in model.strlist(w, "alarms"):
+            g.add((node, NEMIK.alarm, Literal(trig)))
         if cause := model.text(w, "caused_by"):
             cause_ref = reference_uri(repo, cause) if model.is_reference(cause) else Literal(cause)
             g.add((node, PROV.wasInformedBy, cause_ref))

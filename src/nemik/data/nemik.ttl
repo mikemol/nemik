@@ -36,6 +36,7 @@ nemik:vector a rdf:Property ; rdfs:comment "The waypoint's WV:1 priority vector 
 nemik:vectorSource a rdf:Property ; rdfs:comment "Who wrote the vector: default, signal or agent (mtools:W248)." .
 nemik:dtstart a rdf:Property ; rdfs:comment "RFC 5545 DTSTART value as the queue stores it (mtools:W300; nemik:W134)." .
 nemik:due a rdf:Property ; rdfs:comment "RFC 5545 DUE value as the queue stores it (mtools:W300; nemik:W134)." .
+nemik:alarm a rdf:Property ; rdfs:comment "One RFC 5545 VALARM TRIGGER as the queue stores it (mtools:W279); resolved by nemik.alarm (nemik:W129)." .
 nemik:queuePosition a rdf:Property ; rdfs:comment "0-based index of the waypoint in mtools' model.ordered(): the order its own session works the queue." .
 nemik:mintedDuring a rdf:Property ; rdfs:comment "tick | interrupt: whether a live tick lock was held when mtools minted the waypoint." .
 nemik:waitsFor a rdf:Property ; rdfs:comment "An edge nemik resolved from free-text blocked_on: to a waypoint (local or repo:W<n>), a workstream, or the operator." .
