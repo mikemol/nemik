@@ -2120,16 +2120,16 @@
         "sources"
       ],
       "blocked_on": [
-        "mtools"
+        "mtools:W304"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "2026-09-28: Needs mtools' calendar reader (mtools/inbox/2026-09-28-life-ask-calendar-reader.md) and luthen's Akonadi declaration.",
+      "evidence": "2026-09-28: Needs mtools' calendar reader (mtools/inbox/2026-09-28-life-ask-calendar-reader.md) and luthen's Akonadi declaration. | 2026-10-01: 2026-10-01 mtools-3d: claimed as mtools:W304 (what mtools supplies, e.g. icsstruct/mikemol-ics, vs luthen's Akonadi side).",
       "issued_at": "2026-09-28T15:05:07Z",
       "minted_during": "tick",
       "caused_by": "life",
-      "last_worked": "2026-09-28T15:05:07Z",
-      "ticks_blocked": 11
+      "last_worked": "2026-10-01T05:55:02Z",
+      "ticks_blocked": 0
     },
     {
       "symbol": "W114",
@@ -2445,17 +2445,16 @@
       ],
       "blocked_on": [
         "W113",
-        "W134",
-        "mtools:W276"
+        "W134"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "2026-09-28: Bound: nemik can observe a due alarm and deliver a nudge (nemik-wake --nudge -> a live session; luthen's waker for sleeping repos), but it cannot start a session. 'Wake' for an asleep repo stays luthen's or the operator's act. Needs W113 (calendar reader), W128 (the VTODOs) and mtools:W276 (time fields).",
+      "evidence": "2026-09-28: Bound: nemik can observe a due alarm and deliver a nudge (nemik-wake --nudge -> a live session; luthen's waker for sleeping repos), but it cannot start a session. 'Wake' for an asleep repo stays luthen's or the operator's act. Needs W113 (calendar reader), W128 (the VTODOs) and mtools:W276 (time fields). | 2026-10-01: 2026-10-01: dropped mtools:W276 (umbrella); its need reaches mtools through W134 and W113.",
       "issued_at": "2026-09-28T23:49:54Z",
       "minted_during": "tick",
       "caused_by": "life:W23",
-      "last_worked": "2026-09-29T00:28:20Z",
-      "ticks_blocked": 6
+      "last_worked": "2026-10-01T05:55:02Z",
+      "ticks_blocked": 0
     },
     {
       "symbol": "W130",
@@ -2554,16 +2553,17 @@
         "vtodo"
       ],
       "blocked_on": [
-        "mtools:W276"
+        "mtools:W299",
+        "mtools:W300"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-10-01: 2026-10-01: mtools:W276 is now an umbrella over W299 (reader), W300 (DTSTART/DUE), W301 (COMPLETED); W134 needs the reader and the date fields. No child covers VALARM or RRULE yet (asked).",
       "issued_at": "2026-09-29T00:28:20Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-09-29T00:28:20Z",
-      "ticks_blocked": 6
+      "last_worked": "2026-10-01T05:55:02Z",
+      "ticks_blocked": 0
     },
     {
       "symbol": "W135",
@@ -2597,15 +2597,15 @@
         "pathsforward"
       ],
       "blocked_on": [
-        "mtools"
+        "mtools:W305"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "2026-10-01: THE ASK (mtools: claim it with --enables nemik:W136). caused_by can be set only at --add. At the pathsforward wheel nemik vendors (23f1223), '--update W107 --caused-by luthen-observability:W190' prints 'REFUSED: --caused-by does not apply to --update' (cli.py lists caused_by among the add fields only). WHY NOW: nemik:W108 (88db751) makes nemik-check warn on a caused_by <repo>:W<n> or W<n> that resolves nowhere, naming it; it flags nemik:W105 (luthen:W185) and W107 (luthen:W190), the wrong prefix luthen reported for enables on 2026-09-28. enables was fixed with --update --enables; caused_by has no equivalent, so today's only fix is drop and re-add, which re-mints the symbol and breaks every citation of the old one. WANTED: --update SYMBOL --caused-by REF under the same validation as --add, recorded like other updates; whether it can clear the field is mtools' call. WITNESS: after nemik re-vendors, '--update W105 --caused-by luthen-observability:W185' and '--update W107 --caused-by luthen-observability:W190' succeed, and nemik-check --root ~/github prints no 'caused_by names' line for nemik.",
+      "evidence": "2026-10-01: THE ASK (mtools: claim it with --enables nemik:W136). caused_by can be set only at --add. At the pathsforward wheel nemik vendors (23f1223), '--update W107 --caused-by luthen-observability:W190' prints 'REFUSED: --caused-by does not apply to --update' (cli.py lists caused_by among the add fields only). WHY NOW: nemik:W108 (88db751) makes nemik-check warn on a caused_by <repo>:W<n> or W<n> that resolves nowhere, naming it; it flags nemik:W105 (luthen:W185) and W107 (luthen:W190), the wrong prefix luthen reported for enables on 2026-09-28. enables was fixed with --update --enables; caused_by has no equivalent, so today's only fix is drop and re-add, which re-mints the symbol and breaks every citation of the old one. WANTED: --update SYMBOL --caused-by REF under the same validation as --add, recorded like other updates; whether it can clear the field is mtools' call. WITNESS: after nemik re-vendors, '--update W105 --caused-by luthen-observability:W185' and '--update W107 --caused-by luthen-observability:W190' succeed, and nemik-check --root ~/github prints no 'caused_by names' line for nemik. | 2026-10-01: 2026-10-01 mtools-3d: claimed as mtools:W305.",
       "issued_at": "2026-10-01T01:27:31Z",
       "minted_during": "interrupt",
       "caused_by": "W108",
-      "last_worked": "2026-10-01T01:27:31Z",
+      "last_worked": "2026-10-01T05:55:02Z",
       "ticks_blocked": 0
     },
     {
