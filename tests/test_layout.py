@@ -27,7 +27,12 @@ FLEET = Path(__file__).parent / "fixtures" / "fleet"
 # improves; a change that needs them loosened is a regression. History (cross p95, intra p95, area):
 #   W125 labels inside:            2548, 387, 14.2M px^2
 #   W126 skyline packing, spacing: 2200, 370, 10.8M px^2
-BUDGET = {"cross_p95": 2450, "intra_p95": 410, "area": 11_900_000}
+#   W127 fit zoom in the 1360x1200 graph pane: 0.37 (unchanged: the strict packing still wins here)
+BUDGET = {"cross_p95": 2450, "intra_p95": 410, "area": 11_900_000, "fit_zoom": 0.33}
+# The rank forest (W135), same rules. History (cross p95, fit zoom):
+#   W135 forest, strict packing:            3654, 0.223 (2038x5352: a column on a landscape pane)
+#   W127 packing may set a box beside the boxes it depends on: 2009, 0.458 (2319x2583)
+FOREST_BUDGET = {"cross_p95": 2210, "fit_zoom": 0.41}
 
 METRICS = """() => {
   const unit = n => n.isChild() ? n.parent().id() : n.id();
@@ -46,7 +51,9 @@ METRICS = """() => {
   }).map(n => n.data("label"));
   return { cross_n: X.length, cross_p50: q(X, .5), cross_p95: q(X, .95), cross_total: sum(X),
            intra_n: I.length, intra_p50: q(I, .5), intra_p95: q(I, .95), intra_total: sum(I),
-           width: Math.round(bb.w), height: Math.round(bb.h), labels_outside: outside };
+           width: Math.round(bb.w), height: Math.round(bb.h), labels_outside: outside,
+           // nemik:W127: the scale the first draw fits the whole graph to, in this viewport.
+           fit_zoom: Math.round(1000 * Math.min(cy.width() / (bb.w + 40), cy.height() / (bb.h + 40))) / 1000 };
 }"""
 
 
@@ -100,6 +107,7 @@ def test_layout_meets_budgets_with_labels_inside(server, scheme, tmp_path) -> No
     assert m["cross_p95"] <= BUDGET["cross_p95"], m
     assert m["intra_p95"] <= BUDGET["intra_p95"], m
     assert m["width"] * m["height"] <= BUDGET["area"], m
+    assert m["fit_zoom"] >= BUDGET["fit_zoom"], m
 
 
 def test_rank_forest_view(server, tmp_path) -> None:
@@ -130,3 +138,5 @@ def test_rank_forest_view(server, tmp_path) -> None:
     assert ranked > 0  # the server ships nemik-rank's composed order
     assert overlaps == []
     assert m["labels_outside"] == []
+    assert m["cross_p95"] <= FOREST_BUDGET["cross_p95"], m
+    assert m["fit_zoom"] >= FOREST_BUDGET["fit_zoom"], m

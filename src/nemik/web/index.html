@@ -414,22 +414,31 @@ function tile() {
   let pos = new Map(), flip = new Set();
   const at = (u, r) => ({ x: pos.get(u).x + (flip.has(u) ? size(u).w - r.x : r.x), y: pos.get(u).y + r.y });
   const cross = () => crossEdges.map(([u, ru, v, rv]) => dist(at(u, ru), at(v, rv)));
+  // nemik:W127: the area that counts is the viewport-shaped rectangle the drawing is fitted into,
+  // not the drawing's own box: minimizing it maximizes the fit-to-screen scale. A portrait packing
+  // on a landscape screen is width-poor and scale-limited by its height, whatever its own area.
+  const VW = cy.width() || 1, VH = cy.height() || 1;
   const area = () => {
     let x1 = Infinity, y1 = Infinity, x2 = -Infinity, y2 = -Infinity;
     for (const [u, p] of pos) { x1 = Math.min(x1, p.x); y1 = Math.min(y1, p.y);
       x2 = Math.max(x2, p.x + size(u).w); y2 = Math.max(y2, p.y + size(u).h); }
-    return (x2 - x1) * (y2 - y1);
+    const s = Math.max((x2 - x1) / VW, (y2 - y1) / VH);
+    return s * s * VW * VH;
   };
   const seq = [...units.keys()].sort((a, b) => rank.get(a) - rank.get(b) || size(b).w * size(b).h - size(a).w * size(a).h || (a < b ? -1 : 1));
   // k: how far a box will drop to stay near its neighbours (score = y + k * |x - target|).
   // prev: the previous packing, so a second pass also aims at neighbours not yet placed.
-  const pack = (W, k, prev) => {
+  // loose (nemik:W127): a box need only start no higher than the boxes it depends on, so it may sit
+  // beside them rather than below. The strict rule stacks a long cross-repo chain into a column
+  // whatever width is allowed (the rank forest's narrow boxes came out 2038x5352 on a 1360x1200
+  // view); both are tried, and the score below picks.
+  const pack = (W, k, prev, loose) => {
     pos = new Map();
     const placed = [];
     for (const u of seq) {
       const { w: uw, h: uh } = size(u);
       let minY = 0;
-      for (const v of up.get(u)) if (pos.has(v)) minY = Math.max(minY, pos.get(v).y + size(v).h + GAP);
+      for (const v of up.get(u)) if (pos.has(v)) minY = Math.max(minY, pos.get(v).y + (loose ? GAP : size(v).h + GAP));
       let s = 0, n = 0;
       for (const [v, c] of w.get(u)) {
         const p = pos.get(v) || (prev && prev.get(v));
@@ -458,9 +467,11 @@ function tile() {
   const widest = Math.max(...seq.map(u => size(u).w));
   const side = Math.sqrt(seq.reduce((t, u) => t + (size(u).w + GAP) * (size(u).h + GAP), 0));
   let best = null, base = null;
-  for (const f of [1, 1.25, 1.5, 1.75, 2, 2.5, 3]) for (const k of [0.25, 1, 4]) for (const again of [false, true]) {
-    pack(Math.max(widest, side * f), k, null);
-    if (again) pack(Math.max(widest, side * f), k, new Map(pos));
+  // Target widths around the side of a square of the same area, scaled toward the viewport's aspect.
+  const aspect = Math.sqrt(VW / VH);
+  for (const loose of [false, true]) for (const f of [1, 1.25, 1.5, 1.75, 2, 2.5, 3].map(f => f * aspect)) for (const k of [0.25, 1, 4]) for (const again of [false, true]) {
+    pack(Math.max(widest, side * f), k, null, loose);
+    if (again) pack(Math.max(widest, side * f), k, new Map(pos), loose);
     flip = new Set();
     // Mirror pass: flip any box whose mirror image lowers the cross-edge p95 (then total).
     const c = () => { const L = cross(); return [p95(L), L.reduce((a, b) => a + b, 0)]; };

@@ -2390,7 +2390,7 @@
     {
       "symbol": "W127",
       "title": "Web view: pack to the viewport's aspect ratio (fit-to-screen scale), not only minimum area; the W126 packing comes out portrait on a landscape screen",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "web",
@@ -2398,12 +2398,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-01: the packing score is now the viewport-shaped area the drawing fits into (max(W/VW, H/VH)^2 VW VH), widths scaled by sqrt(aspect); and a loose packing (a box need only start no higher than the boxes it depends on) is tried beside the strict one. Width alone never bound: the strict rule stacked cross-repo chains into a column at any width. Fixture, 1360x1200 pane: normal view unchanged (strict wins; fit 0.37, cross p95 2200); rank forest 2038x5352 -> 2319x2583, fit 0.223 -> 0.458, cross p95 3654 -> 2009. test_layout pins fit_zoom and forest budgets. Measured on Playwright's Chromium 1194, not the pinned 1243 (cdn.playwright.dev unreachable here).",
       "issued_at": "2026-09-28T23:00:16Z",
       "minted_during": "tick",
       "caused_by": "operator",
-      "last_worked": null,
+      "last_worked": "2026-10-01T00:55:21Z",
       "ticks_blocked": 0,
       "weight": 5
     },
