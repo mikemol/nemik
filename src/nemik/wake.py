@@ -24,6 +24,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from rdflib import Graph
+from rdflib.namespace import DCTERMS
 
 from nemik.blocks import inbound, operator_asks
 
@@ -103,6 +104,42 @@ def roster(g: Graph, liveness: dict, *, now: datetime | None = None) -> list[dic
     return sorted(rows.values(), key=lambda r: (order[r["state"]], -len(r["waiting"]), r["repo"]))
 
 
+def fired_alarms(g: Graph, start: datetime, end: datetime, liveness: dict) -> list[dict]:
+    """Every alarm that fired in [start, end) on an open waypoint, oldest first (nemik:W149).
+
+    Alarms live on waypoints (mtools:W279), with their anchors (W300) and recurrence (W309/W310);
+    nemik.alarm resolves each to its instants. The owner's liveness says who can act on it now.
+    """
+    from rdflib import URIRef
+
+    from nemik.adapter import BASE, NEMIK, OSLC_CM
+    from nemik.alarm import fires_between
+
+    def val(n: URIRef, p) -> str:
+        return str(g.value(n, p) or "")
+
+    out = []
+    for n in sorted(set(g.subjects(NEMIK.alarm, None))):
+        if (n, OSLC_CM.state, NEMIK.Done) in g:
+            continue
+        repo, _, sym = str(n).removeprefix(BASE).partition("/")
+        rec = liveness.get(repo)
+        state = "unknown" if rec is None else AWAKE.get(rec.get("verdict"), "idle")
+        for trig in sorted(str(t) for t in g.objects(n, NEMIK.alarm)):
+            try:
+                hits = fires_between(trig, start, end, dtstart=val(n, NEMIK.dtstart), due=val(n, NEMIK.due),
+                                     rrule=val(n, NEMIK.rrule),
+                                     exdates=tuple(sorted(str(x) for x in g.objects(n, NEMIK.exdate))),
+                                     done={str(r): "" for r in g.objects(n, NEMIK.occurrenceDone)})
+            except Exception as e:  # noqa: BLE001 - one bad alarm (a hand-edited queue) must not hide the rest
+                out.append({"ref": f"{repo}:{sym}", "repo": repo, "trigger": trig, "error": str(e), "state": state,
+                            "at": "", "recurrence_id": "", "title": val(n, DCTERMS.title)})
+                continue
+            out += [{"ref": f"{repo}:{sym}", "repo": repo, "trigger": trig, "at": at.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                     "recurrence_id": rid, "state": state, "title": val(n, DCTERMS.title)} for at, rid in hits]
+    return sorted(out, key=lambda a: (a["at"], a["ref"], a["trigger"]))
+
+
 def operator_row(g: Graph) -> dict:
     needs = [a for a in operator_asks(g) if a["category"] == "needs-you"]
     return {"repo": "operator", "state": "you", "last_tick": "",
@@ -148,6 +185,10 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     ap.add_argument("--nudge", action="store_true",
                      help="print only rows due a nudge now (backoff/dedup via --nudges-state)")
     ap.add_argument("--nudges-state", type=Path, default=nudges_path())
+    ap.add_argument("--alarms", action="store_true",
+                    help="list alarms that fired on open waypoints in [--since, --until) (nemik:W149)")
+    ap.add_argument("--since", help="ISO-8601 instant (default: 15 minutes before --until)")
+    ap.add_argument("--until", help="ISO-8601 instant (default: now)")
     args = ap.parse_args(argv)
     if g is None:
         g = Graph()
@@ -155,6 +196,22 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
             if qg is not None:
                 g += qg
     live, source = read_liveness(args.root, args.liveness)
+    if args.alarms:
+        from datetime import timedelta
+
+        until = datetime.fromisoformat(args.until) if args.until else datetime.now(timezone.utc)
+        since = datetime.fromisoformat(args.since) if args.since else until - timedelta(minutes=15)
+        fired = fired_alarms(g, since.astimezone(timezone.utc), until.astimezone(timezone.utc), live)
+        if args.json:
+            print(json.dumps({"liveness": source, "since": since.isoformat(), "until": until.isoformat(),
+                              "alarms": fired}, indent=2))
+            return
+        print(f"alarms fired {since.isoformat()} .. {until.isoformat()} (liveness: {source})")
+        for a in fired:
+            occ = f" [{a['recurrence_id']}]" if a["recurrence_id"] else ""
+            what = f"ERROR {a['error']}" if a.get("error") else a["title"][:60]
+            print(f"  {a['at'] or '-':20} {a['state']:7} {a['ref']:28}{occ} {a['trigger']:22} {what}")
+        return
     rows = [r for r in roster(g, live) if args.all or r["state"] != "awake"]
     if args.nudge:
         try:

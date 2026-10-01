@@ -255,3 +255,4 @@
 2026-10-01T10:00:20Z  tick  W143 done      collapse  "Keep reminders are Google Tasks since 2025-10; no master-token Keep client"
 2026-10-01T13:12:45Z  tick  W129 atomized  collapse  "W129 -> W149, W150, W151"
 2026-10-01T13:17:37Z  tick  W147 done      unblock   "Akonadi calendar export; W113 unblocked"
+2026-10-01T13:19:39Z  tick  W149 done      unblock   "nemik-wake --alarms; W150/W151 unblocked"

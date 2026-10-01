@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 61
+      "ticks_blocked": 63
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 18,
       "weight": 1
     },
     {
@@ -1398,7 +1398,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-09-27T21:13:38Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 47,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1986,7 +1986,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T22:46:47Z",
-      "ticks_blocked": 13,
+      "ticks_blocked": 15,
       "weight": 0
     },
     {
@@ -2125,7 +2125,8 @@
       "minted_during": "tick",
       "caused_by": "life",
       "last_worked": "2026-10-01T10:56:21Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 3
     },
     {
       "symbol": "W114",
@@ -2440,7 +2441,6 @@
         "vtodo"
       ],
       "blocked_on": [
-        "W149",
         "W150",
         "W151"
       ],
@@ -2620,7 +2620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 6
+      "ticks_blocked": 8
     },
     {
       "symbol": "W138",
@@ -2842,6 +2842,27 @@
     {
       "symbol": "W149",
       "title": "W129a: nemik-wake --alarms: every alarm that fired in a window ([last check, now), default the last 15 min) on an open waypoint, via alarm.fires_between (one-shot and recurring), with owner repo, RECURRENCE-ID and the owner's liveness; --json",
+      "status": "done",
+      "enables": [
+        "W129"
+      ],
+      "touches": [
+        "nemik-wake"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-01: wake.fired_alarms(g, start, end, liveness): every open waypoint with nemik:alarm, each trigger via alarm.fires_between (anchors, rrule, exdates, completed occurrences), owner liveness state; a malformed alarm becomes an 'error' row instead of hiding the rest. nemik-wake --alarms [--since] [--until] (default the last 15 min) [--json]. tests/test_wake_alarms.py: one-shot + weekly recurring with a completed occurrence skipped, done waypoint never fires, bad trigger reported; bazel 22/22. Live: no queue carries alarms yet (empty list).",
+      "issued_at": "2026-10-01T13:12:44Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-10-01T13:19:38Z",
+      "ticks_blocked": 0,
+      "weight": 4
+    },
+    {
+      "symbol": "W150",
+      "title": "W129b: fired alarms deliver like nudges: deduped by (ref, RECURRENCE-ID, instant) in the existing nudges state, so each firing is delivered once; a live owner gets a SendMessage-ready line",
       "status": "ready",
       "enables": [
         "W129"
@@ -2856,52 +2877,28 @@
       "issued_at": "2026-10-01T13:12:44Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
-      "ticks_blocked": 0
-    },
-    {
-      "symbol": "W150",
-      "title": "W129b: fired alarms deliver like nudges: deduped by (ref, RECURRENCE-ID, instant) in the existing nudges state, so each firing is delivered once; a live owner gets a SendMessage-ready line",
-      "status": "blocked",
-      "enables": [
-        "W129"
-      ],
-      "touches": [
-        "nemik-wake"
-      ],
-      "blocked_on": [
-        "W149"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "",
-      "issued_at": "2026-10-01T13:12:44Z",
-      "minted_during": "tick",
-      "caused_by": null,
       "last_worked": "2026-10-01T13:12:45Z",
-      "ticks_blocked": 1
+      "ticks_blocked": 0
     },
     {
       "symbol": "W151",
       "title": "W129c: a fired alarm whose owner is asleep becomes a wake-roster row (reason: alarm, the waypoint and when it fired); nemik never starts a session",
-      "status": "blocked",
+      "status": "ready",
       "enables": [
         "W129"
       ],
       "touches": [
         "nemik-wake"
       ],
-      "blocked_on": [
-        "W149"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-01T13:12:45Z",
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-01T13:12:45Z",
-      "ticks_blocked": 1
+      "ticks_blocked": 0
     }
   ],
   "residue": [
