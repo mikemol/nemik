@@ -256,6 +256,8 @@ def operator_asks(g: Graph) -> list[dict]:
             "dtstart": str(g.value(node, NEMIK.dtstart) or ""),
             "due": str(g.value(node, NEMIK.due) or ""),
             "alarms": sorted(str(a) for a in g.objects(node, NEMIK.alarm)),
+            "rrule": str(g.value(node, NEMIK.rrule) or ""),
+            "exdates": sorted(str(x) for x in g.objects(node, NEMIK.exdate)),
         })
     groups: dict[str, set[str]] = {}
     for a in out:

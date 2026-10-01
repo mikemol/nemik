@@ -120,6 +120,10 @@ def vtodos(asks: list[dict], repos: set[str], link: str = "") -> list[list[str]]
         # The waypoints this ask releases, as RFC 5545 relations (RELTYPE=CHILD: they follow it).
         lines += [prop for name, key in (("DTSTART", "dtstart"), ("DUE", "due"))
                   if (prop := time_property(name, a.get(key, "")))]
+        # mtools:W309: recurrence rides along as stored (nemik:W145 expands it for firing).
+        if a.get("rrule"):
+            lines.append(f"RRULE:{a['rrule']}")
+            lines += [time_property("EXDATE", x) for x in a.get("exdates", [])]
         lines += [f"RELATED-TO;RELTYPE=CHILD:{uid(w)}" for w in a.get("waiting", [])]
         if link:
             lines.append(f"URL:{link.rstrip('/')}/#{a['ref']}")

@@ -32,3 +32,13 @@ def test_vtodo_carries_each_alarm_as_a_display_valarm() -> None:
     assert "TRIGGER;RELATED=END:-PT2H" in todo
     assert "TRIGGER;VALUE=DATE-TIME:20261001T190000Z" in todo
     assert todo.count("BEGIN:VALARM") == 2 and "ACTION:DISPLAY" in todo
+
+
+def test_vtodo_carries_recurrence_as_stored() -> None:
+    """mtools:W309: RRULE verbatim, each EXDATE in its stored value form."""
+    ask = {"ref": "life:W30", "title": "drill", "category": "needs-you", "ask": "operator: act drill",
+           "waiting": [], "same_ask": [], "dtstart": "TZID=America/Detroit:20261005T180000",
+           "rrule": "FREQ=WEEKLY;BYDAY=MO", "exdates": ["TZID=America/Detroit:20261012T180000"]}
+    (todo,) = vtodos([ask], {"life"})
+    assert "RRULE:FREQ=WEEKLY;BYDAY=MO" in todo
+    assert "EXDATE;TZID=America/Detroit:20261012T180000" in todo

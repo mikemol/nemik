@@ -131,6 +131,12 @@ def queue_graph(repo: str, state_path: Path, known: frozenset[str] = frozenset()
         for field, pred in (("dtstart", NEMIK.dtstart), ("due", NEMIK.due)):
             if val := model.text(w, field):
                 g.add((node, pred, Literal(val)))
+        # mtools:W309: an RFC 5545 RRULE (verbatim) and its EXDATEs; vtodo passes them through, and
+        # expanding occurrences for nemik-wake is nemik:W145.
+        if rule := model.text(w, "rrule"):
+            g.add((node, NEMIK.rrule, Literal(rule)))
+        for ex in model.strlist(w, "exdates"):
+            g.add((node, NEMIK.exdate, Literal(ex)))
         # mtools:W279: VALARM triggers, verbatim; nemik.alarm resolves them, nemik-wake fires them.
         for trig in model.strlist(w, "alarms"):
             g.add((node, NEMIK.alarm, Literal(trig)))

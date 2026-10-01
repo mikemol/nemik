@@ -2765,11 +2765,11 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "2026-10-01: 2026-10-01 mtools-3d: W278 is now an umbrella over W309 (--rrule/--exdate stored + validated) and W310 (--complete-occurrence RECURRENCE-ID map, blocked on W309). W145 needs both (it fires per occurrence and skips completed ones); cites W310, reaching W309 through it.",
+      "evidence": "2026-10-01: 2026-10-01 mtools-3d: W278 is now an umbrella over W309 (--rrule/--exdate stored + validated) and W310 (--complete-occurrence RECURRENCE-ID map, blocked on W309). W145 needs both (it fires per occurrence and skips completed ones); cites W310, reaching W309 through it. | 2026-10-01: 2026-10-01 step 1 (needs no W310): mtools:W309 landed ffc7896; adapter carries rrule (nemik:rrule) and exdates (nemik:exdate), operator_asks carries them, VTODOs emit RRULE verbatim + EXDATE per stored value form. test_alarm covers it; bazel 21/21. Independent check: icalendar + recurring_ical_events expand a weekly-Monday rule from 2026-10-05 with 10-12 excluded to 10-05, 10-19, 10-26. recurring_ical_events is the candidate expander for firing (mtools suggests it or icsstruct). Remaining, after mtools:W310: expand occurrences in nemik-wake, skip completed RECURRENCE-IDs.",
       "issued_at": "2026-10-01T07:10:11Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-01T07:55:34Z",
+      "last_worked": "2026-10-01T08:20:10Z",
       "ticks_blocked": 0
     },
     {
