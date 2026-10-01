@@ -1342,7 +1342,7 @@
     },
     {
       "symbol": "W75",
-      "title": "Weather: one outage = one monotone FFI waypoint (minted by the blocked repo, witness over a probe fact); identical witness queries group as one weather item in views and ddG; design note in W58 doc",
+      "title": "Weather: one outage = one monotone FFI waypoint, witness over a probe fact",
       "status": "ready",
       "enables": [],
       "touches": [
@@ -1351,11 +1351,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-10-01: full title before the 2026-10-01 trim: minted by the blocked repo; identical witness queries group as one weather item in views and ddG; design note in W58 doc",
       "issued_at": "2026-09-27T19:42:13Z",
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
-      "last_worked": "2026-09-27T19:54:01Z",
+      "last_worked": "2026-10-01T19:50:19Z",
       "ticks_blocked": 0,
       "weight": 1
     },
@@ -1388,17 +1388,16 @@
         "web"
       ],
       "blocked_on": [
-        "nemik-witnesses",
-        "luthen-observability:W152"
+        "luthen-observability:W170"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "2026-09-27: 40fc94b: text-valign bottom + text-background; dagre nodeDimensionsIncludeLabels | 2026-09-27: verified in headless Chromium (playwright): substrate row at 3x, every label below its node and clear of neighbours | 2026-09-27: operator saw it unfixed: deployed image pins aad664d (20 behind 40fc94b); asked luthen to rebuild | 2026-09-27: luthen: ship classifier-denied in their session, routed to operator; follower not stalled | 2026-09-27: operator: push=deploy (luthen ships on push, inbox 2026-09-26); not an operator act. No luthen_image_follow_ship{nemik} series at 20:45Z; asked luthen to make the follow run outside a Claude turn | 2026-09-27: luthen W152: image_follow as an unattended unit (operator reviews before enable); any nemik rollout from now ships main, which contains 40fc94b | 2026-09-27: W152 reframed: nemik image changes self-serve (push reaches the pod, no luthen turn); design note coming for nemik review; asked for NEMIK_VM_URL/NEMIK_VMALERT_URL in the pod env",
+      "evidence": "2026-09-27: 40fc94b: text-valign bottom + text-background; dagre nodeDimensionsIncludeLabels | 2026-09-27: verified in headless Chromium (playwright): substrate row at 3x, every label below its node and clear of neighbours | 2026-09-27: operator saw it unfixed: deployed image pins aad664d (20 behind 40fc94b); asked luthen to rebuild | 2026-09-27: luthen: ship classifier-denied in their session, routed to operator; follower not stalled | 2026-09-27: operator: push=deploy (luthen ships on push, inbox 2026-09-26); not an operator act. No luthen_image_follow_ship{nemik} series at 20:45Z; asked luthen to make the follow run outside a Claude turn | 2026-09-27: luthen W152: image_follow as an unattended unit (operator reviews before enable); any nemik rollout from now ships main, which contains 40fc94b | 2026-09-27: W152 reframed: nemik image changes self-serve (push reaches the pod, no luthen turn); design note coming for nemik review; asked for NEMIK_VM_URL/NEMIK_VMALERT_URL in the pod env | 2026-10-01: 2026-10-01: W152 is an umbrella; W170 (W152e, push witnessed end to end) is the child that proves the view deploys",
       "issued_at": "2026-09-27T20:09:11Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-09-27T21:13:38Z",
-      "ticks_blocked": 47,
+      "last_worked": "2026-10-01T19:50:19Z",
+      "ticks_blocked": 0,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1966,7 +1965,7 @@
     },
     {
       "symbol": "W106",
-      "title": "Containerfile test stage: uv sync now fetches paperkit from github (W102 restored the git source) - an egress the luthen build may not have; build the test stage without that fetch (or from the bazel venv, W101)",
+      "title": "Containerfile test stage: build without the github paperkit fetch (egress)",
       "status": "blocked",
       "enables": [
         "luthen-observability:W185"
@@ -1981,11 +1980,11 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "2026-09-28: luthen 2026-09-28: buildkitd is a host process on luthen's host network, which reaches github.com; the git fetch is likely fine (not yet witnessed). No-egress covers derived data leaving, not pinned sources coming in. Urgency dropped; kept for GitHub-down resilience. | 2026-09-28: Now a prerequisite for the first Forgejo build: the base image (uv python3.13-bookworm-slim) has no git binary, so the test stage's uv sync cannot fetch paperkit's git source; also the test stage does not COPY ARCHITECTURE.md, which test_architecture reads. Expected, not yet run. | 2026-09-28: MEASURED 2026-09-28 at 40543f3: buildctl build (luthen's /run/buildkit) of the Containerfile succeeds; test stage 55 passed, 12 skipped. My 'no git binary' prediction was wrong. The 12 skips (opa, chromium, likely architecture) are the open part: the image gate runs less than bazel. | 2026-09-28: Atomized 2026-09-28 into W122 (done), W123 (opa), W124 (chromium) by measured skip cause (pytest -rs in the image build).",
+      "evidence": "2026-09-28: luthen 2026-09-28: buildkitd is a host process on luthen's host network, which reaches github.com; the git fetch is likely fine (not yet witnessed). No-egress covers derived data leaving, not pinned sources coming in. Urgency dropped; kept for GitHub-down resilience. | 2026-09-28: Now a prerequisite for the first Forgejo build: the base image (uv python3.13-bookworm-slim) has no git binary, so the test stage's uv sync cannot fetch paperkit's git source; also the test stage does not COPY ARCHITECTURE.md, which test_architecture reads. Expected, not yet run. | 2026-09-28: MEASURED 2026-09-28 at 40543f3: buildctl build (luthen's /run/buildkit) of the Containerfile succeeds; test stage 55 passed, 12 skipped. My 'no git binary' prediction was wrong. The 12 skips (opa, chromium, likely architecture) are the open part: the image gate runs less than bazel. | 2026-09-28: Atomized 2026-09-28 into W122 (done), W123 (opa), W124 (chromium) by measured skip cause (pytest -rs in the image build). | 2026-10-01: full title before 2026-10-01 trim: Containerfile test stage: uv sync now fetches paperkit from github (W102 restored the git source) - an egress the luthen build may not have; build the test stage without that fetch (or from the bazel venv, W101)",
       "issued_at": "2026-09-28T13:25:08Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-09-28T22:46:47Z",
+      "last_worked": "2026-10-01T19:49:14Z",
       "ticks_blocked": 15,
       "weight": 0
     },
@@ -2108,7 +2107,7 @@
     },
     {
       "symbol": "W113",
-      "title": "life ask: operator calendars as a nemik source (~/.config/nemik/calendars.toml, Akonadi collections on luthen via mtools' calendar reader; events as nodes, waypoint 'at' cal:<label>/<uid>; nemik-operator shows next N days); credentials never in graph/metrics/export",
+      "title": "Operator calendars as a nemik source (life ask), credentials never exported",
       "status": "ready",
       "enables": [
         "life:W13"
@@ -2120,11 +2119,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-09-28: Needs mtools' calendar reader (mtools/inbox/2026-09-28-life-ask-calendar-reader.md) and luthen's Akonadi declaration. | 2026-10-01: 2026-10-01 mtools-3d: claimed as mtools:W304 (what mtools supplies, e.g. icsstruct/mikemol-ics, vs luthen's Akonadi side). | 2026-10-01: 2026-10-01 mtools-3d: mtools:W304 answered: mtools' part exists (mikemol-icsstruct, mikemol-ics --window 14d --json SOURCE: per-occurrence records, RRULE/RDATE/EXDATE/overrides, tz-aware, lossless, URLs redacted). The Akonadi read is nemik's (Qt/KF stays out of mtools): W147 exports an .ics, then nemik reads it through mikemol-ics (add mikemol-icsstruct as a dependency when W113 is worked).",
+      "evidence": "2026-09-28: Needs mtools' calendar reader (mtools/inbox/2026-09-28-life-ask-calendar-reader.md) and luthen's Akonadi declaration. | 2026-10-01: 2026-10-01 mtools-3d: claimed as mtools:W304 (what mtools supplies, e.g. icsstruct/mikemol-ics, vs luthen's Akonadi side). | 2026-10-01: 2026-10-01 mtools-3d: mtools:W304 answered: mtools' part exists (mikemol-icsstruct, mikemol-ics --window 14d --json SOURCE: per-occurrence records, RRULE/RDATE/EXDATE/overrides, tz-aware, lossless, URLs redacted). The Akonadi read is nemik's (Qt/KF stays out of mtools): W147 exports an .ics, then nemik reads it through mikemol-ics (add mikemol-icsstruct as a dependency when W113 is worked). | 2026-10-01: full title before the 2026-10-01 trim: life ask: operator calendars as a nemik source (~/.config/nemik/calendars.toml, Akonadi collections on luthen via mtools' calendar reader; events as nodes, waypoint 'at' cal:<label>/<uid>; nemik-operator shows next N days); credentials never in graph/metrics/export",
       "issued_at": "2026-09-28T15:05:07Z",
       "minted_during": "tick",
       "caused_by": "life",
-      "last_worked": "2026-10-01T10:56:21Z",
+      "last_worked": "2026-10-01T19:49:18Z",
       "ticks_blocked": 0,
       "weight": 3
     },
@@ -2431,7 +2430,7 @@
     },
     {
       "symbol": "W129",
-      "title": "Calendar as the loops' scheduler of record: nemik-wake reads due VALARMs on waypoints (Akonadi, host-side, via W113's reader) and nudges or wakes the owning workstream through the existing wake/nudge path; session cron becomes only a delivery path",
+      "title": "Calendar as the loops' scheduler of record: fired VALARMs nudge or wake the owner",
       "status": "blocked",
       "enables": [
         "life:W23"
@@ -2446,11 +2445,11 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "nemik-wake: list alarms that have fired on open waypoints (fires_at <= now), with the owning workstream and its liveness; --nudge delivers them through the existing backoff state; an asleep owner becomes a wake-roster row (nemik cannot start a session).",
-      "evidence": "2026-09-28: Bound: nemik can observe a due alarm and deliver a nudge (nemik-wake --nudge -> a live session; luthen's waker for sleeping repos), but it cannot start a session. 'Wake' for an asleep repo stays luthen's or the operator's act. Needs W113 (calendar reader), W128 (the VTODOs) and mtools:W276 (time fields). | 2026-10-01: 2026-10-01: dropped mtools:W276 (umbrella); its need reaches mtools through W134 and W113. | 2026-10-01: 2026-10-01 mtools-3d: RRULE/EXDATE = mtools:W278 (done per occurrence, keyed by RECURRENCE-ID), VALARM = mtools:W279 (stored and projected; firing them is this waypoint). Both blocked on mtools:W300 and --enables nemik:W129. | 2026-10-01: 2026-10-01: mtools:W279 (765c1f4) puts alarms ON waypoints, so firing reads queues, not Akonadi: W113 is no longer a prerequisite (still wanted for the operator's own calendar). Recurrence split to W145 (mtools:W278). Step 1 done: pathsforward re-vendored at 765c1f4; adapter carries alarms (nemik:alarm), operator_asks carries them; nemik/alarm.py fires_at(trigger, dtstart, due) resolves to UTC using mtools' timevalue.parse/parse_trigger (DATE anchors = local midnight); VTODOs carry each alarm as a DISPLAY VALARM with TRIGGER as stored. tests/test_alarm.py (3); bazel 21/21. Google Tasks has no alarms, so VALARMs reach the .ics sink only. | 2026-10-01: Atomized 2026-10-01 (ATOMIZE: advanced once without landing): W149 list fired alarms, W150 deliver once (nudges state), W151 asleep owner -> wake roster.",
+      "evidence": "2026-09-28: Bound: nemik can observe a due alarm and deliver a nudge (nemik-wake --nudge -> a live session; luthen's waker for sleeping repos), but it cannot start a session. 'Wake' for an asleep repo stays luthen's or the operator's act. Needs W113 (calendar reader), W128 (the VTODOs) and mtools:W276 (time fields). | 2026-10-01: 2026-10-01: dropped mtools:W276 (umbrella); its need reaches mtools through W134 and W113. | 2026-10-01: 2026-10-01 mtools-3d: RRULE/EXDATE = mtools:W278 (done per occurrence, keyed by RECURRENCE-ID), VALARM = mtools:W279 (stored and projected; firing them is this waypoint). Both blocked on mtools:W300 and --enables nemik:W129. | 2026-10-01: 2026-10-01: mtools:W279 (765c1f4) puts alarms ON waypoints, so firing reads queues, not Akonadi: W113 is no longer a prerequisite (still wanted for the operator's own calendar). Recurrence split to W145 (mtools:W278). Step 1 done: pathsforward re-vendored at 765c1f4; adapter carries alarms (nemik:alarm), operator_asks carries them; nemik/alarm.py fires_at(trigger, dtstart, due) resolves to UTC using mtools' timevalue.parse/parse_trigger (DATE anchors = local midnight); VTODOs carry each alarm as a DISPLAY VALARM with TRIGGER as stored. tests/test_alarm.py (3); bazel 21/21. Google Tasks has no alarms, so VALARMs reach the .ics sink only. | 2026-10-01: Atomized 2026-10-01 (ATOMIZE: advanced once without landing): W149 list fired alarms, W150 deliver once (nudges state), W151 asleep owner -> wake roster. | 2026-10-01: full title before the 2026-10-01 trim: Calendar as the loops' scheduler of record: nemik-wake reads due VALARMs on waypoints (Akonadi, host-side, via W113's reader) and nudges or wakes the owning workstream through the existing wake/nudge path; session cron becomes only a delivery path",
       "issued_at": "2026-09-28T23:49:54Z",
       "minted_during": "tick",
       "caused_by": "life:W23",
-      "last_worked": "2026-10-01T13:12:45Z",
+      "last_worked": "2026-10-01T19:49:18Z",
       "ticks_blocked": 1,
       "weight": 3
     },
@@ -2819,7 +2818,7 @@
     },
     {
       "symbol": "W148",
-      "title": "Google Tasks 'nemik' list grouped by repo: one parent task per repo (summary 'repo (n)', earliest due), each ask a subtask (RELATED-TO;RELTYPE=PARENT); existing tasks re-parented in place, UIDs and dates kept; a repo with no open asks completes its parent",
+      "title": "Google Tasks 'nemik' list grouped by repo: parent task per repo, asks as subtasks",
       "status": "ready",
       "enables": [
         "life:W28"
@@ -2831,11 +2830,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-10-01: Operator 2026-10-01 via life-21 offered (a) a list per repo or (b) parent-per-repo with subtasks, no preference. nemik picks (b): keeps the one sink, list count does not grow with the fleet, regrouping is a parent change on the same item (no cross-list move, which may not keep identity), and Tasks' one nesting level matches repo -> ask. Risk to verify first, on ONE task: that akonadi_google_resource maps RELATED-TO;RELTYPE=PARENT to the Tasks parent field.",
+      "evidence": "2026-10-01: Operator 2026-10-01 via life-21 offered (a) a list per repo or (b) parent-per-repo with subtasks, no preference. nemik picks (b): keeps the one sink, list count does not grow with the fleet, regrouping is a parent change on the same item (no cross-list move, which may not keep identity), and Tasks' one nesting level matches repo -> ask. Risk to verify first, on ONE task: that akonadi_google_resource maps RELATED-TO;RELTYPE=PARENT to the Tasks parent field. | 2026-10-01: full title before the 2026-10-01 trim: Google Tasks 'nemik' list grouped by repo: one parent task per repo (summary 'repo (n)', earliest due), each ask a subtask (RELATED-TO;RELTYPE=PARENT); existing tasks re-parented in place, UIDs and dates kept; a repo with no open asks completes its parent",
       "issued_at": "2026-10-01T13:02:20Z",
       "minted_during": "tick",
       "caused_by": "life:W28",
-      "last_worked": "2026-10-01T13:02:20Z",
+      "last_worked": "2026-10-01T19:49:18Z",
       "ticks_blocked": 0,
       "weight": 3
     },
@@ -2862,7 +2861,7 @@
     },
     {
       "symbol": "W150",
-      "title": "W129b: fired alarms deliver like nudges: deduped by (ref, RECURRENCE-ID, instant) in the existing nudges state, so each firing is delivered once; a live owner gets a SendMessage-ready line",
+      "title": "W129b: deliver fired alarms once, deduped by (ref, RECURRENCE-ID, instant)",
       "status": "ready",
       "enables": [
         "W129"
@@ -2873,11 +2872,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-10-01: full title before the 2026-10-01 trim: W129b: fired alarms deliver like nudges: deduped by (ref, RECURRENCE-ID, instant) in the existing nudges state, so each firing is delivered once; a live owner gets a SendMessage-ready line",
       "issued_at": "2026-10-01T13:12:44Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-01T13:12:45Z",
+      "last_worked": "2026-10-01T19:49:18Z",
       "ticks_blocked": 0
     },
     {
@@ -2920,7 +2919,7 @@
     },
     {
       "symbol": "W153",
-      "title": "nemik-serve --static OUT/: the web view as static files (index.html, vendor/, graph.json, wake.json, goals/<repo>.json, inbound/<repo>.json precomputed from the same export), relative links so it works from a bucket subpath, no request-time logic; the Tools panel (/cmd) omitted in static mode",
+      "title": "nemik-serve --static OUT/ --withheld FILE: the web view as static files",
       "status": "ready",
       "enables": [
         "luthen-observability:W269"
@@ -2933,11 +2932,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-10-01: Operator ruling 2026-10-01 via luthen-observability-6b: nemik's current view may be public (content is almost all in public repos; life holds nothing beyond what is posted socially); same privacy/egress rules on anything published; no Cloudflare; luthen gates the export (W270), publishes to a GCS bucket behind Cloud CDN (W271/W272), nothing connects back to luthen. | 2026-10-01: luthen-observability-6b 2026-10-01 contract: WITHHOLD WHOLE, NEVER SCRUB. The gate marks items; the static build drops each marked item entirely (no node, no edges into it, no goals/inbound entry); where another item references it, render a 'withheld' stub carrying the symbol only, so no dependency silently disappears. Input: the gate's withheld list (repo, W, field, rule; never the matched text). luthen W272 cites W153. | 2026-10-01: Withheld-list contract (luthen-observability-6b 2026-10-01): --withheld FILE is REQUIRED with --static (publish job writes <export-dir>/withheld.json; never assume the path). Shape v1: {version: 1, as_of, items: [{ref, field, rule}]}. Drop by ref alone (set; field/rule are for the owning repo). Unknown version: fail. items [] = nothing withheld. Missing file = gate did not run: FAIL, never publish ungated. Never copy it into OUT/. Rules start as address-literal, key-shaped, amr-derived; new rules only add values.",
+      "evidence": "2026-10-01: Operator ruling 2026-10-01 via luthen-observability-6b: nemik's current view may be public (content is almost all in public repos; life holds nothing beyond what is posted socially); same privacy/egress rules on anything published; no Cloudflare; luthen gates the export (W270), publishes to a GCS bucket behind Cloud CDN (W271/W272), nothing connects back to luthen. | 2026-10-01: luthen-observability-6b 2026-10-01 contract: WITHHOLD WHOLE, NEVER SCRUB. The gate marks items; the static build drops each marked item entirely (no node, no edges into it, no goals/inbound entry); where another item references it, render a 'withheld' stub carrying the symbol only, so no dependency silently disappears. Input: the gate's withheld list (repo, W, field, rule; never the matched text). luthen W272 cites W153. | 2026-10-01: Withheld-list contract (luthen-observability-6b 2026-10-01): --withheld FILE is REQUIRED with --static (publish job writes <export-dir>/withheld.json; never assume the path). Shape v1: {version: 1, as_of, items: [{ref, field, rule}]}. Drop by ref alone (set; field/rule are for the owning repo). Unknown version: fail. items [] = nothing withheld. Missing file = gate did not run: FAIL, never publish ungated. Never copy it into OUT/. Rules start as address-literal, key-shaped, amr-derived; new rules only add values. | 2026-10-01: full title before the 2026-10-01 trim: nemik-serve --static OUT/: the web view as static files (index.html, vendor/, graph.json, wake.json, goals/<repo>.json, inbound/<repo>.json precomputed from the same export), relative links so it works from a bucket subpath, no request-time logic; the Tools panel (/cmd) omitted in static mode",
       "issued_at": "2026-10-01T16:30:23Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W269",
-      "last_worked": "2026-10-01T16:31:18Z",
+      "last_worked": "2026-10-01T19:49:19Z",
       "ticks_blocked": 0
     },
     {
