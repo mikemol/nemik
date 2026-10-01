@@ -2933,11 +2933,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-10-01: Operator ruling 2026-10-01 via luthen-observability-6b: nemik's current view may be public (content is almost all in public repos; life holds nothing beyond what is posted socially); same privacy/egress rules on anything published; no Cloudflare; luthen gates the export (W270), publishes to a GCS bucket behind Cloud CDN (W271/W272), nothing connects back to luthen.",
+      "evidence": "2026-10-01: Operator ruling 2026-10-01 via luthen-observability-6b: nemik's current view may be public (content is almost all in public repos; life holds nothing beyond what is posted socially); same privacy/egress rules on anything published; no Cloudflare; luthen gates the export (W270), publishes to a GCS bucket behind Cloud CDN (W271/W272), nothing connects back to luthen. | 2026-10-01: luthen-observability-6b 2026-10-01 contract: WITHHOLD WHOLE, NEVER SCRUB. The gate marks items; the static build drops each marked item entirely (no node, no edges into it, no goals/inbound entry); where another item references it, render a 'withheld' stub carrying the symbol only, so no dependency silently disappears. Input: the gate's withheld list (repo, W, field, rule; never the matched text). luthen W272 cites W153.",
       "issued_at": "2026-10-01T16:30:23Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W269",
-      "last_worked": "2026-10-01T16:30:23Z",
+      "last_worked": "2026-10-01T16:30:53Z",
       "ticks_blocked": 0
     },
     {
@@ -2954,11 +2954,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-10-01: Contract: the build FAILS if it renders a field absent from the manifest (new free text cannot slip in unexamined). luthen W270 cites W154.",
       "issued_at": "2026-10-01T16:30:23Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W269",
-      "last_worked": null,
+      "last_worked": "2026-10-01T16:30:53Z",
       "ticks_blocked": 0
     }
   ],
