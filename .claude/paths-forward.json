@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 147,
+  "counter": 148,
   "waypoints": [
     {
       "symbol": "W1",
@@ -2812,6 +2812,27 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W148",
+      "title": "Google Tasks 'nemik' list grouped by repo: one parent task per repo (summary 'repo (n)', earliest due), each ask a subtask (RELATED-TO;RELTYPE=PARENT); existing tasks re-parented in place, UIDs and dates kept; a repo with no open asks completes its parent",
+      "status": "ready",
+      "enables": [
+        "life:W28"
+      ],
+      "touches": [
+        "akonadi",
+        "vtodo"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-10-01: Operator 2026-10-01 via life-21 offered (a) a list per repo or (b) parent-per-repo with subtasks, no preference. nemik picks (b): keeps the one sink, list count does not grow with the fleet, regrouping is a parent change on the same item (no cross-list move, which may not keep identity), and Tasks' one nesting level matches repo -> ask. Risk to verify first, on ONE task: that akonadi_google_resource maps RELATED-TO;RELTYPE=PARENT to the Tasks parent field.",
+      "issued_at": "2026-10-01T13:02:20Z",
+      "minted_during": "tick",
+      "caused_by": "life:W28",
+      "last_worked": "2026-10-01T13:02:20Z",
       "ticks_blocked": 0
     }
   ],
