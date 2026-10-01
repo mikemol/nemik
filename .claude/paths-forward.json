@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 151,
+  "counter": 152,
   "waypoints": [
     {
       "symbol": "W1",
@@ -2898,6 +2898,24 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-01T13:12:45Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W152",
+      "title": "nemik-rank --band VECTOR / --item <repo>:W<n>: the band (and the rule that placed it) for any vector or any waypoint, not only ready ones",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "nemik-rank"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-01: nemik-rank --band VECTOR prints '<band>  (<rule>)', exit 1 when the vector is invalid; --item REPO:W<n> prints status, band, rule and vector for any waypoint (exit 2 if unknown); repo positional now optional. test_rank covers --band (critical, invalid). Live: --item el-openglo:W176 -> Done critical (R:H/S:C). bazel 22/22.",
+      "issued_at": "2026-10-01T15:36:45Z",
+      "minted_during": "tick",
+      "caused_by": "el-openglo:W176",
+      "last_worked": "2026-10-01T15:37:29Z",
       "ticks_blocked": 0
     }
   ],

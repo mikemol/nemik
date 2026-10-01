@@ -147,3 +147,18 @@ def test_composition_refuses_an_unknown_objective() -> None:
 
     with pytest.raises(ValueError, match="unknown objectives"):
         load_composition('[order]\ntiers = [["age"]]\n')
+
+
+def test_band_mode_names_the_band_of_any_vector(capsys) -> None:
+    """el-openglo:W176's vector, checked while the item was still open."""
+    import pytest
+
+    from nemik.rank import main
+
+    with pytest.raises(SystemExit) as e:
+        main(["--band", "WV:1/R:H/E:N/C:H/I:N/A:N/X:N/S:C/F:K/W:Y"], g=Graph())
+    assert e.value.code == 0
+    assert capsys.readouterr().out.startswith("critical")
+    with pytest.raises(SystemExit) as e:
+        main(["--band", "WV:1/R:H"], g=Graph())
+    assert e.value.code == 1

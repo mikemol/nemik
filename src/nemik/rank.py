@@ -251,20 +251,41 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     from nemik.check import default_root, survey
 
     ap = argparse.ArgumentParser(prog="nemik-rank", description=(main.__doc__ or "").splitlines()[0])
-    ap.add_argument("repo", help="the workstream whose ready items to rank")
+    ap.add_argument("repo", nargs="?", default="", help="the workstream whose ready items to rank")
     ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
     ap.add_argument("--goals", action="store_true",
                     help="each goal with its frontier, on-deck leaf, and outside waits (path clear iff none)")
     ap.add_argument("--json", action="store_true", help="machine-readable output")
     ap.add_argument("--check", action="store_true",
                     help="exit 1 if the ready item mtools works next is outweighed by another (drift witness)")
+    ap.add_argument("--band", metavar="VECTOR", help="print the band a WV:1 vector falls in, and why")
+    ap.add_argument("--item", metavar="REPO:W<n>", help="print the band of that waypoint, whatever its status")
     args = ap.parse_args(argv)
+    if args.band:  # nemik:W152 (el-openglo:W176): check a vector's band before the item closes
+        from nemik.score import band, load_bands
+
+        b, why = band(args.band, load_bands())
+        print(f"{b}  ({why})")
+        raise SystemExit(1 if why.startswith("invalid") else 0)
     if g is None:
         g = Graph()
         for _, qg, _ in survey(args.root):
             if qg is not None:
                 g += qg
     weights = load_weights()
+    if args.item:
+        from nemik.score import band, load_bands
+
+        repo_, _, sym = args.item.partition(":")
+        n = URIRef(f"{BASE}{repo_}/{sym}")
+        if (n, NEMIK.symbol, None) not in g:
+            print(f"rank: {args.item} is not a waypoint in any workstream")
+            raise SystemExit(2)
+        vec = str(g.value(n, NEMIK.vector) or "") or None
+        b, why = band(vec, load_bands())
+        state = str(g.value(n, OSLC_CM.state) or "").rsplit("/", 1)[-1].rsplit("#", 1)[-1]
+        print(f"{args.item}  {state}  {b}  ({why})  {vec or 'no vector'}")
+        return
     if args.check:
         failed = False
         for u in umbrellas(g, args.repo):
