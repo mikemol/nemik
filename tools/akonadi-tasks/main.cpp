@@ -21,6 +21,7 @@
 #include <Akonadi/ItemFetchScope>
 #include <Akonadi/ItemModifyJob>
 #include <KCalendarCore/ICalFormat>
+#include <QSet>
 #include <KCalendarCore/MemoryCalendar>
 #include <KCalendarCore/Event>
 #include <KCalendarCore/Todo>
@@ -50,6 +51,11 @@ int main(int argc, char **argv) {
     QCoreApplication app(argc, argv);
     const QStringList args = app.arguments();
     const bool apply = args.contains(QStringLiteral("--apply"));
+    // --only REF (repeatable): sync just these refs and leave every other task as it is (no COMPLETE
+    // for refs outside the set), so a new mapping can be tried on one task (nemik:W162).
+    QSet<QString> only;
+    for (int i = 0; i + 1 < args.size(); ++i)
+        if (args.at(i) == QStringLiteral("--only")) only.insert(args.at(i + 1));
     const int li = args.indexOf(QStringLiteral("--list"));
     const QString listName = li > 0 && li + 1 < args.size() ? args.at(li + 1) : QString();
 
@@ -103,6 +109,7 @@ int main(int argc, char **argv) {
         const QString ref = refOf(t);
         if (ref.isEmpty()) continue;
         t->setDescription(t->description() + QLatin1Char('\n') + kRefTag + ref);
+        if (!only.isEmpty() && !only.contains(ref)) continue;  // nemik:W162: try a change on chosen refs first
         feed.insert(ref, t);
     }
 
@@ -179,7 +186,7 @@ int main(int argc, char **argv) {
         run(new Akonadi::ItemModifyJob(item), f.key());
     }
     for (auto m = mine.cbegin(); m != mine.cend(); ++m) {  // the ask closed upstream
-        if (feed.contains(m.key())) continue;
+        if (feed.contains(m.key()) || (!only.isEmpty() && !only.contains(m.key()))) continue;
         Akonadi::Item item = m.value();
         const Todo::Ptr have = item.payload<Todo::Ptr>();
         if (have->isCompleted()) continue;

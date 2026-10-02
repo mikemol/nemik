@@ -188,6 +188,8 @@ def tasks_main(argv: list[str] | None = None) -> None:
     ap.add_argument("--list", required=True, help="the Google Tasks list, by name")
     ap.add_argument("--create-list", action="store_true", help="create the list when none has that name")
     ap.add_argument("--apply", action="store_true", help="write; without it, only print the plan")
+    ap.add_argument("--only", action="append", default=[], metavar="REF",
+                    help="sync only this repo:W<n> (repeatable); other tasks are left untouched (nemik:W162)")
     args = ap.parse_args(argv)
     if not args.helper.exists():
         print(f"ERROR: {args.helper} is missing; build it with ./setup.sh", flush=True)
@@ -199,6 +201,8 @@ def tasks_main(argv: list[str] | None = None) -> None:
         raise SystemExit(2) from e
     cmd = [str(args.helper), "--list", args.list]
     cmd += ["--create-list"] * args.create_list + ["--apply"] * args.apply
+    for r in args.only:
+        cmd += ["--only", r]
     sys.stdout.flush()
     raise SystemExit(subprocess.run(cmd, input=text.encode(), check=False).returncode)
 
