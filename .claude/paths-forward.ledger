@@ -285,3 +285,4 @@
 2026-10-02T05:15:32Z  tick  W168  advanced  unblock  "send-ready line for live owners; W150 alarm delivery done; W157 working"  evidence=tests/test_wake_alarms.py
 2026-10-02T05:19:11Z  interrupt  W181  advanced  --  "withheld leaf's text leaked through goals outside; entry now dropped whole"  evidence=tests/test_withheld.py
 2026-10-02T05:45:23Z  tick  W157  advanced  unblock  "mikemol-ics vendored into the venv, smoke-tested"  evidence=tests/test_ics_reader.py
+2026-10-02T06:15:08Z  tick  W157  advanced  unblock  "calendars.occurrences reads exported calendars, leaves no copy; W158 working"  evidence=tests/test_calendars.py
