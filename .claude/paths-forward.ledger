@@ -301,3 +301,4 @@
 2026-10-02T12:06:03Z  interrupt  W184  done  --  "side panel overflow fixed; test reproduces it at 380px"  evidence=tests/test_layout.py
 2026-10-02T12:20:42Z  interrupt  W185  done  --  "refit on a changed view; treemap no longer scaled off the page"  evidence=tests/test_layout.py
 2026-10-02T12:50:30Z  tick  W124  advanced  collapse  "image gate runs browser tests on pinned chromium (162 passed, 0 skipped); W155/W156 dropped (egress premise disproven), W106 done; W173 working"  evidence=Containerfile
+2026-10-02T12:55:48Z  interrupt  W186  done  --  "one cite format, every cite a link"  evidence=tests/test_layout.py

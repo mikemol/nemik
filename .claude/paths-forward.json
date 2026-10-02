@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 185,
+  "counter": 186,
   "waypoints": [
     {
       "symbol": "W1",
@@ -3481,6 +3481,22 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-02T12:20:42Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W186",
+      "title": "Cites: one format (repo:W<n>) and every cite a link, in detail, lanes, findings, wake, goals",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-02: 2026-10-02: index.html linked(text, repo): escapes free text, normalizes 'repo W<n>'/'repo/W<n>' of known repos to repo:W<n>, links every repo:W<n> (and a bare W<n> as that waypoint's own repo's in blocked_on/ask/caused_by). Applied to detail (cite as, title, caused by, blocked on, is-the-block-for, waits on, claim-with), unclaimed placeholders, lanes (ask, same ask, waiting), findings (repo:W<n> as a link; repo-level findings show just the repo, no '--'), wake claim-with, goals outside. The redundant 'waypoint: repo W<n>' row is gone (cite as says it). test_layout::test_every_cite_in_the_panel_is_a_repo_colon_link scans the panel's text outside links; it first caught a fixture title 'el-openglo W112'. Live render checked (nemik:W182 detail, findings). bazel 31/31.",
+      "issued_at": "2026-10-02T12:54:45Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": "2026-10-02T12:55:48Z",
       "ticks_blocked": 0
     }
   ],

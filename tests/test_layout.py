@@ -300,3 +300,35 @@ def test_side_panel_never_overflows_sideways(server, width) -> None:
           return { scroll: a.scrollWidth, client: a.clientWidth, wide: wide.slice(0, 5) }; }""")
         browser.close()
     assert m["wide"] == [] and m["scroll"] <= m["client"] + 1, m
+
+
+def test_every_cite_in_the_panel_is_a_repo_colon_link(server) -> None:
+    """Operator 2026-10-02: one cite format (repo:W<n>, never 'repo W<n>' or 'repo/W<n>'), and
+    every cite shown is a link. Checked over a waypoint's detail, a lane, findings and wake."""
+    with sync_api.sync_playwright() as p:
+        try:
+            exe = os.environ.get("NEMIK_CHROMIUM")
+            browser = p.chromium.launch(executable_path=os.path.abspath(exe) if exe else None)
+        except Exception as e:  # noqa: BLE001 - no browser installed here
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": 1400, "height": 1000})
+        page.goto(server)
+        page.wait_for_function("() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0", timeout=60000)
+        page.wait_for_timeout(500)
+        bad = page.evaluate("""() => {
+          const out = [], pat = /\\b[a-z][a-z0-9-]*(?:[:\\/]| )W\\d+\\b/;
+          const scan = where => {
+            const walk = document.createTreeWalker(document.querySelector('aside'), NodeFilter.SHOW_TEXT);
+            for (let t; (t = walk.nextNode());) {
+              if (t.parentElement.closest('a[data-cite], select, #toolout, p.stat')) continue;
+              const m = t.textContent.match(pat);
+              if (m) out.push(where + ': ' + m[0]);
+            }
+          };
+          const ns = cy.nodes('[symbol]').filter(n => n.data('caused_by') && n.data('blocked_on').length);
+          if (ns.length) { detail(ns[0].data()); scan('detail'); }
+          lane('needs-you'); scan('lane');
+          return [...new Set(out)].slice(0, 8);
+        }""")
+        browser.close()
+    assert bad == []

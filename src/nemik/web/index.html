@@ -720,7 +720,7 @@ function lane(cat) {
     unstated: "Blocked on you with no stated ask, so you can't tell a decision from a check-in. The agent should state what it needs.",
   }[cat];
   const rows = (data.operator || []).filter(a => a.category === cat).map(a =>
-    `<dt><code>${esc(a.ref)}</code></dt><dd>${esc(a.ask)}${a.same_ask.length ? `<br><span class="stat">same ask: ${a.same_ask.map(esc).join(", ")}</span>` : ""}${(a.waiting || []).length ? `<br><span class="stat">waiting behind this: ${a.waiting.map(esc).join(", ")}</span>` : ""}</dd>`);
+    `<dt>${citeLink(a.ref)}</dt><dd>${linked(a.ask, a.ref.split(":")[0])}${a.same_ask.length ? `<br><span class="stat">same ask: ${a.same_ask.map(citeLink).join(", ")}</span>` : ""}${(a.waiting || []).length ? `<br><span class="stat">waiting behind this: ${a.waiting.map(citeLink).join(", ")}</span>` : ""}</dd>`);
   document.getElementById("detail").innerHTML = `<p class="stat">${esc(help)}</p><dl>${rows.join("")}</dl>`;
 }
 
@@ -728,38 +728,37 @@ function detail(n) {
   const e = n.effort || {};
   if (n.state === "unclaimed") {
     document.getElementById("detail").innerHTML = `<dl>
-      <dt>waiting</dt><dd><code>${esc(n.for)}</code> is blocked on <b>${esc(n.repo)}</b></dd>
-      <dt>blocked on</dt><dd>${esc(n.blocked_on.join(", "))}</dd>
+      <dt>waiting</dt><dd>${citeLink(n.for)} is blocked on <b>${esc(n.repo)}</b></dd>
+      <dt>blocked on</dt><dd>${linked(n.blocked_on.join(", "), n.for.split(":")[0])}</dd>
       <dt>claimed by</dt><dd>nothing yet</dd></dl>
       <p class="stat">To make it citable: ${esc(n.repo)} adds a waypoint with
-      <code>--enables ${esc(n.for)}</code>, or the blocked side writes that waypoint as
+      <code>--enables</code> ${citeLink(n.for)}, or the blocked side writes that waypoint as
       <code>${esc(n.repo)}:W&lt;n&gt;</code> in blocked_on. ${esc(n.repo)}'s agent can list these with
       <code>nemik-inbound ${esc(n.repo)}</code> or <code>/inbound/${esc(n.repo)}</code>.</p>`;
     return;
   }
   const inb = (data.inbound || []).filter(b => b.claimed_by.includes(n.cite) || b.blocked === n.cite);
   document.getElementById("detail").innerHTML = `<dl>
-    <dt>cite as</dt><dd><code>${esc(n.cite)}</code></dd>
-    <dt>waypoint</dt><dd>${esc(n.repo)} ${esc(n.symbol)}</dd>
-    <dt>title</dt><dd>${esc(n.title)}</dd>
+    <dt>cite as</dt><dd>${citeLink(n.cite)}</dd>
+    <dt>title</dt><dd>${linked(n.title)}</dd>
     <dt>state</dt><dd>${esc(n.state)}</dd>
     ${n.minted_during ? `<dt>minted during</dt><dd>${esc(n.minted_during)}</dd>` : ""}
-    ${n.caused_by ? `<dt>caused by</dt><dd>${esc(n.caused_by.replace(/^urn:nemik:/, ""))}</dd>` : ""}
-    ${n.blocked_on.length ? `<dt>blocked on</dt><dd>${esc(n.blocked_on.join(", "))} (${esc(n.blocked_kind)})</dd>` : ""}
+    ${n.caused_by ? `<dt>caused by</dt><dd>${linked(n.caused_by.replace(/^urn:nemik:([^/]+)\//, "$1:"), n.repo)}</dd>` : ""}
+    ${n.blocked_on.length ? `<dt>blocked on</dt><dd>${linked(n.blocked_on.join(", "), n.repo)} (${esc(n.blocked_kind)})</dd>` : ""}
     <dt>forecast</dt><dd>${e.forecast || 0}</dd>
     <dt>interrupt</dt><dd>${e.interrupt || 0}</dd>
     <dt>unclassified</dt><dd>${e.unclassified || 0}</dd>
     <dt>last activity</dt><dd>${esc(n.last_activity || "none")}</dd>
-    ${inb.filter(b => b.blocked !== n.cite).map(b => `<dt>is the block for</dt><dd><code>${esc(b.blocked)}</code></dd>`).join("")}
+    ${inb.filter(b => b.blocked !== n.cite).map(b => `<dt>is the block for</dt><dd>${citeLink(b.blocked)}</dd>`).join("")}
     ${inb.filter(b => b.blocked === n.cite).map(b => `<dt>waits on</dt><dd>${b.claimed_by.length
-      ? b.claimed_by.map(c => `<code>${esc(c)}</code>`).join(", ") : `${esc(b.blocker)} (waiting on ${esc(b.blocker)}: claim with <code>--enables ${esc(b.blocked)}</code>)`}</dd>`).join("")}</dl>`;
+      ? b.claimed_by.map(citeLink).join(", ") : `${esc(b.blocker)} (waiting on ${esc(b.blocker)}: claim with <code>--enables</code> ${citeLink(b.blocked)})`}</dd>`).join("")}</dl>`;
 }
 
 function findings() {
   const repo = document.getElementById("repo").value;
   const rows = Object.entries(data.findings).filter(([r]) => !repo || r === repo)
     .flatMap(([r, fs]) => fs.map(([sev, sym, msg]) =>
-      `<div class="finding ${esc(sev)}">${esc(sev)} · ${esc(r)} ${esc(sym)} · ${esc(msg)}</div>`));
+      `<div class="finding ${esc(sev)}">${esc(sev)} · ${/^W\d+$/.test(sym) ? citeLink(`${r}:${sym}`) : esc(r)} · ${linked(msg)}</div>`));
   document.getElementById("findings").innerHTML = rows.join("") || '<span class="stat">none</span>';
 }
 
@@ -798,7 +797,7 @@ async function wake() {
   liveness = Object.fromEntries(w.roster.map(r => [r.repo, r.state]));
   const sleepers = w.roster.filter(r => r.state !== "awake");
   const rows = sleepers.map(r => `<dt><b>${esc(r.repo)}</b> <span class="stat">${esc(r.state)}</span></dt>
-    <dd>${r.waiting.map(x => `${citeLink(x.blocked)}${x.claimed_by.length ? "" : ` (waiting on ${esc(r.repo)}: claim with <code>--enables ${esc(x.blocked)}</code>)`}`).join(", ")}</dd>`);
+    <dd>${r.waiting.map(x => `${citeLink(x.blocked)}${x.claimed_by.length ? "" : ` (waiting on ${esc(r.repo)}: claim with <code>--enables</code> ${citeLink(x.blocked)})`}`).join(", ")}</dd>`);
   el.innerHTML = (rows.length ? `<dl>${rows.join("")}</dl>` : "Everything waited on is awake.")
     + `<p><b>${w.operator.waiting.length} need you:</b> ${w.operator.waiting.map(x => citeLink(x.blocked)).join(", ") || "none"}</p>`
     + `<p class="stat">Liveness: ${esc(w.liveness)}.</p>`;
@@ -814,7 +813,7 @@ async function goals() {
   el.innerHTML = gs.length ? "<dl>" + gs.map(g => `<dt>${citeLink(repo + ":" + g.goal)} ${esc(g.title.slice(0, 60))}</dt>
     <dd>on deck ${g.on_deck ? citeLink(g.on_deck) : "none"}; path ${g.clear
       ? '<span style="color:var(--ready)">clear</span>'
-      : '<span style="color:var(--blocked)">waits on</span> ' + g.outside.map(o => /^[\w.-]+:W\d+$/.test(o) ? citeLink(o) : esc(o)).join(", ")}</dd>`).join("") + "</dl>"
+      : '<span style="color:var(--blocked)">waits on</span> ' + g.outside.map(o => linked(o)).join(", ")}</dd>`).join("") + "</dl>"
     : "No open goals.";
 }
 
@@ -838,6 +837,18 @@ async function tool() {
 if (document.getElementById("tool")) document.getElementById("tool").onchange = tool;
 
 // A cite in the Wake panel is a link: it selects that waypoint in the graph and shows its detail.
+// Operator 2026-10-02: one cite format everywhere, `repo:W<n>`, and every cite is a link. linked()
+// escapes free text and turns each cite in it into one; a bare W<n> is that repo's when `repo` is
+// given (a waypoint's own blocked_on names its local items that way).
+const CITE = /\b([a-z][a-z0-9-]*):(W\d+)\b/g;
+function linked(text, repo) {
+  // The older spellings "repo W<n>" and "repo/W<n>" of a known repo are the same cite.
+  const repos = new Set((data && data.nodes || []).map(n => n.repo));
+  let out = esc(text).replace(/\b([a-z][a-z0-9-]*)[ \/](W\d+)\b/g, (m, r, w) => repos.has(r) ? `${r}:${w}` : m)
+    .replace(CITE, (m) => citeLink(m));
+  if (repo) out = out.replace(/(^|[\s,(\[])(W\d+)\b(?![^<]*<\/code>)/g, (m, pre, w) => pre + citeLink(`${repo}:${w}`));
+  return out;
+}
 function citeLink(cite) {
   return `<a href="#" data-cite="${esc(cite)}"><code>${esc(cite)}</code></a>`;
 }
