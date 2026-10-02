@@ -25,7 +25,7 @@ exports_files(["pyproject.toml"])
 # console script, the same entries as pyproject's [project.scripts] plus pathsforward's own.
 venv_from_hub(
     name = ".venv",
-    hub_requirements = all_requirements + ["@pathsforward//:pkg"],
+    hub_requirements = all_requirements + ["@pathsforward//:pkg", "@icsstruct//:pkg"],
     python_version = "3.13",
     python_version_short = "3.13",
     srcs = glob(["src/nemik/**"], exclude = ["**/__pycache__/**"]),
@@ -43,5 +43,6 @@ venv_from_hub(
         "nemik-ics": "nemik.vtodo:main",
         "nemik-tasks": "nemik.vtodo:tasks_main",
         "mikemol-paths-forward": "mikemol.pathsforward.cli:main",
+        "mikemol-ics": "mikemol.icsstruct.cli:main",
     },
 )

@@ -42,6 +42,12 @@ vendored_wheel(
     wheel = "//:vendor/wheels/mikemol_pathsforward-0.1.0+f22d7fe-py3-none-any.whl",
 )
 
+# nemik:W157: mtools' icsstruct (mikemol-ics), vendored the same way at mtools 3e12e44.
+vendored_wheel(
+    name = "icsstruct",
+    wheel = "//:vendor/wheels/mikemol_icsstruct-0.1.0+3e12e44-py3-none-any.whl",
+)
+
 # nemik:W98: opa, the witness evaluator, as a hashed input instead of whatever /usr/bin holds.
 http_file = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_file")
 http_file(
