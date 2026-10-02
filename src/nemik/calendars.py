@@ -10,12 +10,41 @@ never leaves KWallet, the event text never goes to the export, metrics or nemik-
 from __future__ import annotations
 
 import json
+import re
 import shutil
 import subprocess
 import tempfile
 from pathlib import Path
 
 from nemik.vtodo import DEFAULT_HELPER
+
+DEFAULT_CONFIG = Path.home() / ".config" / "nemik" / "calendars.toml"
+_LABEL = re.compile(r"[a-z][a-z0-9-]{0,31}")
+
+
+def load_collections(path: Path = DEFAULT_CONFIG) -> dict[str, str]:
+    """nemik:W158: which calendars nemik may read, as {label: Akonadi collection name}.
+
+    ~/.config/nemik/calendars.toml:
+
+        [calendars]
+        home = "Personal"          # label = what a waypoint cites as cal:home/<uid>
+
+    No file reads no calendar: the operator opts each one in, as with ics.toml. A label must be
+    short lowercase (it appears in refs); a bad one fails rather than being skipped.
+    """
+    import tomllib
+
+    if not path.exists():
+        return {}
+    cals = tomllib.loads(path.read_text()).get("calendars", {})
+    if not isinstance(cals, dict):
+        raise ValueError(f"{path}: [calendars] must be a table of label = \"collection name\"")
+    for label, name in cals.items():
+        if not _LABEL.fullmatch(label) or not isinstance(name, str) or not name:
+            raise ValueError(f"{path}: bad entry {label!r}: labels are [a-z][a-z0-9-]*, names non-empty strings")
+    return dict(sorted(cals.items()))
+
 
 KEEP = ("uid", "start", "end", "all_day", "summary", "recurrence_id")
 

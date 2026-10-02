@@ -42,3 +42,15 @@ def test_a_failed_export_raises_rather_than_reading_as_a_free_day(tmp_path, ics)
     import subprocess
     with pytest.raises(subprocess.CalledProcessError):
         occurrences({"home": "Personal"}, start="2026-10-01", helper=_helper(tmp_path, fail=True), ics=ics)
+
+
+def test_config_opts_calendars_in(tmp_path) -> None:
+    from nemik.calendars import load_collections
+
+    assert load_collections(tmp_path / "missing.toml") == {}
+    p = tmp_path / "calendars.toml"
+    p.write_text('[calendars]\nhome = "Personal"\nwork = "Shift schedule"\n')
+    assert load_collections(p) == {"home": "Personal", "work": "Shift schedule"}
+    p.write_text('[calendars]\n"Home Cal" = "Personal"\n')
+    with pytest.raises(ValueError, match="bad entry"):
+        load_collections(p)

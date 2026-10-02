@@ -286,3 +286,4 @@
 2026-10-02T05:19:11Z  interrupt  W181  advanced  --  "withheld leaf's text leaked through goals outside; entry now dropped whole"  evidence=tests/test_withheld.py
 2026-10-02T05:45:23Z  tick  W157  advanced  unblock  "mikemol-ics vendored into the venv, smoke-tested"  evidence=tests/test_ics_reader.py
 2026-10-02T06:15:08Z  tick  W157  advanced  unblock  "calendars.occurrences reads exported calendars, leaves no copy; W158 working"  evidence=tests/test_calendars.py
+2026-10-02T06:44:50Z  tick  W158  advanced  unblock  "calendars.toml loader; operator ask W182 for which calendars; W159 working"  evidence=tests/test_calendars.py
