@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 81
+      "ticks_blocked": 82
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 36,
+      "ticks_blocked": 37,
       "weight": 1
     },
     {
@@ -1360,7 +1360,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "weight": 1
     },
     {
@@ -1401,7 +1401,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-01T19:50:19Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1991,7 +1991,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "weight": 0
     },
     {
@@ -2136,7 +2136,7 @@
       "minted_during": "tick",
       "caused_by": "life",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "weight": 3
     },
     {
@@ -2462,7 +2462,7 @@
       "minted_during": "tick",
       "caused_by": "life:W23",
       "last_worked": "2026-10-01T19:49:18Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "weight": 3
     },
     {
@@ -2631,7 +2631,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 26
+      "ticks_blocked": 27
     },
     {
       "symbol": "W138",
@@ -2852,7 +2852,7 @@
       "minted_during": "tick",
       "caused_by": "life:W28",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "weight": 3
     },
     {
@@ -2898,7 +2898,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 17
+      "ticks_blocked": 18
     },
     {
       "symbol": "W151",
@@ -3098,7 +3098,7 @@
       "minted_during": "interrupt",
       "caused_by": "W113",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "weight": 3
     },
     {
@@ -3197,12 +3197,31 @@
       "minted_during": "interrupt",
       "caused_by": "W148",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "weight": 3
     },
     {
       "symbol": "W166",
       "title": "Alarm delivery: dedupe key (ref, RECURRENCE-ID, instant) in the nudges state",
+      "status": "done",
+      "enables": [
+        "W150"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-02: 2026-10-02: wake.alarm_key(a) = 'alarm|ref|rid|at' (repo keys never contain '|'); wake.undelivered(fired, seen) delivers each firing once, mutating seen like due_nudges; error rows are never marked so they stay visible. tests/test_alarm_delivery.py (4); bazel 28/28.",
+      "issued_at": "2026-10-01T19:51:39Z",
+      "minted_during": "interrupt",
+      "caused_by": "W150",
+      "last_worked": "2026-10-02T04:14:49Z",
+      "ticks_blocked": 0,
+      "weight": 6
+    },
+    {
+      "symbol": "W167",
+      "title": "Alarm delivery: fired alarms go out through the nudge path",
       "status": "working",
       "enables": [
         "W150"
@@ -3215,26 +3234,7 @@
       "issued_at": "2026-10-01T19:51:39Z",
       "minted_during": "interrupt",
       "caused_by": "W150",
-      "last_worked": "2026-10-02T03:58:58Z",
-      "ticks_blocked": 0,
-      "weight": 6
-    },
-    {
-      "symbol": "W167",
-      "title": "Alarm delivery: fired alarms go out through the nudge path",
-      "status": "ready",
-      "enables": [
-        "W150"
-      ],
-      "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
-      "issued_at": "2026-10-01T19:51:39Z",
-      "minted_during": "interrupt",
-      "caused_by": "W150",
-      "last_worked": null,
+      "last_worked": "2026-10-02T04:14:49Z",
       "ticks_blocked": 0,
       "weight": 6
     },
@@ -3257,7 +3257,7 @@
       "minted_during": "interrupt",
       "caused_by": "W150",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "weight": 4
     },
     {

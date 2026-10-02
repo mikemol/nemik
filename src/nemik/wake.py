@@ -172,6 +172,33 @@ def due_nudges(rows: list[dict], seen: dict, now: datetime | None = None) -> lis
     return due
 
 
+def alarm_key(a: dict) -> str:
+    """nemik:W166: one firing's identity: (ref, RECURRENCE-ID, instant), in the nudges state's key
+    space. Repo names (the state's other keys) never contain '|', so the two cannot collide."""
+    return f"alarm|{a['ref']}|{a['recurrence_id']}|{a['at']}"
+
+
+def undelivered(fired: list[dict], seen: dict, now: datetime | None = None) -> list[dict]:
+    """Fired alarms not yet delivered, each marked delivered in `seen` (mutated, like due_nudges).
+
+    A firing is delivered once: the same (ref, occurrence, instant) seen again by an overlapping
+    window is skipped. Error rows (a bad trigger) have no instant, are never marked, and so stay
+    visible every run until the queue is fixed.
+    """
+    now = now or datetime.now(timezone.utc)
+    out = []
+    for a in fired:
+        if a.get("error"):
+            out.append(a)
+            continue
+        k = alarm_key(a)
+        if k in seen:
+            continue
+        seen[k] = now.timestamp()
+        out.append(a)
+    return out
+
+
 def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     import argparse
 
