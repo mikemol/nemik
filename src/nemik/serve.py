@@ -313,6 +313,25 @@ def write_static(out: Path) -> list[Path]:
     return written
 
 
+def static_data(model: Model) -> dict[str, object]:
+    """nemik:W170: every document the page fetches, computed once from one export, as
+    {published path: document}. Only what the page reads is published: inbound/<repo>.json was
+    planned, but the page never fetches it, so it stays off the public surface."""
+    from nemik.rank import goals, load_weights
+
+    model.refresh()
+    g, live = model.graph, read_liveness(model.root, None)[0]
+    docs: dict[str, object] = {
+        "graph.json": model.doc,
+        # The liveness *source* is a host path; the static view says only that it is a snapshot.
+        "wake.json": {"liveness": "snapshot", "roster": roster(g, live), "operator": operator_row(g)},
+    }
+    weights = load_weights()
+    for repo in sorted({n["repo"] for n in model.doc["nodes"] if n["id"].startswith(BASE)}):
+        docs[f"goals/{repo}.json"] = goals(g, repo, weights)
+    return docs
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(prog="nemik-serve", description=(__doc__ or "").splitlines()[0])
     ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
