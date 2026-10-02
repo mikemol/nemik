@@ -28,7 +28,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends git ca-certific
 ADD --checksum=sha256:69da5179ee403d10fa11bab6cfb4ffb0d23dba5f9b682fa977db772a1da5670f --chmod=755 \
     https://github.com/open-policy-agent/opa/releases/download/v1.20.2/opa_linux_amd64_static /usr/local/bin/opa
 ENV NEMIK_OPA=/usr/local/bin/opa
-RUN uv sync --frozen --extra docs && .venv/bin/pytest -q -rs tests && touch /app/.tested
+# nemik:W124: the browser tests (layout budgets, treemap, side panel) run here too, on the same
+# chrome-headless-shell Bazel pins (MODULE.bazel @chromium, by sha256), test stage only.
+ADD --checksum=sha256:a9da028861a0cf789ff25c2fed45f5f1aaf969ed9247835b6a7821a4f7af9d1d \
+    https://cdn.playwright.dev/builds/cft/153.0.8010.12/linux64/chrome-headless-shell-linux64.zip /tmp/chs.zip
+RUN apt-get update && apt-get install -y --no-install-recommends unzip && unzip -q /tmp/chs.zip -d /opt && rm /tmp/chs.zip \
+    && rm -rf /var/lib/apt/lists/*
+ENV NEMIK_CHROMIUM=/opt/chrome-headless-shell-linux64/chrome-headless-shell
+RUN uv sync --frozen --extra docs && .venv/bin/playwright install-deps chromium-headless-shell \
+    && .venv/bin/pytest -q -rs tests && touch /app/.tested
 
 FROM base
 COPY --from=test /app/.tested /app/.tested

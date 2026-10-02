@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 108
+      "ticks_blocked": 111
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 63,
+      "ticks_blocked": 66,
       "weight": 1
     },
     {
@@ -1360,7 +1360,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 44,
+      "ticks_blocked": 47,
       "weight": 1
     },
     {
@@ -1401,7 +1401,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-01T19:50:19Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 48,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1970,7 +1970,7 @@
     {
       "symbol": "W106",
       "title": "Containerfile test stage: build without the github paperkit fetch (egress)",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "luthen-observability:W185"
       ],
@@ -1978,19 +1978,15 @@
         "containerfile",
         "paperkit"
       ],
-      "blocked_on": [
-        "W124",
-        "W155",
-        "W156"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "2026-09-28: luthen 2026-09-28: buildkitd is a host process on luthen's host network, which reaches github.com; the git fetch is likely fine (not yet witnessed). No-egress covers derived data leaving, not pinned sources coming in. Urgency dropped; kept for GitHub-down resilience. | 2026-09-28: Now a prerequisite for the first Forgejo build: the base image (uv python3.13-bookworm-slim) has no git binary, so the test stage's uv sync cannot fetch paperkit's git source; also the test stage does not COPY ARCHITECTURE.md, which test_architecture reads. Expected, not yet run. | 2026-09-28: MEASURED 2026-09-28 at 40543f3: buildctl build (luthen's /run/buildkit) of the Containerfile succeeds; test stage 55 passed, 12 skipped. My 'no git binary' prediction was wrong. The 12 skips (opa, chromium, likely architecture) are the open part: the image gate runs less than bazel. | 2026-09-28: Atomized 2026-09-28 into W122 (done), W123 (opa), W124 (chromium) by measured skip cause (pytest -rs in the image build). | 2026-10-01: full title before 2026-10-01 trim: Containerfile test stage: uv sync now fetches paperkit from github (W102 restored the git source) - an egress the luthen build may not have; build the test stage without that fetch (or from the bazel venv, W101)",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-09-28: luthen 2026-09-28: buildkitd is a host process on luthen's host network, which reaches github.com; the git fetch is likely fine (not yet witnessed). No-egress covers derived data leaving, not pinned sources coming in. Urgency dropped; kept for GitHub-down resilience. | 2026-09-28: Now a prerequisite for the first Forgejo build: the base image (uv python3.13-bookworm-slim) has no git binary, so the test stage's uv sync cannot fetch paperkit's git source; also the test stage does not COPY ARCHITECTURE.md, which test_architecture reads. Expected, not yet run. | 2026-09-28: MEASURED 2026-09-28 at 40543f3: buildctl build (luthen's /run/buildkit) of the Containerfile succeeds; test stage 55 passed, 12 skipped. My 'no git binary' prediction was wrong. The 12 skips (opa, chromium, likely architecture) are the open part: the image gate runs less than bazel. | 2026-09-28: Atomized 2026-09-28 into W122 (done), W123 (opa), W124 (chromium) by measured skip cause (pytest -rs in the image build). | 2026-10-01: full title before 2026-10-01 trim: Containerfile test stage: uv sync now fetches paperkit from github (W102 restored the git source) - an egress the luthen build may not have; build the test stage without that fetch (or from the bazel venv, W101) | 2026-10-02: 2026-10-02: test stage now carries the witness and browser tests (W123, W124); the egress concern is residue (W155/W156 dropped with reason).",
       "issued_at": "2026-09-28T13:25:08Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 2,
+      "last_worked": "2026-10-02T12:50:14Z",
+      "ticks_blocked": 0,
       "weight": 0
     },
     {
@@ -2333,7 +2329,7 @@
     {
       "symbol": "W124",
       "title": "W106c: image test stage runs test_web_render (pinned chrome-headless-shell, as MODULE.bazel @chromium), or record why the pre-commit bazel gate is enough",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W106"
       ],
@@ -2342,12 +2338,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-02: 2026-10-02: Containerfile test stage ADDs the same chrome-headless-shell zip Bazel pins (sha256 a9da02...), unzips to /opt, NEMIK_CHROMIUM set, playwright install-deps chromium-headless-shell for its libraries (test stage only; final image unchanged). buildctl --target test: 162 passed, 0 skipped (was 153/6); the layout budgets hold in the image's Chromium too. Gate time ~2m40s for pytest.",
       "issued_at": "2026-09-28T22:45:31Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-02T11:46:46Z",
+      "last_worked": "2026-10-02T12:49:57Z",
       "ticks_blocked": 0,
       "weight": 2
     },
@@ -2621,7 +2617,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 53
+      "ticks_blocked": 56
     },
     {
       "symbol": "W138",
@@ -2840,7 +2836,7 @@
       "minted_during": "tick",
       "caused_by": "life:W28",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 14,
       "weight": 3
     },
     {
@@ -2969,44 +2965,6 @@
       "weight": 6
     },
     {
-      "symbol": "W155",
-      "title": "Test stage: drop the github paperkit fetch (egress the luthen build may lack)",
-      "status": "ready",
-      "enables": [
-        "W106"
-      ],
-      "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
-      "issued_at": "2026-10-01T19:51:29Z",
-      "minted_during": "interrupt",
-      "caused_by": null,
-      "last_worked": null,
-      "ticks_blocked": 0,
-      "weight": 2
-    },
-    {
-      "symbol": "W156",
-      "title": "Test stage: run from the bazel venv (W101) instead of uv sync",
-      "status": "ready",
-      "enables": [
-        "W106"
-      ],
-      "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
-      "issued_at": "2026-10-01T19:51:38Z",
-      "minted_during": "interrupt",
-      "caused_by": "W106",
-      "last_worked": null,
-      "ticks_blocked": 0,
-      "weight": 2
-    },
-    {
       "symbol": "W157",
       "title": "Operator calendars: read the W147 Akonadi export into nemik (host-side)",
       "status": "done",
@@ -3119,7 +3077,7 @@
       "minted_during": "interrupt",
       "caused_by": "W148",
       "last_worked": "2026-10-02T09:13:53Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 15,
       "weight": 5
     },
     {
@@ -3178,7 +3136,7 @@
       "minted_during": "interrupt",
       "caused_by": "W148",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 14,
       "weight": 3
     },
     {
@@ -3317,7 +3275,7 @@
     {
       "symbol": "W173",
       "title": "Weather: one outage is one monotone FFI waypoint, minted by the blocked repo with a probe-fact witness",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W75"
       ],
@@ -3329,7 +3287,7 @@
       "issued_at": "2026-10-01T19:51:39Z",
       "minted_during": "interrupt",
       "caused_by": "W75",
-      "last_worked": null,
+      "last_worked": "2026-10-02T12:50:30Z",
       "ticks_blocked": 0,
       "weight": 2
     },
@@ -3472,7 +3430,7 @@
       "minted_during": "tick",
       "caused_by": "W158",
       "last_worked": "2026-10-02T06:44:50Z",
-      "ticks_blocked": 19
+      "ticks_blocked": 22
     },
     {
       "symbol": "W183",
@@ -3553,6 +3511,20 @@
       "title": "Per-repo [order] override: a repo declares its own tiers (e.g. structure first) so DRIFT judges against it",
       "dropped_at": "2026-10-01T20:49:20Z",
       "reason": "el-openglo (its only asker) adopted nemik's composed order on 2026-10-01 and syncs weights each tick, so no per-repo override is needed; revisit if another repo asks for one",
+      "recoverable": true
+    },
+    {
+      "symbol": "W155",
+      "title": "Test stage: drop the github paperkit fetch (egress the luthen build may lack)",
+      "dropped_at": "2026-10-02T12:50:14Z",
+      "reason": "the premise (the luthen build may lack egress to github) is disproven: Forgejo's buildkit has built and shipped every nemik push (ImagePolicy at 1790942925-32d6d3d), fetching paperkit by git; and W123/W124 now fetch opa and chrome-headless-shell by checksum. Revisit only if luthen's build loses egress.",
+      "recoverable": true
+    },
+    {
+      "symbol": "W156",
+      "title": "Test stage: run from the bazel venv (W101) instead of uv sync",
+      "dropped_at": "2026-10-02T12:50:14Z",
+      "reason": "the premise (the luthen build may lack egress to github) is disproven: Forgejo's buildkit has built and shipped every nemik push (ImagePolicy at 1790942925-32d6d3d), fetching paperkit by git; and W123/W124 now fetch opa and chrome-headless-shell by checksum. Revisit only if luthen's build loses egress. W156 (bazel venv in the image) has no remaining motive beyond that egress.",
       "recoverable": true
     }
   ],
