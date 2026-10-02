@@ -44,5 +44,6 @@ venv_from_hub(
         "nemik-tasks": "nemik.vtodo:tasks_main",
         "mikemol-paths-forward": "mikemol.pathsforward.cli:main",
         "mikemol-ics": "mikemol.icsstruct.cli:main",
+        "nemik-days": "nemik.calendars:days_main",
     },
 )

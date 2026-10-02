@@ -105,3 +105,51 @@ def event_graph(occs: list[dict], queues):
         if (m := CAL_REF.fullmatch(str(text).strip())) and (ev := nxt.get((m[1], m[2]))):
             g.add((n, NEMIK.waitsFor, ev))
     return g
+
+
+def days_main(argv: list[str] | None = None, g=None) -> None:
+    """nemik-days: the next N days of the operator's opted-in calendars, each with its waiters.
+
+    A separate command, not a flag on nemik-operator (nemik:W161): nemik-serve runs nemik-operator
+    for its Tools panel, so anything nemik-operator can reach is on the served path. This module is
+    reachable from no served module (tests/test_calendar_boundary.py).
+    """
+    import argparse
+    from datetime import date
+
+    from rdflib import Graph
+
+    from nemik.blocks import ref
+    from nemik.adapter import NEMIK
+    from nemik.check import default_root, survey
+    from nemik.vtodo import DEFAULT_HELPER
+
+    ap = argparse.ArgumentParser(prog="nemik-days", description=(days_main.__doc__ or "").splitlines()[0])
+    ap.add_argument("days", type=int, nargs="?", default=7, help="how many days ahead (default 7)")
+    ap.add_argument("--root", type=Path, default=default_root(), help="~/github")
+    ap.add_argument("--calendars", type=Path, default=DEFAULT_CONFIG, help="calendars.toml")
+    ap.add_argument("--helper", type=Path, default=DEFAULT_HELPER, help="the nemik-akonadi-tasks binary")
+    ap.add_argument("--json", action="store_true")
+    args = ap.parse_args(argv)
+    cols = load_collections(args.calendars)
+    if not cols:
+        print(f"no calendar opted in ({args.calendars})")
+        return
+    if g is None:
+        g = Graph()
+        for _, qg, _ in survey(args.root):
+            if qg is not None:
+                g += qg
+    occs = occurrences(cols, start=date.today().isoformat(), window=f"{args.days}d", helper=args.helper)
+    eg = event_graph(occs, g)
+    rows = []
+    for o in occs:
+        ev = f"urn:nemik:cal:{o['label']}/{o['uid']}/{o['recurrence_id'] or o['start']}"
+        rows.append({**o, "waiting": sorted(ref(n) for n, _, t in eg.triples((None, NEMIK.waitsFor, None)) if str(t) == ev)})
+    if args.json:
+        print(json.dumps(rows, indent=2))
+        return
+    print(f"next {args.days} days ({len(rows)})")
+    for d in rows:
+        waits = f"  <- {', '.join(d['waiting'])}" if d["waiting"] else ""
+        print(f"  {(d['start'] or '')[:16]:16} {d['label']:10} {(d['summary'] or '')[:60]}{waits}")

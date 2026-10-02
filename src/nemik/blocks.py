@@ -297,27 +297,6 @@ def operator_asks(g: Graph) -> list[dict]:
     return sorted(out, key=lambda a: (order[a["category"]], -a["ticks_blocked"], a["ref"]))
 
 
-def _calendar_days(args, g: Graph) -> list[dict]:
-    """nemik:W160: the next N days of opted-in calendars, each with the waypoints waiting on it."""
-    from datetime import date
-
-    from nemik.calendars import DEFAULT_CONFIG, event_graph, load_collections, occurrences
-    from nemik.vtodo import DEFAULT_HELPER
-
-    cols = load_collections(args.calendars or DEFAULT_CONFIG)
-    if not cols:
-        return []
-    occs = occurrences(cols, start=date.today().isoformat(), window=f"{args.days}d",
-                       helper=args.helper or DEFAULT_HELPER)
-    eg = event_graph(occs, g)
-    out = []
-    for o in occs:
-        ev = f"urn:nemik:cal:{o['label']}/{o['uid']}/{o['recurrence_id'] or o['start']}"
-        waiting = sorted(ref(n) for n, _, t in eg.triples((None, NEMIK.waitsFor, None)) if str(t) == ev)
-        out.append({**o, "summary": o["summary"] or "", "start": o["start"] or "", "waiting": waiting})
-    return out
-
-
 def operator_main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     """nemik-operator: blocks on the operator, sorted into needs-you / answered / condition / unstated."""
     import argparse
@@ -329,10 +308,6 @@ def operator_main(argv: list[str] | None = None, g: Graph | None = None) -> None
     ap = argparse.ArgumentParser(prog="nemik-operator", description=(operator_main.__doc__ or "").splitlines()[0])
     ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
     ap.add_argument("--json", action="store_true", help="machine-readable output")
-    ap.add_argument("--days", type=int, default=0,
-                    help="also list the next N days of the calendars opted in via --calendars (host-side; nemik:W160)")
-    ap.add_argument("--calendars", type=Path, default=None, help="calendars.toml (default ~/.config/nemik/calendars.toml)")
-    ap.add_argument("--helper", type=Path, default=None, help="the nemik-akonadi-tasks binary")
     args = ap.parse_args(argv)
 
     root = Path(args.root)
@@ -344,16 +319,9 @@ def operator_main(argv: list[str] | None = None, g: Graph | None = None) -> None
         for repo, path in workstream_files(root, LEDGER):
             g += ledger_graph(repo, path)[0]
     asks = operator_asks(g)
-    days = _calendar_days(args, g) if args.days > 0 else None
     if args.json:
-        print(json.dumps(asks if days is None else {"asks": asks, "calendar": days}, indent=2))
+        print(json.dumps(asks, indent=2))
         return
-    if days is not None:
-        print(f"next {args.days} days ({len(days)})" if days else
-              f"next {args.days} days: no calendar opted in (calendars.toml)")
-        for d in days:
-            waits = f"  <- {', '.join(d['waiting'])}" if d["waiting"] else ""
-            print(f"  {d['start'][:16]:16} {d['label']:10} {d['summary'][:60]}{waits}")
     for cat in CATEGORIES:
         rows = [a for a in asks if a["category"] == cat]
         print(f"\n{cat} ({len(rows)})")

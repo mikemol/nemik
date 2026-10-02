@@ -76,13 +76,13 @@ def test_events_become_nodes_and_cal_refs_wait_on_the_next_occurrence() -> None:
 
 
 def test_operator_lists_the_next_days_with_waiters(tmp_path, ics, capsys, monkeypatch) -> None:
-    """nemik:W160: nemik-operator --days N, from opted-in calendars only."""
+    """nemik:W160/W161: nemik-days N, from opted-in calendars only."""
     import datetime
 
     from rdflib import Graph, Literal
 
     from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri
-    from nemik.blocks import operator_main
+    from nemik.calendars import days_main
 
     class Today(datetime.date):
         @classmethod
@@ -95,9 +95,9 @@ def test_operator_lists_the_next_days_with_waiters(tmp_path, ics, capsys, monkey
     g.add((w, OSLC_CM.state, STATE["blocked"]))
     g.add((w, NEMIK.blockedOn, Literal("cal:home/a@t")))
     cfg = tmp_path / "calendars.toml"
-    operator_main(["--days", "14", "--calendars", str(cfg), "--helper", str(_helper(tmp_path))], g)
+    days_main(["14", "--calendars", str(cfg), "--helper", str(_helper(tmp_path))], g)
     assert "no calendar opted in" in capsys.readouterr().out
     cfg.write_text('[calendars]\nhome = "Personal"\n')
-    operator_main(["--days", "14", "--calendars", str(cfg), "--helper", str(_helper(tmp_path))], g)
+    days_main(["14", "--calendars", str(cfg), "--helper", str(_helper(tmp_path))], g)
     out = capsys.readouterr().out
     assert "dentist" in out and "<- life:W9" in out

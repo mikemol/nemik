@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 100
+      "ticks_blocked": 102
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 55,
+      "ticks_blocked": 57,
       "weight": 1
     },
     {
@@ -1360,7 +1360,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 36,
+      "ticks_blocked": 38,
       "weight": 1
     },
     {
@@ -1401,7 +1401,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-01T19:50:19Z",
-      "ticks_blocked": 37,
+      "ticks_blocked": 39,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1991,7 +1991,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 37,
+      "ticks_blocked": 39,
       "weight": 0
     },
     {
@@ -2114,7 +2114,7 @@
     {
       "symbol": "W113",
       "title": "Operator calendars as a nemik source (life ask), credentials never exported",
-      "status": "blocked",
+      "status": "ready",
       "enables": [
         "life:W13"
       ],
@@ -2122,17 +2122,15 @@
         "nemik-operator",
         "sources"
       ],
-      "blocked_on": [
-        "W161"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
       "evidence": "2026-09-28: Needs mtools' calendar reader (mtools/inbox/2026-09-28-life-ask-calendar-reader.md) and luthen's Akonadi declaration. | 2026-10-01: 2026-10-01 mtools-3d: claimed as mtools:W304 (what mtools supplies, e.g. icsstruct/mikemol-ics, vs luthen's Akonadi side). | 2026-10-01: 2026-10-01 mtools-3d: mtools:W304 answered: mtools' part exists (mikemol-icsstruct, mikemol-ics --window 14d --json SOURCE: per-occurrence records, RRULE/RDATE/EXDATE/overrides, tz-aware, lossless, URLs redacted). The Akonadi read is nemik's (Qt/KF stays out of mtools): W147 exports an .ics, then nemik reads it through mikemol-ics (add mikemol-icsstruct as a dependency when W113 is worked). | 2026-10-01: full title before the 2026-10-01 trim: life ask: operator calendars as a nemik source (~/.config/nemik/calendars.toml, Akonadi collections on luthen via mtools' calendar reader; events as nodes, waypoint 'at' cal:<label>/<uid>; nemik-operator shows next N days); credentials never in graph/metrics/export",
       "issued_at": "2026-09-28T15:05:07Z",
       "minted_during": "tick",
       "caused_by": "life",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 0,
       "weight": 3
     },
     {
@@ -2624,7 +2622,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 45
+      "ticks_blocked": 47
     },
     {
       "symbol": "W138",
@@ -2843,7 +2841,7 @@
       "minted_during": "tick",
       "caused_by": "life:W28",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 5,
       "weight": 3
     },
     {
@@ -3077,30 +3075,30 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": null,
-      "evidence": "2026-10-02: 2026-10-02: nemik-operator --days N [--calendars FILE --helper BIN]: opted-in calendars' next N days, each with the waypoints waiting on it (event_graph); no config -> 'no calendar opted in'; --json wraps {asks, calendar}. test_calendars end-to-end with a stand-in helper and real mikemol-ics; SKILL.md row. bazel 30/30. Live use waits on W182 (operator picks calendars).",
+      "evidence": "2026-10-02: 2026-10-02: nemik-operator --days N [--calendars FILE --helper BIN]: opted-in calendars' next N days, each with the waypoints waiting on it (event_graph); no config -> 'no calendar opted in'; --json wraps {asks, calendar}. test_calendars end-to-end with a stand-in helper and real mikemol-ics; SKILL.md row. bazel 30/30. Live use waits on W182 (operator picks calendars). | 2026-10-02: 2026-10-02: superseded by W161: the view is now nemik-days N, a host-only command, because nemik-operator is on the served path.",
       "issued_at": "2026-10-01T19:51:38Z",
       "minted_during": "interrupt",
       "caused_by": "W113",
-      "last_worked": "2026-10-02T07:44:58Z",
+      "last_worked": "2026-10-02T10:15:59Z",
       "ticks_blocked": 0,
       "weight": 3
     },
     {
       "symbol": "W161",
       "title": "Operator calendars: test that credentials never reach graph, metrics or export",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W113"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-02: 2026-10-02: tests/test_calendar_boundary.py: (1) structural: the import closure of serve/metrics/check/manifest/withheld/tools/export never reaches nemik.calendars; (2) behavioural: a queue blocked on cal:home/a@t serves no Event and no urn:nemik:cal: in graph.json or metrics. The structural witness FAILED first: nemik-serve's Tools panel runs nemik-operator, and W160 had put the calendar read inside nemik-operator (--days). Moved to its own host-only command nemik-days (calendars.days_main); nemik-operator no longer imports the reader. SKILL.md row moved. Credential: nemik never holds it (Akonadi/KWallet in the helper). bazel 31/31.",
       "issued_at": "2026-10-01T19:51:38Z",
       "minted_during": "interrupt",
       "caused_by": "W113",
-      "last_worked": "2026-10-02T09:45:08Z",
+      "last_worked": "2026-10-02T10:15:59Z",
       "ticks_blocked": 0,
       "weight": 4
     },
@@ -3122,7 +3120,7 @@
       "minted_during": "interrupt",
       "caused_by": "W148",
       "last_worked": "2026-10-02T09:13:53Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 6,
       "weight": 5
     },
     {
@@ -3181,7 +3179,7 @@
       "minted_during": "interrupt",
       "caused_by": "W148",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 5,
       "weight": 3
     },
     {
@@ -3475,12 +3473,12 @@
       "minted_during": "tick",
       "caused_by": "W158",
       "last_worked": "2026-10-02T06:44:50Z",
-      "ticks_blocked": 11
+      "ticks_blocked": 13
     },
     {
       "symbol": "W183",
       "title": "nemik-check: a blocked_on of cal:<label>/<uid> is a resolvable condition (not UnresolvedBlocker), checked against calendars.toml labels only, never event text",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W113"
       ],
@@ -3492,7 +3490,7 @@
       "issued_at": "2026-10-02T07:14:53Z",
       "minted_during": "tick",
       "caused_by": "W159",
-      "last_worked": null,
+      "last_worked": "2026-10-02T10:16:11Z",
       "ticks_blocked": 0,
       "weight": 4
     }
