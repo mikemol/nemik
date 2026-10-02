@@ -60,6 +60,7 @@ aside a { color: var(--ink); text-decoration: underline dotted var(--muted); }
   <div id="cy"></div>
   <aside>
     <div class="legend" id="legend"></div>
+    <div class="legend" id="repokey" hidden></div>
     <p class="stat">Border thickness: interrupt share of ledger activity on that waypoint. Diamond: minted during an interrupt (no tick lock held). Dashed red: waits for (read from blocked_on), ending at the blocker's claiming waypoint, or at a dashed "?" in the blocker's box when nothing there claims it yet. Faded: satisfied, because the upstream end is done and no longer holds anything back.</p>
     <p class="stat">Repo box border: liveness, from the Wake panel's roster --
       <span style="color:var(--ready)">awake</span>,
@@ -196,6 +197,7 @@ function draw() {
       { selector: ":selected", style: { "overlay-opacity": 0.15 } },
     ],
   });
+  document.getElementById("repokey").hidden = true;
   if (treemapOn) treemap(); else tile();
   if (view) { cy.zoom(view.zoom); cy.pan(view.pan); }
   // nemik:W88: an edge between two boxes is faint until one of its ends is hovered or selected,
@@ -356,6 +358,11 @@ function treemap() {
       n.addClass("tile").position({ x: r.x + r.w / 2, y: r.y + r.h / 2 });
     });
     cy.edges().forEach(e => { if (!e.hasClass("waits") && t.parent.get(e.source().id()) === e.target().id()) e.addClass("contained"); });
+    // Step 4: the repo colour key, since fill is the repo here.
+    const key = document.getElementById("repokey");
+    key.innerHTML = [...new Set(ns.map(n => n.data("repo")))].sort().map(r =>
+      `<span><i class="dot" style="background:${repoHue(r)}"></i>${esc(r)}</span>`).join(" ");
+    key.hidden = false;
     let x = 0;
     cy.nodes().not(ns).not(".repo").forEach(n => { n.position({ x: x + n.outerWidth() / 2, y: H + 40 }); x += n.outerWidth() + 12; });
   });
