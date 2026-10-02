@@ -219,7 +219,7 @@ def umbrellas(g: Graph, repo: str) -> list[URIRef]:
             if (n, OSLC_CM.state, NEMIK.Ready) in g and is_umbrella(g, n)]
 
 
-def rank(g: Graph, repo: str, weights: Weights, comp: Composition | None = None) -> list[dict]:
+def rank(g: Graph, repo: str, weights: Weights, comp: Composition | None = None, *, fruit_row: bool = True) -> list[dict]:
     """Every ready leaf in `repo`, in the declared composed order (nemik:W132; lower symbol on ties).
 
     Umbrellas are left out: their open children are what can be worked (nemik:W74).
@@ -232,6 +232,12 @@ def rank(g: Graph, repo: str, weights: Weights, comp: Composition | None = None)
     bands = load_bands()
     rows = [{"symbol": str(g.value(n, NEMIK.symbol)), "title": str(g.value(n, DCTERMS.title) or ""),
              **objectives(g, n, weights, bands)} for n in ready]
+    # nemik:W178: the fruit class competes as one row. Its heaviest member stands in for it with
+    # the class weight, so it is worked first exactly when the pile outweighs the deepest item.
+    if fruit_row and (f := fruit(g, repo, rows, weights)) and len(f["members"]) > 1:
+        rep = min((r for r in rows if r["symbol"] in f["members"]),
+                  key=lambda r: (-r["downstream"], int(r["symbol"].lstrip("W"))))
+        rep["weight"], rep["fruit"] = f["class_weight"], f
     out = compose(rows, comp or load_composition())
     # mtools sorts a queue by stored `weight` (--weights-from), so `weight` carries the COMPOSED
     # order: highest first, distinct unless two rows truly tie. The raw sum stays in `downstream`.
@@ -245,9 +251,11 @@ def rank(g: Graph, repo: str, weights: Weights, comp: Composition | None = None)
 FRUIT_TAG = "fruit"
 
 
-def fruit(g: Graph, repo: str, rows: list[dict]) -> dict | None:
+def fruit(g: Graph, repo: str, rows: list[dict], weights: Weights | None = None) -> dict | None:
     """nemik:W178: the low-hanging fruit of `repo` as ONE virtual row, weighed against the rest.
 
+    Each member counts `local` (rank-weights.toml, the weight of one waypoint in this repo) for
+    the attention it costs, plus what it moves, so the class is in the same units as downstream.
     A member is a ranked ready leaf that moves nothing else (raw downstream 0) or that its repo tags
     `touches: fruit`. Each member carries the attention it costs to keep on the queue (1) plus what
     it moves; the class weighs their sum, so it outranks a deep item exactly when the pile does, and
@@ -260,7 +268,7 @@ def fruit(g: Graph, repo: str, rows: list[dict]) -> dict | None:
         return None
     return {"symbol": "FRUIT", "title": f"low-hanging fruit ({len(members)})",
             "members": [r["symbol"] for r in members],
-            "class_weight": sum(1 + r["downstream"] for r in members)}
+            "class_weight": sum((weights.local if weights else 1) + r["downstream"] for r in members)}
 
 
 def main(argv: list[str] | None = None, g: Graph | None = None) -> None:

@@ -25,3 +25,33 @@ def test_tagged_item_joins_with_its_downstream() -> None:
 
 def test_no_members_no_row() -> None:
     assert fruit(Graph(), "a", [{"symbol": "W1", "downstream": 2}]) is None
+
+
+def _graph(spec):
+    """{symbol: [what it enables]} as ready waypoints in repo a."""
+    from nemik.adapter import OSLC_CM, waypoint_uri, workstream_uri
+    g = Graph()
+    for sym, en in spec.items():
+        n = waypoint_uri("a", sym)
+        g.add((n, NEMIK.symbol, Literal(sym)))
+        g.add((n, NEMIK.workstream, workstream_uri("a")))
+        g.add((n, OSLC_CM.state, NEMIK.Ready if not en or en != ["blocked"] else NEMIK.Blocked))
+        for t in en:
+            if t != "blocked":
+                g.add((n, NEMIK.enables, waypoint_uri("b", t)))
+                g.add((waypoint_uri("b", t), OSLC_CM.state, NEMIK.Blocked))
+    return g
+
+
+def test_pile_outweighs_a_deep_item_and_leads() -> None:
+    from nemik.rank import load_weights, rank
+    g = _graph({"W1": ["W90"], "W2": [], "W3": [], "W4": [], "W5": [], "W6": [],
+                "W7": [], "W8": [], "W9": [], "W10": []})  # W1 moves one stalled peer (8); fruit W2-W10 weigh 9
+    rows = rank(g, "a", load_weights())
+    assert rows[0]["symbol"] == "W2" and rows[0]["fruit"]["class_weight"] == 9
+
+
+def test_deep_item_outweighing_the_pile_leads() -> None:
+    from nemik.rank import load_weights, rank
+    g = _graph({"W1": ["W90"], "W2": [], "W3": []})  # one stalled peer (8) > fruit 2
+    assert rank(g, "a", load_weights())[0]["symbol"] == "W1"

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 178,
+  "counter": 179,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 67
+      "ticks_blocked": 68
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 22,
+      "ticks_blocked": 23,
       "weight": 1
     },
     {
@@ -1360,7 +1360,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "weight": 1
     },
     {
@@ -1401,7 +1401,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-01T19:50:19Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1991,7 +1991,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "weight": 0
     },
     {
@@ -2136,7 +2136,7 @@
       "minted_during": "tick",
       "caused_by": "life",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "weight": 3
     },
     {
@@ -2462,7 +2462,7 @@
       "minted_during": "tick",
       "caused_by": "life:W23",
       "last_worked": "2026-10-01T19:49:18Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "weight": 3
     },
     {
@@ -2631,7 +2631,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 12
+      "ticks_blocked": 13
     },
     {
       "symbol": "W138",
@@ -2651,7 +2651,7 @@
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 3
     },
     {
       "symbol": "W139",
@@ -2852,7 +2852,7 @@
       "minted_during": "tick",
       "caused_by": "life:W28",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "weight": 3
     },
     {
@@ -2898,7 +2898,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 3
+      "ticks_blocked": 4
     },
     {
       "symbol": "W151",
@@ -2919,7 +2919,7 @@
       "caused_by": null,
       "last_worked": "2026-10-01T13:12:45Z",
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 4
     },
     {
       "symbol": "W152",
@@ -2963,7 +2963,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W269",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 1
+      "ticks_blocked": 2
     },
     {
       "symbol": "W154",
@@ -3042,7 +3042,7 @@
       "caused_by": "W113",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 5
     },
     {
       "symbol": "W158",
@@ -3061,7 +3061,7 @@
       "caused_by": "W113",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 5
     },
     {
       "symbol": "W159",
@@ -3080,7 +3080,7 @@
       "caused_by": "W113",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 5
     },
     {
       "symbol": "W160",
@@ -3102,7 +3102,7 @@
       "minted_during": "interrupt",
       "caused_by": "W113",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "weight": 3
     },
     {
@@ -3122,7 +3122,7 @@
       "caused_by": "W113",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 4
     },
     {
       "symbol": "W162",
@@ -3141,7 +3141,7 @@
       "caused_by": "W148",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 5
     },
     {
       "symbol": "W163",
@@ -3160,7 +3160,7 @@
       "caused_by": "W148",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 5
     },
     {
       "symbol": "W164",
@@ -3179,7 +3179,7 @@
       "caused_by": "W148",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 5
     },
     {
       "symbol": "W165",
@@ -3201,7 +3201,7 @@
       "minted_during": "interrupt",
       "caused_by": "W148",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "weight": 3
     },
     {
@@ -3221,7 +3221,7 @@
       "caused_by": "W150",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 6
     },
     {
       "symbol": "W167",
@@ -3240,7 +3240,7 @@
       "caused_by": "W150",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 6
     },
     {
       "symbol": "W168",
@@ -3261,7 +3261,7 @@
       "minted_during": "interrupt",
       "caused_by": "W150",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "weight": 4
     },
     {
@@ -3300,7 +3300,7 @@
       "caused_by": "W153",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 7
     },
     {
       "symbol": "W171",
@@ -3319,7 +3319,7 @@
       "caused_by": "W153",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 7
     },
     {
       "symbol": "W172",
@@ -3340,7 +3340,7 @@
       "minted_during": "interrupt",
       "caused_by": "W153",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "weight": 5
     },
     {
@@ -3420,19 +3420,39 @@
     {
       "symbol": "W178",
       "title": "nemik-rank: low-hanging fruit as one virtual umbrella row, weighed against deep items",
-      "status": "working",
+      "status": "blocked",
       "enables": [],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W179"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Compose the FRUIT row into nemik-rank's output and --json (weights: class_weight vs each deep row's downstream), so --weights-from puts the heaviest fruit member first when the class wins",
-      "evidence": "2026-10-02: operator 2026-10-01 on balance: treat the low-hanging set as one virtual umbrella; its weight (sum of its members' composed weight) competes against each deep item in the normal ranking, so the fruit gets a tick when, together, they outweigh the heaviest deep item. No fixed ratio. | 2026-10-02: operator 2026-10-01: no time box and no lanes; each tick works the weightiest row, and sometimes that row is the fruit class (then work its heaviest member). The bundle's weight drops as members land. | 2026-10-02: 2026-10-01 step 1: rank.fruit(g, repo, rows) -> virtual row (members = downstream 0 or touches 'fruit'; class_weight = sum(1+downstream)); tests/test_fruit.py; bazel 26/26. Live: fruit/heaviest-deep nemik 2/18, el-openglo 24/19, luthen 50/47, mtools 16/24 -- the class would win in el-openglo and luthen today.",
+      "evidence": "2026-10-02: operator 2026-10-01 on balance: treat the low-hanging set as one virtual umbrella; its weight (sum of its members' composed weight) competes against each deep item in the normal ranking, so the fruit gets a tick when, together, they outweigh the heaviest deep item. No fixed ratio. | 2026-10-02: operator 2026-10-01: no time box and no lanes; each tick works the weightiest row, and sometimes that row is the fruit class (then work its heaviest member). The bundle's weight drops as members land. | 2026-10-02: 2026-10-01 step 1: rank.fruit(g, repo, rows) -> virtual row (members = downstream 0 or touches 'fruit'; class_weight = sum(1+downstream)); tests/test_fruit.py; bazel 26/26. Live: fruit/heaviest-deep nemik 2/18, el-openglo 24/19, luthen 50/47, mtools 16/24 -- the class would win in el-openglo and luthen today. | 2026-10-02: 2026-10-01 step 2: rank() lets the heaviest fruit member stand in with the class weight (members counted at rank-weights local); nemik-rank/--json/--weights-from carry it; serve keeps fruit_row=False until W179. My first test assumed 1-per-item against peer_blocked=8 units and failed: pinned by stating the unit in the docstring and the test. Live: el-openglo next = W33 (fruit) after elevated W92. bazel 26/26.",
       "issued_at": "2026-10-02T00:13:17Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-02T00:45:10Z",
+      "last_worked": "2026-10-02T01:14:12Z",
       "ticks_blocked": 0,
       "weight": 7
+    },
+    {
+      "symbol": "W179",
+      "title": "Forest view in fruit order: rank_pos with the FRUIT row raised intra_crossings 214->310 on the fixture; lay heads out so it stays within budget",
+      "status": "working",
+      "enables": [
+        "W178"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-02T01:14:05Z",
+      "minted_during": "tick",
+      "caused_by": "W178",
+      "last_worked": "2026-10-02T01:14:12Z",
+      "ticks_blocked": 0
     }
   ],
   "residue": [
