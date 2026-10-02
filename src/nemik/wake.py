@@ -86,9 +86,24 @@ def should_nudge(last_nudged: float | None, now: datetime | None = None, rewake_
     return (now or datetime.now(timezone.utc)).timestamp() - last_nudged >= rewake_s
 
 
-def roster(g: Graph, liveness: dict, *, now: datetime | None = None) -> list[dict]:
-    """One row per workstream something is waiting on, sleepers with waiters first."""
+def roster(g: Graph, liveness: dict, *, now: datetime | None = None, alarms: list[dict] | None = None) -> list[dict]:
+    """One row per workstream something is waiting on, sleepers with waiters first.
+
+    nemik:W151: a fired alarm (fired_alarms) whose owner is not awake also puts the owner on the
+    roster, waiting on itself, so the same wake/nudge path that wakes a blocker wakes it. An awake
+    owner gets W168's send-ready line instead and no row.
+    """
     rows: dict[str, dict] = {}
+    for a in alarms or []:
+        if a.get("error") or a["state"] == "awake" or a.get("message") and a["state"] == "idle":
+            continue
+        rec = liveness.get(a["repo"])
+        last_tick = (rec or {}).get("last_tick") or ""
+        row = rows.setdefault(a["repo"], {
+            "repo": a["repo"], "state": a["state"], "last_tick": last_tick,
+            "last_tick_age_s": age_seconds(last_tick, now), "waiting": []})
+        row["waiting"].append({"blocked": a["ref"], "claimed_by": [a["ref"]],
+                               "title": f"alarm fired {a['at']}: {a['title']}"})
     for b in inbound(g):
         rec = liveness.get(b["blocker"])
         last_tick = (rec or {}).get("last_tick") or ""
@@ -268,7 +283,11 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
             if a.get("message"):
                 print(f"      send: {a['message'].splitlines()[0]}")
         return
-    rows = [r for r in roster(g, live) if args.all or r["state"] != "awake"]
+    from datetime import timedelta
+
+    end = datetime.now(timezone.utc)
+    rows = [r for r in roster(g, live, alarms=fired_alarms(g, end - timedelta(minutes=15), end, live))
+            if args.all or r["state"] != "awake"]
     if args.nudge:
         seen = _read_seen(args.nudges_state)
         rows = due_nudges(rows, seen)

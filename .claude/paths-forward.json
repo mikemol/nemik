@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 98
+      "ticks_blocked": 100
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 53,
+      "ticks_blocked": 55,
       "weight": 1
     },
     {
@@ -1360,7 +1360,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 34,
+      "ticks_blocked": 36,
       "weight": 1
     },
     {
@@ -1401,7 +1401,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-01T19:50:19Z",
-      "ticks_blocked": 35,
+      "ticks_blocked": 37,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1991,7 +1991,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 35,
+      "ticks_blocked": 37,
       "weight": 0
     },
     {
@@ -2132,7 +2132,7 @@
       "minted_during": "tick",
       "caused_by": "life",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 8,
       "weight": 3
     },
     {
@@ -2439,7 +2439,7 @@
     {
       "symbol": "W129",
       "title": "Calendar as the loops' scheduler of record",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "life:W23"
       ],
@@ -2447,17 +2447,15 @@
         "nemik-wake",
         "vtodo"
       ],
-      "blocked_on": [
-        "W151"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "nemik-wake: list alarms that have fired on open waypoints (fires_at <= now), with the owning workstream and its liveness; --nudge delivers them through the existing backoff state; an asleep owner becomes a wake-roster row (nemik cannot start a session).",
-      "evidence": "2026-09-28: Bound: nemik can observe a due alarm and deliver a nudge (nemik-wake --nudge -> a live session; luthen's waker for sleeping repos), but it cannot start a session. 'Wake' for an asleep repo stays luthen's or the operator's act. Needs W113 (calendar reader), W128 (the VTODOs) and mtools:W276 (time fields). | 2026-10-01: 2026-10-01: dropped mtools:W276 (umbrella); its need reaches mtools through W134 and W113. | 2026-10-01: 2026-10-01 mtools-3d: RRULE/EXDATE = mtools:W278 (done per occurrence, keyed by RECURRENCE-ID), VALARM = mtools:W279 (stored and projected; firing them is this waypoint). Both blocked on mtools:W300 and --enables nemik:W129. | 2026-10-01: 2026-10-01: mtools:W279 (765c1f4) puts alarms ON waypoints, so firing reads queues, not Akonadi: W113 is no longer a prerequisite (still wanted for the operator's own calendar). Recurrence split to W145 (mtools:W278). Step 1 done: pathsforward re-vendored at 765c1f4; adapter carries alarms (nemik:alarm), operator_asks carries them; nemik/alarm.py fires_at(trigger, dtstart, due) resolves to UTC using mtools' timevalue.parse/parse_trigger (DATE anchors = local midnight); VTODOs carry each alarm as a DISPLAY VALARM with TRIGGER as stored. tests/test_alarm.py (3); bazel 21/21. Google Tasks has no alarms, so VALARMs reach the .ics sink only. | 2026-10-01: Atomized 2026-10-01 (ATOMIZE: advanced once without landing): W149 list fired alarms, W150 deliver once (nudges state), W151 asleep owner -> wake roster. | 2026-10-01: full title before the 2026-10-01 trim: Calendar as the loops' scheduler of record: nemik-wake reads due VALARMs on waypoints (Akonadi, host-side, via W113's reader) and nudges or wakes the owning workstream through the existing wake/nudge path; session cron becomes only a delivery path",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-09-28: Bound: nemik can observe a due alarm and deliver a nudge (nemik-wake --nudge -> a live session; luthen's waker for sleeping repos), but it cannot start a session. 'Wake' for an asleep repo stays luthen's or the operator's act. Needs W113 (calendar reader), W128 (the VTODOs) and mtools:W276 (time fields). | 2026-10-01: 2026-10-01: dropped mtools:W276 (umbrella); its need reaches mtools through W134 and W113. | 2026-10-01: 2026-10-01 mtools-3d: RRULE/EXDATE = mtools:W278 (done per occurrence, keyed by RECURRENCE-ID), VALARM = mtools:W279 (stored and projected; firing them is this waypoint). Both blocked on mtools:W300 and --enables nemik:W129. | 2026-10-01: 2026-10-01: mtools:W279 (765c1f4) puts alarms ON waypoints, so firing reads queues, not Akonadi: W113 is no longer a prerequisite (still wanted for the operator's own calendar). Recurrence split to W145 (mtools:W278). Step 1 done: pathsforward re-vendored at 765c1f4; adapter carries alarms (nemik:alarm), operator_asks carries them; nemik/alarm.py fires_at(trigger, dtstart, due) resolves to UTC using mtools' timevalue.parse/parse_trigger (DATE anchors = local midnight); VTODOs carry each alarm as a DISPLAY VALARM with TRIGGER as stored. tests/test_alarm.py (3); bazel 21/21. Google Tasks has no alarms, so VALARMs reach the .ics sink only. | 2026-10-01: Atomized 2026-10-01 (ATOMIZE: advanced once without landing): W149 list fired alarms, W150 deliver once (nudges state), W151 asleep owner -> wake roster. | 2026-10-01: full title before the 2026-10-01 trim: Calendar as the loops' scheduler of record: nemik-wake reads due VALARMs on waypoints (Akonadi, host-side, via W113's reader) and nudges or wakes the owning workstream through the existing wake/nudge path; session cron becomes only a delivery path | 2026-10-02: 2026-10-02: W150 (deliver once, send line) and W151 (asleep owner on the wake roster) landed: a fired VALARM reaches its owner through nemik-wake's existing nudge/wake path.",
       "issued_at": "2026-09-28T23:49:54Z",
       "minted_during": "tick",
       "caused_by": "life:W23",
-      "last_worked": "2026-10-01T19:49:18Z",
-      "ticks_blocked": 12,
+      "last_worked": "2026-10-02T09:44:54Z",
+      "ticks_blocked": 0,
       "weight": 3
     },
     {
@@ -2626,7 +2624,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 43
+      "ticks_blocked": 45
     },
     {
       "symbol": "W138",
@@ -2845,7 +2843,7 @@
       "minted_during": "tick",
       "caused_by": "life:W28",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 3,
       "weight": 3
     },
     {
@@ -2893,7 +2891,7 @@
     {
       "symbol": "W151",
       "title": "W129c: a fired alarm whose owner is asleep becomes a wake-roster row (reason: alarm, the waypoint and when it fired); nemik never starts a session",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W129"
       ],
@@ -2902,12 +2900,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-02: 2026-10-02: roster(..., alarms=) adds a row for a fired alarm's owner that is asleep/unknown (or idle without a send line), waiting on its own ref; nemik-wake (default and --nudge) passes the last 15 minutes' firings, so the existing backoff and wake path apply. test_wake_alarms: asleep -> row + nudge with backoff, awake -> none. bazel 30/30.",
       "issued_at": "2026-10-01T13:12:45Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-02T09:15:26Z",
+      "last_worked": "2026-10-02T09:44:53Z",
       "ticks_blocked": 0,
       "weight": 4
     },
@@ -3090,7 +3088,7 @@
     {
       "symbol": "W161",
       "title": "Operator calendars: test that credentials never reach graph, metrics or export",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W113"
       ],
@@ -3102,7 +3100,7 @@
       "issued_at": "2026-10-01T19:51:38Z",
       "minted_during": "interrupt",
       "caused_by": "W113",
-      "last_worked": null,
+      "last_worked": "2026-10-02T09:45:08Z",
       "ticks_blocked": 0,
       "weight": 4
     },
@@ -3124,7 +3122,7 @@
       "minted_during": "interrupt",
       "caused_by": "W148",
       "last_worked": "2026-10-02T09:13:53Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 4,
       "weight": 5
     },
     {
@@ -3183,7 +3181,7 @@
       "minted_during": "interrupt",
       "caused_by": "W148",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 3,
       "weight": 3
     },
     {
@@ -3477,7 +3475,7 @@
       "minted_during": "tick",
       "caused_by": "W158",
       "last_worked": "2026-10-02T06:44:50Z",
-      "ticks_blocked": 9
+      "ticks_blocked": 11
     },
     {
       "symbol": "W183",

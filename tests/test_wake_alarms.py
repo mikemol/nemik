@@ -70,3 +70,18 @@ def test_live_owner_gets_a_send_ready_line_and_a_sleeper_does_not(tmp_path) -> N
     first = live[0]["message"].splitlines()[0]
     assert first.startswith("nemik → life: alarm on life:W9 fired at 2026-10-01T20:00:00Z")
     assert all("message" not in a for a in asleep)
+
+
+def test_a_sleeping_owner_of_a_fired_alarm_joins_the_wake_roster(tmp_path) -> None:
+    """nemik:W151: asleep owner -> roster row (then the usual nudge/wake); awake owner -> no row."""
+    from nemik.wake import due_nudges, roster
+
+    g = _graph(tmp_path)
+    window = (datetime(2026, 10, 1, tzinfo=UTC), datetime(2026, 10, 2, tzinfo=UTC))
+    asleep = {"life": {"verdict": "dormant"}}
+    rows = roster(g, asleep, alarms=fired_alarms(g, *window, asleep))
+    (life,) = [r for r in rows if r["repo"] == "life"]
+    assert life["state"] == "asleep" and life["waiting"][0]["blocked"] == "life:W9"
+    assert due_nudges(rows, {}) and due_nudges(rows, {"life": 9e18}) == []  # backoff applies as for blockers
+    awake = {"life": {"verdict": "ok"}}
+    assert not [r for r in roster(g, awake, alarms=fired_alarms(g, *window, awake)) if r["repo"] == "life"]

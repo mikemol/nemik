@@ -292,3 +292,4 @@
 2026-10-02T08:15:34Z  tick  W162  advanced  unblock  "--only REF so the parent mapping is tried on one task"  evidence=tools/akonadi-tasks/main.cpp
 2026-10-02T08:48:06Z  tick  W162  advanced  unblock  "live one-task parent test applied; Akonadi holds the parent, Google side unconfirmed"  evidence=tools/akonadi-tasks/main.cpp
 2026-10-02T09:15:26Z  tick  W163  advanced  unblock  "grouped feed (parent per repo) behind --group; W164 already built; W162 awaits operator glance; W151 working"  evidence=tests/test_vtodo.py
+2026-10-02T09:45:09Z  tick  W151  advanced  unblock  "asleep alarm owner joins the wake roster; W129 done; life notified by letter; W161 working"  evidence=tests/test_wake_alarms.py
