@@ -247,7 +247,7 @@ def test_treemap_view_draws(server, tmp_path) -> None:
           const repos = new Set(tiles.map(n => n.data('repo')));
           const bb = cy.elements(':visible').boundingBox();
           const key = document.getElementById('repokey');
-          return { key_repos: key.hidden ? 0 : key.querySelectorAll('span').length, tiles: tiles.length, contained: cy.edges('.contained').length, outside: bad.slice(0, 5),
+          return { groups: cy.nodes('.tile.group').length, key_repos: key.hidden ? 0 : key.querySelectorAll('span').length, tiles: tiles.length, contained: cy.edges('.contained').length, outside: bad.slice(0, 5),
                    repo_boxes: cy.nodes('.repo').length, repos: repos.size,
                    fit_zoom: Math.round(1000 * Math.min(cy.width() / (bb.w + 40), cy.height() / (bb.h + 40))) / 1000 };
         }""")
@@ -257,5 +257,6 @@ def test_treemap_view_draws(server, tmp_path) -> None:
     (out / "treemap-dark.json").write_text(json.dumps(m, indent=1))
     assert errors == []
     assert m["repo_boxes"] == 0 and m["repos"] > 1, m  # not grouped by repo
-    assert m["key_repos"] == m["repos"], m  # every repo colour has a key entry
+    assert m["key_repos"] == m["repos"], m
+    assert m["groups"] > 0, m  # the big trees are named once, in their own tile  # every repo colour has a key entry
     assert m["tiles"] > 0 and m["contained"] > 0 and m["outside"] == [], m  # "outside" = overlapping tiles

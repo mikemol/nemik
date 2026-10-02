@@ -189,6 +189,7 @@ function draw() {
         "text-valign": "center", "text-halign": "center", "font-size": "data(fs)", "border-width": 1,
         "border-color": css("--bg"), "background-color": "data(repoColor)", "background-opacity": 1, color: "#fff",
         "text-outline-width": 1, "text-outline-color": "#0008" } },
+      { selector: "node.tile.group", style: { "text-wrap": "wrap", "text-max-width": "data(tw)" } },
       { selector: 'node.tile[state = "blocked"]', style: { "background-opacity": 0.45 } },
       { selector: 'node.tile[state = "working"]', style: { "border-width": 3, "border-color": css("--ink") } },
       { selector: "edge.contained", style: { display: "none" } },
@@ -358,6 +359,16 @@ function treemap() {
       n.addClass("tile").position({ x: r.x + r.w / 2, y: r.y + r.h / 2 });
     });
     cy.edges().forEach(e => { if (!e.hasClass("waits") && t.parent.get(e.source().id()) === e.target().id()) e.addClass("contained"); });
+    // Step 5: a top-level group is named in its root's own tile (the reference names a group in its
+    // biggest tile), with the title wrapped inside it. An overlay label over the whole group collided
+    // with the tiles' own text (screenshot, 2026-10-01).
+    for (const r of t.roots) {
+      if (!t.kids.get(r).length) continue;
+      const n = cy.getElementById(r), c = R.get(r + "#self");
+      const text = `${n.data("symbol")} ${n.data("title") || ""}`.slice(0, 80);
+      const fs = Math.min(c.h / 4, Math.sqrt(c.w * c.h / text.length) * 0.9, 22);
+      if (fs >= 8) n.data({ label: text, fs }).addClass("group");
+    }
     // Step 4: the repo colour key, since fill is the repo here.
     const key = document.getElementById("repokey");
     key.innerHTML = [...new Set(ns.map(n => n.data("repo")))].sort().map(r =>

@@ -278,3 +278,4 @@
 2026-10-02T02:28:50Z  tick  W180  advanced  unblock  "treemap drawn: strip layout, fit 0.823 (slice-and-dice was 0.066)"  evidence=tests/test_layout.py
 2026-10-02T02:48:48Z  tick  W180  advanced  unblock  "treemap redrawn per operator's reference: abutting leaves, repo fill, varying weight"  evidence=tests/test_layout.py
 2026-10-02T03:14:50Z  tick  W180  advanced  unblock  "treemap repo colour key"  evidence=tests/test_layout.py
+2026-10-02T03:47:16Z  tick  W180  done  unblock  "treemap groups named in their root tile; W180 done; W166 working"  evidence=tests/test_layout.py
