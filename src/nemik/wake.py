@@ -137,6 +137,14 @@ def fired_alarms(g: Graph, start: datetime, end: datetime, liveness: dict) -> li
                 continue
             out += [{"ref": f"{repo}:{sym}", "repo": repo, "trigger": trig, "at": at.strftime("%Y-%m-%dT%H:%M:%SZ"),
                      "recurrence_id": rid, "state": state, "title": val(n, DCTERMS.title)} for at, rid in hits]
+    # nemik:W168: an owner with a live session (awake or idle) gets a line ready to send as is: the
+    # first line stands alone (the recipient previews only it) and cites the waypoint. An asleep or
+    # unknown owner gets none; waking it is the roster's job (nemik:W151).
+    for a in out:
+        if a["state"] in ("awake", "idle") and not a.get("error"):
+            occ = f" (occurrence {a['recurrence_id']})" if a["recurrence_id"] else ""
+            a["message"] = (f"nemik → {a['repo']}: alarm on {a['ref']} fired at {a['at']}{occ}: {a['title']}\n"
+                            f"Trigger {a['trigger']}, as stored on the waypoint. Act on it, or move the alarm.")
     return sorted(out, key=lambda a: (a["at"], a["ref"], a["trigger"]))
 
 
@@ -257,6 +265,8 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
             occ = f" [{a['recurrence_id']}]" if a["recurrence_id"] else ""
             what = f"ERROR {a['error']}" if a.get("error") else a["title"][:60]
             print(f"  {a['at'] or '-':20} {a['state']:7} {a['ref']:28}{occ} {a['trigger']:22} {what}")
+            if a.get("message"):
+                print(f"      send: {a['message'].splitlines()[0]}")
         return
     rows = [r for r in roster(g, live) if args.all or r["state"] != "awake"]
     if args.nudge:

@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 84
+      "ticks_blocked": 86
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 39,
+      "ticks_blocked": 41,
       "weight": 1
     },
     {
@@ -1360,7 +1360,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 20,
+      "ticks_blocked": 22,
       "weight": 1
     },
     {
@@ -1401,7 +1401,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-01T19:50:19Z",
-      "ticks_blocked": 21,
+      "ticks_blocked": 23,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1991,7 +1991,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 21,
+      "ticks_blocked": 23,
       "weight": 0
     },
     {
@@ -2136,7 +2136,7 @@
       "minted_during": "tick",
       "caused_by": "life",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 20,
+      "ticks_blocked": 22,
       "weight": 3
     },
     {
@@ -2462,7 +2462,7 @@
       "minted_during": "tick",
       "caused_by": "life:W23",
       "last_worked": "2026-10-01T19:49:18Z",
-      "ticks_blocked": 22,
+      "ticks_blocked": 24,
       "weight": 3
     },
     {
@@ -2631,7 +2631,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 29
+      "ticks_blocked": 31
     },
     {
       "symbol": "W138",
@@ -2852,7 +2852,7 @@
       "minted_during": "tick",
       "caused_by": "life:W28",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 20,
+      "ticks_blocked": 22,
       "weight": 3
     },
     {
@@ -2879,24 +2879,23 @@
     {
       "symbol": "W150",
       "title": "W129b: deliver fired alarms once, deduped by (ref, RECURRENCE-ID, instant)",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W129"
       ],
       "touches": [
         "nemik-wake"
       ],
-      "blocked_on": [
-        "W168"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "2026-10-01: full title before the 2026-10-01 trim: W129b: fired alarms deliver like nudges: deduped by (ref, RECURRENCE-ID, instant) in the existing nudges state, so each firing is delivered once; a live owner gets a SendMessage-ready line",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-01: full title before the 2026-10-01 trim: W129b: fired alarms deliver like nudges: deduped by (ref, RECURRENCE-ID, instant) in the existing nudges state, so each firing is delivered once; a live owner gets a SendMessage-ready line | 2026-10-02: 2026-10-02: all three children landed (W166 key, W167 nudge path, W168 send-ready line); nemik-wake --alarms --nudge delivers each firing once.",
       "issued_at": "2026-10-01T13:12:44Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 1
+      "last_worked": "2026-10-02T05:15:32Z",
+      "ticks_blocked": 0,
+      "weight": 4
     },
     {
       "symbol": "W151",
@@ -3022,7 +3021,7 @@
     {
       "symbol": "W157",
       "title": "Operator calendars: read the W147 Akonadi export into nemik (host-side)",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W113"
       ],
@@ -3034,7 +3033,7 @@
       "issued_at": "2026-10-01T19:51:38Z",
       "minted_during": "interrupt",
       "caused_by": "W113",
-      "last_worked": null,
+      "last_worked": "2026-10-02T05:15:32Z",
       "ticks_blocked": 0,
       "weight": 5
     },
@@ -3096,7 +3095,7 @@
       "minted_during": "interrupt",
       "caused_by": "W113",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 20,
+      "ticks_blocked": 22,
       "weight": 3
     },
     {
@@ -3195,7 +3194,7 @@
       "minted_during": "interrupt",
       "caused_by": "W148",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 20,
+      "ticks_blocked": 22,
       "weight": 3
     },
     {
@@ -3239,19 +3238,19 @@
     {
       "symbol": "W168",
       "title": "Alarm delivery: a live owner gets a SendMessage-ready line",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W150"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-02: 2026-10-02: fired_alarms adds 'message' for live owners (awake/idle): first line 'nemik → <repo>: alarm on <ref> fired at <at>[ (occurrence)]: <title>' stands alone; text mode prints 'send: ...'; asleep/unknown owners get none (W151 wakes them). test_wake_alarms (live vs dormant). bazel 28/28.",
       "issued_at": "2026-10-01T19:51:39Z",
       "minted_during": "interrupt",
       "caused_by": "W150",
-      "last_worked": "2026-10-02T04:44:49Z",
+      "last_worked": "2026-10-02T05:15:14Z",
       "ticks_blocked": 0,
       "weight": 4
     },

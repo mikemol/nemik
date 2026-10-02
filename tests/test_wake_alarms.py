@@ -59,3 +59,14 @@ def test_alarms_nudge_delivers_each_firing_once(tmp_path, capsys) -> None:
     second = json.loads(capsys.readouterr().out)["alarms"]
     assert first and second == []
     assert json.loads(state.read_text())["life"] == 1.0  # the repo nudge state survives
+
+
+def test_live_owner_gets_a_send_ready_line_and_a_sleeper_does_not(tmp_path) -> None:
+    """nemik:W168: the first line stands alone and cites the waypoint; asleep owners get none."""
+    g = _graph(tmp_path)
+    window = (datetime(2026, 10, 1, tzinfo=UTC), datetime(2026, 10, 2, tzinfo=UTC))
+    live = fired_alarms(g, *window, {"life": {"verdict": "ok"}})
+    asleep = fired_alarms(g, *window, {"life": {"verdict": "dormant"}})
+    first = live[0]["message"].splitlines()[0]
+    assert first.startswith("nemik → life: alarm on life:W9 fired at 2026-10-01T20:00:00Z")
+    assert all("message" not in a for a in asleep)
