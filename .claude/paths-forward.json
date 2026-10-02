@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 75
+      "ticks_blocked": 76
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 30,
+      "ticks_blocked": 31,
       "weight": 1
     },
     {
@@ -1360,7 +1360,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "weight": 1
     },
     {
@@ -1401,7 +1401,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-01T19:50:19Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 13,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1991,7 +1991,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 13,
       "weight": 0
     },
     {
@@ -2136,7 +2136,7 @@
       "minted_during": "tick",
       "caused_by": "life",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "weight": 3
     },
     {
@@ -2462,7 +2462,7 @@
       "minted_during": "tick",
       "caused_by": "life:W23",
       "last_worked": "2026-10-01T19:49:18Z",
-      "ticks_blocked": 13,
+      "ticks_blocked": 14,
       "weight": 3
     },
     {
@@ -2631,7 +2631,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 20
+      "ticks_blocked": 21
     },
     {
       "symbol": "W138",
@@ -2852,7 +2852,7 @@
       "minted_during": "tick",
       "caused_by": "life:W28",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "weight": 3
     },
     {
@@ -2898,7 +2898,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 11
+      "ticks_blocked": 12
     },
     {
       "symbol": "W151",
@@ -2942,7 +2942,7 @@
     {
       "symbol": "W153",
       "title": "nemik-serve --static OUT/ --withheld FILE: the web view as static files",
-      "status": "working",
+      "status": "done",
       "enables": [
         "luthen-observability:W269"
       ],
@@ -2953,12 +2953,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-10-01: Operator ruling 2026-10-01 via luthen-observability-6b: nemik's current view may be public (content is almost all in public repos; life holds nothing beyond what is posted socially); same privacy/egress rules on anything published; no Cloudflare; luthen gates the export (W270), publishes to a GCS bucket behind Cloud CDN (W271/W272), nothing connects back to luthen. | 2026-10-01: luthen-observability-6b 2026-10-01 contract: WITHHOLD WHOLE, NEVER SCRUB. The gate marks items; the static build drops each marked item entirely (no node, no edges into it, no goals/inbound entry); where another item references it, render a 'withheld' stub carrying the symbol only, so no dependency silently disappears. Input: the gate's withheld list (repo, W, field, rule; never the matched text). luthen W272 cites W153. | 2026-10-01: Withheld-list contract (luthen-observability-6b 2026-10-01): --withheld FILE is REQUIRED with --static (publish job writes <export-dir>/withheld.json; never assume the path). Shape v1: {version: 1, as_of, items: [{ref, field, rule}]}. Drop by ref alone (set; field/rule are for the owning repo). Unknown version: fail. items [] = nothing withheld. Missing file = gate did not run: FAIL, never publish ungated. Never copy it into OUT/. Rules start as address-literal, key-shaped, amr-derived; new rules only add values. | 2026-10-01: full title before the 2026-10-01 trim: nemik-serve --static OUT/: the web view as static files (index.html, vendor/, graph.json, wake.json, goals/<repo>.json, inbound/<repo>.json precomputed from the same export), relative links so it works from a bucket subpath, no request-time logic; the Tools panel (/cmd) omitted in static mode",
+      "next_bounded_step": null,
+      "evidence": "2026-10-01: Operator ruling 2026-10-01 via luthen-observability-6b: nemik's current view may be public (content is almost all in public repos; life holds nothing beyond what is posted socially); same privacy/egress rules on anything published; no Cloudflare; luthen gates the export (W270), publishes to a GCS bucket behind Cloud CDN (W271/W272), nothing connects back to luthen. | 2026-10-01: luthen-observability-6b 2026-10-01 contract: WITHHOLD WHOLE, NEVER SCRUB. The gate marks items; the static build drops each marked item entirely (no node, no edges into it, no goals/inbound entry); where another item references it, render a 'withheld' stub carrying the symbol only, so no dependency silently disappears. Input: the gate's withheld list (repo, W, field, rule; never the matched text). luthen W272 cites W153. | 2026-10-01: Withheld-list contract (luthen-observability-6b 2026-10-01): --withheld FILE is REQUIRED with --static (publish job writes <export-dir>/withheld.json; never assume the path). Shape v1: {version: 1, as_of, items: [{ref, field, rule}]}. Drop by ref alone (set; field/rule are for the owning repo). Unknown version: fail. items [] = nothing withheld. Missing file = gate did not run: FAIL, never publish ungated. Never copy it into OUT/. Rules start as address-literal, key-shaped, amr-derived; new rules only add values. | 2026-10-01: full title before the 2026-10-01 trim: nemik-serve --static OUT/: the web view as static files (index.html, vendor/, graph.json, wake.json, goals/<repo>.json, inbound/<repo>.json precomputed from the same export), relative links so it works from a bucket subpath, no request-time logic; the Tools panel (/cmd) omitted in static mode | 2026-10-02: 2026-10-01: nemik-serve --static OUT --withheld FILE (serve.build_static): load list (fail closed) -> static_data -> withheld.apply -> manifest check, all before any write; then page+vendor+data. Live: 24 files from ~/github with an empty list; --withheld /nope -> exit 2, OUT not created. tests/test_static.py end-to-end; SKILL.md row; bazel 27/27.",
       "issued_at": "2026-10-01T16:30:23Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W269",
-      "last_worked": "2026-10-02T02:01:44Z",
+      "last_worked": "2026-10-02T02:14:45Z",
       "ticks_blocked": 0
     },
     {
@@ -3098,7 +3098,7 @@
       "minted_during": "interrupt",
       "caused_by": "W113",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "weight": 3
     },
     {
@@ -3197,7 +3197,7 @@
       "minted_during": "interrupt",
       "caused_by": "W148",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "weight": 3
     },
     {
@@ -3257,7 +3257,7 @@
       "minted_during": "interrupt",
       "caused_by": "W150",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "weight": 4
     },
     {

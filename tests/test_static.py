@@ -34,3 +34,24 @@ def test_static_page_has_no_tools_panel(tmp_path) -> None:
     write_static(tmp_path)
     html = (tmp_path / "index.html").read_text()
     assert 'id="tool"' not in html and "cmd/" not in html.split("<script>")[0]
+
+
+def test_static_build_end_to_end(tmp_path) -> None:
+    import json
+    from pathlib import Path
+
+    import pytest
+
+    from nemik.serve import main
+
+    fleet = Path(__file__).parent / "fixtures" / "fleet"
+    out = tmp_path / "out"
+    with pytest.raises(SystemExit) as e:  # no list: refused, nothing written
+        main(["--root", str(fleet), "--static", str(out), "--withheld", str(tmp_path / "missing.json")])
+    assert e.value.code == 2 and not out.exists()
+    wl = tmp_path / "withheld.json"
+    wl.write_text(json.dumps({"version": 1, "as_of": "x", "items": []}))
+    main(["--root", str(fleet), "--static", str(out), "--withheld", str(wl)])
+    names = {p.relative_to(out).as_posix() for p in out.rglob("*") if p.is_file()}
+    assert {"index.html", "graph.json", "wake.json"} <= names and any(n.startswith("goals/") for n in names)
+    assert "withheld.json" not in names

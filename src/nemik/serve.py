@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 import threading
 import time
 from importlib.metadata import PackageNotFoundError, version
@@ -338,12 +339,43 @@ def static_data(model: Model) -> dict[str, object]:
     return docs
 
 
-def main() -> None:
+def build_static(root: Path, out: Path, withheld: Path | None) -> list[Path]:
+    """nemik:W153: the gated static view under `out`. Every check runs before anything is written,
+    so a refused build leaves `out` untouched; the withheld list itself is never copied into it."""
+    from nemik.manifest import unmanifested
+    from nemik.withheld import apply, load
+
+    refs = load(withheld)  # fails closed first: no list, no build
+    docs = apply(static_data(Model(root)), refs)
+    if bad := [f for name, doc in docs.items() for f in unmanifested(name, doc)]:
+        raise ValueError("unmanifested fields, refusing to publish: " + ", ".join(bad))
+    written = write_static(out)
+    for name, doc in sorted(docs.items()):
+        dst = out / name
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        dst.write_text(json.dumps(doc, indent=1))
+        written.append(dst)
+    return written
+
+
+def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(prog="nemik-serve", description=(__doc__ or "").splitlines()[0])
     ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
     ap.add_argument("--bind", default="127.0.0.1")
     ap.add_argument("--port", type=int, default=8750)
-    args = ap.parse_args()
+    ap.add_argument("--static", type=Path, metavar="OUT",
+                    help="write the view as static files under OUT and exit (nemik:W153); needs --withheld")
+    ap.add_argument("--withheld", type=Path, metavar="FILE",
+                    help="luthen's withheld list (v1); required with --static, a missing file fails the build")
+    args = ap.parse_args(argv)
+    if args.static:
+        try:
+            for path in build_static(args.root, args.static, args.withheld):
+                print(path)
+        except ValueError as e:  # WithheldError, an unmanifested field, missing page markers
+            print(f"ERROR: {e}", file=sys.stderr)
+            raise SystemExit(2) from e
+        return
     ThreadingHTTPServer((args.bind, args.port), handler(Model(args.root))).serve_forever()
 
 
