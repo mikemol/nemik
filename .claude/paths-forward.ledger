@@ -298,3 +298,4 @@
 2026-10-02T11:15:27Z  tick  W138  advanced  unblock  "policy only=[tags] narrows blocked dependents; W123 working"  evidence=tests/test_guarantees.py
 2026-10-02T11:46:46Z  tick  W123  advanced  unblock  "image gate runs the witness tests with pinned opa (153 passed, only chromium skips left); W124 working"  evidence=Containerfile
 2026-10-02T11:48:57Z  interrupt  W178  advanced  --  "working fruit member holds the class slot (luthen drift artefact)"  evidence=tests/test_fruit.py
+2026-10-02T12:06:03Z  interrupt  W184  done  --  "side panel overflow fixed; test reproduces it at 380px"  evidence=tests/test_layout.py

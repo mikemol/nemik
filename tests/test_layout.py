@@ -265,3 +265,33 @@ def test_treemap_view_draws(server, tmp_path) -> None:
     assert m["key_repos"] == m["repos"], m
     assert m["groups"] > 0, m  # clusters are drawn as labelled frames  # every repo colour has a key entry
     assert m["tiles"] > 0 and m["contained"] > 0 and m["outside"] == [], m  # "outside" = overlapping tiles
+
+
+@pytest.mark.parametrize("width", [380, 1400])
+def test_side_panel_never_overflows_sideways(server, width) -> None:
+    """Operator 2026-10-02: the panel cut text off on the right (a long ask, URL or ref list in the
+    two-column detail grid). At phone and desktop widths, with the needs-you lane open, nothing in
+    the aside is wider than the aside."""
+    with sync_api.sync_playwright() as p:
+        try:
+            exe = os.environ.get("NEMIK_CHROMIUM")
+            browser = p.chromium.launch(executable_path=os.path.abspath(exe) if exe else None)
+        except Exception as e:  # noqa: BLE001 - no browser installed here
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": width, "height": 1200})
+        page.goto(server)
+        page.wait_for_function("() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0", timeout=60000)
+        # The fixture's text is stripped, so give the asks the shapes that overflowed live: a long
+        # URL with no break opportunity, and a long ask.
+        page.evaluate("""() => { for (const a of data.operator) {
+            a.ask = 'operator: act open https://store.kde.org/p/0000000000/very-long-path-without-any-break-opportunity-at-all in your browser and approve the KubeVirt stage-1 apply after reviewing ten in-place component diffs';
+            a.waiting = Array.from({length: 12}, (_, i) => 'luthen-observability:W1' + i); }
+          lane('needs-you'); }""")
+        page.wait_for_timeout(300)
+        m = page.evaluate("""() => { const a = document.querySelector('aside');
+          const r = a.getBoundingClientRect(), wide = [];
+          a.querySelectorAll('*').forEach(e => { const b = e.getBoundingClientRect();
+            if (b.width && b.right > r.right + 1) wide.push(e.tagName + ':' + (e.textContent || '').slice(0, 40)); });
+          return { scroll: a.scrollWidth, client: a.clientWidth, wide: wide.slice(0, 5) }; }""")
+        browser.close()
+    assert m["wide"] == [] and m["scroll"] <= m["client"] + 1, m

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 183,
+  "counter": 184,
   "waypoints": [
     {
       "symbol": "W1",
@@ -3492,6 +3492,22 @@
       "last_worked": "2026-10-02T10:45:06Z",
       "ticks_blocked": 0,
       "weight": 4
+    },
+    {
+      "symbol": "W184",
+      "title": "Side panel cut text off on the right (operator screenshot)",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-02: 2026-10-02: cause: the detail <dl> grid used 'auto 1fr'; a track's minimum is its longest unbreakable token (a URL, a 'same ask' ref list), so the second column grew past the 340px panel. Fix: minmax(0, max-content) minmax(0, 1fr), dt/dd min-width 0 + overflow-wrap anywhere, aside overflow-x hidden, pre/code wrap. test_layout::test_side_panel_never_overflows_sideways at 380px and 1400px with long asks injected (fixture text is stripped): FAILS on the old CSS (aside scrollWidth 419 > 380; DD/SPAN overflow), passes now. My headless shots never showed it because the fixture has no long tokens. bazel 31/31.",
+      "issued_at": "2026-10-02T12:05:57Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": "2026-10-02T12:06:03Z",
+      "ticks_blocked": 0
     }
   ],
   "residue": [

@@ -35,8 +35,14 @@ aside h2 { font-size: 14px; margin: 16px 0 6px; }
 .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
 .finding { font-size: 12px; margin: 2px 0; }
 .Violation { color: var(--blocked); } .Warning { color: var(--interrupt); }
-dl { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; margin: 0; }
+/* nemik: the side panel cut text off on the right (operator, 2026-10-02 screenshot): a grid track's
+   minimum is its longest unbreakable token (a URL, a repo:W<n> list), so `1fr` grew past the panel.
+   minmax(0, ...) lets both columns shrink, and long tokens break anywhere. */
+dl { display: grid; grid-template-columns: minmax(0, max-content) minmax(0, 1fr); gap: 2px 10px; margin: 0; }
+dt, dd { min-width: 0; overflow-wrap: anywhere; }
 dt { color: var(--muted); }
+aside { overflow-x: hidden; }
+aside pre, aside code { white-space: pre-wrap; overflow-wrap: anywhere; }
 /* Links sat at the browser's default dark blue, unreadable on the dark panel. */
 aside a { color: var(--ink); text-decoration: underline dotted var(--muted); }
 /* A goal's title is too long for the two-column grid: stack title over its status. */
