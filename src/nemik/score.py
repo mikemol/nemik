@@ -70,6 +70,14 @@ class Policy:
     name: str
     tag: str | None
     rules: tuple[dict[str, frozenset[str]], ...]
+    # nemik:W138 (luthen's letter, section 3): when set, only dependents carrying one of these touches
+    # tags are blocked ("no tenant-facing rollout while a trust-boundary item is open"); empty
+    # blocks every dependent on a shared surface, as W133 did.
+    only: frozenset[str] = frozenset()
+
+    def blocks(self, touches: set[str]) -> bool:
+        """Whether a dependent with these touches is in the class's scope at all."""
+        return not self.only or bool(self.only & touches)
 
     def member(self, vector: str | None, touches: set[str]) -> bool:
         """In the class when it carries the tag, or its vector matches one of the rules."""
@@ -99,6 +107,7 @@ def load_guarantees(text: str | None = None, bands: Bands | None = None) -> Guar
         raise ValueError(f"bands.toml: guarantee.floor = {floor!r} is not in order")
     policies = tuple(
         Policy(p["class"], p.get("tag"),
-               tuple({m: frozenset(v) for m, v in r.items()} for r in p.get("vector", [])))
+               tuple({m: frozenset(v) for m, v in r.items()} for r in p.get("vector", [])),
+               frozenset(p.get("only", [])))
         for p in d.get("policy", []))
     return Guarantees(floor, policies)

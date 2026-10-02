@@ -114,3 +114,14 @@ def test_check_ok_still_reports_the_unscored_census(capsys) -> None:
     out = capsys.readouterr().out.splitlines()
     assert e.value.code == 0
     assert out == ["rank: UNSCORED a 1", "rank: OK a: next ready item carries the top cross-repo weight"]
+
+
+def test_only_narrows_the_blocked_dependents_to_named_tags() -> None:
+    """nemik:W138 (luthen's letter §3): only tenant-facing rollouts wait on an open trust-boundary item."""
+    text = (load_guarantees.__globals__["files"]("nemik.data").joinpath("bands.toml").read_text()
+            .replace('tag = "trust-boundary"\n', 'tag = "trust-boundary"\nonly = ["tenant-rollout"]\n', 1))
+    g = Graph()
+    _wp(g, "W1", "blocked", touches=("trust-boundary", "opa"))
+    _wp(g, "W2", touches=("opa", "tenant-rollout"))  # in scope: blocked
+    _wp(g, "W3", touches=("opa", "dashboard"))  # same surface, not a rollout: not blocked
+    assert policy_blocks(g, "a", load_guarantees(text)) == [("W2", "W1", "trust-boundary", ["opa"])]

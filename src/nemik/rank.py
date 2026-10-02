@@ -422,7 +422,7 @@ def policy_blocks(g: Graph, repo: str, guar) -> list[tuple[str, str, str, list[s
     for p in guar.policies:
         members = {n for n in nodes if p.member(vector[n], touches[n])}
         for dep in nodes:
-            if dep in members or (dep, OSLC_CM.state, NEMIK.Ready) not in g:
+            if dep in members or (dep, OSLC_CM.state, NEMIK.Ready) not in g or not p.blocks(touches[dep]):
                 continue
             for b in members:
                 if shared := sorted((touches[dep] & touches[b]) - {p.tag}):

@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 104
+      "ticks_blocked": 105
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 59,
+      "ticks_blocked": 60,
       "weight": 1
     },
     {
@@ -1360,7 +1360,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 40,
+      "ticks_blocked": 41,
       "weight": 1
     },
     {
@@ -1401,7 +1401,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-01T19:50:19Z",
-      "ticks_blocked": 41,
+      "ticks_blocked": 42,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1991,7 +1991,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 41,
+      "ticks_blocked": 42,
       "weight": 0
     },
     {
@@ -2313,7 +2313,7 @@
     {
       "symbol": "W123",
       "title": "W106b: image test stage runs test_witnesses (pinned opa v1.20.2 by sha256, as MODULE.bazel @opa)",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W106"
       ],
@@ -2327,7 +2327,7 @@
       "issued_at": "2026-09-28T22:45:31Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-10-02T11:15:27Z",
       "ticks_blocked": 0,
       "weight": 2
     },
@@ -2622,12 +2622,12 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 49
+      "ticks_blocked": 50
     },
     {
       "symbol": "W138",
       "title": "rank --check POLICY: an optional dependent filter, so a class blocks only named dependents (luthen's example: tenant-facing rollouts)",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "nemik-rank",
@@ -2635,12 +2635,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-10-01: W133's [[policy]] blocks every ready item that shares a touches surface with an open member. luthen's letter (inbox/archive/2026-09-28-luthen-observability-cvss-ranking.md, section 3) scoped a block to named dependents or classes: no tenant-facing rollout is ready while an open trust-boundary item touches the same surface. Add an optional 'only' list of dependent tags; absent keeps today's behaviour.",
+      "next_bounded_step": null,
+      "evidence": "2026-10-01: W133's [[policy]] blocks every ready item that shares a touches surface with an open member. luthen's letter (inbox/archive/2026-09-28-luthen-observability-cvss-ranking.md, section 3) scoped a block to named dependents or classes: no tenant-facing rollout is ready while an open trust-boundary item touches the same surface. Add an optional 'only' list of dependent tags; absent keeps today's behaviour. | 2026-10-02: 2026-10-02: [[policy]] gains optional only = [tags] (score.Policy.only/blocks); rank.policy_blocks skips dependents outside it; absent keeps W133 behaviour. bands.toml comment documents it; test_guarantees: only=['tenant-rollout'] blocks the rollout on the shared opa surface, not the dashboard item (my first expectation listed the rollout tag as a shared surface; the member does not carry it, so the pair names only opa). bazel 31/31. luthen can set only once it tags rollouts.",
       "issued_at": "2026-10-01T01:27:31Z",
       "minted_during": "interrupt",
       "caused_by": "W133",
-      "last_worked": "2026-10-02T10:45:26Z",
+      "last_worked": "2026-10-02T11:15:13Z",
       "ticks_blocked": 0,
       "weight": 3
     },
@@ -2841,7 +2841,7 @@
       "minted_during": "tick",
       "caused_by": "life:W28",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "weight": 3
     },
     {
@@ -3120,7 +3120,7 @@
       "minted_during": "interrupt",
       "caused_by": "W148",
       "last_worked": "2026-10-02T09:13:53Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "weight": 5
     },
     {
@@ -3179,7 +3179,7 @@
       "minted_during": "interrupt",
       "caused_by": "W148",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "weight": 3
     },
     {
@@ -3473,7 +3473,7 @@
       "minted_during": "tick",
       "caused_by": "W158",
       "last_worked": "2026-10-02T06:44:50Z",
-      "ticks_blocked": 15
+      "ticks_blocked": 16
     },
     {
       "symbol": "W183",
