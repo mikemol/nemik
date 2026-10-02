@@ -236,18 +236,23 @@ def test_treemap_view_draws(server, tmp_path) -> None:
         page.check("#treemap")
         page.wait_for_function("() => cy.nodes('.tile').length > 0", timeout=60000)
         m = page.evaluate("""() => {
-          // Step 3: leaves partition the map, so no two tiles may overlap (beyond the separator).
+          // Step 6: nested clusters. A child lies inside its parent's frame (below the header); two
+          // tiles overlap only when one contains the other.
           const tiles = cy.nodes('.tile').filter(n => n.visible()), bad = [];
-          // The tile's own rect (position +- size), not its bounding box: borders draw outside it.
-          const bbs = tiles.map(n => { const p = n.position(), w = n.data('tw') / 2, h = n.data('th') / 2;
-            return [n.id(), { x1: p.x - w, x2: p.x + w, y1: p.y - h, y2: p.y + h }]; });
+          const rect = n => { const p = n.position(), w = n.data('tw') / 2, h = n.data('th') / 2;
+            return { x1: p.x - w, x2: p.x + w, y1: p.y - h, y2: p.y + h }; };
+          const inside = (c, q) => c.x1 >= q.x1 - 0.5 && c.y1 >= q.y1 - 0.5 && c.x2 <= q.x2 + 0.5 && c.y2 <= q.y2 + 0.5;
+          cy.edges('.contained').forEach(e => { if (!inside(rect(e.source()), rect(e.target()))) bad.push('outside ' + e.source().id()); });
+          const bbs = tiles.map(n => [n.id(), rect(n)]);
           const hit = (a, b) => a.x1 < b.x2 - 0.5 && b.x1 < a.x2 - 0.5 && a.y1 < b.y2 - 0.5 && b.y1 < a.y2 - 0.5;
-          for (let i = 0; i < bbs.length; i++) for (let j = i + 1; j < bbs.length; j++)
-            if (hit(bbs[i][1], bbs[j][1])) bad.push(bbs[i][0] + " x " + bbs[j][0]);
+          for (let i = 0; i < bbs.length; i++) for (let j = i + 1; j < bbs.length; j++) {
+            const [a, b] = [bbs[i][1], bbs[j][1]];
+            if (hit(a, b) && !inside(a, b) && !inside(b, a)) bad.push(bbs[i][0] + " x " + bbs[j][0]);
+          }
           const repos = new Set(tiles.map(n => n.data('repo')));
           const bb = cy.elements(':visible').boundingBox();
           const key = document.getElementById('repokey');
-          return { groups: cy.nodes('.tile.group').length, key_repos: key.hidden ? 0 : key.querySelectorAll('span').length, tiles: tiles.length, contained: cy.edges('.contained').length, outside: bad.slice(0, 5),
+          return { groups: cy.nodes('.tile.cluster').length, key_repos: key.hidden ? 0 : key.querySelectorAll('span').length, tiles: tiles.length, contained: cy.edges('.contained').length, outside: bad.slice(0, 5),
                    repo_boxes: cy.nodes('.repo').length, repos: repos.size,
                    fit_zoom: Math.round(1000 * Math.min(cy.width() / (bb.w + 40), cy.height() / (bb.h + 40))) / 1000 };
         }""")
@@ -258,5 +263,5 @@ def test_treemap_view_draws(server, tmp_path) -> None:
     assert errors == []
     assert m["repo_boxes"] == 0 and m["repos"] > 1, m  # not grouped by repo
     assert m["key_repos"] == m["repos"], m
-    assert m["groups"] > 0, m  # the big trees are named once, in their own tile  # every repo colour has a key entry
+    assert m["groups"] > 0, m  # clusters are drawn as labelled frames  # every repo colour has a key entry
     assert m["tiles"] > 0 and m["contained"] > 0 and m["outside"] == [], m  # "outside" = overlapping tiles

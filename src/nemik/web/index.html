@@ -189,7 +189,12 @@ function draw() {
         "text-valign": "center", "text-halign": "center", "font-size": "data(fs)", "border-width": 1,
         "border-color": css("--bg"), "background-color": "data(repoColor)", "background-opacity": 1, color: "#fff",
         "text-outline-width": 1, "text-outline-color": "#0008" } },
-      { selector: "node.tile.group", style: { "text-wrap": "wrap", "text-max-width": "data(tw)" } },
+      // Step 6: a cluster is a frame tinted with its repo, label in its header (graphviz-style); it
+      // draws under its children (z by depth).
+      { selector: "node.tile", style: { "z-index-compare": "manual", "z-index": "data(depth)" } },
+      { selector: "node.tile.cluster", style: { "background-opacity": 0.12, "border-width": 1.5,
+        "border-color": "data(repoColor)", "text-valign": "top", "text-margin-y": "data(hm)", color: css("--ink"),
+        "text-outline-width": 0 } },
       { selector: 'node.tile[state = "blocked"]', style: { "background-opacity": 0.45 } },
       { selector: 'node.tile[state = "working"]', style: { "border-width": 3, "border-color": css("--ink") } },
       { selector: "edge.contained", style: { display: "none" } },
@@ -296,7 +301,7 @@ function treeOf(nodes, edges) {
 // horizontal strips, a strip closing when adding the next item would worsen its worst aspect ratio.
 // Order reads left to right, top to bottom; area is proportional to weight. Plain slice-and-dice
 // (step 1) kept order too, but 272 fixture roots in one row came out as hair-thin slivers.
-function orderedTreemap(tree, order, rect, pad = 4) {
+function orderedTreemap(tree, order, rect, pad = 4, head = 3 * pad) {
   const out = new Map(), rank = new Map(order.map((id, i) => [id, i]));
   const byRank = (a, b) => (rank.get(a) ?? Infinity) - (rank.get(b) ?? Infinity) || (a < b ? -1 : 1);
   const lay = (ids, r, depth) => {
@@ -321,13 +326,13 @@ function orderedTreemap(tree, order, rect, pad = 4) {
         x += w;
         out.set(id, { ...cell, depth });
         // The header and margins shrink with a small cell, so children never leave it.
-        const px = Math.min(pad, cell.w / 4), top = Math.min(pad * 3, cell.h / 4), py = Math.min(pad, cell.h / 4);
+        // Step 6 (operator: graphviz-style labelled nested clusters): a node with work beneath it is a
+        // frame; its label gets a header strip of its own and its children sit inside the margins.
+        // Header and margins shrink with a small cell, so children never leave it.
         if (tree.kids.get(id).length) {
-          // The node's own share is a tile beside its children, so leaves partition the whole map.
-          const selfId = id + "#self";
-          tree.weight.set(selfId, tree.own.get(id)); tree.kids.set(selfId, []);
-          rank.set(selfId, -1);
-          lay([selfId, ...tree.kids.get(id)], { x: cell.x + px, y: cell.y + top, w: cell.w - 2 * px, h: cell.h - top - py }, depth + 1);
+          const px = Math.min(pad, cell.w / 6), top = Math.min(head, cell.h / 3), py = Math.min(pad, cell.h / 6);
+          out.get(id).head = top;
+          lay(tree.kids.get(id), { x: cell.x + px, y: cell.y + top, w: cell.w - 2 * px, h: cell.h - top - py }, depth + 1);
         }
       }
       y += h;
@@ -348,27 +353,25 @@ function treemap() {
   const order = ns.filter(n => n.data("rank_pos") !== undefined).sort((a, b) => a.data("rank_pos") - b.data("rank_pos")).map(n => n.id());
   // Room for one label-sized leaf (about 50x50) per unit of weight, in the pane's landscape shape.
   const total = t.roots.reduce((a, r) => a + t.weight.get(r), 0), H = Math.sqrt(total * 2500 * 0.62), W = H / 0.62;
-  const R = orderedTreemap(t, order, { x: 0, y: 0, w: W, h: H }, 0);
+  const R = orderedTreemap(t, order, { x: 0, y: 0, w: W, h: H }, 4, 16);
   cy.batch(() => {
     ns.forEach(n => {
-      // A node with children is drawn by its own-share tile ("#self"); its frame is implied.
-      const r = R.get(n.id() + "#self") || R.get(n.id());
+      const r = R.get(n.id());
       if (!r) { n.style("display", "none"); return; }
-      const fs = Math.max(0, Math.min(r.h * 0.45, r.w / Math.max(3, String(n.data("label")).length) * 1.6, 28));
-      n.data({ tw: Math.max(1, r.w), th: Math.max(1, r.h), repoColor: repoHue(n.data("repo")), fs, label: fs >= 7 ? n.data("label") : "" });
-      n.addClass("tile").position({ x: r.x + r.w / 2, y: r.y + r.h / 2 });
+      const base = { tw: Math.max(1, r.w), th: Math.max(1, r.h), repoColor: repoHue(n.data("repo")), depth: r.depth };
+      n.addClass("tile").removeClass("cluster").position({ x: r.x + r.w / 2, y: r.y + r.h / 2 });
+      if (r.head !== undefined) {
+        // A cluster: its label (symbol and title, cut to the width) in the header strip.
+        const fs = Math.min(11, r.head * 0.75), fits = Math.floor(r.w / (fs * 0.62));
+        const text = `${n.data("symbol")} ${n.data("title") || ""}`;
+        n.data({ ...base, fs, hm: (r.head - fs) / 2 + fs, label: fs >= 6 && fits > 3 ? (text.length > fits ? text.slice(0, fits - 1) + "…" : text) : "" })
+         .addClass("cluster");
+      } else {
+        const fs = Math.max(0, Math.min(r.h * 0.45, r.w / Math.max(3, String(n.data("symbol")).length) * 1.6, 24));
+        n.data({ ...base, fs, label: fs >= 7 ? n.data("symbol") : "" });
+      }
     });
     cy.edges().forEach(e => { if (!e.hasClass("waits") && t.parent.get(e.source().id()) === e.target().id()) e.addClass("contained"); });
-    // Step 5: a top-level group is named in its root's own tile (the reference names a group in its
-    // biggest tile), with the title wrapped inside it. An overlay label over the whole group collided
-    // with the tiles' own text (screenshot, 2026-10-01).
-    for (const r of t.roots) {
-      if (!t.kids.get(r).length) continue;
-      const n = cy.getElementById(r), c = R.get(r + "#self");
-      const text = `${n.data("symbol")} ${n.data("title") || ""}`.slice(0, 80);
-      const fs = Math.min(c.h / 4, Math.sqrt(c.w * c.h / text.length) * 0.9, 22);
-      if (fs >= 8) n.data({ label: text, fs }).addClass("group");
-    }
     // Step 4: the repo colour key, since fill is the repo here.
     const key = document.getElementById("repokey");
     key.innerHTML = [...new Set(ns.map(n => n.data("repo")))].sort().map(r =>
