@@ -81,6 +81,8 @@ aside a { color: var(--ink); text-decoration: underline dotted var(--muted); }
       <pre id="toolout" style="white-space:pre-wrap; overflow:auto; max-height:40vh; font-size:11px"></pre>
     </div>
     <!-- /tools -->
+    <h2>Weather</h2>
+    <div id="weather" class="stat">No outage is being waited on.</div>
     <h2>Goals</h2>
     <div id="goals" class="stat">Pick a repo.</div>
     <h2>Wake</h2>
@@ -767,6 +769,21 @@ function detail(n) {
       ? b.claimed_by.map(citeLink).join(", ") : `${esc(b.blocker)} (waiting on ${esc(b.blocker)}: claim with <code>--enables</code> ${citeLink(b.blocked)})`}</dd>`).join("")}</dl>`;
 }
 
+// nemik:W174: one entry per outage being waited on. Waypoints whose witnesses are the same query
+// share a weather id (the query itself is not published), so N repos waiting on one registry
+// outage read as one outage with N waiters, not N problems.
+function weather() {
+  const repo = document.getElementById("repo").value;
+  const open = data.nodes.filter(n => n.weather && !["done", "dropped", "withheld"].includes(n.state));
+  const groups = new Map();
+  for (const n of open) (groups.get(n.weather) || groups.set(n.weather, []).get(n.weather)).push(n);
+  const rows = [...groups.values()].filter(g => !repo || g.some(n => n.repo === repo))
+    .sort((a, b) => b.length - a.length || (a[0].cite < b[0].cite ? -1 : 1))
+    .map(g => `<dt>${g.length} waiting</dt><dd>${g.map(n => citeLink(n.cite)).join(", ")}${
+      g[0].title ? ` <span class="stat">${linked(g[0].title)}</span>` : ""}</dd>`);
+  document.getElementById("weather").innerHTML = rows.length ? `<dl>${rows.join("")}</dl>` : "No outage is being waited on.";
+}
+
 function findings() {
   const repo = document.getElementById("repo").value;
   const rows = Object.entries(data.findings).filter(([r]) => !repo || r === repo)
@@ -798,7 +815,7 @@ async function load() {
   const repos = [...new Set(data.nodes.map(n => n.repo))].sort();
   sel.innerHTML = '<option value="">all</option>' + repos.map(r => `<option${r === cur ? " selected" : ""}>${esc(r)}</option>`).join("");
   await wake();  // draw() reads `liveness`, populated by wake() -- fetch it first, not alongside.
-  draw(); findings(); goals();
+  draw(); findings(); goals(); weather();
 }
 
 // Also feeds `liveness` (repo -> asleep/idle/awake) that draw() uses to color repo boxes, so the
@@ -826,7 +843,7 @@ async function goals() {
   el.innerHTML = gs.length ? "<dl>" + gs.map(g => `<dt>${citeLink(repo + ":" + g.goal)} ${esc(g.title.slice(0, 60))}</dt>
     <dd>on deck ${g.on_deck ? citeLink(g.on_deck) : "none"}; path ${g.clear
       ? '<span style="color:var(--ready)">clear</span>'
-      : '<span style="color:var(--blocked)">waits on</span> ' + g.outside.map(o => linked(o)).join(", ")}</dd>`).join("") + "</dl>"
+      : '<span style="color:var(--blocked)">waits on</span> ' + weatherOnce(g.outside).map(o => linked(o)).join(", ")}</dd>`).join("") + "</dl>"
     : "No open goals.";
 }
 
@@ -862,6 +879,12 @@ function linked(text, repo) {
   if (repo) out = out.replace(/(^|[\s,(\[])(W\d+)\b(?![^<]*<\/code>)/g, (m, pre, w) => pre + citeLink(`${repo}:${w}`));
   return out;
 }
+// A goal's outside list, with refs that wait on the same outage (same weather id) shown once.
+function weatherOnce(refs) {
+  const seen = new Set();
+  return refs.filter(r => { const w = (data.nodes.find(n => n.cite === r) || {}).weather;
+    if (!w) return true; if (seen.has(w)) return false; seen.add(w); return true; });
+}
 function citeLink(cite) {
   return `<a href="#" data-cite="${esc(cite)}"><code>${esc(cite)}</code></a>`;
 }
@@ -876,7 +899,7 @@ for (const id of ["wake", "goals"]) document.getElementById(id).addEventListener
   const a = ev.target.closest("[data-cite]");
   if (a) { ev.preventDefault(); focusCite(a.dataset.cite); }
 });
-document.getElementById("repo").onchange = () => { draw(); findings(); goals(); tool(); };
+document.getElementById("repo").onchange = () => { draw(); findings(); goals(); weather(); tool(); };
 document.getElementById("showDone").onchange = draw;
 document.getElementById("showNoise").onchange = draw;
 // The forest toggle is a per-viewer preference; storage can be missing or throw (private window).

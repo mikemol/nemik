@@ -343,3 +343,26 @@ def test_every_cite_in_the_panel_is_a_repo_colon_link(server) -> None:
         }""")
         browser.close()
     assert bad == []
+
+
+def test_weather_panel_groups_one_outage(server) -> None:
+    """nemik:W174 step 2: waypoints sharing a weather id list as one outage with all its waiters."""
+    with sync_api.sync_playwright() as p:
+        try:
+            exe = os.environ.get("NEMIK_CHROMIUM")
+            browser = p.chromium.launch(executable_path=os.path.abspath(exe) if exe else None)
+        except Exception as e:  # noqa: BLE001 - no browser installed here
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page()
+        page.goto(server)
+        page.wait_for_function("() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0", timeout=60000)
+        m = page.evaluate("""() => {
+          const open = data.nodes.filter(n => n.state === 'blocked' && n.cite).slice(0, 3);
+          open.forEach(n => n.weather = 'wx:same');  // three repos' items wait on one outage
+          weather();
+          const once = weatherOnce(open.map(n => n.cite));
+          return { rows: document.querySelectorAll('#weather dt').length,
+                   waiters: document.querySelectorAll('#weather dd > a[data-cite]').length, once: once.length };
+        }""")
+        browser.close()
+    assert m == {"rows": 1, "waiters": 3, "once": 1}, m

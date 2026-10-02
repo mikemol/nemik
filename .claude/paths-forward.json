@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 113
+      "ticks_blocked": 114
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 68,
+      "ticks_blocked": 69,
       "weight": 1
     },
     {
@@ -1359,7 +1359,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "weight": 1
     },
     {
@@ -1400,7 +1400,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-01T19:50:19Z",
-      "ticks_blocked": 50,
+      "ticks_blocked": 51,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -2616,7 +2616,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 58
+      "ticks_blocked": 59
     },
     {
       "symbol": "W138",
@@ -2835,7 +2835,7 @@
       "minted_during": "tick",
       "caused_by": "life:W28",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "weight": 3
     },
     {
@@ -3076,7 +3076,7 @@
       "minted_during": "interrupt",
       "caused_by": "W148",
       "last_worked": "2026-10-02T09:13:53Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "weight": 5
     },
     {
@@ -3135,7 +3135,7 @@
       "minted_during": "interrupt",
       "caused_by": "W148",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "weight": 3
     },
     {
@@ -3293,26 +3293,26 @@
     {
       "symbol": "W174",
       "title": "Weather: identical witness queries group as one weather item in views and ddG",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W75"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Step 2: views use the weather id -- the panel lists each open weather item once with every waypoint waiting on it, and goals' outside counts a shared outage once",
-      "evidence": "2026-10-02: 2026-10-02 step 1: adapter sets nemik:weather = 'wx:'+sha256(witness, whitespace collapsed)[:10]; graph.json nodes carry 'weather' (manifested as ref; withheld stubs blank). The query text never enters the graph (may name hosts). tests/test_weather.py: same query across repos/whitespace -> same id, none without a witness, different query -> different id, query text absent from the serialized graph. bazel 32/32.",
+      "next_bounded_step": null,
+      "evidence": "2026-10-02: 2026-10-02 step 1: adapter sets nemik:weather = 'wx:'+sha256(witness, whitespace collapsed)[:10]; graph.json nodes carry 'weather' (manifested as ref; withheld stubs blank). The query text never enters the graph (may name hosts). tests/test_weather.py: same query across repos/whitespace -> same id, none without a witness, different query -> different id, query text absent from the serialized graph. bazel 32/32. | 2026-10-02: 2026-10-02 step 2: side panel 'Weather' lists each open outage once (grouped by weather id, largest first, repo filter respected) with every waiting waypoint as a link; goals' 'waits on' shows refs sharing a weather id once (weatherOnce). test_layout::test_weather_panel_groups_one_outage: three items given one id -> 1 row, 3 waiters, once=1 (first run counted a 4th link from a fixture title; counted direct links only). bazel 32/32.",
       "issued_at": "2026-10-01T19:51:39Z",
       "minted_during": "interrupt",
       "caused_by": "W75",
-      "last_worked": "2026-10-02T13:45:20Z",
+      "last_worked": "2026-10-02T14:16:11Z",
       "ticks_blocked": 0,
       "weight": 2
     },
     {
       "symbol": "W175",
       "title": "Weather: design note in the W58 doc",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W75"
       ],
@@ -3324,7 +3324,7 @@
       "issued_at": "2026-10-01T19:51:39Z",
       "minted_during": "interrupt",
       "caused_by": "W75",
-      "last_worked": null,
+      "last_worked": "2026-10-02T14:16:11Z",
       "ticks_blocked": 0,
       "weight": 2
     },
@@ -3429,7 +3429,7 @@
       "minted_during": "tick",
       "caused_by": "W158",
       "last_worked": "2026-10-02T06:44:50Z",
-      "ticks_blocked": 24
+      "ticks_blocked": 25
     },
     {
       "symbol": "W183",
