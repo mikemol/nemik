@@ -3428,11 +3428,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-10-02: operator 2026-10-01 on balance: treat the low-hanging set as one virtual umbrella; its weight (sum of its members' composed weight) competes against each deep item in the normal ranking, so the fruit gets a tick when, together, they outweigh the heaviest deep item. No fixed ratio.",
       "issued_at": "2026-10-02T00:13:17Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": null,
+      "last_worked": "2026-10-02T00:14:43Z",
       "ticks_blocked": 0
     }
   ],
