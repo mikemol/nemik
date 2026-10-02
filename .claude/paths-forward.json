@@ -3570,9 +3570,9 @@
       "recoverable": true
     }
   ],
-  "job_id": "07a2b13b",
-  "heartbeat": "2026-10-02T00:29:17Z",
+  "job_id": "eb49bf5c",
+  "heartbeat": "2026-10-02T16:54:36Z",
   "lock": null,
-  "predecessor_job_id": "2c987931",
+  "predecessor_job_id": "07a2b13b",
   "leases": []
 }
