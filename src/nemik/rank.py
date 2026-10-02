@@ -12,7 +12,7 @@ import tomllib
 from dataclasses import dataclass
 from importlib.resources import files
 
-from rdflib import Graph, URIRef
+from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import DCTERMS
 
 from nemik.adapter import BASE, NEMIK, OSLC_CM, workstream_uri
@@ -240,6 +240,27 @@ def rank(g: Graph, repo: str, weights: Weights, comp: Composition | None = None)
         r["weight"] = keys.index(r["key"]) + 1
         r["key"] = list(r["key"])
     return out
+
+
+FRUIT_TAG = "fruit"
+
+
+def fruit(g: Graph, repo: str, rows: list[dict]) -> dict | None:
+    """nemik:W178: the low-hanging fruit of `repo` as ONE virtual row, weighed against the rest.
+
+    A member is a ranked ready leaf that moves nothing else (raw downstream 0) or that its repo tags
+    `touches: fruit`. Each member carries the attention it costs to keep on the queue (1) plus what
+    it moves; the class weighs their sum, so it outranks a deep item exactly when the pile does, and
+    lightens as members land (operator 2026-10-01: no time box, the weightiest row wins).
+    """
+    tagged = {str(g.value(n, NEMIK.symbol)) for n in g.subjects(NEMIK.touches, Literal(FRUIT_TAG))
+              if (n, NEMIK.workstream, workstream_uri(repo)) in g}
+    members = [r for r in rows if r["downstream"] == 0 or r["symbol"] in tagged]
+    if not members:
+        return None
+    return {"symbol": "FRUIT", "title": f"low-hanging fruit ({len(members)})",
+            "members": [r["symbol"] for r in members],
+            "class_weight": sum(1 + r["downstream"] for r in members)}
 
 
 def main(argv: list[str] | None = None, g: Graph | None = None) -> None:

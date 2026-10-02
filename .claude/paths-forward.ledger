@@ -266,3 +266,4 @@
 2026-10-01T23:47:24Z  tick  W154  advanced  unblock  "field manifest + unmanifested() + test; statuses fixed on chained umbrellas; W177 now the working card"  evidence=src/nemik/manifest.py,tests/test_manifest.py
 2026-10-02T00:09:02Z  tick  W177  advanced  unblock  "ActiveCardShape: one working card per repo; 7 sleeping repos flagged, all live repos clean; W169 now working"  evidence=src/nemik/blocks.py,tests/test_active_card.py
 2026-10-02T00:17:03Z  tick  W169  advanced  unblock  "static page+vendor writer, relative links tested; W178 working"  evidence=tests/test_static.py
+2026-10-02T00:45:10Z  tick  W178  advanced  sweep-model  "fruit() virtual row + tests; class outweighs deep in el-openglo, luthen"  evidence=tests/test_fruit.py
