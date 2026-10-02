@@ -632,7 +632,7 @@ async function load() {
 async function wake() {
   const el = document.getElementById("wake");
   let w;
-  try { w = await (await fetch("wake")).json(); } catch (e) { el.textContent = "unavailable"; return; }
+  try { w = await (await fetch("wake.json")).json(); } catch (e) { el.textContent = "unavailable"; return; }
   liveness = Object.fromEntries(w.roster.map(r => [r.repo, r.state]));
   const sleepers = w.roster.filter(r => r.state !== "awake");
   const rows = sleepers.map(r => `<dt><b>${esc(r.repo)}</b> <span class="stat">${esc(r.state)}</span></dt>
@@ -648,7 +648,7 @@ async function goals() {
   const el = document.getElementById("goals"), repo = document.getElementById("repo").value;
   if (!repo) { el.textContent = "Pick a repo."; return; }
   let gs;
-  try { gs = await (await fetch("goals/" + encodeURIComponent(repo))).json(); } catch (e) { el.textContent = "unavailable"; return; }
+  try { gs = await (await fetch("goals/" + encodeURIComponent(repo) + ".json")).json(); } catch (e) { el.textContent = "unavailable"; return; }
   el.innerHTML = gs.length ? "<dl>" + gs.map(g => `<dt>${citeLink(repo + ":" + g.goal)} ${esc(g.title.slice(0, 60))}</dt>
     <dd>on deck ${g.on_deck ? citeLink(g.on_deck) : "none"}; path ${g.clear
       ? '<span style="color:var(--ready)">clear</span>'

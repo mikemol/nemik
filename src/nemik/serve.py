@@ -299,6 +299,20 @@ def handler(model: Model) -> type[BaseHTTPRequestHandler]:
     return H
 
 
+def write_static(out: Path) -> list[Path]:
+    """nemik:W169: the page and its scripts as files under `out`, every link relative, so the view
+    works from any bucket subpath. Data files are W170's; the gate is W172's."""
+    web = files("nemik.web")
+    written = [out / "index.html"]
+    (out / "vendor").mkdir(parents=True, exist_ok=True)
+    written[0].write_bytes(web.joinpath("index.html").read_bytes())
+    for name in sorted(VENDOR):
+        dst = out / "vendor" / name
+        dst.write_bytes(web.joinpath("vendor").joinpath(name).read_bytes())
+        written.append(dst)
+    return written
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(prog="nemik-serve", description=(__doc__ or "").splitlines()[0])
     ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
