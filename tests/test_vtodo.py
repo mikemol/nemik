@@ -84,3 +84,19 @@ def test_dtstart_and_due_pass_through_as_rfc5545_properties() -> None:
     ask = {**ASKS[0], "due": "TZID=America/Detroit:20261001T163000"}
     (todo,) = vtodos([ask], {"life"})
     assert "DUE;TZID=America/Detroit:20261001T163000" in todo
+
+
+def test_grouped_adds_a_parent_per_repo_and_keeps_children_as_they_are() -> None:
+    """nemik:W163: one parent VTODO per repo; asks keep their UID and gain RELATED-TO PARENT."""
+    from nemik.vtodo import grouped
+
+    asks = [{**ASKS[0]}, {**ASKS[2]}, {**ASKS[2], "ref": "aeternum:W49", "due": "20261005"},
+            {**ASKS[2], "ref": "aeternum:W50", "due": "20261003T120000Z"}]
+    flat = vtodos(asks, {"life", "aeternum"})
+    g = grouped(flat)
+    parents = [t for t in g if any(line.startswith("UID:nemik:repo:") for line in t)]
+    assert [next(line for line in p if line.startswith("SUMMARY")) for p in parents] == ["SUMMARY:aeternum (3)", "SUMMARY:life (1)"]
+    assert "DUE:20261003T120000Z" in parents[0]  # the earliest child due
+    kids = [t for t in g if t not in parents]
+    assert all(t[-2].startswith("RELATED-TO;RELTYPE=PARENT:nemik:repo:") and t[-1] == "END:VTODO" for t in kids)
+    assert sorted(t[1] for t in kids) == sorted(t[1] for t in flat)  # same UIDs: re-parented, not recreated

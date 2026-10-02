@@ -137,6 +137,31 @@ def vtodos(asks: list[dict], repos: set[str], link: str = "") -> list[list[str]]
     return out
 
 
+def grouped(todos: list[list[str]]) -> list[list[str]]:
+    """nemik:W163 (W148): one parent VTODO per repo, each ask its subtask (RELATED-TO;RELTYPE=PARENT).
+
+    The parent's UID is nemik:repo:<repo> (the Tasks helper keys it as ref `repo:<repo>`), its
+    summary `<repo> (<n asks>)`, its DUE the earliest child DUE, as stored. Children keep their
+    UIDs and dates, so an existing task is re-parented in place, not recreated. A repo whose last
+    ask closes drops out of the feed and the helper completes its parent like any closed ask.
+    """
+    by_repo: dict[str, list[list[str]]] = {}
+    for t in todos:
+        repo = next(line for line in t if line.startswith("CATEGORIES:")).split(",", 1)[1]
+        by_repo.setdefault(repo.replace("\\,", ","), []).append(t)
+    out = []
+    for repo, kids in sorted(by_repo.items()):
+        dues = [line for k in kids for line in k if line.startswith("DUE")]
+        parent = ["BEGIN:VTODO", f"UID:nemik:repo:{repo}", "DTSTAMP:19700101T000000Z",
+                  f"SUMMARY:{_escape(f'{repo} ({len(kids)})')}", f"DESCRIPTION:{_escape(f'nemik: asks from {repo}')}",
+                  "STATUS:NEEDS-ACTION", f"CATEGORIES:nemik,{_escape(repo)}"]
+        if dues:  # earliest by the date-time digits, whatever the value form
+            parent.append(min(dues, key=lambda d: re.sub(r"[^0-9]", "", d.rpartition(":")[2]).ljust(15, "0")))
+        out.append(parent + ["END:VTODO"])
+        out += [k[:-1] + [f"RELATED-TO;RELTYPE=PARENT:nemik:repo:{repo}", k[-1]] for k in kids]
+    return out
+
+
 def calendar(todos: list[list[str]]) -> str:
     lines = ["BEGIN:VCALENDAR", "VERSION:2.0", f"PRODID:{PRODID}", "X-WR-CALNAME:nemik: needs you"]
     for t in todos:
@@ -145,7 +170,7 @@ def calendar(todos: list[list[str]]) -> str:
     return "".join(_fold(line) + "\r\n" for line in lines)
 
 
-def feed(root: Path, opt_in: Path, link: str = "") -> str:
+def feed(root: Path, opt_in: Path, link: str = "", group: bool = False) -> str:
     """The iCalendar text nemik-ics prints, built in-process."""
     from rdflib import Graph
 
@@ -159,7 +184,8 @@ def feed(root: Path, opt_in: Path, link: str = "") -> str:
             g += qg
     for repo, path in workstream_files(root, LEDGER):
         g += ledger_graph(repo, path)[0]
-    return calendar(vtodos(operator_asks(g), opted_in(opt_in), link))
+    todos = vtodos(operator_asks(g), opted_in(opt_in), link)
+    return calendar(grouped(todos) if group else todos)
 
 
 DEFAULT_HELPER = Path.home() / "github" / "nemik" / "build" / "akonadi-tasks" / "nemik-akonadi-tasks"
@@ -190,12 +216,13 @@ def tasks_main(argv: list[str] | None = None) -> None:
     ap.add_argument("--apply", action="store_true", help="write; without it, only print the plan")
     ap.add_argument("--only", action="append", default=[], metavar="REF",
                     help="sync only this repo:W<n> (repeatable); other tasks are left untouched (nemik:W162)")
+    ap.add_argument("--group", action="store_true", help="a parent task per repo, each ask a subtask (nemik:W163)")
     args = ap.parse_args(argv)
     if not args.helper.exists():
         print(f"ERROR: {args.helper} is missing; build it with ./setup.sh", flush=True)
         raise SystemExit(2)
     try:
-        text = feed(args.root, args.opt_in, args.link)
+        text = feed(args.root, args.opt_in, args.link, args.group)
     except Exception as e:  # noqa: BLE001 - any feed failure is the 2 of the exit contract
         print(f"ERROR: feed: {e}", flush=True)
         raise SystemExit(2) from e

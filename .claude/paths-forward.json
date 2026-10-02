@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 95
+      "ticks_blocked": 98
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 50,
+      "ticks_blocked": 53,
       "weight": 1
     },
     {
@@ -1360,7 +1360,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 31,
+      "ticks_blocked": 34,
       "weight": 1
     },
     {
@@ -1401,7 +1401,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-01T19:50:19Z",
-      "ticks_blocked": 32,
+      "ticks_blocked": 35,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1991,7 +1991,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 32,
+      "ticks_blocked": 35,
       "weight": 0
     },
     {
@@ -2132,7 +2132,7 @@
       "minted_during": "tick",
       "caused_by": "life",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 6,
       "weight": 3
     },
     {
@@ -2457,7 +2457,7 @@
       "minted_during": "tick",
       "caused_by": "life:W23",
       "last_worked": "2026-10-01T19:49:18Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 12,
       "weight": 3
     },
     {
@@ -2626,7 +2626,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 40
+      "ticks_blocked": 43
     },
     {
       "symbol": "W138",
@@ -2836,8 +2836,6 @@
       ],
       "blocked_on": [
         "W162",
-        "W163",
-        "W164",
         "W165"
       ],
       "blocked_kind": "agent",
@@ -2847,7 +2845,7 @@
       "minted_during": "tick",
       "caused_by": "life:W28",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 31,
+      "ticks_blocked": 1,
       "weight": 3
     },
     {
@@ -2895,7 +2893,7 @@
     {
       "symbol": "W151",
       "title": "W129c: a fired alarm whose owner is asleep becomes a wake-roster row (reason: alarm, the waypoint and when it fired); nemik never starts a session",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W129"
       ],
@@ -2909,7 +2907,7 @@
       "issued_at": "2026-10-01T13:12:45Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-01T13:12:45Z",
+      "last_worked": "2026-10-02T09:15:26Z",
       "ticks_blocked": 0,
       "weight": 4
     },
@@ -3111,57 +3109,59 @@
     {
       "symbol": "W162",
       "title": "Tasks: test on ONE task that RELATED-TO;RELTYPE=PARENT maps to the Google Tasks parent",
-      "status": "working",
+      "status": "blocked",
       "enables": [
         "W148"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "operator: act glance at Google Tasks list 'nemik': is life:W12 indented under 'life (1)'? (yes = parent mapping works; no = parents first, children second pass)"
+      ],
+      "blocked_kind": "human",
       "next_bounded_step": "Read back on Google's side: operator glance at Google Tasks 'nemik' (is 'Snorkel…'/life:W12 nested under 'life (1)'?), or a fresh Akonadi item fetch after the parent's remoteId lands; then W163",
       "evidence": "2026-10-02: 2026-10-02 step 1: helper --only REF (repeatable) syncs only those refs and never COMPLETEs outside them; nemik-tasks --only passes through. Live plan-only: '--only life:W12' -> LIST nemik (1 asks in the feed), 1 planned change, nothing else touched. Helper rebuilt via cmake. bazel green. | 2026-10-02: 2026-10-02 step 2 (live, one task): helper UPDATE now carries RELATED-TO;RELTYPE=PARENT (re-parent in place); HAVE lines report a ref's parent. Fed parent VTODO nemik:repo:life ('life (1)') + life:W12 with RELATED-TO PARENT, --only both, --apply: UPDATE life:W12, CREATE repo:life, APPLIED (0 failed). Akonadi then holds life:W12 parent=nemik:repo:life, unchanged after a forced resource synchronize (5 reads over 90s). NOT yet proven on Google's side: Akonadi may serve its cache, and the child was updated before the parent was created (the resource needs the parent's remote id). Feed file deleted.",
       "issued_at": "2026-10-01T19:51:38Z",
       "minted_during": "interrupt",
       "caused_by": "W148",
-      "last_worked": "2026-10-02T08:48:06Z",
-      "ticks_blocked": 0,
+      "last_worked": "2026-10-02T09:13:53Z",
+      "ticks_blocked": 2,
       "weight": 5
     },
     {
       "symbol": "W163",
       "title": "Tasks: emit one parent VTODO per repo (summary 'repo (n)', earliest due)",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W148"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-02: 2026-10-02: vtodo.grouped(todos): parent VTODO per repo (UID nemik:repo:<repo>, 'repo (n)', DUE = earliest child DUE), each ask gains RELATED-TO;RELTYPE=PARENT with UID/dates unchanged; nemik-tasks/feed --group (off by default until W162's Google read-back). test_vtodo grouped case; bazel 30/30.",
       "issued_at": "2026-10-01T19:51:38Z",
       "minted_during": "interrupt",
       "caused_by": "W148",
-      "last_worked": null,
+      "last_worked": "2026-10-02T09:15:07Z",
       "ticks_blocked": 0,
       "weight": 5
     },
     {
       "symbol": "W164",
       "title": "Tasks: re-parent existing asks in place, UIDs and dates kept",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W148"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-02: 2026-10-02: already built in W162 step 2: the helper's UPDATE compares and sets RELATED-TO;RELTYPE=PARENT, keeping the item (UID, dates); a parent's completion for a repo with no asks is the existing COMPLETE of a ref missing from the feed (W165 checks it live).",
       "issued_at": "2026-10-01T19:51:38Z",
       "minted_during": "interrupt",
       "caused_by": "W148",
-      "last_worked": null,
+      "last_worked": "2026-10-02T09:15:22Z",
       "ticks_blocked": 0,
       "weight": 5
     },
@@ -3174,9 +3174,7 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W162",
-        "W163",
-        "W164"
+        "W162"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
@@ -3185,7 +3183,7 @@
       "minted_during": "interrupt",
       "caused_by": "W148",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 31,
+      "ticks_blocked": 1,
       "weight": 3
     },
     {
@@ -3479,7 +3477,7 @@
       "minted_during": "tick",
       "caused_by": "W158",
       "last_worked": "2026-10-02T06:44:50Z",
-      "ticks_blocked": 6
+      "ticks_blocked": 9
     },
     {
       "symbol": "W183",
