@@ -96,7 +96,7 @@ const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).
 const LANE = { "needs-you": "needs you", answered: "already answered", condition: "waiting on a condition", unstated: "no ask stated" };
 const STATES = ["ready", "working", "blocked", "done", "dropped", "unclaimed"];
 const color = s => css("--" + (STATES.includes(s) ? s : "other"));
-let data = null, cy = null, selectedId = null, liveness = {};
+let data = null, cy = null, selectedId = null, liveness = {}, lastMode = null;
 
 document.getElementById("legend").innerHTML = [...STATES, "other"].map(s =>
   `<span><i class="dot" style="background:${color(s)}"></i>${s}</span>`).join("");
@@ -152,7 +152,12 @@ function draw() {
       classes: "waits" + (e.satisfied ? " satisfied" : "") })),
   ];
   // Keep the reader's viewport across a redraw; only the first draw fits the graph (nemik:W119).
-  const view = cy ? { zoom: cy.zoom(), pan: { ...cy.pan() } } : null;
+  // The viewport is kept only across a redraw of the SAME view: a changed layout mode or repo
+  // filter puts every node somewhere else, and the old zoom/pan then showed one tile scaled off the
+  // page (operator 2026-10-02, treemap toggle).
+  const mode = [treemapOn, document.getElementById("forest").checked, repo].join("|");
+  const view = cy && mode === lastMode ? { zoom: cy.zoom(), pan: { ...cy.pan() } } : null;
+  lastMode = mode;
   if (cy) cy.destroy();
   cy = cytoscape({
     container: document.getElementById("cy"), elements: els,
@@ -211,7 +216,9 @@ function draw() {
   });
   document.getElementById("repokey").hidden = true;
   if (treemapOn) treemap(); else tile();
-  if (view) { cy.zoom(view.zoom); cy.pan(view.pan); }
+  // The layout runs after cytoscape's own initial fit, so a fresh view is fitted here, to what the
+  // layout actually placed.
+  if (view) { cy.zoom(view.zoom); cy.pan(view.pan); } else cy.fit(cy.elements(":visible"), 20);
   // nemik:W88: an edge between two boxes is faint until one of its ends is hovered or selected,
   // or "show all cross-repo edges" is on. Inside a box, edges stay as they are.
   const unit = n => (n.isChild() ? n.parent().id() : n.id());

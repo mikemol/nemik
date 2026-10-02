@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 184,
+  "counter": 185,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 107
+      "ticks_blocked": 108
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 62,
+      "ticks_blocked": 63,
       "weight": 1
     },
     {
@@ -1360,7 +1360,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 43,
+      "ticks_blocked": 44,
       "weight": 1
     },
     {
@@ -1401,7 +1401,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-01T19:50:19Z",
-      "ticks_blocked": 44,
+      "ticks_blocked": 45,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1990,7 +1990,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "weight": 0
     },
     {
@@ -2621,7 +2621,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 52
+      "ticks_blocked": 53
     },
     {
       "symbol": "W138",
@@ -2840,7 +2840,7 @@
       "minted_during": "tick",
       "caused_by": "life:W28",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "weight": 3
     },
     {
@@ -3119,7 +3119,7 @@
       "minted_during": "interrupt",
       "caused_by": "W148",
       "last_worked": "2026-10-02T09:13:53Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "weight": 5
     },
     {
@@ -3178,7 +3178,7 @@
       "minted_during": "interrupt",
       "caused_by": "W148",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "weight": 3
     },
     {
@@ -3472,7 +3472,7 @@
       "minted_during": "tick",
       "caused_by": "W158",
       "last_worked": "2026-10-02T06:44:50Z",
-      "ticks_blocked": 18
+      "ticks_blocked": 19
     },
     {
       "symbol": "W183",
@@ -3507,6 +3507,22 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-02T12:06:03Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W185",
+      "title": "Viewport: a changed layout mode or repo filter refits instead of keeping the old zoom/pan (treemap scaled off the page)",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-02: 2026-10-02: draw() kept the previous zoom/pan across every redraw (W119); toggling treemap (or forest, or the repo filter) moves every node, so the old viewport showed one tile scaled off the page (operator screenshot). Now the viewport is kept only when the mode key (treemap|forest|repo) is unchanged; otherwise, and on first draw, cy.fit runs AFTER the layout (cytoscape's own init fit ran before treemap() placed anything). test_treemap_view_draws zooms in (4x, panned) then toggles and asserts the map fits the pane: FAILS on the old code, passes now. Live data (538 waypoints) at 2576/1400/420 px: fitted, side panel no overflow. bazel 31/31.",
+      "issued_at": "2026-10-02T12:17:13Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": "2026-10-02T12:20:42Z",
       "ticks_blocked": 0
     }
   ],

@@ -233,8 +233,12 @@ def test_treemap_view_draws(server, tmp_path) -> None:
         page.on("pageerror", lambda e: errors.append(str(e)))
         page.goto(server)
         page.wait_for_function("() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0", timeout=60000)
+        page.evaluate("() => { cy.zoom(4); cy.pan({x: -3000, y: -2000}); }")  # the reader had zoomed in
         page.check("#treemap")
         page.wait_for_function("() => cy.nodes('.tile').length > 0", timeout=60000)
+        # W185: toggling the view refits; the old zoom/pan scaled one tile off the page.
+        fit = page.evaluate("""() => { const b = cy.elements(':visible').renderedBoundingBox();
+          return b.x1 >= -1 && b.y1 >= -1 && b.x2 <= cy.width() + 1 && b.y2 <= cy.height() + 1; }""")
         m = page.evaluate("""() => {
           // Step 6: nested clusters. A child lies inside its parent's frame (below the header); two
           // tiles overlap only when one contains the other.
@@ -261,6 +265,7 @@ def test_treemap_view_draws(server, tmp_path) -> None:
         browser.close()
     (out / "treemap-dark.json").write_text(json.dumps(m, indent=1))
     assert errors == []
+    assert fit, "the treemap is not fitted to the pane after the toggle"
     assert m["repo_boxes"] == 0 and m["repos"] > 1, m  # not grouped by repo
     assert m["key_repos"] == m["repos"], m
     assert m["groups"] > 0, m  # clusters are drawn as labelled frames  # every repo colour has a key entry
