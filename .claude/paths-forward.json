@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 186,
+  "counter": 187,
   "waypoints": [
     {
       "symbol": "W1",
@@ -3497,6 +3497,22 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-02T12:55:48Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W187",
+      "title": "Treemap leaves: repo on its own line, labels fitted to the tile",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-02: 2026-10-02: leaf label = 'repo\\nW<n>' when it fits at >= 7px, else the symbol alone, else none; fitFont() measures the text on a canvas in the page's own font (largest size <= 28 that fits 92% width, 90% height at line-height 1.2). test_treemap_view_draws: 243 two-line leaves, 0 labels wider or taller than their tile (canvas-measured). Live 534 waypoints rendered and checked by screenshot. bazel 31/31.",
+      "issued_at": "2026-10-02T13:04:43Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": "2026-10-02T13:04:49Z",
       "ticks_blocked": 0
     }
   ],

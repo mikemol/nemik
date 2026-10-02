@@ -253,10 +253,20 @@ def test_treemap_view_draws(server, tmp_path) -> None:
             const [a, b] = [bbs[i][1], bbs[j][1]];
             if (hit(a, b) && !inside(a, b) && !inside(b, a)) bad.push(bbs[i][0] + " x " + bbs[j][0]);
           }
+          // Leaf labels: repo on the first line, and the text inside its tile (canvas-measured).
+          const ctx = document.createElement('canvas').getContext('2d'), clipped = [];
+          let twoLine = 0;
+          tiles.filter(n => !n.hasClass('cluster') && n.data('label')).forEach(n => {
+            const lines = String(n.data('label')).split('\\n');
+            if (lines.length === 2 && lines[0] === n.data('repo')) twoLine++;
+            ctx.font = `bold ${n.data('fs')}px ${getComputedStyle(document.body).fontFamily}`;
+            const w = Math.max(...lines.map(l => ctx.measureText(l).width));
+            if (w > n.data('tw') + 0.5 || lines.length * n.data('fs') * 1.2 > n.data('th') + 0.5) clipped.push(n.id());
+          });
           const repos = new Set(tiles.map(n => n.data('repo')));
           const bb = cy.elements(':visible').boundingBox();
           const key = document.getElementById('repokey');
-          return { groups: cy.nodes('.tile.cluster').length, key_repos: key.hidden ? 0 : key.querySelectorAll('span').length, tiles: tiles.length, contained: cy.edges('.contained').length, outside: bad.slice(0, 5),
+          return { two_line: twoLine, clipped: clipped.slice(0, 5), groups: cy.nodes('.tile.cluster').length, key_repos: key.hidden ? 0 : key.querySelectorAll('span').length, tiles: tiles.length, contained: cy.edges('.contained').length, outside: bad.slice(0, 5),
                    repo_boxes: cy.nodes('.repo').length, repos: repos.size,
                    fit_zoom: Math.round(1000 * Math.min(cy.width() / (bb.w + 40), cy.height() / (bb.h + 40))) / 1000 };
         }""")
@@ -268,7 +278,8 @@ def test_treemap_view_draws(server, tmp_path) -> None:
     assert fit, "the treemap is not fitted to the pane after the toggle"
     assert m["repo_boxes"] == 0 and m["repos"] > 1, m  # not grouped by repo
     assert m["key_repos"] == m["repos"], m
-    assert m["groups"] > 0, m  # clusters are drawn as labelled frames  # every repo colour has a key entry
+    assert m["groups"] > 0, m  # clusters are drawn as labelled frames
+    assert m["two_line"] > 0 and m["clipped"] == [], m  # leaves name their repo, and every label fits  # every repo colour has a key entry
     assert m["tiles"] > 0 and m["contained"] > 0 and m["outside"] == [], m  # "outside" = overlapping tiles
 
 

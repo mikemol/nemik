@@ -197,6 +197,7 @@ function draw() {
       // Step 3: fill = repo hue, tiles abut with a thin page-coloured separator, text scaled to fit;
       // state reads as opacity (blocked dim) and a working tile's thicker separator.
       { selector: "node.tile", style: { shape: "rectangle", width: "data(tw)", height: "data(th)", padding: 0,
+        "text-wrap": "wrap", "line-height": 1.2,
         "text-valign": "center", "text-halign": "center", "font-size": "data(fs)", "border-width": 1,
         "border-color": css("--bg"), "background-color": "data(repoColor)", "background-opacity": 1, color: "#fff",
         "text-outline-width": 1, "text-outline-color": "#0008" } },
@@ -359,6 +360,14 @@ function orderedTreemap(tree, order, rect, pad = 4, head = 3 * pad) {
 // edge to the tile's own parent is implied by containment and hidden; every other edge is drawn.
 // Operator chips and placeholders sit in a row below the map.
 function repoHue(r) { let h = 0; for (const c of r) h = (h * 31 + c.charCodeAt(0)) % 360; return `hsl(${h}, 65%, 55%)`; }
+// The largest font (px, at most 28) at which `lines` fit a w x h box: measured with the page's own
+// font on a canvas, so it holds for any string, not an average character width.
+const _measure = document.createElement("canvas").getContext("2d");
+function fitFont(lines, w, h) {
+  _measure.font = `bold 100px ${getComputedStyle(document.body).fontFamily}`;
+  const widest = Math.max(...lines.map(l => _measure.measureText(String(l)).width)) / 100;
+  return Math.floor(Math.min(28, (w * 0.92) / widest, (h * 0.9) / (lines.length * 1.2)));
+}
 function treemap() {
   const ns = cy.nodes("[symbol]").filter(n => n.data("state") !== "unclaimed");
   const t = treeOf(ns.map(n => n.data()), cy.edges().map(e => ({ kind: e.hasClass("waits") ? "waits" : "enables",
@@ -380,8 +389,12 @@ function treemap() {
         n.data({ ...base, fs, hm: (r.head - fs) / 2 + fs, label: fs >= 6 && fits > 3 ? (text.length > fits ? text.slice(0, fits - 1) + "…" : text) : "" })
          .addClass("cluster");
       } else {
-        const fs = Math.max(0, Math.min(r.h * 0.45, r.w / Math.max(3, String(n.data("symbol")).length) * 1.6, 24));
-        n.data({ ...base, fs, label: fs >= 7 ? n.data("symbol") : "" });
+        // Operator 2026-10-02: a leaf names its repo too, on its own line (vertical space is cheaper
+        // than horizontal), and the text is fitted to the tile. Two lines if they fit at a readable
+        // size, else the symbol alone, else nothing.
+        const two = [n.data("repo"), n.data("symbol")], f2 = fitFont(two, r.w, r.h), f1 = fitFont([n.data("symbol")], r.w, r.h);
+        const [fs, label] = f2 >= 7 ? [f2, two.join("\n")] : f1 >= 7 ? [f1, n.data("symbol")] : [0, ""];
+        n.data({ ...base, fs, label });
       }
     });
     cy.edges().forEach(e => { if (!e.hasClass("waits") && t.parent.get(e.source().id()) === e.target().id()) e.addClass("contained"); });
