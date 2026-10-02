@@ -3454,18 +3454,18 @@
     },
     {
       "symbol": "W180",
-      "title": "Treemap view: repo boxes nest goals/umbrellas nest leaves; area ~ composed weight; ordered (rank = reading order); enables become containment, only cross-tree waits drawn as edges",
+      "title": "Treemap view: goals/umbrellas nest leaves across repos; area ~ composed weight; rank = reading order; repo by color/symbol",
       "status": "ready",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-10-02: operator 2026-10-01: do not group by repo; repo is a color or symbol code. Nesting follows the enables tree fleet-wide, so a cross-repo chain sits in one tile.",
       "issued_at": "2026-10-02T01:32:56Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": null,
+      "last_worked": "2026-10-02T01:35:11Z",
       "ticks_blocked": 0
     }
   ],
