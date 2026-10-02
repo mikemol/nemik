@@ -36,7 +36,10 @@ BUDGET = {"cross_p95": 2450, "intra_p95": 365, "area": 11_900_000, "fit_zoom": 0
 #   W135 forest, strict packing:            3654, 0.223 (2038x5352: a column on a landscape pane)
 #   W127 packing may set a box beside the boxes it depends on: 2009, 0.458 (2319x2583)
 #   W139 measured (in-box crossings, upward cross-box edges): strict 214, 16; loose (W127) 214, 17
-FOREST_BUDGET = {"cross_p95": 2210, "fit_zoom": 0.41, "intra_crossings": 235, "cross_upward": 19}
+#   W179 fruit class ranked as one row (W178): 2010, 0.458; in-box crossings 214 -> 310. The rise is
+#        the price of a new constraint (rank order honours the fruit class), not a layout regression
+#        (operator 2026-10-01); the budget is re-based on it, same ~10% headroom as before.
+FOREST_BUDGET = {"cross_p95": 2210, "fit_zoom": 0.41, "intra_crossings": 340, "cross_upward": 19}
 
 METRICS = """() => {
   const unit = n => n.isChild() ? n.parent().id() : n.id();

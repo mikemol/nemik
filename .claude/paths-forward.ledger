@@ -269,3 +269,4 @@
 2026-10-02T00:45:10Z  tick  W178  advanced  sweep-model  "fruit() virtual row + tests; class outweighs deep in el-openglo, luthen"  evidence=tests/test_fruit.py
 2026-10-02T01:14:12Z  tick  W178  advanced  unblock  "fruit row composed into nemik-rank; forest view split to W179 (crossings 214->310)"  evidence=tests/test_fruit.py
 2026-10-02T01:16:06Z  tick  W179  rejected  --  "merged fruit column made the forest worse (363 crossings); reverted, next: per-box diff"
+2026-10-02T01:32:10Z  tick  W179  advanced  --  "operator: crossings rise is the constraint's cost; budget re-based 235->340, view ships fruit order; W178/W179 done, W170 working"

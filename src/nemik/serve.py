@@ -207,7 +207,7 @@ def to_json(g: Graph, findings: dict) -> dict:
     weights, comp = load_weights(), load_composition()
     by_id = {n["id"]: n for n in nodes}
     for repo in sorted({n["repo"] for n in nodes if n["state"] == "ready"}):
-        for i, r in enumerate(rank(g, repo, weights, comp, fruit_row=False)):
+        for i, r in enumerate(rank(g, repo, weights, comp)):
             if n := by_id.get(f"{BASE}{repo}/{r['symbol']}"):
                 n["rank_pos"], n["band"] = i, r["band_name"]
     # nemik:W119: a total order on everything drawn. rdflib iterates in hash order, and Python salts
