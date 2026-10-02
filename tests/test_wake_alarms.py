@@ -43,3 +43,19 @@ def test_a_bad_alarm_is_reported_not_fatal(tmp_path) -> None:
     g.add((waypoint_uri("life", "W9"), NEMIK.alarm, Literal("not-a-trigger")))
     got = fired_alarms(g, datetime(2026, 10, 1, tzinfo=UTC), datetime(2026, 10, 2, tzinfo=UTC), {})
     assert any(a.get("error") for a in got) and any(a["at"] == "2026-10-01T20:00:00Z" for a in got)
+
+
+def test_alarms_nudge_delivers_each_firing_once(tmp_path, capsys) -> None:
+    """nemik:W167: --alarms --nudge prints a firing on the first run only, sharing the nudges state."""
+    from nemik.wake import main
+
+    g, state = _graph(tmp_path), tmp_path / "nudges.json"
+    state.write_text(json.dumps({"life": 1.0}))  # a repo nudge already recorded there
+    argv = ["--alarms", "--nudge", "--json", "--since", "2026-10-01T00:00:00+00:00",
+            "--until", "2026-10-20T00:00:00+00:00", "--nudges-state", str(state), "--liveness", str(tmp_path / "none")]
+    main(argv, g)
+    first = json.loads(capsys.readouterr().out)["alarms"]
+    main(argv, g)
+    second = json.loads(capsys.readouterr().out)["alarms"]
+    assert first and second == []
+    assert json.loads(state.read_text())["life"] == 1.0  # the repo nudge state survives

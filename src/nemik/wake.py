@@ -172,6 +172,18 @@ def due_nudges(rows: list[dict], seen: dict, now: datetime | None = None) -> lis
     return due
 
 
+def _read_seen(path: Path) -> dict:
+    try:
+        return json.loads(path.read_text())
+    except (OSError, ValueError):
+        return {}
+
+
+def _write_seen(path: Path, seen: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(seen, sort_keys=True))
+
+
 def alarm_key(a: dict) -> str:
     """nemik:W166: one firing's identity: (ref, RECURRENCE-ID, instant), in the nudges state's key
     space. Repo names (the state's other keys) never contain '|', so the two cannot collide."""
@@ -210,7 +222,8 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     ap.add_argument("--all", action="store_true", help="include awake workstreams")
     ap.add_argument("--json", action="store_true", help="machine-readable output")
     ap.add_argument("--nudge", action="store_true",
-                     help="print only rows due a nudge now (backoff/dedup via --nudges-state)")
+                     help="print only rows due a nudge now (backoff/dedup via --nudges-state); with --alarms, "
+                          "only firings not yet delivered")
     ap.add_argument("--nudges-state", type=Path, default=nudges_path())
     ap.add_argument("--alarms", action="store_true",
                     help="list alarms that fired on open waypoints in [--since, --until) (nemik:W149)")
@@ -229,6 +242,12 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         until = datetime.fromisoformat(args.until) if args.until else datetime.now(timezone.utc)
         since = datetime.fromisoformat(args.since) if args.since else until - timedelta(minutes=15)
         fired = fired_alarms(g, since.astimezone(timezone.utc), until.astimezone(timezone.utc), live)
+        if args.nudge:
+            # nemik:W167: alarms go out through the nudge path, so each firing is delivered once
+            # (W166's key) in the same state file the repo nudges use.
+            seen = _read_seen(args.nudges_state)
+            fired = undelivered(fired, seen)
+            _write_seen(args.nudges_state, seen)
         if args.json:
             print(json.dumps({"liveness": source, "since": since.isoformat(), "until": until.isoformat(),
                               "alarms": fired}, indent=2))
@@ -241,13 +260,9 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         return
     rows = [r for r in roster(g, live) if args.all or r["state"] != "awake"]
     if args.nudge:
-        try:
-            seen = json.loads(args.nudges_state.read_text())
-        except (OSError, ValueError):
-            seen = {}
+        seen = _read_seen(args.nudges_state)
         rows = due_nudges(rows, seen)
-        args.nudges_state.parent.mkdir(parents=True, exist_ok=True)
-        args.nudges_state.write_text(json.dumps(seen))
+        _write_seen(args.nudges_state, seen)
     if args.json:
         print(json.dumps({"liveness": source, "roster": rows, "operator": operator_row(g)}, indent=2))
         return
