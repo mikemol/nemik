@@ -217,3 +217,40 @@ def test_treemap_model(server) -> None:
     assert m["bad"] == [], m
     assert m["n"] > 0 and m["total"] == m["n"], m  # every open item is placed exactly once
     assert m["repos_in_one_root"] > 1, m  # not grouped by repo: a tree spans repos
+
+
+def test_treemap_view_draws(server, tmp_path) -> None:
+    """nemik:W180 step 2: the toggle draws tiles nested as the model says, with no page errors."""
+    out = Path(os.environ.get("TEST_UNDECLARED_OUTPUTS_DIR") or tmp_path)
+    with sync_api.sync_playwright() as p:
+        try:
+            exe = os.environ.get("NEMIK_CHROMIUM")
+            browser = p.chromium.launch(executable_path=os.path.abspath(exe) if exe else None)
+        except Exception as e:  # noqa: BLE001 - no browser installed here
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": 1700, "height": 1250}, color_scheme="dark")
+        errors: list[str] = []
+        page.on("pageerror", lambda e: errors.append(str(e)))
+        page.goto(server)
+        page.wait_for_function("() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0", timeout=60000)
+        page.check("#treemap")
+        page.wait_for_function("() => cy.nodes('.tile').length > 0", timeout=60000)
+        m = page.evaluate("""() => {
+          const tiles = cy.nodes('.tile'), bad = [];
+          cy.edges('.contained').forEach(e => {
+            const c = e.source().boundingBox({includeLabels: false}), q = e.target().boundingBox({includeLabels: false});
+            if (c.x1 < q.x1 - 2 || c.y1 < q.y1 - 2 || c.x2 > q.x2 + 2 || c.y2 > q.y2 + 2) bad.push(e.source().id());
+          });
+          const repos = new Set(tiles.map(n => n.data('repo')));
+          const bb = cy.elements(':visible').boundingBox();
+          return { tiles: tiles.length, contained: cy.edges('.contained').length, outside: bad.slice(0, 5),
+                   repo_boxes: cy.nodes('.repo').length, repos: repos.size,
+                   fit_zoom: Math.round(1000 * Math.min(cy.width() / (bb.w + 40), cy.height() / (bb.h + 40))) / 1000 };
+        }""")
+        page.evaluate("() => cy.fit(undefined, 20)")
+        page.screenshot(path=str(out / "treemap-dark.png"))
+        browser.close()
+    (out / "treemap-dark.json").write_text(json.dumps(m, indent=1))
+    assert errors == []
+    assert m["repo_boxes"] == 0 and m["repos"] > 1, m  # not grouped by repo
+    assert m["tiles"] > 0 and m["contained"] > 0 and m["outside"] == [], m

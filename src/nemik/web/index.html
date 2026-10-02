@@ -53,6 +53,7 @@ aside a { color: var(--ink); text-decoration: underline dotted var(--muted); }
   <label><input type="checkbox" id="showNoise"> show operator blocks that don't need you</label>
   <label><input type="checkbox" id="showCross"> show all cross-repo edges</label>
   <label title="Inside each repo: its goals left to right in nemik-rank order, each with the work beneath it"><input type="checkbox" id="forest"> rank forest</label>
+  <label title="One treemap across the fleet: each tile holds the work beneath it, area by load, rank order reading left to right; repo is the border colour"><input type="checkbox" id="treemap"> treemap</label>
   <span class="stat" id="stat"></span>
 </header>
 <main>
@@ -118,7 +119,8 @@ function draw() {
   const chip = e => `${e.target}@${byId.get(e.source).repo}`;
   waits.forEach(e => { if (e.target.startsWith("operator:")) e.chip = chip(e); });
   const actors = [...new Set(waits.filter(e => e.chip).map(e => e.chip))].sort();
-  const repos = [...new Set(data.nodes.filter(n => keep.has(n.id)).map(n => n.repo))];
+  const treemapOn = document.getElementById("treemap").checked;
+  const repos = treemapOn ? [] : [...new Set(data.nodes.filter(n => keep.has(n.id)).map(n => n.repo))];
   const els = [
     // A repo box counts the unclaimed blocks inside it: each one is that repo's move.
     // Its border reads liveness (asleep/idle/awake), from the same roster the Wake panel
@@ -129,13 +131,13 @@ function draw() {
     }),
     ...data.nodes.filter(n => keep.has(n.id)).map(n => {
       const e = n.effort || {}, total = (e.forecast || 0) + (e.interrupt || 0) + (e.unclassified || 0);
-      return { data: { ...n, parent: "repo:" + n.repo, label: n.state === "unclaimed" ? `? ${n.for}` : n.symbol,
+      return { data: { ...n, parent: treemapOn ? undefined : "repo:" + n.repo, label: n.state === "unclaimed" ? `? ${n.for}` : n.symbol,
         fill: color(n.state), border: total ? 1 + 6 * (e.interrupt || 0) / total : 1 } };
     }),
     ...actors.map(a => {
       const [cat, r] = a.slice(9).split("@");
       const n = (data.operator || []).filter(x => x.category === cat && x.ref.split(":")[0] === r).length;
-      return { data: { id: a, parent: "repo:" + r, label: `${LANE[cat]} (${n})`, lane: cat }, classes: "actor operator " + cat };
+      return { data: { id: a, parent: treemapOn ? undefined : "repo:" + r, label: `${LANE[cat]} (${n})`, lane: cat }, classes: "actor operator " + cat };
     }),
     ...data.edges.filter(e => e.kind === "enables" && keep.has(e.source) && keep.has(e.target))
       .map((e, i) => ({ data: { id: "e" + i, source: e.source, target: e.target }, classes: e.satisfied ? "satisfied" : "" })),
@@ -179,12 +181,17 @@ function draw() {
       { selector: ".operator.answered, .operator.condition", style: { "background-color": css("--done") } },
       { selector: ".operator.unstated", style: { "background-color": css("--interrupt") } },
       { selector: "edge.rank", style: { display: "none" } },
+      // nemik:W180: a tile is a rectangle of its computed size, label top-left, repo as border colour.
+      { selector: "node.tile", style: { shape: "rectangle", width: "data(tw)", height: "data(th)", padding: 0,
+        "text-valign": "top", "text-halign": "center", "font-size": 9, "border-width": 2,
+        "border-color": "data(repoColor)", "background-opacity": 0.85 } },
+      { selector: "edge.contained", style: { display: "none" } },
       { selector: "edge.cross", style: { opacity: 0.08 } },
       { selector: "edge.cross.lit", style: { opacity: 1, "z-index": 10 } },
       { selector: ":selected", style: { "overlay-opacity": 0.15 } },
     ],
   });
-  tile();
+  if (treemapOn) treemap(); else tile();
   if (view) { cy.zoom(view.zoom); cy.pan(view.pan); }
   // nemik:W88: an edge between two boxes is faint until one of its ends is hovered or selected,
   // or "show all cross-repo edges" is on. Inside a box, edges stay as they are.
@@ -265,27 +272,68 @@ function treeOf(nodes, edges) {
   for (const id of open) w(id);
   return { parent, kids, weight, roots: [...open].filter(id => !parent.get(id)) };
 }
-// orderedTreemap: slice-and-dice in the given order (rank = reading order), alternating direction
-// by depth, each node's area proportional to its weight, its own cell a header strip of `pad`.
+// orderedTreemap: an ordered *strip* treemap (Bederson et al. 2002): items in rank order fill
+// horizontal strips, a strip closing when adding the next item would worsen its worst aspect ratio.
+// Order reads left to right, top to bottom; area is proportional to weight. Plain slice-and-dice
+// (step 1) kept order too, but 272 fixture roots in one row came out as hair-thin slivers.
 function orderedTreemap(tree, order, rect, pad = 4) {
   const out = new Map(), rank = new Map(order.map((id, i) => [id, i]));
   const byRank = (a, b) => (rank.get(a) ?? Infinity) - (rank.get(b) ?? Infinity) || (a < b ? -1 : 1);
-  const lay = (ids, r, horiz, depth) => {
-    const total = ids.reduce((a, id) => a + tree.weight.get(id), 0);
-    let at = horiz ? r.x : r.y;
-    for (const id of ids.slice().sort(byRank)) {
-      const f = tree.weight.get(id) / total, span = (horiz ? r.w : r.h) * f;
-      const cell = horiz ? { x: at, y: r.y, w: span, h: r.h } : { x: r.x, y: at, w: r.w, h: span };
-      at += span;
-      out.set(id, { ...cell, depth });
-      // The header and margins shrink with a small cell, so children never leave it.
-      const px = Math.min(pad, cell.w / 4), top = Math.min(pad * 3, cell.h / 4), py = Math.min(pad, cell.h / 4);
-      const inner = { x: cell.x + px, y: cell.y + top, w: cell.w - 2 * px, h: cell.h - top - py };
-      if (tree.kids.get(id).length) lay(tree.kids.get(id), inner, !horiz, depth + 1);
+  const lay = (ids, r, depth) => {
+    if (r.w <= 0 || r.h <= 0) { for (const id of ids) out.set(id, { x: r.x, y: r.y, w: 0, h: 0, depth }); return; }
+    const items = ids.slice().sort(byRank), total = items.reduce((a, id) => a + tree.weight.get(id), 0);
+    const scale = (r.w * r.h) / total;  // area per unit weight
+    const worst = strip => { const a = strip.reduce((s, id) => s + tree.weight.get(id) * scale, 0), h = a / r.w;
+      return Math.max(...strip.map(id => { const w = tree.weight.get(id) * scale / h; return Math.max(w / h, h / w); })); };
+    const strips = [];
+    let cur = [];
+    for (const id of items) {
+      if (cur.length && worst([...cur, id]) > worst(cur)) { strips.push(cur); cur = []; }
+      cur.push(id);
+    }
+    if (cur.length) strips.push(cur);
+    let y = r.y;
+    for (const strip of strips) {
+      const h = strip.reduce((s, id) => s + tree.weight.get(id) * scale, 0) / r.w;
+      let x = r.x;
+      for (const id of strip) {
+        const w = tree.weight.get(id) * scale / h, cell = { x, y, w, h };
+        x += w;
+        out.set(id, { ...cell, depth });
+        // The header and margins shrink with a small cell, so children never leave it.
+        const px = Math.min(pad, cell.w / 4), top = Math.min(pad * 3, cell.h / 4), py = Math.min(pad, cell.h / 4);
+        if (tree.kids.get(id).length) lay(tree.kids.get(id), { x: cell.x + px, y: cell.y + top, w: cell.w - 2 * px, h: cell.h - top - py }, depth + 1);
+      }
+      y += h;
     }
   };
-  lay(tree.roots, rect, true, 0);
+  lay(tree.roots, rect, 0);
   return out;
+}
+
+// nemik:W180 step 2: draw the treemap. Positions and sizes come from orderedTreemap; an enables
+// edge to the tile's own parent is implied by containment and hidden; every other edge is drawn.
+// Operator chips and placeholders sit in a row below the map.
+function repoHue(r) { let h = 0; for (const c of r) h = (h * 31 + c.charCodeAt(0)) % 360; return `hsl(${h}, 65%, 55%)`; }
+function treemap() {
+  const ns = cy.nodes("[symbol]").filter(n => n.data("state") !== "unclaimed");
+  const t = treeOf(ns.map(n => n.data()), cy.edges().map(e => ({ kind: e.hasClass("waits") ? "waits" : "enables",
+    source: e.source().id(), target: e.target().id() })));
+  const order = ns.filter(n => n.data("rank_pos") !== undefined).sort((a, b) => a.data("rank_pos") - b.data("rank_pos")).map(n => n.id());
+  // Room for one label-sized leaf (about 50x50) per unit of weight, in the pane's landscape shape.
+  const total = t.roots.reduce((a, r) => a + t.weight.get(r), 0), H = Math.sqrt(total * 2500 * 0.62), W = H / 0.62;
+  const R = orderedTreemap(t, order, { x: 0, y: 0, w: W, h: H }, 6);
+  cy.batch(() => {
+    ns.forEach(n => {
+      const r = R.get(n.id());
+      if (!r) { n.style("display", "none"); return; }
+      n.data({ tw: Math.max(1, r.w), th: Math.max(1, r.h), repoColor: repoHue(n.data("repo")) });
+      n.addClass("tile").style("z-index", r.depth).position({ x: r.x + r.w / 2, y: r.y + r.h / 2 });
+    });
+    cy.edges().forEach(e => { if (!e.hasClass("waits") && t.parent.get(e.source().id()) === e.target().id()) e.addClass("contained"); });
+    let x = 0;
+    cy.nodes().not(ns).not(".repo").forEach(n => { n.position({ x: x + n.outerWidth() / 2, y: H + 40 }); x += n.outerWidth() + 12; });
+  });
 }
 
 // nemik:W135 (operator 2026-09-28: "a multi-headed overlapping dag/forest view ordered by
@@ -750,6 +798,11 @@ document.getElementById("showDone").onchange = draw;
 document.getElementById("showNoise").onchange = draw;
 // The forest toggle is a per-viewer preference; storage can be missing or throw (private window).
 try { document.getElementById("forest").checked = localStorage.getItem("nemik.forest") === "1"; } catch (e) { /* default off */ }
+try { document.getElementById("treemap").checked = localStorage.getItem("nemik.treemap") === "1"; } catch (e) { /* default off */ }
+document.getElementById("treemap").onchange = () => {
+  try { localStorage.setItem("nemik.treemap", document.getElementById("treemap").checked ? "1" : "0"); } catch (e) { /* not remembered */ }
+  draw();
+};
 document.getElementById("forest").onchange = () => {
   try { localStorage.setItem("nemik.forest", document.getElementById("forest").checked ? "1" : "0"); } catch (e) { /* not remembered */ }
   draw();
