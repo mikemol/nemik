@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 180,
+  "counter": 181,
   "waypoints": [
     {
       "symbol": "W1",
@@ -3455,6 +3455,22 @@
       "last_worked": "2026-10-02T03:58:58Z",
       "ticks_blocked": 0,
       "weight": 7
+    },
+    {
+      "symbol": "W181",
+      "title": "Withheld leak fix: a goals entry whose frontier holds a withheld leaf is dropped whole (its outside = the leaf's blocked_on text)",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-02: 2026-10-02: goals' outside = frontier leaves' blocked_on text (+ cross-repo refs), per rank.frontier; withheld.apply now drops a goals entry whose goal, any frontier leaf, or on_deck is withheld. Live: goals/aeternum.json entries W75/W76/W77 all have frontier [aeternum:W74]. Audit of other derived copies: unclaimed placeholders (dropped via 'for'), operator ask/inbound blocked_on (dropped by ref), roster titles (replaced), findings (fixed shape messages + refs) -- no other copy of a withheld item's text. test_withheld goals case; bazel 28/28.",
+      "issued_at": "2026-10-02T05:19:01Z",
+      "minted_during": "tick",
+      "caused_by": "luthen-observability-6b",
+      "last_worked": "2026-10-02T05:19:11Z",
+      "ticks_blocked": 0
     }
   ],
   "residue": [

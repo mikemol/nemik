@@ -283,3 +283,4 @@
 2026-10-02T04:14:49Z  tick  W166  advanced  unblock  "alarm dedupe key + undelivered(); W167 working"  evidence=tests/test_alarm_delivery.py
 2026-10-02T04:44:50Z  tick  W167  advanced  unblock  "--alarms --nudge delivers each firing once; W168 working"  evidence=tests/test_wake_alarms.py
 2026-10-02T05:15:32Z  tick  W168  advanced  unblock  "send-ready line for live owners; W150 alarm delivery done; W157 working"  evidence=tests/test_wake_alarms.py
+2026-10-02T05:19:11Z  interrupt  W181  advanced  --  "withheld leaf's text leaked through goals outside; entry now dropped whole"  evidence=tests/test_withheld.py

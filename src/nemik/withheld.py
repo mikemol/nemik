@@ -73,5 +73,10 @@ def apply(docs: dict[str, object], refs: frozenset[str]) -> dict[str, object]:
     for name, doc in docs.items():
         if name.startswith("goals/"):
             repo = name.removeprefix("goals/").removesuffix(".json")
-            out[name] = [r for r in doc if f"{repo}:{r['goal']}" not in refs]
+            # A goals entry carries its frontier leaves' blocked_on text in `outside` (nemik.rank
+            # .frontier), so it holds withheld content whenever a leaf is withheld, not only when
+            # the goal is (luthen-observability found aeternum:W74's text under W75-W77, 2026-10-02).
+            # The entry is dropped whole, never scrubbed.
+            out[name] = [r for r in doc if f"{repo}:{r['goal']}" not in refs
+                         and not refs & set(r["frontier"]) and r.get("on_deck") not in refs]
     return out

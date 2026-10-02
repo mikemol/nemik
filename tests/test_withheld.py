@@ -56,3 +56,14 @@ def test_withheld_item_is_dropped_whole_and_pointers_become_stubs(tmp_path, docs
     assert all(a["ref"] != ref for a in og["operator"]) and all(b["blocked"] != ref for b in og["inbound"])
     for name, doc in out.items():
         assert unmanifested(name, doc) == [], name
+
+
+def test_goals_entry_is_dropped_when_a_frontier_leaf_is_withheld(tmp_path, docs) -> None:
+    """luthen-observability, 2026-10-02: `outside` is the leaves' blocked_on text, so a withheld
+    leaf's text rode out under the goals it feeds. The whole entry goes."""
+    name, entry = next((n, e) for n, d in docs.items() if n.startswith("goals/") for e in d
+                       if e["frontier"] and e["frontier"][0] != f"{n[6:-5]}:{e['goal']}")
+    leaf = entry["frontier"][0]
+    out = apply(docs, load(_write(tmp_path, {"version": 1, "items": [{"ref": leaf, "field": "blocked_on", "rule": "address-literal"}]})))
+    assert all(leaf not in e["frontier"] for e in out[name])
+    assert any(e["goal"] == entry["goal"] for e in docs[name])  # it was there before
