@@ -165,3 +165,17 @@ def test_apply_writes_letters_to_waiting_repos(tmp_path, monkeypatch, capsys) ->
     (la,), (lb,) = list((tmp_path / "a" / "inbox").iterdir()), list((tmp_path / "b" / "inbox").iterdir())
     assert "W2" in la.read_text() and "a:W1" in lb.read_text() and "W5" in lb.read_text()
     assert not list((tmp_path / "c" / "inbox").iterdir())
+
+
+def test_the_skills_weather_examples_are_valid_witnesses(monkeypatch) -> None:
+    """nemik:W173: the witness examples SKILL.md teaches evaluate against the observers' fact shapes
+    (a first draft compared input.alert[...] to a string, missing `.state`)."""
+    import re
+    from pathlib import Path
+
+    text = (Path(__file__).parents[1] / "skills" / "nemik" / "SKILL.md").read_text()
+    section = text.split("## Waiting on an outage (weather)")[1].split("\n## ")[0]
+    examples = [q.replace('\\\\"', '\\"') for q in re.findall(r"`(input\.[^`]+)`", section) if "==" in q]
+    assert examples
+    for q in examples:
+        assert ".state" in q or ".values" in q, q

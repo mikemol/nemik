@@ -303,3 +303,4 @@
 2026-10-02T12:50:30Z  tick  W124  advanced  collapse  "image gate runs browser tests on pinned chromium (162 passed, 0 skipped); W155/W156 dropped (egress premise disproven), W106 done; W173 working"  evidence=Containerfile
 2026-10-02T12:55:48Z  interrupt  W186  done  --  "one cite format, every cite a link"  evidence=tests/test_layout.py
 2026-10-02T13:04:49Z  interrupt  W187  done  --  "treemap leaves show repo on a second line, fitted"  evidence=tests/test_layout.py
+2026-10-02T13:16:26Z  tick  W173  advanced  unblock  "weather convention in the skill; examples checked against fact shapes; W174 working"  evidence=skills/nemik/SKILL.md

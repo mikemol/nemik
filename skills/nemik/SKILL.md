@@ -103,6 +103,25 @@ listed. If it appears under *unstated*, or not at all, the chain is broken somew
 The unresolved `enables` (for example a wrong repo prefix) is a `VIOLATES`: it pages the operator
 through luthen. Everything else above is a Warning.
 
+## Waiting on an outage (weather)
+
+When your work is blocked by something being *down* (a registry, an API, a host, a CI runner), not
+by another session's work, that is **weather**, and it gets one waypoint of its own (nemik:W173):
+
+- **The blocked repo mints it**, not the owner of the broken thing: you are the one who needs to
+  know when it is back. One outage is one waypoint, `--add "weather: <what is down>"`, and your real
+  work blocks on it by citation (`blocked_on: ["<this-repo>:W<n>"]`, blocked_kind `agent`).
+- **It carries a witness**, a one-line Rego query over a probe fact (`$PF --update W<n> --witness
+  '<query>'`), e.g. `input.alert["RegistryDown"].state == "inactive"` or
+  `input.promql["up{job=\"forgejo\"}"].values[0] == 1`. Facts come only from nemik's fixed observers
+  (`input.pid`, `file`, `git_ref`, `alert`, `promql`, `now`); see `nemik-witnesses`.
+- **It is monotone**: once the witness holds, `nemik-witnesses --apply` marks it done with the facts
+  as evidence and wakes whoever waits on it. It is never reopened. If the thing breaks again, that
+  is a new outage and a new waypoint.
+- A witnessed waypoint is never worked by a tick (mtools skips it); nobody "fixes" weather from
+  inside the waiting repo. If the outage needs a fix, that fix is the owner's waypoint, and your
+  weather item may cite it in evidence.
+
 ## Talking to other workstreams
 
 - **Letters** go in the other repo's `inbox/` as `YYYY-MM-DD-<from>-<topic>.md`, first line
