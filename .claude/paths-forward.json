@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 118
+      "ticks_blocked": 119
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 73,
+      "ticks_blocked": 74,
       "weight": 1
     },
     {
@@ -1397,7 +1397,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-01T19:50:19Z",
-      "ticks_blocked": 55,
+      "ticks_blocked": 56,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -2613,7 +2613,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 63
+      "ticks_blocked": 64
     },
     {
       "symbol": "W138",
@@ -2831,7 +2831,7 @@
       "minted_during": "tick",
       "caused_by": "life:W28",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "weight": 3
     },
     {
@@ -3114,7 +3114,7 @@
     {
       "symbol": "W165",
       "title": "Tasks: complete a repo's parent when it has no open asks",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W148"
       ],
@@ -3126,7 +3126,7 @@
       "issued_at": "2026-10-01T19:51:39Z",
       "minted_during": "interrupt",
       "caused_by": "W148",
-      "last_worked": "2026-10-01T23:45:16Z",
+      "last_worked": "2026-10-02T17:28:25Z",
       "ticks_blocked": 0,
       "weight": 1
     },
@@ -3421,7 +3421,7 @@
       "minted_during": "tick",
       "caused_by": "W158",
       "last_worked": "2026-10-02T06:44:50Z",
-      "ticks_blocked": 29
+      "ticks_blocked": 30
     },
     {
       "symbol": "W183",
@@ -3509,19 +3509,21 @@
     {
       "symbol": "W188",
       "title": "Tasks read-back from Google itself (KGAPI fetch with the resource's account), so a write is confirmed by a fetch, not the helper's exit or Akonadi's cache",
-      "status": "working",
+      "status": "blocked",
       "enables": [
         "W148"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "operator: decide how nemik reads Google Tasks back: (a) the helper borrows the Google resource's token from KWallet in-process for a read-only GET (never written, printed or exported), or (b) your Google Tasks view stays the read-back, or (c) I first try making Akonadi drop its cached copy and refetch, and come back if that fails"
+      ],
+      "blocked_kind": "human",
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-10-02: 2026-10-02: an Akonadi resource synchronize is NOT a Google read: after try 2, a forced synchronize still showed life:W12 parent=nemik:repo:life in Akonadi while Google's list (operator screenshot) was flat. Today's HAVE (parent=ZXot..., the Google id we wrote) is likewise unconfirmable from Akonadi. A true read-back needs Google's API with the account's token, which so far stays inside Akonadi/KWallet by operator rule: the operator's call.",
       "issued_at": "2026-10-02T16:28:13Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-02T16:54:32Z",
+      "last_worked": "2026-10-02T17:28:25Z",
       "ticks_blocked": 0,
       "weight": 2
     }

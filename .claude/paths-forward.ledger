@@ -310,3 +310,4 @@
 2026-10-02T15:16:43Z  tick  W141  advanced  sweep  "fixture regenerated, budgets re-based on graph size"  evidence=tests/test_layout.py
 2026-10-02T16:28:13Z  interrupt  W162  advanced  --  "parent sent as Google task id (remoteId); unconfirmed until read from Google; W188 minted"  evidence=tools/akonadi-tasks/main.cpp
 2026-10-02T16:54:32Z  interrupt  W162  done  --  "subtask link confirmed on Google via operator screenshot (indent measured); W188 working"
+2026-10-02T17:28:25Z  tick  W188  blocked  --  "Akonadi sync is no Google read (negative control from try 2); credential use is the operator's call; W165 working"
