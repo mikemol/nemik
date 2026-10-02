@@ -96,6 +96,7 @@ listed. If it appears under *unstated*, or not at all, the chain is broken somew
 | `UnresolvedBlockerShape` | blocked_on names no repo, waypoint or operator ask nemik can resolve | rewrite it as one of those |
 | `LandedBlockerShape` | a blocker is already done or dropped; if all are, the item is ready | trim it (`$PF --bump-blocked` prunes local ones) |
 | `MalformedBlockerShape` | a symbol with prose attached (`W8 (both ...)`) | symbol alone; prose goes in evidence |
+| `ActiveCardShape` | no `working` card while items are ready, or more than one (operator 2026-10-01: one active card per repo unless everything open is blocked) | mark the item you are doing `$PF --update <W> --status working`; return extras to ready |
 | `AdoptionShape` | the repo runs someone else's `mikemol-paths-forward` | `uv add` a sha-pinned copy (mtools INSTALL.md) |
 
 The unresolved `enables` (for example a wrong repo prefix) is a `VIOLATES`: it pages the operator

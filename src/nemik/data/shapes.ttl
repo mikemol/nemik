@@ -121,3 +121,11 @@ nemik:AdoptionShape a sh:NodeShape ;
     sh:property [ sh:path nemik:pathsforwardAdoption ; sh:not [ sh:in ( "missing" "no-pyproject" ) ] ;
                   sh:severity sh:Warning ;
                   sh:message "the queue's writer is not this repo's own dependency: uv add a sha-pinned mikemol-pathsforward (mtools INSTALL.md) and run .venv/bin/mikemol-paths-forward" ] .
+
+# One active card per repo unless everything open is blocked (nemik:W177, operator 2026-10-01).
+nemik:ActiveCardShape a sh:NodeShape ;
+    sh:targetSubjectsOf nemik:noActiveCard, nemik:extraActiveCards ;
+    sh:property [ sh:path nemik:noActiveCard ; sh:maxCount 0 ; sh:severity sh:Warning ;
+                  sh:message "no working card while items are ready: mark the one you are doing with --update <W> --status working" ] ;
+    sh:property [ sh:path nemik:extraActiveCards ; sh:maxCount 0 ; sh:severity sh:Warning ;
+                  sh:message "more than one working card: keep one, return the others to ready" ] .

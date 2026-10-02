@@ -264,3 +264,4 @@
 2026-10-01T20:03:44Z  tick  W154  advanced  unblock  "chained W113/W148/W150/W153 children so one leaf is citable (fixes life/luthen umbrella warnings my atomization caused); W154 marked working; minted W177 one-active-card check"  by=agent-nemik-bb
 2026-10-01T20:49:20Z  tick  --  dropped  collapse  "W176 per-repo order override dropped: el-openglo adopted nemik's ranking"  by=agent-nemik-bb
 2026-10-01T23:47:24Z  tick  W154  advanced  unblock  "field manifest + unmanifested() + test; statuses fixed on chained umbrellas; W177 now the working card"  evidence=src/nemik/manifest.py,tests/test_manifest.py
+2026-10-02T00:09:02Z  tick  W177  advanced  unblock  "ActiveCardShape: one working card per repo; 7 sleeping repos flagged, all live repos clean; W169 now working"  evidence=src/nemik/blocks.py,tests/test_active_card.py

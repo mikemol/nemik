@@ -91,6 +91,18 @@ def annotate(g: Graph) -> None:
         if len(kids) >= 2:
             g.add((node, NEMIK.umbrellaBlockOn, target))
 
+    # nemik:W177 (operator 2026-10-01): each repo keeps exactly one `working` card unless every open
+    # item is blocked. None while something is ready, or several, is the defect; the workstream
+    # node carries the count so the finding reads "--" like the adoption one.
+    for ws in set(g.objects(None, NEMIK.workstream)):
+        mine = list(g.subjects(NEMIK.workstream, ws))
+        working = [n for n in mine if (n, OSLC_CM.state, NEMIK.Working) in g]
+        ready = [n for n in mine if (n, OSLC_CM.state, NEMIK.Ready) in g]
+        if not working and ready:
+            g.add((ws, NEMIK.noActiveCard, Literal(len(ready))))
+        elif len(working) > 1:
+            g.add((ws, NEMIK.extraActiveCards, Literal(len(working))))
+
     # A block on a waypoint that has already landed (done, or dropped to residue) is stale: the
     # waiter should have been lifted to ready, or its blocked_on trimmed (nemik:W110, paperkit
     # found 8 such in its own queue, some a day old). All of them landed means mis-stated as blocked.
