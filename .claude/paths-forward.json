@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 94
+      "ticks_blocked": 95
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 49,
+      "ticks_blocked": 50,
       "weight": 1
     },
     {
@@ -1360,7 +1360,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 30,
+      "ticks_blocked": 31,
       "weight": 1
     },
     {
@@ -1401,7 +1401,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-01T19:50:19Z",
-      "ticks_blocked": 31,
+      "ticks_blocked": 32,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1991,7 +1991,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 31,
+      "ticks_blocked": 32,
       "weight": 0
     },
     {
@@ -2132,7 +2132,7 @@
       "minted_during": "tick",
       "caused_by": "life",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "weight": 3
     },
     {
@@ -2457,7 +2457,7 @@
       "minted_during": "tick",
       "caused_by": "life:W23",
       "last_worked": "2026-10-01T19:49:18Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "weight": 3
     },
     {
@@ -2626,7 +2626,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 39
+      "ticks_blocked": 40
     },
     {
       "symbol": "W138",
@@ -2847,7 +2847,7 @@
       "minted_during": "tick",
       "caused_by": "life:W28",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 30,
+      "ticks_blocked": 31,
       "weight": 3
     },
     {
@@ -3118,12 +3118,12 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Feed one parent VTODO (UID nemik:repo:life, summary 'life (n)') plus life:W12 with RELATED-TO;RELTYPE=PARENT:nemik:repo:life; run nemik-tasks --list nemik --only nemik:repo:life --only life:W12 --apply; read back whether Google shows W12 under the parent; record either way",
-      "evidence": "2026-10-02: 2026-10-02 step 1: helper --only REF (repeatable) syncs only those refs and never COMPLETEs outside them; nemik-tasks --only passes through. Live plan-only: '--only life:W12' -> LIST nemik (1 asks in the feed), 1 planned change, nothing else touched. Helper rebuilt via cmake. bazel green.",
+      "next_bounded_step": "Read back on Google's side: operator glance at Google Tasks 'nemik' (is 'Snorkel…'/life:W12 nested under 'life (1)'?), or a fresh Akonadi item fetch after the parent's remoteId lands; then W163",
+      "evidence": "2026-10-02: 2026-10-02 step 1: helper --only REF (repeatable) syncs only those refs and never COMPLETEs outside them; nemik-tasks --only passes through. Live plan-only: '--only life:W12' -> LIST nemik (1 asks in the feed), 1 planned change, nothing else touched. Helper rebuilt via cmake. bazel green. | 2026-10-02: 2026-10-02 step 2 (live, one task): helper UPDATE now carries RELATED-TO;RELTYPE=PARENT (re-parent in place); HAVE lines report a ref's parent. Fed parent VTODO nemik:repo:life ('life (1)') + life:W12 with RELATED-TO PARENT, --only both, --apply: UPDATE life:W12, CREATE repo:life, APPLIED (0 failed). Akonadi then holds life:W12 parent=nemik:repo:life, unchanged after a forced resource synchronize (5 reads over 90s). NOT yet proven on Google's side: Akonadi may serve its cache, and the child was updated before the parent was created (the resource needs the parent's remote id). Feed file deleted.",
       "issued_at": "2026-10-01T19:51:38Z",
       "minted_during": "interrupt",
       "caused_by": "W148",
-      "last_worked": "2026-10-02T08:15:34Z",
+      "last_worked": "2026-10-02T08:48:06Z",
       "ticks_blocked": 0,
       "weight": 5
     },
@@ -3185,7 +3185,7 @@
       "minted_during": "interrupt",
       "caused_by": "W148",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 30,
+      "ticks_blocked": 31,
       "weight": 3
     },
     {
@@ -3479,7 +3479,7 @@
       "minted_during": "tick",
       "caused_by": "W158",
       "last_worked": "2026-10-02T06:44:50Z",
-      "ticks_blocked": 5
+      "ticks_blocked": 6
     },
     {
       "symbol": "W183",

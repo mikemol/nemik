@@ -154,6 +154,10 @@ int main(int argc, char **argv) {
         if (!it.hasPayload<Todo::Ptr>()) continue;
         const QString ref = refOf(it.payload<Todo::Ptr>());
         if (!ref.isEmpty()) mine.insert(ref, it);
+        // nemik:W162: with --only, report what the list holds for those refs, parent included, so a
+        // mapping can be read back after the resource syncs.
+        if (only.contains(ref))
+            out(QStringLiteral("HAVE %1 parent=%2").arg(ref, it.payload<Todo::Ptr>()->relatedTo(KCalendarCore::Incidence::RelTypeParent)));
     }
 
     int failed = 0;
@@ -175,8 +179,11 @@ int main(int argc, char **argv) {
         if (have->isCompleted()) { out(QStringLiteral("DONE-CLAIM ") + f.key()); continue; }
         // nemik:W134: start and due times (mtools:W300) sync too, so a moved date moves the task.
         if (have->summary() == want->summary() && have->description() == want->description()
-            && have->dtStart() == want->dtStart() && have->dtDue() == want->dtDue())
+            && have->dtStart() == want->dtStart() && have->dtDue() == want->dtDue()
+            && have->relatedTo(KCalendarCore::Incidence::RelTypeParent) == want->relatedTo(KCalendarCore::Incidence::RelTypeParent))
             continue;
+        // nemik:W148/W162: the parent (RELATED-TO;RELTYPE=PARENT) moves too, re-parenting in place.
+        have->setRelatedTo(want->relatedTo(KCalendarCore::Incidence::RelTypeParent), KCalendarCore::Incidence::RelTypeParent);
         have->setSummary(want->summary());
         have->setDescription(want->description());
         have->setDtStart(want->dtStart());
