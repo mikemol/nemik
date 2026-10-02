@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 187,
+  "counter": 188,
   "waypoints": [
     {
       "symbol": "W1",
@@ -3064,16 +3064,16 @@
       ],
       "touches": [],
       "blocked_on": [
-        "operator: act glance at Google Tasks list 'nemik': is life:W12 indented under 'life (1)'? (yes = parent mapping works; no = parents first, children second pass)"
+        "operator: act refresh Google Tasks 'nemik': is the SNHU task (life:W12) now indented under 'life (1)'?"
       ],
       "blocked_kind": "human",
       "next_bounded_step": "Read back on Google's side: operator glance at Google Tasks 'nemik' (is 'Snorkel…'/life:W12 nested under 'life (1)'?), or a fresh Akonadi item fetch after the parent's remoteId lands; then W163",
-      "evidence": "2026-10-02: 2026-10-02 step 1: helper --only REF (repeatable) syncs only those refs and never COMPLETEs outside them; nemik-tasks --only passes through. Live plan-only: '--only life:W12' -> LIST nemik (1 asks in the feed), 1 planned change, nothing else touched. Helper rebuilt via cmake. bazel green. | 2026-10-02: 2026-10-02 step 2 (live, one task): helper UPDATE now carries RELATED-TO;RELTYPE=PARENT (re-parent in place); HAVE lines report a ref's parent. Fed parent VTODO nemik:repo:life ('life (1)') + life:W12 with RELATED-TO PARENT, --only both, --apply: UPDATE life:W12, CREATE repo:life, APPLIED (0 failed). Akonadi then holds life:W12 parent=nemik:repo:life, unchanged after a forced resource synchronize (5 reads over 90s). NOT yet proven on Google's side: Akonadi may serve its cache, and the child was updated before the parent was created (the resource needs the parent's remote id). Feed file deleted.",
+      "evidence": "2026-10-02: 2026-10-02 step 1: helper --only REF (repeatable) syncs only those refs and never COMPLETEs outside them; nemik-tasks --only passes through. Live plan-only: '--only life:W12' -> LIST nemik (1 asks in the feed), 1 planned change, nothing else touched. Helper rebuilt via cmake. bazel green. | 2026-10-02: 2026-10-02 step 2 (live, one task): helper UPDATE now carries RELATED-TO;RELTYPE=PARENT (re-parent in place); HAVE lines report a ref's parent. Fed parent VTODO nemik:repo:life ('life (1)') + life:W12 with RELATED-TO PARENT, --only both, --apply: UPDATE life:W12, CREATE repo:life, APPLIED (0 failed). Akonadi then holds life:W12 parent=nemik:repo:life, unchanged after a forced resource synchronize (5 reads over 90s). NOT yet proven on Google's side: Akonadi may serve its cache, and the child was updated before the parent was created (the resource needs the parent's remote id). Feed file deleted. | 2026-10-02: 2026-10-02 operator read-back (phone screenshot): 'life (1)' and life:W12 are separate top-level tasks in Google's nemik list. Akonadi's parent link did not reach Google: the child was updated before the parent existed remotely. Next: second pass now the parent exists. | 2026-10-02: 2026-10-02 try 3: kdepim-runtime taskhandler.cpp itemChanged passes relatedTo(RelTypeParent) to TaskMoveJob as the new parent's Google task id; we had sent 'nemik:repo:life', which Google cannot resolve. Helper now translates the feed's parent UID to the parent item's remoteId (keyed by nemik-ref, since Google's resource does not keep our UID). Ran: life:W12 UPDATE with parent ZXotWkFsbGUwSnBzMjFyQw (life (1)'s remote id). SENT, UNCONFIRMED: the helper's HAVE line reads Akonadi's cache, not Google (operator 2026-10-02: read your writes). Google-side read-back minted as W188.",
       "issued_at": "2026-10-01T19:51:38Z",
       "minted_during": "interrupt",
       "caused_by": "W148",
-      "last_worked": "2026-10-02T09:13:53Z",
-      "ticks_blocked": 21,
+      "last_worked": "2026-10-02T16:28:13Z",
+      "ticks_blocked": 0,
       "weight": 5
     },
     {
@@ -3509,6 +3509,24 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-02T13:04:49Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W188",
+      "title": "Tasks read-back from Google itself (KGAPI fetch with the resource's account), so a write is confirmed by a fetch, not the helper's exit or Akonadi's cache",
+      "status": "ready",
+      "enables": [
+        "W148"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-02T16:28:13Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": null,
       "ticks_blocked": 0
     }
   ],

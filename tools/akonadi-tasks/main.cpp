@@ -157,7 +157,21 @@ int main(int argc, char **argv) {
         // nemik:W162: with --only, report what the list holds for those refs, parent included, so a
         // mapping can be read back after the resource syncs.
         if (only.contains(ref))
-            out(QStringLiteral("HAVE %1 parent=%2").arg(ref, it.payload<Todo::Ptr>()->relatedTo(KCalendarCore::Incidence::RelTypeParent)));
+            out(QStringLiteral("HAVE %1 remote=%2 parent=%3").arg(ref, it.remoteId(), it.payload<Todo::Ptr>()->relatedTo(KCalendarCore::Incidence::RelTypeParent)));
+    }
+
+    // nemik:W162: Google's resource passes relatedTo(RelTypeParent) straight to TaskMoveJob as the
+    // new parent's *Google task id* (kdepim-runtime taskhandler.cpp itemChanged). The feed names the
+    // parent by its nemik UID, so translate it to the parent item's remoteId, which only exists once
+    // the parent has been created on Google. Until then the child stays unparented this run.
+    QHash<QString, QString> remoteOf;  // nemik UID -> Akonadi remoteId (the Google task id)
+    // Keyed by ref: Google's resource does not keep our UID on the item, only the nemik-ref line.
+    for (auto m = mine.cbegin(); m != mine.cend(); ++m) remoteOf.insert(QStringLiteral("nemik:") + m.key(), m.value().remoteId());
+    for (const Todo::Ptr &t : feed) {
+        const QString p = t->relatedTo(KCalendarCore::Incidence::RelTypeParent);
+        if (p.isEmpty()) continue;
+        t->setRelatedTo(remoteOf.value(p), KCalendarCore::Incidence::RelTypeParent);
+        if (!remoteOf.contains(p)) out(QStringLiteral("DEFER-PARENT ") + refOf(t) + QStringLiteral(" (parent not on Google yet; rerun)"));
     }
 
     int failed = 0;
