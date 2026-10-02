@@ -1,7 +1,29 @@
 {
- "counter": 87,
+ "counter": 136,
  "project_root": "/fixture/linux-sources",
- "residue": [],
+ "residue": [
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W111",
+   "title": "linux-sources W111"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W125",
+   "title": "linux-sources W125"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W134",
+   "title": "linux-sources W134"
+  }
+ ],
  "version": 1,
  "waypoints": [
   {
@@ -199,13 +221,10 @@
    "title": "linux-sources W21"
   },
   {
-   "blocked_kind": "agent",
-   "blocked_on": [
-    "W45",
-    "W61"
-   ],
+   "blocked_kind": null,
+   "blocked_on": [],
    "enables": [],
-   "status": "blocked",
+   "status": "ready",
    "symbol": "W22",
    "title": "linux-sources W22"
   },
@@ -228,8 +247,7 @@
   {
    "blocked_kind": "agent",
    "blocked_on": [
-    "W62",
-    "W63"
+    "W62"
    ],
    "enables": [],
    "status": "blocked",
@@ -333,8 +351,10 @@
   {
    "blocked_kind": null,
    "blocked_on": [],
-   "enables": [],
-   "status": "ready",
+   "enables": [
+    "W92"
+   ],
+   "status": "done",
    "symbol": "W37",
    "title": "linux-sources W37"
   },
@@ -342,9 +362,9 @@
    "blocked_kind": null,
    "blocked_on": [],
    "enables": [
-    "W37"
+    "W92"
    ],
-   "status": "ready",
+   "status": "done",
    "symbol": "W38",
    "title": "linux-sources W38"
   },
@@ -359,14 +379,10 @@
    "title": "linux-sources W39"
   },
   {
-   "blocked_kind": "agent",
-   "blocked_on": [
-    "mtools-91",
-    "mtools:W24",
-    "mtools:W46"
-   ],
+   "blocked_kind": null,
+   "blocked_on": [],
    "enables": [],
-   "status": "blocked",
+   "status": "done",
    "symbol": "W40",
    "title": "linux-sources W40"
   },
@@ -403,47 +419,40 @@
    "title": "linux-sources W44"
   },
   {
-   "blocked_kind": "agent",
-   "blocked_on": [
-    "W68"
-   ],
+   "blocked_kind": null,
+   "blocked_on": [],
    "enables": [
     "W22",
     "W53"
    ],
-   "status": "blocked",
+   "status": "done",
    "symbol": "W45",
    "title": "linux-sources W45"
   },
   {
-   "blocked_kind": "agent",
-   "blocked_on": [
-    "W53",
-    "luthen-observability:W43"
-   ],
+   "blocked_kind": null,
+   "blocked_on": [],
    "enables": [
     "W48"
    ],
-   "status": "blocked",
+   "status": "done",
    "symbol": "W46",
    "title": "linux-sources W46"
   },
   {
-   "blocked_kind": "agent",
-   "blocked_on": [
-    "luthen-observability:W43"
-   ],
+   "blocked_kind": null,
+   "blocked_on": [],
    "enables": [
     "W49"
    ],
-   "status": "blocked",
+   "status": "done",
    "symbol": "W47",
    "title": "linux-sources W47"
   },
   {
    "blocked_kind": "agent",
    "blocked_on": [
-    "W46"
+    "luthen-observability:W275"
    ],
    "enables": [
     "W49"
@@ -455,7 +464,6 @@
   {
    "blocked_kind": "agent",
    "blocked_on": [
-    "W47",
     "W48"
    ],
    "enables": [
@@ -500,14 +508,12 @@
    "title": "linux-sources W52"
   },
   {
-   "blocked_kind": "agent",
-   "blocked_on": [
-    "W45"
-   ],
+   "blocked_kind": null,
+   "blocked_on": [],
    "enables": [
     "W46"
    ],
-   "status": "blocked",
+   "status": "done",
    "symbol": "W53",
    "title": "linux-sources W53"
   },
@@ -549,7 +555,7 @@
    "enables": [
     "W61"
    ],
-   "status": "ready",
+   "status": "done",
    "symbol": "W57",
    "title": "linux-sources W57"
   },
@@ -559,7 +565,7 @@
    "enables": [
     "W61"
    ],
-   "status": "ready",
+   "status": "done",
    "symbol": "W58",
    "title": "linux-sources W58"
   },
@@ -569,7 +575,7 @@
    "enables": [
     "W61"
    ],
-   "status": "ready",
+   "status": "done",
    "symbol": "W59",
    "title": "linux-sources W59"
   },
@@ -579,22 +585,17 @@
    "enables": [
     "W61"
    ],
-   "status": "ready",
+   "status": "done",
    "symbol": "W60",
    "title": "linux-sources W60"
   },
   {
-   "blocked_kind": "agent",
-   "blocked_on": [
-    "W57",
-    "W58",
-    "W59",
-    "W60"
-   ],
+   "blocked_kind": null,
+   "blocked_on": [],
    "enables": [
     "W22"
    ],
-   "status": "blocked",
+   "status": "done",
    "symbol": "W61",
    "title": "linux-sources W61"
   },
@@ -604,7 +605,7 @@
    "enables": [
     "W25"
    ],
-   "status": "ready",
+   "status": "working",
    "symbol": "W62",
    "title": "linux-sources W62"
   },
@@ -614,7 +615,7 @@
    "enables": [
     "W25"
    ],
-   "status": "ready",
+   "status": "done",
    "symbol": "W63",
    "title": "linux-sources W63"
   },
@@ -630,7 +631,7 @@
    "blocked_kind": null,
    "blocked_on": [],
    "enables": [],
-   "status": "ready",
+   "status": "done",
    "symbol": "W65",
    "title": "linux-sources W65"
   },
@@ -640,7 +641,7 @@
    "caused_by": "mtools-69",
    "enables": [],
    "minted_during": "interrupt",
-   "status": "working",
+   "status": "done",
    "symbol": "W66",
    "title": "linux-sources W66"
   },
@@ -652,21 +653,19 @@
     "W68"
    ],
    "minted_during": "interrupt",
-   "status": "ready",
+   "status": "done",
    "symbol": "W67",
    "title": "linux-sources W67"
   },
   {
-   "blocked_kind": "agent",
-   "blocked_on": [
-    "W67"
-   ],
+   "blocked_kind": null,
+   "blocked_on": [],
    "caused_by": "operator",
    "enables": [
     "W45"
    ],
    "minted_during": "interrupt",
-   "status": "blocked",
+   "status": "done",
    "symbol": "W68",
    "title": "linux-sources W68"
   },
@@ -834,16 +833,14 @@
    "title": "linux-sources W83"
   },
   {
-   "blocked_kind": "agent",
-   "blocked_on": [
-    "luthen-observability"
-   ],
+   "blocked_kind": null,
+   "blocked_on": [],
    "caused_by": "luthen-observability:W211",
    "enables": [
     "luthen-observability:W211"
    ],
    "minted_during": "interrupt",
-   "status": "blocked",
+   "status": "done",
    "symbol": "W84",
    "title": "linux-sources W84"
   },
@@ -855,7 +852,7 @@
     "luthen-observability:W124"
    ],
    "minted_during": "interrupt",
-   "status": "ready",
+   "status": "done",
    "symbol": "W85",
    "title": "linux-sources W85"
   },
@@ -879,9 +876,511 @@
     "luthen-observability:W50"
    ],
    "minted_during": "interrupt",
-   "status": "ready",
+   "status": "done",
    "symbol": "W87",
    "title": "linux-sources W87"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W88",
+   "title": "linux-sources W88"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W61",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W89",
+   "title": "linux-sources W89"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "mtools",
+   "enables": [
+    "W91"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W90",
+   "title": "linux-sources W90"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W91",
+   "title": "linux-sources W91"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W37",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W92",
+   "title": "linux-sources W92"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W93",
+   "title": "linux-sources W93"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W91",
+   "enables": [
+    "W96"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W94",
+   "title": "linux-sources W94"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W91",
+   "enables": [
+    "W96"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W95",
+   "title": "linux-sources W95"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W91",
+   "enables": [
+    "W91"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W96",
+   "title": "linux-sources W96"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W91",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W97",
+   "title": "linux-sources W97"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W97",
+   "enables": [
+    "W99"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W98",
+   "title": "linux-sources W98"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W98",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W99",
+   "title": "linux-sources W99"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W98",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W100",
+   "title": "linux-sources W100"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "mtools:W306",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W101",
+   "title": "linux-sources W101"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "mtools:W306",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W102",
+   "title": "linux-sources W102"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W37",
+   "enables": [
+    "W92"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W103",
+   "title": "linux-sources W103"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W37",
+   "enables": [
+    "W92"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W104",
+   "title": "linux-sources W104"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W68",
+   "enables": [
+    "W45"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W105",
+   "title": "linux-sources W105"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W105",
+   "enables": [
+    "W109"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W106",
+   "title": "linux-sources W106"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W54",
+   "enables": [
+    "W109"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W107",
+   "title": "linux-sources W107"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W96",
+   "enables": [
+    "W109"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W108",
+   "title": "linux-sources W108"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W109",
+   "title": "linux-sources W109"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W110",
+   "title": "linux-sources W110"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W112",
+   "title": "linux-sources W112"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W103",
+   "enables": [
+    "W92"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W113",
+   "title": "linux-sources W113"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W103",
+   "enables": [
+    "W92"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W114",
+   "title": "linux-sources W114"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W103",
+   "enables": [
+    "W92"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W115",
+   "title": "linux-sources W115"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W116",
+   "title": "linux-sources W116"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W117",
+   "title": "linux-sources W117"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W118",
+   "title": "linux-sources W118"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W38",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W119",
+   "title": "linux-sources W119"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W38",
+   "enables": [
+    "W38"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W120",
+   "title": "linux-sources W120"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W120",
+   "enables": [
+    "W131"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W121",
+   "title": "linux-sources W121"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W38",
+   "enables": [
+    "W38"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W122",
+   "title": "linux-sources W122"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W122",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W123",
+   "title": "linux-sources W123"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W38",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W124",
+   "title": "linux-sources W124"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W125",
+   "enables": [
+    "W92"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W126",
+   "title": "linux-sources W126"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W128"
+   ],
+   "caused_by": "W123",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W127",
+   "title": "linux-sources W127"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W127",
+   "enables": [
+    "W127"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W128",
+   "title": "linux-sources W128"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W127",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W129",
+   "title": "linux-sources W129"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W128",
+   "enables": [
+    "W128"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W130",
+   "title": "linux-sources W130"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W129",
+   "enables": [
+    "W129",
+    "W128"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W131",
+   "title": "linux-sources W131"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W129",
+   "enables": [
+    "W133"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W132",
+   "title": "linux-sources W132"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W132",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W133",
+   "title": "linux-sources W133"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "luthen-observability:W276",
+   "enables": [
+    "luthen-observability:W276"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W135",
+   "title": "linux-sources W135"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W125",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W136",
+   "title": "linux-sources W136"
   }
  ]
 }

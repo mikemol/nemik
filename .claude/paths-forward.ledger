@@ -307,3 +307,4 @@
 2026-10-02T13:45:20Z  tick  W174  advanced  unblock  "weather id from witness hash; query text kept out"  evidence=tests/test_weather.py
 2026-10-02T14:16:11Z  tick  W174  advanced  unblock  "weather panel + goals dedupe; W175 working"  evidence=tests/test_layout.py
 2026-10-02T14:44:22Z  tick  W175  advanced  unblock  "weather design note as built; W75 done; W141 working (only ready item)"  evidence=.claude/design/W58-mechanical-blockers.md
+2026-10-02T15:16:43Z  tick  W141  advanced  sweep  "fixture regenerated, budgets re-based on graph size"  evidence=tests/test_layout.py

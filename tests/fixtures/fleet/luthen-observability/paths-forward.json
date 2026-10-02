@@ -1,5 +1,5 @@
 {
- "counter": 234,
+ "counter": 285,
  "project_root": "/fixture/luthen-observability",
  "residue": [
   {
@@ -274,6 +274,41 @@
    "recoverable": true,
    "symbol": "W214",
    "title": "luthen-observability W214"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W210",
+   "title": "luthen-observability W210"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W212",
+   "title": "luthen-observability W212"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W213",
+   "title": "luthen-observability W213"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W74",
+   "title": "luthen-observability W74"
+  },
+  {
+   "dropped_at": "2026-09-28T00:00:00Z",
+   "reason": "fixture",
+   "recoverable": true,
+   "symbol": "W229",
+   "title": "luthen-observability W229"
   }
  ],
  "version": 1,
@@ -292,7 +327,7 @@
   {
    "blocked_kind": "agent",
    "blocked_on": [
-    "W115"
+    "W275"
    ],
    "enables": [
     "linux-sources:W47",
@@ -315,8 +350,7 @@
   {
    "blocked_kind": "agent",
    "blocked_on": [
-    "W112",
-    "W115"
+    "W111"
    ],
    "enables": [
     "W41"
@@ -340,7 +374,7 @@
   {
    "blocked_kind": "agent",
    "blocked_on": [
-    "el-openglo"
+    "el-openglo:W71"
    ],
    "enables": [
     "el-openglo:W70"
@@ -350,14 +384,12 @@
    "title": "luthen-observability W94"
   },
   {
-   "blocked_kind": "agent",
-   "blocked_on": [
-    "mtools-65"
-   ],
+   "blocked_kind": null,
+   "blocked_on": [],
    "enables": [
     "W70"
    ],
-   "status": "blocked",
+   "status": "ready",
    "symbol": "W79",
    "title": "luthen-observability W79"
   },
@@ -538,7 +570,6 @@
   {
    "blocked_kind": "agent",
    "blocked_on": [
-    "W197",
     "W198",
     "W199"
    ],
@@ -553,9 +584,7 @@
   {
    "blocked_kind": null,
    "blocked_on": [],
-   "enables": [
-    "W54"
-   ],
+   "enables": [],
    "status": "ready",
    "symbol": "W56",
    "title": "luthen-observability W56"
@@ -695,7 +724,6 @@
   {
    "blocked_kind": "agent",
    "blocked_on": [
-    "W100",
     "W102"
    ],
    "enables": [],
@@ -723,7 +751,7 @@
    "blocked_kind": null,
    "blocked_on": [],
    "enables": [],
-   "status": "ready",
+   "status": "done",
    "symbol": "W51",
    "title": "luthen-observability W51"
   },
@@ -739,7 +767,6 @@
    "blocked_kind": "agent",
    "blocked_on": [
     "W121",
-    "W123",
     "W53"
    ],
    "enables": [],
@@ -750,7 +777,6 @@
   {
    "blocked_kind": "agent",
    "blocked_on": [
-    "W97",
     "W98"
    ],
    "enables": [],
@@ -850,7 +876,6 @@
    "blocked_kind": null,
    "blocked_on": [],
    "enables": [
-    "W58",
     "W61"
    ],
    "status": "done",
@@ -872,16 +897,6 @@
    "status": "done",
    "symbol": "W82",
    "title": "luthen-observability W82"
-  },
-  {
-   "blocked_kind": "human",
-   "blocked_on": [
-    "gcalculus"
-   ],
-   "enables": [],
-   "status": "blocked",
-   "symbol": "W74",
-   "title": "luthen-observability W74"
   },
   {
    "blocked_kind": null,
@@ -952,9 +967,7 @@
   {
    "blocked_kind": null,
    "blocked_on": [],
-   "enables": [
-    "W58"
-   ],
+   "enables": [],
    "status": "done",
    "symbol": "W60",
    "title": "luthen-observability W60"
@@ -978,9 +991,7 @@
   {
    "blocked_kind": null,
    "blocked_on": [],
-   "enables": [
-    "W54"
-   ],
+   "enables": [],
    "status": "done",
    "symbol": "W55",
    "title": "luthen-observability W55"
@@ -1184,9 +1195,7 @@
   },
   {
    "blocked_kind": null,
-   "blocked_on": [
-    "W28"
-   ],
+   "blocked_on": [],
    "enables": [
     "W21",
     "W22"
@@ -1442,9 +1451,7 @@
   {
    "blocked_kind": null,
    "blocked_on": [],
-   "enables": [
-    "W58"
-   ],
+   "enables": [],
    "status": "done",
    "symbol": "W61",
    "title": "luthen-observability W61"
@@ -1460,26 +1467,22 @@
    "title": "luthen-observability W96"
   },
   {
-   "blocked_kind": "agent",
-   "blocked_on": [
-    "event"
-   ],
+   "blocked_kind": null,
+   "blocked_on": [],
    "enables": [
     "W8"
    ],
-   "status": "blocked",
+   "status": "done",
    "symbol": "W99",
    "title": "luthen-observability W99"
   },
   {
-   "blocked_kind": "agent",
-   "blocked_on": [
-    "W100"
-   ],
+   "blocked_kind": null,
+   "blocked_on": [],
    "enables": [
     "W73"
    ],
-   "status": "blocked",
+   "status": "ready",
    "symbol": "W101",
    "title": "luthen-observability W101"
   },
@@ -1509,14 +1512,12 @@
    "title": "luthen-observability W104"
   },
   {
-   "blocked_kind": "agent",
-   "blocked_on": [
-    "event"
-   ],
+   "blocked_kind": null,
+   "blocked_on": [],
    "enables": [
     "W85"
    ],
-   "status": "blocked",
+   "status": "done",
    "symbol": "W105",
    "title": "luthen-observability W105"
   },
@@ -1561,8 +1562,7 @@
   {
    "blocked_kind": "agent",
    "blocked_on": [
-    "linux-sources",
-    "W123"
+    "linux-sources"
    ],
    "enables": [
     "W45"
@@ -1584,8 +1584,7 @@
   {
    "blocked_kind": "agent",
    "blocked_on": [
-    "W121",
-    "W123"
+    "W121"
    ],
    "enables": [
     "W45"
@@ -1610,7 +1609,6 @@
   {
    "blocked_kind": "agent",
    "blocked_on": [
-    "W128",
     "W129"
    ],
    "enables": [
@@ -1635,7 +1633,6 @@
   {
    "blocked_kind": "agent",
    "blocked_on": [
-    "W133",
     "W130"
    ],
    "enables": [
@@ -1747,7 +1744,9 @@
   {
    "blocked_kind": null,
    "blocked_on": [],
-   "enables": [],
+   "enables": [
+    "W254"
+   ],
    "minted_during": "tick",
    "status": "ready",
    "symbol": "W151",
@@ -1756,8 +1755,6 @@
   {
    "blocked_kind": "agent",
    "blocked_on": [
-    "W166",
-    "W167",
     "W168",
     "W169",
     "W170"
@@ -1821,7 +1818,7 @@
    "caused_by": "operator",
    "enables": [],
    "minted_during": "tick",
-   "status": "ready",
+   "status": "done",
    "symbol": "W158",
    "title": "luthen-observability W158"
   },
@@ -1923,43 +1920,35 @@
    "title": "luthen-observability W167"
   },
   {
-   "blocked_kind": "agent",
-   "blocked_on": [
-    "W196"
-   ],
+   "blocked_kind": null,
+   "blocked_on": [],
    "enables": [
     "W152"
    ],
    "minted_during": "tick",
-   "status": "blocked",
+   "status": "ready",
    "symbol": "W168",
    "title": "luthen-observability W168"
   },
   {
-   "blocked_kind": "agent",
-   "blocked_on": [
-    "W183",
-    "W184",
-    "W185"
-   ],
+   "blocked_kind": null,
+   "blocked_on": [],
    "enables": [
     "W152"
    ],
    "minted_during": "tick",
-   "status": "blocked",
+   "status": "ready",
    "symbol": "W169",
    "title": "luthen-observability W169"
   },
   {
-   "blocked_kind": "agent",
-   "blocked_on": [
-    "W185"
-   ],
+   "blocked_kind": null,
+   "blocked_on": [],
    "enables": [
     "W152"
    ],
    "minted_during": "tick",
-   "status": "blocked",
+   "status": "ready",
    "symbol": "W170",
    "title": "luthen-observability W170"
   },
@@ -2255,15 +2244,13 @@
    "title": "luthen-observability W197"
   },
   {
-   "blocked_kind": "agent",
-   "blocked_on": [
-    "W197"
-   ],
+   "blocked_kind": null,
+   "blocked_on": [],
    "enables": [
     "W199"
    ],
    "minted_during": "tick",
-   "status": "blocked",
+   "status": "ready",
    "symbol": "W198",
    "title": "luthen-observability W198"
   },
@@ -2283,9 +2270,7 @@
   {
    "blocked_kind": "agent",
    "blocked_on": [
-    "W201",
-    "W202",
-    "W203"
+    "W201"
    ],
    "caused_by": "inbox",
    "enables": [],
@@ -2297,8 +2282,6 @@
   {
    "blocked_kind": "agent",
    "blocked_on": [
-    "W204",
-    "W205",
     "W206"
    ],
    "caused_by": "inbox",
@@ -2399,63 +2382,18 @@
    "title": "luthen-observability W209"
   },
   {
-   "blocked_kind": "agent",
-   "blocked_on": [
-    "W211",
-    "W212",
-    "W213"
-   ],
-   "caused_by": "operator",
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W210",
    "enables": [],
    "minted_during": "tick",
-   "status": "blocked",
-   "symbol": "W210",
-   "title": "luthen-observability W210"
-  },
-  {
-   "blocked_kind": "agent",
-   "blocked_on": [
-    "linux-sources"
-   ],
-   "caused_by": "W210",
-   "enables": [
-    "W213"
-   ],
-   "minted_during": "tick",
-   "status": "blocked",
+   "status": "done",
    "symbol": "W211",
    "title": "luthen-observability W211"
   },
   {
-   "blocked_kind": null,
-   "blocked_on": [],
-   "caused_by": "W210",
-   "enables": [
-    "W210"
-   ],
-   "minted_during": "tick",
-   "status": "ready",
-   "symbol": "W212",
-   "title": "luthen-observability W212"
-  },
-  {
    "blocked_kind": "agent",
    "blocked_on": [
-    "W211"
-   ],
-   "caused_by": "W210",
-   "enables": [
-    "W210"
-   ],
-   "minted_during": "tick",
-   "status": "blocked",
-   "symbol": "W213",
-   "title": "luthen-observability W213"
-  },
-  {
-   "blocked_kind": "agent",
-   "blocked_on": [
-    "W223",
     "W224",
     "W225"
    ],
@@ -2555,16 +2493,14 @@
    "title": "luthen-observability W223"
   },
   {
-   "blocked_kind": "agent",
-   "blocked_on": [
-    "W228"
-   ],
+   "blocked_kind": null,
+   "blocked_on": [],
    "caused_by": "W215",
    "enables": [
     "W225"
    ],
    "minted_during": "tick",
-   "status": "blocked",
+   "status": "ready",
    "symbol": "W224",
    "title": "luthen-observability W224"
   },
@@ -2593,38 +2529,28 @@
    "title": "luthen-observability W226"
   },
   {
-   "blocked_kind": null,
-   "blocked_on": [],
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W284"
+   ],
    "caused_by": "operator",
    "enables": [],
    "minted_during": "interrupt",
-   "status": "ready",
+   "status": "blocked",
    "symbol": "W227",
    "title": "luthen-observability W227"
   },
   {
-   "blocked_kind": "agent",
-   "blocked_on": [
-    "luthen-pvc-usage-walk"
-   ],
+   "blocked_kind": null,
+   "blocked_on": [],
    "caused_by": "W224",
    "enables": [
     "W224"
    ],
    "minted_during": "tick",
-   "status": "blocked",
+   "status": "done",
    "symbol": "W228",
    "title": "luthen-observability W228"
-  },
-  {
-   "blocked_kind": null,
-   "blocked_on": [],
-   "caused_by": "mtools-W270",
-   "enables": [],
-   "minted_during": "interrupt",
-   "status": "ready",
-   "symbol": "W229",
-   "title": "luthen-observability W229"
   },
   {
    "blocked_kind": null,
@@ -2640,7 +2566,8 @@
    "blocked_kind": null,
    "blocked_on": [],
    "enables": [
-    "W53"
+    "W53",
+    "W262"
    ],
    "minted_during": "tick",
    "status": "ready",
@@ -2674,7 +2601,7 @@
   {
    "blocked_kind": "agent",
    "blocked_on": [
-    "nemik:W121"
+    "nemik"
    ],
    "caused_by": "operator",
    "enables": [],
@@ -2682,6 +2609,612 @@
    "status": "blocked",
    "symbol": "W234",
    "title": "luthen-observability W234"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W235",
+   "title": "luthen-observability W235"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "zram_near_limit",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W236",
+   "title": "luthen-observability W236"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "probe_failed",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W237",
+   "title": "luthen-observability W237"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "life:W7",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W238",
+   "title": "luthen-observability W238"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W246"
+   ],
+   "caused_by": "amr-skills",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W239",
+   "title": "luthen-observability W239"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "life:W27",
+   "enables": [
+    "life:W27"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W240",
+   "title": "luthen-observability W240"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W246"
+   ],
+   "caused_by": "aeternum:W73",
+   "enables": [
+    "aeternum:W73"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W241",
+   "title": "luthen-observability W241"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W99",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W242",
+   "title": "luthen-observability W242"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W235"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W243",
+   "title": "luthen-observability W243"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W245"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W244",
+   "title": "luthen-observability W244"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W235"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W245",
+   "title": "luthen-observability W245"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W239",
+   "enables": [
+    "W239",
+    "W241",
+    "W152"
+   ],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W246",
+   "title": "luthen-observability W246"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W247-vmutils-depclean",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W247",
+   "title": "luthen-observability W247"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W248",
+   "title": "luthen-observability W248"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W249",
+   "title": "luthen-observability W249"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W250",
+   "title": "luthen-observability W250"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W253",
+    "W254",
+    "W255",
+    "W256"
+   ],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W251",
+   "title": "luthen-observability W251"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W253",
+    "W254"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W252",
+   "title": "luthen-observability W252"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W274"
+   ],
+   "caused_by": "operator",
+   "enables": [
+    "W255"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W253",
+   "title": "luthen-observability W253"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W151"
+   ],
+   "caused_by": "operator",
+   "enables": [
+    "W255"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W254",
+   "title": "luthen-observability W254"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W253",
+    "W254"
+   ],
+   "caused_by": "operator",
+   "enables": [
+    "W256"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W255",
+   "title": "luthen-observability W255"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator: decide (fixture)"
+   ],
+   "caused_by": "operator",
+   "enables": [
+    "W251"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W256",
+   "title": "luthen-observability W256"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "mtools:W319",
+   "enables": [
+    "mtools:W319"
+   ],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W257",
+   "title": "luthen-observability W257"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W249",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W258",
+   "title": "luthen-observability W258"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "linux-sources:W110",
+   "enables": [
+    "linux-sources:W110"
+   ],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W259",
+   "title": "luthen-observability W259"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "linux-sources:W110",
+   "enables": [
+    "linux-sources:W110"
+   ],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W260",
+   "title": "luthen-observability W260"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "linux-sources:W110",
+   "enables": [
+    "linux-sources:W110"
+   ],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W261",
+   "title": "luthen-observability W261"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W231"
+   ],
+   "caused_by": "linux-sources:W110",
+   "enables": [
+    "linux-sources:W110"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W262",
+   "title": "luthen-observability W262"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "linux-sources:W110",
+   "enables": [
+    "linux-sources:W110"
+   ],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W263",
+   "title": "luthen-observability W263"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "el-openglo:W177"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W264",
+   "title": "luthen-observability W264"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W265",
+   "title": "luthen-observability W265"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W267",
+    "W265"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W266",
+   "title": "luthen-observability W266"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W265"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W267",
+   "title": "luthen-observability W267"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "luthen-observability"
+   ],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W268",
+   "title": "luthen-observability W268"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W271",
+    "W272"
+   ],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W269",
+   "title": "luthen-observability W269"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "W272",
+    "W269"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W270",
+   "title": "luthen-observability W270"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator: decide (fixture)"
+   ],
+   "caused_by": "operator",
+   "enables": [
+    "W272",
+    "W269"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W271",
+   "title": "luthen-observability W271"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W271"
+   ],
+   "caused_by": "operator",
+   "enables": [
+    "W269"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W272",
+   "title": "luthen-observability W272"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W273",
+   "title": "luthen-observability W273"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator: act (fixture)"
+   ],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W274",
+   "title": "luthen-observability W274"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W276"
+   ],
+   "caused_by": "linux-sources:W48",
+   "enables": [
+    "linux-sources:W48",
+    "W111"
+   ],
+   "minted_during": "tick",
+   "status": "blocked",
+   "symbol": "W275",
+   "title": "luthen-observability W275"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "linux-sources:W48",
+   "enables": [
+    "W275"
+   ],
+   "minted_during": "tick",
+   "status": "working",
+   "symbol": "W276",
+   "title": "luthen-observability W276"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W277",
+   "title": "luthen-observability W277"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "el-openglo:W213",
+   "enables": [
+    "el-openglo:W214"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W278",
+   "title": "luthen-observability W278"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "substrate:W37"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W279",
+   "title": "luthen-observability W279"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "el-openglo:W214",
+   "enables": [
+    "el-openglo:W214"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W280",
+   "title": "luthen-observability W280"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "el-openglo:W214"
+   ],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W281",
+   "title": "luthen-observability W281"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W282",
+   "title": "luthen-observability W282"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W283",
+   "title": "luthen-observability W283"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "W227"
+   ],
+   "minted_during": "tick",
+   "status": "ready",
+   "symbol": "W284",
+   "title": "luthen-observability W284"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [
+    "el-openglo:W232"
+   ],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W285",
+   "title": "luthen-observability W285"
   }
  ]
 }

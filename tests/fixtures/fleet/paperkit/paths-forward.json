@@ -1,5 +1,5 @@
 {
- "counter": 138,
+ "counter": 139,
  "project_root": "/fixture/paperkit",
  "residue": [
   {
@@ -80,7 +80,7 @@
    "title": "paperkit W82"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W82"
    ],
@@ -92,7 +92,7 @@
    "title": "paperkit W83"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W83"
    ],
@@ -104,7 +104,7 @@
    "title": "paperkit W84"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W84"
    ],
@@ -186,7 +186,7 @@
    "title": "paperkit W92"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W92"
    ],
@@ -208,7 +208,7 @@
    "title": "paperkit W94"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W70"
    ],
@@ -220,7 +220,7 @@
    "title": "paperkit W95"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W70"
    ],
@@ -232,7 +232,7 @@
    "title": "paperkit W96"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W70"
    ],
@@ -244,7 +244,7 @@
    "title": "paperkit W97"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W112"
    ],
@@ -256,7 +256,7 @@
    "title": "paperkit W98"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W98"
    ],
@@ -278,7 +278,7 @@
    "title": "paperkit W100"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W100"
    ],
@@ -300,7 +300,7 @@
    "title": "paperkit W102"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W102"
    ],
@@ -322,7 +322,7 @@
    "title": "paperkit W104"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W104"
    ],
@@ -353,7 +353,7 @@
    "title": "paperkit W112"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W112"
    ],
@@ -439,7 +439,7 @@
    "title": "paperkit W118"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W117",
     "W118"
@@ -472,7 +472,7 @@
    "title": "paperkit W108"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W134"
    ],
@@ -484,7 +484,7 @@
    "title": "paperkit W109"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W136"
    ],
@@ -506,7 +506,7 @@
    "title": "paperkit W136"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W134"
    ],
@@ -604,7 +604,7 @@
    "title": "paperkit W79"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W109"
    ],
@@ -617,7 +617,7 @@
    "title": "paperkit W80"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W80"
    ],
@@ -629,7 +629,7 @@
    "title": "paperkit W81"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W80",
     "W81"
@@ -692,7 +692,7 @@
    "title": "paperkit W65"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W82",
     "W83",
@@ -727,7 +727,7 @@
    "title": "paperkit W68"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W137"
    ],
@@ -761,7 +761,7 @@
    "title": "paperkit W69"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W123"
    ],
@@ -774,7 +774,7 @@
    "title": "paperkit W70"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W95",
     "W96",
@@ -788,7 +788,7 @@
    "title": "paperkit W71"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W70",
     "W71"
@@ -801,7 +801,7 @@
    "title": "paperkit W72"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W92",
     "W93"
@@ -814,7 +814,7 @@
    "title": "paperkit W73"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W66",
     "W73"
@@ -841,7 +841,7 @@
    "title": "paperkit W76"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W70",
     "W71",
@@ -855,7 +855,7 @@
    "title": "paperkit W61"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W60"
    ],
@@ -865,7 +865,7 @@
    "title": "paperkit W59"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W132"
    ],
@@ -877,17 +877,19 @@
    "title": "paperkit W60"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W66"
    ],
-   "enables": [],
+   "enables": [
+    "W140"
+   ],
    "status": "blocked",
    "symbol": "W44",
    "title": "paperkit W44"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W73",
     "W74"
@@ -900,7 +902,7 @@
    "title": "paperkit W43"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W109",
     "W77"
@@ -913,7 +915,7 @@
    "title": "paperkit W52"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W102",
     "W103"
@@ -924,7 +926,7 @@
    "title": "paperkit W49"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W104",
     "W105"
@@ -935,7 +937,7 @@
    "title": "paperkit W47"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W112",
     "W113"
@@ -948,7 +950,7 @@
    "title": "paperkit W45"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W98",
     "W99"
@@ -959,7 +961,7 @@
    "title": "paperkit W40"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W100",
     "W101"
@@ -1028,7 +1030,7 @@
    "title": "paperkit W31"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W31"
    ],
@@ -1119,7 +1121,7 @@
    "title": "paperkit W129"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W8"
    ],
@@ -1183,7 +1185,6 @@
   {
    "blocked_kind": "agent",
    "blocked_on": [
-    "W2",
     "W8"
    ],
    "enables": [],
@@ -1192,7 +1193,7 @@
    "title": "paperkit W19"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W19"
    ],
@@ -1322,7 +1323,7 @@
    "title": "paperkit W13"
   },
   {
-   "blocked_kind": null,
+   "blocked_kind": "agent",
    "blocked_on": [
     "W92"
    ],
@@ -1332,12 +1333,10 @@
    "title": "paperkit W34"
   },
   {
-   "blocked_kind": "agent",
-   "blocked_on": [
-    "summit-6b"
-   ],
+   "blocked_kind": null,
+   "blocked_on": [],
    "enables": [],
-   "status": "blocked",
+   "status": "ready",
    "symbol": "W35",
    "title": "paperkit W35"
   },
@@ -1398,6 +1397,28 @@
    "status": "ready",
    "symbol": "W138",
    "title": "paperkit W138"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "life:W15",
+   "enables": [
+    "life:W15"
+   ],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W139",
+   "title": "paperkit W139"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W44"
+   ],
+   "enables": [],
+   "status": "blocked",
+   "symbol": "W140",
+   "title": "paperkit W140"
   }
  ]
 }

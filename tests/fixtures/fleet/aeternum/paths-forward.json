@@ -1,5 +1,5 @@
 {
- "counter": 62,
+ "counter": 77,
  "project_root": "/fixture/aeternum",
  "residue": [
   {
@@ -422,12 +422,10 @@
    "title": "aeternum W47"
   },
   {
-   "blocked_kind": "human",
-   "blocked_on": [
-    "operator: decide (fixture)"
-   ],
+   "blocked_kind": null,
+   "blocked_on": [],
    "enables": [],
-   "status": "blocked",
+   "status": "done",
    "symbol": "W48",
    "title": "aeternum W48"
   },
@@ -518,24 +516,20 @@
    "title": "aeternum W56"
   },
   {
-   "blocked_kind": "human",
-   "blocked_on": [
-    "operator: decide (fixture)"
-   ],
+   "blocked_kind": null,
+   "blocked_on": [],
    "enables": [],
    "minted_during": "interrupt",
-   "status": "blocked",
+   "status": "done",
    "symbol": "W57",
    "title": "aeternum W57"
   },
   {
-   "blocked_kind": "human",
-   "blocked_on": [
-    "operator: decide (fixture)"
-   ],
+   "blocked_kind": null,
+   "blocked_on": [],
    "enables": [],
    "minted_during": "interrupt",
-   "status": "blocked",
+   "status": "done",
    "symbol": "W58",
    "title": "aeternum W58"
   },
@@ -584,6 +578,174 @@
    "status": "blocked",
    "symbol": "W62",
    "title": "aeternum W62"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "amr-skills"
+   ],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W63",
+   "title": "aeternum W63"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W64",
+   "title": "aeternum W64"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W65",
+   "title": "aeternum W65"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W66",
+   "title": "aeternum W66"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W67",
+   "title": "aeternum W67"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W68",
+   "title": "aeternum W68"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator: decide (fixture)"
+   ],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W69",
+   "title": "aeternum W69"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W70",
+   "title": "aeternum W70"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W71",
+   "title": "aeternum W71"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [
+    "life:W20"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W72",
+   "title": "aeternum W72"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "luthen-observability:W241"
+   ],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W73",
+   "title": "aeternum W73"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator: act (fixture)"
+   ],
+   "caused_by": "operator",
+   "enables": [
+    "W75",
+    "W76",
+    "W77",
+    "life:W20"
+   ],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W74",
+   "title": "aeternum W74"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator: decide (fixture)"
+   ],
+   "caused_by": "operator",
+   "enables": [
+    "life:W20"
+   ],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W75",
+   "title": "aeternum W75"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator: decide (fixture)"
+   ],
+   "caused_by": "operator",
+   "enables": [
+    "life:W20"
+   ],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W76",
+   "title": "aeternum W76"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator: decide (fixture)"
+   ],
+   "caused_by": "operator",
+   "enables": [
+    "life:W20"
+   ],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W77",
+   "title": "aeternum W77"
   }
  ]
 }

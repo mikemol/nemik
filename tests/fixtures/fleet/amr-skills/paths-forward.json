@@ -1,5 +1,5 @@
 {
- "counter": 77,
+ "counter": 80,
  "project_root": "/fixture/amr-skills",
  "residue": [
   {
@@ -438,7 +438,7 @@
   {
    "blocked_kind": "agent",
    "blocked_on": [
-    "mtools:W30"
+    "substrate"
    ],
    "enables": [],
    "status": "blocked",
@@ -469,7 +469,7 @@
     "operator: act (fixture)"
    ],
    "enables": [],
-   "status": "blocked",
+   "status": "done",
    "symbol": "W54",
    "title": "amr-skills W54"
   },
@@ -549,7 +549,7 @@
     "operator: decide (fixture)"
    ],
    "enables": [],
-   "status": "blocked",
+   "status": "done",
    "symbol": "W63",
    "title": "amr-skills W63"
   },
@@ -593,7 +593,7 @@
     "operator: decide (fixture)"
    ],
    "enables": [],
-   "status": "blocked",
+   "status": "done",
    "symbol": "W68",
    "title": "amr-skills W68"
   },
@@ -679,6 +679,34 @@
    "status": "done",
    "symbol": "W77",
    "title": "amr-skills W77"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator: act (fixture)"
+   ],
+   "enables": [
+    "aeternum:W63"
+   ],
+   "status": "blocked",
+   "symbol": "W78",
+   "title": "amr-skills W78"
+  },
+  {
+   "blocked_on": [],
+   "enables": [],
+   "status": "working",
+   "symbol": "W79",
+   "title": "amr-skills W79"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "minted_during": "tick",
+   "status": "done",
+   "symbol": "W80",
+   "title": "amr-skills W80"
   }
  ]
 }

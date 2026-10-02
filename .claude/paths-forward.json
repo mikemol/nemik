@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 116
+      "ticks_blocked": 117
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 71,
+      "ticks_blocked": 72,
       "weight": 1
     },
     {
@@ -1397,7 +1397,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-01T19:50:19Z",
-      "ticks_blocked": 53,
+      "ticks_blocked": 54,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -2613,7 +2613,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 61
+      "ticks_blocked": 62
     },
     {
       "symbol": "W138",
@@ -2676,19 +2676,19 @@
     {
       "symbol": "W141",
       "title": "Regenerate tests/fixtures/fleet from ~/github (make_fleet.py): the snapshot predates life:W23, so nemik's own W128/W129/W134 edges fail against it",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "fixtures"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-10-01: With nemik's current queue copied into the fixture fleet, nemik-check reports Violations on W128, W129 and W134 (enables life:W23 and similar) and caused_by warnings naming life:W23: the targets were minted after the snapshot. Host only: tests/fixtures/make_fleet.py reads ~/github.",
+      "next_bounded_step": null,
+      "evidence": "2026-10-01: With nemik's current queue copied into the fixture fleet, nemik-check reports Violations on W128, W129 and W134 (enables life:W23 and similar) and caused_by warnings naming life:W23: the targets were minted after the snapshot. Host only: tests/fixtures/make_fleet.py reads ~/github. | 2026-10-02: 2026-10-02: make_fleet.py ~/github regenerated tests/fixtures/fleet (455 -> 501 open nodes, content still stripped). Budgets broke on size (area 4106x3022 > 11.9M, fit 0.328, crossings 195, forest p95 2357, upward 20) and were re-based with history lines in test_layout.py (~10% headroom); treemap fit 0.609 on the new fixture. bazel 32/32.",
       "issued_at": "2026-10-01T01:27:32Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-10-02T14:44:22Z",
+      "last_worked": "2026-10-02T15:16:34Z",
       "ticks_blocked": 0,
       "weight": 1
     },
@@ -2832,7 +2832,7 @@
       "minted_during": "tick",
       "caused_by": "life:W28",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "weight": 3
     },
     {
@@ -3073,7 +3073,7 @@
       "minted_during": "interrupt",
       "caused_by": "W148",
       "last_worked": "2026-10-02T09:13:53Z",
-      "ticks_blocked": 20,
+      "ticks_blocked": 21,
       "weight": 5
     },
     {
@@ -3132,7 +3132,7 @@
       "minted_during": "interrupt",
       "caused_by": "W148",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "weight": 3
     },
     {
@@ -3426,7 +3426,7 @@
       "minted_during": "tick",
       "caused_by": "W158",
       "last_worked": "2026-10-02T06:44:50Z",
-      "ticks_blocked": 27
+      "ticks_blocked": 28
     },
     {
       "symbol": "W183",

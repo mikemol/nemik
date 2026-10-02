@@ -1,5 +1,5 @@
 {
- "counter": 76,
+ "counter": 79,
  "project_root": "/fixture/substrate",
  "residue": [
   {
@@ -29,7 +29,7 @@
   {
    "blocked_kind": "human",
    "blocked_on": [
-    "a"
+    "operator: act (fixture)"
    ],
    "enables": [],
    "status": "blocked",
@@ -134,10 +134,12 @@
    "title": "substrate W25"
   },
   {
-   "blocked_kind": null,
-   "blocked_on": [],
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator: decide (fixture)"
+   ],
    "enables": [],
-   "status": "ready",
+   "status": "blocked",
    "symbol": "W9",
    "title": "substrate W9"
   },
@@ -145,7 +147,7 @@
    "blocked_kind": null,
    "blocked_on": [],
    "enables": [],
-   "status": "ready",
+   "status": "working",
    "symbol": "W10",
    "title": "substrate W10"
   },
@@ -319,7 +321,7 @@
    "enables": [
     "W37"
    ],
-   "status": "ready",
+   "status": "done",
    "symbol": "W35",
    "title": "substrate W35"
   },
@@ -332,12 +334,10 @@
    "title": "substrate W36"
   },
   {
-   "blocked_kind": "agent",
-   "blocked_on": [
-    "store"
-   ],
+   "blocked_kind": null,
+   "blocked_on": [],
    "enables": [],
-   "status": "blocked",
+   "status": "ready",
    "symbol": "W37",
    "title": "substrate W37"
   },
@@ -382,7 +382,7 @@
    "blocked_kind": null,
    "blocked_on": [],
    "enables": [],
-   "status": "ready",
+   "status": "done",
    "symbol": "W42",
    "title": "substrate W42"
   },
@@ -463,7 +463,7 @@
    "title": "substrate W50"
   },
   {
-   "blocked_kind": "human",
+   "blocked_kind": "agent",
    "blocked_on": [
     "W63"
    ],
@@ -487,21 +487,20 @@
    "title": "substrate W52"
   },
   {
-   "blocked_kind": "agent",
-   "blocked_on": [
-    "an"
-   ],
+   "blocked_kind": null,
+   "blocked_on": [],
    "caused_by": "gate-census-t93",
    "enables": [],
    "minted_during": "interrupt",
-   "status": "blocked",
+   "status": "done",
    "symbol": "W53",
    "title": "substrate W53"
   },
   {
-   "blocked_kind": "human",
+   "blocked_kind": "agent",
    "blocked_on": [
-    "W64"
+    "W64",
+    "W65"
    ],
    "caused_by": "gate-census-t93",
    "enables": [],
@@ -521,9 +520,19 @@
    "title": "substrate W55"
   },
   {
-   "blocked_kind": "human",
+   "blocked_kind": "agent",
    "blocked_on": [
-    "W66-W76"
+    "W66",
+    "W67",
+    "W68",
+    "W69",
+    "W70",
+    "W71",
+    "W72",
+    "W73",
+    "W74",
+    "W75",
+    "W76"
    ],
    "caused_by": "gate-census-t93",
    "enables": [],
@@ -535,7 +544,7 @@
   {
    "blocked_kind": "human",
    "blocked_on": [
-    "operator"
+    "operator: decide (fixture)"
    ],
    "caused_by": "gate-census-t93",
    "enables": [],
@@ -761,6 +770,38 @@
    "status": "ready",
    "symbol": "W76",
    "title": "substrate W76"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "mtools:W48",
+   "enables": [
+    "amr-skills:W51"
+   ],
+   "minted_during": "interrupt",
+   "status": "done",
+   "symbol": "W77",
+   "title": "substrate W77"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W37",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W78",
+   "title": "substrate W78"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "mtools:W429",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "ready",
+   "symbol": "W79",
+   "title": "substrate W79"
   }
  ]
 }

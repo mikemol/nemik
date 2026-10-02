@@ -1,5 +1,5 @@
 {
- "counter": 22,
+ "counter": 30,
  "project_root": "/fixture/life",
  "residue": [
   {
@@ -17,7 +17,7 @@
    "blocked_on": [],
    "enables": [],
    "minted_during": "interrupt",
-   "status": "ready",
+   "status": "done",
    "symbol": "W1",
    "title": "life W1"
   },
@@ -31,13 +31,11 @@
    "title": "life W2"
   },
   {
-   "blocked_kind": "agent",
-   "blocked_on": [
-    "W1"
-   ],
+   "blocked_kind": null,
+   "blocked_on": [],
    "enables": [],
    "minted_during": "interrupt",
-   "status": "blocked",
+   "status": "done",
    "symbol": "W3",
    "title": "life W3"
   },
@@ -71,39 +69,48 @@
    "title": "life W6"
   },
   {
-   "blocked_kind": null,
-   "blocked_on": [],
+   "blocked_kind": "human",
+   "blocked_on": [
+    "luthen-observability:W238",
+    "operator: act (fixture)"
+   ],
    "caused_by": "resumes",
    "enables": [],
    "minted_during": "interrupt",
-   "status": "ready",
+   "status": "blocked",
    "symbol": "W7",
    "title": "life W7"
   },
   {
-   "blocked_kind": null,
-   "blocked_on": [],
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator: act (fixture)"
+   ],
    "caused_by": "resumes",
    "enables": [],
    "minted_during": "interrupt",
-   "status": "ready",
+   "status": "blocked",
    "symbol": "W8",
    "title": "life W8"
   },
   {
-   "blocked_kind": null,
-   "blocked_on": [],
-   "enables": [],
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator: act (fixture)"
+   ],
+   "enables": [
+    "W10",
+    "resumes:W5"
+   ],
    "minted_during": "interrupt",
-   "status": "ready",
+   "status": "blocked",
    "symbol": "W9",
    "title": "life W9"
   },
   {
    "blocked_kind": "agent",
    "blocked_on": [
-    "W9",
-    "W21"
+    "W9"
    ],
    "enables": [
     "W11"
@@ -138,7 +145,7 @@
   {
    "blocked_kind": "agent",
    "blocked_on": [
-    "nemik:W113"
+    "nemik:W160"
    ],
    "caused_by": "operator",
    "enables": [],
@@ -162,9 +169,9 @@
    "title": "life W14"
   },
   {
-   "blocked_kind": "human",
+   "blocked_kind": "agent",
    "blocked_on": [
-    "operator: decide (fixture)"
+    "paperkit:W139"
    ],
    "caused_by": "operator",
    "enables": [],
@@ -178,7 +185,9 @@
    "blocked_on": [
     "el-openglo:W116",
     "el-openglo:W113",
-    "el-openglo:W43"
+    "el-openglo:W99",
+    "el-openglo:W101",
+    "el-openglo:W102"
    ],
    "caused_by": "operator",
    "enables": [],
@@ -211,10 +220,9 @@
    "title": "life W19"
   },
   {
-   "blocked_kind": "human",
+   "blocked_kind": "agent",
    "blocked_on": [
-    "aeternum:W48",
-    "operator: decide (fixture)"
+    "aeternum:W74"
    ],
    "caused_by": "operator",
    "enables": [],
@@ -224,17 +232,15 @@
    "title": "life W20"
   },
   {
-   "blocked_kind": "human",
-   "blocked_on": [
-    "operator: decide (fixture)"
-   ],
+   "blocked_kind": null,
+   "blocked_on": [],
    "caused_by": "resumes:W1",
    "enables": [
     "resumes:W1",
     "W10"
    ],
    "minted_during": "interrupt",
-   "status": "blocked",
+   "status": "done",
    "symbol": "W21",
    "title": "life W21"
   },
@@ -250,6 +256,101 @@
    "status": "done",
    "symbol": "W22",
    "title": "life W22"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "nemik:W168",
+    "nemik:W151"
+   ],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W23",
+   "title": "life W23"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator: decide (fixture)"
+   ],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W24",
+   "title": "life W24"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator: act (fixture)"
+   ],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W25",
+   "title": "life W25"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator: act (fixture)"
+   ],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W26",
+   "title": "life W26"
+  },
+  {
+   "blocked_kind": "human",
+   "blocked_on": [
+    "operator: act (fixture)"
+   ],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W27",
+   "title": "life W27"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "nemik:W165"
+   ],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W28",
+   "title": "life W28"
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "luthen-observability:W267"
+   ],
+   "caused_by": "luthen-observability:W266",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "blocked",
+   "symbol": "W29",
+   "title": "life W29"
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "operator",
+   "enables": [],
+   "minted_during": "interrupt",
+   "status": "working",
+   "symbol": "W30",
+   "title": "life W30"
   }
  ]
 }
