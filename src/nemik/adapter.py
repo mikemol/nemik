@@ -113,6 +113,13 @@ def queue_graph(repo: str, state_path: Path, known: frozenset[str] = frozenset()
             g.add((node, NEMIK.blockedKind, Literal(kind)))
         for tag in model.strlist(w, "touches"):
             g.add((node, NEMIK.touches, Literal(tag)))
+        # nemik:W174: weather. Waypoints whose witnesses are the same query wait on the same outage,
+        # so they share one weather id: a hash of the query with its whitespace collapsed. The query
+        # text itself stays out of the graph (it may name hosts or endpoints).
+        if wq := " ".join(model.text(w, "witness").split()):
+            import hashlib
+
+            g.add((node, NEMIK.weather, Literal("wx:" + hashlib.sha256(wq.encode()).hexdigest()[:10])))
         if (tb := model.ticks(w)):
             g.add((node, NEMIK.ticksBlocked, Literal(tb)))
         if issued := model.text(w, "issued_at"):

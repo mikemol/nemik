@@ -304,3 +304,4 @@
 2026-10-02T12:55:48Z  interrupt  W186  done  --  "one cite format, every cite a link"  evidence=tests/test_layout.py
 2026-10-02T13:04:49Z  interrupt  W187  done  --  "treemap leaves show repo on a second line, fitted"  evidence=tests/test_layout.py
 2026-10-02T13:16:26Z  tick  W173  advanced  unblock  "weather convention in the skill; examples checked against fact shapes; W174 working"  evidence=skills/nemik/SKILL.md
+2026-10-02T13:45:20Z  tick  W174  advanced  unblock  "weather id from witness hash; query text kept out"  evidence=tests/test_weather.py

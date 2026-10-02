@@ -46,7 +46,7 @@ def _stub(ref: str) -> dict:
     repo, _, sym = ref.partition(":")
     return {"id": _id(ref), "repo": repo, "symbol": sym, "cite": ref, "state": "withheld", "title": "withheld",
             "blocked_on": [], "blocked_kind": "", "caused_by": "", "minted_during": "", "effort": {},
-            "last_activity": "", "open_blockers": 0}
+            "last_activity": "", "open_blockers": 0, "weather": ""}
 
 
 def apply(docs: dict[str, object], refs: frozenset[str]) -> dict[str, object]:

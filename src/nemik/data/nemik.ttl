@@ -51,3 +51,4 @@ nemik:unresolvedBlocker a rdf:Property ; rdfs:comment "A blocked_on value on a b
 nemik:pathsforwardAdoption a rdf:Property ; rdfs:comment "declared | owner | missing | no-pyproject | unobservable: whether the workstream runs mikemol-paths-forward from its own environment (nemik.adoption)." .
 nemik:noActiveCard a rdf:Property ; rdfs:comment "Derived: the workstream has ready items and no working card (value: how many are ready)." .
 nemik:extraActiveCards a rdf:Property ; rdfs:comment "Derived: the workstream has more than one working card (value: how many)." .
+nemik:weather a rdf:Property ; rdfs:comment "nemik:W174: a hash of the waypoint's witness query; equal values wait on the same outage. The query text is not in the graph." .
