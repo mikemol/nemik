@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 179,
+  "counter": 180,
   "waypoints": [
     {
       "symbol": "W1",
@@ -3450,6 +3450,22 @@
       "minted_during": "tick",
       "caused_by": "W178",
       "last_worked": "2026-10-02T01:31:52Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W180",
+      "title": "Treemap view: repo boxes nest goals/umbrellas nest leaves; area ~ composed weight; ordered (rank = reading order); enables become containment, only cross-tree waits drawn as edges",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-02T01:32:56Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": null,
       "ticks_blocked": 0
     }
   ],
