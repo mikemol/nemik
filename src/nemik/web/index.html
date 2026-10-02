@@ -182,9 +182,14 @@ function draw() {
       { selector: ".operator.unstated", style: { "background-color": css("--interrupt") } },
       { selector: "edge.rank", style: { display: "none" } },
       // nemik:W180: a tile is a rectangle of its computed size, label top-left, repo as border colour.
+      // Step 3: fill = repo hue, tiles abut with a thin page-coloured separator, text scaled to fit;
+      // state reads as opacity (blocked dim) and a working tile's thicker separator.
       { selector: "node.tile", style: { shape: "rectangle", width: "data(tw)", height: "data(th)", padding: 0,
-        "text-valign": "top", "text-halign": "center", "font-size": 9, "border-width": 2,
-        "border-color": "data(repoColor)", "background-opacity": 0.85 } },
+        "text-valign": "center", "text-halign": "center", "font-size": "data(fs)", "border-width": 1,
+        "border-color": css("--bg"), "background-color": "data(repoColor)", "background-opacity": 1, color: "#fff",
+        "text-outline-width": 1, "text-outline-color": "#0008" } },
+      { selector: 'node.tile[state = "blocked"]', style: { "background-opacity": 0.45 } },
+      { selector: 'node.tile[state = "working"]', style: { "border-width": 3, "border-color": css("--ink") } },
       { selector: "edge.contained", style: { display: "none" } },
       { selector: "edge.cross", style: { opacity: 0.08 } },
       { selector: "edge.cross.lit", style: { opacity: 1, "z-index": 10 } },
@@ -267,10 +272,22 @@ function treeOf(nodes, edges) {
   }
   const kids = new Map([...open].map(id => [id, []]));
   for (const [id, p] of parent) if (p) kids.get(p).push(id);
+  // Own weight (step 3, operator's treemap reference: sizes must vary): 1 + how many open items
+  // this one moves downstream, over enables and waits alike, so a load-bearing leaf is a big tile.
+  const succ = new Map([...open].map(id => [id, []]));
+  for (const e of edges) {
+    const [up, down] = e.kind === "waits" ? [e.target, e.source] : [e.source, e.target];
+    if (open.has(up) && open.has(down) && up !== down) succ.get(up).push(down);
+  }
+  const own = new Map([...open].map(id => {
+    const seen = new Set([id]), st = [id];
+    while (st.length) for (const d of succ.get(st.pop())) if (!seen.has(d)) { seen.add(d); st.push(d); }
+    return [id, seen.size];
+  }));
   const weight = new Map();
-  const w = id => weight.get(id) ?? (weight.set(id, 1 + kids.get(id).reduce((a, k) => a + w(k), 0)), weight.get(id));
+  const w = id => weight.get(id) ?? (weight.set(id, own.get(id) + kids.get(id).reduce((a, k) => a + w(k), 0)), weight.get(id));
   for (const id of open) w(id);
-  return { parent, kids, weight, roots: [...open].filter(id => !parent.get(id)) };
+  return { parent, kids, weight, own, roots: [...open].filter(id => !parent.get(id)) };
 }
 // orderedTreemap: an ordered *strip* treemap (Bederson et al. 2002): items in rank order fill
 // horizontal strips, a strip closing when adding the next item would worsen its worst aspect ratio.
@@ -302,7 +319,13 @@ function orderedTreemap(tree, order, rect, pad = 4) {
         out.set(id, { ...cell, depth });
         // The header and margins shrink with a small cell, so children never leave it.
         const px = Math.min(pad, cell.w / 4), top = Math.min(pad * 3, cell.h / 4), py = Math.min(pad, cell.h / 4);
-        if (tree.kids.get(id).length) lay(tree.kids.get(id), { x: cell.x + px, y: cell.y + top, w: cell.w - 2 * px, h: cell.h - top - py }, depth + 1);
+        if (tree.kids.get(id).length) {
+          // The node's own share is a tile beside its children, so leaves partition the whole map.
+          const selfId = id + "#self";
+          tree.weight.set(selfId, tree.own.get(id)); tree.kids.set(selfId, []);
+          rank.set(selfId, -1);
+          lay([selfId, ...tree.kids.get(id)], { x: cell.x + px, y: cell.y + top, w: cell.w - 2 * px, h: cell.h - top - py }, depth + 1);
+        }
       }
       y += h;
     }
@@ -322,13 +345,15 @@ function treemap() {
   const order = ns.filter(n => n.data("rank_pos") !== undefined).sort((a, b) => a.data("rank_pos") - b.data("rank_pos")).map(n => n.id());
   // Room for one label-sized leaf (about 50x50) per unit of weight, in the pane's landscape shape.
   const total = t.roots.reduce((a, r) => a + t.weight.get(r), 0), H = Math.sqrt(total * 2500 * 0.62), W = H / 0.62;
-  const R = orderedTreemap(t, order, { x: 0, y: 0, w: W, h: H }, 6);
+  const R = orderedTreemap(t, order, { x: 0, y: 0, w: W, h: H }, 0);
   cy.batch(() => {
     ns.forEach(n => {
-      const r = R.get(n.id());
+      // A node with children is drawn by its own-share tile ("#self"); its frame is implied.
+      const r = R.get(n.id() + "#self") || R.get(n.id());
       if (!r) { n.style("display", "none"); return; }
-      n.data({ tw: Math.max(1, r.w), th: Math.max(1, r.h), repoColor: repoHue(n.data("repo")) });
-      n.addClass("tile").style("z-index", r.depth).position({ x: r.x + r.w / 2, y: r.y + r.h / 2 });
+      const fs = Math.max(0, Math.min(r.h * 0.45, r.w / Math.max(3, String(n.data("label")).length) * 1.6, 28));
+      n.data({ tw: Math.max(1, r.w), th: Math.max(1, r.h), repoColor: repoHue(n.data("repo")), fs, label: fs >= 7 ? n.data("label") : "" });
+      n.addClass("tile").position({ x: r.x + r.w / 2, y: r.y + r.h / 2 });
     });
     cy.edges().forEach(e => { if (!e.hasClass("waits") && t.parent.get(e.source().id()) === e.target().id()) e.addClass("contained"); });
     let x = 0;

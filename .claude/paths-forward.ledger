@@ -276,3 +276,4 @@
 2026-10-02T02:14:45Z  tick  W153  advanced  unblock  "--static build assembled and gated; luthen W272 unblocked"  evidence=tests/test_static.py
 2026-10-02T02:21:18Z  tick  W180  advanced  unblock  "treemap model (treeOf + orderedTreemap) with invariants test"  evidence=tests/test_layout.py
 2026-10-02T02:28:50Z  tick  W180  advanced  unblock  "treemap drawn: strip layout, fit 0.823 (slice-and-dice was 0.066)"  evidence=tests/test_layout.py
+2026-10-02T02:48:48Z  tick  W180  advanced  unblock  "treemap redrawn per operator's reference: abutting leaves, repo fill, varying weight"  evidence=tests/test_layout.py

@@ -195,7 +195,7 @@ TREEMAP_INVARIANTS = """async () => {
   const sibs = [t.roots, ...t.kids.values()];
   const hit = (a, b) => a.x < b.x + b.w - 1e-6 && b.x < a.x + a.w - 1e-6 && a.y < b.y + b.h - 1e-6 && b.y < a.y + a.h - 1e-6;
   for (const s of sibs) for (let i = 0; i < s.length; i++) for (let j = i + 1; j < s.length; j++) if (hit(R.get(s[i]), R.get(s[j]))) bad.push("overlap " + s[i] + " " + s[j]);
-  const tot = t.roots.reduce((a, r) => a + t.weight.get(r), 0);
+  const tot = [...R.keys()].filter(k => !k.endsWith("#self")).length;
   return { bad: bad.slice(0, 5), n: t.parent.size, roots: t.roots.length, total: tot,
            repos_in_one_root: Math.max(...t.roots.map(r => { const s = new Set(), st = [r]; while (st.length) { const x = st.pop(); s.add(x.split("/").slice(-2)[0]); st.push(...t.kids.get(x)); } return s.size; })) };
 }"""
@@ -236,11 +236,14 @@ def test_treemap_view_draws(server, tmp_path) -> None:
         page.check("#treemap")
         page.wait_for_function("() => cy.nodes('.tile').length > 0", timeout=60000)
         m = page.evaluate("""() => {
-          const tiles = cy.nodes('.tile'), bad = [];
-          cy.edges('.contained').forEach(e => {
-            const c = e.source().boundingBox({includeLabels: false}), q = e.target().boundingBox({includeLabels: false});
-            if (c.x1 < q.x1 - 2 || c.y1 < q.y1 - 2 || c.x2 > q.x2 + 2 || c.y2 > q.y2 + 2) bad.push(e.source().id());
-          });
+          // Step 3: leaves partition the map, so no two tiles may overlap (beyond the separator).
+          const tiles = cy.nodes('.tile').filter(n => n.visible()), bad = [];
+          // The tile's own rect (position +- size), not its bounding box: borders draw outside it.
+          const bbs = tiles.map(n => { const p = n.position(), w = n.data('tw') / 2, h = n.data('th') / 2;
+            return [n.id(), { x1: p.x - w, x2: p.x + w, y1: p.y - h, y2: p.y + h }]; });
+          const hit = (a, b) => a.x1 < b.x2 - 0.5 && b.x1 < a.x2 - 0.5 && a.y1 < b.y2 - 0.5 && b.y1 < a.y2 - 0.5;
+          for (let i = 0; i < bbs.length; i++) for (let j = i + 1; j < bbs.length; j++)
+            if (hit(bbs[i][1], bbs[j][1])) bad.push(bbs[i][0] + " x " + bbs[j][0]);
           const repos = new Set(tiles.map(n => n.data('repo')));
           const bb = cy.elements(':visible').boundingBox();
           return { tiles: tiles.length, contained: cy.edges('.contained').length, outside: bad.slice(0, 5),
@@ -253,4 +256,4 @@ def test_treemap_view_draws(server, tmp_path) -> None:
     (out / "treemap-dark.json").write_text(json.dumps(m, indent=1))
     assert errors == []
     assert m["repo_boxes"] == 0 and m["repos"] > 1, m  # not grouped by repo
-    assert m["tiles"] > 0 and m["contained"] > 0 and m["outside"] == [], m
+    assert m["tiles"] > 0 and m["contained"] > 0 and m["outside"] == [], m  # "outside" = overlapping tiles

@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 78
+      "ticks_blocked": 79
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 33,
+      "ticks_blocked": 34,
       "weight": 1
     },
     {
@@ -1360,7 +1360,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 14,
+      "ticks_blocked": 15,
       "weight": 1
     },
     {
@@ -1401,7 +1401,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-01T19:50:19Z",
-      "ticks_blocked": 15,
+      "ticks_blocked": 16,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1991,7 +1991,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 15,
+      "ticks_blocked": 16,
       "weight": 0
     },
     {
@@ -2136,7 +2136,7 @@
       "minted_during": "tick",
       "caused_by": "life",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 14,
+      "ticks_blocked": 15,
       "weight": 3
     },
     {
@@ -2462,7 +2462,7 @@
       "minted_during": "tick",
       "caused_by": "life:W23",
       "last_worked": "2026-10-01T19:49:18Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "weight": 3
     },
     {
@@ -2631,7 +2631,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 23
+      "ticks_blocked": 24
     },
     {
       "symbol": "W138",
@@ -2852,7 +2852,7 @@
       "minted_during": "tick",
       "caused_by": "life:W28",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 14,
+      "ticks_blocked": 15,
       "weight": 3
     },
     {
@@ -2898,7 +2898,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 14
+      "ticks_blocked": 15
     },
     {
       "symbol": "W151",
@@ -3098,7 +3098,7 @@
       "minted_during": "interrupt",
       "caused_by": "W113",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 14,
+      "ticks_blocked": 15,
       "weight": 3
     },
     {
@@ -3197,7 +3197,7 @@
       "minted_during": "interrupt",
       "caused_by": "W148",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 14,
+      "ticks_blocked": 15,
       "weight": 3
     },
     {
@@ -3257,7 +3257,7 @@
       "minted_during": "interrupt",
       "caused_by": "W150",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 14,
+      "ticks_blocked": 15,
       "weight": 4
     },
     {
@@ -3453,12 +3453,12 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Step 3 (operator 2026-10-01, Singapore-exports reference): draw it like a treemap -- leaves only, tiles abutting with thin separators (no padding/header frames), fill = repo hue (state as a corner mark or text), leaf area from a weight that varies (downstream/composed weight + 1, not subtree count), label font scaled to tile, only tiles big enough get text; groups read from adjacency, top-level group labelled once",
-      "evidence": "2026-10-02: operator 2026-10-01: do not group by repo; repo is a color or symbol code. Nesting follows the enables tree fleet-wide, so a cross-repo chain sits in one tile. | 2026-10-02: 2026-10-01 step 1: index.html treeOf(nodes, edges) (fleet-wide enables forest, parent = deepest open thing it enables, cycles cut at lowest id, weight = subtree size) and orderedTreemap(tree, rankOrder, rect) (slice-and-dice, alternating by depth, rank = reading order). test_layout.py::test_treemap_model on the fixture: 464 open items placed once, 272 roots, children inside parents, siblings disjoint, a root spanning >1 repo. First run put children outside tiny parents (fixed header/margins scale with cell). bazel 27/27. | 2026-10-02: 2026-10-01 step 2: 'treemap' toggle (remembered per viewer) draws tiles at orderedTreemap's rects, no repo boxes, repo = border hue, enables-to-parent edges hidden as implied by containment, chips in a row below. Slice-and-dice gave hair-thin root slivers (fit 0.066, screenshot) -> replaced with an ordered strip treemap (Bederson 2002) and canvas sized ~50x50 per unit weight: fit_zoom 0.823 on the fixture, 455 tiles, 192 contained, 0 outside parent, 15 repos. test_layout::test_treemap_view_draws; bazel 27/27. | 2026-10-02: operator 2026-10-01: step 2's render does not scan as a treemap. Diagnosis: (1) every leaf weighs 1, so tiles are a uniform grid; (2) nested padded frames read as boxes-in-boxes, not a partition; (3) fill = state and repo only on the border, so groups have no colour; (4) fixed 9px labels collide.",
+      "next_bounded_step": "Step 4: a repo colour key, and label the top-level groups once (the reference's 'Telephones'); then hover/click a tile = select (side panel), edges only on hover",
+      "evidence": "2026-10-02: operator 2026-10-01: do not group by repo; repo is a color or symbol code. Nesting follows the enables tree fleet-wide, so a cross-repo chain sits in one tile. | 2026-10-02: 2026-10-01 step 1: index.html treeOf(nodes, edges) (fleet-wide enables forest, parent = deepest open thing it enables, cycles cut at lowest id, weight = subtree size) and orderedTreemap(tree, rankOrder, rect) (slice-and-dice, alternating by depth, rank = reading order). test_layout.py::test_treemap_model on the fixture: 464 open items placed once, 272 roots, children inside parents, siblings disjoint, a root spanning >1 repo. First run put children outside tiny parents (fixed header/margins scale with cell). bazel 27/27. | 2026-10-02: 2026-10-01 step 2: 'treemap' toggle (remembered per viewer) draws tiles at orderedTreemap's rects, no repo boxes, repo = border hue, enables-to-parent edges hidden as implied by containment, chips in a row below. Slice-and-dice gave hair-thin root slivers (fit 0.066, screenshot) -> replaced with an ordered strip treemap (Bederson 2002) and canvas sized ~50x50 per unit weight: fit_zoom 0.823 on the fixture, 455 tiles, 192 contained, 0 outside parent, 15 repos. test_layout::test_treemap_view_draws; bazel 27/27. | 2026-10-02: operator 2026-10-01: step 2's render does not scan as a treemap. Diagnosis: (1) every leaf weighs 1, so tiles are a uniform grid; (2) nested padded frames read as boxes-in-boxes, not a partition; (3) fill = state and repo only on the border, so groups have no colour; (4) fixed 9px labels collide. | 2026-10-02: 2026-10-01 step 3: leaves only (a parent is its own-share '#self' tile beside its children), tiles abut with 1px separators, fill = repo hue, blocked dim, working outlined, font scaled to tile and hidden under 7px; own weight = 1 + open items it moves downstream (enables and waits), so sizes vary. Fixture fit_zoom 0.597. Test now checks the leaves partition the map (rects from position +- size, since borders draw outside). bazel 27/27.",
       "issued_at": "2026-10-02T01:32:56Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-02T02:38:18Z",
+      "last_worked": "2026-10-02T02:48:48Z",
       "ticks_blocked": 0,
       "weight": 7
     }
