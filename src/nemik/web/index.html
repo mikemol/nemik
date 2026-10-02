@@ -235,6 +235,59 @@ function rankEdges(kids) {
 // cross between them, oriented downstream: a box another box waits on sits above it. Cycles are cut
 // at DFS back edges (the edge is still drawn, just not ranked). Units with no cross edges go in a
 // last row, since nothing orders them.
+// nemik:W180 (operator 2026-10-01: "the correct layout is probably reminiscent of a treemap"; not
+// grouped by repo). Step 1, the model: the enables forest across the whole fleet, one parent each,
+// and an ordered treemap of it. Pure functions over plain data, so they can be checked headless.
+// treeOf: each open waypoint's parent is the heaviest open thing it enables (ties: lower id); a
+// second parent stays a drawn edge. Weight = 1 + the weight of everything beneath (area ~ load).
+function treeOf(nodes, edges) {
+  const open = new Set(nodes.filter(n => n.state !== "done" && n.state !== "dropped").map(n => n.id));
+  const ups = new Map([...open].map(id => [id, []]));
+  for (const e of edges) if (e.kind === "enables" && open.has(e.source) && open.has(e.target) && e.source !== e.target) ups.get(e.source).push(e.target);
+  const reach = new Map();  // number of open things each node sits under (transitively), cycle-safe
+  const depthUp = id => { if (reach.has(id)) return reach.get(id); reach.set(id, 0);
+    let d = 0; for (const u of ups.get(id)) d = Math.max(d, 1 + depthUp(u)); reach.set(id, d); return d; };
+  const parent = new Map();
+  for (const id of [...open].sort()) {
+    const cands = ups.get(id).slice().sort((a, b) => depthUp(b) - depthUp(a) || (a < b ? -1 : 1));
+    parent.set(id, cands[0] || null);
+  }
+  // A cycle in the chosen parents is cut at its lowest id, which becomes a root.
+  for (const id of [...open].sort()) {
+    const seen = new Set(); let c = id;
+    while (c && !seen.has(c)) { seen.add(c); c = parent.get(c); }
+    if (c) { const cyc = []; let x = c; do { cyc.push(x); x = parent.get(x); } while (x !== c); parent.set(cyc.sort()[0], null); }
+  }
+  const kids = new Map([...open].map(id => [id, []]));
+  for (const [id, p] of parent) if (p) kids.get(p).push(id);
+  const weight = new Map();
+  const w = id => weight.get(id) ?? (weight.set(id, 1 + kids.get(id).reduce((a, k) => a + w(k), 0)), weight.get(id));
+  for (const id of open) w(id);
+  return { parent, kids, weight, roots: [...open].filter(id => !parent.get(id)) };
+}
+// orderedTreemap: slice-and-dice in the given order (rank = reading order), alternating direction
+// by depth, each node's area proportional to its weight, its own cell a header strip of `pad`.
+function orderedTreemap(tree, order, rect, pad = 4) {
+  const out = new Map(), rank = new Map(order.map((id, i) => [id, i]));
+  const byRank = (a, b) => (rank.get(a) ?? Infinity) - (rank.get(b) ?? Infinity) || (a < b ? -1 : 1);
+  const lay = (ids, r, horiz, depth) => {
+    const total = ids.reduce((a, id) => a + tree.weight.get(id), 0);
+    let at = horiz ? r.x : r.y;
+    for (const id of ids.slice().sort(byRank)) {
+      const f = tree.weight.get(id) / total, span = (horiz ? r.w : r.h) * f;
+      const cell = horiz ? { x: at, y: r.y, w: span, h: r.h } : { x: r.x, y: at, w: r.w, h: span };
+      at += span;
+      out.set(id, { ...cell, depth });
+      // The header and margins shrink with a small cell, so children never leave it.
+      const px = Math.min(pad, cell.w / 4), top = Math.min(pad * 3, cell.h / 4), py = Math.min(pad, cell.h / 4);
+      const inner = { x: cell.x + px, y: cell.y + top, w: cell.w - 2 * px, h: cell.h - top - py };
+      if (tree.kids.get(id).length) lay(tree.kids.get(id), inner, !horiz, depth + 1);
+    }
+  };
+  lay(tree.roots, rect, true, 0);
+  return out;
+}
+
 // nemik:W135 (operator 2026-09-28: "a multi-headed overlapping dag/forest view ordered by
 // nemik-rank"). Inside one repo box: the HEADS are its goals (nothing open in the box follows
 // them); each hangs its prerequisites below it. Heads run left to right by the best nemik-rank

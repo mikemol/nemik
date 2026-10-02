@@ -274,3 +274,4 @@
 2026-10-02T01:44:32Z  tick  W171  advanced  unblock  "static page drops the Tools panel; W172 (withheld gate) working"  evidence=tests/test_static.py
 2026-10-02T02:01:44Z  tick  W172  advanced  unblock  "withheld gate, failing closed; W153 (assemble --static) working"  evidence=tests/test_withheld.py
 2026-10-02T02:14:45Z  tick  W153  advanced  unblock  "--static build assembled and gated; luthen W272 unblocked"  evidence=tests/test_static.py
+2026-10-02T02:21:18Z  tick  W180  advanced  unblock  "treemap model (treeOf + orderedTreemap) with invariants test"  evidence=tests/test_layout.py

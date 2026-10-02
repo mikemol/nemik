@@ -179,3 +179,41 @@ def test_rank_forest_view(server, tmp_path) -> None:
     assert m["fit_zoom"] >= FOREST_BUDGET["fit_zoom"], m
     assert m["intra_crossings"] <= FOREST_BUDGET["intra_crossings"], m
     assert m["cross_upward"] <= FOREST_BUDGET["cross_upward"], m
+
+
+TREEMAP_INVARIANTS = """async () => {
+  const g = await (await fetch("graph.json")).json();
+  const t = treeOf(g.nodes, g.edges);
+  const order = g.nodes.filter(n => n.rank_pos !== undefined).sort((a, b) => a.rank_pos - b.rank_pos).map(n => n.id);
+  const R = orderedTreemap(t, order, { x: 0, y: 0, w: 1600, h: 1000 });
+  const bad = [];
+  for (const [id, p] of t.parent) {
+    if (!R.has(id)) bad.push("unplaced " + id);
+    const r = R.get(id), q = p && R.get(p);
+    if (q && !(r.x >= q.x - 1e-6 && r.y >= q.y - 1e-6 && r.x + r.w <= q.x + q.w + 1e-6 && r.y + r.h <= q.y + q.h + 1e-6)) bad.push("outside parent " + id);
+  }
+  const sibs = [t.roots, ...t.kids.values()];
+  const hit = (a, b) => a.x < b.x + b.w - 1e-6 && b.x < a.x + a.w - 1e-6 && a.y < b.y + b.h - 1e-6 && b.y < a.y + a.h - 1e-6;
+  for (const s of sibs) for (let i = 0; i < s.length; i++) for (let j = i + 1; j < s.length; j++) if (hit(R.get(s[i]), R.get(s[j]))) bad.push("overlap " + s[i] + " " + s[j]);
+  const tot = t.roots.reduce((a, r) => a + t.weight.get(r), 0);
+  return { bad: bad.slice(0, 5), n: t.parent.size, roots: t.roots.length, total: tot,
+           repos_in_one_root: Math.max(...t.roots.map(r => { const s = new Set(), st = [r]; while (st.length) { const x = st.pop(); s.add(x.split("/").slice(-2)[0]); st.push(...t.kids.get(x)); } return s.size; })) };
+}"""
+
+
+def test_treemap_model(server) -> None:
+    """nemik:W180 step 1: one parent each, children inside parents, siblings disjoint, across repos."""
+    with sync_api.sync_playwright() as p:
+        try:
+            exe = os.environ.get("NEMIK_CHROMIUM")
+            browser = p.chromium.launch(executable_path=os.path.abspath(exe) if exe else None)
+        except Exception as e:  # noqa: BLE001 - no browser installed here
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page()
+        page.goto(server)
+        page.wait_for_function("() => typeof treeOf === 'function'", timeout=60000)
+        m = page.evaluate(TREEMAP_INVARIANTS)
+        browser.close()
+    assert m["bad"] == [], m
+    assert m["n"] > 0 and m["total"] == m["n"], m  # every open item is placed exactly once
+    assert m["repos_in_one_root"] > 1, m  # not grouped by repo: a tree spans repos
