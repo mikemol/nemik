@@ -7,7 +7,8 @@ a set, `field`/`rule` are for the owning repo and ignored here; `items: []` with
 
 A withheld item publishes nothing of its own: no title, ask, blockers, effort or goal entry. Where
 a published item points at it, the end is a stub carrying the symbol only, so no dependency
-silently disappears. An edge between two withheld items is dropped.
+silently disappears (luthen confirmed this reading 2026-10-01: "no edges into it" meant no node or
+content, not losing the dependency). An edge between two withheld items is dropped.
 """
 
 from __future__ import annotations

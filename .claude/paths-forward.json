@@ -3328,11 +3328,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": null,
-      "evidence": "2026-10-02: 2026-10-01: src/nemik/withheld.py load() fails on missing/non-JSON/unknown-version/bad items; apply() drops each withheld item from nodes, inbound, operator, goals, wake operator lane; roster waiting rows keep the ref with title 'withheld'; an edge with one published end keeps a symbol-only stub, an edge between two withheld items is dropped. tests/test_withheld.py (4); bazel 27/27. My first test hung: fixture titles are substrings of each other ('aeternum W2' in 'aeternum W20') and pytest's diff of the failure ran away; replaced with a sentinel title. Open boundary: luthen's contract says both 'no edges into it' and 'stub where referenced'; I read it as the edge kept, ending at the stub. Asked luthen to confirm.",
+      "evidence": "2026-10-02: 2026-10-01: src/nemik/withheld.py load() fails on missing/non-JSON/unknown-version/bad items; apply() drops each withheld item from nodes, inbound, operator, goals, wake operator lane; roster waiting rows keep the ref with title 'withheld'; an edge with one published end keeps a symbol-only stub, an edge between two withheld items is dropped. tests/test_withheld.py (4); bazel 27/27. My first test hung: fixture titles are substrings of each other ('aeternum W2' in 'aeternum W20') and pytest's diff of the failure ran away; replaced with a sentinel title. Open boundary: luthen's contract says both 'no edges into it' and 'stub where referenced'; I read it as the edge kept, ending at the stub. Asked luthen to confirm. | 2026-10-02: 2026-10-01: luthen-observability-6b confirmed the built reading (edge kept to a symbol-only stub; 'no edges into it' meant no node/content). Boundary closed.",
       "issued_at": "2026-10-01T19:51:39Z",
       "minted_during": "interrupt",
       "caused_by": "W153",
-      "last_worked": "2026-10-02T02:01:43Z",
+      "last_worked": "2026-10-02T02:04:44Z",
       "ticks_blocked": 0,
       "weight": 5
     },
