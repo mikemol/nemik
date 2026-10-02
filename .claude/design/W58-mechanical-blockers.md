@@ -132,3 +132,18 @@ ddG, and one `--apply` pass wakes every waiter.
 
 Observable fact: this needs blackbox probes of shared endpoints (luthen, nemik:W76). `up` for a
 metrics port is not the same claim as "BES accepts uploads".
+
+### As built (2026-10-02: nemik:W173, W174)
+
+- **Convention** (W173): the nemik skill's "Waiting on an outage (weather)" section teaches it:
+  the blocked repo mints the waypoint, its work blocks on it by citation, the witness is over an
+  observer fact (`.state` for alerts, `.values` for promql), done is final.
+- **Identity** (W174): the identity is the witness query, but the graph carries only a hash of it
+  (`nemik:weather = wx:<sha256 of the whitespace-collapsed query, 10 hex>`). The query can name
+  hosts or endpoints, which the public view must not show (withhold-whole contract, W153/W172),
+  and equality is all the grouping needs. Two spellings of one query that differ beyond whitespace
+  are two weather items: residue, accepted, since normalizing Rego is a parser's job.
+- **Views**: the side panel's Weather section lists each open outage once with its waiters; a
+  goal's ddG ("waits on") shows a shared outage once. `nemik-witnesses --apply` already wakes every
+  waiter in one pass (W64).
+- Still open: the probes themselves (luthen, nemik:W76's blackbox targets).

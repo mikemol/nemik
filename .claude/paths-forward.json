@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 114
+      "ticks_blocked": 116
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 69,
+      "ticks_blocked": 71,
       "weight": 1
     },
     {
@@ -1343,23 +1343,20 @@
     {
       "symbol": "W75",
       "title": "Weather: one outage = one monotone FFI waypoint, witness over a probe fact",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [
         "conditions"
       ],
-      "blocked_on": [
-        "W174",
-        "W175"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "2026-10-01: full title before the 2026-10-01 trim: minted by the blocked repo; identical witness queries group as one weather item in views and ddG; design note in W58 doc",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-01: full title before the 2026-10-01 trim: minted by the blocked repo; identical witness queries group as one weather item in views and ddG; design note in W58 doc | 2026-10-02: 2026-10-02: children landed: W173 (convention in the skill), W174 (weather id, panel, ddG once), W175 (design note as built).",
       "issued_at": "2026-09-27T19:42:13Z",
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
-      "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 2,
+      "last_worked": "2026-10-02T14:44:09Z",
+      "ticks_blocked": 0,
       "weight": 1
     },
     {
@@ -1400,7 +1397,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-01T19:50:19Z",
-      "ticks_blocked": 51,
+      "ticks_blocked": 53,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -2616,7 +2613,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 59
+      "ticks_blocked": 61
     },
     {
       "symbol": "W138",
@@ -2679,7 +2676,7 @@
     {
       "symbol": "W141",
       "title": "Regenerate tests/fixtures/fleet from ~/github (make_fleet.py): the snapshot predates life:W23, so nemik's own W128/W129/W134 edges fail against it",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [
         "fixtures"
@@ -2691,7 +2688,7 @@
       "issued_at": "2026-10-01T01:27:32Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-10-01T01:27:32Z",
+      "last_worked": "2026-10-02T14:44:22Z",
       "ticks_blocked": 0,
       "weight": 1
     },
@@ -2835,7 +2832,7 @@
       "minted_during": "tick",
       "caused_by": "life:W28",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 19,
       "weight": 3
     },
     {
@@ -3076,7 +3073,7 @@
       "minted_during": "interrupt",
       "caused_by": "W148",
       "last_worked": "2026-10-02T09:13:53Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 20,
       "weight": 5
     },
     {
@@ -3135,7 +3132,7 @@
       "minted_during": "interrupt",
       "caused_by": "W148",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 19,
       "weight": 3
     },
     {
@@ -3312,19 +3309,19 @@
     {
       "symbol": "W175",
       "title": "Weather: design note in the W58 doc",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W75"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-02: 2026-10-02: .claude/design/W58-mechanical-blockers.md 'Weather' gains 'As built': W173 convention, W174 hashed identity (why the query stays out of the graph; whitespace-only normalization residue), views, open item (probes, W76).",
       "issued_at": "2026-10-01T19:51:39Z",
       "minted_during": "interrupt",
       "caused_by": "W75",
-      "last_worked": "2026-10-02T14:16:11Z",
+      "last_worked": "2026-10-02T14:44:09Z",
       "ticks_blocked": 0,
       "weight": 2
     },
@@ -3429,7 +3426,7 @@
       "minted_during": "tick",
       "caused_by": "W158",
       "last_worked": "2026-10-02T06:44:50Z",
-      "ticks_blocked": 25
+      "ticks_blocked": 27
     },
     {
       "symbol": "W183",
