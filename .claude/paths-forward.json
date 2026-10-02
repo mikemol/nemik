@@ -3448,7 +3448,7 @@
     {
       "symbol": "W180",
       "title": "Treemap view: goals/umbrellas nest leaves across repos; area ~ composed weight; rank = reading order; repo by color/symbol",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
@@ -3458,7 +3458,7 @@
       "issued_at": "2026-10-02T01:32:56Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-02T01:35:11Z",
+      "last_worked": "2026-10-02T02:15:35Z",
       "ticks_blocked": 0,
       "weight": 7
     }
