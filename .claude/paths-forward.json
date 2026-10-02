@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 91
+      "ticks_blocked": 93
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 46,
+      "ticks_blocked": 48,
       "weight": 1
     },
     {
@@ -1360,7 +1360,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 29,
       "weight": 1
     },
     {
@@ -1401,7 +1401,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-01T19:50:19Z",
-      "ticks_blocked": 28,
+      "ticks_blocked": 30,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1991,7 +1991,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 28,
+      "ticks_blocked": 30,
       "weight": 0
     },
     {
@@ -2123,7 +2123,6 @@
         "sources"
       ],
       "blocked_on": [
-        "W160",
         "W161"
       ],
       "blocked_kind": "agent",
@@ -2458,7 +2457,7 @@
       "minted_during": "tick",
       "caused_by": "life:W23",
       "last_worked": "2026-10-01T19:49:18Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 7,
       "weight": 3
     },
     {
@@ -2627,7 +2626,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 36
+      "ticks_blocked": 38
     },
     {
       "symbol": "W138",
@@ -2848,7 +2847,7 @@
       "minted_during": "tick",
       "caused_by": "life:W28",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 29,
       "weight": 3
     },
     {
@@ -3074,19 +3073,19 @@
     {
       "symbol": "W160",
       "title": "nemik-operator shows the next N days of calendar events",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W113"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-02: 2026-10-02: nemik-operator --days N [--calendars FILE --helper BIN]: opted-in calendars' next N days, each with the waypoints waiting on it (event_graph); no config -> 'no calendar opted in'; --json wraps {asks, calendar}. test_calendars end-to-end with a stand-in helper and real mikemol-ics; SKILL.md row. bazel 30/30. Live use waits on W182 (operator picks calendars).",
       "issued_at": "2026-10-01T19:51:38Z",
       "minted_during": "interrupt",
       "caused_by": "W113",
-      "last_worked": "2026-10-02T07:14:53Z",
+      "last_worked": "2026-10-02T07:44:58Z",
       "ticks_blocked": 0,
       "weight": 3
     },
@@ -3112,7 +3111,7 @@
     {
       "symbol": "W162",
       "title": "Tasks: test on ONE task that RELATED-TO;RELTYPE=PARENT maps to the Google Tasks parent",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W148"
       ],
@@ -3124,7 +3123,7 @@
       "issued_at": "2026-10-01T19:51:38Z",
       "minted_during": "interrupt",
       "caused_by": "W148",
-      "last_worked": null,
+      "last_worked": "2026-10-02T07:45:11Z",
       "ticks_blocked": 0,
       "weight": 5
     },
@@ -3186,7 +3185,7 @@
       "minted_during": "interrupt",
       "caused_by": "W148",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 29,
       "weight": 3
     },
     {
@@ -3480,7 +3479,7 @@
       "minted_during": "tick",
       "caused_by": "W158",
       "last_worked": "2026-10-02T06:44:50Z",
-      "ticks_blocked": 2
+      "ticks_blocked": 4
     },
     {
       "symbol": "W183",
@@ -3498,7 +3497,8 @@
       "minted_during": "tick",
       "caused_by": "W159",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 4
     }
   ],
   "residue": [
