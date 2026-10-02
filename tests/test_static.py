@@ -28,3 +28,9 @@ def test_data_files_cover_what_the_page_fetches_and_are_manifested() -> None:
     assert docs["wake.json"]["liveness"] == "snapshot"  # no host path published
     for name, doc in docs.items():
         assert unmanifested(name, doc) == [], name
+
+
+def test_static_page_has_no_tools_panel(tmp_path) -> None:
+    write_static(tmp_path)
+    html = (tmp_path / "index.html").read_text()
+    assert 'id="tool"' not in html and "cmd/" not in html.split("<script>")[0]

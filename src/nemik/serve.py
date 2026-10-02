@@ -305,7 +305,13 @@ def write_static(out: Path) -> list[Path]:
     web = files("nemik.web")
     written = [out / "index.html"]
     (out / "vendor").mkdir(parents=True, exist_ok=True)
-    written[0].write_bytes(web.joinpath("index.html").read_bytes())
+    page = web.joinpath("index.html").read_text()
+    # nemik:W171: the Tools panel runs commands on the server; a static host has none, so it is cut.
+    head, _, rest = page.partition("<!-- tools:")
+    _, _, tail = rest.partition("<!-- /tools -->")
+    if not tail:
+        raise ValueError("index.html: the Tools panel markers are missing")
+    written[0].write_text(head + tail)
     for name in sorted(VENDOR):
         dst = out / "vendor" / name
         dst.write_bytes(web.joinpath("vendor").joinpath(name).read_bytes())

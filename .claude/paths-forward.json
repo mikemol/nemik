@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 71
+      "ticks_blocked": 73
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 26,
+      "ticks_blocked": 28,
       "weight": 1
     },
     {
@@ -1360,7 +1360,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 9,
       "weight": 1
     },
     {
@@ -1401,7 +1401,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-01T19:50:19Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 10,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1991,7 +1991,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 10,
       "weight": 0
     },
     {
@@ -2136,7 +2136,7 @@
       "minted_during": "tick",
       "caused_by": "life",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 9,
       "weight": 3
     },
     {
@@ -2462,7 +2462,7 @@
       "minted_during": "tick",
       "caused_by": "life:W23",
       "last_worked": "2026-10-01T19:49:18Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 11,
       "weight": 3
     },
     {
@@ -2631,7 +2631,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 16
+      "ticks_blocked": 18
     },
     {
       "symbol": "W138",
@@ -2852,7 +2852,7 @@
       "minted_during": "tick",
       "caused_by": "life:W28",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 9,
       "weight": 3
     },
     {
@@ -2898,7 +2898,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 7
+      "ticks_blocked": 9
     },
     {
       "symbol": "W151",
@@ -2952,8 +2952,6 @@
         "publish"
       ],
       "blocked_on": [
-        "W170",
-        "W171",
         "W172"
       ],
       "blocked_kind": "agent",
@@ -2963,7 +2961,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W269",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 5
+      "ticks_blocked": 1
     },
     {
       "symbol": "W154",
@@ -3102,7 +3100,7 @@
       "minted_during": "interrupt",
       "caused_by": "W113",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 9,
       "weight": 3
     },
     {
@@ -3201,7 +3199,7 @@
       "minted_during": "interrupt",
       "caused_by": "W148",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 9,
       "weight": 3
     },
     {
@@ -3261,7 +3259,7 @@
       "minted_during": "interrupt",
       "caused_by": "W150",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 9,
       "weight": 4
     },
     {
@@ -3305,6 +3303,25 @@
     {
       "symbol": "W171",
       "title": "Static view: omit the Tools panel (/cmd) in static mode",
+      "status": "done",
+      "enables": [
+        "W153"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-02: 2026-10-01: index.html marks the Tools panel <!-- tools: ... /tools -->; write_static cuts it (fails if markers are missing); JS guards a missing #tool; test_static asserts no #tool in the static page; bazel 26/26.",
+      "issued_at": "2026-10-01T19:51:39Z",
+      "minted_during": "interrupt",
+      "caused_by": "W153",
+      "last_worked": "2026-10-02T01:44:32Z",
+      "ticks_blocked": 0,
+      "weight": 7
+    },
+    {
+      "symbol": "W172",
+      "title": "Static view: --withheld FILE gate, failing closed (luthen's v1 contract)",
       "status": "working",
       "enables": [
         "W153"
@@ -3317,30 +3334,8 @@
       "issued_at": "2026-10-01T19:51:39Z",
       "minted_during": "interrupt",
       "caused_by": "W153",
-      "last_worked": "2026-10-02T01:37:50Z",
+      "last_worked": "2026-10-02T01:44:32Z",
       "ticks_blocked": 0,
-      "weight": 7
-    },
-    {
-      "symbol": "W172",
-      "title": "Static view: --withheld FILE gate, failing closed (luthen's v1 contract)",
-      "status": "blocked",
-      "enables": [
-        "W153"
-      ],
-      "touches": [],
-      "blocked_on": [
-        "W170",
-        "W171"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "",
-      "issued_at": "2026-10-01T19:51:39Z",
-      "minted_during": "interrupt",
-      "caused_by": "W153",
-      "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 5,
       "weight": 5
     },
     {
@@ -3467,7 +3462,7 @@
       "caused_by": "operator",
       "last_worked": "2026-10-02T01:35:11Z",
       "ticks_blocked": 0,
-      "weight": 8
+      "weight": 7
     }
   ],
   "residue": [
