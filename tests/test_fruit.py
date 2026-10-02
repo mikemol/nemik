@@ -55,3 +55,14 @@ def test_deep_item_outweighing_the_pile_leads() -> None:
     from nemik.rank import load_weights, rank
     g = _graph({"W1": ["W90"], "W2": [], "W3": []})  # one stalled peer (8) > fruit 2
     assert rank(g, "a", load_weights())[0]["symbol"] == "W1"
+
+
+def test_a_working_fruit_member_holds_the_class_slot() -> None:
+    """luthen-observability 2026-10-02: with a fruit member working, no other member inherits the class weight."""
+    from nemik.adapter import OSLC_CM, waypoint_uri
+    from nemik.rank import load_weights, rank
+    g = _graph({"W1": ["W90"], "W2": [], "W3": [], "W4": [], "W5": [], "W6": [],
+                "W7": [], "W8": [], "W9": [], "W10": []})
+    g.set((waypoint_uri("a", "W2"), OSLC_CM.state, NEMIK.Working))
+    rows = rank(g, "a", load_weights())
+    assert rows[0]["symbol"] == "W1" and not any("fruit" in r for r in rows)

@@ -234,7 +234,13 @@ def rank(g: Graph, repo: str, weights: Weights, comp: Composition | None = None,
              **objectives(g, n, weights, bands)} for n in ready]
     # nemik:W178: the fruit class competes as one row. Its heaviest member stands in for it with
     # the class weight, so it is worked first exactly when the pile outweighs the deepest item.
-    if fruit_row and (f := fruit(g, repo, rows, weights)) and len(f["members"]) > 1:
+    # While a fruit member is the working card, the class's slot is taken: no stand-in is promoted,
+    # or the next member would inherit the class weight and read as DRIFT against the queue
+    # (luthen-observability, 2026-10-02: W52 working, W56 suddenly "carries 13").
+    working = [n for n in g.subjects(NEMIK.workstream, ws) if (n, OSLC_CM.state, NEMIK.Working) in g]
+    fruit_busy = any(downstream_weight(g, n, weights) == 0
+                     or (n, NEMIK.touches, Literal(FRUIT_TAG)) in g for n in working)
+    if fruit_row and not fruit_busy and (f := fruit(g, repo, rows, weights)) and len(f["members"]) > 1:
         rep = min((r for r in rows if r["symbol"] in f["members"]),
                   key=lambda r: (-r["downstream"], int(r["symbol"].lstrip("W"))))
         rep["weight"], rep["fruit"] = f["class_weight"], f
