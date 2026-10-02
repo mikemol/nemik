@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 177,
+  "counter": 178,
   "waypoints": [
     {
       "symbol": "W1",
@@ -3418,6 +3418,22 @@
       "last_worked": "2026-10-02T00:08:54Z",
       "ticks_blocked": 0,
       "weight": 7
+    },
+    {
+      "symbol": "W178",
+      "title": "nemik-rank alternates two lanes: low-hanging fruit (cheap ready leaves) and deep impact (top downstream weight); --check warns when the ledger shows N ticks in one lane",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-02T00:13:17Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
