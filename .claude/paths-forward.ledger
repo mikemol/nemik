@@ -272,3 +272,4 @@
 2026-10-02T01:32:10Z  tick  W179  advanced  --  "operator: crossings rise is the constraint's cost; budget re-based 235->340, view ships fruit order; W178/W179 done, W170 working"
 2026-10-02T01:37:50Z  tick  W170  advanced  unblock  "static data docs, manifested; inbound and host path kept off the public surface; W171 working"  evidence=tests/test_static.py
 2026-10-02T01:44:32Z  tick  W171  advanced  unblock  "static page drops the Tools panel; W172 (withheld gate) working"  evidence=tests/test_static.py
+2026-10-02T02:01:44Z  tick  W172  advanced  unblock  "withheld gate, failing closed; W153 (assemble --static) working"  evidence=tests/test_withheld.py
