@@ -74,3 +74,34 @@ def occurrences(collections: dict[str, str], *, start: str, window: str = "14d",
         return sorted(out, key=lambda r: (r["start"] or "", r["label"], r["uid"] or ""))
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
+
+
+CAL_REF = re.compile(r"cal:([a-z][a-z0-9-]{0,31})/(\S+)")
+
+
+def event_graph(occs: list[dict], queues):
+    """nemik:W159: occurrences as nemik:Event nodes, and every open waypoint whose blocked_on cites
+    `cal:<label>/<uid>` waiting for that event's next occurrence (nemik:waitsFor).
+
+    HOST-SIDE ONLY: the result carries event text, so it is merged into a graph for nemik-operator
+    on the host, never into nemik-serve, the export or metrics (operator 2026-09-28).
+    """
+    from rdflib import Graph, Literal, URIRef
+    from rdflib.namespace import DCTERMS, RDF
+
+    from nemik.adapter import NEMIK, OSLC_CM
+
+    g = Graph()
+    nxt: dict[tuple[str, str], URIRef] = {}
+    for o in occs:  # sorted by start, so the first seen per (label, uid) is the next occurrence
+        ev = URIRef(f"urn:nemik:cal:{o['label']}/{o['uid']}/{o['recurrence_id'] or o['start']}")
+        g.add((ev, RDF.type, NEMIK.Event))
+        g.add((ev, DCTERMS.title, Literal(o["summary"] or "")))
+        g.add((ev, NEMIK.dtstart, Literal(o["start"] or "")))
+        nxt.setdefault((o["label"], o["uid"]), ev)
+    for n, _, text in queues.triples((None, NEMIK.blockedOn, None)):
+        if (n, OSLC_CM.state, NEMIK.Done) in queues:
+            continue
+        if (m := CAL_REF.fullmatch(str(text).strip())) and (ev := nxt.get((m[1], m[2]))):
+            g.add((n, NEMIK.waitsFor, ev))
+    return g

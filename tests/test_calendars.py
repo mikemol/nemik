@@ -54,3 +54,22 @@ def test_config_opts_calendars_in(tmp_path) -> None:
     p.write_text('[calendars]\n"Home Cal" = "Personal"\n')
     with pytest.raises(ValueError, match="bad entry"):
         load_collections(p)
+
+
+def test_events_become_nodes_and_cal_refs_wait_on_the_next_occurrence() -> None:
+    from rdflib import Graph, Literal
+
+    from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri
+    from nemik.calendars import event_graph
+
+    occs = [{"label": "home", "uid": "a@t", "start": "2026-10-03T15:00:00+00:00", "end": None, "all_day": False,
+             "summary": "dentist", "recurrence_id": "2026-10-03T15:00:00+00:00"},
+            {"label": "home", "uid": "a@t", "start": "2026-10-10T15:00:00+00:00", "end": None, "all_day": False,
+             "summary": "dentist", "recurrence_id": "2026-10-10T15:00:00+00:00"}]
+    q = Graph()
+    w = waypoint_uri("life", "W9")
+    q.add((w, OSLC_CM.state, STATE["blocked"]))
+    q.add((w, NEMIK.blockedOn, Literal("cal:home/a@t")))
+    g = event_graph(occs, q)
+    assert len(set(g.subjects(None, NEMIK.Event))) == 2
+    assert [str(t) for t in g.objects(w, NEMIK.waitsFor)] == ["urn:nemik:cal:home/a@t/2026-10-03T15:00:00+00:00"]
