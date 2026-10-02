@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 102
+      "ticks_blocked": 104
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 57,
+      "ticks_blocked": 59,
       "weight": 1
     },
     {
@@ -1360,7 +1360,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W111",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 38,
+      "ticks_blocked": 40,
       "weight": 1
     },
     {
@@ -1401,7 +1401,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-01T19:50:19Z",
-      "ticks_blocked": 39,
+      "ticks_blocked": 41,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -1991,7 +1991,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 39,
+      "ticks_blocked": 41,
       "weight": 0
     },
     {
@@ -2114,7 +2114,7 @@
     {
       "symbol": "W113",
       "title": "Operator calendars as a nemik source (life ask), credentials never exported",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "life:W13"
       ],
@@ -2124,12 +2124,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-09-28: Needs mtools' calendar reader (mtools/inbox/2026-09-28-life-ask-calendar-reader.md) and luthen's Akonadi declaration. | 2026-10-01: 2026-10-01 mtools-3d: claimed as mtools:W304 (what mtools supplies, e.g. icsstruct/mikemol-ics, vs luthen's Akonadi side). | 2026-10-01: 2026-10-01 mtools-3d: mtools:W304 answered: mtools' part exists (mikemol-icsstruct, mikemol-ics --window 14d --json SOURCE: per-occurrence records, RRULE/RDATE/EXDATE/overrides, tz-aware, lossless, URLs redacted). The Akonadi read is nemik's (Qt/KF stays out of mtools): W147 exports an .ics, then nemik reads it through mikemol-ics (add mikemol-icsstruct as a dependency when W113 is worked). | 2026-10-01: full title before the 2026-10-01 trim: life ask: operator calendars as a nemik source (~/.config/nemik/calendars.toml, Akonadi collections on luthen via mtools' calendar reader; events as nodes, waypoint 'at' cal:<label>/<uid>; nemik-operator shows next N days); credentials never in graph/metrics/export",
+      "next_bounded_step": null,
+      "evidence": "2026-09-28: Needs mtools' calendar reader (mtools/inbox/2026-09-28-life-ask-calendar-reader.md) and luthen's Akonadi declaration. | 2026-10-01: 2026-10-01 mtools-3d: claimed as mtools:W304 (what mtools supplies, e.g. icsstruct/mikemol-ics, vs luthen's Akonadi side). | 2026-10-01: 2026-10-01 mtools-3d: mtools:W304 answered: mtools' part exists (mikemol-icsstruct, mikemol-ics --window 14d --json SOURCE: per-occurrence records, RRULE/RDATE/EXDATE/overrides, tz-aware, lossless, URLs redacted). The Akonadi read is nemik's (Qt/KF stays out of mtools): W147 exports an .ics, then nemik reads it through mikemol-ics (add mikemol-icsstruct as a dependency when W113 is worked). | 2026-10-01: full title before the 2026-10-01 trim: life ask: operator calendars as a nemik source (~/.config/nemik/calendars.toml, Akonadi collections on luthen via mtools' calendar reader; events as nodes, waypoint 'at' cal:<label>/<uid>; nemik-operator shows next N days); credentials never in graph/metrics/export | 2026-10-02: 2026-10-02: children landed: W157 (mikemol-ics vendored, calendars.occurrences), W158 (calendars.toml opt-in), W159 (events as nodes, cal: refs wait on the next occurrence), W160/W161 (nemik-days, host-only, boundary witnessed), W183 (check accepts cal: blocks). Live use waits only on the operator's calendar choice (W182).",
       "issued_at": "2026-09-28T15:05:07Z",
       "minted_during": "tick",
       "caused_by": "life",
-      "last_worked": "2026-10-01T23:45:16Z",
+      "last_worked": "2026-10-02T10:45:13Z",
       "ticks_blocked": 0,
       "weight": 3
     },
@@ -2622,12 +2622,12 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 47
+      "ticks_blocked": 49
     },
     {
       "symbol": "W138",
       "title": "rank --check POLICY: an optional dependent filter, so a class blocks only named dependents (luthen's example: tenant-facing rollouts)",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [
         "nemik-rank",
@@ -2640,7 +2640,7 @@
       "issued_at": "2026-10-01T01:27:31Z",
       "minted_during": "interrupt",
       "caused_by": "W133",
-      "last_worked": "2026-10-01T01:27:31Z",
+      "last_worked": "2026-10-02T10:45:26Z",
       "ticks_blocked": 0,
       "weight": 3
     },
@@ -2841,7 +2841,7 @@
       "minted_during": "tick",
       "caused_by": "life:W28",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 7,
       "weight": 3
     },
     {
@@ -3120,7 +3120,7 @@
       "minted_during": "interrupt",
       "caused_by": "W148",
       "last_worked": "2026-10-02T09:13:53Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 8,
       "weight": 5
     },
     {
@@ -3179,7 +3179,7 @@
       "minted_during": "interrupt",
       "caused_by": "W148",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 7,
       "weight": 3
     },
     {
@@ -3473,24 +3473,24 @@
       "minted_during": "tick",
       "caused_by": "W158",
       "last_worked": "2026-10-02T06:44:50Z",
-      "ticks_blocked": 13
+      "ticks_blocked": 15
     },
     {
       "symbol": "W183",
       "title": "nemik-check: a blocked_on of cal:<label>/<uid> is a resolvable condition (not UnresolvedBlocker), checked against calendars.toml labels only, never event text",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W113"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-02: 2026-10-02: blocks.annotate exempts blocked_on matching cal:<label>/<uid> from UnresolvedBlocker, by form only (the check never reads calendars, W161; on the pod there are none). test_umbrella_block: cal form clean, prose still flagged; CAL_BLOCK and calendars.CAL_REF patterns agree. SKILL.md row. bazel 31/31.",
       "issued_at": "2026-10-02T07:14:53Z",
       "minted_during": "tick",
       "caused_by": "W159",
-      "last_worked": "2026-10-02T10:16:11Z",
+      "last_worked": "2026-10-02T10:45:06Z",
       "ticks_blocked": 0,
       "weight": 4
     }

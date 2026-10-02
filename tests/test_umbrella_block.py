@@ -85,3 +85,21 @@ def test_a_chain_step_with_one_open_child_is_not_an_umbrella() -> None:
     g.add((waiter, NEMIK.waitsFor, step))
     annotate(g)
     assert (waiter, NEMIK.umbrellaBlockOn, None) not in g
+
+
+def test_a_calendar_block_is_a_condition_not_unresolved() -> None:
+    """nemik:W183: cal:<label>/<uid> resolves by form; prose still does not."""
+    g = Graph()
+    cal, prose = _wp(g, "life", "W1", "blocked"), _wp(g, "life", "W2", "blocked")
+    g.add((cal, NEMIK.blockedOn, Literal("cal:home/a@t")))
+    g.add((prose, NEMIK.blockedOn, Literal("after the dentist")))
+    annotate(g)
+    assert (cal, NEMIK.unresolvedBlocker, None) not in g
+    assert (prose, NEMIK.unresolvedBlocker, None) in g
+
+
+def test_cal_forms_agree() -> None:
+    from nemik.blocks import CAL_BLOCK
+    from nemik.calendars import CAL_REF
+
+    assert CAL_BLOCK.pattern == CAL_REF.pattern.replace("(", "").replace(")", "")

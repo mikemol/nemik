@@ -23,6 +23,9 @@ _SYMBOLISH = re.compile(r"^([A-Za-z0-9_.-]+:)?W\d+\b")
 _CLEAN_SYMBOL = re.compile(r"([A-Za-z0-9_.-]+:)?W\d+")
 
 
+CAL_BLOCK = re.compile(r"cal:[a-z][a-z0-9-]{0,31}/\S+")  # same form as nemik.calendars.CAL_REF
+
+
 def ref(node: URIRef) -> str:
     """The citable form of a waypoint IRI: `<repo>:W<n>`."""
     repo, _, sym = str(node).removeprefix(BASE).partition("/")
@@ -74,7 +77,11 @@ def annotate(g: Graph) -> None:
         human = str(g.value(node, NEMIK.blockedKind) or "") == "human"  # drawn to an operator lane
         if (node, NEMIK.waitsFor, None) not in g and not human:
             for text in g.objects(node, NEMIK.blockedOn):
-                g.add((node, NEMIK.unresolvedBlocker, text))
+                # nemik:W183: cal:<label>/<uid> is a condition, an event on the operator's calendar
+                # (nemik-days resolves it host-side). Checked by form only: the check runs where the
+                # calendars are not, and must never read them (nemik:W161).
+                if not CAL_BLOCK.fullmatch(str(text).strip()):
+                    g.add((node, NEMIK.unresolvedBlocker, text))
 
     # A peer block that lands on an UMBRELLA -- a waypoint its own repo's open children enable --
     # rather than on the child step doing the work (nemik:W41, luthen-observability's finding):

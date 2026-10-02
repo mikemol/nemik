@@ -94,7 +94,7 @@ listed. If it appears under *unstated*, or not at all, the chain is broken somew
 | `UnclaimedBlockShape` | blocked on a workstream and nothing there claims it | cite `<repo>:W<n>`, or ask them to mint a claiming waypoint (rule 2) |
 | `OperatorAskShape` | operator block with no stated ask, or one already answered | rule 4 |
 | `UmbrellaBlockShape` | blocked on another repo's umbrella (2+ open children enable it), not the child step doing the work; a single-child chain step is fine to cite | cite the child `<repo>:W<n>` |
-| `UnresolvedBlockerShape` | blocked_on names no repo, waypoint or operator ask nemik can resolve | rewrite it as one of those |
+| `UnresolvedBlockerShape` | blocked_on names no repo, waypoint, operator ask or calendar event (`cal:<label>/<uid>`) nemik can resolve | rewrite it as one of those |
 | `LandedBlockerShape` | a blocker is already done or dropped; if all are, the item is ready | trim it (`$PF --bump-blocked` prunes local ones) |
 | `MalformedBlockerShape` | a symbol with prose attached (`W8 (both ...)`) | symbol alone; prose goes in evidence |
 | `ActiveCardShape` | no `working` card while items are ready, or more than one (operator 2026-10-01: one active card per repo unless everything open is blocked) | mark the item you are doing `$PF --update <W> --status working`; return extras to ready |
