@@ -129,6 +129,31 @@ def occurrences(collections: dict[str, str], *, start: str, window: str = "14d",
         shutil.rmtree(tmp, ignore_errors=True)
 
 
+def dedupe(rows: list[dict]) -> list[dict]:
+    """nemik:W191 (life-82): one row per (start, summary) across DIFFERENT calendars.
+
+    The household and main calendars repeat some entries (same chore, same instant). The first
+    calendar's row stays and names the others in `also`; their waiters are merged in, so a waypoint
+    citing either copy still shows. Two identical entries inside ONE calendar are two real events
+    and both stay: only a calendar not yet represented under that key is merged. Display only: the
+    event graph keeps every occurrence, so cal:<label>/<uid> refs still resolve to their own copy.
+    """
+    out: list[dict] = []
+    first: dict[tuple, dict] = {}
+    for r in rows:
+        k = (r["start"], r["summary"])
+        p = first.get(k)
+        if p is None:
+            first[k] = r = dict(r)
+            out.append(r)
+        elif r["label"] != p["label"] and r["label"] not in p.get("also", []):
+            p["also"] = [*p.get("also", []), r["label"]]
+            p["waiting"] = sorted({*p.get("waiting", []), *r.get("waiting", [])})
+        else:
+            out.append(dict(r))  # a second event in a calendar already represented: a real one
+    return out
+
+
 CAL_REF = re.compile(r"cal:([a-z][a-z0-9-]{0,31})/(\S+)")
 
 
@@ -183,6 +208,8 @@ def days_main(argv: list[str] | None = None, g=None) -> None:
     ap.add_argument("--calendars", type=Path, default=DEFAULT_CONFIG, help="calendars.toml")
     ap.add_argument("--helper", type=Path, default=DEFAULT_HELPER, help="the nemik-akonadi-tasks binary")
     ap.add_argument("--json", action="store_true")
+    ap.add_argument("--no-dedupe", action="store_true",
+                    help="list every calendar's copy of an entry that repeats across calendars (nemik:W191)")
     args = ap.parse_args(argv)
     cals = load_calendars(args.calendars)
     cols = {label: c.name for label, c in cals.items()}
@@ -212,6 +239,8 @@ def days_main(argv: list[str] | None = None, g=None) -> None:
     for o in occs:
         ev = f"urn:nemik:cal:{o['label']}/{o['uid']}/{o['recurrence_id'] or o['start']}"
         rows.append({**o, "waiting": sorted(ref(n) for n, _, t in eg.triples((None, NEMIK.waitsFor, None)) if str(t) == ev)})
+    if not args.no_dedupe:
+        rows = dedupe(rows)
     # nemik:W190: a filtered calendar reports what its filter kept. "0 of N matched" says the filter
     # ate the day, not that the day is free.
     report = [f"filter {label}: {stats[label][0]} of {stats[label][1]} matched"
@@ -225,6 +254,7 @@ def days_main(argv: list[str] | None = None, g=None) -> None:
     print(f"next {args.days} days ({len(rows)})")
     for d in rows:
         waits = f"  <- {', '.join(d['waiting'])}" if d["waiting"] else ""
-        print(f"  {(d['start'] or '')[:16]:16} {d['label']:10} {(d['summary'] or '')[:60]}{waits}")
+        also = f"  [also: {', '.join(d['also'])}]" if d.get("also") else ""
+        print(f"  {(d['start'] or '')[:16]:16} {d['label']:10} {(d['summary'] or '')[:60]}{also}{waits}")
     for line in report:
         print(f"  {line}")

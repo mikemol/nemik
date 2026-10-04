@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 120
+      "ticks_blocked": 122
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 75,
+      "ticks_blocked": 77,
       "weight": 1
     },
     {
@@ -1397,7 +1397,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-01T19:50:19Z",
-      "ticks_blocked": 57,
+      "ticks_blocked": 59,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -2613,7 +2613,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 65
+      "ticks_blocked": 67
     },
     {
       "symbol": "W138",
@@ -2831,7 +2831,7 @@
       "minted_during": "tick",
       "caused_by": "life:W28",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 5,
       "weight": 3
     },
     {
@@ -3114,7 +3114,7 @@
     {
       "symbol": "W165",
       "title": "Tasks: complete a repo's parent when it has no open asks",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W148"
       ],
@@ -3126,9 +3126,10 @@
       "issued_at": "2026-10-01T19:51:39Z",
       "minted_during": "interrupt",
       "caused_by": "W148",
-      "last_worked": "2026-10-04T02:34:29Z",
+      "last_worked": "2026-10-04T20:41:00Z",
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 1,
+      "completed": null
     },
     {
       "symbol": "W166",
@@ -3522,7 +3523,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-02T17:28:25Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 3,
       "weight": 2
     },
     {
@@ -3564,22 +3565,22 @@
     {
       "symbol": "W191",
       "title": "nemik-days: dedupe the same chore across calendars on (start, summary) (life-82, optional)",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W190"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-04: 2026-10-04: calendars.dedupe(rows): one row per (start, summary) across DIFFERENT calendars; the first calendar's row stays and names the rest in 'also', waiters from every copy merged; two identical entries inside ONE calendar both stay (they are real); display only, the event graph keeps every occurrence so cal:<label>/<uid> refs resolve to their own copy. nemik-days --no-dedupe shows every copy. Tests: unit (merge across, never within, waiters merged, input not mutated) + days_main (4 rows deduped, 8 with --no-dedupe). READ BACK live on the operator's real calendars, counts only: 7 days = 66 occurrences raw, 55 deduped, 11 rows carrying [also: ...]. SKILL.md row updated (filter + dedupe). bazel 34/34.",
       "issued_at": "2026-10-04T02:36:15Z",
       "minted_during": "tick",
       "caused_by": "life-82",
-      "last_worked": "2026-10-04T20:28:55Z",
+      "last_worked": "2026-10-04T20:40:38Z",
       "ticks_blocked": 0,
       "weight": 1,
-      "completed": null
+      "completed": "20261004T204038Z"
     },
     {
       "symbol": "W192",

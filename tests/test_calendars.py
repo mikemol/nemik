@@ -185,3 +185,49 @@ def test_a_filter_that_matches_nothing_is_reported_not_read_as_a_free_day(tmp_pa
     days_main(["14", "--calendars", str(cfg), "--helper", str(_helper(tmp_path, text=CHORES))], __import__("rdflib").Graph())
     out = capsys.readouterr().out
     assert "next 14 days (0)" in out and "filter chores: 0 of 4 matched" in out and "not a free day" in out
+
+
+def _row(label, start, summary, waiting=()):
+    return {"label": label, "uid": "u", "start": start, "end": None, "all_day": False, "summary": summary,
+            "recurrence_id": start, "waiting": list(waiting)}
+
+
+def test_dedupe_merges_across_calendars_never_within_one() -> None:
+    """nemik:W191: the same entry in two calendars is one row naming the other; two identical entries
+    inside one calendar are two real events; waiters from both copies are kept."""
+    from nemik.calendars import dedupe
+
+    rows = [_row("household", "2026-10-05T09:00", "Trash: Mike", ["life:W9"]),
+            _row("main", "2026-10-05T09:00", "Trash: Mike", ["life:W10"]),
+            _row("main", "2026-10-05T09:00", "Trash: Mike"),  # a third copy, in a calendar already represented
+            _row("main", "2026-10-05T09:00", "Dishes: Pascal"),
+            _row("main", "2026-10-06T09:00", "Dishes: Pascal"),
+            _row("chores", "2026-10-06T09:00", "Dishes: Pascal"),
+            _row("chores", "2026-10-06T09:00", "Dishes: Pascal")]  # two real events in ONE calendar
+    got = dedupe(rows)
+    assert [(r["label"], r["summary"], r.get("also")) for r in got] == [
+        ("household", "Trash: Mike", ["main"]), ("main", "Trash: Mike", None), ("main", "Dishes: Pascal", None),
+        ("main", "Dishes: Pascal", ["chores"]), ("chores", "Dishes: Pascal", None)]
+    assert got[0]["waiting"] == ["life:W10", "life:W9"]  # both copies' waiters
+    assert "also" not in rows[0]  # the input is not mutated
+
+
+def test_days_dedupes_across_calendars_and_no_dedupe_shows_all(tmp_path, ics, capsys, monkeypatch) -> None:
+    import datetime
+
+    from nemik.calendars import days_main
+
+    class Today(datetime.date):
+        @classmethod
+        def today(cls):
+            return cls(2026, 10, 1)
+    monkeypatch.setattr(datetime, "date", Today)
+    cfg = tmp_path / "calendars.toml"
+    cfg.write_text('[calendars]\nhousehold = "A"\nmain = "B"\n')  # the stand-in exports the same ICS for both
+    base = ["14", "--calendars", str(cfg), "--helper", str(_helper(tmp_path, text=CHORES))]
+    g = __import__("rdflib").Graph()
+    days_main(base, g)
+    out = capsys.readouterr().out
+    assert "next 14 days (4)" in out and "[also: main]" in out
+    days_main([*base, "--no-dedupe"], g)
+    assert "next 14 days (8)" in capsys.readouterr().out
