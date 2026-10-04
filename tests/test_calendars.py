@@ -101,3 +101,17 @@ def test_operator_lists_the_next_days_with_waiters(tmp_path, ics, capsys, monkey
     days_main(["14", "--calendars", str(cfg), "--helper", str(_helper(tmp_path))], g)
     out = capsys.readouterr().out
     assert "dentist" in out and "<- life:W9" in out
+
+
+def test_the_reader_is_found_in_nemiks_own_venv_not_on_path(tmp_path, monkeypatch) -> None:
+    """life-82, 2026-10-02: .venv/bin/nemik-days run without the venv on PATH could not find
+    mikemol-ics. The default is the venv's own copy; a missing reader is a stated refusal."""
+    from nemik.calendars import _venv_ics
+
+    for k, v in installed._bin()[1].items():
+        monkeypatch.setenv(k, v)
+    monkeypatch.setenv("PATH", "/usr/bin:/bin")  # the venv is not on PATH
+    got = occurrences({"home": "Personal"}, start="2026-10-01", helper=_helper(tmp_path))
+    assert [r["uid"] for r in got] == ["a@t"] and _venv_ics().endswith("/mikemol-ics")
+    with pytest.raises(FileNotFoundError, match="calendar reader"):
+        occurrences({"home": "Personal"}, start="2026-10-01", helper=_helper(tmp_path), ics=str(tmp_path / "nope"))

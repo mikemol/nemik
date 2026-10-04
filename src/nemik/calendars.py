@@ -49,14 +49,25 @@ def load_collections(path: Path = DEFAULT_CONFIG) -> dict[str, str]:
 KEEP = ("uid", "start", "end", "all_day", "summary", "recurrence_id")
 
 
+def _venv_ics() -> str:
+    """mikemol-ics from nemik's own venv (it is vendored there, nemik:W157), not from PATH: a host
+    caller runs .venv/bin/nemik-days without activating the venv (life-82, 2026-10-02)."""
+    import sys
+
+    return str(Path(sys.executable).parent / "mikemol-ics")
+
+
 def occurrences(collections: dict[str, str], *, start: str, window: str = "14d",
-                helper: Path = DEFAULT_HELPER, ics: str = "mikemol-ics") -> list[dict]:
+                helper: Path = DEFAULT_HELPER, ics: str | None = None) -> list[dict]:
     """[{label, uid, start, end, all_day, summary, recurrence_id}] for every collection, by start.
 
     `collections` maps a short label (what waypoints cite as cal:<label>/<uid>) to the Akonadi
     collection name. A collection that fails to export or parse raises: a silent gap would read as
     a free day.
     """
+    ics = ics or _venv_ics()
+    if not Path(ics).exists() and not shutil.which(ics):
+        raise FileNotFoundError(f"the calendar reader {ics} is missing: rebuild nemik's venv (bazel build //:.venv)")
     tmp = Path(tempfile.mkdtemp(prefix="nemik-cal-"))  # mkdtemp is 0700
     try:
         out: list[dict] = []
@@ -140,7 +151,11 @@ def days_main(argv: list[str] | None = None, g=None) -> None:
         for _, qg, _ in survey(args.root):
             if qg is not None:
                 g += qg
-    occs = occurrences(cols, start=date.today().isoformat(), window=f"{args.days}d", helper=args.helper)
+    try:
+        occs = occurrences(cols, start=date.today().isoformat(), window=f"{args.days}d", helper=args.helper)
+    except FileNotFoundError as e:
+        print(f"ERROR: {e}")
+        raise SystemExit(2) from e
     eg = event_graph(occs, g)
     rows = []
     for o in occs:

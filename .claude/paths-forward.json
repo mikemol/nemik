@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 188,
+  "counter": 190,
   "waypoints": [
     {
       "symbol": "W1",
@@ -3114,7 +3114,7 @@
     {
       "symbol": "W165",
       "title": "Tasks: complete a repo's parent when it has no open asks",
-      "status": "working",
+      "status": "ready",
       "enables": [
         "W148"
       ],
@@ -3126,7 +3126,7 @@
       "issued_at": "2026-10-01T19:51:39Z",
       "minted_during": "interrupt",
       "caused_by": "W148",
-      "last_worked": "2026-10-02T17:28:25Z",
+      "last_worked": "2026-10-04T02:34:29Z",
       "ticks_blocked": 0,
       "weight": 1
     },
@@ -3408,20 +3408,18 @@
     {
       "symbol": "W182",
       "title": "Operator picks which Akonadi calendars nemik may read (calendars.toml)",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "operator: decide which of your 11 Google calendars nemik may read for the next-N-days view (life:W13), and a short label for each; none is read until listed"
-      ],
-      "blocked_kind": "human",
-      "next_bounded_step": "",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-04: 2026-10-03: operator chose (relayed by life-82); read back here: ~/.config/nemik/calendars.toml is mode 600 and load_collections returns 8 labels (bills, chores, events, family, household, main, maintenance, mol-family). Event text not printed.",
       "issued_at": "2026-10-02T06:44:50Z",
       "minted_during": "tick",
       "caused_by": "W158",
-      "last_worked": "2026-10-02T06:44:50Z",
-      "ticks_blocked": 30
+      "last_worked": "2026-10-04T02:34:07Z",
+      "ticks_blocked": 0
     },
     {
       "symbol": "W183",
@@ -3526,6 +3524,39 @@
       "last_worked": "2026-10-02T17:28:25Z",
       "ticks_blocked": 0,
       "weight": 2
+    },
+    {
+      "symbol": "W189",
+      "title": "nemik-days finds mikemol-ics in its own venv, refuses clearly when absent (life-82)",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-04: 2026-10-03: calendars.occurrences defaults ics to the venv's own mikemol-ics (_venv_ics: sys.executable's bin dir), not PATH; a missing reader raises FileNotFoundError naming the fix, and nemik-days turns it into 'ERROR: ...' exit 2. tests/test_calendars.py: reader found with the venv off PATH, and a clear refusal when absent. Read back live: PATH=/usr/bin:/bin .venv/bin/nemik-days 1 against the operator's 8 calendars -> 'next 1 days (9)', exit 0. (An env -i run hung: it strips the D-Bus variables the Akonadi helper needs; a test artifact, not the fix.) bazel 32/32.",
+      "issued_at": "2026-10-04T02:34:07Z",
+      "minted_during": "tick",
+      "caused_by": "life-82",
+      "last_worked": "2026-10-04T02:34:12Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W190",
+      "title": "calendars.toml per-calendar include filter (life:W31): name + include substrings on SUMMARY, absent = all, '0 of N matched' not 'free'",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-04T02:34:12Z",
+      "minted_during": "tick",
+      "caused_by": "life-82",
+      "last_worked": "2026-10-04T02:34:29Z",
+      "ticks_blocked": 0,
+      "weight": 1
     }
   ],
   "residue": [
