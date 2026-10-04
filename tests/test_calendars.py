@@ -13,10 +13,10 @@ ICS = "\r\n".join(["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//t//EN",
                    "DTEND:20261003T160000Z", "SUMMARY:dentist", "END:VEVENT", "END:VCALENDAR", ""])
 
 
-def _helper(tmp_path, fail=False) -> Path:
+def _helper(tmp_path, fail=False, text: str = ICS) -> Path:
     """A stand-in for nemik-akonadi-tasks --export-calendar NAME --out FILE."""
     src = tmp_path / "src.ics"
-    src.write_text(ICS, newline="")
+    src.write_text(text, newline="")
     h = tmp_path / "helper"
     h.write_text(f"#!/bin/sh\n{'exit 2' if fail else ''}\ncp {src} \"$4\"\necho \"$4\" >> {tmp_path}/seen\n")
     h.chmod(h.stat().st_mode | stat.S_IXUSR)
@@ -131,3 +131,57 @@ def test_a_refusing_helper_is_reported_not_a_traceback(tmp_path, ics, capsys) ->
     assert e.value.code == 2
     out = capsys.readouterr().out
     assert "refusing to start it" in out and "Traceback" not in out
+
+
+CHORES = "\r\n".join(["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//t//EN"] + [
+    line for i, summary in enumerate(["Trash: Mike", "Dishes: Pascal", "Supper: Pascal", "Lunch: Sam"])
+    for line in ("BEGIN:VEVENT", f"UID:c{i}@t", "DTSTAMP:20261001T000000Z", f"DTSTART:2026100{3 + i}T150000Z",
+                 f"DTEND:2026100{3 + i}T160000Z", f"SUMMARY:{summary}", "END:VEVENT")] + ["END:VCALENDAR", ""])
+
+
+def test_calendar_entries_take_a_name_or_a_table_and_a_typo_fails(tmp_path) -> None:
+    """nemik:W190 (life:W31): `label = "Name"` still works; `{ name, include }` adds the filter; an
+    unknown key (a typo'd `includes` would silently mean "no filter") and a bad include fail."""
+    from nemik.calendars import Calendar, load_calendars, load_collections
+
+    p = tmp_path / "calendars.toml"
+    p.write_text('[calendars]\nhome = "Personal"\nchores = { name = "Chores", include = ["Mike", "Supper: Pascal"] }\n')
+    assert load_calendars(p) == {"chores": Calendar("Chores", ("Mike", "Supper: Pascal")), "home": Calendar("Personal")}
+    assert load_collections(p) == {"chores": "Chores", "home": "Personal"}
+    for bad in ('chores = { name = "Chores", includes = ["Mike"] }', 'chores = { name = "Chores", include = "Mike" }',
+                'chores = { name = "Chores", include = [""] }', 'chores = { include = ["Mike"] }'):
+        p.write_text(f"[calendars]\n{bad}\n")
+        with pytest.raises(ValueError, match="bad entry"):
+            load_calendars(p)
+
+
+def test_include_keeps_case_sensitive_substring_matches_and_counts_both_ways(tmp_path, ics) -> None:
+    got_all: dict = {}
+    occurrences({"chores": "Chores"}, start="2026-10-01", helper=_helper(tmp_path, text=CHORES), ics=ics, stats=got_all)
+    assert got_all == {"chores": (4, 4)}  # no include: everything
+    stats: dict = {}
+    got = occurrences({"chores": "Chores"}, start="2026-10-01", helper=_helper(tmp_path, text=CHORES), ics=ics,
+                      includes={"chores": ("Mike", "Supper: Pascal")}, stats=stats)
+    assert [r["summary"] for r in got] == ["Trash: Mike", "Supper: Pascal"] and stats == {"chores": (2, 4)}
+    none: dict = {}
+    assert not occurrences({"chores": "Chores"}, start="2026-10-01", helper=_helper(tmp_path, text=CHORES), ics=ics,
+                           includes={"chores": ("mike",)}, stats=none)  # case-sensitive: "mike" is not "Mike"
+    assert none == {"chores": (0, 4)}
+
+
+def test_a_filter_that_matches_nothing_is_reported_not_read_as_a_free_day(tmp_path, ics, capsys, monkeypatch) -> None:
+    import datetime
+
+    from nemik.calendars import days_main
+
+    class Today(datetime.date):  # the window starts today: pin it so the fixture dates stay inside it
+        @classmethod
+        def today(cls):
+            return cls(2026, 10, 1)
+    monkeypatch.setattr(datetime, "date", Today)
+
+    cfg = tmp_path / "calendars.toml"
+    cfg.write_text('[calendars]\nchores = { name = "Chores", include = ["Nobody"] }\n')
+    days_main(["14", "--calendars", str(cfg), "--helper", str(_helper(tmp_path, text=CHORES))], __import__("rdflib").Graph())
+    out = capsys.readouterr().out
+    assert "next 14 days (0)" in out and "filter chores: 0 of 4 matched" in out and "not a free day" in out

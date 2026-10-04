@@ -3544,27 +3544,27 @@
     {
       "symbol": "W190",
       "title": "calendars.toml per-calendar include filter (life:W31): name + include substrings on SUMMARY, absent = all, '0 of N matched' not 'free'",
-      "status": "working",
+      "status": "done",
       "enables": [
         "life:W31"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-04: 2026-10-04: calendars.load_calendars: [calendars] entries are 'label = \"Name\"' (unchanged) or { name, include = [patterns] }; unknown keys, a non-list include and empty patterns fail ('bad entry'), since a typo'd includes would silently mean no filter. occurrences(includes=, stats=): case-sensitive substring on SUMMARY, any pattern, absent = all; stats {label: (matched, total)}. nemik-days prints 'filter <label>: M of N matched' and, when 0 of N, says it is the filter, not a free day; --json keeps the row list unchanged and writes the counts to stderr. Tests: shapes + typos, semantics (case-sensitive, any-of, none-given), the 0-of-N report. READ BACK live on the operator's real Chores calendar via a temp copy of the config (their file untouched, counts only): 7 days, 48 events, 12 kept by include [Mike, Supper: Pascal]. bazel 34/34.",
       "issued_at": "2026-10-04T02:34:12Z",
       "minted_during": "tick",
       "caused_by": "life-82",
-      "last_worked": "2026-10-04T20:14:30Z",
+      "last_worked": "2026-10-04T20:21:38Z",
       "ticks_blocked": 0,
       "weight": 1,
-      "completed": null
+      "completed": "20261004T202138Z"
     },
     {
       "symbol": "W191",
       "title": "nemik-days: dedupe the same chore across calendars on (start, summary) (life-82, optional)",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W190"
       ],
@@ -3576,9 +3576,10 @@
       "issued_at": "2026-10-04T02:36:15Z",
       "minted_during": "tick",
       "caused_by": "life-82",
-      "last_worked": null,
+      "last_worked": "2026-10-04T20:21:38Z",
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 1,
+      "completed": null
     },
     {
       "symbol": "W192",

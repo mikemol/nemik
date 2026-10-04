@@ -13,8 +13,10 @@ import json
 import re
 import shutil
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
+from typing import NamedTuple
 
 from nemik.vtodo import DEFAULT_HELPER
 
@@ -22,16 +24,26 @@ DEFAULT_CONFIG = Path.home() / ".config" / "nemik" / "calendars.toml"
 _LABEL = re.compile(r"[a-z][a-z0-9-]{0,31}")
 
 
-def load_collections(path: Path = DEFAULT_CONFIG) -> dict[str, str]:
-    """nemik:W158: which calendars nemik may read, as {label: Akonadi collection name}.
+class Calendar(NamedTuple):
+    """One opted-in calendar: its Akonadi collection and an optional summary filter (nemik:W190)."""
+    name: str
+    include: tuple[str, ...] = ()
+
+
+def load_calendars(path: Path = DEFAULT_CONFIG) -> dict[str, Calendar]:
+    """nemik:W158/W190: which calendars nemik may read, as {label: Calendar}.
 
     ~/.config/nemik/calendars.toml:
 
         [calendars]
         home = "Personal"          # label = what a waypoint cites as cal:home/<uid>
+        chores = { name = "Chores", include = ["Mike", "Supper: Pascal"] }
 
+    `include` (life:W31, operator 2026-10-02) keeps only events whose SUMMARY contains one of the
+    patterns: case-sensitive substrings, any pattern matching. Absent or empty means everything.
     No file reads no calendar: the operator opts each one in, as with ics.toml. A label must be
-    short lowercase (it appears in refs); a bad one fails rather than being skipped.
+    short lowercase (it appears in refs). A bad entry or an unknown key fails rather than being
+    skipped: a typo'd `includes` would otherwise silently mean "no filter".
     """
     import tomllib
 
@@ -40,10 +52,27 @@ def load_collections(path: Path = DEFAULT_CONFIG) -> dict[str, str]:
     cals = tomllib.loads(path.read_text()).get("calendars", {})
     if not isinstance(cals, dict):
         raise ValueError(f"{path}: [calendars] must be a table of label = \"collection name\"")
-    for label, name in cals.items():
-        if not _LABEL.fullmatch(label) or not isinstance(name, str) or not name:
-            raise ValueError(f"{path}: bad entry {label!r}: labels are [a-z][a-z0-9-]*, names non-empty strings")
-    return dict(sorted(cals.items()))
+    out: dict[str, Calendar] = {}
+    for label, spec in cals.items():
+        bad = f"{path}: bad entry {label!r}: "
+        if not _LABEL.fullmatch(label):
+            raise ValueError(bad + "labels are [a-z][a-z0-9-]*")
+        if isinstance(spec, str):
+            spec = {"name": spec}
+        if not isinstance(spec, dict) or set(spec) - {"name", "include"}:
+            raise ValueError(bad + "a name string, or a table with only `name` and `include`")
+        name, include = spec.get("name"), spec.get("include", [])
+        if not isinstance(name, str) or not name:
+            raise ValueError(bad + "`name` must be a non-empty string")
+        if not isinstance(include, list) or not all(isinstance(x, str) and x for x in include):
+            raise ValueError(bad + "`include` must be a list of non-empty strings")
+        out[label] = Calendar(name, tuple(include))
+    return dict(sorted(out.items()))
+
+
+def load_collections(path: Path = DEFAULT_CONFIG) -> dict[str, str]:
+    """{label: Akonadi collection name}: load_calendars without the filters (nemik:W158)."""
+    return {label: c.name for label, c in load_calendars(path).items()}
 
 
 KEEP = ("uid", "start", "end", "all_day", "summary", "recurrence_id")
@@ -58,12 +87,16 @@ def _venv_ics() -> str:
 
 
 def occurrences(collections: dict[str, str], *, start: str, window: str = "14d",
-                helper: Path = DEFAULT_HELPER, ics: str | None = None) -> list[dict]:
+                helper: Path = DEFAULT_HELPER, ics: str | None = None,
+                includes: dict[str, tuple[str, ...]] | None = None,
+                stats: dict[str, tuple[int, int]] | None = None) -> list[dict]:
     """[{label, uid, start, end, all_day, summary, recurrence_id}] for every collection, by start.
 
     `collections` maps a short label (what waypoints cite as cal:<label>/<uid>) to the Akonadi
     collection name. A collection that fails to export or parse raises: a silent gap would read as
-    a free day.
+    a free day. `includes` filters a label's events to those whose summary contains a pattern
+    (nemik:W190); `stats`, when given, is filled with {label: (matched, total)} for every label, so
+    a filter that matches nothing is reported as "0 of N", never as a free day.
     """
     ics = ics or _venv_ics()
     if not Path(ics).exists() and not shutil.which(ics):
@@ -77,10 +110,19 @@ def occurrences(collections: dict[str, str], *, start: str, window: str = "14d",
                            check=True, capture_output=True)
             text = subprocess.run([ics, "--from", start, "--window", window, "--json", str(f)],
                                   check=True, capture_output=True, text=True).stdout
+            pats = (includes or {}).get(label, ())
+            total = matched = 0
             for line in text.splitlines():
                 rec = json.loads(line)
-                if rec.get("kind") == "occurrence":
-                    out.append({"label": label, **{k: rec.get(k) for k in KEEP}})
+                if rec.get("kind") != "occurrence":
+                    continue
+                total += 1
+                if pats and not any(p in (rec.get("summary") or "") for p in pats):
+                    continue
+                matched += 1
+                out.append({"label": label, **{k: rec.get(k) for k in KEEP}})
+            if stats is not None:
+                stats[label] = (matched, total)
             f.unlink()
         return sorted(out, key=lambda r: (r["start"] or "", r["label"], r["uid"] or ""))
     finally:
@@ -142,7 +184,8 @@ def days_main(argv: list[str] | None = None, g=None) -> None:
     ap.add_argument("--helper", type=Path, default=DEFAULT_HELPER, help="the nemik-akonadi-tasks binary")
     ap.add_argument("--json", action="store_true")
     args = ap.parse_args(argv)
-    cols = load_collections(args.calendars)
+    cals = load_calendars(args.calendars)
+    cols = {label: c.name for label, c in cals.items()}
     if not cols:
         print(f"no calendar opted in ({args.calendars})")
         return
@@ -152,7 +195,9 @@ def days_main(argv: list[str] | None = None, g=None) -> None:
             if qg is not None:
                 g += qg
     try:
-        occs = occurrences(cols, start=date.today().isoformat(), window=f"{args.days}d", helper=args.helper)
+        stats: dict[str, tuple[int, int]] = {}
+        occs = occurrences(cols, start=date.today().isoformat(), window=f"{args.days}d", helper=args.helper,
+                           includes={label: c.include for label, c in cals.items() if c.include}, stats=stats)
     except FileNotFoundError as e:
         print(f"ERROR: {e}")
         raise SystemExit(2) from e
@@ -167,10 +212,19 @@ def days_main(argv: list[str] | None = None, g=None) -> None:
     for o in occs:
         ev = f"urn:nemik:cal:{o['label']}/{o['uid']}/{o['recurrence_id'] or o['start']}"
         rows.append({**o, "waiting": sorted(ref(n) for n, _, t in eg.triples((None, NEMIK.waitsFor, None)) if str(t) == ev)})
+    # nemik:W190: a filtered calendar reports what its filter kept. "0 of N matched" says the filter
+    # ate the day, not that the day is free.
+    report = [f"filter {label}: {stats[label][0]} of {stats[label][1]} matched"
+              + (" (nothing matched: that is the filter, not a free day)" if stats[label][0] == 0 and stats[label][1] else "")
+              for label, c in cals.items() if c.include and label in stats]
     if args.json:
-        print(json.dumps(rows, indent=2))
+        print(json.dumps(rows, indent=2))  # the row list, unchanged for existing readers
+        for line in report:
+            print(line, file=sys.stderr)
         return
     print(f"next {args.days} days ({len(rows)})")
     for d in rows:
         waits = f"  <- {', '.join(d['waiting'])}" if d["waiting"] else ""
         print(f"  {(d['start'] or '')[:16]:16} {d['label']:10} {(d['summary'] or '')[:60]}{waits}")
+    for line in report:
+        print(f"  {line}")
