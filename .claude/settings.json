@@ -1,16 +1,68 @@
 {
   "hooks": {
     "SessionStart": [
-      {"hooks": [
-        {"type": "command", "command": "\"$CLAUDE_PROJECT_DIR/.venv/bin/mikemol-hook-inbound-asks\""},
-        {"type": "command", "command": "\"$CLAUDE_PROJECT_DIR/.venv/bin/mikemol-hook-nemik-check\""}
-      ]}
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR/.venv/bin/mikemol-hook-inbound-asks\""
+          },
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR/.venv/bin/mikemol-hook-nemik-check\""
+          }
+        ]
+      }
     ],
     "UserPromptSubmit": [
-      {"hooks": [
-        {"type": "command", "command": "\"$CLAUDE_PROJECT_DIR/.venv/bin/mikemol-hook-inbound-asks\""},
-        {"type": "command", "command": "\"$CLAUDE_PROJECT_DIR/.venv/bin/mikemol-hook-nemik-check\""}
-      ]}
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR/.venv/bin/mikemol-hook-inbound-asks\""
+          },
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR/.venv/bin/mikemol-hook-nemik-check\""
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "STRUCT_HOOK_BLOCK=1 \"$CLAUDE_PROJECT_DIR/.venv/bin/mikemol-hook-structural-query\""
+          },
+          {
+            "type": "command",
+            "command": "NOCHAIN_HOOK_BLOCK=1 \"$CLAUDE_PROJECT_DIR/.venv/bin/mikemol-hook-no-chaining\""
+          },
+          {
+            "type": "command",
+            "command": "NOVERIFY_HOOK_BLOCK=1 \"$CLAUDE_PROJECT_DIR/.venv/bin/mikemol-hook-no-verify\""
+          },
+          {
+            "type": "command",
+            "command": "SHELLCHECK_HOOK_BLOCK=1 PATH=\"$HOME/.local/bin:$PATH\" \"$CLAUDE_PROJECT_DIR/.venv/bin/mikemol-hook-shellcheck\""
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "SHELLCHECK_HOOK_BLOCK=1 PATH=\"$HOME/.local/bin:$PATH\" \"$CLAUDE_PROJECT_DIR/.venv/bin/mikemol-hook-shellcheck\""
+          },
+          {
+            "type": "command",
+            "command": "PYCHECK_HOOK_BLOCK=1 \"$CLAUDE_PROJECT_DIR/.venv/bin/mikemol-hook-pycheck\""
+          }
+        ]
+      }
     ]
   }
 }
