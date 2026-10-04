@@ -3576,7 +3576,7 @@
       "issued_at": "2026-10-04T02:36:15Z",
       "minted_during": "tick",
       "caused_by": "life-82",
-      "last_worked": "2026-10-04T20:21:38Z",
+      "last_worked": "2026-10-04T20:28:55Z",
       "ticks_blocked": 0,
       "weight": 1,
       "completed": null
@@ -3584,21 +3584,21 @@
     {
       "symbol": "W192",
       "title": "Witness one nemik push end to end: push -> registry tag -> deploy-state commit -> Flux reconcile -> pod on the new digest, read back from each system (luthen W170)",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "luthen-observability:W170"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-04: 2026-10-04 WITNESS for luthen W170, every stage READ from its own system (not exit codes): push dcab038 (origin/main read back) -> ImageRepository latestTags holds 1791145125-dcab03834f57... -> ImagePolicy latestRef.tag = the same -> ImageUpdateAutomation deploy-state lastPushCommit 0c4f2339d080 at 2026-10-04T20:25:18Z -> Kustomization nemik lastAppliedRevision main@sha1:0c4f2339d080 -> Deployment spec image and BOTH pods Running+ready on :1791145125-dcab038..., pod imageID sha256:92d99e951a11dfebf888980e51fb1b46734ef917a76c3977d2267838a96764d8 (watcher saw the new pod at 20:25:21Z; before it, pods were on c7ca982's tag). Route: GitHub push -> existing mirror -> Forgejo build -> registry -> Flux (luthen's SSH push path W433/W419/W420 is not live; not used). Limit: my 6s poll saw no intermediate state between 20:18 and 20:25:21Z, so per-stage latency is only known for the automation push (20:25:18Z); the Forgejo mirror/build timing was not read.",
       "issued_at": "2026-10-04T20:03:15Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W170",
-      "last_worked": "2026-10-04T20:14:48Z",
+      "last_worked": "2026-10-04T20:28:54Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261004T202854Z",
       "weight": 2
     },
     {
