@@ -216,13 +216,17 @@ def tasks_main(argv: list[str] | None = None) -> None:
     ap.add_argument("--apply", action="store_true", help="write; without it, only print the plan")
     ap.add_argument("--only", action="append", default=[], metavar="REF",
                     help="sync only this repo:W<n> (repeatable); other tasks are left untouched (nemik:W162)")
-    ap.add_argument("--group", action="store_true", help="a parent task per repo, each ask a subtask (nemik:W163)")
+    ap.add_argument("--flat", action="store_true",
+                    help="one task per ask, no per-repo parent (default: a parent task per repo, nemik:W148/W163)")
+    ap.add_argument("--retry-wait", type=int, default=25, metavar="SECONDS",
+                    help="with --apply, rerun while the helper defers a child's parent, waiting this long for the "
+                         "Google resource to sync (at most 3 reruns; nemik:W148)")
     args = ap.parse_args(argv)
     if not args.helper.exists():
         print(f"ERROR: {args.helper} is missing; build it with ./setup.sh", flush=True)
         raise SystemExit(2)
     try:
-        text = feed(args.root, args.opt_in, args.link, args.group)
+        text = feed(args.root, args.opt_in, args.link, not args.flat)
     except Exception as e:  # noqa: BLE001 - any feed failure is the 2 of the exit contract
         print(f"ERROR: feed: {e}", flush=True)
         raise SystemExit(2) from e
@@ -231,7 +235,23 @@ def tasks_main(argv: list[str] | None = None) -> None:
     for r in args.only:
         cmd += ["--only", r]
     sys.stdout.flush()
-    raise SystemExit(subprocess.run(cmd, input=text.encode(), check=False).returncode)
+    # nemik:W148: a child can only name its parent by Google's own task id, which exists once the
+    # Google resource has uploaded the parent. The first apply creates parents and the helper prints
+    # DEFER-PARENT for children it could not attach yet; wait for the sync and rerun, so one
+    # invocation converges (the timer would otherwise need two ticks).
+    import time
+
+    tries = 1 + (3 if args.apply and not args.flat else 0)
+    for attempt in range(tries):
+        run = subprocess.run(cmd, input=text.encode(), capture_output=True, check=False)
+        sys.stdout.write(run.stdout.decode(errors="replace"))
+        sys.stderr.write(run.stderr.decode(errors="replace"))
+        sys.stdout.flush()
+        if run.returncode != 0 or b"DEFER-PARENT" not in run.stdout or attempt == tries - 1:
+            break
+        print(f"RETRY {attempt + 1}: parents are not on Google yet; waiting {args.retry_wait}s for the resource to sync", flush=True)
+        time.sleep(args.retry_wait)
+    raise SystemExit(run.returncode)
 
 
 def main(argv: list[str] | None = None) -> None:

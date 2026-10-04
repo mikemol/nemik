@@ -66,9 +66,11 @@ def test_nemik_tasks_feeds_the_helper_and_returns_its_exit_code(tmp_path) -> Non
                       "print('ARGS', ' '.join(sys.argv[1:]), 'TODOS', feed.count('BEGIN:VTODO'))\nsys.exit(1)\n")
     helper.chmod(0o755)
     base = ["--root", str(tmp_path / "root"), "--opt-in", str(opt), "--list", "nemik"]
-    r = installed.run("nemik-tasks", *base, "--helper", str(helper), "--apply")
+    r = installed.run("nemik-tasks", *base, "--helper", str(helper), "--apply", "--flat")
     assert r.returncode == 1
-    assert "ARGS --list nemik --apply TODOS 1" in r.stdout
+    assert "ARGS --list nemik --apply TODOS 1" in r.stdout  # --flat: the ask alone
+    r = installed.run("nemik-tasks", *base, "--helper", str(helper), "--apply")
+    assert "TODOS 2" in r.stdout  # grouped by default: its repo's parent and the ask
     r = installed.run("nemik-tasks", *base, "--helper", str(tmp_path / "missing"))
     assert r.returncode == 2 and "setup.sh" in r.stdout
 
@@ -100,3 +102,46 @@ def test_grouped_adds_a_parent_per_repo_and_keeps_children_as_they_are() -> None
     kids = [t for t in g if t not in parents]
     assert all(t[-2].startswith("RELATED-TO;RELTYPE=PARENT:nemik:repo:") and t[-1] == "END:VTODO" for t in kids)
     assert sorted(t[1] for t in kids) == sorted(t[1] for t in flat)  # same UIDs: re-parented, not recreated
+
+
+def test_a_repo_with_no_open_asks_has_no_parent_so_the_helper_completes_it() -> None:
+    """nemik:W165: the grouped feed carries a parent only for a repo that still has an ask. A repo whose
+    last ask closed drops out, and the helper's existing rule (a ref missing from the feed is a closed
+    ask: COMPLETE) then completes the parent task like any other."""
+    from nemik.vtodo import grouped
+
+    both = grouped(vtodos(ASKS, {"life", "aeternum"}))
+    parents = [t[1] for t in both if t[1].startswith("UID:nemik:repo:")]
+    assert parents == ["UID:nemik:repo:aeternum", "UID:nemik:repo:life"]
+    life_only = grouped(vtodos([a for a in ASKS if not a["ref"].startswith("aeternum")], {"life", "aeternum"}))
+    assert [t[1] for t in life_only if t[1].startswith("UID:nemik:repo:")] == ["UID:nemik:repo:life"]
+    assert grouped([]) == []  # no asks at all: no parents, everything completes
+
+
+def test_apply_reruns_while_the_helper_defers_a_parent_then_converges(tmp_path) -> None:
+    """nemik:W148: DEFER-PARENT means the parent is not on Google yet; wait for the sync and rerun."""
+    import json
+    import sys
+
+    import installed
+
+    q = tmp_path / "root" / "life" / ".claude"
+    q.mkdir(parents=True)
+    (q / "paths-forward.json").write_text(json.dumps({"version": 1, "project_root": "/x", "counter": 1, "residue": [],
+        "waypoints": [{"symbol": "W9", "title": "cpr", "status": "blocked", "blocked_kind": "human",
+                       "blocked_on": ["operator: act attend the class"]}]}))
+    opt = tmp_path / "ics.toml"
+    opt.write_text('repos = ["*"]\n')
+    runs = tmp_path / "runs"
+    helper = tmp_path / "helper"
+    # Defers on the first run, succeeds on the second: the count of past runs is the state.
+    helper.write_text(f"#!{sys.executable}\nimport sys, pathlib\nsys.stdin.read()\nr = pathlib.Path({str(runs)!r})\n"
+                      "n = int(r.read_text()) if r.exists() else 0\nr.write_text(str(n + 1))\n"
+                      "print('DEFER-PARENT life:W9' if n == 0 else 'APPLIED (0 failed)')\n")
+    helper.chmod(0o755)
+    base = ["--root", str(tmp_path / "root"), "--opt-in", str(opt), "--list", "nemik", "--helper", str(helper), "--retry-wait", "0"]
+    r = installed.run("nemik-tasks", *base, "--apply")
+    assert r.returncode == 0 and "RETRY 1" in r.stdout and "APPLIED" in r.stdout and runs.read_text() == "2"
+    runs.unlink()
+    r = installed.run("nemik-tasks", *base)  # plan only: a deferral is shown, never retried
+    assert "RETRY" not in r.stdout and runs.read_text() == "1"

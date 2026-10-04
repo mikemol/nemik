@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 122
+      "ticks_blocked": 125
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 77,
+      "ticks_blocked": 80,
       "weight": 1
     },
     {
@@ -1382,23 +1382,22 @@
     {
       "symbol": "W77",
       "title": "Graph labels occluded by neighbouring shapes (operator ask)",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [
         "web"
       ],
-      "blocked_on": [
-        "luthen-observability:W170"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "2026-09-27: 40fc94b: text-valign bottom + text-background; dagre nodeDimensionsIncludeLabels | 2026-09-27: verified in headless Chromium (playwright): substrate row at 3x, every label below its node and clear of neighbours | 2026-09-27: operator saw it unfixed: deployed image pins aad664d (20 behind 40fc94b); asked luthen to rebuild | 2026-09-27: luthen: ship classifier-denied in their session, routed to operator; follower not stalled | 2026-09-27: operator: push=deploy (luthen ships on push, inbox 2026-09-26); not an operator act. No luthen_image_follow_ship{nemik} series at 20:45Z; asked luthen to make the follow run outside a Claude turn | 2026-09-27: luthen W152: image_follow as an unattended unit (operator reviews before enable); any nemik rollout from now ships main, which contains 40fc94b | 2026-09-27: W152 reframed: nemik image changes self-serve (push reaches the pod, no luthen turn); design note coming for nemik review; asked for NEMIK_VM_URL/NEMIK_VMALERT_URL in the pod env | 2026-10-01: 2026-10-01: W152 is an umbrella; W170 (W152e, push witnessed end to end) is the child that proves the view deploys",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-09-27: 40fc94b: text-valign bottom + text-background; dagre nodeDimensionsIncludeLabels | 2026-09-27: verified in headless Chromium (playwright): substrate row at 3x, every label below its node and clear of neighbours | 2026-09-27: operator saw it unfixed: deployed image pins aad664d (20 behind 40fc94b); asked luthen to rebuild | 2026-09-27: luthen: ship classifier-denied in their session, routed to operator; follower not stalled | 2026-09-27: operator: push=deploy (luthen ships on push, inbox 2026-09-26); not an operator act. No luthen_image_follow_ship{nemik} series at 20:45Z; asked luthen to make the follow run outside a Claude turn | 2026-09-27: luthen W152: image_follow as an unattended unit (operator reviews before enable); any nemik rollout from now ships main, which contains 40fc94b | 2026-09-27: W152 reframed: nemik image changes self-serve (push reaches the pod, no luthen turn); design note coming for nemik review; asked for NEMIK_VM_URL/NEMIK_VMALERT_URL in the pod env | 2026-10-01: 2026-10-01: W152 is an umbrella; W170 (W152e, push witnessed end to end) is the child that proves the view deploys | 2026-10-04: 2026-10-04: its blocker luthen:W170 is done (nemik:W192 witnessed the push chain). READ BACK from the live pod via port-forward, not assumed: the served index.html carries the label-inside code (W125 comment, text-valign center), linked() (W186), treemap() and fitFont() (W180/W187); served graph.json: 2471 real nodes all carry the weather field (10 non-empty, W174), 149 carry rank_pos. The original ask (labels clipped under neighbouring shapes) was superseded by labels inside the shapes (W125) and is live.",
       "issued_at": "2026-09-27T20:09:11Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-10-01T19:50:19Z",
-      "ticks_blocked": 59,
-      "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
+      "last_worked": "2026-10-04T20:58:27Z",
+      "ticks_blocked": 0,
+      "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty",
+      "completed": "20261004T205827Z"
     },
     {
       "symbol": "W78",
@@ -2613,7 +2612,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 67
+      "ticks_blocked": 70
     },
     {
       "symbol": "W138",
@@ -2813,7 +2812,7 @@
     {
       "symbol": "W148",
       "title": "Google Tasks 'nemik' list grouped by repo: parent task per repo, asks as subtasks",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "life:W28"
       ],
@@ -2821,18 +2820,17 @@
         "akonadi",
         "vtodo"
       ],
-      "blocked_on": [
-        "W165"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "2026-10-01: Operator 2026-10-01 via life-21 offered (a) a list per repo or (b) parent-per-repo with subtasks, no preference. nemik picks (b): keeps the one sink, list count does not grow with the fleet, regrouping is a parent change on the same item (no cross-list move, which may not keep identity), and Tasks' one nesting level matches repo -> ask. Risk to verify first, on ONE task: that akonadi_google_resource maps RELATED-TO;RELTYPE=PARENT to the Tasks parent field. | 2026-10-01: full title before the 2026-10-01 trim: Google Tasks 'nemik' list grouped by repo: one parent task per repo (summary 'repo (n)', earliest due), each ask a subtask (RELATED-TO;RELTYPE=PARENT); existing tasks re-parented in place, UIDs and dates kept; a repo with no open asks completes its parent",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-01: Operator 2026-10-01 via life-21 offered (a) a list per repo or (b) parent-per-repo with subtasks, no preference. nemik picks (b): keeps the one sink, list count does not grow with the fleet, regrouping is a parent change on the same item (no cross-list move, which may not keep identity), and Tasks' one nesting level matches repo -> ask. Risk to verify first, on ONE task: that akonadi_google_resource maps RELATED-TO;RELTYPE=PARENT to the Tasks parent field. | 2026-10-01: full title before the 2026-10-01 trim: Google Tasks 'nemik' list grouped by repo: one parent task per repo (summary 'repo (n)', earliest due), each ask a subtask (RELATED-TO;RELTYPE=PARENT); existing tasks re-parented in place, UIDs and dates kept; a repo with no open asks completes its parent | 2026-10-04: 2026-10-04: nemik-tasks now groups by default (--flat opts out) and, with --apply, reruns up to 3 times (--retry-wait 25s) while the helper defers a child's parent, so one invocation converges. LIVE on the operator's nemik list: plan before = 39 CREATE (7 parents + 32 asks) / 20 UPDATE / 7 COMPLETE / 55 DEFER-PARENT; apply: pass 1 created and completed, RETRY 1, pass 2 re-parented 75, exit 0 (an exit code is not confirmation, so:) READ BACK: a fresh plan shows no CREATE/UPDATE/DEFER/COMPLETE, and all 8 repos with open asks (aeternum, amr-skills, el-openglo, life, luthen-observability, mtools, nemik, substrate) have a parent task carrying a Google-assigned id. NOT independently confirmed: that Google shows each ask NESTED under its parent (Akonadi's own copy is what the helper reads; the one-task test was confirmed from the operator's phone, W162). Needs the operator's glance, or W188.",
       "issued_at": "2026-10-01T13:02:20Z",
       "minted_during": "tick",
       "caused_by": "life:W28",
-      "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 5,
-      "weight": 3
+      "last_worked": "2026-10-04T21:02:54Z",
+      "ticks_blocked": 0,
+      "weight": 3,
+      "completed": "20261004T210254Z"
     },
     {
       "symbol": "W149",
@@ -3114,22 +3112,22 @@
     {
       "symbol": "W165",
       "title": "Tasks: complete a repo's parent when it has no open asks",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W148"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-04: 2026-10-04: a repo with no open asks has no parent in the grouped feed (test_vtodo: aeternum dropped -> only life's parent; empty -> none), so the helper's existing rule (a ref missing from the feed is a closed ask: COMPLETE) completes the parent like any ask. Not exercised live for a PARENT (every repo with a parent still has asks); the same path completed 7 closed asks live (checked against the queues: luthen W121/W248/W249/W250 done, substrate W54 blocked on its own W64, W51/W56 no longer operator asks).",
       "issued_at": "2026-10-01T19:51:39Z",
       "minted_during": "interrupt",
       "caused_by": "W148",
-      "last_worked": "2026-10-04T20:41:00Z",
+      "last_worked": "2026-10-04T21:02:54Z",
       "ticks_blocked": 0,
       "weight": 1,
-      "completed": null
+      "completed": "20261004T210254Z"
     },
     {
       "symbol": "W166",
@@ -3523,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-02T17:28:25Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 6,
       "weight": 2
     },
     {

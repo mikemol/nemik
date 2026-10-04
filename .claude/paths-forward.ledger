@@ -321,3 +321,4 @@
 2026-10-04T20:22:03Z  tick  W190  advanced  unblock  "include filter with M-of-N report, read back live (12 of 48); committed locally, push held until the dcab038 deploy witness (W192) finishes; W191 working"  evidence=tests/test_calendars.py
 2026-10-04T20:29:08Z  tick  W192  advanced  unblock  "push witnessed end to end for luthen W170: registry tag, ImagePolicy, deploy-state commit 0c4f233, Kustomization, both pods on digest 92d99e9"  evidence=kubectl reads in W192 evidence
 2026-10-04T20:41:39Z  tick  W191  advanced  sweep  "nemik-days dedupes an entry repeated across calendars (66 -> 55 live), never within one; W165 working"  evidence=tests/test_calendars.py
+2026-10-04T21:03:15Z  tick  W148  advanced  sweep  "landed 5 steps: W77 closed on a live-pod read, W165, W148 (grouped Tasks live, converged, 7 correct completions), plus the operator's pin/hooks and W190/W191 earlier; nothing ready left"  evidence=src/nemik/vtodo.py,tests/test_vtodo.py
