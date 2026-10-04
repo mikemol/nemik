@@ -20,6 +20,8 @@ COPY skills ./skills
 # the paper and its checks, and the docs extra (paperkit) that runs them. -rs names every skip.
 COPY ARCHITECTURE.md paper.toml warrants.bib rubric.tsv ./
 COPY checks ./checks
+# The hooks wiring (mikemol-hook-inbound-asks, mikemol-hook-nemik-check) is tested against the settings file.
+COPY .claude/settings.json ./.claude/settings.json
 # paperkit is a pinned git source (nemik:W102), and uv needs a git binary to fetch it. The test stage
 # only: the final image never carries git.
 RUN apt-get update && apt-get install -y --no-install-recommends git ca-certificates && rm -rf /var/lib/apt/lists/*

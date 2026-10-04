@@ -8,14 +8,16 @@ dependencies = [
     "pyshacl>=0.26",
     "mikemol-pathsforward",
     "python-dateutil>=2.9",
+    "mikemol-hooks",  # nemik: mtools' Claude Code hooks (inbound-asks, nemik-check), installed as nemik's own dependency
     "mikemol-icsstruct",  # nemik:W157: operator calendars (W113) read through mtools' lossless iCalendar reader (mtools:W304)  # nemik:W145: RRULE expansion (mtools:W309 stores the rule, nemik expands it)
 ]
 
 [tool.uv.sources]
 # Vendored wheel (nemik:W6, H1): built from mtools' pathsforward at the pinned commit; see
 # vendor/wheels/README.md. No network fetch at build time.
-mikemol-pathsforward = { path = "vendor/wheels/mikemol_pathsforward-0.1.0+f22d7fe-py3-none-any.whl" }
-mikemol-icsstruct = { path = "vendor/wheels/mikemol_icsstruct-0.1.0+3e12e44-py3-none-any.whl" }
+mikemol-pathsforward = { path = "vendor/wheels/mikemol_pathsforward-0.1.0+03749d5-py3-none-any.whl" }
+mikemol-hooks = { path = "vendor/wheels/mikemol_hooks-0.1.0+03749d5-py3-none-any.whl" }
+mikemol-icsstruct = { path = "vendor/wheels/mikemol_icsstruct-0.1.0+03749d5-py3-none-any.whl" }
 paperkit = { git = "https://github.com/mikemol/paperkit.git", rev = "b5877102af3b48005fde814416bff5b8f06ba5cd" }
 
 [project.scripts]

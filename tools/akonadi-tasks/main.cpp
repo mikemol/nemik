@@ -29,6 +29,8 @@
 #include <QFile>
 #include <QSaveFile>
 #include <QCoreApplication>
+#include <QDBusConnection>
+#include <QDBusConnectionInterface>
 #include <QTextStream>
 #include <QTimeZone>
 #include <cstdio>
@@ -50,6 +52,19 @@ static void out(const QString &s) { std::fputs((s + QLatin1Char('\n')).toUtf8().
 int main(int argc, char **argv) {
     QCoreApplication app(argc, argv);
     const QStringList args = app.arguments();
+    // nemik:W193 (luthen-observability:W299): never start Akonadi from here. With no session bus, or
+    // no running akonadi_control, the Akonadi client library goes looking for a server and spawns
+    // akonadi_control itself; from an agent scope that process has no display and Qt aborts it
+    // (core dumps 2026-10-02 13:33 and 2026-10-03 22:31 EDT, both in claude-nemik-*.scope, both at
+    // moments this helper ran). Refuse first, before any Akonadi object exists.
+    {
+        auto bus = QDBusConnection::sessionBus();
+        if (!bus.isConnected() || !bus.interface()
+            || !bus.interface()->isServiceRegistered(QStringLiteral("org.freedesktop.Akonadi.Control"))) {
+            out(QStringLiteral("ERROR: akonadi is not running on this session bus; refusing to start it from here"));
+            return 2;
+        }
+    }
     const bool apply = args.contains(QStringLiteral("--apply"));
     // --only REF (repeatable): sync just these refs and leave every other task as it is (no COMPLETE
     // for refs outside the set), so a new mapping can be tried on one task (nemik:W162).

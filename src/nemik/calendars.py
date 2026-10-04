@@ -156,6 +156,12 @@ def days_main(argv: list[str] | None = None, g=None) -> None:
     except FileNotFoundError as e:
         print(f"ERROR: {e}")
         raise SystemExit(2) from e
+    except subprocess.CalledProcessError as e:
+        # The helper refuses (nemik:W193) when Akonadi is not running; say what it said, not a traceback.
+        why = ((e.stdout or b"").decode(errors="replace").strip() or (e.stderr or b"").decode(errors="replace").strip()
+               or f"exit {e.returncode}")
+        print(f"ERROR: the calendar export failed: {why.splitlines()[-1]}")
+        raise SystemExit(2) from e
     eg = event_graph(occs, g)
     rows = []
     for o in occs:

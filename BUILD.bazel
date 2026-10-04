@@ -11,7 +11,7 @@ exports_files(["pyproject.toml"])
         name = src.removeprefix("tests/").removesuffix(".py"),
         srcs = ["tests/venv_pytest.sh"],
         args = ["$(rootpath " + src + ")", "-c", "$(rootpath pyproject.toml)"],
-        data = [src, "tests/installed.py", "//tests/fixtures:fleet", "pyproject.toml", "ARCHITECTURE.md", "skills/nemik/SKILL.md", "src/nemik/data/shapes.ttl", ":.venv", "@opa//file", "@chromium//:files", "@chromium//:chrome-headless-shell"],
+        data = [src, "tests/installed.py", ".claude/settings.json", "//tests/fixtures:fleet", "pyproject.toml", "ARCHITECTURE.md", "skills/nemik/SKILL.md", "src/nemik/data/shapes.ttl", ":.venv", "@opa//file", "@chromium//:files", "@chromium//:chrome-headless-shell"],
         env = {
             "NEMIK_OPA": "$(rootpath @opa//file)",
             "NEMIK_CHROMIUM": "$(rootpath @chromium//:chrome-headless-shell)",
@@ -25,7 +25,7 @@ exports_files(["pyproject.toml"])
 # console script, the same entries as pyproject's [project.scripts] plus pathsforward's own.
 venv_from_hub(
     name = ".venv",
-    hub_requirements = all_requirements + ["@pathsforward//:pkg", "@icsstruct//:pkg"],
+    hub_requirements = all_requirements + ["@pathsforward//:pkg", "@icsstruct//:pkg", "@hooks//:pkg"],
     python_version = "3.13",
     python_version_short = "3.13",
     srcs = glob(["src/nemik/**"], exclude = ["**/__pycache__/**"]),
@@ -44,6 +44,8 @@ venv_from_hub(
         "nemik-tasks": "nemik.vtodo:tasks_main",
         "mikemol-paths-forward": "mikemol.pathsforward.cli:main",
         "mikemol-ics": "mikemol.icsstruct.cli:main",
+        "mikemol-hook-inbound-asks": "mikemol.hooks.entry:inbound_asks_main",
+        "mikemol-hook-nemik-check": "mikemol.hooks.entry:nemik_check_main",
         "nemik-days": "nemik.calendars:days_main",
     },
 )

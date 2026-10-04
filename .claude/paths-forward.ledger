@@ -314,3 +314,7 @@
 2026-10-04T02:30:14Z  tick  --  takeover  --  "stale lock from 2026-10-02T17:31Z (session ended mid-tick); W189 ics fix was uncommitted, re-verified below"
 2026-10-04T02:34:39Z  tick  W189  advanced  unblock  "nemik-days reads mikemol-ics from its own venv (life-82); W182 done; W190 minted for the include filter"  evidence=tests/test_calendars.py
 2026-10-04T02:36:15Z  tick  --  advanced  --  "letter to life (no live session); W191 minted for the dedupe"
+2026-10-04T20:03:15Z  tick  W192 minted    -         "Witness one nemik push end to end: push -> registry tag -> deploy-state commit -> Flux reconcile -> pod on the new digest, read back from each system (luthen W170)"  evidence=luthen-observability:W170
+2026-10-04T20:03:15Z  tick  W193 minted    -         "Find which nemik session started the display-less akonadi_control (claude-nemik scope, 2026-10-02 13:33 EDT); is it nemik-akonadi-tasks? (luthen W299)"  evidence=luthen-observability:W299
+2026-10-04T20:06:41Z  tick  W194 minted    -         "Move the mtools pin to 03749d5 (pathsforward, icsstruct, hooks wheels at one sha) and wire the new hooks (inbound-asks, nemik-check) in .claude/settings.json"  evidence=operator
+2026-10-04T20:15:20Z  interrupt  W194  advanced  unblock  "mtools pin 03749d5 (3 wheels, one sha) + inbound-asks and nemik-check hooks wired and read back live; W193 helper refuses to start Akonadi (luthen W299 evidence); W190 working"  evidence=.claude/settings.json,tests/test_hooks_wired.py,tools/akonadi-tasks/main.cpp

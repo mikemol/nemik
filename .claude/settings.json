@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {"hooks": [
+        {"type": "command", "command": "\"$CLAUDE_PROJECT_DIR/.venv/bin/mikemol-hook-inbound-asks\""},
+        {"type": "command", "command": "\"$CLAUDE_PROJECT_DIR/.venv/bin/mikemol-hook-nemik-check\""}
+      ]}
+    ],
+    "UserPromptSubmit": [
+      {"hooks": [
+        {"type": "command", "command": "\"$CLAUDE_PROJECT_DIR/.venv/bin/mikemol-hook-inbound-asks\""},
+        {"type": "command", "command": "\"$CLAUDE_PROJECT_DIR/.venv/bin/mikemol-hook-nemik-check\""}
+      ]}
+    ]
+  }
+}

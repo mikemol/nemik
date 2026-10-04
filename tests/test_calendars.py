@@ -115,3 +115,19 @@ def test_the_reader_is_found_in_nemiks_own_venv_not_on_path(tmp_path, monkeypatc
     assert [r["uid"] for r in got] == ["a@t"] and _venv_ics().endswith("/mikemol-ics")
     with pytest.raises(FileNotFoundError, match="calendar reader"):
         occurrences({"home": "Personal"}, start="2026-10-01", helper=_helper(tmp_path), ics=str(tmp_path / "nope"))
+
+
+def test_a_refusing_helper_is_reported_not_a_traceback(tmp_path, ics, capsys) -> None:
+    """nemik:W193: the Akonadi helper refuses when Akonadi is not running; nemik-days says so, exit 2."""
+    from nemik.calendars import days_main
+
+    h = tmp_path / "helper"
+    h.write_text("#!/bin/sh\necho 'ERROR: akonadi is not running on this session bus; refusing to start it from here'\nexit 2\n")
+    h.chmod(0o755)
+    cfg = tmp_path / "calendars.toml"
+    cfg.write_text('[calendars]\nhome = "Personal"\n')
+    with pytest.raises(SystemExit) as e:
+        days_main(["3", "--calendars", str(cfg), "--helper", str(h)], __import__("rdflib").Graph())
+    assert e.value.code == 2
+    out = capsys.readouterr().out
+    assert "refusing to start it" in out and "Traceback" not in out

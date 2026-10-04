@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 191,
+  "counter": 194,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 119
+      "ticks_blocked": 120
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 74,
+      "ticks_blocked": 75,
       "weight": 1
     },
     {
@@ -1397,7 +1397,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-01T19:50:19Z",
-      "ticks_blocked": 56,
+      "ticks_blocked": 57,
       "witness": "not input.promql[\"luthen_image_follow_ship{image=\\\"nemik\\\",step=\\\"rollout\\\",state=~\\\"ok|done|success\\\"}\"].empty"
     },
     {
@@ -2613,7 +2613,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 64
+      "ticks_blocked": 65
     },
     {
       "symbol": "W138",
@@ -2831,7 +2831,7 @@
       "minted_during": "tick",
       "caused_by": "life:W28",
       "last_worked": "2026-10-01T23:45:16Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "weight": 3
     },
     {
@@ -3522,7 +3522,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-02T17:28:25Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "weight": 2
     },
     {
@@ -3545,7 +3545,9 @@
       "symbol": "W190",
       "title": "calendars.toml per-calendar include filter (life:W31): name + include substrings on SUMMARY, absent = all, '0 of N matched' not 'free'",
       "status": "working",
-      "enables": [],
+      "enables": [
+        "life:W31"
+      ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
@@ -3554,9 +3556,10 @@
       "issued_at": "2026-10-04T02:34:12Z",
       "minted_during": "tick",
       "caused_by": "life-82",
-      "last_worked": "2026-10-04T02:34:29Z",
+      "last_worked": "2026-10-04T20:14:30Z",
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 1,
+      "completed": null
     },
     {
       "symbol": "W191",
@@ -3574,7 +3577,64 @@
       "minted_during": "tick",
       "caused_by": "life-82",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
+    },
+    {
+      "symbol": "W192",
+      "title": "Witness one nemik push end to end: push -> registry tag -> deploy-state commit -> Flux reconcile -> pod on the new digest, read back from each system (luthen W170)",
+      "status": "ready",
+      "enables": [
+        "luthen-observability:W170"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-04T20:03:15Z",
+      "minted_during": "tick",
+      "caused_by": "luthen-observability:W170",
+      "last_worked": "2026-10-04T20:14:48Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "weight": 2
+    },
+    {
+      "symbol": "W193",
+      "title": "Find which nemik session started the display-less akonadi_control (claude-nemik scope, 2026-10-02 13:33 EDT); is it nemik-akonadi-tasks? (luthen W299)",
+      "status": "done",
+      "enables": [
+        "luthen-observability:W299"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-04: 2026-10-04: evidence for luthen W299: two akonadi_control SIGABRT dumps, 2026-10-02 13:33:21 EDT (claude-nemik-p2613571.scope) and 2026-10-03 22:31:58 EDT (claude-nemik-p2497145.scope; luthen's note named only the first), both ending in QMessageLogger::fatal; both timestamps fall in ledger windows where nemik-akonadi-tasks ran, the second inside my env -i nemik-days test (no D-Bus session, no DISPLAY; it hung 100s). Mechanism not proven (stopping the healthy akonadi to reproduce would be disruptive). Fix is at the contract: the helper now refuses before creating any Akonadi object unless the session bus is up and org.freedesktop.Akonadi.Control is registered (exit 2, 'refusing to start it from here'). READ BACK: env -i run exits 2 in 0s with that message; coredump count 2->2, akonadi_control procs 1->1; normal-env plan run unchanged. nemik-days prints the refusal instead of a traceback. tests/test_akonadi_guard.py (host-only) and test_calendars case.",
+      "issued_at": "2026-10-04T20:03:15Z",
+      "minted_during": "tick",
+      "caused_by": "luthen-observability:W299",
+      "last_worked": "2026-10-04T20:14:30Z",
+      "ticks_blocked": 0,
+      "completed": "20261004T201430Z"
+    },
+    {
+      "symbol": "W194",
+      "title": "Move the mtools pin to 03749d5 (pathsforward, icsstruct, hooks wheels at one sha) and wire the new hooks (inbound-asks, nemik-check) in .claude/settings.json",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-04: 2026-10-04: pin moved to mtools 03749d5 for all three vendored wheels (pathsforward, icsstruct, hooks; old f22d7fe/3e12e44 wheels git rm'd, vendor/wheels/README history, MODULE.bazel vendored_wheel hooks, BUILD.bazel hub + console scripts, uv.lock adds mypy/ruff/pathspec). New pathsforward in the built venv: --inbound, --prune-landed, --embargo present; its --check accepts nemik's queue. Hooks wired in .claude/settings.json (SessionStart + UserPromptSubmit: mikemol-hook-inbound-asks, mikemol-hook-nemik-check). READ BACK, not assumed: ran both hooks live (inbound-asks listed 3 unclaimed peer asks; nemik-check surfaced W47), and the nemik-check hook fired in this very session on a prompt event. tests/test_hooks_wired.py: settings wire both on both events, scripts installed, both exit 0 on a SessionStart payload. Bazel 34/34; image test stage (buildctl target=test) 171 passed, 1 skipped (the host-only helper test); Containerfile now COPYs .claude/settings.json.",
+      "issued_at": "2026-10-04T20:06:41Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": "2026-10-04T20:14:30Z",
+      "ticks_blocked": 0,
+      "completed": "20261004T201430Z"
     }
   ],
   "residue": [
