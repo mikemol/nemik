@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 190,
+  "counter": 191,
   "waypoints": [
     {
       "symbol": "W1",
@@ -3557,6 +3557,24 @@
       "last_worked": "2026-10-04T02:34:29Z",
       "ticks_blocked": 0,
       "weight": 1
+    },
+    {
+      "symbol": "W191",
+      "title": "nemik-days: dedupe the same chore across calendars on (start, summary) (life-82, optional)",
+      "status": "ready",
+      "enables": [
+        "W190"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-04T02:36:15Z",
+      "minted_during": "tick",
+      "caused_by": "life-82",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [

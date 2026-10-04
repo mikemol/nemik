@@ -313,3 +313,4 @@
 2026-10-02T17:28:25Z  tick  W188  blocked  --  "Akonadi sync is no Google read (negative control from try 2); credential use is the operator's call; W165 working"
 2026-10-04T02:30:14Z  tick  --  takeover  --  "stale lock from 2026-10-02T17:31Z (session ended mid-tick); W189 ics fix was uncommitted, re-verified below"
 2026-10-04T02:34:39Z  tick  W189  advanced  unblock  "nemik-days reads mikemol-ics from its own venv (life-82); W182 done; W190 minted for the include filter"  evidence=tests/test_calendars.py
+2026-10-04T02:36:15Z  tick  --  advanced  --  "letter to life (no live session); W191 minted for the dedupe"
