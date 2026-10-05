@@ -1,19 +1,24 @@
 from pathlib import Path
 
+import installed
 import pytest
 from rdflib import Graph
 
 from nemik.check import survey
 from nemik.tools import COMMANDS, FILE_COMMANDS, run
 
-import installed
-
 # module:function -> the console script pyproject installs for it
-SCRIPTS = {"nemik.rank:main": "nemik-rank", "nemik.overlaps:main": "nemik-overlaps", "nemik.blocks:main": "nemik-inbound",
-           "nemik.blocks:operator_main": "nemik-operator", "nemik.wake:main": "nemik-wake", "nemik.check:main": "nemik-check",
-           "nemik.metrics:main": "nemik-metrics", "nemik.floorasks:main": "nemik-floor-asks",
-           "nemik.witnesses:main": "nemik-witnesses"}
-
+SCRIPTS = {
+    "nemik.rank:main": "nemik-rank",
+    "nemik.overlaps:main": "nemik-overlaps",
+    "nemik.blocks_cli:main": "nemik-inbound",
+    "nemik.blocks_cli:operator_main": "nemik-operator",
+    "nemik.wake:main": "nemik-wake",
+    "nemik.check:main": "nemik-check",
+    "nemik.metrics:main": "nemik-metrics",
+    "nemik.floorasks:main": "nemik-floor-asks",
+    "nemik.witnesses:main": "nemik-witnesses",
+}
 
 
 def _graph(root: Path) -> Graph:
@@ -30,20 +35,50 @@ def test_cmd_output_is_the_cli_output(name, tmp_path) -> None:
 
     q = tmp_path / "a" / ".claude"
     q.mkdir(parents=True)
-    (q / "paths-forward.json").write_text(json.dumps({"version": 1, "project_root": str(tmp_path / "a"), "counter": 2,
-        "waypoints": [{"symbol": "W1", "title": "t", "status": "ready", "touches": ["x"]},
-                      {"symbol": "W2", "title": "u", "status": "blocked", "blocked_on": ["b"], "blocked_kind": "agent",
-                       "touches": ["x"]}], "residue": []}))
-    fn, argv, _ = {**COMMANDS, **FILE_COMMANDS}[name]
+    (q / "paths-forward.json").write_text(
+        json.dumps(
+            {
+                "version": 1,
+                "project_root": str(tmp_path / "a"),
+                "counter": 2,
+                "waypoints": [
+                    {"symbol": "W1", "title": "t", "status": "ready", "touches": ["x"]},
+                    {
+                        "symbol": "W2",
+                        "title": "u",
+                        "status": "blocked",
+                        "blocked_on": ["b"],
+                        "blocked_kind": "agent",
+                        "touches": ["x"],
+                    },
+                ],
+                "residue": [],
+            }
+        )
+    )
+    _, argv, _ = {**COMMANDS, **FILE_COMMANDS}[name]
     code, out = run(name, _graph(tmp_path), str(tmp_path), "a")
-    mod = {"rank": "nemik.rank:main", "goals": "nemik.rank:main", "rank-check": "nemik.rank:main",
-                    "overlaps": "nemik.overlaps:main", "overlaps-cross": "nemik.overlaps:main",
-                    "inbound": "nemik.blocks:main", "operator": "nemik.blocks:operator_main",
-                    "wake": "nemik.wake:main", "check": "nemik.check:main", "metrics": "nemik.metrics:main",
-                    "floor-asks": "nemik.floorasks:main", "witnesses": "nemik.witnesses:main"}.get(name, "")
+    mod = {
+        "rank": "nemik.rank:main",
+        "goals": "nemik.rank:main",
+        "rank-check": "nemik.rank:main",
+        "overlaps": "nemik.overlaps:main",
+        "overlaps-cross": "nemik.overlaps:main",
+        "inbound": "nemik.blocks_cli:main",
+        "operator": "nemik.blocks_cli:operator_main",
+        "wake": "nemik.wake:main",
+        "check": "nemik.check:main",
+        "metrics": "nemik.metrics:main",
+        "floor-asks": "nemik.floorasks:main",
+        "witnesses": "nemik.witnesses:main",
+    }.get(name, "")
     if name.startswith("pf-"):  # mtools' CLI, pointed at the same queue file
-        cli = installed.run("mikemol-paths-forward", "--state",
-                            str(tmp_path / "a" / ".claude" / "paths-forward.json"), "--" + name[3:])
+        cli = installed.run(
+            "mikemol-paths-forward",
+            "--state",
+            str(tmp_path / "a" / ".claude" / "paths-forward.json"),
+            "--" + name[3:],
+        )
         assert (code, out) == (cli.returncode, cli.stdout)
         return
     cli = installed.run(SCRIPTS[mod], *argv("a"), "--root", str(tmp_path))

@@ -11,7 +11,7 @@ Recurrence (RRULE, mtools:W309/W310) is expanded here (fires_between, nemik:W145
 from __future__ import annotations
 
 import re
-from datetime import date, datetime, time, timedelta, timezone
+from datetime import UTC, date, datetime, time, timedelta
 
 from mikemol.pathsforward.timevalue import duration
 from mikemol.pathsforward.timevalue import fires_at as _fires_at
@@ -21,7 +21,9 @@ __all__ = ["duration", "fires_at", "fires_between", "recurrence_id"]
 
 def fires_at(trigger: str, dtstart: str = "", due: str = "") -> datetime | None:
     """The UTC instant `trigger` fires, or None when its anchor is unset."""
-    return _fires_at(trigger, dtstart, due, day_zone=datetime.now().astimezone().tzinfo)
+    # An aware datetime always has a tzinfo; the fallback only satisfies the type.
+    host_zone = datetime.now().astimezone().tzinfo or UTC
+    return _fires_at(trigger, dtstart, due, day_zone=host_zone)
 
 
 def recurrence_id(when: datetime | date, dtstart: str) -> str:
@@ -33,12 +35,20 @@ def recurrence_id(when: datetime | date, dtstart: str) -> str:
     if re.fullmatch(r"\d{8}", dtstart):
         return when.strftime("%Y%m%d")
     assert isinstance(when, datetime)
-    return when.astimezone(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    return when.astimezone(UTC).strftime("%Y%m%dT%H%M%SZ")
 
 
-def fires_between(trigger: str, start: datetime, end: datetime, *, dtstart: str = "", due: str = "",
-                  rrule: str = "", exdates: tuple[str, ...] = (), done: dict | None = None,
-                  ) -> list[tuple[datetime, str]]:
+def fires_between(
+    trigger: str,
+    start: datetime,
+    end: datetime,
+    *,
+    dtstart: str = "",
+    due: str = "",
+    rrule: str = "",
+    exdates: tuple[str, ...] = (),
+    done: dict | None = None,
+) -> list[tuple[datetime, str]]:
     """Every (UTC instant, RECURRENCE-ID) in [start, end) at which `trigger` fires (nemik:W145).
 
     Without a rule: the one instant, RECURRENCE-ID "". With one (mtools:W309): each occurrence of
@@ -55,17 +65,29 @@ def fires_between(trigger: str, start: datetime, end: datetime, *, dtstart: str 
     from mikemol.pathsforward.timevalue import parse
 
     first = parse(dtstart).when
-    anchor = first if isinstance(first, datetime) else datetime.combine(first, time(0)).astimezone()
+    anchor = (
+        first
+        if isinstance(first, datetime)
+        else datetime.combine(first, time(0)).astimezone()
+    )
     offset = base - anchor  # where the trigger sits relative to each occurrence's start
-    skip_at = {(w if isinstance(w := parse(x).when, datetime) else datetime.combine(w, time(0)).astimezone())
-               for x in exdates}
+    skip_at = {
+        (
+            w
+            if isinstance(w := parse(x).when, datetime)
+            else datetime.combine(w, time(0)).astimezone()
+        )
+        for x in exdates
+    }
     out = []
     # Occurrences whose firing can fall in the window: shift the window back by the offset.
-    for occ in rrulestr(rrule, dtstart=anchor).between(start - offset - timedelta(seconds=1), end - offset, inc=True):
+    for occ in rrulestr(rrule, dtstart=anchor).between(
+        start - offset - timedelta(seconds=1), end - offset, inc=True
+    ):
         rid = recurrence_id(occ if isinstance(first, datetime) else occ.date(), dtstart)
         if occ in skip_at or rid in (done or {}):
             continue
-        at = (occ + offset).astimezone(timezone.utc)
+        at = (occ + offset).astimezone(UTC)
         if start <= at < end:
             out.append((at, rid))
     return out

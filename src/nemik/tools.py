@@ -17,24 +17,37 @@ from collections.abc import Callable
 
 from rdflib import Graph
 
-from nemik import blocks, check, floorasks, metrics, overlaps, rank, wake, witnesses
+from nemik import (
+    blocks_cli,
+    check,
+    floorasks,
+    metrics,
+    overlaps,
+    rank,
+    wake,
+    witnesses,
+)
 
 # name -> (main, argv for a repo or None, whether a repo is required)
-COMMANDS: dict[str, tuple[Callable[..., None], Callable[[str | None], list[str]], bool]] = {
+COMMANDS: dict[
+    str, tuple[Callable[..., None], Callable[[str | None], list[str]], bool]
+] = {
     "rank": (rank.main, lambda r: [r or ""], True),
     "goals": (rank.main, lambda r: [r or "", "--goals"], True),
     "rank-check": (rank.main, lambda r: [r or "", "--check"], True),
     "overlaps": (overlaps.main, lambda r: [], False),
     "overlaps-cross": (overlaps.main, lambda r: ["--cross"], False),
-    "inbound": (blocks.main, lambda r: [r] if r else [], False),
-    "operator": (blocks.operator_main, lambda r: [], False),
+    "inbound": (blocks_cli.main, lambda r: [r] if r else [], False),
+    "operator": (blocks_cli.operator_main, lambda r: [], False),
     "wake": (wake.main, lambda r: ["--all"], False),
 }
 
 # nemik:W82: commands that read the queue files themselves (they need more than the graph).
 # Same fixed-argv rule; `witnesses` is the dry run, never --apply, and its observers may reach the
 # network, so the panel runs it only on an explicit pick.
-FILE_COMMANDS: dict[str, tuple[Callable[..., None], Callable[[str | None], list[str]], bool]] = {
+FILE_COMMANDS: dict[
+    str, tuple[Callable[..., None], Callable[[str | None], list[str]], bool]
+] = {
     "check": (check.main, lambda r: [], False),
     "metrics": (metrics.main, lambda r: [], False),
     "floor-asks": (floorasks.main, lambda r: [], False),
@@ -63,11 +76,13 @@ def _pf(flag: str) -> Callable[..., None]:
     return run_pf
 
 
-FILE_COMMANDS.update({
-    "pf-queue": (_pf("--queue"), lambda r: [r or ""], True),
-    "pf-check": (_pf("--check"), lambda r: [r or ""], True),
-    "pf-overlaps": (_pf("--overlaps"), lambda r: [r or ""], True),
-})
+FILE_COMMANDS.update(
+    {
+        "pf-queue": (_pf("--queue"), lambda r: [r or ""], True),
+        "pf-check": (_pf("--check"), lambda r: [r or ""], True),
+        "pf-overlaps": (_pf("--overlaps"), lambda r: [r or ""], True),
+    }
+)
 
 # redirect_stdout swaps a process-wide object, so two requests at once would interleave.
 _stdout = threading.Lock()
@@ -77,7 +92,9 @@ def run(name: str, g: Graph, root: str, repo: str | None = None) -> tuple[int, s
     """(exit code, stdout) of command `name` over `g`; ValueError for an unknown command or bad repo."""
     table = COMMANDS if name in COMMANDS else FILE_COMMANDS
     if name not in table:
-        raise ValueError(f"unknown command {name!r}; one of {', '.join([*COMMANDS, *FILE_COMMANDS])}")
+        raise ValueError(
+            f"unknown command {name!r}; one of {', '.join([*COMMANDS, *FILE_COMMANDS])}"
+        )
     fn, argv, needs_repo = table[name]
     if repo is not None and not re.fullmatch(r"[\w.-]+", repo):
         raise ValueError(f"bad repo {repo!r}")

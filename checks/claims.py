@@ -8,6 +8,7 @@ several claims. Run from the repo root (paperkit's `root = "."` in paper.toml pu
 
     python3 checks/claims.py <claim-key>      # exit 0 = claim holds
 """
+
 from __future__ import annotations
 
 import re
@@ -28,48 +29,67 @@ def _modules() -> dict[str, str]:
 
 
 def _imports_nemik(text: str) -> set[str]:
-    return {m.group(1) for m in re.finditer(r"^from nemik\.(\w+) import", text, re.M)}
+    return {
+        m.group(1)
+        for m in re.finditer(r"^from nemik\.(\w+) import", text, re.MULTILINE)
+    }
 
 
 # -- guarantees ---------------------------------------------------------------------------------
+
 
 def single_writer_boundary():
     # adapter.py is the ONE module that parses the state file (through mtools' store.load); no
     # other module re-implements that parse.
     mods = _modules()
-    readers = [name for name, text in mods.items() if "store.load(" in text or "store.load (" in text]
+    readers = [
+        name
+        for name, text in mods.items()
+        if "store.load(" in text or "store.load (" in text
+    ]
     assert readers == ["adapter"], f"store.load() called outside adapter.py: {readers}"
 
 
 def exit_code_is_the_verdict():
     text = _src("check.py")
-    assert "sys.exit(1 if failed else 0)" in text, "nemik-check's exit code is no longer 1-iff-Violation"
+    assert "sys.exit(1 if failed else 0)" in text, (
+        "nemik-check's exit code is no longer 1-iff-Violation"
+    )
 
 
 def provenance_lines_are_stable():
     text = _src("check.py")
     assert 'f"provenance: nemik {sha' in text, "the nemik provenance line prefix moved"
-    assert 'f"provenance: queue {repo}' in text, "the per-queue provenance line prefix moved"
+    assert 'f"provenance: queue {repo}' in text, (
+        "the per-queue provenance line prefix moved"
+    )
 
 
 def unclaimed_is_a_literal_other_repos_grep():
-    text = _src("blocks.py")
-    assert '"UNCLAIMED"' in text, "the UNCLAIMED literal other repos' tick loops grep for is gone"
+    text = _src("blocks_cli.py")
+    assert '"UNCLAIMED"' in text, (
+        "the UNCLAIMED literal other repos' tick loops grep for is gone"
+    )
 
 
 def symbol_pattern_is_enforced():
     shapes = (SRC / "data" / "shapes.ttl").read_text()
-    assert 'sh:pattern "^W[0-9]+$"' in shapes, "the W<n> symbol pattern shape changed or was removed"
+    assert 'sh:pattern "^W[0-9]+$"' in shapes, (
+        "the W<n> symbol pattern shape changed or was removed"
+    )
 
 
 def hermetic_vendoring():
     pyproject = (ROOT / "pyproject.toml").read_text()
-    m = re.search(r'mikemol-pathsforward\s*=\s*\{\s*path\s*=', pyproject)
-    assert m, "mikemol-pathsforward is no longer pinned to a local vendored path (H1 hermeticity)"
+    m = re.search(r"mikemol-pathsforward\s*=\s*\{\s*path\s*=", pyproject)
+    assert m, (
+        "mikemol-pathsforward is no longer pinned to a local vendored path (H1 hermeticity)"
+    )
 
 
 def cross_repo_citation_form():
     from nemik.adapter import reference_uri
+
     got = str(reference_uri("alpha", "beta:W3"))
     assert got == "urn:nemik:beta/W3", f"foreign-symbol resolution changed shape: {got}"
     got = str(reference_uri("alpha", "W7"))
@@ -78,15 +98,22 @@ def cross_repo_citation_form():
 
 # -- standards ------------------------------------------------------------------------------------
 
+
 def oslc_cm_state_vocabulary():
     # oslc_cm:state is the OSLC CM property; its four values are nemik's own vocabulary (mtools'
     # status strings have no OSLC CM state URIs of their own to map onto).
-    from nemik.adapter import STATE, NEMIK, OSLC_CM
-    assert set(STATE) == {"ready", "working", "blocked", "done"}, f"STATE keys drifted: {set(STATE)}"
-    assert all(str(v).startswith(str(NEMIK)) for v in STATE.values()), "a STATE value left nemik's own namespace"
+    from nemik.adapter import NEMIK, OSLC_CM, STATE
+
+    assert set(STATE) == {"ready", "working", "blocked", "done"}, (
+        f"STATE keys drifted: {set(STATE)}"
+    )
+    assert all(str(v).startswith(str(NEMIK)) for v in STATE.values()), (
+        "a STATE value left nemik's own namespace"
+    )
     adapter_src = _src("adapter.py")
-    assert "g.add((node, OSLC_CM.state, STATE.get(status" in adapter_src, \
+    assert "g.add((node, OSLC_CM.state, STATE.get(status" in adapter_src, (
         "queue_graph() no longer asserts state through the oslc_cm:state property"
+    )
     assert OSLC_CM  # imported and actually referenced above, not vestigial
 
 
@@ -98,31 +125,45 @@ def prov_activity_shape():
 
 def prometheus_label_format():
     from nemik.metrics import label
+
     got = label(repo="alpha", state="ready")
-    assert got == '{repo="alpha",state="ready"}', f"Prometheus label format changed: {got}"
+    assert got == '{repo="alpha",state="ready"}', (
+        f"Prometheus label format changed: {got}"
+    )
 
 
 def shacl_is_the_one_validator():
     mods = _modules()
-    users = [name for name, text in mods.items() if re.search(r"^from pyshacl import|^import pyshacl", text, re.M)]
+    users = [
+        name
+        for name, text in mods.items()
+        if re.search(r"^from pyshacl import|^import pyshacl", text, re.MULTILINE)
+    ]
     assert users == ["check"], f"pyshacl imported outside check.py: {users}"
 
 
 # -- modularity -----------------------------------------------------------------------------------
 
+
 def adapter_is_the_foundation_layer():
-    assert not _imports_nemik(_src("adapter.py")), "adapter.py now depends on another nemik module"
+    assert not _imports_nemik(_src("adapter.py")), (
+        "adapter.py now depends on another nemik module"
+    )
 
 
 def adoption_has_no_internal_coupling():
-    assert not _imports_nemik(_src("adoption.py")), "adoption.py picked up a dependency on another nemik module"
+    assert not _imports_nemik(_src("adoption.py")), (
+        "adoption.py picked up a dependency on another nemik module"
+    )
 
 
 def hub_modules_depend_on_everything_below():
     mods = _modules()
     for hub in ("metrics", "serve"):
         deps = _imports_nemik(mods[hub])
-        assert deps == {"adapter", "blocks", "wake", "check"}, f"{hub}.py's dependency set changed: {deps}"
+        assert deps == {"adapter", "blocks", "wake", "check"}, (
+            f"{hub}.py's dependency set changed: {deps}"
+        )
 
 
 def import_graph_is_acyclic():
@@ -142,17 +183,30 @@ def rdf_is_not_centralized_behind_adapter():
     # The honest modularity gap: rdflib is a shared foundation library every module reaches for
     # directly, not a dependency adapter.py alone encapsulates.
     mods = _modules()
-    direct_importers = [name for name, text in mods.items()
-                         if name != "adapter" and re.search(r"^from rdflib|^import rdflib", text, re.M)]
-    assert len(direct_importers) >= 2, f"rdflib turned out to be centralized after all: {direct_importers}"
+    direct_importers = [
+        name
+        for name, text in mods.items()
+        if name != "adapter"
+        and re.search(r"^from rdflib|^import rdflib", text, re.MULTILINE)
+    ]
+    assert len(direct_importers) >= 2, (
+        f"rdflib turned out to be centralized after all: {direct_importers}"
+    )
 
 
 def no_versioned_schema():
     # The claim is an absence: no version negotiation between shapes.ttl and its consumers.
     # Falsifiable both ways -- this fails the moment someone adds one, which is the point.
     shapes = (SRC / "data" / "shapes.ttl").read_text()
-    for marker in ("owl:versionInfo", "schemaVersion", "shapesVersion", "sh:severity sh:Info"):
-        assert marker not in shapes, f"{marker} found in shapes.ttl -- update this claim, it may no longer hold"
+    for marker in (
+        "owl:versionInfo",
+        "schemaVersion",
+        "shapesVersion",
+        "sh:severity sh:Info",
+    ):
+        assert marker not in shapes, (
+            f"{marker} found in shapes.ttl -- update this claim, it may no longer hold"
+        )
 
 
 def nemik_never_writes_a_queue():
@@ -160,17 +214,21 @@ def nemik_never_writes_a_queue():
     # source never calls either, so this package is read-only with respect to the fleet's state.
     for name, text in _modules().items():
         for writer in ("store.save(", "store.write_atomic(", "ledger.write("):
-            assert writer not in text, f"{name}.py calls {writer} -- nemik is no longer read-only"
+            assert writer not in text, (
+                f"{name}.py calls {writer} -- nemik is no longer read-only"
+            )
 
 
 def check_py_bypasses_the_adapter_boundary():
     # The honest exception to single_writer_boundary()'s isolation claim: check.py imports an
     # mtools exception TYPE directly, rather than through a re-export adapter.py provides.
     text = _src("check.py")
-    assert "from mikemol.pathsforward.store import UnreadableStateError" in text, \
+    assert "from mikemol.pathsforward.store import UnreadableStateError" in text, (
         "check.py no longer bypasses adapter.py for this import -- update the claim, don't just delete it"
-    assert "import UnreadableStateError" not in _src("adapter.py"), \
+    )
+    assert "import UnreadableStateError" not in _src("adapter.py"), (
         "adapter.py now re-exports this exception -- the leak this claim documents may be closed"
+    )
 
 
 CLAIMS = {

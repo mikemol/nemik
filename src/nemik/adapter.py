@@ -48,7 +48,9 @@ def reference_uri(repo: str, ref: str) -> URIRef:
 
 
 OPERATOR = URIRef(f"{BASE}operator")
-_SESSION = re.compile(r"^(?P<repo>.+)-[0-9a-f]{2}$")  # a ListAgents session name: <repo>-<2 hex>
+_SESSION = re.compile(
+    r"^(?P<repo>.+)-[0-9a-f]{2}$"
+)  # a ListAgents session name: <repo>-<2 hex>
 _OPERATOR_WORDS = ("operator", "user", "mikemol", "mike", "human")
 
 
@@ -78,7 +80,9 @@ def resolve_blocker(repo: str, text: str, known: frozenset[str]) -> URIRef | Non
     return None
 
 
-def queue_graph(repo: str, state_path: Path, known: frozenset[str] = frozenset()) -> Graph:
+def queue_graph(
+    repo: str, state_path: Path, known: frozenset[str] = frozenset()
+) -> Graph:
     """Translate one repo's queue. Raises store.UnreadableStateError if mtools refuses it."""
     state = store.load(state_path)
     g = bind(Graph())
@@ -107,8 +111,8 @@ def queue_graph(repo: str, state_path: Path, known: frozenset[str] = frozenset()
             g.add((node, NEMIK.enables, reference_uri(repo, target)))
         for who in model.strlist(w, "blocked_on"):
             g.add((node, NEMIK.blockedOn, Literal(who)))
-            if target := resolve_blocker(repo, who, known):
-                g.add((node, NEMIK.waitsFor, target))
+            if waited := resolve_blocker(repo, who, known):
+                g.add((node, NEMIK.waitsFor, waited))
         if kind := model.text(w, "blocked_kind"):
             g.add((node, NEMIK.blockedKind, Literal(kind)))
         for tag in model.strlist(w, "touches"):
@@ -119,8 +123,14 @@ def queue_graph(repo: str, state_path: Path, known: frozenset[str] = frozenset()
         if wq := " ".join(model.text(w, "witness").split()):
             import hashlib
 
-            g.add((node, NEMIK.weather, Literal("wx:" + hashlib.sha256(wq.encode()).hexdigest()[:10])))
-        if (tb := model.ticks(w)):
+            g.add(
+                (
+                    node,
+                    NEMIK.weather,
+                    Literal("wx:" + hashlib.sha256(wq.encode()).hexdigest()[:10]),
+                )
+            )
+        if tb := model.ticks(w):
             g.add((node, NEMIK.ticksBlocked, Literal(tb)))
         if issued := model.text(w, "issued_at"):
             g.add((node, DCTERMS.created, Literal(issued)))
@@ -152,7 +162,11 @@ def queue_graph(repo: str, state_path: Path, known: frozenset[str] = frozenset()
         for trig in model.strlist(w, "alarms"):
             g.add((node, NEMIK.alarm, Literal(trig)))
         if cause := model.text(w, "caused_by"):
-            cause_ref = reference_uri(repo, cause) if model.is_reference(cause) else Literal(cause)
+            cause_ref = (
+                reference_uri(repo, cause)
+                if model.is_reference(cause)
+                else Literal(cause)
+            )
             g.add((node, PROV.wasInformedBy, cause_ref))
     for r in state.residue:
         symbol = model.text(r, "symbol")
@@ -197,9 +211,13 @@ def ledger_graph(repo: str, ledger_path: Path) -> tuple[Graph, int]:
         node = URIRef(f"{ws}/ledger/{n}")
         g.add((node, RDF.type, PROV.Activity))
         g.add((node, NEMIK.workstream, ws))
-        g.add((node, PROV.startedAtTime, Literal(rec.stamp, datatype=XSD.dateTime)))  # is_stamp since 2293751
+        g.add(
+            (node, PROV.startedAtTime, Literal(rec.stamp, datatype=XSD.dateTime))
+        )  # is_stamp since 2293751
         g.add((node, NEMIK.kind, Literal(e.kind)))
-        g.add((node, NEMIK.effortClass, Literal(KIND_CLASS.get(e.kind, "unclassified"))))
+        g.add(
+            (node, NEMIK.effortClass, Literal(KIND_CLASS.get(e.kind, "unclassified")))
+        )
         g.add((node, NEMIK.outcome, Literal(e.outcome)))
         g.add((node, NEMIK.mechanism, Literal(e.mechanism)))
         g.add((node, RDFS.comment, Literal(e.note)))

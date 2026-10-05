@@ -43,7 +43,9 @@ def workstream_files(root: Path, name: str) -> list[tuple[str, Path]]:
     carries only these two files per repo): <root>/<repo>/<name>.
     """
     found = {p.parents[1].name: p for p in root.glob(f"*/.claude/{name}")}
-    found |= {p.parent.name: p for p in root.glob(f"*/{name}") if p.parent.name != ".claude"}
+    found |= {
+        p.parent.name: p for p in root.glob(f"*/{name}") if p.parent.name != ".claude"
+    }
     if not found and (root / ".claude" / name).exists():  # --root pointed at one repo
         # resolved: `--root .` has the name '' (nemik:W142), which left the workstream unnamed and
         # its own <repo>:W<n> references unresolvable.
@@ -57,7 +59,9 @@ def workstream_files(root: Path, name: str) -> list[tuple[str, Path]]:
 
 def shapes() -> Graph:
     g = Graph()
-    g.parse(data=files("nemik.data").joinpath("shapes.ttl").read_text(), format="turtle")
+    g.parse(
+        data=files("nemik.data").joinpath("shapes.ttl").read_text(), format="turtle"
+    )
     return g
 
 
@@ -78,9 +82,16 @@ def survey(root: Path) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
     merged = Graph()
     for repo, state_path in queues:
         try:
-            graphs[repo] = queue_graph(repo, state_path, known)
-            graphs[repo].add((workstream_uri(repo), NEMIK.pathsforwardAdoption, Literal(adoption(state_path))))
-            merged += graphs[repo]
+            qg = queue_graph(repo, state_path, known)
+            qg.add(
+                (
+                    workstream_uri(repo),
+                    NEMIK.pathsforwardAdoption,
+                    Literal(adoption(state_path)),
+                )
+            )
+            graphs[repo] = qg
+            merged += qg
         except UnreadableStateError as exc:
             graphs[repo], refused[repo] = None, str(exc)
     annotate(merged)
@@ -91,7 +102,9 @@ def survey(root: Path) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
         initNs={"sh": SH},
     ):
         repo, _, sym = str(focus).removeprefix(BASE).partition("/")
-        by_repo.setdefault(repo, []).append((str(sev).rsplit("#", 1)[-1], sym or "--", str(msg)))
+        by_repo.setdefault(repo, []).append(
+            (str(sev).rsplit("#", 1)[-1], sym or "--", str(msg))
+        )
     for repo, g in graphs.items():
         if g is None:
             yield repo, None, [("Unreadable", "--", refused[repo])]
@@ -101,7 +114,9 @@ def survey(root: Path) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
 
 def _git(cwd: Path, *argv: str) -> str | None:
     try:
-        out = subprocess.run(["git", "-C", str(cwd), *argv], capture_output=True, text=True, check=True)
+        out = subprocess.run(
+            ["git", "-C", str(cwd), *argv], capture_output=True, text=True, check=True
+        )
     except (OSError, subprocess.CalledProcessError):
         return None
     return out.stdout.strip()
@@ -140,15 +155,29 @@ def provenance(root: Path) -> list[str]:
             exported = exported_commit(path.parent)
             state = f"{exported[0]}@{exported[1]}" if exported else "untracked-source"
         else:
-            changed = _git(path.parent, "status", "--porcelain", "--", str(path), str(path.with_name(LEDGER)))
+            changed = _git(
+                path.parent,
+                "status",
+                "--porcelain",
+                "--",
+                str(path),
+                str(path.with_name(LEDGER)),
+            )
             state = "uncommitted" if changed else "committed"
         lines.append(f"provenance: queue {repo} {state}")
     return lines
 
 
 def main(argv: list[str] | None = None) -> None:
-    ap = argparse.ArgumentParser(prog="nemik-check", description=(__doc__ or "").splitlines()[0])
-    ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
+    ap = argparse.ArgumentParser(
+        prog="nemik-check", description=(__doc__ or "").splitlines()[0]
+    )
+    ap.add_argument(
+        "--root",
+        type=Path,
+        default=default_root(),
+        help="~/github, or the export layout root",
+    )
     ap.add_argument("--dump", type=Path, help="write the merged graph as Turtle")
     args = ap.parse_args(argv)
 

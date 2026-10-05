@@ -13,7 +13,9 @@ from importlib.resources import files
 
 
 def load() -> dict:
-    return json.loads(files("nemik.data").joinpath("field-manifest.json").read_text())["files"]
+    return json.loads(files("nemik.data").joinpath("field-manifest.json").read_text())[
+        "files"
+    ]
 
 
 def _fields(rows) -> set[str]:
@@ -26,22 +28,43 @@ def unmanifested(name: str, doc) -> list[str]:
     key = "goals/<repo>.json" if name.startswith("goals/") else name
     if key not in m:
         return [f"{name}: file is not in the manifest"]
-    spec, bad = m[key], []
+    spec = m[key]
+    bad: list[str] = []
 
     def check(section: str, rows) -> None:
-        bad.extend(f"{name} {section}.{k}" for k in sorted(_fields(rows) - set(spec[section])))
+        bad.extend(
+            f"{name} {section}.{k}" for k in sorted(_fields(rows) - set(spec[section]))
+        )
 
     if key == "graph.json":
         for section in ("nodes", "edges", "inbound", "operator"):
             check(section, doc.get(section))
-        bad += [f"{name} top.{k}" for k in sorted(set(doc) - set(spec) - {"nodes", "edges", "inbound", "operator", "findings"})]
-        bad += [f"{name} findings.{r}" for r, fs in doc.get("findings", {}).items()
-                if any(not isinstance(f, list) or not all(isinstance(x, str) for x in f) for f in fs)]
+        bad += [
+            f"{name} top.{k}"
+            for k in sorted(
+                set(doc)
+                - set(spec)
+                - {"nodes", "edges", "inbound", "operator", "findings"}
+            )
+        ]
+        bad += [
+            f"{name} findings.{r}"
+            for r, fs in doc.get("findings", {}).items()
+            if any(
+                not isinstance(f, list) or not all(isinstance(x, str) for x in f)
+                for f in fs
+            )
+        ]
     elif key == "wake.json":
         bad += [f"{name} top.{k}" for k in sorted(set(doc) - set(spec["top"]))]
         check("roster", doc.get("roster"))
-        check("waiting", [w for r in doc.get("roster", []) for w in r.get("waiting", [])])
-        bad += [f"{name} operator.{k}" for k in sorted(set(doc.get("operator", {})) - set(spec["operator"]))]
+        check(
+            "waiting", [w for r in doc.get("roster", []) for w in r.get("waiting", [])]
+        )
+        bad += [
+            f"{name} operator.{k}"
+            for k in sorted(set(doc.get("operator", {})) - set(spec["operator"]))
+        ]
     else:
         check("goals", doc)
     return bad
