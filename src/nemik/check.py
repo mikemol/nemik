@@ -46,10 +46,15 @@ def workstream_files(root: Path, name: str) -> list[tuple[str, Path]]:
     found |= {
         p.parent.name: p for p in root.glob(f"*/{name}") if p.parent.name != ".claude"
     }
-    if not found and (root / ".claude" / name).exists():  # --root pointed at one repo
-        # resolved: `--root .` has the name '' (nemik:W142), which left the workstream unnamed and
-        # its own <repo>:W<n> references unresolvable.
-        found = {root.resolve().name: root / ".claude" / name}
+    own = root / ".claude" / name
+    if own.exists():
+        # nemik:W224: a root with a queue of its own is a workstream too, named by its directory,
+        # beside the workstreams it contains (the host queue at ~/github/.claude over every repo,
+        # cited `github:W<n>`); a root that holds no repos (--root pointed at one repo) is the
+        # same rule with nothing beneath it. A child of the same name wins. Resolved: `--root .`
+        # has the name '' (nemik:W142), which left the workstream unnamed and its own
+        # <repo>:W<n> references unresolvable.
+        found.setdefault(root.resolve().name, own)
     # A dot-named directory (e.g. .linux-sources-gate-wt, a git worktree of linux-sources) carries
     # another workstream's queue at another commit, not a workstream of its own; it cannot be
     # cited either, since mtools' <repo>:W<n> requires the repo to start alphanumeric. Counting it
