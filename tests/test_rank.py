@@ -69,11 +69,34 @@ def test_rank_orders_ready_items_by_weight_then_symbol() -> None:
     rows = rank(g, "a", W)
     assert [r["symbol"] for r in rows] == ["W9", "W2"]  # blocked W3 excluded
     assert rows[0]["downstream"] == 8  # the raw cross-repo sum
-    assert rows[0]["weight"] > rows[1]["weight"]  # `weight` carries the composed order (W132)
+    assert (
+        rows[0]["weight"] > rows[1]["weight"]
+    )  # `weight` carries the composed order (W132)
+
+
+def test_fleet_rank_pools_repos_into_one_comparable_order() -> None:
+    # nemik:W202: each repo's lone ready item is position 1 in its own `rank`, so `weight`
+    # cannot be compared across repos; `rank_fleet` composes the pool once.
+    from nemik.adapter import workstream_uri
+    from nemik.rank import rank, rank_fleet
+
+    g = Graph()
+    for repo, sym in (("a", "W1"), ("b", "W5")):
+        n = _wp(g, repo, sym)
+        g.add((n, NEMIK.workstream, workstream_uri(repo)))
+        g.add((n, NEMIK.symbol, Literal(sym)))
+    g.add((_wp(g, "c", "W9", "blocked"), NEMIK.waitsFor, waypoint_uri("a", "W1")))
+    assert rank(g, "a", W)[0]["weight"] == rank(g, "b", W)[0]["weight"] == 1
+    fleet = rank_fleet(g, W)
+    assert [r["cite"] for r in fleet] == ["a:W1", "b:W5"]
+    assert [r["repo"] for r in fleet] == ["a", "b"]
+    assert fleet[0]["downstream"] == 8  # the stalled peer c:W9 waits on a:W1
+    assert fleet[0]["weight"] > fleet[1]["weight"]
 
 
 def _ready(g: Graph, repo: str, sym: str, pos: int):
     from nemik.adapter import workstream_uri
+
     n = _wp(g, repo, sym)
     g.add((n, NEMIK.workstream, workstream_uri(repo)))
     g.add((n, NEMIK.symbol, Literal(sym)))
@@ -88,7 +111,9 @@ def test_drift_fires_when_next_item_is_outweighed_and_clears_when_it_leads() -> 
     first, heavy = _ready(g, "a", "W1", 0), _ready(g, "a", "W2", 1)
     stalled = _wp(g, "b", "W9", "blocked")
     g.add((stalled, NEMIK.waitsFor, heavy))
-    nxt, top = drift(g, "a", W)
+    found = drift(g, "a", W)
+    assert found is not None
+    nxt, top = found
     assert (nxt["symbol"], top["symbol"]) == ("W1", "W2")
     g.remove((stalled, NEMIK.waitsFor, heavy))
     g.add((stalled, NEMIK.waitsFor, first))
@@ -115,7 +140,11 @@ def _row(sym, operator=0, band=-3, weight=0):
 def test_compose_lexicographic_is_one_objective_per_tier() -> None:
     from nemik.rank import Composition, compose
 
-    rows = [_row("W1", band=-3, weight=50), _row("W2", band=-1, weight=0), _row("W3", operator=1, band=-4)]
+    rows = [
+        _row("W1", band=-3, weight=50),
+        _row("W2", band=-1, weight=0),
+        _row("W3", operator=1, band=-4),
+    ]
     lex = Composition((("operator",), ("band",), ("weight",)), {})
     assert [r["symbol"] for r in compose(rows, lex)] == ["W3", "W2", "W1"]
 
@@ -125,7 +154,11 @@ def test_compose_pareto_front_then_scalarized_within_it() -> None:
 
     # W1 (band -3, weight 50) and W2 (band -1, weight 0) are both on the first front of
     # [band, weight]; W4 is dominated by W1. Inside the front, 100 per band step beats 50 weight.
-    rows = [_row("W1", band=-3, weight=50), _row("W2", band=-1, weight=0), _row("W4", band=-3, weight=10)]
+    rows = [
+        _row("W1", band=-3, weight=50),
+        _row("W2", band=-1, weight=0),
+        _row("W4", band=-3, weight=10),
+    ]
     comp = Composition((("operator",), ("band", "weight")), {"band": 100, "weight": 1})
     assert [r["symbol"] for r in compose(rows, comp)] == ["W2", "W1", "W4"]
     # Weight the trade the other way and the same front flips; the dominated W4 stays last.

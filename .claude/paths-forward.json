@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 201,
+  "counter": 214,
   "waypoints": [
     {
       "symbol": "W1",
@@ -3757,6 +3757,329 @@
       "last_worked": "2026-10-05T14:36:25Z",
       "ticks_blocked": 0,
       "completed": null
+    },
+    {
+      "symbol": "W202",
+      "title": "nemik-rank fleet mode: rank every workstream's ready items in one run (no repo argument), with a cross-repo-comparable order",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-05: 2026-10-05: ran ruff format on rank.py (1 file reformatted, ruff check passes). mypy debt per file: 12 files, 87 errors; luthen-observability checks/mypy_plan.py is hard-coded to checks.* and checks/mypy_debt.json, so the order was computed by scratchpad script. | 2026-10-05: 2026-10-05: nemik-rank --all landed in src/nemik/rank.py (_rows, _position, rank_fleet, fleet_repos; tests/test_rank.py::test_fleet_rank_pools_repos_into_one_comparable_order). 61 tests pass; live fleet run orders the ready items of every repo by one composed key, each row carrying repo and cite. Prerequisite typing debt paid: adapter.py, alarm.py, manifest.py, blocks.py, check.py, rank.py clean under the edit gate; blocks CLI moved to blocks_cli.py to break the check<->blocks cycle.",
+      "issued_at": "2026-10-05T16:29:32Z",
+      "minted_during": "interrupt",
+      "caused_by": "inbox/archive/2026-10-05-github-host-fleet-wide-rank.md",
+      "last_worked": "2026-10-05T16:49:49Z",
+      "ticks_blocked": 0,
+      "completed": "20261005T164949Z"
+    },
+    {
+      "symbol": "W203",
+      "title": "nemik typing: src/nemik/adapter.py (1 findings)",
+      "status": "done",
+      "enables": [
+        "W206",
+        "W207",
+        "W213",
+        "W210",
+        "W209",
+        "W214",
+        "W212",
+        "W208",
+        "W211"
+      ],
+      "touches": [
+        "typing",
+        "mypy"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-05: ledger row gone",
+      "issued_at": "2026-10-05T16:39:44Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-10-05T16:41:50Z",
+      "ticks_blocked": 0,
+      "completed": "20261005T164150Z",
+      "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
+      "vector_source": "agent"
+    },
+    {
+      "symbol": "W204",
+      "title": "nemik typing: src/nemik/alarm.py (1 findings)",
+      "status": "done",
+      "enables": [
+        "W213",
+        "W214",
+        "W212"
+      ],
+      "touches": [
+        "typing",
+        "mypy"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-05: ledger row gone",
+      "issued_at": "2026-10-05T16:39:44Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-10-05T16:42:17Z",
+      "ticks_blocked": 0,
+      "completed": "20261005T164217Z",
+      "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
+      "vector_source": "agent"
+    },
+    {
+      "symbol": "W205",
+      "title": "nemik typing: src/nemik/manifest.py (1 findings)",
+      "status": "done",
+      "enables": [
+        "W214"
+      ],
+      "touches": [
+        "typing",
+        "mypy"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-05: ledger row gone",
+      "issued_at": "2026-10-05T16:39:44Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-10-05T16:41:50Z",
+      "ticks_blocked": 0,
+      "completed": "20261005T164150Z",
+      "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
+      "vector_source": "agent"
+    },
+    {
+      "symbol": "W206",
+      "title": "nemik typing: src/nemik/blocks.py (20 findings)",
+      "status": "done",
+      "enables": [
+        "W213",
+        "W210",
+        "W209",
+        "W214",
+        "W212",
+        "W211"
+      ],
+      "touches": [
+        "typing",
+        "mypy"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-05: ledger row gone",
+      "issued_at": "2026-10-05T16:39:44Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-10-05T16:47:03Z",
+      "ticks_blocked": 0,
+      "completed": "20261005T164703Z",
+      "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
+      "vector_source": "agent"
+    },
+    {
+      "symbol": "W207",
+      "title": "nemik typing: src/nemik/check.py (2 findings)",
+      "status": "done",
+      "enables": [
+        "W213",
+        "W210",
+        "W209",
+        "W214",
+        "W212",
+        "W211"
+      ],
+      "touches": [
+        "typing",
+        "mypy"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-05: ledger row gone",
+      "issued_at": "2026-10-05T16:39:44Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-10-05T16:47:03Z",
+      "ticks_blocked": 0,
+      "completed": "20261005T164703Z",
+      "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
+      "vector_source": "agent"
+    },
+    {
+      "symbol": "W208",
+      "title": "nemik typing: src/nemik/withheld.py (3 findings)",
+      "status": "ready",
+      "enables": [
+        "W214"
+      ],
+      "touches": [
+        "typing",
+        "mypy"
+      ],
+      "blocked_on": [],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Whole-file Write clearing 3 finding(s) so the edit gate stops refusing it, then lower the ledger row",
+      "evidence": "",
+      "issued_at": "2026-10-05T16:39:44Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-10-05T16:49:44Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
+      "vector_source": "agent"
+    },
+    {
+      "symbol": "W209",
+      "title": "nemik typing: src/nemik/rank.py (23 findings)",
+      "status": "done",
+      "enables": [
+        "W214"
+      ],
+      "touches": [
+        "typing",
+        "mypy"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-05: ledger row gone",
+      "issued_at": "2026-10-05T16:39:45Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-10-05T16:49:44Z",
+      "ticks_blocked": 0,
+      "completed": "20261005T164944Z",
+      "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
+      "vector_source": "agent"
+    },
+    {
+      "symbol": "W210",
+      "title": "nemik typing: src/nemik/overlaps.py (2 findings)",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "typing",
+        "mypy"
+      ],
+      "blocked_on": [],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Whole-file Write clearing 2 finding(s) so the edit gate stops refusing it, then lower the ledger row",
+      "evidence": "",
+      "issued_at": "2026-10-05T16:39:45Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-10-05T16:49:44Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
+      "vector_source": "agent"
+    },
+    {
+      "symbol": "W211",
+      "title": "nemik typing: src/nemik/witnesses.py (2 findings)",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "typing",
+        "mypy"
+      ],
+      "blocked_on": [],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Whole-file Write clearing 2 finding(s) so the edit gate stops refusing it, then lower the ledger row",
+      "evidence": "",
+      "issued_at": "2026-10-05T16:39:45Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-10-05T16:49:44Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
+      "vector_source": "agent"
+    },
+    {
+      "symbol": "W212",
+      "title": "nemik typing: src/nemik/wake.py (5 findings)",
+      "status": "working",
+      "enables": [
+        "W213",
+        "W214"
+      ],
+      "touches": [
+        "typing",
+        "mypy"
+      ],
+      "blocked_on": [],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Whole-file Write clearing 5 finding(s) so the edit gate stops refusing it, then lower the ledger row",
+      "evidence": "",
+      "issued_at": "2026-10-05T16:39:45Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-10-05T16:50:15Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
+      "vector_source": "agent"
+    },
+    {
+      "symbol": "W213",
+      "title": "nemik typing: src/nemik/metrics.py (3 findings)",
+      "status": "blocked",
+      "enables": [],
+      "touches": [
+        "typing",
+        "mypy"
+      ],
+      "blocked_on": [
+        "W212"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Waits on 1 debt file(s): clean those first",
+      "evidence": "",
+      "issued_at": "2026-10-05T16:39:45Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-10-05T16:49:44Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
+      "vector_source": "agent"
+    },
+    {
+      "symbol": "W214",
+      "title": "nemik typing: src/nemik/serve.py (22 findings)",
+      "status": "blocked",
+      "enables": [],
+      "touches": [
+        "typing",
+        "mypy"
+      ],
+      "blocked_on": [
+        "W212",
+        "W208"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Waits on 2 debt file(s): clean those first",
+      "evidence": "",
+      "issued_at": "2026-10-05T16:39:45Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-10-05T16:49:44Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
+      "vector_source": "agent"
     }
   ],
   "residue": [

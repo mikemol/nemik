@@ -331,3 +331,16 @@
 2026-10-05T14:25:17Z  tick  W195  advanced  sweep  "calendar-write ask from life: rights read live (Mol Family Calendar is read-only to the account, 11 of 14 calendars writable), opt-in schema, event feed, helper write mode with three guards, nemik-calendar-write; W200 asks the operator where to write; also repaired the venv (stray uv editable install) and brought calendars and vtodo to the new edit-gate bar"  evidence=src/nemik/calwrite.py,tools/akonadi-tasks/main.cpp,tests/test_calwrite.py
 2026-10-05T14:36:03Z  tick  W201 minted    -         "Keep the mirror in step: a unit that runs nemik-calendar-write --apply every few minutes (a waypoint that changes or closes must update or delete its event); ask luthen, as for the Tasks unit W234"  evidence=life-c5
 2026-10-05T14:36:29Z  interrupt  W200  advanced  unblock  "operator moved the target to Mol Household Calendar and opted in themselves; read the calendar back: 3 nemik-owned events exist with Google ids, plan is idempotent; W201 asks luthen for the periodic unit"  evidence=calendar export read back (deleted)
+2026-10-05T16:29:32Z  interrupt W202 minted    -         "nemik-rank fleet mode: rank every workstream's ready items in one run (no repo argument), with a cross-repo-comparable order"  evidence=github:W2
+2026-10-05T16:39:44Z  tick  W203 minted    -         "nemik typing: src/nemik/adapter.py (1 findings)"
+2026-10-05T16:39:44Z  tick  W204 minted    -         "nemik typing: src/nemik/alarm.py (2 findings)"
+2026-10-05T16:39:44Z  tick  W205 minted    -         "nemik typing: src/nemik/manifest.py (1 findings)"
+2026-10-05T16:39:44Z  tick  W206 minted    -         "nemik typing: src/nemik/blocks.py (20 findings)"
+2026-10-05T16:39:44Z  tick  W207 minted    -         "nemik typing: src/nemik/check.py (2 findings)"
+2026-10-05T16:39:44Z  tick  W208 minted    -         "nemik typing: src/nemik/withheld.py (3 findings)"
+2026-10-05T16:39:45Z  tick  W209 minted    -         "nemik typing: src/nemik/rank.py (23 findings)"
+2026-10-05T16:39:45Z  tick  W210 minted    -         "nemik typing: src/nemik/overlaps.py (2 findings)"
+2026-10-05T16:39:45Z  tick  W211 minted    -         "nemik typing: src/nemik/witnesses.py (2 findings)"
+2026-10-05T16:39:45Z  tick  W212 minted    -         "nemik typing: src/nemik/wake.py (5 findings)"
+2026-10-05T16:39:45Z  tick  W213 minted    -         "nemik typing: src/nemik/metrics.py (3 findings)"
+2026-10-05T16:39:45Z  tick  W214 minted    -         "nemik typing: src/nemik/serve.py (23 findings)"
