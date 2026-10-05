@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 225,
+  "counter": 226,
   "waypoints": [
     {
       "symbol": "W1",
@@ -4309,12 +4309,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-10-05: 2026-10-05 operator: nemik does not yet know about nested workstreams. Probes: nemik-rank . --root ~/github prints nothing; nemik-rank github only resolves with --root /home/mikemol (a workaround that makes ~mikemol the fleet). Open design points: how a parent's queue relates to its children's (aggregate, or separate), whether the citation prefix nests (github/repo:W<n> vs repo:W<n>), and what --all and nemik-inbound do with a parent.",
+      "next_bounded_step": "Rebuild the venv so the installed CLIs and the web view see it (nemik:W226), then deploy through luthen's nemik image. After that, decide whether a repo containing repos (not just the root) needs the same rule, and whether a parent's weights should aggregate its children's",
+      "evidence": "2026-10-05: 2026-10-05 operator: nemik does not yet know about nested workstreams. Probes: nemik-rank . --root ~/github prints nothing; nemik-rank github only resolves with --root /home/mikemol (a workaround that makes ~mikemol the fleet). Open design points: how a parent's queue relates to its children's (aggregate, or separate), whether the citation prefix nests (github/repo:W<n> vs repo:W<n>), and what --all and nemik-inbound do with a parent. | 2026-10-05: 2026-10-05 4c7ab22: workstream_files includes <root>/.claude/<name> as the workstream named by the root directory, beside its children (a same-named child wins); the old --root-at-one-repo fallback is the same rule. tests/test_nested.py (4). Verified with PYTHONPATH=src: nemik-rank github ranks the host queue (W1 W2 W10 W11) and nemik-check lists github with only the standing warnings. NOT live yet: the installed .venv copy and the cluster image predate it.",
       "issued_at": "2026-10-05T22:32:01Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-05T22:33:27Z",
+      "last_worked": "2026-10-05T23:41:09Z",
       "ticks_blocked": 0
     },
     {
@@ -4334,6 +4334,31 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-05T22:39:47Z",
+      "ticks_blocked": 0,
+      "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
+      "vector_source": "agent"
+    },
+    {
+      "symbol": "W226",
+      "title": "Rebuild nemik's own venv (./setup.sh) so nemik-rank, nemik-check and nemik-serve resolve the root workstream (github:W<n>), then hand luthen the new build for the cluster image",
+      "status": "ready",
+      "enables": [
+        "W224"
+      ],
+      "touches": [
+        "nemik",
+        "venv",
+        "setup",
+        "deploy"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Run ./setup.sh (bazel build //:.venv) in nemik, confirm nemik-rank github prints the host queue with no PYTHONPATH, run the test suite from the built venv, then letter luthen-observability with the build for the cluster image",
+      "evidence": "",
+      "issued_at": "2026-10-05T23:41:09Z",
+      "minted_during": "interrupt",
+      "caused_by": "W224",
+      "last_worked": "2026-10-05T23:41:14Z",
       "ticks_blocked": 0,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
