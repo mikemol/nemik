@@ -344,3 +344,14 @@
 2026-10-05T16:39:45Z  tick  W212 minted    -         "nemik typing: src/nemik/wake.py (5 findings)"
 2026-10-05T16:39:45Z  tick  W213 minted    -         "nemik typing: src/nemik/metrics.py (3 findings)"
 2026-10-05T16:39:45Z  tick  W214 minted    -         "nemik typing: src/nemik/serve.py (23 findings)"
+2026-10-05T18:20:43Z  tick  W215 minted    -         "nemik typing: src/nemik/adoption.py (27 findings)"
+2026-10-05T18:20:43Z  tick  W216 minted    -         "nemik typing: src/nemik/score.py (43 findings)"
+2026-10-05T18:20:43Z  tick  W217 minted    -         "nemik typing: src/nemik/__init__.py (1 findings)"
+2026-10-05T18:20:44Z  tick  W218 minted    -         "nemik typing: src/nemik/blocks_cli.py (33 findings)"
+2026-10-05T18:20:44Z  tick  W219 minted    -         "nemik typing: src/nemik/floorasks.py (17 findings)"
+2026-10-05T18:20:44Z  tick  W220 minted    -         "nemik typing: src/nemik/vtodo.py (79 findings)"
+2026-10-05T18:20:44Z  tick  W221 minted    -         "nemik typing: src/nemik/calendars.py (133 findings)"
+2026-10-05T18:20:44Z  tick  W222 minted    -         "nemik typing: src/nemik/calwrite.py (10 findings)"
+2026-10-05T18:20:44Z  tick  W223 minted    -         "nemik typing: src/nemik/tools.py (28 findings)"
+2026-10-05T22:32:01Z  interrupt W224 minted    -         "Let a fleet root's own queue be a workstream: nemik-rank/check/inbound for the host session (~/github/.claude/paths-forward.json) see the host beside the repos, with cross-repo weights, without --root pointing at the parent"  evidence=github:W12
+2026-10-05T22:39:47Z  interrupt W225 minted    -         "U: update the nemik skill for nemik-rank --all"  evidence=operator

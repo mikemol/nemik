@@ -155,8 +155,7 @@ def queue_graph(
         for ex in model.strlist(w, "exdates"):
             g.add((node, NEMIK.exdate, Literal(ex)))
         # mtools:W310: completed occurrences, {RECURRENCE-ID: COMPLETED}; the ids are what skip.
-        occ = w.get("occurrences")
-        for rid in sorted(occ) if isinstance(occ, dict) else ():
+        for rid in sorted(model.strmap(w, "occurrences")):
             g.add((node, NEMIK.occurrenceDone, Literal(rid)))
         # mtools:W279: VALARM triggers, verbatim; nemik.alarm resolves them, nemik-wake fires them.
         for trig in model.strlist(w, "alarms"):

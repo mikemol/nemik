@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 import sys
 from importlib.metadata import PackageNotFoundError, distribution
+from typing import cast
 
 
 def editable_install() -> bool:
@@ -20,9 +21,19 @@ def editable_install() -> bool:
         return False
     if not text:
         return False
-    return bool(json.loads(text).get("dir_info", {}).get("editable"))
+    # PEP 610: a JSON object whose `dir_info` object carries the `editable` flag; anything else is
+    # not an editable install, and each step is narrowed from what the next one reads.
+    loaded = cast("object", json.loads(text))
+    if not isinstance(loaded, dict):
+        return False
+    info = cast("dict[str, object]", loaded).get("dir_info")
+    if not isinstance(info, dict):
+        return False
+    return bool(cast("dict[str, object]", info).get("editable"))
 
 
 if editable_install():
-    print("nemik: WARNING running from an editable install; use the built venv: ./setup.sh (bazel build //:.venv)",
-          file=sys.stderr)
+    print(
+        "nemik: WARNING running from an editable install; use the built venv: ./setup.sh (bazel build //:.venv)",
+        file=sys.stderr,
+    )
