@@ -17,7 +17,9 @@
 #include <Akonadi/CollectionFetchJob>
 #include <Akonadi/Item>
 #include <Akonadi/ItemCreateJob>
+#include <Akonadi/ItemDeleteJob>
 #include <Akonadi/ItemFetchJob>
+#include <KCalendarCore/Alarm>
 #include <Akonadi/ItemFetchScope>
 #include <Akonadi/ItemModifyJob>
 #include <KCalendarCore/ICalFormat>
@@ -113,6 +115,137 @@ int main(int argc, char **argv) {
         if (!f.commit()) { out(QStringLiteral("ERROR: cannot write ") + outPath); return 2; }
         out(QStringLiteral("EXPORTED %1 incidences from %2").arg(n).arg(cals.first().displayName()));
         return 0;
+    }
+
+    // nemik:W195 (life's write ask): --rights [NAME] prints what the account lets nemik do to each
+    // event calendar, from Akonadi's collection rights (they mirror Google's access role: owner and
+    // writer may create/change/delete, reader may not). Read-only; metadata only, no event text.
+    const int ri = args.indexOf(QStringLiteral("--rights"));
+    if (ri > 0) {
+        const QString only = ri + 1 < args.size() && !args.at(ri + 1).startsWith(QStringLiteral("--")) ? args.at(ri + 1) : QString();
+        static const QString kEventMime2 = QStringLiteral("application/x-vnd.akonadi.calendar.event");
+        auto *rcj = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(), Akonadi::CollectionFetchJob::Recursive);
+        if (!rcj->exec()) { out(QStringLiteral("ERROR: collections: ") + rcj->errorString()); return 2; }
+        int n = 0;
+        for (const Akonadi::Collection &c : rcj->collections()) {
+            if (c.resource() != kResource || !c.contentMimeTypes().contains(kEventMime2)) continue;
+            if (!only.isEmpty() && c.displayName() != only && c.name() != only) continue;
+            const auto r = c.rights();
+            auto yn = [&](Akonadi::Collection::Right f) { return r.testFlag(f) ? 'Y' : 'N'; };
+            out(QStringLiteral("RIGHTS %1: create=%2 change=%3 delete=%4").arg(c.displayName())
+                    .arg(QLatin1Char(yn(Akonadi::Collection::CanCreateItem)))
+                    .arg(QLatin1Char(yn(Akonadi::Collection::CanChangeItem)))
+                    .arg(QLatin1Char(yn(Akonadi::Collection::CanDeleteItem))));
+            ++n;
+        }
+        if (n == 0) { out(QStringLiteral("ERROR: no event calendar matches")); return 2; }
+        return 0;
+    }
+
+    // nemik:W198 (life's write ask): --write-calendar NAME [--apply] writes the VEVENTs on stdin
+    // (nemik.calwrite's feed) INTO one event calendar. Three guards, in this order, each before any
+    // write: (1) the account must hold create+change+delete on that calendar (Akonadi's collection
+    // rights, which mirror Google's access role), else REFUSED and exit 2; (2) every event in the
+    // feed must carry a nemik: UID, else REFUSED; (3) only events whose UID starts nemik: are ever
+    // created, changed or deleted, so the operator's own events are untouched. Without --apply it
+    // only PLANS. Output names refs and times, never titles.
+    const int wi = args.indexOf(QStringLiteral("--write-calendar"));
+    if (wi > 0) {
+        const QString calName = wi + 1 < args.size() ? args.at(wi + 1) : QString();
+        static const QString kEventMime3 = QStringLiteral("application/x-vnd.akonadi.calendar.event");
+        static const QString kOwned = QStringLiteral("nemik:");
+        auto *wcj = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(), Akonadi::CollectionFetchJob::Recursive);
+        if (!wcj->exec()) { out(QStringLiteral("ERROR: collections: ") + wcj->errorString()); return 2; }
+        QList<Akonadi::Collection> targets;
+        for (const Akonadi::Collection &c : wcj->collections())
+            if (c.resource() == kResource && c.contentMimeTypes().contains(kEventMime3)
+                && (c.displayName() == calName || c.name() == calName))
+                targets << c;
+        if (targets.size() != 1) {
+            out(QStringLiteral("ERROR: %1 calendars named %2").arg(targets.size()).arg(calName));
+            return 2;
+        }
+        const Akonadi::Collection target = targets.first();
+        const auto rights = target.rights();
+        if (!rights.testFlag(Akonadi::Collection::CanCreateItem) || !rights.testFlag(Akonadi::Collection::CanChangeItem)
+            || !rights.testFlag(Akonadi::Collection::CanDeleteItem)) {
+            out(QStringLiteral("REFUSED %1: this account has no write rights here (see --rights); nothing was written").arg(target.displayName()));
+            return 2;
+        }
+        QTextStream wstdin(stdin);
+        auto wfeed = KCalendarCore::MemoryCalendar::Ptr(new KCalendarCore::MemoryCalendar(QTimeZone::utc()));
+        if (!fmt.fromString(wfeed, wstdin.readAll())) { out(QStringLiteral("ERROR: stdin is not iCalendar")); return 2; }
+        auto eventRef = [&](const KCalendarCore::Incidence::Ptr &e) -> QString {
+            if (e->uid().startsWith(kOwned)) return e->uid().mid(kOwned.size());
+            for (const QString &line : e->description().split(QLatin1Char('\n')))
+                if (line.startsWith(kRefTag)) return line.mid(kRefTag.size()).trimmed();
+            return {};
+        };
+        QHash<QString, KCalendarCore::Event::Ptr> want;
+        for (const KCalendarCore::Event::Ptr &e : wfeed->rawEvents()) {
+            if (!e->uid().startsWith(kOwned)) {
+                out(QStringLiteral("REFUSED: a feed event lacks a nemik: UID; nemik writes only its own events"));
+                return 2;
+            }
+            want.insert(e->uid().mid(kOwned.size()), e);
+        }
+        auto *wij = new Akonadi::ItemFetchJob(target);
+        wij->fetchScope().fetchFullPayload();
+        if (!wij->exec()) { out(QStringLiteral("ERROR: items: ") + wij->errorString()); return 2; }
+        QHash<QString, Akonadi::Item> have;  // nemik-owned events only
+        for (const Akonadi::Item &it : wij->items()) {
+            if (!it.hasPayload<KCalendarCore::Incidence::Ptr>()) continue;
+            const auto inc = it.payload<KCalendarCore::Incidence::Ptr>();
+            const QString r = eventRef(inc);
+            if (!r.isEmpty() && (inc->uid().startsWith(kOwned) || inc->description().contains(kRefTag))) have.insert(r, it);
+        }
+        auto same = [](const KCalendarCore::Event::Ptr &a, const KCalendarCore::Event::Ptr &b) {
+            if (a->summary() != b->summary() || a->description() != b->description() || a->allDay() != b->allDay()
+                || a->dtStart() != b->dtStart() || a->dtEnd() != b->dtEnd() || !(*a->recurrence() == *b->recurrence())
+                || a->alarms().size() != b->alarms().size())
+                return false;
+            for (int i = 0; i < a->alarms().size(); ++i)
+                if (a->alarms().at(i)->startOffset() != b->alarms().at(i)->startOffset()
+                    || a->alarms().at(i)->endOffset() != b->alarms().at(i)->endOffset())
+                    return false;
+            return true;
+        };
+        int wfailed = 0;
+        auto wrun = [&](KJob *job, const QString &what) {
+            if (!apply) { delete job; return; }
+            if (!job->exec()) { ++wfailed; out(QStringLiteral("FAILED ") + what + QStringLiteral(": ") + job->errorString()); }
+        };
+        QStringList refs = want.keys();
+        refs.sort();
+        for (const QString &r : refs) {
+            const KCalendarCore::Event::Ptr ev = want.value(r);
+            const QString when = ev->dtStart().toString(Qt::ISODate);
+            if (!have.contains(r)) {
+                Akonadi::Item item(kEventMime3);
+                item.setPayload<KCalendarCore::Incidence::Ptr>(ev);
+                out(QStringLiteral("CREATE ") + r + QStringLiteral("  ") + when);
+                wrun(new Akonadi::ItemCreateJob(item, target), r);
+                continue;
+            }
+            Akonadi::Item item = have.value(r);
+            const auto cur = item.payload<KCalendarCore::Incidence::Ptr>().dynamicCast<KCalendarCore::Event>();
+            if (cur && same(cur, ev)) continue;
+            // Keep the item's own identity (its UID as Google holds it) and replace the content.
+            KCalendarCore::Event::Ptr next(ev->clone());
+            if (cur) next->setUid(cur->uid());
+            item.setPayload<KCalendarCore::Incidence::Ptr>(next);
+            out(QStringLiteral("UPDATE ") + r + QStringLiteral("  ") + when);
+            wrun(new Akonadi::ItemModifyJob(item), r);
+        }
+        QStringList stale = have.keys();
+        stale.sort();
+        for (const QString &r : stale) {  // a waypoint that is no longer open or dated
+            if (want.contains(r)) continue;
+            out(QStringLiteral("DELETE ") + r);
+            wrun(new Akonadi::ItemDeleteJob(have.value(r)), r);
+        }
+        out(apply ? QStringLiteral("APPLIED (%1 failed)").arg(wfailed) : QStringLiteral("PLAN ONLY: rerun with --apply to write"));
+        return wfailed ? 1 : 0;
     }
 
     // The feed: every VTODO nemik-ics wrote, keyed by ref; the description gains the ref tag.

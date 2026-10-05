@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 194,
+  "counter": 200,
   "waypoints": [
     {
       "symbol": "W1",
@@ -798,9 +798,10 @@
       ],
       "touches": [],
       "blocked_on": [
-        "gabion",
-        "sre-troubleshooting",
-        "amr-skills:W76"
+        "gabion:W11",
+        "gabion:W14",
+        "amr-skills:W76",
+        "sre-troubleshooting"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "Each tick: nemik-wake --json; on a wake event for one of the three, message it citing its <repo>:W<n>",
@@ -808,8 +809,8 @@
       "issued_at": "2026-09-27T15:13:28Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-09-28T17:45:36Z",
-      "ticks_blocked": 80,
+      "last_worked": "2026-10-05T01:30:03Z",
+      "ticks_blocked": 0,
       "weight": 1
     },
     {
@@ -3635,6 +3636,110 @@
       "last_worked": "2026-10-04T20:14:30Z",
       "ticks_blocked": 0,
       "completed": "20261004T201430Z"
+    },
+    {
+      "symbol": "W195",
+      "title": "Calendar write access (life's ask): read what the account allows per calendar (helper --rights), answer life's authorization question from the reading",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-05: 2026-10-05: helper --rights [NAME] (read-only, collection rights from Akonadi, which mirror Google's access role; metadata only) read live over the 14 event calendars of the operator's account: 11 grant create/change/delete (VI, Work hours, Call log, Bills, Call log 2, Maintenance, Premiers, Family, Events, the primary, Mol Household Calendar), 3 grant none (Holidays in United States, Mol Family Calendar, Chores). So the Google authorization is NOT read-only (the Tasks writes already proved it); the TARGET calendar life named, Mol Family Calendar, gives this account no write rights (create=N change=N delete=N), a calendar-level sharing permission, not nemik's or the resource's scope. Chores is the same (read-only to this account). life's premise 'the resource is authorized read-only' is wrong; the real blocker is the target calendar's ACL.",
+      "issued_at": "2026-10-05T14:11:04Z",
+      "minted_during": "tick",
+      "caused_by": "life-82",
+      "last_worked": "2026-10-05T14:11:19Z",
+      "ticks_blocked": 0,
+      "completed": "20261005T141119Z"
+    },
+    {
+      "symbol": "W196",
+      "title": "calendars.toml opt-in for writing: per-calendar write = true plus mirror = [repos], read-only by default, bad combinations refused",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-05: 2026-10-05: calendars.Calendar gains write (bool) and mirror (repos). calendars.toml entries are a plain name string (unchanged, read-only) or a table with name, include, write and mirror. write = true needs mirror = [repos], and mirror needs write = true: a half-configured entry is refused, not guessed. A non-bool write is a TypeError, and an unknown key (a typo like mirrors) still fails. nemik-days skips UIDs starting nemik: (its own mirrored events) so nothing lists twice. Tests: test_calendars (opt-in twice, own-event skip). Gate note: the mtools edit hooks (ruff check, ruff format and mypy on the whole post-edit file) are now live. calendars.py, vtodo.py and two test files were brought to that bar, src/nemik/py.typed was added, and pyproject got a [tool.mypy] mypy_path = tests (where the sibling test helper lives).",
+      "issued_at": "2026-10-05T14:11:05Z",
+      "minted_during": "tick",
+      "caused_by": "life-82",
+      "last_worked": "2026-10-05T14:25:00Z",
+      "ticks_blocked": 0,
+      "completed": "20261005T142500Z"
+    },
+    {
+      "symbol": "W197",
+      "title": "Event feed: open dated waypoints (dtstart/due, alarms, rrule) of mirrored repos as VEVENTs with a stable UID nemik:<repo>:W<n>",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-05: 2026-10-05: nemik.calwrite.events/feed: one VEVENT per OPEN waypoint with dtstart or due in the mirrored repos; UID nemik:<repo>:W<n> (stable: a republish updates), DESCRIPTION nemik-ref, VALARMs as stored (RELATED=END gets a DTEND to count from), RRULE plus EXDATE (an occurrence marked done becomes an EXDATE), all-day due inclusive (DTEND the next day), mixed kinds/zones get no end rather than a wrong one, done/dropped/undated/other-repo absent, DTSTAMP fixed so the feed depends only on the queues, CRLF and folded at 75 octets. tests/test_calwrite.py (13).",
+      "issued_at": "2026-10-05T14:11:05Z",
+      "minted_during": "tick",
+      "caused_by": "life-82",
+      "last_worked": "2026-10-05T14:24:51Z",
+      "ticks_blocked": 0,
+      "completed": "20261005T142451Z"
+    },
+    {
+      "symbol": "W198",
+      "title": "Akonadi helper --write-calendar NAME: upsert nemik-owned events by UID, delete nemik-owned events no longer fed, plan unless --apply, refuse without create/change/delete rights",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-05: 2026-10-05: helper --write-calendar NAME [--apply] with three guards in order, each before any write: (1) the account must hold create+change+delete on the calendar (Akonadi collection rights), else REFUSED exit 2; (2) every feed event must carry a nemik: UID, else REFUSED; (3) only nemik-owned events are ever created, changed or deleted (the operator's own events are untouched); plan unless --apply; output names refs and times, never titles; update keeps the item's own UID. READ BACK live (no write possible in any of them): the real Mol Family Calendar with --apply -> REFUSED, exit 2, nothing written; a feed with a non-nemik UID aimed at Events -> REFUSED; a proper nemik event aimed at Events -> CREATE ... PLAN ONLY. NOT yet exercised live: the create/modify/delete jobs themselves (an apply writes to the operator's real Google calendar; held for the operator's say-so, W200).",
+      "issued_at": "2026-10-05T14:11:06Z",
+      "minted_during": "tick",
+      "caused_by": "life-82",
+      "last_worked": "2026-10-05T14:24:52Z",
+      "ticks_blocked": 0,
+      "completed": "20261005T142452Z"
+    },
+    {
+      "symbol": "W199",
+      "title": "nemik-calendar-write [--apply]: calendars.toml + queues -> feed -> helper, one command; plan by default",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-05: 2026-10-05: nemik-calendar-write [--apply] (console script, calwrite.main): for each calendar with write=true, builds the mirror repos' feed from the queues and runs the helper; plans unless --apply; exit 0 ok / 1 some writes failed / 2 refused or helper missing; no opted-in calendar -> says so, exit 0. test_calendar_write: nothing written unless opted in, plan vs apply argv, a helper refusal is the exit code. test_calendar_boundary now also guards nemik.calwrite as host-only. SKILL.md row. READ BACK live, plan only: against Mol Family Calendar -> '3 dated waypoints of life' then REFUSED (no write rights), exit 2; against Events (writable) -> CREATE for the 3 dated life waypoints (W26, W30, W9), no deletes, PLAN ONLY.",
+      "issued_at": "2026-10-05T14:11:06Z",
+      "minted_during": "tick",
+      "caused_by": "life-82",
+      "last_worked": "2026-10-05T14:24:52Z",
+      "ticks_blocked": 0,
+      "completed": "20261005T142452Z"
+    },
+    {
+      "symbol": "W200",
+      "title": "Operator decision: which calendar the dated waypoints are written to (Mol Family Calendar grants the account no write rights), and enabling the mirror for life",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "operator: decide where the dated life waypoints are written. Mol Family Calendar gives your account NO write rights (read-only to you), so either (a) its owner grants your Google account 'Make changes to events' on it (a sharing change in Google Calendar, yours or your spouse's, not nemik's), or (b) pick a calendar you can write that your spouse also sees (writable to you: Family, Mol Household Calendar, Events, Maintenance, Bills). Then say whether to enable the mirror for life: nothing is written until you set write = true and mirror = [\"life\"] on that calendar in ~/.config/nemik/calendars.toml yourself"
+      ],
+      "blocked_kind": "human",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-05T14:11:07Z",
+      "minted_during": "tick",
+      "caused_by": "life-82",
+      "last_worked": "2026-10-05T14:11:25Z",
+      "ticks_blocked": 0,
+      "completed": null
     }
   ],
   "residue": [

@@ -13,7 +13,8 @@ import nemik
 
 SRC = Path(nemik.__file__).parent
 SERVED = ["serve", "metrics", "check", "manifest", "withheld", "tools", "export"]
-HOST_ONLY = {"nemik.calendars"}
+# calwrite carries waypoint titles (W197), calendars carries event text (W157).
+HOST_ONLY = {"nemik.calendars", "nemik.calwrite"}
 
 
 def _imports(mod: str) -> set[str]:
@@ -22,7 +23,11 @@ def _imports(mod: str) -> set[str]:
         return set()
     out = set()
     for node in ast.walk(ast.parse(path.read_text())):
-        if isinstance(node, ast.ImportFrom) and node.module and node.module.startswith("nemik"):
+        if (
+            isinstance(node, ast.ImportFrom)
+            and node.module
+            and node.module.startswith("nemik")
+        ):
             out.add(node.module)
         elif isinstance(node, ast.Import):
             out |= {a.name for a in node.names if a.name.startswith("nemik")}
@@ -48,9 +53,25 @@ def test_a_cal_blocker_serves_no_event(tmp_path) -> None:
 
     repo = tmp_path / "life" / ".claude"
     repo.mkdir(parents=True)
-    (repo / "paths-forward.json").write_text(json.dumps({"version": 1, "project_root": str(tmp_path / "life"),
-        "counter": 1, "residue": [], "waypoints": [{"symbol": "W1", "title": "after the appointment",
-        "status": "blocked", "blocked_on": ["cal:home/a@t"], "blocked_kind": "agent"}]}))
+    (repo / "paths-forward.json").write_text(
+        json.dumps(
+            {
+                "version": 1,
+                "project_root": str(tmp_path / "life"),
+                "counter": 1,
+                "residue": [],
+                "waypoints": [
+                    {
+                        "symbol": "W1",
+                        "title": "after the appointment",
+                        "status": "blocked",
+                        "blocked_on": ["cal:home/a@t"],
+                        "blocked_kind": "agent",
+                    }
+                ],
+            }
+        )
+    )
     m = Model(tmp_path)
     m.refresh()
     text = json.dumps(m.doc) + m.metrics().decode()

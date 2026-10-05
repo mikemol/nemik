@@ -3,14 +3,17 @@
 import stat
 from pathlib import Path
 
+import installed
 import pytest
 
-import installed
 from nemik.calendars import occurrences
 
-ICS = "\r\n".join(["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//t//EN",
-                   "BEGIN:VEVENT", "UID:a@t", "DTSTAMP:20261001T000000Z", "DTSTART:20261003T150000Z",
-                   "DTEND:20261003T160000Z", "SUMMARY:dentist", "END:VEVENT", "END:VCALENDAR", ""])
+ICS = (
+    "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//t//EN\r\n"
+    "BEGIN:VEVENT\r\nUID:a@t\r\nDTSTAMP:20261001T000000Z\r\n"
+    "DTSTART:20261003T150000Z\r\nDTEND:20261003T160000Z\r\n"
+    "SUMMARY:dentist\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n"
+)
 
 
 def _helper(tmp_path, fail=False, text: str = ICS) -> Path:
@@ -18,7 +21,9 @@ def _helper(tmp_path, fail=False, text: str = ICS) -> Path:
     src = tmp_path / "src.ics"
     src.write_text(text, newline="")
     h = tmp_path / "helper"
-    h.write_text(f"#!/bin/sh\n{'exit 2' if fail else ''}\ncp {src} \"$4\"\necho \"$4\" >> {tmp_path}/seen\n")
+    h.write_text(
+        f'#!/bin/sh\n{"exit 2" if fail else ""}\ncp {src} "$4"\necho "$4" >> {tmp_path}/seen\n'
+    )
     h.chmod(h.stat().st_mode | stat.S_IXUSR)
     return h
 
@@ -32,16 +37,30 @@ def ics(monkeypatch) -> str:
 
 
 def test_occurrences_are_read_and_the_export_is_deleted(tmp_path, ics) -> None:
-    got = occurrences({"home": "Personal"}, start="2026-10-01", helper=_helper(tmp_path), ics=ics)
-    assert [(r["label"], r["uid"], r["summary"]) for r in got] == [("home", "a@t", "dentist")]
+    got = occurrences(
+        {"home": "Personal"}, start="2026-10-01", helper=_helper(tmp_path), ics=ics
+    )
+    assert [(r["label"], r["uid"], r["summary"]) for r in got] == [
+        ("home", "a@t", "dentist")
+    ]
     exported = Path((tmp_path / "seen").read_text().strip())
-    assert not exported.exists() and not exported.parent.exists()  # no copy of the calendar is left
+    assert (
+        not exported.exists() and not exported.parent.exists()
+    )  # no copy of the calendar is left
 
 
-def test_a_failed_export_raises_rather_than_reading_as_a_free_day(tmp_path, ics) -> None:
+def test_a_failed_export_raises_rather_than_reading_as_a_free_day(
+    tmp_path, ics
+) -> None:
     import subprocess
+
     with pytest.raises(subprocess.CalledProcessError):
-        occurrences({"home": "Personal"}, start="2026-10-01", helper=_helper(tmp_path, fail=True), ics=ics)
+        occurrences(
+            {"home": "Personal"},
+            start="2026-10-01",
+            helper=_helper(tmp_path, fail=True),
+            ics=ics,
+        )
 
 
 def test_config_opts_calendars_in(tmp_path) -> None:
@@ -62,34 +81,52 @@ def test_events_become_nodes_and_cal_refs_wait_on_the_next_occurrence() -> None:
     from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri
     from nemik.calendars import event_graph
 
-    occs = [{"label": "home", "uid": "a@t", "start": "2026-10-03T15:00:00+00:00", "end": None, "all_day": False,
-             "summary": "dentist", "recurrence_id": "2026-10-03T15:00:00+00:00"},
-            {"label": "home", "uid": "a@t", "start": "2026-10-10T15:00:00+00:00", "end": None, "all_day": False,
-             "summary": "dentist", "recurrence_id": "2026-10-10T15:00:00+00:00"}]
+    occs = [
+        {
+            "label": "home",
+            "uid": "a@t",
+            "start": "2026-10-03T15:00:00+00:00",
+            "end": None,
+            "all_day": False,
+            "summary": "dentist",
+            "recurrence_id": "2026-10-03T15:00:00+00:00",
+        },
+        {
+            "label": "home",
+            "uid": "a@t",
+            "start": "2026-10-10T15:00:00+00:00",
+            "end": None,
+            "all_day": False,
+            "summary": "dentist",
+            "recurrence_id": "2026-10-10T15:00:00+00:00",
+        },
+    ]
     q = Graph()
     w = waypoint_uri("life", "W9")
     q.add((w, OSLC_CM.state, STATE["blocked"]))
     q.add((w, NEMIK.blockedOn, Literal("cal:home/a@t")))
     g = event_graph(occs, q)
     assert len(set(g.subjects(None, NEMIK.Event))) == 2
-    assert [str(t) for t in g.objects(w, NEMIK.waitsFor)] == ["urn:nemik:cal:home/a@t/2026-10-03T15:00:00+00:00"]
+    assert [str(t) for t in g.objects(w, NEMIK.waitsFor)] == [
+        "urn:nemik:cal:home/a@t/2026-10-03T15:00:00+00:00"
+    ]
 
 
-def test_operator_lists_the_next_days_with_waiters(tmp_path, ics, capsys, monkeypatch) -> None:
+def test_operator_lists_the_next_days_with_waiters(
+    tmp_path, ics, capsys, monkeypatch
+) -> None:
     """nemik:W160/W161: nemik-days N, from opted-in calendars only."""
-    import datetime
+    from datetime import date
 
     from rdflib import Graph, Literal
 
     from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri
     from nemik.calendars import days_main
 
-    class Today(datetime.date):
-        @classmethod
-        def today(cls):
-            return cls(2026, 10, 1)
-    monkeypatch.setattr(datetime, "date", Today)
-    monkeypatch.setenv("PATH", str(installed._bin()[0]) + ":" + __import__("os").environ["PATH"])
+    monkeypatch.setattr("nemik.calendars.today", lambda: date(2026, 10, 1))
+    monkeypatch.setenv(
+        "PATH", str(installed._bin()[0]) + ":" + __import__("os").environ["PATH"]
+    )
     g = Graph()
     w = waypoint_uri("life", "W9")
     g.add((w, OSLC_CM.state, STATE["blocked"]))
@@ -103,7 +140,9 @@ def test_operator_lists_the_next_days_with_waiters(tmp_path, ics, capsys, monkey
     assert "dentist" in out and "<- life:W9" in out
 
 
-def test_the_reader_is_found_in_nemiks_own_venv_not_on_path(tmp_path, monkeypatch) -> None:
+def test_the_reader_is_found_in_nemiks_own_venv_not_on_path(
+    tmp_path, monkeypatch
+) -> None:
     """life-82, 2026-10-02: .venv/bin/nemik-days run without the venv on PATH could not find
     mikemol-ics. The default is the venv's own copy; a missing reader is a stated refusal."""
     from nemik.calendars import _venv_ics
@@ -111,10 +150,17 @@ def test_the_reader_is_found_in_nemiks_own_venv_not_on_path(tmp_path, monkeypatc
     for k, v in installed._bin()[1].items():
         monkeypatch.setenv(k, v)
     monkeypatch.setenv("PATH", "/usr/bin:/bin")  # the venv is not on PATH
-    got = occurrences({"home": "Personal"}, start="2026-10-01", helper=_helper(tmp_path))
+    got = occurrences(
+        {"home": "Personal"}, start="2026-10-01", helper=_helper(tmp_path)
+    )
     assert [r["uid"] for r in got] == ["a@t"] and _venv_ics().endswith("/mikemol-ics")
     with pytest.raises(FileNotFoundError, match="calendar reader"):
-        occurrences({"home": "Personal"}, start="2026-10-01", helper=_helper(tmp_path), ics=str(tmp_path / "nope"))
+        occurrences(
+            {"home": "Personal"},
+            start="2026-10-01",
+            helper=_helper(tmp_path),
+            ics=str(tmp_path / "nope"),
+        )
 
 
 def test_a_refusing_helper_is_reported_not_a_traceback(tmp_path, ics, capsys) -> None:
@@ -122,21 +168,41 @@ def test_a_refusing_helper_is_reported_not_a_traceback(tmp_path, ics, capsys) ->
     from nemik.calendars import days_main
 
     h = tmp_path / "helper"
-    h.write_text("#!/bin/sh\necho 'ERROR: akonadi is not running on this session bus; refusing to start it from here'\nexit 2\n")
+    h.write_text(
+        "#!/bin/sh\necho 'ERROR: akonadi is not running on this session bus; refusing to start it from here'\nexit 2\n"
+    )
     h.chmod(0o755)
     cfg = tmp_path / "calendars.toml"
     cfg.write_text('[calendars]\nhome = "Personal"\n')
     with pytest.raises(SystemExit) as e:
-        days_main(["3", "--calendars", str(cfg), "--helper", str(h)], __import__("rdflib").Graph())
+        days_main(
+            ["3", "--calendars", str(cfg), "--helper", str(h)],
+            __import__("rdflib").Graph(),
+        )
     assert e.value.code == 2
     out = capsys.readouterr().out
     assert "refusing to start it" in out and "Traceback" not in out
 
 
-CHORES = "\r\n".join(["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//t//EN"] + [
-    line for i, summary in enumerate(["Trash: Mike", "Dishes: Pascal", "Supper: Pascal", "Lunch: Sam"])
-    for line in ("BEGIN:VEVENT", f"UID:c{i}@t", "DTSTAMP:20261001T000000Z", f"DTSTART:2026100{3 + i}T150000Z",
-                 f"DTEND:2026100{3 + i}T160000Z", f"SUMMARY:{summary}", "END:VEVENT")] + ["END:VCALENDAR", ""])
+CHORES = "\r\n".join(
+    ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//t//EN"]
+    + [
+        line
+        for i, summary in enumerate(
+            ["Trash: Mike", "Dishes: Pascal", "Supper: Pascal", "Lunch: Sam"]
+        )
+        for line in (
+            "BEGIN:VEVENT",
+            f"UID:c{i}@t",
+            "DTSTAMP:20261001T000000Z",
+            f"DTSTART:2026100{3 + i}T150000Z",
+            f"DTEND:2026100{3 + i}T160000Z",
+            f"SUMMARY:{summary}",
+            "END:VEVENT",
+        )
+    ]
+    + ["END:VCALENDAR", ""]
+)
 
 
 def test_calendar_entries_take_a_name_or_a_table_and_a_typo_fails(tmp_path) -> None:
@@ -145,51 +211,103 @@ def test_calendar_entries_take_a_name_or_a_table_and_a_typo_fails(tmp_path) -> N
     from nemik.calendars import Calendar, load_calendars, load_collections
 
     p = tmp_path / "calendars.toml"
-    p.write_text('[calendars]\nhome = "Personal"\nchores = { name = "Chores", include = ["Mike", "Supper: Pascal"] }\n')
-    assert load_calendars(p) == {"chores": Calendar("Chores", ("Mike", "Supper: Pascal")), "home": Calendar("Personal")}
+    p.write_text(
+        '[calendars]\nhome = "Personal"\nchores = { name = "Chores", include = ["Mike", "Supper: Pascal"] }\n'
+    )
+    assert load_calendars(p) == {
+        "chores": Calendar("Chores", ("Mike", "Supper: Pascal")),
+        "home": Calendar("Personal"),
+    }
     assert load_collections(p) == {"chores": "Chores", "home": "Personal"}
-    for bad in ('chores = { name = "Chores", includes = ["Mike"] }', 'chores = { name = "Chores", include = "Mike" }',
-                'chores = { name = "Chores", include = [""] }', 'chores = { include = ["Mike"] }'):
+    for bad in (
+        'chores = { name = "Chores", includes = ["Mike"] }',
+        'chores = { name = "Chores", include = "Mike" }',
+        'chores = { name = "Chores", include = [""] }',
+        'chores = { include = ["Mike"] }',
+    ):
         p.write_text(f"[calendars]\n{bad}\n")
         with pytest.raises(ValueError, match="bad entry"):
             load_calendars(p)
 
 
-def test_include_keeps_case_sensitive_substring_matches_and_counts_both_ways(tmp_path, ics) -> None:
+def test_include_keeps_case_sensitive_substring_matches_and_counts_both_ways(
+    tmp_path, ics
+) -> None:
     got_all: dict = {}
-    occurrences({"chores": "Chores"}, start="2026-10-01", helper=_helper(tmp_path, text=CHORES), ics=ics, stats=got_all)
+    occurrences(
+        {"chores": "Chores"},
+        start="2026-10-01",
+        helper=_helper(tmp_path, text=CHORES),
+        ics=ics,
+        stats=got_all,
+    )
     assert got_all == {"chores": (4, 4)}  # no include: everything
     stats: dict = {}
-    got = occurrences({"chores": "Chores"}, start="2026-10-01", helper=_helper(tmp_path, text=CHORES), ics=ics,
-                      includes={"chores": ("Mike", "Supper: Pascal")}, stats=stats)
-    assert [r["summary"] for r in got] == ["Trash: Mike", "Supper: Pascal"] and stats == {"chores": (2, 4)}
+    got = occurrences(
+        {"chores": "Chores"},
+        start="2026-10-01",
+        helper=_helper(tmp_path, text=CHORES),
+        ics=ics,
+        includes={"chores": ("Mike", "Supper: Pascal")},
+        stats=stats,
+    )
+    assert [r["summary"] for r in got] == [
+        "Trash: Mike",
+        "Supper: Pascal",
+    ] and stats == {"chores": (2, 4)}
     none: dict = {}
-    assert not occurrences({"chores": "Chores"}, start="2026-10-01", helper=_helper(tmp_path, text=CHORES), ics=ics,
-                           includes={"chores": ("mike",)}, stats=none)  # case-sensitive: "mike" is not "Mike"
+    assert not occurrences(
+        {"chores": "Chores"},
+        start="2026-10-01",
+        helper=_helper(tmp_path, text=CHORES),
+        ics=ics,
+        includes={"chores": ("mike",)},
+        stats=none,
+    )  # case-sensitive: "mike" is not "Mike"
     assert none == {"chores": (0, 4)}
 
 
-def test_a_filter_that_matches_nothing_is_reported_not_read_as_a_free_day(tmp_path, ics, capsys, monkeypatch) -> None:
-    import datetime
+def test_a_filter_that_matches_nothing_is_reported_not_read_as_a_free_day(
+    tmp_path, ics, capsys, monkeypatch
+) -> None:
+    from datetime import date
 
     from nemik.calendars import days_main
 
-    class Today(datetime.date):  # the window starts today: pin it so the fixture dates stay inside it
-        @classmethod
-        def today(cls):
-            return cls(2026, 10, 1)
-    monkeypatch.setattr(datetime, "date", Today)
+    # The window starts today: pin it so the fixture dates stay inside it.
+    monkeypatch.setattr("nemik.calendars.today", lambda: date(2026, 10, 1))
 
     cfg = tmp_path / "calendars.toml"
     cfg.write_text('[calendars]\nchores = { name = "Chores", include = ["Nobody"] }\n')
-    days_main(["14", "--calendars", str(cfg), "--helper", str(_helper(tmp_path, text=CHORES))], __import__("rdflib").Graph())
+    days_main(
+        [
+            "14",
+            "--calendars",
+            str(cfg),
+            "--helper",
+            str(_helper(tmp_path, text=CHORES)),
+        ],
+        __import__("rdflib").Graph(),
+    )
     out = capsys.readouterr().out
-    assert "next 14 days (0)" in out and "filter chores: 0 of 4 matched" in out and "not a free day" in out
+    assert (
+        "next 14 days (0)" in out
+        and "filter chores: 0 of 4 matched" in out
+        and "not a free day" in out
+    )
 
 
 def _row(label, start, summary, waiting=()):
-    return {"label": label, "uid": "u", "start": start, "end": None, "all_day": False, "summary": summary,
-            "recurrence_id": start, "waiting": list(waiting)}
+    return {
+        "label": label,
+        "uid": "u",
+        "start": start,
+        "end": None,
+        "all_day": False,
+        "summary": summary,
+        "recurrence_id": start,
+        "waiting": list(waiting),
+    }
 
 
 def test_dedupe_merges_across_calendars_never_within_one() -> None:
@@ -197,37 +315,102 @@ def test_dedupe_merges_across_calendars_never_within_one() -> None:
     inside one calendar are two real events; waiters from both copies are kept."""
     from nemik.calendars import dedupe
 
-    rows = [_row("household", "2026-10-05T09:00", "Trash: Mike", ["life:W9"]),
-            _row("main", "2026-10-05T09:00", "Trash: Mike", ["life:W10"]),
-            _row("main", "2026-10-05T09:00", "Trash: Mike"),  # a third copy, in a calendar already represented
-            _row("main", "2026-10-05T09:00", "Dishes: Pascal"),
-            _row("main", "2026-10-06T09:00", "Dishes: Pascal"),
-            _row("chores", "2026-10-06T09:00", "Dishes: Pascal"),
-            _row("chores", "2026-10-06T09:00", "Dishes: Pascal")]  # two real events in ONE calendar
+    rows = [
+        _row("household", "2026-10-05T09:00", "Trash: Mike", ["life:W9"]),
+        _row("main", "2026-10-05T09:00", "Trash: Mike", ["life:W10"]),
+        _row(
+            "main", "2026-10-05T09:00", "Trash: Mike"
+        ),  # a third copy, in a calendar already represented
+        _row("main", "2026-10-05T09:00", "Dishes: Pascal"),
+        _row("main", "2026-10-06T09:00", "Dishes: Pascal"),
+        _row("chores", "2026-10-06T09:00", "Dishes: Pascal"),
+        _row("chores", "2026-10-06T09:00", "Dishes: Pascal"),
+    ]  # two real events in ONE calendar
     got = dedupe(rows)
     assert [(r["label"], r["summary"], r.get("also")) for r in got] == [
-        ("household", "Trash: Mike", ["main"]), ("main", "Trash: Mike", None), ("main", "Dishes: Pascal", None),
-        ("main", "Dishes: Pascal", ["chores"]), ("chores", "Dishes: Pascal", None)]
+        ("household", "Trash: Mike", ["main"]),
+        ("main", "Trash: Mike", None),
+        ("main", "Dishes: Pascal", None),
+        ("main", "Dishes: Pascal", ["chores"]),
+        ("chores", "Dishes: Pascal", None),
+    ]
     assert got[0]["waiting"] == ["life:W10", "life:W9"]  # both copies' waiters
     assert "also" not in rows[0]  # the input is not mutated
 
 
-def test_days_dedupes_across_calendars_and_no_dedupe_shows_all(tmp_path, ics, capsys, monkeypatch) -> None:
-    import datetime
+def test_days_dedupes_across_calendars_and_no_dedupe_shows_all(
+    tmp_path, ics, capsys, monkeypatch
+) -> None:
+    from datetime import date
 
     from nemik.calendars import days_main
 
-    class Today(datetime.date):
-        @classmethod
-        def today(cls):
-            return cls(2026, 10, 1)
-    monkeypatch.setattr(datetime, "date", Today)
+    monkeypatch.setattr("nemik.calendars.today", lambda: date(2026, 10, 1))
     cfg = tmp_path / "calendars.toml"
-    cfg.write_text('[calendars]\nhousehold = "A"\nmain = "B"\n')  # the stand-in exports the same ICS for both
-    base = ["14", "--calendars", str(cfg), "--helper", str(_helper(tmp_path, text=CHORES))]
+    cfg.write_text(
+        '[calendars]\nhousehold = "A"\nmain = "B"\n'
+    )  # the stand-in exports the same ICS for both
+    base = [
+        "14",
+        "--calendars",
+        str(cfg),
+        "--helper",
+        str(_helper(tmp_path, text=CHORES)),
+    ]
     g = __import__("rdflib").Graph()
     days_main(base, g)
     out = capsys.readouterr().out
     assert "next 14 days (4)" in out and "[also: main]" in out
     days_main([*base, "--no-dedupe"], g)
     assert "next 14 days (8)" in capsys.readouterr().out
+
+
+def test_writing_is_opt_in_twice_and_a_calendar_is_read_only_by_default(
+    tmp_path,
+) -> None:
+    """nemik:W196 (life's ask): `write = true` AND `mirror = [repos]`; either alone is refused."""
+    from nemik.calendars import Calendar, load_calendars
+
+    cfg = tmp_path / "calendars.toml"
+    cfg.write_text(
+        '[calendars]\nplain = "Chores"\n'
+        'shared = { name = "Family", write = true, mirror = ["life", "mtools"] }\n'
+    )
+    got = load_calendars(cfg)
+    assert got["plain"] == Calendar("Chores")  # read-only, nothing mirrored
+    assert got["plain"].write is False and got["plain"].mirror == ()
+    assert got["shared"] == Calendar("Family", (), True, ("life", "mtools"))
+    for entry, why in (
+        ('{ name = "F", write = true }', "needs `mirror"),
+        ('{ name = "F", mirror = ["life"] }', "needs `write = true`"),
+        ('{ name = "F", write = true, mirror = [] }', "needs `mirror"),
+        ('{ name = "F", write = true, mirror = ["a b"] }', "list of repo names"),
+        ('{ name = "F", write = true, mirrors = ["life"] }', "only `name`"),
+    ):
+        cfg.write_text(f"[calendars]\nshared = {entry}\n")
+        with pytest.raises(ValueError, match=why):
+            load_calendars(cfg)
+    cfg.write_text(
+        '[calendars]\nshared = { name = "F", write = "yes", mirror = ["l"] }\n'
+    )
+    with pytest.raises(TypeError, match="true or false"):
+        load_calendars(cfg)
+
+
+def test_events_nemik_mirrored_are_not_read_back_as_the_operators_own(
+    tmp_path, ics
+) -> None:
+    """nemik:W196: a UID of nemik:<repo>:W<n> is nemik's own write; reading it back would list
+    each dated waypoint twice, so nemik-days skips it (and does not count it)."""
+    mixed = ICS.replace("END:VCALENDAR\r\n", "").replace(
+        "UID:a@t", "UID:nemik:life:W9"
+    ) + ICS.replace("BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//t//EN\r\n", "")
+    stats: dict[str, tuple[int, int]] = {}
+    got = occurrences(
+        {"home": "Personal"},
+        start="2026-10-01",
+        helper=_helper(tmp_path, text=mixed),
+        ics=ics,
+        stats=stats,
+    )
+    assert [r["uid"] for r in got] == ["a@t"] and stats == {"home": (1, 1)}

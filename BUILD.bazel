@@ -47,5 +47,6 @@ venv_from_hub(
         "mikemol-hook-inbound-asks": "mikemol.hooks.entry:inbound_asks_main",
         "mikemol-hook-nemik-check": "mikemol.hooks.entry:nemik_check_main",
         "nemik-days": "nemik.calendars:days_main",
+        "nemik-calendar-write": "nemik.calwrite:main",
     },
 )

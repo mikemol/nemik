@@ -45,7 +45,12 @@ def uid(ref: str) -> str:
 
 
 def _escape(text: str) -> str:
-    return text.replace("\\", "\\\\").replace(";", "\\;").replace(",", "\\,").replace("\n", "\\n")
+    return (
+        text.replace("\\", "\\\\")
+        .replace(";", "\\;")
+        .replace(",", "\\,")
+        .replace("\n", "\\n")
+    )
 
 
 def _fold(line: str) -> str:
@@ -53,7 +58,8 @@ def _fold(line: str) -> str:
     raw = line.encode()
     if len(raw) <= 75:
         return line
-    out, cur = [], b""
+    out: list[str] = []
+    cur = b""
     for ch in line:
         b = ch.encode()
         if len(cur) + len(b) > (75 if not out else 74):
@@ -91,7 +97,7 @@ def stated_ask(ask: str) -> tuple[str, str]:
     """(verb, what) from an ask that may join several blocked_on values with ' | '."""
     for part in ask.split(" | "):
         if m := EXPLICIT.match(part):
-            return m[1].lower(), part[m.end():].strip(" :—-")
+            return m[1].lower(), part[m.end() :].strip(" :—-")
     return "decide", ask
 
 
@@ -118,8 +124,11 @@ def vtodos(asks: list[dict], repos: set[str], link: str = "") -> list[list[str]]
             f"CATEGORIES:nemik,{_escape(repo)}",
         ]
         # The waypoints this ask releases, as RFC 5545 relations (RELTYPE=CHILD: they follow it).
-        lines += [prop for name, key in (("DTSTART", "dtstart"), ("DUE", "due"))
-                  if (prop := time_property(name, a.get(key, "")))]
+        lines += [
+            prop
+            for name, key in (("DTSTART", "dtstart"), ("DUE", "due"))
+            if (prop := time_property(name, a.get(key, "")))
+        ]
         # mtools:W309: recurrence rides along as stored (nemik:W145 expands it for firing).
         if a.get("rrule"):
             lines.append(f"RRULE:{a['rrule']}")
@@ -129,9 +138,15 @@ def vtodos(asks: list[dict], repos: set[str], link: str = "") -> list[list[str]]
             lines.append(f"URL:{link.rstrip('/')}/#{a['ref']}")
         # mtools:W279: each alarm as a display VALARM, its TRIGGER exactly as stored (nemik:W129).
         for trig in a.get("alarms", []):
-            lines += ["BEGIN:VALARM", "ACTION:DISPLAY", f"DESCRIPTION:{_escape(f'{verb}: {what}')}",
-                      f"TRIGGER;{trig}" if trig.startswith(("RELATED=", "VALUE=")) else f"TRIGGER:{trig}",
-                      "END:VALARM"]
+            lines += [
+                "BEGIN:VALARM",
+                "ACTION:DISPLAY",
+                f"DESCRIPTION:{_escape(f'{verb}: {what}')}",
+                f"TRIGGER;{trig}"
+                if trig.startswith(("RELATED=", "VALUE="))
+                else f"TRIGGER:{trig}",
+                "END:VALARM",
+            ]
         lines.append("END:VTODO")
         out.append(lines)
     return out
@@ -147,23 +162,46 @@ def grouped(todos: list[list[str]]) -> list[list[str]]:
     """
     by_repo: dict[str, list[list[str]]] = {}
     for t in todos:
-        repo = next(line for line in t if line.startswith("CATEGORIES:")).split(",", 1)[1]
+        repo = next(line for line in t if line.startswith("CATEGORIES:")).split(",", 1)[
+            1
+        ]
         by_repo.setdefault(repo.replace("\\,", ","), []).append(t)
     out = []
     for repo, kids in sorted(by_repo.items()):
         dues = [line for k in kids for line in k if line.startswith("DUE")]
-        parent = ["BEGIN:VTODO", f"UID:nemik:repo:{repo}", "DTSTAMP:19700101T000000Z",
-                  f"SUMMARY:{_escape(f'{repo} ({len(kids)})')}", f"DESCRIPTION:{_escape(f'nemik: asks from {repo}')}",
-                  "STATUS:NEEDS-ACTION", f"CATEGORIES:nemik,{_escape(repo)}"]
+        parent = [
+            "BEGIN:VTODO",
+            f"UID:nemik:repo:{repo}",
+            "DTSTAMP:19700101T000000Z",
+            f"SUMMARY:{_escape(f'{repo} ({len(kids)})')}",
+            f"DESCRIPTION:{_escape(f'nemik: asks from {repo}')}",
+            "STATUS:NEEDS-ACTION",
+            f"CATEGORIES:nemik,{_escape(repo)}",
+        ]
         if dues:  # earliest by the date-time digits, whatever the value form
-            parent.append(min(dues, key=lambda d: re.sub(r"[^0-9]", "", d.rpartition(":")[2]).ljust(15, "0")))
+            parent.append(
+                min(
+                    dues,
+                    key=lambda d: re.sub(r"[^0-9]", "", d.rpartition(":")[2]).ljust(
+                        15, "0"
+                    ),
+                )
+            )
         out.append(parent + ["END:VTODO"])
-        out += [k[:-1] + [f"RELATED-TO;RELTYPE=PARENT:nemik:repo:{repo}", k[-1]] for k in kids]
+        out += [
+            k[:-1] + [f"RELATED-TO;RELTYPE=PARENT:nemik:repo:{repo}", k[-1]]
+            for k in kids
+        ]
     return out
 
 
 def calendar(todos: list[list[str]]) -> str:
-    lines = ["BEGIN:VCALENDAR", "VERSION:2.0", f"PRODID:{PRODID}", "X-WR-CALNAME:nemik: needs you"]
+    lines = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        f"PRODID:{PRODID}",
+        "X-WR-CALNAME:nemik: needs you",
+    ]
     for t in todos:
         lines += t
     lines.append("END:VCALENDAR")
@@ -188,7 +226,9 @@ def feed(root: Path, opt_in: Path, link: str = "", group: bool = False) -> str:
     return calendar(grouped(todos) if group else todos)
 
 
-DEFAULT_HELPER = Path.home() / "github" / "nemik" / "build" / "akonadi-tasks" / "nemik-akonadi-tasks"
+DEFAULT_HELPER = (
+    Path.home() / "github" / "nemik" / "build" / "akonadi-tasks" / "nemik-akonadi-tasks"
+)
 
 
 def tasks_main(argv: list[str] | None = None) -> None:
@@ -206,28 +246,63 @@ def tasks_main(argv: list[str] | None = None) -> None:
 
     from nemik.check import default_root
 
-    ap = argparse.ArgumentParser(prog="nemik-tasks", description=(tasks_main.__doc__ or "").splitlines()[0])
-    ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
-    ap.add_argument("--opt-in", type=Path, default=DEFAULT_OPT_IN, help="TOML with repos = [...]")
-    ap.add_argument("--link", default="", help="base URL of the nemik view, for each task's URL")
-    ap.add_argument("--helper", type=Path, default=DEFAULT_HELPER, help="the nemik-akonadi-tasks binary")
+    ap = argparse.ArgumentParser(
+        prog="nemik-tasks", description=(tasks_main.__doc__ or "").splitlines()[0]
+    )
+    ap.add_argument(
+        "--root",
+        type=Path,
+        default=default_root(),
+        help="~/github, or the export layout root",
+    )
+    ap.add_argument(
+        "--opt-in", type=Path, default=DEFAULT_OPT_IN, help="TOML with repos = [...]"
+    )
+    ap.add_argument(
+        "--link", default="", help="base URL of the nemik view, for each task's URL"
+    )
+    ap.add_argument(
+        "--helper",
+        type=Path,
+        default=DEFAULT_HELPER,
+        help="the nemik-akonadi-tasks binary",
+    )
     ap.add_argument("--list", required=True, help="the Google Tasks list, by name")
-    ap.add_argument("--create-list", action="store_true", help="create the list when none has that name")
-    ap.add_argument("--apply", action="store_true", help="write; without it, only print the plan")
-    ap.add_argument("--only", action="append", default=[], metavar="REF",
-                    help="sync only this repo:W<n> (repeatable); other tasks are left untouched (nemik:W162)")
-    ap.add_argument("--flat", action="store_true",
-                    help="one task per ask, no per-repo parent (default: a parent task per repo, nemik:W148/W163)")
-    ap.add_argument("--retry-wait", type=int, default=25, metavar="SECONDS",
-                    help="with --apply, rerun while the helper defers a child's parent, waiting this long for the "
-                         "Google resource to sync (at most 3 reruns; nemik:W148)")
+    ap.add_argument(
+        "--create-list",
+        action="store_true",
+        help="create the list when none has that name",
+    )
+    ap.add_argument(
+        "--apply", action="store_true", help="write; without it, only print the plan"
+    )
+    ap.add_argument(
+        "--only",
+        action="append",
+        default=[],
+        metavar="REF",
+        help="sync only this repo:W<n> (repeatable); other tasks are left untouched (nemik:W162)",
+    )
+    ap.add_argument(
+        "--flat",
+        action="store_true",
+        help="one task per ask, no per-repo parent (default: a parent task per repo, nemik:W148/W163)",
+    )
+    ap.add_argument(
+        "--retry-wait",
+        type=int,
+        default=25,
+        metavar="SECONDS",
+        help="with --apply, rerun while the helper defers a child's parent, waiting this long for the "
+        "Google resource to sync (at most 3 reruns; nemik:W148)",
+    )
     args = ap.parse_args(argv)
     if not args.helper.exists():
         print(f"ERROR: {args.helper} is missing; build it with ./setup.sh", flush=True)
         raise SystemExit(2)
     try:
         text = feed(args.root, args.opt_in, args.link, not args.flat)
-    except Exception as e:  # noqa: BLE001 - any feed failure is the 2 of the exit contract
+    except Exception as e:
         print(f"ERROR: feed: {e}", flush=True)
         raise SystemExit(2) from e
     cmd = [str(args.helper), "--list", args.list]
@@ -247,9 +322,16 @@ def tasks_main(argv: list[str] | None = None) -> None:
         sys.stdout.write(run.stdout.decode(errors="replace"))
         sys.stderr.write(run.stderr.decode(errors="replace"))
         sys.stdout.flush()
-        if run.returncode != 0 or b"DEFER-PARENT" not in run.stdout or attempt == tries - 1:
+        if (
+            run.returncode != 0
+            or b"DEFER-PARENT" not in run.stdout
+            or attempt == tries - 1
+        ):
             break
-        print(f"RETRY {attempt + 1}: parents are not on Google yet; waiting {args.retry_wait}s for the resource to sync", flush=True)
+        print(
+            f"RETRY {attempt + 1}: parents are not on Google yet; waiting {args.retry_wait}s for the resource to sync",
+            flush=True,
+        )
         time.sleep(args.retry_wait)
     raise SystemExit(run.returncode)
 
@@ -260,11 +342,24 @@ def main(argv: list[str] | None = None) -> None:
 
     from nemik.check import default_root
 
-    ap = argparse.ArgumentParser(prog="nemik-ics", description=(main.__doc__ or "").splitlines()[0])
-    ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
-    ap.add_argument("--opt-in", type=Path, default=DEFAULT_OPT_IN, help="TOML with repos = [...]")
-    ap.add_argument("--link", default="", help="base URL of the nemik view, for each task's URL")
-    ap.add_argument("--out", type=Path, help="write here (atomically) instead of stdout")
+    ap = argparse.ArgumentParser(
+        prog="nemik-ics", description=(main.__doc__ or "").splitlines()[0]
+    )
+    ap.add_argument(
+        "--root",
+        type=Path,
+        default=default_root(),
+        help="~/github, or the export layout root",
+    )
+    ap.add_argument(
+        "--opt-in", type=Path, default=DEFAULT_OPT_IN, help="TOML with repos = [...]"
+    )
+    ap.add_argument(
+        "--link", default="", help="base URL of the nemik view, for each task's URL"
+    )
+    ap.add_argument(
+        "--out", type=Path, help="write here (atomically) instead of stdout"
+    )
     args = ap.parse_args(argv)
 
     text = feed(args.root, args.opt_in, args.link)

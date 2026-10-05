@@ -15,6 +15,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+from datetime import date, datetime
 from pathlib import Path
 from typing import NamedTuple
 
@@ -22,12 +23,22 @@ from nemik.vtodo import DEFAULT_HELPER
 
 DEFAULT_CONFIG = Path.home() / ".config" / "nemik" / "calendars.toml"
 _LABEL = re.compile(r"[a-z][a-z0-9-]{0,31}")
+_REPO = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*")
+
+
+def today() -> date:
+    """The operator's local calendar date: where a reading window starts (a seam tests can pin)."""
+    return datetime.now().astimezone().date()
 
 
 class Calendar(NamedTuple):
-    """One opted-in calendar: its Akonadi collection and an optional summary filter (nemik:W190)."""
+    """One opted-in calendar: its Akonadi collection, an optional summary filter (nemik:W190), and
+    optionally the repos whose dated waypoints nemik writes INTO it (nemik:W196, life's ask)."""
+
     name: str
     include: tuple[str, ...] = ()
+    write: bool = False
+    mirror: tuple[str, ...] = ()
 
 
 def load_calendars(path: Path = DEFAULT_CONFIG) -> dict[str, Calendar]:
@@ -51,7 +62,9 @@ def load_calendars(path: Path = DEFAULT_CONFIG) -> dict[str, Calendar]:
         return {}
     cals = tomllib.loads(path.read_text()).get("calendars", {})
     if not isinstance(cals, dict):
-        raise ValueError(f"{path}: [calendars] must be a table of label = \"collection name\"")
+        raise TypeError(
+            f'{path}: [calendars] must be a table of label = "collection name"'
+        )
     out: dict[str, Calendar] = {}
     for label, spec in cals.items():
         bad = f"{path}: bad entry {label!r}: "
@@ -59,14 +72,40 @@ def load_calendars(path: Path = DEFAULT_CONFIG) -> dict[str, Calendar]:
             raise ValueError(bad + "labels are [a-z][a-z0-9-]*")
         if isinstance(spec, str):
             spec = {"name": spec}
-        if not isinstance(spec, dict) or set(spec) - {"name", "include"}:
-            raise ValueError(bad + "a name string, or a table with only `name` and `include`")
+        allowed = {"name", "include", "write", "mirror"}
+        if not isinstance(spec, dict) or set(spec) - allowed:
+            raise ValueError(
+                bad + "a name string, or a table with only `name`, `include`, "
+                "`write` and `mirror`"
+            )
         name, include = spec.get("name"), spec.get("include", [])
+        write, mirror = spec.get("write", False), spec.get("mirror", [])
         if not isinstance(name, str) or not name:
             raise ValueError(bad + "`name` must be a non-empty string")
-        if not isinstance(include, list) or not all(isinstance(x, str) and x for x in include):
+        if not isinstance(include, list) or not all(
+            isinstance(x, str) and x for x in include
+        ):
             raise ValueError(bad + "`include` must be a list of non-empty strings")
-        out[label] = Calendar(name, tuple(include))
+        if not isinstance(write, bool):
+            raise TypeError(bad + "`write` must be true or false")
+        if not isinstance(mirror, list) or not all(
+            isinstance(x, str) and _REPO.fullmatch(x) for x in mirror
+        ):
+            raise ValueError(bad + "`mirror` must be a list of repo names")
+        # Writing is opt-in twice over and never implicit: the calendar says
+        # `write = true` AND names which repos land on it. Either alone is a
+        # half-configured entry, refused rather than guessed at.
+        if write and not mirror:
+            raise ValueError(
+                bad + "`write = true` needs `mirror = [repos]`: nothing is "
+                "mirrored implicitly"
+            )
+        if mirror and not write:
+            raise ValueError(
+                bad + "`mirror` needs `write = true`: a calendar is read-only "
+                "unless it says so"
+            )
+        out[label] = Calendar(name, tuple(include), write, tuple(mirror))
     return dict(sorted(out.items()))
 
 
@@ -86,10 +125,16 @@ def _venv_ics() -> str:
     return str(Path(sys.executable).parent / "mikemol-ics")
 
 
-def occurrences(collections: dict[str, str], *, start: str, window: str = "14d",
-                helper: Path = DEFAULT_HELPER, ics: str | None = None,
-                includes: dict[str, tuple[str, ...]] | None = None,
-                stats: dict[str, tuple[int, int]] | None = None) -> list[dict]:
+def occurrences(
+    collections: dict[str, str],
+    *,
+    start: str,
+    window: str = "14d",
+    helper: Path = DEFAULT_HELPER,
+    ics: str | None = None,
+    includes: dict[str, tuple[str, ...]] | None = None,
+    stats: dict[str, tuple[int, int]] | None = None,
+) -> list[dict]:
     """[{label, uid, start, end, all_day, summary, recurrence_id}] for every collection, by start.
 
     `collections` maps a short label (what waypoints cite as cal:<label>/<uid>) to the Akonadi
@@ -100,21 +145,34 @@ def occurrences(collections: dict[str, str], *, start: str, window: str = "14d",
     """
     ics = ics or _venv_ics()
     if not Path(ics).exists() and not shutil.which(ics):
-        raise FileNotFoundError(f"the calendar reader {ics} is missing: rebuild nemik's venv (bazel build //:.venv)")
+        raise FileNotFoundError(
+            f"the calendar reader {ics} is missing: rebuild nemik's venv (bazel build //:.venv)"
+        )
     tmp = Path(tempfile.mkdtemp(prefix="nemik-cal-"))  # mkdtemp is 0700
     try:
         out: list[dict] = []
         for label, name in sorted(collections.items()):
             f = tmp / f"{label}.ics"
-            subprocess.run([str(helper), "--export-calendar", name, "--out", str(f)],
-                           check=True, capture_output=True)
-            text = subprocess.run([ics, "--from", start, "--window", window, "--json", str(f)],
-                                  check=True, capture_output=True, text=True).stdout
+            subprocess.run(
+                [str(helper), "--export-calendar", name, "--out", str(f)],
+                check=True,
+                capture_output=True,
+            )
+            text = subprocess.run(
+                [ics, "--from", start, "--window", window, "--json", str(f)],
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout
             pats = (includes or {}).get(label, ())
             total = matched = 0
             for line in text.splitlines():
                 rec = json.loads(line)
                 if rec.get("kind") != "occurrence":
+                    continue
+                # Events nemik itself mirrored into a calendar (nemik:W196) are not the operator's
+                # own entries: reading them back would list each dated waypoint twice.
+                if str(rec.get("uid") or "").startswith("nemik:"):
                     continue
                 total += 1
                 if pats and not any(p in (rec.get("summary") or "") for p in pats):
@@ -150,7 +208,9 @@ def dedupe(rows: list[dict]) -> list[dict]:
             p["also"] = [*p.get("also", []), r["label"]]
             p["waiting"] = sorted({*p.get("waiting", []), *r.get("waiting", [])})
         else:
-            out.append(dict(r))  # a second event in a calendar already represented: a real one
+            out.append(
+                dict(r)
+            )  # a second event in a calendar already represented: a real one
     return out
 
 
@@ -171,8 +231,12 @@ def event_graph(occs: list[dict], queues):
 
     g = Graph()
     nxt: dict[tuple[str, str], URIRef] = {}
-    for o in occs:  # sorted by start, so the first seen per (label, uid) is the next occurrence
-        ev = URIRef(f"urn:nemik:cal:{o['label']}/{o['uid']}/{o['recurrence_id'] or o['start']}")
+    for o in (
+        occs
+    ):  # sorted by start, so the first seen per (label, uid) is the next occurrence
+        ev = URIRef(
+            f"urn:nemik:cal:{o['label']}/{o['uid']}/{o['recurrence_id'] or o['start']}"
+        )
         g.add((ev, RDF.type, NEMIK.Event))
         g.add((ev, DCTERMS.title, Literal(o["summary"] or "")))
         g.add((ev, NEMIK.dtstart, Literal(o["start"] or "")))
@@ -180,8 +244,10 @@ def event_graph(occs: list[dict], queues):
     for n, _, text in queues.triples((None, NEMIK.blockedOn, None)):
         if (n, OSLC_CM.state, NEMIK.Done) in queues:
             continue
-        if (m := CAL_REF.fullmatch(str(text).strip())) and (ev := nxt.get((m[1], m[2]))):
-            g.add((n, NEMIK.waitsFor, ev))
+        if (m := CAL_REF.fullmatch(str(text).strip())) and (
+            found := nxt.get((m[1], m[2]))
+        ):
+            g.add((n, NEMIK.waitsFor, found))
     return g
 
 
@@ -193,23 +259,36 @@ def days_main(argv: list[str] | None = None, g=None) -> None:
     reachable from no served module (tests/test_calendar_boundary.py).
     """
     import argparse
-    from datetime import date
 
     from rdflib import Graph
 
-    from nemik.blocks import ref
     from nemik.adapter import NEMIK
+    from nemik.blocks import ref
     from nemik.check import default_root, survey
     from nemik.vtodo import DEFAULT_HELPER
 
-    ap = argparse.ArgumentParser(prog="nemik-days", description=(days_main.__doc__ or "").splitlines()[0])
-    ap.add_argument("days", type=int, nargs="?", default=7, help="how many days ahead (default 7)")
+    ap = argparse.ArgumentParser(
+        prog="nemik-days", description=(days_main.__doc__ or "").splitlines()[0]
+    )
+    ap.add_argument(
+        "days", type=int, nargs="?", default=7, help="how many days ahead (default 7)"
+    )
     ap.add_argument("--root", type=Path, default=default_root(), help="~/github")
-    ap.add_argument("--calendars", type=Path, default=DEFAULT_CONFIG, help="calendars.toml")
-    ap.add_argument("--helper", type=Path, default=DEFAULT_HELPER, help="the nemik-akonadi-tasks binary")
+    ap.add_argument(
+        "--calendars", type=Path, default=DEFAULT_CONFIG, help="calendars.toml"
+    )
+    ap.add_argument(
+        "--helper",
+        type=Path,
+        default=DEFAULT_HELPER,
+        help="the nemik-akonadi-tasks binary",
+    )
     ap.add_argument("--json", action="store_true")
-    ap.add_argument("--no-dedupe", action="store_true",
-                    help="list every calendar's copy of an entry that repeats across calendars (nemik:W191)")
+    ap.add_argument(
+        "--no-dedupe",
+        action="store_true",
+        help="list every calendar's copy of an entry that repeats across calendars (nemik:W191)",
+    )
     args = ap.parse_args(argv)
     cals = load_calendars(args.calendars)
     cols = {label: c.name for label, c in cals.items()}
@@ -223,31 +302,58 @@ def days_main(argv: list[str] | None = None, g=None) -> None:
                 g += qg
     try:
         stats: dict[str, tuple[int, int]] = {}
-        occs = occurrences(cols, start=date.today().isoformat(), window=f"{args.days}d", helper=args.helper,
-                           includes={label: c.include for label, c in cals.items() if c.include}, stats=stats)
+        occs = occurrences(
+            cols,
+            start=today().isoformat(),
+            window=f"{args.days}d",
+            helper=args.helper,
+            includes={label: c.include for label, c in cals.items() if c.include},
+            stats=stats,
+        )
     except FileNotFoundError as e:
         print(f"ERROR: {e}")
         raise SystemExit(2) from e
     except subprocess.CalledProcessError as e:
         # The helper refuses (nemik:W193) when Akonadi is not running; say what it said, not a traceback.
-        why = ((e.stdout or b"").decode(errors="replace").strip() or (e.stderr or b"").decode(errors="replace").strip()
-               or f"exit {e.returncode}")
+        why = (
+            (e.stdout or b"").decode(errors="replace").strip()
+            or (e.stderr or b"").decode(errors="replace").strip()
+            or f"exit {e.returncode}"
+        )
         print(f"ERROR: the calendar export failed: {why.splitlines()[-1]}")
         raise SystemExit(2) from e
     eg = event_graph(occs, g)
     rows = []
     for o in occs:
         ev = f"urn:nemik:cal:{o['label']}/{o['uid']}/{o['recurrence_id'] or o['start']}"
-        rows.append({**o, "waiting": sorted(ref(n) for n, _, t in eg.triples((None, NEMIK.waitsFor, None)) if str(t) == ev)})
+        rows.append(
+            {
+                **o,
+                "waiting": sorted(
+                    ref(n)
+                    for n, _, t in eg.triples((None, NEMIK.waitsFor, None))
+                    if str(t) == ev
+                ),
+            }
+        )
     if not args.no_dedupe:
         rows = dedupe(rows)
     # nemik:W190: a filtered calendar reports what its filter kept. "0 of N matched" says the filter
     # ate the day, not that the day is free.
-    report = [f"filter {label}: {stats[label][0]} of {stats[label][1]} matched"
-              + (" (nothing matched: that is the filter, not a free day)" if stats[label][0] == 0 and stats[label][1] else "")
-              for label, c in cals.items() if c.include and label in stats]
+    report = [
+        f"filter {label}: {stats[label][0]} of {stats[label][1]} matched"
+        + (
+            " (nothing matched: that is the filter, not a free day)"
+            if stats[label][0] == 0 and stats[label][1]
+            else ""
+        )
+        for label, c in cals.items()
+        if c.include and label in stats
+    ]
     if args.json:
-        print(json.dumps(rows, indent=2))  # the row list, unchanged for existing readers
+        print(
+            json.dumps(rows, indent=2)
+        )  # the row list, unchanged for existing readers
         for line in report:
             print(line, file=sys.stderr)
         return
@@ -255,6 +361,8 @@ def days_main(argv: list[str] | None = None, g=None) -> None:
     for d in rows:
         waits = f"  <- {', '.join(d['waiting'])}" if d["waiting"] else ""
         also = f"  [also: {', '.join(d['also'])}]" if d.get("also") else ""
-        print(f"  {(d['start'] or '')[:16]:16} {d['label']:10} {(d['summary'] or '')[:60]}{also}{waits}")
+        print(
+            f"  {(d['start'] or '')[:16]:16} {d['label']:10} {(d['summary'] or '')[:60]}{also}{waits}"
+        )
     for line in report:
         print(f"  {line}")

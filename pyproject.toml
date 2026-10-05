@@ -25,6 +25,7 @@ nemik-check = "nemik.check:main"
 nemik-metrics = "nemik.metrics:main"
 nemik-serve = "nemik.serve:main"
 nemik-days = "nemik.calendars:days_main"
+nemik-calendar-write = "nemik.calwrite:main"
 nemik-inbound = "nemik.blocks:main"
 nemik-operator = "nemik.blocks:operator_main"
 nemik-wake = "nemik.wake:main"
@@ -56,3 +57,9 @@ dev = [
 [tool.pytest.ini_options]
 # bazel-* are output symlinks into the Bazel cache; collecting them would run every test twice.
 testpaths = ["tests"]
+
+[tool.mypy]
+# The tests import their sibling helper (tests/installed.py) by bare name, as pytest's rootdir
+# import mode resolves it; mypy needs the same directory to find it. Not an exemption: it only
+# says where the module lives (the edit gate checks a copy at the repo root, so it needs this).
+mypy_path = "tests"
