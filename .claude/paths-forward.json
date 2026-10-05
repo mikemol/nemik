@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 200,
+  "counter": 201,
   "waypoints": [
     {
       "symbol": "W1",
@@ -3725,19 +3725,36 @@
     {
       "symbol": "W200",
       "title": "Operator decision: which calendar the dated waypoints are written to (Mol Family Calendar grants the account no write rights), and enabling the mirror for life",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-05: 2026-10-05: operator answered: the target is Mol Household Calendar (writable to the account: create/change/delete all Y) instead of Mol Family Calendar, and the operator set write = true, mirror = [life] on it in ~/.config/nemik/calendars.toml themselves (read back: one entry, label household). READ BACK from the calendar: exporting Mol Household Calendar shows 3 events with UID nemik:life:W30, nemik:life:W26, nemik:life:W9, each carrying a Google event id and CREATED 2026-10-05T14:31:32Z (after every write-capable step of mine, so the operator's own apply); their content matches the waypoints, W30 carries its alarm. A fresh plan then shows no create, update or delete: the upsert is idempotent. Not yet exercised live: UPDATE and DELETE (they happen when a mirrored waypoint changes or closes). Export file deleted.",
+      "issued_at": "2026-10-05T14:11:07Z",
+      "minted_during": "tick",
+      "caused_by": "life-82",
+      "last_worked": "2026-10-05T14:36:02Z",
+      "ticks_blocked": 0,
+      "completed": "20261005T143602Z"
+    },
+    {
+      "symbol": "W201",
+      "title": "Keep the mirror in step: a unit that runs nemik-calendar-write --apply every few minutes (a waypoint that changes or closes must update or delete its event); ask luthen, as for the Tasks unit W234",
       "status": "blocked",
       "enables": [],
       "touches": [],
       "blocked_on": [
-        "operator: decide where the dated life waypoints are written. Mol Family Calendar gives your account NO write rights (read-only to you), so either (a) its owner grants your Google account 'Make changes to events' on it (a sharing change in Google Calendar, yours or your spouse's, not nemik's), or (b) pick a calendar you can write that your spouse also sees (writable to you: Family, Mol Household Calendar, Events, Maintenance, Bills). Then say whether to enable the mirror for life: nothing is written until you set write = true and mirror = [\"life\"] on that calendar in ~/.config/nemik/calendars.toml yourself"
+        "luthen-observability"
       ],
-      "blocked_kind": "human",
+      "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "",
-      "issued_at": "2026-10-05T14:11:07Z",
+      "evidence": "2026-10-05: 2026-10-05: letter left in luthen-observability/inbox/2026-10-05-nemik-calendar-write-unit.md (no luthen session was live) asking for a claiming waypoint and the unit.",
+      "issued_at": "2026-10-05T14:36:03Z",
       "minted_during": "tick",
-      "caused_by": "life-82",
-      "last_worked": "2026-10-05T14:11:25Z",
+      "caused_by": "life-c5",
+      "last_worked": "2026-10-05T14:36:25Z",
       "ticks_blocked": 0,
       "completed": null
     }
