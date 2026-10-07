@@ -39,7 +39,7 @@ venv_from_hub(
         "nemik-rank": "nemik.rank:main",
         "nemik-floor-asks": "nemik.floorasks:main",
         "nemik-overlaps": "nemik.overlaps:main",
-        "nemik-witnesses": "nemik.witnesses:main",
+        "nemik-witnesses": "nemik.witnesses_cli:main",
         "nemik-ics": "nemik.vtodo:main",
         "nemik-tasks": "nemik.vtodo:tasks_main",
         "mikemol-paths-forward": "mikemol.pathsforward.cli:main",

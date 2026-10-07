@@ -356,3 +356,4 @@
 2026-10-05T22:32:01Z  interrupt W224 minted    -         "Let a fleet root's own queue be a workstream: nemik-rank/check/inbound for the host session (~/github/.claude/paths-forward.json) see the host beside the repos, with cross-repo weights, without --root pointing at the parent"  evidence=github:W12
 2026-10-05T22:39:47Z  interrupt W225 minted    -         "U: update the nemik skill for nemik-rank --all"  evidence=operator
 2026-10-05T23:41:09Z  interrupt W226 minted    -         "Rebuild nemik's own venv (./setup.sh) so nemik-rank, nemik-check and nemik-serve resolve the root workstream (github:W<n>), then hand luthen the new build for the cluster image"  evidence=W224
+2026-10-07T14:46:18Z  interrupt W227 minted    -         "nemik-witnesses reads every promql witness as undefined unless NEMIK_VM_URL is set, and nothing sets it"

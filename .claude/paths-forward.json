@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 226,
+  "counter": 227,
   "waypoints": [
     {
       "symbol": "W1",
@@ -4362,6 +4362,27 @@
       "ticks_blocked": 0,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
+    },
+    {
+      "symbol": "W227",
+      "title": "nemik-witnesses reads every promql witness as undefined unless NEMIK_VM_URL is set, and nothing sets it",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "witnesses",
+        "promql",
+        "luthen"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Landed in the next commit: nemik.endpoint.export_defaults plus the nemik.witnesses_cli entry point (console script repointed in pyproject.toml and BUILD.bazel); measured: nemik-witnesses with no NEMIK_* environment now evaluates all six declared promql witnesses (false: none holds yet). Remaining: run nemik-witnesses --apply from luthen's timer so witnessed waypoints close without the host session (luthen-observability card to mint), and the same default for nemik-metrics and any other reader of NEMIK_VM_URL.",
+      "evidence": "2026-10-07: 2026-10-07 host reading. nemik-witnesses printed 'undefined: cannot observe promql[...]' for all seven declared witnesses (luthen-observability W306, W358, W376, W630, W631, W632 and the new W640) because witnesses.py _get returns None when NEMIK_VM_URL is unset (its docstring says the address comes from the environment, on luthen from checks/endpoints_query --side host). Run by hand with NEMIK_VM_URL set to the vmsingle address that endpoints_query prints, the same seven evaluate: W376 true (its dry-run metric appeared after the operator's host apply) and --apply marked it done with the witness recorded; the others false. So witnessed waypoints have been unable to close by themselves, and W306, W358 and W376 sat blocked on a series that existed. Nothing in the repo sets the variable: no unit, no wrapper. Also checked: the same _get serves NEMIK_VMALERT_URL for the alert observer. | 2026-10-07: 2026-10-07 host: started on the operator's 'no cards in other idle repos?'. Held the .venv rebuild while kine p99 was 4.7 s (KINE-HIGH from the paperkit sweep plus a second luthen gate); stopped the luthen W645 commit, watching for recovery. | 2026-10-07: 2026-10-07 host: 6 new tests in tests/test_endpoint.py plus 11 in test_witnesses pass (17 passed). Not edited: witnesses.py (240 findings; the edit gate refuses it). bazel/venv.bzl takes console scripts from BUILD.bazel, not pyproject.toml, so both were changed.",
+      "issued_at": "2026-10-07T14:46:18Z",
+      "minted_during": "interrupt",
+      "caused_by": null,
+      "last_worked": "2026-10-07T19:27:41Z",
+      "ticks_blocked": 0,
+      "completed": null
     }
   ],
   "residue": [
