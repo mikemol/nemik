@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 128
+      "ticks_blocked": 129
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "weight": 1
     },
     {
@@ -2613,7 +2613,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 73
+      "ticks_blocked": 74
     },
     {
       "symbol": "W138",
@@ -3522,7 +3522,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-02T17:28:25Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 10,
       "weight": 2
     },
     {
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-08T13:42:13Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -3941,7 +3941,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -3966,7 +3966,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -3991,7 +3991,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -3999,7 +3999,7 @@
     {
       "symbol": "W212",
       "title": "nemik typing: src/nemik/wake.py (206 findings)",
-      "status": "working",
+      "status": "ready",
       "enables": [
         "W213"
       ],
@@ -4013,7 +4013,7 @@
       "issued_at": "2026-10-05T16:39:45Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-08T14:32:04Z",
+      "last_worked": "2026-10-08T14:40:36Z",
       "ticks_blocked": 0,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
@@ -4039,7 +4039,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4063,7 +4063,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4157,7 +4157,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4182,7 +4182,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4207,7 +4207,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4232,7 +4232,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4255,7 +4255,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4285,7 +4285,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4404,7 +4404,7 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:09:03Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -4430,23 +4430,21 @@
     {
       "symbol": "W230",
       "title": "Run mtools' realizability policy as one batch: nemik state documents in, verdicts out, tested against the pinned opa",
-      "status": "blocked",
+      "status": "working",
       "enables": [
         "W228",
         "W231"
       ],
       "touches": [],
-      "blocked_on": [
-        "mtools:W850"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "2026-10-08: 2026-10-08: the policy file is mtools' (mtools:W850, package data in the pathsforward wheel); this card is nemik's batch run and tests against it, so it waits on that file and on the md0 RELEASE.",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "mtools:W850 landed at 472f940: bump the vendored mtools wheels from 03749d5 to a sha at or after 472f940 (vendor/wheels/README.md), rebuild //:.venv, confirm data.realizability ships in the pathsforward wheel, then write the batch run and its tests",
+      "evidence": "2026-10-08: 2026-10-08: the policy file is mtools' (mtools:W850, package data in the pathsforward wheel); this card is nemik's batch run and tests against it, so it waits on that file and on the md0 RELEASE. | 2026-10-08: W850 done (mtools 472f940); the pin 03749d5 predates it, so the next step is the pin bump",
       "issued_at": "2026-10-08T13:43:15Z",
       "minted_during": "tick",
       "caused_by": "W228",
-      "last_worked": "2026-10-08T13:45:27Z",
-      "ticks_blocked": 2,
+      "last_worked": "2026-10-08T14:40:37Z",
+      "ticks_blocked": 0,
       "completed": null
     },
     {
@@ -4504,7 +4502,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W665",
       "last_worked": "2026-10-08T13:52:29Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null
     },
     {
@@ -4525,7 +4523,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T13:52:00Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null
     },
     {
@@ -4551,7 +4549,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:17:54Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -4563,8 +4561,7 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W230",
-        "mtools:W850"
+        "W230"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
@@ -4572,8 +4569,8 @@
       "issued_at": "2026-10-08T13:50:22Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
-      "last_worked": "2026-10-08T13:50:33Z",
-      "ticks_blocked": 2,
+      "last_worked": "2026-10-08T14:40:30Z",
+      "ticks_blocked": 0,
       "completed": null
     },
     {
@@ -4595,7 +4592,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:26:28Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -4617,7 +4614,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:22:37Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -4660,7 +4657,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:07:19Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null
     },
     {
@@ -4682,7 +4679,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:17:49Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -4704,7 +4701,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:14:24Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null
     },
     {
@@ -4725,7 +4722,7 @@
       "minted_during": "tick",
       "caused_by": "W229",
       "last_worked": "2026-10-08T14:09:02Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -4746,7 +4743,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-08T14:17:48Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     }
   ],
@@ -4798,7 +4795,7 @@
   "heartbeat": "2026-10-08T14:30:28Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-08T14:31:22Z"
+    "taken_at": "2026-10-08T14:40:16Z"
   },
   "predecessor_job_id": "eb49bf5c",
   "leases": []
