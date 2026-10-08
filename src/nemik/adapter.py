@@ -80,6 +80,15 @@ def resolve_blocker(repo: str, text: str, known: frozenset[str]) -> URIRef | Non
     return None
 
 
+def load_state(state_path: Path) -> model.State:
+    """A queue as mtools' own loader reads it, for the modules that judge a queue unchanged.
+
+    This module stays the one place that calls `store.load` (the single-writer-boundary claim).
+    Raises store.UnreadableStateError if mtools refuses it.
+    """
+    return store.load(state_path)
+
+
 def queue_graph(
     repo: str, state_path: Path, known: frozenset[str] = frozenset()
 ) -> Graph:

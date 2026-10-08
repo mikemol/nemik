@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 245,
+  "counter": 247,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 129
+      "ticks_blocked": 131
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 6,
       "weight": 1
     },
     {
@@ -2613,7 +2613,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 74
+      "ticks_blocked": 76
     },
     {
       "symbol": "W138",
@@ -3522,7 +3522,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-02T17:28:25Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 12,
       "weight": 2
     },
     {
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-08T13:42:13Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -3941,7 +3941,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 6,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -3966,7 +3966,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 6,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -3991,7 +3991,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 6,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4039,7 +4039,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 6,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4063,7 +4063,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 6,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4157,7 +4157,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 6,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4182,7 +4182,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 6,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4207,7 +4207,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 6,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4232,7 +4232,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 6,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4255,7 +4255,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 6,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4285,7 +4285,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 6,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4389,7 +4389,6 @@
         "realizability"
       ],
       "blocked_on": [
-        "W230",
         "W231",
         "W232",
         "W234",
@@ -4450,21 +4449,24 @@
     {
       "symbol": "W231",
       "title": "nemik-check --realizability: build the input documents from the graph, one batched opa eval, print each waypoint's coordinate and ledger",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W228",
         "W232"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "",
+      "blocked_on": [
+        "W247"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Atomized into W246 (reader) and W247 (printer); lands when both do",
       "evidence": "",
       "issued_at": "2026-10-08T13:43:15Z",
       "minted_during": "tick",
       "caused_by": "W228",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-08T23:51:42Z",
+      "ticks_blocked": 1,
+      "completed": null
     },
     {
       "symbol": "W232",
@@ -4502,28 +4504,26 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W665",
       "last_worked": "2026-10-08T14:56:18Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
       "symbol": "W234",
       "title": "Read verdict marks, not private re-derivations: print the persisted per-transition mark with its provenance (mark or derived) and flag a stale mark",
-      "status": "blocked",
+      "status": "ready",
       "enables": [
         "W228"
       ],
       "touches": [],
-      "blocked_on": [
-        "mtools:W851"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "2026-10-08: 2026-10-08: operator requirement relayed by github-28: verdicts are read from the persisted marks, not re-derived privately. Waits on the writer's per-transition ledger (mtools:W851): its location and line format are asked of mtools. Where no mark exists (every card minted before the hook) the verdict is printed as derived. | 2026-10-08: 2026-10-08: mtools-25 agreed (mtools:W849, W852): marks file .claude/paths-forward.marks.jsonl beside the queue, append-only, one JSON object per transition, apart from the text .ledger. Record {as_of, op, symbol, policy_version (sha256 of realizability.rego), input_digest (sha256 of the canonical input), verdict:{ref, level, reference_arm, residue[{gate, reference_arm, what, closes_by, closes_ref?}]}}; as_of is the same now the policy received, so a mark re-derives and a stale one (as_of older than max_age_seconds, or another policy_version) is detectable. The file quotes waypoint text, so it stays out of nemik-serve, the export and the static build. Recorded in the design note.",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "mtools:W851 landed (--admit writes marks to .claude/paths-forward.marks.jsonl): a reader of that file (as_of, op, symbol, policy_version, input_digest, verdict), printing mark vs derived provenance and flagging a stale mark (as_of past max_age_seconds, or another policy_version); needs a pin bump to the sha carrying W851 only for the writer, not for the reader",
+      "evidence": "2026-10-08: 2026-10-08: operator requirement relayed by github-28: verdicts are read from the persisted marks, not re-derived privately. Waits on the writer's per-transition ledger (mtools:W851): its location and line format are asked of mtools. Where no mark exists (every card minted before the hook) the verdict is printed as derived. | 2026-10-08: 2026-10-08: mtools-25 agreed (mtools:W849, W852): marks file .claude/paths-forward.marks.jsonl beside the queue, append-only, one JSON object per transition, apart from the text .ledger. Record {as_of, op, symbol, policy_version (sha256 of realizability.rego), input_digest (sha256 of the canonical input), verdict:{ref, level, reference_arm, residue[{gate, reference_arm, what, closes_by, closes_ref?}]}}; as_of is the same now the policy received, so a mark re-derives and a stale one (as_of older than max_age_seconds, or another policy_version) is detectable. The file quotes waypoint text, so it stays out of nemik-serve, the export and the static build. Recorded in the design note. | 2026-10-08: mtools:W851 done 2026-10-08T15:08:38Z",
       "issued_at": "2026-10-08T13:50:20Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
-      "last_worked": "2026-10-08T13:52:00Z",
-      "ticks_blocked": 3,
+      "last_worked": "2026-10-08T23:44:27Z",
+      "ticks_blocked": 0,
       "completed": null
     },
     {
@@ -4549,21 +4549,19 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:17:54Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
       "symbol": "W236",
       "title": "Decay: nemik passes input.now and the as_of of each mark and fact, and prints the as_of it used; a stale mark floors its gate, never passes",
-      "status": "blocked",
+      "status": "ready",
       "enables": [
         "W228"
       ],
       "touches": [],
-      "blocked_on": [
-        "W230"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
       "evidence": "2026-10-08: 2026-10-08: the policy takes the time as an input (input.now) so a verdict stays a pure function of its input; max_age_seconds is the policy's (mtools:W850), the batch run is W230.",
       "issued_at": "2026-10-08T13:50:22Z",
@@ -4592,7 +4590,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:56:19Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -4614,7 +4612,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:22:37Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -4657,7 +4655,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:07:19Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 5,
       "completed": null
     },
     {
@@ -4679,7 +4677,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:17:49Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -4701,7 +4699,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:14:24Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 5,
       "completed": null
     },
     {
@@ -4722,7 +4720,7 @@
       "minted_during": "tick",
       "caused_by": "W229",
       "last_worked": "2026-10-08T14:09:02Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -4743,7 +4741,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-08T14:17:48Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -4766,6 +4764,48 @@
       "last_worked": "2026-10-08T14:58:38Z",
       "ticks_blocked": 0,
       "completed": "20261008T145838Z"
+    },
+    {
+      "symbol": "W246",
+      "title": "nemik.realize: judge every live waypoint through the pinned certify.items and opa_eval, return verdicts keyed by ref (a pure function of queue, now and opa)",
+      "status": "done",
+      "enables": [
+        "W231"
+      ],
+      "touches": [
+        "realizability"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-08: src/nemik/realize.py written, ruff+format+mypy clean in the scratchpad before install; a host run on the real queue is for W247 (no -c scripts allowed) | 2026-10-08: src/nemik/realize.py + tests/test_realize.py (2 passed on host in 2.62s); bazel gate at the commit",
+      "issued_at": "2026-10-08T23:51:37Z",
+      "minted_during": "tick",
+      "caused_by": "W231",
+      "last_worked": "2026-10-08T23:56:26Z",
+      "ticks_blocked": 0,
+      "completed": "20261008T235626Z"
+    },
+    {
+      "symbol": "W247",
+      "title": "nemik-check --realizability: print each live waypoint coordinate and residue ledger from nemik.realize, exit nonzero when opa is unavailable",
+      "status": "working",
+      "enables": [
+        "W231"
+      ],
+      "touches": [
+        "realizability"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "After the reader: add the flag to nemik.check, one printed row per waypoint (ref, level, residue lines with closes_by), shape test in tests/",
+      "evidence": "",
+      "issued_at": "2026-10-08T23:51:37Z",
+      "minted_during": "tick",
+      "caused_by": "W231",
+      "last_worked": "2026-10-08T23:56:32Z",
+      "ticks_blocked": 0,
+      "completed": null
     }
   ],
   "residue": [
@@ -4812,12 +4852,12 @@
       "recoverable": true
     }
   ],
-  "job_id": "63bbcf8b",
-  "heartbeat": "2026-10-08T14:30:28Z",
+  "job_id": "ee709298",
+  "heartbeat": "2026-10-08T23:54:45Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-08T14:55:21Z"
+    "taken_at": "2026-10-08T23:54:50Z"
   },
-  "predecessor_job_id": "eb49bf5c",
+  "predecessor_job_id": "63bbcf8b",
   "leases": []
 }
