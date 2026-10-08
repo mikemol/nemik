@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 227,
+  "counter": 244,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 125
+      "ticks_blocked": 128
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 3,
       "weight": 1
     },
     {
@@ -2613,7 +2613,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 70
+      "ticks_blocked": 73
     },
     {
       "symbol": "W138",
@@ -3522,7 +3522,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-02T17:28:25Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 9,
       "weight": 2
     },
     {
@@ -3741,7 +3741,7 @@
     },
     {
       "symbol": "W201",
-      "title": "Keep the mirror in step: a unit that runs nemik-calendar-write --apply every few minutes (a waypoint that changes or closes must update or delete its event); ask luthen, as for the Tasks unit W234",
+      "title": "Keep the calendar mirror in step: a luthen unit runs nemik-calendar-write --apply",
       "status": "blocked",
       "enables": [],
       "touches": [],
@@ -3750,12 +3750,12 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "2026-10-05: 2026-10-05: letter left in luthen-observability/inbox/2026-10-05-nemik-calendar-write-unit.md (no luthen session was live) asking for a claiming waypoint and the unit.",
+      "evidence": "2026-10-05: 2026-10-05: letter left in luthen-observability/inbox/2026-10-05-nemik-calendar-write-unit.md (no luthen session was live) asking for a claiming waypoint and the unit. | 2026-10-08: 2026-10-08: title shortened (was bundled, nemik-check W201 warning); full ask unchanged: a unit every few minutes so a waypoint that changes or closes updates or deletes its event, asked of luthen as for the Tasks unit W234.",
       "issued_at": "2026-10-05T14:36:03Z",
       "minted_during": "tick",
       "caused_by": "life-c5",
-      "last_worked": "2026-10-05T14:36:25Z",
-      "ticks_blocked": 0,
+      "last_worked": "2026-10-08T13:42:13Z",
+      "ticks_blocked": 3,
       "completed": null
     },
     {
@@ -3802,7 +3802,7 @@
     {
       "symbol": "W204",
       "title": "nemik typing: src/nemik/alarm.py (3 findings)",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W212"
       ],
@@ -3810,22 +3810,22 @@
         "debt"
       ],
       "blocked_on": [],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Whole-file Write clearing 3 finding(s) so the edit gate stops refusing it, then lower the ledger row",
-      "evidence": "2026-10-05: ledger row gone",
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-05: ledger row gone | 2026-10-07: 2026-10-07 host: mikemol-pycheck --census nemik no longer lists src/nemik/alarm.py (0 findings; the card said 3). Closed on that reading.",
       "issued_at": "2026-10-05T16:39:44Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-05T23:29:00Z",
+      "last_worked": "2026-10-07T19:34:05Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261007T193405Z",
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
     },
     {
       "symbol": "W205",
       "title": "nemik typing: src/nemik/manifest.py (38 findings)",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W214"
       ],
@@ -3833,22 +3833,22 @@
         "debt"
       ],
       "blocked_on": [],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Whole-file Write clearing 38 finding(s) so the edit gate stops refusing it, then lower the ledger row",
-      "evidence": "2026-10-05: ledger row gone",
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-05: ledger row gone | 2026-10-07: 2026-10-07 host: mikemol-pycheck --census nemik no longer lists src/nemik/manifest.py (0 findings; the card said 38). Closed on that reading.",
       "issued_at": "2026-10-05T16:39:44Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-05T23:29:01Z",
+      "last_worked": "2026-10-07T19:34:05Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261007T193405Z",
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
     },
     {
       "symbol": "W206",
       "title": "nemik typing: src/nemik/blocks.py (96 findings)",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W207"
       ],
@@ -3856,22 +3856,22 @@
         "debt"
       ],
       "blocked_on": [],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Whole-file Write clearing 96 finding(s) so the edit gate stops refusing it, then lower the ledger row",
-      "evidence": "2026-10-05: ledger row gone",
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-05: ledger row gone | 2026-10-07: 2026-10-07 host: mikemol-pycheck --census nemik no longer lists src/nemik/blocks.py (0 findings; the card said 96). Closed on that reading.",
       "issued_at": "2026-10-05T16:39:44Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-05T23:29:00Z",
+      "last_worked": "2026-10-07T19:34:06Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261007T193406Z",
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
     },
     {
       "symbol": "W207",
       "title": "nemik typing: src/nemik/check.py (11 findings)",
-      "status": "blocked",
+      "status": "ready",
       "enables": [
         "W218",
         "W219",
@@ -3884,11 +3884,8 @@
       "touches": [
         "debt"
       ],
-      "blocked_on": [
-        "W215",
-        "W206"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "Waits on 2 debt file(s) to clean first",
       "evidence": "2026-10-05: ledger row gone",
       "issued_at": "2026-10-05T16:39:44Z",
@@ -3944,7 +3941,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 3,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -3969,7 +3966,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 3,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -3994,7 +3991,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 3,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4009,17 +4006,14 @@
       "touches": [
         "debt"
       ],
-      "blocked_on": [
-        "W204",
-        "W207"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "Waits on 4 debt file(s) to clean first",
-      "evidence": "",
+      "evidence": "2026-10-08: 2026-10-08: returned to ready by the nemik session working W228 at the operator's direction (operator: W228 is the one to focus on). No nemik session was live behind the working mark (ListAgents: github-28, mtools-25 only), and the md0 HOLD stops builds and tests anyway. Resume it when the HOLD is released.",
       "issued_at": "2026-10-05T16:39:45Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-05T23:29:01Z",
+      "last_worked": "2026-10-08T14:32:04Z",
       "ticks_blocked": 0,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
@@ -4045,7 +4039,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 3,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4059,7 +4053,6 @@
         "debt"
       ],
       "blocked_on": [
-        "W205",
         "W223",
         "W208"
       ],
@@ -4070,7 +4063,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 3,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4078,7 +4071,7 @@
     {
       "symbol": "W215",
       "title": "nemik typing: src/nemik/adoption.py (27 findings)",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W207"
       ],
@@ -4086,15 +4079,15 @@
         "debt"
       ],
       "blocked_on": [],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Whole-file Write clearing 27 finding(s) so the edit gate stops refusing it, then lower the ledger row",
-      "evidence": "",
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-07: 2026-10-07 host: mikemol-pycheck --census nemik no longer lists src/nemik/adoption.py (0 findings; the card said 27). Closed on that reading.",
       "issued_at": "2026-10-05T18:20:43Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-05T23:29:00Z",
+      "last_worked": "2026-10-07T19:34:07Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261007T193407Z",
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
     },
@@ -4164,7 +4157,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 3,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4189,7 +4182,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 3,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4214,7 +4207,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 3,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4239,7 +4232,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 3,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4262,7 +4255,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 3,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4292,7 +4285,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 3,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4341,7 +4334,7 @@
     {
       "symbol": "W226",
       "title": "Rebuild nemik's own venv (./setup.sh) so nemik-rank, nemik-check and nemik-serve resolve the root workstream (github:W<n>), then hand luthen the new build for the cluster image",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W224"
       ],
@@ -4353,20 +4346,21 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Run ./setup.sh (bazel build //:.venv) in nemik, confirm nemik-rank github prints the host queue with no PYTHONPATH, run the test suite from the built venv, then letter luthen-observability with the build for the cluster image",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-07: 2026-10-07 host: bazel build //:.venv rebuilt (nemik b59c8ee tree); nemik-rank github prints the host queue with no PYTHONPATH (W14, W1, W2, W10, W11, W13); tests/test_endpoint.py and test_witnesses.py 17 passed from the built venv. Not run here: the chromium-backed tests. The cluster image handoff to luthen is folded into luthen-observability:W648.",
       "issued_at": "2026-10-05T23:41:09Z",
       "minted_during": "interrupt",
       "caused_by": "W224",
-      "last_worked": "2026-10-05T23:41:14Z",
+      "last_worked": "2026-10-07T19:32:46Z",
       "ticks_blocked": 0,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
-      "vector_source": "agent"
+      "vector_source": "agent",
+      "completed": "20261007T193246Z"
     },
     {
       "symbol": "W227",
       "title": "nemik-witnesses reads every promql witness as undefined unless NEMIK_VM_URL is set, and nothing sets it",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "witnesses",
@@ -4375,13 +4369,384 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Landed in the next commit: nemik.endpoint.export_defaults plus the nemik.witnesses_cli entry point (console script repointed in pyproject.toml and BUILD.bazel); measured: nemik-witnesses with no NEMIK_* environment now evaluates all six declared promql witnesses (false: none holds yet). Remaining: run nemik-witnesses --apply from luthen's timer so witnessed waypoints close without the host session (luthen-observability card to mint), and the same default for nemik-metrics and any other reader of NEMIK_VM_URL.",
-      "evidence": "2026-10-07: 2026-10-07 host reading. nemik-witnesses printed 'undefined: cannot observe promql[...]' for all seven declared witnesses (luthen-observability W306, W358, W376, W630, W631, W632 and the new W640) because witnesses.py _get returns None when NEMIK_VM_URL is unset (its docstring says the address comes from the environment, on luthen from checks/endpoints_query --side host). Run by hand with NEMIK_VM_URL set to the vmsingle address that endpoints_query prints, the same seven evaluate: W376 true (its dry-run metric appeared after the operator's host apply) and --apply marked it done with the witness recorded; the others false. So witnessed waypoints have been unable to close by themselves, and W306, W358 and W376 sat blocked on a series that existed. Nothing in the repo sets the variable: no unit, no wrapper. Also checked: the same _get serves NEMIK_VMALERT_URL for the alert observer. | 2026-10-07: 2026-10-07 host: started on the operator's 'no cards in other idle repos?'. Held the .venv rebuild while kine p99 was 4.7 s (KINE-HIGH from the paperkit sweep plus a second luthen gate); stopped the luthen W645 commit, watching for recovery. | 2026-10-07: 2026-10-07 host: 6 new tests in tests/test_endpoint.py plus 11 in test_witnesses pass (17 passed). Not edited: witnesses.py (240 findings; the edit gate refuses it). bazel/venv.bzl takes console scripts from BUILD.bazel, not pyproject.toml, so both were changed.",
+      "next_bounded_step": null,
+      "evidence": "2026-10-07: 2026-10-07 host reading. nemik-witnesses printed 'undefined: cannot observe promql[...]' for all seven declared witnesses (luthen-observability W306, W358, W376, W630, W631, W632 and the new W640) because witnesses.py _get returns None when NEMIK_VM_URL is unset (its docstring says the address comes from the environment, on luthen from checks/endpoints_query --side host). Run by hand with NEMIK_VM_URL set to the vmsingle address that endpoints_query prints, the same seven evaluate: W376 true (its dry-run metric appeared after the operator's host apply) and --apply marked it done with the witness recorded; the others false. So witnessed waypoints have been unable to close by themselves, and W306, W358 and W376 sat blocked on a series that existed. Nothing in the repo sets the variable: no unit, no wrapper. Also checked: the same _get serves NEMIK_VMALERT_URL for the alert observer. | 2026-10-07: 2026-10-07 host: started on the operator's 'no cards in other idle repos?'. Held the .venv rebuild while kine p99 was 4.7 s (KINE-HIGH from the paperkit sweep plus a second luthen gate); stopped the luthen W645 commit, watching for recovery. | 2026-10-07: 2026-10-07 host: 6 new tests in tests/test_endpoint.py plus 11 in test_witnesses pass (17 passed). Not edited: witnesses.py (240 findings; the edit gate refuses it). bazel/venv.bzl takes console scripts from BUILD.bazel, not pyproject.toml, so both were changed. | 2026-10-07: Landed b59c8ee. The timer that runs nemik-witnesses --apply is a luthen-observability waypoint (host unit and files.json entry), minted from here; nemik-metrics and other NEMIK_VM_URL readers are a separate nemik follow-up if any exist.",
       "issued_at": "2026-10-07T14:46:18Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-10-07T19:27:41Z",
+      "last_worked": "2026-10-07T19:31:36Z",
       "ticks_blocked": 0,
+      "completed": "20261007T193136Z"
+    },
+    {
+      "symbol": "W228",
+      "title": "nemik-check evaluates the realizability policy over every queue and prints each waypoint's coordinate and its residue ledger",
+      "status": "blocked",
+      "enables": [],
+      "touches": [
+        "nemik",
+        "policy",
+        "realizability"
+      ],
+      "blocked_on": [
+        "W230",
+        "W231",
+        "W232",
+        "W234",
+        "W235",
+        "W236",
+        "W243"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Agree the shared verdict schema and the open questions in .claude/design/W228-realizability-read-side.md with mtools-25 (W848) and luthen-observability (W666), then, after the md0 RELEASE, the policy file and its tests",
+      "evidence": "2026-10-08: 2026-10-08: design note written under the md0 HOLD: .claude/design/W228-realizability-read-side.md (one policy with a transition input for the writer and a state input for this read side; gate-by-gate mapping onto nemik's existing shapes: reachable is mostly what UnclaimedBlock/LandedBlocker/UnresolvedBlocker/UmbrellaBlock/OperatorAsk/CausedBy/EdgeIntoDropped already compute, constructible is half there, observable and coverable are new; graph facts stay in Python and reach Rego as booleans, unknown is residue never a pass; one batched opa eval; surface nemik-check --realizability and a metrics gauge). No code, no build, no test run: the HOLD (luthen W644 evidence: operator order relayed by github-28, no gate, commit, bazel build, test run or tree scan until RELEASE) is in force per mtools:W848 today. I ran two recursive searches over ~/github (a find at depth 4 and a grep for the policy) before I found the HOLD; reported to the host. | 2026-10-08: 2026-10-08: stigmaturgy (operator requirement relayed by github-28: this whole thing should support stigmaturgy): design note extended, four consequences (verdicts are persisted marks read with provenance, residue is an attractor in nemik-rank, marks decay by max_age_seconds with the time an explicit input, hosts leave marks too: W233) become W234, W235, W236 under this card. | 2026-10-08: 2026-10-08: operator ruling on the wake tension (relayed by github-28, in the operator's words): 'nemik-wake wakes; a sleeping session has no autonomy, being woken gives it such.' Waking is not dispatch; nemik-wake and its nudges stay and assign nothing; salience-not-authority holds after the wake. No change to the design; recorded in the note. The operator's outside assessment that named stigmaturgy is at ~/github/assessment.txt (citations unchecked; not relied on). luthen recorded the host-apply shape on its W665 as agreed (no argvs, effect per kind including start-heavy, restarts as {unit, verb}).",
+      "issued_at": "2026-10-08T13:38:08Z",
+      "minted_during": "interrupt",
+      "caused_by": "luthen-observability:W666",
+      "last_worked": "2026-10-08T14:09:03Z",
+      "ticks_blocked": 1,
+      "completed": null
+    },
+    {
+      "symbol": "W229",
+      "title": "Shared verdict schema for the realizability policy agreed with mtools:W848 and luthen-observability:W666 (field names, lifecycle gates, deferral field)",
+      "status": "done",
+      "enables": [
+        "W228",
+        "W230"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-08: 2026-10-08: design note sent to mtools-25 (for W848) and github-28 (luthen host, for W666) with five open questions; waiting on their answers. | 2026-10-08: 2026-10-08: mtools-25 answered (mtools:W848): union verdict {ref, level, reference_arm, residue:[{gate, reference_arm, what, closes_by}]}, level=coverable with empty residue = runtime-valid, no admitted bool (nemik confirmed; luthen's host agreed an earlier form and mtools relays this one so W666 emits it); deferral = writer-owned deferred:[{gate, reference_arm, what, closes_by}], no waiver field, waive/waived keys are a violation, drop carries drop.gate/reference_arm/reason; policy file = package data mikemol/pathsforward/policy/realizability.rego read from the vendored wheel; mtools units W849 (fields incl. deferred), W850 (policy), W851 (writer hook). Their runner is pytestspec/opa.py (pinned opa, 'opa version' must equal PINNED or it raises, opa eval --format json --stdin-input); a fleet batch is one eval with input.items and a per-item rule plus a set rule. Recorded in the design note. Still open, asked back: the 'none' level token, the package and rule names (for W850), whether their PINNED equals nemik's v1.20.2, and a sample queue record with deferred and drop for W849. luthen's W666 agreement still outstanding. | 2026-10-08: 2026-10-08: mtools-25 answered my three follow-ups (recorded in mtools:W850 and W849): levels none, constructible, reachable, observable, coverable; a residue entry's reference_arm overrides the verdict's; ref stays per item. Package data.realizability, per-item rule data.realizability.verdict, set rule data.realizability.verdicts (list in input.items order). pytestspec/opa.py PINNED = 1.20.2 equals nemik's v1.20.2 (the sha256 stays nemik's). Sample records with deferred and drop.* are in W849's evidence (illustrative). Rule for nemik's adapter: an absent field means not declared, never clean, so the state document carries null for a field the record lacks. All in the design note. Only luthen's agreement (mtools relays it, W666) is outstanding. | 2026-10-08: 2026-10-08: the shared verdict schema is agreed with mtools-25 (mtools:W848): {ref, level, reference_arm, residue:[{gate, reference_arm, what, closes_by, closes_ref?}]}, levels none/constructible/reachable/observable/coverable, deferral as a writer-owned list, package data.realizability with verdict and verdicts rules, opa 1.20.2 both sides, marks in .claude/paths-forward.marks.jsonl; all in the design note. Landed; the one remainder (luthen W666 emitting it) is W243. Closed rather than advanced a third time (ATOMIZE).",
+      "issued_at": "2026-10-08T13:43:14Z",
+      "minted_during": "tick",
+      "caused_by": "W228",
+      "last_worked": "2026-10-08T14:09:03Z",
+      "ticks_blocked": 0,
+      "completed": "20261008T140903Z"
+    },
+    {
+      "symbol": "W230",
+      "title": "Run mtools' realizability policy as one batch: nemik state documents in, verdicts out, tested against the pinned opa",
+      "status": "blocked",
+      "enables": [
+        "W228",
+        "W231"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "mtools:W850"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "2026-10-08: 2026-10-08: the policy file is mtools' (mtools:W850, package data in the pathsforward wheel); this card is nemik's batch run and tests against it, so it waits on that file and on the md0 RELEASE.",
+      "issued_at": "2026-10-08T13:43:15Z",
+      "minted_during": "tick",
+      "caused_by": "W228",
+      "last_worked": "2026-10-08T13:45:27Z",
+      "ticks_blocked": 2,
+      "completed": null
+    },
+    {
+      "symbol": "W231",
+      "title": "nemik-check --realizability: build the input documents from the graph, one batched opa eval, print each waypoint's coordinate and ledger",
+      "status": "ready",
+      "enables": [
+        "W228",
+        "W232"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-08T13:43:15Z",
+      "minted_during": "tick",
+      "caused_by": "W228",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W232",
+      "title": "nemik-metrics gauge nemik_realizability_waypoints{repo,coordinate} and the skill row for nemik-check --realizability",
+      "status": "ready",
+      "enables": [
+        "W228"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-08T13:43:15Z",
+      "minted_during": "tick",
+      "caused_by": "W228",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W233",
+      "title": "Host-apply DAG: decide who models host/files.json rows, activate kinds and unit ordering as edges and witnesses a waypoint can cite (luthen W665)",
+      "status": "blocked",
+      "enables": [
+        "luthen-observability:W665"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "luthen-observability"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "When luthen's real host-apply.json exists: a reader (rows, kinds, restarts as graph nodes and edges), host:<id> resolved like cal: refs, the apply observer for witnesses, tests on the sample; after the md0 RELEASE",
+      "evidence": "2026-10-08: 2026-10-08: answered to github-28: luthen exports host-apply.json (rows, activate kinds, after/restarts edges, applied state) beside liveness.json; nemik reads it, rows are citable as host:<id>, and row-applied becomes a witness over a new closed observer fact. Waiting on luthen for the activate-kind vocabulary and a sample export. | 2026-10-08: 2026-10-08: luthen host (github-28) sent the 45-kind vocabulary grouped by effect and an illustrative hand-made host-apply.json. Design recorded in the note (section 'Host apply as a mark'): kinds table plus rows pointing at a kind, restarts as structured {unit, verb}, rows cite as host:<id>, row-applied is a witness fact input.apply[<id>] with as_of so decay applies, never served in the first cut. Asked of luthen: omit argvs from the export, add an effect class per kind, keep row ids unique and stable. Still waiting on luthen to generate a real export; home.mount and srv-media.mount are not rows until luthen-observability:W663.",
+      "issued_at": "2026-10-08T13:43:16Z",
+      "minted_during": "tick",
+      "caused_by": "luthen-observability:W665",
+      "last_worked": "2026-10-08T13:52:29Z",
+      "ticks_blocked": 2,
+      "completed": null
+    },
+    {
+      "symbol": "W234",
+      "title": "Read verdict marks, not private re-derivations: print the persisted per-transition mark with its provenance (mark or derived) and flag a stale mark",
+      "status": "blocked",
+      "enables": [
+        "W228"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "mtools:W851"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "2026-10-08: 2026-10-08: operator requirement relayed by github-28: verdicts are read from the persisted marks, not re-derived privately. Waits on the writer's per-transition ledger (mtools:W851): its location and line format are asked of mtools. Where no mark exists (every card minted before the hook) the verdict is printed as derived. | 2026-10-08: 2026-10-08: mtools-25 agreed (mtools:W849, W852): marks file .claude/paths-forward.marks.jsonl beside the queue, append-only, one JSON object per transition, apart from the text .ledger. Record {as_of, op, symbol, policy_version (sha256 of realizability.rego), input_digest (sha256 of the canonical input), verdict:{ref, level, reference_arm, residue[{gate, reference_arm, what, closes_by, closes_ref?}]}}; as_of is the same now the policy received, so a mark re-derives and a stale one (as_of older than max_age_seconds, or another policy_version) is detectable. The file quotes waypoint text, so it stays out of nemik-serve, the export and the static build. Recorded in the design note.",
+      "issued_at": "2026-10-08T13:50:20Z",
+      "minted_during": "tick",
+      "caused_by": "luthen-observability:W666",
+      "last_worked": "2026-10-08T13:52:00Z",
+      "ticks_blocked": 2,
+      "completed": null
+    },
+    {
+      "symbol": "W235",
+      "title": "Replace nemik-rank's objectives with the g-calculus current-flow model after an audit; residue edges (closes_ref) are its first new term",
+      "status": "blocked",
+      "enables": [
+        "W228"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "W237",
+        "W238",
+        "W240",
+        "W241",
+        "W242",
+        "W244"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "2026-10-08: 2026-10-08: needs closes_by to be machine-resolvable (a repo:W<n>), not only prose: asked of mtools as a structured part of the residue entry (W849). Then a new rank objective under the configurable composition (rank-weights.toml [order]). | 2026-10-08: 2026-10-08: mtools-25 agreed (W849): a residue entry carries an optional closes_ref (repo:W<n>, validated like caused_by) beside the prose closes_by; nothing parses the prose, so nemik-rank reads closes_ref only. | 2026-10-08: 2026-10-08: luthen host's reading of the gcalculus model recorded in the design note and split into W237 (design, waits on gcalculus) and W238 (implementation); two decays kept apart: hard staleness for safety facts and verdict marks (W236), smooth half-life decay for salience marks. | 2026-10-08: 2026-10-08: operator ruling relayed by github-28: the model REPLACES the existing ranking after an audit (not one more objective). Sequence W239 (express each objective), W240 (audit both over the real queues, every disagreement recorded), W241 (switch, old ranking kept as the comparison arm until then). Cost and determinism (operator on W237 d): measurements apply to smaller graphs glued together, so each repo's queue is reduced to its ports and the reductions are glued (W242).",
+      "issued_at": "2026-10-08T13:50:21Z",
+      "minted_during": "tick",
+      "caused_by": "luthen-observability:W666",
+      "last_worked": "2026-10-08T14:17:54Z",
+      "ticks_blocked": 1,
+      "completed": null
+    },
+    {
+      "symbol": "W236",
+      "title": "Decay: nemik passes input.now and the as_of of each mark and fact, and prints the as_of it used; a stale mark floors its gate, never passes",
+      "status": "blocked",
+      "enables": [
+        "W228"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "W230",
+        "mtools:W850"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "2026-10-08: 2026-10-08: the policy takes the time as an input (input.now) so a verdict stays a pure function of its input; max_age_seconds is the policy's (mtools:W850), the batch run is W230.",
+      "issued_at": "2026-10-08T13:50:22Z",
+      "minted_during": "tick",
+      "caused_by": "luthen-observability:W666",
+      "last_worked": "2026-10-08T13:50:33Z",
+      "ticks_blocked": 2,
+      "completed": null
+    },
+    {
+      "symbol": "W237",
+      "title": "Residue salience as effective conductance: settle the pull's sources, the edge weights (declared in rank-weights.toml) and how the closes objective joins the composed order, with gcalculus",
+      "status": "blocked",
+      "enables": [
+        "W235",
+        "W238"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "gcalculus:W208"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "2026-10-08: 2026-10-08: operator points at gcalculus's math model (relayed by github-28); EXPLAINED.md definitions and arithmetic checked (OR=a+b, AND=ab/(a+b), elimination = minimal dissipation, AND(g,g)=g/2, OR(a,a)=2a). Adopted as the design basis; sources of the pull, edge weights, how it joins the composed order, cost and determinism, and how nemik consumes gcalculus are NOT defined: design note section 'Residue salience as effective conductance'. Letter left in gcalculus/inbox (no gcalculus session live) asking the four questions; it asks gcalculus to cite nemik:W237 with --enables. | 2026-10-08: 2026-10-08: github-28 suggested the answer to the sources question: demand injected at residue-bearing waypoints (current sources weighted by gate), a super-sink grounded through the ready frontier, a ready card's salience = the current through it (conserved: total salience = total demand; per-edge current is the kept decomposition; unreachable residue = stranded demand, a reachable-gate finding). Adopted as the working answer; one reduced-Laplacian solve gives every card. Raised, not settled: a resistor network is symmetric but dependencies are directional (undirected flow vs a directed absorbing walk, which is not the calculus gcalculus models); the sink's per-card conductance; demand weights per gate and the half-life decay of an aged residue are declared data. In the design note. | 2026-10-08: 2026-10-08: gcalculus claimed this with gcalculus:W208 (its full answer waits on the md0 cutover); its partial answer, read from its queue, is recorded in the design note: (1) no published package, stdlib-only with no build-system, and no per-edge-current or grounded-sink API (it has r_eff, laplacian, eliminate, freeze(keep=) and glue of potential patches); (2) undirected flow LEAKS demand to non-prerequisites (counterexample: a needs b, d needs a and e, b and e ready: 2/5 of a's demand exits through e), and a directed variant is not claimed by gcalc, so the model as-is is not 'demand flows toward what must be done first'; (3) dense exact Fraction solve is about cubic (n=120 7.5 s, n=240 85 s, 769-bit denominators), too slow for hundreds of nodes, so determinism must come from a fixed elimination order, not exactness. | 2026-10-08: 2026-10-08: operator, directly: the model is already directed (blocks vs enables). The symmetry question is closed: demand flows only from a card to what it needs and is absorbed at the ready frontier, so gcalculus:W208's leak (a symmetric-link counterexample) does not apply. On an acyclic graph demand propagates in one pass in dependency order (exact fractions affordable); a cycle needs a small solve inside its strongly connected component. Exposed and asked of the operator: blocked_on [a, e] is conjunctive (needs both), so does D's demand go in full to each prerequisite (the old downstream weight; conservation lost) or split (conserved; each looks half as important)? OR composes alternatives, which conjunctive prerequisites are not. | 2026-10-08: 2026-10-08: operator pointed at gcalculus's differential channels (+evidence and -evidence). Source read: gcalculus inbox 2026-08-21 letter, Q2 the differential pair (class is lossy, the retained pair tells ignorance from conflict, contradiction is a quantity). My reading, recorded in the note and NOT yet confirmed: each dependency carries + evidence (A enables B) and - evidence (B blocked_on A); direction is their differential; the leak came from collapsing the pair to one symmetric conductance; the pair also carries agreement, ignorance (one side only: UnclaimedBlockShape) and conflict (the sides disagree: LandedBlocker, EdgeIntoDropped) as quantities. Near-collision finding argues for exact arithmetic where the directed pass makes it affordable. The conjunctive question is restated in those terms. | 2026-10-08: 2026-10-08: operator ruled the conjunctive question: SPLIT, conserved ('let the physics do the work'), and 'the nodal solve answers this question as the solve frontier advances; you only get confused because you try to solve in advance of the frontier.' No split rule is fixed in advance: node elimination ordered from the ready frontier inward decides each node's division when it is eliminated, and the next solve re-divides as cards land. The audit's diamond disagreements are decided for the model. My earlier 'one pass in dependency order' is corrected: true only for trees and series-parallel parts; reconvergent prerequisites need the nodal solve. With sources, direction, Pareto, operator asks and the split ruled, what remains here is gcalculus's answer on packaging (gcalculus:W208) and the declared edge weights and sink wiring.",
+      "issued_at": "2026-10-08T14:02:25Z",
+      "minted_during": "tick",
+      "caused_by": "luthen-observability:W666",
+      "last_worked": "2026-10-08T14:26:28Z",
+      "ticks_blocked": 1,
+      "completed": null
+    },
+    {
+      "symbol": "W238",
+      "title": "Current-flow solver for nemik-rank: deterministic, law tests (series below the weakest link, parallel additive, duplicates double, open circuit), measured on the real graph",
+      "status": "blocked",
+      "enables": [
+        "W235",
+        "W242"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "W237"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "2026-10-08: 2026-10-08: needs the design card W237 (sources, weights, composition, consumption) and a structured closes_ref (mtools:W849); then measure the open graph's size before choosing exact elimination over a deterministic sparse solve; after the md0 RELEASE. | 2026-10-08: 2026-10-08: from gcalculus:W208: exact fractions are out at this size (cubic; n=240 takes 85 s), so the solver is floating point with a fixed elimination order for determinism (nemik:W119); the grounded-sink current call does not exist in gcalc, so either gcalculus adds it or this card implements it and tests the laws gcalculus names; and the model must be directed (or the leak accepted) per the counterexample in the design note. | 2026-10-08: 2026-10-08: with the model directed (operator), the solver is a single propagation pass in dependency order over each acyclic part, plus a small linear solve per strongly connected component for cycles; exact fractions are affordable again for the acyclic pass. The diamond rule (full demand to each conjunctive prerequisite vs a split) is the open input, asked of the operator.",
+      "issued_at": "2026-10-08T14:02:33Z",
+      "minted_during": "tick",
+      "caused_by": "luthen-observability:W666",
+      "last_worked": "2026-10-08T14:22:37Z",
+      "ticks_blocked": 1,
+      "completed": null
+    },
+    {
+      "symbol": "W239",
+      "title": "Express each existing ranking objective (operator asks, bands, downstream weight, Pareto fronts) as a statement about the current-flow model, or find where it cannot be",
+      "status": "done",
+      "enables": [
+        "W235",
+        "W240"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-08: 2026-10-08: first-pass mapping written in the design note (section 'Audit, then REPLACE'): downstream weight is exact where each waiter has one route to the frontier and differs on a diamond (old double count vs the model's conserved split); band is the card's own demand (the old band*100+weight scalarization is linear, so exact in form); Pareto fronts have no counterpart (one scalar; a worked example where front-then-scalarize and the scalar disagree); operator asks first has no counterpart as a flow (a strict tier is the limit of a weight going to infinity). These are PREDICTIONS: the audit (W240) is what tests them, and gcalculus should confirm the statements. | 2026-10-08: 2026-10-08: CORRECTION (operator, directly: the gcalculus model provides Pareto emergently). My first pass said Pareto fronts have no counterpart; that was wrong, it only looked absent because I collapsed each card to one scalar. Keeping the fibre (each card's current split by source class: band, downstream class, operator ask, residue gate) gives a componentwise dominance partial order whose non-dominated sets are the Pareto fronts; the scalar is the final collapse that orders inside a front. The audit compares front membership as well as order. Design note row corrected.",
+      "issued_at": "2026-10-08T14:07:07Z",
+      "minted_during": "tick",
+      "caused_by": "luthen-observability:W666",
+      "last_worked": "2026-10-08T14:20:51Z",
+      "ticks_blocked": 0,
+      "completed": "20261008T140717Z"
+    },
+    {
+      "symbol": "W240",
+      "title": "Audit: run the old ranking and the model over the real queues, record every disagreement with its reason (a bug in the old ranking or a missing term in the model, never averaged)",
+      "status": "blocked",
+      "enables": [
+        "W235",
+        "W241"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "W238",
+        "W242"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-08T14:07:08Z",
+      "minted_during": "tick",
+      "caused_by": "luthen-observability:W666",
+      "last_worked": "2026-10-08T14:07:19Z",
+      "ticks_blocked": 2,
+      "completed": null
+    },
+    {
+      "symbol": "W241",
+      "title": "Switch nemik-rank to the current-flow model once the audit is decided, keeping the old ranking as the comparison arm until the switch",
+      "status": "blocked",
+      "enables": [
+        "W235"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "W240",
+        "W244"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-08T14:07:08Z",
+      "minted_during": "tick",
+      "caused_by": "luthen-observability:W666",
+      "last_worked": "2026-10-08T14:17:49Z",
+      "ticks_blocked": 1,
+      "completed": null
+    },
+    {
+      "symbol": "W242",
+      "title": "Reduce each repo's queue to its ports (Kron reduction) and glue the reductions for the fleet solve, cached by queue digest",
+      "status": "blocked",
+      "enables": [
+        "W235",
+        "W240"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "W238"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "2026-10-08: 2026-10-08: operator on W237 (d): measurements apply to smaller graphs glued together. Design recorded (section 'Cost and determinism'): per-repo Kron reduction to ports with the equivalent injected currents, the sink is a port of every repo, cross-repo edges live in the glue layer so a reduction depends only on its own queue and is cached by its digest, per-card current by local back-substitution, exact arithmetic or a fixed order for bit-for-bit determinism. The host cited gcalculus's Agda proof that any split gives the same answer; I have not read it and will cite it only once found (asked of gcalculus, with whether the package exposes reduce-to-ports and glue with the obstruction). | 2026-10-08: 2026-10-08: gcalculus:W208 reports freeze(keep=) (Kron to ports) exists but glue_patches/Obstruction glue POTENTIAL PATCHES, not port networks, and exact solves are cubic; so the per-repo reduction bounds the cost by one repo's size but exactness is dropped for a fixed-order floating solve, and the port-network glue may have to be nemik's own.",
+      "issued_at": "2026-10-08T14:07:09Z",
+      "minted_during": "tick",
+      "caused_by": "luthen-observability:W666",
+      "last_worked": "2026-10-08T14:14:24Z",
+      "ticks_blocked": 2,
+      "completed": null
+    },
+    {
+      "symbol": "W243",
+      "title": "luthen-observability:W666 emits the agreed verdict shape (ref, level, reference_arm, residue with closes_by and optional closes_ref)",
+      "status": "blocked",
+      "enables": [
+        "W228"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "luthen-observability:W666"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "2026-10-08: 2026-10-08: the remainder of W229: mtools-25 agreed the union shape and it is recorded in the design note; the luthen host agreed an earlier form (ref/level/reference_arm/residue[gate, reference_arm, closes_by]) and github-28 has used the same words since, but no explicit confirmation of the final union (closes_by plus the optional closes_ref) and no W666 emitting it yet.",
+      "issued_at": "2026-10-08T14:08:55Z",
+      "minted_during": "tick",
+      "caused_by": "W229",
+      "last_worked": "2026-10-08T14:09:02Z",
+      "ticks_blocked": 1,
+      "completed": null
+    },
+    {
+      "symbol": "W244",
+      "title": "Operator asks inside the model: show what an ask needs (its current's path to the frontier) and what it overrides (whose share falls), so the operator's reply refactors the graph instead of a strict tier",
+      "status": "blocked",
+      "enables": [
+        "W235"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "W238"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "2026-10-08: 2026-10-08: operator ruling, given directly in this session: the operator-ask objective is neither a strict tier outside the model nor an infinite weight; the model tells the operator what an ask needs and what it overrides, and the operator's interaction refactors the graph so asks live inside the model and respond to it. Needs the solver (W238) and a DIRECTED model (the undirected leak would list non-prerequisites as what the ask needs). The strict tier (nemik:W111) stays until the switch (W241). Design note section 'Operator asks inside the model'.",
+      "issued_at": "2026-10-08T14:17:42Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": "2026-10-08T14:17:48Z",
+      "ticks_blocked": 1,
       "completed": null
     }
   ],
@@ -4429,9 +4794,12 @@
       "recoverable": true
     }
   ],
-  "job_id": "eb49bf5c",
-  "heartbeat": "2026-10-02T16:54:36Z",
-  "lock": null,
-  "predecessor_job_id": "07a2b13b",
+  "job_id": "63bbcf8b",
+  "heartbeat": "2026-10-08T14:30:28Z",
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-10-08T14:31:22Z"
+  },
+  "predecessor_job_id": "eb49bf5c",
   "leases": []
 }
