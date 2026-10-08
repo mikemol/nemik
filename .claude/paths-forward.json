@@ -4438,12 +4438,12 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "mtools:W850 landed at 472f940: bump the vendored mtools wheels from 03749d5 to a sha at or after 472f940 (vendor/wheels/README.md), rebuild //:.venv, confirm data.realizability ships in the pathsforward wheel, then write the batch run and its tests",
-      "evidence": "2026-10-08: 2026-10-08: the policy file is mtools' (mtools:W850, package data in the pathsforward wheel); this card is nemik's batch run and tests against it, so it waits on that file and on the md0 RELEASE. | 2026-10-08: W850 done (mtools 472f940); the pin 03749d5 predates it, so the next step is the pin bump",
+      "next_bounded_step": "pin is at 472f940 and the built .venv ships policy/realizability.rego; now write the batch run (nemik state documents in, verdicts out, one opa eval over input.items) and its tests against the pinned opa",
+      "evidence": "2026-10-08: 2026-10-08: the policy file is mtools' (mtools:W850, package data in the pathsforward wheel); this card is nemik's batch run and tests against it, so it waits on that file and on the md0 RELEASE. | 2026-10-08: W850 done (mtools 472f940); the pin 03749d5 predates it, so the next step is the pin bump | 2026-10-08: eba08b7: pin bump to 472f940, 38/38 gate; .venv/lib/python3.13/site-packages/mikemol/pathsforward/policy/realizability.rego present",
       "issued_at": "2026-10-08T13:43:15Z",
       "minted_during": "tick",
       "caused_by": "W228",
-      "last_worked": "2026-10-08T14:40:37Z",
+      "last_worked": "2026-10-08T14:45:02Z",
       "ticks_blocked": 0,
       "completed": null
     },
@@ -4793,10 +4793,7 @@
   ],
   "job_id": "63bbcf8b",
   "heartbeat": "2026-10-08T14:30:28Z",
-  "lock": {
-    "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-08T14:40:16Z"
-  },
+  "lock": null,
   "predecessor_job_id": "eb49bf5c",
   "leases": []
 }
