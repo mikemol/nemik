@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 244,
+  "counter": 245,
   "waypoints": [
     {
       "symbol": "W1",
@@ -4430,7 +4430,7 @@
     {
       "symbol": "W230",
       "title": "Run mtools' realizability policy as one batch: nemik state documents in, verdicts out, tested against the pinned opa",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W228",
         "W231"
@@ -4438,14 +4438,14 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "pin is at 472f940 and the built .venv ships policy/realizability.rego; now write the batch run (nemik state documents in, verdicts out, one opa eval over input.items) and its tests against the pinned opa",
-      "evidence": "2026-10-08: 2026-10-08: the policy file is mtools' (mtools:W850, package data in the pathsforward wheel); this card is nemik's batch run and tests against it, so it waits on that file and on the md0 RELEASE. | 2026-10-08: W850 done (mtools 472f940); the pin 03749d5 predates it, so the next step is the pin bump | 2026-10-08: eba08b7: pin bump to 472f940, 38/38 gate; .venv/lib/python3.13/site-packages/mikemol/pathsforward/policy/realizability.rego present",
+      "next_bounded_step": null,
+      "evidence": "2026-10-08: 2026-10-08: the policy file is mtools' (mtools:W850, package data in the pathsforward wheel); this card is nemik's batch run and tests against it, so it waits on that file and on the md0 RELEASE. | 2026-10-08: W850 done (mtools 472f940); the pin 03749d5 predates it, so the next step is the pin bump | 2026-10-08: eba08b7: pin bump to 472f940, 38/38 gate; .venv/lib/python3.13/site-packages/mikemol/pathsforward/policy/realizability.rego present | 2026-10-08: collapse: the batch run already exists in the pinned wheel as --certify (mtools:W850 certify.py + opa_eval.py; several symbols in one opa eval, verdicts in order, exit nonzero on residue); nemik did not rebuild it. Its nemik-side witness is W245 (tests/test_certify.py). First real findings applied: W237 shortened and given a next step, W233 now cites luthen-observability:W665.",
       "issued_at": "2026-10-08T13:43:15Z",
       "minted_during": "tick",
       "caused_by": "W228",
-      "last_worked": "2026-10-08T14:45:02Z",
+      "last_worked": "2026-10-08T14:58:38Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261008T145838Z"
     },
     {
       "symbol": "W231",
@@ -4493,16 +4493,16 @@
       ],
       "touches": [],
       "blocked_on": [
-        "luthen-observability"
+        "luthen-observability:W665"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "When luthen's real host-apply.json exists: a reader (rows, kinds, restarts as graph nodes and edges), host:<id> resolved like cal: refs, the apply observer for witnesses, tests on the sample; after the md0 RELEASE",
-      "evidence": "2026-10-08: 2026-10-08: answered to github-28: luthen exports host-apply.json (rows, activate kinds, after/restarts edges, applied state) beside liveness.json; nemik reads it, rows are citable as host:<id>, and row-applied becomes a witness over a new closed observer fact. Waiting on luthen for the activate-kind vocabulary and a sample export. | 2026-10-08: 2026-10-08: luthen host (github-28) sent the 45-kind vocabulary grouped by effect and an illustrative hand-made host-apply.json. Design recorded in the note (section 'Host apply as a mark'): kinds table plus rows pointing at a kind, restarts as structured {unit, verb}, rows cite as host:<id>, row-applied is a witness fact input.apply[<id>] with as_of so decay applies, never served in the first cut. Asked of luthen: omit argvs from the export, add an effect class per kind, keep row ids unique and stable. Still waiting on luthen to generate a real export; home.mount and srv-media.mount are not rows until luthen-observability:W663.",
+      "evidence": "2026-10-08: 2026-10-08: answered to github-28: luthen exports host-apply.json (rows, activate kinds, after/restarts edges, applied state) beside liveness.json; nemik reads it, rows are citable as host:<id>, and row-applied becomes a witness over a new closed observer fact. Waiting on luthen for the activate-kind vocabulary and a sample export. | 2026-10-08: 2026-10-08: luthen host (github-28) sent the 45-kind vocabulary grouped by effect and an illustrative hand-made host-apply.json. Design recorded in the note (section 'Host apply as a mark'): kinds table plus rows pointing at a kind, restarts as structured {unit, verb}, rows cite as host:<id>, row-applied is a witness fact input.apply[<id>] with as_of so decay applies, never served in the first cut. Asked of luthen: omit argvs from the export, add an effect class per kind, keep row ids unique and stable. Still waiting on luthen to generate a real export; home.mount and srv-media.mount are not rows until luthen-observability:W663. | 2026-10-08: certify residue: blocked_on named the repo, not a waypoint; luthen-observability:W665 is the exporter (its next step: extract kinds table, then checks.host_apply_export writing host-apply.json), so it is cited",
       "issued_at": "2026-10-08T13:43:16Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W665",
-      "last_worked": "2026-10-08T13:52:29Z",
-      "ticks_blocked": 3,
+      "last_worked": "2026-10-08T14:56:18Z",
+      "ticks_blocked": 0,
       "completed": null
     },
     {
@@ -4575,7 +4575,7 @@
     },
     {
       "symbol": "W237",
-      "title": "Residue salience as effective conductance: settle the pull's sources, the edge weights (declared in rank-weights.toml) and how the closes objective joins the composed order, with gcalculus",
+      "title": "Residue salience as effective conductance: settle sources, declared edge weights and the closes objective with gcalculus",
       "status": "blocked",
       "enables": [
         "W235",
@@ -4586,12 +4586,12 @@
         "gcalculus:W208"
       ],
       "blocked_kind": "agent",
-      "next_bounded_step": "",
+      "next_bounded_step": "On gcalculus:W208 answer (packaging: reduce-to-ports, glue, exactness): record the answer in the design note, then declare the edge weights in rank-weights.toml and wire the sink; unblocks W238",
       "evidence": "2026-10-08: 2026-10-08: operator points at gcalculus's math model (relayed by github-28); EXPLAINED.md definitions and arithmetic checked (OR=a+b, AND=ab/(a+b), elimination = minimal dissipation, AND(g,g)=g/2, OR(a,a)=2a). Adopted as the design basis; sources of the pull, edge weights, how it joins the composed order, cost and determinism, and how nemik consumes gcalculus are NOT defined: design note section 'Residue salience as effective conductance'. Letter left in gcalculus/inbox (no gcalculus session live) asking the four questions; it asks gcalculus to cite nemik:W237 with --enables. | 2026-10-08: 2026-10-08: github-28 suggested the answer to the sources question: demand injected at residue-bearing waypoints (current sources weighted by gate), a super-sink grounded through the ready frontier, a ready card's salience = the current through it (conserved: total salience = total demand; per-edge current is the kept decomposition; unreachable residue = stranded demand, a reachable-gate finding). Adopted as the working answer; one reduced-Laplacian solve gives every card. Raised, not settled: a resistor network is symmetric but dependencies are directional (undirected flow vs a directed absorbing walk, which is not the calculus gcalculus models); the sink's per-card conductance; demand weights per gate and the half-life decay of an aged residue are declared data. In the design note. | 2026-10-08: 2026-10-08: gcalculus claimed this with gcalculus:W208 (its full answer waits on the md0 cutover); its partial answer, read from its queue, is recorded in the design note: (1) no published package, stdlib-only with no build-system, and no per-edge-current or grounded-sink API (it has r_eff, laplacian, eliminate, freeze(keep=) and glue of potential patches); (2) undirected flow LEAKS demand to non-prerequisites (counterexample: a needs b, d needs a and e, b and e ready: 2/5 of a's demand exits through e), and a directed variant is not claimed by gcalc, so the model as-is is not 'demand flows toward what must be done first'; (3) dense exact Fraction solve is about cubic (n=120 7.5 s, n=240 85 s, 769-bit denominators), too slow for hundreds of nodes, so determinism must come from a fixed elimination order, not exactness. | 2026-10-08: 2026-10-08: operator, directly: the model is already directed (blocks vs enables). The symmetry question is closed: demand flows only from a card to what it needs and is absorbed at the ready frontier, so gcalculus:W208's leak (a symmetric-link counterexample) does not apply. On an acyclic graph demand propagates in one pass in dependency order (exact fractions affordable); a cycle needs a small solve inside its strongly connected component. Exposed and asked of the operator: blocked_on [a, e] is conjunctive (needs both), so does D's demand go in full to each prerequisite (the old downstream weight; conservation lost) or split (conserved; each looks half as important)? OR composes alternatives, which conjunctive prerequisites are not. | 2026-10-08: 2026-10-08: operator pointed at gcalculus's differential channels (+evidence and -evidence). Source read: gcalculus inbox 2026-08-21 letter, Q2 the differential pair (class is lossy, the retained pair tells ignorance from conflict, contradiction is a quantity). My reading, recorded in the note and NOT yet confirmed: each dependency carries + evidence (A enables B) and - evidence (B blocked_on A); direction is their differential; the leak came from collapsing the pair to one symmetric conductance; the pair also carries agreement, ignorance (one side only: UnclaimedBlockShape) and conflict (the sides disagree: LandedBlocker, EdgeIntoDropped) as quantities. Near-collision finding argues for exact arithmetic where the directed pass makes it affordable. The conjunctive question is restated in those terms. | 2026-10-08: 2026-10-08: operator ruled the conjunctive question: SPLIT, conserved ('let the physics do the work'), and 'the nodal solve answers this question as the solve frontier advances; you only get confused because you try to solve in advance of the frontier.' No split rule is fixed in advance: node elimination ordered from the ready frontier inward decides each node's division when it is eliminated, and the next solve re-divides as cards land. The audit's diamond disagreements are decided for the model. My earlier 'one pass in dependency order' is corrected: true only for trees and series-parallel parts; reconvergent prerequisites need the nodal solve. With sources, direction, Pareto, operator asks and the split ruled, what remains here is gcalculus's answer on packaging (gcalculus:W208) and the declared edge weights and sink wiring.",
       "issued_at": "2026-10-08T14:02:25Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
-      "last_worked": "2026-10-08T14:26:28Z",
+      "last_worked": "2026-10-08T14:56:19Z",
       "ticks_blocked": 2,
       "completed": null
     },
@@ -4745,6 +4745,27 @@
       "last_worked": "2026-10-08T14:17:48Z",
       "ticks_blocked": 2,
       "completed": null
+    },
+    {
+      "symbol": "W245",
+      "title": "Test the pinned --certify batch under bazel @opa: a fixture queue in, verdict levels and residue out",
+      "status": "done",
+      "enables": [
+        "W230"
+      ],
+      "touches": [
+        "realizability"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-08: tests/test_certify.py (2 tests, pass on host: 2 passed in 2.58s); bazel gate at the commit that carries it",
+      "issued_at": "2026-10-08T14:56:28Z",
+      "minted_during": "tick",
+      "caused_by": "W230",
+      "last_worked": "2026-10-08T14:58:38Z",
+      "ticks_blocked": 0,
+      "completed": "20261008T145838Z"
     }
   ],
   "residue": [
@@ -4793,7 +4814,10 @@
   ],
   "job_id": "63bbcf8b",
   "heartbeat": "2026-10-08T14:30:28Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-10-08T14:55:21Z"
+  },
   "predecessor_job_id": "eb49bf5c",
   "leases": []
 }
