@@ -4,8 +4,8 @@
 #   - the image is the bare name `nemik`, pinned by deploy-state's `images:` entry, not
 #     localhost/nemik:built with pullPolicy Never;
 #   - runAsNonRoot, seccomp RuntimeDefault, allowPrivilegeEscalation false (restricted requires them).
-# Kept: 2 replicas (zero-downtime ship, operator 2026-09-26), Guaranteed 512Mi / 1 cpu (fits the
-# tenant quota with one surge pod), readiness and a more lenient liveness on /metrics.
+# Kept: 2 replicas (zero-downtime ship, operator 2026-09-26), Guaranteed 768Mi / 1 cpu (fits the
+# 3Gi tenant quota with one surge pod: 3 x 768Mi), readiness and a more lenient liveness on /metrics.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -36,9 +36,16 @@ spec:
           env:
             - {name: NEMIK_VM_URL, value: "http://vmsingle.buildbuddy.svc.cluster.local:8428"}
             - {name: NEMIK_VMALERT_URL, value: "http://vmalert.buildbuddy.svc.cluster.local:8880"}
+            # nemik:W260: OOMKilled at 12:50Z at the old 512Mi (peak working set 536 MB). Measured on
+            # the real 16-queue root: 240 MB after the first build, ~315-350 MB once the graph has
+            # been rebuilt (a rebuild holds the old graph while the new one is built, and luthen's
+            # export changes every minute), ~340 MB after a /cmd. A pod adds its own overhead and
+            # concurrent requests on top, so 768Mi (Guaranteed, tenant quota 3Gi at luthen c4b58bd).
+            # glibc arenas: one per request thread, never returned; two bound the fragmentation.
+            - {name: MALLOC_ARENA_MAX, value: "2"}
           resources:
-            requests: {memory: 512Mi, cpu: "1"}
-            limits: {memory: 512Mi, cpu: "1"}
+            requests: {memory: 768Mi, cpu: "1"}
+            limits: {memory: 768Mi, cpu: "1"}
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true

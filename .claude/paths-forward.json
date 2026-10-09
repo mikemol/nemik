@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 259,
+  "counter": 260,
   "waypoints": [
     {
       "symbol": "W1",
@@ -4966,6 +4966,23 @@
       "last_worked": "2026-10-09T09:58:01Z",
       "ticks_blocked": 0,
       "completed": "20261009T095801Z"
+    },
+    {
+      "symbol": "W260",
+      "title": "nemik container OOMKilled at 12:50Z: bound the reader's resident set or raise the limit",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Measure a fresh pod's resident set by phase (queue load, graph, shapes, host-apply); quota is applied (luthen c4b58bd), so 768Mi may ship once the measurement says bigger-limit.",
+      "evidence": "",
+      "issued_at": "2026-10-09T12:55:53Z",
+      "minted_during": "interrupt",
+      "caused_by": "github:W1",
+      "last_worked": "2026-10-09T13:00:35Z",
+      "ticks_blocked": 0,
+      "completed": null
     }
   ],
   "residue": [
@@ -5021,10 +5038,7 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": {
-    "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-09T12:32:39Z"
-  },
+  "lock": null,
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }
