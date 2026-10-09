@@ -1,0 +1,16 @@
+#!/bin/sh
+# nemik: push after every commit that passed the gate (.githooks/pre-commit). A push to main is a Flux
+# ship (Forgejo build -> deploy-state -> ns nemik), so a commit here is a deploy: the gate is the only
+# thing between them. Operator 2026-10-09: "add git-push to the postcommit hook".
+#
+# Skipped when there is nowhere to push (detached HEAD, no upstream) or the commit is part of a rebase.
+# A failed push never undoes the commit; it prints and leaves the commit local to be pushed by hand.
+cd "$(git rev-parse --show-toplevel)" || exit 0
+git_dir=$(git rev-parse --git-dir)
+if [ -d "$git_dir/rebase-merge" ] || [ -d "$git_dir/rebase-apply" ]; then
+	exit 0
+fi
+branch=$(git symbolic-ref --quiet --short HEAD) || exit 0
+git rev-parse --abbrev-ref --symbolic-full-name '@{upstream}' >/dev/null 2>&1 || exit 0
+git push --quiet || echo "post-commit: push of $branch failed; the commit stays local" >&2
+exit 0

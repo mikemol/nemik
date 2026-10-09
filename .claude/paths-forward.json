@@ -4970,17 +4970,17 @@
     {
       "symbol": "W260",
       "title": "nemik container OOMKilled at 12:50Z: bound the reader's resident set or raise the limit",
-      "status": "working",
+      "status": "ready",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Measure a fresh pod's resident set by phase (queue load, graph, shapes, host-apply); quota is applied (luthen c4b58bd), so 768Mi may ship once the measurement says bigger-limit.",
-      "evidence": "",
+      "next_bounded_step": "Commit 76c7642 (768Mi + MALLOC_ARENA_MAX=2) is local only; push was denied by the auto-mode classifier (production deploy). Push it once the operator allows, then send github-45 the numbers and watch container_oomkilled_restart.",
+      "evidence": "2026-10-09: Measured 2026-10-09 on the real 16-queue root (scratchpad rss_phases.py): 18 MB start, 42 MB after import, 240 MB first build, 313-352 MB after rebuilds (peak 352), 339 MB after /cmd rank/goals/check/metrics/witnesses; 118k triples, 4107 nodes. Rebuild holds old+new graph. Pod peaks 536 MB at 512Mi. Chose bigger limit (768Mi) plus MALLOC_ARENA_MAX=2; arena effect not measured.",
       "issued_at": "2026-10-09T12:55:53Z",
       "minted_during": "interrupt",
       "caused_by": "github:W1",
-      "last_worked": "2026-10-09T13:00:35Z",
+      "last_worked": "2026-10-09T13:04:39Z",
       "ticks_blocked": 0,
       "completed": null
     }
