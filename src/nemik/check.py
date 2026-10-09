@@ -184,9 +184,13 @@ def _realizability(root: Path) -> int:
     from mikemol.pathsforward.lock import stamp
     from mikemol.pathsforward.opa_eval import OpaUnavailableError
 
+    from nemik.marks import MARKS, policy_version, provenance, read
     from nemik.realize import rows, runtime_valid, verdicts
 
     now, residue, unjudged = stamp(datetime.now(UTC)), 0, 0
+    version = policy_version()
+    # nemik:W236: the clock is the policy's input, so the verdicts below are a function of it; say which.
+    print(f"as_of {now}  policy {version[:12]}")
     for repo, path in workstream_files(root, QUEUE):
         try:
             found = verdicts(repo, path, root, now)
@@ -194,10 +198,14 @@ def _realizability(root: Path) -> int:
             print(f"NOT JUDGED {repo}: {exc}")
             unjudged += 1
             continue
-        print(f"{repo}: {len(found)} waypoint(s)")
+        # nemik:W234: the writer's persisted marks are read, not re-derived; a stale one is named.
+        marks, unreadable = read(path.parent / MARKS)
+        print(f"{repo}: {len(found)} waypoint(s), {unreadable} unreadable mark line(s)")
         for verdict in found:
             residue += not runtime_valid(verdict)
-            for line in rows(verdict):
+            symbol = str(verdict.get("ref")).rsplit(":", 1)[-1]
+            source = provenance(marks.get(symbol), now, version)
+            for line in rows(verdict, source):
                 print(f"  {line}")
     return 2 if unjudged else int(residue > 0)
 

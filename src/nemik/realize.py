@@ -45,11 +45,12 @@ def verdicts(repo: str, state_path: Path, root: Path, now: str) -> list[Json]:
     return opa_eval.verdicts(built, opa_eval.resolve())
 
 
-def rows(verdict: Json) -> list[str]:
+def rows(verdict: Json, source: str = "") -> list[str]:
     """Print one verdict as its coordinate line and one line per residue entry.
 
     The coordinate is the deepest gate closed with every gate before it clean; a residue entry
     names the gate it is at, what is missing and what would close it. Nothing is a bare reject.
+    `source` says where the verdict came from (mark, derived or stale), when the caller knows.
 
     Returns:
         the lines.
@@ -58,6 +59,7 @@ def rows(verdict: Json) -> list[str]:
     residue = verdict.get("residue")
     entries = residue if isinstance(residue, list) else []
     head = f"{verdict.get('ref')}  {verdict.get('level')}  residue={len(entries)}"
+    head += f"  ({source})" if source else ""
     lines = [head]
     for entry in entries:
         if isinstance(entry, dict):

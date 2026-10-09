@@ -47,6 +47,7 @@ def _run(root: Path, opa: str) -> subprocess.CompletedProcess[str]:
 def test_each_live_waypoint_gets_a_coordinate_and_its_residue(tmp_path: Path) -> None:
     done = _run(_fleet(tmp_path), str(Path(shutil.which(OPA) or OPA).resolve()))
     assert done.returncode == 1, done.stdout + done.stderr
+    assert done.stdout.startswith("as_of 20"), done.stdout
     assert "alpha: 2 waypoint(s)" in done.stdout
     assert "alpha:W1  " in done.stdout
     assert "closes by:" in done.stdout

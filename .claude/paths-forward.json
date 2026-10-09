@@ -4507,21 +4507,21 @@
     {
       "symbol": "W234",
       "title": "Read verdict marks, not private re-derivations: print the persisted per-transition mark with its provenance (mark or derived) and flag a stale mark",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W228"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "mtools:W851 landed (--admit writes marks to .claude/paths-forward.marks.jsonl): a reader of that file (as_of, op, symbol, policy_version, input_digest, verdict), printing mark vs derived provenance and flagging a stale mark (as_of past max_age_seconds, or another policy_version); needs a pin bump to the sha carrying W851 only for the writer, not for the reader",
-      "evidence": "2026-10-08: 2026-10-08: operator requirement relayed by github-28: verdicts are read from the persisted marks, not re-derived privately. Waits on the writer's per-transition ledger (mtools:W851): its location and line format are asked of mtools. Where no mark exists (every card minted before the hook) the verdict is printed as derived. | 2026-10-08: 2026-10-08: mtools-25 agreed (mtools:W849, W852): marks file .claude/paths-forward.marks.jsonl beside the queue, append-only, one JSON object per transition, apart from the text .ledger. Record {as_of, op, symbol, policy_version (sha256 of realizability.rego), input_digest (sha256 of the canonical input), verdict:{ref, level, reference_arm, residue[{gate, reference_arm, what, closes_by, closes_ref?}]}}; as_of is the same now the policy received, so a mark re-derives and a stale one (as_of older than max_age_seconds, or another policy_version) is detectable. The file quotes waypoint text, so it stays out of nemik-serve, the export and the static build. Recorded in the design note. | 2026-10-08: mtools:W851 done 2026-10-08T15:08:38Z",
+      "next_bounded_step": null,
+      "evidence": "2026-10-08: 2026-10-08: operator requirement relayed by github-28: verdicts are read from the persisted marks, not re-derived privately. Waits on the writer's per-transition ledger (mtools:W851): its location and line format are asked of mtools. Where no mark exists (every card minted before the hook) the verdict is printed as derived. | 2026-10-08: 2026-10-08: mtools-25 agreed (mtools:W849, W852): marks file .claude/paths-forward.marks.jsonl beside the queue, append-only, one JSON object per transition, apart from the text .ledger. Record {as_of, op, symbol, policy_version (sha256 of realizability.rego), input_digest (sha256 of the canonical input), verdict:{ref, level, reference_arm, residue[{gate, reference_arm, what, closes_by, closes_ref?}]}}; as_of is the same now the policy received, so a mark re-derives and a stale one (as_of older than max_age_seconds, or another policy_version) is detectable. The file quotes waypoint text, so it stays out of nemik-serve, the export and the static build. Recorded in the design note. | 2026-10-08: mtools:W851 done 2026-10-08T15:08:38Z | 2026-10-09: 2026-10-09: nemik.marks reads .claude/paths-forward.marks.jsonl (latest mark per symbol, unreadable lines counted) and tags each verdict mark | derived | stale in nemik-check --realizability; no queue has marks yet because the writer (--admit, mtools:W851) is not in the pinned wheel 472f940, so every row reads derived until a pin bump; tests/test_marks.py",
       "issued_at": "2026-10-08T13:50:20Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
-      "last_worked": "2026-10-08T23:44:27Z",
+      "last_worked": "2026-10-09T00:23:31Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261009T002331Z"
     },
     {
       "symbol": "W235",
@@ -4552,21 +4552,21 @@
     {
       "symbol": "W236",
       "title": "Decay: nemik passes input.now and the as_of of each mark and fact, and prints the as_of it used; a stale mark floors its gate, never passes",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W228"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-10-08: 2026-10-08: the policy takes the time as an input (input.now) so a verdict stays a pure function of its input; max_age_seconds is the policy's (mtools:W850), the batch run is W230.",
+      "next_bounded_step": null,
+      "evidence": "2026-10-08: 2026-10-08: the policy takes the time as an input (input.now) so a verdict stays a pure function of its input; max_age_seconds is the policy's (mtools:W850), the batch run is W230. | 2026-10-09: 2026-10-09: nemik-check --realizability passes the policy its input.now and prints the as_of and policy sha it used; a mark older than max_age_seconds (3600, the policy default) or judged by another policy is tagged stale (nemik.marks.provenance); the printed verdict is always the one derived now, so a stale mark can never pass",
       "issued_at": "2026-10-08T13:50:22Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
-      "last_worked": "2026-10-08T14:40:30Z",
+      "last_worked": "2026-10-09T00:23:32Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261009T002332Z"
     },
     {
       "symbol": "W237",
