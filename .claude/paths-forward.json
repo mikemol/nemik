@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 247,
+  "counter": 248,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 138
+      "ticks_blocked": 139
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 13,
+      "ticks_blocked": 14,
       "weight": 1
     },
     {
@@ -2613,7 +2613,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 83
+      "ticks_blocked": 84
     },
     {
       "symbol": "W138",
@@ -3522,7 +3522,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-02T17:28:25Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "weight": 2
     },
     {
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-08T13:42:13Z",
-      "ticks_blocked": 13,
+      "ticks_blocked": 14,
       "completed": null
     },
     {
@@ -4371,7 +4371,7 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:09:03Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "completed": null
     },
     {
@@ -4471,7 +4471,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W665",
       "last_worked": "2026-10-08T14:56:18Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 10,
       "completed": null
     },
     {
@@ -4502,7 +4502,6 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W238",
         "W240",
         "W241",
         "W242",
@@ -4639,28 +4638,6 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:17:49Z",
-      "ticks_blocked": 11,
-      "completed": null
-    },
-    {
-      "symbol": "W242",
-      "title": "Reduce each repo's queue to its ports (Kron reduction) and glue the reductions for the fleet solve, cached by queue digest",
-      "status": "blocked",
-      "enables": [
-        "W235",
-        "W240"
-      ],
-      "touches": [],
-      "blocked_on": [
-        "W238"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "2026-10-08: 2026-10-08: operator on W237 (d): measurements apply to smaller graphs glued together. Design recorded (section 'Cost and determinism'): per-repo Kron reduction to ports with the equivalent injected currents, the sink is a port of every repo, cross-repo edges live in the glue layer so a reduction depends only on its own queue and is cached by its digest, per-card current by local back-substitution, exact arithmetic or a fixed order for bit-for-bit determinism. The host cited gcalculus's Agda proof that any split gives the same answer; I have not read it and will cite it only once found (asked of gcalculus, with whether the package exposes reduce-to-ports and glue with the obstruction). | 2026-10-08: 2026-10-08: gcalculus:W208 reports freeze(keep=) (Kron to ports) exists but glue_patches/Obstruction glue POTENTIAL PATCHES, not port networks, and exact solves are cubic; so the per-repo reduction bounds the cost by one repo's size but exactness is dropped for a fixed-order floating solve, and the port-network glue may have to be nemik's own. | 2026-10-09: 2026-10-09: gcalculus:W208 caveat: the cone model changes the network per source, so a reduction keyed by the queue digest alone is invalid (the in-repo cone must be in the key); at the measured cost (paperkit 4.0 s, 493 sources, largest cone 52) the cache is probably unnecessary: measure before building it",
-      "issued_at": "2026-10-08T14:07:09Z",
-      "minted_during": "tick",
-      "caused_by": "luthen-observability:W666",
-      "last_worked": "2026-10-09T00:53:09Z",
       "ticks_blocked": 12,
       "completed": null
     },
@@ -4682,29 +4659,27 @@
       "minted_during": "tick",
       "caused_by": "W229",
       "last_worked": "2026-10-08T14:09:02Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
       "symbol": "W244",
       "title": "Operator asks inside the model: show what an ask needs (its current's path to the frontier) and what it overrides (whose share falls), so the operator's reply refactors the graph instead of a strict tier",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W235"
       ],
       "touches": [],
-      "blocked_on": [
-        "W238"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "2026-10-08: 2026-10-08: operator ruling, given directly in this session: the operator-ask objective is neither a strict tier outside the model nor an infinite weight; the model tells the operator what an ask needs and what it overrides, and the operator's interaction refactors the graph so asks live inside the model and respond to it. Needs the solver (W238) and a DIRECTED model (the undirected leak would list non-prerequisites as what the ask needs). The strict tier (nemik:W111) stays until the switch (W241). Design note section 'Operator asks inside the model'.",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-08: 2026-10-08: operator ruling, given directly in this session: the operator-ask objective is neither a strict tier outside the model nor an infinite weight; the model tells the operator what an ask needs and what it overrides, and the operator's interaction refactors the graph so asks live inside the model and respond to it. Needs the solver (W238) and a DIRECTED model (the undirected leak would list non-prerequisites as what the ask needs). The strict tier (nemik:W111) stays until the switch (W241). Design note section 'Operator asks inside the model'. | 2026-10-09: 2026-10-09: nemik-rank REPO --ask repo:W<n> (nemik.salience.ask_effect): needs = the ready cards that absorb the ask demand with their currents; overrides = the ready cards of REPO that sit lower with the ask than without it (positions shown); a ref that injects no demand is refused. No new policy: the ask is already a demand source. Hand-solved fixture: ask W5 needs W2, displaces W1 from position 1 to 2. tests/test_salience.py (7). The strict operator tier (nemik:W111) stays until the switch (W241)",
       "issued_at": "2026-10-08T14:17:42Z",
       "minted_during": "tick",
       "caused_by": "operator",
-      "last_worked": "2026-10-08T14:17:48Z",
-      "ticks_blocked": 11,
-      "completed": null
+      "last_worked": "2026-10-09T01:18:19Z",
+      "ticks_blocked": 0,
+      "completed": "20261009T011819Z"
     },
     {
       "symbol": "W245",
@@ -4768,6 +4743,24 @@
       "last_worked": "2026-10-09T00:07:21Z",
       "ticks_blocked": 0,
       "completed": "20261009T000721Z"
+    },
+    {
+      "symbol": "W248",
+      "title": "nemik tests: clear the 27 pre-existing ruff findings in older test files (datetime.UTC, import order, unused imports in test_witnesses.py, check=False, re flags)",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "debt"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Run ruff check --fix on tests/, review the unsafe ones by hand, ruff format, mypy; one bazel gate",
+      "evidence": "",
+      "issued_at": "2026-10-09T01:18:18Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -4811,6 +4804,13 @@
       "title": "Test stage: run from the bazel venv (W101) instead of uv sync",
       "dropped_at": "2026-10-02T12:50:14Z",
       "reason": "the premise (the luthen build may lack egress to github) is disproven: Forgejo's buildkit has built and shipped every nemik push (ImagePolicy at 1790942925-32d6d3d), fetching paperkit by git; and W123/W124 now fetch opa and chrome-headless-shell by checksum. Revisit only if luthen's build loses egress. W156 (bazel venv in the image) has no remaining motive beyond that egress.",
+      "recoverable": true
+    },
+    {
+      "symbol": "W242",
+      "title": "Reduce each repo's queue to its ports (Kron reduction) and glue the reductions for the fleet solve, cached by queue digest",
+      "dropped_at": "2026-10-09T01:16:02Z",
+      "reason": "Measured 2026-10-09: nemik-rank paperkit takes 20.65 s with the old arm alone and 20.98 s with --flow (493 sources, exact), so the flow solve adds about 0.3 s; the time is the graph build, not the solve. gcalculus warned a queue-digest cache key is invalid under the cone model anyway. Recoverable if a larger graph ever makes the solve dominate.",
       "recoverable": true
     }
   ],

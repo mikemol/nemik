@@ -449,6 +449,12 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         help="the flow model's salience beside the old weight, and the pairs they order "
         "differently (nemik:W240, the audit before the model replaces the ranking)",
     )
+    ap.add_argument(
+        "--ask",
+        metavar="REPO:W<n>",
+        help="what that waiting card (an operator ask) needs and which of REPO's ready "
+        "cards it pushes down in the flow model (nemik:W244)",
+    )
     args = ap.parse_args(argv)
     if (
         args.band
@@ -545,6 +551,29 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
             print(
                 f"{r['goal']:6} {r['weight']:4}  on deck {r['on_deck'] or '-'}; path {path}  {r['title'][:60]}"
             )
+        return
+    if args.ask:
+        # nemik:W244: an ask lives inside the model. Show where its demand lands (what it needs)
+        # and which of this repo's ready cards sit lower because of it (what it overrides), so the
+        # operator's reply can refactor the graph.
+        from nemik.salience import ask_effect, show
+
+        try:
+            effect = ask_effect(g, args.repo, args.ask)
+        except ValueError as err:
+            print(f"rank: {err}")
+            raise SystemExit(2) from err
+        print(f"ask {effect.ref} in {args.repo}'s ranking")
+        if effect.stranded:
+            print("  needs: nothing on the ready frontier (stranded demand)")
+        for card, current in effect.needs:
+            print(f"  needs {card:28} carries {show(current)}")
+        for card, without, with_ in effect.displaced:
+            print(
+                f"  overrides {card}: position {without} without the ask, {with_} with it"
+            )
+        if not effect.displaced:
+            print("  overrides: no ready card of this repo sits lower because of it")
         return
     if args.flow:
         # nemik:W240: the old downstream weight beside the flow model's salience (exact; shown
