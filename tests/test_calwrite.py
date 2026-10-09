@@ -78,6 +78,34 @@ def test_only_open_dated_waypoints_of_the_opted_in_repos_become_events(
     assert events(g, []) == []  # nothing is mirrored implicitly
 
 
+def test_a_calendar_touch_routes_a_waypoint_to_that_calendar_only(
+    tmp_path: Path,
+) -> None:
+    # nemik:W263 (life:W40): `calendar:main` keeps the waypoint off every other calendar, so the
+    # household mirror drops it; untagged waypoints go wherever their repo is mirrored, as before.
+    # A caller that names no calendar reads no tags.
+    g = _queue(
+        tmp_path,
+        "life",
+        [
+            {"symbol": "W1", "title": "plain", "status": "ready", "due": "20261001"},
+            {
+                "symbol": "W2",
+                "title": "personal",
+                "status": "ready",
+                "due": "20261002",
+                "touches": ["calendar:main"],
+                "alarms": ["-PT15M"],
+            },
+        ],
+    )
+    household = [e[1] for e in events(g, ["life"], "household")]
+    main = [e[1] for e in events(g, ["life"], "main")]
+    assert household == [f"UID:{uid('life:W1')}"]
+    assert main == [f"UID:{uid('life:W1')}", f"UID:{uid('life:W2')}"]
+    assert len(events(g, ["life"])) == 2
+
+
 def test_a_due_only_waypoint_sits_at_its_deadline_with_an_end_for_its_alarm(
     tmp_path: Path,
 ) -> None:

@@ -428,3 +428,4 @@
 2026-10-09T13:34:02Z  interrupt W261 minted    -         "UI: show the flow salience (the gcalculus weighting) on each ready card and in the forest ordering, not only rank_pos and band"  evidence=operator
 2026-10-09T13:34:03Z  interrupt W262 minted    -         "UI: delete the non-forest per-repo layout branch and pullRows now that the rank forest is always on"  evidence=operator
 2026-10-09T13:53:06Z  tick  W263 minted    -         "Per-waypoint calendar routing: a touches tag (calendar:<label> or private) keeps a waypoint off the shared mirror and writes it to a named personal calendar; answer whether nemik-wake --alarms already delivers alarms"  evidence=life:W40
+2026-10-09T13:57:36Z  tick  W263 advanced  unblock   "calendar routing by touch; W262 dead layout deleted earlier this tick"

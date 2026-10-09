@@ -133,14 +133,38 @@ def event_lines(
     return lines
 
 
-def events(g: Graph, repos: Iterable[str]) -> list[list[str]]:
-    """One VEVENT per open dated waypoint of `repos`, in repo then waypoint order."""
+ROUTE = "calendar:"
+
+
+def routed_elsewhere(g: Graph, n, label: str | None) -> bool:
+    """nemik:W263 (life:W40): a waypoint touching `calendar:<other>` belongs only to that calendar.
+
+    The tag is a route, not a filter: the named calendar takes the waypoint (when its own `mirror`
+    lists the repo, as ever), every other calendar leaves it out, so a mirror that wrote it earlier
+    drops it on the next run. `label` None means the caller names no calendar: tags are not read.
+    """
+    if label is None:
+        return False
+    routes = {
+        str(t).removeprefix(ROUTE)
+        for t in g.objects(n, NEMIK.touches)
+        if str(t).startswith(ROUTE)
+    }
+    return bool(routes) and label not in routes
+
+
+def events(g: Graph, repos: Iterable[str], label: str | None = None) -> list[list[str]]:
+    """One VEVENT per open dated waypoint of `repos`, in repo then waypoint order.
+
+    `label` is the calendar being written; a waypoint routed to another calendar by a
+    `calendar:<label>` touch is left out (nemik:W263).
+    """
     want = set(repos)
     found: list[tuple[str, int, list[str]]] = []
     for n in set(g.subjects(NEMIK.workstream, None)):
         repo = str(n).removeprefix(BASE).partition("/")[0]
         symbol = str(g.value(n, NEMIK.symbol) or "")
-        if repo not in want or not symbol:
+        if repo not in want or not symbol or routed_elsewhere(g, n, label):
             continue
         if (n, RDF.type, NEMIK.Dropped) in g or (n, OSLC_CM.state, NEMIK.Done) in g:
             continue
@@ -164,10 +188,10 @@ def events(g: Graph, repos: Iterable[str]) -> list[list[str]]:
     return [lines for _, _, lines in sorted(found, key=lambda f: f[:2])]
 
 
-def feed(g: Graph, repos: Iterable[str]) -> str:
+def feed(g: Graph, repos: Iterable[str], label: str | None = None) -> str:
     """The iCalendar text the Akonadi helper reads on stdin (CRLF, folded at 75 octets)."""
     lines = ["BEGIN:VCALENDAR", "VERSION:2.0", f"PRODID:{PRODID}"]
-    for event in events(g, repos):
+    for event in events(g, repos, label):
         lines += event
     lines.append("END:VCALENDAR")
     return "".join(_fold(line) + "\r\n" for line in lines)
@@ -227,9 +251,11 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> int:
                 g += qg
     worst = 0
     for label, cal in targets.items():
-        code, out = _write(args.helper, cal.name, feed(g, cal.mirror), args.apply)
+        code, out = _write(
+            args.helper, cal.name, feed(g, cal.mirror, label), args.apply
+        )
         print(
-            f"== {label}: {len(events(g, cal.mirror))} dated waypoints of {', '.join(cal.mirror)}"
+            f"== {label}: {len(events(g, cal.mirror, label))} dated waypoints of {', '.join(cal.mirror)}"
         )
         print(out, end="")
         worst = max(worst, code)

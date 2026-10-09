@@ -5024,20 +5024,21 @@
     {
       "symbol": "W263",
       "title": "Per-waypoint calendar routing: a touches tag (calendar:<label> or private) keeps a waypoint off the shared mirror and writes it to a named personal calendar; answer whether nemik-wake --alarms already delivers alarms",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "life:W40"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Read calendars.py/calwrite.py and calendars.toml; design the tag and the per-calendar accept rule; answer life:W40's question 4 from nemik-wake --alarms.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: calwrite.events/feed take the calendar label; a calendar:<label> touch routes a waypoint to that calendar only (tests/test_calwrite.py); answered life:W40 in life/inbox/2026-10-09-nemik-w263-calendar-routing.md, incl. nemik-wake --alarms reaches agent sessions, not the phone",
       "issued_at": "2026-10-09T13:53:06Z",
       "minted_during": "tick",
       "caused_by": "life:W40",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-09T13:57:35Z",
+      "ticks_blocked": 0,
+      "completed": "20261009T135735Z"
     }
   ],
   "residue": [
