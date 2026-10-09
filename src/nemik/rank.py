@@ -597,6 +597,17 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         print(f"flow {args.repo}: {len(pairs)} pair(s) ordered differently")
         for above, below in pairs:
             print(f"  old puts {above} above {below}; flow puts {below} above {above}")
+        # Why: the old weight counts a shared source in full for each card; the flow splits it.
+        # Each card that the old arm put above another and the flow did not is explained by the
+        # sources it shares with other ready cards.
+        for card in sorted({above for above, _ in pairs}):
+            shared = result.contested(card)
+            print(f"  {card}: {len(shared)} contested source(s)")
+            for source, demand, part, others in shared[:8]:
+                print(
+                    f"    {source}: demand {show(demand)}, {card} absorbs {show(part)}, "
+                    f"shared with {', '.join(others[:4])}"
+                )
         return
     rows = rank(g, args.repo, weights)
     if args.json:

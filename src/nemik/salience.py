@@ -43,6 +43,27 @@ class Audit:
     rows: list[Row]
     flow: Flow
     sources: int
+    demand: dict[str, Fraction] | None = None
+    closures: dict[str, frozenset[str]] | None = None
+
+    def contested(self, ref: str) -> list[tuple[str, Fraction, Fraction, list[str]]]:
+        """List the sources in `ref`'s downstream closure whose demand is split with another card.
+
+        A source is contested when more than one ready card absorbs it (a conjunctive diamond);
+        each such source is why the flow salience of `ref` falls below its old weight.
+
+        Returns:
+            (source, demand, the part `ref` absorbs, the other cards sharing it), by source.
+
+        """
+        out: list[tuple[str, Fraction, Fraction, list[str]]] = []
+        for source in sorted((self.closures or {}).get(ref, ())):
+            sharers = sorted(c for c, by in self.flow.fibre.items() if source in by)
+            if len(sharers) > 1 and ref in sharers:
+                demand = (self.demand or {}).get(source, Fraction(0))
+                others = [c for c in sharers if c != ref]
+                out.append((source, demand, self.flow.fibre[ref][source], others))
+        return out
 
     def old_order(self) -> list[str]:
         """Order the cards by the old weight, the lower symbol first on a tie.
@@ -141,8 +162,11 @@ def audit(
         return seen - {n}
 
     population: set[Node] = set()
+    reach: dict[str, frozenset[str]] = {}
     for n in mine:
-        population |= closure(n)
+        cone = closure(n)
+        population |= cone
+        reach[ref_of(n)] = frozenset(ref_of(x) for x in cone)
     sources = sorted((x for x in population if x in prereq), key=str)
     needs = {
         ref_of(x): sorted(ref_of(p) for p in ps if p in nodes)
@@ -158,7 +182,7 @@ def audit(
         )
         for n in mine
     ]
-    return Audit(rows, flow, len(sources))
+    return Audit(rows, flow, len(sources), demand, reach)
 
 
 @dataclass(frozen=True)

@@ -496,8 +496,20 @@ has moved a card). Unit edge weights; ready cards are ground; no source was stra
 
 The mtools and aeternum differences have the shape gcalculus found: the flow salience falls below
 the old weight where a source is shared (W795, W796 at exactly 1/2; W802, W803 at 16/21), which is
-the conjunctive-split effect. NOT yet traced one by one for mtools and aeternum (gcalculus traced
-its three); a per-disagreement account is the remaining residue of W240.
+the conjunctive-split effect. TRACED (`nemik-rank REPO --flow` now prints, under the pairs, the
+contested sources behind each card, and the figures close exactly):
+
+- mtools W802 and W803: two contested sources (W317, W504), each shared with W408, W576 and the
+  other card, so each absorbs 0.3810 of each: 2 x 0.3810 = 0.7619 against the old 2. W798 and W819
+  have no contested source (1.0000 each), so the flow puts them above.
+- aeternum W78: six contested sources (W104, W108, W87, W88, W98, W99; shares 0.5385, 0.2667, 0.5,
+  0.5, 0.2, 0.2 = 2.2052) plus six uncontested at 1 each = 8.2052 against the old 12, so W74
+  (11.0000, uncontested) goes above.
+
+Every disagreement in all sixteen workstreams is therefore the one effect the operator ruled on
+(SPLIT, conserved): the old weight counted a source in full for each ready card that serves it. None
+is a bug in the model and none is a term the model is missing; each is a bug in the old ranking in the
+sense that its total exceeded the demand injected (conservation).
 
 ## Open questions (each blocks code, none blocks this note)
 

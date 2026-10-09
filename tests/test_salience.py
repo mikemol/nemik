@@ -90,6 +90,18 @@ def test_both_arms_agree_when_the_split_does_not_change_the_order(
     assert result.disagreements() == []
 
 
+def test_the_gap_between_the_arms_is_the_contested_sources(tmp_path: Path) -> None:
+    result = audit(_graph(_fleet(tmp_path)), "a")
+    local = Fraction(load_weights().local)
+    # W1 is reached by W3 (shared with W2) and W4 (W1 alone): only W3 is contested.
+    assert result.contested("a:W1") == [("a:W3", local, local / 2, ["a:W2"])]
+    row = {r.ref: r for r in result.rows}["a:W1"]
+    lost = sum(
+        (demand - part for _, demand, part, _ in result.contested("a:W1")), Fraction(0)
+    )
+    assert row.old - lost == row.new
+
+
 def test_display_rounds_but_the_value_stays_exact() -> None:
     value = Fraction(1, 3)
     assert show(value) == "0.3333"

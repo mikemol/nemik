@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 139
+      "ticks_blocked": 140
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 14,
+      "ticks_blocked": 15,
       "weight": 1
     },
     {
@@ -2613,7 +2613,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 84
+      "ticks_blocked": 85
     },
     {
       "symbol": "W138",
@@ -3522,7 +3522,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-02T17:28:25Z",
-      "ticks_blocked": 20,
+      "ticks_blocked": 21,
       "weight": 2
     },
     {
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-08T13:42:13Z",
-      "ticks_blocked": 14,
+      "ticks_blocked": 15,
       "completed": null
     },
     {
@@ -4371,7 +4371,7 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:09:03Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "completed": null
     },
     {
@@ -4471,7 +4471,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W665",
       "last_worked": "2026-10-08T14:56:18Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "completed": null
     },
     {
@@ -4503,9 +4503,7 @@
       "touches": [],
       "blocked_on": [
         "W240",
-        "W241",
-        "W242",
-        "W244"
+        "W241"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
@@ -4513,8 +4511,8 @@
       "issued_at": "2026-10-08T13:50:21Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
-      "last_worked": "2026-10-08T14:17:54Z",
-      "ticks_blocked": 1,
+      "last_worked": "2026-10-09T01:21:42Z",
+      "ticks_blocked": 0,
       "completed": null
     },
     {
@@ -4561,8 +4559,7 @@
       "title": "Current-flow solver for nemik-rank: deterministic, law tests (series below the weakest link, parallel additive, duplicates double, open circuit), measured on the real graph",
       "status": "done",
       "enables": [
-        "W235",
-        "W242"
+        "W235"
       ],
       "touches": [],
       "blocked_on": [],
@@ -4599,25 +4596,22 @@
     {
       "symbol": "W240",
       "title": "Audit: run the old ranking and the model over the real queues, record every disagreement with its reason (a bug in the old ranking or a missing term in the model, never averaged)",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W235",
         "W241"
       ],
       "touches": [],
-      "blocked_on": [
-        "W238",
-        "W242"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Account for each remaining disagreement one by one (mtools: W802/W803 vs W798/W819; aeternum: W78 vs W74) as a bug in the old ranking or a missing term in the model, then record in the design note; gcalculus traced its three repos",
-      "evidence": "2026-10-09: 2026-10-09: gcalculus ran the audit on three repos (gcalculus, luthen-observability, paperkit; unit edge weights): every ordering difference is the one conjunctive-split effect, and where no source is shared the arms agree to the digit (5.9%, 1.2%, 1.7% of pairs differ); script in nemik/inbox/2026-10-09-gcalculus-w237-audit-script.md takes a repo name. Remaining: the other thirteen repos, and an audit against nemik.flow itself | 2026-10-09: 2026-10-09: audit run over all sixteen workstreams with nemik-rank REPO --flow (table in the design note): 0 disagreements in 11, 9 gcalculus, 150 luthen-observability, 87 paperkit, 4 mtools, 1 aeternum; none stranded; the new ones have the conjunctive-split shape but are not yet traced individually",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: 2026-10-09: gcalculus ran the audit on three repos (gcalculus, luthen-observability, paperkit; unit edge weights): every ordering difference is the one conjunctive-split effect, and where no source is shared the arms agree to the digit (5.9%, 1.2%, 1.7% of pairs differ); script in nemik/inbox/2026-10-09-gcalculus-w237-audit-script.md takes a repo name. Remaining: the other thirteen repos, and an audit against nemik.flow itself | 2026-10-09: 2026-10-09: audit run over all sixteen workstreams with nemik-rank REPO --flow (table in the design note): 0 disagreements in 11, 9 gcalculus, 150 luthen-observability, 87 paperkit, 4 mtools, 1 aeternum; none stranded; the new ones have the conjunctive-split shape but are not yet traced individually | 2026-10-09: 2026-10-09: every disagreement accounted for from data: nemik-rank REPO --flow prints the contested sources under each differing pair, and the figures close exactly (mtools W802/W803: 2 x 0.3810 = 0.7619 vs old 2; aeternum W78: 6 contested sources sum 2.2052 + 6 uncontested = 8.2052 vs old 12); all sixteen workstreams show the one conjunctive-split effect, decided for the model by the operator ruling. tests/test_salience.py (8)",
       "issued_at": "2026-10-08T14:07:08Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
-      "last_worked": "2026-10-09T01:12:36Z",
+      "last_worked": "2026-10-09T01:23:53Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261009T012353Z"
     },
     {
       "symbol": "W241",
@@ -4628,8 +4622,7 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W240",
-        "W244"
+        "W240"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
@@ -4637,8 +4630,8 @@
       "issued_at": "2026-10-08T14:07:08Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
-      "last_worked": "2026-10-08T14:17:49Z",
-      "ticks_blocked": 12,
+      "last_worked": "2026-10-09T01:21:43Z",
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -4659,7 +4652,7 @@
       "minted_during": "tick",
       "caused_by": "W229",
       "last_worked": "2026-10-08T14:09:02Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 13,
       "completed": null
     },
     {
@@ -4818,7 +4811,7 @@
   "heartbeat": "2026-10-09T00:40:20Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-09T00:58:22Z"
+    "taken_at": "2026-10-09T01:21:35Z"
   },
   "predecessor_job_id": "ee709298",
   "leases": []
