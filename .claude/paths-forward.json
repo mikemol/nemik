@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 265,
+  "counter": 270,
   "waypoints": [
     {
       "symbol": "W1",
@@ -5076,6 +5076,101 @@
       "last_worked": "2026-10-09T16:27:33Z",
       "ticks_blocked": 0,
       "completed": "20261009T162733Z"
+    },
+    {
+      "symbol": "W266",
+      "title": "Graph history for a project-manager view: diff the workstream graph between two revisions or dates from each repo's committed paths-forward.json and ledger (minted, closed, dropped, status flips, edge changes, newly UNCLAIMED), per-card time-in-state, weekly roll-up (opened vs closed, blocked share, oldest blocked by repo), optional nemik_waypoint_age_seconds series",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "W267",
+        "W268",
+        "W269",
+        "W270"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Umbrella: the four slices W267-W270 land in order (diff, time-in-state, weekly roll-up, age metric).",
+      "evidence": "2026-10-09: 2026-10-09: taken from github-45 (operator ask for a project-manager view); atomized into W267-W270; git-history first so it works backwards.",
+      "issued_at": "2026-10-09T17:12:46Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": "2026-10-09T17:13:20Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W267",
+      "title": "nemik-history: diff one repo's graph between two revisions or dates from git history of .claude/paths-forward.json (minted, closed, dropped, status flips, edge changes, newly UNCLAIMED blocks)",
+      "status": "done",
+      "enables": [
+        "W266"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: nemik-history (src/nemik/history.py, tests/test_history.py): reads each repo's committed queue by rev or date, diffs minted, closed, dropped, flips, edges added/removed, new cross-repo blocks; smoke run on nemik since 2026-10-09: 10 minted, 14 closed. UNCLAIMED needs the fleet, so this slice reports new blocks on other workstreams instead.",
+      "issued_at": "2026-10-09T17:13:14Z",
+      "minted_during": "interrupt",
+      "caused_by": "W266",
+      "last_worked": "2026-10-09T17:14:56Z",
+      "ticks_blocked": 0,
+      "completed": "20261009T171456Z"
+    },
+    {
+      "symbol": "W268",
+      "title": "nemik-history: per-card time-in-state from the committed history",
+      "status": "ready",
+      "enables": [
+        "W266"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Walk a card's revisions, sum the time in each status; needs the diff slice's revision reader.",
+      "evidence": "",
+      "issued_at": "2026-10-09T17:13:14Z",
+      "minted_during": "interrupt",
+      "caused_by": "W266",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W269",
+      "title": "nemik-history: weekly roll-up (opened vs closed, blocked share, oldest blocked by repo)",
+      "status": "ready",
+      "enables": [
+        "W266"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Bucket the history by ISO week per repo; print the three series.",
+      "evidence": "",
+      "issued_at": "2026-10-09T17:13:15Z",
+      "minted_during": "interrupt",
+      "caused_by": "W266",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W270",
+      "title": "nemik-metrics: nemik_waypoint_age_seconds as a series",
+      "status": "ready",
+      "enables": [
+        "W266"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Add the gauge per open waypoint age by repo and state; only after the history slices, and declare it in the metrics tests and the field manifest if it is exported.",
+      "evidence": "",
+      "issued_at": "2026-10-09T17:13:15Z",
+      "minted_during": "interrupt",
+      "caused_by": "W266",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [

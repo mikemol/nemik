@@ -433,3 +433,8 @@
 2026-10-09T14:23:01Z  tick  W264 minted    -         "UI: draw each edge's width by the flow current, so the picture shows where demand travels"  evidence=operator
 2026-10-09T14:31:28Z  tick  W264 advanced  unblock   "edge width by flow current; W261 closed with the edge step split out; W260 cites luthen W675"
 2026-10-09T16:27:29Z  interrupt W265 minted    -         "UI: the repo filter is a row of toggles (none lit = all), not a select-one-or-all dropdown"  evidence=operator
+2026-10-09T17:12:46Z  interrupt W266 minted    -         "Graph history for a project-manager view: diff the workstream graph between two revisions or dates from each repo's committed paths-forward.json and ledger (minted, closed, dropped, status flips, edge changes, newly UNCLAIMED), per-card time-in-state, weekly roll-up (opened vs closed, blocked share, oldest blocked by repo), optional nemik_waypoint_age_seconds series"  evidence=operator
+2026-10-09T17:13:14Z  interrupt W267 minted    -         "nemik-history: diff one repo's graph between two revisions or dates from git history of .claude/paths-forward.json (minted, closed, dropped, status flips, edge changes, newly UNCLAIMED blocks)"  evidence=W266
+2026-10-09T17:13:14Z  interrupt W268 minted    -         "nemik-history: per-card time-in-state from the committed history"  evidence=W266
+2026-10-09T17:13:15Z  interrupt W269 minted    -         "nemik-history: weekly roll-up (opened vs closed, blocked share, oldest blocked by repo)"  evidence=W266
+2026-10-09T17:13:15Z  interrupt W270 minted    -         "nemik-metrics: nemik_waypoint_age_seconds as a series"  evidence=W266
