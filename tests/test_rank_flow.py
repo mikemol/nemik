@@ -168,5 +168,20 @@ def test_the_view_ships_each_ready_cards_flow_salience(tmp_path: Path) -> None:
     assert by_symbol["W1"]["salience"] == by_symbol["W2"]["salience"] == 1.5
 
 
+def test_the_view_ships_the_current_across_each_dependency(tmp_path: Path) -> None:
+    # nemik:W264: W7 and W8 each need only B (W3), so each dependency carries exactly their demand
+    # of 1; W4 needs A and E equally, so it splits its demand of 1 in half across the two.
+    from nemik.serve import to_json
+
+    doc = to_json(_fleet(tmp_path), {})
+    current = {
+        (e["source"].rsplit("/", 1)[-1], e["target"].rsplit("/", 1)[-1]): e["current"]
+        for e in doc["edges"]
+        if "current" in e
+    }
+    assert current[("W7", "W3")] == 1.0
+    assert current[("W4", "W1")] == current[("W4", "W2")] == 0.5
+
+
 def test_the_packaged_operator_weight_is_declared() -> None:
     assert load_weights().operator == 15

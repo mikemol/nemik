@@ -330,3 +330,18 @@ def salience_of(
     return audit(
         g, repo, Weights(local, peer, peer_blocked, operator), workable=True
     ).flow.salience
+
+
+def edge_currents(
+    g: Graph, repo: str, local: int, peer: int, peer_blocked: int, operator: int = 0
+) -> dict[tuple[str, str], float]:
+    """The demand that crossed each dependency in `repo`'s solve, by (`repo:W<n>` of the card that
+    needs, of its prerequisite): what the view draws as an edge's width (nemik:W264). Floats: the
+    view needs a magnitude, not the exact fraction.
+    """
+    from nemik.rank import Weights
+
+    flow = audit(
+        g, repo, Weights(local, peer, peer_blocked, operator), workable=True
+    ).flow
+    return {edge: float(amount) for edge, amount in flow.current.items()}

@@ -429,3 +429,5 @@
 2026-10-09T13:34:03Z  interrupt W262 minted    -         "UI: delete the non-forest per-repo layout branch and pullRows now that the rank forest is always on"  evidence=operator
 2026-10-09T13:53:06Z  tick  W263 minted    -         "Per-waypoint calendar routing: a touches tag (calendar:<label> or private) keeps a waypoint off the shared mirror and writes it to a named personal calendar; answer whether nemik-wake --alarms already delivers alarms"  evidence=life:W40
 2026-10-09T13:57:36Z  tick  W263 advanced  unblock   "calendar routing by touch; W262 dead layout deleted earlier this tick"
+2026-10-09T14:11:08Z  tick  W261 advanced  collapse  "closed W235 and W228 (their blockers cleared); salience on the label; W260 and W224 filed on their owners"
+2026-10-09T14:23:01Z  tick  W264 minted    -         "UI: draw each edge's width by the flow current, so the picture shows where demand travels"  evidence=operator

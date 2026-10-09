@@ -255,6 +255,26 @@ def to_json(g: Graph, findings: dict) -> dict:
                 found["rank_pos"], found["band"] = i, r["band_name"]
                 if r.get("salience") is not None:
                     found["salience"] = round(r["salience"], 4)
+    # nemik:W264: the demand that crossed each dependency, summed over the ready repos' solves, as
+    # the width the page draws the edge with. A `waits` edge runs waiter -> blocker, an `enables`
+    # edge prerequisite -> dependent; the flow names a dependency (needing card, prerequisite).
+    from nemik.salience import edge_currents
+
+    crossed: dict[tuple[str, str], float] = defaultdict(float)
+    for repo in sorted({n["repo"] for n in nodes if n["state"] == "ready"}):
+        for pair, amount in edge_currents(
+            g, repo, weights.local, weights.peer, weights.peer_blocked, weights.operator
+        ).items():
+            crossed[pair] += amount
+    for e in edges:
+        need, pre = (
+            (e["target"], e["source"])
+            if e["kind"] == "enables"
+            else (e["source"], e["target"])
+        )
+        carried = crossed.get((ref(URIRef(need)), ref(URIRef(pre))), 0.0)
+        if carried:
+            e["current"] = round(carried, 4)
     # nemik:W119: a total order on everything drawn. rdflib iterates in hash order, and Python salts
     # str hashes per process, so without this every server start (and every rebuild after an
     # insertion) handed the layout the same graph in a different order, and dagre/cytoscape laid it

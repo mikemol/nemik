@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 263,
+  "counter": 264,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 151
+      "ticks_blocked": 152
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 26,
+      "ticks_blocked": 27,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T12:42:16Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "weight": 2,
       "completed": null
     },
@@ -4975,7 +4975,7 @@
       "enables": [],
       "touches": [],
       "blocked_on": [
-        "github-45: watch container_oomkilled_restart for nemik after the 768Mi rollout; reopen if it recurs"
+        "luthen-observability:W675"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "Commit 76c7642 (768Mi + MALLOC_ARENA_MAX=2) is local only; push was denied by the auto-mode classifier (production deploy). Push it once the operator allows, then send github-45 the numbers and watch container_oomkilled_restart.",
@@ -4983,28 +4983,28 @@
       "issued_at": "2026-10-09T12:55:53Z",
       "minted_during": "interrupt",
       "caused_by": "github:W1",
-      "last_worked": "2026-10-09T14:08:37Z",
-      "ticks_blocked": 0,
+      "last_worked": "2026-10-09T14:22:30Z",
+      "ticks_blocked": 1,
       "completed": null,
       "weight": 1
     },
     {
       "symbol": "W261",
       "title": "UI: show the flow salience (the gcalculus weighting) on each ready card and in the forest ordering, not only rank_pos and band",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Remaining: draw edge width by the flow current (flow fibre) in graph.json and the page; salience order and the label/side-panel salience are shipped. Needs the operator to look at the salience order first (compare with rank order).",
-      "evidence": "2026-10-09: 2026-10-09: salience order checkbox (ec168a8); with it on, a ready card's label carries its salience, e.g. W12 · 3.5",
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: 2026-10-09: salience order checkbox (ec168a8); with it on, a ready card's label carries its salience, e.g. W12 · 3.5 | 2026-10-09: 2026-10-09: shipped: graph.json salience per ready card (ec168a8), 'salience order' checkbox ordering heads and layers by flow salience, salience on the side panel and (with the checkbox) on the label (99ba0a9). Edge width by current split to W264 (atomize rule)",
       "issued_at": "2026-10-09T13:34:02Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-09T14:08:28Z",
+      "last_worked": "2026-10-09T14:23:02Z",
       "ticks_blocked": 0,
-      "weight": 3,
-      "completed": null
+      "weight": 1,
+      "completed": "20261009T142302Z"
     },
     {
       "symbol": "W262",
@@ -5042,6 +5042,22 @@
       "last_worked": "2026-10-09T13:57:35Z",
       "ticks_blocked": 0,
       "completed": "20261009T135735Z"
+    },
+    {
+      "symbol": "W264",
+      "title": "UI: draw each edge's width by the flow current, so the picture shows where demand travels",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Ship flow.fibre per repo into graph.json edges (field in field-manifest.json), then set the edge width style in index.html; check the 'salience order' view first with the operator.",
+      "evidence": "",
+      "issued_at": "2026-10-09T14:23:01Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -5099,7 +5115,7 @@
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-09T14:07:21Z"
+    "taken_at": "2026-10-09T14:22:21Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []

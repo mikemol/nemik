@@ -24,7 +24,7 @@ iteration is sorted (nemik:W119). Demand conserved is checked on every source.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from fractions import Fraction
 from typing import TYPE_CHECKING
 
@@ -42,13 +42,15 @@ class Flow:
     `salience` is the demand each ready card absorbs, summed over sources; `fibre[card][source]` is
     the part that came from each source; `stranded` is the demand of a source with no ready card in
     its cone; `potential[source]` is the potential at the source for its injected demand, whose ratio
-    to the demand is the effective resistance from the source to the frontier.
+    to the demand is the effective resistance from the source to the frontier. `current[(card,
+    prerequisite)]` is the demand that crossed that dependency, summed over sources (nemik:W264).
     """
 
     salience: dict[str, Fraction]
     fibre: dict[str, dict[str, Fraction]]
     stranded: dict[str, Fraction]
     potential: dict[str, Fraction]
+    current: dict[tuple[str, str], Fraction] = field(default_factory=dict)
 
 
 def _cone(
@@ -78,14 +80,14 @@ def _grounded(
     nodes: list[str],
     source: str,
     amount: Fraction,
-) -> tuple[dict[str, Fraction], Fraction]:
+) -> tuple[dict[str, Fraction], dict[str, Fraction]]:
     """Inject `amount` at `source` and read the current into each ready card.
 
     Eliminates the unknown nodes one at a time, lowest degree first (ties by name), keeping each
     node's pivot and neighbours for the back substitution.
 
     Returns:
-        (current into each ready card, the potential at the source).
+        (current into each ready card, the potential at every unknown node; a ready card is 0).
 
     Raises:
         ZeroDivisionError: when a component has no ground (the pivot of its last node is zero).
@@ -126,7 +128,7 @@ def _grounded(
         for a, b in ((u, v), (v, u)):
             if b in front and a in potential:
                 into[b] = into.get(b, ZERO) + w * potential[a]
-    return into, potential.get(source, ZERO)
+    return into, potential
 
 
 def solve(
@@ -155,6 +157,7 @@ def solve(
     fibre: dict[str, dict[str, Fraction]] = {}
     stranded: dict[str, Fraction] = {}
     potential: dict[str, Fraction] = {}
+    current: dict[tuple[str, str], Fraction] = {}
     for source, amount in sorted(demand.items()):
         if not amount:
             continue
@@ -171,12 +174,17 @@ def solve(
             if u not in front
             for p in prereq.get(u, [])
         ]
-        into, potential[source] = _grounded(edges, front, cone, source, amount)
+        into, volts = _grounded(edges, front, cone, source, amount)
+        potential[source] = volts.get(source, ZERO)
         if sum(into.values(), ZERO) != amount:
             msg = f"demand at {source} is not conserved: {amount} in, {sum(into.values(), ZERO)} out"
             raise ValueError(msg)
-        for card, current in into.items():
-            fibre.setdefault(card, {})[source] = current
+        for u, p, w in edges:
+            across = w * (volts.get(u, ZERO) - volts.get(p, ZERO))
+            if across:
+                current[(u, p)] = current.get((u, p), ZERO) + across
+        for card, absorbed in into.items():
+            fibre.setdefault(card, {})[source] = absorbed
     salience = {
         card: sum(by_source.values(), ZERO)
         for card, by_source in sorted(fibre.items())
@@ -187,4 +195,5 @@ def solve(
         {c: dict(sorted(f.items())) for c, f in sorted(fibre.items())},
         stranded,
         potential,
+        dict(sorted(current.items())),
     )
