@@ -5121,38 +5121,40 @@
     {
       "symbol": "W268",
       "title": "nemik-history: per-card time-in-state from the committed history",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W266"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Walk a card's revisions, sum the time in each status; needs the diff slice's revision reader.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: nemik-history --time-in-state: snapshots() walks the commits touching .claude/paths-forward.json, time_in_state() credits each commit's state until the next; tests/test_history.py checks W1 blocked 8d ready 1d on a throwaway repo",
       "issued_at": "2026-10-09T17:13:14Z",
       "minted_during": "interrupt",
       "caused_by": "W266",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-09T17:17:59Z",
+      "ticks_blocked": 0,
+      "completed": "20261009T171759Z"
     },
     {
       "symbol": "W269",
       "title": "nemik-history: weekly roll-up (opened vs closed, blocked share, oldest blocked by repo)",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W266"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Bucket the history by ISO week per repo; print the three series.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: nemik-history --weekly: per ISO week opened, closed, open, blocked share, oldest block; real run on nemik: W39 opened 104 closed 92, W40 90/92, W41 76/69 (blocked 70%, oldest W17 12.1d)",
       "issued_at": "2026-10-09T17:13:15Z",
       "minted_during": "interrupt",
       "caused_by": "W266",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-09T17:18:00Z",
+      "ticks_blocked": 0,
+      "completed": "20261009T171800Z"
     },
     {
       "symbol": "W270",

@@ -4,9 +4,18 @@ from __future__ import annotations
 
 import json
 import subprocess
+from datetime import UTC, datetime
 from pathlib import Path
 
-from nemik.history import diff, main, queue_at, resolve
+from nemik.history import (
+    diff,
+    main,
+    queue_at,
+    resolve,
+    snapshots,
+    time_in_state,
+    weekly,
+)
 
 
 def _wp(symbol: str, status: str = "ready", **more: object) -> dict:
@@ -95,6 +104,40 @@ def test_the_history_is_read_by_revision_and_by_date(tmp_path: Path) -> None:
     assert resolve(repo, "2026-09-30") is None  # before the first commit
     assert resolve(repo, "2026-10-03") == first  # the last commit before the date
     assert queue_at(repo, resolve(repo, "2026-09-30")) == {}
+
+
+def test_time_in_state_and_the_weekly_roll_up_follow_the_commits(
+    tmp_path: Path,
+) -> None:
+    repo = tmp_path / "a"
+    repo.mkdir()
+    subprocess.run(["git", "-C", str(repo), "init", "-q"], check=True)
+    _commit(
+        repo,
+        {"waypoints": [_wp("W1", "blocked"), _wp("W2")], "residue": []},
+        "2026-10-05T12:00:00Z",  # Monday of ISO week 41
+    )
+    _commit(
+        repo,
+        {"waypoints": [_wp("W1", "blocked"), _wp("W2", "done")], "residue": []},
+        "2026-10-07T12:00:00Z",
+    )
+    _commit(
+        repo,
+        {"waypoints": [_wp("W1", "ready"), _wp("W2", "done")], "residue": []},
+        "2026-10-13T12:00:00Z",  # week 42
+    )
+    snaps = snapshots(repo)
+    spent = time_in_state(snaps, datetime(2026, 10, 14, 12, tzinfo=UTC))
+    day = 86400
+    assert spent["W1"] == {"blocked": 8 * day, "ready": 1 * day}
+    assert spent["W2"] == {"ready": 2 * day, "done": 7 * day}
+    w41, w42 = weekly(snaps)
+    assert (w41["week"], w41["opened"], w41["closed"]) == ("2026-W41", 2, 1)
+    assert w41["blocked_share"] == 1.0  # W1 is the only open card and it is blocked
+    assert (w41["oldest_blocked"], w41["oldest_blocked_days"]) == ("W1", 2.0)
+    assert (w42["opened"], w42["closed"], w42["blocked_share"]) == (0, 0, 0.0)
+    assert w42["oldest_blocked"] is None
 
 
 def test_the_command_prints_the_diff_between_two_dates(tmp_path: Path, capsys) -> None:
