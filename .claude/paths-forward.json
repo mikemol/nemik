@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 255,
+  "counter": 256,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 146
+      "ticks_blocked": 147
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 21,
+      "ticks_blocked": 22,
       "weight": 1
     },
     {
@@ -2597,23 +2597,22 @@
     {
       "symbol": "W137",
       "title": "Calibrate the bands.toml floor and trust-boundary policy (W133) against luthen's first vectored waypoints",
-      "status": "blocked",
+      "status": "ready",
       "enables": [],
       "touches": [
         "nemik-rank",
         "bands"
       ],
-      "blocked_on": [
-        "luthen-observability:W431"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "2026-10-01: W133 shipped floor=critical (the narrowest claim) and a trust-boundary class (touches tag, or vector S:C) with nothing to test them against: no fixture queue carries a vector or a trust-boundary tag. Waits on luthen-observability writing vectors (its W190; W188's trust-boundary items). Then: nemik-rank luthen-observability --check, and adjust the floor and class rules by letter. | 2026-10-09: 2026-10-09: nemik-inbound luthen-observability lists luthen-observability:W431 as the waypoint that claims it; the block now cites it instead of the bare repo name",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "luthen-observability:W431 is done (letter nemik/inbox/from-luthen-observability-w137-bands-calibration.md: both guarantees fired on first contact and were right; 7 band proposals): read the letter, apply the proposals to bands.toml as a reviewed diff, run nemik-rank luthen-observability --check",
+      "evidence": "2026-10-01: W133 shipped floor=critical (the narrowest claim) and a trust-boundary class (touches tag, or vector S:C) with nothing to test them against: no fixture queue carries a vector or a trust-boundary tag. Waits on luthen-observability writing vectors (its W190; W188's trust-boundary items). Then: nemik-rank luthen-observability --check, and adjust the floor and class rules by letter. | 2026-10-09: 2026-10-09: nemik-inbound luthen-observability lists luthen-observability:W431 as the waypoint that claims it; the block now cites it instead of the bare repo name | 2026-10-09: 2026-10-09: luthen-observability:W431 is done in luthen queue (completed 2026-10-04); a foreign landed blocker is not pruned by --bump-blocked, so cleared by hand",
       "issued_at": "2026-10-01T01:27:31Z",
       "minted_during": "interrupt",
       "caused_by": "W133",
-      "last_worked": "2026-10-09T03:12:01Z",
-      "ticks_blocked": 1
+      "last_worked": "2026-10-09T05:47:05Z",
+      "ticks_blocked": 0,
+      "completed": null
     },
     {
       "symbol": "W138",
@@ -3522,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-02T17:28:25Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 28,
       "weight": 2
     },
     {
@@ -3756,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T03:12:00Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -4282,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T02:13:14Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "weight": 2,
       "completed": null
     },
@@ -4375,7 +4374,7 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:09:03Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -4460,23 +4459,21 @@
     {
       "symbol": "W233",
       "title": "Host-apply DAG: decide who models host/files.json rows, activate kinds and unit ordering as edges and witnesses a waypoint can cite (luthen W665)",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "luthen-observability:W665"
       ],
       "touches": [],
-      "blocked_on": [
-        "luthen-observability:W665"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "When luthen's real host-apply.json exists: a reader (rows, kinds, restarts as graph nodes and edges), host:<id> resolved like cal: refs, the apply observer for witnesses, tests on the sample; after the md0 RELEASE",
-      "evidence": "2026-10-08: 2026-10-08: answered to github-28: luthen exports host-apply.json (rows, activate kinds, after/restarts edges, applied state) beside liveness.json; nemik reads it, rows are citable as host:<id>, and row-applied becomes a witness over a new closed observer fact. Waiting on luthen for the activate-kind vocabulary and a sample export. | 2026-10-08: 2026-10-08: luthen host (github-28) sent the 45-kind vocabulary grouped by effect and an illustrative hand-made host-apply.json. Design recorded in the note (section 'Host apply as a mark'): kinds table plus rows pointing at a kind, restarts as structured {unit, verb}, rows cite as host:<id>, row-applied is a witness fact input.apply[<id>] with as_of so decay applies, never served in the first cut. Asked of luthen: omit argvs from the export, add an effect class per kind, keep row ids unique and stable. Still waiting on luthen to generate a real export; home.mount and srv-media.mount are not rows until luthen-observability:W663. | 2026-10-08: certify residue: blocked_on named the repo, not a waypoint; luthen-observability:W665 is the exporter (its next step: extract kinds table, then checks.host_apply_export writing host-apply.json), so it is cited",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-08: 2026-10-08: answered to github-28: luthen exports host-apply.json (rows, activate kinds, after/restarts edges, applied state) beside liveness.json; nemik reads it, rows are citable as host:<id>, and row-applied becomes a witness over a new closed observer fact. Waiting on luthen for the activate-kind vocabulary and a sample export. | 2026-10-08: 2026-10-08: luthen host (github-28) sent the 45-kind vocabulary grouped by effect and an illustrative hand-made host-apply.json. Design recorded in the note (section 'Host apply as a mark'): kinds table plus rows pointing at a kind, restarts as structured {unit, verb}, rows cite as host:<id>, row-applied is a witness fact input.apply[<id>] with as_of so decay applies, never served in the first cut. Asked of luthen: omit argvs from the export, add an effect class per kind, keep row ids unique and stable. Still waiting on luthen to generate a real export; home.mount and srv-media.mount are not rows until luthen-observability:W663. | 2026-10-08: certify residue: blocked_on named the repo, not a waypoint; luthen-observability:W665 is the exporter (its next step: extract kinds table, then checks.host_apply_export writing host-apply.json), so it is cited | 2026-10-09: 2026-10-09: luthen-observability:W665 exporter landed (444f06a, verified); answered github-45: publish at <export root>/host-apply.json beside liveness.json, fallback run the module, empty after is enough but the export should carry ordering: none so nemik reads it as ordering unknown | 2026-10-09: 2026-10-09: reader and witness landed: src/nemik/hostapply.py (parse/load/restarts_of/effect_of/fact: validates version, effects, verbs, kinds, duplicate ids and dangling after; an empty after is ordering unknown; applied null, a stale export or any problem never reads as applied; load reads <root>/host-apply.json else runs luthen exporter from its venv) and the apply observer in witnesses.py (input.apply[\"<row id>\"], undefined for an unknown row or an unreadable export). Checked against the real export (198 rows, 51 kinds, no problems, 5 not applied; drain-tier-service is start-heavy). tests/test_hostapply.py (12) and tests/test_apply_witness.py (5); the duplicate-id test found a real defect (a duplicate hid the first row dangling after), fixed. host: citations are W256",
       "issued_at": "2026-10-08T13:43:16Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W665",
-      "last_worked": "2026-10-08T14:56:18Z",
-      "ticks_blocked": 17,
-      "completed": null
+      "last_worked": "2026-10-09T05:51:06Z",
+      "ticks_blocked": 0,
+      "completed": "20261009T055106Z"
     },
     {
       "symbol": "W234",
@@ -4515,7 +4512,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-09T01:34:04Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "completed": null
     },
     {
@@ -4774,7 +4771,7 @@
       "minted_during": "tick",
       "caused_by": "W244",
       "last_worked": "2026-10-09T01:30:25Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "completed": null
     },
     {
@@ -4896,6 +4893,26 @@
       "last_worked": "2026-10-09T02:12:45Z",
       "ticks_blocked": 0,
       "completed": "20261009T021245Z"
+    },
+    {
+      "symbol": "W256",
+      "title": "host:<id> citations: a waypoint cites a host-apply row in blocked_on or evidence; nemik-check resolves it against the export and reports an unknown row as an unresolved citation, never a pass",
+      "status": "ready",
+      "enables": [
+        "W233"
+      ],
+      "touches": [
+        "realizability"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Look at how cal: refs are resolved (adapter.resolve_blocker, shapes.ttl); add host: the same way, read through nemik.hostapply.load; a row the export does not hold, or an export that cannot be read, is a Warning shape; tests on a planted export",
+      "evidence": "",
+      "issued_at": "2026-10-09T05:50:55Z",
+      "minted_during": "tick",
+      "caused_by": "W233",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -4951,7 +4968,10 @@
   ],
   "job_id": "cc92a47b",
   "heartbeat": "2026-10-09T00:40:20Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-10-09T05:46:47Z"
+  },
   "predecessor_job_id": "ee709298",
   "leases": []
 }

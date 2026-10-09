@@ -128,6 +128,23 @@ def _promql(key: str) -> dict | None:
     return {"values": values, "empty": not values}
 
 
+def _apply(key: str) -> dict | None:
+    """A row id of luthen's host-apply export: whether its live file matches the declared source.
+
+    nemik:W233. `applied` is true only for a fresh, well-formed export that carries an applied
+    mark for the row; a row the export does not hold, or an export that cannot be read, is
+    undefined (never counted as done).
+    """
+    from nemik.check import default_root
+    from nemik.hostapply import fact, load
+
+    try:
+        export = load(default_root())
+    except ValueError:
+        return None
+    return fact(export, key, datetime.now(UTC).isoformat()) if export else None
+
+
 # `input.now` (RFC 3339, UTC) is always present, so a time witness needs no observer:
 # `time.parse_rfc3339_ns(input.now) >= time.parse_rfc3339_ns("2026-10-01T00:00:00Z")`.
 OBSERVERS = {
@@ -136,6 +153,7 @@ OBSERVERS = {
     "git_ref": _git_ref,
     "alert": _alert,
     "promql": _promql,
+    "apply": _apply,
 }
 
 
