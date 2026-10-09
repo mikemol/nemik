@@ -19,7 +19,11 @@ def test_goal_frontier_and_its_outside_boundary() -> None:
     g = Graph()
     G = _wp(g, "a", "W1", "blocked", ["W2"])
     U = _wp(g, "a", "W2", "blocked", ["W3", "W4"])
-    L1, L2, L3 = _wp(g, "a", "W3"), _wp(g, "a", "W4", "blocked", ["b:W9"]), _wp(g, "a", "W5", "done")
+    L1, L2, L3 = (
+        _wp(g, "a", "W3"),
+        _wp(g, "a", "W4", "blocked", ["b:W9"]),
+        _wp(g, "a", "W5", "done"),
+    )
     X = _wp(g, "c", "W7")
     for s, o in ((U, G), (L1, U), (L2, U), (L3, U), (X, G)):
         g.add((s, NEMIK.enables, o))
@@ -53,12 +57,20 @@ def test_goals_pick_terminal_items_with_on_deck_leaf_and_outside_waits() -> None
     from nemik.rank import goals, load_weights
 
     g = Graph()
-    G, L1, L2 = _wp(g, "a", "W1", "blocked", ["W2", "W3"]), _wp(g, "a", "W2"), _wp(g, "a", "W3", "blocked", ["b:W9"])
+    G, L1, L2 = (
+        _wp(g, "a", "W1", "blocked", ["W2", "W3"]),
+        _wp(g, "a", "W2"),
+        _wp(g, "a", "W3", "blocked", ["b:W9"]),
+    )
     H = _wp(g, "a", "W4")
     for n, s in ((G, "W1"), (L1, "W2"), (L2, "W3"), (H, "W4")):
         g.add((n, NEMIK.workstream, workstream_uri("a")))
         g.add((n, NEMIK.symbol, Literal(s)))
     rows = {r["goal"]: r for r in goals(g, "a", load_weights())}
     assert set(rows) == {"W1", "W4"}
-    assert rows["W1"]["on_deck"] == "a:W2" and rows["W1"]["outside"] == ["b:W9"] and not rows["W1"]["clear"]
+    assert (
+        rows["W1"]["on_deck"] == "a:W2"
+        and rows["W1"]["outside"] == ["b:W9"]
+        and not rows["W1"]["clear"]
+    )
     assert rows["W4"]["frontier"] == ["a:W4"] and rows["W4"]["clear"]

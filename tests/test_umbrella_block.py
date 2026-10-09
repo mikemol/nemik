@@ -12,7 +12,11 @@ def _wp(g, repo, sym, status="ready"):
 
 def test_peer_block_on_umbrella_is_flagged_and_on_child_is_not() -> None:
     g = Graph()
-    umbrella, child, sibling = _wp(g, "b", "W43"), _wp(g, "b", "W115"), _wp(g, "b", "W116")
+    umbrella, child, sibling = (
+        _wp(g, "b", "W43"),
+        _wp(g, "b", "W115"),
+        _wp(g, "b", "W116"),
+    )
     g.add((child, NEMIK.enables, umbrella))
     g.add((sibling, NEMIK.enables, umbrella))
     on_umbrella, on_child = _wp(g, "a", "W46", "blocked"), _wp(g, "a", "W47", "blocked")
@@ -53,10 +57,17 @@ def test_block_on_a_landed_waypoint_is_flagged_and_all_landed_means_ready() -> N
 def test_symbol_with_prose_attached_is_malformed_and_clean_forms_are_not() -> None:
     g = Graph()
     w = _wp(g, "p", "W19", "blocked")
-    for text in ("W8 (both rewrite the lock)", "W8", "luthen-observability:W185", "operator: decide x"):
+    for text in (
+        "W8 (both rewrite the lock)",
+        "W8",
+        "luthen-observability:W185",
+        "operator: decide x",
+    ):
         g.add((w, NEMIK.blockedOn, Literal(text)))
     annotate(g)
-    assert set(g.objects(w, NEMIK.malformedBlocker)) == {Literal("W8 (both rewrite the lock)")}
+    assert set(g.objects(w, NEMIK.malformedBlocker)) == {
+        Literal("W8 (both rewrite the lock)")
+    }
 
 
 def test_operator_ask_lists_the_work_waiting_behind_it_across_repos() -> None:
@@ -68,7 +79,11 @@ def test_operator_ask_lists_the_work_waiting_behind_it_across_repos() -> None:
     ask = _wp(g, "life", "W21", "blocked")
     g.add((ask, NEMIK.blockedOn, Literal("operator: decide approve the resume")))
     g.add((ask, NEMIK.waitsFor, OPERATOR))
-    w1, w3, done = _wp(g, "resumes", "W1", "blocked"), _wp(g, "resumes", "W3", "blocked"), _wp(g, "resumes", "W4", "done")
+    w1, w3, done = (
+        _wp(g, "resumes", "W1", "blocked"),
+        _wp(g, "resumes", "W3", "blocked"),
+        _wp(g, "resumes", "W4", "done"),
+    )
     g.add((w1, NEMIK.waitsFor, ask))
     g.add((w3, NEMIK.waitsFor, w1))
     g.add((ask, NEMIK.enables, done))

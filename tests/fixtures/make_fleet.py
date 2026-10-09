@@ -23,10 +23,12 @@ def scrub_block(text: str) -> str:
     t = text.strip()
     if REF.match(t):
         return t
-    m = re.match(r"^(operator)\s*:\s*(decide|act)\b", t, re.I)
+    m = re.match(r"^(operator)\s*:\s*(decide|act)\b", t, re.IGNORECASE)
     if m:
         return f"operator: {m[2].lower()} (fixture)"
-    head = re.split(r"[\s:,(/]", t, maxsplit=1)[0]  # a repo or session name, the part nemik resolves
+    head = re.split(r"[\s:,(/]", t, maxsplit=1)[
+        0
+    ]  # a repo or session name, the part nemik resolves
     return head
 
 
@@ -43,14 +45,35 @@ def main(root: Path, out: Path) -> None:
             if w.get("caused_by"):
                 x["caused_by"] = scrub_block(w["caused_by"])
             wps.append(x)
-        res = [{"symbol": r.get("symbol"), "title": f"{repo} {r.get('symbol')}", "reason": "fixture",
-                "dropped_at": "2026-09-28T00:00:00Z", "recoverable": True} for r in d.get("residue", [])]
+        res = [
+            {
+                "symbol": r.get("symbol"),
+                "title": f"{repo} {r.get('symbol')}",
+                "reason": "fixture",
+                "dropped_at": "2026-09-28T00:00:00Z",
+                "recoverable": True,
+            }
+            for r in d.get("residue", [])
+        ]
         (out / repo).mkdir(parents=True)
-        (out / repo / "paths-forward.json").write_text(json.dumps(
-            {"version": 1, "project_root": f"/fixture/{repo}", "counter": d.get("counter", 0),
-             "waypoints": wps, "residue": res}, indent=1, sort_keys=True) + "\n")
+        (out / repo / "paths-forward.json").write_text(
+            json.dumps(
+                {
+                    "version": 1,
+                    "project_root": f"/fixture/{repo}",
+                    "counter": d.get("counter", 0),
+                    "waypoints": wps,
+                    "residue": res,
+                },
+                indent=1,
+                sort_keys=True,
+            )
+            + "\n"
+        )
 
 
 if __name__ == "__main__":
-    main(Path(sys.argv[1] if len(sys.argv) > 1 else Path.home() / "github").expanduser(),
-         Path(__file__).parent / "fleet")
+    main(
+        Path(sys.argv[1] if len(sys.argv) > 1 else Path.home() / "github").expanduser(),
+        Path(__file__).parent / "fleet",
+    )

@@ -26,7 +26,11 @@ def test_exactly_one_working_card_is_clean() -> None:
     g = Graph()
     ws = _repo(g, "a", "working", "ready", "blocked")
     annotate(g)
-    assert (ws, NEMIK.noActiveCard, None) not in g and (ws, NEMIK.extraActiveCards, None) not in g
+    assert (ws, NEMIK.noActiveCard, None) not in g and (
+        ws,
+        NEMIK.extraActiveCards,
+        None,
+    ) not in g
 
 
 def test_several_working_cards_are_flagged() -> None:

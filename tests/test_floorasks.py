@@ -26,14 +26,21 @@ BIB = """@misc{a1,
 
 def test_each_bad_pointer_is_named(tmp_path) -> None:
     (tmp_path / "r" / ".claude").mkdir(parents=True)
-    (tmp_path / "r" / ".claude" / "paths-forward.json").write_text(json.dumps({
-        "waypoints": [{"symbol": "W1", "status": "done"}],
-        "residue": [{"symbol": "W2"}],
-    }))
+    (tmp_path / "r" / ".claude" / "paths-forward.json").write_text(
+        json.dumps(
+            {
+                "waypoints": [{"symbol": "W1", "status": "done"}],
+                "residue": [{"symbol": "W2"}],
+            }
+        )
+    )
     floor = tmp_path / "floor"
     floor.mkdir()
     (floor / "asks.bib").write_text(BIB)
     assert len(floor_asks(floor)) == 5
     assert {(k, why) for k, _, why in unresolved(tmp_path, floor)} == {
-        ("a2", "dropped"), ("a3", "no such waypoint"), ("a4", "no queue for repo"), ("a5", "malformed"),
+        ("a2", "dropped"),
+        ("a3", "no such waypoint"),
+        ("a4", "no queue for repo"),
+        ("a5", "malformed"),
     }

@@ -15,9 +15,8 @@ import subprocess
 import time
 from pathlib import Path
 
-import pytest
-
 import installed
+import pytest
 
 sync_api = pytest.importorskip("playwright.sync_api")
 
@@ -32,8 +31,14 @@ FLEET = Path(__file__).parent / "fixtures" / "fleet"
 #   W139 measured (in-box crossings, upward cross-box edges): before W118 105, 16; now 109, 16
 #   W141 fixture regenerated from the live fleet (455 -> 501 open nodes): 2381, 324, 4106x3022,
 #        fit 0.328, crossings 195, upward 15. A bigger graph, not a worse layout: re-based, ~10% headroom.
-BUDGET = {"cross_p95": 2450, "intra_p95": 365, "area": 13_600_000, "fit_zoom": 0.30,
-          "intra_crossings": 215, "cross_upward": 18}
+BUDGET = {
+    "cross_p95": 2450,
+    "intra_p95": 365,
+    "area": 13_600_000,
+    "fit_zoom": 0.30,
+    "intra_crossings": 215,
+    "cross_upward": 18,
+}
 # The rank forest (W135), same rules. History (cross p95, fit zoom):
 #   W135 forest, strict packing:            3654, 0.223 (2038x5352: a column on a landscape pane)
 #   W127 packing may set a box beside the boxes it depends on: 2009, 0.458 (2319x2583)
@@ -42,7 +47,12 @@ BUDGET = {"cross_p95": 2450, "intra_p95": 365, "area": 13_600_000, "fit_zoom": 0
 #        the price of a new constraint (rank order honours the fruit class), not a layout regression
 #        (operator 2026-10-01); the budget is re-based on it, same ~10% headroom as before.
 #   W141 regenerated fixture (501 open nodes): 2357, 0.45; crossings 190, upward 20. Re-based.
-FOREST_BUDGET = {"cross_p95": 2600, "fit_zoom": 0.41, "intra_crossings": 340, "cross_upward": 22}
+FOREST_BUDGET = {
+    "cross_p95": 2600,
+    "fit_zoom": 0.41,
+    "intra_crossings": 340,
+    "cross_upward": 22,
+}
 
 METRICS = """() => {
   const unit = n => n.isChild() ? n.parent().id() : n.id();
@@ -99,8 +109,12 @@ def server():
         s.bind(("127.0.0.1", 0))
         port = s.getsockname()[1]
     env = {**installed._bin()[1], "PYTHONHASHSEED": "0"}
-    proc = subprocess.Popen([*installed.script("nemik-serve"), "--root", str(FLEET), "--port", str(port)],
-                            env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    proc = subprocess.Popen(
+        [*installed.script("nemik-serve"), "--root", str(FLEET), "--port", str(port)],
+        env=env,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
     for _ in range(100):
         try:
             socket.create_connection(("127.0.0.1", port), timeout=0.2).close()
@@ -120,20 +134,28 @@ NODE_OVERLAPS = """() => {
   return out;
 }"""
 
+
 @pytest.mark.parametrize("scheme", ["light", "dark"])
 def test_layout_meets_budgets_with_labels_inside(server, scheme, tmp_path) -> None:
     out = Path(os.environ.get("TEST_UNDECLARED_OUTPUTS_DIR") or tmp_path)
     with sync_api.sync_playwright() as p:
         try:
             exe = os.environ.get("NEMIK_CHROMIUM")
-            browser = p.chromium.launch(executable_path=os.path.abspath(exe) if exe else None)
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
         except Exception as e:  # noqa: BLE001 - no browser installed here
             pytest.skip(f"chromium unavailable: {e}")
-        page = browser.new_page(viewport={"width": 1700, "height": 1250}, color_scheme=scheme)
+        page = browser.new_page(
+            viewport={"width": 1700, "height": 1250}, color_scheme=scheme
+        )
         errors: list[str] = []
         page.on("pageerror", lambda e: errors.append(str(e)))
         page.goto(server)
-        page.wait_for_function("() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0", timeout=60000)
+        page.wait_for_function(
+            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
+            timeout=60000,
+        )
         m = page.evaluate(METRICS)
         overlaps = page.evaluate(NODE_OVERLAPS)
         page.screenshot(path=str(out / f"layout-{scheme}.png"))
@@ -155,14 +177,21 @@ def test_rank_forest_view(server, tmp_path) -> None:
     with sync_api.sync_playwright() as p:
         try:
             exe = os.environ.get("NEMIK_CHROMIUM")
-            browser = p.chromium.launch(executable_path=os.path.abspath(exe) if exe else None)
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
         except Exception as e:  # noqa: BLE001 - no browser installed here
             pytest.skip(f"chromium unavailable: {e}")
-        page = browser.new_page(viewport={"width": 1700, "height": 1250}, color_scheme="dark")
+        page = browser.new_page(
+            viewport={"width": 1700, "height": 1250}, color_scheme="dark"
+        )
         errors: list[str] = []
         page.on("pageerror", lambda e: errors.append(str(e)))
         page.goto(server)
-        page.wait_for_function("() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0", timeout=60000)
+        page.wait_for_function(
+            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
+            timeout=60000,
+        )
         ranked = page.evaluate("() => cy.nodes('[rank_pos]').length")
         page.check("#forest")
         page.wait_for_timeout(500)
@@ -209,7 +238,9 @@ def test_treemap_model(server) -> None:
     with sync_api.sync_playwright() as p:
         try:
             exe = os.environ.get("NEMIK_CHROMIUM")
-            browser = p.chromium.launch(executable_path=os.path.abspath(exe) if exe else None)
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
         except Exception as e:  # noqa: BLE001 - no browser installed here
             pytest.skip(f"chromium unavailable: {e}")
         page = browser.new_page()
@@ -218,7 +249,9 @@ def test_treemap_model(server) -> None:
         m = page.evaluate(TREEMAP_INVARIANTS)
         browser.close()
     assert m["bad"] == [], m
-    assert m["n"] > 0 and m["total"] == m["n"], m  # every open item is placed exactly once
+    assert m["n"] > 0 and m["total"] == m["n"], (
+        m
+    )  # every open item is placed exactly once
     assert m["repos_in_one_root"] > 1, m  # not grouped by repo: a tree spans repos
 
 
@@ -228,15 +261,24 @@ def test_treemap_view_draws(server, tmp_path) -> None:
     with sync_api.sync_playwright() as p:
         try:
             exe = os.environ.get("NEMIK_CHROMIUM")
-            browser = p.chromium.launch(executable_path=os.path.abspath(exe) if exe else None)
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
         except Exception as e:  # noqa: BLE001 - no browser installed here
             pytest.skip(f"chromium unavailable: {e}")
-        page = browser.new_page(viewport={"width": 1700, "height": 1250}, color_scheme="dark")
+        page = browser.new_page(
+            viewport={"width": 1700, "height": 1250}, color_scheme="dark"
+        )
         errors: list[str] = []
         page.on("pageerror", lambda e: errors.append(str(e)))
         page.goto(server)
-        page.wait_for_function("() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0", timeout=60000)
-        page.evaluate("() => { cy.zoom(4); cy.pan({x: -3000, y: -2000}); }")  # the reader had zoomed in
+        page.wait_for_function(
+            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
+            timeout=60000,
+        )
+        page.evaluate(
+            "() => { cy.zoom(4); cy.pan({x: -3000, y: -2000}); }"
+        )  # the reader had zoomed in
         page.check("#treemap")
         page.wait_for_function("() => cy.nodes('.tile').length > 0", timeout=60000)
         # W185: toggling the view refits; the old zoom/pan scaled one tile off the page.
@@ -282,8 +324,12 @@ def test_treemap_view_draws(server, tmp_path) -> None:
     assert m["repo_boxes"] == 0 and m["repos"] > 1, m  # not grouped by repo
     assert m["key_repos"] == m["repos"], m
     assert m["groups"] > 0, m  # clusters are drawn as labelled frames
-    assert m["two_line"] > 0 and m["clipped"] == [], m  # leaves name their repo, and every label fits  # every repo colour has a key entry
-    assert m["tiles"] > 0 and m["contained"] > 0 and m["outside"] == [], m  # "outside" = overlapping tiles
+    assert m["two_line"] > 0 and m["clipped"] == [], (
+        m
+    )  # leaves name their repo, and every label fits  # every repo colour has a key entry
+    assert m["tiles"] > 0 and m["contained"] > 0 and m["outside"] == [], (
+        m
+    )  # "outside" = overlapping tiles
 
 
 @pytest.mark.parametrize("width", [380, 1400])
@@ -294,12 +340,17 @@ def test_side_panel_never_overflows_sideways(server, width) -> None:
     with sync_api.sync_playwright() as p:
         try:
             exe = os.environ.get("NEMIK_CHROMIUM")
-            browser = p.chromium.launch(executable_path=os.path.abspath(exe) if exe else None)
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
         except Exception as e:  # noqa: BLE001 - no browser installed here
             pytest.skip(f"chromium unavailable: {e}")
         page = browser.new_page(viewport={"width": width, "height": 1200})
         page.goto(server)
-        page.wait_for_function("() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0", timeout=60000)
+        page.wait_for_function(
+            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
+            timeout=60000,
+        )
         # The fixture's text is stripped, so give the asks the shapes that overflowed live: a long
         # URL with no break opportunity, and a long ask.
         page.evaluate("""() => { for (const a of data.operator) {
@@ -322,12 +373,17 @@ def test_every_cite_in_the_panel_is_a_repo_colon_link(server) -> None:
     with sync_api.sync_playwright() as p:
         try:
             exe = os.environ.get("NEMIK_CHROMIUM")
-            browser = p.chromium.launch(executable_path=os.path.abspath(exe) if exe else None)
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
         except Exception as e:  # noqa: BLE001 - no browser installed here
             pytest.skip(f"chromium unavailable: {e}")
         page = browser.new_page(viewport={"width": 1400, "height": 1000})
         page.goto(server)
-        page.wait_for_function("() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0", timeout=60000)
+        page.wait_for_function(
+            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
+            timeout=60000,
+        )
         page.wait_for_timeout(500)
         bad = page.evaluate("""() => {
           const out = [], pat = /\\b[a-z][a-z0-9-]*(?:[:\\/]| )W\\d+\\b/;
@@ -353,12 +409,17 @@ def test_weather_panel_groups_one_outage(server) -> None:
     with sync_api.sync_playwright() as p:
         try:
             exe = os.environ.get("NEMIK_CHROMIUM")
-            browser = p.chromium.launch(executable_path=os.path.abspath(exe) if exe else None)
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
         except Exception as e:  # noqa: BLE001 - no browser installed here
             pytest.skip(f"chromium unavailable: {e}")
         page = browser.new_page()
         page.goto(server)
-        page.wait_for_function("() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0", timeout=60000)
+        page.wait_for_function(
+            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
+            timeout=60000,
+        )
         m = page.evaluate("""() => {
           const open = data.nodes.filter(n => n.state === 'blocked' && n.cite).slice(0, 3);
           open.forEach(n => n.weather = 'wx:same');  // three repos' items wait on one outage

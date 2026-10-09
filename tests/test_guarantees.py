@@ -15,8 +15,14 @@ B = load_bands()
 V = "WV:1/R:{R}/E:N/C:N/I:N/A:N/X:N/S:{S}/F:K/W:N"
 
 
-def _wp(g: Graph, sym: str, status: str = "ready", pos: int | None = None, vector: str | None = None,
-        touches: tuple[str, ...] = ()):
+def _wp(
+    g: Graph,
+    sym: str,
+    status: str = "ready",
+    pos: int | None = None,
+    vector: str | None = None,
+    touches: tuple[str, ...] = (),
+):
     n = waypoint_uri("a", sym)
     g.add((n, OSLC_CM.state, STATE[status]))
     g.add((n, NEMIK.workstream, workstream_uri("a")))
@@ -49,14 +55,18 @@ def test_inversion_names_the_next_item_and_the_urgent_one() -> None:
     assert (urgent["symbol"], urgent["band_name"]) == ("W2", "critical")
 
 
-def test_no_inversion_when_the_next_item_is_at_the_floor_or_nothing_reaches_it() -> None:
+def test_no_inversion_when_the_next_item_is_at_the_floor_or_nothing_reaches_it() -> (
+    None
+):
     g = Graph()
     _wp(g, "W1", pos=0, vector=V.format(R="H", S="C"))
     _wp(g, "W2", pos=1)
     assert inversion(g, "a", rank(g, "a", W), B, load_guarantees()) is None
     g2 = Graph()
     _wp(g2, "W1", pos=0)
-    _wp(g2, "W2", pos=1, vector=V.format(R="C", S="U"))  # high: below the packaged floor
+    _wp(
+        g2, "W2", pos=1, vector=V.format(R="C", S="U")
+    )  # high: below the packaged floor
     assert inversion(g2, "a", rank(g2, "a", W), B, load_guarantees()) is None
 
 
@@ -67,7 +77,9 @@ def test_policy_blocks_a_ready_item_sharing_a_surface_with_an_open_member() -> N
     _wp(g, "W3", touches=("dashboard",))  # shares nothing with a member
     _wp(g, "W4", vector=V.format(R="L", S="C"), touches=("rbac",))  # a member by vector
     _wp(g, "W5", touches=("rbac",))
-    _wp(g, "W6", touches=("opa", "trust-boundary"))  # a member itself: never blocked by W1
+    _wp(
+        g, "W6", touches=("opa", "trust-boundary")
+    )  # a member itself: never blocked by W1
     assert policy_blocks(g, "a", load_guarantees()) == [
         ("W2", "W1", "trust-boundary", ["opa"]),
         ("W2", "W6", "trust-boundary", ["opa"]),
@@ -100,7 +112,10 @@ def test_check_names_rule_and_pair_and_exits_one(capsys) -> None:
         main(["a", "--check"], g=g)
     out = capsys.readouterr().out.splitlines()
     assert e.value.code == 1
-    assert "rank: INVERSION a: next is W1 (normal) while W2 is ready at critical (floor critical)" in out
+    assert (
+        "rank: INVERSION a: next is W1 (normal) while W2 is ready at critical (floor critical)"
+        in out
+    )
     assert "rank: POLICY a: W1 is ready while trust-boundary W2 is open on opa" in out
     assert "rank: UNSCORED a 1" in out
     assert not any(line.startswith("rank: OK") for line in out)
@@ -113,15 +128,30 @@ def test_check_ok_still_reports_the_unscored_census(capsys) -> None:
         main(["a", "--check"], g=g)
     out = capsys.readouterr().out.splitlines()
     assert e.value.code == 0
-    assert out == ["rank: UNSCORED a 1", "rank: OK a: next ready item carries the top cross-repo weight"]
+    assert out == [
+        "rank: UNSCORED a 1",
+        "rank: OK a: next ready item carries the top cross-repo weight",
+    ]
 
 
 def test_only_narrows_the_blocked_dependents_to_named_tags() -> None:
     """nemik:W138 (luthen's letter §3): only tenant-facing rollouts wait on an open trust-boundary item."""
-    text = (load_guarantees.__globals__["files"]("nemik.data").joinpath("bands.toml").read_text()
-            .replace('tag = "trust-boundary"\n', 'tag = "trust-boundary"\nonly = ["tenant-rollout"]\n', 1))
+    text = (
+        load_guarantees.__globals__["files"]("nemik.data")
+        .joinpath("bands.toml")
+        .read_text()
+        .replace(
+            'tag = "trust-boundary"\n',
+            'tag = "trust-boundary"\nonly = ["tenant-rollout"]\n',
+            1,
+        )
+    )
     g = Graph()
     _wp(g, "W1", "blocked", touches=("trust-boundary", "opa"))
     _wp(g, "W2", touches=("opa", "tenant-rollout"))  # in scope: blocked
-    _wp(g, "W3", touches=("opa", "dashboard"))  # same surface, not a rollout: not blocked
-    assert policy_blocks(g, "a", load_guarantees(text)) == [("W2", "W1", "trust-boundary", ["opa"])]
+    _wp(
+        g, "W3", touches=("opa", "dashboard")
+    )  # same surface, not a rollout: not blocked
+    assert policy_blocks(g, "a", load_guarantees(text)) == [
+        ("W2", "W1", "trust-boundary", ["opa"])
+    ]

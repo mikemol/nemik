@@ -15,5 +15,10 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_architecture_projection_gates_clean() -> None:
-    r = subprocess.run([sys.executable, "-m", "paperkit.gate", str(ROOT)], capture_output=True, text=True)
+    r = subprocess.run(
+        [sys.executable, "-m", "paperkit.gate", str(ROOT)],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
     assert r.returncode == 0, r.stdout + r.stderr

@@ -11,19 +11,22 @@ B = load_bands()
 V = "WV:1/R:{R}/E:{E}/C:{C}/I:{I}/A:{A}/X:N/S:{S}/F:K/W:N"
 
 
-def vec(R="L", E="N", C="N", I="N", A="N", S="U"):  # noqa: E741 - the metric's own letter
+def vec(R="L", E="N", C="N", I="N", A="N", S="U"):
     return V.format(R=R, E=E, C=C, I=I, A=A, S=S)
 
 
-@pytest.mark.parametrize(("v", "want"), [
-    (vec(R="H", S="C"), "critical"),
-    (vec(E="Y", C="H"), "critical"),
-    (vec(R="C"), "high"),
-    (vec(S="C"), "high"),
-    (vec(R="T"), "elevated"),
-    (vec(), "low"),
-    (vec(C="L"), "normal"),  # local, some impact: no rule -> unmatched
-])
+@pytest.mark.parametrize(
+    ("v", "want"),
+    [
+        (vec(R="H", S="C"), "critical"),
+        (vec(E="Y", C="H"), "critical"),
+        (vec(R="C"), "high"),
+        (vec(S="C"), "high"),
+        (vec(R="T"), "elevated"),
+        (vec(), "low"),
+        (vec(C="L"), "normal"),  # local, some impact: no rule -> unmatched
+    ],
+)
 def test_band_table(v, want) -> None:
     assert band(v, B)[0] == want
 
@@ -41,8 +44,25 @@ def test_table_refuses_a_default_outside_its_order() -> None:
 
 def test_adapter_carries_the_vector_as_written(tmp_path) -> None:
     q = tmp_path / "q.json"
-    q.write_text(json.dumps({"version": 1, "project_root": "/x", "counter": 1, "residue": [], "waypoints": [
-        {"symbol": "W1", "title": "t", "status": "ready", "vector": vec(R="H", S="C"), "vector_source": "agent"}]}))
+    q.write_text(
+        json.dumps(
+            {
+                "version": 1,
+                "project_root": "/x",
+                "counter": 1,
+                "residue": [],
+                "waypoints": [
+                    {
+                        "symbol": "W1",
+                        "title": "t",
+                        "status": "ready",
+                        "vector": vec(R="H", S="C"),
+                        "vector_source": "agent",
+                    }
+                ],
+            }
+        )
+    )
     g = queue_graph("r", q)
     n = waypoint_uri("r", "W1")
     assert str(g.value(n, NEMIK.vector)) == vec(R="H", S="C")

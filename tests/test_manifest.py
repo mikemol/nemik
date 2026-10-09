@@ -15,7 +15,14 @@ def _documents():
     m.refresh()
     live, source = read_liveness(FLEET, None)
     yield "graph.json", m.doc
-    yield "wake.json", {"liveness": source, "roster": roster(m.graph, live), "operator": operator_row(m.graph)}
+    yield (
+        "wake.json",
+        {
+            "liveness": source,
+            "roster": roster(m.graph, live),
+            "operator": operator_row(m.graph),
+        },
+    )
     for repo in sorted({n["repo"] for n in m.doc["nodes"]}):
         yield f"goals/{repo}.json", goals(m.graph, repo, load_weights())
 
@@ -29,12 +36,27 @@ def test_a_new_field_is_flagged() -> None:
     docs = dict(_documents())
     docs["graph.json"]["nodes"][0]["secret"] = "x"
     assert unmanifested("graph.json", docs["graph.json"]) == ["graph.json nodes.secret"]
-    assert unmanifested("goals/x.json", [{"goal": "W1", "leak": 1}]) == ["goals/x.json goals.leak"]
+    assert unmanifested("goals/x.json", [{"goal": "W1", "leak": 1}]) == [
+        "goals/x.json goals.leak"
+    ]
     assert unmanifested("extra.json", {}) == ["extra.json: file is not in the manifest"]
 
 
 def test_manifest_classes_are_known() -> None:
-    known = {"ref", "enum", "count", "flag", "time", "text", "counts", "records", "record", "list-ref", "list-text", "list-time"}
+    known = {
+        "ref",
+        "enum",
+        "count",
+        "flag",
+        "time",
+        "text",
+        "counts",
+        "records",
+        "record",
+        "list-ref",
+        "list-text",
+        "list-time",
+    }
     for spec in load().values():
         for fields in spec.values():
             assert set(fields.values()) <= known

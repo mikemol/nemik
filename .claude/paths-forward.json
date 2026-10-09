@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 254,
+  "counter": 255,
   "waypoints": [
     {
       "symbol": "W1",
@@ -4738,21 +4738,22 @@
     {
       "symbol": "W248",
       "title": "nemik tests: clear the 27 pre-existing ruff findings in older test files (datetime.UTC, import order, unused imports in test_witnesses.py, check=False, re flags)",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "debt"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Run ruff check --fix on tests/, review the unsafe ones by hand, ruff format, mypy; one bazel gate",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: 2026-10-09: ruff check and ruff format --check are clean over src and tests (82 files): 29 auto-fixes plus ruff format on 29 files, and by hand the self-assigned UTC (test_alarm, test_wake_alarms), check=False (installed.py, test_architecture), endswith tuple and an object-index in test_static, and the FLY002 join in test_ics_reader. mypy over tests still reports 8 errors in 5 files (W255)",
       "issued_at": "2026-10-09T01:18:18Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-10-09T02:09:32Z",
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 1,
+      "completed": "20261009T020932Z"
     },
     {
       "symbol": "W249",
@@ -4875,6 +4876,24 @@
       "ticks_blocked": 0,
       "weight": 1,
       "completed": "20261009T020602Z"
+    },
+    {
+      "symbol": "W255",
+      "title": "nemik tests: clear the 8 mypy errors in test_active_card, test_wake_nudge, test_vtodo, test_guarantees and test_fruit",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "debt"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Run mypy --config-file pyproject.toml tests; fix each by narrowing (isinstance, an assert on the Optional) rather than loosening a type; one bazel gate",
+      "evidence": "",
+      "issued_at": "2026-10-09T02:09:33Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [

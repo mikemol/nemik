@@ -16,15 +16,22 @@ def test_a_firing_is_delivered_once_across_overlapping_windows() -> None:
 
 def test_occurrences_and_instants_are_distinct() -> None:
     seen: dict = {}
-    rows = [_a("2026-10-01T13:00:00Z", "20261001"), _a("2026-10-02T13:00:00Z", "20261002"),
-            _a("2026-10-01T12:00:00Z", "20261001")]  # a second alarm on the same occurrence
+    rows = [
+        _a("2026-10-01T13:00:00Z", "20261001"),
+        _a("2026-10-02T13:00:00Z", "20261002"),
+        _a("2026-10-01T12:00:00Z", "20261001"),
+    ]  # a second alarm on the same occurrence
     assert len(undelivered(rows, seen)) == 3
 
 
 def test_errors_are_never_marked_delivered() -> None:
     seen: dict = {}
     bad = {**_a(""), "error": "bad trigger"}
-    assert undelivered([bad], seen) == [bad] and undelivered([bad], seen) == [bad] and seen == {}
+    assert (
+        undelivered([bad], seen) == [bad]
+        and undelivered([bad], seen) == [bad]
+        and seen == {}
+    )
 
 
 def test_alarm_keys_cannot_collide_with_repo_keys() -> None:

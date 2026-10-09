@@ -8,9 +8,8 @@ import subprocess
 import time
 from pathlib import Path
 
-import pytest
-
 import installed
+import pytest
 
 sync_api = pytest.importorskip("playwright.sync_api")
 
@@ -18,11 +17,28 @@ sync_api = pytest.importorskip("playwright.sync_api")
 def _queue(root: Path, repo: str, n: int) -> None:
     d = root / repo / ".claude"
     d.mkdir(parents=True)
-    wps = [{"symbol": f"W{i}", "title": f"item {i}", "status": "ready" if i % 3 else "blocked",
-            "blocked_on": [f"W{i - 1}"] if i % 3 == 0 else [], "blocked_kind": "agent" if i % 3 == 0 else None,
-            "enables": [f"W{i + 1}"] if i % 4 == 1 and i < n else []} for i in range(1, n + 1)]
-    (d / "paths-forward.json").write_text(json.dumps(
-        {"version": 1, "project_root": str(root / repo), "counter": n, "waypoints": wps, "residue": []}))
+    wps = [
+        {
+            "symbol": f"W{i}",
+            "title": f"item {i}",
+            "status": "ready" if i % 3 else "blocked",
+            "blocked_on": [f"W{i - 1}"] if i % 3 == 0 else [],
+            "blocked_kind": "agent" if i % 3 == 0 else None,
+            "enables": [f"W{i + 1}"] if i % 4 == 1 and i < n else [],
+        }
+        for i in range(1, n + 1)
+    ]
+    (d / "paths-forward.json").write_text(
+        json.dumps(
+            {
+                "version": 1,
+                "project_root": str(root / repo),
+                "counter": n,
+                "waypoints": wps,
+                "residue": [],
+            }
+        )
+    )
 
 
 @pytest.fixture
@@ -32,8 +48,15 @@ def server(tmp_path):
     with socket.socket() as s:
         s.bind(("127.0.0.1", 0))
         port = s.getsockname()[1]
-    proc = installed.popen("nemik-serve", "--root", str(tmp_path), "--port", str(port),
-                            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    proc = installed.popen(
+        "nemik-serve",
+        "--root",
+        str(tmp_path),
+        "--port",
+        str(port),
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
     for _ in range(50):
         try:
             socket.create_connection(("127.0.0.1", port), timeout=0.2).close()
@@ -76,18 +99,25 @@ def test_labels_are_not_covered_by_other_nodes(server) -> None:
         try:
             # nemik:W99: Bazel hands a pinned headless shell as $NEMIK_CHROMIUM; the host uses Playwright's cache.
             exe = os.environ.get("NEMIK_CHROMIUM")
-            browser = p.chromium.launch(executable_path=os.path.abspath(exe) if exe else None)
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
         except Exception as e:  # noqa: BLE001 - no browser installed here
             pytest.skip(f"chromium unavailable: {e}")
         page = browser.new_page(viewport={"width": 1400, "height": 900})
         errors: list[str] = []
         page.on("pageerror", lambda e: errors.append(str(e)))
         page.goto(server)
-        page.wait_for_function("() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0", timeout=20000)
+        page.wait_for_function(
+            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
+            timeout=20000,
+        )
         count, overlaps = page.evaluate(OVERLAPS)
         boxes = page.evaluate(BOXES)
         browser.close()
     assert errors == []
     assert count == 65
     assert overlaps == []
-    assert boxes == []  # nemik:W117: rows offset toward their neighbours must not overlap
+    assert (
+        boxes == []
+    )  # nemik:W117: rows offset toward their neighbours must not overlap

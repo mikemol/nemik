@@ -1,5 +1,4 @@
 import os
-import os
 import shutil
 
 import pytest
@@ -7,7 +6,9 @@ import pytest
 from nemik.witnesses import witness
 
 # nemik:W98: Bazel hands the test a pinned opa as $NEMIK_OPA; the host falls back to PATH.
-pytestmark = pytest.mark.skipif(shutil.which(os.environ.get("NEMIK_OPA", "opa")) is None, reason="opa not installed")
+pytestmark = pytest.mark.skipif(
+    shutil.which(os.environ.get("NEMIK_OPA", "opa")) is None, reason="opa not installed"
+)
 
 
 def test_file_witness_true_false(tmp_path) -> None:
@@ -49,8 +50,23 @@ def test_git_ref_witness(tmp_path, monkeypatch) -> None:
 
     repo = tmp_path / "r"
     subprocess.run(["git", "init", "-q", "-b", "main", str(repo)], check=True)
-    subprocess.run(["git", "-C", str(repo), "-c", "user.name=t", "-c", "user.email=t@t",
-                    "commit", "-q", "--allow-empty", "-m", "x"], check=True)
+    subprocess.run(
+        [
+            "git",
+            "-C",
+            str(repo),
+            "-c",
+            "user.name=t",
+            "-c",
+            "user.email=t@t",
+            "commit",
+            "-q",
+            "--allow-empty",
+            "-m",
+            "x",
+        ],
+        check=True,
+    )
     monkeypatch.setenv("NEMIK_ROOT", str(tmp_path))
     assert witness('input.git_ref["r@main"].exists')[0] == "true"
     assert witness('input.git_ref["r@nope"].exists')[0] == "false"
@@ -61,9 +77,6 @@ def test_git_ref_witness(tmp_path, monkeypatch) -> None:
 
 def test_runner_applies_only_holding_witnesses(tmp_path, monkeypatch, capsys) -> None:
     import json
-    import sys
-
-    from nemik import witnesses
 
     flag = tmp_path / "flag"
     flag.write_text("")
@@ -71,13 +84,34 @@ def test_runner_applies_only_holding_witnesses(tmp_path, monkeypatch, capsys) ->
     q.mkdir(parents=True)
     state = q / "paths-forward.json"
     wps = [
-        {"symbol": "W1", "title": "flag exists", "status": "blocked", "blocked_on": ["nemik-witnesses"],
-         "blocked_kind": "agent", "witness": f'input.file["{flag}"].exists'},
-        {"symbol": "W2", "title": "never", "status": "blocked", "blocked_on": ["nemik-witnesses"],
-         "blocked_kind": "agent", "witness": f'input.file["{tmp_path}/nope"].exists'},
+        {
+            "symbol": "W1",
+            "title": "flag exists",
+            "status": "blocked",
+            "blocked_on": ["nemik-witnesses"],
+            "blocked_kind": "agent",
+            "witness": f'input.file["{flag}"].exists',
+        },
+        {
+            "symbol": "W2",
+            "title": "never",
+            "status": "blocked",
+            "blocked_on": ["nemik-witnesses"],
+            "blocked_kind": "agent",
+            "witness": f'input.file["{tmp_path}/nope"].exists',
+        },
     ]
-    state.write_text(json.dumps({"version": 1, "project_root": str(tmp_path / "r"), "counter": 2,
-                                 "waypoints": wps, "residue": []}))
+    state.write_text(
+        json.dumps(
+            {
+                "version": 1,
+                "project_root": str(tmp_path / "r"),
+                "counter": 2,
+                "waypoints": wps,
+                "residue": [],
+            }
+        )
+    )
     import installed  # nemik:W97: as installed, so --apply reaches the installed mikemol-paths-forward
 
     r = installed.run("nemik-witnesses", "--root", str(tmp_path), "--apply")
@@ -114,17 +148,38 @@ def _serve(monkeypatch, routes: dict) -> None:
 
 
 def test_alert_and_promql_witnesses(monkeypatch) -> None:
-    alerts = [{"name": "Trace", "state": "firing", "labels": {"repo": "a"}},
-              {"name": "Trace", "state": "pending", "labels": {"repo": "b"}}]
-    _serve(monkeypatch, {
-        "/api/v1/alerts": lambda q: {"status": "success", "data": {"alerts": alerts}},
-        "/api/v1/query": lambda q: {"status": "success", "data": {"result": (
-            [{"value": [0, "3"]}] if q["query"] == ['kube_job_status_succeeded{job_name="t"}'] else [])}},
-    })
+    alerts = [
+        {"name": "Trace", "state": "firing", "labels": {"repo": "a"}},
+        {"name": "Trace", "state": "pending", "labels": {"repo": "b"}},
+    ]
+    _serve(
+        monkeypatch,
+        {
+            "/api/v1/alerts": lambda q: {
+                "status": "success",
+                "data": {"alerts": alerts},
+            },
+            "/api/v1/query": lambda q: {
+                "status": "success",
+                "data": {
+                    "result": (
+                        [{"value": [0, "3"]}]
+                        if q["query"] == ['kube_job_status_succeeded{job_name="t"}']
+                        else []
+                    )
+                },
+            },
+        },
+    )
     assert witness('input.alert["Trace{repo=\\"a\\"}"].state == "firing"')[0] == "true"
     assert witness('input.alert["Trace{repo=\\"b\\"}"].state == "firing"')[0] == "false"
     assert witness('input.alert["Other"].state == "inactive"')[0] == "true"
-    assert witness('input.promql["kube_job_status_succeeded{job_name=\\"t\\"}"].values[0] > 0')[0] == "true"
+    assert (
+        witness(
+            'input.promql["kube_job_status_succeeded{job_name=\\"t\\"}"].values[0] > 0'
+        )[0]
+        == "true"
+    )
     assert witness('input.promql["absent_metric"].empty')[0] == "true"
 
 
@@ -135,9 +190,6 @@ def test_unset_endpoint_is_undefined(monkeypatch) -> None:
 
 def test_apply_writes_letters_to_waiting_repos(tmp_path, monkeypatch, capsys) -> None:
     import json
-    import sys
-
-    from nemik import witnesses
 
     flag = tmp_path / "flag"
     flag.write_text("")
@@ -146,15 +198,50 @@ def test_apply_writes_letters_to_waiting_repos(tmp_path, monkeypatch, capsys) ->
         d = tmp_path / repo / ".claude"
         d.mkdir(parents=True)
         (tmp_path / repo / "inbox").mkdir()
-        (d / "paths-forward.json").write_text(json.dumps(
-            {"version": 1, "project_root": str(tmp_path / repo), "counter": 9, "waypoints": wps, "residue": []}))
+        (d / "paths-forward.json").write_text(
+            json.dumps(
+                {
+                    "version": 1,
+                    "project_root": str(tmp_path / repo),
+                    "counter": 9,
+                    "waypoints": wps,
+                    "residue": [],
+                }
+            )
+        )
 
-    queue("a", [{"symbol": "W1", "title": "flag", "status": "blocked", "blocked_on": ["nemik-witnesses"],
-                 "blocked_kind": "agent", "witness": f'input.file["{flag}"].exists'},
-                {"symbol": "W2", "title": "local waiter", "status": "blocked", "blocked_on": ["W1"],
-                 "blocked_kind": "agent"}])
-    queue("b", [{"symbol": "W5", "title": "foreign waiter", "status": "blocked", "blocked_on": ["a:W1"],
-                 "blocked_kind": "agent"}])
+    queue(
+        "a",
+        [
+            {
+                "symbol": "W1",
+                "title": "flag",
+                "status": "blocked",
+                "blocked_on": ["nemik-witnesses"],
+                "blocked_kind": "agent",
+                "witness": f'input.file["{flag}"].exists',
+            },
+            {
+                "symbol": "W2",
+                "title": "local waiter",
+                "status": "blocked",
+                "blocked_on": ["W1"],
+                "blocked_kind": "agent",
+            },
+        ],
+    )
+    queue(
+        "b",
+        [
+            {
+                "symbol": "W5",
+                "title": "foreign waiter",
+                "status": "blocked",
+                "blocked_on": ["a:W1"],
+                "blocked_kind": "agent",
+            }
+        ],
+    )
     queue("c", [{"symbol": "W7", "title": "unrelated", "status": "ready"}])
     import installed  # nemik:W97: as installed, so --apply reaches the installed mikemol-paths-forward
 
@@ -162,8 +249,13 @@ def test_apply_writes_letters_to_waiting_repos(tmp_path, monkeypatch, capsys) ->
     assert r.returncode == 0 and "APPLY FAILED" not in r.stderr, r.stderr
     out = r.stdout
     assert out.count("WOKE ") == 2
-    (la,), (lb,) = list((tmp_path / "a" / "inbox").iterdir()), list((tmp_path / "b" / "inbox").iterdir())
-    assert "W2" in la.read_text() and "a:W1" in lb.read_text() and "W5" in lb.read_text()
+    (la,), (lb,) = (
+        list((tmp_path / "a" / "inbox").iterdir()),
+        list((tmp_path / "b" / "inbox").iterdir()),
+    )
+    assert (
+        "W2" in la.read_text() and "a:W1" in lb.read_text() and "W5" in lb.read_text()
+    )
     assert not list((tmp_path / "c" / "inbox").iterdir())
 
 
@@ -175,7 +267,11 @@ def test_the_skills_weather_examples_are_valid_witnesses(monkeypatch) -> None:
 
     text = (Path(__file__).parents[1] / "skills" / "nemik" / "SKILL.md").read_text()
     section = text.split("## Waiting on an outage (weather)")[1].split("\n## ")[0]
-    examples = [q.replace('\\\\"', '\\"') for q in re.findall(r"`(input\.[^`]+)`", section) if "==" in q]
+    examples = [
+        q.replace('\\\\"', '\\"')
+        for q in re.findall(r"`(input\.[^`]+)`", section)
+        if "==" in q
+    ]
     assert examples
     for q in examples:
         assert ".state" in q or ".values" in q, q

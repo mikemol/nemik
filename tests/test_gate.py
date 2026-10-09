@@ -11,16 +11,24 @@ import json
 import subprocess
 from pathlib import Path
 
-import pytest
-
 import installed
+import pytest
 
 
 def waypoint(sym: str, **kw) -> dict:
     return {
-        "symbol": sym, "title": f"{sym} title", "status": "ready", "enables": [], "touches": [],
-        "blocked_on": [], "blocked_kind": None, "next_bounded_step": "", "evidence": "",
-        "issued_at": "2026-09-26T00:00:00Z", "last_worked": "2026-09-26T00:00:00Z", "ticks_blocked": 0,
+        "symbol": sym,
+        "title": f"{sym} title",
+        "status": "ready",
+        "enables": [],
+        "touches": [],
+        "blocked_on": [],
+        "blocked_kind": None,
+        "next_bounded_step": "",
+        "evidence": "",
+        "issued_at": "2026-09-26T00:00:00Z",
+        "last_worked": "2026-09-26T00:00:00Z",
+        "ticks_blocked": 0,
     } | kw
 
 
@@ -28,10 +36,17 @@ def write_queue(root: Path, repo: str, *wps: dict) -> None:
     d = root / repo
     d.mkdir(parents=True)
     counter = max((int(w["symbol"][1:]) for w in wps), default=0)
-    (d / "paths-forward.json").write_text(json.dumps({
-        "version": 1, "project_root": f"/fixture/{repo}", "counter": counter,
-        "waypoints": list(wps), "residue": [],
-    }))
+    (d / "paths-forward.json").write_text(
+        json.dumps(
+            {
+                "version": 1,
+                "project_root": f"/fixture/{repo}",
+                "counter": counter,
+                "waypoints": list(wps),
+                "residue": [],
+            }
+        )
+    )
 
 
 def run(tool: str, root: Path, *argv: str) -> subprocess.CompletedProcess:
@@ -41,9 +56,12 @@ def run(tool: str, root: Path, *argv: str) -> subprocess.CompletedProcess:
 @pytest.fixture
 def root(tmp_path: Path) -> Path:
     # alpha:W1 waits on beta:W1, which claims it; alpha:W2 waits on beta with nothing claiming it.
-    write_queue(tmp_path, "alpha",
-                waypoint("W1", status="blocked", blocked_on=["beta:W1"], blocked_kind="agent"),
-                waypoint("W2", status="blocked", blocked_on=["beta"], blocked_kind="agent"))
+    write_queue(
+        tmp_path,
+        "alpha",
+        waypoint("W1", status="blocked", blocked_on=["beta:W1"], blocked_kind="agent"),
+        waypoint("W2", status="blocked", blocked_on=["beta"], blocked_kind="agent"),
+    )
     write_queue(tmp_path, "beta", waypoint("W1", enables=["alpha:W1"]))
     return tmp_path
 
@@ -82,7 +100,9 @@ def test_provenance_untracked_by_default_for_export_layout(root: Path) -> None:
 
 def test_provenance_reads_exported_commit_json(root: Path) -> None:
     # nemik:W7: luthen's exporter writes commit.json beside the export-layout queue.
-    (root / "alpha" / "commit.json").write_text('{"sha": "abc123def456", "dirty": false}')
+    (root / "alpha" / "commit.json").write_text(
+        '{"sha": "abc123def456", "dirty": false}'
+    )
     (root / "beta" / "commit.json").write_text('{"sha": "0000deadbeef", "dirty": true}')
     r = run("check", root)
     lines = r.stdout.splitlines()
@@ -114,9 +134,17 @@ def test_long_atomic_title_does_not_warn(tmp_path: Path) -> None:
 
 
 def test_operator_categories(tmp_path: Path) -> None:
-    write_queue(tmp_path, "alpha",
-                waypoint("W1", status="blocked", blocked_on=["operator: decide ship A or B"], blocked_kind="human"),
-                waypoint("W2", status="blocked", blocked_on=["operator"], blocked_kind="human"))
+    write_queue(
+        tmp_path,
+        "alpha",
+        waypoint(
+            "W1",
+            status="blocked",
+            blocked_on=["operator: decide ship A or B"],
+            blocked_kind="human",
+        ),
+        waypoint("W2", status="blocked", blocked_on=["operator"], blocked_kind="human"),
+    )
     r = run("operator", tmp_path, "--json")
     assert r.returncode == 0, r.stderr
     asks = json.loads(r.stdout)
@@ -130,9 +158,16 @@ def test_operator_long_free_text_reads_as_needs_you(tmp_path: Path) -> None:
     # lands in unstated. It doesn't -- only a truly bare blocked_on does; several words of
     # free text with no decide/act keyword is still read as needs-you. Fixed the docs to match
     # the code rather than the reverse, since undercounting a real ask is the worse failure.
-    write_queue(tmp_path, "alpha",
-                waypoint("W1", status="blocked",
-                          blocked_on=["schema.py needs a full cleanroom, not a patch"], blocked_kind="human"))
+    write_queue(
+        tmp_path,
+        "alpha",
+        waypoint(
+            "W1",
+            status="blocked",
+            blocked_on=["schema.py needs a full cleanroom, not a patch"],
+            blocked_kind="human",
+        ),
+    )
     r = run("operator", tmp_path, "--json")
     asks = json.loads(r.stdout)
     asks = asks if isinstance(asks, list) else asks["asks"]
@@ -142,10 +177,16 @@ def test_operator_long_free_text_reads_as_needs_you(tmp_path: Path) -> None:
 def test_bundled_title_on_done_waypoint_does_not_warn(tmp_path: Path) -> None:
     # nemik:W116: decomposing finished work is noise; only open waypoints take the advice.
     bundled = "x" * 80 + "; " + "y" * 80
-    write_queue(tmp_path, "alpha", waypoint("W1", title=bundled, status="done"),
-                waypoint("W2", title=bundled))
+    write_queue(
+        tmp_path,
+        "alpha",
+        waypoint("W1", title=bundled, status="done"),
+        waypoint("W2", title=bundled),
+    )
     r = run("check", tmp_path)
-    warned = [l.split()[1] for l in r.stdout.splitlines() if "title over 150 chars" in l]
+    warned = [
+        l.split()[1] for l in r.stdout.splitlines() if "title over 150 chars" in l
+    ]
     assert warned == ["W2"], r.stdout
 
 
@@ -153,12 +194,15 @@ def test_caused_by_unresolved_reference_warns_and_names_it(root: Path) -> None:
     # nemik:W108: caused_by resolves like enables. A wrong repo prefix (luthen for
     # luthen-observability) or a missing symbol is named; a resolving one, a dropped one and
     # free text are not.
-    write_queue(root, "gamma",
-                waypoint("W1", caused_by="luthen:W190"),
-                waypoint("W2", caused_by="beta:W9"),
-                waypoint("W3", caused_by="beta:W1"),
-                waypoint("W4", caused_by="W1"),
-                waypoint("W5", caused_by="operator"))
+    write_queue(
+        root,
+        "gamma",
+        waypoint("W1", caused_by="luthen:W190"),
+        waypoint("W2", caused_by="beta:W9"),
+        waypoint("W3", caused_by="beta:W1"),
+        waypoint("W4", caused_by="W1"),
+        waypoint("W5", caused_by="operator"),
+    )
     r = run("check", root)
     assert r.returncode == 0, r.stdout + r.stderr  # a Warning, not a Violation
     named = {l.split()[1]: l for l in r.stdout.splitlines() if "caused_by names" in l}
@@ -171,19 +215,27 @@ def test_caused_by_into_residue_resolves(tmp_path: Path) -> None:
     write_queue(tmp_path, "alpha", waypoint("W2", caused_by="W1"))
     q = tmp_path / "alpha" / "paths-forward.json"
     doc = json.loads(q.read_text())
-    doc["residue"] = [{"symbol": "W1", "title": "dropped cause", "reason": "superseded"}]
+    doc["residue"] = [
+        {"symbol": "W1", "title": "dropped cause", "reason": "superseded"}
+    ]
     q.write_text(json.dumps(doc))
     r = run("check", tmp_path)
     assert not any("caused_by names" in l for l in r.stdout.splitlines()), r.stdout
 
 
-def test_single_repo_root_given_as_dot_is_named_by_its_directory(tmp_path: Path) -> None:
+def test_single_repo_root_given_as_dot_is_named_by_its_directory(
+    tmp_path: Path,
+) -> None:
     # nemik:W142: Path(".").name is '', so `--root .` inside a repo left the workstream unnamed and
     # its own alpha:W<n> causes unresolved.
     repo = tmp_path / "alpha"
     (repo / ".claude").mkdir(parents=True)
-    write_queue(tmp_path, "staging", waypoint("W1"), waypoint("W2", caused_by="alpha:W1"))
-    (tmp_path / "staging" / "paths-forward.json").rename(repo / ".claude" / "paths-forward.json")
+    write_queue(
+        tmp_path, "staging", waypoint("W1"), waypoint("W2", caused_by="alpha:W1")
+    )
+    (tmp_path / "staging" / "paths-forward.json").rename(
+        repo / ".claude" / "paths-forward.json"
+    )
     r = installed.run("nemik-check", "--root", ".", cwd=repo)
     lines = r.stdout.splitlines()
     assert "OK        alpha" in lines, r.stdout + r.stderr

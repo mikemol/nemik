@@ -29,7 +29,14 @@ def script(name: str) -> list[str]:
 
 
 def run(name: str, *args: str, **kw) -> subprocess.CompletedProcess:
-    return subprocess.run([*script(name), *args], env=_bin()[1], capture_output=True, text=True, **kw)
+    return subprocess.run(
+        [*script(name), *args],
+        env=_bin()[1],
+        capture_output=True,
+        text=True,
+        check=False,
+        **kw,
+    )
 
 
 def popen(name: str, *args: str, **kw) -> subprocess.Popen:

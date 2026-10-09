@@ -17,7 +17,11 @@ def test_every_nemik_command_is_documented() -> None:
 
 
 def test_every_check_shape_is_documented() -> None:
-    shapes = re.findall(r"^nemik:(\w+Shape) a sh:NodeShape", (ROOT / "src/nemik/data/shapes.ttl").read_text(), re.M)
+    shapes = re.findall(
+        r"^nemik:(\w+Shape) a sh:NodeShape",
+        (ROOT / "src/nemik/data/shapes.ttl").read_text(),
+        re.MULTILINE,
+    )
     assert shapes
     missing = [s for s in shapes if f"`{s}`" not in SKILL]
     assert not missing, f"skills/nemik/SKILL.md does not document {missing}"
