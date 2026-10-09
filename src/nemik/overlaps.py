@@ -6,6 +6,7 @@ waypoints share. `--cross` keeps only tags shared across repos: the part a singl
 """
 
 from rdflib import Graph
+from rdflib.term import Node
 
 from nemik.adapter import NEMIK, OSLC_CM, STATE
 from nemik.blocks import _repo, ref
@@ -14,15 +15,15 @@ LIVE = {STATE["ready"], STATE["working"]}
 
 
 def overlaps(g: Graph, cross: bool = False) -> dict[str, list[str]]:
-    by_tag: dict[str, set] = {}
+    by_tag: dict[str, set[Node]] = {}
     for node, tag in g.subject_objects(NEMIK.touches):
         if g.value(node, OSLC_CM.state) in LIVE:
             by_tag.setdefault(str(tag), set()).add(node)
-    out = {}
-    for tag, nodes in sorted(by_tag.items()):
+    out: dict[str, list[str]] = {}
+    for name, nodes in sorted(by_tag.items()):
         if len(nodes) < 2 or (cross and len({_repo(n) for n in nodes}) < 2):
             continue
-        out[tag] = sorted(ref(n) for n in nodes)
+        out[name] = sorted(ref(n) for n in nodes)
     return out
 
 
@@ -32,9 +33,16 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
 
     from nemik.check import default_root, survey
 
-    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
-    ap.add_argument("--cross", action="store_true", help="only tags shared across repos")
+    ap = argparse.ArgumentParser(description=(__doc__ or "").splitlines()[0])
+    ap.add_argument(
+        "--root",
+        type=Path,
+        default=default_root(),
+        help="~/github, or the export layout root",
+    )
+    ap.add_argument(
+        "--cross", action="store_true", help="only tags shared across repos"
+    )
     args = ap.parse_args(argv)
     if g is None:
         g = Graph()

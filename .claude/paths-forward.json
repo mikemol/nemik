@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 132
+      "ticks_blocked": 133
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "weight": 1
     },
     {
@@ -2613,7 +2613,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 77
+      "ticks_blocked": 78
     },
     {
       "symbol": "W138",
@@ -3522,7 +3522,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-02T17:28:25Z",
-      "ticks_blocked": 13,
+      "ticks_blocked": 14,
       "weight": 2
     },
     {
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-08T13:42:13Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "completed": null
     },
     {
@@ -3931,7 +3931,6 @@
         "debt"
       ],
       "blocked_on": [
-        "W207",
         "W216"
       ],
       "blocked_kind": "agent",
@@ -3941,7 +3940,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 1,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -3949,50 +3948,46 @@
     {
       "symbol": "W210",
       "title": "nemik typing: src/nemik/overlaps.py (16 findings)",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W223"
       ],
       "touches": [
         "debt"
       ],
-      "blocked_on": [
-        "W207"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Waits on 3 debt file(s) to clean first",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: 2026-10-09: overlaps.py cleaned (format, a Node/str name reuse, dict[str, set[Node]], __doc__ guard): ruff, format and mypy clean",
       "issued_at": "2026-10-05T16:39:45Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 7,
-      "completed": null,
+      "last_worked": "2026-10-09T00:27:16Z",
+      "ticks_blocked": 0,
+      "completed": "20261009T002716Z",
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
     },
     {
       "symbol": "W211",
       "title": "nemik typing: src/nemik/witnesses.py (99 findings)",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W223"
       ],
       "touches": [
         "debt"
       ],
-      "blocked_on": [
-        "W207"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Waits on 3 debt file(s) to clean first",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: 2026-10-09: witnesses.py cleaned (ruff fixes, format, a None-match guard in _alert, check=False on the apply subprocess): ruff, format and mypy clean",
       "issued_at": "2026-10-05T16:39:45Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 7,
-      "completed": null,
+      "last_worked": "2026-10-09T00:27:17Z",
+      "ticks_blocked": 0,
+      "completed": "20261009T002717Z",
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
     },
@@ -4061,7 +4056,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4138,75 +4133,69 @@
     {
       "symbol": "W218",
       "title": "nemik typing: src/nemik/blocks_cli.py (33 findings)",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W223"
       ],
       "touches": [
         "debt"
       ],
-      "blocked_on": [
-        "W207"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Waits on 3 debt file(s) to clean first",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: 2026-10-09: blocks_cli.py already passes ruff, format and mypy; the 33 findings in the title are stale",
       "issued_at": "2026-10-05T18:20:44Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 7,
-      "completed": null,
+      "last_worked": "2026-10-09T00:27:18Z",
+      "ticks_blocked": 0,
+      "completed": "20261009T002718Z",
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
     },
     {
       "symbol": "W219",
       "title": "nemik typing: src/nemik/floorasks.py (17 findings)",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W223"
       ],
       "touches": [
         "debt"
       ],
-      "blocked_on": [
-        "W207"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Waits on 3 debt file(s) to clean first",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: 2026-10-09: floorasks.py formatted (the only finding left); ruff, format and mypy clean",
       "issued_at": "2026-10-05T18:20:44Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 7,
-      "completed": null,
+      "last_worked": "2026-10-09T00:27:18Z",
+      "ticks_blocked": 0,
+      "completed": "20261009T002718Z",
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
     },
     {
       "symbol": "W220",
       "title": "nemik typing: src/nemik/vtodo.py (79 findings)",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W221"
       ],
       "touches": [
         "debt"
       ],
-      "blocked_on": [
-        "W207"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Waits on 3 debt file(s) to clean first",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: 2026-10-09: vtodo.py already passes ruff, format and mypy; the 79 findings in the title are stale",
       "issued_at": "2026-10-05T18:20:44Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 7,
-      "completed": null,
+      "last_worked": "2026-10-09T00:27:19Z",
+      "ticks_blocked": 0,
+      "completed": "20261009T002719Z",
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
     },
@@ -4230,7 +4219,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4253,7 +4242,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4271,7 +4260,6 @@
       "blocked_on": [
         "W218",
         "W219",
-        "W213",
         "W210",
         "W209",
         "W211"
@@ -4283,7 +4271,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 1,
       "completed": null,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
@@ -4387,11 +4375,7 @@
         "realizability"
       ],
       "blocked_on": [
-        "W231",
-        "W232",
-        "W234",
         "W235",
-        "W236",
         "W243"
       ],
       "blocked_kind": "agent",
@@ -4401,7 +4385,7 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:09:03Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -4501,7 +4485,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W665",
       "last_worked": "2026-10-08T14:56:18Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -4546,7 +4530,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:17:54Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -4587,7 +4571,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:56:19Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -4609,7 +4593,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:22:37Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -4652,7 +4636,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:07:19Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "completed": null
     },
     {
@@ -4674,7 +4658,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:17:49Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -4696,7 +4680,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:14:24Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "completed": null
     },
     {
@@ -4717,7 +4701,7 @@
       "minted_during": "tick",
       "caused_by": "W229",
       "last_worked": "2026-10-08T14:09:02Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -4738,7 +4722,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-08T14:17:48Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {

@@ -43,9 +43,11 @@ def unresolved(root: Path, floor: Path) -> list[tuple[str, str, str]]:
     for key, ptr in floor_asks(floor):
         repo, _, sym = ptr.partition(":")
         if not re.fullmatch(r"W\d+", sym):
-            bad.append((key, ptr, "malformed")); continue
+            bad.append((key, ptr, "malformed"))
+            continue
         if repo not in queues:
-            bad.append((key, ptr, "no queue for repo")); continue
+            bad.append((key, ptr, "no queue for repo"))
+            continue
         st = cache.setdefault(repo, _statuses(queues[repo])).get(sym)
         if st is None:
             bad.append((key, ptr, "no such waypoint"))
@@ -56,7 +58,12 @@ def unresolved(root: Path, floor: Path) -> list[tuple[str, str, str]]:
 
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
+    ap.add_argument(
+        "--root",
+        type=Path,
+        default=default_root(),
+        help="~/github, or the export layout root",
+    )
     ap.add_argument("--floor", type=Path, help="default: <root>/summit/floor")
     args = ap.parse_args(argv)
     floor = args.floor or args.root / "summit" / "floor"
