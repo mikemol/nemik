@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 264,
+  "counter": 265,
   "waypoints": [
     {
       "symbol": "W1",
@@ -4979,11 +4979,11 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "Commit 76c7642 (768Mi + MALLOC_ARENA_MAX=2) is local only; push was denied by the auto-mode classifier (production deploy). Push it once the operator allows, then send github-45 the numbers and watch container_oomkilled_restart.",
-      "evidence": "2026-10-09: Measured 2026-10-09 on the real 16-queue root (scratchpad rss_phases.py): 18 MB start, 42 MB after import, 240 MB first build, 313-352 MB after rebuilds (peak 352), 339 MB after /cmd rank/goals/check/metrics/witnesses; 118k triples, 4107 nodes. Rebuild holds old+new graph. Pod peaks 536 MB at 512Mi. Chose bigger limit (768Mi) plus MALLOC_ARENA_MAX=2; arena effect not measured.",
+      "evidence": "2026-10-09: Measured 2026-10-09 on the real 16-queue root (scratchpad rss_phases.py): 18 MB start, 42 MB after import, 240 MB first build, 313-352 MB after rebuilds (peak 352), 339 MB after /cmd rank/goals/check/metrics/witnesses; 118k triples, 4107 nodes. Rebuild holds old+new graph. Pod peaks 536 MB at 512Mi. Chose bigger limit (768Mi) plus MALLOC_ARENA_MAX=2; arena effect not measured. | 2026-10-09: 2026-10-09 14:38Z (github-45, recorded on luthen-observability:W675): both replicas at limit 768Mi Guaranteed, working sets 446.9 and 432.4 MB (57%), restarts_total 0, container_oomkilled_restart not firing. github-45 keeps watching and messages nemik if it recurs.",
       "issued_at": "2026-10-09T12:55:53Z",
       "minted_during": "interrupt",
       "caused_by": "github:W1",
-      "last_worked": "2026-10-09T14:22:30Z",
+      "last_worked": "2026-10-09T14:38:57Z",
       "ticks_blocked": 1,
       "completed": null,
       "weight": 1
@@ -5059,6 +5059,23 @@
       "last_worked": "2026-10-09T14:31:28Z",
       "ticks_blocked": 0,
       "completed": "20261009T143128Z"
+    },
+    {
+      "symbol": "W265",
+      "title": "UI: the repo filter is a row of toggles (none lit = all), not a select-one-or-all dropdown",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: index.html: #repos toggle buttons replace the select; a Set of picked repos (none = all) filters the graph, findings and weather; goals lists every picked repo; the tool panel needs exactly one; the pick is remembered in localStorage; main's height follows the wrapped header (--hh). Not seen rendered; no test drives the page filter.",
+      "issued_at": "2026-10-09T16:27:29Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": "2026-10-09T16:27:33Z",
+      "ticks_blocked": 0,
+      "completed": "20261009T162733Z"
     }
   ],
   "residue": [

@@ -432,3 +432,4 @@
 2026-10-09T14:11:08Z  tick  W261 advanced  collapse  "closed W235 and W228 (their blockers cleared); salience on the label; W260 and W224 filed on their owners"
 2026-10-09T14:23:01Z  tick  W264 minted    -         "UI: draw each edge's width by the flow current, so the picture shows where demand travels"  evidence=operator
 2026-10-09T14:31:28Z  tick  W264 advanced  unblock   "edge width by flow current; W261 closed with the edge step split out; W260 cites luthen W675"
+2026-10-09T16:27:29Z  interrupt W265 minted    -         "UI: the repo filter is a row of toggles (none lit = all), not a select-one-or-all dropdown"  evidence=operator
