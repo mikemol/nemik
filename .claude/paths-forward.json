@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 145
+      "ticks_blocked": 146
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 20,
+      "ticks_blocked": 21,
       "weight": 1
     },
     {
@@ -2604,16 +2604,16 @@
         "bands"
       ],
       "blocked_on": [
-        "luthen-observability"
+        "luthen-observability:W431"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "2026-10-01: W133 shipped floor=critical (the narrowest claim) and a trust-boundary class (touches tag, or vector S:C) with nothing to test them against: no fixture queue carries a vector or a trust-boundary tag. Waits on luthen-observability writing vectors (its W190; W188's trust-boundary items). Then: nemik-rank luthen-observability --check, and adjust the floor and class rules by letter.",
+      "evidence": "2026-10-01: W133 shipped floor=critical (the narrowest claim) and a trust-boundary class (touches tag, or vector S:C) with nothing to test them against: no fixture queue carries a vector or a trust-boundary tag. Waits on luthen-observability writing vectors (its W190; W188's trust-boundary items). Then: nemik-rank luthen-observability --check, and adjust the floor and class rules by letter. | 2026-10-09: 2026-10-09: nemik-inbound luthen-observability lists luthen-observability:W431 as the waypoint that claims it; the block now cites it instead of the bare repo name",
       "issued_at": "2026-10-01T01:27:31Z",
       "minted_during": "interrupt",
       "caused_by": "W133",
-      "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 90
+      "last_worked": "2026-10-09T03:12:01Z",
+      "ticks_blocked": 1
     },
     {
       "symbol": "W138",
@@ -3522,7 +3522,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-02T17:28:25Z",
-      "ticks_blocked": 26,
+      "ticks_blocked": 27,
       "weight": 2
     },
     {
@@ -3746,16 +3746,17 @@
       "enables": [],
       "touches": [],
       "blocked_on": [
-        "luthen-observability"
+        "luthen-observability:W626",
+        "luthen-observability:W670"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "2026-10-05: 2026-10-05: letter left in luthen-observability/inbox/2026-10-05-nemik-calendar-write-unit.md (no luthen session was live) asking for a claiming waypoint and the unit. | 2026-10-08: 2026-10-08: title shortened (was bundled, nemik-check W201 warning); full ask unchanged: a unit every few minutes so a waypoint that changes or closes updates or deletes its event, asked of luthen as for the Tasks unit W234.",
+      "evidence": "2026-10-05: 2026-10-05: letter left in luthen-observability/inbox/2026-10-05-nemik-calendar-write-unit.md (no luthen session was live) asking for a claiming waypoint and the unit. | 2026-10-08: 2026-10-08: title shortened (was bundled, nemik-check W201 warning); full ask unchanged: a unit every few minutes so a waypoint that changes or closes updates or deletes its event, asked of luthen as for the Tasks unit W234. | 2026-10-09: 2026-10-09: claimed on luthen as luthen-observability:W626 and W670 (nemik-inbound luthen-observability lists both; relayed by github-45)",
       "issued_at": "2026-10-05T14:36:03Z",
       "minted_during": "tick",
       "caused_by": "life-c5",
-      "last_worked": "2026-10-08T13:42:13Z",
-      "ticks_blocked": 20,
+      "last_worked": "2026-10-09T03:12:00Z",
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -4281,7 +4282,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T02:13:14Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "weight": 2,
       "completed": null
     },
@@ -4365,8 +4366,7 @@
         "realizability"
       ],
       "blocked_on": [
-        "W235",
-        "W243"
+        "W235"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "Agree the shared verdict schema and the open questions in .claude/design/W228-realizability-read-side.md with mtools-25 (W848) and luthen-observability (W666), then, after the md0 RELEASE, the policy file and its tests",
@@ -4375,7 +4375,7 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:09:03Z",
-      "ticks_blocked": 13,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -4475,7 +4475,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W665",
       "last_worked": "2026-10-08T14:56:18Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "completed": null
     },
     {
@@ -4515,7 +4515,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-09T01:34:04Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -4638,23 +4638,21 @@
     {
       "symbol": "W243",
       "title": "luthen-observability:W666 emits the agreed verdict shape (ref, level, reference_arm, residue with closes_by and optional closes_ref)",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W228"
       ],
       "touches": [],
-      "blocked_on": [
-        "luthen-observability:W666"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "2026-10-08: 2026-10-08: the remainder of W229: mtools-25 agreed the union shape and it is recorded in the design note; the luthen host agreed an earlier form (ref/level/reference_arm/residue[gate, reference_arm, closes_by]) and github-28 has used the same words since, but no explicit confirmation of the final union (closes_by plus the optional closes_ref) and no W666 emitting it yet.",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-08: 2026-10-08: the remainder of W229: mtools-25 agreed the union shape and it is recorded in the design note; the luthen host agreed an earlier form (ref/level/reference_arm/residue[gate, reference_arm, closes_by]) and github-28 has used the same words since, but no explicit confirmation of the final union (closes_by plus the optional closes_ref) and no W666 emitting it yet. | 2026-10-09: 2026-10-09: luthen-observability:W666 is done in luthen own queue (completed 20261009T031114Z): policy/cutover/gate.rego, commit 647d16b (exists in luthen-observability), emits {ref, level, reference_arm, residue} and the cutover ran S1-S8 through it (relayed by github-45, checked against the queue)",
       "issued_at": "2026-10-08T14:08:55Z",
       "minted_during": "tick",
       "caused_by": "W229",
-      "last_worked": "2026-10-08T14:09:02Z",
-      "ticks_blocked": 18,
-      "completed": null
+      "last_worked": "2026-10-09T03:11:59Z",
+      "ticks_blocked": 0,
+      "completed": "20261009T031159Z"
     },
     {
       "symbol": "W244",
@@ -4776,7 +4774,7 @@
       "minted_during": "tick",
       "caused_by": "W244",
       "last_worked": "2026-10-09T01:30:25Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
