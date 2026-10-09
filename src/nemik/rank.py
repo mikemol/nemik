@@ -151,6 +151,7 @@ def objectives(
         "band_why": why,
         "weight": down if salience is None else salience.get(ref_of(n), 0),
         "downstream": down,
+        "salience": None if salience is None else float(salience.get(ref_of(n), 0)),
     }
 
 

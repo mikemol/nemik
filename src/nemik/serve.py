@@ -253,6 +253,8 @@ def to_json(g: Graph, findings: dict) -> dict:
         for i, r in enumerate(rank(g, repo, weights, comp)):
             if found := by_id.get(f"{BASE}{repo}/{r['symbol']}"):
                 found["rank_pos"], found["band"] = i, r["band_name"]
+                if r.get("salience") is not None:
+                    found["salience"] = round(r["salience"], 4)
     # nemik:W119: a total order on everything drawn. rdflib iterates in hash order, and Python salts
     # str hashes per process, so without this every server start (and every rebuild after an
     # insertion) handed the layout the same graph in a different order, and dagre/cytoscape laid it

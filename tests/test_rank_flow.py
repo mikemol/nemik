@@ -158,5 +158,15 @@ def test_an_operator_ask_is_a_demand_source_with_the_declared_weight(
     assert _ranked(g, 15) == ["W2", "W1"]  # the ask carries its declared weight
 
 
+def test_the_view_ships_each_ready_cards_flow_salience(tmp_path: Path) -> None:
+    # nemik:W261: graph.json carries the salience the card absorbs, so the page can order by it.
+    from nemik.serve import to_json
+
+    doc = to_json(_fleet(tmp_path), {})
+    by_symbol = {n["symbol"]: n for n in doc["nodes"] if n["state"] == "ready"}
+    assert by_symbol["W3"]["salience"] == 2.0  # B absorbs both sole dependents' demand
+    assert by_symbol["W1"]["salience"] == by_symbol["W2"]["salience"] == 1.5
+
+
 def test_the_packaged_operator_weight_is_declared() -> None:
     assert load_weights().operator == 15

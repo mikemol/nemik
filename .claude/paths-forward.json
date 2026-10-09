@@ -4992,12 +4992,12 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Add salience (and the share it absorbs) to graph.json per ready node via rank(); draw it on the node label and the side panel; decide the manifest field names (manifest.py gates published fields).",
+      "next_bounded_step": "Ship salience, the edge current (flow fibre) and each ready card's absorbed share in graph.json (check manifest.py field gating). Draw them: label and side panel; edge width by current; head order by the demand flowing into it, not by band-dominated rank_pos. Operator 2026-10-09: layout should be salience-directed.",
       "evidence": "",
       "issued_at": "2026-10-09T13:34:02Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": null,
+      "last_worked": "2026-10-09T13:40:04Z",
       "ticks_blocked": 0
     },
     {

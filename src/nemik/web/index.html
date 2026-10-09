@@ -58,6 +58,7 @@ aside a { color: var(--ink); text-decoration: underline dotted var(--muted); }
   <label><input type="checkbox" id="showDone"> show done/dropped</label>
   <label><input type="checkbox" id="showNoise"> show operator blocks that don't need you</label>
   <label><input type="checkbox" id="showCross"> show all cross-repo edges</label>
+  <label title="Order the forest by the flow model's salience (the demand each goal's cone carries, and each ready card absorbs) instead of by nemik-rank's band-first position"><input type="checkbox" id="bySalience"> salience order</label>
   <label title="One treemap across the fleet: each tile holds the work beneath it, area by load, rank order reading left to right; repo is the border colour"><input type="checkbox" id="treemap"> treemap</label>
   <span class="stat" id="stat"></span>
 </header>
@@ -156,7 +157,7 @@ function draw() {
   // The viewport is kept only across a redraw of the SAME view: a changed layout mode or repo
   // filter puts every node somewhere else, and the old zoom/pan then showed one tile scaled off the
   // page (operator 2026-10-02, treemap toggle).
-  const mode = [treemapOn, repo].join("|");
+  const mode = [treemapOn, document.getElementById("bySalience").checked, repo].join("|");
   const view = cy && mode === lastMode ? { zoom: cy.zoom(), pan: { ...cy.pan() } } : null;
   lastMode = mode;
   if (cy) cy.destroy();
@@ -429,7 +430,13 @@ function forest(box) {
   });
   const rp = id => { const v = cy.getElementById(id).data("rank_pos"); return v === undefined ? Infinity : v; };
   const sym = id => cy.getElementById(id).data("label") || id;
-  const byRank = (a, b) => rp(a) - rp(b) || (sym(a) < sym(b) ? -1 : sym(a) > sym(b) ? 1 : 0);
+  const bySal = document.getElementById("bySalience").checked;
+  const sal = id => cy.getElementById(id).data("salience") || 0;
+  const bySym = (a, b) => (sym(a) < sym(b) ? -1 : sym(a) > sym(b) ? 1 : 0);
+  // nemik:W261: "salience order" ranks by the flow model alone (highest absorbed salience first);
+  // otherwise by nemik-rank's composed position, where the band outranks the weight.
+  const byRank = bySal ? (a, b) => sal(b) - sal(a) || rp(a) - rp(b) || bySym(a, b)
+                       : (a, b) => rp(a) - rp(b) || bySym(a, b);
   const below = h => {  // everything under a head, following prerequisites
     const seen = new Set([h]), stack = [h];
     while (stack.length) for (const p of feeds.get(stack.pop())) if (!seen.has(p)) { seen.add(p); stack.push(p); }
@@ -439,7 +446,10 @@ function forest(box) {
   if (!heads.length) heads = [...ids];  // a cycle with no exit: every member is its own head
   const trees = new Map(heads.map(h => [h, below(h)]));
   const best = h => Math.min(...[...trees.get(h)].map(rp));
-  heads.sort((a, b) => best(a) - best(b) || byRank(a, b));
+  // A head's salience is the demand its whole cone carries: the sum over the ready cards beneath it.
+  const carried = h => [...trees.get(h)].reduce((t, n) => t + sal(n), 0);
+  heads.sort(bySal ? (a, b) => carried(b) - carried(a) || best(a) - best(b) || byRank(a, b)
+                   : (a, b) => best(a) - best(b) || byRank(a, b));
   const owner = new Map();
   for (const h of heads) for (const n of trees.get(h)) if (!owner.has(n)) owner.set(n, h);
   for (const n of ids) if (!owner.has(n)) owner.set(n, heads[0]);
@@ -756,6 +766,7 @@ function detail(n) {
     <dt>cite as</dt><dd>${citeLink(n.cite)}</dd>
     <dt>title</dt><dd>${linked(n.title)}</dd>
     <dt>state</dt><dd>${esc(n.state)}</dd>
+    ${n.salience !== undefined ? `<dt>salience</dt><dd>${n.salience} (flow model; band ${esc(n.band || "")}, rank ${n.rank_pos})</dd>` : ""}
     ${n.minted_during ? `<dt>minted during</dt><dd>${esc(n.minted_during)}</dd>` : ""}
     ${n.caused_by ? `<dt>caused by</dt><dd>${linked(n.caused_by.replace(/^urn:nemik:([^/]+)\//, "$1:"), n.repo)}</dd>` : ""}
     ${n.blocked_on.length ? `<dt>blocked on</dt><dd>${linked(n.blocked_on.join(", "), n.repo)} (${esc(n.blocked_kind)})</dd>` : ""}
@@ -905,6 +916,11 @@ document.getElementById("showNoise").onchange = draw;
 try { document.getElementById("treemap").checked = localStorage.getItem("nemik.treemap") === "1"; } catch (e) { /* default off */ }
 document.getElementById("treemap").onchange = () => {
   try { localStorage.setItem("nemik.treemap", document.getElementById("treemap").checked ? "1" : "0"); } catch (e) { /* not remembered */ }
+  draw();
+};
+try { document.getElementById("bySalience").checked = localStorage.getItem("nemik.bySalience") === "1"; } catch (e) { /* default off */ }
+document.getElementById("bySalience").onchange = () => {
+  try { localStorage.setItem("nemik.bySalience", document.getElementById("bySalience").checked ? "1" : "0"); } catch (e) { /* not remembered */ }
   draw();
 };
 document.getElementById("showCross").onchange = () => cy && cy.edges(".cross").length && (

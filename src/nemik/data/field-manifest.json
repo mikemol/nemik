@@ -7,7 +7,7 @@
         "id": "ref", "repo": "enum", "symbol": "ref", "cite": "ref", "for": "ref", "state": "enum",
         "title": "text", "blocked_on": "list-text", "blocked_kind": "enum", "caused_by": "text",
         "minted_during": "text", "effort": "counts", "last_activity": "time", "open_blockers": "count",
-        "rank_pos": "count", "band": "enum", "weather": "ref"
+        "rank_pos": "count", "salience": "count", "band": "enum", "weather": "ref"
       },
       "edges": {"source": "ref", "target": "ref", "kind": "enum", "satisfied": "flag"},
       "inbound": {"blocked": "ref", "blocker": "enum", "claimed_by": "list-ref", "title": "text", "blocked_on": "list-text"},
