@@ -173,6 +173,35 @@ def provenance(root: Path) -> list[str]:
     return lines
 
 
+def _realizability(root: Path) -> int:
+    """Print every live waypoint's realizability coordinate and residue (nemik:W247).
+
+    Exit 0 when every waypoint is runtime-valid, 1 when any carries residue, 2 when a queue could
+    not be judged (no pinned opa, an unreadable queue): not checked never reads as clean.
+    """
+    from datetime import UTC, datetime
+
+    from mikemol.pathsforward.lock import stamp
+    from mikemol.pathsforward.opa_eval import OpaUnavailableError
+
+    from nemik.realize import rows, runtime_valid, verdicts
+
+    now, residue, unjudged = stamp(datetime.now(UTC)), 0, 0
+    for repo, path in workstream_files(root, QUEUE):
+        try:
+            found = verdicts(repo, path, root, now)
+        except (OpaUnavailableError, UnreadableStateError) as exc:
+            print(f"NOT JUDGED {repo}: {exc}")
+            unjudged += 1
+            continue
+        print(f"{repo}: {len(found)} waypoint(s)")
+        for verdict in found:
+            residue += not runtime_valid(verdict)
+            for line in rows(verdict):
+                print(f"  {line}")
+    return 2 if unjudged else int(residue > 0)
+
+
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(
         prog="nemik-check", description=(__doc__ or "").splitlines()[0]
@@ -184,7 +213,15 @@ def main(argv: list[str] | None = None) -> None:
         help="~/github, or the export layout root",
     )
     ap.add_argument("--dump", type=Path, help="write the merged graph as Turtle")
+    ap.add_argument(
+        "--realizability",
+        action="store_true",
+        help="print each live waypoint's realizability coordinate and residue ledger "
+        "(mtools' policy under the pinned opa); exit 2 when a queue could not be judged",
+    )
     args = ap.parse_args(argv)
+    if args.realizability:
+        sys.exit(_realizability(args.root))
 
     for line in provenance(args.root):
         print(line)

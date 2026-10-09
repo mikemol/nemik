@@ -39,8 +39,8 @@ def test_every_live_waypoint_is_judged_and_a_done_one_is_not(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     monkeypatch.setenv("OPA_BIN", str(Path(shutil.which(OPA) or OPA).resolve()))
-    found = verdicts(_queue(tmp_path), tmp_path, NOW)
-    assert [str(v["ref"]).rsplit(":", 1)[-1] for v in found] == ["W1", "W2"]
+    found = verdicts("alpha", _queue(tmp_path), tmp_path, NOW)
+    assert [v["ref"] for v in found] == ["alpha:W1", "alpha:W2"]
 
 
 def test_an_absent_opa_raises_rather_than_reading_clean(
@@ -50,4 +50,4 @@ def test_an_absent_opa_raises_rather_than_reading_clean(
 
     monkeypatch.setenv("OPA_BIN", str(tmp_path / "no-such-opa"))
     with pytest.raises(OpaUnavailableError):
-        verdicts(_queue(tmp_path), tmp_path, NOW)
+        verdicts("alpha", _queue(tmp_path), tmp_path, NOW)

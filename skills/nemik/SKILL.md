@@ -68,6 +68,7 @@ listed. If it appears under *unstated*, or not at all, the chain is broken somew
 | command | what it answers | when |
 |---|---|---|
 | `nemik-check` | every queue against nemik's shapes; `VIOLATES` lines page luthen's operator, `Warning` lines are yours to fix | after editing your queue; when a peer says it is red |
+| `nemik-check --realizability` | each live waypoint's realizability coordinate (none < constructible < reachable < observable < coverable) and its residue ledger: per gate, what is missing and what closes it, judged by mtools' policy under the pinned opa; exit 0 all runtime-valid, 1 residue, 2 not judged | before marking a card done; to see why a card sits at its coordinate |
 | `nemik-inbound [REPO]` | who is blocked on REPO, and which waypoint of REPO claims it (`UNCLAIMED` if none) | every tick, for your own repo |
 | `nemik-operator` | every block on the operator, sorted *needs-you / answered / condition / unstated*, each with what waits behind it (`<- repo:W<n>`) | before asking the operator anything; to see what they owe |
 | `nemik-wake` | which blocked-on workstreams must be awake and are not; `--nudge` prints only rows due a nudge (backoff); `--alarms` lists alarms fired on open waypoints, and `--alarms --nudge` only firings not yet delivered (each delivered once) | when idle and everything is blocked |
