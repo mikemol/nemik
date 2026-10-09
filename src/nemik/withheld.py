@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from typing import Any
 
 from nemik.adapter import BASE
 
@@ -25,16 +26,24 @@ class WithheldError(ValueError):
 
 def load(path: Path | None) -> frozenset[str]:
     if path is None or not path.exists():
-        raise WithheldError(f"withheld list {path} is missing: the gate did not run, refusing to publish")
+        raise WithheldError(
+            f"withheld list {path} is missing: the gate did not run, refusing to publish"
+        )
     try:
         doc = json.loads(path.read_text())
     except ValueError as e:
         raise WithheldError(f"withheld list {path} is not JSON: {e}") from e
     if doc.get("version") != 1:
-        raise WithheldError(f"withheld list {path}: unknown version {doc.get('version')!r}")
+        raise WithheldError(
+            f"withheld list {path}: unknown version {doc.get('version')!r}"
+        )
     items = doc.get("items")
-    if not isinstance(items, list) or not all(isinstance(i, dict) and isinstance(i.get("ref"), str) for i in items):
-        raise WithheldError(f"withheld list {path}: items must be a list of {{ref, field, rule}}")
+    if not isinstance(items, list) or not all(
+        isinstance(i, dict) and isinstance(i.get("ref"), str) for i in items
+    ):
+        raise WithheldError(
+            f"withheld list {path}: items must be a list of {{ref, field, rule}}"
+        )
     return frozenset(i["ref"] for i in items)
 
 
@@ -44,12 +53,25 @@ def _id(ref: str) -> str:
 
 def _stub(ref: str) -> dict:
     repo, _, sym = ref.partition(":")
-    return {"id": _id(ref), "repo": repo, "symbol": sym, "cite": ref, "state": "withheld", "title": "withheld",
-            "blocked_on": [], "blocked_kind": "", "caused_by": "", "minted_during": "", "effort": {},
-            "last_activity": "", "open_blockers": 0, "weather": ""}
+    return {
+        "id": _id(ref),
+        "repo": repo,
+        "symbol": sym,
+        "cite": ref,
+        "state": "withheld",
+        "title": "withheld",
+        "blocked_on": [],
+        "blocked_kind": "",
+        "caused_by": "",
+        "minted_during": "",
+        "effort": {},
+        "last_activity": "",
+        "open_blockers": 0,
+        "weather": "",
+    }
 
 
-def apply(docs: dict[str, object], refs: frozenset[str]) -> dict[str, object]:
+def apply(docs: dict[str, Any], refs: frozenset[str]) -> dict[str, Any]:
     """The documents with every withheld item dropped whole (stubs where a published item points)."""
     if not refs:
         return docs
@@ -66,9 +88,14 @@ def apply(docs: dict[str, object], refs: frozenset[str]) -> dict[str, object]:
     g["operator"] = [a for a in g["operator"] if a["ref"] not in refs]
     out["graph.json"] = g
     wake = dict(docs["wake.json"])
-    hide = lambda rows: [w if w["blocked"] not in refs else {**w, "title": "withheld"} for w in rows]  # noqa: E731
+    hide = lambda rows: [
+        w if w["blocked"] not in refs else {**w, "title": "withheld"} for w in rows
+    ]
     wake["roster"] = [{**r, "waiting": hide(r["waiting"])} for r in wake["roster"]]
-    wake["operator"] = {**wake["operator"], "waiting": [w for w in wake["operator"]["waiting"] if w["blocked"] not in refs]}
+    wake["operator"] = {
+        **wake["operator"],
+        "waiting": [w for w in wake["operator"]["waiting"] if w["blocked"] not in refs],
+    }
     out["wake.json"] = wake
     for name, doc in docs.items():
         if name.startswith("goals/"):
@@ -77,6 +104,11 @@ def apply(docs: dict[str, object], refs: frozenset[str]) -> dict[str, object]:
             # .frontier), so it holds withheld content whenever a leaf is withheld, not only when
             # the goal is (luthen-observability found aeternum:W74's text under W75-W77, 2026-10-02).
             # The entry is dropped whole, never scrubbed.
-            out[name] = [r for r in doc if f"{repo}:{r['goal']}" not in refs
-                         and not refs & set(r["frontier"]) and r.get("on_deck") not in refs]
+            out[name] = [
+                r
+                for r in doc
+                if f"{repo}:{r['goal']}" not in refs
+                and not refs & set(r["frontier"])
+                and r.get("on_deck") not in refs
+            ]
     return out

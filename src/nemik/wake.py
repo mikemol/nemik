@@ -20,7 +20,7 @@ from __future__ import annotations
 import json
 import subprocess
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from rdflib import Graph
@@ -47,7 +47,11 @@ def read_liveness(root: Path, source: str | None) -> tuple[dict, str]:
         py = luthen / ".venv" / "bin" / "python"
         if py.exists():
             out = subprocess.run(
-                [str(py), "-m", "checks.loop_liveness"], cwd=luthen, capture_output=True, text=True, check=True
+                [str(py), "-m", "checks.loop_liveness"],
+                cwd=luthen,
+                capture_output=True,
+                text=True,
+                check=True,
             ).stdout
             return json.loads(out)["repos"], "luthen-observability checks.loop_liveness"
     except (OSError, ValueError, KeyError, subprocess.CalledProcessError) as exc:
@@ -68,11 +72,13 @@ def age_seconds(last_tick: str | None, now: datetime | None = None) -> float | N
     except ValueError:
         return None
     if then.tzinfo is None:
-        then = then.replace(tzinfo=timezone.utc)
-    return (now or datetime.now(timezone.utc)).astimezone(timezone.utc).timestamp() - then.timestamp()
+        then = then.replace(tzinfo=UTC)
+    return (now or datetime.now(UTC)).astimezone(UTC).timestamp() - then.timestamp()
 
 
-def should_nudge(last_nudged: float | None, now: datetime | None = None, rewake_s: int = REWAKE_S) -> bool:
+def should_nudge(
+    last_nudged: float | None, now: datetime | None = None, rewake_s: int = REWAKE_S
+) -> bool:
     """Is it time to nudge again, given when (unix seconds, or None if never) it was last nudged?
 
     nemik:W18/luthen W117: the backoff+dedup decision luthen's checks/waker.py currently
@@ -83,10 +89,16 @@ def should_nudge(last_nudged: float | None, now: datetime | None = None, rewake_
     """
     if last_nudged is None:
         return True
-    return (now or datetime.now(timezone.utc)).timestamp() - last_nudged >= rewake_s
+    return (now or datetime.now(UTC)).timestamp() - last_nudged >= rewake_s
 
 
-def roster(g: Graph, liveness: dict, *, now: datetime | None = None, alarms: list[dict] | None = None) -> list[dict]:
+def roster(
+    g: Graph,
+    liveness: dict,
+    *,
+    now: datetime | None = None,
+    alarms: list[dict] | None = None,
+) -> list[dict]:
     """One row per workstream something is waiting on, sleepers with waiters first.
 
     nemik:W151: a fired alarm (fired_alarms) whose owner is not awake also puts the owner on the
@@ -95,46 +107,78 @@ def roster(g: Graph, liveness: dict, *, now: datetime | None = None, alarms: lis
     """
     rows: dict[str, dict] = {}
     for a in alarms or []:
-        if a.get("error") or a["state"] == "awake" or a.get("message") and a["state"] == "idle":
+        if (
+            a.get("error")
+            or a["state"] == "awake"
+            or a.get("message")
+            and a["state"] == "idle"
+        ):
             continue
         rec = liveness.get(a["repo"])
         last_tick = (rec or {}).get("last_tick") or ""
-        row = rows.setdefault(a["repo"], {
-            "repo": a["repo"], "state": a["state"], "last_tick": last_tick,
-            "last_tick_age_s": age_seconds(last_tick, now), "waiting": []})
-        row["waiting"].append({"blocked": a["ref"], "claimed_by": [a["ref"]],
-                               "title": f"alarm fired {a['at']}: {a['title']}"})
+        row = rows.setdefault(
+            a["repo"],
+            {
+                "repo": a["repo"],
+                "state": a["state"],
+                "last_tick": last_tick,
+                "last_tick_age_s": age_seconds(last_tick, now),
+                "waiting": [],
+            },
+        )
+        row["waiting"].append(
+            {
+                "blocked": a["ref"],
+                "claimed_by": [a["ref"]],
+                "title": f"alarm fired {a['at']}: {a['title']}",
+            }
+        )
     for b in inbound(g):
         rec = liveness.get(b["blocker"])
         last_tick = (rec or {}).get("last_tick") or ""
-        row = rows.setdefault(b["blocker"], {
-            "repo": b["blocker"],
-            "state": "unknown" if rec is None else AWAKE.get(rec.get("verdict"), "idle"),
-            "last_tick": last_tick,
-            "last_tick_age_s": age_seconds(last_tick, now),
-            "waiting": [],
-        })
-        row["waiting"].append({"blocked": b["blocked"], "claimed_by": b["claimed_by"], "title": b["title"]})
+        row = rows.setdefault(
+            b["blocker"],
+            {
+                "repo": b["blocker"],
+                "state": "unknown"
+                if rec is None
+                else AWAKE.get(rec.get("verdict"), "idle"),
+                "last_tick": last_tick,
+                "last_tick_age_s": age_seconds(last_tick, now),
+                "waiting": [],
+            },
+        )
+        row["waiting"].append(
+            {
+                "blocked": b["blocked"],
+                "claimed_by": b["claimed_by"],
+                "title": b["title"],
+            }
+        )
     order = {"asleep": 0, "idle": 1, "unknown": 2, "awake": 3}
-    return sorted(rows.values(), key=lambda r: (order[r["state"]], -len(r["waiting"]), r["repo"]))
+    return sorted(
+        rows.values(), key=lambda r: (order[r["state"]], -len(r["waiting"]), r["repo"])
+    )
 
 
-def fired_alarms(g: Graph, start: datetime, end: datetime, liveness: dict) -> list[dict]:
+def fired_alarms(
+    g: Graph, start: datetime, end: datetime, liveness: dict
+) -> list[dict]:
     """Every alarm that fired in [start, end) on an open waypoint, oldest first (nemik:W149).
 
     Alarms live on waypoints (mtools:W279), with their anchors (W300) and recurrence (W309/W310);
     nemik.alarm resolves each to its instants. The owner's liveness says who can act on it now.
     """
-    from rdflib import URIRef
+    from rdflib.term import Node
 
     from nemik.adapter import BASE, NEMIK, OSLC_CM
     from nemik.alarm import fires_between
 
-    def val(n: URIRef, p) -> str:
+    def val(n: Node, p) -> str:
         return str(g.value(n, p) or "")
 
     out = []
-    for n in sorted(set(g.subjects(NEMIK.alarm, None))):
+    for n in sorted(set(g.subjects(NEMIK.alarm, None)), key=str):
         if (n, OSLC_CM.state, NEMIK.Done) in g:
             continue
         repo, _, sym = str(n).removeprefix(BASE).partition("/")
@@ -142,31 +186,65 @@ def fired_alarms(g: Graph, start: datetime, end: datetime, liveness: dict) -> li
         state = "unknown" if rec is None else AWAKE.get(rec.get("verdict"), "idle")
         for trig in sorted(str(t) for t in g.objects(n, NEMIK.alarm)):
             try:
-                hits = fires_between(trig, start, end, dtstart=val(n, NEMIK.dtstart), due=val(n, NEMIK.due),
-                                     rrule=val(n, NEMIK.rrule),
-                                     exdates=tuple(sorted(str(x) for x in g.objects(n, NEMIK.exdate))),
-                                     done={str(r): "" for r in g.objects(n, NEMIK.occurrenceDone)})
+                hits = fires_between(
+                    trig,
+                    start,
+                    end,
+                    dtstart=val(n, NEMIK.dtstart),
+                    due=val(n, NEMIK.due),
+                    rrule=val(n, NEMIK.rrule),
+                    exdates=tuple(sorted(str(x) for x in g.objects(n, NEMIK.exdate))),
+                    done={str(r): "" for r in g.objects(n, NEMIK.occurrenceDone)},
+                )
             except Exception as e:  # noqa: BLE001 - one bad alarm (a hand-edited queue) must not hide the rest
-                out.append({"ref": f"{repo}:{sym}", "repo": repo, "trigger": trig, "error": str(e), "state": state,
-                            "at": "", "recurrence_id": "", "title": val(n, DCTERMS.title)})
+                out.append(
+                    {
+                        "ref": f"{repo}:{sym}",
+                        "repo": repo,
+                        "trigger": trig,
+                        "error": str(e),
+                        "state": state,
+                        "at": "",
+                        "recurrence_id": "",
+                        "title": val(n, DCTERMS.title),
+                    }
+                )
                 continue
-            out += [{"ref": f"{repo}:{sym}", "repo": repo, "trigger": trig, "at": at.strftime("%Y-%m-%dT%H:%M:%SZ"),
-                     "recurrence_id": rid, "state": state, "title": val(n, DCTERMS.title)} for at, rid in hits]
+            out += [
+                {
+                    "ref": f"{repo}:{sym}",
+                    "repo": repo,
+                    "trigger": trig,
+                    "at": at.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                    "recurrence_id": rid,
+                    "state": state,
+                    "title": val(n, DCTERMS.title),
+                }
+                for at, rid in hits
+            ]
     # nemik:W168: an owner with a live session (awake or idle) gets a line ready to send as is: the
     # first line stands alone (the recipient previews only it) and cites the waypoint. An asleep or
     # unknown owner gets none; waking it is the roster's job (nemik:W151).
     for a in out:
         if a["state"] in ("awake", "idle") and not a.get("error"):
             occ = f" (occurrence {a['recurrence_id']})" if a["recurrence_id"] else ""
-            a["message"] = (f"nemik → {a['repo']}: alarm on {a['ref']} fired at {a['at']}{occ}: {a['title']}\n"
-                            f"Trigger {a['trigger']}, as stored on the waypoint. Act on it, or move the alarm.")
+            a["message"] = (
+                f"nemik → {a['repo']}: alarm on {a['ref']} fired at {a['at']}{occ}: {a['title']}\n"
+                f"Trigger {a['trigger']}, as stored on the waypoint. Act on it, or move the alarm."
+            )
     return sorted(out, key=lambda a: (a["at"], a["ref"], a["trigger"]))
 
 
 def operator_row(g: Graph) -> dict:
     needs = [a for a in operator_asks(g) if a["category"] == "needs-you"]
-    return {"repo": "operator", "state": "you", "last_tick": "",
-            "waiting": [{"blocked": a["ref"], "claimed_by": [], "title": a["ask"]} for a in needs]}
+    return {
+        "repo": "operator",
+        "state": "you",
+        "last_tick": "",
+        "waiting": [
+            {"blocked": a["ref"], "claimed_by": [], "title": a["ask"]} for a in needs
+        ],
+    }
 
 
 def nudges_path() -> Path:
@@ -183,7 +261,7 @@ def due_nudges(rows: list[dict], seen: dict, now: datetime | None = None) -> lis
     default) -- should_nudge() itself owns no state file. Mutates `seen` in place for the repos
     returned, so a caller can write it straight back out.
     """
-    now = now or datetime.now(timezone.utc)
+    now = now or datetime.now(UTC)
     due = []
     for r in rows:
         if r["state"] not in ("asleep", "idle") or not r["waiting"]:
@@ -213,14 +291,16 @@ def alarm_key(a: dict) -> str:
     return f"alarm|{a['ref']}|{a['recurrence_id']}|{a['at']}"
 
 
-def undelivered(fired: list[dict], seen: dict, now: datetime | None = None) -> list[dict]:
+def undelivered(
+    fired: list[dict], seen: dict, now: datetime | None = None
+) -> list[dict]:
     """Fired alarms not yet delivered, each marked delivered in `seen` (mutated, like due_nudges).
 
     A firing is delivered once: the same (ref, occurrence, instant) seen again by an overlapping
     window is skipped. Error rows (a bad trigger) have no instant, are never marked, and so stay
     visible every run until the queue is fixed.
     """
-    now = now or datetime.now(timezone.utc)
+    now = now or datetime.now(UTC)
     out = []
     for a in fired:
         if a.get("error"):
@@ -239,18 +319,33 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
 
     from nemik.check import default_root, survey
 
-    ap = argparse.ArgumentParser(prog="nemik-wake", description=(__doc__ or "").splitlines()[0])
-    ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
+    ap = argparse.ArgumentParser(
+        prog="nemik-wake", description=(__doc__ or "").splitlines()[0]
+    )
+    ap.add_argument(
+        "--root",
+        type=Path,
+        default=default_root(),
+        help="~/github, or the export layout root",
+    )
     ap.add_argument("--liveness", help="loop_liveness JSON file, or - for stdin")
     ap.add_argument("--all", action="store_true", help="include awake workstreams")
     ap.add_argument("--json", action="store_true", help="machine-readable output")
-    ap.add_argument("--nudge", action="store_true",
-                     help="print only rows due a nudge now (backoff/dedup via --nudges-state); with --alarms, "
-                          "only firings not yet delivered")
+    ap.add_argument(
+        "--nudge",
+        action="store_true",
+        help="print only rows due a nudge now (backoff/dedup via --nudges-state); with --alarms, "
+        "only firings not yet delivered",
+    )
     ap.add_argument("--nudges-state", type=Path, default=nudges_path())
-    ap.add_argument("--alarms", action="store_true",
-                    help="list alarms that fired on open waypoints in [--since, --until) (nemik:W149)")
-    ap.add_argument("--since", help="ISO-8601 instant (default: 15 minutes before --until)")
+    ap.add_argument(
+        "--alarms",
+        action="store_true",
+        help="list alarms that fired on open waypoints in [--since, --until) (nemik:W149)",
+    )
+    ap.add_argument(
+        "--since", help="ISO-8601 instant (default: 15 minutes before --until)"
+    )
     ap.add_argument("--until", help="ISO-8601 instant (default: now)")
     args = ap.parse_args(argv)
     if g is None:
@@ -262,9 +357,13 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     if args.alarms:
         from datetime import timedelta
 
-        until = datetime.fromisoformat(args.until) if args.until else datetime.now(timezone.utc)
-        since = datetime.fromisoformat(args.since) if args.since else until - timedelta(minutes=15)
-        fired = fired_alarms(g, since.astimezone(timezone.utc), until.astimezone(timezone.utc), live)
+        until = datetime.fromisoformat(args.until) if args.until else datetime.now(UTC)
+        since = (
+            datetime.fromisoformat(args.since)
+            if args.since
+            else until - timedelta(minutes=15)
+        )
+        fired = fired_alarms(g, since.astimezone(UTC), until.astimezone(UTC), live)
         if args.nudge:
             # nemik:W167: alarms go out through the nudge path, so each firing is delivered once
             # (W166's key) in the same state file the repo nudges use.
@@ -272,34 +371,62 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
             fired = undelivered(fired, seen)
             _write_seen(args.nudges_state, seen)
         if args.json:
-            print(json.dumps({"liveness": source, "since": since.isoformat(), "until": until.isoformat(),
-                              "alarms": fired}, indent=2))
+            print(
+                json.dumps(
+                    {
+                        "liveness": source,
+                        "since": since.isoformat(),
+                        "until": until.isoformat(),
+                        "alarms": fired,
+                    },
+                    indent=2,
+                )
+            )
             return
-        print(f"alarms fired {since.isoformat()} .. {until.isoformat()} (liveness: {source})")
+        print(
+            f"alarms fired {since.isoformat()} .. {until.isoformat()} (liveness: {source})"
+        )
         for a in fired:
             occ = f" [{a['recurrence_id']}]" if a["recurrence_id"] else ""
             what = f"ERROR {a['error']}" if a.get("error") else a["title"][:60]
-            print(f"  {a['at'] or '-':20} {a['state']:7} {a['ref']:28}{occ} {a['trigger']:22} {what}")
+            print(
+                f"  {a['at'] or '-':20} {a['state']:7} {a['ref']:28}{occ} {a['trigger']:22} {what}"
+            )
             if a.get("message"):
                 print(f"      send: {a['message'].splitlines()[0]}")
         return
     from datetime import timedelta
 
-    end = datetime.now(timezone.utc)
-    rows = [r for r in roster(g, live, alarms=fired_alarms(g, end - timedelta(minutes=15), end, live))
-            if args.all or r["state"] != "awake"]
+    end = datetime.now(UTC)
+    rows = [
+        r
+        for r in roster(
+            g, live, alarms=fired_alarms(g, end - timedelta(minutes=15), end, live)
+        )
+        if args.all or r["state"] != "awake"
+    ]
     if args.nudge:
         seen = _read_seen(args.nudges_state)
         rows = due_nudges(rows, seen)
         _write_seen(args.nudges_state, seen)
     if args.json:
-        print(json.dumps({"liveness": source, "roster": rows, "operator": operator_row(g)}, indent=2))
+        print(
+            json.dumps(
+                {"liveness": source, "roster": rows, "operator": operator_row(g)},
+                indent=2,
+            )
+        )
         return
     print(f"liveness: {source}")
     for r in rows:
-        print(f"\n{r['state'].upper():7} {r['repo']}  ({len(r['waiting'])} waiting; last tick {r['last_tick'] or 'none'})")
+        print(
+            f"\n{r['state'].upper():7} {r['repo']}  ({len(r['waiting'])} waiting; last tick {r['last_tick'] or 'none'})"
+        )
         for w in r["waiting"]:
-            claim = ", ".join(w["claimed_by"]) or f"waiting on {r['repo']}: claim with --enables {w['blocked']}"
+            claim = (
+                ", ".join(w["claimed_by"])
+                or f"waiting on {r['repo']}: claim with --enables {w['blocked']}"
+            )
             print(f"          {w['blocked']:28} {claim:22} {w['title'][:60]}")
     op = operator_row(g)
     print(f"\nYOU     operator  ({len(op['waiting'])} need you: nemik-operator)")

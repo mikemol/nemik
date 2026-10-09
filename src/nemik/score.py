@@ -32,8 +32,13 @@ def load_bands(text: str | None = None) -> Bands:
         text = files("nemik.data").joinpath("bands.toml").read_text()
     d = tomllib.loads(text)
     order = tuple(d["order"])
-    rules = {b: tuple({m: frozenset(v) for m, v in r.items()} for r in d.get("band", {}).get(b, []))
-             for b in order}
+    rules = {
+        b: tuple(
+            {m: frozenset(v) for m, v in r.items()}
+            for r in d.get("band", {}).get(b, [])
+        )
+        for b in order
+    }
     for key in ("unscored", "unmatched"):
         if d[key] not in order:
             raise ValueError(f"bands.toml: {key} = {d[key]!r} is not in order")
@@ -55,7 +60,9 @@ def band(vector: str | None, bands: Bands) -> tuple[str, str]:
     for b in bands.order:
         for rule in bands.rules[b]:
             if _matches(values, rule):
-                return b, "/".join(f"{m}:{'|'.join(sorted(a))}" for m, a in rule.items())
+                return b, "/".join(
+                    f"{m}:{'|'.join(sorted(a))}" for m, a in rule.items()
+                )
     return bands.unmatched, "unmatched"
 
 
@@ -67,6 +74,7 @@ def _matches(values: dict[str, str], rule: dict[str, frozenset[str]]) -> bool:
 @dataclass(frozen=True)
 class Policy:
     """An item class that blocks the ready items sharing a surface with its open members (W133)."""
+
     name: str
     tag: str | None
     rules: tuple[dict[str, frozenset[str]], ...]
@@ -86,7 +94,9 @@ class Policy:
         try:
             values = parse(vector) if vector else None
         except RefusedError:
-            values = None  # an invalid vector is unscored (band()); it proves no membership
+            values = (
+                None  # an invalid vector is unscored (band()); it proves no membership
+            )
         return values is not None and any(_matches(values, r) for r in self.rules)
 
 
@@ -106,8 +116,12 @@ def load_guarantees(text: str | None = None, bands: Bands | None = None) -> Guar
     if floor is not None and floor not in bands.order:
         raise ValueError(f"bands.toml: guarantee.floor = {floor!r} is not in order")
     policies = tuple(
-        Policy(p["class"], p.get("tag"),
-               tuple({m: frozenset(v) for m, v in r.items()} for r in p.get("vector", [])),
-               frozenset(p.get("only", [])))
-        for p in d.get("policy", []))
+        Policy(
+            p["class"],
+            p.get("tag"),
+            tuple({m: frozenset(v) for m, v in r.items()} for r in p.get("vector", [])),
+            frozenset(p.get("only", [])),
+        )
+        for p in d.get("policy", [])
+    )
     return Guarantees(floor, policies)
