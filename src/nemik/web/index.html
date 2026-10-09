@@ -58,7 +58,6 @@ aside a { color: var(--ink); text-decoration: underline dotted var(--muted); }
   <label><input type="checkbox" id="showDone"> show done/dropped</label>
   <label><input type="checkbox" id="showNoise"> show operator blocks that don't need you</label>
   <label><input type="checkbox" id="showCross"> show all cross-repo edges</label>
-  <label title="Inside each repo: its goals left to right in nemik-rank order, each with the work beneath it"><input type="checkbox" id="forest"> rank forest</label>
   <label title="One treemap across the fleet: each tile holds the work beneath it, area by load, rank order reading left to right; repo is the border colour"><input type="checkbox" id="treemap"> treemap</label>
   <span class="stat" id="stat"></span>
 </header>
@@ -157,7 +156,7 @@ function draw() {
   // The viewport is kept only across a redraw of the SAME view: a changed layout mode or repo
   // filter puts every node somewhere else, and the old zoom/pan then showed one tile scaled off the
   // page (operator 2026-10-02, treemap toggle).
-  const mode = [treemapOn, document.getElementById("forest").checked, repo].join("|");
+  const mode = [treemapOn, repo].join("|");
   const view = cy && mode === lastMode ? { zoom: cy.zoom(), pan: { ...cy.pan() } } : null;
   lastMode = mode;
   if (cy) cy.destroy();
@@ -513,7 +512,7 @@ function tile() {
   // Inside each box, try each dagre alignment and keep the one minimizing p95/p95_0 + area/area_0
   // (operator 2026-09-28: minimize the 95th-percentile edge length, and the boxes' area), ties
   // broken by total length. p95, not the mean: the long outliers are what make the view unreadable.
-  const forestOn = document.getElementById("forest").checked;
+  const forestOn = true;  // operator 2026-10-09: the rank forest is the only per-repo view
   cy.nodes(".repo").forEach(r => {
     const kids = r.children(), inner = kids.edgesWith(kids);
     if (forestOn) { forest(r.children()); units.set(r.id(), { el: kids, bb: kids.boundingBox() }); return; }
@@ -902,15 +901,10 @@ for (const id of ["wake", "goals"]) document.getElementById(id).addEventListener
 document.getElementById("repo").onchange = () => { draw(); findings(); goals(); weather(); tool(); };
 document.getElementById("showDone").onchange = draw;
 document.getElementById("showNoise").onchange = draw;
-// The forest toggle is a per-viewer preference; storage can be missing or throw (private window).
-try { document.getElementById("forest").checked = localStorage.getItem("nemik.forest") === "1"; } catch (e) { /* default off */ }
+// The treemap toggle is a per-viewer preference; storage can be missing or throw (private window).
 try { document.getElementById("treemap").checked = localStorage.getItem("nemik.treemap") === "1"; } catch (e) { /* default off */ }
 document.getElementById("treemap").onchange = () => {
   try { localStorage.setItem("nemik.treemap", document.getElementById("treemap").checked ? "1" : "0"); } catch (e) { /* not remembered */ }
-  draw();
-};
-document.getElementById("forest").onchange = () => {
-  try { localStorage.setItem("nemik.forest", document.getElementById("forest").checked ? "1" : "0"); } catch (e) { /* not remembered */ }
   draw();
 };
 document.getElementById("showCross").onchange = () => cy && cy.edges(".cross").length && (

@@ -31,14 +31,8 @@ FLEET = Path(__file__).parent / "fixtures" / "fleet"
 #   W139 measured (in-box crossings, upward cross-box edges): before W118 105, 16; now 109, 16
 #   W141 fixture regenerated from the live fleet (455 -> 501 open nodes): 2381, 324, 4106x3022,
 #        fit 0.328, crossings 195, upward 15. A bigger graph, not a worse layout: re-based, ~10% headroom.
-BUDGET = {
-    "cross_p95": 2450,
-    "intra_p95": 365,
-    "area": 13_600_000,
-    "fit_zoom": 0.30,
-    "intra_crossings": 215,
-    "cross_upward": 18,
-}
+# (The per-repo dagre layout these numbers measured was retired 2026-10-09: the rank forest is the
+# only view, so FOREST_BUDGET below is the only budget. The history stays as residue.)
 # The rank forest (W135), same rules. History (cross p95, fit zoom):
 #   W135 forest, strict packing:            3654, 0.223 (2038x5352: a column on a landscape pane)
 #   W127 packing may set a box beside the boxes it depends on: 2009, 0.458 (2319x2583)
@@ -135,43 +129,6 @@ NODE_OVERLAPS = """() => {
 }"""
 
 
-@pytest.mark.parametrize("scheme", ["light", "dark"])
-def test_layout_meets_budgets_with_labels_inside(server, scheme, tmp_path) -> None:
-    out = Path(os.environ.get("TEST_UNDECLARED_OUTPUTS_DIR") or tmp_path)
-    with sync_api.sync_playwright() as p:
-        try:
-            exe = os.environ.get("NEMIK_CHROMIUM")
-            browser = p.chromium.launch(
-                executable_path=os.path.abspath(exe) if exe else None
-            )
-        except Exception as e:  # noqa: BLE001 - no browser installed here
-            pytest.skip(f"chromium unavailable: {e}")
-        page = browser.new_page(
-            viewport={"width": 1700, "height": 1250}, color_scheme=scheme
-        )
-        errors: list[str] = []
-        page.on("pageerror", lambda e: errors.append(str(e)))
-        page.goto(server)
-        page.wait_for_function(
-            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=60000,
-        )
-        m = page.evaluate(METRICS)
-        overlaps = page.evaluate(NODE_OVERLAPS)
-        page.screenshot(path=str(out / f"layout-{scheme}.png"))
-        browser.close()
-    (out / f"layout-{scheme}.json").write_text(json.dumps(m, indent=1))
-    assert errors == []
-    assert overlaps == []  # nemik:W118 reorders rows after the layout
-    assert m["labels_outside"] == []
-    assert m["cross_p95"] <= BUDGET["cross_p95"], m
-    assert m["intra_p95"] <= BUDGET["intra_p95"], m
-    assert m["width"] * m["height"] <= BUDGET["area"], m
-    assert m["fit_zoom"] >= BUDGET["fit_zoom"], m
-    assert m["intra_crossings"] <= BUDGET["intra_crossings"], m
-    assert m["cross_upward"] <= BUDGET["cross_upward"], m
-
-
 def test_rank_forest_view(server, tmp_path) -> None:
     out = Path(os.environ.get("TEST_UNDECLARED_OUTPUTS_DIR") or tmp_path)
     with sync_api.sync_playwright() as p:
@@ -193,7 +150,6 @@ def test_rank_forest_view(server, tmp_path) -> None:
             timeout=60000,
         )
         ranked = page.evaluate("() => cy.nodes('[rank_pos]').length")
-        page.check("#forest")
         page.wait_for_timeout(500)
         m = page.evaluate(METRICS)
         overlaps = page.evaluate(NODE_OVERLAPS)

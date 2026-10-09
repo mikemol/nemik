@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 260,
+  "counter": 262,
   "waypoints": [
     {
       "symbol": "W1",
@@ -4983,6 +4983,38 @@
       "last_worked": "2026-10-09T13:04:39Z",
       "ticks_blocked": 0,
       "completed": null
+    },
+    {
+      "symbol": "W261",
+      "title": "UI: show the flow salience (the gcalculus weighting) on each ready card and in the forest ordering, not only rank_pos and band",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Add salience (and the share it absorbs) to graph.json per ready node via rank(); draw it on the node label and the side panel; decide the manifest field names (manifest.py gates published fields).",
+      "evidence": "",
+      "issued_at": "2026-10-09T13:34:02Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W262",
+      "title": "UI: delete the non-forest per-repo layout branch and pullRows now that the rank forest is always on",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Remove the dagre-alignment search in draw() and pullRows (index.html); keep forest(); check the static build still renders.",
+      "evidence": "",
+      "issued_at": "2026-10-09T13:34:03Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
