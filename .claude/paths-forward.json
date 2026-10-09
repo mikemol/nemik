@@ -4918,20 +4918,22 @@
     {
       "symbol": "W257",
       "title": "Move the mtools pin from 472f940 to d14270f or later so the writer has --admit and the marks ledger (mtools:W851, W852), --certify --facts and the waypoint fields reference_arm, command, population, deferred",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "vendoring"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Follow vendor/wheels/README.md: git archive the three distributions at the new sha, uv build --wheel, rename, git rm the old, update pyproject.toml, MODULE.bazel, uv.lock and the README; rebuild the venv; run the whole gate; then --admit on one real --update to see a marks line that nemik.marks reads as a mark",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: 2026-10-09: the three mtools wheels move 472f940 to d14270f (pathsforward 9c888eae, icsstruct 25389411, hooks e001ea96; README, pyproject.toml, MODULE.bazel, uv.lock). One API change absorbed: certify.items now takes Where(repo, root) (nemik.realize updated). Verified live: mikemol-paths-forward --add ... --admit judged the card (reachable, 2 residue) and left <queue>.marks.jsonl; nemik-check --realizability on that fleet read it as (mark) with the same policy sha, the first real writer-produced mark through nemik.marks (W234). Whole-tree mypy, ruff and format clean; gate at the commit",
       "issued_at": "2026-10-09T05:53:16Z",
       "minted_during": "tick",
       "caused_by": "mtools:W851",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-09T06:18:16Z",
+      "ticks_blocked": 0,
+      "weight": 1,
+      "completed": "20261009T061816Z"
     },
     {
       "symbol": "W258",

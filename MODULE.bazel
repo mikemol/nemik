@@ -39,19 +39,19 @@ use_repo(pip, "nemik_dev")
 vendored_wheel = use_repo_rule("//bazel:wheel.bzl", "vendored_wheel")
 vendored_wheel(
     name = "pathsforward",
-    wheel = "//:vendor/wheels/mikemol_pathsforward-0.1.0+472f940-py3-none-any.whl",
+    wheel = "//:vendor/wheels/mikemol_pathsforward-0.1.0+d14270f-py3-none-any.whl",
 )
 
 # nemik: mtools' hooks (mikemol-hook-inbound-asks, mikemol-hook-nemik-check), vendored at the same sha.
 vendored_wheel(
     name = "hooks",
-    wheel = "//:vendor/wheels/mikemol_hooks-0.1.0+472f940-py3-none-any.whl",
+    wheel = "//:vendor/wheels/mikemol_hooks-0.1.0+d14270f-py3-none-any.whl",
 )
 
-# nemik:W157: mtools' icsstruct (mikemol-ics), vendored the same way at mtools 472f940, one sha across all three.
+# nemik:W157: mtools' icsstruct (mikemol-ics), vendored the same way at mtools d14270f, one sha across all three.
 vendored_wheel(
     name = "icsstruct",
-    wheel = "//:vendor/wheels/mikemol_icsstruct-0.1.0+472f940-py3-none-any.whl",
+    wheel = "//:vendor/wheels/mikemol_icsstruct-0.1.0+d14270f-py3-none-any.whl",
 )
 
 # nemik:W98: opa, the witness evaluator, as a hashed input instead of whatever /usr/bin holds.

@@ -41,7 +41,7 @@ def verdicts(repo: str, state_path: Path, root: Path, now: str) -> list[Json]:
     """
     state = load_state(state_path)
     symbols = [text(w, "symbol") for w in state.waypoints if text(w, "status") != _DONE]
-    built = certify.items(state, symbols, repo, now, root)
+    built = certify.items(state, symbols, certify.Where(repo, root), now)
     return opa_eval.verdicts(built, opa_eval.resolve())
 
 
