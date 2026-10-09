@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 258,
+  "counter": 259,
   "waypoints": [
     {
       "symbol": "W1",
@@ -4466,11 +4466,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": null,
-      "evidence": "2026-10-08: 2026-10-08: answered to github-28: luthen exports host-apply.json (rows, activate kinds, after/restarts edges, applied state) beside liveness.json; nemik reads it, rows are citable as host:<id>, and row-applied becomes a witness over a new closed observer fact. Waiting on luthen for the activate-kind vocabulary and a sample export. | 2026-10-08: 2026-10-08: luthen host (github-28) sent the 45-kind vocabulary grouped by effect and an illustrative hand-made host-apply.json. Design recorded in the note (section 'Host apply as a mark'): kinds table plus rows pointing at a kind, restarts as structured {unit, verb}, rows cite as host:<id>, row-applied is a witness fact input.apply[<id>] with as_of so decay applies, never served in the first cut. Asked of luthen: omit argvs from the export, add an effect class per kind, keep row ids unique and stable. Still waiting on luthen to generate a real export; home.mount and srv-media.mount are not rows until luthen-observability:W663. | 2026-10-08: certify residue: blocked_on named the repo, not a waypoint; luthen-observability:W665 is the exporter (its next step: extract kinds table, then checks.host_apply_export writing host-apply.json), so it is cited | 2026-10-09: 2026-10-09: luthen-observability:W665 exporter landed (444f06a, verified); answered github-45: publish at <export root>/host-apply.json beside liveness.json, fallback run the module, empty after is enough but the export should carry ordering: none so nemik reads it as ordering unknown | 2026-10-09: 2026-10-09: reader and witness landed: src/nemik/hostapply.py (parse/load/restarts_of/effect_of/fact: validates version, effects, verbs, kinds, duplicate ids and dangling after; an empty after is ordering unknown; applied null, a stale export or any problem never reads as applied; load reads <root>/host-apply.json else runs luthen exporter from its venv) and the apply observer in witnesses.py (input.apply[\"<row id>\"], undefined for an unknown row or an unreadable export). Checked against the real export (198 rows, 51 kinds, no problems, 5 not applied; drain-tier-service is start-heavy). tests/test_hostapply.py (12) and tests/test_apply_witness.py (5); the duplicate-id test found a real defect (a duplicate hid the first row dangling after), fixed. host: citations are W256",
+      "evidence": "2026-10-08: 2026-10-08: answered to github-28: luthen exports host-apply.json (rows, activate kinds, after/restarts edges, applied state) beside liveness.json; nemik reads it, rows are citable as host:<id>, and row-applied becomes a witness over a new closed observer fact. Waiting on luthen for the activate-kind vocabulary and a sample export. | 2026-10-08: 2026-10-08: luthen host (github-28) sent the 45-kind vocabulary grouped by effect and an illustrative hand-made host-apply.json. Design recorded in the note (section 'Host apply as a mark'): kinds table plus rows pointing at a kind, restarts as structured {unit, verb}, rows cite as host:<id>, row-applied is a witness fact input.apply[<id>] with as_of so decay applies, never served in the first cut. Asked of luthen: omit argvs from the export, add an effect class per kind, keep row ids unique and stable. Still waiting on luthen to generate a real export; home.mount and srv-media.mount are not rows until luthen-observability:W663. | 2026-10-08: certify residue: blocked_on named the repo, not a waypoint; luthen-observability:W665 is the exporter (its next step: extract kinds table, then checks.host_apply_export writing host-apply.json), so it is cited | 2026-10-09: 2026-10-09: luthen-observability:W665 exporter landed (444f06a, verified); answered github-45: publish at <export root>/host-apply.json beside liveness.json, fallback run the module, empty after is enough but the export should carry ordering: none so nemik reads it as ordering unknown | 2026-10-09: 2026-10-09: reader and witness landed: src/nemik/hostapply.py (parse/load/restarts_of/effect_of/fact: validates version, effects, verbs, kinds, duplicate ids and dangling after; an empty after is ordering unknown; applied null, a stale export or any problem never reads as applied; load reads <root>/host-apply.json else runs luthen exporter from its venv) and the apply observer in witnesses.py (input.apply[\"<row id>\"], undefined for an unknown row or an unreadable export). Checked against the real export (198 rows, 51 kinds, no problems, 5 not applied; drain-tier-service is start-heavy). tests/test_hostapply.py (12) and tests/test_apply_witness.py (5); the duplicate-id test found a real defect (a duplicate hid the first row dangling after), fixed. host: citations are W256 | 2026-10-09: 2026-10-09 CORRECTION (github-45, luthen W665 residue / new card W680): host-apply.json is built as the unprivileged user, so a row under a root-only path (bees-drain-image, bees-quiet-policy, kata-containerd-dropin, kubelet-swap) is applied:null although installed: null means UNKNOWN there. The root-side reading shows exactly one drifted row (lib-host-live-types). Earlier entries here and in messages that call those rows \"not applied\" or \"pending drift\" overclaimed for four of the five. nemik reads null as never-applied (fail-safe, a witness waits rather than passes), which is right but yields false negatives for those four; W259 consumes the explicit flag when W680 lands",
       "issued_at": "2026-10-08T13:43:16Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W665",
-      "last_worked": "2026-10-09T05:51:06Z",
+      "last_worked": "2026-10-09T09:29:17Z",
       "ticks_blocked": 0,
       "completed": "20261009T055106Z"
     },
@@ -4952,6 +4952,27 @@
       "last_worked": "2026-10-09T05:56:21Z",
       "ticks_blocked": 0,
       "completed": "20261009T055621Z"
+    },
+    {
+      "symbol": "W259",
+      "title": "Read the per-row unobservable flag of luthen host-apply export: a null applied from a root-only path is unknown, not pending",
+      "status": "blocked",
+      "enables": [],
+      "touches": [
+        "realizability"
+      ],
+      "blocked_on": [
+        "luthen-observability:W680"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "When luthen-observability:W680 lands (additive flag, version stays 1): parse it in nemik.hostapply, make the apply witness fact report unknown (undefined) for an unobservable row instead of applied:false, and say so in the skill; tests on a planted export with the flag",
+      "evidence": "",
+      "issued_at": "2026-10-09T09:29:03Z",
+      "minted_during": "tick",
+      "caused_by": "luthen-observability:W680",
+      "last_worked": "2026-10-09T09:29:17Z",
+      "ticks_blocked": 0,
+      "completed": null
     }
   ],
   "residue": [
