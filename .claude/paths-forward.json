@@ -5046,18 +5046,19 @@
     {
       "symbol": "W264",
       "title": "UI: draw each edge's width by the flow current, so the picture shows where demand travels",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Ship flow.fibre per repo into graph.json edges (field in field-manifest.json), then set the edge width style in index.html; check the 'salience order' view first with the operator.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: d944810: flow.Flow.current (summed per-dependency current), salience.edge_currents, graph.json edge current (manifested), page edge width mapData(current) when 'salience order' is on; tests/test_rank_flow.py checks W7->W3 = 1 and W4's split 0.5/0.5. Not seen rendered.",
       "issued_at": "2026-10-09T14:23:01Z",
       "minted_during": "tick",
       "caused_by": "operator",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-09T14:31:28Z",
+      "ticks_blocked": 0,
+      "completed": "20261009T143128Z"
     }
   ],
   "residue": [
@@ -5113,10 +5114,7 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": {
-    "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-09T14:22:21Z"
-  },
+  "lock": null,
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }

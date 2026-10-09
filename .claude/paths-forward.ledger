@@ -431,3 +431,4 @@
 2026-10-09T13:57:36Z  tick  W263 advanced  unblock   "calendar routing by touch; W262 dead layout deleted earlier this tick"
 2026-10-09T14:11:08Z  tick  W261 advanced  collapse  "closed W235 and W228 (their blockers cleared); salience on the label; W260 and W224 filed on their owners"
 2026-10-09T14:23:01Z  tick  W264 minted    -         "UI: draw each edge's width by the flow current, so the picture shows where demand travels"  evidence=operator
+2026-10-09T14:31:28Z  tick  W264 advanced  unblock   "edge width by flow current; W261 closed with the edge step split out; W260 cites luthen W675"
