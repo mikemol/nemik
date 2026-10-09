@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 136
+      "ticks_blocked": 137
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "weight": 1
     },
     {
@@ -2613,7 +2613,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 81
+      "ticks_blocked": 82
     },
     {
       "symbol": "W138",
@@ -3522,7 +3522,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-02T17:28:25Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "weight": 2
     },
     {
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-08T13:42:13Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
@@ -4371,7 +4371,7 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:09:03Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "completed": null
     },
     {
@@ -4471,7 +4471,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W665",
       "last_worked": "2026-10-08T14:56:18Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "completed": null
     },
     {
@@ -4516,7 +4516,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:17:54Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 10,
       "completed": null
     },
     {
@@ -4557,29 +4557,27 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:56:19Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 10,
       "completed": null
     },
     {
       "symbol": "W238",
       "title": "Current-flow solver for nemik-rank: deterministic, law tests (series below the weakest link, parallel additive, duplicates double, open circuit), measured on the real graph",
-      "status": "blocked",
+      "status": "working",
       "enables": [
         "W235",
         "W242"
       ],
       "touches": [],
-      "blocked_on": [
-        "W237"
-      ],
+      "blocked_on": [],
       "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "2026-10-08: 2026-10-08: needs the design card W237 (sources, weights, composition, consumption) and a structured closes_ref (mtools:W849); then measure the open graph's size before choosing exact elimination over a deterministic sparse solve; after the md0 RELEASE. | 2026-10-08: 2026-10-08: from gcalculus:W208: exact fractions are out at this size (cubic; n=240 takes 85 s), so the solver is floating point with a fixed elimination order for determinism (nemik:W119); the grounded-sink current call does not exist in gcalc, so either gcalculus adds it or this card implements it and tests the laws gcalculus names; and the model must be directed (or the leak accepted) per the counterexample in the design note. | 2026-10-08: 2026-10-08: with the model directed (operator), the solver is a single propagation pass in dependency order over each acyclic part, plus a small linear solve per strongly connected component for cycles; exact fractions are affordable again for the acyclic pass. The diamond rule (full demand to each conjunctive prerequisite vs a split) is the open input, asked of the operator.",
+      "next_bounded_step": "First slice landed (src/nemik/flow.py, directed, exact Fractions, acyclic, laws in tests/test_flow.py). Remaining: a small linear solve per strongly connected component (a cycle raises CycleError today); a harness that builds demand/needs/frontier from the real queues; measure it on the real graph; edge and sink conductances read from rank-weights.toml once W237 declares them",
+      "evidence": "2026-10-08: 2026-10-08: needs the design card W237 (sources, weights, composition, consumption) and a structured closes_ref (mtools:W849); then measure the open graph's size before choosing exact elimination over a deterministic sparse solve; after the md0 RELEASE. | 2026-10-08: 2026-10-08: from gcalculus:W208: exact fractions are out at this size (cubic; n=240 takes 85 s), so the solver is floating point with a fixed elimination order for determinism (nemik:W119); the grounded-sink current call does not exist in gcalc, so either gcalculus adds it or this card implements it and tests the laws gcalculus names; and the model must be directed (or the leak accepted) per the counterexample in the design note. | 2026-10-08: 2026-10-08: with the model directed (operator), the solver is a single propagation pass in dependency order over each acyclic part, plus a small linear solve per strongly connected component for cycles; exact fractions are affordable again for the acyclic pass. The diamond rule (full demand to each conjunctive prerequisite vs a split) is the open input, asked of the operator. | 2026-10-09: 2026-10-09: unblocked on this reading: the operator rulings (directed, split by the nodal solve, Pareto emergent) fix the model, and the solver is parametric in the edge and sink conductances W237 will declare, so it does not wait for gcalculus packaging (nemik implements elimination itself and cites the laws). src/nemik/flow.py + tests/test_flow.py: 11 laws pass (series below the weakest link and the exact half-life, parallel additive, duplicates counted once and two sources doubling, exact conservation, the diamond split 2/5 vs 3/5 decided by the physics, a landed prerequisite redirecting demand, no demand to a non-prerequisite, stranded demand, cycles reported, input-order independence)",
       "issued_at": "2026-10-08T14:02:33Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
-      "last_worked": "2026-10-08T14:22:37Z",
-      "ticks_blocked": 9,
+      "last_worked": "2026-10-09T00:43:17Z",
+      "ticks_blocked": 0,
       "completed": null
     },
     {
@@ -4622,7 +4620,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:07:19Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "completed": null
     },
     {
@@ -4644,7 +4642,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:17:49Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 10,
       "completed": null
     },
     {
@@ -4666,7 +4664,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:14:24Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "completed": null
     },
     {
@@ -4687,7 +4685,7 @@
       "minted_during": "tick",
       "caused_by": "W229",
       "last_worked": "2026-10-08T14:09:02Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 10,
       "completed": null
     },
     {
@@ -4708,7 +4706,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-08T14:17:48Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 10,
       "completed": null
     },
     {
