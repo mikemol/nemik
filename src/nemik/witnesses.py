@@ -283,7 +283,34 @@ def main(argv: list[str] | None = None) -> None:
         action="store_true",
         help="mark waypoints whose witness holds as done",
     )
+    ap.add_argument(
+        "--wait",
+        metavar="QUERY",
+        help="block until QUERY holds (a PromQL expression, or a Rego query over the observers): "
+        "exit 0 held, 1 timed out, 2 cannot be evaluated (nemik:W258)",
+    )
+    ap.add_argument(
+        "--timeout",
+        default="12h",
+        help="with --wait: give up after this long (90s, 30m, 12h, 1d)",
+    )
+    ap.add_argument(
+        "--every",
+        default="30s",
+        help="with --wait: poll this often (90s, 30m, 12h, 1d)",
+    )
     args = ap.parse_args(argv)
+    if args.wait:
+        from nemik.witwait import poller, seconds, wait
+
+        try:
+            limit, step = seconds(args.timeout), seconds(args.every)
+        except ValueError as err:
+            print(f"nemik-witnesses: {err}", file=sys.stderr)
+            raise SystemExit(2) from err
+        code, line = wait(poller(args.wait), limit, step)
+        print(line)
+        raise SystemExit(code)
     # nemik:W97: the queue's one writer is the installed mikemol-paths-forward, beside this interpreter
     # in the same .venv (host, or bazel's //:.venv). Missing is a failure, reported, never a skip.
     pf = Path(sys.executable).parent / "mikemol-paths-forward"

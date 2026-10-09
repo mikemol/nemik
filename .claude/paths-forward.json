@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 256,
+  "counter": 258,
   "waypoints": [
     {
       "symbol": "W1",
@@ -4911,8 +4911,46 @@
       "issued_at": "2026-10-09T05:50:55Z",
       "minted_during": "tick",
       "caused_by": "W233",
+      "last_worked": "2026-10-09T05:53:28Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W257",
+      "title": "Move the mtools pin from 472f940 to d14270f or later so the writer has --admit and the marks ledger (mtools:W851, W852), --certify --facts and the waypoint fields reference_arm, command, population, deferred",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "vendoring"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Follow vendor/wheels/README.md: git archive the three distributions at the new sha, uv build --wheel, rename, git rm the old, update pyproject.toml, MODULE.bazel, uv.lock and the README; rebuild the venv; run the whole gate; then --admit on one real --update to see a marks line that nemik.marks reads as a mark",
+      "evidence": "",
+      "issued_at": "2026-10-09T05:53:16Z",
+      "minted_during": "tick",
+      "caused_by": "mtools:W851",
       "last_worked": null,
       "ticks_blocked": 0
+    },
+    {
+      "symbol": "W258",
+      "title": "nemik-witnesses --wait: block on a PromQL expression or a Rego witness, exit 0 when it holds, 1 on timeout, 2 when it cannot be evaluated",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "witnesses"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: operator 2026-10-08 via github-28 (host session): after a day of hand-polling /proc/mdstat, ls and commit logs, a tool that could wait() on an ad-hoc alert; letter nemik/inbox/2026-10-08-luthen-observability-witnesses-wait-mode.md | 2026-10-09: 2026-10-09: nemik-witnesses --wait QUERY [--timeout 12h] [--every 30s] (src/nemik/witwait.py, flags in witnesses.main): a pure loop with injectable poll, sleep and clock; Rego queries ride the existing observers, a bare PromQL expression holds while its instant-query result is non-empty (capped to 5 values and a count); exit 0 held (value and time), 1 timeout (last value, never empty), 2 cannot be evaluated (unknown is not not-yet; 3 consecutive blips tolerated; an unknown last poll at the timeout is 2). tests/test_witwait.py (10): a planted series crossing the threshold between polls returns 0 with the value against a real local HTTP server, a down probe returns 2. Run live: held on a file witness (exit 0), TIMEOUT with last value (exit 1), and a PromQL up == 1 against the discovered VM endpoint",
+      "issued_at": "2026-10-09T05:53:21Z",
+      "minted_during": "tick",
+      "caused_by": "luthen-observability:W674",
+      "last_worked": "2026-10-09T05:56:21Z",
+      "ticks_blocked": 0,
+      "completed": "20261009T055621Z"
     }
   ],
   "residue": [
