@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 135
+      "ticks_blocked": 136
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "weight": 1
     },
     {
@@ -2613,7 +2613,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 80
+      "ticks_blocked": 81
     },
     {
       "symbol": "W138",
@@ -3522,7 +3522,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-02T17:28:25Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "weight": 2
     },
     {
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-08T13:42:13Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "completed": null
     },
     {
@@ -4273,18 +4273,18 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Rebuild the venv so the installed CLIs and the web view see it (nemik:W226), then deploy through luthen's nemik image. After that, decide whether a repo containing repos (not just the root) needs the same rule, and whether a parent's weights should aggregate its children's",
-      "evidence": "2026-10-05: 2026-10-05 operator: nemik does not yet know about nested workstreams. Probes: nemik-rank . --root ~/github prints nothing; nemik-rank github only resolves with --root /home/mikemol (a workaround that makes ~mikemol the fleet). Open design points: how a parent's queue relates to its children's (aggregate, or separate), whether the citation prefix nests (github/repo:W<n> vs repo:W<n>), and what --all and nemik-inbound do with a parent. | 2026-10-05: 2026-10-05 4c7ab22: workstream_files includes <root>/.claude/<name> as the workstream named by the root directory, beside its children (a same-named child wins); the old --root-at-one-repo fallback is the same rule. tests/test_nested.py (4). Verified with PYTHONPATH=src: nemik-rank github ranks the host queue (W1 W2 W10 W11) and nemik-check lists github with only the standing warnings. NOT live yet: the installed .venv copy and the cluster image predate it.",
+      "next_bounded_step": "Decide, with the operator, whether a repo containing repos (not just the root) needs the same rule, and whether a parent weights should aggregate its children; confirm the nemik image on the cluster carries 4c7ab22 (not visible from this session)",
+      "evidence": "2026-10-05: 2026-10-05 operator: nemik does not yet know about nested workstreams. Probes: nemik-rank . --root ~/github prints nothing; nemik-rank github only resolves with --root /home/mikemol (a workaround that makes ~mikemol the fleet). Open design points: how a parent's queue relates to its children's (aggregate, or separate), whether the citation prefix nests (github/repo:W<n> vs repo:W<n>), and what --all and nemik-inbound do with a parent. | 2026-10-05: 2026-10-05 4c7ab22: workstream_files includes <root>/.claude/<name> as the workstream named by the root directory, beside its children (a same-named child wins); the old --root-at-one-repo fallback is the same rule. tests/test_nested.py (4). Verified with PYTHONPATH=src: nemik-rank github ranks the host queue (W1 W2 W10 W11) and nemik-check lists github with only the standing warnings. NOT live yet: the installed .venv copy and the cluster image predate it. | 2026-10-09: 2026-10-09: the installed venv now resolves it: nemik-rank github ranks the host queue (W14 W1 W2 W10 W11 W13) from .venv/bin; pushes since have gone out through the normal path, but the running cluster image is not visible from this session",
       "issued_at": "2026-10-05T22:32:01Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-05T23:41:09Z",
+      "last_worked": "2026-10-09T00:37:58Z",
       "ticks_blocked": 0
     },
     {
       "symbol": "W225",
       "title": "U: update the nemik skill for nemik-rank --all",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "nemik",
@@ -4292,15 +4292,16 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Edit ~/.claude/skills/nemik: add the --all row and the host visitor use",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: 2026-10-09: skills/nemik/SKILL.md (the installed skill is a symlink to it) names nemik-rank --all in the rank row; tests/test_skill.py passes at the commit",
       "issued_at": "2026-10-05T22:39:47Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-10-05T22:39:47Z",
+      "last_worked": "2026-10-09T00:38:00Z",
       "ticks_blocked": 0,
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
-      "vector_source": "agent"
+      "vector_source": "agent",
+      "completed": "20261009T003800Z"
     },
     {
       "symbol": "W226",
@@ -4370,7 +4371,7 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:09:03Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -4470,7 +4471,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W665",
       "last_worked": "2026-10-08T14:56:18Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "completed": null
     },
     {
@@ -4515,7 +4516,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:17:54Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -4556,7 +4557,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:56:19Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -4578,7 +4579,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:22:37Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -4621,7 +4622,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:07:19Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 10,
       "completed": null
     },
     {
@@ -4643,7 +4644,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:17:49Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -4665,7 +4666,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:14:24Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 10,
       "completed": null
     },
     {
@@ -4686,7 +4687,7 @@
       "minted_during": "tick",
       "caused_by": "W229",
       "last_worked": "2026-10-08T14:09:02Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -4707,7 +4708,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-08T14:17:48Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
