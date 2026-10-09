@@ -55,8 +55,13 @@ def _edges(queue: dict) -> set[tuple[str, str, str]]:
     return out
 
 
-def _number(symbol: str) -> int:
-    return int(symbol.lstrip("W") or 0)
+def _number(symbol: str) -> tuple[int, int, str]:
+    """A sort key: W<n> by number, then anything that is not a W<n> (an old or foreign symbol in a
+    committed queue, such as luthen's `R-amtool`) after them by name, never an error."""
+    digits = symbol.removeprefix("W")
+    if symbol.startswith("W") and digits.isdigit():
+        return (0, int(digits), "")
+    return (1, 0, symbol)
 
 
 def diff(old: dict, new: dict) -> Diff:

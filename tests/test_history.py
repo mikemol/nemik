@@ -54,6 +54,13 @@ def test_diff_names_every_class_of_change() -> None:
     assert d.new_cross_blocks == [("W3", "mtools:W5")]
 
 
+def test_a_symbol_that_is_not_w_n_sorts_last_instead_of_raising() -> None:
+    # luthen's committed history holds `R-amtool`, which is not a W<n>.
+    new = {"waypoints": [_wp("W10"), _wp("R-amtool"), _wp("W2")], "residue": []}
+    d = diff({}, new)
+    assert d.minted == ["W2", "W10", "R-amtool"]
+
+
 def test_a_repo_with_no_queue_yet_reads_as_empty() -> None:
     d = diff({}, {"waypoints": [_wp("W1", "done")], "residue": []})
     assert d.minted == ["W1"] and d.closed == ["W1"]
