@@ -532,7 +532,23 @@ gaps `nemik-check --realizability` prints, per gate) injects demand at the card 
 through its cone; an entry that names an open `closes_ref` adds that card as a prerequisite, so the
 card that closes the gap is pulled up. Gate weights are unit (the baseline). The pinned policy only
 emits `closes_ref` on a card's own deferred entries, so most gaps today pull toward their own card,
-not toward a closer. Turning it on is W253: audit it on the real fleet and declare the gate weights.
+not toward a closer.
+
+W253 (audited 2026-10-09; the decision is OFF in production ranking, with the numbers):
+
+- Where the gaps are, over the 1,563 judged cards of the fleet: coverable 1,550 (99%, "no population
+  declared"), observable 1,019 (65%, "no witness or evidence"), constructible 131 (8%, mostly "no
+  next_bounded_step"), reachable 61 (4%, a reference that resolves to nothing).
+- Unit weights rank PAPERWORK. Luthen: 462 of 10,011 pairs of workable cards reorder; paperkit 52 of
+  4,753; a card jumps (luthen W378, 0 to 3.0) for what it fails to say, not for what working it
+  unblocks.
+- Declared per-gate weights (`rank-weights.toml [residue]`: constructible 1, reachable 1, observable 0,
+  coverable 0; a gate not named weighs 1) cut that to luthen 248 and paperkit 14 pairs, but the
+  movement that remains is cards with no next step climbing past low-downstream cards. Whether the
+  fleet's ranking should pull toward fixing a card's own specification is a policy choice, not a
+  consequence of the model, so it is not made by default.
+- So the mechanism, the weights and the audit exist (`nemik-rank REPO --flow --residue`) and
+  production `weight` ignores residue. Enabling is a reviewed change when someone wants the policy.
 
 ## Open questions (each blocks code, none blocks this note)
 

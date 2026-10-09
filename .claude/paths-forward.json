@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 142
+      "ticks_blocked": 143
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "weight": 1
     },
     {
@@ -2613,7 +2613,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 87
+      "ticks_blocked": 88
     },
     {
       "symbol": "W138",
@@ -3522,7 +3522,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-02T17:28:25Z",
-      "ticks_blocked": 23,
+      "ticks_blocked": 24,
       "weight": 2
     },
     {
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-08T13:42:13Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -4372,7 +4372,7 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:09:03Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "completed": null
     },
     {
@@ -4472,7 +4472,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W665",
       "last_worked": "2026-10-08T14:56:18Z",
-      "ticks_blocked": 13,
+      "ticks_blocked": 14,
       "completed": null
     },
     {
@@ -4503,8 +4503,7 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W249",
-        "W251"
+        "W249"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "The objective replacement landed (W241). Remaining: the operator ask inside the model (W249, needs the operator ruling) and the residue term (W251)",
@@ -4651,7 +4650,7 @@
       "minted_during": "tick",
       "caused_by": "W229",
       "last_worked": "2026-10-08T14:09:02Z",
-      "ticks_blocked": 15,
+      "ticks_blocked": 16,
       "completed": null
     },
     {
@@ -4773,7 +4772,7 @@
       "minted_during": "tick",
       "caused_by": "W244",
       "last_worked": "2026-10-09T01:30:25Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null
     },
     {
@@ -4792,7 +4791,8 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W251",
@@ -4837,7 +4837,7 @@
     {
       "symbol": "W253",
       "title": "Decide whether residue demand is on by default in nemik-rank: audit the real fleet with nemik-rank REPO --flow --residue, declare per-gate weights in rank-weights.toml, then enable",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W235"
       ],
@@ -4846,14 +4846,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Run nemik-rank REPO --flow --residue over the sixteen workstreams and record which cards rise and why; propose gate weights; the operator may want to rule the weight of a constructible gap against an observable one",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: 2026-10-09: audited on the real fleet; decision: residue demand stays OFF in production ranking. Gaps sit at coverable 99%, observable 65%, constructible 8%, reachable 4% of 1563 judged cards; unit weights reorder 462/10011 luthen and 52/4753 paperkit pairs by paperwork. Declared per-gate weights (rank-weights.toml [residue]: constructible 1, reachable 1, observable 0, coverable 0) give 248/10011 and 14/4753, still dominated by cards with no next step climbing: a policy choice, not made by default. Mechanism, weights and the --flow --residue audit stay. tests/test_gate_weights.py (3)",
       "issued_at": "2026-10-09T01:42:09Z",
       "minted_during": "tick",
       "caused_by": "W251",
-      "last_worked": "2026-10-09T01:42:30Z",
+      "last_worked": "2026-10-09T01:52:22Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261009T015222Z"
     }
   ],
   "residue": [
@@ -4911,7 +4911,7 @@
   "heartbeat": "2026-10-09T00:40:20Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-09T01:34:51Z"
+    "taken_at": "2026-10-09T01:45:38Z"
   },
   "predecessor_job_id": "ee709298",
   "leases": []

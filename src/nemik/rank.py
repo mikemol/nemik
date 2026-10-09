@@ -633,12 +633,18 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         # rounded), and every pair the two order differently. The model replaces the old order
         # only after this audit agrees (W241).
         from nemik.residue import by_card
-        from nemik.salience import audit, show
+        from nemik.salience import audit, load_gate_weights, show
 
-        # nemik:W251: --residue adds each recorded gap (the policy's residue, per gate) as demand at
-        # its card, so the cards that close gaps rise; off by default until audited.
+        # nemik:W251: --residue adds each recorded gap (the policy's residue) as demand at its card,
+        # weighted by gate from rank-weights.toml [residue] (W253); off by default.
         gaps = by_card(args.root) if args.residue else None
-        result = audit(g, args.repo, residue=gaps, workable=args.workable)
+        result = audit(
+            g,
+            args.repo,
+            residue=gaps,
+            workable=args.workable,
+            gate_weights=load_gate_weights(),
+        )
         old_pos = {c: i + 1 for i, c in enumerate(result.old_order())}
         new_pos = {c: i + 1 for i, c in enumerate(result.new_order())}
         print(

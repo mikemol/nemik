@@ -48,6 +48,20 @@ tiers = [["operator"], ["band", "weight"]]
 # differences close exactly (design note, "The audit, run on every workstream").
 weight = "flow"
 
+# nemik:W253: what ONE recorded gap (a residue entry of the realizability policy, mtools:W850) weighs
+# as demand at the card that bears it, by gate, for `nemik-rank REPO --flow --residue`. Unit weights
+# measured badly: over the 1,563 judged cards the gaps sit at coverable 1,550 (99%, "no population
+# declared"), observable 1,019 (65%, "no witness or evidence"), constructible 131 (8%, mostly "no
+# next_bounded_step") and reachable 61 (4%, a reference that resolves to nothing). The first two are
+# paperwork nearly every card shares; counting them ranks a card by how little it says, not by what
+# working it would unblock. They weigh 0 until a reason is declared here; the two rare gates, which
+# name something specific to fix, weigh 1.
+[residue]
+constructible = 1
+reachable = 1
+observable = 0
+coverable = 0
+
 [order.scalarize]
 operator = 1
 band = 100

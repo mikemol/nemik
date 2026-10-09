@@ -125,6 +125,7 @@ def audit(
     residue: dict[str, list[dict[str, object]]] | None = None,
     gate_weight: Fraction = Fraction(1),
     workable: bool = False,
+    gate_weights: dict[str, Fraction] | None = None,
 ) -> Audit:
     """Run both arms over the ready cards of `repo`.
 
@@ -203,8 +204,9 @@ def audit(
     for card, entries in (residue or {}).items():
         if card not in open_refs or card not in relevant or card == without:
             continue
-        demand[card] = demand.get(card, Fraction(0)) + gate_weight * len(entries)
         for entry in entries:
+            weight = (gate_weights or {}).get(str(entry.get("gate")), gate_weight)
+            demand[card] = demand.get(card, Fraction(0)) + weight
             target = entry.get("closes_ref")
             if (
                 isinstance(target, str)
@@ -272,6 +274,24 @@ def ask_effect(
     ]
     needs = sorted(absorbed, key=lambda item: (-item[1], item[0]))
     return AskEffect(ref, needs, displaced, stranded)
+
+
+def load_gate_weights(text: str | None = None) -> dict[str, Fraction]:
+    """Read the per-gate residue weights from `[residue]` in rank-weights.toml (nemik:W253).
+
+    `text` overrides the packaged file (for tests). A gate the table does not name weighs 1.
+
+    Returns:
+        the weight of one residue entry at each named gate.
+
+    """
+    import tomllib
+    from importlib.resources import files
+
+    if text is None:
+        text = files("nemik.data").joinpath("rank-weights.toml").read_text()
+    table = tomllib.loads(text).get("residue", {})
+    return {str(gate): Fraction(str(w)) for gate, w in table.items()}
 
 
 def salience_of(
