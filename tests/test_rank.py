@@ -166,11 +166,16 @@ def test_compose_pareto_front_then_scalarized_within_it() -> None:
     assert [r["symbol"] for r in compose(rows, comp)] == ["W1", "W2", "W4"]
 
 
-def test_operator_asks_rank_first_under_the_packaged_composition() -> None:
+def test_operator_asks_are_not_a_tier_in_the_packaged_composition() -> None:
+    # nemik:W249: an ask is a demand source inside `weight` (rank-weights.toml `operator`), not a
+    # tier above the order; the objective is still printed, and the strict tier is one declaration
+    # away.
     from nemik.rank import compose, load_composition
 
     rows = [_row("W1", band=0, weight=999), _row("W2", operator=1, band=-4, weight=0)]
-    assert [r["symbol"] for r in compose(rows, load_composition())] == ["W2", "W1"]
+    assert [r["symbol"] for r in compose(rows, load_composition())] == ["W1", "W2"]
+    strict = load_composition('[order]\ntiers = [["operator"], ["band", "weight"]]\n')
+    assert [r["symbol"] for r in compose(rows, strict)] == ["W2", "W1"]
 
 
 def test_composition_refuses_an_unknown_objective() -> None:

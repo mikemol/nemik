@@ -17,6 +17,19 @@ local = 1
 peer = 2
 peer_blocked = 8
 
+# nemik:W249 (operator ruling 2026-10-09: "b", a declared operator class with its own number): what an
+# operator ask injects as demand in the flow model, in the same units as the three classes above. A
+# card whose caused_by is `operator` (or `operator: ...`) is a demand source of this weight in
+# addition to the class it already carries: a ready ask absorbs it, a waiting ask sends it through
+# its cone. It replaces the strict `operator` tier (below), so an ask can be outranked by deep work
+# and the dial is this one number. 15 is a starting value, chosen from the 2026-10-09 displacement
+# measurement (luthen's top salience 56.8, then 14.2, 12.7, 12.5, 9.0). Measured at 15, a leaf ask
+# rises within its band, not past a higher band (band outranks weight): luthen W675 from 134th of 135
+# to 16th (the old strict tier: 2nd), mtools W593 and W614 from 7th and 8th to 3rd and 4th (2nd and
+# 3rd). An ask already high or one whose need is another card (its demand follows its prerequisites)
+# barely moves. Change it here, as a reviewed diff.
+operator = 15
+
 # nemik:W132 (luthen-observability:W190; operator 2026-09-28: "a parameterizable pareto function"):
 # how nemik-rank COMPOSES its objectives into one order. Every objective is maximized:
 #   operator  1 when the operator asked for the waypoint (caused_by = operator), else 0 (nemik:W111:
@@ -29,10 +42,13 @@ peer_blocked = 8
 # next tier, then to the lower symbol.
 #   pure lexicographic: tiers = [["operator"], ["band"], ["weight"]]
 #   one Pareto tier:    tiers = [["operator", "band", "weight"]]
-# The default keeps the operator's ruling strict, then trades band against downstream weight: one
-# band step is worth 100 units of downstream weight within a front.
+# The default trades band against weight: one band step is worth 100 units of weight within a front.
+# nemik:W249: the `operator` objective is NOT a tier by default any more. An operator ask lives inside
+# `weight` as a demand source (`operator`, above), so it responds to the model instead of sitting
+# outside it. To restore the strict tier (an ask beats the backlog regardless of weight, W111):
+# tiers = [["operator"], ["band", "weight"]].
 [order]
-tiers = [["operator"], ["band", "weight"]]
+tiers = [["band", "weight"]]
 
 # nemik:W241 (operator ruling, 2026-10-08: the gcalculus model REPLACES the ranking after an audit):
 # which model the `weight` objective is.

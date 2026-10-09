@@ -430,6 +430,28 @@ and withheld.json:
 - Debt: luthen builds the export from host_activate.py, a debt file; a clean extracted kinds table
   may have to come first (luthen's call).
 
+## The operator ask weight, ruled (W249; operator 2026-10-09: option (b))
+
+RULING: an operator ask is a demand source with a declared class weight of its own, not a strict tier
+above the order. DONE as `operator = 15` in `rank-weights.toml` (a starting value: one number, the dial)
+and the default composition no longer has an `operator` tier (`tiers = [["band", "weight"]]`).
+
+How it works: a card whose `caused_by` is `operator` (or `operator: ...`) injects the declared weight
+as demand IN ADDITION to the class it carries (local, peer, peer_blocked). A ready ask absorbs it at
+itself; a waiting ask sends it through its cone to what it needs, so an ask whose real need is another
+card raises THAT card (the model answering "what needs to happen"). It rises within its band, because
+band outranks weight in the composition.
+
+Measured on the fleet at 15 (2026-10-09; the strict tier for comparison):
+- luthen W675 (a leaf, 134th of 135): 16th (strict: 2nd). Others pushed down 119 (strict: 132).
+- mtools W593 and W614: 7th and 8th to 3rd and 4th (strict: 2nd and 3rd). Others pushed down 4 (5).
+- gcalculus W212, life W14 and W28, mtools W580: unmoved (already high).
+- luthen W254 stays 13th: it is ready by state but has an open prerequisite in the graph, so its demand
+  flows to that prerequisite instead of being absorbed at itself.
+
+Reversible: the strict tier is `tiers = [["operator"], ["band", "weight"]]`, and the `operator`
+objective is still computed and printed.
+
 ## The model, settled (gcalculus:W208 full answer, 2026-10-09; decisions for W237)
 
 Source: gcalculus/inbox letter `2026-10-09-gcalculus-w237-the-answer.md` (nemik/inbox), reference

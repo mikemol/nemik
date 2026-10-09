@@ -125,3 +125,38 @@ def test_an_unknown_model_is_refused() -> None:
 
 def test_the_packaged_composition_declares_flow() -> None:
     assert load_composition().weight_model == "flow"
+
+
+def _ask_fleet(tmp_path: Path) -> Graph:
+    # W1 and W2 are ready leaves, equal in everything; the operator asked for W2.
+    (tmp_path / "a" / ".claude").mkdir(parents=True)
+    state = tmp_path / "a" / ".claude" / "paths-forward.json"
+    _pf(state, "--init")
+    _pf(state, "--add", "plain", "--next", "do it")
+    _pf(state, "--add", "asked", "--next", "do it", "--caused-by", "operator")
+    g = Graph()
+    for _, qg, _ in survey(tmp_path):
+        if qg is not None:
+            g += qg
+    return g
+
+
+def _ranked(g: Graph, operator: int) -> list[str]:
+    weights = load_weights(
+        f"local = 1\npeer = 2\npeer_blocked = 8\noperator = {operator}\n"
+    )
+    comp = load_composition(f'{TIERS}weight = "flow"\n')
+    return [r["symbol"] for r in rank(g, "a", weights, comp, fruit_row=False)]
+
+
+def test_an_operator_ask_is_a_demand_source_with_the_declared_weight(
+    tmp_path: Path,
+) -> None:
+    g = _ask_fleet(tmp_path)
+    no_term = _ranked(g, 0)  # a tie between equal leaves: the lower symbol leads
+    assert no_term == ["W1", "W2"]
+    assert _ranked(g, 15) == ["W2", "W1"]  # the ask carries its declared weight
+
+
+def test_the_packaged_operator_weight_is_declared() -> None:
+    assert load_weights().operator == 15

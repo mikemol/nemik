@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 148
+      "ticks_blocked": 149
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 23,
+      "ticks_blocked": 24,
       "weight": 1
     },
     {
@@ -3512,7 +3512,7 @@
       ],
       "touches": [],
       "blocked_on": [
-        "operator: decide how nemik reads Google Tasks back: (a) the helper borrows the Google resource's token from KWallet in-process for a read-only GET (never written, printed or exported), or (b) your Google Tasks view stays the read-back, or (c) I first try making Akonadi drop its cached copy and refetch, and come back if that fails"
+        "operator: act provide a read-only Google Tasks API token for the read-back helper (operator ruling 2026-10-09: they will supply their own); no credential is used before it is given"
       ],
       "blocked_kind": "human",
       "next_bounded_step": "",
@@ -3520,9 +3520,10 @@
       "issued_at": "2026-10-02T16:28:13Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-02T17:28:25Z",
-      "ticks_blocked": 29,
-      "weight": 2
+      "last_worked": "2026-10-09T12:42:16Z",
+      "ticks_blocked": 0,
+      "weight": 2,
+      "completed": null
     },
     {
       "symbol": "W189",
@@ -3754,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -4263,24 +4264,22 @@
     {
       "symbol": "W224",
       "title": "Nested workstreams: nemik resolves, cites and ranks a workstream that contains others, such as the host queue above every repo",
-      "status": "blocked",
+      "status": "ready",
       "enables": [],
       "touches": [
         "nemik",
         "nested-workstreams",
         "host-visitor"
       ],
-      "blocked_on": [
-        "operator: decide how a workstream that contains workstreams behaves: (a) only the root queue nests (today: the host queue above every repo, and nothing else), (b) any repo may contain repos and cites them <parent>/<child>:W<n>, or (c) a parent queue also carries the weight of its children, summed into its own ranking"
-      ],
-      "blocked_kind": "human",
-      "next_bounded_step": "Decide, with the operator, whether a repo containing repos (not just the root) needs the same rule, and whether a parent weights should aggregate its children; confirm the nemik image on the cluster carries 4c7ab22 (not visible from this session)",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Operator ruling 2026-10-09: nested workstreams are glued-in subgraphs; nesting changes only addressing, no parent weight aggregation. Step: discover queues at depth, name them by relative path, and check the mtools citation grammar for \"/\" in <repo>:W<n>.",
       "evidence": "2026-10-05: 2026-10-05 operator: nemik does not yet know about nested workstreams. Probes: nemik-rank . --root ~/github prints nothing; nemik-rank github only resolves with --root /home/mikemol (a workaround that makes ~mikemol the fleet). Open design points: how a parent's queue relates to its children's (aggregate, or separate), whether the citation prefix nests (github/repo:W<n> vs repo:W<n>), and what --all and nemik-inbound do with a parent. | 2026-10-05: 2026-10-05 4c7ab22: workstream_files includes <root>/.claude/<name> as the workstream named by the root directory, beside its children (a same-named child wins); the old --root-at-one-repo fallback is the same rule. tests/test_nested.py (4). Verified with PYTHONPATH=src: nemik-rank github ranks the host queue (W1 W2 W10 W11) and nemik-check lists github with only the standing warnings. NOT live yet: the installed .venv copy and the cluster image predate it. | 2026-10-09: 2026-10-09: the installed venv now resolves it: nemik-rank github ranks the host queue (W14 W1 W2 W10 W11 W13) from .venv/bin; pushes since have gone out through the normal path, but the running cluster image is not visible from this session | 2026-10-09: 2026-10-09: the mechanism for the root case is live (nemik-rank github ranks the host queue); what remains is policy, and whether the running cluster image carries 4c7ab22 is not visible from this session",
       "issued_at": "2026-10-05T22:32:01Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-09T02:13:14Z",
-      "ticks_blocked": 3,
+      "last_worked": "2026-10-09T12:42:16Z",
+      "ticks_blocked": 0,
       "weight": 2,
       "completed": null
     },
@@ -4373,7 +4372,7 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:09:03Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -4496,22 +4495,20 @@
     {
       "symbol": "W235",
       "title": "Replace nemik-rank's objectives with the g-calculus current-flow model after an audit; residue edges (closes_ref) are its first new term",
-      "status": "blocked",
+      "status": "ready",
       "enables": [
         "W228"
       ],
       "touches": [],
-      "blocked_on": [
-        "W249"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "The objective replacement landed (W241). Remaining: the operator ask inside the model (W249, needs the operator ruling) and the residue term (W251)",
       "evidence": "2026-10-08: 2026-10-08: needs closes_by to be machine-resolvable (a repo:W<n>), not only prose: asked of mtools as a structured part of the residue entry (W849). Then a new rank objective under the configurable composition (rank-weights.toml [order]). | 2026-10-08: 2026-10-08: mtools-25 agreed (W849): a residue entry carries an optional closes_ref (repo:W<n>, validated like caused_by) beside the prose closes_by; nothing parses the prose, so nemik-rank reads closes_ref only. | 2026-10-08: 2026-10-08: luthen host's reading of the gcalculus model recorded in the design note and split into W237 (design, waits on gcalculus) and W238 (implementation); two decays kept apart: hard staleness for safety facts and verdict marks (W236), smooth half-life decay for salience marks. | 2026-10-08: 2026-10-08: operator ruling relayed by github-28: the model REPLACES the existing ranking after an audit (not one more objective). Sequence W239 (express each objective), W240 (audit both over the real queues, every disagreement recorded), W241 (switch, old ranking kept as the comparison arm until then). Cost and determinism (operator on W237 d): measurements apply to smaller graphs glued together, so each repo's queue is reduced to its ports and the reductions are glued (W242). | 2026-10-09: 2026-10-09: W237, W238, W239, W240, W241, W242 (dropped), W244 are done; the weight objective is the flow salience",
       "issued_at": "2026-10-08T13:50:21Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-09T01:34:04Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 0,
       "completed": null
     },
     {
@@ -4755,23 +4752,21 @@
     {
       "symbol": "W249",
       "title": "Move the operator tier inside the flow model: an operator ask becomes a demand source with a declared class weight instead of a strict tier above the order",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W235"
       ],
       "touches": [],
-      "blocked_on": [
-        "operator: decide how heavy an operator ask is as a demand source: (a) the peer_blocked class (8, a session idle on it), (b) a new declared operator class with its own number (say which), or (c) keep the strict tier above the order and only show its needs and overrides with nemik-rank --ask"
-      ],
-      "blocked_kind": "human",
-      "next_bounded_step": "Needs the operator ruling on the ask weight, then: add an operator class to rank-weights.toml, make caused_by=operator sources inject it, drop the operator tier from [order], audit with nemik-rank --flow and --ask",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: 2026-10-09 operator ruling: (b), a new declared operator class with its own number. Done: operator = 15 in rank-weights.toml (Weights.operator, default 0 for callers that do not name it); salience.audit adds it as demand at each operator-asked card (caused_by operator); the packaged composition drops the operator tier (tiers = band, weight); strict tier is one declaration away. 15 is my starting value, not the operator: the dial is that one number. Measured: luthen W675 134th to 16th (strict 2nd), mtools W593/W614 7th/8th to 3rd/4th; tests: test_rank (strict tier is now a declared option), test_rank_flow (+2); design note section The operator ask weight, ruled",
       "issued_at": "2026-10-09T01:30:17Z",
       "minted_during": "tick",
       "caused_by": "W244",
-      "last_worked": "2026-10-09T01:30:25Z",
-      "ticks_blocked": 8,
-      "completed": null
+      "last_worked": "2026-10-09T12:41:01Z",
+      "ticks_blocked": 0,
+      "completed": "20261009T124101Z"
     },
     {
       "symbol": "W250",
@@ -5028,7 +5023,7 @@
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-09T09:56:23Z"
+    "taken_at": "2026-10-09T12:32:39Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []

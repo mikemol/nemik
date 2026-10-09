@@ -24,10 +24,15 @@ class Weights:
     local: int
     peer: int
     peer_blocked: int
+    operator: int = 0
 
 
 def load_weights(text: str | None = None) -> Weights:
-    """Read the edge weights; `text` overrides the packaged file (for tests)."""
+    """Read the edge weights; `text` overrides the packaged file (for tests).
+
+    `operator` (nemik:W249) is the demand an operator ask injects as a source in the flow model; a
+    text that does not name it weighs an ask nothing beyond its class.
+    """
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
     data = tomllib.loads(text)
@@ -35,6 +40,7 @@ def load_weights(text: str | None = None) -> Weights:
         local=int(data["local"]),
         peer=int(data["peer"]),
         peer_blocked=int(data["peer_blocked"]),
+        operator=int(data.get("operator", 0)),
     )
 
 
@@ -312,7 +318,9 @@ def _rows(
     bands = load_bands()
     flow = (comp or load_composition()).weight_model == "flow"
     salience = (
-        salience_of(g, repo, weights.local, weights.peer, weights.peer_blocked)
+        salience_of(
+            g, repo, weights.local, weights.peer, weights.peer_blocked, weights.operator
+        )
         if flow
         else None
     )

@@ -201,6 +201,19 @@ def audit(
     front = {ref_of(n) for n in ready}
     relevant = {ref_of(x) for x in population} | {ref_of(n) for n in mine}
     open_refs = {ref_of(n) for n in nodes}
+    if weights.operator:
+        # nemik:W249: an operator ask is a demand source with a declared class weight, not a strict
+        # tier above the order. A ready ask absorbs its own demand; a waiting one sends it through
+        # its cone. Additive to the class weight the card already carries.
+        from rdflib.namespace import PROV
+
+        for n in sorted(nodes, key=str):
+            cause = str(g.value(n, PROV.wasInformedBy) or "").strip().lower()
+            asked = cause == "operator" or cause.startswith("operator:")
+            if asked and ref_of(n) in relevant and ref_of(n) != without:
+                demand[ref_of(n)] = (
+                    demand.get(ref_of(n), Fraction(0)) + weights.operator
+                )
     for card, entries in (residue or {}).items():
         if card not in open_refs or card not in relevant or card == without:
             continue
@@ -295,12 +308,13 @@ def load_gate_weights(text: str | None = None) -> dict[str, Fraction]:
 
 
 def salience_of(
-    g: Graph, repo: str, local: int, peer: int, peer_blocked: int
+    g: Graph, repo: str, local: int, peer: int, peer_blocked: int, operator: int = 0
 ) -> dict[str, Fraction]:
     """Solve `repo`'s ready cards and return each card's exact flow salience, by `repo:W<n>`.
 
-    The class weights come in as plain numbers (the three of `rank-weights.toml`), so a caller
-    needs no shared type with this module; nemik.rank uses this for its `weight` objective (W241).
+    The class weights come in as plain numbers (those of `rank-weights.toml`, `operator` being
+    what an operator ask injects, W249), so a caller needs no shared type with this module;
+    nemik.rank uses this for its `weight` objective (W241).
 
     The ground is the WORKABLE cards (state ready or working), what a worker can pick up now: a card
     blocked on something outside the graph is a dead end and absorbs nothing (nemik:W252; measured
@@ -314,5 +328,5 @@ def salience_of(
     from nemik.rank import Weights
 
     return audit(
-        g, repo, Weights(local, peer, peer_blocked), workable=True
+        g, repo, Weights(local, peer, peer_blocked, operator), workable=True
     ).flow.salience
