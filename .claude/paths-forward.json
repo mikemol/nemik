@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 134
+      "ticks_blocked": 135
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 10,
       "weight": 1
     },
     {
@@ -2613,7 +2613,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 79
+      "ticks_blocked": 80
     },
     {
       "symbol": "W138",
@@ -3522,7 +3522,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-02T17:28:25Z",
-      "ticks_blocked": 15,
+      "ticks_blocked": 16,
       "weight": 2
     },
     {
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-08T13:42:13Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 10,
       "completed": null
     },
     {
@@ -3789,11 +3789,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": null,
-      "evidence": "2026-10-05: ledger row gone | 2026-10-05: ledger row gone",
+      "evidence": "2026-10-05: ledger row gone | 2026-10-05: ledger row gone | 2026-10-09: 2026-10-09: adapter.py passes ruff, format and mypy (whole-source run, mypy without silent imports); the findings count in the title is stale",
       "issued_at": "2026-10-05T16:39:44Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-05T23:29:01Z",
+      "last_worked": "2026-10-09T00:35:24Z",
       "ticks_blocked": 0,
       "completed": "20261005T232901Z",
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
@@ -3812,11 +3812,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": null,
-      "evidence": "2026-10-05: ledger row gone | 2026-10-07: 2026-10-07 host: mikemol-pycheck --census nemik no longer lists src/nemik/alarm.py (0 findings; the card said 3). Closed on that reading.",
+      "evidence": "2026-10-05: ledger row gone | 2026-10-07: 2026-10-07 host: mikemol-pycheck --census nemik no longer lists src/nemik/alarm.py (0 findings; the card said 3). Closed on that reading. | 2026-10-09: 2026-10-09: alarm.py passes ruff, format and mypy (whole-source run); the findings count in the title is stale",
       "issued_at": "2026-10-05T16:39:44Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-07T19:34:05Z",
+      "last_worked": "2026-10-09T00:35:24Z",
       "ticks_blocked": 0,
       "completed": "20261007T193405Z",
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
@@ -3835,11 +3835,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": null,
-      "evidence": "2026-10-05: ledger row gone | 2026-10-07: 2026-10-07 host: mikemol-pycheck --census nemik no longer lists src/nemik/manifest.py (0 findings; the card said 38). Closed on that reading.",
+      "evidence": "2026-10-05: ledger row gone | 2026-10-07: 2026-10-07 host: mikemol-pycheck --census nemik no longer lists src/nemik/manifest.py (0 findings; the card said 38). Closed on that reading. | 2026-10-09: 2026-10-09: manifest.py passes ruff, format and mypy (whole-source run); the findings count in the title is stale",
       "issued_at": "2026-10-05T16:39:44Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-07T19:34:05Z",
+      "last_worked": "2026-10-09T00:35:25Z",
       "ticks_blocked": 0,
       "completed": "20261007T193405Z",
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
@@ -3858,11 +3858,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": null,
-      "evidence": "2026-10-05: ledger row gone | 2026-10-07: 2026-10-07 host: mikemol-pycheck --census nemik no longer lists src/nemik/blocks.py (0 findings; the card said 96). Closed on that reading.",
+      "evidence": "2026-10-05: ledger row gone | 2026-10-07: 2026-10-07 host: mikemol-pycheck --census nemik no longer lists src/nemik/blocks.py (0 findings; the card said 96). Closed on that reading. | 2026-10-09: 2026-10-09: blocks.py passes ruff, format and mypy (whole-source run); the findings count in the title is stale",
       "issued_at": "2026-10-05T16:39:44Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-07T19:34:06Z",
+      "last_worked": "2026-10-09T00:35:25Z",
       "ticks_blocked": 0,
       "completed": "20261007T193406Z",
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
@@ -3923,25 +3923,23 @@
     {
       "symbol": "W209",
       "title": "nemik typing: src/nemik/rank.py (260 findings)",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W223"
       ],
       "touches": [
         "debt"
       ],
-      "blocked_on": [
-        "W216"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Waits on 4 debt file(s) to clean first",
-      "evidence": "2026-10-05: ledger row gone",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-05: ledger row gone | 2026-10-09: 2026-10-09: rank.py passes ruff, format and mypy (whole-source run); the 260 findings in the title are stale",
       "issued_at": "2026-10-05T16:39:45Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 2,
-      "completed": null,
+      "last_worked": "2026-10-09T00:35:26Z",
+      "ticks_blocked": 0,
+      "completed": "20261009T003526Z",
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
     },
@@ -4040,24 +4038,21 @@
     {
       "symbol": "W214",
       "title": "nemik typing: src/nemik/serve.py (186 findings)",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [
         "debt"
       ],
-      "blocked_on": [
-        "W223",
-        "W208"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Waits on 15 debt file(s) to clean first",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: 2026-10-09: serve.py cleaned (import order, format, nodes/edges typed list[dict[str, Any]], renamed reused loop and handler variables, a None-safe repo query): ruff, format and mypy clean",
       "issued_at": "2026-10-05T16:39:45Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 9,
-      "completed": null,
+      "last_worked": "2026-10-09T00:35:28Z",
+      "ticks_blocked": 0,
+      "completed": "20261009T003528Z",
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
     },
@@ -4074,11 +4069,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": null,
-      "evidence": "2026-10-07: 2026-10-07 host: mikemol-pycheck --census nemik no longer lists src/nemik/adoption.py (0 findings; the card said 27). Closed on that reading.",
+      "evidence": "2026-10-07: 2026-10-07 host: mikemol-pycheck --census nemik no longer lists src/nemik/adoption.py (0 findings; the card said 27). Closed on that reading. | 2026-10-09: 2026-10-09: adoption.py passes ruff, format and mypy (whole-source run); the findings count in the title is stale",
       "issued_at": "2026-10-05T18:20:43Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-07T19:34:07Z",
+      "last_worked": "2026-10-09T00:35:26Z",
       "ticks_blocked": 0,
       "completed": "20261007T193407Z",
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
@@ -4120,11 +4115,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": null,
-      "evidence": "2026-10-05: ledger row gone",
+      "evidence": "2026-10-05: ledger row gone | 2026-10-09: 2026-10-09: __init__.py passes ruff, format and mypy (whole-source run)",
       "issued_at": "2026-10-05T18:20:43Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-05T23:29:01Z",
+      "last_worked": "2026-10-09T00:35:27Z",
       "ticks_blocked": 0,
       "completed": "20261005T232901Z",
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
@@ -4225,48 +4220,44 @@
     {
       "symbol": "W222",
       "title": "nemik typing: src/nemik/calwrite.py (10 findings)",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [
         "debt"
       ],
-      "blocked_on": [
-        "W221"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Waits on 5 debt file(s) to clean first",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: 2026-10-09: calwrite.py passes ruff, format and mypy (whole-source run); the findings count in the title is stale",
       "issued_at": "2026-10-05T18:20:44Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 9,
-      "completed": null,
+      "last_worked": "2026-10-09T00:35:27Z",
+      "ticks_blocked": 0,
+      "completed": "20261009T003527Z",
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
     },
     {
       "symbol": "W223",
       "title": "nemik typing: src/nemik/tools.py (28 findings)",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W214"
       ],
       "touches": [
         "debt"
       ],
-      "blocked_on": [
-        "W209"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Waits on 12 debt file(s) to clean first",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: 2026-10-09: tools.py passes ruff, format and mypy (whole-source run); the findings count in the title is stale",
       "issued_at": "2026-10-05T18:20:44Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-05T23:29:01Z",
-      "ticks_blocked": 1,
-      "completed": null,
+      "last_worked": "2026-10-09T00:35:28Z",
+      "ticks_blocked": 0,
+      "completed": "20261009T003528Z",
       "vector": "WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N",
       "vector_source": "agent"
     },
@@ -4379,7 +4370,7 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:09:03Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null
     },
     {
@@ -4479,7 +4470,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W665",
       "last_worked": "2026-10-08T14:56:18Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -4524,7 +4515,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:17:54Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "completed": null
     },
     {
@@ -4565,7 +4556,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:56:19Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "completed": null
     },
     {
@@ -4587,7 +4578,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:22:37Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "completed": null
     },
     {
@@ -4630,7 +4621,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:07:19Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -4652,7 +4643,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:17:49Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "completed": null
     },
     {
@@ -4674,7 +4665,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:14:24Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -4695,7 +4686,7 @@
       "minted_during": "tick",
       "caused_by": "W229",
       "last_worked": "2026-10-08T14:09:02Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "completed": null
     },
     {
@@ -4716,7 +4707,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-08T14:17:48Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "completed": null
     },
     {
