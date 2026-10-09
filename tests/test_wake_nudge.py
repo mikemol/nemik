@@ -41,7 +41,7 @@ def test_should_nudge_true_once_rewake_window_elapses() -> None:
 
 def test_due_nudges_filters_state_waiting_and_backoff_then_records_seen() -> None:
     now = datetime(2026, 9, 26, 12, 0, 0, tzinfo=UTC)
-    rows = [
+    rows: list[dict] = [
         {"repo": "alpha", "state": "asleep", "waiting": [{"blocked": "x"}]},
         {
             "repo": "beta",

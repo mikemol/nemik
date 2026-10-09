@@ -19,7 +19,7 @@ def test_ready_items_and_no_working_card_is_flagged() -> None:
     g = Graph()
     ws = _repo(g, "a", "ready", "ready", "blocked")
     annotate(g)
-    assert [int(o) for o in g.objects(ws, NEMIK.noActiveCard)] == [2]
+    assert [int(str(o)) for o in g.objects(ws, NEMIK.noActiveCard)] == [2]
 
 
 def test_exactly_one_working_card_is_clean() -> None:
@@ -37,7 +37,7 @@ def test_several_working_cards_are_flagged() -> None:
     g = Graph()
     ws = _repo(g, "a", "working", "working", "working")
     annotate(g)
-    assert [int(o) for o in g.objects(ws, NEMIK.extraActiveCards)] == [3]
+    assert [int(str(o)) for o in g.objects(ws, NEMIK.extraActiveCards)] == [3]
 
 
 def test_all_blocked_or_done_needs_no_card() -> None:

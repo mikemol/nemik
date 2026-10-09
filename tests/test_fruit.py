@@ -13,6 +13,7 @@ def test_members_are_leaves_moving_nothing_or_tagged() -> None:
         {"symbol": "W3", "downstream": 0},
     ]
     f = fruit(Graph(), "a", rows)
+    assert f is not None
     assert f["members"] == ["W1", "W3"] and f["class_weight"] == 2
 
 
@@ -25,6 +26,7 @@ def test_tagged_item_joins_with_its_downstream() -> None:
     g.add((n, NEMIK.workstream, workstream_uri("a")))
     g.add((n, NEMIK.touches, Literal("fruit")))
     f = fruit(g, "a", [{"symbol": "W2", "downstream": 3}])
+    assert f is not None
     assert f["members"] == ["W2"] and f["class_weight"] == 4
 
 

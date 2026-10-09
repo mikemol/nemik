@@ -4880,20 +4880,21 @@
     {
       "symbol": "W255",
       "title": "nemik tests: clear the 8 mypy errors in test_active_card, test_wake_nudge, test_vtodo, test_guarantees and test_fruit",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "debt"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Run mypy --config-file pyproject.toml tests; fix each by narrowing (isinstance, an assert on the Optional) rather than loosening a type; one bazel gate",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: 2026-10-09: mypy over src and tests is clean (82 files): int(str(o)) for rdflib nodes (test_active_card), list[dict] annotations for the mixed fixtures (test_vtodo ASKS, test_wake_nudge rows), an assert on the Optional returns (test_fruit, test_guarantees). With W248, ruff check, ruff format --check and mypy all pass over the whole repo",
       "issued_at": "2026-10-09T02:09:33Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-09T02:12:45Z",
+      "ticks_blocked": 0,
+      "completed": "20261009T021245Z"
     }
   ],
   "residue": [

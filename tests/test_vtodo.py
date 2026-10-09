@@ -2,7 +2,7 @@
 
 from nemik.vtodo import calendar, stated_ask, vtodos
 
-ASKS = [
+ASKS: list[dict] = [
     {
         "ref": "life:W21",
         "title": "Resume, approve",

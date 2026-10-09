@@ -50,7 +50,9 @@ def test_inversion_names_the_next_item_and_the_urgent_one() -> None:
     _wp(g, "W1", pos=0)  # unscored -> normal, and mtools works it next
     _wp(g, "W2", pos=1, vector=V.format(R="H", S="C"))  # critical
     guar = load_guarantees()
-    nxt, urgent = inversion(g, "a", rank(g, "a", W), B, guar)
+    found = inversion(g, "a", rank(g, "a", W), B, guar)
+    assert found is not None
+    nxt, urgent = found
     assert (nxt["symbol"], nxt["band_name"]) == ("W1", "normal")
     assert (urgent["symbol"], urgent["band_name"]) == ("W2", "critical")
 
