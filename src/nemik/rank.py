@@ -41,14 +41,24 @@ def load_weights(text: str | None = None) -> Weights:
 OBJECTIVES = ("operator", "band", "weight")
 
 
+WEIGHT_MODELS = ("flow", "downstream")
+
+
 @dataclass(frozen=True)
 class Composition:
     tiers: tuple[tuple[str, ...], ...]
     scalarize: dict[str, float]
+    weight_model: str = "downstream"
 
 
 def load_composition(text: str | None = None) -> Composition:
-    """Read [order] from the weights file (nemik:W132); `text` overrides it (for tests)."""
+    """Read [order] from the weights file (nemik:W132); `text` overrides it (for tests).
+
+    `weight` names the model behind the `weight` objective (nemik:W241): `flow`, the per-source
+    nodal current-flow salience (nemik.flow, audited in W240), or `downstream`, the old transitive
+    sum. A text that names neither keeps the old sum, so a caller that predates the switch is
+    unchanged; the packaged file declares `flow`.
+    """
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
     o = tomllib.loads(text).get("order", {})
@@ -58,7 +68,14 @@ def load_composition(text: str | None = None) -> Composition:
         raise ValueError(
             f"rank-weights.toml [order]: unknown objectives {sorted(unknown)}"
         )
-    return Composition(tiers, {k: float(v) for k, v in o.get("scalarize", {}).items()})
+    model = str(o.get("weight", "downstream"))
+    if model not in WEIGHT_MODELS:
+        raise ValueError(
+            f"rank-weights.toml [order]: weight must be one of {WEIGHT_MODELS}"
+        )
+    return Composition(
+        tiers, {k: float(v) for k, v in o.get("scalarize", {}).items()}, model
+    )
 
 
 def _dominates(a: dict, b: dict, objs: tuple[str, ...]) -> bool:
@@ -69,8 +86,10 @@ def compose(rows: list[dict], comp: Composition) -> list[dict]:
     """Order rows by the declared composition; each row gets `key` (equal keys are true ties).
 
     Across tiers: lexicographic. Within a tier: Pareto fronts (non-dominated sorting), then the
-    tier's weighted sum inside a front, then the next tier on what is still tied.
+    tier's weighted sum inside a front, then the next tier on what is still tied. The sum is exact
+    (`Fraction`): an exact flow salience must not lose a near-tie to a float (nemik:W241).
     """
+    from fractions import Fraction
 
     def go(
         items: list[dict], tiers: tuple[tuple[str, ...], ...], prefix: tuple
@@ -89,7 +108,7 @@ def compose(rows: list[dict], comp: Composition) -> list[dict]:
             ]
             remaining = [a for a in remaining if a not in front]
             scal = {
-                id(a): sum(comp.scalarize.get(o, 1.0) * a[o] for o in objs)
+                id(a): sum(Fraction(comp.scalarize.get(o, 1.0)) * a[o] for o in objs)
                 for a in front
             }
             for v in sorted({scal[id(a)] for a in front}, reverse=True):
@@ -104,7 +123,14 @@ def compose(rows: list[dict], comp: Composition) -> list[dict]:
     return go(list(rows), comp.tiers, ())
 
 
-def objectives(g: Graph, n: Node, weights: Weights, bands) -> dict:
+def objectives(
+    g: Graph, n: Node, weights: Weights, bands, salience: dict | None = None
+) -> dict:
+    """One ready card's objectives.
+
+    `salience` (nemik.salience, the flow model) replaces the `weight` objective when given; the old
+    transitive sum stays in `downstream` either way (nemik:W241).
+    """
     from rdflib.namespace import PROV
 
     from nemik.score import band
@@ -117,7 +143,7 @@ def objectives(g: Graph, n: Node, weights: Weights, bands) -> dict:
         "band": -bands.rank(b),
         "band_name": b,
         "band_why": why,
-        "weight": down,
+        "weight": down if salience is None else salience.get(ref_of(n), 0),
         "downstream": down,
     }
 
@@ -261,11 +287,18 @@ def umbrellas(g: Graph, repo: str) -> list[Node]:
 
 
 def _rows(
-    g: Graph, repo: str, weights: Weights, *, fruit_row: bool = True
+    g: Graph,
+    repo: str,
+    weights: Weights,
+    *,
+    fruit_row: bool = True,
+    comp: Composition | None = None,
 ) -> list[dict]:
     """`repo`'s ready leaves as objective rows, before any ordering (for `rank`, `rank_fleet`).
 
-    Umbrellas are left out: their open children are what can be worked (nemik:W74).
+    Umbrellas are left out: their open children are what can be worked (nemik:W74). When the
+    composition declares `weight = "flow"` (nemik:W241), the `weight` objective is the flow model's
+    exact salience for this repo, solved once for all its ready cards.
     """
     ws = workstream_uri(repo)
     ready = [
@@ -273,14 +306,21 @@ def _rows(
         for n in g.subjects(NEMIK.workstream, ws)
         if (n, OSLC_CM.state, NEMIK.Ready) in g and not is_umbrella(g, n)
     ]
+    from nemik.salience import salience_of
     from nemik.score import load_bands
 
     bands = load_bands()
+    flow = (comp or load_composition()).weight_model == "flow"
+    salience = (
+        salience_of(g, repo, weights.local, weights.peer, weights.peer_blocked)
+        if flow
+        else None
+    )
     rows = [
         {
             "symbol": str(g.value(n, NEMIK.symbol)),
             "title": str(g.value(n, DCTERMS.title) or ""),
-            **objectives(g, n, weights, bands),
+            **objectives(g, n, weights, bands, salience),
         }
         for n in ready
     ]
@@ -321,7 +361,8 @@ def _position(rows: list[dict], comp: Composition | None) -> list[dict]:
     keys = sorted({r["key"] for r in out}, reverse=True)
     for r in out:
         r["weight"] = keys.index(r["key"]) + 1
-        r["key"] = list(r["key"])
+        # The order was decided on exact values; the printed key is for reading (and JSON).
+        r["key"] = [x if isinstance(x, int) else float(x) for x in r["key"]]
     return out
 
 
@@ -337,7 +378,7 @@ def rank(
 
     Umbrellas are left out: their open children are what can be worked (nemik:W74).
     """
-    return _position(_rows(g, repo, weights, fruit_row=fruit_row), comp)
+    return _position(_rows(g, repo, weights, fruit_row=fruit_row, comp=comp), comp)
 
 
 def fleet_repos(g: Graph) -> list[str]:
@@ -358,7 +399,7 @@ def rank_fleet(
     """
     rows = []
     for repo in fleet_repos(g):
-        for r in _rows(g, repo, weights):
+        for r in _rows(g, repo, weights, comp=comp):
             r["repo"], r["cite"] = repo, f"{repo}:{r['symbol']}"
             rows.append(r)
     return _position(rows, comp)

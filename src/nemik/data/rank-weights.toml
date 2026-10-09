@@ -34,6 +34,20 @@ peer_blocked = 8
 [order]
 tiers = [["operator"], ["band", "weight"]]
 
+# nemik:W241 (operator ruling, 2026-10-08: the gcalculus model REPLACES the ranking after an audit):
+# which model the `weight` objective is.
+#   flow        the exact current-flow salience (nemik.flow): each waiting card injects its class
+#               weight (local/peer/peer_blocked above, relative to the ranked repo), the demand
+#               flows through the cone of what it needs to the ready cards (ground), conserved, and
+#               a card's `weight` is the part it absorbs. A source shared by several ready cards is
+#               split between them (the operator's ruling: SPLIT, "let the physics do the work").
+#   downstream  the old transitive sum, each downstream waypoint counted in full for every ready
+#               card that serves it. Kept as the comparison arm: `nemik-rank REPO --flow` prints
+#               both and every pair they order differently, with the contested sources behind each.
+# AUDIT (W240, all sixteen workstreams): the arms differ only where a source is shared; the
+# differences close exactly (design note, "The audit, run on every workstream").
+weight = "flow"
+
 [order.scalarize]
 operator = 1
 band = 100

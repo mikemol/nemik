@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 248,
+  "counter": 249,
   "waypoints": [
     {
       "symbol": "W1",
@@ -4279,7 +4279,8 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T00:37:58Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 2
     },
     {
       "symbol": "W225",
@@ -4616,23 +4617,21 @@
     {
       "symbol": "W241",
       "title": "Switch nemik-rank to the current-flow model once the audit is decided, keeping the old ranking as the comparison arm until the switch",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W235"
       ],
       "touches": [],
-      "blocked_on": [
-        "W240"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: 2026-10-09: nemik-rank weight objective is the exact flow salience: [order] weight = \"flow\" in rank-weights.toml (WEIGHT_MODELS flow|downstream; a composition naming neither keeps the old sum), compose scalarizes in Fraction so exact values keep near-ties, _rows solves once per repo through nemik.salience.salience_of, the old sum stays in downstream and as the --flow comparison arm. Weights re-synced (nemik: 2 set). tests/test_rank_flow.py (5): three shared dependents on A and E against two sole dependents on B give old order A E B and flow order B A E. The strict operator tier is unchanged: moving it inside the model needs the operator ruling on an ask weight (W249)",
       "issued_at": "2026-10-08T14:07:08Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
-      "last_worked": "2026-10-09T01:21:43Z",
-      "ticks_blocked": 1,
-      "completed": null
+      "last_worked": "2026-10-09T01:30:26Z",
+      "ticks_blocked": 0,
+      "completed": "20261009T013026Z"
     },
     {
       "symbol": "W243",
@@ -4753,7 +4752,29 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
+    },
+    {
+      "symbol": "W249",
+      "title": "Move the operator tier inside the flow model: an operator ask becomes a demand source with a declared class weight instead of a strict tier above the order",
+      "status": "blocked",
+      "enables": [
+        "W235"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "operator: decide how heavy an operator ask is as a demand source: (a) the peer_blocked class (8, a session idle on it), (b) a new declared operator class with its own number (say which), or (c) keep the strict tier above the order and only show its needs and overrides with nemik-rank --ask"
+      ],
+      "blocked_kind": "human",
+      "next_bounded_step": "Needs the operator ruling on the ask weight, then: add an operator class to rank-weights.toml, make caused_by=operator sources inject it, drop the operator tier from [order], audit with nemik-rank --flow and --ask",
+      "evidence": "",
+      "issued_at": "2026-10-09T01:30:17Z",
+      "minted_during": "tick",
+      "caused_by": "W244",
+      "last_worked": "2026-10-09T01:30:25Z",
+      "ticks_blocked": 0,
+      "completed": null
     }
   ],
   "residue": [

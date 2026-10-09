@@ -232,3 +232,20 @@ def ask_effect(
     ]
     needs = sorted(absorbed, key=lambda item: (-item[1], item[0]))
     return AskEffect(ref, needs, displaced, stranded)
+
+
+def salience_of(
+    g: Graph, repo: str, local: int, peer: int, peer_blocked: int
+) -> dict[str, Fraction]:
+    """Solve `repo`'s ready cards and return each card's exact flow salience, by `repo:W<n>`.
+
+    The class weights come in as plain numbers (the three of `rank-weights.toml`), so a caller
+    needs no shared type with this module; nemik.rank uses this for its `weight` objective (W241).
+
+    Returns:
+        the salience of every ready card of `repo` that absorbs any demand.
+
+    """
+    from nemik.rank import Weights
+
+    return audit(g, repo, Weights(local, peer, peer_blocked)).flow.salience
