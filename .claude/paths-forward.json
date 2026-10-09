@@ -3745,17 +3745,16 @@
       "enables": [],
       "touches": [],
       "blocked_on": [
-        "luthen-observability:W626",
-        "luthen-observability:W670"
+        "luthen-observability:W626"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "2026-10-05: 2026-10-05: letter left in luthen-observability/inbox/2026-10-05-nemik-calendar-write-unit.md (no luthen session was live) asking for a claiming waypoint and the unit. | 2026-10-08: 2026-10-08: title shortened (was bundled, nemik-check W201 warning); full ask unchanged: a unit every few minutes so a waypoint that changes or closes updates or deletes its event, asked of luthen as for the Tasks unit W234. | 2026-10-09: 2026-10-09: claimed on luthen as luthen-observability:W626 and W670 (nemik-inbound luthen-observability lists both; relayed by github-45)",
+      "evidence": "2026-10-05: 2026-10-05: letter left in luthen-observability/inbox/2026-10-05-nemik-calendar-write-unit.md (no luthen session was live) asking for a claiming waypoint and the unit. | 2026-10-08: 2026-10-08: title shortened (was bundled, nemik-check W201 warning); full ask unchanged: a unit every few minutes so a waypoint that changes or closes updates or deletes its event, asked of luthen as for the Tasks unit W234. | 2026-10-09: 2026-10-09: claimed on luthen as luthen-observability:W626 and W670 (nemik-inbound luthen-observability lists both; relayed by github-45) | 2026-10-09: 2026-10-09: luthen dropped W670 into residue pointing at W626 (verified in luthen queue, dropped 06:20Z); W626 carries the contract and needs the operator host apply when declared",
       "issued_at": "2026-10-05T14:36:03Z",
       "minted_during": "tick",
       "caused_by": "life-c5",
-      "last_worked": "2026-10-09T03:12:00Z",
-      "ticks_blocked": 3,
+      "last_worked": "2026-10-09T06:20:54Z",
+      "ticks_blocked": 0,
       "completed": null
     },
     {
