@@ -17,10 +17,21 @@ order = ["critical", "high", "elevated", "normal", "low"]
 unscored = "normal"
 unmatched = "normal"
 
-# Host reach across a trust boundary, host integrity, or confidential data leaving the host.
+# Host reach across a trust boundary WITH some impact, host integrity, or confidential data
+# leaving the host. (luthen W137 letter, proposal 1: host reach across a boundary with every
+# impact N is a boundary crossing and still lands in high through S = C below, not critical.)
 [[band.critical]]
 R = ["H"]
 S = ["C"]
+I = ["L", "H"]
+[[band.critical]]
+R = ["H"]
+S = ["C"]
+C = ["L", "H"]
+[[band.critical]]
+R = ["H"]
+S = ["C"]
+A = ["L", "H"]
 [[band.critical]]
 R = ["H"]
 I = ["H"]
@@ -28,21 +39,36 @@ I = ["H"]
 E = ["Y"]
 C = ["H"]
 
-# Cluster reach, any trust-boundary crossing, or high confidentiality/integrity impact.
+# Cluster reach WITH some integrity or availability impact (proposal 4: bare R = C flooded this
+# band, 35 of 72, a Valkey resize beside OpenBao seal work), any trust-boundary crossing, high
+# confidentiality/integrity impact, or host reach with availability at risk (proposal 3: work that
+# gates every exec outranks single-tenant items).
 [[band.high]]
 R = ["C"]
+I = ["L", "H"]
+[[band.high]]
+R = ["C"]
+A = ["L", "H"]
 [[band.high]]
 S = ["C"]
 [[band.high]]
 C = ["H"]
 [[band.high]]
 I = ["H"]
+[[band.high]]
+R = ["H"]
+A = ["H"]
 
-# Tenant reach, or availability at risk.
+# Tenant reach, availability at risk, host reach (proposal 5: host drift work ranked under tenant
+# reach), or cluster reach with no impact (what proposal 4 moved down from high).
 [[band.elevated]]
 R = ["T"]
 [[band.elevated]]
 A = ["H"]
+[[band.elevated]]
+R = ["H"]
+[[band.elevated]]
+R = ["C"]
 
 # Local, and no impact at all.
 [[band.low]]

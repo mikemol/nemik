@@ -18,9 +18,20 @@ def vec(R="L", E="N", C="N", I="N", A="N", S="U"):
 @pytest.mark.parametrize(
     ("v", "want"),
     [
-        (vec(R="H", S="C"), "critical"),
+        # luthen's W137 calibration: crossing a boundary from the host is critical only with some
+        # impact; with every impact N it is a boundary crossing and lands in high.
+        (vec(R="H", S="C", I="L"), "critical"),
+        (vec(R="H", S="C", C="L"), "critical"),
+        (vec(R="H", S="C", A="L"), "critical"),
+        (vec(R="H", S="C"), "high"),
         (vec(E="Y", C="H"), "critical"),
-        (vec(R="C"), "high"),
+        # Cluster reach floods high unless something is at stake; host reach with availability at
+        # risk is high, and bare host or cluster reach is elevated.
+        (vec(R="C", I="L"), "high"),
+        (vec(R="C", A="L"), "high"),
+        (vec(R="C"), "elevated"),
+        (vec(R="H", A="H"), "high"),
+        (vec(R="H"), "elevated"),
         (vec(S="C"), "high"),
         (vec(R="T"), "elevated"),
         (vec(), "low"),

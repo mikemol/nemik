@@ -12,7 +12,9 @@ from nemik.score import load_bands, load_guarantees
 
 W = Weights(local=1, peer=2, peer_blocked=8)
 B = load_bands()
-V = "WV:1/R:{R}/E:N/C:N/I:N/A:N/X:N/S:{S}/F:K/W:N"
+# I:L, not N: since luthen's W137 calibration a host-reach boundary crossing is critical only with
+# some impact, and these tests mean "critical" by R:H S:C.
+V = "WV:1/R:{R}/E:N/C:N/I:L/A:N/X:N/S:{S}/F:K/W:N"
 
 
 def _wp(

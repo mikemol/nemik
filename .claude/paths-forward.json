@@ -2597,7 +2597,7 @@
     {
       "symbol": "W137",
       "title": "Calibrate the bands.toml floor and trust-boundary policy (W133) against luthen's first vectored waypoints",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "nemik-rank",
@@ -2605,14 +2605,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "luthen-observability:W431 is done (letter nemik/inbox/from-luthen-observability-w137-bands-calibration.md: both guarantees fired on first contact and were right; 7 band proposals): read the letter, apply the proposals to bands.toml as a reviewed diff, run nemik-rank luthen-observability --check",
-      "evidence": "2026-10-01: W133 shipped floor=critical (the narrowest claim) and a trust-boundary class (touches tag, or vector S:C) with nothing to test them against: no fixture queue carries a vector or a trust-boundary tag. Waits on luthen-observability writing vectors (its W190; W188's trust-boundary items). Then: nemik-rank luthen-observability --check, and adjust the floor and class rules by letter. | 2026-10-09: 2026-10-09: nemik-inbound luthen-observability lists luthen-observability:W431 as the waypoint that claims it; the block now cites it instead of the bare repo name | 2026-10-09: 2026-10-09: luthen-observability:W431 is done in luthen queue (completed 2026-10-04); a foreign landed blocker is not pruned by --bump-blocked, so cleared by hand",
+      "next_bounded_step": null,
+      "evidence": "2026-10-01: W133 shipped floor=critical (the narrowest claim) and a trust-boundary class (touches tag, or vector S:C) with nothing to test them against: no fixture queue carries a vector or a trust-boundary tag. Waits on luthen-observability writing vectors (its W190; W188's trust-boundary items). Then: nemik-rank luthen-observability --check, and adjust the floor and class rules by letter. | 2026-10-09: 2026-10-09: nemik-inbound luthen-observability lists luthen-observability:W431 as the waypoint that claims it; the block now cites it instead of the bare repo name | 2026-10-09: 2026-10-09: luthen-observability:W431 is done in luthen queue (completed 2026-10-04); a foreign landed blocker is not pruned by --bump-blocked, so cleared by hand | 2026-10-09: 2026-10-09: luthen proposals decided in nemik/src/nemik/data/bands.toml: 1 (R:H S:C critical only with C, I or A of L or H), 3 (R:H A:H high), 4 (R:C high only with I or A of L or H; bare R:C elevated), 5 (bare R:H elevated) applied; 2 declined (R:H I:H stays critical); 6 and 7 answered; X reading accepted. Census of luthen 278 open cards: critical 5 to 5, high 36 to 39, elevated 6 to 12, normal 229 to 220; floor and critical membership unchanged. tests/test_score.py (band table with the new boundaries) and tests/test_guarantees.py (vectors carry I:L) updated deliberately. Letter luthen-observability/inbox/2026-10-09-nemik-w137-bands-applied.md also asks whether the cutover umbrella cards W659-W669 should keep S:C (88 POLICY lines, 66 name them)",
       "issued_at": "2026-10-01T01:27:31Z",
       "minted_during": "interrupt",
       "caused_by": "W133",
-      "last_worked": "2026-10-09T05:47:05Z",
+      "last_worked": "2026-10-09T06:13:49Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261009T061349Z"
     },
     {
       "symbol": "W138",
@@ -5008,7 +5008,7 @@
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-09T06:02:43Z"
+    "taken_at": "2026-10-09T06:10:23Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []
