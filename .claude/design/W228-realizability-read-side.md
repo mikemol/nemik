@@ -511,6 +511,29 @@ Every disagreement in all sixteen workstreams is therefore the one effect the op
 is a bug in the model and none is a term the model is missing; each is a bug in the old ranking in the
 sense that its total exceeded the demand injected (conservation).
 
+## The ground, and the residue term (W252, W251; 2026-10-09)
+
+THE GROUND IS THE WORKABLE CARDS. gcalculus's audit script (and my port of it) took "ready" to mean
+every open card with no open prerequisite. That includes a card blocked on something OUTSIDE the graph
+(an operator ask, another agent): it has no open prerequisite and is not workable. Left as ground it
+absorbs demand that a workable card would otherwise receive. The model's own description (github-28,
+2026-10-08) is a sink grounded "through the ready frontier (what a worker can pick up now)", so the
+ground is cards whose state is ready or working, and a blocked card with no open prerequisite is a
+dead end: no current leaves it, and a source whose cone has no workable card is STRANDED. Production
+ranking (`salience_of`, the `weight` objective since W241) uses this ground. Measured against the open
+ground, on genuinely workable cards: luthen-observability 0 of 10,011 pairs ordered oppositely;
+paperkit 5 of 4,753 (W117 rises, 4.44 to 6.06, because blocked cards stop taking a share of its
+sources). The `--flow` audit keeps the open ground by default so its numbers stay comparable with
+gcalculus's; `--workable` shows the production ground.
+
+THE RESIDUE TERM (mechanism only; not on by default). Each residue entry the policy returns (the
+gaps `nemik-check --realizability` prints, per gate) injects demand at the card that bears it:
+`nemik-rank REPO --flow --residue`. A workable card absorbs its own; a waiting card's demand flows
+through its cone; an entry that names an open `closes_ref` adds that card as a prerequisite, so the
+card that closes the gap is pulled up. Gate weights are unit (the baseline). The pinned policy only
+emits `closes_ref` on a card's own deferred entries, so most gaps today pull toward their own card,
+not toward a closer. Turning it on is W253: audit it on the real fleet and declare the gate weights.
+
 ## Open questions (each blocks code, none blocks this note)
 
 1. Field names of the shared verdict: AGREED (see above). Still open for stigmaturgy: a structured

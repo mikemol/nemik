@@ -102,6 +102,35 @@ def test_the_gap_between_the_arms_is_the_contested_sources(tmp_path: Path) -> No
     assert row.old - lost == row.new
 
 
+def test_a_recorded_gap_on_a_waiting_card_adds_demand_that_flows_to_its_cone(
+    tmp_path: Path,
+) -> None:
+    # W3 needs W1 and W2; one gap on W3 adds 1 of demand, split between them.
+    gap: dict[str, object] = {"gate": "constructible"}
+    result = audit(_graph(_fleet(tmp_path)), "a", residue={"a:W3": [gap]})
+    local = Fraction(load_weights().local)
+    assert result.rows[0].new == local * Fraction(3, 2) + Fraction(1, 2)
+    assert result.rows[1].new == local / 2 + Fraction(1, 2)
+
+
+def test_a_gap_that_names_the_card_that_closes_it_pulls_that_card_up(
+    tmp_path: Path,
+) -> None:
+    # W4 needs only W1. Its gap names a:W2 as the closer, so W2 becomes a prerequisite of W4.
+    graph = _graph(_fleet(tmp_path))
+    plain = audit(graph, "a", residue={"a:W4": [{"gate": "g"}]})
+    closer = audit(graph, "a", residue={"a:W4": [{"gate": "g", "closes_ref": "a:W2"}]})
+    plain_w2, closer_w2 = plain.rows[1].new, closer.rows[1].new
+    assert closer_w2 > plain_w2
+    assert closer.flow.stranded == {}
+
+
+def test_a_gap_on_a_card_that_is_not_open_is_ignored(tmp_path: Path) -> None:
+    graph = _graph(_fleet(tmp_path))
+    gaps: dict[str, list[dict[str, object]]] = {"a:W99": [{"gate": "g"}]}
+    assert audit(graph, "a", residue=gaps).rows == audit(graph, "a").rows
+
+
 def test_display_rounds_but_the_value_stays_exact() -> None:
     value = Fraction(1, 3)
     assert show(value) == "0.3333"

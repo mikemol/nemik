@@ -71,6 +71,49 @@ def test_the_flow_arm_splits_it_so_the_sole_dependents_win(tmp_path: Path) -> No
     assert _order(_fleet(tmp_path), "flow") == ["W3", "W1", "W2"]
 
 
+def _blocked_sharer(tmp_path: Path) -> Graph:
+    # W1, W2 ready. W3 is blocked on the operator (a dead end, not workable). W4 needs W1 and W3,
+    # W5 needs W2. If W3 absorbed demand, W1 would get 1/2 and W2 1, so W2 would lead; W3 cannot
+    # be picked up, so W4's demand all goes to W1 and the tie falls to the lower symbol.
+    (tmp_path / "a" / ".claude").mkdir(parents=True)
+    state = tmp_path / "a" / ".claude" / "paths-forward.json"
+    _pf(state, "--init")
+    for title in ("one", "two", "ask", "needs both", "needs two"):
+        _pf(state, "--add", title, "--next", "do it")
+    _pf(
+        state,
+        "--update",
+        "W3",
+        "--status",
+        "blocked",
+        "--blocked-kind",
+        "human",
+        "--blocked-on",
+        "operator: decide it",
+    )
+    for card, on in (("W4", ["W1", "W3"]), ("W5", ["W2"])):
+        _pf(
+            state,
+            "--update",
+            card,
+            "--status",
+            "blocked",
+            "--blocked-kind",
+            "agent",
+            "--blocked-on",
+            *on,
+        )
+    g = Graph()
+    for _, qg, _ in survey(tmp_path):
+        if qg is not None:
+            g += qg
+    return g
+
+
+def test_a_card_blocked_outside_the_graph_absorbs_no_demand(tmp_path: Path) -> None:
+    assert _order(_blocked_sharer(tmp_path), "flow") == ["W1", "W2"]
+
+
 def test_a_composition_that_names_no_model_keeps_the_old_sum() -> None:
     assert load_composition(TIERS).weight_model == "downstream"
 

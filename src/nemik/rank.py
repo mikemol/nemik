@@ -491,6 +491,18 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         "differently (nemik:W240, the audit before the model replaces the ranking)",
     )
     ap.add_argument(
+        "--workable",
+        action="store_true",
+        help="with --flow: ground only the cards in state ready or working, so a card blocked on "
+        "something outside the graph does not absorb demand (nemik:W252)",
+    )
+    ap.add_argument(
+        "--residue",
+        action="store_true",
+        help="with --flow: add each recorded gap (realizability residue) as demand at its card "
+        "(nemik:W251; needs the pinned opa)",
+    )
+    ap.add_argument(
         "--ask",
         metavar="REPO:W<n>",
         help="what that waiting card (an operator ask) needs and which of REPO's ready "
@@ -620,9 +632,13 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         # nemik:W240: the old downstream weight beside the flow model's salience (exact; shown
         # rounded), and every pair the two order differently. The model replaces the old order
         # only after this audit agrees (W241).
+        from nemik.residue import by_card
         from nemik.salience import audit, show
 
-        result = audit(g, args.repo)
+        # nemik:W251: --residue adds each recorded gap (the policy's residue, per gate) as demand at
+        # its card, so the cards that close gaps rise; off by default until audited.
+        gaps = by_card(args.root) if args.residue else None
+        result = audit(g, args.repo, residue=gaps, workable=args.workable)
         old_pos = {c: i + 1 for i, c in enumerate(result.old_order())}
         new_pos = {c: i + 1 for i, c in enumerate(result.new_order())}
         print(

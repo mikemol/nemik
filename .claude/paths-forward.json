@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 249,
+  "counter": 253,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 140
+      "ticks_blocked": 142
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 15,
+      "ticks_blocked": 17,
       "weight": 1
     },
     {
@@ -2613,7 +2613,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 85
+      "ticks_blocked": 87
     },
     {
       "symbol": "W138",
@@ -3522,7 +3522,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-02T17:28:25Z",
-      "ticks_blocked": 21,
+      "ticks_blocked": 23,
       "weight": 2
     },
     {
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-08T13:42:13Z",
-      "ticks_blocked": 15,
+      "ticks_blocked": 17,
       "completed": null
     },
     {
@@ -4372,7 +4372,7 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:09:03Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 10,
       "completed": null
     },
     {
@@ -4472,7 +4472,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W665",
       "last_worked": "2026-10-08T14:56:18Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 13,
       "completed": null
     },
     {
@@ -4503,17 +4503,17 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W240",
-        "W241"
+        "W249",
+        "W251"
       ],
       "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "2026-10-08: 2026-10-08: needs closes_by to be machine-resolvable (a repo:W<n>), not only prose: asked of mtools as a structured part of the residue entry (W849). Then a new rank objective under the configurable composition (rank-weights.toml [order]). | 2026-10-08: 2026-10-08: mtools-25 agreed (W849): a residue entry carries an optional closes_ref (repo:W<n>, validated like caused_by) beside the prose closes_by; nothing parses the prose, so nemik-rank reads closes_ref only. | 2026-10-08: 2026-10-08: luthen host's reading of the gcalculus model recorded in the design note and split into W237 (design, waits on gcalculus) and W238 (implementation); two decays kept apart: hard staleness for safety facts and verdict marks (W236), smooth half-life decay for salience marks. | 2026-10-08: 2026-10-08: operator ruling relayed by github-28: the model REPLACES the existing ranking after an audit (not one more objective). Sequence W239 (express each objective), W240 (audit both over the real queues, every disagreement recorded), W241 (switch, old ranking kept as the comparison arm until then). Cost and determinism (operator on W237 d): measurements apply to smaller graphs glued together, so each repo's queue is reduced to its ports and the reductions are glued (W242).",
+      "next_bounded_step": "The objective replacement landed (W241). Remaining: the operator ask inside the model (W249, needs the operator ruling) and the residue term (W251)",
+      "evidence": "2026-10-08: 2026-10-08: needs closes_by to be machine-resolvable (a repo:W<n>), not only prose: asked of mtools as a structured part of the residue entry (W849). Then a new rank objective under the configurable composition (rank-weights.toml [order]). | 2026-10-08: 2026-10-08: mtools-25 agreed (W849): a residue entry carries an optional closes_ref (repo:W<n>, validated like caused_by) beside the prose closes_by; nothing parses the prose, so nemik-rank reads closes_ref only. | 2026-10-08: 2026-10-08: luthen host's reading of the gcalculus model recorded in the design note and split into W237 (design, waits on gcalculus) and W238 (implementation); two decays kept apart: hard staleness for safety facts and verdict marks (W236), smooth half-life decay for salience marks. | 2026-10-08: 2026-10-08: operator ruling relayed by github-28: the model REPLACES the existing ranking after an audit (not one more objective). Sequence W239 (express each objective), W240 (audit both over the real queues, every disagreement recorded), W241 (switch, old ranking kept as the comparison arm until then). Cost and determinism (operator on W237 d): measurements apply to smaller graphs glued together, so each repo's queue is reduced to its ports and the reductions are glued (W242). | 2026-10-09: 2026-10-09: W237, W238, W239, W240, W241, W242 (dropped), W244 are done; the weight objective is the flow salience",
       "issued_at": "2026-10-08T13:50:21Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
-      "last_worked": "2026-10-09T01:21:42Z",
-      "ticks_blocked": 0,
+      "last_worked": "2026-10-09T01:34:04Z",
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -4651,7 +4651,7 @@
       "minted_during": "tick",
       "caused_by": "W229",
       "last_worked": "2026-10-08T14:09:02Z",
-      "ticks_blocked": 13,
+      "ticks_blocked": 15,
       "completed": null
     },
     {
@@ -4773,6 +4773,85 @@
       "minted_during": "tick",
       "caused_by": "W244",
       "last_worked": "2026-10-09T01:30:25Z",
+      "ticks_blocked": 2,
+      "completed": null
+    },
+    {
+      "symbol": "W250",
+      "title": "nemik-rank --all costs 33 s since the flow switch (about 21 s is the graph build): share the open-graph and prerequisite scan across repos instead of rebuilding it per repo, and skip the old-weight arm inside salience_of",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "nemik"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Measure first (nemik-rank --all, nemik-rank luthen-observability); then audit() split so salience_of reuses one scan; keep exactness; expect most of the 12 s to go",
+      "evidence": "",
+      "issued_at": "2026-10-09T01:33:35Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W251",
+      "title": "Residue demand in the flow model: each residue entry from nemik-check --realizability injects demand at its waypoint, weighted by gate, toward its closes_ref, so the card that closes a gap rises",
+      "status": "done",
+      "enables": [
+        "W235"
+      ],
+      "touches": [
+        "realizability"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: 2026-10-09: mechanism landed: audit(residue=, gate_weight=) in nemik.salience injects demand at the card bearing each gap and adds an open closes_ref as a prerequisite (workable cards absorb their own); nemik.residue.by_card gathers the fleet residue under the pinned opa; nemik-rank REPO --flow --residue. Off by default: whether to enable it and the gate weights are W253. Tests: test_salience (3 residue cases), test_residue (2)",
+      "issued_at": "2026-10-09T01:33:59Z",
+      "minted_during": "tick",
+      "caused_by": "W235",
+      "last_worked": "2026-10-09T01:42:23Z",
+      "ticks_blocked": 0,
+      "completed": "20261009T014223Z"
+    },
+    {
+      "symbol": "W252",
+      "title": "Ground of the flow model: workable cards (state ready or working) absorb demand; a card blocked outside the graph is a dead end",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "realizability"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: 2026-10-09: found by running --flow --residue on nemik: W249 (blocked on the operator) showed as ready and absorbed demand. Measured: luthen 0 of 10,011 pairs and paperkit 5 of 4,753 pairs of workable cards order oppositely between the grounds. salience_of (production) now grounds workable cards only; the --flow audit keeps the open ground by default; --workable shows the production ground. tests/test_rank_flow.py: a card blocked on the operator shares a source and does not move the order",
+      "issued_at": "2026-10-09T01:42:09Z",
+      "minted_during": "tick",
+      "caused_by": "W241",
+      "last_worked": "2026-10-09T01:42:22Z",
+      "ticks_blocked": 0,
+      "completed": "20261009T014222Z"
+    },
+    {
+      "symbol": "W253",
+      "title": "Decide whether residue demand is on by default in nemik-rank: audit the real fleet with nemik-rank REPO --flow --residue, declare per-gate weights in rank-weights.toml, then enable",
+      "status": "working",
+      "enables": [
+        "W235"
+      ],
+      "touches": [
+        "realizability"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Run nemik-rank REPO --flow --residue over the sixteen workstreams and record which cards rise and why; propose gate weights; the operator may want to rule the weight of a constructible gap against an observable one",
+      "evidence": "",
+      "issued_at": "2026-10-09T01:42:09Z",
+      "minted_during": "tick",
+      "caused_by": "W251",
+      "last_worked": "2026-10-09T01:42:30Z",
       "ticks_blocked": 0,
       "completed": null
     }
@@ -4832,7 +4911,7 @@
   "heartbeat": "2026-10-09T00:40:20Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-09T01:21:35Z"
+    "taken_at": "2026-10-09T01:34:51Z"
   },
   "predecessor_job_id": "ee709298",
   "leases": []

@@ -118,12 +118,29 @@ def show(value: Fraction, places: int = DECIMALS) -> str:
 
 
 def audit(
-    g: Graph, repo: str, weights: Weights | None = None, without: str = ""
+    g: Graph,
+    repo: str,
+    weights: Weights | None = None,
+    without: str = "",
+    residue: dict[str, list[dict[str, object]]] | None = None,
+    gate_weight: Fraction = Fraction(1),
+    workable: bool = False,
 ) -> Audit:
     """Run both arms over the ready cards of `repo`.
 
+    `workable` narrows the ground to cards whose state is ready or working. By default the ground
+    is gcalculus's: every open card with no open prerequisite, which includes a card blocked on
+    something outside the graph (an operator ask, another agent); such a card then absorbs demand
+    that a workable card would otherwise receive.
+
     `weights` default to the packaged `rank-weights.toml` classes. `without` names one source whose
     demand is left out of the flow arm, to see what that source contributes (nemik:W244).
+
+    `residue` maps a card (`repo:W<n>`) to its recorded gaps (the policy's residue entries, nemik:
+    W251): each entry injects `gate_weight` of demand at its card. A ready card absorbs its own;
+    a waiting card's demand flows through its cone, and an entry that names an open `closes_ref`
+    adds that card to the prerequisites, so the card that closes the gap is pulled up. Absent, the
+    flow is the class-weighted downstream demand only.
 
     Returns:
         the rows (ready cards of `repo`, in symbol order), the flow solve and the source count.
@@ -139,6 +156,13 @@ def audit(
             if s in nodes and s != p:
                 prereq.setdefault(s, set()).add(p)
     ready = {n for n in nodes if n not in prereq}
+    if workable:
+        ready = {
+            n
+            for n in ready
+            if (n, OSLC_CM.state, NEMIK.Ready) in g
+            or (n, OSLC_CM.state, NEMIK.Working) in g
+        }
     mine = sorted(
         (n for n in ready if _repo(n) == repo), key=lambda n: _number(ref_of(n))
     )
@@ -173,7 +197,23 @@ def audit(
         for x, ps in prereq.items()
     }
     demand = {ref_of(x): Fraction(klass(x)) for x in sources if ref_of(x) != without}
-    flow = solve(demand, needs, {ref_of(n) for n in ready})
+    front = {ref_of(n) for n in ready}
+    relevant = {ref_of(x) for x in population} | {ref_of(n) for n in mine}
+    open_refs = {ref_of(n) for n in nodes}
+    for card, entries in (residue or {}).items():
+        if card not in open_refs or card not in relevant or card == without:
+            continue
+        demand[card] = demand.get(card, Fraction(0)) + gate_weight * len(entries)
+        for entry in entries:
+            target = entry.get("closes_ref")
+            if (
+                isinstance(target, str)
+                and target in open_refs
+                and target != card
+                and card not in front
+            ):
+                needs[card] = sorted({*needs.get(card, []), target})
+    flow = solve(demand, needs, front)
     rows = [
         Row(
             ref_of(n),
@@ -242,10 +282,17 @@ def salience_of(
     The class weights come in as plain numbers (the three of `rank-weights.toml`), so a caller
     needs no shared type with this module; nemik.rank uses this for its `weight` objective (W241).
 
+    The ground is the WORKABLE cards (state ready or working), what a worker can pick up now: a card
+    blocked on something outside the graph is a dead end and absorbs nothing (nemik:W252; measured
+    against the open ground, 0 of 10,011 luthen pairs and 5 of 4,753 paperkit pairs order
+    differently).
+
     Returns:
-        the salience of every ready card of `repo` that absorbs any demand.
+        the salience of every workable card of `repo` that absorbs any demand.
 
     """
     from nemik.rank import Weights
 
-    return audit(g, repo, Weights(local, peer, peer_blocked)).flow.salience
+    return audit(
+        g, repo, Weights(local, peer, peer_blocked), workable=True
+    ).flow.salience
