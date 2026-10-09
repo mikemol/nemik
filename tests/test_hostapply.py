@@ -104,6 +104,29 @@ def test_a_stale_export_proves_nothing() -> None:
     assert late is not None and late["applied"] is False and late["stale"] is True
 
 
+def test_a_row_the_exporter_could_not_read_is_unknown_not_pending() -> None:
+    # luthen's W680: applied:null on a root-only path is UNKNOWN. An export without the flag
+    # (older) reads as observable, the previous behaviour.
+    rows = [
+        {
+            "id": "kubelet-swap",
+            "activate": "install",
+            "after": [],
+            "applied": None,
+            "unobservable": True,
+        },
+        {"id": "plain", "activate": "install", "after": [], "applied": None},
+    ]
+    export = parse(_export(rows=rows))
+    assert export.rows["kubelet-swap"].unobservable is True
+    assert export.rows["plain"].unobservable is False
+    unknown = fact(export, "kubelet-swap", NOW)
+    assert unknown is not None
+    assert unknown["unobservable"] is True and unknown["applied"] is False
+    pending = fact(export, "plain", NOW)
+    assert pending is not None and pending["unobservable"] is False
+
+
 def test_an_unknown_row_is_an_unresolved_citation_not_a_pass() -> None:
     assert fact(parse(_export()), "home-mount-typo", NOW) is None
 

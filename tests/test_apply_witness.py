@@ -73,6 +73,28 @@ def test_a_row_the_export_does_not_hold_is_undefined(
     assert missing == ['apply["no-such-row"]']
 
 
+def test_a_row_the_exporter_could_not_read_is_undefined_not_false(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("NEMIK_ROOT", str(tmp_path))
+    row: dict[str, object] = {
+        "id": "kubelet-swap",
+        "activate": "reload",
+        "after": [],
+        "applied": None,
+        "unobservable": True,
+    }
+    doc = {
+        "version": 1,
+        "as_of": _now(),
+        "kinds": {"reload": {"effect": "reload", "restarts": []}},
+        "rows": [row],
+    }
+    (tmp_path / "host-apply.json").write_text(json.dumps(doc), encoding="utf-8")
+    _, missing = facts('input.apply["kubelet-swap"].applied == true')
+    assert missing == ['apply["kubelet-swap"]']
+
+
 def test_no_export_at_all_is_undefined(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

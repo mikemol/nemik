@@ -70,6 +70,7 @@ class Row:
     activate: str
     after: tuple[str, ...]
     applied: tuple[str, str] | None
+    unobservable: bool = False
 
 
 @dataclass(frozen=True)
@@ -118,7 +119,8 @@ def _row(raw: object, kinds: dict[str, Kind], problems: list[str]) -> Row | None
     applied = _dict(body.get("applied"))
     stamp = (str(applied.get("at")), str(applied.get("digest"))) if applied else None
     after = tuple(str(x) for x in _list(body.get("after")))
-    return Row(ident, activate, after, stamp)
+    # An absent flag (an export older than luthen's W680) reads as observable, the old behaviour.
+    return Row(ident, activate, after, stamp, body.get("unobservable") is True)
 
 
 def parse(doc: object) -> HostApply:
@@ -230,11 +232,14 @@ def fact(export: HostApply, row_id: str, now: str) -> dict[str, object] | None:
     """Give the witness fact for a row: `input.apply[<id>]` (nemik:W233).
 
     `applied` is true only when the row carries an applied mark AND the export is fresh AND
-    well-formed; a null mark, an unknown kind or a stale export never read as applied.
+    well-formed; a null mark, an unknown kind or a stale export never read as applied. A row the
+    exporter could not read (`unobservable`, luthen's W680: its path is root-only to the
+    unprivileged exporter) is neither applied nor pending: it is UNKNOWN, and the witness observer
+    reports it as such (nemik:W259).
 
     Returns:
-        {applied, at, digest, as_of, stale}, or None when the row does not exist (an unresolved
-        citation, never a pass).
+        {applied, unobservable, at, digest, as_of, stale}, or None when the row does not exist (an
+        unresolved citation, never a pass).
 
     """
     row = export.rows.get(row_id)
@@ -250,6 +255,7 @@ def fact(export: HostApply, row_id: str, now: str) -> dict[str, object] | None:
     at, digest = row.applied if row.applied else (None, None)
     return {
         "applied": row.applied is not None and not stale and not export.problems,
+        "unobservable": row.unobservable,
         "at": at,
         "digest": digest,
         "as_of": export.as_of,

@@ -142,7 +142,9 @@ def _apply(key: str) -> dict | None:
         export = load(default_root())
     except ValueError:
         return None
-    return fact(export, key, datetime.now(UTC).isoformat()) if export else None
+    seen = fact(export, key, datetime.now(UTC).isoformat()) if export else None
+    # nemik:W259: a row the exporter could not read is unknown, not "not yet": undefined.
+    return None if seen is None or seen["unobservable"] else seen
 
 
 # `input.now` (RFC 3339, UTC) is always present, so a time witness needs no observer:

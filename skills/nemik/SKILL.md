@@ -119,7 +119,9 @@ by another session's work, that is **weather**, and it gets one waypoint of its 
   (`input.pid`, `file`, `git_ref`, `alert`, `promql`, `apply`, `now`); see `nemik-witnesses`.
   `input.apply["<row id>"].applied` reads luthen's host-apply export (`<root>/host-apply.json`,
   nemik:W233): true only for a fresh, well-formed export whose row is applied (its live file equals
-  its declared source); a row the export does not hold, or a stale one, is never done. Cite a row in a
+  its declared source); a row the export does not hold, or a stale one, is never done, and a row
+  luthen's unprivileged exporter could not read (`unobservable`, a root-only path) is undefined:
+  unknown, not pending (nemik:W259). Cite a row in a
   waypoint as `host:<id>` (`blocked_on: ["host:home-mount"]`, a condition like `cal:`); `nemik-check`
   warns when the export is readable and does not hold that row (nemik:W256).
 - **It is monotone**: once the witness holds, `nemik-witnesses --apply` marks it done with the facts
