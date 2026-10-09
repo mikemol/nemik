@@ -30,8 +30,13 @@ def _graph(root: Path) -> Graph:
 
 
 @pytest.mark.parametrize("name", sorted([*COMMANDS, *FILE_COMMANDS]))
-def test_cmd_output_is_the_cli_output(name, tmp_path) -> None:
+def test_cmd_output_is_the_cli_output(name, tmp_path, monkeypatch) -> None:
     import json
+
+    # nemik:W232: metrics also asks opa for realizability; this test compares two runs of the same
+    # command, so opa is pinned absent for both (both report the queue "unjudged"), and the policy's
+    # own verdicts are tested in test_realize.py / test_metrics_realizability.py.
+    monkeypatch.setenv("OPA_BIN", "/nonexistent/opa")
 
     q = tmp_path / "a" / ".claude"
     q.mkdir(parents=True)

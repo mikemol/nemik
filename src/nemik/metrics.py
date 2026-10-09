@@ -19,6 +19,13 @@
                                              liveness (asleep|idle|awake|unknown)
     nemik_pathsforward_adoption{repo,state}  1 per repo: declared|owner|missing|no-pyproject|unobservable
     nemik_ledger_unparsed{repo}              legacy/malformed ledger lines mtools returned unparsed
+    nemik_realizability_waypoints{repo,coordinate}
+                                             live waypoints per realizability coordinate
+                                             (none|constructible|reachable|observable|coverable),
+                                             judged by mtools' policy under the pinned opa
+    nemik_realizability_unjudged{repo}       1 for a repo whose queue could not be judged (no pinned
+                                             opa, an unreadable queue): absent coordinates are
+                                             "not checked", never "clean"
 
 Pushing is not nemik's job: luthen hosts the push path, which admits metric names only when
 its policy entails them. This command prints, and the host decides what to import.
@@ -30,15 +37,20 @@ import argparse
 import json
 import os
 from collections import Counter
+from datetime import UTC, datetime
 from pathlib import Path
 
+from mikemol.pathsforward.lock import stamp
+from mikemol.pathsforward.opa_eval import OpaUnavailableError
+from mikemol.pathsforward.store import UnreadableStateError
 from rdflib import RDF, Graph
 from rdflib.namespace import PROV
 
 from nemik.adapter import BASE, NEMIK, OSLC_CM, ledger_graph
 from nemik.blocks import inbound
+from nemik.check import LEDGER, QUEUE, default_root, survey, workstream_files
+from nemik.realize import verdicts
 from nemik.wake import read_liveness, roster
-from nemik.check import LEDGER, default_root, survey, workstream_files
 
 CLASS = {
     "tick": "forecast",
@@ -59,24 +71,58 @@ def label(**kv: str) -> str:
     return "{" + ",".join(f'{k}="{v}"' for k, v in kv.items()) + "}"
 
 
+def realizability_lines(root: Path) -> list[str]:
+    """One gauge row per repo and coordinate; a queue that cannot be judged is flagged, not zeroed."""
+    out = ["# TYPE nemik_realizability_waypoints gauge"]
+    out.append("# TYPE nemik_realizability_unjudged gauge")
+    now = stamp(datetime.now(UTC))
+    for repo, path in workstream_files(root, QUEUE):
+        try:
+            found = verdicts(repo, path, root, now)
+        except (OpaUnavailableError, UnreadableStateError):
+            out.append(f"nemik_realizability_unjudged{label(repo=repo)} 1")
+            continue
+        by_level = Counter(str(v.get("level")) for v in found)
+        for level, n in sorted(by_level.items()):
+            out.append(
+                f"nemik_realizability_waypoints{label(repo=repo, coordinate=level)} {n}"
+            )
+    return out
+
+
 def main(argv: list[str] | None = None) -> None:
-    ap = argparse.ArgumentParser(prog="nemik-metrics", description=(__doc__ or "").splitlines()[0])
-    ap.add_argument("--root", type=Path, default=default_root(), help="~/github, or the export layout root")
+    ap = argparse.ArgumentParser(
+        prog="nemik-metrics", description=(__doc__ or "").splitlines()[0]
+    )
+    ap.add_argument(
+        "--root",
+        type=Path,
+        default=default_root(),
+        help="~/github, or the export layout root",
+    )
     ap.add_argument("--spool", type=Path, default=spool_path())
     args = ap.parse_args(argv)
 
-    out = ["# TYPE nemik_waypoints gauge", "# TYPE nemik_waypoints_minted gauge", "# TYPE nemik_findings gauge"]
+    out = [
+        "# TYPE nemik_waypoints gauge",
+        "# TYPE nemik_waypoints_minted gauge",
+        "# TYPE nemik_findings gauge",
+    ]
     for repo, g, findings in survey(args.root):
-        states = Counter()
+        states: Counter[str] = Counter()
         if g is not None:
             for _, _, st in g.triples((None, OSLC_CM.state, None)):
                 states[str(st).rsplit("#", 1)[-1].lower()] += 1
             states["dropped"] = sum(1 for _ in g.subjects(RDF.type, NEMIK.Dropped))
-        for st, n in sorted(states.items()):
-            out.append(f"nemik_waypoints{label(repo=repo, state=st)} {n}")
+        for name, n in sorted(states.items()):
+            out.append(f"nemik_waypoints{label(repo=repo, state=name)} {n}")
         if g is not None:
-            for during, n in sorted(Counter(str(o) for o in g.objects(None, NEMIK.mintedDuring)).items()):
-                out.append(f"nemik_waypoints_minted{label(repo=repo, during=during)} {n}")
+            for during, n in sorted(
+                Counter(str(o) for o in g.objects(None, NEMIK.mintedDuring)).items()
+            ):
+                out.append(
+                    f"nemik_waypoints_minted{label(repo=repo, during=during)} {n}"
+                )
         for sev, n in sorted(Counter(sev for sev, _, _ in findings).items()):
             out.append(f"nemik_findings{label(repo=repo, severity=sev)} {n}")
 
@@ -85,19 +131,29 @@ def main(argv: list[str] | None = None) -> None:
         if g is not None:
             merged += g
     out.append("# TYPE nemik_blocks_inbound gauge")
-    inb = Counter((b["blocker"], str(bool(b["claimed_by"])).lower()) for b in inbound(merged))
+    inb = Counter(
+        (b["blocker"], str(bool(b["claimed_by"])).lower()) for b in inbound(merged)
+    )
     for (repo, claimed), n in sorted(inb.items()):
         out.append(f"nemik_blocks_inbound{label(repo=repo, claimed=claimed)} {n}")
 
     out.append("# TYPE nemik_pathsforward_adoption gauge")
-    for ws, _, state in sorted(merged.triples((None, NEMIK.pathsforwardAdoption, None))):
-        out.append(f"nemik_pathsforward_adoption{label(repo=str(ws).removeprefix(BASE), state=str(state))} 1")
+    for ws, _, state in sorted(
+        merged.triples((None, NEMIK.pathsforwardAdoption, None))
+    ):
+        out.append(
+            f"nemik_pathsforward_adoption{label(repo=str(ws).removeprefix(BASE), state=str(state))} 1"
+        )
     out.append("# TYPE nemik_waiting_on gauge")
     live, _ = read_liveness(args.root, None)
     for r in roster(merged, live):
-        out.append(f"nemik_waiting_on{label(repo=r['repo'], state=r['state'])} {len(r['waiting'])}")
+        out.append(
+            f"nemik_waiting_on{label(repo=r['repo'], state=r['state'])} {len(r['waiting'])}"
+        )
+    out += realizability_lines(args.root)
 
-    prompts, turns = Counter(), Counter()
+    prompts: Counter[tuple[str, str, str]] = Counter()
+    turns: Counter[str] = Counter()
     if args.spool.exists():
         for raw in args.spool.read_text(encoding="utf-8").splitlines():
             try:
@@ -112,7 +168,9 @@ def main(argv: list[str] | None = None) -> None:
                 turns[repo] += 1
     out.append("# TYPE nemik_prompts_total counter")
     for (repo, src, cls), n in sorted(prompts.items()):
-        out.append(f"nemik_prompts_total{label(repo=repo, source=src, **{'class': cls})} {n}")
+        out.append(
+            f"nemik_prompts_total{label(repo=repo, source=src, **{'class': cls})} {n}"
+        )
     out.append("# TYPE nemik_turns_total counter")
     for repo, n in sorted(turns.items()):
         out.append(f"nemik_turns_total{label(repo=repo)} {n}")
@@ -126,7 +184,9 @@ def main(argv: list[str] | None = None) -> None:
             for k in g.objects(a, NEMIK.kind)
         )
         for (cls, kind), n in sorted(lines.items()):
-            out.append(f"nemik_ledger_lines{label(repo=repo, kind=kind, **{'class': cls})} {n}")
+            out.append(
+                f"nemik_ledger_lines{label(repo=repo, kind=kind, **{'class': cls})} {n}"
+            )
         out.append(f"nemik_ledger_unparsed{label(repo=repo)} {unparsed}")
     print("\n".join(out))
 

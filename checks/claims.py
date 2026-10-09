@@ -159,11 +159,13 @@ def adoption_has_no_internal_coupling():
 
 def hub_modules_depend_on_everything_below():
     mods = _modules()
-    for hub in ("metrics", "serve"):
+    lower = {"adapter", "blocks", "wake", "check"}
+    # nemik:W232: nemik-metrics also reads the realizability verdicts, through realize.py, which
+    # itself rests on adapter alone; serve does not.
+    expected = {"metrics": lower | {"realize"}, "serve": lower}
+    for hub, want in expected.items():
         deps = _imports_nemik(mods[hub])
-        assert deps == {"adapter", "blocks", "wake", "check"}, (
-            f"{hub}.py's dependency set changed: {deps}"
-        )
+        assert deps == want, f"{hub}.py's dependency set changed: {deps}"
 
 
 def import_graph_is_acyclic():
