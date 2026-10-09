@@ -1,21 +1,22 @@
-"""nemik:W238: demand flows from the cards that need something toward the ready frontier, conserved.
+"""nemik:W238: demand flows from the cards that need something to the ready frontier, conserved.
 
-The model is gcalculus's conductance calculus read on nemik's queue graph (design note
-W228-realizability-read-side.md, "Residue salience as effective conductance" and "The model is
-DIRECTED"): parallel alternatives add, `OR(a, b) = a + b`; a chain composes in series,
-`AND(a, b) = ab / (a + b)`, so it is never above its weakest link; a repeated source is counted once.
+The model is gcalculus's (gcalculus:W208, `scripts/flow_reference.py`, b9196cf; design note
+W228-realizability-read-side.md): for each demand source x, a NODAL solve on x's prerequisite closure
+(x and everything it transitively needs), with the ready cards at potential 0 and the demand injected
+at x. The current into each ready card is x's salience there; summed over sources it is the card's
+salience, and per source it is the fibre a mark keeps.
 
-Direction is the queue's own: demand moves from a card to what it NEEDS (`blocked_on`) and is
-absorbed at the ready frontier, so it can never reach a card the source does not need. A card with
-several prerequisites does not split its demand by a rule fixed in advance (the operator ruled:
-conserved, "let the physics do the work"). The solve runs from the frontier inward: each branch is its
-edge in series with the prerequisite's own effective conductance, and the card's demand divides among
-its branches in proportion. When a prerequisite lands it leaves `needs`, and the next solve divides
-the same demand over what remains.
+Why a cone and why a nodal solve:
+- Direction is the queue's own. Outside x's cone a coupling is a leak (a card x does not need would
+  receive some of x's demand); inside it the coupling is real, the resource sensitivity: branches that
+  share a prerequisite compete for its capacity.
+- A series-parallel fold (parallel of series over the prerequisites) is the idempotent mistake: it
+  counts a shared prerequisite once per branch. The nodal solve counts it once.
+- The operator's conjunctive-split ruling needs no rule fixed in advance: the solve divides x's demand
+  among its prerequisites, and divides it again when one lands and leaves `needs`.
 
-All arithmetic is exact `Fraction`, and every order is sorted, so the same input gives the same
-answer bit for bit (nemik:W119). Cycles are reported, never dropped: a strongly connected component
-needs its own small linear solve, which this first slice does not do.
+All arithmetic is exact `Fraction`, so the answer does not depend on an elimination order, and every
+iteration is sorted (nemik:W119). Demand conserved is checked on every source.
 """
 
 from __future__ import annotations
@@ -31,124 +32,161 @@ ZERO = Fraction(0)
 ONE = Fraction(1)
 
 
-class CycleError(ValueError):
-    """The dependency graph has a cycle among these cards; none of them is solved."""
-
-    def __init__(self, members: list[str]) -> None:
-        super().__init__(f"dependency cycle among {', '.join(members)}")
-        self.members = members
-
-
 @dataclass(frozen=True)
 class Flow:
     """One solve.
 
-    `salience` is the demand each frontier card receives; `stranded` is demand that reached a card
-    with no open prerequisite and no place on the frontier (a block on something outside the
-    graph); `conductance` is each card's effective conductance to the frontier; `edges` is the demand
-    carried by each (card, prerequisite) edge, the decomposition a mark keeps.
+    `salience` is the demand each ready card absorbs, summed over sources; `fibre[card][source]` is
+    the part that came from each source; `stranded` is the demand of a source with no ready card in
+    its cone; `potential[source]` is the potential at the source for its injected demand, whose ratio
+    to the demand is the effective resistance from the source to the frontier.
     """
 
     salience: dict[str, Fraction]
+    fibre: dict[str, dict[str, Fraction]]
     stranded: dict[str, Fraction]
-    conductance: dict[str, Fraction]
-    edges: dict[tuple[str, str], Fraction]
+    potential: dict[str, Fraction]
 
 
-def series(a: Fraction, b: Fraction) -> Fraction:
-    """Compose two conductances in series (gcalculus AND): never above the weaker.
+def _cone(
+    needs: Mapping[str, Collection[str]], front: Collection[str], source: str
+) -> list[str]:
+    """Collect the source and everything it transitively needs; a ready card has no prerequisites.
 
     Returns:
-        ab / (a + b).
+        the cards, sorted.
 
     """
-    return a * b / (a + b)
+    seen: set[str] = set()
+    stack = [source]
+    while stack:
+        card = stack.pop()
+        if card in seen:
+            continue
+        seen.add(card)
+        if card not in front:
+            stack.extend(needs.get(card, ()))
+    return sorted(seen)
 
 
-def _order(
-    needs: Mapping[str, Collection[str]], frontier: Collection[str]
-) -> list[str]:
-    """Order the non-frontier cards so every prerequisite precedes its dependents.
+def _solve(matrix: list[list[Fraction]], rhs: list[Fraction]) -> list[Fraction]:
+    """Solve a linear system exactly, by Gauss-Jordan elimination over the rationals.
 
     Returns:
-        the cards, prerequisites first.
+        the solution.
 
     Raises:
-        CycleError: when some cards can never be ordered.
+        ZeroDivisionError: when the system is singular (a component with no ground).
 
     """
-    pending = {
-        card: {p for p in prereqs if p not in frontier}
-        for card, prereqs in needs.items()
-        if card not in frontier
-    }
-    for prereqs in list(pending.values()):
-        for p in prereqs:
-            pending.setdefault(p, {q for q in needs.get(p, ()) if q not in frontier})
-    ordered: list[str] = []
-    done: set[str] = set()
-    while pending:
-        ready = sorted(c for c, ps in pending.items() if ps <= done)
-        if not ready:
-            raise CycleError(sorted(pending))
-        for card in ready:
-            ordered.append(card)
-            done.add(card)
-            del pending[card]
-    return ordered
+    n = len(matrix)
+    rows = [[*row, rhs[i]] for i, row in enumerate(matrix)]
+    for col in range(n):
+        pivot = next((r for r in range(col, n) if rows[r][col] != 0), None)
+        if pivot is None:
+            msg = "a component with no ground"
+            raise ZeroDivisionError(msg)
+        rows[col], rows[pivot] = rows[pivot], rows[col]
+        scale = rows[col][col]
+        rows[col] = [v / scale for v in rows[col]]
+        for r in range(n):
+            if r != col and rows[r][col] != 0:
+                factor = rows[r][col]
+                rows[r] = [
+                    a - factor * b for a, b in zip(rows[r], rows[col], strict=True)
+                ]
+    return [rows[i][n] for i in range(n)]
+
+
+def _grounded(
+    edges: list[tuple[str, str, Fraction]],
+    front: Collection[str],
+    nodes: list[str],
+    source: str,
+    amount: Fraction,
+) -> tuple[dict[str, Fraction], Fraction]:
+    """Inject `amount` at `source` and read the current into each ready card.
+
+    Returns:
+        (current into each ready card, the potential at the source).
+
+    """
+    unknown = [n for n in nodes if n not in front]
+    index = {n: i for i, n in enumerate(unknown)}
+    size = len(unknown)
+    matrix = [[ZERO] * size for _ in range(size)]
+    for u, v, w in edges:
+        for a, b in ((u, v), (v, u)):
+            if a in index:
+                matrix[index[a]][index[a]] += w
+                if b in index:
+                    matrix[index[a]][index[b]] -= w
+    rhs = [amount if n == source else ZERO for n in unknown]
+    potential = dict(zip(unknown, _solve(matrix, rhs), strict=True))
+    into: dict[str, Fraction] = {}
+    for u, v, w in edges:
+        for a, b in ((u, v), (v, u)):
+            if b in front and a in potential:
+                into[b] = into.get(b, ZERO) + w * potential[a]
+    return into, potential.get(source, ZERO)
 
 
 def solve(
     demand: Mapping[str, Fraction],
     needs: Mapping[str, Collection[str]],
     frontier: Collection[str],
+    weights: Mapping[tuple[str, str], Fraction] | None = None,
     edge: Fraction = ONE,
-    sink: Fraction = ONE,
 ) -> Flow:
-    """Propagate demand from its sources to the ready frontier.
+    """Propagate each source's demand to the ready frontier through its own cone.
 
     `needs[card]` lists the OPEN prerequisites of `card` (a landed or dropped one has left the list:
-    an open circuit, never a zero weight). A prerequisite named twice counts once. `edge` is the
-    conductance of every dependency edge and `sink` of every frontier card's tie to the sink; both
-    are declared data (rank-weights.toml), here parameters.
+    an open circuit, never a zero weight); a prerequisite named twice counts once. `weights[(card,
+    prerequisite)]` overrides the conductance `edge` of one dependency; both are declared data
+    (rank-weights.toml), here parameters.
 
     Returns:
-        the salience, stranded demand, conductances and edge flows.
+        the salience, its fibre per source, the stranded sources and the source potentials.
+
+    Raises:
+        ValueError: when a source's demand is not conserved (a defect, never an expected answer).
 
     """
     front = set(frontier)
-    wanted = {c: sorted(set(ps)) for c, ps in needs.items() if c not in front}
-    conductance: dict[str, Fraction] = dict.fromkeys(sorted(front), sink)
-    shares: dict[str, dict[str, Fraction]] = {}
-    order = _order(wanted, front)
-    for card in order:
-        branch = {
-            p: series(edge, conductance[p])
-            for p in wanted.get(card, [])
-            if conductance.get(p, ZERO) > ZERO
-        }
-        total = sum(branch.values(), ZERO)
-        conductance[card] = total
-        shares[card] = (
-            {p: b / total for p, b in sorted(branch.items())} if total else {}
-        )
-    inflow: dict[str, Fraction] = {}
-    for card, amount in sorted(demand.items()):
-        inflow[card] = inflow.get(card, ZERO) + amount
-    edges: dict[tuple[str, str], Fraction] = {}
+    prereq = {c: sorted(set(ps)) for c, ps in needs.items() if c not in front}
+    fibre: dict[str, dict[str, Fraction]] = {}
     stranded: dict[str, Fraction] = {}
-    for card in reversed(order):
-        amount = inflow.get(card, ZERO)
+    potential: dict[str, Fraction] = {}
+    for source, amount in sorted(demand.items()):
         if not amount:
             continue
-        if not shares[card]:
-            stranded[card] = amount
+        if source in front:
+            fibre.setdefault(source, {})[source] = amount
             continue
-        for p, share in shares[card].items():
-            edges[(card, p)] = amount * share
-            inflow[p] = inflow.get(p, ZERO) + amount * share
-    salience = {c: inflow[c] for c in sorted(front) if inflow.get(c, ZERO)}
-    for card, amount in sorted(inflow.items()):
-        if card not in front and card not in order and amount:
-            stranded[card] = amount
-    return Flow(salience, stranded, conductance, edges)
+        cone = _cone(prereq, front, source)
+        if not any(n in front for n in cone):
+            stranded[source] = amount
+            continue
+        edges = [
+            (u, p, (weights or {}).get((u, p), edge))
+            for u in cone
+            if u not in front
+            for p in prereq.get(u, [])
+        ]
+        into, potential[source] = _grounded(edges, front, cone, source, amount)
+        if sum(into.values(), ZERO) != amount:
+            msg = f"demand at {source} is not conserved: {amount} in, {sum(into.values(), ZERO)} out"
+            raise ValueError(msg)
+        for card, current in into.items():
+            fibre.setdefault(card, {})[source] = current
+    salience = {
+        card: sum(by_source.values(), ZERO)
+        for card, by_source in sorted(fibre.items())
+        if sum(by_source.values(), ZERO)
+    }
+    return Flow(
+        salience,
+        {c: dict(sorted(f.items())) for c, f in sorted(fibre.items())},
+        stranded,
+        potential,
+    )

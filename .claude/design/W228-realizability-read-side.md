@@ -382,9 +382,13 @@ complement or Kron reduction, gives an exactly equivalent network on its ports):
    - Exactness is exact arithmetic. In floating point the glued and whole-graph answers agree only
      up to rounding, so use exact fractions (per-repo sizes are small) or a fixed elimination order,
      to keep nemik:W119 (same input, same order) bit for bit.
-4. Cited by the luthen host: gcalculus states "any split of the work gives the same answer", proved
-   in its Agda file. I have NOT read that file; it is cited, not re-proved, once I have found it
-   (asked of gcalculus). The gluing obstruction (which overlap fails, an H1 class) maps onto a finding
+4. CORRECTED 2026-10-09 (gcalculus:W208): the luthen host cited "any split of the work gives the same
+   answer" (`drive-compose`, agda/GcalcNu.agda). That chunks a step generator's RUN; it says nothing
+   about splitting a NETWORK. The witnesses that bear on reduce-then-glue are
+   `network/sheaf-glue/restriction-composes` (eliminate in two stages = straight through) and
+   `network/kron/order-is-immaterial` (every interior elimination order gives one reduced Laplacian),
+   exact over the rationals but FINITE (bridge-sized) instances; the general Schur-complement quotient
+   property is standard, not mechanised in gcalculus. Cite it as that. The gluing obstruction (which overlap fails, an H1 class) maps onto a finding
    nemik already reports: in a partition the only shared things are cross-repo edges described from
    both sides (A enables it, B waits on it), and a mismatch there is an unclaimed or unresolved
    block.
@@ -425,6 +429,52 @@ and withheld.json:
 - Privacy: not served in the first cut (host paths and digests stay off the public view).
 - Debt: luthen builds the export from host_activate.py, a debt file; a clean extracted kinds table
   may have to come first (luthen's call).
+
+## The model, settled (gcalculus:W208 full answer, 2026-10-09; decisions for W237)
+
+Source: gcalculus/inbox letter `2026-10-09-gcalculus-w237-the-answer.md` (nemik/inbox), reference
+`gcalculus scripts/flow_reference.py` at b9196cf (exits 0, "every control holds"; re-run here).
+It supersedes the gcalculus findings above on cost and on the frontier-inward elimination.
+
+1. THE MODEL IS A PER-SOURCE CONE SOLVE, NOT A GLOBAL FRONTIER-INWARD ELIMINATION. For each demand
+   source x: a nodal solve on x's prerequisite closure (x and everything it transitively needs),
+   ready cards at potential 0, demand injected at x. A global elimination from the frontier inward
+   reintroduces the leak through FILL-IN (eliminating a shared prerequisite couples its dependents
+   laterally): z needs y1 needs s needs r, y2 needs s and q, demand at z: global gives q 1/3 though z
+   does not need q; the cone gives r 1. Inside a cone the lateral coupling is the resource
+   sensitivity (branches that share a prerequisite compete for its capacity); outside it is a leak.
+   This corrects my own sentence above that the nodal solve runs "from the frontier inward".
+2. A SERIES-PARALLEL FOLD IS THE IDEMPOTENT MISTAKE. It counts a shared prerequisite once per branch.
+   Reconvergence (x needs y1, y2; both need s; s needs r3; y1 needs r1; y2 needs r2; unit edges): fold
+   1/3, 1/3, 1/3; nodal 3/8, 3/8, 1/4 (hand-checked here: y = 3/8, s = 1/4). My first W238 slice
+   (9713d89) was the fold and was wrong on exactly this case; replaced by the cone solve.
+3. THE SINK WIRING IS NOT A PARAMETER. Ready cards ARE the ground, so open question (ii) above (the
+   sink's per-card conductance) is closed: there is no sink conductance.
+4. THE AUDIT, RUN BY gcalculus (W239/W240) on three repos of the fleet graph, unit edge weights: every
+   ordering difference between the old downstream weight and the model is the one conjunctive-split
+   effect; where no source is shared the arms agree to the digit. Pairs ordered differently:
+   gcalculus 5.9%, luthen-observability 1.2%, paperkit 1.7%. Thirteen repos are unaudited; the script
+   takes a repo name (W240 is the loop over them).
+5. COST. Exact is affordable (paperkit 4.0 s for 493 sources, largest cone 52). The earlier "exact is
+   out" is withdrawn. Determinism needs no elimination order (the exact solution is unique).
+6. W242 CACHE KEY. Kron reduction is exact for a fixed network, but the cone changes the network per
+   source, so a repo's reduction keyed by the queue digest alone is INVALID; the in-repo cone would
+   have to be part of the key. At the measured cost the cache is probably unnecessary.
+
+Decisions (nemik's):
+
+- Edge weights: UNIT conductance on every prerequisite edge is the baseline. Distinct weights for an
+  `enables` edge, a `closes_ref` edge and each gate are policy, declared in `rank-weights.toml` as a
+  reviewed diff when someone has a reason; `nemik.flow.solve` already takes per-edge `weights`.
+- Packaging: PORT, do not vendor. nemik.flow is a stdlib exact solver (about 130 lines with its
+  checks), tested against gcalculus's controls (tests/test_flow.py), with the reference's results as
+  the spec. nemik stays independent of gcalculus's working tree and sha.
+- Display of exact fractions: comparison stays exact; display rounds to a fixed number of decimals
+  (declared data, default 4), never the stored value.
+- Tie-break: ties are genuine (luthen W626 = W670 = 8.00); the lower symbol wins, as nemik:W119
+  already requires.
+- The class weight (local 1 / peer 2 / peer-blocked 8) is a property of the (ranked repo, source)
+  pair, so the demand a source injects is recomputed per ranked repo (as gcalculus did).
 
 ## Open questions (each blocks code, none blocks this note)
 
