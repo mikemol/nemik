@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 144
+      "ticks_blocked": 145
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "weight": 1
     },
     {
@@ -2613,7 +2613,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 89
+      "ticks_blocked": 90
     },
     {
       "symbol": "W138",
@@ -3522,7 +3522,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-02T17:28:25Z",
-      "ticks_blocked": 25,
+      "ticks_blocked": 26,
       "weight": 2
     },
     {
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-08T13:42:13Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "completed": null
     },
     {
@@ -4264,23 +4264,26 @@
     {
       "symbol": "W224",
       "title": "Nested workstreams: nemik resolves, cites and ranks a workstream that contains others, such as the host queue above every repo",
-      "status": "ready",
+      "status": "blocked",
       "enables": [],
       "touches": [
         "nemik",
         "nested-workstreams",
         "host-visitor"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "operator: decide how a workstream that contains workstreams behaves: (a) only the root queue nests (today: the host queue above every repo, and nothing else), (b) any repo may contain repos and cites them <parent>/<child>:W<n>, or (c) a parent queue also carries the weight of its children, summed into its own ranking"
+      ],
+      "blocked_kind": "human",
       "next_bounded_step": "Decide, with the operator, whether a repo containing repos (not just the root) needs the same rule, and whether a parent weights should aggregate its children; confirm the nemik image on the cluster carries 4c7ab22 (not visible from this session)",
-      "evidence": "2026-10-05: 2026-10-05 operator: nemik does not yet know about nested workstreams. Probes: nemik-rank . --root ~/github prints nothing; nemik-rank github only resolves with --root /home/mikemol (a workaround that makes ~mikemol the fleet). Open design points: how a parent's queue relates to its children's (aggregate, or separate), whether the citation prefix nests (github/repo:W<n> vs repo:W<n>), and what --all and nemik-inbound do with a parent. | 2026-10-05: 2026-10-05 4c7ab22: workstream_files includes <root>/.claude/<name> as the workstream named by the root directory, beside its children (a same-named child wins); the old --root-at-one-repo fallback is the same rule. tests/test_nested.py (4). Verified with PYTHONPATH=src: nemik-rank github ranks the host queue (W1 W2 W10 W11) and nemik-check lists github with only the standing warnings. NOT live yet: the installed .venv copy and the cluster image predate it. | 2026-10-09: 2026-10-09: the installed venv now resolves it: nemik-rank github ranks the host queue (W14 W1 W2 W10 W11 W13) from .venv/bin; pushes since have gone out through the normal path, but the running cluster image is not visible from this session",
+      "evidence": "2026-10-05: 2026-10-05 operator: nemik does not yet know about nested workstreams. Probes: nemik-rank . --root ~/github prints nothing; nemik-rank github only resolves with --root /home/mikemol (a workaround that makes ~mikemol the fleet). Open design points: how a parent's queue relates to its children's (aggregate, or separate), whether the citation prefix nests (github/repo:W<n> vs repo:W<n>), and what --all and nemik-inbound do with a parent. | 2026-10-05: 2026-10-05 4c7ab22: workstream_files includes <root>/.claude/<name> as the workstream named by the root directory, beside its children (a same-named child wins); the old --root-at-one-repo fallback is the same rule. tests/test_nested.py (4). Verified with PYTHONPATH=src: nemik-rank github ranks the host queue (W1 W2 W10 W11) and nemik-check lists github with only the standing warnings. NOT live yet: the installed .venv copy and the cluster image predate it. | 2026-10-09: 2026-10-09: the installed venv now resolves it: nemik-rank github ranks the host queue (W14 W1 W2 W10 W11 W13) from .venv/bin; pushes since have gone out through the normal path, but the running cluster image is not visible from this session | 2026-10-09: 2026-10-09: the mechanism for the root case is live (nemik-rank github ranks the host queue); what remains is policy, and whether the running cluster image carries 4c7ab22 is not visible from this session",
       "issued_at": "2026-10-05T22:32:01Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-09T00:37:58Z",
+      "last_worked": "2026-10-09T02:13:14Z",
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 2,
+      "completed": null
     },
     {
       "symbol": "W225",
@@ -4372,7 +4375,7 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:09:03Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 13,
       "completed": null
     },
     {
@@ -4472,7 +4475,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W665",
       "last_worked": "2026-10-08T14:56:18Z",
-      "ticks_blocked": 15,
+      "ticks_blocked": 16,
       "completed": null
     },
     {
@@ -4512,7 +4515,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-09T01:34:04Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null
     },
     {
@@ -4650,7 +4653,7 @@
       "minted_during": "tick",
       "caused_by": "W229",
       "last_worked": "2026-10-08T14:09:02Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -4773,7 +4776,7 @@
       "minted_during": "tick",
       "caused_by": "W244",
       "last_worked": "2026-10-09T01:30:25Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "completed": null
     },
     {
@@ -4950,10 +4953,7 @@
   ],
   "job_id": "cc92a47b",
   "heartbeat": "2026-10-09T00:40:20Z",
-  "lock": {
-    "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-09T02:02:33Z"
-  },
+  "lock": null,
   "predecessor_job_id": "ee709298",
   "leases": []
 }
