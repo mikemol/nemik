@@ -443,6 +443,12 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         action="store_true",
         help="every workstream's ready items in one cross-repo order (nemik:W202)",
     )
+    ap.add_argument(
+        "--flow",
+        action="store_true",
+        help="the flow model's salience beside the old weight, and the pairs they order "
+        "differently (nemik:W240, the audit before the model replaces the ranking)",
+    )
     args = ap.parse_args(argv)
     if (
         args.band
@@ -539,6 +545,29 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
             print(
                 f"{r['goal']:6} {r['weight']:4}  on deck {r['on_deck'] or '-'}; path {path}  {r['title'][:60]}"
             )
+        return
+    if args.flow:
+        # nemik:W240: the old downstream weight beside the flow model's salience (exact; shown
+        # rounded), and every pair the two order differently. The model replaces the old order
+        # only after this audit agrees (W241).
+        from nemik.salience import audit, show
+
+        result = audit(g, args.repo)
+        old_pos = {c: i + 1 for i, c in enumerate(result.old_order())}
+        new_pos = {c: i + 1 for i, c in enumerate(result.new_order())}
+        print(
+            f"flow {args.repo}: {len(result.rows)} ready, {result.sources} sources, "
+            f"{len(result.flow.stranded)} stranded"
+        )
+        for row in sorted(result.rows, key=lambda r: new_pos[r.ref]):
+            print(
+                f"{row.ref:28} old={row.old:<5} flow={show(row.new):>10}  "
+                f"old#{old_pos[row.ref]:<4} flow#{new_pos[row.ref]}"
+            )
+        pairs = result.disagreements()
+        print(f"flow {args.repo}: {len(pairs)} pair(s) ordered differently")
+        for above, below in pairs:
+            print(f"  old puts {above} above {below}; flow puts {below} above {above}")
         return
     rows = rank(g, args.repo, weights)
     if args.json:

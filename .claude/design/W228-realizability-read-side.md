@@ -476,6 +476,29 @@ Decisions (nemik's):
 - The class weight (local 1 / peer 2 / peer-blocked 8) is a property of the (ranked repo, source)
   pair, so the demand a source injects is recomputed per ranked repo (as gcalculus did).
 
+## The audit, run on every workstream (W240; `nemik-rank REPO --flow`, 2026-10-09)
+
+`nemik.salience` is the graph side of `nemik.flow`, ported from gcalculus's audit script; it
+reproduces gcalculus's numbers (gcalculus 9 pairs, the nine file-split cards at 4.6366 against the
+lone gate W212 at 18.2705; paperkit 87) and luthen-observability at 150 against their 149 (the queue
+has moved a card). Unit edge weights; ready cards are ground; no source was stranded anywhere.
+
+| workstream | ready | sources | pairs ordered differently |
+|---|---|---|---|
+| gcalculus | 17 | 67 | 9 |
+| luthen-observability | 161 | 138 | 150 |
+| paperkit | 101 | 493 | 87 |
+| mtools | 30 | 390 | 4 (W802, W803 above W798, W819) |
+| aeternum | 19 | 28 | 1 (W78 above W74) |
+| nemik | 4 | 6 | 0 |
+| gabion, substrate, amr-skills, resumes, rosettapkg, linux-sources, github (host), life | 1 to 16 | 3 to 261 | 0 |
+| summit, el-openglo | 0 | 0 | none to rank |
+
+The mtools and aeternum differences have the shape gcalculus found: the flow salience falls below
+the old weight where a source is shared (W795, W796 at exactly 1/2; W802, W803 at 16/21), which is
+the conjunctive-split effect. NOT yet traced one by one for mtools and aeternum (gcalculus traced
+its three); a per-disagreement account is the remaining residue of W240.
+
 ## Open questions (each blocks code, none blocks this note)
 
 1. Field names of the shared verdict: AGREED (see above). Still open for stigmaturgy: a structured

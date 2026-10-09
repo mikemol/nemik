@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 137
+      "ticks_blocked": 138
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 13,
       "weight": 1
     },
     {
@@ -2613,7 +2613,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 82
+      "ticks_blocked": 83
     },
     {
       "symbol": "W138",
@@ -3522,7 +3522,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-02T17:28:25Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "weight": 2
     },
     {
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-08T13:42:13Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 13,
       "completed": null
     },
     {
@@ -4371,7 +4371,7 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:09:03Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -4471,7 +4471,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W665",
       "last_worked": "2026-10-08T14:56:18Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -4502,7 +4502,6 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W237",
         "W238",
         "W240",
         "W241",
@@ -4516,7 +4515,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:17:54Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -4561,22 +4560,22 @@
     {
       "symbol": "W238",
       "title": "Current-flow solver for nemik-rank: deterministic, law tests (series below the weakest link, parallel additive, duplicates double, open circuit), measured on the real graph",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W235",
         "W242"
       ],
       "touches": [],
       "blocked_on": [],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Cone solve landed (src/nemik/flow.py, per-source nodal, exact, cycles solved, 13 controls incl. gcalculus reconvergence 3/8 3/8 1/4). Remaining: a harness that builds demand/needs/frontier from the real queues (class weight per ranked repo), measure it on the real graph (gcalculus saw paperkit 4.0 s), per-edge weights from rank-weights.toml when declared, then W240 audit over the other thirteen repos",
-      "evidence": "2026-10-08: 2026-10-08: needs the design card W237 (sources, weights, composition, consumption) and a structured closes_ref (mtools:W849); then measure the open graph's size before choosing exact elimination over a deterministic sparse solve; after the md0 RELEASE. | 2026-10-08: 2026-10-08: from gcalculus:W208: exact fractions are out at this size (cubic; n=240 takes 85 s), so the solver is floating point with a fixed elimination order for determinism (nemik:W119); the grounded-sink current call does not exist in gcalc, so either gcalculus adds it or this card implements it and tests the laws gcalculus names; and the model must be directed (or the leak accepted) per the counterexample in the design note. | 2026-10-08: 2026-10-08: with the model directed (operator), the solver is a single propagation pass in dependency order over each acyclic part, plus a small linear solve per strongly connected component for cycles; exact fractions are affordable again for the acyclic pass. The diamond rule (full demand to each conjunctive prerequisite vs a split) is the open input, asked of the operator. | 2026-10-09: 2026-10-09: unblocked on this reading: the operator rulings (directed, split by the nodal solve, Pareto emergent) fix the model, and the solver is parametric in the edge and sink conductances W237 will declare, so it does not wait for gcalculus packaging (nemik implements elimination itself and cites the laws). src/nemik/flow.py + tests/test_flow.py: 11 laws pass (series below the weakest link and the exact half-life, parallel additive, duplicates counted once and two sources doubling, exact conservation, the diamond split 2/5 vs 3/5 decided by the physics, a landed prerequisite redirecting demand, no demand to a non-prerequisite, stranded demand, cycles reported, input-order independence) | 2026-10-09: 2026-10-09: the first slice (9713d89) was the series-parallel fold and was wrong on reconvergence; replaced by the cone nodal solve per gcalculus:W208 (hand-checked: y=3/8, s=1/4); the cycle limitation is gone (a cycle inside a cone is solved); tests/test_flow.py 13 pass",
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-08: 2026-10-08: needs the design card W237 (sources, weights, composition, consumption) and a structured closes_ref (mtools:W849); then measure the open graph's size before choosing exact elimination over a deterministic sparse solve; after the md0 RELEASE. | 2026-10-08: 2026-10-08: from gcalculus:W208: exact fractions are out at this size (cubic; n=240 takes 85 s), so the solver is floating point with a fixed elimination order for determinism (nemik:W119); the grounded-sink current call does not exist in gcalc, so either gcalculus adds it or this card implements it and tests the laws gcalculus names; and the model must be directed (or the leak accepted) per the counterexample in the design note. | 2026-10-08: 2026-10-08: with the model directed (operator), the solver is a single propagation pass in dependency order over each acyclic part, plus a small linear solve per strongly connected component for cycles; exact fractions are affordable again for the acyclic pass. The diamond rule (full demand to each conjunctive prerequisite vs a split) is the open input, asked of the operator. | 2026-10-09: 2026-10-09: unblocked on this reading: the operator rulings (directed, split by the nodal solve, Pareto emergent) fix the model, and the solver is parametric in the edge and sink conductances W237 will declare, so it does not wait for gcalculus packaging (nemik implements elimination itself and cites the laws). src/nemik/flow.py + tests/test_flow.py: 11 laws pass (series below the weakest link and the exact half-life, parallel additive, duplicates counted once and two sources doubling, exact conservation, the diamond split 2/5 vs 3/5 decided by the physics, a landed prerequisite redirecting demand, no demand to a non-prerequisite, stranded demand, cycles reported, input-order independence) | 2026-10-09: 2026-10-09: the first slice (9713d89) was the series-parallel fold and was wrong on reconvergence; replaced by the cone nodal solve per gcalculus:W208 (hand-checked: y=3/8, s=1/4); the cycle limitation is gone (a cycle inside a cone is solved); tests/test_flow.py 13 pass | 2026-10-09: 2026-10-09: harness landed: src/nemik/salience.py (graph to demand/needs/frontier, both arms) and nemik-rank REPO --flow; tests/test_salience.py (4, a hand-solved conjunctive split: W1 3/2, W2 1/2 against old 2 and 1) and tests/test_flow.py (13). Run on the real graph for all sixteen workstreams in one tick with no timeout; it reproduces gcalculus numbers on gcalculus (9 pairs) and paperkit (87). Remaining weight-declaration (rank-weights.toml) is W241 work",
       "issued_at": "2026-10-08T14:02:33Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
-      "last_worked": "2026-10-09T00:53:21Z",
+      "last_worked": "2026-10-09T01:12:31Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261009T011231Z"
     },
     {
       "symbol": "W239",
@@ -4601,7 +4600,7 @@
     {
       "symbol": "W240",
       "title": "Audit: run the old ranking and the model over the real queues, record every disagreement with its reason (a bug in the old ranking or a missing term in the model, never averaged)",
-      "status": "blocked",
+      "status": "working",
       "enables": [
         "W235",
         "W241"
@@ -4612,13 +4611,13 @@
         "W242"
       ],
       "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "2026-10-09: 2026-10-09: gcalculus ran the audit on three repos (gcalculus, luthen-observability, paperkit; unit edge weights): every ordering difference is the one conjunctive-split effect, and where no source is shared the arms agree to the digit (5.9%, 1.2%, 1.7% of pairs differ); script in nemik/inbox/2026-10-09-gcalculus-w237-audit-script.md takes a repo name. Remaining: the other thirteen repos, and an audit against nemik.flow itself",
+      "next_bounded_step": "Account for each remaining disagreement one by one (mtools: W802/W803 vs W798/W819; aeternum: W78 vs W74) as a bug in the old ranking or a missing term in the model, then record in the design note; gcalculus traced its three repos",
+      "evidence": "2026-10-09: 2026-10-09: gcalculus ran the audit on three repos (gcalculus, luthen-observability, paperkit; unit edge weights): every ordering difference is the one conjunctive-split effect, and where no source is shared the arms agree to the digit (5.9%, 1.2%, 1.7% of pairs differ); script in nemik/inbox/2026-10-09-gcalculus-w237-audit-script.md takes a repo name. Remaining: the other thirteen repos, and an audit against nemik.flow itself | 2026-10-09: 2026-10-09: audit run over all sixteen workstreams with nemik-rank REPO --flow (table in the design note): 0 disagreements in 11, 9 gcalculus, 150 luthen-observability, 87 paperkit, 4 mtools, 1 aeternum; none stranded; the new ones have the conjunctive-split shape but are not yet traced individually",
       "issued_at": "2026-10-08T14:07:08Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
-      "last_worked": "2026-10-09T00:53:10Z",
-      "ticks_blocked": 11,
+      "last_worked": "2026-10-09T01:12:36Z",
+      "ticks_blocked": 0,
       "completed": null
     },
     {
@@ -4640,7 +4639,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:17:49Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "completed": null
     },
     {
@@ -4662,7 +4661,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-09T00:53:09Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
@@ -4683,7 +4682,7 @@
       "minted_during": "tick",
       "caused_by": "W229",
       "last_worked": "2026-10-08T14:09:02Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "completed": null
     },
     {
@@ -4704,7 +4703,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-08T14:17:48Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "completed": null
     },
     {
@@ -4817,7 +4816,10 @@
   ],
   "job_id": "cc92a47b",
   "heartbeat": "2026-10-09T00:40:20Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-10-09T00:58:22Z"
+  },
   "predecessor_job_id": "ee709298",
   "leases": []
 }
