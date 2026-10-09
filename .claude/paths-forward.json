@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 262,
+  "counter": 263,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 149
+      "ticks_blocked": 150
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 24,
+      "ticks_blocked": 25,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T12:42:16Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -4280,7 +4280,7 @@
       "caused_by": "operator",
       "last_worked": "2026-10-09T12:42:16Z",
       "ticks_blocked": 0,
-      "weight": 2,
+      "weight": 3,
       "completed": null
     },
     {
@@ -4372,7 +4372,7 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:09:03Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "completed": null
     },
     {
@@ -4509,7 +4509,8 @@
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-09T01:34:04Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": null,
+      "weight": 2
     },
     {
       "symbol": "W236",
@@ -4982,7 +4983,8 @@
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T13:04:39Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": null,
+      "weight": 1
     },
     {
       "symbol": "W261",
@@ -4998,21 +5000,42 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T13:40:04Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 4
     },
     {
       "symbol": "W262",
       "title": "UI: delete the non-forest per-repo layout branch and pullRows now that the rank forest is always on",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Remove the dagre-alignment search in draw() and pullRows (index.html); keep forest(); check the static build still renders.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: tile() lays every repo box with forest() only; the dagre alignment search, rankEdges and pullRows are deleted from src/nemik/web/index.html (about 90 lines); the layout test (forest budget) still gates it where a browser exists",
       "issued_at": "2026-10-09T13:34:03Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
+      "last_worked": "2026-10-09T13:54:09Z",
+      "ticks_blocked": 0,
+      "weight": 4,
+      "completed": "20261009T135409Z"
+    },
+    {
+      "symbol": "W263",
+      "title": "Per-waypoint calendar routing: a touches tag (calendar:<label> or private) keeps a waypoint off the shared mirror and writes it to a named personal calendar; answer whether nemik-wake --alarms already delivers alarms",
+      "status": "ready",
+      "enables": [
+        "life:W40"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Read calendars.py/calwrite.py and calendars.toml; design the tag and the per-calendar accept rule; answer life:W40's question 4 from nemik-wake --alarms.",
+      "evidence": "",
+      "issued_at": "2026-10-09T13:53:06Z",
+      "minted_during": "tick",
+      "caused_by": "life:W40",
       "last_worked": null,
       "ticks_blocked": 0
     }
@@ -5070,7 +5093,10 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-10-09T13:52:13Z"
+  },
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }
