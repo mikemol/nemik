@@ -100,7 +100,11 @@ def survey(root: Path) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
         except UnreadableStateError as exc:
             graphs[repo], refused[repo] = None, str(exc)
     annotate(merged)
-    _, results, _ = validate(merged, shacl_graph=shapes())
+    from nemik.shaclcache import cached_sparql_parse
+
+    # nemik:W254: pyshacl hands rdflib the same constraint text for every focus node; parse it once.
+    with cached_sparql_parse():
+        _, results, _ = validate(merged, shacl_graph=shapes())
     by_repo: dict[str, list[Finding]] = {repo: [] for repo in graphs}
     for focus, sev, msg in results.query(
         "SELECT ?f ?s ?m WHERE { ?r sh:focusNode ?f ; sh:resultSeverity ?s ; sh:resultMessage ?m }",

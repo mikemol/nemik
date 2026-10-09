@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 143
+      "ticks_blocked": 144
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "weight": 1
     },
     {
@@ -2613,7 +2613,7 @@
       "minted_during": "interrupt",
       "caused_by": "W133",
       "last_worked": "2026-10-01T01:27:31Z",
-      "ticks_blocked": 88
+      "ticks_blocked": 89
     },
     {
       "symbol": "W138",
@@ -3522,7 +3522,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-02T17:28:25Z",
-      "ticks_blocked": 24,
+      "ticks_blocked": 25,
       "weight": 2
     },
     {
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-08T13:42:13Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "completed": null
     },
     {
@@ -4372,7 +4372,7 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-08T14:09:03Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
@@ -4472,7 +4472,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W665",
       "last_worked": "2026-10-08T14:56:18Z",
-      "ticks_blocked": 14,
+      "ticks_blocked": 15,
       "completed": null
     },
     {
@@ -4512,7 +4512,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
       "last_worked": "2026-10-09T01:34:04Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -4650,7 +4650,7 @@
       "minted_during": "tick",
       "caused_by": "W229",
       "last_worked": "2026-10-08T14:09:02Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "completed": null
     },
     {
@@ -4772,7 +4772,7 @@
       "minted_during": "tick",
       "caused_by": "W244",
       "last_worked": "2026-10-09T01:30:25Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -4858,21 +4858,23 @@
     },
     {
       "symbol": "W254",
-      "title": "Every nemik command pays about 20 s for the graph survey: pyshacl re-parses 1,290 SPARQL constraint queries per run (27 s of 67 s under cProfile); parse them once or cache the parsed form",
-      "status": "ready",
+      "title": "The graph survey costs every nemik command about 20 s: parse pyshacl SPARQL constraints once instead of 1,290 times per run",
+      "status": "done",
       "enables": [],
       "touches": [
         "nemik"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Measure nemik-check and nemik-rank REPO wall time; find the SPARQL constraints in shapes.ttl and how many are instances of one shape; try prefixed-query reuse or parse caching in rdflib; keep the shapes semantics and the SHACL results identical (compare nemik-check output before and after)",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: 2026-10-09: nemik.shaclcache.cached_sparql_parse (scoped patch around the SHACL validation in check.survey): rdflib parses and translates the same constraint text for every focus node; the translated query (rdflib prepareQuery object, documented reusable across initBindings) is cached by text, base and namespaces. A first attempt that cached the parse tree failed (translation rewrites it in place and its nodes cannot be deep-copied), caught by comparing outputs. Measured: nemik-check 17.0 s to 9.2 s with a byte-identical report (empty diff); nemik-rank --all 33 s (flow, before W250) to 20.4 s (W250) to 10.3 s. tests/test_shaclcache.py (4): correct answers for different bindings, one translation per text, originals restored",
       "issued_at": "2026-10-09T01:59:03Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-09T02:06:02Z",
+      "ticks_blocked": 0,
+      "weight": 1,
+      "completed": "20261009T020602Z"
     }
   ],
   "residue": [
@@ -4930,7 +4932,7 @@
   "heartbeat": "2026-10-09T00:40:20Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-09T01:45:38Z"
+    "taken_at": "2026-10-09T02:02:33Z"
   },
   "predecessor_job_id": "ee709298",
   "leases": []
