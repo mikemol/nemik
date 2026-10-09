@@ -99,7 +99,7 @@ nemik:UmbrellaBlockShape a sh:NodeShape ;
 nemik:UnresolvedBlockerShape a sh:NodeShape ;
     sh:targetSubjectsOf nemik:unresolvedBlocker ;
     sh:property [ sh:path nemik:unresolvedBlocker ; sh:maxCount 0 ; sh:severity sh:Warning ;
-                  sh:message "blocked on no resolvable party: name a repo, a <repo>:W<n>, or 'operator: decide/act ...'" ] .
+                  sh:message "blocked on no resolvable party: name a repo, a <repo>:W<n>, 'operator: decide/act ...', a cal:<label>/<uid> or a host:<id> (a row luthen's host-apply export holds)" ] .
 
 # Blocked on a waypoint that has already landed, done or dropped (nemik:W110, paperkit's letter).
 nemik:LandedBlockerShape a sh:NodeShape ;

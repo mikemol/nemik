@@ -120,7 +120,8 @@ by another session's work, that is **weather**, and it gets one waypoint of its 
   `input.apply["<row id>"].applied` reads luthen's host-apply export (`<root>/host-apply.json`,
   nemik:W233): true only for a fresh, well-formed export whose row is applied (its live file equals
   its declared source); a row the export does not hold, or a stale one, is never done. Cite a row in a
-  waypoint as `host:<id>`.
+  waypoint as `host:<id>` (`blocked_on: ["host:home-mount"]`, a condition like `cal:`); `nemik-check`
+  warns when the export is readable and does not hold that row (nemik:W256).
 - **It is monotone**: once the witness holds, `nemik-witnesses --apply` marks it done with the facts
   as evidence and wakes whoever waits on it. It is never reopened. If the thing breaks again, that
   is a new outage and a new waypoint.

@@ -29,6 +29,8 @@ _CLEAN_SYMBOL = re.compile(r"([A-Za-z0-9_.-]+:)?W\d+")
 CAL_BLOCK = re.compile(
     r"cal:[a-z][a-z0-9-]{0,31}/\S+"
 )  # same form as nemik.calendars.CAL_REF
+# nemik:W256: host:<id> is a condition, a row of luthen's host-apply export (nemik.hostapply).
+HOST_BLOCK = re.compile(r"host:[A-Za-z0-9][A-Za-z0-9._@-]*")
 
 
 def ref(node: Node) -> str:
@@ -91,7 +93,10 @@ def annotate(g: Graph) -> None:
                 # nemik:W183: cal:<label>/<uid> is a condition, an event on the operator's calendar
                 # (nemik-days resolves it host-side). Checked by form only: the check runs where the
                 # calendars are not, and must never read them (nemik:W161).
-                if not CAL_BLOCK.fullmatch(str(text).strip()):
+                # nemik:W256: host:<id> likewise by form here; `check.survey` then holds it against
+                # the host-apply export, where the export is readable.
+                cited = str(text).strip()
+                if not (CAL_BLOCK.fullmatch(cited) or HOST_BLOCK.fullmatch(cited)):
                     g.add((node, NEMIK.unresolvedBlocker, text))
 
     # A peer block that lands on an UMBRELLA -- a waypoint its own repo's open children enable --

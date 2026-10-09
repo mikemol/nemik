@@ -4896,8 +4896,8 @@
     },
     {
       "symbol": "W256",
-      "title": "host:<id> citations: a waypoint cites a host-apply row in blocked_on or evidence; nemik-check resolves it against the export and reports an unknown row as an unresolved citation, never a pass",
-      "status": "ready",
+      "title": "host:<id> citations: nemik-check resolves a cited host-apply row against the export and reports an unknown row as unresolved",
+      "status": "done",
       "enables": [
         "W233"
       ],
@@ -4906,14 +4906,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Look at how cal: refs are resolved (adapter.resolve_blocker, shapes.ttl); add host: the same way, read through nemik.hostapply.load; a row the export does not hold, or an export that cannot be read, is a Warning shape; tests on a planted export",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: 2026-10-09: host:<id> in blocked_on is accepted by form in blocks.annotate (like cal:) and held against the export in check.survey: a row the readable export does not hold is an unresolvedBlocker Warning (shape message names host:); only the file is read (hostapply.load run_exporter=False, no subprocess per survey); no export or an unreadable one leaves the citation as written. tests/test_host_citations.py (4). Verified live that luthen publishes ~/.local/share/luthen/nemik-export/host-apply.json with ordering none (4f396f5) and nemik reads it",
       "issued_at": "2026-10-09T05:50:55Z",
       "minted_during": "tick",
       "caused_by": "W233",
-      "last_worked": "2026-10-09T05:53:28Z",
+      "last_worked": "2026-10-09T06:04:39Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261009T060439Z"
     },
     {
       "symbol": "W257",
@@ -5004,12 +5004,12 @@
       "recoverable": true
     }
   ],
-  "job_id": "cc92a47b",
-  "heartbeat": "2026-10-09T00:40:20Z",
+  "job_id": "6473ee18",
+  "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-09T05:46:47Z"
+    "taken_at": "2026-10-09T06:02:43Z"
   },
-  "predecessor_job_id": "ee709298",
+  "predecessor_job_id": "cc92a47b",
   "leases": []
 }

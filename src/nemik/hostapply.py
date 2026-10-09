@@ -21,6 +21,7 @@ A malformed export is reported in `problems`, not repaired and not silently part
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -32,6 +33,8 @@ if TYPE_CHECKING:
     from pathlib import Path
 
 EXPORT = "host-apply.json"
+# A waypoint cites a row as `host:<id>` (nemik:W256); the id is the row's key in the export.
+HOST_REF = re.compile(r"host:([A-Za-z0-9][A-Za-z0-9._@-]*)")
 EFFECTS = frozenset(
     {
         "install",
@@ -163,10 +166,12 @@ def parse(doc: object) -> HostApply:
     )
 
 
-def load(root: Path) -> HostApply | None:
+def load(root: Path, *, run_exporter: bool = True) -> HostApply | None:
     """Read `<root>/host-apply.json`, else run luthen's exporter from its venv.
 
     The same two sources, in the same order, as nemik's liveness read (`nemik.wake.read_liveness`).
+    `run_exporter=False` reads the file only: a survey runs on every command and must not start a
+    subprocess.
 
     Returns:
         the export, or None when there is neither a file nor a runnable exporter.
@@ -181,7 +186,7 @@ def load(root: Path) -> HostApply | None:
             return parse(json.loads(path.read_text(encoding="utf-8")))
         luthen = root / LUTHEN
         python = luthen / ".venv" / "bin" / "python"
-        if python.exists():
+        if run_exporter and python.exists():
             done = subprocess.run(
                 [str(python), "-m", EXPORTER],
                 cwd=luthen,

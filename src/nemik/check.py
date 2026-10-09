@@ -100,6 +100,19 @@ def survey(root: Path) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
         except UnreadableStateError as exc:
             graphs[repo], refused[repo] = None, str(exc)
     annotate(merged)
+    from nemik.hostapply import HOST_REF, load
+
+    # nemik:W256: a cited host-apply row the export does not hold is an unresolved citation. Only the
+    # file is read (no exporter subprocess), and no export at all leaves the citation as it was.
+    try:
+        export = load(root, run_exporter=False)
+    except ValueError:
+        export = None
+    if export is not None:
+        for node, cited in list(merged.subject_objects(NEMIK.blockedOn)):
+            m = HOST_REF.fullmatch(str(cited).strip())
+            if m and m[1] not in export.rows:
+                merged.add((node, NEMIK.unresolvedBlocker, cited))
     from nemik.shaclcache import cached_sparql_parse
 
     # nemik:W254: pyshacl hands rdflib the same constraint text for every focus node; parse it once.
