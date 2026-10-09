@@ -4819,12 +4819,12 @@
       "recoverable": true
     }
   ],
-  "job_id": "ee709298",
-  "heartbeat": "2026-10-08T23:54:45Z",
+  "job_id": "cc92a47b",
+  "heartbeat": "2026-10-09T00:40:20Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-09T00:04:46Z"
+    "taken_at": "2026-10-09T00:40:53Z"
   },
-  "predecessor_job_id": "63bbcf8b",
+  "predecessor_job_id": "ee709298",
   "leases": []
 }
