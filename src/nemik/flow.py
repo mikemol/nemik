@@ -15,7 +15,10 @@ Why a cone and why a nodal solve:
 - The operator's conjunctive-split ruling needs no rule fixed in advance: the solve divides x's demand
   among its prerequisites, and divides it again when one lands and leaves `needs`.
 
-All arithmetic is exact `Fraction`, so the answer does not depend on an elimination order, and every
+The solve is exact sparse elimination (star-mesh, lowest degree first): the grounded Laplacian of a
+cone is symmetric and positive definite, so no pivoting is needed, and the cones are nearly trees, so
+the fill-in stays small (nemik:W250; the dense Gauss-Jordan it replaced cost 11 s over the fleet).
+All arithmetic is exact `Fraction`, so the answer does not depend on the elimination order, and every
 iteration is sorted (nemik:W119). Demand conserved is checked on every source.
 """
 
@@ -69,35 +72,6 @@ def _cone(
     return sorted(seen)
 
 
-def _solve(matrix: list[list[Fraction]], rhs: list[Fraction]) -> list[Fraction]:
-    """Solve a linear system exactly, by Gauss-Jordan elimination over the rationals.
-
-    Returns:
-        the solution.
-
-    Raises:
-        ZeroDivisionError: when the system is singular (a component with no ground).
-
-    """
-    n = len(matrix)
-    rows = [[*row, rhs[i]] for i, row in enumerate(matrix)]
-    for col in range(n):
-        pivot = next((r for r in range(col, n) if rows[r][col] != 0), None)
-        if pivot is None:
-            msg = "a component with no ground"
-            raise ZeroDivisionError(msg)
-        rows[col], rows[pivot] = rows[pivot], rows[col]
-        scale = rows[col][col]
-        rows[col] = [v / scale for v in rows[col]]
-        for r in range(n):
-            if r != col and rows[r][col] != 0:
-                factor = rows[r][col]
-                rows[r] = [
-                    a - factor * b for a, b in zip(rows[r], rows[col], strict=True)
-                ]
-    return [rows[i][n] for i in range(n)]
-
-
 def _grounded(
     edges: list[tuple[str, str, Fraction]],
     front: Collection[str],
@@ -107,22 +81,46 @@ def _grounded(
 ) -> tuple[dict[str, Fraction], Fraction]:
     """Inject `amount` at `source` and read the current into each ready card.
 
+    Eliminates the unknown nodes one at a time, lowest degree first (ties by name), keeping each
+    node's pivot and neighbours for the back substitution.
+
     Returns:
         (current into each ready card, the potential at the source).
 
+    Raises:
+        ZeroDivisionError: when a component has no ground (the pivot of its last node is zero).
+
     """
-    unknown = [n for n in nodes if n not in front]
-    index = {n: i for i, n in enumerate(unknown)}
-    size = len(unknown)
-    matrix = [[ZERO] * size for _ in range(size)]
+    diag: dict[str, Fraction] = {n: ZERO for n in nodes if n not in front}
+    link: dict[str, dict[str, Fraction]] = {n: {} for n in diag}
     for u, v, w in edges:
         for a, b in ((u, v), (v, u)):
-            if a in index:
-                matrix[index[a]][index[a]] += w
-                if b in index:
-                    matrix[index[a]][index[b]] -= w
-    rhs = [amount if n == source else ZERO for n in unknown]
-    potential = dict(zip(unknown, _solve(matrix, rhs), strict=True))
+            if a in diag:
+                diag[a] += w
+                if b in diag:
+                    link[a][b] = link[a].get(b, ZERO) + w
+    rhs = {n: (amount if n == source else ZERO) for n in diag}
+    steps: list[tuple[str, Fraction, dict[str, Fraction]]] = []
+    while link:
+        k = min(link, key=lambda n: (len(link[n]), n))
+        pivot = diag[k]
+        if pivot == 0:
+            msg = "a component with no ground"
+            raise ZeroDivisionError(msg)
+        around = link.pop(k)
+        for i, g_i in sorted(around.items()):
+            diag[i] -= g_i * g_i / pivot
+            rhs[i] += g_i / pivot * rhs[k]
+            del link[i][k]
+            for j, g_j in around.items():
+                if j != i:
+                    link[i][j] = link[i].get(j, ZERO) + g_i * g_j / pivot
+        steps.append((k, pivot, around))
+    potential: dict[str, Fraction] = {}
+    for k, pivot, around in reversed(steps):
+        potential[k] = (
+            rhs[k] + sum((g * potential[j] for j, g in around.items()), ZERO)
+        ) / pivot
     into: dict[str, Fraction] = {}
     for u, v, w in edges:
         for a, b in ((u, v), (v, u)):

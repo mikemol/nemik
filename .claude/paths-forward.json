@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 253,
+  "counter": 254,
   "waypoints": [
     {
       "symbol": "W1",
@@ -4778,21 +4778,22 @@
     {
       "symbol": "W250",
       "title": "nemik-rank --all costs 33 s since the flow switch (about 21 s is the graph build): share the open-graph and prerequisite scan across repos instead of rebuilding it per repo, and skip the old-weight arm inside salience_of",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "nemik"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Measure first (nemik-rank --all, nemik-rank luthen-observability); then audit() split so salience_of reuses one scan; keep exactness; expect most of the 12 s to go",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: 2026-10-09: profiled nemik-rank --all (cProfile): of 67 s under the profiler, survey/SHACL is 50 s and the ranking 15 s, 11.4 s of it in flow.solve (dense exact Gauss-Jordan per source). Replaced by exact sparse elimination (lowest-degree star-mesh, no pivoting needed on a grounded Laplacian): nemik-rank --all 33.0 s to 20.4 s, equal to the old arm alone (20.65 s); the paperkit audit 21.0 s to 17.6 s with identical rows. tests/test_flow_reference.py: the solver equals an independent dense Fraction solve exactly on 12 seeded random graphs with cycles; test_flow (13) unchanged",
       "issued_at": "2026-10-09T01:33:35Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-10-09T01:59:02Z",
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 1,
+      "completed": "20261009T015902Z"
     },
     {
       "symbol": "W251",
@@ -4854,6 +4855,24 @@
       "last_worked": "2026-10-09T01:52:22Z",
       "ticks_blocked": 0,
       "completed": "20261009T015222Z"
+    },
+    {
+      "symbol": "W254",
+      "title": "Every nemik command pays about 20 s for the graph survey: pyshacl re-parses 1,290 SPARQL constraint queries per run (27 s of 67 s under cProfile); parse them once or cache the parsed form",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "nemik"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Measure nemik-check and nemik-rank REPO wall time; find the SPARQL constraints in shapes.ttl and how many are instances of one shape; try prefixed-query reuse or parse caching in rdflib; keep the shapes semantics and the SHACL results identical (compare nemik-check output before and after)",
+      "evidence": "",
+      "issued_at": "2026-10-09T01:59:03Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
