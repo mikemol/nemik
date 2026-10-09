@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 150
+      "ticks_blocked": 151
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 25,
+      "ticks_blocked": 26,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T12:42:16Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null
     },
     {
@@ -4264,23 +4264,25 @@
     {
       "symbol": "W224",
       "title": "Nested workstreams: nemik resolves, cites and ranks a workstream that contains others, such as the host queue above every repo",
-      "status": "ready",
+      "status": "blocked",
       "enables": [],
       "touches": [
         "nemik",
         "nested-workstreams",
         "host-visitor"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "Operator ruling 2026-10-09: nested workstreams are glued-in subgraphs; nesting changes only addressing, no parent weight aggregation. Step: discover queues at depth, name them by relative path, and check the mtools citation grammar for \"/\" in <repo>:W<n>.",
-      "evidence": "2026-10-05: 2026-10-05 operator: nemik does not yet know about nested workstreams. Probes: nemik-rank . --root ~/github prints nothing; nemik-rank github only resolves with --root /home/mikemol (a workaround that makes ~mikemol the fleet). Open design points: how a parent's queue relates to its children's (aggregate, or separate), whether the citation prefix nests (github/repo:W<n> vs repo:W<n>), and what --all and nemik-inbound do with a parent. | 2026-10-05: 2026-10-05 4c7ab22: workstream_files includes <root>/.claude/<name> as the workstream named by the root directory, beside its children (a same-named child wins); the old --root-at-one-repo fallback is the same rule. tests/test_nested.py (4). Verified with PYTHONPATH=src: nemik-rank github ranks the host queue (W1 W2 W10 W11) and nemik-check lists github with only the standing warnings. NOT live yet: the installed .venv copy and the cluster image predate it. | 2026-10-09: 2026-10-09: the installed venv now resolves it: nemik-rank github ranks the host queue (W14 W1 W2 W10 W11 W13) from .venv/bin; pushes since have gone out through the normal path, but the running cluster image is not visible from this session | 2026-10-09: 2026-10-09: the mechanism for the root case is live (nemik-rank github ranks the host queue); what remains is policy, and whether the running cluster image carries 4c7ab22 is not visible from this session",
+      "blocked_on": [
+        "mtools"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Once mtools' citation grammar accepts <parent>/<child>:W<n>: discover queues at depth in check.workstream_files, name each by its relative path, and add a nested fixture test. No parent weight aggregation (operator ruling 2026-10-09).",
+      "evidence": "2026-10-05: 2026-10-05 operator: nemik does not yet know about nested workstreams. Probes: nemik-rank . --root ~/github prints nothing; nemik-rank github only resolves with --root /home/mikemol (a workaround that makes ~mikemol the fleet). Open design points: how a parent's queue relates to its children's (aggregate, or separate), whether the citation prefix nests (github/repo:W<n> vs repo:W<n>), and what --all and nemik-inbound do with a parent. | 2026-10-05: 2026-10-05 4c7ab22: workstream_files includes <root>/.claude/<name> as the workstream named by the root directory, beside its children (a same-named child wins); the old --root-at-one-repo fallback is the same rule. tests/test_nested.py (4). Verified with PYTHONPATH=src: nemik-rank github ranks the host queue (W1 W2 W10 W11) and nemik-check lists github with only the standing warnings. NOT live yet: the installed .venv copy and the cluster image predate it. | 2026-10-09: 2026-10-09: the installed venv now resolves it: nemik-rank github ranks the host queue (W14 W1 W2 W10 W11 W13) from .venv/bin; pushes since have gone out through the normal path, but the running cluster image is not visible from this session | 2026-10-09: 2026-10-09: the mechanism for the root case is live (nemik-rank github ranks the host queue); what remains is policy, and whether the running cluster image carries 4c7ab22 is not visible from this session | 2026-10-09: 2026-10-09: operator ruled: nested workstreams are glued-in subgraphs; nesting impacts only addressing. mtools' _FOREIGN grammar (model.py) has no '/' in the repo part, so a nested queue cannot be cited; asked mtools in mtools/inbox/2026-10-09-nemik-nested-workstream-citation.md. Nothing is nested on disk today.",
       "issued_at": "2026-10-05T22:32:01Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-09T12:42:16Z",
+      "last_worked": "2026-10-09T14:09:14Z",
       "ticks_blocked": 0,
-      "weight": 3,
+      "weight": 2,
       "completed": null
     },
     {
@@ -4355,25 +4357,23 @@
     {
       "symbol": "W228",
       "title": "nemik-check evaluates the realizability policy over every queue and prints each waypoint's coordinate and its residue ledger",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [
         "nemik",
         "policy",
         "realizability"
       ],
-      "blocked_on": [
-        "W235"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Agree the shared verdict schema and the open questions in .claude/design/W228-realizability-read-side.md with mtools-25 (W848) and luthen-observability (W666), then, after the md0 RELEASE, the policy file and its tests",
-      "evidence": "2026-10-08: 2026-10-08: design note written under the md0 HOLD: .claude/design/W228-realizability-read-side.md (one policy with a transition input for the writer and a state input for this read side; gate-by-gate mapping onto nemik's existing shapes: reachable is mostly what UnclaimedBlock/LandedBlocker/UnresolvedBlocker/UmbrellaBlock/OperatorAsk/CausedBy/EdgeIntoDropped already compute, constructible is half there, observable and coverable are new; graph facts stay in Python and reach Rego as booleans, unknown is residue never a pass; one batched opa eval; surface nemik-check --realizability and a metrics gauge). No code, no build, no test run: the HOLD (luthen W644 evidence: operator order relayed by github-28, no gate, commit, bazel build, test run or tree scan until RELEASE) is in force per mtools:W848 today. I ran two recursive searches over ~/github (a find at depth 4 and a grep for the policy) before I found the HOLD; reported to the host. | 2026-10-08: 2026-10-08: stigmaturgy (operator requirement relayed by github-28: this whole thing should support stigmaturgy): design note extended, four consequences (verdicts are persisted marks read with provenance, residue is an attractor in nemik-rank, marks decay by max_age_seconds with the time an explicit input, hosts leave marks too: W233) become W234, W235, W236 under this card. | 2026-10-08: 2026-10-08: operator ruling on the wake tension (relayed by github-28, in the operator's words): 'nemik-wake wakes; a sleeping session has no autonomy, being woken gives it such.' Waking is not dispatch; nemik-wake and its nudges stay and assign nothing; salience-not-authority holds after the wake. No change to the design; recorded in the note. The operator's outside assessment that named stigmaturgy is at ~/github/assessment.txt (citations unchecked; not relied on). luthen recorded the host-apply shape on its W665 as agreed (no argvs, effect per kind including start-heavy, restarts as {unit, verb}).",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-08: 2026-10-08: design note written under the md0 HOLD: .claude/design/W228-realizability-read-side.md (one policy with a transition input for the writer and a state input for this read side; gate-by-gate mapping onto nemik's existing shapes: reachable is mostly what UnclaimedBlock/LandedBlocker/UnresolvedBlocker/UmbrellaBlock/OperatorAsk/CausedBy/EdgeIntoDropped already compute, constructible is half there, observable and coverable are new; graph facts stay in Python and reach Rego as booleans, unknown is residue never a pass; one batched opa eval; surface nemik-check --realizability and a metrics gauge). No code, no build, no test run: the HOLD (luthen W644 evidence: operator order relayed by github-28, no gate, commit, bazel build, test run or tree scan until RELEASE) is in force per mtools:W848 today. I ran two recursive searches over ~/github (a find at depth 4 and a grep for the policy) before I found the HOLD; reported to the host. | 2026-10-08: 2026-10-08: stigmaturgy (operator requirement relayed by github-28: this whole thing should support stigmaturgy): design note extended, four consequences (verdicts are persisted marks read with provenance, residue is an attractor in nemik-rank, marks decay by max_age_seconds with the time an explicit input, hosts leave marks too: W233) become W234, W235, W236 under this card. | 2026-10-08: 2026-10-08: operator ruling on the wake tension (relayed by github-28, in the operator's words): 'nemik-wake wakes; a sleeping session has no autonomy, being woken gives it such.' Waking is not dispatch; nemik-wake and its nudges stay and assign nothing; salience-not-authority holds after the wake. No change to the design; recorded in the note. The operator's outside assessment that named stigmaturgy is at ~/github/assessment.txt (citations unchecked; not relied on). luthen recorded the host-apply shape on its W665 as agreed (no argvs, effect per kind including start-heavy, restarts as {unit, verb}). | 2026-10-09: 2026-10-09: closed: nemik-check --realizability evaluates the policy over every queue (opa pinned), prints coordinates and the residue ledger; marks ledger (nemik.marks), realize.verdicts via certify.Where, metrics gauges, host-apply witness (input.apply), residue demand in the flow audit; its last blocker W235 is done. Design: .claude/design/W228-realizability-read-side.md",
       "issued_at": "2026-10-08T13:38:08Z",
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W666",
-      "last_worked": "2026-10-08T14:09:03Z",
-      "ticks_blocked": 5,
-      "completed": null
+      "last_worked": "2026-10-09T14:08:00Z",
+      "ticks_blocked": 0,
+      "completed": "20261009T140800Z"
     },
     {
       "symbol": "W229",
@@ -4495,21 +4495,21 @@
     {
       "symbol": "W235",
       "title": "Replace nemik-rank's objectives with the g-calculus current-flow model after an audit; residue edges (closes_ref) are its first new term",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W228"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "The objective replacement landed (W241). Remaining: the operator ask inside the model (W249, needs the operator ruling) and the residue term (W251)",
-      "evidence": "2026-10-08: 2026-10-08: needs closes_by to be machine-resolvable (a repo:W<n>), not only prose: asked of mtools as a structured part of the residue entry (W849). Then a new rank objective under the configurable composition (rank-weights.toml [order]). | 2026-10-08: 2026-10-08: mtools-25 agreed (W849): a residue entry carries an optional closes_ref (repo:W<n>, validated like caused_by) beside the prose closes_by; nothing parses the prose, so nemik-rank reads closes_ref only. | 2026-10-08: 2026-10-08: luthen host's reading of the gcalculus model recorded in the design note and split into W237 (design, waits on gcalculus) and W238 (implementation); two decays kept apart: hard staleness for safety facts and verdict marks (W236), smooth half-life decay for salience marks. | 2026-10-08: 2026-10-08: operator ruling relayed by github-28: the model REPLACES the existing ranking after an audit (not one more objective). Sequence W239 (express each objective), W240 (audit both over the real queues, every disagreement recorded), W241 (switch, old ranking kept as the comparison arm until then). Cost and determinism (operator on W237 d): measurements apply to smaller graphs glued together, so each repo's queue is reduced to its ports and the reductions are glued (W242). | 2026-10-09: 2026-10-09: W237, W238, W239, W240, W241, W242 (dropped), W244 are done; the weight objective is the flow salience",
+      "next_bounded_step": null,
+      "evidence": "2026-10-08: 2026-10-08: needs closes_by to be machine-resolvable (a repo:W<n>), not only prose: asked of mtools as a structured part of the residue entry (W849). Then a new rank objective under the configurable composition (rank-weights.toml [order]). | 2026-10-08: 2026-10-08: mtools-25 agreed (W849): a residue entry carries an optional closes_ref (repo:W<n>, validated like caused_by) beside the prose closes_by; nothing parses the prose, so nemik-rank reads closes_ref only. | 2026-10-08: 2026-10-08: luthen host's reading of the gcalculus model recorded in the design note and split into W237 (design, waits on gcalculus) and W238 (implementation); two decays kept apart: hard staleness for safety facts and verdict marks (W236), smooth half-life decay for salience marks. | 2026-10-08: 2026-10-08: operator ruling relayed by github-28: the model REPLACES the existing ranking after an audit (not one more objective). Sequence W239 (express each objective), W240 (audit both over the real queues, every disagreement recorded), W241 (switch, old ranking kept as the comparison arm until then). Cost and determinism (operator on W237 d): measurements apply to smaller graphs glued together, so each repo's queue is reduced to its ports and the reductions are glued (W242). | 2026-10-09: 2026-10-09: W237, W238, W239, W240, W241, W242 (dropped), W244 are done; the weight objective is the flow salience | 2026-10-09: 2026-10-09: closed: the objective replacement landed (W241), the operator ask is a declared demand source (W249, operator = 15, ruled 'b'), the residue term is built and OFF by default (W253: unit weights ranked paperwork; per-gate weights in rank-weights.toml [residue], nemik-rank --flow --residue)",
       "issued_at": "2026-10-08T13:50:21Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W666",
-      "last_worked": "2026-10-09T01:34:04Z",
+      "last_worked": "2026-10-09T14:07:54Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261009T140754Z",
       "weight": 2
     },
     {
@@ -4971,17 +4971,19 @@
     {
       "symbol": "W260",
       "title": "nemik container OOMKilled at 12:50Z: bound the reader's resident set or raise the limit",
-      "status": "ready",
+      "status": "blocked",
       "enables": [],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "github-45: watch container_oomkilled_restart for nemik after the 768Mi rollout; reopen if it recurs"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Commit 76c7642 (768Mi + MALLOC_ARENA_MAX=2) is local only; push was denied by the auto-mode classifier (production deploy). Push it once the operator allows, then send github-45 the numbers and watch container_oomkilled_restart.",
       "evidence": "2026-10-09: Measured 2026-10-09 on the real 16-queue root (scratchpad rss_phases.py): 18 MB start, 42 MB after import, 240 MB first build, 313-352 MB after rebuilds (peak 352), 339 MB after /cmd rank/goals/check/metrics/witnesses; 118k triples, 4107 nodes. Rebuild holds old+new graph. Pod peaks 536 MB at 512Mi. Chose bigger limit (768Mi) plus MALLOC_ARENA_MAX=2; arena effect not measured.",
       "issued_at": "2026-10-09T12:55:53Z",
       "minted_during": "interrupt",
       "caused_by": "github:W1",
-      "last_worked": "2026-10-09T13:04:39Z",
+      "last_worked": "2026-10-09T14:08:37Z",
       "ticks_blocked": 0,
       "completed": null,
       "weight": 1
@@ -4994,14 +4996,15 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Ship salience, the edge current (flow fibre) and each ready card's absorbed share in graph.json (check manifest.py field gating). Draw them: label and side panel; edge width by current; head order by the demand flowing into it, not by band-dominated rank_pos. Operator 2026-10-09: layout should be salience-directed.",
-      "evidence": "",
+      "next_bounded_step": "Remaining: draw edge width by the flow current (flow fibre) in graph.json and the page; salience order and the label/side-panel salience are shipped. Needs the operator to look at the salience order first (compare with rank order).",
+      "evidence": "2026-10-09: 2026-10-09: salience order checkbox (ec168a8); with it on, a ready card's label carries its salience, e.g. W12 · 3.5",
       "issued_at": "2026-10-09T13:34:02Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-09T13:40:04Z",
+      "last_worked": "2026-10-09T14:08:28Z",
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 3,
+      "completed": null
     },
     {
       "symbol": "W262",
@@ -5096,7 +5099,7 @@
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-09T13:52:13Z"
+    "taken_at": "2026-10-09T14:07:21Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []

@@ -129,7 +129,8 @@ function draw() {
   waits.forEach(e => { if (e.target.startsWith("operator:")) e.chip = chip(e); });
   const actors = [...new Set(waits.filter(e => e.chip).map(e => e.chip))].sort();
   const treemapOn = document.getElementById("treemap").checked;
-  const repos = treemapOn ? [] : [...new Set(data.nodes.filter(n => keep.has(n.id)).map(n => n.repo))];
+  const bySal = document.getElementById("bySalience").checked;  // nemik:W261: salience on the label
+  const repos =treemapOn ? [] : [...new Set(data.nodes.filter(n => keep.has(n.id)).map(n => n.repo))];
   const els = [
     // A repo box counts the unclaimed blocks inside it: each one is that repo's move.
     // Its border reads liveness (asleep/idle/awake), from the same roster the Wake panel
@@ -140,7 +141,7 @@ function draw() {
     }),
     ...data.nodes.filter(n => keep.has(n.id)).map(n => {
       const e = n.effort || {}, total = (e.forecast || 0) + (e.interrupt || 0) + (e.unclassified || 0);
-      return { data: { ...n, parent: treemapOn ? undefined : "repo:" + n.repo, label: n.state === "unclaimed" ? `? ${n.for}` : n.symbol,
+      return { data: { ...n, parent: treemapOn ? undefined : "repo:" + n.repo, label: n.state === "unclaimed" ? `? ${n.for}` : n.symbol + (bySal && n.salience ? ` · ${+n.salience.toFixed(1)}` : ""),
         fill: color(n.state), border: total ? 1 + 6 * (e.interrupt || 0) / total : 1 } };
     }),
     ...actors.map(a => {
