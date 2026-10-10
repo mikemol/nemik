@@ -129,6 +129,34 @@ def age_days(path: Path, today: date) -> int | None:
         return None
 
 
+_ALERT = re.compile(r"-alert-(.+)-(opened|resolved)-([0-9a-f]+)\.md$")
+
+
+def alert_key(path: Path) -> tuple[str, str, str] | None:
+    """(alert name, opened|resolved, alert id) of a machine-generated alert letter, else None."""
+    m = _ALERT.search(path.name)
+    return (m[1], m[2], m[3]) if m else None
+
+
+def alert_closed(
+    owner: str, path: Path, resolved: dict[tuple[str, str, str], str]
+) -> bool:
+    """nemik:W301 (substrate): an alert letter needs no card when its RESOLVED twin is present.
+
+    A `resolved` letter is the end of the pair: nothing is left to act on. An `opened` letter is
+    answered by construction when a `resolved` letter of the same alert name and id is dated the
+    same day or later; an `opened` with none stays live. `resolved` maps (owner, name, id) to the
+    latest resolved date (the file name's `YYYY-MM-DD`).
+    """
+    key = alert_key(path)
+    if key is None:
+        return False
+    name, kind, ident = key
+    if kind == "resolved":
+        return True
+    return resolved.get((owner, name, ident), "") >= path.name[:10]
+
+
 def orphans(root: Path, repo: str | None = None) -> list[tuple[str, Path, bool]]:
     """(repo, letter, answered) for each letter under `<repo>/inbox/` no waypoint cites, for `repo`
     alone when given."""
@@ -139,6 +167,12 @@ def orphans(root: Path, repo: str | None = None) -> list[tuple[str, Path, bool]]
         _queue_text(_load(state))
         for state in sorted(root.glob("*/.claude/paths-forward.json"))
     )
+    resolved: dict[tuple[str, str, str], str] = {}
+    for path in sorted(root.glob("*/inbox/*.md")):
+        key = alert_key(path)
+        if key and key[1] == "resolved":
+            slot = (path.parents[1].name, key[0], key[2])
+            resolved[slot] = max(resolved.get(slot, ""), path.name[:10])
     for path in sorted(root.glob("*/inbox/*.md")):
         owner = path.parents[1].name
         state = root / owner / ".claude" / "paths-forward.json"
@@ -149,7 +183,8 @@ def orphans(root: Path, repo: str | None = None) -> list[tuple[str, Path, bool]]
             path.name not in _queue_text(queue)
             and f"{owner}/inbox/{path.name}" not in fleet
         ):
-            found.append((owner, path, answered(owner, path, queue)))
+            closed = answered(owner, path, queue) or alert_closed(owner, path, resolved)
+            found.append((owner, path, closed))
     return found
 
 
@@ -203,26 +238,80 @@ def archive_commands(
     ]
 
 
+def apply_fold(
+    root: Path,
+    repo: str | None = None,
+    older_than: int | None = None,
+    today: date | None = None,
+    writer: str | None = None,
+    env: dict[str, str] | None = None,
+) -> list[str]:
+    """nemik:W301 (substrate): carry out what `--fold` prints, so the act does not stall at the plan.
+
+    Each live orphan gets its `--add` through this venv's mikemol-paths-forward (the one writer of a
+    queue; `writer` and `env` override it, for a sandbox), and each stale one is moved into its
+    inbox's `archive/`. Idempotent: a letter a waypoint now cites is no longer an orphan, so a
+    second run finds nothing.
+
+    Returns:
+        one line per letter: the symbol minted, mtools' refusal, or the archive move.
+    """
+    import subprocess
+    import sys
+
+    writer = writer or str(Path(sys.executable).parent / "mikemol-paths-forward")
+    live, stale = _split(root, repo, older_than, today or _today())
+    done: list[str] = []
+    for owner, path in live:
+        line = _first_line(path)
+        head = _HEADER.match(line)
+        if head:
+            title = f"Answer {head[1]}: {line[len(head[0]) :].strip()}"
+        else:
+            title = line.lstrip("# ")
+        state = root / owner / ".claude" / "paths-forward.json"
+        cmd = [writer, "--state", str(state), "--add", title[:140]]
+        run = subprocess.run(
+            [*cmd, "--caused-by", f"inbox/{path.name}"],
+            capture_output=True,
+            text=True,
+            check=False,
+            env=env,
+        )
+        done.append(f"{owner}: {(run.stdout or run.stderr).strip()}")
+    for owner, path in stale:
+        (path.parent / "archive").mkdir(exist_ok=True)
+        path.rename(path.parent / "archive" / path.name)
+        done.append(f"{owner}: archived {path.name}")
+    return done
+
+
 def report(
     root: Path,
     workstreams: set[str],
     fold: bool = False,
     repo: str | None = None,
     older_than: int | None = None,
+    apply: bool = False,
 ) -> tuple[list[str], int]:
     """Printable lines and the exit code: 0 clean, 5 when a letter is misdelivered.
 
     With `fold`, the live orphan letters are listed as `--add` commands and the stale ones as `mv`
-    commands into inbox/archive (neither changes the code; nothing is applied). `repo` scopes the
-    orphan listing to one inbox, `older_than` makes a dated orphan stale after that many days.
+    commands into inbox/archive; with `apply` as well they are carried out instead (apply_fold).
+    `repo` scopes the orphan listing AND the misdelivery lines to letters that sit in or are
+    addressed to that repo; `older_than` makes a dated orphan stale after that many days.
     """
     addressed, unaddressed = headers(root)
+    if repo:
+        addressed = [x for x in addressed if repo in (x.inbox, x.recipient)]
     bad = misdelivered(addressed, workstreams)
     lines = [
         f"letters: {len(addressed)} addressed, {len(unaddressed)} without a header"
     ]
     lines += [f"MISDELIVERED {row}" for row in bad]
-    if fold:
+    if fold and apply:
+        lines += apply_fold(root, repo, older_than)
+    elif fold:
         add = fold_commands(root, repo=repo, older_than=older_than)
         move = archive_commands(root, repo=repo, older_than=older_than)
         lines.append(f"live orphans: {len(add)} (no waypoint cites them)")

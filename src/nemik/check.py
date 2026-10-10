@@ -291,6 +291,12 @@ def main(argv: list[str] | None = None) -> None:
         help="with --letters --fold: an uncited letter whose file name is dated more than DAYS "
         "days ago is stale (listed as an archive `mv`), not live",
     )
+    ap.add_argument(
+        "--apply",
+        action="store_true",
+        help="with --letters --fold: carry out the plan: mint each live letter's waypoint through "
+        "mikemol-paths-forward and move each stale letter into its inbox's archive/ (nemik:W301)",
+    )
     args = ap.parse_args(argv)
     if args.realizability:
         sys.exit(_realizability(args.root))
@@ -303,6 +309,7 @@ def main(argv: list[str] | None = None) -> None:
             args.fold,
             args.repo,
             args.older_than,
+            args.apply,
         )
         print("\n".join(said))
         sys.exit(code)

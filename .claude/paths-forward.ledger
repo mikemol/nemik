@@ -477,3 +477,4 @@
 2026-10-10T13:49:30Z  tick  W300 minted    -         "nemik-metrics: nemik_operator_salience{repo} and nemik_operator_asks{repo}, what the operator owes each repo's work"  evidence=operator
 2026-10-10T13:50:43Z  tick  W300 advanced  unblock   "operator-ask salience reaches VTODO PRIORITY (W299) and metrics (W300)"
 2026-10-10T14:10:22Z  tick  --   idle      -         "nothing ready: W282-W297 wait on each repo to claim its inbox fold, W224 on mtools, W260 on github, W201 on luthen, W188 on the operator's token; cron suspended"
+2026-10-10T16:03:30Z  interrupt W301 minted    -         "nemik-check --letters --fold --apply, alert-pair rule, --repo scopes the misdelivery lines (substrate:W301)"  evidence=inbox/2026-10-10-substrate-fold-apply-mode.md

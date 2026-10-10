@@ -98,6 +98,67 @@ def test_an_old_dated_orphan_is_stale_and_the_scope_is_one_repo(tmp_path: Path) 
     assert len(fold_commands(tmp_path, repo="nemik", today=today)) == 2
 
 
+def test_an_alert_pair_needs_no_card_but_an_unresolved_opened_does(
+    tmp_path: Path,
+) -> None:
+    # nemik:W301 (substrate): luthen's `alert OPENED` / `alert RESOLVED` letters pair by alert id.
+    from nemik.letters import archive_commands, fold_commands
+
+    queue = tmp_path / "substrate" / ".claude" / "paths-forward.json"
+    queue.parent.mkdir(parents=True)
+    queue.write_text(
+        '{"version": 1, "project_root": "/x", "counter": 0, "residue": [],'
+        ' "waypoints": []}'
+    )
+    for name in (
+        "2026-09-24-luthen-alert-fell-opened-a02e6095.md",
+        "2026-09-24-luthen-alert-fell-resolved-a02e6095.md",
+        "2026-10-06-luthen-alert-stalled-opened-bbbb1111.md",
+    ):
+        _letter(tmp_path, "substrate", name, "luthen → substrate: alert")
+    (card,) = fold_commands(tmp_path, repo="substrate")
+    assert "stalled-opened-bbbb1111" in card  # no RESOLVED twin: still a card
+    moves = archive_commands(tmp_path, repo="substrate")
+    assert len(moves) == 2 and all("a02e6095" in m for m in moves)
+
+
+def test_apply_mints_the_cards_and_archives_the_stale(tmp_path: Path) -> None:
+    # nemik:W301: --fold --apply does what --fold prints; a second run finds nothing to do.
+    import json
+    from datetime import date
+
+    import installed
+
+    from nemik.letters import apply_fold, orphans
+
+    state = tmp_path / "a" / ".claude" / "paths-forward.json"
+    state.parent.mkdir(parents=True)
+    state.write_text(
+        json.dumps(
+            {
+                "version": 1,
+                "project_root": str(tmp_path / "a"),
+                "counter": 0,
+                "residue": [],
+                "waypoints": [],
+            }
+        )
+    )
+    _letter(tmp_path, "a", "2026-10-09-live.md", "life → a: a live question")
+    _letter(tmp_path, "a", "2026-01-01-old.md", "life → a: long ago")
+    done = apply_fold(
+        tmp_path,
+        "a",
+        14,
+        date(2026, 10, 10),
+        writer=installed.script("mikemol-paths-forward")[0],
+        env=installed._bin()[1],
+    )
+    assert any("W1" in line for line in done)
+    assert (tmp_path / "a" / "inbox" / "archive" / "2026-01-01-old.md").exists()
+    assert orphans(tmp_path, "a") == []
+
+
 def test_a_peer_waypoint_citing_the_letter_path_owns_it(tmp_path: Path) -> None:
     # nemik:W280: the sender's waiting waypoint cites `<repo>/inbox/<file>` in its evidence.
     from nemik.letters import orphans

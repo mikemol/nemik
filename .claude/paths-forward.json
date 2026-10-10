@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 300,
+  "counter": 301,
   "waypoints": [
     {
       "symbol": "W1",
@@ -5757,6 +5757,25 @@
       "last_worked": "2026-10-10T13:49:38Z",
       "ticks_blocked": 0,
       "completed": "20261010T134938Z"
+    },
+    {
+      "symbol": "W301",
+      "title": "nemik-check --letters --fold --apply, alert-pair rule, --repo scopes the misdelivery lines (substrate:W301)",
+      "status": "done",
+      "enables": [
+        "substrate:W301"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-10: letters.apply_fold + check --letters --fold --apply; alert_closed pairs luthen alert opened/resolved letters by name and id; report scopes MISDELIVERED lines with --repo; tests in tests/test_letters.py. Substrate's inbox: 39 live before, 11 live and 28 stale now (plan only, nothing applied).",
+      "issued_at": "2026-10-10T16:03:30Z",
+      "minted_during": "interrupt",
+      "caused_by": "inbox/2026-10-10-substrate-fold-apply-mode.md",
+      "last_worked": "2026-10-10T16:04:01Z",
+      "ticks_blocked": 0,
+      "completed": "20261010T160401Z"
     }
   ],
   "residue": [
