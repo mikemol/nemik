@@ -252,9 +252,24 @@ def main(argv: list[str] | None = None) -> None:
         "repo) is read from an uncommitted or untracked queue: a claim about a peer reaches only "
         "as far as its last commit (nemik:W272, gcalculus:W224). Validates nothing.",
     )
+    ap.add_argument(
+        "--letters",
+        action="store_true",
+        help="check every letter under <repo>/inbox is addressed to that repo (its first line "
+        "`from → to:`); exit 5 when one is misdelivered. Reads the receiving side only; validates "
+        "nothing else (nemik:W271, gcalculus:W224)",
+    )
     args = ap.parse_args(argv)
     if args.realizability:
         sys.exit(_realizability(args.root))
+    if args.letters:
+        from nemik.letters import report
+
+        said, code = report(
+            args.root, {repo for repo, _ in workstream_files(args.root, QUEUE)}
+        )
+        print("\n".join(said))
+        sys.exit(code)
     if args.committed is not None:
         lines = provenance(args.root)
         for line in lines:

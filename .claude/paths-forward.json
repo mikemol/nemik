@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 273,
+  "counter": 274,
   "waypoints": [
     {
       "symbol": "W1",
@@ -5173,39 +5173,42 @@
     {
       "symbol": "W271",
       "title": "Outbound-letter delivery check: every letter a sender cites or addresses to a peer is present in that peer's inbox, as an exit-coded nemik-check mode",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "gcalculus:W224"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "Design: a letter's first line 'A -> B: ...' names the recipient; check that every waypoint caused_by/--enables letter path resolves and that letters headed 'X -> nemik' exist under nemik/inbox; exit 1 with a per-repo count of undelivered. Needs a sender-side record of what was sent (the cited path) because nemik cannot see a letter that was never cited.",
-      "evidence": "",
+      "blocked_on": [
+        "W274"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Receiving side shipped; the sender-side manifest (W274) closes the loop.",
+      "evidence": "2026-10-10: nemik-check --letters (src/nemik/letters.py, tests/test_letters.py): real run over the fleet: 161 letters addressed, 143 without a header, 3 misdelivered: gcalculus/inbox/2026-08-21-gcalculus-your-paraconsistency-is-filed.md (names linux-sources), paperkit/inbox/2026-08-11-paperkit-gcalculus-reply.md (names gcalculus), mikemol.github.io/inbox/2026-08-13-summit-invitation.md (names mikemol-github-io, no such workstream)",
       "issued_at": "2026-10-10T02:31:59Z",
       "minted_during": "tick",
       "caused_by": "gcalculus:W224",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-10T02:35:46Z",
+      "ticks_blocked": 0,
+      "completed": null
     },
     {
       "symbol": "W272",
       "title": "Assert, not only report, that a consumer reads a peer at its last commit: an exit-coded nemik-check mode that fails when a claim rests on a peer's uncommitted queue",
-      "status": "working",
+      "status": "done",
       "enables": [
         "gcalculus:W224"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Design: nemik-check already prints 'provenance: queue <repo> committed|uncommitted'; add --committed so exit 1 means some queue read was uncommitted, and cite it from gcalculus.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-10: 75f1901: nemik-check --committed [REPO...] exits 4 when a named queue is uncommitted or untracked; tests/test_check_committed.py; answered gcalculus in gcalculus/inbox/2026-10-09-nemik-peer-state-witnesses-answered.md",
       "issued_at": "2026-10-10T02:32:00Z",
       "minted_during": "tick",
       "caused_by": "gcalculus:W224",
-      "last_worked": "2026-10-10T02:32:42Z",
+      "last_worked": "2026-10-10T02:35:40Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261010T023540Z"
     },
     {
       "symbol": "W273",
@@ -5222,6 +5225,24 @@
       "issued_at": "2026-10-10T02:32:01Z",
       "minted_during": "tick",
       "caused_by": "gcalculus:W225",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W274",
+      "title": "Sender-side letter manifest: a list of what a repo sent (peer and filename) that nemik-check --letters takes as input, so a letter never delivered becomes visible",
+      "status": "ready",
+      "enables": [
+        "W271"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Design the file (peer<TAB>filename per line, in the sender's repo), then extend nemik.letters to compare it with the peer inboxes; gcalculus offered to emit it.",
+      "evidence": "",
+      "issued_at": "2026-10-10T02:35:41Z",
+      "minted_during": "tick",
+      "caused_by": "gcalculus:W224",
       "last_worked": null,
       "ticks_blocked": 0
     }
