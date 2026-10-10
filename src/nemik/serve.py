@@ -216,7 +216,9 @@ def to_json(g: Graph, findings: dict) -> dict:
                 }
             )
             edges.append({"source": str(s), "target": ask, "kind": "waits"})
-    asks = operator_asks(g)
+    from nemik.blocks import with_salience
+
+    asks = with_salience(g, operator_asks(g))
     for a in asks:
         edges.append(
             {

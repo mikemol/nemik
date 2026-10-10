@@ -338,3 +338,33 @@ def operator_asks(g: Graph) -> list[dict[str, Any]]:
     return sorted(
         out, key=lambda a: (order[a["category"]], -a["ticks_blocked"], a["ref"])
     )
+
+
+def with_salience(g: Graph, asks: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """nemik:W298 (operator 2026-10-10: the waiting-on-operator machinery must carry the salience
+    signal): how much demand waits behind each ask.
+
+    Each ask is a card with no open prerequisite, so in the flow model it is ground: it absorbs the
+    demand of the cards that need it, weighted by the class weights of rank-weights.toml (as seen from
+    the ask's own repo). That absorbed salience is what answering the ask would release, in the same
+    units as nemik-rank. An ask that itself needs another open card carries 0 (its demand flows to
+    that card). Within a category the heaviest ask comes first; ticks blocked break ties.
+    """
+    from nemik.salience import audit
+
+    solved: dict[str, dict[str, Any]] = {}
+    for ask in asks:
+        repo = str(ask["ref"]).partition(":")[0]
+        if repo not in solved:
+            solved[repo] = audit(g, repo).flow.salience
+        ask["salience"] = round(float(solved[repo].get(ask["ref"], 0)), 2)
+    order = {c: i for i, c in enumerate(CATEGORIES)}
+    return sorted(
+        asks,
+        key=lambda a: (
+            order[a["category"]],
+            -a["salience"],
+            -a["ticks_blocked"],
+            a["ref"],
+        ),
+    )

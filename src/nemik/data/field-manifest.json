@@ -12,7 +12,7 @@
       "edges": {"source": "ref", "target": "ref", "kind": "enum", "satisfied": "flag", "current": "count"},
       "inbound": {"blocked": "ref", "blocker": "enum", "claimed_by": "list-ref", "title": "text", "blocked_on": "list-text"},
       "operator": {
-        "ref": "ref", "category": "enum", "title": "text", "ask": "text", "waiting": "list-ref",
+        "ref": "ref", "category": "enum", "title": "text", "ask": "text", "waiting": "list-ref", "salience": "count",
         "same_ask": "list-ref", "ticks_blocked": "count", "last_activity": "time", "dtstart": "time",
         "due": "time", "rrule": "text", "exdates": "list-time", "alarms": "list-text"
       },

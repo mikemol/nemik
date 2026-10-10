@@ -665,7 +665,7 @@ function lane(cat) {
     unstated: "Blocked on you with no stated ask, so you can't tell a decision from a check-in. The agent should state what it needs.",
   }[cat];
   const rows = (data.operator || []).filter(a => a.category === cat).map(a =>
-    `<dt>${citeLink(a.ref)}</dt><dd>${linked(a.ask, a.ref.split(":")[0])}${a.same_ask.length ? `<br><span class="stat">same ask: ${a.same_ask.map(citeLink).join(", ")}</span>` : ""}${(a.waiting || []).length ? `<br><span class="stat">waiting behind this: ${a.waiting.map(citeLink).join(", ")}</span>` : ""}</dd>`);
+    `<dt>${citeLink(a.ref)}${a.salience ? ` <span class="stat" title="demand waiting behind this ask, in nemik-rank units">${a.salience}</span>` : ""}</dt><dd>${linked(a.ask, a.ref.split(":")[0])}${a.same_ask.length ? `<br><span class="stat">same ask: ${a.same_ask.map(citeLink).join(", ")}</span>` : ""}${(a.waiting || []).length ? `<br><span class="stat">waiting behind this: ${a.waiting.map(citeLink).join(", ")}</span>` : ""}</dd>`);
   document.getElementById("detail").innerHTML = `<p class="stat">${esc(help)}</p><dl>${rows.join("")}</dl>`;
 }
 

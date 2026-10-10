@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 297,
+  "counter": 298,
   "waypoints": [
     {
       "symbol": "W1",
@@ -5706,6 +5706,22 @@
       "last_worked": "2026-10-10T06:17:47Z",
       "ticks_blocked": 0,
       "completed": null
+    },
+    {
+      "symbol": "W298",
+      "title": "Operator asks carry the flow salience: the demand behind each ask, heaviest first (nemik-operator, /operator, the lane panel)",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Landed: blocks.with_salience, nemik-operator, graph.json operator rows, the lane panel. Remaining: an ask that waits on another open card shows 0, so surface the prerequisite's salience on it.",
+      "evidence": "",
+      "issued_at": "2026-10-10T13:40:55Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [

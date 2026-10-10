@@ -82,14 +82,18 @@ def operator_main(argv: list[str] | None = None, g: Graph | None = None) -> None
                 g += qg
         for repo, path in workstream_files(root, LEDGER):
             g += ledger_graph(repo, path)[0]
-    asks = operator_asks(g)
+    from nemik.blocks import with_salience
+
+    asks = with_salience(g, operator_asks(g))
     if args.json:
         print(json.dumps(asks, indent=2))
         return
     for cat in CATEGORIES:
         rows = [a for a in asks if a["category"] == cat]
-        print(f"\n{cat} ({len(rows)})")
+        print(f"\n{cat} ({len(rows)}), heaviest first")
         for a in rows:
             dup = f"  same ask as {', '.join(a['same_ask'])}" if a["same_ask"] else ""
             behind = f"  <- {', '.join(a['waiting'])}" if a["waiting"] else ""
-            print(f"  {a['ref']:28} {a['ask'][:70]}{dup}{behind}")
+            # nemik:W298: the demand that waits behind the ask, in nemik-rank's units.
+            weight = f"{a['salience']:6.1f}"
+            print(f"  {weight} {a['ref']:28} {a['ask'][:70]}{dup}{behind}")
