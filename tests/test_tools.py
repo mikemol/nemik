@@ -87,7 +87,14 @@ def test_cmd_output_is_the_cli_output(name, tmp_path, monkeypatch) -> None:
         assert (code, out) == (cli.returncode, cli.stdout)
         return
     cli = installed.run(SCRIPTS[mod], *argv("a"), "--root", str(tmp_path))
-    assert (code, out) == (cli.returncode, cli.stdout)
+
+    def stable(text: str) -> str:
+        # nemik:W270: waypoint ages move with the clock, so two runs a second apart differ.
+        return "\n".join(
+            ln for ln in text.splitlines() if "nemik_waypoint_age_seconds{" not in ln
+        )
+
+    assert (code, stable(out)) == (cli.returncode, stable(cli.stdout))
 
 
 def test_unknown_command_and_bad_repo_are_refused() -> None:
