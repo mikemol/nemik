@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 154
+      "ticks_blocked": 155
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 29,
+      "ticks_blocked": 30,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T12:42:16Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null,
       "weight": 1
     },
@@ -5188,7 +5188,7 @@
       "minted_during": "tick",
       "caused_by": "gcalculus:W224",
       "last_worked": "2026-10-10T02:39:52Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -5213,21 +5213,22 @@
     {
       "symbol": "W273",
       "title": "Pin freshness across repos: report how far a repo's pin of a peer (pinned_files remote and commit, vendored wheels) is behind that peer's HEAD",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "gcalculus:W225"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Design: enumerate pins from each repo's pyproject, MODULE.bazel and vendor README; compare to the peer's HEAD with git rev-list --count; print behind-by per pin; no witness hosting (the substrate tripwire stays a gcalculus board check).",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-10: nemik-pins (src/nemik/pins.py, tests/test_pins.py): real run 2026-10-10: mtools pins 189 commits behind in el-openglo, gcalculus (one pin), life, paperkit, substrate; 173 in linux-sources and summit; gcalculus' other pin 4; paperkit pinned 33 behind by linux-sources, 10 by el-openglo. The substrate tripwire stays a gcalculus board check.",
       "issued_at": "2026-10-10T02:32:01Z",
       "minted_during": "tick",
       "caused_by": "gcalculus:W225",
-      "last_worked": null,
+      "last_worked": "2026-10-10T03:14:28Z",
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 1,
+      "completed": "20261010T031428Z"
     },
     {
       "symbol": "W275",
@@ -5244,7 +5245,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 2
     },
     {
       "symbol": "W276",
@@ -5262,7 +5263,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-10T02:43:56Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "weight": 1,
       "completed": null
     },
@@ -5366,7 +5367,7 @@
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-10T02:43:10Z"
+    "taken_at": "2026-10-10T03:13:12Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []

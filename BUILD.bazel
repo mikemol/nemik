@@ -49,5 +49,6 @@ venv_from_hub(
         "nemik-days": "nemik.calendars:days_main",
         "nemik-calendar-write": "nemik.calwrite:main",
         "nemik-history": "nemik.history:main",
+        "nemik-pins": "nemik.pins:main",
     },
 )
