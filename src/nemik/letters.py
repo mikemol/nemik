@@ -1,5 +1,5 @@
-"""nemik:W271 (gcalculus:W224), W277, W278: is every letter in the inbox it is addressed to, and does
-a waypoint own it?
+"""nemik:W271 (gcalculus:W224), W277, W278, W282: is every letter in the inbox it is addressed to, and
+does a waypoint own it?
 
 A letter is a file under `<repo>/inbox/`. Its first line says who wrote it and to whom
 (`gcalculus → nemik: ...`, or with `->`). This reads the receiving side only: a letter whose header
@@ -8,9 +8,10 @@ no workstream is unaddressable. A letter that was written and never put in any i
 from here.
 
 Operator direction 2026-10-10 (W275): a letter is the evidence of a waypoint in file form. So a
-letter no waypoint of its repo cites (by file name, in `caused_by` or any text field) is an orphan.
-An orphan whose own references to its repo's waypoints are all closed is `answered` (to archive);
-any other is `live`, and `--fold` prints the `--add` that gives it a waypoint.
+letter no waypoint in the fleet cites is an orphan. Each repo migrates its own inbox (W282): an
+orphan is `stale` when its file name carries a date older than `--older-than` days (no waypoint ever
+cited it, so it produced no work) or when everything it names in its own repo is closed; the rest are
+`live`, and `--fold` prints the `--add` that gives each a waypoint and the `mv` that archives the stale.
 """
 
 from __future__ import annotations
@@ -18,6 +19,7 @@ from __future__ import annotations
 import json
 import re
 import shlex
+from datetime import UTC, date, datetime
 from pathlib import Path
 from typing import NamedTuple
 
@@ -25,6 +27,7 @@ _HEADER = re.compile(
     r"^(?:#\s*)?([A-Za-z0-9][\w.-]*)\s*(?:→|->)\s*([A-Za-z0-9][\w.-]*)\s*[:(]"
 )
 _REF = re.compile(r"\b([A-Za-z0-9][\w.-]*):W([1-9][0-9]*)\b")
+_DATED = re.compile(r"^(\d{4})-(\d{2})-(\d{2})-")
 
 
 class Letter(NamedTuple):
@@ -32,6 +35,10 @@ class Letter(NamedTuple):
     name: str
     sender: str
     recipient: str
+
+
+def _today() -> date:
+    return datetime.now(UTC).date()
 
 
 def _first_line(path: Path) -> str:
@@ -111,8 +118,20 @@ def answered(repo: str, path: Path, queue: dict) -> bool:
     return bool(own) and own <= _closed(queue)
 
 
-def orphans(root: Path) -> list[tuple[str, Path, bool]]:
-    """(repo, letter, answered) for each letter under `<repo>/inbox/` no waypoint of `repo` cites."""
+def age_days(path: Path, today: date) -> int | None:
+    """Days since the date in the letter's file name (`YYYY-MM-DD-...`); None when it has none."""
+    m = _DATED.match(path.name)
+    if not m:
+        return None
+    try:
+        return (today - date(int(m[1]), int(m[2]), int(m[3]))).days
+    except ValueError:
+        return None
+
+
+def orphans(root: Path, repo: str | None = None) -> list[tuple[str, Path, bool]]:
+    """(repo, letter, answered) for each letter under `<repo>/inbox/` no waypoint cites, for `repo`
+    alone when given."""
     found: list[tuple[str, Path, bool]] = []
     # nemik:W280: a letter is owned when ANY waypoint in the fleet cites its path (a sender cites
     # `<repo>/inbox/<file>` in the waiting waypoint's evidence), or its own repo's queue names the file.
@@ -121,32 +140,49 @@ def orphans(root: Path) -> list[tuple[str, Path, bool]]:
         for state in sorted(root.glob("*/.claude/paths-forward.json"))
     )
     for path in sorted(root.glob("*/inbox/*.md")):
-        repo = path.parents[1].name
-        state = root / repo / ".claude" / "paths-forward.json"
-        if not state.exists():
+        owner = path.parents[1].name
+        state = root / owner / ".claude" / "paths-forward.json"
+        if (repo and owner != repo) or not state.exists():
             continue
         queue = _load(state)
         if (
             path.name not in _queue_text(queue)
-            and f"{repo}/inbox/{path.name}" not in fleet
+            and f"{owner}/inbox/{path.name}" not in fleet
         ):
-            found.append((repo, path, answered(repo, path, queue)))
+            found.append((owner, path, answered(owner, path, queue)))
     return found
 
 
-def fold_commands(root: Path, pf: str = "mikemol-paths-forward") -> list[str]:
+def _split(
+    root: Path, repo: str | None, older_than: int | None, today: date
+) -> tuple[list[tuple[str, Path]], list[tuple[str, Path]]]:
+    """(live, stale) orphans: stale is answered, or dated more than `older_than` days ago."""
+    live: list[tuple[str, Path]] = []
+    stale: list[tuple[str, Path]] = []
+    for owner, path, closed in orphans(root, repo):
+        age = age_days(path, today)
+        old = older_than is not None and age is not None and age > older_than
+        (stale if closed or old else live).append((owner, path))
+    return live, stale
+
+
+def fold_commands(
+    root: Path,
+    pf: str = "mikemol-paths-forward",
+    repo: str | None = None,
+    older_than: int | None = None,
+    today: date | None = None,
+) -> list[str]:
     """One `--add` per live orphan letter: a waypoint in the recipient whose caused_by is the letter."""
     out: list[str] = []
-    for repo, path, closed in orphans(root):
-        if closed:
-            continue
+    for owner, path in _split(root, repo, older_than, today or _today())[0]:
         line = _first_line(path)
         head = _HEADER.match(line)
         if head:
             title = f"Answer {head[1]}: {line[len(head[0]) :].strip()}"
         else:
             title = line.lstrip("# ")
-        state = root / repo / ".claude" / "paths-forward.json"
+        state = root / owner / ".claude" / "paths-forward.json"
         out.append(
             f"{pf} --state {shlex.quote(str(state))} --add {shlex.quote(title[:140])} "
             f"--caused-by inbox/{path.name}"
@@ -154,22 +190,31 @@ def fold_commands(root: Path, pf: str = "mikemol-paths-forward") -> list[str]:
     return out
 
 
-def archive_commands(root: Path) -> list[str]:
-    """One `mv` per answered orphan, into that repo's `inbox/archive/`."""
+def archive_commands(
+    root: Path,
+    repo: str | None = None,
+    older_than: int | None = None,
+    today: date | None = None,
+) -> list[str]:
+    """One `mv` per stale orphan, into that repo's `inbox/archive/`."""
     return [
         f"mv {shlex.quote(str(path))} {shlex.quote(str(path.parent / 'archive'))}/"
-        for _, path, closed in orphans(root)
-        if closed
+        for _, path in _split(root, repo, older_than, today or _today())[1]
     ]
 
 
 def report(
-    root: Path, workstreams: set[str], fold: bool = False
+    root: Path,
+    workstreams: set[str],
+    fold: bool = False,
+    repo: str | None = None,
+    older_than: int | None = None,
 ) -> tuple[list[str], int]:
     """Printable lines and the exit code: 0 clean, 5 when a letter is misdelivered.
 
-    With `fold`, the live orphan letters are listed as `--add` commands and the answered ones as
-    `mv` commands into inbox/archive (neither changes the code; nothing is applied).
+    With `fold`, the live orphan letters are listed as `--add` commands and the stale ones as `mv`
+    commands into inbox/archive (neither changes the code; nothing is applied). `repo` scopes the
+    orphan listing to one inbox, `older_than` makes a dated orphan stale after that many days.
     """
     addressed, unaddressed = headers(root)
     bad = misdelivered(addressed, workstreams)
@@ -178,9 +223,10 @@ def report(
     ]
     lines += [f"MISDELIVERED {row}" for row in bad]
     if fold:
-        add, move = fold_commands(root), archive_commands(root)
+        add = fold_commands(root, repo=repo, older_than=older_than)
+        move = archive_commands(root, repo=repo, older_than=older_than)
         lines.append(f"live orphans: {len(add)} (no waypoint cites them)")
         lines += add
-        lines.append(f"answered orphans: {len(move)} (everything they name is closed)")
+        lines.append(f"stale orphans: {len(move)} (answered, or older than the cutoff)")
         lines += move
     return lines, 5 if bad else 0

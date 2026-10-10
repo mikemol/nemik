@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 281,
+  "counter": 297,
   "waypoints": [
     {
       "symbol": "W1",
@@ -5035,11 +5035,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": null,
-      "evidence": "2026-10-09: calwrite.events/feed take the calendar label; a calendar:<label> touch routes a waypoint to that calendar only (tests/test_calwrite.py); answered life:W40 in life/inbox/2026-10-09-nemik-w263-calendar-routing.md, incl. nemik-wake --alarms reaches agent sessions, not the phone",
+      "evidence": "2026-10-09: calwrite.events/feed take the calendar label; a calendar:<label> touch routes a waypoint to that calendar only (tests/test_calwrite.py); answered life:W40 in life/inbox/2026-10-09-nemik-w263-calendar-routing.md, incl. nemik-wake --alarms reaches agent sessions, not the phone | 2026-10-10: Letter answered by this card: nemik/inbox/2026-10-09-life-ask-per-waypoint-calendar-routing.md",
       "issued_at": "2026-10-09T13:53:06Z",
       "minted_during": "tick",
       "caused_by": "life:W40",
-      "last_worked": "2026-10-09T13:57:35Z",
+      "last_worked": "2026-10-10T06:18:08Z",
       "ticks_blocked": 0,
       "completed": "20261009T135735Z"
     },
@@ -5358,6 +5358,354 @@
       "ticks_blocked": 0,
       "weight": 1,
       "completed": "20261010T044427Z"
+    },
+    {
+      "symbol": "W282",
+      "title": "Letter migration: every repo folds its own inbox into waypoints, with nemik's per-repo tool",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "W283",
+        "W284",
+        "W285",
+        "W286",
+        "W287",
+        "W288",
+        "W289",
+        "W290",
+        "W291",
+        "W292",
+        "W293",
+        "W294",
+        "W295",
+        "W296",
+        "W297"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Per repo: nemik-check --letters --fold --repo <repo> --older-than 14 prints the mv (stale: answered, or dated over 14 days with no citing waypoint) and the --add (live) lines; the repo applies the mv, mints or claims a card for each live letter, and reports done. One child card per repo, blocked on that repo so nemik-inbound shows it there as a claimable row.",
+      "evidence": "2026-10-10: 2026-10-10 operator: a human pass over the orphan letters is not wanted; a better answered-already signal is a per-repo migration task. Fleet measure with --older-than 14: 69 live orphans, 147 stale (nemik-check --letters --fold --older-than 14). | 2026-10-10: nemik's own inbox folded 2026-10-10: one stale letter and luthen's claim-w170-w299 letter (both cards it names are done) archived; life's routing letter cited on W263",
+      "issued_at": "2026-10-10T06:17:20Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": "2026-10-10T06:18:16Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W283",
+      "title": "Fold aeternum's inbox into waypoints: nemik-check --letters --fold --repo aeternum --older-than 14, apply the mv for the stale, claim or mint a card for each live letter",
+      "status": "blocked",
+      "enables": [
+        "W282"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "aeternum"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Run the command in aeternum's tick, apply the printed mv lines (archive), mint the printed --add for each live letter, then report done to nemik:W282.",
+      "evidence": "",
+      "issued_at": "2026-10-10T06:17:27Z",
+      "minted_during": "interrupt",
+      "caused_by": "W282",
+      "last_worked": "2026-10-10T06:17:28Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W284",
+      "title": "Fold amr-skills's inbox into waypoints: nemik-check --letters --fold --repo amr-skills --older-than 14, apply the mv for the stale, claim or mint a card for each live letter",
+      "status": "blocked",
+      "enables": [
+        "W282"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "amr-skills"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Run the command in amr-skills's tick, apply the printed mv lines (archive), mint the printed --add for each live letter, then report done to nemik:W282.",
+      "evidence": "",
+      "issued_at": "2026-10-10T06:17:28Z",
+      "minted_during": "interrupt",
+      "caused_by": "W282",
+      "last_worked": "2026-10-10T06:17:29Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W285",
+      "title": "Fold el-openglo's inbox into waypoints: nemik-check --letters --fold --repo el-openglo --older-than 14, apply the mv for the stale, claim or mint a card for each live letter",
+      "status": "blocked",
+      "enables": [
+        "W282"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "el-openglo"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Run the command in el-openglo's tick, apply the printed mv lines (archive), mint the printed --add for each live letter, then report done to nemik:W282.",
+      "evidence": "",
+      "issued_at": "2026-10-10T06:17:30Z",
+      "minted_during": "interrupt",
+      "caused_by": "W282",
+      "last_worked": "2026-10-10T06:17:30Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W286",
+      "title": "Fold gabion's inbox into waypoints: nemik-check --letters --fold --repo gabion --older-than 14, apply the mv for the stale, claim or mint a card for each live letter",
+      "status": "blocked",
+      "enables": [
+        "W282"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "gabion"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Run the command in gabion's tick, apply the printed mv lines (archive), mint the printed --add for each live letter, then report done to nemik:W282.",
+      "evidence": "",
+      "issued_at": "2026-10-10T06:17:31Z",
+      "minted_during": "interrupt",
+      "caused_by": "W282",
+      "last_worked": "2026-10-10T06:17:31Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W287",
+      "title": "Fold gcalculus's inbox into waypoints: nemik-check --letters --fold --repo gcalculus --older-than 14, apply the mv for the stale, claim or mint a card for each live letter",
+      "status": "blocked",
+      "enables": [
+        "W282"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "gcalculus"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Run the command in gcalculus's tick, apply the printed mv lines (archive), mint the printed --add for each live letter, then report done to nemik:W282.",
+      "evidence": "",
+      "issued_at": "2026-10-10T06:17:32Z",
+      "minted_during": "interrupt",
+      "caused_by": "W282",
+      "last_worked": "2026-10-10T06:17:33Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W288",
+      "title": "Fold github's inbox into waypoints: nemik-check --letters --fold --repo github --older-than 14, apply the mv for the stale, claim or mint a card for each live letter",
+      "status": "blocked",
+      "enables": [
+        "W282"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "github"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Run the command in github's tick, apply the printed mv lines (archive), mint the printed --add for each live letter, then report done to nemik:W282.",
+      "evidence": "",
+      "issued_at": "2026-10-10T06:17:33Z",
+      "minted_during": "interrupt",
+      "caused_by": "W282",
+      "last_worked": "2026-10-10T06:17:34Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W289",
+      "title": "Fold life's inbox into waypoints: nemik-check --letters --fold --repo life --older-than 14, apply the mv for the stale, claim or mint a card for each live letter",
+      "status": "blocked",
+      "enables": [
+        "W282"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "life"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Run the command in life's tick, apply the printed mv lines (archive), mint the printed --add for each live letter, then report done to nemik:W282.",
+      "evidence": "",
+      "issued_at": "2026-10-10T06:17:35Z",
+      "minted_during": "interrupt",
+      "caused_by": "W282",
+      "last_worked": "2026-10-10T06:17:35Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W290",
+      "title": "Fold linux-sources's inbox into waypoints: nemik-check --letters --fold --repo linux-sources --older-than 14, apply the mv for the stale, claim or mint a card for each live letter",
+      "status": "blocked",
+      "enables": [
+        "W282"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "linux-sources"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Run the command in linux-sources's tick, apply the printed mv lines (archive), mint the printed --add for each live letter, then report done to nemik:W282.",
+      "evidence": "",
+      "issued_at": "2026-10-10T06:17:37Z",
+      "minted_during": "interrupt",
+      "caused_by": "W282",
+      "last_worked": "2026-10-10T06:17:38Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W291",
+      "title": "Fold luthen-observability's inbox into waypoints: nemik-check --letters --fold --repo luthen-observability --older-than 14, apply the mv for the stale, claim or mint a card for each live letter",
+      "status": "blocked",
+      "enables": [
+        "W282"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "luthen-observability"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Run the command in luthen-observability's tick, apply the printed mv lines (archive), mint the printed --add for each live letter, then report done to nemik:W282.",
+      "evidence": "",
+      "issued_at": "2026-10-10T06:17:39Z",
+      "minted_during": "interrupt",
+      "caused_by": "W282",
+      "last_worked": "2026-10-10T06:17:40Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W292",
+      "title": "Fold mtools's inbox into waypoints: nemik-check --letters --fold --repo mtools --older-than 14, apply the mv for the stale, claim or mint a card for each live letter",
+      "status": "blocked",
+      "enables": [
+        "W282"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "mtools"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Run the command in mtools's tick, apply the printed mv lines (archive), mint the printed --add for each live letter, then report done to nemik:W282.",
+      "evidence": "",
+      "issued_at": "2026-10-10T06:17:40Z",
+      "minted_during": "interrupt",
+      "caused_by": "W282",
+      "last_worked": "2026-10-10T06:17:41Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W293",
+      "title": "Fold paperkit's inbox into waypoints: nemik-check --letters --fold --repo paperkit --older-than 14, apply the mv for the stale, claim or mint a card for each live letter",
+      "status": "blocked",
+      "enables": [
+        "W282"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "paperkit"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Run the command in paperkit's tick, apply the printed mv lines (archive), mint the printed --add for each live letter, then report done to nemik:W282.",
+      "evidence": "",
+      "issued_at": "2026-10-10T06:17:41Z",
+      "minted_during": "interrupt",
+      "caused_by": "W282",
+      "last_worked": "2026-10-10T06:17:42Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W294",
+      "title": "Fold resumes's inbox into waypoints: nemik-check --letters --fold --repo resumes --older-than 14, apply the mv for the stale, claim or mint a card for each live letter",
+      "status": "blocked",
+      "enables": [
+        "W282"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "resumes"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Run the command in resumes's tick, apply the printed mv lines (archive), mint the printed --add for each live letter, then report done to nemik:W282.",
+      "evidence": "",
+      "issued_at": "2026-10-10T06:17:43Z",
+      "minted_during": "interrupt",
+      "caused_by": "W282",
+      "last_worked": "2026-10-10T06:17:44Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W295",
+      "title": "Fold rosettapkg's inbox into waypoints: nemik-check --letters --fold --repo rosettapkg --older-than 14, apply the mv for the stale, claim or mint a card for each live letter",
+      "status": "blocked",
+      "enables": [
+        "W282"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "rosettapkg"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Run the command in rosettapkg's tick, apply the printed mv lines (archive), mint the printed --add for each live letter, then report done to nemik:W282.",
+      "evidence": "",
+      "issued_at": "2026-10-10T06:17:45Z",
+      "minted_during": "interrupt",
+      "caused_by": "W282",
+      "last_worked": "2026-10-10T06:17:45Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W296",
+      "title": "Fold substrate's inbox into waypoints: nemik-check --letters --fold --repo substrate --older-than 14, apply the mv for the stale, claim or mint a card for each live letter",
+      "status": "blocked",
+      "enables": [
+        "W282"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "substrate"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Run the command in substrate's tick, apply the printed mv lines (archive), mint the printed --add for each live letter, then report done to nemik:W282.",
+      "evidence": "",
+      "issued_at": "2026-10-10T06:17:46Z",
+      "minted_during": "interrupt",
+      "caused_by": "W282",
+      "last_worked": "2026-10-10T06:17:46Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W297",
+      "title": "Fold summit's inbox into waypoints: nemik-check --letters --fold --repo summit --older-than 14, apply the mv for the stale, claim or mint a card for each live letter",
+      "status": "blocked",
+      "enables": [
+        "W282"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "summit"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Run the command in summit's tick, apply the printed mv lines (archive), mint the printed --add for each live letter, then report done to nemik:W282.",
+      "evidence": "",
+      "issued_at": "2026-10-10T06:17:47Z",
+      "minted_during": "interrupt",
+      "caused_by": "W282",
+      "last_worked": "2026-10-10T06:17:47Z",
+      "ticks_blocked": 0,
+      "completed": null
     }
   ],
   "residue": [

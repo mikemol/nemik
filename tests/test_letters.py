@@ -73,6 +73,31 @@ def test_an_orphan_whose_waypoints_are_all_closed_is_archived_not_folded(
     assert move.startswith("mv ") and "done.md" in move and move.endswith("/archive/")
 
 
+def test_an_old_dated_orphan_is_stale_and_the_scope_is_one_repo(tmp_path: Path) -> None:
+    # nemik:W282: each repo migrates its own inbox; a letter nothing cited for N days is archived.
+    from datetime import date
+
+    from nemik.letters import archive_commands, fold_commands
+
+    for repo in ("nemik", "life"):
+        queue = tmp_path / repo / ".claude" / "paths-forward.json"
+        queue.parent.mkdir(parents=True)
+        queue.write_text(
+            '{"version": 1, "project_root": "/x", "counter": 0, "residue": [],'
+            ' "waypoints": []}'
+        )
+    _letter(tmp_path, "nemik", "2026-08-01-old.md", "life → nemik: long ago")
+    _letter(tmp_path, "nemik", "2026-10-09-new.md", "life → nemik: yesterday")
+    _letter(tmp_path, "life", "2026-08-01-other.md", "nemik → life: not nemik's")
+    today = date(2026, 10, 10)
+    (add,) = fold_commands(tmp_path, repo="nemik", older_than=14, today=today)
+    assert "2026-10-09-new.md" in add
+    (move,) = archive_commands(tmp_path, repo="nemik", older_than=14, today=today)
+    assert "2026-08-01-old.md" in move and "life/inbox" not in move
+    # without a cutoff nothing is stale, and every letter is live
+    assert len(fold_commands(tmp_path, repo="nemik", today=today)) == 2
+
+
 def test_a_peer_waypoint_citing_the_letter_path_owns_it(tmp_path: Path) -> None:
     # nemik:W280: the sender's waiting waypoint cites `<repo>/inbox/<file>` in its evidence.
     from nemik.letters import orphans

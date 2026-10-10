@@ -278,6 +278,19 @@ def main(argv: list[str] | None = None) -> None:
         help="with --letters: also list, as --add commands, every letter no waypoint of its repo "
         "cites (a letter is a waypoint's evidence in file form; nemik:W277). Applies nothing.",
     )
+    ap.add_argument(
+        "--repo",
+        metavar="REPO",
+        help="with --letters --fold: list only this repo's inbox (each repo migrates its own; "
+        "nemik:W282)",
+    )
+    ap.add_argument(
+        "--older-than",
+        type=int,
+        metavar="DAYS",
+        help="with --letters --fold: an uncited letter whose file name is dated more than DAYS "
+        "days ago is stale (listed as an archive `mv`), not live",
+    )
     args = ap.parse_args(argv)
     if args.realizability:
         sys.exit(_realizability(args.root))
@@ -288,6 +301,8 @@ def main(argv: list[str] | None = None) -> None:
             args.root,
             {repo for repo, _ in workstream_files(args.root, QUEUE)},
             args.fold,
+            args.repo,
+            args.older_than,
         )
         print("\n".join(said))
         sys.exit(code)
