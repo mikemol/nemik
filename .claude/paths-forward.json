@@ -5287,20 +5287,21 @@
     {
       "symbol": "W278",
       "title": "Orphan-letter triage: 257 letters no waypoint cites; classify by age and by whether a done waypoint of that repo already names the sender or subject, so --fold proposes only the live ones and the rest are archived",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W275"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Add to nemik.letters an age and answered-already signal (a done waypoint whose title or evidence cites the sender and a subject word, or the letter's W<n> refs all done); --fold lists the unanswered, --fold --archive lists the rest as mv commands to inbox/archive; nothing applied.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-10: nemik.letters: answered() (a letter naming its own repo's waypoints, all closed) splits orphans into live (--add) and answered (mv to inbox/archive); tests/test_letters.py. Real run 2026-10-10: 243 live, 14 answered. The signal is weak because letters mostly name the SENDER's waypoints; the remaining 243 need a better answered-already signal (the recipient's ledger or a done card naming the sender) or a human pass. Residue, not a fix.",
       "issued_at": "2026-10-10T02:45:03Z",
       "minted_during": "tick",
       "caused_by": "operator",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-10T02:46:48Z",
+      "ticks_blocked": 0,
+      "completed": "20261010T024648Z"
     }
   ],
   "residue": [

@@ -52,6 +52,27 @@ def test_fold_proposes_a_waypoint_for_each_letter_no_waypoint_cites(
     assert str(queue) in cmd
 
 
+def test_an_orphan_whose_waypoints_are_all_closed_is_archived_not_folded(
+    tmp_path: Path,
+) -> None:
+    # nemik:W278: what the letter names has landed, so it is answered; one naming an open card is live.
+    from nemik.letters import archive_commands, fold_commands
+
+    queue = tmp_path / "nemik" / ".claude" / "paths-forward.json"
+    queue.parent.mkdir(parents=True)
+    queue.write_text(
+        '{"version": 1, "project_root": "/x", "counter": 2, "residue": [],'
+        ' "waypoints": [{"symbol": "W1", "title": "t", "status": "done"},'
+        ' {"symbol": "W2", "title": "u", "status": "ready"}]}'
+    )
+    _letter(tmp_path, "nemik", "done.md", "life → nemik: about nemik:W1")
+    _letter(tmp_path, "nemik", "open.md", "life → nemik: about nemik:W2")
+    assert len(fold_commands(tmp_path)) == 1
+    assert "--caused-by inbox/open.md" in fold_commands(tmp_path)[0]
+    (move,) = archive_commands(tmp_path)
+    assert move.startswith("mv ") and "done.md" in move and move.endswith("/archive/")
+
+
 def test_the_command_exits_5_only_when_a_letter_is_misdelivered(
     tmp_path: Path, capsys
 ) -> None:

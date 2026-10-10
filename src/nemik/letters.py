@@ -1,5 +1,5 @@
-"""nemik:W271 (gcalculus:W224), W277: is every letter in the inbox it is addressed to, and does a
-waypoint own it?
+"""nemik:W271 (gcalculus:W224), W277, W278: is every letter in the inbox it is addressed to, and does
+a waypoint own it?
 
 A letter is a file under `<repo>/inbox/`. Its first line says who wrote it and to whom
 (`gcalculus → nemik: ...`, or with `->`). This reads the receiving side only: a letter whose header
@@ -8,8 +8,9 @@ no workstream is unaddressable. A letter that was written and never put in any i
 from here.
 
 Operator direction 2026-10-10 (W275): a letter is the evidence of a waypoint in file form. So a
-letter no waypoint of its repo cites (by file name, in `caused_by` or any text field) is an orphan,
-and `--fold` prints the `--add` that gives it a waypoint.
+letter no waypoint of its repo cites (by file name, in `caused_by` or any text field) is an orphan.
+An orphan whose own references to its repo's waypoints are all closed is `answered` (to archive);
+any other is `live`, and `--fold` prints the `--add` that gives it a waypoint.
 """
 
 from __future__ import annotations
@@ -23,6 +24,7 @@ from typing import NamedTuple
 _HEADER = re.compile(
     r"^(?:#\s*)?([A-Za-z0-9][\w.-]*)\s*(?:→|->)\s*([A-Za-z0-9][\w.-]*)\s*[:(]"
 )
+_REF = re.compile(r"\b([A-Za-z0-9][\w.-]*):W([1-9][0-9]*)\b")
 
 
 class Letter(NamedTuple):
@@ -65,12 +67,16 @@ def misdelivered(letters: list[Letter], workstreams: set[str]) -> list[str]:
     return out
 
 
-def _queue_text(path: Path) -> str:
-    """Every string in a repo's queue, joined: a letter is cited if its file name appears in it."""
+def _load(path: Path) -> dict:
     try:
         data = json.loads(path.read_text())
     except (OSError, json.JSONDecodeError):
-        return ""
+        return {}
+    return data if isinstance(data, dict) else {}
+
+
+def _queue_text(queue: dict) -> str:
+    """Every string in a parsed queue, joined: a letter is cited if its file name appears in it."""
     strings: list[str] = []
 
     def walk(node: object) -> None:
@@ -83,25 +89,48 @@ def _queue_text(path: Path) -> str:
             for item in node.values():
                 walk(item)
 
-    walk(data)
+    walk(queue)
     return "\n".join(strings)
 
 
-def orphans(root: Path) -> list[tuple[str, Path]]:
-    """(repo, letter) for each letter under `<repo>/inbox/` that no waypoint of `repo` cites."""
-    found: list[tuple[str, Path]] = []
+def _closed(queue: dict) -> set[str]:
+    done = {
+        w["symbol"] for w in queue.get("waypoints", []) if w.get("status") == "done"
+    }
+    return done | {r["symbol"] for r in queue.get("residue", [])}
+
+
+def answered(repo: str, path: Path, queue: dict) -> bool:
+    """True when the letter names waypoints of `repo` and every one of them is closed: what it
+    asked about has landed or been dropped. A letter naming none of `repo`'s waypoints is live."""
+    own = {
+        f"W{m[2]}"
+        for m in _REF.finditer(path.read_text(errors="replace"))
+        if m[1] == repo
+    }
+    return bool(own) and own <= _closed(queue)
+
+
+def orphans(root: Path) -> list[tuple[str, Path, bool]]:
+    """(repo, letter, answered) for each letter under `<repo>/inbox/` no waypoint of `repo` cites."""
+    found: list[tuple[str, Path, bool]] = []
     for path in sorted(root.glob("*/inbox/*.md")):
         repo = path.parents[1].name
-        queue = root / repo / ".claude" / "paths-forward.json"
-        if queue.exists() and path.name not in _queue_text(queue):
-            found.append((repo, path))
+        state = root / repo / ".claude" / "paths-forward.json"
+        if not state.exists():
+            continue
+        queue = _load(state)
+        if path.name not in _queue_text(queue):
+            found.append((repo, path, answered(repo, path, queue)))
     return found
 
 
 def fold_commands(root: Path, pf: str = "mikemol-paths-forward") -> list[str]:
-    """One `--add` per orphan letter: a waypoint in the recipient whose caused_by is the letter."""
+    """One `--add` per live orphan letter: a waypoint in the recipient whose caused_by is the letter."""
     out: list[str] = []
-    for repo, path in orphans(root):
+    for repo, path, closed in orphans(root):
+        if closed:
+            continue
         line = _first_line(path)
         head = _HEADER.match(line)
         if head:
@@ -116,12 +145,22 @@ def fold_commands(root: Path, pf: str = "mikemol-paths-forward") -> list[str]:
     return out
 
 
+def archive_commands(root: Path) -> list[str]:
+    """One `mv` per answered orphan, into that repo's `inbox/archive/`."""
+    return [
+        f"mv {shlex.quote(str(path))} {shlex.quote(str(path.parent / 'archive'))}/"
+        for _, path, closed in orphans(root)
+        if closed
+    ]
+
+
 def report(
     root: Path, workstreams: set[str], fold: bool = False
 ) -> tuple[list[str], int]:
     """Printable lines and the exit code: 0 clean, 5 when a letter is misdelivered.
 
-    With `fold`, the orphan letters are listed as `--add` commands (and do not change the code).
+    With `fold`, the live orphan letters are listed as `--add` commands and the answered ones as
+    `mv` commands into inbox/archive (neither changes the code; nothing is applied).
     """
     addressed, unaddressed = headers(root)
     bad = misdelivered(addressed, workstreams)
@@ -130,7 +169,9 @@ def report(
     ]
     lines += [f"MISDELIVERED {row}" for row in bad]
     if fold:
-        cmds = fold_commands(root)
-        lines.append(f"orphans: {len(cmds)} letters no waypoint cites")
-        lines += cmds
+        add, move = fold_commands(root), archive_commands(root)
+        lines.append(f"live orphans: {len(add)} (no waypoint cites them)")
+        lines += add
+        lines.append(f"answered orphans: {len(move)} (everything they name is closed)")
+        lines += move
     return lines, 5 if bad else 0
