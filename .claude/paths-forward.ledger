@@ -454,3 +454,4 @@
 2026-10-10T03:46:58Z  tick  W280 minted    -         "nemik-check --letters counts a letter as owned when any waypoint in the fleet cites its path, not only its own repo's queue"  evidence=W275
 2026-10-10T04:15:09Z  redact W270 redacted  --        "sha256:bec9c6ea55f9 n=1"
 2026-10-10T04:23:16Z  tick  W276 advanced  unblock   "mtools c4d4b56 re-vendored via tools/revendor-mtools.sh; attachments read; main briefly lacked the wheels (gitignore) and was repaired in 833ba2e; pre-commit now refuses an untracked wheel"
+2026-10-10T04:32:52Z  interrupt W281 minted    -         "Re-vendor mtools at 842ab10 or later so --check reports a missing, non-regular or hash-changed attachment (mtools:W932)"  evidence=mtools:W932

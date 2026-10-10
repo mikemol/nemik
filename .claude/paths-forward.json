@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 280,
+  "counter": 281,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 157
+      "ticks_blocked": 158
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 32,
+      "ticks_blocked": 33,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T12:42:16Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 10,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "completed": null,
       "weight": 1
     },
@@ -5188,7 +5188,7 @@
       "minted_during": "tick",
       "caused_by": "gcalculus:W224",
       "last_worked": "2026-10-10T02:39:52Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "completed": null
     },
     {
@@ -5341,6 +5341,24 @@
       "ticks_blocked": 0,
       "weight": 2,
       "completed": "20261010T041514Z"
+    },
+    {
+      "symbol": "W281",
+      "title": "Re-vendor mtools at 842ab10 or later so --check reports a missing, non-regular or hash-changed attachment (mtools:W932)",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-10: re-vendored at 842ab10 with tools/revendor-mtools.sh (now -q); README history and hashes updated; --check on nemik's queue still OK",
+      "issued_at": "2026-10-10T04:32:52Z",
+      "minted_during": "interrupt",
+      "caused_by": "mtools:W932",
+      "last_worked": "2026-10-10T04:44:27Z",
+      "ticks_blocked": 0,
+      "weight": 1,
+      "completed": "20261010T044427Z"
     }
   ],
   "residue": [
@@ -5405,7 +5423,7 @@
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-10T04:13:11Z"
+    "taken_at": "2026-10-10T04:43:14Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []

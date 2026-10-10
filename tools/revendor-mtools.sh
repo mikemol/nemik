@@ -20,7 +20,7 @@ trap 'rm -rf "$tmp"' EXIT
 for dist in pathsforward icsstruct hooks; do
 	git -C "$mtools" archive "$new" -- "$dist" | tar -x -C "$tmp"
 	sed -i "s/^version = .*/version = \"0.1.0+$short\"/" "$tmp/$dist/pyproject.toml"
-	(cd "$tmp/$dist" && uv build --wheel -o "$out")
+	(cd "$tmp/$dist" && uv build -q --wheel -o "$out")
 done
 
 for file in "$here/pyproject.toml" "$here/MODULE.bazel"; do
