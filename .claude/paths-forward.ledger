@@ -448,3 +448,4 @@
 2026-10-10T02:39:46Z  interrupt W277 minted    -         "Fold the existing inbox letters into waypoints: a nemik-letters --fold mode proposes, for each inbox letter with no citing waypoint, the card to mint in the recipient with the letter as its evidence"  evidence=operator
 2026-10-10T02:45:03Z  tick  W278 minted    -         "Orphan-letter triage: 257 letters no waypoint cites; classify by age and by whether a done waypoint of that repo already names the sender or subject, so --fold proposes only the live ones and the rest are archived"  evidence=operator
 2026-10-10T02:48:42Z  tick  W278 advanced  sweep     "letters --fold (W277) and orphan triage (W278); W276 asked of mtools; 243 live orphan letters need a better answered signal or a human pass"
+2026-10-10T03:16:59Z  tick  W273 advanced  unblock   "nemik-pins shipped; gcalculus told, with the W274 correction"
