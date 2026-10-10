@@ -37,7 +37,11 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         for _, qg, _ in survey(args.root):
             if qg is not None:
                 g += qg
-    blocks = [b for b in inbound(g) if not args.repo or b["blocker"] == args.repo]
+    blocks = [
+        b
+        for b in inbound(g, letters=True)
+        if not args.repo or b["blocker"] == args.repo
+    ]
     if args.json:
         print(json.dumps(blocks, indent=2))
         return
@@ -49,8 +53,10 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
             if b["claimed_by"]
             else f"  -- waiting on you, claim with --enables {b['blocked']}"
         )
+        # nemik:W275: the letter files the waiting waypoint cites as evidence, after the hint.
+        letters = f"  [letter: {', '.join(b['letters'])}]" if b["letters"] else ""
         print(
-            f"{b['blocker']:24} <- {b['blocked']:28} {claim:28} {b['title'][:60]}{hint}"
+            f"{b['blocker']:24} <- {b['blocked']:28} {claim:28} {b['title'][:60]}{hint}{letters}"
         )
 
 

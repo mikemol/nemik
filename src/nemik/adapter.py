@@ -152,6 +152,14 @@ def queue_graph(
             g.add((node, NEMIK.vector, Literal(vec)))
         if src := model.text(w, "vector_source"):
             g.add((node, NEMIK.vectorSource, Literal(src)))
+        # nemik:W275 (operator 2026-10-10: a letter is a waypoint's evidence in file form): the letter
+        # files a waypoint cites in its evidence or next step, as written. Paths only: the evidence
+        # text itself stays out of the graph.
+        for text in (model.text(w, "evidence"), model.text(w, "next_bounded_step")):
+            for path in re.findall(
+                r"(?:[\w.-]+/inbox/[\w./-]+\.md|\.claude/letters/[\w./-]+\.md)", text
+            ):
+                g.add((node, NEMIK.letter, Literal(path)))
         # mtools:W300: RFC 5545 DTSTART/DUE values, kept exactly as written (a DATE, a UTC
         # DATE-TIME, or TZID=Zone:local); nemik.vtodo renders them as properties (nemik:W134).
         for field, pred in (("dtstart", NEMIK.dtstart), ("due", NEMIK.due)):

@@ -43,8 +43,13 @@ def _repo(node: Node) -> str:
     return str(node).removeprefix(BASE).partition("/")[0]
 
 
-def inbound(g: Graph) -> list[dict[str, Any]]:
-    """Every open waypoint waiting on another workstream, with the blocker's claiming waypoints."""
+def inbound(g: Graph, letters: bool = False) -> list[dict[str, Any]]:
+    """Every open waypoint waiting on another workstream, with the blocker's claiming waypoints.
+
+    With `letters`, each row also carries the letter files the waiting waypoint cites (nemik:W275):
+    the CLI shows them; the served and published documents leave them out, since a file name can
+    say more than the title it sits beside.
+    """
     out: list[dict[str, Any]] = []
     for node, _, target in g.triples((None, NEMIK.waitsFor, None)):
         if (node, OSLC_CM.state, NEMIK.Done) in g:
@@ -68,15 +73,16 @@ def inbound(g: Graph) -> list[dict[str, Any]]:
         }
         if named is not None:
             claims.add(named)
-        out.append(
-            {
-                "blocked": ref(node),
-                "title": str(g.value(node, DCTERMS.title) or ""),
-                "blocked_on": sorted(str(o) for o in g.objects(node, NEMIK.blockedOn)),
-                "blocker": blocker,
-                "claimed_by": sorted(ref(c) for c in claims),
-            }
-        )
+        row: dict[str, Any] = {
+            "blocked": ref(node),
+            "title": str(g.value(node, DCTERMS.title) or ""),
+            "blocked_on": sorted(str(o) for o in g.objects(node, NEMIK.blockedOn)),
+            "blocker": blocker,
+            "claimed_by": sorted(ref(c) for c in claims),
+        }
+        if letters:
+            row["letters"] = sorted(str(o) for o in g.objects(node, NEMIK.letter))
+        out.append(row)
     return sorted(out, key=lambda b: (b["blocker"], b["blocked"], b["claimed_by"]))
 
 

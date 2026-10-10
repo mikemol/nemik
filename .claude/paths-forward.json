@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 155
+      "ticks_blocked": 156
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 30,
+      "ticks_blocked": 31,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T12:42:16Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "completed": null,
       "weight": 1
     },
@@ -5188,7 +5188,7 @@
       "minted_during": "tick",
       "caused_by": "gcalculus:W224",
       "last_worked": "2026-10-10T02:39:52Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null
     },
     {
@@ -5238,12 +5238,12 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Design the convention: letters live in the sender's repo (.claude/letters/<W>-<slug>.md), the addressed object is the waypoint edge (--enables or blocked_on peer:W<n>), the file is its evidence; decide the cite grammar and what the recipient sees.",
-      "evidence": "",
+      "next_bounded_step": "Step 1 landed: adapter reads cited letter paths into nemik:letter and nemik-inbound shows them. Remaining: (a) nemik-check resolves each cited path under the root (a Finding when it does not exist), (b) --letters counts a letter as owned when ANY waypoint across the fleet cites its path, not only its own repo's, (c) the mtools --attach field (W276) replaces the regex over free-text evidence.",
+      "evidence": "2026-10-10: 2026-10-10: adapter nemik:letter (paths from evidence and next_bounded_step), inbound(letters=True), nemik-inbound [letter: ...]; tests/test_inbound_letters.py; real run shows gcalculus:W224 and W225 carrying their letter",
       "issued_at": "2026-10-10T02:39:43Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": null,
+      "last_worked": "2026-10-10T03:45:07Z",
       "ticks_blocked": 0,
       "weight": 2
     },
@@ -5263,7 +5263,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-10T02:43:56Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "weight": 1,
       "completed": null
     },
@@ -5365,7 +5365,10 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-10-10T03:43:13Z"
+  },
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }
