@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 158
+      "ticks_blocked": 159
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 33,
+      "ticks_blocked": 34,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T12:42:16Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 10,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "completed": null,
       "weight": 1
     },
@@ -5173,23 +5173,21 @@
     {
       "symbol": "W271",
       "title": "Outbound-letter delivery check: every letter a sender cites or addresses to a peer is present in that peer's inbox, as an exit-coded nemik-check mode",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "gcalculus:W224"
       ],
       "touches": [],
-      "blocked_on": [
-        "W275"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Receiving-side check shipped; once letters are waypoint evidence (W275), 'delivered' means 'cited by a waypoint', and --letters becomes the orphan detector.",
-      "evidence": "2026-10-10: nemik-check --letters (src/nemik/letters.py, tests/test_letters.py): real run over the fleet: 161 letters addressed, 143 without a header, 3 misdelivered: gcalculus/inbox/2026-08-21-gcalculus-your-paraconsistency-is-filed.md (names linux-sources), paperkit/inbox/2026-08-11-paperkit-gcalculus-reply.md (names gcalculus), mikemol.github.io/inbox/2026-08-13-summit-invitation.md (names mikemol-github-io, no such workstream)",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-10: nemik-check --letters (src/nemik/letters.py, tests/test_letters.py): real run over the fleet: 161 letters addressed, 143 without a header, 3 misdelivered: gcalculus/inbox/2026-08-21-gcalculus-your-paraconsistency-is-filed.md (names linux-sources), paperkit/inbox/2026-08-11-paperkit-gcalculus-reply.md (names gcalculus), mikemol.github.io/inbox/2026-08-13-summit-invitation.md (names mikemol-github-io, no such workstream) | 2026-10-10: closed with W275: receiving-side nemik-check --letters (misdelivery, orphans, --fold), and 'delivered' now means cited by a waypoint (W275, W279, W280); gcalculus told in gcalculus/inbox/2026-10-10-nemik-pin-freshness-shipped.md",
       "issued_at": "2026-10-10T02:31:59Z",
       "minted_during": "tick",
       "caused_by": "gcalculus:W224",
-      "last_worked": "2026-10-10T02:39:52Z",
-      "ticks_blocked": 5,
-      "completed": null
+      "last_worked": "2026-10-10T04:46:44Z",
+      "ticks_blocked": 0,
+      "completed": "20261010T044644Z"
     },
     {
       "symbol": "W272",
@@ -5233,19 +5231,20 @@
     {
       "symbol": "W275",
       "title": "Letters become the evidence of a waypoint in file form: a waypoint's evidence or caused_by may cite a letter file (letter:<path>), nemik-inbound prints it beside each waiting row, and nemik-check resolves it like any citation",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Step 1 landed: adapter reads cited letter paths into nemik:letter and nemik-inbound shows them. Remaining: (a) nemik-check resolves each cited path under the root (a Finding when it does not exist), (b) --letters counts a letter as owned when ANY waypoint across the fleet cites its path, not only its own repo's, (c) the mtools --attach field (W276) replaces the regex over free-text evidence.",
-      "evidence": "2026-10-10: 2026-10-10: adapter nemik:letter (paths from evidence and next_bounded_step), inbound(letters=True), nemik-inbound [letter: ...]; tests/test_inbound_letters.py; real run shows gcalculus:W224 and W225 carrying their letter",
+      "next_bounded_step": null,
+      "evidence": "2026-10-10: 2026-10-10: adapter nemik:letter (paths from evidence and next_bounded_step), inbound(letters=True), nemik-inbound [letter: ...]; tests/test_inbound_letters.py; real run shows gcalculus:W224 and W225 carrying their letter | 2026-10-10: 2026-10-10: the design is built: a letter is a waypoint's evidence in file form. Cited paths (evidence, next step, or mtools attachments with sha256) become nemik:letter; nemik-inbound shows them (W275 step 1); nemik-check warns on a cited letter that does not exist (W279); an orphan letter is one no waypoint in the fleet cites (W280, W278 triage, W277 --fold proposals); mtools --attach with --check on hash drift (W276, W281). Practice from here: cite or attach the letter on the waiting waypoint; 243 old orphans await a human pass.",
       "issued_at": "2026-10-10T02:39:43Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-10T03:45:07Z",
+      "last_worked": "2026-10-10T04:46:39Z",
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 2,
+      "completed": "20261010T044639Z"
     },
     {
       "symbol": "W276",
@@ -5421,10 +5420,7 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": {
-    "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-10T04:43:14Z"
-  },
+  "lock": null,
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }
