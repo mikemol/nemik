@@ -50,6 +50,31 @@ def test_the_adapter_reads_letter_paths_from_evidence_and_the_next_step(
     }
 
 
+def test_the_adapter_reads_mtools_attachments_as_cited_letters(tmp_path: Path) -> None:
+    # nemik:W276: mtools' `--attach PATH` stores {path, sha256}; the path is the citation.
+    path = tmp_path / "q.json"
+    waypoint = {
+        "symbol": "W1",
+        "title": "t",
+        "status": "ready",
+        "attachments": [{"path": ".claude/letters/W1-ask.md", "sha256": "a" * 64}],
+    }
+    path.write_text(
+        json.dumps(
+            {
+                "version": 1,
+                "project_root": "/x",
+                "counter": 1,
+                "residue": [],
+                "waypoints": [waypoint],
+            }
+        )
+    )
+    g = queue_graph("a", path)
+    found = {str(o) for o in g.objects(waypoint_uri("a", "W1"), NEMIK.letter)}
+    assert found == {".claude/letters/W1-ask.md"}
+
+
 def test_inbound_carries_the_letters_only_when_asked() -> None:
     g = Graph()
     g.add((workstream_uri("b"), RDF.type, NEMIK.Workstream))

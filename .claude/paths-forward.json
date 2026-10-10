@@ -5250,20 +5250,20 @@
     {
       "symbol": "W276",
       "title": "Ask mtools for an attach mode: --update W<n> --attach PATH stores a file reference plus content hash in the waypoint's evidence, so a letter is a first-class evidence file and mtools stays the only writer",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "mtools shipped --attach (W930 2a7866f, W931 c4d4b56): attachments [{path, sha256}] on the waypoint. Re-vendor the mtools wheels at c4d4b56 or later (vendor/wheels, pyproject.toml, MODULE.bazel, uv.lock, README), then read attachments in the adapter beside the free-text regex, and show them in nemik-inbound. W932 (a --check finding for a missing or changed attachment) is next on mtools.",
-      "evidence": "2026-10-10: 2026-10-10: letter written to mtools: --attach PATH stores {path, sha256}; --check flags missing or hash-changed; repo-relative only. | 2026-10-10: 2026-10-10 mtools-2a: --attach PATH is repo-relative, sha256 of the bytes; refused (exit 2) for absolute, .., missing, directory or link paths; re-attaching replaces the hash; --check reports a malformed entry.",
+      "next_bounded_step": null,
+      "evidence": "2026-10-10: 2026-10-10: letter written to mtools: --attach PATH stores {path, sha256}; --check flags missing or hash-changed; repo-relative only. | 2026-10-10: 2026-10-10 mtools-2a: --attach PATH is repo-relative, sha256 of the bytes; refused (exit 2) for absolute, .., missing, directory or link paths; re-attaching replaces the hash; --check reports a malformed entry. | 2026-10-10: 2026-10-10: mtools wheels re-vendored at c4d4b56 with the new tools/revendor-mtools.sh (one command: builds the three wheels from git archive, renames 0.1.0+<sha>, rewrites pyproject.toml and MODULE.bazel, uv lock, prints hashes); adapter reads attach.entries() into nemik:letter beside the free-text paths; tests/test_inbound_letters.py. Remaining on mtools: W932 (--check finding for a missing or changed attachment).",
       "issued_at": "2026-10-10T02:39:45Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-10T04:12:23Z",
+      "last_worked": "2026-10-10T04:19:40Z",
       "ticks_blocked": 0,
       "weight": 1,
-      "completed": null
+      "completed": "20261010T041940Z"
     },
     {
       "symbol": "W277",

@@ -160,6 +160,12 @@ def queue_graph(
                 r"(?:[\w.-]+/inbox/[\w./-]+\.md|\.claude/letters/[\w./-]+\.md)", text
             ):
                 g.add((node, NEMIK.letter, Literal(path)))
+        # nemik:W276: mtools:W930/W931's `attachments` [{path, sha256}] are the stored form of the
+        # same citation: a repo-relative file pinned by hash, read through mtools' own parser.
+        from mikemol.pathsforward import attach
+
+        for attached, _digest in attach.entries(w):
+            g.add((node, NEMIK.letter, Literal(attached)))
         # mtools:W300: RFC 5545 DTSTART/DUE values, kept exactly as written (a DATE, a UTC
         # DATE-TIME, or TZID=Zone:local); nemik.vtodo renders them as properties (nemik:W134).
         for field, pred in (("dtstart", NEMIK.dtstart), ("due", NEMIK.due)):
