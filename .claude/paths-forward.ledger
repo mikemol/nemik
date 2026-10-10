@@ -442,3 +442,4 @@
 2026-10-10T02:32:00Z  tick  W272 minted    -         "Assert, not only report, that a consumer reads a peer at its last commit: an exit-coded nemik-check mode that fails when a claim rests on a peer's uncommitted queue"  evidence=gcalculus:W224
 2026-10-10T02:32:01Z  tick  W273 minted    -         "Pin freshness across repos: report how far a repo's pin of a peer (pinned_files remote and commit, vendored wheels) is behind that peer's HEAD"  evidence=gcalculus:W225
 2026-10-10T02:35:41Z  tick  W274 minted    -         "Sender-side letter manifest: a list of what a repo sent (peer and filename) that nemik-check --letters takes as input, so a letter never delivered becomes visible"  evidence=gcalculus:W224
+2026-10-10T02:37:15Z  tick  W271 advanced  unblock   "claimed gcalculus W224/W225 as W271-W273; shipped --committed (W272) and --letters (W271 receiving side); W274 atomized"
