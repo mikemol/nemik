@@ -101,6 +101,27 @@ def stated_ask(ask: str) -> tuple[str, str]:
     return "decide", ask
 
 
+def priority(salience: float, text: str | None = None) -> int:
+    """nemik:W299: the RFC 5545 PRIORITY (1 highest .. 9 lowest) of an ask that holds back `salience`.
+
+    The steps are declared data (`[ask_priority]` in rank-weights.toml: a floor of salience and the
+    level it earns, the highest floor reached wins); an ask below every floor is 9. `text` overrides
+    the packaged file (for tests).
+    """
+    import tomllib
+    from importlib.resources import files
+
+    if text is None:
+        text = files("nemik.data").joinpath("rank-weights.toml").read_text()
+    steps = tomllib.loads(text).get("ask_priority", {})
+    for floor, level in sorted(
+        ((float(k), int(v)) for k, v in steps.items()), reverse=True
+    ):
+        if salience >= floor:
+            return level
+    return 9
+
+
 def vtodos(asks: list[dict], repos: set[str], link: str = "") -> list[list[str]]:
     """One VTODO (as property lines) per needs-you ask from an opted-in repo, in ref order."""
     out = []
@@ -123,6 +144,9 @@ def vtodos(asks: list[dict], repos: set[str], link: str = "") -> list[list[str]]
             "STATUS:NEEDS-ACTION",
             f"CATEGORIES:nemik,{_escape(repo)}",
         ]
+        # nemik:W299: the heavier the demand an ask holds back, the higher its PRIORITY.
+        if a.get("salience") is not None:
+            lines.append(f"PRIORITY:{priority(float(a['salience']))}")
         # The waypoints this ask releases, as RFC 5545 relations (RELTYPE=CHILD: they follow it).
         lines += [
             prop
@@ -213,7 +237,7 @@ def feed(root: Path, opt_in: Path, link: str = "", group: bool = False) -> str:
     from rdflib import Graph
 
     from nemik.adapter import ledger_graph
-    from nemik.blocks import operator_asks
+    from nemik.blocks import operator_asks, with_salience
     from nemik.check import LEDGER, survey, workstream_files
 
     g = Graph()
@@ -222,7 +246,7 @@ def feed(root: Path, opt_in: Path, link: str = "", group: bool = False) -> str:
             g += qg
     for repo, path in workstream_files(root, LEDGER):
         g += ledger_graph(repo, path)[0]
-    todos = vtodos(operator_asks(g), opted_in(opt_in), link)
+    todos = vtodos(with_salience(g, operator_asks(g)), opted_in(opt_in), link)
     return calendar(grouped(todos) if group else todos)
 
 

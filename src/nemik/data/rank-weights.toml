@@ -82,3 +82,14 @@ coverable = 0
 operator = 1
 band = 100
 weight = 1
+
+# nemik:W299 (operator 2026-10-10: the waiting-on-operator machinery carries the salience signal):
+# the RFC 5545 PRIORITY (1 highest .. 9 lowest) nemik-ics gives an operator ask by the flow salience it
+# holds back. A floor of salience and the level it earns; the highest floor reached wins, and an ask
+# below every floor is 9. 2026-10-10's 83 needs-you asks ranged 86.0 down to 0: the top three were 86,
+# 47 and 32, a long middle sat at 15 (a ready class weight), and over half held back nothing.
+[ask_priority]
+"40" = 1
+"15" = 3
+"5" = 5
+"0.01" = 7

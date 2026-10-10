@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 298,
+  "counter": 299,
   "waypoints": [
     {
       "symbol": "W1",
@@ -5723,6 +5723,23 @@
       "last_worked": "2026-10-10T13:44:13Z",
       "ticks_blocked": 0,
       "completed": "20261010T134413Z"
+    },
+    {
+      "symbol": "W299",
+      "title": "Operator-ask VTODOs carry PRIORITY from the flow salience (declared steps in rank-weights.toml)",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-10: nemik.vtodo.priority (declared steps [ask_priority] in rank-weights.toml: >=40 -> 1, 15 -> 3, 5 -> 5, 0.01 -> 7, else 9); vtodos adds PRIORITY when the ask carries salience; feed() weighs the asks; tests/test_ask_priority.py. The grouped repo-parent VTODO carries none.",
+      "issued_at": "2026-10-10T13:47:52Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": "2026-10-10T13:48:07Z",
+      "ticks_blocked": 0,
+      "completed": "20261010T134807Z"
     }
   ],
   "residue": [
@@ -5785,7 +5802,10 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-10-10T13:47:12Z"
+  },
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }
