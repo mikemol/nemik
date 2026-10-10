@@ -438,3 +438,6 @@
 2026-10-09T17:13:14Z  interrupt W268 minted    -         "nemik-history: per-card time-in-state from the committed history"  evidence=W266
 2026-10-09T17:13:15Z  interrupt W269 minted    -         "nemik-history: weekly roll-up (opened vs closed, blocked share, oldest blocked by repo)"  evidence=W266
 2026-10-09T17:13:15Z  interrupt W270 minted    -         "nemik-metrics: nemik_waypoint_age_seconds as a series"  evidence=W266
+2026-10-10T02:31:59Z  tick  W271 minted    -         "Outbound-letter delivery check: every letter a sender cites or addresses to a peer is present in that peer's inbox, as an exit-coded nemik-check mode"  evidence=gcalculus:W224
+2026-10-10T02:32:00Z  tick  W272 minted    -         "Assert, not only report, that a consumer reads a peer at its last commit: an exit-coded nemik-check mode that fails when a claim rests on a peer's uncommitted queue"  evidence=gcalculus:W224
+2026-10-10T02:32:01Z  tick  W273 minted    -         "Pin freshness across repos: report how far a repo's pin of a peer (pinned_files remote and commit, vendored wheels) is behind that peer's HEAD"  evidence=gcalculus:W225

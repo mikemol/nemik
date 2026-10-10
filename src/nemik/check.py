@@ -244,9 +244,30 @@ def main(argv: list[str] | None = None) -> None:
         help="print each live waypoint's realizability coordinate and residue ledger "
         "(mtools' policy under the pinned opa); exit 2 when a queue could not be judged",
     )
+    ap.add_argument(
+        "--committed",
+        nargs="*",
+        metavar="REPO",
+        help="print the queue provenance lines and exit 4 when any named repo (none named: every "
+        "repo) is read from an uncommitted or untracked queue: a claim about a peer reaches only "
+        "as far as its last commit (nemik:W272, gcalculus:W224). Validates nothing.",
+    )
     args = ap.parse_args(argv)
     if args.realizability:
         sys.exit(_realizability(args.root))
+    if args.committed is not None:
+        lines = provenance(args.root)
+        for line in lines:
+            print(line)
+        named = set(args.committed)
+        stale = [
+            line
+            for line in lines
+            if line.startswith("provenance: queue ")
+            and line.split()[3].split("@")[0] != "committed"
+            and (not named or line.split()[2] in named)
+        ]
+        sys.exit(4 if stale else 0)
 
     for line in provenance(args.root):
         print(line)

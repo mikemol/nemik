@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 270,
+  "counter": 273,
   "waypoints": [
     {
       "symbol": "W1",
@@ -5169,6 +5169,61 @@
       "last_worked": "2026-10-09T17:21:01Z",
       "ticks_blocked": 0,
       "completed": "20261009T172101Z"
+    },
+    {
+      "symbol": "W271",
+      "title": "Outbound-letter delivery check: every letter a sender cites or addresses to a peer is present in that peer's inbox, as an exit-coded nemik-check mode",
+      "status": "ready",
+      "enables": [
+        "gcalculus:W224"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Design: a letter's first line 'A -> B: ...' names the recipient; check that every waypoint caused_by/--enables letter path resolves and that letters headed 'X -> nemik' exist under nemik/inbox; exit 1 with a per-repo count of undelivered. Needs a sender-side record of what was sent (the cited path) because nemik cannot see a letter that was never cited.",
+      "evidence": "",
+      "issued_at": "2026-10-10T02:31:59Z",
+      "minted_during": "tick",
+      "caused_by": "gcalculus:W224",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W272",
+      "title": "Assert, not only report, that a consumer reads a peer at its last commit: an exit-coded nemik-check mode that fails when a claim rests on a peer's uncommitted queue",
+      "status": "working",
+      "enables": [
+        "gcalculus:W224"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Design: nemik-check already prints 'provenance: queue <repo> committed|uncommitted'; add --committed so exit 1 means some queue read was uncommitted, and cite it from gcalculus.",
+      "evidence": "",
+      "issued_at": "2026-10-10T02:32:00Z",
+      "minted_during": "tick",
+      "caused_by": "gcalculus:W224",
+      "last_worked": "2026-10-10T02:32:42Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W273",
+      "title": "Pin freshness across repos: report how far a repo's pin of a peer (pinned_files remote and commit, vendored wheels) is behind that peer's HEAD",
+      "status": "ready",
+      "enables": [
+        "gcalculus:W225"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Design: enumerate pins from each repo's pyproject, MODULE.bazel and vendor README; compare to the peer's HEAD with git rev-list --count; print behind-by per pin; no witness hosting (the substrate tripwire stays a gcalculus board check).",
+      "evidence": "",
+      "issued_at": "2026-10-10T02:32:01Z",
+      "minted_during": "tick",
+      "caused_by": "gcalculus:W225",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -5224,7 +5279,10 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-10-10T02:31:37Z"
+  },
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }
