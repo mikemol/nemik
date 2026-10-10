@@ -114,13 +114,22 @@ def answered(repo: str, path: Path, queue: dict) -> bool:
 def orphans(root: Path) -> list[tuple[str, Path, bool]]:
     """(repo, letter, answered) for each letter under `<repo>/inbox/` no waypoint of `repo` cites."""
     found: list[tuple[str, Path, bool]] = []
+    # nemik:W280: a letter is owned when ANY waypoint in the fleet cites its path (a sender cites
+    # `<repo>/inbox/<file>` in the waiting waypoint's evidence), or its own repo's queue names the file.
+    fleet = "\n".join(
+        _queue_text(_load(state))
+        for state in sorted(root.glob("*/.claude/paths-forward.json"))
+    )
     for path in sorted(root.glob("*/inbox/*.md")):
         repo = path.parents[1].name
         state = root / repo / ".claude" / "paths-forward.json"
         if not state.exists():
             continue
         queue = _load(state)
-        if path.name not in _queue_text(queue):
+        if (
+            path.name not in _queue_text(queue)
+            and f"{repo}/inbox/{path.name}" not in fleet
+        ):
             found.append((repo, path, answered(repo, path, queue)))
     return found
 

@@ -73,6 +73,23 @@ def test_an_orphan_whose_waypoints_are_all_closed_is_archived_not_folded(
     assert move.startswith("mv ") and "done.md" in move and move.endswith("/archive/")
 
 
+def test_a_peer_waypoint_citing_the_letter_path_owns_it(tmp_path: Path) -> None:
+    # nemik:W280: the sender's waiting waypoint cites `<repo>/inbox/<file>` in its evidence.
+    from nemik.letters import orphans
+
+    for repo, evidence in (("nemik", ""), ("life", "Letter: nemik/inbox/asked.md")):
+        queue = tmp_path / repo / ".claude" / "paths-forward.json"
+        queue.parent.mkdir(parents=True)
+        queue.write_text(
+            '{"version": 1, "project_root": "/x", "counter": 1, "residue": [],'
+            ' "waypoints": [{"symbol": "W1", "title": "t", "status": "ready",'
+            f' "evidence": "{evidence}"}}]}}'
+        )
+    _letter(tmp_path, "nemik", "asked.md", "life → nemik: cited by the sender")
+    _letter(tmp_path, "nemik", "loose.md", "life → nemik: cited by nobody")
+    assert [path.name for _, path, _ in orphans(tmp_path)] == ["loose.md"]
+
+
 def test_the_command_exits_5_only_when_a_letter_is_misdelivered(
     tmp_path: Path, capsys
 ) -> None:

@@ -452,3 +452,4 @@
 2026-10-10T03:46:51Z  tick  W275 advanced  unblock   "step 1: cited letter paths become nemik:letter; nemik-inbound prints them; (a) resolve check, (b) fleet-wide owned test, (c) mtools attach remain"
 2026-10-10T03:46:57Z  tick  W279 minted    -         "nemik-check resolves each cited letter path under the root: a Warning finding when a waypoint cites a letter file that does not exist"  evidence=W275
 2026-10-10T03:46:58Z  tick  W280 minted    -         "nemik-check --letters counts a letter as owned when any waypoint in the fleet cites its path, not only its own repo's queue"  evidence=W275
+2026-10-10T04:15:09Z  redact W270 redacted  --        "sha256:bec9c6ea55f9 n=1"

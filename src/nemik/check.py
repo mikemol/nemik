@@ -127,6 +127,19 @@ def survey(root: Path) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
         by_repo.setdefault(repo, []).append(
             (str(sev).rsplit("#", 1)[-1], sym or "--", str(msg))
         )
+    # nemik:W279: a letter a waypoint cites as evidence must exist (moved to inbox/archive counts).
+    # The export layout carries no inbox, so a root without any inbox directory is not asked.
+    if any(root.glob("*/inbox")):
+        for node, _, cited in merged.triples((None, NEMIK.letter, None)):
+            repo, _, sym = str(node).removeprefix(BASE).partition("/")
+            rel = str(cited)
+            path = root / (rel if "/inbox/" in rel else f"{repo}/{rel}")
+            archived = path.parent / "archive" / path.name
+            if not (path.exists() or archived.exists()):
+                missing = (
+                    f"cites the letter {rel}, which is not under the root: fix the path"
+                )
+                by_repo.setdefault(repo, []).append(("Warning", sym, missing))
     for repo, g in graphs.items():
         if g is None:
             yield repo, None, [("Unreadable", "--", refused[repo])]

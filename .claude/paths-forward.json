@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 156
+      "ticks_blocked": 157
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 31,
+      "ticks_blocked": 32,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T12:42:16Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null,
       "weight": 1
     },
@@ -5162,7 +5162,7 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": null,
-      "evidence": "2026-10-09: nemik_waypoint_age_seconds{repo,state,quantile} (metrics.age_lines; tests/test_metrics_age.py); median and oldest age of open waypoints per state from issued_at; letter to luthen asking to admit the name (luthen-observability/inbox/2026-10-09-nemik-w270-waypoint-age-metric.md)",
+      "evidence": "2026-10-09: nemik_waypoint_age_seconds{repo,state,quantile} (metrics.age_lines; tests/test_metrics_age.py); median and oldest age of open waypoints per state from issued_at; letter to luthen asking to admit the name (a letter to luthen (withdrawn: metrics_relays.json already relays nemik_*))",
       "issued_at": "2026-10-09T17:13:15Z",
       "minted_during": "interrupt",
       "caused_by": "W266",
@@ -5188,7 +5188,7 @@
       "minted_during": "tick",
       "caused_by": "gcalculus:W224",
       "last_worked": "2026-10-10T02:39:52Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -5250,20 +5250,18 @@
     {
       "symbol": "W276",
       "title": "Ask mtools for an attach mode: --update W<n> --attach PATH stores a file reference plus content hash in the waypoint's evidence, so a letter is a first-class evidence file and mtools stays the only writer",
-      "status": "blocked",
+      "status": "ready",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "mtools"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Asked in mtools/inbox/2026-10-10-nemik-attach-a-file-to-a-waypoint.md; when mtools answers with a waypoint, cite it and read the attachments field in nemik-inbound.",
-      "evidence": "2026-10-10: 2026-10-10: letter written to mtools: --attach PATH stores {path, sha256}; --check flags missing or hash-changed; repo-relative only.",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "mtools shipped --attach (W930 2a7866f, W931 c4d4b56): attachments [{path, sha256}] on the waypoint. Re-vendor the mtools wheels at c4d4b56 or later (vendor/wheels, pyproject.toml, MODULE.bazel, uv.lock, README), then read attachments in the adapter beside the free-text regex, and show them in nemik-inbound. W932 (a --check finding for a missing or changed attachment) is next on mtools.",
+      "evidence": "2026-10-10: 2026-10-10: letter written to mtools: --attach PATH stores {path, sha256}; --check flags missing or hash-changed; repo-relative only. | 2026-10-10: 2026-10-10 mtools-2a: --attach PATH is repo-relative, sha256 of the bytes; refused (exit 2) for absolute, .., missing, directory or link paths; re-attaching replaces the hash; --check reports a malformed entry.",
       "issued_at": "2026-10-10T02:39:45Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-10T02:43:56Z",
-      "ticks_blocked": 2,
+      "last_worked": "2026-10-10T04:12:23Z",
+      "ticks_blocked": 0,
       "weight": 1,
       "completed": null
     },
@@ -5307,38 +5305,42 @@
     {
       "symbol": "W279",
       "title": "nemik-check resolves each cited letter path under the root: a Warning finding when a waypoint cites a letter file that does not exist",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W275"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "In check.survey add a finding per nemik:letter literal whose path is absent under root (the export layout has no inbox, so skip when the root holds no inbox dirs); test with a throwaway root.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-10: check.survey: a Warning per cited letter path absent under the root (archive counts; a root with no inbox is not asked); tests/test_letter_resolves.py. Real run: 7 dangling cites, 6 in other repos (linux-sources W164/W165 and summit W13/W23/W34 cite letters to retired repos cassian-observability, sre-troubleshooting, mat260) and one of mine (W270, fixed).",
       "issued_at": "2026-10-10T03:46:57Z",
       "minted_during": "tick",
       "caused_by": "W275",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-10T04:15:11Z",
+      "ticks_blocked": 0,
+      "weight": 2,
+      "completed": "20261010T041511Z"
     },
     {
       "symbol": "W280",
       "title": "nemik-check --letters counts a letter as owned when any waypoint in the fleet cites its path, not only its own repo's queue",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W275"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Collect every nemik:letter path across all queues; an orphan is a letter whose path no waypoint cites anywhere; keep the caused_by inbox/<file> form for the recipient's own repo.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-10: letters.orphans: owned when any queue in the fleet contains <repo>/inbox/<file>, or its own repo's queue names the file; tests/test_letters.py (a peer waypoint citing the path owns it)",
       "issued_at": "2026-10-10T03:46:58Z",
       "minted_during": "tick",
       "caused_by": "W275",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-10T04:15:14Z",
+      "ticks_blocked": 0,
+      "weight": 2,
+      "completed": "20261010T041514Z"
     }
   ],
   "residue": [
@@ -5401,7 +5403,10 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-10-10T04:13:11Z"
+  },
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }
