@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 299,
+  "counter": 300,
   "waypoints": [
     {
       "symbol": "W1",
@@ -5740,6 +5740,23 @@
       "last_worked": "2026-10-10T13:48:07Z",
       "ticks_blocked": 0,
       "completed": "20261010T134807Z"
+    },
+    {
+      "symbol": "W300",
+      "title": "nemik-metrics: nemik_operator_salience{repo} and nemik_operator_asks{repo}, what the operator owes each repo's work",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-10: metrics.operator_lines: nemik_operator_salience{repo} (sum of the repo's needs-you asks' flow salience) and nemik_operator_asks{repo}; tests/test_operator_salience.py; metrics are relayed by luthen's nemik_ prefix rule, so no luthen change",
+      "issued_at": "2026-10-10T13:49:30Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": "2026-10-10T13:49:38Z",
+      "ticks_blocked": 0,
+      "completed": "20261010T134938Z"
     }
   ],
   "residue": [

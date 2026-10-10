@@ -474,3 +474,4 @@
 2026-10-10T06:17:47Z  interrupt W297 minted    -         "Fold summit's inbox into waypoints: nemik-check --letters --fold --repo summit --older-than 14, apply the mv for the stale, claim or mint a card for each live letter"  evidence=W282
 2026-10-10T13:40:55Z  interrupt W298 minted    -         "Operator asks carry the flow salience: the demand behind each ask, heaviest first (nemik-operator, /operator, the lane panel)"  evidence=operator
 2026-10-10T13:47:52Z  tick  W299 minted    -         "Operator-ask VTODOs carry PRIORITY from the flow salience (declared steps in rank-weights.toml)"  evidence=operator
+2026-10-10T13:49:30Z  tick  W300 minted    -         "nemik-metrics: nemik_operator_salience{repo} and nemik_operator_asks{repo}, what the operator owes each repo's work"  evidence=operator

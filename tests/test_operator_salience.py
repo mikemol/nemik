@@ -32,6 +32,23 @@ def test_an_ask_carries_the_demand_of_the_cards_waiting_behind_it() -> None:
     assert found == {"a:W1": 3.0, "a:W2": 1.0}
 
 
+def test_the_metrics_sum_each_repos_asks_and_count_them() -> None:
+    # nemik:W300: two asks of repo a hold back 3 and 1; repo b has one with nothing behind it.
+    from nemik.metrics import operator_lines
+
+    g = Graph()
+    heavy = _ask(g, "a", "W1", "heavy")
+    light = _ask(g, "a", "W2", "light")
+    _ask(g, "b", "W1", "alone")
+    for sym in ("W3", "W4", "W5"):
+        g.add((_card(g, "a", sym), NEMIK.waitsFor, heavy))
+    g.add((_card(g, "a", "W6"), NEMIK.waitsFor, light))
+    lines = operator_lines(g)
+    assert 'nemik_operator_salience{repo="a"} 4.00' in lines
+    assert 'nemik_operator_asks{repo="a"} 2' in lines
+    assert 'nemik_operator_salience{repo="b"} 0.00' in lines
+
+
 def test_the_heaviest_ask_leads_its_category() -> None:
     g = Graph()
     old = _ask(g, "a", "W1", "old but light")

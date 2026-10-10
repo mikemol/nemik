@@ -27,6 +27,9 @@
                                              opa, an unreadable queue): absent coordinates are
                                              "not checked", never "clean"
 
+    nemik_operator_salience{repo}            flow salience the repo's needs-you operator asks hold back,
+                                             summed (what the operator owes its work; W300)
+    nemik_operator_asks{repo}                how many needs-you asks that is
     nemik_waypoint_age_seconds{repo,state,quantile}
                                              age of the open waypoints per state, from issued_at:
                                              quantile 0.5 is the median, 1 the oldest (W270)
@@ -91,6 +94,26 @@ def realizability_lines(root: Path) -> list[str]:
             out.append(
                 f"nemik_realizability_waypoints{label(repo=repo, coordinate=level)} {n}"
             )
+    return out
+
+
+def operator_lines(g: Graph) -> list[str]:
+    """nemik:W300: per repo, the flow salience its needs-you operator asks hold back, summed, and how
+    many asks that is: what the operator owes that repo's work, in nemik-rank's units."""
+    from nemik.blocks import operator_asks, with_salience
+
+    held: dict[str, float] = {}
+    count: dict[str, int] = {}
+    for ask in with_salience(g, operator_asks(g)):
+        if ask["category"] != "needs-you":
+            continue
+        repo = str(ask["ref"]).partition(":")[0]
+        held[repo] = held.get(repo, 0.0) + float(ask["salience"])
+        count[repo] = count.get(repo, 0) + 1
+    out = ["# TYPE nemik_operator_salience gauge", "# TYPE nemik_operator_asks gauge"]
+    for repo in sorted(held):
+        out.append(f"nemik_operator_salience{label(repo=repo)} {held[repo]:.2f}")
+        out.append(f"nemik_operator_asks{label(repo=repo)} {count[repo]}")
     return out
 
 
@@ -189,6 +212,7 @@ def main(argv: list[str] | None = None) -> None:
         out.append(
             f"nemik_waiting_on{label(repo=r['repo'], state=r['state'])} {len(r['waiting'])}"
         )
+    out += operator_lines(merged)
     out += realizability_lines(args.root)
 
     prompts: Counter[tuple[str, str, str]] = Counter()
