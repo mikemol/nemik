@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 278,
+  "counter": 280,
   "waypoints": [
     {
       "symbol": "W1",
@@ -5303,6 +5303,42 @@
       "last_worked": "2026-10-10T02:46:48Z",
       "ticks_blocked": 0,
       "completed": "20261010T024648Z"
+    },
+    {
+      "symbol": "W279",
+      "title": "nemik-check resolves each cited letter path under the root: a Warning finding when a waypoint cites a letter file that does not exist",
+      "status": "ready",
+      "enables": [
+        "W275"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "In check.survey add a finding per nemik:letter literal whose path is absent under root (the export layout has no inbox, so skip when the root holds no inbox dirs); test with a throwaway root.",
+      "evidence": "",
+      "issued_at": "2026-10-10T03:46:57Z",
+      "minted_during": "tick",
+      "caused_by": "W275",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W280",
+      "title": "nemik-check --letters counts a letter as owned when any waypoint in the fleet cites its path, not only its own repo's queue",
+      "status": "ready",
+      "enables": [
+        "W275"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Collect every nemik:letter path across all queues; an orphan is a letter whose path no waypoint cites anywhere; keep the caused_by inbox/<file> form for the recipient's own repo.",
+      "evidence": "",
+      "issued_at": "2026-10-10T03:46:58Z",
+      "minted_during": "tick",
+      "caused_by": "W275",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -5365,10 +5401,7 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": {
-    "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-10T03:43:13Z"
-  },
+  "lock": null,
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }
