@@ -27,5 +27,7 @@ for file in "$here/pyproject.toml" "$here/MODULE.bazel"; do
 	sed -i "s/0\.1\.0+$old/0.1.0+$short/g; s/mtools $old/mtools $short/g" "$file"
 done
 git -C "$here" rm -q -f "$out"/*+"$old"-*.whl
+# vendor/wheels/.gitignore is `*` (the wheels are tracked by force), so the new ones are added by -f.
+git -C "$here" add -f "$out"/*+"$short"-*.whl
 (cd "$here" && uv lock)
 sha256sum "$out"/*+"$short"-*.whl
