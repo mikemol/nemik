@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 159
+      "ticks_blocked": 160
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 34,
+      "ticks_blocked": 35,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T12:42:16Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null,
       "weight": 1
     },
@@ -5389,7 +5389,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-10T06:18:16Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -5410,7 +5410,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -5431,7 +5431,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:29Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -5452,7 +5452,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:30Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -5473,7 +5473,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -5494,7 +5494,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -5515,7 +5515,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:34Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -5536,7 +5536,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -5557,7 +5557,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:38Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -5578,7 +5578,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:40Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -5599,7 +5599,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:42Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -5662,7 +5662,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -5683,7 +5683,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:46Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -5704,7 +5704,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -5819,10 +5819,7 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": {
-    "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-10T13:47:12Z"
-  },
+  "lock": null,
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }

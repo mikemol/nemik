@@ -475,3 +475,5 @@
 2026-10-10T13:40:55Z  interrupt W298 minted    -         "Operator asks carry the flow salience: the demand behind each ask, heaviest first (nemik-operator, /operator, the lane panel)"  evidence=operator
 2026-10-10T13:47:52Z  tick  W299 minted    -         "Operator-ask VTODOs carry PRIORITY from the flow salience (declared steps in rank-weights.toml)"  evidence=operator
 2026-10-10T13:49:30Z  tick  W300 minted    -         "nemik-metrics: nemik_operator_salience{repo} and nemik_operator_asks{repo}, what the operator owes each repo's work"  evidence=operator
+2026-10-10T13:50:43Z  tick  W300 advanced  unblock   "operator-ask salience reaches VTODO PRIORITY (W299) and metrics (W300)"
+2026-10-10T14:10:22Z  tick  --   idle      -         "nothing ready: W282-W297 wait on each repo to claim its inbox fold, W224 on mtools, W260 on github, W201 on luthen, W188 on the operator's token; cron suspended"
