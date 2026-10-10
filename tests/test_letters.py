@@ -31,6 +31,27 @@ def test_a_letter_must_sit_in_the_inbox_it_names(tmp_path: Path) -> None:
     ]
 
 
+def test_fold_proposes_a_waypoint_for_each_letter_no_waypoint_cites(
+    tmp_path: Path,
+) -> None:
+    # nemik:W277: a letter is a waypoint's evidence in file form, so an uncited one is an orphan.
+    from nemik.letters import fold_commands
+
+    queue = tmp_path / "nemik" / ".claude" / "paths-forward.json"
+    queue.parent.mkdir(parents=True)
+    queue.write_text(
+        '{"version": 1, "project_root": "/x", "counter": 1, "residue": [],'
+        ' "waypoints": [{"symbol": "W1", "title": "t", "status": "ready",'
+        ' "caused_by": "inbox/cited.md"}]}'
+    )
+    _letter(tmp_path, "nemik", "cited.md", "gcalculus → nemik: already owned")
+    _letter(tmp_path, "nemik", "loose.md", "life → nemik: a question")
+    (cmd,) = fold_commands(tmp_path)
+    assert "--add 'Answer life: a question'" in cmd
+    assert cmd.endswith("--caused-by inbox/loose.md")
+    assert str(queue) in cmd
+
+
 def test_the_command_exits_5_only_when_a_letter_is_misdelivered(
     tmp_path: Path, capsys
 ) -> None:

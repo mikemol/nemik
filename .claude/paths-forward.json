@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 274,
+  "counter": 278,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 153
+      "ticks_blocked": 154
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 28,
+      "ticks_blocked": 29,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T12:42:16Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null,
       "weight": 1
     },
@@ -5179,16 +5179,16 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W274"
+        "W275"
       ],
       "blocked_kind": "agent",
-      "next_bounded_step": "Receiving side shipped; the sender-side manifest (W274) closes the loop.",
+      "next_bounded_step": "Receiving-side check shipped; once letters are waypoint evidence (W275), 'delivered' means 'cited by a waypoint', and --letters becomes the orphan detector.",
       "evidence": "2026-10-10: nemik-check --letters (src/nemik/letters.py, tests/test_letters.py): real run over the fleet: 161 letters addressed, 143 without a header, 3 misdelivered: gcalculus/inbox/2026-08-21-gcalculus-your-paraconsistency-is-filed.md (names linux-sources), paperkit/inbox/2026-08-11-paperkit-gcalculus-reply.md (names gcalculus), mikemol.github.io/inbox/2026-08-13-summit-invitation.md (names mikemol-github-io, no such workstream)",
       "issued_at": "2026-10-10T02:31:59Z",
       "minted_during": "tick",
       "caused_by": "gcalculus:W224",
-      "last_worked": "2026-10-10T02:35:46Z",
-      "ticks_blocked": 0,
+      "last_worked": "2026-10-10T02:39:52Z",
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -5226,23 +5226,79 @@
       "minted_during": "tick",
       "caused_by": "gcalculus:W225",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 2
     },
     {
-      "symbol": "W274",
-      "title": "Sender-side letter manifest: a list of what a repo sent (peer and filename) that nemik-check --letters takes as input, so a letter never delivered becomes visible",
+      "symbol": "W275",
+      "title": "Letters become the evidence of a waypoint in file form: a waypoint's evidence or caused_by may cite a letter file (letter:<path>), nemik-inbound prints it beside each waiting row, and nemik-check resolves it like any citation",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Design the convention: letters live in the sender's repo (.claude/letters/<W>-<slug>.md), the addressed object is the waypoint edge (--enables or blocked_on peer:W<n>), the file is its evidence; decide the cite grammar and what the recipient sees.",
+      "evidence": "",
+      "issued_at": "2026-10-10T02:39:43Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 4
+    },
+    {
+      "symbol": "W276",
+      "title": "Ask mtools for an attach mode: --update W<n> --attach PATH stores a file reference plus content hash in the waypoint's evidence, so a letter is a first-class evidence file and mtools stays the only writer",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "mtools"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Asked in mtools/inbox/2026-10-10-nemik-attach-a-file-to-a-waypoint.md; when mtools answers with a waypoint, cite it and read the attachments field in nemik-inbound.",
+      "evidence": "2026-10-10: 2026-10-10: letter written to mtools: --attach PATH stores {path, sha256}; --check flags missing or hash-changed; repo-relative only.",
+      "issued_at": "2026-10-10T02:39:45Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": "2026-10-10T02:43:56Z",
+      "ticks_blocked": 0,
+      "weight": 1,
+      "completed": null
+    },
+    {
+      "symbol": "W277",
+      "title": "Fold the existing inbox letters into waypoints: a nemik-letters --fold mode proposes, for each inbox letter with no citing waypoint, the card to mint in the recipient with the letter as its evidence",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-10: nemik-check --letters --fold (src/nemik/letters.py orphans, fold_commands; tests/test_letters.py): real run 2026-10-10: 162 addressed, 143 headerless, 257 letters whose file name no text of their repo's queue contains, each printed as an --add command with --caused-by inbox/<file>; nothing applied. Triage before minting: many are old and already answered under another citation.",
+      "issued_at": "2026-10-10T02:39:46Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": "2026-10-10T02:44:58Z",
+      "ticks_blocked": 0,
+      "weight": 3,
+      "completed": "20261010T024458Z"
+    },
+    {
+      "symbol": "W278",
+      "title": "Orphan-letter triage: 257 letters no waypoint cites; classify by age and by whether a done waypoint of that repo already names the sender or subject, so --fold proposes only the live ones and the rest are archived",
       "status": "ready",
       "enables": [
-        "W271"
+        "W275"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Design the file (peer<TAB>filename per line, in the sender's repo), then extend nemik.letters to compare it with the peer inboxes; gcalculus offered to emit it.",
+      "next_bounded_step": "Add to nemik.letters an age and answered-already signal (a done waypoint whose title or evidence cites the sender and a subject word, or the letter's W<n> refs all done); --fold lists the unanswered, --fold --archive lists the rest as mv commands to inbox/archive; nothing applied.",
       "evidence": "",
-      "issued_at": "2026-10-10T02:35:41Z",
+      "issued_at": "2026-10-10T02:45:03Z",
       "minted_during": "tick",
-      "caused_by": "gcalculus:W224",
+      "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0
     }
@@ -5296,11 +5352,21 @@
       "dropped_at": "2026-10-09T01:16:02Z",
       "reason": "Measured 2026-10-09: nemik-rank paperkit takes 20.65 s with the old arm alone and 20.98 s with --flow (493 sources, exact), so the flow solve adds about 0.3 s; the time is the graph build, not the solve. gcalculus warned a queue-digest cache key is invalid under the cone model anyway. Recoverable if a larger graph ever makes the solve dominate.",
       "recoverable": true
+    },
+    {
+      "symbol": "W274",
+      "title": "Sender-side letter manifest: a list of what a repo sent (peer and filename) that nemik-check --letters takes as input, so a letter never delivered becomes visible",
+      "dropped_at": "2026-10-10T02:39:51Z",
+      "reason": "Superseded by W275 (operator 2026-10-10): a letter is the evidence of a waypoint, so the waypoint that cites it is the sender-side record; no separate manifest. Revisit if letters stay free-standing.",
+      "recoverable": true
     }
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-10-10T02:43:10Z"
+  },
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }

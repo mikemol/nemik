@@ -259,6 +259,12 @@ def main(argv: list[str] | None = None) -> None:
         "`from → to:`); exit 5 when one is misdelivered. Reads the receiving side only; validates "
         "nothing else (nemik:W271, gcalculus:W224)",
     )
+    ap.add_argument(
+        "--fold",
+        action="store_true",
+        help="with --letters: also list, as --add commands, every letter no waypoint of its repo "
+        "cites (a letter is a waypoint's evidence in file form; nemik:W277). Applies nothing.",
+    )
     args = ap.parse_args(argv)
     if args.realizability:
         sys.exit(_realizability(args.root))
@@ -266,7 +272,9 @@ def main(argv: list[str] | None = None) -> None:
         from nemik.letters import report
 
         said, code = report(
-            args.root, {repo for repo, _ in workstream_files(args.root, QUEUE)}
+            args.root,
+            {repo for repo, _ in workstream_files(args.root, QUEUE)},
+            args.fold,
         )
         print("\n".join(said))
         sys.exit(code)
