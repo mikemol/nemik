@@ -236,13 +236,24 @@ def fired_alarms(
 
 
 def operator_row(g: Graph) -> dict:
-    needs = [a for a in operator_asks(g) if a["category"] == "needs-you"]
+    from nemik.blocks import with_salience
+
+    # nemik:W298: heaviest first, each with the demand waiting behind it.
+    needs = [
+        a for a in with_salience(g, operator_asks(g)) if a["category"] == "needs-you"
+    ]
     return {
         "repo": "operator",
         "state": "you",
         "last_tick": "",
         "waiting": [
-            {"blocked": a["ref"], "claimed_by": [], "title": a["ask"]} for a in needs
+            {
+                "blocked": a["ref"],
+                "claimed_by": [],
+                "title": a["ask"],
+                "salience": a["salience"],
+            }
+            for a in needs
         ],
     }
 
@@ -430,3 +441,6 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
             print(f"          {w['blocked']:28} {claim:22} {w['title'][:60]}")
     op = operator_row(g)
     print(f"\nYOU     operator  ({len(op['waiting'])} need you: nemik-operator)")
+    # nemik:W298: the five heaviest, with the demand waiting behind each
+    for w in op["waiting"][:5]:
+        print(f"  {w['salience']:6.1f} {w['blocked']:28} {w['title'][:60]}")

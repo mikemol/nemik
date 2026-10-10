@@ -5710,18 +5710,19 @@
     {
       "symbol": "W298",
       "title": "Operator asks carry the flow salience: the demand behind each ask, heaviest first (nemik-operator, /operator, the lane panel)",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Landed: blocks.with_salience, nemik-operator, graph.json operator rows, the lane panel. Remaining: an ask that waits on another open card shows 0, so surface the prerequisite's salience on it.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-10: c2c6b98 + this commit: blocks.with_salience (flow salience absorbed by each ask, heaviest first); nemik-operator prints it; /operator and graph.json operator rows carry it; the lane panel shows it; the lane edge (ask -> operator:<category>) and the waiter -> ask edges carry current in graph.json; nemik-wake's operator row and its CLI list the five heaviest with salience. Real run: 83 needs-you asks, heaviest aeternum:W74 (86.0), luthen-observability:W271 (47.0), mtools:W576 (31.9). Not done: VTODO priority for the calendar projection.",
       "issued_at": "2026-10-10T13:40:55Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-10T13:44:13Z",
+      "ticks_blocked": 0,
+      "completed": "20261010T134413Z"
     }
   ],
   "residue": [

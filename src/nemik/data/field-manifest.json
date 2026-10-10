@@ -21,7 +21,7 @@
     "wake.json": {
       "top": {"liveness": "text", "roster": "records", "operator": "record"},
       "roster": {"repo": "enum", "state": "enum", "last_tick": "time", "last_tick_age_s": "count", "waiting": "records"},
-      "waiting": {"blocked": "ref", "claimed_by": "list-ref", "title": "text"},
+      "waiting": {"blocked": "ref", "claimed_by": "list-ref", "title": "text", "salience": "count"},
       "operator": {"repo": "enum", "state": "enum", "last_tick": "time", "waiting": "records"}
     },
     "goals/<repo>.json": {

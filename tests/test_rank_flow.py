@@ -183,5 +183,50 @@ def test_the_view_ships_the_current_across_each_dependency(tmp_path: Path) -> No
     assert current[("W4", "W1")] == current[("W4", "W2")] == 0.5
 
 
+def test_the_view_weighs_the_edges_that_wait_on_the_operator(tmp_path: Path) -> None:
+    # nemik:W298: W1 is an ask; W2 and W3 wait on it. The lane edge carries what the ask holds back
+    # (2), and each waiter's edge into the ask carries its own demand (1).
+    from nemik.serve import to_json
+
+    (tmp_path / "a" / ".claude").mkdir(parents=True)
+    state = tmp_path / "a" / ".claude" / "paths-forward.json"
+    _pf(state, "--init")
+    for title in ("ask", "w two", "w three"):
+        _pf(state, "--add", title, "--next", "do it")
+    _pf(
+        state,
+        "--update",
+        "W1",
+        "--status",
+        "blocked",
+        "--blocked-kind",
+        "human",
+        "--blocked-on",
+        "operator: decide it",
+    )
+    for card in ("W2", "W3"):
+        _pf(
+            state,
+            "--update",
+            card,
+            "--status",
+            "blocked",
+            "--blocked-kind",
+            "agent",
+            "--blocked-on",
+            "W1",
+        )
+    g = Graph()
+    for _, qg, _ in survey(tmp_path):
+        if qg is not None:
+            g += qg
+    doc = to_json(g, {})
+    (lane,) = [e for e in doc["edges"] if e["target"].startswith("operator:")]
+    assert lane["current"] == 2.0
+    into = [e for e in doc["edges"] if e["target"].endswith("/W1") and "current" in e]
+    assert sorted(e["current"] for e in into) == [1.0, 1.0]
+    assert doc["operator"][0]["salience"] == 2.0
+
+
 def test_the_packaged_operator_weight_is_declared() -> None:
     assert load_weights().operator == 15

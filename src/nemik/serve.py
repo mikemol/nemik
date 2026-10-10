@@ -220,13 +220,15 @@ def to_json(g: Graph, findings: dict) -> dict:
 
     asks = with_salience(g, operator_asks(g))
     for a in asks:
-        edges.append(
-            {
-                "source": f"{BASE}{a['ref'].replace(':', '/', 1)}",
-                "target": f"operator:{a['category']}",
-                "kind": "waits",
-            }
-        )
+        lane_edge: dict[str, Any] = {
+            "source": f"{BASE}{a['ref'].replace(':', '/', 1)}",
+            "target": f"operator:{a['category']}",
+            "kind": "waits",
+        }
+        # nemik:W298: the demand an ask holds back is its edge's weight.
+        if a["salience"]:
+            lane_edge["current"] = a["salience"]
+        edges.append(lane_edge)
     # nemik:W56: an edge whose upstream end is done no longer holds anything back. For `enables`
     # that end is the source; for `waits` it is the target. open_blockers counts what still does.
     done = {n["id"] for n in nodes if n["state"] == "done"}
@@ -268,6 +270,21 @@ def to_json(g: Graph, findings: dict) -> dict:
             g, repo, weights.local, weights.peer, weights.peer_blocked, weights.operator
         ).items():
             crossed[pair] += amount
+    # nemik:W298: an operator ask is not workable, so the solve above never ends a path at it; the
+    # open-ground solve does, and the edges INTO an ask take their current from it.
+    asked = {str(a["ref"]) for a in asks}
+    for repo in sorted({str(a["ref"]).partition(":")[0] for a in asks}):
+        for pair, amount in edge_currents(
+            g,
+            repo,
+            weights.local,
+            weights.peer,
+            weights.peer_blocked,
+            weights.operator,
+            workable=False,
+        ).items():
+            if pair[1] in asked:
+                crossed[pair] += amount
     for e in edges:
         need, pre = (
             (e["target"], e["source"])
