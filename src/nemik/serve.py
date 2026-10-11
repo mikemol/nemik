@@ -40,8 +40,11 @@ VENDOR = {"cytoscape.min.js", "dagre.min.js", "cytoscape-dagre.js"}
 
 
 class Model:
-    def __init__(self, root: Path) -> None:
+    def __init__(self, root: Path, withheld: frozenset[str] = frozenset()) -> None:
         self.root = root
+        # nemik:W309: refs luthen withholds from the public view. They are kept out of every NUMBER
+        # the view publishes (salience, edge current, history counts), not only out of the node list.
+        self.withheld = withheld
         self.key: tuple = ()
         self.graph = bind(Graph())
         self.payload = b"{}"
@@ -82,7 +85,8 @@ class Model:
             self.graph, self.key = g, key
             self.rebuilds += 1
             self.rebuild_cpu = time.process_time() - cpu0
-            doc = to_json(g, findings)
+            numbers = without(g, self.withheld) if self.withheld else None
+            doc = to_json(g, findings, numbers)
             self.nodes, self.edges, self.workstreams = (
                 len(doc["nodes"]),
                 len(doc["edges"]),
@@ -133,7 +137,23 @@ def local(term) -> str:
     return str(term).removeprefix("urn:nemik:").rsplit("#", 1)[-1].rsplit("/", 1)[-1]
 
 
-def to_json(g: Graph, findings: dict) -> dict:
+def without(g: Graph, refs: frozenset[str]) -> Graph:
+    """nemik:W309: a copy of `g` with every withheld waypoint (and every edge to or from it) removed,
+    the graph the public numbers are computed over."""
+    from nemik.withheld import _id
+
+    out = Graph()
+    gone = {URIRef(_id(r)) for r in refs}
+    for s, p, o in g:
+        if s not in gone and o not in gone:
+            out.add((s, p, o))
+    return out
+
+
+def to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
+    # nemik:W309: every published number (salience, edge current, ask weight) comes from `gn`, the
+    # graph without the withheld waypoints, when there are any; structure still comes from `g`.
+    gn = numbers if numbers is not None else g
     effort: dict[str, Counter] = defaultdict(Counter)
     last: dict[str, str] = {}
     for act in g.subjects(RDF.type, PROV.Activity):
@@ -218,7 +238,7 @@ def to_json(g: Graph, findings: dict) -> dict:
             edges.append({"source": str(s), "target": ask, "kind": "waits"})
     from nemik.blocks import with_salience
 
-    asks = with_salience(g, operator_asks(g))
+    asks = with_salience(gn, operator_asks(g))
     for a in asks:
         lane_edge: dict[str, Any] = {
             "source": f"{BASE}{a['ref'].replace(':', '/', 1)}",
@@ -254,7 +274,7 @@ def to_json(g: Graph, findings: dict) -> dict:
     weights, comp = load_weights(), load_composition()
     by_id = {n["id"]: n for n in nodes}
     for repo in sorted({n["repo"] for n in nodes if n["state"] == "ready"}):
-        for i, r in enumerate(rank(g, repo, weights, comp)):
+        for i, r in enumerate(rank(gn, repo, weights, comp)):
             if found := by_id.get(f"{BASE}{repo}/{r['symbol']}"):
                 found["rank_pos"], found["band"] = i, r["band_name"]
                 if r.get("salience") is not None:
@@ -267,7 +287,12 @@ def to_json(g: Graph, findings: dict) -> dict:
     crossed: dict[tuple[str, str], float] = defaultdict(float)
     for repo in sorted({n["repo"] for n in nodes if n["state"] == "ready"}):
         for pair, amount in edge_currents(
-            g, repo, weights.local, weights.peer, weights.peer_blocked, weights.operator
+            gn,
+            repo,
+            weights.local,
+            weights.peer,
+            weights.peer_blocked,
+            weights.operator,
         ).items():
             crossed[pair] += amount
     # nemik:W298: an operator ask is not workable, so the solve above never ends a path at it; the
@@ -275,7 +300,7 @@ def to_json(g: Graph, findings: dict) -> dict:
     asked = {str(a["ref"]) for a in asks}
     for repo in sorted({str(a["ref"]).partition(":")[0] for a in asks}):
         for pair, amount in edge_currents(
-            g,
+            gn,
             repo,
             weights.local,
             weights.peer,
@@ -459,21 +484,37 @@ def static_data(model: Model) -> dict[str, object]:
         {n["repo"] for n in model.doc["nodes"] if n["id"].startswith(BASE)}
     ):
         docs[f"goals/{repo}.json"] = goals(g, repo, weights)
-    docs["history.json"] = history_doc(model.root)
+    docs["history.json"] = history_doc(model.root, model.withheld)
     return docs
 
 
-def history_doc(root: Path) -> dict[str, list[dict[str, Any]]]:
+def history_doc(
+    root: Path, withheld: frozenset[str] = frozenset()
+) -> dict[str, list[dict[str, Any]]]:
     """nemik:W308: the project-manager's weekly roll-up per repo, from each repo's committed queue.
 
     Counts and days only: the roll-up row's `oldest_blocked` symbol is dropped, so nothing here names
-    a waypoint. It needs git history, so only a host-side build has it (the pod has none).
+    a waypoint, and a withheld waypoint (nemik:W309) is left out of every snapshot before counting.
+    It needs git history, so only a host-side build has it (the pod has none).
     """
     from nemik.history import snapshots, weekly
 
     out: dict[str, list[dict[str, Any]]] = {}
     for repo, path in workstream_files(root, QUEUE):
-        rows = weekly(snapshots(path.parents[1]))
+        hide = {r.partition(":")[2] for r in withheld if r.partition(":")[0] == repo}
+        snaps = [
+            (
+                at,
+                {
+                    **q,
+                    "waypoints": [
+                        w for w in q.get("waypoints", []) if w["symbol"] not in hide
+                    ],
+                },
+            )
+            for at, q in snapshots(path.parents[1])
+        ]
+        rows = weekly(snaps)
         out[repo] = [
             {k: v for k, v in r.items() if k != "oldest_blocked"} for r in rows
         ]
@@ -487,7 +528,7 @@ def build_static(root: Path, out: Path, withheld: Path | None) -> list[Path]:
     from nemik.withheld import apply, load
 
     refs = load(withheld)  # fails closed first: no list, no build
-    docs = apply(static_data(Model(root)), refs)
+    docs = apply(static_data(Model(root, refs)), refs)
     if bad := [f for name, doc in docs.items() for f in unmanifested(name, doc)]:
         raise ValueError("unmanifested fields, refusing to publish: " + ", ".join(bad))
     written = write_static(out)

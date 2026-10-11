@@ -228,5 +228,50 @@ def test_the_view_weighs_the_edges_that_wait_on_the_operator(tmp_path: Path) -> 
     assert doc["operator"][0]["salience"] == 2.0
 
 
+def test_a_withheld_waiter_shapes_no_published_number(tmp_path: Path) -> None:
+    # nemik:W309: the public view is computed over the graph WITHOUT withheld waypoints, so hiding
+    # a waiter does not leave its weight behind in the ask's salience or its edge current.
+    from nemik.serve import to_json, without
+
+    (tmp_path / "a" / ".claude").mkdir(parents=True)
+    state = tmp_path / "a" / ".claude" / "paths-forward.json"
+    _pf(state, "--init")
+    for title in ("ask", "w two", "w three"):
+        _pf(state, "--add", title, "--next", "do it")
+    _pf(
+        state,
+        "--update",
+        "W1",
+        "--status",
+        "blocked",
+        "--blocked-kind",
+        "human",
+        "--blocked-on",
+        "operator: decide it",
+    )
+    for card in ("W2", "W3"):
+        _pf(
+            state,
+            "--update",
+            card,
+            "--status",
+            "blocked",
+            "--blocked-kind",
+            "agent",
+            "--blocked-on",
+            "W1",
+        )
+    g = Graph()
+    for _, qg, _ in survey(tmp_path):
+        if qg is not None:
+            g += qg
+    assert to_json(g, {})["operator"][0]["salience"] == 2.0
+    hidden = frozenset({"a:W3"})
+    doc = to_json(g, {}, without(g, hidden))
+    assert doc["operator"][0]["salience"] == 1.0  # W3's demand is not in it
+    (lane,) = [e for e in doc["edges"] if e["target"].startswith("operator:")]
+    assert lane["current"] == 1.0
+
+
 def test_the_packaged_operator_weight_is_declared() -> None:
     assert load_weights().operator == 15

@@ -5900,18 +5900,19 @@
     {
       "symbol": "W309",
       "title": "Public view: salience, edge current and history counts must not be shaped by withheld waypoints",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Compute the published salience, edge current and history.json over the graph minus luthen's withheld refs (static_data applies withheld AFTER computing), or state the residual leak to luthen; add a test that withholding a waiter changes no published number.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: serve.without (the graph minus withheld refs); Model(root, withheld) computes salience, edge current and ask weight over it (structure and stubs still from the full graph); history_doc drops withheld symbols before counting; build_static passes the refs in; tests: test_a_withheld_waiter_shapes_no_published_number (ask 2.0 -> 1.0 when a waiter is withheld), test_a_withheld_waypoint_is_not_counted_in_the_published_history.",
       "issued_at": "2026-10-11T16:22:45Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-11T16:26:04Z",
+      "ticks_blocked": 0,
+      "completed": "20261011T162604Z"
     }
   ],
   "residue": [

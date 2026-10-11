@@ -162,6 +162,18 @@ def test_the_static_history_names_no_waypoint_and_passes_the_manifest(
     assert unmanifested("history.json", doc) == []
 
 
+def test_a_withheld_waypoint_is_not_counted_in_the_published_history(
+    tmp_path: Path,
+) -> None:
+    # nemik:W309: _two_commits mints W1 then W2; withholding a:W2 leaves one opened card.
+    from nemik.serve import history_doc
+
+    _two_commits(tmp_path)
+    full = sum(row["opened"] for row in history_doc(tmp_path)["a"])
+    kept = sum(row["opened"] for row in history_doc(tmp_path, frozenset({"a:W2"}))["a"])
+    assert (full, kept) == (2, 1)
+
+
 def test_the_command_prints_the_diff_between_two_dates(tmp_path: Path, capsys) -> None:
     _two_commits(tmp_path)
     code = main(["a", "--from", "2026-10-02", "--root", str(tmp_path)])
