@@ -65,6 +65,8 @@ def unmanifested(name: str, doc) -> list[str]:
             f"{name} operator.{k}"
             for k in sorted(set(doc.get("operator", {})) - set(spec["operator"]))
         ]
+    elif key == "history.json":
+        check("weeks", [row for rows in doc.values() for row in rows])
     else:
         check("goals", doc)
     return bad

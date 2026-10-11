@@ -24,6 +24,9 @@
       "waiting": {"blocked": "ref", "claimed_by": "list-ref", "title": "text", "salience": "count"},
       "operator": {"repo": "enum", "state": "enum", "last_tick": "time", "waiting": "records"}
     },
+    "history.json": {
+      "weeks": {"week": "text", "opened": "count", "closed": "count", "open": "count", "blocked_share": "count", "oldest_blocked_days": "count"}
+    },
     "goals/<repo>.json": {
       "goals": {
         "goal": "ref", "title": "text", "weight": "count", "frontier": "list-ref", "on_deck": "ref",

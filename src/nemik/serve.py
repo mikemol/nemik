@@ -459,7 +459,25 @@ def static_data(model: Model) -> dict[str, object]:
         {n["repo"] for n in model.doc["nodes"] if n["id"].startswith(BASE)}
     ):
         docs[f"goals/{repo}.json"] = goals(g, repo, weights)
+    docs["history.json"] = history_doc(model.root)
     return docs
+
+
+def history_doc(root: Path) -> dict[str, list[dict[str, Any]]]:
+    """nemik:W308: the project-manager's weekly roll-up per repo, from each repo's committed queue.
+
+    Counts and days only: the roll-up row's `oldest_blocked` symbol is dropped, so nothing here names
+    a waypoint. It needs git history, so only a host-side build has it (the pod has none).
+    """
+    from nemik.history import snapshots, weekly
+
+    out: dict[str, list[dict[str, Any]]] = {}
+    for repo, path in workstream_files(root, QUEUE):
+        rows = weekly(snapshots(path.parents[1]))
+        out[repo] = [
+            {k: v for k, v in r.items() if k != "oldest_blocked"} for r in rows
+        ]
+    return out
 
 
 def build_static(root: Path, out: Path, withheld: Path | None) -> list[Path]:

@@ -147,6 +147,21 @@ def test_time_in_state_and_the_weekly_roll_up_follow_the_commits(
     assert w42["oldest_blocked"] is None
 
 
+def test_the_static_history_names_no_waypoint_and_passes_the_manifest(
+    tmp_path: Path,
+) -> None:
+    # nemik:W308: history.json is counts and days; the oldest-blocked symbol is dropped.
+    from nemik.manifest import unmanifested
+    from nemik.serve import history_doc
+
+    _two_commits(tmp_path)
+    doc = history_doc(tmp_path)
+    assert list(doc) == ["a"]
+    assert all("oldest_blocked" not in row for row in doc["a"])
+    assert {"week", "opened", "closed", "open", "blocked_share"} <= set(doc["a"][0])
+    assert unmanifested("history.json", doc) == []
+
+
 def test_the_command_prints_the_diff_between_two_dates(tmp_path: Path, capsys) -> None:
     _two_commits(tmp_path)
     code = main(["a", "--from", "2026-10-02", "--root", str(tmp_path)])

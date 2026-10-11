@@ -485,3 +485,6 @@
 2026-10-11T01:15:01Z  tick  W304 advanced  unblock   "armed 30m; pyfmt helper (W302); nemik-pins reads wheel pins (W303); re-vendored mtools at 7d4a458 (W304)"
 2026-10-11T01:16:51Z  tick  --   idle      -         "nothing ready: fold cards wait on their repos, W224 on mtools, W260 on github, W201 on luthen W626, W188 on the operator token; cron suspended"
 2026-10-11T11:41:30Z  interrupt W305 minted    -         "nemik-overlaps prints who holds the work claim for an overlapping tag, and how old it is (mtools:W913)"  evidence=mtools:W913
+2026-10-11T16:06:44Z  interrupt W306 minted    -         "Render nemik's web view in headless Chrome: find the host's binary and make the layout and interaction tests run against it"  evidence=operator
+2026-10-11T16:06:55Z  interrupt W307 minted    -         "A history panel in the web view: per-repo weekly opened vs closed and blocked share from history.json"  evidence=operator
+2026-10-11T16:07:04Z  interrupt W308 minted    -         "Publish the weekly project-manager history as history.json in the static view"  evidence=operator
