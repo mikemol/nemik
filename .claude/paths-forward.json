@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 336,
+  "counter": 341,
   "waypoints": [
     {
       "symbol": "W1",
@@ -6412,6 +6412,109 @@
       "caused_by": "W332",
       "last_worked": null,
       "ticks_blocked": 0
+    },
+    {
+      "symbol": "W337",
+      "title": "Accessibility gates for the view, reusing el-openglo and paperkit's a11y machinery (umbrella)",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "a11y",
+        "web"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "children: W338 contrast and CVD gate, W339 use-of-colour, W340 legibility floors, W341 a11y adversary; ask el-openglo and paperkit what is reusable as a package",
+      "evidence": "",
+      "issued_at": "2026-10-11T21:16:23Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W338",
+      "title": "Contrast and colour-blind gate over the view's palette",
+      "status": "ready",
+      "enables": [
+        "W337"
+      ],
+      "touches": [
+        "a11y",
+        "web"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "extract every node, edge, halo and text colour pair from index.html; check WCAG 1.4.3/1.4.11 ratios and a CVD simulation, reusing el-openglo cvd_gate.py by import not copy",
+      "evidence": "",
+      "issued_at": "2026-10-11T21:16:30Z",
+      "minted_during": "tick",
+      "caused_by": "W337",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W339",
+      "title": "Use-of-colour check: every state the view shows has a second channel",
+      "status": "ready",
+      "enables": [
+        "W337"
+      ],
+      "touches": [
+        "a11y",
+        "web"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "WCAG 1.4.1 as in el-openglo check_use_of_colour: state, band and halo must differ by shape, weight or text, not hue or opacity alone; measured in the render-check browser",
+      "evidence": "",
+      "issued_at": "2026-10-11T21:16:31Z",
+      "minted_during": "tick",
+      "caused_by": "W337",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W340",
+      "title": "Legibility floors for the view: label size, edge density, target size",
+      "status": "ready",
+      "enables": [
+        "W337"
+      ],
+      "touches": [
+        "a11y",
+        "web"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "render-check measures the rendered label px, edge crossings per node and hit-target size at the default fit; the all-repos fit is below any floor, so the view must default to a scoped, readable subset",
+      "evidence": "",
+      "issued_at": "2026-10-11T21:16:32Z",
+      "minted_during": "tick",
+      "caused_by": "W337",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W341",
+      "title": "An a11y adversary for the view, as paperkit has for its VPAT",
+      "status": "ready",
+      "enables": [
+        "W337"
+      ],
+      "touches": [
+        "a11y",
+        "web"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "adapt paperkit .claude/agents/a11y-adversary.md: a read-only agent that tries to refute each a11y claim the checks make; keyboard and screen-reader paths included",
+      "evidence": "",
+      "issued_at": "2026-10-11T21:16:34Z",
+      "minted_during": "tick",
+      "caused_by": "W337",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -6474,10 +6577,7 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": {
-    "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-11T21:11:21Z"
-  },
+  "lock": null,
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }

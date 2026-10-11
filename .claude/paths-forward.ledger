@@ -524,3 +524,9 @@
 2026-10-11T21:07:44Z  interrupt W334 minted    -         "graph.json carries each repo's own longest chain (on_path_repo)"  evidence=W332
 2026-10-11T21:07:45Z  interrupt W335 minted    -         "web: path-scope selector drives the gold halo"  evidence=W332
 2026-10-11T21:07:46Z  interrupt W336 minted    -         "web: transit reveal of unselected repos on a selected chain"  evidence=W332
+2026-10-11T21:16:23Z  tick  W337 minted    -         "Accessibility gates for the view, reusing el-openglo and paperkit's a11y machinery (umbrella)"  evidence=operator
+2026-10-11T21:16:30Z  tick  W338 minted    -         "Contrast and colour-blind gate over the view's palette"  evidence=W337
+2026-10-11T21:16:31Z  tick  W339 minted    -         "Use-of-colour check: every state the view shows has a second channel"  evidence=W337
+2026-10-11T21:16:32Z  tick  W340 minted    -         "Legibility floors for the view: label size, edge density, target size"  evidence=W337
+2026-10-11T21:16:34Z  tick  W341 minted    -         "An a11y adversary for the view, as paperkit has for its VPAT"  evidence=W337
+2026-10-11T21:16:46Z  tick  W333 advanced  unblock   "critical() takes a scope (repo, view, card cone); a11y umbrella W337 filed from the operator's illegibility report"  evidence=217d700
