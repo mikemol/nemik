@@ -5811,18 +5811,19 @@
     {
       "symbol": "W304",
       "title": "Re-vendor mtools at its HEAD when nemik-pins nemik reports it more than 30 commits behind",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Run tools/revendor-mtools.sh <mtools HEAD> 842ab10 (the script git-adds the wheels), update the README history and hashes with a sed file, rebuild the venv, run --check and the gate; read the new --check findings for nemik's queue.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: re-vendored mtools at 7d4a458 with tools/revendor-mtools.sh; README history and hashes updated; --check OK; nemik-pins nemik: behind 0",
       "issued_at": "2026-10-11T01:09:00Z",
       "minted_during": "interrupt",
       "caused_by": "W303",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-11T01:11:48Z",
+      "ticks_blocked": 0,
+      "completed": "20261011T011148Z"
     }
   ],
   "residue": [
