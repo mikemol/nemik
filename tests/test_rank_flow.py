@@ -71,6 +71,21 @@ def test_the_flow_arm_splits_it_so_the_sole_dependents_win(tmp_path: Path) -> No
     assert _order(_fleet(tmp_path), "flow") == ["W3", "W1", "W2"]
 
 
+def test_ranking_toward_a_milestone_counts_only_that_cards_demand(
+    tmp_path: Path,
+) -> None:
+    # nemik:W316: toward a:W4 the only demand is W4's, which needs W1 and W2 equally; W3 serves W7
+    # and W8 only, so it absorbs nothing and falls below both.
+    g = _fleet(tmp_path)
+    comp = load_composition(f'{TIERS}weight = "flow"\n')
+    toward = rank(g, "a", load_weights(), comp, fruit_row=False, toward="a:W4")
+    assert [r["symbol"] for r in toward] == ["W1", "W2", "W3"]
+    assert toward[0]["salience"] == toward[1]["salience"] == 0.5
+    assert toward[2]["salience"] == 0
+    # toward nothing named, the fleet-wide order is unchanged
+    assert _order(g, "flow") == ["W3", "W1", "W2"]
+
+
 def _blocked_sharer(tmp_path: Path) -> Graph:
     # W1, W2 ready. W3 is blocked on the operator (a dead end, not workable). W4 needs W1 and W3,
     # W5 needs W2. If W3 absorbed demand, W1 would get 1/2 and W2 1, so W2 would lead; W3 cannot

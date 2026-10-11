@@ -300,8 +300,11 @@ def _rows(
     *,
     fruit_row: bool = True,
     comp: Composition | None = None,
+    toward: str = "",
 ) -> list[dict]:
     """`repo`'s ready leaves as objective rows, before any ordering (for `rank`, `rank_fleet`).
+
+    `toward` (`repo:W<n>`, nemik:W316) ranks by the demand of that one milestone card alone.
 
     Umbrellas are left out: their open children are what can be worked (nemik:W74). When the
     composition declares `weight = "flow"` (nemik:W241), the `weight` objective is the flow model's
@@ -320,7 +323,13 @@ def _rows(
     flow = (comp or load_composition()).weight_model == "flow"
     salience = (
         salience_of(
-            g, repo, weights.local, weights.peer, weights.peer_blocked, weights.operator
+            g,
+            repo,
+            weights.local,
+            weights.peer,
+            weights.peer_blocked,
+            weights.operator,
+            toward,
         )
         if flow
         else None
@@ -382,12 +391,16 @@ def rank(
     comp: Composition | None = None,
     *,
     fruit_row: bool = True,
+    toward: str = "",
 ) -> list[dict]:
     """Every ready leaf in `repo`, in the declared composed order (nemik:W132; lower symbol on ties).
 
-    Umbrellas are left out: their open children are what can be worked (nemik:W74).
+    Umbrellas are left out: their open children are what can be worked (nemik:W74). With `toward`
+    (a milestone `repo:W<n>`, nemik:W316) the order is by that card's demand alone.
     """
-    return _position(_rows(g, repo, weights, fruit_row=fruit_row, comp=comp), comp)
+    return _position(
+        _rows(g, repo, weights, fruit_row=fruit_row, comp=comp, toward=toward), comp
+    )
 
 
 def fleet_repos(g: Graph) -> list[str]:
@@ -516,6 +529,13 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         metavar="REPO:W<n>",
         help="what that waiting card (an operator ask) needs and which of REPO's ready "
         "cards it pushes down in the flow model (nemik:W244)",
+    )
+    ap.add_argument(
+        "--toward",
+        metavar="REPO:W<n>",
+        default="",
+        help="rank by the demand of that one milestone card alone, so the order reads as what "
+        "moves it (nemik:W316; an umbrella is a milestone already)",
     )
     args = ap.parse_args(argv)
     if (
@@ -681,7 +701,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
                     f"shared with {', '.join(others[:4])}"
                 )
         return
-    rows = rank(g, args.repo, weights)
+    rows = rank(g, args.repo, weights, toward=args.toward)
     if args.json:
         print(json.dumps(rows, indent=2))
         return

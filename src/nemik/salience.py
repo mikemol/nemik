@@ -126,8 +126,12 @@ def audit(
     gate_weight: Fraction = Fraction(1),
     workable: bool = False,
     gate_weights: dict[str, Fraction] | None = None,
+    toward: str = "",
 ) -> Audit:
     """Run both arms over the ready cards of `repo`.
+
+    `toward` (`repo:W<n>`, nemik:W316) makes the one demand source the named milestone: salience then
+    reads as what moves that card, with no operator or residue demand added.
 
     `workable` narrows the ground to cards whose state is ready or working. By default the ground
     is gcalculus's: every open card with no open prerequisite, which includes a card blocked on
@@ -193,6 +197,9 @@ def audit(
         population |= cone
         reach[ref_of(n)] = frozenset(ref_of(x) for x in cone)
     sources = sorted((x for x in population if x in prereq), key=str)
+    if toward:
+        # nemik:W316: a milestone ranks by ITS demand alone: the one source is the target card.
+        sources = [x for x in sources if ref_of(x) == toward]
     needs = {
         ref_of(x): sorted(ref_of(p) for p in ps if p in nodes)
         for x, ps in prereq.items()
@@ -201,7 +208,7 @@ def audit(
     front = {ref_of(n) for n in ready}
     relevant = {ref_of(x) for x in population} | {ref_of(n) for n in mine}
     open_refs = {ref_of(n) for n in nodes}
-    if weights.operator:
+    if weights.operator and not toward:
         # nemik:W249: an operator ask is a demand source with a declared class weight, not a strict
         # tier above the order. A ready ask absorbs its own demand; a waiting one sends it through
         # its cone. Additive to the class weight the card already carries.
@@ -214,7 +221,7 @@ def audit(
                 demand[ref_of(n)] = (
                     demand.get(ref_of(n), Fraction(0)) + weights.operator
                 )
-    for card, entries in (residue or {}).items():
+    for card, entries in ({} if toward else (residue or {})).items():
         if card not in open_refs or card not in relevant or card == without:
             continue
         for entry in entries:
@@ -308,7 +315,13 @@ def load_gate_weights(text: str | None = None) -> dict[str, Fraction]:
 
 
 def salience_of(
-    g: Graph, repo: str, local: int, peer: int, peer_blocked: int, operator: int = 0
+    g: Graph,
+    repo: str,
+    local: int,
+    peer: int,
+    peer_blocked: int,
+    operator: int = 0,
+    toward: str = "",
 ) -> dict[str, Fraction]:
     """Solve `repo`'s ready cards and return each card's exact flow salience, by `repo:W<n>`.
 
@@ -328,7 +341,11 @@ def salience_of(
     from nemik.rank import Weights
 
     return audit(
-        g, repo, Weights(local, peer, peer_blocked, operator), workable=True
+        g,
+        repo,
+        Weights(local, peer, peer_blocked, operator),
+        workable=True,
+        toward=toward,
     ).flow.salience
 
 
