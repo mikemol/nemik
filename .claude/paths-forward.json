@@ -5436,23 +5436,21 @@
     {
       "symbol": "W285",
       "title": "Fold el-openglo's inbox into waypoints: nemik-check --letters --fold --repo el-openglo --older-than 14, apply the mv for the stale, claim or mint a card for each live letter",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W282"
       ],
       "touches": [],
-      "blocked_on": [
-        "el-openglo"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Run the command in el-openglo's tick, apply the printed mv lines (archive), mint the printed --add for each live letter, then report done to nemik:W282.",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: 2026-10-11 el-openglo-97: claimed by el-openglo:W460; plan shows 23 addressed, 0 live, 0 stale orphans (live ones already minted W461-W483).",
       "issued_at": "2026-10-10T06:17:30Z",
       "minted_during": "interrupt",
       "caused_by": "W282",
-      "last_worked": "2026-10-10T06:17:30Z",
-      "ticks_blocked": 4,
-      "completed": null
+      "last_worked": "2026-10-11T16:46:33Z",
+      "ticks_blocked": 0,
+      "completed": "20261011T164633Z"
     },
     {
       "symbol": "W286",
@@ -5499,23 +5497,21 @@
     {
       "symbol": "W288",
       "title": "Fold github's inbox into waypoints: nemik-check --letters --fold --repo github --older-than 14, apply the mv for the stale, claim or mint a card for each live letter",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W282"
       ],
       "touches": [],
-      "blocked_on": [
-        "github"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Run the command in github's tick, apply the printed mv lines (archive), mint the printed --add for each live letter, then report done to nemik:W282.",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: 2026-10-11 github-8f: claimed by github:W18, done; plan: 0 live, 0 stale orphans, nothing to apply.",
       "issued_at": "2026-10-10T06:17:33Z",
       "minted_during": "interrupt",
       "caused_by": "W282",
-      "last_worked": "2026-10-10T06:17:34Z",
-      "ticks_blocked": 4,
-      "completed": null
+      "last_worked": "2026-10-11T16:46:34Z",
+      "ticks_blocked": 0,
+      "completed": "20261011T164634Z"
     },
     {
       "symbol": "W289",
@@ -5541,44 +5537,40 @@
     {
       "symbol": "W290",
       "title": "Fold linux-sources's inbox into waypoints: nemik-check --letters --fold --repo linux-sources --older-than 14, apply the mv for the stale, claim or mint a card for each live letter",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W282"
       ],
       "touches": [],
-      "blocked_on": [
-        "linux-sources"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Run the command in linux-sources's tick, apply the printed mv lines (archive), mint the printed --add for each live letter, then report done to nemik:W282.",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: 2026-10-11 linux-sources-4c (linux-sources:W253): plan found nothing to fold; the only exit-5 line was gcalculus' misfiled letter, which nemik:W310 now delivers by copy.",
       "issued_at": "2026-10-10T06:17:37Z",
       "minted_during": "interrupt",
       "caused_by": "W282",
-      "last_worked": "2026-10-10T06:17:38Z",
-      "ticks_blocked": 4,
-      "completed": null
+      "last_worked": "2026-10-11T16:46:37Z",
+      "ticks_blocked": 0,
+      "completed": "20261011T164637Z"
     },
     {
       "symbol": "W291",
       "title": "Fold luthen-observability's inbox into waypoints: nemik-check --letters --fold --repo luthen-observability --older-than 14, apply the mv for the stale, claim or mint a card for each live letter",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W282"
       ],
       "touches": [],
-      "blocked_on": [
-        "luthen-observability"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Run the command in luthen-observability's tick, apply the printed mv lines (archive), mint the printed --add for each live letter, then report done to nemik:W282.",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: 2026-10-11 luthen-observability-a9: fold done; one live orphan claimed as luthen-observability:W827; --apply changed no files.",
       "issued_at": "2026-10-10T06:17:39Z",
       "minted_during": "interrupt",
       "caused_by": "W282",
-      "last_worked": "2026-10-10T06:17:40Z",
-      "ticks_blocked": 4,
-      "completed": null
+      "last_worked": "2026-10-11T16:46:35Z",
+      "ticks_blocked": 0,
+      "completed": "20261011T164635Z"
     },
     {
       "symbol": "W292",
