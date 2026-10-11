@@ -516,3 +516,4 @@
 2026-10-11T20:09:47Z  interrupt W329 minted    -         "test_tools metrics flaked once in the gate: the assertion now names the differing lines"  evidence=W325
 2026-10-11T20:09:53Z  tick  W325 advanced  collapse  "thoughts-forward 2: cycles (W324), utilization and Little's law (W325), flow efficiency (W328); luthen told of five deadlocks; flaky metrics test instrumented (W329)"
 2026-10-11T20:12:45Z  tick  W330 minted    -         "nemik-work W<n>: one command makes W<n> the single working card"  evidence=operator
+2026-10-11T20:15:58Z  tick  W331 minted    -         "nemik-check warns on each card in a true dependency deadlock, so the cause is fixed where it is written"  evidence=luthen-observability:W830

@@ -124,6 +124,7 @@ A waypoint is `ready`, `working`, `blocked`, `done` or `dropped`, and every chan
 | `LandedBlockerShape` | a blocker is already done or dropped; if all are, the item is ready | trim it (`$PF --bump-blocked` prunes local ones) |
 | `MalformedBlockerShape` | a symbol with prose attached (`W8 (both ...)`) | symbol alone; prose goes in evidence |
 | `ActiveCardShape` | no `working` card while items are ready, or more than one (operator 2026-10-01: one active card per repo unless everything open is blocked) | mark the item you are doing `$PF --update <W> --status working`; return extras to ready |
+| dependency cycle (a check finding from `nemik.critical`, W331) | cards that wait on each other in a loop, none of them blocked on the operator: none can become ready; usually an umbrella that lists its children under `enables` while being `blocked_on` them. A cycle with an operator-blocked member is left to the operator (the same-ask pair) | clear the `enables` (or the `blocked_on`) that closes the loop; `nemik-critical` lists every cycle |
 | `AdoptionShape` | the repo runs someone else's `mikemol-paths-forward` | `uv add` a sha-pinned copy (mtools INSTALL.md) |
 
 The unresolved `enables` (for example a wrong repo prefix) is a `VIOLATES`: it pages the operator

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 330,
+  "counter": 331,
   "waypoints": [
     {
       "symbol": "W1",
@@ -6205,7 +6205,7 @@
     {
       "symbol": "W326",
       "title": "Starvation and aging: a ready card that has waited long while later cards were ranked above it",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W323"
       ],
@@ -6217,7 +6217,7 @@
       "issued_at": "2026-10-11T20:00:40Z",
       "minted_during": "interrupt",
       "caused_by": "W323",
-      "last_worked": "2026-10-11T20:12:48Z",
+      "last_worked": "2026-10-11T20:16:42Z",
       "ticks_blocked": 0,
       "completed": null
     },
@@ -6278,19 +6278,36 @@
     {
       "symbol": "W330",
       "title": "nemik-work W<n>: one command makes W<n> the single working card",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Landed (nemik.work, tests/test_work.py, SKILL row, workflow transition and reference); close after the gate.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: 0b15dc4: nemik.work (plan returns the others to ready, marks the target; never edits the queue file), tests/test_work.py, SKILL row, workflow transition and reference; used on itself (W326 -> ready, W330 -> working).",
       "issued_at": "2026-10-11T20:12:45Z",
       "minted_during": "tick",
       "caused_by": "operator",
-      "last_worked": "2026-10-11T20:12:48Z",
+      "last_worked": "2026-10-11T20:15:57Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261011T201557Z"
+    },
+    {
+      "symbol": "W331",
+      "title": "nemik-check warns on each card in a true dependency deadlock, so the cause is fixed where it is written",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: check.survey: a Warning per card on a cycle with no operator-blocked member (nemik.critical.cycles), naming the cycle and the usual cause; tests/test_deadlock_check.py; SKILL warnings table row. luthen-observability cleared its five (cleared enables on W70, W412, W440, W447, W777; closed W692): nemik-critical reads 0 true deadlocks there.",
+      "issued_at": "2026-10-11T20:15:58Z",
+      "minted_during": "tick",
+      "caused_by": "luthen-observability:W830",
+      "last_worked": "2026-10-11T20:16:40Z",
+      "ticks_blocked": 0,
+      "completed": "20261011T201640Z"
     }
   ],
   "residue": [

@@ -127,6 +127,23 @@ def survey(root: Path) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
         by_repo.setdefault(repo, []).append(
             (str(sev).rsplit("#", 1)[-1], sym or "--", str(msg))
         )
+    # nemik:W331: every card on a dependency cycle that the operator cannot break is a Warning, so
+    # the cause is fixed where it is written (usually an umbrella that lists its children under
+    # `enables` and is blocked_on them). nemik.critical classifies the cycles.
+    from nemik.critical import cycles
+
+    cause = (
+        "none of them can become ready (an umbrella listing its children under "
+        "enables while blocked_on them is the usual cause)"
+    )
+    for members, operator_can_break in cycles(merged):
+        if operator_can_break:
+            continue
+        for member in members:
+            mrepo, _, msym = member.partition(":")
+            others = ", ".join(m for m in members if m != member) or "itself"
+            found = f"on a dependency cycle with {others}: {cause}"
+            by_repo.setdefault(mrepo, []).append(("Warning", msym, found))
     # nemik:W279: a letter a waypoint cites as evidence must exist (moved to inbox/archive counts).
     # The export layout carries no inbox, so a root without any inbox directory is not asked.
     if any(root.glob("*/inbox")):
