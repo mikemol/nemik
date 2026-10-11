@@ -6189,26 +6189,26 @@
     {
       "symbol": "W325",
       "title": "Utilization and Little's law in the weekly roll-up: arrivals over departures, and the implied wait L over lambda",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W323"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Add utilization (opened over closed, above 1 means the queue grows) and implied_wait_days (open over weekly closed rate) to nemik.history.weekly and history.json.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: history.weekly adds utilization and implied_wait_days (manifested); nemik's own weeks: utilization 1.13, 0.98, 1.22 (the queue grows slightly), implied wait 0.7, 0.3, 1.7 days; tests/test_history.py.",
       "issued_at": "2026-10-11T20:00:39Z",
       "minted_during": "interrupt",
       "caused_by": "W323",
-      "last_worked": "2026-10-11T20:03:44Z",
+      "last_worked": "2026-10-11T20:06:53Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261011T200653Z"
     },
     {
       "symbol": "W326",
       "title": "Starvation and aging: a ready card that has waited long while later cards were ranked above it",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W323"
       ],
@@ -6220,8 +6220,9 @@
       "issued_at": "2026-10-11T20:00:40Z",
       "minted_during": "interrupt",
       "caused_by": "W323",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-11T20:06:55Z",
+      "ticks_blocked": 0,
+      "completed": null
     },
     {
       "symbol": "W327",
@@ -6244,20 +6245,21 @@
     {
       "symbol": "W328",
       "title": "Flow efficiency: the share of a closed card's lifetime spent working, now that the working state is enforced",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W323"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Add flow_efficiency (working time over total time of cards closed that week) to nemik.history.weekly from time_in_state; report as low until compliance data accrues.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: history.weekly adds flow_efficiency from time_in_state; nemik's own weeks read 0.001, 0.041, 0.045: working time is about 0-5% of live time because cards were rarely marked working, the measurement the operator's skill-issue point predicted; it will rise as the pre-commit rule (W319) takes effect.",
       "issued_at": "2026-10-11T20:00:42Z",
       "minted_during": "interrupt",
       "caused_by": "W323",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-11T20:06:54Z",
+      "ticks_blocked": 0,
+      "completed": "20261011T200654Z"
     }
   ],
   "residue": [

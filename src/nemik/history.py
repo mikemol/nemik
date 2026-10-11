@@ -159,6 +159,19 @@ def time_in_state(snaps: list[Snapshot], now: datetime) -> dict[str, dict[str, f
     return totals
 
 
+def _flow_efficiency(
+    closed: list[str], spent: dict[str, dict[str, float]]
+) -> float | None:
+    """Working time over all live time (ready, working, blocked) summed over `closed`, or None."""
+    active = sum(spent.get(s, {}).get("working", 0.0) for s in closed)
+    live = sum(
+        spent.get(s, {}).get(k, 0.0)
+        for s in closed
+        for k in ("ready", "working", "blocked")
+    )
+    return round(active / live, 3) if live else None
+
+
 def weekly(snaps: list[Snapshot]) -> list[dict]:
     """One row per ISO week that saw a commit: opened and closed that week, how much of what was
     open at the week's last commit was blocked, and the longest-running block then.
@@ -174,14 +187,18 @@ def weekly(snaps: list[Snapshot]) -> list[dict]:
     blocked_since: dict[str, datetime] = {}
     born: dict[str, datetime] = {}
     done_at: dict[str, datetime] = {}
+    # nemik:W328: time each card spent in each status over the whole history, for flow efficiency.
+    spent = time_in_state(snaps, snaps[-1][0] if snaps else datetime.now(UTC))
     for (year, week), inside in sorted(weeks.items()):
         finished: list[float] = []
+        closed_now: list[str] = []
         for at, queue in inside:
             for symbol, status in _status(queue).items():
                 born.setdefault(symbol, at)
                 if status == "done" and symbol not in done_at:
                     done_at[symbol] = at
                     finished.append((at - born[symbol]).total_seconds() / 86400)
+                    closed_now.append(symbol)
                 if status == "blocked":
                     blocked_since.setdefault(symbol, at)
                 else:
@@ -203,6 +220,18 @@ def weekly(snaps: list[Snapshot]) -> list[dict]:
                 if finished
                 else None,
                 "open": len(open_cards),
+                # nemik:W325 (Little's law, L = lambda W): utilization is arrivals over departures
+                # (above 1 the queue grows); implied_wait_days is open cards over the weekly close
+                # rate, how long a new card waits at this week's pace.
+                "utilization": round(len(change.minted) / len(change.closed), 2)
+                if change.closed
+                else None,
+                "implied_wait_days": round(len(open_cards) / len(change.closed) * 7, 1)
+                if change.closed
+                else None,
+                # nemik:W328: working time over (ready + working + blocked) time, for the cards that
+                # closed this week; None when none had any, low until agents mark the working state.
+                "flow_efficiency": _flow_efficiency(closed_now, spent),
                 "blocked_share": round(len(blocked) / len(open_cards), 3)
                 if open_cards
                 else 0.0,
