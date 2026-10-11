@@ -5371,7 +5371,6 @@
         "W287",
         "W289",
         "W292",
-        "W293",
         "W294",
         "W295",
         "W297"
@@ -5382,8 +5381,8 @@
       "issued_at": "2026-10-10T06:17:20Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-11T22:10:04Z",
-      "ticks_blocked": 3,
+      "last_worked": "2026-10-11T23:18:52Z",
+      "ticks_blocked": 0,
       "completed": null
     },
     {
@@ -5589,23 +5588,21 @@
     {
       "symbol": "W293",
       "title": "Fold paperkit's inbox into waypoints: nemik-check --letters --fold --repo paperkit --older-than 14, apply the mv for the stale, claim or mint a card for each live letter",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W282"
       ],
       "touches": [],
-      "blocked_on": [
-        "paperkit"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Run the command in paperkit's tick, apply the printed mv lines (archive), mint the printed --add for each live letter, then report done to nemik:W282.",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: paperkit-d8 (paperkit:W302): --apply run, 9 cards minted (paperkit:W323-W331), 47 stale archived, misdelivered gcalculus reply delivered. Verified here: nemik-check --letters --fold --repo paperkit --older-than 14 reports 0 live and 0 stale orphans (11 addressed, 55 without a header).",
       "issued_at": "2026-10-10T06:17:41Z",
       "minted_during": "interrupt",
       "caused_by": "W282",
-      "last_worked": "2026-10-10T06:17:42Z",
-      "ticks_blocked": 15,
-      "completed": null
+      "last_worked": "2026-10-11T23:18:51Z",
+      "ticks_blocked": 0,
+      "completed": "20261011T231851Z"
     },
     {
       "symbol": "W294",
@@ -6646,10 +6643,7 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": {
-    "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-11T23:11:21Z"
-  },
+  "lock": null,
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }
