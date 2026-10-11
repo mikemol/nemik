@@ -500,3 +500,5 @@
 2026-10-11T18:18:15Z  interrupt W316 minted    -         "Milestone-directed ranking: nemik-rank --toward <repo:W<n>> ranks by the demand toward one target card"  evidence=W312
 2026-10-11T18:18:16Z  interrupt W317 minted    -         "Repo health (red, amber, green) per repo in the view and in nemik-metrics, from blocked share, oldest block and operator asks owed"  evidence=W312
 2026-10-11T18:18:17Z  interrupt W318 minted    -         "Baseline variance: name a baseline revision per repo and report planned versus actual since it (nemik-history --baseline)"  evidence=W312
+2026-10-11T18:43:02Z  tick  W319 minted    -         "Enforce the working state: a code or test commit is refused while ready cards exist and none is marked working"  evidence=operator
+2026-10-11T18:44:39Z  tick  W320 minted    -         "Model nemik's workflows rigorously and check SKILL.md against the model (structural correspondence)"  evidence=operator

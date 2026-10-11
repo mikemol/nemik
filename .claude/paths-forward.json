@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 318,
+  "counter": 320,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 164
+      "ticks_blocked": 165
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 39,
+      "ticks_blocked": 40,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T12:42:16Z",
-      "ticks_blocked": 15,
+      "ticks_blocked": 16,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 13,
+      "ticks_blocked": 14,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 13,
+      "ticks_blocked": 14,
       "completed": null,
       "weight": 1
     },
@@ -5384,7 +5384,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-10T06:18:16Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -5405,7 +5405,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -5426,7 +5426,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:29Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -5466,7 +5466,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -5487,7 +5487,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -5527,7 +5527,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -5586,7 +5586,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -5607,7 +5607,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:42Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -5628,7 +5628,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -5649,7 +5649,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -5689,7 +5689,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -5869,21 +5869,21 @@
     {
       "symbol": "W308",
       "title": "Publish the weekly project-manager history as history.json in the static view",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W307"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "static_data computes it host-side from git history (nemik.history.weekly): per repo and week, opened, closed, open, blocked share, oldest block in days, no symbols; add the file to field-manifest.json. The pod has no git history, so only the static build carries it.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: e0c5175: history_doc and history.json in static_data, manifest entry and test; closed late (the card stayed marked working: a discipline lapse the pre-commit rule now catches).",
       "issued_at": "2026-10-11T16:07:04Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-11T16:08:22Z",
+      "last_worked": "2026-10-11T18:44:34Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261011T184434Z"
     },
     {
       "symbol": "W309",
@@ -5945,7 +5945,6 @@
       "blocked_on": [
         "W313",
         "W314",
-        "W315",
         "W316",
         "W317",
         "W318"
@@ -5957,7 +5956,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T18:18:25Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -5976,25 +5975,28 @@
       "minted_during": "interrupt",
       "caused_by": "W312",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W314",
       "title": "Toil ratio over time: per week and repo, the share of ledger activity that was interrupt work (nemik-history --toil)",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W312"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Read each repo's ledger effort classes (forecast, interrupt, unclassified) with their timestamps; weekly interrupt share; tests on a throwaway ledger.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: nemik.history.toil and nemik-history --toil: per ISO week ledger activity by effort class and toil_share; tests/test_toil.py; real run on nemik: W39 11%, W40 9%, W41 0% (many lines unclassified: ticks logged without a kind). Also W319: pre-commit refuses a code or test commit while ready cards exist and none is working.",
       "issued_at": "2026-10-11T18:18:13Z",
       "minted_during": "interrupt",
       "caused_by": "W312",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-11T18:44:53Z",
+      "ticks_blocked": 0,
+      "weight": 1,
+      "completed": "20261011T184453Z"
     },
     {
       "symbol": "W315",
@@ -6031,7 +6033,8 @@
       "minted_during": "interrupt",
       "caused_by": "W312",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W317",
@@ -6049,7 +6052,8 @@
       "minted_during": "interrupt",
       "caused_by": "W312",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W318",
@@ -6066,6 +6070,40 @@
       "issued_at": "2026-10-11T18:18:17Z",
       "minted_during": "interrupt",
       "caused_by": "W312",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 1
+    },
+    {
+      "symbol": "W319",
+      "title": "Enforce the working state: a code or test commit is refused while ready cards exist and none is marked working",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Landed in .githooks/pre-commit (queue-only commits and an empty ready set are exempt). Next card: flow efficiency in nemik-history once agents comply.",
+      "evidence": "",
+      "issued_at": "2026-10-11T18:43:02Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": "2026-10-11T18:44:54Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W320",
+      "title": "Model nemik's workflows rigorously and check SKILL.md against the model (structural correspondence)",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Design: a declared workflow spec (waypoint lifecycle, tick, peer ask, operator ask, letter, inbox fold) as data with states, transitions and the command that effects each; a test that every model verb appears in SKILL.md and every workflow command in SKILL.md is in the model. First slice: the lifecycle and tick.",
+      "evidence": "",
+      "issued_at": "2026-10-11T18:44:39Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0
     }
@@ -6130,7 +6168,10 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-10-11T18:41:28Z"
+  },
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }

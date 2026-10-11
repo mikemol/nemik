@@ -19,7 +19,7 @@ from dataclasses import asdict, dataclass, field
 from datetime import UTC, datetime
 from pathlib import Path
 
-from nemik.check import QUEUE, default_root, workstream_files
+from nemik.check import LEDGER, QUEUE, default_root, workstream_files
 
 QUEUE_PATH = f".claude/{QUEUE}"
 _DATE = re.compile(r"\d{4}-\d{2}-\d{2}([T ]\d{2}:\d{2}(:\d{2})?)?")
@@ -268,15 +268,23 @@ def main(argv: list[str] | None = None) -> int:
         action="store_true",
         help="per ISO week: opened, closed, blocked share, oldest block (W269)",
     )
+    mode.add_argument(
+        "--toil",
+        action="store_true",
+        help="per ISO week: ledger activity by effort class and the interrupt share (W314)",
+    )
     args = ap.parse_args(argv)
     dirs = {r: p.parents[1] for r, p in workstream_files(args.root, QUEUE)}
     names = sorted(dirs) if args.all else args.repos
-    if not names or (args.start is None and not (args.time_in_state or args.weekly)):
+    series = args.time_in_state or args.weekly or args.toil
+    if not names or (args.start is None and not series):
         ap.error("name the repos (or --all) and a --from")
     for name in names:
         if name not in dirs:
             print(f"ERROR: no workstream {name} under {args.root}", file=sys.stderr)
             return 2
+    if args.toil:
+        return _toil(args, names, dirs)
     if args.time_in_state or args.weekly:
         return _series(args, names, dirs)
     out: dict[str, Diff] = {}
@@ -289,6 +297,61 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps({r: asdict(d) for r, d in out.items()}, indent=1))
     else:
         print("\n".join(render(r, d) for r, d in out.items()))
+    return 0
+
+
+def toil(repo: str, ledger: Path) -> list[dict]:
+    """nemik:W314: per ISO week, the repo's ledger activity by effort class and the interrupt share.
+
+    Each ledger line is one PROV activity with a start time and an effort class (forecast: a scheduled
+    tick or operator-typed work; interrupt: unplanned; unclassified). `toil_share` is interrupt over
+    forecast plus interrupt, the tax unplanned work levies on planned work; None when neither occurred.
+    """
+    from rdflib import RDF
+    from rdflib.namespace import PROV
+
+    from nemik.adapter import NEMIK, ledger_graph
+
+    g, _ = ledger_graph(repo, ledger)
+    weeks: dict[str, dict[str, int]] = {}
+    for act in g.subjects(RDF.type, PROV.Activity):
+        stamp = str(g.value(act, PROV.startedAtTime) or "")
+        if not stamp:
+            continue
+        iso = datetime.fromisoformat(stamp).isocalendar()
+        cls = str(g.value(act, NEMIK.effortClass) or "unclassified")
+        week = weeks.setdefault(f"{iso.year}-W{iso.week:02d}", {})
+        week[cls] = week.get(cls, 0) + 1
+    rows = []
+    for label, counts in sorted(weeks.items()):
+        planned = counts.get("forecast", 0)
+        unplanned = counts.get("interrupt", 0)
+        rows.append(
+            {
+                "week": label,
+                **counts,
+                "toil_share": round(unplanned / (planned + unplanned), 3)
+                if planned + unplanned
+                else None,
+            }
+        )
+    return rows
+
+
+def _toil(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> int:
+    """`--toil`: the weekly interrupt share per repo, from each repo's ledger."""
+    doc = {n: toil(n, dirs[n] / ".claude" / LEDGER) for n in names}
+    if args.json:
+        print(json.dumps(doc, indent=1))
+        return 0
+    for name, rows in doc.items():
+        print(name)
+        for row in rows:
+            share = "-" if row["toil_share"] is None else f"{row['toil_share']:.0%}"
+            counts = "  ".join(
+                f"{k} {v}" for k, v in row.items() if k not in ("week", "toil_share")
+            )
+            print(f"  {row['week']}  interrupt share {share:>4}  {counts}")
     return 0
 
 

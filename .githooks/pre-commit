@@ -16,4 +16,16 @@ if [ -n "$missing" ]; then
 	echo "pre-commit: not tracked (vendor/wheels/.gitignore hides them; git add -f): $missing" >&2
 	exit 1
 fi
+# nemik:W319 (operator 2026-10-11: agents rarely marking a card `working` is a discipline problem, so
+# it is enforced, not advised): a commit that changes code or tests while the queue has ready cards
+# and NO working card is refused. Mark the card you are doing first:
+#   mikemol-paths-forward --state .claude/paths-forward.json --update W<n> --status working
+# A queue-only commit (nothing staged under src/ or tests/) is exempt, and so is a queue with nothing ready.
+if [ -n "$(git diff --cached --name-only -- src tests)" ] &&
+	grep -q '"status": "ready"' .claude/paths-forward.json &&
+	! grep -q '"status": "working"' .claude/paths-forward.json; then
+	echo "pre-commit: code or tests changed, the queue has ready cards, and none is marked working." >&2
+	echo "  mark the card you are doing: mikemol-paths-forward --state .claude/paths-forward.json --update W<n> --status working" >&2
+	exit 1
+fi
 exec bazel test //... --noshow_progress
