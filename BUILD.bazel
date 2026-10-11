@@ -50,5 +50,6 @@ venv_from_hub(
         "nemik-calendar-write": "nemik.calwrite:main",
         "nemik-history": "nemik.history:main",
         "nemik-pins": "nemik.pins:main",
+        "nemik-critical": "nemik.critical:main",
     },
 )

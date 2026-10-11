@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 321,
+  "counter": 322,
   "waypoints": [
     {
       "symbol": "W1",
@@ -5961,22 +5961,22 @@
     {
       "symbol": "W313",
       "title": "Critical path and slack: per open card, the length of its longest open dependency chain and its float, highlighted in the view",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W312"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Design: longest path through open prerequisites to a terminal card (nemik.flow/salience reach); slack = how much a card can wait before it lengthens the path; nemik-rank --critical lists the zero-slack chain; the web view marks it.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: nemik.critical (critical(g): length, one longest chain, slack per open card; nemik-critical CLI, --json), tests/test_critical.py (longest chain zero slack, side branch 1, isolated card 2, closed card leaves the path, a cycle terminates); SKILL row and workflow reference. Real fleet run 2026-10-11: the critical path is 38 open cards deep, all in gabion (W49 ... W871), 53 cards at zero slack, 2111 with slack. The view marking is the next card.",
       "issued_at": "2026-10-11T18:18:12Z",
       "minted_during": "interrupt",
       "caused_by": "W312",
-      "last_worked": "2026-10-11T19:12:45Z",
+      "last_worked": "2026-10-11T19:16:51Z",
       "ticks_blocked": 0,
       "weight": 1,
-      "completed": null
+      "completed": "20261011T191651Z"
     },
     {
       "symbol": "W314",
@@ -6124,6 +6124,25 @@
       "last_worked": "2026-10-11T19:12:43Z",
       "ticks_blocked": 0,
       "completed": "20261011T191243Z"
+    },
+    {
+      "symbol": "W322",
+      "title": "Mark the critical path in the web view: zero-slack cards and edges drawn heavier or outlined",
+      "status": "working",
+      "enables": [
+        "W312"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Ship slack per card and the chain in graph.json (nemik.critical, manifested), outline zero-slack nodes in the page; verify with tools/render-check.sh.",
+      "evidence": "",
+      "issued_at": "2026-10-11T19:16:50Z",
+      "minted_during": "tick",
+      "caused_by": "W313",
+      "last_worked": "2026-10-11T19:16:54Z",
+      "ticks_blocked": 0,
+      "completed": null
     }
   ],
   "residue": [
