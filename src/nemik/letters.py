@@ -286,6 +286,13 @@ def apply_fold(
     return done
 
 
+def held(root: Path, ltr: Letter) -> bool:
+    """True when the letter's recipient holds it: in its inbox, or archived there (a repo that has
+    read a letter files it under `inbox/archive/`, which is still delivered)."""
+    inbox = root / ltr.recipient / "inbox"
+    return (inbox / ltr.name).exists() or (inbox / "archive" / ltr.name).exists()
+
+
 def redeliveries(
     root: Path, workstreams: set[str], repo: str | None = None
 ) -> list[tuple[Path, Path]]:
@@ -301,7 +308,7 @@ def redeliveries(
         if repo and repo not in (ltr.inbox, ltr.recipient):
             continue
         dest = root / ltr.recipient / "inbox" / ltr.name
-        if (root / ltr.recipient / "inbox").is_dir() and not dest.exists():
+        if dest.parent.is_dir() and not held(root, ltr):
             out.append((root / ltr.inbox / "inbox" / ltr.name, dest))
     return out
 
@@ -326,25 +333,23 @@ def report(
         addressed = [x for x in addressed if repo in (x.inbox, x.recipient)]
     import shutil
 
-    # A misdelivered letter whose recipient already holds a copy is delivered (nemik:W310).
-    pending = [
-        x
-        for x in addressed
-        if x.recipient == x.inbox
-        or not (root / x.recipient / "inbox" / x.name).exists()
-    ]
+    # A misdelivered letter its recipient holds (in its inbox or archived there) is delivered (W310).
+    # With --apply the copies are made FIRST, so the verdict and the exit code are the after state.
+    delivery: list[str] = []
+    if fold:
+        for src, dst in redeliveries(root, workstreams, repo):
+            if apply:
+                shutil.copy2(src, dst)
+                delivery.append(f"delivered {dst}")
+            else:
+                delivery.append(f"cp {src} {dst}")
+    pending = [x for x in addressed if x.recipient == x.inbox or not held(root, x)]
     bad = misdelivered(pending, workstreams)
     lines = [
         f"letters: {len(addressed)} addressed, {len(unaddressed)} without a header"
     ]
     lines += [f"MISDELIVERED {row}" for row in bad]
-    if fold:
-        for src, dst in redeliveries(root, workstreams, repo):
-            if apply:
-                shutil.copy2(src, dst)
-                lines.append(f"delivered {dst}")
-            else:
-                lines.append(f"cp {src} {dst}")
+    lines += delivery
     if fold and apply:
         lines += apply_fold(root, repo, older_than)
     elif fold:

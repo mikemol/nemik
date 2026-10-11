@@ -181,8 +181,13 @@ def test_a_misdelivered_letter_is_copied_to_its_recipient_and_then_counts_as_del
     assert code == 5 and any(line.startswith("cp ") for line in said)
     said, code = report(tmp_path, spaces, True, "linux-sources", None, True)
     assert any(line.startswith("delivered ") for line in said)
-    assert (tmp_path / "linux-sources" / "inbox" / "2026-08-21-misfiled.md").exists()
-    assert report(tmp_path, spaces, True, "linux-sources")[1] == 0  # delivered now
+    assert code == 0  # the apply run's own verdict is the after state
+    copy = tmp_path / "linux-sources" / "inbox" / "2026-08-21-misfiled.md"
+    assert copy.exists()
+    # the recipient reads it and files it under archive/: still delivered, not misdelivered again
+    (copy.parent / "archive").mkdir()
+    copy.rename(copy.parent / "archive" / copy.name)
+    assert report(tmp_path, spaces, True, "linux-sources")[1] == 0
 
 
 def test_a_peer_waypoint_citing_the_letter_path_owns_it(tmp_path: Path) -> None:
