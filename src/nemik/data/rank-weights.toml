@@ -93,3 +93,8 @@ weight = 1
 "15" = 3
 "5" = 5
 "0.01" = 7
+
+# nemik:W326: a ready card that waited longer than this many days while newer cards ranked above it
+# is STARVED (nemik-starved). Reporting only: ranking has no aging term, by choice.
+[starvation]
+days = 14

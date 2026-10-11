@@ -1,0 +1,100 @@
+"""nemik:W326: starvation, the failure of a pure priority queue.
+
+A ready card is STARVED when it has waited longer than the declared age (`[starvation] days` in
+rank-weights.toml) while cards issued after it were ranked above it. Ranking by band and flow salience
+never ages a card, so a low-weight card can sit behind a stream of newer, heavier ones forever. This
+reports who is overtaken and by how many; whether to add an aging term to the order is a separate,
+declared decision (the residue term is off by default for the same reason: measure first).
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import tomllib
+from datetime import UTC, datetime
+from importlib.resources import files
+from pathlib import Path
+from typing import NamedTuple
+
+from rdflib import Graph
+from rdflib.namespace import DCTERMS
+
+from nemik.adapter import waypoint_uri
+from nemik.rank import fleet_repos, load_composition, load_weights, rank
+
+DEFAULT_DAYS = 14
+
+
+class Starved(NamedTuple):
+    cite: str
+    waited_days: float
+    overtaken_by: int
+
+
+def days_limit(text: str | None = None) -> int:
+    """The declared age in days (`[starvation] days`), or 14 when the table is absent."""
+    if text is None:
+        text = files("nemik.data").joinpath("rank-weights.toml").read_text()
+    return int(tomllib.loads(text).get("starvation", {}).get("days", DEFAULT_DAYS))
+
+
+def starved(
+    g: Graph, repo: str, now: datetime, days: int = DEFAULT_DAYS
+) -> list[Starved]:
+    """`repo`'s ready cards that waited over `days` while later-issued cards ranked above them."""
+    order = rank(g, repo, load_weights(), load_composition())
+    issued: dict[str, datetime] = {}
+    for row in order:
+        stamp = g.value(waypoint_uri(repo, row["symbol"]), DCTERMS.created)
+        if stamp is not None:
+            issued[row["symbol"]] = datetime.fromisoformat(str(stamp))
+    found: list[Starved] = []
+    for i, row in enumerate(order):
+        born = issued.get(row["symbol"])
+        if born is None or (now - born).days <= days:
+            continue
+        ahead = [r["symbol"] for r in order[:i] if issued.get(r["symbol"], born) > born]
+        if ahead:
+            found.append(
+                Starved(
+                    f"{repo}:{row['symbol']}",
+                    round((now - born).total_seconds() / 86400, 1),
+                    len(ahead),
+                )
+            )
+    return sorted(found, key=lambda s: -s.waited_days)
+
+
+def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
+    """nemik-starved: ready cards overtaken by newer ones for longer than the declared age."""
+    from nemik.check import default_root, survey
+
+    ap = argparse.ArgumentParser(
+        prog="nemik-starved", description=(main.__doc__ or "").splitlines()[0]
+    )
+    ap.add_argument("repos", nargs="*", help="only these repos (default: every one)")
+    ap.add_argument("--root", type=Path, default=default_root(), help="~/github")
+    ap.add_argument(
+        "--days", type=int, default=None, help="age limit (default: the declared)"
+    )
+    ap.add_argument("--json", action="store_true")
+    args = ap.parse_args(argv)
+    if g is None:
+        g = Graph()
+        for _, qg, _ in survey(args.root):
+            if qg is not None:
+                g += qg
+    days = args.days if args.days is not None else days_limit()
+    now = datetime.now(UTC)
+    found: list[Starved] = []
+    for repo in args.repos or fleet_repos(g):
+        found += starved(g, repo, now, days)
+    if args.json:
+        print(json.dumps([s._asdict() for s in found], indent=1))
+        return
+    print(
+        f"starved ready cards (waited over {days} days, overtaken by newer ones): {len(found)}"
+    )
+    for s in found:
+        print(f"  {s.cite}  waited {s.waited_days}d, overtaken by {s.overtaken_by}")
