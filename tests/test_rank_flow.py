@@ -179,6 +179,9 @@ def test_the_view_marks_the_critical_path_and_ships_slack(tmp_path: Path) -> Non
     on_path = [n for n in nodes if n["on_path"]]
     assert len(on_path) == 2
     assert all(n["slack"] == 0 for n in on_path)
+    # nemik:W334: each repo also marks its own longest chain.
+    assert all(isinstance(n["on_path_repo"], bool) for n in nodes)
+    assert {n["repo"] for n in nodes if n["on_path_repo"]} == {n["repo"] for n in nodes}
 
 
 def test_the_view_ships_the_current_across_each_dependency(tmp_path: Path) -> None:

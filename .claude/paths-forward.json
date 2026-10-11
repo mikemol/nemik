@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 170
+      "ticks_blocked": 171
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 46,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T12:42:16Z",
-      "ticks_blocked": 21,
+      "ticks_blocked": 22,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 22,
+      "ticks_blocked": 23,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "completed": null,
       "weight": 1
     },
@@ -5384,7 +5384,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-10T06:18:16Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "completed": null
     },
     {
@@ -5405,7 +5405,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
@@ -5426,7 +5426,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:29Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
@@ -5466,7 +5466,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
@@ -5487,7 +5487,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
@@ -5527,7 +5527,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
@@ -5586,7 +5586,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
@@ -5607,7 +5607,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:42Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
@@ -5628,7 +5628,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
@@ -5649,7 +5649,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
@@ -5689,7 +5689,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
@@ -5954,7 +5954,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T19:12:00Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "completed": null
     },
     {
@@ -6033,7 +6033,7 @@
       "caused_by": "W312",
       "last_worked": "2026-10-11T20:11:30Z",
       "ticks_blocked": 0,
-      "weight": 1,
+      "weight": 2,
       "completed": null
     },
     {
@@ -6053,7 +6053,7 @@
       "caused_by": "W312",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 2
     },
     {
       "symbol": "W318",
@@ -6072,7 +6072,7 @@
       "caused_by": "W312",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 2
     },
     {
       "symbol": "W319",
@@ -6160,7 +6160,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T20:11:31Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -6237,7 +6237,7 @@
       "caused_by": "W323",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W328",
@@ -6352,7 +6352,7 @@
     {
       "symbol": "W334",
       "title": "graph.json carries each repo's own longest chain (on_path_repo)",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W332"
       ],
@@ -6362,19 +6362,19 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "on_path_repo beside the fleet on_path; the page derives view and selected-card chains client-side from slack and edges",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: serve.to_json: on_path_repo per open card from critical(gn, repo_scope(repo)); field-manifest flag; test_rank_flow",
       "issued_at": "2026-10-11T21:07:44Z",
       "minted_during": "interrupt",
       "caused_by": "W332",
-      "last_worked": "2026-10-11T21:13:31Z",
+      "last_worked": "2026-10-11T21:42:23Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261011T214223Z"
     },
     {
       "symbol": "W335",
       "title": "web: one coloured halo per path scope, with a legend",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W332"
       ],
@@ -6389,8 +6389,10 @@
       "issued_at": "2026-10-11T21:07:45Z",
       "minted_during": "interrupt",
       "caused_by": "W332",
-      "last_worked": "2026-10-11T21:10:52Z",
-      "ticks_blocked": 0
+      "last_worked": "2026-10-11T21:42:24Z",
+      "ticks_blocked": 0,
+      "weight": 2,
+      "completed": null
     },
     {
       "symbol": "W336",
@@ -6411,7 +6413,8 @@
       "minted_during": "interrupt",
       "caused_by": "W332",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 2
     },
     {
       "symbol": "W337",
@@ -6446,12 +6449,13 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "extract every node, edge, halo and text colour pair from index.html; check WCAG 1.4.3/1.4.11 ratios and a CVD simulation, reusing el-openglo cvd_gate.py by import not copy",
-      "evidence": "",
+      "evidence": "2026-10-11: el-openglo answer: nothing there is installable (flat modules, no build backend). cvd_gate.py's pure core (worst_view_dE, Okabe-Ito floor; numpy+colorspacious; one lazy palette_graph import to cut) is to be extracted as a mikemol-* package homed in mtools (el-openglo:W508, minted soon, needs mtools to name the home). Plan: WCAG 1.4.3/1.4.11 ratio arithmetic is generic and lands here first; the CVD arm waits on that package, pinned by the one mtools sha.",
       "issued_at": "2026-10-11T21:16:30Z",
       "minted_during": "tick",
       "caused_by": "W337",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-11T21:18:11Z",
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W339",
@@ -6467,12 +6471,13 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "WCAG 1.4.1 as in el-openglo check_use_of_colour: state, band and halo must differ by shape, weight or text, not hue or opacity alone; measured in the render-check browser",
-      "evidence": "",
+      "evidence": "2026-10-11: el-openglo answer: check_use_of_colour.py scans el-openglo's own emitted artifacts and the criterion is mat230's (el-openglo:W72 adopts it); depend on mat230's check, not a copy. Legibility floors (W340): only the floor arithmetic is generic; APCA and contrast floors are tied to el-openglo's solver. | 2026-10-11: Correction: mat230 is archived; the only copy is /home/mikemol/github/mat230.tar.xz (member mat230/bin/check-a11y, _check_use_of_colour). The live cite is el-openglo:W72 (adopting it, ready). Until it lands, the logic source is that tar member; nemik reads it, never depends on mat230 as a repo.",
       "issued_at": "2026-10-11T21:16:31Z",
       "minted_during": "tick",
-      "caused_by": "W337",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "caused_by": "el-openglo:W72",
+      "last_worked": "2026-10-11T21:18:55Z",
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W340",
@@ -6493,7 +6498,8 @@
       "minted_during": "tick",
       "caused_by": "W337",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W341",
@@ -6509,12 +6515,13 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "adapt paperkit .claude/agents/a11y-adversary.md: a read-only agent that tries to refute each a11y claim the checks make; keyboard and screen-reader paths included",
-      "evidence": "",
+      "evidence": "2026-10-11: paperkit:W320 answer: a11y-adversary is a copy-pattern, no shared form. Keep the method (refute-by-default; reason from the artifact, not the docstring; attack order false entailment, standards accuracy, overclaim, drift; REFUTED/SURVIVED/UNCERTAIN with file:line; read-only). Re-point at nemik's own claim registry (the checks of W338-W340). Candidates for a web page: use_of_colour.py, ruler.py, linkalt.py; contrast 1.4.3/1.4.11 has no check anywhere, so W338 writes the first. Not portable: the PDF/UA and veraPDF checks. | 2026-10-11: paperkit:W321 (shared adversary agent taking a claim registry as input) is carded, design-first. Not blocking: nemik copies the method now and adopts the shared agent when it exists.",
       "issued_at": "2026-10-11T21:16:34Z",
       "minted_during": "tick",
-      "caused_by": "W337",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "caused_by": "paperkit:W320",
+      "last_worked": "2026-10-11T21:18:33Z",
+      "ticks_blocked": 0,
+      "weight": 1
     }
   ],
   "residue": [
@@ -6577,7 +6584,10 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-10-11T21:41:21Z"
+  },
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }

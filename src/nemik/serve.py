@@ -281,14 +281,20 @@ def to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
                     found["salience"] = round(r["salience"], 4)
     # nemik:W322: slack (nemik.critical) per open card, and which cards lie on the longest chain, so
     # the page can mark the path that bounds the fleet. Computed over `gn` like every published number.
-    from nemik.critical import critical
+    from nemik.critical import critical, repo_scope
 
     crit = critical(gn)
     on_path = set(crit.chain)
+    # nemik:W334: each repo's own longest chain, beside the fleet's, for the page's per-repo halo.
+    repo_chain = {
+        repo: set(critical(gn, repo_scope(gn, repo)).chain)
+        for repo in sorted({n["repo"] for n in nodes})
+    }
     for item in nodes:
         if item.get("cite") in crit.slack:
             item["slack"] = crit.slack[item["cite"]]
             item["on_path"] = item["cite"] in on_path
+            item["on_path_repo"] = item["cite"] in repo_chain[item["repo"]]
     # nemik:W264: the demand that crossed each dependency, summed over the ready repos' solves, as
     # the width the page draws the edge with. A `waits` edge runs waiter -> blocker, an `enables`
     # edge prerequisite -> dependent; the flow names a dependency (needing card, prerequisite).
