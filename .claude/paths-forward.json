@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 308,
+  "counter": 309,
   "waypoints": [
     {
       "symbol": "W1",
@@ -5864,21 +5864,19 @@
     {
       "symbol": "W307",
       "title": "A history panel in the web view: per-repo weekly opened vs closed and blocked share from history.json",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "W308"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Needs the history.json card first; draw a small table or bars per repo in the side panel; verify in headless Chrome (W306).",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: index.html: History panel (hidden unless history.json exists; per toggled repo its last four weeks: opened, closed, open, blocked share, title carries oldest block days); tests/test_layout.py test_the_history_panel_shows_the_weekly_roll_up_when_there_is_one (host Chrome, history.json served by a route stub): passes.",
       "issued_at": "2026-10-11T16:06:55Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-11T16:07:10Z",
+      "last_worked": "2026-10-11T16:22:43Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261011T162243Z"
     },
     {
       "symbol": "W308",
@@ -5898,6 +5896,22 @@
       "last_worked": "2026-10-11T16:08:22Z",
       "ticks_blocked": 0,
       "completed": null
+    },
+    {
+      "symbol": "W309",
+      "title": "Public view: salience, edge current and history counts must not be shaped by withheld waypoints",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Compute the published salience, edge current and history.json over the graph minus luthen's withheld refs (static_data applies withheld AFTER computing), or state the residual leak to luthen; add a test that withholding a waiter changes no published number.",
+      "evidence": "",
+      "issued_at": "2026-10-11T16:22:45Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [

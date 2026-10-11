@@ -176,6 +176,44 @@ def test_repo_toggles_and_salience_order(server, tmp_path) -> None:
     assert labelled > 0 and widened > 0
 
 
+def test_the_history_panel_shows_the_weekly_roll_up_when_there_is_one(
+    server, tmp_path
+) -> None:
+    # nemik:W307: history.json exists only in a host-side static build; the panel is hidden without it.
+    doc = {
+        "nemik": [
+            {
+                "week": "2026-W41",
+                "opened": 5,
+                "closed": 3,
+                "open": 4,
+                "blocked_share": 0.5,
+                "oldest_blocked_days": 2.0,
+            }
+        ]
+    }
+    with sync_api.sync_playwright() as p:
+        exe = os.environ.get("NEMIK_CHROMIUM")
+        try:
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        page.route(
+            "**/history.json",
+            lambda route: route.fulfill(
+                status=200, content_type="application/json", body=json.dumps(doc)
+            ),
+        )
+        page.goto(server)
+        page.wait_for_function("() => !document.getElementById('historyBox').hidden")
+        text = page.inner_text("#history")
+        browser.close()
+    assert "W41" in text and "+5" in text and "50% blocked" in text
+
+
 def test_rank_forest_view(server, tmp_path) -> None:
     out = Path(os.environ.get("TEST_UNDECLARED_OUTPUTS_DIR") or tmp_path)
     with sync_api.sync_playwright() as p:

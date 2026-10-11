@@ -88,6 +88,7 @@ aside a { color: var(--ink); text-decoration: underline dotted var(--muted); }
     <!-- /tools -->
     <h2>Weather</h2>
     <div id="weather" class="stat">No outage is being waited on.</div>
+    <div id="historyBox" hidden><h2>History</h2><div id="history" class="stat"></div></div>
     <h2>Goals</h2>
     <div id="goals" class="stat">Pick a repo.</div>
     <h2>Wake</h2>
@@ -736,8 +737,24 @@ document.getElementById("repos").onclick = ev => {
   if (picked.has(r)) picked.delete(r); else picked.add(r);
   b.setAttribute("aria-pressed", picked.has(r));
   try { localStorage.setItem("nemik.repos", JSON.stringify([...picked])); } catch (e) { /* not remembered */ }
-  draw(); findings(); goals(); weather(); tool();
+  draw(); findings(); goals(); weather(); history(); tool();
 };
+
+// nemik:W307: the project-manager's weekly roll-up (history.json, built host-side from git history, so
+// the live pod has none and the panel stays hidden): per toggled repo, its last four weeks.
+let historyDoc = undefined;
+async function history() {
+  const box = document.getElementById("historyBox");
+  if (historyDoc === undefined) {
+    try { const r = await fetch("history.json"); historyDoc = r.ok ? await r.json() : null; } catch (e) { historyDoc = null; }
+  }
+  if (!historyDoc) { box.hidden = true; return; }
+  const rows = Object.entries(historyDoc).filter(([r]) => wants(r) && historyDoc[r].length).map(([r, weeks]) =>
+    `<dt>${esc(r)}</dt><dd>${weeks.slice(-4).map(w =>
+      `<div title="${esc(w.week)}: ${w.opened} opened, ${w.closed} closed, ${w.open} open, ${Math.round(100 * w.blocked_share)}% blocked${w.oldest_blocked_days == null ? "" : `, oldest block ${w.oldest_blocked_days}d`}">${esc(w.week.slice(5))} +${w.opened} −${w.closed} · ${w.open} open · ${Math.round(100 * w.blocked_share)}% blocked</div>`).join("")}</dd>`);
+  box.hidden = !rows.length;
+  document.getElementById("history").innerHTML = `<dl>${rows.join("")}</dl>`;
+}
 
 let lastGraph = null;
 async function load() {
@@ -760,7 +777,7 @@ async function load() {
   }
   chips([...new Set(data.nodes.map(n => n.repo))].sort());
   await wake();  // draw() reads `liveness`, populated by wake() -- fetch it first, not alongside.
-  draw(); findings(); goals(); weather();
+  draw(); findings(); goals(); weather(); history();
 }
 
 // Also feeds `liveness` (repo -> asleep/idle/awake) that draw() uses to color repo boxes, so the

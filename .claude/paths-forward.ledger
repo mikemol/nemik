@@ -488,3 +488,4 @@
 2026-10-11T16:06:44Z  interrupt W306 minted    -         "Render nemik's web view in headless Chrome: find the host's binary and make the layout and interaction tests run against it"  evidence=operator
 2026-10-11T16:06:55Z  interrupt W307 minted    -         "A history panel in the web view: per-repo weekly opened vs closed and blocked share from history.json"  evidence=operator
 2026-10-11T16:07:04Z  interrupt W308 minted    -         "Publish the weekly project-manager history as history.json in the static view"  evidence=operator
+2026-10-11T16:22:45Z  interrupt W309 minted    -         "Public view: salience, edge current and history counts must not be shaped by withheld waypoints"  evidence=operator
