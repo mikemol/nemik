@@ -20,6 +20,9 @@ _PIN = re.compile(
     r"git\+https://github\.com/[\w.-]+/([\w.-]+?)(?:\.git)?@([0-9a-f]{7,40})\b"
 )
 _FILES = ("pyproject.toml", "MODULE.bazel")
+# A vendored mtools wheel names its commit in its file name: mikemol_<dist>-0.1.0+<sha>-py3-none-any.whl
+# (vendor/wheels/README.md); every mikemol_* distribution there is built from the mtools repo.
+_WHEEL = re.compile(r"mikemol_\w+-[\d.]+\+([0-9a-f]{7,40})-py3-none-any\.whl")
 
 
 class Pin(NamedTuple):
@@ -35,8 +38,11 @@ def pins(root: Path) -> list[Pin]:
         for path in sorted(root.glob(f"*/{name}")):
             if path.parent.name.startswith("."):
                 continue  # a worktree of another repo, not a repo (see check.workstream_files)
-            for m in _PIN.finditer(path.read_text(errors="replace")):
+            text = path.read_text(errors="replace")
+            for m in _PIN.finditer(text):
                 found.add(Pin(path.parent.name, m[1], m[2]))
+            for w in _WHEEL.finditer(text):
+                found.add(Pin(path.parent.name, "mtools", w[1]))
     return sorted(found)
 
 

@@ -57,6 +57,19 @@ def test_a_pin_is_as_far_behind_as_the_peer_has_commits_since(tmp_path: Path) ->
     assert behind(tmp_path, Pin("app", "ghost", "a" * 40)) is None  # not cloned here
 
 
+def test_a_vendored_wheel_names_its_mtools_commit_in_its_file_name(
+    tmp_path: Path,
+) -> None:
+    # nemik:W303: nemik pins mtools by wheel (vendor/wheels/mikemol_*-0.1.0+<sha>-...), not a git URL.
+    consumer = tmp_path / "app"
+    consumer.mkdir()
+    (consumer / "pyproject.toml").write_text(
+        'a = { path = "vendor/wheels/mikemol_hooks-0.1.0+842ab10-py3-none-any.whl" }\n'
+        'b = { path = "vendor/wheels/mikemol_icsstruct-0.1.0+842ab10-py3-none-any.whl" }\n'
+    )
+    assert pins(tmp_path) == [Pin("app", "mtools", "842ab10")]  # one pin: one commit
+
+
 def test_the_command_exits_6_only_past_the_threshold(tmp_path: Path, capsys) -> None:
     shas = _peer(tmp_path)
     consumer = tmp_path / "app"

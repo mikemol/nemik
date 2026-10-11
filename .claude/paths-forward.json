@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 302,
+  "counter": 304,
   "waypoints": [
     {
       "symbol": "W1",
@@ -5790,6 +5790,39 @@
       "last_worked": "2026-10-11T01:04:52Z",
       "ticks_blocked": 0,
       "completed": "20261011T010452Z"
+    },
+    {
+      "symbol": "W303",
+      "title": "nemik-pins reads vendored mtools wheel pins (the commit in the wheel's file name), so nemik's own pin staleness is reported",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: nemik.pins._WHEEL; nemik-pins nemik: mtools@842ab10 behind 41 (mtools HEAD 7d4a458); tests/test_pins.py",
+      "issued_at": "2026-10-11T01:08:30Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": "2026-10-11T01:08:46Z",
+      "ticks_blocked": 0,
+      "completed": "20261011T010846Z"
+    },
+    {
+      "symbol": "W304",
+      "title": "Re-vendor mtools at its HEAD when nemik-pins nemik reports it more than 30 commits behind",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Run tools/revendor-mtools.sh <mtools HEAD> 842ab10 (the script git-adds the wheels), update the README history and hashes with a sed file, rebuild the venv, run --check and the gate; read the new --check findings for nemik's queue.",
+      "evidence": "",
+      "issued_at": "2026-10-11T01:09:00Z",
+      "minted_during": "interrupt",
+      "caused_by": "W303",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
