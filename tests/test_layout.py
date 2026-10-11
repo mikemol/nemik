@@ -169,6 +169,8 @@ def test_repo_toggles_and_salience_order(server, tmp_path) -> None:
             "() => cy.nodes('[symbol]').filter(n => n.data('label').includes(' · ')).length"
         )
         widened = page.evaluate("() => cy.edges('[current > 0]').length")
+        # nemik:W322: the cards on the longest open chain carry the halo class data
+        assert page.evaluate("() => cy.nodes('[?on_path]').length") > 0
         page.screenshot(path=str(out / "salience-order.png"))
         browser.close()
     assert errors == []

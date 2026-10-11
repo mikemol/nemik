@@ -168,6 +168,19 @@ def test_the_view_ships_each_ready_cards_flow_salience(tmp_path: Path) -> None:
     assert by_symbol["W1"]["salience"] == by_symbol["W2"]["salience"] == 1.5
 
 
+def test_the_view_marks_the_critical_path_and_ships_slack(tmp_path: Path) -> None:
+    # nemik:W322: in the fleet fixture W4-W6 each need W1 and W2, W7-W8 need W3: the longest open chain
+    # is two cards deep, so exactly one chain is on the path and every open card carries a slack.
+    from nemik.serve import to_json
+
+    doc = to_json(_fleet(tmp_path), {})
+    nodes = [n for n in doc["nodes"] if n["state"] != "done"]
+    assert all(isinstance(n["slack"], int) for n in nodes)
+    on_path = [n for n in nodes if n["on_path"]]
+    assert len(on_path) == 2
+    assert all(n["slack"] == 0 for n in on_path)
+
+
 def test_the_view_ships_the_current_across_each_dependency(tmp_path: Path) -> None:
     # nemik:W264: W7 and W8 each need only B (W3), so each dependency carries exactly their demand
     # of 1; W4 needs A and E equally, so it splits its demand of 1 in half across the two.

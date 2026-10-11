@@ -505,3 +505,4 @@
 2026-10-11T18:51:43Z  tick  W321 minted    -         "Extend the workflow model to the tick, the letter and the weather workflows and to the warnings table"  evidence=W320
 2026-10-11T18:54:46Z  tick  W320 advanced  collapse  "toil (W314), working-state enforcement (W319), workflow model with a SKILL correspondence test (W320); the test found four untaught commands"
 2026-10-11T19:16:50Z  tick  W322 minted    -         "Mark the critical path in the web view: zero-slack cards and edges drawn heavier or outlined"  evidence=W313
+2026-10-11T19:19:15Z  tick  W313 advanced  collapse  "workflow model extended (W321), nemik-critical (W313): fleet critical path is 38 cards, all gabion"

@@ -279,6 +279,16 @@ def to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
                 found["rank_pos"], found["band"] = i, r["band_name"]
                 if r.get("salience") is not None:
                     found["salience"] = round(r["salience"], 4)
+    # nemik:W322: slack (nemik.critical) per open card, and which cards lie on the longest chain, so
+    # the page can mark the path that bounds the fleet. Computed over `gn` like every published number.
+    from nemik.critical import critical
+
+    crit = critical(gn)
+    on_path = set(crit.chain)
+    for item in nodes:
+        if item.get("cite") in crit.slack:
+            item["slack"] = crit.slack[item["cite"]]
+            item["on_path"] = item["cite"] in on_path
     # nemik:W264: the demand that crossed each dependency, summed over the ready repos' solves, as
     # the width the page draws the edge with. A `waits` edge runs waiter -> blocker, an `enables`
     # edge prerequisite -> dependent; the flow names a dependency (needing card, prerequisite).
