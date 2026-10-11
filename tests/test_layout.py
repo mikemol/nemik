@@ -123,8 +123,10 @@ def server():
 NODE_OVERLAPS = """() => {
   const ns = cy.nodes("[symbol], .actor").filter(n => n.visible());
   const hit = (a, b) => a.x1 < b.x2 && b.x1 < a.x2 && a.y1 < b.y2 && b.y1 < a.y2;
+  // the node body, not its halo rings (nemik:W335: bounds-expansion makes boundingBox() include them)
+  const body = n => { const p = n.position(), w = n.outerWidth() / 2, h = n.outerHeight() / 2; return { x1: p.x - w, x2: p.x + w, y1: p.y - h, y2: p.y + h }; };
   const out = [];
-  ns.forEach(a => ns.forEach(b => { if (a.id() < b.id() && hit(a.boundingBox(), b.boundingBox())) out.push(a.id() + " x " + b.id()); }));
+  ns.forEach(a => ns.forEach(b => { if (a.id() < b.id() && hit(body(a), body(b))) out.push(a.id() + " x " + b.id()); }));
   return out;
 }"""
 
@@ -171,6 +173,27 @@ def test_repo_toggles_and_salience_order(server, tmp_path) -> None:
         widened = page.evaluate("() => cy.edges('[current > 0]').length")
         # nemik:W322: the cards on the longest open chain carry the halo class data
         assert page.evaluate("() => cy.nodes('[?on_path]').length") > 0
+        # nemik:W335: one ring per scope, a legend naming each, and a selected card's cone gets its own ring
+        assert page.evaluate("() => cy.nodes('[nrings > 0]').length") > 0
+        assert (
+            page.evaluate(
+                "() => cy.nodes().filter(n => (n.data('rings') || []).includes('view')).length"
+            )
+            > 0
+        )
+        assert (
+            page.evaluate("() => document.querySelectorAll('#pathkey span').length")
+            == 4
+        )
+        ringed = page.evaluate("() => cy.nodes('[nrings > 0]')[0].id()")
+        page.evaluate(f"() => cy.getElementById('{ringed}').emit('tap')")
+        page.wait_for_timeout(300)
+        assert (
+            page.evaluate(
+                "() => cy.nodes().filter(n => (n.data('rings') || []).includes('sel')).length"
+            )
+            > 0
+        )
         page.screenshot(path=str(out / "salience-order.png"))
         browser.close()
     assert errors == []

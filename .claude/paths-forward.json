@@ -6374,7 +6374,7 @@
     {
       "symbol": "W335",
       "title": "web: one coloured halo per path scope, with a legend",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W332"
       ],
@@ -6384,15 +6384,15 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "no selector: fleet, repo, view and selected-card chains each get their own halo colour, drawn together (a card on several shows stacked rings); a legend names each colour; view chain recomputed over visible nodes on toggle; render-check test",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: index.html: ring per scope (fleet solid gold, repo dashed sky, view dotted pink, selected-cone solid ink) via SVG background-image, legend #pathkey, view chain from the drawn set, selected chain from the cone, refreshed on tap; test_layout asserts rings, view ring, 4 legend rows, sel ring after tap; node-overlap metric now measures bodies not halos. render-check 9 passed",
       "issued_at": "2026-10-11T21:07:45Z",
       "minted_during": "interrupt",
       "caused_by": "W332",
-      "last_worked": "2026-10-11T21:42:24Z",
+      "last_worked": "2026-10-11T21:50:41Z",
       "ticks_blocked": 0,
       "weight": 2,
-      "completed": null
+      "completed": "20261011T215041Z"
     },
     {
       "symbol": "W336",
@@ -6482,7 +6482,7 @@
     {
       "symbol": "W340",
       "title": "Legibility floors for the view: label size, edge density, target size",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W337"
       ],
@@ -6497,9 +6497,10 @@
       "issued_at": "2026-10-11T21:16:32Z",
       "minted_during": "tick",
       "caused_by": "W337",
-      "last_worked": null,
+      "last_worked": "2026-10-11T21:50:42Z",
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 1,
+      "completed": null
     },
     {
       "symbol": "W341",

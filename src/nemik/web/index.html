@@ -71,6 +71,7 @@ aside a { color: var(--ink); text-decoration: underline dotted var(--muted); }
   <div id="cy"></div>
   <aside>
     <div class="legend" id="legend"></div>
+    <div class="legend" id="pathkey" title="Halos mark the longest chain of open work in each scope; a card on several shows its rings stacked, innermost first"></div>
     <div class="legend" id="repokey" hidden></div>
     <p class="stat">Border thickness: interrupt share of ledger activity on that waypoint. Diamond: minted during an interrupt (no tick lock held). Dashed red: waits for (read from blocked_on), ending at the blocker's claiming waypoint, or at a dashed "?" in the blocker's box when nothing there claims it yet. Faded: satisfied, because the upstream end is done and no longer holds anything back.</p>
     <p class="stat">Repo box border: liveness, from the Wake panel's roster --
@@ -116,6 +117,96 @@ const picked = new Set();
 try { JSON.parse(localStorage.getItem("nemik.repos") || "[]").forEach(r => picked.add(r)); } catch (e) { /* not remembered */ }
 const wants = r => !picked.size || picked.has(r);
 
+// nemik:W335: one halo ring per path scope, drawn together (innermost first), each with its own colour AND
+// dash so the scope never rests on hue alone: the fleet's longest chain, this repo's, the visible set's,
+// and the selected card's cone. Colours are Okabe-Ito; "ink" follows the theme.
+const PAD = 4;
+const SCOPES = [
+  { id: "fleet", color: "#e0a000", dash: "", width: 2, label: "longest chain, fleet" },
+  { id: "repo", color: "#56b4e9", dash: "6 3", width: 2, label: "longest chain, its repo" },
+  { id: "view", color: "#cc79a7", dash: "1.5 3", width: 2.5, label: "longest chain, this view" },
+  { id: "sel", color: "ink", dash: "", width: 3, label: "longest chain, selected card's cone" },
+];
+const scopeColor = c => (c === "ink" ? css("--ink") : c);
+document.getElementById("pathkey").innerHTML = SCOPES.map(s =>
+  `<span><svg width="26" height="8" aria-hidden="true"><line x1="1" y1="4" x2="25" y2="4" stroke="${scopeColor(s.color)}" stroke-width="${s.width}" stroke-dasharray="${s.dash}"/></svg>${s.label}</span>`).join("");
+
+// The longest chain of dependencies among `ids`; `deps` are [prerequisite, dependent] pairs. A cycle is cut where
+// the walk meets itself, as everywhere else in nemik.
+function longestChain(ids, deps) {
+  const succ = new Map([...ids].map(id => [id, []]));
+  deps.forEach(([a, b]) => { if (succ.has(a) && succ.has(b) && a !== b) succ.get(a).push(b); });
+  const memo = new Map(), onStack = new Set();
+  const walk = id => {
+    if (memo.has(id)) return memo.get(id);
+    onStack.add(id);
+    let best = { len: 1, next: null };
+    for (const t of succ.get(id)) {
+      if (onStack.has(t)) continue;
+      const r = walk(t);
+      if (r.len + 1 > best.len) best = { len: r.len + 1, next: t };
+    }
+    onStack.delete(id);
+    memo.set(id, best);
+    return best;
+  };
+  let start = null;
+  [...ids].sort().forEach(id => { if (!start || walk(id).len > walk(start).len) start = id; });
+  const chain = [];
+  for (let id = start; id; id = memo.get(id).next) chain.push(id);
+  return chain;
+}
+
+const isOpen = n => n.symbol && !["done", "dropped"].includes(n.state);
+const depEdges = () => data.edges.filter(e => e.kind === "enables" || e.kind === "waits")
+  .map(e => (e.kind === "enables" ? [e.source, e.target] : [e.target, e.source]));
+let keepOpen = new Set();
+
+// Each card's rings, as scope ids. The view chain is over what is drawn; the selected chain over the
+// selected card's cone (everything it transitively waits on or enables), whatever is drawn.
+function ringMap() {
+  const rings = new Map();
+  const put = (id, s) => rings.set(id, [...(rings.get(id) || []), s]);
+  data.nodes.filter(isOpen).forEach(n => { if (n.on_path) put(n.id, "fleet"); if (n.on_path_repo) put(n.id, "repo"); });
+  const deps = depEdges();
+  longestChain(keepOpen, deps).forEach(id => put(id, "view"));
+  if (selectedId && data.nodes.some(n => n.id === selectedId && isOpen(n))) {
+    const open = new Set(data.nodes.filter(isOpen).map(n => n.id));
+    const reach = (from, forward) => {
+      const seen = new Set([from]), todo = [from];
+      while (todo.length) {
+        const cur = todo.pop();
+        deps.forEach(([a, b]) => {
+          const [x, y] = forward ? [a, b] : [b, a];
+          if (x === cur && open.has(y) && !seen.has(y)) { seen.add(y); todo.push(y); }
+        });
+      }
+      return seen;
+    };
+    const cone = new Set([...reach(selectedId, true), ...reach(selectedId, false)]);
+    longestChain(cone, deps).forEach(id => put(id, "sel"));
+  }
+  return rings;
+}
+
+function ringSvg(ele) {
+  const on = ele.data("rings") || [], rs = SCOPES.filter(s => on.includes(s.id)), k = rs.length;
+  const w = ele.outerWidth() + 2 * PAD * k, h = ele.outerHeight() + 2 * PAD * k;
+  const rects = rs.map((s, i) => {
+    const x = PAD * (k - i - 1) + 1.5;
+    return `<rect x="${x}" y="${x}" width="${w - 2 * x}" height="${h - 2 * x}" rx="${6 + PAD * (i + 1)}" fill="none" stroke="${scopeColor(s.color)}" stroke-width="${s.width}" stroke-dasharray="${s.dash}"/>`;
+  }).join("");
+  return "data:image/svg+xml;utf8," + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}">${rects}</svg>`);
+}
+const ringW = ele => ele.outerWidth() + 2 * PAD * (ele.data("nrings") || 0) + "px";
+const ringH = ele => ele.outerHeight() + 2 * PAD * (ele.data("nrings") || 0) + "px";
+
+function refreshRings() {
+  const rings = ringMap();
+  cy.nodes("[symbol]").forEach(n => { const r = rings.get(n.id()) || []; n.data({ rings: r, nrings: r.length }); });
+  cy.style().update();
+}
+
 function draw() {
   const showDone = document.getElementById("showDone").checked;
   const showNoise = document.getElementById("showNoise").checked;
@@ -141,6 +232,8 @@ function draw() {
   const treemapOn = document.getElementById("treemap").checked;
   const bySal = document.getElementById("bySalience").checked;  // nemik:W261: salience on the label
   const repos =treemapOn ? [] : [...new Set(data.nodes.filter(n => keep.has(n.id)).map(n => n.repo))];
+  keepOpen = new Set(data.nodes.filter(n => keep.has(n.id) && isOpen(n)).map(n => n.id));
+  const ringsOf = ringMap();
   const els = [
     // A repo box counts the unclaimed blocks inside it: each one is that repo's move.
     // Its border reads liveness (asleep/idle/awake), from the same roster the Wake panel
@@ -152,7 +245,8 @@ function draw() {
     ...data.nodes.filter(n => keep.has(n.id)).map(n => {
       const e = n.effort || {}, total = (e.forecast || 0) + (e.interrupt || 0) + (e.unclassified || 0);
       return { data: { ...n, parent: treemapOn ? undefined : "repo:" + n.repo, label: n.state === "unclaimed" ? `? ${n.for}` : n.symbol + (bySal && n.salience ? ` · ${+n.salience.toFixed(1)}` : ""),
-        fill: color(n.state), border: total ? 1 + 6 * (e.interrupt || 0) / total : 1 } };
+        fill: color(n.state), border: total ? 1 + 6 * (e.interrupt || 0) / total : 1,
+        rings: ringsOf.get(n.id) || [], nrings: (ringsOf.get(n.id) || []).length } };
     }),
     ...actors.map(a => {
       const [cat, r] = a.slice(9).split("@");
@@ -201,8 +295,10 @@ function draw() {
       { selector: "edge.satisfied", style: { opacity: 0.25, "line-style": "solid" } },
       // nemik:W264: with "salience order" on, an edge is as wide as the flow that crossed it.
       { selector: "edge[current > 0]", style: { width: "mapData(current, 0, 12, 1.5, 7)" } },
-      // nemik:W322: the cards on the longest open chain (nemik-critical) carry a gold halo.
-      { selector: "node[?on_path]", style: { "underlay-color": "#e0a000", "underlay-opacity": 0.55, "underlay-padding": 5 } },
+      // nemik:W322, W335: the cards on a longest open chain (nemik-critical) carry one ring per scope.
+      { selector: "node[nrings > 0]", style: { "background-image": ringSvg, "background-fit": "none", "background-clip": "none",
+        "background-width": ringW, "background-height": ringH, "background-position-x": "50%", "background-position-y": "50%",
+        "bounds-expansion": PAD * 4 + 4 } },
       { selector: ".actor", style: { shape: "round-rectangle", "background-color": css("--other"),
         label: "data(label)", width: "label", height: 20, padding: 6, "text-halign": "center",
         "text-valign": "center", "text-margin-x": 0, color: css("--bg"), "font-size": 11, "border-width": 0 } },
@@ -250,7 +346,7 @@ function draw() {
   cy.on("mouseout", "node", light);
   cy.on("select unselect", "node", light);
   light();
-  cy.on("tap", "node[symbol]", ev => { selectedId = ev.target.id(); detail(ev.target.data()); });
+  cy.on("tap", "node[symbol]", ev => { selectedId = ev.target.id(); detail(ev.target.data()); refreshRings(); });
   cy.on("tap", "node[lane]", ev => lane(ev.target.data("lane")));
   // The 60s poll rebuilds the graph from scratch (cy.destroy() above), which silently drops
   // whatever the user had selected. Re-select the same node if it still exists.
