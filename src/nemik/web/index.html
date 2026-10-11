@@ -65,6 +65,7 @@ aside a { color: var(--ink); text-decoration: underline dotted var(--muted); }
   <label title="Order the forest by the flow model's salience (the demand each goal's cone carries, and each ready card absorbs) instead of by nemik-rank's band-first position"><input type="checkbox" id="bySalience"> salience order</label>
   <label title="One treemap across the fleet: each tile holds the work beneath it, area by load, rank order reading left to right; repo is the border colour"><input type="checkbox" id="treemap"> treemap</label>
   <span class="stat" id="stat"></span>
+  <span class="stat" id="legnote" role="status"></span>
   <span id="repos" title="Toggle repos on and off; none lit shows every repo"></span>
 </header>
 <main>
@@ -201,6 +202,26 @@ function ringSvg(ele) {
 const ringW = ele => ele.outerWidth() + 2 * PAD * (ele.data("nrings") || 0) + "px";
 const ringH = ele => ele.outerHeight() + 2 * PAD * (ele.data("nrings") || 0) + "px";
 
+// nemik:W340: a view whose labels are smaller than MIN_LABEL_PX on screen is not legible (the all-repos fit
+// shrinks the 10px label to about 4). The first fit never goes below that floor: when fitting everything
+// would, it shows the repo box carrying the most salience at the floor, and says how to see the rest.
+const MIN_LABEL_PX = 8, LABEL_FONT_PX = 10;
+function fitReadable(treemapOn, repos) {
+  const note = document.getElementById("legnote");
+  note.textContent = "";
+  cy.fit(cy.elements(":visible"), 20);
+  const floor = MIN_LABEL_PX / LABEL_FONT_PX;
+  if (treemapOn || cy.zoom() >= floor || repos.length < 2) return;
+  const load = r => data.nodes.filter(n => n.repo === r).reduce((s, n) => s + (n.salience || 0), 0);
+  const focus = [...repos].sort((a, b) => load(b) - load(a) || (a < b ? -1 : 1))[0];
+  const box = cy.getElementById("repo:" + focus);
+  if (!box.length) return;
+  const bb = box.boundingBox();
+  cy.viewport({ zoom: floor, pan: { x: 20 - bb.x1 * floor, y: 20 - bb.y1 * floor } });
+  note.innerHTML = `${esc(focus)} at readable size; ${repos.length - 1} more repos off-screen. <button id="fitall" type="button">fit all (too small to read)</button>`;
+  document.getElementById("fitall").onclick = () => { cy.fit(cy.elements(":visible"), 20); note.textContent = ""; };
+}
+
 function refreshRings() {
   const rings = ringMap();
   cy.nodes("[symbol]").forEach(n => { const r = rings.get(n.id()) || []; n.data({ rings: r, nrings: r.length }); });
@@ -332,7 +353,7 @@ function draw() {
   if (treemapOn) treemap(); else tile();
   // The layout runs after cytoscape's own initial fit, so a fresh view is fitted here, to what the
   // layout actually placed.
-  if (view) { cy.zoom(view.zoom); cy.pan(view.pan); } else cy.fit(cy.elements(":visible"), 20);
+  if (view) { cy.zoom(view.zoom); cy.pan(view.pan); } else fitReadable(treemapOn, repos);
   // nemik:W88: an edge between two boxes is faint until one of its ends is hovered or selected,
   // or "show all cross-repo edges" is on. Inside a box, edges stay as they are.
   const unit = n => (n.isChild() ? n.parent().id() : n.id());

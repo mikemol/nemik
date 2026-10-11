@@ -239,6 +239,44 @@ def test_the_history_panel_shows_the_weekly_roll_up_when_there_is_one(
     assert "W41" in text and "+5" in text and "50% blocked" in text
 
 
+LEGIBILITY = """() => {
+  const ns = cy.nodes("[symbol]").filter(n => n.visible()).filter(n => {
+    const p = n.renderedPosition();
+    return p.x >= 0 && p.y >= 0 && p.x <= cy.width() && p.y <= cy.height();
+  });
+  const z = cy.zoom();
+  return { label_px: 10 * z, in_view: ns.length,
+    min_target_px: Math.min(...ns.map(n => Math.min(n.outerWidth(), n.outerHeight()) * z)) };
+}"""
+
+
+def test_the_default_view_is_legible(server) -> None:
+    # nemik:W340: the first view never shrinks a label below 8 px or a node below 12 px on screen; when
+    # the whole fleet would, it shows one repo at the floor and says so, with a way to fit everything.
+    with sync_api.sync_playwright() as p:
+        try:
+            exe = os.environ.get("NEMIK_CHROMIUM")
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        page.goto(server)
+        page.wait_for_function(
+            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
+            timeout=60000,
+        )
+        page.wait_for_timeout(500)
+        m = page.evaluate(LEGIBILITY)
+        note = page.inner_text("#legnote")
+        browser.close()
+    assert m["in_view"] > 0
+    assert m["label_px"] >= 8, m
+    assert m["min_target_px"] >= 12, m
+    assert note == "" or "readable size" in note
+
+
 def test_rank_forest_view(server, tmp_path) -> None:
     out = Path(os.environ.get("TEST_UNDECLARED_OUTPUTS_DIR") or tmp_path)
     with sync_api.sync_playwright() as p:

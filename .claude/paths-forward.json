@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 342,
+  "counter": 343,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 171
+      "ticks_blocked": 172
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 46,
+      "ticks_blocked": 47,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T12:42:16Z",
-      "ticks_blocked": 22,
+      "ticks_blocked": 23,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 23,
+      "ticks_blocked": 24,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 20,
+      "ticks_blocked": 21,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 20,
+      "ticks_blocked": 21,
       "completed": null,
       "weight": 1
     },
@@ -5367,7 +5367,6 @@
       "touches": [],
       "blocked_on": [
         "W283",
-        "W284",
         "W286",
         "W287",
         "W289",
@@ -5383,8 +5382,8 @@
       "issued_at": "2026-10-10T06:17:20Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-10T06:18:16Z",
-      "ticks_blocked": 8,
+      "last_worked": "2026-10-11T22:10:04Z",
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -5405,29 +5404,27 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 13,
       "completed": null
     },
     {
       "symbol": "W284",
       "title": "Fold amr-skills's inbox into waypoints: nemik-check --letters --fold --repo amr-skills --older-than 14, apply the mv for the stale, claim or mint a card for each live letter",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W282"
       ],
       "touches": [],
-      "blocked_on": [
-        "amr-skills"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Run the command in amr-skills's tick, apply the printed mv lines (archive), mint the printed --add for each live letter, then report done to nemik:W282.",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: amr-skills-bb: amr-skills:W275 resolved, five letters committed. Verified here: nemik-check --letters --fold --repo amr-skills --older-than 14 reports 0 live and 0 stale orphans (5 addressed, 80 without a header).",
       "issued_at": "2026-10-10T06:17:28Z",
       "minted_during": "interrupt",
       "caused_by": "W282",
-      "last_worked": "2026-10-10T06:17:29Z",
-      "ticks_blocked": 12,
-      "completed": null
+      "last_worked": "2026-10-11T22:06:41Z",
+      "ticks_blocked": 0,
+      "completed": "20261011T220641Z"
     },
     {
       "symbol": "W285",
@@ -5466,7 +5463,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 13,
       "completed": null
     },
     {
@@ -5487,7 +5484,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 13,
       "completed": null
     },
     {
@@ -5527,7 +5524,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 13,
       "completed": null
     },
     {
@@ -5586,7 +5583,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 13,
       "completed": null
     },
     {
@@ -5607,7 +5604,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:42Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 13,
       "completed": null
     },
     {
@@ -5628,7 +5625,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 13,
       "completed": null
     },
     {
@@ -5649,7 +5646,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 13,
       "completed": null
     },
     {
@@ -5689,7 +5686,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 13,
       "completed": null
     },
     {
@@ -5954,7 +5951,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T19:12:00Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -6033,7 +6030,7 @@
       "caused_by": "W312",
       "last_worked": "2026-10-11T20:11:30Z",
       "ticks_blocked": 0,
-      "weight": 2,
+      "weight": 3,
       "completed": null
     },
     {
@@ -6053,7 +6050,7 @@
       "caused_by": "W312",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W318",
@@ -6072,7 +6069,7 @@
       "caused_by": "W312",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W319",
@@ -6160,7 +6157,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T20:11:31Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null
     },
     {
@@ -6237,7 +6234,7 @@
       "caused_by": "W323",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 5
     },
     {
       "symbol": "W328",
@@ -6397,7 +6394,7 @@
     {
       "symbol": "W336",
       "title": "web: transit reveal of unselected repos on a selected chain",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W332"
       ],
@@ -6412,9 +6409,10 @@
       "issued_at": "2026-10-11T21:07:46Z",
       "minted_during": "interrupt",
       "caused_by": "W332",
-      "last_worked": null,
+      "last_worked": "2026-10-11T22:16:24Z",
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 5,
+      "completed": null
     },
     {
       "symbol": "W337",
@@ -6455,12 +6453,12 @@
       "caused_by": "W337",
       "last_worked": "2026-10-11T21:18:11Z",
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 2
     },
     {
       "symbol": "W339",
       "title": "Use-of-colour check: every state the view shows has a second channel",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W337"
       ],
@@ -6468,21 +6466,24 @@
         "a11y",
         "web"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "WCAG 1.4.1 as in el-openglo check_use_of_colour: state, band and halo must differ by shape, weight or text, not hue or opacity alone; measured in the render-check browser",
+      "blocked_on": [
+        "el-openglo:W72"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "wait for el-openglo:W72 (its use-of-colour measurement and policy); then import or call it for nemik's view. Do not read mat230.tar.xz or copy its logic.",
       "evidence": "2026-10-11: el-openglo answer: check_use_of_colour.py scans el-openglo's own emitted artifacts and the criterion is mat230's (el-openglo:W72 adopts it); depend on mat230's check, not a copy. Legibility floors (W340): only the floor arithmetic is generic; APCA and contrast floors are tied to el-openglo's solver. | 2026-10-11: Correction: mat230 is archived; the only copy is /home/mikemol/github/mat230.tar.xz (member mat230/bin/check-a11y, _check_use_of_colour). The live cite is el-openglo:W72 (adopting it, ready). Until it lands, the logic source is that tar member; nemik reads it, never depends on mat230 as a repo.",
       "issued_at": "2026-10-11T21:16:31Z",
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
-      "last_worked": "2026-10-11T21:18:55Z",
-      "ticks_blocked": 0,
-      "weight": 1
+      "last_worked": "2026-10-11T22:10:00Z",
+      "ticks_blocked": 1,
+      "weight": 1,
+      "completed": null
     },
     {
       "symbol": "W340",
       "title": "Legibility floors for the view: label size, edge density, target size",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W337"
       ],
@@ -6492,15 +6493,15 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "render-check measures the rendered label px, edge crossings per node and hit-target size at the default fit; the all-repos fit is below any floor, so the view must default to a scoped, readable subset",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: index.html fitReadable: the first fit never goes below an 8px label; when fit-all would, the highest-salience repo shows at the floor with a #legnote and a fit-all button; test_the_default_view_is_legible asserts label >= 8px and node >= 12px on screen. Edge-density floor not measured (left to W338/W341 follow-up). render-check 10 passed",
       "issued_at": "2026-10-11T21:16:32Z",
       "minted_during": "tick",
       "caused_by": "W337",
-      "last_worked": "2026-10-11T21:50:42Z",
+      "last_worked": "2026-10-11T22:16:22Z",
       "ticks_blocked": 0,
       "weight": 1,
-      "completed": null
+      "completed": "20261011T221622Z"
     },
     {
       "symbol": "W341",
@@ -6522,7 +6523,7 @@
       "caused_by": "paperkit:W320",
       "last_worked": "2026-10-11T21:18:33Z",
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 2
     },
     {
       "symbol": "W342",
@@ -6540,7 +6541,27 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
+    },
+    {
+      "symbol": "W343",
+      "title": "Wanted-asset convention: say I need X, Y is building it, I take X from anyone",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "letters"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "design: a card blocked on a named supplier card also records that any owner may deliver the same asset (a fallback, not a second block); decide whether freecell holds the want or only the departing asset (its README says it holds assets with a recorded why-it-cannot-land-yet, not decisions); first case: W339 on el-openglo:W72",
+      "evidence": "",
+      "issued_at": "2026-10-11T22:10:15Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 4
     }
   ],
   "residue": [
@@ -6603,7 +6624,10 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-10-11T22:11:21Z"
+  },
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }

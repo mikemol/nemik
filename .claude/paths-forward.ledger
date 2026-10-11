@@ -532,3 +532,5 @@
 2026-10-11T21:16:46Z  tick  W333 advanced  unblock   "critical() takes a scope (repo, view, card cone); a11y umbrella W337 filed from the operator's illegibility report"  evidence=217d700
 2026-10-11T21:55:10Z  tick  W342 minted    -         "Adopt isolated mikemol-commit: pre-commit hook and gate go through MIKEMOL_REAL_ROOT"  evidence=github:W1
 2026-10-11T21:55:19Z  tick  W335 advanced  unblock   "on_path_repo shipped (838458a); one coloured dashed ring per path scope with a legend (2f7640d)"  evidence=2f7640d
+2026-10-11T22:10:15Z  interrupt W343 minted    -         "Wanted-asset convention: say I need X, Y is building it, I take X from anyone"  evidence=operator
+2026-10-11T22:12:05Z  tick  W339 nudged    nudge     "NUDGE el-openglo:W72 (W339 waits on it); el-openglo already told 2026-10-11, no new message"
