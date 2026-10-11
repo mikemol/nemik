@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 304,
+  "counter": 305,
   "waypoints": [
     {
       "symbol": "W1",
@@ -5824,6 +5824,25 @@
       "last_worked": "2026-10-11T01:11:48Z",
       "ticks_blocked": 0,
       "completed": "20261011T011148Z"
+    },
+    {
+      "symbol": "W305",
+      "title": "nemik-overlaps prints who holds the work claim for an overlapping tag, and how old it is (mtools:W913)",
+      "status": "done",
+      "enables": [
+        "mtools:W913"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: nemik.overlaps: read_claims (mikemol-membudget claims), parse_claims, row; each OVERLAP row names the holder repo, owner and age; absent membudget says so once; tests/test_overlap_claims.py (their sample line). Live: membudget claims works from nemik; real overlaps had no held tag at the time (the one claim was mtools:mutation). Written with tools/pyfmt.sh, clean first try.",
+      "issued_at": "2026-10-11T11:41:30Z",
+      "minted_during": "interrupt",
+      "caused_by": "mtools:W913",
+      "last_worked": "2026-10-11T11:42:33Z",
+      "ticks_blocked": 0,
+      "completed": "20261011T114233Z"
     }
   ],
   "residue": [
