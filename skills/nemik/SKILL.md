@@ -63,6 +63,24 @@ them only as a chain the graph can walk:
 Witness: your ask appears under **needs-you** in `nemik-operator`, with the waypoints behind it
 listed. If it appears under *unstated*, or not at all, the chain is broken somewhere.
 
+## The card lifecycle
+
+A waypoint is `ready`, `working`, `blocked`, `done` or `dropped`, and every change goes through
+`$PF --update W<n>` (or `--drop`). The model is `src/nemik/data/workflows.toml`, and
+`tests/test_workflows.py` fails if this section and the model disagree.
+
+- **Start a card: `--update W<n> --status working`.** Exactly one card is working at a time.
+  `nemik-check` warns when items are ready and none is working, and when more than one is; a commit
+  that changes code or tests while ready cards exist and none is marked working is refused by the
+  pre-commit hook. A card that stays `working` after it lands is the same lapse, so close it.
+- **Finish: `--update W<n> --status done --evidence-append "<what a stranger can check>"`.** A commit
+  hash, a path, a command and its output; "looks right" is not evidence.
+- **It waits on someone: `--update W<n> --status blocked --blocked-kind agent|human --blocked-on <who>`.**
+  `blocked_on` and `blocked_kind` are both required (the four rules above say how to write them).
+- **The wait ends: `--bump-blocked`** returns a card to `ready` once every local blocker has landed.
+- **It no longer earns its place: `--drop W<n> "<reason>"`.** The reason is required and kept as
+  residue; the symbol is never reused.
+
 ## Commands
 
 | command | what it answers | when |

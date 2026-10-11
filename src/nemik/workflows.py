@@ -1,0 +1,33 @@
+"""nemik:W320: nemik's workflows as data, for checking against skills/nemik/SKILL.md.
+
+`data/workflows.toml` declares the card lifecycle, the rules the skill teaches and the cross-workstream
+workflows. This module only reads it; tests/test_workflows.py is the correspondence check.
+"""
+
+from __future__ import annotations
+
+import tomllib
+from importlib.resources import files
+from typing import Any
+
+
+def load(text: str | None = None) -> dict[str, Any]:
+    """The workflow model; `text` overrides the packaged file (for tests)."""
+    if text is None:
+        text = files("nemik.data").joinpath("workflows.toml").read_text()
+    return tomllib.loads(text)
+
+
+def transitions(model: dict[str, Any]) -> list[dict[str, Any]]:
+    return list(model["lifecycle"]["transition"])
+
+
+def advice_only(model: dict[str, Any]) -> list[str]:
+    """What the skill teaches but nothing checks: lifecycle commands and rules with no enforcer."""
+    loose = [
+        f"{t['from']}->{t['to']} ({t['command']})"
+        for t in transitions(model)
+        if not t["enforced_by"]
+    ]
+    loose += [f"rule {r['id']}" for r in model["rule"] if not r["enforced_by"]]
+    return loose

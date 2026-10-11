@@ -1,0 +1,103 @@
+# nemik's workflows as data (nemik:W320; operator 2026-10-11: "rigorously model the workflow(s), so that
+# we can check for structural correspondence with SKILL.md").
+#
+# Three things are declared here, and tests/test_workflows.py holds each against skills/nemik/SKILL.md
+# and against the code that enforces it:
+#   - the card lifecycle: states, the transitions between them, the command that makes each, and
+#     what checks it (a SHACL message in shapes.ttl, or a hook);
+#   - the rules the skill teaches, each with the phrase that anchors it in SKILL.md;
+#   - the cross-workstream workflows (peer block, operator ask, inbox fold) as ordered steps.
+# A transition or step with an empty `enforced_by` is advice only: the test lists it, so "taught but
+# not enforced" is a visible set, not an accident.
+
+[lifecycle]
+states = ["ready", "working", "blocked", "done", "dropped"]
+
+[[lifecycle.transition]]
+from = "ready"
+to = "working"
+command = "--status working"
+when = "you begin the card; exactly one card is working at a time"
+enforced_by = [
+  { shape = "no working card while items are ready" },
+  { shape = "more than one working card" },
+  { hook = ".githooks/pre-commit", text = "none is marked working" },
+]
+
+[[lifecycle.transition]]
+from = "working"
+to = "done"
+command = "--status done"
+when = "its evidence is checkable by someone who was not there"
+enforced_by = []
+
+[[lifecycle.transition]]
+from = "working"
+to = "blocked"
+command = "--blocked-kind"
+when = "the step turns out to wait on someone: record who (--blocked-on) and what kind"
+enforced_by = [{ shape = "a blocked waypoint must carry blockedOn and blockedKind" }]
+
+[[lifecycle.transition]]
+from = "blocked"
+to = "ready"
+command = "--bump-blocked"
+when = "every blocker has landed"
+enforced_by = [{ shape = "every blocker in blocked_on has landed: this waypoint is ready, not blocked" }]
+
+[[lifecycle.transition]]
+from = "ready"
+to = "dropped"
+command = "--drop"
+when = "it no longer earns its place; the reason is required and kept as residue"
+enforced_by = []
+
+[[rule]]
+id = "cite"
+skill_anchor = "Cite, don't name."
+statement = "a reference to another workstream's waypoint is <repo>:W<n>, the directory name"
+enforced_by = [{ shape = "blocked on no resolvable party" }]
+
+[[rule]]
+id = "claim"
+skill_anchor = "Claim what waits on you."
+statement = "every nemik-inbound row for your repo is claimed by a waypoint of yours or declined"
+enforced_by = [{ shape = "blocked on another workstream, and no waypoint there claims it" }]
+
+[[rule]]
+id = "blocked-kind"
+skill_anchor = "says who can move it."
+statement = "human means only the operator can move it; another repo or your own waypoint is agent"
+enforced_by = [{ shape = "blocked_kind outside agent|human" }]
+
+[[rule]]
+id = "operator-ask"
+skill_anchor = "Asks to the operator state the ask."
+statement = "an operator block is `operator: decide ...` or `operator: act ...`, never bare"
+enforced_by = [
+  { shape = "blocked on the operator with no stated ask" },
+  { shape = "blocked_on records the operator's answer already" },
+]
+
+[[workflow]]
+name = "peer-block"
+steps = [
+  { who = "blocked session", command = "--blocked-on", does = "cites <repo>:W<n>" },
+  { who = "blocker session", command = "nemik-inbound", does = "reads the row" },
+  { who = "blocker session", command = "--enables", does = "mints or points a waypoint that claims it" },
+]
+
+[[workflow]]
+name = "operator-ask"
+steps = [
+  { who = "holder", command = "operator: decide", does = "keeps one waypoint blocked on the ask (blocked_kind human)" },
+  { who = "waiters", command = "--blocked-on", does = "block on the holder's waypoint by citation, never on the operator" },
+  { who = "operator", command = "nemik-operator", does = "reads the ask, heaviest first, with what it releases" },
+]
+
+[[workflow]]
+name = "inbox-fold"
+steps = [
+  { who = "repo", command = "--fold", does = "reads the plan: live letters to cards, stale ones to archive" },
+  { who = "repo", command = "--apply", does = "carries the plan out; idempotent" },
+]
