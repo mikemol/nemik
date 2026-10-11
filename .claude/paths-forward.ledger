@@ -478,3 +478,5 @@
 2026-10-10T13:50:43Z  tick  W300 advanced  unblock   "operator-ask salience reaches VTODO PRIORITY (W299) and metrics (W300)"
 2026-10-10T14:10:22Z  tick  --   idle      -         "nothing ready: W282-W297 wait on each repo to claim its inbox fold, W224 on mtools, W260 on github, W201 on luthen, W188 on the operator's token; cron suspended"
 2026-10-10T16:03:30Z  interrupt W301 minted    -         "nemik-check --letters --fold --apply, alert-pair rule, --repo scopes the misdelivery lines (substrate:W301)"  evidence=inbox/2026-10-10-substrate-fold-apply-mode.md
+2026-10-10T16:08:16Z  tick  W301 advanced  unblock   "substrate awake: its three asks (fold --apply, alert pairs, --repo scoping) shipped in cf91255; told substrate-94"
+2026-10-11T01:04:21Z  interrupt W302 minted    -         "tools/pyfmt.sh: format, lint and type-check a .py draft in one command, so multi-region changes skip the edit gate's one-region refusals"  evidence=operator

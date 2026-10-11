@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 301,
+  "counter": 302,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 160
+      "ticks_blocked": 161
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 35,
+      "ticks_blocked": 36,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T12:42:16Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 13,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 10,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 10,
       "completed": null,
       "weight": 1
     },
@@ -5379,7 +5379,6 @@
         "W293",
         "W294",
         "W295",
-        "W296",
         "W297"
       ],
       "blocked_kind": "agent",
@@ -5410,7 +5409,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -5431,7 +5430,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:29Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -5452,7 +5451,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:30Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -5473,7 +5472,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -5494,7 +5493,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -5515,7 +5514,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:34Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -5536,7 +5535,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -5557,7 +5556,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:38Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -5578,7 +5577,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:40Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -5599,7 +5598,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -5620,7 +5619,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:42Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -5641,7 +5640,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -5662,29 +5661,27 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
       "symbol": "W296",
       "title": "Fold substrate's inbox into waypoints: nemik-check --letters --fold --repo substrate --older-than 14, apply the mv for the stale, claim or mint a card for each live letter",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W282"
       ],
       "touches": [],
-      "blocked_on": [
-        "substrate"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Run the command in substrate's tick, apply the printed mv lines (archive), mint the printed --add for each live letter, then report done to nemik:W282.",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-10: 2026-10-10 substrate-94: ran nemik-check --letters --fold --apply --repo substrate --older-than 14 from nemik's venv: 11 cards minted (substrate:W303-W313), 28 stale letters archived, alert pairs included; substrate:W301 done.",
       "issued_at": "2026-10-10T06:17:46Z",
       "minted_during": "interrupt",
       "caused_by": "W282",
-      "last_worked": "2026-10-10T06:17:46Z",
-      "ticks_blocked": 1,
-      "completed": null
+      "last_worked": "2026-10-10T16:09:40Z",
+      "ticks_blocked": 0,
+      "completed": "20261010T160940Z"
     },
     {
       "symbol": "W297",
@@ -5704,7 +5701,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -5776,6 +5773,23 @@
       "last_worked": "2026-10-10T16:04:01Z",
       "ticks_blocked": 0,
       "completed": "20261010T160401Z"
+    },
+    {
+      "symbol": "W302",
+      "title": "tools/pyfmt.sh: format, lint and type-check a .py draft in one command, so multi-region changes skip the edit gate's one-region refusals",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: tools/pyfmt.sh (python -m ruff format, ruff check, mypy; probed on pins.py), documented in README Development tools and in memory",
+      "issued_at": "2026-10-11T01:04:21Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": "2026-10-11T01:04:52Z",
+      "ticks_blocked": 0,
+      "completed": "20261011T010452Z"
     }
   ],
   "residue": [

@@ -87,6 +87,16 @@ session, cgroup scope, repo, event, and where a prompt came from (a scheduled ti
 operator-typed tick, the operator, a peer session, a subagent, or a background notice). It never
 stores prompt text, never uses the network, and always exits 0.
 
+## Development tools
+
+- `tools/pyfmt.sh <draft> <dest.py>`: formats a Python draft with the venv's ruff, writes it, then runs
+  ruff check and mypy on it, so a change that touches several places lands clean in one step
+  (the edit gate refuses a half-formatted or half-imported file).
+- `tools/revendor-mtools.sh <new-sha> <old-sha>`: rebuilds the three vendored mtools wheels at one
+  commit and rewrites the pins (see `vendor/wheels/README.md`).
+- Before committing: `bazel build //:.venv --show_result=0` if a module was added, then the pre-commit
+  gate (`.githooks/pre-commit`) runs `bazel test //...`; a push to main ships.
+
 ## Hosting
 
 `Containerfile` builds the web view. Mount only the flat queue export read-only at `/export`,
