@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 331,
+  "counter": 336,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 169
+      "ticks_blocked": 170
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 44,
+      "ticks_blocked": 45,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T12:42:16Z",
-      "ticks_blocked": 20,
+      "ticks_blocked": 21,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 21,
+      "ticks_blocked": 22,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "completed": null,
       "weight": 1
     },
@@ -5384,7 +5384,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-10T06:18:16Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "completed": null
     },
     {
@@ -5405,7 +5405,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "completed": null
     },
     {
@@ -5426,7 +5426,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:29Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "completed": null
     },
     {
@@ -5466,7 +5466,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "completed": null
     },
     {
@@ -5487,7 +5487,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "completed": null
     },
     {
@@ -5527,7 +5527,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "completed": null
     },
     {
@@ -5586,7 +5586,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "completed": null
     },
     {
@@ -5607,7 +5607,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:42Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "completed": null
     },
     {
@@ -5628,7 +5628,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "completed": null
     },
     {
@@ -5649,7 +5649,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "completed": null
     },
     {
@@ -5689,7 +5689,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "completed": null
     },
     {
@@ -5954,7 +5954,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T19:12:00Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -6151,7 +6151,6 @@
       "enables": [],
       "touches": [],
       "blocked_on": [
-        "W326",
         "W327"
       ],
       "blocked_kind": "agent",
@@ -6161,7 +6160,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T20:11:31Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -6309,6 +6308,110 @@
       "last_worked": "2026-10-11T20:16:40Z",
       "ticks_blocked": 0,
       "completed": "20261011T201640Z"
+    },
+    {
+      "symbol": "W332",
+      "title": "Scoped critical paths: per-repo, per-view and selected-card longest chain (umbrella)",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "critical-path",
+        "web"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-11T21:07:28Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W333",
+      "title": "nemik.critical takes a scope: a repo, a visible set, or one card's cone",
+      "status": "done",
+      "enables": [
+        "W332"
+      ],
+      "touches": [
+        "critical-path"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: critical(g, scope), repo_scope, cone in nemik.critical; nemik-critical --repo/--card; tests/test_critical.py",
+      "issued_at": "2026-10-11T21:07:43Z",
+      "minted_during": "interrupt",
+      "caused_by": "W332",
+      "last_worked": "2026-10-11T21:13:27Z",
+      "ticks_blocked": 0,
+      "completed": "20261011T211327Z"
+    },
+    {
+      "symbol": "W334",
+      "title": "graph.json carries each repo's own longest chain (on_path_repo)",
+      "status": "working",
+      "enables": [
+        "W332"
+      ],
+      "touches": [
+        "critical-path",
+        "web"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "on_path_repo beside the fleet on_path; the page derives view and selected-card chains client-side from slack and edges",
+      "evidence": "",
+      "issued_at": "2026-10-11T21:07:44Z",
+      "minted_during": "interrupt",
+      "caused_by": "W332",
+      "last_worked": "2026-10-11T21:13:31Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W335",
+      "title": "web: one coloured halo per path scope, with a legend",
+      "status": "ready",
+      "enables": [
+        "W332"
+      ],
+      "touches": [
+        "critical-path",
+        "web"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "no selector: fleet, repo, view and selected-card chains each get their own halo colour, drawn together (a card on several shows stacked rings); a legend names each colour; view chain recomputed over visible nodes on toggle; render-check test",
+      "evidence": "",
+      "issued_at": "2026-10-11T21:07:45Z",
+      "minted_during": "interrupt",
+      "caused_by": "W332",
+      "last_worked": "2026-10-11T21:10:52Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W336",
+      "title": "web: transit reveal of unselected repos on a selected chain",
+      "status": "ready",
+      "enables": [
+        "W332"
+      ],
+      "touches": [
+        "critical-path",
+        "web"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "show cards of unselected repos that a selected repo's chain passes through as limited ghost nodes; depth control, 1 = what it waits on, 2 = what that waits on",
+      "evidence": "",
+      "issued_at": "2026-10-11T21:07:46Z",
+      "minted_during": "interrupt",
+      "caused_by": "W332",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -6371,7 +6474,10 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-10-11T21:11:21Z"
+  },
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }

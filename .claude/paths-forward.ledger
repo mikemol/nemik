@@ -519,3 +519,8 @@
 2026-10-11T20:15:58Z  tick  W331 minted    -         "nemik-check warns on each card in a true dependency deadlock, so the cause is fixed where it is written"  evidence=luthen-observability:W830
 2026-10-11T20:18:40Z  tick  W331 advanced  collapse  "nemik-work (W330), a check finding on true deadlocks (W331); luthen cleared its five"
 2026-10-11T20:48:54Z  tick  W326 advanced  sweep     "nemik-starved: ready cards overtaken by newer ones past a declared age; reporting only"  evidence=79cd7c5
+2026-10-11T21:07:28Z  interrupt W332 minted    -         "Scoped critical paths: per-repo, per-view and selected-card longest chain (umbrella)"  evidence=operator
+2026-10-11T21:07:43Z  interrupt W333 minted    -         "nemik.critical takes a scope: a repo, a visible set, or one card's cone"  evidence=W332
+2026-10-11T21:07:44Z  interrupt W334 minted    -         "graph.json carries each repo's own longest chain (on_path_repo)"  evidence=W332
+2026-10-11T21:07:45Z  interrupt W335 minted    -         "web: path-scope selector drives the gold halo"  evidence=W332
+2026-10-11T21:07:46Z  interrupt W336 minted    -         "web: transit reveal of unselected repos on a selected chain"  evidence=W332

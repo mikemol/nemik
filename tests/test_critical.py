@@ -33,6 +33,27 @@ def test_the_longest_chain_has_zero_slack_and_a_side_branch_has_some() -> None:
     }
 
 
+def test_a_scope_bounds_the_chain_to_a_repo_or_a_cone() -> None:
+    # nemik:W333: a:W1 -> b:W1 -> b:W2 crosses repos; a:W9 stands alone in a.
+    from nemik.critical import cone, critical, repo_scope
+
+    g = Graph()
+    a1 = waypoint_uri("a", "W1")
+    b1, b2 = waypoint_uri("b", "W1"), waypoint_uri("b", "W2")
+    a9 = waypoint_uri("a", "W9")
+    for node in (a1, b1, b2, a9):
+        g.add((node, OSLC_CM.state, STATE["ready"]))
+    g.add((a1, NEMIK.enables, b1))
+    g.add((b1, NEMIK.enables, b2))
+    assert critical(g).chain == ["a:W1", "b:W1", "b:W2"]
+    assert repo_scope(g, "b") == {"b:W1", "b:W2"}
+    assert critical(g, repo_scope(g, "b")).chain == ["b:W1", "b:W2"]
+    assert cone(g, "b:W1") == {"a:W1", "b:W1", "b:W2"}
+    assert cone(g, "a:W9") == {"a:W9"}
+    assert critical(g, cone(g, "a:W9")).chain == ["a:W9"]
+    assert cone(g, "x:W0") == set()
+
+
 def test_a_cycle_is_reported_and_a_chain_is_not() -> None:
     # nemik:W324: x -> y -> z -> x never clears; a -> b is a chain; w waits on itself.
     from nemik.critical import cycles

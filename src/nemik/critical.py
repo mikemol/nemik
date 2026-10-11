@@ -28,14 +28,49 @@ class Critical(NamedTuple):
     slack: dict[str, int]
 
 
-def critical(g: Graph) -> Critical:
-    """The critical path of the open graph: its length, its zero-slack cards in dependency order,
-    and every open card's slack."""
-    nodes = {
+def _open(g: Graph) -> set[Node]:
+    return {
         n
         for n in g.subjects(OSLC_CM.state, None)
         if (n, OSLC_CM.state, NEMIK.Done) not in g
     }
+
+
+def repo_scope(g: Graph, repo: str) -> set[str]:
+    """nemik:W333: the open cards of one repo, as cites: the scope of that repo's own critical path."""
+    return {c for c in (ref(n) for n in _open(g)) if c.partition(":")[0] == repo}
+
+
+def cone(g: Graph, card: str) -> set[str]:
+    """nemik:W333: `card` with everything it transitively waits on and everything transitively
+    waiting on it (open cards only): the scope of the selected card's longest chain."""
+    nodes = _open(g)
+    start = next((n for n in nodes if ref(n) == card), None)
+    if start is None:
+        return set()
+    succ = {n: {s for s in successors(g, n) if s in nodes} for n in nodes}
+    pred: dict[Node, set[Node]] = {n: set() for n in nodes}
+    for n, outs in succ.items():
+        for s in outs:
+            pred[s].add(n)
+    seen = {start}
+    for edges in (succ, pred):
+        todo = [start]
+        while todo:
+            for nxt in edges[todo.pop()]:
+                if nxt not in seen:
+                    seen.add(nxt)
+                    todo.append(nxt)
+    return {ref(n) for n in seen}
+
+
+def critical(g: Graph, scope: set[str] | None = None) -> Critical:
+    """The critical path of the open graph: its length, its zero-slack cards in dependency order,
+    and every open card's slack. With `scope` (a set of cites, W333) only those cards count, so the
+    path and slack are the longest within a repo, a visible set, or one card's cone."""
+    nodes = _open(g)
+    if scope is not None:
+        nodes = {n for n in nodes if ref(n) in scope}
     succ = {n: {s for s in successors(g, n) if s in nodes and s != n} for n in nodes}
     pred: dict[Node, set[Node]] = {n: set() for n in nodes}
     for n, outs in succ.items():
@@ -151,13 +186,23 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     )
     ap.add_argument("--root", type=Path, default=default_root(), help="~/github")
     ap.add_argument("--json", action="store_true")
+    ap.add_argument("--repo", help="the longest chain within this repo only (W333)")
+    ap.add_argument(
+        "--card", help="the longest chain through this card's cone, <repo>:W<n>"
+    )
     args = ap.parse_args(argv)
     if g is None:
         g = Graph()
         for _, qg, _ in survey(args.root):
             if qg is not None:
                 g += qg
-    found = critical(g)
+    scope: set[str] | None = None
+    if args.repo:
+        scope = repo_scope(g, args.repo)
+    if args.card:
+        around = cone(g, args.card)
+        scope = around if scope is None else scope & around
+    found = critical(g, scope)
     loops = cycles(g)
     if args.json:
         print(json.dumps({**found._asdict(), "cycles": loops}, indent=1))
