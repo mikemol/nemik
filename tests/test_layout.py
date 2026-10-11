@@ -129,6 +129,53 @@ NODE_OVERLAPS = """() => {
 }"""
 
 
+def test_repo_toggles_and_salience_order(server, tmp_path) -> None:
+    # nemik:W306: the repo filter is toggles (none lit = all), and "salience order" puts the flow
+    # salience on a ready card's label and widens edges by their current.
+    out = Path(os.environ.get("TEST_UNDECLARED_OUTPUTS_DIR") or tmp_path)
+    with sync_api.sync_playwright() as p:
+        exe = os.environ.get("NEMIK_CHROMIUM")
+        try:
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        errors: list[str] = []
+        page.on("pageerror", lambda e: errors.append(str(e)))
+        page.goto(server)
+        page.wait_for_function(
+            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
+            timeout=60000,
+        )
+        everything = page.evaluate("() => cy.nodes('[symbol]').length")
+        repos = page.evaluate(
+            "() => [...document.querySelectorAll('#repos button')].map(b => b.dataset.repo)"
+        )
+        page.click(f"#repos button[data-repo='{repos[0]}']")
+        page.wait_for_timeout(500)
+        one = page.evaluate("() => cy.nodes('[symbol]').length")
+        lit = page.evaluate(
+            "() => [...document.querySelectorAll('#repos button')]"
+            ".filter(b => b.getAttribute('aria-pressed') === 'true').length"
+        )
+        page.click(f"#repos button[data-repo='{repos[0]}']")  # unlit again: everything
+        page.wait_for_timeout(500)
+        again = page.evaluate("() => cy.nodes('[symbol]').length")
+        page.check("#bySalience")
+        page.wait_for_timeout(800)
+        labelled = page.evaluate(
+            "() => cy.nodes('[symbol]').filter(n => n.data('label').includes(' · ')).length"
+        )
+        widened = page.evaluate("() => cy.edges('[current > 0]').length")
+        page.screenshot(path=str(out / "salience-order.png"))
+        browser.close()
+    assert errors == []
+    assert 0 < one < everything and lit == 1 and again == everything
+    assert labelled > 0 and widened > 0
+
+
 def test_rank_forest_view(server, tmp_path) -> None:
     out = Path(os.environ.get("TEST_UNDECLARED_OUTPUTS_DIR") or tmp_path)
     with sync_api.sync_playwright() as p:

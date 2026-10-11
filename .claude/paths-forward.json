@@ -5847,21 +5847,19 @@
     {
       "symbol": "W306",
       "title": "Render nemik's web view in headless Chrome: find the host's binary and make the layout and interaction tests run against it",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        ""
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Ask luthen-observability (live) and el-openglo (no live session) where headless chrome is and how a test reaches it (NEMIK_CHROMIUM for tests/test_layout.py); then screenshot the view and check the salience order, repo toggles and edge widths.",
-      "evidence": "2026-10-11: 2026-10-11 luthen-observability-a9 (luthen-observability:W819): /usr/bin/google-chrome-stable 154.0.8037.57, no chromium; measured: google-chrome-stable --headless=new --disable-gpu --user-data-dir=<fresh temp dir> --screenshot=<png> about:blank works as the user with the sandbox ON, exits by itself; keep the gate hermetic, run the render check as a host step, and let a bazel test call it behind NEMIK_CHROMIUM when set (test_layout already skips otherwise).",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: 2026-10-11 luthen-observability-a9 (luthen-observability:W819): /usr/bin/google-chrome-stable 154.0.8037.57, no chromium; measured: google-chrome-stable --headless=new --disable-gpu --user-data-dir=<fresh temp dir> --screenshot=<png> about:blank works as the user with the sandbox ON, exits by itself; keep the gate hermetic, run the render check as a host step, and let a bazel test call it behind NEMIK_CHROMIUM when set (test_layout already skips otherwise). | 2026-10-11: Rendered in host Chrome 154 via playwright: tests/test_layout.py 7 passed (layout budgets, rank forest) plus the new test_repo_toggles_and_salience_order (a toggle narrows the graph and unlights back to all; salience order puts 'W<n> . x' labels and widens edges by current). Screenshots viewed: the toggle row, the salience order checkbox, thick dashed red edges into the operator lanes. tools/render-check.sh is the host step (gate stays hermetic per luthen-observability:W819).",
       "issued_at": "2026-10-11T16:06:44Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-11T16:08:29Z",
+      "last_worked": "2026-10-11T16:18:48Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261011T161848Z"
     },
     {
       "symbol": "W307",

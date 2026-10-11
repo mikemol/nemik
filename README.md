@@ -94,6 +94,9 @@ stores prompt text, never uses the network, and always exits 0.
   (the edit gate refuses a half-formatted or half-imported file).
 - `tools/revendor-mtools.sh <new-sha> <old-sha>`: rebuilds the three vendored mtools wheels at one
   commit and rewrites the pins (see `vendor/wheels/README.md`).
+- `tools/render-check.sh`: the render check as a host step: `tests/test_layout.py` drives the web view in
+  the host's Google Chrome (layout budgets, the rank forest, repo toggles, salience order) and leaves
+  screenshots in `/var/tmp/nemik-shots`. The Bazel gate stays hermetic, where the same tests skip.
 - Before committing: `bazel build //:.venv --show_result=0` if a module was added, then the pre-commit
   gate (`.githooks/pre-commit`) runs `bazel test //...`; a push to main ships.
 
