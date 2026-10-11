@@ -12,6 +12,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import statistics
 import subprocess
 import sys
 from dataclasses import asdict, dataclass, field
@@ -171,9 +172,16 @@ def weekly(snaps: list[Snapshot]) -> list[dict]:
     rows: list[dict] = []
     before: dict = {}
     blocked_since: dict[str, datetime] = {}
+    born: dict[str, datetime] = {}
+    done_at: dict[str, datetime] = {}
     for (year, week), inside in sorted(weeks.items()):
+        finished: list[float] = []
         for at, queue in inside:
             for symbol, status in _status(queue).items():
+                born.setdefault(symbol, at)
+                if status == "done" and symbol not in done_at:
+                    done_at[symbol] = at
+                    finished.append((at - born[symbol]).total_seconds() / 86400)
                 if status == "blocked":
                     blocked_since.setdefault(symbol, at)
                 else:
@@ -189,6 +197,11 @@ def weekly(snaps: list[Snapshot]) -> list[dict]:
                 "week": f"{year}-W{week:02d}",
                 "opened": len(change.minted),
                 "closed": len(change.closed),
+                # nemik:W315: median days from a card's first commit to the commit that closed it,
+                # over the cards that closed this week (None when none did).
+                "lead_time_days": round(statistics.median(finished), 1)
+                if finished
+                else None,
                 "open": len(open_cards),
                 "blocked_share": round(len(blocked) / len(open_cards), 3)
                 if open_cards

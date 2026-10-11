@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 311,
+  "counter": 318,
   "waypoints": [
     {
       "symbol": "W1",
@@ -5935,6 +5935,139 @@
       "last_worked": "2026-10-11T16:49:57Z",
       "ticks_blocked": 0,
       "completed": "20261011T164957Z"
+    },
+    {
+      "symbol": "W312",
+      "title": "Thoughts-forward (operator's notes doc 2026-10-11): the project-management practices nemik should express, as cards",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "W313",
+        "W314",
+        "W315",
+        "W316",
+        "W317",
+        "W318"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Atomized into W313-W318: critical path and slack, toil ratio over time, flow metrics, milestone-directed ranking, repo health (RAG) panel, baseline variance. Source: Google Doc 1Ve0IFuaREPlEjzj94KxVdtE5u3sMn78wIZGdy53RimY (a chat on MS Project, flow metrics, ERM, swarm, Bugzilla).",
+      "evidence": "",
+      "issued_at": "2026-10-11T18:18:01Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": "2026-10-11T18:18:25Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W313",
+      "title": "Critical path and slack: per open card, the length of its longest open dependency chain and its float, highlighted in the view",
+      "status": "ready",
+      "enables": [
+        "W312"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Design: longest path through open prerequisites to a terminal card (nemik.flow/salience reach); slack = how much a card can wait before it lengthens the path; nemik-rank --critical lists the zero-slack chain; the web view marks it.",
+      "evidence": "",
+      "issued_at": "2026-10-11T18:18:12Z",
+      "minted_during": "interrupt",
+      "caused_by": "W312",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W314",
+      "title": "Toil ratio over time: per week and repo, the share of ledger activity that was interrupt work (nemik-history --toil)",
+      "status": "ready",
+      "enables": [
+        "W312"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Read each repo's ledger effort classes (forecast, interrupt, unclassified) with their timestamps; weekly interrupt share; tests on a throwaway ledger.",
+      "evidence": "",
+      "issued_at": "2026-10-11T18:18:13Z",
+      "minted_during": "interrupt",
+      "caused_by": "W312",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W315",
+      "title": "Flow metrics in the weekly roll-up: lead time (first seen to done), velocity, work in progress",
+      "status": "done",
+      "enables": [
+        "W312"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: nemik.history.weekly adds lead_time_days (median first-commit-to-closed days over cards that closed that week); history.json manifest field; test extended (2.0 days on the fixture). Flow efficiency stays out: agents rarely mark cards working, so active/waiting would read about 0.",
+      "issued_at": "2026-10-11T18:18:14Z",
+      "minted_during": "interrupt",
+      "caused_by": "W312",
+      "last_worked": "2026-10-11T18:18:55Z",
+      "ticks_blocked": 0,
+      "completed": "20261011T181855Z"
+    },
+    {
+      "symbol": "W316",
+      "title": "Milestone-directed ranking: nemik-rank --toward <repo:W<n>> ranks by the demand toward one target card",
+      "status": "ready",
+      "enables": [
+        "W312"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Restrict flow sources to the target's cone so salience reads as 'what moves this milestone'; an umbrella waypoint is a milestone already; test on the flow fixture.",
+      "evidence": "",
+      "issued_at": "2026-10-11T18:18:15Z",
+      "minted_during": "interrupt",
+      "caused_by": "W312",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W317",
+      "title": "Repo health (red, amber, green) per repo in the view and in nemik-metrics, from blocked share, oldest block and operator asks owed",
+      "status": "ready",
+      "enables": [
+        "W312"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Declare the thresholds as data in rank-weights.toml; compute from nemik.history.weekly and nemik_operator_salience; a coloured chip on each repo toggle.",
+      "evidence": "",
+      "issued_at": "2026-10-11T18:18:16Z",
+      "minted_during": "interrupt",
+      "caused_by": "W312",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W318",
+      "title": "Baseline variance: name a baseline revision per repo and report planned versus actual since it (nemik-history --baseline)",
+      "status": "ready",
+      "enables": [
+        "W312"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "A baseline is a git revision recorded in a declared file; variance = cards open at the baseline still open, closed, dropped, and cards added since (interrupt versus planned); builds on nemik-history diff.",
+      "evidence": "",
+      "issued_at": "2026-10-11T18:18:17Z",
+      "minted_during": "interrupt",
+      "caused_by": "W312",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [

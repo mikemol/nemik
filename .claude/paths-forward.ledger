@@ -493,3 +493,10 @@
 2026-10-11T16:42:44Z  tick  --   idle      -         "nothing ready; nudged the seven live repos (github, paperkit, el-openglo, amr-skills, linux-sources, luthen, mtools) on their fold cards and W224; seven repos have no session; cron suspended"
 2026-10-11T16:44:20Z  interrupt W310 minted    -         "--letters --fold delivers a misdelivered letter by copying it into its recipient's inbox (linux-sources, paperkit)"  evidence=linux-sources:W253
 2026-10-11T16:49:45Z  interrupt W311 minted    -         "--fold --apply reports the after-delivery verdict, and a letter archived by its recipient still counts as delivered"  evidence=linux-sources:W323
+2026-10-11T18:18:01Z  interrupt W312 minted    -         "Thoughts-forward (operator's notes doc 2026-10-11): the project-management practices nemik should express, as cards"  evidence=operator
+2026-10-11T18:18:12Z  interrupt W313 minted    -         "Critical path and slack: per open card, the length of its longest open dependency chain and its float, highlighted in the view"  evidence=W312
+2026-10-11T18:18:13Z  interrupt W314 minted    -         "Toil ratio over time: per week and repo, the share of ledger activity that was interrupt work (nemik-history --toil)"  evidence=W312
+2026-10-11T18:18:14Z  interrupt W315 minted    -         "Flow metrics in the weekly roll-up: lead time (first seen to done), velocity, work in progress"  evidence=W312
+2026-10-11T18:18:15Z  interrupt W316 minted    -         "Milestone-directed ranking: nemik-rank --toward <repo:W<n>> ranks by the demand toward one target card"  evidence=W312
+2026-10-11T18:18:16Z  interrupt W317 minted    -         "Repo health (red, amber, green) per repo in the view and in nemik-metrics, from blocked share, oldest block and operator asks owed"  evidence=W312
+2026-10-11T18:18:17Z  interrupt W318 minted    -         "Baseline variance: name a baseline revision per repo and report planned versus actual since it (nemik-history --baseline)"  evidence=W312

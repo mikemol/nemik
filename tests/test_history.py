@@ -145,6 +145,8 @@ def test_time_in_state_and_the_weekly_roll_up_follow_the_commits(
     assert (w41["oldest_blocked"], w41["oldest_blocked_days"]) == ("W1", 2.0)
     assert (w42["opened"], w42["closed"], w42["blocked_share"]) == (0, 0, 0.0)
     assert w42["oldest_blocked"] is None
+    # nemik:W315: W2 was first committed Oct 5 and closed Oct 7: a lead time of 2 days, that week only.
+    assert w41["lead_time_days"] == 2.0 and w42["lead_time_days"] is None
 
 
 def test_the_static_history_names_no_waypoint_and_passes_the_manifest(
