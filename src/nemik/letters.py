@@ -286,6 +286,26 @@ def apply_fold(
     return done
 
 
+def redeliveries(
+    root: Path, workstreams: set[str], repo: str | None = None
+) -> list[tuple[Path, Path]]:
+    """nemik:W310 (linux-sources, paperkit): (source, destination) for each misdelivered letter whose
+    header names a workstream: a COPY into that workstream's `inbox/`, so the letter is delivered where
+    it says and the sender keeps its copy (a waypoint there may cite it). Skips a letter the recipient
+    already has. `repo` keeps those that sit in, or are addressed to, that repo."""
+    addressed, _ = headers(root)
+    out: list[tuple[Path, Path]] = []
+    for ltr in addressed:
+        if ltr.recipient == ltr.inbox or ltr.recipient not in workstreams:
+            continue
+        if repo and repo not in (ltr.inbox, ltr.recipient):
+            continue
+        dest = root / ltr.recipient / "inbox" / ltr.name
+        if (root / ltr.recipient / "inbox").is_dir() and not dest.exists():
+            out.append((root / ltr.inbox / "inbox" / ltr.name, dest))
+    return out
+
+
 def report(
     root: Path,
     workstreams: set[str],
@@ -304,11 +324,27 @@ def report(
     addressed, unaddressed = headers(root)
     if repo:
         addressed = [x for x in addressed if repo in (x.inbox, x.recipient)]
-    bad = misdelivered(addressed, workstreams)
+    import shutil
+
+    # A misdelivered letter whose recipient already holds a copy is delivered (nemik:W310).
+    pending = [
+        x
+        for x in addressed
+        if x.recipient == x.inbox
+        or not (root / x.recipient / "inbox" / x.name).exists()
+    ]
+    bad = misdelivered(pending, workstreams)
     lines = [
         f"letters: {len(addressed)} addressed, {len(unaddressed)} without a header"
     ]
     lines += [f"MISDELIVERED {row}" for row in bad]
+    if fold:
+        for src, dst in redeliveries(root, workstreams, repo):
+            if apply:
+                shutil.copy2(src, dst)
+                lines.append(f"delivered {dst}")
+            else:
+                lines.append(f"cp {src} {dst}")
     if fold and apply:
         lines += apply_fold(root, repo, older_than)
     elif fold:

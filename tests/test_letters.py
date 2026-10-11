@@ -159,6 +159,32 @@ def test_apply_mints_the_cards_and_archives_the_stale(tmp_path: Path) -> None:
     assert orphans(tmp_path, "a") == []
 
 
+def test_a_misdelivered_letter_is_copied_to_its_recipient_and_then_counts_as_delivered(
+    tmp_path: Path,
+) -> None:
+    # nemik:W310: a letter addressed to linux-sources that sits in gcalculus/inbox is copied over.
+    for repo in ("gcalculus", "linux-sources"):
+        queue = tmp_path / repo / ".claude" / "paths-forward.json"
+        queue.parent.mkdir(parents=True)
+        queue.write_text(
+            '{"version": 1, "project_root": "/x", "counter": 0, "residue": [],'
+            ' "waypoints": []}'
+        )
+        (tmp_path / repo / "inbox").mkdir()
+    _letter(
+        tmp_path, "gcalculus", "2026-08-21-misfiled.md", "gcalculus → linux-sources: x"
+    )
+    from nemik.letters import report
+
+    spaces = {"gcalculus", "linux-sources"}
+    said, code = report(tmp_path, spaces, True, "linux-sources")
+    assert code == 5 and any(line.startswith("cp ") for line in said)
+    said, code = report(tmp_path, spaces, True, "linux-sources", None, True)
+    assert any(line.startswith("delivered ") for line in said)
+    assert (tmp_path / "linux-sources" / "inbox" / "2026-08-21-misfiled.md").exists()
+    assert report(tmp_path, spaces, True, "linux-sources")[1] == 0  # delivered now
+
+
 def test_a_peer_waypoint_citing_the_letter_path_owns_it(tmp_path: Path) -> None:
     # nemik:W280: the sender's waiting waypoint cites `<repo>/inbox/<file>` in its evidence.
     from nemik.letters import orphans

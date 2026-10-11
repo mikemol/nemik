@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 309,
+  "counter": 310,
   "waypoints": [
     {
       "symbol": "W1",
@@ -5913,6 +5913,23 @@
       "last_worked": "2026-10-11T16:26:04Z",
       "ticks_blocked": 0,
       "completed": "20261011T162604Z"
+    },
+    {
+      "symbol": "W310",
+      "title": "--letters --fold delivers a misdelivered letter by copying it into its recipient's inbox (linux-sources, paperkit)",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: letters.redeliveries and report: plan prints cp src dst for each misdelivered letter whose recipient is a workstream with an inbox; --apply copies (copy2, sender keeps its copy); a letter its recipient holds is delivered, so exit 5 clears; tests/test_letters.py. Real plan: gcalculus/inbox/2026-08-21-gcalculus-your-paraconsistency-is-filed.md -> linux-sources/inbox.",
+      "issued_at": "2026-10-11T16:44:20Z",
+      "minted_during": "interrupt",
+      "caused_by": "linux-sources:W253",
+      "last_worked": "2026-10-11T16:44:26Z",
+      "ticks_blocked": 0,
+      "completed": "20261011T164426Z"
     }
   ],
   "residue": [
