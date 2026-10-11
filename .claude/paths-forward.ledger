@@ -482,3 +482,4 @@
 2026-10-11T01:04:21Z  interrupt W302 minted    -         "tools/pyfmt.sh: format, lint and type-check a .py draft in one command, so multi-region changes skip the edit gate's one-region refusals"  evidence=operator
 2026-10-11T01:08:30Z  interrupt W303 minted    -         "nemik-pins reads vendored mtools wheel pins (the commit in the wheel's file name), so nemik's own pin staleness is reported"  evidence=operator
 2026-10-11T01:09:00Z  interrupt W304 minted    -         "Re-vendor mtools at its HEAD when nemik-pins nemik reports it more than 30 commits behind"  evidence=W303
+2026-10-11T01:15:01Z  tick  W304 advanced  unblock   "armed 30m; pyfmt helper (W302); nemik-pins reads wheel pins (W303); re-vendored mtools at 7d4a458 (W304)"
