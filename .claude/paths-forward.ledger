@@ -530,3 +530,5 @@
 2026-10-11T21:16:32Z  tick  W340 minted    -         "Legibility floors for the view: label size, edge density, target size"  evidence=W337
 2026-10-11T21:16:34Z  tick  W341 minted    -         "An a11y adversary for the view, as paperkit has for its VPAT"  evidence=W337
 2026-10-11T21:16:46Z  tick  W333 advanced  unblock   "critical() takes a scope (repo, view, card cone); a11y umbrella W337 filed from the operator's illegibility report"  evidence=217d700
+2026-10-11T21:55:10Z  tick  W342 minted    -         "Adopt isolated mikemol-commit: pre-commit hook and gate go through MIKEMOL_REAL_ROOT"  evidence=github:W1
+2026-10-11T21:55:19Z  tick  W335 advanced  unblock   "on_path_repo shipped (838458a); one coloured dashed ring per path scope with a legend (2f7640d)"  evidence=2f7640d
