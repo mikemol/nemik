@@ -540,3 +540,4 @@
 2026-10-11T22:59:25Z  interrupt W344 minted    -         "Longest-chain rings mark every card on any longest path, not one arbitrary chain"  evidence=operator
 2026-10-11T23:18:56Z  tick  W344 advanced  unblock   "poset critical path (da8baba); W293 paperkit fold verified and closed"  evidence=da8baba
 2026-10-11T23:41:50Z  tick  W282 escalated escalate  "16 blocked ticks: fold cards W283,W286,W287,W289,W292,W294,W295,W297 and W224 wait on dormant repos (aeternum, gabion, gcalculus, life, mtools, resumes, rosettapkg, summit); reported to the operator once, nudging stops"
+2026-10-11T23:48:18Z  tick  W316 advanced  unblock   "nemik-rank --toward: one milestone's demand alone (7ccca23); fold cards to dormant repos escalated once"  evidence=7ccca23
