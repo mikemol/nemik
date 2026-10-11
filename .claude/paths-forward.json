@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 329,
+  "counter": 330,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 167
+      "ticks_blocked": 168
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 42,
+      "ticks_blocked": 43,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T12:42:16Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "completed": null,
       "weight": 1
     },
@@ -5384,7 +5384,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-10T06:18:16Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "completed": null
     },
     {
@@ -5405,7 +5405,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -5426,7 +5426,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:29Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -5466,7 +5466,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -5487,7 +5487,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -5527,7 +5527,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -5586,7 +5586,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -5607,7 +5607,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:42Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -5628,7 +5628,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -5649,7 +5649,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -5689,7 +5689,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -5954,7 +5954,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T19:12:00Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -6019,7 +6019,7 @@
     {
       "symbol": "W316",
       "title": "Milestone-directed ranking: nemik-rank --toward <repo:W<n>> ranks by the demand toward one target card",
-      "status": "working",
+      "status": "ready",
       "enables": [
         "W312"
       ],
@@ -6031,7 +6031,7 @@
       "issued_at": "2026-10-11T18:18:15Z",
       "minted_during": "interrupt",
       "caused_by": "W312",
-      "last_worked": "2026-10-11T19:43:54Z",
+      "last_worked": "2026-10-11T20:11:30Z",
       "ticks_blocked": 0,
       "weight": 1,
       "completed": null
@@ -6151,11 +6151,8 @@
       "enables": [],
       "touches": [],
       "blocked_on": [
-        "W324",
-        "W325",
         "W326",
-        "W327",
-        "W328"
+        "W327"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "Atomized into W324-W328: deadlock detection, utilization and Little's law, starvation and aging, arrival pacing, flow efficiency. Not foreclosed because nemik does not do them yet.",
@@ -6163,8 +6160,8 @@
       "issued_at": "2026-10-11T20:00:28Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-11T20:00:49Z",
-      "ticks_blocked": 0,
+      "last_worked": "2026-10-11T20:11:31Z",
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -6208,7 +6205,7 @@
     {
       "symbol": "W326",
       "title": "Starvation and aging: a ready card that has waited long while later cards were ranked above it",
-      "status": "working",
+      "status": "ready",
       "enables": [
         "W323"
       ],
@@ -6220,7 +6217,7 @@
       "issued_at": "2026-10-11T20:00:40Z",
       "minted_during": "interrupt",
       "caused_by": "W323",
-      "last_worked": "2026-10-11T20:06:55Z",
+      "last_worked": "2026-10-11T20:12:48Z",
       "ticks_blocked": 0,
       "completed": null
     },
@@ -6277,6 +6274,23 @@
       "last_worked": "2026-10-11T20:09:52Z",
       "ticks_blocked": 0,
       "completed": "20261011T200952Z"
+    },
+    {
+      "symbol": "W330",
+      "title": "nemik-work W<n>: one command makes W<n> the single working card",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Landed (nemik.work, tests/test_work.py, SKILL row, workflow transition and reference); close after the gate.",
+      "evidence": "",
+      "issued_at": "2026-10-11T20:12:45Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": "2026-10-11T20:12:48Z",
+      "ticks_blocked": 0,
+      "completed": null
     }
   ],
   "residue": [
@@ -6339,7 +6353,10 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-10-11T20:11:24Z"
+  },
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }

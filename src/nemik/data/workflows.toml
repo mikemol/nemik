@@ -25,6 +25,13 @@ enforced_by = [
 ]
 
 [[lifecycle.transition]]
+from = "ready"
+to = "working"
+command = "nemik-work"
+when = "the one-command form of the same move: other working cards return to ready first"
+enforced_by = [{ shape = "more than one working card" }]
+
+[[lifecycle.transition]]
 from = "working"
 to = "done"
 command = "--status done"
@@ -130,5 +137,5 @@ steps = [
 [reference]
 commands = [
   "nemik-metrics", "nemik-serve", "nemik-days", "nemik-calendar-write", "nemik-history", "nemik-pins",
-  "nemik-overlaps", "nemik-wake", "nemik-ics", "nemik-tasks", "nemik-floor-asks", "nemik-operator", "nemik-critical",
+  "nemik-overlaps", "nemik-wake", "nemik-ics", "nemik-tasks", "nemik-floor-asks", "nemik-operator", "nemik-critical", "nemik-work",
 ]
