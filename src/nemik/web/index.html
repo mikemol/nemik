@@ -63,6 +63,7 @@ aside a { color: var(--ink); text-decoration: underline dotted var(--muted); }
   <label><input type="checkbox" id="showNoise"> show operator blocks that don't need you</label>
   <label><input type="checkbox" id="showCross"> show all cross-repo edges</label>
   <label title="Order the forest by the flow model's salience (the demand each goal's cone carries, and each ready card absorbs) instead of by nemik-rank's band-first position"><input type="checkbox" id="bySalience"> salience order</label>
+  <label title="With repos picked, also show what their cards wait on in other repos, this many hops out (1 = what it waits on, 2 = and what that waits on); these cards are drawn dashed and dim"><select id="depth"><option>1</option><option selected>2</option><option>3</option></select> hops of blockers</label>
   <label title="One treemap across the fleet: each tile holds the work beneath it, area by load, rank order reading left to right; repo is the border colour"><input type="checkbox" id="treemap"> treemap</label>
   <span class="stat" id="stat"></span>
   <span class="stat" id="legnote" role="status"></span>
@@ -238,11 +239,28 @@ function draw() {
   // A repo target is drawn as its own "ws:" node, not the repo's compound box: dagre cannot lay
   // out edges into compound parents.
   const byId = new Map(data.nodes.map(n => [n.id, n]));
+  // nemik:W336: with repos picked, the open cards they transitively wait on in OTHER repos, `depth` hops out,
+  // are drawn too as context ("ghosts"): not just what a repo is blocked on, but what that is blocked on.
+  const ghosts = new Set();
+  if (picked.size) {
+    const hops = +document.getElementById("depth").value, deps = depEdges();
+    let frontier = new Set(keep);
+    for (let d = 0; d < hops && frontier.size; d++) {
+      const next = new Set();
+      deps.forEach(([blocker, waiter]) => {
+        const b = byId.get(blocker);
+        if (frontier.has(waiter) && b && isOpen(b) && !keep.has(blocker)) { next.add(blocker); }
+      });
+      next.forEach(id => { keep.add(id); ghosts.add(id); });
+      frontier = next;
+    }
+  }
   // A block ends at the blocker's claiming waypoint, or at an "unclaimed" placeholder in the
   // blocker's box; pull that end in even when its repo is filtered out, so the block stays visible.
   const waits = data.edges.filter(e => e.kind === "waits" && keep.has(e.source)
-      && (e.target.startsWith("operator:") ? (showNoise || e.target === "operator:needs-you") : byId.has(e.target)));
-  waits.forEach(e => { if (byId.has(e.target)) keep.add(e.target); });
+      && (e.target.startsWith("operator:") ? (showNoise || e.target === "operator:needs-you")
+        : ghosts.has(e.source) ? keep.has(e.target) : byId.has(e.target)));
+  waits.forEach(e => { if (byId.has(e.target) && !ghosts.has(e.source)) keep.add(e.target); });
   // nemik:W120: one operator lane per repo box, not one for the fleet. A single lane was a hub
   // every ask converged on, so its edges were the longest on the page whatever the layout did
   // (the top 5% of edge lengths, measured). A chip inside each box keeps those edges short; clicking
@@ -261,13 +279,15 @@ function draw() {
     // shows -- a repo nothing is waiting on has no roster row and stays "unknown".
     ...repos.map(r => {
       const k = data.nodes.filter(n => keep.has(n.id) && n.repo === r && n.state === "unclaimed").length;
-      return { data: { id: "repo:" + r, label: k ? `${r} · ${k} unclaimed` : r, live: liveness[r] || "unknown" }, classes: "repo" };
+      const name = wants(r) ? r : `${r} (context)`;
+      return { data: { id: "repo:" + r, label: k ? `${name} · ${k} unclaimed` : name, live: liveness[r] || "unknown" }, classes: "repo" };
     }),
     ...data.nodes.filter(n => keep.has(n.id)).map(n => {
       const e = n.effort || {}, total = (e.forecast || 0) + (e.interrupt || 0) + (e.unclassified || 0);
       return { data: { ...n, parent: treemapOn ? undefined : "repo:" + n.repo, label: n.state === "unclaimed" ? `? ${n.for}` : n.symbol + (bySal && n.salience ? ` · ${+n.salience.toFixed(1)}` : ""),
         fill: color(n.state), border: total ? 1 + 6 * (e.interrupt || 0) / total : 1,
-        rings: ringsOf.get(n.id) || [], nrings: (ringsOf.get(n.id) || []).length } };
+        rings: ringsOf.get(n.id) || [], nrings: (ringsOf.get(n.id) || []).length,
+        ghost: !wants(n.repo) } };
     }),
     ...actors.map(a => {
       const [cat, r] = a.slice(9).split("@");
@@ -283,7 +303,7 @@ function draw() {
   // The viewport is kept only across a redraw of the SAME view: a changed layout mode or repo
   // filter puts every node somewhere else, and the old zoom/pan then showed one tile scaled off the
   // page (operator 2026-10-02, treemap toggle).
-  const mode = [treemapOn, document.getElementById("bySalience").checked, [...picked].sort().join(",")].join("|");
+  const mode = [treemapOn, document.getElementById("bySalience").checked, [...picked].sort().join(","), document.getElementById("depth").value].join("|");
   const view = cy && mode === lastMode ? { zoom: cy.zoom(), pan: { ...cy.pan() } } : null;
   lastMode = mode;
   if (cy) cy.destroy();
@@ -316,6 +336,8 @@ function draw() {
       { selector: "edge.satisfied", style: { opacity: 0.25, "line-style": "solid" } },
       // nemik:W264: with "salience order" on, an edge is as wide as the flow that crossed it.
       { selector: "edge[current > 0]", style: { width: "mapData(current, 0, 12, 1.5, 7)" } },
+      // nemik:W336: a card shown only as context (its repo is not picked) is dashed and dim.
+      { selector: "node[?ghost]", style: { opacity: 0.65, "border-style": "dashed", "border-width": 2 } },
       // nemik:W322, W335: the cards on a longest open chain (nemik-critical) carry one ring per scope.
       { selector: "node[nrings > 0]", style: { "background-image": ringSvg, "background-fit": "none", "background-clip": "none",
         "background-width": ringW, "background-height": ringH, "background-position-x": "50%", "background-position-y": "50%",
@@ -985,6 +1007,7 @@ for (const id of ["wake", "goals"]) document.getElementById(id).addEventListener
   const a = ev.target.closest("[data-cite]");
   if (a) { ev.preventDefault(); focusCite(a.dataset.cite); }
 });
+document.getElementById("depth").onchange = draw;
 document.getElementById("showDone").onchange = draw;
 document.getElementById("showNoise").onchange = draw;
 // The treemap toggle is a per-viewer preference; storage can be missing or throw (private window).

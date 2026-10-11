@@ -277,6 +277,37 @@ def test_the_default_view_is_legible(server) -> None:
     assert note == "" or "readable size" in note
 
 
+def test_picked_repos_show_their_blockers_blockers_as_context(server) -> None:
+    # nemik:W336: pick one repo; its cards' blockers in other repos are drawn dashed as context, and one
+    # more hop (the control's 2) reaches at least as many, never fewer, and never a picked repo's card.
+    with sync_api.sync_playwright() as p:
+        exe = os.environ.get("NEMIK_CHROMIUM")
+        try:
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        page.goto(server)
+        page.wait_for_function(
+            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
+            timeout=60000,
+        )
+        page.click("#repos button[data-repo='nemik']")
+        counts = []
+        for hops in ("1", "2", "3"):
+            page.select_option("#depth", hops)
+            page.wait_for_timeout(600)
+            counts.append(page.evaluate("() => cy.nodes('[?ghost]').length"))
+        stray = page.evaluate(
+            "() => cy.nodes('[?ghost]').filter(n => n.data('repo') === 'nemik').length"
+        )
+        browser.close()
+    assert counts[0] <= counts[1] <= counts[2], counts
+    assert counts[1] > 0 and stray == 0, (counts, stray)
+
+
 def test_rank_forest_view(server, tmp_path) -> None:
     out = Path(os.environ.get("TEST_UNDECLARED_OUTPUTS_DIR") or tmp_path)
     with sync_api.sync_playwright() as p:
