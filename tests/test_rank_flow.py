@@ -177,8 +177,11 @@ def test_the_view_marks_the_critical_path_and_ships_slack(tmp_path: Path) -> Non
     nodes = [n for n in doc["nodes"] if n["state"] != "done"]
     assert all(isinstance(n["slack"], int) for n in nodes)
     on_path = [n for n in nodes if n["on_path"]]
-    assert len(on_path) == 2
-    assert all(n["slack"] == 0 for n in on_path)
+    # nemik:W344: every chain of two ties (W1,W2 -> W4-W6; W3 -> W7,W8), so all eight cards are on some
+    # longest chain, and a card with two ways in (W4 over W1 and W2) has two chains through it.
+    assert len(on_path) == 8
+    assert all(n["slack"] == 0 and n["path_count"] >= 1 for n in on_path)
+    assert {n["symbol"]: n["path_count"] for n in on_path}["W4"] == 2
     # nemik:W334: each repo also marks its own longest chain.
     assert all(isinstance(n["on_path_repo"], bool) for n in nodes)
     assert {n["repo"] for n in nodes if n["on_path_repo"]} == {n["repo"] for n in nodes}

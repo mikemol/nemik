@@ -24,8 +24,16 @@ from nemik.rank import successors
 
 class Critical(NamedTuple):
     length: int
-    chain: list[str]
+    chain: list[
+        str
+    ]  # every card on some longest chain, by (rank, cite): a display order, not a ranking
     slack: dict[str, int]
+    rank: dict[
+        str, int
+    ]  # the height of each open card: the longest chain of prerequisites ending at it
+    paths: dict[
+        str, int
+    ]  # longest chains through each critical card (ways in x ways out)
 
 
 def _open(g: Graph) -> set[Node]:
@@ -108,22 +116,31 @@ def critical(g: Graph, scope: set[str] | None = None) -> Critical:
     through = {n: up[n] + down[n] - 1 for n in nodes}
     length = max(through.values(), default=0)
     slack = {ref(n): length - through[n] for n in nodes}
-    # ONE longest chain: from a card that starts a longest path, step to the dependent that keeps it
-    # longest. (Ties give several equal chains; the zero-slack count says how many cards are on any.)
-    starts = sorted((n for n in nodes if through[n] == length and up[n] == 1), key=str)
-    chain: list[Node] = []
-    here = starts[0] if starts else None
-    while here is not None:
-        chain.append(here)
-        here = next(
-            (
-                s
-                for s in sorted(succ[here], key=str)
-                if through[s] == length and down[s] == down[here] - 1
-            ),
-            None,
+    # nemik:W344: the dependency order is a poset, so tied longest chains are alternatives, not a ranking:
+    # the critical object is EVERY card on some longest chain (zero slack), graded by its rank (`up`), and
+    # by how many longest chains run through it (ways in x ways out). Nothing here depends on sort order
+    # except the order the list is displayed in: (rank, cite).
+    ways_in: dict[Node, int] = {}
+    for n in sorted(nodes, key=lambda x: up[x]):
+        ways_in[n] = (
+            1 if up[n] == 1 else sum(ways_in[p] for p in pred[n] if up[p] == up[n] - 1)
         )
-    return Critical(length, [ref(n) for n in chain], slack)
+    ways_out: dict[Node, int] = {}
+    for n in sorted(nodes, key=lambda x: down[x]):
+        ways_out[n] = (
+            1
+            if down[n] == 1
+            else sum(ways_out[s] for s in succ[n] if down[s] == down[n] - 1)
+        )
+    on_longest = [n for n in nodes if through[n] == length]
+    chain = sorted(on_longest, key=lambda n: (up[n], str(n)))
+    return Critical(
+        length,
+        [ref(n) for n in chain],
+        slack,
+        {ref(n): up[n] for n in nodes},
+        {ref(n): ways_in[n] * ways_out[n] for n in on_longest},
+    )
 
 
 def cycles(g: Graph) -> list[tuple[list[str], bool]]:
@@ -208,7 +225,17 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         print(json.dumps({**found._asdict(), "cycles": loops}, indent=1))
         return
     print(f"critical path: {found.length} open cards deep")
-    print("  " + " -> ".join(found.chain))
+    # nemik:W344: one line per rank; cards sharing a rank are tied alternatives (an antichain), joined by |
+    levels: dict[int, list[str]] = {}
+    for card in found.chain:
+        levels.setdefault(found.rank[card], []).append(card)
+    print(
+        "  "
+        + " -> ".join(
+            "|".join(cards) + (f" (x{len(cards)} tied)" if len(cards) > 1 else "")
+            for _, cards in sorted(levels.items())
+        )
+    )
     loose = sum(1 for s in found.slack.values() if s > 0)
     print(f"  {len(found.slack) - loose} cards at zero slack, {loose} with slack")
     # nemik:W324: a cycle never clears; a cross-repo one spans workstreams that cannot see it alone.

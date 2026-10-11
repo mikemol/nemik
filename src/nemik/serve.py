@@ -294,6 +294,8 @@ def to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
         if item.get("cite") in crit.slack:
             item["slack"] = crit.slack[item["cite"]]
             item["on_path"] = item["cite"] in on_path
+            # nemik:W344: the longest chains through this card (ways in x ways out); 1 = no ties
+            item["path_count"] = crit.paths.get(item["cite"], 0)
             item["on_path_repo"] = item["cite"] in repo_chain[item["repo"]]
     # nemik:W264: the demand that crossed each dependency, summed over the ready repos' solves, as
     # the width the page draws the edge with. A `waits` edge runs waiter -> blocker, an `enables`

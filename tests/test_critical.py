@@ -54,6 +54,32 @@ def test_a_scope_bounds_the_chain_to_a_repo_or_a_cone() -> None:
     assert cone(g, "x:W0") == set()
 
 
+def _fan_in(order: list[int]) -> Graph:
+    # nemik:W344: W1 waits on ten leaves W2..W11 (ten chains of length 2 tie); W12 stands alone.
+    g = Graph()
+    nodes = {i: _card(g, f"W{i}") for i in order}
+    for i in range(2, 12):
+        g.add((nodes[i], NEMIK.enables, nodes[1]))
+    return g
+
+
+def test_tied_longest_chains_are_all_marked_and_graded_not_picked_by_sort_order() -> (
+    None
+):
+    from nemik.critical import critical
+
+    found = critical(_fan_in(list(range(1, 13))))
+    leaves = {f"a:W{i}" for i in range(2, 12)}
+    assert found.length == 2
+    assert set(found.chain) == leaves | {"a:W1"}  # all ten, not one by sort order
+    assert found.rank["a:W1"] == 2 and all(found.rank[c] == 1 for c in leaves)
+    # W1 ends ten longest chains; each leaf starts one
+    assert found.paths["a:W1"] == 10 and all(found.paths[c] == 1 for c in leaves)
+    assert "a:W12" not in found.chain
+    # the answer does not depend on the order the cards were added in
+    assert critical(_fan_in(list(reversed(range(1, 13))))) == found
+
+
 def test_a_cycle_is_reported_and_a_chain_is_not() -> None:
     # nemik:W324: x -> y -> z -> x never clears; a -> b is a chain; w waits on itself.
     from nemik.critical import cycles

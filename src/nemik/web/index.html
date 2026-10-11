@@ -133,30 +133,33 @@ const scopeColor = c => (c === "ink" ? css("--ink") : c);
 document.getElementById("pathkey").innerHTML = SCOPES.map(s =>
   `<span><svg width="26" height="8" aria-hidden="true"><line x1="1" y1="4" x2="25" y2="4" stroke="${scopeColor(s.color)}" stroke-width="${s.width}" stroke-dasharray="${s.dash}"/></svg>${s.label}</span>`).join("");
 
-// The longest chain of dependencies among `ids`; `deps` are [prerequisite, dependent] pairs. A cycle is cut where
-// the walk meets itself, as everywhere else in nemik.
-function longestChain(ids, deps) {
-  const succ = new Map([...ids].map(id => [id, []]));
-  deps.forEach(([a, b]) => { if (succ.has(a) && succ.has(b) && a !== b) succ.get(a).push(b); });
-  const memo = new Map(), onStack = new Set();
-  const walk = id => {
-    if (memo.has(id)) return memo.get(id);
-    onStack.add(id);
-    let best = { len: 1, next: null };
-    for (const t of succ.get(id)) {
-      if (onStack.has(t)) continue;
-      const r = walk(t);
-      if (r.len + 1 > best.len) best = { len: r.len + 1, next: t };
-    }
-    onStack.delete(id);
-    memo.set(id, best);
-    return best;
+// nemik:W344: the dependency order is a poset, so tied longest chains are alternatives, not a ranking. This is
+// every card among `ids` that lies on SOME longest chain (zero slack); `deps` are [prerequisite, dependent]
+// pairs. A cycle is cut where the walk meets itself. Nothing depends on iteration order.
+function criticalSet(ids, deps) {
+  const edges = flip => {
+    const m = new Map([...ids].map(id => [id, []]));
+    deps.forEach(([a, b]) => { const [x, y] = flip ? [b, a] : [a, b]; if (m.has(x) && m.has(y) && x !== y) m.get(x).push(y); });
+    return m;
   };
-  let start = null;
-  [...ids].sort().forEach(id => { if (!start || walk(id).len > walk(start).len) start = id; });
-  const chain = [];
-  for (let id = start; id; id = memo.get(id).next) chain.push(id);
-  return chain;
+  const height = adj => {
+    const memo = new Map(), onStack = new Set();
+    const walk = id => {
+      if (memo.has(id)) return memo.get(id);
+      onStack.add(id);
+      let best = 1;
+      for (const t of adj.get(id)) if (!onStack.has(t)) best = Math.max(best, 1 + walk(t));
+      onStack.delete(id);
+      memo.set(id, best);
+      return best;
+    };
+    ids.forEach(walk);
+    return memo;
+  };
+  const down = height(edges(false)), up = height(edges(true));
+  const through = id => up.get(id) + down.get(id) - 1;
+  const longest = Math.max(0, ...[...ids].map(through));
+  return [...ids].filter(id => through(id) === longest);
 }
 
 const isOpen = n => n.symbol && !["done", "dropped"].includes(n.state);
@@ -171,7 +174,7 @@ function ringMap() {
   const put = (id, s) => rings.set(id, [...(rings.get(id) || []), s]);
   data.nodes.filter(isOpen).forEach(n => { if (n.on_path) put(n.id, "fleet"); if (n.on_path_repo) put(n.id, "repo"); });
   const deps = depEdges();
-  longestChain(keepOpen, deps).forEach(id => put(id, "view"));
+  criticalSet(keepOpen, deps).forEach(id => put(id, "view"));
   if (selectedId && data.nodes.some(n => n.id === selectedId && isOpen(n))) {
     const open = new Set(data.nodes.filter(isOpen).map(n => n.id));
     const reach = (from, forward) => {
@@ -186,7 +189,7 @@ function ringMap() {
       return seen;
     };
     const cone = new Set([...reach(selectedId, true), ...reach(selectedId, false)]);
-    longestChain(cone, deps).forEach(id => put(id, "sel"));
+    criticalSet(cone, deps).forEach(id => put(id, "sel"));
   }
   return rings;
 }
@@ -830,6 +833,7 @@ function detail(n) {
     <dt>title</dt><dd>${linked(n.title)}</dd>
     <dt>state</dt><dd>${esc(n.state)}</dd>
     ${n.salience !== undefined ? `<dt>salience</dt><dd>${n.salience} (flow model; band ${esc(n.band || "")}, rank ${n.rank_pos})</dd>` : ""}
+    ${n.path_count ? `<dt>longest chains through it</dt><dd>${n.path_count}${n.path_count > 1 ? " (tied alternatives)" : ""}</dd>` : ""}
     ${n.minted_during ? `<dt>minted during</dt><dd>${esc(n.minted_during)}</dd>` : ""}
     ${n.caused_by ? `<dt>caused by</dt><dd>${linked(n.caused_by.replace(/^urn:nemik:([^/]+)\//, "$1:"), n.repo)}</dd>` : ""}
     ${n.blocked_on.length ? `<dt>blocked on</dt><dd>${linked(n.blocked_on.join(", "), n.repo)} (${esc(n.blocked_kind)})</dd>` : ""}

@@ -537,3 +537,4 @@
 2026-10-11T22:19:43Z  tick  W340 advanced  sweep     "default view legible: 8px label floor, highest-salience repo at the floor, fit-all button"  evidence=2f3210e
 2026-10-11T22:42:05Z  tick  W339 nudged    nudge     "NUDGE el-openglo:W72 (W339 waits on it); already told, no new message"
 2026-10-11T22:47:55Z  tick  W336 advanced  unblock   "blockers-of-blockers context (depth 1-3, ghosts dashed); W332 umbrella closed"  evidence=b12da79
+2026-10-11T22:59:25Z  interrupt W344 minted    -         "Longest-chain rings mark every card on any longest path, not one arbitrary chain"  evidence=operator
