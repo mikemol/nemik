@@ -506,3 +506,10 @@
 2026-10-11T18:54:46Z  tick  W320 advanced  collapse  "toil (W314), working-state enforcement (W319), workflow model with a SKILL correspondence test (W320); the test found four untaught commands"
 2026-10-11T19:16:50Z  tick  W322 minted    -         "Mark the critical path in the web view: zero-slack cards and edges drawn heavier or outlined"  evidence=W313
 2026-10-11T19:19:15Z  tick  W313 advanced  collapse  "workflow model extended (W321), nemik-critical (W313): fleet critical path is 38 cards, all gabion"
+2026-10-11T19:45:56Z  tick  W322 advanced  collapse  "critical path marked in the web view and verified in host Chrome; W316 next"
+2026-10-11T20:00:28Z  interrupt W323 minted    -         "Thoughts-forward 2 (operator's notes doc, new sections 2026-10-12): block schedulers, queueing theory, traffic shaping, as cards"  evidence=operator
+2026-10-11T20:00:38Z  interrupt W324 minted    -         "Deadlock detection: report cycles in the open dependency graph, fleet-wide, before they stall anything"  evidence=W323
+2026-10-11T20:00:39Z  interrupt W325 minted    -         "Utilization and Little's law in the weekly roll-up: arrivals over departures, and the implied wait L over lambda"  evidence=W323
+2026-10-11T20:00:40Z  interrupt W326 minted    -         "Starvation and aging: a ready card that has waited long while later cards were ranked above it"  evidence=W323
+2026-10-11T20:00:41Z  interrupt W327 minted    -         "Arrival pacing: a declared limit on new open cards per repo and per day, reported against actual"  evidence=W323
+2026-10-11T20:00:42Z  interrupt W328 minted    -         "Flow efficiency: the share of a closed card's lifetime spent working, now that the working state is enforced"  evidence=W323

@@ -14,7 +14,7 @@ import json
 from pathlib import Path
 from typing import NamedTuple
 
-from rdflib import Graph
+from rdflib import Graph, Literal
 from rdflib.term import Node
 
 from nemik.adapter import NEMIK, OSLC_CM
@@ -91,6 +91,57 @@ def critical(g: Graph) -> Critical:
     return Critical(length, [ref(n) for n in chain], slack)
 
 
+def cycles(g: Graph) -> list[tuple[list[str], bool]]:
+    """nemik:W324: the dependency cycles among open cards, each as (its sorted cards, operator
+    breakable): a strongly connected component of more than one card, or a card that waits on itself.
+    Every card in one waits on another, so it cannot clear by itself. It IS breakable when a member is
+    blocked on the operator (blocked_kind human): the `same ask as` convention makes two repos' asks
+    cite each other on purpose, and the operator's answer ends it. Any other cycle is a true
+    deadlock. Tarjan's algorithm; depth is bounded by a simple path."""
+    nodes = {
+        n
+        for n in g.subjects(OSLC_CM.state, None)
+        if (n, OSLC_CM.state, NEMIK.Done) not in g
+    }
+    succ = {
+        n: sorted((s for s in successors(g, n) if s in nodes), key=str) for n in nodes
+    }
+    index: dict[Node, int] = {}
+    low: dict[Node, int] = {}
+    on_stack: set[Node] = set()
+    stack: list[Node] = []
+    found: list[tuple[list[str], bool]] = []
+
+    def visit(v: Node) -> None:
+        index[v] = low[v] = len(index)
+        stack.append(v)
+        on_stack.add(v)
+        for w in succ[v]:
+            if w not in index:
+                visit(w)
+                low[v] = min(low[v], low[w])
+            elif w in on_stack:
+                low[v] = min(low[v], index[w])
+        if low[v] == index[v]:
+            group = []
+            while True:
+                w = stack.pop()
+                on_stack.discard(w)
+                group.append(w)
+                if w == v:
+                    break
+            if len(group) > 1 or v in succ[v]:
+                human = any(
+                    (n, NEMIK.blockedKind, Literal("human")) in g for n in group
+                )
+                found.append((sorted(ref(n) for n in group), human))
+
+    for n in sorted(nodes, key=str):
+        if n not in index:
+            visit(n)
+    return sorted(found)
+
+
 def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     """nemik-critical: the longest chain of open work across the fleet, and what has slack."""
     from nemik.check import default_root, survey
@@ -107,10 +158,22 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
             if qg is not None:
                 g += qg
     found = critical(g)
+    loops = cycles(g)
     if args.json:
-        print(json.dumps(found._asdict(), indent=1))
+        print(json.dumps({**found._asdict(), "cycles": loops}, indent=1))
         return
     print(f"critical path: {found.length} open cards deep")
     print("  " + " -> ".join(found.chain))
     loose = sum(1 for s in found.slack.values() if s > 0)
     print(f"  {len(found.slack) - loose} cards at zero slack, {loose} with slack")
+    # nemik:W324: a cycle never clears; a cross-repo one spans workstreams that cannot see it alone.
+    deadlocks = [c for c, human in loops if not human]
+    print(
+        f"dependency cycles: {len(loops)}, "
+        f"{len(deadlocks)} true deadlocks, {len(loops) - len(deadlocks)} the operator can break"
+    )
+    for cards, human in loops:
+        repos = {c.partition(":")[0] for c in cards}
+        mark = " [cross-repo]" if len(repos) > 1 else ""
+        kind = "operator can break" if human else "DEADLOCK"
+        print(f"  {kind}: {', '.join(cards)}{mark}")

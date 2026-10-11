@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 322,
+  "counter": 328,
   "waypoints": [
     {
       "symbol": "W1",
@@ -6143,6 +6143,121 @@
       "last_worked": "2026-10-11T19:43:53Z",
       "ticks_blocked": 0,
       "completed": "20261011T194353Z"
+    },
+    {
+      "symbol": "W323",
+      "title": "Thoughts-forward 2 (operator's notes doc, new sections 2026-10-12): block schedulers, queueing theory, traffic shaping, as cards",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "W324",
+        "W325",
+        "W326",
+        "W327",
+        "W328"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Atomized into W324-W328: deadlock detection, utilization and Little's law, starvation and aging, arrival pacing, flow efficiency. Not foreclosed because nemik does not do them yet.",
+      "evidence": "",
+      "issued_at": "2026-10-11T20:00:28Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": "2026-10-11T20:00:49Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W324",
+      "title": "Deadlock detection: report cycles in the open dependency graph, fleet-wide, before they stall anything",
+      "status": "done",
+      "enables": [
+        "W323"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: nemik.critical.cycles (Tarjan over the open graph) classified by whether a member is blocked on the operator; nemik-critical prints them and --json carries them; tests/test_critical.py. Real fleet 2026-10-12: 9 cycles, 4 the operator can break (the same-ask pairs, e.g. luthen W257 <-> mtools W576) and 5 true deadlocks, all in luthen-observability (W130/W132/W134/W70, W412/W719/W720/W721, W440/W716, W447/W692/W695/W696, W777/W778/W779). A check finding per card is not built yet.",
+      "issued_at": "2026-10-11T20:00:38Z",
+      "minted_during": "interrupt",
+      "caused_by": "W323",
+      "last_worked": "2026-10-11T20:03:43Z",
+      "ticks_blocked": 0,
+      "completed": "20261011T200343Z"
+    },
+    {
+      "symbol": "W325",
+      "title": "Utilization and Little's law in the weekly roll-up: arrivals over departures, and the implied wait L over lambda",
+      "status": "working",
+      "enables": [
+        "W323"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Add utilization (opened over closed, above 1 means the queue grows) and implied_wait_days (open over weekly closed rate) to nemik.history.weekly and history.json.",
+      "evidence": "",
+      "issued_at": "2026-10-11T20:00:39Z",
+      "minted_during": "interrupt",
+      "caused_by": "W323",
+      "last_worked": "2026-10-11T20:03:44Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W326",
+      "title": "Starvation and aging: a ready card that has waited long while later cards were ranked above it",
+      "status": "ready",
+      "enables": [
+        "W323"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Design: dwell time of ready cards (issued_at) against rank; nemik-rank --check STARVE row past a declared age; an aging term in rank-weights.toml, off by default like the residue term.",
+      "evidence": "",
+      "issued_at": "2026-10-11T20:00:40Z",
+      "minted_during": "interrupt",
+      "caused_by": "W323",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W327",
+      "title": "Arrival pacing: a declared limit on new open cards per repo and per day, reported against actual",
+      "status": "ready",
+      "enables": [
+        "W323"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Design a token-bucket reading from nemik-history opened counts: a declared rate and burst in rank-weights.toml, nemik-check warns when a repo exceeds it; advisory first, enforcement a separate decision.",
+      "evidence": "",
+      "issued_at": "2026-10-11T20:00:41Z",
+      "minted_during": "interrupt",
+      "caused_by": "W323",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W328",
+      "title": "Flow efficiency: the share of a closed card's lifetime spent working, now that the working state is enforced",
+      "status": "ready",
+      "enables": [
+        "W323"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Add flow_efficiency (working time over total time of cards closed that week) to nemik.history.weekly from time_in_state; report as low until compliance data accrues.",
+      "evidence": "",
+      "issued_at": "2026-10-11T20:00:42Z",
+      "minted_during": "interrupt",
+      "caused_by": "W323",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -6205,10 +6320,7 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": {
-    "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-11T19:41:25Z"
-  },
+  "lock": null,
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }
