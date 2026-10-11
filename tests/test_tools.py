@@ -94,7 +94,11 @@ def test_cmd_output_is_the_cli_output(name, tmp_path, monkeypatch) -> None:
             ln for ln in text.splitlines() if "nemik_waypoint_age_seconds{" not in ln
         )
 
-    assert (code, stable(out)) == (cli.returncode, stable(cli.stdout))
+    # A rare second-boundary flake: on a mismatch, name the differing lines instead of truncating them.
+    mine, theirs = stable(out).splitlines(), stable(cli.stdout).splitlines()
+    differing = [(a, b) for a, b in zip(mine, theirs, strict=False) if a != b]
+    assert code == cli.returncode
+    assert (mine, differing) == (theirs, []), differing
 
 
 def test_unknown_command_and_bad_repo_are_refused() -> None:

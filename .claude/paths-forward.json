@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 328,
+  "counter": 329,
   "waypoints": [
     {
       "symbol": "W1",
@@ -6260,6 +6260,23 @@
       "last_worked": "2026-10-11T20:06:54Z",
       "ticks_blocked": 0,
       "completed": "20261011T200654Z"
+    },
+    {
+      "symbol": "W329",
+      "title": "test_tools metrics flaked once in the gate: the assertion now names the differing lines",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: tests/test_tools.py compares the metrics lines and asserts on the differing pairs",
+      "issued_at": "2026-10-11T20:09:47Z",
+      "minted_during": "interrupt",
+      "caused_by": "W325",
+      "last_worked": "2026-10-11T20:09:52Z",
+      "ticks_blocked": 0,
+      "completed": "20261011T200952Z"
     }
   ],
   "residue": [

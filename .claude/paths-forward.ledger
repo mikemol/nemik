@@ -513,3 +513,5 @@
 2026-10-11T20:00:40Z  interrupt W326 minted    -         "Starvation and aging: a ready card that has waited long while later cards were ranked above it"  evidence=W323
 2026-10-11T20:00:41Z  interrupt W327 minted    -         "Arrival pacing: a declared limit on new open cards per repo and per day, reported against actual"  evidence=W323
 2026-10-11T20:00:42Z  interrupt W328 minted    -         "Flow efficiency: the share of a closed card's lifetime spent working, now that the working state is enforced"  evidence=W323
+2026-10-11T20:09:47Z  interrupt W329 minted    -         "test_tools metrics flaked once in the gate: the assertion now names the differing lines"  evidence=W325
+2026-10-11T20:09:53Z  tick  W325 advanced  collapse  "thoughts-forward 2: cycles (W324), utilization and Little's law (W325), flow efficiency (W328); luthen told of five deadlocks; flaky metrics test instrumented (W329)"
