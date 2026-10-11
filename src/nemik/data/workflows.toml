@@ -101,3 +101,34 @@ steps = [
   { who = "repo", command = "--fold", does = "reads the plan: live letters to cards, stale ones to archive" },
   { who = "repo", command = "--apply", does = "carries the plan out; idempotent" },
 ]
+
+[[workflow]]
+name = "letter-as-evidence"
+steps = [
+  { who = "asker", command = "--attach", does = "pins the letter file on the waiting waypoint (or cites its path in evidence)" },
+  { who = "recipient", command = "nemik-inbound", does = "sees the row with its [letter: <path>]" },
+  { who = "any session", command = "nemik-check", does = "warns when a cited letter does not exist, and reports an uncited one as an orphan" },
+]
+
+[[workflow]]
+name = "rank-sync"
+steps = [
+  { who = "tick", command = "nemik-rank", does = "orders the ready cards by band and flow salience" },
+  { who = "tick", command = "--weights-from", does = "stores that order so the queue sorts by it" },
+]
+
+[[workflow]]
+name = "weather"
+steps = [
+  { who = "waiter", command = "nemik-witnesses", does = "evaluates the declared witness; --apply marks the ones that hold done" },
+  { who = "waiter", command = "--wait", does = "blocks on one ad-hoc witness and notifies once" },
+]
+
+# Commands the skill documents that start no workflow of their own: they only read, or measure.
+# Every nemik-* command in the skill's Commands table is either a step above or listed here, so a new
+# command cannot be documented without saying where it belongs.
+[reference]
+commands = [
+  "nemik-metrics", "nemik-serve", "nemik-days", "nemik-calendar-write", "nemik-history", "nemik-pins",
+  "nemik-overlaps", "nemik-wake", "nemik-ics", "nemik-tasks", "nemik-floor-asks", "nemik-operator",
+]

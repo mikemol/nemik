@@ -503,3 +503,4 @@
 2026-10-11T18:43:02Z  tick  W319 minted    -         "Enforce the working state: a code or test commit is refused while ready cards exist and none is marked working"  evidence=operator
 2026-10-11T18:44:39Z  tick  W320 minted    -         "Model nemik's workflows rigorously and check SKILL.md against the model (structural correspondence)"  evidence=operator
 2026-10-11T18:51:43Z  tick  W321 minted    -         "Extend the workflow model to the tick, the letter and the weather workflows and to the warnings table"  evidence=W320
+2026-10-11T18:54:46Z  tick  W320 advanced  collapse  "toil (W314), working-state enforcement (W319), workflow model with a SKILL correspondence test (W320); the test found four untaught commands"

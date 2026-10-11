@@ -55,6 +55,15 @@ def test_every_workflow_step_command_appears_in_the_skill() -> None:
     assert [c for c in commands if c not in SKILL] == []
 
 
+def test_every_documented_command_has_a_workflow_or_is_reference() -> None:
+    table = re.findall(r"^\| `(nemik-[a-z-]+)", SKILL, flags=re.MULTILINE)
+    steps = {s["command"] for w in MODEL["workflow"] for s in w["steps"]}
+    placed = steps | set(MODEL["reference"]["commands"])
+    assert [c for c in table if c not in placed] == []
+    # and the reference list names only commands the skill documents
+    assert [c for c in MODEL["reference"]["commands"] if c not in table] == []
+
+
 def test_what_is_taught_but_not_enforced_is_the_reviewed_set() -> None:
     # Adding an unenforced transition or rule changes this set on purpose, in a reviewed diff.
     assert advice_only(MODEL) == [
