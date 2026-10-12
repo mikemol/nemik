@@ -84,7 +84,7 @@
   section = {standards},
   from    = {prometheus-label-format},
   join    = {. },
-  claim   = {SHACL is the one conformance language nemik enforces the fleet's queues against --- pyshacl is imported nowhere but check.py, so there is exactly one place a shape can be added, relaxed, or read, not several independently-drifting validators},
+  claim   = {SHACL is the one conformance language nemik enforces the fleet's queues against --- pyshacl is imported nowhere but shaclinc.py (which check.py calls, and which re-validates only what a change touches), so there is exactly one place a shape can be added, relaxed, or read, not several independently-drifting validators},
   check   = {claim:shacl-is-the-one-validator}
 }
 

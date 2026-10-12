@@ -20,9 +20,7 @@ from importlib.resources import files
 from pathlib import Path
 
 from mikemol.pathsforward.store import UnreadableStateError
-from pyshacl import validate
 from rdflib import Graph, Literal
-from rdflib.namespace import SH
 
 from nemik.adapter import BASE, NEMIK, OSLC_CM, bind, queue_graph, workstream_uri
 from nemik.adoption import adoption
@@ -130,17 +128,13 @@ def survey(
             m = HOST_REF.fullmatch(str(cited).strip())
             if m and m[1] not in export.rows:
                 merged.add((node, NEMIK.unresolvedBlocker, cited))
-    from nemik.shaclcache import cached_sparql_parse
+    from nemik.shaclinc import findings as shacl_findings
 
-    # nemik:W254: pyshacl hands rdflib the same constraint text for every focus node; parse it once.
-    with cached_sparql_parse():
-        _, results, _ = validate(merged, shacl_graph=shapes())
+    # nemik:W400: a rebuild in the same process re-validates only the nodes its change touches.
+    results = shacl_findings(str(root.resolve()), merged, shapes())
     lap("shacl")
     by_repo: dict[str, list[Finding]] = {repo: [] for repo in graphs}
-    for focus, sev, msg in results.query(
-        "SELECT ?f ?s ?m WHERE { ?r sh:focusNode ?f ; sh:resultSeverity ?s ; sh:resultMessage ?m }",
-        initNs={"sh": SH},
-    ):
+    for focus, sev, msg in sorted(results):
         repo, _, sym = str(focus).removeprefix(BASE).partition("/")
         by_repo.setdefault(repo, []).append(
             (str(sev).rsplit("#", 1)[-1], sym or "--", str(msg))

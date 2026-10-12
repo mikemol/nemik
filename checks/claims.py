@@ -139,7 +139,8 @@ def shacl_is_the_one_validator():
         for name, text in mods.items()
         if re.search(r"^from pyshacl import|^import pyshacl", text, re.MULTILINE)
     ]
-    assert users == ["check"], f"pyshacl imported outside check.py: {users}"
+    # nemik:W400: the one importer is shaclinc.py (incremental validation); check.py calls it.
+    assert users == ["shaclinc"], f"pyshacl imported outside shaclinc.py: {users}"
 
 
 # -- modularity -----------------------------------------------------------------------------------

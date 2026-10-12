@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 222
+      "ticks_blocked": 224
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 42,
+      "ticks_blocked": 44,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 44,
+      "ticks_blocked": 46,
       "weight": 2,
       "completed": null
     },
@@ -3750,12 +3750,12 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "2026-10-05: 2026-10-05: letter left in luthen-observability/inbox/2026-10-05-nemik-calendar-write-unit.md (no luthen session was live) asking for a claiming waypoint and the unit. | 2026-10-08: 2026-10-08: title shortened (was bundled, nemik-check W201 warning); full ask unchanged: a unit every few minutes so a waypoint that changes or closes updates or deletes its event, asked of luthen as for the Tasks unit W234. | 2026-10-09: 2026-10-09: claimed on luthen as luthen-observability:W626 and W670 (nemik-inbound luthen-observability lists both; relayed by github-45) | 2026-10-09: 2026-10-09: luthen dropped W670 into residue pointing at W626 (verified in luthen queue, dropped 06:20Z); W626 carries the contract and needs the operator host apply when declared | 2026-10-12: 2026-10-12 luthen-observability-d9: luthen-observability:W626 landed the units (05dfba72) and the nemik_calendar_unreachable alert (15f4668b); the remaining step is installing luthen-nemik-calendar-write.{service,timer} into ~/.config/systemd/user, the user-profile root act tracked as luthen W824/W820; W626 is blocked on W824. luthen will report once the units run and a real exit code is read from the journal.",
+      "evidence": "2026-10-05: 2026-10-05: letter left in luthen-observability/inbox/2026-10-05-nemik-calendar-write-unit.md (no luthen session was live) asking for a claiming waypoint and the unit. | 2026-10-08: 2026-10-08: title shortened (was bundled, nemik-check W201 warning); full ask unchanged: a unit every few minutes so a waypoint that changes or closes updates or deletes its event, asked of luthen as for the Tasks unit W234. | 2026-10-09: 2026-10-09: claimed on luthen as luthen-observability:W626 and W670 (nemik-inbound luthen-observability lists both; relayed by github-45) | 2026-10-09: 2026-10-09: luthen dropped W670 into residue pointing at W626 (verified in luthen queue, dropped 06:20Z); W626 carries the contract and needs the operator host apply when declared | 2026-10-12: 2026-10-12 luthen-observability-d9: luthen-observability:W626 landed the units (05dfba72) and the nemik_calendar_unreachable alert (15f4668b); the remaining step is installing luthen-nemik-calendar-write.{service,timer} into ~/.config/systemd/user, the user-profile root act tracked as luthen W824/W820; W626 is blocked on W824. luthen will report once the units run and a real exit code is read from the journal. | 2026-10-12: 2026-10-12 luthen-observability: W626's apply mechanism decided (chezmoi for userland rows via a no-sudo waldo apply command; tofu for root files only). Not installed yet: chezmoi on host (luthen-observability:W899), apply waldo (W900), the rows incl. luthen-nemik-calendar-write units (W901). W626 now waits on W901; luthen will report when the units are live with a real journal exit code.",
       "issued_at": "2026-10-05T14:36:03Z",
       "minted_during": "tick",
       "caused_by": "life-c5",
-      "last_worked": "2026-10-12T13:54:28Z",
-      "ticks_blocked": 74,
+      "last_worked": "2026-10-12T23:37:26Z",
+      "ticks_blocked": 76,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 71,
+      "ticks_blocked": 73,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 48,
+      "ticks_blocked": 50,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 63,
+      "ticks_blocked": 65,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 63,
+      "ticks_blocked": 65,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 63,
+      "ticks_blocked": 65,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 63,
+      "ticks_blocked": 65,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 63,
+      "ticks_blocked": 65,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 63,
+      "ticks_blocked": 65,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 63,
+      "ticks_blocked": 65,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 63,
+      "ticks_blocked": 65,
       "completed": null
     },
     {
@@ -6446,7 +6446,7 @@
       "caused_by": "W337",
       "last_worked": "2026-10-11T21:18:11Z",
       "ticks_blocked": 0,
-      "weight": 7
+      "weight": 5
     },
     {
       "symbol": "W339",
@@ -6464,12 +6464,12 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "wait for el-openglo:W72 (its use-of-colour measurement and policy); then import or call it for nemik's view. Do not read mat230.tar.xz or copy its logic.",
-      "evidence": "2026-10-11: el-openglo answer: check_use_of_colour.py scans el-openglo's own emitted artifacts and the criterion is mat230's (el-openglo:W72 adopts it); depend on mat230's check, not a copy. Legibility floors (W340): only the floor arithmetic is generic; APCA and contrast floors are tied to el-openglo's solver. | 2026-10-11: Correction: mat230 is archived; the only copy is /home/mikemol/github/mat230.tar.xz (member mat230/bin/check-a11y, _check_use_of_colour). The live cite is el-openglo:W72 (adopting it, ready). Until it lands, the logic source is that tar member; nemik reads it, never depends on mat230 as a repo.",
+      "evidence": "2026-10-11: el-openglo answer: check_use_of_colour.py scans el-openglo's own emitted artifacts and the criterion is mat230's (el-openglo:W72 adopts it); depend on mat230's check, not a copy. Legibility floors (W340): only the floor arithmetic is generic; APCA and contrast floors are tied to el-openglo's solver. | 2026-10-11: Correction: mat230 is archived; the only copy is /home/mikemol/github/mat230.tar.xz (member mat230/bin/check-a11y, _check_use_of_colour). The live cite is el-openglo:W72 (adopting it, ready). Until it lands, the logic source is that tar member; nemik reads it, never depends on mat230 as a repo. | 2026-10-12: 2026-10-12 el-openglo letter inbox/2026-10-12-el-openglo-w339-waits-on-w72.md: el-openglo:W72 ready, ranked behind el-openglo:W273; W339 needs W72.c (check_use_of_colour.py --json + policy/use_of_colour.rego). nemik does not ask it moved up: W339 gates nemik's own palette and is on no one's critical path.",
       "issued_at": "2026-10-11T21:16:31Z",
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
-      "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 51,
+      "last_worked": "2026-10-12T23:18:33Z",
+      "ticks_blocked": 53,
       "weight": 1,
       "completed": null
     },
@@ -6556,7 +6556,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 2
     },
     {
       "symbol": "W344",
@@ -6620,7 +6620,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 38,
+      "ticks_blocked": 40,
       "completed": null
     },
     {
@@ -6758,7 +6758,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 3
     },
     {
       "symbol": "W353",
@@ -6780,7 +6780,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 3
     },
     {
       "symbol": "W354",
@@ -6802,7 +6802,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 3
     },
     {
       "symbol": "W355",
@@ -6824,7 +6824,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 3
     },
     {
       "symbol": "W356",
@@ -7031,7 +7031,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 44,
+      "ticks_blocked": 46,
       "completed": null
     },
     {
@@ -7095,7 +7095,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 4
     },
     {
       "symbol": "W368",
@@ -7117,7 +7117,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 4
     },
     {
       "symbol": "W369",
@@ -7518,7 +7518,7 @@
       "caused_by": "W380",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 7
+      "weight": 5
     },
     {
       "symbol": "W387",
@@ -7603,7 +7603,7 @@
       "caused_by": "W383",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 7
+      "weight": 5
     },
     {
       "symbol": "W391",
@@ -7617,7 +7617,6 @@
       ],
       "blocked_on": [
         "W392",
-        "W393",
         "W394",
         "W395"
       ],
@@ -7628,7 +7627,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -7652,13 +7651,13 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 14,
+      "ticks_blocked": 16,
       "completed": null
     },
     {
       "symbol": "W393",
       "title": "Incremental snapshots: a change rebuilds only the subgraphs and derived numbers it touches",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W391"
       ],
@@ -7666,19 +7665,17 @@
         "web",
         "performance"
       ],
-      "blocked_on": [
-        "W400"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "umbrella: W399 measures the rebuild's phases (decides the order), W402 per-repo parse cache, W400 incremental validation, W401 incremental derived numbers and per-piece snapshots. Done when a single-repo change rebuilds only its dependents and the result equals a full rebuild.",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: All children landed: W399 phase measurement, W402 parse cache, W400 incremental SHACL (10.5 -> <1 s per edit, equal), W401 solve cache + index + per-piece snapshots refetched by hash.",
       "issued_at": "2026-10-12T14:27:39Z",
       "minted_during": "interrupt",
       "caused_by": "W391",
-      "last_worked": "2026-10-12T17:01:54Z",
-      "ticks_blocked": 5,
+      "last_worked": "2026-10-12T23:30:34Z",
+      "ticks_blocked": 0,
       "weight": 3,
-      "completed": null
+      "completed": "20261012T233034Z"
     },
     {
       "symbol": "W394",
@@ -7702,7 +7699,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T18:43:02Z",
-      "ticks_blocked": 14,
+      "ticks_blocked": 16,
       "completed": null
     },
     {
@@ -7726,7 +7723,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 14,
+      "ticks_blocked": 16,
       "completed": null
     },
     {
@@ -7822,7 +7819,7 @@
     {
       "symbol": "W400",
       "title": "Validate only what a change touches: SHACL over the changed repos' nodes and the cross-repo edges into them",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W393"
       ],
@@ -7831,15 +7828,15 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "validation runs once over the merged graph so cross-repo citations resolve; restrict it to the focus nodes of changed repos plus nodes whose cross-repo edges point into them, keeping cached findings for the rest; test: findings equal a full validation after any single-repo change",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: src/nemik/shaclinc.py: last run's triples and findings per focus kept per survey root; a rebuild diffs triples, re-validates touched cards plus cards pointing at them, as a subgraph of those and their neighbours validated whole (pyshacl focus_nodes was tried and rejected: it applies every shape to a named node regardless of targets, giving findings the full run does not). Live fleet: 5 edit kinds incremental 0.6-0.9 s vs full 10.5 s, all EQUAL. tests/test_shaclinc.py pins incremental == full per edit and in sequence.",
       "issued_at": "2026-10-12T16:42:25Z",
       "minted_during": "tick",
       "caused_by": "W393",
-      "last_worked": "2026-10-12T23:00:09Z",
+      "last_worked": "2026-10-12T23:30:32Z",
       "ticks_blocked": 0,
       "weight": 4,
-      "completed": null
+      "completed": "20261012T233032Z"
     },
     {
       "symbol": "W401",
@@ -7969,7 +7966,7 @@
       "caused_by": "W373",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 6
     },
     {
       "symbol": "W407",
@@ -8010,7 +8007,7 @@
       "caused_by": "W373",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 8
+      "weight": 7
     },
     {
       "symbol": "W409",
@@ -8093,7 +8090,7 @@
     {
       "symbol": "W413",
       "title": "Shared projection: cards to tasks with predecessor links, one mapping every export and connector reuses, with a decode-back test",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W365",
         "W366",
@@ -8102,14 +8099,15 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Confirm MSPDI PredecessorLink in the schema reference first (survey left it open)",
-      "evidence": "",
+      "next_bounded_step": "src/nemik/projection.py: project(g, repos) -> [Task(uid, cite, name, done, preds=[Link(uid|cite, cross_repo)])] with stable UIDs from cites; decode(tasks) -> the (card, blocker) pairs; test that decode(project(g)) equals g's blocking edges on the fixture fleet. W365 (MSPDI) and W366 (issue JSON) then only serialize Task.",
+      "evidence": "2026-10-12: MSPDI confirmed on Microsoft Learn (fetched 2026-10-12): PredecessorLink is a Task child, 0..unbounded, children PredecessorUID, Type, CrossProject, CrossProjectName, LinkLag (tenths of a minute), LagFormat, all optional (learn.microsoft.com/en-us/office-project/xml-data-interchange/predecessorlink-element). Type under PredecessorLink: 0 FF, 1 FS, 2 SF, 3 SS (type-element-multiple-parents). nemik's blocking is FS (1); a cross-repo blocker maps to CrossProject=1 with CrossProjectName=<repo>, the survey's open question answered.",
       "issued_at": "2026-10-12T19:48:19Z",
       "minted_during": "tick",
       "caused_by": "W372",
-      "last_worked": null,
+      "last_worked": "2026-10-12T23:31:15Z",
       "ticks_blocked": 0,
-      "weight": 9
+      "weight": 8,
+      "completed": null
     },
     {
       "symbol": "W414",
@@ -8290,7 +8288,7 @@
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-12T22:43:05Z"
+    "taken_at": "2026-10-12T23:17:16Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []
