@@ -62,6 +62,49 @@ What nemik does differently on purpose:
 | write the weekly status report | `nemik-metrics` (health per repo) and `nemik-history REPO --weekly` |
 | link a task to another project's task | cite it as `repo:W<n>` in `blocked_on`; `nemik-inbound` shows the other repo who waits on it |
 
+## From Jira, Bugzilla and issue trackers
+
+### Concepts
+
+| you know | in nemik |
+|---|---|
+| issue, ticket, bug | a card |
+| project | a workstream: one repo and its queue |
+| issue key (`PROJ-123`) | the cite `repo:W<n>`; a symbol is never reused, and a dropped card keeps its number in the residue |
+| blocks / is blocked by | `enables` / `blocked_on`; a block on another repo names that repo's card |
+| depends on an external team | `blocked_kind` agent (another repo's session) or human (the operator) |
+| priority field | the band of the card's WV:1 vector, then the flow salience the ranking computes |
+| triage queue | `nemik-operator`: every ask on the human, sorted needs-you, answered, condition, unstated, heaviest first |
+| comment thread | the card's evidence, and letters in the repo's `inbox/` that a card cites |
+| status workflow | ready, working, blocked, done, dropped; the transitions and who may make them are modelled in `src/nemik/data/workflows.toml` |
+| JQL, saved filters | the RDF graph: `nemik-check`, `nemik-rank`, `nemik-critical` and the rest are queries over it |
+| SLA | `nemik-check` warns on a blocking card when another repo has waited on it past the declared number of loop ticks |
+
+What nemik does differently on purpose:
+
+- **No central server, no write path.** Each repo's queue lives in that repo, written only by its own
+  agent through `mikemol-paths-forward`. nemik reads all of them and writes none, so there is no shared
+  database to lock, migrate or lose, and no second source of truth to drift.
+- **Unanswered is a state the system sees.** An ask on another repo shows up in that repo's
+  `nemik-inbound` as UNCLAIMED until a card there claims it, and a letter no card cites shows up the same
+  way. Nothing waits silently in a queue nobody reads.
+- **Priority answers to the graph.** A ticket's priority is not a field someone sets and forgets; the ranking
+  re-derives it each tick from what is waiting on what.
+
+### Workflow translation
+
+| you used to | in nemik |
+|---|---|
+| file a ticket against another team | add a card that is `blocked_on` their `repo:W<n>`, or write a letter to their `inbox/` |
+| see the tickets assigned to you | `nemik-inbound REPO`: what waits on this repo, claimed or UNCLAIMED, and uncited letters |
+| accept a ticket from another team | run the `--add` line `nemik-inbound` prints: it mints a card that claims theirs |
+| triage the incoming queue | `nemik-operator` for the human; `nemik-rank REPO` for an agent |
+| run a saved filter for "stale and blocked" | `nemik-check` (stale blocks, SLA, saturation) and `nemik-starved` |
+| close a ticket with a resolution | mark the card done with evidence; `nemik-witnesses --apply` closes cards whose declared witness holds |
+| export to a spreadsheet | `nemik-serve`'s `graph.json`, or `nemik-metrics` for numbers |
+
+The interplay of these moves is modelled as `workflow:peer-block` and `workflow:inbox-fold`.
+
 ## From kanban, flow metrics and queueing theory
 
 ### Concepts

@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 193
+      "ticks_blocked": 194
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 13,
+      "ticks_blocked": 14,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 15,
+      "ticks_blocked": 16,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 46,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 42,
+      "ticks_blocked": 43,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 42,
+      "ticks_blocked": 43,
       "completed": null,
       "weight": 1
     },
@@ -5382,7 +5382,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "completed": null
     },
     {
@@ -5403,7 +5403,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 34,
+      "ticks_blocked": 35,
       "completed": null
     },
     {
@@ -5462,7 +5462,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 34,
+      "ticks_blocked": 35,
       "completed": null
     },
     {
@@ -5483,7 +5483,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 34,
+      "ticks_blocked": 35,
       "completed": null
     },
     {
@@ -5523,7 +5523,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 34,
+      "ticks_blocked": 35,
       "completed": null
     },
     {
@@ -5582,7 +5582,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 34,
+      "ticks_blocked": 35,
       "completed": null
     },
     {
@@ -5622,7 +5622,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 34,
+      "ticks_blocked": 35,
       "completed": null
     },
     {
@@ -5643,7 +5643,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 34,
+      "ticks_blocked": 35,
       "completed": null
     },
     {
@@ -5683,7 +5683,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 34,
+      "ticks_blocked": 35,
       "completed": null
     },
     {
@@ -6152,7 +6152,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T20:11:31Z",
-      "ticks_blocked": 24,
+      "ticks_blocked": 25,
       "completed": null
     },
     {
@@ -6229,7 +6229,7 @@
       "caused_by": "W323",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 5
     },
     {
       "symbol": "W328",
@@ -6449,7 +6449,7 @@
       "caused_by": "W337",
       "last_worked": "2026-10-11T21:18:11Z",
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 3
     },
     {
       "symbol": "W339",
@@ -6472,7 +6472,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 22,
+      "ticks_blocked": 23,
       "weight": 1,
       "completed": null
     },
@@ -6519,7 +6519,7 @@
       "caused_by": "paperkit:W320",
       "last_worked": "2026-10-11T21:18:33Z",
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 3
     },
     {
       "symbol": "W342",
@@ -6558,7 +6558,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 4
     },
     {
       "symbol": "W344",
@@ -6622,7 +6622,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 10,
       "completed": null
     },
     {
@@ -6760,7 +6760,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 2
     },
     {
       "symbol": "W353",
@@ -6782,7 +6782,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 2
     },
     {
       "symbol": "W354",
@@ -6804,7 +6804,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 2
     },
     {
       "symbol": "W355",
@@ -6826,7 +6826,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 2
     },
     {
       "symbol": "W356",
@@ -6884,7 +6884,6 @@
         "positioning"
       ],
       "blocked_on": [
-        "W360",
         "W362",
         "W363"
       ],
@@ -6894,7 +6893,7 @@
       "issued_at": "2026-10-12T01:29:24Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-12T09:46:02Z",
+      "last_worked": "2026-10-12T10:12:41Z",
       "ticks_blocked": 0,
       "completed": null
     },
@@ -6924,7 +6923,7 @@
     {
       "symbol": "W360",
       "title": "Positioning: from Jira, Bugzilla and issue trackers",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W358"
       ],
@@ -6934,15 +6933,15 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "map issue to card, depends-on/blocks to blocked_on/enables, priority to rank band plus flow salience, triage to nemik-operator; the difference: queues live in each repo and are read, never written, by nemik; no central server",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: docs/positioning.md issue-tracker section: concepts (issue, project, key, blocks, priority, triage, comments, status workflow, JQL, SLA), differences (no central server or write path, unanswered is visible, priority answers to the graph), workflow translation; test_positioning executed and green.",
       "issued_at": "2026-10-12T01:29:39Z",
       "minted_during": "interrupt",
       "caused_by": "W358",
-      "last_worked": "2026-10-12T09:46:05Z",
+      "last_worked": "2026-10-12T10:12:40Z",
       "ticks_blocked": 0,
       "weight": 1,
-      "completed": null
+      "completed": "20261012T101240Z"
     },
     {
       "symbol": "W361",
@@ -6970,7 +6969,7 @@
     {
       "symbol": "W362",
       "title": "Positioning: from multi-agent and swarm frameworks",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W358"
       ],
@@ -6985,9 +6984,10 @@
       "issued_at": "2026-10-12T01:29:43Z",
       "minted_during": "interrupt",
       "caused_by": "W358",
-      "last_worked": null,
+      "last_worked": "2026-10-12T10:12:43Z",
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 2,
+      "completed": null
     },
     {
       "symbol": "W363",
@@ -7009,7 +7009,7 @@
       "caused_by": "W358",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 2
     },
     {
       "symbol": "W364",
@@ -7035,7 +7035,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 15,
+      "ticks_blocked": 16,
       "completed": null
     },
     {
@@ -7057,7 +7057,7 @@
       "caused_by": "W364",
       "last_worked": "2026-10-12T01:34:53Z",
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 1
     },
     {
       "symbol": "W366",
@@ -7078,7 +7078,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 1
     },
     {
       "symbol": "W367",
@@ -7099,7 +7099,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 1
     },
     {
       "symbol": "W368",
@@ -7121,7 +7121,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 1
     },
     {
       "symbol": "W369",
@@ -7232,7 +7232,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 7
+      "weight": 6
     },
     {
       "symbol": "W374",

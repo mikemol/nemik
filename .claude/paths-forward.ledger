@@ -600,3 +600,5 @@
 2026-10-12T08:42:21Z  tick  W379 advanced  unblock   "nemik-pins reports the host install's drift with the levelling command"
 2026-10-12T09:12:48Z  tick  W361 advanced  unblock   "positioning doc begun: vocabulary and the flow section, with a drift test"
 2026-10-12T09:46:06Z  tick  W359 advanced  unblock   "positioning: MS Project section; the drift test's inputs declared so a doc edit re-runs it"
+2026-10-12T10:11:54Z  tick  W188 escalated escalate  "16 ticks on the operator's read-only Google Tasks token (W188, also behind W371's connector contract); reported once, nudging stops"
+2026-10-12T10:12:45Z  tick  W360 advanced  unblock   "positioning: the issue-tracker section"
