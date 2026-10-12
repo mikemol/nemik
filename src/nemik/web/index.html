@@ -373,6 +373,11 @@ function draw() {
   const repos =treemapOn ? [] : [...new Set(data.nodes.filter(n => keep.has(n.id)).map(n => n.repo))];
   keepOpen = new Set(data.nodes.filter(n => keep.has(n.id) && isOpen(n)).map(n => n.id));
   const ringsOf = ringMap();
+  // nemik:W388: each wait line's natural is its source's place (1..m, by id) among the lines into the same
+  // drawn blocker, so the pattern is generated from the (source, target) pair and stays short.
+  const fanOf = new Map(), fans = new Map();
+  waits.forEach(e => { const t = e.chip || e.target; if (!fans.has(t)) fans.set(t, []); fans.get(t).push(e); });
+  fans.forEach(list => list.sort((a, b) => (a.source < b.source ? -1 : 1)).forEach((e, i) => fanOf.set(e, i + 1)));
   const els = [
     // A repo box counts the unclaimed blocks inside it: each one is that repo's move.
     // Its border reads liveness (asleep/idle/awake), from the same roster the Wake panel
@@ -398,7 +403,8 @@ function draw() {
     }),
     ...data.edges.filter(e => e.kind === "enables" && keep.has(e.source) && keep.has(e.target))
       .map((e, i) => ({ data: { id: "e" + i, source: e.source, target: e.target, current: bySal ? e.current : undefined }, classes: e.satisfied ? "satisfied" : "" })),
-    ...waits.map((e, i) => ({ data: { id: "w" + i, source: e.source, target: e.chip || e.target, current: bySal ? e.current : undefined },
+    ...waits.map((e, i) => ({ data: { id: "w" + i, source: e.source, target: e.chip || e.target, current: bySal ? e.current : undefined,
+      fan: fanOf.get(e), dash: rulerDash(emitF(fanOf.get(e))).split(" ").map(Number) },
       classes: "waits" + (e.satisfied ? " satisfied" : "") })),
   ];
   // Keep the reader's viewport across a redraw; only the first draw fits the graph (nemik:W119).
@@ -433,8 +439,12 @@ function draw() {
       { selector: '.repo[live = "awake"]', style: { "border-width": 2, "border-color": css("--ready") } },
       { selector: "edge", style: { width: 1, "line-color": css("--line"), "target-arrow-color": css("--line"),
         "target-arrow-shape": "triangle", "curve-style": "bezier", "arrow-scale": 0.7 } },
-      { selector: "edge.waits", style: { "line-style": "dashed", "line-color": css("--blocked"),
-        "target-arrow-color": css("--blocked"), width: 1.5 } },
+      // nemik:W388: a wait line's dash is its identity, the ruler-sequence encoding (emitF) of its source's
+      // place among the lines into the same blocker, so lines crowding one card never share a pattern and
+      // each decodes back to its source. "This is a wait" is carried by colour AND the blocking-bar (tee)
+      // arrowhead, not the dash.
+      { selector: "edge.waits", style: { "line-style": "dashed", "line-dash-pattern": "data(dash)",
+        "line-color": css("--blocked"), "target-arrow-color": css("--blocked"), "target-arrow-shape": "tee", width: 1.5 } },
       // nemik:W56/W57: the upstream end is done, so this edge no longer holds anything back.
       { selector: "edge.satisfied", style: { opacity: 0.25, "line-style": "solid" } },
       // nemik:W264: with "salience order" on, an edge is as wide as the flow that crossed it.

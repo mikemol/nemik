@@ -322,6 +322,48 @@ def test_scope_rings_carry_distinct_ruler_motifs_pinned_to_paperkits(server) -> 
     assert legend == dashes
 
 
+FANS = """() => {
+  const fans = {};
+  cy.edges(".waits").forEach(e => {
+    const t = e.target().id();
+    (fans[t] = fans[t] || []).push([e.source().id(), e.data("fan"), e.style("line-dash-pattern")]);
+  });
+  return Object.values(fans).filter(f => f.length > 1);
+}"""
+
+
+def test_blocker_lines_into_one_card_carry_distinct_decodable_ruler_patterns(
+    server,
+) -> None:
+    # nemik:W388: lines crowding one blocker never share a dash pattern; each pattern decodes (one dot or
+    # dash per unit of the natural it encodes, len(F(n)) == n) back to its source's place in the fan.
+    with sync_api.sync_playwright() as p:
+        exe = os.environ.get("NEMIK_CHROMIUM")
+        try:
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        page.goto(server)
+        page.wait_for_function(
+            "() => typeof cy !== 'undefined' && cy && cy.edges('.waits').length > 0",
+            timeout=60000,
+        )
+        fans = page.evaluate(FANS)
+        browser.close()
+    assert fans, "the fixture fleet has no card with two or more wait lines"
+    for fan in fans:
+        patterns = [str(pat) for _, _, pat in fan]
+        assert len(set(patterns)) == len(patterns), fan
+        sources = sorted(src for src, _, _ in fan)
+        for src, n, pat in fan:
+            # decode: one on/off pair per symbol, and n is the source's place in the fan
+            assert len(str(pat).split()) // 2 == n, (src, n, pat)
+            assert sources.index(src) + 1 == n
+
+
 CONTRAST = """() => {
   const lum = css => { const [r, g, b] = css.match(/\\d+(\\.\\d+)?/g).slice(0, 3).map(v => {
     const c = +v / 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; });

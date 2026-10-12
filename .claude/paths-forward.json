@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 388,
+  "counter": 389,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 200
+      "ticks_blocked": 201
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 20,
+      "ticks_blocked": 21,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 22,
+      "ticks_blocked": 23,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 52,
+      "ticks_blocked": 53,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 49,
+      "ticks_blocked": 50,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 49,
+      "ticks_blocked": 50,
       "completed": null,
       "weight": 1
     },
@@ -5382,7 +5382,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 26,
+      "ticks_blocked": 27,
       "completed": null
     },
     {
@@ -5403,7 +5403,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 41,
+      "ticks_blocked": 42,
       "completed": null
     },
     {
@@ -5462,7 +5462,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 41,
+      "ticks_blocked": 42,
       "completed": null
     },
     {
@@ -5483,7 +5483,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 41,
+      "ticks_blocked": 42,
       "completed": null
     },
     {
@@ -5523,7 +5523,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 41,
+      "ticks_blocked": 42,
       "completed": null
     },
     {
@@ -5582,7 +5582,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 41,
+      "ticks_blocked": 42,
       "completed": null
     },
     {
@@ -5622,7 +5622,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 41,
+      "ticks_blocked": 42,
       "completed": null
     },
     {
@@ -5643,7 +5643,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 41,
+      "ticks_blocked": 42,
       "completed": null
     },
     {
@@ -5683,7 +5683,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 41,
+      "ticks_blocked": 42,
       "completed": null
     },
     {
@@ -6471,7 +6471,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 29,
+      "ticks_blocked": 30,
       "weight": 1,
       "completed": null
     },
@@ -6622,7 +6622,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "completed": null
     },
     {
@@ -7033,7 +7033,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 22,
+      "ticks_blocked": 23,
       "completed": null
     },
     {
@@ -7230,7 +7230,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 5
     },
     {
       "symbol": "W374",
@@ -7431,7 +7431,7 @@
     {
       "symbol": "W383",
       "title": "a11y C4: the legibility floor holds for one picked repo and the treemap too",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W337"
       ],
@@ -7446,9 +7446,10 @@
       "issued_at": "2026-10-12T12:14:18Z",
       "minted_during": "interrupt",
       "caused_by": "W380",
-      "last_worked": null,
+      "last_worked": "2026-10-12T13:52:19Z",
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 1,
+      "completed": null
     },
     {
       "symbol": "W384",
@@ -7539,7 +7540,7 @@
     {
       "symbol": "W388",
       "title": "Blocker lines carry a ruler-sequence pattern generated from their src and dst, losslessly",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W386"
       ],
@@ -7549,14 +7550,36 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "operator 2026-10-12: the ruler pattern losslessly encodes arbitrary NATURAL numbers (emit_f: injective, len(F(B)) == value(B)), so a line's pattern is generated procedurally from the line's own attributes, not assigned by its index in a fan. Map (src, dst) to a natural (e.g. interleave the bits of the two cards' numbers, or a pairing function) and encode it through paperkit's emit_f; two different lines then never share a pattern anywhere on the page, and the pattern decodes back to the pair. Decide: which attributes, how to keep the pattern short enough to read at fit zoom (its length grows with the value), and what now says 'waits' since the dash carries identity. Test: decode each rendered pattern back to its edge's src and dst.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: index.html: each wait line's natural is its source's place (1..m, by id) among the lines into the same drawn blocker, a value of the (source, target) pair kept small so the pattern stays readable (emitF's length is the value); line-dash-pattern = rulerDash(emitF(n)); 'waits' now carried by colour and a tee (blocking-bar) arrowhead. test_blocker_lines_into_one_card_carry_distinct_decodable_ruler_patterns: within every fan of two or more, patterns pairwise distinct and each decodes to its source's place; render-check 17 passed.",
       "issued_at": "2026-10-12T13:01:42Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-12T13:16:24Z",
+      "last_worked": "2026-10-12T13:52:17Z",
       "ticks_blocked": 0,
       "weight": 5,
+      "completed": "20261012T135217Z"
+    },
+    {
+      "symbol": "W389",
+      "title": "Switch the ruler-sequence port to mtools' packaged generator (mikemol-rulerseq) when it lands",
+      "status": "blocked",
+      "enables": [],
+      "touches": [
+        "web",
+        "vendor"
+      ],
+      "blocked_on": [
+        "mtools:W1048"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "operator ruling via paperkit 2026-10-12: rulerseq moves to mtools as its own dist (suggested mikemol-rulerseq, module mikemol.rulerseq; name and sha not yet confirmed by mtools), consumed by both paperkit's render checks and nemik; public names cycle_order, emit_f, morse_motif unchanged. When mtools confirms the dist and sha: vendor it beside the other mtools wheels (tools/revendor-mtools.sh dist list), have nemik-serve compute ring and line patterns with mikemol.rulerseq and ship them in graph.json (field-manifest), shrink the page's emitF/rulerMotif to a renderer, keep the motif-family test as the contract. Cite mtools' card here once it exists.",
+      "evidence": "2026-10-12: 2026-10-12 paperkit: superseded paperkit:W338's packaging plan; the operator directed the move to mtools instead. | 2026-10-12: 2026-10-12 mtools claimed it as mtools:W1048: host paperkit's rulerseq.py (source paperkit d6096c9) as dist mikemol-rulerseq, module mikemol.rulerseq; mtools will send the dist name and sha when it lands.",
+      "issued_at": "2026-10-12T13:17:53Z",
+      "minted_during": "interrupt",
+      "caused_by": "paperkit:W338",
+      "last_worked": "2026-10-12T13:24:19Z",
+      "ticks_blocked": 1,
       "completed": null
     }
   ],
