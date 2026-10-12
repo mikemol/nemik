@@ -29,9 +29,9 @@ def test_concurrent_refresh_rebuilds_once(tmp_path: Path) -> None:
     model = Model(tmp_path)
     real_survey = __import__("nemik.serve", fromlist=["survey"]).survey
 
-    def slow_survey(root):
+    def slow_survey(root, phases=None):
         time.sleep(0.05)  # widen the race window so concurrent callers actually overlap
-        yield from real_survey(root)
+        yield from real_survey(root, phases)
 
     barrier = threading.Barrier(5)
 
@@ -70,9 +70,9 @@ def test_poke_serves_stale_while_rebuilding(tmp_path: Path) -> None:
     real_survey = __import__("nemik.serve", fromlist=["survey"]).survey
     gate = threading.Event()
 
-    def gated_survey(root):
+    def gated_survey(root, phases=None):
         gate.wait(timeout=2)
-        yield from real_survey(root)
+        yield from real_survey(root, phases)
 
     q = tmp_path / "alpha" / ".claude" / "paths-forward.json"
     os.utime(q, ns=(q.stat().st_atime_ns, q.stat().st_mtime_ns + 10**9))

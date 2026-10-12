@@ -54,6 +54,9 @@ class Model:
         }  # parsed once per rebuild, shared by requests
         self.rebuilds = 0
         self.rebuild_cpu = 0.0
+        # nemik:W399: the last rebuild's CPU seconds per phase (parse, annotate, shacl, fleet_checks,
+        # ledger, document), so the phase that dominates is measured, not guessed.
+        self.phases: dict[str, float] = {}
         self.nodes = self.edges = self.workstreams = 0
         # ThreadingHTTPServer: refresh() runs on every request (nemik:W19). Without this lock,
         # several requests arriving as a queue file changes (e.g. luthen's once-a-minute export)
@@ -74,19 +77,25 @@ class Model:
             if key == self.key:  # someone else rebuilt while we waited for the lock
                 return
             cpu0 = time.process_time()
+            phases: dict[str, float] = {}
             g, findings = bind(Graph()), {}
-            for repo, qg, fs in survey(self.root):
+            for repo, qg, fs in survey(self.root, phases):
                 findings[repo] = fs
                 if qg is not None:
                     g += qg
+            t = time.process_time()
             for repo, path in workstream_files(self.root, LEDGER):
                 lg, _ = ledger_graph(repo, path)
                 g += lg
+            phases["ledger"] = time.process_time() - t
             self.graph, self.key = g, key
             self.rebuilds += 1
-            self.rebuild_cpu = time.process_time() - cpu0
+            t = time.process_time()
             numbers = without(g, self.withheld) if self.withheld else None
             doc = to_json(g, findings, numbers)
+            phases["document"] = time.process_time() - t
+            self.rebuild_cpu = time.process_time() - cpu0
+            self.phases = phases
             self.nodes, self.edges, self.workstreams = (
                 len(doc["nodes"]),
                 len(doc["edges"]),
@@ -127,6 +136,11 @@ class Model:
                 f"nemik_graph_rebuilds_total {self.rebuilds}",
                 "# TYPE nemik_graph_rebuild_cpu_seconds gauge",
                 f"nemik_graph_rebuild_cpu_seconds {self.rebuild_cpu:.3f}",
+                "# TYPE nemik_graph_rebuild_phase_cpu_seconds gauge",
+                *(
+                    f'nemik_graph_rebuild_phase_cpu_seconds{{phase="{p}"}} {s:.3f}'
+                    for p, s in sorted(self.phases.items())
+                ),
                 "",
             ]
         ).encode()
@@ -151,6 +165,15 @@ def without(g: Graph, refs: frozenset[str]) -> Graph:
 
 
 def to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
+    """The view's document. nemik:W403: built with identical flow solves answered once (the ranking,
+    edge widths and operator-ask weights each asked for the same repo's solve)."""
+    from nemik.salience import memo_audits
+
+    with memo_audits():
+        return _to_json(g, findings, numbers)
+
+
+def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
     # nemik:W309: every published number (salience, edge current, ask weight) comes from `gn`, the
     # graph without the withheld waypoints, when there are any; structure still comes from `g`.
     gn = numbers if numbers is not None else g

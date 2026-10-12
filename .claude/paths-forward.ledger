@@ -641,3 +641,10 @@
 2026-10-12T15:46:14Z  tick  W385 advanced  unblock   "context cards cued by a double border at full opacity, tested on the rendered style"
 2026-10-12T16:12:07Z  tick  W392 nudged    nudge     "NUDGE luthen-observability:W872: in progress there; no message"
 2026-10-12T16:19:43Z  tick  W398 advanced  unblock   "render-check runs the gate's own target and browser; label glyphs probed against the browser's fonts"
+2026-10-12T16:42:23Z  tick  W399 minted    -         "Measure a rebuild's phases: parse, annotate, SHACL, ledger, to_json (CPU and memory each)"  evidence=W393
+2026-10-12T16:42:25Z  tick  W400 minted    -         "Validate only what a change touches: SHACL over the changed repos' nodes and the cross-repo edges into them"  evidence=W393
+2026-10-12T16:42:26Z  tick  W401 minted    -         "Recompute derived numbers only where a change reaches, and write snapshots per piece"  evidence=W393
+2026-10-12T16:42:37Z  tick  W402 minted    -         "Cache each repo's parsed queue and ledger graphs by that repo's file stamps"  evidence=W393
+2026-10-12T16:51:51Z  tick  W403 minted    -         "One flow solve per repo and option per document build, not one per caller"  evidence=W399
+2026-10-12T16:55:43Z  tick  W404 minted    -         "Speed the flow solver's inner loop (flow._grounded), now the rebuild's hotspot"  evidence=W403
+2026-10-12T16:55:49Z  tick  W403 advanced  collapse  "rebuild measured by phase (W399): the document is 87%, from duplicate flow solves; deduped (W403), rebuild 141 -> 86 s"

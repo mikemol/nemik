@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 398,
+  "counter": 404,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 206
+      "ticks_blocked": 207
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 26,
+      "ticks_blocked": 27,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 28,
+      "ticks_blocked": 29,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T13:54:28Z",
-      "ticks_blocked": 58,
+      "ticks_blocked": 59,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 55,
+      "ticks_blocked": 56,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 32,
+      "ticks_blocked": 33,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 47,
+      "ticks_blocked": 48,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 47,
+      "ticks_blocked": 48,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 47,
+      "ticks_blocked": 48,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 47,
+      "ticks_blocked": 48,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 47,
+      "ticks_blocked": 48,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 47,
+      "ticks_blocked": 48,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 47,
+      "ticks_blocked": 48,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 47,
+      "ticks_blocked": 48,
       "completed": null
     },
     {
@@ -6469,7 +6469,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 35,
+      "ticks_blocked": 36,
       "weight": 1,
       "completed": null
     },
@@ -6620,7 +6620,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 22,
+      "ticks_blocked": 23,
       "completed": null
     },
     {
@@ -7031,7 +7031,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 28,
+      "ticks_blocked": 29,
       "completed": null
     },
     {
@@ -7579,7 +7579,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W338",
       "last_worked": "2026-10-12T13:24:19Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "completed": null
     },
     {
@@ -7628,7 +7628,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T14:59:29Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -7652,13 +7652,13 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T15:25:01Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null
     },
     {
       "symbol": "W393",
       "title": "Incremental snapshots: a change rebuilds only the subgraphs and derived numbers it touches",
-      "status": "working",
+      "status": "blocked",
       "enables": [
         "W391"
       ],
@@ -7666,14 +7666,18 @@
         "web",
         "performance"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "operator 2026-10-12: a change need not force a global rebuild, only the pieces that touch it. Key each repo's queue graph by a hash of its own inputs (queue, ledger, letters cited) and rebuild only the repos whose hash moved; then recompute the derived numbers (flow salience, critical path and slack, health, wake roster) only where their inputs reach the change: a repo's solve covers its cone, so a change dirties every repo whose cone crosses into the changed repo (cross-repo edges), and the fleet-wide numbers recompute from cached per-repo parts. Snapshot files are written per piece (per repo, plus the fleet-level ones) so the page can refetch only what changed. Test: change one repo's queue and assert only the dependent pieces were rebuilt and the result equals a full rebuild.",
+      "blocked_on": [
+        "W400",
+        "W401",
+        "W402"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "umbrella: W399 measures the rebuild's phases (decides the order), W402 per-repo parse cache, W400 incremental validation, W401 incremental derived numbers and per-piece snapshots. Done when a single-repo change rebuilds only its dependents and the result equals a full rebuild.",
       "evidence": "",
       "issued_at": "2026-10-12T14:27:39Z",
       "minted_during": "interrupt",
       "caused_by": "W391",
-      "last_worked": "2026-10-12T16:19:41Z",
+      "last_worked": "2026-10-12T17:01:54Z",
       "ticks_blocked": 0,
       "weight": 3,
       "completed": null
@@ -7700,7 +7704,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T15:25:03Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null
     },
     {
@@ -7724,7 +7728,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T15:25:04Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null
     },
     {
@@ -7793,6 +7797,131 @@
       "ticks_blocked": 0,
       "weight": 1,
       "completed": "20261012T161939Z"
+    },
+    {
+      "symbol": "W399",
+      "title": "Measure a rebuild's phases: parse, annotate, SHACL, ledger, to_json (CPU and memory each)",
+      "status": "done",
+      "enables": [
+        "W393"
+      ],
+      "touches": [
+        "performance",
+        "web"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: survey(root, phases) and Model.refresh time each phase; /metrics exports nemik_graph_rebuild_phase_cpu_seconds{phase}. Measured on the real fleet (5931 nodes, 16 workstreams): document 121.9 s (87%), shacl 10.4, ledger 4.1, parse 3.3, annotate 0.3, fleet_checks 0.15; total 141.4 s CPU, peak RSS 281 MB. Profile: salience.audit ran 58 times, 245 of 268 profiled seconds. So W403 (dedupe the solves) and W404 (the solver) come before W402 (parse cache) and W400 (validation).",
+      "issued_at": "2026-10-12T16:42:23Z",
+      "minted_during": "tick",
+      "caused_by": "W393",
+      "last_worked": "2026-10-12T16:55:44Z",
+      "ticks_blocked": 0,
+      "completed": "20261012T165544Z"
+    },
+    {
+      "symbol": "W400",
+      "title": "Validate only what a change touches: SHACL over the changed repos' nodes and the cross-repo edges into them",
+      "status": "ready",
+      "enables": [
+        "W393"
+      ],
+      "touches": [
+        "performance"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "validation runs once over the merged graph so cross-repo citations resolve; restrict it to the focus nodes of changed repos plus nodes whose cross-repo edges point into them, keeping cached findings for the rest; test: findings equal a full validation after any single-repo change",
+      "evidence": "",
+      "issued_at": "2026-10-12T16:42:25Z",
+      "minted_during": "tick",
+      "caused_by": "W393",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W401",
+      "title": "Recompute derived numbers only where a change reaches, and write snapshots per piece",
+      "status": "ready",
+      "enables": [
+        "W393"
+      ],
+      "touches": [
+        "performance",
+        "web"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "flow salience, critical path and slack, health and the wake roster recompute only for repos whose cones cross into a changed repo, the fleet numbers reassembled from cached per-repo parts; snapshot files per repo plus the fleet-level ones, so the page refetches only what changed; test: after any single-repo change the snapshot equals a full rebuild",
+      "evidence": "",
+      "issued_at": "2026-10-12T16:42:26Z",
+      "minted_during": "tick",
+      "caused_by": "W393",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W402",
+      "title": "Cache each repo's parsed queue and ledger graphs by that repo's file stamps",
+      "status": "ready",
+      "enables": [
+        "W393"
+      ],
+      "touches": [
+        "performance"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "survey() re-parses every queue on any change; keep (path, mtime, known repos) -> queue graph and (path, mtime) -> ledger graph, re-parsing only repos whose files moved (a new or vanished repo changes the known set and so invalidates every queue's cross-repo resolution); test: touch one queue, assert one parse",
+      "evidence": "",
+      "issued_at": "2026-10-12T16:42:37Z",
+      "minted_during": "tick",
+      "caused_by": "W393",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W403",
+      "title": "One flow solve per repo and option per document build, not one per caller",
+      "status": "done",
+      "enables": [
+        "W401"
+      ],
+      "touches": [
+        "performance"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: salience.memo_audits(): identical audits answered once per build (keyed by graph, repo, weights, without, gate_weight, workable, toward; residue and gate_weights bypass); to_json wraps _to_json in it, covering every caller. test_memo_audits: the document is identical with and without the memo, with fewer solves. Real fleet: document 121.9 -> 66.6 s, rebuild 141.4 -> 86.5 s CPU; peak RSS unchanged (282 MB).",
+      "issued_at": "2026-10-12T16:51:51Z",
+      "minted_during": "tick",
+      "caused_by": "W399",
+      "last_worked": "2026-10-12T16:55:47Z",
+      "ticks_blocked": 0,
+      "completed": "20261012T165547Z"
+    },
+    {
+      "symbol": "W404",
+      "title": "Speed the flow solver's inner loop (flow._grounded), now the rebuild's hotspot",
+      "status": "working",
+      "enables": [
+        "W401"
+      ],
+      "touches": [
+        "performance"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "after W403 the document phase is 67 s of an 86 s rebuild, and the profile's remaining weight is flow.solve's _grounded (5808 calls, ~190 s cumulative before dedup, a per-call lambda run 20M times): profile it again under the memo, then cut the per-call work (precompute the adjacency once per solve, avoid re-sorting, exact Fractions only where the answer needs them) while keeping every salience exactly equal (the flow tests and test_memo_audits' identical-document check are the contract)",
+      "evidence": "",
+      "issued_at": "2026-10-12T16:55:43Z",
+      "minted_during": "tick",
+      "caused_by": "W403",
+      "last_worked": "2026-10-12T16:55:48Z",
+      "ticks_blocked": 0,
+      "completed": null
     }
   ],
   "residue": [
@@ -7855,7 +7984,10 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-10-12T17:02:44Z"
+  },
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }

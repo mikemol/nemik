@@ -73,13 +73,28 @@ def shapes() -> Graph:
 Finding = tuple[str, str, str]  # (severity, focus symbol, message)
 
 
-def survey(root: Path) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
+def survey(
+    root: Path, phases: dict[str, float] | None = None
+) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
     """Yield (repo, graph, findings) per queue; graph is None when mtools refuses the file.
 
     Validation runs ONCE over the merged graph, so an `enables` edge into another workstream
     (`repo:W<n>`, legal since mtools 9236d5e) resolves against that workstream's waypoints.
     Each finding is attributed to the workstream of its focus node.
+
+    nemik:W399: when `phases` is given, the CPU seconds of each phase (parse, annotate, shacl,
+    fleet_checks) are written into it, so a caller can see which part of a rebuild dominates.
     """
+    import time
+
+    mark = [time.process_time()]
+
+    def lap(name: str) -> None:
+        now = time.process_time()
+        if phases is not None:
+            phases[name] = phases.get(name, 0.0) + now - mark[0]
+        mark[0] = now
+
     queues = workstream_files(root, QUEUE)
     known = frozenset(repo for repo, _ in queues)
     graphs: dict[str, Graph | None] = {}
@@ -99,7 +114,9 @@ def survey(root: Path) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
             merged += qg
         except UnreadableStateError as exc:
             graphs[repo], refused[repo] = None, str(exc)
+    lap("parse")
     annotate(merged)
+    lap("annotate")
     from nemik.hostapply import HOST_REF, load
 
     # nemik:W256: a cited host-apply row the export does not hold is an unresolved citation. Only the
@@ -118,6 +135,7 @@ def survey(root: Path) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
     # nemik:W254: pyshacl hands rdflib the same constraint text for every focus node; parse it once.
     with cached_sparql_parse():
         _, results, _ = validate(merged, shacl_graph=shapes())
+    lap("shacl")
     by_repo: dict[str, list[Finding]] = {repo: [] for repo in graphs}
     for focus, sev, msg in results.query(
         "SELECT ?f ?s ?m WHERE { ?r sh:focusNode ?f ; sh:resultSeverity ?s ; sh:resultMessage ?m }",
@@ -214,6 +232,7 @@ def survey(root: Path) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
                     f"cites the letter {rel}, which is not under the root: fix the path"
                 )
                 by_repo.setdefault(repo, []).append(("Warning", sym, missing))
+    lap("fleet_checks")
     for repo, g in graphs.items():
         if g is None:
             yield repo, None, [("Unreadable", "--", refused[repo])]

@@ -10,6 +10,8 @@ conductance, the baseline; the flow model replaces the old ranking only after th
 
 from __future__ import annotations
 
+from collections.abc import Iterator
+from contextlib import contextmanager
 from dataclasses import dataclass
 from fractions import Fraction
 from typing import TYPE_CHECKING
@@ -25,6 +27,23 @@ if TYPE_CHECKING:
     from nemik.rank import Weights
 
 DECIMALS = 4
+
+# nemik:W403: one document build asked for the same repo's solve up to four times (the ranking, the
+# edge widths twice, the operator-ask weights), each a full flow solve over the same graph: 58 solves,
+# 245 of 268 profiled seconds. Inside `memo_audits()` an identical audit is answered from this table;
+# outside it nothing is cached, so a CLI run computes exactly as before.
+_MEMO: dict[tuple, Audit] | None = None
+
+
+@contextmanager
+def memo_audits() -> Iterator[None]:
+    """Answer repeated identical audits from a table for the duration of the block (one build)."""
+    global _MEMO
+    outer, _MEMO = _MEMO, {} if _MEMO is None else _MEMO
+    try:
+        yield
+    finally:
+        _MEMO = outer
 
 
 @dataclass(frozen=True)
@@ -154,6 +173,24 @@ def audit(
     from nemik.rank import load_weights
 
     weights = weights or load_weights()
+    # W403: residue and gate weights are per-call inputs, not part of the key, so those audits bypass it.
+    key: tuple | None = None
+    if _MEMO is not None and residue is None and gate_weights is None:
+        key = (
+            id(g),
+            len(g),
+            repo,
+            weights.local,
+            weights.peer,
+            weights.peer_blocked,
+            weights.operator,
+            without,
+            gate_weight,
+            workable,
+            toward,
+        )
+        if key in _MEMO:
+            return _MEMO[key]
     nodes = {n for n in g.subjects(OSLC_CM.state, None) if _open(g, n)}
     prereq: dict[Node, set[Node]] = {}
     for p in nodes:
@@ -244,7 +281,10 @@ def audit(
         )
         for n in mine
     ]
-    return Audit(rows, flow, len(sources), demand, reach)
+    result = Audit(rows, flow, len(sources), demand, reach)
+    if key is not None and _MEMO is not None:
+        _MEMO[key] = result
+    return result
 
 
 @dataclass(frozen=True)
