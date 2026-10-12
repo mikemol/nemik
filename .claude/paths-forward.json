@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 210
+      "ticks_blocked": 211
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 30,
+      "ticks_blocked": 31,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 32,
+      "ticks_blocked": 33,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T13:54:28Z",
-      "ticks_blocked": 62,
+      "ticks_blocked": 63,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 59,
+      "ticks_blocked": 60,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 36,
+      "ticks_blocked": 37,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 51,
+      "ticks_blocked": 52,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 51,
+      "ticks_blocked": 52,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 51,
+      "ticks_blocked": 52,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 51,
+      "ticks_blocked": 52,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 51,
+      "ticks_blocked": 52,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 51,
+      "ticks_blocked": 52,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 51,
+      "ticks_blocked": 52,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 51,
+      "ticks_blocked": 52,
       "completed": null
     },
     {
@@ -6469,7 +6469,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 39,
+      "ticks_blocked": 40,
       "weight": 1,
       "completed": null
     },
@@ -6620,7 +6620,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 26,
+      "ticks_blocked": 27,
       "completed": null
     },
     {
@@ -7031,7 +7031,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 32,
+      "ticks_blocked": 33,
       "completed": null
     },
     {
@@ -7579,7 +7579,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W338",
       "last_worked": "2026-10-12T13:24:19Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "completed": null
     },
     {
@@ -7618,8 +7618,7 @@
         "W392",
         "W393",
         "W394",
-        "W395",
-        "W396"
+        "W395"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "operator 2026-10-12: the nemik containers OOM a lot and the page hangs while the server warms up, yet the graph changes only when a queue changes. Children W392-W396: measure first (web vitals), then snapshots rebuilt only on change, served as static files, a page that never waits on a warm server, and the remaining server-only computation moved or precomputed. Deployment is luthen-observability's; coordinate the serving change with it.",
@@ -7627,8 +7626,8 @@
       "issued_at": "2026-10-12T14:27:37Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-12T14:59:29Z",
-      "ticks_blocked": 7,
+      "last_worked": "2026-10-12T18:43:04Z",
+      "ticks_blocked": 0,
       "completed": null
     },
     {
@@ -7652,7 +7651,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null
     },
     {
@@ -7678,7 +7677,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:01:54Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "weight": 3,
       "completed": null
     },
@@ -7699,12 +7698,12 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "the deployed container serves index.html and the snapshot files with a plain static server (small, no rdflib per request, cache headers from the hash), while the builder runs as its own job; no request ever waits on a graph rebuild, and memory is the builder's, bounded and outside serving. Agree the shape with luthen-observability, which deploys nemik",
-      "evidence": "2026-10-12: 2026-10-12: held until luthen's baseline (luthen-observability:W870) has about 7 days of series, so the static serving change does not overtake the before-reading. luthen will read the design as the deployer when it is ready.",
+      "evidence": "2026-10-12: 2026-10-12: held until luthen's baseline (luthen-observability:W870) has about 7 days of series, so the static serving change does not overtake the before-reading. luthen will read the design as the deployer when it is ready. | 2026-10-12: From W396's inventory: the builder job must own /metrics (it is a scrape of the builder, not the page), precompute or drop graph.ttl, and take the liveness file as a snapshot input so wake.json refreshes when liveness changes even with no queue change.",
       "issued_at": "2026-10-12T14:27:40Z",
       "minted_during": "interrupt",
       "caused_by": "W391",
-      "last_worked": "2026-10-12T17:39:28Z",
-      "ticks_blocked": 2,
+      "last_worked": "2026-10-12T18:43:02Z",
+      "ticks_blocked": 3,
       "completed": null
     },
     {
@@ -7728,13 +7727,13 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null
     },
     {
       "symbol": "W396",
       "title": "Inventory what only the server computes, and precompute it into the snapshot or move it to the client",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W391"
       ],
@@ -7744,14 +7743,15 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "list every endpoint and computation nemik-serve does per request (rank and flow solve, critical path, health, wake roster); the interactive parts (scope rings, view chain, ghosts, roll-up) are already client-side. Anything that depends only on the graph goes into the snapshot. The /cmd tools are not kept on any path: W397 retires them.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: Inventory of nemik-serve's routes (2026-10-12): / and /vendor/* are files. /graph.json is precomputed at rebuild (model.payload). /operator and /inbound[/repo] are slices of graph.json's own operator and inbound arrays: client-side filters, no server work. /goals/<repo> runs rank.goals per request on the cached graph; build_static already precomputes goals/<repo>.json. /wake runs roster() per request AND re-reads the liveness file each time: liveness changes without any queue change, so it is a snapshot input of its own (W393's hash must include it). /graph.ttl serializes the whole graph per request: precompute at rebuild or drop. /metrics is the builder's, not the page's: it moves to the builder job. history.json is host-side only (git history). Result: static_data already covers everything the page reads; the gaps are the liveness input, graph.ttl and where /metrics lives.",
       "issued_at": "2026-10-12T14:27:44Z",
       "minted_during": "interrupt",
       "caused_by": "W391",
-      "last_worked": "2026-10-12T14:38:32Z",
+      "last_worked": "2026-10-12T18:42:59Z",
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 6,
+      "completed": "20261012T184259Z"
     },
     {
       "symbol": "W397",
@@ -7859,7 +7859,7 @@
       "issued_at": "2026-10-12T16:42:26Z",
       "minted_during": "tick",
       "caused_by": "W393",
-      "last_worked": "2026-10-12T18:29:14Z",
+      "last_worked": "2026-10-12T18:43:07Z",
       "ticks_blocked": 0,
       "completed": null
     },
