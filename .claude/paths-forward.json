@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 344,
+  "counter": 345,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 175
+      "ticks_blocked": 176
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 50,
+      "ticks_blocked": 51,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T12:42:16Z",
-      "ticks_blocked": 26,
+      "ticks_blocked": 27,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 28,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 24,
+      "ticks_blocked": 25,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 24,
+      "ticks_blocked": 25,
       "completed": null,
       "weight": 1
     },
@@ -5382,7 +5382,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -5403,7 +5403,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "completed": null
     },
     {
@@ -5462,7 +5462,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "completed": null
     },
     {
@@ -5483,7 +5483,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "completed": null
     },
     {
@@ -5523,7 +5523,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "completed": null
     },
     {
@@ -5582,7 +5582,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "completed": null
     },
     {
@@ -5622,7 +5622,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "completed": null
     },
     {
@@ -5643,7 +5643,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "completed": null
     },
     {
@@ -5683,7 +5683,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "completed": null
     },
     {
@@ -5937,7 +5937,6 @@
       "enables": [],
       "touches": [],
       "blocked_on": [
-        "W316",
         "W317",
         "W318"
       ],
@@ -5947,8 +5946,8 @@
       "issued_at": "2026-10-11T18:18:01Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-11T19:12:00Z",
-      "ticks_blocked": 9,
+      "last_worked": "2026-10-11T23:54:55Z",
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -6033,27 +6032,27 @@
     {
       "symbol": "W317",
       "title": "Repo health (red, amber, green) per repo in the view and in nemik-metrics, from blocked share, oldest block and operator asks owed",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W312"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Declare the thresholds as data in rank-weights.toml; compute from nemik.history.weekly and nemik_operator_salience; a coloured chip on each repo toggle.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: nemik.health (blocked share, oldest block in ticks, needs-you asks owed vs [health] [amber, red] in rank-weights.toml, calibrated to the measured fleet); graph.json health (manifest-gated), nemik_repo_health metric, repo chips with glyph + hover reasons; tests/test_health.py, test_layout chip check; render-check 11 passed. Oldest block is in loop ticks (ticks_blocked), not days: the live graph has no blocked-since instant; nemik-history has the git-derived days.",
       "issued_at": "2026-10-11T18:18:16Z",
       "minted_during": "interrupt",
       "caused_by": "W312",
-      "last_worked": "2026-10-11T23:44:25Z",
+      "last_worked": "2026-10-12T00:18:46Z",
       "ticks_blocked": 0,
       "weight": 2,
-      "completed": null
+      "completed": "20261012T001846Z"
     },
     {
       "symbol": "W318",
       "title": "Baseline variance: name a baseline revision per repo and report planned versus actual since it (nemik-history --baseline)",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W312"
       ],
@@ -6065,9 +6064,10 @@
       "issued_at": "2026-10-11T18:18:17Z",
       "minted_during": "interrupt",
       "caused_by": "W312",
-      "last_worked": null,
+      "last_worked": "2026-10-12T00:18:48Z",
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 4,
+      "completed": null
     },
     {
       "symbol": "W319",
@@ -6155,7 +6155,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T20:11:31Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "completed": null
     },
     {
@@ -6232,7 +6232,7 @@
       "caused_by": "W323",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 6
     },
     {
       "symbol": "W328",
@@ -6475,7 +6475,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "weight": 1,
       "completed": null
     },
@@ -6541,7 +6541,7 @@
       "caused_by": "github-8f",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 2
     },
     {
       "symbol": "W343",
@@ -6560,7 +6560,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 5
     },
     {
       "symbol": "W344",
@@ -6582,6 +6582,25 @@
       "ticks_blocked": 0,
       "weight": 4,
       "completed": "20261011T231604Z"
+    },
+    {
+      "symbol": "W345",
+      "title": "Install nemik's tools for the host: one pinned wheel via uv tool install, not symlinks into this venv",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "packaging"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "build the nemik wheel (the console scripts of pyproject [project.scripts]) in bazel; install it per host with uv tool install from that wheel (pinned by this repo's sha), so nemik-* is on the operator's PATH and any repo can add the same wheel as its own dependency; a launcher that resolves another repo's venv is refused (the fleet rule: tools are packages, not paths into someone else's .venv); then verify nemik-operator runs from luthen with no absolute path",
+      "evidence": "",
+      "issued_at": "2026-10-11T23:54:56Z",
+      "minted_during": "interrupt",
+      "caused_by": "luthen-observability-a9",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 1
     }
   ],
   "residue": [
@@ -6644,7 +6663,10 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-10-12T00:11:22Z"
+  },
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }

@@ -16,7 +16,8 @@
         "same_ask": "list-ref", "ticks_blocked": "count", "last_activity": "time", "dtstart": "time",
         "due": "time", "rrule": "text", "exdates": "list-time", "alarms": "list-text"
       },
-      "findings": {"*": "list-text"}
+      "findings": {"*": "list-text"},
+      "health": {"status": "enum", "blocked_share": "count", "oldest_block_ticks": "count", "asks_owed": "count", "reasons": "list-text"}
     },
     "wake.json": {
       "top": {"liveness": "text", "roster": "records", "operator": "record"},

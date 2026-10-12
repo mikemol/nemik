@@ -98,3 +98,11 @@ weight = 1
 # is STARVED (nemik-starved). Reporting only: ranking has no aging term, by choice.
 [starvation]
 days = 14
+
+# nemik:W317: repo health (nemik.health). Each signal declares [amber, red]; a repo is as unhealthy as its
+# worst. oldest_block_ticks counts loop ticks; asks_owed counts needs-you asks. Calibrated 2026-10-11 to the
+# measured fleet (16 repos: shares 0-0.99, longest blocks 0-176 ticks, asks 0-19), so the verdict discriminates.
+[health]
+blocked_share = [0.7, 0.9]
+oldest_block_ticks = [50, 150]
+asks_owed = [5, 12]

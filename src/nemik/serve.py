@@ -345,12 +345,20 @@ def to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
     for item in nodes:
         item["blocked_on"] = sorted(item["blocked_on"])
     edges.sort(key=lambda e: (e["source"], e["target"], e["kind"]))
+    # nemik:W317: each repo's red/amber/green from the declared thresholds, over `gn` like every number.
+    from nemik.health import health, thresholds
+
+    limits = thresholds()
     return {
         "nodes": nodes,
         "edges": edges,
         "inbound": blocks,
         "operator": asks,
         "findings": {r: [list(f) for f in fs] for r, fs in findings.items()},
+        "health": {
+            r: health(gn, r, limits)._asdict()
+            for r in sorted({n["repo"] for n in nodes})
+        },
     }
 
 

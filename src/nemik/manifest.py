@@ -39,6 +39,7 @@ def unmanifested(name: str, doc) -> list[str]:
     if key == "graph.json":
         for section in ("nodes", "edges", "inbound", "operator"):
             check(section, doc.get(section))
+        check("health", list(doc.get("health", {}).values()))
         bad += [
             f"{name} top.{k}"
             for k in sorted(

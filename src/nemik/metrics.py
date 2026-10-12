@@ -117,6 +117,21 @@ def operator_lines(g: Graph) -> list[str]:
     return out
 
 
+def health_lines(g: Graph) -> list[str]:
+    """nemik:W317: each repo's health as a gauge: 0 green, 1 amber, 2 red (nemik.health, from the
+    thresholds `[health]` declares in rank-weights.toml)."""
+    from nemik.blocks import ref
+    from nemik.health import STATUSES, health, thresholds
+
+    limits = thresholds()
+    repos = sorted({ref(n).partition(":")[0] for n in g.subjects(OSLC_CM.state, None)})
+    out = ["# TYPE nemik_repo_health gauge"]
+    for repo in repos:
+        level = STATUSES.index(health(g, repo, limits).status)
+        out.append(f"nemik_repo_health{label(repo=repo)} {level}")
+    return out
+
+
 def age_lines(repo: str, g: Graph, now: datetime) -> list[str]:
     """nemik:W270: how long the open waypoints of `repo` have existed, per OSLC state, as a
     summary-style gauge: quantile 0.5 is the median age and quantile 1 the oldest. Per-waypoint
@@ -213,6 +228,7 @@ def main(argv: list[str] | None = None) -> None:
             f"nemik_waiting_on{label(repo=r['repo'], state=r['state'])} {len(r['waiting'])}"
         )
     out += operator_lines(merged)
+    out += health_lines(merged)
     out += realizability_lines(args.root)
 
     prompts: Counter[tuple[str, str, str]] = Counter()

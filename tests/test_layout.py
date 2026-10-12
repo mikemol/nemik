@@ -270,7 +270,17 @@ def test_the_default_view_is_legible(server) -> None:
         page.wait_for_timeout(500)
         m = page.evaluate(LEGIBILITY)
         note = page.inner_text("#legnote")
+        # nemik:W317: every repo chip carries its health, and a non-green one a glyph, not colour alone
+        chips = page.evaluate(
+            "() => [...document.querySelectorAll('#repos button')]"
+            ".map(b => [b.dataset.health, b.textContent])"
+        )
         browser.close()
+    assert chips and {h for h, _ in chips} <= {"green", "amber", "red"}
+    assert all(
+        text.startswith({"amber": "▲", "red": "■"}.get(h, text[:1]))
+        for h, text in chips
+    )
     assert m["in_view"] > 0
     assert m["label_px"] >= 8, m
     assert m["min_target_px"] >= 12, m

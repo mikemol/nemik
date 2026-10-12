@@ -31,6 +31,8 @@ select { background: var(--panel); border: 1px solid var(--line); border-radius:
    all"); none lit means every repo. The header wraps, so main's height follows --hh (set from JS). */
 #repos { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 4px 6px; }
 #repos button { font: inherit; font-size: 12px; color: var(--muted); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 1px 9px; cursor: pointer; }
+#repos button[data-health="amber"] { border-color: #e69f00; border-width: 2px; }
+#repos button[data-health="red"] { border-color: #d55e00; border-width: 2px; font-weight: 600; }
 #repos button[aria-pressed="true"] { color: var(--bg); background: var(--ink); border-color: var(--ink); }
 main { display: grid; grid-template-columns: 1fr 340px; height: calc(100vh - var(--hh, 50px)); }
 #cy { min-height: 400px; }
@@ -872,7 +874,13 @@ function findings() {
 function chips(repos) {
   for (const r of [...picked]) if (!repos.includes(r)) picked.delete(r);
   const box = document.getElementById("repos");
-  box.innerHTML = repos.map(r => `<button type="button" data-repo="${esc(r)}" aria-pressed="${picked.has(r)}">${esc(r)}</button>`).join("");
+  // nemik:W317: a chip carries its repo's health (nemik.health): a glyph as well as a colour, and the reasons on hover.
+  const MARK = { amber: "▲ ", red: "■ " };
+  box.innerHTML = repos.map(r => {
+    const h = (data.health || {})[r] || { status: "green", reasons: [] };
+    const why = h.reasons.length ? `${h.status}: ${h.reasons.join("; ")}` : "green";
+    return `<button type="button" data-repo="${esc(r)}" data-health="${esc(h.status)}" title="${esc(why)}" aria-pressed="${picked.has(r)}">${MARK[h.status] || ""}${esc(r)}</button>`;
+  }).join("");
   document.documentElement.style.setProperty("--hh", document.querySelector("header").offsetHeight + "px");
 }
 document.getElementById("repos").onclick = ev => {
