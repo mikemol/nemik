@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 410,
+  "counter": 413,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 212
+      "ticks_blocked": 213
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 32,
+      "ticks_blocked": 33,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 34,
+      "ticks_blocked": 35,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T13:54:28Z",
-      "ticks_blocked": 64,
+      "ticks_blocked": 65,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 61,
+      "ticks_blocked": 62,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 38,
+      "ticks_blocked": 39,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 53,
+      "ticks_blocked": 54,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 53,
+      "ticks_blocked": 54,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 53,
+      "ticks_blocked": 54,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 53,
+      "ticks_blocked": 54,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 53,
+      "ticks_blocked": 54,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 53,
+      "ticks_blocked": 54,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 53,
+      "ticks_blocked": 54,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 53,
+      "ticks_blocked": 54,
       "completed": null
     },
     {
@@ -6469,7 +6469,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 41,
+      "ticks_blocked": 42,
       "weight": 1,
       "completed": null
     },
@@ -6556,7 +6556,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 3
     },
     {
       "symbol": "W344",
@@ -6620,7 +6620,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 28,
+      "ticks_blocked": 29,
       "completed": null
     },
     {
@@ -7031,7 +7031,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 34,
+      "ticks_blocked": 35,
       "completed": null
     },
     {
@@ -7188,7 +7188,7 @@
     {
       "symbol": "W372",
       "title": "Integration survey: what each PM tool imports, exposes and lets plugins do",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W364",
         "W371"
@@ -7199,14 +7199,15 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Fetch every cited vendor URL and clear or correct each UNVERIFIED mark in docs/integration-survey.md; then file the shared projection with a decode-back test (survey C2) as the card W365/W366/W371 build on",
-      "evidence": "2026-10-12: docs/integration-survey.md drafted (8 tools; cheapest entry: MSPDI file for desktop tools, API connector for OpenProject/Jira/GitHub/Forgejo, plugin never cheapest; common structure = one card->task+predecessor projection). Citations are from memory, NOT fetched.",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: docs/integration-survey.md drafted (8 tools; cheapest entry: MSPDI file for desktop tools, API connector for OpenProject/Jira/GitHub/Forgejo, plugin never cheapest; common structure = one card->task+predecessor projection). Citations are from memory, NOT fetched. | 2026-10-12: docs/integration-survey.md verified: 42 URLs fetched, 22 claims corrected, 16 still marked UNVERIFIED in the doc (none on the export/connector path). Ranking unchanged; corrections: GitHub Projects has REST now, Project Online retired 2026-09-30, Jira Connect EOS 2027-01-31.",
       "issued_at": "2026-10-12T01:36:42Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-12T19:15:56Z",
+      "last_worked": "2026-10-12T19:48:20Z",
       "ticks_blocked": 0,
-      "weight": 9
+      "weight": 9,
+      "completed": "20261012T194820Z"
     },
     {
       "symbol": "W373",
@@ -7581,7 +7582,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W338",
       "last_worked": "2026-10-12T13:24:19Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 13,
       "completed": null
     },
     {
@@ -7629,7 +7630,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -7653,7 +7654,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "completed": null
     },
     {
@@ -7669,8 +7670,7 @@
       ],
       "blocked_on": [
         "W400",
-        "W401",
-        "W402"
+        "W401"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "umbrella: W399 measures the rebuild's phases (decides the order), W402 per-repo parse cache, W400 incremental validation, W401 incremental derived numbers and per-piece snapshots. Done when a single-repo change rebuilds only its dependents and the result equals a full rebuild.",
@@ -7679,7 +7679,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:01:54Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 1,
       "weight": 3,
       "completed": null
     },
@@ -7705,7 +7705,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T18:43:02Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "completed": null
     },
     {
@@ -7729,7 +7729,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "completed": null
     },
     {
@@ -7841,7 +7841,7 @@
       "caused_by": "W393",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 4
     },
     {
       "symbol": "W401",
@@ -7865,13 +7865,13 @@
       "minted_during": "tick",
       "caused_by": "W393",
       "last_worked": "2026-10-12T19:13:41Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
       "symbol": "W402",
       "title": "Cache each repo's parsed queue and ledger graphs by that repo's file stamps",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W393"
       ],
@@ -7880,15 +7880,15 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "survey() re-parses every queue on any change; keep (path, mtime, known repos) -> queue graph and (path, mtime) -> ledger graph, re-parsing only repos whose files moved (a new or vanished repo changes the known set and so invalidates every queue's cross-repo resolution); test: touch one queue, assert one parse",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: commit 1f33aa7 (pushed, ls-remote confirms): adapter._stamped parse cache; tests/test_parse_cache.py; bazel test //... 82/82 pass. Rebuild-time gain not yet measured (fold into W393's measurement).",
       "issued_at": "2026-10-12T16:42:37Z",
       "minted_during": "tick",
       "caused_by": "W393",
-      "last_worked": "2026-10-12T19:16:00Z",
+      "last_worked": "2026-10-12T19:29:37Z",
       "ticks_blocked": 0,
       "weight": 3,
-      "completed": null
+      "completed": "20261012T192937Z"
     },
     {
       "symbol": "W403",
@@ -7974,7 +7974,7 @@
       "caused_by": "W373",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 4
     },
     {
       "symbol": "W407",
@@ -8039,21 +8039,83 @@
     {
       "symbol": "W410",
       "title": "Memoize the per-repo non-solve derived work (graph scans, health, critical) by the repo's own triples, so a rebuild recomputes only the repos a change reaches",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W401"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "W411",
+        "W412"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Umbrella: W411 (namespace hoist) and W412 (one-pass card index); remeasure with profile_edit.py after each",
+      "evidence": "2026-10-12: Profile 2026-10-12 (scratchpad profile_edit.py, one card done, then to_json under cProfile): 35.8 s; rdflib triples() 19.2 s cumulative (audit 13.6, health 10.6, operator_asks 8.7, critical/rank _open ~9); Namespace.__getattr__ 5.2 s. survey+ledger warm with W402 cache 16.4 s vs 24.0 cold (SHACL dominates: W400). Per-repo memo by triple fingerprint rejected for now: fingerprinting a repo's triples is itself a full scan; a one-pass index removes the scans outright.",
+      "issued_at": "2026-10-12T19:13:33Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-10-12T19:45:12Z",
+      "ticks_blocked": 0,
+      "weight": 2,
+      "completed": null
+    },
+    {
+      "symbol": "W411",
+      "title": "Hoist hot-loop namespace terms (NEMIK.x, OSLC_CM.x) into module constants: 1.48M Namespace.__getattr__ calls cost 5.2 s of a 36 s one-edit rebuild",
+      "status": "done",
+      "enables": [
+        "W410"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: adapter._Terms caches each namespace term on first lookup; profile_edit.py one-edit rebuild 35.8 s -> 27.1 s under cProfile, Namespace.__getattr__ gone from the top 35.",
+      "issued_at": "2026-10-12T19:45:06Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-10-12T19:48:14Z",
+      "ticks_blocked": 0,
+      "completed": "20261012T194814Z"
+    },
+    {
+      "symbol": "W412",
+      "title": "One-pass card index per build: state, blockedOn, enables, repo and asks per card as plain dicts, read by salience.audit, health, blocks.operator_asks, critical._open and rank._open instead of 3.3M rdflib triple lookups (19 s of 36)",
+      "status": "working",
+      "enables": [
+        "W410"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
       "evidence": "",
-      "issued_at": "2026-10-12T19:13:33Z",
+      "issued_at": "2026-10-12T19:45:07Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-10-12T19:48:29Z",
       "ticks_blocked": 0,
-      "weight": 2
+      "completed": null
+    },
+    {
+      "symbol": "W413",
+      "title": "Shared projection: cards to tasks with predecessor links, one mapping every export and connector reuses, with a decode-back test",
+      "status": "ready",
+      "enables": [
+        "W365",
+        "W366",
+        "W371"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Confirm MSPDI PredecessorLink in the schema reference first (survey left it open)",
+      "evidence": "",
+      "issued_at": "2026-10-12T19:48:19Z",
+      "minted_during": "tick",
+      "caused_by": "W372",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -8118,7 +8180,7 @@
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-12T19:12:33Z"
+    "taken_at": "2026-10-12T19:41:30Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []

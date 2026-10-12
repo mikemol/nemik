@@ -661,3 +661,7 @@
 2026-10-12T18:44:15Z  interrupt W408 minted    -         "An OSLC service-provider catalog per repo as the discovery root of the connector contract"  evidence=W373
 2026-10-12T19:13:31Z  tick  W409 minted    -         "Snapshot per piece: write one static file per repo plus the fleet-level pieces, each with a content hash in an index, so the page refetches only what changed"
 2026-10-12T19:13:33Z  tick  W410 minted    -         "Memoize the per-repo non-solve derived work (graph scans, health, critical) by the repo's own triples, so a rebuild recomputes only the repos a change reaches"
+2026-10-12T19:29:33Z  tick  W402 advanced  unblock   "parse cache landed 1f33aa7; W401 atomized into W409/W410; W372 survey drafted, verification next; NUDGE luthen-observability:W878 due (W392,W394,W395 behind it)"
+2026-10-12T19:45:06Z  tick  W411 minted    -         "Hoist hot-loop namespace terms (NEMIK.x, OSLC_CM.x) into module constants: 1.48M Namespace.__getattr__ calls cost 5.2 s of a 36 s one-edit rebuild"
+2026-10-12T19:45:07Z  tick  W412 minted    -         "One-pass card index per build: state, blockedOn, enables, repo and asks per card as plain dicts, read by salience.audit, health, blocks.operator_asks, critical._open and rank._open instead of 3.3M rdflib triple lookups (19 s of 36)"
+2026-10-12T19:48:19Z  tick  W413 minted    -         "Shared projection: cards to tasks with predecessor links, one mapping every export and connector reuses, with a decode-back test"  evidence=W372

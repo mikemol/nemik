@@ -14,8 +14,22 @@ from mikemol.pathsforward import ledger, model, store
 from rdflib import RDF, Graph, Literal, Namespace, URIRef
 from rdflib.namespace import DCTERMS, PROV, RDFS, XSD
 
-OSLC_CM = Namespace("http://open-services.net/ns/cm#")
-NEMIK = Namespace("https://github.com/mikemol/nemik/ns#")
+
+class _Terms(Namespace):
+    """A Namespace that keeps each term once made (nemik:W411).
+
+    rdflib builds a fresh URIRef on every `NEMIK.x`; the hot loops asked 1.48 M times in one rebuild
+    (5.2 s of 36). The term lands in the instance dict, so the next lookup never reaches __getattr__.
+    """
+
+    def __getattr__(self, name: str) -> URIRef:
+        term = super().__getattr__(name)
+        self.__dict__[name] = term
+        return term
+
+
+OSLC_CM = _Terms("http://open-services.net/ns/cm#")
+NEMIK = _Terms("https://github.com/mikemol/nemik/ns#")
 BASE = "urn:nemik:"
 
 STATE = {

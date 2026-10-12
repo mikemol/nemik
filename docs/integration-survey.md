@@ -1,120 +1,165 @@
 # nemik integration survey: PM tools (2026-10-12)
 
+Verified 2026-10-12: 42 URLs fetched, 22 claims corrected, 16 still unverified.
+
 Context: nemik reads `.claude/paths-forward.json` queues, never writes them; emits a graph,
 critical path (step-counted, no durations), and `nemik-ics` for dated cards (docs/positioning.md).
 So the natural direction is **export out of nemik** (read-only mirror), with import only as residue.
 
-**Verification note.** Docs URLs below are the vendors' own doc pages, cited from prior knowledge;
-they were NOT fetched live in this session. Every claim is therefore at best "cited, not re-read".
-Claims I hold with lower confidence are marked **UNVERIFIED** explicitly. Treat this file as a map
-to check, not as a checked map (read-your-writes: confirm against the URL before building).
+**Verification note.** Every URL below was fetched live on 2026-10-12 (WebFetch). [corrected] marks
+text changed against what the page says; UNVERIFIED marks remain only where no vendor page fetched
+supports the claim, with the reason. Two original URLs were dead (404) and are replaced or noted.
+The Jira REST v3 reference pages fetched but their content did not render for the fetch tool.
 
-## 1. GanttProject (desktop, Java, GPL)
-- Formats: native `.gan` (XML); imports/exports MS Project XML (MSPDI) and MPX; CSV import/export;
-  export PDF/PNG/HTML. https://www.ganttproject.biz/ , https://help.ganttproject.biz/ (import/export pages)
-- API: none (desktop app; no REST). UNVERIFIED that no headless CLI exists beyond `-export` options
-  (a command-line export mode is documented in the help wiki per memory).
-- Plugins: Eclipse-RCP-style OSGi plugin bundles in Java (exporters/importers are themselves plugins
-  in the source tree, https://github.com/bardsoftware/ganttproject). No public plugin marketplace;
-  distribution = ship a jar into the plugins dir. UNVERIFIED that this is a supported third-party path.
+## 1. GanttProject (desktop, Java, GPLv3)
+- Formats: native `.gan` (XML). [corrected] Product page: reads MPX, MPP and MSPDI XML from MS Project;
+  exports MSPDI XML (no MPX export stated). https://www.ganttproject.biz/
+  CSV: export via CLI and CSV import discussed on the vendor forum
+  (https://help.ganttproject.biz/t/import-from-csv/7451). PDF/PNG/HTML export: UNVERIFIED on a vendor
+  page (only a dated third-party handbook found; help.ganttproject.biz root is a forum index).
+- API: none (desktop app; no REST). [corrected] A command-line export mode exists: `ganttproject -export csv
+  file.gan` per the vendor forum thread above; `ganttproject -h` lists options. No CLI import.
+- Plugins: source tree has separate import/export modules (`biz.ganttproject.impex.msproject2`,
+  `biz.ganttproject.impex.ical`, `org.ganttproject.impex.htmlpdf`); license GPLv3 per README.
+  https://github.com/bardsoftware/ganttproject UNVERIFIED: the repo page does not describe them as
+  plugins nor any third-party plugin path.
 
-## 2. ProjectLibre (desktop, Java, CPAL)
-- Formats: native `.pod`; reads/writes MS Project `.mpp` (read) and MSPDI `.xml`; reads `.gan`
-  via MPXJ. https://www.projectlibre.com/ (product page, "compatible with Microsoft Project").
-  UNVERIFIED exact read/write matrix; it is built on MPXJ (https://www.mpxj.org/), whose format list
-  is the reliable bound.
-- API: desktop has none. ProjectLibre Cloud (SaaS) API: UNVERIFIED.
-- Plugins: none documented. UNVERIFIED.
+## 2. ProjectLibre (desktop, Java)
+- Formats: native `.pod`. [corrected] Product page: opens `.mpp` and `.xer` directly; imports `.mpp`,
+  `.mpx` and Primavera files. https://www.projectlibre.com/ Write side: saves Microsoft Project XML
+  (MSPDI) per vendor forum (https://www.projectlibre.com/node/296), with reported fidelity bugs
+  (baseline hang, SaveVersion). `.gan` read: UNVERIFIED for ProjectLibre itself.
+  MPXJ (https://www.mpxj.org/) bound: MSPDI read+write, MPP read-only, GanttProject read-only, ProjectLibre
+  read-only; writes MPX, MSPDI, PMXML, XER, Planner, SDEF.
+- License: UNVERIFIED (not stated on product page; CPAL from memory).
+- API: desktop has none. ProjectLibre Cloud is a paid SaaS ($9.99/user/month); its API: UNVERIFIED (not mentioned).
+- Plugins: none documented on product page. UNVERIFIED that none exist.
 
 ## 3. OpenProject (web, Ruby on Rails, GPLv3)
-- Formats: work-package export CSV, XLS, PDF, Atom; import of MS Project via MSPDI XML / Jira /
-  CSV importers (newer releases). https://www.openproject.org/docs/user-guide/work-packages/exporting/
-  Import tooling: UNVERIFIED which importers are built-in vs enterprise.
-- API: REST API v3, HAL+JSON, with a full Relations resource (precedes/follows/blocks/relates).
-  https://www.openproject.org/docs/api/ ; auth: API key (basic), OAuth2 apps, session.
-  https://www.openproject.org/docs/api/introduction/ . Webhooks: configurable outgoing webhooks for
-  work packages/projects. https://www.openproject.org/docs/system-admin-guide/api-and-webhooks/
-- Plugins: Rails engines (Ruby gems) loaded via Gemfile.plugins; can add models, API endpoints, views,
-  hooks. https://www.openproject.org/docs/development/create-openproject-plugin/ Distribution = gem /
-  git source; requires self-hosting, not available on OpenProject cloud.
+- Formats: work-package list export PDF (table/report/Gantt), XLS, CSV; single work package PDF or Atom.
+  https://www.openproject.org/docs/user-guide/work-packages/exporting/
+  [corrected] Import: no built-in MS Project or CSV importer; MS Project route is Excel export + sync
+  (https://www.openproject.org/docs/system-admin-guide/integrations/). Jira: the Jira Migrator is beta,
+  supports Jira Data Center 10.x/11.x only (not Jira Cloud), and does not migrate relations.
+  https://www.openproject.org/docs/installation-and-operations/jira-migration/
+  (Original URL /docs/system-admin-guide/import/ was not used; no such page, 404.)
+- API: REST API v3 (HATEOAS), `application/hal+json`. https://www.openproject.org/docs/api/
+  [corrected] Relations resource types: relates, duplicates/duplicated, blocks/blocked, precedes/follows,
+  includes/partof, requires/required (plus `lag` on follows).
+  https://www.openproject.org/docs/api/endpoints/relations/
+  [corrected] Auth: session (same origin), API token as Bearer, API token via Basic (`apikey`), OAuth2
+  built-in (auth code, PKCE, client credentials), external OIDC JWT (RFC 9068).
+  https://www.openproject.org/docs/api/introduction/
+  [corrected] Webhooks: create/update of projects, work packages, work package comments, time entries,
+  attachments; scoped to all or selected projects.
+  https://www.openproject.org/docs/system-admin-guide/api-and-webhooks/
+- Plugins: Ruby gems / Rails engines, generated by `rails generate open_project:plugin`, wired via
+  `Gemfile.plugins` `:opf_plugins` group; hybrid plugins add a `package.json`.
+  https://www.openproject.org/docs/development/create-openproject-plugin/
+  UNVERIFIED: "not available on OpenProject cloud" (page covers only Docker/packaged installs).
 
 ## 4. Jira Cloud
-- Formats: CSV import (External System Import); export CSV/XML/Word from issue search.
+- Formats: CSV import via External System Import, confirmed.
   https://support.atlassian.com/jira-cloud-administration/docs/import-data-from-a-csv-file/
-  No MSPDI natively (marketplace apps do it).
-- API: REST v3 (+ Agile REST), issue links typed (e.g. "Blocks"). https://developer.atlassian.com/cloud/jira/platform/rest/v3/
-  Webhooks (admin or app-registered). https://developer.atlassian.com/cloud/jira/platform/webhooks/
-  Auth: API token + basic, OAuth 2.0 (3LO), Forge/Connect app auth.
+  [corrected] The page documents only parent/child via "Work item ID"/"Parent" columns, not issue links.
+  Export CSV/XML/Word: UNVERIFIED (not on a fetched page). No MSPDI natively.
+- API: REST v3 issue links (`/rest/api/3/issueLink`, `/rest/api/3/issueLinkType`).
+  https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-links/
+  UNVERIFIED by page: reference pages did not render for fetch; endpoint confirmed only via search
+  snippets of community posts.
+  [corrected] Webhooks: admins (UI or `/rest/webhooks/1.0/webhook`), Connect apps (descriptor or
+  `/rest/api/3/webhook`, 100/tenant), OAuth 2.0 apps (`/rest/api/3/webhook`, 5/user/tenant).
+  https://developer.atlassian.com/cloud/jira/platform/webhooks/
+  Auth: API token + basic, OAuth 2.0 (3LO), Forge (OAuth2 managed), Connect (JWT), confirmed.
   https://developer.atlassian.com/cloud/jira/platform/security-overview/
-  GraphQL via Atlassian platform gateway (UNVERIFIED for full Jira coverage).
-- Plugins: Forge (JS/TS functions on Atlassian infra; UI modules, triggers, custom fields);
-  Connect being retired in favour of Forge. https://developer.atlassian.com/platform/forge/
-  Distribution: Atlassian Marketplace or private install via `forge install`.
-  OSLC: no native OSLC CM provider (third-party adapters exist). UNVERIFIED.
+  GraphQL via Atlassian platform gateway: UNVERIFIED (no page fetched).
+- Plugins: Forge, Atlassian-hosted serverless platform; distribute via Marketplace or developer console.
+  https://developer.atlassian.com/platform/forge/ `forge install`: UNVERIFIED (not on fetched page).
+  [corrected] Connect end of support: January 31, 2027 (extended from Dec 2026).
+  https://community.developer.atlassian.com/t/connect-end-of-support-extended-to-january-31-2027/102002
+  OSLC: no native OSLC CM provider. UNVERIFIED (no page fetched).
 
 ## 5. GitHub Issues / Projects
-- Formats: no issue import format; Projects export view to CSV (UNVERIFIED, recalled as a Projects
-  "export" menu item). Issue migration is via API/ GitHub Enterprise Importer (repos, not loose CSV).
-- API: REST https://docs.github.com/en/rest/issues ; GraphQL (Projects v2 is GraphQL-only)
+- Formats: no issue import format. [corrected] Projects can export a view as **TSV** (not CSV).
+  https://docs.github.com/en/issues/planning-and-tracking-with-projects/managing-your-project/exporting-your-projects-data
+  Issue migration is via API / GitHub Enterprise Importer (repos, not loose CSV).
+- API: REST https://docs.github.com/en/rest/issues (sub-pages incl. Issue dependencies, Sub-issues).
+  [corrected] Projects v2 is no longer GraphQL-only: a REST API covers projects, items, draft items,
+  fields, views (https://docs.github.com/en/rest/projects); the GraphQL guide remains
   https://docs.github.com/en/issues/planning-and-tracking-with-projects/automating-your-project/using-the-api-to-manage-projects
-  Issue dependencies ("blocked by"/"blocking") and sub-issues have REST endpoints (2025);
-  https://docs.github.com/en/rest/issues/issue-dependencies (UNVERIFIED path).
-  Webhooks: repo/org webhooks incl. `issues`, `projects_v2_item`. https://docs.github.com/en/webhooks
-  Auth: PAT (fine-grained), GitHub App, OAuth App. https://docs.github.com/en/apps
-- Plugins: no in-product plugin model. Extension = GitHub Apps (external services), Actions
-  (workflows in repo), CLI extensions. https://docs.github.com/en/actions
+  [corrected] Issue dependencies path confirmed: `.../issues/{n}/dependencies/blocked_by` (GET/POST/DELETE)
+  and `.../dependencies/blocking` (GET only). https://docs.github.com/en/rest/issues/issue-dependencies
+  [corrected] Webhooks: `issues`, `sub_issues`, `issue_dependencies` on repo/org/app; `projects_v2_item`
+  is organization-webhook only. https://docs.github.com/en/webhooks/webhook-events-and-payloads
+  Auth: GitHub App, OAuth App confirmed at https://docs.github.com/en/apps ; fine-grained PAT:
+  UNVERIFIED on that page.
+- Plugins: no in-product plugin model. Extension = GitHub Apps, Actions (YAML workflows in repo,
+  https://docs.github.com/en/actions), CLI extensions.
 
 ## 6. Forgejo
-- Formats: none for issues beyond repo migration (migrates issues from GitHub/Gitea/GitLab via API).
-  https://forgejo.org/docs/latest/user/ (migration). No CSV/MSPDI.
-- API: Gitea-compatible REST v1 with Swagger at `/api/swagger`; issue dependencies endpoints exist
-  (`/repos/{o}/{r}/issues/{i}/dependencies`, `/blocks`). https://forgejo.org/docs/latest/user/api-usage/
-  (dependency endpoints UNVERIFIED by page, known from Gitea swagger). Webhooks: Forgejo/Gitea/Slack
-  etc. per repo/org. https://forgejo.org/docs/latest/user/webhooks/ Auth: access tokens (scoped),
-  OAuth2 provider, basic. Forgejo also ships Forgejo Actions (CI).
-- Plugins: none (no plugin system; customization = templates/themes, Actions, external services).
-  https://forgejo.org/docs/latest/admin/customization/ (UNVERIFIED that docs state "no plugins" plainly).
+- Formats: no CSV/MSPDI. [corrected] Migration (documented on Codeberg, linked from Forgejo user docs)
+  from GitHub, GitLab, Gitea/Forgejo, Gogs, OneDev, GitBucket, Codebase, including issues, labels,
+  milestones, releases, wiki. https://docs.codeberg.org/advanced/migrating-repos/
+  (https://forgejo.org/docs/latest/user/ links there.)
+- API: REST with Swagger at `/api/swagger`, spec at `/swagger.v1.json`.
+  https://forgejo.org/docs/latest/user/api-usage/ [corrected] Dependency endpoints confirmed in the
+  Forgejo swagger: `/repos/{owner}/{repo}/issues/{index}/dependencies` and `/blocks`.
+  https://codeberg.org/swagger.v1.json
+  [corrected] Webhooks: Forgejo, Gitea, Gogs raw; Matrix, Slack, Discord, Teams, Telegram, etc.; per repo,
+  with org and system-wide defaults. https://forgejo.org/docs/latest/user/webhooks/
+  Auth: basic (+OTP header), scoped access tokens, OAuth2 tokens, confirmed. Forgejo Actions (CI).
+- Plugins: customization page lists config, custom files, templates, source changes (templates
+  and source changes explicitly unsupported) and does not mention plugins.
+  https://forgejo.org/docs/latest/admin/customization/ UNVERIFIED that docs state "no plugins" plainly.
   Note: nemik already ships via Forgejo (push-is-deploy), so a token & host already exist.
 
 ## 7. MS Project desktop
-- Formats: `.mpp` (binary, proprietary), MSPDI XML (`.xml`, documented schema), `.mpt`, CSV/XLSX via
-  import/export wizard. MSPDI schema: https://learn.microsoft.com/en-us/office-project/xml-data-interchange/introduction-to-project-xml-data
-- API: VBA / COM object model (Windows only). https://learn.microsoft.com/en-us/office/vba/api/overview/project
+- Formats: `.mpp`, MSPDI XML (schema `mspdi_pj12.xsd`, confirmed), `.mpt`, CSV/XLSX via wizard.
+  https://learn.microsoft.com/en-us/office-project/xml-data-interchange/introduction-to-project-xml-data
+  (PredecessorLink not on that intro page; it is an element of the schema reference.)
+- API: VBA object model reference, confirmed. https://learn.microsoft.com/en-us/office/vba/api/overview/project
   No REST (desktop). Webhooks: none.
-- Plugins: COM/VSTO add-ins (C#/VB.NET), VBA macros; Office Web Add-ins (JS) for Project.
-  https://learn.microsoft.com/en-us/office/dev/add-ins/project/project-add-ins
-  Distribution: installers, AppSource, centralized deployment.
+- Plugins: [corrected] Office task pane add-ins (HTML/JS, Common API only, limited for Project;
+  Professional full, Standard limited). https://learn.microsoft.com/en-us/office/dev/add-ins/project/project-add-ins
+  [corrected] Distribution: file share, SharePoint app catalog, Microsoft Marketplace.
+  COM/VSTO add-ins: UNVERIFIED (not on fetched page).
 
 ## 8. Project Online / Planner
-- Project Online: CSOM + REST ProjectData (OData reporting) and ProjectServer REST.
-  https://learn.microsoft.com/en-us/previous-versions/office/project-javascript-api/ ;
-  https://learn.microsoft.com/en-us/office/client-developer/project/project-online-programming-overview
-  (UNVERIFIED URL). Project Online is announced for retirement (Sep 2026) in favour of Planner
-  (UNVERIFIED date; re-check). Auth: Entra ID (Azure AD) OAuth.
-- Planner: Microsoft Graph REST `/planner/tasks` (basic plans; no dependencies in Graph basic tasks).
-  https://learn.microsoft.com/en-us/graph/api/resources/planner-overview
-  Premium plans (ex-Project for the web) live in Dataverse; API = Dataverse Web API / Schedule API.
+- Project Online: CSOM + REST (`/_api/ProjectServer`, archived Project Server 2013 JS/REST reference).
+  https://learn.microsoft.com/en-us/previous-versions/office/project-javascript-api/
+  [corrected] The URL .../client-developer/project/project-online-programming-overview is dead (404);
+  nearest live: https://learn.microsoft.com/en-us/office/client-developer/project/project-conceptual-and-how-to-articles
+  (found by search, not fetched).
+  [corrected] Project Online **retired on September 30, 2026** (confirmed on the MS Learn add-ins page
+  above); as of this verification it is no longer a target. ProjectData OData is also removed in
+  Project Server Subscription Edition.
+- Planner: Microsoft Graph Planner API covers basic plans only; premium plans/tasks are not on Graph
+  (confirmed). https://learn.microsoft.com/en-us/graph/api/resources/planner-overview
+  Premium plans (ex-Project for the web) live in Dataverse; Schedule API manages scheduling entities
+  incl. `msdyn_projecttaskdependency`; only Project-licensed users, not application users.
   https://learn.microsoft.com/en-us/dynamics365/project-operations/project-management/schedule-api-preview
-  (UNVERIFIED applicability to Planner premium). Webhooks: Graph change notifications do NOT cover
-  Planner tasks (UNVERIFIED); Dataverse has webhooks/plugins. Auth: Entra ID OAuth2, app permissions.
-- Plugins: Dataverse plug-ins (C# .NET, registered on Dataverse events) for premium; Teams/Office
-  add-ins. https://learn.microsoft.com/en-us/power-apps/developer/data-platform/plug-ins
+  (Applies To: Project Operations; UNVERIFIED applicability to Planner premium.)
+  [corrected, cleared] Graph change notifications do not list Planner tasks as a supported resource.
+  https://learn.microsoft.com/en-us/graph/change-notifications-overview Auth: Entra ID OAuth2.
+- Plugins: Dataverse plug-ins (.NET Framework assembly, IPlugin, registered on event-pipeline steps,
+  sync or async), confirmed. https://learn.microsoft.com/en-us/power-apps/developer/data-platform/plug-ins
   Basic Planner: no plugin model.
 
 ## Ranking: cheapest entry for nemik (1 = cheapest)
 
 nemik is read-only over queues and dependency-first, so a one-way export is always the floor.
+Verification did not change any order; reasoning text updated where facts moved (marked).
 
 | tool | order | reasoning |
 |---|---|---|
-| GanttProject | a > c > b | `.gan`/MSPDI export is one file writer; no API exists. |
-| ProjectLibre | a > (b,c absent) | MSPDI export covers it via MPXJ-compatible XML; nothing else to hook. |
+| GanttProject | a > c > b | MSPDI import (or `.gan`) is one file writer; no API exists. |
+| ProjectLibre | a > (b,c absent) | MSPDI (via MPXJ-compatible XML) covers it; nothing else to hook. |
 | OpenProject | b > a > c | REST v3 has typed relations (blocks/precedes) mapping `blocked_on` 1:1; plugin needs self-host Rails. |
-| Jira Cloud | b > a > c | REST issue links carry dependencies; CSV import loses links; Forge is a separate app lifecycle. |
-| GitHub | b > c > a | GraphQL/REST with issue dependencies + sub-issues = umbrella; no file import exists. |
-| Forgejo | b > (a,c absent) | already-deployed host and token; Gitea-style dependency endpoints map edges directly. |
-| MS Project desktop | a > c > b | MSPDI XML is a public schema with PredecessorLink; COM is Windows-only. |
-| Project Online/Planner | a > b > c | MSPDI via desktop import is cheapest; Graph Planner lacks dependencies, Online is retiring. |
+| Jira Cloud | b > a > c | REST issue links carry dependencies; CSV import carries only parent/child, not links; Forge is a separate app lifecycle. |
+| GitHub | b > c > a | REST (now incl. Projects) / GraphQL with issue dependencies + sub-issues = umbrella; no file import exists. |
+| Forgejo | b > (a,c absent) | already-deployed host and token; dependency endpoints confirmed in swagger map edges directly. |
+| MS Project desktop | a > c > b | MSPDI XML is a public schema with PredecessorLink; VBA/COM is Windows-only. |
+| Project Online/Planner | a > b > c | MSPDI via desktop import is cheapest; Graph Planner covers basic plans only; [corrected] Online retired 2026-09-30. |
 
 Common structure under the either/or: every "a" and "b" is the same morphism, card graph ->
 (task, predecessor-link) — MSPDI `PredecessorLink`, OpenProject `relation`, Jira `issueLink`,
@@ -127,7 +172,7 @@ and any write-back path conflicts with "nemik never writes a queue" — keep imp
 - C2: Define the tool-neutral projection (card -> task, edge -> predecessor, umbrella -> summary) once, with a decode-back test so every sink is checked against it.
 - C3: `nemik-export --gan` only if C1's MSPDI round-trip through GanttProject proves lossy.
 - C4: A one-way Forgejo mirror connector: each card -> issue, `blocked_on` -> issue dependency, idempotent by card id label.
-- C5: Same connector shape for GitHub (GraphQL Projects v2 + sub-issues for umbrellas), reusing C4's projection.
+- C5: Same connector shape for GitHub (REST issue dependencies + sub-issues for umbrellas; Projects v2 via REST or GraphQL), reusing C4's projection.
 - C6: OpenProject REST v3 mirror via `relations` (blocks/follows), gated on someone actually running OpenProject.
 - C7: Jira Cloud mirror via REST issue links, deferred; record as residue unless an operator asks.
-- C8: Verification pass: fetch each URL in this survey and clear or confirm every UNVERIFIED mark before any of C1-C7 starts.
+- C8: Verification pass — done 2026-10-12 (this file); 16 UNVERIFIED marks remain, none on the C1/C4/C5 path except PredecessorLink-by-page.
