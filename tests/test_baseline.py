@@ -46,6 +46,31 @@ def test_a_planned_card_dropped_since_counts_as_dropped() -> None:
     assert v["dropped"] == ["W1"] and v["closed"] == [] and v["still_open"] == []
 
 
+def test_shape_drift_counts_edges_and_the_planned_cards_retitled_or_rewired() -> None:
+    # nemik:W349: W1 and W2 planned; W1 gains an edge to the new W3, W2 is retitled.
+    from nemik.history import shape_drift
+
+    base = {
+        "waypoints": [
+            {"symbol": "W1", "status": "ready", "title": "one", "enables": []},
+            {"symbol": "W2", "status": "ready", "title": "two", "enables": []},
+        ],
+        "residue": [],
+    }
+    now = {
+        "waypoints": [
+            {"symbol": "W1", "status": "ready", "title": "one", "enables": ["W3"]},
+            {"symbol": "W2", "status": "ready", "title": "two, narrower"},
+            {"symbol": "W3", "status": "ready", "title": "three"},
+        ],
+        "residue": [],
+    }
+    sh = shape_drift(base, now)
+    assert (sh["edges_added"], sh["edges_removed"]) == (1, 0)
+    assert sh["retitled"] == ["W2"] and sh["rewired"] == ["W1"]
+    assert sh["touched_share"] == 1.0
+
+
 def test_the_baseline_is_given_or_declared_in_the_repo(tmp_path: Path) -> None:
     assert baseline_spec(tmp_path, None) is None
     (tmp_path / ".claude").mkdir()

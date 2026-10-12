@@ -299,6 +299,38 @@ def variance(base: dict, now: dict) -> dict:
     }
 
 
+def shape_drift(base: dict, now: dict) -> dict:
+    """nemik:W349: how far the graph's SHAPE moved since a baseline, beside `variance`'s counts.
+    Edges added and removed (enables and waits), the planned cards (open at the baseline) whose
+    title changed (re-scoped) or whose own edges changed (re-wired), and the share of planned cards
+    touched either way."""
+    planned = {
+        s
+        for s, st in _status(base).items()
+        if st not in ("done", "dropped") and s not in _dropped(base)
+    }
+    old_e, new_e = _edges(base), _edges(now)
+    titles = {w["symbol"]: w.get("title", "") for w in base.get("waypoints", [])}
+    retitled = sorted(
+        (
+            w["symbol"]
+            for w in now.get("waypoints", [])
+            if w["symbol"] in planned and w.get("title", "") != titles.get(w["symbol"])
+        ),
+        key=_number,
+    )
+    changed = old_e ^ new_e
+    rewired = sorted({s for _, s, _ in changed if s in planned}, key=_number)
+    touched = set(retitled) | set(rewired)
+    return {
+        "edges_added": len(new_e - old_e),
+        "edges_removed": len(old_e - new_e),
+        "retitled": retitled,
+        "rewired": rewired,
+        "touched_share": round(len(touched) / len(planned), 3) if planned else None,
+    }
+
+
 def render(repo: str, d: Diff) -> str:
     lines = [
         f"{repo}: {len(d.minted)} minted, {len(d.closed)} closed, {len(d.dropped)} dropped"
@@ -401,8 +433,12 @@ def _baseline(args: argparse.Namespace, names: list[str], dirs: dict[str, Path])
         if spec is None:
             out[name] = {"baseline": None}
             continue
-        v = variance(queue_at(repo, resolve(repo, spec)), queue_at(repo, "HEAD"))
-        out[name] = {"baseline": spec, **v}
+        base, now = queue_at(repo, resolve(repo, spec)), queue_at(repo, "HEAD")
+        out[name] = {
+            "baseline": spec,
+            **variance(base, now),
+            "shape": shape_drift(base, now),
+        }
     if args.json:
         print(json.dumps(out, indent=1))
         return 0
@@ -415,6 +451,12 @@ def _baseline(args: argparse.Namespace, names: list[str], dirs: dict[str, Path])
             f"{name} since {v['baseline']}: planned {v['planned']}, closed {len(v['closed'])}, "
             f"dropped {len(v['dropped'])}, still open {len(v['still_open'])} "
             f"(done share {v['done_share']}); added since: {added or 'none'}"
+        )
+        sh = v["shape"]
+        print(
+            f"  shape: +{sh['edges_added']}/-{sh['edges_removed']} edges, "
+            f"{len(sh['retitled'])} planned retitled, {len(sh['rewired'])} re-wired "
+            f"(touched share {sh['touched_share']})"
         )
     return 0
 
