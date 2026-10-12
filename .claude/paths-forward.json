@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 195
+      "ticks_blocked": 196
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 15,
+      "ticks_blocked": 16,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 47,
+      "ticks_blocked": 48,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 44,
+      "ticks_blocked": 45,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 44,
+      "ticks_blocked": 45,
       "completed": null,
       "weight": 1
     },
@@ -5382,7 +5382,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 21,
+      "ticks_blocked": 22,
       "completed": null
     },
     {
@@ -5403,7 +5403,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 36,
+      "ticks_blocked": 37,
       "completed": null
     },
     {
@@ -5462,7 +5462,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 36,
+      "ticks_blocked": 37,
       "completed": null
     },
     {
@@ -5483,7 +5483,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 36,
+      "ticks_blocked": 37,
       "completed": null
     },
     {
@@ -5523,7 +5523,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 36,
+      "ticks_blocked": 37,
       "completed": null
     },
     {
@@ -5582,7 +5582,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 36,
+      "ticks_blocked": 37,
       "completed": null
     },
     {
@@ -5622,7 +5622,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 36,
+      "ticks_blocked": 37,
       "completed": null
     },
     {
@@ -5643,7 +5643,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 36,
+      "ticks_blocked": 37,
       "completed": null
     },
     {
@@ -5683,7 +5683,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 36,
+      "ticks_blocked": 37,
       "completed": null
     },
     {
@@ -6152,7 +6152,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T20:11:31Z",
-      "ticks_blocked": 26,
+      "ticks_blocked": 27,
       "completed": null
     },
     {
@@ -6215,7 +6215,7 @@
     {
       "symbol": "W327",
       "title": "Arrival pacing: a declared limit on new open cards per repo and per day, reported against actual",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W323"
       ],
@@ -6227,9 +6227,10 @@
       "issued_at": "2026-10-11T20:00:41Z",
       "minted_during": "interrupt",
       "caused_by": "W323",
-      "last_worked": null,
+      "last_worked": "2026-10-12T11:16:59Z",
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 5,
+      "completed": null
     },
     {
       "symbol": "W328",
@@ -6449,7 +6450,7 @@
       "caused_by": "W337",
       "last_worked": "2026-10-11T21:18:11Z",
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 3
     },
     {
       "symbol": "W339",
@@ -6472,7 +6473,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 24,
+      "ticks_blocked": 25,
       "weight": 1,
       "completed": null
     },
@@ -6519,7 +6520,7 @@
       "caused_by": "paperkit:W320",
       "last_worked": "2026-10-11T21:18:33Z",
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 3
     },
     {
       "symbol": "W342",
@@ -6558,7 +6559,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 4
     },
     {
       "symbol": "W344",
@@ -6622,7 +6623,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
@@ -6877,24 +6878,22 @@
     {
       "symbol": "W358",
       "title": "Positioning document: how to understand nemik if you come from X",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [
         "docs",
         "positioning"
       ],
-      "blocked_on": [
-        "W363"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "docs/positioning.md, one section per background, each in two parts: (1) concepts, that world's terms mapped onto nemik's, and what nemik deliberately does differently; (2) workflow translation, a table of 'you used to do X in that tool; in nemik you run Y', each Y a real command or a workflow from data/workflows.toml. Mechanize: a test that every command and workflow the doc names exists (as tests/test_workflows.py does for SKILL.md), so the doc cannot drift. Children W359-W363; draw on the doc trawls (W312, W346).",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: all five sections landed (W359 MS Project, W360 issue trackers, W361 kanban and flow, W362 multi-agent, W363 schedulers), each with concepts, deliberate differences and a workflow-translation table; tests/test_positioning.py keeps every named command, flag and workflow real and is a declared-input test, so a doc edit re-runs it.",
       "issued_at": "2026-10-12T01:29:24Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-12T10:42:38Z",
+      "last_worked": "2026-10-12T11:16:57Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261012T111657Z"
     },
     {
       "symbol": "W359",
@@ -6991,7 +6990,7 @@
     {
       "symbol": "W363",
       "title": "Positioning: from schedulers and traffic control (Linux tc, block I/O schedulers, ERP MRP)",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W358"
       ],
@@ -7001,15 +7000,15 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "queue disciplines to rank composition, fairness and starvation to nemik-starved, token bucket to arrival pacing (W327), MRP explode/net to the enables cone; where the analogy breaks (cards are not packets: they change the graph)",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: docs/positioning.md schedulers, tc and MRP section: concepts (qdisc, strict priority, WFQ, starvation and aging, token bucket as carded W327, backpressure, run queue, MRP explosion and netting), where the analogy breaks (cards change the graph, attention is the scarce resource, fairness reported not enforced), workflow translation; test_positioning green.",
       "issued_at": "2026-10-12T01:29:45Z",
       "minted_during": "interrupt",
       "caused_by": "W358",
-      "last_worked": "2026-10-12T10:42:39Z",
+      "last_worked": "2026-10-12T11:16:55Z",
       "ticks_blocked": 0,
       "weight": 3,
-      "completed": null
+      "completed": "20261012T111655Z"
     },
     {
       "symbol": "W364",
@@ -7035,7 +7034,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -7232,7 +7231,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 7
+      "weight": 6
     },
     {
       "symbol": "W374",

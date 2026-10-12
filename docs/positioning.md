@@ -197,3 +197,45 @@ What nemik does differently on purpose:
 | replay what the agents did | the ledger, and `nemik-history REPO` between any two revisions |
 
 These moves are modelled as `workflow:peer-block`, `workflow:operator-ask` and `workflow:letter-as-evidence`.
+
+## From schedulers and traffic control (Linux tc, I/O schedulers, ERP and MRP)
+
+### Concepts
+
+| you know | in nemik |
+|---|---|
+| a queueing discipline (qdisc) | the ranking's declared composition (`[order]` in `rank-weights.toml`): band first, then flow salience |
+| strict priority | the priority band; an operator ask is deliberately NOT a strict tier but demand inside the flow, with a declared weight |
+| weighted fair queueing | flow salience: a shared prerequisite's demand is split among the cards that need it, not counted in full by each |
+| starvation, aging | `nemik-starved` reports ready cards overtaken past a declared age; there is no aging term in the order, by choice |
+| a token bucket, admission control | arrival pacing, carded as W327 and not built: a declared limit on new cards per repo per day, reported against actual |
+| backpressure | the operator-saturation warning, and the cross-repo SLA warning on a blocker's card |
+| one runnable task per CPU | one `working` card per repo |
+| MRP explosion | the `enables` cone of a card: everything it unblocks, transitively |
+| MRP netting, what is already on hand | done cards drop out of the open graph; their edges show as satisfied |
+| lead-time offsetting | none: nemik does not schedule in time (see the MS Project section) |
+
+Where the analogy breaks, on purpose:
+
+- **Cards are not packets.** Working a card changes the graph: it closes edges, mints new cards, re-wires
+  others. A scheduler that assumed a fixed job set would be scheduling a graph that no longer exists, so
+  the ranking is re-derived from the current graph every tick rather than held as a schedule.
+- **The scarce resource is attention, not cycles.** The operator is the one shared server, and its
+  service time is a human decision. nemik measures its queue and warns on its saturation, but does not
+  try to schedule it.
+- **Fairness is reported, not enforced.** Starvation, saturation and SLA breaches are findings someone acts
+  on, not preemption. A deliberate ruling (dormancy is the operator's choice) is never overridden by a
+  fairness rule.
+
+### Workflow translation
+
+| you used to | in nemik |
+|---|---|
+| read `tc -s qdisc` for drops and backlog | `nemik-history REPO --weekly`: opened versus closed, blocked share, implied wait |
+| inspect the run queue | `nemik-rank REPO` (one repo) or `nemik-rank --all` (the fleet) |
+| find the starved flows | `nemik-starved` |
+| find the saturated link | `nemik-check`'s operator-saturation and cross-repo SLA warnings, and `nemik-metrics`' repo health |
+| explode a bill of materials | `nemik-critical --card repo:W<n>`: that card's cone and its longest chain |
+| check net requirements after a receipt | `nemik-critical --assume-done repo:W<n>`, `nemik-rank REPO --assume-done repo:W<n>` |
+
+The tick that runs this pull loop in every repo is `workflow:rank-sync`.
