@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 379,
+  "counter": 380,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 197
+      "ticks_blocked": 198
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 49,
+      "ticks_blocked": 50,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 46,
+      "ticks_blocked": 47,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 46,
+      "ticks_blocked": 47,
       "completed": null,
       "weight": 1
     },
@@ -5382,7 +5382,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 23,
+      "ticks_blocked": 24,
       "completed": null
     },
     {
@@ -5403,7 +5403,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 38,
+      "ticks_blocked": 39,
       "completed": null
     },
     {
@@ -5462,7 +5462,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 38,
+      "ticks_blocked": 39,
       "completed": null
     },
     {
@@ -5483,7 +5483,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 38,
+      "ticks_blocked": 39,
       "completed": null
     },
     {
@@ -5523,7 +5523,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 38,
+      "ticks_blocked": 39,
       "completed": null
     },
     {
@@ -5582,7 +5582,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 38,
+      "ticks_blocked": 39,
       "completed": null
     },
     {
@@ -5622,7 +5622,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 38,
+      "ticks_blocked": 39,
       "completed": null
     },
     {
@@ -5643,7 +5643,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 38,
+      "ticks_blocked": 39,
       "completed": null
     },
     {
@@ -5683,7 +5683,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 38,
+      "ticks_blocked": 39,
       "completed": null
     },
     {
@@ -6471,7 +6471,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 26,
+      "ticks_blocked": 27,
       "weight": 1,
       "completed": null
     },
@@ -6501,7 +6501,7 @@
     {
       "symbol": "W341",
       "title": "An a11y adversary for the view, as paperkit has for its VPAT",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W337"
       ],
@@ -6511,15 +6511,15 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "adapt paperkit .claude/agents/a11y-adversary.md: a read-only agent that tries to refute each a11y claim the checks make; keyboard and screen-reader paths included",
-      "evidence": "2026-10-11: paperkit:W320 answer: a11y-adversary is a copy-pattern, no shared form. Keep the method (refute-by-default; reason from the artifact, not the docstring; attack order false entailment, standards accuracy, overclaim, drift; REFUTED/SURVIVED/UNCERTAIN with file:line; read-only). Re-point at nemik's own claim registry (the checks of W338-W340). Candidates for a web page: use_of_colour.py, ruler.py, linkalt.py; contrast 1.4.3/1.4.11 has no check anywhere, so W338 writes the first. Not portable: the PDF/UA and veraPDF checks. | 2026-10-11: paperkit:W321 (shared adversary agent taking a claim registry as input) is carded, design-first. Not blocking: nemik copies the method now and adopts the shared agent when it exists.",
+      "next_bounded_step": null,
+      "evidence": "2026-10-11: paperkit:W320 answer: a11y-adversary is a copy-pattern, no shared form. Keep the method (refute-by-default; reason from the artifact, not the docstring; attack order false entailment, standards accuracy, overclaim, drift; REFUTED/SURVIVED/UNCERTAIN with file:line; read-only). Re-point at nemik's own claim registry (the checks of W338-W340). Candidates for a web page: use_of_colour.py, ruler.py, linkalt.py; contrast 1.4.3/1.4.11 has no check anywhere, so W338 writes the first. Not portable: the PDF/UA and veraPDF checks. | 2026-10-11: paperkit:W321 (shared adversary agent taking a claim registry as input) is carded, design-first. Not blocking: nemik copies the method now and adopts the shared agent when it exists. | 2026-10-12: .claude/agents/a11y-adversary.md: paperkit's refute-by-default method (paperkit:W320) re-pointed at nemik's own claim registry: C1 halo dash cues, C2 ghost dashed border, C3 chip glyph, C4 legibility floors (each with its test), C5 state not by colour alone and C6 label contrast (unproven, named as findings). Shared form remains paperkit:W321. First run is W380.",
       "issued_at": "2026-10-11T21:16:34Z",
       "minted_during": "tick",
       "caused_by": "paperkit:W320",
-      "last_worked": "2026-10-12T11:44:53Z",
+      "last_worked": "2026-10-12T12:12:27Z",
       "ticks_blocked": 0,
       "weight": 3,
-      "completed": null
+      "completed": "20261012T121227Z"
     },
     {
       "symbol": "W342",
@@ -6622,7 +6622,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 13,
+      "ticks_blocked": 14,
       "completed": null
     },
     {
@@ -7033,7 +7033,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "completed": null
     },
     {
@@ -7360,6 +7360,28 @@
       "last_worked": "2026-10-12T08:42:12Z",
       "ticks_blocked": 0,
       "completed": "20261012T084212Z"
+    },
+    {
+      "symbol": "W380",
+      "title": "Run the a11y adversary once over the view's claims and triage what it refutes",
+      "status": "working",
+      "enables": [
+        "W337"
+      ],
+      "touches": [
+        "a11y",
+        "web"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "spawn .claude/agents/a11y-adversary.md read-only; verify each REFUTED against the code before acting; a refuted claim becomes a fix card, an unproven one (C5 state not by colour alone, C6 label contrast) a test card",
+      "evidence": "",
+      "issued_at": "2026-10-12T12:12:26Z",
+      "minted_during": "tick",
+      "caused_by": "W341",
+      "last_worked": "2026-10-12T12:12:28Z",
+      "ticks_blocked": 0,
+      "completed": null
     }
   ],
   "residue": [

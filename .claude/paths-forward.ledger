@@ -606,3 +606,5 @@
 2026-10-12T11:12:00Z  tick  W47  escalated escalate  "16 ticks on the dormant-repo watch (gabion W11, W14; sre-troubleshooting): both dormant by the operator's choice; reported once, nudging stops"
 2026-10-12T11:17:01Z  tick  W363 advanced  unblock   "positioning: the schedulers section; W358 umbrella closed"
 2026-10-12T11:45:03Z  tick  W327 advanced  unblock   "nemik-pacing, a token bucket over new cards; W323 umbrella closed"
+2026-10-12T12:12:26Z  tick  W380 minted    -         "Run the a11y adversary once over the view's claims and triage what it refutes"  evidence=W341
+2026-10-12T12:12:36Z  tick  W341 advanced  unblock   "a11y adversary agent with nemik's claim registry; first run carded as W380"
