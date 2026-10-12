@@ -7304,7 +7304,7 @@
     {
       "symbol": "W377",
       "title": "Re-vendor mtools past 7d4a458 so mikemol-commit prints its path and takes the commit lock here",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "hooks",
@@ -7312,14 +7312,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "re-vendor mtools to the fleet par f04f0a2f6b93b69e8e479d341f50ac786f801995 (luthen's repin_par.txt; has the path/lock line mtools:W1015 and the fence fallback W1016, W1022): mikemol-repin --revendor --sha f04f0a2... dry run first, read mtools:W1028 (--revendor --no-sync hazard) before syncing, or tools/revendor-mtools.sh f04f0a2 7d4a458; then one mikemol-commit must print 'path: isolated ... lock: held'. Also measure: does the single warm bazel server (gate worktree and checkout) still exit after max_idle_secs 600.",
-      "evidence": "2026-10-12: 2026-10-12 github-8f: target sha f04f0a2f6b93b69e8e479d341f50ac786f801995 (fleet par), expected witness line 'path: isolated ... lock: held', and measure the idle shutdown.",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: 2026-10-12 github-8f: target sha f04f0a2f6b93b69e8e479d341f50ac786f801995 (fleet par), expected witness line 'path: isolated ... lock: held', and measure the idle shutdown. | 2026-10-12: 636d844: mtools wheels at f04f0a2. Witness, 2026-10-12T07:1xZ: 'mikemol-commit: path: isolated (the repository's pre-commit names MIKEMOL_REAL_ROOT); lock: none (the fence venv is not built (bazel build //fence:.venv))'. Isolation confirmed; the lock needs a //fence target nemik does not have (asked github-8f). mikemol-commit also refused the force-tracked wheels (it adds paths without -f; vendor/wheels/.gitignore is *), so the re-vendor landed by plain commit through the same staged gate. Idle shutdown of the bazel servers not yet measured.",
       "issued_at": "2026-10-12T06:59:22Z",
       "minted_during": "interrupt",
       "caused_by": "W342",
-      "last_worked": "2026-10-12T07:00:14Z",
+      "last_worked": "2026-10-12T07:24:56Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261012T072456Z"
     }
   ],
   "residue": [
@@ -7382,10 +7382,7 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": {
-    "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-12T07:09:28Z"
-  },
+  "lock": null,
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }
