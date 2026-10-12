@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 405,
+  "counter": 410,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 211
+      "ticks_blocked": 212
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 31,
+      "ticks_blocked": 32,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 33,
+      "ticks_blocked": 34,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T13:54:28Z",
-      "ticks_blocked": 63,
+      "ticks_blocked": 64,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 60,
+      "ticks_blocked": 61,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 37,
+      "ticks_blocked": 38,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 52,
+      "ticks_blocked": 53,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 52,
+      "ticks_blocked": 53,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 52,
+      "ticks_blocked": 53,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 52,
+      "ticks_blocked": 53,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 52,
+      "ticks_blocked": 53,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 52,
+      "ticks_blocked": 53,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 52,
+      "ticks_blocked": 53,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 52,
+      "ticks_blocked": 53,
       "completed": null
     },
     {
@@ -6446,7 +6446,7 @@
       "caused_by": "W337",
       "last_worked": "2026-10-11T21:18:11Z",
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 7
     },
     {
       "symbol": "W339",
@@ -6469,7 +6469,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 40,
+      "ticks_blocked": 41,
       "weight": 1,
       "completed": null
     },
@@ -6556,7 +6556,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 7
+      "weight": 4
     },
     {
       "symbol": "W344",
@@ -6620,7 +6620,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 28,
       "completed": null
     },
     {
@@ -6758,7 +6758,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 6
     },
     {
       "symbol": "W353",
@@ -6780,7 +6780,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 6
     },
     {
       "symbol": "W354",
@@ -6802,7 +6802,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 6
     },
     {
       "symbol": "W355",
@@ -6824,7 +6824,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 6
     },
     {
       "symbol": "W356",
@@ -7031,7 +7031,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 33,
+      "ticks_blocked": 34,
       "completed": null
     },
     {
@@ -7053,7 +7053,7 @@
       "caused_by": "W364",
       "last_worked": "2026-10-12T01:34:53Z",
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 5
     },
     {
       "symbol": "W366",
@@ -7074,7 +7074,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 5
     },
     {
       "symbol": "W367",
@@ -7095,7 +7095,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 5
     },
     {
       "symbol": "W368",
@@ -7117,7 +7117,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 5
     },
     {
       "symbol": "W369",
@@ -7205,12 +7205,13 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 9
     },
     {
       "symbol": "W373",
       "title": "Lateral view: IBM Rational Jazz (Team Concert), where nemik's OSLC bones came from",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W358",
         "W372"
@@ -7221,14 +7222,15 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "confirm the lineage from primary sources (OSLC began at IBM Rational around the Jazz platform and Rational Team Concert, later moved to OASIS); then study what Jazz did with OSLC (linked lifecycle data, delegated UIs and previews, tracked resource sets, cross-tool queries) against what nemik does, what made it heavy in the market, and which sound parts nemik should take; also check whether OSLC-speaking tools today (IBM ELM and others) are interop targets for the W371 contract",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: Research (2026-10-12, cited): OSLC announced June 2008 at IBM's Rational Software Conference; open-services.net and 1.0 workgroups 2009; Core V2 2010-11; Eclipse Lyo 2011; parts of Core V2 seeded W3C LDP in 2012; contributed to OASIS 2013, Open Project 2019, CM 3.0 an OASIS Standard 2021. Correction: OSLC was the open integration layer, not the platform; Jazz/RTC was IBM's implementation (RTC renamed EWM at 7.0, the portfolio renamed ELM 2019). The 'too heavy' critique is only partly sourced (SCM CLI complexity, workflow definition, RDF/REST adoption cost, vendor chicken-and-egg); no analyst source on weight or licensing found. Adopt, ranked: TRS feed (W406), resource preview (W407), service-provider catalog (W408); OSLC Query subset and delegated dialogs low priority. Open research: Part 3 and Query spec text, Jazz/RTC GA dates, independent critiques, Polarion/Windchill native endpoints.",
       "issued_at": "2026-10-12T01:38:13Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": null,
+      "last_worked": "2026-10-12T18:44:16Z",
       "ticks_blocked": 0,
-      "weight": 8
+      "weight": 8,
+      "completed": "20261012T184416Z"
     },
     {
       "symbol": "W374",
@@ -7515,7 +7517,7 @@
       "caused_by": "W380",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 7
     },
     {
       "symbol": "W387",
@@ -7579,7 +7581,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W338",
       "last_worked": "2026-10-12T13:24:19Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
@@ -7602,7 +7604,7 @@
       "caused_by": "W383",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 7
     },
     {
       "symbol": "W391",
@@ -7627,7 +7629,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -7651,7 +7653,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -7677,7 +7679,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:01:54Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "weight": 3,
       "completed": null
     },
@@ -7703,7 +7705,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T18:43:02Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -7727,7 +7729,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -7839,12 +7841,12 @@
       "caused_by": "W393",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 3
     },
     {
       "symbol": "W401",
       "title": "Recompute derived numbers only where a change reaches, and write snapshots per piece",
-      "status": "working",
+      "status": "blocked",
       "enables": [
         "W393"
       ],
@@ -7852,14 +7854,17 @@
         "performance",
         "web"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "remaining: per-piece snapshot files (per repo plus the fleet-level ones) so the page refetches only what changed, and the non-solve derived work (graph scans, health, critical) per changed repo; the solve half is done. The per-piece snapshot belongs with W394's static serving.",
+      "blocked_on": [
+        "W409",
+        "W410"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Umbrella: lands when W409 and W410 land; the solve cache half landed in 5803d60",
       "evidence": "2026-10-12: 2026-10-12: flow.solve is cached across rebuilds by its cone-restricted inputs (demand, the prerequisites inside the sources' cones, the ready cards among them, weights): a change outside a source's cones leaves its key unchanged. Exact, since equal inputs give the equal answer. Measured in one process: cold document build 39.7 s, after a single-card edit 12.7 s (-68%). tests/test_flow_cache.py (hit on an outside change, miss on an inside one); the flow, salience and identical-document tests green.",
       "issued_at": "2026-10-12T16:42:26Z",
       "minted_during": "tick",
       "caused_by": "W393",
-      "last_worked": "2026-10-12T18:43:07Z",
+      "last_worked": "2026-10-12T19:13:41Z",
       "ticks_blocked": 0,
       "completed": null
     },
@@ -7882,7 +7887,7 @@
       "caused_by": "W393",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 3
     },
     {
       "symbol": "W403",
@@ -7947,6 +7952,107 @@
       "ticks_blocked": 0,
       "weight": 1,
       "completed": "20261012T175539Z"
+    },
+    {
+      "symbol": "W406",
+      "title": "Publish each repo's ledger as an OSLC Tracked Resource Set: a base snapshot plus an ordered change log",
+      "status": "ready",
+      "enables": [
+        "W393"
+      ],
+      "touches": [
+        "interop",
+        "performance"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "from W373's study of Jazz: TRS (trs:Base plus a trs:ChangeLog of Creation, Modification, Deletion events with trs:order) is the incremental feed OSLC tools already consume (IBM LQE ingests TRS sources). nemik's vocabulary already maps ledger lines to trs:Modification/Creation (docs/specs-survey.md); publish them per repo so a reader syncs by cursor, and use the same change events as the invalidation set for W401's per-piece snapshots",
+      "evidence": "",
+      "issued_at": "2026-10-12T18:44:13Z",
+      "minted_during": "interrupt",
+      "caused_by": "W373",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 3
+    },
+    {
+      "symbol": "W407",
+      "title": "A compact OSLC resource preview per card IRI, used as the hover on any cited card",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "interop",
+        "web"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "from W373: OSLC Core 3.0 Part 3 (resource preview) defines a small document per resource for hover rendering. Serve one per waypoint IRI in the snapshot (title, state, blocked_on, rank) and use it for the view's hover on a cite and for peers rendering nemik cites; first fetch Part 3's text to match its shape",
+      "evidence": "",
+      "issued_at": "2026-10-12T18:44:14Z",
+      "minted_during": "interrupt",
+      "caused_by": "W373",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 1
+    },
+    {
+      "symbol": "W408",
+      "title": "An OSLC service-provider catalog per repo as the discovery root of the connector contract",
+      "status": "ready",
+      "enables": [
+        "W371"
+      ],
+      "touches": [
+        "interop"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "from W373: a missing service-provider catalog is a named integration failure (a Polarion integrator hit it). Publish one catalog per repo listing its CM resources, TRS feed and previews, and make it the root W371's connectors discover; test against Eclipse Lyo's reference CM adapter. Interop targets found: IBM ELM (DOORS Next, LQE via TRS), Jira via SodiusWillert's OSLC Connect, Polarion and Windchill (details unverified), Lyo; GitLab and Codebeamer have no OSLC provider",
+      "evidence": "",
+      "issued_at": "2026-10-12T18:44:15Z",
+      "minted_during": "interrupt",
+      "caused_by": "W373",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 8
+    },
+    {
+      "symbol": "W409",
+      "title": "Snapshot per piece: write one static file per repo plus the fleet-level pieces, each with a content hash in an index, so the page refetches only what changed",
+      "status": "ready",
+      "enables": [
+        "W401"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-12T19:13:31Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 2
+    },
+    {
+      "symbol": "W410",
+      "title": "Memoize the per-repo non-solve derived work (graph scans, health, critical) by the repo's own triples, so a rebuild recomputes only the repos a change reaches",
+      "status": "ready",
+      "enables": [
+        "W401"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-12T19:13:33Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 2
     }
   ],
   "residue": [
@@ -8009,7 +8115,10 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-10-12T19:12:33Z"
+  },
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }

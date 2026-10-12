@@ -656,3 +656,8 @@
 2026-10-12T18:26:02Z  tick  W392 nudged    nudge     "NUDGE luthen-observability:W878: in progress there; no message"
 2026-10-12T18:29:14Z  tick  W401 advanced  unblock   "flow solves cached across rebuilds by cone-restricted inputs: one edit's rebuild 39.7 -> 12.7 s"
 2026-10-12T18:43:09Z  tick  W396 advanced  unblock   "server inventory: static_data covers what the page reads; gaps are liveness input, graph.ttl, /metrics' home; W373 research dispatched"
+2026-10-12T18:44:13Z  interrupt W406 minted    -         "Publish each repo's ledger as an OSLC Tracked Resource Set: a base snapshot plus an ordered change log"  evidence=W373
+2026-10-12T18:44:14Z  interrupt W407 minted    -         "A compact OSLC resource preview per card IRI, used as the hover on any cited card"  evidence=W373
+2026-10-12T18:44:15Z  interrupt W408 minted    -         "An OSLC service-provider catalog per repo as the discovery root of the connector contract"  evidence=W373
+2026-10-12T19:13:31Z  tick  W409 minted    -         "Snapshot per piece: write one static file per repo plus the fleet-level pieces, each with a content hash in an index, so the page refetches only what changed"
+2026-10-12T19:13:33Z  tick  W410 minted    -         "Memoize the per-repo non-solve derived work (graph scans, health, critical) by the repo's own triples, so a rebuild recomputes only the repos a change reaches"
