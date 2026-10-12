@@ -24,9 +24,9 @@ from pyshacl import validate
 from rdflib import Graph, Literal
 from rdflib.namespace import SH
 
-from nemik.adapter import BASE, NEMIK, bind, queue_graph, workstream_uri
+from nemik.adapter import BASE, NEMIK, OSLC_CM, bind, queue_graph, workstream_uri
 from nemik.adoption import adoption
-from nemik.blocks import annotate
+from nemik.blocks import annotate, ref
 
 QUEUE, LEDGER = "paths-forward.json", "paths-forward.ledger"
 
@@ -178,6 +178,29 @@ def survey(root: Path) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
         oldest = next((s[:10] for s in stamps if s), "unknown")
         found = f"{len(refs)} needs-you operator asks are open (cap {cap}, oldest issued {oldest}): {remedy}"
         by_repo.setdefault(orepo, []).append(("Warning", "--", found))
+    # nemik:W356: an inter-workstream SLA. A card blocked on another repo's open card for longer than
+    # the declared number of loop ticks is a Warning on the BLOCKER's card, since that repo can act.
+    sla = int(tomllib.loads(weights_toml).get("sla", {}).get("cross_repo_ticks", 48))
+    for waiter, _, target in merged.triples((None, NEMIK.waitsFor, None)):
+        wcite, tcite = ref(waiter), ref(target)
+        wrepo, trepo = wcite.partition(":")[0], tcite.partition(":")[0]
+        if wrepo == trepo or (target, OSLC_CM.state, None) not in merged:
+            continue
+        if (target, OSLC_CM.state, NEMIK.Done) in merged:
+            continue
+        if (waiter, OSLC_CM.state, NEMIK.Blocked) not in merged:
+            continue
+        # a blocker that itself waits on the operator cannot act; W348 counts that load instead
+        if str(merged.value(target, NEMIK.blockedKind) or "") == "human":
+            continue
+        ticks = int(str(merged.value(waiter, NEMIK.ticksBlocked) or 0))
+        if ticks <= sla:
+            continue
+        late = (
+            f"has kept {wcite} waiting {ticks} loop ticks (SLA {sla}): answer it, re-scope "
+            f"it, or tell {wrepo} why it waits"
+        )
+        by_repo.setdefault(trepo, []).append(("Warning", tcite.partition(":")[2], late))
     # nemik:W279: a letter a waypoint cites as evidence must exist (moved to inbox/archive counts).
     # The export layout carries no inbox, so a root without any inbox directory is not asked.
     if any(root.glob("*/inbox")):

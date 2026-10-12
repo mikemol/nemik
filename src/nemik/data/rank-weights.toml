@@ -111,3 +111,8 @@ asks_owed = [5, 12]
 # that repo's bottleneck). 2026-10-12 fleet: 0-19 per repo; 10 flags the four heaviest.
 [saturation]
 needs_you_per_repo = 10
+
+# nemik:W356: a card blocked on another repo's open card for more than this many loop ticks is a nemik-check
+# Warning on the blocker's card (that repo can act). 48 ticks is a day at the 30-minute cadence.
+[sla]
+cross_repo_ticks = 48
