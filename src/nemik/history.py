@@ -192,10 +192,21 @@ def weekly(snaps: list[Snapshot]) -> list[dict]:
     done_at: dict[str, datetime] = {}
     # nemik:W328: time each card spent in each status over the whole history, for flow efficiency.
     spent = time_in_state(snaps, snaps[-1][0] if snaps else datetime.now(UTC))
+    on_operator: set[str] = set()
     for (year, week), inside in sorted(weeks.items()):
         finished: list[float] = []
         closed_now: list[str] = []
+        # nemik:W357: operator asks, a card entering or leaving blocked_kind human, counted per week.
+        asked, answered = 0, 0
         for at, queue in inside:
+            now_on = {
+                w["symbol"]
+                for w in queue.get("waypoints", [])
+                if w.get("status") == "blocked" and w.get("blocked_kind") == "human"
+            }
+            asked += len(now_on - on_operator)
+            answered += len(on_operator - now_on)
+            on_operator = now_on
             for symbol, status in _status(queue).items():
                 born.setdefault(symbol, at)
                 if status == "done" and symbol not in done_at:
@@ -238,6 +249,13 @@ def weekly(snaps: list[Snapshot]) -> list[dict]:
                 "blocked_share": round(len(blocked) / len(open_cards), 3)
                 if open_cards
                 else 0.0,
+                "operator_asked": asked,
+                "operator_answered": answered,
+                "operator_open": len(on_operator),
+                # Little's law on the operator alone: open asks over the weekly answer rate.
+                "operator_wait_days": round(len(on_operator) / answered * 7, 1)
+                if answered
+                else None,
                 "oldest_blocked": oldest,
                 "oldest_blocked_days": round(
                     (end_at - blocked_since[oldest]).total_seconds() / 86400, 1
@@ -549,6 +567,8 @@ def _series(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -
                 f"  open {row['open']:3}  blocked {row['blocked_share']:.0%}"
                 f"  oldest block {row['oldest_blocked'] or '-'}"
                 f" ({row['oldest_blocked_days']}d)"
+                f"  operator +{row['operator_asked']}/-{row['operator_answered']}"
+                f" open {row['operator_open']} wait {row['operator_wait_days'] or '-'}d"
             )
         for symbol, (state, per) in spent.get(name, {}).items():
             held = "  ".join(f"{k} {_days(v)}" for k, v in per.items())

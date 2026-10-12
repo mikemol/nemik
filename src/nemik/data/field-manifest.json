@@ -26,7 +26,7 @@
       "operator": {"repo": "enum", "state": "enum", "last_tick": "time", "waiting": "records"}
     },
     "history.json": {
-      "weeks": {"week": "text", "opened": "count", "closed": "count", "open": "count", "blocked_share": "count", "oldest_blocked_days": "count", "lead_time_days": "count", "utilization": "count", "implied_wait_days": "count", "flow_efficiency": "count"}
+      "weeks": {"week": "text", "opened": "count", "closed": "count", "open": "count", "blocked_share": "count", "oldest_blocked_days": "count", "lead_time_days": "count", "utilization": "count", "implied_wait_days": "count", "flow_efficiency": "count", "operator_asked": "count", "operator_answered": "count", "operator_open": "count", "operator_wait_days": "count"}
     },
     "goals/<repo>.json": {
       "goals": {
