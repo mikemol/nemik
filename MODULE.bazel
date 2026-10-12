@@ -54,6 +54,13 @@ vendored_wheel(
     wheel = "//:vendor/wheels/mikemol_icsstruct-0.1.0+f04f0a2-py3-none-any.whl",
 )
 
+# nemik:W378: mtools' fence (mikemol-membudget), at the same sha: mikemol-commit finds it beside the
+# interpreter and takes its commit lock with it (mtools:W1016/W1022, github-8f's ruling 2026-10-12).
+vendored_wheel(
+    name = "fence",
+    wheel = "//:vendor/wheels/mikemol_fence-0.1.0+f04f0a2-py3-none-any.whl",
+)
+
 # nemik:W98: opa, the witness evaluator, as a hashed input instead of whatever /usr/bin holds.
 http_file = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_file")
 http_file(

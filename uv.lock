@@ -263,6 +263,14 @@ wheels = [
 ]
 
 [[package]]
+name = "mikemol-fence"
+version = "0.1.0+f04f0a2"
+source = { path = "vendor/wheels/mikemol_fence-0.1.0+f04f0a2-py3-none-any.whl" }
+wheels = [
+    { filename = "mikemol_fence-0.1.0+f04f0a2-py3-none-any.whl", hash = "sha256:fcbe2f60bf5f84fc855f7d2c557b34139d039eaa0268fd5f7176b8a071f9e5eb" },
+]
+
+[[package]]
 name = "mikemol-hooks"
 version = "0.1.0+f04f0a2"
 source = { path = "vendor/wheels/mikemol_hooks-0.1.0+f04f0a2-py3-none-any.whl" }
@@ -368,6 +376,7 @@ name = "nemik"
 version = "0.0.0"
 source = { editable = "." }
 dependencies = [
+    { name = "mikemol-fence" },
     { name = "mikemol-hooks" },
     { name = "mikemol-icsstruct" },
     { name = "mikemol-pathsforward" },
@@ -389,6 +398,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "mikemol-fence", path = "vendor/wheels/mikemol_fence-0.1.0+f04f0a2-py3-none-any.whl" },
     { name = "mikemol-hooks", path = "vendor/wheels/mikemol_hooks-0.1.0+f04f0a2-py3-none-any.whl" },
     { name = "mikemol-icsstruct", path = "vendor/wheels/mikemol_icsstruct-0.1.0+f04f0a2-py3-none-any.whl" },
     { name = "mikemol-pathsforward", path = "vendor/wheels/mikemol_pathsforward-0.1.0+f04f0a2-py3-none-any.whl" },

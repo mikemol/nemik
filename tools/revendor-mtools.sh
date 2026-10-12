@@ -1,5 +1,5 @@
 #!/bin/sh
-# nemik: re-vendor the three mtools wheels (pathsforward, icsstruct, hooks) at ONE commit, the
+# nemik: re-vendor the four mtools wheels (pathsforward, icsstruct, hooks, fence) at ONE commit, the
 # procedure of vendor/wheels/README.md ("To bump the pin") as a script, so a bump is one command.
 #
 #   tools/revendor-mtools.sh <new-sha> <old-sha> [path-to-mtools-clone]
@@ -17,7 +17,7 @@ short=$(git -C "$mtools" rev-parse --short=7 "$new")
 tmp=$(mktemp -d)
 trap 'rm -rf "$tmp"' EXIT
 
-for dist in pathsforward icsstruct hooks; do
+for dist in pathsforward icsstruct hooks fence; do
 	git -C "$mtools" archive "$new" -- "$dist" | tar -x -C "$tmp"
 	sed -i "s/^version = .*/version = \"0.1.0+$short\"/" "$tmp/$dist/pyproject.toml"
 	(cd "$tmp/$dist" && uv build -q --wheel -o "$out")

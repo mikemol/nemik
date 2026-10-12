@@ -9,6 +9,7 @@ dependencies = [
     "mikemol-pathsforward",
     "python-dateutil>=2.9",
     "mikemol-hooks",  # nemik: mtools' Claude Code hooks (inbound-asks, nemik-check), installed as nemik's own dependency
+    "mikemol-fence",  # nemik:W378: mikemol-membudget beside the interpreter, so mikemol-commit takes its commit lock
     "mikemol-icsstruct",  # nemik:W157: operator calendars (W113) read through mtools' lossless iCalendar reader (mtools:W304)  # nemik:W145: RRULE expansion (mtools:W309 stores the rule, nemik expands it)
 ]
 
@@ -18,6 +19,7 @@ dependencies = [
 mikemol-pathsforward = { path = "vendor/wheels/mikemol_pathsforward-0.1.0+f04f0a2-py3-none-any.whl" }
 mikemol-hooks = { path = "vendor/wheels/mikemol_hooks-0.1.0+f04f0a2-py3-none-any.whl" }
 mikemol-icsstruct = { path = "vendor/wheels/mikemol_icsstruct-0.1.0+f04f0a2-py3-none-any.whl" }
+mikemol-fence = { path = "vendor/wheels/mikemol_fence-0.1.0+f04f0a2-py3-none-any.whl" }
 paperkit = { git = "https://github.com/mikemol/paperkit.git", rev = "b5877102af3b48005fde814416bff5b8f06ba5cd" }
 
 [project.scripts]
