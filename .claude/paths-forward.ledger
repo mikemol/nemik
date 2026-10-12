@@ -589,3 +589,5 @@
 2026-10-12T04:57:11Z  interrupt W376 minted    -         "nemik-inbound lists a repo's live orphan letters as UNCLAIMED rows, so the tick's existing step catches them"  evidence=luthen-observability:W722
 2026-10-12T05:18:46Z  tick  W376 advanced  unblock   "inbound lists uncited inbox letters (4d0f067); W375 Burstable shipped (91215f9)"  evidence=4d0f067
 2026-10-12T05:42:33Z  tick  W339 escalated escalate  "16 ticks on el-openglo:W72 (use-of-colour check): ready in el-openglo's queue at weight 26, last worked 2026-10-06; reported to the operator once, nudging stops"
+2026-10-12T06:59:22Z  interrupt W377 minted    -         "Re-vendor mtools past 7d4a458 so mikemol-commit prints its path and takes the commit lock here"  evidence=W342
+2026-10-12T06:59:27Z  tick  W342 advanced  unblock   "staged-index gate in a fixed worktree (b549e0e); commits through mikemol-commit (10316fc); isolation unconfirmed until W377 re-vendors mtools"  evidence=10316fc

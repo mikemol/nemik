@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 376,
+  "counter": 377,
   "waypoints": [
     {
       "symbol": "W1",
@@ -6524,22 +6524,22 @@
     {
       "symbol": "W342",
       "title": "Adopt isolated mikemol-commit: pre-commit hook and gate go through MIKEMOL_REAL_ROOT",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "hooks"
       ],
       "blocked_on": [],
-      "blocked_kind": "agent",
-      "next_bounded_step": "model on mtools .githooks/pre-commit and mtools:W954 and linux-sources efd2150, d3a428d: every tool lookup in the hook and its gate script uses the real root with a default; verify one commit prints path: isolated",
-      "evidence": "2026-10-12: 2026-10-12: read the references. mtools' hook and linux-sources' tools/gate_staged.sh both run bazel in a staged tree at a FIXED path, since bazel keys output_base (cache and server) on the workspace path. Naming MIKEMOL_REAL_ROOT alone would make every isolated commit gate in a fresh snapshot path: a new bazel server and a cold cache per commit. So the fixed-path gate (W374) comes first.",
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: 2026-10-12: read the references. mtools' hook and linux-sources' tools/gate_staged.sh both run bazel in a staged tree at a FIXED path, since bazel keys output_base (cache and server) on the workspace path. Naming MIKEMOL_REAL_ROOT alone would make every isolated commit gate in a fresh snapshot path: a new bazel server and a cold cache per commit. So the fixed-path gate (W374) comes first. | 2026-10-12: 10316fc committed through nemik's own mikemol-commit (console script added to BUILD.bazel) and pushed; the hook names MIKEMOL_REAL_ROOT (b549e0e) and the staged gate was green (76/76). NOT confirmed isolated: the vendored mtools 7d4a458 prints no 'path:' line, and warned 'no commit lock (the fence venv is not built)'. Confirmation is W377 (re-vendor).",
       "issued_at": "2026-10-11T21:55:10Z",
       "minted_during": "tick",
       "caused_by": "github-8f",
-      "last_worked": "2026-10-12T06:38:50Z",
+      "last_worked": "2026-10-12T06:59:24Z",
       "ticks_blocked": 0,
       "weight": 3,
-      "completed": null
+      "completed": "20261012T065924Z"
     },
     {
       "symbol": "W343",
@@ -7300,6 +7300,26 @@
       "ticks_blocked": 0,
       "weight": 1,
       "completed": "20261012T051330Z"
+    },
+    {
+      "symbol": "W377",
+      "title": "Re-vendor mtools past 7d4a458 so mikemol-commit prints its path and takes the commit lock here",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "hooks",
+        "vendor"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "tools/revendor-mtools.sh <new-sha> 7d4a458; then one mikemol-commit must print 'path: isolated' (github-8f's witness) and no 'no commit lock (the fence venv is not built)' warning; report the line to github-8f",
+      "evidence": "",
+      "issued_at": "2026-10-12T06:59:22Z",
+      "minted_during": "interrupt",
+      "caused_by": "W342",
+      "last_worked": "2026-10-12T06:59:26Z",
+      "ticks_blocked": 0,
+      "completed": null
     }
   ],
   "residue": [
@@ -7362,10 +7382,7 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": {
-    "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-12T05:41:25Z"
-  },
+  "lock": null,
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }
