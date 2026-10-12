@@ -557,11 +557,20 @@ def build_static(root: Path, out: Path, withheld: Path | None) -> list[Path]:
     if bad := [f for name, doc in docs.items() for f in unmanifested(name, doc)]:
         raise ValueError("unmanifested fields, refusing to publish: " + ", ".join(bad))
     written = write_static(out)
+    # nemik:W414: hashes.json maps each published data path to the sha256 of its bytes, so a page
+    # (W416) can refetch only the pieces that changed. Paths and digests only: nothing withheld.
+    import hashlib
+
+    hashes: dict[str, str] = {}
     for name, doc in sorted(docs.items()):
         dst = out / name
         dst.parent.mkdir(parents=True, exist_ok=True)
-        dst.write_text(json.dumps(doc, indent=1))
+        body = json.dumps(doc, indent=1)
+        dst.write_text(body)
+        hashes[name] = hashlib.sha256(body.encode()).hexdigest()
         written.append(dst)
+    (out / "hashes.json").write_text(json.dumps(hashes, indent=1, sort_keys=True))
+    written.append(out / "hashes.json")
     return written
 
 

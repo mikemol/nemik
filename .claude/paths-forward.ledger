@@ -666,3 +666,7 @@
 2026-10-12T19:45:07Z  tick  W412 minted    -         "One-pass card index per build: state, blockedOn, enables, repo and asks per card as plain dicts, read by salience.audit, health, blocks.operator_asks, critical._open and rank._open instead of 3.3M rdflib triple lookups (19 s of 36)"
 2026-10-12T19:48:19Z  tick  W413 minted    -         "Shared projection: cards to tasks with predecessor links, one mapping every export and connector reuses, with a decode-back test"  evidence=W372
 2026-10-12T19:54:24Z  tick  W411 advanced  unblock   "cdd6b66 pushed: W411 namespace cache (one-edit rebuild 35.8->27.1 s profiled), W372 survey verified+closed, W410 split W411/W412, W413 filed; W412 working next"
+2026-10-12T20:26:50Z  tick  W412 advanced  unblock   "763e6b5 pushed: one-pass per-build index + operator_asks once; one-edit rebuild 10.08->5.04 s, document equal; W410 closed; W409 (per-piece snapshots) working next"
+2026-10-12T20:42:29Z  tick  W414 minted    -         "Static manifest: manifest.json maps every published data path to the sha256 of its bytes"
+2026-10-12T20:42:30Z  tick  W415 minted    -         "Split graph.json into per-repo pieces plus a fleet piece; the page assembles them, a test pins assembled == whole"
+2026-10-12T20:42:31Z  tick  W416 minted    -         "The page polls manifest.json and refetches only the pieces whose hash changed (browser test)"
