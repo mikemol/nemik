@@ -112,7 +112,10 @@ def resolve(repo: Path, spec: str | None) -> str | None:
     if spec is None:
         return "HEAD"
     if _DATE.fullmatch(spec):
-        out = _git(repo, "rev-list", "-1", f"--before={spec}", "HEAD")
+        # git reads a bare date as that day at the CURRENT time of day, so "--from 2026-10-11" run in
+        # the evening meant the evening of the 11th: pin it to the start of the day (nemik:W318).
+        when = f"{spec}T00:00" if len(spec) == len("YYYY-MM-DD") else spec
+        out = _git(repo, "rev-list", "-1", f"--before={when}", "HEAD")
         return (out or "").strip() or None
     return spec
 
@@ -247,6 +250,55 @@ def weekly(snaps: list[Snapshot]) -> list[dict]:
     return rows
 
 
+BASELINE_PATH = ".claude/baseline"
+
+
+def baseline_spec(repo: Path, spec: str | None) -> str | None:
+    """nemik:W318: the baseline to measure from: `spec` when given, else the first word of the repo's
+    declared `.claude/baseline` file (a revision or a date), else None (no baseline declared)."""
+    if spec:
+        return spec
+    declared = repo / BASELINE_PATH
+    if declared.is_file():
+        words = declared.read_text(encoding="utf-8").split()
+        return words[0] if words else None
+    return None
+
+
+def variance(base: dict, now: dict) -> dict:
+    """nemik:W318: planned versus actual since a baseline. The plan is the cards open at the baseline:
+    how many are now closed, dropped, or still open. The unplanned is every card minted since, split by
+    how it was minted (an interrupt, a tick, or not recorded). Both arguments are parsed queues."""
+    planned = {
+        s
+        for s, st in _status(base).items()
+        if st not in ("done", "dropped") and s not in _dropped(base)
+    }
+    after, gone = _status(now), _dropped(now)
+    closed = sorted((s for s in planned if after.get(s) == "done"), key=_number)
+    dropped = sorted((s for s in planned if s in gone), key=_number)
+    still = sorted(
+        (s for s in planned if s not in gone and after.get(s) not in (None, "done")),
+        key=_number,
+    )
+    known = set(_status(base)) | _dropped(base)
+    minted_during = {
+        w["symbol"]: w.get("minted_during") or "unrecorded"
+        for w in now.get("waypoints", [])
+    }
+    added: dict[str, list[str]] = {}
+    for s in sorted((s for s in set(after) | gone if s not in known), key=_number):
+        added.setdefault(minted_during.get(s, "unrecorded"), []).append(s)
+    return {
+        "planned": len(planned),
+        "closed": closed,
+        "dropped": dropped,
+        "still_open": still,
+        "added": added,
+        "done_share": round(len(closed) / len(planned), 3) if planned else None,
+    }
+
+
 def render(repo: str, d: Diff) -> str:
     lines = [
         f"{repo}: {len(d.minted)} minted, {len(d.closed)} closed, {len(d.dropped)} dropped"
@@ -302,10 +354,20 @@ def main(argv: list[str] | None = None) -> int:
         action="store_true",
         help="per ISO week: ledger activity by effort class and the interrupt share (W314)",
     )
+    mode.add_argument(
+        "--baseline",
+        nargs="?",
+        const="",
+        default=None,
+        metavar="REV_OR_DATE",
+        help="planned versus actual since a baseline: the cards open then, closed, dropped or "
+        f"still open now, and the cards added since by how they were minted; without a value, "
+        f"the repo's declared {BASELINE_PATH} (W318)",
+    )
     args = ap.parse_args(argv)
     dirs = {r: p.parents[1] for r, p in workstream_files(args.root, QUEUE)}
     names = sorted(dirs) if args.all else args.repos
-    series = args.time_in_state or args.weekly or args.toil
+    series = args.time_in_state or args.weekly or args.toil or args.baseline is not None
     if not names or (args.start is None and not series):
         ap.error("name the repos (or --all) and a --from")
     for name in names:
@@ -314,6 +376,8 @@ def main(argv: list[str] | None = None) -> int:
             return 2
     if args.toil:
         return _toil(args, names, dirs)
+    if args.baseline is not None:
+        return _baseline(args, names, dirs)
     if args.time_in_state or args.weekly:
         return _series(args, names, dirs)
     out: dict[str, Diff] = {}
@@ -326,6 +390,32 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps({r: asdict(d) for r, d in out.items()}, indent=1))
     else:
         print("\n".join(render(r, d) for r, d in out.items()))
+    return 0
+
+
+def _baseline(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> int:
+    out: dict[str, dict] = {}
+    for name in names:
+        repo = dirs[name]
+        spec = baseline_spec(repo, args.baseline)
+        if spec is None:
+            out[name] = {"baseline": None}
+            continue
+        v = variance(queue_at(repo, resolve(repo, spec)), queue_at(repo, "HEAD"))
+        out[name] = {"baseline": spec, **v}
+    if args.json:
+        print(json.dumps(out, indent=1))
+        return 0
+    for name, v in out.items():
+        if v["baseline"] is None:
+            print(f"{name}: no baseline (give one, or declare it in {BASELINE_PATH})")
+            continue
+        added = ", ".join(f"{len(s)} {k}" for k, s in sorted(v["added"].items()))
+        print(
+            f"{name} since {v['baseline']}: planned {v['planned']}, closed {len(v['closed'])}, "
+            f"dropped {len(v['dropped'])}, still open {len(v['still_open'])} "
+            f"(done share {v['done_share']}); added since: {added or 'none'}"
+        )
     return 0
 
 

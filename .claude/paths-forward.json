@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 345,
+  "counter": 356,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 176
+      "ticks_blocked": 177
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 51,
+      "ticks_blocked": 52,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T12:42:16Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 28,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 28,
+      "ticks_blocked": 29,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 25,
+      "ticks_blocked": 26,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 25,
+      "ticks_blocked": 26,
       "completed": null,
       "weight": 1
     },
@@ -5382,7 +5382,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null
     },
     {
@@ -5403,7 +5403,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -5462,7 +5462,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -5483,7 +5483,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -5523,7 +5523,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -5582,7 +5582,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -5622,7 +5622,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -5643,7 +5643,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -5683,7 +5683,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -5933,22 +5933,19 @@
     {
       "symbol": "W312",
       "title": "Thoughts-forward (operator's notes doc 2026-10-11): the project-management practices nemik should express, as cards",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "W317",
-        "W318"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Atomized into W313-W318: critical path and slack, toil ratio over time, flow metrics, milestone-directed ranking, repo health (RAG) panel, baseline variance. Source: Google Doc 1Ve0IFuaREPlEjzj94KxVdtE5u3sMn78wIZGdy53RimY (a chat on MS Project, flow metrics, ERM, swarm, Bugzilla).",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: all children landed: W313 critical path, W314 toil, W315 flow metrics, W316 --toward, W317 repo health, W318 --baseline. The second trawl of the same doc is W346.",
       "issued_at": "2026-10-11T18:18:01Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-11T23:54:55Z",
-      "ticks_blocked": 1,
-      "completed": null
+      "last_worked": "2026-10-12T00:43:39Z",
+      "ticks_blocked": 0,
+      "completed": "20261012T004339Z"
     },
     {
       "symbol": "W313",
@@ -6052,22 +6049,22 @@
     {
       "symbol": "W318",
       "title": "Baseline variance: name a baseline revision per repo and report planned versus actual since it (nemik-history --baseline)",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W312"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "A baseline is a git revision recorded in a declared file; variance = cards open at the baseline still open, closed, dropped, and cards added since (interrupt versus planned); builds on nemik-history diff.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: nemik-history --baseline [REV|DATE] (variance, baseline_spec, declared .claude/baseline); tests/test_baseline.py; live: nemik since 2026-10-11 planned 21, closed 6, still open 15, added 29 interrupt + 12 tick. Also fixed resolve(): a bare date now pins to 00:00 (git read it as the current time of day, so --from DATE was silently late).",
       "issued_at": "2026-10-11T18:18:17Z",
       "minted_during": "interrupt",
       "caused_by": "W312",
-      "last_worked": "2026-10-12T00:18:48Z",
+      "last_worked": "2026-10-12T00:43:33Z",
       "ticks_blocked": 0,
       "weight": 4,
-      "completed": null
+      "completed": "20261012T004333Z"
     },
     {
       "symbol": "W319",
@@ -6155,7 +6152,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T20:11:31Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "completed": null
     },
     {
@@ -6452,7 +6449,7 @@
       "caused_by": "W337",
       "last_worked": "2026-10-11T21:18:11Z",
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 4
     },
     {
       "symbol": "W339",
@@ -6475,7 +6472,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "weight": 1,
       "completed": null
     },
@@ -6522,7 +6519,7 @@
       "caused_by": "paperkit:W320",
       "last_worked": "2026-10-11T21:18:33Z",
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 4
     },
     {
       "symbol": "W342",
@@ -6541,7 +6538,7 @@
       "caused_by": "github-8f",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W343",
@@ -6601,6 +6598,257 @@
       "last_worked": null,
       "ticks_blocked": 0,
       "weight": 1
+    },
+    {
+      "symbol": "W346",
+      "title": "Thoughts-forward second trawl: growth directions as cards (umbrella)",
+      "status": "blocked",
+      "enables": [],
+      "touches": [
+        "thoughts-forward"
+      ],
+      "blocked_on": [
+        "W347",
+        "W348",
+        "W349",
+        "W350",
+        "W351",
+        "W352",
+        "W353",
+        "W354",
+        "W355",
+        "W356"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "children W347-W356 from a full read of doc 1Ve0IFuaREPlEjzj94KxVdtE5u3sMn78wIZGdy53RimY on 2026-10-12, ranked by the reader: fire ripple, operator saturation, plan drift, milestone roll-up, what-if, liveness board, token cost, ForgeFed outbox, DORA, inter-workstream SLAs",
+      "evidence": "",
+      "issued_at": "2026-10-12T00:39:56Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": "2026-10-12T00:40:36Z",
+      "ticks_blocked": 1,
+      "completed": null
+    },
+    {
+      "symbol": "W347",
+      "title": "Fire ripple: the planned work each interrupt card delayed",
+      "status": "ready",
+      "enables": [
+        "W346"
+      ],
+      "touches": [
+        "thoughts-forward",
+        "critical-path"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "per interrupt card (minted_during interrupt), its downstream cone of forecast cards and the critical-path delta with and without it; a weekly planned-work-delayed-by-fires total in nemik-history --toil; reads mintedDuring and nemik-critical --card",
+      "evidence": "",
+      "issued_at": "2026-10-12T00:40:17Z",
+      "minted_during": "interrupt",
+      "caused_by": "W346",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 2
+    },
+    {
+      "symbol": "W348",
+      "title": "Operator saturation: warn when operator asks pile up faster than answers",
+      "status": "working",
+      "enables": [
+        "W346"
+      ],
+      "touches": [
+        "thoughts-forward",
+        "operator"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "per repo and fleet: count and age of open blocked_kind human cards against a declared cap, and ask arrival versus answer rate with implied wait; a nemik-check warning and a nemik-metrics gauge. Distinct from W327 (paces card creation, not operator demand)",
+      "evidence": "",
+      "issued_at": "2026-10-12T00:40:18Z",
+      "minted_during": "interrupt",
+      "caused_by": "W346",
+      "last_worked": "2026-10-12T00:43:35Z",
+      "ticks_blocked": 0,
+      "weight": 2,
+      "completed": null
+    },
+    {
+      "symbol": "W349",
+      "title": "Plan drift: how far the graph's shape moved from a baseline",
+      "status": "ready",
+      "enables": [
+        "W346"
+      ],
+      "touches": [
+        "thoughts-forward",
+        "history"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "edges added and removed, cards dropped or re-scoped, critical-path membership churn since the W318 baseline revision; the shape counterpart of W318's time variance, built on nemik-history's diff",
+      "evidence": "",
+      "issued_at": "2026-10-12T00:40:20Z",
+      "minted_during": "interrupt",
+      "caused_by": "W346",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 2
+    },
+    {
+      "symbol": "W350",
+      "title": "Milestone roll-up in the view: an umbrella collapses to one node, expands on click",
+      "status": "ready",
+      "enables": [
+        "W346"
+      ],
+      "touches": [
+        "thoughts-forward",
+        "web"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "the collapsed node carries its repo health and remaining-cone count; reuses umbrella detection and --toward cones; render-check test",
+      "evidence": "",
+      "issued_at": "2026-10-12T00:40:22Z",
+      "minted_during": "interrupt",
+      "caused_by": "W346",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 2
+    },
+    {
+      "symbol": "W351",
+      "title": "What-if: nemik-critical and nemik-rank --assume-done repo:W<n>",
+      "status": "ready",
+      "enables": [
+        "W346"
+      ],
+      "touches": [
+        "thoughts-forward",
+        "critical-path"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "recompute path length, slack and salience as if the named cards were closed or dropped, on the in-memory graph; print the delta against the real graph",
+      "evidence": "",
+      "issued_at": "2026-10-12T00:40:23Z",
+      "minted_during": "interrupt",
+      "caused_by": "W346",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 2
+    },
+    {
+      "symbol": "W352",
+      "title": "Liveness board: which repos had workable cards while asleep",
+      "status": "ready",
+      "enables": [
+        "W346"
+      ],
+      "touches": [
+        "thoughts-forward",
+        "wake"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "awake/idle/asleep per repo over time against its ready-card count; needs the loop-liveness time series from luthen-observability (ask which store and cite its card before starting)",
+      "evidence": "",
+      "issued_at": "2026-10-12T00:40:25Z",
+      "minted_during": "interrupt",
+      "caused_by": "W346",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 2
+    },
+    {
+      "symbol": "W353",
+      "title": "Token cost per card: tokens attributed through the ledger lines that used the card",
+      "status": "ready",
+      "enables": [
+        "W346"
+      ],
+      "touches": [
+        "thoughts-forward",
+        "metrics"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "cost per closed card, per effort class (what interrupts cost) and per unit of salience moved; token counts must come from luthen's telemetry store or the session hook, and the ledger may need a session id (mtools); design first, ask both",
+      "evidence": "",
+      "issued_at": "2026-10-12T00:40:27Z",
+      "minted_during": "interrupt",
+      "caused_by": "W346",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 2
+    },
+    {
+      "symbol": "W354",
+      "title": "ForgeFed outbox: each repo's letters, asks and closures as ActivityStreams, read-only",
+      "status": "ready",
+      "enables": [
+        "W346"
+      ],
+      "touches": [
+        "thoughts-forward",
+        "letters"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "emit JSON-LD Offer/Accept/Resolve per waypoint from the letters-as-evidence graph (nemik.ttl already types a Workstream as a ForgeFed actor); delivery and inboxes cross nemik's read-only boundary and are an operator decision, so stop at the outbox",
+      "evidence": "",
+      "issued_at": "2026-10-12T00:40:28Z",
+      "minted_during": "interrupt",
+      "caused_by": "W346",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 2
+    },
+    {
+      "symbol": "W355",
+      "title": "DORA signals: deploy frequency from pushes, change failure from reopened cards",
+      "status": "ready",
+      "enables": [
+        "W346"
+      ],
+      "touches": [
+        "thoughts-forward",
+        "history"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "a push is a deploy, so frequency comes from git; change failure is a card reopened or re-minted after done; time to restore needs Flux ship status from luthen-observability",
+      "evidence": "",
+      "issued_at": "2026-10-12T00:40:30Z",
+      "minted_during": "interrupt",
+      "caused_by": "W346",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 2
+    },
+    {
+      "symbol": "W356",
+      "title": "Inter-workstream SLAs: a declared time for a repo to answer a cross-repo block",
+      "status": "ready",
+      "enables": [
+        "W346"
+      ],
+      "touches": [
+        "thoughts-forward",
+        "check"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "declare a max answer time per block class in data; nemik-check warns when a cross-repo block outlives it; distinct from W326 starvation (a ready card overtaken), this is a blocked card unanswered",
+      "evidence": "",
+      "issued_at": "2026-10-12T00:40:31Z",
+      "minted_during": "interrupt",
+      "caused_by": "W346",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 2
     }
   ],
   "residue": [
@@ -6663,7 +6911,10 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-10-12T00:41:21Z"
+  },
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }

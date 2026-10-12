@@ -543,3 +543,14 @@
 2026-10-11T23:48:18Z  tick  W316 advanced  unblock   "nemik-rank --toward: one milestone's demand alone (7ccca23); fold cards to dormant repos escalated once"  evidence=7ccca23
 2026-10-11T23:54:56Z  interrupt W345 minted    -         "Install nemik's tools for the host: one pinned wheel via uv tool install, not symlinks into this venv"  evidence=luthen-observability-a9
 2026-10-12T00:23:22Z  tick  W317 advanced  unblock   "repo health RAG: nemik.health, graph.json, nemik_repo_health, chips (61004fb)"  evidence=61004fb
+2026-10-12T00:39:56Z  interrupt W346 minted    -         "Thoughts-forward second trawl: growth directions as cards (umbrella)"  evidence=operator
+2026-10-12T00:40:17Z  interrupt W347 minted    -         "Fire ripple: the planned work each interrupt card delayed"  evidence=W346
+2026-10-12T00:40:18Z  interrupt W348 minted    -         "Operator saturation: warn when operator asks pile up faster than answers"  evidence=W346
+2026-10-12T00:40:20Z  interrupt W349 minted    -         "Plan drift: how far the graph's shape moved from a baseline"  evidence=W346
+2026-10-12T00:40:22Z  interrupt W350 minted    -         "Milestone roll-up in the view: an umbrella collapses to one node, expands on click"  evidence=W346
+2026-10-12T00:40:23Z  interrupt W351 minted    -         "What-if: nemik-critical and nemik-rank --assume-done repo:W<n>"  evidence=W346
+2026-10-12T00:40:25Z  interrupt W352 minted    -         "Liveness board: which repos had workable cards while asleep"  evidence=W346
+2026-10-12T00:40:27Z  interrupt W353 minted    -         "Token cost per card: tokens attributed through the ledger lines that used the card"  evidence=W346
+2026-10-12T00:40:28Z  interrupt W354 minted    -         "ForgeFed outbox: each repo's letters, asks and closures as ActivityStreams, read-only"  evidence=W346
+2026-10-12T00:40:30Z  interrupt W355 minted    -         "DORA signals: deploy frequency from pushes, change failure from reopened cards"  evidence=W346
+2026-10-12T00:40:31Z  interrupt W356 minted    -         "Inter-workstream SLAs: a declared time for a repo to answer a cross-repo block"  evidence=W346
