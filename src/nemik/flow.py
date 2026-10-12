@@ -24,6 +24,7 @@ iteration is sorted (nemik:W119). Demand conserved is checked on every source.
 
 from __future__ import annotations
 
+from collections import OrderedDict
 from dataclasses import dataclass, field
 from fractions import Fraction
 from typing import TYPE_CHECKING
@@ -165,6 +166,43 @@ def solve(
     """
     front = set(frontier)
     prereq = {c: sorted(set(ps)) for c, ps in needs.items() if c not in front}
+    # nemik:W401: the answer depends only on the demand and on what lies inside the sources' cones, so
+    # that, canonicalised, is the cache key. A change anywhere else in the fleet leaves this solve's key
+    # unchanged and it is answered from the cache across rebuilds; exact, since the inputs are equal.
+    reach: set[str] = set()
+    for source in demand:
+        if source not in front:
+            reach.update(_cone(prereq, front, source))
+    key = (
+        tuple(sorted((s, a) for s, a in demand.items() if a)),
+        tuple((c, tuple(prereq.get(c, ()))) for c in sorted(reach)),
+        tuple(sorted(c for c in reach if c in front)),
+        tuple(sorted((weights or {}).items())),
+        edge,
+    )
+    cached = _SOLVES.get(key)
+    if cached is not None:
+        _SOLVES.move_to_end(key)
+        return cached
+    result = _solve(demand, front, prereq, weights, edge)
+    _SOLVES[key] = result
+    if len(_SOLVES) > _SOLVES_MAX:
+        _SOLVES.popitem(last=False)
+    return result
+
+
+# The most recent solves by input; enough for every repo's two grounds in a fleet several times over.
+_SOLVES: OrderedDict[tuple, Flow] = OrderedDict()
+_SOLVES_MAX = 512
+
+
+def _solve(
+    demand: Mapping[str, Fraction],
+    front: set[str],
+    prereq: dict[str, list[str]],
+    weights: Mapping[tuple[str, str], Fraction] | None,
+    edge: Fraction,
+) -> Flow:
     fibre: dict[str, dict[str, Fraction]] = {}
     stranded: dict[str, Fraction] = {}
     potential: dict[str, Fraction] = {}
