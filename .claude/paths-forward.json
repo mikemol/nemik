@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 190
+      "ticks_blocked": 191
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 13,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 42,
+      "ticks_blocked": 43,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 39,
+      "ticks_blocked": 40,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 39,
+      "ticks_blocked": 40,
       "completed": null,
       "weight": 1
     },
@@ -5382,7 +5382,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "completed": null
     },
     {
@@ -5403,7 +5403,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 31,
+      "ticks_blocked": 32,
       "completed": null
     },
     {
@@ -5462,7 +5462,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 31,
+      "ticks_blocked": 32,
       "completed": null
     },
     {
@@ -5483,7 +5483,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 31,
+      "ticks_blocked": 32,
       "completed": null
     },
     {
@@ -5523,7 +5523,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 31,
+      "ticks_blocked": 32,
       "completed": null
     },
     {
@@ -5582,7 +5582,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 31,
+      "ticks_blocked": 32,
       "completed": null
     },
     {
@@ -5622,7 +5622,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 31,
+      "ticks_blocked": 32,
       "completed": null
     },
     {
@@ -5643,7 +5643,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 31,
+      "ticks_blocked": 32,
       "completed": null
     },
     {
@@ -5683,7 +5683,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 31,
+      "ticks_blocked": 32,
       "completed": null
     },
     {
@@ -6152,7 +6152,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T20:11:31Z",
-      "ticks_blocked": 21,
+      "ticks_blocked": 22,
       "completed": null
     },
     {
@@ -6229,7 +6229,7 @@
       "caused_by": "W323",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 7
+      "weight": 6
     },
     {
       "symbol": "W328",
@@ -6449,7 +6449,7 @@
       "caused_by": "W337",
       "last_worked": "2026-10-11T21:18:11Z",
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 4
     },
     {
       "symbol": "W339",
@@ -6472,7 +6472,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "weight": 1,
       "completed": null
     },
@@ -6519,7 +6519,7 @@
       "caused_by": "paperkit:W320",
       "last_worked": "2026-10-11T21:18:33Z",
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 4
     },
     {
       "symbol": "W342",
@@ -6558,7 +6558,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 5
     },
     {
       "symbol": "W344",
@@ -6622,7 +6622,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "completed": null
     },
     {
@@ -6760,7 +6760,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 3
     },
     {
       "symbol": "W353",
@@ -6782,7 +6782,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 3
     },
     {
       "symbol": "W354",
@@ -6804,7 +6804,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 3
     },
     {
       "symbol": "W355",
@@ -6826,7 +6826,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 3
     },
     {
       "symbol": "W356",
@@ -6897,7 +6897,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:31:11Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 13,
       "completed": null
     },
     {
@@ -6920,7 +6920,7 @@
       "caused_by": "W358",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 1
     },
     {
       "symbol": "W360",
@@ -6942,12 +6942,12 @@
       "caused_by": "W358",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 1
     },
     {
       "symbol": "W361",
       "title": "Positioning: from kanban, flow metrics and queueing theory",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W358"
       ],
@@ -6962,9 +6962,10 @@
       "issued_at": "2026-10-12T01:29:41Z",
       "minted_during": "interrupt",
       "caused_by": "W358",
-      "last_worked": null,
+      "last_worked": "2026-10-12T08:42:21Z",
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 1,
+      "completed": null
     },
     {
       "symbol": "W362",
@@ -6986,7 +6987,7 @@
       "caused_by": "W358",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 1
     },
     {
       "symbol": "W363",
@@ -7008,7 +7009,7 @@
       "caused_by": "W358",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 1
     },
     {
       "symbol": "W364",
@@ -7034,7 +7035,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 13,
       "completed": null
     },
     {
@@ -7056,7 +7057,7 @@
       "caused_by": "W364",
       "last_worked": "2026-10-12T01:34:53Z",
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 2
     },
     {
       "symbol": "W366",
@@ -7077,7 +7078,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 2
     },
     {
       "symbol": "W367",
@@ -7098,7 +7099,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 2
     },
     {
       "symbol": "W368",
@@ -7120,7 +7121,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 2
     },
     {
       "symbol": "W369",
@@ -7231,7 +7232,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 8
+      "weight": 7
     },
     {
       "symbol": "W374",
@@ -7345,7 +7346,7 @@
     {
       "symbol": "W379",
       "title": "nemik-pins reports the host-installed nemik tool's sha against HEAD, with the reinstall command",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "packaging",
@@ -7353,14 +7354,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "read uv tool's receipt for nemik (the git+file@sha it was installed from); print INSTALLED <sha>, n commits behind HEAD, and the uv tool install line that brings it level; a check warning when behind by more than a declared count; reinstalling stays a deliberate step, not a post-commit action",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: nemik-pins prints 'host installs nemik@<sha>: behind N' from uv's receipt and the uv tool install --force line that levels it; counts toward --max-behind; tests/test_pins_host.py; SKILL row. Live: host at 697942e, behind 1.",
       "issued_at": "2026-10-12T08:14:25Z",
       "minted_during": "tick",
       "caused_by": "W345",
-      "last_worked": "2026-10-12T08:14:27Z",
+      "last_worked": "2026-10-12T08:42:12Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261012T084212Z"
     }
   ],
   "residue": [

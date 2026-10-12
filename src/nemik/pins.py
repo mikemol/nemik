@@ -61,6 +61,25 @@ def behind(root: Path, pin: Pin) -> int | None:
     return int(run.stdout) if run.returncode == 0 and run.stdout.strip() else None
 
 
+RECEIPT = Path.home() / ".local/share/uv/tools/nemik/uv-receipt.toml"
+_REV = re.compile(r"[?&]rev=([0-9a-f]{7,40})")
+
+
+def installed(receipt: Path) -> str | None:
+    """nemik:W379: the commit the host's `uv tool install` of nemik was made from, read from uv's
+    receipt (`git = "file:///...?rev=<sha>"`); None when nemik is not installed that way."""
+    if not receipt.is_file():
+        return None
+    import tomllib
+
+    for req in (
+        tomllib.loads(receipt.read_text()).get("tool", {}).get("requirements", [])
+    ):
+        if req.get("name") == "nemik" and (m := _REV.search(str(req.get("git", "")))):
+            return m[1]
+    return None
+
+
 def main(argv: list[str] | None = None) -> int:
     """nemik-pins: how many commits each repo's pin of a peer is behind that peer's HEAD."""
     ap = argparse.ArgumentParser(
@@ -74,8 +93,34 @@ def main(argv: list[str] | None = None) -> int:
         default=None,
         help="exit 6 when any pin is more than this many commits behind",
     )
+    ap.add_argument(
+        "--receipt",
+        type=Path,
+        default=RECEIPT,
+        help="uv's receipt for the host install of nemik (W379)",
+    )
     args = ap.parse_args(argv)
     worst = 0
+    # nemik:W379: the host's own install of nemik's tools is a pin too, of nemik by the operator's
+    # PATH; reinstalling stays a deliberate step, so this says how far behind it is and how to level it.
+    if not args.repos or "nemik" in args.repos:
+        sha = installed(args.receipt)
+        if sha is not None:
+            n = behind(args.root, Pin("host", "nemik", sha))
+            head = subprocess.run(
+                ["git", "-C", str(args.root / "nemik"), "rev-parse", "HEAD"],
+                capture_output=True,
+                text=True,
+                check=False,
+            ).stdout.strip()
+            shown = "unknown" if n is None else n
+            print(f"host installs nemik@{sha[:12]}: behind {shown}")
+            if n:
+                print(
+                    f"  level it: uv tool install --force "
+                    f"'nemik @ git+file://{args.root / 'nemik'}@{head}'"
+                )
+            worst = max(worst, n or 0)
     for pin in pins(args.root):
         if args.repos and pin.repo not in args.repos:
             continue
