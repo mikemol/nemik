@@ -144,6 +144,40 @@ def survey(root: Path) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
             others = ", ".join(m for m in members if m != member) or "itself"
             found = f"on a dependency cycle with {others}: {cause}"
             by_repo.setdefault(mrepo, []).append(("Warning", msym, found))
+    # nemik:W348: a repo holding more needs-you asks than the declared cap has made the operator its
+    # bottleneck (the doc's "paralyzed waiting on too many parallel operator answers"). One Warning
+    # on the repo, with the count and the oldest ask, so the remedy (batch, withdraw, share) is local.
+    import tomllib
+
+    from rdflib import URIRef
+    from rdflib.namespace import DCTERMS
+
+    from nemik.blocks import operator_asks
+
+    weights_toml = files("nemik.data").joinpath("rank-weights.toml").read_text()
+    cap = int(
+        tomllib.loads(weights_toml).get("saturation", {}).get("needs_you_per_repo", 10)
+    )
+    owed: dict[str, list[str]] = {}
+    for ask in operator_asks(merged):
+        if ask["category"] == "needs-you":
+            owed.setdefault(str(ask["ref"]).partition(":")[0], []).append(
+                str(ask["ref"])
+            )
+    remedy = (
+        "the operator is this repo's bottleneck; batch them into one ask, withdraw those another "
+        "path answers, or cite a shared ask (same ask as <repo>:W<n>)"
+    )
+    for orepo, refs in sorted(owed.items()):
+        if len(refs) <= cap:
+            continue
+        stamps = sorted(
+            str(merged.value(URIRef(BASE + r.replace(":", "/")), DCTERMS.created) or "")
+            for r in refs
+        )
+        oldest = next((s[:10] for s in stamps if s), "unknown")
+        found = f"{len(refs)} needs-you operator asks are open (cap {cap}, oldest issued {oldest}): {remedy}"
+        by_repo.setdefault(orepo, []).append(("Warning", "--", found))
     # nemik:W279: a letter a waypoint cites as evidence must exist (moved to inbox/archive counts).
     # The export layout carries no inbox, so a root without any inbox directory is not asked.
     if any(root.glob("*/inbox")):

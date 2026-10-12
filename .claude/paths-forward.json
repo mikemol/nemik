@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 356,
+  "counter": 357,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 177
+      "ticks_blocked": 178
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 52,
+      "ticks_blocked": 53,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T12:42:16Z",
-      "ticks_blocked": 28,
+      "ticks_blocked": 29,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 29,
+      "ticks_blocked": 30,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 26,
+      "ticks_blocked": 27,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 26,
+      "ticks_blocked": 27,
       "completed": null,
       "weight": 1
     },
@@ -5382,7 +5382,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -5403,7 +5403,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "completed": null
     },
     {
@@ -5462,7 +5462,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "completed": null
     },
     {
@@ -5483,7 +5483,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "completed": null
     },
     {
@@ -5523,7 +5523,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "completed": null
     },
     {
@@ -5582,7 +5582,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "completed": null
     },
     {
@@ -5622,7 +5622,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "completed": null
     },
     {
@@ -5643,7 +5643,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "completed": null
     },
     {
@@ -5683,7 +5683,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "completed": null
     },
     {
@@ -6152,7 +6152,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T20:11:31Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -6472,7 +6472,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "weight": 1,
       "completed": null
     },
@@ -6609,7 +6609,6 @@
       ],
       "blocked_on": [
         "W347",
-        "W348",
         "W349",
         "W350",
         "W351",
@@ -6617,7 +6616,8 @@
         "W353",
         "W354",
         "W355",
-        "W356"
+        "W356",
+        "W357"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "children W347-W356 from a full read of doc 1Ve0IFuaREPlEjzj94KxVdtE5u3sMn78wIZGdy53RimY on 2026-10-12, ranked by the reader: fire ripple, operator saturation, plan drift, milestone roll-up, what-if, liveness board, token cost, ForgeFed outbox, DORA, inter-workstream SLAs",
@@ -6625,8 +6625,8 @@
       "issued_at": "2026-10-12T00:39:56Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-12T00:40:36Z",
-      "ticks_blocked": 1,
+      "last_worked": "2026-10-12T01:15:37Z",
+      "ticks_blocked": 0,
       "completed": null
     },
     {
@@ -6654,7 +6654,7 @@
     {
       "symbol": "W348",
       "title": "Operator saturation: warn when operator asks pile up faster than answers",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W346"
       ],
@@ -6664,15 +6664,15 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "per repo and fleet: count and age of open blocked_kind human cards against a declared cap, and ask arrival versus answer rate with implied wait; a nemik-check warning and a nemik-metrics gauge. Distinct from W327 (paces card creation, not operator demand)",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: nemik-check Warning per repo over [saturation] needs_you_per_repo (10) with count and oldest ask; tests/test_saturation.py; SKILL findings row. Live 2026-10-12: aeternum 14, el-openglo 12, life 11, luthen-observability 17. The arrival-versus-answer rate half is W357.",
       "issued_at": "2026-10-12T00:40:18Z",
       "minted_during": "interrupt",
       "caused_by": "W346",
-      "last_worked": "2026-10-12T00:43:35Z",
+      "last_worked": "2026-10-12T01:15:28Z",
       "ticks_blocked": 0,
       "weight": 2,
-      "completed": null
+      "completed": "20261012T011528Z"
     },
     {
       "symbol": "W349",
@@ -6721,7 +6721,7 @@
     {
       "symbol": "W351",
       "title": "What-if: nemik-critical and nemik-rank --assume-done repo:W<n>",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W346"
       ],
@@ -6736,9 +6736,10 @@
       "issued_at": "2026-10-12T00:40:23Z",
       "minted_during": "interrupt",
       "caused_by": "W346",
-      "last_worked": null,
+      "last_worked": "2026-10-12T01:15:31Z",
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 2,
+      "completed": null
     },
     {
       "symbol": "W352",
@@ -6849,6 +6850,27 @@
       "last_worked": null,
       "ticks_blocked": 0,
       "weight": 2
+    },
+    {
+      "symbol": "W357",
+      "title": "Operator ask arrival versus answer rate, weekly, with implied wait",
+      "status": "ready",
+      "enables": [
+        "W346"
+      ],
+      "touches": [
+        "operator",
+        "history"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "per ISO week and repo, from the committed queue history: needs-you asks opened, asks answered (left blocked_kind human), and Little's-law implied wait; a fleet total in nemik-history --weekly or its own --operator mode",
+      "evidence": "",
+      "issued_at": "2026-10-12T01:15:26Z",
+      "minted_during": "tick",
+      "caused_by": "W348",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -6911,7 +6933,10 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-10-12T01:11:26Z"
+  },
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }

@@ -555,3 +555,4 @@
 2026-10-12T00:40:30Z  interrupt W355 minted    -         "DORA signals: deploy frequency from pushes, change failure from reopened cards"  evidence=W346
 2026-10-12T00:40:31Z  interrupt W356 minted    -         "Inter-workstream SLAs: a declared time for a repo to answer a cross-repo block"  evidence=W346
 2026-10-12T00:46:19Z  tick  W318 advanced  unblock   "nemik-history --baseline; bare-date resolve fix; W312 closed; W346-W356 filed from the doc trawl (3e8e795)"  evidence=3e8e795
+2026-10-12T01:15:26Z  tick  W357 minted    -         "Operator ask arrival versus answer rate, weekly, with implied wait"  evidence=W348

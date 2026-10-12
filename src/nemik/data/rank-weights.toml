@@ -106,3 +106,8 @@ days = 14
 blocked_share = [0.7, 0.9]
 oldest_block_ticks = [50, 150]
 asks_owed = [5, 12]
+
+# nemik:W348: more open needs-you operator asks than this in one repo is a nemik-check Warning (the operator is
+# that repo's bottleneck). 2026-10-12 fleet: 0-19 per repo; 10 flags the four heaviest.
+[saturation]
+needs_you_per_repo = 10
