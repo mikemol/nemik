@@ -670,3 +670,4 @@
 2026-10-12T20:42:29Z  tick  W414 minted    -         "Static manifest: manifest.json maps every published data path to the sha256 of its bytes"
 2026-10-12T20:42:30Z  tick  W415 minted    -         "Split graph.json into per-repo pieces plus a fleet piece; the page assembles them, a test pins assembled == whole"
 2026-10-12T20:42:31Z  tick  W416 minted    -         "The page polls manifest.json and refetches only the pieces whose hash changed (browser test)"
+2026-10-12T20:47:31Z  tick  W414 advanced  unblock   "ce88156 pushed: hashes.json in the static build; W409 atomized into W414 (done), W415 per-repo split (working), W416 refetch by hash"

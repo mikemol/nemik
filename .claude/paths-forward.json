@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 215
+      "ticks_blocked": 216
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 35,
+      "ticks_blocked": 36,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 37,
+      "ticks_blocked": 38,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T13:54:28Z",
-      "ticks_blocked": 67,
+      "ticks_blocked": 68,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 64,
+      "ticks_blocked": 65,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 41,
+      "ticks_blocked": 42,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 56,
+      "ticks_blocked": 57,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 56,
+      "ticks_blocked": 57,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 56,
+      "ticks_blocked": 57,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 56,
+      "ticks_blocked": 57,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 56,
+      "ticks_blocked": 57,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 56,
+      "ticks_blocked": 57,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 56,
+      "ticks_blocked": 57,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 56,
+      "ticks_blocked": 57,
       "completed": null
     },
     {
@@ -6469,7 +6469,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 44,
+      "ticks_blocked": 45,
       "weight": 1,
       "completed": null
     },
@@ -6620,7 +6620,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 31,
+      "ticks_blocked": 32,
       "completed": null
     },
     {
@@ -7031,7 +7031,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 37,
+      "ticks_blocked": 38,
       "completed": null
     },
     {
@@ -7582,7 +7582,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W338",
       "last_worked": "2026-10-12T13:24:19Z",
-      "ticks_blocked": 15,
+      "ticks_blocked": 16,
       "completed": null
     },
     {
@@ -7630,7 +7630,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "completed": null
     },
     {
@@ -7654,7 +7654,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "completed": null
     },
     {
@@ -7679,7 +7679,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:01:54Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "weight": 3,
       "completed": null
     },
@@ -7705,7 +7705,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T18:43:02Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "completed": null
     },
     {
@@ -7729,7 +7729,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "completed": null
     },
     {
@@ -7864,7 +7864,7 @@
       "minted_during": "tick",
       "caused_by": "W393",
       "last_worked": "2026-10-12T19:13:41Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -8025,7 +8025,6 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W414",
         "W415",
         "W416"
       ],
@@ -8036,7 +8035,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T20:42:39Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "weight": 2,
       "completed": null
     },
@@ -8141,32 +8140,31 @@
     {
       "symbol": "W415",
       "title": "Split graph.json into per-repo pieces plus a fleet piece; the page assembles them, a test pins assembled == whole",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W409"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: src/nemik/pieces.py split/assemble; build_static publishes graph/<repo>.json and graph/_fleet.json cut after the withheld list and manifest checks (so they hold only graph.json fields), each listed in hashes.json. tests/test_pieces.py: fixture fleet pieces assemble back to graph.json (nodes compared by id).",
       "issued_at": "2026-10-12T20:42:30Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-12T20:44:22Z",
+      "last_worked": "2026-10-12T21:23:53Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261012T212353Z"
     },
     {
       "symbol": "W416",
       "title": "The page polls manifest.json and refetches only the pieces whose hash changed (browser test)",
-      "status": "blocked",
+      "status": "working",
       "enables": [
         "W409"
       ],
       "touches": [],
       "blocked_on": [
-        "W414",
         "W415"
       ],
       "blocked_kind": "agent",
@@ -8175,7 +8173,7 @@
       "issued_at": "2026-10-12T20:42:31Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-12T20:42:38Z",
+      "last_worked": "2026-10-12T21:23:55Z",
       "ticks_blocked": 0,
       "completed": null
     }
@@ -8242,7 +8240,7 @@
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-12T20:41:30Z"
+    "taken_at": "2026-10-12T21:11:33Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []

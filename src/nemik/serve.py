@@ -556,6 +556,12 @@ def build_static(root: Path, out: Path, withheld: Path | None) -> list[Path]:
     docs = apply(static_data(Model(root, refs)), refs)
     if bad := [f for name, doc in docs.items() for f in unmanifested(name, doc)]:
         raise ValueError("unmanifested fields, refusing to publish: " + ", ".join(bad))
+    # nemik:W415: graph.json's pieces, cut after the checks above from the document they checked,
+    # so they hold nothing graph.json may not; graph.json stays until the page reads pieces (W416).
+    from nemik.pieces import split
+
+    for piece, cut in split(docs["graph.json"]).items():
+        docs[f"graph/{piece}.json"] = cut
     written = write_static(out)
     # nemik:W414: hashes.json maps each published data path to the sha256 of its bytes, so a page
     # (W416) can refetch only the pieces that changed. Paths and digests only: nothing withheld.
