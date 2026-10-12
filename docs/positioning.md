@@ -152,3 +152,48 @@ What nemik does differently on purpose:
 The modelled workflows behind these moves live in `src/nemik/data/workflows.toml`; the ones a newcomer
 meets first are `workflow:rank-sync` (a tick's ranking), `workflow:peer-block` (waiting on another repo)
 and `workflow:operator-ask` (waiting on the human).
+
+## From multi-agent and swarm frameworks
+
+### Concepts
+
+| you know | in nemik |
+|---|---|
+| agent | a workstream: one repo, one Claude session on it, one queue |
+| orchestrator, planner | none. Each repo's loop ranks its own queue against the fleet graph each tick |
+| task handoff | a card `blocked_on` another repo's card, and that repo minting a card that claims it |
+| message bus, mailbox | letters in a repo's `inbox/`, and peer messages between live sessions; a card cites the letter it answers |
+| shared memory, blackboard | the queues themselves, read fleet-wide as one RDF graph by nemik |
+| supervisor, human in the loop | the operator: a scarce resource with its own queue (`nemik-operator`), salience and load measures |
+| agent liveness, heartbeat | `nemik-wake`: which repos are awake, idle or asleep, and what waits on the sleeping ones |
+| tool permissions, guardrails | per-repo hooks (one writer per queue, the commit gate, the working-card rule), not a central policy |
+| retries and dead letters | a block past the declared SLA warns on the blocker; an uncited letter shows UNCLAIMED until claimed |
+| emergent coordination | the current-flow ranking: demand from every waiting card flows to whoever can do the prerequisite |
+
+What nemik does differently on purpose:
+
+- **No orchestrator.** Nothing assigns work or holds the plan. Every repo pulls from the same graph, so
+  coordination survives any one session dying, and a dormant repo is a visible state, not a hang.
+- **Durable state, not conversation.** An agent's working state lives in its queue file and ledger, not
+  in its context window, so a session can be restarted, compacted or replaced and pick up where the
+  queue says it was.
+- **The human is modelled, not assumed.** The operator's attention is the scarcest resource, so asks on
+  it carry the demand they hold back, duplicate asks are grouped, and a repo that piles up asks is warned.
+  Most things that look like they need the human turn out not to, and the ask categories say which.
+- **Read-only observer, many writers.** nemik never writes a queue; each repo writes its own through one
+  writer. Integration with anything else follows the same rule: exports are files, imports are printed
+  writer commands.
+
+### Workflow translation
+
+| you used to | in nemik |
+|---|---|
+| dispatch a task to another agent | add a card here `blocked_on` its `repo:W<n>`, or write a letter to its `inbox/` |
+| poll for messages addressed to you | `nemik-inbound REPO` every tick: waiting cards and uncited letters, each with its claim command |
+| check which agents are alive | `nemik-wake` |
+| escalate to a human | file the card `blocked_on` an `operator: decide ...` or `operator: act ...` ask; it appears in `nemik-operator` |
+| find who the whole system is waiting on | `nemik-critical` and `nemik-operator`, heaviest first |
+| detect a deadlock between agents | `nemik-critical` lists dependency cycles; `nemik-check` warns on each card in one the operator cannot break |
+| replay what the agents did | the ledger, and `nemik-history REPO` between any two revisions |
+
+These moves are modelled as `workflow:peer-block`, `workflow:operator-ask` and `workflow:letter-as-evidence`.

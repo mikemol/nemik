@@ -62,6 +62,9 @@ def test_cmd_output_is_the_cli_output(name, tmp_path, monkeypatch) -> None:
         )
     )
     _, argv, _ = {**COMMANDS, **FILE_COMMANDS}[name]
+    # nemik:W362's gate: metrics reads the host's live event spool, where another repo's turn landed
+    # between the two runs (nemik_turns_total 931 -> 932). Both runs read one empty spool instead.
+    monkeypatch.setenv("XDG_STATE_HOME", str(tmp_path / "state"))
     code, out = run(name, _graph(tmp_path), str(tmp_path), "a")
     mod = {
         "rank": "nemik.rank:main",
