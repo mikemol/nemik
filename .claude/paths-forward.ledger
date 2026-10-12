@@ -575,3 +575,4 @@
 2026-10-12T01:38:13Z  interrupt W373 minted    -         "Lateral view: IBM Rational Jazz (Team Concert), where nemik's OSLC bones came from"  evidence=operator
 2026-10-12T01:42:17Z  tick  W188 nudged    nudge     "NUDGE el-openglo:W72 (W339) and the operator's Tasks token (W188): both already known to their owners this session, no new message"
 2026-10-12T01:48:40Z  peer  W351 advanced  unblock   "what-if --assume-done (0895b10); bazel server shut down for host memory and idle capped at 600s"  evidence=0895b10
+2026-10-12T02:21:51Z  tick  W356 advanced  unblock   "cross-repo SLA warning on the blocker's card (b2edbbb)"  evidence=b2edbbb
