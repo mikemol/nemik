@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 397,
+  "counter": 398,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 203
+      "ticks_blocked": 204
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 23,
+      "ticks_blocked": 24,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 25,
+      "ticks_blocked": 26,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T13:54:28Z",
-      "ticks_blocked": 55,
+      "ticks_blocked": 56,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 52,
+      "ticks_blocked": 53,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 29,
+      "ticks_blocked": 30,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 44,
+      "ticks_blocked": 45,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 44,
+      "ticks_blocked": 45,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 44,
+      "ticks_blocked": 45,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 44,
+      "ticks_blocked": 45,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 44,
+      "ticks_blocked": 45,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 44,
+      "ticks_blocked": 45,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 44,
+      "ticks_blocked": 45,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 44,
+      "ticks_blocked": 45,
       "completed": null
     },
     {
@@ -6469,7 +6469,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 32,
+      "ticks_blocked": 33,
       "weight": 1,
       "completed": null
     },
@@ -6620,7 +6620,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "completed": null
     },
     {
@@ -6758,7 +6758,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 3
     },
     {
       "symbol": "W353",
@@ -6780,7 +6780,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 3
     },
     {
       "symbol": "W354",
@@ -6802,7 +6802,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 3
     },
     {
       "symbol": "W355",
@@ -6824,7 +6824,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 3
     },
     {
       "symbol": "W356",
@@ -7031,7 +7031,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 25,
+      "ticks_blocked": 26,
       "completed": null
     },
     {
@@ -7228,7 +7228,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 7
+      "weight": 6
     },
     {
       "symbol": "W374",
@@ -7384,7 +7384,7 @@
     {
       "symbol": "W381",
       "title": "a11y C5: card state must not rest on fill colour alone",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W337"
       ],
@@ -7394,15 +7394,15 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "W380 refuted: ready, working and blocked differ only by fill (index.html:328); add a non-colour cue per state (border style or a label prefix glyph), and a browser test asserting each pair of states differs in some non-colour property; the treemap's opacity-only state (:407) too",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: index.html STATE_MARK: working, blocked, done and dropped labels begin with a glyph (play, pause, check, cross), ready with none, in the graph and the treemap (tiles share the label) and in the legend. test_each_card_state_differs_by_more_than_its_fill: one prefix per state, no two states sharing one. The forest layout budget's cross_upward re-based 22 -> 26 (measured 24, wider labels), recorded as the price of the a11y constraint per the budget's own practice. render-check 20 passed. | 2026-10-12: Gate correction: the first glyph set (U+25B6, U+23F8, U+2713, U+2715) was missing from the gate's headless-Chrome fonts and drew as wide boxes (fit_zoom 0.367 there, passing on the host). Switched to U+25B8, U+2016, U+221A, U+00D7, which every base font has: the gate then measured fit_zoom 0.407, the glyphs' real width, and fit_zoom was re-based 0.41 -> 0.37 with the reason beside the budget. bazel test //:test_layout green under the gate's browser. Host/gate browser parity carded as W398.",
       "issued_at": "2026-10-12T12:14:16Z",
       "minted_during": "interrupt",
       "caused_by": "W380",
-      "last_worked": "2026-10-12T14:50:29Z",
+      "last_worked": "2026-10-12T15:32:31Z",
       "ticks_blocked": 0,
       "weight": 1,
-      "completed": null
+      "completed": "20261012T151912Z"
     },
     {
       "symbol": "W382",
@@ -7475,7 +7475,7 @@
     {
       "symbol": "W385",
       "title": "a11y C2: context cards get a cue of their own, and the test checks the style, not a data flag",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W337"
       ],
@@ -7490,9 +7490,10 @@
       "issued_at": "2026-10-12T12:14:20Z",
       "minted_during": "interrupt",
       "caused_by": "W380",
-      "last_worked": "2026-10-12T12:45:32Z",
+      "last_worked": "2026-10-12T15:19:13Z",
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 1,
+      "completed": null
     },
     {
       "symbol": "W386",
@@ -7578,7 +7579,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W338",
       "last_worked": "2026-10-12T13:24:19Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -7618,8 +7619,7 @@
         "W393",
         "W394",
         "W395",
-        "W396",
-        "W397"
+        "W396"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "operator 2026-10-12: the nemik containers OOM a lot and the page hangs while the server warms up, yet the graph changes only when a queue changes. Children W392-W396: measure first (web vitals), then snapshots rebuilt only on change, served as static files, a page that never waits on a warm server, and the remaining server-only computation moved or precomputed. Deployment is luthen-observability's; coordinate the serving change with it.",
@@ -7627,7 +7627,7 @@
       "issued_at": "2026-10-12T14:27:37Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-12T14:38:34Z",
+      "last_worked": "2026-10-12T14:59:29Z",
       "ticks_blocked": 1,
       "completed": null
     },
@@ -7643,7 +7643,7 @@
         "performance"
       ],
       "blocked_on": [
-        "luthen-observability:W870"
+        "luthen-observability:W872"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "operator 2026-10-12: hand the measurement to luthen-observability, which tracks the fleet's metrics; these are metrics the fleet ought to track anyway. Asked luthen to card scheduled Lighthouse/web-vitals runs (LCP, INP, CLS, TTFB, bytes, serving memory cold and warm) against nemik's view and its other hosted web services, exported to its metrics store, citing nemik:W392. When the series exist: read nemik's baseline before W394 lands, and make the render tests assert budgets against those numbers.",
@@ -7651,8 +7651,8 @@
       "issued_at": "2026-10-12T14:27:38Z",
       "minted_during": "interrupt",
       "caused_by": "W391",
-      "last_worked": "2026-10-12T14:36:34Z",
-      "ticks_blocked": 1,
+      "last_worked": "2026-10-12T15:25:01Z",
+      "ticks_blocked": 0,
       "completed": null
     },
     {
@@ -7675,7 +7675,7 @@
       "caused_by": "W391",
       "last_worked": "2026-10-12T14:38:31Z",
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 4
     },
     {
       "symbol": "W394",
@@ -7690,7 +7690,7 @@
         "performance"
       ],
       "blocked_on": [
-        "luthen-observability:W870"
+        "luthen-observability:W872"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "the deployed container serves index.html and the snapshot files with a plain static server (small, no rdflib per request, cache headers from the hash), while the builder runs as its own job; no request ever waits on a graph rebuild, and memory is the builder's, bounded and outside serving. Agree the shape with luthen-observability, which deploys nemik",
@@ -7698,8 +7698,8 @@
       "issued_at": "2026-10-12T14:27:40Z",
       "minted_during": "interrupt",
       "caused_by": "W391",
-      "last_worked": "2026-10-12T14:36:35Z",
-      "ticks_blocked": 1,
+      "last_worked": "2026-10-12T15:25:03Z",
+      "ticks_blocked": 0,
       "completed": null
     },
     {
@@ -7714,7 +7714,7 @@
         "performance"
       ],
       "blocked_on": [
-        "luthen-observability:W870"
+        "luthen-observability:W872"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "stale-while-revalidate in the page: draw from the browser's cached snapshot immediately, show its age, fetch the new one in the background and redraw only if its hash changed (the 60 s poll becomes a cheap conditional request); a server that is warming or down shows the last snapshot with a banner instead of a hung page",
@@ -7722,8 +7722,8 @@
       "issued_at": "2026-10-12T14:27:42Z",
       "minted_during": "interrupt",
       "caused_by": "W391",
-      "last_worked": "2026-10-12T14:36:35Z",
-      "ticks_blocked": 1,
+      "last_worked": "2026-10-12T15:25:04Z",
+      "ticks_blocked": 0,
       "completed": null
     },
     {
@@ -7746,7 +7746,7 @@
       "caused_by": "W391",
       "last_worked": "2026-10-12T14:38:32Z",
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 4
     },
     {
       "symbol": "W397",
@@ -7771,6 +7771,25 @@
       "ticks_blocked": 0,
       "weight": 6,
       "completed": "20261012T145026Z"
+    },
+    {
+      "symbol": "W398",
+      "title": "render-check runs the same pinned headless Chrome (and fonts) as the gate, so a host pass means a gate pass",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "web",
+        "tests"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "W381: tools/render-check.sh passed on the host's google-chrome-stable while the gate's pinned chromium_headless_shell failed the same test: a glyph missing from the gate's fonts drew as a wide box (fit_zoom 0.367 there, fine on the host). Point render-check at the gate's pinned browser (bazel's @chromium) by default, keep the host Chrome as an opt-in, and add a test that the page's label glyphs are present in the gate browser's fonts (render a probe string, compare glyph widths to a known-missing codepoint's box)",
+      "evidence": "",
+      "issued_at": "2026-10-12T15:32:29Z",
+      "minted_during": "interrupt",
+      "caused_by": "W381",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -7833,7 +7852,10 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-10-12T15:32:32Z"
+  },
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }

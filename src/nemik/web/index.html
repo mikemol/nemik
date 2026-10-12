@@ -114,8 +114,13 @@ const STATES = ["ready", "working", "blocked", "done", "dropped", "unclaimed"];
 const color = s => css("--" + (STATES.includes(s) ? s : "other"));
 let data = null, cy = null, selectedId = null, liveness = {}, lastMode = null;
 
+// nemik:W381 (W380 refuted 'state not by colour alone'): each state but ready also carries a glyph at the
+// front of the card's label, so state reads without its fill colour, in the graph and the treemap alike.
+// The glyphs are ones every base font carries (U+25B8, U+2016, U+221A, U+00D7): a glyph a font lacks draws
+// as a wide placeholder box, which widened labels only under the gate's headless Chrome.
+const STATE_MARK = { ready: "", working: "▸ ", blocked: "‖ ", done: "√ ", dropped: "× " };
 document.getElementById("legend").innerHTML = [...STATES, "other"].map(s =>
-  `<span><i class="dot" style="background:${color(s)}"></i>${s}</span>`).join("");
+  `<span><i class="dot" style="background:${color(s)}"></i>${STATE_MARK[s] || ""}${s}</span>`).join("");
 
 function esc(s) { return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 
@@ -389,7 +394,7 @@ function draw() {
     }),
     ...data.nodes.filter(n => keep.has(n.id)).map(n => {
       const e = n.effort || {}, total = (e.forecast || 0) + (e.interrupt || 0) + (e.unclassified || 0);
-      return { data: { ...n, parent: treemapOn ? undefined : "repo:" + n.repo, label: n.state === "unclaimed" ? `? ${n.for}` : n.symbol + (bySal && n.salience ? ` · ${+n.salience.toFixed(1)}` : "")
+      return { data: { ...n, parent: treemapOn ? undefined : "repo:" + n.repo, label: n.state === "unclaimed" ? `? ${n.for}` : (STATE_MARK[n.state] || "") + n.symbol + (bySal && n.salience ? ` · ${+n.salience.toFixed(1)}` : "")
           + (rolled.has(n.id) ? ` ▸ ${rolled.get(n.id)}` : expanded.has(n.id) ? " ▾" : ""),
         rollup: rolled.get(n.id) || 0,
         fill: color(n.state), border: total ? 1 + 6 * (e.interrupt || 0) / total : 1,

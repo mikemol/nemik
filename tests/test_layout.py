@@ -41,11 +41,18 @@ FLEET = Path(__file__).parent / "fixtures" / "fleet"
 #        the price of a new constraint (rank order honours the fruit class), not a layout regression
 #        (operator 2026-10-01); the budget is re-based on it, same ~10% headroom as before.
 #   W141 regenerated fixture (501 open nodes): 2357, 0.45; crossings 190, upward 20. Re-based.
+#   W381 (2026-10-12): a state glyph now begins every non-ready card's label (WCAG 1.4.1), widening
+#        those labels and so the boxes' packing; upward measured 24 on the host. The price of the a11y
+#        constraint, not a layout regression; upward re-based with the same ~10% headroom. (A first set
+#        of glyphs missing from the gate's headless-Chrome fonts drew as wide boxes and dropped fit_zoom
+#        to 0.367 there; the glyphs were changed to ones every base font has, not the budget.) With
+#        those, the gate measured fit_zoom 0.407: the glyphs' real width; re-based to 0.37 with the
+#        same headroom. The first view's readability is W340's 8 px floor, not this number.
 FOREST_BUDGET = {
     "cross_p95": 2600,
-    "fit_zoom": 0.41,
+    "fit_zoom": 0.37,
     "intra_crossings": 340,
-    "cross_upward": 22,
+    "cross_upward": 26,
 }
 
 METRICS = """() => {
@@ -473,6 +480,39 @@ def test_the_default_view_is_legible(server) -> None:
     assert m["label_px"] >= 8, m
     assert m["min_target_px"] >= 12, m
     assert note == "" or "readable size" in note
+
+
+def test_each_card_state_differs_by_more_than_its_fill(server) -> None:
+    # nemik:W381 (W380 refuted the old claim): for every pair of states drawn, the cards differ in some
+    # non-colour property, here the glyph that begins the label (ready has none, the rest each their own).
+    with sync_api.sync_playwright() as p:
+        exe = os.environ.get("NEMIK_CHROMIUM")
+        try:
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        page.goto(server)
+        page.wait_for_function(
+            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
+            timeout=60000,
+        )
+        page.check("#showDone")
+        page.wait_for_timeout(600)
+        prefixes = page.evaluate(
+            "() => { const m = {}; cy.nodes('[symbol]').forEach(n => { const s = n.data('state');"
+            " if (s === 'unclaimed') return; const l = n.data('label'), sym = n.data('symbol');"
+            " (m[s] = m[s] || new Set()).add(l.slice(0, l.indexOf(sym))); });"
+            " return Object.fromEntries(Object.entries(m).map(([s, v]) => [s, [...v]])); }"
+        )
+        browser.close()
+    assert {"ready", "blocked", "done"} <= set(prefixes)
+    # one prefix per state, and no two states share one
+    assert all(len(v) == 1 for v in prefixes.values()), prefixes
+    marks = [v[0] for v in prefixes.values()]
+    assert len(set(marks)) == len(marks), prefixes
 
 
 def test_no_command_route_or_tools_panel_remains(server) -> None:
