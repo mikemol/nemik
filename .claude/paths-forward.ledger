@@ -648,3 +648,5 @@
 2026-10-12T16:51:51Z  tick  W403 minted    -         "One flow solve per repo and option per document build, not one per caller"  evidence=W399
 2026-10-12T16:55:43Z  tick  W404 minted    -         "Speed the flow solver's inner loop (flow._grounded), now the rebuild's hotspot"  evidence=W403
 2026-10-12T16:55:49Z  tick  W403 advanced  collapse  "rebuild measured by phase (W399): the document is 87%, from duplicate flow solves; deduped (W403), rebuild 141 -> 86 s"
+2026-10-12T17:19:43Z  tick  W392 nudged    nudge     "NUDGE luthen-observability:W872 and mtools:W1048: in progress at their owners; no message"
+2026-10-12T17:32:22Z  tick  W404 advanced  unblock   "solver heap: same order, no measurable gain; profile shows exact Fraction arithmetic is the cost; W401 (re-solve only reached cones) is the larger lever"

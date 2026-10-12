@@ -103,8 +103,18 @@ def _grounded(
                     link[a][b] = link[a].get(b, ZERO) + w
     rhs = {n: (amount if n == source else ZERO) for n in diag}
     steps: list[tuple[str, Fraction, dict[str, Fraction]]] = []
+    # nemik:W404: the lowest-degree node (ties by name) from a heap with lazy invalidation, the same
+    # elimination order the old full scan chose, at a fraction of its cost: the scan ran once per
+    # elimination over every remaining node (20 M key calls in one fleet rebuild). An entry whose
+    # degree is stale is skipped; every degree change pushes a fresh entry.
+    import heapq
+
+    heap = [(len(link[n]), n) for n in link]
+    heapq.heapify(heap)
     while link:
-        k = min(link, key=lambda n: (len(link[n]), n))
+        degree, k = heapq.heappop(heap)
+        if k not in link or len(link[k]) != degree:
+            continue
         pivot = diag[k]
         if pivot == 0:
             msg = "a component with no ground"
@@ -117,6 +127,7 @@ def _grounded(
             for j, g_j in around.items():
                 if j != i:
                     link[i][j] = link[i].get(j, ZERO) + g_i * g_j / pivot
+            heapq.heappush(heap, (len(link[i]), i))
         steps.append((k, pivot, around))
     potential: dict[str, Fraction] = {}
     for k, pivot, around in reversed(steps):

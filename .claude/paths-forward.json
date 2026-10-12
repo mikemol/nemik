@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 207
+      "ticks_blocked": 208
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 28,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 29,
+      "ticks_blocked": 30,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T13:54:28Z",
-      "ticks_blocked": 59,
+      "ticks_blocked": 60,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 56,
+      "ticks_blocked": 57,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 33,
+      "ticks_blocked": 34,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 48,
+      "ticks_blocked": 49,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 48,
+      "ticks_blocked": 49,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 48,
+      "ticks_blocked": 49,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 48,
+      "ticks_blocked": 49,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 48,
+      "ticks_blocked": 49,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 48,
+      "ticks_blocked": 49,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 48,
+      "ticks_blocked": 49,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 48,
+      "ticks_blocked": 49,
       "completed": null
     },
     {
@@ -6469,7 +6469,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 36,
+      "ticks_blocked": 37,
       "weight": 1,
       "completed": null
     },
@@ -6556,7 +6556,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 6
     },
     {
       "symbol": "W344",
@@ -6620,7 +6620,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 23,
+      "ticks_blocked": 24,
       "completed": null
     },
     {
@@ -6758,7 +6758,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W353",
@@ -6780,7 +6780,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W354",
@@ -6802,7 +6802,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W355",
@@ -6824,7 +6824,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W356",
@@ -7031,7 +7031,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 29,
+      "ticks_blocked": 30,
       "completed": null
     },
     {
@@ -7053,7 +7053,7 @@
       "caused_by": "W364",
       "last_worked": "2026-10-12T01:34:53Z",
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 2
     },
     {
       "symbol": "W366",
@@ -7074,7 +7074,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 2
     },
     {
       "symbol": "W367",
@@ -7095,7 +7095,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 2
     },
     {
       "symbol": "W368",
@@ -7117,7 +7117,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 2
     },
     {
       "symbol": "W369",
@@ -7228,7 +7228,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 7
     },
     {
       "symbol": "W374",
@@ -7579,7 +7579,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W338",
       "last_worked": "2026-10-12T13:24:19Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "completed": null
     },
     {
@@ -7628,7 +7628,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T14:59:29Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "completed": null
     },
     {
@@ -7652,7 +7652,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T15:25:01Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -7678,7 +7678,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:01:54Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "weight": 3,
       "completed": null
     },
@@ -7704,7 +7704,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T15:25:03Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -7728,7 +7728,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T15:25:04Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -7751,7 +7751,7 @@
       "caused_by": "W391",
       "last_worked": "2026-10-12T14:38:32Z",
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 5
     },
     {
       "symbol": "W397",
@@ -7838,12 +7838,13 @@
       "minted_during": "tick",
       "caused_by": "W393",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W401",
       "title": "Recompute derived numbers only where a change reaches, and write snapshots per piece",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W393"
       ],
@@ -7858,8 +7859,9 @@
       "issued_at": "2026-10-12T16:42:26Z",
       "minted_during": "tick",
       "caused_by": "W393",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-12T17:32:20Z",
+      "ticks_blocked": 0,
+      "completed": null
     },
     {
       "symbol": "W402",
@@ -7879,7 +7881,8 @@
       "minted_during": "tick",
       "caused_by": "W393",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W403",
@@ -7905,7 +7908,7 @@
     {
       "symbol": "W404",
       "title": "Speed the flow solver's inner loop (flow._grounded), now the rebuild's hotspot",
-      "status": "working",
+      "status": "ready",
       "enables": [
         "W401"
       ],
@@ -7914,12 +7917,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "after W403 the document phase is 67 s of an 86 s rebuild, and the profile's remaining weight is flow.solve's _grounded (5808 calls, ~190 s cumulative before dedup, a per-call lambda run 20M times): profile it again under the memo, then cut the per-call work (precompute the adjacency once per solve, avoid re-sorting, exact Fractions only where the answer needs them) while keeping every salience exactly equal (the flow tests and test_memo_audits' identical-document check are the contract)",
-      "evidence": "",
+      "next_bounded_step": "Measured 2026-10-12 after W403: the lowest-degree scan is replaced by a lazy-invalidation heap (same elimination order, flow tests and the identical-document check green), but the document phase did not move (66.6 -> 65.8 s): the scan was not the cost. The profile now puts it in exact Fraction arithmetic (math.gcd 24 s, Fraction add/mul/div ~90 s cumulative) across ~2900 per-source eliminations in 29 solves. Exactness is a design choice (W119, W250: order-independent, deterministic ties), so any further step must keep every salience equal. Options to evaluate, not yet tried: factor a shared cone once and solve several sources' right-hand sides against it; keep integers on a common denominator through the elimination; or accept that W401 (re-solve only cones a change reaches) removes most solves from each rebuild and stop here.",
+      "evidence": "2026-10-12: heap change kept: correct, n log n instead of n^2 per elimination, no measurable gain at this fleet size. Real-fleet rebuild 86.3 s CPU, document 65.8 s.",
       "issued_at": "2026-10-12T16:55:43Z",
       "minted_during": "tick",
       "caused_by": "W403",
-      "last_worked": "2026-10-12T16:55:48Z",
+      "last_worked": "2026-10-12T17:32:20Z",
       "ticks_blocked": 0,
       "completed": null
     }
@@ -7984,10 +7987,7 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": {
-    "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-12T17:02:44Z"
-  },
+  "lock": null,
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }
