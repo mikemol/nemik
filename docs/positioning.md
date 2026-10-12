@@ -208,7 +208,7 @@ These moves are modelled as `workflow:peer-block`, `workflow:operator-ask` and `
 | strict priority | the priority band; an operator ask is deliberately NOT a strict tier but demand inside the flow, with a declared weight |
 | weighted fair queueing | flow salience: a shared prerequisite's demand is split among the cards that need it, not counted in full by each |
 | starvation, aging | `nemik-starved` reports ready cards overtaken past a declared age; there is no aging term in the order, by choice |
-| a token bucket, admission control | arrival pacing, carded as W327 and not built: a declared limit on new cards per repo per day, reported against actual |
+| a token bucket, admission control | `nemik-pacing`: each repo's new cards against a declared rate and burst, read as a token bucket; it reports, it does not admit or refuse |
 | backpressure | the operator-saturation warning, and the cross-repo SLA warning on a blocker's card |
 | one runnable task per CPU | one `working` card per repo |
 | MRP explosion | the `enables` cone of a card: everything it unblocks, transitively |

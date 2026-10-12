@@ -116,3 +116,11 @@ needs_you_per_repo = 10
 # Warning on the blocker's card (that repo can act). 48 ticks is a day at the 30-minute cadence.
 [sla]
 cross_repo_ticks = 48
+
+# nemik:W327: arrival pacing (nemik-pacing), a token bucket over each repo's new cards: `rate` per day,
+# `burst` on top, over `window_days`. Measured 2026-10-12 over 14 days: daily medians 2 to 53, peaks to
+# 844 (a bulk import). Report only; enforcing a pace is a separate decision.
+[pacing]
+rate = 50
+burst = 150
+window_days = 14

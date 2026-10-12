@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 196
+      "ticks_blocked": 197
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 48,
+      "ticks_blocked": 49,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 46,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 46,
       "completed": null,
       "weight": 1
     },
@@ -5382,7 +5382,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 22,
+      "ticks_blocked": 23,
       "completed": null
     },
     {
@@ -5403,7 +5403,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 37,
+      "ticks_blocked": 38,
       "completed": null
     },
     {
@@ -5462,7 +5462,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 37,
+      "ticks_blocked": 38,
       "completed": null
     },
     {
@@ -5483,7 +5483,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 37,
+      "ticks_blocked": 38,
       "completed": null
     },
     {
@@ -5523,7 +5523,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 37,
+      "ticks_blocked": 38,
       "completed": null
     },
     {
@@ -5582,7 +5582,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 37,
+      "ticks_blocked": 38,
       "completed": null
     },
     {
@@ -5622,7 +5622,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 37,
+      "ticks_blocked": 38,
       "completed": null
     },
     {
@@ -5643,7 +5643,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 37,
+      "ticks_blocked": 38,
       "completed": null
     },
     {
@@ -5683,7 +5683,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 37,
+      "ticks_blocked": 38,
       "completed": null
     },
     {
@@ -6139,21 +6139,19 @@
     {
       "symbol": "W323",
       "title": "Thoughts-forward 2 (operator's notes doc, new sections 2026-10-12): block schedulers, queueing theory, traffic shaping, as cards",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "W327"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Atomized into W324-W328: deadlock detection, utilization and Little's law, starvation and aging, arrival pacing, flow efficiency. Not foreclosed because nemik does not do them yet.",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: all children landed: W324 deadlock detection, W325 utilization and Little's law, W326 starvation (nemik-starved), W327 arrival pacing (nemik-pacing), W328 flow efficiency.",
       "issued_at": "2026-10-11T20:00:28Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-11T20:11:31Z",
-      "ticks_blocked": 27,
-      "completed": null
+      "last_worked": "2026-10-12T11:45:02Z",
+      "ticks_blocked": 0,
+      "completed": "20261012T114502Z"
     },
     {
       "symbol": "W324",
@@ -6215,22 +6213,22 @@
     {
       "symbol": "W327",
       "title": "Arrival pacing: a declared limit on new open cards per repo and per day, reported against actual",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W323"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Design a token-bucket reading from nemik-history opened counts: a declared rate and burst in rank-weights.toml, nemik-check warns when a repo exceeds it; advisory first, enforcement a separate decision.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: nemik-pacing (src/nemik/pacing.py): a token bucket per repo over issued_at, [pacing] rate 50/day, burst 150, window 14 days in rank-weights.toml, measured first (daily medians 2-53, peaks to 844); report only. Live: gabion 616 tokens under after its bulk import, mtools 28 under now. tests/test_pacing.py; SKILL row; workflows reference; positioning doc row updated.",
       "issued_at": "2026-10-11T20:00:41Z",
       "minted_during": "interrupt",
       "caused_by": "W323",
-      "last_worked": "2026-10-12T11:16:59Z",
+      "last_worked": "2026-10-12T11:44:46Z",
       "ticks_blocked": 0,
       "weight": 5,
-      "completed": null
+      "completed": "20261012T114446Z"
     },
     {
       "symbol": "W328",
@@ -6473,7 +6471,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 25,
+      "ticks_blocked": 26,
       "weight": 1,
       "completed": null
     },
@@ -6503,7 +6501,7 @@
     {
       "symbol": "W341",
       "title": "An a11y adversary for the view, as paperkit has for its VPAT",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W337"
       ],
@@ -6518,9 +6516,10 @@
       "issued_at": "2026-10-11T21:16:34Z",
       "minted_during": "tick",
       "caused_by": "paperkit:W320",
-      "last_worked": "2026-10-11T21:18:33Z",
+      "last_worked": "2026-10-12T11:44:53Z",
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 3,
+      "completed": null
     },
     {
       "symbol": "W342",
@@ -6623,7 +6622,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 13,
       "completed": null
     },
     {
@@ -7034,7 +7033,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "completed": null
     },
     {
@@ -7231,7 +7230,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 5
     },
     {
       "symbol": "W374",
