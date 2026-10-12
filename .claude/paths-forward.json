@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 192
+      "ticks_blocked": 193
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 13,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 14,
+      "ticks_blocked": 15,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 44,
+      "ticks_blocked": 45,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 41,
+      "ticks_blocked": 42,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 41,
+      "ticks_blocked": 42,
       "completed": null,
       "weight": 1
     },
@@ -5382,7 +5382,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "completed": null
     },
     {
@@ -5403,7 +5403,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 33,
+      "ticks_blocked": 34,
       "completed": null
     },
     {
@@ -5462,7 +5462,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 33,
+      "ticks_blocked": 34,
       "completed": null
     },
     {
@@ -5483,7 +5483,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 33,
+      "ticks_blocked": 34,
       "completed": null
     },
     {
@@ -5523,7 +5523,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 33,
+      "ticks_blocked": 34,
       "completed": null
     },
     {
@@ -5582,7 +5582,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 33,
+      "ticks_blocked": 34,
       "completed": null
     },
     {
@@ -5622,7 +5622,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 33,
+      "ticks_blocked": 34,
       "completed": null
     },
     {
@@ -5643,7 +5643,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 33,
+      "ticks_blocked": 34,
       "completed": null
     },
     {
@@ -5683,7 +5683,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 33,
+      "ticks_blocked": 34,
       "completed": null
     },
     {
@@ -6152,7 +6152,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T20:11:31Z",
-      "ticks_blocked": 23,
+      "ticks_blocked": 24,
       "completed": null
     },
     {
@@ -6472,7 +6472,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 21,
+      "ticks_blocked": 22,
       "weight": 1,
       "completed": null
     },
@@ -6622,7 +6622,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -6884,7 +6884,6 @@
         "positioning"
       ],
       "blocked_on": [
-        "W359",
         "W360",
         "W362",
         "W363"
@@ -6895,14 +6894,14 @@
       "issued_at": "2026-10-12T01:29:24Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-12T09:12:47Z",
+      "last_worked": "2026-10-12T09:46:02Z",
       "ticks_blocked": 0,
       "completed": null
     },
     {
       "symbol": "W359",
       "title": "Positioning: from MS Project and classic PM (tasks, dependencies, critical path, baselines)",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W358"
       ],
@@ -6912,20 +6911,20 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "map task to card, predecessor to blocked_on/enables, critical path and float to nemik-critical slack, baseline to nemik-history --baseline, RAG to repo health; say what is missing on purpose (no durations, no resource levelling: agents, not people)",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: docs/positioning.md MS Project and classic PM section: concepts (task, summary task, predecessor, milestone, critical path, float, baseline, RAG, resource, Gantt), what nemik does differently (no durations, no levelling, the plan moves), workflow translation. Also: docs/positioning.md and workflows.toml are now declared test data in BUILD.bazel; the drift test had been answered from cache when the doc changed.",
       "issued_at": "2026-10-12T01:29:37Z",
       "minted_during": "interrupt",
       "caused_by": "W358",
-      "last_worked": "2026-10-12T09:12:48Z",
+      "last_worked": "2026-10-12T09:46:00Z",
       "ticks_blocked": 0,
       "weight": 1,
-      "completed": null
+      "completed": "20261012T094600Z"
     },
     {
       "symbol": "W360",
       "title": "Positioning: from Jira, Bugzilla and issue trackers",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W358"
       ],
@@ -6940,9 +6939,10 @@
       "issued_at": "2026-10-12T01:29:39Z",
       "minted_during": "interrupt",
       "caused_by": "W358",
-      "last_worked": null,
+      "last_worked": "2026-10-12T09:46:05Z",
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 1,
+      "completed": null
     },
     {
       "symbol": "W361",
@@ -7035,7 +7035,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 14,
+      "ticks_blocked": 15,
       "completed": null
     },
     {

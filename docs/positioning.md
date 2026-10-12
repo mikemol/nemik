@@ -19,6 +19,49 @@ nemik's own vocabulary, once:
 | the operator | the one human; an ask on them is a card blocked with `blocked_kind` human |
 | letter | a file in a repo's `inbox/`, a message whose evidence a card cites |
 
+## From MS Project and classic project management
+
+### Concepts
+
+| you know | in nemik |
+|---|---|
+| task | a card |
+| summary task | an umbrella: a card blocked on its children; the web view can roll it up over its work |
+| predecessor, finish-to-start link | `blocked_on` on the dependent, or `enables` on the prerequisite; both are the same edge |
+| milestone | any card you rank toward, often an umbrella |
+| critical path | `nemik-critical`: every card on any longest chain of open work, per fleet, repo, view or one card's cone |
+| total float (slack) | the slack `nemik-critical` gives each open card: how far it can slip before it lengthens the path |
+| baseline | a revision or date; `nemik-history --baseline` compares planned with actual since it |
+| status report, RAG | repo health (red, amber, green) from declared thresholds, in `nemik-metrics` and on the view's repo chips |
+| resource | a workstream (a repo and its agent session), and one shared scarce resource, the operator |
+| Gantt chart | none on purpose (see below); the calendar export `nemik-ics` places cards that carry dates |
+
+What nemik does differently on purpose:
+
+- **No durations, no dates by default.** A card's length is one step; the critical path counts cards, not
+  days. Work here is done by agents whose speed varies by orders of magnitude between cards, so a
+  duration estimate would be a fiction the schedule then trusts. Dates appear only where a card carries a
+  real one (a due date, an event), and those go to calendars, not to a Gantt.
+- **No resource levelling.** Each repo works one card at a time and pulls its own next one, so there is
+  no allocation to level. The one shared resource that does saturate, the operator, is measured instead:
+  asks owed per repo, and the operator's own arrival, answer and wait rates.
+- **The plan is the graph, and it is allowed to move.** Re-planning is minting, re-wiring and dropping
+  cards in the queue, recorded as history; `--baseline` reports how far the plan's shape drifted rather
+  than treating drift as failure.
+
+### Workflow translation
+
+| you used to | in nemik |
+|---|---|
+| open the project and find the critical path | `nemik-critical`, or `nemik-critical --repo R` for one repo |
+| check a task's float | the slack column of `nemik-critical --json`, or the view's detail panel |
+| set a baseline and track variance | `nemik-history REPO --baseline DATE`: planned, closed, dropped, still open, added since, and how the shape moved |
+| ask "what if this task finishes now?" | `nemik-critical --assume-done repo:W<n>` |
+| ask "what moves this milestone?" | `nemik-rank REPO --toward repo:W<n>` |
+| find what an unplanned task pushed back | `nemik-critical --fires`: interrupt cards holding up planned work, and by how much |
+| write the weekly status report | `nemik-metrics` (health per repo) and `nemik-history REPO --weekly` |
+| link a task to another project's task | cite it as `repo:W<n>` in `blocked_on`; `nemik-inbound` shows the other repo who waits on it |
+
 ## From kanban, flow metrics and queueing theory
 
 ### Concepts
