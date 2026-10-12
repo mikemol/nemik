@@ -557,3 +557,20 @@
 2026-10-12T00:46:19Z  tick  W318 advanced  unblock   "nemik-history --baseline; bare-date resolve fix; W312 closed; W346-W356 filed from the doc trawl (3e8e795)"  evidence=3e8e795
 2026-10-12T01:15:26Z  tick  W357 minted    -         "Operator ask arrival versus answer rate, weekly, with implied wait"  evidence=W348
 2026-10-12T01:18:47Z  tick  W348 advanced  unblock   "operator saturation Warning (9b6bd21); rate half split to W357"  evidence=9b6bd21
+2026-10-12T01:29:24Z  interrupt W358 minted    -         "Positioning document: how to understand nemik if you come from X"  evidence=operator
+2026-10-12T01:29:37Z  interrupt W359 minted    -         "Positioning: from MS Project and classic PM (tasks, dependencies, critical path, baselines)"  evidence=W358
+2026-10-12T01:29:39Z  interrupt W360 minted    -         "Positioning: from Jira, Bugzilla and issue trackers"  evidence=W358
+2026-10-12T01:29:41Z  interrupt W361 minted    -         "Positioning: from kanban, flow metrics and queueing theory"  evidence=W358
+2026-10-12T01:29:43Z  interrupt W362 minted    -         "Positioning: from multi-agent and swarm frameworks"  evidence=W358
+2026-10-12T01:29:45Z  interrupt W363 minted    -         "Positioning: from schedulers and traffic control (Linux tc, block I/O schedulers, ERP MRP)"  evidence=W358
+2026-10-12T01:31:54Z  interrupt W364 minted    -         "Interop with other PM tools: export adapters, and import as printed writer commands"  evidence=operator
+2026-10-12T01:31:59Z  interrupt W365 minted    -         "Export to MS Project XML (MSPDI): cards as tasks, blocked_on as predecessors"  evidence=W364
+2026-10-12T01:32:03Z  interrupt W366 minted    -         "Export to issue trackers: Jira CSV and GitHub/Forgejo issue JSON, as a read-only mirror"  evidence=W364
+2026-10-12T01:32:07Z  interrupt W367 minted    -         "Import from other tools as printed writer commands, never a queue write"  evidence=W364
+2026-10-12T01:34:00Z  interrupt W368 minted    -         "A documented, versioned read API over nemik-serve's JSON"  evidence=W364
+2026-10-12T01:34:02Z  interrupt W369 minted    -         "Outbound connectors: mirror cards to Jira, GitHub/Forgejo issues and Project Online via their APIs"  evidence=W364
+2026-10-12T01:34:05Z  interrupt W370 minted    -         "Inbound connectors: webhooks or polls from other tools become letters or printed commands"  evidence=W364
+2026-10-12T01:35:48Z  interrupt W371 minted    -         "Connector contract: one interface every inbound and outbound integration implements"  evidence=operator
+2026-10-12T01:36:42Z  interrupt W372 minted    -         "Integration survey: what each PM tool imports, exposes and lets plugins do"  evidence=operator
+2026-10-12T01:38:13Z  interrupt W373 minted    -         "Lateral view: IBM Rational Jazz (Team Concert), where nemik's OSLC bones came from"  evidence=operator
+2026-10-12T01:42:17Z  tick  W188 nudged    nudge     "NUDGE el-openglo:W72 (W339) and the operator's Tasks token (W188): both already known to their owners this session, no new message"

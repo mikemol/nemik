@@ -80,6 +80,25 @@ def test_tied_longest_chains_are_all_marked_and_graded_not_picked_by_sort_order(
     assert critical(_fan_in(list(reversed(range(1, 13))))) == found
 
 
+def test_what_if_closing_the_head_of_the_chain_shortens_it_and_leaves_the_graph_alone() -> (
+    None
+):
+    # nemik:W351: a:W1 -> a:W2 -> a:W3 is the chain; a:W4 hangs off a:W1. Assume a:W1 done.
+    from nemik.critical import assume_done, critical, what_if
+
+    g = Graph()
+    a, b, c, d = (_card(g, s) for s in ("W1", "W2", "W3", "W4"))
+    for src, dst in ((a, b), (b, c), (a, d)):
+        g.add((src, NEMIK.enables, dst))
+    before = critical(g)
+    after = critical(assume_done(g, ["a:W1"]))
+    assert (before.length, after.length) == (3, 2)
+    assert "a:W1" not in after.slack  # closed cards leave the open graph
+    assert critical(g) == before  # the real graph is untouched
+    report = what_if(before, after, ["a:W1"])
+    assert "critical path: 3 -> 2" in report
+
+
 def test_a_cycle_is_reported_and_a_chain_is_not() -> None:
     # nemik:W324: x -> y -> z -> x never clears; a -> b is a chain; w waits on itself.
     from nemik.critical import cycles

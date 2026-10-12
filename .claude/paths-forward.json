@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 357,
+  "counter": 373,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 178
+      "ticks_blocked": 179
     },
     {
       "symbol": "W18",
@@ -810,7 +810,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-05T01:30:03Z",
-      "ticks_blocked": 53,
+      "ticks_blocked": 54,
       "weight": 1
     },
     {
@@ -3512,16 +3512,17 @@
       ],
       "touches": [],
       "blocked_on": [
-        "operator: act provide a read-only Google Tasks API token for the read-back helper (operator ruling 2026-10-09: they will supply their own); no credential is used before it is given"
+        "operator: act provide a read-only Google Tasks API token for the read-back helper (operator ruling 2026-10-09: they will supply their own); no credential is used before it is given",
+        "W371"
       ],
       "blocked_kind": "human",
       "next_bounded_step": "",
-      "evidence": "2026-10-02: 2026-10-02: an Akonadi resource synchronize is NOT a Google read: after try 2, a forced synchronize still showed life:W12 parent=nemik:repo:life in Akonadi while Google's list (operator screenshot) was flat. Today's HAVE (parent=ZXot..., the Google id we wrote) is likewise unconfirmable from Akonadi. A true read-back needs Google's API with the account's token, which so far stays inside Akonadi/KWallet by operator rule: the operator's call.",
+      "evidence": "2026-10-02: 2026-10-02: an Akonadi resource synchronize is NOT a Google read: after try 2, a forced synchronize still showed life:W12 parent=nemik:repo:life in Akonadi while Google's list (operator screenshot) was flat. Today's HAVE (parent=ZXot..., the Google id we wrote) is likewise unconfirmable from Akonadi. A true read-back needs Google's API with the account's token, which so far stays inside Akonadi/KWallet by operator rule: the operator's call. | 2026-10-12: 2026-10-12 operator: W188 is the first instance of a CLASS of integrations, so it is built on the connector contract (W371) as its first member, not as a one-off helper.",
       "issued_at": "2026-10-02T16:28:13Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-09T12:42:16Z",
-      "ticks_blocked": 29,
+      "last_worked": "2026-10-12T01:35:59Z",
+      "ticks_blocked": 1,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3756,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 30,
+      "ticks_blocked": 31,
       "completed": null
     },
     {
@@ -4281,7 +4282,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 28,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4985,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 28,
       "completed": null,
       "weight": 1
     },
@@ -5382,7 +5383,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "completed": null
     },
     {
@@ -5403,7 +5404,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "completed": null
     },
     {
@@ -5462,7 +5463,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "completed": null
     },
     {
@@ -5483,7 +5484,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "completed": null
     },
     {
@@ -5523,7 +5524,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "completed": null
     },
     {
@@ -5582,7 +5583,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "completed": null
     },
     {
@@ -5622,7 +5623,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "completed": null
     },
     {
@@ -5643,7 +5644,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "completed": null
     },
     {
@@ -5683,7 +5684,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "completed": null
     },
     {
@@ -6152,7 +6153,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T20:11:31Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 10,
       "completed": null
     },
     {
@@ -6229,7 +6230,7 @@
       "caused_by": "W323",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 8
     },
     {
       "symbol": "W328",
@@ -6449,7 +6450,7 @@
       "caused_by": "W337",
       "last_worked": "2026-10-11T21:18:11Z",
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 6
     },
     {
       "symbol": "W339",
@@ -6472,7 +6473,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "weight": 1,
       "completed": null
     },
@@ -6519,7 +6520,7 @@
       "caused_by": "paperkit:W320",
       "last_worked": "2026-10-11T21:18:33Z",
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 6
     },
     {
       "symbol": "W342",
@@ -6538,7 +6539,7 @@
       "caused_by": "github-8f",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 4
     },
     {
       "symbol": "W343",
@@ -6557,7 +6558,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 7
     },
     {
       "symbol": "W344",
@@ -6626,7 +6627,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:15:37Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -6721,7 +6722,7 @@
     {
       "symbol": "W351",
       "title": "What-if: nemik-critical and nemik-rank --assume-done repo:W<n>",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W346"
       ],
@@ -6731,15 +6732,15 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "recompute path length, slack and salience as if the named cards were closed or dropped, on the in-memory graph; print the delta against the real graph",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: nemik-critical --assume-done (assume_done copies the graph, what_if prints length, chain leave/join, slack changes) and nemik-rank --assume-done; test in test_critical (3 -> 2, graph untouched); SKILL rows",
       "issued_at": "2026-10-12T00:40:23Z",
       "minted_during": "interrupt",
       "caused_by": "W346",
-      "last_worked": "2026-10-12T01:15:31Z",
+      "last_worked": "2026-10-12T01:44:06Z",
       "ticks_blocked": 0,
       "weight": 2,
-      "completed": null
+      "completed": "20261012T014406Z"
     },
     {
       "symbol": "W352",
@@ -6832,7 +6833,7 @@
     {
       "symbol": "W356",
       "title": "Inter-workstream SLAs: a declared time for a repo to answer a cross-repo block",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W346"
       ],
@@ -6847,9 +6848,10 @@
       "issued_at": "2026-10-12T00:40:31Z",
       "minted_during": "interrupt",
       "caused_by": "W346",
-      "last_worked": null,
+      "last_worked": "2026-10-12T01:44:07Z",
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 2,
+      "completed": null
     },
     {
       "symbol": "W357",
@@ -6870,7 +6872,367 @@
       "minted_during": "tick",
       "caused_by": "W348",
       "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 2
+    },
+    {
+      "symbol": "W358",
+      "title": "Positioning document: how to understand nemik if you come from X",
+      "status": "blocked",
+      "enables": [],
+      "touches": [
+        "docs",
+        "positioning"
+      ],
+      "blocked_on": [
+        "W359",
+        "W360",
+        "W361",
+        "W362",
+        "W363"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "docs/positioning.md, one section per background, each in two parts: (1) concepts, that world's terms mapped onto nemik's, and what nemik deliberately does differently; (2) workflow translation, a table of 'you used to do X in that tool; in nemik you run Y', each Y a real command or a workflow from data/workflows.toml. Mechanize: a test that every command and workflow the doc names exists (as tests/test_workflows.py does for SKILL.md), so the doc cannot drift. Children W359-W363; draw on the doc trawls (W312, W346).",
+      "evidence": "",
+      "issued_at": "2026-10-12T01:29:24Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": "2026-10-12T01:31:11Z",
+      "ticks_blocked": 1,
+      "completed": null
+    },
+    {
+      "symbol": "W359",
+      "title": "Positioning: from MS Project and classic PM (tasks, dependencies, critical path, baselines)",
+      "status": "ready",
+      "enables": [
+        "W358"
+      ],
+      "touches": [
+        "docs",
+        "positioning"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "map task to card, predecessor to blocked_on/enables, critical path and float to nemik-critical slack, baseline to nemik-history --baseline, RAG to repo health; say what is missing on purpose (no durations, no resource levelling: agents, not people)",
+      "evidence": "",
+      "issued_at": "2026-10-12T01:29:37Z",
+      "minted_during": "interrupt",
+      "caused_by": "W358",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 3
+    },
+    {
+      "symbol": "W360",
+      "title": "Positioning: from Jira, Bugzilla and issue trackers",
+      "status": "ready",
+      "enables": [
+        "W358"
+      ],
+      "touches": [
+        "docs",
+        "positioning"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "map issue to card, depends-on/blocks to blocked_on/enables, priority to rank band plus flow salience, triage to nemik-operator; the difference: queues live in each repo and are read, never written, by nemik; no central server",
+      "evidence": "",
+      "issued_at": "2026-10-12T01:29:39Z",
+      "minted_during": "interrupt",
+      "caused_by": "W358",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 3
+    },
+    {
+      "symbol": "W361",
+      "title": "Positioning: from kanban, flow metrics and queueing theory",
+      "status": "ready",
+      "enables": [
+        "W358"
+      ],
+      "touches": [
+        "docs",
+        "positioning"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "WIP to the one working card, lead time and flow efficiency to nemik-history --weekly, Little's law to implied wait, starvation to nemik-starved, saturation to the operator cap; salience as current through a network rather than a priority number",
+      "evidence": "",
+      "issued_at": "2026-10-12T01:29:41Z",
+      "minted_during": "interrupt",
+      "caused_by": "W358",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 3
+    },
+    {
+      "symbol": "W362",
+      "title": "Positioning: from multi-agent and swarm frameworks",
+      "status": "ready",
+      "enables": [
+        "W358"
+      ],
+      "touches": [
+        "docs",
+        "positioning"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "agent to workstream session, task handoff to blocked_on plus inbound claim, message bus to letters and peer messages, orchestrator to nothing: no central scheduler, each repo's loop ranks its own queue against the fleet graph; the operator as a scarce shared resource",
+      "evidence": "",
+      "issued_at": "2026-10-12T01:29:43Z",
+      "minted_during": "interrupt",
+      "caused_by": "W358",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 3
+    },
+    {
+      "symbol": "W363",
+      "title": "Positioning: from schedulers and traffic control (Linux tc, block I/O schedulers, ERP MRP)",
+      "status": "ready",
+      "enables": [
+        "W358"
+      ],
+      "touches": [
+        "docs",
+        "positioning"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "queue disciplines to rank composition, fairness and starvation to nemik-starved, token bucket to arrival pacing (W327), MRP explode/net to the enables cone; where the analogy breaks (cards are not packets: they change the graph)",
+      "evidence": "",
+      "issued_at": "2026-10-12T01:29:45Z",
+      "minted_during": "interrupt",
+      "caused_by": "W358",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 3
+    },
+    {
+      "symbol": "W364",
+      "title": "Interop with other PM tools: files, a read API, and live app connectors",
+      "status": "blocked",
+      "enables": [],
+      "touches": [
+        "interop",
+        "positioning"
+      ],
+      "blocked_on": [
+        "W365",
+        "W366",
+        "W367",
+        "W368",
+        "W369",
+        "W370"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Three layers. Files: exports another tool opens (W365, W366) and imports printed as writer commands (W367). A read API: nemik-serve's JSON as a documented, versioned API (W368). Live connectors: sync with Jira, GitHub/Forgejo, MS Project Online, Google Tasks (W188 is the first) through their APIs (W369 outbound, W370 inbound). Invariant: no connector writes a queue; inbound arrives as printed commands or a letter in the repo's inbox, outbound is a one-way mirror. Credentials are per tool and the operator's to give.",
+      "evidence": "",
+      "issued_at": "2026-10-12T01:31:54Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": "2026-10-12T01:34:06Z",
+      "ticks_blocked": 1,
+      "completed": null
+    },
+    {
+      "symbol": "W365",
+      "title": "Export to MS Project XML (MSPDI): cards as tasks, blocked_on as predecessors",
+      "status": "ready",
+      "enables": [
+        "W364"
+      ],
+      "touches": [
+        "interop"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "nemik-export --mspdi [repo...]: tasks with outline levels from umbrellas, finish-to-start links from the dependency edges, no durations (marked estimated). Round-trip check by opening the file in GanttProject and ProjectLibre (both open-source desktop tools that read MS Project XML; the earlier 'LibreProject' was a misnaming of ProjectLibre). Adoption angle: these are the open-source homes of people who come from MS Project, so a clean import there is a way in; OpenProject (web, with a REST API) is the candidate for the W369 connector side. Verify each tool's actual import support before claiming it in docs.",
+      "evidence": "",
+      "issued_at": "2026-10-12T01:31:59Z",
+      "minted_during": "interrupt",
+      "caused_by": "W364",
+      "last_worked": "2026-10-12T01:34:53Z",
+      "ticks_blocked": 0,
+      "weight": 5
+    },
+    {
+      "symbol": "W366",
+      "title": "Export to issue trackers: Jira CSV and GitHub/Forgejo issue JSON, as a read-only mirror",
+      "status": "ready",
+      "enables": [
+        "W364"
+      ],
+      "touches": [
+        "interop"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "one issue per card with a link back to its cite, blocks/is-blocked-by from the edges, labels from touches and band; the queue stays the source of truth, so the export is one-way and stamped with the commit it came from",
+      "evidence": "",
+      "issued_at": "2026-10-12T01:32:03Z",
+      "minted_during": "interrupt",
+      "caused_by": "W364",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 5
+    },
+    {
+      "symbol": "W367",
+      "title": "Import from other tools as printed writer commands, never a queue write",
+      "status": "ready",
+      "enables": [
+        "W364"
+      ],
+      "touches": [
+        "interop"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "nemik-import --from jira-csv|mspdi|github FILE --repo R prints the mikemol-paths-forward --add and --update lines (titles, blocked_on, caused_by the source item's id) for R's loop to review and run; dedupe against cards already citing the same source id",
+      "evidence": "",
+      "issued_at": "2026-10-12T01:32:07Z",
+      "minted_during": "interrupt",
+      "caused_by": "W364",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 5
+    },
+    {
+      "symbol": "W368",
+      "title": "A documented, versioned read API over nemik-serve's JSON",
+      "status": "ready",
+      "enables": [
+        "W364"
+      ],
+      "touches": [
+        "interop",
+        "api"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "OpenAPI description of graph.json, wake.json, history.json, goals, rank and critical endpoints; a version field and the field manifest as the contract (a field outside it fails the build already); a client example another app can call",
+      "evidence": "",
+      "issued_at": "2026-10-12T01:34:00Z",
+      "minted_during": "interrupt",
+      "caused_by": "W364",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 5
+    },
+    {
+      "symbol": "W369",
+      "title": "Outbound connectors: mirror cards to Jira, GitHub/Forgejo issues and Project Online via their APIs",
+      "status": "ready",
+      "enables": [
+        "W364"
+      ],
+      "touches": [
+        "interop",
+        "api"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "one-way, idempotent mirror keyed by cite (create, update, close); a dry run prints the calls; each tool's credential is an operator act (operator: act give a scoped token) filed per tool when its connector is ready, never used before it is given; reuses the W366 mapping",
+      "evidence": "",
+      "issued_at": "2026-10-12T01:34:02Z",
+      "minted_during": "interrupt",
+      "caused_by": "W364",
+      "last_worked": null,
       "ticks_blocked": 0
+    },
+    {
+      "symbol": "W370",
+      "title": "Inbound connectors: webhooks or polls from other tools become letters or printed commands",
+      "status": "ready",
+      "enables": [
+        "W364"
+      ],
+      "touches": [
+        "interop",
+        "api",
+        "letters"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "a Jira/GitHub/Forgejo event (new issue, comment, close) lands as a letter in the owning repo's inbox, or as printed --add/--update lines, never a queue write; letters then fold into waypoints as today; W188 (Google Tasks, read-only token pending) is the first instance",
+      "evidence": "",
+      "issued_at": "2026-10-12T01:34:05Z",
+      "minted_during": "interrupt",
+      "caused_by": "W364",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W371",
+      "title": "Connector contract: one interface every inbound and outbound integration implements",
+      "status": "ready",
+      "enables": [
+        "W369",
+        "W370",
+        "W188"
+      ],
+      "touches": [
+        "interop",
+        "api"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "define the class before its second member: a Connector has a source id scheme, a declared credential (scope, read-only or not, where it is stored), poll or webhook, and a mapping to letters or printed writer commands; a registry in data/connectors.toml; one conformance test every connector must pass (never writes a queue, dedupes by source id, never reads a credential absent from the declared store, dry run prints and changes nothing); a connector's missing credential files its own operator: act ask from the declaration. W188 Google Tasks is the first member, re-aimed onto it.",
+      "evidence": "",
+      "issued_at": "2026-10-12T01:35:48Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W372",
+      "title": "Integration survey: what each PM tool imports, exposes and lets plugins do",
+      "status": "ready",
+      "enables": [
+        "W364",
+        "W371"
+      ],
+      "touches": [
+        "interop",
+        "positioning"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "for GanttProject, ProjectLibre, OpenProject, Jira, GitHub/Forgejo, MS Project and Project Online: file formats it reads and writes, its API (REST, webhooks, auth), and its plugin or extension model (language, what a plugin can hook, how it is distributed), each claim cited to the tool's own docs; then rank where nemik gets in cheapest: a file, a connector (W371), or a plugin that runs inside the tool; a plugin is a new layer W364 does not have yet",
+      "evidence": "",
+      "issued_at": "2026-10-12T01:36:42Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W373",
+      "title": "Lateral view: IBM Rational Jazz (Team Concert), where nemik's OSLC bones came from",
+      "status": "ready",
+      "enables": [
+        "W358",
+        "W372"
+      ],
+      "touches": [
+        "positioning",
+        "interop"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "confirm the lineage from primary sources (OSLC began at IBM Rational around the Jazz platform and Rational Team Concert, later moved to OASIS); then study what Jazz did with OSLC (linked lifecycle data, delegated UIs and previews, tracked resource sets, cross-tool queries) against what nemik does, what made it heavy in the market, and which sound parts nemik should take; also check whether OSLC-speaking tools today (IBM ELM and others) are interop targets for the W371 contract",
+      "evidence": "",
+      "issued_at": "2026-10-12T01:38:13Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 9
     }
   ],
   "residue": [
@@ -6933,7 +7295,10 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-10-12T01:41:27Z"
+  },
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }

@@ -194,6 +194,38 @@ def cycles(g: Graph) -> list[tuple[list[str], bool]]:
     return sorted(found)
 
 
+def assume_done(g: Graph, cites: list[str]) -> Graph:
+    """nemik:W351: a copy of `g` in which each named card (`repo:W<n>`) is closed. `g` is untouched."""
+    out = Graph()
+    out += g
+    wanted = set(cites)
+    for node in list(out.subjects(OSLC_CM.state, None)):
+        if ref(node) in wanted:
+            out.remove((node, OSLC_CM.state, None))
+            out.add((node, OSLC_CM.state, NEMIK.Done))
+    return out
+
+
+def what_if(before: Critical, after: Critical, cites: list[str]) -> str:
+    """The delta a what-if makes: path length, the cards that leave or join a longest chain, and the
+    open cards whose slack changed (the closed ones themselves are not counted)."""
+    left = sorted(set(before.chain) - set(after.chain) - set(cites))
+    joined = sorted(set(after.chain) - set(before.chain))
+    moved = sorted(
+        c
+        for c in after.slack
+        if c in before.slack and after.slack[c] != before.slack[c]
+    )
+    lines = [
+        f"assume done: {', '.join(cites)}",
+        f"  critical path: {before.length} -> {after.length} open cards deep",
+        f"  leave a longest chain: {', '.join(left) or 'none'}",
+        f"  join a longest chain: {', '.join(joined) or 'none'}",
+        f"  slack changed on {len(moved)} open card(s)",
+    ]
+    return "\n".join(lines)
+
+
 def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     """nemik-critical: the longest chain of open work across the fleet, and what has slack."""
     from nemik.check import default_root, survey
@@ -207,6 +239,13 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     ap.add_argument(
         "--card", help="the longest chain through this card's cone, <repo>:W<n>"
     )
+    ap.add_argument(
+        "--assume-done",
+        nargs="+",
+        metavar="REPO:W<n>",
+        default=[],
+        help="what-if: the path and slack as if these cards were closed, against today's (W351)",
+    )
     args = ap.parse_args(argv)
     if g is None:
         g = Graph()
@@ -219,6 +258,16 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     if args.card:
         around = cone(g, args.card)
         scope = around if scope is None else scope & around
+    if args.assume_done:
+        # nemik:W351: what-if. The same scope, on a copy where the named cards are closed.
+        before = critical(g, scope)
+        g = assume_done(g, args.assume_done)
+        after = critical(g, scope)
+        if args.json:
+            print(json.dumps({"before": before._asdict(), "after": after._asdict()}))
+            return
+        print(what_if(before, after, args.assume_done))
+        return
     found = critical(g, scope)
     loops = cycles(g)
     if args.json:

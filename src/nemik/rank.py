@@ -537,6 +537,13 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         help="rank by the demand of that one milestone card alone, so the order reads as what "
         "moves it (nemik:W316; an umbrella is a milestone already)",
     )
+    ap.add_argument(
+        "--assume-done",
+        nargs="+",
+        metavar="REPO:W<n>",
+        default=[],
+        help="what-if: rank as if these cards were closed (nemik:W351)",
+    )
     args = ap.parse_args(argv)
     if (
         args.band
@@ -552,6 +559,10 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
             if qg is not None:
                 g += qg
     weights = load_weights()
+    if args.assume_done:
+        from nemik.critical import assume_done
+
+        g = assume_done(g, args.assume_done)
     if args.all:
         fleet = rank_fleet(g, weights)
         if args.json:
