@@ -219,6 +219,59 @@ def survey(
             f"it, or tell {wrepo} why it waits"
         )
         by_repo.setdefault(trepo, []).append(("Warning", tcite.partition(":")[2], late))
+    # nemik:W405: a card waiting on another repo's card that has open prerequisites of its own (an
+    # umbrella, or a card a peer has since atomized) gets the leaves to cite instead, with the exact
+    # re-point command, so the fix is one command rather than a hand search (three hand re-points of
+    # nemik:W392 in one day, W870 -> W872 -> W878). Info only: it never changes the verdict.
+    from nemik.rank import successors
+
+    open_nodes = {
+        n
+        for n in merged.subjects(OSLC_CM.state, None)
+        if (n, OSLC_CM.state, NEMIK.Done) not in merged
+    }
+    prereqs: dict = {}
+    for n in open_nodes:
+        for s in successors(merged, n):
+            if s in open_nodes and s != n:
+                prereqs.setdefault(s, set()).add(n)
+
+    # An umbrella is what the shape calls one: two or more open children enable it. Only umbrellas are
+    # descended (their work IS their children); a single step that waits on something is still the
+    # step you wait for, so the descent stops at the first non-umbrella.
+    def umbrella(n) -> bool:
+        return len(prereqs.get(n, ())) >= 2
+
+    for waiter, _, target in merged.triples((None, NEMIK.waitsFor, None)):
+        if not umbrella(target) or waiter not in open_nodes:
+            continue
+        wrepo, trepo = ref(waiter).partition(":")[0], ref(target).partition(":")[0]
+        if wrepo == trepo:
+            continue
+        seen, todo, leaves = {target}, [target], set()
+        while todo:
+            for p in prereqs.get(todo.pop(), ()):
+                if p in seen:
+                    continue
+                seen.add(p)
+                if umbrella(p):
+                    todo.append(p)
+                else:
+                    leaves.add(ref(p))
+        if not leaves:
+            continue
+        wsym = ref(waiter).partition(":")[2]
+        pf = f"mikemol-paths-forward --state {wrepo}/.claude/paths-forward.json"
+        if len(leaves) == 1:
+            (leaf,) = leaves
+            # `--update=W<n>`: the same argument to argparse, and never read as a "repo W<n>" cite
+            hint = f"waits on {ref(target)}, whose open step is {leaf}: {pf} --update={wsym} --blocked-on {leaf}"
+        else:
+            hint = (
+                f"waits on {ref(target)}, whose open steps are {', '.join(sorted(leaves))}: "
+                f"cite the one that unblocks you ({pf} --update={wsym} --blocked-on <one of them>)"
+            )
+        by_repo.setdefault(wrepo, []).append(("Info", wsym, hint))
     # nemik:W279: a letter a waypoint cites as evidence must exist (moved to inbox/archive counts).
     # The export layout carries no inbox, so a root without any inbox directory is not asked.
     if any(root.glob("*/inbox")):
