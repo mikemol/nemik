@@ -591,3 +591,4 @@
 2026-10-12T05:42:33Z  tick  W339 escalated escalate  "16 ticks on el-openglo:W72 (use-of-colour check): ready in el-openglo's queue at weight 26, last worked 2026-10-06; reported to the operator once, nudging stops"
 2026-10-12T06:59:22Z  interrupt W377 minted    -         "Re-vendor mtools past 7d4a458 so mikemol-commit prints its path and takes the commit lock here"  evidence=W342
 2026-10-12T06:59:27Z  tick  W342 advanced  unblock   "staged-index gate in a fixed worktree (b549e0e); commits through mikemol-commit (10316fc); isolation unconfirmed until W377 re-vendors mtools"  evidence=10316fc
+2026-10-12T07:11:09Z  tick  W377 advanced  unblock   "re-vendored mtools 7d4a458 -> f04f0a2 (fleet par) with tools/revendor-mtools.sh (uv lock only, so mtools:W1028's sync hazard does not apply); committing through mikemol-commit to read its path line"
