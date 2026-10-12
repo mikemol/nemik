@@ -556,3 +556,4 @@
 2026-10-12T00:40:31Z  interrupt W356 minted    -         "Inter-workstream SLAs: a declared time for a repo to answer a cross-repo block"  evidence=W346
 2026-10-12T00:46:19Z  tick  W318 advanced  unblock   "nemik-history --baseline; bare-date resolve fix; W312 closed; W346-W356 filed from the doc trawl (3e8e795)"  evidence=3e8e795
 2026-10-12T01:15:26Z  tick  W357 minted    -         "Operator ask arrival versus answer rate, weekly, with implied wait"  evidence=W348
+2026-10-12T01:18:47Z  tick  W348 advanced  unblock   "operator saturation Warning (9b6bd21); rate half split to W357"  evidence=9b6bd21
