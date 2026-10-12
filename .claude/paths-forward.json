@@ -7199,12 +7199,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "for GanttProject, ProjectLibre, OpenProject, Jira, GitHub/Forgejo, MS Project and Project Online: file formats it reads and writes, its API (REST, webhooks, auth), and its plugin or extension model (language, what a plugin can hook, how it is distributed), each claim cited to the tool's own docs; then rank where nemik gets in cheapest: a file, a connector (W371), or a plugin that runs inside the tool; a plugin is a new layer W364 does not have yet",
-      "evidence": "",
+      "next_bounded_step": "Fetch every cited vendor URL and clear or correct each UNVERIFIED mark in docs/integration-survey.md; then file the shared projection with a decode-back test (survey C2) as the card W365/W366/W371 build on",
+      "evidence": "2026-10-12: docs/integration-survey.md drafted (8 tools; cheapest entry: MSPDI file for desktop tools, API connector for OpenProject/Jira/GitHub/Forgejo, plugin never cheapest; common structure = one card->task+predecessor projection). Citations are from memory, NOT fetched.",
       "issued_at": "2026-10-12T01:36:42Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": null,
+      "last_worked": "2026-10-12T19:15:56Z",
       "ticks_blocked": 0,
       "weight": 9
     },
@@ -7871,7 +7871,7 @@
     {
       "symbol": "W402",
       "title": "Cache each repo's parsed queue and ledger graphs by that repo's file stamps",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W393"
       ],
@@ -7885,9 +7885,10 @@
       "issued_at": "2026-10-12T16:42:37Z",
       "minted_during": "tick",
       "caused_by": "W393",
-      "last_worked": null,
+      "last_worked": "2026-10-12T19:16:00Z",
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 3,
+      "completed": null
     },
     {
       "symbol": "W403",

@@ -7,6 +7,7 @@ reader, so schema drift across repos is mtools' problem to absorb, not a second 
 from __future__ import annotations
 
 import re
+from collections.abc import Callable
 from pathlib import Path
 
 from mikemol.pathsforward import ledger, model, store
@@ -89,10 +90,48 @@ def load_state(state_path: Path) -> model.State:
     return store.load(state_path)
 
 
+# nemik:W402: parsed graphs by (what was asked, the file's stamp). A rebuild re-parses only the files
+# that moved; a new or vanished repo changes `known` and so every queue's key. One entry per
+# (kind, repo): a moved file replaces its stale entry instead of growing the cache.
+_PARSED: dict[tuple[str, str], tuple[tuple[object, ...], Graph, int]] = {}
+
+
+def _stamped(
+    kind: str,
+    repo: str,
+    path: Path,
+    extra: object,
+    build: Callable[[], tuple[Graph, int]],
+) -> tuple[Graph, int]:
+    """Answer `build()` from the cache while `path` is unchanged; always a fresh copy to mutate."""
+    st = path.stat()
+    key = (str(path), st.st_mtime_ns, st.st_size, st.st_ino, extra)
+    hit = _PARSED.get((kind, repo))
+    if hit is None or hit[0] != key:
+        g, n = build()
+        hit = (key, g, n)
+        _PARSED[(kind, repo)] = hit
+    copy = Graph()
+    for prefix, ns in hit[1].namespaces():
+        copy.bind(prefix, ns, override=True)
+    copy += hit[1]
+    return copy, hit[2]
+
+
 def queue_graph(
     repo: str, state_path: Path, known: frozenset[str] = frozenset()
 ) -> Graph:
     """Translate one repo's queue. Raises store.UnreadableStateError if mtools refuses it."""
+    return _stamped(
+        "queue",
+        repo,
+        state_path,
+        known,
+        lambda: (_queue_graph(repo, state_path, known), 0),
+    )[0]
+
+
+def _queue_graph(repo: str, state_path: Path, known: frozenset[str]) -> Graph:
     state = store.load(state_path)
     g = bind(Graph())
     ws = workstream_uri(repo)
@@ -221,6 +260,12 @@ def ledger_graph(repo: str, ledger_path: Path) -> tuple[Graph, int]:
     that, when it names a symbol, prov:used that waypoint, so interrupt and forecast effort land on
     the same nodes the dependency edges join.
     """
+    return _stamped(
+        "ledger", repo, ledger_path, None, lambda: _ledger_graph(repo, ledger_path)
+    )
+
+
+def _ledger_graph(repo: str, ledger_path: Path) -> tuple[Graph, int]:
     g = bind(Graph())
     g.bind("prov", PROV)
     unparsed = 0
