@@ -1,2 +1,6 @@
 common --enable_bzlmod
+# The server exits 10 minutes after its last command, not the 3-hour default: on 2026-10-12 fourteen idle
+# gate servers held the host at full swap (github-8f's report). A tick's gates run minutes apart, so ten
+# minutes keeps the warm cache through a tick and frees the heap after it.
+startup --max_idle_secs=600
 test --test_output=errors --test_summary=terse

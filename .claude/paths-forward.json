@@ -6612,7 +6612,6 @@
         "W347",
         "W349",
         "W350",
-        "W351",
         "W352",
         "W353",
         "W354",
@@ -6626,8 +6625,8 @@
       "issued_at": "2026-10-12T00:39:56Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-12T01:15:37Z",
-      "ticks_blocked": 1,
+      "last_worked": "2026-10-12T01:48:35Z",
+      "ticks_blocked": 0,
       "completed": null
     },
     {
@@ -7295,10 +7294,7 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": {
-    "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-12T01:41:27Z"
-  },
+  "lock": null,
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }
