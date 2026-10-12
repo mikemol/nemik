@@ -617,3 +617,5 @@
 2026-10-12T12:25:31Z  interrupt W387 minted    -         "Side panel sections collapse (native details/summary), remembered per viewer"  evidence=operator
 2026-10-12T12:32:48Z  op    W387 advanced  unblock   "collapsible side panel; W380 adversary triaged into W381-W386"
 2026-10-12T12:45:36Z  tick  W384 advanced  unblock   "label contrast >= 4.5:1 on every fill, both themes, measured in the browser"
+2026-10-12T13:01:42Z  interrupt W388 minted    -         "Blocker lines that share a card take ruler-sequence motifs, so crowded lines stay apart without colour"  evidence=operator
+2026-10-12T13:16:26Z  tick  W382 advanced  unblock   "ring scopes carry ruler-sequence motifs (port of paperkit's emit_f, pinned by test); paperkit asked to package rulerseq"

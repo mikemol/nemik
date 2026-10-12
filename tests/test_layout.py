@@ -288,6 +288,40 @@ def test_rolling_up_umbrellas_hides_their_work_and_a_double_click_expands_one(
     assert opened >= rolled + 1
 
 
+def test_scope_rings_carry_distinct_ruler_motifs_pinned_to_paperkits(server) -> None:
+    # nemik:W382: the page's port of paperkit's emit_f gives each path scope its own ruler-sequence
+    # motif. The family is pinned to paperkit's published motifs (render/checks/rulerseq.py), and the
+    # rings actually drawn use pairwise-distinct dash patterns.
+    with sync_api.sync_playwright() as p:
+        exe = os.environ.get("NEMIK_CHROMIUM")
+        try:
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        page.goto(server)
+        page.wait_for_function("() => typeof rulerMotif === 'function'")
+        motifs = page.evaluate("() => [0, 1, 2, 3].map(rulerMotif)")
+        lengths = page.evaluate("() => [5, 6, 13, 200].map(n => emitF(n).length)")
+        dashes = page.evaluate("() => SCOPES.map(s => s.dash)")
+        legend = page.evaluate(
+            "() => [...document.querySelectorAll('#pathkey line')]"
+            ".map(l => l.getAttribute('stroke-dasharray'))"
+        )
+        browser.close()
+    assert motifs == [
+        "·",
+        "·--",
+        "·--····",
+        "·--····--------",
+    ]
+    assert lengths == [5, 6, 13, 200]  # len(F(n)) == n: any natural, losslessly
+    assert len(set(dashes)) == 4 and all(dashes)
+    assert legend == dashes
+
+
 CONTRAST = """() => {
   const lum = css => { const [r, g, b] = css.match(/\\d+(\\.\\d+)?/g).slice(0, 3).map(v => {
     const c = +v / 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; });

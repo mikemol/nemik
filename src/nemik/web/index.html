@@ -150,12 +150,30 @@ document.querySelectorAll("details.sec").forEach(d => {
 // dash so the scope never rests on hue alone: the fleet's longest chain, this repo's, the visible set's,
 // and the selected card's cone. Colours are Okabe-Ito; "ink" follows the theme.
 const PAD = 4;
+// nemik:W382: the ruler-sequence encoding (paperkit's render/checks/rulerseq.py, emit_f; owner paperkit,
+// summit record ruler-sequence-rules), ported because the pinned paperkit package does not ship it.
+// emitF(n) is F over n's bits LSB-first: injective, length n, so it encodes any natural losslessly;
+// rulerMotif(k) = F(2^(k+1) - 1) is the order-k motif, and order k prefixes order k+1.
+// tests/test_layout.py pins the motifs to paperkit's published family.
+const RULER_DOT = "·", RULER_DASH = "-";
+function emitF(n) {
+  let out = "", s = RULER_DOT;
+  for (let i = 0; n >> i; i++) {
+    if ((n >> i) & 1) { out += s.repeat(1 << i); s = s === RULER_DOT ? RULER_DASH : RULER_DOT; }
+  }
+  return out;
+}
+const rulerMotif = k => emitF(2 ** (k + 1) - 1);
+// A motif as an SVG stroke-dasharray: a dot is a short stroke, a dash a long one, each then a gap.
+const rulerDash = motif => [...motif].map(c => (c === RULER_DOT ? "1.5 2.5" : "6 2.5")).join(" ");
+// Each scope's ring carries its own motif order (broadest scope, longest motif), so no two scopes share a
+// pattern, whatever their colours (WCAG 1.4.1; W380 refuted the old fleet/sel pair, both solid).
 const SCOPES = [
-  { id: "fleet", color: "#e0a000", dash: "", width: 2, label: "longest chain, fleet" },
-  { id: "repo", color: "#56b4e9", dash: "6 3", width: 2, label: "longest chain, its repo" },
-  { id: "view", color: "#cc79a7", dash: "1.5 3", width: 2.5, label: "longest chain, this view" },
-  { id: "sel", color: "ink", dash: "", width: 3, label: "longest chain, selected card's cone" },
-];
+  { id: "fleet", color: "#e0a000", order: 3, width: 2, label: "longest chain, fleet" },
+  { id: "repo", color: "#56b4e9", order: 2, width: 2, label: "longest chain, its repo" },
+  { id: "view", color: "#cc79a7", order: 1, width: 2.5, label: "longest chain, this view" },
+  { id: "sel", color: "ink", order: 0, width: 3, label: "longest chain, selected card's cone" },
+].map(s => ({ ...s, dash: rulerDash(rulerMotif(s.order)) }));
 const scopeColor = c => (c === "ink" ? css("--ink") : c);
 document.getElementById("pathkey").innerHTML = SCOPES.map(s =>
   `<span><svg width="26" height="8" aria-hidden="true"><line x1="1" y1="4" x2="25" y2="4" stroke="${scopeColor(s.color)}" stroke-width="${s.width}" stroke-dasharray="${s.dash}"/></svg>${s.label}</span>`).join("");

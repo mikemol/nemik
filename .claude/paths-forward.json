@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 387,
+  "counter": 388,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 199
+      "ticks_blocked": 200
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 21,
+      "ticks_blocked": 22,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 51,
+      "ticks_blocked": 52,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 48,
+      "ticks_blocked": 49,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 48,
+      "ticks_blocked": 49,
       "completed": null,
       "weight": 1
     },
@@ -5382,7 +5382,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 25,
+      "ticks_blocked": 26,
       "completed": null
     },
     {
@@ -5403,7 +5403,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 40,
+      "ticks_blocked": 41,
       "completed": null
     },
     {
@@ -5462,7 +5462,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 40,
+      "ticks_blocked": 41,
       "completed": null
     },
     {
@@ -5483,7 +5483,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 40,
+      "ticks_blocked": 41,
       "completed": null
     },
     {
@@ -5523,7 +5523,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 40,
+      "ticks_blocked": 41,
       "completed": null
     },
     {
@@ -5582,7 +5582,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 40,
+      "ticks_blocked": 41,
       "completed": null
     },
     {
@@ -5622,7 +5622,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 40,
+      "ticks_blocked": 41,
       "completed": null
     },
     {
@@ -5643,7 +5643,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 40,
+      "ticks_blocked": 41,
       "completed": null
     },
     {
@@ -5683,7 +5683,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 40,
+      "ticks_blocked": 41,
       "completed": null
     },
     {
@@ -6448,7 +6448,7 @@
       "caused_by": "W337",
       "last_worked": "2026-10-11T21:18:11Z",
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 1
     },
     {
       "symbol": "W339",
@@ -6471,7 +6471,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 28,
+      "ticks_blocked": 29,
       "weight": 1,
       "completed": null
     },
@@ -6622,7 +6622,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 15,
+      "ticks_blocked": 16,
       "completed": null
     },
     {
@@ -7033,7 +7033,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 21,
+      "ticks_blocked": 22,
       "completed": null
     },
     {
@@ -7230,7 +7230,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 6
     },
     {
       "symbol": "W374",
@@ -7407,8 +7407,8 @@
     },
     {
       "symbol": "W382",
-      "title": "a11y C1: every path-scope ring has its own dash pattern, and the test reads it",
-      "status": "working",
+      "title": "a11y C1: path-scope rings take ruler-sequence motifs (paperkit's rulerseq), and the test reads them",
+      "status": "done",
       "enables": [
         "W337"
       ],
@@ -7418,15 +7418,15 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "W380 refuted: fleet and sel are both solid (index.html:130,133), differing by hue and 1 px width; give each scope a distinct pattern readable at fit zoom, and make the test assert the four stroke-dasharray values are pairwise distinct",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: 2026-10-12 operator: the ruler pattern losslessly encodes arbitrary reals (emit_f over any binary tuple, not only the all-ones orders), so a ring's pattern may be generated from what the scope IS (for example its nesting depth or the size of its chain), and the test can decode it back rather than only compare. | 2026-10-12: CORRECTION, operator 2026-10-12: arbitrary NATURAL numbers, not reals (the entry above over-extended it). A ring's pattern is emit_f of a natural the scope maps to. | 2026-10-12: index.html: emitF/rulerMotif, an attributed port of paperkit's emit_f/morse_motif (not in the pinned paperkit package: it lives under render/checks); each scope's ring takes motif order fleet 3, repo 2, view 1, sel 0, as SVG dasharrays. test_scope_rings_carry_distinct_ruler_motifs_pinned_to_paperkits pins the family to paperkit's published motifs, asserts len(F(n)) == n for 5, 6, 13, 200, and that the four drawn dashes (and the legend's) are pairwise distinct; render-check 16 passed. paperkit asked to package rulerseq so the port can become an import.",
       "issued_at": "2026-10-12T12:14:17Z",
       "minted_during": "interrupt",
       "caused_by": "W380",
-      "last_worked": "2026-10-12T12:45:35Z",
+      "last_worked": "2026-10-12T13:16:23Z",
       "ticks_blocked": 0,
       "weight": 1,
-      "completed": null
+      "completed": "20261012T131623Z"
     },
     {
       "symbol": "W383",
@@ -7535,6 +7535,29 @@
       "last_worked": "2026-10-12T12:32:46Z",
       "ticks_blocked": 0,
       "completed": "20261012T123246Z"
+    },
+    {
+      "symbol": "W388",
+      "title": "Blocker lines carry a ruler-sequence pattern generated from their src and dst, losslessly",
+      "status": "working",
+      "enables": [
+        "W386"
+      ],
+      "touches": [
+        "a11y",
+        "web"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "operator 2026-10-12: the ruler pattern losslessly encodes arbitrary NATURAL numbers (emit_f: injective, len(F(B)) == value(B)), so a line's pattern is generated procedurally from the line's own attributes, not assigned by its index in a fan. Map (src, dst) to a natural (e.g. interleave the bits of the two cards' numbers, or a pairing function) and encode it through paperkit's emit_f; two different lines then never share a pattern anywhere on the page, and the pattern decodes back to the pair. Decide: which attributes, how to keep the pattern short enough to read at fit zoom (its length grows with the value), and what now says 'waits' since the dash carries identity. Test: decode each rendered pattern back to its edge's src and dst.",
+      "evidence": "",
+      "issued_at": "2026-10-12T13:01:42Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": "2026-10-12T13:16:24Z",
+      "ticks_blocked": 0,
+      "weight": 5,
+      "completed": null
     }
   ],
   "residue": [
