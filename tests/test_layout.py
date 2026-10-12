@@ -482,6 +482,33 @@ def test_the_default_view_is_legible(server) -> None:
     assert note == "" or "readable size" in note
 
 
+def test_every_label_glyph_exists_in_this_browsers_fonts(server) -> None:
+    # nemik:W398: a glyph the browser's fonts lack draws as a placeholder box, which once widened labels
+    # only under the gate's headless Chrome. Each glyph the page puts in a label must measure differently
+    # from a codepoint no font has (a private-use character), in the browser the test runs in.
+    with sync_api.sync_playwright() as p:
+        exe = os.environ.get("NEMIK_CHROMIUM")
+        try:
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page()
+        page.goto(server)
+        page.wait_for_function("() => typeof STATE_MARK === 'object'")
+        missing = page.evaluate(
+            "() => { const c = document.createElement('canvas').getContext('2d');"
+            " c.font = 'bold 10px sans-serif';"
+            " const box = c.measureText('\\u{10FFFD}').width;"
+            " const glyphs = [...Object.values(STATE_MARK), '\\u25b2', '\\u25a0']"
+            "   .map(s => s.trim()).filter(Boolean);"
+            " return glyphs.filter(g => Math.abs(c.measureText(g).width - box) < 0.01); }"
+        )
+        browser.close()
+    assert missing == [], f"not in this browser's fonts: {missing}"
+
+
 def test_context_cards_have_a_rendered_cue_of_their_own(server) -> None:
     # nemik:W385 (W380 refuted the data-flag proof): with one repo picked, the context cards drawn from
     # other repos RENDER a double border at full opacity, and no other card renders one.
