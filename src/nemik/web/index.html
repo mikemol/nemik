@@ -66,6 +66,7 @@ aside a { color: var(--ink); text-decoration: underline dotted var(--muted); }
   <label><input type="checkbox" id="showCross"> show all cross-repo edges</label>
   <label title="Order the forest by the flow model's salience (the demand each goal's cone carries, and each ready card absorbs) instead of by nemik-rank's band-first position"><input type="checkbox" id="bySalience"> salience order</label>
   <label title="With repos picked, also show what their cards wait on in other repos, this many hops out (1 = what it waits on, 2 = and what that waits on); these cards are drawn dashed and dim"><select id="depth"><option>1</option><option selected>2</option><option>3</option></select> hops of blockers</label>
+  <label title="Collapse each umbrella (a card with two or more open prerequisites in its repo) over the work beneath it that nothing else needs; its label counts what it hides (W350). Double-click an umbrella to expand or collapse it."><input type="checkbox" id="rollup"> roll up umbrellas</label>
   <label title="One treemap across the fleet: each tile holds the work beneath it, area by load, rank order reading left to right; repo is the border colour"><input type="checkbox" id="treemap"> treemap</label>
   <span class="stat" id="stat"></span>
   <span class="stat" id="legnote" role="status"></span>
@@ -168,6 +169,7 @@ const isOpen = n => n.symbol && !["done", "dropped"].includes(n.state);
 const depEdges = () => data.edges.filter(e => e.kind === "enables" || e.kind === "waits")
   .map(e => (e.kind === "enables" ? [e.source, e.target] : [e.target, e.source]));
 let keepOpen = new Set();
+const expanded = new Set();  // nemik:W350: umbrellas the reader opened with a double-click
 
 // Each card's rings, as scope ids. The view chain is over what is drawn; the selected chain over the
 // selected card's cone (everything it transitively waits on or enables), whatever is drawn.
@@ -260,9 +262,40 @@ function draw() {
       frontier = next;
     }
   }
+  // nemik:W350: milestone roll-up. With "roll up umbrellas" on, an umbrella (an open card with two or
+  // more open prerequisites in its own repo) hides the work beneath it that nothing else needs, and its
+  // label counts what it hides; double-click it to expand or collapse it again.
+  const hidden = new Set(), rolled = new Map();
+  if (document.getElementById("rollup").checked) {
+    const deps = depEdges();
+    const preds = new Map(), dependents = new Map();
+    deps.forEach(([p, d]) => {
+      if (!preds.has(d)) preds.set(d, []);
+      preds.get(d).push(p);
+      if (!dependents.has(p)) dependents.set(p, []);
+      dependents.get(p).push(d);
+    });
+    const open = id => byId.has(id) && isOpen(byId.get(id));
+    const umbrellas = [...keep].filter(id => open(id)
+      && (preds.get(id) || []).filter(p => open(p) && byId.get(p).repo === byId.get(id).repo).length >= 2);
+    for (const u of umbrellas) {
+      if (expanded.has(u) || hidden.has(u)) continue;
+      const cone = new Set(), todo = [u];
+      while (todo.length) for (const p of preds.get(todo.pop()) || []) if (open(p) && !cone.has(p) && p !== u) { cone.add(p); todo.push(p); }
+      // keep only what nothing outside the umbrella's cone needs, to a fixed point
+      let changed = true;
+      while (changed) {
+        changed = false;
+        for (const c of [...cone]) if ((dependents.get(c) || []).some(d => d !== u && !cone.has(d) && open(d))) { cone.delete(c); changed = true; }
+      }
+      if (!cone.size) continue;
+      cone.forEach(c => { hidden.add(c); keep.delete(c); });
+      rolled.set(u, cone.size);
+    }
+  }
   // A block ends at the blocker's claiming waypoint, or at an "unclaimed" placeholder in the
   // blocker's box; pull that end in even when its repo is filtered out, so the block stays visible.
-  const waits = data.edges.filter(e => e.kind === "waits" && keep.has(e.source)
+  const waits = data.edges.filter(e => e.kind === "waits" && keep.has(e.source) && !hidden.has(e.target)
       && (e.target.startsWith("operator:") ? (showNoise || e.target === "operator:needs-you")
         : ghosts.has(e.source) ? keep.has(e.target) : byId.has(e.target)));
   waits.forEach(e => { if (byId.has(e.target) && !ghosts.has(e.source)) keep.add(e.target); });
@@ -289,7 +322,9 @@ function draw() {
     }),
     ...data.nodes.filter(n => keep.has(n.id)).map(n => {
       const e = n.effort || {}, total = (e.forecast || 0) + (e.interrupt || 0) + (e.unclassified || 0);
-      return { data: { ...n, parent: treemapOn ? undefined : "repo:" + n.repo, label: n.state === "unclaimed" ? `? ${n.for}` : n.symbol + (bySal && n.salience ? ` · ${+n.salience.toFixed(1)}` : ""),
+      return { data: { ...n, parent: treemapOn ? undefined : "repo:" + n.repo, label: n.state === "unclaimed" ? `? ${n.for}` : n.symbol + (bySal && n.salience ? ` · ${+n.salience.toFixed(1)}` : "")
+          + (rolled.has(n.id) ? ` ▸ ${rolled.get(n.id)}` : expanded.has(n.id) ? " ▾" : ""),
+        rollup: rolled.get(n.id) || 0,
         fill: color(n.state), border: total ? 1 + 6 * (e.interrupt || 0) / total : 1,
         rings: ringsOf.get(n.id) || [], nrings: (ringsOf.get(n.id) || []).length,
         ghost: !wants(n.repo) } };
@@ -308,7 +343,8 @@ function draw() {
   // The viewport is kept only across a redraw of the SAME view: a changed layout mode or repo
   // filter puts every node somewhere else, and the old zoom/pan then showed one tile scaled off the
   // page (operator 2026-10-02, treemap toggle).
-  const mode = [treemapOn, document.getElementById("bySalience").checked, [...picked].sort().join(","), document.getElementById("depth").value].join("|");
+  const mode = [treemapOn, document.getElementById("bySalience").checked, [...picked].sort().join(","), document.getElementById("depth").value,
+    document.getElementById("rollup").checked].join("|");
   const view = cy && mode === lastMode ? { zoom: cy.zoom(), pan: { ...cy.pan() } } : null;
   lastMode = mode;
   if (cy) cy.destroy();
@@ -396,6 +432,12 @@ function draw() {
   light();
   cy.on("tap", "node[symbol]", ev => { selectedId = ev.target.id(); detail(ev.target.data()); refreshRings(); });
   cy.on("tap", "node[lane]", ev => lane(ev.target.data("lane")));
+  // nemik:W350: double-click an umbrella to expand or collapse what it rolls up.
+  cy.on("dbltap", "node[symbol]", ev => {
+    const id = ev.target.id();
+    if (ev.target.data("rollup")) expanded.add(id); else if (expanded.has(id)) expanded.delete(id); else return;
+    draw();
+  });
   // The 60s poll rebuilds the graph from scratch (cy.destroy() above), which silently drops
   // whatever the user had selected. Re-select the same node if it still exists.
   if (selectedId) {
@@ -1020,6 +1062,7 @@ for (const id of ["wake", "goals"]) document.getElementById(id).addEventListener
   if (a) { ev.preventDefault(); focusCite(a.dataset.cite); }
 });
 document.getElementById("depth").onchange = draw;
+document.getElementById("rollup").onchange = draw;
 document.getElementById("showDone").onchange = draw;
 document.getElementById("showNoise").onchange = draw;
 // The treemap toggle is a per-viewer preference; storage can be missing or throw (private window).

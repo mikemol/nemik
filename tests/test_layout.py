@@ -250,6 +250,44 @@ LEGIBILITY = """() => {
 }"""
 
 
+def test_rolling_up_umbrellas_hides_their_work_and_a_double_click_expands_one(
+    server,
+) -> None:
+    # nemik:W350: with "roll up umbrellas" on, fewer cards are drawn, an umbrella counts what it
+    # hides, and a double-click on it brings exactly that many back.
+    with sync_api.sync_playwright() as p:
+        exe = os.environ.get("NEMIK_CHROMIUM")
+        try:
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        page.goto(server)
+        page.wait_for_function(
+            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
+            timeout=60000,
+        )
+        page.click("#repos button[data-repo='nemik']")
+        page.wait_for_timeout(500)
+        full = page.evaluate("() => cy.nodes('[symbol]').length")
+        page.check("#rollup")
+        page.wait_for_timeout(600)
+        rolled = page.evaluate("() => cy.nodes('[symbol]').length")
+        umbrella = page.evaluate(
+            "() => { const u = cy.nodes('[rollup > 0]')[0]; return u ? [u.id(), u.data('rollup')] : null; }"
+        )
+        assert umbrella is not None
+        page.evaluate(f"() => cy.getElementById('{umbrella[0]}').emit('dbltap')")
+        page.wait_for_timeout(600)
+        opened = page.evaluate("() => cy.nodes('[symbol]').length")
+        browser.close()
+    assert rolled < full
+    # the umbrella's own work is back (other umbrellas may stay rolled up)
+    assert opened >= rolled + 1
+
+
 def test_the_default_view_is_legible(server) -> None:
     # nemik:W340: the first view never shrinks a label below 8 px or a node below 12 px on screen; when
     # the whole fleet would, it shows one repo at the floor and says so, with a way to fit everything.

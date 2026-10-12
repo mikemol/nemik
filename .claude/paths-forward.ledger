@@ -581,3 +581,4 @@
 2026-10-12T03:12:16Z  tick  W47  nudged    nudge     "NUDGE dormant gabion/sre-troubleshooting (W47) and the operator's Tasks token (W188): owners already know, no message"
 2026-10-12T03:19:48Z  tick  W357 advanced  unblock   "operator ask rate and implied wait in --weekly (3f4af6a)"  evidence=3f4af6a
 2026-10-12T03:51:48Z  tick  W347 advanced  unblock   "fire ripple --fires (1c5f2f0)"  evidence=1c5f2f0
+2026-10-12T04:12:14Z  tick  W47  nudged    nudge     "NUDGE dormant gabion/sre-troubleshooting: no message (dormancy is the operator's choice)"

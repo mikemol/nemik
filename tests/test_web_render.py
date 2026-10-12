@@ -57,11 +57,20 @@ def server(tmp_path):
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
     )
-    for _ in range(50):
+    # Wait for the server to listen, up to a minute: under host memory pressure (2026-10-12, swap
+    # full) its start took over the old 5 s and the browser met a refused connection. Never yield a
+    # server that is not up: fail here, naming why.
+    deadline = time.monotonic() + 60
+    while True:
         try:
             socket.create_connection(("127.0.0.1", port), timeout=0.2).close()
             break
         except OSError:
+            if proc.poll() is not None or time.monotonic() > deadline:
+                proc.kill()
+                pytest.fail(
+                    f"nemik-serve did not listen on {port} (exit {proc.poll()})"
+                )
             time.sleep(0.1)
     yield f"http://127.0.0.1:{port}/"
     proc.terminate()
