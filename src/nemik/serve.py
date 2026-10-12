@@ -166,10 +166,12 @@ def without(g: Graph, refs: frozenset[str]) -> Graph:
 
 def to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
     """The view's document. nemik:W403: built with identical flow solves answered once (the ranking,
-    edge widths and operator-ask weights each asked for the same repo's solve)."""
+    edge widths and operator-ask weights each asked for the same repo's solve). nemik:W412: and with
+    each graph's per-card facts indexed once."""
+    from nemik.index import indexed
     from nemik.salience import memo_audits
 
-    with memo_audits():
+    with memo_audits(), indexed():
         return _to_json(g, findings, numbers)
 
 

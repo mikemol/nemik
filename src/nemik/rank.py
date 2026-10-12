@@ -161,6 +161,11 @@ def _repo(node: Node) -> str:
 
 def successors(g: Graph, node: Node) -> set[Node]:
     """What this waypoint moves: what it `enables`, and every waypoint that `waitsFor` it."""
+    from nemik.index import index
+
+    ix = index(g)
+    if ix is not None:
+        return ix.successors(node)
     return set(g.objects(node, NEMIK.enables)) | set(g.subjects(NEMIK.waitsFor, node))
 
 
@@ -190,6 +195,11 @@ def downstream_weight(g: Graph, node: Node, weights: Weights) -> int:
 
 
 def _open(g: Graph, n: Node) -> bool:
+    from nemik.index import index
+
+    ix = index(g)
+    if ix is not None:
+        return ix.open(n)
     return (n, OSLC_CM.state, NEMIK.Done) not in g and (n, OSLC_CM.state, None) in g
 
 

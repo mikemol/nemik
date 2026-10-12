@@ -37,6 +37,11 @@ class Critical(NamedTuple):
 
 
 def _open(g: Graph) -> set[Node]:
+    from nemik.index import index
+
+    ix = index(g)
+    if ix is not None:
+        return {n for n in ix.state if ix.open(n)}
     return {
         n
         for n in g.subjects(OSLC_CM.state, None)

@@ -260,7 +260,22 @@ def waiting_behind(g: Graph, node: Node) -> set[Node]:
 
 
 def operator_asks(g: Graph) -> list[dict[str, Any]]:
-    """Every open waypoint waiting on the operator, categorised, with duplicate asks grouped."""
+    """Every open waypoint waiting on the operator, categorised, with duplicate asks grouped.
+
+    nemik:W412: answered once per graph inside a build (health asks it once per repo); each caller
+    gets its own copies of the rows, so a caller that annotates them touches nothing shared.
+    """
+    from nemik.index import index
+
+    ix = index(g)
+    if ix is None:
+        return _operator_asks(g)
+    if ix.operator_asks is None:
+        ix.operator_asks = _operator_asks(g)
+    return [dict(row) for row in ix.operator_asks]
+
+
+def _operator_asks(g: Graph) -> list[dict[str, Any]]:
     from nemik.adapter import OPERATOR
 
     last: dict[Node, str] = {}

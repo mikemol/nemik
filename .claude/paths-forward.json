@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 213
+      "ticks_blocked": 214
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 33,
+      "ticks_blocked": 34,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 35,
+      "ticks_blocked": 36,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T13:54:28Z",
-      "ticks_blocked": 65,
+      "ticks_blocked": 66,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 62,
+      "ticks_blocked": 63,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 39,
+      "ticks_blocked": 40,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 54,
+      "ticks_blocked": 55,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 54,
+      "ticks_blocked": 55,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 54,
+      "ticks_blocked": 55,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 54,
+      "ticks_blocked": 55,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 54,
+      "ticks_blocked": 55,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 54,
+      "ticks_blocked": 55,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 54,
+      "ticks_blocked": 55,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 54,
+      "ticks_blocked": 55,
       "completed": null
     },
     {
@@ -6469,7 +6469,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 42,
+      "ticks_blocked": 43,
       "weight": 1,
       "completed": null
     },
@@ -6620,7 +6620,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 29,
+      "ticks_blocked": 30,
       "completed": null
     },
     {
@@ -6758,7 +6758,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 5
     },
     {
       "symbol": "W353",
@@ -6780,7 +6780,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 5
     },
     {
       "symbol": "W354",
@@ -6802,7 +6802,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 5
     },
     {
       "symbol": "W355",
@@ -6824,7 +6824,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 5
     },
     {
       "symbol": "W356",
@@ -7031,7 +7031,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 35,
+      "ticks_blocked": 36,
       "completed": null
     },
     {
@@ -7095,7 +7095,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 6
     },
     {
       "symbol": "W368",
@@ -7117,7 +7117,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 6
     },
     {
       "symbol": "W369",
@@ -7582,7 +7582,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W338",
       "last_worked": "2026-10-12T13:24:19Z",
-      "ticks_blocked": 13,
+      "ticks_blocked": 14,
       "completed": null
     },
     {
@@ -7630,7 +7630,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null
     },
     {
@@ -7654,7 +7654,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -7679,7 +7679,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:01:54Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "weight": 3,
       "completed": null
     },
@@ -7705,7 +7705,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T18:43:02Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -7729,7 +7729,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -7865,7 +7865,7 @@
       "minted_during": "tick",
       "caused_by": "W393",
       "last_worked": "2026-10-12T19:13:41Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -8020,7 +8020,7 @@
     {
       "symbol": "W409",
       "title": "Snapshot per piece: write one static file per repo plus the fleet-level pieces, each with a content hash in an index, so the page refetches only what changed",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W401"
       ],
@@ -8032,32 +8032,30 @@
       "issued_at": "2026-10-12T19:13:31Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": null,
+      "last_worked": "2026-10-12T20:17:26Z",
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 2,
+      "completed": null
     },
     {
       "symbol": "W410",
       "title": "Memoize the per-repo non-solve derived work (graph scans, health, critical) by the repo's own triples, so a rebuild recomputes only the repos a change reaches",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W401"
       ],
       "touches": [],
-      "blocked_on": [
-        "W411",
-        "W412"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Umbrella: W411 (namespace hoist) and W412 (one-pass card index); remeasure with profile_edit.py after each",
-      "evidence": "2026-10-12: Profile 2026-10-12 (scratchpad profile_edit.py, one card done, then to_json under cProfile): 35.8 s; rdflib triples() 19.2 s cumulative (audit 13.6, health 10.6, operator_asks 8.7, critical/rank _open ~9); Namespace.__getattr__ 5.2 s. survey+ledger warm with W402 cache 16.4 s vs 24.0 cold (SHACL dominates: W400). Per-repo memo by triple fingerprint rejected for now: fingerprinting a repo's triples is itself a full scan; a one-pass index removes the scans outright.",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: Profile 2026-10-12 (scratchpad profile_edit.py, one card done, then to_json under cProfile): 35.8 s; rdflib triples() 19.2 s cumulative (audit 13.6, health 10.6, operator_asks 8.7, critical/rank _open ~9); Namespace.__getattr__ 5.2 s. survey+ledger warm with W402 cache 16.4 s vs 24.0 cold (SHACL dominates: W400). Per-repo memo by triple fingerprint rejected for now: fingerprinting a repo's triples is itself a full scan; a one-pass index removes the scans outright. | 2026-10-12: Both children landed (W411 namespace cache, W412 one-pass index): one-edit document rebuild 10.08 -> 5.04 s unprofiled, output equal.",
       "issued_at": "2026-10-12T19:13:33Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-12T19:45:12Z",
+      "last_worked": "2026-10-12T20:17:25Z",
       "ticks_blocked": 0,
       "weight": 2,
-      "completed": null
+      "completed": "20261012T201725Z"
     },
     {
       "symbol": "W411",
@@ -8081,21 +8079,21 @@
     {
       "symbol": "W412",
       "title": "One-pass card index per build: state, blockedOn, enables, repo and asks per card as plain dicts, read by salience.audit, health, blocks.operator_asks, critical._open and rank._open instead of 3.3M rdflib triple lookups (19 s of 36)",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W410"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: src/nemik/index.py: build-scoped per-card index (state, enables, waited_by) plus operator_asks answered once per graph; read by rank.successors/_open, critical._open, blocks.operator_asks; to_json opens the scope. scratchpad index_equal.py on the live fleet, one card edited: plain 10.08 s, indexed 5.04 s, documents EQUAL. tests/test_index.py pins indexed == plain.",
       "issued_at": "2026-10-12T19:45:07Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-12T19:48:29Z",
+      "last_worked": "2026-10-12T20:17:24Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261012T201724Z"
     },
     {
       "symbol": "W413",
@@ -8115,7 +8113,8 @@
       "minted_during": "tick",
       "caused_by": "W372",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 9
     }
   ],
   "residue": [
@@ -8180,7 +8179,7 @@
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-12T19:41:30Z"
+    "taken_at": "2026-10-12T20:11:30Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []

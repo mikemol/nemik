@@ -665,3 +665,4 @@
 2026-10-12T19:45:06Z  tick  W411 minted    -         "Hoist hot-loop namespace terms (NEMIK.x, OSLC_CM.x) into module constants: 1.48M Namespace.__getattr__ calls cost 5.2 s of a 36 s one-edit rebuild"
 2026-10-12T19:45:07Z  tick  W412 minted    -         "One-pass card index per build: state, blockedOn, enables, repo and asks per card as plain dicts, read by salience.audit, health, blocks.operator_asks, critical._open and rank._open instead of 3.3M rdflib triple lookups (19 s of 36)"
 2026-10-12T19:48:19Z  tick  W413 minted    -         "Shared projection: cards to tasks with predecessor links, one mapping every export and connector reuses, with a decode-back test"  evidence=W372
+2026-10-12T19:54:24Z  tick  W411 advanced  unblock   "cdd6b66 pushed: W411 namespace cache (one-edit rebuild 35.8->27.1 s profiled), W372 survey verified+closed, W410 split W411/W412, W413 filed; W412 working next"
