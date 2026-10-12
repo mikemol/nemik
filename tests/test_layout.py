@@ -475,6 +475,36 @@ def test_the_default_view_is_legible(server) -> None:
     assert note == "" or "readable size" in note
 
 
+def test_no_command_route_or_tools_panel_remains(server) -> None:
+    # nemik:W397: the Tools drop-down ran CLIs through /cmd; it is retired, and every capability it
+    # offered is either native to the view or CLI-only. Neither the route nor the panel may come back.
+    import urllib.error
+    import urllib.request
+
+    try:
+        urllib.request.urlopen(server + "cmd/rank?repo=a", timeout=30)
+        status = 200
+    except urllib.error.HTTPError as e:
+        status = e.code
+    assert status == 404
+    with sync_api.sync_playwright() as p:
+        exe = os.environ.get("NEMIK_CHROMIUM")
+        try:
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page()
+        page.goto(server)
+        page.wait_for_selector("details.sec")
+        tools = page.evaluate(
+            "() => [document.getElementById('tool'), document.getElementById('sec-tools')]"
+        )
+        browser.close()
+    assert tools == [None, None]
+
+
 def test_one_picked_repo_restored_from_the_last_visit_is_legible_too(server) -> None:
     # nemik:W383 (W380 refuted the floor here): a single repo, picked and remembered from a previous
     # visit, is the first view on reload; its labels must still be at least 8 px.

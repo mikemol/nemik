@@ -625,3 +625,12 @@
 2026-10-12T14:12:04Z  tick  W389 nudged    nudge     "NUDGE mtools:W1048: claimed today, will report the sha; no message"
 2026-10-12T14:18:43Z  tick  W390 minted    -         "a11y: the treemap's tile labels meet the legibility floor, or say where they cannot"  evidence=W383
 2026-10-12T14:18:49Z  tick  W383 advanced  unblock   "legibility floor holds for one picked repo; treemap split to W390"
+2026-10-12T14:27:37Z  interrupt W391 minted    -         "Static-first nemik view: snapshots built on change, served as files, computed in the client"  evidence=operator
+2026-10-12T14:27:38Z  interrupt W392 minted    -         "Measure the view's load and responsiveness: web vitals (LCP, INP, CLS, TTFB) in render-check"  evidence=W391
+2026-10-12T14:27:39Z  interrupt W393 minted    -         "Snapshots rebuilt only when a queue or ledger changes, keyed by a content hash"  evidence=W391
+2026-10-12T14:27:40Z  interrupt W394 minted    -         "Serve the snapshots as static files; the in-process graph server leaves the request path"  evidence=W391
+2026-10-12T14:27:42Z  interrupt W395 minted    -         "The page renders the last snapshot at once and refreshes in the background"  evidence=W391
+2026-10-12T14:27:44Z  interrupt W396 minted    -         "Inventory what only the server computes, and precompute it into the snapshot or move it to the client"  evidence=W391
+2026-10-12T14:38:32Z  interrupt W397 minted    -         "Retire the Tools drop-down and /cmd: each capability becomes a native part of the view, or stays CLI-only"  evidence=operator
+2026-10-12T14:42:25Z  tick  W392 nudged    nudge     "NUDGE luthen-observability:W870: carded today, baseline needs ~7 days by design; no message"
+2026-10-12T14:50:32Z  tick  W397 advanced  unblock   "Tools drop-down and /cmd retired; every capability native or CLI-only"

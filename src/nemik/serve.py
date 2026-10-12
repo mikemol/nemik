@@ -409,28 +409,6 @@ def handler(model: Model) -> type[BaseHTTPRequestHandler]:
                     b for b in doc if not inbound_repo or b["blocker"] == inbound_repo
                 ]
                 self.send(200, "application/json", json.dumps(rows, indent=1).encode())
-            elif self.path.startswith("/cmd/"):
-                # nemik:W81: a read-only CLI's exact output over the cached graph.
-                from urllib.parse import parse_qs, urlparse
-
-                from nemik.tools import run
-
-                u = urlparse(self.path)
-                values = parse_qs(u.query).get("repo")
-                cmd_repo = values[0] if values else None
-                try:
-                    code, out = run(
-                        u.path.removeprefix("/cmd/"),
-                        model.graph,
-                        str(model.root),
-                        cmd_repo,
-                    )
-                except ValueError as e:
-                    self.send(400, "text/plain; charset=utf-8", str(e).encode())
-                    return
-                self.send(
-                    200, "text/plain; charset=utf-8", f"# exit {code}\n{out}".encode()
-                )
             elif self.path.startswith("/goals/"):
                 # nemik:W80: the W79 goal view, computed on the cached graph.
                 from nemik.rank import goals, load_weights
@@ -475,12 +453,8 @@ def write_static(out: Path) -> list[Path]:
     written = [out / "index.html"]
     (out / "vendor").mkdir(parents=True, exist_ok=True)
     page = web.joinpath("index.html").read_text()
-    # nemik:W171: the Tools panel runs commands on the server; a static host has none, so it is cut.
-    head, _, rest = page.partition("<!-- tools:")
-    _, _, tail = rest.partition("<!-- /tools -->")
-    if not tail:
-        raise ValueError("index.html: the Tools panel markers are missing")
-    written[0].write_text(head + tail)
+    # nemik:W397: the page no longer has a Tools panel (W171 cut it here), so it is written as it is.
+    written[0].write_text(page)
     for name in sorted(VENDOR):
         dst = out / "vendor" / name
         dst.write_bytes(web.joinpath("vendor").joinpath(name).read_bytes())
