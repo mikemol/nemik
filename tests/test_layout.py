@@ -288,6 +288,40 @@ def test_rolling_up_umbrellas_hides_their_work_and_a_double_click_expands_one(
     assert opened >= rolled + 1
 
 
+def test_side_panel_sections_fold_and_the_choice_survives_a_reload(server) -> None:
+    # nemik:W387: each section is a <details>; the long lists start closed, and a section the viewer
+    # closes stays closed after a reload.
+    with sync_api.sync_playwright() as p:
+        exe = os.environ.get("NEMIK_CHROMIUM")
+        try:
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        page.goto(server)
+        page.wait_for_selector("details.sec")
+        first = page.evaluate(
+            "() => Object.fromEntries([...document.querySelectorAll('details.sec')].map(d => [d.id, d.open]))"
+        )
+        page.click("#sec-goals > summary")
+        page.wait_for_timeout(300)
+        hidden = page.evaluate(
+            "() => [document.getElementById('sec-goals').open,"
+            " document.getElementById('goals').checkVisibility()]"
+        )
+        page.reload()
+        page.wait_for_selector("details.sec")
+        kept = page.evaluate("() => document.getElementById('sec-goals').open")
+        browser.close()
+    assert first["sec-weather"] is False and first["sec-findings"] is False
+    assert first["sec-legend"] is True and first["sec-goals"] is True
+    # closed, and its body is not rendered (Chrome hides it with content-visibility, so it keeps a box)
+    assert hidden == [False, False], hidden
+    assert kept is False
+
+
 def test_the_default_view_is_legible(server) -> None:
     # nemik:W340: the first view never shrinks a label below 8 px or a node below 12 px on screen; when
     # the whole fleet would, it shows one repo at the floor and says so, with a way to fit everything.

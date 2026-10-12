@@ -38,6 +38,7 @@ main { display: grid; grid-template-columns: 1fr 340px; height: calc(100vh - var
 #cy { min-height: 400px; }
 aside { border-left: 1px solid var(--line); background: var(--panel); overflow: auto; padding: 12px 16px; }
 aside h2 { font-size: 14px; margin: 16px 0 6px; }
+aside details.sec > summary { font-size: 14px; font-weight: 600; margin: 16px 0 6px; cursor: pointer; }
 .legend span { display: inline-flex; align-items: center; gap: 4px; margin-right: 10px; }
 .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
 .finding { font-size: 12px; margin: 2px 0; }
@@ -75,6 +76,9 @@ aside a { color: var(--ink); text-decoration: underline dotted var(--muted); }
 <main>
   <div id="cy"></div>
   <aside>
+    <!-- nemik:W387: every panel section folds (details/summary: keyboard-operable, announced as
+         expandable); which are open is remembered per viewer. -->
+    <details class="sec" id="sec-legend" open><summary>Legend</summary>
     <div class="legend" id="legend"></div>
     <div class="legend" id="pathkey" title="Halos mark the longest chain of open work in each scope; a card on several shows its rings stacked, innermost first"></div>
     <div class="legend" id="repokey" hidden></div>
@@ -84,25 +88,32 @@ aside a { color: var(--ink); text-decoration: underline dotted var(--muted); }
       <span style="color:var(--interrupt)">idle</span>,
       <span style="color:var(--blocked)">asleep</span>,
       unmarked if nothing is waiting on it (no roster row).</p>
+    </details>
     <!-- tools: nemik:W171, cut from the static build (no server to run a command) -->
-    <h2>Tools</h2>
+    <details class="sec" id="sec-tools" open><summary>Tools</summary>
     <div class="stat">
       <select id="tool"><option value="">run a command…</option></select>
       <span id="toolnote"></span>
       <pre id="toolout" style="white-space:pre-wrap; overflow:auto; max-height:40vh; font-size:11px"></pre>
     </div>
+    </details>
     <!-- /tools -->
-    <h2>Weather</h2>
+    <details class="sec" id="sec-weather" data-closed-by-default><summary>Weather</summary>
     <div id="weather" class="stat">No outage is being waited on.</div>
-    <div id="historyBox" hidden><h2>History</h2><div id="history" class="stat"></div></div>
-    <h2>Goals</h2>
+    </details>
+    <div id="historyBox" hidden><details class="sec" id="sec-history" open><summary>History</summary><div id="history" class="stat"></div></details></div>
+    <details class="sec" id="sec-goals" open><summary>Goals</summary>
     <div id="goals" class="stat">Pick a repo.</div>
-    <h2>Wake</h2>
+    </details>
+    <details class="sec" id="sec-wake" open><summary>Wake</summary>
     <div id="wake" class="stat">…</div>
-    <h2>Selected</h2>
+    </details>
+    <details class="sec" id="sec-selected" open><summary>Selected</summary>
     <div id="detail" class="stat">Click a waypoint.</div>
-    <h2>Findings</h2>
+    </details>
+    <details class="sec" id="sec-findings" data-closed-by-default><summary>Findings</summary>
     <div id="findings"></div>
+    </details>
   </aside>
 </main>
 <script>
@@ -121,6 +132,19 @@ function esc(s) { return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&l
 const picked = new Set();
 try { JSON.parse(localStorage.getItem("nemik.repos") || "[]").forEach(r => picked.add(r)); } catch (e) { /* not remembered */ }
 const wants = r => !picked.size || picked.has(r);
+
+// nemik:W387: which side-panel sections are open, per viewer. A section marked data-closed-by-default
+// (the long lists) starts closed until the viewer opens it once.
+let openSecs = {};
+try { openSecs = JSON.parse(localStorage.getItem("nemik.sections") || "{}"); } catch (e) { /* not remembered */ }
+document.querySelectorAll("details.sec").forEach(d => {
+  if (d.id in openSecs) d.open = openSecs[d.id];
+  else if (d.hasAttribute("data-closed-by-default")) d.open = false;
+  d.addEventListener("toggle", () => {
+    openSecs[d.id] = d.open;
+    try { localStorage.setItem("nemik.sections", JSON.stringify(openSecs)); } catch (e) { /* not remembered */ }
+  });
+});
 
 // nemik:W335: one halo ring per path scope, drawn together (innermost first), each with its own colour AND
 // dash so the scope never rests on hue alone: the fleet's longest chain, this repo's, the visible set's,

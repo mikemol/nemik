@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 380,
+  "counter": 387,
   "waypoints": [
     {
       "symbol": "W1",
@@ -7364,7 +7364,7 @@
     {
       "symbol": "W380",
       "title": "Run the a11y adversary once over the view's claims and triage what it refutes",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W337"
       ],
@@ -7374,14 +7374,161 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "spawn .claude/agents/a11y-adversary.md read-only; verify each REFUTED against the code before acting; a refuted claim becomes a fix card, an unproven one (C5 state not by colour alone, C6 label contrast) a test card",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: 2026-10-12 adversary run (read-only, no browser probes; WCAG wording from memory, to be checked): C5 REFUTED (state by fill only), C1 REFUTED (fleet and sel both solid; test never reads dasharray), C4 REFUTED (floor skipped for one repo and treemap), C6 REFUTED (label contrast ~2.6-3.4:1), C2 REFUTED (test checks data not style; dashed also means unclaimed), C3 SURVIVED narrowly. Verified here against the source: C1 (:130,:133), C4 (:222), C6 tokens (:12-20). Carded as W381-W386.",
       "issued_at": "2026-10-12T12:12:26Z",
       "minted_during": "tick",
       "caused_by": "W341",
-      "last_worked": "2026-10-12T12:12:28Z",
+      "last_worked": "2026-10-12T12:14:21Z",
+      "ticks_blocked": 0,
+      "completed": "20261012T121421Z"
+    },
+    {
+      "symbol": "W381",
+      "title": "a11y C5: card state must not rest on fill colour alone",
+      "status": "ready",
+      "enables": [
+        "W337"
+      ],
+      "touches": [
+        "a11y",
+        "web"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "W380 refuted: ready, working and blocked differ only by fill (index.html:328); add a non-colour cue per state (border style or a label prefix glyph), and a browser test asserting each pair of states differs in some non-colour property; the treemap's opacity-only state (:407) too",
+      "evidence": "",
+      "issued_at": "2026-10-12T12:14:16Z",
+      "minted_during": "interrupt",
+      "caused_by": "W380",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W382",
+      "title": "a11y C1: every path-scope ring has its own dash pattern, and the test reads it",
+      "status": "ready",
+      "enables": [
+        "W337"
+      ],
+      "touches": [
+        "a11y",
+        "web"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "W380 refuted: fleet and sel are both solid (index.html:130,133), differing by hue and 1 px width; give each scope a distinct pattern readable at fit zoom, and make the test assert the four stroke-dasharray values are pairwise distinct",
+      "evidence": "",
+      "issued_at": "2026-10-12T12:14:17Z",
+      "minted_during": "interrupt",
+      "caused_by": "W380",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W383",
+      "title": "a11y C4: the legibility floor holds for one picked repo and the treemap too",
+      "status": "ready",
+      "enables": [
+        "W337"
+      ],
+      "touches": [
+        "a11y",
+        "web"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "W380 refuted: fitReadable returns early when repos.length < 2 (index.html:222), so a single picked repo (including one restored from localStorage) can fit to 4 px labels; apply the floor there, and measure the treemap's own data(fs); test both",
+      "evidence": "",
+      "issued_at": "2026-10-12T12:14:18Z",
+      "minted_during": "interrupt",
+      "caused_by": "W380",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W384",
+      "title": "a11y C6: label text meets 4.5:1 on every node fill in both themes",
+      "status": "working",
+      "enables": [
+        "W338"
+      ],
+      "touches": [
+        "a11y",
+        "web"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "W380 refuted the source comment 'contrasts with every state fill in both themes': --bg on --done is ~2.6:1 (light) and ~3.4:1 (dark), on --interrupt ~2.7:1 (light); choose label colours per fill to reach 4.5:1, and a test computing the WCAG ratio of label against every fill token in both color schemes. This is the first piece of W338's contrast gate.",
+      "evidence": "",
+      "issued_at": "2026-10-12T12:14:19Z",
+      "minted_during": "interrupt",
+      "caused_by": "W380",
+      "last_worked": "2026-10-12T12:32:47Z",
       "ticks_blocked": 0,
       "completed": null
+    },
+    {
+      "symbol": "W385",
+      "title": "a11y C2: context cards get a cue of their own, and the test checks the style, not a data flag",
+      "status": "ready",
+      "enables": [
+        "W337"
+      ],
+      "touches": [
+        "a11y",
+        "web"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "W380 refuted: the test counts [?ghost] data, so deleting the style passes; and dashed also means unclaimed (index.html:362), so a dashed card is ambiguous; give context its own cue and assert the rendered style",
+      "evidence": "",
+      "issued_at": "2026-10-12T12:14:20Z",
+      "minted_during": "interrupt",
+      "caused_by": "W380",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W386",
+      "title": "a11y gaps: keyboard and screen-reader paths to what only the canvas offers",
+      "status": "ready",
+      "enables": [
+        "W337"
+      ],
+      "touches": [
+        "a11y",
+        "web"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "W380 gaps: card selection, umbrella expand (double-click only) and card details are mouse-only on the canvas; chip health and reasons are a title attribute, not in the accessible name; #legnote's live region re-announces its injected button; C1-C4 tested in light only. Design a keyboard-reachable list of the visible cards mirroring the canvas, put health in chip names, and run the a11y tests in both themes",
+      "evidence": "",
+      "issued_at": "2026-10-12T12:14:21Z",
+      "minted_during": "interrupt",
+      "caused_by": "W380",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W387",
+      "title": "Side panel sections collapse (native details/summary), remembered per viewer",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "web",
+        "a11y"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: index.html: every side-panel section is a <details class=sec> with its heading as <summary>; open state per viewer in localStorage (nemik.sections); Weather and Findings start closed; the static build's tools markers still wrap the Tools section. test_side_panel_sections_fold_and_the_choice_survives_a_reload (checkVisibility, since Chrome hides closed details with content-visibility); render-check 13 passed.",
+      "issued_at": "2026-10-12T12:25:31Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": "2026-10-12T12:32:46Z",
+      "ticks_blocked": 0,
+      "completed": "20261012T123246Z"
     }
   ],
   "residue": [

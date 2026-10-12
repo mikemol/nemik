@@ -608,3 +608,11 @@
 2026-10-12T11:45:03Z  tick  W327 advanced  unblock   "nemik-pacing, a token bucket over new cards; W323 umbrella closed"
 2026-10-12T12:12:26Z  tick  W380 minted    -         "Run the a11y adversary once over the view's claims and triage what it refutes"  evidence=W341
 2026-10-12T12:12:36Z  tick  W341 advanced  unblock   "a11y adversary agent with nemik's claim registry; first run carded as W380"
+2026-10-12T12:14:16Z  interrupt W381 minted    -         "a11y C5: card state must not rest on fill colour alone"  evidence=W380
+2026-10-12T12:14:17Z  interrupt W382 minted    -         "a11y C1: every path-scope ring has its own dash pattern, and the test reads it"  evidence=W380
+2026-10-12T12:14:18Z  interrupt W383 minted    -         "a11y C4: the legibility floor holds for one picked repo and the treemap too"  evidence=W380
+2026-10-12T12:14:19Z  interrupt W384 minted    -         "a11y C6: label text meets 4.5:1 on every node fill in both themes"  evidence=W380
+2026-10-12T12:14:20Z  interrupt W385 minted    -         "a11y C2: context cards get a cue of their own, and the test checks the style, not a data flag"  evidence=W380
+2026-10-12T12:14:21Z  interrupt W386 minted    -         "a11y gaps: keyboard and screen-reader paths to what only the canvas offers"  evidence=W380
+2026-10-12T12:25:31Z  interrupt W387 minted    -         "Side panel sections collapse (native details/summary), remembered per viewer"  evidence=operator
+2026-10-12T12:32:48Z  op    W387 advanced  unblock   "collapsible side panel; W380 adversary triaged into W381-W386"
