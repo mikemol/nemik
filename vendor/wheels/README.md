@@ -34,3 +34,4 @@ together, to one sha, per mtools INSTALL.md.
 - `mikemol_hooks-0.1.0+f04f0a2-py3-none-any.whl`: sha256 dd2afba862fed54e948acb6ee942d309ce6767cb72bac23c13739d992a2d925b
 - `mikemol_icsstruct-0.1.0+f04f0a2-py3-none-any.whl`: sha256 d665ecd83619ff5d3457a44a232a32acf87d2fc11f1123bac7cd96ae120bd784
 - `mikemol_pathsforward-0.1.0+f04f0a2-py3-none-any.whl`: sha256 1d634502d66fe9d260f0e2c281b55fca2479e708af39ec1be00d5d8e432e4b0e
+- `mikemol_fence-0.1.0+f04f0a2-py3-none-any.whl`: sha256 fcbe2f60bf5f84fc855f7d2c557b34139d039eaa0268fd5f7176b8a071f9e5eb (nemik:W378: mtools' fence at `f04f0a2`, for `mikemol-membudget`, the commit lock mikemol-commit takes)

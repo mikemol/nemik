@@ -593,3 +593,4 @@
 2026-10-12T06:59:27Z  tick  W342 advanced  unblock   "staged-index gate in a fixed worktree (b549e0e); commits through mikemol-commit (10316fc); isolation unconfirmed until W377 re-vendors mtools"  evidence=10316fc
 2026-10-12T07:11:09Z  tick  W377 advanced  unblock   "re-vendored mtools 7d4a458 -> f04f0a2 (fleet par) with tools/revendor-mtools.sh (uv lock only, so mtools:W1028's sync hazard does not apply); committing through mikemol-commit to read its path line"
 2026-10-12T07:35:31Z  interrupt W378 minted    -         "Vendor mikemol-fence beside hooks so mikemol-commit's lock reads held"  evidence=github-8f
+2026-10-12T07:55:16Z  tick  W378 advanced  unblock   "fence vendored at f04f0a2; membudget beside the interpreter; next commit via mikemol-commit reads the lock line"
