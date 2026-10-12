@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 198
+      "ticks_blocked": 199
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 20,
+      "ticks_blocked": 21,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 50,
+      "ticks_blocked": 51,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 47,
+      "ticks_blocked": 48,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 47,
+      "ticks_blocked": 48,
       "completed": null,
       "weight": 1
     },
@@ -5382,7 +5382,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 24,
+      "ticks_blocked": 25,
       "completed": null
     },
     {
@@ -5403,7 +5403,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 39,
+      "ticks_blocked": 40,
       "completed": null
     },
     {
@@ -5462,7 +5462,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 39,
+      "ticks_blocked": 40,
       "completed": null
     },
     {
@@ -5483,7 +5483,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 39,
+      "ticks_blocked": 40,
       "completed": null
     },
     {
@@ -5523,7 +5523,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 39,
+      "ticks_blocked": 40,
       "completed": null
     },
     {
@@ -5582,7 +5582,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 39,
+      "ticks_blocked": 40,
       "completed": null
     },
     {
@@ -5622,7 +5622,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 39,
+      "ticks_blocked": 40,
       "completed": null
     },
     {
@@ -5643,7 +5643,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 39,
+      "ticks_blocked": 40,
       "completed": null
     },
     {
@@ -5683,7 +5683,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 39,
+      "ticks_blocked": 40,
       "completed": null
     },
     {
@@ -6471,7 +6471,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 28,
       "weight": 1,
       "completed": null
     },
@@ -6622,7 +6622,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 14,
+      "ticks_blocked": 15,
       "completed": null
     },
     {
@@ -6760,7 +6760,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W353",
@@ -6782,7 +6782,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W354",
@@ -6804,7 +6804,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W355",
@@ -6826,7 +6826,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W356",
@@ -7033,7 +7033,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 20,
+      "ticks_blocked": 21,
       "completed": null
     },
     {
@@ -7055,7 +7055,7 @@
       "caused_by": "W364",
       "last_worked": "2026-10-12T01:34:53Z",
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 2
     },
     {
       "symbol": "W366",
@@ -7076,7 +7076,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 2
     },
     {
       "symbol": "W367",
@@ -7097,7 +7097,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 2
     },
     {
       "symbol": "W368",
@@ -7119,7 +7119,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 2
     },
     {
       "symbol": "W369",
@@ -7402,12 +7402,13 @@
       "minted_during": "interrupt",
       "caused_by": "W380",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W382",
       "title": "a11y C1: every path-scope ring has its own dash pattern, and the test reads it",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W337"
       ],
@@ -7422,8 +7423,10 @@
       "issued_at": "2026-10-12T12:14:17Z",
       "minted_during": "interrupt",
       "caused_by": "W380",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-12T12:45:35Z",
+      "ticks_blocked": 0,
+      "weight": 1,
+      "completed": null
     },
     {
       "symbol": "W383",
@@ -7444,12 +7447,13 @@
       "minted_during": "interrupt",
       "caused_by": "W380",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W384",
       "title": "a11y C6: label text meets 4.5:1 on every node fill in both themes",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W338"
       ],
@@ -7459,14 +7463,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "W380 refuted the source comment 'contrasts with every state fill in both themes': --bg on --done is ~2.6:1 (light) and ~3.4:1 (dark), on --interrupt ~2.7:1 (light); choose label colours per fill to reach 4.5:1, and a test computing the WCAG ratio of label against every fill token in both color schemes. This is the first piece of W338's contrast gate.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: index.html labelInk(): each filled card and lane chip takes near-black or white, whichever has the higher WCAG ratio against its rendered fill; the false source comment is replaced. test_every_card_label_meets_four_and_a_half_to_one[light|dark] measures label against fill on the rendered nodes (done cards shown) and asserts >= 4.5:1; render-check 15 passed. Not covered: ghost cards' 0.65 opacity lowers effective contrast (folded into W385), treemap tiles' white-on-hue text (W386).",
       "issued_at": "2026-10-12T12:14:19Z",
       "minted_during": "interrupt",
       "caused_by": "W380",
-      "last_worked": "2026-10-12T12:32:47Z",
+      "last_worked": "2026-10-12T12:45:30Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261012T124530Z"
     },
     {
       "symbol": "W385",
@@ -7482,12 +7486,13 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "W380 refuted: the test counts [?ghost] data, so deleting the style passes; and dashed also means unclaimed (index.html:362), so a dashed card is ambiguous; give context its own cue and assert the rendered style",
-      "evidence": "",
+      "evidence": "2026-10-12: From W384: ghost cards render at opacity 0.65, which blends the 4.5:1 label pair toward the page and lowers its effective contrast; a cue for context that is not opacity would fix this too.",
       "issued_at": "2026-10-12T12:14:20Z",
       "minted_during": "interrupt",
       "caused_by": "W380",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-12T12:45:32Z",
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W386",
@@ -7508,7 +7513,8 @@
       "minted_during": "interrupt",
       "caused_by": "W380",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W387",

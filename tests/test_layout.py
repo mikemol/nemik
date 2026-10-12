@@ -288,6 +288,46 @@ def test_rolling_up_umbrellas_hides_their_work_and_a_double_click_expands_one(
     assert opened >= rolled + 1
 
 
+CONTRAST = """() => {
+  const lum = css => { const [r, g, b] = css.match(/\\d+(\\.\\d+)?/g).slice(0, 3).map(v => {
+    const c = +v / 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; });
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
+  const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); };
+  return cy.nodes("[symbol], .actor").filter(n => !n.hasClass("tile") && n.data("state") !== "unclaimed")
+    .map(n => [n.data("state") || n.data("lane"), +ratio(n.style("color"), n.style("background-color")).toFixed(2)]);
+}"""
+
+
+@pytest.mark.parametrize("scheme", ["light", "dark"])
+def test_every_card_label_meets_four_and_a_half_to_one(server, scheme) -> None:
+    # nemik:W384 (W380 refuted the old claim): label text on every filled card and lane chip is at
+    # least 4.5:1 against its fill (WCAG 1.4.3), in both themes.
+    with sync_api.sync_playwright() as p:
+        exe = os.environ.get("NEMIK_CHROMIUM")
+        try:
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(
+            viewport={"width": 1700, "height": 1250}, color_scheme=scheme
+        )
+        page.goto(server)
+        page.wait_for_function(
+            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
+            timeout=60000,
+        )
+        page.check("#showDone")
+        page.wait_for_timeout(600)
+        pairs = page.evaluate(CONTRAST)
+        browser.close()
+    assert pairs
+    assert {s for s, _ in pairs} >= {"ready", "blocked", "done"}
+    low = sorted({(s, r) for s, r in pairs if r < 4.5})
+    assert low == [], low
+
+
 def test_side_panel_sections_fold_and_the_choice_survives_a_reload(server) -> None:
     # nemik:W387: each section is a <details>; the long lists start closed, and a section the viewer
     # closes stays closed after a reload.
