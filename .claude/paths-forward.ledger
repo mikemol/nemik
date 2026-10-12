@@ -586,3 +586,4 @@
 2026-10-12T04:42:43Z  tick  W374 minted    -         "Gate the staged index in a fixed-path worktree, so an isolated commit keeps one bazel cache and server"  evidence=W342
 2026-10-12T04:42:46Z  tick  W342 atomized  collapse  "isolated commit needs a fixed-path gate tree first (W374), as mtools and linux-sources do"
 2026-10-12T04:56:15Z  interrupt W375 minted    -         "Answer luthen-observability:W722: ship nemik's Deployment Burstable (memory request under the 768Mi limit)"  evidence=luthen-observability:W722
+2026-10-12T04:57:11Z  interrupt W376 minted    -         "nemik-inbound lists a repo's live orphan letters as UNCLAIMED rows, so the tick's existing step catches them"  evidence=luthen-observability:W722

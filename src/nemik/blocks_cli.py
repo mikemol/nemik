@@ -58,6 +58,18 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         print(
             f"{b['blocker']:24} <- {b['blocked']:28} {claim:28} {b['title'][:60]}{hint}{letters}"
         )
+    # nemik:W376: a letter in REPO's inbox that no waypoint cites is waiting on REPO too (one sat two
+    # days unseen, luthen-observability:W722). The same UNCLAIMED token, with the --add that claims it;
+    # the fold's 14-day cutoff leaves old ones to `nemik-check --letters --fold`.
+    if args.repo:
+        from nemik.letters import _split, _today, fold_commands
+
+        live = _split(Path(args.root), args.repo, 14, _today())[0]
+        claims = fold_commands(Path(args.root), repo=args.repo, older_than=14)
+        for (_, path), cmd in zip(live, claims, strict=True):
+            print(
+                f"{args.repo:24} <- letter {path.name:51} UNCLAIMED  -- claim with: {cmd}"
+            )
 
 
 def operator_main(argv: list[str] | None = None, g: Graph | None = None) -> None:
