@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 186
+      "ticks_blocked": 187
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 38,
+      "ticks_blocked": 39,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 35,
+      "ticks_blocked": 36,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 35,
+      "ticks_blocked": 36,
       "completed": null,
       "weight": 1
     },
@@ -5382,7 +5382,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 13,
       "completed": null
     },
     {
@@ -5403,7 +5403,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 28,
       "completed": null
     },
     {
@@ -5462,7 +5462,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 28,
       "completed": null
     },
     {
@@ -5483,7 +5483,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 28,
       "completed": null
     },
     {
@@ -5523,7 +5523,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 28,
       "completed": null
     },
     {
@@ -5582,7 +5582,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 28,
       "completed": null
     },
     {
@@ -5622,7 +5622,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 28,
       "completed": null
     },
     {
@@ -5643,7 +5643,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 28,
       "completed": null
     },
     {
@@ -5683,7 +5683,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 28,
       "completed": null
     },
     {
@@ -6152,7 +6152,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T20:11:31Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -6472,7 +6472,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 15,
+      "ticks_blocked": 16,
       "weight": 1,
       "completed": null
     },
@@ -6539,7 +6539,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-12T04:42:43Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "weight": 3,
       "completed": null
     },
@@ -6560,7 +6560,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 2
     },
     {
       "symbol": "W344",
@@ -6623,7 +6623,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null
     },
     {
@@ -6898,7 +6898,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:31:11Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -6921,7 +6921,7 @@
       "caused_by": "W358",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W360",
@@ -6943,7 +6943,7 @@
       "caused_by": "W358",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W361",
@@ -6965,7 +6965,7 @@
       "caused_by": "W358",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W362",
@@ -6987,7 +6987,7 @@
       "caused_by": "W358",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W363",
@@ -7009,7 +7009,7 @@
       "caused_by": "W358",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W364",
@@ -7035,7 +7035,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -7364,7 +7364,10 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-10-12T05:41:25Z"
+  },
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }

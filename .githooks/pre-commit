@@ -3,29 +3,35 @@
 # bazel re-runs exactly the test targets whose inputs changed and answers the rest from cache, so a
 # queue-only commit costs a cache lookup. Enable once per clone: git config core.hooksPath .githooks
 #
-# It tests the working tree, not the staged index: unstaged edits count. Stash them to gate the index alone.
+# nemik:W374: it gates the STAGED INDEX, not the working tree, in a fixed-path worktree
+# (tools/gate_staged.sh), so unstaged edits no longer count and one bazel server stays warm.
+# nemik:W342: mikemol-commit takes its ISOLATED path (no .git/index.lock held through the gate) only
+# when this file NAMES MIKEMOL_REAL_ROOT. Under that run the cwd is a snapshot of the tracked files;
+# the variable names the real checkout, so every git call and the gate go through it. Unset, it is
+# this checkout and nothing changes.
 set -e
-cd "$(git rev-parse --show-toplevel)"
-# vendor/wheels/.gitignore is `*`, so a rebuilt wheel exists on disk (and satisfies bazel here) yet is
-# not in the commit; the image build then fails from a clean checkout (nemik:W276, 2026-10-10).
-# Every wheel pyproject.toml names must be in the index.
-missing=$(grep -o 'vendor/wheels/[^"]*\.whl' pyproject.toml | while read -r wheel; do
-	git ls-files --error-unmatch "$wheel" >/dev/null 2>&1 || echo "$wheel"
+real_root="${MIKEMOL_REAL_ROOT:-$(git rev-parse --show-toplevel)}"
+# vendor/wheels/.gitignore is `*`, so a rebuilt wheel exists on disk (and satisfies bazel) yet is not
+# in the commit; the image build then fails from a clean checkout (nemik:W276, 2026-10-10). Every
+# wheel the STAGED pyproject.toml names must be in the index.
+missing=$(git -C "$real_root" show :pyproject.toml | grep -o 'vendor/wheels/[^"]*\.whl' | while read -r wheel; do
+	git -C "$real_root" ls-files --error-unmatch "$wheel" >/dev/null 2>&1 || echo "$wheel"
 done)
 if [ -n "$missing" ]; then
 	echo "pre-commit: not tracked (vendor/wheels/.gitignore hides them; git add -f): $missing" >&2
 	exit 1
 fi
 # nemik:W319 (operator 2026-10-11: agents rarely marking a card `working` is a discipline problem, so
-# it is enforced, not advised): a commit that changes code or tests while the queue has ready cards
-# and NO working card is refused. Mark the card you are doing first:
-#   mikemol-paths-forward --state .claude/paths-forward.json --update W<n> --status working
+# it is enforced, not advised): a commit that changes code or tests while the STAGED queue has ready
+# cards and NO working card is refused. Mark the card you are doing first:
+#   nemik-work W<n>
 # A queue-only commit (nothing staged under src/ or tests/) is exempt, and so is a queue with nothing ready.
-if [ -n "$(git diff --cached --name-only -- src tests)" ] &&
-	grep -q '"status": "ready"' .claude/paths-forward.json &&
-	! grep -q '"status": "working"' .claude/paths-forward.json; then
+queue=$(git -C "$real_root" show :.claude/paths-forward.json)
+if [ -n "$(git -C "$real_root" diff --cached --name-only -- src tests)" ] &&
+	printf '%s' "$queue" | grep -q '"status": "ready"' &&
+	! printf '%s' "$queue" | grep -q '"status": "working"'; then
 	echo "pre-commit: code or tests changed, the queue has ready cards, and none is marked working." >&2
-	echo "  mark the card you are doing: mikemol-paths-forward --state .claude/paths-forward.json --update W<n> --status working" >&2
+	echo "  mark the card you are doing: nemik-work W<n>" >&2
 	exit 1
 fi
-exec bazel test //... --noshow_progress
+MIKEMOL_REAL_ROOT="$real_root" exec "$real_root/tools/gate_staged.sh"

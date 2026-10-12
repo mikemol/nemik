@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# nemik:W374: run the gate over the STAGED tree (the index), never the working tree, in a persistent
+# worktree at a FIXED path. bazel keys its output base (cache and server) on the workspace path, so a
+# fixed path stays warm across commits; gating in a fresh snapshot each time would start a new bazel
+# server with a cold cache per commit (the host-memory problem of 2026-10-12). Modelled on
+# linux-sources' tools/gate_staged.sh.
+#
+# Under mikemol-commit's isolated run the hook's cwd is a snapshot (tracked files only, no .git), so
+# MIKEMOL_REAL_ROOT names the real checkout and every git call goes through it. Unset, the real root
+# is this checkout.
+#
+#   tools/gate_staged.sh        gate the index;  GATE_WT overrides the worktree path (tests)
+set -o pipefail
+
+real_root="${MIKEMOL_REAL_ROOT:-$(git rev-parse --show-toplevel)}" || exit 1
+wt="${GATE_WT:-$(dirname "$real_root")/.nemik-gate-wt}"
+
+# Under a hook git exports its repo env, GIT_INDEX_FILE relative to the checkout. That index is the
+# one to gate (under `git commit <paths>` it is a temporary index), so capture it, then clear git's
+# env so the worktree's calls see their own repository.
+idx="${GIT_INDEX_FILE:-}"
+if [ -n "$idx" ]; then
+    case "$idx" in /*) ;; *) idx="$real_root/$idx" ;; esac
+else
+    idx="$(git -C "$real_root" rev-parse --git-path index)" || exit 1
+    case "$idx" in /*) ;; *) idx="$real_root/$idx" ;; esac
+fi
+unset GIT_INDEX_FILE GIT_DIR GIT_WORK_TREE GIT_PREFIX GIT_OBJECT_DIRECTORY
+
+# One gate at a time in the shared worktree.
+exec 9>"$wt.lock" || exit 1
+flock 9 || exit 1
+
+if [ ! -e "$wt/.git" ]; then
+    git -C "$real_root" worktree add --detach "$wt" HEAD >/dev/null || exit 1
+fi
+head_sha="$(git -C "$real_root" rev-parse HEAD)" || exit 1
+git -C "$wt" checkout --quiet --detach --force "$head_sha" || exit 1
+git -C "$wt" clean -fdxq -e 'bazel-*' -e .venv || exit 1
+tree="$(GIT_INDEX_FILE="$idx" git -C "$real_root" write-tree)" || exit 1
+git -C "$wt" read-tree --reset -u "$tree" || exit 1
+
+cd "$wt" || exit 1
+# The tree's .venv is a bazel output, never tracked, and some checks run it by path (paper.toml's
+# `claim:` check is `.venv/bin/python3 checks/claims.py`): build it here as the checkout has it.
+bazel build //:.venv --show_result=0 --noshow_progress || exit 1
+ln -sfn bazel-bin/.venv .venv || exit 1
+if bazel test //... --noshow_progress; then
+    echo "gate_staged: green on the staged tree ($wt)" >&2
+    exit 0
+fi
+echo "gate_staged: the gate FAILED on the staged tree ($wt): commit refused" >&2
+exit 1
