@@ -40,11 +40,15 @@ spec:
             # the real 16-queue root: 240 MB after the first build, ~315-350 MB once the graph has
             # been rebuilt (a rebuild holds the old graph while the new one is built, and luthen's
             # export changes every minute), ~340 MB after a /cmd. A pod adds its own overhead and
-            # concurrent requests on top, so 768Mi (Guaranteed, tenant quota 3Gi at luthen c4b58bd).
+            # concurrent requests on top, so a 768Mi limit (tenant quota 3Gi at luthen c4b58bd).
             # glibc arenas: one per request thread, never returned; two bound the fragmentation.
             - {name: MALLOC_ARENA_MAX, value: "2"}
+          # nemik:W375 (luthen-observability:W722): Burstable, not Guaranteed. LimitedSwap gives zram swap
+          # only to a container whose memory request is below its limit, about request / MemTotal x
+          # SwapTotal (~half the request on this node): a 512Mi request covers the steady working set
+          # (430-450 MB) and adds ~256Mi of swap under a rebuild spike, where Guaranteed had none.
           resources:
-            requests: {memory: 768Mi, cpu: "1"}
+            requests: {memory: 512Mi, cpu: "1"}
             limits: {memory: 768Mi, cpu: "1"}
           securityContext:
             allowPrivilegeEscalation: false

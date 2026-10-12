@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 374,
+  "counter": 375,
   "waypoints": [
     {
       "symbol": "W1",
@@ -7254,6 +7254,33 @@
       "last_worked": "2026-10-12T04:42:45Z",
       "ticks_blocked": 0,
       "completed": null
+    },
+    {
+      "symbol": "W375",
+      "title": "Answer luthen-observability:W722: ship nemik's Deployment Burstable (memory request under the 768Mi limit)",
+      "status": "done",
+      "enables": [
+        "luthen-observability:W722"
+      ],
+      "touches": [
+        "deploy"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: deploy/deployment.yaml: memory request 512Mi under the 768Mi limit (Burstable; ~256Mi zram swap under LimitedSwap per the letter's formula; 512Mi covers the 430-450 MB working set, where the letter's 256Mi would not). Witness on luthen's side: kube_pod_status_qos_class{namespace=nemik} Burstable.",
+      "issued_at": "2026-10-12T04:56:15Z",
+      "minted_during": "interrupt",
+      "caused_by": "luthen-observability:W722",
+      "last_worked": "2026-10-12T04:56:30Z",
+      "ticks_blocked": 0,
+      "completed": "20261012T045630Z",
+      "attachments": [
+        {
+          "path": "inbox/2026-10-10-luthen-observability-w627a-burstable-memory.md",
+          "sha256": "2101580555424387668e9763edf2c4812fd1e60d859cbce73f59dcccf0d30c9f"
+        }
+      ]
     }
   ],
   "residue": [
