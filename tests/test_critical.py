@@ -99,6 +99,29 @@ def test_what_if_closing_the_head_of_the_chain_shortens_it_and_leaves_the_graph_
     assert "critical path: 3 -> 2" in report
 
 
+def test_a_fire_is_an_interrupt_card_holding_up_planned_work() -> None:
+    # nemik:W347: interrupt a:W1 -> planned a:W2 -> planned a:W3; interrupt a:W4 holds up nothing.
+    from rdflib import Literal
+
+    from nemik.critical import fires
+
+    g = Graph()
+    cards = {s: _card(g, s) for s in ("W1", "W2", "W3", "W4")}
+    for s, during in (
+        ("W1", "interrupt"),
+        ("W2", "tick"),
+        ("W3", "tick"),
+        ("W4", "interrupt"),
+    ):
+        g.add((cards[s], NEMIK.mintedDuring, Literal(during)))
+    g.add((cards["W1"], NEMIK.enables, cards["W2"]))
+    g.add((cards["W2"], NEMIK.enables, cards["W3"]))
+    (fire,) = fires(g)
+    assert fire.cite == "a:W1"
+    assert fire.planned == ["a:W2", "a:W3"]
+    assert fire.delay == 1  # the path is 3 with it open, 2 if it were done
+
+
 def test_a_cycle_is_reported_and_a_chain_is_not() -> None:
     # nemik:W324: x -> y -> z -> x never clears; a -> b is a chain; w waits on itself.
     from nemik.critical import cycles

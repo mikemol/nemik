@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 182
+      "ticks_blocked": 183
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 34,
+      "ticks_blocked": 35,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 31,
+      "ticks_blocked": 32,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 31,
+      "ticks_blocked": 32,
       "completed": null,
       "weight": 1
     },
@@ -5382,7 +5382,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -5403,7 +5403,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 23,
+      "ticks_blocked": 24,
       "completed": null
     },
     {
@@ -5462,7 +5462,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 23,
+      "ticks_blocked": 24,
       "completed": null
     },
     {
@@ -5483,7 +5483,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 23,
+      "ticks_blocked": 24,
       "completed": null
     },
     {
@@ -5523,7 +5523,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 23,
+      "ticks_blocked": 24,
       "completed": null
     },
     {
@@ -5582,7 +5582,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 23,
+      "ticks_blocked": 24,
       "completed": null
     },
     {
@@ -5622,7 +5622,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 23,
+      "ticks_blocked": 24,
       "completed": null
     },
     {
@@ -5643,7 +5643,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 23,
+      "ticks_blocked": 24,
       "completed": null
     },
     {
@@ -5683,7 +5683,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 23,
+      "ticks_blocked": 24,
       "completed": null
     },
     {
@@ -6152,7 +6152,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T20:11:31Z",
-      "ticks_blocked": 13,
+      "ticks_blocked": 14,
       "completed": null
     },
     {
@@ -6229,7 +6229,7 @@
       "caused_by": "W323",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 8
+      "weight": 7
     },
     {
       "symbol": "W328",
@@ -6449,7 +6449,7 @@
       "caused_by": "W337",
       "last_worked": "2026-10-11T21:18:11Z",
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 5
     },
     {
       "symbol": "W339",
@@ -6472,7 +6472,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "weight": 1,
       "completed": null
     },
@@ -6519,7 +6519,7 @@
       "caused_by": "paperkit:W320",
       "last_worked": "2026-10-11T21:18:33Z",
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 5
     },
     {
       "symbol": "W342",
@@ -6538,7 +6538,7 @@
       "caused_by": "github-8f",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 3
     },
     {
       "symbol": "W343",
@@ -6557,7 +6557,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 7
+      "weight": 6
     },
     {
       "symbol": "W344",
@@ -6608,7 +6608,6 @@
         "thoughts-forward"
       ],
       "blocked_on": [
-        "W347",
         "W350",
         "W352",
         "W353",
@@ -6621,14 +6620,14 @@
       "issued_at": "2026-10-12T00:39:56Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-12T03:14:23Z",
+      "last_worked": "2026-10-12T03:44:04Z",
       "ticks_blocked": 0,
       "completed": null
     },
     {
       "symbol": "W347",
       "title": "Fire ripple: the planned work each interrupt card delayed",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W346"
       ],
@@ -6638,15 +6637,15 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "per interrupt card (minted_during interrupt), its downstream cone of forecast cards and the critical-path delta with and without it; a weekly planned-work-delayed-by-fires total in nemik-history --toil; reads mintedDuring and nemik-critical --card",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: nemik-critical --fires [--repo R]: critical.fires lists open interrupt cards with tick-minted work downstream and the path delay (length now minus length if done); test in test_critical; live luthen-observability: W447 delays the path 3 and holds up 4 planned (W163, W180, W275, W368), six more hold up one each with no delay. Weekly roll-up of delayed planned work not built (needs a graph per revision).",
       "issued_at": "2026-10-12T00:40:17Z",
       "minted_during": "interrupt",
       "caused_by": "W346",
-      "last_worked": "2026-10-12T03:14:25Z",
+      "last_worked": "2026-10-12T03:44:02Z",
       "ticks_blocked": 0,
       "weight": 2,
-      "completed": null
+      "completed": "20261012T034402Z"
     },
     {
       "symbol": "W348",
@@ -6697,7 +6696,7 @@
     {
       "symbol": "W350",
       "title": "Milestone roll-up in the view: an umbrella collapses to one node, expands on click",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W346"
       ],
@@ -6712,9 +6711,10 @@
       "issued_at": "2026-10-12T00:40:22Z",
       "minted_during": "interrupt",
       "caused_by": "W346",
-      "last_worked": null,
+      "last_worked": "2026-10-12T03:44:07Z",
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 2,
+      "completed": null
     },
     {
       "symbol": "W351",
@@ -6896,7 +6896,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:31:11Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "completed": null
     },
     {
@@ -6919,7 +6919,7 @@
       "caused_by": "W358",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 2
     },
     {
       "symbol": "W360",
@@ -6941,7 +6941,7 @@
       "caused_by": "W358",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 2
     },
     {
       "symbol": "W361",
@@ -6963,7 +6963,7 @@
       "caused_by": "W358",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 2
     },
     {
       "symbol": "W362",
@@ -6985,7 +6985,7 @@
       "caused_by": "W358",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 2
     },
     {
       "symbol": "W363",
@@ -7007,7 +7007,7 @@
       "caused_by": "W358",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 2
     },
     {
       "symbol": "W364",
@@ -7033,7 +7033,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "completed": null
     },
     {
@@ -7055,7 +7055,7 @@
       "caused_by": "W364",
       "last_worked": "2026-10-12T01:34:53Z",
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 4
     },
     {
       "symbol": "W366",
@@ -7076,7 +7076,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 4
     },
     {
       "symbol": "W367",
@@ -7097,7 +7097,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 4
     },
     {
       "symbol": "W368",
@@ -7119,7 +7119,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 4
     },
     {
       "symbol": "W369",
@@ -7230,7 +7230,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 9
+      "weight": 8
     }
   ],
   "residue": [
@@ -7293,7 +7293,10 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-10-12T03:41:27Z"
+  },
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }

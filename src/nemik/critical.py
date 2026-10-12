@@ -206,6 +206,44 @@ def assume_done(g: Graph, cites: list[str]) -> Graph:
     return out
 
 
+class Fire(NamedTuple):
+    cite: str
+    planned: list[str]  # open forecast (tick-minted) cards downstream of it
+    delay: int  # how many cards longer the scope's critical path is because it is open
+
+
+def fires(g: Graph, scope: set[str] | None = None) -> list[Fire]:
+    """nemik:W347: fire ripple. Each open card minted during an interrupt, with the planned work it
+    holds up: the open tick-minted cards downstream of it, and how much longer the scope's critical
+    path is while it stays open (its length now, minus the length if it were done). Only fires that
+    hold up planned work are listed, heaviest delay first."""
+    nodes = _open(g)
+    if scope is not None:
+        nodes = {n for n in nodes if ref(n) in scope}
+    succ = {n: {s for s in successors(g, n) if s in nodes} for n in nodes}
+
+    def minted(n: Node) -> str:
+        return str(g.value(n, NEMIK.mintedDuring) or "")
+
+    base = critical(g, scope).length
+    out: list[Fire] = []
+    for n in sorted(nodes, key=str):
+        if minted(n) != "interrupt":
+            continue
+        seen, todo = {n}, [n]
+        while todo:
+            for nxt in succ[todo.pop()]:
+                if nxt not in seen:
+                    seen.add(nxt)
+                    todo.append(nxt)
+        planned = sorted(ref(x) for x in seen - {n} if minted(x) == "tick")
+        if not planned:
+            continue
+        delay = base - critical(assume_done(g, [ref(n)]), scope).length
+        out.append(Fire(ref(n), planned, delay))
+    return sorted(out, key=lambda f: (-f.delay, -len(f.planned), f.cite))
+
+
 def what_if(before: Critical, after: Critical, cites: list[str]) -> str:
     """The delta a what-if makes: path length, the cards that leave or join a longest chain, and the
     open cards whose slack changed (the closed ones themselves are not counted)."""
@@ -246,6 +284,12 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         default=[],
         help="what-if: the path and slack as if these cards were closed, against today's (W351)",
     )
+    ap.add_argument(
+        "--fires",
+        action="store_true",
+        help="each open interrupt card that holds up planned (tick-minted) work, and how much "
+        "longer the critical path is while it stays open (W347)",
+    )
     args = ap.parse_args(argv)
     if g is None:
         g = Graph()
@@ -258,6 +302,19 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     if args.card:
         around = cone(g, args.card)
         scope = around if scope is None else scope & around
+    if args.fires:
+        found_fires = fires(g, scope)
+        if args.json:
+            print(json.dumps([f._asdict() for f in found_fires], indent=1))
+            return
+        print(f"fires holding up planned work: {len(found_fires)}")
+        for f in found_fires:
+            print(
+                f"  {f.cite}  delays the path {f.delay}, holds up {len(f.planned)} planned: "
+                + ", ".join(f.planned[:8])
+                + (" ..." if len(f.planned) > 8 else "")
+            )
+        return
     if args.assume_done:
         # nemik:W351: what-if. The same scope, on a copy where the named cards are closed.
         before = critical(g, scope)
