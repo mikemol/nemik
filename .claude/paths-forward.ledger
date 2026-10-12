@@ -672,3 +672,8 @@
 2026-10-12T20:42:31Z  tick  W416 minted    -         "The page polls manifest.json and refetches only the pieces whose hash changed (browser test)"
 2026-10-12T20:47:31Z  tick  W414 advanced  unblock   "ce88156 pushed: hashes.json in the static build; W409 atomized into W414 (done), W415 per-repo split (working), W416 refetch by hash"
 2026-10-12T21:31:43Z  tick  W415 advanced  unblock   "10faee2 pushed: per-repo graph pieces; NUDGE luthen-observability:W878 (W392,W394,W395) ledger-only; ESCALATE mtools:W1048 not raised: it is ready-to-commit, worked 20:41, held on its CPU rail (W1052), no operator ask"
+2026-10-12T21:54:44Z  tick  W416 advanced  unblock   "cd33bcd pushed: static page refetches pieces by hash (browser-tested); W409 and W401 closed; W400 (incremental SHACL) working next"
+2026-10-12T21:56:59Z  tick  W417 minted    -         "Vendor mikemol-rulerseq (mtools 2eeb11e) beside the other mtools wheels via tools/revendor-mtools.sh"
+2026-10-12T21:57:01Z  tick  W418 minted    -         "nemik-serve computes ring and blocker-line ruler patterns with mikemol.rulerseq and ships them in graph.json (field manifest updated)"
+2026-10-12T21:57:02Z  tick  W419 minted    -         "The page renders shipped ruler patterns; emitF and rulerMotif leave index.html, the motif-family browser test stays as the contract"
+2026-10-12T21:57:15Z  tick  W389 advanced  unblock   "mtools:W1048 landed (2eeb11e, ls-remote confirmed); W389 atomized into W417 vendor -> W418 serve patterns -> W419 page renderer"

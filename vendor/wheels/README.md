@@ -1,10 +1,10 @@
 # Vendored wheels
 
-`mikemol_pathsforward-0.1.0+f04f0a2-py3-none-any.whl` (sha256 1d634502d66fe9d260f0e2c281b55fca2479e708af39ec1be00d5d8e432e4b0e; uv.lock pins it) is built from mtools' pathsforward at the
-exact commit nemik pins (`f04f0a2`; local version segment names it, since mtools does not bump its
-own version per commit), via:
+`mikemol_pathsforward-0.1.0+<sha>-py3-none-any.whl` (uv.lock pins it; its hash is in SHA256SUMS) is
+built from mtools' pathsforward at the exact commit nemik pins (the local version segment names it,
+since mtools does not bump its own version per commit), via:
 
-    git -C ~/github/mtools archive f04f0a2 -- pathsforward \
+    git -C ~/github/mtools archive <sha> -- pathsforward \
       | tar -x -C <tmp> && cd <tmp>/pathsforward && uv build --wheel -o <out>
 
 This is nemik:H1 (nemik:W6): the image build no longer fetches from github.com at build time. To
@@ -17,21 +17,24 @@ History: 9236d5e (nemik:W6, superseded) -> 8a279a1 (nemik:W10: --enables clear, 
 the queue-level symbol, since argparse eats a bare -- itself; mtools:W43) -> 8c24617
 (nemik:W20: model.leverage()/describe_rank() added; ordered() sorts by (status, -leverage,
 file order); render.queue() falls back to describe_rank when rank_reason is unset;
-mtools:W51) -> e4f478b (nemik:W40: ATOMIZE W<n> (top for k ticks) in --check/--check-evidence/--payload when the top workable waypoint was advanced by a prior tick; mtools:W111/W113) -> c713252 (nemik:W43: stored integer `weight`, --update --weight N; ordered() sorts (status, -weight, -leverage, file order); missing weight = 0; mtools:W115) -> f945d43 (nemik:W44: --update stamps last_worked only for work fields (status/blocked-on/blocked-kind/next/evidence-append); --weight/--title/--enables/--ticks-blocked are metadata; mtools:W117) -> d491475 (nemik:W48: --weights-from FILE.json, all-or-nothing bulk weights under one lock; mtools:W116) -> 836f20e (nemik:W50: --update --touches replaces touches[] as metadata; mtools:W122) -> 49ac0ff (nemik:W52: --overlaps prints OVERLAP <tag>: W<a>,W<b> over ready/working; mtools:W118) -> 6f81801 (nemik:W55: --bump-blocked prunes done local blockers, empty list returns to ready; mtools:W125) -> 4de0da4 (nemik:W64: waypoint `witness` field, --add/--update --witness QUERY, stored verbatim, never run; mtools:W131) -> 8d9ea4e (nemik:W59: --check flags a witnessed waypoint that is ready or working; mtools:W132) -> 345c06c (nemik:W67: witnessed waypoints are never workable: ordered(), payload step and ATOMIZE skip them; mtools:W133) -> 23f1223 (nemik:W130: waypoint `vector` + `vector_source` fields, WV:1 grammar in vector.py, --check validates stored vectors and prints UNSCORED <n>; mtools:W248/W256/W257) -> a2b7b62 (nemik:W136: --update SYMBOL --caused-by REF, one-token-checked as --add, empty clears, metadata; mtools:W305) -> 765c1f4 (nemik:W129: dtstart/due (mtools:W300) and alarms (mtools:W279), timevalue.parse/parse_trigger; mtools:W299/W300/W279) -> f22d7fe (nemik:W146: timevalue.fires_at/duration resolve alarms; --alarm -PT1H accepted; mtools:W307/W308) -> 03749d5 (operator 2026-10-04: one sha for all three vendored mtools wheels; adds --inbound, --prune-landed, embargoes, ledger outcome sets, six of nemik's shapes in --check) -> 472f940 (nemik:W230: one sha again; ships the Rego realizability policy as package data, `--certify`, and the realizability fields in the queue; mtools:W850) -> d14270f (nemik:W257: `--admit` on `--add`/`--update`/`--drop` and the marks ledger `<queue>.marks.jsonl`, `--certify --facts`, the waypoint fields reference_arm, command, population and deferred; mtools:W851/W852/W854/W849) -> c4d4b56 (nemik:W276: waypoint `attachments` [{path, sha256}] and `--update --attach PATH`, mtools:W930/W931; re-vendored with tools/revendor-mtools.sh) -> 842ab10 (nemik:W281: --check reports an attachment whose file is missing, not a plain file, or whose sha256 changed; mtools:W932) -> 7d4a458 (nemik:W304: nemik-pins reported 41 commits behind; includes pycodemod judged-fix and later mtools changes) -> f04f0a2 (nemik:W377: the fleet par from luthen's repin_par.txt; mikemol-commit prints its path and lock, mtools:W1015, with the fence fallback, W1016/W1022).
+mtools:W51) -> e4f478b (nemik:W40: ATOMIZE W<n> (top for k ticks) in --check/--check-evidence/--payload when the top workable waypoint was advanced by a prior tick; mtools:W111/W113) -> c713252 (nemik:W43: stored integer `weight`, --update --weight N; ordered() sorts (status, -weight, -leverage, file order); missing weight = 0; mtools:W115) -> f945d43 (nemik:W44: --update stamps last_worked only for work fields (status/blocked-on/blocked-kind/next/evidence-append); --weight/--title/--enables/--ticks-blocked are metadata; mtools:W117) -> d491475 (nemik:W48: --weights-from FILE.json, all-or-nothing bulk weights under one lock; mtools:W116) -> 836f20e (nemik:W50: --update --touches replaces touches[] as metadata; mtools:W122) -> 49ac0ff (nemik:W52: --overlaps prints OVERLAP <tag>: W<a>,W<b> over ready/working; mtools:W118) -> 6f81801 (nemik:W55: --bump-blocked prunes done local blockers, empty list returns to ready; mtools:W125) -> 4de0da4 (nemik:W64: waypoint `witness` field, --add/--update --witness QUERY, stored verbatim, never run; mtools:W131) -> 8d9ea4e (nemik:W59: --check flags a witnessed waypoint that is ready or working; mtools:W132) -> 345c06c (nemik:W67: witnessed waypoints are never workable: ordered(), payload step and ATOMIZE skip them; mtools:W133) -> 23f1223 (nemik:W130: waypoint `vector` + `vector_source` fields, WV:1 grammar in vector.py, --check validates stored vectors and prints UNSCORED <n>; mtools:W248/W256/W257) -> a2b7b62 (nemik:W136: --update SYMBOL --caused-by REF, one-token-checked as --add, empty clears, metadata; mtools:W305) -> 765c1f4 (nemik:W129: dtstart/due (mtools:W300) and alarms (mtools:W279), timevalue.parse/parse_trigger; mtools:W299/W300/W279) -> f22d7fe (nemik:W146: timevalue.fires_at/duration resolve alarms; --alarm -PT1H accepted; mtools:W307/W308) -> 03749d5 (operator 2026-10-04: one sha for all three vendored mtools wheels; adds --inbound, --prune-landed, embargoes, ledger outcome sets, six of nemik's shapes in --check) -> 472f940 (nemik:W230: one sha again; ships the Rego realizability policy as package data, `--certify`, and the realizability fields in the queue; mtools:W850) -> d14270f (nemik:W257: `--admit` on `--add`/`--update`/`--drop` and the marks ledger `<queue>.marks.jsonl`, `--certify --facts`, the waypoint fields reference_arm, command, population and deferred; mtools:W851/W852/W854/W849) -> c4d4b56 (nemik:W276: waypoint `attachments` [{path, sha256}] and `--update --attach PATH`, mtools:W930/W931; re-vendored with tools/revendor-mtools.sh) -> 842ab10 (nemik:W281: --check reports an attachment whose file is missing, not a plain file, or whose sha256 changed; mtools:W932) -> 7d4a458 (nemik:W304: nemik-pins reported 41 commits behind; includes pycodemod judged-fix and later mtools changes) -> f04f0a2 (nemik:W377: the fleet par from luthen's repin_par.txt; mikemol-commit prints its path and lock, mtools:W1015, with the fence fallback, W1016/W1022) -> 2eeb11e (nemik:W417: adds mikemol-rulerseq, mtools:W1048, the ruler-sequence generator nemik-serve computes patterns with).
 
-`mikemol_icsstruct-0.1.0+f04f0a2-py3-none-any.whl` (sha256 d665ecd83619ff5d3457a44a232a32acf87d2fc11f1123bac7cd96ae120bd784; uv.lock pins it) (nemik:W157) is mtools' icsstruct at `f04f0a2`,
-built the same way (`git archive f04f0a2 -- icsstruct`, `uv build --wheel`). It supplies `mikemol-ics`,
+`mikemol_icsstruct-0.1.0+<sha>-py3-none-any.whl` (nemik:W157) is mtools' icsstruct at the same sha,
+built the same way (`git archive <sha> -- icsstruct`, `uv build --wheel`). It supplies `mikemol-ics`,
 which reads the operator calendars the Akonadi helper exports (W147) for W113.
 
-`mikemol_hooks-0.1.0+f04f0a2-py3-none-any.whl` (sha256 dd2afba862fed54e948acb6ee942d309ce6767cb72bac23c13739d992a2d925b; uv.lock pins it) is mtools' hooks distribution at `f04f0a2`
-(`git archive f04f0a2 -- hooks`, `uv build --wheel`). nemik wires two of its console scripts,
+`mikemol_rulerseq-0.1.0+<sha>-py3-none-any.whl` (nemik:W417) is mtools' rulerseq at the same sha:
+`mikemol.rulerseq`, paperkit's ruler-sequence generator hosted by mtools (mtools:W1048). Stdlib only.
+
+`mikemol_hooks-0.1.0+<sha>-py3-none-any.whl` is mtools' hooks distribution at the same sha
+(`git archive <sha> -- hooks`, `uv build --wheel`). nemik wires two of its console scripts,
 `mikemol-hook-inbound-asks` and `mikemol-hook-nemik-check`, in `.claude/settings.json`. It brings
 `ruff` and `mypy` into the lock (the distribution's own dependencies). All three mtools wheels move
 together, to one sha, per mtools INSTALL.md.
 
-## Hashes (sha256; uv.lock pins the same)
+## Hashes
 
-- `mikemol_hooks-0.1.0+f04f0a2-py3-none-any.whl`: sha256 dd2afba862fed54e948acb6ee942d309ce6767cb72bac23c13739d992a2d925b
-- `mikemol_icsstruct-0.1.0+f04f0a2-py3-none-any.whl`: sha256 d665ecd83619ff5d3457a44a232a32acf87d2fc11f1123bac7cd96ae120bd784
-- `mikemol_pathsforward-0.1.0+f04f0a2-py3-none-any.whl`: sha256 1d634502d66fe9d260f0e2c281b55fca2479e708af39ec1be00d5d8e432e4b0e
-- `mikemol_fence-0.1.0+f04f0a2-py3-none-any.whl`: sha256 fcbe2f60bf5f84fc855f7d2c557b34139d039eaa0268fd5f7176b8a071f9e5eb (nemik:W378: mtools' fence at `f04f0a2`, for `mikemol-membudget`, the commit lock mikemol-commit takes)
+`SHA256SUMS` beside the wheels, written by `tools/revendor-mtools.sh` on every bump (nemik:W417:
+the hand-kept list here went stale with each bump); `sha256sum -c SHA256SUMS` in this directory
+verifies them, and uv.lock pins the same digests. mikemol_fence is mtools' fence (nemik:W378), for
+`mikemol-membudget`, the commit lock mikemol-commit takes.

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 416,
+  "counter": 419,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 217
+      "ticks_blocked": 220
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 37,
+      "ticks_blocked": 40,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 39,
+      "ticks_blocked": 42,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T13:54:28Z",
-      "ticks_blocked": 69,
+      "ticks_blocked": 72,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 66,
+      "ticks_blocked": 69,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 43,
+      "ticks_blocked": 46,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 58,
+      "ticks_blocked": 61,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 58,
+      "ticks_blocked": 61,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 58,
+      "ticks_blocked": 61,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 58,
+      "ticks_blocked": 61,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 58,
+      "ticks_blocked": 61,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 58,
+      "ticks_blocked": 61,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 58,
+      "ticks_blocked": 61,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 58,
+      "ticks_blocked": 61,
       "completed": null
     },
     {
@@ -6446,7 +6446,7 @@
       "caused_by": "W337",
       "last_worked": "2026-10-11T21:18:11Z",
       "ticks_blocked": 0,
-      "weight": 7
+      "weight": 6
     },
     {
       "symbol": "W339",
@@ -6469,7 +6469,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 46,
+      "ticks_blocked": 49,
       "weight": 1,
       "completed": null
     },
@@ -6620,7 +6620,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 33,
+      "ticks_blocked": 36,
       "completed": null
     },
     {
@@ -6758,7 +6758,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 4
     },
     {
       "symbol": "W353",
@@ -6780,7 +6780,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 4
     },
     {
       "symbol": "W354",
@@ -6802,7 +6802,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 4
     },
     {
       "symbol": "W355",
@@ -6824,7 +6824,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 4
     },
     {
       "symbol": "W356",
@@ -7031,7 +7031,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 39,
+      "ticks_blocked": 42,
       "completed": null
     },
     {
@@ -7095,7 +7095,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 5
     },
     {
       "symbol": "W368",
@@ -7117,7 +7117,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 5
     },
     {
       "symbol": "W369",
@@ -7518,7 +7518,7 @@
       "caused_by": "W380",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 7
+      "weight": 6
     },
     {
       "symbol": "W387",
@@ -7573,16 +7573,17 @@
         "vendor"
       ],
       "blocked_on": [
-        "mtools:W1048"
+        "W418",
+        "W419"
       ],
       "blocked_kind": "agent",
-      "next_bounded_step": "operator ruling via paperkit 2026-10-12: rulerseq moves to mtools as its own dist (suggested mikemol-rulerseq, module mikemol.rulerseq; name and sha not yet confirmed by mtools), consumed by both paperkit's render checks and nemik; public names cycle_order, emit_f, morse_motif unchanged. When mtools confirms the dist and sha: vendor it beside the other mtools wheels (tools/revendor-mtools.sh dist list), have nemik-serve compute ring and line patterns with mikemol.rulerseq and ship them in graph.json (field-manifest), shrink the page's emitF/rulerMotif to a renderer, keep the motif-family test as the contract. Cite mtools' card here once it exists.",
-      "evidence": "2026-10-12: 2026-10-12 paperkit: superseded paperkit:W338's packaging plan; the operator directed the move to mtools instead. | 2026-10-12: 2026-10-12 mtools claimed it as mtools:W1048: host paperkit's rulerseq.py (source paperkit d6096c9) as dist mikemol-rulerseq, module mikemol.rulerseq; mtools will send the dist name and sha when it lands.",
+      "next_bounded_step": "Umbrella: W417 vendor, W418 serve computes patterns, W419 page renders them",
+      "evidence": "2026-10-12: 2026-10-12 paperkit: superseded paperkit:W338's packaging plan; the operator directed the move to mtools instead. | 2026-10-12: 2026-10-12 mtools claimed it as mtools:W1048: host paperkit's rulerseq.py (source paperkit d6096c9) as dist mikemol-rulerseq, module mikemol.rulerseq; mtools will send the dist name and sha when it lands. | 2026-10-12: mtools:W1048 landed: dist mikemol-rulerseq, module mikemol.rulerseq, mtools 2eeb11e (ls-remote confirms origin/main), subdirectory=rulerseq; public names cycle_order, emit_f, morse_motif, dash_pattern, nicematrix_defs, css_defs, css_stops, rule, rule_name, column_encoding, main; stdlib only; python -m mikemol.rulerseq is the selftest.",
       "issued_at": "2026-10-12T13:17:53Z",
       "minted_during": "interrupt",
       "caused_by": "paperkit:W338",
-      "last_worked": "2026-10-12T13:24:19Z",
-      "ticks_blocked": 17,
+      "last_worked": "2026-10-12T21:57:13Z",
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -7605,7 +7606,7 @@
       "caused_by": "W383",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 7
+      "weight": 6
     },
     {
       "symbol": "W391",
@@ -7630,7 +7631,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -7654,7 +7655,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
@@ -7669,8 +7670,7 @@
         "performance"
       ],
       "blocked_on": [
-        "W400",
-        "W401"
+        "W400"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "umbrella: W399 measures the rebuild's phases (decides the order), W402 per-repo parse cache, W400 incremental validation, W401 incremental derived numbers and per-piece snapshots. Done when a single-repo change rebuilds only its dependents and the result equals a full rebuild.",
@@ -7679,7 +7679,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:01:54Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 3,
       "weight": 3,
       "completed": null
     },
@@ -7705,7 +7705,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T18:43:02Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
@@ -7729,7 +7729,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
@@ -7929,7 +7929,7 @@
       "last_worked": "2026-10-12T17:32:20Z",
       "ticks_blocked": 0,
       "completed": null,
-      "weight": 2
+      "weight": 1
     },
     {
       "symbol": "W405",
@@ -7972,7 +7972,7 @@
       "caused_by": "W373",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 2
     },
     {
       "symbol": "W407",
@@ -8013,7 +8013,7 @@
       "caused_by": "W373",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 8
+      "weight": 7
     },
     {
       "symbol": "W409",
@@ -8112,7 +8112,7 @@
       "caused_by": "W372",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 9
+      "weight": 8
     },
     {
       "symbol": "W414",
@@ -8170,6 +8170,66 @@
       "last_worked": "2026-10-12T21:47:29Z",
       "ticks_blocked": 0,
       "completed": "20261012T214729Z"
+    },
+    {
+      "symbol": "W417",
+      "title": "Vendor mikemol-rulerseq (mtools 2eeb11e) beside the other mtools wheels via tools/revendor-mtools.sh",
+      "status": "done",
+      "enables": [
+        "W389"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: mtools wheels re-vendored f04f0a2 -> 2eeb11e with mikemol-rulerseq added (revendor-mtools.sh dist list, pyproject, MODULE.bazel, BUILD hub); python -m mikemol.rulerseq selftest ok from nemik's bazel venv. Mechanized: the script now writes vendor/wheels/SHA256SUMS; the README's hand-kept hash list (stale every bump) is replaced by a pointer to it.",
+      "issued_at": "2026-10-12T21:56:59Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-10-12T22:15:09Z",
+      "ticks_blocked": 0,
+      "weight": 3,
+      "completed": "20261012T221509Z"
+    },
+    {
+      "symbol": "W418",
+      "title": "nemik-serve computes ring and blocker-line ruler patterns with mikemol.rulerseq and ships them in graph.json (field manifest updated)",
+      "status": "ready",
+      "enables": [
+        "W389"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-12T21:57:01Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-10-12T21:57:11Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W419",
+      "title": "The page renders shipped ruler patterns; emitF and rulerMotif leave index.html, the motif-family browser test stays as the contract",
+      "status": "blocked",
+      "enables": [
+        "W389"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "W418"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-12T21:57:02Z",
+      "minted_during": "tick",
+      "caused_by": null,
+      "last_worked": "2026-10-12T21:57:12Z",
+      "ticks_blocked": 2,
+      "completed": null
     }
   ],
   "residue": [
@@ -8234,7 +8294,7 @@
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-12T21:41:30Z"
+    "taken_at": "2026-10-12T22:11:33Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []

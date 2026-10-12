@@ -1,5 +1,5 @@
 #!/bin/sh
-# nemik: re-vendor the four mtools wheels (pathsforward, icsstruct, hooks, fence) at ONE commit, the
+# nemik: re-vendor the mtools wheels (pathsforward, icsstruct, hooks, fence, rulerseq) at ONE commit, the
 # procedure of vendor/wheels/README.md ("To bump the pin") as a script, so a bump is one command.
 #
 #   tools/revendor-mtools.sh <new-sha> <old-sha> [path-to-mtools-clone]
@@ -17,7 +17,7 @@ short=$(git -C "$mtools" rev-parse --short=7 "$new")
 tmp=$(mktemp -d)
 trap 'rm -rf "$tmp"' EXIT
 
-for dist in pathsforward icsstruct hooks fence; do
+for dist in pathsforward icsstruct hooks fence rulerseq; do
 	git -C "$mtools" archive "$new" -- "$dist" | tar -x -C "$tmp"
 	sed -i "s/^version = .*/version = \"0.1.0+$short\"/" "$tmp/$dist/pyproject.toml"
 	(cd "$tmp/$dist" && uv build -q --wheel -o "$out")
@@ -30,4 +30,7 @@ git -C "$here" rm -q -f "$out"/*+"$old"-*.whl
 # vendor/wheels/.gitignore is `*` (the wheels are tracked by force), so the new ones are added by -f.
 git -C "$here" add -f "$out"/*+"$short"-*.whl
 (cd "$here" && uv lock)
-sha256sum "$out"/*+"$short"-*.whl
+# nemik:W417: the hash list is written, not hand-kept (README.md points here); `sha256sum -c` checks it.
+(cd "$out" && sha256sum ./*+"$short"-*.whl >SHA256SUMS)
+git -C "$here" add -f "$out/SHA256SUMS"
+cat "$out/SHA256SUMS"
