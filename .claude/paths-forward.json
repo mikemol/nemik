@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 204
+      "ticks_blocked": 205
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 24,
+      "ticks_blocked": 25,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 26,
+      "ticks_blocked": 27,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T13:54:28Z",
-      "ticks_blocked": 56,
+      "ticks_blocked": 57,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 53,
+      "ticks_blocked": 54,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 30,
+      "ticks_blocked": 31,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 46,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 46,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 46,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 46,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 46,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 46,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 46,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 46,
       "completed": null
     },
     {
@@ -6446,7 +6446,7 @@
       "caused_by": "W337",
       "last_worked": "2026-10-11T21:18:11Z",
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 4
     },
     {
       "symbol": "W339",
@@ -6469,7 +6469,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 33,
+      "ticks_blocked": 34,
       "weight": 1,
       "completed": null
     },
@@ -6556,7 +6556,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 2
     },
     {
       "symbol": "W344",
@@ -6620,7 +6620,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 20,
+      "ticks_blocked": 21,
       "completed": null
     },
     {
@@ -6758,7 +6758,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 5
     },
     {
       "symbol": "W353",
@@ -6780,7 +6780,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 5
     },
     {
       "symbol": "W354",
@@ -6802,7 +6802,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 5
     },
     {
       "symbol": "W355",
@@ -6824,7 +6824,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 5
     },
     {
       "symbol": "W356",
@@ -7031,7 +7031,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 26,
+      "ticks_blocked": 27,
       "completed": null
     },
     {
@@ -7053,7 +7053,7 @@
       "caused_by": "W364",
       "last_worked": "2026-10-12T01:34:53Z",
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W366",
@@ -7074,7 +7074,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W367",
@@ -7095,7 +7095,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W368",
@@ -7117,7 +7117,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W369",
@@ -7228,7 +7228,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 7
     },
     {
       "symbol": "W374",
@@ -7475,7 +7475,7 @@
     {
       "symbol": "W385",
       "title": "a11y C2: context cards get a cue of their own, and the test checks the style, not a data flag",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W337"
       ],
@@ -7485,15 +7485,15 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "W380 refuted: the test counts [?ghost] data, so deleting the style passes; and dashed also means unclaimed (index.html:362), so a dashed card is ambiguous; give context its own cue and assert the rendered style",
-      "evidence": "2026-10-12: From W384: ghost cards render at opacity 0.65, which blends the 4.5:1 label pair toward the page and lowers its effective contrast; a cue for context that is not opacity would fix this too.",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: From W384: ghost cards render at opacity 0.65, which blends the 4.5:1 label pair toward the page and lowers its effective contrast; a cue for context that is not opacity would fix this too. | 2026-10-12: index.html node[?ghost]: a double border (no other card uses it; unclaimed is dashed) at full opacity, removing the 0.65 opacity that lowered label contrast. test_context_cards_have_a_rendered_cue_of_their_own reads the RENDERED border-style and opacity, not the data flag: context cards double and opaque, no other card double. Green under the gate's browser (bazel test //:test_layout).",
       "issued_at": "2026-10-12T12:14:20Z",
       "minted_during": "interrupt",
       "caused_by": "W380",
-      "last_worked": "2026-10-12T15:19:13Z",
+      "last_worked": "2026-10-12T15:46:11Z",
       "ticks_blocked": 0,
       "weight": 1,
-      "completed": null
+      "completed": "20261012T154611Z"
     },
     {
       "symbol": "W386",
@@ -7515,7 +7515,7 @@
       "caused_by": "W380",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 4
     },
     {
       "symbol": "W387",
@@ -7579,7 +7579,7 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W338",
       "last_worked": "2026-10-12T13:24:19Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "completed": null
     },
     {
@@ -7602,7 +7602,7 @@
       "caused_by": "W383",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 4
     },
     {
       "symbol": "W391",
@@ -7628,7 +7628,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T14:59:29Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -7652,7 +7652,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T15:25:01Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -7675,7 +7675,7 @@
       "caused_by": "W391",
       "last_worked": "2026-10-12T14:38:31Z",
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 6
     },
     {
       "symbol": "W394",
@@ -7699,7 +7699,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T15:25:03Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -7723,7 +7723,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T15:25:04Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -7746,7 +7746,7 @@
       "caused_by": "W391",
       "last_worked": "2026-10-12T14:38:32Z",
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 6
     },
     {
       "symbol": "W397",
@@ -7775,7 +7775,7 @@
     {
       "symbol": "W398",
       "title": "render-check runs the same pinned headless Chrome (and fonts) as the gate, so a host pass means a gate pass",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [
         "web",
@@ -7788,8 +7788,10 @@
       "issued_at": "2026-10-12T15:32:29Z",
       "minted_during": "interrupt",
       "caused_by": "W381",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-12T15:46:12Z",
+      "ticks_blocked": 0,
+      "weight": 1,
+      "completed": null
     }
   ],
   "residue": [
@@ -7852,10 +7854,7 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": {
-    "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-12T15:32:32Z"
-  },
+  "lock": null,
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }

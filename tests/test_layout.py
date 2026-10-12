@@ -482,6 +482,37 @@ def test_the_default_view_is_legible(server) -> None:
     assert note == "" or "readable size" in note
 
 
+def test_context_cards_have_a_rendered_cue_of_their_own(server) -> None:
+    # nemik:W385 (W380 refuted the data-flag proof): with one repo picked, the context cards drawn from
+    # other repos RENDER a double border at full opacity, and no other card renders one.
+    with sync_api.sync_playwright() as p:
+        exe = os.environ.get("NEMIK_CHROMIUM")
+        try:
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        page.goto(server)
+        page.wait_for_function(
+            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
+            timeout=60000,
+        )
+        page.click("#repos button[data-repo='nemik']")
+        page.wait_for_timeout(600)
+        seen = page.evaluate(
+            "() => cy.nodes('[symbol]').map(n => [!!n.data('ghost'),"
+            " n.style('border-style'), +n.style('opacity')])"
+        )
+        browser.close()
+    ghosts = [s for s in seen if s[0]]
+    others = [s for s in seen if not s[0]]
+    assert ghosts, "no context card was drawn"
+    assert all(style == "double" and opacity == 1 for _, style, opacity in ghosts)
+    assert not any(style == "double" for _, style, _ in others)
+
+
 def test_each_card_state_differs_by_more_than_its_fill(server) -> None:
     # nemik:W381 (W380 refuted the old claim): for every pair of states drawn, the cards differ in some
     # non-colour property, here the glyph that begins the label (ready has none, the rest each their own).

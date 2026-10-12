@@ -637,3 +637,5 @@
 2026-10-12T15:12:24Z  tick  W392 nudged    nudge     "NUDGE luthen-observability:W870 and mtools:W1048: both carded today, owners know; no message"
 2026-10-12T15:19:14Z  tick  W381 advanced  unblock   "card state carried by a label glyph as well as fill; layout budget re-based for the wider labels"
 2026-10-12T15:32:29Z  interrupt W398 minted    -         "render-check runs the same pinned headless Chrome (and fonts) as the gate, so a host pass means a gate pass"  evidence=W381
+2026-10-12T15:42:22Z  tick  W392 nudged    nudge     "NUDGE luthen-observability:W872: carded today, in progress there; no message"
+2026-10-12T15:46:14Z  tick  W385 advanced  unblock   "context cards cued by a double border at full opacity, tested on the rendered style"

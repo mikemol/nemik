@@ -455,7 +455,9 @@ function draw() {
       // nemik:W264: with "salience order" on, an edge is as wide as the flow that crossed it.
       { selector: "edge[current > 0]", style: { width: "mapData(current, 0, 12, 1.5, 7)" } },
       // nemik:W336: a card shown only as context (its repo is not picked) is dashed and dim.
-      { selector: "node[?ghost]", style: { opacity: 0.65, "border-style": "dashed", "border-width": 2 } },
+      // nemik:W385 (W380 refuted the old cue): a DOUBLE border, a shape no other card uses (unclaimed is
+      // dashed), at full opacity so its label keeps W384's 4.5:1 contrast; the repo box says "(context)".
+      { selector: "node[?ghost]", style: { "border-style": "double", "border-width": 4, "border-color": css("--muted") } },
       // nemik:W322, W335: the cards on a longest open chain (nemik-critical) carry one ring per scope.
       { selector: "node[nrings > 0]", style: { "background-image": ringSvg, "background-fit": "none", "background-clip": "none",
         "background-width": ringW, "background-height": ringH, "background-position-x": "50%", "background-position-y": "50%",
