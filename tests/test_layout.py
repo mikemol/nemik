@@ -296,9 +296,9 @@ def test_rolling_up_umbrellas_hides_their_work_and_a_double_click_expands_one(
 
 
 def test_scope_rings_carry_distinct_ruler_motifs_pinned_to_paperkits(server) -> None:
-    # nemik:W382: the page's port of paperkit's emit_f gives each path scope its own ruler-sequence
-    # motif. The family is pinned to paperkit's published motifs (render/checks/rulerseq.py), and the
-    # rings actually drawn use pairwise-distinct dash patterns.
+    # nemik:W382/W419: each path scope gets its own ruler-sequence motif, now shipped by the server from
+    # mtools' mikemol.rulerseq (paperkit's emit_f, hosted). The family is pinned to paperkit's published
+    # motifs, and the rings actually drawn use pairwise-distinct dash patterns.
     with sync_api.sync_playwright() as p:
         exe = os.environ.get("NEMIK_CHROMIUM")
         try:
@@ -309,10 +309,12 @@ def test_scope_rings_carry_distinct_ruler_motifs_pinned_to_paperkits(server) -> 
             pytest.skip(f"chromium unavailable: {e}")
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
         page.goto(server)
-        page.wait_for_function("() => typeof rulerMotif === 'function'")
+        # the legend is drawn once the first graph (and its patterns) has loaded
+        page.wait_for_selector("#pathkey line", state="attached")
         motifs = page.evaluate("() => [0, 1, 2, 3].map(rulerMotif)")
-        lengths = page.evaluate("() => [5, 6, 13, 200].map(n => emitF(n).length)")
-        dashes = page.evaluate("() => SCOPES.map(s => s.dash)")
+        lengths = page.evaluate("() => data.ruler.f.map(p => p.length)")
+        dashes = page.evaluate("() => SCOPES.map(scopeDash)")
+        generates = page.evaluate("() => typeof emitF !== 'undefined'")
         legend = page.evaluate(
             "() => [...document.querySelectorAll('#pathkey line')]"
             ".map(l => l.getAttribute('stroke-dasharray'))"
@@ -324,7 +326,9 @@ def test_scope_rings_carry_distinct_ruler_motifs_pinned_to_paperkits(server) -> 
         "·--····",
         "·--····--------",
     ]
-    assert lengths == [5, 6, 13, 200]  # len(F(n)) == n: any natural, losslessly
+    # len(F(n)) == n, so each shipped pattern decodes to its index
+    assert lengths == list(range(len(lengths)))
+    assert not generates  # the page renders the patterns; it no longer generates them
     assert len(set(dashes)) == 4 and all(dashes)
     assert legend == dashes
 

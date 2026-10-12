@@ -7566,24 +7566,22 @@
     {
       "symbol": "W389",
       "title": "Switch the ruler-sequence port to mtools' packaged generator (mikemol-rulerseq) when it lands",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [
         "web",
         "vendor"
       ],
-      "blocked_on": [
-        "W419"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Umbrella: W417 vendor, W418 serve computes patterns, W419 page renders them",
-      "evidence": "2026-10-12: 2026-10-12 paperkit: superseded paperkit:W338's packaging plan; the operator directed the move to mtools instead. | 2026-10-12: 2026-10-12 mtools claimed it as mtools:W1048: host paperkit's rulerseq.py (source paperkit d6096c9) as dist mikemol-rulerseq, module mikemol.rulerseq; mtools will send the dist name and sha when it lands. | 2026-10-12: mtools:W1048 landed: dist mikemol-rulerseq, module mikemol.rulerseq, mtools 2eeb11e (ls-remote confirms origin/main), subdirectory=rulerseq; public names cycle_order, emit_f, morse_motif, dash_pattern, nicematrix_defs, css_defs, css_stops, rule, rule_name, column_encoding, main; stdlib only; python -m mikemol.rulerseq is the selftest.",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: 2026-10-12 paperkit: superseded paperkit:W338's packaging plan; the operator directed the move to mtools instead. | 2026-10-12: 2026-10-12 mtools claimed it as mtools:W1048: host paperkit's rulerseq.py (source paperkit d6096c9) as dist mikemol-rulerseq, module mikemol.rulerseq; mtools will send the dist name and sha when it lands. | 2026-10-12: mtools:W1048 landed: dist mikemol-rulerseq, module mikemol.rulerseq, mtools 2eeb11e (ls-remote confirms origin/main), subdirectory=rulerseq; public names cycle_order, emit_f, morse_motif, dash_pattern, nicematrix_defs, css_defs, css_stops, rule, rule_name, column_encoding, main; stdlib only; python -m mikemol.rulerseq is the selftest. | 2026-10-12: W417 vendor (8978610), W418 server table (95e5eec), W419 page renders shipped patterns: nemik no longer carries its own ruler-sequence port.",
       "issued_at": "2026-10-12T13:17:53Z",
       "minted_during": "interrupt",
       "caused_by": "paperkit:W338",
-      "last_worked": "2026-10-12T21:57:13Z",
-      "ticks_blocked": 1,
-      "completed": null
+      "last_worked": "2026-10-12T23:00:05Z",
+      "ticks_blocked": 0,
+      "completed": "20261012T230005Z"
     },
     {
       "symbol": "W390",
@@ -7824,7 +7822,7 @@
     {
       "symbol": "W400",
       "title": "Validate only what a change touches: SHACL over the changed repos' nodes and the cross-repo edges into them",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W393"
       ],
@@ -7838,7 +7836,7 @@
       "issued_at": "2026-10-12T16:42:25Z",
       "minted_during": "tick",
       "caused_by": "W393",
-      "last_worked": "2026-10-12T22:46:15Z",
+      "last_worked": "2026-10-12T23:00:09Z",
       "ticks_blocked": 0,
       "weight": 4,
       "completed": null
@@ -8213,21 +8211,21 @@
     {
       "symbol": "W419",
       "title": "The page renders shipped ruler patterns; emitF and rulerMotif leave index.html, the motif-family browser test stays as the contract",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W389"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: index.html: emitF removed; rulerF(n)/rulerMotif(k) read graph.json ruler (W418), rulerDash only renders; the scope legend is drawn after the first graph loads. test_layout motif test now pins the shipped motifs to paperkit's family, len(f[n]) == n, emitF absent, legend == ring dashes; render-check green (first run caught a test race on the legend, fixed by waiting for #pathkey line).",
       "issued_at": "2026-10-12T21:57:02Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-10-12T22:49:14Z",
+      "last_worked": "2026-10-12T23:00:03Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261012T230003Z"
     }
   ],
   "residue": [
