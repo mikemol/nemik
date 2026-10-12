@@ -1031,10 +1031,47 @@ async function history() {
   document.getElementById("history").innerHTML = `<dl>${rows.join("")}</dl>`;
 }
 
+// nemik:W416: a static build publishes hashes.json and graph.json's pieces (graph/<repo>.json and
+// graph/_fleet.json, W414/W415). The page refetches only the pieces whose hash moved and assembles
+// them as nemik.pieces.assemble does; without hashes.json (nemik-serve) it reads graph.json whole.
+const pieceCache = {};  // path -> {hash, doc}
+window.__pieceFetches = [];  // the paths fetched, in order: what a browser test counts
+async function graphText() {
+  const res = await fetch("hashes.json");
+  if (!res.ok) return (await fetch("graph.json")).text();
+  const hashes = await res.json();
+  const piece = async path => {
+    if (!pieceCache[path] || pieceCache[path].hash !== hashes[path]) {
+      window.__pieceFetches.push(path);
+      pieceCache[path] = {hash: hashes[path], doc: await (await fetch(path)).json()};
+    }
+    return pieceCache[path].doc;
+  };
+  const fleet = await piece("graph/_fleet.json");
+  const parts = [...await Promise.all(fleet.repos.map(r => piece(`graph/${r}.json`))), fleet];
+  const byId = (a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
+  const edgeKey = e => [e.source, e.target, e.kind];
+  const byEdge = (a, b) => {
+    const [x, y] = [edgeKey(a), edgeKey(b)];
+    for (let i = 0; i < 3; i++) if (x[i] !== y[i]) return x[i] < y[i] ? -1 : 1;
+    return 0;
+  };
+  const merged = section => Object.fromEntries(
+    parts.flatMap(p => Object.entries(p[section])).sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0));
+  return JSON.stringify({
+    nodes: parts.flatMap(p => p.nodes).sort(byId),
+    edges: parts.flatMap(p => p.edges).sort(byEdge),
+    inbound: fleet.inbound,
+    operator: fleet.operator,
+    findings: merged("findings"),
+    health: merged("health"),
+  });
+}
+
 let lastGraph = null;
 async function load() {
   try {
-    const text = await (await fetch("graph.json")).text();
+    const text = await graphText();
     // nemik:W119: the 60s poll redrew and re-fit even when nothing changed, so the view jumped
     // and lost the reader's pan/zoom every minute. An unchanged graph is not redrawn.
     if (text === lastGraph && data) {

@@ -573,6 +573,58 @@ def test_each_card_state_differs_by_more_than_its_fill(server) -> None:
     assert len(set(marks)) == len(marks), prefixes
 
 
+def test_a_static_build_refetches_only_the_pieces_whose_hash_moved(tmp_path) -> None:
+    # nemik:W416: the page reads graph.json's pieces by hashes.json, draws the same graph, and on a
+    # refresh fetches only the piece whose hash changed.
+    import functools
+    import http.server
+    import json
+    import threading
+
+    from nemik.serve import build_static
+
+    withheld = tmp_path / "withheld.json"
+    withheld.write_text(json.dumps({"version": 1, "as_of": "x", "items": []}))
+    out = tmp_path / "out"
+    build_static(FLEET, out, withheld)
+    whole = json.loads((out / "graph.json").read_text())
+    fleet = json.loads((out / "graph" / "_fleet.json").read_text())
+    handler = functools.partial(
+        http.server.SimpleHTTPRequestHandler, directory=str(out)
+    )
+    httpd = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
+    threading.Thread(target=httpd.serve_forever, daemon=True).start()
+    url = f"http://127.0.0.1:{httpd.server_address[1]}/"
+    try:
+        with sync_api.sync_playwright() as p:
+            exe = os.environ.get("NEMIK_CHROMIUM")
+            try:
+                browser = p.chromium.launch(
+                    executable_path=os.path.abspath(exe) if exe else None
+                )
+            except sync_api.Error as e:
+                pytest.skip(f"chromium unavailable: {e}")
+            page = browser.new_page()
+            page.goto(url)
+            page.wait_for_function("() => typeof data !== 'undefined' && data")
+            drawn = page.evaluate("() => data.nodes.length")
+            first = page.evaluate("() => [...window.__pieceFetches]")
+            one = fleet["repos"][0]
+            hashes = json.loads((out / "hashes.json").read_text())
+            hashes[f"graph/{one}.json"] = "moved"
+            (out / "hashes.json").write_text(json.dumps(hashes))
+            page.evaluate("() => load()")
+            second = page.evaluate("n => window.__pieceFetches.slice(n)", len(first))
+            browser.close()
+    finally:
+        httpd.shutdown()
+    assert drawn == len(whole["nodes"])
+    assert sorted(first) == sorted(
+        ["graph/_fleet.json", *(f"graph/{r}.json" for r in fleet["repos"])]
+    )
+    assert second == [f"graph/{one}.json"]
+
+
 def test_no_command_route_or_tools_panel_remains(server) -> None:
     # nemik:W397: the Tools drop-down ran CLIs through /cmd; it is retired, and every capability it
     # offered is either native to the view or CLI-only. Neither the route nor the panel may come back.
