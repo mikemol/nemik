@@ -594,3 +594,6 @@
 2026-10-12T07:11:09Z  tick  W377 advanced  unblock   "re-vendored mtools 7d4a458 -> f04f0a2 (fleet par) with tools/revendor-mtools.sh (uv lock only, so mtools:W1028's sync hazard does not apply); committing through mikemol-commit to read its path line"
 2026-10-12T07:35:31Z  interrupt W378 minted    -         "Vendor mikemol-fence beside hooks so mikemol-commit's lock reads held"  evidence=github-8f
 2026-10-12T07:55:16Z  tick  W378 advanced  unblock   "fence vendored at f04f0a2; membudget beside the interpreter; next commit via mikemol-commit reads the lock line"
+2026-10-12T08:05:28Z  tick  W378 advanced  unblock   "lock: held confirmed on 697942e; idle-shutdown measurement owed next tick"  evidence=697942e
+2026-10-12T08:14:25Z  tick  W379 minted    -         "nemik-pins reports the host-installed nemik tool's sha against HEAD, with the reinstall command"  evidence=W345
+2026-10-12T08:14:28Z  tick  W345 advanced  unblock   "nemik tools on the host PATH via uv tool install pinned at 697942e; drift card W379; gate server idle exit measured"

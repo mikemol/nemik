@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 378,
+  "counter": 379,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 189
+      "ticks_blocked": 190
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 10,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 41,
+      "ticks_blocked": 42,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 38,
+      "ticks_blocked": 39,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 38,
+      "ticks_blocked": 39,
       "completed": null,
       "weight": 1
     },
@@ -5382,7 +5382,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 15,
+      "ticks_blocked": 16,
       "completed": null
     },
     {
@@ -5403,7 +5403,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 30,
+      "ticks_blocked": 31,
       "completed": null
     },
     {
@@ -5462,7 +5462,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 30,
+      "ticks_blocked": 31,
       "completed": null
     },
     {
@@ -5483,7 +5483,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 30,
+      "ticks_blocked": 31,
       "completed": null
     },
     {
@@ -5523,7 +5523,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 30,
+      "ticks_blocked": 31,
       "completed": null
     },
     {
@@ -5582,7 +5582,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 30,
+      "ticks_blocked": 31,
       "completed": null
     },
     {
@@ -5622,7 +5622,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 30,
+      "ticks_blocked": 31,
       "completed": null
     },
     {
@@ -5643,7 +5643,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 30,
+      "ticks_blocked": 31,
       "completed": null
     },
     {
@@ -5683,7 +5683,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 30,
+      "ticks_blocked": 31,
       "completed": null
     },
     {
@@ -6152,7 +6152,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T20:11:31Z",
-      "ticks_blocked": 20,
+      "ticks_blocked": 21,
       "completed": null
     },
     {
@@ -6449,7 +6449,7 @@
       "caused_by": "W337",
       "last_worked": "2026-10-11T21:18:11Z",
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 6
     },
     {
       "symbol": "W339",
@@ -6472,7 +6472,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "weight": 1,
       "completed": null
     },
@@ -6519,7 +6519,7 @@
       "caused_by": "paperkit:W320",
       "last_worked": "2026-10-11T21:18:33Z",
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 6
     },
     {
       "symbol": "W342",
@@ -6558,7 +6558,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 2
     },
     {
       "symbol": "W344",
@@ -6584,21 +6584,22 @@
     {
       "symbol": "W345",
       "title": "Install nemik's tools for the host: one pinned wheel via uv tool install, not symlinks into this venv",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "packaging"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "build the nemik wheel (the console scripts of pyproject [project.scripts]) in bazel; install it per host with uv tool install from that wheel (pinned by this repo's sha), so nemik-* is on the operator's PATH and any repo can add the same wheel as its own dependency; a launcher that resolves another repo's venv is refused (the fleet rule: tools are packages, not paths into someone else's .venv); then verify nemik-operator runs from luthen with no absolute path",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: 2026-10-12: uv tool install 'nemik @ git+file:///home/mikemol/github/nemik@697942e' (the vendored mtools wheels resolve from the same commit; a bare wheel could not, since uv sources are not in a wheel): 19 nemik-* on PATH in ~/.local/bin. Witness: env -C luthen-observability nemik-operator --root ~/github --json ran by name. Drift against HEAD is W379. Reverse with: uv tool uninstall nemik.",
       "issued_at": "2026-10-11T23:54:56Z",
       "minted_during": "interrupt",
       "caused_by": "luthen-observability-a9",
-      "last_worked": null,
+      "last_worked": "2026-10-12T08:14:26Z",
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 1,
+      "completed": "20261012T081426Z"
     },
     {
       "symbol": "W346",
@@ -6621,7 +6622,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -6759,7 +6760,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 5
     },
     {
       "symbol": "W353",
@@ -6781,7 +6782,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 5
     },
     {
       "symbol": "W354",
@@ -6803,7 +6804,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 5
     },
     {
       "symbol": "W355",
@@ -6825,7 +6826,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 5
     },
     {
       "symbol": "W356",
@@ -6896,7 +6897,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:31:11Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
@@ -6919,7 +6920,7 @@
       "caused_by": "W358",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W360",
@@ -6941,7 +6942,7 @@
       "caused_by": "W358",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W361",
@@ -6963,7 +6964,7 @@
       "caused_by": "W358",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W362",
@@ -6985,7 +6986,7 @@
       "caused_by": "W358",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W363",
@@ -7007,7 +7008,7 @@
       "caused_by": "W358",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W364",
@@ -7033,7 +7034,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
@@ -7055,7 +7056,7 @@
       "caused_by": "W364",
       "last_worked": "2026-10-12T01:34:53Z",
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 4
     },
     {
       "symbol": "W366",
@@ -7076,7 +7077,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 4
     },
     {
       "symbol": "W367",
@@ -7097,7 +7098,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 4
     },
     {
       "symbol": "W368",
@@ -7119,7 +7120,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 4
     },
     {
       "symbol": "W369",
@@ -7324,7 +7325,7 @@
     {
       "symbol": "W378",
       "title": "Vendor mikemol-fence beside hooks so mikemol-commit's lock reads held",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "hooks",
@@ -7332,12 +7333,32 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "github-8f ruling, mtools confirmed: the dist is mikemol-fence (console script mikemol-membudget); W1016/W1022 take the mikemol-membudget beside the interpreter, so nemik's venv must carry it: add fence to tools/revendor-mtools.sh's dists at f04f0a2, pyproject sources and MODULE.bazel, rebuild the venv, then one mikemol-commit must print 'lock: held'. Re-vendor routine: until mtools:W1039 (mikemol-commit force-adds exactly named paths) lands, land a re-vendor by plain commit through the staged gate and say so in the message.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: 697942e committed through mikemol-commit: 'mikemol-commit: path: isolated (the repository's pre-commit names MIKEMOL_REAL_ROOT); lock: held' (membudget hold on claim:path:nemik/.git/mtools/commit). Fence at f04f0a2 in 82304aa.",
       "issued_at": "2026-10-12T07:35:31Z",
       "minted_during": "interrupt",
       "caused_by": "github-8f",
-      "last_worked": "2026-10-12T07:35:37Z",
+      "last_worked": "2026-10-12T08:05:18Z",
+      "ticks_blocked": 0,
+      "completed": "20261012T080518Z"
+    },
+    {
+      "symbol": "W379",
+      "title": "nemik-pins reports the host-installed nemik tool's sha against HEAD, with the reinstall command",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "packaging",
+        "pins"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "read uv tool's receipt for nemik (the git+file@sha it was installed from); print INSTALLED <sha>, n commits behind HEAD, and the uv tool install line that brings it level; a check warning when behind by more than a declared count; reinstalling stays a deliberate step, not a post-commit action",
+      "evidence": "",
+      "issued_at": "2026-10-12T08:14:25Z",
+      "minted_during": "tick",
+      "caused_by": "W345",
+      "last_worked": "2026-10-12T08:14:27Z",
       "ticks_blocked": 0,
       "completed": null
     }
@@ -7402,10 +7423,7 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": {
-    "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-12T07:41:06Z"
-  },
+  "lock": null,
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }
