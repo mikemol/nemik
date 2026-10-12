@@ -46,6 +46,9 @@ venv_from_hub(
         "mikemol-ics": "mikemol.icsstruct.cli:main",
         "mikemol-hook-inbound-asks": "mikemol.hooks.entry:inbound_asks_main",
         "mikemol-hook-nemik-check": "mikemol.hooks.entry:nemik_check_main",
+        # nemik:W342: the commit kata, so this repo commits through its isolated path (no index lock
+        # held through the gate) with its own pinned copy, not another repo's venv.
+        "mikemol-commit": "mikemol.hooks.commit_kata:main",
         "nemik-days": "nemik.calendars:days_main",
         "nemik-calendar-write": "nemik.calwrite:main",
         "nemik-history": "nemik.history:main",

@@ -6524,22 +6524,20 @@
     {
       "symbol": "W342",
       "title": "Adopt isolated mikemol-commit: pre-commit hook and gate go through MIKEMOL_REAL_ROOT",
-      "status": "blocked",
+      "status": "working",
       "enables": [],
       "touches": [
         "hooks"
       ],
-      "blocked_on": [
-        "W374"
-      ],
+      "blocked_on": [],
       "blocked_kind": "agent",
       "next_bounded_step": "model on mtools .githooks/pre-commit and mtools:W954 and linux-sources efd2150, d3a428d: every tool lookup in the hook and its gate script uses the real root with a default; verify one commit prints path: isolated",
       "evidence": "2026-10-12: 2026-10-12: read the references. mtools' hook and linux-sources' tools/gate_staged.sh both run bazel in a staged tree at a FIXED path, since bazel keys output_base (cache and server) on the workspace path. Naming MIKEMOL_REAL_ROOT alone would make every isolated commit gate in a fresh snapshot path: a new bazel server and a cold cache per commit. So the fixed-path gate (W374) comes first.",
       "issued_at": "2026-10-11T21:55:10Z",
       "minted_during": "tick",
       "caused_by": "github-8f",
-      "last_worked": "2026-10-12T04:42:43Z",
-      "ticks_blocked": 2,
+      "last_worked": "2026-10-12T06:38:50Z",
+      "ticks_blocked": 0,
       "weight": 3,
       "completed": null
     },
@@ -7237,7 +7235,7 @@
     {
       "symbol": "W374",
       "title": "Gate the staged index in a fixed-path worktree, so an isolated commit keeps one bazel cache and server",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W342"
       ],
@@ -7246,14 +7244,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "as linux-sources tools/gate_staged.sh: a scratch worktree at a FIXED path (bazel's output_base is keyed on the workspace path), reset to HEAD, the staged index checked out into it, bazel test //... there; git calls go through MIKEMOL_REAL_ROOT; the working-card and tracked-wheel checks read the index, not the working tree. Without the fixed path every isolated commit would start a new bazel server with a cold cache, the host-memory problem of 2026-10-12.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: b549e0e: tools/gate_staged.sh gates the staged index in a fixed-path worktree (<parent>/.nemik-gate-wt, flock'd, its own bazel-bin/.venv link since paper.toml's claim checks run .venv/bin/python3); the hook reads the index for the wheel and working-card checks and names MIKEMOL_REAL_ROOT. The first staged run caught a real dependency on untracked state (the .venv link).",
       "issued_at": "2026-10-12T04:42:43Z",
       "minted_during": "tick",
       "caused_by": "W342",
-      "last_worked": "2026-10-12T05:13:31Z",
+      "last_worked": "2026-10-12T06:38:49Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261012T063849Z"
     },
     {
       "symbol": "W375",
