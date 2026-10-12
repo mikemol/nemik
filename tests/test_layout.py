@@ -475,6 +475,42 @@ def test_the_default_view_is_legible(server) -> None:
     assert note == "" or "readable size" in note
 
 
+def test_one_picked_repo_restored_from_the_last_visit_is_legible_too(server) -> None:
+    # nemik:W383 (W380 refuted the floor here): a single repo, picked and remembered from a previous
+    # visit, is the first view on reload; its labels must still be at least 8 px.
+    with sync_api.sync_playwright() as p:
+        exe = os.environ.get("NEMIK_CHROMIUM")
+        try:
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": 900, "height": 600})
+        page.goto(server)
+        page.wait_for_function(
+            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
+            timeout=60000,
+        )
+        # the repo with the most cards, so its fit is the one most likely to fall under the floor
+        big = page.evaluate(
+            "() => { const c = {}; data.nodes.forEach(n => c[n.repo] = (c[n.repo] || 0) + 1);"
+            " return Object.entries(c).sort((a, b) => b[1] - a[1])[0][0]; }"
+        )
+        page.evaluate(
+            f"() => localStorage.setItem('nemik.repos', JSON.stringify(['{big}']))"
+        )
+        page.reload()
+        page.wait_for_function(
+            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
+            timeout=60000,
+        )
+        page.wait_for_timeout(500)
+        m = page.evaluate(LEGIBILITY)
+        browser.close()
+    assert m["label_px"] >= 8, m
+
+
 def test_picked_repos_show_their_blockers_blockers_as_context(server) -> None:
     # nemik:W336: pick one repo; its cards' blockers in other repos are drawn dashed as context, and one
     # more hop (the control's 2) reaches at least as many, never fewer, and never a picked repo's card.

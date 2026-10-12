@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 389,
+  "counter": 390,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 201
+      "ticks_blocked": 202
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 21,
+      "ticks_blocked": 22,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 23,
+      "ticks_blocked": 24,
       "weight": 2,
       "completed": null
     },
@@ -3750,12 +3750,12 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "2026-10-05: 2026-10-05: letter left in luthen-observability/inbox/2026-10-05-nemik-calendar-write-unit.md (no luthen session was live) asking for a claiming waypoint and the unit. | 2026-10-08: 2026-10-08: title shortened (was bundled, nemik-check W201 warning); full ask unchanged: a unit every few minutes so a waypoint that changes or closes updates or deletes its event, asked of luthen as for the Tasks unit W234. | 2026-10-09: 2026-10-09: claimed on luthen as luthen-observability:W626 and W670 (nemik-inbound luthen-observability lists both; relayed by github-45) | 2026-10-09: 2026-10-09: luthen dropped W670 into residue pointing at W626 (verified in luthen queue, dropped 06:20Z); W626 carries the contract and needs the operator host apply when declared",
+      "evidence": "2026-10-05: 2026-10-05: letter left in luthen-observability/inbox/2026-10-05-nemik-calendar-write-unit.md (no luthen session was live) asking for a claiming waypoint and the unit. | 2026-10-08: 2026-10-08: title shortened (was bundled, nemik-check W201 warning); full ask unchanged: a unit every few minutes so a waypoint that changes or closes updates or deletes its event, asked of luthen as for the Tasks unit W234. | 2026-10-09: 2026-10-09: claimed on luthen as luthen-observability:W626 and W670 (nemik-inbound luthen-observability lists both; relayed by github-45) | 2026-10-09: 2026-10-09: luthen dropped W670 into residue pointing at W626 (verified in luthen queue, dropped 06:20Z); W626 carries the contract and needs the operator host apply when declared | 2026-10-12: 2026-10-12 luthen-observability-d9: luthen-observability:W626 landed the units (05dfba72) and the nemik_calendar_unreachable alert (15f4668b); the remaining step is installing luthen-nemik-calendar-write.{service,timer} into ~/.config/systemd/user, the user-profile root act tracked as luthen W824/W820; W626 is blocked on W824. luthen will report once the units run and a real exit code is read from the journal.",
       "issued_at": "2026-10-05T14:36:03Z",
       "minted_during": "tick",
       "caused_by": "life-c5",
-      "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 53,
+      "last_worked": "2026-10-12T13:54:28Z",
+      "ticks_blocked": 54,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 50,
+      "ticks_blocked": 51,
       "weight": 2,
       "completed": null
     },
@@ -4971,21 +4971,19 @@
     {
       "symbol": "W260",
       "title": "nemik container OOMKilled at 12:50Z: bound the reader's resident set or raise the limit",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "luthen-observability:W675"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Commit 76c7642 (768Mi + MALLOC_ARENA_MAX=2) is local only; push was denied by the auto-mode classifier (production deploy). Push it once the operator allows, then send github-45 the numbers and watch container_oomkilled_restart.",
-      "evidence": "2026-10-09: Measured 2026-10-09 on the real 16-queue root (scratchpad rss_phases.py): 18 MB start, 42 MB after import, 240 MB first build, 313-352 MB after rebuilds (peak 352), 339 MB after /cmd rank/goals/check/metrics/witnesses; 118k triples, 4107 nodes. Rebuild holds old+new graph. Pod peaks 536 MB at 512Mi. Chose bigger limit (768Mi) plus MALLOC_ARENA_MAX=2; arena effect not measured. | 2026-10-09: 2026-10-09 14:38Z (github-45, recorded on luthen-observability:W675): both replicas at limit 768Mi Guaranteed, working sets 446.9 and 432.4 MB (57%), restarts_total 0, container_oomkilled_restart not firing. github-45 keeps watching and messages nemik if it recurs.",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-09: Measured 2026-10-09 on the real 16-queue root (scratchpad rss_phases.py): 18 MB start, 42 MB after import, 240 MB first build, 313-352 MB after rebuilds (peak 352), 339 MB after /cmd rank/goals/check/metrics/witnesses; 118k triples, 4107 nodes. Rebuild holds old+new graph. Pod peaks 536 MB at 512Mi. Chose bigger limit (768Mi) plus MALLOC_ARENA_MAX=2; arena effect not measured. | 2026-10-09: 2026-10-09 14:38Z (github-45, recorded on luthen-observability:W675): both replicas at limit 768Mi Guaranteed, working sets 446.9 and 432.4 MB (57%), restarts_total 0, container_oomkilled_restart not firing. github-45 keeps watching and messages nemik if it recurs. | 2026-10-12: 2026-10-12 luthen-observability-d9: verified 2026-10-09 14:38Z, limit 768Mi on both replicas, working sets 447/432 MB, restarts_total 0, container_oomkilled_restart not firing; luthen-observability:W675 only watches for a recurrence. Since then W375 made the Deployment Burstable (request 512Mi under the 768Mi limit) for zram swap, so the limit is unchanged and swap headroom is added.",
       "issued_at": "2026-10-09T12:55:53Z",
       "minted_during": "interrupt",
       "caused_by": "github:W1",
-      "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 50,
-      "completed": null,
+      "last_worked": "2026-10-12T13:54:25Z",
+      "ticks_blocked": 0,
+      "completed": "20261012T135425Z",
       "weight": 1
     },
     {
@@ -5382,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 28,
       "completed": null
     },
     {
@@ -5403,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 42,
+      "ticks_blocked": 43,
       "completed": null
     },
     {
@@ -5462,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 42,
+      "ticks_blocked": 43,
       "completed": null
     },
     {
@@ -5483,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 42,
+      "ticks_blocked": 43,
       "completed": null
     },
     {
@@ -5523,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 42,
+      "ticks_blocked": 43,
       "completed": null
     },
     {
@@ -5582,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 42,
+      "ticks_blocked": 43,
       "completed": null
     },
     {
@@ -5622,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 42,
+      "ticks_blocked": 43,
       "completed": null
     },
     {
@@ -5643,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 42,
+      "ticks_blocked": 43,
       "completed": null
     },
     {
@@ -5683,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 42,
+      "ticks_blocked": 43,
       "completed": null
     },
     {
@@ -6471,7 +6469,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 30,
+      "ticks_blocked": 31,
       "weight": 1,
       "completed": null
     },
@@ -6622,7 +6620,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -7033,7 +7031,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 23,
+      "ticks_blocked": 24,
       "completed": null
     },
     {
@@ -7386,7 +7384,7 @@
     {
       "symbol": "W381",
       "title": "a11y C5: card state must not rest on fill colour alone",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W337"
       ],
@@ -7401,9 +7399,10 @@
       "issued_at": "2026-10-12T12:14:16Z",
       "minted_during": "interrupt",
       "caused_by": "W380",
-      "last_worked": null,
+      "last_worked": "2026-10-12T14:18:47Z",
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 1,
+      "completed": null
     },
     {
       "symbol": "W382",
@@ -7431,7 +7430,7 @@
     {
       "symbol": "W383",
       "title": "a11y C4: the legibility floor holds for one picked repo and the treemap too",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W337"
       ],
@@ -7441,15 +7440,15 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "W380 refuted: fitReadable returns early when repos.length < 2 (index.html:222), so a single picked repo (including one restored from localStorage) can fit to 4 px labels; apply the floor there, and measure the treemap's own data(fs); test both",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: index.html fitReadable: the floor now holds when one repo is drawn (including a pick restored from localStorage): its top-left at 8 px with a pan note and the fit-all button. test_one_picked_repo_restored_from_the_last_visit_is_legible_too (largest repo restored as the pick, 900x600 window); render-check 18 passed. The treemap case is split to W390.",
       "issued_at": "2026-10-12T12:14:18Z",
       "minted_during": "interrupt",
       "caused_by": "W380",
-      "last_worked": "2026-10-12T13:52:19Z",
+      "last_worked": "2026-10-12T14:18:44Z",
       "ticks_blocked": 0,
       "weight": 1,
-      "completed": null
+      "completed": "20261012T141844Z"
     },
     {
       "symbol": "W384",
@@ -7579,8 +7578,29 @@
       "minted_during": "interrupt",
       "caused_by": "paperkit:W338",
       "last_worked": "2026-10-12T13:24:19Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
+    },
+    {
+      "symbol": "W390",
+      "title": "a11y: the treemap's tile labels meet the legibility floor, or say where they cannot",
+      "status": "ready",
+      "enables": [
+        "W337"
+      ],
+      "touches": [
+        "a11y",
+        "web"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "split from W383: treemap tiles scale their own font (data(fs)) to fit each tile, so small tiles have small text by construction and fitReadable skips the treemap. Decide a rule (a tile whose label would fall under 8 px at the fit zoom shows its symbol on hover or in a list instead of shrinking) and test min(fs) x zoom over the labels actually drawn",
+      "evidence": "",
+      "issued_at": "2026-10-12T14:18:43Z",
+      "minted_during": "tick",
+      "caused_by": "W383",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [

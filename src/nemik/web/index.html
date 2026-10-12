@@ -261,14 +261,23 @@ function fitReadable(treemapOn, repos) {
   note.textContent = "";
   cy.fit(cy.elements(":visible"), 20);
   const floor = MIN_LABEL_PX / LABEL_FONT_PX;
-  if (treemapOn || cy.zoom() >= floor || repos.length < 2) return;
-  const load = r => data.nodes.filter(n => n.repo === r).reduce((s, n) => s + (n.salience || 0), 0);
-  const focus = [...repos].sort((a, b) => load(b) - load(a) || (a < b ? -1 : 1))[0];
-  const box = cy.getElementById("repo:" + focus);
-  if (!box.length) return;
-  const bb = box.boundingBox();
+  if (treemapOn || cy.zoom() >= floor) return;
+  // nemik:W383 (W380 refuted the old early return on one repo): with one repo drawn, including a pick
+  // restored from the last visit, show its top-left corner at the floor, not the whole box too small.
+  let bb, what;
+  if (repos.length < 2) {
+    bb = cy.elements(":visible").boundingBox();
+    what = `${esc(repos[0] || "this view")} at readable size; pan to see the rest.`;
+  } else {
+    const load = r => data.nodes.filter(n => n.repo === r).reduce((s, n) => s + (n.salience || 0), 0);
+    const focus = [...repos].sort((a, b) => load(b) - load(a) || (a < b ? -1 : 1))[0];
+    const box = cy.getElementById("repo:" + focus);
+    if (!box.length) return;
+    bb = box.boundingBox();
+    what = `${esc(focus)} at readable size; ${repos.length - 1} more repos off-screen.`;
+  }
   cy.viewport({ zoom: floor, pan: { x: 20 - bb.x1 * floor, y: 20 - bb.y1 * floor } });
-  note.innerHTML = `${esc(focus)} at readable size; ${repos.length - 1} more repos off-screen. <button id="fitall" type="button">fit all (too small to read)</button>`;
+  note.innerHTML = `${what} <button id="fitall" type="button">fit all (too small to read)</button>`;
   document.getElementById("fitall").onclick = () => { cy.fit(cy.elements(":visible"), 20); note.textContent = ""; };
 }
 
