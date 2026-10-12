@@ -583,3 +583,5 @@
 2026-10-12T03:51:48Z  tick  W347 advanced  unblock   "fire ripple --fires (1c5f2f0)"  evidence=1c5f2f0
 2026-10-12T04:12:14Z  tick  W47  nudged    nudge     "NUDGE dormant gabion/sre-troubleshooting: no message (dormancy is the operator's choice)"
 2026-10-12T04:28:03Z  tick  W350 advanced  unblock   "umbrella roll-up in the view; render-test server wait hardened after a memory-pressure flake (d3f6b75)"  evidence=d3f6b75
+2026-10-12T04:42:43Z  tick  W374 minted    -         "Gate the staged index in a fixed-path worktree, so an isolated commit keeps one bazel cache and server"  evidence=W342
+2026-10-12T04:42:46Z  tick  W342 atomized  collapse  "isolated commit needs a fixed-path gate tree first (W374), as mtools and linux-sources do"

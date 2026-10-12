@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 373,
+  "counter": 374,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 184
+      "ticks_blocked": 185
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-09T06:20:54Z",
-      "ticks_blocked": 36,
+      "ticks_blocked": 37,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 33,
+      "ticks_blocked": 34,
       "weight": 2,
       "completed": null
     },
@@ -4984,7 +4984,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W1",
       "last_worked": "2026-10-09T14:38:57Z",
-      "ticks_blocked": 33,
+      "ticks_blocked": 34,
       "completed": null,
       "weight": 1
     },
@@ -5382,7 +5382,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "completed": null
     },
     {
@@ -5403,7 +5403,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 25,
+      "ticks_blocked": 26,
       "completed": null
     },
     {
@@ -5462,7 +5462,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 25,
+      "ticks_blocked": 26,
       "completed": null
     },
     {
@@ -5483,7 +5483,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 25,
+      "ticks_blocked": 26,
       "completed": null
     },
     {
@@ -5523,7 +5523,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 25,
+      "ticks_blocked": 26,
       "completed": null
     },
     {
@@ -5582,7 +5582,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 25,
+      "ticks_blocked": 26,
       "completed": null
     },
     {
@@ -5622,7 +5622,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 25,
+      "ticks_blocked": 26,
       "completed": null
     },
     {
@@ -5643,7 +5643,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 25,
+      "ticks_blocked": 26,
       "completed": null
     },
     {
@@ -5683,7 +5683,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 25,
+      "ticks_blocked": 26,
       "completed": null
     },
     {
@@ -6152,7 +6152,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T20:11:31Z",
-      "ticks_blocked": 15,
+      "ticks_blocked": 16,
       "completed": null
     },
     {
@@ -6229,7 +6229,7 @@
       "caused_by": "W323",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 8
+      "weight": 7
     },
     {
       "symbol": "W328",
@@ -6449,7 +6449,7 @@
       "caused_by": "W337",
       "last_worked": "2026-10-11T21:18:11Z",
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 5
     },
     {
       "symbol": "W339",
@@ -6472,7 +6472,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-11T22:10:00Z",
-      "ticks_blocked": 13,
+      "ticks_blocked": 14,
       "weight": 1,
       "completed": null
     },
@@ -6519,24 +6519,26 @@
       "caused_by": "paperkit:W320",
       "last_worked": "2026-10-11T21:18:33Z",
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 5
     },
     {
       "symbol": "W342",
       "title": "Adopt isolated mikemol-commit: pre-commit hook and gate go through MIKEMOL_REAL_ROOT",
-      "status": "working",
+      "status": "blocked",
       "enables": [],
       "touches": [
         "hooks"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W374"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "model on mtools .githooks/pre-commit and mtools:W954 and linux-sources efd2150, d3a428d: every tool lookup in the hook and its gate script uses the real root with a default; verify one commit prints path: isolated",
-      "evidence": "",
+      "evidence": "2026-10-12: 2026-10-12: read the references. mtools' hook and linux-sources' tools/gate_staged.sh both run bazel in a staged tree at a FIXED path, since bazel keys output_base (cache and server) on the workspace path. Naming MIKEMOL_REAL_ROOT alone would make every isolated commit gate in a fresh snapshot path: a new bazel server and a cold cache per commit. So the fixed-path gate (W374) comes first.",
       "issued_at": "2026-10-11T21:55:10Z",
       "minted_during": "tick",
       "caused_by": "github-8f",
-      "last_worked": "2026-10-12T04:17:50Z",
+      "last_worked": "2026-10-12T04:42:43Z",
       "ticks_blocked": 0,
       "weight": 3,
       "completed": null
@@ -6558,7 +6560,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 7
+      "weight": 6
     },
     {
       "symbol": "W344",
@@ -6621,7 +6623,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -6896,7 +6898,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:31:11Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "completed": null
     },
     {
@@ -7033,7 +7035,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "completed": null
     },
     {
@@ -7055,7 +7057,7 @@
       "caused_by": "W364",
       "last_worked": "2026-10-12T01:34:53Z",
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 3
     },
     {
       "symbol": "W366",
@@ -7076,7 +7078,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 3
     },
     {
       "symbol": "W367",
@@ -7097,7 +7099,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 3
     },
     {
       "symbol": "W368",
@@ -7119,7 +7121,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 3
     },
     {
       "symbol": "W369",
@@ -7230,7 +7232,28 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 9
+      "weight": 8
+    },
+    {
+      "symbol": "W374",
+      "title": "Gate the staged index in a fixed-path worktree, so an isolated commit keeps one bazel cache and server",
+      "status": "working",
+      "enables": [
+        "W342"
+      ],
+      "touches": [
+        "hooks"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "as linux-sources tools/gate_staged.sh: a scratch worktree at a FIXED path (bazel's output_base is keyed on the workspace path), reset to HEAD, the staged index checked out into it, bazel test //... there; git calls go through MIKEMOL_REAL_ROOT; the working-card and tracked-wheel checks read the index, not the working tree. Without the fixed path every isolated commit would start a new bazel server with a cold cache, the host-memory problem of 2026-10-12.",
+      "evidence": "",
+      "issued_at": "2026-10-12T04:42:43Z",
+      "minted_during": "tick",
+      "caused_by": "W342",
+      "last_worked": "2026-10-12T04:42:45Z",
+      "ticks_blocked": 0,
+      "completed": null
     }
   ],
   "residue": [
