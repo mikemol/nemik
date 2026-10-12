@@ -677,3 +677,4 @@
 2026-10-12T21:57:01Z  tick  W418 minted    -         "nemik-serve computes ring and blocker-line ruler patterns with mikemol.rulerseq and ships them in graph.json (field manifest updated)"
 2026-10-12T21:57:02Z  tick  W419 minted    -         "The page renders shipped ruler patterns; emitF and rulerMotif leave index.html, the motif-family browser test stays as the contract"
 2026-10-12T21:57:15Z  tick  W389 advanced  unblock   "mtools:W1048 landed (2eeb11e, ls-remote confirmed); W389 atomized into W417 vendor -> W418 serve patterns -> W419 page renderer"
+2026-10-12T22:42:21Z  tick  W417 advanced  unblock   "8978610 pushed (plain commit after staged gate green; mtools:W1039 gap): wheels at 2eeb11e + mikemol-rulerseq; script writes SHA256SUMS; W418 unblocked"

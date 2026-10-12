@@ -41,6 +41,7 @@ def split(doc: dict[str, Any]) -> dict[str, dict[str, Any]]:
     fleet = pieces[FLEET]
     fleet["inbound"] = doc.get("inbound", [])
     fleet["operator"] = doc.get("operator", [])
+    fleet["ruler"] = doc.get("ruler", {})
     fleet["repos"] = names
     return pieces
 
@@ -61,6 +62,7 @@ def assemble(pieces: dict[str, dict[str, Any]]) -> dict[str, Any]:
         "operator": fleet["operator"],
         "findings": {},
         "health": {},
+        "ruler": fleet["ruler"],
     }
     for section in ("findings", "health"):
         for p in parts:

@@ -17,7 +17,8 @@
         "due": "time", "rrule": "text", "exdates": "list-time", "alarms": "list-text"
       },
       "findings": {"*": "list-text"},
-      "health": {"status": "enum", "blocked_share": "count", "oldest_block_ticks": "count", "asks_owed": "count", "reasons": "list-text"}
+      "health": {"status": "enum", "blocked_share": "count", "oldest_block_ticks": "count", "asks_owed": "count", "reasons": "list-text"},
+      "ruler": {"motif": "list-text", "f": "list-text"}
     },
     "wake.json": {
       "top": {"liveness": "text", "roster": "records", "operator": "record"},

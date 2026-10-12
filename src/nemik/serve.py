@@ -384,6 +384,31 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
             r: health(gn, r, limits)._asdict()
             for r in sorted({n["repo"] for n in nodes})
         },
+        "ruler": ruler_table(edges, asks),
+    }
+
+
+def ruler_table(edges: list[dict], asks: list[dict]) -> dict[str, list[str]]:
+    """nemik:W418: the ruler-sequence patterns the page draws, from mtools' generator (mtools:W1048).
+
+    `motif[k]` is the order-k motif (one per halo scope, orders 0..3). `f[n]` is F(n), the pattern of
+    the n-th line into one blocker; which lines a view shows is the page's choice, so it indexes this
+    table rather than the server fixing each line's n. A line's n is at most the lines into its blocker
+    or into an ask chip (one per category and repo), so the table runs to the larger of those.
+    """
+    from collections import Counter
+
+    from mikemol.rulerseq import emit_f, morse_motif
+
+    into = Counter(e["target"] for e in edges if e["kind"] == "waits")
+    chips = Counter((a["category"], str(a["ref"]).partition(":")[0]) for a in asks)
+    top = max([*into.values(), *chips.values(), 0])
+    return {
+        "motif": [morse_motif(k) for k in range(4)],
+        "f": [
+            emit_f([int(b) for b in reversed(f"{n:b}")]) if n else ""
+            for n in range(top + 1)
+        ],
     }
 
 

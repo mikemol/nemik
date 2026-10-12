@@ -50,4 +50,5 @@ def test_a_repo_piece_holds_only_that_repo() -> None:
     assert assemble(pieces) == doc | {
         "nodes": sorted(doc["nodes"], key=lambda n: n["id"]),
         "findings": {"a": [], "c": []},
+        "ruler": {},
     }
