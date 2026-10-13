@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 257
+      "ticks_blocked": 258
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 77,
+      "ticks_blocked": 78,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 79,
+      "ticks_blocked": 80,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T23:37:26Z",
-      "ticks_blocked": 109,
+      "ticks_blocked": 110,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 107,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 83,
+      "ticks_blocked": 84,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 98,
+      "ticks_blocked": 99,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 98,
+      "ticks_blocked": 99,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 98,
+      "ticks_blocked": 99,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 98,
+      "ticks_blocked": 99,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 98,
+      "ticks_blocked": 99,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 98,
+      "ticks_blocked": 99,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 98,
+      "ticks_blocked": 99,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 98,
+      "ticks_blocked": 99,
       "completed": null
     },
     {
@@ -6426,7 +6426,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T06:56:21Z",
-      "ticks_blocked": 24,
+      "ticks_blocked": 25,
       "completed": null
     },
     {
@@ -6450,7 +6450,7 @@
       "minted_during": "tick",
       "caused_by": "W337",
       "last_worked": "2026-10-13T07:54:43Z",
-      "ticks_blocked": 23,
+      "ticks_blocked": 24,
       "weight": 5,
       "completed": null
     },
@@ -6560,7 +6560,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 2
     },
     {
       "symbol": "W344",
@@ -6624,7 +6624,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 73,
+      "ticks_blocked": 74,
       "completed": null
     },
     {
@@ -6762,7 +6762,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W353",
@@ -6784,7 +6784,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W354",
@@ -6806,7 +6806,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W355",
@@ -6828,7 +6828,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W356",
@@ -7031,7 +7031,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
@@ -7634,7 +7634,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 34,
+      "ticks_blocked": 35,
       "completed": null
     },
     {
@@ -7658,7 +7658,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 49,
+      "ticks_blocked": 50,
       "completed": null
     },
     {
@@ -7706,7 +7706,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-13T03:46:31Z",
-      "ticks_blocked": 49,
+      "ticks_blocked": 50,
       "completed": null
     },
     {
@@ -7730,7 +7730,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 49,
+      "ticks_blocked": 50,
       "completed": null
     },
     {
@@ -8288,7 +8288,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 30,
+      "ticks_blocked": 31,
       "completed": null
     },
     {
@@ -8309,7 +8309,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T05:38:02Z",
-      "ticks_blocked": 28,
+      "ticks_blocked": 29,
       "completed": null
     },
     {
@@ -8330,7 +8330,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 30,
+      "ticks_blocked": 31,
       "completed": null
     },
     {
@@ -8352,7 +8352,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T14:49:56Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "weight": 4,
       "completed": null
     },
@@ -8597,7 +8597,7 @@
       "minted_during": "tick",
       "caused_by": "W338",
       "last_worked": "2026-10-13T08:13:31Z",
-      "ticks_blocked": 23,
+      "ticks_blocked": 24,
       "completed": null
     },
     {
@@ -8824,7 +8824,7 @@
       "minted_during": "tick",
       "caused_by": "W426",
       "last_worked": "2026-10-13T13:18:45Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -8849,27 +8849,27 @@
     {
       "symbol": "W453",
       "title": "critical over Cards: the longest-chain poset (rank, slack, path count) computed from nemik.cards.Card, rdflib only at the edge",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W425"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: critical.critical_cards(by_cite, scope): the longest-chain poset over plain Cards (succ: y follows x when x is in y.enabled_by or y.waits_for; open = not done), visiting in URI order so cycle-breaking matches; critical(g) is the shim. Live fleet: old (HEAD) vs new on 17 scopes (fleet + each repo), every field equal. tests/test_critical_cards.py: chain, tie, ranks, path counts, scope from hand-built Cards; test_critical green.",
       "issued_at": "2026-10-13T14:49:53Z",
       "minted_during": "tick",
       "caused_by": "W425",
-      "last_worked": "2026-10-13T16:23:14Z",
+      "last_worked": "2026-10-13T16:46:58Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261013T164658Z",
       "weight": 3
     },
     {
       "symbol": "W454",
       "title": "health over Cards: a repo's verdict (blocked share, oldest block, asks owed) from nemik.cards.Card plus the operator asks as plain rows",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W425"
       ],
@@ -8881,9 +8881,10 @@
       "issued_at": "2026-10-13T14:49:54Z",
       "minted_during": "tick",
       "caused_by": "W425",
-      "last_worked": null,
+      "last_worked": "2026-10-13T16:47:00Z",
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 4,
+      "completed": null
     },
     {
       "symbol": "W455",
@@ -8991,7 +8992,7 @@
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-13T16:11:19Z"
+    "taken_at": "2026-10-13T16:41:34Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []

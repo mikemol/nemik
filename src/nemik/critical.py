@@ -17,8 +17,9 @@ from typing import NamedTuple
 from rdflib import Graph, Literal
 from rdflib.term import Node
 
-from nemik.adapter import NEMIK, OSLC_CM
+from nemik.adapter import BASE, NEMIK, OSLC_CM
 from nemik.blocks import ref
+from nemik.cards import Card
 from nemik.rank import successors
 
 
@@ -81,20 +82,42 @@ def critical(g: Graph, scope: set[str] | None = None) -> Critical:
     """The critical path of the open graph: its length, its zero-slack cards in dependency order,
     and every open card's slack. With `scope` (a set of cites, W333) only those cards count, so the
     path and slack are the longest within a repo, a visible set, or one card's cone."""
-    nodes = _open(g)
+    from nemik.cards import cards
+
+    return critical_cards(cards(g), scope)
+
+
+def _key(cite: str) -> str:
+    # the order the graph version visited cards in (their URIs), so cycle-breaking, which depends on
+    # visiting order, gives the same answer: "a:W1" and "a0:W1" sort differently as cites than as URIs
+    return BASE + cite.replace(":", "/", 1)
+
+
+def critical_cards(by_cite: dict[str, Card], scope: set[str] | None = None) -> Critical:
+    """nemik:W453: `critical` over plain `Card`s, no rdflib: the portable core (W422, W425).
+
+    A card's successors are what it enables and what waits for it, so `y` follows `x` when `x` is in
+    `y.enabled_by` or `y.waits_for`. Open means not done, as the graph version counted it.
+    """
+    nodes = {c for c, card in by_cite.items() if not card.done}
     if scope is not None:
-        nodes = {n for n in nodes if ref(n) in scope}
-    succ = {n: {s for s in successors(g, n) if s in nodes and s != n} for n in nodes}
-    pred: dict[Node, set[Node]] = {n: set() for n in nodes}
+        nodes = {c for c in nodes if c in scope}
+    succ: dict[str, set[str]] = {n: set() for n in nodes}
+    for y in nodes:
+        card = by_cite[y]
+        for x in (*card.enabled_by, *card.waits_for):
+            if x in nodes and x != y:
+                succ[x].add(y)
+    pred: dict[str, set[str]] = {n: set() for n in nodes}
     for n, outs in succ.items():
         for s in outs:
             pred[s].add(n)
 
-    def longest(edges: dict[Node, set[Node]]) -> dict[Node, int]:
-        memo: dict[Node, int] = {}
-        for start in sorted(nodes, key=str):
-            stack: list[tuple[Node, list[Node]]] = [
-                (start, sorted(edges[start], key=str))
+    def longest(edges: dict[str, set[str]]) -> dict[str, int]:
+        memo: dict[str, int] = {}
+        for start in sorted(nodes, key=_key):
+            stack: list[tuple[str, list[str]]] = [
+                (start, sorted(edges[start], key=_key))
             ]
             on_path = {start}
             while stack:
@@ -108,7 +131,7 @@ def critical(g: Graph, scope: set[str] | None = None) -> Critical:
                 if todo:
                     nxt = todo.pop()
                     on_path.add(nxt)
-                    stack.append((nxt, sorted(edges[nxt], key=str)))
+                    stack.append((nxt, sorted(edges[nxt], key=_key)))
                     continue
                 memo[node] = 1 + max(
                     (memo[e] for e in edges[node] if e in memo), default=0
@@ -120,17 +143,17 @@ def critical(g: Graph, scope: set[str] | None = None) -> Critical:
     down, up = longest(succ), longest(pred)
     through = {n: up[n] + down[n] - 1 for n in nodes}
     length = max(through.values(), default=0)
-    slack = {ref(n): length - through[n] for n in nodes}
+    slack = {n: length - through[n] for n in nodes}
     # nemik:W344: the dependency order is a poset, so tied longest chains are alternatives, not a ranking:
     # the critical object is EVERY card on some longest chain (zero slack), graded by its rank (`up`), and
     # by how many longest chains run through it (ways in x ways out). Nothing here depends on sort order
     # except the order the list is displayed in: (rank, cite).
-    ways_in: dict[Node, int] = {}
+    ways_in: dict[str, int] = {}
     for n in sorted(nodes, key=lambda x: up[x]):
         ways_in[n] = (
             1 if up[n] == 1 else sum(ways_in[p] for p in pred[n] if up[p] == up[n] - 1)
         )
-    ways_out: dict[Node, int] = {}
+    ways_out: dict[str, int] = {}
     for n in sorted(nodes, key=lambda x: down[x]):
         ways_out[n] = (
             1
@@ -138,13 +161,13 @@ def critical(g: Graph, scope: set[str] | None = None) -> Critical:
             else sum(ways_out[s] for s in succ[n] if down[s] == down[n] - 1)
         )
     on_longest = [n for n in nodes if through[n] == length]
-    chain = sorted(on_longest, key=lambda n: (up[n], str(n)))
+    chain = sorted(on_longest, key=lambda n: (up[n], _key(n)))
     return Critical(
         length,
-        [ref(n) for n in chain],
+        chain,
         slack,
-        {ref(n): up[n] for n in nodes},
-        {ref(n): ways_in[n] * ways_out[n] for n in on_longest},
+        {n: up[n] for n in nodes},
+        {n: ways_in[n] * ways_out[n] for n in on_longest},
     )
 
 
