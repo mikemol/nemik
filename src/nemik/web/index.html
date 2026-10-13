@@ -134,9 +134,14 @@ const STATE_MARK = { ready: "", working: "▸ ", blocked: "‖ ", done: "√ ", 
 // nemik:W456: what an umbrella's label carries after its symbol, each glyph used in this role only (the
 // roll-up count once reused the working mark: "‖ W503 ▸ 3" read as working). ASCII "+" needs no font.
 const ROLLUP_MARK = " +", EXPANDED_MARK = " ▾";
+// nemik:W477: stored ready, but an open card enables it, so it waits (nemik:W465). ASCII, this role only.
+const BEHIND_MARK = "~ ";
+const stateMark = d => (d.state === "ready" && d.behind_open ? BEHIND_MARK : STATE_MARK[d.state] || "");
 document.getElementById("legend").innerHTML = [...STATES, "other"].map(s =>
   `<span><i class="dot" style="background:${color(s)}"></i>${STATE_MARK[s] || ""}${s}</span>`).join("")
-  + `<span>W1${ROLLUP_MARK}3 umbrella, 3 rolled up</span><span>W1${EXPANDED_MARK} umbrella, expanded</span>`;
+  + `<span>W1${ROLLUP_MARK}3 umbrella, 3 rolled up</span><span>W1${EXPANDED_MARK} umbrella, expanded</span>`
+  + `<span>${BEHIND_MARK}W1 stored ready, but waits on an open card</span>`
+  + `<span>W1 · 4 salience it absorbs; W1 · (4) demand a waiting card carries on to the cards it waits on (salience order)</span>`;
 
 function esc(s) { return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 
@@ -455,6 +460,20 @@ function draw() {
   const actors = [...new Set(waits.filter(e => e.chip).map(e => e.chip))].sort();
   const treemapOn = document.getElementById("treemap").checked;
   const bySal = document.getElementById("bySalience").checked;  // nemik:W261: salience on the label
+  // nemik:W464: a waiting card absorbs no salience (only the frontier does), so its label read blank
+  // though demand runs through it. What it carries is the demand leaving it toward the frontier (its
+  // own plus what passes through), summed once per dependency (one can be drawn as both a waits and
+  // an enables edge). Along a chain it ends equal to what the frontier card absorbs.
+  const through = new Map(), seenDep = new Set();
+  for (const e of data.edges) {
+    if (!e.current || (e.kind !== "waits" && e.kind !== "enables")) continue;
+    const [needs, pre] = e.kind === "waits" ? [e.source, e.target] : [e.target, e.source];
+    if (seenDep.has(needs + " " + pre)) continue;
+    seenDep.add(needs + " " + pre);
+    through.set(needs, (through.get(needs) || 0) + e.current);
+  }
+  const demandLabel = n => !bySal ? "" : n.salience ? ` · ${+n.salience.toFixed(1)}`
+    : through.get(n.id) ? ` · (${+through.get(n.id).toFixed(1)})` : "";
   const repos =treemapOn ? [] : [...new Set(data.nodes.filter(n => keep.has(n.id)).map(n => n.repo))];
   keepOpen = new Set(data.nodes.filter(n => keep.has(n.id) && isOpen(n)).map(n => n.id));
   const ringsOf = ringMap();
@@ -474,7 +493,7 @@ function draw() {
     }),
     ...data.nodes.filter(n => keep.has(n.id)).map(n => {
       const e = n.effort || {}, total = (e.forecast || 0) + (e.interrupt || 0) + (e.unclassified || 0);
-      return { data: { ...n, parent: treemapOn ? undefined : "repo:" + n.repo, label: n.state === "unclaimed" ? `? ${n.for}` : (STATE_MARK[n.state] || "") + n.symbol + (bySal && n.salience ? ` · ${+n.salience.toFixed(1)}` : "")
+      return { data: { ...n, parent: treemapOn ? undefined : "repo:" + n.repo, label: n.state === "unclaimed" ? `? ${n.for}` : stateMark(n) + n.symbol + demandLabel(n)
           + (rolled.has(n.id) ? `${ROLLUP_MARK}${rolled.get(n.id)}` : expanded.has(n.id) ? EXPANDED_MARK : ""),
         rollup: rolled.get(n.id) || 0,
         fill: color(n.state), border: total ? 1 + 6 * (e.interrupt || 0) / total : 1,
@@ -744,7 +763,7 @@ function treemap() {
   cy.batch(() => {
     // nemik:W474: a tile names its card as the graph does: its state mark, and an umbrella's roll-up
     // (+N hidden) or expanded mark, so work folded into a tile is never silently missing.
-    const marked = n => (STATE_MARK[n.data("state")] || "") + n.data("symbol")
+    const marked = n => stateMark(n.data()) + n.data("symbol")
       + (n.data("rollup") ? `${ROLLUP_MARK}${n.data("rollup")}` : expanded.has(n.id()) ? EXPANDED_MARK : "");
     ns.forEach(n => {
       const r = R.get(n.id());

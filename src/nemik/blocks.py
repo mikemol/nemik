@@ -86,6 +86,23 @@ def inbound(g: Graph, letters: bool = False) -> list[dict[str, Any]]:
     return sorted(out, key=lambda b: (b["blocker"], b["blocked"], b["claimed_by"]))
 
 
+def ready_behind_open(g: Graph) -> dict[Node, list[Node]]:
+    """nemik:W465: each ready card an open card enables, with those enablers, leaving out the
+    umbrellas (2+ open children of its own repo) that ReadyUmbrella already reports. A pure reading
+    of the graph, so annotate (the check) and serve (the view's mark, nemik:W477) agree."""
+    out: dict[Node, list[Node]] = {}
+    for node in g.subjects(OSLC_CM.state, NEMIK.Ready):
+        enablers = [
+            c
+            for c in g.subjects(NEMIK.enables, node)
+            if (c, OSLC_CM.state, None) in g and (c, OSLC_CM.state, NEMIK.Done) not in g
+        ]
+        own = [c for c in enablers if _repo(c) == _repo(node)]
+        if enablers and len(own) < 2:
+            out[node] = sorted(enablers, key=str)
+    return out
+
+
 def annotate(g: Graph) -> None:
     """Mark unclaimed blocks, operator blocks by category, and blocks that resolve to no party."""
     # A blocked waypoint whose blocked_on names nothing nemik can resolve (no workstream, waypoint
@@ -134,18 +151,13 @@ def annotate(g: Graph) -> None:
             if len(kids) >= 2:
                 for kid in kids:
                     g.add((node, NEMIK.readyUmbrella, kid))
-            # nemik:W465: the one-enabler case the umbrella rule leaves out (mtools:W1115 sat ready
-            # behind open W1122, W1116 behind W1115). The flow model already treats it as waiting,
-            # so its salience reads blank while its fill says ready: the two disagree.
-            # Ready only, as mtools:W1131's fix: a working card is being done, so it is left alone.
-            elif state == NEMIK.Ready:
-                for c in g.subjects(NEMIK.enables, node):
-                    if (c, OSLC_CM.state, None) in g and (
-                        c,
-                        OSLC_CM.state,
-                        NEMIK.Done,
-                    ) not in g:
-                        g.add((node, NEMIK.readyBehindOpen, c))
+    # nemik:W465: the one-enabler case the umbrella rule leaves out (mtools:W1115 sat ready behind
+    # open W1122, W1116 behind W1115). The flow model already treats it as waiting, so its salience
+    # reads blank while its fill says ready. Ready only, as mtools:W1131's fix: a working card is
+    # being done, so it is left alone.
+    for node, enablers in ready_behind_open(g).items():
+        for c in enablers:
+            g.add((node, NEMIK.readyBehindOpen, c))
 
     # nemik:W177 (operator 2026-10-01): each repo keeps exactly one `working` card unless every open
     # item is blocked. None while something is ready, or several, is the defect; the workstream

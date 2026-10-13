@@ -578,7 +578,9 @@ def test_each_card_state_differs_by_more_than_its_fill(server, scheme) -> None:
         page.check("#showDone")
         page.wait_for_timeout(600)
         prefixes = page.evaluate(
-            "() => { const m = {}; cy.nodes('[symbol]').forEach(n => { const s = n.data('state');"
+            # nemik:W477: a ready card behind an open enabler is drawn as a state of its own ("~ ")
+            "() => { const m = {}; cy.nodes('[symbol]').forEach(n => { const s = n.data('state')"
+            " === 'ready' && n.data('behind_open') ? 'ready-behind-open' : n.data('state');"
             " if (s === 'unclaimed') return; const l = n.data('label'), sym = n.data('symbol');"
             " (m[s] = m[s] || new Set()).add(l.slice(0, l.indexOf(sym))); });"
             " return Object.fromEntries(Object.entries(m).map(([s, v]) => [s, [...v]])); }"
@@ -600,7 +602,9 @@ USE_OF_COLOUR = """() => {
   cy.nodes("[symbol]").forEach(n => {
     // the state mark is the label's leading run before the first letter or digit ("" for ready,
     // "? " for an unclaimed ask, "▸ " for working, ...): a card's symbol or cite starts alphanumeric
-    const s = n.data("state"), label = n.data("label") || "";
+    // nemik:W477: a ready card behind an open enabler is drawn as a state of its own ("~ ")
+    const s = n.data("state") === "ready" && n.data("behind_open") ? "ready-behind-open" : n.data("state");
+    const label = n.data("label") || "";
     (byState[s] = byState[s] || new Set()).add(label.match(/^[^A-Za-z0-9]*/)[0]);
   });
   const prefixes = Object.fromEntries(Object.entries(byState).map(([s, p]) => [s, [...p]]));
@@ -832,6 +836,41 @@ def test_a_cite_link_in_the_panel_selects_its_card_and_announces_it(server) -> N
     assert selected == [target["id"]]
     assert target["cite"] in said and live == "polite"
     assert target["cite"].rsplit(":", 1)[-1] in detail
+
+
+def test_every_card_demand_crosses_carries_a_number(server) -> None:
+    # nemik:W464: only the frontier absorbs salience, so a waiting card's label read blank though
+    # demand ran through it (the operator read that as salience lost). With salience order on, every
+    # drawn card with demand leaving it says how much, in parentheses beside the frontier's number.
+    with sync_api.sync_playwright() as p:
+        exe = os.environ.get("NEMIK_CHROMIUM")
+        try:
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        page.goto(server)
+        page.wait_for_function(
+            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
+            timeout=60000,
+        )
+        page.check("#bySalience")
+        page.wait_for_timeout(1000)
+        bare = page.evaluate(
+            "() => { const carries = new Set(data.edges.filter(e => e.current)"
+            ".map(e => e.kind === 'waits' ? e.source : e.target));"
+            " return cy.nodes('[symbol]').filter(n => n.visible()"
+            " && carries.has(n.id()) && !/ · /.test(n.data('label')))"
+            ".map(n => n.data('label')); }"
+        )
+        carried = page.evaluate(
+            "() => cy.nodes('[symbol]').filter(n => / · \\(/.test(n.data('label'))).length"
+        )
+        browser.close()
+    assert carried > 0, "the fixture fleet has no waiting card with demand to label"
+    assert bare == []
 
 
 def test_a_rolled_up_tile_says_what_it_hides(server) -> None:

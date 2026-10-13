@@ -323,6 +323,14 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
             # nemik:W344: the longest chains through this card (ways in x ways out); 1 = no ties
             item["path_count"] = crit.paths.get(item["cite"], 0)
             item["on_path_repo"] = item["cite"] in repo_chain[item["repo"]]
+    # nemik:W477: a card stored ready while an open card enables it (nemik:W465's finding) is drawn
+    # as waiting: its fill says ready, but the flow model counts it as waiting and gives it no salience.
+    from nemik.blocks import ready_behind_open
+
+    behind = {str(s) for s in ready_behind_open(g)}
+    for item in nodes:
+        if item["id"] in behind:
+            item["behind_open"] = True
     # nemik:W264: the demand that crossed each dependency, summed over the ready repos' solves, as
     # the width the page draws the edge with. A `waits` edge runs waiter -> blocker, an `enables`
     # edge prerequisite -> dependent; the flow names a dependency (needing card, prerequisite).

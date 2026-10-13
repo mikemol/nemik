@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 263
+      "ticks_blocked": 264
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 83,
+      "ticks_blocked": 84,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 85,
+      "ticks_blocked": 86,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T23:37:26Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 112,
+      "ticks_blocked": 113,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 89,
+      "ticks_blocked": 90,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 104,
+      "ticks_blocked": 105,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 104,
+      "ticks_blocked": 105,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 104,
+      "ticks_blocked": 105,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 104,
+      "ticks_blocked": 105,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 104,
+      "ticks_blocked": 105,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 104,
+      "ticks_blocked": 105,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 104,
+      "ticks_blocked": 105,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 104,
+      "ticks_blocked": 105,
       "completed": null
     },
     {
@@ -6426,7 +6426,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T06:56:21Z",
-      "ticks_blocked": 30,
+      "ticks_blocked": 31,
       "completed": null
     },
     {
@@ -6450,7 +6450,7 @@
       "minted_during": "tick",
       "caused_by": "W337",
       "last_worked": "2026-10-13T07:54:43Z",
-      "ticks_blocked": 29,
+      "ticks_blocked": 30,
       "weight": 5,
       "completed": null
     },
@@ -6624,7 +6624,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 79,
+      "ticks_blocked": 80,
       "completed": null
     },
     {
@@ -7032,7 +7032,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -7635,7 +7635,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 40,
+      "ticks_blocked": 41,
       "completed": null
     },
     {
@@ -7659,7 +7659,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 55,
+      "ticks_blocked": 56,
       "completed": null
     },
     {
@@ -7707,7 +7707,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-13T03:46:31Z",
-      "ticks_blocked": 55,
+      "ticks_blocked": 56,
       "completed": null
     },
     {
@@ -7731,7 +7731,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 55,
+      "ticks_blocked": 56,
       "completed": null
     },
     {
@@ -8288,7 +8288,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -8309,7 +8309,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T05:38:02Z",
-      "ticks_blocked": 34,
+      "ticks_blocked": 35,
       "completed": null
     },
     {
@@ -8330,7 +8330,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 36,
+      "ticks_blocked": 37,
       "completed": null
     },
     {
@@ -8594,7 +8594,7 @@
       "minted_during": "tick",
       "caused_by": "W338",
       "last_worked": "2026-10-13T08:13:31Z",
-      "ticks_blocked": 29,
+      "ticks_blocked": 30,
       "completed": null
     },
     {
@@ -8821,7 +8821,7 @@
       "minted_during": "tick",
       "caused_by": "W426",
       "last_worked": "2026-10-13T13:18:45Z",
-      "ticks_blocked": 14,
+      "ticks_blocked": 15,
       "completed": null
     },
     {
@@ -8970,7 +8970,7 @@
       "minted_during": "tick",
       "caused_by": "W458",
       "last_worked": "2026-10-13T19:10:34Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -9011,7 +9011,7 @@
     {
       "symbol": "W462",
       "title": "Card popover on hover after a delay: the Selected panel's fields beside the hovered graph node",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
@@ -9021,9 +9021,10 @@
       "issued_at": "2026-10-13T18:11:02Z",
       "minted_during": "tick",
       "caused_by": "operator",
-      "last_worked": null,
+      "last_worked": "2026-10-13T19:53:13Z",
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 4,
+      "completed": null
     },
     {
       "symbol": "W463",
@@ -9045,26 +9046,27 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T19:10:41Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "weight": 3,
       "completed": null
     },
     {
       "symbol": "W464",
       "title": "Label every open card with the demand passing through it, not only the frontier's absorbed salience",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "index.html:458 shows salience only when nonzero, and only ready cards absorb it (flow model), so blocked cards read blank; show the throughput (sum of edge currents into the card, flow.current, W264) or the cone demand (index.html:789) with a distinct mark, legend entry, and a test that every open card in a solved cone carries a number",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: index.html: with salience order on, a waiting card's label shows ' · (N)', the demand it carries to the cards it waits on (sum of edge currents where it is the needing card, once per dependency); live mtools chain: W1117 (1), W1118 (1), W1116 (3), W1115 (4), W1122 · 4 (conserved); legend row; test_layout::test_every_card_demand_crosses_carries_a_number",
       "issued_at": "2026-10-13T18:15:29Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": null,
+      "last_worked": "2026-10-13T19:53:12Z",
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 4,
+      "completed": "20261013T195312Z"
     },
     {
       "symbol": "W465",
@@ -9283,25 +9285,25 @@
       "minted_during": "tick",
       "caused_by": "W465",
       "last_worked": "2026-10-13T19:16:27Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
       "symbol": "W477",
       "title": "Draw a card stored ready but behind an open enabler as waiting: a mark and a legend entry, from the readyBehindOpen finding",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "serve.py adds behind_open to such nodes; index.html gives them a distinct mark (a glyph present in the gate fonts, used in no other role) and a legend row; test_layout asserts mtools-like chains show it",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: blocks.ready_behind_open(g) is the one reading (annotate and serve both call it); serve publishes behind_open (field-manifest flag); index.html marks such a ready card '~ ' (BEHIND_MARK, ASCII, this role only) in graph and treemap labels, with a legend row; live probe: 88 marked (= check's count), mtools:W1115-W1118 '~', W1122 plain; glyph/legend browser tests pass",
       "issued_at": "2026-10-13T19:14:31Z",
       "minted_during": "tick",
       "caused_by": "W465",
-      "last_worked": "2026-10-13T19:17:18Z",
+      "last_worked": "2026-10-13T19:47:48Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261013T194748Z"
     }
   ],
   "residue": [
@@ -9373,7 +9375,7 @@
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-13T19:11:25Z"
+    "taken_at": "2026-10-13T19:41:34Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []
