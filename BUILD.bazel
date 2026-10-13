@@ -59,5 +59,6 @@ venv_from_hub(
         "nemik-work": "nemik.work:main",
         "nemik-starved": "nemik.starved:main",
         "nemik-pacing": "nemik.pacing:main",
+        "nemik-export": "nemik.mspdi:main",
     },
 )

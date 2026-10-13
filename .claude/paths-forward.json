@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 419,
+  "counter": 420,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 225
+      "ticks_blocked": 226
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 46,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 47,
+      "ticks_blocked": 48,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T23:37:26Z",
-      "ticks_blocked": 77,
+      "ticks_blocked": 78,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 74,
+      "ticks_blocked": 75,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 51,
+      "ticks_blocked": 52,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 66,
+      "ticks_blocked": 67,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 66,
+      "ticks_blocked": 67,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 66,
+      "ticks_blocked": 67,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 66,
+      "ticks_blocked": 67,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 66,
+      "ticks_blocked": 67,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 66,
+      "ticks_blocked": 67,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 66,
+      "ticks_blocked": 67,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 66,
+      "ticks_blocked": 67,
       "completed": null
     },
     {
@@ -6469,7 +6469,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-12T23:18:33Z",
-      "ticks_blocked": 54,
+      "ticks_blocked": 55,
       "weight": 1,
       "completed": null
     },
@@ -6620,7 +6620,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 41,
+      "ticks_blocked": 42,
       "completed": null
     },
     {
@@ -7017,7 +7017,6 @@
         "positioning"
       ],
       "blocked_on": [
-        "W365",
         "W366",
         "W367",
         "W368",
@@ -7031,13 +7030,13 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 47,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
       "symbol": "W365",
       "title": "Export to MS Project XML (MSPDI): cards as tasks, blocked_on as predecessors",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W364"
       ],
@@ -7046,20 +7045,20 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "nemik-export --mspdi [repo...]: tasks with outline levels from umbrellas, finish-to-start links from the dependency edges, no durations (marked estimated). Round-trip check by opening the file in GanttProject and ProjectLibre (both open-source desktop tools that read MS Project XML; the earlier 'LibreProject' was a misnaming of ProjectLibre). Adoption angle: these are the open-source homes of people who come from MS Project, so a clean import there is a way in; OpenProject (web, with a REST API) is the candidate for the W369 connector side. Verify each tool's actual import support before claiming it in docs.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: src/nemik/mspdi.py write/read over nemik.projection; nemik-export [--repo R] prints MSPDI. PredecessorLink Type 1 (FS); cross-repo predecessor = CrossProject 1 + CrossProjectName <repo>\\<cite>; cite in task Text1 (FieldID 188743731, verified on Microsoft Learn FieldID Element). tests/test_mspdi.py: fleet and one-repo exports read back equal to the projection, every link FS, CrossProject present for cross-repo. Live: nemik-export --repo nemik wrote 764 Task/PredecessorLink/CrossProject elements. Not yet opened in MS Project/ProjectLibre/GanttProject: no such tool on this host.",
       "issued_at": "2026-10-12T01:31:59Z",
       "minted_during": "interrupt",
       "caused_by": "W364",
-      "last_worked": "2026-10-13T00:11:23Z",
+      "last_worked": "2026-10-13T00:13:18Z",
       "ticks_blocked": 0,
       "weight": 5,
-      "completed": null
+      "completed": "20261013T001318Z"
     },
     {
       "symbol": "W366",
       "title": "Export to issue trackers: Jira CSV and GitHub/Forgejo issue JSON, as a read-only mirror",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W364"
       ],
@@ -7073,9 +7072,10 @@
       "issued_at": "2026-10-12T01:32:03Z",
       "minted_during": "interrupt",
       "caused_by": "W364",
-      "last_worked": null,
+      "last_worked": "2026-10-13T00:13:25Z",
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 5,
+      "completed": null
     },
     {
       "symbol": "W367",
@@ -7628,7 +7628,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null
     },
     {
@@ -7652,7 +7652,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -7700,7 +7700,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T18:43:02Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -7724,7 +7724,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -8225,6 +8225,22 @@
       "last_worked": "2026-10-12T23:00:03Z",
       "ticks_blocked": 0,
       "completed": "20261012T230003Z"
+    },
+    {
+      "symbol": "W420",
+      "title": "Load nemik-export output in a real reader (MPXJ, ProjectLibre or GanttProject) and pin that it opens with its links",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "MPXJ reads MSPDI headless (survey: MPXJ bound confirmed); a hermetic test that runs it over the fixture export is the cheapest real-reader check",
+      "evidence": "",
+      "issued_at": "2026-10-13T00:13:24Z",
+      "minted_during": "tick",
+      "caused_by": "W365",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
