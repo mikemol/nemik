@@ -577,6 +577,74 @@ def test_each_card_state_differs_by_more_than_its_fill(server) -> None:
     assert len(set(marks)) == len(marks), prefixes
 
 
+USE_OF_COLOUR = """() => {
+  // nemik:W429: el-openglo's use-of-colour cases (policy/use_of_colour.rego's input), measured from
+  // what the page RENDERS, not from its style tables. Every meaning carries hue; a cue counts only
+  // when it is rendered and tells this meaning apart from its siblings.
+  const cases = [];
+  const byState = {};
+  cy.nodes("[symbol]").forEach(n => {
+    // the state mark is the label's leading run before the first letter or digit ("" for ready,
+    // "? " for an unclaimed ask, "▸ " for working, ...): a card's symbol or cite starts alphanumeric
+    const s = n.data("state"), label = n.data("label") || "";
+    (byState[s] = byState[s] || new Set()).add(label.match(/^[^A-Za-z0-9]*/)[0]);
+  });
+  const prefixes = Object.fromEntries(Object.entries(byState).map(([s, p]) => [s, [...p]]));
+  for (const [s, p] of Object.entries(prefixes)) {
+    const mine = p.length === 1 ? p[0] : null;
+    const others = Object.entries(prefixes).filter(([t]) => t !== s).flatMap(([, q]) => q);
+    const distinct = mine !== null && !others.includes(mine);
+    cases.push({ id: "card-state-" + s, file: "index.html", line: 0, meaning: "card is " + s,
+                 colour: [{ kind: "hue" }], cues: distinct ? [{ kind: "text" }] : [] });
+  }
+  const dashes = SCOPES.map(scopeDash);
+  SCOPES.forEach((s, i) => {
+    const own = dashes[i] && dashes.indexOf(dashes[i]) === i;
+    cases.push({ id: "scope-ring-" + s.id, file: "index.html", line: 0, meaning: s.label,
+                 colour: [{ kind: "hue" }], cues: own ? [{ kind: "stroke" }] : [] });
+  });
+  const waits = cy.edges(".waits");
+  if (waits.length)
+    cases.push({ id: "wait-line", file: "index.html", line: 0, meaning: "waits on its target",
+                 colour: [{ kind: "hue" }],
+                 cues: waits.every(e => (e.data("dash") || []).length) ? [{ kind: "stroke" }] : [] });
+  return { cases, withheld: [] };
+}"""
+
+
+def test_every_meaning_the_view_colours_has_a_second_channel(server, tmp_path) -> None:
+    # nemik:W429/W431: the measurement above, evaluated with el-openglo's pinned requirement
+    # (W430, policy/use_of_colour.rego) by the pinned opa: no denial, and something admitted.
+    import json
+    import shutil
+
+    rego = os.environ.get("NEMIK_USE_OF_COLOUR_REGO")
+    opa = shutil.which(os.environ.get("NEMIK_OPA", "opa"))
+    if not rego or not opa:
+        pytest.skip("pinned rego or opa unavailable (run under bazel)")
+    with sync_api.sync_playwright() as p:
+        exe = os.environ.get("NEMIK_CHROMIUM")
+        try:
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        page.goto(server)
+        page.wait_for_selector("#pathkey line", state="attached")
+        measured = page.evaluate(USE_OF_COLOUR)
+        browser.close()
+    data = tmp_path / "input.json"
+    data.write_text(json.dumps(measured))
+    query = "data.el.use_of_colour"
+    cmd = [opa, "eval", "-f", "json", "-d", rego, "-i", str(data), query]
+    out = subprocess.run(cmd, capture_output=True, text=True, check=True)
+    verdict = json.loads(out.stdout)["result"][0]["expressions"][0]["value"]
+    assert verdict["deny"] == [], verdict["deny"]
+    assert len(verdict["admitted"]) == len(measured["cases"]) >= 5
+
+
 def test_a_static_build_refetches_only_the_pieces_whose_hash_moved(tmp_path) -> None:
     # nemik:W416: the page reads graph.json's pieces by hashes.json, draws the same graph, and on a
     # refresh fetches only the piece whose hash changed.

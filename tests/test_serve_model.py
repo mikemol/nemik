@@ -44,7 +44,9 @@ def test_concurrent_refresh_rebuilds_once(tmp_path: Path) -> None:
         for t in threads:
             t.start()
         for t in threads:
-            t.join(timeout=2)
+            # a cap, not an expectation: at host load ~100 one rebuild outlasted a 2 s join and the
+            # assertion read 0 rebuilds that were still running (nemik:W339's gate, 2026-10-13)
+            t.join(timeout=120)
 
     assert model.rebuilds == 1, f"expected exactly one rebuild, got {model.rebuilds}"
 

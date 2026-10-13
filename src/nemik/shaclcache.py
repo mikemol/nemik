@@ -12,14 +12,23 @@ base and namespaces are seen.
 
 The patch is scoped: it lives for the `with` block and the originals are restored on exit, so nothing
 outside a survey sees it.
+
+The block holds a process-wide lock (reentrant, so a nested block is fine). Two threads in it at once
+broke both halves (test_serve_model, 2026-10-13, under host load): the second entrant saved the first
+one's patch as "the originals" and re-installed it for good on exit, and pyparsing, which rdflib parses
+SPARQL with, is not thread-safe (its parse-action arity detection is shared state). One survey at a
+time is what nemik-serve's Model asks for anyway.
 """
 
 from __future__ import annotations
 
+import threading
 from contextlib import contextmanager
 from typing import TYPE_CHECKING, Any
 
 from rdflib.plugins.sparql import processor
+
+_LOCK = threading.RLock()
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
@@ -41,22 +50,27 @@ def cached_sparql_parse() -> Iterator[None]:
 
     """
     module = vars(processor)
-    parse, translate = module["parseQuery"], module["translateQuery"]
     queries: dict[tuple[str, Any, str], Any] = {}
 
     def lazy(text: str) -> _Text:
         return _Text(text)
 
-    def cached(tree: Any, base: Any = None, init_ns: Any = None) -> Any:
-        if not isinstance(tree, _Text):
-            return translate(tree, base, init_ns)
-        key = (tree.text, base, repr(sorted((init_ns or {}).items(), key=str)))
-        if key not in queries:
-            queries[key] = translate(parse(tree.text), base, init_ns)
-        return queries[key]
+    # The originals are read under the lock: read before it, a second thread would save the first
+    # thread's patch as the originals. A nested block in the same thread saves and restores the
+    # outer patch, which still parses and translates correctly.
+    with _LOCK:
+        parse, translate = module["parseQuery"], module["translateQuery"]
 
-    module["parseQuery"], module["translateQuery"] = lazy, cached
-    try:
-        yield
-    finally:
-        module["parseQuery"], module["translateQuery"] = parse, translate
+        def cached(tree: Any, base: Any = None, init_ns: Any = None) -> Any:
+            if not isinstance(tree, _Text):
+                return translate(tree, base, init_ns)
+            key = (tree.text, base, repr(sorted((init_ns or {}).items(), key=str)))
+            if key not in queries:
+                queries[key] = translate(parse(tree.text), base, init_ns)
+            return queries[key]
+
+        module["parseQuery"], module["translateQuery"] = lazy, cached
+        try:
+            yield
+        finally:
+            module["parseQuery"], module["translateQuery"] = parse, translate

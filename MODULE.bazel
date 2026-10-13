@@ -78,6 +78,15 @@ http_file(
     downloaded_file_path = "opa",
 )
 
+# nemik:W430: el-openglo's use-of-colour requirement (el-openglo:W72, WCAG 1.4.1), pinned at the commit
+# that last changed it, never copied: the view's measurement (W429) is evaluated against it (W431).
+http_file(
+    name = "use_of_colour_rego",
+    url = "https://raw.githubusercontent.com/mikemol/el-openglo/3f2bc1276cf3fffa28e6d747aef78e4377244ce4/policy/use_of_colour.rego",
+    sha256 = "f1260f5c4b0a2d8ad6e015a40c2dee72da27a75ef9c095d5bbf1fe8c960d985a",
+    downloaded_file_path = "use_of_colour.rego",
+)
+
 # nemik:W99: the render test's headless Chromium as a hashed input (Playwright's own build of
 # chromium_headless_shell-1243, the revision the pinned playwright wheel expects), not ~/.cache.
 http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
