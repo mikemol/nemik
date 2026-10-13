@@ -9278,20 +9278,18 @@
     {
       "symbol": "W476",
       "title": "Ask mtools: --bump-blocked (or a --block-behind-open mode) sets a ready card blocked on its one open enabler, so ReadyBehindOpen fixes itself",
-      "status": "blocked",
+      "status": "ready",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "mtools:W1131"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "letter to mtools citing nemik:W465 with the 88-card count and the paperkit W145-W200 chain; once it ships and the fleet count falls, raise ReadyBehindOpenShape from Info to Warning",
-      "evidence": "2026-10-13: 2026-10-13 asked mtools (session mtools-c9) to mint the mode and cite nemik:W476; Info until the fleet count falls | 2026-10-13: mtools carded it as mtools:W1131: --block-behind-open [--write], ready cards only, open enablers only, behind mtools:W1130",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "repin the mtools wheels to 3ded8d1 (tools/revendor-mtools.sh 3ded8d1 c47d50b), run --block-behind-open --write on nemik's queue, tell paperkit its 55-card chain is one --write once it repins; raise ReadyBehindOpen to Warning when the fleet count falls",
+      "evidence": "2026-10-13: 2026-10-13 asked mtools (session mtools-c9) to mint the mode and cite nemik:W476; Info until the fleet count falls | 2026-10-13: mtools carded it as mtools:W1131: --block-behind-open [--write], ready cards only, open enablers only, behind mtools:W1130 | 2026-10-13: mtools:W1131 landed mtools 3ded8d1: --block-behind-open [--write], ready cards, open LOCAL enablers only; mtools' own count fell 9 -> 1 (W833's enabler is cross-repo: mtools:W1133)",
       "issued_at": "2026-10-13T19:14:02Z",
       "minted_during": "tick",
       "caused_by": "W465",
-      "last_worked": "2026-10-13T19:16:27Z",
-      "ticks_blocked": 2,
+      "last_worked": "2026-10-13T21:14:46Z",
+      "ticks_blocked": 0,
       "completed": null
     },
     {
