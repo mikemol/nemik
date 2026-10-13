@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 482,
+  "counter": 484,
   "waypoints": [
     {
       "symbol": "W1",
@@ -7127,7 +7127,7 @@
     {
       "symbol": "W369",
       "title": "Outbound connectors: mirror cards to Jira, GitHub/Forgejo issues and Project Online via their APIs",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W364"
       ],
@@ -7135,8 +7135,10 @@
         "interop",
         "api"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W371"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "one-way, idempotent mirror keyed by cite (create, update, close); a dry run prints the calls; each tool's credential is an operator act (operator: act give a scoped token) filed per tool when its connector is ready, never used before it is given; reuses the W366 mapping",
       "evidence": "",
       "issued_at": "2026-10-12T01:34:02Z",
@@ -7148,7 +7150,7 @@
     {
       "symbol": "W370",
       "title": "Inbound connectors: webhooks or polls from other tools become letters or printed commands",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W364"
       ],
@@ -7157,8 +7159,10 @@
         "api",
         "letters"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W371"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "a Jira/GitHub/Forgejo event (new issue, comment, close) lands as a letter in the owning repo's inbox, or as printed --add/--update lines, never a queue write; letters then fold into waypoints as today; W188 (Google Tasks, read-only token pending) is the first instance",
       "evidence": "",
       "issued_at": "2026-10-12T01:34:05Z",
@@ -9129,7 +9133,6 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W478",
         "W479",
         "W480",
         "W481"
@@ -9278,17 +9281,17 @@
     {
       "symbol": "W476",
       "title": "Ask mtools: --bump-blocked (or a --block-behind-open mode) sets a ready card blocked on its one open enabler, so ReadyBehindOpen fixes itself",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "repin the mtools wheels to 3ded8d1 (tools/revendor-mtools.sh 3ded8d1 c47d50b), run --block-behind-open --write on nemik's queue, tell paperkit its 55-card chain is one --write once it repins; raise ReadyBehindOpen to Warning when the fleet count falls",
-      "evidence": "2026-10-13: 2026-10-13 asked mtools (session mtools-c9) to mint the mode and cite nemik:W476; Info until the fleet count falls | 2026-10-13: mtools carded it as mtools:W1131: --block-behind-open [--write], ready cards only, open enablers only, behind mtools:W1130 | 2026-10-13: mtools:W1131 landed mtools 3ded8d1: --block-behind-open [--write], ready cards, open LOCAL enablers only; mtools' own count fell 9 -> 1 (W833's enabler is cross-repo: mtools:W1133)",
+      "next_bounded_step": "when W1134 lands: tell paperkit; repin past it (with W483's repin); then raise ReadyBehindOpen to Warning once the fleet count falls",
+      "evidence": "2026-10-13: 2026-10-13 asked mtools (session mtools-c9) to mint the mode and cite nemik:W476; Info until the fleet count falls | 2026-10-13: mtools carded it as mtools:W1131: --block-behind-open [--write], ready cards only, open enablers only, behind mtools:W1130 | 2026-10-13: mtools:W1131 landed mtools 3ded8d1: --block-behind-open [--write], ready cards, open LOCAL enablers only; mtools' own count fell 9 -> 1 (W833's enabler is cross-repo: mtools:W1133) | 2026-10-13: repinned to 3ded8d1; nemik's own queue: BLOCKED W369 and W370 on W371 (the connector contract, a real prerequisite); paperkit (55-card chain) told by message; mtools 9 -> 1 | 2026-10-13: 2026-10-13 mtools: 3ded8d1's --block-behind-open deadlocks a ring of 3+ ready cards (blocks each on the next); fixed by mtools:W1134 (keeps rings), not yet on mtools main. nemik's own run blocked only W369/W370 on W371 (no ring). paperkit told to dry-run and wait for W1134 before --write",
       "issued_at": "2026-10-13T19:14:02Z",
       "minted_during": "tick",
       "caused_by": "W465",
-      "last_worked": "2026-10-13T21:14:46Z",
+      "last_worked": "2026-10-13T21:46:55Z",
       "ticks_blocked": 0,
       "completed": null
     },
@@ -9331,7 +9334,7 @@
     {
       "symbol": "W479",
       "title": "Nav pane step 2: the focused row's card is highlighted on the canvas and opens the W462 popover beside it",
-      "status": "working",
+      "status": "ready",
       "enables": [
         "W468"
       ],
@@ -9343,7 +9346,7 @@
       "issued_at": "2026-10-13T20:15:30Z",
       "minted_during": "tick",
       "caused_by": "W468",
-      "last_worked": "2026-10-13T20:17:32Z",
+      "last_worked": "2026-10-13T21:31:13Z",
       "ticks_blocked": 0,
       "completed": null
     },
@@ -9399,6 +9402,43 @@
       "last_worked": "2026-10-13T20:54:34Z",
       "ticks_blocked": 0,
       "completed": "20261013T205434Z"
+    },
+    {
+      "symbol": "W483",
+      "title": "rank's frontier reads through mtools' shared walker (mikemol.frontier.walk, mtools:W1127): stored-state open test as the realized predicate, every ranking test unchanged",
+      "status": "ready",
+      "enables": [
+        "W461"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "repin to 39835b8 (adding the frontier dist); ask luthen-observability to move the par; rank.frontier through frontier(nodes, edges, realized=done); an agreement test over every fixture against the old _open; the existing rank and frontier tests unmodified",
+      "evidence": "2026-10-13: 2026-10-13 github-8f: (1) the fleet par (luthen-observability/repin_par.txt) is f04f0a2; nemik is already ahead of it (c47d50b, then 3ded8d1); going to 39835b8 for the frontier dist means asking luthen-observability, with a card, to move the par so the fleet does not drift. (2) the predicate: realized(n) = the stored state is done (oslc_cm:state nemik:Done); the old open test is stored-state present and not done (rank.py:203); the test must prove the walker's ready and realized agree with the old _open on every existing fixture",
+      "issued_at": "2026-10-13T21:33:07Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-8f",
+      "last_worked": "2026-10-13T21:34:34Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W484",
+      "title": "nemik-check names each enabling cycle ('W1 -> W2 -> W3 -> W1') instead of showing its members as ready or blocked",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "W483"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "after W483's repin: read cycles from mikemol.frontier.walk.frontier(...).cycles (each named once from its earliest node, among unrealized nodes) over the fleet graph; a shape (Warning: a ring cannot land) carrying the named cycle on its earliest member; compare against the frontier dist's tests; the view rings it too",
+      "evidence": "",
+      "issued_at": "2026-10-13T21:46:54Z",
+      "minted_during": "interrupt",
+      "caused_by": "mtools:W1134",
+      "last_worked": "2026-10-13T21:46:56Z",
+      "ticks_blocked": 0,
+      "completed": null
     }
   ],
   "residue": [
