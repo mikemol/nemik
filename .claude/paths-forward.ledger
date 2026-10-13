@@ -768,3 +768,5 @@
 2026-10-13T19:14:31Z  tick  W477 minted    -         "Draw a card stored ready but behind an open enabler as waiting: a mark and a legend entry, from the readyBehindOpen finding"  evidence=W465
 2026-10-13T19:36:41Z  tick  W465 advanced  unblock   "9bf27e8 [PUSHED, ls-remote]: W465 ReadyBehindOpen (Info, ready only, 88 fleet-wide; skill row; no-versioned-schema claim names Info staging) + W475 test-input guard; W476 blocked on mtools:W1131 (--block-behind-open); W477 working"
 2026-10-13T19:42:54Z  nudge W476 nudged    -         "mtools:W1131 accepted 2026-10-13 and promised a message when W1130 lands; not re-messaged within the hour"
+2026-10-13T20:10:05Z  tick  W477 advanced  unblock   "bbe82e2 [PUSHED, ls-remote]: W477 ready-behind-open drawn as its own state '~' (88 live, one reading with the check; a11y tests key on the displayed state) + W464 waiting cards show carried demand ' · (N)', conserved; W462 working"
+2026-10-13T20:12:54Z  nudge W476 nudged    -         "mtools:W1131 is working in mtools (seen by --prune-landed); no message needed"

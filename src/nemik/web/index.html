@@ -44,6 +44,11 @@ main { display: grid; grid-template-columns: 1fr 340px; height: calc(100vh - var
 #cy { min-height: 400px; }
 aside { border-left: 1px solid var(--line); background: var(--panel); overflow: auto; padding: 12px 16px; }
 aside h2 { font-size: 14px; margin: 16px 0 6px; }
+/* nemik:W462: the card popover on hover, the Selected panel's rows beside the card */
+#pop { position: fixed; z-index: 10; max-width: 360px; max-height: 60vh; overflow: auto; padding: 8px 12px;
+  background: var(--panel); color: var(--ink); border: 1px solid var(--line); border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3); font-size: 12px; }
+#pop[hidden] { display: none; }
 /* nemik:W473: read by a screen reader, not drawn */
 .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 aside details.sec > summary { font-size: 14px; font-weight: 600; margin: 16px 0 6px; cursor: pointer; }
@@ -84,6 +89,7 @@ aside a { color: var(--ink); text-decoration: underline dotted var(--muted); }
 </header>
 <main>
   <div id="cy"></div>
+  <div id="pop" role="tooltip" hidden></div>
   <aside>
     <!-- nemik:W387: every panel section folds (details/summary: keyboard-operable, announced as
          expandable); which are open is remembered per viewer. -->
@@ -630,6 +636,12 @@ function draw() {
   };
   cy.on("mouseover", "node", ev => ev.target.connectedEdges(".cross").addClass("lit"));
   cy.on("mouseout", "node", light);
+  // nemik:W462: the card popover, the hovercard convention: it opens after a 500 ms rest, stays while
+  // the pointer is on the card or on the popover, closes 300 ms after it leaves both, and Esc
+  // dismisses it (WCAG 1.4.13: dismissible, hoverable, persistent).
+  cy.on("mouseover", "node[symbol]", ev => popSoon(ev.target));
+  cy.on("mouseout", "node[symbol]", () => popLater());
+  cy.on("pan zoom", () => popHide());
   cy.on("select unselect", "node", light);
   light();
   cy.on("tap", "node[symbol]", ev => selectCard(ev.target.id()));
@@ -1062,10 +1074,35 @@ function lane(cat) {
   document.getElementById("detail").innerHTML = `<p class="stat">${esc(help)}</p><dl>${rows.join("")}</dl>`;
 }
 
-function detail(n) {
+function detail(n) { document.getElementById("detail").innerHTML = detailHTML(n); }
+const POP_OPEN_MS = 500, POP_CLOSE_MS = 300;
+let popOpen = null, popClose = null;
+function popSoon(el) {
+  clearTimeout(popClose); clearTimeout(popOpen);
+  popOpen = setTimeout(() => popShow(el), POP_OPEN_MS);
+}
+function popShow(el) {
+  const pop = document.getElementById("pop"), box = document.getElementById("cy").getBoundingClientRect();
+  const bb = el.renderedBoundingBox();
+  pop.innerHTML = detailHTML(el.data());
+  pop.hidden = false;
+  // beside the card, kept inside the window
+  const x = Math.min(box.left + bb.x2 + 8, window.innerWidth - pop.offsetWidth - 8);
+  const y = Math.min(box.top + bb.y1, window.innerHeight - pop.offsetHeight - 8);
+  pop.style.left = Math.max(8, x) + "px"; pop.style.top = Math.max(8, y) + "px";
+}
+function popLater() { clearTimeout(popOpen); clearTimeout(popClose); popClose = setTimeout(popHide, POP_CLOSE_MS); }
+function popHide() { clearTimeout(popOpen); clearTimeout(popClose); document.getElementById("pop").hidden = true; }
+document.getElementById("pop").addEventListener("mouseenter", () => clearTimeout(popClose));
+// a pointer leaving the canvas from a card fires no cytoscape mouseout, so the canvas says so itself
+document.getElementById("cy").addEventListener("mouseleave", popLater);
+document.getElementById("pop").addEventListener("mouseleave", popLater);
+document.addEventListener("keydown", ev => { if (ev.key === "Escape") popHide(); });
+// nemik:W462: the Selected panel's rows, also shown by the hover popover, from one source
+function detailHTML(n) {
   const e = n.effort || {};
   if (n.state === "unclaimed") {
-    document.getElementById("detail").innerHTML = `<dl>
+    return `<dl>
       <dt>waiting</dt><dd>${citeLink(n.for)} is blocked on <b>${esc(n.repo)}</b></dd>
       <dt>blocked on</dt><dd>${linked(n.blocked_on.join(", "), n.for.split(":")[0])}</dd>
       <dt>claimed by</dt><dd>nothing yet</dd></dl>
@@ -1073,10 +1110,9 @@ function detail(n) {
       <code>--enables</code> ${citeLink(n.for)}, or the blocked side writes that waypoint as
       <code>${esc(n.repo)}:W&lt;n&gt;</code> in blocked_on. ${esc(n.repo)}'s agent can list these with
       <code>nemik-inbound ${esc(n.repo)}</code> or <code>/inbound/${esc(n.repo)}</code>.</p>`;
-    return;
   }
   const inb = (data.inbound || []).filter(b => b.claimed_by.includes(n.cite) || b.blocked === n.cite);
-  document.getElementById("detail").innerHTML = `<dl>
+  return `<dl>
     <dt>cite as</dt><dd>${citeLink(n.cite)}</dd>
     <dt>title</dt><dd>${linked(n.title)}</dd>
     <dt>state</dt><dd>${esc(n.state)}</dd>

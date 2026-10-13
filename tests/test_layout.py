@@ -838,6 +838,59 @@ def test_a_cite_link_in_the_panel_selects_its_card_and_announces_it(server) -> N
     assert target["cite"].rsplit(":", 1)[-1] in detail
 
 
+def test_the_card_popover_follows_the_hovercard_rules(server) -> None:
+    # nemik:W462 (operator 2026-10-13: the card view as a popover on hover plus delay). WCAG 1.4.13:
+    # not before the delay, hoverable (the pointer may move onto it), dismissible (Esc), and gone
+    # once the pointer leaves both the card and the popover.
+    with sync_api.sync_playwright() as p:
+        exe = os.environ.get("NEMIK_CHROMIUM")
+        try:
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        page.goto(server)
+        page.wait_for_function(
+            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
+            timeout=60000,
+        )
+        page.wait_for_timeout(800)
+        card = page.evaluate(
+            "() => { const n = cy.nodes('[symbol]').filter(n => n.visible()"
+            " && n.data('state') !== 'unclaimed').first();"
+            " const r = document.getElementById('cy').getBoundingClientRect(),"
+            " p = n.renderedPosition();"
+            " return { x: r.left + p.x, y: r.top + p.y, cite: n.data('cite') }; }"
+        )
+        hidden = "() => document.getElementById('pop').hidden"
+        page.mouse.move(card["x"], card["y"])
+        page.wait_for_timeout(150)
+        early = page.evaluate(hidden)
+        page.wait_for_timeout(600)
+        shown = not page.evaluate(hidden)
+        text = page.inner_text("#pop")
+        box = page.locator("#pop").bounding_box()
+        assert box is not None
+        page.mouse.move(box["x"] + 10, box["y"] + 10, steps=4)
+        page.wait_for_timeout(500)
+        kept = not page.evaluate(hidden)
+        page.keyboard.press("Escape")
+        dismissed = page.evaluate(hidden)
+        page.mouse.move(card["x"], card["y"])
+        page.wait_for_timeout(700)
+        page.mouse.move(5, 5)
+        page.wait_for_timeout(500)
+        left = page.evaluate(hidden)
+        browser.close()
+    assert early, "the popover opened before its delay"
+    assert shown and card["cite"] in text
+    assert kept, "the popover closed when the pointer moved onto it"
+    assert dismissed, "Esc did not dismiss the popover"
+    assert left, "the popover stayed after the pointer left"
+
+
 def test_every_card_demand_crosses_carries_a_number(server) -> None:
     # nemik:W464: only the frontier absorbs salience, so a waiting card's label read blank though
     # demand ran through it (the operator read that as salience lost). With salience order on, every
