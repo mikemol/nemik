@@ -744,3 +744,7 @@
 2026-10-13T16:58:33Z  tick  W453 advanced  unblock   "W453 critical_cards: the critical path over plain Cards, equal to the graph version on all 17 live scopes; deploy healthy (in flight, 2 behind); W454 health over Cards working"
 2026-10-13T17:29:14Z  tick  W457 minted    -         "Repin mtools pathsforward+hooks to c47d50b (tick-close prunes landed local blockers)"  evidence=mtools:W1112
 2026-10-13T17:29:17Z  tick  W454 advanced  collapse  "W454+W425 landed 14cd546 [PUSHED]: health over Cards; W457 repin queued; W352 working"
+2026-10-13T17:44:47Z  tick  W458 minted    -         "OperatorActShape: an operator-act block with no runnable command and no done-when is an unwritten tool"  evidence=github-8f
+2026-10-13T17:49:16Z  tick  W459 minted    -         "OperatorActShape escalates Warning to Violation after N ticks, N learned from ledger history"  evidence=W458
+2026-10-13T17:49:17Z  tick  W460 minted    -         "MACHINE_ACT misreads errands: 'apply' in 'apply for Medicaid' and 'drill session' flag life:W26 and life:W7 as unwritten tools"  evidence=W458
+2026-10-13T18:03:04Z  tick  W461 minted    -         "Apply resources as nemik nodes: read luthen's host root published as a queue-shaped document, read-only, in nemik-serve"  evidence=luthen-observability:W943

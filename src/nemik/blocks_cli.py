@@ -102,7 +102,9 @@ def operator_main(argv: list[str] | None = None, g: Graph | None = None) -> None
         return
     for cat in CATEGORIES:
         rows = [a for a in asks if a["category"] == cat]
-        print(f"\n{cat} ({len(rows)}), heaviest first")
+        # nemik:W458: an act ask with nothing to run is the owner's debt, not the operator's.
+        label = "no command yet: the owner owes a tool" if cat == "no-command" else cat
+        print(f"\n{label} ({len(rows)}), heaviest first")
         for a in rows:
             dup = f"  same ask as {', '.join(a['same_ask'])}" if a["same_ask"] else ""
             behind = f"  <- {', '.join(a['waiting'])}" if a["waiting"] else ""

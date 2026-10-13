@@ -87,7 +87,10 @@ nemik:OperatorAskShape a sh:NodeShape ;
     sh:property [ sh:path nemik:operatorAsk ; sh:not [ sh:in ( "unstated" ) ] ; sh:severity sh:Warning ;
                   sh:message "blocked on the operator with no stated ask: write blocked_on as 'operator: decide <question>' or 'operator: act <what only the operator can do>'" ] ;
     sh:property [ sh:path nemik:operatorAsk ; sh:not [ sh:in ( "answered" ) ] ; sh:severity sh:Warning ;
-                  sh:message "blocked on the operator, but blocked_on records the operator's answer already: lift the block, or re-file it against the condition it waits on" ] .
+                  sh:message "blocked on the operator, but blocked_on records the operator's answer already: lift the block, or re-file it against the condition it waits on" ] ;
+    # nemik:W458 (OperatorActShape): an act ask with no command in the standard shape is an unwritten tool.
+    sh:property [ sh:path nemik:operatorAsk ; sh:not [ sh:in ( "no-command" ) ] ; sh:severity sh:Warning ;
+                  sh:message "blocked on 'operator: act' with nothing to run: put the verbatim command (env -C <repo> <abs interpreter> -m <module> ..., or sudo <abs path>|env -C ...), its expected output and when it is done into blocked_on; until then the owner owes a tool" ] .
 
 # Blocked on another workstream's umbrella rather than on the child step doing the work (W41).
 nemik:UmbrellaBlockShape a sh:NodeShape ;

@@ -216,11 +216,32 @@ BARE = re.compile(
     r"^\s*(the\s+)?(operator|user|mikemol|mike|human)\s*(\(\w+\))?\s*$", re.IGNORECASE
 )
 
-CATEGORIES = ("needs-you", "answered", "condition", "unstated")
+# nemik:W458 (github-8f, luthen-observability:W69 stood 93 ticks as "operator: act the host-root sudo
+# applies" with nothing to run): an act ask carries the command in a standard shape, an
+# `env -C <repo> <abs interpreter> -m <module>` line or a sudo-prefixed one. Without it the owner
+# still owes the tool, and the ask is not the operator's yet.
+COMMAND = re.compile(
+    r"\benv\s+-C\s+\S+\s+/\S+\s+-m\s+\S+"
+    r"|\bsudo\s+(?:-\S+\s+)*(?:/\S+|env\s+-C\b|systemctl\s+\w|python[\d.]*\s+-m\s+\S)"
+)
+# Only an act on a machine owes a command: "bring to orientation" or "check Gmail" is the
+# operator's own errand, not an unwritten tool.
+MACHINE_ACT = re.compile(
+    r"\b(sudo|root|run|apply|applies|command|install|systemctl|reaper|restore|drill)\b",
+    re.IGNORECASE,
+)
+
+CATEGORIES = ("needs-you", "no-command", "answered", "condition", "unstated")
 
 
 def operator_category(text: str) -> str:
-    if EXPLICIT.match(text):
+    if m := EXPLICIT.match(text):
+        if (
+            m[1].lower() == "act"
+            and MACHINE_ACT.search(text)
+            and not COMMAND.search(text)
+        ):
+            return "no-command"
         return "needs-you"
     if ANSWERED.search(text):
         return "answered"
@@ -320,7 +341,9 @@ def _operator_asks(g: Graph) -> list[dict[str, Any]]:
         cats = [operator_category(t) for t in texts] or ["unstated"]
         # the most actionable reading wins across several blocked_on values
         cat = next(
-            c for c in ("needs-you", "unstated", "condition", "answered") if c in cats
+            c
+            for c in ("needs-you", "no-command", "unstated", "condition", "answered")
+            if c in cats
         )
         out.append(
             {

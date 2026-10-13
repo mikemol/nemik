@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 457,
+  "counter": 461,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 260
+      "ticks_blocked": 261
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 80,
+      "ticks_blocked": 81,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 82,
+      "ticks_blocked": 83,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T23:37:26Z",
-      "ticks_blocked": 112,
+      "ticks_blocked": 113,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 109,
+      "ticks_blocked": 110,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 86,
+      "ticks_blocked": 87,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 101,
+      "ticks_blocked": 102,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 101,
+      "ticks_blocked": 102,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 101,
+      "ticks_blocked": 102,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 101,
+      "ticks_blocked": 102,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 101,
+      "ticks_blocked": 102,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 101,
+      "ticks_blocked": 102,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 101,
+      "ticks_blocked": 102,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 101,
+      "ticks_blocked": 102,
       "completed": null
     },
     {
@@ -6426,7 +6426,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T06:56:21Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 28,
       "completed": null
     },
     {
@@ -6450,7 +6450,7 @@
       "minted_during": "tick",
       "caused_by": "W337",
       "last_worked": "2026-10-13T07:54:43Z",
-      "ticks_blocked": 26,
+      "ticks_blocked": 27,
       "weight": 5,
       "completed": null
     },
@@ -6624,7 +6624,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 76,
+      "ticks_blocked": 77,
       "completed": null
     },
     {
@@ -6745,7 +6745,7 @@
     {
       "symbol": "W352",
       "title": "Liveness board: which repos had workable cards while asleep",
-      "status": "working",
+      "status": "ready",
       "enables": [
         "W346"
       ],
@@ -6760,7 +6760,7 @@
       "issued_at": "2026-10-12T00:40:25Z",
       "minted_during": "interrupt",
       "caused_by": "W346",
-      "last_worked": "2026-10-13T17:16:46Z",
+      "last_worked": "2026-10-13T17:43:16Z",
       "ticks_blocked": 0,
       "weight": 3,
       "completed": null
@@ -6785,7 +6785,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 2
     },
     {
       "symbol": "W354",
@@ -6807,7 +6807,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 2
     },
     {
       "symbol": "W355",
@@ -6829,7 +6829,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 2
     },
     {
       "symbol": "W356",
@@ -7032,7 +7032,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 14,
+      "ticks_blocked": 15,
       "completed": null
     },
     {
@@ -7189,7 +7189,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 3
     },
     {
       "symbol": "W372",
@@ -7635,7 +7635,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 37,
+      "ticks_blocked": 38,
       "completed": null
     },
     {
@@ -7659,7 +7659,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 52,
+      "ticks_blocked": 53,
       "completed": null
     },
     {
@@ -7707,7 +7707,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-13T03:46:31Z",
-      "ticks_blocked": 52,
+      "ticks_blocked": 53,
       "completed": null
     },
     {
@@ -7731,7 +7731,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 52,
+      "ticks_blocked": 53,
       "completed": null
     },
     {
@@ -8288,7 +8288,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -8309,7 +8309,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T05:38:02Z",
-      "ticks_blocked": 31,
+      "ticks_blocked": 32,
       "completed": null
     },
     {
@@ -8330,7 +8330,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 33,
+      "ticks_blocked": 34,
       "completed": null
     },
     {
@@ -8594,7 +8594,7 @@
       "minted_during": "tick",
       "caused_by": "W338",
       "last_worked": "2026-10-13T08:13:31Z",
-      "ticks_blocked": 26,
+      "ticks_blocked": 27,
       "completed": null
     },
     {
@@ -8821,7 +8821,7 @@
       "minted_during": "tick",
       "caused_by": "W426",
       "last_worked": "2026-10-13T13:18:45Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
@@ -8922,17 +8922,85 @@
     {
       "symbol": "W457",
       "title": "Repin mtools pathsforward+hooks to c47d50b (tick-close prunes landed local blockers)",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: tools/revendor-mtools.sh c47d50b 7adcefb: all five wheels at c47d50b, uv.lock + SHA256SUMS updated, bazel //:.venv builds",
+      "issued_at": "2026-10-13T17:29:14Z",
+      "minted_during": "tick",
+      "caused_by": "mtools:W1112",
+      "last_worked": "2026-10-13T17:44:48Z",
+      "ticks_blocked": 0,
+      "weight": 1,
+      "completed": "20261013T174448Z"
+    },
+    {
+      "symbol": "W458",
+      "title": "OperatorActShape: an operator-act block with no runnable command and no done-when is an unwritten tool",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: blocks.operator_category: act ask on a machine (MACHINE_ACT) with no COMMAND (env -C repo /interp -m mod, sudo /path|env -C|systemctl|python -m) -> no-command; shapes.ttl OperatorAskShape Warning; nemik-operator heading 'no command yet: the owner owes a tool'; tests/test_operator_act_shape.py; fleet 2026-10-13: 9 cards (substrate:W333, luthen-observability:W271/W65/W358/W685, life:W27/W26/W7, el-openglo:W156); luthen-observability:W69 no longer an operator block (re-filed onto W949/W950). Escalation W459, errand false positives W460",
+      "issued_at": "2026-10-13T17:44:47Z",
+      "minted_during": "tick",
+      "caused_by": "github-8f",
+      "last_worked": "2026-10-13T17:49:21Z",
+      "ticks_blocked": 0,
+      "completed": "20261013T174921Z"
+    },
+    {
+      "symbol": "W459",
+      "title": "OperatorActShape escalates Warning to Violation after N ticks, N learned from ledger history",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "read ticks_blocked of no-command asks over the ledger history; pick N; add a second sh:property at sh:Violation gated on ticksBlocked >= N",
+      "evidence": "",
+      "issued_at": "2026-10-13T17:49:16Z",
+      "minted_during": "tick",
+      "caused_by": "W458",
+      "last_worked": "2026-10-13T18:06:04Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W460",
+      "title": "MACHINE_ACT misreads errands: 'apply' in 'apply for Medicaid' and 'drill session' flag life:W26 and life:W7 as unwritten tools",
       "status": "ready",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "bump the mtools sha in pyproject/MODULE, bazel build //:.venv, confirm --tick-close prints UNBLOCKED lines",
-      "evidence": "",
-      "issued_at": "2026-10-13T17:29:14Z",
+      "next_bounded_step": "add an 'errand' category: an act ask with no machine target is the operator's own errand; list it under its own heading in nemik-operator only, never in the tool backlog or any other surface (no content outside nemik-operator); pin life:W26 and life:W7 as errand cases",
+      "evidence": "2026-10-13: 2026-10-13 github-8f ruling: life:W26/W7 are personal errands, own heading 'errand', not counted in the tool backlog, content not shown outside nemik-operator",
+      "issued_at": "2026-10-13T17:49:17Z",
       "minted_during": "tick",
-      "caused_by": "mtools:W1112",
-      "last_worked": null,
+      "caused_by": "W458",
+      "last_worked": "2026-10-13T18:05:26Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W461",
+      "title": "Apply resources as nemik nodes: read luthen's host root published as a queue-shaped document, read-only, in nemik-serve",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "first: a stable, reversible IRI mapping for Terraform addresses (module.x.type.name) in adapter.waypoint_uri, with tests and no literal addresses; then ingest one read-only workstream for luthen's host root (view and shapes only, no rank weights); luthen publishes the document",
+      "evidence": "2026-10-13: 2026-10-13 github-8f: first slice approved as scoped; luthen is the publisher (state from its four gates as ready/done/blocked plus waitsFor), nemik consumes",
+      "issued_at": "2026-10-13T18:03:04Z",
+      "minted_during": "tick",
+      "caused_by": "luthen-observability:W943",
+      "last_worked": "2026-10-13T18:05:28Z",
       "ticks_blocked": 0
     }
   ],
@@ -9003,7 +9071,10 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-10-13T17:41:34Z"
+  },
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }
