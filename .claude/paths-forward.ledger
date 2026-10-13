@@ -687,3 +687,5 @@
 2026-10-13T01:19:05Z  tick  W423 minted    -         "Spike 1: pieces.split/assemble in the py2many typed subset, transpiled to TypeScript, replacing index.html graphText(); conformance corpus run on both"  evidence=W422
 2026-10-13T01:19:06Z  tick  W424 minted    -         "Spike 2: flow.solve in the typed subset with a named Rational type (BigInt numerator/denominator), checked against gcalculus' flow_reference corpus"  evidence=W422
 2026-10-13T01:19:07Z  tick  W425 minted    -         "Make nemik.index.Index the pure input type (built from rdflib once) so critical, projection and health can enter the typed subset"  evidence=W422
+2026-10-13T01:36:10Z  tick  W426 minted    -         "Ask mtools for a tick-open mode: lock, pull, bump-blocked, check, nemik-inbound, rank and weights-from as ONE command (and tick-close: ledger and unlock)"  evidence=operator
+2026-10-13T01:41:27Z  tick  W427 minted    -         "nemik-rank --apply STATE: rank and write the weights into the queue in one call (replaces nemik-rank --json > file then --weights-from)"  evidence=W426

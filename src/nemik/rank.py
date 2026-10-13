@@ -497,6 +497,12 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     )
     ap.add_argument("--json", action="store_true", help="machine-readable output")
     ap.add_argument(
+        "--apply",
+        metavar="STATE",
+        help="write the ranked weights into that queue through mikemol-paths-forward --weights-from "
+        "(nemik:W427: one call instead of --json to a file and then --weights-from)",
+    )
+    ap.add_argument(
         "--check",
         action="store_true",
         help="exit 1 if the ready item mtools works next is outweighed by another (drift witness)",
@@ -723,6 +729,9 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
                 )
         return
     rows = rank(g, args.repo, weights, toward=args.toward)
+    if args.apply:
+        _apply(args.apply, rows)
+        return
     if args.json:
         print(json.dumps(rows, indent=2))
         return
@@ -730,6 +739,28 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         print(
             f"{r['symbol']:6} {r['band_name']:9} op={r['operator']} down={r['downstream']:<4} {r['title'][:70]}"
         )
+
+
+def _apply(state: str, rows: list[dict]) -> None:
+    """nemik:W427: hand the ranked rows to the queue's one writer, mikemol-paths-forward, the one
+    installed beside this interpreter; nemik never writes a queue itself. Exits with its status."""
+    import json
+    import subprocess
+    import sys
+    import tempfile
+    from pathlib import Path
+
+    pf = Path(sys.executable).parent / "mikemol-paths-forward"
+    with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as f:
+        json.dump(rows, f)
+    try:
+        done = subprocess.run(
+            [str(pf), "--state", str(state), "--weights-from", f.name], check=False
+        )
+    finally:
+        Path(f.name).unlink()
+    if done.returncode:
+        raise SystemExit(done.returncode)
 
 
 def _next(g: Graph, repo: str, rows: list[dict]) -> dict:

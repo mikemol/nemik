@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 425,
+  "counter": 427,
   "waypoints": [
     {
       "symbol": "W1",
@@ -7094,7 +7094,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 5
     },
     {
       "symbol": "W368",
@@ -7116,7 +7116,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 5
     },
     {
       "symbol": "W369",
@@ -8006,7 +8006,7 @@
       "caused_by": "W373",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 6
     },
     {
       "symbol": "W409",
@@ -8335,7 +8335,49 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 5
+    },
+    {
+      "symbol": "W426",
+      "title": "Ask mtools for a tick-open mode: lock, pull, bump-blocked, check, nemik-inbound, rank and weights-from as ONE command (and tick-close: ledger and unlock)",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "mtools:W1078",
+        "mtools:W1079",
+        "mtools:W1082"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Typed by hand every tick this session (7 calls, ~15 ticks); also the commit read-back (ls-remote vs log -1) after every mikemol-commit. Send to mtools as a paths-forward mode request; block on its card once minted",
+      "evidence": "2026-10-13: 2026-10-13 github-8f: carded with mtools as one paths-forward mode shared with gabion and amr-skills (symbol to follow). Post-commit read-back: mikemol-commit's [PUSHED] checks the LOCAL origin/main tracking ref (commit_kata.py:308-323), not the remote; gap sent to github-8f with a fix (ls-remote once after push, REMOTE-MISMATCH otherwise). Until it lands nemik keeps ls-remote, since every nemik push is a Flux deploy. | 2026-10-13: mtools cards: mtools:W1078 --tick-open (lock, bump-blocked, check, inbound, rank + weights), mtools:W1079 --tick-close, mtools:W1082 [PUSHED] only after ls-remote (REMOTE-MISMATCH otherwise). nemik's part: W427 nemik-rank --apply.",
+      "issued_at": "2026-10-13T01:36:10Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": "2026-10-13T01:42:04Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W427",
+      "title": "nemik-rank --apply STATE: rank and write the weights into the queue in one call (replaces nemik-rank --json > file then --weights-from)",
+      "status": "done",
+      "enables": [
+        "W426"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: nemik-rank REPO --apply STATE: ranks and hands the rows to the mikemol-paths-forward beside the interpreter (--weights-from), temp file removed, exit status passed through; nemik still never writes a queue. Live: nemik-rank nemik --apply .claude/paths-forward.json -> weights set: 19. tests/test_rank_apply.py pins the writer call and the failure exit.",
+      "issued_at": "2026-10-13T01:41:27Z",
+      "minted_during": "tick",
+      "caused_by": "W426",
+      "last_worked": "2026-10-13T02:04:45Z",
+      "ticks_blocked": 0,
+      "weight": 3,
+      "completed": "20261013T020445Z"
     }
   ],
   "residue": [
