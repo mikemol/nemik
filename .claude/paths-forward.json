@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 224
+      "ticks_blocked": 225
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 44,
+      "ticks_blocked": 45,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 46,
+      "ticks_blocked": 47,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T23:37:26Z",
-      "ticks_blocked": 76,
+      "ticks_blocked": 77,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 73,
+      "ticks_blocked": 74,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 50,
+      "ticks_blocked": 51,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 65,
+      "ticks_blocked": 66,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 65,
+      "ticks_blocked": 66,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 65,
+      "ticks_blocked": 66,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 65,
+      "ticks_blocked": 66,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 65,
+      "ticks_blocked": 66,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 65,
+      "ticks_blocked": 66,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 65,
+      "ticks_blocked": 66,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 65,
+      "ticks_blocked": 66,
       "completed": null
     },
     {
@@ -6446,7 +6446,7 @@
       "caused_by": "W337",
       "last_worked": "2026-10-11T21:18:11Z",
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 4
     },
     {
       "symbol": "W339",
@@ -6469,7 +6469,7 @@
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
       "last_worked": "2026-10-12T23:18:33Z",
-      "ticks_blocked": 53,
+      "ticks_blocked": 54,
       "weight": 1,
       "completed": null
     },
@@ -6620,7 +6620,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 40,
+      "ticks_blocked": 41,
       "completed": null
     },
     {
@@ -6758,7 +6758,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 2
     },
     {
       "symbol": "W353",
@@ -6780,7 +6780,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 2
     },
     {
       "symbol": "W354",
@@ -6802,7 +6802,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 2
     },
     {
       "symbol": "W355",
@@ -6824,7 +6824,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 2
     },
     {
       "symbol": "W356",
@@ -7031,13 +7031,13 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 46,
+      "ticks_blocked": 47,
       "completed": null
     },
     {
       "symbol": "W365",
       "title": "Export to MS Project XML (MSPDI): cards as tasks, blocked_on as predecessors",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W364"
       ],
@@ -7051,9 +7051,10 @@
       "issued_at": "2026-10-12T01:31:59Z",
       "minted_during": "interrupt",
       "caused_by": "W364",
-      "last_worked": "2026-10-12T01:34:53Z",
+      "last_worked": "2026-10-13T00:11:23Z",
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 5,
+      "completed": null
     },
     {
       "symbol": "W366",
@@ -7095,7 +7096,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 3
     },
     {
       "symbol": "W368",
@@ -7117,7 +7118,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 3
     },
     {
       "symbol": "W369",
@@ -7518,7 +7519,7 @@
       "caused_by": "W380",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 4
     },
     {
       "symbol": "W387",
@@ -7603,7 +7604,7 @@
       "caused_by": "W383",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 4
     },
     {
       "symbol": "W391",
@@ -7627,7 +7628,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -7651,7 +7652,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "completed": null
     },
     {
@@ -7699,7 +7700,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T18:43:02Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "completed": null
     },
     {
@@ -7723,7 +7724,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "completed": null
     },
     {
@@ -7966,7 +7967,7 @@
       "caused_by": "W373",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 1
     },
     {
       "symbol": "W407",
@@ -8007,7 +8008,7 @@
       "caused_by": "W373",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 7
+      "weight": 5
     },
     {
       "symbol": "W409",
@@ -8090,7 +8091,7 @@
     {
       "symbol": "W413",
       "title": "Shared projection: cards to tasks with predecessor links, one mapping every export and connector reuses, with a decode-back test",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W365",
         "W366",
@@ -8099,15 +8100,15 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "src/nemik/projection.py: project(g, repos) -> [Task(uid, cite, name, done, preds=[Link(uid|cite, cross_repo)])] with stable UIDs from cites; decode(tasks) -> the (card, blocker) pairs; test that decode(project(g)) equals g's blocking edges on the fixture fleet. W365 (MSPDI) and W366 (issue JSON) then only serialize Task.",
-      "evidence": "2026-10-12: MSPDI confirmed on Microsoft Learn (fetched 2026-10-12): PredecessorLink is a Task child, 0..unbounded, children PredecessorUID, Type, CrossProject, CrossProjectName, LinkLag (tenths of a minute), LagFormat, all optional (learn.microsoft.com/en-us/office-project/xml-data-interchange/predecessorlink-element). Type under PredecessorLink: 0 FF, 1 FS, 2 SF, 3 SS (type-element-multiple-parents). nemik's blocking is FS (1); a cross-repo blocker maps to CrossProject=1 with CrossProjectName=<repo>, the survey's open question answered.",
+      "next_bounded_step": null,
+      "evidence": "2026-10-12: MSPDI confirmed on Microsoft Learn (fetched 2026-10-12): PredecessorLink is a Task child, 0..unbounded, children PredecessorUID, Type, CrossProject, CrossProjectName, LinkLag (tenths of a minute), LagFormat, all optional (learn.microsoft.com/en-us/office-project/xml-data-interchange/predecessorlink-element). Type under PredecessorLink: 0 FF, 1 FS, 2 SF, 3 SS (type-element-multiple-parents). nemik's blocking is FS (1); a cross-repo blocker maps to CrossProject=1 with CrossProjectName=<repo>, the survey's open question answered. | 2026-10-13: src/nemik/projection.py: project(g, repos) -> Task(uid, cite, name, done, preds=Link(cite, cross_repo)); predecessors = waitsFor + enabled-by; UIDs 1..n by cite. tests/test_projection.py: decode(project(g)) equals the fixture's blocking edges computed independently (non-vacuous), UIDs positive and unique, cross-repo marking, one-repo projection keeps its outbound links.",
       "issued_at": "2026-10-12T19:48:19Z",
       "minted_during": "tick",
       "caused_by": "W372",
-      "last_worked": "2026-10-12T23:31:15Z",
+      "last_worked": "2026-10-13T00:11:21Z",
       "ticks_blocked": 0,
       "weight": 8,
-      "completed": null
+      "completed": "20261013T001121Z"
     },
     {
       "symbol": "W414",
@@ -8288,7 +8289,7 @@
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-12T23:17:16Z"
+    "taken_at": "2026-10-13T00:07:07Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []
