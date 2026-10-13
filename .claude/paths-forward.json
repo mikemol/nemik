@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 447,
+  "counter": 450,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 248
+      "ticks_blocked": 250
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 68,
+      "ticks_blocked": 70,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 70,
+      "ticks_blocked": 72,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T23:37:26Z",
-      "ticks_blocked": 100,
+      "ticks_blocked": 102,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 97,
+      "ticks_blocked": 99,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 74,
+      "ticks_blocked": 76,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 89,
+      "ticks_blocked": 91,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 89,
+      "ticks_blocked": 91,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 89,
+      "ticks_blocked": 91,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 89,
+      "ticks_blocked": 91,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 89,
+      "ticks_blocked": 91,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 89,
+      "ticks_blocked": 91,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 89,
+      "ticks_blocked": 91,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 89,
+      "ticks_blocked": 91,
       "completed": null
     },
     {
@@ -6426,7 +6426,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T06:56:21Z",
-      "ticks_blocked": 15,
+      "ticks_blocked": 17,
       "completed": null
     },
     {
@@ -6450,7 +6450,7 @@
       "minted_during": "tick",
       "caused_by": "W337",
       "last_worked": "2026-10-13T07:54:43Z",
-      "ticks_blocked": 14,
+      "ticks_blocked": 16,
       "weight": 5,
       "completed": null
     },
@@ -6624,7 +6624,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 64,
+      "ticks_blocked": 66,
       "completed": null
     },
     {
@@ -7031,7 +7031,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -7633,7 +7633,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 25,
+      "ticks_blocked": 27,
       "completed": null
     },
     {
@@ -7657,7 +7657,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 40,
+      "ticks_blocked": 42,
       "completed": null
     },
     {
@@ -7705,7 +7705,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-13T03:46:31Z",
-      "ticks_blocked": 40,
+      "ticks_blocked": 42,
       "completed": null
     },
     {
@@ -7729,7 +7729,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 40,
+      "ticks_blocked": 42,
       "completed": null
     },
     {
@@ -7955,7 +7955,7 @@
     {
       "symbol": "W406",
       "title": "Publish each repo's ledger as an OSLC Tracked Resource Set: a base snapshot plus an ordered change log",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W393"
       ],
@@ -7963,15 +7963,17 @@
         "interop",
         "performance"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "from W373's study of Jazz: TRS (trs:Base plus a trs:ChangeLog of Creation, Modification, Deletion events with trs:order) is the incremental feed OSLC tools already consume (IBM LQE ingests TRS sources). nemik's vocabulary already maps ledger lines to trs:Modification/Creation (docs/specs-survey.md); publish them per repo so a reader syncs by cursor, and use the same change events as the invalidation set for W401's per-piece snapshots",
+      "blocked_on": [
+        "W449"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Umbrella over W448 TRS model and W449 publishing",
       "evidence": "",
       "issued_at": "2026-10-12T18:44:13Z",
       "minted_during": "interrupt",
       "caused_by": "W373",
-      "last_worked": "2026-10-13T12:42:53Z",
-      "ticks_blocked": 0,
+      "last_worked": "2026-10-13T13:13:10Z",
+      "ticks_blocked": 1,
       "weight": 1,
       "completed": null
     },
@@ -8286,7 +8288,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 21,
+      "ticks_blocked": 23,
       "completed": null
     },
     {
@@ -8307,7 +8309,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T05:38:02Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 21,
       "completed": null
     },
     {
@@ -8328,7 +8330,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 21,
+      "ticks_blocked": 23,
       "completed": null
     },
     {
@@ -8353,21 +8355,19 @@
     {
       "symbol": "W426",
       "title": "Ask mtools for a tick-open mode: lock, pull, bump-blocked, check, nemik-inbound, rank and weights-from as ONE command (and tick-close: ledger and unlock)",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "mtools:W1082"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Typed by hand every tick this session (7 calls, ~15 ticks); also the commit read-back (ls-remote vs log -1) after every mikemol-commit. Send to mtools as a paths-forward mode request; block on its card once minted",
-      "evidence": "2026-10-13: 2026-10-13 github-8f: carded with mtools as one paths-forward mode shared with gabion and amr-skills (symbol to follow). Post-commit read-back: mikemol-commit's [PUSHED] checks the LOCAL origin/main tracking ref (commit_kata.py:308-323), not the remote; gap sent to github-8f with a fix (ls-remote once after push, REMOTE-MISMATCH otherwise). Until it lands nemik keeps ls-remote, since every nemik push is a Flux deploy. | 2026-10-13: mtools cards: mtools:W1078 --tick-open (lock, bump-blocked, check, inbound, rank + weights), mtools:W1079 --tick-close, mtools:W1082 [PUSHED] only after ls-remote (REMOTE-MISMATCH otherwise). nemik's part: W427 nemik-rank --apply. | 2026-10-13: 2026-10-13: mtools:W1078 (--tick-open) and mtools:W1079 (--tick-close) are done in mtools; trimmed. W1082 (PUSHED only after ls-remote) is working. Adopting the tick modes needs nemik's mtools pin moved past them (W447).",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: 2026-10-13 github-8f: carded with mtools as one paths-forward mode shared with gabion and amr-skills (symbol to follow). Post-commit read-back: mikemol-commit's [PUSHED] checks the LOCAL origin/main tracking ref (commit_kata.py:308-323), not the remote; gap sent to github-8f with a fix (ls-remote once after push, REMOTE-MISMATCH otherwise). Until it lands nemik keeps ls-remote, since every nemik push is a Flux deploy. | 2026-10-13: mtools cards: mtools:W1078 --tick-open (lock, bump-blocked, check, inbound, rank + weights), mtools:W1079 --tick-close, mtools:W1082 [PUSHED] only after ls-remote (REMOTE-MISMATCH otherwise). nemik's part: W427 nemik-rank --apply. | 2026-10-13: 2026-10-13: mtools:W1078 (--tick-open) and mtools:W1079 (--tick-close) are done in mtools; trimmed. W1082 (PUSHED only after ls-remote) is working. Adopting the tick modes needs nemik's mtools pin moved past them (W447). | 2026-10-13: 2026-10-13: all three landed and nemik is pinned past them (7adcefb, W447): --tick-open (lock, bump-blocked, inbound, check; exit 3 if held) and --tick-close (ledger, render, check, unlock even if the ledger line is refused); mikemol-commit's [PUSHED] is now what git ls-remote says (W1082), with [REMOTE-MISMATCH remote=...], [LOCAL: not on origin/main] or UNVERIFIED otherwise. A tick is --tick-open, git pull, nemik-rank --apply, work, --tick-close.",
       "issued_at": "2026-10-13T01:36:10Z",
       "minted_during": "tick",
       "caused_by": "operator",
-      "last_worked": "2026-10-13T12:18:27Z",
-      "ticks_blocked": 1,
-      "completed": null
+      "last_worked": "2026-10-13T13:14:27Z",
+      "ticks_blocked": 0,
+      "completed": "20261013T131427Z"
     },
     {
       "symbol": "W427",
@@ -8593,7 +8593,7 @@
       "minted_during": "tick",
       "caused_by": "W338",
       "last_worked": "2026-10-13T08:13:31Z",
-      "ticks_blocked": 14,
+      "ticks_blocked": 16,
       "completed": null
     },
     {
@@ -8751,19 +8751,76 @@
     {
       "symbol": "W447",
       "title": "Adopt mikemol-paths-forward --tick-open and --tick-close (mtools:W1078, mtools:W1079) for this loop, repinning mtools past them if the pin predates them",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Check whether bf2b8e8 contains W1078/W1079's commits (merge-base --is-ancestor); if not, revendor to mtools main; then run one tick with --tick-open/--tick-close and compare against the hand-typed preamble",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: Repinned to mtools 7adcefb (contains 7aa3b8f, W1078/W1079); the vendored writer now has --tick-open HOLDER and --tick-close HOLDER SYMBOL OUTCOME MECHANISM NOTE. Pushed as the commit after 297d7bf. Next tick opens and closes with them. | 2026-10-13: Used 2026-10-13: --tick-open agent-nemik-bb took the lock, bumped blocked, ran --check and printed ATOMIZE/NUDGE in one call. Not visible in its output: git pull, inbound, weights. A following nemik-rank --apply left the state hash unchanged (66aee...), so weights were either synced silently or already equal; inbound printed nothing either way. A tick is now --tick-open + git pull + nemik-inbound + nemik-rank --apply (4 calls, was 7); close with --tick-close.",
       "issued_at": "2026-10-13T12:18:27Z",
       "minted_during": "tick",
       "caused_by": "W426",
-      "last_worked": "2026-10-13T12:42:54Z",
+      "last_worked": "2026-10-13T13:12:45Z",
       "ticks_blocked": 0,
       "weight": 1,
+      "completed": "20261013T131245Z"
+    },
+    {
+      "symbol": "W448",
+      "title": "TRS model: a repo's trs:Base and ordered trs:ChangeLog (Creation, Modification, Deletion) derived from its queue and ledger, as an rdflib graph",
+      "status": "done",
+      "enables": [
+        "W406"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: src/nemik/trs.py: trs(repo, queue, ledger) -> TRS 2.0 graph: <ws>/trs/base (trs:Base, ldp:member per card the queue holds) and <ws>/trs/changelog (trs:ChangeLog, one event per ledger line naming a card, trs:order = line number; first event Creation, then Modification; a card the ledger names but the queue no longer holds gets a Deletion after the last event). tests/test_trs.py: event sequence, base membership, unique orders.",
+      "issued_at": "2026-10-13T13:13:07Z",
+      "minted_during": "tick",
+      "caused_by": "W406",
+      "last_worked": "2026-10-13T13:16:22Z",
+      "ticks_blocked": 0,
+      "completed": "20261013T131622Z"
+    },
+    {
+      "symbol": "W449",
+      "title": "Publish trs/<repo>/base.ttl and changelog.ttl in the static build (Turtle, listed in hashes.json), with a TRS link from the service catalog (W408)",
+      "status": "working",
+      "enables": [
+        "W406"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-13T13:13:08Z",
+      "minted_during": "tick",
+      "caused_by": "W406",
+      "last_worked": "2026-10-13T13:16:25Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W450",
+      "title": "Adopt tick-open's per-repo hook list (mtools:W1111): git pull, nemik-inbound nemik, nemik-rank nemik --apply, so a tick opens in one call",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "mtools:W1111"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-13T13:15:31Z",
+      "minted_during": "tick",
+      "caused_by": "W426",
+      "last_worked": "2026-10-13T13:15:32Z",
+      "ticks_blocked": 1,
       "completed": null
     }
   ],
@@ -8829,7 +8886,7 @@
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-13T12:41:36Z"
+    "taken_at": "2026-10-13T13:11:35Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []
