@@ -613,6 +613,10 @@ def build_static(root: Path, out: Path, withheld: Path | None) -> list[Path]:
         feed = turtle(repo, model.graph, model.graph, hidden)
         for part in ("base", "changelog"):
             bodies[f"trs/{repo}/{part}.ttl"] = feed[part]
+    # nemik:W451: the OSLC discovery root, pointing at each repo's tracked resource set above
+    from nemik.catalog import catalog
+
+    bodies["catalog.ttl"] = catalog(sorted(repos)).serialize(format="turtle")
     hashes: dict[str, str] = {}
     for name, body in sorted(bodies.items()):
         dst = out / name
