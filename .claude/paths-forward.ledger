@@ -783,3 +783,4 @@
 2026-10-13T22:08:13Z  interrupt W488 minted    -         "UmbrellaCompleteShape: an umbrella whose children are all done is realized by construction; a stored open state on it is named"  evidence=github-8f
 2026-10-13T22:08:14Z  interrupt W489 minted    -         "ReadyNeitherShape: a ready non-umbrella left untouched past the learned time-to-do of small cards must be atomized or done"  evidence=github-8f
 2026-10-13T22:16:32Z  interrupt W490 minted    -         "Advice as graph nodes: each deterministic advisory gets a node with its resolution derived from the world (acted, rejected with reason, ignored)"  evidence=github-8f
+2026-10-13T22:41:00Z  interrupt W491 minted    -         "Goals as a node type: declared, not inferred from 'nothing open follows it', realized when all its children are, weighted by graph salience"  evidence=github-8f
