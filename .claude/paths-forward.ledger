@@ -774,3 +774,4 @@
 2026-10-13T20:15:30Z  tick  W479 minted    -         "Nav pane step 2: the focused row's card is highlighted on the canvas and opens the W462 popover beside it"  evidence=W468
 2026-10-13T20:15:32Z  tick  W480 minted    -         "Nav pane step 3: focus and the open/closed state of the pane survive the 60 s poll's redraw, restored by cite"  evidence=W468
 2026-10-13T20:15:40Z  tick  W481 minted    -         "Nav pane step 4: the list becomes an APG tree view, umbrellas nesting their open children, Right/Left expanding and collapsing"  evidence=W468
+2026-10-13T20:48:31Z  interrupt W482 minted    -         "Chain legend states each chain's length; the edges of the view's longest chains are drawn, so a chain is visible across repo boxes"  evidence=operator

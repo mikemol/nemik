@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 481,
+  "counter": 482,
   "waypoints": [
     {
       "symbol": "W1",
@@ -9384,6 +9384,23 @@
       "caused_by": "W468",
       "last_worked": null,
       "ticks_blocked": 0
+    },
+    {
+      "symbol": "W482",
+      "title": "Chain legend states each chain's length; the edges of the view's longest chains are drawn, so a chain is visible across repo boxes",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: index.html: criticalSet carries longest and its up/down heights; the legend reads 'longest chain, this view (N cards, across repo boxes)' (and the selection's); markChainEdges draws the dependencies consecutive on a view longest chain (edge.onchain, view-ring colour, above the faint cross edges). Live, nemik picked: two 6-card chains, luthen W878>W872>W873>W870>nemik W392>W391 and mtools W1071>W1072>W1073>nemik W423>W424>W422, cross-box links drawn. test_layout::test_the_view_chain_is_drawn_end_to_end_with_its_length",
+      "issued_at": "2026-10-13T20:48:31Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": "2026-10-13T20:54:34Z",
+      "ticks_blocked": 0,
+      "completed": "20261013T205434Z"
     }
   ],
   "residue": [
