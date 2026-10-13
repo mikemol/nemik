@@ -8602,7 +8602,7 @@
     {
       "symbol": "W439",
       "title": "Pick the pinnable MSPDI reader: MPXJ on a hermetic JVM (its jar closure via http_file or rules_jvm_external) vs the Project 2007 SDK's mspdi_pj12.xsd recovered from an archive with a sha256",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W420"
       ],
@@ -8614,7 +8614,7 @@
       "issued_at": "2026-10-13T08:49:39Z",
       "minted_during": "tick",
       "caused_by": "W420",
-      "last_worked": "2026-10-13T10:37:29Z",
+      "last_worked": "2026-10-13T10:50:00Z",
       "ticks_blocked": 0,
       "weight": 2,
       "completed": null
@@ -8698,20 +8698,20 @@
     {
       "symbol": "W444",
       "title": "Repin the mtools wheels to the fleet par (luthen's repin_par.txt) with mikemol-repin, for mikemol-commit's identity check (mtools:W1107) and stale-index refresh (mtools:W1108)",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Read the par from luthen's repin_par.txt; mikemol-repin nemik to it (or tools/revendor-mtools.sh <par> 2eeb11e); commit with plain git commit after the staged gate (force-tracked wheels); then confirm a commit prints COMMITTED with its own subject and the real index is current (no git reset needed). Drop the manual git log -1 / git reset steps once both are confirmed",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: d4a3b3b (pushed, ls-remote and log -1 subject confirmed): mtools wheels 2eeb11e -> bf2b8e8, which contains 2988de7 (W1107 identity check) and a819c34 (W1108 index refresh), both checked with merge-base --is-ancestor; ahead of the fleet par f04f0a2 (predates both). SHA256SUMS written by the script.",
       "issued_at": "2026-10-13T10:35:55Z",
       "minted_during": "interrupt",
       "caused_by": "W428",
-      "last_worked": "2026-10-13T10:37:29Z",
+      "last_worked": "2026-10-13T10:49:59Z",
       "ticks_blocked": 0,
       "weight": 1,
-      "completed": null
+      "completed": "20261013T104959Z"
     }
   ],
   "residue": [
