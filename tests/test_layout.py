@@ -469,6 +469,10 @@ def test_the_default_view_is_legible(server) -> None:
         page.wait_for_timeout(500)
         m = page.evaluate(LEGIBILITY)
         note = page.inner_text("#legnote")
+        # nemik:W433: the live region holds text only; a control inside it is re-announced with it
+        controls_in_status = page.evaluate(
+            "() => document.querySelectorAll('#legnote button, #legnote a').length"
+        )
         # nemik:W317: every repo chip carries its health, and a non-green one a glyph, not colour alone
         chips = page.evaluate(
             "() => [...document.querySelectorAll('#repos button')]"
@@ -484,6 +488,7 @@ def test_the_default_view_is_legible(server) -> None:
     assert m["label_px"] >= 8, m
     assert m["min_target_px"] >= 12, m
     assert note == "" or "readable size" in note
+    assert controls_in_status == 0
 
 
 def test_every_label_glyph_exists_in_this_browsers_fonts(server) -> None:
@@ -695,6 +700,33 @@ def test_a_static_build_refetches_only_the_pieces_whose_hash_moved(tmp_path) -> 
         ["graph/_fleet.json", *(f"graph/{r}.json" for r in fleet["repos"])]
     )
     assert second == [f"graph/{one}.json"]
+
+
+def test_every_repo_chip_names_its_health_in_words(server) -> None:
+    # nemik:W432: a chip's health was a glyph plus a title attribute; its accessible name now says
+    # the repo, the status and the reasons, and the glyph is hidden from assistive tech.
+    with sync_api.sync_playwright() as p:
+        exe = os.environ.get("NEMIK_CHROMIUM")
+        try:
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page()
+        page.goto(server)
+        page.wait_for_selector("#repos button[data-repo]")
+        chips = page.evaluate(
+            "() => [...document.querySelectorAll('#repos button[data-repo]')].map(b => "
+            "[b.dataset.repo, b.dataset.health, b.getAttribute('aria-label'), "
+            "[...b.querySelectorAll('[aria-hidden=true]')].map(s => s.textContent).join('')])"
+        )
+        browser.close()
+    assert chips
+    for repo, status, name, hidden in chips:
+        assert name.startswith(f"{repo}, health {status}"), name
+        assert "▲" not in name and "■" not in name, name
+        assert hidden == {"amber": "▲ ", "red": "■ "}.get(status, "")
 
 
 def test_no_command_route_or_tools_panel_remains(server) -> None:

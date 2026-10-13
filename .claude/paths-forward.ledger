@@ -694,3 +694,8 @@
 2026-10-13T02:49:56Z  tick  W429 minted    -         "Measure use of colour from the rendered view: a browser test emits el-openglo's cases shape (meaning, colour kinds, non-colour cue kinds) for card states, scope rings, wait lines and repo chips"  evidence=W339
 2026-10-13T02:49:58Z  tick  W430 minted    -         "Pin el-openglo's policy/use_of_colour.rego at a commit as a Bazel input (http_file with sha256), never a copy"  evidence=W339
 2026-10-13T02:50:00Z  tick  W431 minted    -         "Gate: evaluate the view's use-of-colour cases with the pinned rego through nemik's opa; deny must be empty"  evidence=W339
+2026-10-13T05:38:05Z  tick  W339 advanced  unblock   "8275a24 pushed: use-of-colour gate on el-openglo's pinned rego (W429-W431, W339 closed); gate refusals: test_layout timeout under host load (size large) and a real thread race in shaclcache (lock + regression test); W428 state-sync race traced to the katas sweep, github-8f owns it; W394 web-vitals baseline running; W386 working"
+2026-10-13T05:40:09Z  tick  W432 minted    -         "Repo chips carry their health and its reasons in the accessible name, not only a title attribute"  evidence=W386
+2026-10-13T05:40:13Z  tick  W433 minted    -         "The #legnote live region announces its message once, not the button injected into it"  evidence=W386
+2026-10-13T05:40:17Z  tick  W434 minted    -         "Run the a11y browser tests (contrast, glyphs, cues) in both themes, not light only"  evidence=W386
+2026-10-13T05:40:21Z  tick  W435 minted    -         "A keyboard-reachable list of the visible cards mirroring the canvas: select, expand an umbrella and open details without a mouse"  evidence=W386

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 431,
+  "counter": 435,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 229
+      "ticks_blocked": 230
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 49,
+      "ticks_blocked": 50,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 51,
+      "ticks_blocked": 52,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T23:37:26Z",
-      "ticks_blocked": 81,
+      "ticks_blocked": 82,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 78,
+      "ticks_blocked": 79,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 55,
+      "ticks_blocked": 56,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 70,
+      "ticks_blocked": 71,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 70,
+      "ticks_blocked": 71,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 70,
+      "ticks_blocked": 71,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 70,
+      "ticks_blocked": 71,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 70,
+      "ticks_blocked": 71,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 70,
+      "ticks_blocked": 71,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 70,
+      "ticks_blocked": 71,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 70,
+      "ticks_blocked": 71,
       "completed": null
     },
     {
@@ -6446,7 +6446,7 @@
       "caused_by": "W337",
       "last_worked": "2026-10-11T21:18:11Z",
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W339",
@@ -6554,7 +6554,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 4
     },
     {
       "symbol": "W344",
@@ -6618,7 +6618,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 46,
       "completed": null
     },
     {
@@ -7027,7 +7027,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null
     },
     {
@@ -7093,7 +7093,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 5
     },
     {
       "symbol": "W368",
@@ -7115,7 +7115,7 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 5
     },
     {
       "symbol": "W369",
@@ -7499,7 +7499,7 @@
     {
       "symbol": "W386",
       "title": "a11y gaps: keyboard and screen-reader paths to what only the canvas offers",
-      "status": "working",
+      "status": "blocked",
       "enables": [
         "W337"
       ],
@@ -7507,14 +7507,19 @@
         "a11y",
         "web"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "W380 gaps: card selection, umbrella expand (double-click only) and card details are mouse-only on the canvas; chip health and reasons are a title attribute, not in the accessible name; #legnote's live region re-announces its injected button; C1-C4 tested in light only. Design a keyboard-reachable list of the visible cards mirroring the canvas, put health in chip names, and run the a11y tests in both themes",
+      "blocked_on": [
+        "W432",
+        "W433",
+        "W434",
+        "W435"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Umbrella over W432 chip names, W433 live region, W434 both themes, W435 keyboard card list",
       "evidence": "",
       "issued_at": "2026-10-12T12:14:21Z",
       "minted_during": "interrupt",
       "caused_by": "W380",
-      "last_worked": "2026-10-13T03:06:51Z",
+      "last_worked": "2026-10-13T05:40:28Z",
       "ticks_blocked": 0,
       "weight": 2,
       "completed": null
@@ -7602,7 +7607,7 @@
       "caused_by": "W383",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W391",
@@ -7626,7 +7631,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "completed": null
     },
     {
@@ -7650,7 +7655,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 21,
+      "ticks_blocked": 22,
       "completed": null
     },
     {
@@ -7698,7 +7703,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-13T03:46:31Z",
-      "ticks_blocked": 21,
+      "ticks_blocked": 22,
       "completed": null
     },
     {
@@ -7722,7 +7727,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 21,
+      "ticks_blocked": 22,
       "completed": null
     },
     {
@@ -8006,7 +8011,7 @@
       "caused_by": "W373",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 7
     },
     {
       "symbol": "W409",
@@ -8276,26 +8281,28 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null
     },
     {
       "symbol": "W423",
       "title": "Spike 1: pieces.split/assemble in the py2many typed subset, transpiled to TypeScript, replacing index.html graphText(); conformance corpus run on both",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W422"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "mtools:W1073"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Transpile half waits on mtools:W1070 (websubset gate), W1071 (py2many), W1072 (runner), W1073 (harness); then rewrite pieces.py in the subset, run the TS side over tests/corpus/pieces, delete index.html graphText()",
       "evidence": "2026-10-13: mtools cards (github-8f 2026-10-13, caused_by nemik:W422): mtools:W1070 websubset gate, mtools:W1071 pinned py2many transpile, mtools:W1072 conformance runner, mtools:W1073 pieces spike harness. Not started; the corpus half here is the work for now. | 2026-10-13: Corpus half landed: tools/gen_pieces_corpus.py writes tests/corpus/pieces/*.json (doc, split, assemble per case): empty-fleet, single-repo, cross-repo-edge-and-fleet-node, key-ordering, astral-plane-keys (U+FFFF vs U+1F600: code-point vs UTF-16 order), fixture-fleet-3-repos (168 nodes; the full fleet is 3 MB, already covered by test_pieces). tests/test_pieces_corpus.py runs every case through Python with field-by-field diffs: 6/6 agree; split-then-assemble identity holds under assemble's canonical order (nodes by id, edges by (source,target,kind)). First run's one difference was my test's expectation (edge order), not pieces.",
       "issued_at": "2026-10-13T01:19:05Z",
       "minted_during": "tick",
       "caused_by": "W422",
-      "last_worked": "2026-10-13T03:06:50Z",
-      "ticks_blocked": 0,
+      "last_worked": "2026-10-13T05:38:02Z",
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -8316,7 +8323,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null
     },
     {
@@ -8336,7 +8343,7 @@
       "caused_by": "W422",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 6
     },
     {
       "symbol": "W426",
@@ -8356,7 +8363,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:42:04Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null
     },
     {
@@ -8452,6 +8459,81 @@
       "last_worked": "2026-10-13T03:06:38Z",
       "ticks_blocked": 0,
       "completed": "20261013T030638Z"
+    },
+    {
+      "symbol": "W432",
+      "title": "Repo chips carry their health and its reasons in the accessible name, not only a title attribute",
+      "status": "done",
+      "enables": [
+        "W386"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: Repo chips: aria-label '<repo>, health <status>[: reasons]', the glyph wrapped aria-hidden; title kept. test_every_repo_chip_names_its_health_in_words; render-check green.",
+      "issued_at": "2026-10-13T05:40:09Z",
+      "minted_during": "tick",
+      "caused_by": "W386",
+      "last_worked": "2026-10-13T05:52:35Z",
+      "ticks_blocked": 0,
+      "completed": "20261013T055235Z"
+    },
+    {
+      "symbol": "W433",
+      "title": "The #legnote live region announces its message once, not the button injected into it",
+      "status": "done",
+      "enables": [
+        "W386"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: #legnote (role=status) holds the message as text only; the fit-all button moved to sibling #legact, cleared with it. test_the_default_view_is_legible asserts no control inside #legnote; render-check green.",
+      "issued_at": "2026-10-13T05:40:13Z",
+      "minted_during": "tick",
+      "caused_by": "W386",
+      "last_worked": "2026-10-13T05:52:37Z",
+      "ticks_blocked": 0,
+      "completed": "20261013T055237Z"
+    },
+    {
+      "symbol": "W434",
+      "title": "Run the a11y browser tests (contrast, glyphs, cues) in both themes, not light only",
+      "status": "working",
+      "enables": [
+        "W386"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-13T05:40:17Z",
+      "minted_during": "tick",
+      "caused_by": "W386",
+      "last_worked": "2026-10-13T05:52:40Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W435",
+      "title": "A keyboard-reachable list of the visible cards mirroring the canvas: select, expand an umbrella and open details without a mouse",
+      "status": "ready",
+      "enables": [
+        "W386"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-13T05:40:21Z",
+      "minted_during": "tick",
+      "caused_by": "W386",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -8516,7 +8598,7 @@
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-13T02:47:49Z"
+    "taken_at": "2026-10-13T05:38:56Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []

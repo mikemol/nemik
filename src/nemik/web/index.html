@@ -70,7 +70,7 @@ aside a { color: var(--ink); text-decoration: underline dotted var(--muted); }
   <label title="Collapse each umbrella (a card with two or more open prerequisites in its repo) over the work beneath it that nothing else needs; its label counts what it hides (W350). Double-click an umbrella to expand or collapse it."><input type="checkbox" id="rollup"> roll up umbrellas</label>
   <label title="One treemap across the fleet: each tile holds the work beneath it, area by load, rank order reading left to right; repo is the border colour"><input type="checkbox" id="treemap"> treemap</label>
   <span class="stat" id="stat"></span>
-  <span class="stat" id="legnote" role="status"></span>
+  <span class="stat" id="legnote" role="status"></span><span class="stat" id="legact"></span>
   <span id="repos" title="Toggle repos on and off; none lit shows every repo"></span>
 </header>
 <main>
@@ -248,8 +248,11 @@ const ringH = ele => ele.outerHeight() + 2 * PAD * (ele.data("nrings") || 0) + "
 // would, it shows the repo box carrying the most salience at the floor, and says how to see the rest.
 const MIN_LABEL_PX = 8, LABEL_FONT_PX = 10;
 function fitReadable(treemapOn, repos) {
-  const note = document.getElementById("legnote");
+  // nemik:W433: the live region holds the message only; its "fit all" button sits beside it, so a
+  // screen reader announces the note once instead of re-reading the injected button with it.
+  const note = document.getElementById("legnote"), act = document.getElementById("legact");
   note.textContent = "";
+  act.textContent = "";
   cy.fit(cy.elements(":visible"), 20);
   const floor = MIN_LABEL_PX / LABEL_FONT_PX;
   if (treemapOn || cy.zoom() >= floor) return;
@@ -258,18 +261,21 @@ function fitReadable(treemapOn, repos) {
   let bb, what;
   if (repos.length < 2) {
     bb = cy.elements(":visible").boundingBox();
-    what = `${esc(repos[0] || "this view")} at readable size; pan to see the rest.`;
+    what = `${repos[0] || "this view"} at readable size; pan to see the rest.`;
   } else {
     const load = r => data.nodes.filter(n => n.repo === r).reduce((s, n) => s + (n.salience || 0), 0);
     const focus = [...repos].sort((a, b) => load(b) - load(a) || (a < b ? -1 : 1))[0];
     const box = cy.getElementById("repo:" + focus);
     if (!box.length) return;
     bb = box.boundingBox();
-    what = `${esc(focus)} at readable size; ${repos.length - 1} more repos off-screen.`;
+    what = `${focus} at readable size; ${repos.length - 1} more repos off-screen.`;
   }
   cy.viewport({ zoom: floor, pan: { x: 20 - bb.x1 * floor, y: 20 - bb.y1 * floor } });
-  note.innerHTML = `${what} <button id="fitall" type="button">fit all (too small to read)</button>`;
-  document.getElementById("fitall").onclick = () => { cy.fit(cy.elements(":visible"), 20); note.textContent = ""; };
+  note.textContent = what;  // text, not markup: the repo name needs no escaping here
+  act.innerHTML = `<button id="fitall" type="button">fit all (too small to read)</button>`;
+  document.getElementById("fitall").onclick = () => {
+    cy.fit(cy.elements(":visible"), 20); note.textContent = ""; act.textContent = "";
+  };
 }
 
 // nemik:W384: WCAG contrast. Each filled card and lane chip gets whichever of near-black or white text
@@ -996,7 +1002,10 @@ function chips(repos) {
   box.innerHTML = repos.map(r => {
     const h = (data.health || {})[r] || { status: "green", reasons: [] };
     const why = h.reasons.length ? `${h.status}: ${h.reasons.join("; ")}` : "green";
-    return `<button type="button" data-repo="${esc(r)}" data-health="${esc(h.status)}" title="${esc(why)}" aria-pressed="${picked.has(r)}">${MARK[h.status] || ""}${esc(r)}</button>`;
+    // nemik:W432: the accessible name carries the health and its reasons in words (a screen reader
+    // reads a title attribute inconsistently, and the glyph as a shape name); the glyph is decoration.
+    const name = `${r}, health ${why}`;
+    return `<button type="button" data-repo="${esc(r)}" data-health="${esc(h.status)}" title="${esc(why)}" aria-label="${esc(name)}" aria-pressed="${picked.has(r)}"><span aria-hidden="true">${MARK[h.status] || ""}</span>${esc(r)}</button>`;
   }).join("");
   document.documentElement.style.setProperty("--hh", document.querySelector("header").offsetHeight + "px");
 }
