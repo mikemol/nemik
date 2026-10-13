@@ -799,6 +799,49 @@ def test_the_card_list_selects_and_expands_from_the_keyboard(server) -> None:
     assert expanded == "true"
 
 
+TILE_LABELS = """() => {
+  const z = cy.zoom(), tiles = cy.nodes('.tile').filter(n => n.visible());
+  const drawn = tiles.filter(n => !n.hasClass('tinylabel'));
+  return { tiles: tiles.length, hidden: tiles.length - drawn.length,
+           smallest: Math.min(...drawn.map(n => (n.data('fs') || 10) * z)),
+           note: document.getElementById('legnote').textContent };
+}"""
+ZOOM_IN_4X = "() => cy.zoom({ level: cy.zoom() * 4, renderedPosition: { x: 0, y: 0 } })"
+
+
+def test_treemap_labels_meet_the_floor_or_are_hidden_and_counted(server) -> None:
+    # nemik:W390: no tile label is drawn under 8 px; the ones hidden are counted on the status line, and
+    # zooming in brings them back.
+    with sync_api.sync_playwright() as p:
+        exe = os.environ.get("NEMIK_CHROMIUM")
+        try:
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        page.goto(server)
+        page.wait_for_function(
+            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
+            timeout=60000,
+        )
+        page.check("#treemap")
+        page.wait_for_function("() => cy.nodes('.tile').length > 0", timeout=60000)
+        page.wait_for_timeout(300)
+        fit = page.evaluate(TILE_LABELS)
+        page.evaluate(ZOOM_IN_4X)
+        page.wait_for_timeout(300)
+        zoomed = page.evaluate(TILE_LABELS)
+        browser.close()
+    assert fit["tiles"] > 0
+    assert fit["smallest"] >= 8, fit
+    assert zoomed["smallest"] >= 8, zoomed
+    if fit["hidden"]:
+        assert f"{fit['hidden']} tiles too small" in fit["note"], fit
+        assert zoomed["hidden"] < fit["hidden"], (fit, zoomed)
+
+
 def test_no_command_route_or_tools_panel_remains(server) -> None:
     # nemik:W397: the Tools drop-down ran CLIs through /cmd; it is retired, and every capability it
     # offered is either native to the view or CLI-only. Neither the route nor the panel may come back.

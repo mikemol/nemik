@@ -533,6 +533,8 @@ function draw() {
       { selector: "node.tile.cluster", style: { "background-opacity": 0.12, "border-width": 1.5,
         "border-color": "data(repoColor)", "text-valign": "top", "text-margin-y": "data(hm)", color: css("--ink"),
         "text-outline-width": 0 } },
+      // nemik:W390: a tile whose label would draw under MIN_LABEL_PX shows none rather than an unreadable one
+      { selector: "node.tile.tinylabel", style: { label: "" } },
       { selector: 'node.tile[state = "blocked"]', style: { "background-opacity": 0.45 } },
       { selector: 'node.tile[state = "working"]', style: { "border-width": 3, "border-color": css("--ink") } },
       { selector: "edge.contained", style: { display: "none" } },
@@ -547,6 +549,23 @@ function draw() {
   // The layout runs after cytoscape's own initial fit, so a fresh view is fitted here, to what the
   // layout actually placed.
   if (view) { cy.zoom(view.zoom); cy.pan(view.pan); } else fitReadable(treemapOn, repos);
+  // nemik:W390: treemap tiles size their own text to fit (data(fs)), so a small tile's label shrinks with it.
+  // At every zoom, a label that would draw under the floor is hidden instead, and the status line says how
+  // many and where they are read: the Cards list (W435) names every card drawn.
+  if (treemapOn) {
+    const tileLabels = () => {
+      let hidden = 0;
+      cy.nodes(".tile").forEach(n => {
+        const tiny = (n.data("fs") || LABEL_FONT_PX) * cy.zoom() < MIN_LABEL_PX;
+        n.toggleClass("tinylabel", tiny);
+        if (tiny) hidden++;
+      });
+      document.getElementById("legnote").textContent = hidden
+        ? `${hidden} tiles too small to label at this zoom; zoom in, or read them in Cards.` : "";
+    };
+    tileLabels();
+    cy.on("zoom", tileLabels);
+  }
   // nemik:W88: an edge between two boxes is faint until one of its ends is hovered or selected,
   // or "show all cross-repo edges" is on. Inside a box, edges stay as they are.
   const unit = n => (n.isChild() ? n.parent().id() : n.id());
