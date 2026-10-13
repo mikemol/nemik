@@ -743,6 +743,62 @@ def test_every_repo_chip_names_its_health_in_words(server) -> None:
         assert hidden == {"amber": "▲ ", "red": "■ "}.get(status, "")
 
 
+def test_the_card_list_selects_and_expands_from_the_keyboard(server) -> None:
+    # nemik:W435: selecting a card, reading it, and expanding an umbrella were pointer-only on the
+    # canvas. The Cards list does each with focus and Enter alone.
+    with sync_api.sync_playwright() as p:
+        exe = os.environ.get("NEMIK_CHROMIUM")
+        try:
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        page.goto(server)
+        page.wait_for_function(
+            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
+            timeout=60000,
+        )
+        page.click("#repos button[data-repo='nemik']")
+        page.check("#rollup")
+        page.wait_for_timeout(600)
+        page.evaluate("() => { document.getElementById('sec-cards').open = true; }")
+        listed = page.evaluate(
+            "() => document.querySelectorAll('#cardlist button[data-card]').length"
+        )
+        drawn = page.evaluate(
+            "() => cy.nodes('[symbol]')"
+            ".filter(n => n.visible() && n.data('state') !== 'unclaimed').length"
+        )
+        first = page.locator("#cardlist button[data-card]").nth(1)
+        target = first.get_attribute("data-card")
+        first.focus()
+        page.keyboard.press("Enter")
+        page.wait_for_timeout(300)
+        selected = page.evaluate("() => cy.nodes(':selected').map(n => n.id())")
+        current = first.get_attribute("aria-current")
+        focused = page.evaluate("() => document.activeElement.dataset.card")
+        detail = page.inner_text("#detail")
+        toggle = page.locator("#cardlist button[data-toggle]").first
+        before = page.evaluate("() => cy.nodes('[symbol]').length")
+        toggle.focus()
+        page.keyboard.press("Enter")
+        page.wait_for_timeout(600)
+        after = page.evaluate("() => cy.nodes('[symbol]').length")
+        expanded = page.evaluate(
+            "() => document.activeElement.getAttribute('aria-expanded')"
+        )
+        browser.close()
+    assert target is not None
+    assert listed == drawn > 1
+    assert selected == [target]
+    assert current == "true" and focused == target
+    assert target.rsplit("/", 1)[-1] in detail
+    assert after > before
+    assert expanded == "true"
+
+
 def test_no_command_route_or_tools_panel_remains(server) -> None:
     # nemik:W397: the Tools drop-down ran CLIs through /cmd; it is retired, and every capability it
     # offered is either native to the view or CLI-only. Neither the route nor the panel may come back.

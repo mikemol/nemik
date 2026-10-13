@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 435,
+  "counter": 436,
   "waypoints": [
     {
       "symbol": "W1",
@@ -6410,21 +6410,25 @@
     {
       "symbol": "W337",
       "title": "Accessibility gates for the view, reusing el-openglo and paperkit's a11y machinery (umbrella)",
-      "status": "ready",
+      "status": "blocked",
       "enables": [],
       "touches": [
         "a11y",
         "web"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W338",
+        "W390"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "children: W338 contrast and CVD gate, W339 use-of-colour, W340 legibility floors, W341 a11y adversary; ask el-openglo and paperkit what is reusable as a package",
-      "evidence": "",
+      "evidence": "2026-10-13: Children done: W339 use of colour, W340 legibility floors, W341 adversary, W386 keyboard/screen reader. Open: W338 contrast + CVD, W390 treemap legibility.",
       "issued_at": "2026-10-11T21:16:23Z",
       "minted_during": "tick",
       "caused_by": "operator",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-13T06:56:21Z",
+      "ticks_blocked": 0,
+      "completed": null
     },
     {
       "symbol": "W338",
@@ -7499,7 +7503,7 @@
     {
       "symbol": "W386",
       "title": "a11y gaps: keyboard and screen-reader paths to what only the canvas offers",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W337"
       ],
@@ -7507,19 +7511,17 @@
         "a11y",
         "web"
       ],
-      "blocked_on": [
-        "W435"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Umbrella over W432 chip names, W433 live region, W434 both themes, W435 keyboard card list",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: All four parts landed: W432 chip names, W433 live region, W434 both themes, W435 keyboard card list.",
       "issued_at": "2026-10-12T12:14:21Z",
       "minted_during": "interrupt",
       "caused_by": "W380",
-      "last_worked": "2026-10-13T05:40:28Z",
-      "ticks_blocked": 1,
+      "last_worked": "2026-10-13T06:55:59Z",
+      "ticks_blocked": 0,
       "weight": 2,
-      "completed": null
+      "completed": "20261013T065559Z"
     },
     {
       "symbol": "W387",
@@ -7587,7 +7589,7 @@
     {
       "symbol": "W390",
       "title": "a11y: the treemap's tile labels meet the legibility floor, or say where they cannot",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W337"
       ],
@@ -7602,9 +7604,10 @@
       "issued_at": "2026-10-12T14:18:43Z",
       "minted_during": "tick",
       "caused_by": "W383",
-      "last_worked": null,
+      "last_worked": "2026-10-13T07:14:18Z",
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 4,
+      "completed": null
     },
     {
       "symbol": "W391",
@@ -8392,11 +8395,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": null,
-      "evidence": "2026-10-13: Source: ~/github/.claude/katas/katas.py:268 start_commit(repo, 'none', 'Queue: state sync', ...) (copy in mtools katas/src/mikemol/katas/fleet.py); nemik history shows one such commit, 5a4287b 2026-10-08. Told el-openglo (el-openglo-97) it is the katas sweep and forwarded the diagnosis plus remedies (route through mikemol-commit, or its own staged dir) to github-8f, the sweep's owner. | 2026-10-13: github-8f 2026-10-13: owned; carded at mtools as a blocker (skip repos with a live session, lease the rest, then route through mikemol-commit). Until then the host flush collides at about :19 and :49 each hour: on a refusal at those minutes, retry the commit (the verdict) and note it here.",
+      "evidence": "2026-10-13: Source: ~/github/.claude/katas/katas.py:268 start_commit(repo, 'none', 'Queue: state sync', ...) (copy in mtools katas/src/mikemol/katas/fleet.py); nemik history shows one such commit, 5a4287b 2026-10-08. Told el-openglo (el-openglo-97) it is the katas sweep and forwarded the diagnosis plus remedies (route through mikemol-commit, or its own staged dir) to github-8f, the sweep's owner. | 2026-10-13: github-8f 2026-10-13: owned; carded at mtools as a blocker (skip repos with a live session, lease the rest, then route through mikemol-commit). Until then the host flush collides at about :19 and :49 each hour: on a refusal at those minutes, retry the commit (the verdict) and note it here. | 2026-10-13: 2026-10-13 the race hit: katas sweep commit 553486a landed during mikemol-commit W435, which exited 0 and printed the sweep's commit as its verdict (false success; W435 not committed), and left nemik's index staging deletions of HEAD files. Index rebuilt with git reset (mixed, nothing lost); reported to github-8f for mtools (verdict must check HEAD is its own commit). nemik now checks git log -1 against its subject after each commit.",
       "issued_at": "2026-10-13T02:49:28Z",
       "minted_during": "tick",
       "caused_by": "inbox/2026-10-13-el-openglo-queue-sync-collides-with-the-gate.md",
-      "last_worked": "2026-10-13T02:50:57Z",
+      "last_worked": "2026-10-13T07:14:09Z",
       "ticks_blocked": 0,
       "completed": "20261013T024935Z"
     },
@@ -8517,21 +8520,38 @@
     {
       "symbol": "W435",
       "title": "A keyboard-reachable list of the visible cards mirroring the canvas: select, expand an umbrella and open details without a mouse",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W386"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Design: a collapsible side-panel section 'Cards' (details.sec, like the others) holding a <ul> of the cards cy currently shows, in the canvas's salience order; each row a <button> whose accessible name is state + symbol + title; Enter/Space selects that card on the canvas (same handler as a tap, so halos and details follow) and an umbrella row carries aria-expanded toggling the same roll-up as double-click. Rebuilt in draw(). Test: keyboard only (Tab to the list, Enter on a row) selects the card and shows its details; Enter on an umbrella expands it.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: index.html: side-panel section 'Cards' (#cardlist) lists the visible cards in salience order (unclaimed ask placeholders excluded: their label is a bare cite); each row a button named 'state symbol: title' that selects through the tap path (selectCard), aria-current kept in place so focus stays; umbrellas get an expand/collapse button with aria-expanded toggling the double-click roll-up (toggleUmbrella, now shared by dbltap), focus restored after the redraw. test_the_card_list_selects_and_expands_from_the_keyboard: focus+Enter selects, details show, Enter on the toggle expands and aria-expanded is true; render-check green. First run broke test_every_cite_in_the_panel_is_a_repo_colon_link (placeholder labels are bare cites) -> placeholders excluded.",
       "issued_at": "2026-10-13T05:40:21Z",
       "minted_during": "tick",
       "caused_by": "W386",
-      "last_worked": "2026-10-13T06:26:21Z",
+      "last_worked": "2026-10-13T06:55:59Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261013T065559Z"
+    },
+    {
+      "symbol": "W436",
+      "title": "Shape: a ready card that open cards enable is waiting on them; flag it (W337 sat ready as an umbrella while W338 and W390 enabled it)",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: blocks.annotate marks nemik:readyUmbrella on a ready/working card with >= 2 open same-repo children (the umbrella definition shared with UmbrellaBlockShape, factored as open_children); ReadyUmbrellaShape warns. Sized first on the live fleet: 'any open enabler' would fire on 91 cards in 11 repos (paperkit 55), too broad; the umbrella form fires on 12 in 8 repos. tests/test_ready_umbrella.py (flagged, chain step not, blocked not, other-repo children not); SKILL.md row; test_skill green.",
+      "issued_at": "2026-10-13T06:56:22Z",
+      "minted_during": "tick",
+      "caused_by": "W337",
+      "last_worked": "2026-10-13T07:14:08Z",
+      "ticks_blocked": 0,
+      "completed": "20261013T071408Z"
     }
   ],
   "residue": [

@@ -102,6 +102,9 @@ aside a { color: var(--ink); text-decoration: underline dotted var(--muted); }
     <details class="sec" id="sec-selected" open><summary>Selected</summary>
     <div id="detail" class="stat">Click a waypoint.</div>
     </details>
+    <details class="sec" id="sec-cards" data-closed-by-default><summary>Cards</summary>
+    <ul id="cardlist" class="stat"></ul>
+    </details>
     <details class="sec" id="sec-findings" data-closed-by-default><summary>Findings</summary>
     <div id="findings"></div>
     </details>
@@ -303,6 +306,52 @@ function refreshRings() {
   cy.nodes("[symbol]").forEach(n => { const r = rings.get(n.id()) || []; n.data({ rings: r, nrings: r.length }); });
   cy.style().update();
 }
+
+// nemik:W435: what the canvas offers only to a pointer (select a card and read it, expand an umbrella)
+// as a keyboard-reachable list of the cards drawn, in salience order. A row's button selects through
+// the same path as a tap; an umbrella's second button toggles the same roll-up as a double-click and
+// says its state in aria-expanded.
+function selectCard(id) {
+  const el = cy.getElementById(id);
+  if (!el.length) return;
+  cy.nodes(":selected").unselect();
+  el.select();
+  selectedId = id; detail(el.data()); refreshRings();
+  // in place, not a rebuild: rebuilding would drop the keyboard focus on the row just pressed
+  for (const b of document.querySelectorAll("#cardlist button[data-card]"))
+    b.setAttribute("aria-current", String(b.dataset.card === id));
+}
+function toggleUmbrella(id) {
+  const el = cy.getElementById(id);
+  if (el.data("rollup")) expanded.add(id); else if (expanded.has(id)) expanded.delete(id); else return;
+  draw();
+}
+function cardList() {
+  // an unclaimed placeholder is another repo's ask, labelled with its cite, not a card of its own
+  const rows = cy.nodes("[symbol]").filter(n => n.visible() && n.data("state") !== "unclaimed").toArray()
+    .sort((a, b) => (b.data("salience") || 0) - (a.data("salience") || 0) || (a.id() < b.id() ? -1 : 1));
+  document.getElementById("cardlist").innerHTML = rows.map(n => {
+    const d = n.data(), id = esc(n.id());
+    const name = `${d.state || ""} ${d.symbol}: ${d.title || ""}`;
+    const umbrella = d.rollup || expanded.has(n.id());
+    const toggle = umbrella
+      ? ` <button type="button" data-toggle="${id}" aria-expanded="${expanded.has(n.id())}">${expanded.has(n.id()) ? "collapse" : `expand ${d.rollup}`}</button>`
+      : "";
+    return `<li><button type="button" data-card="${id}" aria-label="${esc(name)}"`
+      + ` aria-current="${n.id() === selectedId}">${esc(d.label || d.symbol)}</button>${toggle}</li>`;
+  }).join("");
+}
+document.getElementById("cardlist").addEventListener("click", ev => {
+  const card = ev.target.closest("button[data-card]"), toggle = ev.target.closest("button[data-toggle]");
+  if (card) selectCard(card.dataset.card);
+  if (toggle) {
+    const id = toggle.dataset.toggle;
+    toggleUmbrella(id);
+    // keep keyboard focus on the same control across the redraw
+    const again = document.querySelector(`#cardlist button[data-toggle="${CSS.escape(id)}"]`);
+    if (again) again.focus();
+  }
+});
 
 function draw() {
   const showDone = document.getElementById("showDone").checked;
@@ -511,20 +560,17 @@ function draw() {
   cy.on("mouseout", "node", light);
   cy.on("select unselect", "node", light);
   light();
-  cy.on("tap", "node[symbol]", ev => { selectedId = ev.target.id(); detail(ev.target.data()); refreshRings(); });
+  cy.on("tap", "node[symbol]", ev => { selectedId = ev.target.id(); detail(ev.target.data()); refreshRings(); cardList(); });
   cy.on("tap", "node[lane]", ev => lane(ev.target.data("lane")));
   // nemik:W350: double-click an umbrella to expand or collapse what it rolls up.
-  cy.on("dbltap", "node[symbol]", ev => {
-    const id = ev.target.id();
-    if (ev.target.data("rollup")) expanded.add(id); else if (expanded.has(id)) expanded.delete(id); else return;
-    draw();
-  });
+  cy.on("dbltap", "node[symbol]", ev => toggleUmbrella(ev.target.id()));
   // The 60s poll rebuilds the graph from scratch (cy.destroy() above), which silently drops
   // whatever the user had selected. Re-select the same node if it still exists.
   if (selectedId) {
     const el = cy.getElementById(selectedId);
     if (el.length) { el.select(); detail(el.data()); } else { selectedId = null; }
   }
+  cardList();
   const shown = data.nodes.filter(n => keep.has(n.id));
   const blocked = shown.filter(n => n.state === "blocked").length;
   document.getElementById("stat").textContent = `${shown.length} waypoints · ${blocked} blocked · ${repos.length} repos`;

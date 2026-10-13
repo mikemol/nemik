@@ -95,6 +95,12 @@ nemik:UmbrellaBlockShape a sh:NodeShape ;
     sh:property [ sh:path nemik:umbrellaBlockOn ; sh:maxCount 0 ; sh:severity sh:Warning ;
                   sh:message "blocked on another workstream's umbrella waypoint (two or more of its own open children enable it): cite the child step that actually unblocks you, <repo>:W<n>" ] .
 
+# Ready or working, but an umbrella over two or more open children of its own (nemik:W436).
+nemik:ReadyUmbrellaShape a sh:NodeShape ;
+    sh:targetSubjectsOf nemik:readyUmbrella ;
+    sh:property [ sh:path nemik:readyUmbrella ; sh:maxCount 0 ; sh:severity sh:Warning ;
+                  sh:message "ready, but an umbrella: two or more of its own open cards enable it; set it blocked on them (it lands when they do), or drop the enables edges that are not prerequisites" ] .
+
 # Blocked, but on nothing the graph can reach: no edge can be drawn and no one can be nudged.
 nemik:UnresolvedBlockerShape a sh:NodeShape ;
     sh:targetSubjectsOf nemik:unresolvedBlocker ;

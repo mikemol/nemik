@@ -109,19 +109,31 @@ def annotate(g: Graph) -> None:
     # rather than on the child step doing the work (nemik:W41, luthen-observability's finding):
     # every child then inherits the waiter's weight in nemik-rank, and the umbrella itself can
     # never be the thing that lands.
-    for node, _, target in g.triples((None, NEMIK.waitsFor, None)):
-        if _repo(target) == _repo(node) or (node, OSLC_CM.state, NEMIK.Done) in g:
-            continue
+    def open_children(target: Node) -> list[Node]:
         # nemik:W144: an umbrella splits into two or more open children. A target with exactly one
         # open child is a step in a chain (mtools:W300 <- W299; W310 <- W309): citing it is right,
         # and the work beneath it is reached through it.
-        kids = [
+        return [
             c
             for c in g.subjects(NEMIK.enables, target)
             if _repo(c) == _repo(target) and (c, OSLC_CM.state, NEMIK.Done) not in g
         ]
-        if len(kids) >= 2:
+
+    for node, _, target in g.triples((None, NEMIK.waitsFor, None)):
+        if _repo(target) == _repo(node) or (node, OSLC_CM.state, NEMIK.Done) in g:
+            continue
+        if len(open_children(target)) >= 2:
             g.add((node, NEMIK.umbrellaBlockOn, target))
+
+    # nemik:W436: an umbrella that is itself ready or working, though two or more of its own open
+    # children enable it (nemik:W337 sat ready over W338 and W390). It cannot land before them, so
+    # it is blocked on them, and ranking it as workable sends a session to work nothing.
+    for state in (NEMIK.Ready, NEMIK.Working):
+        for node in g.subjects(OSLC_CM.state, state):
+            kids = open_children(node)
+            if len(kids) >= 2:
+                for kid in kids:
+                    g.add((node, NEMIK.readyUmbrella, kid))
 
     # nemik:W177 (operator 2026-10-01): each repo keeps exactly one `working` card unless every open
     # item is blocked. None while something is ready, or several, is the defect; the workstream
