@@ -45,6 +45,14 @@ cd "$wt" || exit 1
 # `claim:` check is `.venv/bin/python3 checks/claims.py`): build it here as the checkout has it.
 bazel build //:.venv --show_result=0 --noshow_progress || exit 1
 ln -sfn bazel-bin/.venv .venv || exit 1
+# nemik:W421: the registries a change must also update (a new command's SKILL.md row and workflows
+# entry, a shape's SKILL.md row, an architecture claim's projection) fail in seconds here, before the
+# whole suite: W365 and W400 each spent two ~10-minute gate rounds finding them one at a time.
+fast=(//:test_skill //:test_workflows //:test_architecture)
+if ! bazel test "${fast[@]}" --noshow_progress; then
+    echo "gate_staged: a registry check FAILED (fast pass, before the full suite): commit refused" >&2
+    exit 1
+fi
 if bazel test //... --noshow_progress; then
     echo "gate_staged: green on the staged tree ($wt)" >&2
     exit 0
