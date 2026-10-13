@@ -1,0 +1,119 @@
+{
+ "assemble": {
+  "edges": [
+   {
+    "kind": "waits",
+    "source": "urn:nemik:a/W\uffff",
+    "target": "urn:nemik:a/W1"
+   },
+   {
+    "kind": "waits",
+    "source": "urn:nemik:a/W\ud83d\ude00",
+    "target": "urn:nemik:a/W1"
+   }
+  ],
+  "findings": {
+   "a": []
+  },
+  "health": {},
+  "inbound": [],
+  "nodes": [
+   {
+    "id": "urn:nemik:a/W1",
+    "repo": "a"
+   },
+   {
+    "id": "urn:nemik:a/W\uffff",
+    "repo": "a"
+   },
+   {
+    "id": "urn:nemik:a/W\ud83d\ude00",
+    "repo": "a"
+   }
+  ],
+  "operator": [],
+  "ruler": {}
+ },
+ "doc": {
+  "edges": [
+   {
+    "kind": "waits",
+    "source": "urn:nemik:a/W\ud83d\ude00",
+    "target": "urn:nemik:a/W1"
+   },
+   {
+    "kind": "waits",
+    "source": "urn:nemik:a/W\uffff",
+    "target": "urn:nemik:a/W1"
+   }
+  ],
+  "findings": {
+   "a": []
+  },
+  "health": {},
+  "inbound": [],
+  "nodes": [
+   {
+    "id": "urn:nemik:a/W\uffff",
+    "repo": "a"
+   },
+   {
+    "id": "urn:nemik:a/W\ud83d\ude00",
+    "repo": "a"
+   },
+   {
+    "id": "urn:nemik:a/W1",
+    "repo": "a"
+   }
+  ],
+  "operator": [],
+  "ruler": {}
+ },
+ "name": "astral-plane-keys",
+ "split": {
+  "_fleet": {
+   "edges": [],
+   "findings": {},
+   "health": {},
+   "inbound": [],
+   "nodes": [],
+   "operator": [],
+   "repos": [
+    "a"
+   ],
+   "ruler": {}
+  },
+  "a": {
+   "edges": [
+    {
+     "kind": "waits",
+     "source": "urn:nemik:a/W\ud83d\ude00",
+     "target": "urn:nemik:a/W1"
+    },
+    {
+     "kind": "waits",
+     "source": "urn:nemik:a/W\uffff",
+     "target": "urn:nemik:a/W1"
+    }
+   ],
+   "findings": {
+    "a": []
+   },
+   "health": {},
+   "nodes": [
+    {
+     "id": "urn:nemik:a/W\uffff",
+     "repo": "a"
+    },
+    {
+     "id": "urn:nemik:a/W\ud83d\ude00",
+     "repo": "a"
+    },
+    {
+     "id": "urn:nemik:a/W1",
+     "repo": "a"
+    }
+   ]
+  }
+ }
+}

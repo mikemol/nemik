@@ -1,0 +1,190 @@
+{
+ "assemble": {
+  "edges": [
+   {
+    "kind": "enables",
+    "source": "urn:nemik:b/W1",
+    "target": "urn:nemik:a/W9"
+   },
+   {
+    "kind": "waits",
+    "source": "urn:nemik:z/W2",
+    "target": "urn:nemik:z/W1"
+   }
+  ],
+  "findings": {
+   "a": [],
+   "z": []
+  },
+  "health": {
+   "a": {},
+   "b": {},
+   "z": {}
+  },
+  "inbound": [],
+  "nodes": [
+   {
+    "id": "urn:nemik:a/W9",
+    "repo": "a"
+   },
+   {
+    "id": "urn:nemik:b/W1",
+    "repo": "b"
+   },
+   {
+    "id": "urn:nemik:z/W1",
+    "repo": "z"
+   },
+   {
+    "id": "urn:nemik:z/W2",
+    "repo": "z"
+   }
+  ],
+  "operator": [],
+  "ruler": {
+   "f": [
+    "",
+    "\u00b7"
+   ],
+   "motif": [
+    "\u00b7"
+   ]
+  }
+ },
+ "doc": {
+  "edges": [
+   {
+    "kind": "waits",
+    "source": "urn:nemik:z/W2",
+    "target": "urn:nemik:z/W1"
+   },
+   {
+    "kind": "enables",
+    "source": "urn:nemik:b/W1",
+    "target": "urn:nemik:a/W9"
+   }
+  ],
+  "findings": {
+   "a": [],
+   "z": []
+  },
+  "health": {
+   "a": {},
+   "b": {},
+   "z": {}
+  },
+  "inbound": [],
+  "nodes": [
+   {
+    "id": "urn:nemik:z/W2",
+    "repo": "z"
+   },
+   {
+    "id": "urn:nemik:b/W1",
+    "repo": "b"
+   },
+   {
+    "id": "urn:nemik:z/W1",
+    "repo": "z"
+   },
+   {
+    "id": "urn:nemik:a/W9",
+    "repo": "a"
+   }
+  ],
+  "operator": [],
+  "ruler": {
+   "f": [
+    "",
+    "\u00b7"
+   ],
+   "motif": [
+    "\u00b7"
+   ]
+  }
+ },
+ "name": "key-ordering",
+ "split": {
+  "_fleet": {
+   "edges": [],
+   "findings": {},
+   "health": {},
+   "inbound": [],
+   "nodes": [],
+   "operator": [],
+   "repos": [
+    "a",
+    "b",
+    "z"
+   ],
+   "ruler": {
+    "f": [
+     "",
+     "\u00b7"
+    ],
+    "motif": [
+     "\u00b7"
+    ]
+   }
+  },
+  "a": {
+   "edges": [],
+   "findings": {
+    "a": []
+   },
+   "health": {
+    "a": {}
+   },
+   "nodes": [
+    {
+     "id": "urn:nemik:a/W9",
+     "repo": "a"
+    }
+   ]
+  },
+  "b": {
+   "edges": [
+    {
+     "kind": "enables",
+     "source": "urn:nemik:b/W1",
+     "target": "urn:nemik:a/W9"
+    }
+   ],
+   "findings": {},
+   "health": {
+    "b": {}
+   },
+   "nodes": [
+    {
+     "id": "urn:nemik:b/W1",
+     "repo": "b"
+    }
+   ]
+  },
+  "z": {
+   "edges": [
+    {
+     "kind": "waits",
+     "source": "urn:nemik:z/W2",
+     "target": "urn:nemik:z/W1"
+    }
+   ],
+   "findings": {
+    "z": []
+   },
+   "health": {
+    "z": {}
+   },
+   "nodes": [
+    {
+     "id": "urn:nemik:z/W2",
+     "repo": "z"
+    },
+    {
+     "id": "urn:nemik:z/W1",
+     "repo": "z"
+    }
+   ]
+  }
+ }
+}

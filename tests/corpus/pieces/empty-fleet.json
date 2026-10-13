@@ -1,0 +1,33 @@
+{
+ "assemble": {
+  "edges": [],
+  "findings": {},
+  "health": {},
+  "inbound": [],
+  "nodes": [],
+  "operator": [],
+  "ruler": {}
+ },
+ "doc": {
+  "edges": [],
+  "findings": {},
+  "health": {},
+  "inbound": [],
+  "nodes": [],
+  "operator": [],
+  "ruler": {}
+ },
+ "name": "empty-fleet",
+ "split": {
+  "_fleet": {
+   "edges": [],
+   "findings": {},
+   "health": {},
+   "inbound": [],
+   "nodes": [],
+   "operator": [],
+   "repos": [],
+   "ruler": {}
+  }
+ }
+}

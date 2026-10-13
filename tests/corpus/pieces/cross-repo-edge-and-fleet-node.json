@@ -1,0 +1,161 @@
+{
+ "assemble": {
+  "edges": [
+   {
+    "kind": "waits",
+    "source": "operator",
+    "target": "urn:nemik:a/W1"
+   },
+   {
+    "kind": "waits",
+    "source": "urn:nemik:a/W1",
+    "target": "urn:nemik:b/W1"
+   }
+  ],
+  "findings": {
+   "a": [],
+   "c": [
+    [
+     "Warning",
+     "--",
+     "no queue"
+    ]
+   ]
+  },
+  "health": {
+   "a": {},
+   "b": {}
+  },
+  "inbound": [],
+  "nodes": [
+   {
+    "id": "operator",
+    "repo": ""
+   },
+   {
+    "id": "urn:nemik:a/W1",
+    "repo": "a"
+   },
+   {
+    "id": "urn:nemik:b/W1",
+    "repo": "b"
+   }
+  ],
+  "operator": [],
+  "ruler": {}
+ },
+ "doc": {
+  "edges": [
+   {
+    "kind": "waits",
+    "source": "operator",
+    "target": "urn:nemik:a/W1"
+   },
+   {
+    "kind": "waits",
+    "source": "urn:nemik:a/W1",
+    "target": "urn:nemik:b/W1"
+   }
+  ],
+  "findings": {
+   "a": [],
+   "c": [
+    [
+     "Warning",
+     "--",
+     "no queue"
+    ]
+   ]
+  },
+  "health": {
+   "a": {},
+   "b": {}
+  },
+  "inbound": [],
+  "nodes": [
+   {
+    "id": "urn:nemik:a/W1",
+    "repo": "a"
+   },
+   {
+    "id": "urn:nemik:b/W1",
+    "repo": "b"
+   },
+   {
+    "id": "operator",
+    "repo": ""
+   }
+  ],
+  "operator": [],
+  "ruler": {}
+ },
+ "name": "cross-repo-edge-and-fleet-node",
+ "split": {
+  "_fleet": {
+   "edges": [
+    {
+     "kind": "waits",
+     "source": "operator",
+     "target": "urn:nemik:a/W1"
+    }
+   ],
+   "findings": {
+    "c": [
+     [
+      "Warning",
+      "--",
+      "no queue"
+     ]
+    ]
+   },
+   "health": {},
+   "inbound": [],
+   "nodes": [
+    {
+     "id": "operator",
+     "repo": ""
+    }
+   ],
+   "operator": [],
+   "repos": [
+    "a",
+    "b"
+   ],
+   "ruler": {}
+  },
+  "a": {
+   "edges": [
+    {
+     "kind": "waits",
+     "source": "urn:nemik:a/W1",
+     "target": "urn:nemik:b/W1"
+    }
+   ],
+   "findings": {
+    "a": []
+   },
+   "health": {
+    "a": {}
+   },
+   "nodes": [
+    {
+     "id": "urn:nemik:a/W1",
+     "repo": "a"
+    }
+   ]
+  },
+  "b": {
+   "edges": [],
+   "findings": {},
+   "health": {
+    "b": {}
+   },
+   "nodes": [
+    {
+     "id": "urn:nemik:b/W1",
+     "repo": "b"
+    }
+   ]
+  }
+ }
+}

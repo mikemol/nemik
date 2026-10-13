@@ -8289,18 +8289,18 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Corpus first: tests/test_pieces.py fixtures plus generated cases (split then assemble is identity, key ordering, empty fleet, single-repo fleet) as data files both sides run; then rewrite pieces.py in the subset once mtools' subset gate and transpile step exist; report every corpus difference to github-8f",
-      "evidence": "",
+      "next_bounded_step": "Transpile half waits on mtools:W1070 (websubset gate), W1071 (py2many), W1072 (runner), W1073 (harness); then rewrite pieces.py in the subset, run the TS side over tests/corpus/pieces, delete index.html graphText()",
+      "evidence": "2026-10-13: mtools cards (github-8f 2026-10-13, caused_by nemik:W422): mtools:W1070 websubset gate, mtools:W1071 pinned py2many transpile, mtools:W1072 conformance runner, mtools:W1073 pieces spike harness. Not started; the corpus half here is the work for now. | 2026-10-13: Corpus half landed: tools/gen_pieces_corpus.py writes tests/corpus/pieces/*.json (doc, split, assemble per case): empty-fleet, single-repo, cross-repo-edge-and-fleet-node, key-ordering, astral-plane-keys (U+FFFF vs U+1F600: code-point vs UTF-16 order), fixture-fleet-3-repos (168 nodes; the full fleet is 3 MB, already covered by test_pieces). tests/test_pieces_corpus.py runs every case through Python with field-by-field diffs: 6/6 agree; split-then-assemble identity holds under assemble's canonical order (nodes by id, edges by (source,target,kind)). First run's one difference was my test's expectation (edge order), not pieces.",
       "issued_at": "2026-10-13T01:19:05Z",
       "minted_during": "tick",
       "caused_by": "W422",
-      "last_worked": "2026-10-13T01:20:25Z",
+      "last_worked": "2026-10-13T01:35:21Z",
       "ticks_blocked": 0,
       "completed": null
     },
     {
       "symbol": "W424",
-      "title": "Spike 2: flow.solve in the typed subset with a named Rational type (BigInt numerator/denominator), checked against gcalculus' flow_reference corpus",
+      "title": "Spike 2: gcalculus's flow solve as the one portable source, consumed pinned by nemik in Python and in the page",
       "status": "blocked",
       "enables": [
         "W422"
@@ -8310,12 +8310,12 @@
         "W423"
       ],
       "blocked_kind": "agent",
-      "next_bounded_step": "Do not accept py2many's default int mapping. Corpus: gcalculus flow_reference cases plus big-number and negative-division cases; the LRU cache stays outside the subset",
-      "evidence": "",
+      "next_bounded_step": "Wait on mtools:W1070 and gcalculus:W255; then contribute flow._grounded to gcalculus as the shipped sparse solver with the agreement corpus",
+      "evidence": "2026-10-13: 2026-10-13 operator correction via github-8f: nemik's flow.py is a second implementation of gcalculus's reference; gcalculus's becomes the portable source (github-8f minting the gcalculus card); nemik's flow.py is deleted when the corpus agrees. mtools:W1074 is the Fraction/BigInt spike. | 2026-10-13: 2026-10-13 census of gcalculus scripts/flow_reference.py (268 lines; imports only sys and fractions; solve path lines 28-159 = solve, cone, grounded, model_b/model_g/model_a, seeded_at, landed): Fraction built only from ints (+ - * /, != 0, ==; never hashed), dict/list/set, sorted without key, next/any/sum/zip(strict), recursion with mutating closures in model_a, ZeroDivisionError; no heapq/itertools/functools/regex/I/O; pure and deterministic, insertion-order dependent. Corpus: controls() p1-p5, ~20 exact expectations; no gcalculus test runs it. Gap: its solve is DENSE Gauss-Jordan; nemik's flow.py is sparse star-mesh (W250: dense cost 11 s over the fleet), so the single portable source must carry the sparse elimination before nemik can delete its copy. | 2026-10-13: 2026-10-13 github-8f ruling (folded into gcalculus:W255): the portable source carries BOTH solvers; gcalculus dense Gauss-Jordan is the reference oracle, nemik's sparse star-mesh (_grounded, W250) is the shipped solver, the corpus pins they agree on every case. nemik contributes _grounded to gcalculus:W255 once the subset gate (mtools:W1070) exists. Corpus additions: astral-plane string keys (TS needs a code-point comparator: JS sorts UTF-16 code units), Rational gcd reduction with BigInt, negative and zero denominators, insertion-order output keys, the ZeroDivisionError case. model_a closures -> explicit state and wiring controls() into a test are gcalculus's first steps.",
       "issued_at": "2026-10-13T01:19:06Z",
       "minted_during": "tick",
       "caused_by": "W422",
-      "last_worked": "2026-10-13T01:19:17Z",
+      "last_worked": "2026-10-13T01:25:21Z",
       "ticks_blocked": 0,
       "completed": null
     },

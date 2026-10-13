@@ -1,0 +1,104 @@
+{
+ "assemble": {
+  "edges": [
+   {
+    "kind": "waits",
+    "source": "urn:nemik:a/W1",
+    "target": "urn:nemik:a/W2"
+   }
+  ],
+  "findings": {
+   "a": []
+  },
+  "health": {
+   "a": {
+    "status": "ok"
+   }
+  },
+  "inbound": [],
+  "nodes": [
+   {
+    "id": "urn:nemik:a/W1",
+    "repo": "a"
+   },
+   {
+    "id": "urn:nemik:a/W2",
+    "repo": "a"
+   }
+  ],
+  "operator": [],
+  "ruler": {}
+ },
+ "doc": {
+  "edges": [
+   {
+    "kind": "waits",
+    "source": "urn:nemik:a/W1",
+    "target": "urn:nemik:a/W2"
+   }
+  ],
+  "findings": {
+   "a": []
+  },
+  "health": {
+   "a": {
+    "status": "ok"
+   }
+  },
+  "inbound": [],
+  "nodes": [
+   {
+    "id": "urn:nemik:a/W1",
+    "repo": "a"
+   },
+   {
+    "id": "urn:nemik:a/W2",
+    "repo": "a"
+   }
+  ],
+  "operator": [],
+  "ruler": {}
+ },
+ "name": "single-repo",
+ "split": {
+  "_fleet": {
+   "edges": [],
+   "findings": {},
+   "health": {},
+   "inbound": [],
+   "nodes": [],
+   "operator": [],
+   "repos": [
+    "a"
+   ],
+   "ruler": {}
+  },
+  "a": {
+   "edges": [
+    {
+     "kind": "waits",
+     "source": "urn:nemik:a/W1",
+     "target": "urn:nemik:a/W2"
+    }
+   ],
+   "findings": {
+    "a": []
+   },
+   "health": {
+    "a": {
+     "status": "ok"
+    }
+   },
+   "nodes": [
+    {
+     "id": "urn:nemik:a/W1",
+     "repo": "a"
+    },
+    {
+     "id": "urn:nemik:a/W2",
+     "repo": "a"
+    }
+   ]
+  }
+ }
+}
