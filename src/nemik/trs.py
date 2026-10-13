@@ -27,8 +27,14 @@ def _line(activity: Node) -> int:
     return int(str(activity).rsplit("/", 1)[-1])
 
 
-def trs(repo: str, queue: Graph, ledger: Graph) -> Graph:
-    """The TRS graph for `repo`: <ws>/trs/base and <ws>/trs/changelog."""
+def trs(
+    repo: str, queue: Graph, ledger: Graph, withheld: frozenset[str] = frozenset()
+) -> Graph:
+    """The TRS graph for `repo`: <ws>/trs/base and <ws>/trs/changelog.
+
+    A card whose URI is in `withheld` (nemik:W449: luthen's withheld list) is in neither the base nor
+    any change event; its events are skipped whole, so a reader cannot even learn that it changed.
+    """
     ws = workstream_uri(repo)
     base, log = URIRef(f"{ws}/trs/base"), URIRef(f"{ws}/trs/changelog")
     g = Graph()
@@ -37,7 +43,7 @@ def trs(repo: str, queue: Graph, ledger: Graph) -> Graph:
     cards = {
         c
         for c in queue.subjects(NEMIK.workstream, ws)
-        if (c, OSLC_CM.state, None) in queue
+        if (c, OSLC_CM.state, None) in queue and str(c) not in withheld
     }
     g.add((base, RDF.type, TRS.Base))
     for card in sorted(cards, key=str):
@@ -45,7 +51,7 @@ def trs(repo: str, queue: Graph, ledger: Graph) -> Graph:
     events = sorted(
         (_line(act), card)
         for act, card in ledger.subject_objects(PROV.used)
-        if (act, NEMIK.workstream, ws) in ledger
+        if (act, NEMIK.workstream, ws) in ledger and str(card) not in withheld
     )
     g.add((log, RDF.type, TRS.ChangeLog))
     seen: set[Node] = set()
@@ -60,6 +66,28 @@ def trs(repo: str, queue: Graph, ledger: Graph) -> Graph:
         tail += 1
         _event(g, log, TRS.Deletion, card, tail)
     return g
+
+
+def turtle(
+    repo: str, queue: Graph, ledger: Graph, withheld: frozenset[str] = frozenset()
+) -> dict[str, str]:
+    """{"base": Turtle, "changelog": Turtle} for `repo`: the two resources a TRS reader fetches."""
+    g = trs(repo, queue, ledger, withheld)
+    ws = workstream_uri(repo)
+    log = URIRef(f"{ws}/trs/changelog")
+    out: dict[str, str] = {}
+    for part, root in (("base", URIRef(f"{ws}/trs/base")), ("changelog", log)):
+        sub = Graph()
+        sub.bind("trs", TRS)
+        sub.bind("ldp", LDP)
+        for t in g.triples((root, None, None)):
+            sub.add(t)
+        if part == "changelog":
+            for ev in g.objects(log, TRS.change):
+                for t in g.triples((ev, None, None)):
+                    sub.add(t)
+        out[part] = sub.serialize(format="turtle")
+    return out
 
 
 def _event(g: Graph, log: URIRef, kind: URIRef, card: Node, order: int) -> None:

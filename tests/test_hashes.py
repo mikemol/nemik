@@ -15,8 +15,12 @@ def test_every_data_file_is_hashed_and_nothing_else(tmp_path: Path) -> None:
     out = tmp_path / "out"
     build_static(FLEET, out, withheld)
     hashes = json.loads((out / "hashes.json").read_text())
+    # the JSON documents and (W449) each repo's TRS feed in Turtle
     data = {
-        str(p.relative_to(out)) for p in out.rglob("*.json") if p.name != "hashes.json"
+        str(p.relative_to(out))
+        for pattern in ("*.json", "*.ttl")
+        for p in out.rglob(pattern)
+        if p.name != "hashes.json"
     }
     assert set(hashes) == data
     for name, digest in hashes.items():

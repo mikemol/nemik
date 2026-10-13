@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 250
+      "ticks_blocked": 251
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 70,
+      "ticks_blocked": 71,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 72,
+      "ticks_blocked": 73,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T23:37:26Z",
-      "ticks_blocked": 102,
+      "ticks_blocked": 103,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 99,
+      "ticks_blocked": 100,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 76,
+      "ticks_blocked": 77,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 91,
+      "ticks_blocked": 92,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 91,
+      "ticks_blocked": 92,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 91,
+      "ticks_blocked": 92,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 91,
+      "ticks_blocked": 92,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 91,
+      "ticks_blocked": 92,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 91,
+      "ticks_blocked": 92,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 91,
+      "ticks_blocked": 92,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 91,
+      "ticks_blocked": 92,
       "completed": null
     },
     {
@@ -6426,7 +6426,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T06:56:21Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -6450,7 +6450,7 @@
       "minted_during": "tick",
       "caused_by": "W337",
       "last_worked": "2026-10-13T07:54:43Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "weight": 5,
       "completed": null
     },
@@ -6560,7 +6560,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 2
     },
     {
       "symbol": "W344",
@@ -6624,7 +6624,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 66,
+      "ticks_blocked": 67,
       "completed": null
     },
     {
@@ -6762,7 +6762,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W353",
@@ -6784,7 +6784,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W354",
@@ -6806,7 +6806,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W355",
@@ -6828,7 +6828,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W356",
@@ -7031,7 +7031,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "completed": null
     },
     {
@@ -7633,7 +7633,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 28,
       "completed": null
     },
     {
@@ -7657,7 +7657,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 42,
+      "ticks_blocked": 43,
       "completed": null
     },
     {
@@ -7705,7 +7705,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-13T03:46:31Z",
-      "ticks_blocked": 42,
+      "ticks_blocked": 43,
       "completed": null
     },
     {
@@ -7729,7 +7729,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 42,
+      "ticks_blocked": 43,
       "completed": null
     },
     {
@@ -7955,7 +7955,7 @@
     {
       "symbol": "W406",
       "title": "Publish each repo's ledger as an OSLC Tracked Resource Set: a base snapshot plus an ordered change log",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W393"
       ],
@@ -7963,19 +7963,17 @@
         "interop",
         "performance"
       ],
-      "blocked_on": [
-        "W449"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Umbrella over W448 TRS model and W449 publishing",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: W448 model and W449 publishing landed: every repo's ledger is published as an OSLC TRS (base + ordered change log) in Turtle, withheld cards excluded; discovery through the service catalog is W408.",
       "issued_at": "2026-10-12T18:44:13Z",
       "minted_during": "interrupt",
       "caused_by": "W373",
-      "last_worked": "2026-10-13T13:13:10Z",
-      "ticks_blocked": 1,
+      "last_worked": "2026-10-13T13:49:24Z",
+      "ticks_blocked": 0,
       "weight": 1,
-      "completed": null
+      "completed": "20261013T134924Z"
     },
     {
       "symbol": "W407",
@@ -8000,7 +7998,7 @@
     {
       "symbol": "W408",
       "title": "An OSLC service-provider catalog per repo as the discovery root of the connector contract",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W371"
       ],
@@ -8014,9 +8012,10 @@
       "issued_at": "2026-10-12T18:44:15Z",
       "minted_during": "interrupt",
       "caused_by": "W373",
-      "last_worked": null,
+      "last_worked": "2026-10-13T13:49:26Z",
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 5,
+      "completed": null
     },
     {
       "symbol": "W409",
@@ -8288,7 +8287,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 23,
+      "ticks_blocked": 24,
       "completed": null
     },
     {
@@ -8309,7 +8308,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T05:38:02Z",
-      "ticks_blocked": 21,
+      "ticks_blocked": 22,
       "completed": null
     },
     {
@@ -8330,7 +8329,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 23,
+      "ticks_blocked": 24,
       "completed": null
     },
     {
@@ -8350,7 +8349,7 @@
       "caused_by": "W422",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 4
     },
     {
       "symbol": "W426",
@@ -8593,7 +8592,7 @@
       "minted_during": "tick",
       "caused_by": "W338",
       "last_worked": "2026-10-13T08:13:31Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "completed": null
     },
     {
@@ -8788,21 +8787,21 @@
     {
       "symbol": "W449",
       "title": "Publish trs/<repo>/base.ttl and changelog.ttl in the static build (Turtle, listed in hashes.json), with a TRS link from the service catalog (W408)",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W406"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: build_static writes trs/<repo>/base.ttl and changelog.ttl (nemik.trs.turtle) for every repo, listed in hashes.json; trs() takes the withheld URIs and drops those cards from base and change log alike. tests/test_trs_published.py: each repo's files parse as Turtle with a trs:Base / trs:ChangeLog, and a withheld card appears in neither; test_hashes counts .ttl. The service-catalog link is W408's.",
       "issued_at": "2026-10-13T13:13:08Z",
       "minted_during": "tick",
       "caused_by": "W406",
-      "last_worked": "2026-10-13T13:16:25Z",
+      "last_worked": "2026-10-13T13:49:22Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261013T134922Z"
     },
     {
       "symbol": "W450",
@@ -8815,12 +8814,12 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-10-13: mtools 2026-10-13: W1111 design: hooks stored in the queue state as argv lists (writer-only), one line per hook with its exit status, a failing hook reported but not stopping the rest or changing the lock. The writer's own --inbound prints UNCLAIMED peer asks (like nemik-inbound's card rows); nemik-inbound stays a hook because it also reports uncited inbox letters (W376).",
       "issued_at": "2026-10-13T13:15:31Z",
       "minted_during": "tick",
       "caused_by": "W426",
-      "last_worked": "2026-10-13T13:15:32Z",
-      "ticks_blocked": 1,
+      "last_worked": "2026-10-13T13:18:45Z",
+      "ticks_blocked": 2,
       "completed": null
     }
   ],
@@ -8886,7 +8885,7 @@
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-13T13:11:35Z"
+    "taken_at": "2026-10-13T13:41:35Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []

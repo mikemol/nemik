@@ -27,8 +27,9 @@ class Client:
         self.seen: dict[str, str] = {}
 
     def _get(self, path: str) -> Any:
+        # JSON documents decode; anything else (the TRS feeds are Turtle, W449) is kept as text
         with urllib.request.urlopen(self.base + path, timeout=30) as r:
-            return json.load(r)
+            return json.load(r) if path.endswith(".json") else r.read().decode()
 
     def refresh(self, prefix: str = "") -> list[str]:
         """Fetch every path under `prefix` whose hash moved; return the paths fetched."""

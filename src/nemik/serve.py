@@ -578,7 +578,8 @@ def build_static(root: Path, out: Path, withheld: Path | None) -> list[Path]:
     from nemik.withheld import apply, load
 
     refs = load(withheld)  # fails closed first: no list, no build
-    docs = apply(static_data(Model(root, refs)), refs)
+    model = Model(root, refs)
+    docs = apply(static_data(model), refs)
     if bad := [f for name, doc in docs.items() for f in unmanifested(name, doc)]:
         raise ValueError("unmanifested fields, refusing to publish: " + ", ".join(bad))
     # nemik:W415: graph.json's pieces, cut after the checks above from the document they checked,
@@ -600,11 +601,22 @@ def build_static(root: Path, out: Path, withheld: Path | None) -> list[Path]:
     # (W416) can refetch only the pieces that changed. Paths and digests only: nothing withheld.
     import hashlib
 
+    # nemik:W449: each repo's Tracked Resource Set (W448) as Turtle, the form TRS readers consume; a
+    # withheld card leaves both the base and the change log
+    from nemik.trs import turtle
+    from nemik.withheld import _id
+
+    hidden = frozenset(_id(r) for r in refs)
+    bodies = {name: json.dumps(doc, indent=1) for name, doc in docs.items()}
+    repos = {str(n["repo"]) for n in docs["graph.json"]["nodes"] if n["repo"]}
+    for repo in sorted(repos):
+        feed = turtle(repo, model.graph, model.graph, hidden)
+        for part in ("base", "changelog"):
+            bodies[f"trs/{repo}/{part}.ttl"] = feed[part]
     hashes: dict[str, str] = {}
-    for name, doc in sorted(docs.items()):
+    for name, body in sorted(bodies.items()):
         dst = out / name
         dst.parent.mkdir(parents=True, exist_ok=True)
-        body = json.dumps(doc, indent=1)
         dst.write_text(body)
         hashes[name] = hashlib.sha256(body.encode()).hexdigest()
         written.append(dst)
