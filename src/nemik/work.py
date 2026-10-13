@@ -23,6 +23,25 @@ def working(state: Path) -> list[str]:
     ]
 
 
+def blockers(state: Path, symbol: str) -> tuple[list[str], list[str]]:
+    """(open, landed) entries of `symbol`'s blocked_on (nemik:W443).
+
+    A local W<n> that is done, or dropped into residue, has landed. Anything else (a local card
+    still open, another repo's card, free text) is open: this tool cannot see another repo's state,
+    so it does not guess.
+    """
+    data = json.loads(state.read_text())
+    cards = {w["symbol"]: w for w in data.get("waypoints", [])}
+    dropped = {r["symbol"] for r in data.get("residue", [])}
+    entries = cards.get(symbol, {}).get("blocked_on") or []
+    landed = [
+        b
+        for b in entries
+        if b in dropped or (b in cards and cards[b].get("status") == "done")
+    ]
+    return [b for b in entries if b not in landed], landed
+
+
 def plan(current: list[str], symbol: str) -> list[tuple[str, str]]:
     """(symbol, status) updates that leave `symbol` the only working card."""
     return [(s, "ready") for s in current if s != symbol] + (
@@ -43,27 +62,44 @@ def main(argv: list[str] | None = None) -> int:
         help="the queue file (default: .claude/paths-forward.json here)",
     )
     ap.add_argument("--dry-run", action="store_true", help="print the updates only")
+    ap.add_argument(
+        "--force",
+        action="store_true",
+        help="work it even though blocked_on names something not known to have landed",
+    )
     args = ap.parse_args(argv)
     writer = str(Path(sys.executable).parent / "mikemol-paths-forward")
+    still, landed = blockers(args.state, args.symbol)
+    if still and not args.force:
+        # nemik:W443: working a blocked card left it 'working' with a stale blocked_on (W441).
+        print(
+            f"nemik-work: {args.symbol} is blocked on {', '.join(still)}; "
+            "land or unblock those first, or pass --force",
+            file=sys.stderr,
+        )
+        return 2
     steps = plan(working(args.state), args.symbol)
     for symbol, status in steps:
-        print(f"{symbol} -> {status}")
+        displaced = symbol != args.symbol
+        note = " (displaced: it was working)" if displaced else ""
+        if not displaced and landed:
+            note = f" (cleared landed blocker(s): {', '.join(landed)})"
+        print(f"{symbol} -> {status}{note}")
         if args.dry_run:
             continue
-        run = subprocess.run(
-            [
-                writer,
-                "--state",
-                str(args.state),
-                "--update",
-                symbol,
-                "--status",
-                status,
-            ],
-            capture_output=True,
-            text=True,
-            check=False,
-        )
+        cmd = [
+            writer,
+            "--state",
+            str(args.state),
+            "--update",
+            symbol,
+            "--status",
+            status,
+        ]
+        if not displaced and landed:
+            # keep only what is still open; with nothing open the list is emptied
+            cmd += ["--blocked-on", *still]
+        run = subprocess.run(cmd, capture_output=True, text=True, check=False)
         if run.returncode:
             print(run.stderr.strip() or run.stdout.strip(), file=sys.stderr)
             return run.returncode
