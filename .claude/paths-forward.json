@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 243
+      "ticks_blocked": 244
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 63,
+      "ticks_blocked": 64,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 65,
+      "ticks_blocked": 66,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T23:37:26Z",
-      "ticks_blocked": 95,
+      "ticks_blocked": 96,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 92,
+      "ticks_blocked": 93,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 69,
+      "ticks_blocked": 70,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 84,
+      "ticks_blocked": 85,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 84,
+      "ticks_blocked": 85,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 84,
+      "ticks_blocked": 85,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 84,
+      "ticks_blocked": 85,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 84,
+      "ticks_blocked": 85,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 84,
+      "ticks_blocked": 85,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 84,
+      "ticks_blocked": 85,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 84,
+      "ticks_blocked": 85,
       "completed": null
     },
     {
@@ -6426,7 +6426,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T06:56:21Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "completed": null
     },
     {
@@ -6450,7 +6450,7 @@
       "minted_during": "tick",
       "caused_by": "W337",
       "last_worked": "2026-10-13T07:54:43Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 10,
       "weight": 5,
       "completed": null
     },
@@ -6624,7 +6624,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 59,
+      "ticks_blocked": 60,
       "completed": null
     },
     {
@@ -7032,7 +7032,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -7633,7 +7633,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 20,
+      "ticks_blocked": 21,
       "completed": null
     },
     {
@@ -7657,7 +7657,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 35,
+      "ticks_blocked": 36,
       "completed": null
     },
     {
@@ -7705,7 +7705,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-13T03:46:31Z",
-      "ticks_blocked": 35,
+      "ticks_blocked": 36,
       "completed": null
     },
     {
@@ -7729,7 +7729,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 35,
+      "ticks_blocked": 36,
       "completed": null
     },
     {
@@ -8248,7 +8248,7 @@
       "minted_during": "tick",
       "caused_by": "W365",
       "last_worked": "2026-10-13T11:04:33Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "weight": 1,
       "completed": null
     },
@@ -8288,7 +8288,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "completed": null
     },
     {
@@ -8309,7 +8309,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T05:38:02Z",
-      "ticks_blocked": 14,
+      "ticks_blocked": 15,
       "completed": null
     },
     {
@@ -8330,7 +8330,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "completed": null
     },
     {
@@ -8370,7 +8370,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:42:04Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "completed": null
     },
     {
@@ -8597,7 +8597,7 @@
       "minted_during": "tick",
       "caused_by": "W338",
       "last_worked": "2026-10-13T08:13:31Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 10,
       "completed": null
     },
     {
@@ -8724,12 +8724,12 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Resolve the JAXB transitive closure from the POMs (jaxb-core, txw2, istack-commons-runtime, jakarta.activation-api, ...); pin each jar with http_file + sha256; pin a Temurin 17 JRE as http_archive, or use the bazel embedded JDK only if the test sandbox can reach it; measure total size",
-      "evidence": "",
+      "next_bounded_step": "MODULE.bazel: http_archive the Temurin JRE (strip_prefix, sha256 above) and one http_file per jar with its sha256 (hash each from the downloads in the scratchpad's jars/); expose them to the tests as env paths like NEMIK_OPA",
+      "evidence": "2026-10-13: Measured 2026-10-13 by running it: MPXJ 16.10.0 reads nemik-export's MSPDI with exactly 7 jars: mpxj-16.10.0, jakarta.xml.bind-api-3.0.1, jaxb-runtime-3.0.2, jaxb-core-3.0.2, txw2-3.0.2, istack-commons-runtime-4.0.1, com.sun.activation:jakarta.activation-2.0.1 (all Maven Central). JRE: Bazel's embedded JDK 25 fails (NoClassDefFoundError java.awt.image.RenderedImage: it is jlinked without java.desktop, which JAXB's runtime loads); Temurin JRE 21.0.12.1+1 works: https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jre_x64_linux_hotspot_21.0.12.1_1.tar.gz, sha256 2413149700df0f7d440500a84a8f764c535f21e5a5e87d38328b64eec2c5b500 (Adoptium API value, re-hashed locally: equal), 52 MB.",
       "issued_at": "2026-10-13T11:04:21Z",
       "minted_during": "tick",
       "caused_by": "W439",
-      "last_worked": "2026-10-13T11:04:35Z",
+      "last_worked": "2026-10-13T11:17:15Z",
       "ticks_blocked": 0,
       "completed": null
     },
@@ -8745,13 +8745,13 @@
         "W445"
       ],
       "blocked_kind": "agent",
-      "next_bounded_step": "First confirm the jar has a runnable reader (net.sf.mpxj.sample.MpxjQuery, or a 20-line Java main if not); run it under the pinned JRE in the sandbox; parse its output into (task, predecessor) pairs",
-      "evidence": "",
+      "next_bounded_step": "Parse the relationship lines: map ID to name, collect (task, predecessor) cite pairs from the predecessor column, compare with nemik.projection.decode over in-file links (cross-project links carry no PredecessorUID, so compare them separately or exclude them)",
+      "evidence": "2026-10-13: 2026-10-13 checked the jar (mpxj-16.10.0.jar, 3.43 MB): the package is now org.mpxj (was net.sf.mpxj); org.mpxj.sample.MpxjQuery, MpxjConvert and MpxjBatchConvert are present, so no Java source is needed and a JRE suffices. The W439 UNVERIFIED mark is cleared under the new name. | 2026-10-13: Run by hand on the fixture export: org.mpxj.sample.MpxjQuery lists every task, and its relationship section prints 'ID<TAB>name<TAB>predecessor IDs<TAB>successor IDs' (e.g. aeternum:W10 with predecessors 3,4,5,6 = W11-W14). The successor column repeats each task's own ID (the sample prints a successor relation's predecessor end), so the test reads the predecessor column only.",
       "issued_at": "2026-10-13T11:04:22Z",
       "minted_during": "tick",
       "caused_by": "W439",
-      "last_worked": "2026-10-13T11:04:30Z",
-      "ticks_blocked": 0,
+      "last_worked": "2026-10-13T11:17:16Z",
+      "ticks_blocked": 1,
       "completed": null
     }
   ],
@@ -8817,7 +8817,7 @@
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-13T11:02:34Z"
+    "taken_at": "2026-10-13T11:13:05Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []
