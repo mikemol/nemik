@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 456,
+  "counter": 457,
   "waypoints": [
     {
       "symbol": "W1",
@@ -8279,8 +8279,7 @@
       "touches": [],
       "blocked_on": [
         "W423",
-        "W424",
-        "W425"
+        "W424"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "Umbrella over W423, W424, W425; cite mtools' cards on W423 once they exist",
@@ -8289,7 +8288,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 33,
+      "ticks_blocked": 0,
       "completed": null
     },
     {
@@ -8919,6 +8918,22 @@
       "ticks_blocked": 0,
       "weight": 4,
       "completed": "20261013T162313Z"
+    },
+    {
+      "symbol": "W457",
+      "title": "Repin mtools pathsforward+hooks to c47d50b (tick-close prunes landed local blockers)",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "bump the mtools sha in pyproject/MODULE, bazel build //:.venv, confirm --tick-close prints UNBLOCKED lines",
+      "evidence": "",
+      "issued_at": "2026-10-13T17:29:14Z",
+      "minted_during": "tick",
+      "caused_by": "mtools:W1112",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -8988,10 +9003,7 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": {
-    "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-13T17:11:35Z"
-  },
+  "lock": null,
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }
