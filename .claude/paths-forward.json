@@ -9431,11 +9431,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": null,
-      "evidence": "2026-10-13: blocks.dependency_cycles(g) asks mikemol.frontier.walk.frontier(...).cycles over every card with enables (prereq->dependent) and waitsFor (blocker->waiter) edges, realized = done; annotate names each ring on its earliest card ('r:W1 -> r:W2 -> r:W3 -> r:W1'); DependencyCycleShape Warning; skill row; tests/test_dependency_cycle.py (ring of three named once; a done member breaks it); live fleet: 0 cycles today",
+      "evidence": "2026-10-13: blocks.dependency_cycles(g) asks mikemol.frontier.walk.frontier(...).cycles over every card with enables (prereq->dependent) and waitsFor (blocker->waiter) edges, realized = done; annotate names each ring on its earliest card ('r:W1 -> r:W2 -> r:W3 -> r:W1'); DependencyCycleShape Warning; skill row; tests/test_dependency_cycle.py (ring of three named once; a done member breaks it); live fleet: 0 cycles today | 2026-10-13: gate refused the first version: nemik already warns on deadlocks (W331, check.py, per member, skipping cycles the operator can break), and a second shape duplicated it without that exception. Reworked: no new shape; blocks.dependency_cycles (the shared walker's cycles) names W331's existing warning in ring order from each member ('a:W2 -> a:W3 -> a:W1 -> a:W2'), falling back to the old member list; test_deadlock_check unchanged and passing",
       "issued_at": "2026-10-13T21:46:54Z",
       "minted_during": "interrupt",
       "caused_by": "mtools:W1134",
-      "last_worked": "2026-10-13T22:21:00Z",
+      "last_worked": "2026-10-13T23:05:00Z",
       "ticks_blocked": 0,
       "completed": "20261013T222100Z"
     },
