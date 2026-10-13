@@ -449,7 +449,8 @@ def test_side_panel_sections_fold_and_the_choice_survives_a_reload(server) -> No
     assert kept is False
 
 
-def test_the_default_view_is_legible(server) -> None:
+@pytest.mark.parametrize("scheme", ["light", "dark"])  # nemik:W434
+def test_the_default_view_is_legible(server, scheme) -> None:
     # nemik:W340: the first view never shrinks a label below 8 px or a node below 12 px on screen; when
     # the whole fleet would, it shows one repo at the floor and says so, with a way to fit everything.
     with sync_api.sync_playwright() as p:
@@ -460,7 +461,9 @@ def test_the_default_view_is_legible(server) -> None:
             )
         except sync_api.Error as e:
             pytest.skip(f"chromium unavailable: {e}")
-        page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        page = browser.new_page(
+            viewport={"width": 1700, "height": 1250}, color_scheme=scheme
+        )
         page.goto(server)
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
@@ -518,7 +521,8 @@ def test_every_label_glyph_exists_in_this_browsers_fonts(server) -> None:
     assert missing == [], f"not in this browser's fonts: {missing}"
 
 
-def test_context_cards_have_a_rendered_cue_of_their_own(server) -> None:
+@pytest.mark.parametrize("scheme", ["light", "dark"])  # nemik:W434
+def test_context_cards_have_a_rendered_cue_of_their_own(server, scheme) -> None:
     # nemik:W385 (W380 refuted the data-flag proof): with one repo picked, the context cards drawn from
     # other repos RENDER a double border at full opacity, and no other card renders one.
     with sync_api.sync_playwright() as p:
@@ -529,7 +533,9 @@ def test_context_cards_have_a_rendered_cue_of_their_own(server) -> None:
             )
         except sync_api.Error as e:
             pytest.skip(f"chromium unavailable: {e}")
-        page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        page = browser.new_page(
+            viewport={"width": 1700, "height": 1250}, color_scheme=scheme
+        )
         page.goto(server)
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
@@ -549,7 +555,8 @@ def test_context_cards_have_a_rendered_cue_of_their_own(server) -> None:
     assert not any(style == "double" for _, style, _ in others)
 
 
-def test_each_card_state_differs_by_more_than_its_fill(server) -> None:
+@pytest.mark.parametrize("scheme", ["light", "dark"])  # nemik:W434
+def test_each_card_state_differs_by_more_than_its_fill(server, scheme) -> None:
     # nemik:W381 (W380 refuted the old claim): for every pair of states drawn, the cards differ in some
     # non-colour property, here the glyph that begins the label (ready has none, the rest each their own).
     with sync_api.sync_playwright() as p:
@@ -560,7 +567,9 @@ def test_each_card_state_differs_by_more_than_its_fill(server) -> None:
             )
         except sync_api.Error as e:
             pytest.skip(f"chromium unavailable: {e}")
-        page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        page = browser.new_page(
+            viewport={"width": 1700, "height": 1250}, color_scheme=scheme
+        )
         page.goto(server)
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
@@ -617,7 +626,10 @@ USE_OF_COLOUR = """() => {
 }"""
 
 
-def test_every_meaning_the_view_colours_has_a_second_channel(server, tmp_path) -> None:
+@pytest.mark.parametrize("scheme", ["light", "dark"])  # nemik:W434
+def test_every_meaning_the_view_colours_has_a_second_channel(
+    server, tmp_path, scheme
+) -> None:
     # nemik:W429/W431: the measurement above, evaluated with el-openglo's pinned requirement
     # (W430, policy/use_of_colour.rego) by the pinned opa: no denial, and something admitted.
     import json
@@ -635,7 +647,9 @@ def test_every_meaning_the_view_colours_has_a_second_channel(server, tmp_path) -
             )
         except sync_api.Error as e:
             pytest.skip(f"chromium unavailable: {e}")
-        page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        page = browser.new_page(
+            viewport={"width": 1700, "height": 1250}, color_scheme=scheme
+        )
         page.goto(server)
         page.wait_for_selector("#pathkey line", state="attached")
         measured = page.evaluate(USE_OF_COLOUR)
