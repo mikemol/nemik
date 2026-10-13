@@ -741,3 +741,4 @@
 2026-10-13T15:43:07Z  tick  W455 noted     repair    "verifying the fix: build for cce98a5 started 11:26 EDT, no failure logged since the last pre-fix one (11:10); cluster still 3470e43; re-check next tick"
 2026-10-13T16:07:36Z  interrupt W456 minted    -         "Label glyphs mean one thing each: the roll-up suffix stops reusing the working mark (W503 ▸ 3 vs ▸ W503), and a test refuses any glyph used in two roles"  evidence=operator
 2026-10-13T16:36:51Z  tick  W456 advanced  unblock   "W455 closed (cluster runs cce98a5; nemik-pins says in flight vs stuck past --stuck-after); W456 roll-up mark is '+n' (was the working mark ▸), legend explains it, a test refuses a glyph in two roles; W453 working"
+2026-10-13T16:58:33Z  tick  W453 advanced  unblock   "W453 critical_cards: the critical path over plain Cards, equal to the graph version on all 17 live scopes; deploy healthy (in flight, 2 behind); W454 health over Cards working"

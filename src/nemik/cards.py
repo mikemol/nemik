@@ -28,6 +28,9 @@ class Card:
     title: str
     waits_for: tuple[str, ...]  # the cards it waits for (annotate's resolved waitsFor)
     enabled_by: tuple[str, ...]  # the cards that enable it
+    ticks_blocked: int = (
+        0  # loop ticks it has spent blocked (health's oldest-block signal, W454)
+    )
 
     @property
     def repo(self) -> str:
@@ -54,5 +57,6 @@ def cards(g: Graph) -> dict[str, Card]:
             enabled_by=tuple(
                 sorted(ref(s) for s in g.subjects(NEMIK.enables, n) if s in nodes)
             ),
+            ticks_blocked=int(str(g.value(n, NEMIK.ticksBlocked) or 0)),
         )
     return dict(sorted(out.items()))

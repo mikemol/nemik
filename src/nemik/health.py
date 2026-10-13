@@ -10,12 +10,12 @@ from __future__ import annotations
 
 import tomllib
 from importlib.resources import files
-from typing import NamedTuple
+from typing import Any, NamedTuple
 
 from rdflib import Graph
 
-from nemik.adapter import NEMIK, OSLC_CM
-from nemik.blocks import operator_asks, ref
+from nemik.blocks import operator_asks
+from nemik.cards import Card, cards
 
 STATUSES = ("green", "amber", "red")
 SIGNALS = ("blocked_share", "oldest_block_ticks", "asks_owed")
@@ -39,19 +39,23 @@ def thresholds(text: str | None = None) -> dict[str, tuple[float, float]]:
 
 def health(g: Graph, repo: str, limits: dict[str, tuple[float, float]]) -> Health:
     """`repo`'s verdict: the worst of its signals against `limits`, with a reason per crossing."""
-    open_cards = [
-        n
-        for n in g.subjects(OSLC_CM.state, None)
-        if (n, OSLC_CM.state, NEMIK.Done) not in g and ref(n).partition(":")[0] == repo
-    ]
-    blocked = [n for n in open_cards if (n, OSLC_CM.state, NEMIK.Blocked) in g]
+    return health_cards(cards(g), operator_asks(g), repo, limits)
+
+
+def health_cards(
+    by_cite: dict[str, Card],
+    asks: list[dict[str, Any]],
+    repo: str,
+    limits: dict[str, tuple[float, float]],
+) -> Health:
+    """nemik:W454: `health` over plain Cards and the operator asks as plain rows: the portable core."""
+    open_cards = [c for c in by_cite.values() if not c.done and c.repo == repo]
+    blocked = [c for c in open_cards if c.state == "blocked"]
     share = len(blocked) / len(open_cards) if open_cards else 0.0
-    ticks = max(
-        (int(str(g.value(n, NEMIK.ticksBlocked) or 0)) for n in blocked), default=0
-    )
+    ticks = max((c.ticks_blocked for c in blocked), default=0)
     owed = sum(
         1
-        for ask in operator_asks(g)
+        for ask in asks
         if ask["category"] == "needs-you" and str(ask["ref"]).partition(":")[0] == repo
     )
     seen = {"blocked_share": share, "oldest_block_ticks": ticks, "asks_owed": owed}

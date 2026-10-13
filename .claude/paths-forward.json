@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 258
+      "ticks_blocked": 260
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 78,
+      "ticks_blocked": 80,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 80,
+      "ticks_blocked": 82,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T23:37:26Z",
-      "ticks_blocked": 110,
+      "ticks_blocked": 112,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 107,
+      "ticks_blocked": 109,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 84,
+      "ticks_blocked": 86,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 99,
+      "ticks_blocked": 101,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 99,
+      "ticks_blocked": 101,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 99,
+      "ticks_blocked": 101,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 99,
+      "ticks_blocked": 101,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 99,
+      "ticks_blocked": 101,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 99,
+      "ticks_blocked": 101,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 99,
+      "ticks_blocked": 101,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 99,
+      "ticks_blocked": 101,
       "completed": null
     },
     {
@@ -6426,7 +6426,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T06:56:21Z",
-      "ticks_blocked": 25,
+      "ticks_blocked": 27,
       "completed": null
     },
     {
@@ -6450,7 +6450,7 @@
       "minted_during": "tick",
       "caused_by": "W337",
       "last_worked": "2026-10-13T07:54:43Z",
-      "ticks_blocked": 24,
+      "ticks_blocked": 26,
       "weight": 5,
       "completed": null
     },
@@ -6624,7 +6624,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 74,
+      "ticks_blocked": 76,
       "completed": null
     },
     {
@@ -6745,7 +6745,7 @@
     {
       "symbol": "W352",
       "title": "Liveness board: which repos had workable cards while asleep",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W346"
       ],
@@ -6760,9 +6760,10 @@
       "issued_at": "2026-10-12T00:40:25Z",
       "minted_during": "interrupt",
       "caused_by": "W346",
-      "last_worked": null,
+      "last_worked": "2026-10-13T17:16:46Z",
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 3,
+      "completed": null
     },
     {
       "symbol": "W353",
@@ -7031,7 +7032,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 14,
       "completed": null
     },
     {
@@ -7188,7 +7189,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 4
     },
     {
       "symbol": "W372",
@@ -7634,7 +7635,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 35,
+      "ticks_blocked": 37,
       "completed": null
     },
     {
@@ -7658,7 +7659,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 50,
+      "ticks_blocked": 52,
       "completed": null
     },
     {
@@ -7706,7 +7707,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-13T03:46:31Z",
-      "ticks_blocked": 50,
+      "ticks_blocked": 52,
       "completed": null
     },
     {
@@ -7730,7 +7731,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 50,
+      "ticks_blocked": 52,
       "completed": null
     },
     {
@@ -8288,7 +8289,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 31,
+      "ticks_blocked": 33,
       "completed": null
     },
     {
@@ -8309,7 +8310,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T05:38:02Z",
-      "ticks_blocked": 29,
+      "ticks_blocked": 31,
       "completed": null
     },
     {
@@ -8330,31 +8331,28 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 31,
+      "ticks_blocked": 33,
       "completed": null
     },
     {
       "symbol": "W425",
       "title": "Make nemik.index.Index the pure input type (built from rdflib once) so critical, projection and health can enter the typed subset",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W422"
       ],
       "touches": [],
-      "blocked_on": [
-        "W453",
-        "W454"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Umbrella: projection done; W453 critical and W454 health follow over Cards",
-      "evidence": "2026-10-13: nemik/cards.py: Card (cite, state, title, waits_for, enabled_by: strings and tuples, frozen) and cards(g), the only rdflib touch. projection.project_cards is pure over Cards; project(g) is the shim. Consumers green: test_projection, test_mspdi, test_issues, test_mpxj, test_importer.",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: nemik/cards.py: Card (cite, state, title, waits_for, enabled_by: strings and tuples, frozen) and cards(g), the only rdflib touch. projection.project_cards is pure over Cards; project(g) is the shim. Consumers green: test_projection, test_mspdi, test_issues, test_mpxj, test_importer. | 2026-10-13: projection, critical (W453) and health (W454) all computed over nemik.cards.Card; cards(g) the only rdflib reader",
       "issued_at": "2026-10-13T01:19:07Z",
       "minted_during": "tick",
       "caused_by": "W422",
-      "last_worked": "2026-10-13T14:49:56Z",
-      "ticks_blocked": 4,
+      "last_worked": "2026-10-13T17:16:26Z",
+      "ticks_blocked": 0,
       "weight": 4,
-      "completed": null
+      "completed": "20261013T171626Z"
     },
     {
       "symbol": "W426",
@@ -8597,7 +8595,7 @@
       "minted_during": "tick",
       "caused_by": "W338",
       "last_worked": "2026-10-13T08:13:31Z",
-      "ticks_blocked": 24,
+      "ticks_blocked": 26,
       "completed": null
     },
     {
@@ -8824,7 +8822,7 @@
       "minted_during": "tick",
       "caused_by": "W426",
       "last_worked": "2026-10-13T13:18:45Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 11,
       "completed": null
     },
     {
@@ -8869,22 +8867,22 @@
     {
       "symbol": "W454",
       "title": "health over Cards: a repo's verdict (blocked share, oldest block, asks owed) from nemik.cards.Card plus the operator asks as plain rows",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W425"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: health_cards(by_cite, asks, repo, limits) pure over Card; health(g) a shim; Card gains ticks_blocked; tests/test_health_cards.py + test_health + test_serve_model pass",
       "issued_at": "2026-10-13T14:49:54Z",
       "minted_during": "tick",
       "caused_by": "W425",
-      "last_worked": "2026-10-13T16:47:00Z",
+      "last_worked": "2026-10-13T17:16:25Z",
       "ticks_blocked": 0,
       "weight": 4,
-      "completed": null
+      "completed": "20261013T171625Z"
     },
     {
       "symbol": "W455",
@@ -8992,7 +8990,7 @@
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-13T16:41:34Z"
+    "taken_at": "2026-10-13T17:11:35Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []
