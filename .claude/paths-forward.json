@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 443,
+  "counter": 444,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 240
+      "ticks_blocked": 242
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 60,
+      "ticks_blocked": 62,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 62,
+      "ticks_blocked": 64,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T23:37:26Z",
-      "ticks_blocked": 92,
+      "ticks_blocked": 94,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 89,
+      "ticks_blocked": 91,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 66,
+      "ticks_blocked": 68,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 81,
+      "ticks_blocked": 83,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 81,
+      "ticks_blocked": 83,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 81,
+      "ticks_blocked": 83,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 81,
+      "ticks_blocked": 83,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 81,
+      "ticks_blocked": 83,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 81,
+      "ticks_blocked": 83,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 81,
+      "ticks_blocked": 83,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 81,
+      "ticks_blocked": 83,
       "completed": null
     },
     {
@@ -6426,7 +6426,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T06:56:21Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -6450,7 +6450,7 @@
       "minted_during": "tick",
       "caused_by": "W337",
       "last_worked": "2026-10-13T07:54:43Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 8,
       "weight": 5,
       "completed": null
     },
@@ -6624,7 +6624,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 56,
+      "ticks_blocked": 58,
       "completed": null
     },
     {
@@ -6762,7 +6762,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 2
     },
     {
       "symbol": "W353",
@@ -6784,7 +6784,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 2
     },
     {
       "symbol": "W354",
@@ -6806,7 +6806,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 2
     },
     {
       "symbol": "W355",
@@ -6828,7 +6828,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 2
     },
     {
       "symbol": "W356",
@@ -7022,7 +7022,6 @@
       ],
       "blocked_on": [
         "W367",
-        "W368",
         "W369",
         "W370"
       ],
@@ -7033,7 +7032,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 13,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -7634,7 +7633,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 19,
       "completed": null
     },
     {
@@ -7658,7 +7657,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 32,
+      "ticks_blocked": 34,
       "completed": null
     },
     {
@@ -7706,7 +7705,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-13T03:46:31Z",
-      "ticks_blocked": 32,
+      "ticks_blocked": 34,
       "completed": null
     },
     {
@@ -7730,7 +7729,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 32,
+      "ticks_blocked": 34,
       "completed": null
     },
     {
@@ -8248,7 +8247,7 @@
       "minted_during": "tick",
       "caused_by": "W365",
       "last_worked": "2026-10-13T08:49:40Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 6,
       "weight": 1,
       "completed": null
     },
@@ -8288,7 +8287,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 13,
+      "ticks_blocked": 15,
       "completed": null
     },
     {
@@ -8309,7 +8308,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T05:38:02Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 13,
       "completed": null
     },
     {
@@ -8330,7 +8329,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 13,
+      "ticks_blocked": 15,
       "completed": null
     },
     {
@@ -8370,7 +8369,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:42:04Z",
-      "ticks_blocked": 13,
+      "ticks_blocked": 15,
       "completed": null
     },
     {
@@ -8402,11 +8401,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": null,
-      "evidence": "2026-10-13: Source: ~/github/.claude/katas/katas.py:268 start_commit(repo, 'none', 'Queue: state sync', ...) (copy in mtools katas/src/mikemol/katas/fleet.py); nemik history shows one such commit, 5a4287b 2026-10-08. Told el-openglo (el-openglo-97) it is the katas sweep and forwarded the diagnosis plus remedies (route through mikemol-commit, or its own staged dir) to github-8f, the sweep's owner. | 2026-10-13: github-8f 2026-10-13: owned; carded at mtools as a blocker (skip repos with a live session, lease the rest, then route through mikemol-commit). Until then the host flush collides at about :19 and :49 each hour: on a refusal at those minutes, retry the commit (the verdict) and note it here. | 2026-10-13: 2026-10-13 the race hit: katas sweep commit 553486a landed during mikemol-commit W435, which exited 0 and printed the sweep's commit as its verdict (false success; W435 not committed), and left nemik's index staging deletions of HEAD files. Index rebuilt with git reset (mixed, nothing lost); reported to github-8f for mtools (verdict must check HEAD is its own commit). nemik now checks git log -1 against its subject after each commit.",
+      "evidence": "2026-10-13: Source: ~/github/.claude/katas/katas.py:268 start_commit(repo, 'none', 'Queue: state sync', ...) (copy in mtools katas/src/mikemol/katas/fleet.py); nemik history shows one such commit, 5a4287b 2026-10-08. Told el-openglo (el-openglo-97) it is the katas sweep and forwarded the diagnosis plus remedies (route through mikemol-commit, or its own staged dir) to github-8f, the sweep's owner. | 2026-10-13: github-8f 2026-10-13: owned; carded at mtools as a blocker (skip repos with a live session, lease the rest, then route through mikemol-commit). Until then the host flush collides at about :19 and :49 each hour: on a refusal at those minutes, retry the commit (the verdict) and note it here. | 2026-10-13: 2026-10-13 the race hit: katas sweep commit 553486a landed during mikemol-commit W435, which exited 0 and printed the sweep's commit as its verdict (false success; W435 not committed), and left nemik's index staging deletions of HEAD files. Index rebuilt with git reset (mixed, nothing lost); reported to github-8f for mtools (verdict must check HEAD is its own commit). nemik now checks git log -1 against its subject after each commit. | 2026-10-13: 2026-10-13 github-8f: the host flush that committed 7089ab6 was its old katas.py; retired since 07:49Z (mikemol-katas tick end skips repos with a fresh tick lock or live session, W1098). mikemol-commit's identity check (mtools:W1107, 2988de7: RACED, exit 4) and stale-index refresh (mtools:W1108, a819c34) exist; nemik takes them by repinning (W444).",
       "issued_at": "2026-10-13T02:49:28Z",
       "minted_during": "tick",
       "caused_by": "inbox/2026-10-13-el-openglo-queue-sync-collides-with-the-gate.md",
-      "last_worked": "2026-10-13T07:14:09Z",
+      "last_worked": "2026-10-13T10:35:56Z",
       "ticks_blocked": 0,
       "completed": "20261013T024935Z"
     },
@@ -8597,13 +8596,13 @@
       "minted_during": "tick",
       "caused_by": "W338",
       "last_worked": "2026-10-13T08:13:31Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 8,
       "completed": null
     },
     {
       "symbol": "W439",
       "title": "Pick the pinnable MSPDI reader: MPXJ on a hermetic JVM (its jar closure via http_file or rules_jvm_external) vs the Project 2007 SDK's mspdi_pj12.xsd recovered from an archive with a sha256",
-      "status": "working",
+      "status": "ready",
       "enables": [
         "W420"
       ],
@@ -8615,7 +8614,7 @@
       "issued_at": "2026-10-13T08:49:39Z",
       "minted_during": "tick",
       "caused_by": "W420",
-      "last_worked": "2026-10-13T09:53:26Z",
+      "last_worked": "2026-10-13T10:37:29Z",
       "ticks_blocked": 0,
       "weight": 2,
       "completed": null
@@ -8669,11 +8668,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": null,
-      "evidence": "2026-10-13: apischema.openapi(): OpenAPI 3.1 generated from the schemas (each data path a GET whose 200 refs its published schema; hashes.json and graph/{piece}.json listed); build_static publishes openapi.json (in hashes.json). tools/nemik_client.py: stdlib client that refetches only paths whose hash moved, with --watch. tests/test_read_api.py: every openapi ref is a published schema; the client fetches everything once, then nothing when nothing moved.",
+      "evidence": "2026-10-13: apischema.openapi(): OpenAPI 3.1 generated from the schemas (each data path a GET whose 200 refs its published schema; hashes.json and graph/{piece}.json listed); build_static publishes openapi.json (in hashes.json). tools/nemik_client.py: stdlib client that refetches only paths whose hash moved, with --watch. tests/test_read_api.py: every openapi ref is a published schema; the client fetches everything once, then nothing when nothing moved. | 2026-10-13: 2026-10-13 RECORD CORRECTION: W442's code landed and deployed in 7089ab6, which carries the katas sweep's message 'Queue: state sync' / Waypoint: none (8 files incl. src/nemik/apischema.py, serve.py, tools/nemik_client.py, tests/test_read_api.py), not a W442 commit; mikemol-commit W442 reported that commit as its own. Pushed history is not rewritten (a push is a deploy); this line is the attribution.",
       "issued_at": "2026-10-13T08:49:58Z",
       "minted_during": "tick",
       "caused_by": "W368",
-      "last_worked": "2026-10-13T09:53:22Z",
+      "last_worked": "2026-10-13T10:35:03Z",
       "ticks_blocked": 0,
       "completed": "20261013T095322Z",
       "weight": 3
@@ -8695,6 +8694,24 @@
       "ticks_blocked": 0,
       "weight": 1,
       "completed": "20261013T091404Z"
+    },
+    {
+      "symbol": "W444",
+      "title": "Repin the mtools wheels to the fleet par (luthen's repin_par.txt) with mikemol-repin, for mikemol-commit's identity check (mtools:W1107) and stale-index refresh (mtools:W1108)",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Read the par from luthen's repin_par.txt; mikemol-repin nemik to it (or tools/revendor-mtools.sh <par> 2eeb11e); commit with plain git commit after the staged gate (force-tracked wheels); then confirm a commit prints COMMITTED with its own subject and the real index is current (no git reset needed). Drop the manual git log -1 / git reset steps once both are confirmed",
+      "evidence": "",
+      "issued_at": "2026-10-13T10:35:55Z",
+      "minted_during": "interrupt",
+      "caused_by": "W428",
+      "last_worked": "2026-10-13T10:37:29Z",
+      "ticks_blocked": 0,
+      "weight": 1,
+      "completed": null
     }
   ],
   "residue": [
@@ -8759,7 +8776,7 @@
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-13T09:50:09Z"
+    "taken_at": "2026-10-13T10:36:35Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []
