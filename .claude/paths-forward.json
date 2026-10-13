@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 484,
+  "counter": 487,
   "waypoints": [
     {
       "symbol": "W1",
@@ -9439,6 +9439,57 @@
       "last_worked": "2026-10-13T21:46:56Z",
       "ticks_blocked": 0,
       "completed": null
+    },
+    {
+      "symbol": "W485",
+      "title": "Measure where working time goes: leaves vs interior vs directed cards, per repo, from every ledger, as a series",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "per tick line in every repo's ledger: the working card, its downstream weight, leaf or not (nothing waits on it, no goal edge), and chosen by directive (a message or letter citing it) or by rank; publish the shares over time plus the open-leaf count per repo and its age distribution; report the measurement before W486's design",
+      "evidence": "",
+      "issued_at": "2026-10-13T22:02:11Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-8f",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W486",
+      "title": "Salience from the graph alone: every unrealized node a unit demand source; alerts, asks, goals as nodes with edges, age in edge capacity",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "W485"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "after W485's measurement: (a) every unrealized node a unit source, rank tests re-baselined with the diff explained; (b) operator asks as nodes (the operator lane already exists as a node); (c) alert and goal node types published by their owners (with W461's federation); (d) age as an edge capacity from W485's distribution",
+      "evidence": "2026-10-13: 2026-10-13 operator via github-8f: demand IS salience: alerts, asks, goals live IN the graph as nodes with edges (published by their owners, federated as in W461); an alert's state comes from the world, edges to cards whose witness clears it; a leaf's age sits in an edge capacity derived from the observed distribution. Code today (salience.audit): the demand vector is typed beside the graph: klass(x) (rank-weights local/peer/peer_blocked) for population & prereq, + weights.operator for operator-caused cards (W249), + residue gate weights (W853). Derivable: every unrealized node as a unit source flowing to what it needs gives a ready leaf its own unit and interior nodes their dependants'; the class/operator/gate weights become node types or edge capacities, and solve's demand argument disappears",
+      "issued_at": "2026-10-13T22:02:14Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-8f",
+      "last_worked": "2026-10-13T22:03:19Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W487",
+      "title": "OrphanLeafShape: an open card with no goal path and nothing downstream is a Warning, fixed by giving it an edge",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "a card nothing waits on, that enables nothing open and reaches no goal node; the remedy names the edge to add (enables a goal or a card that needs it) or a drop; staged at Info first with the fleet count, as ReadyBehindOpen was",
+      "evidence": "",
+      "issued_at": "2026-10-13T22:02:15Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-8f",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [

@@ -777,3 +777,6 @@
 2026-10-13T20:48:31Z  interrupt W482 minted    -         "Chain legend states each chain's length; the edges of the view's longest chains are drawn, so a chain is visible across repo boxes"  evidence=operator
 2026-10-13T21:33:07Z  interrupt W483 minted    -         "rank's frontier reads through mtools' shared walker (mikemol.frontier.walk, mtools:W1127): stored-state open test as the realized predicate, every ranking test unchanged"  evidence=github-8f
 2026-10-13T21:46:54Z  interrupt W484 minted    -         "nemik-check names each enabling cycle ('W1 -> W2 -> W3 -> W1') instead of showing its members as ready or blocked"  evidence=mtools:W1134
+2026-10-13T22:02:11Z  interrupt W485 minted    -         "Measure where working time goes: leaves vs interior vs directed cards, per repo, from every ledger, as a series"  evidence=github-8f
+2026-10-13T22:02:14Z  interrupt W486 minted    -         "Give a ready leaf a nonzero, dependency-derived weight: its own demand as a source, plus age interest from the measured distribution"  evidence=github-8f
+2026-10-13T22:02:15Z  interrupt W487 minted    -         "OrphanLeafShape: an open card with no goal path and nothing downstream is a Warning, fixed by giving it an edge"  evidence=github-8f
