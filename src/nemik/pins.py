@@ -137,6 +137,12 @@ def main(argv: list[str] | None = None) -> int:
         action="store_false",
         help="skip the deployed-image check (W455)",
     )
+    ap.add_argument(
+        "--stuck-after",
+        type=int,
+        default=5,
+        help="call the ship stuck past this many commits (a fresh push is always briefly behind)",
+    )
     args = ap.parse_args(argv)
     worst = 0
     # nemik:W379: the host's own install of nemik's tools is a pin too, of nemik by the operator's
@@ -170,9 +176,13 @@ def main(argv: list[str] | None = None) -> int:
                 n = behind(args.root, Pin("cluster", "nemik", live))
                 shown = "unknown" if n is None else n
                 print(f"cluster deploys nemik@{live[:12]}: behind {shown}")
-                if n:
+                if n and n > args.stuck_after:
                     print(
                         "  the ship is stuck: a stuck ship goes to luthen-observability"
+                    )
+                elif n:
+                    print(
+                        "  in flight: the newest pushes are still building or rolling"
                     )
                 worst = max(worst, n or 0)
     for pin in pins(args.root):

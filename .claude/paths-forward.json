@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 455,
+  "counter": 456,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 256
+      "ticks_blocked": 257
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 76,
+      "ticks_blocked": 77,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 78,
+      "ticks_blocked": 79,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T23:37:26Z",
-      "ticks_blocked": 108,
+      "ticks_blocked": 109,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 105,
+      "ticks_blocked": 106,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 82,
+      "ticks_blocked": 83,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 97,
+      "ticks_blocked": 98,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 97,
+      "ticks_blocked": 98,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 97,
+      "ticks_blocked": 98,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 97,
+      "ticks_blocked": 98,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 97,
+      "ticks_blocked": 98,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 97,
+      "ticks_blocked": 98,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 97,
+      "ticks_blocked": 98,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 97,
+      "ticks_blocked": 98,
       "completed": null
     },
     {
@@ -6426,7 +6426,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T06:56:21Z",
-      "ticks_blocked": 23,
+      "ticks_blocked": 24,
       "completed": null
     },
     {
@@ -6450,7 +6450,7 @@
       "minted_during": "tick",
       "caused_by": "W337",
       "last_worked": "2026-10-13T07:54:43Z",
-      "ticks_blocked": 22,
+      "ticks_blocked": 23,
       "weight": 5,
       "completed": null
     },
@@ -6624,7 +6624,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 72,
+      "ticks_blocked": 73,
       "completed": null
     },
     {
@@ -7031,7 +7031,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "completed": null
     },
     {
@@ -7634,7 +7634,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 33,
+      "ticks_blocked": 34,
       "completed": null
     },
     {
@@ -7658,7 +7658,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 48,
+      "ticks_blocked": 49,
       "completed": null
     },
     {
@@ -7706,7 +7706,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-13T03:46:31Z",
-      "ticks_blocked": 48,
+      "ticks_blocked": 49,
       "completed": null
     },
     {
@@ -7730,7 +7730,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 48,
+      "ticks_blocked": 49,
       "completed": null
     },
     {
@@ -8288,7 +8288,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 29,
+      "ticks_blocked": 30,
       "completed": null
     },
     {
@@ -8309,7 +8309,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T05:38:02Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 28,
       "completed": null
     },
     {
@@ -8330,7 +8330,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 29,
+      "ticks_blocked": 30,
       "completed": null
     },
     {
@@ -8352,7 +8352,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T14:49:56Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "weight": 4,
       "completed": null
     },
@@ -8597,7 +8597,7 @@
       "minted_during": "tick",
       "caused_by": "W338",
       "last_worked": "2026-10-13T08:13:31Z",
-      "ticks_blocked": 22,
+      "ticks_blocked": 23,
       "completed": null
     },
     {
@@ -8824,7 +8824,7 @@
       "minted_during": "tick",
       "caused_by": "W426",
       "last_worked": "2026-10-13T13:18:45Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "completed": null
     },
     {
@@ -8888,17 +8888,35 @@
     {
       "symbol": "W455",
       "title": "Deploy drift check: compare the commit in the running nemik Deployment's image tag with origin/main, report how far behind, and warn past a threshold",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: Root cause (luthen-observability, read-only diagnosis 2026-10-13): Flux was healthy; every image build since 3d73711 (W361) failed in the Containerfile's test stage, pytest exit 2 (collection), so no tag was pushed: the test stage never copied docs/ (W361's test_positioning reads docs/positioning.md) nor tools/ (W442's client). Fixed: Containerfile copies docs, tools, BUILD.bazel, Containerfile; tests/test_containerfile.py holds the image test stage's COPY list a superset of the Bazel test data. nemik-pins now prints 'cluster deploys nemik@<sha>: behind N' from the Deployment's image tag (--no-cluster skips). | 2026-10-13: 2026-10-13 15:5xZ: buildkitd journal shows a build starting 11:26:52 EDT (the push of cce98a5 was 11:26) and no 'did not complete' since 11:10 (the last pre-fix failure); still running at last read. nemik-pins: cluster still 3470e43, behind 61. | 2026-10-13: luthen-observability 15:53Z: the fixed build passed and pushed registry tag 1791905210-cce98a5f5881...; Flux's ImagePolicy resolves to it; the Deployment rolls within ~20 min (automation commit + Kustomization interval). luthen also applied alert nemik_build_no_image (ac45c550): 3+ runner tasks in 6 h with no registry push for nemik, routed to nemik. | 2026-10-13: Verified 2026-10-13: nemik-pins nemik reports 'cluster deploys nemik@cce98a5f5881: behind 1' (the fix's own commit, rolled; the 1 is a later push). The live page now runs current code. nemik-pins gains --stuck-after (default 5): fewer commits behind reads 'in flight', not 'stuck'.",
+      "issued_at": "2026-10-13T15:10:00Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": "2026-10-13T16:12:31Z",
+      "ticks_blocked": 0,
+      "weight": 4,
+      "completed": "20261013T161231Z"
+    },
+    {
+      "symbol": "W456",
+      "title": "Label glyphs mean one thing each: the roll-up suffix stops reusing the working mark (W503 ▸ 3 vs ▸ W503), and a test refuses any glyph used in two roles",
       "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Verify next tick: nemik-pins nemik shows the cluster at cce98a5 or later (behind 0 or small); if the image build still fails, ask luthen for the buildkit error line",
-      "evidence": "2026-10-13: Root cause (luthen-observability, read-only diagnosis 2026-10-13): Flux was healthy; every image build since 3d73711 (W361) failed in the Containerfile's test stage, pytest exit 2 (collection), so no tag was pushed: the test stage never copied docs/ (W361's test_positioning reads docs/positioning.md) nor tools/ (W442's client). Fixed: Containerfile copies docs, tools, BUILD.bazel, Containerfile; tests/test_containerfile.py holds the image test stage's COPY list a superset of the Bazel test data. nemik-pins now prints 'cluster deploys nemik@<sha>: behind N' from the Deployment's image tag (--no-cluster skips). | 2026-10-13: 2026-10-13 15:5xZ: buildkitd journal shows a build starting 11:26:52 EDT (the push of cce98a5 was 11:26) and no 'did not complete' since 11:10 (the last pre-fix failure); still running at last read. nemik-pins: cluster still 3470e43, behind 61.",
-      "issued_at": "2026-10-13T15:10:00Z",
+      "next_bounded_step": "Operator asked 2026-10-13 what '‖ W503 ▸ 3' means: ▸ is both STATE_MARK.working (prefix) and the rolled-up count (suffix). Pick a distinct roll-up glyph (e.g. '+3' or '⊕3', checked in the gate browser's fonts like W398), give the expanded mark the same care, and extend the browser test to collect every label glyph by role and assert no glyph has two roles; document the marks in the legend",
+      "evidence": "",
+      "issued_at": "2026-10-13T16:07:36Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-13T15:43:05Z",
+      "last_worked": "2026-10-13T16:12:32Z",
       "ticks_blocked": 0,
       "weight": 4,
       "completed": null
@@ -8971,7 +8989,10 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-10-13T16:11:19Z"
+  },
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }
