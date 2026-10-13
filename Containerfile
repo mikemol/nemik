@@ -20,6 +20,12 @@ COPY skills ./skills
 # the paper and its checks, and the docs extra (paperkit) that runs them. -rs names every skip.
 COPY ARCHITECTURE.md paper.toml warrants.bib rubric.tsv ./
 COPY checks ./checks
+# nemik:W455: every path the Bazel test targets read as data must be here too (tests/test_containerfile.py
+# holds the two lists equal): docs/positioning.md (W361) and tools/nemik_client.py (W442) were missing,
+# pytest stopped at collection (exit 2), and no image was pushed from 3d73711 on for ~30 h.
+COPY docs ./docs
+COPY tools ./tools
+COPY BUILD.bazel Containerfile ./
 # The hooks wiring (mikemol-hook-inbound-asks, mikemol-hook-nemik-check) is tested against the settings file.
 COPY .claude/settings.json ./.claude/settings.json
 # paperkit is a pinned git source (nemik:W102), and uv needs a git binary to fetch it. The test stage

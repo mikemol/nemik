@@ -80,6 +80,38 @@ def installed(receipt: Path) -> str | None:
     return None
 
 
+_IMAGE_SHA = re.compile(r"-([0-9a-f]{40})$")
+
+
+def deployed(namespace: str = "nemik") -> str | None:
+    """nemik:W455: the commit the cluster's nemik Deployment runs, from its image tag
+    (`.../nemik:<epoch>-<sha40>`); None when kubectl or the cluster cannot be read.
+
+    Found 2026-10-13: pushes were confirmed on origin, but the ship stopped at 3470e43 and the page
+    ran 60 commits behind for a day and a half with nothing saying so.
+    """
+    try:
+        run = subprocess.run(
+            [
+                "kubectl",
+                "-n",
+                namespace,
+                "get",
+                "deploy",
+                "-o",
+                "jsonpath={.items[0].spec.template.spec.containers[0].image}",
+            ],
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=60,
+        )
+    except (OSError, subprocess.TimeoutExpired):
+        return None
+    m = _IMAGE_SHA.search(run.stdout.strip()) if run.returncode == 0 else None
+    return m[1] if m else None
+
+
 def main(argv: list[str] | None = None) -> int:
     """nemik-pins: how many commits each repo's pin of a peer is behind that peer's HEAD."""
     ap = argparse.ArgumentParser(
@@ -98,6 +130,12 @@ def main(argv: list[str] | None = None) -> int:
         type=Path,
         default=RECEIPT,
         help="uv's receipt for the host install of nemik (W379)",
+    )
+    ap.add_argument(
+        "--no-cluster",
+        dest="cluster",
+        action="store_false",
+        help="skip the deployed-image check (W455)",
     )
     args = ap.parse_args(argv)
     worst = 0
@@ -121,6 +159,22 @@ def main(argv: list[str] | None = None) -> int:
                     f"'nemik @ git+file://{args.root / 'nemik'}@{head}'"
                 )
             worst = max(worst, n or 0)
+        # nemik:W455: a push is not a deploy until the cluster runs it
+        live = deployed() if args.cluster else None
+        if args.cluster:
+            if live is None:
+                print(
+                    "cluster deploys nemik@unknown (kubectl or the Deployment unreadable)"
+                )
+            else:
+                n = behind(args.root, Pin("cluster", "nemik", live))
+                shown = "unknown" if n is None else n
+                print(f"cluster deploys nemik@{live[:12]}: behind {shown}")
+                if n:
+                    print(
+                        "  the ship is stuck: a stuck ship goes to luthen-observability"
+                    )
+                worst = max(worst, n or 0)
     for pin in pins(args.root):
         if args.repos and pin.repo not in args.repos:
             continue
