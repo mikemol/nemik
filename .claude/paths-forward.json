@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 244
+      "ticks_blocked": 245
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 64,
+      "ticks_blocked": 65,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 66,
+      "ticks_blocked": 67,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T23:37:26Z",
-      "ticks_blocked": 96,
+      "ticks_blocked": 97,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 93,
+      "ticks_blocked": 94,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 70,
+      "ticks_blocked": 71,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 85,
+      "ticks_blocked": 86,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 85,
+      "ticks_blocked": 86,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 85,
+      "ticks_blocked": 86,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 85,
+      "ticks_blocked": 86,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 85,
+      "ticks_blocked": 86,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 85,
+      "ticks_blocked": 86,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 85,
+      "ticks_blocked": 86,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 85,
+      "ticks_blocked": 86,
       "completed": null
     },
     {
@@ -6426,7 +6426,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T06:56:21Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
@@ -6450,7 +6450,7 @@
       "minted_during": "tick",
       "caused_by": "W337",
       "last_worked": "2026-10-13T07:54:43Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "weight": 5,
       "completed": null
     },
@@ -6624,7 +6624,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 60,
+      "ticks_blocked": 61,
       "completed": null
     },
     {
@@ -7032,7 +7032,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "completed": null
     },
     {
@@ -7082,7 +7082,7 @@
     {
       "symbol": "W367",
       "title": "Import from other tools as printed writer commands, never a queue write",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W364"
       ],
@@ -7096,9 +7096,10 @@
       "issued_at": "2026-10-12T01:32:07Z",
       "minted_during": "interrupt",
       "caused_by": "W364",
-      "last_worked": null,
+      "last_worked": "2026-10-13T11:45:17Z",
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 3,
+      "completed": null
     },
     {
       "symbol": "W368",
@@ -7633,7 +7634,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 21,
+      "ticks_blocked": 22,
       "completed": null
     },
     {
@@ -7657,7 +7658,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 36,
+      "ticks_blocked": 37,
       "completed": null
     },
     {
@@ -7705,7 +7706,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-13T03:46:31Z",
-      "ticks_blocked": 36,
+      "ticks_blocked": 37,
       "completed": null
     },
     {
@@ -7729,7 +7730,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 36,
+      "ticks_blocked": 37,
       "completed": null
     },
     {
@@ -8234,23 +8235,20 @@
     {
       "symbol": "W420",
       "title": "Load nemik-export output in a real reader (MPXJ, ProjectLibre or GanttProject) and pin that it opens with its links",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "W445",
-        "W446"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Umbrella over W445 (pin JRE + MPXJ closure) and W446 (MPXJ reads the export, pairs equal)",
-      "evidence": "2026-10-13: 2026-10-13: Microsoft no longer links mspdi_pj12.xsd (it shipped only in the retired Project 2007 SDK); MPXJ needs a JVM and a jar closure in the build. Choice split out as W439.",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: 2026-10-13: Microsoft no longer links mspdi_pj12.xsd (it shipped only in the retired Project 2007 SDK); MPXJ needs a JVM and a jar closure in the build. Choice split out as W439. | 2026-10-13: A real reader, MPXJ 16.10.0, opens nemik-export's MSPDI and finds every in-file link nemik wrote, in the test suite on a pinned JRE (W445, W446).",
       "issued_at": "2026-10-13T00:13:24Z",
       "minted_during": "tick",
       "caused_by": "W365",
-      "last_worked": "2026-10-13T11:04:33Z",
-      "ticks_blocked": 1,
+      "last_worked": "2026-10-13T11:45:15Z",
+      "ticks_blocked": 0,
       "weight": 1,
-      "completed": null
+      "completed": "20261013T114515Z"
     },
     {
       "symbol": "W421",
@@ -8288,7 +8286,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -8309,7 +8307,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T05:38:02Z",
-      "ticks_blocked": 15,
+      "ticks_blocked": 16,
       "completed": null
     },
     {
@@ -8330,7 +8328,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -8370,7 +8368,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:42:04Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -8597,7 +8595,7 @@
       "minted_during": "tick",
       "caused_by": "W338",
       "last_worked": "2026-10-13T08:13:31Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "completed": null
     },
     {
@@ -8717,42 +8715,40 @@
     {
       "symbol": "W445",
       "title": "Pin a JRE and MPXJ's MSPDI jar closure (mpxj 16.10.0, jakarta.xml.bind-api, jaxb-runtime and transitive jars) as sha256-pinned Bazel inputs",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W420"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "MODULE.bazel: http_archive the Temurin JRE (strip_prefix, sha256 above) and one http_file per jar with its sha256 (hash each from the downloads in the scratchpad's jars/); expose them to the tests as env paths like NEMIK_OPA",
-      "evidence": "2026-10-13: Measured 2026-10-13 by running it: MPXJ 16.10.0 reads nemik-export's MSPDI with exactly 7 jars: mpxj-16.10.0, jakarta.xml.bind-api-3.0.1, jaxb-runtime-3.0.2, jaxb-core-3.0.2, txw2-3.0.2, istack-commons-runtime-4.0.1, com.sun.activation:jakarta.activation-2.0.1 (all Maven Central). JRE: Bazel's embedded JDK 25 fails (NoClassDefFoundError java.awt.image.RenderedImage: it is jlinked without java.desktop, which JAXB's runtime loads); Temurin JRE 21.0.12.1+1 works: https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jre_x64_linux_hotspot_21.0.12.1_1.tar.gz, sha256 2413149700df0f7d440500a84a8f764c535f21e5a5e87d38328b64eec2c5b500 (Adoptium API value, re-hashed locally: equal), 52 MB.",
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: Measured 2026-10-13 by running it: MPXJ 16.10.0 reads nemik-export's MSPDI with exactly 7 jars: mpxj-16.10.0, jakarta.xml.bind-api-3.0.1, jaxb-runtime-3.0.2, jaxb-core-3.0.2, txw2-3.0.2, istack-commons-runtime-4.0.1, com.sun.activation:jakarta.activation-2.0.1 (all Maven Central). JRE: Bazel's embedded JDK 25 fails (NoClassDefFoundError java.awt.image.RenderedImage: it is jlinked without java.desktop, which JAXB's runtime loads); Temurin JRE 21.0.12.1+1 works: https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jre_x64_linux_hotspot_21.0.12.1_1.tar.gz, sha256 2413149700df0f7d440500a84a8f764c535f21e5a5e87d38328b64eec2c5b500 (Adoptium API value, re-hashed locally: equal), 52 MB. | 2026-10-13: MODULE.bazel pins the Temurin 21 JRE (http_archive, sha256 2413149700df...b500) and the 7 jars (http_file each, sha256 from the downloads); BUILD filegroup :mpxj_classpath; only //:test_mpxj gets them as data and env (NEMIK_JAVA, NEMIK_MPXJ_CLASSPATH). bazel build fetched all, sha-checked.",
       "issued_at": "2026-10-13T11:04:21Z",
       "minted_during": "tick",
       "caused_by": "W439",
-      "last_worked": "2026-10-13T11:17:15Z",
+      "last_worked": "2026-10-13T11:45:13Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261013T114513Z"
     },
     {
       "symbol": "W446",
       "title": "Browser-free test: MPXJ reads nemik-export's MSPDI for the fixture fleet; task count and predecessor pairs equal nemik.projection's",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W420"
       ],
       "touches": [],
-      "blocked_on": [
-        "W445"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Parse the relationship lines: map ID to name, collect (task, predecessor) cite pairs from the predecessor column, compare with nemik.projection.decode over in-file links (cross-project links carry no PredecessorUID, so compare them separately or exclude them)",
-      "evidence": "2026-10-13: 2026-10-13 checked the jar (mpxj-16.10.0.jar, 3.43 MB): the package is now org.mpxj (was net.sf.mpxj); org.mpxj.sample.MpxjQuery, MpxjConvert and MpxjBatchConvert are present, so no Java source is needed and a JRE suffices. The W439 UNVERIFIED mark is cleared under the new name. | 2026-10-13: Run by hand on the fixture export: org.mpxj.sample.MpxjQuery lists every task, and its relationship section prints 'ID<TAB>name<TAB>predecessor IDs<TAB>successor IDs' (e.g. aeternum:W10 with predecessors 3,4,5,6 = W11-W14). The successor column repeats each task's own ID (the sample prints a successor relation's predecessor end), so the test reads the predecessor column only.",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: 2026-10-13 checked the jar (mpxj-16.10.0.jar, 3.43 MB): the package is now org.mpxj (was net.sf.mpxj); org.mpxj.sample.MpxjQuery, MpxjConvert and MpxjBatchConvert are present, so no Java source is needed and a JRE suffices. The W439 UNVERIFIED mark is cleared under the new name. | 2026-10-13: Run by hand on the fixture export: org.mpxj.sample.MpxjQuery lists every task, and its relationship section prints 'ID<TAB>name<TAB>predecessor IDs<TAB>successor IDs' (e.g. aeternum:W10 with predecessors 3,4,5,6 = W11-W14). The successor column repeats each task's own ID (the sample prints a successor relation's predecessor end), so the test reads the predecessor column only. | 2026-10-13: tests/test_mpxj.py: exports the fixture fleet with nemik.mspdi, runs org.mpxj.sample.MpxjQuery under the pinned JRE, maps MPXJ task IDs back to cites, and asserts MPXJ's predecessor pairs equal nemik.projection's in-file links (non-vacuous). bazel test //:test_mpxj: 1 passed (log checked: not skipped).",
       "issued_at": "2026-10-13T11:04:22Z",
       "minted_during": "tick",
       "caused_by": "W439",
-      "last_worked": "2026-10-13T11:17:16Z",
-      "ticks_blocked": 1,
-      "completed": null
+      "last_worked": "2026-10-13T11:45:14Z",
+      "ticks_blocked": 0,
+      "completed": "20261013T114514Z"
     }
   ],
   "residue": [
@@ -8817,7 +8813,7 @@
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-13T11:13:05Z"
+    "taken_at": "2026-10-13T11:41:34Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []

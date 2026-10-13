@@ -87,9 +87,35 @@ http_file(
     downloaded_file_path = "use_of_colour.rego",
 )
 
+# nemik:W445: a real MSPDI reader for nemik-export (W420): MPXJ and the JAXB jars it needs to read MSPDI,
+# found by running it (MPXJ's POM lists ten compile deps; the MSPDI reader needs only these), and a
+# full JRE: Bazel's embedded JDK is jlinked without java.desktop, which JAXB's runtime loads.
+http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+http_archive(
+    name = "temurin_jre",
+    url = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jre_x64_linux_hotspot_21.0.12.1_1.tar.gz",
+    sha256 = "2413149700df0f7d440500a84a8f764c535f21e5a5e87d38328b64eec2c5b500",
+    strip_prefix = "jdk-21.0.12.1+1-jre",
+    build_file_content = 'filegroup(name = "files", srcs = glob(["**"]), visibility = ["//visibility:public"])\nexports_files(["bin/java"])',
+)
+
+[http_file(
+    name = name,
+    url = "https://repo1.maven.org/maven2/" + path,
+    sha256 = sha,
+    downloaded_file_path = path.rsplit("/", 1)[-1],
+) for name, path, sha in [
+    ("mpxj_jar", "net/sf/mpxj/mpxj/16.10.0/mpxj-16.10.0.jar", "0004751793726e73e81b71160a1ed7dd7bdeb80fc2d42484d0504a464a6eddb7"),
+    ("jaxb_api_jar", "jakarta/xml/bind/jakarta.xml.bind-api/3.0.1/jakarta.xml.bind-api-3.0.1.jar", "b8fb4bee3ff5b5c1ef77144d8411316018d7bbd41fcf1ede0646f7978546b867"),
+    ("jaxb_runtime_jar", "org/glassfish/jaxb/jaxb-runtime/3.0.2/jaxb-runtime-3.0.2.jar", "7b3a3784b9c6e343a8d38fc108602ba810177f03f2d8d1e7258b1cef7fd9d4c7"),
+    ("jaxb_core_jar", "org/glassfish/jaxb/jaxb-core/3.0.2/jaxb-core-3.0.2.jar", "f9a360b939597643b2676e35fc497afb561d20e8a513128a5c0070366db11bbd"),
+    ("txw2_jar", "org/glassfish/jaxb/txw2/3.0.2/txw2-3.0.2.jar", "b4bcf94fb0a759456e2521724513baec94b78e93127544af162e3cff08d93343"),
+    ("istack_jar", "com/sun/istack/istack-commons-runtime/4.0.1/istack-commons-runtime-4.0.1.jar", "9f91115f449384886f572bd62c8812ee1004273d4b5c85cac65179ad4c16990f"),
+    ("activation_jar", "com/sun/activation/jakarta.activation/2.0.1/jakarta.activation-2.0.1.jar", "b9e24b7dd6e07495562ea96531be3130c96dba4d78e1dfd88adbbdebf4332871"),
+]]
+
 # nemik:W99: the render test's headless Chromium as a hashed input (Playwright's own build of
 # chromium_headless_shell-1243, the revision the pinned playwright wheel expects), not ~/.cache.
-http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 http_archive(
     name = "chromium",
     url = "https://cdn.playwright.dev/builds/cft/153.0.8010.12/linux64/chrome-headless-shell-linux64.zip",
