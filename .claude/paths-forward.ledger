@@ -699,3 +699,4 @@
 2026-10-13T05:40:13Z  tick  W433 minted    -         "The #legnote live region announces its message once, not the button injected into it"  evidence=W386
 2026-10-13T05:40:17Z  tick  W434 minted    -         "Run the a11y browser tests (contrast, glyphs, cues) in both themes, not light only"  evidence=W386
 2026-10-13T05:40:21Z  tick  W435 minted    -         "A keyboard-reachable list of the visible cards mirroring the canvas: select, expand an umbrella and open details without a mouse"  evidence=W386
+2026-10-13T06:47:54Z  tick  W434 advanced  unblock   "6de7a42 W432+W433 (chip accessible names, live region once) and W434 (a11y checks in both themes) pushed; W386 atomized into W432-W435; W435 keyboard card list designed, working next"
