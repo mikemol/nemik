@@ -212,9 +212,16 @@ def frontier(g: Graph, goal: Node) -> tuple[set[Node], set[str]]:
     ddG: what those leaves wait on from outside the repo. That is each leaf's blocked_on entries
     that are not local symbols, plus open enablers from another repo. The path to `goal` is clear
     exactly when ddG is empty: every remaining obstacle is work this repo can do itself.
+
+    nemik:W483: which of the walked cards are leaves is decided by the fleet's shared walker
+    (mikemol.frontier.walk, mtools:W1127) with `realized` = the stored state is done, over the goal's
+    local cone as plain nodes and edges (a feeder must be realized before what it feeds).
     """
+    from mikemol.frontier.walk import frontier as walk
+
     repo = _repo(goal)
-    seen, stack, leaves, outside = {goal}, [goal], set(), set()
+    seen, stack, outside = {goal}, [goal], set()
+    nodes, edges = {goal}, set()
     while stack:
         n = stack.pop()
         feeders = set(g.subjects(NEMIK.enables, n)) | {
@@ -222,22 +229,27 @@ def frontier(g: Graph, goal: Node) -> tuple[set[Node], set[str]]:
             for t in g.objects(n, NEMIK.waitsFor)
             if str(t).startswith(BASE) and "/" in str(t)[len(BASE) :]
         }
-        local_open = set()
         for f in feeders:
-            if not _open(g, f):
+            if _repo(f) != repo:
+                if _open(g, f):
+                    outside.add(ref_of(f))
                 continue
-            if _repo(f) == repo:
-                local_open.add(f)
-            else:
-                outside.add(ref_of(f))
-        if not local_open:
-            leaves.add(n)
-            for lit in g.objects(n, NEMIK.blockedOn):
-                if not re.fullmatch(r"W\d+", str(lit).strip()):
-                    outside.add(str(lit))
-        for f in local_open - seen:
-            seen.add(f)
-            stack.append(f)
+            if (f, OSLC_CM.state, None) in g:  # a card, open or done
+                nodes.add(f)
+                edges.add((str(f), str(n)))
+            if _open(g, f) and f not in seen:
+                seen.add(f)
+                stack.append(f)
+    verdict = walk(
+        sorted(str(x) for x in nodes),
+        sorted(edges),
+        lambda s: (URIRef(s), OSLC_CM.state, NEMIK.Done) in g,
+    )
+    leaves: set[Node] = {URIRef(s) for s in verdict.ready}
+    for n in leaves:
+        for lit in g.objects(n, NEMIK.blockedOn):
+            if not re.fullmatch(r"W\d+", str(lit).strip()):
+                outside.add(str(lit))
     return leaves, outside
 
 

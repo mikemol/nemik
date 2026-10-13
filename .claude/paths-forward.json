@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 487,
+  "counter": 490,
   "waypoints": [
     {
       "symbol": "W1",
@@ -9281,17 +9281,17 @@
     {
       "symbol": "W476",
       "title": "Ask mtools: --bump-blocked (or a --block-behind-open mode) sets a ready card blocked on its one open enabler, so ReadyBehindOpen fixes itself",
-      "status": "working",
+      "status": "ready",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "when W1134 lands: tell paperkit; repin past it (with W483's repin); then raise ReadyBehindOpen to Warning once the fleet count falls",
-      "evidence": "2026-10-13: 2026-10-13 asked mtools (session mtools-c9) to mint the mode and cite nemik:W476; Info until the fleet count falls | 2026-10-13: mtools carded it as mtools:W1131: --block-behind-open [--write], ready cards only, open enablers only, behind mtools:W1130 | 2026-10-13: mtools:W1131 landed mtools 3ded8d1: --block-behind-open [--write], ready cards, open LOCAL enablers only; mtools' own count fell 9 -> 1 (W833's enabler is cross-repo: mtools:W1133) | 2026-10-13: repinned to 3ded8d1; nemik's own queue: BLOCKED W369 and W370 on W371 (the connector contract, a real prerequisite); paperkit (55-card chain) told by message; mtools 9 -> 1 | 2026-10-13: 2026-10-13 mtools: 3ded8d1's --block-behind-open deadlocks a ring of 3+ ready cards (blocks each on the next); fixed by mtools:W1134 (keeps rings), not yet on mtools main. nemik's own run blocked only W369/W370 on W371 (no ring). paperkit told to dry-run and wait for W1134 before --write",
+      "evidence": "2026-10-13: 2026-10-13 asked mtools (session mtools-c9) to mint the mode and cite nemik:W476; Info until the fleet count falls | 2026-10-13: mtools carded it as mtools:W1131: --block-behind-open [--write], ready cards only, open enablers only, behind mtools:W1130 | 2026-10-13: mtools:W1131 landed mtools 3ded8d1: --block-behind-open [--write], ready cards, open LOCAL enablers only; mtools' own count fell 9 -> 1 (W833's enabler is cross-repo: mtools:W1133) | 2026-10-13: repinned to 3ded8d1; nemik's own queue: BLOCKED W369 and W370 on W371 (the connector contract, a real prerequisite); paperkit (55-card chain) told by message; mtools 9 -> 1 | 2026-10-13: 2026-10-13 mtools: 3ded8d1's --block-behind-open deadlocks a ring of 3+ ready cards (blocks each on the next); fixed by mtools:W1134 (keeps rings), not yet on mtools main. nemik's own run blocked only W369/W370 on W371 (no ring). paperkit told to dry-run and wait for W1134 before --write | 2026-10-13: repin landed fae8807 [PUSHED, ls-remote]",
       "issued_at": "2026-10-13T19:14:02Z",
       "minted_during": "tick",
       "caused_by": "W465",
-      "last_worked": "2026-10-13T21:46:55Z",
+      "last_worked": "2026-10-13T22:08:35Z",
       "ticks_blocked": 0,
       "completed": null
     },
@@ -9334,7 +9334,7 @@
     {
       "symbol": "W479",
       "title": "Nav pane step 2: the focused row's card is highlighted on the canvas and opens the W462 popover beside it",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W468"
       ],
@@ -9346,7 +9346,7 @@
       "issued_at": "2026-10-13T20:15:30Z",
       "minted_during": "tick",
       "caused_by": "W468",
-      "last_worked": "2026-10-13T21:31:13Z",
+      "last_worked": "2026-10-13T22:21:02Z",
       "ticks_blocked": 0,
       "completed": null
     },
@@ -9406,39 +9406,38 @@
     {
       "symbol": "W483",
       "title": "rank's frontier reads through mtools' shared walker (mikemol.frontier.walk, mtools:W1127): stored-state open test as the realized predicate, every ranking test unchanged",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W461"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "repin to 39835b8 (adding the frontier dist); ask luthen-observability to move the par; rank.frontier through frontier(nodes, edges, realized=done); an agreement test over every fixture against the old _open; the existing rank and frontier tests unmodified",
-      "evidence": "2026-10-13: 2026-10-13 github-8f: (1) the fleet par (luthen-observability/repin_par.txt) is f04f0a2; nemik is already ahead of it (c47d50b, then 3ded8d1); going to 39835b8 for the frontier dist means asking luthen-observability, with a card, to move the par so the fleet does not drift. (2) the predicate: realized(n) = the stored state is done (oslc_cm:state nemik:Done); the old open test is stored-state present and not done (rank.py:203); the test must prove the walker's ready and realized agree with the old _open on every existing fixture",
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: 2026-10-13 github-8f: (1) the fleet par (luthen-observability/repin_par.txt) is f04f0a2; nemik is already ahead of it (c47d50b, then 3ded8d1); going to 39835b8 for the frontier dist means asking luthen-observability, with a card, to move the par so the fleet does not drift. (2) the predicate: realized(n) = the stored state is done (oslc_cm:state nemik:Done); the old open test is stored-state present and not done (rank.py:203); the test must prove the walker's ready and realized agree with the old _open on every existing fixture | 2026-10-13: repinned 3ded8d1 -> 39835b8 adding mikemol_frontier (revendor list, pyproject, MODULE vendored_wheel, BUILD hub); rank.frontier walks the goal's local cone into plain nodes/edges and asks mikemol.frontier.walk.frontier with realized(n) := (n, oslc_cm:state, nemik:Done) in g; leaves = verdict.ready. tests/test_frontier_walker.py keeps the old walk verbatim and compares (dG, ddG) for every open fixture card: agree; every rank/frontier/salience test (68) passes unmodified; live fleet: 2401 open cards, 0 differ",
       "issued_at": "2026-10-13T21:33:07Z",
       "minted_during": "interrupt",
       "caused_by": "github-8f",
-      "last_worked": "2026-10-13T21:34:34Z",
-      "ticks_blocked": 0
+      "last_worked": "2026-10-13T22:16:17Z",
+      "ticks_blocked": 0,
+      "completed": "20261013T221617Z"
     },
     {
       "symbol": "W484",
       "title": "nemik-check names each enabling cycle ('W1 -> W2 -> W3 -> W1') instead of showing its members as ready or blocked",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "W483"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "after W483's repin: read cycles from mikemol.frontier.walk.frontier(...).cycles (each named once from its earliest node, among unrealized nodes) over the fleet graph; a shape (Warning: a ring cannot land) carrying the named cycle on its earliest member; compare against the frontier dist's tests; the view rings it too",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: blocks.dependency_cycles(g) asks mikemol.frontier.walk.frontier(...).cycles over every card with enables (prereq->dependent) and waitsFor (blocker->waiter) edges, realized = done; annotate names each ring on its earliest card ('r:W1 -> r:W2 -> r:W3 -> r:W1'); DependencyCycleShape Warning; skill row; tests/test_dependency_cycle.py (ring of three named once; a done member breaks it); live fleet: 0 cycles today",
       "issued_at": "2026-10-13T21:46:54Z",
       "minted_during": "interrupt",
       "caused_by": "mtools:W1134",
-      "last_worked": "2026-10-13T21:46:56Z",
+      "last_worked": "2026-10-13T22:21:00Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261013T222100Z"
     },
     {
       "symbol": "W485",
@@ -9484,11 +9483,62 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "a card nothing waits on, that enables nothing open and reaches no goal node; the remedy names the edge to add (enables a goal or a card that needs it) or a drop; staged at Info first with the fleet count, as ReadyBehindOpen was",
-      "evidence": "",
+      "evidence": "2026-10-13: 2026-10-13 operator rule via github-8f: a ready node is an umbrella over ready nodes, or needs atomizing, or is small enough to do now; so a ready leaf's pull is W489's age-of-readiness check, and an unworked leaf is mis-sized (atomize) or a ranking miss (W486). W487 stays the structural half: no goal path and nothing downstream means no edge yet",
       "issued_at": "2026-10-13T22:02:15Z",
       "minted_during": "interrupt",
       "caused_by": "github-8f",
-      "last_worked": null,
+      "last_worked": "2026-10-13T22:08:28Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W488",
+      "title": "UmbrellaCompleteShape: an umbrella whose children are all done is realized by construction; a stored open state on it is named",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "UmbrellaCompleteShape names exactly mtools:W1139's set: open, not working, empty next step, no foreign blocked_on, 1+ local enabling children all done, none dropped; evidence 'all children done: W1, W2'",
+      "evidence": "2026-10-13: mtools carded the close as mtools:W1139 (--close-umbrellas [--write]). Agreed refusals, so both sides count the same cards: a child = a card of this queue that ENABLES the umbrella (not blocked_on); 1+ children, all DONE; KEPT (not named): a dropped child, a non-empty next_bounded_step, a working card, a foreign blocked_on",
+      "issued_at": "2026-10-13T22:08:13Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-8f",
+      "last_worked": "2026-10-13T22:10:20Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W489",
+      "title": "ReadyNeitherShape: a ready non-umbrella left untouched past the learned time-to-do of small cards must be atomized or done",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "W485"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "bound = the distribution of completed small cards' ticks from working to done, from the ledgers (W485's measurement), not a typed size; the shape prints the card, its age and the bound; staged at Info first with the fleet count",
+      "evidence": "",
+      "issued_at": "2026-10-13T22:08:14Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-8f",
+      "last_worked": "2026-10-13T22:08:26Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W490",
+      "title": "Advice as graph nodes: each deterministic advisory gets a node with its resolution derived from the world (acted, rejected with reason, ignored)",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "first slice: nemik-check rows as advice nodes, identity (tool, rule, repo, subject card) to match mtools:W1140's entries (re-run updates last_run; nemik's first-seen agrees); resolution by the next reading: ACTED (row cleared), REJECTED (the queue's advice list carries a mtools:W1141 --reject-advice entry for that (rule, card) with a reason), IGNORED (persists, nothing recorded); pathsforward --rejected/--unchanged are commit-message fields about the WORK and are NOT advice rejections (a test pins the difference); series per (tool, rule, repo) with ignored age in luthen-observability:W905's registry, one panel by repo",
+      "evidence": "2026-10-13: 2026-10-13 github-8f: REJECTED reads mtools:W1141's --reject-advice field, never --rejected/--unchanged (commit-message fields)",
+      "issued_at": "2026-10-13T22:16:32Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-8f",
+      "last_worked": "2026-10-13T22:19:04Z",
       "ticks_blocked": 0
     }
   ],

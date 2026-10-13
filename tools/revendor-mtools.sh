@@ -17,7 +17,7 @@ short=$(git -C "$mtools" rev-parse --short=7 "$new")
 tmp=$(mktemp -d)
 trap 'rm -rf "$tmp"' EXIT
 
-for dist in pathsforward icsstruct hooks fence rulerseq; do
+for dist in pathsforward icsstruct hooks fence rulerseq frontier; do
 	git -C "$mtools" archive "$new" -- "$dist" | tar -x -C "$tmp"
 	sed -i "s/^version = .*/version = \"0.1.0+$short\"/" "$tmp/$dist/pyproject.toml"
 	(cd "$tmp/$dist" && uv build -q --wheel -o "$out")
