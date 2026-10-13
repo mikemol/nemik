@@ -263,7 +263,8 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
             edges.append({"source": str(s), "target": ask, "kind": "waits"})
     from nemik.blocks import with_salience
 
-    asks = with_salience(gn, operator_asks(g))
+    # nemik:W460: an errand is the operator's own business: nemik-operator lists it, the view does not.
+    asks = [a for a in with_salience(gn, operator_asks(g)) if a["category"] != "errand"]
     for a in asks:
         lane_edge: dict[str, Any] = {
             "source": f"{BASE}{a['ref'].replace(':', '/', 1)}",

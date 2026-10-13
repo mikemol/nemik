@@ -1,6 +1,6 @@
 """nemik:W458: an operator act ask with no command in the standard shape is the owner's debt."""
 
-from nemik.blocks import operator_category
+from nemik.blocks import errand_repos, operator_category
 
 ENV = "env -C /home/m/github/luthen /usr/bin/python3 -m luthen.apply --set tpm"
 
@@ -24,3 +24,10 @@ def test_an_errand_is_the_operators_not_a_tool() -> None:
 
 def test_a_decision_is_unchanged() -> None:
     assert operator_category("operator: decide which store") == "needs-you"
+
+
+def test_errand_repos_are_declared() -> None:
+    # nemik:W460: a machine-sounding act in these repos is an errand, not an unwritten tool
+    assert errand_repos('[errand]\nrepos = ["life"]\n') == {"life"}
+    assert errand_repos("") == frozenset()
+    assert "life" in errand_repos()  # the shipped declaration (github-8f ruling)

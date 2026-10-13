@@ -103,7 +103,10 @@ def operator_main(argv: list[str] | None = None, g: Graph | None = None) -> None
     for cat in CATEGORIES:
         rows = [a for a in asks if a["category"] == cat]
         # nemik:W458: an act ask with nothing to run is the owner's debt, not the operator's.
-        label = "no command yet: the owner owes a tool" if cat == "no-command" else cat
+        label = {
+            "no-command": "no command yet: the owner owes a tool",
+            "errand": "errand: yours, no tool to write",
+        }.get(cat, cat)
         print(f"\n{label} ({len(rows)}), heaviest first")
         for a in rows:
             dup = f"  same ask as {', '.join(a['same_ask'])}" if a["same_ask"] else ""

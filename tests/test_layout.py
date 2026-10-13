@@ -799,6 +799,72 @@ def test_the_card_list_selects_and_expands_from_the_keyboard(server) -> None:
     assert expanded == "true"
 
 
+def test_a_cite_link_in_the_panel_selects_its_card_and_announces_it(server) -> None:
+    # nemik:W473: cite links in the Selected panel and the lanes did nothing; every one now goes
+    # through the same select path as a tap, and the selection is spoken in a polite live region.
+    with sync_api.sync_playwright() as p:
+        exe = os.environ.get("NEMIK_CHROMIUM")
+        try:
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        page.goto(server)
+        page.wait_for_function(
+            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 1",
+            timeout=60000,
+        )
+        target = page.evaluate(
+            "() => { const n = cy.nodes('[symbol]').filter(n => n.visible()"
+            " && n.data('cite')).last().data();"
+            " document.getElementById('detail').innerHTML = citeLink(n.cite);"
+            " return { id: n.id, cite: n.cite }; }"
+        )
+        page.click("#detail a[data-cite]")
+        page.wait_for_timeout(300)
+        selected = page.evaluate("() => cy.nodes(':selected').map(n => n.id())")
+        said = page.inner_text("#announce")
+        live = page.get_attribute("#announce", "aria-live")
+        detail = page.inner_text("#detail")
+        browser.close()
+    assert selected == [target["id"]]
+    assert target["cite"] in said and live == "polite"
+    assert target["cite"].rsplit(":", 1)[-1] in detail
+
+
+def test_a_rolled_up_tile_says_what_it_hides(server) -> None:
+    # nemik:W474: the treemap rebuilt tile labels from the bare repo and symbol, so a rolled-up
+    # umbrella (luthen-observability:W43 hiding W111) read as a plain card and its work vanished.
+    with sync_api.sync_playwright() as p:
+        exe = os.environ.get("NEMIK_CHROMIUM")
+        try:
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        page.goto(server)
+        page.wait_for_function(
+            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
+            timeout=60000,
+        )
+        page.check("#rollup")
+        page.check("#treemap")
+        page.wait_for_timeout(1500)
+        tiles = page.evaluate(
+            "() => cy.nodes('.tile').filter(n => n.visible() && n.data('rollup')"
+            " && !n.hasClass('tinylabel') && n.data('label'))"
+            ".map(n => ({ label: n.data('label'), rollup: n.data('rollup') }))"
+        )
+        browser.close()
+    assert tiles, "the fixture fleet has no labelled rolled-up tile to check"
+    for t in tiles:
+        assert f"+{t['rollup']}" in t["label"], t
+
+
 TILE_LABELS = """() => {
   const z = cy.zoom(), tiles = cy.nodes('.tile').filter(n => n.visible());
   const drawn = tiles.filter(n => !n.hasClass('tinylabel'));

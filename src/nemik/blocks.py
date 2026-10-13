@@ -231,7 +231,18 @@ MACHINE_ACT = re.compile(
     re.IGNORECASE,
 )
 
-CATEGORIES = ("needs-you", "no-command", "answered", "condition", "unstated")
+CATEGORIES = ("needs-you", "no-command", "errand", "answered", "condition", "unstated")
+
+
+def errand_repos(text: str | None = None) -> frozenset[str]:
+    """nemik:W460: the repos whose machine-sounding acts are the operator's own errands ("apply for
+    Medicaid", a "drill" session), declared under [errand] in rank-weights.toml: no tool to write."""
+    import tomllib
+    from importlib.resources import files
+
+    if text is None:
+        text = files("nemik.data").joinpath("rank-weights.toml").read_text()
+    return frozenset(tomllib.loads(text).get("errand", {}).get("repos", []))
 
 
 def operator_category(text: str) -> str:
@@ -326,6 +337,7 @@ def _operator_asks(g: Graph) -> list[dict[str, Any]]:
         and (n, OSLC_CM.state, NEMIK.Blocked) in g
     }
     repos = {str(w).removeprefix(BASE) for w in g.subjects(RDF.type, NEMIK.Workstream)}
+    errands = errand_repos()
     for node in human:
         if (node, OSLC_CM.state, NEMIK.Done) in g:
             continue
@@ -340,11 +352,13 @@ def _operator_asks(g: Graph) -> list[dict[str, Any]]:
         text = " | ".join(texts)
         cats = [operator_category(t) for t in texts] or ["unstated"]
         # the most actionable reading wins across several blocked_on values
-        cat = next(
+        cat: str = next(
             c
             for c in ("needs-you", "no-command", "unstated", "condition", "answered")
             if c in cats
         )
+        if cat == "no-command" and ref(node).partition(":")[0] in errands:
+            cat = "errand"
         out.append(
             {
                 "ref": ref(node),

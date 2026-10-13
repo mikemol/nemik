@@ -44,6 +44,8 @@ main { display: grid; grid-template-columns: 1fr 340px; height: calc(100vh - var
 #cy { min-height: 400px; }
 aside { border-left: 1px solid var(--line); background: var(--panel); overflow: auto; padding: 12px 16px; }
 aside h2 { font-size: 14px; margin: 16px 0 6px; }
+/* nemik:W473: read by a screen reader, not drawn */
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 aside details.sec > summary { font-size: 14px; font-weight: 600; margin: 16px 0 6px; cursor: pointer; }
 .legend span { display: inline-flex; align-items: center; gap: 4px; margin-right: 10px; }
 .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
@@ -77,6 +79,7 @@ aside a { color: var(--ink); text-decoration: underline dotted var(--muted); }
   <label title="One treemap across the fleet: each tile holds the work beneath it, area by load, rank order reading left to right; repo is the border colour"><input type="checkbox" id="treemap"> treemap</label>
   <span class="stat" id="stat"></span>
   <span class="stat" id="legnote" role="status"></span><span class="stat" id="legact"></span>
+  <span id="announce" class="sr-only" role="status" aria-live="polite"></span>
   <span id="repos" title="Toggle repos on and off; none lit shows every repo"></span>
 </header>
 <main>
@@ -118,7 +121,7 @@ aside a { color: var(--ink); text-decoration: underline dotted var(--muted); }
 </main>
 <script>
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-const LANE = { "needs-you": "needs you", answered: "already answered", condition: "waiting on a condition", unstated: "no ask stated" };
+const LANE = { "needs-you": "needs you", "no-command": "no command yet", answered: "already answered", condition: "waiting on a condition", unstated: "no ask stated" };
 const STATES = ["ready", "working", "blocked", "done", "dropped", "unclaimed"];
 const color = s => css("--" + (STATES.includes(s) ? s : "other"));
 let data = null, cy = null, selectedId = null, liveness = {}, lastMode = null;
@@ -331,6 +334,21 @@ function selectCard(id) {
   // in place, not a rebuild: rebuilding would drop the keyboard focus on the row just pressed
   for (const b of document.querySelectorAll("#cardlist button[data-card]"))
     b.setAttribute("aria-current", String(b.dataset.card === id));
+  // nemik:W473: one select path (tap, list row, cite link) and one announcement of it
+  const d = el.data();
+  document.getElementById("announce").textContent =
+    `selected ${d.cite || d.symbol}, ${d.state || ""}: ${d.title || ""}`;
+}
+// nemik:W473: a cite anywhere on the page (Selected panel, lanes, wake, goals) selects its card
+// through selectCard and brings it into view; one not drawn still shows in the Selected panel.
+function focusCite(cite) {
+  const n = data.nodes.find(x => x.cite === cite);
+  if (!n) return;
+  const el = cy && cy.getElementById(n.id);
+  if (el && el.length) {
+    selectCard(n.id);
+    cy.animate({ center: { eles: el }, zoom: Math.max(cy.zoom(), 1.2) });
+  } else detail(n);
 }
 function toggleUmbrella(id) {
   const el = cy.getElementById(id);
@@ -424,7 +442,8 @@ function draw() {
   // A block ends at the blocker's claiming waypoint, or at an "unclaimed" placeholder in the
   // blocker's box; pull that end in even when its repo is filtered out, so the block stays visible.
   const waits = data.edges.filter(e => e.kind === "waits" && keep.has(e.source) && !hidden.has(e.target)
-      && (e.target.startsWith("operator:") ? (showNoise || e.target === "operator:needs-you")
+      // nemik:W467: the no-command lane shows by default too: it is the owners' debt, kept in sight.
+      && (e.target.startsWith("operator:") ? (showNoise || e.target === "operator:needs-you" || e.target === "operator:no-command")
         : ghosts.has(e.source) ? keep.has(e.target) : byId.has(e.target)));
   waits.forEach(e => { if (byId.has(e.target) && !ghosts.has(e.source)) keep.add(e.target); });
   // nemik:W120: one operator lane per repo box, not one for the fleet. A single lane was a hub
@@ -529,6 +548,10 @@ function draw() {
       { selector: ".operator", style: { "background-color": css("--blocked") } },
       { selector: ".operator.answered, .operator.condition", style: { "background-color": css("--done") } },
       { selector: ".operator.unstated", style: { "background-color": css("--interrupt") } },
+      // nemik:W467: the owner's debt, not the operator's: the "other" fill and a dashed edge, so it
+      // differs from needs-you without relying on colour alone.
+      { selector: ".operator.no-command", style: { "background-color": css("--other"), "border-width": 2,
+        "border-style": "dashed", "border-color": css("--ink") } },
       { selector: "edge.rank", style: { display: "none" } },
       // nemik:W180: a tile is a rectangle of its computed size, label top-left, repo as border colour.
       // Step 3: fill = repo hue, tiles abut with a thin page-coloured separator, text scaled to fit;
@@ -590,7 +613,7 @@ function draw() {
   cy.on("mouseout", "node", light);
   cy.on("select unselect", "node", light);
   light();
-  cy.on("tap", "node[symbol]", ev => { selectedId = ev.target.id(); detail(ev.target.data()); refreshRings(); cardList(); });
+  cy.on("tap", "node[symbol]", ev => selectCard(ev.target.id()));
   cy.on("tap", "node[lane]", ev => lane(ev.target.data("lane")));
   // nemik:W350: double-click an umbrella to expand or collapse what it rolls up.
   cy.on("dbltap", "node[symbol]", ev => toggleUmbrella(ev.target.id()));
@@ -719,6 +742,10 @@ function treemap() {
   const total = t.roots.reduce((a, r) => a + t.weight.get(r), 0), H = Math.sqrt(total * 2500 * 0.62), W = H / 0.62;
   const R = orderedTreemap(t, order, { x: 0, y: 0, w: W, h: H }, 4, 16);
   cy.batch(() => {
+    // nemik:W474: a tile names its card as the graph does: its state mark, and an umbrella's roll-up
+    // (+N hidden) or expanded mark, so work folded into a tile is never silently missing.
+    const marked = n => (STATE_MARK[n.data("state")] || "") + n.data("symbol")
+      + (n.data("rollup") ? `${ROLLUP_MARK}${n.data("rollup")}` : expanded.has(n.id()) ? EXPANDED_MARK : "");
     ns.forEach(n => {
       const r = R.get(n.id());
       if (!r) { n.style("display", "none"); return; }
@@ -727,15 +754,15 @@ function treemap() {
       if (r.head !== undefined) {
         // A cluster: its label (symbol and title, cut to the width) in the header strip.
         const fs = Math.min(11, r.head * 0.75), fits = Math.floor(r.w / (fs * 0.62));
-        const text = `${n.data("symbol")} ${n.data("title") || ""}`;
+        const text = `${marked(n)} ${n.data("title") || ""}`;
         n.data({ ...base, fs, hm: (r.head - fs) / 2 + fs, label: fs >= 6 && fits > 3 ? (text.length > fits ? text.slice(0, fits - 1) + "…" : text) : "" })
          .addClass("cluster");
       } else {
         // Operator 2026-10-02: a leaf names its repo too, on its own line (vertical space is cheaper
         // than horizontal), and the text is fitted to the tile. Two lines if they fit at a readable
         // size, else the symbol alone, else nothing.
-        const two = [n.data("repo"), n.data("symbol")], f2 = fitFont(two, r.w, r.h), f1 = fitFont([n.data("symbol")], r.w, r.h);
-        const [fs, label] = f2 >= 7 ? [f2, two.join("\n")] : f1 >= 7 ? [f1, n.data("symbol")] : [0, ""];
+        const two = [n.data("repo"), marked(n)], f2 = fitFont(two, r.w, r.h), f1 = fitFont([marked(n)], r.w, r.h);
+        const [fs, label] = f2 >= 7 ? [f2, two.join("\n")] : f1 >= 7 ? [f1, marked(n)] : [0, ""];
         n.data({ ...base, fs, label });
       }
     });
@@ -1006,12 +1033,13 @@ function tile() {
 function lane(cat) {
   const help = {
     "needs-you": "A decision or an act only you can make. Asks listed together are the same ask from several repos.",
+    "no-command": "An act on a machine with nothing to run yet: the owning repo still owes the command (or the tool). Not yours until it has one. Ticks show how long each has stood.",
     answered: "The block records your answer already. The agent should lift it or re-file it against the condition it now waits on.",
     condition: "Filed against you, but it waits on an event or condition, not on you.",
     unstated: "Blocked on you with no stated ask, so you can't tell a decision from a check-in. The agent should state what it needs.",
   }[cat];
   const rows = (data.operator || []).filter(a => a.category === cat).map(a =>
-    `<dt>${citeLink(a.ref)}${a.salience ? ` <span class="stat" title="demand waiting behind this ask, in nemik-rank units">${a.salience}</span>` : ""}</dt><dd>${linked(a.ask, a.ref.split(":")[0])}${a.same_ask.length ? `<br><span class="stat">same ask: ${a.same_ask.map(citeLink).join(", ")}</span>` : ""}${(a.waiting || []).length ? `<br><span class="stat">waiting behind this: ${a.waiting.map(citeLink).join(", ")}</span>` : ""}</dd>`);
+    `<dt>${citeLink(a.ref)}${a.salience ? ` <span class="stat" title="demand waiting behind this ask, in nemik-rank units">${a.salience}</span>` : ""}${a.ticks_blocked ? ` <span class="stat" title="loop ticks this ask has stood">${a.ticks_blocked} ticks</span>` : ""}</dt><dd>${linked(a.ask, a.ref.split(":")[0])}${a.same_ask.length ? `<br><span class="stat">same ask: ${a.same_ask.map(citeLink).join(", ")}</span>` : ""}${(a.waiting || []).length ? `<br><span class="stat">waiting behind this: ${a.waiting.map(citeLink).join(", ")}</span>` : ""}</dd>`);
   document.getElementById("detail").innerHTML = `<p class="stat">${esc(help)}</p><dl>${rows.join("")}</dl>`;
 }
 
@@ -1229,15 +1257,8 @@ function weatherOnce(refs) {
 function citeLink(cite) {
   return `<a href="#" data-cite="${esc(cite)}"><code>${esc(cite)}</code></a>`;
 }
-function focusCite(cite) {
-  const n = data.nodes.find(x => x.cite === cite);
-  if (!n) return;
-  const el = cy && cy.getElementById(n.id);
-  if (el && el.length) { cy.elements().unselect(); el.select(); cy.animate({ center: { eles: el }, zoom: Math.max(cy.zoom(), 1.2) }); }
-  detail(n);
-}
-for (const id of ["wake", "goals"]) document.getElementById(id).addEventListener("click", ev => {
-  const a = ev.target.closest("[data-cite]");
+document.addEventListener("click", ev => {
+  const a = ev.target.closest("a[data-cite]");
   if (a) { ev.preventDefault(); focusCite(a.dataset.cite); }
 });
 document.getElementById("depth").onchange = draw;

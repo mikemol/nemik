@@ -753,3 +753,12 @@
 2026-10-13T18:15:29Z  interrupt W464 minted    -         "Label every open card with the demand passing through it, not only the frontier's absorbed salience"  evidence=operator
 2026-10-13T18:18:50Z  interrupt W465 minted    -         "A card stored ready but waiting on an open enabler is drawn as ready: shape it and draw its structural state"  evidence=operator
 2026-10-13T18:18:51Z  interrupt W466 minted    -         "WCAG as Rego: a facts extractor over the rendered view and one policy per success criterion, no waivers"  evidence=operator
+2026-10-13T18:22:31Z  tick  W458 advanced  unblock   "W457 bb5f628 + W458 06e8123 [PUSHED, ls-remote]: repin c47d50b; OperatorActShape 9 cards; minted W459-W466 (popover, nav modes, through-salience, ready-but-waiting, WCAG-as-Rego); W459 working"
+2026-10-13T18:25:49Z  tick  W467 minted    -         "Show the no-command and errand asks in the web view: their own lanes in the operator panel, with how many ticks each has stood"  evidence=operator
+2026-10-13T18:26:05Z  tick  W468 minted    -         "Navigation pane: the current mode's tree as an APG tree view (roving tabindex), the graph mirrors its focus"  evidence=W463
+2026-10-13T18:26:06Z  tick  W469 minted    -         "Mode switcher reorders the navigation pane's tree: Rank, Dependency, Critical, Asks, Tree, Repo, Recency, and a spatial canvas mode"  evidence=W463
+2026-10-13T18:26:07Z  tick  W470 minted    -         "Recency's clock is a codomain: offer last activity, issued, last worked, dtstart and due as choices, like the modes"  evidence=W463
+2026-10-13T18:26:09Z  tick  W471 minted    -         "Viewer settings: selection follows focus, single-key shortcuts (on by default), remembered per viewer"  evidence=W463
+2026-10-13T18:26:10Z  tick  W472 minted    -         "Keymap table drives the keys and a ? help overlay; / jumps to a card by cite or title"  evidence=W463
+2026-10-13T18:26:11Z  tick  W473 minted    -         "Cite links in the Selected panel and operator lanes select their card; one select path and a live-region announcement"  evidence=W463
+2026-10-13T18:37:56Z  tick  W474 minted    -         "Treemap labels drop the roll-up mark: a rolled-up umbrella's hidden work (luthen-observability:W43 hiding W111) is invisible"  evidence=operator

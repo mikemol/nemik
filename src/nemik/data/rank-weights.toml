@@ -94,6 +94,12 @@ weight = 1
 "5" = 5
 "0.01" = 7
 
+# nemik:W460 (github-8f ruling 2026-10-13): in these repos an act that reads like a machine act ("apply
+# for Medicaid", a "drill" session) is the operator's own errand, not an unwritten tool. Errands are
+# listed by nemik-operator only: never counted in the tool backlog, never published by the view.
+[errand]
+repos = ["life"]
+
 # nemik:W326: a ready card that waited longer than this many days while newer cards ranked above it
 # is STARVED (nemik-starved). Reporting only: ranking has no aging term, by choice.
 [starvation]

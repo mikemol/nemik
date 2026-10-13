@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 466,
+  "counter": 474,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 261
+      "ticks_blocked": 262
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 81,
+      "ticks_blocked": 82,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 83,
+      "ticks_blocked": 84,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T23:37:26Z",
-      "ticks_blocked": 113,
+      "ticks_blocked": 114,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 110,
+      "ticks_blocked": 111,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 87,
+      "ticks_blocked": 88,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 102,
+      "ticks_blocked": 103,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 102,
+      "ticks_blocked": 103,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 102,
+      "ticks_blocked": 103,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 102,
+      "ticks_blocked": 103,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 102,
+      "ticks_blocked": 103,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 102,
+      "ticks_blocked": 103,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 102,
+      "ticks_blocked": 103,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 102,
+      "ticks_blocked": 103,
       "completed": null
     },
     {
@@ -6426,7 +6426,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T06:56:21Z",
-      "ticks_blocked": 28,
+      "ticks_blocked": 29,
       "completed": null
     },
     {
@@ -6450,7 +6450,7 @@
       "minted_during": "tick",
       "caused_by": "W337",
       "last_worked": "2026-10-13T07:54:43Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 28,
       "weight": 5,
       "completed": null
     },
@@ -6560,7 +6560,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 3
     },
     {
       "symbol": "W344",
@@ -6624,7 +6624,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 77,
+      "ticks_blocked": 78,
       "completed": null
     },
     {
@@ -6762,7 +6762,7 @@
       "caused_by": "W346",
       "last_worked": "2026-10-13T17:43:16Z",
       "ticks_blocked": 0,
-      "weight": 3,
+      "weight": 2,
       "completed": null
     },
     {
@@ -7032,7 +7032,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 15,
+      "ticks_blocked": 16,
       "completed": null
     },
     {
@@ -7189,7 +7189,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 4
     },
     {
       "symbol": "W372",
@@ -7635,7 +7635,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 38,
+      "ticks_blocked": 39,
       "completed": null
     },
     {
@@ -7659,7 +7659,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 53,
+      "ticks_blocked": 54,
       "completed": null
     },
     {
@@ -7707,7 +7707,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-13T03:46:31Z",
-      "ticks_blocked": 53,
+      "ticks_blocked": 54,
       "completed": null
     },
     {
@@ -7731,7 +7731,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 53,
+      "ticks_blocked": 54,
       "completed": null
     },
     {
@@ -8288,7 +8288,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -8309,7 +8309,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T05:38:02Z",
-      "ticks_blocked": 32,
+      "ticks_blocked": 33,
       "completed": null
     },
     {
@@ -8330,7 +8330,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 34,
+      "ticks_blocked": 35,
       "completed": null
     },
     {
@@ -8594,7 +8594,7 @@
       "minted_during": "tick",
       "caused_by": "W338",
       "last_worked": "2026-10-13T08:13:31Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 28,
       "completed": null
     },
     {
@@ -8821,7 +8821,7 @@
       "minted_during": "tick",
       "caused_by": "W426",
       "last_worked": "2026-10-13T13:18:45Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 13,
       "completed": null
     },
     {
@@ -8957,35 +8957,40 @@
     {
       "symbol": "W459",
       "title": "OperatorActShape escalates Warning to Violation after N ticks, N learned from ledger history",
-      "status": "working",
+      "status": "blocked",
       "enables": [],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W467",
+        "W460"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "read ticks_blocked of no-command asks over the ledger history; pick N; add a second sh:property at sh:Violation gated on ticksBlocked >= N",
-      "evidence": "",
+      "evidence": "2026-10-13: 2026-10-13 operator: wants better visibility before any escalation to Violation, and the shape is still being worked; held behind W467 (lanes in the view) and W460 (errands split out)",
       "issued_at": "2026-10-13T17:49:16Z",
       "minted_during": "tick",
       "caused_by": "W458",
-      "last_worked": "2026-10-13T18:06:04Z",
+      "last_worked": "2026-10-13T18:26:03Z",
       "ticks_blocked": 0,
       "completed": null
     },
     {
       "symbol": "W460",
       "title": "MACHINE_ACT misreads errands: 'apply' in 'apply for Medicaid' and 'drill session' flag life:W26 and life:W7 as unwritten tools",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "add an 'errand' category: an act ask with no machine target is the operator's own errand; list it under its own heading in nemik-operator only, never in the tool backlog or any other surface (no content outside nemik-operator); pin life:W26 and life:W7 as errand cases",
-      "evidence": "2026-10-13: 2026-10-13 github-8f ruling: life:W26/W7 are personal errands, own heading 'errand', not counted in the tool backlog, content not shown outside nemik-operator",
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: 2026-10-13 github-8f ruling: life:W26/W7 are personal errands, own heading 'errand', not counted in the tool backlog, content not shown outside nemik-operator | 2026-10-13: [errand] repos=[life] in rank-weights.toml (errand_repos); a no-command ask in such a repo is category 'errand'; nemik-operator lists it under 'errand: yours, no tool to write'; serve.py drops errands from the published view; vtodo only feeds needs-you, so errands are not in the task feed either; tests in test_operator_act_shape.py and test_lanes.py",
       "issued_at": "2026-10-13T17:49:17Z",
       "minted_during": "tick",
       "caused_by": "W458",
-      "last_worked": "2026-10-13T18:05:26Z",
-      "ticks_blocked": 0
+      "last_worked": "2026-10-13T18:29:56Z",
+      "ticks_blocked": 0,
+      "weight": 1,
+      "completed": "20261013T182956Z"
     },
     {
       "symbol": "W461",
@@ -9001,7 +9006,8 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W943",
       "last_worked": "2026-10-13T18:05:28Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W462",
@@ -9017,23 +9023,33 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 3
     },
     {
       "symbol": "W463",
       "title": "Decide what tab navigation means on the view: the graph as one tab stop with arrow keys along dependency edges",
-      "status": "ready",
+      "status": "blocked",
       "enables": [],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "operator answers the open questions (default mode, selection follows focus, single-key default, ...); then atomize N1-N15",
-      "evidence": "2026-10-13: 2026-10-13 research report: scratchpad navigability-research.md (copy into docs/ before the session ends). Modes Rank/Dependency/Critical/Asks/Tree/Recency/Repo; proposed cards N1-N15, smallest first N1 wire dead cite links in #detail and lanes; 8 open questions for the operator",
+      "blocked_on": [
+        "W468",
+        "W469",
+        "W470",
+        "W471",
+        "W472",
+        "W473"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "atomized into the nav-pane cards; this umbrella closes when they land",
+      "evidence": "2026-10-13: 2026-10-13 research report: scratchpad navigability-research.md (copy into docs/ before the session ends). Modes Rank/Dependency/Critical/Asks/Tree/Recency/Repo; proposed cards N1-N15, smallest first N1 wire dead cite links in #detail and lanes; 8 open questions for the operator | 2026-10-13: 2026-10-13 operator rulings: default mode: no preference; selection-follows-focus is a user setting; single-key shortcuts on by default (with the WCAG 2.1.4 off switch); outside a spatial mode navigation IS a tree, so a navigation pane holds that tree, reordered by mode, with obvious keys (the APG tree view); an ambiguous clock is a codomain: offer its values as choices like the modes; panning on cursor move: undecided. Open: does Dependency mode cross repos",
       "issued_at": "2026-10-13T18:11:04Z",
       "minted_during": "tick",
       "caused_by": "operator",
-      "last_worked": "2026-10-13T18:18:54Z",
-      "ticks_blocked": 0
+      "last_worked": "2026-10-13T18:26:16Z",
+      "ticks_blocked": 0,
+      "weight": 3,
+      "completed": null
     },
     {
       "symbol": "W464",
@@ -9049,12 +9065,13 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 3
     },
     {
       "symbol": "W465",
       "title": "A card stored ready but waiting on an open enabler is drawn as ready: shape it and draw its structural state",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
@@ -9064,8 +9081,10 @@
       "issued_at": "2026-10-13T18:18:50Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-13T18:43:33Z",
+      "ticks_blocked": 0,
+      "weight": 3,
+      "completed": null
     },
     {
       "symbol": "W466",
@@ -9081,7 +9100,151 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 3
+    },
+    {
+      "symbol": "W467",
+      "title": "Show the no-command and errand asks in the web view: their own lanes in the operator panel, with how many ticks each has stood",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: index.html: no-command lane shown by default (not behind the noise toggle), label 'no command yet', help text, its own fill plus a dashed border (not colour alone); every lane row shows its ticks; tests/test_lanes.py: every blocks.CATEGORIES entry has a LANE label and help",
+      "issued_at": "2026-10-13T18:25:49Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": "2026-10-13T18:27:22Z",
+      "ticks_blocked": 0,
+      "completed": "20261013T182722Z"
+    },
+    {
+      "symbol": "W468",
+      "title": "Navigation pane: the current mode's tree as an APG tree view (roving tabindex), the graph mirrors its focus",
+      "status": "ready",
+      "enables": [
+        "W463"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "a DOM tree beside the canvas: Up/Down move, Right expands or enters, Left collapses or goes to the parent, Home/End, type-ahead; one tab stop; start with Rank mode's order; the canvas highlights the focused card; survives the 60 s poll by restoring focus by cite",
+      "evidence": "",
+      "issued_at": "2026-10-13T18:26:05Z",
+      "minted_during": "tick",
+      "caused_by": "W463",
+      "last_worked": null,
       "ticks_blocked": 0
+    },
+    {
+      "symbol": "W469",
+      "title": "Mode switcher reorders the navigation pane's tree: Rank, Dependency, Critical, Asks, Tree, Repo, Recency, and a spatial canvas mode",
+      "status": "ready",
+      "enables": [
+        "W463"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "a radiogroup in the header plus number keys; the pane's tree is rebuilt per mode and keeps the focused card when it is in the new tree; the spatial mode hands keys to the canvas",
+      "evidence": "",
+      "issued_at": "2026-10-13T18:26:06Z",
+      "minted_during": "tick",
+      "caused_by": "W463",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W470",
+      "title": "Recency's clock is a codomain: offer last activity, issued, last worked, dtstart and due as choices, like the modes",
+      "status": "ready",
+      "enables": [
+        "W463"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "a second radiogroup shown only in Recency mode; a card with no value for the chosen clock sorts last and says so",
+      "evidence": "",
+      "issued_at": "2026-10-13T18:26:07Z",
+      "minted_during": "tick",
+      "caused_by": "W463",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W471",
+      "title": "Viewer settings: selection follows focus, single-key shortcuts (on by default), remembered per viewer",
+      "status": "ready",
+      "enables": [
+        "W463"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "a settings section with two checkboxes, stored in localStorage behind try/catch; the shortcut off switch satisfies WCAG 2.1.4",
+      "evidence": "",
+      "issued_at": "2026-10-13T18:26:09Z",
+      "minted_during": "tick",
+      "caused_by": "W463",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W472",
+      "title": "Keymap table drives the keys and a ? help overlay; / jumps to a card by cite or title",
+      "status": "ready",
+      "enables": [
+        "W463"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "one JS table {key, mode, action, description}; the handler and the overlay both read it, so the help can never drift from the keys; a test that every table key has a handler",
+      "evidence": "",
+      "issued_at": "2026-10-13T18:26:10Z",
+      "minted_during": "tick",
+      "caused_by": "W463",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W473",
+      "title": "Cite links in the Selected panel and operator lanes select their card; one select path and a live-region announcement",
+      "status": "done",
+      "enables": [
+        "W463"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: index.html: tap, card-list row and every a[data-cite] (document-level listener: Selected panel, lanes, wake, goals) go through selectCard, which sets aria-current and writes 'selected <cite>, <state>: <title>' to #announce (role=status, aria-live=polite, .sr-only); test_layout::test_a_cite_link_in_the_panel_selects_its_card_and_announces_it passes on host Chrome with the W435 keyboard test",
+      "issued_at": "2026-10-13T18:26:11Z",
+      "minted_during": "tick",
+      "caused_by": "W463",
+      "last_worked": "2026-10-13T18:31:24Z",
+      "ticks_blocked": 0,
+      "completed": "20261013T183124Z"
+    },
+    {
+      "symbol": "W474",
+      "title": "Treemap labels drop the roll-up mark: a rolled-up umbrella's hidden work (luthen-observability:W43 hiding W111) is invisible",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: index.html treemap: tile and cluster labels carry the state mark and ROLLUP_MARK +N / EXPANDED_MARK (marked()); live probe: W43 now 'luthen-observability / ‖ W43 +1' with roll-up on; test_layout::test_a_rolled_up_tile_says_what_it_hides",
+      "issued_at": "2026-10-13T18:37:56Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": "2026-10-13T18:43:31Z",
+      "ticks_blocked": 0,
+      "completed": "20261013T184331Z"
     }
   ],
   "residue": [
@@ -9153,7 +9316,7 @@
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-13T17:41:34Z"
+    "taken_at": "2026-10-13T18:23:13Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []
