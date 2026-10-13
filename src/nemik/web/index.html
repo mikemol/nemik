@@ -194,8 +194,13 @@ const SCOPES = [
 const scopeColor = c => (c === "ink" ? css("--ink") : c.startsWith("--") ? css(c) : c);
 const scopeDash = s => rulerDash(rulerMotif(s.order));
 // The legend waits for the first graph, since its patterns arrive with it (W419).
+// nemik:W482 (operator 2026-10-13: chains of 2 and 3 both ringed "longest, this view"): the view and
+// selection chains carry their length, and say that a chain runs on between repo boxes, where each
+// box shows only its piece of it.
+const chainLen = {};
+let viewChain = null;  // the cards on the view's longest chains, with their heights (criticalSet)
 const pathKey = () => { document.getElementById("pathkey").innerHTML = SCOPES.map(s =>
-  `<span><svg width="26" height="8" aria-hidden="true"><line x1="1" y1="4" x2="25" y2="4" stroke="${scopeColor(s.color)}" stroke-width="${s.width}" stroke-dasharray="${scopeDash(s)}"/></svg>${s.label}</span>`).join(""); };
+  `<span><svg width="26" height="8" aria-hidden="true"><line x1="1" y1="4" x2="25" y2="4" stroke="${scopeColor(s.color)}" stroke-width="${s.width}" stroke-dasharray="${scopeDash(s)}"/></svg>${s.label}${chainLen[s.id] ? ` (${chainLen[s.id]} cards, across repo boxes)` : ""}</span>`).join(""); };
 
 // nemik:W344: the dependency order is a poset, so tied longest chains are alternatives, not a ranking. This is
 // every card among `ids` that lies on SOME longest chain (zero slack); `deps` are [prerequisite, dependent]
@@ -223,7 +228,10 @@ function criticalSet(ids, deps) {
   const down = height(edges(false)), up = height(edges(true));
   const through = id => up.get(id) + down.get(id) - 1;
   const longest = Math.max(0, ...[...ids].map(through));
-  return [...ids].filter(id => through(id) === longest);
+  const on = [...ids].filter(id => through(id) === longest);
+  on.longest = longest;  // nemik:W482: the legend says how long "longest" is
+  on.up = up; on.down = down;  // and its edges can be found (markChainEdges)
+  return on;
 }
 
 const isOpen = n => n.symbol && !["done", "dropped"].includes(n.state);
@@ -239,7 +247,10 @@ function ringMap() {
   const put = (id, s) => rings.set(id, [...(rings.get(id) || []), s]);
   data.nodes.filter(isOpen).forEach(n => { if (n.on_path) put(n.id, "fleet"); if (n.on_path_repo) put(n.id, "repo"); });
   const deps = depEdges();
-  criticalSet(keepOpen, deps).forEach(id => put(id, "view"));
+  viewChain = criticalSet(keepOpen, deps);
+  viewChain.forEach(id => put(id, "view"));
+  chainLen.view = viewChain.longest;
+  delete chainLen.sel;
   if (selectedId && data.nodes.some(n => n.id === selectedId && isOpen(n))) {
     const open = new Set(data.nodes.filter(isOpen).map(n => n.id));
     const reach = (from, forward) => {
@@ -254,8 +265,11 @@ function ringMap() {
       return seen;
     };
     const cone = new Set([...reach(selectedId, true), ...reach(selectedId, false)]);
-    criticalSet(cone, deps).forEach(id => put(id, "sel"));
+    const selChain = criticalSet(cone, deps);
+    selChain.forEach(id => put(id, "sel"));
+    chainLen.sel = selChain.longest;
   }
+  if (document.getElementById("pathkey").innerHTML) pathKey();  // after the first graph (W419)
   return rings;
 }
 
@@ -329,7 +343,22 @@ function labelInk() {
 function refreshRings() {
   const rings = ringMap();
   cy.nodes("[symbol]").forEach(n => { const r = rings.get(n.id()) || []; n.data({ rings: r, nrings: r.length }); });
+  markChainEdges();
   cy.style().update();
+}
+// nemik:W482: draw the dependencies that make up the view's longest chains, so a chain can be followed
+// from one repo box into the next (each box shows only its piece). An edge is on a chain when both
+// ends are and they are consecutive on it: one step down from the prerequisite, one step up to it.
+function markChainEdges() {
+  cy.edges().removeClass("onchain");
+  const chain = viewChain;
+  if (!chain) return;
+  const on = new Set(chain);
+  cy.edges().forEach(e => {
+    const [pre, dep] = e.hasClass("waits") ? [e.target().id(), e.source().id()] : [e.source().id(), e.target().id()];
+    if (on.has(pre) && on.has(dep) && chain.down.get(pre) === chain.down.get(dep) + 1
+        && chain.up.get(dep) === chain.up.get(pre) + 1) e.addClass("onchain");
+  });
 }
 
 // nemik:W435: what the canvas offers only to a pointer (select a card and read it, expand an umbrella)
@@ -622,6 +651,9 @@ function draw() {
       { selector: "edge.contained", style: { display: "none" } },
       { selector: "edge.cross", style: { opacity: 0.08 } },
       { selector: "edge.cross.lit", style: { opacity: 1, "z-index": 10 } },
+      // nemik:W482: a longest-chain edge, in the view ring's colour, drawn even between repo boxes
+      { selector: "edge.onchain", style: { opacity: 1, "z-index": 9, width: 3,
+        "line-color": css("--ring-view"), "target-arrow-color": css("--ring-view") } },
       { selector: ":selected", style: { "overlay-opacity": 0.15 } },
     ],
   });
@@ -677,6 +709,7 @@ function draw() {
     const el = cy.getElementById(selectedId);
     if (el.length) { el.select(); detail(el.data()); } else { selectedId = null; }
   }
+  markChainEdges();
   cardList();
   const shown = data.nodes.filter(n => keep.has(n.id));
   const blocked = shown.filter(n => n.state === "blocked").length;

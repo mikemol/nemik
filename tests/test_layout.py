@@ -838,6 +838,42 @@ def test_a_cite_link_in_the_panel_selects_its_card_and_announces_it(server) -> N
     assert target["cite"].rsplit(":", 1)[-1] in detail
 
 
+def test_the_view_chain_is_drawn_end_to_end_with_its_length(server) -> None:
+    # nemik:W482 (operator 2026-10-13: chains of 2 and 3 both ringed "longest, this view"). Each ring
+    # was a piece of one longest chain that ran on into another repo's box; the chain's own edges now
+    # draw it end to end, and the legend says how long it is.
+    with sync_api.sync_playwright() as p:
+        exe = os.environ.get("NEMIK_CHROMIUM")
+        try:
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        page.goto(server)
+        page.wait_for_function(
+            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
+            timeout=60000,
+        )
+        page.wait_for_timeout(1000)
+        got = page.evaluate(
+            "() => { const on = new Set(viewChain);"
+            " const ends = cy.edges('.onchain').map(e => [e.source().id(), e.target().id()]);"
+            " const touched = new Set(ends.flat());"
+            " return { longest: viewChain.longest, cards: on.size, edges: ends.length,"
+            " stray: ends.filter(([a, b]) => !on.has(a) || !on.has(b)).length,"
+            " untouched: [...on].filter(id => !touched.has(id)).length,"
+            " legend: document.getElementById('pathkey').innerText }; }"
+        )
+        browser.close()
+    assert got["longest"] > 1, "the fixture fleet has no chain to draw"
+    assert got["edges"] >= got["longest"] - 1
+    assert got["stray"] == 0, "a chain edge has an end off the chain"
+    assert got["untouched"] == 0, "a card on the chain has no chain edge"
+    assert f"({got['longest']} cards" in got["legend"]
+
+
 def test_the_page_script_runs_without_errors(server) -> None:
     # nemik:W478: a redeclared const killed the whole page script, and every view test then failed
     # with "cy.nodes is not a function" (cy fell back to the #cy element). Name the cause instead.
