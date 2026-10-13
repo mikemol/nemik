@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 436,
+  "counter": 438,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 233
+      "ticks_blocked": 234
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 53,
+      "ticks_blocked": 54,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 55,
+      "ticks_blocked": 56,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T23:37:26Z",
-      "ticks_blocked": 85,
+      "ticks_blocked": 86,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 82,
+      "ticks_blocked": 83,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 59,
+      "ticks_blocked": 60,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 74,
+      "ticks_blocked": 75,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 74,
+      "ticks_blocked": 75,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 74,
+      "ticks_blocked": 75,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 74,
+      "ticks_blocked": 75,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 74,
+      "ticks_blocked": 75,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 74,
+      "ticks_blocked": 75,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 74,
+      "ticks_blocked": 75,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 74,
+      "ticks_blocked": 75,
       "completed": null
     },
     {
@@ -6417,8 +6417,7 @@
         "web"
       ],
       "blocked_on": [
-        "W338",
-        "W390"
+        "W338"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "children: W338 contrast and CVD gate, W339 use-of-colour, W340 legibility floors, W341 a11y adversary; ask el-openglo and paperkit what is reusable as a package",
@@ -6433,7 +6432,7 @@
     {
       "symbol": "W338",
       "title": "Contrast and colour-blind gate over the view's palette",
-      "status": "working",
+      "status": "blocked",
       "enables": [
         "W337"
       ],
@@ -6441,14 +6440,17 @@
         "a11y",
         "web"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "extract every node, edge, halo and text colour pair from index.html; check WCAG 1.4.3/1.4.11 ratios and a CVD simulation, reusing el-openglo cvd_gate.py by import not copy",
-      "evidence": "2026-10-11: el-openglo answer: nothing there is installable (flat modules, no build backend). cvd_gate.py's pure core (worst_view_dE, Okabe-Ito floor; numpy+colorspacious; one lazy palette_graph import to cut) is to be extracted as a mikemol-* package homed in mtools (el-openglo:W508, minted soon, needs mtools to name the home). Plan: WCAG 1.4.3/1.4.11 ratio arithmetic is generic and lands here first; the CVD arm waits on that package, pinned by the one mtools sha.",
+      "blocked_on": [
+        "W437",
+        "W438"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Umbrella over W437 and W438",
+      "evidence": "2026-10-11: el-openglo answer: nothing there is installable (flat modules, no build backend). cvd_gate.py's pure core (worst_view_dE, Okabe-Ito floor; numpy+colorspacious; one lazy palette_graph import to cut) is to be extracted as a mikemol-* package homed in mtools (el-openglo:W508, minted soon, needs mtools to name the home). Plan: WCAG 1.4.3/1.4.11 ratio arithmetic is generic and lands here first; the CVD arm waits on that package, pinned by the one mtools sha. | 2026-10-13: Text contrast (1.4.3, 4.5:1) already landed as W384 (labelInk + test, both themes). Split: W437 non-text contrast 3:1 (workable), W438 CVD arm (blocked on el-openglo:W508).",
       "issued_at": "2026-10-11T21:16:30Z",
       "minted_during": "tick",
       "caused_by": "W337",
-      "last_worked": "2026-10-13T07:46:27Z",
+      "last_worked": "2026-10-13T07:54:43Z",
       "ticks_blocked": 0,
       "weight": 5,
       "completed": null
@@ -6623,7 +6625,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 49,
+      "ticks_blocked": 50,
       "completed": null
     },
     {
@@ -7032,7 +7034,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "completed": null
     },
     {
@@ -7632,7 +7634,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "completed": null
     },
     {
@@ -7656,7 +7658,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 25,
+      "ticks_blocked": 26,
       "completed": null
     },
     {
@@ -7704,7 +7706,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-13T03:46:31Z",
-      "ticks_blocked": 25,
+      "ticks_blocked": 26,
       "completed": null
     },
     {
@@ -7728,7 +7730,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 25,
+      "ticks_blocked": 26,
       "completed": null
     },
     {
@@ -8012,7 +8014,7 @@
       "caused_by": "W373",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 7
+      "weight": 6
     },
     {
       "symbol": "W409",
@@ -8250,7 +8252,7 @@
     {
       "symbol": "W421",
       "title": "One declaration per console script: BUILD.bazel reads pyproject's [project.scripts], and a pre-commit check names every registry a new script still misses (SKILL.md row, workflows.toml)",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
@@ -8260,9 +8262,10 @@
       "issued_at": "2026-10-13T01:14:42Z",
       "minted_during": "interrupt",
       "caused_by": "W365",
-      "last_worked": null,
+      "last_worked": "2026-10-13T08:24:12Z",
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 1,
+      "completed": null
     },
     {
       "symbol": "W422",
@@ -8282,7 +8285,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "completed": null
     },
     {
@@ -8303,7 +8306,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T05:38:02Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "completed": null
     },
     {
@@ -8324,7 +8327,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "completed": null
     },
     {
@@ -8344,7 +8347,7 @@
       "caused_by": "W422",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 5
     },
     {
       "symbol": "W426",
@@ -8364,7 +8367,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:42:04Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "completed": null
     },
     {
@@ -8553,6 +8556,46 @@
       "last_worked": "2026-10-13T07:14:08Z",
       "ticks_blocked": 0,
       "completed": "20261013T071408Z"
+    },
+    {
+      "symbol": "W437",
+      "title": "Non-text contrast (WCAG 1.4.11): scope rings, wait lines and tile borders reach 3:1 against the page background in both themes, measured from rendered styles",
+      "status": "done",
+      "enables": [
+        "W338"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: Measured first (test_meaningful_strokes_reach_three_to_one, rendered colours vs body background): light rings fleet 2.13, repo 2.15, view 2.85, enables line 1.32; dark enables line 1.45; dark rings passed. Fix: --edge token (light #84847e, dark #74746e) for dependency lines instead of the separator --line; rings read theme tokens --ring-fleet/repo/view (light darkened Okabe-Ito #8f6400/#0072b2/#a3477d, dark unchanged). All >= 3:1 in both themes; render-check green.",
+      "issued_at": "2026-10-13T07:54:33Z",
+      "minted_during": "tick",
+      "caused_by": "W338",
+      "last_worked": "2026-10-13T08:23:23Z",
+      "ticks_blocked": 0,
+      "completed": "20261013T082323Z"
+    },
+    {
+      "symbol": "W438",
+      "title": "Colour-blind arm: the view's palette through el-openglo's cvd_gate core (worst-view dE, Okabe-Ito floor) once it ships as an mtools package",
+      "status": "blocked",
+      "enables": [
+        "W338"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "el-openglo:W544"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "2026-10-13: 2026-10-13: el-openglo:W508 was a mis-cite: the 2026-10-11 answer said the cvd_gate package card was 'W508, minted soon', but W508 became 'adopt isolated mikemol-commit' (done) and no card packages cvd_gate's core yet. Re-pointed at el-openglo and asked it to mint the card, citing nemik:W438. | 2026-10-13: el-openglo minted el-openglo:W544 (enables nemik:W438): extract cvd_gate's pure core (worst_view_dE, OKABE_ITO; numpy+colorspacious; cut the lazy palette_graph import at line 368) as a mikemol-* dist homed in mtools. Ready in its queue, not started.",
+      "issued_at": "2026-10-13T07:54:34Z",
+      "minted_during": "tick",
+      "caused_by": "W338",
+      "last_worked": "2026-10-13T08:13:31Z",
+      "ticks_blocked": 0,
+      "completed": null
     }
   ],
   "residue": [
@@ -8617,7 +8660,7 @@
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-13T07:40:01Z"
+    "taken_at": "2026-10-13T08:11:33Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []

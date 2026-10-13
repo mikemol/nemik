@@ -842,6 +842,46 @@ def test_treemap_labels_meet_the_floor_or_are_hidden_and_counted(server) -> None
         assert zoomed["hidden"] < fit["hidden"], (fit, zoomed)
 
 
+NON_TEXT_CONTRAST = """() => {
+  // nemik:W437: WCAG 1.4.11, 3:1 for graphical objects that carry meaning, measured on rendered colours
+  const rgb = c => { const x = document.createElement('div'); x.style.color = c; document.body.appendChild(x);
+    const m = getComputedStyle(x).color.match(/\\d+(\\.\\d+)?/g).map(Number); x.remove(); return m.slice(0, 3); };
+  const lum = c => { const [r, g, b] = rgb(c).map(v => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; });
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
+  const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); };
+  const bg = getComputedStyle(document.body).backgroundColor;
+  const out = {};
+  SCOPES.forEach(s => { out['ring ' + s.id] = ratio(scopeColor(s.color), bg); });
+  const w = cy.edges('.waits')[0];
+  if (w) out['wait line'] = ratio(w.style('line-color'), bg);
+  const e = cy.edges().filter(x => !x.hasClass('waits') && x.visible())[0];
+  if (e) out['enables line'] = ratio(e.style('line-color'), bg);
+  return out;
+}"""
+
+
+@pytest.mark.parametrize("scheme", ["light", "dark"])
+def test_meaningful_strokes_reach_three_to_one(server, scheme) -> None:
+    with sync_api.sync_playwright() as p:
+        exe = os.environ.get("NEMIK_CHROMIUM")
+        try:
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(
+            viewport={"width": 1700, "height": 1250}, color_scheme=scheme
+        )
+        page.goto(server)
+        page.wait_for_selector("#pathkey line", state="attached")
+        ratios = page.evaluate(NON_TEXT_CONTRAST)
+        browser.close()
+    low = {k: round(v, 2) for k, v in ratios.items() if v < 3}
+    assert len(ratios) >= 5
+    assert not low, f"{scheme}: under 3:1 against the page: {low}"
+
+
 def test_no_command_route_or_tools_panel_remains(server) -> None:
     # nemik:W397: the Tools drop-down ran CLIs through /cmd; it is retired, and every capability it
     # offered is either native to the view or CLI-only. Neither the route nor the panel may come back.

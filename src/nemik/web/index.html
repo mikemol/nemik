@@ -12,12 +12,18 @@
   --bg: #f7f7f5; --panel: #ffffff; --ink: #1d1d1b; --muted: #6b6b66; --line: #d9d9d4;
   --ready: #2f7d4f; --working: #2b62c0; --blocked: #b8452c; --done: #9a9a94; --dropped: #c8c8c2;
   --other: #8a5cc2; --interrupt: #d08a1a; --unclaimed: #d0453a;
+  /* nemik:W437 (WCAG 1.4.11, 3:1 against --bg): a dependency line is meaning, not a separator, so it
+     gets --edge, not --line; the halo rings are Okabe-Ito, darkened for the light page. */
+  --edge: #84847e;
+  --ring-fleet: #8f6400; --ring-repo: #0072b2; --ring-view: #a3477d;
 }
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #161615; --panel: #1f1f1d; --ink: #ecece8; --muted: #9a9a94; --line: #34342f;
     --ready: #5cc088; --working: #6d9cf0; --blocked: #ef7a5c; --done: #6b6b66; --dropped: #45453f;
     --other: #b38ae8; --interrupt: #f0b045; --unclaimed: #ff6b5c;
+    --edge: #74746e;
+    --ring-fleet: #e0a000; --ring-repo: #56b4e9; --ring-view: #cc79a7;
   }
 }
 * { box-sizing: border-box; }
@@ -161,12 +167,13 @@ const rulerDash = motif => [...motif].map(c => (c === RULER_DOT ? "1.5 2.5" : "6
 // Each scope's ring carries its own motif order (broadest scope, longest motif), so no two scopes share a
 // pattern, whatever their colours (WCAG 1.4.1; W380 refuted the old fleet/sel pair, both solid).
 const SCOPES = [
-  { id: "fleet", color: "#e0a000", order: 3, width: 2, label: "longest chain, fleet" },
-  { id: "repo", color: "#56b4e9", order: 2, width: 2, label: "longest chain, its repo" },
-  { id: "view", color: "#cc79a7", order: 1, width: 2.5, label: "longest chain, this view" },
+  { id: "fleet", color: "--ring-fleet", order: 3, width: 2, label: "longest chain, fleet" },
+  { id: "repo", color: "--ring-repo", order: 2, width: 2, label: "longest chain, its repo" },
+  { id: "view", color: "--ring-view", order: 1, width: 2.5, label: "longest chain, this view" },
   { id: "sel", color: "ink", order: 0, width: 3, label: "longest chain, selected card's cone" },
 ];
-const scopeColor = c => (c === "ink" ? css("--ink") : c);
+// nemik:W437: a scope colour is a theme token (light and dark each reach 3:1 against --bg)
+const scopeColor = c => (c === "ink" ? css("--ink") : c.startsWith("--") ? css(c) : c);
 const scopeDash = s => rulerDash(rulerMotif(s.order));
 // The legend waits for the first graph, since its patterns arrive with it (W419).
 const pathKey = () => { document.getElementById("pathkey").innerHTML = SCOPES.map(s =>
@@ -492,7 +499,7 @@ function draw() {
       { selector: '.repo[live = "asleep"]', style: { "border-width": 2, "border-color": css("--blocked") } },
       { selector: '.repo[live = "idle"]', style: { "border-width": 2, "border-color": css("--interrupt") } },
       { selector: '.repo[live = "awake"]', style: { "border-width": 2, "border-color": css("--ready") } },
-      { selector: "edge", style: { width: 1, "line-color": css("--line"), "target-arrow-color": css("--line"),
+      { selector: "edge", style: { width: 1, "line-color": css("--edge"), "target-arrow-color": css("--edge"),
         "target-arrow-shape": "triangle", "curve-style": "bezier", "arrow-scale": 0.7 } },
       // nemik:W388: a wait line's dash is its identity, the ruler-sequence encoding (emitF) of its source's
       // place among the lines into the same blocker, so lines crowding one card never share a pattern and
