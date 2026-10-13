@@ -732,3 +732,6 @@
 2026-10-13T14:17:18Z  tick  W449 advanced  unblock   "W449 TRS published as Turtle per repo (withheld cards excluded; the gate caught the example client decoding Turtle as JSON, fixed); W406 closed; W408 service catalog working"
 2026-10-13T14:19:11Z  tick  W451 minted    -         "Publish catalog.ttl: an oslc:ServiceProviderCatalog with one ServiceProvider per repo (CM domain) and its trs:TrackedResourceSet pointing at the published base and change log"  evidence=W408
 2026-10-13T14:19:12Z  tick  W452 minted    -         "Interop check: an OSLC client (Eclipse Lyo) discovers nemik's catalog and reads a repo's TRS without nemik-specific code"  evidence=W408
+2026-10-13T14:44:50Z  tick  W451 advanced  unblock   "W451 OSLC service-provider catalog published (provider per repo, TRS links resolve); W408 split into W451 (done) and W452 Lyo interop check (working)"
+2026-10-13T14:49:53Z  tick  W453 minted    -         "critical over Cards: the longest-chain poset (rank, slack, path count) computed from nemik.cards.Card, rdflib only at the edge"  evidence=W425
+2026-10-13T14:49:54Z  tick  W454 minted    -         "health over Cards: a repo's verdict (blocked share, oldest block, asks owed) from nemik.cards.Card plus the operator asks as plain rows"  evidence=W425

@@ -19,12 +19,10 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
-from nemik.adapter import NEMIK, OSLC_CM
-from nemik.blocks import ref
+from nemik.cards import Card, cards
 
 if TYPE_CHECKING:
     from rdflib import Graph
-    from rdflib.term import Node
 
 
 @dataclass(frozen=True)
@@ -50,40 +48,32 @@ class Task:
         return self.cite.partition(":")[0]
 
 
-def _cards(g: Graph, repos: set[str] | None) -> list[Node]:
-    cards = {n for n in g.subjects(OSLC_CM.state, None)}
-    if repos is not None:
-        cards = {n for n in cards if ref(n).partition(":")[0] in repos}
-    return sorted(cards, key=ref)
-
-
-def predecessors(g: Graph, card: Node) -> set[Node]:
-    """What `card` cannot finish before: what it waits for, and what enables it."""
-    return set(g.objects(card, NEMIK.waitsFor)) | set(g.subjects(NEMIK.enables, card))
-
-
 def project(g: Graph, repos: set[str] | None = None) -> list[Task]:
     """The cards of `repos` (every repo when None) as tasks, in cite order."""
-    cards = _cards(g, repos)
+    return project_cards(cards(g), repos)
+
+
+def project_cards(
+    by_cite: dict[str, Card], repos: set[str] | None = None
+) -> list[Task]:
+    """nemik:W425: the projection over plain `Card`s, no rdflib: the portable core (W422).
+
+    A card's predecessors are what it waits for and what enables it; one in another repo is a
+    cross-project link.
+    """
+    chosen = [
+        c for cite, c in sorted(by_cite.items()) if repos is None or c.repo in repos
+    ]
     tasks = []
-    for uid, card in enumerate(cards, start=1):
-        cite = ref(card)
-        home = cite.partition(":")[0]
-        links = sorted(
-            (
-                Link(ref(p), ref(p).partition(":")[0] != home)
-                for p in predecessors(g, card)
-                if (p, OSLC_CM.state, None) in g
-            ),
-            key=lambda link: link.cite,
-        )
+    for uid, card in enumerate(chosen, start=1):
+        preds = sorted(set(card.waits_for) | set(card.enabled_by))
         tasks.append(
             Task(
                 uid=uid,
-                cite=cite,
-                name=str(g.value(card, NEMIK.title) or cite),
-                done=(card, OSLC_CM.state, NEMIK.Done) in g,
-                preds=tuple(links),
+                cite=card.cite,
+                name=card.title or card.cite,
+                done=card.done,
+                preds=tuple(Link(p, p.partition(":")[0] != card.repo) for p in preds),
             )
         )
     return tasks

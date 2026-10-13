@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 452,
+  "counter": 454,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 253
+      "ticks_blocked": 254
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 73,
+      "ticks_blocked": 74,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 75,
+      "ticks_blocked": 76,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T23:37:26Z",
-      "ticks_blocked": 105,
+      "ticks_blocked": 106,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 102,
+      "ticks_blocked": 103,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 79,
+      "ticks_blocked": 80,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 94,
+      "ticks_blocked": 95,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 94,
+      "ticks_blocked": 95,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 94,
+      "ticks_blocked": 95,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 94,
+      "ticks_blocked": 95,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 94,
+      "ticks_blocked": 95,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 94,
+      "ticks_blocked": 95,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 94,
+      "ticks_blocked": 95,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 94,
+      "ticks_blocked": 95,
       "completed": null
     },
     {
@@ -6426,7 +6426,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T06:56:21Z",
-      "ticks_blocked": 20,
+      "ticks_blocked": 21,
       "completed": null
     },
     {
@@ -6450,7 +6450,7 @@
       "minted_during": "tick",
       "caused_by": "W337",
       "last_worked": "2026-10-13T07:54:43Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "weight": 5,
       "completed": null
     },
@@ -6624,7 +6624,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 69,
+      "ticks_blocked": 70,
       "completed": null
     },
     {
@@ -7031,7 +7031,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "completed": null
     },
     {
@@ -7633,7 +7633,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 30,
+      "ticks_blocked": 31,
       "completed": null
     },
     {
@@ -7657,7 +7657,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 46,
       "completed": null
     },
     {
@@ -7705,7 +7705,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-13T03:46:31Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 46,
       "completed": null
     },
     {
@@ -7729,7 +7729,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 46,
       "completed": null
     },
     {
@@ -7998,26 +7998,24 @@
     {
       "symbol": "W408",
       "title": "An OSLC service-provider catalog per repo as the discovery root of the connector contract",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W371"
       ],
       "touches": [
         "interop"
       ],
-      "blocked_on": [
-        "W452"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Umbrella over W451 catalog and W452 Lyo interop check",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: W451 landed (catalog.ttl, provider per repo, TRS links resolve, tested as a client reads it). W452 (Lyo interop) dropped to residue with its measured cost: Lyo's TRS client is a beta with all of Jena and Jersey in its closure.",
       "issued_at": "2026-10-12T18:44:15Z",
       "minted_during": "interrupt",
       "caused_by": "W373",
-      "last_worked": "2026-10-13T14:19:14Z",
-      "ticks_blocked": 1,
+      "last_worked": "2026-10-13T14:47:03Z",
+      "ticks_blocked": 0,
       "weight": 5,
-      "completed": null
+      "completed": "20261013T144703Z"
     },
     {
       "symbol": "W409",
@@ -8289,7 +8287,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 26,
+      "ticks_blocked": 27,
       "completed": null
     },
     {
@@ -8310,7 +8308,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T05:38:02Z",
-      "ticks_blocked": 24,
+      "ticks_blocked": 25,
       "completed": null
     },
     {
@@ -8331,27 +8329,31 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 26,
+      "ticks_blocked": 27,
       "completed": null
     },
     {
       "symbol": "W425",
       "title": "Make nemik.index.Index the pure input type (built from rdflib once) so critical, projection and health can enter the typed subset",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W422"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "blocked_on": [
+        "W453",
+        "W454"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Umbrella: projection done; W453 critical and W454 health follow over Cards",
+      "evidence": "2026-10-13: nemik/cards.py: Card (cite, state, title, waits_for, enabled_by: strings and tuples, frozen) and cards(g), the only rdflib touch. projection.project_cards is pure over Cards; project(g) is the shim. Consumers green: test_projection, test_mspdi, test_issues, test_mpxj, test_importer.",
       "issued_at": "2026-10-13T01:19:07Z",
       "minted_during": "tick",
       "caused_by": "W422",
-      "last_worked": null,
+      "last_worked": "2026-10-13T14:49:56Z",
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 4,
+      "completed": null
     },
     {
       "symbol": "W426",
@@ -8594,7 +8596,7 @@
       "minted_during": "tick",
       "caused_by": "W338",
       "last_worked": "2026-10-13T08:13:31Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "completed": null
     },
     {
@@ -8821,7 +8823,7 @@
       "minted_during": "tick",
       "caused_by": "W426",
       "last_worked": "2026-10-13T13:18:45Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 5,
       "completed": null
     },
     {
@@ -8844,23 +8846,41 @@
       "completed": "20261013T142121Z"
     },
     {
-      "symbol": "W452",
-      "title": "Interop check: an OSLC client (Eclipse Lyo) discovers nemik's catalog and reads a repo's TRS without nemik-specific code",
+      "symbol": "W453",
+      "title": "critical over Cards: the longest-chain poset (rank, slack, path count) computed from nemik.cards.Card, rdflib only at the edge",
       "status": "working",
       "enables": [
-        "W408"
+        "W425"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Find the smallest Lyo client that can load a ServiceProviderCatalog and a TRS from static files (lyo-client or lyo-trs-client jars, JRE already pinned by W445); measure its jar closure the way W445 did before pinning",
+      "next_bounded_step": "",
       "evidence": "",
-      "issued_at": "2026-10-13T14:19:12Z",
+      "issued_at": "2026-10-13T14:49:53Z",
       "minted_during": "tick",
-      "caused_by": "W408",
-      "last_worked": "2026-10-13T14:21:23Z",
+      "caused_by": "W425",
+      "last_worked": "2026-10-13T14:49:58Z",
       "ticks_blocked": 0,
       "completed": null
+    },
+    {
+      "symbol": "W454",
+      "title": "health over Cards: a repo's verdict (blocked share, oldest block, asks owed) from nemik.cards.Card plus the operator asks as plain rows",
+      "status": "ready",
+      "enables": [
+        "W425"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-13T14:49:54Z",
+      "minted_during": "tick",
+      "caused_by": "W425",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -8919,13 +8939,20 @@
       "dropped_at": "2026-10-10T02:39:51Z",
       "reason": "Superseded by W275 (operator 2026-10-10): a letter is the evidence of a waypoint, so the waypoint that cites it is the sender-side record; no separate manifest. Revisit if letters stay free-standing.",
       "recoverable": true
+    },
+    {
+      "symbol": "W452",
+      "title": "Interop check: an OSLC client (Eclipse Lyo) discovers nemik's catalog and reads a repo's TRS without nemik-specific code",
+      "dropped_at": "2026-10-13T14:47:02Z",
+      "reason": "Measured 2026-10-13: Lyo's only TRS client is org.eclipse.lyo.trs:trs-client 7.0.0.Beta3 (beta); its POM's compile closure includes apache-jena-libs (all of Jena), jersey-client, jakarta.servlet-api, httpclient, oslc4j-core, oslc-client and Lyo's store-core, far out of proportion to one interop check. The catalog and feeds are already read as a client would (test_catalog resolves every link; test_trs_published parses each feed). Revisit if Lyo ships a non-beta client with a small closure, or if a connector (W371) brings a JVM OSLC client anyway.",
+      "recoverable": true
     }
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-13T14:18:01Z"
+    "taken_at": "2026-10-13T14:45:34Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []
