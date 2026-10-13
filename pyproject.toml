@@ -63,6 +63,8 @@ allow-direct-references = true
 dev = [
     "playwright>=1.63.0",
     "pytest>=9.1.1",
+    "jsonschema>=4.23",  # nemik:W441: published documents validate against their generated schemas
+    "types-jsonschema",  # its stubs, for the mypy edit gate
 ]
 
 [tool.pytest.ini_options]

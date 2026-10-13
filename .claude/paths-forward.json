@@ -8644,26 +8644,26 @@
     {
       "symbol": "W441",
       "title": "Validate every published document against its generated schema in the test suite (adds jsonschema as a dev dependency)",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W368"
       ],
       "touches": [],
       "blocked_on": [],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "",
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: jsonschema (+ types-jsonschema) added to the dev group, uv.lock re-resolved (jsonschema 4.26.0, attrs, referencing, rpds-py, jsonschema-specifications). tests/test_published_valid.py builds the fixture's static view, checks every published schema is valid 2020-12, and validates every contracted document against its schema. First run found one mismatch: goals on_deck is published as null when nothing is on deck, but ref was typed string; ref is now nullable. All validate.",
       "issued_at": "2026-10-13T08:49:58Z",
       "minted_during": "tick",
       "caused_by": "W368",
-      "last_worked": "2026-10-13T09:01:44Z",
+      "last_worked": "2026-10-13T09:24:06Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261013T092406Z"
     },
     {
       "symbol": "W442",
       "title": "OpenAPI description of the static files and nemik-serve's routes, referencing the generated schemas, plus a client example another app can run",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W368"
       ],
@@ -8675,7 +8675,7 @@
       "issued_at": "2026-10-13T08:49:58Z",
       "minted_during": "tick",
       "caused_by": "W368",
-      "last_worked": "2026-10-13T08:50:05Z",
+      "last_worked": "2026-10-13T09:24:08Z",
       "ticks_blocked": 0,
       "completed": null,
       "weight": 3
