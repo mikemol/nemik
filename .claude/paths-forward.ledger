@@ -762,3 +762,7 @@
 2026-10-13T18:26:10Z  tick  W472 minted    -         "Keymap table drives the keys and a ? help overlay; / jumps to a card by cite or title"  evidence=W463
 2026-10-13T18:26:11Z  tick  W473 minted    -         "Cite links in the Selected panel and operator lanes select their card; one select path and a live-region announcement"  evidence=W463
 2026-10-13T18:37:56Z  tick  W474 minted    -         "Treemap labels drop the roll-up mark: a rolled-up umbrella's hidden work (luthen-observability:W43 hiding W111) is invisible"  evidence=operator
+2026-10-13T19:01:40Z  interrupt W475 minted    -         "A test reading a package file by src/ path passes on the host and fails in the gate sandbox: flag it before commit"  evidence=W467
+2026-10-13T19:10:42Z  tick  W467 advanced  unblock   "f3a00fd [PUSHED, ls-remote]: W467 no-command lane + ticks, W460 errands, W473 one select path + announce, W474 treemap roll-up marks (W43 +1 hid W111); W463 atomized W468-W473 from operator rulings; W459 held on the operator; W475 sandbox-path guard minted; W465 working"
+2026-10-13T19:14:02Z  tick  W476 minted    -         "Ask mtools: --bump-blocked (or a --block-behind-open mode) sets a ready card blocked on its one open enabler, so ReadyBehindOpen fixes itself"  evidence=W465
+2026-10-13T19:14:31Z  tick  W477 minted    -         "Draw a card stored ready but behind an open enabler as waiting: a mark and a legend entry, from the readyBehindOpen finding"  evidence=W465

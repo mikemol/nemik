@@ -135,7 +135,7 @@
 
 @misc{no-versioned-schema,
   section = {limits},
-  claim   = {nemik has no schema version negotiated between itself and the workstreams it reads --- shapes.ttl changes (like the September 2026 title-length refinement, nemik:W23) take effect fleet-wide the moment this repo's shapes.ttl is edited, with no way for an individual workstream to pin an older ruleset or be warned it is about to see new Warnings; conformance drift is discovered by running nemik-check, not declared in advance},
+  claim   = {nemik has no schema version negotiated between itself and the workstreams it reads --- shapes.ttl changes (like the September 2026 title-length refinement, nemik:W23) take effect fleet-wide the moment this repo's shapes.ttl is edited, with no way for an individual workstream to pin an older ruleset. A new shape may be staged at sh:Info first so its findings are seen before they count (ReadyBehindOpenShape, nemik:W465, 88 cards on its first day), but that staging is nemik's choice per shape, not a version any workstream negotiates; conformance drift is discovered by running nemik-check, not declared in advance},
   check   = {claim:no-versioned-schema}
 }
 

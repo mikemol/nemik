@@ -200,13 +200,10 @@ def rdf_is_not_centralized_behind_adapter():
 def no_versioned_schema():
     # The claim is an absence: no version negotiation between shapes.ttl and its consumers.
     # Falsifiable both ways -- this fails the moment someone adds one, which is the point.
+    # nemik:W465: staging one shape at sh:Info is nemik's own per-shape choice, not a version a
+    # workstream can pin, so it no longer counts against the claim (the claim's text says so).
     shapes = (SRC / "data" / "shapes.ttl").read_text()
-    for marker in (
-        "owl:versionInfo",
-        "schemaVersion",
-        "shapesVersion",
-        "sh:severity sh:Info",
-    ):
+    for marker in ("owl:versionInfo", "schemaVersion", "shapesVersion"):
         assert marker not in shapes, (
             f"{marker} found in shapes.ttl -- update this claim, it may no longer hold"
         )

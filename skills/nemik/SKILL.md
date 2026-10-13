@@ -127,6 +127,7 @@ A waypoint is `ready`, `working`, `blocked`, `done` or `dropped`, and every chan
 | `OperatorAskShape` | operator block with no stated ask, or one already answered | rule 4 |
 | `UmbrellaBlockShape` | blocked on another repo's umbrella (2+ open children enable it), not the child step doing the work; a single-child chain step is fine to cite | cite the child `<repo>:W<n>` |
 | `ReadyUmbrellaShape` | ready or working, yet 2+ of your own open cards enable it: an umbrella that cannot land before its children (W436) | `--update W<n> --status blocked --blocked-on <the children>`, or drop the `enables` edges that are not prerequisites |
+| `ReadyBehindOpenShape` | ready, yet one open card (any repo) enables it: it cannot land first, and its salience reads blank (W465; Info for now) | `--update W<n> --status blocked --blocked-on <that card>`, or drop the `enables` edge if it is not a prerequisite; mtools:W1131's `--block-behind-open` will do it for you |
 | `UnresolvedBlockerShape` | blocked_on names no repo, waypoint, operator ask or calendar event (`cal:<label>/<uid>`) nemik can resolve | rewrite it as one of those |
 | `LandedBlockerShape` | a blocker is already done or dropped; if all are, the item is ready | trim it (`$PF --bump-blocked` prunes local ones) |
 | `MalformedBlockerShape` | a symbol with prose attached (`W8 (both ...)`) | symbol alone; prose goes in evidence |

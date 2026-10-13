@@ -134,6 +134,18 @@ def annotate(g: Graph) -> None:
             if len(kids) >= 2:
                 for kid in kids:
                     g.add((node, NEMIK.readyUmbrella, kid))
+            # nemik:W465: the one-enabler case the umbrella rule leaves out (mtools:W1115 sat ready
+            # behind open W1122, W1116 behind W1115). The flow model already treats it as waiting,
+            # so its salience reads blank while its fill says ready: the two disagree.
+            # Ready only, as mtools:W1131's fix: a working card is being done, so it is left alone.
+            elif state == NEMIK.Ready:
+                for c in g.subjects(NEMIK.enables, node):
+                    if (c, OSLC_CM.state, None) in g and (
+                        c,
+                        OSLC_CM.state,
+                        NEMIK.Done,
+                    ) not in g:
+                        g.add((node, NEMIK.readyBehindOpen, c))
 
     # nemik:W177 (operator 2026-10-01): each repo keeps exactly one `working` card unless every open
     # item is blocked. None while something is ready, or several, is the defect; the workstream

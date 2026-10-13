@@ -104,6 +104,15 @@ nemik:ReadyUmbrellaShape a sh:NodeShape ;
     sh:property [ sh:path nemik:readyUmbrella ; sh:maxCount 0 ; sh:severity sh:Warning ;
                   sh:message "ready, but an umbrella: two or more of its own open cards enable it; set it blocked on them (it lands when they do), or drop the enables edges that are not prerequisites" ] .
 
+# Ready, but an open card enables it (nemik:W465): it cannot land first. mtools:W1131's
+# --block-behind-open applies the fix.
+nemik:ReadyBehindOpenShape a sh:NodeShape ;
+    sh:targetSubjectsOf nemik:readyBehindOpen ;
+    # Info, not Warning, at first: 88 cards fleet-wide on 2026-10-13 (55 in one paperkit chain), and
+    # the fix is mechanical (nemik:W476 asks pathsforward to apply it), not 88 hand edits.
+    sh:property [ sh:path nemik:readyBehindOpen ; sh:maxCount 0 ; sh:severity sh:Info ;
+                  sh:message "ready, but an open card enables it: it waits on that card, so set it blocked on it (it becomes ready when that lands), or drop the enables edge if it is not a prerequisite" ] .
+
 # Blocked, but on nothing the graph can reach: no edge can be drawn and no one can be nudged.
 nemik:UnresolvedBlockerShape a sh:NodeShape ;
     sh:targetSubjectsOf nemik:unresolvedBlocker ;
