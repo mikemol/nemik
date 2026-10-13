@@ -40,8 +40,12 @@ def test_every_contracted_document_validates(built: Path) -> None:
     for doc in sorted(built.rglob("*.json")):
         name = str(doc.relative_to(built))
         schema = built / _schema_for(name)
-        if name.startswith(("schema/", "graph/")) or name == "hashes.json":
-            continue  # schemas themselves; pieces are cut from graph.json (W415); the index
+        if name.startswith(("schema/", "graph/")) or name in (
+            "hashes.json",
+            "openapi.json",
+        ):
+            # the contract itself (schemas, openapi), pieces cut from graph.json (W415), the index
+            continue
         assert schema.exists(), f"{name} is published with no schema"
         validator = Draft202012Validator(json.loads(schema.read_text()))
         errors = sorted(validator.iter_errors(json.loads(doc.read_text())), key=str)

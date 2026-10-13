@@ -119,3 +119,72 @@ def schemas() -> dict[str, dict[str, Any]]:
         | body
         for path, body in bodies.items()
     }
+
+
+def schema_path(pattern: str) -> str:
+    """Where the static build publishes the schema for a data path pattern."""
+    return "schema/" + pattern.replace("<repo>", "repo") + ".schema.json"
+
+
+def openapi() -> dict[str, Any]:
+    """nemik:W442: the read API as OpenAPI 3.1, generated, so it cannot drift from the schemas.
+
+    Every published data path is a GET whose 200 response refers to the schema the same build
+    publishes beside it (OpenAPI 3.1 takes JSON Schema 2020-12 as is). hashes.json and the graph pieces
+    (W414, W415) are listed for the client that refetches only what changed.
+    """
+    version = json.loads(
+        files("nemik.data").joinpath("field-manifest.json").read_text()
+    )["version"]
+
+    def get(
+        summary: str, schema: dict[str, Any], param: str | None = None
+    ) -> dict[str, Any]:
+        op: dict[str, Any] = {
+            "summary": summary,
+            "responses": {
+                "200": {
+                    "description": "the document",
+                    "content": {"application/json": {"schema": schema}},
+                }
+            },
+        }
+        if param:
+            op["parameters"] = [
+                {
+                    "name": param,
+                    "in": "path",
+                    "required": True,
+                    "schema": {"type": "string"},
+                }
+            ]
+        return {"get": op}
+
+    paths: dict[str, Any] = {}
+    for pattern in schemas():
+        url = "/" + pattern.replace("<repo>", "{repo}")
+        paths[url] = get(
+            f"nemik {pattern}",
+            {"$ref": schema_path(pattern)},
+            "repo" if "<repo>" in pattern else None,
+        )
+    paths["/hashes.json"] = get(
+        "every published path with the sha256 of its bytes (W414): refetch only what moved",
+        {"type": "object", "additionalProperties": {"type": "string"}},
+    )
+    paths["/graph/{piece}.json"] = get(
+        "one repo's piece of graph.json, or _fleet (W415); assembling them gives graph.json",
+        {"type": "object"},
+        "piece",
+    )
+    return {
+        "openapi": "3.1.0",
+        "info": {
+            "title": "nemik read API",
+            "version": str(version),
+            "description": "Read-only. Every document is a static file; the field manifest is the "
+            "contract, and a field outside it fails nemik's build.",
+        },
+        "jsonSchemaDialect": DIALECT,
+        "paths": paths,
+    }

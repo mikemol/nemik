@@ -589,10 +589,12 @@ def build_static(root: Path, out: Path, withheld: Path | None) -> list[Path]:
         docs[f"graph/{piece}.json"] = cut
     # nemik:W440: the contract the published files keep, generated from the field manifest and listed in
     # hashes.json like the data, so a client sees when it changes
-    from nemik.apischema import schemas
+    from nemik.apischema import openapi, schema_path, schemas
 
     for pattern, schema in schemas().items():
-        docs["schema/" + pattern.replace("<repo>", "repo") + ".schema.json"] = schema
+        docs[schema_path(pattern)] = schema
+    # nemik:W442: the read API, generated from the same schemas
+    docs["openapi.json"] = openapi()
     written = write_static(out)
     # nemik:W414: hashes.json maps each published data path to the sha256 of its bytes, so a page
     # (W416) can refetch only the pieces that changed. Paths and digests only: nothing withheld.

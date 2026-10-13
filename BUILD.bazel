@@ -14,7 +14,7 @@ exports_files(["pyproject.toml"])
         # load ~100 it crossed medium's 300 s (284 s alone, then a timeout in the gate). The rest stay medium.
         size = "large" if src == "tests/test_layout.py" else "medium",
         args = ["$(rootpath " + src + ")", "-c", "$(rootpath pyproject.toml)"],
-        data = [src, "tests/installed.py", ".claude/settings.json", "//tests/fixtures:fleet", "pyproject.toml", "ARCHITECTURE.md", "skills/nemik/SKILL.md", "docs/positioning.md", "src/nemik/data/workflows.toml"] + glob(["tests/corpus/**"]) + [ "src/nemik/data/shapes.ttl", ":.venv", "@opa//file", "@use_of_colour_rego//file", "@chromium//:files", "@chromium//:chrome-headless-shell"],
+        data = [src, "tests/installed.py", ".claude/settings.json", "//tests/fixtures:fleet", "pyproject.toml", "ARCHITECTURE.md", "skills/nemik/SKILL.md", "docs/positioning.md", "src/nemik/data/workflows.toml", "tools/nemik_client.py"] + glob(["tests/corpus/**"]) + [ "src/nemik/data/shapes.ttl", ":.venv", "@opa//file", "@use_of_colour_rego//file", "@chromium//:files", "@chromium//:chrome-headless-shell"],
         env = {
             "NEMIK_OPA": "$(rootpath @opa//file)",
             "NEMIK_USE_OF_COLOUR_REGO": "$(rootpath @use_of_colour_rego//file)",
