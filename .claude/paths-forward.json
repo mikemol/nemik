@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 438,
+  "counter": 442,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 235
+      "ticks_blocked": 237
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 55,
+      "ticks_blocked": 57,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 57,
+      "ticks_blocked": 59,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T23:37:26Z",
-      "ticks_blocked": 87,
+      "ticks_blocked": 89,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 84,
+      "ticks_blocked": 86,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 61,
+      "ticks_blocked": 63,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 76,
+      "ticks_blocked": 78,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 76,
+      "ticks_blocked": 78,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 76,
+      "ticks_blocked": 78,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 76,
+      "ticks_blocked": 78,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 76,
+      "ticks_blocked": 78,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 76,
+      "ticks_blocked": 78,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 76,
+      "ticks_blocked": 78,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 76,
+      "ticks_blocked": 78,
       "completed": null
     },
     {
@@ -6426,7 +6426,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T06:56:21Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -6450,7 +6450,7 @@
       "minted_during": "tick",
       "caused_by": "W337",
       "last_worked": "2026-10-13T07:54:43Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 3,
       "weight": 5,
       "completed": null
     },
@@ -6560,7 +6560,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 5
     },
     {
       "symbol": "W344",
@@ -6624,7 +6624,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 51,
+      "ticks_blocked": 53,
       "completed": null
     },
     {
@@ -7033,7 +7033,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 10,
       "completed": null
     },
     {
@@ -7099,12 +7099,12 @@
       "caused_by": "W364",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 3
     },
     {
       "symbol": "W368",
       "title": "A documented, versioned read API over nemik-serve's JSON",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W364"
       ],
@@ -7112,16 +7112,21 @@
         "interop",
         "api"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "OpenAPI description of graph.json, wake.json, history.json, goals, rank and critical endpoints; a version field and the field manifest as the contract (a field outside it fails the build already); a client example another app can call",
+      "blocked_on": [
+        "W440",
+        "W441",
+        "W442"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Umbrella over W440 schema generation, W441 validation, W442 OpenAPI + client",
       "evidence": "",
       "issued_at": "2026-10-12T01:34:00Z",
       "minted_during": "interrupt",
       "caused_by": "W364",
-      "last_worked": null,
-      "ticks_blocked": 0,
-      "weight": 4
+      "last_worked": "2026-10-13T08:50:06Z",
+      "ticks_blocked": 1,
+      "weight": 3,
+      "completed": null
     },
     {
       "symbol": "W369",
@@ -7633,7 +7638,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 12,
+      "ticks_blocked": 14,
       "completed": null
     },
     {
@@ -7657,7 +7662,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 29,
       "completed": null
     },
     {
@@ -7705,7 +7710,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-13T03:46:31Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 29,
       "completed": null
     },
     {
@@ -7729,7 +7734,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 29,
       "completed": null
     },
     {
@@ -8234,18 +8239,20 @@
     {
       "symbol": "W420",
       "title": "Load nemik-export output in a real reader (MPXJ, ProjectLibre or GanttProject) and pin that it opens with its links",
-      "status": "working",
+      "status": "blocked",
       "enables": [],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W439"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "MPXJ reads MSPDI headless (survey: MPXJ bound confirmed); a hermetic test that runs it over the fixture export is the cheapest real-reader check",
-      "evidence": "",
+      "evidence": "2026-10-13: 2026-10-13: Microsoft no longer links mspdi_pj12.xsd (it shipped only in the retired Project 2007 SDK); MPXJ needs a JVM and a jar closure in the build. Choice split out as W439.",
       "issued_at": "2026-10-13T00:13:24Z",
       "minted_during": "tick",
       "caused_by": "W365",
-      "last_worked": "2026-10-13T08:38:08Z",
-      "ticks_blocked": 0,
+      "last_worked": "2026-10-13T08:49:40Z",
+      "ticks_blocked": 1,
       "weight": 1,
       "completed": null
     },
@@ -8285,7 +8292,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 10,
       "completed": null
     },
     {
@@ -8306,7 +8313,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T05:38:02Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 8,
       "completed": null
     },
     {
@@ -8327,7 +8334,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 10,
       "completed": null
     },
     {
@@ -8347,7 +8354,7 @@
       "caused_by": "W422",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 4
     },
     {
       "symbol": "W426",
@@ -8367,7 +8374,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:42:04Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 10,
       "completed": null
     },
     {
@@ -8594,6 +8601,85 @@
       "minted_during": "tick",
       "caused_by": "W338",
       "last_worked": "2026-10-13T08:13:31Z",
+      "ticks_blocked": 3,
+      "completed": null
+    },
+    {
+      "symbol": "W439",
+      "title": "Pick the pinnable MSPDI reader: MPXJ on a hermetic JVM (its jar closure via http_file or rules_jvm_external) vs the Project 2007 SDK's mspdi_pj12.xsd recovered from an archive with a sha256",
+      "status": "ready",
+      "enables": [
+        "W420"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Measure each: MPXJ's runtime closure for the MSPDI reader alone (jar count and size) and whether Bazel's bundled JDK runs it in the test sandbox; whether the SDK download survives on archive.org. Pick the smaller, record the rejected one as residue",
+      "evidence": "",
+      "issued_at": "2026-10-13T08:49:39Z",
+      "minted_during": "tick",
+      "caused_by": "W420",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W440",
+      "title": "Generate a JSON Schema per published file from field-manifest.json (field class to JSON type), published beside the data in the static build, versioned by the manifest's version",
+      "status": "ready",
+      "enables": [
+        "W368"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-13T08:49:57Z",
+      "minted_during": "tick",
+      "caused_by": "W368",
+      "last_worked": "2026-10-13T08:52:25Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W441",
+      "title": "Validate every published document against its generated schema in the test suite (adds jsonschema as a dev dependency)",
+      "status": "working",
+      "enables": [
+        "W368"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "W440"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-13T08:49:58Z",
+      "minted_during": "tick",
+      "caused_by": "W368",
+      "last_worked": "2026-10-13T08:52:25Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W442",
+      "title": "OpenAPI description of the static files and nemik-serve's routes, referencing the generated schemas, plus a client example another app can run",
+      "status": "blocked",
+      "enables": [
+        "W368"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "W440"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-13T08:49:58Z",
+      "minted_during": "tick",
+      "caused_by": "W368",
+      "last_worked": "2026-10-13T08:50:05Z",
       "ticks_blocked": 1,
       "completed": null
     }
@@ -8660,7 +8746,7 @@
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-13T08:11:33Z"
+    "taken_at": "2026-10-13T08:48:41Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []
