@@ -375,12 +375,35 @@ function cardList() {
     const name = `${d.state || ""} ${d.symbol}: ${d.title || ""}`;
     const umbrella = d.rollup || expanded.has(n.id());
     const toggle = umbrella
-      ? ` <button type="button" data-toggle="${id}" aria-expanded="${expanded.has(n.id())}">${expanded.has(n.id()) ? "collapse" : `expand ${d.rollup}`}</button>`
+      ? ` <button type="button" tabindex="-1" data-toggle="${id}" aria-expanded="${expanded.has(n.id())}">${expanded.has(n.id()) ? "collapse" : `expand ${d.rollup}`}</button>`
       : "";
-    return `<li><button type="button" data-card="${id}" aria-label="${esc(name)}"`
+    return `<li><button type="button" tabindex="-1" data-card="${id}" aria-label="${esc(name)}"`
       + ` aria-current="${n.id() === selectedId}">${esc(d.label || d.symbol)}</button>${toggle}</li>`;
   }).join("");
+  // nemik:W478: one tab stop for the whole list (a roving tabindex): the selected card's row, else the first
+  const buttons = [...document.querySelectorAll("#cardlist button[data-card]")];
+  const stop = buttons.find(b => b.dataset.card === selectedId) || buttons[0];
+  if (stop) stop.tabIndex = 0;
 }
+// nemik:W478: Up/Down/Home/End move along the list, Right/Left between a row's card and its umbrella
+// toggle; Enter and Space press the focused button as any button does. The tab stop follows focus.
+document.getElementById("cardlist").addEventListener("keydown", ev => {
+  const rows = [...document.querySelectorAll("#cardlist button[data-card]")];
+  const at = ev.target.closest("li"), i = rows.indexOf(at && at.querySelector("button[data-card]"));
+  if (i < 0) return;
+  let next = null;
+  if (ev.key === "ArrowDown") next = rows[Math.min(i + 1, rows.length - 1)];
+  else if (ev.key === "ArrowUp") next = rows[Math.max(i - 1, 0)];
+  else if (ev.key === "Home") next = rows[0];
+  else if (ev.key === "End") next = rows[rows.length - 1];
+  else if (ev.key === "ArrowRight") next = at.querySelector("button[data-toggle]");
+  else if (ev.key === "ArrowLeft") next = rows[i];
+  if (!next) return;
+  ev.preventDefault();
+  for (const b of document.querySelectorAll("#cardlist button")) b.tabIndex = -1;
+  next.tabIndex = 0;
+  next.focus();
+});
 document.getElementById("cardlist").addEventListener("click", ev => {
   const card = ev.target.closest("button[data-card]"), toggle = ev.target.closest("button[data-toggle]");
   if (card) selectCard(card.dataset.card);

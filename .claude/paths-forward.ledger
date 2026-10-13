@@ -770,3 +770,7 @@
 2026-10-13T19:42:54Z  nudge W476 nudged    -         "mtools:W1131 accepted 2026-10-13 and promised a message when W1130 lands; not re-messaged within the hour"
 2026-10-13T20:10:05Z  tick  W477 advanced  unblock   "bbe82e2 [PUSHED, ls-remote]: W477 ready-behind-open drawn as its own state '~' (88 live, one reading with the check; a11y tests key on the displayed state) + W464 waiting cards show carried demand ' · (N)', conserved; W462 working"
 2026-10-13T20:12:54Z  nudge W476 nudged    -         "mtools:W1131 is working in mtools (seen by --prune-landed); no message needed"
+2026-10-13T20:15:28Z  tick  W478 minted    -         "Nav pane step 1: the Cards list becomes one tab stop with a roving tabindex; Up/Down/Home/End move, Enter selects"  evidence=W468
+2026-10-13T20:15:30Z  tick  W479 minted    -         "Nav pane step 2: the focused row's card is highlighted on the canvas and opens the W462 popover beside it"  evidence=W468
+2026-10-13T20:15:32Z  tick  W480 minted    -         "Nav pane step 3: focus and the open/closed state of the pane survive the 60 s poll's redraw, restored by cite"  evidence=W468
+2026-10-13T20:15:40Z  tick  W481 minted    -         "Nav pane step 4: the list becomes an APG tree view, umbrellas nesting their open children, Right/Left expanding and collapsing"  evidence=W468

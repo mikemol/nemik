@@ -838,6 +838,76 @@ def test_a_cite_link_in_the_panel_selects_its_card_and_announces_it(server) -> N
     assert target["cite"].rsplit(":", 1)[-1] in detail
 
 
+def test_the_page_script_runs_without_errors(server) -> None:
+    # nemik:W478: a redeclared const killed the whole page script, and every view test then failed
+    # with "cy.nodes is not a function" (cy fell back to the #cy element). Name the cause instead.
+    with sync_api.sync_playwright() as p:
+        exe = os.environ.get("NEMIK_CHROMIUM")
+        try:
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        errors: list[str] = []
+        page.on("pageerror", lambda err: errors.append(str(err)))
+        page.goto(server)
+        page.wait_for_timeout(3000)
+        browser.close()
+    assert errors == []
+
+
+def test_the_card_list_is_one_tab_stop_walked_by_arrows(server) -> None:
+    # nemik:W478: the Cards list was a tab stop per card (hundreds of Tabs to cross it). Now the list
+    # is one stop, the arrows walk it, Enter selects, and Tab leaves it.
+    with sync_api.sync_playwright() as p:
+        exe = os.environ.get("NEMIK_CHROMIUM")
+        try:
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        page.goto(server)
+        page.wait_for_function(
+            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 1",
+            timeout=60000,
+        )
+        page.evaluate("() => { document.getElementById('sec-cards').open = true; }")
+        page.wait_for_timeout(300)
+        stops = page.evaluate(
+            "() => [...document.querySelectorAll('#cardlist button')]"
+            ".filter(b => b.tabIndex === 0).length"
+        )
+        rows = page.evaluate(
+            "() => [...document.querySelectorAll('#cardlist button[data-card]')]"
+            ".map(b => b.dataset.card)"
+        )
+        page.locator("#cardlist button[tabindex='0']").focus()
+        page.keyboard.press("ArrowDown")
+        page.keyboard.press("ArrowDown")
+        second = page.evaluate("() => document.activeElement.dataset.card")
+        page.keyboard.press("End")
+        last = page.evaluate("() => document.activeElement.dataset.card")
+        page.keyboard.press("Home")
+        page.keyboard.press("ArrowDown")
+        page.keyboard.press("Enter")
+        page.wait_for_timeout(300)
+        selected = page.evaluate("() => cy.nodes(':selected').map(n => n.id())")
+        page.keyboard.press("Tab")
+        outside = page.evaluate(
+            "() => !document.getElementById('cardlist').contains(document.activeElement)"
+        )
+        browser.close()
+    assert len(rows) > 2
+    assert stops == 1
+    assert second == rows[2] and last == rows[-1]
+    assert selected == [rows[1]]
+    assert outside, "Tab stayed inside the list"
+
+
 def test_the_card_popover_follows_the_hovercard_rules(server) -> None:
     # nemik:W462 (operator 2026-10-13: the card view as a popover on hover plus delay). WCAG 1.4.13:
     # not before the delay, hoverable (the pointer may move onto it), dismissible (Esc), and gone

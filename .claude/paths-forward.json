@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 477,
+  "counter": 481,
   "waypoints": [
     {
       "symbol": "W1",
@@ -9123,19 +9123,24 @@
     {
       "symbol": "W468",
       "title": "Navigation pane: the current mode's tree as an APG tree view (roving tabindex), the graph mirrors its focus",
-      "status": "working",
+      "status": "blocked",
       "enables": [
         "W463"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "a DOM tree beside the canvas: Up/Down move, Right expands or enters, Left collapses or goes to the parent, Home/End, type-ahead; one tab stop; start with Rank mode's order; the canvas highlights the focused card; survives the 60 s poll by restoring focus by cite",
+      "blocked_on": [
+        "W478",
+        "W479",
+        "W480",
+        "W481"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "umbrella: lands when W478-W481 do",
       "evidence": "2026-10-13: W462 popover landed for hover; the pane's focused card should open the same popover (popShow on the canvas node), per the W462 design",
       "issued_at": "2026-10-13T18:26:05Z",
       "minted_during": "tick",
       "caused_by": "W463",
-      "last_worked": "2026-10-13T20:15:14Z",
+      "last_worked": "2026-10-13T20:15:42Z",
       "ticks_blocked": 0,
       "weight": 2,
       "completed": null
@@ -9305,6 +9310,80 @@
       "last_worked": "2026-10-13T19:47:48Z",
       "ticks_blocked": 0,
       "completed": "20261013T194748Z"
+    },
+    {
+      "symbol": "W478",
+      "title": "Nav pane step 1: the Cards list becomes one tab stop with a roving tabindex; Up/Down/Home/End move, Enter selects",
+      "status": "done",
+      "enables": [
+        "W468"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: index.html #cardlist: roving tabindex (one tab stop: the selected row, else the first), Up/Down/Home/End move, Right/Left between a row's card and its umbrella toggle, Enter/Space press; tests: one_tab_stop_walked_by_arrows, the W435 keyboard test, and page_script_runs_without_errors (pageerror listener: a script error is named, not seen as 'cy.nodes is not a function')",
+      "issued_at": "2026-10-13T20:15:28Z",
+      "minted_during": "tick",
+      "caused_by": "W468",
+      "last_worked": "2026-10-13T20:17:29Z",
+      "ticks_blocked": 0,
+      "completed": "20261013T201729Z"
+    },
+    {
+      "symbol": "W479",
+      "title": "Nav pane step 2: the focused row's card is highlighted on the canvas and opens the W462 popover beside it",
+      "status": "working",
+      "enables": [
+        "W468"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "on focus of a pane row: add a focus class to the canvas node (a ring distinct from selection) and popShow it; on blur, remove and popLater",
+      "evidence": "",
+      "issued_at": "2026-10-13T20:15:30Z",
+      "minted_during": "tick",
+      "caused_by": "W468",
+      "last_worked": "2026-10-13T20:17:32Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W480",
+      "title": "Nav pane step 3: focus and the open/closed state of the pane survive the 60 s poll's redraw, restored by cite",
+      "status": "ready",
+      "enables": [
+        "W468"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "remember the focused cite before draw(); after cardList() rebuilds, refocus the row with that cite if it still exists, else the nearest by rank; a test forces a redraw while a row has focus",
+      "evidence": "",
+      "issued_at": "2026-10-13T20:15:32Z",
+      "minted_during": "tick",
+      "caused_by": "W468",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W481",
+      "title": "Nav pane step 4: the list becomes an APG tree view, umbrellas nesting their open children, Right/Left expanding and collapsing",
+      "status": "ready",
+      "enables": [
+        "W468"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "role=tree/treeitem with aria-expanded and aria-level; the nesting is the enables forest the treemap already computes (treeOf); expand shares state with the canvas roll-up; Right enters a child, Left goes to the parent",
+      "evidence": "",
+      "issued_at": "2026-10-13T20:15:40Z",
+      "minted_during": "tick",
+      "caused_by": "W468",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
