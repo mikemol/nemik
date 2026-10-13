@@ -86,6 +86,12 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument(
         "--repo", action="append", help="export only this repo (repeatable)"
     )
+    ap.add_argument(
+        "--format",
+        choices=("mspdi", "issues"),
+        default="mspdi",
+        help="mspdi: MS Project XML; issues: issue-tracker JSON (W366)",
+    )
     args = ap.parse_args(argv)
     queues = workstream_files(args.root, QUEUE)
     known = frozenset(r for r, _ in queues)
@@ -94,6 +100,11 @@ def main(argv: list[str] | None = None) -> None:
         g += queue_graph(repo, path, known)
     annotate(g)
     tasks = project(g, set(args.repo) if args.repo else None)
+    if args.format == "issues":
+        from nemik import issues
+
+        sys.stdout.write(issues.write(tasks))
+        return
     sys.stdout.write(write(tasks, ",".join(args.repo) if args.repo else "nemik"))
 
 

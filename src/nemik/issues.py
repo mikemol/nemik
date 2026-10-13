@@ -1,0 +1,55 @@
+"""nemik:W366: cards as issue-tracker issues (GitHub / Forgejo shape), a read-only mirror.
+
+A serializer over nemik.projection (W413). Each Task becomes an issue: its title, a body that names the
+cite (so a mirrored issue always leads back to the card), `state` open or closed, the repo as a label,
+and `blocked_by`, the cites of its predecessors. GitHub's issue-dependency endpoints and Forgejo's
+dependency endpoints both take "this issue is blocked by that one" (docs/integration-survey.md), so the
+mirror's writer resolves each blocked_by cite to the issue it created; that writer is a connector
+(W371), not this module. Nothing here writes anywhere: `nemik-export --format issues` prints JSON.
+
+Jira's CSV import documents only parent/child columns, not issue links (the survey's verified finding),
+so a Jira mirror would lose the blocking edges; it is left to the connector rather than a lossy file.
+"""
+
+from __future__ import annotations
+
+import json
+
+from nemik.projection import Link, Task
+
+
+def to_issues(tasks: list[Task]) -> list[dict[str, object]]:
+    """One issue per task, in cite order."""
+    return [
+        {
+            "cite": t.cite,
+            "title": t.name,
+            "body": f"nemik card {t.cite}",
+            "state": "closed" if t.done else "open",
+            "labels": [t.repo],
+            "blocked_by": [link.cite for link in t.preds],
+        }
+        for t in tasks
+    ]
+
+
+def write(tasks: list[Task]) -> str:
+    return json.dumps(to_issues(tasks), indent=1)
+
+
+def read(text: str) -> list[Task]:
+    """The tasks an issues document written by `write` holds (for the round-trip test)."""
+    rows = json.loads(text)
+    return [
+        Task(
+            uid=i,
+            cite=str(r["cite"]),
+            name=str(r["title"]),
+            done=r["state"] == "closed",
+            preds=tuple(
+                Link(c, c.partition(":")[0] != str(r["cite"]).partition(":")[0])
+                for c in r["blocked_by"]
+            ),
+        )
+        for i, r in enumerate(rows, start=1)
+    ]

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 420,
+  "counter": 425,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 226
+      "ticks_blocked": 227
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 46,
+      "ticks_blocked": 47,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 48,
+      "ticks_blocked": 49,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T23:37:26Z",
-      "ticks_blocked": 78,
+      "ticks_blocked": 79,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 75,
+      "ticks_blocked": 76,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 52,
+      "ticks_blocked": 53,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 67,
+      "ticks_blocked": 68,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 67,
+      "ticks_blocked": 68,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 67,
+      "ticks_blocked": 68,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 67,
+      "ticks_blocked": 68,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 67,
+      "ticks_blocked": 68,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 67,
+      "ticks_blocked": 68,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 67,
+      "ticks_blocked": 68,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 67,
+      "ticks_blocked": 68,
       "completed": null
     },
     {
@@ -6446,12 +6446,12 @@
       "caused_by": "W337",
       "last_worked": "2026-10-11T21:18:11Z",
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 2
     },
     {
       "symbol": "W339",
       "title": "Use-of-colour check: every state the view shows has a second channel",
-      "status": "blocked",
+      "status": "ready",
       "enables": [
         "W337"
       ],
@@ -6459,18 +6459,16 @@
         "a11y",
         "web"
       ],
-      "blocked_on": [
-        "el-openglo:W72"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "wait for el-openglo:W72 (its use-of-colour measurement and policy); then import or call it for nemik's view. Do not read mat230.tar.xz or copy its logic.",
-      "evidence": "2026-10-11: el-openglo answer: check_use_of_colour.py scans el-openglo's own emitted artifacts and the criterion is mat230's (el-openglo:W72 adopts it); depend on mat230's check, not a copy. Legibility floors (W340): only the floor arithmetic is generic; APCA and contrast floors are tied to el-openglo's solver. | 2026-10-11: Correction: mat230 is archived; the only copy is /home/mikemol/github/mat230.tar.xz (member mat230/bin/check-a11y, _check_use_of_colour). The live cite is el-openglo:W72 (adopting it, ready). Until it lands, the logic source is that tar member; nemik reads it, never depends on mat230 as a repo. | 2026-10-12: 2026-10-12 el-openglo letter inbox/2026-10-12-el-openglo-w339-waits-on-w72.md: el-openglo:W72 ready, ranked behind el-openglo:W273; W339 needs W72.c (check_use_of_colour.py --json + policy/use_of_colour.rego). nemik does not ask it moved up: W339 gates nemik's own palette and is on no one's critical path.",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Call el-openglo's check_use_of_colour.py --json logic shape against nemik's view palette (STATE_MARK glyphs, ring dashes, chip glyphs), evaluate with its use_of_colour.rego via nemik's opa; vendor or pin the pair the way nemik pins other repos' artifacts, never a copy",
+      "evidence": "2026-10-11: el-openglo answer: check_use_of_colour.py scans el-openglo's own emitted artifacts and the criterion is mat230's (el-openglo:W72 adopts it); depend on mat230's check, not a copy. Legibility floors (W340): only the floor arithmetic is generic; APCA and contrast floors are tied to el-openglo's solver. | 2026-10-11: Correction: mat230 is archived; the only copy is /home/mikemol/github/mat230.tar.xz (member mat230/bin/check-a11y, _check_use_of_colour). The live cite is el-openglo:W72 (adopting it, ready). Until it lands, the logic source is that tar member; nemik reads it, never depends on mat230 as a repo. | 2026-10-12: 2026-10-12 el-openglo letter inbox/2026-10-12-el-openglo-w339-waits-on-w72.md: el-openglo:W72 ready, ranked behind el-openglo:W273; W339 needs W72.c (check_use_of_colour.py --json + policy/use_of_colour.rego). nemik does not ask it moved up: W339 gates nemik's own palette and is on no one's critical path. | 2026-10-13: 2026-10-12 el-openglo letter inbox/2026-10-12-el-openglo-w72-landed-w339-unblocked.md: el-openglo:W72 is done (its earlier letter's status was stale). Callable pair: el-openglo scripts/check_use_of_colour.py --json (measurement) and policy/use_of_colour.rego (requirement), behind scripts/opa_gate.py. Depend on that pair, not a copy.",
       "issued_at": "2026-10-11T21:16:31Z",
       "minted_during": "tick",
       "caused_by": "el-openglo:W72",
-      "last_worked": "2026-10-12T23:18:33Z",
-      "ticks_blocked": 55,
-      "weight": 1,
+      "last_worked": "2026-10-13T01:16:15Z",
+      "ticks_blocked": 0,
+      "weight": 2,
       "completed": null
     },
     {
@@ -6556,7 +6554,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 4
     },
     {
       "symbol": "W344",
@@ -6620,7 +6618,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 42,
+      "ticks_blocked": 43,
       "completed": null
     },
     {
@@ -7030,7 +7028,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -7058,7 +7056,7 @@
     {
       "symbol": "W366",
       "title": "Export to issue trackers: Jira CSV and GitHub/Forgejo issue JSON, as a read-only mirror",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W364"
       ],
@@ -7067,15 +7065,15 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "one issue per card with a link back to its cite, blocks/is-blocked-by from the edges, labels from touches and band; the queue stays the source of truth, so the export is one-way and stamped with the commit it came from",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: src/nemik/issues.py over nemik.projection; nemik-export --format issues prints one issue per card (cite in body, open/closed, repo label, blocked_by cites: GitHub's and Forgejo's dependency-endpoint shape). Jira CSV deliberately not produced: the verified survey says Jira's CSV import documents only parent/child, so it would drop blocking edges; Jira is the connector's (W371). tests/test_issues.py round-trips the fixture fleet with every blocker; SKILL.md row updated.",
       "issued_at": "2026-10-12T01:32:03Z",
       "minted_during": "interrupt",
       "caused_by": "W364",
-      "last_worked": "2026-10-13T00:13:25Z",
+      "last_worked": "2026-10-13T01:20:23Z",
       "ticks_blocked": 0,
       "weight": 5,
-      "completed": null
+      "completed": "20261013T012023Z"
     },
     {
       "symbol": "W367",
@@ -7519,7 +7517,7 @@
       "caused_by": "W380",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 2
     },
     {
       "symbol": "W387",
@@ -7604,7 +7602,7 @@
       "caused_by": "W383",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 2
     },
     {
       "symbol": "W391",
@@ -7628,7 +7626,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -7652,7 +7650,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "completed": null
     },
     {
@@ -7700,7 +7698,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T18:43:02Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "completed": null
     },
     {
@@ -7724,7 +7722,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "completed": null
     },
     {
@@ -8240,6 +8238,103 @@
       "minted_during": "tick",
       "caused_by": "W365",
       "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 1
+    },
+    {
+      "symbol": "W421",
+      "title": "One declaration per console script: BUILD.bazel reads pyproject's [project.scripts], and a pre-commit check names every registry a new script still misses (SKILL.md row, workflows.toml)",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "W365 needed four edits (pyproject, BUILD, SKILL.md, workflows.toml) and two gate refusals, ~10 min each, to find the last two; derive BUILD's map from pyproject and run test_skill + test_workflows in the fast pre-commit so the miss surfaces before the full gate",
+      "evidence": "",
+      "issued_at": "2026-10-13T01:14:42Z",
+      "minted_during": "interrupt",
+      "caused_by": "W365",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 1
+    },
+    {
+      "symbol": "W422",
+      "title": "Census for github-8f's one-implementation spike: which nemik Python should run browser-side unchanged, with types, I/O and conformance corpora",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "W423",
+        "W424",
+        "W425"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Umbrella over W423, W424, W425; cite mtools' cards on W423 once they exist",
+      "evidence": "2026-10-13: 2026-10-13 census sent to github-8f: spike pieces.assemble (duplicated today in index.html graphText), then flow.solve against the gcalculus reference corpus (Fraction -> BigInt rationals); critical/projection/health need a dict front end (nemik.index) first; survey/shacl/rank/witness not candidates. | 2026-10-13: 2026-10-13 github-8f decided (repo-level): py2many typed subset behind a portable-subset edit gate, shared conformance corpus run on both outputs, Python is source, generated TypeScript is build output. Order: W423 pieces, W424 flow (named Rational, BigInt), W425 Index front end. Subset gate and transpile step are mtools work (github-8f is asking mtools to card them).",
+      "issued_at": "2026-10-13T01:17:48Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": "2026-10-13T01:19:18Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W423",
+      "title": "Spike 1: pieces.split/assemble in the py2many typed subset, transpiled to TypeScript, replacing index.html graphText(); conformance corpus run on both",
+      "status": "working",
+      "enables": [
+        "W422"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Corpus first: tests/test_pieces.py fixtures plus generated cases (split then assemble is identity, key ordering, empty fleet, single-repo fleet) as data files both sides run; then rewrite pieces.py in the subset once mtools' subset gate and transpile step exist; report every corpus difference to github-8f",
+      "evidence": "",
+      "issued_at": "2026-10-13T01:19:05Z",
+      "minted_during": "tick",
+      "caused_by": "W422",
+      "last_worked": "2026-10-13T01:20:25Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W424",
+      "title": "Spike 2: flow.solve in the typed subset with a named Rational type (BigInt numerator/denominator), checked against gcalculus' flow_reference corpus",
+      "status": "blocked",
+      "enables": [
+        "W422"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "W423"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Do not accept py2many's default int mapping. Corpus: gcalculus flow_reference cases plus big-number and negative-division cases; the LRU cache stays outside the subset",
+      "evidence": "",
+      "issued_at": "2026-10-13T01:19:06Z",
+      "minted_during": "tick",
+      "caused_by": "W422",
+      "last_worked": "2026-10-13T01:19:17Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W425",
+      "title": "Make nemik.index.Index the pure input type (built from rdflib once) so critical, projection and health can enter the typed subset",
+      "status": "ready",
+      "enables": [
+        "W422"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-13T01:19:07Z",
+      "minted_during": "tick",
+      "caused_by": "W422",
+      "last_worked": null,
       "ticks_blocked": 0
     }
   ],
@@ -8305,7 +8400,7 @@
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-13T00:07:07Z"
+    "taken_at": "2026-10-13T01:15:35Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []
