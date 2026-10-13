@@ -8849,7 +8849,7 @@
     {
       "symbol": "W453",
       "title": "critical over Cards: the longest-chain poset (rank, slack, path count) computed from nemik.cards.Card, rdflib only at the edge",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W425"
       ],
@@ -8861,7 +8861,7 @@
       "issued_at": "2026-10-13T14:49:53Z",
       "minted_during": "tick",
       "caused_by": "W425",
-      "last_worked": "2026-10-13T15:12:37Z",
+      "last_worked": "2026-10-13T16:23:14Z",
       "ticks_blocked": 0,
       "completed": null,
       "weight": 3
@@ -8906,20 +8906,20 @@
     {
       "symbol": "W456",
       "title": "Label glyphs mean one thing each: the roll-up suffix stops reusing the working mark (W503 ▸ 3 vs ▸ W503), and a test refuses any glyph used in two roles",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Operator asked 2026-10-13 what '‖ W503 ▸ 3' means: ▸ is both STATE_MARK.working (prefix) and the rolled-up count (suffix). Pick a distinct roll-up glyph (e.g. '+3' or '⊕3', checked in the gate browser's fonts like W398), give the expanded mark the same care, and extend the browser test to collect every label glyph by role and assert no glyph has two roles; document the marks in the legend",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-13: index.html: ROLLUP_MARK ' +' (ASCII, no font risk) replaces the reused working mark '▸' after a rolled-up umbrella's symbol; EXPANDED_MARK ' ▾' named too; the legend now explains both. test_no_label_glyph_plays_two_roles collects every label glyph by role (state prefixes incl. '?', roll-up, expanded, salience '·') and fails on any glyph in two roles, and checks rolled-up labels end '+<n>'. render-check green.",
       "issued_at": "2026-10-13T16:07:36Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-13T16:12:32Z",
+      "last_worked": "2026-10-13T16:23:13Z",
       "ticks_blocked": 0,
       "weight": 4,
-      "completed": null
+      "completed": "20261013T162313Z"
     }
   ],
   "residue": [

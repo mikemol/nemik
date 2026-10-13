@@ -882,6 +882,52 @@ def test_meaningful_strokes_reach_three_to_one(server, scheme) -> None:
     assert not low, f"{scheme}: under 3:1 against the page: {low}"
 
 
+GLYPH_ROLES = """() => {
+  // nemik:W456: every glyph a card label can carry, by the role it plays; a glyph in two roles makes
+  // a label ambiguous ("‖ W503 ▸ 3" once read as working)
+  const glyphs = s => [...s].filter(c => c.trim() && !/[A-Za-z0-9]/.test(c));
+  return {
+    state: [...Object.values(STATE_MARK).flatMap(glyphs), "?"],
+    rollup: glyphs(ROLLUP_MARK),
+    expanded: glyphs(EXPANDED_MARK),
+    salience: ["·"],
+  };
+}"""
+
+
+def test_no_label_glyph_plays_two_roles(server) -> None:
+    with sync_api.sync_playwright() as p:
+        exe = os.environ.get("NEMIK_CHROMIUM")
+        try:
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        page.goto(server)
+        page.wait_for_function(
+            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
+            timeout=60000,
+        )
+        roles = page.evaluate(GLYPH_ROLES)
+        page.click("#repos button[data-repo='nemik']")
+        page.check("#rollup")
+        page.wait_for_timeout(600)
+        rolled = page.evaluate(
+            "() => cy.nodes('[rollup > 0]').map(n => [n.data('label'), n.data('rollup')])"
+        )
+        browser.close()
+    seen: dict[str, str] = {}
+    for role, glyphs in roles.items():
+        for g in glyphs:
+            assert seen.setdefault(g, role) == role, (
+                f"{g!r} is both {seen[g]} and {role}"
+            )
+    assert rolled, "the fixture has an umbrella to roll up"
+    assert all(label.endswith(f"+{n}") for label, n in rolled), rolled
+
+
 def test_no_command_route_or_tools_panel_remains(server) -> None:
     # nemik:W397: the Tools drop-down ran CLIs through /cmd; it is retired, and every capability it
     # offered is either native to the view or CLI-only. Neither the route nor the panel may come back.
