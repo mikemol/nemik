@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 492,
+  "counter": 493,
   "waypoints": [
     {
       "symbol": "W1",
@@ -9281,19 +9281,19 @@
     {
       "symbol": "W476",
       "title": "Ask mtools: --bump-blocked (or a --block-behind-open mode) sets a ready card blocked on its one open enabler, so ReadyBehindOpen fixes itself",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "after W483/W484 land: repin 39835b8 -> ca6702b (tools/revendor-mtools.sh, explicit wheel paths in the commit), so nemik reads at par; then raise ReadyBehindOpen to Warning once the fleet count falls",
-      "evidence": "2026-10-13: 2026-10-13 asked mtools (session mtools-c9) to mint the mode and cite nemik:W476; Info until the fleet count falls | 2026-10-13: mtools carded it as mtools:W1131: --block-behind-open [--write], ready cards only, open enablers only, behind mtools:W1130 | 2026-10-13: mtools:W1131 landed mtools 3ded8d1: --block-behind-open [--write], ready cards, open LOCAL enablers only; mtools' own count fell 9 -> 1 (W833's enabler is cross-repo: mtools:W1133) | 2026-10-13: repinned to 3ded8d1; nemik's own queue: BLOCKED W369 and W370 on W371 (the connector contract, a real prerequisite); paperkit (55-card chain) told by message; mtools 9 -> 1 | 2026-10-13: 2026-10-13 mtools: 3ded8d1's --block-behind-open deadlocks a ring of 3+ ready cards (blocks each on the next); fixed by mtools:W1134 (keeps rings), not yet on mtools main. nemik's own run blocked only W369/W370 on W371 (no ring). paperkit told to dry-run and wait for W1134 before --write | 2026-10-13: repin landed fae8807 [PUSHED, ls-remote] | 2026-10-13: 2026-10-13 luthen-observability fe5ceb9c: the fleet par is mtools ca6702b (frontier dist + W1134 ring-safe --block-behind-open)",
+      "next_bounded_step": "re-count the fleet with nemik-check once paperkit and the others have run the mode, then raise ReadyBehindOpenShape to Warning (card it then)",
+      "evidence": "2026-10-13: 2026-10-13 asked mtools (session mtools-c9) to mint the mode and cite nemik:W476; Info until the fleet count falls | 2026-10-13: mtools carded it as mtools:W1131: --block-behind-open [--write], ready cards only, open enablers only, behind mtools:W1130 | 2026-10-13: mtools:W1131 landed mtools 3ded8d1: --block-behind-open [--write], ready cards, open LOCAL enablers only; mtools' own count fell 9 -> 1 (W833's enabler is cross-repo: mtools:W1133) | 2026-10-13: repinned to 3ded8d1; nemik's own queue: BLOCKED W369 and W370 on W371 (the connector contract, a real prerequisite); paperkit (55-card chain) told by message; mtools 9 -> 1 | 2026-10-13: 2026-10-13 mtools: 3ded8d1's --block-behind-open deadlocks a ring of 3+ ready cards (blocks each on the next); fixed by mtools:W1134 (keeps rings), not yet on mtools main. nemik's own run blocked only W369/W370 on W371 (no ring). paperkit told to dry-run and wait for W1134 before --write | 2026-10-13: repin landed fae8807 [PUSHED, ls-remote] | 2026-10-13: 2026-10-13 luthen-observability fe5ceb9c: the fleet par is mtools ca6702b (frontier dist + W1134 ring-safe --block-behind-open) | 2026-10-14: repinned 39835b8 -> ca6702b, the fleet par (luthen-observability fe5ceb9c); at ca6702b --block-behind-open keeps cards on an enabling cycle (mtools:W1134); nemik's own queue: nothing left to block; paperkit told it is safe to --write. ReadyBehindOpen stays Info until the fleet count falls",
       "issued_at": "2026-10-13T19:14:02Z",
       "minted_during": "tick",
       "caused_by": "W465",
-      "last_worked": "2026-10-13T22:33:07Z",
+      "last_worked": "2026-10-14T13:48:40Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261014T134840Z"
     },
     {
       "symbol": "W477",
@@ -9334,21 +9334,21 @@
     {
       "symbol": "W479",
       "title": "Nav pane step 2: the focused row's card is highlighted on the canvas and opens the W462 popover beside it",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W468"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "on focus of a pane row: add a focus class to the canvas node (a ring distinct from selection) and popShow it; on blur, remove and popLater",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-14: index.html: focusin on a Cards list row adds .listfocus (a dotted ink outline, distinct from selection and the chain rings) to its canvas card and popShow()s the W462 popover; focusout out of the list clears both; Esc dismisses. test_layout::test_a_focused_list_row_rings_its_card_and_opens_the_popover; the stroke, second-channel, glyph and legibility tests still pass on host Chrome",
       "issued_at": "2026-10-13T20:15:30Z",
       "minted_during": "tick",
       "caused_by": "W468",
-      "last_worked": "2026-10-13T22:21:02Z",
+      "last_worked": "2026-10-14T13:50:18Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261014T135018Z"
     },
     {
       "symbol": "W480",
@@ -9575,6 +9575,22 @@
       "minted_during": "interrupt",
       "caused_by": "github:W37",
       "last_worked": "2026-10-14T02:42:53Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W493",
+      "title": "Raise ReadyBehindOpenShape from Info to Warning once the fleet count has fallen",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "recount with nemik-check --root ~/github (88 on 2026-10-13; paperkit's 55-card chain and mtools W833's cross-repo case were the bulk); when the count is near zero, flip sh:Info to sh:Warning in shapes.ttl, update the skill row and ARCHITECTURE's no-versioned-schema claim (it names Info staging), and re-run the gate",
+      "evidence": "",
+      "issued_at": "2026-10-14T13:48:45Z",
+      "minted_during": "interrupt",
+      "caused_by": "W476",
+      "last_worked": null,
       "ticks_blocked": 0
     }
   ],
