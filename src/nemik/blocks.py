@@ -103,6 +103,24 @@ def ready_behind_open(g: Graph) -> dict[Node, list[Node]]:
     return out
 
 
+def dependency_cycles(g: Graph) -> list[tuple[Node, ...]]:
+    """nemik:W484 (mtools:W1134 found a ring of three ready cards blocked into a deadlock): every
+    cycle of open cards that wait on or enable one another, named once from its earliest card, as
+    the fleet's shared walker (mikemol.frontier.walk, mtools:W1127) finds it. A ring can never land."""
+    from mikemol.frontier.walk import frontier as walk
+
+    cards = {n for n in g.subjects(OSLC_CM.state, None)}
+    edges = {(str(a), str(b)) for a, _, b in g.triples((None, NEMIK.enables, None))}
+    edges |= {(str(b), str(a)) for a, _, b in g.triples((None, NEMIK.waitsFor, None))}
+    names = {str(n) for n in cards}
+    verdict = walk(
+        sorted(names),
+        sorted((a, b) for a, b in edges if a in names and b in names),
+        lambda s: (URIRef(s), OSLC_CM.state, NEMIK.Done) in g,
+    )
+    return [tuple(URIRef(s) for s in ring) for ring in verdict.cycles]
+
+
 def annotate(g: Graph) -> None:
     """Mark unclaimed blocks, operator blocks by category, and blocks that resolve to no party."""
     # A blocked waypoint whose blocked_on names nothing nemik can resolve (no workstream, waypoint

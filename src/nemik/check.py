@@ -148,13 +148,26 @@ def survey(
         "none of them can become ready (an umbrella listing its children under "
         "enables while blocked_on them is the usual cause)"
     )
+    # nemik:W484 (mtools:W1134's ring of three): name the ring in order, "a:W1 -> a:W2 -> a:W1",
+    # as the fleet's shared walker finds it, rather than as an unordered set of members.
+    from nemik.blocks import dependency_cycles
+
+    rings = [[ref(n) for n in ring] for ring in dependency_cycles(merged)]
     for members, operator_can_break in cycles(merged):
         if operator_can_break:
             continue
         for member in members:
             mrepo, _, msym = member.partition(":")
-            others = ", ".join(m for m in members if m != member) or "itself"
-            found = f"on a dependency cycle with {others}: {cause}"
+            ring = next(
+                (r for r in rings if member in r and set(r) <= set(members)), None
+            )
+            if ring:
+                at = ring.index(member)
+                turn = [*ring[at:], *ring[:at], member]
+                found = f"on a dependency cycle {' -> '.join(turn)}: {cause}"
+            else:
+                others = ", ".join(m for m in members if m != member) or "itself"
+                found = f"on a dependency cycle with {others}: {cause}"
             by_repo.setdefault(mrepo, []).append(("Warning", msym, found))
     # nemik:W348: a repo holding more needs-you asks than the declared cap has made the operator its
     # bottleneck (the doc's "paralyzed waiting on too many parallel operator answers"). One Warning
