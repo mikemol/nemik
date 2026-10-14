@@ -786,3 +786,8 @@
 2026-10-13T22:41:00Z  interrupt W491 minted    -         "Goals as a node type: declared, not inferred from 'nothing open follows it', realized when all its children are, weighted by graph salience"  evidence=github-8f
 2026-10-14T02:38:08Z  interrupt W492 minted    -         "Retro node type and shapes: precommit, frozen timeline, delta, trigger and root and contributing, blameless root, sustain, findings with owner or verdict change, enforcement layer for recurring classes"  evidence=github-8f:W37
 2026-10-14T13:48:45Z  interrupt W493 minted    -         "Raise ReadyBehindOpenShape from Info to Warning once the fleet count has fallen"  evidence=W476
+2026-10-14T13:56:10Z  interrupt W494 minted    -         "Incremental redraw: the poll patches the graph in place instead of destroying it and laying it out again"  evidence=operator
+2026-10-14T13:56:20Z  interrupt W495 minted    -         "Measure poll churn by walking history: per interval, cards added or removed, edges changed, state flips, metadata-only changes"  evidence=W494
+2026-10-14T13:56:21Z  interrupt W496 minted    -         "Patch tier 1: a poll whose changes are node attributes only updates those nodes in place, no destroy and no relayout"  evidence=W494
+2026-10-14T13:56:22Z  interrupt W497 minted    -         "Patch tier 3: the side panels (findings, goals, weather, history, wake, lanes) re-render only when their own inputs changed"  evidence=W494
+2026-10-14T13:56:26Z  interrupt W498 minted    -         "Patch tier 2: added and removed cards and edges change in place, the layout marked out of date rather than redone"  evidence=W494

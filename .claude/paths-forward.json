@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 493,
+  "counter": 498,
   "waypoints": [
     {
       "symbol": "W1",
@@ -9133,7 +9133,6 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W479",
         "W480",
         "W481"
       ],
@@ -9592,6 +9591,102 @@
       "caused_by": "W476",
       "last_worked": null,
       "ticks_blocked": 0
+    },
+    {
+      "symbol": "W494",
+      "title": "Incremental redraw: the poll patches the graph in place instead of destroying it and laying it out again",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "W496",
+        "W497",
+        "W498"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "umbrella: lands when W495-W498 do",
+      "evidence": "",
+      "issued_at": "2026-10-14T13:56:10Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": "2026-10-14T13:56:31Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W495",
+      "title": "Measure poll churn by walking history: per interval, cards added or removed, edges changed, state flips, metadata-only changes",
+      "status": "done",
+      "enables": [
+        "W494"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "tier 1 alone removes ~1.8 of 8.1 points: ship it only as the base of tier 2 (the diff of the drawn graph against new data); structural-in-place (W498) is the win",
+      "evidence": "2026-10-14: nemik-history --churn [--from DATE] --all (src/nemik/churn.py: classify, churn, commit_classes; STEPS 60/300/3600 s): 2026-09-30..2026-10-14, 16 repos, 1842 commits: structural 76%, attribute-only 20%, status flips 2%. Polls every 60 s (20997): identical 91.9%, attribute 1.6%, state 0.2%, structural 6.3%, so 8.1% redraw now and 6.3% would still redraw if only attributes and recolours patched in place; every 300 s: 31.4% now, 25.9% after tier 1; every 3600 s: 71.6% / 69.6%. A floor: history is commit-granular, the live view also sees uncommitted writes. Two live snapshots 150 s apart were byte-identical",
+      "issued_at": "2026-10-14T13:56:20Z",
+      "minted_during": "interrupt",
+      "caused_by": "W494",
+      "last_worked": "2026-10-14T13:58:53Z",
+      "ticks_blocked": 0,
+      "completed": "20261014T135853Z"
+    },
+    {
+      "symbol": "W496",
+      "title": "Patch tier 1: a poll whose changes are node attributes only updates those nodes in place, no destroy and no relayout",
+      "status": "working",
+      "enables": [
+        "W494"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "the diff of the drawn graph against new data (ids, edge triples, per-node fields) that tier 2 (W498) is built on, applying the attribute and recolour changes in place; on its own it removes only ~1.8 of the 8.1 points of redraws (W495), so land it with W498 or as its base",
+      "evidence": "",
+      "issued_at": "2026-10-14T13:56:21Z",
+      "minted_during": "interrupt",
+      "caused_by": "W494",
+      "last_worked": "2026-10-14T14:08:36Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W497",
+      "title": "Patch tier 3: the side panels (findings, goals, weather, history, wake, lanes) re-render only when their own inputs changed",
+      "status": "ready",
+      "enables": [
+        "W494"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "each panel keeps the serialized input it last rendered from and skips innerHTML when it is equal, so a panel with the reader's scroll or focus in it is not rebuilt by an unrelated change; the load() path then calls them only for the pieces whose hashes moved (hashes.json already says which)",
+      "evidence": "",
+      "issued_at": "2026-10-14T13:56:22Z",
+      "minted_during": "interrupt",
+      "caused_by": "W494",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W498",
+      "title": "Patch tier 2: added and removed cards and edges change in place, the layout marked out of date rather than redone",
+      "status": "ready",
+      "enables": [
+        "W494"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "the win per W495: 76% of commits and 6.3 of 8.1 points of redraws are structural. cy.add/cy.remove for the structural diff over the drawn element ids; a new node takes its neighbours' place (its repo box, or beside its enabler), a removed one leaves a gap; an 'out of date: N cards added' control re-runs the full layout on request; treemap mode relays out as before. Build it on W496's diff of the drawn graph against the new data (do both in one landing if tier 1 alone is too small to ship)",
+      "evidence": "",
+      "issued_at": "2026-10-14T13:56:26Z",
+      "minted_during": "interrupt",
+      "caused_by": "W494",
+      "last_worked": "2026-10-14T13:58:53Z",
+      "ticks_blocked": 0,
+      "completed": null
     }
   ],
   "residue": [

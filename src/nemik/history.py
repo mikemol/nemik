@@ -405,6 +405,12 @@ def main(argv: list[str] | None = None) -> int:
         help="per ISO week: ledger activity by effort class and the interrupt share (W314)",
     )
     mode.add_argument(
+        "--churn",
+        action="store_true",
+        help="how often a poll of the fleet's queues finds them changed, and how (identical, "
+        "attribute-only, status flip, structural), sampled over --from..now, default a week (W495)",
+    )
+    mode.add_argument(
         "--baseline",
         nargs="?",
         const="",
@@ -417,13 +423,23 @@ def main(argv: list[str] | None = None) -> int:
     args = ap.parse_args(argv)
     dirs = {r: p.parents[1] for r, p in workstream_files(args.root, QUEUE)}
     names = sorted(dirs) if args.all else args.repos
-    series = args.time_in_state or args.weekly or args.toil or args.baseline is not None
+    series = (
+        args.time_in_state
+        or args.weekly
+        or args.toil
+        or args.churn
+        or args.baseline is not None
+    )
     if not names or (args.start is None and not series):
         ap.error("name the repos (or --all) and a --from")
     for name in names:
         if name not in dirs:
             print(f"ERROR: no workstream {name} under {args.root}", file=sys.stderr)
             return 2
+    if args.churn:
+        from nemik.churn import run
+
+        return run(dirs, names, args.start, args.json)
     if args.toil:
         return _toil(args, names, dirs)
     if args.baseline is not None:
