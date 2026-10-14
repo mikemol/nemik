@@ -791,3 +791,4 @@
 2026-10-14T13:56:21Z  interrupt W496 minted    -         "Patch tier 1: a poll whose changes are node attributes only updates those nodes in place, no destroy and no relayout"  evidence=W494
 2026-10-14T13:56:22Z  interrupt W497 minted    -         "Patch tier 3: the side panels (findings, goals, weather, history, wake, lanes) re-render only when their own inputs changed"  evidence=W494
 2026-10-14T13:56:26Z  interrupt W498 minted    -         "Patch tier 2: added and removed cards and edges change in place, the layout marked out of date rather than redone"  evidence=W494
+2026-10-14T14:09:06Z  interrupt W499 minted    -         "Incremental redraw for the treemap and for repo boxes and lanes that appear or go"  evidence=W494

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 498,
+  "counter": 499,
   "waypoints": [
     {
       "symbol": "W1",
@@ -9133,7 +9133,6 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W480",
         "W481"
       ],
       "blocked_kind": "agent",
@@ -9352,20 +9351,21 @@
     {
       "symbol": "W480",
       "title": "Nav pane step 3: focus and the open/closed state of the pane survive the 60 s poll's redraw, restored by cite",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W468"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "remember the focused cite before draw(); after cardList() rebuilds, refocus the row with that cite if it still exists, else the nearest by rank; a test forces a redraw while a row has focus",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-14: cardList() notes the control holding focus, repaints only when the list's markup changed, and focuses the same control again with the roving tab stop moved to it; tests/test_incremental_redraw.py::test_a_rebuilt_card_list_keeps_the_focus_a_reader_had_in_it",
       "issued_at": "2026-10-13T20:15:32Z",
       "minted_during": "tick",
       "caused_by": "W468",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-14T14:08:56Z",
+      "ticks_blocked": 0,
+      "completed": "20261014T140856Z"
     },
     {
       "symbol": "W481",
@@ -9595,23 +9595,19 @@
     {
       "symbol": "W494",
       "title": "Incremental redraw: the poll patches the graph in place instead of destroying it and laying it out again",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "W496",
-        "W497",
-        "W498"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "umbrella: lands when W495-W498 do",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-14: all children done: W495 (nemik-history --churn, 76% of commits structural), W496 (fields in place), W497 (panels repaint only when changed), W498 (structure in place), plus W480 (list focus survives). The poll no longer destroys the graph: same cy instance, nothing placed moves, the layout says how far out of date it is. Not done: treemap mode and a repo box or operator lane appearing or going still draw afresh (W499)",
       "issued_at": "2026-10-14T13:56:10Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-14T13:56:31Z",
+      "last_worked": "2026-10-14T14:09:06Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261014T140906Z"
     },
     {
       "symbol": "W495",
@@ -9635,56 +9631,74 @@
     {
       "symbol": "W496",
       "title": "Patch tier 1: a poll whose changes are node attributes only updates those nodes in place, no destroy and no relayout",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W494"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "the diff of the drawn graph against new data (ids, edge triples, per-node fields) that tier 2 (W498) is built on, applying the attribute and recolour changes in place; on its own it removes only ~1.8 of the 8.1 points of redraws (W495), so land it with W498 or as its base",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-14: index.html: draw() is render(poll); a poll (render(true) from load()) diffs the plan's elements against the drawn ones by id (edge ids are now e|src|dst and w|src|dst) and patchDraw writes changed fields onto the cards that stay (syncData: sets changed keys, removes vanished ones), restyles, and runs afterDraw; a view change you made (draw()) still lays out afresh; treemap mode and boxes/lanes appearing or going fall back to a full draw. tests/test_incremental_redraw.py::test_a_poll_that_only_changes_fields_follows_in_place (same cy instance, no card moved, label updated, relayout button hidden)",
       "issued_at": "2026-10-14T13:56:21Z",
       "minted_during": "interrupt",
       "caused_by": "W494",
-      "last_worked": "2026-10-14T14:08:36Z",
+      "last_worked": "2026-10-14T14:08:55Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261014T140855Z"
     },
     {
       "symbol": "W497",
       "title": "Patch tier 3: the side panels (findings, goals, weather, history, wake, lanes) re-render only when their own inputs changed",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W494"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "each panel keeps the serialized input it last rendered from and skips innerHTML when it is equal, so a panel with the reader's scroll or focus in it is not rebuilt by an unrelated change; the load() path then calls them only for the pieces whose hashes moved (hashes.json already says which)",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-14: index.html paint(target, html): a panel is rewritten only when its markup changed (or something else touched the element); detail, lane, weather, findings, history, wake, goals, the repo toggles and the Cards list all write through it. tests/test_incremental_redraw.py::test_a_panel_whose_markup_did_not_change_is_not_rewritten",
       "issued_at": "2026-10-14T13:56:22Z",
       "minted_during": "interrupt",
       "caused_by": "W494",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-14T14:08:56Z",
+      "ticks_blocked": 0,
+      "completed": "20261014T140856Z"
     },
     {
       "symbol": "W498",
       "title": "Patch tier 2: added and removed cards and edges change in place, the layout marked out of date rather than redone",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W494"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "the win per W495: 76% of commits and 6.3 of 8.1 points of redraws are structural. cy.add/cy.remove for the structural diff over the drawn element ids; a new node takes its neighbours' place (its repo box, or beside its enabler), a removed one leaves a gap; an 'out of date: N cards added' control re-runs the full layout on request; treemap mode relays out as before. Build it on W496's diff of the drawn graph against the new data (do both in one landing if tier 1 alone is too small to ship)",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-14: index.html: patchDraw removes the cards and edges that went (cy.remove), adds new ones (cy.add, nodes then edges) and placeNew puts a new card above a prerequisite it waits on or below a dependent waiting on it (the forest draws heads on top), else at the foot of its repo box, stepping along and down rows until it overlaps nothing; nothing already placed moves; #relayout ('layout out of date: N cards moved in or out') appears and re-runs the full layout; a box or lane appearing/going or a card changing box returns false for a full draw. tests/test_incremental_redraw.py::test_a_poll_that_adds_and_removes_cards_leaves_the_rest_where_it_was (new card placed, no clash, no card moved, removal counted, button restores a fresh layout)",
       "issued_at": "2026-10-14T13:56:26Z",
       "minted_during": "interrupt",
       "caused_by": "W494",
-      "last_worked": "2026-10-14T13:58:53Z",
+      "last_worked": "2026-10-14T14:08:55Z",
+      "ticks_blocked": 0,
+      "completed": "20261014T140855Z"
+    },
+    {
+      "symbol": "W499",
+      "title": "Incremental redraw for the treemap and for repo boxes and lanes that appear or go",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "treemap tile sizes depend on structure, so a structural poll there recomputes the treemap but should keep the viewport, selection and focus (today it draws afresh); a new repo box or operator lane placed by the packing step into the free space beside the placed boxes; measure with nemik-history --churn how often each case occurs before choosing",
+      "evidence": "",
+      "issued_at": "2026-10-14T14:09:06Z",
+      "minted_during": "interrupt",
+      "caused_by": "W494",
+      "last_worked": "2026-10-14T14:09:07Z",
       "ticks_blocked": 0,
       "completed": null
     }

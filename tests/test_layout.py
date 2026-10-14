@@ -874,6 +874,44 @@ def test_the_view_chain_is_drawn_end_to_end_with_its_length(server) -> None:
     assert f"({got['longest']} cards" in got["legend"]
 
 
+def test_a_focused_list_row_rings_its_card_and_opens_the_popover(server) -> None:
+    # nemik:W479: keyboard focus on a Cards list row rings that card on the canvas and shows the same
+    # popover hover opens; Esc closes it, and moving focus out of the list clears the ring.
+    with sync_api.sync_playwright() as p:
+        exe = os.environ.get("NEMIK_CHROMIUM")
+        try:
+            browser = p.chromium.launch(
+                executable_path=os.path.abspath(exe) if exe else None
+            )
+        except sync_api.Error as e:
+            pytest.skip(f"chromium unavailable: {e}")
+        page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        page.goto(server)
+        page.wait_for_function(
+            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 1",
+            timeout=60000,
+        )
+        page.evaluate("() => { document.getElementById('sec-cards').open = true; }")
+        page.wait_for_timeout(300)
+        page.locator("#cardlist button[tabindex='0']").focus()
+        page.keyboard.press("ArrowDown")
+        page.wait_for_timeout(200)
+        card = page.evaluate("() => document.activeElement.dataset.card")
+        ringed = page.evaluate("() => cy.nodes('.listfocus').map(n => n.id())")
+        shown = not page.evaluate("() => document.getElementById('pop').hidden")
+        text = page.inner_text("#pop")
+        page.keyboard.press("Escape")
+        closed = page.evaluate("() => document.getElementById('pop').hidden")
+        page.locator("#bySalience").focus()
+        page.wait_for_timeout(200)
+        cleared = page.evaluate("() => cy.nodes('.listfocus').length")
+        browser.close()
+    assert ringed == [card]
+    assert shown and card.rsplit("/", 1)[-1] in text
+    assert closed, "Esc did not close the popover"
+    assert cleared == 0, "the ring stayed after focus left the list"
+
+
 def test_the_page_script_runs_without_errors(server) -> None:
     # nemik:W478: a redeclared const killed the whole page script, and every view test then failed
     # with "cy.nodes is not a function" (cy fell back to the #cy element). Name the cause instead.
