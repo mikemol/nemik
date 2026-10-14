@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 491,
+  "counter": 492,
   "waypoints": [
     {
       "symbol": "W1",
@@ -9555,6 +9555,26 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W492",
+      "title": "Retro node type and shapes: precommit, frozen timeline, delta, trigger and root and contributing, blameless root, sustain, findings with owner or verdict change, enforcement layer for recurring classes",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "retro",
+        "shapes",
+        "oslc"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Shapes for the Retro node, from the host's gate map (mtools:W1171 evidence): retro.precommit copied from the card's mint-time next step and witness, narrative_only when empty (G0); a non-empty computed delta (G2); trigger, root and contributing fields with root != trigger (G3); a lexical blameless check on root with a rewrite hint, which catches wording not substance (G5); sustain non-empty, using the commitmsg 'thin' pattern (G6); each finding references a card with owner, due and witness, or a --certify verdict change (G7); handoff slots instrument, channel, operator in self or other, with other refused unless a self probe is recorded as executed-and-failed (G8); enforcement_layer enum memory < instructions < trigger < hook < gate, refusing a recurring class below hook unless declared one-off (G9). Reuse W488 and W489 shape patterns; W490 advice nodes are a retro trigger.",
+      "evidence": "",
+      "issued_at": "2026-10-14T02:38:08Z",
+      "minted_during": "interrupt",
+      "caused_by": "github:W37",
+      "last_worked": "2026-10-14T02:42:53Z",
       "ticks_blocked": 0
     }
   ],
