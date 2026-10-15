@@ -258,6 +258,28 @@ def test_checkable_next_step_without_a_witness_warns(root: Path) -> None:
     assert any("tests/test_new.py" in row for row in named), r.stdout
 
 
+def test_stray_lifecycle_words_in_a_next_step_warn(root: Path) -> None:
+    """nemik:W553: words that blur the lifecycle steps warn on open cards, not the named exceptions.
+
+    'rolled out' (a Kubernetes witness), 'promoted', 'pushed', a live session and a done card do
+    not warn. A Warning, not a Violation.
+    """
+    write_queue(
+        root,
+        "gamma",
+        waypoint("W1", next_bounded_step="the unit is shipped and armed on the host"),
+        waypoint("W2", next_bounded_step="the deployment rolled out and was pushed"),
+        waypoint("W3", next_bounded_step="wake the live session"),
+        waypoint("W4", next_bounded_step="it is deployed", status="done"),
+        waypoint("W5", next_bounded_step="once installed, it is live"),
+    )
+    r = run("check", root)
+    assert r.returncode == 0, r.stdout + r.stderr
+    rows = [row for row in r.stdout.splitlines() if "blurs the change-lifecycle" in row]
+    words = {(row.split()[1], row.split("'")[1]) for row in rows}
+    assert words == {("W1", "shipped"), ("W1", "armed"), ("W5", "live")}, r.stdout
+
+
 def test_caused_by_into_residue_resolves(tmp_path: Path) -> None:
     write_queue(tmp_path, "alpha", waypoint("W2", caused_by="W1"))
     q = tmp_path / "alpha" / "paths-forward.json"

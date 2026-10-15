@@ -189,6 +189,16 @@ def _queue_graph(repo: str, state_path: Path, known: frozenset[str]) -> Graph:
         )
         for path in sorted(set(named)):
             g.add((node, NEMIK.namesFile, Literal(path)))
+        # nemik:W553 (github-8f 2026-10-15): words that blur the change-lifecycle steps.
+        # Not strays, by name: rolled out, activation, promoted, pushed.
+        strays = re.findall(
+            r"\b(?:armed|shipped|host-shipped|takes effect|rides the next apply|deployed"
+            r"|live(?!\s+(?:session|sessions|loop|queue|view|reader|data|graph|fleet)))\b",
+            model.text(w, "next_bounded_step"),
+            flags=re.IGNORECASE,
+        )
+        for word in sorted({s.lower() for s in strays}):
+            g.add((node, NEMIK.strayWord, Literal(word)))
         # nemik:W174: weather. Waypoints whose witnesses are the same query wait on the same outage,
         # so they share one weather id: a hash of the query with its whitespace collapsed. The query
         # text itself stays out of the graph (it may name hosts or endpoints).

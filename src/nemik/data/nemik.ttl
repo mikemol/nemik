@@ -13,6 +13,7 @@ nemik:enables a rdf:Property ; rdfs:comment "This waypoint unblocks the object w
 nemik:blockedOn a rdf:Property ; rdfs:comment "Free-text name of what the waypoint waits on." .
 nemik:blockedKind a rdf:Property ; rdfs:comment "agent | human." .
 nemik:touches a rdf:Property ; rdfs:comment "A tag naming an area the waypoint touches." .
+nemik:strayWord a rdf:Property ; rdfs:comment "A word in the waypoint's next step that blurs the change-lifecycle steps (nemik:W553)." .
 nemik:namesFile a rdf:Property ; rdfs:comment "A repo file path the waypoint's next step names, as written (nemik:W544)." .
 
 # The four waypoint states, as a SKOS scheme. OSLC CM 3.0 leaves oslc_cm:state's values to the

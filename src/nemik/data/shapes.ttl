@@ -128,6 +128,22 @@ nemik:CheckableNextStepShape a sh:NodeShape ;
                 FILTER NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#weather> ?w }
             }""" ] .
 
+# nemik:W553 (github-8f 2026-10-15): open work whose next step uses a word that blurs the change-lifecycle
+# steps (nemik:ChangeLifecycle: landed, installed, held, enabled, active, applied) should name the step.
+# The word set is the adapter's; the verdict of a run (mtools corpus/exit-table.json, mtools:W1294) is a
+# separate axis. A Warning, and only for ready or working cards.
+nemik:LifecycleWordShape a sh:NodeShape ;
+    sh:targetClass oslc_cm:ChangeRequest ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        sh:message "next step says '{?word}', which blurs the change-lifecycle steps: say landed, installed, held, enabled, active or applied (nemik:ChangeLifecycle)" ;
+        sh:select """
+            SELECT $this ?word WHERE {
+                $this <http://open-services.net/ns/cm#state> ?state .
+                FILTER (?state IN (<https://github.com/mikemol/nemik/ns#Ready>, <https://github.com/mikemol/nemik/ns#Working>))
+                $this <https://github.com/mikemol/nemik/ns#strayWord> ?word .
+            }""" ] .
+
 # Blocked on another workstream's umbrella rather than on the child step doing the work (W41).
 nemik:UmbrellaBlockShape a sh:NodeShape ;
     sh:targetSubjectsOf nemik:umbrellaBlockOn ;
