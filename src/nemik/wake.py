@@ -25,12 +25,14 @@ import sys
 from datetime import UTC, datetime
 from pathlib import Path
 
+from mikemol.hooks import rewake
 from rdflib import Graph
 from rdflib.namespace import DCTERMS
 
 from nemik.blocks import inbound, operator_asks
 
-REWAKE_S = 30 * 60  # matches luthen checks/waker.py's own default
+# nemik:W549: mtools' mikemol.hooks.rewake (mtools:W1299) owns the constant and the pure pair.
+REWAKE_S = rewake.REWAKE_S
 
 AWAKE = {"ok": "awake", "dormant": "asleep"}
 
@@ -67,15 +69,7 @@ def age_seconds(last_tick: str | None, now: datetime | None = None) -> float | N
     A caller gets an age, not a raw timestamp it has to subtract itself -- the gap luthen's W117
     named (nemik:W18).
     """
-    if not last_tick:
-        return None
-    try:
-        then = datetime.fromisoformat(last_tick)
-    except ValueError:
-        return None
-    if then.tzinfo is None:
-        then = then.replace(tzinfo=UTC)
-    return (now or datetime.now(UTC)).astimezone(UTC).timestamp() - then.timestamp()
+    return rewake.age_seconds(last_tick, now or datetime.now(UTC))
 
 
 def should_nudge(
@@ -89,9 +83,7 @@ def should_nudge(
     the caller decides WHICH rows are nudge candidates (e.g. state in asleep/idle, or
     stale/future/unknown) and where `last_nudged` came from and gets recorded.
     """
-    if last_nudged is None:
-        return True
-    return (now or datetime.now(UTC)).timestamp() - last_nudged >= rewake_s
+    return rewake.should_nudge(last_nudged, now or datetime.now(UTC), rewake_s)
 
 
 def roster(

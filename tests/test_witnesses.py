@@ -250,15 +250,17 @@ def test_apply_writes_letters_to_waiting_repos(tmp_path, monkeypatch, capsys) ->
     r = installed.run("nemik-witnesses", "--root", str(tmp_path), "--apply")
     assert r.returncode == 0 and "APPLY FAILED" not in r.stderr, r.stderr
     out = r.stdout
-    assert out.count("WOKE ") == 2
-    (la,), (lb,) = (
-        list((tmp_path / "a" / "inbox").iterdir()),
-        list((tmp_path / "b" / "inbox").iterdir()),
-    )
-    assert (
-        "W2" in la.read_text() and "a:W1" in lb.read_text() and "W5" in lb.read_text()
-    )
+    # mtools:W1215: the writer prunes a done card from its local dependents at once, so W2 is
+    # already free and only the foreign waiter needs a letter.
+    assert out.count("WOKE ") == 1
+    (lb,) = list((tmp_path / "b" / "inbox").iterdir())
+    assert "a:W1" in lb.read_text()
+    assert "W5" in lb.read_text()
+    assert not list((tmp_path / "a" / "inbox").iterdir())
     assert not list((tmp_path / "c" / "inbox").iterdir())
+    freed = json.loads((tmp_path / "a" / ".claude" / "paths-forward.json").read_text())
+    states = {w["symbol"]: w["status"] for w in freed["waypoints"]}
+    assert states["W2"] == "ready"
 
 
 def test_the_skills_weather_examples_are_valid_witnesses(monkeypatch) -> None:
