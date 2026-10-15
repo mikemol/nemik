@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 520,
+  "counter": 531,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 268
+      "ticks_blocked": 269
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 88,
+      "ticks_blocked": 89,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 90,
+      "ticks_blocked": 91,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T23:37:26Z",
-      "ticks_blocked": 120,
+      "ticks_blocked": 121,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 117,
+      "ticks_blocked": 118,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 94,
+      "ticks_blocked": 95,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 109,
+      "ticks_blocked": 110,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 109,
+      "ticks_blocked": 110,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 109,
+      "ticks_blocked": 110,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 109,
+      "ticks_blocked": 110,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 109,
+      "ticks_blocked": 110,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 109,
+      "ticks_blocked": 110,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 109,
+      "ticks_blocked": 110,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 109,
+      "ticks_blocked": 110,
       "completed": null
     },
     {
@@ -6426,7 +6426,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T06:56:21Z",
-      "ticks_blocked": 35,
+      "ticks_blocked": 36,
       "completed": null
     },
     {
@@ -6450,7 +6450,7 @@
       "minted_during": "tick",
       "caused_by": "W337",
       "last_worked": "2026-10-13T07:54:43Z",
-      "ticks_blocked": 34,
+      "ticks_blocked": 35,
       "weight": 5,
       "completed": null
     },
@@ -6624,7 +6624,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 84,
+      "ticks_blocked": 85,
       "completed": null
     },
     {
@@ -7032,7 +7032,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 22,
+      "ticks_blocked": 23,
       "completed": null
     },
     {
@@ -7145,7 +7145,7 @@
       "minted_during": "interrupt",
       "caused_by": "W364",
       "last_worked": null,
-      "ticks_blocked": 3
+      "ticks_blocked": 4
     },
     {
       "symbol": "W370",
@@ -7169,7 +7169,7 @@
       "minted_during": "interrupt",
       "caused_by": "W364",
       "last_worked": null,
-      "ticks_blocked": 3
+      "ticks_blocked": 4
     },
     {
       "symbol": "W371",
@@ -7639,7 +7639,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 46,
       "completed": null
     },
     {
@@ -7663,7 +7663,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 60,
+      "ticks_blocked": 61,
       "completed": null
     },
     {
@@ -7711,7 +7711,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-15T12:14:41Z",
-      "ticks_blocked": 60,
+      "ticks_blocked": 61,
       "completed": null
     },
     {
@@ -7735,7 +7735,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 60,
+      "ticks_blocked": 61,
       "completed": null
     },
     {
@@ -8292,7 +8292,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -8313,7 +8313,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T05:38:02Z",
-      "ticks_blocked": 39,
+      "ticks_blocked": 40,
       "completed": null
     },
     {
@@ -8334,7 +8334,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 41,
+      "ticks_blocked": 42,
       "completed": null
     },
     {
@@ -8598,7 +8598,7 @@
       "minted_during": "tick",
       "caused_by": "W338",
       "last_worked": "2026-10-13T08:13:31Z",
-      "ticks_blocked": 34,
+      "ticks_blocked": 35,
       "completed": null
     },
     {
@@ -8825,7 +8825,7 @@
       "minted_during": "tick",
       "caused_by": "W426",
       "last_worked": "2026-10-13T13:18:45Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "completed": null
     },
     {
@@ -8974,7 +8974,7 @@
       "minted_during": "tick",
       "caused_by": "W458",
       "last_worked": "2026-10-13T19:10:34Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "completed": null
     },
     {
@@ -9050,7 +9050,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T19:10:41Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "weight": 3,
       "completed": null
     },
@@ -9142,7 +9142,7 @@
       "minted_during": "tick",
       "caused_by": "W463",
       "last_worked": "2026-10-13T20:15:42Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "weight": 2,
       "completed": null
     },
@@ -9472,7 +9472,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-13T22:03:19Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -9525,7 +9525,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-13T22:08:26Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -9812,7 +9812,7 @@
       "issued_at": "2026-10-15T11:52:00Z",
       "minted_during": "tick",
       "caused_by": "W500",
-      "last_worked": "2026-10-15T12:43:50Z",
+      "last_worked": "2026-10-15T13:20:29Z",
       "ticks_blocked": 0,
       "weight": 3,
       "completed": null
@@ -9856,7 +9856,7 @@
       "minted_during": "tick",
       "caused_by": "W500",
       "last_worked": "2026-10-15T11:53:53Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null
     },
     {
@@ -9974,7 +9974,7 @@
       "minted_during": "tick",
       "caused_by": "github:W35",
       "last_worked": "2026-10-15T12:00:59Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null
     },
     {
@@ -10020,23 +10020,31 @@
     {
       "symbol": "W515",
       "title": "Hold the nemik repo to the same standards as mtools: bazel precommit gate, hooks, strict mypy, no waivers, warrants",
-      "status": "ready",
+      "status": "blocked",
       "enables": [],
       "touches": [
         "nemik",
         "standards",
         "gate"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "Survey nemik against mtools's gate with the precommit kata (katas.py precommit survey, then gate red --kind if blocked), list every gap as a child card, and mint them by tool. Prerequisite for receiving pathsforward.",
-      "evidence": "",
+      "blocked_on": [
+        "W521",
+        "W522",
+        "W524",
+        "W525",
+        "W526",
+        "W527"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "umbrella: lands when W521-W527 do; W517 (promoting the paths-forward architecture into nemik) waits on it",
+      "evidence": "2026-10-15: 2026-10-15 SURVEY (katas.py precommit; katas.py typing nemik --no-mint; read of .githooks, tools/gate_staged.sh, .claude/settings.json, mtools' pre-commit and INSTALL.md). HAVE: a bazel gate over the STAGED index in a fixed worktree (gate_staged.sh: a fast registry pass, then bazel test //...), refuses when bazel cannot build; all seven Claude hooks wired (inbound-asks, nemik-check, structural-query, no-chaining, no-verify, shellcheck, pycheck); a post-commit hook; warrants.bib with paperkit claim witnesses. GAPS vs mtools: (1) the hook is a script, not a //:precommit bazel target (the kata classes nemik 'script' beside gabion, gcalculus, rosettapkg, substrate, summit); (2) the gate runs tests only: no ruff or mypy stage, no shell-checker stage, no stray-code stage; (3) no [tool.ruff] house config; (4) 8 '# noqa: BLE001' waivers in 3 files (wake.py:199, test_web_render.py:114, test_layout.py x6) against a zero-waiver rule; (5) house-strict mypy: 6,369 findings over 141 files, and pyproject's [tool.mypy] sets no strictness (the edit hook checks only the files touched); mtools adopts this through mikemol-ratchet, a paydown-only baseline; (6) git hooks: no pre-push or commit-msg (mtools has both), and the pre-commit runs live from the tree where mtools re-execs a snapshot of itself so a mid-write edit cannot fail a peer's commit; (7) mtools' stage 'every warrant check names a test that exists, and every test is named' has no nemik counterpart for checks/claims.py",
       "issued_at": "2026-10-15T12:08:10Z",
       "minted_during": "tick",
       "caused_by": "operator",
-      "last_worked": null,
+      "last_worked": "2026-10-15T13:14:23Z",
       "ticks_blocked": 0,
-      "weight": 10
+      "weight": 10,
+      "completed": null
     },
     {
       "symbol": "W516",
@@ -10079,7 +10087,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-15T12:08:20Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -10140,6 +10148,215 @@
       "last_worked": "2026-10-15T12:50:39Z",
       "ticks_blocked": 0,
       "completed": "20261015T125039Z"
+    },
+    {
+      "symbol": "W521",
+      "title": "nemik's pre-commit runs bazel test //:precommit, one target that names the whole gate",
+      "status": "ready",
+      "enables": [
+        "W515"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "add //:precommit (a test_suite over every //:test_* plus the lint, type, shell and warrant stages W522, W524, W526 and W527 add), make tools/gate_staged.sh run it after the fast registry pass, and have .githooks/pre-commit name it so the precommit kata classes nemik BAZEL; the staged-index worktree design (W374) stays",
+      "evidence": "",
+      "issued_at": "2026-10-15T13:13:51Z",
+      "minted_during": "tick",
+      "caused_by": "W515",
+      "last_worked": "2026-10-15T13:14:21Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W522",
+      "title": "A house ruff configuration and a ruff stage over every Python file in the gate",
+      "status": "ready",
+      "enables": [
+        "W515"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "nemik has no [tool.ruff]; the edit hook lints only touched files with mtools' own rules; copy mtools' house config (select ALL, per-file ignores only by responsibility) into pyproject, run ruff over src tests checks tools as a bazel check target, measure the findings first and baseline them for the ratchet (W524) rather than fixing by hand",
+      "evidence": "",
+      "issued_at": "2026-10-15T13:14:05Z",
+      "minted_during": "tick",
+      "caused_by": "W515",
+      "last_worked": "2026-10-15T13:14:22Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W523",
+      "title": "No waivers: the eight noqa BLE001 sites become named exceptions and a test holds the count at zero",
+      "status": "done",
+      "enables": [
+        "W515"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-15: all 8 waivers removed: wake.py's alarm loop catches (ValueError, TypeError, OverflowError) (what the RFC 5545/RRULE parsers and naive-vs-aware arithmetic raise; tests/test_wake_alarms.py's bad-alarm case still passes); the 7 browser-launch sites (test_web_render.py x1, test_layout.py x6) catch sync_api.Error. tests/test_no_waivers.py holds the whole tree (src package, tests, tools, checks) to zero noqa/type-ignore/nosec/pragma/pylint-disable/mypy-ignore-errors/fmt-off/isort-skip, patterns built from fragments so the test holds none; it also improved W475's guard: tests/test_test_inputs.py now reads every pattern of every glob in the test macro's data list only (it read only single-pattern globs and the whole BUILD, so the venv's srcs glob could falsely cover a path). Passes on host and under bazel",
+      "issued_at": "2026-10-15T13:14:06Z",
+      "minted_during": "tick",
+      "caused_by": "W515",
+      "last_worked": "2026-10-15T13:17:43Z",
+      "ticks_blocked": 0,
+      "completed": "20261015T131743Z"
+    },
+    {
+      "symbol": "W524",
+      "title": "House-strict mypy under mtools' paydown-only ratchet: baseline the 6,369 findings and let the count only fall",
+      "status": "ready",
+      "enables": [
+        "W515"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "katas.py typing nemik --no-mint measured 6,369 findings over 141 files; set the house strict flags in pyproject [tool.mypy]; adopt mikemol-ratchet (mtools INSTALL.md: a paydown-only ratchet over a baseline set) pinned at the repo's mtools sha, as a bazel check that fails when the count rises and when a fixed finding is not removed from the baseline; the pay-down plan (the kata's per-file ledger) is a separate, mechanical chain",
+      "evidence": "",
+      "issued_at": "2026-10-15T13:14:07Z",
+      "minted_during": "tick",
+      "caused_by": "W515",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W525",
+      "title": "Git hook parity with mtools: pre-push, commit-msg, and a pre-commit that runs from a snapshot of itself",
+      "status": "ready",
+      "enables": [
+        "W515"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "mtools has .githooks/pre-push and commit-msg (the wheel ships mikemol-githook-pre-push already); nemik has neither; and its pre-commit runs live from the tree, so an edit to it mid-run can fail a peer's commit with a parse error blamed on them (mtools measured this across two trees 61 s apart): re-exec from a snapshot as mtools does, armed both ways by a test that mutates the live file",
+      "evidence": "",
+      "issued_at": "2026-10-15T13:14:08Z",
+      "minted_during": "tick",
+      "caused_by": "W515",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W526",
+      "title": "Shell and stray-code stages in the gate: shellcheck over every shell file, and no untracked code under .claude/",
+      "status": "ready",
+      "enables": [
+        "W515"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "mtools' gate has 'every shell checker is invoked or declared parked' and 'no untracked code (.py .rego .sh) under .claude/'; nemik's tools/*.sh and .githooks are shellchecked only when an agent edits them; add both as gate stages (orphan_check.sh is mtools' own)",
+      "evidence": "",
+      "issued_at": "2026-10-15T13:14:08Z",
+      "minted_during": "tick",
+      "caused_by": "W515",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W527",
+      "title": "Every claim witness in checks/claims.py is cited by a warrant, and every warrant check names a witness that exists",
+      "status": "ready",
+      "enables": [
+        "W515"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "mtools' gate has 'every warrant check names a test that exists, and every test is named'; nemik's paperkit gate proves every tagged claim is cited, not that every witness function in checks/claims.py is used or that a warrant's check names a function that exists (a renamed witness passes until it is run); add the two-way check as a test and a gate stage",
+      "evidence": "",
+      "issued_at": "2026-10-15T13:14:09Z",
+      "minted_during": "tick",
+      "caused_by": "W515",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W528",
+      "title": "Emit a VTIMEZONE for every TZID in nemik-ics and nemik-calendar-write output (RFC 5545 3.2.19), reusing pathsforward's vtimezone writer",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "nemik",
+        "icalendar",
+        "standards"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Audit 2026-10-15 (github/.claude/design-standards-coverage-2026-10-15.md): vtodo.py time_property emits ;TZID= parameters and nemik emits no VTIMEZONE (pathsforward fixed the same defect in its writer, W315). Reuse mikemol.pathsforward vtimezone and ics content_line in place of nemik's own _fold and _escape, and add a test that parses nemik-ics and calwrite output back with an iCalendar parser and fails on any error.",
+      "evidence": "",
+      "issued_at": "2026-10-15T13:15:08Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W529",
+      "title": "SHACL does the rules: declare every emitted predicate in nemik.ttl, validate shapes.ttl against SHACL-SHACL, and port marker rules to sh:sparql",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "nemik",
+        "shacl",
+        "standards"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Audit 2026-10-15: nemik:readyUmbrella, nemik:readyBehindOpen and nemik:letter are used but not declared in nemik.ttl; about nine rules are computed in Python as marker predicates and only reported by maxCount 0 shapes; nothing validates shapes.ttl itself. Steps: a test that every emitted predicate is declared; pyshacl meta-SHACL over shapes.ttl; port landedBlocker and malformedBlocker to sh:sparql constraints first and delete their markers. This is also the validator W519 should use instead of a new JSON schema.",
+      "evidence": "",
+      "issued_at": "2026-10-15T13:15:09Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W530",
+      "title": "Standard terms in the RDF output: dcterms identifier, subject, typed created, a close time for completed, prov Agent for operator and sessions",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "nemik",
+        "oslc",
+        "prov",
+        "standards"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Audit 2026-10-15: symbol, touches, workstream are nemik-only predicates where dcterms:identifier, dcterms:subject and oslc:serviceProvider exist; dcterms:created is an untyped literal (adapter.py:198); pathsforward's completed stamp is not mapped; no prov:Agent though the operator and sessions exist, and wasInformedBy is applied waypoint to waypoint. Emit the standard terms alongside the nemik ones (no break for readers), type dates as xsd:dateTime, and confirm exact OSLC CM 3.0 term names from the vocabulary before use (the audit could not).",
+      "evidence": "",
+      "issued_at": "2026-10-15T13:15:10Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W531",
+      "title": "Conformance tests against the standards: Prometheus output parsed with HELP lines, graph.ttl round-tripped, model.md TRS drift fixed",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "nemik",
+        "metrics",
+        "rdf",
+        "standards"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Audit 2026-10-15: no test parses /metrics or nemik-metrics output and there are no HELP lines; /graph.ttl is not round-tripped (only TRS and the catalog are); docs/model.md says TRS is not implemented though trs.py and catalog.py implement it. Add a prometheus_client parser test plus HELP lines, an rdflib parse-and-isomorphism test for graph.ttl, and correct model.md.",
+      "evidence": "",
+      "issued_at": "2026-10-15T13:15:11Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [

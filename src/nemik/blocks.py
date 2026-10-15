@@ -137,7 +137,18 @@ def annotate(g: Graph) -> None:
                 # nemik:W256: host:<id> likewise by form here; `check.survey` then holds it against
                 # the host-apply export, where the export is readable.
                 cited = str(text).strip()
-                if not (CAL_BLOCK.fullmatch(cited) or HOST_BLOCK.fullmatch(cited)):
+                # nemik:W520 (luthen-observability, 2026-10-15): the writer refuses a witnessed card that
+                # is ready and tells its owner to block it on `nemik-witnesses`, the process that closes
+                # it. That is a party, for a card that has a witness (the graph keeps only its hash, as
+                # NEMIK.weather); for any other card it still names nothing.
+                witnessed = (
+                    cited == "nemik-witnesses" and (node, NEMIK.weather, None) in g
+                )
+                if not (
+                    CAL_BLOCK.fullmatch(cited)
+                    or HOST_BLOCK.fullmatch(cited)
+                    or witnessed
+                ):
                     g.add((node, NEMIK.unresolvedBlocker, text))
 
     # A peer block that lands on an UMBRELLA -- a waypoint its own repo's open children enable --
