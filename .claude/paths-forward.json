@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 499,
+  "counter": 500,
   "waypoints": [
     {
       "symbol": "W1",
@@ -9701,6 +9701,28 @@
       "last_worked": "2026-10-14T14:09:07Z",
       "ticks_blocked": 0,
       "completed": null
+    },
+    {
+      "symbol": "W500",
+      "title": "nemik process grows from 312 MiB to the 768Mi container limit within an hour of each start and is OOMKilled: find what grows and bound it",
+      "status": "ready",
+      "enables": [
+        "luthen-observability:W1051"
+      ],
+      "touches": [
+        "nemik",
+        "memory",
+        "oom"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Reproduce from a fresh start, sample RSS per phase (cache, graph, serve loop) to find what is unbounded, bound it in the code, then size the limit from an uncensored working-set series (no typed number). Witness: increase of kube_pod_container_status_restarts_total in namespace nemik over 6h is 0. Evidence from luthen-observability W1051: working-set p99 over 12h equals the limit (series censored), 133 readiness and 221 liveness probe failures in 12h.",
+      "evidence": "",
+      "issued_at": "2026-10-15T03:50:31Z",
+      "minted_during": "interrupt",
+      "caused_by": "luthen-observability:W1051",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
