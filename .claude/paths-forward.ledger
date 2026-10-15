@@ -844,3 +844,8 @@
 2026-10-15T16:22:00Z  tick  W542 minted    -         "W524a: set the house strict flags in pyproject [tool.mypy] and record the finding count per file"  evidence=W524
 2026-10-15T16:22:01Z  tick  W543 minted    -         "W524b: adopt mikemol-ratchet pinned at the repo's mtools sha as a bazel check: fails when the count rises or a fixed finding stays in the baseline"  evidence=W524
 2026-10-15T16:22:06Z  tick  W524 advanced  collapse  "atomized W524 (top >1 tick) into W542 flags+baseline and W543 ratchet check; no code this tick"
+2026-10-15T16:52:13Z  tick  W542 advanced  sweep     "read mtools' strict flag set; found nemik's .venv lacks mypy and that W542 cannot land without W543 (edit gate); recorded in W542, no code"
+2026-10-15T16:56:37Z  interrupt W544 minted    -         "EditDeclaredShape: a card naming a repo file declares file:<path>!w, as a shapes.ttl warning (W529)"  evidence=mtools:W1276
+2026-10-15T16:56:38Z  interrupt W545 minted    -         "CheckableNextStepShape: a card with a checkable next step declares a witness, as a shapes.ttl warning (W529)"  evidence=mtools:W1279
+2026-10-15T17:22:39Z  tick  W542 advanced  sweep     "started the strict-flag mypy measurement in the background with mtools' mypy (first run failed on comma-separated error codes; reran one flag per code); output pending"
+2026-10-15T17:52:07Z  tick  W423 advanced  sweep     "added py2many rust -> wasm as an option on W423's operator ask and asked mtools-ad to measure the rust backend on the typed sample; no code, mypy W542 untouched"

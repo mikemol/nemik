@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 543,
+  "counter": 545,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 276
+      "ticks_blocked": 279
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 96,
+      "ticks_blocked": 99,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 98,
+      "ticks_blocked": 101,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T23:37:26Z",
-      "ticks_blocked": 128,
+      "ticks_blocked": 131,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 125,
+      "ticks_blocked": 128,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 102,
+      "ticks_blocked": 105,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 117,
+      "ticks_blocked": 120,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 117,
+      "ticks_blocked": 120,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 117,
+      "ticks_blocked": 120,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 117,
+      "ticks_blocked": 120,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 117,
+      "ticks_blocked": 120,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 117,
+      "ticks_blocked": 120,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 117,
+      "ticks_blocked": 120,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 117,
+      "ticks_blocked": 120,
       "completed": null
     },
     {
@@ -6426,7 +6426,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T06:56:21Z",
-      "ticks_blocked": 43,
+      "ticks_blocked": 46,
       "completed": null
     },
     {
@@ -6450,7 +6450,7 @@
       "minted_during": "tick",
       "caused_by": "W337",
       "last_worked": "2026-10-13T07:54:43Z",
-      "ticks_blocked": 42,
+      "ticks_blocked": 45,
       "weight": 5,
       "completed": null
     },
@@ -6624,7 +6624,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 92,
+      "ticks_blocked": 95,
       "completed": null
     },
     {
@@ -7032,7 +7032,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 30,
+      "ticks_blocked": 33,
       "completed": null
     },
     {
@@ -7145,7 +7145,7 @@
       "minted_during": "interrupt",
       "caused_by": "W364",
       "last_worked": null,
-      "ticks_blocked": 11
+      "ticks_blocked": 14
     },
     {
       "symbol": "W370",
@@ -7169,7 +7169,7 @@
       "minted_during": "interrupt",
       "caused_by": "W364",
       "last_worked": null,
-      "ticks_blocked": 11
+      "ticks_blocked": 14
     },
     {
       "symbol": "W371",
@@ -7639,7 +7639,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 53,
+      "ticks_blocked": 56,
       "completed": null
     },
     {
@@ -7663,7 +7663,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 68,
+      "ticks_blocked": 71,
       "completed": null
     },
     {
@@ -7711,7 +7711,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-15T12:14:41Z",
-      "ticks_blocked": 68,
+      "ticks_blocked": 71,
       "completed": null
     },
     {
@@ -7735,7 +7735,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 68,
+      "ticks_blocked": 71,
       "completed": null
     },
     {
@@ -8292,7 +8292,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 19,
       "completed": null
     },
     {
@@ -8304,16 +8304,16 @@
       ],
       "touches": [],
       "blocked_on": [
-        "mtools:W1073"
+        "operator: decide the transpile route for mtools:W1071 (W423 waits on it): py2many's rust target is measured broken on 3 of 4 functions, so the live options are a fork or fix of a backend, another transpiler, or leaving the typed subset and hand-writing the browser side"
       ],
-      "blocked_kind": "agent",
+      "blocked_kind": "human",
       "next_bounded_step": "Transpile half waits on mtools:W1070 (websubset gate), W1071 (py2many), W1072 (runner), W1073 (harness); then rewrite pieces.py in the subset, run the TS side over tests/corpus/pieces, delete index.html graphText()",
-      "evidence": "2026-10-13: mtools cards (github-8f 2026-10-13, caused_by nemik:W422): mtools:W1070 websubset gate, mtools:W1071 pinned py2many transpile, mtools:W1072 conformance runner, mtools:W1073 pieces spike harness. Not started; the corpus half here is the work for now. | 2026-10-13: Corpus half landed: tools/gen_pieces_corpus.py writes tests/corpus/pieces/*.json (doc, split, assemble per case): empty-fleet, single-repo, cross-repo-edge-and-fleet-node, key-ordering, astral-plane-keys (U+FFFF vs U+1F600: code-point vs UTF-16 order), fixture-fleet-3-repos (168 nodes; the full fleet is 3 MB, already covered by test_pieces). tests/test_pieces_corpus.py runs every case through Python with field-by-field diffs: 6/6 agree; split-then-assemble identity holds under assemble's canonical order (nodes by id, edges by (source,target,kind)). First run's one difference was my test's expectation (edge order), not pieces.",
+      "evidence": "2026-10-13: mtools cards (github-8f 2026-10-13, caused_by nemik:W422): mtools:W1070 websubset gate, mtools:W1071 pinned py2many transpile, mtools:W1072 conformance runner, mtools:W1073 pieces spike harness. Not started; the corpus half here is the work for now. | 2026-10-13: Corpus half landed: tools/gen_pieces_corpus.py writes tests/corpus/pieces/*.json (doc, split, assemble per case): empty-fleet, single-repo, cross-repo-edge-and-fleet-node, key-ordering, astral-plane-keys (U+FFFF vs U+1F600: code-point vs UTF-16 order), fixture-fleet-3-repos (168 nodes; the full fleet is 3 MB, already covered by test_pieces). tests/test_pieces_corpus.py runs every case through Python with field-by-field diffs: 6/6 agree; split-then-assemble identity holds under assemble's canonical order (nodes by id, edges by (source,target,kind)). First run's one difference was my test's expectation (edge order), not pieces. | 2026-10-15: 2026-10-15 mtools-ad: W1073 waits on W1071 (pinned py2many transpile) and W1072 (conformance runner, itself blocked on W1071); root is W1071, unstarted, a repo-level dependency decision. mtools-ad is taking W1071 now (measure py2many's TypeScript backend on a small module, nothing pinned) and will report, and say whether W1073 is re-scoped. Done mtools-side: W1070 web-subset gate (W1254-W1257, W1076, W1077). | 2026-10-15: 2026-10-15 mtools-ad measured mtools:W1071: py2many 0.9 (newest) has NO TypeScript backend (targets: cpp rust julia kotlin lean nim mojo dlang dart go vlang smt zig; --typescript is ignored, falls through to cpp, 0 conversions). The transpile premise fails as written; W1072 and W1073 hang on a choice of another target language, a fork, or another transpiler. Evidence is on mtools:W1071. | 2026-10-15: 2026-10-15 nemik-84: the card's goal is a browser-side replacement for index.html graphText(), so py2many rust -> wasm32 (wasm-bindgen) is a candidate not yet measured; asks mtools-ad to run the W1071 measurement on the rust backend with the typed sample. | 2026-10-15: 2026-10-15 mtools-ad mtools:W1282: py2many 0.9 --rust on the typed sample (4 functions + asserts) converts but rustc 1.98.1 refuses it: needs the anyhow crate (E0463); with it stubbed 6 errors, 3 of 4 functions broken (list[int] params become &_ E0121; sorted() emitted verbatim E0425; f-string fn returns &str for a String E0308); only add() valid. wasm32-unknown-unknown NOT measured: host sysroot /opt/rust-bin-1.98.1 (no rustup) has std for x86_64-unknown-linux-gnu only, wasm-bindgen absent. Nothing pinned. mtools:W1281 stays blocked on nemik:W423 for the route decision.",
       "issued_at": "2026-10-13T01:19:05Z",
       "minted_during": "tick",
       "caused_by": "W422",
-      "last_worked": "2026-10-13T05:38:02Z",
-      "ticks_blocked": 47,
+      "last_worked": "2026-10-15T17:53:42Z",
+      "ticks_blocked": 0,
       "completed": null
     },
     {
@@ -8334,7 +8334,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 49,
+      "ticks_blocked": 52,
       "completed": null
     },
     {
@@ -8598,7 +8598,7 @@
       "minted_during": "tick",
       "caused_by": "W338",
       "last_worked": "2026-10-13T08:13:31Z",
-      "ticks_blocked": 42,
+      "ticks_blocked": 45,
       "completed": null
     },
     {
@@ -8825,7 +8825,7 @@
       "minted_during": "tick",
       "caused_by": "W426",
       "last_worked": "2026-10-13T13:18:45Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 30,
       "completed": null
     },
     {
@@ -8974,7 +8974,7 @@
       "minted_during": "tick",
       "caused_by": "W458",
       "last_worked": "2026-10-13T19:10:34Z",
-      "ticks_blocked": 14,
+      "ticks_blocked": 17,
       "completed": null
     },
     {
@@ -9050,7 +9050,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T19:10:41Z",
-      "ticks_blocked": 14,
+      "ticks_blocked": 17,
       "weight": 3,
       "completed": null
     },
@@ -9142,7 +9142,7 @@
       "minted_during": "tick",
       "caused_by": "W463",
       "last_worked": "2026-10-13T20:15:42Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 14,
       "weight": 2,
       "completed": null
     },
@@ -9472,7 +9472,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-13T22:03:19Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 14,
       "completed": null
     },
     {
@@ -9525,7 +9525,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-13T22:08:26Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 14,
       "completed": null
     },
     {
@@ -9856,7 +9856,7 @@
       "minted_during": "tick",
       "caused_by": "W500",
       "last_worked": "2026-10-15T11:53:53Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 13,
       "completed": null
     },
     {
@@ -9974,7 +9974,7 @@
       "minted_during": "tick",
       "caused_by": "github:W35",
       "last_worked": "2026-10-15T12:00:59Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 13,
       "completed": null
     },
     {
@@ -10040,7 +10040,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-15T13:14:23Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 7,
       "weight": 10,
       "completed": null
     },
@@ -10085,7 +10085,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-15T12:08:20Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
@@ -10529,7 +10529,7 @@
       "minted_during": "interrupt",
       "caused_by": "mtools:W1260",
       "last_worked": "2026-10-15T15:11:46Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 5,
       "completed": null
     },
     {
@@ -10576,12 +10576,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Edit [tool.mypy] to strict; run the typing kata (katas.py typing nemik --no-mint) and keep its per-file counts as the baseline input",
-      "evidence": "",
+      "next_bounded_step": "Add the flags to [tool.mypy], rerun mypy, write per-file counts to mypy-baseline.json, land with W543",
+      "evidence": "2026-10-15: 2026-10-15: mtools' [tool.mypy] is strict+extra_checks+strict_equality+disallow_any_{decorated,explicit,expr}+warn_unused_ignores+warn_unreachable+enable_error_code[ignore-without-code,redundant-expr,truthy-bool]; nemik's .venv has no mypy binary, so the measurement needs mypy added as a dev dependency (or run via the mtools gate). Landing the strict flags alone would trip the .py edit gate (6,369 findings), so W542 and W543 land in one commit. | 2026-10-15: 2026-10-15 measurement (mtools mypy, mtools flag set, src tests tools): exit 1 = findings, 10,196 JSON lines, vs the earlier kata's 6,369 (flag sets differ; the baseline must use the flags pyproject will carry). Output was in the session scratchpad, not durable: rerun into the repo when writing mypy-baseline.json.",
       "issued_at": "2026-10-15T16:22:00Z",
       "minted_during": "tick",
       "caused_by": "W524",
-      "last_worked": null,
+      "last_worked": "2026-10-15T17:23:23Z",
       "ticks_blocked": 0
     },
     {
@@ -10600,6 +10600,44 @@
       "issued_at": "2026-10-15T16:22:01Z",
       "minted_during": "tick",
       "caused_by": "W524",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W544",
+      "title": "EditDeclaredShape: a card naming a repo file declares file:<path>!w, as a shapes.ttl warning (W529)",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "shapes",
+        "shacl"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Write the sh:sparql warning in shapes.ttl, not a Python marker: a ready or working card whose next step or evidence names a repo file and declares no file:<path>!w warns, because pathsforward --overlaps flags a real edit collision only on declared writes. Test with a card that names a file and declares none.",
+      "evidence": "",
+      "issued_at": "2026-10-15T16:56:37Z",
+      "minted_during": "interrupt",
+      "caused_by": "mtools:W1276",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W545",
+      "title": "CheckableNextStepShape: a card with a checkable next step declares a witness, as a shapes.ttl warning (W529)",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "shapes",
+        "shacl"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Write the sh:NodeShape warning in shapes.ttl: whether a step is already done is machine-readable only through a witness (--witness with --witness-lang, mtools:W1260), since --check-evidence reads only path existence. Decide what makes a step checkable from the card fields; test one checkable and one uncheckable card. A warning, not a violation.",
+      "evidence": "",
+      "issued_at": "2026-10-15T16:56:38Z",
+      "minted_during": "interrupt",
+      "caused_by": "mtools:W1279",
       "last_worked": null,
       "ticks_blocked": 0
     }
