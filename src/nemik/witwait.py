@@ -25,7 +25,7 @@ import time
 from datetime import UTC, datetime
 from typing import TYPE_CHECKING
 
-from nemik.witnesses import _REF, _get, witness
+from nemik.witnesses import _get, is_rego, witness
 
 if TYPE_CHECKING:
     from collections.abc import Callable
@@ -101,13 +101,13 @@ def promql_poll(expr: str) -> Callable[[], tuple[str, str]]:
 
 
 def poller(query: str) -> Callable[[], tuple[str, str]]:
-    """Choose the evaluator for a query: Rego when it names an observer, else PromQL.
+    """Choose the evaluator for a query: Rego when it reads `input`, else PromQL.
 
     Returns:
         the poll function.
 
     """
-    return rego_poll(query) if _REF.search(query) else promql_poll(query)
+    return rego_poll(query) if is_rego(query) else promql_poll(query)
 
 
 def wait(

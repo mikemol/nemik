@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 518,
+  "counter": 519,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 267
+      "ticks_blocked": 268
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 87,
+      "ticks_blocked": 88,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 89,
+      "ticks_blocked": 90,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T23:37:26Z",
-      "ticks_blocked": 119,
+      "ticks_blocked": 120,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 116,
+      "ticks_blocked": 117,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 93,
+      "ticks_blocked": 94,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 108,
+      "ticks_blocked": 109,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 108,
+      "ticks_blocked": 109,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 108,
+      "ticks_blocked": 109,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 108,
+      "ticks_blocked": 109,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 108,
+      "ticks_blocked": 109,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 108,
+      "ticks_blocked": 109,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 108,
+      "ticks_blocked": 109,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 108,
+      "ticks_blocked": 109,
       "completed": null
     },
     {
@@ -6426,7 +6426,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T06:56:21Z",
-      "ticks_blocked": 34,
+      "ticks_blocked": 35,
       "completed": null
     },
     {
@@ -6450,7 +6450,7 @@
       "minted_during": "tick",
       "caused_by": "W337",
       "last_worked": "2026-10-13T07:54:43Z",
-      "ticks_blocked": 33,
+      "ticks_blocked": 34,
       "weight": 5,
       "completed": null
     },
@@ -6560,7 +6560,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 9
+      "weight": 8
     },
     {
       "symbol": "W344",
@@ -6624,7 +6624,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 83,
+      "ticks_blocked": 84,
       "completed": null
     },
     {
@@ -6762,7 +6762,7 @@
       "caused_by": "W346",
       "last_worked": "2026-10-13T17:43:16Z",
       "ticks_blocked": 0,
-      "weight": 7,
+      "weight": 6,
       "completed": null
     },
     {
@@ -6785,7 +6785,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 7
+      "weight": 6
     },
     {
       "symbol": "W354",
@@ -6807,7 +6807,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 7
+      "weight": 6
     },
     {
       "symbol": "W355",
@@ -6829,7 +6829,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 7
+      "weight": 6
     },
     {
       "symbol": "W356",
@@ -7032,7 +7032,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 21,
+      "ticks_blocked": 22,
       "completed": null
     },
     {
@@ -7145,7 +7145,7 @@
       "minted_during": "interrupt",
       "caused_by": "W364",
       "last_worked": null,
-      "ticks_blocked": 2
+      "ticks_blocked": 3
     },
     {
       "symbol": "W370",
@@ -7169,7 +7169,7 @@
       "minted_during": "interrupt",
       "caused_by": "W364",
       "last_worked": null,
-      "ticks_blocked": 2
+      "ticks_blocked": 3
     },
     {
       "symbol": "W371",
@@ -7193,7 +7193,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 12
+      "weight": 11
     },
     {
       "symbol": "W372",
@@ -7639,7 +7639,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 44,
+      "ticks_blocked": 45,
       "completed": null
     },
     {
@@ -7663,7 +7663,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 59,
+      "ticks_blocked": 60,
       "completed": null
     },
     {
@@ -7711,7 +7711,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-15T12:14:41Z",
-      "ticks_blocked": 59,
+      "ticks_blocked": 60,
       "completed": null
     },
     {
@@ -7735,7 +7735,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 59,
+      "ticks_blocked": 60,
       "completed": null
     },
     {
@@ -8292,7 +8292,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 8,
       "completed": null
     },
     {
@@ -8313,7 +8313,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T05:38:02Z",
-      "ticks_blocked": 38,
+      "ticks_blocked": 39,
       "completed": null
     },
     {
@@ -8334,7 +8334,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 40,
+      "ticks_blocked": 41,
       "completed": null
     },
     {
@@ -8598,7 +8598,7 @@
       "minted_during": "tick",
       "caused_by": "W338",
       "last_worked": "2026-10-13T08:13:31Z",
-      "ticks_blocked": 33,
+      "ticks_blocked": 34,
       "completed": null
     },
     {
@@ -8825,7 +8825,7 @@
       "minted_during": "tick",
       "caused_by": "W426",
       "last_worked": "2026-10-13T13:18:45Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "completed": null
     },
     {
@@ -8974,7 +8974,7 @@
       "minted_during": "tick",
       "caused_by": "W458",
       "last_worked": "2026-10-13T19:10:34Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -9050,7 +9050,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T19:10:41Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "weight": 3,
       "completed": null
     },
@@ -9105,7 +9105,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 10
+      "weight": 9
     },
     {
       "symbol": "W467",
@@ -9142,7 +9142,7 @@
       "minted_during": "tick",
       "caused_by": "W463",
       "last_worked": "2026-10-13T20:15:42Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "weight": 2,
       "completed": null
     },
@@ -9163,7 +9163,7 @@
       "caused_by": "W463",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 5
     },
     {
       "symbol": "W470",
@@ -9182,7 +9182,7 @@
       "caused_by": "W463",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 5
     },
     {
       "symbol": "W471",
@@ -9201,7 +9201,7 @@
       "caused_by": "W463",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 5
     },
     {
       "symbol": "W472",
@@ -9220,7 +9220,7 @@
       "caused_by": "W463",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 6
+      "weight": 5
     },
     {
       "symbol": "W473",
@@ -9384,7 +9384,7 @@
       "caused_by": "W468",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 4
     },
     {
       "symbol": "W482",
@@ -9454,7 +9454,7 @@
       "caused_by": "github-8f",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 3
     },
     {
       "symbol": "W486",
@@ -9472,7 +9472,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-13T22:03:19Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null
     },
     {
@@ -9525,7 +9525,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-13T22:08:26Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 3,
       "completed": null
     },
     {
@@ -9738,7 +9738,7 @@
     {
       "symbol": "W501",
       "title": "Declare the executor-load witness fact in the nemik witness set so luthen-observability W1054 can be claimed",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "luthen-observability:W1054"
       ],
@@ -9749,14 +9749,15 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Take the one-line promql witness stored on luthen-observability W1054 (executor CPU above its own derived 7-day p90 while the executor CPU limit series is below 24 cores) into nemik-witnesses as a declared fact, read it with nemik-witnesses (dry) and confirm it evaluates false on an idle executor and true on a fixture. Then tell luthen-observability so W883 and mtools W1052 can cite it.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-15: witnesses.witness() now reads a bare PromQL witness as --wait always has (is_rego: the query reads 'input.'; else PromQL): it holds while the instant query returns a sample, false on an empty result, undefined when the probe cannot answer; witwait.poller uses the same test (a time witness with input.now was sent to the PromQL probe). luthen-observability:W1054's stored witness needs no Rego wrapper. LIVE: nemik-witnesses --root ~/github (dry) over the real VictoriaMetrics: 'WITNESS luthen-observability:W1054 false' (the expression went to the probe verbatim). tests/test_witness_promql.py (6): a sample holds, an empty result is false, an unreachable probe is undefined, the expression is passed unchanged, what is Rego vs PromQL, wait and the queue choose the same evaluator, the queue scan finds it. --apply marks luthen's W1054 done (and wakes W883 and mtools:W1052 by letter) the first time it holds",
       "issued_at": "2026-10-15T04:53:40Z",
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W1054",
-      "last_worked": null,
+      "last_worked": "2026-10-15T12:45:52Z",
       "ticks_blocked": 0,
-      "weight": 13
+      "weight": 13,
+      "completed": "20261015T124552Z"
     },
     {
       "symbol": "W502",
@@ -9799,21 +9800,19 @@
     {
       "symbol": "W504",
       "title": "The pod's shape: a builder container loops --publish into a shared volume, a small server container runs --serve",
-      "status": "blocked",
+      "status": "working",
       "enables": [
         "W500"
       ],
       "touches": [],
-      "blocked_on": [
-        "W518"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "after W518: deploy/deployment.yaml as two containers (builder, server) with those constraints, validated by nemik's own checks; then message luthen-observability with the names and limits",
-      "evidence": "2026-10-15: 2026-10-15 asked luthen-observability (the deployer) to agree cutting over before its 7-day web-vitals baseline and to choose sidecar+emptyDir versus a CronJob writing a shared PVC; also waits on W518 | 2026-10-15: 2026-10-15 luthen-observability (the deployer) agreed: (1) cut over WITHOUT waiting for the 7-day web-vitals baseline (the flapping pod makes it no baseline); it releases W394's hold and restarts the baseline clock at the cutover; gate the cutover on W518 and on W504's pod shape passing nemik's own checks. (2) SHAPE: sidecar builder plus emptyDir per pod, no PVC. Constraints to carry: (a) the emptyDir is DISK-backed (not Medium Memory) with a declared sizeLimit, so the snapshot is not charged to container memory; (b) the builder rebuilds on a CHANGED source content hash (an event, not a timer) and has a cpu limit; (c) liveness and readiness on the static server must not depend on the builder (a stale-but-served snapshot beats a restart); (d) tell luthen the container names and requests/limits when ready, so it adds the workloads.json row (its memory_posture gate refuses a live pod with no row) and W1051/W505's witness reads the new containers",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "when nemik-pins reports the cluster at or past W518's commit: commit and push W504, read the rollout back (kubectl rollout status, restarts counter, the server's /metrics), then message luthen-observability the container names and limits (server 32Mi/96Mi cpu 25m/250m; builder 512Mi/768Mi cpu 250m/1) for its workloads.json row and its W1051/W505 witness",
+      "evidence": "2026-10-15: 2026-10-15 asked luthen-observability (the deployer) to agree cutting over before its 7-day web-vitals baseline and to choose sidecar+emptyDir versus a CronJob writing a shared PVC; also waits on W518 | 2026-10-15: 2026-10-15 luthen-observability (the deployer) agreed: (1) cut over WITHOUT waiting for the 7-day web-vitals baseline (the flapping pod makes it no baseline); it releases W394's hold and restarts the baseline clock at the cutover; gate the cutover on W518 and on W504's pod shape passing nemik's own checks. (2) SHAPE: sidecar builder plus emptyDir per pod, no PVC. Constraints to carry: (a) the emptyDir is DISK-backed (not Medium Memory) with a declared sizeLimit, so the snapshot is not charged to container memory; (b) the builder rebuilds on a CHANGED source content hash (an event, not a timer) and has a cpu limit; (c) liveness and readiness on the static server must not depend on the builder (a stale-but-served snapshot beats a restart); (d) tell luthen the container names and requests/limits when ready, so it adds the workloads.json row (its memory_posture gate refuses a live pod with no row) and W1051/W505's witness reads the new containers | 2026-10-15: 2026-10-15 built and tested locally, NOT committed: deploy/deployment.yaml is the two-container shape (server: nemik-static, 32Mi/96Mi; builder: sh loop of nemik-serve --publish /srv, 512Mi/768Mi, cpu limit 1; disk-backed emptyDir 256Mi), tests/test_deploy_manifest.py (9: luthen's constraints a-c, commands held to the real argparse, quota 2.6Gi of 3Gi with a surge pod, restricted security context; a mutation to a Memory emptyDir fails it), pyyaml+types-pyyaml in the dev group (uv.lock), deploy/ in BUILD data and the Containerfile test stage, staticserve.parser(). kubectl --dry-run=client accepts the manifest. Memory peak of the builder measured 563-607 MB against 768Mi. ORDER: a push is a deploy and image and manifest roll independently: the manifest must not reach a cluster whose image lacks nemik-static (new pods would crash-loop and stall the rollout; the old pods keep serving, so it is safe but noisy); the cluster deploys 48026a1 now",
       "issued_at": "2026-10-15T11:52:00Z",
       "minted_during": "tick",
       "caused_by": "W500",
-      "last_worked": "2026-10-15T12:14:41Z",
+      "last_worked": "2026-10-15T12:43:50Z",
       "ticks_blocked": 0,
       "weight": 3,
       "completed": null
@@ -9835,7 +9834,7 @@
       "caused_by": "W500",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 8
+      "weight": 7
     },
     {
       "symbol": "W506",
@@ -9857,7 +9856,7 @@
       "minted_during": "tick",
       "caused_by": "W500",
       "last_worked": "2026-10-15T11:53:53Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -9975,7 +9974,7 @@
       "minted_during": "tick",
       "caused_by": "github:W35",
       "last_worked": "2026-10-15T12:00:59Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -9999,7 +9998,7 @@
     {
       "symbol": "W514",
       "title": "Derive the dependency map of nemik: every import, tool call and shared data file between nemik, pathsforward and mtools, by tool not by hand",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "nemik",
@@ -10008,14 +10007,15 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Use the existing import-edge derivation in mtools (corpus.import_edges, ask mtools-ad for the mode) over nemik, mtools/pathsforward and every consumer that pins either. Output: a derived graph with edges labelled import, subprocess, file format or CLI contract, and a list of places where pathsforward code assumes it is not nemik's concern (the cause of poor architecture the operator named). Record the graph and its generator command on this card.",
-      "evidence": "2026-10-15: mtools:W1251 first pass (written by the mtools session at github-8f's confirmed request; status untouched, W514 stays open until the CLI blind spot closes, mtools:W1252). GENERATOR: python3 -m mikemol.corpus.depmap [--rows] [--mention nemik] ROOT... (mtools corpus dist, AST-derived: import module-level vs deferred, subprocess literal argv, path constants, mention in comments/strings), run over 15 fleet repos. FINDINGS: (1) nemik imports mtools only (pathsforward from 8 src modules adapter alarm check marks metrics realize residue score; frontier from blocks rank; rulerseq from serve, six vendored wheels at ca6702b) and no file in the 15 repos imports nemik: nemik is a pure sink of import edges, so promotion changes pin direction only. (2) THE REAL COUPLING IS THE FILE FORMAT: paths-forward.json/.ledger/.marks.jsonl has one writer (pathsforward foreign.py:31 marks.py:33) and at least four independent readers across two repos: nemik, and mtools hooks (build_failure commit_kata inbound_asks nemik_check revendor_apply standing_facts tick_stop work_claims_hook), plus debtplan writes it. (3) nemik's shapes live as comments in pathsforward, not as a contract both sides test: 75 mentions in 20 src modules (ops 20, check 15, cli 10) plus 52 in its tests. (4) BLIND SPOT, printed on the tool's first line: no CLI edge between the lineages appears (nemik shows git and kubectl, pathsforward opa); shell hooks, variable argv and settings files are invisible to a literal-argv reader. Full note: mtools .claude/design/nemik-dependency-map.md",
+      "next_bounded_step": null,
+      "evidence": "2026-10-15: mtools:W1251 first pass (written by the mtools session at github-8f's confirmed request; status untouched, W514 stays open until the CLI blind spot closes, mtools:W1252). GENERATOR: python3 -m mikemol.corpus.depmap [--rows] [--mention nemik] ROOT... (mtools corpus dist, AST-derived: import module-level vs deferred, subprocess literal argv, path constants, mention in comments/strings), run over 15 fleet repos. FINDINGS: (1) nemik imports mtools only (pathsforward from 8 src modules adapter alarm check marks metrics realize residue score; frontier from blocks rank; rulerseq from serve, six vendored wheels at ca6702b) and no file in the 15 repos imports nemik: nemik is a pure sink of import edges, so promotion changes pin direction only. (2) THE REAL COUPLING IS THE FILE FORMAT: paths-forward.json/.ledger/.marks.jsonl has one writer (pathsforward foreign.py:31 marks.py:33) and at least four independent readers across two repos: nemik, and mtools hooks (build_failure commit_kata inbound_asks nemik_check revendor_apply standing_facts tick_stop work_claims_hook), plus debtplan writes it. (3) nemik's shapes live as comments in pathsforward, not as a contract both sides test: 75 mentions in 20 src modules (ops 20, check 15, cli 10) plus 52 in its tests. (4) BLIND SPOT, printed on the tool's first line: no CLI edge between the lineages appears (nemik shows git and kubectl, pathsforward opa); shell hooks, variable argv and settings files are invisible to a literal-argv reader. Full note: mtools .claude/design/nemik-dependency-map.md | 2026-10-15: mtools:W1252 second reader (blind spot closed; depmap now also reads three CLI kinds: tool = string constants exactly mikemol-*/nemik-*, hook = commands in .claude/settings.json by event and matcher, shell = names on non-comment lines of *.sh and bin/ files). RESULT over nemik+mtools: (a) nemik -> mtools: nemik's src names mikemol-paths-forward in 6 constants (12 more in tests), mikemol-ics once, and its settings.json wires 7 mikemol-hook-* commands (inbound-asks, nemik-check, structural-query, no-chaining, no-verify, shellcheck, pycheck) on SessionStart/UserPromptSubmit/PreToolUse. (b) mtools -> nemik: hooks names nemik-check (2 shell lines in its wrapper, 1 constant), katas names nemik-check and nemik-rank, pathsforward's tests name nemik-witnesses. So the CLI contract is real and runs both ways, through constants and hook wiring, not literal argv. (c) READER INDEPENDENCE, the input to nemik:W517: of the readers of paths-forward.json only nemik (11 modules) and debtplan import mikemol.pathsforward; mtools hooks (build_failure commit_kata inbound_asks nemik_check revendor_apply standing_facts tick_stop work_claims_hook) and katas do NOT import it, so they parse the file with their own code: those are the independent readers that need a tested schema first. Noise in the tool kind: nemik-45 is a session name, nemik-never-writes-a-queue and nemik-cal- are fragments, not tools. Generator unchanged: python3 -m mikemol.corpus.depmap ROOT... | 2026-10-15: Closed 2026-10-15 by github (host) against proof: generator mtools corpus.depmap (W1251) plus its second reader (e71be76, W1252) read tool, hook and shell edges; both appended above, blind spot closed. Limit stated by mtools: reader independence is read from imports only.",
       "issued_at": "2026-10-15T12:08:10Z",
       "minted_during": "tick",
       "caused_by": "operator",
-      "last_worked": "2026-10-15T12:20:11Z",
+      "last_worked": "2026-10-15T12:35:56Z",
       "ticks_blocked": 0,
-      "weight": 11
+      "weight": 11,
+      "completed": "20261015T123556Z"
     },
     {
       "symbol": "W515",
@@ -10036,7 +10036,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 11
+      "weight": 10
     },
     {
       "symbol": "W516",
@@ -10057,7 +10057,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 10
+      "weight": 9
     },
     {
       "symbol": "W517",
@@ -10070,7 +10070,6 @@
         "architecture"
       ],
       "blocked_on": [
-        "W514",
         "W515"
       ],
       "blocked_kind": "agent",
@@ -10086,21 +10085,44 @@
     {
       "symbol": "W518",
       "title": "A fresh publish process starts warm: the SHACL results and the flow solves persist beside the snapshots",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W500"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "wire publish(): load before the build, save after, and key it on CONTENT (luthen's constraint b); drafts ready (serve2.txt, test_publish2.txt), waiting for W503's commit",
-      "evidence": "2026-10-15: 2026-10-15 prototype (scratchpad cache_proto.py) then src/nemik/cachestore.py: save()/load() of shaclinc's last runs and flow's solves under BASE/.cache/build-caches.pickle, stamped by the shapes, shaclinc/flow/cachestore source and the pyshacl/rdflib versions (a different stamp, a damaged or missing file is a cold start, never an error); public export/import hooks on shaclinc and flow. Measured on the pod-shaped export: caches 9.6 MB, 0.6 s to load, a fresh process then rebuilds in 16.0 s CPU against 37-57 s cold; no blank nodes in the cached triples. tests/test_cachestore.py (5): exact round trip, an unchanged rebuild validates NOTHING after a restore, a stamp change distrusts it, damage is cold",
+      "next_bounded_step": "W504: install the two-container manifest (drafted), builder memory limit 768Mi against a 563-607 MB peak, then tell luthen-observability the container names and limits",
+      "evidence": "2026-10-15: 2026-10-15 prototype (scratchpad cache_proto.py) then src/nemik/cachestore.py: save()/load() of shaclinc's last runs and flow's solves under BASE/.cache/build-caches.pickle, stamped by the shapes, shaclinc/flow/cachestore source and the pyshacl/rdflib versions (a different stamp, a damaged or missing file is a cold start, never an error); public export/import hooks on shaclinc and flow. Measured on the pod-shaped export: caches 9.6 MB, 0.6 s to load, a fresh process then rebuilds in 16.0 s CPU against 37-57 s cold; no blank nodes in the cached triples. tests/test_cachestore.py (5): exact round trip, an unchanged rebuild validates NOTHING after a restore, a stamp change distrusts it, damage is cold | 2026-10-15: wired into nemik-serve --publish: the caches load before and save after a build; the build is keyed on the CONTENT of every queue and ledger file (luthen's constraint b: a rewrite that changes nothing is not a change); build_static now runs inside memo_audits()+indexed() (it ran outside the scope the live document is built in: rank.goals alone was a third of a 94 s profiled publish, 1.09 M rdflib successor calls); cards() memoized in the index (31 builds of the same dict per publish); graph.ttl written as N-Triples (valid Turtle, much cheaper); the index scope holds graphs WEAKLY (a strong reference kept every per-repo graph copy alive to the end: +140 MB at the peak). MEASURED on the pod-shaped export, 17 repos, each cycle its own process: cold 52.5 s CPU / 607 MB peak; after a content change with caches 21.4 s CPU / 563 MB peak (was 44 s / 531 MB before the scope work, 64 s cold); nothing changed 0.6 s / 46 MB. tests/test_build_scope.py: the scoped build publishes byte-identical files; tests/test_cachestore.py (5), tests/test_publish.py (7)",
       "issued_at": "2026-10-15T12:10:05Z",
       "minted_during": "tick",
       "caused_by": "W503",
-      "last_worked": "2026-10-15T12:18:45Z",
+      "last_worked": "2026-10-15T12:41:03Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261015T124103Z"
+    },
+    {
+      "symbol": "W519",
+      "title": "One queue schema for the paths-forward state, ledger line and marks line, validated by the writer, nemik and every independent reader's tests against a fixture",
+      "status": "ready",
+      "enables": [
+        "W517"
+      ],
+      "touches": [
+        "nemik",
+        "pathsforward",
+        "schema"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "From the dependency map: the independent readers (mtools hooks build_failure commit_kata inbound_asks nemik_check revendor_apply standing_facts tick_stop work_claims_hook, and katas) parse paths-forward.json with their own code. Define one machine-readable schema (state, ledger line, marks line, versioned) and a fixture set; the writer emits against it, nemik reads against it, and each independent reader's tests validate the same fixture, so a format change fails every reader's test at once. This precedes any code move (W517). Decide where the schema lives (nemik after promotion, mtools until then).",
+      "evidence": "",
+      "issued_at": "2026-10-15T12:35:57Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 10
     }
   ],
   "residue": [
@@ -10170,7 +10192,10 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": null,
+  "lock": {
+    "holder": "agent-nemik-bb",
+    "taken_at": "2026-10-15T12:46:35Z"
+  },
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }

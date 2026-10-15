@@ -202,7 +202,27 @@ def evaluate(query: str, doc: dict, missing: list[str]) -> str:
     )
 
 
+def is_rego(query: str) -> bool:
+    """Whether `query` is a Rego witness: it reads `input` (an observer fact, or `input.now`).
+
+    A PromQL expression cannot name `input.` (a metric name has no dot), so anything else is PromQL."""
+    return re.search(r"\binput\.", query) is not None
+
+
 def witness(query: str, now: datetime | None = None) -> tuple[str, dict, list[str]]:
+    """'true' | 'false' | 'undefined' for a waypoint's witness, with the facts that decided it.
+
+    nemik:W501: a witness that is a bare PromQL expression holds while its instant query returns a
+    sample, the PromQL meaning of a comparison (`x > y` returns the series only while it is true) and
+    what `--wait` has always done with one; luthen-observability:W1054 stores its executor-load witness
+    that way, and no Rego wrapper (and its escaped quotes) needs writing by hand."""
+    if not is_rego(query):
+        stamp = (now or datetime.now(UTC)).isoformat()
+        fact = _promql(query)
+        if fact is None:
+            return "undefined", {"now": stamp}, [f'promql["{query}"]']
+        verdict = "false" if fact["empty"] else "true"
+        return verdict, {"now": stamp, "promql": {query: fact}}, []
     doc, missing = facts(query, now)
     return evaluate(query, doc, missing), doc, missing
 
