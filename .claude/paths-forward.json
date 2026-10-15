@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 500,
+  "counter": 501,
   "waypoints": [
     {
       "symbol": "W1",
@@ -9717,10 +9717,32 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Reproduce from a fresh start, sample RSS per phase (cache, graph, serve loop) to find what is unbounded, bound it in the code, then size the limit from an uncensored working-set series (no typed number). Witness: increase of kube_pod_container_status_restarts_total in namespace nemik over 6h is 0. Evidence from luthen-observability W1051: working-set p99 over 12h equals the limit (series censored), 133 readiness and 221 liveness probe failures in 12h.",
-      "evidence": "",
+      "evidence": "2026-10-15: 2026-10-15 luthen census (read-only): the two OLD nemik pods (Terminating, stale shim) still run nemik-serve, one at RSS 728 MB after about 40 h (started 2026-10-13 19:46), so four nemik servers share the host. Growth data point: the new pods reach about 800 MB within an hour of start, the old one sat at 728 MB after 40 h, so growth may be driven by load or startup work (cache fill) and not by time alone; the old pods are outside the cgroup limit that OOM-kills the new ones. Orphans cost about 1.4 GB RSS.",
       "issued_at": "2026-10-15T03:50:31Z",
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W1051",
+      "last_worked": "2026-10-15T05:24:04Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W501",
+      "title": "Declare the executor-load witness fact in the nemik witness set so luthen-observability W1054 can be claimed",
+      "status": "ready",
+      "enables": [
+        "luthen-observability:W1054"
+      ],
+      "touches": [
+        "nemik",
+        "witnesses",
+        "buildbuddy"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Take the one-line promql witness stored on luthen-observability W1054 (executor CPU above its own derived 7-day p90 while the executor CPU limit series is below 24 cores) into nemik-witnesses as a declared fact, read it with nemik-witnesses (dry) and confirm it evaluates false on an idle executor and true on a fixture. Then tell luthen-observability so W883 and mtools W1052 can cite it.",
+      "evidence": "",
+      "issued_at": "2026-10-15T04:53:40Z",
+      "minted_during": "interrupt",
+      "caused_by": "luthen-observability:W1054",
       "last_worked": null,
       "ticks_blocked": 0
     }

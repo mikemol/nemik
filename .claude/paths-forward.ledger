@@ -793,3 +793,4 @@
 2026-10-14T13:56:26Z  interrupt W498 minted    -         "Patch tier 2: added and removed cards and edges change in place, the layout marked out of date rather than redone"  evidence=W494
 2026-10-14T14:09:06Z  interrupt W499 minted    -         "Incremental redraw for the treemap and for repo boxes and lanes that appear or go"  evidence=W494
 2026-10-15T03:50:31Z  interrupt W500 minted    -         "nemik process grows from 312 MiB to the 768Mi container limit within an hour of each start and is OOMKilled: find what grows and bound it"  evidence=luthen-observability:W1051
+2026-10-15T04:53:40Z  interrupt W501 minted    -         "Declare the executor-load witness fact in the nemik witness set so luthen-observability W1054 can be claimed"  evidence=luthen-observability:W1054
