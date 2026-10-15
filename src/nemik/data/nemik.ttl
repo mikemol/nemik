@@ -24,6 +24,28 @@ nemik:Ready a skos:Concept ; skos:inScheme nemik:WaypointStates ; skos:prefLabel
 nemik:Working a skos:Concept ; skos:inScheme nemik:WaypointStates ; skos:prefLabel "working" .
 nemik:Blocked a skos:Concept ; skos:inScheme nemik:WaypointStates ; skos:prefLabel "blocked" .
 nemik:Done a skos:Concept ; skos:inScheme nemik:WaypointStates ; skos:prefLabel "done" .
+# nemik:W551 (github-8f 2026-10-15): the five distinct steps of a change on the host, which sessions
+# mixed under about six words. Each has one definition and the evidence that witnesses it. A run's
+# verdict (mtools' corpus/exit-table.json, mtools:W1294) is a separate axis from the step reached.
+nemik:witnessedBy a rdf:Property ; rdfs:comment "The evidence that shows a lifecycle step has been reached (nemik:W551)." .
+nemik:ChangeLifecycle a skos:ConceptScheme ;
+    skos:prefLabel "change lifecycle on the host" ;
+    skos:hasTopConcept nemik:Landed, nemik:Installed, nemik:Enabled, nemik:Active, nemik:Applied .
+nemik:Landed a skos:Concept ; skos:inScheme nemik:ChangeLifecycle ; skos:prefLabel "landed" ;
+    skos:definition "The change is committed to its repository." ;
+    nemik:witnessedBy "a git ref containing the commit" .
+nemik:Installed a skos:Concept ; skos:inScheme nemik:ChangeLifecycle ; skos:prefLabel "installed" ;
+    skos:definition "An apply has written the change's files onto the host." ;
+    nemik:witnessedBy "a host_live_types row for the written artifact" .
+nemik:Enabled a skos:Concept ; skos:inScheme nemik:ChangeLifecycle ; skos:prefLabel "enabled" ;
+    skos:definition "The change's trigger is registered with the host's scheduler." ;
+    nemik:witnessedBy "systemctl is-enabled reports enabled" .
+nemik:Active a skos:Concept ; skos:inScheme nemik:ChangeLifecycle ; skos:prefLabel "active" ;
+    skos:definition "The change's trigger is armed and can fire now." ;
+    nemik:witnessedBy "systemctl is-active reports active" .
+nemik:Applied a skos:Concept ; skos:inScheme nemik:ChangeLifecycle ; skos:prefLabel "applied" ;
+    skos:definition "A run of the change converged on the host." ;
+    nemik:witnessedBy "a run record whose verdict is converged" .
 nemik:Dropped a rdfs:Class ; rdfs:comment "A residue entry: a symbol that was issued and dropped, still resolvable." .
 nemik:kind a rdf:Property ; rdfs:comment "The ledger line's raw kind column (free text upstream)." .
 nemik:effortClass a rdf:Property ; rdfs:comment "forecast | interrupt | unclassified, from nemik's KIND_CLASS reading of kind." .
