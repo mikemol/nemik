@@ -181,6 +181,14 @@ def _queue_graph(repo: str, state_path: Path, known: frozenset[str]) -> Graph:
             g.add((node, NEMIK.blockedKind, Literal(kind)))
         for tag in model.strlist(w, "touches"):
             g.add((node, NEMIK.touches, Literal(tag)))
+        # nemik:W544 (mtools:W1276): the repo files the next step names, as written. Paths only; the
+        # EditDeclaredShape in shapes.ttl compares them with the file:<path>!w touches.
+        named = re.findall(
+            r"(?:[\w.-]+/)*[\w-]+\.(?:py|ttl|ya?ml|json|md|html|toml|js)\b",
+            model.text(w, "next_bounded_step"),
+        )
+        for path in sorted(set(named)):
+            g.add((node, NEMIK.namesFile, Literal(path)))
         # nemik:W174: weather. Waypoints whose witnesses are the same query wait on the same outage,
         # so they share one weather id: a hash of the query with its whitespace collapsed. The query
         # text itself stays out of the graph (it may name hosts or endpoints).

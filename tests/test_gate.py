@@ -213,6 +213,29 @@ def test_caused_by_unresolved_reference_warns_and_names_it(root: Path) -> None:
     assert "caused_by names beta:W9," in named["W2"]
 
 
+def test_next_step_naming_a_file_without_a_declared_write_warns(root: Path) -> None:
+    """nemik:W544: open work that names a repo file declares file:<path>!w.
+
+    Done work, work that declares one, and a step naming no file do not warn. A Warning,
+    not a Violation.
+    """
+    step = "edit src/nemik/adapter.py and tests/test_gate.py"
+    write_queue(
+        root,
+        "gamma",
+        waypoint("W1", next_bounded_step=step),
+        waypoint("W2", next_bounded_step=step, touches=["file:src/nemik/adapter.py!w"]),
+        waypoint("W3", next_bounded_step=step, status="done"),
+        waypoint("W4", next_bounded_step="think about it"),
+    )
+    r = run("check", root)
+    assert r.returncode == 0, r.stdout + r.stderr
+    named = [row for row in r.stdout.splitlines() if "declares no file:" in row]
+    assert {row.split()[1] for row in named} == {"W1"}, r.stdout
+    assert any("src/nemik/adapter.py" in row for row in named), r.stdout
+    assert any("tests/test_gate.py" in row for row in named), r.stdout
+
+
 def test_caused_by_into_residue_resolves(tmp_path: Path) -> None:
     write_queue(tmp_path, "alpha", waypoint("W2", caused_by="W1"))
     q = tmp_path / "alpha" / "paths-forward.json"
