@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W320: nemik's workflows as data, for checking against skills/nemik/SKILL.md.
 
 `data/workflows.toml` declares the card lifecycle, the rules the skill teaches and the cross-workstream

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W273 (gcalculus:W225): how far behind a peer's HEAD is each repo's pin of it?
 
 A pin is `git+https://github.com/<owner>/<peer>[.git]@<sha>` in a repo's pyproject.toml or

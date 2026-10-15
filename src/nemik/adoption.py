@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """Does each workstream run mikemol-paths-forward from its own environment?
 
 The operator's intent (2026-09-26): each repo installs the package as its own sha-pinned

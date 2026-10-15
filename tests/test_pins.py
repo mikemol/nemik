@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W273 (gcalculus:W225): nemik-pins reports how far behind a peer's HEAD a pin is."""
 
 from __future__ import annotations

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W366: cards as issue-tracker issues (GitHub / Forgejo shape), a read-only mirror.
 
 A serializer over nemik.projection (W413). Each Task becomes an issue: its title, a body that names the

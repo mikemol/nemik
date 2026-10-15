@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W133 (luthen-observability:W190 §3): the ordering guarantees nemik-rank --check refuses on.
 
 Each guarantee is falsifiable: --check names the rule and the pair of items that broke it.

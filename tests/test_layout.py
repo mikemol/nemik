@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W125: the web view's layout quality, measured on a fixed fleet-shaped graph and held to
 budgets, in both colour schemes.
 

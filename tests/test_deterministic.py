@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W119: the served graph is the same bytes whatever Python's str-hash salt is.
 
 The operator saw the web view "jumping around" with no data change. rdflib iterates in hash order,

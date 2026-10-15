@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W448: a repo's queue and ledger as an OSLC Tracked Resource Set (TRS 2.0).
 
 TRS is the incremental feed OSLC tools already consume (IBM's LQE ingests TRS sources; W373's study of

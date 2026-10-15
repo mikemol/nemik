@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W154: the field manifest covers every field the export renders, and flags any that is new."""
 
 from pathlib import Path

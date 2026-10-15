@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """The `nemik-inbound` and `nemik-operator` commands, over the readings in `nemik.blocks`.
 
 They live apart from `blocks` because they need `nemik.check.survey`, and `check` imports

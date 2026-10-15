@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W154: the field manifest for the static public view.
 
 `data/field-manifest.json` names every field each published file may carry. `unmanifested` returns

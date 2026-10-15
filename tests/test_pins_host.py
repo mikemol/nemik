@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W379: nemik-pins reads the host's uv install receipt for nemik and names its commit."""
 
 from __future__ import annotations

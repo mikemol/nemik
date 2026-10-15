@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W246: judge every live waypoint with mtools' realizability policy, in one batch.
 
 The policy and its input envelope are mtools' (mtools:W850, shipped in the pinned pathsforward

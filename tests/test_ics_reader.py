@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W157: mtools' mikemol-ics is installed in nemik's venv and reads an exported calendar."""
 
 import subprocess

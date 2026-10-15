@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W503: a snapshot is built in a fresh process, published by one atomic flip, and skipped when quiet."""
 
 import json

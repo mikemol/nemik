@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W423: write the pieces conformance corpus, one JSON file per case.
 
 Each case is {"name", "doc", "split", "assemble"}: the graph document, what nemik.pieces.split gives

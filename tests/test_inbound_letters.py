@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W275: a waiting waypoint's cited letter files reach nemik-inbound, not the served graph."""
 
 from __future__ import annotations

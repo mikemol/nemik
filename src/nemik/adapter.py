@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """Paths-forward queue -> OSLC CM ChangeRequests, read through mtools' own loader.
 
 The adapter never parses the state file itself: `mikemol.pathsforward.store.load` is the one

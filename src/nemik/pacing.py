@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W327: arrival pacing, a token bucket over each repo's new cards.
 
 A repo may mint cards at a declared rate per day with a declared burst on top (`[pacing]` in

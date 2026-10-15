@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W97: run a console script from the installed .venv, as a user would.
 
 Host: the scripts sit beside the interpreter running pytest (.venv/bin). Bazel: the test's runfiles

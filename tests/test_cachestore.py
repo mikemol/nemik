@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W518: the build's caches survive a process boundary, and only ever when they are still valid."""
 
 from pathlib import Path

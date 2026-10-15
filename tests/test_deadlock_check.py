@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W331: nemik-check warns on each card in a dependency deadlock the operator cannot break."""
 
 from __future__ import annotations

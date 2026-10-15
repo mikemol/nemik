@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik-serve: a read-only web view of the merged workstream graph.
 
     /             the dependency view (static page; draws /graph.json)

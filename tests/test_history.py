@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W267: nemik-history diffs a repo's committed queue between two revisions."""
 
 from __future__ import annotations

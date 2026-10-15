@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W415: graph.json's per-repo pieces put back together give graph.json."""
 
 import json

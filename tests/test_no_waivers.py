@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W523: no suppression directive anywhere in nemik's Python, held by the gate.
 
 The house rule (mtools): a finding is fixed or the rule is changed in the one reviewed place, never waived

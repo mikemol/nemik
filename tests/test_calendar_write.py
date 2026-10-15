@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W199 (life's ask): nemik-calendar-write ties calendars.toml, the queues and the helper."""
 
 import json

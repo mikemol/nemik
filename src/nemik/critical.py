@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W313: the critical path through the open dependency graph, and each card's slack.
 
 Every open card counts one step. `up` is the length of the longest chain of open prerequisites ending at

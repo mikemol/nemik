@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W495: a poll's change is classified by what the drawn graph must do to follow it."""
 
 from datetime import UTC, datetime, timedelta

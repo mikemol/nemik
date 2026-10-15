@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W401: a solve is answered from the cache when nothing inside its sources' cones changed."""
 
 from __future__ import annotations

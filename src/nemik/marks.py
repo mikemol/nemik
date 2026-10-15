@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W234/W236: read the verdict marks mtools' writer persists, never re-derive them privately.
 
 The marks file is `.claude/paths-forward.marks.jsonl` beside the queue (mtools:W851, agreed in

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W172: luthen's withheld list applied to the static view's documents, failing closed.
 
 Contract (luthen-observability-6b, 2026-10-01; nemik:W153 evidence): WITHHOLD WHOLE, NEVER SCRUB.

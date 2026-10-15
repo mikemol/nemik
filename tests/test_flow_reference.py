@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W250: the sparse elimination in nemik.flow equals an independent dense solve, exactly."""
 
 from __future__ import annotations

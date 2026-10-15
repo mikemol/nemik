@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W455: the image's test stage carries every repo path the Bazel test targets read.
 
 Two gates run the same tests: Bazel (the commit gate) and the Containerfile's test stage (the image

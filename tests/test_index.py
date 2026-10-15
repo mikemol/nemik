@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W412: inside a build the per-card facts come from one index, and they equal the graph's."""
 
 from __future__ import annotations

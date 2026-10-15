@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W314: nemik-history --toil reports the weekly interrupt share from a repo's ledger."""
 
 from __future__ import annotations

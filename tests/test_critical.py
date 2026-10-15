@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W313: the critical path and slack of the open dependency graph."""
 
 from __future__ import annotations

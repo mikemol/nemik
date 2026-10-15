@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W412: one pass over a graph into plain dicts, read by the hot loops for one build.
 
 A rebuild asked rdflib 3.3 M triple patterns (17 s of 27) for the same few facts per card: its

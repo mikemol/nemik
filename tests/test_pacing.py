@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W327: arrival pacing as a token bucket over each repo's new cards."""
 
 from __future__ import annotations

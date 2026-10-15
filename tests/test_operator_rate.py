@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W357: per week, operator asks opened and answered, and the implied wait on the operator."""
 
 from __future__ import annotations

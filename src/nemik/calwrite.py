@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W197 (life's ask): open dated waypoints as VEVENTs, for writing into a calendar.
 
 A waypoint with a DTSTART or a DUE (mtools:W300), and optionally alarms (W279) and a recurrence

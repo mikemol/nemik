@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W494: the 60 s poll follows the fleet in place instead of destroying the graph and laying it out again.
 
 nemik-history --churn (W495) measured what a poll finds: structural changes (cards minted, closed,

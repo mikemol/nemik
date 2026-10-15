@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W440: a JSON Schema per published file, generated from field-manifest.json.
 
 The manifest already decides what may be published (nemik:W154: a field outside it fails the build), so it

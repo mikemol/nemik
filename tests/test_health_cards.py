@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W454: repo health computed from plain Cards and ask rows alone, no graph."""
 
 from nemik.cards import Card

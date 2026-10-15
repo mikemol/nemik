@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W483: rank.frontier through mtools' shared walker agrees with the old stored-state walk.
 
 The old walk decided a card was open from its stored state (rank._open) and called a card a leaf

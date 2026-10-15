@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W513: a console script is declared in every registry it belongs in, and a gap is named at once.
 
 nemik-static (W502) was refused by three checks in turn, one gate run each: the BUILD console_scripts

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W161: operator calendars stay host-side. Event text and the account credential never reach
 the graph nemik-serve builds, the metrics, the export or the static build (operator 2026-09-28).
 

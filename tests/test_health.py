@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W317: repo health is the worst of its declared signals, with a reason per crossing."""
 
 from __future__ import annotations

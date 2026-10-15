@@ -828,3 +828,8 @@
 2026-10-15T13:15:11Z  tick  W531 minted    -         "Conformance tests against the standards: Prometheus output parsed with HELP lines, graph.ttl round-tripped, model.md TRS drift fixed"  evidence=operator
 2026-10-15T13:17:51Z  tick  W515 advanced  collapse  "W515 surveyed against mtools' gate (7 gaps minted W521-W527, umbrella); W523 no-waivers done (8 -> 0, whole-tree test, W475 guard improved); W518/W520/W523 in the gate; cluster at d45a5bc, W504 still waits for the W518 image"
 2026-10-15T14:15:05Z  tick  W532 minted    -         "Decide nemik's licence and copyright notice, then drop missing-copyright-notice from ruff-house.toml and add the notice to every file"  evidence=W522
+2026-10-15T14:28:55Z  tick  W533 minted    -         "Extract one converge library from pod_reaper.converge: one pass path, halt repeat detection, a trigger field on every run row"  evidence=operator
+2026-10-15T14:28:56Z  tick  W534 minted    -         "One run-row schema for apply, reaper and nudge ledgers: ts, run id, trigger, verdict, detail, inputs digest"  evidence=operator
+2026-10-15T14:28:56Z  tick  W535 minted    -         "Share one Rego facts and evaluate core between nemik witnesses, pathsforward opa_eval and luthen preflight gates"  evidence=operator
+2026-10-15T14:32:10Z  tick  W536 minted    -         "Replace tools/ruff_ratchet.py with mtools' mikemol-ratchet (pinned dependency, set baseline of path:rule keys), and use it for W524's mypy baseline"  evidence=W522
+2026-10-15T14:32:14Z  tick  W522 advanced  collapse  "W522 landed 70e31e3: house ruff ratchet (2998 findings baseline), W521 e2b8336 and W523 88a52eb earlier; W532 licence ask to operator, W536 mikemol-ratchet adoption minted; W504 still waits on cluster image (at 459e5be)"

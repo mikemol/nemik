@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W442: the generated OpenAPI points at published schemas, and the example client works."""
 
 import functools

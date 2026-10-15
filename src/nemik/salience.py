@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W238/W240: the flow model's salience of a repo's ready cards, beside the old downstream weight.
 
 The graph side of nemik.flow, ported from gcalculus's audit script (nemik/inbox/2026-10-09-gcalculus-

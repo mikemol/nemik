@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W238: demand flows from the cards that need something to the ready frontier, conserved.
 
 The model is gcalculus's (gcalculus:W208, `scripts/flow_reference.py`, b9196cf; design note

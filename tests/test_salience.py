@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W240: the flow model beside the old downstream weight, on a fleet small enough to solve by hand."""
 
 from __future__ import annotations

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """Cross-repo downstream weight for ranking a queue's ready items (nemik:W34).
 
 mtools' own ordering (mtools:W51 `model.leverage`) counts one queue's immediate edges. This module

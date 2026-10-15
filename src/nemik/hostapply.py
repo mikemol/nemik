@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W233: read luthen's host-apply export, the marks the host leaves on itself.
 
 luthen-observability EXPORTS `host-apply.json` (luthen-observability:W665, `python -m

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W326: starvation, the failure of a pure priority queue.
 
 A ready card is STARVED when it has waited longer than the declared age (`[starvation] days` in

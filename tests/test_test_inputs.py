@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W475: every repo file a test opens by path is a declared input of the bazel test.
 
 A test that opens `src/nemik/web/index.html` by path passes on the host and fails in the gate, whose

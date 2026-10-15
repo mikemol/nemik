@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W518: building the static view inside one build's index scope changes how fast, never what.
 
 A warm publish profiled at 94 s with a third of it in rank.goals asking rdflib for facts the per-graph

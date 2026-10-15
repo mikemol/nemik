@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W232: nemik-metrics exposes the realizability coordinate counts, and an unjudged queue is flagged."""
 
 from __future__ import annotations

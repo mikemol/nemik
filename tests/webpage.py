@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik: a served fixture fleet and a Chromium page on it, for browser tests outside test_layout.
 
 test_layout.py keeps its own server fixture (a large file, edited in one piece); new browser tests

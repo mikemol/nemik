@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W245: mtools' realizability batch (`--certify`) runs under the hash-pinned opa.
 
 The policy ships in the pinned pathsforward wheel (nemik:W230, mtools:W850). This test is the

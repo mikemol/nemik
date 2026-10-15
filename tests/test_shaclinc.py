@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W400: validating only what a change touches gives exactly the full run's findings."""
 
 from collections.abc import Callable

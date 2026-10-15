@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W253: a recorded gap weighs what rank-weights.toml [residue] says for its gate."""
 
 from __future__ import annotations

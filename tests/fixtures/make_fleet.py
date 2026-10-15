@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """Regenerate tests/fixtures/fleet/ from the live queues under ~/github (nemik:W125).
 
 The layout test needs a graph with the fleet's real SHAPE: its repos, symbols, statuses and every

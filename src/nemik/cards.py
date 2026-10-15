@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W425: the queue's cards as plain data, the pure input the typed-subset modules read.
 
 nemik:W422's plan moves modules into a portable Python subset that transpiles to TypeScript (mtools:

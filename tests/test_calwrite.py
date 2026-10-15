@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W197 (life's ask): dated waypoints as VEVENTs with a stable UID, ready to write."""
 
 import json

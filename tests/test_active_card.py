@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W177: a repo keeps exactly one working card unless every open item is blocked."""
 
 from rdflib import Graph

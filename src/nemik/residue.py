@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W251: every recorded gap in the fleet, by card, for the flow model's residue demand.
 
 The policy (mtools:W850) judges each live waypoint and returns its residue: the gaps it has not

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W423: the Python half of the pieces conformance run (the TypeScript half is mtools:W1072).
 
 Every case in tests/corpus/pieces is run through nemik.pieces; any difference is printed field by

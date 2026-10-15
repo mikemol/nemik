@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W251: the fleet's recorded gaps, by card, from the pinned policy."""
 
 from __future__ import annotations

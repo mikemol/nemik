@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W400: validate only what a change touches, and keep every other node's findings.
 
 A rebuild validated the whole fleet (the largest phase left once the parse and solve caches landed).

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W267: how a workstream's graph changed between two points in its git history.
 
 nemik-history reads each repo's committed `.claude/paths-forward.json` at two revisions (or the

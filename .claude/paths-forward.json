@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 532,
+  "counter": 536,
   "waypoints": [
     {
       "symbol": "W1",
@@ -10028,7 +10028,6 @@
         "gate"
       ],
       "blocked_on": [
-        "W522",
         "W524",
         "W525",
         "W526",
@@ -10041,7 +10040,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-15T13:14:23Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 0,
       "weight": 10,
       "completed": null
     },
@@ -10373,23 +10372,105 @@
     {
       "symbol": "W532",
       "title": "Decide nemik's licence and copyright notice, then drop missing-copyright-notice from ruff-house.toml and add the notice to every file",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W515"
       ],
       "touches": [],
-      "blocked_on": [
-        "operator: decide nemik's licence (Apache-2.0 as mtools, or other) so the SPDX and copyright notice can be added to every file"
-      ],
-      "blocked_kind": "human",
-      "next_bounded_step": "after the ruling: add the notice header to every Python file, drop missing-copyright-notice from ruff-house.toml, lower the baseline",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-15: 2026-10-15 operator ruling (chat): nemik is Apache-2.0. Next: LICENSE file, SPDX+copyright header on every Python file (mtools' notice), drop missing-copyright-notice from ruff-house.toml, lower the baseline. | 2026-10-15: LICENSE (Apache-2.0) + SPDX/copyright header on 184 Python files by a one-shot script; missing-copyright-notice now enforced by ruff-house.toml with mtools' notice regex",
       "issued_at": "2026-10-15T14:15:05Z",
       "minted_during": "tick",
       "caused_by": "W522",
-      "last_worked": "2026-10-15T14:15:09Z",
+      "last_worked": "2026-10-15T14:34:15Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261015T143415Z"
+    },
+    {
+      "symbol": "W533",
+      "title": "Extract one converge library from pod_reaper.converge: one pass path, halt repeat detection, a trigger field on every run row",
+      "status": "ready",
+      "enables": [
+        "W517"
+      ],
+      "touches": [
+        "nemik",
+        "converge",
+        "architecture"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Convergent-patterns audit 2026-10-15 (github/.claude/design-convergent-patterns-2026-10-15.md, F1): the reconcile loop exists in pod_reaper.converge (halt_key, SAME_HALT_PASSES) and apply_converge (no repeat-halt detection: drift); neither records why it woke. Lift converge(pass, record, policy) with acute triggers and the chronic epoch nudge (operator design 2026-10-15), every row naming its trigger; luthen ports apply_converge and the reaper onto it.",
+      "evidence": "",
+      "issued_at": "2026-10-15T14:28:55Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W534",
+      "title": "One run-row schema for apply, reaper and nudge ledgers: ts, run id, trigger, verdict, detail, inputs digest",
+      "status": "ready",
+      "enables": [
+        "W517"
+      ],
+      "touches": [
+        "nemik",
+        "records",
+        "schema"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Audit F5: apply-set-runs.jsonl, reaper-runs.jsonl, nemik nudges.json, the fence ledger and the paths-forward ledger and marks each carry their own schema. Publish one run-row shape (validated the same way as the queue contract, W519, standards first: PROV Activity fields where they fit) and migrate writers one at a time.",
+      "evidence": "",
+      "issued_at": "2026-10-15T14:28:56Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W535",
+      "title": "Share one Rego facts and evaluate core between nemik witnesses, pathsforward opa_eval and luthen preflight gates",
+      "status": "ready",
+      "enables": [
+        "W517"
+      ],
+      "touches": [
+        "nemik",
+        "rego",
+        "gates"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Audit F3 and F9: fact providers differ for real reasons and stay, but the fact-to-Rego evaluation (a missing fact is undefined, never a pass) is duplicated in nemik witnesses.py:162-205, pathsforward opa_eval, opa_plan and apply_set preflight, and pod_reaper.py:435 has its own rollout witness. One core in nemik witnesses, the others call it. First confirm whether opa_eval and witnesses already share code (the audit could not).",
+      "evidence": "",
+      "issued_at": "2026-10-15T14:28:56Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W536",
+      "title": "Replace tools/ruff_ratchet.py with mtools' mikemol-ratchet (pinned dependency, set baseline of path:rule keys), and use it for W524's mypy baseline",
+      "status": "ready",
+      "enables": [
+        "W524"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-15T14:32:10Z",
+      "minted_during": "tick",
+      "caused_by": "W522",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -10459,10 +10540,7 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": {
-    "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-15T14:11:32Z"
-  },
+  "lock": null,
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }

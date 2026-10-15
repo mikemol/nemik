@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W128: operator asks as RFC 5545 VTODOs, opt-in per repo."""
 
 from nemik.vtodo import calendar, stated_ask, vtodos

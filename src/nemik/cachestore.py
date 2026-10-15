@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W518: the build's two caches, kept between short-lived processes.
 
 The long-lived server rebuilt in about 16 s CPU because it kept the last SHACL run (nemik:W400: only

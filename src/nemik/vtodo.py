@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W128: the operator's asks as iCalendar VTODOs (RFC 5545), one projection with two sinks.
 
 `nemik-ics` writes the projection to a local .ics file that Akonadi (or any calendar) can subscribe

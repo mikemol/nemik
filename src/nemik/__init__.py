@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W94: every nemik command imports this package, so this is where an editable install is flagged.
 
 An editable install runs the working tree, not what was installed: a CLI then behaves as whatever

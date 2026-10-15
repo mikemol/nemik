@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W413: the card-to-task projection keeps every blocking edge, and decodes back to them."""
 
 from pathlib import Path

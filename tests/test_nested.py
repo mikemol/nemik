@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W224: a workstream may contain others, so a root with its own queue is one too."""
 
 from __future__ import annotations

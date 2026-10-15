@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W442: a minimal client for nemik's read API, standard library only.
 
 It is the example another app copies: read hashes.json, fetch only the documents whose hash moved since

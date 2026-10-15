@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W129: a waypoint's alarm resolves to the instant it fires; VTODOs carry it as a VALARM."""
 
 from datetime import UTC, datetime

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W271 (gcalculus:W224), W277, W278, W282: is every letter in the inbox it is addressed to, and
 does a waypoint own it?
 

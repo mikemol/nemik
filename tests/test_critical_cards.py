@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W453: the critical path computed from plain Cards alone, no graph."""
 
 from nemik.cards import Card

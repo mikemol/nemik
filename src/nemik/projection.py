@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W413: nemik's cards as tasks with predecessor links, the one mapping every export reuses.
 
 Every tool the integration survey ranks (docs/integration-survey.md) reads the same structure: tasks,

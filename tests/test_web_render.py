@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W78: render the web view in headless Chromium and check that no waypoint's label is covered
 by another waypoint's shape (the operator's occlusion report, nemik:W77)."""
 

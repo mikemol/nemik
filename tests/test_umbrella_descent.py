@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W405: a card waiting on another repo's umbrella is told which open steps to cite instead."""
 
 from __future__ import annotations

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W451: an OSLC service-provider catalog, the root an OSLC client discovers nemik from.
 
 W373's study of Jazz found a missing service-provider catalog named as an integration failure (a

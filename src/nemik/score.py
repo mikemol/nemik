@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W131 (luthen-observability:W190): a waypoint's WV:1 vector -> a priority band.
 
 mtools stores and validates the vector (mikemol.pathsforward.vector, mtools:W248); nemik owns the

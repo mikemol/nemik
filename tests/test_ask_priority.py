@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W299: an operator ask's calendar PRIORITY follows the demand it holds back."""
 
 from __future__ import annotations

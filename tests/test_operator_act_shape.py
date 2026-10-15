@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W458: an operator act ask with no command in the standard shape is the owner's debt."""
 
 from nemik.blocks import errand_repos, operator_category

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik-wake: which blocked-on entities must be awake, and which are not.
 
 Joins what is waiting on each workstream (nemik.blocks.inbound: other repos' open waypoints

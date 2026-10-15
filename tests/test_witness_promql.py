@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W501: a waypoint's witness may be a bare PromQL expression, as --wait has always read one.
 
 luthen-observability:W1054 stores its executor-load witness as one PromQL string; a Rego wrapper with its

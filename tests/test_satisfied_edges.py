@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W56: edges from done work are marked satisfied; open_blockers counts the rest."""
 
 import json

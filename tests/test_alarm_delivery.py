@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W166: each alarm firing is delivered once, keyed (ref, RECURRENCE-ID, instant)."""
 
 from nemik.wake import alarm_key, undelivered

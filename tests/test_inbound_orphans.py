@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W376: nemik-inbound REPO lists REPO's uncited inbox letters as UNCLAIMED rows."""
 
 from __future__ import annotations

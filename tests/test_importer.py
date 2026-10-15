@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W367: the printed import runs cleanly through the real writer and rebuilds the links."""
 
 import json

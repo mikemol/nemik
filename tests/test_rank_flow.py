@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W241: nemik-rank's `weight` objective is the flow salience when the composition says so."""
 
 from __future__ import annotations

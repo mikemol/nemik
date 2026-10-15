@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W522: the house ruff rules are a paydown-only ratchet over the whole tree.
 
 mtools selects every ruff rule; nemik carries thousands of findings under them, so

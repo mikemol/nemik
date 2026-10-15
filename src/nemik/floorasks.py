@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """Witness that summit floor asks point at live waypoints (nemik:W42).
 
 Each `summit/floor/*.bib` entry may carry `waypoint = {<repo>:W<n>}`. The pointer must resolve to

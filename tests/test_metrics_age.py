@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W270: nemik-metrics reports how long the open waypoints have existed."""
 
 from __future__ import annotations

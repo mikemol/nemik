@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W19: model.refresh() must not let concurrent requests redo the rebuild in parallel.
 
 ThreadingHTTPServer calls refresh() on every request. Without a lock, several requests arriving

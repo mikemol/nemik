@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W149: nemik-wake --alarms lists alarms that fired in a window on open waypoints."""
 
 import json

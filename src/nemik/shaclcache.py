@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W254: translate each SPARQL constraint of the shapes once per survey, not once per focus node.
 
 pyshacl runs a SPARQL-based constraint by handing rdflib the same query text for every focus node

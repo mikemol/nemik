@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W465: a card stored ready behind one open enabler is flagged; the umbrella rule keeps the rest."""
 
 from rdflib import Graph

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W415: graph.json cut into one piece per repo plus a fleet piece, and put back together.
 
 A change in one repo then changes that repo's piece (and the fleet piece when it moves a fleet-level

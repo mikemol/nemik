@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """Gate tests: the output contracts other workstreams read.
 
 luthen's W81 witness parses nemik-check's exit code and provenance lines; other repos' ticks read

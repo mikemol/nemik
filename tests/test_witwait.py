@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W258: nemik-witnesses --wait blocks on a witness and exits 0 held, 1 timeout, 2 unknown."""
 
 from __future__ import annotations

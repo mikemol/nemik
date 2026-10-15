@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W348: a repo with more needs-you operator asks than the declared cap gets one Warning."""
 
 from __future__ import annotations

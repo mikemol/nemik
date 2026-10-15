@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W157: calendars exported by the helper, read through mikemol-ics, temp files removed."""
 
 import stat

@@ -12,9 +12,6 @@ namespace-packages = ["tests", "tools", "checks"]
 preview = true
 select = ["ALL"]
 ignore = [
-    # The repo carries no licence file, so a copyright notice is a decision no agent can make: it is
-    # carded for the operator (nemik:W532) and this entry leaves with the answer.
-    "missing-copyright-notice",
     "incorrect-blank-line-before-class",
     "multi-line-summary-second-line",
     "missing-trailing-comma",
@@ -25,6 +22,9 @@ ignore = [
 "tests/test_*.py" = ["S101"]
 # Running the ratchet is the whole job of its test: an argv list, no shell, this interpreter.
 "tests/test_ruff_ratchet.py" = ["suspicious-subprocess-import", "subprocess-without-shell-equals-true"]
+
+[lint.flake8-copyright]
+notice-rgx = '(?i)SPDX-License-Identifier: Apache-2\.0[ \t]*\n#[ \t]*Copyright \(c\) \d{4} Mike Mol'
 
 [lint.flake8-pytest-style]
 fixture-parentheses = true

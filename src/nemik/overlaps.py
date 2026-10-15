@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """Fleet-wide touches[] overlap (nemik:W53), in the line shape of mtools' `--overlaps` (mtools:W118).
 
 `OVERLAP <tag>: <repo>:W<a>,<repo>:W<b>` for each tag that two or more live (ready or working)

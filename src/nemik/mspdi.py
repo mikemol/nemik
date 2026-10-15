@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W365: cards as MS Project XML (MSPDI), read by MS Project, ProjectLibre and GanttProject.
 
 A serializer over nemik.projection (W413), nothing more: each Task becomes a <Task>, each predecessor

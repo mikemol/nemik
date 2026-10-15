@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W157/W113: the operator's calendars, read host-side as event occurrences.
 
 For each configured collection the KF6 Akonadi helper (W147) exports one .ics into a private temp

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 from rdflib import Graph, Literal
 
 from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri

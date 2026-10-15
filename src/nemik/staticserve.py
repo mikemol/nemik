@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W502: serve a published snapshot as files, with no model, no graph and no rdflib.
 
 Operator ruling 2026-10-15 (W500): the pod serves prebuilt snapshots and does no graph work, so

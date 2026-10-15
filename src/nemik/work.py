@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W330: nemik-work W<n>: make W<n> the one working card.
 
 The lifecycle says exactly one card is working at a time (data/workflows.toml); nemik-check warns on

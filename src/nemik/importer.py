@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W367: nemik-import: tasks from another tool as mikemol-paths-forward commands, printed, never run.
 
 nemik never writes a queue (the one writer is mikemol-paths-forward); an import is a list of the writer's

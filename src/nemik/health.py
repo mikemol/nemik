@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W317: repo health, red / amber / green, from declared thresholds.
 
 Three signals per repo, each read live from the graph: the share of its open cards that are blocked, how

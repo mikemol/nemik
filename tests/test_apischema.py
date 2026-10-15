@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W440: the published schemas are the field manifest, written as JSON Schema."""
 
 import json

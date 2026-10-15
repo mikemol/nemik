@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W258: wait on a witness, so a session can background it and get one notification.
 
     nemik-witnesses --wait '<PromQL expression, or a Rego query over the observers>' --timeout 12h

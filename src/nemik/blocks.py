@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """Cross-workstream blocks, read from both sides.
 
 A waypoint blocked on another workstream is only actionable when both agents can name the same

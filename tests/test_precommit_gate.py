@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W521: the commit gate is one bazel target, and the hook refuses when it cannot run.
 
 The operator's rule (2026-10-06): a pre-commit should be a bazel build with the gate logic in a BUILD file, so

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W233: luthen's host-apply export is read, validated, and never taken on trust."""
 
 from __future__ import annotations

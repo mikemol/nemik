@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W502: the view works from a published snapshot and the file server alone.
 
 A snapshot is built by the static build from the fixture fleet, served by nemik-static (no model, no

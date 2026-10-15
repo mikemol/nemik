@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W495: how often a poll of the fleet's graph finds it changed, and how, walked from git history.
 
 The view polls every 60 s and redraws from scratch whenever the graph text differs. Whether to patch

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W193 (luthen-observability:W299): the Akonadi helper never starts Akonadi.
 
 Two akonadi_control core dumps (2026-10-02 and 2026-10-03, both in claude-nemik-*.scope) matched

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik-check: validate every workstream's queue against nemik's SHACL shapes.
 
 Exit 0 when every queue under the root translates with no sh:Violation; exit 1 otherwise.

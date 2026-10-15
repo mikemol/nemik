@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W414: hashes.json names every published data file with the sha256 of its bytes."""
 
 import hashlib

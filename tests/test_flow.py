@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W238: the laws of the conductance calculus and gcalculus's controls (gcalculus:W208)."""
 
 from __future__ import annotations

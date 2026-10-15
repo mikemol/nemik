@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W448: the TRS change log is ordered, creates before it modifies, and deletes what was dropped."""
 
 from rdflib import RDF, Graph, Literal, URIRef

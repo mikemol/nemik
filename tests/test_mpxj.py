@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W446: a real MSPDI reader, MPXJ, reads nemik-export and finds the links nemik wrote.
 
 Run under the pinned Temurin JRE with MPXJ's MSPDI closure (W445). MPXJ's own query command prints a

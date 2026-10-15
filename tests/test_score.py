@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W131: WV:1 vectors -> declared bands; unscored and invalid are visible, never a zero."""
 
 import json

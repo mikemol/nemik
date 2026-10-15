@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W326: a ready card overtaken by newer ones past the declared age is starved."""
 
 from __future__ import annotations

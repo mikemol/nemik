@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W172: luthen's withheld list, failing closed, withholding whole."""
 
 import json

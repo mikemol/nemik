@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W254: a SPARQL constraint is translated once per survey, with the same answers as before."""
 
 from __future__ import annotations

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W247: `nemik-check --realizability` prints each live waypoint's coordinate and residue."""
 
 from __future__ import annotations

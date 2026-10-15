@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik-metrics: print nemik's state as Prometheus text exposition (for vmagent's import).
 
     nemik_waypoints{repo,state}              waypoints per OSLC state (ready|working|blocked|done|dropped)

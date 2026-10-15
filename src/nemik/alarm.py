@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W129: when a waypoint's alarm fires, as one UTC instant.
 
 mtools stores each alarm as an RFC 5545 TRIGGER (mtools:W279), next to the times it counts from

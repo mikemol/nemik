@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """FFI waypoints (nemik:W58 rev 3, W60): a declared Rego witness over facts from a closed set of observers.
 
 Nothing in a queue is executed. A waypoint's `witness` is a Rego query over `input`. nemik's

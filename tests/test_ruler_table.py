@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W418: graph.json ships the ruler patterns from mtools' generator, enough for every line."""
 
 from pathlib import Path

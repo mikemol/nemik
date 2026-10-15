@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
 """nemik:W256: a waypoint blocked on `host:<id>` is held against luthen's host-apply export."""
 
 from __future__ import annotations
