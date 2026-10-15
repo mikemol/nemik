@@ -9,7 +9,7 @@ from rdflib.namespace import RDF, SKOS
 
 NEMIK = "https://github.com/mikemol/nemik/ns#"
 DATA = Path(__file__).resolve().parents[1] / "src" / "nemik" / "data" / "nemik.ttl"
-STEPS = ("landed", "installed", "enabled", "active", "applied")
+STEPS = ("landed", "installed", "held", "enabled", "active", "applied")
 
 
 def _graph() -> Graph:
@@ -18,8 +18,8 @@ def _graph() -> Graph:
     return graph
 
 
-def test_the_scheme_has_exactly_the_five_steps() -> None:
-    """Five concepts in the scheme, labelled with the five words."""
+def test_the_scheme_has_exactly_the_six_steps() -> None:
+    """Six concepts in the scheme, labelled with the six words."""
     graph = _graph()
     scheme = graph.resource(f"{NEMIK}ChangeLifecycle")
     members = [

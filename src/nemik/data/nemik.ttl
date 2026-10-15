@@ -30,7 +30,14 @@ nemik:Done a skos:Concept ; skos:inScheme nemik:WaypointStates ; skos:prefLabel 
 nemik:witnessedBy a rdf:Property ; rdfs:comment "The evidence that shows a lifecycle step has been reached (nemik:W551)." .
 nemik:ChangeLifecycle a skos:ConceptScheme ;
     skos:prefLabel "change lifecycle on the host" ;
-    skos:hasTopConcept nemik:Landed, nemik:Installed, nemik:Enabled, nemik:Active, nemik:Applied .
+    skos:hasTopConcept nemik:Landed, nemik:Installed, nemik:Held, nemik:Enabled, nemik:Active, nemik:Applied .
+# nemik:W554 (github-8f 2026-10-15): declared and installed but deliberately not enabled, used all day
+# for systemd units and drum rows ("held", "staged"); a real step between installed and enabled.
+nemik:Held a skos:Concept ; skos:inScheme nemik:ChangeLifecycle ; skos:prefLabel "held" ;
+    skos:altLabel "staged" ;
+    skos:definition "The change is installed on the host and deliberately not enabled." ;
+    nemik:extension true ;
+    nemik:witnessedBy "systemctl is-enabled reports disabled while the unit file is installed" .
 # nemik:W552: the OSLC CM 3.0 mapping, read from the published vocabulary (the 303 from
 # open-services.net/ns/cm# to docs.oasis-open-projects.org/oslc-op/cm/v3.0/errata01/os/change-mgt-vocab.html,
 # fetched 2026-10-15), not from memory. CM's states describe a change request's resolution
