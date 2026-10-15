@@ -585,6 +585,20 @@ def history_doc(
 def build_static(
     root: Path, out: Path, withheld: Path | None, private: bool = False
 ) -> list[Path]:
+    """nemik:W153 (see _build_static), inside the same per-build scope the live server's document is
+    built in (nemik:W412, W403): each graph indexed once and each flow solve answered once. The build
+    ran outside it, so the goals, the pieces and the TRS feeds asked rdflib 1.09 M times for facts the
+    index holds (a warm publish profiled at 94 s, a third of it in rank.goals)."""
+    from nemik.index import indexed
+    from nemik.salience import memo_audits
+
+    with memo_audits(), indexed():
+        return _build_static(root, out, withheld, private)
+
+
+def _build_static(
+    root: Path, out: Path, withheld: Path | None, private: bool = False
+) -> list[Path]:
     """nemik:W153: the gated static view under `out`. Every check runs before anything is written,
     so a refused build leaves `out` untouched; the withheld list itself is never copied into it.
 
@@ -671,27 +685,28 @@ def private_files(model: Model, out: Path) -> list[Path]:
     repos = {str(n["repo"]) for n in model.doc["nodes"] if n["repo"]}
     for repo in sorted(repos | {str(b["blocker"]) for b in rows}):
         put(f"inbound/{repo}.json", dump([b for b in rows if b["blocker"] == repo]))
-    put("graph.ttl", model.graph.serialize(format="turtle").encode())
+    # N-Triples, which is Turtle with one triple per line: the same RDF a /graph.ttl reader parses, without
+    # the grouping and sorting that made the Turtle serializer the costliest single write of the build
+    put("graph.ttl", model.graph.serialize(format="nt").encode())
     gauge = (
         "# TYPE nemik_snapshot_published_seconds gauge\n"
         f"nemik_snapshot_published_seconds {time.time():.0f}\n"
     )
     put("metrics", model.metrics() + gauge.encode())
-    put("source-key", key_digest(model.key).encode())
     return made
 
 
-def key_digest(key: tuple) -> str:
-    """A digest of the (path, mtime) key Model.refresh compares: what a published snapshot was built from."""
+def fleet_key(root: Path) -> str:
+    """The digest of every queue and ledger file's path and CONTENT now. Content, not mtime: an export
+    that rewrites a file without changing it (luthen's does, every minute) is not a change, and a build
+    costs real CPU (luthen-observability, nemik:W504: the builder rebuilds on a changed content hash)."""
     import hashlib
 
-    return hashlib.sha256(repr(key).encode()).hexdigest()
-
-
-def fleet_key(root: Path) -> str:
-    """The digest of every queue and ledger file's path and mtime now (Model.sources, same order)."""
-    paths = [p for name in (QUEUE, LEDGER) for _, p in workstream_files(root, name)]
-    return key_digest(tuple((str(p), p.stat().st_mtime_ns) for p in paths))
+    digest = hashlib.sha256()
+    for name in (QUEUE, LEDGER):
+        for _, path in workstream_files(root, name):
+            digest.update(str(path).encode() + b"\0" + path.read_bytes() + b"\0")
+    return digest.hexdigest()
 
 
 def publish(
@@ -702,6 +717,8 @@ def publish(
     returned to the OS when it exits (nemik:W500: rebuilding in a long-lived process left ~20 MB of
     fragmented heap per build). Returns None when no queue or ledger changed since current/ was built.
     The last `keep` snapshots stay, so a request already reading one is not pulled out from under it."""
+    from nemik import cachestore
+
     key = fleet_key(root)
     live = base / "current" / "source-key"
     if live.exists() and live.read_text() == key:
@@ -709,11 +726,16 @@ def publish(
     base.mkdir(parents=True, exist_ok=True)
     stamp = time.strftime("%Y%m%dT%H%M%SZ", time.gmtime())
     snap = base / f"snap-{stamp}-{os.getpid()}"
+    cachestore.load(
+        base / ".cache"
+    )  # nemik:W518: start warm, as the long-lived server was
     try:
         build_static(root, snap, withheld, private=True)
+        (snap / "source-key").write_text(key)
     except BaseException:
         shutil.rmtree(snap, ignore_errors=True)
         raise
+    cachestore.save(base / ".cache")
     link = base / f".current-{os.getpid()}"
     link.unlink(missing_ok=True)
     link.symlink_to(snap.name)

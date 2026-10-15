@@ -21,9 +21,19 @@ from rdflib.term import Node
 
 Result = tuple[str, str]  # (severity IRI, message)
 
-_LAST: dict[
-    str, tuple[frozenset[tuple[Node, Node, Node]], dict[Node, list[Result]]]
-] = {}
+Held = dict[str, tuple[frozenset[tuple[Node, Node, Node]], dict[Node, list[Result]]]]
+_LAST: Held = {}
+
+
+def export_cache() -> Held:
+    """nemik:W518: the last runs, for a publisher to keep between its short-lived processes."""
+    return dict(_LAST)
+
+
+def import_cache(held: Held) -> None:
+    """nemik:W518: restore runs a publisher kept: the next findings() diffs against them, so only what
+    changed since is validated again (a graph with blank nodes would revalidate every one of them)."""
+    _LAST.update(held)
 
 
 def _results(data: Graph, shapes: Graph) -> dict[Node, list[Result]]:

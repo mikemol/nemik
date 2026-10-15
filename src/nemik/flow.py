@@ -196,6 +196,19 @@ _SOLVES: OrderedDict[tuple, Flow] = OrderedDict()
 _SOLVES_MAX = 512
 
 
+def export_solves() -> dict[tuple, Flow]:
+    """nemik:W518: the cached solves, for a publisher to keep between its short-lived processes."""
+    return dict(_SOLVES)
+
+
+def import_solves(held: dict[tuple, Flow]) -> None:
+    """nemik:W518: restore solves a publisher kept; the bound still holds, oldest dropped first."""
+    for key, flow in held.items():
+        _SOLVES[key] = flow
+    while len(_SOLVES) > _SOLVES_MAX:
+        _SOLVES.popitem(last=False)
+
+
 def _solve(
     demand: Mapping[str, Fraction],
     front: set[str],

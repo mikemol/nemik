@@ -25,6 +25,8 @@ COPY checks ./checks
 # pytest stopped at collection (exit 2), and no image was pushed from 3d73711 on for ~30 h.
 COPY docs ./docs
 COPY tools ./tools
+# nemik:W504: test_deploy_manifest holds the pod's shape to the constraints luthen-observability agreed.
+COPY deploy ./deploy
 COPY BUILD.bazel Containerfile ./
 # The hooks wiring (mikemol-hook-inbound-asks, mikemol-hook-nemik-check) is tested against the settings file.
 COPY .claude/settings.json ./.claude/settings.json

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 519,
+  "counter": 520,
   "waypoints": [
     {
       "symbol": "W1",
@@ -10051,11 +10051,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Today luthen's withheld list is applied inside nemik's static build (withheld.py, fail closed, withhold whole never scrub). Move the decision to the repos: each repo's own writer produces an export of what may leave it (its policy, its rules), and nemik and its pod can only read exports, so the pod cannot see what must not pass. Design the export format and the migration of luthen's withheld list into per-repo declarations; keep fail-closed (no export means nothing published).",
-      "evidence": "",
+      "evidence": "2026-10-15: 2026-10-15: nemik's README Hosting section already states the intended boundary: mount only the flat queue export read-only at /export, not a whole source tree. W516 makes that export the repos' own product (their policy decides what is in it), which matches the operator's ruling that the pod should not see data that must not pass.",
       "issued_at": "2026-10-15T12:08:11Z",
       "minted_during": "tick",
       "caused_by": "operator",
-      "last_worked": null,
+      "last_worked": "2026-10-15T12:59:37Z",
       "ticks_blocked": 0,
       "weight": 9
     },
@@ -10116,13 +10116,30 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "From the dependency map: the independent readers (mtools hooks build_failure commit_kata inbound_asks nemik_check revendor_apply standing_facts tick_stop work_claims_hook, and katas) parse paths-forward.json with their own code. Define one machine-readable schema (state, ledger line, marks line, versioned) and a fixture set; the writer emits against it, nemik reads against it, and each independent reader's tests validate the same fixture, so a format change fails every reader's test at once. This precedes any code move (W517). Decide where the schema lives (nemik after promotion, mtools until then).",
-      "evidence": "",
+      "evidence": "2026-10-15: 2026-10-15 operator reminder: nemik is derived from existing standards (README): OSLC Change Management 3.0 (each waypoint an oslc_cm:ChangeRequest), W3C PROV (ledger entries are prov:Activity, caused-by is prov:wasInformedBy), SHACL (queue rules in src/nemik/data/shapes.ttl, checked by nemik-check), Prometheus/OpenTelemetry-style metrics, ForgeFed/ActivityPub designed for messages between workstreams; also in use: RDF/Turtle (graph.ttl), iCalendar RFC 5545 (VTODO, VALARM, RRULE via nemik-ics and calendar-write), Rego/OPA for witnesses. Consequence for this card: do NOT invent a new JSON schema. The queue contract should be expressed in those standards: the OSLC CM and PROV mapping as the vocabulary and the SHACL shapes as the validator, with each independent reader's tests validating fixtures against shapes.ttl.",
       "issued_at": "2026-10-15T12:35:57Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": null,
+      "last_worked": "2026-10-15T12:59:36Z",
       "ticks_blocked": 0,
       "weight": 10
+    },
+    {
+      "symbol": "W520",
+      "title": "nemik-check accepts nemik-witnesses as a resolvable party for a card that carries a witness",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-15: blocks.annotate: blocked_on 'nemik-witnesses' is not an unresolved blocker when the card carries a witness (its weather hash is in the graph); a card with no witness, or a witnessed card blocked on anything else unresolvable, is still flagged. tests/test_witness_party.py (3)",
+      "issued_at": "2026-10-15T12:50:27Z",
+      "minted_during": "tick",
+      "caused_by": "luthen-observability:W1054",
+      "last_worked": "2026-10-15T12:50:39Z",
+      "ticks_blocked": 0,
+      "completed": "20261015T125039Z"
     }
   ],
   "residue": [
@@ -10192,10 +10209,7 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": {
-    "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-15T12:46:35Z"
-  },
+  "lock": null,
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }

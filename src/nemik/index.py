@@ -9,14 +9,19 @@ the graph's identity and size, which catches the additions a build makes (assume
 
 from __future__ import annotations
 
+import weakref
 from collections.abc import Iterator
 from contextlib import contextmanager
 from dataclasses import dataclass, field
+from typing import TYPE_CHECKING
 
 from rdflib import Graph
 from rdflib.term import Node
 
 from nemik.adapter import NEMIK, OSLC_CM
+
+if TYPE_CHECKING:
+    from nemik.cards import Card
 
 
 @dataclass
@@ -28,6 +33,9 @@ class Index:
     waited_by: dict[Node, set[Node]] = field(default_factory=dict)
     # a whole-graph answer asked more than once per build (once per repo's health)
     operator_asks: list[dict[str, object]] | None = None
+    # nemik:W518: every card as plain data, read from the graph once (health and critical asked for it
+    # 31 times in one build, 10 s of a warm publish)
+    cards: dict[str, Card] | None = None
 
     def successors(self, node: Node) -> set[Node]:
         return self.enables.get(node, set()) | self.waited_by.get(node, set())
@@ -40,7 +48,7 @@ class Index:
         return state in self.state.get(node, ())
 
 
-_SCOPE: dict[int, tuple[Graph, int, Index]] | None = None
+_SCOPE: dict[int, tuple[weakref.ref[Graph], int, Index]] | None = None
 
 
 @contextmanager
@@ -59,7 +67,7 @@ def index(g: Graph) -> Index | None:
     if _SCOPE is None:
         return None
     hit = _SCOPE.get(id(g))
-    if hit is not None and hit[0] is g and hit[1] == len(g):
+    if hit is not None and hit[0]() is g and hit[1] == len(g):
         return hit[2]
     ix = Index()
     for s, o in g.subject_objects(OSLC_CM.state):
@@ -68,5 +76,13 @@ def index(g: Graph) -> Index | None:
         ix.enables.setdefault(s, set()).add(o)
     for s, o in g.subject_objects(NEMIK.waitsFor):
         ix.waited_by.setdefault(o, set()).add(s)
-    _SCOPE[id(g)] = (g, len(g), ix)
+    scope, key = _SCOPE, id(g)
+
+    def forget(dead: weakref.ref[Graph]) -> None:
+        # nemik:W518: the entry goes with its graph. A strong reference kept every copy a build made
+        # (one per repo) alive to the end of the scope: +140 MB at the peak of a publish.
+        if key in scope and scope[key][0] is dead:
+            del scope[key]
+
+    scope[key] = (weakref.ref(g, forget), len(g), ix)
     return ix

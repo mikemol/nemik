@@ -42,7 +42,21 @@ class Card:
 
 
 def cards(g: Graph) -> dict[str, Card]:
-    """Every card in `g`, by cite: the only place this layer touches rdflib."""
+    """Every card in `g`, by cite: the only place this layer touches rdflib.
+
+    nemik:W518: inside one build's `indexed()` scope it is read once per graph and shared (a Card is
+    frozen, the dict is copied), where health and critical each asked for it again."""
+    from nemik.index import index
+
+    ix = index(g)
+    if ix is None:
+        return _read(g)
+    if ix.cards is None:
+        ix.cards = _read(g)
+    return dict(ix.cards)
+
+
+def _read(g: Graph) -> dict[str, Card]:
     nodes = set(g.subjects(OSLC_CM.state, None))
     out: dict[str, Card] = {}
     for n in nodes:

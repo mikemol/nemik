@@ -42,11 +42,9 @@ def single_writer_boundary():
     # adapter.py is the ONE module that parses the state file (through mtools' store.load); no
     # other module re-implements that parse.
     mods = _modules()
-    readers = [
-        name
-        for name, text in mods.items()
-        if "store.load(" in text or "store.load (" in text
-    ]
+    # The module `store`, not any name ending in it: nemik.cachestore (W518) has its own load().
+    call = re.compile(r"(?<![A-Za-z0-9_])store\.load\s?\(")
+    readers = [name for name, text in mods.items() if call.search(text)]
     assert readers == ["adapter"], f"store.load() called outside adapter.py: {readers}"
 
 
@@ -212,9 +210,11 @@ def no_versioned_schema():
 def nemik_never_writes_a_queue():
     # mikemol.pathsforward.store exposes save()/write_atomic() alongside load(); nemik's own
     # source never calls either, so this package is read-only with respect to the fleet's state.
+    # Word-bounded: nemik.cachestore.save() (W518) writes the build's own caches, never a queue.
     for name, text in _modules().items():
         for writer in ("store.save(", "store.write_atomic(", "ledger.write("):
-            assert writer not in text, (
+            call = re.compile(r"(?<![A-Za-z0-9_])" + re.escape(writer))
+            assert not call.search(text), (
                 f"{name}.py calls {writer} -- nemik is no longer read-only"
             )
 

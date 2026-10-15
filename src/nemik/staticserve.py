@@ -170,7 +170,8 @@ def handler(root: Path) -> type[BaseHTTPRequestHandler]:
     return H
 
 
-def main(argv: list[str] | None = None) -> None:
+def parser() -> argparse.ArgumentParser:
+    """The command line, separate from main so a deployment manifest can be checked against it."""
     ap = argparse.ArgumentParser(
         prog="nemik-static",
         description="serve a published nemik snapshot as files (W502)",
@@ -180,7 +181,11 @@ def main(argv: list[str] | None = None) -> None:
     )
     ap.add_argument("--bind", default="127.0.0.1")
     ap.add_argument("--port", type=int, default=8750)
-    args = ap.parse_args(argv)
+    return ap
+
+
+def main(argv: list[str] | None = None) -> None:
+    args = parser().parse_args(argv)
     ThreadingHTTPServer((args.bind, args.port), handler(args.root)).serve_forever()
 
 

@@ -2,12 +2,14 @@
 
 import json
 import os
+import shutil
 import subprocess
+import time
 from pathlib import Path
 
 import installed
 
-from nemik.serve import fleet_key, key_digest, publish
+from nemik.serve import fleet_key, publish
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
 
@@ -84,6 +86,36 @@ def test_the_publish_command_runs_in_its_own_process(tmp_path: Path) -> None:
     assert again.stdout.strip() == "unchanged"
 
 
-def test_the_key_digest_is_stable_for_a_key() -> None:
-    assert key_digest((("a", 1),)) == key_digest((("a", 1),))
-    assert key_digest((("a", 1),)) != key_digest((("a", 2),))
+def _copy_fleet(tmp_path: Path) -> Path:
+    root = tmp_path / "fleet"
+    shutil.copytree(FLEET, root)
+    return root
+
+
+def test_a_rewrite_that_changes_nothing_is_not_a_change(tmp_path: Path) -> None:
+    # luthen's export rewrites its files every minute; a build costs real CPU, so only CONTENT counts
+    root = _copy_fleet(tmp_path)
+    assert publish(root, tmp_path / "pub", None) is not None
+    files = list(root.glob("*/paths-forward.*"))  # the export layout
+    assert files, "the fixture fleet has no queue or ledger files to touch"
+    for queue in files:
+        os.utime(queue, ns=(time.time_ns(), time.time_ns() + 10**9))
+    assert publish(root, tmp_path / "pub", None) is None
+
+
+def test_a_change_of_content_is_published(tmp_path: Path) -> None:
+    root = _copy_fleet(tmp_path)
+    first = publish(root, tmp_path / "pub", None)
+    assert first is not None
+    queue = next(root.glob("*/paths-forward.json"))
+    queue.write_text(queue.read_text() + "\n")
+    assert fleet_key(root) != (first / "source-key").read_text()
+    second = publish(root, tmp_path / "pub", None)
+    assert second is not None and second != first
+
+
+def test_a_publish_keeps_the_build_caches_beside_the_snapshots(tmp_path: Path) -> None:
+    # W518: the next fresh process starts warm from these
+    assert publish(FLEET, tmp_path / "pub", None) is not None
+    cache = tmp_path / "pub" / ".cache" / "build-caches.pickle"
+    assert cache.is_file() and cache.stat().st_size > 0
