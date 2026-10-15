@@ -30,6 +30,7 @@ paperkit = { git = "https://github.com/mikemol/paperkit.git", rev = "b5877102af3
 nemik-check = "nemik.check:main"
 nemik-metrics = "nemik.metrics:main"
 nemik-serve = "nemik.serve:main"
+nemik-static = "nemik.staticserve:main"
 nemik-days = "nemik.calendars:days_main"
 nemik-calendar-write = "nemik.calwrite:main"
 nemik-history = "nemik.history:main"

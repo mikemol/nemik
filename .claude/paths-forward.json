@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 501,
+  "counter": 513,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 265
+      "ticks_blocked": 266
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 85,
+      "ticks_blocked": 86,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 87,
+      "ticks_blocked": 88,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T23:37:26Z",
-      "ticks_blocked": 117,
+      "ticks_blocked": 118,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 114,
+      "ticks_blocked": 115,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 91,
+      "ticks_blocked": 92,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 107,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 107,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 107,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 107,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 107,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 107,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 107,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 107,
       "completed": null
     },
     {
@@ -6426,7 +6426,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T06:56:21Z",
-      "ticks_blocked": 32,
+      "ticks_blocked": 33,
       "completed": null
     },
     {
@@ -6450,7 +6450,7 @@
       "minted_during": "tick",
       "caused_by": "W337",
       "last_worked": "2026-10-13T07:54:43Z",
-      "ticks_blocked": 31,
+      "ticks_blocked": 32,
       "weight": 5,
       "completed": null
     },
@@ -6560,7 +6560,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 7
     },
     {
       "symbol": "W344",
@@ -6624,7 +6624,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 81,
+      "ticks_blocked": 82,
       "completed": null
     },
     {
@@ -6762,7 +6762,7 @@
       "caused_by": "W346",
       "last_worked": "2026-10-13T17:43:16Z",
       "ticks_blocked": 0,
-      "weight": 3,
+      "weight": 5,
       "completed": null
     },
     {
@@ -6785,7 +6785,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 5
     },
     {
       "symbol": "W354",
@@ -6807,7 +6807,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 5
     },
     {
       "symbol": "W355",
@@ -6829,7 +6829,7 @@
       "caused_by": "W346",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 3
+      "weight": 5
     },
     {
       "symbol": "W356",
@@ -7032,7 +7032,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 20,
       "completed": null
     },
     {
@@ -7145,7 +7145,7 @@
       "minted_during": "interrupt",
       "caused_by": "W364",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 1
     },
     {
       "symbol": "W370",
@@ -7169,7 +7169,7 @@
       "minted_during": "interrupt",
       "caused_by": "W364",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 1
     },
     {
       "symbol": "W371",
@@ -7193,7 +7193,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 5
+      "weight": 8
     },
     {
       "symbol": "W372",
@@ -7639,7 +7639,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 42,
+      "ticks_blocked": 43,
       "completed": null
     },
     {
@@ -7663,7 +7663,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 57,
+      "ticks_blocked": 58,
       "completed": null
     },
     {
@@ -7711,7 +7711,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-13T03:46:31Z",
-      "ticks_blocked": 57,
+      "ticks_blocked": 58,
       "completed": null
     },
     {
@@ -7735,7 +7735,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 57,
+      "ticks_blocked": 58,
       "completed": null
     },
     {
@@ -8292,7 +8292,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -8313,7 +8313,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T05:38:02Z",
-      "ticks_blocked": 36,
+      "ticks_blocked": 37,
       "completed": null
     },
     {
@@ -8334,7 +8334,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 38,
+      "ticks_blocked": 39,
       "completed": null
     },
     {
@@ -8598,7 +8598,7 @@
       "minted_during": "tick",
       "caused_by": "W338",
       "last_worked": "2026-10-13T08:13:31Z",
-      "ticks_blocked": 31,
+      "ticks_blocked": 32,
       "completed": null
     },
     {
@@ -8825,7 +8825,7 @@
       "minted_during": "tick",
       "caused_by": "W426",
       "last_worked": "2026-10-13T13:18:45Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 17,
       "completed": null
     },
     {
@@ -8974,7 +8974,7 @@
       "minted_during": "tick",
       "caused_by": "W458",
       "last_worked": "2026-10-13T19:10:34Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "completed": null
     },
     {
@@ -9050,7 +9050,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T19:10:41Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 4,
       "weight": 3,
       "completed": null
     },
@@ -9105,7 +9105,7 @@
       "caused_by": "operator",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 4
+      "weight": 7
     },
     {
       "symbol": "W467",
@@ -9142,7 +9142,7 @@
       "minted_during": "tick",
       "caused_by": "W463",
       "last_worked": "2026-10-13T20:15:42Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "weight": 2,
       "completed": null
     },
@@ -9163,7 +9163,7 @@
       "caused_by": "W463",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 4
     },
     {
       "symbol": "W470",
@@ -9182,7 +9182,7 @@
       "caused_by": "W463",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 4
     },
     {
       "symbol": "W471",
@@ -9201,7 +9201,7 @@
       "caused_by": "W463",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 4
     },
     {
       "symbol": "W472",
@@ -9220,7 +9220,7 @@
       "caused_by": "W463",
       "last_worked": null,
       "ticks_blocked": 0,
-      "weight": 2
+      "weight": 4
     },
     {
       "symbol": "W473",
@@ -9383,7 +9383,8 @@
       "minted_during": "tick",
       "caused_by": "W468",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 3
     },
     {
       "symbol": "W482",
@@ -9452,7 +9453,8 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 2
     },
     {
       "symbol": "W486",
@@ -9470,7 +9472,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-13T22:03:19Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -9487,7 +9489,8 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-13T22:08:28Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W488",
@@ -9503,7 +9506,8 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-13T22:10:20Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W489",
@@ -9521,7 +9525,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-13T22:08:26Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 1,
       "completed": null
     },
     {
@@ -9532,13 +9536,14 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "first slice: nemik-check rows as advice nodes, identity (tool, rule, repo, subject card) to match mtools:W1140's entries (re-run updates last_run; nemik's first-seen agrees); resolution by the next reading: ACTED (row cleared), REJECTED (the queue's advice list carries a mtools:W1141 --reject-advice entry for that (rule, card) with a reason), IGNORED (persists, nothing recorded); pathsforward --rejected/--unchanged are commit-message fields about the WORK and are NOT advice rejections (a test pins the difference); series per (tool, rule, repo) with ignored age in luthen-observability:W905's registry, one panel by repo",
-      "evidence": "2026-10-13: 2026-10-13 github-8f: REJECTED reads mtools:W1141's --reject-advice field, never --rejected/--unchanged (commit-message fields)",
+      "next_bounded_step": "after W500: read each queue's advice list (nemik.cards-style reader) into advice nodes with (tool, rule, repo, subject); resolution open/rejected/applied comes from the row's status, not inferred; then the nemik-check rows as a second source",
+      "evidence": "2026-10-13: 2026-10-13 github-8f: REJECTED reads mtools:W1141's --reject-advice field, never --rejected/--unchanged (commit-message fields) | 2026-10-15: 2026-10-15 mtools letter (inbox/2026-10-15-mtools-advice-list-in-the-queue.md): mtools:W1140 landed (b21999d, 2cebfa1, 4821b65): a TOP-LEVEL 'advice' list in the state file, one row per (tool, rule, subject, action) with first_run, last_run, status open|rejected|applied and a reason on a rejected row; written by --block-matching, --block-behind-open and --update-many dry runs; --reject-advice TOOL RULE REASON rejects every open row of a tool and rule in one command. The rows carry no repo: the file read is the repo. mtools has run it only in its own suite",
       "issued_at": "2026-10-13T22:16:32Z",
       "minted_during": "interrupt",
       "caused_by": "github-8f",
-      "last_worked": "2026-10-13T22:19:04Z",
-      "ticks_blocked": 0
+      "last_worked": "2026-10-15T11:45:15Z",
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W491",
@@ -9554,7 +9559,8 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W492",
@@ -9574,7 +9580,8 @@
       "minted_during": "interrupt",
       "caused_by": "github:W37",
       "last_worked": "2026-10-14T02:42:53Z",
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W493",
@@ -9590,7 +9597,8 @@
       "minted_during": "interrupt",
       "caused_by": "W476",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 1
     },
     {
       "symbol": "W494",
@@ -9688,7 +9696,7 @@
     {
       "symbol": "W499",
       "title": "Incremental redraw for the treemap and for repo boxes and lanes that appear or go",
-      "status": "working",
+      "status": "ready",
       "enables": [],
       "touches": [],
       "blocked_on": [],
@@ -9698,7 +9706,7 @@
       "issued_at": "2026-10-14T14:09:06Z",
       "minted_during": "interrupt",
       "caused_by": "W494",
-      "last_worked": "2026-10-14T14:09:07Z",
+      "last_worked": "2026-10-15T11:45:17Z",
       "ticks_blocked": 0,
       "completed": null
     },
@@ -9716,13 +9724,15 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Reproduce from a fresh start, sample RSS per phase (cache, graph, serve loop) to find what is unbounded, bound it in the code, then size the limit from an uncensored working-set series (no typed number). Witness: increase of kube_pod_container_status_restarts_total in namespace nemik over 6h is 0. Evidence from luthen-observability W1051: working-set p99 over 12h equals the limit (series censored), 133 readiness and 221 liveness probe failures in 12h.",
-      "evidence": "2026-10-15: 2026-10-15 luthen census (read-only): the two OLD nemik pods (Terminating, stale shim) still run nemik-serve, one at RSS 728 MB after about 40 h (started 2026-10-13 19:46), so four nemik servers share the host. Growth data point: the new pods reach about 800 MB within an hour of start, the old one sat at 728 MB after 40 h, so growth may be driven by load or startup work (cache fill) and not by time alone; the old pods are outside the cgroup limit that OOM-kills the new ones. Orphans cost about 1.4 GB RSS.",
+      "next_bounded_step": "W502 first: nemik-serve --serve DIR as a file server with no model and no rdflib import",
+      "evidence": "2026-10-15: 2026-10-15 luthen census (read-only): the two OLD nemik pods (Terminating, stale shim) still run nemik-serve, one at RSS 728 MB after about 40 h (started 2026-10-13 19:46), so four nemik servers share the host. Growth data point: the new pods reach about 800 MB within an hour of start, the old one sat at 728 MB after 40 h, so growth may be driven by load or startup work (cache fill) and not by time alone; the old pods are outside the cgroup limit that OOM-kills the new ones. Orphans cost about 1.4 GB RSS. | 2026-10-15: 2026-10-15 operator direction to nemik: design the web view for static serving (assume the pod must sustain orders of magnitude more requests at orders of magnitude more graph churn). Existing lever: nemik-serve --static OUT --withheld FILE already writes the merged graph as static files behind luthen's withheld list (exit 2 and nothing written when the list is missing). The memory fix may therefore be structural, not a leak hunt: build the view from the queues on an event (a queue changed) into static files, serve them with a tiny fileserver whose memory does not depend on graph size, keep the live graph engine out of the request path. Measure first (RSS per phase, W500 original step), then choose; keep the withheld-list refusal and the no-literal-address rule. | 2026-10-15: 2026-10-15 measured (scratchpad rss_rebuilds.py, leak_types.py; fleet 6774 nodes, 192,980 triples, payload 4.8 MB): forcing Model.refresh() repeatedly in one process: RSS 487 MB after the first build, 722 after the second, ~800 by the third, and 780 MB AFTER a full gc at rebuild 8, still climbing ~20 MB per rebuild; the pod rebuilds about once a minute (luthen's export changes every minute). Python object counts are FLAT (1.766 M tracked objects, 33 Graph objects, solves cache 24-26 entries ~0.5 MB), so this is allocator fragmentation from building and freeing a ~190k-triple graph repeatedly, not a retained object; bounding it in the same process is the wrong lever. Operator ruling 2026-10-15: the pod becomes ~static serving; request count and graph churn must scale independently (a request is a file read, churn is a build rate, not a per-request cost); this is also why py2many/TypeScript was explored (W422): compute moves to the client or the build. Chain: W502 file server, W503 atomic publish in a fresh process, W504 the pod's shape, W505 the uncensored series, W506 build outside the cluster | 2026-10-15: CORRECTION 2026-10-15 (host, same day): the operator does NOT want intermediate artifacts. Withdraw the suggestion to build static files from the queues on an event. Keep the direction (memory independent of graph size and request count) but without a build step: serve each response as a pure function of the source queues, computed lazily per request and streamed (no resident merged graph), with HTTP validators keyed by the source files' content hashes (ETag and 304) so churn and repeated requests cost almost nothing, and any memo bounded and keyed by those hashes. The --static mode stays as it is, not a new dependency. | 2026-10-15: 2026-10-15 operator: the cluster already runs valkey, so the memo lives there, not in the pod. Design constraints from the fleet rules: key = content hash of the source queue files, so there is no invalidation protocol and no TTL (no wall-clock expiry); bounded by valkey maxmemory with an LRU eviction policy, so the cache is never the source of truth and losing it only costs a recompute (a recovery path, not data); if valkey is unreachable nemik degrades to computing without a memo and stays up; the pod keeps no resident graph. Open for luthen-observability: which valkey instance and namespace to use, its memory budget given the tier pressure, and the network policy for nemik to reach it. | 2026-10-15: CORRECTION 2026-10-15 (operator): use the EXISTING valkey instance, no new one and no budget negotiation: its memory is already dynamically managed. Put TTLs on everything nemik writes there (TTL is expiry of cache entries, not a timeout on work, so it does not conflict with the no-wall-clock-timeouts rule; correctness never depends on it because keys are content hashes). Withdraw my earlier 'no TTLs' and 'maxmemory plus LRU' constraints: the instance's own management governs eviction. Remaining for luthen-observability only: the key prefix convention and the declared network path from the nemik namespace, no literal address on a card. | 2026-10-15: 2026-10-15 luthen answers (luthen-observability:W1066): the existing valkey is BuildBuddy's scheduler store, Service cache in the buildbuddy namespace on 6379; no NetworkPolicy in buildbuddy or nemik (default allow), reach it by service name; W1066 declares an endpoints.json row valkey so nemik resolves it by name. Key prefix nemik:memo:<content-hash>, registered in valkey_keys.json (one owner per prefix, overlap test). CAUTION: this store evicted live BuildBuddy TASK records under allkeys-lfu on 2026-09-25 at 256 MB, so every nemik key MUST carry a TTL and every value a size cap so the memo cannot crowd the scheduler; today 1.5 MB of 2 GB used, valkey_evicting already alerts. | 2026-10-15: 2026-10-15 operator: salt the memo key with a checksum of the key name and the semantic version. Host note on sufficiency: sound if the key covers EVERYTHING the response depends on: (1) content hashes of every source queue file read, (2) the request shape (view, filters, format), (3) the withheld list's own hash, because a response filtered by a different withheld list must never be served from the cache of another (a leak path, not a staleness bug), (4) the code identity: a semantic version only if it is bumped on every behavior change, otherwise add the image digest or tag sha, since dev builds share a version. Hash an unambiguous encoding (length-prefixed fields). Never put a withheld response behind a key a less-privileged request could compute. Test: change each input in turn and assert the key changes. | 2026-10-15: CORRECTION 2026-10-15 (operator): request filters do NOT go in the cache key. They are cheap and the highest-entropy input, so keying on them defeats the cache. Cache only the expensive filter-independent result per view and format, and apply the request filters at response time. Distinction kept: the WITHHELD list is policy, not a request filter. It is applied before anything is stored and stays in the key (its hash), because the valkey instance has no network policy and holds the value in clear, so a withheld record must never be written there. Withdraw the earlier 'request shape: view, filters, format' wording: the key is source hashes, view, format, withheld-list hash and code identity. | 2026-10-15: DIRECTION 2026-10-15 (operator): get the data to the client and let the client do the work; no smarts in the server. Supersedes the per-view and per-format server computation in earlier notes: the server returns the source data (as the queues already store it) with ETag and 304 from the source files' content hashes, and the client does views, filters, sorting, grouping and formatting. The ONE server-side duty that stays is the withheld policy, because it is a security boundary and withheld data must never reach the client or valkey. Memo (if any is still needed) is just the withheld-applied payload keyed by source hashes, withheld-list hash and code identity, with TTL and size cap. Measure RSS per phase first; expect the pod to shrink to a file-reading handler.",
       "issued_at": "2026-10-15T03:50:31Z",
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W1051",
-      "last_worked": "2026-10-15T05:24:04Z",
-      "ticks_blocked": 0
+      "last_worked": "2026-10-15T11:58:44Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "weight": 6
     },
     {
       "symbol": "W501",
@@ -9743,6 +9753,233 @@
       "issued_at": "2026-10-15T04:53:40Z",
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W1054",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "weight": 9
+    },
+    {
+      "symbol": "W502",
+      "title": "nemik-serve --serve DIR: a static file server with no model, conditional requests from hashes.json, /metrics from the build",
+      "status": "done",
+      "enables": [
+        "W500"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "W503: publish a snapshot atomically from a fresh process",
+      "evidence": "2026-10-15: src/nemik/staticserve.py + console script nemik-static (pyproject, BUILD): stdlib only (a test holds it to never importing rdflib); serves ROOT/current if a publisher flips that symlink else ROOT; ETag = the sha256 hashes.json lists (304 on If-None-Match), size+mtime otherwise; files streamed in 64 KiB chunks; path traversal and symlink escapes refused; /healthz (liveness) and /metrics from a file the build writes (503 until one exists: readiness). Measured on a real 17-repo snapshot (76 files): 80,000 requests, 7.3 GB served, ~1,120 req/s over 16 keep-alive connections, p50 5.6 ms, p99 45 ms, server RSS 29.7 -> 33.1 MB (the dynamic server: ~800 MB, +20 MB per rebuild). tests/test_staticserve.py (6) and tests/test_static_view.py (the page draws from the files alone, in a browser)",
+      "issued_at": "2026-10-15T11:51:58Z",
+      "minted_during": "tick",
+      "caused_by": "W500",
+      "last_worked": "2026-10-15T12:00:00Z",
+      "ticks_blocked": 0,
+      "completed": "20261015T120000Z"
+    },
+    {
+      "symbol": "W503",
+      "title": "nemik-serve --publish ROOT: build a snapshot in a fresh process and flip current/ atomically",
+      "status": "working",
+      "enables": [
+        "W500"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "build_static into ROOT/snap-<stamp>/, then rename a temp symlink over ROOT/current (atomic), keep the last two snapshots; the process exits, so every build's memory is returned; the private build passes an empty withheld list (the pod is not the public view); adds the private extras the pod served live (operator.json, inbound/<repo>.json, graph.ttl) as files; unchanged piece hashes mean unchanged files, so a quiet fleet costs a build and no downstream change",
+      "evidence": "",
+      "issued_at": "2026-10-15T11:51:59Z",
+      "minted_during": "tick",
+      "caused_by": "W500",
+      "last_worked": "2026-10-15T12:00:01Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W504",
+      "title": "The pod's shape: a builder container loops --publish into a shared volume, a small server container runs --serve",
+      "status": "ready",
+      "enables": [
+        "W500"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "deploy/deployment.yaml: two containers sharing an emptyDir; builder: sh loop of nemik-serve --publish every ~60 s (fresh process each cycle), memory limit for a build's peak; server: nemik-serve --serve with a small limit; readiness and liveness on the server's /metrics; the export PVC mounted read-only into the builder only; a push is a deploy, so read the rollout back through nemik-pins and the restart counter",
+      "evidence": "",
+      "issued_at": "2026-10-15T11:52:00Z",
+      "minted_during": "tick",
+      "caused_by": "W500",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W505",
+      "title": "Size the pod's limits from an uncensored working-set series, the server flat and the builder's peak per cycle",
+      "status": "ready",
+      "enables": [
+        "W500"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "after the new shape runs a day: server RSS flat, builder peak per cycle, restarts over 6h = 0 (W500's witness); set requests and limits from the series (no typed number); tell luthen-observability so its W1051 witness reads the new containers",
+      "evidence": "",
+      "issued_at": "2026-10-15T11:52:01Z",
+      "minted_during": "tick",
+      "caused_by": "W500",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W506",
+      "title": "Federated client assembly: the browser builds the view from the sources its viewer names, no central node required",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "W507",
+        "W508",
+        "W509",
+        "W510",
+        "W511"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "umbrella: lands when W507-W511 do. W502-W505 (a static pod that serves one source) stay: they fix the OOM now and make nemik one source among many",
+      "evidence": "2026-10-15: 2026-10-15 operator: the snapshots can be emergent and incremental, and the client can construct them from multiple sources; our data comes out of one node only by accident. What if the repos were federated ActivityPub servers, or plain HTTP fetches from GitHub, or any compliant source? The user lives in the browser, not the server. Today's published forms are already source-shaped: graph/<repo>.json pieces with hashes.json (W414-W416), per-repo OSLC TRS base+changelog Turtle (W448/W449), the ServiceProviderCatalog catalog.ttl (W451); a repo's own .claude/paths-forward.json is itself a publishable document",
+      "issued_at": "2026-10-15T11:52:02Z",
+      "minted_during": "tick",
+      "caused_by": "W500",
+      "last_worked": "2026-10-15T11:53:53Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W507",
+      "title": "A source contract: anything that yields a repo's cards and edges, with a cursor, in a form the browser can read",
+      "status": "ready",
+      "enables": [
+        "W506"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "design doc docs/federation.md: Source = {id, fetch(cursor) -> {cards, edges, cursor}}; adapters over the forms that exist or are easy: nemik pieces (hashes.json), OSLC TRS base+changelog, a raw queue file over HTTP (GitHub or Forgejo raw), an ActivityPub/ForgeFed actor's outbox; each says how it names a card (repo:W<n>), how cross-repo blocked_on resolves, what its cursor is (hash, ETag, changelog position, outbox page); decide which first adapter proves it (the raw queue file: nothing to publish)",
+      "evidence": "",
+      "issued_at": "2026-10-15T11:53:09Z",
+      "minted_during": "tick",
+      "caused_by": "W506",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W508",
+      "title": "Every computation the view needs runs over plain Card data, so it can run in the browser",
+      "status": "ready",
+      "enables": [
+        "W506"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "inventory what is pure today (projection W425, critical W453, health W454, flow.solve, frontier via the shared walker W483) and what still reads rdflib (blocks.annotate: operator asks, ready-behind-open, cycles; salience.audit; rank); port each to Card-pure functions with the old graph version kept as the test reference, as W453/W454 did; the web-subset gate (mtools:W1070) marks them, the py2many step (mtools:W1071) emits the TypeScript; flow.solve's Fraction needs the BigInt answer (mtools:W1074)",
+      "evidence": "",
+      "issued_at": "2026-10-15T11:53:10Z",
+      "minted_during": "tick",
+      "caused_by": "W506",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W509",
+      "title": "The page assembles its graph from several sources named by the viewer, with cross-repo references resolved in the browser",
+      "status": "ready",
+      "enables": [
+        "W506"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "viewer settings hold a source list (localStorage, try/catch) and the page opens with nemik's own published pieces as the default; each source fetched with its own cursor, CORS and failure handled per source (one unreachable source shows as unavailable, the rest still draw); blocked_on across sources resolved client-side with the rules adapter.resolve_blocker holds today; the page works from a bucket or a file URL with no nemik server at all",
+      "evidence": "",
+      "issued_at": "2026-10-15T11:53:12Z",
+      "minted_during": "tick",
+      "caused_by": "W506",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W510",
+      "title": "Sources update incrementally: each carries a cursor, and a change patches the drawn graph in place",
+      "status": "ready",
+      "enables": [
+        "W506"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "per source: ETag or content hash for a piece, the TRS change log's position for an OSLC provider, an outbox page for ActivityPub; the poll asks each source only for what moved and feeds the result to W494's in-place patch (render(true)), so the cost of a change is the change, not the fleet; measured with nemik-history --churn as the input rate",
+      "evidence": "",
+      "issued_at": "2026-10-15T11:53:12Z",
+      "minted_during": "tick",
+      "caused_by": "W506",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W511",
+      "title": "Each repo publishes its own piece, and what it withholds is its own choice at the source",
+      "status": "ready",
+      "enables": [
+        "W506"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "today nemik cuts graph/<repo>.json centrally and luthen's withheld list is a central filter (W153, W309); in a federation the publisher decides what leaves it and no combiner can leak what a source never published; mtools' writer exports the repo's piece (or the queue as-is) on commit, the repo's host serves it; the withheld list becomes a publisher-side filter, and the combiner (client or pod) needs none; ask mtools and luthen-observability before building",
+      "evidence": "",
+      "issued_at": "2026-10-15T11:53:13Z",
+      "minted_during": "tick",
+      "caused_by": "W506",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W512",
+      "title": "Profile nemik client behavior and precompute server-side only the measured hot filter shapes to cut the data volume sent",
+      "status": "blocked",
+      "enables": [],
+      "touches": [
+        "nemik",
+        "web",
+        "metrics"
+      ],
+      "blocked_on": [
+        "W500"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "After W500 lands (server returns source data, client does the work): record per request the view, the canonical filter shape (never the values), payload bytes and client render time as a Victoria series by shape. Rank shapes by bytes saved times frequency. Precompute and cache server-side ONLY the top measured shapes (valkey, key = source hashes plus withheld-list hash plus code identity plus canonical filter shape, TTL and size cap, the withheld policy still applied before storing); everything else stays client-side. Witness: median payload bytes per session falls with no rise in server RSS.",
+      "evidence": "",
+      "issued_at": "2026-10-15T12:00:55Z",
+      "minted_during": "tick",
+      "caused_by": "github:W35",
+      "last_worked": "2026-10-15T12:00:59Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W513",
+      "title": "A new console script cannot reach the gate undeclared: one check names every registry it must appear in",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "nemik-static was refused three times by three registries (skill table, workflows.toml, BUILD console_scripts) found one gate failure at a time; a test or generator that reads pyproject [project.scripts] and lists every place each script must be declared (BUILD.bazel console_scripts, SKILL.md table, workflows.toml step or reference) in ONE finding, so adding a command is one pass",
+      "evidence": "",
+      "issued_at": "2026-10-15T12:01:12Z",
+      "minted_during": "tick",
+      "caused_by": "W502",
       "last_worked": null,
       "ticks_blocked": 0
     }
@@ -9816,7 +10053,7 @@
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-13T20:11:35Z"
+    "taken_at": "2026-10-15T11:44:18Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []

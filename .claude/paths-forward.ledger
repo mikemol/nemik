@@ -794,3 +794,15 @@
 2026-10-14T14:09:06Z  interrupt W499 minted    -         "Incremental redraw for the treemap and for repo boxes and lanes that appear or go"  evidence=W494
 2026-10-15T03:50:31Z  interrupt W500 minted    -         "nemik process grows from 312 MiB to the 768Mi container limit within an hour of each start and is OOMKilled: find what grows and bound it"  evidence=luthen-observability:W1051
 2026-10-15T04:53:40Z  interrupt W501 minted    -         "Declare the executor-load witness fact in the nemik witness set so luthen-observability W1054 can be claimed"  evidence=luthen-observability:W1054
+2026-10-15T11:51:58Z  tick  W502 minted    -         "nemik-serve --serve DIR: a static file server with no model, conditional requests from hashes.json, /metrics from the build"  evidence=W500
+2026-10-15T11:51:59Z  tick  W503 minted    -         "nemik-serve --publish ROOT: build a snapshot in a fresh process and flip current/ atomically"  evidence=W500
+2026-10-15T11:52:00Z  tick  W504 minted    -         "The pod's shape: a builder container loops --publish into a shared volume, a small server container runs --serve"  evidence=W500
+2026-10-15T11:52:01Z  tick  W505 minted    -         "Size the pod's limits from an uncensored working-set series, the server flat and the builder's peak per cycle"  evidence=W500
+2026-10-15T11:52:02Z  tick  W506 minted    -         "Build outside the cluster: the host or CI publishes the snapshot and the pod only serves it; what the page computes moves to the client"  evidence=W500
+2026-10-15T11:53:09Z  tick  W507 minted    -         "A source contract: anything that yields a repo's cards and edges, with a cursor, in a form the browser can read"  evidence=W506
+2026-10-15T11:53:10Z  tick  W508 minted    -         "Every computation the view needs runs over plain Card data, so it can run in the browser"  evidence=W506
+2026-10-15T11:53:12Z  tick  W509 minted    -         "The page assembles its graph from several sources named by the viewer, with cross-repo references resolved in the browser"  evidence=W506
+2026-10-15T11:53:12Z  tick  W510 minted    -         "Sources update incrementally: each carries a cursor, and a change patches the drawn graph in place"  evidence=W506
+2026-10-15T11:53:13Z  tick  W511 minted    -         "Each repo publishes its own piece, and what it withholds is its own choice at the source"  evidence=W506
+2026-10-15T12:00:55Z  tick  W512 minted    -         "Profile nemik client behavior and precompute server-side only the measured hot filter shapes to cut the data volume sent"  evidence=github:W35
+2026-10-15T12:01:12Z  tick  W513 minted    -         "A new console script cannot reach the gate undeclared: one check names every registry it must appear in"  evidence=W502

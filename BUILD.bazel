@@ -50,6 +50,7 @@ venv_from_hub(
         "nemik-check": "nemik.check:main",
         "nemik-metrics": "nemik.metrics:main",
         "nemik-serve": "nemik.serve:main",
+        "nemik-static": "nemik.staticserve:main",
         "nemik-inbound": "nemik.blocks_cli:main",
         "nemik-operator": "nemik.blocks_cli:operator_main",
         "nemik-wake": "nemik.wake:main",
