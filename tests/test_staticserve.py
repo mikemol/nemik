@@ -117,6 +117,25 @@ def test_a_published_current_link_is_what_is_served(served: tuple[Path, int]) ->
     assert snapshot(root) == root / "current"
 
 
+def test_the_live_servers_extensionless_paths_still_answer(
+    served: tuple[Path, int],
+) -> None:
+    # W503: /wake, /operator, /inbound, /inbound/<repo> and /goals/<repo> were routes of the dynamic
+    # server; the snapshot holds them as .json files and the file server maps the old spelling on.
+    root, port = served
+    (root / "inbound").mkdir()
+    (root / "goals").mkdir()
+    (root / "wake.json").write_text('{"roster": []}')
+    (root / "inbound.json").write_text("[1]")
+    (root / "inbound" / "r.json").write_text("[2]")
+    (root / "goals" / "r.json").write_text("[3]")
+    assert _get(port, "/wake")[2] == b'{"roster": []}'
+    assert _get(port, "/inbound")[2] == b"[1]"
+    assert _get(port, "/inbound/r")[2] == b"[2]"
+    assert _get(port, "/goals/r")[2] == b"[3]"
+    assert _get(port, "/inbound/none")[0] == 404
+
+
 def test_the_server_never_imports_rdflib() -> None:
     probe = "import nemik.staticserve, sys; sys.exit('rdflib' in sys.modules)"
     run = subprocess.run([sys.executable, "-I", "-c", probe], check=False)

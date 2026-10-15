@@ -806,3 +806,8 @@
 2026-10-15T11:53:13Z  tick  W511 minted    -         "Each repo publishes its own piece, and what it withholds is its own choice at the source"  evidence=W506
 2026-10-15T12:00:55Z  tick  W512 minted    -         "Profile nemik client behavior and precompute server-side only the measured hot filter shapes to cut the data volume sent"  evidence=github:W35
 2026-10-15T12:01:12Z  tick  W513 minted    -         "A new console script cannot reach the gate undeclared: one check names every registry it must appear in"  evidence=W502
+2026-10-15T12:08:10Z  tick  W514 minted    -         "Derive the dependency map of nemik: every import, tool call and shared data file between nemik, pathsforward and mtools, by tool not by hand"  evidence=operator
+2026-10-15T12:08:10Z  tick  W515 minted    -         "Hold the nemik repo to the same standards as mtools: bazel precommit gate, hooks, strict mypy, no waivers, warrants"  evidence=operator
+2026-10-15T12:08:11Z  tick  W516 minted    -         "Withholding semantics live in the owning repos: each repo exports only publishable data and the nemik pod mounts only that export"  evidence=operator
+2026-10-15T12:08:16Z  tick  W517 minted    -         "Promote the paths-forward architecture out of mtools into nemik: design, order and pin migration for every consumer"  evidence=operator
+2026-10-15T12:10:05Z  tick  W518 minted    -         "A fresh publish process starts warm: the SHACL results and the flow solves persist beside the snapshots"  evidence=W503

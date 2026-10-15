@@ -42,8 +42,11 @@ def resolve(base: Path, target: str) -> Path | None:
     if any(p in {".", ".."} or "\\" in p or "\x00" in p for p in parts):
         return None
     path = base.joinpath(*parts)
-    if path.is_dir():
+    if path.is_dir() and (path / "index.html").exists():
         path = path / "index.html"
+    elif not path.is_file() and parts:
+        # /wake, /operator, /inbound[/<repo>] and /goals/<repo>, as the live server spelled them
+        path = path.with_name(path.name + ".json")
     try:
         real = path.resolve(strict=True)
     except OSError:

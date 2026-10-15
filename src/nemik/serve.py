@@ -18,6 +18,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import shutil
 import sys
 import threading
 import time
@@ -580,13 +582,20 @@ def history_doc(
     return out
 
 
-def build_static(root: Path, out: Path, withheld: Path | None) -> list[Path]:
+def build_static(
+    root: Path, out: Path, withheld: Path | None, private: bool = False
+) -> list[Path]:
     """nemik:W153: the gated static view under `out`. Every check runs before anything is written,
-    so a refused build leaves `out` untouched; the withheld list itself is never copied into it."""
+    so a refused build leaves `out` untouched; the withheld list itself is never copied into it.
+
+    nemik:W503: `private` is the pod's own build: nothing is withheld unless a list is given, and the
+    files the live server answered beyond the public view are written too (see private_files)."""
     from nemik.manifest import unmanifested
     from nemik.withheld import apply, load
 
-    refs = load(withheld)  # fails closed first: no list, no build
+    refs = (
+        frozenset() if private and withheld is None else load(withheld)
+    )  # public fails closed
     model = Model(root, refs)
     docs = apply(static_data(model), refs)
     if bad := [f for name, doc in docs.items() for f in unmanifested(name, doc)]:
@@ -635,7 +644,83 @@ def build_static(root: Path, out: Path, withheld: Path | None) -> list[Path]:
         written.append(dst)
     (out / "hashes.json").write_text(json.dumps(hashes, indent=1, sort_keys=True))
     written.append(out / "hashes.json")
+    if private:
+        written += private_files(model, out)
     return written
+
+
+def private_files(model: Model, out: Path) -> list[Path]:
+    """nemik:W503: what the live server answered beyond the public view, as files: /operator.json,
+    /inbound.json and /inbound/<repo>.json (one per repo, empty when nothing waits on it), /graph.ttl,
+    /metrics with the snapshot's own age gauge, and the source key the next publish compares. Never
+    part of the public build: these name every waypoint's asks and blockers."""
+    made: list[Path] = []
+
+    def put(name: str, body: bytes) -> None:
+        dst = out / name
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        dst.write_bytes(body)
+        made.append(dst)
+
+    def dump(doc: object) -> bytes:
+        return json.dumps(doc, indent=1).encode()
+
+    rows = model.doc["inbound"]
+    put("operator.json", dump(model.doc["operator"]))
+    put("inbound.json", dump(rows))
+    repos = {str(n["repo"]) for n in model.doc["nodes"] if n["repo"]}
+    for repo in sorted(repos | {str(b["blocker"]) for b in rows}):
+        put(f"inbound/{repo}.json", dump([b for b in rows if b["blocker"] == repo]))
+    put("graph.ttl", model.graph.serialize(format="turtle").encode())
+    gauge = (
+        "# TYPE nemik_snapshot_published_seconds gauge\n"
+        f"nemik_snapshot_published_seconds {time.time():.0f}\n"
+    )
+    put("metrics", model.metrics() + gauge.encode())
+    put("source-key", key_digest(model.key).encode())
+    return made
+
+
+def key_digest(key: tuple) -> str:
+    """A digest of the (path, mtime) key Model.refresh compares: what a published snapshot was built from."""
+    import hashlib
+
+    return hashlib.sha256(repr(key).encode()).hexdigest()
+
+
+def fleet_key(root: Path) -> str:
+    """The digest of every queue and ledger file's path and mtime now (Model.sources, same order)."""
+    paths = [p for name in (QUEUE, LEDGER) for _, p in workstream_files(root, name)]
+    return key_digest(tuple((str(p), p.stat().st_mtime_ns) for p in paths))
+
+
+def publish(
+    root: Path, base: Path, withheld: Path | None, keep: int = 3
+) -> Path | None:
+    """nemik:W503: build a private snapshot under base/snap-<stamp>-<pid>/ and flip base/current to it
+    with one atomic rename. The build runs in this short-lived process, so every byte of its graph is
+    returned to the OS when it exits (nemik:W500: rebuilding in a long-lived process left ~20 MB of
+    fragmented heap per build). Returns None when no queue or ledger changed since current/ was built.
+    The last `keep` snapshots stay, so a request already reading one is not pulled out from under it."""
+    key = fleet_key(root)
+    live = base / "current" / "source-key"
+    if live.exists() and live.read_text() == key:
+        return None
+    base.mkdir(parents=True, exist_ok=True)
+    stamp = time.strftime("%Y%m%dT%H%M%SZ", time.gmtime())
+    snap = base / f"snap-{stamp}-{os.getpid()}"
+    try:
+        build_static(root, snap, withheld, private=True)
+    except BaseException:
+        shutil.rmtree(snap, ignore_errors=True)
+        raise
+    link = base / f".current-{os.getpid()}"
+    link.unlink(missing_ok=True)
+    link.symlink_to(snap.name)
+    os.replace(link, base / "current")
+    for old in sorted(p for p in base.glob("snap-*") if p.is_dir())[:-keep]:
+        shutil.rmtree(old, ignore_errors=True)
+    return snap
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -662,7 +747,23 @@ def main(argv: list[str] | None = None) -> None:
         metavar="FILE",
         help="luthen's withheld list (v1); required with --static, a missing file fails the build",
     )
+    ap.add_argument(
+        "--publish",
+        type=Path,
+        metavar="BASE",
+        help="build a private snapshot under BASE and flip BASE/current to it atomically, then exit "
+        "(nemik:W503); skipped when nothing changed; --withheld is optional (the pod is not the "
+        "public view)",
+    )
     args = ap.parse_args(argv)
+    if args.publish:
+        try:
+            snap = publish(args.root, args.publish, args.withheld)
+        except ValueError as e:
+            print(f"ERROR: {e}", file=sys.stderr)
+            raise SystemExit(2) from e
+        print(snap if snap else "unchanged")
+        return
     if args.static:
         try:
             for path in build_static(args.root, args.static, args.withheld):
