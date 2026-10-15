@@ -69,6 +69,8 @@ dev = [
     "pytest>=9.1.1",
     "jsonschema>=4.23",  # nemik:W441: published documents validate against their generated schemas
     "types-jsonschema",  # its stubs, for the mypy edit gate
+    "pyyaml>=6.0",  # nemik:W504: tests/test_deploy_manifest.py reads deploy/*.yaml against the pod shape luthen agreed
+    "types-pyyaml",  # its stubs, for the mypy edit gate
 ]
 
 [tool.pytest.ini_options]

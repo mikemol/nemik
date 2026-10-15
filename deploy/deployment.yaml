@@ -1,11 +1,23 @@
-# nemik-serve, carried over from luthen's terraform/nemik.tf (W82, W146) under namespace nemik's
-# `restricted` Pod Security. What changed and why:
-#   - the export is the luthen-declared PVC `nemik-export` (read-only), not a hostPath;
-#   - the image is the bare name `nemik`, pinned by deploy-state's `images:` entry, not
-#     localhost/nemik:built with pullPolicy Never;
-#   - runAsNonRoot, seccomp RuntimeDefault, allowPrivilegeEscalation false (restricted requires them).
-# Kept: 2 replicas (zero-downtime ship, operator 2026-09-26), Guaranteed 768Mi / 1 cpu (fits the
-# 3Gi tenant quota with one surge pod: 3 x 768Mi), readiness and a more lenient liveness on /metrics.
+# nemik, shipped as snapshots (nemik:W500 / W504; operator ruling 2026-10-15, agreed with luthen-observability,
+# the deployer, 2026-10-15). The pod does no graph work at request time and no graph work in a long-lived
+# process: a BUILDER container runs `nemik-serve --publish /srv` as a fresh process each time the source
+# queues' CONTENT changes (its memory goes back to the OS when it exits; the build's caches persist beside
+# the snapshots, W518), and a SERVER container only serves the files (`nemik-static`, W502).
+#
+# Why: the dynamic server rebuilt the whole graph about once a minute and its heap fragmented: RSS climbed
+# ~20 MB per rebuild until the 768Mi limit OOM-killed it (133 readiness and 221 liveness failures in 12 h,
+# luthen-observability:W1051). Measured: 80,000 requests (7.3 GB) took the file server from 29.7 to 33.1 MB.
+#
+# luthen-observability's constraints, carried here:
+#   (a) the snapshot volume is disk-backed (NOT Medium: Memory) with a declared sizeLimit, so published files
+#       are not charged to a container's memory;
+#   (b) the builder rebuilds on a changed content hash (publish skips an unchanged fleet) and has a cpu limit;
+#   (c) the server's probes do not depend on the builder: /healthz is liveness, and /metrics (a file the first
+#       build wrote) is readiness only until a snapshot exists, after which a dead builder leaves a stale
+#       snapshot served rather than a restart;
+#   (d) container names and requests/limits go to luthen-observability for its workloads.json row.
+# Kept: 2 replicas (zero-downtime ship, operator 2026-09-26), the export PVC read-only (builder only),
+# restricted Pod Security. Tenant quota 3Gi: (96Mi + 768Mi) x 3 pods (2 + 1 surge) = 2.6Gi.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -25,31 +37,16 @@ spec:
         runAsGroup: 1000
         seccompProfile: {type: RuntimeDefault}
       containers:
-        - name: nemik
+        - name: server
           image: nemik
+          command: ["/app/.venv/bin/nemik-static"]
+          args: ["--root", "/srv", "--bind", "0.0.0.0", "--port", "8750"]
           ports:
             - {name: http, containerPort: 8750}
-          # The dashboard's witness tools read these (nemik-45, 2026-09-27). vmsingle and vmalert
-          # live in namespace buildbuddy (luthen endpoints.json, read 2026-09-28), so they are named
-          # by FQDN now that nemik runs in its own namespace. Re-derive: luthen-observability
-          # `checks.endpoints_query vmsingle-http --side pod` (and vmalert-http).
-          env:
-            - {name: NEMIK_VM_URL, value: "http://vmsingle.buildbuddy.svc.cluster.local:8428"}
-            - {name: NEMIK_VMALERT_URL, value: "http://vmalert.buildbuddy.svc.cluster.local:8880"}
-            # nemik:W260: OOMKilled at 12:50Z at the old 512Mi (peak working set 536 MB). Measured on
-            # the real 16-queue root: 240 MB after the first build, ~315-350 MB once the graph has
-            # been rebuilt (a rebuild holds the old graph while the new one is built, and luthen's
-            # export changes every minute), ~340 MB after a /cmd. A pod adds its own overhead and
-            # concurrent requests on top, so a 768Mi limit (tenant quota 3Gi at luthen c4b58bd).
-            # glibc arenas: one per request thread, never returned; two bound the fragmentation.
-            - {name: MALLOC_ARENA_MAX, value: "2"}
-          # nemik:W375 (luthen-observability:W722): Burstable, not Guaranteed. LimitedSwap gives zram swap
-          # only to a container whose memory request is below its limit, about request / MemTotal x
-          # SwapTotal (~half the request on this node): a 512Mi request covers the steady working set
-          # (430-450 MB) and adds ~256Mi of swap under a rebuild spike, where Guaranteed had none.
+          # Measured 29.7 -> 33.1 MB over 80,000 requests; the limit is about three times that.
           resources:
-            requests: {memory: 512Mi, cpu: "1"}
-            limits: {memory: 768Mi, cpu: "1"}
+            requests: {memory: 32Mi, cpu: 25m}
+            limits: {memory: 96Mi, cpu: 250m}
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
@@ -58,16 +55,43 @@ spec:
             httpGet: {path: /metrics, port: http}
             periodSeconds: 10
             failureThreshold: 6
-          # A wedged pod stays `running` under readiness alone (2026-09-26); liveness restarts it.
           livenessProbe:
-            httpGet: {path: /metrics, port: http}
+            httpGet: {path: /healthz, port: http}
             periodSeconds: 10
             failureThreshold: 12
           volumeMounts:
+            - {name: snapshots, mountPath: /srv, readOnly: true}
+        - name: builder
+          image: nemik
+          command: ["/bin/sh", "-c"]
+          # An unchanged fleet costs one hash pass (about a second); a changed one a build (~16 s CPU warm).
+          # A failed build is reported and retried, never fatal: the last snapshot keeps being served.
+          args:
+            - |
+              while true; do
+                /app/.venv/bin/nemik-serve --root /export --publish /srv || echo "publish failed: $?" >&2
+                sleep 30
+              done
+          env:
+            # glibc arenas: one per thread, never returned; two bound the fragmentation (nemik:W260).
+            - {name: MALLOC_ARENA_MAX, value: "2"}
+          # Measured on a pod-shaped export (no git), 17 repos: the build peaks near 530 MB.
+          resources:
+            requests: {memory: 512Mi, cpu: 250m}
+            limits: {memory: 768Mi, cpu: "1"}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: {drop: [ALL]}
+          volumeMounts:
             - {name: export, mountPath: /export, readOnly: true}
+            - {name: snapshots, mountPath: /srv}
             - {name: tmp, mountPath: /tmp}
       volumes:
         - name: export
           persistentVolumeClaim: {claimName: nemik-export, readOnly: true}
+        # disk-backed: the published snapshots are not container memory (four at the peak is ~100 MB)
+        - name: snapshots
+          emptyDir: {sizeLimit: 256Mi}
         - name: tmp
           emptyDir: {medium: Memory, sizeLimit: 64Mi}
