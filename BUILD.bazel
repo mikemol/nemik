@@ -14,7 +14,7 @@ exports_files(["pyproject.toml"])
         # load ~100 it crossed medium's 300 s (284 s alone, then a timeout in the gate). The rest stay medium.
         size = "large" if src == "tests/test_layout.py" else "medium",
         args = ["$(rootpath " + src + ")", "-c", "$(rootpath pyproject.toml)"],
-        data = [src, "tests/installed.py", "tests/webpage.py",".claude/settings.json", "//tests/fixtures:fleet", "pyproject.toml", "ARCHITECTURE.md", "skills/nemik/SKILL.md", "docs/positioning.md", "deploy/deployment.yaml", "src/nemik/data/workflows.toml", "tools/nemik_client.py", "BUILD.bazel", "Containerfile"] + glob(["tests/corpus/**"]) + [ "src/nemik/data/shapes.ttl", "src/nemik/data/nemik.ttl", ":.venv", "@opa//file", "@use_of_colour_rego//file", "@chromium//:files", "@chromium//:chrome-headless-shell"]
+        data = [src, "tests/installed.py", "tests/webpage.py",".claude/settings.json", "//tests/fixtures:fleet", "pyproject.toml", "ARCHITECTURE.md", "skills/nemik/SKILL.md", "docs/positioning.md", "deploy/deployment.yaml", "src/nemik/data/workflows.toml", "tools/nemik_client.py", "BUILD.bazel", "Containerfile"] + glob(["tests/corpus/**"]) + [ "src/nemik/data/shapes.ttl", "src/nemik/data/nemik.ttl", "src/nemik/data/run-row.schema.json", ":.venv", "@opa//file", "@use_of_colour_rego//file", "@chromium//:files", "@chromium//:chrome-headless-shell"]
             # nemik:W445: the JRE (52 MB) and MPXJ's jars go to the one test that reads with them
             + (["@temurin_jre//:files", "@temurin_jre//:bin/java", ":mpxj_classpath"] if src == "tests/test_mpxj.py" else [])
             # nemik:W518: the claims boundary test runs checks/claims.py's read-only witnesses

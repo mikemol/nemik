@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mikemol/nemik/ns/run-row.schema.json",
+  "title": "nemik run row (W556)",
+  "description": "One row of a run log: apply-set-runs, reaper-runs, apply-ledger, tier-rehearsal or drum decisions. Out of scope by name: nudges.json (a state map), the fence TSV (measurements) and the paths-forward text ledger. Fields follow PROV-O where they fit: ts is prov:startedAtTime, trigger is prov:wasInformedBy.",
+  "type": "object",
+  "required": ["ts", "run_id", "trigger", "exit", "verdict"],
+  "additionalProperties": true,
+  "properties": {
+    "ts": {
+      "type": "string",
+      "format": "date-time",
+      "description": "RFC 3339 instant the run started (prov:startedAtTime). Never absent and never inherited from the previous line."
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Names the run; rows of one run share it."
+    },
+    "trigger": {
+      "type": "string",
+      "minLength": 1,
+      "description": "What started the run (prov:wasInformedBy): a timer, a path, a card as <repo>:W<n>, or an operator."
+    },
+    "exit": {
+      "type": "integer",
+      "description": "The process exit code, always spelled exit (not apply_exit, rc or ok)."
+    },
+    "verdict": {
+      "type": "object",
+      "description": "The run's verdict as an object, never a JSON string inside the row. Its state axis is separate from the change-lifecycle step (nemik:ChangeLifecycle).",
+      "required": ["state"],
+      "properties": {
+        "state": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": true
+    },
+    "detail": {
+      "type": "string",
+      "description": "Free text for a reader; the lifecycle-word check (nemik:W555) reads it."
+    },
+    "inputs_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "sha256 of the inputs the run read, so an unchanged input is visible."
+    }
+  }
+}
