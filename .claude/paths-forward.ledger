@@ -841,3 +841,6 @@
 2026-10-15T15:15:32Z  tick  W541 minted    -         "Make the image build's test stage failing visible at the push, not hours later: a test that runs a fixture-order-sensitive pick under reversed and shuffled directory order"  evidence=W504
 2026-10-15T15:20:56Z  tick  W528 advanced  collapse  "W528 landed 7e28fbb (pushed, ls-remote matches): pathsforward ics+vtimezone in both feeds, and test_publish fixed after luthen found it failing every image build since adf18e6; W541 carded; W504 waits on the next image; W536-W540 queued"
 2026-10-15T15:56:38Z  tick  W504 advanced  unblock   "committed 742ff69: two-container pod + test_deploy_manifest (ruff-ratchet clean, gate green, 127 tests); NOT pushed (push is deploy; image must carry nemik-static first)"
+2026-10-15T16:22:00Z  tick  W542 minted    -         "W524a: set the house strict flags in pyproject [tool.mypy] and record the finding count per file"  evidence=W524
+2026-10-15T16:22:01Z  tick  W543 minted    -         "W524b: adopt mikemol-ratchet pinned at the repo's mtools sha as a bazel check: fails when the count rises or a fixed finding stays in the baseline"  evidence=W524
+2026-10-15T16:22:06Z  tick  W524 advanced  collapse  "atomized W524 (top >1 tick) into W542 flags+baseline and W543 ratchet check; no code this tick"
