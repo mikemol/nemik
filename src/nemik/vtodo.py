@@ -21,6 +21,9 @@ import re
 import tomllib
 from pathlib import Path
 
+from mikemol.pathsforward.ics import escape, serialize
+from mikemol.pathsforward.vtimezone import vtimezone
+
 from nemik.blocks import EXPLICIT
 
 PRODID = "-//nemik//operator asks//EN"
@@ -46,30 +49,25 @@ def uid(ref: str) -> str:
     return f"nemik:{ref}"
 
 
-def _escape(text: str) -> str:
-    return (
-        text.replace("\\", "\\\\")
-        .replace(";", "\\;")
-        .replace(",", "\\,")
-        .replace("\n", "\\n")
-    )
+_TZID = re.compile(r";TZID=(?P<zone>[^:;]+):(?P<year>\d{4})")
 
 
-def _fold(line: str) -> str:
-    """RFC 5545 3.1: lines over 75 octets continue on the next line after CRLF + one space."""
-    raw = line.encode()
-    if len(raw) <= 75:
-        return line
+def timezones(lines: list[str]) -> list[str]:
+    """nemik:W528: one VTIMEZONE per TZID the content lines use (RFC 5545 3.2.19).
+
+    Each is exact from a year before the zone's earliest value to two after its latest, as
+    pathsforward's calendar writes it, so a recurrence's near future is covered too. The folding,
+    escaping and the zone rules are pathsforward's (mikemol.pathsforward.ics and .vtimezone), not
+    a copy here.
+    """
+    years: dict[str, list[int]] = {}
+    for line in lines:
+        for found in _TZID.finditer(line):
+            years.setdefault(found["zone"], []).append(int(found["year"]))
     out: list[str] = []
-    cur = b""
-    for ch in line:
-        b = ch.encode()
-        if len(cur) + len(b) > (75 if not out else 74):
-            out.append(cur.decode())
-            cur = b""
-        cur += b
-    out.append(cur.decode())
-    return "\r\n ".join(out)
+    for zone, seen in sorted(years.items()):
+        out += vtimezone(zone, min(seen) - 1, max(seen) + 2)
+    return out
 
 
 def _stamp(iso: str) -> str:
@@ -141,10 +139,10 @@ def vtodos(asks: list[dict], repos: set[str], link: str = "") -> list[list[str]]
             "BEGIN:VTODO",
             f"UID:{uid(a['ref'])}",
             f"DTSTAMP:{_stamp(a.get('last_activity', ''))}",
-            f"SUMMARY:{_escape(f'{verb}: {what}')}",
-            f"DESCRIPTION:{_escape(chr(10).join(desc))}",
+            f"SUMMARY:{escape(f'{verb}: {what}')}",
+            f"DESCRIPTION:{escape(chr(10).join(desc))}",
             "STATUS:NEEDS-ACTION",
-            f"CATEGORIES:nemik,{_escape(repo)}",
+            f"CATEGORIES:nemik,{escape(repo)}",
         ]
         # nemik:W299: the heavier the demand an ask holds back, the higher its PRIORITY.
         if a.get("salience") is not None:
@@ -167,7 +165,7 @@ def vtodos(asks: list[dict], repos: set[str], link: str = "") -> list[list[str]]
             lines += [
                 "BEGIN:VALARM",
                 "ACTION:DISPLAY",
-                f"DESCRIPTION:{_escape(f'{verb}: {what}')}",
+                f"DESCRIPTION:{escape(f'{verb}: {what}')}",
                 f"TRIGGER;{trig}"
                 if trig.startswith(("RELATED=", "VALUE="))
                 else f"TRIGGER:{trig}",
@@ -199,10 +197,10 @@ def grouped(todos: list[list[str]]) -> list[list[str]]:
             "BEGIN:VTODO",
             f"UID:nemik:repo:{repo}",
             "DTSTAMP:19700101T000000Z",
-            f"SUMMARY:{_escape(f'{repo} ({len(kids)})')}",
-            f"DESCRIPTION:{_escape(f'nemik: asks from {repo}')}",
+            f"SUMMARY:{escape(f'{repo} ({len(kids)})')}",
+            f"DESCRIPTION:{escape(f'nemik: asks from {repo}')}",
             "STATUS:NEEDS-ACTION",
-            f"CATEGORIES:nemik,{_escape(repo)}",
+            f"CATEGORIES:nemik,{escape(repo)}",
         ]
         if dues:  # earliest by the date-time digits, whatever the value form
             parent.append(
@@ -228,10 +226,10 @@ def calendar(todos: list[list[str]]) -> str:
         f"PRODID:{PRODID}",
         "X-WR-CALNAME:nemik: needs you",
     ]
-    for t in todos:
-        lines += t
+    body = [line for t in todos for line in t]
+    lines += timezones(body) + body
     lines.append("END:VCALENDAR")
-    return "".join(_fold(line) + "\r\n" for line in lines)
+    return serialize(lines)
 
 
 def feed(root: Path, opt_in: Path, link: str = "", group: bool = False) -> str:

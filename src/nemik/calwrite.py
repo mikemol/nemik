@@ -22,13 +22,14 @@ from collections.abc import Iterable
 from datetime import date, timedelta
 from pathlib import Path
 
+from mikemol.pathsforward.ics import escape, serialize
 from rdflib import Graph
 from rdflib.namespace import DCTERMS, RDF
 
 from nemik.adapter import BASE, NEMIK, OSLC_CM
 from nemik.calendars import DEFAULT_CONFIG, load_calendars
 from nemik.check import default_root, survey
-from nemik.vtodo import DEFAULT_HELPER, _escape, _fold, time_property
+from nemik.vtodo import DEFAULT_HELPER, time_property, timezones
 
 PRODID = "-//nemik//dated waypoints//EN"
 OWNED = "nemik:"  # a UID with this prefix is nemik's own event, in any calendar
@@ -115,13 +116,13 @@ def event_lines(
     start, end = event_times(
         dtstart, due, any(t.startswith("RELATED=END") for t in triggers)
     )
-    summary = _escape(title)
+    summary = escape(title)
     lines = [
         "BEGIN:VEVENT",
         f"UID:{uid(ref)}",
         "DTSTAMP:19700101T000000Z",
         f"SUMMARY:{summary}",
-        f"DESCRIPTION:{_escape(f'nemik-ref: {ref}')}",
+        f"DESCRIPTION:{escape(f'nemik-ref: {ref}')}",
         time_property("DTSTART", start),
     ]
     if end:
@@ -193,10 +194,10 @@ def events(g: Graph, repos: Iterable[str], label: str | None = None) -> list[lis
 def feed(g: Graph, repos: Iterable[str], label: str | None = None) -> str:
     """The iCalendar text the Akonadi helper reads on stdin (CRLF, folded at 75 octets)."""
     lines = ["BEGIN:VCALENDAR", "VERSION:2.0", f"PRODID:{PRODID}"]
-    for event in events(g, repos, label):
-        lines += event
+    body = [line for event in events(g, repos, label) for line in event]
+    lines += timezones(body) + body
     lines.append("END:VCALENDAR")
-    return "".join(_fold(line) + "\r\n" for line in lines)
+    return serialize(lines)
 
 
 def _write(helper: Path, name: str, text: str, apply: bool) -> tuple[int, str]:

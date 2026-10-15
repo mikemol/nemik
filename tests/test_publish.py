@@ -109,7 +109,14 @@ def test_a_change_of_content_is_published(tmp_path: Path) -> None:
     root = _copy_fleet(tmp_path)
     first = publish(root, tmp_path / "pub", None)
     assert first is not None
-    queue = next(root.glob("*/paths-forward.json"))
+    # W504: a dot-named directory is not a workstream (workstream_files skips it), and glob order is
+    # the filesystem's, so the image build's copy handed back .linux-sources-gate-wt first and the
+    # edit changed nothing the key reads. Pick a real workstream, the same one on every filesystem.
+    queue = min(
+        p
+        for p in root.glob("*/paths-forward.json")
+        if not p.parent.name.startswith(".")
+    )
     queue.write_text(queue.read_text() + "\n")
     assert fleet_key(root) != (first / "source-key").read_text()
     second = publish(root, tmp_path / "pub", None)
