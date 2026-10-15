@@ -849,3 +849,4 @@
 2026-10-15T16:56:38Z  interrupt W545 minted    -         "CheckableNextStepShape: a card with a checkable next step declares a witness, as a shapes.ttl warning (W529)"  evidence=mtools:W1279
 2026-10-15T17:22:39Z  tick  W542 advanced  sweep     "started the strict-flag mypy measurement in the background with mtools' mypy (first run failed on comma-separated error codes; reran one flag per code); output pending"
 2026-10-15T17:52:07Z  tick  W423 advanced  sweep     "added py2many rust -> wasm as an option on W423's operator ask and asked mtools-ad to measure the rust backend on the typed sample; no code, mypy W542 untouched"
+2026-10-15T18:54:08Z  tick  W544 advanced  unblock   "landed 9d52740: EditDeclaredShape as a shapes.ttl SPARQL warning over new nemik:namesFile paths (mtools:W1276); W545 next"
