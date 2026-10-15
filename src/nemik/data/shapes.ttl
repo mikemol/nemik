@@ -111,6 +111,23 @@ nemik:EditDeclaredShape a sh:NodeShape ;
                 }
             }""" ] .
 
+# nemik:W545 (mtools:W1279): a next step is checkable when it names a repo file (the same
+# nemik:namesFile facts as EditDeclaredShape); whether it is already done is machine-readable only
+# through a witness (mtools:W1260), since --check-evidence reads only path existence. nemik:weather is
+# emitted only from a witness, so its absence means none is declared. A Warning, not a Violation.
+nemik:CheckableNextStepShape a sh:NodeShape ;
+    sh:targetClass oslc_cm:ChangeRequest ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        sh:message "next step names {?file}, so whether it is done is checkable, but the card declares no witness: add --witness (and --witness-lang) so the step can be marked done by a query, not by reading prose" ;
+        sh:select """
+            SELECT $this ?file WHERE {
+                $this <http://open-services.net/ns/cm#state> ?state .
+                FILTER (?state IN (<https://github.com/mikemol/nemik/ns#Ready>, <https://github.com/mikemol/nemik/ns#Working>))
+                $this <https://github.com/mikemol/nemik/ns#namesFile> ?file .
+                FILTER NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#weather> ?w }
+            }""" ] .
+
 # Blocked on another workstream's umbrella rather than on the child step doing the work (W41).
 nemik:UmbrellaBlockShape a sh:NodeShape ;
     sh:targetSubjectsOf nemik:umbrellaBlockOn ;

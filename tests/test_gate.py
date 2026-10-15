@@ -236,6 +236,28 @@ def test_next_step_naming_a_file_without_a_declared_write_warns(root: Path) -> N
     assert any("tests/test_gate.py" in row for row in named), r.stdout
 
 
+def test_checkable_next_step_without_a_witness_warns(root: Path) -> None:
+    """nemik:W545: a next step naming a repo file is checkable, so the card declares a witness.
+
+    A card with a witness, a done card and a step naming no file do not warn. A Warning,
+    not a Violation.
+    """
+    step = "write tests/test_new.py"
+    write_queue(
+        root,
+        "gamma",
+        waypoint("W1", next_bounded_step=step),
+        waypoint("W2", next_bounded_step=step, witness="input.file.exists"),
+        waypoint("W3", next_bounded_step=step, status="done"),
+        waypoint("W4", next_bounded_step="think about it"),
+    )
+    r = run("check", root)
+    assert r.returncode == 0, r.stdout + r.stderr
+    named = [row for row in r.stdout.splitlines() if "declares no witness" in row]
+    assert {row.split()[1] for row in named} == {"W1"}, r.stdout
+    assert any("tests/test_new.py" in row for row in named), r.stdout
+
+
 def test_caused_by_into_residue_resolves(tmp_path: Path) -> None:
     write_queue(tmp_path, "alpha", waypoint("W2", caused_by="W1"))
     q = tmp_path / "alpha" / "paths-forward.json"
