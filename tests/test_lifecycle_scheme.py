@@ -29,6 +29,24 @@ def test_the_scheme_has_exactly_the_five_steps() -> None:
     assert sorted(members) == sorted(STEPS)
 
 
+def test_every_step_is_mapped_to_oslc_cm_or_marked_an_extension() -> None:
+    """nemik:W552: a step either closely matches an OSLC CM term or says it is a nemik extension."""
+    graph = _graph()
+    extension = graph.resource(f"{NEMIK}extension").identifier
+    cm = "http://open-services.net/ns/cm#"
+    expected = {
+        "landed": cm + "Fixed",
+        "applied": cm + "Verified",
+    }
+    for step in STEPS:
+        concept = graph.resource(f"{NEMIK}{step.capitalize()}").identifier
+        matches = {str(m) for m in graph.objects(concept, SKOS.closeMatch)}
+        marked = graph.value(concept, extension) is not None
+        assert bool(matches) != marked, step  # exactly one of the two
+        if step in expected:
+            assert matches == {expected[step]}, step
+
+
 def test_every_step_has_a_definition_and_a_witness() -> None:
     """A step without a definition or without the evidence that witnesses it is refused."""
     graph = _graph()

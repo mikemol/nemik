@@ -31,20 +31,32 @@ nemik:witnessedBy a rdf:Property ; rdfs:comment "The evidence that shows a lifec
 nemik:ChangeLifecycle a skos:ConceptScheme ;
     skos:prefLabel "change lifecycle on the host" ;
     skos:hasTopConcept nemik:Landed, nemik:Installed, nemik:Enabled, nemik:Active, nemik:Applied .
+# nemik:W552: the OSLC CM 3.0 mapping, read from the published vocabulary (the 303 from
+# open-services.net/ns/cm# to docs.oasis-open-projects.org/oslc-op/cm/v3.0/errata01/os/change-mgt-vocab.html,
+# fetched 2026-10-15), not from memory. CM's states describe a change request's resolution
+# (Fixed, Verified, Closed), not its deployment, so only two steps genuinely fit: a landed commit is
+# CM's Fixed ("resolved or fixed but the resolution or fix has not yet been verified") and a converged
+# run is its Verified ("the resolution or the fix is verified"). The rest are nemik extensions.
+nemik:extension a rdf:Property ; rdfs:comment "True on a lifecycle step with no OSLC CM 3.0 term that fits it (nemik:W552)." .
 nemik:Landed a skos:Concept ; skos:inScheme nemik:ChangeLifecycle ; skos:prefLabel "landed" ;
     skos:definition "The change is committed to its repository." ;
+    skos:closeMatch oslc_cm:Fixed ;
     nemik:witnessedBy "a git ref containing the commit" .
 nemik:Installed a skos:Concept ; skos:inScheme nemik:ChangeLifecycle ; skos:prefLabel "installed" ;
     skos:definition "An apply has written the change's files onto the host." ;
+    nemik:extension true ;
     nemik:witnessedBy "a host_live_types row for the written artifact" .
 nemik:Enabled a skos:Concept ; skos:inScheme nemik:ChangeLifecycle ; skos:prefLabel "enabled" ;
     skos:definition "The change's trigger is registered with the host's scheduler." ;
+    nemik:extension true ;
     nemik:witnessedBy "systemctl is-enabled reports enabled" .
 nemik:Active a skos:Concept ; skos:inScheme nemik:ChangeLifecycle ; skos:prefLabel "active" ;
     skos:definition "The change's trigger is armed and can fire now." ;
+    nemik:extension true ;
     nemik:witnessedBy "systemctl is-active reports active" .
 nemik:Applied a skos:Concept ; skos:inScheme nemik:ChangeLifecycle ; skos:prefLabel "applied" ;
     skos:definition "A run of the change converged on the host." ;
+    skos:closeMatch oslc_cm:Verified ;
     nemik:witnessedBy "a run record whose verdict is converged" .
 nemik:Dropped a rdfs:Class ; rdfs:comment "A residue entry: a symbol that was issued and dropped, still resolvable." .
 nemik:kind a rdf:Property ; rdfs:comment "The ledger line's raw kind column (free text upstream)." .
