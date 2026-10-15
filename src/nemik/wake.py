@@ -196,7 +196,9 @@ def fired_alarms(
                     exdates=tuple(sorted(str(x) for x in g.objects(n, NEMIK.exdate))),
                     done={str(r): "" for r in g.objects(n, NEMIK.occurrenceDone)},
                 )
-            except Exception as e:  # noqa: BLE001 - one bad alarm (a hand-edited queue) must not hide the rest
+            # One bad alarm (a hand-edited queue) must not hide the rest. What a bad one raises: the
+            # RFC 5545 and RRULE parsers' ValueError, a naive-versus-aware TypeError, a year out of range.
+            except (ValueError, TypeError, OverflowError) as e:
                 out.append(
                     {
                         "ref": f"{repo}:{sym}",

@@ -19,6 +19,8 @@ exports_files(["pyproject.toml"])
             + (["@temurin_jre//:files", "@temurin_jre//:bin/java", ":mpxj_classpath"] if src == "tests/test_mpxj.py" else [])
             # nemik:W518: the claims boundary test runs checks/claims.py's read-only witnesses
             + (["checks/claims.py"] if src == "tests/test_claims_boundary.py" else [])
+            # nemik:W523: the no-waivers test scans every Python file the repo keeps outside the package
+            + (glob(["tests/*.py", "tools/*.py", "checks/*.py"], exclude = [src, "tests/installed.py", "tests/webpage.py", "tools/nemik_client.py", "checks/claims.py"]) if src == "tests/test_no_waivers.py" else [])
             # nemik:W475: the input guard reads every test's source to check what each one opens
             + (glob(["tests/test_*.py"], exclude = [src]) if src == "tests/test_test_inputs.py" else []),
         env = {

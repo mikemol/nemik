@@ -60,9 +60,16 @@ def _paths(source: str) -> set[str]:
 def _declared() -> tuple[set[str], list[str]]:
     """The test macro's data: exact files, and directory prefixes (globs and fixture packages)."""
     build = (REPO / "BUILD.bazel").read_text()
-    files = set(re.findall(r'"([\w./-]+\.[\w]+|Containerfile)"', build))
-    prefixes = [g.split("**")[0] for g in re.findall(r'glob\(\["([^"]+)"\]\)', build)]
-    pkgs = re.findall(r'"//([\w/]+):(\w+)"', build)
+    # only the test macro's own data list (up to its env): the venv's srcs glob is not test data
+    data = build.split("data = [", 1)[1].split("env = {", 1)[0]
+    files = set(re.findall(r'"([\w./-]+\.[\w]+|Containerfile)"', data))
+    # every pattern of every glob([...]): its directory part, up to the first wildcard, is a covered prefix
+    prefixes = [
+        item.split("*")[0]
+        for group in re.findall(r"glob\(\[([^\]]*)\]", data)
+        for item in re.findall(r'"([^"]+)"', group)
+    ]
+    pkgs = re.findall(r'"//([\w/]+):(\w+)"', data)
     prefixes += [f"{pkg}/{name}/" for pkg, name in pkgs]
     return files, prefixes
 

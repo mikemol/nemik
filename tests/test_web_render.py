@@ -111,7 +111,7 @@ def test_labels_are_not_covered_by_other_nodes(server) -> None:
             browser = p.chromium.launch(
                 executable_path=os.path.abspath(exe) if exe else None
             )
-        except Exception as e:  # noqa: BLE001 - no browser installed here
+        except sync_api.Error as e:
             pytest.skip(f"chromium unavailable: {e}")
         page = browser.new_page(viewport={"width": 1400, "height": 900})
         errors: list[str] = []

@@ -1335,7 +1335,7 @@ def test_rank_forest_view(server, tmp_path) -> None:
             browser = p.chromium.launch(
                 executable_path=os.path.abspath(exe) if exe else None
             )
-        except Exception as e:  # noqa: BLE001 - no browser installed here
+        except sync_api.Error as e:
             pytest.skip(f"chromium unavailable: {e}")
         page = browser.new_page(
             viewport={"width": 1700, "height": 1250}, color_scheme="dark"
@@ -1395,7 +1395,7 @@ def test_treemap_model(server) -> None:
             browser = p.chromium.launch(
                 executable_path=os.path.abspath(exe) if exe else None
             )
-        except Exception as e:  # noqa: BLE001 - no browser installed here
+        except sync_api.Error as e:
             pytest.skip(f"chromium unavailable: {e}")
         page = browser.new_page()
         page.goto(server)
@@ -1418,7 +1418,7 @@ def test_treemap_view_draws(server, tmp_path) -> None:
             browser = p.chromium.launch(
                 executable_path=os.path.abspath(exe) if exe else None
             )
-        except Exception as e:  # noqa: BLE001 - no browser installed here
+        except sync_api.Error as e:
             pytest.skip(f"chromium unavailable: {e}")
         page = browser.new_page(
             viewport={"width": 1700, "height": 1250}, color_scheme="dark"
@@ -1497,7 +1497,7 @@ def test_side_panel_never_overflows_sideways(server, width) -> None:
             browser = p.chromium.launch(
                 executable_path=os.path.abspath(exe) if exe else None
             )
-        except Exception as e:  # noqa: BLE001 - no browser installed here
+        except sync_api.Error as e:
             pytest.skip(f"chromium unavailable: {e}")
         page = browser.new_page(viewport={"width": width, "height": 1200})
         page.goto(server)
@@ -1530,7 +1530,7 @@ def test_every_cite_in_the_panel_is_a_repo_colon_link(server) -> None:
             browser = p.chromium.launch(
                 executable_path=os.path.abspath(exe) if exe else None
             )
-        except Exception as e:  # noqa: BLE001 - no browser installed here
+        except sync_api.Error as e:
             pytest.skip(f"chromium unavailable: {e}")
         page = browser.new_page(viewport={"width": 1400, "height": 1000})
         page.goto(server)
@@ -1566,7 +1566,7 @@ def test_weather_panel_groups_one_outage(server) -> None:
             browser = p.chromium.launch(
                 executable_path=os.path.abspath(exe) if exe else None
             )
-        except Exception as e:  # noqa: BLE001 - no browser installed here
+        except sync_api.Error as e:
             pytest.skip(f"chromium unavailable: {e}")
         page = browser.new_page()
         page.goto(server)
