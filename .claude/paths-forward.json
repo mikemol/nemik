@@ -7706,11 +7706,11 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "luthen-observability's answer on cutting over before the 7-day baseline; W504 waits on it",
-      "evidence": "2026-10-12: 2026-10-12: held until luthen's baseline (luthen-observability:W870) has about 7 days of series, so the static serving change does not overtake the before-reading. luthen will read the design as the deployer when it is ready. | 2026-10-12: From W396's inventory: the builder job must own /metrics (it is a scrape of the builder, not the page), precompute or drop graph.ttl, and take the liveness file as a snapshot input so wake.json refreshes when liveness changes even with no queue change. | 2026-10-13: 2026-10-13T03:45Z luthen-observability: web-vitals CronJob live; first run failed ('0 series', cause unread), later runs succeed (5 series: lcp, ttfb, tbt seconds, cls score, transfer bytes; target nemik, phase warm); 7-day baseline counts from the first successful sample (~2026-10-13T00:45Z). Panels on Grafana dashboard metrics-luthen. INP not measurable; tbt is the proxy. | 2026-10-15: 2026-10-15 implementation under way via the W500 incident (the pod is OOM-killed hourly; luthen-observability:W1051): W502 nemik-static (file server, 80k requests 29.7 -> 33.1 MB), W503 nemik-serve --publish (atomic current/ flip from a short-lived process), W518 (persist caches so a cold build is not 57 s CPU), W504 (the pod's shape). Pushing W502/W503 changes no deployed behaviour (deploy/deployment.yaml still runs the dynamic server); only W504 does, and it would overtake luthen's 7-day baseline (about 2.5 days old). Argument to cut over now: the pod flaps (133 readiness and 221 liveness failures in 12 h), so web vitals measured on it are not a clean 'before'. Asked luthen-observability to agree",
+      "evidence": "2026-10-12: 2026-10-12: held until luthen's baseline (luthen-observability:W870) has about 7 days of series, so the static serving change does not overtake the before-reading. luthen will read the design as the deployer when it is ready. | 2026-10-12: From W396's inventory: the builder job must own /metrics (it is a scrape of the builder, not the page), precompute or drop graph.ttl, and take the liveness file as a snapshot input so wake.json refreshes when liveness changes even with no queue change. | 2026-10-13: 2026-10-13T03:45Z luthen-observability: web-vitals CronJob live; first run failed ('0 series', cause unread), later runs succeed (5 series: lcp, ttfb, tbt seconds, cls score, transfer bytes; target nemik, phase warm); 7-day baseline counts from the first successful sample (~2026-10-13T00:45Z). Panels on Grafana dashboard metrics-luthen. INP not measurable; tbt is the proxy. | 2026-10-15: 2026-10-15 implementation under way via the W500 incident (the pod is OOM-killed hourly; luthen-observability:W1051): W502 nemik-static (file server, 80k requests 29.7 -> 33.1 MB), W503 nemik-serve --publish (atomic current/ flip from a short-lived process), W518 (persist caches so a cold build is not 57 s CPU), W504 (the pod's shape). Pushing W502/W503 changes no deployed behaviour (deploy/deployment.yaml still runs the dynamic server); only W504 does, and it would overtake luthen's 7-day baseline (about 2.5 days old). Argument to cut over now: the pod flaps (133 readiness and 221 liveness failures in 12 h), so web vitals measured on it are not a clean 'before'. Asked luthen-observability to agree | 2026-10-15: 2026-10-15 luthen-observability released this hold and will restart its web-vitals baseline clock at the cutover (W504); shape agreed: sidecar builder + disk-backed emptyDir, no PVC",
       "issued_at": "2026-10-12T14:27:40Z",
       "minted_during": "interrupt",
       "caused_by": "W391",
-      "last_worked": "2026-10-15T12:12:49Z",
+      "last_worked": "2026-10-15T12:14:41Z",
       "ticks_blocked": 59,
       "completed": null
     },
@@ -9805,16 +9805,15 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W518",
-        "luthen-observability"
+        "W518"
       ],
       "blocked_kind": "agent",
-      "next_bounded_step": "deploy/deployment.yaml: two containers sharing an emptyDir; builder: sh loop of nemik-serve --publish every ~60 s (fresh process each cycle), memory limit for a build's peak; server: nemik-serve --serve with a small limit; readiness and liveness on the server's /metrics; the export PVC mounted read-only into the builder only; a push is a deploy, so read the rollout back through nemik-pins and the restart counter",
-      "evidence": "2026-10-15: 2026-10-15 asked luthen-observability (the deployer) to agree cutting over before its 7-day web-vitals baseline and to choose sidecar+emptyDir versus a CronJob writing a shared PVC; also waits on W518",
+      "next_bounded_step": "after W518: deploy/deployment.yaml as two containers (builder, server) with those constraints, validated by nemik's own checks; then message luthen-observability with the names and limits",
+      "evidence": "2026-10-15: 2026-10-15 asked luthen-observability (the deployer) to agree cutting over before its 7-day web-vitals baseline and to choose sidecar+emptyDir versus a CronJob writing a shared PVC; also waits on W518 | 2026-10-15: 2026-10-15 luthen-observability (the deployer) agreed: (1) cut over WITHOUT waiting for the 7-day web-vitals baseline (the flapping pod makes it no baseline); it releases W394's hold and restarts the baseline clock at the cutover; gate the cutover on W518 and on W504's pod shape passing nemik's own checks. (2) SHAPE: sidecar builder plus emptyDir per pod, no PVC. Constraints to carry: (a) the emptyDir is DISK-backed (not Medium Memory) with a declared sizeLimit, so the snapshot is not charged to container memory; (b) the builder rebuilds on a CHANGED source content hash (an event, not a timer) and has a cpu limit; (c) liveness and readiness on the static server must not depend on the builder (a stale-but-served snapshot beats a restart); (d) tell luthen the container names and requests/limits when ready, so it adds the workloads.json row (its memory_posture gate refuses a live pod with no row) and W1051/W505's witness reads the new containers",
       "issued_at": "2026-10-15T11:52:00Z",
       "minted_during": "tick",
       "caused_by": "W500",
-      "last_worked": "2026-10-15T12:12:55Z",
+      "last_worked": "2026-10-15T12:14:41Z",
       "ticks_blocked": 0,
       "weight": 3,
       "completed": null
@@ -9982,19 +9981,20 @@
     {
       "symbol": "W513",
       "title": "A new console script cannot reach the gate undeclared: one check names every registry it must appear in",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "nemik-static was refused three times by three registries (skill table, workflows.toml, BUILD console_scripts) found one gate failure at a time; a test or generator that reads pyproject [project.scripts] and lists every place each script must be declared (BUILD.bazel console_scripts, SKILL.md table, workflows.toml step or reference) in ONE finding, so adding a command is one pass",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-15: tests/test_script_registries.py: reads pyproject [project.scripts] against BUILD.bazel console_scripts, the skill's command table and workflows.toml together and names every gap of every missing command in ONE failure (nemik-static had been refused by three checks in turn, one gate run each); the per-registry tests stay; a second test pins the message",
       "issued_at": "2026-10-15T12:01:12Z",
       "minted_during": "tick",
       "caused_by": "W502",
-      "last_worked": null,
+      "last_worked": "2026-10-15T12:19:15Z",
       "ticks_blocked": 0,
-      "weight": 1
+      "weight": 1,
+      "completed": "20261015T121915Z"
     },
     {
       "symbol": "W514",
@@ -10009,11 +10009,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Use the existing import-edge derivation in mtools (corpus.import_edges, ask mtools-ad for the mode) over nemik, mtools/pathsforward and every consumer that pins either. Output: a derived graph with edges labelled import, subprocess, file format or CLI contract, and a list of places where pathsforward code assumes it is not nemik's concern (the cause of poor architecture the operator named). Record the graph and its generator command on this card.",
-      "evidence": "",
+      "evidence": "2026-10-15: mtools:W1251 first pass (written by the mtools session at github-8f's confirmed request; status untouched, W514 stays open until the CLI blind spot closes, mtools:W1252). GENERATOR: python3 -m mikemol.corpus.depmap [--rows] [--mention nemik] ROOT... (mtools corpus dist, AST-derived: import module-level vs deferred, subprocess literal argv, path constants, mention in comments/strings), run over 15 fleet repos. FINDINGS: (1) nemik imports mtools only (pathsforward from 8 src modules adapter alarm check marks metrics realize residue score; frontier from blocks rank; rulerseq from serve, six vendored wheels at ca6702b) and no file in the 15 repos imports nemik: nemik is a pure sink of import edges, so promotion changes pin direction only. (2) THE REAL COUPLING IS THE FILE FORMAT: paths-forward.json/.ledger/.marks.jsonl has one writer (pathsforward foreign.py:31 marks.py:33) and at least four independent readers across two repos: nemik, and mtools hooks (build_failure commit_kata inbound_asks nemik_check revendor_apply standing_facts tick_stop work_claims_hook), plus debtplan writes it. (3) nemik's shapes live as comments in pathsforward, not as a contract both sides test: 75 mentions in 20 src modules (ops 20, check 15, cli 10) plus 52 in its tests. (4) BLIND SPOT, printed on the tool's first line: no CLI edge between the lineages appears (nemik shows git and kubectl, pathsforward opa); shell hooks, variable argv and settings files are invisible to a literal-argv reader. Full note: mtools .claude/design/nemik-dependency-map.md",
       "issued_at": "2026-10-15T12:08:10Z",
       "minted_during": "tick",
       "caused_by": "operator",
-      "last_worked": null,
+      "last_worked": "2026-10-15T12:20:11Z",
       "ticks_blocked": 0,
       "weight": 11
     },
@@ -10093,12 +10093,12 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "measured on a pod-shaped export (queues and ledgers, no git), 17 repos: a cold build is 56.9 s CPU (document 33.0, shacl 12.3, ledger 5.2, parse 4.5), peak 530 MB; the second build in one process is 15.7 s (document 8.1, ledger 2.8, parse 2.5, shacl 0.2): the long-lived server's caches did the difference. Persist shaclinc._LAST (the last triples and findings per focus node) and flow._SOLVES (canonical inputs to solves) under BASE/.cache, loaded at start and rewritten at the end, so each short-lived build costs about the warm 16 s; a cache that fails to load is a cold build, never an error; the incremental==full claim of tests/test_shaclinc.py must still hold across a save and load",
-      "evidence": "",
+      "next_bounded_step": "wire publish(): load before the build, save after, and key it on CONTENT (luthen's constraint b); drafts ready (serve2.txt, test_publish2.txt), waiting for W503's commit",
+      "evidence": "2026-10-15: 2026-10-15 prototype (scratchpad cache_proto.py) then src/nemik/cachestore.py: save()/load() of shaclinc's last runs and flow's solves under BASE/.cache/build-caches.pickle, stamped by the shapes, shaclinc/flow/cachestore source and the pyshacl/rdflib versions (a different stamp, a damaged or missing file is a cold start, never an error); public export/import hooks on shaclinc and flow. Measured on the pod-shaped export: caches 9.6 MB, 0.6 s to load, a fresh process then rebuilds in 16.0 s CPU against 37-57 s cold; no blank nodes in the cached triples. tests/test_cachestore.py (5): exact round trip, an unchanged rebuild validates NOTHING after a restore, a stamp change distrusts it, damage is cold",
       "issued_at": "2026-10-15T12:10:05Z",
       "minted_during": "tick",
       "caused_by": "W503",
-      "last_worked": "2026-10-15T12:10:12Z",
+      "last_worked": "2026-10-15T12:18:45Z",
       "ticks_blocked": 0,
       "completed": null
     }
@@ -10170,10 +10170,7 @@
   ],
   "job_id": "6473ee18",
   "heartbeat": "2026-10-09T05:58:12Z",
-  "lock": {
-    "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-15T12:11:33Z"
-  },
+  "lock": null,
   "predecessor_job_id": "cc92a47b",
   "leases": []
 }
