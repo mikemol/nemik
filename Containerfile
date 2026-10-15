@@ -29,6 +29,8 @@ COPY tools ./tools
 COPY deploy ./deploy
 # nemik:W521: test_precommit_gate reads the pre-commit hook (the script it names is under tools/).
 COPY .githooks ./.githooks
+# nemik:W522: test_ruff_ratchet reads the house ruff config and the baseline it holds the tree to.
+COPY ruff-house.toml ruff-baseline.json ./
 COPY BUILD.bazel Containerfile ./
 # The hooks wiring (mikemol-hook-inbound-asks, mikemol-hook-nemik-check) is tested against the settings file.
 COPY .claude/settings.json ./.claude/settings.json

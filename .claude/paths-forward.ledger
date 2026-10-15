@@ -827,3 +827,4 @@
 2026-10-15T13:15:10Z  tick  W530 minted    -         "Standard terms in the RDF output: dcterms identifier, subject, typed created, a close time for completed, prov Agent for operator and sessions"  evidence=operator
 2026-10-15T13:15:11Z  tick  W531 minted    -         "Conformance tests against the standards: Prometheus output parsed with HELP lines, graph.ttl round-tripped, model.md TRS drift fixed"  evidence=operator
 2026-10-15T13:17:51Z  tick  W515 advanced  collapse  "W515 surveyed against mtools' gate (7 gaps minted W521-W527, umbrella); W523 no-waivers done (8 -> 0, whole-tree test, W475 guard improved); W518/W520/W523 in the gate; cluster at d45a5bc, W504 still waits for the W518 image"
+2026-10-15T14:15:05Z  tick  W532 minted    -         "Decide nemik's licence and copyright notice, then drop missing-copyright-notice from ruff-house.toml and add the notice to every file"  evidence=W522

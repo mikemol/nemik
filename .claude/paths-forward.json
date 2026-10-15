@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 531,
+  "counter": 532,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 270
+      "ticks_blocked": 272
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 90,
+      "ticks_blocked": 92,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 92,
+      "ticks_blocked": 94,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T23:37:26Z",
-      "ticks_blocked": 122,
+      "ticks_blocked": 124,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 119,
+      "ticks_blocked": 121,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 96,
+      "ticks_blocked": 98,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 111,
+      "ticks_blocked": 113,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 111,
+      "ticks_blocked": 113,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 111,
+      "ticks_blocked": 113,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 111,
+      "ticks_blocked": 113,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 111,
+      "ticks_blocked": 113,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 111,
+      "ticks_blocked": 113,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 111,
+      "ticks_blocked": 113,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 111,
+      "ticks_blocked": 113,
       "completed": null
     },
     {
@@ -6426,7 +6426,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T06:56:21Z",
-      "ticks_blocked": 37,
+      "ticks_blocked": 39,
       "completed": null
     },
     {
@@ -6450,7 +6450,7 @@
       "minted_during": "tick",
       "caused_by": "W337",
       "last_worked": "2026-10-13T07:54:43Z",
-      "ticks_blocked": 36,
+      "ticks_blocked": 38,
       "weight": 5,
       "completed": null
     },
@@ -6624,7 +6624,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 86,
+      "ticks_blocked": 88,
       "completed": null
     },
     {
@@ -7032,7 +7032,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 24,
+      "ticks_blocked": 26,
       "completed": null
     },
     {
@@ -7145,7 +7145,7 @@
       "minted_during": "interrupt",
       "caused_by": "W364",
       "last_worked": null,
-      "ticks_blocked": 5
+      "ticks_blocked": 7
     },
     {
       "symbol": "W370",
@@ -7169,7 +7169,7 @@
       "minted_during": "interrupt",
       "caused_by": "W364",
       "last_worked": null,
-      "ticks_blocked": 5
+      "ticks_blocked": 7
     },
     {
       "symbol": "W371",
@@ -7639,7 +7639,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 47,
+      "ticks_blocked": 49,
       "completed": null
     },
     {
@@ -7663,7 +7663,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 62,
+      "ticks_blocked": 64,
       "completed": null
     },
     {
@@ -7711,7 +7711,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-15T12:14:41Z",
-      "ticks_blocked": 62,
+      "ticks_blocked": 64,
       "completed": null
     },
     {
@@ -7735,7 +7735,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 62,
+      "ticks_blocked": 64,
       "completed": null
     },
     {
@@ -8292,7 +8292,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
@@ -8313,7 +8313,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T05:38:02Z",
-      "ticks_blocked": 41,
+      "ticks_blocked": 43,
       "completed": null
     },
     {
@@ -8334,7 +8334,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 43,
+      "ticks_blocked": 45,
       "completed": null
     },
     {
@@ -8598,7 +8598,7 @@
       "minted_during": "tick",
       "caused_by": "W338",
       "last_worked": "2026-10-13T08:13:31Z",
-      "ticks_blocked": 36,
+      "ticks_blocked": 38,
       "completed": null
     },
     {
@@ -8825,7 +8825,7 @@
       "minted_during": "tick",
       "caused_by": "W426",
       "last_worked": "2026-10-13T13:18:45Z",
-      "ticks_blocked": 21,
+      "ticks_blocked": 23,
       "completed": null
     },
     {
@@ -8974,7 +8974,7 @@
       "minted_during": "tick",
       "caused_by": "W458",
       "last_worked": "2026-10-13T19:10:34Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 10,
       "completed": null
     },
     {
@@ -9050,7 +9050,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T19:10:41Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 10,
       "weight": 3,
       "completed": null
     },
@@ -9142,7 +9142,7 @@
       "minted_during": "tick",
       "caused_by": "W463",
       "last_worked": "2026-10-13T20:15:42Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 7,
       "weight": 2,
       "completed": null
     },
@@ -9472,7 +9472,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-13T22:03:19Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 7,
       "completed": null
     },
     {
@@ -9525,7 +9525,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-13T22:08:26Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 7,
       "completed": null
     },
     {
@@ -9726,11 +9726,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "W502 first: nemik-serve --serve DIR as a file server with no model and no rdflib import",
-      "evidence": "2026-10-15: 2026-10-15 luthen census (read-only): the two OLD nemik pods (Terminating, stale shim) still run nemik-serve, one at RSS 728 MB after about 40 h (started 2026-10-13 19:46), so four nemik servers share the host. Growth data point: the new pods reach about 800 MB within an hour of start, the old one sat at 728 MB after 40 h, so growth may be driven by load or startup work (cache fill) and not by time alone; the old pods are outside the cgroup limit that OOM-kills the new ones. Orphans cost about 1.4 GB RSS. | 2026-10-15: 2026-10-15 operator direction to nemik: design the web view for static serving (assume the pod must sustain orders of magnitude more requests at orders of magnitude more graph churn). Existing lever: nemik-serve --static OUT --withheld FILE already writes the merged graph as static files behind luthen's withheld list (exit 2 and nothing written when the list is missing). The memory fix may therefore be structural, not a leak hunt: build the view from the queues on an event (a queue changed) into static files, serve them with a tiny fileserver whose memory does not depend on graph size, keep the live graph engine out of the request path. Measure first (RSS per phase, W500 original step), then choose; keep the withheld-list refusal and the no-literal-address rule. | 2026-10-15: 2026-10-15 measured (scratchpad rss_rebuilds.py, leak_types.py; fleet 6774 nodes, 192,980 triples, payload 4.8 MB): forcing Model.refresh() repeatedly in one process: RSS 487 MB after the first build, 722 after the second, ~800 by the third, and 780 MB AFTER a full gc at rebuild 8, still climbing ~20 MB per rebuild; the pod rebuilds about once a minute (luthen's export changes every minute). Python object counts are FLAT (1.766 M tracked objects, 33 Graph objects, solves cache 24-26 entries ~0.5 MB), so this is allocator fragmentation from building and freeing a ~190k-triple graph repeatedly, not a retained object; bounding it in the same process is the wrong lever. Operator ruling 2026-10-15: the pod becomes ~static serving; request count and graph churn must scale independently (a request is a file read, churn is a build rate, not a per-request cost); this is also why py2many/TypeScript was explored (W422): compute moves to the client or the build. Chain: W502 file server, W503 atomic publish in a fresh process, W504 the pod's shape, W505 the uncensored series, W506 build outside the cluster | 2026-10-15: CORRECTION 2026-10-15 (host, same day): the operator does NOT want intermediate artifacts. Withdraw the suggestion to build static files from the queues on an event. Keep the direction (memory independent of graph size and request count) but without a build step: serve each response as a pure function of the source queues, computed lazily per request and streamed (no resident merged graph), with HTTP validators keyed by the source files' content hashes (ETag and 304) so churn and repeated requests cost almost nothing, and any memo bounded and keyed by those hashes. The --static mode stays as it is, not a new dependency. | 2026-10-15: 2026-10-15 operator: the cluster already runs valkey, so the memo lives there, not in the pod. Design constraints from the fleet rules: key = content hash of the source queue files, so there is no invalidation protocol and no TTL (no wall-clock expiry); bounded by valkey maxmemory with an LRU eviction policy, so the cache is never the source of truth and losing it only costs a recompute (a recovery path, not data); if valkey is unreachable nemik degrades to computing without a memo and stays up; the pod keeps no resident graph. Open for luthen-observability: which valkey instance and namespace to use, its memory budget given the tier pressure, and the network policy for nemik to reach it. | 2026-10-15: CORRECTION 2026-10-15 (operator): use the EXISTING valkey instance, no new one and no budget negotiation: its memory is already dynamically managed. Put TTLs on everything nemik writes there (TTL is expiry of cache entries, not a timeout on work, so it does not conflict with the no-wall-clock-timeouts rule; correctness never depends on it because keys are content hashes). Withdraw my earlier 'no TTLs' and 'maxmemory plus LRU' constraints: the instance's own management governs eviction. Remaining for luthen-observability only: the key prefix convention and the declared network path from the nemik namespace, no literal address on a card. | 2026-10-15: 2026-10-15 luthen answers (luthen-observability:W1066): the existing valkey is BuildBuddy's scheduler store, Service cache in the buildbuddy namespace on 6379; no NetworkPolicy in buildbuddy or nemik (default allow), reach it by service name; W1066 declares an endpoints.json row valkey so nemik resolves it by name. Key prefix nemik:memo:<content-hash>, registered in valkey_keys.json (one owner per prefix, overlap test). CAUTION: this store evicted live BuildBuddy TASK records under allkeys-lfu on 2026-09-25 at 256 MB, so every nemik key MUST carry a TTL and every value a size cap so the memo cannot crowd the scheduler; today 1.5 MB of 2 GB used, valkey_evicting already alerts. | 2026-10-15: 2026-10-15 operator: salt the memo key with a checksum of the key name and the semantic version. Host note on sufficiency: sound if the key covers EVERYTHING the response depends on: (1) content hashes of every source queue file read, (2) the request shape (view, filters, format), (3) the withheld list's own hash, because a response filtered by a different withheld list must never be served from the cache of another (a leak path, not a staleness bug), (4) the code identity: a semantic version only if it is bumped on every behavior change, otherwise add the image digest or tag sha, since dev builds share a version. Hash an unambiguous encoding (length-prefixed fields). Never put a withheld response behind a key a less-privileged request could compute. Test: change each input in turn and assert the key changes. | 2026-10-15: CORRECTION 2026-10-15 (operator): request filters do NOT go in the cache key. They are cheap and the highest-entropy input, so keying on them defeats the cache. Cache only the expensive filter-independent result per view and format, and apply the request filters at response time. Distinction kept: the WITHHELD list is policy, not a request filter. It is applied before anything is stored and stays in the key (its hash), because the valkey instance has no network policy and holds the value in clear, so a withheld record must never be written there. Withdraw the earlier 'request shape: view, filters, format' wording: the key is source hashes, view, format, withheld-list hash and code identity. | 2026-10-15: DIRECTION 2026-10-15 (operator): get the data to the client and let the client do the work; no smarts in the server. Supersedes the per-view and per-format server computation in earlier notes: the server returns the source data (as the queues already store it) with ETag and 304 from the source files' content hashes, and the client does views, filters, sorting, grouping and formatting. The ONE server-side duty that stays is the withheld policy, because it is a security boundary and withheld data must never reach the client or valkey. Memo (if any is still needed) is just the withheld-applied payload keyed by source hashes, withheld-list hash and code identity, with TTL and size cap. Measure RSS per phase first; expect the pod to shrink to a file-reading handler. | 2026-10-15: CORRECTION 2026-10-15 (operator): the withholding rules and semantics belong in the owning repos, and the pod must not be able to see data that must not pass through. Withdraw every earlier note that put the withheld list in the serving path or the cache key: the pod receives only what each repo exports (nemik:W516), so there is nothing to withhold at serve time and the cache can hold what the pod can see. Host had asserted a serve-time withheld boundary without reading the serving path; the code (withheld.py) applies the list only when building the public static copy. Related: nemik:W514 (dependency map), W515 (nemik held to mtools standards), W517 (promote pathsforward into nemik).",
+      "evidence": "2026-10-15: 2026-10-15 luthen census (read-only): the two OLD nemik pods (Terminating, stale shim) still run nemik-serve, one at RSS 728 MB after about 40 h (started 2026-10-13 19:46), so four nemik servers share the host. Growth data point: the new pods reach about 800 MB within an hour of start, the old one sat at 728 MB after 40 h, so growth may be driven by load or startup work (cache fill) and not by time alone; the old pods are outside the cgroup limit that OOM-kills the new ones. Orphans cost about 1.4 GB RSS. | 2026-10-15: 2026-10-15 operator direction to nemik: design the web view for static serving (assume the pod must sustain orders of magnitude more requests at orders of magnitude more graph churn). Existing lever: nemik-serve --static OUT --withheld FILE already writes the merged graph as static files behind luthen's withheld list (exit 2 and nothing written when the list is missing). The memory fix may therefore be structural, not a leak hunt: build the view from the queues on an event (a queue changed) into static files, serve them with a tiny fileserver whose memory does not depend on graph size, keep the live graph engine out of the request path. Measure first (RSS per phase, W500 original step), then choose; keep the withheld-list refusal and the no-literal-address rule. | 2026-10-15: 2026-10-15 measured (scratchpad rss_rebuilds.py, leak_types.py; fleet 6774 nodes, 192,980 triples, payload 4.8 MB): forcing Model.refresh() repeatedly in one process: RSS 487 MB after the first build, 722 after the second, ~800 by the third, and 780 MB AFTER a full gc at rebuild 8, still climbing ~20 MB per rebuild; the pod rebuilds about once a minute (luthen's export changes every minute). Python object counts are FLAT (1.766 M tracked objects, 33 Graph objects, solves cache 24-26 entries ~0.5 MB), so this is allocator fragmentation from building and freeing a ~190k-triple graph repeatedly, not a retained object; bounding it in the same process is the wrong lever. Operator ruling 2026-10-15: the pod becomes ~static serving; request count and graph churn must scale independently (a request is a file read, churn is a build rate, not a per-request cost); this is also why py2many/TypeScript was explored (W422): compute moves to the client or the build. Chain: W502 file server, W503 atomic publish in a fresh process, W504 the pod's shape, W505 the uncensored series, W506 build outside the cluster | 2026-10-15: CORRECTION 2026-10-15 (host, same day): the operator does NOT want intermediate artifacts. Withdraw the suggestion to build static files from the queues on an event. Keep the direction (memory independent of graph size and request count) but without a build step: serve each response as a pure function of the source queues, computed lazily per request and streamed (no resident merged graph), with HTTP validators keyed by the source files' content hashes (ETag and 304) so churn and repeated requests cost almost nothing, and any memo bounded and keyed by those hashes. The --static mode stays as it is, not a new dependency. | 2026-10-15: 2026-10-15 operator: the cluster already runs valkey, so the memo lives there, not in the pod. Design constraints from the fleet rules: key = content hash of the source queue files, so there is no invalidation protocol and no TTL (no wall-clock expiry); bounded by valkey maxmemory with an LRU eviction policy, so the cache is never the source of truth and losing it only costs a recompute (a recovery path, not data); if valkey is unreachable nemik degrades to computing without a memo and stays up; the pod keeps no resident graph. Open for luthen-observability: which valkey instance and namespace to use, its memory budget given the tier pressure, and the network policy for nemik to reach it. | 2026-10-15: CORRECTION 2026-10-15 (operator): use the EXISTING valkey instance, no new one and no budget negotiation: its memory is already dynamically managed. Put TTLs on everything nemik writes there (TTL is expiry of cache entries, not a timeout on work, so it does not conflict with the no-wall-clock-timeouts rule; correctness never depends on it because keys are content hashes). Withdraw my earlier 'no TTLs' and 'maxmemory plus LRU' constraints: the instance's own management governs eviction. Remaining for luthen-observability only: the key prefix convention and the declared network path from the nemik namespace, no literal address on a card. | 2026-10-15: 2026-10-15 luthen answers (luthen-observability:W1066): the existing valkey is BuildBuddy's scheduler store, Service cache in the buildbuddy namespace on 6379; no NetworkPolicy in buildbuddy or nemik (default allow), reach it by service name; W1066 declares an endpoints.json row valkey so nemik resolves it by name. Key prefix nemik:memo:<content-hash>, registered in valkey_keys.json (one owner per prefix, overlap test). CAUTION: this store evicted live BuildBuddy TASK records under allkeys-lfu on 2026-09-25 at 256 MB, so every nemik key MUST carry a TTL and every value a size cap so the memo cannot crowd the scheduler; today 1.5 MB of 2 GB used, valkey_evicting already alerts. | 2026-10-15: 2026-10-15 operator: salt the memo key with a checksum of the key name and the semantic version. Host note on sufficiency: sound if the key covers EVERYTHING the response depends on: (1) content hashes of every source queue file read, (2) the request shape (view, filters, format), (3) the withheld list's own hash, because a response filtered by a different withheld list must never be served from the cache of another (a leak path, not a staleness bug), (4) the code identity: a semantic version only if it is bumped on every behavior change, otherwise add the image digest or tag sha, since dev builds share a version. Hash an unambiguous encoding (length-prefixed fields). Never put a withheld response behind a key a less-privileged request could compute. Test: change each input in turn and assert the key changes. | 2026-10-15: CORRECTION 2026-10-15 (operator): request filters do NOT go in the cache key. They are cheap and the highest-entropy input, so keying on them defeats the cache. Cache only the expensive filter-independent result per view and format, and apply the request filters at response time. Distinction kept: the WITHHELD list is policy, not a request filter. It is applied before anything is stored and stays in the key (its hash), because the valkey instance has no network policy and holds the value in clear, so a withheld record must never be written there. Withdraw the earlier 'request shape: view, filters, format' wording: the key is source hashes, view, format, withheld-list hash and code identity. | 2026-10-15: DIRECTION 2026-10-15 (operator): get the data to the client and let the client do the work; no smarts in the server. Supersedes the per-view and per-format server computation in earlier notes: the server returns the source data (as the queues already store it) with ETag and 304 from the source files' content hashes, and the client does views, filters, sorting, grouping and formatting. The ONE server-side duty that stays is the withheld policy, because it is a security boundary and withheld data must never reach the client or valkey. Memo (if any is still needed) is just the withheld-applied payload keyed by source hashes, withheld-list hash and code identity, with TTL and size cap. Measure RSS per phase first; expect the pod to shrink to a file-reading handler. | 2026-10-15: CORRECTION 2026-10-15 (operator): the withholding rules and semantics belong in the owning repos, and the pod must not be able to see data that must not pass through. Withdraw every earlier note that put the withheld list in the serving path or the cache key: the pod receives only what each repo exports (nemik:W516), so there is nothing to withhold at serve time and the cache can hold what the pod can see. Host had asserted a serve-time withheld boundary without reading the serving path; the code (withheld.py) applies the list only when building the public static copy. Related: nemik:W514 (dependency map), W515 (nemik held to mtools standards), W517 (promote pathsforward into nemik). | 2026-10-15: 2026-10-15 luthen b82c3cf7: valkey_keys.json registers nemik:memo: as nemik's prefix with ttl_required; every other key is BuildBuddy's. The per-value size cap is nemik's to declare. Remaining on luthen-observability W1066: the endpoints.json client row so nemik dials the cache by declared name.",
       "issued_at": "2026-10-15T03:50:31Z",
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W1051",
-      "last_worked": "2026-10-15T12:08:21Z",
+      "last_worked": "2026-10-15T14:03:08Z",
       "ticks_blocked": 0,
       "completed": null,
       "weight": 6
@@ -9800,7 +9800,7 @@
     {
       "symbol": "W504",
       "title": "The pod's shape: a builder container loops --publish into a shared volume, a small server container runs --serve",
-      "status": "working",
+      "status": "ready",
       "enables": [
         "W500"
       ],
@@ -9812,7 +9812,7 @@
       "issued_at": "2026-10-15T11:52:00Z",
       "minted_during": "tick",
       "caused_by": "W500",
-      "last_worked": "2026-10-15T13:20:29Z",
+      "last_worked": "2026-10-15T14:13:11Z",
       "ticks_blocked": 0,
       "weight": 3,
       "completed": null
@@ -9856,7 +9856,7 @@
       "minted_during": "tick",
       "caused_by": "W500",
       "last_worked": "2026-10-15T11:53:53Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -9974,7 +9974,7 @@
       "minted_during": "tick",
       "caused_by": "github:W35",
       "last_worked": "2026-10-15T12:00:59Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
@@ -10028,7 +10028,6 @@
         "gate"
       ],
       "blocked_on": [
-        "W521",
         "W522",
         "W524",
         "W525",
@@ -10042,7 +10041,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-15T13:14:23Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "weight": 10,
       "completed": null
     },
@@ -10087,7 +10086,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-15T12:08:20Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 5,
       "completed": null
     },
     {
@@ -10172,21 +10171,22 @@
     {
       "symbol": "W522",
       "title": "A house ruff configuration and a ruff stage over every Python file in the gate",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W515"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "nemik has no [tool.ruff]; the edit hook lints only touched files with mtools' own rules; copy mtools' house config (select ALL, per-file ignores only by responsibility) into pyproject, run ruff over src tests checks tools as a bazel check target, measure the findings first and baseline them for the ratchet (W524) rather than fixing by hand",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-15: tools/ruff_ratchet.py + ruff-house.toml + ruff-baseline.json (3020 findings, paydown-only); tests/test_ruff_ratchet.py in //:precommit; licence-notice rule carded as W532",
       "issued_at": "2026-10-15T13:14:05Z",
       "minted_during": "tick",
       "caused_by": "W515",
-      "last_worked": "2026-10-15T13:14:22Z",
+      "last_worked": "2026-10-15T14:17:03Z",
       "ticks_blocked": 0,
-      "weight": 7
+      "weight": 7,
+      "completed": "20261015T141703Z"
     },
     {
       "symbol": "W523",
@@ -10210,7 +10210,7 @@
     {
       "symbol": "W524",
       "title": "House-strict mypy under mtools' paydown-only ratchet: baseline the 6,369 findings and let the count only fall",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W515"
       ],
@@ -10222,9 +10222,10 @@
       "issued_at": "2026-10-15T13:14:07Z",
       "minted_during": "tick",
       "caused_by": "W515",
-      "last_worked": null,
+      "last_worked": "2026-10-15T14:17:07Z",
       "ticks_blocked": 0,
-      "weight": 7
+      "weight": 7,
+      "completed": null
     },
     {
       "symbol": "W525",
@@ -10368,6 +10369,27 @@
       "last_worked": null,
       "ticks_blocked": 0,
       "weight": 9
+    },
+    {
+      "symbol": "W532",
+      "title": "Decide nemik's licence and copyright notice, then drop missing-copyright-notice from ruff-house.toml and add the notice to every file",
+      "status": "blocked",
+      "enables": [
+        "W515"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "operator: decide nemik's licence (Apache-2.0 as mtools, or other) so the SPDX and copyright notice can be added to every file"
+      ],
+      "blocked_kind": "human",
+      "next_bounded_step": "after the ruling: add the notice header to every Python file, drop missing-copyright-notice from ruff-house.toml, lower the baseline",
+      "evidence": "",
+      "issued_at": "2026-10-15T14:15:05Z",
+      "minted_during": "tick",
+      "caused_by": "W522",
+      "last_worked": "2026-10-15T14:15:09Z",
+      "ticks_blocked": 0,
+      "completed": null
     }
   ],
   "residue": [
@@ -10439,7 +10461,7 @@
   "heartbeat": "2026-10-09T05:58:12Z",
   "lock": {
     "holder": "agent-nemik-bb",
-    "taken_at": "2026-10-15T13:41:06Z"
+    "taken_at": "2026-10-15T14:11:32Z"
   },
   "predecessor_job_id": "cc92a47b",
   "leases": []

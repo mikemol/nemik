@@ -63,19 +63,36 @@ def _declared() -> tuple[set[str], list[str]]:
     # only the test macro's own data list (up to its env): the venv's srcs glob is not test data
     data = build.split("data = [", 1)[1].split("env = {", 1)[0]
     files = set(re.findall(r'"([\w./-]+\.[\w]+|[\w./-]+/[\w.-]+|Containerfile)"', data))
-    # every pattern of every glob([...]): its directory part, up to the first wildcard, is a covered prefix
-    prefixes = [
-        item.split("*")[0]
+    # every pattern of every glob([...]): a trailing `**` covers a directory, any other pattern its matches
+    patterns = [
+        item
         for group in re.findall(r"glob\(\[([^\]]*)\]", data)
         for item in re.findall(r'"([^"]+)"', group)
     ]
+    prefixes = [item.split("*")[0] for item in patterns if item.endswith("**")]
+    files |= {item for item in patterns if not item.endswith("**")}
     pkgs = re.findall(r'"//([\w/]+):(\w+)"', data)
     prefixes += [f"{pkg}/{name}/" for pkg, name in pkgs]
     return files, prefixes
 
 
+def _glob(pattern: str) -> re.Pattern[str]:
+    """Translate a BUILD glob pattern to a regex.
+
+    Returns:
+        A pattern where `**` crosses directories and `*` stays within one.
+
+    """
+    return re.compile(re.escape(pattern).replace(r"\*\*", ".*").replace(r"\*", "[^/]*"))
+
+
 def _covered(path: str, files: set[str], prefixes: list[str]) -> bool:
-    if path in files:
+    if path in files or any(
+        _glob(item).fullmatch(path) for item in files if "*" in item
+    ):
+        return True
+    # a directory some declared glob reaches into
+    if any(item.startswith(f"{path}/") for item in files):
         return True
     return any(f"{path}/".startswith(p) or path.startswith(p) for p in prefixes)
 

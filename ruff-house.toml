@@ -1,0 +1,30 @@
+# nemik:W522: mtools' house ruff rules (every rule, preview on), applied only by tools/ruff_ratchet.py
+# against ruff-baseline.json. pyproject's [tool.ruff] stays the edit hook's lighter check until the
+# baseline reaches zero, because selecting every rule there would refuse any edit to a file that already
+# carries a finding. Relief is never granted here: a finding is fixed or it stays in the baseline.
+line-length = 100
+target-version = "py313"
+extend-exclude = ["bazel-*", ".claude", ".venv"]
+# tests/, tools/ and checks/ are scripts and test modules, not packages (mtools declares its own the same way).
+namespace-packages = ["tests", "tools", "checks"]
+
+[lint]
+preview = true
+select = ["ALL"]
+ignore = [
+    # The repo carries no licence file, so a copyright notice is a decision no agent can make: it is
+    # carded for the operator (nemik:W532) and this entry leaves with the answer.
+    "missing-copyright-notice",
+    "incorrect-blank-line-before-class",
+    "multi-line-summary-second-line",
+    "missing-trailing-comma",
+]
+
+[lint.per-file-ignores]
+# A test's job is to assert; this is the one relief, granted to the test modules by responsibility.
+"tests/test_*.py" = ["S101"]
+# Running the ratchet is the whole job of its test: an argv list, no shell, this interpreter.
+"tests/test_ruff_ratchet.py" = ["suspicious-subprocess-import", "subprocess-without-shell-equals-true"]
+
+[lint.flake8-pytest-style]
+fixture-parentheses = true

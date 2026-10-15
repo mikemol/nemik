@@ -1,0 +1,1460 @@
+{
+ "checks/claims.py": {
+  "ANN001": 3,
+  "ANN201": 19,
+  "ANN202": 1,
+  "D103": 20,
+  "D205": 1,
+  "E501": 1,
+  "PLC0415": 3,
+  "PLR2004": 1,
+  "S101": 25,
+  "T201": 2
+ },
+ "src/nemik/__init__.py": {
+  "D401": 1,
+  "DOC201": 1,
+  "E501": 3,
+  "RUF067": 2,
+  "T201": 1
+ },
+ "src/nemik/adapter.py": {
+  "C901": 1,
+  "D103": 3,
+  "D401": 2,
+  "DOC201": 6,
+  "E501": 4,
+  "PLC0415": 2,
+  "PLR0912": 1,
+  "PLR0915": 1,
+  "RUF001": 1,
+  "RUF031": 1,
+  "TC003": 2
+ },
+ "src/nemik/adoption.py": {
+  "D400": 1,
+  "D401": 1,
+  "DOC201": 1,
+  "TC003": 1
+ },
+ "src/nemik/alarm.py": {
+  "D401": 2,
+  "DOC201": 3,
+  "PLC0415": 2,
+  "PLR0913": 1,
+  "S101": 2
+ },
+ "src/nemik/apischema.py": {
+  "D401": 3,
+  "DOC201": 5,
+  "E501": 6
+ },
+ "src/nemik/blocks.py": {
+  "C416": 1,
+  "C901": 2,
+  "D103": 1,
+  "D205": 5,
+  "D209": 4,
+  "D401": 1,
+  "DOC201": 9,
+  "E501": 8,
+  "FBT001": 1,
+  "FBT002": 1,
+  "FBT003": 1,
+  "FURB118": 1,
+  "PLC0415": 6,
+  "PLR0912": 2,
+  "PLR0914": 1,
+  "PLR2004": 4,
+  "TC002": 1
+ },
+ "src/nemik/blocks_cli.py": {
+  "E501": 4,
+  "PLC0415": 2,
+  "T201": 6
+ },
+ "src/nemik/cachestore.py": {
+  "D401": 1,
+  "DOC201": 3,
+  "E501": 4,
+  "PTH105": 1,
+  "S301": 1,
+  "S403": 1
+ },
+ "src/nemik/calendars.py": {
+  "ANN001": 2,
+  "ANN201": 1,
+  "C901": 2,
+  "D205": 3,
+  "D209": 2,
+  "D401": 1,
+  "DOC201": 7,
+  "DOC501": 4,
+  "E501": 2,
+  "EM102": 2,
+  "PLC0415": 11,
+  "PLR0913": 1,
+  "PLW1514": 1,
+  "PLW2901": 2,
+  "S404": 1,
+  "S603": 2,
+  "T201": 8,
+  "TRY003": 2
+ },
+ "src/nemik/calwrite.py": {
+  "ANN001": 1,
+  "D103": 1,
+  "D401": 3,
+  "DOC201": 9,
+  "E501": 1,
+  "FBT001": 2,
+  "FURB118": 1,
+  "PLR0913": 1,
+  "PLR0917": 1,
+  "S404": 1,
+  "S603": 1,
+  "T201": 4,
+  "TC003": 1
+ },
+ "src/nemik/cards.py": {
+  "D102": 2,
+  "D209": 1,
+  "DOC201": 1,
+  "E501": 3,
+  "PLC0415": 1,
+  "TC002": 1
+ },
+ "src/nemik/catalog.py": {
+  "D401": 1,
+  "DOC201": 1,
+  "E501": 3
+ },
+ "src/nemik/check.py": {
+  "ANN001": 1,
+  "C901": 1,
+  "D103": 2,
+  "D401": 1,
+  "DOC201": 5,
+  "DOC402": 1,
+  "E501": 8,
+  "PLC0415": 16,
+  "PLR0912": 1,
+  "PLR0914": 1,
+  "PLR0915": 1,
+  "PLR2004": 1,
+  "S404": 1,
+  "S603": 1,
+  "S607": 1,
+  "T201": 10,
+  "TC003": 1
+ },
+ "src/nemik/churn.py": {
+  "D102": 1,
+  "D103": 1,
+  "D205": 1,
+  "D209": 1,
+  "D401": 3,
+  "DOC201": 8,
+  "E501": 4,
+  "FBT001": 1,
+  "FURB113": 1,
+  "T201": 2
+ },
+ "src/nemik/critical.py": {
+  "C901": 3,
+  "D101": 2,
+  "D205": 5,
+  "D209": 5,
+  "D401": 2,
+  "DOC201": 8,
+  "E501": 13,
+  "PLC0415": 3,
+  "PLR0912": 1,
+  "PLR0914": 1,
+  "PLR2004": 1,
+  "T201": 11,
+  "TC001": 1,
+  "TC002": 1
+ },
+ "src/nemik/endpoint.py": {
+  "DOC201": 2,
+  "S404": 1,
+  "S603": 1,
+  "TC003": 1
+ },
+ "src/nemik/floorasks.py": {
+  "D103": 1,
+  "DOC201": 2,
+  "T201": 2
+ },
+ "src/nemik/flow.py": {
+  "C901": 1,
+  "DOC201": 1,
+  "DOC502": 1,
+  "E501": 12,
+  "PLC0415": 1,
+  "PLR0912": 1,
+  "RUF031": 1
+ },
+ "src/nemik/health.py": {
+  "D101": 1,
+  "D401": 1,
+  "DOC201": 3,
+  "E501": 4,
+  "PLR2004": 1,
+  "TC002": 1
+ },
+ "src/nemik/history.py": {
+  "D103": 1,
+  "D205": 6,
+  "D209": 5,
+  "D401": 4,
+  "DOC201": 15,
+  "E501": 9,
+  "FURB140": 1,
+  "PLC0415": 4,
+  "PLR0914": 1,
+  "PLR6201": 6,
+  "S404": 1,
+  "S603": 1,
+  "S607": 1,
+  "T201": 14
+ },
+ "src/nemik/hostapply.py": {
+  "FURB110": 1,
+  "S404": 1,
+  "S603": 1
+ },
+ "src/nemik/importer.py": {
+  "D401": 1,
+  "DOC201": 2,
+  "E501": 6,
+  "PLC0415": 2,
+  "PLW1514": 2,
+  "T201": 1,
+  "TC001": 1
+ },
+ "src/nemik/index.py": {
+  "D102": 3,
+  "D401": 1,
+  "DOC201": 1,
+  "E501": 2,
+  "PLW0603": 1,
+  "TC002": 2,
+  "TC003": 1,
+  "UP052": 1
+ },
+ "src/nemik/issues.py": {
+  "D103": 1,
+  "D401": 1,
+  "DOC201": 2,
+  "E501": 5
+ },
+ "src/nemik/letters.py": {
+  "D101": 1,
+  "D205": 5,
+  "D209": 4,
+  "D400": 1,
+  "D401": 2,
+  "D413": 1,
+  "DOC201": 14,
+  "E501": 11,
+  "FBT001": 2,
+  "FBT002": 2,
+  "PLC0415": 3,
+  "PLR0913": 2,
+  "PLR0917": 2,
+  "PLR6201": 2,
+  "PLW1514": 3,
+  "S404": 1,
+  "S603": 1,
+  "SIM108": 2
+ },
+ "src/nemik/manifest.py": {
+  "ANN001": 3,
+  "D103": 1,
+  "DOC201": 1,
+  "E501": 1
+ },
+ "src/nemik/marks.py": {
+  "TC002": 1,
+  "TC003": 1
+ },
+ "src/nemik/metrics.py": {
+  "C901": 1,
+  "D103": 3,
+  "D205": 3,
+  "D209": 3,
+  "DOC201": 4,
+  "E501": 9,
+  "FURB113": 1,
+  "PLC0415": 4,
+  "PLR0912": 1,
+  "PLR0915": 1,
+  "PLR6201": 1,
+  "PTH111": 1,
+  "RUF031": 1,
+  "T201": 1
+ },
+ "src/nemik/mspdi.py": {
+  "D401": 2,
+  "DOC201": 2,
+  "E501": 5,
+  "FBT003": 1,
+  "PLC0415": 9,
+  "S314": 1,
+  "S405": 1
+ },
+ "src/nemik/overlaps.py": {
+  "D101": 1,
+  "D103": 2,
+  "D205": 1,
+  "D209": 1,
+  "D401": 1,
+  "DOC201": 3,
+  "E501": 2,
+  "FBT001": 1,
+  "FBT002": 1,
+  "PLC0415": 2,
+  "PLR2004": 2,
+  "RUF031": 1,
+  "S404": 1,
+  "S603": 1,
+  "T201": 2,
+  "TC002": 1
+ },
+ "src/nemik/pacing.py": {
+  "D101": 1,
+  "D401": 1,
+  "DOC201": 3,
+  "E501": 1,
+  "PLC0415": 1,
+  "T201": 2
+ },
+ "src/nemik/pieces.py": {
+  "D401": 1,
+  "DOC201": 2,
+  "E501": 1,
+  "FURB118": 1
+ },
+ "src/nemik/pins.py": {
+  "D101": 1,
+  "D205": 3,
+  "D209": 2,
+  "D400": 1,
+  "D401": 1,
+  "DOC201": 5,
+  "E501": 2,
+  "FURB142": 2,
+  "PLC0415": 1,
+  "PLW1514": 1,
+  "S404": 1,
+  "S603": 3,
+  "S607": 3,
+  "T201": 7
+ },
+ "src/nemik/projection.py": {
+  "D102": 1,
+  "D401": 1,
+  "DOC201": 3,
+  "E501": 2
+ },
+ "src/nemik/rank.py": {
+  "ANN001": 4,
+  "C901": 1,
+  "D101": 2,
+  "D103": 2,
+  "D205": 2,
+  "D209": 1,
+  "D401": 4,
+  "DOC201": 21,
+  "DOC501": 3,
+  "E501": 7,
+  "EM102": 2,
+  "PERF401": 1,
+  "PLC0415": 24,
+  "PLR0911": 1,
+  "PLR0912": 1,
+  "PLR0913": 2,
+  "PLR0914": 1,
+  "PLR0915": 1,
+  "PLW1514": 1,
+  "S404": 1,
+  "S603": 1,
+  "T201": 27,
+  "TC002": 1,
+  "TRY003": 2
+ },
+ "src/nemik/realize.py": {
+  "DOC502": 1,
+  "E501": 1,
+  "PERF401": 1
+ },
+ "src/nemik/salience.py": {
+  "C901": 1,
+  "D205": 1,
+  "D401": 1,
+  "DOC201": 1,
+  "E501": 7,
+  "FBT001": 2,
+  "FBT002": 2,
+  "PLC0415": 6,
+  "PLR0912": 1,
+  "PLR0913": 3,
+  "PLR0914": 1,
+  "PLR0915": 1,
+  "PLR0917": 3,
+  "PLW0603": 1,
+  "TC003": 1,
+  "UP052": 1
+ },
+ "src/nemik/score.py": {
+  "D101": 2,
+  "D103": 1,
+  "D401": 1,
+  "DOC201": 6,
+  "DOC501": 1,
+  "E501": 2,
+  "EM102": 3,
+  "TRY003": 3
+ },
+ "src/nemik/serve.py": {
+  "ANN001": 1,
+  "C901": 3,
+  "D101": 1,
+  "D102": 3,
+  "D103": 2,
+  "D107": 1,
+  "D205": 9,
+  "D209": 9,
+  "D401": 3,
+  "DOC201": 12,
+  "DOC501": 1,
+  "E501": 30,
+  "FBT001": 2,
+  "FBT002": 2,
+  "FURB110": 1,
+  "FURB118": 2,
+  "PLC0415": 26,
+  "PLR0912": 2,
+  "PLR0914": 1,
+  "PLR0915": 1,
+  "PLR6201": 3,
+  "PTH105": 1,
+  "T201": 4
+ },
+ "src/nemik/shaclcache.py": {
+  "ANN401": 4,
+  "B903": 1,
+  "E501": 6,
+  "UP052": 1
+ },
+ "src/nemik/shaclinc.py": {
+  "D205": 2,
+  "D209": 2,
+  "DOC201": 2,
+  "E501": 8,
+  "PLC0415": 1
+ },
+ "src/nemik/starved.py": {
+  "D101": 1,
+  "D401": 1,
+  "DOC201": 2,
+  "E501": 1,
+  "PLC0415": 1,
+  "T201": 3
+ },
+ "src/nemik/staticserve.py": {
+  "C901": 1,
+  "D102": 1,
+  "D103": 2,
+  "D107": 1,
+  "D401": 5,
+  "DOC201": 5,
+  "E501": 2,
+  "PLR6104": 1,
+  "PLW0717": 1
+ },
+ "src/nemik/trs.py": {
+  "D401": 2,
+  "DOC201": 2,
+  "E501": 4,
+  "TC002": 1
+ },
+ "src/nemik/vtodo.py": {
+  "D103": 2,
+  "D205": 1,
+  "D209": 1,
+  "D401": 3,
+  "DOC201": 9,
+  "DOC501": 1,
+  "E501": 8,
+  "FBT001": 1,
+  "FBT002": 1,
+  "FURB118": 1,
+  "PLC0415": 13,
+  "PLR2004": 2,
+  "PLW1514": 1,
+  "RUF005": 2,
+  "S404": 1,
+  "S603": 1,
+  "T201": 4
+ },
+ "src/nemik/wake.py": {
+  "ANN001": 1,
+  "C901": 1,
+  "D103": 3,
+  "D205": 1,
+  "D209": 1,
+  "D400": 1,
+  "D401": 1,
+  "DOC201": 8,
+  "E501": 2,
+  "FURB118": 1,
+  "PLC0415": 9,
+  "PLR0912": 1,
+  "PLR0915": 1,
+  "PLR6201": 2,
+  "PLW0717": 1,
+  "PLW1514": 3,
+  "PTH111": 1,
+  "RUF021": 1,
+  "S404": 1,
+  "S603": 1,
+  "T201": 10,
+  "TC002": 1
+ },
+ "src/nemik/web/__init__.py": {
+  "D104": 1
+ },
+ "src/nemik/withheld.py": {
+  "D103": 1,
+  "D401": 1,
+  "DOC201": 1,
+  "E501": 2,
+  "E731": 1,
+  "EM102": 4,
+  "FURB118": 1,
+  "TC003": 1,
+  "TRY003": 4
+ },
+ "src/nemik/witnesses.py": {
+  "D103": 1,
+  "D205": 1,
+  "D209": 3,
+  "D401": 4,
+  "DOC201": 13,
+  "E501": 8,
+  "PERF401": 1,
+  "PLC0415": 10,
+  "PLW1514": 1,
+  "PTH110": 1,
+  "S310": 1,
+  "S404": 1,
+  "S603": 3,
+  "S607": 1,
+  "T201": 6
+ },
+ "src/nemik/witwait.py": {
+  "E501": 1,
+  "PLR0913": 1
+ },
+ "src/nemik/work.py": {
+  "D401": 1,
+  "DOC201": 4,
+  "E501": 1,
+  "PLW1514": 2,
+  "S404": 1,
+  "S603": 1,
+  "T201": 3
+ },
+ "src/nemik/workflows.py": {
+  "D103": 1,
+  "D401": 2,
+  "DOC201": 2,
+  "E501": 1
+ },
+ "tests/fixtures/make_fleet.py": {
+  "D103": 2,
+  "RET504": 1
+ },
+ "tests/installed.py": {
+  "ANN003": 2,
+  "D103": 3,
+  "S101": 1,
+  "S404": 1,
+  "S603": 2
+ },
+ "tests/test_active_card.py": {
+  "ANN001": 2,
+  "ANN002": 1,
+  "ANN202": 1,
+  "D103": 4,
+  "PT018": 1
+ },
+ "tests/test_akonadi_guard.py": {
+  "D103": 1,
+  "PLR2004": 1,
+  "PT018": 1,
+  "S404": 1,
+  "S603": 1
+ },
+ "tests/test_alarm.py": {
+  "ANN001": 1,
+  "D103": 5,
+  "PLC0415": 4,
+  "PLR2004": 4,
+  "PT018": 1
+ },
+ "tests/test_alarm_delivery.py": {
+  "ANN001": 3,
+  "ANN202": 1,
+  "D103": 4,
+  "PLR2004": 1,
+  "PT018": 2
+ },
+ "tests/test_apischema.py": {
+  "D103": 2,
+  "DOC201": 1
+ },
+ "tests/test_apply_witness.py": {
+  "D103": 6,
+  "FBT001": 1,
+  "FBT003": 4,
+  "TC002": 1,
+  "TC003": 1
+ },
+ "tests/test_architecture.py": {
+  "D103": 1,
+  "D205": 1,
+  "D209": 1,
+  "S404": 1,
+  "S603": 1
+ },
+ "tests/test_ask_priority.py": {
+  "D103": 3,
+  "PLR2004": 1,
+  "PT018": 1
+ },
+ "tests/test_baseline.py": {
+  "D103": 4,
+  "PLC0415": 1,
+  "PLR2004": 2,
+  "PT018": 3,
+  "RUF069": 2,
+  "TC003": 1
+ },
+ "tests/test_build_scope.py": {
+  "D103": 2,
+  "E501": 3,
+  "FBT003": 2,
+  "PLC2701": 1,
+  "PLR2004": 1,
+  "PT018": 1
+ },
+ "tests/test_cachestore.py": {
+  "D103": 5,
+  "E501": 1,
+  "PLR2004": 1,
+  "PT018": 3,
+  "SLF001": 3,
+  "syntax": 1
+ },
+ "tests/test_calendar_boundary.py": {
+  "ANN001": 1,
+  "D103": 2,
+  "D205": 1,
+  "PLC0415": 2,
+  "PT018": 1
+ },
+ "tests/test_calendar_write.py": {
+  "D103": 3,
+  "D401": 1,
+  "D403": 1,
+  "DOC201": 2,
+  "PLR2004": 2
+ },
+ "tests/test_calendars.py": {
+  "ANN001": 35,
+  "ANN202": 1,
+  "ARG001": 4,
+  "D103": 7,
+  "D205": 4,
+  "D209": 4,
+  "D401": 2,
+  "DOC201": 2,
+  "E501": 4,
+  "FBT002": 1,
+  "FBT003": 1,
+  "PLC0415": 18,
+  "PLC2701": 1,
+  "PLR2004": 2,
+  "PT001": 1,
+  "PT018": 9,
+  "S404": 1,
+  "SLF001": 3
+ },
+ "tests/test_calwrite.py": {
+  "D103": 7,
+  "FBT001": 1,
+  "PLR2004": 2,
+  "PT018": 4
+ },
+ "tests/test_catalog.py": {
+  "D103": 1,
+  "E501": 1
+ },
+ "tests/test_certify.py": {
+  "D103": 2,
+  "S404": 1,
+  "S603": 1
+ },
+ "tests/test_check_committed.py": {
+  "D103": 1,
+  "E501": 1,
+  "PLR2004": 3,
+  "S404": 1,
+  "S603": 1,
+  "S607": 1,
+  "TC003": 1
+ },
+ "tests/test_check_realizability.py": {
+  "D103": 2,
+  "PLR2004": 1,
+  "S404": 1,
+  "S603": 2
+ },
+ "tests/test_churn.py": {
+  "D103": 3,
+  "PLR2004": 3,
+  "RUF069": 2
+ },
+ "tests/test_claims_boundary.py": {
+  "D103": 3,
+  "DOC201": 1,
+  "E501": 3,
+  "PT018": 1
+ },
+ "tests/test_containerfile.py": {
+  "D103": 2,
+  "D401": 1,
+  "DOC201": 2,
+  "E501": 2
+ },
+ "tests/test_critical.py": {
+  "ANN202": 1,
+  "D103": 7,
+  "PLC0415": 7,
+  "PLR2004": 4,
+  "PT018": 2
+ },
+ "tests/test_critical_cards.py": {
+  "D103": 2,
+  "E501": 1,
+  "PLR2004": 4,
+  "PT018": 1
+ },
+ "tests/test_deadlock_check.py": {
+  "D103": 2,
+  "PLC0415": 2
+ },
+ "tests/test_dependency_cycle.py": {
+  "D103": 3,
+  "E501": 1
+ },
+ "tests/test_deterministic.py": {
+  "ANN001": 6,
+  "ANN003": 1,
+  "ANN202": 2,
+  "D103": 1,
+  "S404": 1,
+  "S603": 1,
+  "SLF001": 2
+ },
+ "tests/test_editable.py": {
+  "ANN001": 3,
+  "ANN202": 1,
+  "ANN204": 1,
+  "D100": 1,
+  "D103": 1
+ },
+ "tests/test_endpoint.py": {
+  "D103": 6
+ },
+ "tests/test_floorasks.py": {
+  "ANN001": 1,
+  "D100": 1,
+  "D103": 1,
+  "PLR2004": 1
+ },
+ "tests/test_flow.py": {
+  "D103": 13,
+  "PLR2004": 2
+ },
+ "tests/test_flow_cache.py": {
+  "ANN001": 3,
+  "ANN002": 1,
+  "ANN003": 1,
+  "ANN202": 1,
+  "D103": 2,
+  "PLR2004": 1,
+  "SLF001": 1
+ },
+ "tests/test_flow_reference.py": {
+  "C901": 1,
+  "D103": 1,
+  "DOC201": 1,
+  "PLR2004": 1,
+  "S311": 1
+ },
+ "tests/test_frontier.py": {
+  "ANN001": 5,
+  "ANN202": 1,
+  "D100": 1,
+  "D103": 4,
+  "N806": 14,
+  "PLC0415": 3,
+  "PT018": 3
+ },
+ "tests/test_frontier_walker.py": {
+  "D103": 1,
+  "DOC201": 1,
+  "PLC2701": 2,
+  "PLR2004": 1
+ },
+ "tests/test_fruit.py": {
+  "ANN001": 1,
+  "ANN202": 1,
+  "D103": 5,
+  "DOC201": 1,
+  "E501": 1,
+  "PLC0415": 6,
+  "PLR2004": 3,
+  "PT018": 4
+ },
+ "tests/test_gate.py": {
+  "ANN003": 1,
+  "D103": 18,
+  "E741": 10,
+  "PT001": 1,
+  "S404": 1,
+  "TC003": 2
+ },
+ "tests/test_gate_weights.py": {
+  "D103": 3,
+  "S404": 1,
+  "S603": 1,
+  "TC003": 1
+ },
+ "tests/test_guarantees.py": {
+  "ANN001": 2,
+  "ANN202": 1,
+  "D103": 8,
+  "E501": 1,
+  "PLR0913": 1,
+  "PLR0917": 1,
+  "PLR2004": 1,
+  "RUF043": 1
+ },
+ "tests/test_hashes.py": {
+  "D103": 1
+ },
+ "tests/test_health.py": {
+  "D103": 4,
+  "PLR2004": 3,
+  "PT018": 2,
+  "RUF069": 2
+ },
+ "tests/test_health_cards.py": {
+  "D103": 1,
+  "PLR2004": 3,
+  "RUF069": 1
+ },
+ "tests/test_history.py": {
+  "ANN001": 1,
+  "D103": 8,
+  "E501": 1,
+  "PLC0415": 3,
+  "PLR2004": 1,
+  "PT018": 4,
+  "RUF069": 3,
+  "S404": 1,
+  "S603": 4,
+  "S607": 4,
+  "TC003": 1
+ },
+ "tests/test_hooks_wired.py": {
+  "ANN001": 1,
+  "D103": 2,
+  "E501": 2,
+  "S404": 1,
+  "S603": 1,
+  "SLF001": 2
+ },
+ "tests/test_host_citations.py": {
+  "D103": 4,
+  "S404": 1,
+  "S603": 1,
+  "TC003": 1
+ },
+ "tests/test_hostapply.py": {
+  "D103": 13,
+  "PT018": 7,
+  "TC003": 1
+ },
+ "tests/test_ics_reader.py": {
+  "ANN001": 1,
+  "D103": 1,
+  "PT018": 1,
+  "S404": 1,
+  "S603": 1,
+  "SLF001": 1
+ },
+ "tests/test_importer.py": {
+  "D103": 2,
+  "FBT003": 7,
+  "S404": 1,
+  "S603": 2
+ },
+ "tests/test_inbound_letters.py": {
+  "D103": 3,
+  "TC003": 1
+ },
+ "tests/test_inbound_orphans.py": {
+  "D103": 2,
+  "PLC2701": 1,
+  "PT018": 2,
+  "TC002": 1,
+  "TC003": 1
+ },
+ "tests/test_incremental_redraw.py": {
+  "D103": 5,
+  "E501": 3,
+  "PT018": 4
+ },
+ "tests/test_index.py": {
+  "D103": 3,
+  "PLC2701": 2
+ },
+ "tests/test_issues.py": {
+  "D103": 2,
+  "E501": 1,
+  "PLR6201": 1
+ },
+ "tests/test_lanes.py": {
+  "D103": 1
+ },
+ "tests/test_layout.py": {
+  "ANN001": 47,
+  "ANN201": 1,
+  "ARG001": 1,
+  "D103": 31,
+  "D205": 3,
+  "D209": 2,
+  "E501": 67,
+  "PLC0415": 9,
+  "PLC1901": 1,
+  "PLR2004": 13,
+  "PT018": 19,
+  "PTH100": 35,
+  "S310": 1,
+  "S404": 1,
+  "S603": 2,
+  "SLF001": 1
+ },
+ "tests/test_letter_resolves.py": {
+  "D103": 3,
+  "TC003": 1
+ },
+ "tests/test_letters.py": {
+  "ANN001": 1,
+  "D103": 9,
+  "E501": 2,
+  "FBT003": 4,
+  "PLC0415": 11,
+  "PLR2004": 5,
+  "PT018": 5,
+  "SLF001": 1,
+  "TC003": 1
+ },
+ "tests/test_manifest.py": {
+  "ANN202": 1,
+  "D103": 3,
+  "E501": 1,
+  "S105": 1
+ },
+ "tests/test_marks.py": {
+  "D103": 8,
+  "E501": 1,
+  "PLR2004": 2,
+  "TC003": 1
+ },
+ "tests/test_memo_audits.py": {
+  "ANN001": 1,
+  "ANN002": 1,
+  "ANN003": 1,
+  "ANN202": 1,
+  "D103": 1,
+  "E501": 1,
+  "PLC2701": 1
+ },
+ "tests/test_metrics_age.py": {
+  "D103": 1,
+  "TC003": 1
+ },
+ "tests/test_metrics_realizability.py": {
+  "D103": 2,
+  "E501": 1,
+  "S404": 1,
+  "S603": 1
+ },
+ "tests/test_mpxj.py": {
+  "D103": 1,
+  "E501": 1,
+  "FURB142": 1,
+  "PTH100": 2,
+  "S404": 1,
+  "S603": 1
+ },
+ "tests/test_mspdi.py": {
+  "D103": 3,
+  "E501": 1,
+  "S314": 2,
+  "S405": 1
+ },
+ "tests/test_no_waivers.py": {
+  "D103": 2,
+  "E501": 1,
+  "PLR2004": 1
+ },
+ "tests/test_operator_act_shape.py": {
+  "D103": 5
+ },
+ "tests/test_operator_rate.py": {
+  "D103": 1,
+  "PLR2004": 2,
+  "RUF069": 1
+ },
+ "tests/test_operator_salience.py": {
+  "ANN202": 2,
+  "D103": 3,
+  "PLC0415": 1
+ },
+ "tests/test_overlap_claims.py": {
+  "D103": 3,
+  "PLR2004": 1,
+  "PT018": 1,
+  "RUF031": 1,
+  "TC003": 1
+ },
+ "tests/test_overlaps.py": {
+  "D100": 1,
+  "D103": 1
+ },
+ "tests/test_pacing.py": {
+  "D103": 3,
+  "PLR2004": 3,
+  "RUF069": 2
+ },
+ "tests/test_parse_cache.py": {
+  "ARG001": 1,
+  "D103": 3,
+  "E501": 1,
+  "PLR2004": 3,
+  "PLW1514": 1
+ },
+ "tests/test_pieces.py": {
+  "D103": 2,
+  "FURB118": 2
+ },
+ "tests/test_pieces_corpus.py": {
+  "D103": 3,
+  "FURB118": 2,
+  "PLR2004": 1,
+  "PLW1514": 2
+ },
+ "tests/test_pins.py": {
+  "ANN001": 1,
+  "D103": 3,
+  "E501": 1,
+  "PLR2004": 2,
+  "S404": 1,
+  "S603": 1,
+  "S607": 1,
+  "TC003": 1
+ },
+ "tests/test_pins_host.py": {
+  "D103": 2,
+  "TC003": 1
+ },
+ "tests/test_positioning.py": {
+  "D103": 3,
+  "D205": 1,
+  "D209": 1,
+  "E501": 1,
+  "PLC0415": 1,
+  "PLW1514": 1
+ },
+ "tests/test_precommit_gate.py": {
+  "D103": 4,
+  "D401": 1,
+  "DOC201": 1,
+  "E501": 4,
+  "PLW1514": 1,
+  "PT018": 1,
+  "S404": 1,
+  "S603": 1
+ },
+ "tests/test_projection.py": {
+  "D103": 3
+ },
+ "tests/test_publish.py": {
+  "D103": 7,
+  "E501": 2,
+  "PT018": 3,
+  "PTH115": 2,
+  "S404": 1,
+  "S603": 2,
+  "SLF001": 2
+ },
+ "tests/test_published_valid.py": {
+  "D103": 3,
+  "D401": 1,
+  "DOC201": 1,
+  "E501": 1,
+  "PLR2004": 1,
+  "PLR6201": 1
+ },
+ "tests/test_rank.py": {
+  "ANN001": 5,
+  "ANN202": 3,
+  "D100": 1,
+  "D103": 13,
+  "PLC0415": 14,
+  "PLR2004": 5
+ },
+ "tests/test_rank_apply.py": {
+  "ARG001": 1,
+  "ARG005": 1,
+  "D103": 2,
+  "E501": 1,
+  "FBT001": 1,
+  "PLR2004": 1,
+  "PLW1514": 1,
+  "S404": 1,
+  "SLF001": 2
+ },
+ "tests/test_rank_flow.py": {
+  "D103": 14,
+  "E501": 2,
+  "PLC0415": 5,
+  "PLR2004": 10,
+  "RUF031": 3,
+  "RUF069": 10,
+  "S404": 1,
+  "S603": 1,
+  "TC003": 1
+ },
+ "tests/test_read_api.py": {
+  "ANN202": 1,
+  "D103": 4,
+  "PT018": 2
+ },
+ "tests/test_ready_behind_open.py": {
+  "D103": 2,
+  "E501": 1
+ },
+ "tests/test_ready_umbrella.py": {
+  "D103": 4,
+  "E501": 1
+ },
+ "tests/test_realize.py": {
+  "D103": 2,
+  "E501": 1,
+  "PLC0415": 1,
+  "S404": 1,
+  "S603": 1
+ },
+ "tests/test_residue.py": {
+  "D103": 2,
+  "PLC0415": 1,
+  "S404": 1,
+  "S603": 1
+ },
+ "tests/test_ruler_table.py": {
+  "D103": 2,
+  "PLR2004": 2
+ },
+ "tests/test_salience.py": {
+  "D103": 11,
+  "E501": 1,
+  "S404": 1,
+  "S603": 1,
+  "TC003": 1
+ },
+ "tests/test_satisfied_edges.py": {
+  "D103": 1,
+  "RUF031": 4
+ },
+ "tests/test_saturation.py": {
+  "D103": 2
+ },
+ "tests/test_score.py": {
+  "ANN001": 9,
+  "ANN201": 1,
+  "D103": 5,
+  "E741": 1,
+  "N803": 6,
+  "PLR0913": 1,
+  "PLR0917": 1,
+  "PT018": 1
+ },
+ "tests/test_script_registries.py": {
+  "D103": 2,
+  "E501": 4
+ },
+ "tests/test_serve_model.py": {
+  "ANN001": 4,
+  "ANN202": 3,
+  "D103": 3,
+  "PLC0415": 1,
+  "PLR2004": 3,
+  "PT018": 1,
+  "TC003": 1
+ },
+ "tests/test_shaclcache.py": {
+  "D103": 4,
+  "E501": 1
+ },
+ "tests/test_shaclcache_threads.py": {
+  "D103": 2,
+  "E501": 1,
+  "PLR2004": 2
+ },
+ "tests/test_shaclinc.py": {
+  "D103": 2,
+  "PLC2701": 1
+ },
+ "tests/test_skill.py": {
+  "D103": 2,
+  "D205": 1,
+  "D209": 1
+ },
+ "tests/test_sla.py": {
+  "D103": 2,
+  "E501": 1
+ },
+ "tests/test_starved.py": {
+  "D103": 2,
+  "PLC0415": 1,
+  "PLR2004": 3
+ },
+ "tests/test_static.py": {
+  "ANN001": 3,
+  "D103": 4,
+  "PLC0415": 7,
+  "PLR2004": 1,
+  "PT018": 3
+ },
+ "tests/test_static_view.py": {
+  "D103": 2,
+  "E501": 1,
+  "PLR2004": 1,
+  "S404": 1,
+  "S603": 1,
+  "SLF001": 1
+ },
+ "tests/test_staticserve.py": {
+  "D103": 8,
+  "E501": 1,
+  "PLR2004": 5,
+  "PT001": 1,
+  "S404": 1,
+  "S603": 1
+ },
+ "tests/test_test_inputs.py": {
+  "D103": 2,
+  "D401": 2,
+  "DOC201": 3,
+  "E501": 1,
+  "PERF401": 1
+ },
+ "tests/test_toil.py": {
+  "D103": 1,
+  "PLR2004": 1,
+  "PT018": 1,
+  "RUF069": 2,
+  "TC003": 1
+ },
+ "tests/test_trs.py": {
+  "D103": 3,
+  "E501": 1
+ },
+ "tests/test_trs_published.py": {
+  "D103": 2,
+  "E501": 1
+ },
+ "tests/test_umbrella_block.py": {
+  "ANN001": 4,
+  "ANN202": 1,
+  "D100": 1,
+  "D103": 6,
+  "PLC0415": 4
+ },
+ "tests/test_umbrella_descent.py": {
+  "D103": 2,
+  "E501": 1,
+  "TC003": 1
+ },
+ "tests/test_vtodo.py": {
+  "ANN001": 3,
+  "D103": 4,
+  "D205": 1,
+  "D209": 1,
+  "E501": 6,
+  "PLC0415": 10,
+  "PLC1901": 1,
+  "PLR2004": 4,
+  "PT018": 4
+ },
+ "tests/test_wake_alarms.py": {
+  "ANN001": 7,
+  "ANN202": 1,
+  "D103": 2,
+  "E501": 1,
+  "PLC0415": 4,
+  "PT018": 4,
+  "RUF069": 1
+ },
+ "tests/test_wake_nudge.py": {
+  "D103": 6,
+  "D205": 1,
+  "PLR2004": 1,
+  "RUF069": 1
+ },
+ "tests/test_weather.py": {
+  "ANN001": 4,
+  "ANN202": 1,
+  "D103": 1,
+  "E501": 1,
+  "PT018": 1
+ },
+ "tests/test_web_render.py": {
+  "ANN001": 2,
+  "ANN201": 1,
+  "D103": 2,
+  "D205": 1,
+  "D209": 1,
+  "E501": 2,
+  "PLR2004": 1,
+  "PT001": 1,
+  "PTH100": 1,
+  "S404": 1
+ },
+ "tests/test_withheld.py": {
+  "ANN001": 10,
+  "ANN201": 1,
+  "D103": 5,
+  "D205": 1,
+  "D209": 1,
+  "PLC0415": 1,
+  "PT018": 2
+ },
+ "tests/test_witness_party.py": {
+  "D103": 3,
+  "E501": 2,
+  "TC002": 1
+ },
+ "tests/test_witness_promql.py": {
+  "ARG001": 2,
+  "D103": 6,
+  "DOC201": 1,
+  "E501": 5
+ },
+ "tests/test_witnesses.py": {
+  "ANN001": 15,
+  "ANN002": 1,
+  "ANN202": 3,
+  "ARG001": 5,
+  "ARG005": 1,
+  "D100": 1,
+  "D103": 10,
+  "D205": 1,
+  "D209": 1,
+  "E501": 2,
+  "PLC0415": 12,
+  "PLR2004": 1,
+  "PT018": 6,
+  "S404": 1,
+  "S603": 2,
+  "S607": 2
+ },
+ "tests/test_witwait.py": {
+  "ANN001": 1,
+  "ANN202": 1,
+  "D103": 10,
+  "D401": 2,
+  "DOC201": 1,
+  "DOC402": 1,
+  "PLR2004": 5,
+  "PLR6301": 1,
+  "PT018": 2,
+  "TC003": 1,
+  "UP052": 1
+ },
+ "tests/test_work.py": {
+  "ANN001": 1,
+  "D103": 4,
+  "ERA001": 1,
+  "PLR2004": 1,
+  "TC003": 1
+ },
+ "tests/test_workflows.py": {
+  "D103": 7,
+  "D205": 1,
+  "D209": 1,
+  "E501": 2
+ },
+ "tests/webpage.py": {
+  "ANN401": 1,
+  "D401": 1,
+  "DOC201": 1,
+  "DOC402": 1,
+  "E501": 1,
+  "PTH100": 1,
+  "S404": 1,
+  "S603": 1,
+  "SLF001": 1,
+  "UP052": 1
+ },
+ "tools/gen_pieces_corpus.py": {
+  "ANN401": 1,
+  "D103": 2,
+  "D205": 1,
+  "D209": 1,
+  "DOC201": 1,
+  "E501": 3
+ },
+ "tools/nemik_client.py": {
+  "ANN401": 1,
+  "D103": 1,
+  "D107": 1,
+  "DOC201": 1,
+  "E501": 1,
+  "S310": 1,
+  "T201": 1
+ },
+ "tools/ruff_ratchet.py": {
+  "D103": 2,
+  "D401": 1,
+  "DOC201": 2,
+  "DOC501": 1,
+  "E501": 1,
+  "EM102": 1,
+  "PLR6201": 1,
+  "S404": 1,
+  "S603": 1,
+  "T201": 5,
+  "TRY003": 1
+ }
+}
