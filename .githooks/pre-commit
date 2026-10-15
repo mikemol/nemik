@@ -10,6 +10,12 @@
 # the variable names the real checkout, so every git call and the gate go through it. Unset, it is
 # this checkout and nothing changes.
 set -e
+# nemik:W521 (mtools: a gate refuses when it cannot run, never skips): bazel IS the gate, so its absence
+# refuses the commit here and says why, rather than failing later inside the worktree setup.
+command -v bazel >/dev/null 2>&1 || {
+	echo "pre-commit: bazel is not on PATH, so the gate (bazel test //:precommit) cannot run: commit refused" >&2
+	exit 1
+}
 real_root="${MIKEMOL_REAL_ROOT:-$(git rev-parse --show-toplevel)}"
 # vendor/wheels/.gitignore is `*`, so a rebuilt wheel exists on disk (and satisfies bazel) yet is not
 # in the commit; the image build then fails from a clean checkout (nemik:W276, 2026-10-10). Every

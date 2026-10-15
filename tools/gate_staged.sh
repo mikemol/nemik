@@ -53,7 +53,9 @@ if ! bazel test "${fast[@]}" --noshow_progress; then
     echo "gate_staged: a registry check FAILED (fast pass, before the full suite): commit refused" >&2
     exit 1
 fi
-if bazel test //... --noshow_progress; then
+# nemik:W521: the gate is one bazel target, //:precommit (a test_suite over every test; the lint, type,
+# shell and warrant stages join it as they land), so BuildBuddy captures its logs as one invocation.
+if bazel test //:precommit --noshow_progress; then
     echo "gate_staged: green on the staged tree ($wt)" >&2
     exit 0
 fi

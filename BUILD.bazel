@@ -21,6 +21,8 @@ exports_files(["pyproject.toml"])
             + (["checks/claims.py"] if src == "tests/test_claims_boundary.py" else [])
             # nemik:W523: the no-waivers test scans every Python file the repo keeps outside the package
             + (glob(["tests/*.py", "tools/*.py", "checks/*.py"], exclude = [src, "tests/installed.py", "tests/webpage.py", "tools/nemik_client.py", "checks/claims.py"]) if src == "tests/test_no_waivers.py" else [])
+            # nemik:W521: the gate test reads the hook and the script that runs the //:precommit suite
+            + ([".githooks/pre-commit", "tools/gate_staged.sh"] if src == "tests/test_precommit_gate.py" else [])
             # nemik:W475: the input guard reads every test's source to check what each one opens
             + (glob(["tests/test_*.py"], exclude = [src]) if src == "tests/test_test_inputs.py" else []),
         env = {
@@ -34,6 +36,13 @@ exports_files(["pyproject.toml"])
     )
     for src in glob(["tests/test_*.py"])
 ]
+
+# nemik:W521: the commit gate as one target: every test above, and (as they land) the lint, type, shell and
+# warrant stages. tools/gate_staged.sh runs `bazel test //:precommit`; the hook refuses when bazel is absent.
+test_suite(
+    name = "precommit",
+    tests = [":" + src.removeprefix("tests/").removesuffix(".py") for src in glob(["tests/test_*.py"])],
+)
 
 # nemik:W445: MPXJ and the JAXB jars its MSPDI reader needs (pinned in MODULE.bazel)
 filegroup(

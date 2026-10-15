@@ -27,6 +27,8 @@ COPY docs ./docs
 COPY tools ./tools
 # nemik:W504: test_deploy_manifest holds the pod's shape to the constraints luthen-observability agreed.
 COPY deploy ./deploy
+# nemik:W521: test_precommit_gate reads the pre-commit hook (the script it names is under tools/).
+COPY .githooks ./.githooks
 COPY BUILD.bazel Containerfile ./
 # The hooks wiring (mikemol-hook-inbound-asks, mikemol-hook-nemik-check) is tested against the settings file.
 COPY .claude/settings.json ./.claude/settings.json
