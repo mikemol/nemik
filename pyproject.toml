@@ -76,9 +76,12 @@ dev = [
 [tool.pytest.ini_options]
 # bazel-* are output symlinks into the Bazel cache; collecting them would run every test twice.
 testpaths = ["tests"]
+# nemik:W566: tools/ holds importable logic (codon_census, check_run_rows) that its tests import by name
+# instead of loading it by path, so mypy sees the types; mypy_path below says the same to mypy.
+pythonpath = ["tools"]
 
 [tool.mypy]
 # The tests import their sibling helper (tests/installed.py) by bare name, as pytest's rootdir
 # import mode resolves it; mypy needs the same directory to find it. Not an exemption: it only
 # says where the module lives (the edit gate checks a copy at the repo root, so it needs this).
-mypy_path = "tests:stubs"
+mypy_path = "tests:stubs:tools"

@@ -12,7 +12,7 @@ exports_files(["pyproject.toml"])
         srcs = ["tests/venv_pytest.sh"],
         # nemik:W339: the browser suite is many page loads and grows with each view check; at host
         # load ~100 it crossed medium's 300 s (284 s alone, then a timeout in the gate). The rest stay medium.
-        size = "large" if src == "tests/test_layout.py" else "medium",
+        size = "large" if src in ("tests/test_layout.py", "tests/test_codon_census.py") else "medium",
         args = ["$(rootpath " + src + ")", "-c", "$(rootpath pyproject.toml)"],
         data = [src, "tests/installed.py", "tests/webpage.py",".claude/settings.json", "//tests/fixtures:fleet", "pyproject.toml", "ARCHITECTURE.md", "skills/nemik/SKILL.md", "docs/positioning.md", "deploy/deployment.yaml", "src/nemik/data/workflows.toml", "tools/nemik_client.py", "BUILD.bazel", "Containerfile"] + glob(["tests/corpus/**"]) + [ "src/nemik/data/shapes.ttl", "src/nemik/data/nemik.ttl", "src/nemik/data/run-row.schema.json", ":.venv", "@opa//file", "@use_of_colour_rego//file", "@chromium//:files", "@chromium//:chrome-headless-shell"]
             # nemik:W445: the JRE (52 MB) and MPXJ's jars go to the one test that reads with them
@@ -27,6 +27,8 @@ exports_files(["pyproject.toml"])
             + (["mypy-house.ini", "mypy-baseline.json", "tools/mypy_ratchet.py"] + glob(["src/**/*.py", "tests/*.py", "tools/*.py", "checks/*.py", "stubs/**"], exclude = [src, "tests/installed.py", "tests/webpage.py", "tools/nemik_client.py", "checks/claims.py", "tools/mypy_ratchet.py"], allow_empty = True) if src == "tests/test_mypy_ratchet.py" else [])
             # nemik:W566: the Codon pin test runs the staged compiler
             + (["@codon//:files", "@codon//:bin/codon"] if src == "tests/test_codon_pin.py" else [])
+            # nemik:W566: the Codon census compiles every module of the package with the pinned compiler
+            + (["@codon//:files", "@codon//:bin/codon", "tools/codon_census.py", "codon-baseline.json"] + glob(["src/nemik/*.py"]) if src == "tests/test_codon_census.py" else [])
             # nemik:W521: the gate test reads the hook and the script that runs the //:precommit suite
             + ([".githooks/pre-commit", "tools/gate_staged.sh"] if src == "tests/test_precommit_gate.py" else [])
             # nemik:W522: the ruff ratchet measures every Python file of the four trees against its baseline
@@ -42,7 +44,7 @@ exports_files(["pyproject.toml"])
             "NEMIK_MPXJ_CLASSPATH": "$(rootpaths :mpxj_classpath)",
         } if src == "tests/test_mpxj.py" else {}) | ({
             "NEMIK_CODON": "$(rootpath @codon//:bin/codon)",
-        } if src == "tests/test_codon_pin.py" else {}),
+        } if src in ("tests/test_codon_pin.py", "tests/test_codon_census.py") else {}),
     )
     for src in glob(["tests/test_*.py"])
 ]

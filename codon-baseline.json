@@ -1,0 +1,214 @@
+{
+ "adapter": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'collections.abc'"
+ },
+ "adoption": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'tomllib'"
+ },
+ "alarm": {
+  "as_written": "syntax error, unexpected ','",
+  "stripped": "syntax error, unexpected ','"
+ },
+ "apischema": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'importlib.resources'"
+ },
+ "blocks": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'rdflib'"
+ },
+ "blocks_cli": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'argparse'"
+ },
+ "cachestore": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'hashlib'"
+ },
+ "calendars": {
+  "as_written": "syntax error, unexpected ','",
+  "stripped": "syntax error, unexpected ','"
+ },
+ "calwrite": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'argparse'"
+ },
+ "cards": {
+  "as_written": "class decorator got unexpected argument",
+  "stripped": "class decorator got unexpected argument"
+ },
+ "catalog": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'rdflib'"
+ },
+ "check": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'argparse'"
+ },
+ "churn": {
+  "as_written": "class decorator got unexpected argument",
+  "stripped": "class decorator got unexpected argument"
+ },
+ "critical": {
+  "as_written": "Assert failed:\tdictionary items are invalid\nExpression:\tt && t->size() == 2\nSource:\t\t/github/workspace/codon/parser/ast/expr.cpp:238",
+  "stripped": "Assert failed:\tdictionary items are invalid\nExpression:\tt && t->size() == 2\nSource:\t\t/github/workspace/codon/parser/ast/expr.cpp:238"
+ },
+ "endpoint": {
+  "as_written": "Assert failed:\tdictionary items are invalid\nExpression:\tt && t->size() == 2\nSource:\t\t/github/workspace/codon/parser/ast/expr.cpp:238",
+  "stripped": "Assert failed:\tdictionary items are invalid\nExpression:\tt && t->size() == 2\nSource:\t\t/github/workspace/codon/parser/ast/expr.cpp:238"
+ },
+ "floorasks": {
+  "as_written": "no module named 'argparse'",
+  "stripped": "no module named 'argparse'"
+ },
+ "flow": {
+  "as_written": "class decorator got unexpected argument",
+  "stripped": "class decorator got unexpected argument"
+ },
+ "health": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'tomllib'"
+ },
+ "history": {
+  "as_written": "Assert failed:\tdictionary items are invalid\nExpression:\tt && t->size() == 2\nSource:\t\t/github/workspace/codon/parser/ast/expr.cpp:238",
+  "stripped": "Assert failed:\tdictionary items are invalid\nExpression:\tt && t->size() == 2\nSource:\t\t/github/workspace/codon/parser/ast/expr.cpp:238"
+ },
+ "hostapply": {
+  "as_written": "syntax error, unexpected ','",
+  "stripped": "syntax error, unexpected ','"
+ },
+ "importer": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'argparse'"
+ },
+ "index": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'weakref'"
+ },
+ "issues": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'nemik.projection'"
+ },
+ "letters": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'shlex'"
+ },
+ "manifest": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'importlib.resources'"
+ },
+ "marks": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'hashlib'"
+ },
+ "metrics": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'argparse'"
+ },
+ "mspdi": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'xml.etree.ElementTree'"
+ },
+ "overlaps": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'subprocess'"
+ },
+ "pacing": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'argparse'"
+ },
+ "pieces": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'nemik.adapter'"
+ },
+ "pins": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'argparse'"
+ },
+ "projection": {
+  "as_written": "class decorator got unexpected argument",
+  "stripped": "class decorator got unexpected argument"
+ },
+ "rank": {
+  "as_written": "syntax error, unexpected ','",
+  "stripped": "syntax error, unexpected ','"
+ },
+ "realize": {
+  "as_written": "no module named '__future__'",
+  "stripped": "cannot import name 'TYPE_CHECKING' from 'typing'"
+ },
+ "residue": {
+  "as_written": "no module named '__future__'",
+  "stripped": "cannot import name 'UTC' from 'datetime'"
+ },
+ "runrows": {
+  "as_written": "no module named 'importlib.resources'",
+  "stripped": "no module named 'importlib.resources'"
+ },
+ "salience": {
+  "as_written": "class decorator got unexpected argument",
+  "stripped": "class decorator got unexpected argument"
+ },
+ "score": {
+  "as_written": "class decorator got unexpected argument",
+  "stripped": "class decorator got unexpected argument"
+ },
+ "serve": {
+  "as_written": "Assert failed:\tdictionary items are invalid\nExpression:\tt && t->size() == 2\nSource:\t\t/github/workspace/codon/parser/ast/expr.cpp:238",
+  "stripped": "Assert failed:\tdictionary items are invalid\nExpression:\tt && t->size() == 2\nSource:\t\t/github/workspace/codon/parser/ast/expr.cpp:238"
+ },
+ "shaclcache": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'contextlib'"
+ },
+ "shaclinc": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'pyshacl'"
+ },
+ "starved": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'argparse'"
+ },
+ "staticserve": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'argparse'"
+ },
+ "trs": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'rdflib'"
+ },
+ "vtodo": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'tomllib'"
+ },
+ "wake": {
+  "as_written": "syntax error, unexpected ','",
+  "stripped": "syntax error, unexpected ','"
+ },
+ "withheld": {
+  "as_written": "Assert failed:\tdictionary items are invalid\nExpression:\tt && t->size() == 2\nSource:\t\t/github/workspace/codon/parser/ast/expr.cpp:238",
+  "stripped": "Assert failed:\tdictionary items are invalid\nExpression:\tt && t->size() == 2\nSource:\t\t/github/workspace/codon/parser/ast/expr.cpp:238"
+ },
+ "witnesses": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'subprocess'"
+ },
+ "witnesses_cli": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'nemik'"
+ },
+ "witwait": {
+  "as_written": "syntax error, unexpected ','",
+  "stripped": "syntax error, unexpected ','"
+ },
+ "work": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'argparse'"
+ },
+ "workflows": {
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'tomllib'"
+ }
+}

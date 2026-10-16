@@ -31,7 +31,7 @@ COPY deploy ./deploy
 COPY .githooks ./.githooks
 # nemik:W522: test_ruff_ratchet reads the house ruff config and the baseline it holds the tree to.
 COPY ruff-house.toml ruff-baseline.json ./
-COPY mypy-house.ini mypy-baseline.json ./
+COPY mypy-house.ini mypy-baseline.json codon-baseline.json ./
 COPY stubs ./stubs
 COPY BUILD.bazel Containerfile ./
 # The hooks wiring (mikemol-hook-inbound-asks, mikemol-hook-nemik-check) is tested against the settings file.
