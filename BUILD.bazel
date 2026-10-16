@@ -25,6 +25,8 @@ exports_files(["pyproject.toml"])
             + (["tools/check_run_rows.py"] if src == "tests/test_check_run_rows.py" else [])
             # nemik:W543: the mypy ratchet measures every Python file of the four trees against its baseline
             + (["mypy-house.ini", "mypy-baseline.json", "tools/mypy_ratchet.py"] + glob(["src/**/*.py", "tests/*.py", "tools/*.py", "checks/*.py", "stubs/**"], exclude = [src, "tests/installed.py", "tests/webpage.py", "tools/nemik_client.py", "checks/claims.py", "tools/mypy_ratchet.py"], allow_empty = True) if src == "tests/test_mypy_ratchet.py" else [])
+            # nemik:W566: the Codon pin test runs the staged compiler
+            + (["@codon//:files", "@codon//:bin/codon"] if src == "tests/test_codon_pin.py" else [])
             # nemik:W521: the gate test reads the hook and the script that runs the //:precommit suite
             + ([".githooks/pre-commit", "tools/gate_staged.sh"] if src == "tests/test_precommit_gate.py" else [])
             # nemik:W522: the ruff ratchet measures every Python file of the four trees against its baseline
@@ -38,7 +40,9 @@ exports_files(["pyproject.toml"])
         } | ({
             "NEMIK_JAVA": "$(rootpath @temurin_jre//:bin/java)",
             "NEMIK_MPXJ_CLASSPATH": "$(rootpaths :mpxj_classpath)",
-        } if src == "tests/test_mpxj.py" else {}),
+        } if src == "tests/test_mpxj.py" else {}) | ({
+            "NEMIK_CODON": "$(rootpath @codon//:bin/codon)",
+        } if src == "tests/test_codon_pin.py" else {}),
     )
     for src in glob(["tests/test_*.py"])
 ]

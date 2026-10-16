@@ -106,6 +106,17 @@ http_archive(
     build_file_content = 'filegroup(name = "files", srcs = glob(["**"]), visibility = ["//visibility:public"])\nexports_files(["bin/java"])',
 )
 
+# nemik:W566: Codon 0.20.3, the typed-Python compiler the operator aims all Python at (nemik:W561), as
+# a hashed input. The sha256 was computed from the downloaded asset (nemik:W559) and equals the digest
+# GitHub publishes for it (verified by mtools-ad, mtools:W1320).
+http_archive(
+    name = "codon",
+    url = "https://github.com/exaloop/codon/releases/download/v0.20.3/codon-linux-x86_64.tar.gz",
+    sha256 = "8716e5753a441764d13fd6a0b4f911060d292f66c9e61d0a4cdccb64c843da6f",
+    strip_prefix = "codon-deploy-linux-x86_64",
+    build_file_content = 'filegroup(name = "files", srcs = glob(["**"]), visibility = ["//visibility:public"])\nexports_files(["bin/codon"])',
+)
+
 [http_file(
     name = name,
     url = "https://repo1.maven.org/maven2/" + path,

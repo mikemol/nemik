@@ -30,14 +30,16 @@ def script(name: str) -> list[str]:
     return [str(path)]
 
 
-def run(name: str, *args: str, **kw) -> subprocess.CompletedProcess:
+def run(
+    name: str, *args: str, cwd: Path | None = None
+) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
         [*script(name), *args],
         env=_bin()[1],
         capture_output=True,
         text=True,
         check=False,
-        **kw,
+        cwd=cwd,
     )
 
 

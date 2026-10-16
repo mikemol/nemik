@@ -196,9 +196,9 @@
   "misc": 30
  },
  "tests/installed.py": {
-  "misc": 2,
-  "no-untyped-def": 2,
-  "type-arg": 2
+  "misc": 1,
+  "no-untyped-def": 1,
+  "type-arg": 1
  },
  "tests/test_active_card.py": {
   "misc": 19,
@@ -285,7 +285,7 @@
  },
  "tests/test_deploy_manifest.py": {
   "explicit-any": 6,
-  "misc": 86
+  "misc": 83
  },
  "tests/test_deterministic.py": {
   "misc": 31,
@@ -317,7 +317,7 @@
   "no-untyped-def": 1
  },
  "tests/test_gate.py": {
-  "misc": 194,
+  "misc": 186,
   "no-untyped-def": 1,
   "type-arg": 3
  },
@@ -446,9 +446,6 @@
   "misc": 7,
   "type-arg": 1
  },
- "tests/test_salience.py": {
-  "misc": 14
- },
  "tests/test_satisfied_edges.py": {
   "misc": 20
  },
@@ -521,7 +518,7 @@
   "misc": 3
  },
  "tests/test_vtodo.py": {
-  "misc": 109,
+  "misc": 94,
   "no-untyped-def": 3,
   "type-arg": 1
  },
@@ -561,7 +558,7 @@
   "misc": 26
  },
  "tests/test_witnesses.py": {
-  "misc": 125,
+  "misc": 113,
   "no-untyped-call": 3,
   "no-untyped-def": 11,
   "type-arg": 1
