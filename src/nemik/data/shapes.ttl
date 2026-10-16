@@ -206,6 +206,13 @@ nemik:ActiveCardShape a sh:NodeShape ;
 # generated at a time (prov:generatedAtTime), by an utterance (a prov:Activity), and is attributed to
 # the one who spoke (a prov:Agent: the operator is urn:nemik:operator). mtools:W1384 writes the JSON-LD
 # on the card and validates against this shape; nemik:W598 reads it into the graph.
+# nemik:W597 (operator 2026-10-16 via github-8f: a ruling lives as provenance, not as prose that stays
+# lost in the sea): an open card whose prose claims an operator ruling needs the transcript record.
+nemik:UnwarrantedRulingShape a sh:NodeShape ;
+    sh:targetSubjectsOf nemik:claimsRuling ;
+    sh:property [ sh:path nemik:claimsRuling ; sh:maxCount 0 ; sh:severity sh:Warning ;
+                  sh:message "this card claims an operator ruling in prose and carries no warrant: attach the transcript record with mikemol-paths-forward --warrant SYMBOL --transcript PATH --uuid UUID (nemik:W597)" ] .
+
 nemik:MalformedWarrantShape a sh:NodeShape ;
     sh:targetSubjectsOf nemik:malformedWarrant ;
     sh:property [ sh:path nemik:malformedWarrant ; sh:maxCount 0 ; sh:severity sh:Warning ;

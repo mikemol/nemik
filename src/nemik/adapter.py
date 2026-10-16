@@ -185,6 +185,10 @@ def _queue_graph(repo: str, state_path: Path, known: frozenset[str]) -> Graph:
         # that does not parse is marked, not guessed at.
         for bad in warrants.attach(g, w):
             g.add((node, NEMIK.malformedWarrant, Literal(bad)))
+        if warrants.claims_ruling(
+            w
+        ):  # nemik:W597: an operator ruling in prose, no warrant
+            g.add((node, NEMIK.claimsRuling, Literal("operator ruling in prose")))
         for tag in model.strlist(w, "touches"):
             g.add((node, NEMIK.touches, Literal(tag)))
         # nemik:W544 (mtools:W1276): the repo files the next step names, as written. Paths only; the

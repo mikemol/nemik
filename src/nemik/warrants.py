@@ -12,9 +12,54 @@ marks the card.
 """
 
 import json
+import tomllib
 from collections.abc import Mapping
+from importlib.resources import files
 
 from rdflib import Graph
+
+
+def ruling_words(text: str | None = None) -> list[str]:
+    """Read the phrases that claim an operator ruling (declared in rank-weights.toml [rulings]).
+
+    Args:
+        text: The rank-weights TOML, or None for the one that ships with the package.
+
+    Returns:
+        The lowercase phrases; empty when the table is absent.
+
+    """
+    if text is None:
+        text = files("nemik.data").joinpath("rank-weights.toml").read_text()
+    document: dict[str, object] = tomllib.loads(text)
+    table = document.get("rulings")
+    words = table.get("words") if isinstance(table, dict) else None
+    return [str(word).lower() for word in words] if isinstance(words, list) else []
+
+
+WORDS = ruling_words()
+
+
+def claims_ruling(
+    waypoint: Mapping[str, object], words: list[str] | None = None
+) -> bool:
+    """Say whether an open card claims an operator ruling in prose and carries no warrant.
+
+    Args:
+        waypoint: The waypoint as its queue stores it.
+        words: The claim phrases, or None for the declared ones.
+
+    Returns:
+        True for an open card whose title, evidence or next step uses a claim phrase while its
+        `warrants` list is empty.
+
+    """
+    if waypoint.get("status") == "done" or waypoint.get("warrants"):
+        return False
+    prose = " ".join(
+        str(waypoint.get(key, "")) for key in ("title", "evidence", "next_bounded_step")
+    ).lower()
+    return any(word in prose for word in (WORDS if words is None else words))
 
 
 def attach(g: Graph, waypoint: Mapping[str, object]) -> list[str]:

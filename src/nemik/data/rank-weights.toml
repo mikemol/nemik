@@ -118,6 +118,11 @@ asks_owed = [5, 12]
 [saturation]
 needs_you_per_repo = 10
 
+# nemik:W597: phrases (matched lowercase, as substrings) by which a card's prose claims an operator ruling;
+# an open card using one with no `warrants` list is a nemik-check Warning (UnwarrantedRulingShape).
+[rulings]
+words = ["operator ruling", "operator ruled", "operator said", "operator decided", "per the operator", "operator approved", "operator via"]
+
 # nemik:W356: a card blocked on another repo's open card for more than this many loop ticks is a nemik-check
 # Warning on the blocker's card (that repo can act). 48 ticks is a day at the 30-minute cadence.
 [sla]
