@@ -74,5 +74,6 @@ def verdict(replay: Replay, head: str) -> str:
         return f"GREEN {short} passed the image test stage in {replay.seconds} s"
     return (
         f"RED {short} failed the image test stage (exit {replay.status}, {replay.seconds} s): "
-        f"read .git/image-replica-{short}.log, then file --gate-red with the failing test"
+        f'query VictoriaLogs {{service.name="nemik.image-replica", sha="{short}"}} '
+        f"(cache .git/image-replica-{short}.log), then file --gate-red with the failing test"
     )

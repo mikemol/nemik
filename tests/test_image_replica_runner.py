@@ -43,7 +43,9 @@ def _stub(tmp_path: Path, status: int) -> Path:
 
     """
     stub = tmp_path / "stub.sh"
-    stub.write_text(f'#!/bin/sh\necho "$1" >> "{tmp_path}/calls"\nexit {status}\n')
+    stub.write_text(
+        f'#!/bin/sh\necho "$1" >> "{tmp_path}/calls"\necho "replay output of $1"\nexit {status}\n'
+    )
     stub.chmod(0o755)
     return stub
 
@@ -67,7 +69,8 @@ def test_a_sha_is_replayed_once_and_its_result_recorded(tmp_path: Path) -> None:
     repo, sha = _repo(tmp_path)
     stub = _stub(tmp_path, 3)
     for _ in range(2):
-        assert installed.run(str(RUNNER), str(stub), "HEAD", cwd=repo).returncode == 0
+        run = installed.run(str(RUNNER), str(stub), "HEAD", "none", cwd=repo)
+        assert run.returncode == 0
     assert _calls(tmp_path) == [sha]
     fields = (repo / ".git" / "image-replica.last").read_text().split()
     assert fields[:2] == [sha, "3"]
@@ -80,6 +83,28 @@ def test_a_held_lock_makes_a_second_start_exit_without_replaying(
     repo, _ = _repo(tmp_path)
     with (repo / ".git" / "image-replica.lock").open("w") as held:
         fcntl.flock(held, fcntl.LOCK_EX)
-        run = installed.run(str(RUNNER), str(_stub(tmp_path, 0)), "HEAD", cwd=repo)
+        stub = _stub(tmp_path, 0)
+        run = installed.run(str(RUNNER), str(stub), "HEAD", "none", cwd=repo)
     assert run.returncode == 0
     assert _calls(tmp_path) == []
+
+
+def test_the_replay_output_goes_to_the_shipper_and_the_replay_status_survives(
+    tmp_path: Path,
+) -> None:
+    """nemik:W596: output reaches the shipper; its exit does not change the replay's."""
+    repo, sha = _repo(tmp_path)
+    shipper = tmp_path / "shipper.sh"
+    shipper.write_text(
+        f'#!/bin/sh\necho "args: $@" >> "{tmp_path}/shipped"\n'
+        f'cat >> "{tmp_path}/shipped"\nexit 9\n'
+    )
+    shipper.chmod(0o755)
+    command = f"{shipper} --field sha={{sha}}"
+    run = installed.run(str(RUNNER), str(_stub(tmp_path, 4)), "HEAD", command, cwd=repo)
+    assert run.returncode == 0
+    shipped = (tmp_path / "shipped").read_text()
+    assert f"args: --field sha={sha[:7]}" in shipped
+    assert f"replay output of {sha}" in shipped
+    assert (repo / ".git" / f"image-replica-{sha[:7]}.log").exists()
+    assert (repo / ".git" / "image-replica.last").read_text().split()[:2] == [sha, "4"]

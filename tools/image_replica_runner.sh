@@ -7,17 +7,25 @@
 # (the running loop picks up the newer sha when it finishes), and a burst of commits is replayed as
 # the newest one, never one build per commit. Each result is one line in `.git/image-replica.last`:
 #   <sha> <exit status> <seconds>
-# which the tick reads (nemik:W592); this process never writes the queue. Each replay keeps its own
-# log, `.git/image-replica-<first 7 of the sha>.log`, so a failure survives the next replay.
-#   image_replica_runner.sh [REPLICA [REF]]
+# which the tick reads (nemik:W592); this process never writes the queue.
+#
+# nemik:W596 (operator 2026-10-16: "you log to services, not to files"): the replay's output lines go
+# to the fleet log service through a SHIPPER, a command that reads lines on stdin. The shipper is
+# luthen's OTLP log producer (luthen-observability:W1157: service.name=nemik.image-replica, the sha
+# as a field, read back from VictoriaLogs before it exits 0); until it exists nothing ships.
+# `.git/image-replica-<sha7>.log` is only a cache of the same lines, never the evidence.
+#   image_replica_runner.sh [REPLICA [REF [SHIPPER]]]
 #   REPLICA  the replay script (default: tools/image_replica.sh beside the repo root)
 #   REF      the ref to replay (default: origin/main, what the forge builds)
+#   SHIPPER  the stdin-lines command, `{sha}` replaced by the 7-character sha; absent or `none`:
+#            the cache file only
 set -uo pipefail
 
 repo="$(git rev-parse --show-toplevel)"
 gitdir="$(git -C "$repo" rev-parse --absolute-git-dir)"
 replica="${1:-$repo/tools/image_replica.sh}"
 ref="${2:-origin/main}"
+shipper="${3:-none}"
 last="$gitdir/image-replica.last"
 
 exec 9>"$gitdir/image-replica.lock"
@@ -29,7 +37,14 @@ while :; do
 		exit 0
 	fi
 	start="$(date +%s)"
-	"$replica" "$sha" >"$gitdir/image-replica-${sha:0:7}.log" 2>&1
-	status=$?
+	cache="$gitdir/image-replica-${sha:0:7}.log"
+	if [ "$shipper" = "none" ]; then
+		"$replica" "$sha" >"$cache" 2>&1
+		status=$?
+	else
+		read -r -a ship <<<"${shipper//\{sha\}/${sha:0:7}}"
+		"$replica" "$sha" 2>&1 | tee "$cache" | "${ship[@]}" >/dev/null 2>&1
+		status="${PIPESTATUS[0]}"
+	fi
 	printf '%s %s %s\n' "$sha" "$status" "$(($(date +%s) - start))" >"$last"
 done
