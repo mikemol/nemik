@@ -16,10 +16,17 @@ import os
 from pathlib import Path
 
 import installed
+import pytest
 from codon_census import Census, census, failing, first_error, modules, regressions
 
 ROOT = Path(__file__).resolve().parents[1]
-CODON = Path(os.environ["NEMIK_CODON"]).resolve()
+_STAGED = os.environ.get("NEMIK_CODON")
+if not _STAGED:
+    pytest.skip(
+        "the pinned Codon comes from bazel (MODULE.bazel @codon, W566)",
+        allow_module_level=True,
+    )
+CODON = Path(_STAGED).resolve()
 BASELINE = ROOT / "codon-baseline.json"
 
 

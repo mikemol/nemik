@@ -11,8 +11,15 @@ import os
 from pathlib import Path
 
 import installed
+import pytest
 
-CODON = Path(os.environ["NEMIK_CODON"]).resolve()
+_STAGED = os.environ.get("NEMIK_CODON")
+if not _STAGED:
+    pytest.skip(
+        "the pinned Codon comes from bazel (MODULE.bazel @codon, W566)",
+        allow_module_level=True,
+    )
+CODON = Path(_STAGED).resolve()
 TYPED = "def add(a: int, b: int) -> int:\n    return a + b\n\nprint(add(2, 3))\n"
 
 

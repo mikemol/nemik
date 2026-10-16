@@ -84,4 +84,7 @@ pythonpath = ["tools"]
 # The tests import their sibling helper (tests/installed.py) by bare name, as pytest's rootdir
 # import mode resolves it; mypy needs the same directory to find it. Not an exemption: it only
 # says where the module lives (the edit gate checks a copy at the repo root, so it needs this).
-mypy_path = "tests:stubs:tools"
+# nemik:W566/W571: src is a base too, so src/nemik/x.py is module nemik.x whether it is named by path or
+# imported through the editable install the image has (else: "Source file found twice under different
+# module names: src.nemik.manifest and nemik.manifest", mypy exit 2, in the image's test stage only).
+mypy_path = "tests:stubs:tools:src"
