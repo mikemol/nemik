@@ -8,9 +8,21 @@ import pytest
 from nemik.witnesses import witness
 
 # nemik:W98: Bazel hands the test a pinned opa as $NEMIK_OPA; the host falls back to PATH.
+# nemik:W603: a skip is not a gate. When NEMIK_OPA is NAMED (Bazel and the image stage always name
+# it) the opa must exist, so its absence fails below instead of skipping; only a bare host run with
+# no NEMIK_OPA and no opa on PATH skips.
+NAMED = os.environ.get("NEMIK_OPA")
 pytestmark = pytest.mark.skipif(
-    shutil.which(os.environ.get("NEMIK_OPA", "opa")) is None, reason="opa not installed"
+    NAMED is None and shutil.which("opa") is None, reason="opa not installed"
 )
+
+
+def test_a_named_opa_exists() -> None:
+    """When the environment names the pinned opa, it must be there: no silent skip."""
+    if NAMED is not None:
+        assert shutil.which(NAMED) is not None, (
+            f"NEMIK_OPA={NAMED} is not an executable"
+        )
 
 
 def test_file_witness_true_false(tmp_path) -> None:
