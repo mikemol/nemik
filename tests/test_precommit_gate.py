@@ -34,6 +34,17 @@ def test_the_gate_is_the_precommit_suite() -> None:
     )
 
 
+def test_the_gate_replays_the_images_environment_before_the_suite() -> None:
+    """W571: a clean-environment collection and an editable-style mypy run precede the suite."""
+    code = "\n".join(_code(SCRIPT))
+    clean = code.index("env -i PATH")
+    editable = code.index('PYTHONPATH="$wt/src"')
+    suite = code.index("bazel test //:precommit")
+    assert clean < editable < suite
+    assert "--collect-only" in code
+    assert "tools/mypy_ratchet.py" in code
+
+
 def test_the_suite_covers_every_test_target() -> None:
     build = (ROOT / "BUILD.bazel").read_text()
     suite = build[build.index("test_suite(") :]

@@ -53,6 +53,20 @@ if ! bazel test "${fast[@]}" --noshow_progress; then
     echo "gate_staged: a registry check FAILED (fast pass, before the full suite): commit refused" >&2
     exit 1
 fi
+# nemik:W571: the image's test stage runs plain pytest with none of Bazel's NEMIK_* variables and the
+# project installed editable. Two commits passed the Bazel gate and failed there on 2026-10-16 (a test
+# module read os.environ["NEMIK_CODON"] at import: collection error; mypy reached src/nemik/x.py by path
+# and by import: "Source file found twice"). Replay both here in seconds, on the staged tree.
+if ! out=$(env -i PATH="$PATH" HOME="$HOME" .venv/bin/python3 -m pytest --collect-only -q tests 2>&1); then
+    printf '%s\n' "$out" | tail -n 30 >&2
+    echo "gate_staged: a test module does not collect without Bazel's environment (the image's test stage would exit 2): commit refused" >&2
+    exit 1
+fi
+if ! out=$(env PYTHONPATH="$wt/src" .venv/bin/python3 tools/mypy_ratchet.py 2>&1); then
+    printf '%s\n' "$out" | tail -n 30 >&2
+    echo "gate_staged: the mypy ratchet fails with the package importable from src (the image installs it editable): commit refused" >&2
+    exit 1
+fi
 # nemik:W521: the gate is one bazel target, //:precommit (a test_suite over every test; the lint, type,
 # shell and warrant stages join it as they land), so BuildBuddy captures its logs as one invocation.
 if bazel test //:precommit --noshow_progress; then
