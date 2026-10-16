@@ -199,3 +199,18 @@ nemik:ActiveCardShape a sh:NodeShape ;
                   sh:message "no working card while items are ready: mark the one you are doing with --update <W> --status working" ] ;
     sh:property [ sh:path nemik:extraActiveCards ; sh:maxCount 0 ; sh:severity sh:Warning ;
                   sh:message "more than one working card: keep one, return the others to ready" ] .
+
+# nemik:W599 (operator 2026-10-16 via github-8f: transcript needles of operator utterances are provenance,
+# "that's why we call them warrants"): the contract a warrant is written to, W3C PROV-O. The transcript
+# record is a prov:Entity (IRI file:///path#uuid) the card's judgement prov:wasDerivedFrom; it was
+# generated at a time (prov:generatedAtTime), by an utterance (a prov:Activity), and is attributed to
+# the one who spoke (a prov:Agent: the operator is urn:nemik:operator). mtools:W1384 writes the JSON-LD
+# on the card and validates against this shape; nemik:W598 reads it into the graph.
+nemik:WarrantRecordShape a sh:NodeShape ;
+    sh:targetObjectsOf prov:wasDerivedFrom ;
+    sh:property [ sh:path prov:generatedAtTime ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:dateTime ;
+                  sh:message "a warrant's transcript record needs prov:generatedAtTime, one xsd:dateTime (the record's timestamp)" ] ;
+    sh:property [ sh:path prov:wasAttributedTo ; sh:minCount 1 ; sh:class prov:Agent ;
+                  sh:message "a warrant's transcript record needs prov:wasAttributedTo a prov:Agent (the operator is urn:nemik:operator)" ] ;
+    sh:property [ sh:path prov:wasGeneratedBy ; sh:minCount 1 ; sh:class prov:Activity ;
+                  sh:message "a warrant's transcript record needs prov:wasGeneratedBy the utterance, a prov:Activity" ] .
