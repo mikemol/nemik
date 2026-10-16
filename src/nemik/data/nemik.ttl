@@ -13,6 +13,10 @@ nemik:enables a rdf:Property ; rdfs:comment "This waypoint unblocks the object w
 nemik:blockedOn a rdf:Property ; rdfs:comment "Free-text name of what the waypoint waits on." .
 nemik:blockedKind a rdf:Property ; rdfs:comment "agent | human." .
 nemik:touches a rdf:Property ; rdfs:comment "A tag naming an area the waypoint touches." .
+nemik:stream a rdf:Property ; rdfs:comment "The run log a prov:Activity row came from, for example apply-set-runs (nemik:W558)." .
+nemik:trigger a rdf:Property ; rdfs:comment "What started a run, as its writer names it (nemik:W558, run-row.schema.json)." .
+nemik:exitCode a rdf:Property ; rdfs:comment "A run's process exit code (nemik:W558)." .
+nemik:verdictState a rdf:Property ; rdfs:comment "The state of a run's verdict object, a separate axis from the nemik:ChangeLifecycle step reached (nemik:W558)." .
 nemik:strayWord a rdf:Property ; rdfs:comment "A word in the waypoint's next step that blurs the change-lifecycle steps (nemik:W553)." .
 nemik:namesFile a rdf:Property ; rdfs:comment "A repo file path the waypoint's next step names, as written (nemik:W544)." .
 
