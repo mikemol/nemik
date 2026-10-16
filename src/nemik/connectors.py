@@ -179,3 +179,24 @@ def parse(document: dict[str, object]) -> list[Connector]:
             )
         )
     return found
+
+
+def credential_ask(connector: Connector) -> str:
+    """Say what only the operator can do when a connector's credential is absent (nemik:W586).
+
+    The text is derived from the declaration, so a connector never words its own ask: it names the
+    scope to grant, whether the grant may be read-only, and the store to put it in. Whether the
+    credential is absent is the caller's I/O; this stays pure.
+
+    Args:
+        connector: The declared connector.
+
+    Returns:
+        A blocked_on string in the `operator: act` form.
+
+    """
+    credential = connector.credential
+    return (
+        f"operator: act put the {connector.name} credential in {credential.store} "
+        f"(scope {credential.scope}, {credential.access})"
+    )

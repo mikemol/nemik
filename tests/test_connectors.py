@@ -53,6 +53,15 @@ def test_two_connectors_parse_in_declared_order() -> None:
     assert found[1].credential.store.startswith("file:")
 
 
+def test_a_missing_credential_asks_the_operator_from_the_declaration() -> None:
+    """The ask names the connector, store, scope and access, all from its declaration."""
+    ask = connectors.credential_ask(_parse(TWO)[0])
+    assert ask == (
+        "operator: act put the google-tasks credential in pass:nemik/google-tasks "
+        "(scope tasks.readonly, read-only)"
+    )
+
+
 def test_the_shipped_declaration_loads() -> None:
     """The file that ships with the package parses, whatever it declares so far."""
     text = files("nemik.data").joinpath("connectors.toml").read_text(encoding="utf-8")
