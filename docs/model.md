@@ -21,7 +21,7 @@ Node IRIs are `urn:nemik:<repo>` for a workstream, `urn:nemik:<repo>/W<n>` for a
 | Derivation: what an activity used, what caused a waypoint | W3C PROV | implemented |
 | Rules a queue must satisfy | SHACL | implemented (`nemik-check`) |
 | Effort over time | Prometheus text, scraped into VictoriaMetrics | implemented (`nemik-metrics`, `/metrics`) |
-| Change feed per workstream | OSLC Tracked Resource Set | designed, not implemented |
+| Change feed per workstream | OSLC Tracked Resource Set | implemented (`nemik.trs`; `trs/<repo>/base.ttl` and `changelog.ttl` in the static view) |
 | Messages between workstreams | ForgeFed / ActivityStreams | designed, not implemented |
 
 ## Waypoint: a queued item
@@ -205,9 +205,6 @@ The exit code carries only the verdict (0 conforms, 1 violates). A reader that g
   as still current in the ForgeFed draft). A summit ask is an Offer of a Ticket, with Accept,
   Reject and Resolve. An interrupt is an incoming Activity that the waypoint's
   `prov:wasInformedBy` cites.
-- **Tracked Resource Set.** The ledger is already append-only. Publishing it as a `trs:ChangeLog`
-  per workstream would let other consumers sync incrementally.
-
 ## Known residue
 
 - `effortClass` for ledger kinds is nemik's reading. It becomes definitional only if mtools
