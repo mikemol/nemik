@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 545,
+  "counter": 559,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 281
+      "ticks_blocked": 292
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-12T02:25:58Z",
-      "ticks_blocked": 101,
+      "ticks_blocked": 112,
       "weight": 1
     },
     {
@@ -3521,7 +3521,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 103,
+      "ticks_blocked": 114,
       "weight": 2,
       "completed": null
     },
@@ -3755,7 +3755,7 @@
       "minted_during": "tick",
       "caused_by": "life-c5",
       "last_worked": "2026-10-12T23:37:26Z",
-      "ticks_blocked": 133,
+      "ticks_blocked": 144,
       "completed": null
     },
     {
@@ -4281,7 +4281,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 130,
+      "ticks_blocked": 141,
       "weight": 2,
       "completed": null
     },
@@ -5380,7 +5380,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 107,
+      "ticks_blocked": 118,
       "completed": null
     },
     {
@@ -5401,7 +5401,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 122,
+      "ticks_blocked": 133,
       "completed": null
     },
     {
@@ -5460,7 +5460,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 122,
+      "ticks_blocked": 133,
       "completed": null
     },
     {
@@ -5481,7 +5481,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 122,
+      "ticks_blocked": 133,
       "completed": null
     },
     {
@@ -5521,7 +5521,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 122,
+      "ticks_blocked": 133,
       "completed": null
     },
     {
@@ -5580,7 +5580,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 122,
+      "ticks_blocked": 133,
       "completed": null
     },
     {
@@ -5620,7 +5620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 122,
+      "ticks_blocked": 133,
       "completed": null
     },
     {
@@ -5641,7 +5641,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 122,
+      "ticks_blocked": 133,
       "completed": null
     },
     {
@@ -5681,7 +5681,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 122,
+      "ticks_blocked": 133,
       "completed": null
     },
     {
@@ -6426,7 +6426,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T06:56:21Z",
-      "ticks_blocked": 48,
+      "ticks_blocked": 59,
       "completed": null
     },
     {
@@ -6450,7 +6450,7 @@
       "minted_during": "tick",
       "caused_by": "W337",
       "last_worked": "2026-10-13T07:54:43Z",
-      "ticks_blocked": 47,
+      "ticks_blocked": 58,
       "weight": 5,
       "completed": null
     },
@@ -6624,7 +6624,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 97,
+      "ticks_blocked": 108,
       "completed": null
     },
     {
@@ -7032,7 +7032,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 35,
+      "ticks_blocked": 46,
       "completed": null
     },
     {
@@ -7145,7 +7145,7 @@
       "minted_during": "interrupt",
       "caused_by": "W364",
       "last_worked": null,
-      "ticks_blocked": 16
+      "ticks_blocked": 27
     },
     {
       "symbol": "W370",
@@ -7169,7 +7169,7 @@
       "minted_during": "interrupt",
       "caused_by": "W364",
       "last_worked": null,
-      "ticks_blocked": 16
+      "ticks_blocked": 27
     },
     {
       "symbol": "W371",
@@ -7639,7 +7639,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 58,
+      "ticks_blocked": 69,
       "completed": null
     },
     {
@@ -7663,7 +7663,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:27Z",
-      "ticks_blocked": 73,
+      "ticks_blocked": 84,
       "completed": null
     },
     {
@@ -7711,7 +7711,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-15T12:14:41Z",
-      "ticks_blocked": 73,
+      "ticks_blocked": 84,
       "completed": null
     },
     {
@@ -7735,7 +7735,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-12T17:39:29Z",
-      "ticks_blocked": 73,
+      "ticks_blocked": 84,
       "completed": null
     },
     {
@@ -8292,7 +8292,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 21,
+      "ticks_blocked": 32,
       "completed": null
     },
     {
@@ -8313,7 +8313,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-15T17:53:42Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 13,
       "completed": null
     },
     {
@@ -8334,7 +8334,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 54,
+      "ticks_blocked": 65,
       "completed": null
     },
     {
@@ -8598,7 +8598,7 @@
       "minted_during": "tick",
       "caused_by": "W338",
       "last_worked": "2026-10-13T08:13:31Z",
-      "ticks_blocked": 47,
+      "ticks_blocked": 58,
       "completed": null
     },
     {
@@ -8825,7 +8825,7 @@
       "minted_during": "tick",
       "caused_by": "W426",
       "last_worked": "2026-10-13T13:18:45Z",
-      "ticks_blocked": 32,
+      "ticks_blocked": 43,
       "completed": null
     },
     {
@@ -8974,7 +8974,7 @@
       "minted_during": "tick",
       "caused_by": "W458",
       "last_worked": "2026-10-13T19:10:34Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 30,
       "completed": null
     },
     {
@@ -9050,7 +9050,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T19:10:41Z",
-      "ticks_blocked": 19,
+      "ticks_blocked": 30,
       "weight": 3,
       "completed": null
     },
@@ -9142,7 +9142,7 @@
       "minted_during": "tick",
       "caused_by": "W463",
       "last_worked": "2026-10-13T20:15:42Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 27,
       "weight": 2,
       "completed": null
     },
@@ -9472,7 +9472,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-13T22:03:19Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 27,
       "completed": null
     },
     {
@@ -9525,7 +9525,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-13T22:08:26Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 27,
       "completed": null
     },
     {
@@ -9856,7 +9856,7 @@
       "minted_during": "tick",
       "caused_by": "W500",
       "last_worked": "2026-10-15T11:53:53Z",
-      "ticks_blocked": 15,
+      "ticks_blocked": 26,
       "completed": null
     },
     {
@@ -9974,7 +9974,7 @@
       "minted_during": "tick",
       "caused_by": "github:W35",
       "last_worked": "2026-10-15T12:00:59Z",
-      "ticks_blocked": 15,
+      "ticks_blocked": 26,
       "completed": null
     },
     {
@@ -10040,7 +10040,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-15T13:14:23Z",
-      "ticks_blocked": 9,
+      "ticks_blocked": 20,
       "weight": 10,
       "completed": null
     },
@@ -10085,7 +10085,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-15T12:08:20Z",
-      "ticks_blocked": 14,
+      "ticks_blocked": 25,
       "completed": null
     },
     {
@@ -10428,12 +10428,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Audit F5: apply-set-runs.jsonl, reaper-runs.jsonl, nemik nudges.json, the fence ledger and the paths-forward ledger and marks each carry their own schema. Publish one run-row shape (validated the same way as the queue contract, W519, standards first: PROV Activity fields where they fit) and migrate writers one at a time.",
-      "evidence": "",
+      "next_bounded_step": "Publish the run-row shape for the five run logs only (W556), then migrate apply-set-runs first (W557)",
+      "evidence": "2026-10-15: 2026-10-15 audit F5, first writer read: luthen-observability/.claude/opa_plan/apply-set-runs.jsonl rows carry activations, argv, dry, exit, set, state, verdict, when. verdict is a JSON document stored AS A STRING inside the row (needs a second parse), when is the timestamp, state reuses the lifecycle word 'applied' (nemik:ChangeLifecycle, W550) as a verdict. No run id and no trigger. Writers still to read: checks/pod_reaper.py (reaper-runs), checks/log_ship.py, nemik/wake.py nudges.json, the fence ledger, the paths-forward ledger and marks. | 2026-10-15: 2026-10-15 audit F5, writers 2 and 3 (read from /var/lib/luthen/opa_plan): reaper-runs.jsonl rows are {event, exit, set, verdict} with NO timestamp at all (log_ship stamp=none: 'an untimed line inherits the previous line's time') and verdict an OBJECT {converged, done, state, stuck} where apply-set-runs carries a string; state there is 'done'. apply-ledger.jsonl rows are {apply_exit, changes, commit, destroys_sha256, dirty, planfile_sha256, policy_sha256, preconditions, prev, root, sudo_user, user, when, witness{exit,status,why}}: the exit is apply_exit not exit, prev is a hash chain, witness is an object. So three writers, three exit spellings (exit, exit, apply_exit), two timestamp spellings (when, none), verdict as string, object, or absent. Also in log_ship's streams and unread: tier-rehearsal/steps.jsonl, drum/decisions.jsonl. | 2026-10-15: 2026-10-15 audit F5 COMPLETE, writers 4-7. tier-rehearsal/steps.jsonl rows are {ok, reading{out,rc}, step}: no timestamp, no run id, and ok:true beside reading.rc=1 (a 'No space left on device' on rollback), so ok does not mean rc==0. drum/decisions.jsonl rows are {attachment, decision, multiple, pid, reason, t}: a decision log, t is unix seconds, reason reuses 'enabled' (a lifecycle word). nemik nudges.json is NOT a log: a state map {repo: unix_seconds_last_nudged} plus alarm keys (W166), rewritten whole. The fence ledger (mtools fence/ledger.py) is TSV measurement rows (label, wall_s, peak_mb, stamp_epoch, user_s, sys_s, cg_peak_mb), no verdict. The paths-forward ledger is a text line: ts, kind, symbol, outcome, mechanism, note, evidence=. SO: five run-ish logs (apply-set-runs, reaper-runs, apply-ledger, tier-rehearsal, drum decisions) plus one state map, one measurement TSV and one text ledger that a run-row schema must NOT swallow. Spellings: exit as exit/apply_exit/rc/ok, time as when/t/stamp_epoch/none.",
       "issued_at": "2026-10-15T14:28:56Z",
       "minted_during": "tick",
       "caused_by": "operator",
-      "last_worked": null,
+      "last_worked": "2026-10-15T23:22:18Z",
       "ticks_blocked": 0,
       "weight": 13
     },
@@ -10529,7 +10529,7 @@
       "minted_during": "interrupt",
       "caused_by": "mtools:W1260",
       "last_worked": "2026-10-15T15:11:46Z",
-      "ticks_blocked": 7,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -10626,7 +10626,7 @@
     {
       "symbol": "W545",
       "title": "CheckableNextStepShape: a card with a checkable next step declares a witness, as a shapes.ttl warning (W529)",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "shapes",
@@ -10634,12 +10634,317 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Write the sh:NodeShape warning in shapes.ttl: whether a step is already done is machine-readable only through a witness (--witness with --witness-lang, mtools:W1260), since --check-evidence reads only path existence. Decide what makes a step checkable from the card fields; test one checkable and one uncheckable card. A warning, not a violation.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-15: committed 644a925: shapes.ttl nemik:CheckableNextStepShape (SPARQL warning): checkable = a ready or working card's next step names a repo file (nemik:namesFile, from W544); witness declared = nemik:weather present (emitted only from a witness). SKILL.md documents it, tests/test_gate.py covers warn / witnessed / done / no-file. Gate green. Known cost: it fires alongside EditDeclaredShape on every ready card that names a file and has no witness, so expect fleet-wide warning volume; narrowing 'checkable' is the follow-up if that is noise.",
       "issued_at": "2026-10-15T16:56:38Z",
       "minted_during": "interrupt",
       "caused_by": "mtools:W1279",
+      "last_worked": "2026-10-15T19:48:08Z",
+      "ticks_blocked": 0,
+      "completed": "20261015T194808Z"
+    },
+    {
+      "symbol": "W546",
+      "title": "Done or dropped card pushes one notice to every cross-repo edge on it: inbox letter, plus a message to a live session",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "letters",
+        "notice"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Design: the writer emits a done/dropped event (mtools:W1215 prunes dependents at once, so the writer emits and nemik delivers, one copy of the logic); nemik reads the event and for each cross-repo edge (caused_by, enables, blocked_on) writes one inbox letter and, if the owning session is live, a message; delivered once and recorded. Children: W547 the delivery record and edge walk, W548 the live-session message. Measured: wake() in src/nemik/witnesses.py:267 is called only after nemik-witnesses --apply, covers only blocked_on waiters, and records nothing but the letter file.",
+      "evidence": "",
+      "issued_at": "2026-10-15T19:22:40Z",
+      "minted_during": "tick",
+      "caused_by": "github-8f",
       "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W547",
+      "title": "Delivery record and edge walk for a done or dropped card: one inbox letter per cross-repo edge, delivered once",
+      "status": "ready",
+      "enables": [
+        "W546",
+        "W548"
+      ],
+      "touches": [
+        "letters",
+        "notice"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Pick the delivery record's home (a nemik-owned file keyed repo:W<n>->edge, not the inbox) and generalize waiters() in src/nemik/witnesses.py:240 to caused_by, enables and blocked_on; write the pure edge-walk first, with a test over a three-repo fixture, then the letter writer",
+      "evidence": "2026-10-15: 2026-10-15: checked mikemol-paths-forward --delivered (mtools pathsforward delivered.py, W803): it prints the queue's version 0.0.<highest done number>, not a notice record, so W547 builds its own. Idempotence by letter filename alone is not enough: wake() names the file by date, so a rerun on a later day writes a second letter, and a letter the reader deleted would be sent again.",
+      "issued_at": "2026-10-15T19:22:44Z",
+      "minted_during": "tick",
+      "caused_by": "W546",
+      "last_worked": "2026-10-15T19:52:11Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W548",
+      "title": "Message the owning session of a delivered edge notice when it is live",
+      "status": "ready",
+      "enables": [
+        "W546"
+      ],
+      "touches": [
+        "letters",
+        "notice"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "After the letter is written, find the owner session through ListAgents-style discovery on the host and send one message naming the done card as <repo>:W<n>; skip silently when no session is live; the letter remains the durable copy",
+      "evidence": "",
+      "issued_at": "2026-10-15T19:22:45Z",
+      "minted_during": "tick",
+      "caused_by": "W546",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W549",
+      "title": "Answer luthen-observability:W1071: should_nudge importable from luthen without a nemik dependency",
+      "status": "done",
+      "enables": [
+        "luthen-observability:W1071"
+      ],
+      "touches": [
+        "wake",
+        "vendoring"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-15: 2026-10-15 measured: age_seconds and should_nudge (src/nemik/wake.py:64-94) are 31 lines, stdlib only (datetime), no nemik import, plus REWAKE_S = 30*60. Moving them to a package luthen vendors needs mtools to host them (mtools hooks); nemik.wake then re-exports, tests in tests/ keep passing unchanged. Asked mtools-ad where it wants them. | 2026-10-15: 2026-10-15 mtools-ad agreed: home is the hooks dist, new module mikemol.hooks.rewake (luthen already vendors hooks), card mtools:W1299 (enables nemik:W549). They port age_seconds, should_nudge and REWAKE_S as a pure module with tests, with the clock passed in (no datetime.now default inside; a thin default at the caller). They will send the sha when it lands. Keep nemik's copy until then; after repinning mtools to that sha, nemik.wake re-exports from mikemol.hooks.rewake and supplies the now default itself. | 2026-10-15: 2026-10-15 mtools-ad: mikemol.hooks.rewake landed as mtools b5db3c4 (pushed, W1299): REWAKE_S = 30*60, age_seconds(last_tick, now), should_nudge(last_nudged, now, rewake_s=REWAKE_S), pure, 7 tests; now is a required argument, so nemik.wake supplies datetime.now(UTC) at its call sites or a one-line wrapper. | 2026-10-15: committed 1e8ba57: all six mtools wheels repinned ca6702b -> b5db3c4 (tools/revendor-mtools.sh), nemik.wake re-exports REWAKE_S, age_seconds and should_nudge from mikemol.hooks.rewake (mtools:W1299) with datetime.now(UTC) supplied at nemik's wrappers; tests/test_witnesses.py follows mtools:W1215 (done card frees local dependents at once, so only foreign waiters get a letter). Gate green. Luthen can now import mikemol.hooks.rewake from the hooks it vendors.",
+      "issued_at": "2026-10-15T20:07:05Z",
+      "minted_during": "interrupt",
+      "caused_by": "luthen-observability:W1071",
+      "last_worked": "2026-10-15T20:57:46Z",
+      "ticks_blocked": 0,
+      "completed": "20261015T205746Z"
+    },
+    {
+      "symbol": "W550",
+      "title": "Change-lifecycle concept scheme beside WaypointStates, and a vocabulary-divergence check for its words used off-scheme",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "vocabulary",
+        "skos",
+        "oslc"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Declare in nemik.ttl a skos:ConceptScheme beside WaypointStates (about lines 19-25) with one skos:Concept per step: landed (committed), installed (written by an apply), enabled (trigger registered), active (trigger armed), applied (a run converged). Each gets a definition and the evidence that witnesses it (git ref, host_live_types row, systemd is-enabled, is-active, run record verdict). Confirm the exact OSLC CM 3.0 state terms from the vocabulary file, not memory (as W530 says), map where they fit, mark the rest a nemik extension. Then a check flagging these words used off-scheme in queue text and run records, linked to mtools' corpus/exit-table.json (mtools:W1294): a run's verdict is one axis, the lifecycle step another. Atomize into scheme, mapping, check before working.",
+      "evidence": "",
+      "issued_at": "2026-10-15T20:44:04Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-8f",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W551",
+      "title": "Declare the change-lifecycle skos:ConceptScheme in nemik.ttl: five concepts, each with a definition and its witness",
+      "status": "done",
+      "enables": [
+        "W552",
+        "W550"
+      ],
+      "touches": [
+        "vocabulary",
+        "skos"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-15: committed 4973c0d: nemik.ttl nemik:ChangeLifecycle skos:ConceptScheme with Landed, Installed, Enabled, Active, Applied, each a skos:definition and a nemik:witnessedBy text (git ref, host_live_types row, systemctl is-enabled, is-active, run record verdict); tests/test_lifecycle_scheme.py; BUILD.bazel lists nemik.ttl as test data. Gate green.",
+      "issued_at": "2026-10-15T20:51:36Z",
+      "minted_during": "tick",
+      "caused_by": "W550",
+      "last_worked": "2026-10-15T21:11:45Z",
+      "ticks_blocked": 0,
+      "completed": "20261015T211145Z"
+    },
+    {
+      "symbol": "W552",
+      "title": "Map the lifecycle concepts to OSLC CM 3.0 state terms, confirmed from the vocabulary file, and mark the unmapped as nemik extensions",
+      "status": "done",
+      "enables": [
+        "W553",
+        "W550"
+      ],
+      "touches": [
+        "vocabulary",
+        "oslc"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-15: committed a67829f: nemik.ttl maps landed -> skos:closeMatch oslc_cm:Fixed and applied -> oslc_cm:Verified, marks installed, enabled and active nemik:extension true; read from the published OSLC CM 3.0 vocabulary (open-services.net/ns/cm# 303 to docs.oasis-open-projects.org/oslc-op/cm/v3.0/errata01/os/change-mgt-vocab.html, fetched 2026-10-15 via WebFetch, whose summarizer made the quoted definitions second-hand). tests/test_lifecycle_scheme.py holds exactly one of closeMatch/extension per step. Gate green.",
+      "issued_at": "2026-10-15T20:51:37Z",
+      "minted_during": "tick",
+      "caused_by": "W550",
+      "last_worked": "2026-10-15T21:26:55Z",
+      "ticks_blocked": 0,
+      "completed": "20261015T212655Z"
+    },
+    {
+      "symbol": "W553",
+      "title": "Vocabulary-divergence check: lifecycle words used off-scheme in queue text and run records, linked to mtools' exit table",
+      "status": "done",
+      "enables": [
+        "W550"
+      ],
+      "touches": [
+        "vocabulary",
+        "check"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-15: 2026-10-15: a regex cannot judge whether landed/installed/enabled/active/applied is used correctly, only flag strays outside the five. Asked github-8f which strays they have seen (guesses: deployed, shipped, live, rolled out, activated, registered). Their list becomes the check's word set. | 2026-10-15: 2026-10-15 github-8f's word list. STRAYS to flag: armed (used for both enabled and active), shipped, host-shipped (landed or installed, ambiguous), live (active or applied), takes effect, rides the next apply (landed but not yet installed), deployed. NOT strays, leave alone: rolled out (Kubernetes rollout status, a witness term), activation and activate (luthen's apply activation kinds, so activated too), promoted (the drum overlay promotion), pushed (a git remote state). | 2026-10-15: committed f9668c2: shapes.ttl nemik:LifecycleWordShape (SPARQL warning on ready/working cards), adapter emits nemik:strayWord from next_bounded_step (armed, shipped, host-shipped, takes effect, rides the next apply, deployed, and live except before session/loop/queue/view/reader/data/graph/fleet), nemik.ttl declares it, SKILL.md documents it, tests/test_gate.py covers stray, named not-strays (rolled out, pushed), a live session, a done card. Queue text only: the run-record half is W555. Gate green.",
+      "issued_at": "2026-10-15T20:51:38Z",
+      "minted_during": "tick",
+      "caused_by": "W550",
+      "last_worked": "2026-10-15T22:13:49Z",
+      "ticks_blocked": 0,
+      "completed": "20261015T221349Z"
+    },
+    {
+      "symbol": "W554",
+      "title": "Add held as a sixth lifecycle concept between installed and enabled: declared and installed but deliberately not enabled",
+      "status": "done",
+      "enables": [
+        "W550"
+      ],
+      "touches": [
+        "vocabulary",
+        "skos"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-15: committed fe2eb06: nemik:Held (altLabel staged) in nemik:ChangeLifecycle, nemik:extension true, witnessed by systemctl is-enabled reporting disabled with the unit file installed; tests/test_lifecycle_scheme.py counts six steps. Gate green.",
+      "issued_at": "2026-10-15T21:28:08Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-8f",
+      "last_worked": "2026-10-15T22:13:48Z",
+      "ticks_blocked": 0,
+      "completed": "20261015T221348Z"
+    },
+    {
+      "symbol": "W555",
+      "title": "Run records: flag lifecycle stray words in run-row detail, with mtools' exit table as the verdict axis",
+      "status": "blocked",
+      "enables": [
+        "W550"
+      ],
+      "touches": [
+        "vocabulary",
+        "check"
+      ],
+      "blocked_on": [
+        "W558"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Find where run rows are read (the apply, reaper and nudge ledgers, W534's run-row schema), emit nemik:strayWord from the detail column, so LifecycleWordShape covers them; read corpus/exit-table.json (mtools:W1294) and record a run's verdict as a separate axis from the lifecycle step. Depends on W534's schema if the rows are not yet one shape.",
+      "evidence": "2026-10-15: 2026-10-15: nemik reads no run rows today, so there is nothing for the stray-word shape to flag until W558 ingests them. FINDING in mtools corpus/exit-table.json (mtools:W1294): the exit classes reuse lifecycle words as verdict names. DONE lists INSTALLED, and WITHHELD (exit 6) is named HELD, the same word W554 gave the lifecycle step between installed and enabled. Verdict axis and lifecycle axis share vocabulary, so the scheme and the exit table need a stated mapping: a run that exits INSTALLED (verdict) reached the installed step only if its witness says so. Tell mtools-ad via W555's edge once the mapping is chosen.",
+      "issued_at": "2026-10-15T22:13:50Z",
+      "minted_during": "tick",
+      "caused_by": "W553",
+      "last_worked": "2026-10-15T23:52:21Z",
+      "ticks_blocked": 1,
+      "completed": null
+    },
+    {
+      "symbol": "W556",
+      "title": "Publish the one run-row shape for apply, reaper, apply-ledger, tier-rehearsal and drum logs, validated like the queue contract",
+      "status": "done",
+      "enables": [
+        "W534"
+      ],
+      "touches": [
+        "records",
+        "schema"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-15: committed 6b826bd: src/nemik/data/run-row.schema.json (draft 2020-12; required ts, run_id, trigger, exit, object verdict with state; optional detail and inputs_digest; PROV-O startedAtTime and wasInformedBy where they fit), tests/test_run_row_schema.py accepts one clean row and refuses apply-set-runs, reaper-runs, apply-ledger and a string verdict as audited, BUILD.bazel lists the schema as test data. Out of scope by name: nudges.json, the fence TSV, the text ledger. Gate green.",
+      "issued_at": "2026-10-15T23:22:19Z",
+      "minted_during": "tick",
+      "caused_by": "W534",
+      "last_worked": "2026-10-15T23:36:35Z",
+      "ticks_blocked": 0,
+      "completed": "20261015T233635Z"
+    },
+    {
+      "symbol": "W557",
+      "title": "Migrate apply-set-runs.jsonl to the run-row shape: verdict as an object, a timestamp, a run id and a trigger",
+      "status": "done",
+      "enables": [
+        "W534"
+      ],
+      "touches": [
+        "records",
+        "schema"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-15: W556 landed (6b826bd), so the shape exists. The writer is luthen's, so this is an ask to luthen-observability, not nemik work: emit ts, run_id, trigger, exit and an object verdict in apply-set-runs.jsonl while log_ship keeps reading the old rows. | 2026-10-15: 2026-10-15 luthen claimed it as luthen-observability:W1089 (ready): emit ts, run_id, trigger, exit, object verdict as additional fields, keep the old keys, test against run-row.schema.json at 6b826bd. Answered: trigger is a free non-empty string in the schema (no enum). Flagged: the old verdict key is a STRING and the schema's verdict is an OBJECT, so they cannot coexist under one key. | 2026-10-15: 2026-10-15 luthen: luthen-observability:W1089's first writer landed as dcdc1249. apply-set-runs rows carry ts (RFC 3339, same instant as the old when), run_id (uuid4 hex), trigger ('systemd-unit' when INVOCATION_ID is set, else 'hand'), exit, verdict as an object with a state; legacy text moved to verdict_json (readers checked: apply_epoch reads when/state/exit, the vmalert-logs rule reads set/state, nothing reads the verdict string); an oversize verdict collapses to {state, truncated}. Takes effect on the next apply_set run (hourly at the latest); luthen will read one real row from VictoriaLogs and confirm. Remaining under W1089, one writer at a time: reaper-runs, apply-ledger (apply_exit to exit), tier-rehearsal, drum decisions. | 2026-10-16: 2026-10-15 validated myself: tools/check_run_rows.py over /var/lib/luthen/opa_plan/apply-set-runs.jsonl: 4 rows pass the run-row schema (the last, at 2026-10-16T00:09:04Z, trigger systemd-unit, exit 3, verdict an object with state deferred, run_id present, legacy text in verdict_json), 468 older rows fail for one reason, no ts. The old rows stay as they are (an append-only log); W558 must count them as unmigrated, not guess a ts from when. | 2026-10-16: committed 4d2fb44: tools/check_run_rows.py and tests/test_check_run_rows.py (4 tests), BUILD.bazel per-test data entry. The apply-set writer's migration is verified against real rows (4 pass, 468 older lack ts). luthen-observability:W1089 continues with reaper-runs, apply-ledger, tier-rehearsal and drum decisions, one writer at a time.",
+      "issued_at": "2026-10-15T23:22:20Z",
+      "minted_during": "tick",
+      "caused_by": "W534",
+      "last_worked": "2026-10-16T00:28:03Z",
+      "ticks_blocked": 0,
+      "completed": "20261016T002803Z"
+    },
+    {
+      "symbol": "W558",
+      "title": "Read run rows into the graph: an adapter for rows that validate against run-row.schema.json, emitting ts, trigger, exit and detail",
+      "status": "ready",
+      "enables": [
+        "W555"
+      ],
+      "touches": [
+        "records",
+        "adapter"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "nemik reads no run rows today (grep: no reader of *-runs.jsonl, apply-ledger or exit-table in src/nemik). Add an adapter beside _queue_graph that reads run-log paths from the export, keeps rows that validate against src/nemik/data/run-row.schema.json, and emits a prov:Activity per row (ts as prov:startedAtTime, trigger as prov:wasInformedBy, exit, the detail text). Rows that fail the schema are counted, not guessed at. Needs W557's writers to emit the shape before real rows pass.",
+      "evidence": "",
+      "issued_at": "2026-10-15T23:52:16Z",
+      "minted_during": "tick",
+      "caused_by": "W555",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W559",
+      "title": "Spike: measure Pyodide and Codon on nemik's typed core, toward a portable strongly-typed everything (operator 2026-10-15)",
+      "status": "ready",
+      "enables": [
+        "W423"
+      ],
+      "touches": [
+        "portability",
+        "typing"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Decide with the operator: Pyodide keeps the Python as-is and gives portability to the browser at ~14 MB, no typing; Codon gives static typing and native speed but needs the JSON documents typed (a concrete schema per document, which W519 and W556 are already producing) and has no browser story I can confirm. Next measurement: type pieces.split/assemble with concrete records under Codon and run the corpus there; and check whether Codon can emit wasm",
+      "evidence": "2026-10-16: 2026-10-15 SPIKE RESULTS on src/nemik/pieces.py (BASE inlined; scratchpad copies pieces_spike.py, pieces_codon.py, run_pyodide.mjs) with the 6-case corpus tests/corpus/pieces. PYODIDE 0.27.7 (npm, 14 MB on disk) under node 24-ish: all 6 cases AGREE unchanged, incl. astral-plane key ordering (it is CPython, so Python's ordering), cold load 3656 ms wall (not user/sys CPU), module import 53 ms. It enforces NO static types: dict[str, Any] runs as-is. CODON 0.20.3 (80 MB tarball, runs on this host, needs no install): rejects the module as written: (1) 'no module named __future__', fixed by deleting the line; (2) \"'Any' object has no attribute '__iter__'\" in split(), so Any is opaque and every dict[str, Any] document needs a concrete type (a node/edge record, typed dicts). Codon type-checks at instantiation, only for functions a driver calls. Codon has a json module (json.loads works). NOT tested: Codon's Python interop, wasm output from Codon (I believe it targets native LLVM only, unverified), typing the document with concrete records.",
+      "issued_at": "2026-10-15T23:59:36Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": "2026-10-16T00:01:44Z",
       "ticks_blocked": 0
     }
   ],
