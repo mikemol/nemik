@@ -32,6 +32,8 @@
     nemik_operator_salience{repo}            flow salience the repo's needs-you operator asks hold back,
                                              summed (what the operator owes its work; W300)
     nemik_operator_asks{repo}                how many needs-you asks that is
+    nemik_warrant_debt{repo}                 open cards claiming an operator ruling in prose, no
+                                             warrant (UnwarrantedRulingShape, W597); to 0 (W607)
     nemik_waypoint_age_seconds{repo,state,quantile}
                                              age of the open waypoints per state, from issued_at:
                                              quantile 0.5 is the median, 1 the oldest (W270)
@@ -56,7 +58,7 @@ from rdflib import RDF, Graph
 from rdflib.namespace import PROV
 
 from nemik.adapter import BASE, NEMIK, OSLC_CM, ledger_graph
-from nemik.blocks import inbound
+from nemik.blocks import inbound, ref
 from nemik.check import LEDGER, QUEUE, default_root, survey, workstream_files
 from nemik.realize import verdicts
 from nemik.wake import read_liveness, roster
@@ -116,6 +118,28 @@ def operator_lines(g: Graph) -> list[str]:
     for repo in sorted(held):
         out.append(f"nemik_operator_salience{label(repo=repo)} {held[repo]:.2f}")
         out.append(f"nemik_operator_asks{label(repo=repo)} {count[repo]}")
+    return out
+
+
+def warrant_lines(g: Graph) -> list[str]:
+    """nemik:W607: per repo, the open cards that claim an operator ruling and have no warrant.
+
+    The warrant debt (nemik:W597's UnwarrantedRulingShape): a series to ratchet down to zero as
+    the rulings gain transcript records. Every repo with a queue is listed, so zero is a value,
+    not an absent series.
+
+    Args:
+        g: The merged queue graph.
+
+    Returns:
+        The gauge's TYPE line and one sample per repo.
+
+    """
+    repos = sorted({ref(n).partition(":")[0] for n in g.subjects(OSLC_CM.state, None)})
+    claims = g.subjects(NEMIK.claimsRuling, None)
+    debt = Counter(ref(n).partition(":")[0] for n in claims)
+    out = ["# TYPE nemik_warrant_debt gauge"]
+    out += [f"nemik_warrant_debt{label(repo=repo)} {debt[repo]}" for repo in repos]
     return out
 
 
@@ -231,6 +255,7 @@ def main(argv: list[str] | None = None) -> None:
         )
     out += operator_lines(merged)
     out += health_lines(merged)
+    out += warrant_lines(merged)
     out += realizability_lines(args.root)
 
     prompts: Counter[tuple[str, str, str]] = Counter()
