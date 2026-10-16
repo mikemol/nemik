@@ -13,4 +13,10 @@ fi
 branch=$(git symbolic-ref --quiet --short HEAD) || exit 0
 git rev-parse --abbrev-ref --symbolic-full-name '@{upstream}' >/dev/null 2>&1 || exit 0
 git push --quiet || echo "post-commit: push of $branch failed; the commit stays local" >&2
+# nemik:W591: replay the image's test stage on what was pushed (about 16 minutes, nemik:W588), detached
+# and single-flight (the runner takes a lock), so the commit returns at once and a burst of commits is
+# replayed as the newest. The result lands in .git/image-replica.last for the tick to read (W592).
+if [ -x tools/image_replica_runner.sh ]; then
+	setsid nohup tools/image_replica_runner.sh >/dev/null 2>&1 &
+fi
 exit 0

@@ -36,7 +36,7 @@ exports_files(["pyproject.toml"])
             # nemik:W589: the replica script's buildctl command line is held to the Containerfile's stage
             # nemik:W593: the flow cases as corpus data, read by the one test that checks them
             + (["tests/flow_cases.py"] if src == "tests/test_flow_corpus.py" else [])
-            + (["tools/image_replica.sh"] if src == "tests/test_image_replica.py" else [])
+            + (["tools/image_replica.sh", ".githooks/post-commit"] if src == "tests/test_image_replica.py" else [])
             + (["tools/image_replica_runner.sh"] if src == "tests/test_image_replica_runner.py" else [])
             # nemik:W522: the ruff ratchet measures every Python file of the four trees against its baseline
             + (["ruff-house.toml", "ruff-baseline.json"] + glob(["src/**/*.py", "tests/*.py", "tools/*.py", "checks/*.py"], exclude = [src, "tests/installed.py", "tests/webpage.py", "tools/nemik_client.py", "checks/claims.py"]) if src == "tests/test_ruff_ratchet.py" else [])

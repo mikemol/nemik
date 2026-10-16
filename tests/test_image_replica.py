@@ -35,3 +35,13 @@ def test_the_scratch_clone_is_removed_on_every_exit() -> None:
     script = SCRIPT.read_text(encoding="utf-8")
     assert "trap 'rm -rf \"$scratch\"' EXIT" in script
     assert "exec buildctl" not in script
+
+
+def test_post_commit_starts_the_runner_detached_after_the_push() -> None:
+    """The runner starts after the push, detached with setsid and in the background."""
+    hook = (ROOT / ".githooks" / "post-commit").read_text(encoding="utf-8")
+    push = hook.index("git push")
+    start = hook.index("tools/image_replica_runner.sh >/dev/null 2>&1 &")
+    assert push < start
+    assert "setsid nohup tools/image_replica_runner.sh" in hook
+    assert hook.rstrip().endswith("exit 0")
