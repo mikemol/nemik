@@ -27,6 +27,7 @@ from rdflib import Graph, Literal
 from nemik.adapter import BASE, NEMIK, OSLC_CM, bind, queue_graph, workstream_uri
 from nemik.adoption import adoption
 from nemik.blocks import annotate, ref
+from nemik.idle import findings as idle_findings
 
 QUEUE, LEDGER = "paths-forward.json", "paths-forward.ledger"
 
@@ -228,6 +229,10 @@ def survey(
             f"it, or tell {wrepo} why it waits"
         )
         by_repo.setdefault(trepo, []).append(("Warning", tcite.partition(":")[2], late))
+    # nemik:W577: a loop that ticks idle with nothing workable is told to disarm or name its wait.
+    idle_said = idle_findings(root, merged, [repo for repo, _ in queues])
+    for irepo, said in idle_said.items():
+        by_repo.setdefault(irepo, []).append(("Warning", "--", said))
     # nemik:W405: a card waiting on another repo's card that has open prerequisites of its own (an
     # umbrella, or a card a peer has since atomized) gets the leaves to cite instead, with the exact
     # re-point command, so the fix is one command rather than a hand search (three hand re-points of

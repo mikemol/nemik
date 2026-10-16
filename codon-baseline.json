@@ -71,6 +71,10 @@
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'tomllib'"
  },
+ "idle": {
+  "as_written": "no module named 'tomllib'",
+  "stripped": "no module named 'tomllib'"
+ },
  "history": {
   "as_written": "Assert failed:\tdictionary items are invalid\nExpression:\tt && t->size() == 2\nSource:\t\t/github/workspace/codon/parser/ast/expr.cpp:238",
   "stripped": "Assert failed:\tdictionary items are invalid\nExpression:\tt && t->size() == 2\nSource:\t\t/github/workspace/codon/parser/ast/expr.cpp:238"
