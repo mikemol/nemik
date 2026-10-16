@@ -256,8 +256,7 @@ def annotate(g: Graph) -> None:
             for t in g.objects(node, NEMIK.waitsFor)
             if (t, OSLC_CM.state, NEMIK.Done) in g or (t, RDF.type, NEMIK.Dropped) in g
         ]
-        for t in landed:
-            g.add((node, NEMIK.landedBlocker, t))
+        # nemik:W529: the per-blocker finding is a SPARQL constraint (LandedBlockerShape).
         if landed and len(landed) == len(set(g.objects(node, NEMIK.blockedOn))):
             g.add((node, NEMIK.allBlockersLanded, Literal(True)))
 

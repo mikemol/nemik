@@ -1,13 +1,16 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-from rdflib import Graph, Literal
+from rdflib import RDF, Graph, Literal
 
 from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri
 from nemik.blocks import annotate
+from nemik.check import shapes
+from nemik.shaclinc import findings
 
 
 def _wp(g, repo, sym, status="ready"):
     n = waypoint_uri(repo, sym)
+    g.add((n, RDF.type, OSLC_CM.ChangeRequest))
     g.add((n, OSLC_CM.state, STATE[status]))
     return n
 
@@ -49,10 +52,16 @@ def test_block_on_a_landed_waypoint_is_flagged_and_all_landed_means_ready() -> N
         g.add((mixed, NEMIK.blockedOn, Literal(t.split("/")[-1])))
         g.add((mixed, NEMIK.waitsFor, t))
     annotate(g)
-    assert (all_landed, NEMIK.landedBlocker, done) in g
+    said: dict[object, list[str]] = {}
+    for focus, _, message in findings("umbrella-block", g, shapes()):
+        if "already landed" in message:
+            said.setdefault(focus, []).append(message)
+    assert [str(done) in m for m in said[all_landed]] == [
+        True
+    ]  # SPARQL constraint, W529
+    assert [str(done) in m for m in said[mixed]] == [True]
+    assert not any(str(live) in m for m in said[mixed])
     assert (all_landed, NEMIK.allBlockersLanded, None) in g
-    assert (mixed, NEMIK.landedBlocker, done) in g
-    assert (mixed, NEMIK.landedBlocker, live) not in g
     assert (mixed, NEMIK.allBlockersLanded, None) not in g
 
 

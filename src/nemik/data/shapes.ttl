@@ -172,10 +172,23 @@ nemik:UnresolvedBlockerShape a sh:NodeShape ;
                   sh:message "blocked on no resolvable party: name a repo, a <repo>:W<n>, 'operator: decide/act ...', a cal:<label>/<uid> or a host:<id> (a row luthen's host-apply export holds)" ] .
 
 # Blocked on a waypoint that has already landed, done or dropped (nemik:W110, paperkit's letter).
+# nemik:W529: the per-blocker rule is a SPARQL constraint over the emitted nemik:waitsFor edges, so the
+# rule lives here and the adapter plumbs no marker for it; "every blocker landed" stays a derived marker
+# because it compares a count of blocked_on entries.
 nemik:LandedBlockerShape a sh:NodeShape ;
-    sh:targetSubjectsOf nemik:landedBlocker ;
-    sh:property [ sh:path nemik:landedBlocker ; sh:maxCount 0 ; sh:severity sh:Warning ;
-                  sh:message "blocked_on names a waypoint that has already landed (done or dropped): trim it from blocked_on (mikemol-paths-forward --prune-landed --root <fleet root> prunes local and foreign repo:W<n> ones)" ] ;
+    sh:targetClass oslc_cm:ChangeRequest ;
+    sh:targetSubjectsOf nemik:allBlockersLanded ;
+    sh:sparql [
+        sh:severity sh:Warning ;
+        sh:message "blocked_on names {?landed}, a waypoint that has already landed (done or dropped): trim it from blocked_on (mikemol-paths-forward --prune-landed --root <fleet root> prunes local and foreign repo:W<n> ones)" ;
+        sh:select """
+            SELECT $this ?landed WHERE {
+                $this <https://github.com/mikemol/nemik/ns#waitsFor> ?landed .
+                { ?landed <http://open-services.net/ns/cm#state> <https://github.com/mikemol/nemik/ns#Done> }
+                UNION
+                { ?landed a <https://github.com/mikemol/nemik/ns#Dropped> }
+                FILTER NOT EXISTS { $this <http://open-services.net/ns/cm#state> <https://github.com/mikemol/nemik/ns#Done> }
+            }""" ] ;
     sh:property [ sh:path nemik:allBlockersLanded ; sh:maxCount 0 ; sh:severity sh:Warning ;
                   sh:message "every blocker in blocked_on has landed: this waypoint is ready, not blocked" ] .
 
