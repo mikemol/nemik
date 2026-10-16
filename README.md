@@ -89,9 +89,10 @@ stores prompt text, never uses the network, and always exits 0.
 
 ## Development tools
 
-- `tools/pyfmt.sh <draft> <dest.py>`: formats a Python draft with the venv's ruff, writes it, then runs
-  ruff check and mypy on it, so a change that touches several places lands clean in one step
-  (the edit gate refuses a half-formatted or half-imported file).
+- `mikemol-pycheck --install <draft> <dest.py>`: formats a Python draft, runs the edit gate's ruff and
+  mypy on it, and writes it to the destination only when it passes (a refused draft leaves no file), so a
+  change that touches several places lands clean in one step (the edit gate refuses a half-formatted or
+  half-imported file). It replaces tools/pyfmt.sh, which wrote first and left the dirty file.
 - `tools/revendor-mtools.sh <new-sha> <old-sha>`: rebuilds the three vendored mtools wheels at one
   commit and rewrites the pins (see `vendor/wheels/README.md`).
 - `tools/render-check.sh`: the render check as a host step: `tests/test_layout.py` drives the web view in
