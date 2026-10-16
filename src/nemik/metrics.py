@@ -34,7 +34,7 @@
     nemik_operator_asks{repo}                how many needs-you asks that is
     nemik_warrant_debt{repo}                 open cards claiming an operator ruling in prose, no
                                              warrant (UnwarrantedRulingShape, W597); to 0 (W607)
-    nemik_repo_tier{repo,tier}               the repo's burn-down tier as its place in the order, 0
+    nemik_repo_tier{repo}                    the repo's burn-down tier as its place in the order, 0
                                              first (rank-weights.toml [tiers], W600); no gate
     nemik_waypoint_age_seconds{repo,state,quantile}
                                              age of the open waypoints per state, from issued_at:
@@ -153,7 +153,8 @@ def tier_lines(g: Graph) -> list[str]:
         g: The merged queue graph.
 
     Returns:
-        The gauge's TYPE line and one sample per repo, labelled with the tier's name.
+        The gauge's TYPE line and one sample per repo. The tier is the value, not a label, so a
+        tier change leaves no stale series (luthen-observability's cardinality caveat).
 
     """
     declared = tiers.load()
@@ -161,7 +162,7 @@ def tier_lines(g: Graph) -> list[str]:
     out = ["# TYPE nemik_repo_tier gauge"]
     for repo in repos:
         tier = declared.get(repo, tiers.UNLISTED)
-        out.append(f"nemik_repo_tier{label(repo=repo, tier=tier)} {tiers.rank(tier)}")
+        out.append(f"nemik_repo_tier{label(repo=repo)} {tiers.rank(tier)}")
     return out
 
 
