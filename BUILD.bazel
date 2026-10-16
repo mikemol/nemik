@@ -33,6 +33,8 @@ exports_files(["pyproject.toml"])
             + (glob(["tests/*.py", "tools/*.py", "checks/*.py"], exclude = [src, "tests/installed.py", "tests/webpage.py", "tools/nemik_client.py", "checks/claims.py"]) if src == "tests/test_order_sensitive_picks.py" else [])
             # nemik:W521: the gate test reads the hook and the script that runs the //:precommit suite
             + ([".githooks/pre-commit", "tools/gate_staged.sh"] if src == "tests/test_precommit_gate.py" else [])
+            # nemik:W589: the replica script's buildctl command line is held to the Containerfile's stage
+            + (["tools/image_replica.sh"] if src == "tests/test_image_replica.py" else [])
             # nemik:W522: the ruff ratchet measures every Python file of the four trees against its baseline
             + (["ruff-house.toml", "ruff-baseline.json"] + glob(["src/**/*.py", "tests/*.py", "tools/*.py", "checks/*.py"], exclude = [src, "tests/installed.py", "tests/webpage.py", "tools/nemik_client.py", "checks/claims.py"]) if src == "tests/test_ruff_ratchet.py" else [])
             # nemik:W475: the input guard reads every test's source to check what each one opens
