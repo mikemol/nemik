@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import re
 from collections.abc import Callable
+from datetime import datetime
 from pathlib import Path
 
 from mikemol.pathsforward import ledger, model, store
@@ -57,6 +58,23 @@ def workstream_uri(repo: str) -> URIRef:
 
 def waypoint_uri(repo: str, symbol: str) -> URIRef:
     return URIRef(f"{BASE}{repo}/{symbol}")
+
+
+def _instant(text: str) -> Literal:
+    """Type a queue timestamp as xsd:dateTime when it is one, else keep it as written (nemik:W530).
+
+    Args:
+        text: The stamp as the queue stores it, normally 2026-10-16T14:02:11Z.
+
+    Returns:
+        A typed literal when the text parses as an ISO 8601 instant with an offset, else plain.
+
+    """
+    try:
+        parsed = datetime.fromisoformat(text)
+    except ValueError:
+        return Literal(text)
+    return Literal(text, datatype=XSD.dateTime) if parsed.tzinfo else Literal(text)
 
 
 def reference_uri(repo: str, ref: str) -> URIRef:
@@ -165,6 +183,8 @@ def _queue_graph(repo: str, state_path: Path, known: frozenset[str]) -> Graph:
         g.add((node, RDF.type, OSLC_CM.ChangeRequest))
         g.add((node, NEMIK.workstream, ws))
         g.add((node, NEMIK.symbol, Literal(symbol)))
+        # nemik:W530: the standard terms beside the nemik ones, so no reader breaks
+        g.add((node, DCTERMS.identifier, Literal(symbol)))
         g.add((node, DCTERMS.title, Literal(model.text(w, "title"))))
         g.add((node, OSLC_CM.state, STATE.get(status, Literal(status))))
         g.add((node, OSLC_CM.closed, Literal(status == "done", datatype=XSD.boolean)))
@@ -191,6 +211,7 @@ def _queue_graph(repo: str, state_path: Path, known: frozenset[str]) -> Graph:
             g.add((node, NEMIK.claimsRuling, Literal("operator ruling in prose")))
         for tag in model.strlist(w, "touches"):
             g.add((node, NEMIK.touches, Literal(tag)))
+            g.add((node, DCTERMS.subject, Literal(tag)))
         # nemik:W544 (mtools:W1276): the repo files the next step names, as written. Paths only; the
         # EditDeclaredShape in shapes.ttl compares them with the file:<path>!w touches.
         named = re.findall(
@@ -225,7 +246,7 @@ def _queue_graph(repo: str, state_path: Path, known: frozenset[str]) -> Graph:
         if tb := model.ticks(w):
             g.add((node, NEMIK.ticksBlocked, Literal(tb)))
         if issued := model.text(w, "issued_at"):
-            g.add((node, DCTERMS.created, Literal(issued)))
+            g.add((node, DCTERMS.created, _instant(issued)))
         # mtools 2e21902: derived from the tick lock at mint time, never by the agent.
         if during := model.text(w, "minted_during"):
             g.add((node, NEMIK.mintedDuring, Literal(during)))
