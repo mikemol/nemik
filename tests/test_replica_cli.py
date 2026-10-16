@@ -4,7 +4,7 @@
 
 from pathlib import Path
 
-from nemik.replica_cli import main, pushed_sha, report
+from nemik.replica_cli import main, pushed_sha, report, shipped
 
 SHA = "c" * 40
 
@@ -51,3 +51,15 @@ def test_the_report_words_green_and_red_and_the_exit_follows(tmp_path: Path) -> 
     _gitdir(red, f"{SHA} 2 300\n", "loose")
     assert main(["--repo", str(red)]) == 1
     assert report(_gitdir(tmp_path / "n", "", "packed")).startswith("NONE")
+
+
+def test_a_replay_is_shipped_unshipped_or_refused(tmp_path: Path) -> None:
+    """nemik:W604: the shipper's status beside the replay's, per sha."""
+    gitdir = _gitdir(tmp_path / "s", f"{SHA} 0 900\n", "packed")
+    assert shipped(gitdir, SHA).startswith("UNSHIPPED no shipper")
+    (gitdir / "image-replica.shipped").write_text(f"{SHA} 0\n", encoding="utf-8")
+    assert shipped(gitdir, SHA) == "SHIPPED"
+    assert report(gitdir).endswith("[SHIPPED]")
+    (gitdir / "image-replica.shipped").write_text(f"{SHA} 7\n", encoding="utf-8")
+    assert shipped(gitdir, SHA) == "UNSHIPPED shipper exit 7"
+    assert shipped(gitdir, "d" * 40).startswith("UNSHIPPED no shipper")

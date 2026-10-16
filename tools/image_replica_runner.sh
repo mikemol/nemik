@@ -15,6 +15,10 @@
 # the sha as a field, read back from VictoriaLogs before it exits 0); it is the default when luthen's
 # venv exists on the host, and the lines reach it by a pipe (it reads /dev/stdin).
 # `.git/image-replica-<sha7>.log` is only a cache of the same lines, never the evidence.
+#
+# nemik:W604: the shipper's own exit status (7 = refused or not read back) is kept apart from the
+# replay's, as `<sha> <status>` in `.git/image-replica.shipped`, so nemik-replica can say a replay's
+# lines never reached the service.
 #   image_replica_runner.sh [REPLICA [REF [SHIPPER]]]
 #   REPLICA  the replay script (default: tools/image_replica.sh beside the repo root)
 #   REF      the ref to replay (default: origin/main, what the forge builds)
@@ -36,6 +40,7 @@ if [ "$shipper" = "default" ]; then
 	fi
 fi
 last="$gitdir/image-replica.last"
+shipped="$gitdir/image-replica.shipped"
 
 exec 9>"$gitdir/image-replica.lock"
 flock -n 9 || exit 0
@@ -53,7 +58,9 @@ while :; do
 	else
 		read -r -a ship <<<"${shipper//\{sha\}/${sha:0:7}}"
 		"$replica" "$sha" 2>&1 | tee "$cache" | "${ship[@]}" >/dev/null 2>&1
-		status="${PIPESTATUS[0]}"
+		stages=("${PIPESTATUS[@]}")
+		status="${stages[0]}"
+		printf '%s %s\n' "$sha" "${stages[2]}" >"$shipped"
 	fi
 	printf '%s %s %s\n' "$sha" "$status" "$(($(date +%s) - start))" >"$last"
 done

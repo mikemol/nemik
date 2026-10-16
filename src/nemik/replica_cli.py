@@ -49,7 +49,26 @@ def report(gitdir: Path) -> str:
     """
     last = gitdir / "image-replica.last"
     text = last.read_text(encoding="utf-8") if last.exists() else ""
-    return verdict(parse(text), pushed_sha(gitdir))
+    replay = parse(text)
+    return f"{verdict(replay, pushed_sha(gitdir))} [{shipped(gitdir, replay.sha)}]"
+
+
+def shipped(gitdir: Path, sha: str) -> str:
+    """Say whether a replay's lines reached the log service (nemik:W604).
+
+    Args:
+        gitdir: The repository's .git directory.
+        sha: The replayed commit.
+
+    Returns:
+        SHIPPED, or UNSHIPPED with the shipper's exit status or the reason there is none.
+
+    """
+    record = gitdir / "image-replica.shipped"
+    fields = record.read_text(encoding="utf-8").split() if record.exists() else []
+    if len(fields) != len(["sha", "status"]) or fields[0] != sha:
+        return "UNSHIPPED no shipper ran for this sha"
+    return "SHIPPED" if fields[1] == "0" else f"UNSHIPPED shipper exit {fields[1]}"
 
 
 def main(argv: list[str] | None = None) -> int:

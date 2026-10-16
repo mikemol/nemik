@@ -107,4 +107,6 @@ def test_the_replay_output_goes_to_the_shipper_and_the_replay_status_survives(
     assert f"args: --field sha={sha[:7]}" in shipped
     assert f"replay output of {sha}" in shipped
     assert (repo / ".git" / f"image-replica-{sha[:7]}.log").exists()
+    record = (repo / ".git" / "image-replica.shipped").read_text().split()
+    assert record == [sha, "9"]
     assert (repo / ".git" / "image-replica.last").read_text().split()[:2] == [sha, "4"]
