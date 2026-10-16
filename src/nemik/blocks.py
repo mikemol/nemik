@@ -45,6 +45,50 @@ def _repo(node: Node) -> str:
     return str(node).removeprefix(BASE).partition("/")[0]
 
 
+def claims_of(g: Graph, node: Node, blocker: str) -> set[Node]:
+    """Find the blocker repo's cards that claim a wait.
+
+    Args:
+        g: The merged graph.
+        node: The waiting card.
+        blocker: The repo it waits on.
+
+    Returns:
+        The blocker's cards that enable the waiter or were caused by it.
+
+    """
+    return {w for w in g.subjects(NEMIK.enables, node) if _repo(w) == blocker} | {
+        w for w in g.subjects(PROV.wasInformedBy, node) if _repo(w) == blocker
+    }
+
+
+def bare_wait_edges(g: Graph) -> list[tuple[Node, Node]]:
+    """Resolve each open card blocked on a bare repo name to its claims (nemik:W576).
+
+    A wait on `linux-sources` names no card, so it draws no card-to-card edge and a ring through it
+    went unseen for days. The wait resolves to that repo's cards that claim it (`claims_of`): the
+    waiter cannot move before one of them does, so the claim is a prerequisite of the waiter.
+
+    Args:
+        g: The merged graph.
+
+    Returns:
+        Each (claim, waiter) pair.
+
+    """
+    found: list[tuple[Node, Node]] = []
+    for node, _, target in g.triples((None, NEMIK.waitsFor, None)):
+        if (target, RDF.type, NEMIK.Workstream) not in g:
+            continue
+        if (node, OSLC_CM.state, NEMIK.Done) in g or _repo(target) == _repo(node):
+            continue
+        found.extend(
+            (claim, node)
+            for claim in sorted(claims_of(g, node, _repo(target)), key=str)
+        )
+    return found
+
+
 def inbound(g: Graph, letters: bool = False) -> list[dict[str, Any]]:
     """Every open waypoint waiting on another workstream, with the blocker's claiming waypoints.
 
@@ -70,9 +114,7 @@ def inbound(g: Graph, letters: bool = False) -> list[dict[str, Any]]:
             continue  # the operator, or a target outside the graph
         if blocker == _repo(node):
             continue
-        claims = {w for w in g.subjects(NEMIK.enables, node) if _repo(w) == blocker} | {
-            w for w in g.subjects(PROV.wasInformedBy, node) if _repo(w) == blocker
-        }
+        claims = claims_of(g, node, blocker)
         if named is not None:
             claims.add(named)
         row: dict[str, Any] = {
@@ -114,6 +156,7 @@ def dependency_cycles(g: Graph) -> list[tuple[Node, ...]]:
     cards = {n for n in g.subjects(OSLC_CM.state, None)}
     edges = {(str(a), str(b)) for a, _, b in g.triples((None, NEMIK.enables, None))}
     edges |= {(str(b), str(a)) for a, _, b in g.triples((None, NEMIK.waitsFor, None))}
+    edges |= {(str(claim), str(waiter)) for claim, waiter in bare_wait_edges(g)}
     names = {str(n) for n in cards}
     verdict = walk(
         sorted(names),

@@ -66,3 +66,72 @@ def test_the_deadlock_warning_names_the_ring_in_order() -> None:
     assert sorted(found) == ["W1", "W2", "W3"]
     assert "a:W1 -> a:W2 -> a:W3 -> a:W1" in found["W1"]
     assert "a:W2 -> a:W3 -> a:W1 -> a:W2" in found["W2"]
+
+
+def _card(symbol: str, blocked_on: list[str], enables: list[str]) -> dict[str, object]:
+    """Build one blocked card on an agent.
+
+    Args:
+        symbol: The card's symbol.
+        blocked_on: What it waits on.
+        enables: What it enables.
+
+    Returns:
+        The queue row.
+
+    """
+    return {
+        "symbol": symbol,
+        "title": symbol,
+        "status": "blocked",
+        "blocked_on": blocked_on,
+        "blocked_kind": "agent",
+        "enables": enables,
+        "next_bounded_step": "x",
+    }
+
+
+def _queue(root: Path, repo: str, cards: list[dict[str, object]]) -> None:
+    """Write one repo's queue under root."""
+    state = {
+        "version": 1,
+        "project_root": f"/{repo}",
+        "counter": 9,
+        "residue": [],
+        "waypoints": cards,
+    }
+    queue = root / repo / ".claude" / "paths-forward.json"
+    queue.parent.mkdir(parents=True)
+    queue.write_text(json.dumps(state))
+
+
+def test_a_ring_through_a_bare_repo_wait_is_a_warning_naming_every_card() -> None:
+    """nemik:W576: linux-sources:W323 waits on gcalculus:W265, which waits on 'linux-sources'.
+
+    The bare name draws no card edge; the repo's card that enables the waiter (W330) is the claim,
+    and it waits on W323, so the ring W265 -> W323 -> W330 -> W265 crosses two repos.
+    """
+    with tempfile.TemporaryDirectory() as tmp:
+        root = Path(tmp)
+        _queue(
+            root,
+            "linux-sources",
+            [
+                _card("W323", ["gcalculus:W265"], []),
+                _card("W330", ["W323"], ["gcalculus:W265"]),
+            ],
+        )
+        _queue(root, "gcalculus", [_card("W265", ["linux-sources"], [])])
+        found = {
+            (repo, sym): msg
+            for repo, _, findings in survey(root)
+            for sev, sym, msg in findings
+            if sev == "Warning" and "dependency cycle" in msg
+        }
+    assert sorted(found) == [
+        ("gcalculus", "W265"),
+        ("linux-sources", "W323"),
+        ("linux-sources", "W330"),
+    ]
+    assert all("gcalculus:W265" in msg for msg in found.values())
+    assert all("linux-sources:W330" in msg for msg in found.values())

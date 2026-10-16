@@ -20,7 +20,7 @@ from rdflib import Graph, Literal
 from rdflib.term import Node
 
 from nemik.adapter import BASE, NEMIK, OSLC_CM
-from nemik.blocks import ref
+from nemik.blocks import bare_wait_edges, ref
 from nemik.cards import Card
 from nemik.rank import successors
 
@@ -188,6 +188,10 @@ def cycles(g: Graph) -> list[tuple[list[str], bool]]:
     succ = {
         n: sorted((s for s in successors(g, n) if s in nodes), key=str) for n in nodes
     }
+    # nemik:W576: a wait on a bare repo name is an edge from each card that claims it
+    for claim, waiter in bare_wait_edges(g):
+        if claim in nodes and waiter in nodes and waiter not in succ[claim]:
+            succ[claim] = sorted([*succ[claim], waiter], key=str)
     index: dict[Node, int] = {}
     low: dict[Node, int] = {}
     on_stack: set[Node] = set()
