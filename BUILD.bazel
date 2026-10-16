@@ -23,6 +23,8 @@ exports_files(["pyproject.toml"])
             + (glob(["tests/*.py", "tools/*.py", "checks/*.py"], exclude = [src, "tests/installed.py", "tests/webpage.py", "tools/nemik_client.py", "checks/claims.py"]) if src == "tests/test_no_waivers.py" else [])
             # nemik:W557: the run-row tool runs against the schema it validates with
             + (["tools/check_run_rows.py"] if src == "tests/test_check_run_rows.py" else [])
+            # nemik:W543: the mypy ratchet measures every Python file of the four trees against its baseline
+            + (["mypy-house.ini", "mypy-baseline.json", "tools/mypy_ratchet.py"] + glob(["src/**/*.py", "tests/*.py", "tools/*.py", "checks/*.py", "stubs/**"], exclude = [src, "tests/installed.py", "tests/webpage.py", "tools/nemik_client.py", "checks/claims.py", "tools/mypy_ratchet.py"], allow_empty = True) if src == "tests/test_mypy_ratchet.py" else [])
             # nemik:W521: the gate test reads the hook and the script that runs the //:precommit suite
             + ([".githooks/pre-commit", "tools/gate_staged.sh"] if src == "tests/test_precommit_gate.py" else [])
             # nemik:W522: the ruff ratchet measures every Python file of the four trees against its baseline

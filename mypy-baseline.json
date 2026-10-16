@@ -1,0 +1,602 @@
+{
+ "checks/claims.py": {
+  "misc": 46,
+  "no-untyped-call": 3,
+  "no-untyped-def": 20
+ },
+ "src/nemik/adapter.py": {
+  "misc": 14
+ },
+ "src/nemik/adoption.py": {
+  "call-overload": 1,
+  "misc": 25,
+  "var-annotated": 1
+ },
+ "src/nemik/alarm.py": {
+  "misc": 2,
+  "type-arg": 1
+ },
+ "src/nemik/apischema.py": {
+  "explicit-any": 11,
+  "misc": 152
+ },
+ "src/nemik/blocks.py": {
+  "call-overload": 1,
+  "explicit-any": 8,
+  "misc": 126
+ },
+ "src/nemik/blocks_cli.py": {
+  "misc": 44
+ },
+ "src/nemik/cachestore.py": {
+  "misc": 7
+ },
+ "src/nemik/calendars.py": {
+  "misc": 120,
+  "no-untyped-def": 3,
+  "type-arg": 7,
+  "var-annotated": 3
+ },
+ "src/nemik/calwrite.py": {
+  "misc": 11,
+  "no-untyped-def": 1
+ },
+ "src/nemik/cards.py": {
+  "arg-type": 1,
+  "assignment": 1
+ },
+ "src/nemik/check.py": {
+  "call-overload": 2,
+  "misc": 47,
+  "no-untyped-def": 1,
+  "type-arg": 1
+ },
+ "src/nemik/churn.py": {
+  "misc": 41,
+  "type-arg": 2
+ },
+ "src/nemik/critical.py": {
+  "misc": 22
+ },
+ "src/nemik/endpoint.py": {
+  "misc": 1
+ },
+ "src/nemik/floorasks.py": {
+  "misc": 17
+ },
+ "src/nemik/flow.py": {
+  "misc": 15,
+  "type-arg": 3
+ },
+ "src/nemik/health.py": {
+  "explicit-any": 1,
+  "misc": 11,
+  "var-annotated": 1
+ },
+ "src/nemik/history.py": {
+  "misc": 229,
+  "type-arg": 14
+ },
+ "src/nemik/hostapply.py": {
+  "misc": 2
+ },
+ "src/nemik/importer.py": {
+  "misc": 11
+ },
+ "src/nemik/issues.py": {
+  "misc": 10
+ },
+ "src/nemik/letters.py": {
+  "misc": 20,
+  "type-arg": 4
+ },
+ "src/nemik/manifest.py": {
+  "misc": 37,
+  "no-any-return": 1,
+  "no-untyped-def": 3,
+  "type-arg": 1
+ },
+ "src/nemik/marks.py": {
+  "misc": 3
+ },
+ "src/nemik/metrics.py": {
+  "misc": 42
+ },
+ "src/nemik/mspdi.py": {
+  "misc": 4
+ },
+ "src/nemik/overlaps.py": {
+  "misc": 2
+ },
+ "src/nemik/pacing.py": {
+  "misc": 12,
+  "var-annotated": 1
+ },
+ "src/nemik/pieces.py": {
+  "explicit-any": 5,
+  "misc": 88
+ },
+ "src/nemik/pins.py": {
+  "call-overload": 1,
+  "misc": 25
+ },
+ "src/nemik/rank.py": {
+  "misc": 269,
+  "no-untyped-def": 3,
+  "type-arg": 20,
+  "var-annotated": 1
+ },
+ "src/nemik/realize.py": {
+  "misc": 1
+ },
+ "src/nemik/salience.py": {
+  "misc": 25,
+  "type-arg": 2,
+  "var-annotated": 1
+ },
+ "src/nemik/score.py": {
+  "call-overload": 1,
+  "misc": 47
+ },
+ "src/nemik/serve.py": {
+  "explicit-any": 5,
+  "misc": 351,
+  "no-untyped-def": 1,
+  "operator": 1,
+  "type-arg": 8
+ },
+ "src/nemik/shaclcache.py": {
+  "explicit-any": 2,
+  "misc": 23
+ },
+ "src/nemik/shaclinc.py": {
+  "misc": 3
+ },
+ "src/nemik/starved.py": {
+  "call-overload": 1,
+  "misc": 36
+ },
+ "src/nemik/staticserve.py": {
+  "misc": 4
+ },
+ "src/nemik/vtodo.py": {
+  "misc": 87,
+  "type-arg": 2,
+  "var-annotated": 1
+ },
+ "src/nemik/wake.py": {
+  "misc": 229,
+  "no-any-return": 1,
+  "no-untyped-def": 1,
+  "redundant-expr": 1,
+  "type-arg": 14
+ },
+ "src/nemik/withheld.py": {
+  "explicit-any": 1,
+  "misc": 76,
+  "no-untyped-call": 1,
+  "type-arg": 1
+ },
+ "src/nemik/witnesses.py": {
+  "misc": 110,
+  "type-arg": 11
+ },
+ "src/nemik/witwait.py": {
+  "misc": 11
+ },
+ "src/nemik/work.py": {
+  "call-overload": 1,
+  "misc": 36
+ },
+ "src/nemik/workflows.py": {
+  "explicit-any": 3,
+  "misc": 13
+ },
+ "tests/fixtures/make_fleet.py": {
+  "misc": 30
+ },
+ "tests/installed.py": {
+  "misc": 2,
+  "no-untyped-def": 2,
+  "type-arg": 2
+ },
+ "tests/test_active_card.py": {
+  "misc": 19,
+  "no-untyped-call": 4,
+  "no-untyped-def": 1,
+  "operator": 2
+ },
+ "tests/test_alarm.py": {
+  "misc": 18,
+  "no-untyped-def": 1
+ },
+ "tests/test_alarm_delivery.py": {
+  "misc": 29,
+  "no-untyped-call": 7,
+  "no-untyped-def": 1,
+  "type-arg": 3
+ },
+ "tests/test_apischema.py": {
+  "misc": 42,
+  "type-arg": 2
+ },
+ "tests/test_apply_witness.py": {
+  "misc": 20
+ },
+ "tests/test_ask_priority.py": {
+  "explicit-any": 2,
+  "misc": 12
+ },
+ "tests/test_baseline.py": {
+  "misc": 24,
+  "type-arg": 1
+ },
+ "tests/test_cachestore.py": {
+  "misc": 9,
+  "type-arg": 1
+ },
+ "tests/test_calendar_boundary.py": {
+  "misc": 14,
+  "no-untyped-def": 1
+ },
+ "tests/test_calendar_write.py": {
+  "misc": 1
+ },
+ "tests/test_calendars.py": {
+  "misc": 153,
+  "no-any-return": 1,
+  "no-untyped-call": 7,
+  "no-untyped-def": 15,
+  "type-arg": 3
+ },
+ "tests/test_calwrite.py": {
+  "misc": 28,
+  "type-arg": 1
+ },
+ "tests/test_catalog.py": {
+  "misc": 3
+ },
+ "tests/test_certify.py": {
+  "misc": 17
+ },
+ "tests/test_check_committed.py": {
+  "misc": 1
+ },
+ "tests/test_check_run_rows.py": {
+  "misc": 4
+ },
+ "tests/test_churn.py": {
+  "misc": 34,
+  "type-arg": 2
+ },
+ "tests/test_containerfile.py": {
+  "misc": 7
+ },
+ "tests/test_critical.py": {
+  "misc": 50,
+  "no-untyped-def": 1
+ },
+ "tests/test_critical_cards.py": {
+  "misc": 1,
+  "type-arg": 1
+ },
+ "tests/test_deadlock_check.py": {
+  "misc": 3
+ },
+ "tests/test_deploy_manifest.py": {
+  "explicit-any": 6,
+  "misc": 86
+ },
+ "tests/test_deterministic.py": {
+  "misc": 31,
+  "no-untyped-call": 6,
+  "no-untyped-def": 3
+ },
+ "tests/test_editable.py": {
+  "misc": 9,
+  "no-untyped-call": 1,
+  "no-untyped-def": 3
+ },
+ "tests/test_floorasks.py": {
+  "misc": 14,
+  "no-untyped-def": 1
+ },
+ "tests/test_flow_cache.py": {
+  "attr-defined": 1,
+  "misc": 7,
+  "no-untyped-def": 4
+ },
+ "tests/test_frontier.py": {
+  "misc": 74,
+  "no-untyped-call": 13,
+  "no-untyped-def": 1
+ },
+ "tests/test_fruit.py": {
+  "misc": 85,
+  "no-untyped-call": 3,
+  "no-untyped-def": 1
+ },
+ "tests/test_gate.py": {
+  "misc": 194,
+  "no-untyped-def": 1,
+  "type-arg": 3
+ },
+ "tests/test_guarantees.py": {
+  "misc": 25,
+  "no-untyped-def": 3
+ },
+ "tests/test_hashes.py": {
+  "misc": 8
+ },
+ "tests/test_history.py": {
+  "misc": 90,
+  "no-untyped-def": 1,
+  "type-arg": 2
+ },
+ "tests/test_hooks_wired.py": {
+  "misc": 12,
+  "no-untyped-def": 1
+ },
+ "tests/test_ics_reader.py": {
+  "misc": 6,
+  "no-untyped-def": 1
+ },
+ "tests/test_importer.py": {
+  "misc": 14
+ },
+ "tests/test_inbound_letters.py": {
+  "misc": 17
+ },
+ "tests/test_inbound_orphans.py": {
+  "misc": 6
+ },
+ "tests/test_incremental_redraw.py": {
+  "misc": 62
+ },
+ "tests/test_layout.py": {
+  "misc": 715,
+  "no-untyped-def": 36
+ },
+ "tests/test_letter_resolves.py": {
+  "misc": 6
+ },
+ "tests/test_letters.py": {
+  "misc": 6,
+  "no-untyped-def": 1
+ },
+ "tests/test_lifecycle_scheme.py": {
+  "misc": 9,
+  "no-untyped-call": 1
+ },
+ "tests/test_manifest.py": {
+  "misc": 33,
+  "no-untyped-call": 2,
+  "no-untyped-def": 1
+ },
+ "tests/test_memo_audits.py": {
+  "misc": 9,
+  "no-untyped-def": 2,
+  "type-arg": 1
+ },
+ "tests/test_metrics_age.py": {
+  "misc": 10,
+  "type-arg": 1
+ },
+ "tests/test_mpxj.py": {
+  "misc": 3
+ },
+ "tests/test_mypy_ratchet.py": {
+  "misc": 6
+ },
+ "tests/test_operator_rate.py": {
+  "misc": 15,
+  "type-arg": 1
+ },
+ "tests/test_operator_salience.py": {
+  "misc": 33,
+  "no-untyped-def": 2
+ },
+ "tests/test_pieces.py": {
+  "explicit-any": 1,
+  "misc": 64
+ },
+ "tests/test_pieces_corpus.py": {
+  "misc": 44
+ },
+ "tests/test_pins.py": {
+  "misc": 1,
+  "no-untyped-def": 1
+ },
+ "tests/test_positioning.py": {
+  "misc": 22
+ },
+ "tests/test_publish.py": {
+  "misc": 2
+ },
+ "tests/test_published_valid.py": {
+  "misc": 11
+ },
+ "tests/test_rank.py": {
+  "misc": 144,
+  "no-untyped-call": 7,
+  "no-untyped-def": 4
+ },
+ "tests/test_rank_apply.py": {
+  "misc": 4
+ },
+ "tests/test_rank_flow.py": {
+  "misc": 78
+ },
+ "tests/test_read_api.py": {
+  "misc": 20,
+  "no-untyped-call": 1,
+  "no-untyped-def": 1
+ },
+ "tests/test_ready_umbrella.py": {
+  "misc": 13,
+  "type-arg": 2
+ },
+ "tests/test_ruff_ratchet.py": {
+  "misc": 3
+ },
+ "tests/test_ruler_table.py": {
+  "misc": 13
+ },
+ "tests/test_run_row_schema.py": {
+  "misc": 7,
+  "type-arg": 1
+ },
+ "tests/test_salience.py": {
+  "misc": 14
+ },
+ "tests/test_satisfied_edges.py": {
+  "misc": 20
+ },
+ "tests/test_saturation.py": {
+  "misc": 3
+ },
+ "tests/test_score.py": {
+  "misc": 44,
+  "no-untyped-call": 16,
+  "no-untyped-def": 3
+ },
+ "tests/test_script_registries.py": {
+  "misc": 14
+ },
+ "tests/test_serve_model.py": {
+  "misc": 9,
+  "no-untyped-def": 3
+ },
+ "tests/test_shaclcache.py": {
+  "misc": 17
+ },
+ "tests/test_shaclcache_threads.py": {
+  "attr-defined": 6,
+  "misc": 4
+ },
+ "tests/test_shaclinc.py": {
+  "misc": 20,
+  "type-arg": 1
+ },
+ "tests/test_skill.py": {
+  "misc": 11
+ },
+ "tests/test_sla.py": {
+  "misc": 11,
+  "type-arg": 1
+ },
+ "tests/test_starved.py": {
+  "misc": 5
+ },
+ "tests/test_static.py": {
+  "misc": 30,
+  "no-untyped-def": 3
+ },
+ "tests/test_static_view.py": {
+  "misc": 14
+ },
+ "tests/test_staticserve.py": {
+  "misc": 5
+ },
+ "tests/test_test_inputs.py": {
+  "misc": 19
+ },
+ "tests/test_toil.py": {
+  "misc": 8
+ },
+ "tests/test_trs.py": {
+  "misc": 1
+ },
+ "tests/test_trs_published.py": {
+  "misc": 7,
+  "type-arg": 1
+ },
+ "tests/test_umbrella_block.py": {
+  "misc": 88,
+  "no-untyped-call": 16,
+  "no-untyped-def": 1,
+  "operator": 7
+ },
+ "tests/test_umbrella_descent.py": {
+  "misc": 3
+ },
+ "tests/test_vtodo.py": {
+  "misc": 109,
+  "no-untyped-def": 3,
+  "type-arg": 1
+ },
+ "tests/test_vtodo_timezone.py": {
+  "explicit-any": 1,
+  "misc": 12
+ },
+ "tests/test_wake_alarms.py": {
+  "misc": 82,
+  "no-untyped-call": 5,
+  "no-untyped-def": 6
+ },
+ "tests/test_wake_nudge.py": {
+  "misc": 19,
+  "type-arg": 1
+ },
+ "tests/test_weather.py": {
+  "misc": 28,
+  "no-untyped-call": 2,
+  "no-untyped-def": 2
+ },
+ "tests/test_web_render.py": {
+  "misc": 36,
+  "no-untyped-def": 2
+ },
+ "tests/test_withheld.py": {
+  "misc": 76,
+  "no-any-return": 1,
+  "no-untyped-def": 7
+ },
+ "tests/test_witness_party.py": {
+  "misc": 14,
+  "type-arg": 2
+ },
+ "tests/test_witness_promql.py": {
+  "explicit-any": 2,
+  "misc": 26
+ },
+ "tests/test_witnesses.py": {
+  "misc": 125,
+  "no-untyped-call": 3,
+  "no-untyped-def": 11,
+  "type-arg": 1
+ },
+ "tests/test_witwait.py": {
+  "misc": 10,
+  "no-untyped-def": 2
+ },
+ "tests/test_work.py": {
+  "misc": 20,
+  "no-untyped-def": 1
+ },
+ "tests/test_workflows.py": {
+  "misc": 57
+ },
+ "tests/webpage.py": {
+  "explicit-any": 1,
+  "misc": 14
+ },
+ "tools/check_run_rows.py": {
+  "misc": 12
+ },
+ "tools/gen_pieces_corpus.py": {
+  "explicit-any": 3,
+  "misc": 102,
+  "no-any-return": 1
+ },
+ "tools/mypy_ratchet.py": {
+  "misc": 8
+ },
+ "tools/nemik_client.py": {
+  "explicit-any": 2,
+  "misc": 7
+ },
+ "tools/ruff_ratchet.py": {
+  "misc": 7
+ }
+}
