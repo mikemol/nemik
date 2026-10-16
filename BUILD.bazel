@@ -115,6 +115,7 @@ venv_from_hub(
         "nemik-work": "nemik.work:main",
         "nemik-starved": "nemik.starved:main",
         "nemik-replica": "nemik.replica_cli:main",
+        "nemik-ask": "nemik.ask_cli:main",
         "nemik-pacing": "nemik.pacing:main",
         "nemik-export": "nemik.mspdi:main",
         "nemik-import": "nemik.importer:main",

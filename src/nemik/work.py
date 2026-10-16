@@ -44,6 +44,25 @@ def blockers(state: Path, symbol: str) -> tuple[list[str], list[str]]:
     return [b for b in entries if b not in landed], landed
 
 
+def run_writer(argv: list[str]) -> tuple[int, str]:
+    """Run the one writer, mikemol-paths-forward, with the given arguments (nemik:W587).
+
+    The single place nemik-work and nemik-ask start the writer, so neither edits a queue itself.
+
+    Args:
+        argv: The arguments after the writer's path, for example `--state PATH --update W1`.
+
+    Returns:
+        The writer's exit status and its output (stderr when it failed, else stdout).
+
+    """
+    writer = str(Path(sys.executable).parent / "mikemol-paths-forward")
+    run = subprocess.run([writer, *argv], capture_output=True, text=True, check=False)
+    if run.returncode:
+        return run.returncode, run.stderr.strip() or run.stdout.strip()
+    return 0, run.stdout.strip()
+
+
 def plan(current: list[str], symbol: str) -> list[tuple[str, str]]:
     """(symbol, status) updates that leave `symbol` the only working card."""
     return [(s, "ready") for s in current if s != symbol] + (
@@ -70,7 +89,6 @@ def main(argv: list[str] | None = None) -> int:
         help="work it even though blocked_on names something not known to have landed",
     )
     args = ap.parse_args(argv)
-    writer = str(Path(sys.executable).parent / "mikemol-paths-forward")
     still, landed = blockers(args.state, args.symbol)
     if still and not args.force:
         # nemik:W443: working a blocked card left it 'working' with a stale blocked_on (W441).
@@ -89,22 +107,14 @@ def main(argv: list[str] | None = None) -> int:
         print(f"{symbol} -> {status}{note}")
         if args.dry_run:
             continue
-        cmd = [
-            writer,
-            "--state",
-            str(args.state),
-            "--update",
-            symbol,
-            "--status",
-            status,
-        ]
+        cmd = ["--state", str(args.state), "--update", symbol, "--status", status]
         if not displaced and landed:
             # keep only what is still open; with nothing open the list is emptied
             cmd += ["--blocked-on", *still]
-        run = subprocess.run(cmd, capture_output=True, text=True, check=False)
-        if run.returncode:
-            print(run.stderr.strip() or run.stdout.strip(), file=sys.stderr)
-            return run.returncode
+        code, said = run_writer(cmd)
+        if code:
+            print(said, file=sys.stderr)
+            return code
     return 0
 
 
