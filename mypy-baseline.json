@@ -41,10 +41,6 @@
   "misc": 11,
   "no-untyped-def": 1
  },
- "src/nemik/cards.py": {
-  "arg-type": 1,
-  "assignment": 1
- },
  "src/nemik/check.py": {
   "call-overload": 2,
   "misc": 47,
@@ -354,7 +350,7 @@
   "misc": 62
  },
  "tests/test_layout.py": {
-  "misc": 715,
+  "misc": 713,
   "no-untyped-def": 36
  },
  "tests/test_letter_resolves.py": {

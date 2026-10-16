@@ -16,9 +16,13 @@ import socket
 import subprocess
 import time
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import installed
 import pytest
+
+if TYPE_CHECKING:
+    from playwright.sync_api import Page
 
 sync_api = pytest.importorskip("playwright.sync_api")
 
@@ -984,6 +988,31 @@ def test_the_card_list_is_one_tab_stop_walked_by_arrows(server) -> None:
     assert outside, "Tab stayed inside the list"
 
 
+def _open_on_a_fake_clock(page: "Page", url: str) -> None:
+    """Open the page with its timers on Playwright's fake clock, paused once the graph is up.
+
+    nemik:W573: the page's own timers (POP_OPEN_MS 500, POP_CLOSE_MS 300) then advance only by
+    page.clock.run_for, so no assertion depends on how fast the machine is (the image build of
+    f2cb67c failed on a loaded runner, 2026-10-16 04:48). The clock is installed before the page
+    loads, runs in real time while the graph is drawn, and is paused a second ahead of it.
+
+    Args:
+        page: A fresh page.
+        url: The server's address.
+
+    """
+    page.clock.install()
+    page.goto(url)
+    page.wait_for_function(
+        "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
+        timeout=60000,
+    )
+    page.wait_for_timeout(800)
+    now: object = page.evaluate("Date.now()")
+    assert isinstance(now, int | float)
+    page.clock.pause_at(int(now) + 1000)
+
+
 def test_the_card_popover_follows_the_hovercard_rules(server) -> None:
     # nemik:W462 (operator 2026-10-13: the card view as a popover on hover plus delay). WCAG 1.4.13:
     # not before the delay, hoverable (the pointer may move onto it), dismissible (Esc), and gone
@@ -997,12 +1026,7 @@ def test_the_card_popover_follows_the_hovercard_rules(server) -> None:
         except sync_api.Error as e:
             pytest.skip(f"chromium unavailable: {e}")
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
-        page.goto(server)
-        page.wait_for_function(
-            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=60000,
-        )
-        page.wait_for_timeout(800)
+        _open_on_a_fake_clock(page, server)
         card = page.evaluate(
             "() => { const n = cy.nodes('[symbol]').filter(n => n.visible()"
             " && n.data('state') !== 'unclaimed').first();"
@@ -1012,26 +1036,22 @@ def test_the_card_popover_follows_the_hovercard_rules(server) -> None:
         )
         hidden = "() => document.getElementById('pop').hidden"
         page.mouse.move(card["x"], card["y"])
-        page.wait_for_timeout(150)
+        page.clock.run_for(150)
         early = page.evaluate(hidden)
-        page.wait_for_timeout(600)
+        page.clock.run_for(600)
         shown = not page.evaluate(hidden)
         text = page.inner_text("#pop")
         box = page.locator("#pop").bounding_box()
         assert box is not None
-        # nemik:W572: ONE move event, so the card's mouseout and the popover's mouseenter
-        # arrive together. A multi-step path let a loaded CI runner spend longer than
-        # POP_CLOSE_MS (300 ms) between the two, the popover closed, and the image build
-        # failed on this line (2026-10-16 04:48).
         page.mouse.move(box["x"] + 10, box["y"] + 10)
-        page.wait_for_timeout(500)
+        page.clock.run_for(500)
         kept = not page.evaluate(hidden)
         page.keyboard.press("Escape")
         dismissed = page.evaluate(hidden)
         page.mouse.move(card["x"], card["y"])
-        page.wait_for_timeout(700)
+        page.clock.run_for(700)
         page.mouse.move(5, 5)
-        page.wait_for_timeout(500)
+        page.clock.run_for(500)
         left = page.evaluate(hidden)
         browser.close()
     assert early, "the popover opened before its delay"
