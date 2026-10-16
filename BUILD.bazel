@@ -96,6 +96,8 @@ venv_from_hub(
         "mikemol-commit": "mikemol.hooks.commit_kata:main",
         # nemik:W538: format, lint and type-check a draft before it lands (replaces tools/pyfmt.sh).
         "mikemol-pycheck": "mikemol.hooks.pycheck_cli:main",
+        # nemik:W537: re-vendor the mtools wheels at one commit (replaces tools/revendor-mtools.sh).
+        "mikemol-repin": "mikemol.hooks.repin_cli:main",
         # nemik:W378: beside the interpreter, where mikemol-commit looks for its commit lock.
         "mikemol-membudget": "mikemol.fence.membudget_cli:main",
         "nemik-days": "nemik.calendars:days_main",

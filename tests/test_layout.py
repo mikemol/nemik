@@ -1019,7 +1019,11 @@ def test_the_card_popover_follows_the_hovercard_rules(server) -> None:
         text = page.inner_text("#pop")
         box = page.locator("#pop").bounding_box()
         assert box is not None
-        page.mouse.move(box["x"] + 10, box["y"] + 10, steps=4)
+        # nemik:W572: ONE move event, so the card's mouseout and the popover's mouseenter
+        # arrive together. A multi-step path let a loaded CI runner spend longer than
+        # POP_CLOSE_MS (300 ms) between the two, the popover closed, and the image build
+        # failed on this line (2026-10-16 04:48).
+        page.mouse.move(box["x"] + 10, box["y"] + 10)
         page.wait_for_timeout(500)
         kept = not page.evaluate(hidden)
         page.keyboard.press("Escape")
