@@ -143,6 +143,10 @@
   "as_written": "no module named '__future__'",
   "stripped": "cannot import name 'TYPE_CHECKING' from 'typing'"
  },
+ "tiers": {
+  "as_written": "no module named 'tomllib'",
+  "stripped": "no module named 'tomllib'"
+ },
  "ask_cli": {
   "as_written": "no module named 'argparse'",
   "stripped": "no module named 'argparse'"

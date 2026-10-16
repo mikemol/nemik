@@ -118,6 +118,15 @@ asks_owed = [5, 12]
 [saturation]
 needs_you_per_repo = 10
 
+# nemik:W600 (operator burn-down priority, 2026-10-16, relayed by github-8f): which repos the fleet's
+# frontier is burned down in first. A mark for ordering and for grouping the view, never a gate: a
+# repo in a later tier still works its own queue. Each repo appears in exactly one tier.
+[tiers]
+now = ["el-openglo", "gcalculus", "linux-sources", "luthen-observability", "mtools", "nemik", "summit"]
+later = ["paperkit", "substrate", "rosettapkg"]
+only-when-blocking = ["aeternum", "amr-skills"]
+lowest = ["gabion"]
+
 # nemik:W597: phrases (matched lowercase, as substrings) by which a card's prose claims an operator ruling;
 # an open card using one with no `warrants` list is a nemik-check Warning (UnwarrantedRulingShape).
 [rulings]

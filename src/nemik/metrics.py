@@ -34,6 +34,8 @@
     nemik_operator_asks{repo}                how many needs-you asks that is
     nemik_warrant_debt{repo}                 open cards claiming an operator ruling in prose, no
                                              warrant (UnwarrantedRulingShape, W597); to 0 (W607)
+    nemik_repo_tier{repo,tier}               the repo's burn-down tier as its place in the order, 0
+                                             first (rank-weights.toml [tiers], W600); no gate
     nemik_waypoint_age_seconds{repo,state,quantile}
                                              age of the open waypoints per state, from issued_at:
                                              quantile 0.5 is the median, 1 the oldest (W270)
@@ -57,6 +59,7 @@ from mikemol.pathsforward.store import UnreadableStateError
 from rdflib import RDF, Graph
 from rdflib.namespace import PROV
 
+from nemik import tiers
 from nemik.adapter import BASE, NEMIK, OSLC_CM, ledger_graph
 from nemik.blocks import inbound, ref
 from nemik.check import LEDGER, QUEUE, default_root, survey, workstream_files
@@ -140,6 +143,25 @@ def warrant_lines(g: Graph) -> list[str]:
     debt = Counter(ref(n).partition(":")[0] for n in claims)
     out = ["# TYPE nemik_warrant_debt gauge"]
     out += [f"nemik_warrant_debt{label(repo=repo)} {debt[repo]}" for repo in repos]
+    return out
+
+
+def tier_lines(g: Graph) -> list[str]:
+    """nemik:W600: each repo's burn-down tier as a gauge: its position in the order, 0 first.
+
+    Args:
+        g: The merged queue graph.
+
+    Returns:
+        The gauge's TYPE line and one sample per repo, labelled with the tier's name.
+
+    """
+    declared = tiers.load()
+    repos = sorted({ref(n).partition(":")[0] for n in g.subjects(OSLC_CM.state, None)})
+    out = ["# TYPE nemik_repo_tier gauge"]
+    for repo in repos:
+        tier = declared.get(repo, tiers.UNLISTED)
+        out.append(f"nemik_repo_tier{label(repo=repo, tier=tier)} {tiers.rank(tier)}")
     return out
 
 
@@ -256,6 +278,7 @@ def main(argv: list[str] | None = None) -> None:
     out += operator_lines(merged)
     out += health_lines(merged)
     out += warrant_lines(merged)
+    out += tier_lines(merged)
     out += realizability_lines(args.root)
 
     prompts: Counter[tuple[str, str, str]] = Counter()
