@@ -143,6 +143,10 @@
   "as_written": "no module named '__future__'",
   "stripped": "cannot import name 'TYPE_CHECKING' from 'typing'"
  },
+ "warrants": {
+  "as_written": "no module named 'collections.abc'",
+  "stripped": "no module named 'collections.abc'"
+ },
  "replica_cli": {
   "as_written": "no module named 'argparse'",
   "stripped": "no module named 'argparse'"

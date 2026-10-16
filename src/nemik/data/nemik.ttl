@@ -23,6 +23,7 @@ nemik:namesFile a rdf:Property ; rdfs:comment "A repo file path the waypoint's n
 nemik:letter a rdf:Property ; rdfs:comment "An inbox letter file a waypoint cites or attaches, as a path (nemik:W275)." .
 nemik:readyUmbrella a rdf:Property ; rdfs:comment "Derived (nemik:W436): this ready or working card is an umbrella over the object, one of two or more of its own open children." .
 nemik:readyBehindOpen a rdf:Property ; rdfs:comment "Derived (nemik:W465): this ready card has the object, an open card, enabling it, so it waits on it." .
+nemik:malformedWarrant a rdf:Property ; rdfs:comment "Derived (nemik:W598): an entry of the card's warrants list that did not parse as JSON-LD; the start of its text." .
 nemik:Event a rdfs:Class ; rdfs:comment "An event on an operator calendar, read for dated cards (nemik:W183)." .
 
 # The four waypoint states, as a SKOS scheme. OSLC CM 3.0 leaves oslc_cm:state's values to the
