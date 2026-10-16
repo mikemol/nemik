@@ -169,17 +169,17 @@ def test_repo_toggles_and_salience_order(server, tmp_path) -> None:
             "() => [...document.querySelectorAll('#repos button')].map(b => b.dataset.repo)"
         )
         page.click(f"#repos button[data-repo='{repos[0]}']")
-        page.wait_for_timeout(500)
+        _settle(page)
         one = page.evaluate("() => cy.nodes('[symbol]').length")
         lit = page.evaluate(
             "() => [...document.querySelectorAll('#repos button')]"
             ".filter(b => b.getAttribute('aria-pressed') === 'true').length"
         )
         page.click(f"#repos button[data-repo='{repos[0]}']")  # unlit again: everything
-        page.wait_for_timeout(500)
+        _settle(page)
         again = page.evaluate("() => cy.nodes('[symbol]').length")
         page.check("#bySalience")
-        page.wait_for_timeout(800)
+        _settle(page)
         labelled = page.evaluate(
             "() => cy.nodes('[symbol]').filter(n => n.data('label').includes(' · ')).length"
         )
@@ -200,7 +200,7 @@ def test_repo_toggles_and_salience_order(server, tmp_path) -> None:
         )
         ringed = page.evaluate("() => cy.nodes('[nrings > 0]')[0].id()")
         page.evaluate(f"() => cy.getElementById('{ringed}').emit('tap')")
-        page.wait_for_timeout(300)
+        _settle(page)
         assert (
             page.evaluate(
                 "() => cy.nodes().filter(n => (n.data('rings') || []).includes('sel')).length"
@@ -283,17 +283,17 @@ def test_rolling_up_umbrellas_hides_their_work_and_a_double_click_expands_one(
             timeout=60000,
         )
         page.click("#repos button[data-repo='nemik']")
-        page.wait_for_timeout(500)
+        _settle(page)
         full = page.evaluate("() => cy.nodes('[symbol]').length")
         page.check("#rollup")
-        page.wait_for_timeout(600)
+        _settle(page)
         rolled = page.evaluate("() => cy.nodes('[symbol]').length")
         umbrella = page.evaluate(
             "() => { const u = cy.nodes('[rollup > 0]')[0]; return u ? [u.id(), u.data('rollup')] : null; }"
         )
         assert umbrella is not None
         page.evaluate(f"() => cy.getElementById('{umbrella[0]}').emit('dbltap')")
-        page.wait_for_timeout(600)
+        _settle(page)
         opened = page.evaluate("() => cy.nodes('[symbol]').length")
         browser.close()
     assert rolled < full
@@ -412,7 +412,7 @@ def test_every_card_label_meets_four_and_a_half_to_one(server, scheme) -> None:
             timeout=60000,
         )
         page.check("#showDone")
-        page.wait_for_timeout(600)
+        _settle(page)
         pairs = page.evaluate(CONTRAST)
         browser.close()
     assert pairs
@@ -439,7 +439,9 @@ def test_side_panel_sections_fold_and_the_choice_survives_a_reload(server) -> No
             "() => Object.fromEntries([...document.querySelectorAll('details.sec')].map(d => [d.id, d.open]))"
         )
         page.click("#sec-goals > summary")
-        page.wait_for_timeout(300)
+        page.wait_for_function(
+            "() => !document.getElementById('goals').checkVisibility()", timeout=60000
+        )
         hidden = page.evaluate(
             "() => [document.getElementById('sec-goals').open,"
             " document.getElementById('goals').checkVisibility()]"
@@ -475,7 +477,7 @@ def test_the_default_view_is_legible(server, scheme) -> None:
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
             timeout=60000,
         )
-        page.wait_for_timeout(500)
+        _settle(page)
         m = page.evaluate(LEGIBILITY)
         note = page.inner_text("#legnote")
         # nemik:W433: the live region holds text only; a control inside it is re-announced with it
@@ -548,7 +550,7 @@ def test_context_cards_have_a_rendered_cue_of_their_own(server, scheme) -> None:
             timeout=60000,
         )
         page.click("#repos button[data-repo='nemik']")
-        page.wait_for_timeout(600)
+        _settle(page)
         seen = page.evaluate(
             "() => cy.nodes('[symbol]').map(n => [!!n.data('ghost'),"
             " n.style('border-style'), +n.style('opacity')])"
@@ -582,7 +584,7 @@ def test_each_card_state_differs_by_more_than_its_fill(server, scheme) -> None:
             timeout=60000,
         )
         page.check("#showDone")
-        page.wait_for_timeout(600)
+        _settle(page)
         prefixes = page.evaluate(
             # nemik:W477: a ready card behind an open enabler is drawn as a state of its own ("~ ")
             "() => { const m = {}; cy.nodes('[symbol]').forEach(n => { const s = n.data('state')"
@@ -772,7 +774,7 @@ def test_the_card_list_selects_and_expands_from_the_keyboard(server) -> None:
         )
         page.click("#repos button[data-repo='nemik']")
         page.check("#rollup")
-        page.wait_for_timeout(600)
+        _settle(page)
         page.evaluate("() => { document.getElementById('sec-cards').open = true; }")
         listed = page.evaluate(
             "() => document.querySelectorAll('#cardlist button[data-card]').length"
@@ -785,7 +787,7 @@ def test_the_card_list_selects_and_expands_from_the_keyboard(server) -> None:
         target = first.get_attribute("data-card")
         first.focus()
         page.keyboard.press("Enter")
-        page.wait_for_timeout(300)
+        _settle(page)
         selected = page.evaluate("() => cy.nodes(':selected').map(n => n.id())")
         current = first.get_attribute("aria-current")
         focused = page.evaluate("() => document.activeElement.dataset.card")
@@ -794,7 +796,7 @@ def test_the_card_list_selects_and_expands_from_the_keyboard(server) -> None:
         before = page.evaluate("() => cy.nodes('[symbol]').length")
         toggle.focus()
         page.keyboard.press("Enter")
-        page.wait_for_timeout(600)
+        _settle(page)
         after = page.evaluate("() => cy.nodes('[symbol]').length")
         expanded = page.evaluate(
             "() => document.activeElement.getAttribute('aria-expanded')"
@@ -833,7 +835,7 @@ def test_a_cite_link_in_the_panel_selects_its_card_and_announces_it(server) -> N
             " return { id: n.id, cite: n.cite }; }"
         )
         page.click("#detail a[data-cite]")
-        page.wait_for_timeout(300)
+        _settle(page)
         selected = page.evaluate("() => cy.nodes(':selected').map(n => n.id())")
         said = page.inner_text("#announce")
         live = page.get_attribute("#announce", "aria-live")
@@ -862,7 +864,7 @@ def test_the_view_chain_is_drawn_end_to_end_with_its_length(server) -> None:
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
             timeout=60000,
         )
-        page.wait_for_timeout(1000)
+        _settle(page)
         got = page.evaluate(
             "() => { const on = new Set(viewChain);"
             " const ends = cy.edges('.onchain').map(e => [e.source().id(), e.target().id()]);"
@@ -898,10 +900,10 @@ def test_a_focused_list_row_rings_its_card_and_opens_the_popover(server) -> None
             timeout=60000,
         )
         page.evaluate("() => { document.getElementById('sec-cards').open = true; }")
-        page.wait_for_timeout(300)
+        _settle(page)
         page.locator("#cardlist button[tabindex='0']").focus()
         page.keyboard.press("ArrowDown")
-        page.wait_for_timeout(200)
+        _settle(page)
         card = page.evaluate("() => document.activeElement.dataset.card")
         ringed = page.evaluate("() => cy.nodes('.listfocus').map(n => n.id())")
         shown = not page.evaluate("() => document.getElementById('pop').hidden")
@@ -909,7 +911,7 @@ def test_a_focused_list_row_rings_its_card_and_opens_the_popover(server) -> None
         page.keyboard.press("Escape")
         closed = page.evaluate("() => document.getElementById('pop').hidden")
         page.locator("#bySalience").focus()
-        page.wait_for_timeout(200)
+        _settle(page)
         cleared = page.evaluate("() => cy.nodes('.listfocus').length")
         browser.close()
     assert ringed == [card]
@@ -956,7 +958,7 @@ def test_the_card_list_is_one_tab_stop_walked_by_arrows(server) -> None:
             timeout=60000,
         )
         page.evaluate("() => { document.getElementById('sec-cards').open = true; }")
-        page.wait_for_timeout(300)
+        _settle(page)
         stops = page.evaluate(
             "() => [...document.querySelectorAll('#cardlist button')]"
             ".filter(b => b.tabIndex === 0).length"
@@ -974,7 +976,7 @@ def test_the_card_list_is_one_tab_stop_walked_by_arrows(server) -> None:
         page.keyboard.press("Home")
         page.keyboard.press("ArrowDown")
         page.keyboard.press("Enter")
-        page.wait_for_timeout(300)
+        _settle(page)
         selected = page.evaluate("() => cy.nodes(':selected').map(n => n.id())")
         page.keyboard.press("Tab")
         outside = page.evaluate(
@@ -986,6 +988,24 @@ def test_the_card_list_is_one_tab_stop_walked_by_arrows(server) -> None:
     assert second == rows[2] and last == rows[-1]
     assert selected == [rows[1]]
     assert outside, "Tab stayed inside the list"
+
+
+def _settle(page: "Page") -> None:
+    """Wait until the graph has stopped moving: no cytoscape animation running, two frames painted.
+
+    nemik:W573: a view change redraws synchronously, so what is left to wait for is cytoscape's own
+    animation (cy.animate, fit); waiting on that state replaces a fixed sleep that a loaded runner
+    could lose and a fast one wasted.
+
+    Args:
+        page: A page whose graph is up.
+
+    """
+    page.wait_for_function(
+        "() => new Promise(done => requestAnimationFrame("
+        "() => requestAnimationFrame(() => done(typeof cy === 'undefined' || !cy.animated()))))",
+        timeout=60000,
+    )
 
 
 def _open_on_a_fake_clock(page: "Page", url: str) -> None:
@@ -1080,7 +1100,7 @@ def test_every_card_demand_crosses_carries_a_number(server) -> None:
             timeout=60000,
         )
         page.check("#bySalience")
-        page.wait_for_timeout(1000)
+        _settle(page)
         bare = page.evaluate(
             "() => { const carries = new Set(data.edges.filter(e => e.current)"
             ".map(e => e.kind === 'waits' ? e.source : e.target));"
@@ -1115,7 +1135,7 @@ def test_a_rolled_up_tile_says_what_it_hides(server) -> None:
         )
         page.check("#rollup")
         page.check("#treemap")
-        page.wait_for_timeout(1500)
+        _settle(page)
         tiles = page.evaluate(
             "() => cy.nodes('.tile').filter(n => n.visible() && n.data('rollup')"
             " && !n.hasClass('tinylabel') && n.data('label'))"
@@ -1156,10 +1176,10 @@ def test_treemap_labels_meet_the_floor_or_are_hidden_and_counted(server) -> None
         )
         page.check("#treemap")
         page.wait_for_function("() => cy.nodes('.tile').length > 0", timeout=60000)
-        page.wait_for_timeout(300)
+        _settle(page)
         fit = page.evaluate(TILE_LABELS)
         page.evaluate(ZOOM_IN_4X)
-        page.wait_for_timeout(300)
+        _settle(page)
         zoomed = page.evaluate(TILE_LABELS)
         browser.close()
     assert fit["tiles"] > 0
@@ -1241,7 +1261,7 @@ def test_no_label_glyph_plays_two_roles(server) -> None:
         roles = page.evaluate(GLYPH_ROLES)
         page.click("#repos button[data-repo='nemik']")
         page.check("#rollup")
-        page.wait_for_timeout(600)
+        _settle(page)
         rolled = page.evaluate(
             "() => cy.nodes('[rollup > 0]').map(n => [n.data('label'), n.data('rollup')])"
         )
@@ -1316,7 +1336,7 @@ def test_one_picked_repo_restored_from_the_last_visit_is_legible_too(server) -> 
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
             timeout=60000,
         )
-        page.wait_for_timeout(500)
+        _settle(page)
         m = page.evaluate(LEGIBILITY)
         browser.close()
     assert m["label_px"] >= 8, m
@@ -1343,7 +1363,7 @@ def test_picked_repos_show_their_blockers_blockers_as_context(server) -> None:
         counts = []
         for hops in ("1", "2", "3"):
             page.select_option("#depth", hops)
-            page.wait_for_timeout(600)
+            _settle(page)
             counts.append(page.evaluate("() => cy.nodes('[?ghost]').length"))
         stray = page.evaluate(
             "() => cy.nodes('[?ghost]').filter(n => n.data('repo') === 'nemik').length"
@@ -1374,12 +1394,12 @@ def test_rank_forest_view(server, tmp_path) -> None:
             timeout=60000,
         )
         ranked = page.evaluate("() => cy.nodes('[rank_pos]').length")
-        page.wait_for_timeout(500)
+        _settle(page)
         m = page.evaluate(METRICS)
         overlaps = page.evaluate(NODE_OVERLAPS)
         page.screenshot(path=str(out / "forest-dark.png"))
         page.evaluate("() => cy.fit(cy.getElementById('repo:life'), 20)")
-        page.wait_for_timeout(300)
+        _settle(page)
         page.screenshot(path=str(out / "forest-life.png"))
         browser.close()
     (out / "forest-dark.json").write_text(json.dumps(m, indent=1))
@@ -1537,7 +1557,7 @@ def test_side_panel_never_overflows_sideways(server, width) -> None:
             a.ask = 'operator: act open https://store.kde.org/p/0000000000/very-long-path-without-any-break-opportunity-at-all in your browser and approve the KubeVirt stage-1 apply after reviewing ten in-place component diffs';
             a.waiting = Array.from({length: 12}, (_, i) => 'luthen-observability:W1' + i); }
           lane('needs-you'); }""")
-        page.wait_for_timeout(300)
+        _settle(page)
         m = page.evaluate("""() => { const a = document.querySelector('aside');
           const r = a.getBoundingClientRect(), wide = [];
           a.querySelectorAll('*').forEach(e => { const b = e.getBoundingClientRect();
@@ -1564,7 +1584,7 @@ def test_every_cite_in_the_panel_is_a_repo_colon_link(server) -> None:
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
             timeout=60000,
         )
-        page.wait_for_timeout(500)
+        _settle(page)
         bad = page.evaluate("""() => {
           const out = [], pat = /\\b[a-z][a-z0-9-]*(?:[:\\/]| )W\\d+\\b/;
           const scan = where => {
