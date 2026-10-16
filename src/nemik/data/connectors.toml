@@ -1,0 +1,7 @@
+# nemik:W584: the declarations of the integrations that implement the connector contract (W371).
+# One [connectors.<name>] table each, with id_scheme, mode (poll|webhook), maps_to
+# (letters|writer-commands), and a [connectors.<name>.credential] table: scope,
+# access (read-only|read-write), store.
+# W188 (Google Tasks) is the first member and is declared here when it is re-aimed onto the contract.
+
+[connectors]
