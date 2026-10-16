@@ -143,6 +143,10 @@
   "as_written": "no module named '__future__'",
   "stripped": "cannot import name 'TYPE_CHECKING' from 'typing'"
  },
+ "replica_cli": {
+  "as_written": "no module named 'argparse'",
+  "stripped": "no module named 'argparse'"
+ },
  "residue": {
   "as_written": "no module named '__future__'",
   "stripped": "cannot import name 'UTC' from 'datetime'"
