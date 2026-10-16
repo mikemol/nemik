@@ -66,6 +66,8 @@ from nemik.check import LEDGER, QUEUE, default_root, survey, workstream_files
 from nemik.realize import verdicts
 from nemik.wake import read_liveness, roster
 
+TYPE_LINE_WORDS = 3  # "# TYPE", the metric name, its kind
+
 CLASS = {
     "tick": "forecast",
     "operator-tick": "forecast",
@@ -122,6 +124,30 @@ def operator_lines(g: Graph) -> list[str]:
         out.append(f"nemik_operator_salience{label(repo=repo)} {held[repo]:.2f}")
         out.append(f"nemik_operator_asks{label(repo=repo)} {count[repo]}")
     return out
+
+
+def only_families(lines: list[str], names: list[str]) -> list[str]:
+    """Keep the TYPE lines and samples of the named metric families (nemik:W607).
+
+    luthen's host job registers metric families one at a time, so what it pushes must be exactly
+    those; the family list lives with the producer, passed as repeated `--family NAME`.
+
+    Args:
+        lines: The exposition lines.
+        names: The family names to keep.
+
+    Returns:
+        The lines of those families, in their original order.
+
+    """
+
+    def family(line: str) -> str:
+        words = line.split()
+        if line.startswith("# TYPE") and len(words) >= TYPE_LINE_WORDS:
+            return words[2]
+        return line.split("{", 1)[0].split(" ", 1)[0]
+
+    return [line for line in lines if family(line) in names]
 
 
 def warrant_lines(g: Graph) -> list[str]:
@@ -212,6 +238,12 @@ def age_lines(repo: str, g: Graph, now: datetime) -> list[str]:
     return out
 
 
+class _Options(argparse.Namespace):
+    """The parsed command line, with the one option the filter reads typed."""
+
+    family: list[str] | None
+
+
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(
         prog="nemik-metrics", description=(__doc__ or "").splitlines()[0]
@@ -223,7 +255,13 @@ def main(argv: list[str] | None = None) -> None:
         help="~/github, or the export layout root",
     )
     ap.add_argument("--spool", type=Path, default=spool_path())
-    args = ap.parse_args(argv)
+    ap.add_argument(
+        "--family",
+        action="append",
+        metavar="NAME",
+        help="print only this metric family (repeatable): the host job pushes the registered ones",
+    )
+    args = ap.parse_args(argv, namespace=_Options())
 
     out = [
         "# TYPE nemik_waypoints gauge",
@@ -318,7 +356,7 @@ def main(argv: list[str] | None = None) -> None:
                 f"nemik_ledger_lines{label(repo=repo, kind=kind, **{'class': cls})} {n}"
             )
         out.append(f"nemik_ledger_unparsed{label(repo=repo)} {unparsed}")
-    print("\n".join(out))
+    print("\n".join(only_families(out, args.family) if args.family else out))
 
 
 if __name__ == "__main__":

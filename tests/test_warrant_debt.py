@@ -8,7 +8,7 @@ from pathlib import Path
 from rdflib import Graph
 
 from nemik.adapter import queue_graph
-from nemik.metrics import warrant_lines
+from nemik.metrics import only_families, warrant_lines
 
 CLAIM = "2026-10-13 operator ruling: demand is salience"
 
@@ -75,3 +75,18 @@ def test_the_debt_counts_open_unwarranted_claims_and_zero_is_a_value(
     ]
     clean = warrant_lines(_graph(tmp_path, cards[3:]))
     assert clean[1:] == ['nemik_warrant_debt{repo="life"} 0']
+
+
+def test_only_the_named_families_are_kept_type_lines_and_samples() -> None:
+    """nemik:W607: `--family` keeps a family's TYPE line and its samples, and drops the rest."""
+    lines = [
+        "# TYPE nemik_waypoints gauge",
+        'nemik_waypoints{repo="a",state="ready"} 3',
+        "# TYPE nemik_warrant_debt gauge",
+        'nemik_warrant_debt{repo="a"} 2',
+        "# TYPE nemik_repo_tier gauge",
+        'nemik_repo_tier{repo="a"} 0',
+    ]
+    kept = only_families(lines, ["nemik_warrant_debt", "nemik_repo_tier"])
+    assert kept == lines[2:]
+    assert only_families(lines, []) == []
