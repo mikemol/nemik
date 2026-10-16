@@ -100,9 +100,15 @@ def diff(old: dict, new: dict) -> Diff:
 
 
 def _git(repo: Path, *args: str) -> str | None:
-    run = subprocess.run(
-        ["git", "-C", str(repo), *args], capture_output=True, text=True, check=False
-    )
+    # nemik:W572: no git binary is no history, like a directory that is not a repository. The
+    # image's final stage carries no git (only its test stage does), and the snapshot builder of
+    # the pod (nemik-serve --publish) reaches this, so a missing binary must not stop a publish.
+    try:
+        run = subprocess.run(
+            ["git", "-C", str(repo), *args], capture_output=True, text=True, check=False
+        )
+    except OSError:
+        return None
     return run.stdout if run.returncode == 0 else None
 
 
