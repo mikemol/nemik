@@ -34,6 +34,8 @@ exports_files(["pyproject.toml"])
             # nemik:W521: the gate test reads the hook and the script that runs the //:precommit suite
             + ([".githooks/pre-commit", "tools/gate_staged.sh"] if src == "tests/test_precommit_gate.py" else [])
             # nemik:W589: the replica script's buildctl command line is held to the Containerfile's stage
+            # nemik:W529: the vocabulary test reads every module for the NEMIK terms it uses
+            + (glob(["src/nemik/*.py"]) if src == "tests/test_vocabulary_declared.py" else [])
             # nemik:W593: the flow cases as corpus data, read by the one test that checks them
             + (["tests/flow_cases.py"] if src == "tests/test_flow_corpus.py" else [])
             + (["tools/image_replica.sh", ".githooks/post-commit"] if src == "tests/test_image_replica.py" else [])

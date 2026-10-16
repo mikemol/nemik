@@ -14,6 +14,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from rdflib import Graph
+from rdflib.namespace import DCTERMS
 
 from nemik.adapter import NEMIK, OSLC_CM
 from nemik.blocks import ref
@@ -66,7 +67,7 @@ def _read(g: Graph) -> dict[str, Card]:
         out[ref(n)] = Card(
             cite=ref(n),
             state=state,
-            title=str(g.value(n, NEMIK.title) or ""),
+            title=str(g.value(n, DCTERMS.title) or ""),
             waits_for=tuple(
                 sorted(ref(o) for o in g.objects(n, NEMIK.waitsFor) if o in nodes)
             ),
