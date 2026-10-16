@@ -74,5 +74,5 @@ def verdict(replay: Replay, head: str) -> str:
         return f"GREEN {short} passed the image test stage in {replay.seconds} s"
     return (
         f"RED {short} failed the image test stage (exit {replay.status}, {replay.seconds} s): "
-        "read .git/image-replica.log, then file --gate-red with the failing test"
+        f"read .git/image-replica-{short}.log, then file --gate-red with the failing test"
     )
