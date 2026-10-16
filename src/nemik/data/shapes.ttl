@@ -175,7 +175,7 @@ nemik:UnresolvedBlockerShape a sh:NodeShape ;
 nemik:LandedBlockerShape a sh:NodeShape ;
     sh:targetSubjectsOf nemik:landedBlocker ;
     sh:property [ sh:path nemik:landedBlocker ; sh:maxCount 0 ; sh:severity sh:Warning ;
-                  sh:message "blocked_on names a waypoint that has already landed (done or dropped): trim it from blocked_on (--bump-blocked prunes local ones)" ] ;
+                  sh:message "blocked_on names a waypoint that has already landed (done or dropped): trim it from blocked_on (mikemol-paths-forward --prune-landed --root <fleet root> prunes local and foreign repo:W<n> ones)" ] ;
     sh:property [ sh:path nemik:allBlockersLanded ; sh:maxCount 0 ; sh:severity sh:Warning ;
                   sh:message "every blocker in blocked_on has landed: this waypoint is ready, not blocked" ] .
 
