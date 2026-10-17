@@ -136,6 +136,21 @@ def queue_at(repo: Path, rev: str | None) -> dict:
     return json.loads(text) if text else {}
 
 
+def commits_since(repo: Path, since: str) -> int | None:
+    """Count the commits on HEAD after a point in time (nemik:W355: a push is a deploy).
+
+    Args:
+        repo: The repo's working directory.
+        since: A local `YYYY-MM-DDTHH:MM:SS` instant.
+
+    Returns:
+        The number of commits, or None when the directory has no readable git history.
+
+    """
+    out = _git(repo, "rev-list", "--count", f"--since={since}", "HEAD")
+    return int(out) if out and out.strip().isdigit() else None
+
+
 Snapshot = tuple[datetime, dict]
 
 

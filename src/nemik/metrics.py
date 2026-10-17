@@ -91,6 +91,7 @@ HELP = {
     "nemik_repo_tier": "The repo's burn-down tier as its place in the order, 0 first.",
     "nemik_cards_arrived_24h": "Cards issued in the last 24 hours, whatever their state now.",
     "nemik_cards_completed_24h": "Cards committed as done in the last 24 hours (git history).",
+    "nemik_commits_24h": "Commits on HEAD in the last 24 hours (a push is a deploy).",
 }
 
 CLASS = {
@@ -324,6 +325,30 @@ def completed_lines(root: Path, now: datetime) -> list[str]:
     return out
 
 
+def commit_lines(root: Path, now: datetime) -> list[str]:
+    """nemik:W355: per repo, the commits in the last 24 hours, the deploy-frequency signal.
+
+    A push is a deploy in this fleet (nemik:push-is-deploy), so commit frequency is the first DORA
+    signal; change failure and time to restore need the reopened-card and Flux-ship series.
+
+    Args:
+        root: The fleet root.
+        now: The instant the window ends at.
+
+    Returns:
+        The gauge's TYPE line and a sample for each repo whose git history is readable.
+
+    """
+    since = (now - timedelta(days=1)).astimezone().strftime("%Y-%m-%dT%H:%M:%S")
+    out = ["# TYPE nemik_commits_24h gauge"]
+    for repo, path in workstream_files(root, QUEUE):
+        top = path.parents[1] if path.parent.name == ".claude" else path.parent
+        count = history.commits_since(top, since)
+        if count is not None:
+            out.append(f"nemik_commits_24h{label(repo=repo)} {count}")
+    return out
+
+
 def health_lines(g: Graph) -> list[str]:
     """nemik:W317: each repo's health as a gauge: 0 green, 1 amber, 2 red (nemik.health, from the
     thresholds `[health]` declares in rank-weights.toml)."""
@@ -451,6 +476,7 @@ def main(argv: list[str] | None = None) -> None:
     out += tier_lines(merged)
     out += arrival_lines(merged, now)
     out += completed_lines(args.root, now)
+    out += commit_lines(args.root, now)
     out += realizability_lines(args.root)
 
     prompts: Counter[tuple[str, str, str]] = Counter()
