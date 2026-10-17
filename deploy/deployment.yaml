@@ -17,7 +17,7 @@
 #       snapshot served rather than a restart;
 #   (d) container names and requests/limits go to luthen-observability for its workloads.json row.
 # Kept: 2 replicas (zero-downtime ship, operator 2026-09-26), the export PVC read-only (builder only),
-# restricted Pod Security. Tenant quota 3Gi: (96Mi + 768Mi) x 3 pods (2 + 1 surge) = 2.6Gi.
+# restricted Pod Security. Tenant quota 3Gi: (96Mi + 896Mi) x 3 pods (2 + 1 surge) = 2.9Gi.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -75,10 +75,13 @@ spec:
           env:
             # glibc arenas: one per thread, never returned; two bound the fragmentation (nemik:W260).
             - {name: MALLOC_ARENA_MAX, value: "2"}
-          # Measured on a pod-shaped export (no git), 17 repos: the build peaks near 530 MB.
+          # Measured on a pod-shaped export (no git), 17 repos: the build peaked near 530 MB; luthen's 7 d
+          # max_over_time of the working set (2026-10-17) read 746 MiB for the builder, uncensored, so the
+          # old 768Mi limit sat 3% above it. The quota caps the pair: (96Mi + 896Mi) x 3 pods = 2.9Gi of
+          # the 3Gi tenant quota, so 896Mi is the most headroom (20%) the namespace allows (nemik:W505).
           resources:
-            requests: {memory: 512Mi, cpu: 250m}
-            limits: {memory: 768Mi, cpu: "1"}
+            requests: {memory: 640Mi, cpu: 250m}
+            limits: {memory: 896Mi, cpu: "1"}
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
