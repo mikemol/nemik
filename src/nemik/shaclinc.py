@@ -17,12 +17,14 @@ that breaks the claim fails there instead of going stale silently.
 
 from __future__ import annotations
 
+import re
+
 from pyshacl import validate
 from rdflib import Graph
 from rdflib.namespace import SH
-from rdflib.term import Node
+from rdflib.term import Node, URIRef
 
-from nemik.shapedepth import UNBOUNDED, radius
+from nemik.shapedepth import UNBOUNDED, predicates, radius
 
 Result = tuple[str, str]  # (severity IRI, message)
 
@@ -114,6 +116,44 @@ def _neighbourhood(
     return focus
 
 
+def _tail(term: str) -> str:
+    """Name an IRI or prefixed term by its last segment.
+
+    Args:
+        term: An IRI, possibly in angle brackets, or a prefixed name.
+
+    Returns:
+        The text after its last #, / or :.
+
+    """
+    return re.split(r"[#/:]", term.strip("<>"))[-1]
+
+
+def watched_predicates(shapes: Graph, texts: list[str]) -> frozenset[str]:
+    """Name the predicates a verdict can depend on (nemik:W637).
+
+    A changed triple whose predicate no shape mentions cannot change any verdict, so it should not
+    re-judge anything: on the real fleet 5131 of 5208 changes between two runs were queuePosition,
+    which no shape reads, and they touched 2570 cards, so every run validated the whole graph.
+
+    Args:
+        shapes: The shapes graph.
+        texts: Its sh:sparql constraints' query texts.
+
+    Returns:
+        The last segments of every IRI the shapes mention and every predicate a query names,
+        with "type" (SPARQL's `a`); "?" is in the set when a query's predicate is a variable or
+        its text cannot be read, which means every predicate counts.
+
+    """
+    names = {"type"}
+    for triple in shapes:
+        names |= {_tail(str(t)) for t in triple if isinstance(t, URIRef)}
+    for text in texts:
+        names |= {"?" if p == "?" else _tail(p) for p in predicates(text)}
+    return frozenset(names)
+
+
 def findings(key: str, data: Graph, shapes: Graph) -> list[tuple[Node, str, str]]:
     """(focus, severity IRI, message) for every result, re-validating only what changed since `key`'s
     last run (everything on the first, and always when the shapes' depth cannot be bounded)."""
@@ -125,7 +165,10 @@ def findings(key: str, data: Graph, shapes: Graph) -> list[tuple[Node, str, str]
         by_focus = _results(data, shapes)
     else:
         before, by_focus = last[0], dict(last[1])
-        changed = before ^ now
+        watched = watched_predicates(shapes, texts)
+        changed = {
+            t for t in before ^ now if "?" in watched or _tail(str(t[1])) in watched
+        }
         # A node is a card (or any described thing) when it is a subject; a vocabulary term such as
         # nemik:Done is only ever an object, and following it back would reach every card in that state.
         subjects = {s for s, _, _ in now}

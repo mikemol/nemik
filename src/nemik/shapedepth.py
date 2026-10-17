@@ -195,3 +195,33 @@ def radius(texts: list[str]) -> int:
     if key not in _SEEN:
         _SEEN[key] = depth(texts)
     return _SEEN[key]
+
+
+def predicates(text: str) -> list[str]:
+    """Name every predicate a query's triple patterns use (nemik:W637).
+
+    Args:
+        text: The constraint's query text.
+
+    Returns:
+        The predicate terms as written; a variable predicate is returned as "?", and so is a
+        query that cannot be read, because either may read any predicate.
+
+    """
+    where = text.upper().find("WHERE")
+    body = _strip_filters(text[where + len("WHERE") :] if where >= 0 else text)
+    try:
+        found = _statements(body)
+    except ValueError:
+        return ["?"]
+    out: list[str] = []
+    for statement in found:
+        segments: list[list[str]] = [[]]
+        for term in statement:
+            if term == ";":
+                segments.append([])
+            else:
+                segments[-1].append(term)
+        heads = [segments[0][1:2]] + [s[:1] for s in segments[1:]]
+        out += ["?" if term[0] in "?$" else term for head in heads for term in head]
+    return out
