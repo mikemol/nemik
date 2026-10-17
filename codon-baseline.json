@@ -63,6 +63,10 @@
   "as_written": "no module named 'nemik.exportv2'",
   "stripped": "no module named 'nemik.exportv2'"
  },
+ "exportwire": {
+  "as_written": "no module named 'nemik.check'",
+  "stripped": "no module named 'nemik.check'"
+ },
  "floorasks": {
   "as_written": "no module named 'argparse'",
   "stripped": "no module named 'argparse'"
