@@ -97,6 +97,12 @@ stores prompt text, never uses the network, and always exits 0.
   at one commit and rewrites the pins, the lock and the checksums (see `vendor/wheels/README.md`;
   it replaced the hand script tools/revendor-mtools.sh, mtools:W1449). Dry-run without `--write`;
   `--no-sync` keeps the bazel-built `.venv` as it is.
+- Before a submit, the two ratchets the gate runs, locally: `PYTHONPATH=src .venv/bin/python3
+  tools/mypy_ratchet.py` (about a minute, prints `N findings, baseline M`) and
+  `.venv/bin/python3 tools/ruff_ratchet.py` (or `tests/test_ruff_ratchet.py`). `mikemol-pycheck
+  --changed .` judges each file alone and does not compare against the baselines, which is where
+  new files fail (a new file's baseline is 0). `mikemol-websubset --check-file F --target codon`
+  answers the Codon census rules for one file in seconds.
 - `tools/render-check.sh`: the render check as a host step: `tests/test_layout.py` drives the web view in
   the host's Google Chrome (layout budgets, the rank forest, repo toggles, salience order) and leaves
   screenshots in `/var/tmp/nemik-shots`. The Bazel gate stays hermetic, where the same tests skip.
