@@ -17,10 +17,9 @@ states = ["ready", "working", "blocked", "done", "dropped"]
 from = "ready"
 to = "working"
 command = "--status working"
-when = "you begin the card; exactly one card is working at a time"
+when = "you begin the card; some card is working while others are ready (the count need not be one, W540)"
 enforced_by = [
   { shape = "no working card while items are ready" },
-  { shape = "more than one working card" },
   { hook = ".githooks/pre-commit", text = "none is marked working" },
 ]
 
@@ -29,7 +28,7 @@ from = "ready"
 to = "working"
 command = "nemik-work"
 when = "the one-command form of the same move: other working cards return to ready first"
-enforced_by = [{ shape = "more than one working card" }]
+enforced_by = [{ shape = "no working card while items are ready" }]
 
 [[lifecycle.transition]]
 from = "working"

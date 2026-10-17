@@ -311,9 +311,19 @@
    ],
    "amr-skills": [
     [
-     "Warning",
-     "--",
-     "more than one working card: keep one, return the others to ready"
+     "Info",
+     "W49",
+     "no edge joins this open card to any other: add one (--enables <the card or goal that needs it>, or --add-enables), or drop it if it earns no place"
+    ],
+    [
+     "Info",
+     "W76",
+     "every child of this umbrella is done and it states no next step: it is realized by construction, so close it (mikemol-paths-forward --close-umbrellas --write)"
+    ],
+    [
+     "Info",
+     "W79",
+     "no edge joins this open card to any other: add one (--enables <the card or goal that needs it>, or --add-enables), or drop it if it earns no place"
     ]
    ],
    "cassian-observability": []
@@ -3577,9 +3587,19 @@
    ],
    "amr-skills": [
     [
-     "Warning",
-     "--",
-     "more than one working card: keep one, return the others to ready"
+     "Info",
+     "W49",
+     "no edge joins this open card to any other: add one (--enables <the card or goal that needs it>, or --add-enables), or drop it if it earns no place"
+    ],
+    [
+     "Info",
+     "W76",
+     "every child of this umbrella is done and it states no next step: it is realized by construction, so close it (mikemol-paths-forward --close-umbrellas --write)"
+    ],
+    [
+     "Info",
+     "W79",
+     "no edge joins this open card to any other: add one (--enables <the card or goal that needs it>, or --add-enables), or drop it if it earns no place"
     ]
    ],
    "cassian-observability": []
@@ -8268,9 +8288,19 @@
    "findings": {
     "amr-skills": [
      [
-      "Warning",
-      "--",
-      "more than one working card: keep one, return the others to ready"
+      "Info",
+      "W49",
+      "no edge joins this open card to any other: add one (--enables <the card or goal that needs it>, or --add-enables), or drop it if it earns no place"
+     ],
+     [
+      "Info",
+      "W76",
+      "every child of this umbrella is done and it states no next step: it is realized by construction, so close it (mikemol-paths-forward --close-umbrellas --write)"
+     ],
+     [
+      "Info",
+      "W79",
+      "no edge joins this open card to any other: add one (--enables <the card or goal that needs it>, or --add-enables), or drop it if it earns no place"
      ]
     ]
    },

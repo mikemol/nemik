@@ -57,11 +57,10 @@ def test_ready_items_and_no_working_card_is_flagged() -> None:
     assert [m.startswith("no working card") for m in _said(g, ws)] == [True]
 
 
-def test_both_findings_are_warnings_not_violations() -> None:
+def test_the_finding_is_a_warning_not_a_violation() -> None:
     """The severity sits on the shape: a constraint-level one is ignored and reads as Violation."""
     g = Graph()
     _repo(g, "a", "ready")
-    _repo(g, "b", "working", "working")
     annotate(g)
     severities = {sev for _, sev, _ in findings(f"active-{id(g)}", g, shapes())}
     assert "http://www.w3.org/ns/shacl#Violation" not in severities
@@ -74,11 +73,11 @@ def test_exactly_one_working_card_is_clean() -> None:
     assert _said(g, ws) == []
 
 
-def test_several_working_cards_are_flagged() -> None:
-    """Three working cards: one finding, asking to keep one."""
+def test_several_working_cards_are_not_flagged() -> None:
+    """nemik:W540 (operator 2026-10-15): the count need not be one; many working say nothing."""
     g = Graph()
     ws = _repo(g, "a", "working", "working", "working")
-    assert [m.startswith("more than one") for m in _said(g, ws)] == [True]
+    assert _said(g, ws) == []
 
 
 def test_all_blocked_or_done_needs_no_card() -> None:

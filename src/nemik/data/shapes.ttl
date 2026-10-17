@@ -356,20 +356,9 @@ nemik:ActiveCardShape a sh:NodeShape ;
                 FILTER(!BOUND(?working))
             }""" ] .
 
-nemik:ExtraActiveCardShape a sh:NodeShape ;
-    sh:targetObjectsOf nemik:workstream ;
-    sh:severity sh:Warning ;
-    sh:sparql [
-        sh:severity sh:Warning ;
-        sh:message "more than one working card: keep one, return the others to ready" ;
-        sh:select """
-            SELECT DISTINCT $this WHERE {
-                ?one <https://github.com/mikemol/nemik/ns#workstream> $this ;
-                     <http://open-services.net/ns/cm#state> <https://github.com/mikemol/nemik/ns#Working> .
-                ?two <https://github.com/mikemol/nemik/ns#workstream> $this ;
-                     <http://open-services.net/ns/cm#state> <https://github.com/mikemol/nemik/ns#Working> .
-                FILTER(?one != ?two)
-            }""" ] .
+# nemik:W540 (operator 2026-10-15, session 695f3e0a line 68086: "requiring the working card count to be ==1
+# is fragile and puts backpressure in some of the wrong places"): there is no shape for MORE than one
+# working card. The zero-working-while-ready rule above stays; staleness of a working card is W616's.
 
 # nemik:W599 (operator 2026-10-16 via github-8f: transcript needles of operator utterances are provenance,
 # "that's why we call them warrants"): the contract a warrant is written to, W3C PROV-O. The transcript
