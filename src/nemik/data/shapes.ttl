@@ -156,6 +156,38 @@ nemik:ReadyUmbrellaShape a sh:NodeShape ;
     sh:property [ sh:path nemik:readyUmbrella ; sh:maxCount 0 ; sh:severity sh:Warning ;
                   sh:message "ready, but an umbrella: two or more of its own open cards enable it; set it blocked on them (it lands when they do), or drop the enables edges that are not prerequisites" ] .
 
+# An umbrella whose children are all done is realized by construction (nemik:W488; mtools:W1139's
+# --close-umbrellas closes it). Exactly mtools' set: open, not working, no next step stated, no foreign
+# blocker, and one or more local children (cards of the same repo that enable it), all done. A dropped
+# child is never an enabler in the graph, so it cannot hide behind this rule.
+nemik:UmbrellaCompleteShape a sh:NodeShape ;
+    sh:targetObjectsOf nemik:enables ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "every child of this umbrella is done and it states no next step: it is realized by construction, so close it (mikemol-paths-forward --close-umbrellas --write)" ;
+        sh:select """
+            SELECT DISTINCT $this WHERE {
+                $this <https://github.com/mikemol/nemik/ns#workstream> ?ws ;
+                      <http://open-services.net/ns/cm#state> ?state .
+                FILTER(?state != <https://github.com/mikemol/nemik/ns#Done>
+                       && ?state != <https://github.com/mikemol/nemik/ns#Working>)
+                ?kid <https://github.com/mikemol/nemik/ns#enables> $this ;
+                     <https://github.com/mikemol/nemik/ns#workstream> ?ws .
+                OPTIONAL { $this <https://github.com/mikemol/nemik/ns#hasNextStep> ?said }
+                OPTIONAL {
+                    $this <https://github.com/mikemol/nemik/ns#waitsFor> ?far .
+                    ?far <https://github.com/mikemol/nemik/ns#workstream> ?other .
+                    FILTER(?other != ?ws)
+                }
+                OPTIONAL {
+                    ?unfinished <https://github.com/mikemol/nemik/ns#enables> $this ;
+                                <https://github.com/mikemol/nemik/ns#workstream> ?ws ;
+                                <http://open-services.net/ns/cm#state> ?unfinishedState .
+                    FILTER(?unfinishedState != <https://github.com/mikemol/nemik/ns#Done>)
+                }
+                FILTER(!BOUND(?said) && !BOUND(?far) && !BOUND(?unfinished))
+            }""" ] .
+
 # Ready, but an open card enables it (nemik:W465): it cannot land first. mtools:W1131's
 # --block-behind-open applies the fix.
 nemik:ReadyBehindOpenShape a sh:NodeShape ;

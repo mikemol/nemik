@@ -220,6 +220,10 @@ def _queue_graph(repo: str, state_path: Path, known: frozenset[str]) -> Graph:
         )
         for path in sorted(set(named)):
             g.add((node, NEMIK.namesFile, Literal(path)))
+        # nemik:W488: whether the card still states a next step; an umbrella with none and every
+        # child done is realized by construction (UmbrellaCompleteShape).
+        if model.text(w, "next_bounded_step").strip():
+            g.add((node, NEMIK.hasNextStep, Literal("true", datatype=XSD.boolean)))
         # nemik:W553 (github-8f 2026-10-15): words that blur the change-lifecycle steps.
         # Not strays, by name: rolled out, activation, promoted, pushed.
         strays = re.findall(
