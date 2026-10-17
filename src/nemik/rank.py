@@ -18,6 +18,7 @@ from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import DCTERMS
 from rdflib.term import Node
 
+from nemik import tiers
 from nemik.adapter import BASE, NEMIK, OSLC_CM, workstream_uri
 
 
@@ -46,7 +47,11 @@ def load_weights(text: str | None = None) -> Weights:
     )
 
 
-OBJECTIVES = ("operator", "band", "weight")
+# nemik:W600: `tier` is the repo's burn-down tier (rank-weights.toml [tiers]), higher for a more
+# urgent repo. One value per repo: in a per-repo ranking it ties every row and changes nothing, and
+# in the fleet pool it orders the repos. It is a tier of the composition only when [order] names it.
+OBJECTIVES = ("operator", "band", "weight", "tier")
+TIERS = tiers.load()
 
 
 WEIGHT_MODELS = ("flow", "downstream")
@@ -148,6 +153,7 @@ def objectives(
     down = downstream_weight(g, n, weights)
     return {
         "operator": int(cause == "operator" or cause.startswith("operator:")),
+        "tier": -tiers.rank(TIERS.get(_repo(n), tiers.UNLISTED)),
         "band": -bands.rank(b),
         "band_name": b,
         "band_why": why,
@@ -432,6 +438,21 @@ def fleet_repos(g: Graph) -> list[str]:
     return sorted({_repo(n) for n in g.subjects(OSLC_CM.state, NEMIK.Ready)})
 
 
+def _fleet_composition(comp: Composition | None) -> Composition:
+    """Put the burn-down tier ahead of the declared composition, for the fleet pool (nemik:W600).
+
+    Args:
+        comp: The declared composition, or None for the packaged one.
+
+    Returns:
+        The same composition with the `tier` objective as its first tier, so a more urgent repo's
+        cards come first and band and weight decide inside a repo tier.
+
+    """
+    base = comp or load_composition()
+    return Composition((("tier",), *base.tiers), base.scalarize, base.weight_model)
+
+
 def rank_fleet(
     g: Graph, weights: Weights, comp: Composition | None = None
 ) -> list[dict]:
@@ -448,7 +469,7 @@ def rank_fleet(
         for r in _rows(g, repo, weights, comp=comp):
             r["repo"], r["cite"] = repo, f"{repo}:{r['symbol']}"
             rows.append(r)
-    return _position(rows, comp)
+    return _position(rows, _fleet_composition(comp))
 
 
 FRUIT_TAG = "fruit"
