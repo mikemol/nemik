@@ -215,12 +215,39 @@ nemik:AdoptionShape a sh:NodeShape ;
                   sh:message "the queue's writer is not this repo's own dependency: uv add a sha-pinned mikemol-pathsforward (mtools INSTALL.md) and run .venv/bin/mikemol-paths-forward" ] .
 
 # One active card per repo unless everything open is blocked (nemik:W177, operator 2026-10-01).
+# nemik:W529: SPARQL constraints over the workstream's cards, so the rule lives here and the adapter plumbs
+# no count marker for it.
 nemik:ActiveCardShape a sh:NodeShape ;
-    sh:targetSubjectsOf nemik:noActiveCard, nemik:extraActiveCards ;
-    sh:property [ sh:path nemik:noActiveCard ; sh:maxCount 0 ; sh:severity sh:Warning ;
-                  sh:message "no working card while items are ready: mark the one you are doing with --update <W> --status working" ] ;
-    sh:property [ sh:path nemik:extraActiveCards ; sh:maxCount 0 ; sh:severity sh:Warning ;
-                  sh:message "more than one working card: keep one, return the others to ready" ] .
+    sh:targetObjectsOf nemik:workstream ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        sh:severity sh:Warning ;
+        sh:message "no working card while items are ready: mark the one you are doing with --update <W> --status working" ;
+        sh:select """
+            SELECT DISTINCT $this WHERE {
+                ?ready <https://github.com/mikemol/nemik/ns#workstream> $this ;
+                       <http://open-services.net/ns/cm#state> <https://github.com/mikemol/nemik/ns#Ready> .
+                OPTIONAL {
+                    ?working <https://github.com/mikemol/nemik/ns#workstream> $this ;
+                             <http://open-services.net/ns/cm#state> <https://github.com/mikemol/nemik/ns#Working> .
+                }
+                FILTER(!BOUND(?working))
+            }""" ] .
+
+nemik:ExtraActiveCardShape a sh:NodeShape ;
+    sh:targetObjectsOf nemik:workstream ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        sh:severity sh:Warning ;
+        sh:message "more than one working card: keep one, return the others to ready" ;
+        sh:select """
+            SELECT DISTINCT $this WHERE {
+                ?one <https://github.com/mikemol/nemik/ns#workstream> $this ;
+                     <http://open-services.net/ns/cm#state> <https://github.com/mikemol/nemik/ns#Working> .
+                ?two <https://github.com/mikemol/nemik/ns#workstream> $this ;
+                     <http://open-services.net/ns/cm#state> <https://github.com/mikemol/nemik/ns#Working> .
+                FILTER(?one != ?two)
+            }""" ] .
 
 # nemik:W599 (operator 2026-10-16 via github-8f: transcript needles of operator utterances are provenance,
 # "that's why we call them warrants"): the contract a warrant is written to, W3C PROV-O. The transcript
