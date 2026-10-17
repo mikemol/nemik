@@ -9,9 +9,10 @@ points at a node that did (a shape such as "blocked_on names a landed waypoint" 
 state, one hop). Every other node keeps its findings. Those nodes and their neighbours make a small
 graph that is validated whole, so shape targets select exactly as in a full run.
 
-The claim, incremental == full, holds for constraints that read at most one hop from the focus, which is
-every shape in shapes.ttl today; tests/test_shaclinc.py pins it by comparing against a full run after
-edits, so a deeper shape that breaks the claim fails there instead of going stale silently.
+The claim, incremental == full, holds while the neighbourhood is as deep as the deepest shape reads
+(nemik.shapedepth derives that from the shapes; unbounded means a full run); tests/test_shaclinc.py
+and tests/test_warm_equals_cold.py pin it by comparing against a full run after edits, so a shape
+that breaks the claim fails there instead of going stale silently.
 """
 
 from __future__ import annotations
@@ -21,10 +22,13 @@ from rdflib import Graph
 from rdflib.namespace import SH
 from rdflib.term import Node
 
+from nemik.shapedepth import UNBOUNDED, radius
+
 Result = tuple[str, str]  # (severity IRI, message)
 
 Held = dict[str, tuple[frozenset[tuple[Node, Node, Node]], dict[Node, list[Result]]]]
 _LAST: Held = {}
+HUB = 40  # a node with more neighbours than this (a workstream) is judged, not walked through
 
 
 def export_cache() -> Held:
@@ -53,17 +57,10 @@ def _results(data: Graph, shapes: Graph) -> dict[Node, list[Result]]:
     return out
 
 
-HOPS = 2  # nemik:W625: the deepest chain a shape reads, UmbrellaBlockShape (waiter, umbrella, kids)
-
-
-def _neighbourhood(
+def _adjacency(
     now: frozenset[tuple[Node, Node, Node]], touched: set[Node], subjects: set[Node]
-) -> set[Node]:
-    """Grow the touched nodes by the cards that can read them, in both directions, HOPS deep.
-
-    A shape judges a card from its neighbours' state, and the neighbours can sit either side of an
-    edge: ReadyUmbrellaShape reads the kids that enable the umbrella, UmbrellaBlockShape reads the
-    umbrella's kids through the waiter's edge. A change to a kid must re-judge both.
+) -> dict[Node, set[Node]]:
+    """Index which nodes sit either side of an edge.
 
     Args:
         now: The graph's triples.
@@ -71,26 +68,60 @@ def _neighbourhood(
         subjects: The nodes that are cards (a vocabulary term is only ever an object).
 
     Returns:
-        The touched nodes and everything within HOPS undirected edges of them.
+        The neighbours of each node. A dropped card is no longer a subject, but the edges that
+        still point at it are its neighbours, so a touched node counts as one.
 
     """
     adjacent: dict[Node, set[Node]] = {}
     for s, _, o in now:
-        if o in subjects:
+        if o in subjects or o in touched:
             adjacent.setdefault(s, set()).add(o)
             adjacent.setdefault(o, set()).add(s)
-    focus = set(touched)
-    for _ in range(HOPS):
-        focus |= {n for f in focus for n in adjacent.get(f, ())}
+    return adjacent
+
+
+def _neighbourhood(
+    adjacent: dict[Node, set[Node]], seeds: set[Node], hops: int
+) -> set[Node]:
+    """Grow the seeds by the cards that can read them, in both directions, `hops` deep.
+
+    A shape judges a card from its neighbours' state, and the neighbours can sit either side of an
+    edge: ReadyUmbrellaShape reads the kids that enable the umbrella, UmbrellaBlockShape reads the
+    umbrella's kids through the waiter's edge. A change to a kid must re-judge both. A hub (a
+    workstream joins every card of its repo) is re-judged when reached but not walked through, or one
+    changed card would re-judge the repo and, a hop on, the fleet.
+
+    Args:
+        adjacent: The neighbours of each node.
+        seeds: The nodes to grow from.
+        hops: How many undirected edges to follow.
+
+    Returns:
+        The seeds and everything within `hops` edges of them, hubs reached but not passed.
+
+    """
+    focus = set(seeds)
+    front = set(seeds)
+    for _ in range(hops):
+        reached = {
+            n
+            for f in front
+            if len(adjacent.get(f, ())) <= HUB
+            for n in adjacent.get(f, ())
+        }
+        front = reached - focus
+        focus |= reached
     return focus
 
 
 def findings(key: str, data: Graph, shapes: Graph) -> list[tuple[Node, str, str]]:
     """(focus, severity IRI, message) for every result, re-validating only what changed since `key`'s
-    last run (everything on the first)."""
+    last run (everything on the first, and always when the shapes' depth cannot be bounded)."""
     now = frozenset(data)
     last = _LAST.get(key)
-    if last is None:
+    texts = sorted(str(t) for t in shapes.objects(None, SH.select))
+    hops = radius(texts)  # nemik:W626: derived from the shapes
+    if last is None or hops == UNBOUNDED:
         by_focus = _results(data, shapes)
     else:
         before, by_focus = last[0], dict(last[1])
@@ -101,7 +132,8 @@ def findings(key: str, data: Graph, shapes: Graph) -> list[tuple[Node, str, str]
         touched = {s for s, _, _ in changed} | {
             o for _, _, o in changed if o in subjects
         }
-        focus = _neighbourhood(now, touched, subjects)
+        adjacent = _adjacency(now, touched, subjects)
+        focus = _neighbourhood(adjacent, touched, hops)
         for n in focus:
             by_focus.pop(n, None)
         live = focus & subjects
@@ -109,7 +141,12 @@ def findings(key: str, data: Graph, shapes: Graph) -> list[tuple[Node, str, str]
             # Not pyshacl's focus_nodes: it applies every shape to a named node whatever the shape
             # targets. The focus nodes' own triples and their neighbours' make a subgraph validated
             # whole, so targets select exactly as in a full run; only the focus nodes' results are kept.
-            near = _neighbourhood(now, live, subjects)
+            # A hub judged here (a workstream) is judged against ALL its neighbours, or a shape over
+            # the whole repo ("no working card") would see only part of it.
+            near = _neighbourhood(adjacent, live, hops)
+            for hub in live:
+                if len(adjacent.get(hub, ())) > HUB:
+                    near |= adjacent[hub]
             sub = Graph()
             for t in now:
                 if t[0] in near:
