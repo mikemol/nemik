@@ -38,6 +38,7 @@ from rdflib.namespace import DCTERMS, PROV
 from nemik.adapter import BASE, NEMIK, OPERATOR, OSLC_CM, bind, ledger_graph
 from nemik.blocks import inbound, operator_asks, ref
 from nemik.check import LEDGER, QUEUE, default_root, survey, workstream_files
+from nemik.outbox import outbox
 from nemik.wake import operator_row, read_liveness, roster
 
 VENDOR = {"cytoscape.min.js", "dagre.min.js", "cytoscape-dagre.js"}
@@ -647,6 +648,8 @@ def _build_static(
         feed = turtle(repo, model.graph, model.graph, hidden)
         for part in ("base", "changelog"):
             bodies[f"trs/{repo}/{part}.ttl"] = feed[part]
+        # nemik:W354: the repo's cards as a read-only ForgeFed outbox (ActivityStreams JSON-LD)
+        bodies[f"outbox/{repo}.jsonld"] = outbox(repo, model.graph, hidden)
     # nemik:W451: the OSLC discovery root, pointing at each repo's tracked resource set above
     from nemik.catalog import catalog
 

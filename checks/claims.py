@@ -163,7 +163,8 @@ def hub_modules_depend_on_everything_below():
     lower = {"adapter", "blocks", "wake", "check"}
     # nemik:W232: nemik-metrics also reads the realizability verdicts, through realize.py, which
     # itself rests on adapter alone; serve does not.
-    expected = {"metrics": lower | {"realize"}, "serve": lower}
+    # nemik:W354: serve also publishes the outbox, a renderer that rests on adapter alone.
+    expected = {"metrics": lower | {"realize"}, "serve": lower | {"outbox"}}
     for hub, want in expected.items():
         deps = _imports_nemik(mods[hub])
         assert deps == want, f"{hub}.py's dependency set changed: {deps}"
