@@ -9,6 +9,11 @@ start out failing; codon-baseline.json holds what each module hits first today.
 
 On the host, `NEMIK_CODON_WRITE=1` rewrites the baseline from the current census, and only when
 nothing is worse, so the file records progress and nothing else.
+
+Idioms Codon refused here (nemik:W631): a return annotated `X | None` ("unsupported operand type(s)
+for |: type[int] and Optional[T.8]", also for `list[list[str]] | None`). Use Optional[X] instead
+(mtools probed Optional[int] on Codon 0.20.3 and it compiles on both paths; nemik has not yet),
+a sentinel of the same type (shapedepth.UNBOUNDED = -1), or raise and let the caller catch.
 """
 
 import json
