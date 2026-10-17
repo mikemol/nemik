@@ -151,3 +151,23 @@ outcomes = ["idle"]
 rate = 50
 burst = 150
 window_days = 14
+
+# nemik:W608: the warrant debt may only fall. Each repo's count of open cards claiming an operator ruling with no
+# warrant (nemik:W597) on 2026-10-17, 72 in all; nemik-check warns on a repo above its number (a repo not listed has
+# a ceiling of zero). Lower a number in the change that warrants its cards.
+[warrant_debt]
+aeternum = 2
+amr-skills = 2
+el-openglo = 7
+gabion = 4
+gcalculus = 2
+github = 1
+life = 3
+linux-sources = 1
+luthen-observability = 16
+mtools = 14
+nemik = 6
+paperkit = 6
+rosettapkg = 1
+substrate = 6
+summit = 1

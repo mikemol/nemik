@@ -24,6 +24,7 @@ from pathlib import Path
 from mikemol.pathsforward.store import UnreadableStateError
 from rdflib import Graph, Literal
 
+from nemik import warrantdebt
 from nemik.adapter import BASE, NEMIK, OSLC_CM, bind, queue_graph, workstream_uri
 from nemik.adoption import adoption
 from nemik.blocks import annotate, ref
@@ -233,6 +234,10 @@ def survey(
     idle_said = idle_findings(root, merged, [repo for repo, _ in queues])
     for irepo, said in idle_said.items():
         by_repo.setdefault(irepo, []).append(("Warning", "--", said))
+    # nemik:W608: the warrant debt may only fall: a repo above its ceiling is told to warrant.
+    debts = warrantdebt.findings(merged, warrantdebt.baseline())
+    for drepo, dtext in debts.items():
+        by_repo.setdefault(drepo, []).append(("Warning", "--", dtext))
     # nemik:W405: a card waiting on another repo's card that has open prerequisites of its own (an
     # umbrella, or a card a peer has since atomized) gets the leaves to cite instead, with the exact
     # re-point command, so the fix is one command rather than a hand search (three hand re-points of
