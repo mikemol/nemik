@@ -2,10 +2,13 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W355: the git-history families are computed only when asked for by name."""
 
+from collections.abc import Iterator
 from pathlib import Path
 
 import pytest
+from rdflib import Graph
 
+from nemik.check import Finding, survey
 from nemik.metrics import main
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
@@ -42,3 +45,22 @@ def test_naming_a_family_computes_it(
         ]
     )
     assert "# TYPE nemik_commits_24h gauge" in capsys.readouterr().out
+
+
+def test_a_run_surveys_the_fleet_once(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    tmp_path: Path,
+) -> None:
+    """nemik:W632: a plain run paid SHACL twice because it surveyed twice (~275 s each, cold)."""
+    calls = [0]
+    real = survey
+
+    def counted(root: Path) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
+        calls[0] += 1
+        return real(root)
+
+    monkeypatch.setattr("nemik.metrics.survey", counted)
+    main(["--root", str(FLEET), "--spool", str(tmp_path / "none.jsonl")])
+    capsys.readouterr()
+    assert calls[0] == 1

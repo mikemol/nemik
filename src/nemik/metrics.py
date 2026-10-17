@@ -62,7 +62,14 @@ from rdflib.namespace import DCTERMS, PROV
 from nemik import forecast, history, tiers
 from nemik.adapter import BASE, NEMIK, OSLC_CM, ledger_graph
 from nemik.blocks import inbound, ref
-from nemik.check import LEDGER, QUEUE, default_root, survey, workstream_files
+from nemik.check import (
+    LEDGER,
+    QUEUE,
+    Finding,
+    default_root,
+    survey,
+    workstream_files,
+)
 from nemik.realize import verdicts
 from nemik.wake import read_liveness, roster
 
@@ -454,6 +461,40 @@ class _Options(argparse.Namespace):
     root: Path
 
 
+def repo_lines(
+    repo: str, g: Graph | None, findings: list[Finding], now: datetime
+) -> list[str]:
+    """Print one queue's waypoint, minted and finding gauges.
+
+    Args:
+        repo: The queue's repo.
+        g: Its graph, or None when mtools refuses the file.
+        findings: Its findings.
+        now: When the run started.
+
+    Returns:
+        The gauge lines.
+
+    """
+    out: list[str] = []
+    states: Counter[str] = Counter()
+    if g is not None:
+        out += age_lines(repo, g, now)
+        for _, _, st in g.triples((None, OSLC_CM.state, None)):
+            states[str(st).rsplit("#", 1)[-1].lower()] += 1
+        states["dropped"] = sum(1 for _ in g.subjects(RDF.type, NEMIK.Dropped))
+    for name, n in sorted(states.items()):
+        out.append(f"nemik_waypoints{label(repo=repo, state=name)} {n}")
+    if g is not None:
+        for during, n in sorted(
+            Counter(str(o) for o in g.objects(None, NEMIK.mintedDuring)).items()
+        ):
+            out.append(f"nemik_waypoints_minted{label(repo=repo, during=during)} {n}")
+    for sev, n in sorted(Counter(sev for sev, _, _ in findings).items()):
+        out.append(f"nemik_findings{label(repo=repo, severity=sev)} {n}")
+    return out
+
+
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(
         prog="nemik-metrics", description=(__doc__ or "").splitlines()[0]
@@ -480,28 +521,12 @@ def main(argv: list[str] | None = None) -> None:
         "# TYPE nemik_waypoint_age_seconds gauge",
     ]
     now = datetime.now(UTC)
-    for repo, g, findings in survey(args.root):
-        states: Counter[str] = Counter()
-        if g is not None:
-            out += age_lines(repo, g, now)
-        if g is not None:
-            for _, _, st in g.triples((None, OSLC_CM.state, None)):
-                states[str(st).rsplit("#", 1)[-1].lower()] += 1
-            states["dropped"] = sum(1 for _ in g.subjects(RDF.type, NEMIK.Dropped))
-        for name, n in sorted(states.items()):
-            out.append(f"nemik_waypoints{label(repo=repo, state=name)} {n}")
-        if g is not None:
-            for during, n in sorted(
-                Counter(str(o) for o in g.objects(None, NEMIK.mintedDuring)).items()
-            ):
-                out.append(
-                    f"nemik_waypoints_minted{label(repo=repo, during=during)} {n}"
-                )
-        for sev, n in sorted(Counter(sev for sev, _, _ in findings).items()):
-            out.append(f"nemik_findings{label(repo=repo, severity=sev)} {n}")
+    surveyed = list(survey(args.root))
+    for repo, g, findings in surveyed:
+        out += repo_lines(repo, g, findings, now)
 
     merged = Graph()
-    for _, g, _ in survey(args.root):
+    for _, g, _ in surveyed:
         if g is not None:
             merged += g
     out.append("# TYPE nemik_blocks_inbound gauge")
