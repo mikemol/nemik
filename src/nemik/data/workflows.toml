@@ -48,8 +48,8 @@ enforced_by = [{ shape = "a blocked waypoint must carry blockedOn and blockedKin
 [[lifecycle.transition]]
 from = "blocked"
 to = "ready"
-command = "--bump-blocked"
-when = "every blocker has landed"
+command = "--prune-landed"
+when = "every blocker has landed (--prune-landed --root <fleet root> trims it; --bump-blocked only counts ticks)"
 enforced_by = [{ shape = "every blocker in blocked_on has landed: this waypoint is ready, not blocked" }]
 
 [[lifecycle.transition]]

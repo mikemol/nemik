@@ -77,7 +77,7 @@ A waypoint is `ready`, `working`, `blocked`, `done` or `dropped`, and every chan
   hash, a path, a command and its output; "looks right" is not evidence.
 - **It waits on someone: `--update W<n> --status blocked --blocked-kind agent|human --blocked-on <who>`.**
   `blocked_on` and `blocked_kind` are both required (the four rules above say how to write them).
-- **The wait ends: `--bump-blocked`** returns a card to `ready` once every local blocker has landed.
+- **The wait ends: `--prune-landed --root <fleet root>`** trims landed blockers, local and foreign, and returns the card to `ready` once none is left. `--bump-blocked` only counts ticks; do not run it as the remedy.
 - **It no longer earns its place: `--drop W<n> "<reason>"`.** The reason is required and kept as
   residue; the symbol is never reused.
 
@@ -138,7 +138,7 @@ A waypoint is `ready`, `working`, `blocked`, `done` or `dropped`, and every chan
 | `ReadyUmbrellaShape` | ready or working, yet 2+ of your own open cards enable it: an umbrella that cannot land before its children (W436) | `--update W<n> --status blocked --blocked-on <the children>`, or drop the `enables` edges that are not prerequisites |
 | `ReadyBehindOpenShape` | ready, yet one open card (any repo) enables it: it cannot land first, and its salience reads blank (W465; Info for now) | `--update W<n> --status blocked --blocked-on <that card>`, or drop the `enables` edge if it is not a prerequisite; mtools:W1131's `--block-behind-open` will do it for you |
 | `UnresolvedBlockerShape` | blocked_on names no repo, waypoint, operator ask or calendar event (`cal:<label>/<uid>`) nemik can resolve | rewrite it as one of those |
-| `LandedBlockerShape` | a blocker is already done or dropped; if all are, the item is ready | trim it (`$PF --bump-blocked` prunes local ones) |
+| `LandedBlockerShape` | a blocker is already done or dropped; if all are, the item is ready | trim it (`$PF --prune-landed --root <fleet root>` prunes local and foreign ones) |
 | `MalformedBlockerShape` | a symbol with prose attached (`W8 (both ...)`) | symbol alone; prose goes in evidence |
 | `ActiveCardShape` | no `working` card while items are ready, or more than one (operator 2026-10-01: one active card per repo unless everything open is blocked) | mark the item you are doing `$PF --update <W> --status working`; return extras to ready |
 | operator saturation (`N needs-you operator asks are open (cap C, oldest issued D)`, W348) | the repo holds more needs-you asks than `[saturation] needs_you_per_repo` in rank-weights.toml (10): the operator is its bottleneck, and asks queue behind one another | batch related asks into one, withdraw those another path now answers, or cite a shared ask (`same ask as <repo>:W<n>`) so the operator answers once |

@@ -267,7 +267,7 @@ def waiters(root: Path, repo: str, sym: str) -> dict[str, list[str]]:
 def wake(root: Path, repo: str, sym: str, query: str, now: str) -> list[Path]:
     """nemik:W61: a letter in each waiting repo's inbox (the nemik:W4 channel). A letter reaches a
     dormant repo at no token cost until someone wakes it. A live loop reads it on its next tick,
-    where --bump-blocked (local) or the named foreign blocker shows the work is now free."""
+    where --prune-landed (local) or the named foreign blocker shows the work is now free."""
     written = []
     for other, syms in sorted(waiters(root, repo, sym).items()):
         inbox = root / other / "inbox"
@@ -280,7 +280,7 @@ def wake(root: Path, repo: str, sym: str, query: str, now: str) -> list[Path]:
             f"`nemik-witnesses --apply` observed at {now}:\n\n    {query}\n\n"
             f"Waiting on it here: {', '.join(syms)}. Each is blocked on `{cite}`, which is now done.\n"
             + (
-                "A tick's `--bump-blocked` prunes it.\n"
+                "`mikemol-paths-forward --prune-landed --root <fleet root>` prunes it.\n"
                 if other == repo
                 else "Lift the block: `mikemol-paths-forward --state .claude/paths-forward.json --update <W> ...`.\n"
             ),
