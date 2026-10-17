@@ -10,6 +10,7 @@ from rdflib import Graph
 from nemik.adapter import queue_graph
 from nemik.stackable import draft, propose, resolve
 
+WIDE_FILES = 8
 KNOWN = {
     "src/nemik/a.py",
     "src/nemik/b.py",
@@ -68,6 +69,17 @@ def test_the_draft_joins_the_step_the_touches_and_the_commits(tmp_path: Path) ->
     files, sources = draft(g, "r", "W1", cited, KNOWN)
     assert files == ["docs/x.md", "src/nemik/a.py", "tests/test_a.py"]
     assert sources == ["next-step", "touches", "commits"]
+
+
+def test_a_draft_from_past_commits_alone_is_flagged_when_wide(tmp_path: Path) -> None:
+    """mtools-ad: many files from the citing commits alone is wider than the card; say so."""
+    g = _queue(tmp_path)
+    many = {f"src/nemik/m{i}.py" for i in range(WIDE_FILES)}
+    ranked: list[dict[str, object]] = [{"symbol": "W3"}]
+    lines = propose(g, "r", ranked, {"W3": sorted(many)}, many)
+    assert "WIDE" in lines[0]
+    few = propose(g, "r", ranked, {"W3": ["src/nemik/m0.py"]}, many)
+    assert "WIDE" not in few[0]
 
 
 def test_propose_skips_a_card_that_already_has_a_manifest(tmp_path: Path) -> None:

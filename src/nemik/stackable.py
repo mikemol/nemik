@@ -14,6 +14,8 @@ from rdflib import Graph
 
 from nemik.adapter import NEMIK, waypoint_uri
 
+WIDE = 6  # a draft from past commits alone longer than this is probably wider than the card
+
 
 def manifest(g: Graph, repo: str, symbol: str) -> list[str]:
     """Read a card's declared manifest from the graph.
@@ -107,8 +109,12 @@ def propose(
             continue
         files, sources = draft(g, repo, symbol, cited.get(symbol, []), known)
         if files:
+            wide = sources == ["commits"] and len(files) > WIDE
+            note = ""
+            if wide:
+                note = f"WIDE, {len(files)} files from past commits only: narrow it; "
             out.append(
-                f"{symbol}: --manifest {' '.join(files)}  (from {', '.join(sources)};"
+                f"{symbol}: --manifest {' '.join(files)}  ({note}from {', '.join(sources)};"
                 " add --size small|medium|large)"
             )
         else:
