@@ -59,7 +59,7 @@ from mikemol.pathsforward.store import UnreadableStateError
 from rdflib import RDF, Graph
 from rdflib.namespace import DCTERMS, PROV
 
-from nemik import forecast, history, tiers
+from nemik import cachestore, forecast, history, tiers
 from nemik.adapter import BASE, NEMIK, OSLC_CM, ledger_graph
 from nemik.blocks import inbound, ref
 from nemik.check import (
@@ -593,6 +593,10 @@ def main(argv: list[str] | None = None) -> None:
                 f"nemik_ledger_lines{label(repo=repo, kind=kind, **{'class': cls})} {n}"
             )
         out.append(f"nemik_ledger_unparsed{label(repo=repo)} {unparsed}")
+    # nemik:W640: the survey kept its caches before the families ran; keep the flow solves the
+    # salience audit made since (15, 27 s of a profiled warm run), for the real root only.
+    if args.root.resolve() == default_root().resolve():
+        cachestore.persist_user()
     print(render(out, args.family))
 
 
