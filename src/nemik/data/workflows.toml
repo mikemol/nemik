@@ -120,6 +120,7 @@ steps = [
 name = "rank-sync"
 steps = [
   { who = "tick", command = "nemik-rank", does = "orders the ready cards by band and flow salience" },
+  { who = "tick", command = "nemik-stackable", does = "picks the ready cards whose manifests are disjoint, to carry in one stack" },
   { who = "tick", command = "--weights-from", does = "stores that order so the queue sorts by it" },
 ]
 

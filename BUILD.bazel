@@ -91,6 +91,7 @@ venv_from_hub(
         "nemik-operator": "nemik.blocks_cli:operator_main",
         "nemik-wake": "nemik.wake:main",
         "nemik-rank": "nemik.rank:main",
+        "nemik-stackable": "nemik.stackable_cli:main",
         "nemik-floor-asks": "nemik.floorasks:main",
         "nemik-overlaps": "nemik.overlaps:main",
         "nemik-witnesses": "nemik.witnesses_cli:main",

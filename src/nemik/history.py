@@ -137,6 +137,20 @@ def queue_at(repo: Path, rev: str | None) -> dict:
     return json.loads(text) if text else {}
 
 
+def staged_paths(repo: Path) -> list[str]:
+    """List the files staged in a repo's index: the ones a commit in flight already holds.
+
+    Args:
+        repo: The repo's working directory.
+
+    Returns:
+        The staged repo-relative paths; empty when nothing is staged or git is unreadable.
+
+    """
+    out = _git(repo, "diff", "--cached", "--name-only")
+    return out.split() if out else []
+
+
 def close_rate(repo: Path, since: str, days: int) -> float | None:
     """Measure how fast a repo closes cards, per day (nemik:W618).
 

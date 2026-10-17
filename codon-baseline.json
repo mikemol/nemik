@@ -87,6 +87,14 @@
   "as_written": "no module named 'rdflib'",
   "stripped": "no module named 'rdflib'"
  },
+ "stackable": {
+  "as_written": "no module named 'rdflib'",
+  "stripped": "no module named 'rdflib'"
+ },
+ "stackable_cli": {
+  "as_written": "no module named 'argparse'",
+  "stripped": "no module named 'argparse'"
+ },
  "warrantdebt": {
   "as_written": "no module named 'tomllib'",
   "stripped": "no module named 'tomllib'"
