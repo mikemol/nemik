@@ -40,14 +40,23 @@ from nemik.blocks import inbound, operator_asks, ref
 from nemik.check import LEDGER, QUEUE, default_root, survey, workstream_files
 from nemik.exportwire import withheld_by_exports
 from nemik.outbox import outbox
+from nemik.runlogs import runs_graph
 from nemik.wake import operator_row, read_liveness, roster
 
 VENDOR = {"cytoscape.min.js", "dagre.min.js", "cytoscape-dagre.js"}
 
 
 class Model:
-    def __init__(self, root: Path, withheld: frozenset[str] = frozenset()) -> None:
+    def __init__(
+        self,
+        root: Path,
+        withheld: frozenset[str] = frozenset(),
+        runs: Path | None = None,
+    ) -> None:
         self.root = root
+        # nemik:W565: luthen's published run logs (runs/<stream>.jsonl), read as prov:Activity rows
+        # into the graph when a directory is given.
+        self.runs = runs
         # nemik:W309: refs luthen withholds from the public view. They are kept out of every NUMBER
         # the view publishes (salience, edge current, history counts), not only out of the node list.
         self.withheld = withheld
@@ -71,9 +80,12 @@ class Model:
         self._lock = threading.Lock()
 
     def sources(self) -> list[Path]:
-        return [
+        found = [
             p for name in (QUEUE, LEDGER) for _, p in workstream_files(self.root, name)
         ]
+        if self.runs is not None:  # nemik:W565: a changed run log rebuilds the view too
+            found += sorted(self.runs.glob("*.jsonl"))
+        return found
 
     def refresh(self) -> None:
         key = tuple((str(p), p.stat().st_mtime_ns) for p in self.sources())
@@ -93,6 +105,8 @@ class Model:
             for repo, path in workstream_files(self.root, LEDGER):
                 lg, _ = ledger_graph(repo, path)
                 g += lg
+            if self.runs is not None:
+                g += runs_graph(self.runs)[0]
             phases["ledger"] = time.process_time() - t
             self.graph, self.key = g, key
             self.rebuilds += 1
@@ -789,6 +803,13 @@ def main(argv: list[str] | None = None) -> None:
         help="luthen's withheld list (v1); required with --static, a missing file fails the build",
     )
     ap.add_argument(
+        "--runs",
+        type=Path,
+        metavar="DIR",
+        help="the live server only: luthen's published run logs, DIR/<stream>.jsonl, read as "
+        "prov:Activity rows into the graph (nemik:W565)",
+    )
+    ap.add_argument(
         "--exports",
         type=Path,
         metavar="DIR",
@@ -825,7 +846,7 @@ def main(argv: list[str] | None = None) -> None:
             raise SystemExit(2) from e
         return
     ThreadingHTTPServer(
-        (args.bind, args.port), handler(Model(args.root))
+        (args.bind, args.port), handler(Model(args.root, runs=args.runs))
     ).serve_forever()
 
 
