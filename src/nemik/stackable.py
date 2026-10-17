@@ -31,6 +31,91 @@ def manifest(g: Graph, repo: str, symbol: str) -> list[str]:
     return sorted(str(path) for path in g.objects(node, NEMIK.plannedPath))
 
 
+def resolve(path: str, known: set[str]) -> str | None:
+    """Turn a mentioned file into a tracked repo-relative path.
+
+    Args:
+        path: A path as a card's text wrote it, perhaps just a file name.
+        known: The files git tracks.
+
+    Returns:
+        The path itself when tracked, the one tracked path ending in `/<path>` when exactly one
+        does, otherwise None (an untracked file cannot be proposed, only declared by hand).
+
+    """
+    if path in known:
+        return path
+    ends = [name for name in known if name.endswith("/" + path)]
+    return ends[0] if len(ends) == 1 else None
+
+
+def draft(
+    g: Graph, repo: str, symbol: str, cited: list[str], known: set[str]
+) -> tuple[list[str], list[str]]:
+    """Draft a card's manifest from what the graph and its history already say.
+
+    Args:
+        g: The merged queue graph.
+        repo: The card's repo.
+        symbol: The card's symbol.
+        cited: The files the commits citing the card touched.
+        known: The files git tracks, which every proposed path must be.
+
+    Returns:
+        (files, sources): the proposed exact files, sorted, and which evidence named them
+        (`next-step`, `touches`, `commits`). Queue files are left out: the writer owns them.
+
+    """
+    node = waypoint_uri(repo, symbol)
+    named = {str(path) for path in g.objects(node, NEMIK.namesFile)}
+    tags = {str(tag) for tag in g.objects(node, NEMIK.touches)}
+    marked = [tag for tag in tags if tag.startswith("file:")]
+    declared = {tag.removeprefix("file:").removesuffix("!w") for tag in marked}
+    evidence = {"next-step": named, "touches": declared, "commits": set(cited)}
+    sources = [label for label, found in evidence.items() if found]
+    every = {resolve(path, known) for path in named | declared | set(cited)}
+    found = {path for path in every if path is not None}
+    files = sorted(path for path in found if not path.startswith(".claude/"))
+    return files, sources
+
+
+def propose(
+    g: Graph,
+    repo: str,
+    ranked: list[dict[str, object]],
+    cited: dict[str, list[str]],
+    known: set[str],
+) -> list[str]:
+    """Print a drafted manifest for every ready card that declares none.
+
+    Args:
+        g: The merged queue graph.
+        repo: The repo's name.
+        ranked: The repo's ready cards in rank order.
+        cited: The files each card's citing commits touched, by symbol.
+        known: The files git tracks, which every proposed path must be.
+
+    Returns:
+        One line per undeclared card: the `--update` flags to confirm, or why there is
+        nothing to propose. Nothing is written; confirming is the planning act.
+
+    """
+    out: list[str] = []
+    for row in ranked:
+        symbol = str(row["symbol"])
+        if manifest(g, repo, symbol):
+            continue
+        files, sources = draft(g, repo, symbol, cited.get(symbol, []), known)
+        if files:
+            out.append(
+                f"{symbol}: --manifest {' '.join(files)}  (from {', '.join(sources)};"
+                " add --size small|medium|large)"
+            )
+        else:
+            out.append(f"{symbol}: nothing to propose: read its code, or atomize it")
+    return out
+
+
 def report(
     g: Graph, repo: str, ranked: list[dict[str, object]], in_flight: list[str]
 ) -> list[str]:

@@ -18,7 +18,7 @@ from rdflib import Graph
 from nemik import history
 from nemik.check import default_root, survey
 from nemik.rank import load_weights, rank
-from nemik.stackable import report
+from nemik.stackable import propose, report
 
 
 def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
@@ -34,15 +34,29 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     )
     ap.add_argument("repo", help="the repo whose ready cards to stack")
     ap.add_argument("--root", type=Path, default=default_root(), help="~/github")
+    ap.add_argument(
+        "--propose",
+        action="store_true",
+        help="draft a manifest for each ready card without one, for you to confirm",
+    )
     args = ap.parse_args(argv)
     root: Path = args.root
     name: str = args.repo
+    proposing: bool = args.propose
     if g is None:
         g = Graph()
         for _, queue, _ in survey(root):
             if queue is not None:
                 g += queue
     rows: list[dict[str, object]] = rank(g, name, load_weights())
+    if proposing:
+        cited = {
+            str(row["symbol"]): history.cited_files(root / name, str(row["symbol"]))
+            for row in rows
+        }
+        known = history.tracked_files(root / name)
+        sys.stdout.write("\n".join(propose(g, name, rows, cited, known)) + "\n")
+        return
     staged = history.staged_paths(root / name)
     sys.stdout.write("\n".join(report(g, name, rows, staged)) + "\n")
 

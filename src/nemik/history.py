@@ -151,6 +151,44 @@ def staged_paths(repo: Path) -> list[str]:
     return out.split() if out else []
 
 
+def tracked_files(repo: Path) -> set[str]:
+    """List the files git tracks in a repo (nemik:W613 --propose resolves bare names against them).
+
+    Args:
+        repo: The repo's working directory.
+
+    Returns:
+        The tracked repo-relative paths; empty when git is unreadable.
+
+    """
+    out = _git(repo, "ls-files")
+    return set(out.split()) if out else set()
+
+
+def cited_files(repo: Path, symbol: str) -> list[str]:
+    """List the files the commits citing a card touched (nemik:W613 --propose).
+
+    Args:
+        repo: The repo's working directory.
+        symbol: The card's symbol, as a `Waypoint: W<n>` trailer names it.
+
+    Returns:
+        The distinct repo-relative paths of its newest 20 citing commits, sorted; empty when none.
+
+    """
+    out = _git(
+        repo,
+        "log",
+        "-E",
+        f"--grep=^Waypoint: {symbol}$",
+        "--name-only",
+        "--format=",
+        "-n",
+        "20",
+    )
+    return sorted(set(out.split())) if out else []
+
+
 def close_rate(repo: Path, since: str, days: int) -> float | None:
     """Measure how fast a repo closes cards, per day (nemik:W618).
 
