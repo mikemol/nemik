@@ -50,7 +50,7 @@ import argparse
 import json
 import os
 from collections import Counter
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 from mikemol.pathsforward.lock import stamp
@@ -59,7 +59,7 @@ from mikemol.pathsforward.store import UnreadableStateError
 from rdflib import RDF, Graph
 from rdflib.namespace import DCTERMS, PROV
 
-from nemik import tiers
+from nemik import history, tiers
 from nemik.adapter import BASE, NEMIK, OSLC_CM, ledger_graph
 from nemik.blocks import inbound, ref
 from nemik.check import LEDGER, QUEUE, default_root, survey, workstream_files
@@ -90,6 +90,7 @@ HELP = {
     "nemik_warrant_debt": "Open cards claiming an operator ruling in prose with no warrant.",
     "nemik_repo_tier": "The repo's burn-down tier as its place in the order, 0 first.",
     "nemik_cards_arrived_24h": "Cards issued in the last 24 hours, whatever their state now.",
+    "nemik_cards_completed_24h": "Cards committed as done in the last 24 hours (git history).",
 }
 
 CLASS = {
@@ -282,6 +283,47 @@ def arrival_lines(g: Graph, now: datetime) -> list[str]:
     return out
 
 
+def completed_in(repo_dir: Path, since: str) -> int | None:
+    """Count the cards committed as done since a point in time (nemik:W609).
+
+    Args:
+        repo_dir: The repo's working directory.
+        since: A local `YYYY-MM-DDTHH:MM:SS` instant (see nemik.history.resolve).
+
+    Returns:
+        How many cards the committed queue closed between `since` and HEAD, or None when the
+        directory has no committed queue (an export layout has no git history).
+
+    """
+    now: dict[str, object] = history.queue_at(repo_dir, "HEAD")
+    if not now:
+        return None
+    start = history.resolve(repo_dir, since)
+    before: dict[str, object] = history.queue_at(repo_dir, start)
+    return len(history.diff(before, now).closed)
+
+
+def completed_lines(root: Path, now: datetime) -> list[str]:
+    """nemik:W609: per repo, the cards committed as done in the last 24 hours.
+
+    Args:
+        root: The fleet root.
+        now: The instant the window ends at.
+
+    Returns:
+        The gauge's TYPE line and a sample for each repo whose git history is readable.
+
+    """
+    since = (now - timedelta(days=1)).astimezone().strftime("%Y-%m-%dT%H:%M:%S")
+    out = ["# TYPE nemik_cards_completed_24h gauge"]
+    for repo, path in workstream_files(root, QUEUE):
+        top = path.parents[1] if path.parent.name == ".claude" else path.parent
+        done = completed_in(top, since)
+        if done is not None:
+            out.append(f"nemik_cards_completed_24h{label(repo=repo)} {done}")
+    return out
+
+
 def health_lines(g: Graph) -> list[str]:
     """nemik:W317: each repo's health as a gauge: 0 green, 1 amber, 2 red (nemik.health, from the
     thresholds `[health]` declares in rank-weights.toml)."""
@@ -330,6 +372,7 @@ class _Options(argparse.Namespace):
     """The parsed command line, with the one option the filter reads typed."""
 
     family: list[str] | None
+    root: Path
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -407,6 +450,7 @@ def main(argv: list[str] | None = None) -> None:
     out += warrant_lines(merged)
     out += tier_lines(merged)
     out += arrival_lines(merged, now)
+    out += completed_lines(args.root, now)
     out += realizability_lines(args.root)
 
     prompts: Counter[tuple[str, str, str]] = Counter()
