@@ -24,10 +24,6 @@ from rdflib.term import Node
 
 from nemik.adapter import BASE, NEMIK, OSLC_CM
 
-_SYMBOLISH = re.compile(r"^([A-Za-z0-9_.-]+:)?W\d+\b")
-_CLEAN_SYMBOL = re.compile(r"([A-Za-z0-9_.-]+:)?W\d+")
-
-
 CAL_BLOCK = re.compile(
     r"cal:[a-z][a-z0-9-]{0,31}/\S+"
 )  # same form as nemik.calendars.CAL_REF
@@ -260,13 +256,8 @@ def annotate(g: Graph) -> None:
         if landed and len(landed) == len(set(g.objects(node, NEMIK.blockedOn))):
             g.add((node, NEMIK.allBlockersLanded, Literal(True)))
 
-    # A blocked_on entry that starts as a symbol and trails prose ("W8 (both rewrite the lock)")
-    # draws no edge, so it can never be seen to land (nemik:W110). Prose belongs in evidence.
-    for node, _, text in g.triples((None, NEMIK.blockedOn, None)):
-        stripped = str(text).strip()
-        if _SYMBOLISH.match(stripped) and not _CLEAN_SYMBOL.fullmatch(stripped):
-            g.add((node, NEMIK.malformedBlocker, text))
-
+    # nemik:W529: a blocked_on entry that is a symbol with prose run on (nemik:W110) is the
+    # MalformedBlockerShape SPARQL constraint, not a marker.
     for a in operator_asks(g):
         repo, _, sym = a["ref"].partition(":")
         g.add(

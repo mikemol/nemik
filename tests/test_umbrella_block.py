@@ -76,9 +76,9 @@ def test_symbol_with_prose_attached_is_malformed_and_clean_forms_are_not() -> No
     ):
         g.add((w, NEMIK.blockedOn, Literal(text)))
     annotate(g)
-    assert set(g.objects(w, NEMIK.malformedBlocker)) == {
-        Literal("W8 (both rewrite the lock)")
-    }
+    said = [m for _, _, m in findings("malformed-blocker", g, shapes()) if "prose" in m]
+    assert len(said) == 1  # SPARQL constraint, W529
+    assert "W8 (both rewrite the lock)" in said[0]
 
 
 def test_operator_ask_lists_the_work_waiting_behind_it_across_repos() -> None:

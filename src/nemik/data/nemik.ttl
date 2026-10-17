@@ -84,7 +84,6 @@ nemik:outcome a rdf:Property ; rdfs:comment "The ledger line's outcome column." 
 nemik:mechanism a rdf:Property ; rdfs:comment "The ledger line's mechanism column." .
 nemik:umbrellaBlockOn a rdf:Property ; rdfs:comment "Derived: this waypoint waits on another workstream's waypoint that its own repo's open children enable (an umbrella)." .
 nemik:allBlockersLanded a rdf:Property ; rdfs:comment "Derived (nemik:W110): every blocked_on entry of this open waypoint names a waypoint that has landed; it is ready, not blocked." .
-nemik:malformedBlocker a rdf:Property ; rdfs:comment "Derived (nemik:W110): a blocked_on entry that is a symbol with prose attached, so it draws no edge." .
 nemik:vector a rdf:Property ; rdfs:comment "The waypoint's WV:1 priority vector as its queue stores it (mtools:W248); banded by nemik.score (nemik:W131)." .
 nemik:vectorSource a rdf:Property ; rdfs:comment "Who wrote the vector: default, signal or agent (mtools:W248)." .
 nemik:dtstart a rdf:Property ; rdfs:comment "RFC 5545 DTSTART value as the queue stores it (mtools:W300; nemik:W134)." .

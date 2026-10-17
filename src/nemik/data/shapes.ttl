@@ -193,10 +193,19 @@ nemik:LandedBlockerShape a sh:NodeShape ;
                   sh:message "every blocker in blocked_on has landed: this waypoint is ready, not blocked" ] .
 
 # A blocked_on entry that is a symbol with prose run on; it draws no edge, so it never lands.
+# nemik:W529: a SPARQL constraint over the emitted nemik:blockedOn text (the entry, trimmed, begins with a
+# symbol and runs on), so the rule lives here and the adapter plumbs no marker for it.
 nemik:MalformedBlockerShape a sh:NodeShape ;
-    sh:targetSubjectsOf nemik:malformedBlocker ;
-    sh:property [ sh:path nemik:malformedBlocker ; sh:maxCount 0 ; sh:severity sh:Warning ;
-                  sh:message "blocked_on entry is a symbol with prose attached: write W<n> or <repo>:W<n> alone, and put the reason in evidence" ] .
+    sh:targetClass oslc_cm:ChangeRequest ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        sh:message "blocked_on entry {?entry} is a symbol with prose attached: write W<n> or <repo>:W<n> alone, and put the reason in evidence" ;
+        sh:select """
+            SELECT $this ?entry WHERE {
+                $this <https://github.com/mikemol/nemik/ns#blockedOn> ?entry .
+                BIND(REPLACE(STR(?entry), "^[ \t]+|[ \t]+$", "") AS ?trimmed)
+                FILTER(REGEX(?trimmed, "^([A-Za-z0-9_.-]+:)?W[0-9]+[^A-Za-z0-9_]"))
+            }""" ] .
 
 # The operator's intent: each repo installs mikemol-pathsforward and runs it from its own .venv.
 nemik:AdoptionShape a sh:NodeShape ;
