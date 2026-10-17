@@ -3,6 +3,7 @@
 """nemik:W625: the readers keep the SHACL and flow caches in the user's cache directory."""
 
 import json
+import os
 import shutil
 from pathlib import Path
 
@@ -32,11 +33,36 @@ def test_a_survey_of_the_real_root_keeps_its_caches_and_a_later_process_loads_th
     monkeypatch.setenv("NEMIK_ROOT", str(FLEET))
     monkeypatch.setenv("NEMIK_CACHE_DIR", str(tmp_path))
     cachestore.RESTORED[0] = False
-    assert not (tmp_path / cachestore.NAME).exists()
+    assert not (tmp_path / cachestore.user_name()).exists()
     assert sum(1 for _ in survey(FLEET)) > 0
-    assert (tmp_path / cachestore.NAME).exists()
+    assert (tmp_path / cachestore.user_name()).exists()
     cachestore.RESTORED[0] = False
     assert cachestore.restore_user()
+
+
+def test_two_builds_keep_their_own_files(tmp_path: Path) -> None:
+    """A file from another build's stamp stays when this build persists (nemik:W630).
+
+    github-8f saw the relay's pushed build and the dev tree read cold every run: one shared name
+    meant each overwrote the other's cache.
+    """
+    other = tmp_path / "build-caches-0123456789abcdef.pickle"
+    other.write_bytes(b"another build's cache")
+    cachestore.save(tmp_path, cachestore.user_name())
+    assert other.read_bytes() == b"another build's cache"
+    assert (tmp_path / cachestore.user_name()).exists()
+
+
+def test_old_builds_are_pruned_beyond_the_keep_limit(tmp_path: Path) -> None:
+    """Only KEEP per-build files stay, the newest."""
+    for i in range(cachestore.KEEP + 3):
+        old = tmp_path / f"build-caches-{i:016x}.pickle"
+        old.write_bytes(b"x")
+        os.utime(old, (1_000_000 + i, 1_000_000 + i))
+    cachestore.prune(tmp_path)
+    left = sorted(p.name for p in tmp_path.glob("build-caches-*.pickle"))
+    assert len(left) == cachestore.KEEP
+    assert left[0] == f"build-caches-{3:016x}.pickle"
 
 
 def _verdicts(root: Path) -> list[tuple[str, str, str, str]]:

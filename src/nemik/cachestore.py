@@ -27,7 +27,14 @@ from nemik import flow, shaclinc
 
 FORMAT = 1
 NAME = "build-caches.pickle"
-WATCHED = ("data/shapes.ttl", "shaclinc.py", "flow.py", "cachestore.py")
+WATCHED = (
+    "data/shapes.ttl",
+    "shaclinc.py",
+    "shapedepth.py",
+    "flow.py",
+    "cachestore.py",
+)
+KEEP = 4  # per-build files kept in the user directory
 
 
 def stamp() -> str:
@@ -43,7 +50,7 @@ def stamp() -> str:
     return digest.hexdigest()
 
 
-def save(directory: Path) -> int:
+def save(directory: Path, name: str = NAME) -> int:
     """Write both caches under `directory` atomically; returns the bytes written."""
     directory.mkdir(parents=True, exist_ok=True)
     blob = {
@@ -52,16 +59,16 @@ def save(directory: Path) -> int:
         "flow": flow.export_solves(),
     }
     body = pickle.dumps(blob, protocol=pickle.HIGHEST_PROTOCOL)
-    tmp = directory / f".{NAME}.{os.getpid()}"
+    tmp = directory / f".{name}.{os.getpid()}"
     tmp.write_bytes(body)
-    os.replace(tmp, directory / NAME)
+    os.replace(tmp, directory / name)
     return len(body)
 
 
-def load(directory: Path) -> bool:
+def load(directory: Path, name: str = NAME) -> bool:
     """Restore both caches from `directory`; False (a cold start) for anything that is not this code's."""
     try:
-        blob = pickle.loads((directory / NAME).read_bytes())
+        blob = pickle.loads((directory / name).read_bytes())
         if blob["stamp"] != stamp():
             return False
         shaclinc.import_cache(blob["shaclinc"])
@@ -99,6 +106,51 @@ def user_dir() -> Path:
     return Path(base) / USER_NAME
 
 
+def user_name() -> str:
+    """Name this build's file in the user directory, so builds do not evict one another.
+
+    A pushed build and a dev tree have different code bytes, so different stamps; with one shared
+    file name each run of one overwrote the other's cache and both read cold (nemik:W630).
+
+    Returns:
+        build-caches-<first 16 hex of the stamp>.pickle.
+
+    """
+    return f"build-caches-{stamp()[:16]}.pickle"
+
+
+def _age(path: Path) -> float:
+    """Order key for prune.
+
+    Args:
+        path: A per-build cache file.
+
+    Returns:
+        When the file was last written.
+
+    """
+    return path.stat().st_mtime
+
+
+def prune(directory: Path) -> None:
+    """Remove the oldest per-build files beyond KEEP; an unreadable directory is ignored.
+
+    Args:
+        directory: The user cache directory.
+
+    """
+    try:
+        found = sorted(
+            directory.glob("build-caches-*.pickle"),
+            key=_age,
+            reverse=True,
+        )
+        for old in found[KEEP:]:
+            old.unlink()
+    except OSError:
+        return
+
+
 def restore_user() -> bool:
     """Restore the readers' caches once per process (nemik:W625).
 
@@ -112,13 +164,14 @@ def restore_user() -> bool:
     """
     if RESTORED[0]:
         return True
-    RESTORED[0] = load(user_dir())
+    RESTORED[0] = load(user_dir(), user_name())
     return RESTORED[0]
 
 
 def persist_user() -> None:
     """Keep this process's caches for the next reader; an unwritable directory is ignored."""
     try:
-        save(user_dir())
+        save(user_dir(), user_name())
     except OSError:
         return
+    prune(user_dir())
