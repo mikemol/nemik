@@ -19,6 +19,7 @@ from __future__ import annotations
 import hashlib
 import os
 import pickle
+import time
 from importlib.metadata import PackageNotFoundError, version
 from importlib.resources import files
 from pathlib import Path
@@ -35,6 +36,7 @@ WATCHED = (
     "cachestore.py",
 )
 KEEP = 4  # per-build files kept in the user directory
+STRAY = 3600  # seconds before a temp file a killed run left behind is swept
 
 
 def stamp() -> str:
@@ -145,10 +147,18 @@ def prune(directory: Path) -> None:
             key=_age,
             reverse=True,
         )
-        for old in found[KEEP:]:
-            old.unlink()
+        strays = [
+            p
+            for p in directory.glob(".build-caches-*.pickle.*")
+            if time.time() - _age(p) > STRAY
+        ]
     except OSError:
         return
+    for old in [*found[KEEP:], *strays]:
+        try:
+            old.unlink()
+        except OSError:
+            continue
 
 
 def restore_user() -> bool:
