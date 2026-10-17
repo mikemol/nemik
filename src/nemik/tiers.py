@@ -44,6 +44,54 @@ def load(text: str | None = None) -> dict[str, str]:
     return found
 
 
+def of_cite(cite: str, declared: dict[str, str]) -> str:
+    """Name the tier of the repo a citation points into.
+
+    Args:
+        cite: A `<repo>:W<n>` citation.
+        declared: The tiers by repo, from load().
+
+    Returns:
+        The repo's tier, or UNLISTED.
+
+    """
+    return declared.get(cite.partition(":")[0], UNLISTED)
+
+
+def of_row(row: dict[str, object], declared: dict[str, str]) -> str:
+    """Name the tier of the repo an ask row's `ref` points into.
+
+    Args:
+        row: A row carrying a `ref` citation.
+        declared: The tiers by repo, from load().
+
+    Returns:
+        The repo's tier, or UNLISTED.
+
+    """
+    return of_cite(str(row["ref"]), declared)
+
+
+def order(
+    rows: list[dict[str, object]], category: str, declared: dict[str, str]
+) -> list[int]:
+    """Pick a category's rows and place them by tier, most urgent first.
+
+    Args:
+        rows: Ask rows carrying a `category` and a `ref` citation.
+        category: The category to keep.
+        declared: The tiers by repo, from load().
+
+    Returns:
+        The indexes of the kept rows, stably sorted by their repo's tier, so their given order holds
+        inside a tier.
+
+    """
+    kept = [i for i, row in enumerate(rows) if row["category"] == category]
+    keys = {i: rank(of_row(rows[i], declared)) for i in kept}
+    return sorted(kept, key=keys.__getitem__)
+
+
 def rank(tier: str) -> int:
     """Place a tier in the burn-down order.
 

@@ -15,6 +15,7 @@ from pathlib import Path
 
 from rdflib import Graph
 
+from nemik import tiers
 from nemik.adapter import ledger_graph
 from nemik.blocks import CATEGORIES, inbound, operator_asks
 from nemik.check import LEDGER, default_root, survey, workstream_files
@@ -103,7 +104,9 @@ def operator_main(argv: list[str] | None = None, g: Graph | None = None) -> None
         print(json.dumps(asks, indent=2))
         return
     for cat in CATEGORIES:
-        rows = [a for a in asks if a["category"] == cat]
+        declared = tiers.load()
+        # nemik:W600: grouped by the repo's burn-down tier, heaviest first inside a tier.
+        rows = [asks[i] for i in tiers.order(asks, cat, declared)]
         # nemik:W458: an act ask with nothing to run is the owner's debt, not the operator's.
         label = {
             "no-command": "no command yet: the owner owes a tool",
