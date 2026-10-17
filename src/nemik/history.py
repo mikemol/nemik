@@ -24,6 +24,7 @@ from pathlib import Path
 from nemik.check import LEDGER, QUEUE, default_root, workstream_files
 
 QUEUE_PATH = f".claude/{QUEUE}"
+MIN_LANDINGS = 3  # nemik:W616: fewer cited commits than this teach no land interval
 _DATE = re.compile(r"\d{4}-\d{2}-\d{2}([T ]\d{2}:\d{2}(:\d{2})?)?")
 _CROSS = re.compile(r"([A-Za-z0-9][A-Za-z0-9._-]*):W[1-9][0-9]*")
 
@@ -134,6 +135,46 @@ def queue_at(repo: Path, rev: str | None) -> dict:
         return {}
     text = _git(repo, "show", f"{rev}:{QUEUE_PATH}")
     return json.loads(text) if text else {}
+
+
+def citing_epochs(repo: Path, symbol: str) -> list[int] | None:
+    """List when commits cited a card, newest first (nemik:W616).
+
+    Args:
+        repo: The repo's working directory.
+        symbol: The card's symbol, as a `Waypoint: W<n>` trailer names it.
+
+    Returns:
+        The commit times in epoch seconds (the newest 200), or None without readable git history.
+
+    """
+    out = _git(
+        repo, "log", "-E", f"--grep=^Waypoint: {symbol}$", "--format=%ct", "-n", "200"
+    )
+    if out is None:
+        return None
+    return [int(word) for word in out.split() if word.isdigit()]
+
+
+def land_interval(repo: Path) -> int | None:
+    """Learn how often the repo lands cited work, in seconds (nemik:W616).
+
+    Args:
+        repo: The repo's working directory.
+
+    Returns:
+        The median gap between its newest 50 commits that carry a Waypoint trailer, or None when
+        the history is unreadable or holds fewer than three such commits.
+
+    """
+    out = _git(repo, "log", "-E", "--grep=^Waypoint: ", "--format=%ct", "-n", "50")
+    if out is None:
+        return None
+    times = sorted(int(word) for word in out.split() if word.isdigit())
+    if len(times) < MIN_LANDINGS:
+        return None
+    gaps = [times[i + 1] - times[i] for i in range(len(times) - 1)]
+    return int(statistics.median(gaps))
 
 
 def reopened_since(repo: Path, since: str) -> int | None:

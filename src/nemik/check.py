@@ -17,6 +17,7 @@ import json
 import os
 import subprocess
 import sys
+import time
 from collections.abc import Iterator
 from importlib.resources import files
 from pathlib import Path
@@ -87,8 +88,6 @@ def survey(
     nemik:W399: when `phases` is given, the CPU seconds of each phase (parse, annotate, shacl,
     fleet_checks) are written into it, so a caller can see which part of a rebuild dominates.
     """
-    import time
-
     mark = [time.process_time()]
 
     def lap(name: str) -> None:
@@ -234,6 +233,14 @@ def survey(
     idle_said = idle_findings(root, merged, [repo for repo, _ in queues])
     for irepo, said in idle_said.items():
         by_repo.setdefault(irepo, []).append(("Warning", "--", said))
+    # nemik:W616, W617: a working card that looks stalled, or whose progress is invisible. Imported
+    # here because stalled reads history and history reads check: a module-level import is a cycle.
+    from nemik import stalled
+
+    for srepo, rows in stalled.findings(root, merged, int(time.time())).items():
+        by_repo.setdefault(srepo, []).extend(
+            ("Warning", sym, said) for sym, said in rows
+        )
     # nemik:W608: the warrant debt may only fall: a repo above its ceiling is told to warrant.
     debts = warrantdebt.findings(merged, warrantdebt.baseline())
     for drepo, dtext in debts.items():

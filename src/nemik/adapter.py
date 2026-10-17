@@ -257,6 +257,9 @@ def _queue_graph(repo: str, state_path: Path, known: frozenset[str]) -> Graph:
             g.add((node, NEMIK.ticksBlocked, Literal(tb)))
         if issued := model.text(w, "issued_at"):
             g.add((node, DCTERMS.created, _instant(issued)))
+        # nemik:W616: when the card was last worked, for the stalled and progress-invisible checks
+        if worked := model.text(w, "last_worked"):
+            g.add((node, NEMIK.lastWorked, _instant(worked)))
         # mtools 2e21902: derived from the tick lock at mint time, never by the agent.
         if during := model.text(w, "minted_during"):
             g.add((node, NEMIK.mintedDuring, Literal(during)))
