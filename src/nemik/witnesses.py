@@ -24,6 +24,8 @@ import sys
 from datetime import UTC, datetime
 from pathlib import Path
 
+from mikemol.pathsforward.opa_eval import OpaUnavailableError, resolve
+
 # input.<observer>["<key>"], the only fact shape a witness may reference.
 # The key is a Rego string literal, so it may carry escaped quotes (a promql label matcher).
 _REF = re.compile(r'input\.(\w+)\["((?:[^"\\]|\\.)*)"\]')
@@ -180,9 +182,15 @@ def evaluate(query: str, doc: dict, missing: list[str]) -> str:
     """'true' | 'false' | 'undefined'."""
     if missing:
         return "undefined"
+    # nemik:W535: the one pinned-opa resolution, shared with pathsforward; NEMIK_OPA names it.
+    named = {"OPA_BIN": os.environ.get("NEMIK_OPA") or os.environ.get("OPA_BIN", "")}
+    try:
+        opa = resolve({k: v for k, v in named.items() if v})
+    except OpaUnavailableError:
+        return "undefined"
     out = subprocess.run(
         [
-            os.environ.get("NEMIK_OPA", "opa"),
+            opa,
             "eval",
             "--format",
             "json",
