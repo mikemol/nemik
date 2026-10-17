@@ -440,7 +440,9 @@ def test_side_panel_sections_fold_and_the_choice_survives_a_reload(server) -> No
         )
         page.click("#sec-goals > summary")
         page.wait_for_function(
-            "() => !document.getElementById('goals').checkVisibility()", timeout=60000
+            "() => !document.getElementById('goals').checkVisibility()"
+            " && (localStorage.getItem('nemik.sections') || '').includes('\"sec-goals\":false')",
+            timeout=60000,
         )
         hidden = page.evaluate(
             "() => [document.getElementById('sec-goals').open,"
