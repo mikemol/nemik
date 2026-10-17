@@ -25,7 +25,7 @@ from pathlib import Path
 from mikemol.pathsforward.store import UnreadableStateError
 from rdflib import Graph, Literal
 
-from nemik import warrantdebt
+from nemik import cachestore, warrantdebt
 from nemik.adapter import BASE, NEMIK, OSLC_CM, bind, queue_graph, workstream_uri
 from nemik.adoption import adoption
 from nemik.blocks import annotate, ref
@@ -134,7 +134,15 @@ def survey(
     from nemik.shaclinc import findings as shacl_findings
 
     # nemik:W400: a rebuild in the same process re-validates only the nodes its change touches.
+    # nemik:W625: and a fresh process starts from the last reader's caches (142 s CPU cold, 11 s
+    # warm), kept in the user's cache directory; only the real fleet root is kept, so a test's
+    # temporary root does not grow it.
+    kept = root.resolve() == default_root().resolve()
+    if kept:
+        cachestore.restore_user()
     results = shacl_findings(str(root.resolve()), merged, shapes())
+    if kept:
+        cachestore.persist_user()
     lap("shacl")
     by_repo: dict[str, list[Finding]] = {repo: [] for repo in graphs}
     for focus, sev, msg in sorted(results):

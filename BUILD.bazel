@@ -12,7 +12,9 @@ exports_files(["pyproject.toml"])
         srcs = ["tests/venv_pytest.sh"],
         # nemik:W339: the browser suite is many page loads and grows with each view check; at host
         # load ~100 it crossed medium's 300 s (284 s alone, then a timeout in the gate). The rest stay medium.
-        size = "large" if src in ("tests/test_layout.py", "tests/test_codon_census.py") else "medium",
+        # nemik:W625: the SHACL cache tests are full surveys (a cold one is tens of seconds); the warm-equals-cold
+        # property runs five of them beside five twins.
+        size = "large" if src in ("tests/test_layout.py", "tests/test_codon_census.py", "tests/test_warm_equals_cold.py", "tests/test_shaclinc.py", "tests/test_cache_user.py") else "medium",
         args = ["$(rootpath " + src + ")", "-c", "$(rootpath pyproject.toml)"],
         data = [src, "tests/installed.py", "tests/webpage.py",".claude/settings.json", "//tests/fixtures:fleet", "pyproject.toml", "ARCHITECTURE.md", "skills/nemik/SKILL.md", "docs/positioning.md", "deploy/deployment.yaml", "src/nemik/data/workflows.toml", "tools/nemik_client.py", "BUILD.bazel", "Containerfile"] + glob(["tests/corpus/**"]) + [ "src/nemik/data/shapes.ttl", "src/nemik/data/nemik.ttl", "src/nemik/data/run-row.schema.json", ":.venv", "@opa//file", "@use_of_colour_rego//file", "@chromium//:files", "@chromium//:chrome-headless-shell"]
             # nemik:W445: the JRE (52 MB) and MPXJ's jars go to the one test that reads with them

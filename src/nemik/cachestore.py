@@ -21,12 +21,9 @@ import os
 import pickle
 from importlib.metadata import PackageNotFoundError, version
 from importlib.resources import files
-from typing import TYPE_CHECKING
+from pathlib import Path
 
 from nemik import flow, shaclinc
-
-if TYPE_CHECKING:
-    from pathlib import Path
 
 FORMAT = 1
 NAME = "build-caches.pickle"
@@ -82,3 +79,46 @@ def load(directory: Path) -> bool:
     ):
         return False
     return True
+
+
+RESTORED = [False]
+USER_NAME = "nemik"
+
+
+def user_dir() -> Path:
+    """Name the per-user directory the readers keep the caches in (nemik:W625).
+
+    Returns:
+        $NEMIK_CACHE_DIR, else $XDG_CACHE_HOME/nemik, else ~/.cache/nemik.
+
+    """
+    named = os.environ.get("NEMIK_CACHE_DIR")
+    if named:
+        return Path(named)
+    base = os.environ.get("XDG_CACHE_HOME") or str(Path.home() / ".cache")
+    return Path(base) / USER_NAME
+
+
+def restore_user() -> bool:
+    """Restore the readers' caches once per process (nemik:W625).
+
+    A cold fleet survey cost 142 s CPU, 133 s of it SHACL; with the caches of the last run loaded it
+    cost 11 s. Every reader (nemik-check, -rank, -stackable, -metrics, the hooks) starts a fresh
+    process, so without this each paid the cold figure.
+
+    Returns:
+        True when a cache from this code was loaded; False for a cold start.
+
+    """
+    if RESTORED[0]:
+        return True
+    RESTORED[0] = load(user_dir())
+    return RESTORED[0]
+
+
+def persist_user() -> None:
+    """Keep this process's caches for the next reader; an unwritable directory is ignored."""
+    try:
+        save(user_dir())
+    except OSError:
+        return

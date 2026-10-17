@@ -53,6 +53,38 @@ def _results(data: Graph, shapes: Graph) -> dict[Node, list[Result]]:
     return out
 
 
+HOPS = 2  # nemik:W625: the deepest chain a shape reads, UmbrellaBlockShape (waiter, umbrella, kids)
+
+
+def _neighbourhood(
+    now: frozenset[tuple[Node, Node, Node]], touched: set[Node], subjects: set[Node]
+) -> set[Node]:
+    """Grow the touched nodes by the cards that can read them, in both directions, HOPS deep.
+
+    A shape judges a card from its neighbours' state, and the neighbours can sit either side of an
+    edge: ReadyUmbrellaShape reads the kids that enable the umbrella, UmbrellaBlockShape reads the
+    umbrella's kids through the waiter's edge. A change to a kid must re-judge both.
+
+    Args:
+        now: The graph's triples.
+        touched: The nodes a change touched.
+        subjects: The nodes that are cards (a vocabulary term is only ever an object).
+
+    Returns:
+        The touched nodes and everything within HOPS undirected edges of them.
+
+    """
+    adjacent: dict[Node, set[Node]] = {}
+    for s, _, o in now:
+        if o in subjects:
+            adjacent.setdefault(s, set()).add(o)
+            adjacent.setdefault(o, set()).add(s)
+    focus = set(touched)
+    for _ in range(HOPS):
+        focus |= {n for f in focus for n in adjacent.get(f, ())}
+    return focus
+
+
 def findings(key: str, data: Graph, shapes: Graph) -> list[tuple[Node, str, str]]:
     """(focus, severity IRI, message) for every result, re-validating only what changed since `key`'s
     last run (everything on the first)."""
@@ -69,8 +101,7 @@ def findings(key: str, data: Graph, shapes: Graph) -> list[tuple[Node, str, str]
         touched = {s for s, _, _ in changed} | {
             o for _, _, o in changed if o in subjects
         }
-        back = {s for s, _, o in now if o in touched}
-        focus = touched | back
+        focus = _neighbourhood(now, touched, subjects)
         for n in focus:
             by_focus.pop(n, None)
         live = focus & subjects
@@ -78,7 +109,7 @@ def findings(key: str, data: Graph, shapes: Graph) -> list[tuple[Node, str, str]
             # Not pyshacl's focus_nodes: it applies every shape to a named node whatever the shape
             # targets. The focus nodes' own triples and their neighbours' make a subgraph validated
             # whole, so targets select exactly as in a full run; only the focus nodes' results are kept.
-            near = live | {o for s, _, o in now if s in live and o in subjects}
+            near = _neighbourhood(now, live, subjects)
             sub = Graph()
             for t in now:
                 if t[0] in near:
