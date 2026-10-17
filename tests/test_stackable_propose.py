@@ -96,10 +96,39 @@ def test_the_rows_carry_symbol_manifest_a_size_guess_and_the_wide_flag(
             "manifest": ["docs/x.md", "src/nemik/a.py", "tests/test_a.py"],
             "size": "small",
             "wide": False,
+            "verified": False,
+            "mentioned": [],
         }
     ]
     assert guess_size(WIDE_FILES) == "medium"
     assert guess_size(WIDE_FILES + 1) == "large"
+
+
+def test_a_file_the_step_only_mentions_is_listed_apart_and_never_proposed(
+    tmp_path: Path,
+) -> None:
+    """'see docs/x.md then edit src/nemik/b.py' proposes b.py and lists x.md as mentioned only."""
+    residue: list[str] = []
+    card: dict[str, object] = {
+        "symbol": "W4",
+        "title": "t",
+        "status": "ready",
+        "next_bounded_step": "see docs/x.md then edit src/nemik/b.py",
+    }
+    state: dict[str, object] = {
+        "version": 1,
+        "project_root": "/r",
+        "counter": 4,
+        "residue": residue,
+        "waypoints": [card],
+    }
+    path = tmp_path / "r4.json"
+    path.write_text(json.dumps(state), encoding="utf-8")
+    g = queue_graph("r", path)
+    ranked: list[dict[str, object]] = [{"symbol": "W4"}]
+    [line] = propose(g, "r", ranked, {}, KNOWN)
+    assert "UNVERIFIED --manifest src/nemik/b.py" in line
+    assert "mentioned only, not proposed: docs/x.md" in line
 
 
 def test_propose_skips_a_card_that_already_has_a_manifest(tmp_path: Path) -> None:

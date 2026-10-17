@@ -73,7 +73,7 @@ def draft(
 
     """
     node = waypoint_uri(repo, symbol)
-    named = {str(path) for path in g.objects(node, NEMIK.namesFile)}
+    named = {str(path) for path in g.objects(node, NEMIK.editsFile)}
     tags = {str(tag) for tag in g.objects(node, NEMIK.touches)}
     marked = [tag for tag in tags if tag.startswith("file:")]
     declared = {tag.removeprefix("file:").removesuffix("!w") for tag in marked}
@@ -83,6 +83,26 @@ def draft(
     found = {path for path in every if path is not None}
     files = sorted(path for path in found if not path.startswith(".claude/"))
     return files, sources
+
+
+def mentioned(g: Graph, repo: str, symbol: str, known: set[str]) -> list[str]:
+    """List the tracked files a card's next step names without saying it changes them.
+
+    Args:
+        g: The merged queue graph.
+        repo: The card's repo.
+        symbol: The card's symbol.
+        known: The files git tracks.
+
+    Returns:
+        The files the step refers to or reads, which a draft does not propose, sorted.
+
+    """
+    node = waypoint_uri(repo, symbol)
+    named = {str(path) for path in g.objects(node, NEMIK.namesFile)}
+    edits = {str(path) for path in g.objects(node, NEMIK.editsFile)}
+    every = {resolve(path, known) for path in named - edits}
+    return sorted(path for path in every if path is not None)
 
 
 def propose(
@@ -117,9 +137,12 @@ def propose(
             note = ""
             if wide:
                 note = f"WIDE, {len(files)} files from past commits only: narrow it; "
+            reads = mentioned(g, repo, symbol, known)
+            only = f"; mentioned only, not proposed: {' '.join(reads)}" if reads else ""
             out.append(
-                f"{symbol}: --manifest {' '.join(files)}  ({note}from {', '.join(sources)};"
-                " add --size small|medium|large)"
+                f"{symbol}: UNVERIFIED --manifest {' '.join(files)}  ({note}from"
+                f" {', '.join(sources)}{only}; read the card and the code, add --size"
+                " small|medium|large)"
             )
         else:
             out.append(f"{symbol}: nothing to propose: read its code, or atomize it")
@@ -177,6 +200,8 @@ def proposal_rows(
                     "manifest": files,
                     "size": guess_size(len(files)),
                     "wide": wide,
+                    "verified": False,
+                    "mentioned": mentioned(g, repo, symbol, known),
                 }
             )
     return rows

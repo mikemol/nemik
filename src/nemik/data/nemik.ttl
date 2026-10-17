@@ -21,6 +21,7 @@ nemik:strayWord a rdf:Property ; rdfs:comment "A word in the waypoint's next ste
 nemik:plannedPath a rdf:Property ; rdfs:comment "An exact repo-relative file the waypoint plans to create or edit, from its manifest (nemik:W612)." .
 nemik:sizeClass a rdf:Property ; rdfs:comment "The waypoint's declared size class: small, medium or large (nemik:W612)." .
 nemik:lastWorked a rdf:Property ; rdfs:comment "When the waypoint was last worked, from its last_worked stamp (nemik:W616)." .
+nemik:editsFile a rdf:Property ; rdfs:comment "A repo file the waypoint's next step says it changes: an editing verb stands before it in the same clause (nemik:W627)." .
 nemik:hasNextStep a rdf:Property ; rdfs:comment "True when the waypoint still states a next bounded step (nemik:W488)." .
 nemik:namesFile a rdf:Property ; rdfs:comment "A repo file path the waypoint's next step names, as written (nemik:W544)." .
 # nemik:W529 (standards audit 2026-10-15): terms the code emitted that nemik.ttl never declared.

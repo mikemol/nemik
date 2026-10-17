@@ -17,7 +17,7 @@ from mikemol.pathsforward import ledger, model, store
 from rdflib import RDF, Graph, Literal, Namespace, URIRef
 from rdflib.namespace import DCTERMS, PROV, RDFS, XSD
 
-from nemik import warrants
+from nemik import editverbs, warrants
 
 
 class _Terms(Namespace):
@@ -220,6 +220,9 @@ def _queue_graph(repo: str, state_path: Path, known: frozenset[str]) -> Graph:
         )
         for path in sorted(set(named)):
             g.add((node, NEMIK.namesFile, Literal(path)))
+        # nemik:W627: and the ones it says it CHANGES, which a drafted manifest may propose
+        for path in editverbs.edited_paths(model.text(w, "next_bounded_step")):
+            g.add((node, NEMIK.editsFile, Literal(path)))
         # nemik:W488: whether the card still states a next step; an umbrella with none and every
         # child done is realized by construction (UmbrellaCompleteShape).
         if model.text(w, "next_bounded_step").strip():
