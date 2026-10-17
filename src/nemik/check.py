@@ -29,6 +29,7 @@ from nemik import cachestore, warrantdebt
 from nemik.adapter import BASE, NEMIK, OSLC_CM, bind, queue_graph, workstream_uri
 from nemik.adoption import adoption
 from nemik.blocks import annotate, ref
+from nemik.digest import collapse
 from nemik.idle import findings as idle_findings
 
 QUEUE, LEDGER = "paths-forward.json", "paths-forward.ledger"
@@ -477,6 +478,13 @@ def main(argv: list[str] | None = None) -> None:
         help="with --letters --fold: carry out the plan: mint each live letter's waypoint through "
         "mikemol-paths-forward and move each stale letter into its inbox's archive/ (nemik:W301)",
     )
+    ap.add_argument(
+        "--digest",
+        action="store_true",
+        help="print each Info message several cards share once, with the count (the "
+        "per-prompt hook digest, nemik:W641); Warnings and Violations stay in full. "
+        "Without it, one row per card",
+    )
     args = ap.parse_args(argv)
     if args.realizability:
         sys.exit(_realizability(args.root))
@@ -510,6 +518,7 @@ def main(argv: list[str] | None = None) -> None:
     for line in provenance(args.root):
         print(line)
     merged, failed = bind(Graph()), 0
+    digest: bool = args.digest
     for repo, g, findings in survey(args.root):
         if g is None:
             print(f"UNREADABLE {repo}: {findings[0][2]}")
@@ -517,7 +526,7 @@ def main(argv: list[str] | None = None) -> None:
             continue
         violates = any(sev == "Violation" for sev, _, _ in findings)
         print(f"{'VIOLATES  ' if violates else 'OK        '}{repo}")
-        for sev, focus, msg in findings:
+        for sev, focus, msg in collapse(findings) if digest else findings:
             print(f"  {sev:9} {focus:6} {msg}")
         failed += violates
         merged += g
