@@ -8,7 +8,7 @@ from pathlib import Path
 from rdflib import Graph
 
 from nemik.adapter import queue_graph
-from nemik.stackable import draft, propose, resolve
+from nemik.stackable import draft, guess_size, proposal_rows, propose, resolve
 
 WIDE_FILES = 8
 KNOWN = {
@@ -80,6 +80,26 @@ def test_a_draft_from_past_commits_alone_is_flagged_when_wide(tmp_path: Path) ->
     assert "WIDE" in lines[0]
     few = propose(g, "r", ranked, {"W3": ["src/nemik/m0.py"]}, many)
     assert "WIDE" not in few[0]
+
+
+def test_the_rows_carry_symbol_manifest_a_size_guess_and_the_wide_flag(
+    tmp_path: Path,
+) -> None:
+    """The data form luthen applies in one reviewed call: W1 drafts three files, W3 none."""
+    g = _queue(tmp_path)
+    ranked: list[dict[str, object]] = [{"symbol": s} for s in ("W1", "W3")]
+    cited = {"W1": ["tests/test_a.py"]}
+    rows = proposal_rows(g, "r", ranked, cited, KNOWN)
+    assert rows == [
+        {
+            "symbol": "W1",
+            "manifest": ["docs/x.md", "src/nemik/a.py", "tests/test_a.py"],
+            "size": "small",
+            "wide": False,
+        }
+    ]
+    assert guess_size(WIDE_FILES) == "medium"
+    assert guess_size(WIDE_FILES + 1) == "large"
 
 
 def test_propose_skips_a_card_that_already_has_a_manifest(tmp_path: Path) -> None:

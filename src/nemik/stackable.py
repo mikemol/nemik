@@ -16,6 +16,8 @@ from rdflib import Graph
 
 from nemik.adapter import NEMIK, waypoint_uri
 
+SMALL_FILES = 3  # a manifest this short is probably a small change
+MEDIUM_FILES = 8  # and this short a medium one
 WIDE = 6  # a draft from past commits alone longer than this is probably wider than the card
 
 
@@ -122,6 +124,62 @@ def propose(
         else:
             out.append(f"{symbol}: nothing to propose: read its code, or atomize it")
     return out
+
+
+def guess_size(files: int) -> str:
+    """Guess a size class from how many files a manifest names (a draft for review).
+
+    Args:
+        files: The number of files.
+
+    Returns:
+        small up to three files, medium up to eight, otherwise large.
+
+    """
+    if files <= SMALL_FILES:
+        return "small"
+    return "medium" if files <= MEDIUM_FILES else "large"
+
+
+def proposal_rows(
+    g: Graph,
+    repo: str,
+    ranked: list[dict[str, object]],
+    cited: dict[str, list[str]],
+    known: set[str],
+) -> list[dict[str, object]]:
+    """List the drafted manifests as data a writer can apply after review.
+
+    Args:
+        g: The merged queue graph.
+        repo: The repo's name.
+        ranked: The repo's ready cards in rank order.
+        cited: The files each card's citing commits touched, by symbol.
+        known: The files git tracks, which every proposed path must be.
+
+    Returns:
+        One {symbol, manifest, size, wide} row per undeclared card that has a draft; `size` is a
+        guess from the file count, `wide` is true for a draft from past commits alone that names
+        more than WIDE files (narrow it before applying).
+
+    """
+    rows: list[dict[str, object]] = []
+    for row in ranked:
+        symbol = str(row["symbol"])
+        if manifest(g, repo, symbol):
+            continue
+        files, sources = draft(g, repo, symbol, cited.get(symbol, []), known)
+        if files:
+            wide = sources == ["commits"] and len(files) > WIDE
+            rows.append(
+                {
+                    "symbol": symbol,
+                    "manifest": files,
+                    "size": guess_size(len(files)),
+                    "wide": wide,
+                }
+            )
+    return rows
 
 
 def report(

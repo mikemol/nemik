@@ -10,6 +10,7 @@ already staged in REPO. A card with no manifest is counted, never stacked.
 """
 
 import argparse
+import json
 import sys
 from pathlib import Path
 
@@ -18,7 +19,7 @@ from rdflib import Graph
 from nemik import history
 from nemik.check import default_root, survey
 from nemik.rank import load_weights, rank
-from nemik.stackable import generated_files, propose, report
+from nemik.stackable import generated_files, proposal_rows, propose, report
 
 
 def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
@@ -39,10 +40,16 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         action="store_true",
         help="draft a manifest for each ready card without one, for you to confirm",
     )
+    ap.add_argument(
+        "--json",
+        action="store_true",
+        help="with --propose: [{symbol, manifest, size, wide}] for a writer to apply",
+    )
     args = ap.parse_args(argv)
     root: Path = args.root
     name: str = args.repo
     proposing: bool = args.propose
+    as_json: bool = args.json
     if g is None:
         g = Graph()
         for _, queue, _ in survey(root):
@@ -55,6 +62,10 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
             for row in rows
         }
         known = history.tracked_files(root / name)
+        if as_json:
+            drafts = proposal_rows(g, name, rows, cited, known)
+            sys.stdout.write(json.dumps(drafts, indent=1) + "\n")
+            return
         sys.stdout.write("\n".join(propose(g, name, rows, cited, known)) + "\n")
         return
     staged = history.staged_paths(root / name)
