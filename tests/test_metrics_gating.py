@@ -13,6 +13,8 @@ HISTORY = (
     "nemik_cards_completed_24h",
     "nemik_commits_24h",
     "nemik_cards_reopened_24h",
+    "nemik_umbrella_forecast_days",
+    "nemik_unforecastable_cards",
 )
 
 

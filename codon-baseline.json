@@ -83,6 +83,10 @@
   "as_written": "no module named 'rdflib'",
   "stripped": "no module named 'rdflib'"
  },
+ "forecast": {
+  "as_written": "no module named 'rdflib'",
+  "stripped": "no module named 'rdflib'"
+ },
  "warrantdebt": {
   "as_written": "no module named 'tomllib'",
   "stripped": "no module named 'tomllib'"

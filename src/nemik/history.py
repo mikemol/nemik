@@ -137,6 +137,25 @@ def queue_at(repo: Path, rev: str | None) -> dict:
     return json.loads(text) if text else {}
 
 
+def close_rate(repo: Path, since: str, days: int) -> float | None:
+    """Measure how fast a repo closes cards, per day (nemik:W618).
+
+    Args:
+        repo: The repo's working directory.
+        since: A local `YYYY-MM-DDTHH:MM:SS` instant, `days` days back.
+        days: The length of the window in days.
+
+    Returns:
+        Cards the committed queue closed since `since`, per day, or None without a committed queue.
+
+    """
+    head: dict[str, object] = queue_at(repo, "HEAD")
+    if not head:
+        return None
+    start: dict[str, object] = queue_at(repo, resolve(repo, since))
+    return len(diff(start, head).closed) / days
+
+
 def citing_epochs(repo: Path, symbol: str) -> list[int] | None:
     """List when commits cited a card, newest first (nemik:W616).
 

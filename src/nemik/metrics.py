@@ -59,7 +59,7 @@ from mikemol.pathsforward.store import UnreadableStateError
 from rdflib import RDF, Graph
 from rdflib.namespace import DCTERMS, PROV
 
-from nemik import history, tiers
+from nemik import forecast, history, tiers
 from nemik.adapter import BASE, NEMIK, OSLC_CM, ledger_graph
 from nemik.blocks import inbound, ref
 from nemik.check import LEDGER, QUEUE, default_root, survey, workstream_files
@@ -92,6 +92,8 @@ HELP = {
     "nemik_cards_arrived_24h": "Cards issued in the last 24 hours, whatever their state now.",
     "nemik_cards_completed_24h": "Cards committed as done in the last 24 hours (git history).",
     "nemik_commits_24h": "Commits on HEAD in the last 24 hours (a push is a deploy).",
+    "nemik_umbrella_forecast_days": "Days the slowest umbrella needs at the recent close rate.",
+    "nemik_unforecastable_cards": "Working cards with no children, so no forecast can be made.",
     "nemik_cards_reopened_24h": "Cards that went from done back to open in the last 24 hours.",
 }
 
@@ -371,7 +373,9 @@ def reopened_lines(root: Path, now: datetime) -> list[str]:
     return out
 
 
-def history_lines(root: Path, now: datetime, wanted: list[str]) -> list[str]:
+def history_lines(
+    root: Path, merged: Graph, now: datetime, wanted: list[str]
+) -> list[str]:
     """Compute the git-history families, only the ones named.
 
     A plain run once did a git walk per repo for three families and ran past luthen's relay bound
@@ -379,6 +383,7 @@ def history_lines(root: Path, now: datetime, wanted: list[str]) -> list[str]:
 
     Args:
         root: The fleet root.
+        merged: The merged queue graph (the forecast reads the cards' edges).
         now: The instant the windows end at.
         wanted: The family names the caller asked for.
 
@@ -387,6 +392,8 @@ def history_lines(root: Path, now: datetime, wanted: list[str]) -> list[str]:
 
     """
     out: list[str] = []
+    if {"nemik_umbrella_forecast_days", "nemik_unforecastable_cards"} & set(wanted):
+        out += forecast.lines(root, merged, now)
     if "nemik_cards_completed_24h" in wanted:
         out += completed_lines(root, now)
     if "nemik_commits_24h" in wanted:
@@ -522,7 +529,7 @@ def main(argv: list[str] | None = None) -> None:
     out += warrant_lines(merged)
     out += tier_lines(merged)
     out += arrival_lines(merged, now)
-    out += history_lines(args.root, now, args.family or [])
+    out += history_lines(args.root, merged, now, args.family or [])
     out += realizability_lines(args.root)
 
     prompts: Counter[tuple[str, str, str]] = Counter()
