@@ -112,6 +112,10 @@ venv_from_hub(
         "mikemol-pycheck": "mikemol.hooks.pycheck_cli:main",
         # nemik:W537: re-vendor the mtools wheels at one commit (replaces tools/revendor-mtools.sh).
         "mikemol-repin": "mikemol.hooks.repin_cli:main",
+        # nemik:W631: the Codon census rules as an AST scan, a one-file check before a gate;
+        # mikemol-scratch builds the next card beside one in flight (the fleet loop prompt).
+        "mikemol-websubset": "mikemol.hooks.websubset_cli:main",
+        "mikemol-scratch": "mikemol.hooks.scratch_cli:main",
         # nemik:W378: beside the interpreter, where mikemol-commit looks for its commit lock.
         "mikemol-membudget": "mikemol.fence.membudget_cli:main",
         "nemik-days": "nemik.calendars:days_main",
