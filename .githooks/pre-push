@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
+#
+# nemik:W621 (parity with mtools' .githooks/pre-push). nemik's push is a deploy (Flux ships main), so
+# the hook that stands in front of it comes from the same package as the rest: `mikemol-githook-pre-push`
+# blocks a push while a rebase, merge or cherry-pick is in flight and runs `.githooks/pre-push.local`
+# when one exists.
+#
+# A FAILING PRE-PUSH ABANDONS THE PUSH, NEVER THE COMMIT: the commit survives locally and the next
+# commit's push carries both. An absent launcher REFUSES, as every hook here does: a stub that skips when
+# its checker is missing is armed while refusing nothing. Recovery if pushes lock out:
+# `git checkout HEAD -- .githooks/pre-push`, or remove the file; commits are never affected.
+set -uo pipefail
+
+repo="$(git rev-parse --show-toplevel)"
+# HOST STATE: a push made from inside an isolated commit's post-commit has a snapshot for `$repo`, and
+# the launcher lives in the real checkout MIKEMOL_REAL_ROOT names.
+launcher="${MIKEMOL_REAL_ROOT:-$repo}/.venv/bin/mikemol-githook-pre-push"
+if [ ! -x "$launcher" ]; then
+    printf 'pre-push: %s is missing or not executable - cannot run the hook, push refused\n' "$launcher" >&2
+    exit 1
+fi
+exec "$launcher" "$@"
