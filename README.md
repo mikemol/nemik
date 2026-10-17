@@ -93,8 +93,10 @@ stores prompt text, never uses the network, and always exits 0.
   mypy on it, and writes it to the destination only when it passes (a refused draft leaves no file), so a
   change that touches several places lands clean in one step (the edit gate refuses a half-formatted or
   half-imported file). It replaces tools/pyfmt.sh, which wrote first and left the dirty file.
-- `tools/revendor-mtools.sh <new-sha> <old-sha>`: rebuilds the three vendored mtools wheels at one
-  commit and rewrites the pins (see `vendor/wheels/README.md`).
+- `mikemol-repin --revendor --sha <40-hex> --no-sync --write`: rebuilds the six vendored mtools wheels
+  at one commit and rewrites the pins, the lock and the checksums (see `vendor/wheels/README.md`;
+  it replaced the hand script tools/revendor-mtools.sh, mtools:W1449). Dry-run without `--write`;
+  `--no-sync` keeps the bazel-built `.venv` as it is.
 - `tools/render-check.sh`: the render check as a host step: `tests/test_layout.py` drives the web view in
   the host's Google Chrome (layout budgets, the rank forest, repo toggles, salience order) and leaves
   screenshots in `/var/tmp/nemik-shots`. The Bazel gate stays hermetic, where the same tests skip.

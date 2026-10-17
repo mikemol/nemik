@@ -34,7 +34,7 @@ together, to one sha, per mtools INSTALL.md.
 
 ## Hashes
 
-`SHA256SUMS` beside the wheels, written by `tools/revendor-mtools.sh` on every bump (nemik:W417:
+`SHA256SUMS` beside the wheels, written by `mikemol-repin --revendor` on every bump (it replaced the hand script tools/revendor-mtools.sh, mtools:W1449; nemik:W417:
 the hand-kept list here went stale with each bump); `sha256sum -c SHA256SUMS` in this directory
 verifies them, and uv.lock pins the same digests. mikemol_fence is mtools' fence (nemik:W378), for
 `mikemol-membudget`, the commit lock mikemol-commit takes.
