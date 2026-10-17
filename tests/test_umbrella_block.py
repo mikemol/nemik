@@ -53,9 +53,10 @@ def test_block_on_a_landed_waypoint_is_flagged_and_all_landed_means_ready() -> N
         g.add((mixed, NEMIK.waitsFor, t))
     annotate(g)
     said: dict[object, list[str]] = {}
-    for focus, _, message in findings("umbrella-block", g, shapes()):
+    for focus, severity, message in findings("umbrella-block", g, shapes()):
         if "already landed" in message:
             said.setdefault(focus, []).append(message)
+            assert severity.endswith("Warning")
     assert [str(done) in m for m in said[all_landed]] == [
         True
     ]  # SPARQL constraint, W529

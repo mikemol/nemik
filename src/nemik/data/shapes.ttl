@@ -188,6 +188,24 @@ nemik:UmbrellaCompleteShape a sh:NodeShape ;
                 FILTER(!BOUND(?said) && !BOUND(?far) && !BOUND(?unfinished))
             }""" ] .
 
+# An open card with no edge at all (nemik:W487): nothing enables it, it enables nothing, it waits on
+# nothing and nothing waits on it, so no path joins it to any goal. Staged at Info first with the
+# fleet count, as ReadyBehindOpenShape was.
+nemik:OrphanLeafShape a sh:NodeShape ;
+    sh:targetClass oslc_cm:ChangeRequest ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "no edge joins this open card to any other: add one (--enables <the card or goal that needs it>, or --add-enables), or drop it if it earns no place" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this <http://open-services.net/ns/cm#state> ?state .
+                FILTER(?state != <https://github.com/mikemol/nemik/ns#Done>)
+                FILTER NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#enables> ?out }
+                FILTER NOT EXISTS { ?in <https://github.com/mikemol/nemik/ns#enables> $this }
+                FILTER NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#waitsFor> ?far }
+                FILTER NOT EXISTS { ?near <https://github.com/mikemol/nemik/ns#waitsFor> $this }
+            }""" ] .
+
 # Ready, but an open card enables it (nemik:W465): it cannot land first. mtools:W1131's
 # --block-behind-open applies the fix.
 nemik:ReadyBehindOpenShape a sh:NodeShape ;
@@ -210,6 +228,7 @@ nemik:UnresolvedBlockerShape a sh:NodeShape ;
 nemik:LandedBlockerShape a sh:NodeShape ;
     sh:targetClass oslc_cm:ChangeRequest ;
     sh:targetSubjectsOf nemik:allBlockersLanded ;
+    sh:severity sh:Warning ;
     sh:sparql [
         sh:severity sh:Warning ;
         sh:message "blocked_on names {?landed}, a waypoint that has already landed (done or dropped): trim it from blocked_on (mikemol-paths-forward --prune-landed --root <fleet root> prunes local and foreign repo:W<n> ones)" ;
