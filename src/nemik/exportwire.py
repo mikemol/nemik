@@ -35,12 +35,16 @@ def repo_symbols(root: Path) -> dict[str, list[str]]:
         except ValueError:
             out[repo] = symbols
             continue
-        cards = doc.get("waypoints") if isinstance(doc, dict) else None
-        if isinstance(cards, list):
-            for card in cards:
-                symbol: object = card.get("symbol") if isinstance(card, dict) else None
-                if isinstance(symbol, str):
-                    symbols.append(symbol)
+        # A dropped card (residue) is still a card the view shows, so it is withheld with the rest.
+        for field in ("waypoints", "residue"):
+            cards = doc.get(field) if isinstance(doc, dict) else None
+            if isinstance(cards, list):
+                for card in cards:
+                    symbol: object = (
+                        card.get("symbol") if isinstance(card, dict) else None
+                    )
+                    if isinstance(symbol, str):
+                        symbols.append(symbol)
         out[repo] = symbols
     return out
 

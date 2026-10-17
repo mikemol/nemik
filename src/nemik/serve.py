@@ -38,6 +38,7 @@ from rdflib.namespace import DCTERMS, PROV
 from nemik.adapter import BASE, NEMIK, OPERATOR, OSLC_CM, bind, ledger_graph
 from nemik.blocks import inbound, operator_asks, ref
 from nemik.check import LEDGER, QUEUE, default_root, survey, workstream_files
+from nemik.exportwire import withheld_by_exports
 from nemik.outbox import outbox
 from nemik.wake import operator_row, read_liveness, roster
 
@@ -586,7 +587,11 @@ def history_doc(
 
 
 def build_static(
-    root: Path, out: Path, withheld: Path | None, private: bool = False
+    root: Path,
+    out: Path,
+    withheld: Path | None,
+    private: bool = False,
+    exports: Path | None = None,
 ) -> list[Path]:
     """nemik:W153 (see _build_static), inside the same per-build scope the live server's document is
     built in (nemik:W412, W403): each graph indexed once and each flow solve answered once. The build
@@ -596,23 +601,32 @@ def build_static(
     from nemik.salience import memo_audits
 
     with memo_audits(), indexed():
-        return _build_static(root, out, withheld, private)
+        return _build_static(root, out, withheld, private, exports)
 
 
 def _build_static(
-    root: Path, out: Path, withheld: Path | None, private: bool = False
+    root: Path,
+    out: Path,
+    withheld: Path | None,
+    private: bool = False,
+    exports: Path | None = None,
 ) -> list[Path]:
     """nemik:W153: the gated static view under `out`. Every check runs before anything is written,
     so a refused build leaves `out` untouched; the withheld list itself is never copied into it.
 
     nemik:W503: `private` is the pod's own build: nothing is withheld unless a list is given, and the
-    files the live server answered beyond the public view are written too (see private_files)."""
+    files the live server answered beyond the public view are written too (see private_files).
+
+    nemik:W634: with `exports`, each repo's own export (docs/withholding-at-source.md) also decides
+    what leaves it, failing closed per repo: a repo with no export publishes none of its cards."""
     from nemik.manifest import unmanifested
     from nemik.withheld import apply, load
 
     refs = (
         frozenset() if private and withheld is None else load(withheld)
     )  # public fails closed
+    if exports is not None:
+        refs |= withheld_by_exports(root, exports)
     model = Model(root, refs)
     docs = apply(static_data(model), refs)
     if bad := [f for name, doc in docs.items() for f in unmanifested(name, doc)]:
@@ -775,6 +789,13 @@ def main(argv: list[str] | None = None) -> None:
         help="luthen's withheld list (v1); required with --static, a missing file fails the build",
     )
     ap.add_argument(
+        "--exports",
+        type=Path,
+        metavar="DIR",
+        help="with --static: the repos' own exports, DIR/<repo>.json (version 2); a repo with no "
+        "export publishes none of its cards (nemik:W634)",
+    )
+    ap.add_argument(
         "--publish",
         type=Path,
         metavar="BASE",
@@ -793,7 +814,9 @@ def main(argv: list[str] | None = None) -> None:
         return
     if args.static:
         try:
-            for path in build_static(args.root, args.static, args.withheld):
+            for path in build_static(
+                args.root, args.static, args.withheld, exports=args.exports
+            ):
                 print(path)
         except (
             ValueError
