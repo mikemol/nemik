@@ -59,6 +59,10 @@
   "as_written": "Assert failed:\tdictionary items are invalid\nExpression:\tt && t->size() == 2\nSource:\t\t/github/workspace/codon/parser/ast/expr.cpp:238",
   "stripped": "Assert failed:\tdictionary items are invalid\nExpression:\tt && t->size() == 2\nSource:\t\t/github/workspace/codon/parser/ast/expr.cpp:238"
  },
+ "exportcompat": {
+  "as_written": "no module named 'nemik.exportv2'",
+  "stripped": "no module named 'nemik.exportv2'"
+ },
  "floorasks": {
   "as_written": "no module named 'argparse'",
   "stripped": "no module named 'argparse'"
