@@ -57,7 +57,7 @@ from mikemol.pathsforward.lock import stamp
 from mikemol.pathsforward.opa_eval import OpaUnavailableError
 from mikemol.pathsforward.store import UnreadableStateError
 from rdflib import RDF, Graph
-from rdflib.namespace import PROV
+from rdflib.namespace import DCTERMS, PROV
 
 from nemik import tiers
 from nemik.adapter import BASE, NEMIK, OSLC_CM, ledger_graph
@@ -67,6 +67,7 @@ from nemik.realize import verdicts
 from nemik.wake import read_liveness, roster
 
 TYPE_LINE_WORDS = 3  # "# TYPE", the metric name, its kind
+DAY = 86400  # seconds in the arrival window
 
 # nemik:W531: the HELP line each family prints before its TYPE line (Prometheus text format)
 HELP = {
@@ -88,6 +89,7 @@ HELP = {
     "nemik_repo_health": "Repo health: 0 green, 1 amber, 2 red.",
     "nemik_warrant_debt": "Open cards claiming an operator ruling in prose with no warrant.",
     "nemik_repo_tier": "The repo's burn-down tier as its place in the order, 0 first.",
+    "nemik_cards_arrived_24h": "Cards issued in the last 24 hours, whatever their state now.",
 }
 
 CLASS = {
@@ -253,6 +255,33 @@ def tier_lines(g: Graph) -> list[str]:
     return out
 
 
+def arrival_lines(g: Graph, now: datetime) -> list[str]:
+    """nemik:W609: per repo, the cards issued in the last 24 hours, whatever their state now.
+
+    Args:
+        g: The merged queue graph.
+        now: The instant the window ends at.
+
+    Returns:
+        The gauge's TYPE line and one sample per repo with a queue, zero included.
+
+    """
+    repos = sorted({ref(n).partition(":")[0] for n in g.subjects(OSLC_CM.state, None)})
+    fresh: Counter[str] = Counter()
+    for node, _, created in g.triples((None, DCTERMS.created, None)):
+        try:
+            born = datetime.fromisoformat(str(created))
+        except ValueError:
+            continue
+        if born.tzinfo is not None and 0 <= (now - born).total_seconds() < DAY:
+            fresh[ref(node).partition(":")[0]] += 1
+    out = ["# TYPE nemik_cards_arrived_24h gauge"]
+    out += [
+        f"nemik_cards_arrived_24h{label(repo=repo)} {fresh[repo]}" for repo in repos
+    ]
+    return out
+
+
 def health_lines(g: Graph) -> list[str]:
     """nemik:W317: each repo's health as a gauge: 0 green, 1 amber, 2 red (nemik.health, from the
     thresholds `[health]` declares in rank-weights.toml)."""
@@ -273,8 +302,6 @@ def age_lines(repo: str, g: Graph, now: datetime) -> list[str]:
     summary-style gauge: quantile 0.5 is the median age and quantile 1 the oldest. Per-waypoint
     series would be thousands of labels, and the question ("how long has the oldest one sat") is
     the quantile. Age runs from `issued_at`; a waypoint with none is left out, not counted as new."""
-    from rdflib.namespace import DCTERMS
-
     ages: dict[str, list[float]] = {}
     for node, _, created in g.triples((None, DCTERMS.created, None)):
         state = g.value(node, OSLC_CM.state)
@@ -379,6 +406,7 @@ def main(argv: list[str] | None = None) -> None:
     out += health_lines(merged)
     out += warrant_lines(merged)
     out += tier_lines(merged)
+    out += arrival_lines(merged, now)
     out += realizability_lines(args.root)
 
     prompts: Counter[tuple[str, str, str]] = Counter()
