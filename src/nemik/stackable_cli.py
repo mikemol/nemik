@@ -18,7 +18,7 @@ from rdflib import Graph
 from nemik import history
 from nemik.check import default_root, survey
 from nemik.rank import load_weights, rank
-from nemik.stackable import propose, report
+from nemik.stackable import generated_files, propose, report
 
 
 def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
@@ -58,7 +58,10 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         sys.stdout.write("\n".join(propose(g, name, rows, cited, known)) + "\n")
         return
     staged = history.staged_paths(root / name)
-    sys.stdout.write("\n".join(report(g, name, rows, staged)) + "\n")
+    listing = root / name / ".claude" / "generated.json"
+    text = listing.read_text(encoding="utf-8") if listing.exists() else ""
+    lines = report(g, name, rows, staged, generated_files(text))
+    sys.stdout.write("\n".join(lines) + "\n")
 
 
 if __name__ == "__main__":

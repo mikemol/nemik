@@ -10,6 +10,8 @@ Greedy is not the maximum set of disjoint cards (a maximum independent set, NP-h
 how a stack is built by hand, it keeps the highest-ranked cards, and it is linear in the manifests.
 """
 
+import json
+
 from rdflib import Graph
 
 from nemik.adapter import NEMIK, waypoint_uri
@@ -123,7 +125,11 @@ def propose(
 
 
 def report(
-    g: Graph, repo: str, ranked: list[dict[str, object]], in_flight: list[str]
+    g: Graph,
+    repo: str,
+    ranked: list[dict[str, object]],
+    in_flight: list[str],
+    generated: frozenset[str] = frozenset(),
 ) -> list[str]:
     """Describe the stack the repo's ready cards can make now.
 
@@ -132,25 +138,65 @@ def report(
         repo: The repo's name.
         ranked: The repo's ready cards in rank order (nemik.rank.rank rows).
         in_flight: Files already staged.
+        generated: The repo's generated files (.claude/generated.json): every card that
+            regenerates one would overlap every other, so they leave the overlap test and ride
+            the stack's last entry.
 
     Returns:
-        One line per planned card (STACK when it joins, WAITING when a file overlaps), then a total
-        with the count of cards that have no manifest.
+        One line per planned card (STACK when it joins, WAITING when a file overlaps), the
+        generated files the last entry must carry, then a total with the count of cards that
+        have no manifest.
 
     """
     cards = [f"{repo}:{row['symbol']}" for row in ranked]
     plans = [manifest(g, repo, str(row["symbol"])) for row in ranked]
-    chosen = set(pick(cards, plans, in_flight))
+    tested = [
+        [path for path in files if path not in generated] or [f"(generated) {cite}"]
+        if files
+        else []
+        for cite, files in zip(cards, plans, strict=True)
+    ]
+    chosen = set(pick(cards, tested, in_flight))
     out = [
         f"{'STACK  ' if cite in chosen else 'WAITING'} {cite}  {' '.join(files)}"
         for cite, files in zip(cards, plans, strict=True)
         if files
     ]
+    carried = sorted(
+        {
+            path
+            for cite, files in zip(cards, plans, strict=True)
+            if cite in chosen
+            for path in files
+            if path in generated
+        }
+    )
+    if carried:
+        out.append(f"last entry carries: {' '.join(carried)}")
     unplanned = sum(1 for files in plans if not files)
     out.append(
         f"{len(chosen)} stackable of {len(cards)} ready; {unplanned} have no manifest"
     )
     return out
+
+
+def generated_files(text: str) -> frozenset[str]:
+    """Read a repo's .claude/generated.json.
+
+    Args:
+        text: The file's text, or empty when the repo has none.
+
+    Returns:
+        The exact repo-relative paths it lists as generated; none for empty or malformed text.
+
+    """
+    if not text.strip():
+        return frozenset()
+    try:
+        document: dict[str, list[dict[str, str]]] = json.loads(text)
+        return frozenset(entry["path"] for entry in document.get("generated", []))
+    except (ValueError, KeyError, TypeError, AttributeError):
+        return frozenset()
 
 
 def pick(
