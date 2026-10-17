@@ -68,6 +68,28 @@ from nemik.wake import read_liveness, roster
 
 TYPE_LINE_WORDS = 3  # "# TYPE", the metric name, its kind
 
+# nemik:W531: the HELP line each family prints before its TYPE line (Prometheus text format)
+HELP = {
+    "nemik_waypoints": "Waypoints per repo by OSLC state.",
+    "nemik_waypoints_minted": "Waypoints per repo by when mtools minted them (tick or interrupt).",
+    "nemik_findings": "nemik-check results per repo by severity.",
+    "nemik_waypoint_age_seconds": "Age of open waypoints from issued_at, by state and quantile.",
+    "nemik_prompts_total": "Prompts recorded by the global hook, by source and effort class.",
+    "nemik_turns_total": "Turns ended (Stop events) per repo.",
+    "nemik_ledger_lines": "Parsed ledger lines per repo by effort class and kind.",
+    "nemik_ledger_unparsed": "Legacy or malformed ledger lines mtools returned unparsed.",
+    "nemik_blocks_inbound": "Open waypoints elsewhere waiting on this repo, claimed or not.",
+    "nemik_waiting_on": "Open waypoints elsewhere waiting on this repo, by its liveness.",
+    "nemik_pathsforward_adoption": "1 per repo naming how its queue writer is installed.",
+    "nemik_realizability_waypoints": "Live waypoints per realizability coordinate.",
+    "nemik_realizability_unjudged": "1 for a repo whose queue could not be judged.",
+    "nemik_operator_salience": "Flow salience the repo's needs-you operator asks hold back.",
+    "nemik_operator_asks": "Needs-you operator asks the repo has open.",
+    "nemik_repo_health": "Repo health: 0 green, 1 amber, 2 red.",
+    "nemik_warrant_debt": "Open cards claiming an operator ruling in prose with no warrant.",
+    "nemik_repo_tier": "The repo's burn-down tier as its place in the order, 0 first.",
+}
+
 CLASS = {
     "tick": "forecast",
     "operator-tick": "forecast",
@@ -124,6 +146,45 @@ def operator_lines(g: Graph) -> list[str]:
         out.append(f"nemik_operator_salience{label(repo=repo)} {held[repo]:.2f}")
         out.append(f"nemik_operator_asks{label(repo=repo)} {count[repo]}")
     return out
+
+
+def with_help(lines: list[str]) -> list[str]:
+    """Put a HELP line before each family's TYPE line (nemik:W531).
+
+    Args:
+        lines: The exposition lines, TYPE lines included.
+
+    Returns:
+        The same lines with `# HELP name text` ahead of every `# TYPE name kind`; a family with no
+        text in HELP is left without one, which tests/test_metrics_help.py refuses.
+
+    """
+    out: list[str] = []
+    for line in lines:
+        words = line.split()
+        if (
+            line.startswith("# TYPE")
+            and len(words) >= TYPE_LINE_WORDS
+            and words[2] in HELP
+        ):
+            out.append(f"# HELP {words[2]} {HELP[words[2]]}")
+        out.append(line)
+    return out
+
+
+def render(lines: list[str], families: list[str] | None) -> str:
+    """Join the exposition: only the named families when given, each with its HELP line.
+
+    Args:
+        lines: The exposition lines.
+        families: The families to keep, or None / empty for all.
+
+    Returns:
+        The text to print.
+
+    """
+    shown = only_families(lines, families) if families else lines
+    return "\n".join(with_help(shown))
 
 
 def only_families(lines: list[str], names: list[str]) -> list[str]:
@@ -356,7 +417,7 @@ def main(argv: list[str] | None = None) -> None:
                 f"nemik_ledger_lines{label(repo=repo, kind=kind, **{'class': cls})} {n}"
             )
         out.append(f"nemik_ledger_unparsed{label(repo=repo)} {unparsed}")
-    print("\n".join(only_families(out, args.family) if args.family else out))
+    print(render(out, args.family))
 
 
 if __name__ == "__main__":
