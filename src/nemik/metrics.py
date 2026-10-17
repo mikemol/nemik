@@ -92,6 +92,7 @@ HELP = {
     "nemik_cards_arrived_24h": "Cards issued in the last 24 hours, whatever their state now.",
     "nemik_cards_completed_24h": "Cards committed as done in the last 24 hours (git history).",
     "nemik_commits_24h": "Commits on HEAD in the last 24 hours (a push is a deploy).",
+    "nemik_cards_reopened_24h": "Cards that went from done back to open in the last 24 hours.",
 }
 
 CLASS = {
@@ -349,6 +350,27 @@ def commit_lines(root: Path, now: datetime) -> list[str]:
     return out
 
 
+def reopened_lines(root: Path, now: datetime) -> list[str]:
+    """nemik:W355: per repo, the cards reopened in the last 24 hours, the change-failure signal.
+
+    Args:
+        root: The fleet root.
+        now: The instant the window ends at.
+
+    Returns:
+        The gauge's TYPE line and a sample for each repo whose queue history is readable.
+
+    """
+    since = (now - timedelta(days=1)).astimezone().strftime("%Y-%m-%dT%H:%M:%S")
+    out = ["# TYPE nemik_cards_reopened_24h gauge"]
+    for repo, path in workstream_files(root, QUEUE):
+        top = path.parents[1] if path.parent.name == ".claude" else path.parent
+        count = history.reopened_since(top, since)
+        if count is not None:
+            out.append(f"nemik_cards_reopened_24h{label(repo=repo)} {count}")
+    return out
+
+
 def health_lines(g: Graph) -> list[str]:
     """nemik:W317: each repo's health as a gauge: 0 green, 1 amber, 2 red (nemik.health, from the
     thresholds `[health]` declares in rank-weights.toml)."""
@@ -477,6 +499,7 @@ def main(argv: list[str] | None = None) -> None:
     out += arrival_lines(merged, now)
     out += completed_lines(args.root, now)
     out += commit_lines(args.root, now)
+    out += reopened_lines(args.root, now)
     out += realizability_lines(args.root)
 
     prompts: Counter[tuple[str, str, str]] = Counter()

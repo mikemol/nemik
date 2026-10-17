@@ -136,6 +136,36 @@ def queue_at(repo: Path, rev: str | None) -> dict:
     return json.loads(text) if text else {}
 
 
+def reopened_since(repo: Path, since: str) -> int | None:
+    """Count the cards that went from done back to open after a point in time (nemik:W355).
+
+    A reopened or re-minted card is a change that failed, the DORA change-failure signal.
+
+    Args:
+        repo: The repo's working directory.
+        since: A local `YYYY-MM-DDTHH:MM:SS` instant.
+
+    Returns:
+        How many done-to-open transitions the committed queue shows in the window, or None when the
+        directory has no committed queue.
+
+    """
+    head: dict[str, object] = queue_at(repo, "HEAD")
+    if not head:
+        return None
+    start: dict[str, object] = queue_at(repo, resolve(repo, since))
+    commits: list[tuple[datetime, dict[str, object]]] = snapshots(repo, since)
+    after: list[dict[str, str]] = [_status(q) for _, q in commits]
+    prior = _status(start)
+    reopened = 0
+    for current in after:
+        reopened += sum(
+            1 for s, st in current.items() if st != "done" and prior.get(s) == "done"
+        )
+        prior = current
+    return reopened
+
+
 def commits_since(repo: Path, since: str) -> int | None:
     """Count the commits on HEAD after a point in time (nemik:W355: a push is a deploy).
 
