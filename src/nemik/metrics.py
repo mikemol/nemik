@@ -371,6 +371,31 @@ def reopened_lines(root: Path, now: datetime) -> list[str]:
     return out
 
 
+def history_lines(root: Path, now: datetime, wanted: list[str]) -> list[str]:
+    """Compute the git-history families, only the ones named.
+
+    A plain run once did a git walk per repo for three families and ran past luthen's relay bound
+    (2026-10-17), so these are computed when asked for by name (--family), as the host job does.
+
+    Args:
+        root: The fleet root.
+        now: The instant the windows end at.
+        wanted: The family names the caller asked for.
+
+    Returns:
+        The lines of the named history families.
+
+    """
+    out: list[str] = []
+    if "nemik_cards_completed_24h" in wanted:
+        out += completed_lines(root, now)
+    if "nemik_commits_24h" in wanted:
+        out += commit_lines(root, now)
+    if "nemik_cards_reopened_24h" in wanted:
+        out += reopened_lines(root, now)
+    return out
+
+
 def health_lines(g: Graph) -> list[str]:
     """nemik:W317: each repo's health as a gauge: 0 green, 1 amber, 2 red (nemik.health, from the
     thresholds `[health]` declares in rank-weights.toml)."""
@@ -497,9 +522,7 @@ def main(argv: list[str] | None = None) -> None:
     out += warrant_lines(merged)
     out += tier_lines(merged)
     out += arrival_lines(merged, now)
-    out += completed_lines(args.root, now)
-    out += commit_lines(args.root, now)
-    out += reopened_lines(args.root, now)
+    out += history_lines(args.root, now, args.family or [])
     out += realizability_lines(args.root)
 
     prompts: Counter[tuple[str, str, str]] = Counter()
