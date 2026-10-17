@@ -224,6 +224,12 @@ def _queue_graph(repo: str, state_path: Path, known: frozenset[str]) -> Graph:
         # child done is realized by construction (UmbrellaCompleteShape).
         if model.text(w, "next_bounded_step").strip():
             g.add((node, NEMIK.hasNextStep, Literal("true", datatype=XSD.boolean)))
+        # nemik:W612 (mtools:W1426): the manifest of planned changes (exact repo-relative files)
+        # and a size class; ManifestShape and OversizeShape read them, and nemik.stackable too.
+        for planned in model.strlist(w, "manifest"):
+            g.add((node, NEMIK.plannedPath, Literal(planned)))
+        if size := model.text(w, "size_class").strip():
+            g.add((node, NEMIK.sizeClass, Literal(size)))
         # nemik:W553 (github-8f 2026-10-15): words that blur the change-lifecycle steps.
         # Not strays, by name: rolled out, activation, promoted, pushed.
         strays = re.findall(

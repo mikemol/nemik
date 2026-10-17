@@ -244,6 +244,39 @@ nemik:OrphanLeafShape a sh:NodeShape ;
                 FILTER NOT EXISTS { ?near <https://github.com/mikemol/nemik/ns#waitsFor> $this }
             }""" ] .
 
+# A ready leaf declares its manifest of planned changes (nemik:W612): the exact files it will create or
+# edit and a size class, so the stackable pick (nemik:W613) can tell which cards are disjoint. A leaf is
+# a ready card no open card enables. Staged at Info, as ReadyBehindOpenShape was, until the count falls.
+nemik:ManifestShape a sh:NodeShape ;
+    sh:targetClass oslc_cm:ChangeRequest ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "ready leaf with no manifest of planned changes: declare the files it will create or edit, and its size, with --update <W> --manifest <path>... --size small|medium|large (atomize it until each leaf has one)" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this <http://open-services.net/ns/cm#state> <https://github.com/mikemol/nemik/ns#Ready> .
+                FILTER NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#plannedPath> ?path }
+                FILTER NOT EXISTS {
+                    ?kid <https://github.com/mikemol/nemik/ns#enables> $this ;
+                         <http://open-services.net/ns/cm#state> ?kidState .
+                    FILTER(?kidState != <https://github.com/mikemol/nemik/ns#Done>)
+                }
+            }""" ] .
+
+# A card declared large is not a leaf yet (nemik:W612): it is atomized until its pieces are small or medium.
+nemik:OversizeShape a sh:NodeShape ;
+    sh:targetClass oslc_cm:ChangeRequest ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "declared size large: atomize it into small or medium cards joined by enables edges before it is worked or stacked" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this <http://open-services.net/ns/cm#state> ?state ;
+                      <https://github.com/mikemol/nemik/ns#sizeClass> "large" .
+                FILTER(?state = <https://github.com/mikemol/nemik/ns#Ready>
+                       || ?state = <https://github.com/mikemol/nemik/ns#Working>)
+            }""" ] .
+
 # Ready, but an open card enables it (nemik:W465): it cannot land first. mtools:W1131's
 # --block-behind-open applies the fix.
 nemik:ReadyBehindOpenShape a sh:NodeShape ;
