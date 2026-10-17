@@ -1,8 +1,9 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
 from rdflib import RDF, Graph, Literal
+from umbrella_cases import blocked_on_umbrellas
 
-from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri
+from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri, workstream_uri
 from nemik.blocks import annotate
 from nemik.check import shapes
 from nemik.shaclinc import findings
@@ -12,6 +13,7 @@ def _wp(g, repo, sym, status="ready"):
     n = waypoint_uri(repo, sym)
     g.add((n, RDF.type, OSLC_CM.ChangeRequest))
     g.add((n, OSLC_CM.state, STATE[status]))
+    g.add((n, NEMIK.workstream, workstream_uri(repo)))
     return n
 
 
@@ -27,9 +29,8 @@ def test_peer_block_on_umbrella_is_flagged_and_on_child_is_not() -> None:
     on_umbrella, on_child = _wp(g, "a", "W46", "blocked"), _wp(g, "a", "W47", "blocked")
     g.add((on_umbrella, NEMIK.waitsFor, umbrella))
     g.add((on_child, NEMIK.waitsFor, child))
-    annotate(g)
-    assert (on_umbrella, NEMIK.umbrellaBlockOn, umbrella) in g
-    assert (on_child, NEMIK.umbrellaBlockOn, None) not in g
+    assert blocked_on_umbrellas(g) == {on_umbrella}
+    assert on_child not in blocked_on_umbrellas(g)
 
 
 def test_umbrella_whose_children_are_all_done_is_not_flagged() -> None:
@@ -38,8 +39,7 @@ def test_umbrella_whose_children_are_all_done_is_not_flagged() -> None:
     g.add((child, NEMIK.enables, umbrella))
     waiter = _wp(g, "a", "W9", "blocked")
     g.add((waiter, NEMIK.waitsFor, umbrella))
-    annotate(g)
-    assert (waiter, NEMIK.umbrellaBlockOn, None) not in g
+    assert waiter not in blocked_on_umbrellas(g)
 
 
 def test_block_on_a_landed_waypoint_is_flagged_and_all_landed_means_ready() -> None:
@@ -110,8 +110,7 @@ def test_a_chain_step_with_one_open_child_is_not_an_umbrella() -> None:
     g.add((before, NEMIK.enables, step))
     waiter = _wp(g, "n", "W145", "blocked")
     g.add((waiter, NEMIK.waitsFor, step))
-    annotate(g)
-    assert (waiter, NEMIK.umbrellaBlockOn, None) not in g
+    assert waiter not in blocked_on_umbrellas(g)
 
 
 def test_a_calendar_block_is_a_condition_not_unresolved() -> None:

@@ -192,35 +192,8 @@ def annotate(g: Graph) -> None:
                 ):
                     g.add((node, NEMIK.unresolvedBlocker, text))
 
-    # A peer block that lands on an UMBRELLA -- a waypoint its own repo's open children enable --
-    # rather than on the child step doing the work (nemik:W41, luthen-observability's finding):
-    # every child then inherits the waiter's weight in nemik-rank, and the umbrella itself can
-    # never be the thing that lands.
-    def open_children(target: Node) -> list[Node]:
-        # nemik:W144: an umbrella splits into two or more open children. A target with exactly one
-        # open child is a step in a chain (mtools:W300 <- W299; W310 <- W309): citing it is right,
-        # and the work beneath it is reached through it.
-        return [
-            c
-            for c in g.subjects(NEMIK.enables, target)
-            if _repo(c) == _repo(target) and (c, OSLC_CM.state, NEMIK.Done) not in g
-        ]
-
-    for node, _, target in g.triples((None, NEMIK.waitsFor, None)):
-        if _repo(target) == _repo(node) or (node, OSLC_CM.state, NEMIK.Done) in g:
-            continue
-        if len(open_children(target)) >= 2:
-            g.add((node, NEMIK.umbrellaBlockOn, target))
-
-    # nemik:W436: an umbrella that is itself ready or working, though two or more of its own open
-    # children enable it (nemik:W337 sat ready over W338 and W390). It cannot land before them, so
-    # it is blocked on them, and ranking it as workable sends a session to work nothing.
-    for state in (NEMIK.Ready, NEMIK.Working):
-        for node in g.subjects(OSLC_CM.state, state):
-            kids = open_children(node)
-            if len(kids) >= 2:
-                for kid in kids:
-                    g.add((node, NEMIK.readyUmbrella, kid))
+    # nemik:W41, W144, W436: umbrella blocks and ready umbrellas are SPARQL constraints in
+    # shapes.ttl (nemik:W529), UmbrellaBlockShape and ReadyUmbrellaShape.
     # nemik:W465: the one-enabler case the umbrella rule leaves out (mtools:W1115 sat ready behind
     # open W1122, W1116 behind W1115). The flow model already treats it as waiting, so its salience
     # reads blank while its fill says ready. Ready only, as mtools:W1131's fix: a working card is

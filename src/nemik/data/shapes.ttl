@@ -145,16 +145,54 @@ nemik:LifecycleWordShape a sh:NodeShape ;
             }""" ] .
 
 # Blocked on another workstream's umbrella rather than on the child step doing the work (W41).
+# nemik:W529: a SPARQL constraint over the enables and waitsFor edges; an umbrella is a card two or more of
+# whose own repo's open cards enable it (a target with exactly one is a chain step, nemik:W144).
 nemik:UmbrellaBlockShape a sh:NodeShape ;
-    sh:targetSubjectsOf nemik:umbrellaBlockOn ;
-    sh:property [ sh:path nemik:umbrellaBlockOn ; sh:maxCount 0 ; sh:severity sh:Warning ;
-                  sh:message "blocked on another workstream's umbrella waypoint (two or more of its own open children enable it): cite the child step that actually unblocks you, <repo>:W<n>" ] .
+    sh:targetClass oslc_cm:ChangeRequest ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        sh:message "blocked on another workstream's umbrella waypoint {?umbrella} (two or more of its own open children enable it): cite the child step that actually unblocks you, <repo>:W<n>" ;
+        sh:select """
+            SELECT DISTINCT $this ?umbrella WHERE {
+                $this <https://github.com/mikemol/nemik/ns#waitsFor> ?umbrella ;
+                      <https://github.com/mikemol/nemik/ns#workstream> ?mine ;
+                      <http://open-services.net/ns/cm#state> ?state .
+                FILTER(?state != <https://github.com/mikemol/nemik/ns#Done>)
+                ?umbrella <https://github.com/mikemol/nemik/ns#workstream> ?theirs .
+                FILTER(?theirs != ?mine)
+                ?one <https://github.com/mikemol/nemik/ns#enables> ?umbrella ;
+                     <https://github.com/mikemol/nemik/ns#workstream> ?theirs ;
+                     <http://open-services.net/ns/cm#state> ?oneState .
+                ?two <https://github.com/mikemol/nemik/ns#enables> ?umbrella ;
+                     <https://github.com/mikemol/nemik/ns#workstream> ?theirs ;
+                     <http://open-services.net/ns/cm#state> ?twoState .
+                FILTER(?one != ?two
+                       && ?oneState != <https://github.com/mikemol/nemik/ns#Done>
+                       && ?twoState != <https://github.com/mikemol/nemik/ns#Done>)
+            }""" ] .
 
-# Ready or working, but an umbrella over two or more open children of its own (nemik:W436).
+# Ready or working, but an umbrella over two or more open children of its own (nemik:W436; SPARQL, W529).
 nemik:ReadyUmbrellaShape a sh:NodeShape ;
-    sh:targetSubjectsOf nemik:readyUmbrella ;
-    sh:property [ sh:path nemik:readyUmbrella ; sh:maxCount 0 ; sh:severity sh:Warning ;
-                  sh:message "ready, but an umbrella: two or more of its own open cards enable it; set it blocked on them (it lands when they do), or drop the enables edges that are not prerequisites" ] .
+    sh:targetClass oslc_cm:ChangeRequest ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        sh:message "ready, but an umbrella: two or more of its own open cards enable it; set it blocked on them (it lands when they do), or drop the enables edges that are not prerequisites" ;
+        sh:select """
+            SELECT DISTINCT $this WHERE {
+                $this <http://open-services.net/ns/cm#state> ?state ;
+                      <https://github.com/mikemol/nemik/ns#workstream> ?ws .
+                FILTER(?state = <https://github.com/mikemol/nemik/ns#Ready>
+                       || ?state = <https://github.com/mikemol/nemik/ns#Working>)
+                ?one <https://github.com/mikemol/nemik/ns#enables> $this ;
+                     <https://github.com/mikemol/nemik/ns#workstream> ?ws ;
+                     <http://open-services.net/ns/cm#state> ?oneState .
+                ?two <https://github.com/mikemol/nemik/ns#enables> $this ;
+                     <https://github.com/mikemol/nemik/ns#workstream> ?ws ;
+                     <http://open-services.net/ns/cm#state> ?twoState .
+                FILTER(?one != ?two
+                       && ?oneState != <https://github.com/mikemol/nemik/ns#Done>
+                       && ?twoState != <https://github.com/mikemol/nemik/ns#Done>)
+            }""" ] .
 
 # An umbrella whose children are all done is realized by construction (nemik:W488; mtools:W1139's
 # --close-umbrellas closes it). Exactly mtools' set: open, not working, no next step stated, no foreign

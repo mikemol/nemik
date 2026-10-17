@@ -1,39 +1,88 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W436: a ready umbrella over two or more open children of its own is flagged; a chain step is not."""
+"""nemik:W436: a ready umbrella over two or more open children of its own is flagged; a chain step is not.
 
-from rdflib import Graph
+nemik:W529: ReadyUmbrellaShape is a SPARQL constraint in shapes.ttl over the enables edges.
+"""
 
-from nemik.adapter import NEMIK, OSLC_CM, waypoint_uri
+from itertools import count
+
+from rdflib import RDF, Graph
+from rdflib.term import Node
+
+from nemik.adapter import NEMIK, OSLC_CM, waypoint_uri, workstream_uri
 from nemik.blocks import annotate
+from nemik.check import shapes
+from nemik.shaclinc import findings
+
+_KEYS = count()
 
 
-def _graph(child_states: list) -> Graph:
+def _card(g: Graph, repo: str, symbol: str, state: Node) -> Node:
+    """Add a card in a state to a repo.
+
+    Args:
+        g: The graph to add to.
+        repo: The repo's name.
+        symbol: The card's symbol.
+        state: Its OSLC state.
+
+    Returns:
+        The card's node.
+
+    """
+    node = waypoint_uri(repo, symbol)
+    g.add((node, RDF.type, OSLC_CM.ChangeRequest))
+    g.add((node, OSLC_CM.state, state))
+    g.add((node, NEMIK.workstream, workstream_uri(repo)))
+    return node
+
+
+def _graph(child_states: list[Node]) -> Graph:
+    """Build a ready W1 with one child per state, each enabling it.
+
+    Args:
+        child_states: The children's states.
+
+    Returns:
+        The graph.
+
+    """
     g = Graph()
-    top = waypoint_uri("r", "W1")
-    g.add((top, OSLC_CM.state, NEMIK.Ready))
+    top = _card(g, "r", "W1", NEMIK.Ready)
     for i, state in enumerate(child_states, start=2):
-        kid = waypoint_uri("r", f"W{i}")
-        g.add((kid, OSLC_CM.state, state))
-        g.add((kid, NEMIK.enables, top))
+        g.add((_card(g, "r", f"W{i}", state), NEMIK.enables, top))
     return g
 
 
-def _flagged(g: Graph) -> set:
+def _flagged(g: Graph) -> set[Node]:
+    """Collect the cards ReadyUmbrellaShape names.
+
+    Args:
+        g: The graph.
+
+    Returns:
+        The named cards.
+
+    """
     annotate(g)
-    return set(g.subjects(NEMIK.readyUmbrella, None))
+    rows = findings(f"ready-umbrella-{next(_KEYS)}", g, shapes())
+    return {focus for focus, _, m in rows if m.startswith("ready, but an umbrella")}
 
 
 def test_a_ready_card_with_two_open_children_is_flagged() -> None:
+    """Two open children make the ready W1 an umbrella."""
     g = _graph([NEMIK.Ready, NEMIK.Blocked])
     assert _flagged(g) == {waypoint_uri("r", "W1")}
 
 
 def test_one_open_child_is_a_chain_step_not_an_umbrella() -> None:
+    """One open child and one done: a step in a chain."""
     assert _flagged(_graph([NEMIK.Ready, NEMIK.Done])) == set()
 
 
 def test_a_blocked_umbrella_is_not_flagged() -> None:
+    """A blocked umbrella is already waiting on its children."""
     g = _graph([NEMIK.Ready, NEMIK.Ready])
     top = waypoint_uri("r", "W1")
     g.set((top, OSLC_CM.state, NEMIK.Blocked))
@@ -41,11 +90,9 @@ def test_a_blocked_umbrella_is_not_flagged() -> None:
 
 
 def test_children_in_another_repo_do_not_count() -> None:
+    """Only a card's own repo's open cards make it an umbrella."""
     g = Graph()
-    top = waypoint_uri("r", "W1")
-    g.add((top, OSLC_CM.state, NEMIK.Ready))
+    top = _card(g, "r", "W1", NEMIK.Ready)
     for i in (2, 3):
-        kid = waypoint_uri("other", f"W{i}")
-        g.add((kid, OSLC_CM.state, NEMIK.Ready))
-        g.add((kid, NEMIK.enables, top))
+        g.add((_card(g, "other", f"W{i}", NEMIK.Ready), NEMIK.enables, top))
     assert _flagged(g) == set()
