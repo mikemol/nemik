@@ -20,6 +20,7 @@ from nemik.trs import TRS
 
 OSLC = Namespace("http://open-services.net/ns/core#")
 CM_DOMAIN = URIRef("http://open-services.net/ns/cm#")
+AS = Namespace("https://www.w3.org/ns/activitystreams#")
 
 
 def catalog(repos: list[str]) -> Graph:
@@ -46,4 +47,6 @@ def catalog(repos: list[str]) -> Graph:
         g.add((tracked, RDF.type, TRS.TrackedResourceSet))
         g.add((tracked, TRS.base, URIRef(f"trs/{repo}/base.ttl")))
         g.add((tracked, TRS.changeLog, URIRef(f"trs/{repo}/changelog.ttl")))
+        # nemik:W354: the repo's read-only ForgeFed outbox, published beside its TRS feed
+        g.add((provider, AS.outbox, URIRef(f"outbox/{repo}.jsonld")))
     return g
