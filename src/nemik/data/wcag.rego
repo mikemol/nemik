@@ -88,6 +88,45 @@ violations contains v if {
 	}
 }
 
+# 2.5.8 Target Size (Minimum): a pointer target is at least 24 by 24 CSS pixels, or sits where a
+# 24 px circle centred on it meets no other target and no other undersized target's circle.
+# input.targets is a list of {"name", "x", "y", "w", "h"} boxes read off the rendered page
+# (tests/test_wcag_render.py); it is judged by target_violations, apart from violations, because it
+# needs a browser. Not judged: a link inside a sentence, a control the user agent sizes, a target
+# with an equivalent larger one on the page.
+min_side := 24
+
+target_violations contains v if {
+	some i, t in input.targets
+	undersized(t)
+	some j, o in input.targets
+	i != j
+	crowded(t, o)
+	v := {"criterion": "2.5.8", "target": t.name, "w": t.w, "h": t.h}
+}
+
+undersized(t) if t.w < min_side
+
+undersized(t) if t.h < min_side
+
+# t's 24 px circle meets o's box, or o is undersized too and the two circles meet.
+crowded(t, o) if {
+	cx := t.x + t.w / 2
+	cy := t.y + t.h / 2
+	dx := max([o.x - cx, 0, cx - (o.x + o.w)])
+	dy := max([o.y - cy, 0, cy - (o.y + o.h)])
+	dx * dx + dy * dy < 144
+}
+
+crowded(t, o) if {
+	undersized(o)
+	cx := t.x + t.w / 2
+	cy := t.y + t.h / 2
+	ox := o.x + o.w / 2
+	oy := o.y + o.h / 2
+	(cx - ox) * (cx - ox) + (cy - oy) * (cy - oy) < 576
+}
+
 # A pair whose token the page does not define cannot be judged and is reported, not skipped.
 unjudged contains u if {
 	some theme in themes

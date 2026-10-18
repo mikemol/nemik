@@ -84,3 +84,25 @@ def judge(html: str) -> dict[str, list[Row]]:
         "violations": _rows(value, "violations"),
         "unjudged": _rows(value, "unjudged"),
     }
+
+
+def judge_targets(targets: list[Row]) -> list[Row]:
+    """Judge the sizes of a rendered page's pointer targets (WCAG 2.5.8).
+
+    Args:
+        targets: One box per target, {"name", "x", "y", "w", "h"} in CSS pixels, as a
+            browser measured them (tests/test_wcag_render.py).
+
+    Returns:
+        The undersized targets that a 24 px circle centred on them would leave touching another
+        target; each names the criterion, the target and its size. Empty when opa is unavailable,
+        which a caller must not read as a pass.
+
+    """
+    policy = str(files("nemik").joinpath("data/wcag.rego"))
+    doc: dict[str, object] = {"targets": targets}
+    value = _value(opa_json(TARGET_QUERY, doc, [policy]))
+    return _rows(value, "violations")
+
+
+TARGET_QUERY = '{"violations": data.wcag.target_violations}'
