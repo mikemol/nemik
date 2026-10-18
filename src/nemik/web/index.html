@@ -1480,7 +1480,8 @@ function seriesBoard(s) {
     const sum = t.awake + t.idle + t.asleep, pct = n => Math.round(100 * n / sum);
     return sum ? `awake ${pct(t.awake)}%, idle ${pct(t.idle)}%, asleep ${pct(t.asleep)}% of its history` : "no history";
   };
-  const rows = s.stranded.map(r => `<dt>${esc(r)}</dt><dd>${esc(s.repos[r].state)}, ${s.repos[r].ready} workable; ${esc(share(s.repos[r].history))}</dd>`);
+  const spent = t => t && (t.input || t.output) ? `; ${Math.round((t.input + t.output) / 1000)}k tokens in and out` : "";
+  const rows = s.stranded.map(r => `<dt>${esc(r)}</dt><dd>${esc(s.repos[r].state)}, ${s.repos[r].ready} workable; ${esc(share(s.repos[r].history))}${spent(s.repos[r].tokens)}</dd>`);
   return rows.length
     ? `<p><b>${rows.length} with work, not awake</b> (luthen's series):</p><dl>${rows.join("")}</dl>`
     : `<p class="stat">Every repo with work is awake (luthen's series).</p>`;

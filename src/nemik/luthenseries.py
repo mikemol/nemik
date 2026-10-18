@@ -17,6 +17,8 @@ from pathlib import Path
 VERSION = 1
 NO_TICK = -1
 PAIR = 2
+# the kinds luthen counts a session's tokens in (luthen.claude.session.tokens.total{kind})
+TOKEN_KINDS = ["input", "output", "cache_create", "cache_read"]
 
 
 class Repo:
@@ -320,6 +322,8 @@ def board(series: Series, ready: dict[str, int]) -> dict[str, object]:
             "last_tick": repo.last_tick,
             "ready": ready.get(name, 0),
             "history": rows,
+            # nemik:W353: the repo's sessions' cumulative tokens by kind (the newest 50 transcripts)
+            "tokens": {kind: series.total(name, kind) for kind in TOKEN_KINDS},
         }
     return {
         "as_of": series.as_of,

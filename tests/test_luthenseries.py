@@ -6,7 +6,18 @@ import json
 
 import pytest
 
-from nemik.luthenseries import NO_TICK, parse, state_of, stranded
+from nemik.luthenseries import NO_TICK, board, parse, state_of, stranded
+
+
+def test_the_board_carries_each_repos_tokens_by_kind() -> None:
+    """A repo's sessions' counts sum by kind; a kind nobody counted is 0."""
+    series = parse(_snapshot(), NOW, BOUND)
+    repos = json.dumps(board(series, {"nemik": 1})["repos"])
+    assert (
+        '"tokens": {"input": 7, "output": 0, "cache_create": 0, "cache_read": 0}'
+        in repos
+    )
+
 
 NOW = 1_000_000
 BOUND = 900
