@@ -937,7 +937,10 @@ def test_the_page_script_runs_without_errors(server) -> None:
         errors: list[str] = []
         page.on("pageerror", lambda err: errors.append(str(err)))
         page.goto(server)
-        page.wait_for_timeout(3000)
+        page.wait_for_function(
+            "() => document.getElementById('stat').innerText.includes('waypoints')",
+            timeout=60000,
+        )
         browser.close()
     assert errors == []
 
@@ -1029,7 +1032,9 @@ def _open_on_a_fake_clock(page: "Page", url: str) -> None:
         "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
         timeout=60000,
     )
-    page.wait_for_timeout(800)
+    page.wait_for_function(
+        "() => document.getElementById('wake').innerText.length > 5", timeout=60000
+    )
     now: object = page.evaluate("Date.now()")
     assert isinstance(now, int | float)
     page.clock.pause_at(int(now) + 1000)

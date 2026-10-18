@@ -16,6 +16,10 @@ import webpage
 
 sync_api = pytest.importorskip("playwright.sync_api")
 
+# two animation frames on the page's own clock: whatever a change queued to draw has been drawn
+TWO_FRAMES = (
+    "() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)))"
+)
 POSITIONS = (
     "() => Object.fromEntries(cy.nodes().map(n => [n.id(), "
     "[n.position().x, n.position().y]]))"
@@ -106,7 +110,9 @@ def test_a_poll_that_adds_and_removes_cards_leaves_the_rest_where_it_was(
         moved = page.evaluate(MOVED, before)
         gone = page.evaluate(TAKE_IT_AWAY, new_id)
         page.click("#relayout")
-        page.wait_for_timeout(500)
+        page.wait_for_function(
+            "() => document.getElementById('relayout').hidden", timeout=60000
+        )
         fresh = page.evaluate(
             "() => ({ rebuilt: cy.__kept !== true,"
             " hidden: document.getElementById('relayout').hidden })"
@@ -125,7 +131,7 @@ def test_a_rebuilt_card_list_keeps_the_focus_a_reader_had_in_it(server: str) -> 
     with sync_api.sync_playwright() as p:
         browser, page = webpage.open_page(p, server)
         page.evaluate("() => { document.getElementById('sec-cards').open = true; }")
-        page.wait_for_timeout(300)
+        page.wait_for_selector("#cardlist button[tabindex='0']", state="attached")
         page.locator("#cardlist button[tabindex='0']").focus()
         page.keyboard.press("ArrowDown")
         page.keyboard.press("ArrowDown")
@@ -137,7 +143,7 @@ def test_a_rebuilt_card_list_keeps_the_focus_a_reader_had_in_it(server: str) -> 
             " n.state = n.state === 'ready' ? 'working' : 'ready'; render(true); }",
             held,
         )
-        page.wait_for_timeout(200)
+        page.wait_for_function(TWO_FRAMES)
         now = page.evaluate("() => document.activeElement.dataset.card")
         stops = page.evaluate(
             "() => [...document.querySelectorAll('#cardlist button')]"
