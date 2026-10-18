@@ -51,8 +51,12 @@ ADD --checksum=sha256:a9da028861a0cf789ff25c2fed45f5f1aaf969ed9247835b6a7821a4f7
 RUN apt-get update && apt-get install -y --no-install-recommends unzip && unzip -q /tmp/chs.zip -d /opt && rm /tmp/chs.zip \
     && rm -rf /var/lib/apt/lists/*
 ENV NEMIK_CHROMIUM=/opt/chrome-headless-shell-linux64/chrome-headless-shell
-RUN uv sync --frozen --extra docs && .venv/bin/playwright install-deps chromium-headless-shell \
-    && .venv/bin/pytest -q -rs tests && touch /app/.tested
+# nemik:W660: each long step stamps the time it starts and ends, so a run the server cancels leaves a log
+# that names the step it was in (the image build was cancelled 20:00 after each start, 2026-10-18).
+RUN date -u +"test stage: deps start %FT%TZ" && uv sync --frozen --extra docs \
+    && .venv/bin/playwright install-deps chromium-headless-shell && date -u +"test stage: deps end %FT%TZ"
+RUN date -u +"test stage: pytest start %FT%TZ" && .venv/bin/pytest -q -rs --durations=15 tests \
+    && date -u +"test stage: pytest end %FT%TZ" && touch /app/.tested
 
 FROM base
 COPY --from=test /app/.tested /app/.tested
