@@ -440,3 +440,34 @@ nemik:RetroRootShape a sh:NodeShape ;
                       <https://github.com/mikemol/nemik/ns#root> ?r .
                 FILTER(STR(?t) = STR(?r))
             }""" ] .
+
+# A retro's root names a condition, not a person or a lapse (nemik:W649, gate G5). A lexical check: it
+# catches blame WORDING, not blame in substance, so it is a Warning to rewrite, never a verdict. The
+# word list is whole words, matched without backslashes (a Turtle string would eat them).
+nemik:RetroBlamelessShape a sh:NodeShape ;
+    sh:targetClass nemik:Retro ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        sh:message "the root reads as blame (wording check only; it cannot judge substance): say what made the action reasonable at the time, for example 'X forgot Y' becomes 'nothing reminded X of Y', 'failed to check' becomes 'the check was not part of the step'" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this <https://github.com/mikemol/nemik/ns#root> ?r .
+                FILTER(REGEX(CONCAT(" ", STR(?r), " "), "[^a-z](forgot|forgetting|forgotten|failed to|failure to|should have|shouldn't have|should not have|careless|carelessly|negligent|negligence|sloppy|lazy|laziness|incompetent|didn't bother|did not bother|ignored|neglected|human error|operator error|user error|blame|blamed|fault of|their fault|his fault|her fault)[^a-z]", "i"))
+            }""" ] .
+
+# A retro records what to sustain as well as what to fix (nemik:W649, gate G6). Empty is thin, said in
+# the commit-message draft's own words (`# thin: no <field>`, mtools commitmsg): the gap is stated, not
+# hidden, and it stays Info because a retro with nothing worth keeping is rare but possible.
+nemik:RetroSustainShape a sh:NodeShape ;
+    sh:targetClass nemik:Retro ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "thin: no sustain. Say what worked and should be kept, beside what went wrong" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this a <https://github.com/mikemol/nemik/ns#Retro> .
+                FILTER NOT EXISTS {
+                    $this <https://github.com/mikemol/nemik/ns#sustain> ?s .
+                    FILTER(STRLEN(STR(?s)) > 0)
+                }
+            }""" ] .

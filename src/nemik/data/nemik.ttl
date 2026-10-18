@@ -112,3 +112,5 @@ nemik:Retro a rdfs:Class ; rdfs:comment "A retrospective on a card or a failure:
 nemik:precommit a rdf:Property ; rdfs:comment "What the card predicted at mint time (its next step and witness), copied into the retro; empty makes the retro narrative only (nemik:W648, G0)." .
 nemik:root a rdf:Property ; rdfs:comment "Why the trigger could happen; it differs from the trigger, which is the symptom (nemik:W648, G3)." .
 nemik:contributing a rdf:Property ; rdfs:comment "A contributing factor beside the root (nemik:W648, G3)." .
+# nemik:W649 (gates G5 and G6): what a retro keeps, beside what it fixes.
+nemik:sustain a rdf:Property ; rdfs:comment "What worked and should be kept, recorded beside what went wrong; empty is thin (nemik:W649, G6)." .
