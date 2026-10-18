@@ -1465,17 +1465,45 @@ async function graphText() {
   sourceStatus = got.map(g => g.status === "fulfilled" ? "ok" : "unavailable: " + ((g.reason && g.reason.message) || "failed"));
   const docs = got.filter(g => g.status === "fulfilled").map(g => g.value);
   if (!docs.length) throw new Error("no source answered");
-  if (docs.length === 1) return JSON.stringify(docs[0]);
+  return JSON.stringify(docs.length === 1 ? docs[0] : combine(docs));
+}
+
+// nemik:W656 (W509): several answering sources as one graph. Cards and edges join by identity. A card
+// waiting on "<repo>:W<n>" in another source is wired to that card, by the one rule adapter.resolve_blocker
+// applies to the cross-workstream form; the server could only do that for repos it knew. A reference whose
+// repo no loaded source holds becomes a stub carrying the symbol (state "unloaded"), as withheld.py leaves
+// a stub where a withheld card is pointed at, so the wait is drawn and says what it waits for.
+const FOREIGN_WAIT = /^([A-Za-z0-9._-]+):W(\d+)$/;
+function combine(docs) {
   const once = (rows, key) => [...new Map(rows.map(r => [key(r), r])).values()];
-  return JSON.stringify({
-    nodes: once(docs.flatMap(d => d.nodes), n => n.id).sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0),
-    edges: once(docs.flatMap(d => d.edges), e => [e.source, e.target, e.kind].join(" ")),
+  const byId = (a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
+  const nodes = once(docs.flatMap(d => d.nodes), n => n.id);
+  const edges = once(docs.flatMap(d => d.edges), e => [e.source, e.target, e.kind].join(" "));
+  const ids = new Set(nodes.map(n => n.id));
+  const waits = new Set(edges.filter(e => e.kind === "waits").map(e => e.source + " " + e.target));
+  for (const n of [...nodes]) {
+    for (const text of n.blocked_on || []) {
+      const m = FOREIGN_WAIT.exec(text.trim());
+      if (!m || m[1] === n.repo) continue;
+      const id = `urn:nemik:${m[1]}/W${m[2]}`;
+      if (!ids.has(id)) {
+        ids.add(id);
+        nodes.push({ id, repo: m[1], symbol: `W${m[2]}`, cite: `${m[1]}:W${m[2]}`, state: "unloaded",
+          title: "in a source that is not loaded", blocked_on: [], blocked_kind: "", caused_by: "",
+          minted_during: "", effort: {}, last_activity: "", open_blockers: 0, weather: "" });
+      }
+      if (!waits.has(n.id + " " + id)) { waits.add(n.id + " " + id); edges.push({ source: n.id, target: id, kind: "waits" }); }
+    }
+  }
+  return {
+    nodes: nodes.sort(byId),
+    edges,
     inbound: docs.flatMap(d => d.inbound || []),
     operator: docs.flatMap(d => d.operator || []),
     findings: Object.assign({}, ...docs.map(d => d.findings || {})),
     health: Object.assign({}, ...docs.map(d => d.health || {})),
     ruler: docs[0].ruler,
-  });
+  };
 }
 
 let lastGraph = null;
