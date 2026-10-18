@@ -303,15 +303,15 @@ def board(series: Series, ready: dict[str, int]) -> dict[str, object]:
 
     Returns:
         {"as_of", "repos", "stranded"}: per repo its state, luthen's verdict, last tick (NO_TICK
-        when none), how many cards are ready, and its history as [stamp, state] rows; and the
+        when none), how many cards are ready, and its history as {at, state} rows; and the
         repos that hold work but are not awake.
 
     """
     repos: dict[str, object] = {}
     for name in sorted(series.repos):
         repo = series.repos[name]
-        rows: list[list[object]] = [
-            [repo.stamps[i], state_of(repo.verdicts[i])]
+        rows: list[dict[str, object]] = [
+            {"at": repo.stamps[i], "state": state_of(repo.verdicts[i])}
             for i in range(len(repo.stamps))
         ]
         repos[name] = {

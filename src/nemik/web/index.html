@@ -1467,15 +1467,15 @@ async function load() {
 
 // Also feeds `liveness` (repo -> asleep/idle/awake) that draw() uses to color repo boxes, so the
 // graph doesn't fetch this a second time.
-// nemik:W669: luthen's series (series.json, served only when --series names a fresh snapshot) as the
+// nemik:W669: luthen's series (wake.json's series, a board only when the server has a fresh snapshot) as the
 // repos that hold workable cards but are not awake, each with its state in words and the share of its
 // history spent awake, idle and asleep. No file, or board false, draws nothing.
 function seriesBoard(s) {
   const share = h => {
     const t = { awake: 0, idle: 0, asleep: 0 };
     for (let i = 0; i < h.length; i++) {
-      const end = i + 1 < h.length ? h[i + 1][0] : s.as_of;
-      t[h[i][1]] = (t[h[i][1]] || 0) + Math.max(0, end - h[i][0]);
+      const end = i + 1 < h.length ? h[i + 1].at : s.as_of;
+      t[h[i].state] = (t[h[i].state] || 0) + Math.max(0, end - h[i].at);
     }
     const sum = t.awake + t.idle + t.asleep, pct = n => Math.round(100 * n / sum);
     return sum ? `awake ${pct(t.awake)}%, idle ${pct(t.idle)}%, asleep ${pct(t.asleep)}% of its history` : "no history";
@@ -1489,7 +1489,7 @@ async function wake() {
   const el = document.getElementById("wake");
   let w, board = "";
   try { w = await (await fetch("wake.json")).json(); } catch (e) { el.textContent = "unavailable"; return; }
-  try { const r = await fetch("series.json"); const s = r.ok ? await r.json() : null; board = s && s.board ? seriesBoard(s) : ""; } catch (e) { board = ""; }
+  if (w.series && w.series.board) board = seriesBoard(w.series);
   liveness = Object.fromEntries(w.roster.map(r => [r.repo, r.state]));
   const sleepers = w.roster.filter(r => r.state !== "awake");
   const rows = sleepers.map(r => `<dt><b>${esc(r.repo)}</b> <span class="stat">${esc(r.state)}</span></dt>

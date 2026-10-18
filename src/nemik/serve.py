@@ -46,6 +46,12 @@ from nemik.wake import operator_row, read_liveness, roster
 from nemik.withheldage import require_fresh
 
 VENDOR = {"cytoscape.min.js", "dagre.min.js", "cytoscape-dagre.js"}
+# nemik:W671: luthen's loop snapshot sits beside the queues in the export (as withheld.json and
+# liveness.json do); a published view reads it, refusing one older than SERIES_MAX_AGE, and is
+# rebuilt every SERIES_REBUILD_S although no queue changed, since the board is baked in.
+SERIES_FILE = "luthen-series.json"
+SERIES_MAX_AGE = 900
+SERIES_REBUILD_S = 600
 
 
 class Model:
@@ -145,11 +151,14 @@ class Model:
             return {"board": False, "why": "no --series file"}
         try:
             snap = load(self.series, int(time.time()), self.series_max_age)
-        except (OSError, ValueError, TypeError) as e:
+        except OSError:
+            return {"board": False, "why": "no snapshot"}  # never a host path
+        except (ValueError, TypeError) as e:
             return {"board": False, "why": str(e)}
         ready: dict[str, int] = {}
         for node in self.doc.get("nodes", []):
-            if node["state"] in {"ready", "working"}:
+            cite = f"{node['repo']}:{node.get('symbol', '')}"
+            if node["state"] in {"ready", "working"} and cite not in self.withheld:
                 ready[node["repo"]] = ready.get(node["repo"], 0) + 1
         return {"board": True, **board(snap, ready)}
 
@@ -517,6 +526,7 @@ def handler(model: Model) -> type[BaseHTTPRequestHandler]:
                     "liveness": source,
                     "roster": roster(g, live),
                     "operator": operator_row(g),
+                    "series": model.series_doc(),
                 }
                 self.send(
                     200,
@@ -606,6 +616,9 @@ def static_data(model: Model) -> dict[str, object]:
             "liveness": "snapshot",
             "roster": roster(g, live),
             "operator": operator_row(g),
+            # nemik:W671: luthen's series as a board, or board false with the reason; a withheld
+            # card is not counted, and it names repos and states only.
+            "series": model.series_doc(),
         },
     }
     weights = load_weights()
@@ -691,7 +704,7 @@ def _build_static(
     )  # public fails closed
     if exports is not None:
         refs |= withheld_by_exports(root, exports)
-    model = Model(root, refs)
+    model = Model(root, refs, series=root / SERIES_FILE, series_max_age=SERIES_MAX_AGE)
     docs = apply(static_data(model), refs)
     if bad := [f for name, doc in docs.items() for f in unmanifested(name, doc)]:
         raise ValueError("unmanifested fields, refusing to publish: " + ", ".join(bad))
@@ -809,6 +822,10 @@ def publish(
     key = fleet_key(root)
     if exports is not None:  # nemik:W636: a changed export rebuilds the pod's view too
         key += "|exports:" + exports_key(exports)
+    # nemik:W671: luthen's series board is baked into the view, so with a snapshot beside the queues
+    # the view is rebuilt every ten minutes
+    if (root / SERIES_FILE).exists():
+        key += "|series:" + str(int(time.time()) // SERIES_REBUILD_S)
     live = base / "current" / "source-key"
     if live.exists() and live.read_text() == key:
         return None

@@ -22,7 +22,7 @@
       "ruler": {"motif": "list-text", "f": "list-text"}
     },
     "wake.json": {
-      "top": {"liveness": "text", "roster": "records", "operator": "record"},
+      "top": {"liveness": "text", "roster": "records", "operator": "record", "series": "record"},
       "roster": {"repo": "enum", "state": "enum", "last_tick": "time", "last_tick_age_s": "count", "waiting": "records"},
       "waiting": {"blocked": "ref", "claimed_by": "list-ref", "title": "text", "salience": "count"},
       "operator": {"repo": "enum", "state": "enum", "last_tick": "time", "waiting": "records"}

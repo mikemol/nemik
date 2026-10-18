@@ -22,7 +22,7 @@ from nemik.manifest import load
 DIALECT = "https://json-schema.org/draft/2020-12/schema"
 
 # A field class (the manifest's vocabulary) as a JSON Schema fragment.
-SCALAR: dict[str, dict[str, Any]] = {
+SCALAR: dict[str, dict[str, object]] = {
     # nemik:W441: an absent reference is published as null (a goal with nothing on deck), not omitted
     "ref": {"type": ["string", "null"]},
     "enum": {"type": "string"},
@@ -93,6 +93,7 @@ def schemas() -> dict[str, dict[str, Any]]:
             "type": "object",
             "properties": {
                 "liveness": field(w["top"]["liveness"]),
+                "series": SCALAR["record"],
                 "roster": {
                     "type": "array",
                     "items": record(w["roster"])
