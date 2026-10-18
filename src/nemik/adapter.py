@@ -233,6 +233,12 @@ def _queue_graph(repo: str, state_path: Path, known: frozenset[str]) -> Graph:
                 g.add((node, NEMIK.waitsFor, waited))
         if kind := model.text(w, "blocked_kind"):
             g.add((node, NEMIK.blockedKind, Literal(kind)))
+        # nemik:W343 (mtools:W1511): any of these may deliver what the card wants; a fallback that
+        # never changes the card's state or its blockers.
+        for supplier in model.strlist(w, "acceptable_suppliers"):
+            g.add((node, NEMIK.acceptableSupplier, reference_uri(repo, supplier)))
+        if want := model.text(w, "want").strip():
+            g.add((node, NEMIK.wantText, Literal(want)))
         # nemik:W598: the card's warrants (PROV-O JSON-LD, mtools:W1384) join the graph; one
         # that does not parse is marked, not guessed at.
         for bad in warrants.attach(g, w):

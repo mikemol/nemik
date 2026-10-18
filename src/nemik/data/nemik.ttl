@@ -12,6 +12,8 @@ nemik:symbol a rdf:Property ; rdfs:comment "The waypoint's W<n> symbol, never re
 nemik:enables a rdf:Property ; rdfs:comment "This waypoint unblocks the object waypoint (inverse of depends-on)." .
 nemik:blockedOn a rdf:Property ; rdfs:comment "Free-text name of what the waypoint waits on." .
 nemik:blockedKind a rdf:Property ; rdfs:comment "agent | human." .
+nemik:acceptableSupplier a rdf:Property ; rdfs:comment "Another waypoint whose delivery would also satisfy what this one wants: a fallback beside blockedOn, never a second block (nemik:W343, mtools:W1511)." .
+nemik:wantText a rdf:Property ; rdfs:comment "One line naming the asset the waypoint wants, whoever delivers it (nemik:W343, mtools:W1511)." .
 nemik:touches a rdf:Property ; rdfs:comment "A tag naming an area the waypoint touches." .
 nemik:stream a rdf:Property ; rdfs:comment "The run log a prov:Activity row came from, for example apply-set-runs (nemik:W558)." .
 nemik:trigger a rdf:Property ; rdfs:comment "What started a run, as its writer names it (nemik:W558, run-row.schema.json)." .
