@@ -1523,7 +1523,13 @@ async function load() {
   } catch (e) {
     // A blank page looks the same as "still loading" -- say what actually happened, and keep
     // whatever was last rendered rather than tearing the graph down over a transient miss.
-    document.getElementById("stat").textContent = data ? "graph refresh failed, showing last-known data" : "graph unavailable";
+    // nemik:W657: a page opened from a file: URL cannot read its sibling data files (the browser refuses
+    // fetch there), which looks like a dead page; say what to do. From a bucket or any http(s) host the
+    // same files load as they do from a server.
+    const fromFile = location.protocol === "file:";
+    document.getElementById("stat").textContent = fromFile
+      ? "opened from a file: the browser will not let a page read its data files here; serve this folder over http (for example python3 -m http.server) or put it in a bucket"
+      : data ? "graph refresh failed, showing last-known data" : "graph unavailable";
     drawSources();
     return;
   }
