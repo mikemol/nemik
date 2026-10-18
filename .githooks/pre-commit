@@ -11,11 +11,22 @@
 # this checkout and nothing changes.
 set -e
 # nemik:W521 (mtools: a gate refuses when it cannot run, never skips): bazel IS the gate, so its absence
-# refuses the commit here and says why, rather than failing later inside the worktree setup.
+# refuses the commit here and says why, rather than failing later inside the worktree setup. It is
+# first because it needs no tool but the shell's own: a PATH with nothing on it gets this message.
 command -v bazel >/dev/null 2>&1 || {
 	echo "pre-commit: bazel is not on PATH, so the gate (bazel test //:precommit) cannot run: commit refused" >&2
 	exit 1
 }
+# nemik:W623: the hook runs from a snapshot of itself. sh reads a script as it runs, so an edit to
+# this file mid-run (a peer's commit lands a change to it) could be parsed half-old, half-new and
+# fail a commit that did nothing wrong. The first run copies the file, execs the copy, and the copy
+# unlinks itself (its open descriptor keeps it readable), so nothing is left in the temp directory.
+if [ -z "${NEMIK_HOOK_SNAPSHOT:-}" ]; then
+	snapshot=$(mktemp "${TMPDIR:-/tmp}/pre-commit.XXXXXX") || exit 1
+	cp "$0" "$snapshot" || exit 1
+	NEMIK_HOOK_SNAPSHOT=$snapshot exec sh "$snapshot" "$@"
+fi
+rm -f "$NEMIK_HOOK_SNAPSHOT"
 real_root="${MIKEMOL_REAL_ROOT:-$(git rev-parse --show-toplevel)}"
 # vendor/wheels/.gitignore is `*`, so a rebuilt wheel exists on disk (and satisfies bazel) yet is not
 # in the commit; the image build then fails from a clean checkout (nemik:W276, 2026-10-10). Every
