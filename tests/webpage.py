@@ -25,14 +25,25 @@ CY_READY = "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length
 
 
 @contextmanager
-def served() -> Iterator[str]:
-    """nemik-serve over the fixture fleet, on a free port; yields its URL."""
+def served(series: Path | None = None) -> Iterator[str]:
+    """nemik-serve over the fixture fleet, on a free port; yields its URL.
+
+    `series` is luthen's snapshot file, passed as --series when given (nemik:W669).
+    """
     with socket.socket() as s:
         s.bind(("127.0.0.1", 0))
         port = s.getsockname()[1]
     env = {**installed._bin()[1], "PYTHONHASHSEED": "0"}
+    extra = ["--series", str(series)] if series is not None else []
     proc = subprocess.Popen(
-        [*installed.script("nemik-serve"), "--root", str(FLEET), "--port", str(port)],
+        [
+            *installed.script("nemik-serve"),
+            "--root",
+            str(FLEET),
+            "--port",
+            str(port),
+            *extra,
+        ],
         env=env,
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
