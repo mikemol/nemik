@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
+#
+# nemik:W622 (parity with mtools' .githooks/commit-msg, W491): every commit message names the waypoint it
+# lands, as a `Waypoint: W<n>` or `Waypoint: none` trailer. mikemol-commit writes that trailer from the
+# stack entry's `waypoint`, so a commit it makes passes; a commit made any other way (a plain `git commit`)
+# has none and is refused, which is the point. The check is the hooks package's own module
+# (mikemol.hooks.waypoint_trailer, vendored as mikemol-hooks), so pytest in mtools witnesses it.
+#
+# An absent interpreter REFUSES, as every hook here does: a stub that skips when its checker is missing is
+# armed while refusing nothing. Recovery if commits lock out: `git checkout HEAD -- .githooks/commit-msg`,
+# or remove the file.
+set -uo pipefail
+
+repo="$(git rev-parse --show-toplevel)"
+# HOST STATE: under an isolated commit `$repo` is a snapshot with no venv, and MIKEMOL_REAL_ROOT names the
+# checkout that has it. Unset, it is `$repo`.
+python="${MIKEMOL_REAL_ROOT:-$repo}/.venv/bin/python3"
+if [ ! -x "$python" ]; then
+    printf 'commit-msg: %s is missing or not executable - cannot check the Waypoint trailer, commit refused\n' "$python" >&2
+    exit 1
+fi
+exec "$python" -m mikemol.hooks.waypoint_trailer "$1"
