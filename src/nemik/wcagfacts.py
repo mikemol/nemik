@@ -16,6 +16,24 @@ KNEE = 0.03928
 RULE = re.compile(r"([^{}@]+)\{([^{}]*)\}")
 NO_OUTLINE = re.compile(r"outline\s*:\s*(none|0)\b")
 FOCUS = re.compile(r":focus(-visible)?\b")
+# 1.4.1: the states the view colours, the table of label glyphs it prefixes, and the per-state
+# cytoscape rules that set a border style or a shape.
+STATES = [
+    "ready",
+    "working",
+    "blocked",
+    "done",
+    "dropped",
+    "unclaimed",
+    "other",
+    "interrupt",
+]
+STATE_MARKS = re.compile(r"const STATE_MARK = \{([^}]*)\}")
+GLYPH = re.compile(r'(\w+):\s*"([^"]*)"')
+NODE_RULE = re.compile(
+    r'node\[(state|minted_during) = "(\w+)"\]\',\s*style:\s*\{([^{}]*)\}'
+)
+NON_COLOUR = ["border-style", "shape"]
 TOKEN = re.compile(r"(--[a-z0-9-]+)\s*:\s*(#[0-9a-fA-F]{3,8})\b")
 LIGHT = re.compile(r":root\s*\{([^}]*)\}")
 DARK = re.compile(
@@ -79,6 +97,37 @@ def focus(html: str) -> dict[str, list[str]]:
             elif NO_OUTLINE.search(body):
                 removed.append(selector)
     return {"removed": removed, "styled": styled}
+
+
+def marks(html: str) -> dict[str, list[str]]:
+    """Read the marks, other than colour, that tell the view's card states apart (WCAG 1.4.1).
+
+    Args:
+        html: The page's text.
+
+    Returns:
+        {state: kinds} for every state the view colours: "glyph" when STATE_MARK gives it a label
+        prefix, "border-style" or "shape" when a cytoscape rule for that state (or, for interrupt,
+        for cards minted during an interrupt) sets one. A state with nothing is listed with [].
+        A page with no STATE_MARK table draws no states, so it has nothing to judge: {}.
+
+    """
+    found: dict[str, list[str]] = {state: [] for state in STATES}
+    table = STATE_MARKS.search(html)
+    if not table:
+        return {}
+    glyphs: list[tuple[str, str]] = GLYPH.findall(table.group(1))
+    for state, glyph in glyphs:
+        if glyph.strip() and state in found:
+            found[state].append("glyph")
+    rules: list[tuple[str, str, str]] = NODE_RULE.findall(html)
+    for key, value, body in rules:
+        if value not in found or (key == "minted_during" and value != "interrupt"):
+            continue
+        for kind in NON_COLOUR:
+            if f'"{kind}"' in body or f"{kind}:" in body:
+                found[value].append(kind)
+    return found
 
 
 def luminance(colour: str) -> float:

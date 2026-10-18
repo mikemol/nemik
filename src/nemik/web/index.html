@@ -137,13 +137,15 @@ let data = null, cy = null, selectedId = null, liveness = {}, lastMode = null;
 // front of the card's label, so state reads without its fill colour, in the graph and the treemap alike.
 // The glyphs are ones every base font carries (U+25B8, U+2016, U+221A, U+00D7): a glyph a font lacks draws
 // as a wide placeholder box, which widened labels only under the gate's headless Chrome.
-const STATE_MARK = { ready: "", working: "▸ ", blocked: "‖ ", done: "√ ", dropped: "× " };
+// nemik:W661: a state outside these six (colour --other) carries "* ", ASCII and this role only ("? " is the
+// unclaimed label's), so the only state with no mark is ready (WCAG 1.4.1, judged by data/wcag.rego).
+const STATE_MARK = { ready: "", working: "▸ ", blocked: "‖ ", done: "√ ", dropped: "× ", other: "* " };
 // nemik:W456: what an umbrella's label carries after its symbol, each glyph used in this role only (the
 // roll-up count once reused the working mark: "‖ W503 ▸ 3" read as working). ASCII "+" needs no font.
 const ROLLUP_MARK = " +", EXPANDED_MARK = " ▾";
 // nemik:W477: stored ready, but an open card enables it, so it waits (nemik:W465). ASCII, this role only.
 const BEHIND_MARK = "~ ";
-const stateMark = d => (d.state === "ready" && d.behind_open ? BEHIND_MARK : STATE_MARK[d.state] || "");
+const stateMark = d => (d.state === "ready" && d.behind_open ? BEHIND_MARK : STATE_MARK[STATES.includes(d.state) ? d.state : "other"] || "");
 document.getElementById("legend").innerHTML = [...STATES, "other"].map(s =>
   `<span><i class="dot" style="background:${color(s)}"></i>${STATE_MARK[s] || ""}${s}</span>`).join("")
   + `<span>W1${ROLLUP_MARK}3 umbrella, 3 rolled up</span><span>W1${EXPANDED_MARK} umbrella, expanded</span>`

@@ -4,8 +4,8 @@
 # The facts are measurements and this is the judgement: which token pairs matter and how much
 # contrast each needs. A pair under its bar is a violation; there is no waiver.
 #
-# Not judged here: --done and --dropped, which are de-emphasised states on purpose; the non-colour
-# mark each state carries (1.4.1) is a later child of W466.
+# Not judged for contrast: --done and --dropped, which are de-emphasised states on purpose. The
+# non-colour mark each state carries (1.4.1, W659) is judged below from input.marks.
 package wcag
 
 import rego.v1
@@ -71,6 +71,22 @@ violations contains v if {
 }
 
 replaced(selector) if selector in input.focus.styled
+
+# 1.4.1 Use of Colour: colour is not the only way to tell the card states apart. input.marks
+# (nemik.wcagfacts.marks) lists, per state, the marks the page draws besides its fill: a label
+# glyph, a border style, a shape. One state may carry none, the baseline the others differ from;
+# two states with none differ by colour alone, and each is reported.
+unmarked := {state | some state, kinds in input.marks; count(kinds) == 0}
+
+violations contains v if {
+	count(unmarked) > 1
+	some state in unmarked
+	v := {
+		"criterion": "1.4.1",
+		"state": state,
+		"why": "no mark but its colour, and another state has none either",
+	}
+}
 
 # A pair whose token the page does not define cannot be judged and is reported, not skipped.
 unjudged contains u if {
