@@ -51,6 +51,10 @@
   "as_written": "class decorator got unexpected argument",
   "stripped": "class decorator got unexpected argument"
  },
+ "converge": {
+  "as_written": "no module named 'collections.abc'",
+  "stripped": "no module named 'collections.abc'"
+ },
  "critical": {
   "as_written": "Assert failed:\tdictionary items are invalid\nExpression:\tt && t->size() == 2\nSource:\t\t/github/workspace/codon/parser/ast/expr.cpp:238",
   "stripped": "Assert failed:\tdictionary items are invalid\nExpression:\tt && t->size() == 2\nSource:\t\t/github/workspace/codon/parser/ast/expr.cpp:238"
