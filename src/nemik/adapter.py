@@ -12,6 +12,7 @@ import re
 from collections.abc import Callable
 from datetime import datetime
 from pathlib import Path
+from urllib.parse import quote, unquote
 
 from mikemol.pathsforward import ledger, model, store
 from rdflib import RDF, Graph, Literal, Namespace, URIRef
@@ -58,6 +59,37 @@ def workstream_uri(repo: str) -> URIRef:
 
 def waypoint_uri(repo: str, symbol: str) -> URIRef:
     return URIRef(f"{BASE}{repo}/{symbol}")
+
+
+def resource_uri(repo: str, address: str) -> URIRef:
+    """Name an apply resource (a Terraform address such as module.a.b_c.d["k"][0]) by IRI.
+
+    Every character outside the unreserved set is percent-encoded, so the address is one valid IRI
+    path segment whatever it holds (brackets, quotes, spaces, slashes), and resource_address gives
+    it back exactly (nemik:W461). A card symbol such as W12 has nothing to encode and is unchanged.
+
+    Args:
+        repo: The repo whose host root publishes the resource.
+        address: The resource's address, as the publisher writes it.
+
+    Returns:
+        The resource's IRI under the repo.
+
+    """
+    return URIRef(f"{BASE}{repo}/{quote(address, safe='')}")
+
+
+def resource_address(uri: str) -> str:
+    """Give back the address a resource_uri names.
+
+    Args:
+        uri: An IRI resource_uri made.
+
+    Returns:
+        The address with its percent-encoding undone.
+
+    """
+    return unquote(uri.removeprefix(BASE).partition("/")[2])
 
 
 def _instant(text: str) -> Literal:
