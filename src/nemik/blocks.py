@@ -240,6 +240,58 @@ def node_flags(
     return out
 
 
+def waits_on(
+    rows: dict[str, tuple[list[str], list[str]]], node: str, ancestor: str
+) -> bool:
+    """nemik:W693: whether a card waits on an ancestor, directly or through other cards.
+
+    Args:
+        rows: Each open card's (waits, enables), as `repo:W<n>` references.
+        node: The card to start from.
+        ancestor: The card it should be blocked behind.
+
+    Returns:
+        True when following blocked_on edges from the node reaches the ancestor.
+
+    """
+    seen: set[str] = set()
+    todo = list(rows[node][0]) if node in rows else []
+    while todo:
+        here = todo.pop()
+        if here == ancestor:
+            return True
+        if here not in seen:
+            seen.add(here)
+            todo.extend(rows[here][0] if here in rows else [])
+    return False
+
+
+def disagreements(
+    rows: dict[str, tuple[list[str], list[str]]],
+) -> list[tuple[str, str]]:
+    """nemik:W693: the enables edges whose target does not wait on its source.
+
+    A card that enables another says the other cannot proceed without it, so the other should wait
+    on it, directly or through other cards; where it does not, the enables and blocked_on edges
+    disagree (the operator's data-integrity case, 695f3e0a line 80516). A card with other blockers
+    too (a join) still waits on this one and is no finding. nemik.collapse holds the same rule for
+    the grouping, which cannot import this module (the Codon census stages siblings unimportable).
+
+    Args:
+        rows: Each open card's (waits, enables), as `repo:W<n>` references.
+
+    Returns:
+        (card, enabled card) for each such edge, sorted.
+
+    """
+    return sorted(
+        (card, e)
+        for card, (_, enables) in rows.items()
+        for e in set(enables)
+        if not waits_on(rows, e, card)
+    )
+
+
 def dependency_cycles(g: Graph) -> list[tuple[Node, ...]]:
     """nemik:W484 (mtools:W1134 found a ring of three ready cards blocked into a deadlock): every
     cycle of open cards that wait on or enable one another, named once from its earliest card, as

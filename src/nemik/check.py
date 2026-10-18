@@ -26,13 +26,116 @@ from mikemol.pathsforward.store import UnreadableStateError
 from rdflib import Graph, Literal
 
 from nemik import cachestore, warrantdebt
-from nemik.adapter import BASE, NEMIK, OSLC_CM, bind, queue_graph, workstream_uri
+from nemik.adapter import (
+    BASE,
+    NEMIK,
+    OSLC_CM,
+    bind,
+    queue_graph,
+    waypoint_uri,
+    workstream_uri,
+)
 from nemik.adoption import adoption
-from nemik.blocks import annotate, ref
+from nemik.blocks import annotate, disagreements, ref
 from nemik.digest import collapse
 from nemik.idle import findings as idle_findings
 
 QUEUE, LEDGER = "paths-forward.json", "paths-forward.ledger"
+WRITER = "mikemol-paths-forward --state"
+
+
+def blocked_rows(merged: Graph) -> dict[str, tuple[list[str], list[str]]]:
+    """nemik:W693: every open card with the cards it waits on and the cards it enables.
+
+    Args:
+        merged: The merged queue graph.
+
+    Returns:
+        card -> (waits, enables), as `repo:W<n>` references, over open cards only.
+
+    """
+    open_cards = {
+        n
+        for n in merged.subjects(OSLC_CM.state, None)
+        if (n, OSLC_CM.state, NEMIK.Done) not in merged
+    }
+    return {
+        ref(n): (
+            sorted(
+                {ref(t) for t in merged.objects(n, NEMIK.waitsFor) if t in open_cards}
+            ),
+            sorted(
+                {ref(t) for t in merged.objects(n, NEMIK.enables) if t in open_cards}
+            ),
+        )
+        for n in open_cards
+    }
+
+
+def integrity_commands(merged: Graph, root: Path) -> dict[str, list[str]]:
+    """nemik:W693: for each integrity finding, the two ways to fix it, as commands (a dry run).
+
+    A card that enables E says E cannot proceed without it, but where E does not wait on the card
+    the enables and blocked_on edges disagree. Either E should wait on the card (add the
+    blocked_on) or the card should not enable E (drop the enables edge). Which is right is the
+    owning repo's call, so both are printed and nothing is applied.
+
+    Args:
+        merged: The merged queue graph.
+        root: The directory holding the repos, for the state-file paths in the commands.
+
+    Returns:
+        The lines to print, by the repo that holds the card.
+
+    """
+    rows = blocked_rows(merged)
+    out: dict[str, list[str]] = {}
+    for card, escaped in disagreements(rows):
+        repo, _, sym = card.partition(":")
+        erepo, _, esym = escaped.partition(":")
+        keep = [r.removeprefix(f"{repo}:") for r in rows[card][1] if r != escaped]
+        waiting = sorted(
+            str(w) for w in merged.objects(waypoint_uri(erepo, esym), NEMIK.blockedOn)
+        )
+        state_of = f"{WRITER} {root}/%s/.claude/paths-forward.json"
+        drop = f"{state_of % repo} --update {sym} --enables {' '.join(keep)}".rstrip()
+        wait = " ".join([*waiting, sym if erepo == repo else card])
+        add = f"{state_of % erepo} --update {esym} --blocked-on {wait} --blocked-kind agent"
+        out.setdefault(repo, []).extend(
+            [
+                f"{card}: enables {escaped}, which does not wait on it",
+                f"    drop the enables edge: {drop}",
+                f"    or add the blocked_on: {add}",
+            ]
+        )
+    return out
+
+
+def integrity_findings(merged: Graph) -> dict[str, list[tuple[str, str]]]:
+    """nemik:W693: the enables edges whose target does not wait on the card that enables it.
+
+    The operator (2026-10-18, 695f3e0a line 80516) called an enables edge into a card that is not
+    transitively blocked behind its source a data-integrity problem: the enables and blocked_on
+    edges disagree. A card that also has other blockers (a join) still waits on this one and is
+    not named. This names each such edge so it is fixed where it is written.
+
+    Args:
+        merged: The merged queue graph.
+
+    Returns:
+        (symbol, message) pairs by repo, for each open card whose enables names a card that does
+        not wait on it.
+
+    """
+    found: dict[str, list[tuple[str, str]]] = {}
+    for card, escaped in disagreements(blocked_rows(merged)):
+        repo, _, symbol = card.partition(":")
+        said = (
+            f"enables {escaped}, which does not wait on it: the enables and blocked_on edges "
+            "disagree (add the blocked_on, or drop the enables edge)"
+        )
+        found.setdefault(repo, []).append((symbol, said))
+    return found
 
 
 def default_root() -> Path:
@@ -277,6 +380,12 @@ def survey(
     debts = warrantdebt.findings(merged, warrantdebt.baseline())
     for drepo, dtext in debts.items():
         by_repo.setdefault(drepo, []).append(("Warning", "--", dtext))
+    # nemik:W693: an enables edge whose target does not wait on its source (the operator's
+    # data-integrity rule, 695f3e0a line 80516): the enables and blocked_on edges disagree.
+    # Staged at Info, as ManifestShape was: the first run found 274 across the fleet, and a
+    # Warning is not cosmetic, so it rises on a declared ratchet from that count, not before.
+    for irepo, rows in integrity_findings(merged).items():
+        by_repo.setdefault(irepo, []).extend(("Info", sym, said) for sym, said in rows)
     # nemik:W405: a card waiting on another repo's card that has open prerequisites of its own (an
     # umbrella, or a card a peer has since atomized) gets the leaves to cite instead, with the exact
     # re-point command, so the fix is one command rather than a hand search (three hand re-points of
@@ -444,6 +553,49 @@ def _realizability(root: Path) -> int:
     return 2 if unjudged else int(residue > 0)
 
 
+def committed_verdict(root: Path, named: set[str]) -> int:
+    """Print the queue provenance lines and say whether a named repo's queue is not committed.
+
+    Args:
+        root: The directory holding the repos.
+        named: The repos to hold to the verdict; none named means every repo.
+
+    Returns:
+        4 when any named repo is read from an uncommitted or untracked queue, otherwise 0.
+
+    """
+    lines = provenance(root)
+    sys.stdout.write("".join(f"{line}\n" for line in lines))
+    stale = [
+        line
+        for line in lines
+        if line.startswith("provenance: queue ")
+        and line.split()[3].split("@")[0] != "committed"
+        and (not named or line.split()[2] in named)
+    ]
+    return 4 if stale else 0
+
+
+def integrity_report(root: Path) -> int:
+    """Print the integrity findings per repo with the fixes as commands, and apply nothing.
+
+    Args:
+        root: The directory holding the repos.
+
+    Returns:
+        0.
+
+    """
+    whole = bind(Graph())
+    for _, g, _ in survey(root):
+        if g is not None:
+            whole += g
+    for repo, said in sorted(integrity_commands(whole, root).items()):
+        sys.stdout.write(f"{repo}: {len(said) // 3} finding(s)\n")
+        sys.stdout.write("".join(f"{line}\n" for line in said))
+    return 0
+
+
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(
         prog="nemik-check", description=(__doc__ or "").splitlines()[0]
@@ -502,6 +654,13 @@ def main(argv: list[str] | None = None) -> None:
         "mikemol-paths-forward and move each stale letter into its inbox's archive/ (nemik:W301)",
     )
     ap.add_argument(
+        "--integrity",
+        action="store_true",
+        help="dry run: for each enables edge that leaves the subtree its card waits behind "
+        "(nemik:W693), print the count per repo and the two fixes as commands, drop the edge or "
+        "add the blocked_on; applies nothing. Each repo's session chooses",
+    )
+    ap.add_argument(
         "--digest",
         action="store_true",
         help="print each Info message several cards share once, with the count (the "
@@ -525,18 +684,9 @@ def main(argv: list[str] | None = None) -> None:
         print("\n".join(said))
         sys.exit(code)
     if args.committed is not None:
-        lines = provenance(args.root)
-        for line in lines:
-            print(line)
-        named = set(args.committed)
-        stale = [
-            line
-            for line in lines
-            if line.startswith("provenance: queue ")
-            and line.split()[3].split("@")[0] != "committed"
-            and (not named or line.split()[2] in named)
-        ]
-        sys.exit(4 if stale else 0)
+        sys.exit(committed_verdict(args.root, set(args.committed)))
+    if args.integrity:
+        sys.exit(integrity_report(args.root))
 
     for line in provenance(args.root):
         print(line)
