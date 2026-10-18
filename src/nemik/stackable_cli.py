@@ -27,6 +27,51 @@ from nemik.stackable import generated_files, manifest, proposal_rows, propose, r
 RIDE_ALONG_BAR = 2
 
 
+def history_cited(repo_dir: Path) -> Callable[[str], list[str]]:
+    """Bind a repo's git history as the source of a card's touched files (nemik:W611).
+
+    Args:
+        repo_dir: The repo's working directory.
+
+    Returns:
+        A function from a card's symbol to the files the commits citing it touched.
+
+    """
+
+    def cited(symbol: str) -> list[str]:
+        return history.cited_files(repo_dir, symbol)
+
+    return cited
+
+
+def drifted(
+    g: Graph, name: str, cited: Callable[[str], list[str]]
+) -> list[tuple[str, list[str]]]:
+    """Find the done cards of a repo whose commits touched files outside their manifest.
+
+    Args:
+        g: The merged queue graph.
+        name: The repo.
+        cited: Maps a symbol to the files its citing commits touched.
+
+    Returns:
+        (symbol, files outside the manifest) for each done card that declared a manifest and
+        drifted from it, in symbol order.
+
+    """
+    prefix = f"urn:nemik:{name}/"
+    found: list[tuple[str, list[str]]] = []
+    for node in g.subjects(OSLC_CM.state, STATE["done"]):
+        if not str(node).startswith(prefix):
+            continue
+        symbol = str(node)[len(prefix) :]
+        planned = manifest(g, name, symbol)
+        extra = drift(cited(symbol), planned) if planned else []
+        if extra:
+            found.append((symbol, extra))
+    return sorted(found)
+
+
 def drift_lines(
     g: Graph, name: str, cited: Callable[[str], list[str]], at_least: int
 ) -> list[str]:
@@ -42,17 +87,7 @@ def drift_lines(
         One line per done card with a manifest and some drift, then one per ride-along kind.
 
     """
-    prefix = f"urn:nemik:{name}/"
-    drifts: list[tuple[str, list[str]]] = []
-    for node in g.subjects(OSLC_CM.state, STATE["done"]):
-        if not str(node).startswith(prefix):
-            continue
-        symbol = str(node)[len(prefix) :]
-        planned = manifest(g, name, symbol)
-        extra = drift(cited(symbol), planned) if planned else []
-        if extra:
-            drifts.append((symbol, extra))
-    drifts.sort()
+    drifts = drifted(g, name, cited)
     lines = [f"{symbol}: drift {' '.join(extra)}" for symbol, extra in drifts]
     for one, cards in ride_along([extra for _, extra in drifts], at_least):
         lines.append(f"ride-along: {one} missed by {cards} cards")
@@ -67,9 +102,7 @@ def print_drift(g: Graph, repo: Path) -> None:
         repo: The repo's working directory.
 
     """
-    found = drift_lines(
-        g, repo.name, lambda s: history.cited_files(repo, s), RIDE_ALONG_BAR
-    )
+    found = drift_lines(g, repo.name, history_cited(repo), RIDE_ALONG_BAR)
     sys.stdout.write("\n".join(found) + "\n")
 
 

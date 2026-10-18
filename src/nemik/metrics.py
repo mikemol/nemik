@@ -103,6 +103,7 @@ HELP = {
     "nemik_umbrella_forecast_days": "Days the slowest umbrella needs at the recent close rate.",
     "nemik_unforecastable_cards": "Working cards with no children, so no forecast can be made.",
     "nemik_cards_reopened_24h": "Cards that went from done back to open in the last 24 hours.",
+    "nemik_manifest_drift": "Done cards whose commits touched files outside their manifest.",
     "nemik_run_log_unmigrated": "Source run-log lines that predate the run-row shape, by stream.",
 }
 
@@ -403,6 +404,31 @@ def ticks(repo: str, ledger: Path) -> list[tuple[str, str]]:
     return out
 
 
+def drift_lines(root: Path, merged: Graph) -> list[str]:
+    """nemik:W611: per repo, the done cards whose commits touched files outside their manifest.
+
+    A manifest is a lower bound; a rising count says cards are understating the files they edit.
+    One git walk per done card, so it is computed only when asked for by name.
+
+    Args:
+        root: The fleet root.
+        merged: The merged queue graph (a card's manifest is read from it).
+
+    Returns:
+        The gauge's TYPE line and a sample for each repo with a git history.
+
+    """
+    from nemik.stackable_cli import drifted, history_cited
+
+    out = ["# TYPE nemik_manifest_drift gauge"]
+    for repo, path in workstream_files(root, QUEUE):
+        top = path.parents[1] if path.parent.name == ".claude" else path.parent
+        if (top / ".git").exists():
+            count = len(drifted(merged, repo, history_cited(top)))
+            out.append(f"nemik_manifest_drift{label(repo=repo)} {count}")
+    return out
+
+
 def history_lines(
     root: Path, merged: Graph, now: datetime, wanted: list[str]
 ) -> list[str]:
@@ -430,6 +456,8 @@ def history_lines(
         out += commit_lines(root, now)
     if "nemik_cards_reopened_24h" in wanted:
         out += reopened_lines(root, now)
+    if "nemik_manifest_drift" in wanted:
+        out += drift_lines(root, merged)
     return out
 
 
