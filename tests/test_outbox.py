@@ -53,6 +53,38 @@ def test_each_state_is_the_activity_the_actor_last_did(tmp_path: Path) -> None:
     assert '"totalItems": 3' in text
 
 
+def test_an_activity_is_published_when_the_card_was_last_worked(tmp_path: Path) -> None:
+    """A worked card's time is its last work; a card never worked falls back to its issue time."""
+    cards: list[dict[str, object]] = [
+        {
+            "symbol": "W1",
+            "title": "worked",
+            "status": "done",
+            "issued_at": "2026-10-01T00:00:00Z",
+            "last_worked": "2026-10-02T03:04:05Z",
+        },
+        {
+            "symbol": "W2",
+            "title": "idle",
+            "status": "ready",
+            "issued_at": "2026-10-01T06:00:00Z",
+        },
+        {"symbol": "W3", "title": "undated", "status": "ready"},
+    ]
+    state: dict[str, object] = {
+        "version": 1,
+        "project_root": "/a",
+        "counter": 3,
+        "residue": [],
+        "waypoints": cards,
+    }
+    path = tmp_path / "a.json"
+    path.write_text(json.dumps(state), encoding="utf-8")
+    text = outbox("a", queue_graph("a", path))
+    stamps = [line.split('"')[3] for line in text.splitlines() if '"published"' in line]
+    assert stamps == ["2026-10-02T03:04:05+00:00", "2026-10-01T06:00:00+00:00"]
+
+
 def test_a_withheld_card_leaves_the_document_whole(tmp_path: Path) -> None:
     """Withholding W2 removes its activity and its title from the bytes."""
     hidden = frozenset({str(waypoint_uri("a", "W2"))})

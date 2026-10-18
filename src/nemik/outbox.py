@@ -61,7 +61,16 @@ def outbox(repo: str, queue: Graph, withheld: frozenset[str] = frozenset()) -> s
         ticket: dict[str, object] = {"type": "Ticket", "id": str(card)}
         if title is not None:
             ticket["summary"] = str(title)
-        items.append({"type": verb(str(state)), "actor": ws, "object": ticket})
+        activity: dict[str, object] = {
+            "type": verb(str(state)),
+            "actor": ws,
+            "object": ticket,
+        }
+        # The activity happened when the card was last worked; one never worked, when issued.
+        when = queue.value(card, NEMIK.lastWorked) or queue.value(card, DCTERMS.created)
+        if when is not None:
+            activity["published"] = str(when)
+        items.append(activity)
     document: dict[str, object] = {
         "@context": CONTEXT,
         "id": f"{ws}/outbox",
