@@ -386,3 +386,43 @@ nemik:WarrantRecordShape a sh:NodeShape ;
                   sh:message "a warrant's transcript record needs prov:wasAttributedTo a prov:Agent (the operator is urn:nemik:operator)" ] ;
     sh:property [ sh:path prov:wasGeneratedBy ; sh:minCount 1 ; sh:class prov:Activity ;
                   sh:message "a warrant's transcript record needs prov:wasGeneratedBy the utterance, a prov:Activity" ] .
+
+# A retro with no precommit is narrative only (nemik:W648, gate G0): nothing recorded what the card
+# predicted at mint time, so the retro cannot say how the prediction missed.
+nemik:RetroPrecommitShape a sh:NodeShape ;
+    sh:targetClass nemik:Retro ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "narrative only: this retro records no precommit (the card's mint-time next step and witness), so it cannot show how the prediction missed" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this a <https://github.com/mikemol/nemik/ns#Retro> .
+                FILTER NOT EXISTS {
+                    $this <https://github.com/mikemol/nemik/ns#precommit> ?p .
+                    FILTER(STRLEN(STR(?p)) > 0)
+                }
+            }""" ] .
+
+# A retro names a trigger and a root, and they differ (nemik:W648, gate G3): the trigger is the
+# symptom that started the review, the root is why it could happen.
+nemik:RetroRootShape a sh:NodeShape ;
+    sh:targetClass nemik:Retro ;
+    sh:severity sh:Violation ;
+    sh:sparql [
+        sh:message "a retro must name its trigger and its root" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this a <https://github.com/mikemol/nemik/ns#Retro> .
+                FILTER (
+                    NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#trigger> ?t . FILTER(STRLEN(STR(?t)) > 0) }
+                    || NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#root> ?r . FILTER(STRLEN(STR(?r)) > 0) }
+                )
+            }""" ] ;
+    sh:sparql [
+        sh:message "the root equals the trigger: the trigger is the symptom, the root is why it could happen" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this <https://github.com/mikemol/nemik/ns#trigger> ?t ;
+                      <https://github.com/mikemol/nemik/ns#root> ?r .
+                FILTER(STR(?t) = STR(?r))
+            }""" ] .

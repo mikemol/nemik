@@ -105,3 +105,8 @@ nemik:ticksBlocked a rdf:Property ; rdfs:comment "mtools' ticks_blocked counter.
 nemik:unresolvedBlocker a rdf:Property ; rdfs:comment "A blocked_on value on a blocked waypoint that resolves to no workstream, waypoint or operator." .
 nemik:pathsforwardAdoption a rdf:Property ; rdfs:comment "declared | owner | missing | no-pyproject | unobservable: whether the workstream runs mikemol-paths-forward from its own environment (nemik.adoption)." .
 nemik:weather a rdf:Property ; rdfs:comment "nemik:W174: a hash of the waypoint's witness query; equal values wait on the same outage. The query text is not in the graph." .
+# nemik:W648 (retro node, gates G0 and G3): the vocabulary the Retro shapes judge. nemik:trigger above is shared with run rows.
+nemik:Retro a rdfs:Class ; rdfs:comment "A retrospective on a card or a failure: what was predicted, what started the review, and why it could happen (nemik:W492)." .
+nemik:precommit a rdf:Property ; rdfs:comment "What the card predicted at mint time (its next step and witness), copied into the retro; empty makes the retro narrative only (nemik:W648, G0)." .
+nemik:root a rdf:Property ; rdfs:comment "Why the trigger could happen; it differs from the trigger, which is the symptom (nemik:W648, G3)." .
+nemik:contributing a rdf:Property ; rdfs:comment "A contributing factor beside the root (nemik:W648, G3)." .
