@@ -127,6 +127,28 @@ crowded(t, o) if {
 	(cx - ox) * (cx - ox) + (cy - oy) * (cy - oy) < 576
 }
 
+# 4.1.2 Name, Role, Value: every control has an accessible name. 2.5.3 Label in Name: when it shows
+# text, the name contains it. input.names is a list of {"target", "accessible", "visible"} read off
+# the rendered page (tests/test_wcag_render.py): the name the browser computes from aria-label, the
+# labels and the text, and the letters and digits the control shows (a glyph or an aria-hidden span
+# is decoration, not a label). Judged by name_violations, apart from violations, as target sizes are.
+name_violations contains v if {
+	some t in input.names
+	trim_space(t.accessible) == ""
+	v := {"criterion": "4.1.2", "target": t.target, "why": "no accessible name"}
+}
+
+name_violations contains v if {
+	some t in input.names
+	trim_space(t.visible) != ""
+	not contains(lower(t.accessible), lower(trim_space(t.visible)))
+	v := {
+		"criterion": "2.5.3",
+		"target": t.target,
+		"why": "the accessible name does not contain the visible text",
+	}
+}
+
 # A pair whose token the page does not define cannot be judged and is reported, not skipped.
 unjudged contains u if {
 	some theme in themes

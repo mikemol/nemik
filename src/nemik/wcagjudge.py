@@ -106,3 +106,23 @@ def judge_targets(targets: list[Row]) -> list[Row]:
 
 
 TARGET_QUERY = '{"violations": data.wcag.target_violations}'
+NAME_QUERY = '{"violations": data.wcag.name_violations}'
+
+
+def judge_names(names: list[Row]) -> list[Row]:
+    """Judge the accessible names of a rendered page's controls (WCAG 4.1.2 and 2.5.3).
+
+    Args:
+        names: One row per control, {"target", "accessible", "visible"}: the name a browser
+            computes for it and the letters and digits it shows, as tests/test_wcag_render.py
+            reads them.
+
+    Returns:
+        The controls with no name, and those whose name leaves out the text they show; each
+        names the criterion and the target. Empty when opa is unavailable, which a caller must
+        not read as a pass.
+
+    """
+    policy = str(files("nemik").joinpath("data/wcag.rego"))
+    doc: dict[str, object] = {"names": names}
+    return _rows(_value(opa_json(NAME_QUERY, doc, [policy])), "violations")
