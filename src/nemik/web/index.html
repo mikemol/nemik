@@ -154,12 +154,15 @@ const STATE_MARK = { ready: "", working: "▸ ", blocked: "‖ ", done: "√ ", 
 const ROLLUP_MARK = " +", EXPANDED_MARK = " ▾";
 // nemik:W477: stored ready, but an open card enables it, so it waits (nemik:W465). ASCII, this role only.
 const BEHIND_MARK = "~ ";
+// nemik:W684: a ready leaf with no manifest cannot be stacked; the Selected panel says so. Its drawn
+// indicator is the warning badge (nemik:W688), not a state of its own: a ready card drawn with another
+// state's fill and mark broke the one-mark-per-state and second-channel rules (the gate's browser tests).
+const needsManifest = d => d.state === "ready" && d.needs_manifest === true;
 const stateMark = d => (d.state === "ready" && d.behind_open ? BEHIND_MARK : STATE_MARK[STATES.includes(d.state) ? d.state : "other"] || "");
 document.getElementById("legend").innerHTML = [...STATES, "other"].map(s =>
   `<span><i class="dot" style="background:${color(s)}"></i>${STATE_MARK[s] || ""}${s}</span>`).join("")
   + `<span>W1${ROLLUP_MARK}3 umbrella, 3 rolled up</span><span>W1${EXPANDED_MARK} umbrella, expanded</span>`
-  + `<span>${BEHIND_MARK}W1 stored ready, but waits on an open card</span>`
-  + `<span>W1 · 4 salience it absorbs; W1 · (4) demand a waiting card carries on to the cards it waits on (salience order)</span>`;
+  + `<span>${BEHIND_MARK}W1 stored ready, but waits on an open card</span>`  + `<span>W1 · 4 salience it absorbs; W1 · (4) demand a waiting card carries on to the cards it waits on (salience order)</span>`;
 
 function esc(s) { return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 
@@ -1328,7 +1331,7 @@ function detailHTML(n) {
   return `<dl>
     <dt>cite as</dt><dd>${citeLink(n.cite)}</dd>
     <dt>title</dt><dd>${linked(n.title)}</dd>
-    <dt>state</dt><dd>${esc(n.state)}</dd>
+    <dt>state</dt><dd>${esc(n.state)}${needsManifest(n) ? " (needs a manifest: without one it cannot be stacked)" : ""}</dd>
     ${n.salience !== undefined ? `<dt>salience</dt><dd>${n.salience} (flow model; band ${esc(n.band || "")}, rank ${n.rank_pos})</dd>` : ""}
     ${n.path_count ? `<dt>longest chains through it</dt><dd>${n.path_count}${n.path_count > 1 ? " (tied alternatives)" : ""}</dd>` : ""}
     ${n.minted_during ? `<dt>minted during</dt><dd>${esc(n.minted_during)}</dd>` : ""}

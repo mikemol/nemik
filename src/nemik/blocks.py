@@ -143,6 +143,53 @@ def ready_behind_open(g: Graph) -> dict[Node, list[Node]]:
     return out
 
 
+def ready_unmanifested(g: Graph) -> list[Node]:
+    """nemik:W684: each ready leaf that declares no manifest, the cards ManifestShape reports.
+
+    A leaf is a ready card no open card enables. Without a manifest it cannot be stacked
+    (nemik:W613), so the view draws it as waiting for one instead of as pickable. A pure reading of
+    the graph, so the check and the view agree.
+
+    Args:
+        g: The merged queue graph.
+
+    Returns:
+        The cards, in node order.
+
+    """
+    out: list[Node] = []
+    for node in g.subjects(OSLC_CM.state, NEMIK.Ready):
+        if (node, NEMIK.plannedPath, None) in g:
+            continue
+        open_enablers = [
+            c
+            for c in g.subjects(NEMIK.enables, node)
+            if (c, OSLC_CM.state, None) in g and (c, OSLC_CM.state, NEMIK.Done) not in g
+        ]
+        if not open_enablers:
+            out.append(node)
+    return sorted(out, key=str)
+
+
+def node_marks(g: Graph) -> dict[str, dict[str, bool]]:
+    """nemik:W477, W684: the flags the view draws on a ready card, by node id.
+
+    Args:
+        g: The merged queue graph.
+
+    Returns:
+        For each ready card that waits on an open card `behind_open`, and for each ready leaf with
+        no manifest `needs_manifest`, both true; a card with neither has no entry.
+
+    """
+    marks: dict[str, dict[str, bool]] = {}
+    for node in ready_behind_open(g):
+        marks.setdefault(str(node), {})["behind_open"] = True
+    for node in ready_unmanifested(g):
+        marks.setdefault(str(node), {})["needs_manifest"] = True
+    return marks
+
+
 def dependency_cycles(g: Graph) -> list[tuple[Node, ...]]:
     """nemik:W484 (mtools:W1134 found a ring of three ready cards blocked into a deadlock): every
     cycle of open cards that wait on or enable one another, named once from its earliest card, as

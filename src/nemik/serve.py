@@ -401,12 +401,12 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
             item["on_path_repo"] = item["cite"] in repo_chain[item["repo"]]
     # nemik:W477: a card stored ready while an open card enables it (nemik:W465's finding) is drawn
     # as waiting: its fill says ready, but the flow model counts it as waiting and gives it no salience.
-    from nemik.blocks import ready_behind_open
+    # nemik:W684: a ready leaf with no manifest cannot be stacked, so it is drawn waiting for one.
+    from nemik.blocks import node_marks
 
-    behind = {str(s) for s in ready_behind_open(g)}
+    marks = node_marks(g)
     for item in nodes:
-        if item["id"] in behind:
-            item["behind_open"] = True
+        item.update(marks.get(item["id"], {}))
     # nemik:W264: the demand that crossed each dependency, summed over the ready repos' solves, as
     # the width the page draws the edge with. A `waits` edge runs waiter -> blocker, an `enables`
     # edge prerequisite -> dependent; the flow names a dependency (needing card, prerequisite).
