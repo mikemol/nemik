@@ -56,7 +56,7 @@ def seconds(text: str) -> float:
     return float(int(m[1]) * _SECONDS[m[2]])
 
 
-def rego_poll(query: str) -> Callable[[], tuple[str, str]]:
+def rego_poll(query: str, lang: str = "") -> Callable[[], tuple[str, str]]:
     """Poll a Rego witness over the observers.
 
     Returns:
@@ -65,7 +65,7 @@ def rego_poll(query: str) -> Callable[[], tuple[str, str]]:
     """
 
     def poll() -> tuple[str, str]:
-        verdict, doc, missing = witness(query)
+        verdict, doc, missing = witness(query, lang=lang)
         seen = json.dumps({k: v for k, v in doc.items() if k != "now"}, sort_keys=True)
         if verdict == "true":
             return HELD, seen
@@ -102,14 +102,14 @@ def promql_poll(expr: str) -> Callable[[], tuple[str, str]]:
     return poll
 
 
-def poller(query: str) -> Callable[[], tuple[str, str]]:
-    """Choose the evaluator for a query: Rego when it reads `input`, else PromQL.
+def poller(query: str, lang: str = "") -> Callable[[], tuple[str, str]]:
+    """Choose the evaluator for a query: its declared language, else Rego when it reads `input`.
 
     Returns:
         the poll function.
 
     """
-    return rego_poll(query) if is_rego(query) else promql_poll(query)
+    return rego_poll(query, lang) if is_rego(query, lang) else promql_poll(query)
 
 
 def wait(

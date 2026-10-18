@@ -102,6 +102,6 @@ def test_the_queue_scan_finds_a_bare_promql_witness(tmp_path: Path) -> None:
         )
     )
     found = open_witnesses(tmp_path)
-    assert [(repo, sym, query) for repo, _, sym, query in found] == [
+    assert [(repo, sym, query) for repo, _, sym, query, _lang in found] == [
         ("luthen-observability", "W1054", EXECUTOR_LOAD)
     ]

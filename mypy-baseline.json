@@ -5,7 +5,7 @@
   "no-untyped-def": 20
  },
  "src/nemik/adapter.py": {
-  "misc": 14
+  "misc": 9
  },
  "src/nemik/adoption.py": {
   "call-overload": 1,
@@ -174,7 +174,7 @@
   "type-arg": 1
  },
  "src/nemik/witnesses.py": {
-  "misc": 108,
+  "misc": 102,
   "type-arg": 11
  },
  "src/nemik/witwait.py": {

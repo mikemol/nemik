@@ -224,21 +224,29 @@ def evaluate(query: str, doc: dict, missing: list[str]) -> str:
     )
 
 
-def is_rego(query: str) -> bool:
-    """Whether `query` is a Rego witness: it reads `input` (an observer fact, or `input.now`).
+def is_rego(query: str, lang: str = "") -> bool:
+    """Whether `query` is a Rego witness.
 
-    A PromQL expression cannot name `input.` (a metric name has no dot), so anything else is PromQL."""
+    nemik:W539: a waypoint declares its language (`--witness-lang rego|promql`, the card's
+    `witness_lang`), and that is read first. Only a witness without the field is sniffed: it is
+    Rego when it reads `input` (an observer fact, or `input.now`), since a PromQL expression cannot
+    name `input.` (a metric name has no dot), and anything else is PromQL.
+    """
+    if lang in {"rego", "promql"}:
+        return lang == "rego"
     return re.search(r"\binput\.", query) is not None
 
 
-def witness(query: str, now: datetime | None = None) -> tuple[str, dict, list[str]]:
+def witness(
+    query: str, now: datetime | None = None, lang: str = ""
+) -> tuple[str, dict, list[str]]:
     """'true' | 'false' | 'undefined' for a waypoint's witness, with the facts that decided it.
 
     nemik:W501: a witness that is a bare PromQL expression holds while its instant query returns a
     sample, the PromQL meaning of a comparison (`x > y` returns the series only while it is true) and
     what `--wait` has always done with one; luthen-observability:W1054 stores its executor-load witness
     that way, and no Rego wrapper (and its escaped quotes) needs writing by hand."""
-    if not is_rego(query):
+    if not is_rego(query, lang):
         stamp = (now or datetime.now(UTC)).isoformat()
         fact = _promql(query)
         if fact is None:
@@ -249,19 +257,25 @@ def witness(query: str, now: datetime | None = None) -> tuple[str, dict, list[st
     return evaluate(query, doc, missing), doc, missing
 
 
-def open_witnesses(root: Path) -> list[tuple[str, Path, str, str]]:
-    """(repo, queue path, symbol, query) for every witnessed waypoint not yet done, fleet-wide."""
+def open_witnesses(root: Path) -> list[tuple[str, Path, str, str, str]]:
+    """(repo, queue path, symbol, query, lang) for every witnessed waypoint not yet done.
+
+    `lang` is the card's declared witness_lang, or "" when it declares none (nemik:W539).
+    """
     from nemik.check import QUEUE, workstream_files
 
-    out = []
+    out: list[tuple[str, Path, str, str, str]] = []
     for repo, path in workstream_files(root, QUEUE):
         try:
-            data = json.loads(path.read_text(encoding="utf-8"))
+            data: dict[str, list[dict[str, str]]] = json.loads(
+                path.read_text(encoding="utf-8")
+            )
         except (OSError, ValueError):
             continue
         for w in data.get("waypoints", []):
             if w.get("witness") and w.get("status") != "done":
-                out.append((repo, path, w["symbol"], w["witness"]))
+                lang = w.get("witness_lang") or ""
+                out.append((repo, path, w["symbol"], w["witness"], lang))
     return out
 
 
@@ -334,6 +348,12 @@ def main(argv: list[str] | None = None) -> None:
         "exit 0 held, 1 timed out, 2 cannot be evaluated (nemik:W258)",
     )
     ap.add_argument(
+        "--lang",
+        choices=["rego", "promql"],
+        default="",
+        help="with --wait: the query's language, instead of guessing it from its text (nemik:W539)",
+    )
+    ap.add_argument(
         "--timeout",
         default="12h",
         help="with --wait: give up after this long (90s, 30m, 12h, 1d)",
@@ -352,16 +372,18 @@ def main(argv: list[str] | None = None) -> None:
         except ValueError as err:
             print(f"nemik-witnesses: {err}", file=sys.stderr)
             raise SystemExit(2) from err
-        code, line = wait(poller(args.wait), limit, step)
+        code, line = wait(poller(args.wait, args.lang), limit, step)
         print(line)
         raise SystemExit(code)
     # nemik:W97: the queue's one writer is the installed mikemol-paths-forward, beside this interpreter
     # in the same .venv (host, or bazel's //:.venv). Missing is a failure, reported, never a skip.
     pf = Path(sys.executable).parent / "mikemol-paths-forward"
-    for repo, path, sym, query in open_witnesses(args.root):
-        verdict, doc, missing = witness(query)
+    for repo, path, sym, query, lang in open_witnesses(args.root):
+        verdict, doc, missing = witness(query, lang=lang)
         note = f"  cannot observe {','.join(missing)}" if missing else ""
-        print(f"WITNESS {repo}:{sym} {verdict}{note}")
+        # nemik:W539: a witness with no declared language is sniffed; say so, so the count can fall to 0
+        sniffed = "  language sniffed (no witness_lang)" if not lang else ""
+        print(f"WITNESS {repo}:{sym} {verdict}{note}{sniffed}")
         if args.apply and verdict == "true":
             observed = {k: v for k, v in doc.items() if k != "now"}
             if not pf.exists():
