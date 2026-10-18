@@ -158,11 +158,17 @@ const BEHIND_MARK = "~ ";
 // indicator is the warning badge (nemik:W688), not a state of its own: a ready card drawn with another
 // state's fill and mark broke the one-mark-per-state and second-channel rules (the gate's browser tests).
 const needsManifest = d => d.state === "ready" && d.needs_manifest === true;
+// nemik:W688 (operator 2026-10-18, 695f3e0a line 79877: a card that throws warnings on the CLI carries a
+// visual indicator in the UI): "!" and the count after a card's symbol, "!!" when one is a Violation.
+// ASCII, this role only; the count is the text and the messages are in the Selected panel, so colour
+// carries nothing here. The payload's rows are the CLI's (nemik:W687), so a new shape shows up unaided.
+const warnMark = d => { const w = d.warnings || []; return w.length ? `${w.some(x => x.severity === "Violation") ? "!!" : "!"}${w.length}` : ""; };
 const stateMark = d => (d.state === "ready" && d.behind_open ? BEHIND_MARK : STATE_MARK[STATES.includes(d.state) ? d.state : "other"] || "");
 document.getElementById("legend").innerHTML = [...STATES, "other"].map(s =>
   `<span><i class="dot" style="background:${color(s)}"></i>${STATE_MARK[s] || ""}${s}</span>`).join("")
   + `<span>W1${ROLLUP_MARK}3 umbrella, 3 rolled up</span><span>W1${EXPANDED_MARK} umbrella, expanded</span>`
-  + `<span>${BEHIND_MARK}W1 stored ready, but waits on an open card</span>`  + `<span>W1 · 4 salience it absorbs; W1 · (4) demand a waiting card carries on to the cards it waits on (salience order)</span>`;
+  + `<span>${BEHIND_MARK}W1 stored ready, but waits on an open card</span>`
+  + `<span>W1 !2 two nemik-check Warnings on the card (!! when one is a Violation); the messages are in Selected</span>`  + `<span>W1 · 4 salience it absorbs; W1 · (4) demand a waiting card carries on to the cards it waits on (salience order)</span>`;
 
 function esc(s) { return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 
@@ -435,7 +441,9 @@ function cardList() {
     .sort((a, b) => (b.data("salience") || 0) - (a.data("salience") || 0) || (a.id() < b.id() ? -1 : 1));
   const html = rows.map(n => {
     const d = n.data(), id = esc(n.id());
-    const name = `${d.state || ""} ${d.symbol}: ${d.title || ""}`;
+    // nemik:W688: the badge's count is visible text (WCAG 2.5.3), so the name carries it, in words
+    const warned = (d.warnings || []).length;
+    const name = `${d.state || ""} ${d.symbol}${warned ? ` ${warned} warning${warned > 1 ? "s" : ""}` : ""}: ${d.title || ""}`;
     const umbrella = d.rollup || expanded.has(n.id());
     const toggle = umbrella
       ? ` <button type="button" tabindex="-1" data-toggle="${id}" aria-expanded="${expanded.has(n.id())}">${expanded.has(n.id()) ? "collapse" : `expand ${d.rollup}`}</button>`
@@ -607,7 +615,7 @@ function render(poll) {
     }),
     ...data.nodes.filter(n => keep.has(n.id)).map(n => {
       const e = n.effort || {}, total = (e.forecast || 0) + (e.interrupt || 0) + (e.unclassified || 0);
-      return { data: { ...n, parent: treemapOn ? undefined : "repo:" + n.repo, label: n.state === "unclaimed" ? `? ${n.for}` : stateMark(n) + n.symbol + demandLabel(n)
+      return { data: { ...n, parent: treemapOn ? undefined : "repo:" + n.repo, label: n.state === "unclaimed" ? `? ${n.for}` : stateMark(n) + n.symbol + warnMark(n) + demandLabel(n)
           + (rolled.has(n.id) ? `${ROLLUP_MARK}${rolled.get(n.id)}` : expanded.has(n.id) ? EXPANDED_MARK : ""),
         rollup: rolled.get(n.id) || 0,
         fill: color(n.state), border: total ? 1 + 6 * (e.interrupt || 0) / total : 1,
@@ -991,7 +999,7 @@ function treemap() {
   cy.batch(() => {
     // nemik:W474: a tile names its card as the graph does: its state mark, and an umbrella's roll-up
     // (+N hidden) or expanded mark, so work folded into a tile is never silently missing.
-    const marked = n => stateMark(n.data()) + n.data("symbol")
+    const marked = n => stateMark(n.data()) + n.data("symbol") + warnMark(n.data())
       + (n.data("rollup") ? `${ROLLUP_MARK}${n.data("rollup")}` : expanded.has(n.id()) ? EXPANDED_MARK : "");
     ns.forEach(n => {
       const r = R.get(n.id());
@@ -1332,6 +1340,7 @@ function detailHTML(n) {
     <dt>cite as</dt><dd>${citeLink(n.cite)}</dd>
     <dt>title</dt><dd>${linked(n.title)}</dd>
     <dt>state</dt><dd>${esc(n.state)}${needsManifest(n) ? " (needs a manifest: without one it cannot be stacked)" : ""}</dd>
+    ${n.warnings && n.warnings.length ? `<dt>warnings</dt><dd>${n.warnings.map(w => `${esc(w.severity)}: ${esc(w.message)}`).join("<br>")}</dd>` : ""}
     ${n.salience !== undefined ? `<dt>salience</dt><dd>${n.salience} (flow model; band ${esc(n.band || "")}, rank ${n.rank_pos})</dd>` : ""}
     ${n.path_count ? `<dt>longest chains through it</dt><dd>${n.path_count}${n.path_count > 1 ? " (tied alternatives)" : ""}</dd>` : ""}
     ${n.minted_during ? `<dt>minted during</dt><dd>${esc(n.minted_during)}</dd>` : ""}
