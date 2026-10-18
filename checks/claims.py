@@ -168,7 +168,7 @@ def hub_modules_depend_on_everything_below():
     # check and exportv2 (a leaf that reads one JSON file).
     expected = {
         "metrics": lower | {"realize", "runlogs"},
-        "serve": lower | {"outbox", "exportwire", "runlogs"},
+        "serve": lower | {"outbox", "exportwire", "runlogs", "withheldage"},
     }
     for hub, want in expected.items():
         deps = _imports_nemik(mods[hub])

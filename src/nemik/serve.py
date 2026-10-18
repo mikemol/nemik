@@ -42,6 +42,7 @@ from nemik.exportwire import exports_key, withheld_by_exports
 from nemik.outbox import outbox
 from nemik.runlogs import runs_graph
 from nemik.wake import operator_row, read_liveness, roster
+from nemik.withheldage import require_fresh
 
 VENDOR = {"cytoscape.min.js", "dagre.min.js", "cytoscape-dagre.js"}
 
@@ -784,6 +785,20 @@ def publish(
     return snap
 
 
+class _Options(argparse.Namespace):
+    """The parsed command line, typed, so each option reads as its own type."""
+
+    root: Path
+    bind: str
+    port: int
+    static: Path | None
+    withheld: Path | None
+    withheld_max_age: int
+    runs: Path | None
+    exports: Path | None
+    publish: Path | None
+
+
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(
         prog="nemik-serve", description=(__doc__ or "").splitlines()[0]
@@ -809,6 +824,14 @@ def main(argv: list[str] | None = None) -> None:
         help="luthen's withheld list (v1); required with --static, a missing file fails the build",
     )
     ap.add_argument(
+        "--withheld-max-age",
+        type=int,
+        default=0,
+        metavar="SECONDS",
+        help="refuse the withheld list when its as_of is older than SECONDS (0: no limit); "
+        "luthen restamps it every minute, so 900 is a real stop (nemik:W647)",
+    )
+    ap.add_argument(
         "--runs",
         type=Path,
         metavar="DIR",
@@ -830,7 +853,13 @@ def main(argv: list[str] | None = None) -> None:
         "(nemik:W503); skipped when nothing changed; --withheld is optional (the pod is not the "
         "public view)",
     )
-    args = ap.parse_args(argv)
+    args = ap.parse_args(argv, namespace=_Options())
+    if args.withheld is not None and args.withheld_max_age:
+        try:
+            require_fresh(args.withheld, args.withheld_max_age, time.time())
+        except ValueError as e:
+            sys.stderr.write(f"ERROR: {e}\n")
+            raise SystemExit(2) from e
     if args.publish:
         try:
             snap = publish(args.root, args.publish, args.withheld, exports=args.exports)
