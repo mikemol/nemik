@@ -1413,16 +1413,26 @@ async function history() {
 // them as nemik.pieces.assemble does; without hashes.json (nemik-serve) it reads graph.json whole.
 const pieceCache = {};  // path -> {hash, doc}
 window.__pieceFetches = [];  // the paths fetched, in order: what a browser test counts
-async function graphText() {
-  const res = await fetch("hashes.json");
-  if (!res.ok) return (await fetch("graph.json")).text();
+// nemik:W655 (W509): one source's graph, fetched on its own cursor (the hash of each piece it last
+// returned, kept per source and path). An empty URL is this server's own pieces. A source that cannot be
+// reached, refuses (CORS), or answers something unreadable throws, and graphText shows it as unavailable
+// while the others draw.
+async function sourceGraph(src) {
+  const base = src.url ? src.url.replace(/\/*$/, "/") : "";
+  const res = await fetch(base + "hashes.json");
+  if (!res.ok) {
+    const whole = await fetch(base + "graph.json");
+    if (!whole.ok) throw new Error("HTTP " + whole.status);
+    return whole.json();
+  }
   const hashes = await res.json();
   const piece = async path => {
-    if (!pieceCache[path] || pieceCache[path].hash !== hashes[path]) {
-      window.__pieceFetches.push(path);
-      pieceCache[path] = {hash: hashes[path], doc: await (await fetch(path)).json()};
+    const key = base + path;
+    if (!pieceCache[key] || pieceCache[key].hash !== hashes[path]) {
+      window.__pieceFetches.push(key);
+      pieceCache[key] = {hash: hashes[path], doc: await (await fetch(base + path)).json()};
     }
-    return pieceCache[path].doc;
+    return pieceCache[key].doc;
   };
   const fleet = await piece("graph/_fleet.json");
   const parts = [...await Promise.all(fleet.repos.map(r => piece(`graph/${r}.json`))), fleet];
@@ -1435,7 +1445,7 @@ async function graphText() {
   };
   const merged = section => Object.fromEntries(
     parts.flatMap(p => Object.entries(p[section])).sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0));
-  return JSON.stringify({
+  return {
     nodes: parts.flatMap(p => p.nodes).sort(byId),
     edges: parts.flatMap(p => p.edges).sort(byEdge),
     inbound: fleet.inbound,
@@ -1443,6 +1453,28 @@ async function graphText() {
     findings: merged("findings"),
     health: merged("health"),
     ruler: fleet.ruler,
+  };
+}
+
+// Every source is asked; the ones that answer are combined (cards and edges by identity, the rest
+// joined), and each one's outcome is kept in sourceStatus for the Sources section. Only when none
+// answers is the refresh a failure. One answering source is returned untouched.
+let sourceStatus = [];
+async function graphText() {
+  const got = await Promise.allSettled(sources.map(sourceGraph));
+  sourceStatus = got.map(g => g.status === "fulfilled" ? "ok" : "unavailable: " + ((g.reason && g.reason.message) || "failed"));
+  const docs = got.filter(g => g.status === "fulfilled").map(g => g.value);
+  if (!docs.length) throw new Error("no source answered");
+  if (docs.length === 1) return JSON.stringify(docs[0]);
+  const once = (rows, key) => [...new Map(rows.map(r => [key(r), r])).values()];
+  return JSON.stringify({
+    nodes: once(docs.flatMap(d => d.nodes), n => n.id).sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0),
+    edges: once(docs.flatMap(d => d.edges), e => [e.source, e.target, e.kind].join(" ")),
+    inbound: docs.flatMap(d => d.inbound || []),
+    operator: docs.flatMap(d => d.operator || []),
+    findings: Object.assign({}, ...docs.map(d => d.findings || {})),
+    health: Object.assign({}, ...docs.map(d => d.health || {})),
+    ruler: docs[0].ruler,
   });
 }
 
@@ -1453,6 +1485,7 @@ async function load() {
     // nemik:W119: the 60s poll redrew and re-fit even when nothing changed, so the view jumped
     // and lost the reader's pan/zoom every minute. An unchanged graph is not redrawn.
     if (text === lastGraph && data) {
+      drawSources();
       await wake();  // liveness still refreshes: recolour the boxes in place, no relayout
       cy.nodes(".repo").forEach(n => n.data("live", liveness[n.id().slice(5)] || "unknown"));
       return;
@@ -1463,8 +1496,10 @@ async function load() {
     // A blank page looks the same as "still loading" -- say what actually happened, and keep
     // whatever was last rendered rather than tearing the graph down over a transient miss.
     document.getElementById("stat").textContent = data ? "graph refresh failed, showing last-known data" : "graph unavailable";
+    drawSources();
     return;
   }
+  drawSources();
   chips([...new Set(data.nodes.map(n => n.repo))].sort());
   await wake();  // draw() reads `liveness`, populated by wake() -- fetch it first, not alongside.
   pathKey(); render(true); findings(); goals(); weather(); history();
@@ -1587,7 +1622,8 @@ function drawSources() {
   const rows = sources.map((s, i) => `<div class="srcrow">
     <input data-src="${i}" data-field="id" value="${esc(s.id)}" aria-label="source ${i + 1} id" size="8">
     <input data-src="${i}" data-field="url" value="${esc(s.url)}" aria-label="source ${i + 1} URL, empty for this server" size="22">
-    <button type="button" data-remove="${i}" aria-label="remove source ${i + 1}">remove</button></div>`);
+    <button type="button" data-remove="${i}" aria-label="remove source ${i + 1}">remove</button>
+    <span class="stat" data-status="${i}">${esc(sourceStatus[i] || "")}</span></div>`);
   paint(document.getElementById("sources"), rows.join("")
     + `<button type="button" id="addsource">add source</button>`
     + `<p class="stat">Kept in this browser. An empty URL is this server's own published pieces.</p>`);
