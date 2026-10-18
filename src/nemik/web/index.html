@@ -69,7 +69,9 @@ aside a { color: var(--ink); text-decoration: underline dotted var(--muted); }
 /* nemik:W665 (WCAG 2.5.8, judged by data/wcag.rego): every pointer target in the panel is at least 24 px
    high, so rows of buttons and links a few pixels apart no longer crowd each other's 24 px circle. */
 aside a { display: inline-block; min-height: 24px; line-height: 24px; }
-aside details.sec > summary, #cardlist button { min-height: 24px; }
+aside details.sec > summary, #cardlist button, #sources button, #sources input { min-height: 24px; }
+.srcrow { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0; }
+.srcrow input { flex: 1 1 6em; min-width: 0; }
 /* A goal's title is too long for the two-column grid: stack title over its status. */
 #goals dl { display: block; }
 #goals dd { margin: 0 0 8px 12px; }
@@ -118,6 +120,9 @@ aside details.sec > summary, #cardlist button { min-height: 24px; }
     </details>
     <details class="sec" id="sec-wake" open><summary>Wake</summary>
     <div id="wake" class="stat">…</div>
+    </details>
+    <details class="sec" id="sec-sources" data-closed-by-default><summary>Sources</summary>
+    <div id="sources" class="stat"></div>
     </details>
     <details class="sec" id="sec-selected" open><summary>Selected</summary>
     <div id="detail" class="stat">Click a waypoint.</div>
@@ -1565,6 +1570,38 @@ document.getElementById("bySalience").onchange = () => {
 document.getElementById("showCross").onchange = () => cy && cy.edges(".cross").length && (
   document.getElementById("showCross").checked ? cy.edges(".cross").addClass("lit")
   : (cy.edges(".cross").removeClass("lit"), cy.nodes(":selected").connectedEdges(".cross").addClass("lit")));
+// nemik:W654 (W509): the sources this viewer assembles its graph from, an id and a URL each, kept in this
+// browser only. The default is one entry, nemik's own published pieces (an empty URL means "here"). A
+// reading that is missing, throws or is not a list of {id, url} strings leaves the default.
+const DEFAULT_SOURCES = [{ id: "nemik", url: "" }];
+let sources = DEFAULT_SOURCES.map(s => ({ ...s }));
+try {
+  const kept = JSON.parse(localStorage.getItem("nemik.sources") || "null");
+  if (Array.isArray(kept) && kept.length && kept.every(s => s && typeof s.id === "string" && typeof s.url === "string"))
+    sources = kept.map(s => ({ id: s.id, url: s.url }));
+} catch (e) { /* not remembered */ }
+function saveSources() {
+  try { localStorage.setItem("nemik.sources", JSON.stringify(sources)); } catch (e) { /* not remembered */ }
+}
+function drawSources() {
+  const rows = sources.map((s, i) => `<div class="srcrow">
+    <input data-src="${i}" data-field="id" value="${esc(s.id)}" aria-label="source ${i + 1} id" size="8">
+    <input data-src="${i}" data-field="url" value="${esc(s.url)}" aria-label="source ${i + 1} URL, empty for this server" size="22">
+    <button type="button" data-remove="${i}" aria-label="remove source ${i + 1}">remove</button></div>`);
+  paint(document.getElementById("sources"), rows.join("")
+    + `<button type="button" id="addsource">add source</button>`
+    + `<p class="stat">Kept in this browser. An empty URL is this server's own published pieces.</p>`);
+}
+document.getElementById("sources").addEventListener("input", ev => {
+  const box = ev.target.closest("input[data-src]");
+  if (box) { sources[+box.dataset.src][box.dataset.field] = box.value; saveSources(); }
+});
+document.getElementById("sources").addEventListener("click", ev => {
+  const rm = ev.target.closest("button[data-remove]");
+  if (rm && sources.length > 1) { sources.splice(+rm.dataset.remove, 1); saveSources(); drawSources(); }
+  else if (ev.target.closest("#addsource")) { sources.push({ id: "", url: "" }); saveSources(); drawSources(); }
+});
+drawSources();
 load();
 setInterval(load, 60000);
 </script>
