@@ -64,3 +64,18 @@ def withheld_by_exports(root: Path, exports: Path) -> set[str]:
     for repo, symbols in repo_symbols(root).items():
         out |= export_refs(repo, symbols, exports / f"{repo}.json")
     return out
+
+
+def exports_key(exports: Path) -> str:
+    """Name the state of an exports directory, so a changed export rebuilds the view.
+
+    Args:
+        exports: A directory holding <repo>.json for each repo.
+
+    Returns:
+        Each export's name and modification time, joined; empty for a directory with none.
+
+    """
+    return ";".join(
+        f"{p.name}:{p.stat().st_mtime_ns}" for p in sorted(exports.glob("*.json"))
+    )

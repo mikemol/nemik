@@ -38,7 +38,7 @@ from rdflib.namespace import DCTERMS, PROV
 from nemik.adapter import BASE, NEMIK, OPERATOR, OSLC_CM, bind, ledger_graph
 from nemik.blocks import inbound, operator_asks, ref
 from nemik.check import LEDGER, QUEUE, default_root, survey, workstream_files
-from nemik.exportwire import withheld_by_exports
+from nemik.exportwire import exports_key, withheld_by_exports
 from nemik.outbox import outbox
 from nemik.runlogs import runs_graph
 from nemik.wake import operator_row, read_liveness, roster
@@ -743,7 +743,11 @@ def fleet_key(root: Path) -> str:
 
 
 def publish(
-    root: Path, base: Path, withheld: Path | None, keep: int = 3
+    root: Path,
+    base: Path,
+    withheld: Path | None,
+    keep: int = 3,
+    exports: Path | None = None,
 ) -> Path | None:
     """nemik:W503: build a private snapshot under base/snap-<stamp>-<pid>/ and flip base/current to it
     with one atomic rename. The build runs in this short-lived process, so every byte of its graph is
@@ -753,6 +757,8 @@ def publish(
     from nemik import cachestore
 
     key = fleet_key(root)
+    if exports is not None:  # nemik:W636: a changed export rebuilds the pod's view too
+        key += "|exports:" + exports_key(exports)
     live = base / "current" / "source-key"
     if live.exists() and live.read_text() == key:
         return None
@@ -763,7 +769,7 @@ def publish(
         base / ".cache"
     )  # nemik:W518: start warm, as the long-lived server was
     try:
-        build_static(root, snap, withheld, private=True)
+        build_static(root, snap, withheld, private=True, exports=exports)
         (snap / "source-key").write_text(key)
     except BaseException:
         shutil.rmtree(snap, ignore_errors=True)
@@ -813,8 +819,8 @@ def main(argv: list[str] | None = None) -> None:
         "--exports",
         type=Path,
         metavar="DIR",
-        help="with --static: the repos' own exports, DIR/<repo>.json (version 2); a repo with no "
-        "export publishes none of its cards (nemik:W634)",
+        help="with --static or --publish: the repos' own exports, DIR/<repo>.json (version 2); a "
+        "repo with no export publishes none of its cards (nemik:W634, W636)",
     )
     ap.add_argument(
         "--publish",
@@ -827,7 +833,7 @@ def main(argv: list[str] | None = None) -> None:
     args = ap.parse_args(argv)
     if args.publish:
         try:
-            snap = publish(args.root, args.publish, args.withheld)
+            snap = publish(args.root, args.publish, args.withheld, exports=args.exports)
         except ValueError as e:
             print(f"ERROR: {e}", file=sys.stderr)
             raise SystemExit(2) from e
