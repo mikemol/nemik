@@ -4,3 +4,10 @@ filegroup(
     srcs = glob(["fleet/**"]),
     visibility = ["//visibility:public"],
 )
+
+# nemik:W690: one small queue and ledger covering each field nemik reads, for the queue contract.
+filegroup(
+    name = "queue",
+    srcs = glob(["queue/**"]),
+    visibility = ["//visibility:public"],
+)

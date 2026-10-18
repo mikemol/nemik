@@ -1,0 +1,114 @@
+{
+ "counter": 6,
+ "project_root": "/fixture/alpha",
+ "residue": [
+  {
+   "dropped_at": "2026-10-10T09:00:00Z",
+   "reason": "folded into W2",
+   "recoverable": true,
+   "symbol": "W6",
+   "title": "alpha W6"
+  }
+ ],
+ "version": 1,
+ "waypoints": [
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "completed": "20261012T100000Z",
+   "enables": [
+    "W2"
+   ],
+   "evidence": "commit abc1234",
+   "issued_at": "2026-10-10T08:00:00Z",
+   "last_worked": "2026-10-12T10:00:00Z",
+   "minted_during": "tick",
+   "next_bounded_step": null,
+   "status": "done",
+   "symbol": "W1",
+   "ticks_blocked": 0,
+   "title": "alpha W1 is done",
+   "touches": [
+    "core"
+   ]
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "caused_by": "W1",
+   "enables": [
+    "W5"
+   ],
+   "evidence": "",
+   "issued_at": "2026-10-10T08:05:00Z",
+   "last_worked": "2026-10-13T09:00:00Z",
+   "manifest": [
+    "src/alpha/core.py",
+    "tests/test_core.py"
+   ],
+   "minted_during": "tick",
+   "next_bounded_step": "Write the parser and its test",
+   "size_class": "small",
+   "status": "ready",
+   "symbol": "W2",
+   "ticks_blocked": 0,
+   "title": "alpha W2 is ready with a manifest",
+   "touches": [
+    "core"
+   ],
+   "weight": 3
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "beta:W9"
+   ],
+   "caused_by": "operator",
+   "enables": [],
+   "evidence": "",
+   "issued_at": "2026-10-11T08:00:00Z",
+   "last_worked": "2026-10-13T09:30:00Z",
+   "minted_during": "interrupt",
+   "next_bounded_step": "Wait for beta to ship W9",
+   "status": "blocked",
+   "symbol": "W3",
+   "ticks_blocked": 2,
+   "title": "alpha W3 waits on a peer",
+   "touches": []
+  },
+  {
+   "blocked_kind": null,
+   "blocked_on": [],
+   "enables": [],
+   "evidence": "",
+   "issued_at": "2026-10-12T08:00:00Z",
+   "last_worked": "2026-10-13T09:45:00Z",
+   "minted_during": "tick",
+   "next_bounded_step": "Build the thing in flight",
+   "status": "working",
+   "symbol": "W4",
+   "ticks_blocked": 0,
+   "title": "alpha W4 is being worked",
+   "touches": []
+  },
+  {
+   "blocked_kind": "agent",
+   "blocked_on": [
+    "W2"
+   ],
+   "enables": [],
+   "evidence": "",
+   "issued_at": "2026-10-12T08:30:00Z",
+   "last_worked": "2026-10-13T09:50:00Z",
+   "minted_during": "tick",
+   "next_bounded_step": "Check the file exists",
+   "status": "blocked",
+   "symbol": "W5",
+   "ticks_blocked": 0,
+   "title": "alpha W5 closes on a witness once W2 lands",
+   "touches": [],
+   "witness": "input.file[\"/fixture/alpha/done\"].exists",
+   "witness_lang": "rego"
+  }
+ ]
+}

@@ -1,0 +1,3 @@
+2026-10-10T08:00:00Z  tick  W1  advanced  unblock  "wrote the first slice"  evidence=commit abc1234
+2026-10-12T10:00:00Z  tick  W1  done  unblock  "landed"  evidence=commit abc1234
+2026-10-13T09:30:00Z  interrupt  W3  minted  -  "beta asked for the shared parser"  evidence=beta:W9
