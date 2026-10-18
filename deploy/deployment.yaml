@@ -69,7 +69,13 @@ spec:
           args:
             - |
               while true; do
-                /app/.venv/bin/nemik-serve --root /export --publish /srv || echo "publish failed: $?" >&2
+                # nemik:W636: each repo's export is derived from the queue and luthen's withheld list
+                # (re-stamped every minute), and the build refuses a list older than 900 s, so a stopped
+                # producer fails closed: the last snapshot keeps being served.
+                /app/.venv/bin/nemik-exports --root /export --withheld /export/withheld.json --out /tmp/exports \
+                  && /app/.venv/bin/nemik-serve --root /export --publish /srv --exports /tmp/exports \
+                       --withheld /export/withheld.json --withheld-max-age 900 \
+                  || echo "publish failed: $?" >&2
                 sleep 30
               done
           env:

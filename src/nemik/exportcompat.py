@@ -39,11 +39,20 @@ def derive(repo: str, symbols: list[str], withheld: set[str]) -> dict[str, objec
 
 
 def write(path: Path, export: dict[str, object]) -> None:
-    """Write an export where the reader will look for it.
+    """Write an export where the reader will look for it, unless it is already there unchanged.
+
+    Leaving an identical file alone keeps its modification time, which nemik-serve --publish uses
+    to decide whether the exports changed; a rewrite every loop would rebuild the pod every loop.
 
     Args:
         path: The export file.
         export: The document derive() built.
 
     """
-    path.write_text(json.dumps(export, sort_keys=True), encoding="utf-8")
+    text = json.dumps(export, sort_keys=True)
+    try:
+        if path.read_text(encoding="utf-8") == text:
+            return  # unchanged: leave the file, and its modification time, alone (nemik:W636)
+    except OSError:
+        pass
+    path.write_text(text, encoding="utf-8")

@@ -90,13 +90,22 @@ def test_the_servers_command_line_is_one_the_tool_accepts() -> None:
     assert args.port == server["ports"][0]["containerPort"]
 
 
-def test_the_builders_flags_are_flags_nemik_serve_has() -> None:
-    """Every flag the builder loop passes appears in nemik-serve --help."""
-    help_text = installed.run("nemik-serve", "--help").stdout
+def test_the_builders_flags_are_flags_its_commands_have() -> None:
+    """Every flag the builder loop passes appears in --help of the command it is passed to.
+
+    The loop runs nemik-exports and then nemik-serve --publish with the exports directory and the
+    luthen withheld list, refusing a list older than 900 s (nemik:W636, W647).
+    """
     command = " ".join(_containers()["builder"]["args"])
-    flags = {word for word in command.split() if word.startswith("--")}
-    assert flags >= {"--root", "--publish"}
-    assert [f for f in sorted(flags) if f not in help_text] == []
+    exports_part, _, serve_part = command.partition("/app/.venv/bin/nemik-serve")
+    exports_flags = {w for w in exports_part.split() if w.startswith("--")}
+    serve_flags = {w for w in serve_part.split() if w.startswith("--")}
+    assert exports_flags >= {"--root", "--withheld", "--out"}
+    assert serve_flags >= {"--root", "--publish", "--exports", "--withheld"}
+    assert "--withheld-max-age 900" in serve_part
+    for tool, flags in (("nemik-exports", exports_flags), ("nemik-serve", serve_flags)):
+        help_text = installed.run(tool, "--help").stdout
+        assert [f for f in sorted(flags) if f not in help_text] == []
 
 
 def test_the_snapshot_is_written_by_the_builder_and_only_read_by_the_server() -> None:
