@@ -402,9 +402,10 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
     # nemik:W477: a card stored ready while an open card enables it (nemik:W465's finding) is drawn
     # as waiting: its fill says ready, but the flow model counts it as waiting and gives it no salience.
     # nemik:W684: a ready leaf with no manifest cannot be stacked, so it is drawn waiting for one.
-    from nemik.blocks import node_marks
+    # nemik:W687: and a card that throws a Warning on the CLI carries it, for the badge.
+    from nemik.blocks import node_flags
 
-    marks = node_marks(g)
+    marks = node_flags(g, findings)
     for item in nodes:
         item.update(marks.get(item["id"], {}))
     # nemik:W264: the demand that crossed each dependency, summed over the ready repos' solves, as

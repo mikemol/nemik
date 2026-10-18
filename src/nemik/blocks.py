@@ -190,6 +190,56 @@ def node_marks(g: Graph) -> dict[str, dict[str, bool]]:
     return marks
 
 
+SHOWN_SEVERITIES = ("Warning", "Violation")
+
+
+def warnings_by_card(
+    findings: dict[str, list[tuple[str, str, str]]],
+) -> dict[str, dict[str, list[dict[str, str]]]]:
+    """nemik:W687: each card's Warnings and Violations, keyed by node id, for the view's badge.
+
+    The operator (2026-10-18, 695f3e0a line 79877) ruled that a card that throws warnings on the CLI
+    carries a visual indicator in the UI. The CLI prints nemik-check's findings; this groups the
+    same rows by card so the payload carries exactly what the CLI says, and a new shape reaches the
+    view with no further work. Info rows stay on the CLI (hundreds, and not warnings).
+
+    Args:
+        findings: nemik-check's rows by repo: (severity, focus symbol, message). A repo-level row
+            has the symbol `--` and belongs to no card.
+
+    Returns:
+        node id -> {"warnings": [{"severity", "message"}, ...]}, only for cards that have any.
+
+    """
+    out: dict[str, dict[str, list[dict[str, str]]]] = {}
+    for repo, rows in findings.items():
+        for severity, symbol, message in rows:
+            if severity in SHOWN_SEVERITIES and symbol != "--":
+                card = out.setdefault(f"{BASE}{repo}/{symbol}", {"warnings": []})
+                card["warnings"].append({"severity": severity, "message": message})
+    return out
+
+
+def node_flags(
+    g: Graph, findings: dict[str, list[tuple[str, str, str]]]
+) -> dict[str, dict[str, object]]:
+    """nemik:W477, W684, W687: everything the view adds to a card's node beyond the graph, by id.
+
+    Args:
+        g: The merged queue graph.
+        findings: nemik-check's rows by repo: (severity, focus symbol, message).
+
+    Returns:
+        node id -> its flags (behind_open, needs_manifest) and its warnings, for each card that
+        has any.
+
+    """
+    out: dict[str, dict[str, object]] = {k: dict(v) for k, v in node_marks(g).items()}
+    for node, held in warnings_by_card(findings).items():
+        out.setdefault(node, {}).update(held)
+    return out
+
+
 def dependency_cycles(g: Graph) -> list[tuple[Node, ...]]:
     """nemik:W484 (mtools:W1134 found a ring of three ready cards blocked into a deadlock): every
     cycle of open cards that wait on or enable one another, named once from its earliest card, as
