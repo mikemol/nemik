@@ -107,6 +107,25 @@ def judge_targets(targets: list[Row]) -> list[Row]:
 
 TARGET_QUERY = '{"violations": data.wcag.target_violations}'
 NAME_QUERY = '{"violations": data.wcag.name_violations}'
+ORDER_QUERY = '{"violations": data.wcag.order_violations}'
+
+
+def judge_order(targets: list[Row]) -> list[Row]:
+    """Judge the order Tab visits a rendered page's controls (WCAG 2.4.3).
+
+    Args:
+        targets: One box per control, {"name", "x", "y", "w", "h"}, in the order Tab visits
+            them (document order, as tests/test_wcag_render.py reads it).
+
+    Returns:
+        The steps that go up a line or left along one; each names the criterion, the control
+        left and the control reached. Empty when opa is unavailable, which a caller must not
+        read as a pass.
+
+    """
+    policy = str(files("nemik").joinpath("data/wcag.rego"))
+    doc: dict[str, object] = {"targets": targets}
+    return _rows(_value(opa_json(ORDER_QUERY, doc, [policy])), "violations")
 
 
 def judge_names(names: list[Row]) -> list[Row]:

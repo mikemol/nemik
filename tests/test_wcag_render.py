@@ -17,7 +17,28 @@ import webpage
 from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import sync_playwright
 
-from nemik.wcagjudge import Row, judge_names, judge_targets
+from nemik.wcagjudge import Row, judge_names, judge_order, judge_targets
+
+
+def test_tab_goes_down_and_across_a_line_not_up_or_back() -> None:
+    """A step to the next control may go right or down; up a line or left along one fails."""
+    row = [_box("a", 0, 0, 30, 24), _box("b", 40, 0, 30, 24), _box("c", 0, 40, 30, 24)]
+    assert not judge_order(row)
+    up = judge_order([_box("low", 0, 40, 30, 24), _box("high", 0, 0, 30, 24)])
+    assert [(str(f["from"]), str(f["to"])) for f in up] == [("low", "high")]
+    back = judge_order([_box("right", 40, 0, 30, 24), _box("left", 0, 0, 30, 24)])
+    assert [(str(f["from"]), str(f["to"])) for f in back] == [("right", "left")]
+
+
+def test_tab_visits_the_pages_controls_in_reading_order() -> None:
+    """2.4.3 over the controls on screen, in document order (the order Tab visits them).
+
+    A control scrolled out of its list is left out: its box lies outside the list, and says
+    nothing about where Tab goes next.
+    """
+    shown = [t for t in _page_rows(TARGETS) if not t["clipped"]]
+    assert len(shown) > MIN_TOOLBAR
+    assert not judge_order(shown)
 
 
 def _absolute(path: str) -> str:
@@ -48,7 +69,14 @@ TARGETS = (
     const boxes = [e, ...(e.labels ? [...e.labels] : [])].map(n => n.getBoundingClientRect());
     const x1 = Math.min(...boxes.map(b => b.left)), y1 = Math.min(...boxes.map(b => b.top));
     const x2 = Math.max(...boxes.map(b => b.right)), y2 = Math.max(...boxes.map(b => b.bottom));
-    return { name: e.tagName.toLowerCase() + (e.id ? '#' + e.id : '') +
+    // scrolled out of a clipping ancestor: its box says nothing about where Tab leads
+    const clipped = (() => { const b = e.getBoundingClientRect();
+      for (let p = e.parentElement; p; p = p.parentElement) {
+        const o = getComputedStyle(p).overflowY, r = p.getBoundingClientRect();
+        if (['auto', 'scroll', 'hidden'].includes(o) && (b.bottom > r.bottom || b.top < r.top))
+          return true; }
+      return false; })();
+    return { clipped, name: e.tagName.toLowerCase() + (e.id ? '#' + e.id : '') +
                    (e.textContent ? ' ' + e.textContent.trim().slice(0, 24) : ''),
              x: Math.round(x1 * 10) / 10, y: Math.round(y1 * 10) / 10 + window.scrollY,
              w: Math.round((x2 - x1) * 10) / 10, h: Math.round((y2 - y1) * 10) / 10 }; })"""
@@ -78,6 +106,8 @@ NAMES = (
     return { target: id, accessible, visible: e.tagName === 'INPUT' ? '' : visible }; })"""
 )
 
+# one page load per script: the tests read the same rows, and a load starts a server and a browser
+SEEN: dict[str, list[Row]] = {}
 TOOLBAR = 150
 MIN_TOOLBAR = 10
 ROWS = 60
@@ -167,6 +197,8 @@ def _page_rows(script: str) -> list[Row]:
         The rows, as the policy reads them.
 
     """
+    if script in SEEN:
+        return SEEN[script]
     exe = os.environ.get("NEMIK_CHROMIUM")
     with webpage.served() as url, sync_playwright() as p:
         try:
@@ -178,9 +210,11 @@ def _page_rows(script: str) -> list[Row]:
         page.wait_for_function(webpage.CY_READY, timeout=60000)
         raw: object = page.evaluate(script)
         browser.close()
-    if not isinstance(raw, list):
-        return []
-    return [{str(k): v for k, v in r.items()} for r in raw if isinstance(r, dict)]
+    rows: list[Row] = []
+    if isinstance(raw, list):
+        rows = [{str(k): v for k, v in r.items()} for r in raw if isinstance(r, dict)]
+    SEEN[script] = rows
+    return rows
 
 
 def test_the_toolbar_meets_target_size() -> None:

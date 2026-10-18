@@ -127,6 +127,27 @@ crowded(t, o) if {
 	(cx - ox) * (cx - ox) + (cy - oy) * (cy - oy) < 576
 }
 
+# 2.4.3 Focus Order: Tab visits controls in a meaningful order. input.targets is in the order Tab
+# visits them (document order; the page uses no positive tabindex), each with its box. Judged by
+# order_violations: a step to the next control must not jump up a line, nor go left along the same
+# line, because that is the reverse of the reading order.
+line := 12
+
+order_violations contains v if {
+	some i, a in input.targets
+	b := input.targets[i + 1]
+	b.y + b.h / 2 < a.y + a.h / 2 - line
+	v := {"criterion": "2.4.3", "from": a.name, "to": b.name, "why": "focus moves up a line"}
+}
+
+order_violations contains v if {
+	some i, a in input.targets
+	b := input.targets[i + 1]
+	abs((b.y + b.h / 2) - (a.y + a.h / 2)) <= line
+	b.x + b.w < a.x
+	v := {"criterion": "2.4.3", "from": a.name, "to": b.name, "why": "focus moves left along a line"}
+}
+
 # 4.1.2 Name, Role, Value: every control has an accessible name. 2.5.3 Label in Name: when it shows
 # text, the name contains it. input.names is a list of {"target", "accessible", "visible"} read off
 # the rendered page (tests/test_wcag_render.py): the name the browser computes from aria-label, the
