@@ -50,6 +50,7 @@ import argparse
 import json
 import os
 from collections import Counter
+from collections.abc import Callable
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
@@ -74,6 +75,8 @@ from nemik.realize import verdicts
 from nemik.runlogs import unmigrated_at_source
 from nemik.wake import read_liveness, roster
 
+# nemik:W620: what builds one group of families' lines when a run asks for them
+Producer = Callable[[], list[str]]
 TYPE_LINE_WORDS = 3  # "# TYPE", the metric name, its kind
 DAY = 86400  # seconds in the arrival window
 
@@ -511,6 +514,7 @@ class _Options(argparse.Namespace):
     family: list[str] | None
     root: Path
     runs: Path | None
+    spool: Path
 
 
 def run_log_lines(directory: Path | None) -> list[str]:
@@ -569,6 +573,152 @@ def repo_lines(
     return out
 
 
+# nemik:W620: the families that need no queue read (the spool, the ledgers, git history that does not
+# need the cards' edges, realizability and the run logs); a run naming only these skips the survey.
+HISTORY_FAMILIES = (
+    "nemik_cards_completed_24h",
+    "nemik_commits_24h",
+    "nemik_cards_reopened_24h",
+    "nemik_umbrella_forecast_days",
+    "nemik_unforecastable_cards",
+    "nemik_manifest_drift",
+)
+REALIZABILITY = ("nemik_realizability_waypoints", "nemik_realizability_unjudged")
+GRAPH_FREE = frozenset(
+    {
+        "nemik_prompts_total",
+        "nemik_turns_total",
+        "nemik_ledger_lines",
+        "nemik_ledger_unparsed",
+        "nemik_run_log_unmigrated",
+        "nemik_cards_completed_24h",
+        "nemik_commits_24h",
+        "nemik_cards_reopened_24h",
+        *REALIZABILITY,
+    }
+)
+
+
+def inbound_lines(merged: Graph) -> list[str]:
+    """Count the open waypoints elsewhere that wait on each repo, claimed or not.
+
+    Args:
+        merged: The merged queue graph.
+
+    Returns:
+        The nemik_blocks_inbound gauge's lines.
+
+    """
+    out = ["# TYPE nemik_blocks_inbound gauge"]
+    inb = Counter(
+        (b["blocker"], str(bool(b["claimed_by"])).lower()) for b in inbound(merged)
+    )
+    for (repo, claimed), n in sorted(inb.items()):
+        out.append(f"nemik_blocks_inbound{label(repo=repo, claimed=claimed)} {n}")
+    return out
+
+
+def adoption_lines(merged: Graph) -> list[str]:
+    """Say how each repo's queue writer is installed.
+
+    Args:
+        merged: The merged queue graph.
+
+    Returns:
+        The nemik_pathsforward_adoption gauge's lines.
+
+    """
+    out = ["# TYPE nemik_pathsforward_adoption gauge"]
+    for ws, _, state in sorted(
+        merged.triples((None, NEMIK.pathsforwardAdoption, None))
+    ):
+        repo = str(ws).removeprefix(BASE)
+        out.append(f"nemik_pathsforward_adoption{label(repo=repo, state=str(state))} 1")
+    return out
+
+
+def waiting_lines(root: Path, merged: Graph) -> list[str]:
+    """Count the open waypoints elsewhere that wait on each repo, by the repo's liveness.
+
+    Args:
+        root: The fleet root.
+        merged: The merged queue graph.
+
+    Returns:
+        The nemik_waiting_on gauge's lines.
+
+    """
+    out = ["# TYPE nemik_waiting_on gauge"]
+    live, _ = read_liveness(root, None)
+    out.extend(
+        f"nemik_waiting_on{label(repo=r['repo'], state=r['state'])} {len(r['waiting'])}"
+        for r in roster(merged, live)
+    )
+    return out
+
+
+def spool_lines(spool: Path) -> list[str]:
+    """Count the prompts and turns the global hook recorded, by repo.
+
+    Args:
+        spool: The hook's event spool; absent means no events.
+
+    Returns:
+        The nemik_prompts_total and nemik_turns_total lines.
+
+    """
+    prompts: Counter[tuple[str, str, str]] = Counter()
+    turns: Counter[str] = Counter()
+    if spool.exists():
+        for raw in spool.read_text(encoding="utf-8").splitlines():
+            try:
+                e = json.loads(raw)
+            except json.JSONDecodeError:
+                continue
+            repo = e.get("repo") or "none"
+            if e.get("event") == "UserPromptSubmit":
+                src = e.get("source") or "unknown"
+                prompts[(repo, src, CLASS.get(src, "unknown"))] += 1
+            elif e.get("event") == "Stop":
+                turns[repo] += 1
+    out = ["# TYPE nemik_prompts_total counter"]
+    for (repo, src, cls), n in sorted(prompts.items()):
+        out.append(
+            f"nemik_prompts_total{label(repo=repo, source=src, **{'class': cls})} {n}"
+        )
+    out.append("# TYPE nemik_turns_total counter")
+    for repo, n in sorted(turns.items()):
+        out.append(f"nemik_turns_total{label(repo=repo)} {n}")
+    return out
+
+
+def ledger_rows(root: Path) -> list[str]:
+    """Count each repo's ledger lines by effort class and kind, and those that did not parse.
+
+    Args:
+        root: The fleet root.
+
+    Returns:
+        The nemik_ledger_lines and nemik_ledger_unparsed lines.
+
+    """
+    out = ["# TYPE nemik_ledger_lines gauge", "# TYPE nemik_ledger_unparsed gauge"]
+    for repo, path in workstream_files(root, LEDGER):
+        g, unparsed = ledger_graph(repo, path)
+        lines = Counter(
+            (str(c), str(k))
+            for a in g.subjects(RDF.type, PROV.Activity)
+            for c in g.objects(a, NEMIK.effortClass)
+            for k in g.objects(a, NEMIK.kind)
+        )
+        for (cls, kind), n in sorted(lines.items()):
+            out.append(
+                f"nemik_ledger_lines{label(repo=repo, kind=kind, **{'class': cls})} {n}"
+            )
+        out.append(f"nemik_ledger_unparsed{label(repo=repo)} {unparsed}")
+    return out
+
+
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(
         prog="nemik-metrics", description=(__doc__ or "").splitlines()[0]
@@ -601,7 +751,20 @@ def main(argv: list[str] | None = None) -> None:
         "# TYPE nemik_waypoint_age_seconds gauge",
     ]
     now = datetime.now(UTC)
-    surveyed = list(survey(args.root))
+    asking = args.family or []
+
+    def asked(*names: str) -> bool:
+        return not asking or any(name in asking for name in names)
+
+    # nemik:W620: a run builds only what it was asked for. The findings (SHACL and the fleet checks)
+    # are most of a full run's cost and only nemik_findings reads them; the graph families need the
+    # queues read, and the rest (the spool, the ledgers, the git history, realizability) need no
+    # queue at all, so a run that names only those does not read the queues either.
+    surveyed = (
+        list(survey(args.root, check=asked("nemik_findings")))
+        if not asking or not set(asking) <= GRAPH_FREE
+        else []
+    )
     for repo, g, findings in surveyed:
         out += repo_lines(repo, g, findings, now)
 
@@ -609,71 +772,28 @@ def main(argv: list[str] | None = None) -> None:
     for _, g, _ in surveyed:
         if g is not None:
             merged += g
-    out.append("# TYPE nemik_blocks_inbound gauge")
-    inb = Counter(
-        (b["blocker"], str(bool(b["claimed_by"])).lower()) for b in inbound(merged)
-    )
-    for (repo, claimed), n in sorted(inb.items()):
-        out.append(f"nemik_blocks_inbound{label(repo=repo, claimed=claimed)} {n}")
-
-    out.append("# TYPE nemik_pathsforward_adoption gauge")
-    for ws, _, state in sorted(
-        merged.triples((None, NEMIK.pathsforwardAdoption, None))
-    ):
-        out.append(
-            f"nemik_pathsforward_adoption{label(repo=str(ws).removeprefix(BASE), state=str(state))} 1"
-        )
-    out.append("# TYPE nemik_waiting_on gauge")
-    live, _ = read_liveness(args.root, None)
-    for r in roster(merged, live):
-        out.append(
-            f"nemik_waiting_on{label(repo=r['repo'], state=r['state'])} {len(r['waiting'])}"
-        )
-    out += operator_lines(merged)
-    out += health_lines(merged)
-    out += warrant_lines(merged)
-    out += tier_lines(merged)
-    out += arrival_lines(merged, now)
-    out += run_log_lines(args.runs)
-    out += history_lines(args.root, merged, now, args.family or [])
-    out += realizability_lines(args.root)
-
-    prompts: Counter[tuple[str, str, str]] = Counter()
-    turns: Counter[str] = Counter()
-    if args.spool.exists():
-        for raw in args.spool.read_text(encoding="utf-8").splitlines():
-            try:
-                e = json.loads(raw)
-            except json.JSONDecodeError:
-                continue
-            repo = e.get("repo") or "none"
-            if e.get("event") == "UserPromptSubmit":
-                src = e.get("source") or "unknown"
-                prompts[(repo, src, CLASS.get(src, "unknown"))] += 1
-            elif e.get("event") == "Stop":
-                turns[repo] += 1
-    out.append("# TYPE nemik_prompts_total counter")
-    for (repo, src, cls), n in sorted(prompts.items()):
-        out.append(
-            f"nemik_prompts_total{label(repo=repo, source=src, **{'class': cls})} {n}"
-        )
-    out.append("# TYPE nemik_turns_total counter")
-    for repo, n in sorted(turns.items()):
-        out.append(f"nemik_turns_total{label(repo=repo)} {n}")
-    out += ["# TYPE nemik_ledger_lines gauge", "# TYPE nemik_ledger_unparsed gauge"]
-    for repo, path in workstream_files(args.root, LEDGER):
-        g, unparsed = ledger_graph(repo, path)
-        lines = Counter(
-            (str(c), str(k))
-            for a in g.subjects(RDF.type, PROV.Activity)
-            for c in g.objects(a, NEMIK.effortClass)
-            for k in g.objects(a, NEMIK.kind)
-        )
-        for (cls, kind), n in sorted(lines.items()):
-            out.append(
-                f"nemik_ledger_lines{label(repo=repo, kind=kind, **{'class': cls})} {n}"
-            )
-        out.append(f"nemik_ledger_unparsed{label(repo=repo)} {unparsed}")
+    steps: list[tuple[tuple[str, ...], Producer]] = [
+        (("nemik_blocks_inbound",), lambda: inbound_lines(merged)),
+        (("nemik_pathsforward_adoption",), lambda: adoption_lines(merged)),
+        (("nemik_waiting_on",), lambda: waiting_lines(args.root, merged)),
+        (
+            ("nemik_operator_salience", "nemik_operator_asks"),
+            lambda: operator_lines(merged),
+        ),
+        (("nemik_repo_health",), lambda: health_lines(merged)),
+        (("nemik_warrant_debt",), lambda: warrant_lines(merged)),
+        (("nemik_repo_tier",), lambda: tier_lines(merged)),
+        (("nemik_cards_arrived_24h",), lambda: arrival_lines(merged, now)),
+        (("nemik_run_log_unmigrated",), lambda: run_log_lines(args.runs)),
+        (HISTORY_FAMILIES, lambda: history_lines(args.root, merged, now, asking)),
+        (REALIZABILITY, lambda: realizability_lines(args.root)),
+        (("nemik_prompts_total", "nemik_turns_total"), lambda: spool_lines(args.spool)),
+        (
+            ("nemik_ledger_lines", "nemik_ledger_unparsed"),
+            lambda: ledger_rows(args.root),
+        ),
+    ]
+    out += [line for names, produce in steps if asked(*names) for line in produce()]
     # nemik:W640: the survey kept its caches before the families ran; keep the flow solves the
     # salience audit made since (15, 27 s of a profiled warm run), for the real root only.
     if args.root.resolve() == default_root().resolve():

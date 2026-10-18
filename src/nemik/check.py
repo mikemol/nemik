@@ -77,8 +77,25 @@ def shapes() -> Graph:
 Finding = tuple[str, str, str]  # (severity, focus symbol, message)
 
 
+def unchecked(
+    graphs: dict[str, Graph | None], refused: dict[str, str]
+) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
+    """Yield each queue's graph with no findings, the refused ones marked Unreadable (nemik:W620).
+
+    Args:
+        graphs: Each repo's queue graph, or None when mtools refused the file.
+        refused: The reason for each refused repo.
+
+    Yields:
+        (repo, graph, findings) as survey does, the findings empty for a graph.
+
+    """
+    for repo, g in graphs.items():
+        yield repo, g, [] if g is not None else [("Unreadable", "--", refused[repo])]
+
+
 def survey(
-    root: Path, phases: dict[str, float] | None = None
+    root: Path, phases: dict[str, float] | None = None, *, check: bool = True
 ) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
     """Yield (repo, graph, findings) per queue; graph is None when mtools refuses the file.
 
@@ -88,6 +105,9 @@ def survey(
 
     nemik:W399: when `phases` is given, the CPU seconds of each phase (parse, annotate, shacl,
     fleet_checks) are written into it, so a caller can see which part of a rebuild dominates.
+
+    nemik:W620: with `check` false the graphs are read and no finding is computed, which is most of
+    the cost (SHACL and the fleet checks); for a caller that wants a family built from the graphs.
     """
     mark = [time.process_time()]
 
@@ -132,6 +152,9 @@ def survey(
             m = HOST_REF.fullmatch(str(cited).strip())
             if m and m[1] not in export.rows:
                 merged.add((node, NEMIK.unresolvedBlocker, cited))
+    if not check:
+        yield from unchecked(graphs, refused)
+        return
     from nemik.shaclinc import findings as shacl_findings
 
     # nemik:W400: a rebuild in the same process re-validates only the nodes its change touches.
