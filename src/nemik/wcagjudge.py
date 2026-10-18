@@ -9,7 +9,7 @@ theme; a pair whose token the page does not define is reported as unjudged, neve
 
 from importlib.resources import files
 
-from nemik.wcagfacts import facts
+from nemik.wcagfacts import facts, focus
 from nemik.witnesses import opa_json
 
 QUERY = '{"violations": data.wcag.violations, "unjudged": data.wcag.unjudged}'
@@ -63,7 +63,9 @@ def judge(html: str) -> dict[str, list[Row]]:
 
     """
     policy = str(files("nemik").joinpath("data/wcag.rego"))
-    value = _value(opa_json(QUERY, facts(html), [policy]))
+    doc: dict[str, object] = dict(facts(html))
+    doc["focus"] = focus(html)
+    value = _value(opa_json(QUERY, doc, [policy]))
     return {
         "violations": _rows(value, "violations"),
         "unjudged": _rows(value, "unjudged"),

@@ -57,6 +57,21 @@ violations contains v if {
 	v := {"criterion": "1.4.11", "theme": theme, "fg": p.fg, "bg": p.bg, "ratio": r, "min": 3}
 }
 
+# 2.4.7 Focus Visible: a rule that removes a selector's outline needs a :focus or :focus-visible
+# rule for the same base selector, or keyboard focus is invisible there. input.focus comes from
+# nemik.wcagfacts.focus.
+violations contains v if {
+	some selector in input.focus.removed
+	not replaced(selector)
+	v := {
+		"criterion": "2.4.7",
+		"selector": selector,
+		"why": "outline removed with no :focus or :focus-visible rule for the same selector",
+	}
+}
+
+replaced(selector) if selector in input.focus.styled
+
 # A pair whose token the page does not define cannot be judged and is reported, not skipped.
 unjudged contains u if {
 	some theme in themes

@@ -13,6 +13,9 @@ import re
 SHORT = 3
 MAX_CHANNEL = 255
 KNEE = 0.03928
+RULE = re.compile(r"([^{}@]+)\{([^{}]*)\}")
+NO_OUTLINE = re.compile(r"outline\s*:\s*(none|0)\b")
+FOCUS = re.compile(r":focus(-visible)?\b")
 TOKEN = re.compile(r"(--[a-z0-9-]+)\s*:\s*(#[0-9a-fA-F]{3,8})\b")
 LIGHT = re.compile(r":root\s*\{([^}]*)\}")
 DARK = re.compile(
@@ -52,6 +55,30 @@ def tokens(html: str) -> dict[str, dict[str, str]]:
     if override:
         dark.update(_tokens(override.group(1)))
     return {"light": light, "dark": dark}
+
+
+def focus(html: str) -> dict[str, list[str]]:
+    """Read how the page's stylesheet treats keyboard focus (WCAG 2.4.7).
+
+    Args:
+        html: The page's text.
+
+    Returns:
+        {"removed": selectors whose rule sets `outline: none` or `outline: 0`, "styled": the base
+        selectors (focus pseudo-class stripped) of rules that style :focus or :focus-visible}. A
+        selector is listed once per rule it appears in, in source order.
+
+    """
+    removed: list[str] = []
+    styled: list[str] = []
+    pairs: list[tuple[str, str]] = RULE.findall(html)
+    for selectors, body in pairs:
+        for selector in (s.strip() for s in selectors.split(",")):
+            if FOCUS.search(selector):
+                styled.append(FOCUS.sub("", selector).strip())
+            elif NO_OUTLINE.search(body):
+                removed.append(selector)
+    return {"removed": removed, "styled": styled}
 
 
 def luminance(colour: str) -> float:
