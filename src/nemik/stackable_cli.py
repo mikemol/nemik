@@ -12,14 +12,65 @@ already staged in REPO. A card with no manifest is counted, never stacked.
 import argparse
 import json
 import sys
+from collections.abc import Callable
 from pathlib import Path
 
 from rdflib import Graph
 
 from nemik import history
+from nemik.adapter import OSLC_CM, STATE
 from nemik.check import default_root, survey
+from nemik.drift import drift, ride_along
 from nemik.rank import load_weights, rank
-from nemik.stackable import generated_files, proposal_rows, propose, report
+from nemik.stackable import generated_files, manifest, proposal_rows, propose, report
+
+RIDE_ALONG_BAR = 2
+
+
+def drift_lines(
+    g: Graph, name: str, cited: Callable[[str], list[str]], at_least: int
+) -> list[str]:
+    """Report how far each done card's commits strayed from its manifest (nemik:W611).
+
+    Args:
+        g: The merged queue graph.
+        name: The repo.
+        cited: Maps a symbol to the files its citing commits touched.
+        at_least: How many cards must miss a kind of file before it is reported as riding along.
+
+    Returns:
+        One line per done card with a manifest and some drift, then one per ride-along kind.
+
+    """
+    prefix = f"urn:nemik:{name}/"
+    drifts: list[tuple[str, list[str]]] = []
+    for node in g.subjects(OSLC_CM.state, STATE["done"]):
+        if not str(node).startswith(prefix):
+            continue
+        symbol = str(node)[len(prefix) :]
+        planned = manifest(g, name, symbol)
+        extra = drift(cited(symbol), planned) if planned else []
+        if extra:
+            drifts.append((symbol, extra))
+    drifts.sort()
+    lines = [f"{symbol}: drift {' '.join(extra)}" for symbol, extra in drifts]
+    for one, cards in ride_along([extra for _, extra in drifts], at_least):
+        lines.append(f"ride-along: {one} missed by {cards} cards")
+    return lines
+
+
+def print_drift(g: Graph, repo: Path) -> None:
+    """Print the drift of every done card in a repo, from its git history.
+
+    Args:
+        g: The merged queue graph.
+        repo: The repo's working directory.
+
+    """
+    found = drift_lines(
+        g, repo.name, lambda s: history.cited_files(repo, s), RIDE_ALONG_BAR
+    )
+    sys.stdout.write("\n".join(found) + "\n")
 
 
 def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
@@ -45,16 +96,25 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         action="store_true",
         help="with --propose: [{symbol, manifest, size, wide}] for a writer to apply",
     )
+    ap.add_argument(
+        "--drift",
+        action="store_true",
+        help="files each done card's commits touched beyond its manifest (nemik:W611)",
+    )
     args = ap.parse_args(argv)
     root: Path = args.root
     name: str = args.repo
     proposing: bool = args.propose
     as_json: bool = args.json
+    drifting: bool = args.drift
     if g is None:
         g = Graph()
         for _, queue, _ in survey(root):
             if queue is not None:
                 g += queue
+    if drifting:
+        print_drift(g, root / name)
+        return
     rows: list[dict[str, object]] = rank(g, name, load_weights())
     if proposing:
         cited = {
@@ -63,8 +123,9 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         }
         known = history.tracked_files(root / name)
         if as_json:
-            drafts = proposal_rows(g, name, rows, cited, known)
-            sys.stdout.write(json.dumps(drafts, indent=1) + "\n")
+            sys.stdout.write(
+                json.dumps(proposal_rows(g, name, rows, cited, known), indent=1) + "\n"
+            )
             return
         sys.stdout.write("\n".join(propose(g, name, rows, cited, known)) + "\n")
         return
