@@ -15,9 +15,10 @@ One structure covers all of that, as github-8f read it: X rolls up under T exact
 blocked_on path from X reaches T, that is, T dominates X in the blocked_on graph. The dominator tree
 is computed once (Cooper, Harvey and Kennedy's iterative algorithm); a node's umbrella is the set of
 blocked nodes whose immediate dominator it is, when there are two or more; an n-path is the chain of
-umbrellas along the dominator chain, and the recursion is the tree itself. The enables rule is the
-integrity check: a card whose enables names a card that T does not dominate is a data-integrity
-finding (`violations`, for nemik-check to warn on) and is left out of the umbrella.
+umbrellas along the dominator chain, and the recursion is the tree itself. The enables rule keeps a
+card whose enables names a card that T does not dominate out of the umbrella (`violations`); that
+edge may be a join. The data-integrity finding is narrower and separate (`disagreements`): an
+enables edge whose target does not wait on its source at all.
 
 This is the grouping over plain data, so nemik-check and serve.py read one answer. Nothing is
 written to a queue; members keep their own symbols. The module imports nothing, so the Codon census
@@ -164,16 +165,66 @@ def dominated_by(idom: dict[str, str], node: str, target: str) -> bool:
     return False
 
 
+def waits_on(blocked: dict[str, Row], node: str, ancestor: str) -> bool:
+    """Say whether a node waits on an ancestor, directly or through other cards.
+
+    Args:
+        blocked: For each blocked card, the cards it waits on and the cards it enables.
+        node: The card to start from.
+        ancestor: The card it should be blocked behind.
+
+    Returns:
+        True when following blocked_on edges from the node reaches the ancestor.
+
+    """
+    seen: set[str] = set()
+    todo = list(blocked[node][0]) if node in blocked else []
+    while todo:
+        here = todo.pop()
+        if here == ancestor:
+            return True
+        if here not in seen:
+            seen.add(here)
+            todo.extend(blocked[here][0] if here in blocked else [])
+    return False
+
+
+def disagreements(blocked: dict[str, Row]) -> list[tuple[str, str]]:
+    """Find the enables edges whose target does not wait on its source (a data-integrity finding).
+
+    A card that enables another says the other cannot proceed without it, so the other should wait
+    on it, directly or through other cards. Where it does not, the enables and blocked_on edges
+    disagree. A card with other blockers too (a join) still waits on this one, so it is no finding.
+
+    Args:
+        blocked: For each open card, the cards it waits on and the cards it enables.
+
+    Returns:
+        (card, enabled card) for each enables edge whose target is not transitively blocked on the
+        source; sorted.
+
+    """
+    return sorted(
+        (card, e)
+        for card, (_, enables) in blocked.items()
+        for e in set(enables)
+        if not waits_on(blocked, e, card)
+    )
+
+
 def violations(blocked: dict[str, Row]) -> list[Violation]:
     """Find the enables edges that leave the subtree of the card's dominator.
+
+    A card with such an edge cannot roll up under its dominator (the operator's rule, 695f3e0a line
+    80516), but the edge may be a legitimate join: the enabled card also has blockers elsewhere.
+    The data-integrity finding is `disagreements`.
 
     Args:
         blocked: For each blocked card, the cards it waits on and the cards it enables.
 
     Returns:
         (card, target, escaped) for each blocked card that has a dominator T other than the entry
-        and enables a card that T does not dominate: the enables and blocked_on edges disagree.
-        Sorted.
+        and enables a card that T does not dominate. Sorted.
 
     """
     idom = immediate_dominators(blocked)
