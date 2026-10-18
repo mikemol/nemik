@@ -178,6 +178,21 @@ sha-pinned dependency and run it from its own `.venv`. `nemik.adoption` reads ea
 repo tree beside it). `AdoptionShape` warns on `missing` and `no-pyproject`, and
 `nemik_pathsforward_adoption{repo,state}` shows adoption fleet-wide.
 
+## Delivery signals (DORA)
+
+Four signals, three of them nemik's own gauges and one read from luthen's store (nemik:W355):
+
+- **Deploy frequency**: `nemik_commits_24h`, commits on HEAD in the last 24 hours (a push is a deploy).
+- **Lead time**: not measured; a card's `issued_at` to its completion would give it.
+- **Change failure**: `nemik_cards_reopened_24h`, cards that went from done back to open.
+- **Time to restore**: not a nemik gauge. luthen records
+  `deploy:luthen_ship_failing:max_false_conditions{namespace="nemik",deployment="nemik"}`, 1 while the
+  deployment's Progressing or Available condition is false and 0 otherwise. A failure starts at the
+  first 1 and the restore is the next 0; compute the duration with `query_range` over that series. It
+  is rollout health, not Flux reconcile (a Kustomization that fails before applying anything does not
+  show), and no failing ship had been observed when it was written. luthen declined to store
+  completed incidents until one exists to size a store against.
+
 ## Provenance of a verdict
 
 Every `nemik-check` run begins with `provenance:` lines, so that a green which rests on
