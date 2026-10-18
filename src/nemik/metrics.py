@@ -382,6 +382,27 @@ def reopened_lines(root: Path, now: datetime) -> list[str]:
     return out
 
 
+def ticks(repo: str, ledger: Path) -> list[tuple[str, str]]:
+    """nemik:W681: the ledger's tick lines that name a card, as (stamp, symbol).
+
+    Args:
+        repo: The workstream.
+        ledger: Its ledger file.
+
+    Returns:
+        One pair per line of kind `tick` that carries a symbol, in file order.
+
+    """
+    g, _ = ledger_graph(repo, ledger)
+    out: list[tuple[str, str]] = []
+    for act in g.subjects(RDF.type, PROV.Activity):
+        used = g.value(act, PROV.used)
+        if str(g.value(act, NEMIK.kind)) == "tick" and used is not None:
+            stamp = str(g.value(act, PROV.startedAtTime))
+            out.append((stamp, str(used).rpartition("/")[2]))
+    return out
+
+
 def history_lines(
     root: Path, merged: Graph, now: datetime, wanted: list[str]
 ) -> list[str]:
