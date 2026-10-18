@@ -178,33 +178,45 @@ def facts(query: str, now: datetime | None = None) -> tuple[dict, list[str]]:
     return doc, missing
 
 
-def evaluate(query: str, doc: dict, missing: list[str]) -> str:
-    """'true' | 'false' | 'undefined'."""
-    if missing:
-        return "undefined"
+def opa_json(query: str, doc: object, data: list[str]) -> object:
+    """Run `opa eval` once, the one place nemik starts the pinned opa (nemik:W646).
+
+    Args:
+        query: The Rego query.
+        doc: The input document, given on stdin.
+        data: Policy files to load with --data.
+
+    Returns:
+        opa's parsed JSON answer, or None when opa is unavailable or exits non-zero.
+
+    """
     # nemik:W535: the one pinned-opa resolution, shared with pathsforward; NEMIK_OPA names it.
     named = {"OPA_BIN": os.environ.get("NEMIK_OPA") or os.environ.get("OPA_BIN", "")}
     try:
         opa = resolve({k: v for k, v in named.items() if v})
     except OpaUnavailableError:
-        return "undefined"
+        return None
+    argv = [opa, "eval", "--format", "json"]
+    for path in data:
+        argv += ["--data", path]
     out = subprocess.run(
-        [
-            opa,
-            "eval",
-            "--format",
-            "json",
-            "--stdin-input",
-            query,
-        ],
+        [*argv, "--stdin-input", query],
         input=json.dumps(doc),
         capture_output=True,
         text=True,
         check=False,
     )
-    if out.returncode != 0:
+    return None if out.returncode != 0 else json.loads(out.stdout)
+
+
+def evaluate(query: str, doc: dict, missing: list[str]) -> str:
+    """'true' | 'false' | 'undefined'."""
+    if missing:
         return "undefined"
-    result = json.loads(out.stdout).get("result") or []
+    parsed = opa_json(query, doc, [])
+    if not isinstance(parsed, dict):
+        return "undefined"
+    result = parsed.get("result") or []
     return (
         "true"
         if result and all(e["value"] is not False for e in result[0]["expressions"])
