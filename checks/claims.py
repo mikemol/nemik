@@ -167,7 +167,7 @@ def hub_modules_depend_on_everything_below():
     # nemik:W634: and applies the per-repo exports' withholding, through exportwire, which rests on
     # check and exportv2 (a leaf that reads one JSON file).
     expected = {
-        "metrics": lower | {"realize"},
+        "metrics": lower | {"realize", "runlogs"},
         "serve": lower | {"outbox", "exportwire", "runlogs"},
     }
     for hub, want in expected.items():

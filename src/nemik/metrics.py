@@ -71,6 +71,7 @@ from nemik.check import (
     workstream_files,
 )
 from nemik.realize import verdicts
+from nemik.runlogs import unmigrated_at_source
 from nemik.wake import read_liveness, roster
 
 TYPE_LINE_WORDS = 3  # "# TYPE", the metric name, its kind
@@ -102,6 +103,7 @@ HELP = {
     "nemik_umbrella_forecast_days": "Days the slowest umbrella needs at the recent close rate.",
     "nemik_unforecastable_cards": "Working cards with no children, so no forecast can be made.",
     "nemik_cards_reopened_24h": "Cards that went from done back to open in the last 24 hours.",
+    "nemik_run_log_unmigrated": "Source run-log lines that predate the run-row shape, by stream.",
 }
 
 CLASS = {
@@ -459,6 +461,29 @@ class _Options(argparse.Namespace):
 
     family: list[str] | None
     root: Path
+    runs: Path | None
+
+
+def run_log_lines(directory: Path | None) -> list[str]:
+    """Print how many source lines of each published run log predate the run-row shape (W565).
+
+    Args:
+        directory: The export's runs/ directory, or None when no run logs are published here.
+
+    Returns:
+        One nemik_run_log_unmigrated line per stream the directory's index.json counts; nothing
+        when there is no directory or no index.
+
+    """
+    if directory is None:
+        return []
+    counts = unmigrated_at_source(directory)
+    out = ["# TYPE nemik_run_log_unmigrated gauge"] if counts else []
+    out += [
+        f"nemik_run_log_unmigrated{label(stream=stream)} {n}"
+        for stream, n in sorted(counts.items())
+    ]
+    return out
 
 
 def repo_lines(
@@ -507,6 +532,12 @@ def main(argv: list[str] | None = None) -> None:
     )
     ap.add_argument("--spool", type=Path, default=spool_path())
     ap.add_argument(
+        "--runs",
+        type=Path,
+        help="luthen's published run logs (DIR/index.json): print how many source lines predate "
+        "the run-row shape (nemik:W565)",
+    )
+    ap.add_argument(
         "--family",
         action="append",
         metavar="NAME",
@@ -554,6 +585,7 @@ def main(argv: list[str] | None = None) -> None:
     out += warrant_lines(merged)
     out += tier_lines(merged)
     out += arrival_lines(merged, now)
+    out += run_log_lines(args.runs)
     out += history_lines(args.root, merged, now, args.family or [])
     out += realizability_lines(args.root)
 
