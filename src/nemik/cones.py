@@ -113,3 +113,33 @@ def relation(edits_a: list[str], edits_b: list[str], graph: Graph) -> str:
     if b_feeds_a:
         return "b-first"
     return "disjoint"
+
+
+def parallel(
+    cards: list[str], manifests: list[list[str]], in_flight: list[str], graph: Graph
+) -> list[str]:
+    """Pick the cards that can be worked at the same time, most urgent first.
+
+    Where nemik.stackable.pick asks for disjoint file lists, this asks for disjoint cones: a card
+    whose edits feed what another depends on is not parallel with it, even on different files.
+
+    Args:
+        cards: The ready cards' citations, in rank order.
+        manifests: Each card's planned files, parallel to `cards`; an empty manifest is a card that
+            is not planned, which is never picked.
+        in_flight: Files already staged or in a gate.
+        graph: The input graph.
+
+    Returns:
+        The citations whose cones are pairwise disjoint from each other and from `in_flight`, in
+        rank order.
+
+    """
+    taken = list(in_flight)
+    chosen: list[str] = []
+    for cite, files in zip(cards, manifests, strict=True):
+        if not files or relation(taken, files, graph) != "disjoint":
+            continue
+        chosen.append(cite)
+        taken.extend(files)
+    return chosen

@@ -5,7 +5,7 @@
 import json
 from pathlib import Path
 
-from nemik.cones import Graph, cone, load, relation
+from nemik.cones import Graph, cone, load, parallel, relation
 
 GRAPH: Graph = {
     "src/a.py": {"src/b.py"},
@@ -45,6 +45,17 @@ def test_a_card_that_edits_a_dependency_goes_first() -> None:
 def test_a_declared_read_orders_cards_too() -> None:
     """Editing data/x.ttl, which b.py reads, comes before editing a.py."""
     assert relation(["data/x.ttl"], ["src/a.py"], GRAPH) == "a-first"
+
+
+def test_parallel_skips_a_card_whose_edit_feeds_an_earlier_pick() -> None:
+    """Of [a, c, d], c.py feeds a.py, so only a and d run together."""
+    manifests = [["src/a.py"], ["src/c.py"], ["src/d.py"]]
+    assert parallel(["A", "C", "D"], manifests, [], GRAPH) == ["A", "D"]
+
+
+def test_parallel_never_picks_an_unplanned_card_or_one_clashing_with_flight() -> None:
+    """An empty manifest is never picked, and a file in flight blocks its dependents."""
+    assert parallel(["E", "F"], [[], ["src/a.py"]], ["src/c.py"], GRAPH) == []
 
 
 def test_the_same_file_in_two_cards_is_unordered() -> None:
