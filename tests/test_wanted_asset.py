@@ -8,6 +8,14 @@ from pathlib import Path
 from rdflib import Graph, Literal
 
 from nemik.adapter import NEMIK, queue_graph, reference_uri, waypoint_uri
+from nemik.serve import suppliers_of
+
+
+def test_the_served_card_lists_its_suppliers_as_citations(tmp_path: Path) -> None:
+    """The view reads them as repo:W<n>, sorted; a card naming none gets an empty list."""
+    g = _queue(tmp_path)
+    assert suppliers_of(g, waypoint_uri("a", "W1")) == ["other:W9", "third:W4"]
+    assert suppliers_of(g, waypoint_uri("a", "W2")) == []
 
 
 def _queue(tmp_path: Path) -> Graph:

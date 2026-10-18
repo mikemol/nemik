@@ -172,6 +172,20 @@ def local(term) -> str:
     return str(term).removeprefix("urn:nemik:").rsplit("#", 1)[-1].rsplit("/", 1)[-1]
 
 
+def suppliers_of(g: Graph, card: URIRef) -> list[str]:
+    """List the cards that may deliver what a card wants (nemik:W343, mtools:W1511).
+
+    Args:
+        g: The merged queue graph.
+        card: The waiting card.
+
+    Returns:
+        Their citations as repo:W<n>, sorted; empty when the card names none.
+
+    """
+    return sorted(ref(o) for o in g.objects(card, NEMIK.acceptableSupplier))
+
+
 def without(g: Graph, refs: frozenset[str]) -> Graph:
     """nemik:W309: a copy of `g` with every withheld waypoint (and every edge to or from it) removed,
     the graph the public numbers are computed over."""
@@ -226,6 +240,9 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
                     "state": state,
                     "blocked_on": [str(o) for o in g.objects(n, NEMIK.blockedOn)],
                     "blocked_kind": str(g.value(n, NEMIK.blockedKind) or ""),
+                    # nemik:W343: who else may deliver what this card wants, beside its blockers
+                    "suppliers": suppliers_of(g, URIRef(str(n))),
+                    "want": str(g.value(n, NEMIK.wantText) or ""),
                     "effort": dict(sorted(effort.get(str(n), {}).items())),
                     "last_activity": last.get(str(n), ""),
                     "minted_during": str(g.value(n, NEMIK.mintedDuring) or ""),

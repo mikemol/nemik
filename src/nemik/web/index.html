@@ -1329,6 +1329,7 @@ function detailHTML(n) {
     ${n.minted_during ? `<dt>minted during</dt><dd>${esc(n.minted_during)}</dd>` : ""}
     ${n.caused_by ? `<dt>caused by</dt><dd>${linked(n.caused_by.replace(/^urn:nemik:([^/]+)\//, "$1:"), n.repo)}</dd>` : ""}
     ${n.blocked_on.length ? `<dt>blocked on</dt><dd>${linked(n.blocked_on.join(", "), n.repo)} (${esc(n.blocked_kind)})</dd>` : ""}
+    ${(n.suppliers && n.suppliers.length) || n.want ? `<dt>or any owner</dt><dd>${n.want ? esc(n.want) : "of what it waits on"}${n.suppliers && n.suppliers.length ? ` (also fine: ${linked(n.suppliers.join(", "), n.repo)})` : ""}</dd>` : ""}
     <dt>forecast</dt><dd>${e.forecast || 0}</dd>
     <dt>interrupt</dt><dd>${e.interrupt || 0}</dd>
     <dt>unclassified</dt><dd>${e.unclassified || 0}</dd>
