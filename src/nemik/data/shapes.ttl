@@ -144,6 +144,20 @@ nemik:LifecycleWordShape a sh:NodeShape ;
                 $this <https://github.com/mikemol/nemik/ns#strayWord> ?word .
             }""" ] .
 
+# nemik:W555: the same words in a run row's detail (a prov:Activity from runrows.run_graph). The run's
+# verdict (mtools corpus/exit-table.json, mtools:W1294) is the other axis and is not judged here: a run
+# that exits INSTALLED reached the installed step only if its detail says so. An Info, not a Warning,
+# since a log's text is written once and cannot be amended.
+nemik:LifecycleRunWordShape a sh:NodeShape ;
+    sh:targetClass prov:Activity ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "run detail says '{?word}', which blurs the change-lifecycle steps: say landed, installed, held, enabled, active or applied (nemik:ChangeLifecycle)" ;
+        sh:select """
+            SELECT $this ?word WHERE {
+                $this <https://github.com/mikemol/nemik/ns#strayWord> ?word .
+            }""" ] .
+
 # Blocked on another workstream's umbrella rather than on the child step doing the work (W41).
 # nemik:W529: a SPARQL constraint over the enables and waitsFor edges; an umbrella is a card two or more of
 # whose own repo's open cards enable it (a target with exactly one is a chain step, nemik:W144).

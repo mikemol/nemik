@@ -24,7 +24,7 @@ from pathlib import Path
 from rdflib import RDF, Graph, Literal, URIRef
 from rdflib.namespace import PROV, RDFS, XSD
 
-from nemik.adapter import BASE, NEMIK, bind
+from nemik.adapter import BASE, NEMIK, bind, stray_words
 
 
 def decode(text: str) -> object:
@@ -182,6 +182,9 @@ def _add_activity(graph: Graph, stream: str, row: dict[str, object]) -> None:
     graph.add((node, NEMIK.verdictState, Literal(str(state))))
     if row.get("detail"):
         graph.add((node, RDFS.comment, Literal(str(row["detail"]))))
+        # nemik:W555: lifecycle words in a run's detail, flagged as in a card's next step
+        for word in stray_words(str(row["detail"])):
+            graph.add((node, NEMIK.strayWord, Literal(word)))
 
 
 def run_graph(stream: str, path: Path) -> tuple[Graph, int]:

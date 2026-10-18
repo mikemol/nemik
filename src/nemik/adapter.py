@@ -121,6 +121,27 @@ _SESSION = re.compile(
     r"^(?P<repo>.+)-[0-9a-f]{2}$"
 )  # a ListAgents session name: <repo>-<2 hex>
 _OPERATOR_WORDS = ("operator", "user", "mikemol", "mike", "human")
+# nemik:W553, W555: words that blur the change-lifecycle steps, in a card's next step and in a run
+# row's detail. Not strays, by name: rolled out, activation, promoted, pushed.
+_STRAYS = re.compile(
+    r"\b(?:armed|shipped|host-shipped|takes effect|rides the next apply|deployed"
+    r"|live(?!\s+(?:session|sessions|loop|queue|view|reader|data|graph|fleet)))\b",
+    flags=re.IGNORECASE,
+)
+
+
+def stray_words(text: str) -> list[str]:
+    """Find the words in a text that blur the change-lifecycle steps.
+
+    Args:
+        text: A card's next step, or a run row's detail.
+
+    Returns:
+        The distinct words found, lower-cased and sorted.
+
+    """
+    found: list[str] = _STRAYS.findall(text)
+    return sorted({word.lower() for word in found})
 
 
 def resolve_blocker(repo: str, text: str, known: frozenset[str]) -> URIRef | None:
@@ -272,14 +293,7 @@ def _queue_graph(repo: str, state_path: Path, known: frozenset[str]) -> Graph:
         if size := model.text(w, "size_class").strip():
             g.add((node, NEMIK.sizeClass, Literal(size)))
         # nemik:W553 (github-8f 2026-10-15): words that blur the change-lifecycle steps.
-        # Not strays, by name: rolled out, activation, promoted, pushed.
-        strays = re.findall(
-            r"\b(?:armed|shipped|host-shipped|takes effect|rides the next apply|deployed"
-            r"|live(?!\s+(?:session|sessions|loop|queue|view|reader|data|graph|fleet)))\b",
-            model.text(w, "next_bounded_step"),
-            flags=re.IGNORECASE,
-        )
-        for word in sorted({s.lower() for s in strays}):
+        for word in stray_words(model.text(w, "next_bounded_step")):
             g.add((node, NEMIK.strayWord, Literal(word)))
         # nemik:W174: weather. Waypoints whose witnesses are the same query wait on the same outage,
         # so they share one weather id: a hash of the query with its whitespace collapsed. The query
