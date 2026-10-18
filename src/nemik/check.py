@@ -576,23 +576,25 @@ def committed_verdict(root: Path, named: set[str]) -> int:
     return 4 if stale else 0
 
 
-def integrity_report(root: Path) -> int:
+def integrity_report(root: Path, only: str | None = None) -> int:
     """Print the integrity findings per repo with the fixes as commands, and apply nothing.
 
     Args:
         root: The directory holding the repos.
+        only: A repo to report on; None reports every repo. Each repo's session works its own.
 
     Returns:
         0.
 
     """
     whole = bind(Graph())
-    for _, g, _ in survey(root):
+    for _, g, _ in survey(root, check=False):
         if g is not None:
             whole += g
     for repo, said in sorted(integrity_commands(whole, root).items()):
-        sys.stdout.write(f"{repo}: {len(said) // 3} finding(s)\n")
-        sys.stdout.write("".join(f"{line}\n" for line in said))
+        if only is None or only == repo:
+            sys.stdout.write(f"{repo}: {len(said) // 3} finding(s)\n")
+            sys.stdout.write("".join(f"{line}\n" for line in said))
     return 0
 
 
@@ -637,7 +639,8 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument(
         "--repo",
         metavar="REPO",
-        help="with --letters --fold: list only this repo's inbox (each repo migrates its own; "
+        help="with --letters --fold, or --integrity: only this repo's inbox or findings (each repo "
+        "works its own; "
         "nemik:W282)",
     )
     ap.add_argument(
@@ -686,7 +689,7 @@ def main(argv: list[str] | None = None) -> None:
     if args.committed is not None:
         sys.exit(committed_verdict(args.root, set(args.committed)))
     if args.integrity:
-        sys.exit(integrity_report(args.root))
+        sys.exit(integrity_report(args.root, args.repo))
 
     for line in provenance(args.root):
         print(line)
