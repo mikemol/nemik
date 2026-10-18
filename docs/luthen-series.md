@@ -18,11 +18,13 @@ read, so a session can be missing for its first runs (the first full catch-up is
 
 ## W352: awake, idle, asleep against ready cards
 
-A repo is **asleep** when its last tick is older than the loop's interval plus slack and its queue holds workable
-cards; **idle** when the loop is live but no card is ready or working; **awake** otherwise. The inputs are
-`last.tick.timestamp.seconds` (age), `loop.liveness` (luthen's own verdict, used as given) and nemik's ready count
-from the queue graph. The board is a time series of that triple per repo, so "which repos had workable cards while
-asleep" is a query over the product of the two sources, not a new measurement.
+A repo's state is luthen's verdict, read the way `nemik.wake` already reads `loop_liveness`: **awake** for `ok`
+(a live session ticking), **asleep** for `dormant` (no live session), **idle** for anything else (`stale` today, and
+any verdict luthen adds later is shown as it comes, not refused). nemik does not detect liveness itself, so the
+tick's age is not used to decide a state (an earlier draft did, and disagreed with `wake`). The board joins that
+state, over time through the snapshot's history rows, with nemik's ready count from the queue graph, so "which repos
+had workable cards while not awake" is `luthenseries.stranded` (asleep ones first), a query over the product of
+the two sources and not a new measurement.
 
 ## W353: tokens per card
 

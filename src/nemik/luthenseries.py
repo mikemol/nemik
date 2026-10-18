@@ -17,8 +17,6 @@ from pathlib import Path
 VERSION = 1
 NO_TICK = -1
 PAIR = 2
-# a 30 minute loop plus half again: past this a repo's loop has missed a tick
-ASLEEP_AFTER = 2700
 
 
 class Repo:
@@ -254,20 +252,43 @@ def load(path: Path, now: int, max_age: int) -> Series:
     return parse(path.read_text(encoding="utf-8"), now, max_age)
 
 
-def classify(last_tick: int, now: int, ready: int) -> str:
-    """Say whether a repo is awake, idle or asleep.
+def state_of(verdict: str) -> str:
+    """Say whether a repo is awake, idle or asleep, from luthen's verdict.
+
+    The same reading nemik.wake makes of loop_liveness (its AWAKE table), kept here so this
+    module needs nothing else: a live session ticking is awake ("ok"), no live session is asleep
+    ("dormant"), and any other verdict (stale, or one luthen adds later) is idle.
 
     Args:
-        last_tick: The repo's last tick, epoch seconds, or NO_TICK.
-        now: The current epoch seconds.
-        ready: How many cards are ready or working in its queue.
+        verdict: The repo's verdict as luthen names it.
 
     Returns:
-        "asleep" when its loop has missed a tick while it holds workable cards, "idle"
-        when nothing is workable, otherwise "awake".
+        "awake", "asleep" or "idle".
 
     """
-    stale = last_tick == NO_TICK or now - last_tick > ASLEEP_AFTER
-    if ready == 0:
-        return "idle"
-    return "asleep" if stale else "awake"
+    if verdict == "ok":
+        return "awake"
+    return "asleep" if verdict == "dormant" else "idle"
+
+
+def stranded(series: Series, ready: dict[str, int]) -> list[str]:
+    """List the repos that hold workable cards but are not awake.
+
+    Args:
+        series: The snapshot.
+        ready: How many cards are ready or working in each repo's queue.
+
+    Returns:
+        The repos with work and a state other than awake, asleep ones and then idle ones,
+        each group in name order.
+
+    """
+    asleep: list[str] = []
+    idle: list[str] = []
+    for name in sorted(series.repos):
+        state = state_of(series.repos[name].verdict)
+        if ready.get(name, 0) > 0 and state == "asleep":
+            asleep.append(name)
+        elif ready.get(name, 0) > 0 and state == "idle":
+            idle.append(name)
+    return asleep + idle
