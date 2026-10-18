@@ -45,6 +45,16 @@ def test_the_gate_replays_the_images_environment_before_the_suite() -> None:
     assert "tools/mypy_ratchet.py" in code
 
 
+def test_the_gate_checks_shell_files_and_stray_code() -> None:
+    """W526: shell files and stray code under .claude/ are checked ahead of the suite."""
+    code = "\n".join(_code(SCRIPT))
+    shell = code.index('mikemol-shellcheck" --check-file')
+    stray = code.index("ls-files --others --exclude-standard -- .claude")
+    suite = code.index("bazel test //:precommit")
+    assert shell < stray < suite
+    assert "git ls-files" in code
+
+
 def test_the_suite_covers_every_test_target() -> None:
     build = (ROOT / "BUILD.bazel").read_text()
     suite = build[build.index("test_suite(") :]

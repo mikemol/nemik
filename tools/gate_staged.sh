@@ -67,6 +67,26 @@ if ! out=$(env PYTHONPATH="$wt/src" .venv/bin/python3 tools/mypy_ratchet.py 2>&1
     echo "gate_staged: the mypy ratchet fails with the package importable from src (the image installs it editable): commit refused" >&2
     exit 1
 fi
+# nemik:W526: every tracked shell file passes the shell checker (the edit hook checks only what an
+# agent edits), and no code sits untracked under .claude/ (asked of the real checkout: the staged
+# worktree above was cleaned of untracked files).
+while IFS= read -r f; do
+    case "$f" in
+    *.sh | .githooks/*)
+        if ! "$real_root/.venv/bin/mikemol-shellcheck" --check-file "$f"; then
+            echo "gate_staged: $f fails the shell checker: commit refused" >&2
+            exit 1
+        fi
+        ;;
+    *) ;;
+    esac
+done < <(git ls-files)
+stray="$(git -C "$real_root" ls-files --others --exclude-standard -- .claude | grep -E '[.](py|rego|sh)$' || true)"
+if [ -n "$stray" ]; then
+    printf '%s\n' "$stray" >&2
+    echo "gate_staged: untracked code under .claude/ (commit it or remove it): commit refused" >&2
+    exit 1
+fi
 # nemik:W521: the gate is one bazel target, //:precommit (a test_suite over every test; the lint, type,
 # shell and warrant stages join it as they land), so BuildBuddy captures its logs as one invocation.
 if bazel test //:precommit --noshow_progress; then
