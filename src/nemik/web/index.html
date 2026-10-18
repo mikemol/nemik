@@ -66,6 +66,10 @@ aside { overflow-x: hidden; }
 aside pre, aside code { white-space: pre-wrap; overflow-wrap: anywhere; }
 /* Links sat at the browser's default dark blue, unreadable on the dark panel. */
 aside a { color: var(--ink); text-decoration: underline dotted var(--muted); }
+/* nemik:W665 (WCAG 2.5.8, judged by data/wcag.rego): every pointer target in the panel is at least 24 px
+   high, so rows of buttons and links a few pixels apart no longer crowd each other's 24 px circle. */
+aside a { display: inline-block; min-height: 24px; line-height: 24px; }
+aside details.sec > summary, #cardlist button { min-height: 24px; }
 /* A goal's title is too long for the two-column grid: stack title over its status. */
 #goals dl { display: block; }
 #goals dd { margin: 0 0 8px 12px; }

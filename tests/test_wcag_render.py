@@ -120,11 +120,12 @@ def test_the_toolbar_meets_target_size() -> None:
     assert not judge_targets(bar)
 
 
-def test_the_dense_card_lists_do_not_yet() -> None:
-    """Pinned, not approved: list rows hold 21 px buttons and 14 px links a few pixels apart.
+def test_the_card_lists_meet_target_size() -> None:
+    """List rows hold 24 px buttons and links (nemik:W665).
 
     The first rows below the toolbar stand for the lists (judging every target is quadratic in
-    the policy and runs minutes). Making the rows 24 px tall empties this list (nemik:W665).
+    the policy and runs minutes).
     """
     rows = [t for t in _page_targets() if float(str(t["y"])) >= TOOLBAR][:ROWS]
-    assert judge_targets(rows)
+    assert len(rows) == ROWS
+    assert not judge_targets(rows)
