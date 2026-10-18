@@ -1,6 +1,16 @@
 # Withholding at the source (nemik:W516)
 
-**Status: design, nothing built.** Written for whoever builds the children W516 is split into.
+**Status: the reader, the compatible producer and the static build are built (2026-10-17); the pod
+does not use them yet.** Written for whoever builds the children W516 is split into.
+
+Built, with the commit that landed each: `nemik.exportv2.export_refs` reads one export and fails
+closed (93e92d5); `nemik.exportcompat` derives an export from the queue and the v1 list (eb6f41f);
+`nemik.exportwire` applies every repo's export to a fleet, residue cards included (8aeceb1);
+`nemik-serve --static --exports DIR` uses them (10afec1). In flight when this was written:
+`--publish --exports` (W636) and the `nemik-exports` command that writes the derived exports
+(W635). Not built: the pod's deployment passing `--exports`, a repo's own writer emitting its
+export, and retiring luthen's v1 list. The pod must not be given `--exports` until the exports
+directory exists, or it publishes nothing.
 
 ## Today
 
