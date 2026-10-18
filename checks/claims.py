@@ -166,9 +166,12 @@ def hub_modules_depend_on_everything_below():
     # nemik:W354: serve also publishes the outbox, a renderer that rests on adapter alone.
     # nemik:W634: and applies the per-repo exports' withholding, through exportwire, which rests on
     # check and exportv2 (a leaf that reads one JSON file).
+    # nemik:W670: and serves luthen's series snapshot as a board, through luthenseries, a leaf that
+    # reads one JSON file.
     expected = {
         "metrics": lower | {"realize", "runlogs"},
-        "serve": lower | {"outbox", "exportwire", "runlogs", "withheldage"},
+        "serve": lower
+        | {"outbox", "exportwire", "runlogs", "withheldage", "luthenseries"},
     }
     for hub, want in expected.items():
         deps = _imports_nemik(mods[hub])

@@ -39,6 +39,7 @@ from nemik.adapter import BASE, NEMIK, OPERATOR, OSLC_CM, bind, ledger_graph
 from nemik.blocks import inbound, operator_asks, ref
 from nemik.check import LEDGER, QUEUE, default_root, survey, workstream_files
 from nemik.exportwire import exports_key, withheld_by_exports
+from nemik.luthenseries import board, load
 from nemik.outbox import outbox
 from nemik.runlogs import runs_graph
 from nemik.wake import operator_row, read_liveness, roster
@@ -53,8 +54,14 @@ class Model:
         root: Path,
         withheld: frozenset[str] = frozenset(),
         runs: Path | None = None,
+        series: Path | None = None,
+        series_max_age: int = 900,
     ) -> None:
         self.root = root
+        # nemik:W670: luthen's loop and token snapshot (luthen-series.json), read per request so its
+        # age is judged against the clock, never against the last rebuild.
+        self.series = series
+        self.series_max_age = series_max_age
         # nemik:W565: luthen's published run logs (runs/<stream>.jsonl), read as prov:Activity rows
         # into the graph when a directory is given.
         self.runs = runs
@@ -123,6 +130,28 @@ class Model:
                 len(findings),
             )
             self.doc, self.payload = doc, json.dumps(doc).encode()
+
+    def series_doc(self) -> dict[str, object]:
+        """Build the series board from luthen's snapshot (nemik:W670).
+
+        Returns:
+            {"board": True, ...} with each repo's state, history and the stranded list, or
+            {"board": False, "why": ...} when there is no snapshot or it cannot be trusted
+            (missing, unreadable, unversioned, stale, from the future): no board, never a
+            guessed one.
+
+        """
+        if self.series is None:
+            return {"board": False, "why": "no --series file"}
+        try:
+            snap = load(self.series, int(time.time()), self.series_max_age)
+        except (OSError, ValueError, TypeError) as e:
+            return {"board": False, "why": str(e)}
+        ready: dict[str, int] = {}
+        for node in self.doc.get("nodes", []):
+            if node["state"] in {"ready", "working"}:
+                ready[node["repo"]] = ready.get(node["repo"], 0) + 1
+        return {"board": True, **board(snap, ready)}
 
     def poke(self) -> None:
         """Keep requests off the rebuild path (nemik:W69, luthen-observability:W146).
@@ -521,6 +550,9 @@ def handler(model: Model) -> type[BaseHTTPRequestHandler]:
                 )
             elif self.path == "/metrics":
                 self.send(200, "text/plain; version=0.0.4", model.metrics())
+            elif self.path == "/series.json":
+                series_body = json.dumps(model.series_doc(), indent=1).encode()
+                self.send(200, "application/json", series_body)
             elif self.path == "/graph.json":
                 self.send(200, "application/json", model.payload)
             elif self.path == "/graph.ttl":
@@ -812,6 +844,8 @@ class _Options(argparse.Namespace):
     withheld: Path | None
     withheld_max_age: int
     runs: Path | None
+    series: Path | None
+    series_max_age: int
     exports: Path | None
     publish: Path | None
 
@@ -856,6 +890,20 @@ def main(argv: list[str] | None = None) -> None:
         "prov:Activity rows into the graph (nemik:W565)",
     )
     ap.add_argument(
+        "--series",
+        type=Path,
+        metavar="FILE",
+        help="the live server only: luthen's loop and token snapshot (luthen-series.json), served "
+        "as /series.json; a missing, unversioned or stale file serves no board (nemik:W670)",
+    )
+    ap.add_argument(
+        "--series-max-age",
+        type=int,
+        default=900,
+        metavar="SECONDS",
+        help="refuse the series snapshot when its as_of is older than SECONDS (default 900)",
+    )
+    ap.add_argument(
         "--exports",
         type=Path,
         metavar="DIR",
@@ -897,9 +945,13 @@ def main(argv: list[str] | None = None) -> None:
             print(f"ERROR: {e}", file=sys.stderr)
             raise SystemExit(2) from e
         return
-    ThreadingHTTPServer(
-        (args.bind, args.port), handler(Model(args.root, runs=args.runs))
-    ).serve_forever()
+    model = Model(
+        args.root,
+        runs=args.runs,
+        series=args.series,
+        series_max_age=args.series_max_age,
+    )
+    ThreadingHTTPServer((args.bind, args.port), handler(model)).serve_forever()
 
 
 if __name__ == "__main__":

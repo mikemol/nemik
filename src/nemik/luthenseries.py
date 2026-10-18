@@ -292,3 +292,37 @@ def stranded(series: Series, ready: dict[str, int]) -> list[str]:
         elif ready.get(name, 0) > 0 and state == "idle":
             idle.append(name)
     return asleep + idle
+
+
+def board(series: Series, ready: dict[str, int]) -> dict[str, object]:
+    """Lay the snapshot out as the document the view draws.
+
+    Args:
+        series: The snapshot.
+        ready: How many cards are ready or working in each repo's queue.
+
+    Returns:
+        {"as_of", "repos", "stranded"}: per repo its state, luthen's verdict, last tick (NO_TICK
+        when none), how many cards are ready, and its history as [stamp, state] rows; and the
+        repos that hold work but are not awake.
+
+    """
+    repos: dict[str, object] = {}
+    for name in sorted(series.repos):
+        repo = series.repos[name]
+        rows: list[list[object]] = [
+            [repo.stamps[i], state_of(repo.verdicts[i])]
+            for i in range(len(repo.stamps))
+        ]
+        repos[name] = {
+            "state": state_of(repo.verdict),
+            "verdict": repo.verdict,
+            "last_tick": repo.last_tick,
+            "ready": ready.get(name, 0),
+            "history": rows,
+        }
+    return {
+        "as_of": series.as_of,
+        "repos": repos,
+        "stranded": stranded(series, ready),
+    }
