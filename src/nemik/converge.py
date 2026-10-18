@@ -79,8 +79,9 @@ def converge(world: World, policy: Policy, trigger: str) -> tuple[int, Verdict]:
     repeats = 0
     for n in range(1, policy.max_passes + 1):
         code, verdict = world.run_pass()
+        # The verdict is nested: nemik.runrows reads verdict.state from an object.
         row: Verdict = {"event": "pass", "n": n, "trigger": trigger, "exit": code}
-        row.update(verdict)
+        row["verdict"] = verdict
         world.record(row)
         if code in policy.done:
             done = dict(verdict)

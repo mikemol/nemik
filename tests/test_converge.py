@@ -86,3 +86,10 @@ def test_every_row_names_its_trigger_and_pass() -> None:
         ("acute", 1, 1),
         ("acute", 2, 4),
     ]
+
+
+def test_the_verdict_is_nested_in_the_row() -> None:
+    """The run-row reader takes verdict.state from an object, so the verdict is not flattened."""
+    _, rows, _ = _go([(4, {"state": "stuck"})])
+    assert rows[0]["verdict"] == {"state": "stuck"}
+    assert "state" not in rows[0]
