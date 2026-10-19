@@ -39,3 +39,32 @@ def all_blockers_landed(
         if gone and len(gone) == cited.get(card, 0):
             out.add(card)
     return out
+
+
+UMBRELLA = 2  # open enablers of its own repo that make a ready card an umbrella
+
+
+def ready_behind_open(
+    enablers: dict[str, list[str]], ready: set[str], open_cards: set[str]
+) -> dict[str, list[str]]:
+    """Find the ready cards an open card enables, with those enablers (nemik:W465).
+
+    The flow model already treats such a card as waiting while its fill says ready. Umbrellas (two
+    or more open enablers of the card's own repo) are left out: ReadyUmbrellaShape reports them.
+
+    Args:
+        enablers: card -> the cards that enable it, as `repo:W<n>` references.
+        ready: The cards whose state is ready.
+        open_cards: The cards that exist and are not done.
+
+    Returns:
+        card -> its open enablers, sorted, for each ready card that has any and is no umbrella.
+
+    """
+    out: dict[str, list[str]] = {}
+    for card in sorted(ready):
+        held = [c for c in enablers.get(card, []) if c in open_cards]
+        own = [c for c in held if c.partition(":")[0] == card.partition(":")[0]]
+        if held and len(own) < UMBRELLA:
+            out[card] = sorted(held)
+    return out
