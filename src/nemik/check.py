@@ -39,12 +39,12 @@ from nemik.adapter import (
 from nemik.adoption import adoption
 from nemik.blocks import (
     annotate,
-    disagreements,
     lowered_ratchet,
     over_ratchet,
     ref,
     unmanifested_by_repo,
 )
+from nemik.collapse import disagreements
 from nemik.digest import collapse
 from nemik.idle import findings as idle_findings
 
