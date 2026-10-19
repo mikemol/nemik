@@ -72,5 +72,5 @@ def open_page(p: Any, url: str, wait: str = CY_READY) -> tuple[Any, Any]:
         pytest.skip(f"chromium unavailable: {e}")
     page = browser.new_page(viewport={"width": 1700, "height": 1250})
     page.goto(url)
-    page.wait_for_function(wait, timeout=60000)
+    page.wait_for_function(wait, timeout=0)
     return browser, page

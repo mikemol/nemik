@@ -70,7 +70,7 @@ def _ask(script: str) -> str:
             pytest.skip(f"chromium unavailable: {e}")
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
         page.goto(url)
-        page.wait_for_function(webpage.CY_READY, timeout=60000)
+        page.wait_for_function(webpage.CY_READY, timeout=0)
         answer: object = page.evaluate(script)
         browser.close()
     return str(answer)

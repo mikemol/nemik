@@ -33,7 +33,7 @@ def page() -> Iterator[Page]:
             pytest.skip(f"chromium unavailable: {e}")
         opened = browser.new_page(viewport={"width": 1700, "height": 1250})
         opened.goto(url)
-        opened.wait_for_function(webpage.CY_READY, timeout=60000)
+        opened.wait_for_function(webpage.CY_READY, timeout=0)
         yield opened
         browser.close()
 

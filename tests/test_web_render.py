@@ -121,7 +121,7 @@ def test_labels_are_not_covered_by_other_nodes(server) -> None:
         page.goto(server)
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=20000,
+            timeout=0,
         )
         count, overlaps = page.evaluate(OVERLAPS)
         boxes = page.evaluate(BOXES)

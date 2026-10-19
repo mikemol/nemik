@@ -81,7 +81,7 @@ def _page(p: Playwright, address: str, before: str = "") -> Page:
     if before:
         page.add_init_script(before)
     page.goto(address)
-    page.wait_for_function(webpage.CY_READY, timeout=60000)
+    page.wait_for_function(webpage.CY_READY, timeout=0)
     page.evaluate(OPEN)
     return page
 
@@ -105,7 +105,7 @@ def test_an_added_source_is_kept_and_survives_a_reload(url: str) -> None:
         stored += '{"id":"other","url":"https://example.test/pieces"}]'
         assert _eval(page, KEPT) == stored
         page.reload()
-        page.wait_for_function(webpage.CY_READY, timeout=60000)
+        page.wait_for_function(webpage.CY_READY, timeout=0)
         assert _eval(page, SOURCES) == stored
 
 

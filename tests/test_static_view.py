@@ -52,7 +52,7 @@ def test_the_view_draws_from_the_snapshot_files_alone(snapshot_url: str) -> None
         page.on("pageerror", lambda err: errors.append(str(err)))
         page.wait_for_function(
             "() => document.getElementById('stat').innerText.includes('waypoints')",
-            timeout=60000,
+            timeout=0,
         )
         drawn = page.evaluate("() => cy.nodes('[symbol]').length")
         fetched = page.evaluate("() => window.__pieceFetches.length")

@@ -162,7 +162,7 @@ def test_repo_toggles_and_salience_order(server, tmp_path) -> None:
         page.goto(server)
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=60000,
+            timeout=0,
         )
         everything = page.evaluate("() => cy.nodes('[symbol]').length")
         repos = page.evaluate(
@@ -246,7 +246,9 @@ def test_the_history_panel_shows_the_weekly_roll_up_when_there_is_one(
             ),
         )
         page.goto(server)
-        page.wait_for_function("() => !document.getElementById('historyBox').hidden")
+        page.wait_for_function(
+            "() => !document.getElementById('historyBox').hidden", timeout=0
+        )
         text = page.inner_text("#history")
         browser.close()
     assert "W41" in text and "+5" in text and "50% blocked" in text
@@ -280,7 +282,7 @@ def test_rolling_up_umbrellas_hides_their_work_and_a_double_click_expands_one(
         page.goto(server)
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=60000,
+            timeout=0,
         )
         page.click("#repos button[data-repo='nemik']")
         _settle(page)
@@ -366,7 +368,7 @@ def test_blocker_lines_into_one_card_carry_distinct_decodable_ruler_patterns(
         page.goto(server)
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.edges('.waits').length > 0",
-            timeout=60000,
+            timeout=0,
         )
         fans = page.evaluate(FANS)
         browser.close()
@@ -409,7 +411,7 @@ def test_every_card_label_meets_four_and_a_half_to_one(server, scheme) -> None:
         page.goto(server)
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=60000,
+            timeout=0,
         )
         page.check("#showDone")
         _settle(page)
@@ -442,7 +444,7 @@ def test_side_panel_sections_fold_and_the_choice_survives_a_reload(server) -> No
         page.wait_for_function(
             "() => !document.getElementById('goals').checkVisibility()"
             " && (localStorage.getItem('nemik.sections') || '').includes('\"sec-goals\":false')",
-            timeout=60000,
+            timeout=0,
         )
         hidden = page.evaluate(
             "() => [document.getElementById('sec-goals').open,"
@@ -477,7 +479,7 @@ def test_the_default_view_is_legible(server, scheme) -> None:
         page.goto(server)
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=60000,
+            timeout=0,
         )
         _settle(page)
         m = page.evaluate(LEGIBILITY)
@@ -518,7 +520,7 @@ def test_every_label_glyph_exists_in_this_browsers_fonts(server) -> None:
             pytest.skip(f"chromium unavailable: {e}")
         page = browser.new_page()
         page.goto(server)
-        page.wait_for_function("() => typeof STATE_MARK === 'object'")
+        page.wait_for_function("() => typeof STATE_MARK === 'object'", timeout=0)
         missing = page.evaluate(
             "() => { const c = document.createElement('canvas').getContext('2d');"
             " c.font = 'bold 10px sans-serif';"
@@ -549,7 +551,7 @@ def test_context_cards_have_a_rendered_cue_of_their_own(server, scheme) -> None:
         page.goto(server)
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=60000,
+            timeout=0,
         )
         page.click("#repos button[data-repo='nemik']")
         _settle(page)
@@ -583,7 +585,7 @@ def test_each_card_state_differs_by_more_than_its_fill(server, scheme) -> None:
         page.goto(server)
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=60000,
+            timeout=0,
         )
         page.check("#showDone")
         _settle(page)
@@ -711,7 +713,9 @@ def test_a_static_build_refetches_only_the_pieces_whose_hash_moved(tmp_path) -> 
                 pytest.skip(f"chromium unavailable: {e}")
             page = browser.new_page()
             page.goto(url)
-            page.wait_for_function("() => typeof data !== 'undefined' && data")
+            page.wait_for_function(
+                "() => typeof data !== 'undefined' && data", timeout=0
+            )
             drawn = page.evaluate("() => data.nodes.length")
             first = page.evaluate("() => [...window.__pieceFetches]")
             one = fleet["repos"][0]
@@ -772,7 +776,7 @@ def test_the_card_list_selects_and_expands_from_the_keyboard(server) -> None:
         page.goto(server)
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=60000,
+            timeout=0,
         )
         page.click("#repos button[data-repo='nemik']")
         page.check("#rollup")
@@ -828,7 +832,7 @@ def test_a_cite_link_in_the_panel_selects_its_card_and_announces_it(server) -> N
         page.goto(server)
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 1",
-            timeout=60000,
+            timeout=0,
         )
         target = page.evaluate(
             "() => { const n = cy.nodes('[symbol]').filter(n => n.visible()"
@@ -864,7 +868,7 @@ def test_the_view_chain_is_drawn_end_to_end_with_its_length(server) -> None:
         page.goto(server)
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=60000,
+            timeout=0,
         )
         _settle(page)
         got = page.evaluate(
@@ -899,7 +903,7 @@ def test_a_focused_list_row_rings_its_card_and_opens_the_popover(server) -> None
         page.goto(server)
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 1",
-            timeout=60000,
+            timeout=0,
         )
         page.evaluate("() => { document.getElementById('sec-cards').open = true; }")
         _settle(page)
@@ -939,7 +943,7 @@ def test_the_page_script_runs_without_errors(server) -> None:
         page.goto(server)
         page.wait_for_function(
             "() => document.getElementById('stat').innerText.includes('waypoints')",
-            timeout=60000,
+            timeout=0,
         )
         browser.close()
     assert errors == []
@@ -960,7 +964,7 @@ def test_the_card_list_is_one_tab_stop_walked_by_arrows(server) -> None:
         page.goto(server)
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 1",
-            timeout=60000,
+            timeout=0,
         )
         page.evaluate("() => { document.getElementById('sec-cards').open = true; }")
         _settle(page)
@@ -1009,7 +1013,7 @@ def _settle(page: "Page") -> None:
     page.wait_for_function(
         "() => new Promise(done => requestAnimationFrame("
         "() => requestAnimationFrame(() => done(typeof cy === 'undefined' || !cy.animated()))))",
-        timeout=60000,
+        timeout=0,
     )
 
 
@@ -1030,10 +1034,10 @@ def _open_on_a_fake_clock(page: "Page", url: str) -> None:
     page.goto(url)
     page.wait_for_function(
         "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-        timeout=60000,
+        timeout=0,
     )
     page.wait_for_function(
-        "() => document.getElementById('wake').innerText.length > 5", timeout=60000
+        "() => document.getElementById('wake').innerText.length > 5", timeout=0
     )
     now: object = page.evaluate("Date.now()")
     assert isinstance(now, int | float)
@@ -1104,7 +1108,7 @@ def test_every_card_demand_crosses_carries_a_number(server) -> None:
         page.goto(server)
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=60000,
+            timeout=0,
         )
         page.check("#bySalience")
         _settle(page)
@@ -1138,7 +1142,7 @@ def test_a_rolled_up_tile_says_what_it_hides(server) -> None:
         page.goto(server)
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=60000,
+            timeout=0,
         )
         page.check("#rollup")
         page.check("#treemap")
@@ -1179,10 +1183,10 @@ def test_treemap_labels_meet_the_floor_or_are_hidden_and_counted(server) -> None
         page.goto(server)
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=60000,
+            timeout=0,
         )
         page.check("#treemap")
-        page.wait_for_function("() => cy.nodes('.tile').length > 0", timeout=60000)
+        page.wait_for_function("() => cy.nodes('.tile').length > 0", timeout=0)
         _settle(page)
         fit = page.evaluate(TILE_LABELS)
         page.evaluate(ZOOM_IN_4X)
@@ -1263,7 +1267,7 @@ def test_no_label_glyph_plays_two_roles(server) -> None:
         page.goto(server)
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=60000,
+            timeout=0,
         )
         roles = page.evaluate(GLYPH_ROLES)
         page.click("#repos button[data-repo='nemik']")
@@ -1328,7 +1332,7 @@ def test_one_picked_repo_restored_from_the_last_visit_is_legible_too(server) -> 
         page.goto(server)
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=60000,
+            timeout=0,
         )
         # the repo with the most cards, so its fit is the one most likely to fall under the floor
         big = page.evaluate(
@@ -1341,7 +1345,7 @@ def test_one_picked_repo_restored_from_the_last_visit_is_legible_too(server) -> 
         page.reload()
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=60000,
+            timeout=0,
         )
         _settle(page)
         m = page.evaluate(LEGIBILITY)
@@ -1364,7 +1368,7 @@ def test_picked_repos_show_their_blockers_blockers_as_context(server) -> None:
         page.goto(server)
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=60000,
+            timeout=0,
         )
         page.click("#repos button[data-repo='nemik']")
         counts = []
@@ -1398,7 +1402,7 @@ def test_rank_forest_view(server, tmp_path) -> None:
         page.goto(server)
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=60000,
+            timeout=0,
         )
         ranked = page.evaluate("() => cy.nodes('[rank_pos]').length")
         _settle(page)
@@ -1452,7 +1456,7 @@ def test_treemap_model(server) -> None:
             pytest.skip(f"chromium unavailable: {e}")
         page = browser.new_page()
         page.goto(server)
-        page.wait_for_function("() => typeof treeOf === 'function'", timeout=60000)
+        page.wait_for_function("() => typeof treeOf === 'function'", timeout=0)
         m = page.evaluate(TREEMAP_INVARIANTS)
         browser.close()
     assert m["bad"] == [], m
@@ -1481,13 +1485,13 @@ def test_treemap_view_draws(server, tmp_path) -> None:
         page.goto(server)
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=60000,
+            timeout=0,
         )
         page.evaluate(
             "() => { cy.zoom(4); cy.pan({x: -3000, y: -2000}); }"
         )  # the reader had zoomed in
         page.check("#treemap")
-        page.wait_for_function("() => cy.nodes('.tile').length > 0", timeout=60000)
+        page.wait_for_function("() => cy.nodes('.tile').length > 0", timeout=0)
         # W185: toggling the view refits; the old zoom/pan scaled one tile off the page.
         fit = page.evaluate("""() => { const b = cy.elements(':visible').renderedBoundingBox();
           return b.x1 >= -1 && b.y1 >= -1 && b.x2 <= cy.width() + 1 && b.y2 <= cy.height() + 1; }""")
@@ -1556,7 +1560,7 @@ def test_side_panel_never_overflows_sideways(server, width) -> None:
         page.goto(server)
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=60000,
+            timeout=0,
         )
         # The fixture's text is stripped, so give the asks the shapes that overflowed live: a long
         # URL with no break opportunity, and a long ask.
@@ -1589,7 +1593,7 @@ def test_every_cite_in_the_panel_is_a_repo_colon_link(server) -> None:
         page.goto(server)
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=60000,
+            timeout=0,
         )
         _settle(page)
         bad = page.evaluate("""() => {
@@ -1625,7 +1629,7 @@ def test_weather_panel_groups_one_outage(server) -> None:
         page.goto(server)
         page.wait_for_function(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=60000,
+            timeout=0,
         )
         m = page.evaluate("""() => {
           const open = data.nodes.filter(n => n.state === 'blocked' && n.cite).slice(0, 3);

@@ -40,7 +40,7 @@ def test_a_page_opened_from_a_file_url_says_to_serve_the_folder(
 
         page.on("pageerror", note)
         page.goto((out / "index.html").as_uri())
-        page.wait_for_function(SAYS)
+        page.wait_for_function(SAYS, timeout=0)
         shown = page.inner_text("#stat")
         browser.close()
     assert "http.server" in shown

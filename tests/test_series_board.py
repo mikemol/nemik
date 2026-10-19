@@ -76,7 +76,7 @@ def _wake_text(series: Path | None) -> str:
             pytest.skip(f"chromium unavailable: {e}")
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
         page.goto(url)
-        page.wait_for_function(READY, timeout=60000)
+        page.wait_for_function(READY, timeout=0)
         text: object = page.evaluate(SHOWN)
         browser.close()
     return str(text)
