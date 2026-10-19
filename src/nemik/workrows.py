@@ -173,6 +173,90 @@ def tick_kinds(rows: list[WorkRow]) -> dict[str, int]:
     return counts
 
 
+NO_BOUND = -1.0
+
+
+def small_done_stamps(queue_text: str) -> list[tuple[str, str]]:
+    """Give (issued_at, completed) of every done card declared small (nemik:W489).
+
+    Args:
+        queue_text: The text of a paths-forward.json.
+
+    Returns:
+        One pair per done card whose size_class is small and that carries both stamps; empty when
+        the text is not a queue.
+
+    """
+    try:
+        doc: object = json.loads(queue_text)
+    except ValueError:
+        return []
+    if not isinstance(doc, dict):
+        return []
+    items = doc.get("waypoints")
+    if not isinstance(items, list):
+        return []
+    out: list[tuple[str, str]] = []
+    for card in items:
+        if not isinstance(card, dict) or str(card.get("status")) != "done":
+            continue
+        issued, completed = card.get("issued_at"), card.get("completed")
+        small = str(card.get("size_class")) == "small"
+        if small and isinstance(issued, str) and isinstance(completed, str):
+            out.append((issued, completed))
+    return out
+
+
+def ready_stamps(queue_text: str) -> list[tuple[str, str]]:
+    """Give (symbol, last touched) of every ready card that has an issue time (nemik:W489).
+
+    A card is touched when it is issued or worked, so the stamp is the later of `issued_at` and
+    `last_worked` (both UTC text of one form, which sorts as time).
+
+    Args:
+        queue_text: The text of a paths-forward.json.
+
+    Returns:
+        One pair per ready card with an `issued_at`; empty when the text is not a queue.
+
+    """
+    try:
+        doc: object = json.loads(queue_text)
+    except ValueError:
+        return []
+    if not isinstance(doc, dict):
+        return []
+    items = doc.get("waypoints")
+    if not isinstance(items, list):
+        return []
+    out: list[tuple[str, str]] = []
+    for card in items:
+        if isinstance(card, dict) and str(card.get("status")) == "ready":
+            issued, worked = card.get("issued_at"), card.get("last_worked")
+            if isinstance(issued, str):
+                touched = max(issued, worked) if isinstance(worked, str) else issued
+                out.append((str(card.get("symbol")), touched))
+    return out
+
+
+def upper_quantile(values: list[float], q: float) -> float:
+    """Give the value at quantile q of a list, the learned bound of a distribution.
+
+    Args:
+        values: The observations, in any order.
+        q: The quantile in [0, 1], for example 0.9.
+
+    Returns:
+        The value at the nearest rank, or NO_BOUND when there are no observations.
+
+    """
+    if not values:
+        return NO_BOUND
+    ordered = sorted(values)
+    rank = min(len(ordered) - 1, max(0, round(q * (len(ordered) - 1))))
+    return ordered[rank]
+
+
 def open_leaf_stamps(queue_text: str) -> list[str]:
     """Give the `issued_at` of every open leaf of a queue, the cards that could be worked now.
 

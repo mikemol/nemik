@@ -13,6 +13,7 @@ are printed but do not fail the check: divergence is reported to summit's floor,
 from __future__ import annotations
 
 import argparse
+import datetime as dt
 import json
 import os
 import subprocess
@@ -51,10 +52,99 @@ from nemik.collapse import lines as collapse_lines
 from nemik.digest import collapse
 from nemik.idle import findings as idle_findings
 from nemik.rolls import idle_run, stalled
+from nemik.workrows import NO_BOUND, ready_stamps, small_done_stamps, upper_quantile
 
 QUEUE, LEDGER = "paths-forward.json", "paths-forward.ledger"
 WRITER = "mikemol-paths-forward --state"
 STALL_RUN = 2
+NEITHER_QUANTILE = 0.9  # the share of small cards that finished within the bound
+NEITHER_SAMPLES = 10  # fewer finished small cards than this and no bound is learned
+SECONDS_A_DAY = 86400
+
+
+def seconds_between(earlier: str, later: str) -> float | None:
+    """Give the seconds from one ISO stamp to another.
+
+    Args:
+        earlier: The earlier stamp.
+        later: The later stamp.
+
+    Returns:
+        The difference, or None when either is not an ISO time.
+
+    """
+    try:
+        return (
+            dt.datetime.fromisoformat(later) - dt.datetime.fromisoformat(earlier)
+        ).total_seconds()
+    except ValueError:
+        return None
+
+
+def ready_neither(
+    root: Path, now: str
+) -> tuple[float, dict[str, list[tuple[float, str]]]]:
+    """nemik:W489: the ready cards left untouched past how long small cards take to finish.
+
+    The bound is learned, not typed: the 90th percentile of the time from issue to completion of
+    the done cards declared small, across every queue. A ready card whose last touch (issue or
+    work) is older than that is neither being done nor atomized. No bound is learned from fewer
+    than ten finished small cards.
+
+    Args:
+        root: The fleet root.
+        now: The instant to age the cards against, as an ISO stamp.
+
+    Returns:
+        (the bound in seconds, or NO_BOUND; per repo the late cards as (age in seconds, symbol),
+        oldest first).
+
+    """
+    texts = {
+        repo: path.read_text(encoding="utf-8")
+        for repo, path in workstream_files(root, QUEUE)
+    }
+    spans = [
+        span
+        for text in texts.values()
+        for issued, completed in small_done_stamps(text)
+        if (span := seconds_between(issued, completed)) is not None and span >= 0
+    ]
+    bound = (
+        upper_quantile(spans, NEITHER_QUANTILE)
+        if len(spans) >= NEITHER_SAMPLES
+        else NO_BOUND
+    )
+    late: dict[str, list[tuple[float, str]]] = {}
+    for repo, text in texts.items():
+        for symbol, touched in ready_stamps(text):
+            age = seconds_between(touched, now)
+            if bound >= 0 and age is not None and age > bound:
+                late.setdefault(repo, []).append((age, symbol))
+    return bound, {repo: sorted(rows, reverse=True) for repo, rows in late.items()}
+
+
+def add_ready_neither_infos(root: Path, by_repo: dict[str, list[Finding]]) -> None:
+    """nemik:W489: one Info per repo counting its ready cards left untouched past the bound.
+
+    One row per repo, not per card (the hook prints every row into every session); `nemik-check
+    --ready-neither` lists the cards.
+
+    Args:
+        root: The fleet root.
+        by_repo: The findings per repo, added to in place.
+
+    """
+    now = dt.datetime.now(dt.UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
+    bound, late = ready_neither(root, now)
+    for repo, rows in sorted(late.items()):
+        age, symbol = rows[0]
+        found = (
+            f"{len(rows)} ready cards untouched for longer than {bound / SECONDS_A_DAY:.1f} d, "
+            f"how long 9 in 10 small cards took to finish (oldest {symbol}, "
+            f"{age / SECONDS_A_DAY:.1f} d): do each or atomize it"
+        )
+        by_repo.setdefault(repo, []).append(("Info", "--", found))
 
 
 def add_umbrella_infos(merged: Graph, by_repo: dict[str, list[Finding]]) -> None:
@@ -186,11 +276,40 @@ def add_manifest_warnings(merged: Graph, by_repo: dict[str, list[Finding]]) -> N
         by_repo.setdefault(repo, []).append(("Warning", "--", found))
 
 
-def report_mode(report: str | None, root: Path, repo: str | None) -> int | None:
-    """nemik:W693, W685: run the one report mode the arguments ask for, if any.
+def ready_neither_report(root: Path, repo: str | None) -> int:
+    """nemik:W489: list the ready cards untouched past the learned bound, oldest first.
 
     Args:
-        report: "integrity", "unmanifested", or None for neither.
+        root: The directory holding the repos.
+        repo: The one repo to list, or None for all.
+
+    Returns:
+        0.
+
+    """
+    now = dt.datetime.now(dt.UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
+    bound, late = ready_neither(root, now)
+    if bound < 0:
+        sys.stdout.write("no bound learned: fewer than ten finished small cards\n")
+        return 0
+    sys.stdout.write(
+        f"bound: {bound / SECONDS_A_DAY:.1f} d (p90 of finished small cards)\n"
+    )
+    for name, rows in sorted(late.items()):
+        if repo is not None and name != repo:
+            continue
+        sys.stdout.write(f"{name}: {len(rows)} ready cards untouched past the bound\n")
+        sys.stdout.writelines(
+            f"  {name}:{symbol}  {age / SECONDS_A_DAY:.1f} d\n" for age, symbol in rows
+        )
+    return 0
+
+
+def report_mode(report: str | None, root: Path, repo: str | None) -> int | None:
+    """nemik:W693, W685, W489: run the one report mode the arguments ask for, if any.
+
+    Args:
+        report: "integrity", "unmanifested", "ready-neither", or None for none.
         root: The directory holding the repos.
         repo: The one repo to report on, or None for all.
 
@@ -202,6 +321,8 @@ def report_mode(report: str | None, root: Path, repo: str | None) -> int | None:
         return integrity_report(root, repo)
     if report == "unmanifested":
         return unmanifested_report(root)
+    if report == "ready-neither":
+        return ready_neither_report(root, repo)
     return None
 
 
@@ -523,6 +644,7 @@ def survey(
     add_manifest_warnings(merged, by_repo)
     add_roll_warnings(root, merged, by_repo)
     add_umbrella_infos(merged, by_repo)
+    add_ready_neither_infos(root, by_repo)
     # nemik:W356: an inter-workstream SLA. A card blocked on another repo's open card for longer than
     # the declared number of loop ticks is a Warning on the BLOCKER's card, since that repo can act.
     sla = int(tomllib.loads(weights_toml).get("sla", {}).get("cross_repo_ticks", 48))
@@ -855,6 +977,14 @@ def main(argv: list[str] | None = None) -> None:
         help="print the manifest ratchet as it should stand now (nemik:W685): each repo's ready "
         "cards with no manifest, never above what rank-weights.toml [manifest_ratchet] "
         "declares; applies nothing, the table is lowered by writing this output there",
+    )
+    ap.add_argument(
+        "--ready-neither",
+        dest="report",
+        action="store_const",
+        const="ready-neither",
+        help="list the ready cards untouched for longer than 9 in 10 finished small cards took "
+        "(nemik:W489), the bound learned from every queue; --repo REPO limits it to one repo",
     )
     ap.add_argument(
         "--digest",
