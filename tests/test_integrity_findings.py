@@ -73,3 +73,17 @@ def test_the_dry_run_prints_both_fixes_and_applies_neither() -> None:
     state = "/fleet/alpha/.claude/paths-forward.json"
     assert lines[1].endswith(f"{state} --update W1 --enables")
     assert f"{state} --update W2 --blocked-on W1 --blocked-kind agent" in lines[2]
+
+
+def test_the_host_repo_prints_its_queue_at_the_root(tmp_path: Path) -> None:
+    """nemik:W742: the repo named for the root directory keeps its queue at <root>/.claude."""
+    root = tmp_path / "github"
+    (root / ".claude").mkdir(parents=True)
+    (root / ".claude" / "paths-forward.json").write_text("{}", encoding="utf-8")
+    g = Graph()
+    for symbol in ("W1", "W2"):
+        g.add((waypoint_uri("github", symbol), OSLC_CM.state, STATE["blocked"]))
+    g.add((waypoint_uri("github", "W1"), NEMIK.enables, waypoint_uri("github", "W2")))
+    lines = integrity_commands(g, root)["github"]
+    assert f"--state {root}/.claude/paths-forward.json --update W2" in lines[2]
+    assert f"{root}/github/.claude" not in lines[2]

@@ -391,6 +391,13 @@ def integrity_commands(merged: Graph, root: Path) -> dict[str, list[str]]:
     """
     rows = blocked_rows(merged)
     out: dict[str, list[str]] = {}
+    # nemik:W742: the state file of each repo as the fleet reader finds it, so the host repo
+    # (github) prints its own queue at the root and not a directory that does not exist
+    queues = dict(workstream_files(root, QUEUE))
+
+    def state_of(repo: str) -> str:
+        return f"{WRITER} {queues.get(repo, root / repo / '.claude' / QUEUE)}"
+
     for card, escaped in disagreements(rows):
         repo, _, sym = card.partition(":")
         erepo, _, esym = escaped.partition(":")
@@ -398,10 +405,9 @@ def integrity_commands(merged: Graph, root: Path) -> dict[str, list[str]]:
         waiting = sorted(
             str(w) for w in merged.objects(waypoint_uri(erepo, esym), NEMIK.blockedOn)
         )
-        state_of = f"{WRITER} {root}/%s/.claude/paths-forward.json"
-        drop = f"{state_of % repo} --update {sym} --enables {' '.join(keep)}".rstrip()
+        drop = f"{state_of(repo)} --update {sym} --enables {' '.join(keep)}".rstrip()
         wait = " ".join([*waiting, sym if erepo == repo else card])
-        add = f"{state_of % erepo} --update {esym} --blocked-on {wait} --blocked-kind agent"
+        add = f"{state_of(erepo)} --update {esym} --blocked-on {wait} --blocked-kind agent"
         out.setdefault(repo, []).extend(
             [
                 f"{card}: enables {escaped}, which does not wait on it",
