@@ -28,6 +28,11 @@ MIN_LANDINGS = 3  # nemik:W616: fewer cited commits than this teach no land inte
 _DATE = re.compile(r"\d{4}-\d{2}-\d{2}([T ]\d{2}:\d{2}(:\d{2})?)?")
 _CROSS = re.compile(r"([A-Za-z0-9][A-Za-z0-9._-]*):W[1-9][0-9]*")
 
+# nemik:W732: a committed queue as the history readers see it. The fields they read are strings and
+# lists of strings; a parsed queue carries more (evidence, titles), which `slim` drops.
+Waypoint = dict[str, str | list[str]]
+QueueDoc = dict[str, list[Waypoint]]
+
 
 @dataclass
 class Diff:
@@ -42,18 +47,20 @@ class Diff:
     new_cross_blocks: list[tuple[str, str]] = field(default_factory=list)
 
 
-def _status(queue: dict) -> dict[str, str]:
-    return {w["symbol"]: w.get("status", "") for w in queue.get("waypoints", [])}
+def _status(queue: QueueDoc) -> dict[str, str]:
+    return {
+        str(w["symbol"]): str(w.get("status", "")) for w in queue.get("waypoints", [])
+    }
 
 
-def _dropped(queue: dict) -> set[str]:
-    return {r["symbol"] for r in queue.get("residue", [])}
+def _dropped(queue: QueueDoc) -> set[str]:
+    return {str(r["symbol"]) for r in queue.get("residue", [])}
 
 
-def _edges(queue: dict) -> set[tuple[str, str, str]]:
+def _edges(queue: QueueDoc) -> set[tuple[str, str, str]]:
     out: set[tuple[str, str, str]] = set()
     for w in queue.get("waypoints", []):
-        sym = w["symbol"]
+        sym = str(w["symbol"])
         out |= {("enables", sym, t) for t in w.get("enables", [])}
         out |= {("waits", sym, b) for b in w.get("blocked_on", [])}
     return out
@@ -68,7 +75,7 @@ def _number(symbol: str) -> tuple[int, int, str]:
     return (1, 0, symbol)
 
 
-def diff(old: dict, new: dict) -> Diff:
+def diff(old: QueueDoc, new: QueueDoc) -> Diff:
     """The changes from `old` to `new`, both parsed queues (an empty dict is a repo with no queue)."""
     before, after = _status(old), _status(new)
     known = set(before) | _dropped(old)
@@ -142,9 +149,7 @@ def resolve(repo: Path, spec: str | None) -> str | None:
 KEPT = ("symbol", "status", "blocked_kind", "enables", "blocked_on")
 
 
-def slim(
-    queue: dict[str, list[dict[str, object]]],
-) -> dict[str, list[dict[str, object]]]:
+def slim(queue: QueueDoc) -> QueueDoc:
     """Keep only what the history readers use of a parsed queue (nemik:W731).
 
     They read each waypoint's symbol, status, blocked_kind, enables and blocked_on, and each
@@ -199,7 +204,7 @@ def queues_text_at(repo: Path, revs: list[str]) -> list[str]:
     return out
 
 
-def queue_at(repo: Path, rev: str | None, known: str = "") -> dict:
+def queue_at(repo: Path, rev: str | None, known: str = "") -> QueueDoc:
     """The parsed queue as committed at `rev`; empty when there is none then.
 
     `known` is the file's text at `rev` when a batch read already has it (nemik:W725).
@@ -274,10 +279,10 @@ def close_rate(repo: Path, since: str, days: int) -> float | None:
         Cards the committed queue closed since `since`, per day, or None without a committed queue.
 
     """
-    head: dict[str, object] = queue_at(repo, "HEAD")
+    head: QueueDoc = queue_at(repo, "HEAD")
     if not head:
         return None
-    start: dict[str, object] = queue_at(repo, resolve(repo, since))
+    start: QueueDoc = queue_at(repo, resolve(repo, since))
     return len(diff(start, head).closed) / days
 
 
@@ -335,11 +340,11 @@ def reopened_since(repo: Path, since: str) -> int | None:
         directory has no committed queue.
 
     """
-    head: dict[str, object] = queue_at(repo, "HEAD")
+    head: QueueDoc = queue_at(repo, "HEAD")
     if not head:
         return None
-    start: dict[str, object] = queue_at(repo, resolve(repo, since))
-    commits: list[tuple[datetime, dict[str, object]]] = snapshots(repo, since)
+    start: QueueDoc = queue_at(repo, resolve(repo, since))
+    commits: list[tuple[datetime, QueueDoc]] = snapshots(repo, since)
     after: list[dict[str, str]] = [_status(q) for _, q in commits]
     prior = _status(start)
     reopened = 0
@@ -366,7 +371,7 @@ def commits_since(repo: Path, since: str) -> int | None:
     return int(out) if out and out.strip().isdigit() else None
 
 
-Snapshot = tuple[datetime, dict]
+Snapshot = tuple[datetime, QueueDoc]
 
 
 def snapshots(repo: Path, since: str | None = None) -> list[Snapshot]:
@@ -439,7 +444,7 @@ def weekly(snaps: list[Snapshot]) -> list[dict]:
         asked, answered = 0, 0
         for at, queue in inside:
             now_on = {
-                w["symbol"]
+                str(w["symbol"])
                 for w in queue.get("waypoints", [])
                 if w.get("status") == "blocked" and w.get("blocked_kind") == "human"
             }

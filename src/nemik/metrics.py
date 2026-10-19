@@ -421,11 +421,11 @@ def completed_in(repo_dir: Path, since: str) -> int | None:
         directory has no committed queue (an export layout has no git history).
 
     """
-    now: dict[str, object] = history.queue_at(repo_dir, "HEAD")
+    now: history.QueueDoc = history.queue_at(repo_dir, "HEAD")
     if not now:
         return None
     start = history.resolve(repo_dir, since)
-    before: dict[str, object] = history.queue_at(repo_dir, start)
+    before: history.QueueDoc = history.queue_at(repo_dir, start)
     return len(history.diff(before, now).closed)
 
 

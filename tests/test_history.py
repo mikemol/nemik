@@ -11,6 +11,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from nemik.history import (
+    QueueDoc,
     diff,
     main,
     queue_at,
@@ -25,11 +26,11 @@ from nemik.history import (
 
 def test_slim_drops_what_no_history_reader_uses_and_keeps_its_answers() -> None:
     """nemik:W731: evidence and titles go; the diff of two queues is the same on the slim ones."""
-    old: dict[str, list[dict[str, object]]] = {
+    old: QueueDoc = {
         "waypoints": [{"symbol": "W1", "status": "ready", "evidence": "x" * 500}],
         "residue": [],
     }
-    new: dict[str, list[dict[str, object]]] = {
+    new: QueueDoc = {
         "waypoints": [
             {"symbol": "W1", "status": "done", "title": "t", "enables": ["W2"]},
             {"symbol": "W2", "status": "blocked", "blocked_on": ["mtools:W9"]},
