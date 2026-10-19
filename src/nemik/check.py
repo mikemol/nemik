@@ -33,6 +33,7 @@ from nemik.adapter import (
     OSLC_CM,
     bind,
     queue_graph,
+    tick_notes,
     waypoint_uri,
     workstream_uri,
 )
@@ -48,9 +49,41 @@ from nemik.collapse import disagreements
 from nemik.collapse import lines as collapse_lines
 from nemik.digest import collapse
 from nemik.idle import findings as idle_findings
+from nemik.rolls import idle_run, stalled
 
 QUEUE, LEDGER = "paths-forward.json", "paths-forward.ledger"
 WRITER = "mikemol-paths-forward --state"
+STALL_RUN = 2
+
+
+def add_roll_warnings(
+    root: Path, merged: Graph, by_repo: dict[str, list[Finding]]
+) -> None:
+    """nemik:W683: warn on a repo whose last tick rolls all advanced nothing while cards are ready.
+
+    mikemol-paths-forward --tick-roll ends its ledger note with `[rolled; advanced N]` (mtools:
+    W1589). A run of rolls at advanced 0 beside ready cards is a session that keeps rolling
+    without landing, which the roll would otherwise hide.
+
+    Args:
+        root: The directory holding the repos.
+        merged: The merged queue graph.
+        by_repo: The findings per repo, added to in place.
+
+    """
+    ready: dict[str, int] = {}
+    for node in merged.subjects(OSLC_CM.state, NEMIK.Ready):
+        repo = ref(node).partition(":")[0]
+        ready[repo] = ready.get(repo, 0) + 1
+    for repo, path in workstream_files(root, LEDGER):
+        notes = tick_notes(path)
+        if stalled(notes, ready.get(repo, 0), STALL_RUN):
+            found = (
+                f"the last {idle_run(notes)} tick rolls advanced 0 while "
+                f"{ready.get(repo, 0)} cards are ready: the session rolls without landing; "
+                "work a ready card, or block it on what it waits for"
+            )
+            by_repo.setdefault(repo, []).append(("Warning", "--", found))
 
 
 def collapse_main(argv: list[str] | None = None) -> None:
@@ -461,6 +494,7 @@ def survey(
         by_repo.setdefault(orepo, []).append(("Warning", "--", found))
     # nemik:W685: a repo whose ready cards without a manifest passed the declared ratchet.
     add_manifest_warnings(merged, by_repo)
+    add_roll_warnings(root, merged, by_repo)
     # nemik:W356: an inter-workstream SLA. A card blocked on another repo's open card for longer than
     # the declared number of loop ticks is a Warning on the BLOCKER's card, since that repo can act.
     sla = int(tomllib.loads(weights_toml).get("sla", {}).get("cross_repo_ticks", 48))

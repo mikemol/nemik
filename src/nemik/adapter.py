@@ -429,3 +429,20 @@ def _ledger_graph(repo: str, ledger_path: Path) -> tuple[Graph, int]:
         if e.symbol != model.NO_SYMBOL:
             g.add((node, PROV.used, reference_uri(repo, e.symbol)))
     return g, unparsed
+
+
+def tick_notes(ledger_path: Path) -> list[str]:
+    """Give the notes of a ledger's tick lines, oldest first (nemik:W683).
+
+    Args:
+        ledger_path: The ledger file.
+
+    Returns:
+        The note column of each parsed line whose kind is tick.
+
+    """
+    return [
+        rec.entry.note
+        for rec in ledger.read(ledger_path)
+        if not isinstance(rec, ledger.Unparsed) and rec.entry.kind == "tick"
+    ]
