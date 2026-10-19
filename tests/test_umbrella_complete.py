@@ -64,22 +64,21 @@ def _top(**more: object) -> dict[str, object]:
     return {"symbol": "W1", "title": "umbrella", "status": "ready", **more}
 
 
-def _flagged(g: Graph, name: str) -> bool:
-    """Say whether the shape names the repo's W1.
+def _flagged(g: Graph, name: str, phrase: str = "realized by construction") -> bool:
+    """Say whether a shape names the repo's W1.
 
     Args:
         g: The queue's graph.
         name: The repo's name.
+        phrase: A phrase of the message to look for.
 
     Returns:
-        True when UmbrellaCompleteShape reports W1.
+        True when a finding with that phrase reports W1.
 
     """
     node = waypoint_uri(name, "W1")
     rows = findings(f"umbrella-{id(g)}", g, shapes())
-    return any(
-        focus == node and "realized by construction" in m for focus, _, m in rows
-    )
+    return any(focus == node and phrase in m for focus, _, m in rows)
 
 
 def test_all_children_done_and_no_step_is_named(tmp_path: Path) -> None:
@@ -115,3 +114,19 @@ def test_an_open_child_a_next_step_or_a_working_umbrella_keeps_it(
     assert not _flagged(stepped, "c")
     assert not _flagged(working, "d")
     assert not _flagged(foreign, "e")
+
+
+def test_a_card_with_its_own_manifest_is_told_to_check_it_not_to_close(
+    tmp_path: Path,
+) -> None:
+    """nemik:W737 (mtools:W1717): done children do not show the card's own files exist."""
+    own = _umbrella(
+        tmp_path,
+        "f",
+        [_top(manifest=["src/nemik/x.py"]), _kid("W2", "done"), _kid("W3", "done")],
+    )
+    assert not _flagged(own, "f")
+    assert _flagged(own, "f", "check the manifest before closing it")
+    plain = _umbrella(tmp_path, "g", [_top(), _kid("W2", "done")])
+    assert _flagged(plain, "g")
+    assert not _flagged(plain, "g", "check the manifest before closing it")

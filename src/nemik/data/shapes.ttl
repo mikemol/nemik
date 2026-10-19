@@ -237,6 +237,39 @@ nemik:UmbrellaCompleteShape a sh:NodeShape ;
                                 <http://open-services.net/ns/cm#state> ?unfinishedState .
                     FILTER(?unfinishedState != <https://github.com/mikemol/nemik/ns#Done>)
                 }
+                OPTIONAL { $this <https://github.com/mikemol/nemik/ns#plannedPath> ?mine }
+                FILTER(!BOUND(?said) && !BOUND(?far) && !BOUND(?unfinished) && !BOUND(?mine))
+            }""" ] .
+
+# A card with a manifest of its own and every child done (nemik:W737, mtools:W1717). The children
+# being done does not show its own work is: it is closed only when its manifest files exist at HEAD
+# and a landed commit names it, which a graph cannot see, so this says to check, not to close.
+nemik:UmbrellaOwnWorkShape a sh:NodeShape ;
+    sh:targetObjectsOf nemik:enables ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "every child of this card is done, but it has a manifest of its own: its own work is done only when those files exist at HEAD and a landed commit names it, so check the manifest before closing it" ;
+        sh:select """
+            SELECT DISTINCT $this WHERE {
+                $this <https://github.com/mikemol/nemik/ns#workstream> ?ws ;
+                      <https://github.com/mikemol/nemik/ns#plannedPath> ?mine ;
+                      <http://open-services.net/ns/cm#state> ?state .
+                FILTER(?state != <https://github.com/mikemol/nemik/ns#Done>
+                       && ?state != <https://github.com/mikemol/nemik/ns#Working>)
+                ?kid <https://github.com/mikemol/nemik/ns#enables> $this ;
+                     <https://github.com/mikemol/nemik/ns#workstream> ?ws .
+                OPTIONAL { $this <https://github.com/mikemol/nemik/ns#hasNextStep> ?said }
+                OPTIONAL {
+                    $this <https://github.com/mikemol/nemik/ns#waitsFor> ?far .
+                    ?far <https://github.com/mikemol/nemik/ns#workstream> ?other .
+                    FILTER(?other != ?ws)
+                }
+                OPTIONAL {
+                    ?unfinished <https://github.com/mikemol/nemik/ns#enables> $this ;
+                                <https://github.com/mikemol/nemik/ns#workstream> ?ws ;
+                                <http://open-services.net/ns/cm#state> ?unfinishedState .
+                    FILTER(?unfinishedState != <https://github.com/mikemol/nemik/ns#Done>)
+                }
                 FILTER(!BOUND(?said) && !BOUND(?far) && !BOUND(?unfinished))
             }""" ] .
 
