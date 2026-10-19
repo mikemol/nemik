@@ -454,6 +454,11 @@ def _ledger_graph(repo: str, ledger_path: Path) -> tuple[Graph, int]:
         g.add((node, RDFS.comment, Literal(e.note)))
         if e.symbol != model.NO_SYMBOL:
             g.add((node, PROV.used, reference_uri(repo, e.symbol)))
+        if e.session:
+            # nemik:W530: the session that wrote the line is a prov:Agent, urn:uuid as its name
+            agent = URIRef(f"urn:uuid:{e.session}")
+            g.add((agent, RDF.type, PROV.Agent))
+            g.add((node, PROV.wasAssociatedWith, agent))
     return g, unparsed
 
 
