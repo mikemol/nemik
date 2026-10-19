@@ -113,3 +113,33 @@ def test_left_closes_a_parent_and_right_reopens_then_enters() -> None:
     assert isinstance(level, str)
     assert child == str(int(level) + 1)
     assert back == parent
+
+
+FIRST_ROLLED = "() => cy.nodes('[rollup > 0]')[0].id()"
+OPEN_UMBRELLA = (
+    "(id) => { toggleUmbrella(id); document.getElementById('sec-cards').open = true; }"
+)
+UMBRELLA_ROW = (
+    "(id) => { const b = document.querySelector("
+    '`#cardlist button[data-card="${CSS.escape(id)}"]`);'
+    " return !!b && b.getAttribute('aria-expanded') === 'true'; }"
+)
+FOCUS_ROW = (
+    "(id) => document.querySelector("
+    '`#cardlist button[data-card="${CSS.escape(id)}"]`).focus()'
+)
+IS_EXPANDED = "(id) => expanded.has(id)"
+
+
+def test_left_on_an_expanded_umbrella_rolls_it_up_on_the_canvas() -> None:
+    """One fold, two views: Left on an expanded umbrella's row also closes it on the canvas."""
+    with _viewer() as page:
+        page.check("#rollup")
+        page.wait_for_function("() => cy.nodes('[rollup > 0]').length > 0")
+        umbrella: object = page.evaluate(FIRST_ROLLED)
+        page.evaluate(OPEN_UMBRELLA, umbrella)
+        page.wait_for_function(UMBRELLA_ROW, arg=umbrella)
+        page.evaluate(FOCUS_ROW, umbrella)
+        page.keyboard.press("ArrowLeft")
+        still: object = page.evaluate(IS_EXPANDED, umbrella)
+    assert still is False

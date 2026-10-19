@@ -539,7 +539,11 @@ document.getElementById("cardlist").addEventListener("keydown", ev => {
       if (state === "false") { closedTree.delete(id); next = refocus(); }
       else if (state === "true") next = at.querySelector(":scope > ul button[data-card]");
       else next = at.querySelector("button[data-toggle]");
-    } else if (state === "true") { closedTree.add(id); next = refocus(); }
+    } else if (state === "true") {
+      // an umbrella the reader expanded closes on the canvas too: one fold, two views
+      if (expanded.has(id)) toggleUmbrella(id); else closedTree.add(id);
+      next = refocus();
+    }
     else { const up = at.parentElement.closest("li"); next = up && up.querySelector("button[data-card]"); }
   }
   if (!next) return;
