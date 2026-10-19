@@ -386,6 +386,8 @@ KIND_CLASS = {
     # nemik:W698: the writer's one line per status transition (mtools:W1372) is bookkeeping, neither
     # planned nor unplanned work, so it stays out of toil_share.
     "status": "bookkeeping",
+    # nemik:W701: the writer's edge-pruned line for each blocker a prune removes (mtools:W1599).
+    "prune": "bookkeeping",
 }
 
 

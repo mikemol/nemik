@@ -12,6 +12,22 @@ LINES = (
     '2026-10-12T11:00:00Z  peer  W3  minted  -  "asked"  evidence=beta:W9\n'
 )
 STATUS = '2026-10-12T12:00:00Z  status  W1  blocked>ready  writer  "blocked -> ready"\n'
+PRUNE = '2026-10-12T13:00:00Z  prune  W1  edge-pruned  writer  "mtools:W1545"\n'
+
+
+def test_a_prune_line_is_bookkeeping_and_leaves_the_toil_share(tmp_path: Path) -> None:
+    """The prune kind reads as bookkeeping and moves no weekly toil_share."""
+    plain = tmp_path / "plain.ledger"
+    plain.write_text(LINES)
+    pruned = tmp_path / "pruned.ledger"
+    pruned.write_text(LINES + PRUNE)
+    g, _ = ledger_graph("alpha", pruned)
+    classes = sorted(str(o) for o in g.objects(None, NEMIK.effortClass))
+    assert KIND_CLASS["prune"] == "bookkeeping"
+    assert classes == ["bookkeeping", "forecast", "interrupt"]
+    before: list[dict[str, object]] = toil("alpha", plain)
+    after: list[dict[str, object]] = toil("alpha", pruned)
+    assert [r["toil_share"] for r in before] == [r["toil_share"] for r in after]
 
 
 def test_a_status_line_is_bookkeeping(tmp_path: Path) -> None:
