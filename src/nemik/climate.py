@@ -57,6 +57,27 @@ def levels_at(events: list[Event], moment: str) -> dict[str, dict[str, float]]:
     return out
 
 
+def levels_series(
+    events: list[Event], start: str, end: str, step_days: float
+) -> list[tuple[str, dict[str, dict[str, float]]]]:
+    """Take the levels at evenly spaced moments from start to end, both included.
+
+    Returns:
+        [(moment, levels_at(events, moment))], oldest first; just the start when the step is
+        not positive.
+
+    """
+    low = datetime.fromisoformat(start)
+    span = (datetime.fromisoformat(end) - low).total_seconds()
+    step = step_days * 86400
+    count = int(span // step) if step > 0 else 0
+    moments = [
+        datetime.fromtimestamp(low.timestamp() + i * step, tz=low.tzinfo).isoformat()
+        for i in range(count + 1)
+    ]
+    return [(moment, levels_at(events, moment)) for moment in moments]
+
+
 def _days(start: datetime, end: datetime) -> float:
     """Measure the days from one instant to another.
 
