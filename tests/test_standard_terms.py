@@ -8,7 +8,16 @@ from pathlib import Path
 from rdflib import Graph, Literal
 from rdflib.namespace import DCTERMS, XSD
 
-from nemik.adapter import NEMIK, OSLC_CM, queue_graph, waypoint_uri
+from nemik.adapter import NEMIK, OSLC, OSLC_CM, queue_graph, waypoint_uri
+
+
+def test_a_card_names_its_workstream_as_its_service_provider(tmp_path: Path) -> None:
+    """OSLC Core serviceProvider repeats the nemik workstream link, whatever it points at."""
+    graph = _graph(tmp_path, "2026-10-01T00:00:00Z")
+    node = waypoint_uri("nemik", "W1")
+    workstream = list(graph.objects(node, NEMIK.workstream))
+    assert workstream
+    assert set(graph.objects(node, OSLC.serviceProvider)) == set(workstream)
 
 
 def test_a_completed_card_carries_its_close_date(tmp_path: Path) -> None:

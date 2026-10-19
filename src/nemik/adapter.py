@@ -35,6 +35,7 @@ class _Terms(Namespace):
 
 
 OSLC_CM = _Terms("http://open-services.net/ns/cm#")
+OSLC = _Terms("http://open-services.net/ns/core#")
 NEMIK = _Terms("https://github.com/mikemol/nemik/ns#")
 BASE = "urn:nemik:"
 
@@ -48,6 +49,7 @@ STATE = {
 
 def bind(g: Graph) -> Graph:
     g.bind("oslc_cm", OSLC_CM)
+    g.bind("oslc", OSLC)
     g.bind("nemik", NEMIK)
     g.bind("dcterms", DCTERMS)
     return g
@@ -252,6 +254,9 @@ def _queue_graph(repo: str, state_path: Path, known: frozenset[str]) -> Graph:
         status = model.text(w, "status")
         g.add((node, RDF.type, OSLC_CM.ChangeRequest))
         g.add((node, NEMIK.workstream, ws))
+        # nemik:W530: the workstream is the card's OSLC service provider (OSLC Core 3.0:
+        # "a link to the resource's OSLC Service Provider")
+        g.add((node, OSLC.serviceProvider, ws))
         g.add((node, NEMIK.symbol, Literal(symbol)))
         # nemik:W530: the standard terms beside the nemik ones, so no reader breaks
         g.add((node, DCTERMS.identifier, Literal(symbol)))
