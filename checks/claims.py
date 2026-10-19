@@ -168,8 +168,10 @@ def hub_modules_depend_on_everything_below():
     # check and exportv2 (a leaf that reads one JSON file).
     # nemik:W670: and serves luthen's series snapshot as a board, through luthenseries, a leaf that
     # reads one JSON file.
+    # nemik:W485: and counts the ledger ticks by the kind of card worked, through workrows, a leaf
+    # that imports only json.
     expected = {
-        "metrics": lower | {"realize", "runlogs"},
+        "metrics": lower | {"realize", "runlogs", "workrows"},
         "serve": lower
         | {"outbox", "exportwire", "runlogs", "withheldage", "luthenseries"},
     }

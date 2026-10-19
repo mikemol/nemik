@@ -145,6 +145,34 @@ def working_rows(ticks: list[tuple[str, str]], queue_text: str) -> list[WorkRow]
     )
 
 
+KINDS = ("directed", "leaf", "interior")
+
+
+def tick_kinds(rows: list[WorkRow]) -> dict[str, int]:
+    """Count a repo's working ticks by what kind of card they worked (nemik:W485).
+
+    The three kinds are exclusive, taken in order: a directed card (someone asked for it) is
+    directed whatever else it is; of the rest, a card nothing waits on is a leaf, and any other is
+    interior (it unblocks something).
+
+    Args:
+        rows: What `working_rows` returned.
+
+    Returns:
+        tick count per kind in KINDS, each present, zero when no tick was of that kind.
+
+    """
+    counts = dict.fromkeys(KINDS, 0)
+    for _, _, _, leaf, directed in rows:
+        if directed:
+            counts["directed"] += 1
+        elif leaf:
+            counts["leaf"] += 1
+        else:
+            counts["interior"] += 1
+    return counts
+
+
 Edge = tuple[str, str, str]
 
 

@@ -74,6 +74,35 @@ from nemik.check import (
 from nemik.realize import verdicts
 from nemik.runlogs import unmigrated_at_source
 from nemik.wake import read_liveness, roster
+from nemik.workrows import tick_kinds, working_rows
+
+
+def working_tick_lines(root: Path) -> list[str]:
+    """nemik:W485: per repo, how many ledger ticks worked a directed, a leaf and an interior card.
+
+    The series the card asks for before W486's design: where working time goes. Counts, not shares,
+    so a query divides by whatever window it likes. Each tick is classified by the queue as it
+    stands now (nemik.workrows), so a card that has since gained dependants moves a past tick from
+    leaf to interior; the series is a reading of today's graph over the ledger's history.
+
+    Args:
+        root: The fleet root.
+
+    Returns:
+        The nemik_working_ticks lines, one per repo and kind.
+
+    """
+    out = ["# TYPE nemik_working_ticks gauge"]
+    for repo, ledger in workstream_files(root, LEDGER):
+        queue = ledger.parent / QUEUE
+        text = queue.read_text(encoding="utf-8") if queue.is_file() else ""
+        counts = tick_kinds(working_rows(ticks(repo, ledger), text))
+        out.extend(
+            f"nemik_working_ticks{label(repo=repo, kind=kind)} {n}"
+            for kind, n in counts.items()
+        )
+    return out
+
 
 # nemik:W620: what builds one group of families' lines when a run asks for them
 Producer = Callable[[], list[str]]
@@ -90,6 +119,7 @@ HELP = {
     "nemik_turns_total": "Turns ended (Stop events) per repo.",
     "nemik_ledger_lines": "Parsed ledger lines per repo by effort class and kind.",
     "nemik_ledger_unparsed": "Legacy or malformed ledger lines mtools returned unparsed.",
+    "nemik_working_ticks": "Ledger ticks per repo by card kind: directed, leaf, interior.",
     "nemik_blocks_inbound": "Open waypoints elsewhere waiting on this repo, claimed or not.",
     "nemik_waiting_on": "Open waypoints elsewhere waiting on this repo, by its liveness.",
     "nemik_pathsforward_adoption": "1 per repo naming how its queue writer is installed.",
@@ -590,6 +620,7 @@ GRAPH_FREE = frozenset(
         "nemik_turns_total",
         "nemik_ledger_lines",
         "nemik_ledger_unparsed",
+        "nemik_working_ticks",
         "nemik_run_log_unmigrated",
         "nemik_cards_completed_24h",
         "nemik_commits_24h",
@@ -792,6 +823,7 @@ def main(argv: list[str] | None = None) -> None:
             ("nemik_ledger_lines", "nemik_ledger_unparsed"),
             lambda: ledger_rows(args.root),
         ),
+        (("nemik_working_ticks",), lambda: working_tick_lines(args.root)),
     ]
     out += [line for names, produce in steps if asked(*names) for line in produce()]
     # nemik:W640: the survey kept its caches before the families ran; keep the flow solves the
