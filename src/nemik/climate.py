@@ -1,0 +1,97 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
+"""nemik:W746: the climate, what a region (a repo) does over a window, counted out of its events.
+
+The weather (nemik:W745) is where each card stands; the climate is how a repo behaves: how many
+cards it mints and closes a day, how many it reopens, and how long a card takes from its first
+appearance to done, as a median and a ninetieth percentile. Counted from the events of
+nemik:W744, so it inherits their sampling: events backfilled from git are commit-grain, which
+makes a lead time up to one commit gap long or short at each end and a reopen count a lower
+bound (docs/weather-questions.md). No import beyond datetime, no future import: it compiles
+under Codon as written.
+"""
+
+from datetime import datetime
+
+# station, time, field, from, to, commit: nemik.cardevents.Event
+Event = tuple[str, str, str, str, str, str]
+
+QUANTILE_90 = 0.9
+
+
+def _days(start: datetime, end: datetime) -> float:
+    """Measure the days from one instant to another.
+
+    Returns:
+        The difference in days.
+
+    """
+    return (end - start).total_seconds() / 86400
+
+
+def _quantile(sorted_values: list[float], share: float) -> float:
+    """Pick a quantile of a sorted list by position.
+
+    Returns:
+        The value at share of the way along the list, 0.0 for an empty list.
+
+    """
+    if not sorted_values:
+        return 0.0
+    return sorted_values[int(share * (len(sorted_values) - 1))]
+
+
+def climate_of(
+    events: list[Event], start: str, end: str
+) -> dict[str, dict[str, float]]:
+    """Count each repo's activity over the window [start, end) from its events.
+
+    `events` are oldest first; a card's minting may precede the window, which is how a lead time
+    is known for a card closed inside it. Counted: cards minted, closed (a status to done),
+    dropped, and reopened (a status from done to anything else); per day over the window; the
+    median and ninetieth percentile of the days from mint to the first done, over the cards
+    closed in the window whose mint was seen.
+
+    Returns:
+        {repo: {minted, done, dropped, reopened, minted_per_day, done_per_day, lead_median_days,
+        lead_p90_days, leads}}.
+
+    """
+    low, high = datetime.fromisoformat(start), datetime.fromisoformat(end)
+    span = max(_days(low, high), 1e-9)
+    born: dict[str, datetime] = {}
+    closed: set[str] = set()
+    counts: dict[str, dict[str, float]] = {}
+    leads: dict[str, list[float]] = {}
+    for station, stamp, field, was, now, _ in events:
+        at = datetime.fromisoformat(stamp)
+        repo = station.partition(":")[0]
+        row = counts.setdefault(
+            repo, dict.fromkeys(("minted", "done", "dropped", "reopened"), 0.0)
+        )
+        inside = low <= at < high
+        if field == "card" and now == "minted":
+            born[station] = at
+            if inside:
+                row["minted"] += 1
+        elif field == "card" and now == "dropped" and inside:
+            row["dropped"] += 1
+        elif field == "status" and now == "done" and station not in closed:
+            closed.add(station)
+            if inside:
+                row["done"] += 1
+                if station in born:
+                    leads.setdefault(repo, []).append(_days(born[station], at))
+        elif field == "status" and was == "done" and inside:
+            row["reopened"] += 1
+    out: dict[str, dict[str, float]] = {}
+    for repo, row in counts.items():
+        ordered = sorted(leads.get(repo, []))
+        entry = dict(row)
+        entry["minted_per_day"] = row["minted"] / span
+        entry["done_per_day"] = row["done"] / span
+        entry["lead_median_days"] = _quantile(ordered, 0.5)
+        entry["lead_p90_days"] = _quantile(ordered, QUANTILE_90)
+        entry["leads"] = float(len(ordered))
+        out[repo] = entry
+    return out
