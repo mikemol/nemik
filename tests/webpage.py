@@ -27,6 +27,9 @@ class Waitable(Protocol):
     def add_init_script(self, script: str) -> object:
         """Run `script` in every document the page loads."""
 
+    def goto(self, url: str) -> object:
+        """Navigate the page to `url`."""
+
     def wait_for_function(self, expression: str, *, timeout: float) -> object:
         """Wait for a JS predicate to hold."""
 
@@ -85,8 +88,7 @@ def open_page(p: Any, url: str, wait: str = CY_READY) -> tuple[Any, Any]:
     except sync_api.Error as e:
         pytest.skip(f"chromium unavailable: {e}")
     page = browser.new_page(viewport={"width": 1700, "height": 1250})
-    page.goto(url)
-    page.wait_for_function(wait, timeout=0)
+    load(page, url, wait)
     return browser, page
 
 
@@ -134,3 +136,17 @@ def until(page: Waitable, expr: str) -> None:
     if broken is not None:
         message = f"the page broke while the test waited on it: {broken}"
         raise PageBrokenError(message)
+
+
+def load(page: Waitable, url: str, wait: str) -> None:
+    """Watch a page, navigate it to `url`, and wait with no clock until `wait` holds.
+
+    Args:
+        page: A new Playwright page.
+        url: The address to open.
+        wait: A JS arrow function that is truthy once the page is ready.
+
+    """
+    watch(page)
+    page.goto(url)
+    until(page, wait)
