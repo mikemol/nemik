@@ -98,3 +98,26 @@ def test_four_groups_the_list_by_repo() -> None:
         on: object = page.evaluate(RADIO_ON, "repo")
     assert together is True
     assert on is True
+
+
+ROOT_HUMAN_FLAGS = """() => [...document.querySelectorAll('#cardlist > li > button[data-card]')]
+  .map(b => cy.getElementById(b.dataset.card).data('blocked_kind') === 'human')"""
+ASKS_FIRST = f"""() => {{
+  const r = ({ROOT_HUMAN_FLAGS})();
+  return r.some(v => v) && r.every((v, i) => i === 0 || r[i - 1] >= v);
+}}"""
+ANY_ASK = "() => cy.nodes('[symbol]').some(n => n.data('blocked_kind') === 'human')"
+
+
+def test_five_puts_the_cards_waiting_on_the_operator_first() -> None:
+    """Key 5 lists every card blocked on the operator before the others."""
+    with _viewer() as page:
+        any_ask: object = page.evaluate(ANY_ASK)
+        if any_ask is not True:
+            pytest.skip("the fixture fleet has no card waiting on the operator")
+        page.evaluate(PRESS_FROM_BODY)
+        page.keyboard.press("5")
+        first: object = page.evaluate(ASKS_FIRST)
+        on: object = page.evaluate(RADIO_ON, "asks")
+    assert first is True
+    assert on is True

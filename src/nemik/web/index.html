@@ -100,7 +100,7 @@ aside details.sec > summary, #cardlist button, #sources button, #sources input {
   <label title="With repos picked, also show what their cards wait on in other repos, this many hops out (1 = what it waits on, 2 = and what that waits on); these cards are drawn dashed and dim"><select id="depth"><option>1</option><option selected>2</option><option>3</option></select> hops of blockers</label>
   <label title="Collapse each umbrella (a card with two or more open prerequisites in its repo) over the work beneath it that nothing else needs; its label counts what it hides (W350). Double-click an umbrella to expand or collapse it."><input type="checkbox" id="rollup"> roll up umbrellas</label>
   <label title="One treemap across the fleet: each tile holds the work beneath it, area by load, rank order reading left to right; repo is the border colour"><input type="checkbox" id="treemap"> treemap</label>
-  <span role="radiogroup" aria-label="Card list order" title="How the card list orders its cards: by rank (salience), newest card first (by symbol number), by the longest chain beneath it, or grouped by repo. Keys 1 to 4."><label><input type="radio" name="listmode" value="rank" checked> rank</label> <label><input type="radio" name="listmode" value="newest"> newest</label> <label><input type="radio" name="listmode" value="critical"> critical</label> <label><input type="radio" name="listmode" value="repo"> repo</label></span>
+  <span role="radiogroup" aria-label="Card list order" title="How the card list orders its cards: by rank (salience), newest card first (by symbol number), by the longest chain beneath it, grouped by repo, or the cards waiting on the operator first. Keys 1 to 5."><label><input type="radio" name="listmode" value="rank" checked> rank</label> <label><input type="radio" name="listmode" value="newest"> newest</label> <label><input type="radio" name="listmode" value="critical"> critical</label> <label><input type="radio" name="listmode" value="repo"> repo</label> <label><input type="radio" name="listmode" value="asks"> asks</label></span>
   <span class="stat" id="stat"></span>
   <button id="relayout" type="button" hidden title="The poll added or removed cards in place, leaving the rest where they were; this lays the whole graph out again"></button>
   <span class="stat" id="legnote" role="status"></span><span class="stat" id="legact"></span>
@@ -334,6 +334,8 @@ const LIST_ORDER = {
   critical: (a, b) => (chainOf.get(b.id()) || 0) - (chainOf.get(a.id()) || 0),
   // nemik:W736: each repo's cards together (repos by name), heaviest first inside a repo
   repo: (a, b) => String(a.data("repo")).localeCompare(String(b.data("repo"))) || LIST_ORDER.rank(a, b),
+  // nemik:W738: the cards waiting on the operator first, then by rank
+  asks: (a, b) => Number(b.data("blocked_kind") === "human") - Number(a.data("blocked_kind") === "human") || LIST_ORDER.rank(a, b),
 };
 const closedTree = new Set();  // nemik:W725: card-list rows the reader folded (open unless listed)
 
@@ -1439,6 +1441,7 @@ const ACTIONS = {
   orderNewest: () => pickListMode("newest"),
   orderCritical: () => pickListMode("critical"),
   orderRepo: () => pickListMode("repo"),
+  orderAsks: () => pickListMode("asks"),
 };
 function pickListMode(mode) {
   listMode = mode;
@@ -1454,6 +1457,7 @@ const KEYMAP = [
   { key: "2", mode: "any", action: "orderNewest", description: "order the card list newest first" },
   { key: "3", mode: "any", action: "orderCritical", description: "order the card list by longest chain beneath it" },
   { key: "4", mode: "any", action: "orderRepo", description: "group the card list by repo" },
+  { key: "5", mode: "any", action: "orderAsks", description: "put the cards waiting on the operator first" },
 ];
 document.getElementById("keylist").innerHTML = KEYMAP.map(k =>
   `<dt><kbd>${esc(k.key)}</kbd></dt><dd>${esc(k.description)}</dd>`).join("");
