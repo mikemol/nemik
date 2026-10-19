@@ -530,8 +530,18 @@ document.getElementById("cardlist").addEventListener("keydown", ev => {
   else if (ev.key === "ArrowUp") next = rows[Math.max(i - 1, 0)];
   else if (ev.key === "Home") next = rows[0];
   else if (ev.key === "End") next = rows[rows.length - 1];
-  else if (ev.key === "ArrowRight") next = at.querySelector("button[data-toggle]");
-  else if (ev.key === "ArrowLeft") next = rows[i];
+  else if (ev.key === "ArrowRight" || ev.key === "ArrowLeft") {
+    // APG tree: Right opens a closed parent, else enters its first child (a leaf reaches its roll-up
+    // toggle); Left closes an open parent, else goes to the parent row
+    const row = rows[i], id = row.dataset.card, state = row.getAttribute("aria-expanded");
+    const refocus = () => { cardList(); return document.querySelector(`#cardlist button[data-card="${CSS.escape(id)}"]`); };
+    if (ev.key === "ArrowRight") {
+      if (state === "false") { closedTree.delete(id); next = refocus(); }
+      else if (state === "true") next = at.querySelector(":scope > ul button[data-card]");
+      else next = at.querySelector("button[data-toggle]");
+    } else if (state === "true") { closedTree.add(id); next = refocus(); }
+    else { const up = at.parentElement.closest("li"); next = up && up.querySelector("button[data-card]"); }
+  }
   if (!next) return;
   ev.preventDefault();
   for (const b of document.querySelectorAll("#cardlist button")) b.tabIndex = -1;

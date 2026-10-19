@@ -82,3 +82,34 @@ def test_folding_a_parent_hides_its_children_from_the_stops() -> None:
     assert isinstance(after, int)
     assert after < before
     assert state == "false"
+
+
+FOCUS_PARENT = f"""() => {{
+  document.getElementById('sec-cards').open = true;
+  {FIRST_PARENT}.focus();
+}}"""
+FOCUSED_CARD = "() => document.activeElement.dataset.card"
+FOCUSED_LEVEL = "() => document.activeElement.getAttribute('aria-level')"
+PARENT_ID = f"() => {FIRST_PARENT}.dataset.card"
+PARENT_LEVEL = f"() => {FIRST_PARENT}.getAttribute('aria-level')"
+
+
+def test_left_closes_a_parent_and_right_reopens_then_enters() -> None:
+    """Left folds the focused parent, Right unfolds it, Right again enters a child."""
+    with _viewer() as page:
+        page.evaluate(FOCUS_PARENT)
+        parent: object = page.evaluate(PARENT_ID)
+        level: object = page.evaluate(PARENT_LEVEL)
+        page.keyboard.press("ArrowLeft")
+        closed: object = page.evaluate(FOLDED_STATE)
+        page.keyboard.press("ArrowRight")
+        opened: object = page.evaluate(FOLDED_STATE)
+        page.keyboard.press("ArrowRight")
+        child: object = page.evaluate(FOCUSED_LEVEL)
+        page.keyboard.press("ArrowLeft")
+        back: object = page.evaluate(FOCUSED_CARD)
+    assert closed == "false"
+    assert opened == "true"
+    assert isinstance(level, str)
+    assert child == str(int(level) + 1)
+    assert back == parent
