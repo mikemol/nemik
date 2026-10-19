@@ -34,16 +34,38 @@ or done in a commit", not "when did it happen".
 - **The forge's activity feed and OTLP records** (W579) are the other streams the card names;
   neither was read here.
 
+## Per-repo density (`nemik-history --density --all`, last 7 days, 2026-10-19)
+
+| Repo | Commits | Per day | Longest gap |
+|---|---|---|---|
+| nemik | 84 | 12.0 | 14.5 h |
+| mtools | 80 | 11.4 | 44.4 h |
+| el-openglo | 64 | 9.1 | 56.4 h |
+| luthen-observability | 47 | 6.7 | 49.9 h |
+| summit | 43 | 6.1 | 2.5 h |
+| linux-sources | 36 | 5.1 | 71.9 h |
+| amr-skills | 32 | 4.6 | 76.9 h |
+| gcalculus | 9 | 1.3 | 81.2 h |
+| life | 4 | 0.6 | 116.6 h |
+| aeternum | 2 | 0.3 | 21.1 h |
+| resumes | 1 | 0.1 | n/a |
+| gabion, github, paperkit, rosettapkg, substrate | 0 | 0.0 | n/a |
+
+The longest gap is measured between commits inside the window, so a repo that has been quiet
+since its last commit shows no gap for that quiet time. Read it as: in the busiest repos
+(nemik, mtools, el-openglo, luthen-observability, summit) a transition is seen within a day or
+two; in the quieter ones (gcalculus, life) a card can change status and the git stream shows
+nothing for four to five days. Five repos committed no queue change in the week.
+
 ## Not measured, so open
 
-- Per-repo density and the gaps between commits (a repo that commits its queue once a day
-  hides most of its transitions). `nemik-history` has no mode that prints this; the tool should
-  gain one (`--density`: commits per day per repo and the longest gap), not a shell loop over
-  `git log`. Carded as W739.
 - The forge feed and OTLP streams.
+- Whether the ledger covers the gap in the quiet repos: the ledger is written live, but this
+  survey did not count its lines per repo.
 
-## Verdict so far
+## Verdict
 
-No writer change to mtools is justified yet: the git snapshots already give every committed
-transition and the ledger covers the live ones. The hole to measure first is the per-repo
-commit gap.
+No writer change to mtools is justified: the git snapshots give every committed transition for
+the busy repos, and the ledger is the stream that covers what a quiet repo's snapshots miss.
+What remains is a count of ledger lines per repo against the git gaps, which decides whether
+the quiet repos have a hole.
