@@ -1,47 +1,46 @@
 # Cold document build: where the time goes
 
 nemik:W724, corrected by W729. `serve.Model` plus `serve.static_data` over
-`/home/mikemol/github`, cold caches, 2026-10-19. Measure it with `PYTHONSAFEPATH=1
-PYTHONPATH=src`, so that neither the script's directory nor the installed `nemik` in the venv
-(older than the source) is imported.
+`/home/mikemol/github`, 2026-10-19.
 
-## Use a sampler, not cProfile
+## How to measure
 
-cProfile adds a cost to every function call, so it overstates call-heavy code (rdflib, pyshacl)
-and understates tight loops. It put SHACL at 76% of the build; timed without a profiler the 14
-SPARQL constraints take 4.7 s of a 130 s build (3.6%). A stack sampler (the main thread's stack
-read every 20 ms, a few lines of Python with `sys._current_frames`) adds no per-call cost.
+- **Put the repo source on the path:** `PYTHONSAFEPATH=1 PYTHONPATH=src`. Two early profiles
+  imported the `nemik` installed in the venv, a build older than the source, and measured code
+  that no longer runs.
+- **Sample, do not cProfile.** cProfile adds a cost to every function call, so it overstates
+  call-heavy code (rdflib, pyshacl). A stack sampler (the main thread's stack read every 20 ms
+  with `sys._current_frames`, a few lines of Python) adds none.
+- **Say which caches are warm.** There are two, and the results differ by a factor of two:
+  - the SHACL and flow result cache (`cachestore`, `build-caches-*.pickle` in the user cache
+    directory), and
+  - the slim queue per git blob (`slim/<blob id>.z` in the same directory, W729).
+  A "cold" build means both empty: point `NEMIK_CACHE_DIR` at an empty directory.
 
-## The sampled build (81 s wall)
+## Measured (sampler, one run each)
 
-Share of samples with the function on the stack:
+| Run | Wall | Where the time is (share of samples with the function on the stack) |
+|---|---|---|
+| History cache absent, SHACL cache warm | 81 s | `history.snapshots` 34% (git reads 18%, JSON parse 17%), `flow.solve` 25%, `check.survey` 21% |
+| Both caches empty (a freshly started pod) | 162 s | `shaclinc.findings` 67%, `history.snapshots` 14%, `flow.solve` 9% |
+| SHACL cache empty, slim history files kept | 96 s | `shaclinc.findings` 46%, `flow.solve` 19%, `history_doc` 5.7% |
 
-| Share | Where |
-|---|---|
-| 34% | `history.snapshots`: git reads 18%, JSON-parsing each committed queue 17% |
-| 25% | `flow.solve` (`_grounded` 22%) |
-| 21% | `check.survey` |
-| about 13% | the adapter's graph builds (`_stamped`, `queue_graph`, `ledger_graph`) |
-| under 4% | the SPARQL constraints |
-
-So after the git change below the targets are the history parse (W729, W731), the flow
-solve (W404 was right to be filed; a per-source cache measured 2 s and was dropped, W726),
-and the survey.
+So: history was a third of a SHACL-warm build and is now about 6% of one (W725 removed the git
+forks, W731 and W729 the parse and the reads). With every cache empty the build is two thirds
+SHACL validation. Which case matters depends on whether the pod restores its cache at start,
+which has not been checked here.
 
 ## What the earlier numbers got wrong
 
-- Two runs (184.8 s and 157.8 s) imported the installed `nemik`, a build older than the source,
-  so they showed a subprocess-bound build (3,931 git forks).
-- A run under cProfile (472.8 s) showed SHACL at 76%: profiler overhead, as above.
-
-## What held
-
-`history.snapshots` forked `git show` once per queue commit (3,931 calls). Since W725 (399075e)
-it reads them through one `git cat-file --batch`: a repo-source build spawns 85 git processes,
-7.2 s cumulative under cProfile.
+- Two runs (184.8 s and 157.8 s) imported the stale installed `nemik` and showed a
+  subprocess-bound build (3,931 git forks).
+- A cProfile run (472.8 s) put SHACL at 76%; unprofiled and with a warm SHACL cache the 14
+  SPARQL constraints take 4.7 s, because most validations are answered from the cache.
+- `flow.solve` was 6.8% under cProfile and 9 to 25% sampled, depending on the other work. A
+  per-source cache of its solves (W726) saved 2 s and was dropped.
 
 ## Not yet measured
 
-The size of a committed queue. Today's nemik queue is 650,150 bytes over 621 commits; the
-average over the history is unmeasured, and how much is accumulated card `evidence` text is
-unknown. W731's first step measures it before anything is cached.
+- Whether the pod starts with an empty cache directory (then the 162 s row is its first build).
+- The size of a committed queue over time: today's nemik queue is 650,150 bytes over 621
+  commits, mean 215,236 bytes per commit, half of it card `evidence` text.
