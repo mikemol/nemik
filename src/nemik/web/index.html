@@ -124,6 +124,14 @@ aside details.sec > summary, #cardlist button, #sources button, #sources input {
     <details class="sec" id="sec-sources" data-closed-by-default><summary>Sources</summary>
     <div id="sources" class="stat"></div>
     </details>
+    <!-- nemik:W471: viewer settings, remembered per viewer. Single-key shortcuts can be turned off
+         (WCAG 2.1.4); selection follows focus is off until asked for. -->
+    <details class="sec" id="sec-settings" data-closed-by-default><summary>Settings</summary>
+    <div class="stat">
+      <label title="Moving focus along the card list also selects that card (off: Enter or Space selects)"><input type="checkbox" id="followFocus"> selection follows focus</label>
+      <label title="Keys that act on their own, without a modifier; turn off if they collide with assistive technology or speech input"><input type="checkbox" id="shortcuts" checked> single-key shortcuts</label>
+    </div>
+    </details>
     <details class="sec" id="sec-selected" open><summary>Selected</summary>
     <div id="detail" class="stat">Click a waypoint.</div>
     </details>
@@ -471,6 +479,8 @@ document.getElementById("cardlist").addEventListener("focusin", ev => {
   if (!row) return;
   const el = cy.getElementById(row.dataset.card);
   if (el.length) { el.addClass("listfocus"); popShow(el); }
+  // nemik:W471: with "selection follows focus" on, the focused row is also the selected card
+  if (document.getElementById("followFocus").checked) selectCard(row.dataset.card);
 });
 document.getElementById("cardlist").addEventListener("focusout", ev => {
   if (ev.relatedTarget && ev.currentTarget.contains(ev.relatedTarget)) return;
@@ -1648,6 +1658,17 @@ document.getElementById("bySalience").onchange = () => {
   try { localStorage.setItem("nemik.bySalience", document.getElementById("bySalience").checked ? "1" : "0"); } catch (e) { /* not remembered */ }
   draw();
 };
+// nemik:W471: the two viewer settings, kept in this browser only (storage can be missing or throw).
+for (const [id, key, fallback] of [["followFocus", "nemik.followFocus", false], ["shortcuts", "nemik.shortcuts", true]]) {
+  const box = document.getElementById(id);
+  try {
+    const kept = localStorage.getItem(key);
+    box.checked = kept === null ? fallback : kept === "1";
+  } catch (e) { box.checked = fallback; }
+  box.onchange = () => {
+    try { localStorage.setItem(key, box.checked ? "1" : "0"); } catch (e) { /* not remembered */ }
+  };
+}
 document.getElementById("showCross").onchange = () => cy && cy.edges(".cross").length && (
   document.getElementById("showCross").checked ? cy.edges(".cross").addClass("lit")
   : (cy.edges(".cross").removeClass("lit"), cy.nodes(":selected").connectedEdges(".cross").addClass("lit")));
