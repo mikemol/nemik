@@ -36,20 +36,26 @@ or done in a commit", not "when did it happen".
 
 ## Per-repo density (`nemik-history --density --all`, last 7 days, 2026-10-19)
 
-| Repo | Commits | Per day | Longest gap |
-|---|---|---|---|
-| nemik | 84 | 12.0 | 14.5 h |
-| mtools | 80 | 11.4 | 44.4 h |
-| el-openglo | 64 | 9.1 | 56.4 h |
-| luthen-observability | 47 | 6.7 | 49.9 h |
-| summit | 43 | 6.1 | 2.5 h |
-| linux-sources | 36 | 5.1 | 71.9 h |
-| amr-skills | 32 | 4.6 | 76.9 h |
-| gcalculus | 9 | 1.3 | 81.2 h |
-| life | 4 | 0.6 | 116.6 h |
-| aeternum | 2 | 0.3 | 21.1 h |
-| resumes | 1 | 0.1 | n/a |
-| gabion, github, paperkit, rosettapkg, substrate | 0 | 0.0 | n/a |
+With the ledger's lines a day beside it (W741, the same `--density` mode):
+
+| Repo | Commits | Per day | Longest gap | Ledger lines a day |
+|---|---|---|---|---|
+| mtools | 80 | 11.4 | 44.4 h | 185.7 |
+| luthen-observability | 47 | 6.7 | 49.9 h | 144.6 |
+| nemik | 84 | 12.0 | 14.5 h | 62.3 |
+| el-openglo | 64 | 9.1 | 56.4 h | 54.9 |
+| amr-skills | 32 | 4.6 | 76.9 h | 13.7 |
+| summit | 43 | 6.1 | 2.5 h | 4.9 |
+| linux-sources | 36 | 5.1 | 71.9 h | 5.7 |
+| gcalculus | 9 | 1.3 | 81.2 h | 7.1 |
+| life | 4 | 0.6 | 116.6 h | 0.7 |
+| aeternum | 2 | 0.3 | 21.1 h | 0.3 |
+| resumes | 1 | 0.1 | n/a | 0.4 |
+| gabion | 0 | 0.0 | n/a | 32.1 |
+| paperkit | 0 | 0.0 | n/a | 28.4 |
+| github | 0 | 0.0 | n/a | 11.4 |
+| substrate | 0 | 0.0 | n/a | 0.4 |
+| rosettapkg | 0 | 0.0 | n/a | 0.3 |
 
 The longest gap is measured between commits inside the window, so a repo that has been quiet
 since its last commit shows no gap for that quiet time. Read it as: in the busiest repos
@@ -57,15 +63,27 @@ since its last commit shows no gap for that quiet time. Read it as: in the busie
 two; in the quieter ones (gcalculus, life) a card can change status and the git stream shows
 nothing for four to five days. Five repos committed no queue change in the week.
 
+## What the ledger column shows
+
+- **Three repos have an active ledger and no queue-file commit at all** in the week: gabion
+  (32 lines a day), paperkit (28) and github (11). Their status changes are invisible to the
+  git stream; for them the ledger is the only history. Why their queue is never committed (an
+  untracked file, or a repo that does not commit it) was not looked into here.
+- **A ledger line is a tick, not a status transition.** It names the card, the outcome and
+  the mechanism, so it says a card was worked and how, not which status it moved between. It
+  fills the "when was this card touched" gap, not the "what did it change from and to" one.
+- **Quiet in both:** life, aeternum, resumes, substrate and rosettapkg write under one ledger
+  line a day, so little changes there to miss.
+
 ## Not measured, so open
 
 - The forge feed and OTLP streams.
-- Whether the ledger covers the gap in the quiet repos: the ledger is written live, but this
-  survey did not count its lines per repo.
+- Why gabion, paperkit and github never commit their queue file.
 
 ## Verdict
 
-No writer change to mtools is justified: the git snapshots give every committed transition for
-the busy repos, and the ledger is the stream that covers what a quiet repo's snapshots miss.
-What remains is a count of ledger lines per repo against the git gaps, which decides whether
-the quiet repos have a hole.
+No writer change to mtools is justified yet. The git snapshots give every committed transition
+for the busy repos. The ledger covers the uncommitted intervals as "touched at", which is
+enough to date a card's activity but not to rebuild its status path. A hole remains for the
+three repos whose queue is never committed: if a status path is wanted for them, the cheapest
+change is for them to commit their queue file, not a new stream.
