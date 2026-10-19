@@ -172,6 +172,8 @@ HELP = {
     "nemik_repo_tier": "The repo's burn-down tier as its place in the order, 0 first.",
     "nemik_cards_arrived_24h": "Cards issued in the last 24 hours, whatever their state now.",
     "nemik_cards_completed_24h": "Cards committed as done in the last 24 hours (git history).",
+    "nemik_arrival_pressure": "Cards issued over cards completed in the trailing 7 days.",
+    "nemik_net_inflow_per_day": "Cards issued minus completed per day over the trailing 7 days.",
     "nemik_commits_24h": "Commits on HEAD in the last 24 hours (a push is a deploy).",
     "nemik_umbrella_forecast_days": "Days the slowest umbrella needs at the recent close rate.",
     "nemik_unforecastable_cards": "Working cards with no children, so no forecast can be made.",
@@ -355,19 +357,56 @@ def arrival_lines(g: Graph, now: datetime) -> list[str]:
 
     """
     repos = sorted({ref(n).partition(":")[0] for n in g.subjects(OSLC_CM.state, None)})
+    fresh = arrivals_within(g, now, DAY)
+    out = ["# TYPE nemik_cards_arrived_24h gauge"]
+    out += [
+        f"nemik_cards_arrived_24h{label(repo=repo)} {fresh[repo]}" for repo in repos
+    ]
+    return out
+
+
+def arrivals_within(g: Graph, now: datetime, window: int) -> Counter[str]:
+    """Count the cards issued within a window ending now, per repo, whatever their state now.
+
+    Args:
+        g: The merged queue graph.
+        now: The instant the window ends at.
+        window: The window's length in seconds.
+
+    Returns:
+        repo -> cards whose `created` falls in the window (a stamp with no zone is left out).
+
+    """
     fresh: Counter[str] = Counter()
     for node, _, created in g.triples((None, DCTERMS.created, None)):
         try:
             born = datetime.fromisoformat(str(created))
         except ValueError:
             continue
-        if born.tzinfo is not None and 0 <= (now - born).total_seconds() < DAY:
+        if born.tzinfo is not None and 0 <= (now - born).total_seconds() < window:
             fresh[ref(node).partition(":")[0]] += 1
-    out = ["# TYPE nemik_cards_arrived_24h gauge"]
-    out += [
-        f"nemik_cards_arrived_24h{label(repo=repo)} {fresh[repo]}" for repo in repos
-    ]
-    return out
+    return fresh
+
+
+def flow_sample(arrived: int, completed: int, days: int) -> tuple[float | None, float]:
+    """Compare a repo's arrivals with its completions over the same trailing window.
+
+    Both counts cover the same `days`, so a burst of minting in one window is set against the
+    completions of that same window and not against a longer mean (nemik:W609, github-8f).
+
+    Args:
+        arrived: Cards issued in the window.
+        completed: Cards committed as done in the window.
+        days: The window's length in days.
+
+    Returns:
+        (pressure, net inflow per day): pressure is arrived over completed, None when nothing
+        completed (a ratio over zero is absent, not zero); net inflow is arrived minus completed per
+        day, which keeps the scale a ratio hides (2 over 1 and 200 over 100 read the same).
+
+    """
+    pressure = arrived / completed if completed else None
+    return pressure, (arrived - completed) / days
 
 
 def completed_in(repo_dir: Path, since: str) -> int | None:
@@ -408,6 +447,44 @@ def completed_lines(root: Path, now: datetime) -> list[str]:
         done = completed_in(top, since)
         if done is not None:
             out.append(f"nemik_cards_completed_24h{label(repo=repo)} {done}")
+    return out
+
+
+FLOW_DAYS = 7  # the trailing window the arrival-pressure gauges compare over
+
+
+def flow_lines(root: Path, merged: Graph, now: datetime) -> list[str]:
+    """nemik:W609: per repo, arrivals against completions over the same trailing 7 days.
+
+    Two gauges, because a ratio hides scale: nemik_arrival_pressure is cards issued over cards
+    completed (above 1: the repo mints faster than it closes; absent when nothing completed), and
+    nemik_net_inflow_per_day is issued minus completed per day. An alert on either is a
+    learned-baseline rule over the gauge, never a typed threshold; this only publishes them.
+
+    Args:
+        root: The fleet root.
+        merged: The merged queue graph (arrivals are read from the cards' creation times).
+        now: The instant the window ends at.
+
+    Returns:
+        The two gauges' TYPE lines and a sample for each repo whose git history is readable.
+
+    """
+    arrived = arrivals_within(merged, now, FLOW_DAYS * DAY)
+    since = (now - timedelta(days=FLOW_DAYS)).astimezone().strftime("%Y-%m-%dT%H:%M:%S")
+    out = [
+        "# TYPE nemik_arrival_pressure gauge",
+        "# TYPE nemik_net_inflow_per_day gauge",
+    ]
+    for repo, path in workstream_files(root, QUEUE):
+        top = path.parents[1] if path.parent.name == ".claude" else path.parent
+        done = completed_in(top, since)
+        if done is None:
+            continue
+        pressure, net = flow_sample(arrived[repo], done, FLOW_DAYS)
+        if pressure is not None:
+            out.append(f"nemik_arrival_pressure{label(repo=repo)} {pressure:.3f}")
+        out.append(f"nemik_net_inflow_per_day{label(repo=repo)} {net:.2f}")
     return out
 
 
@@ -525,6 +602,8 @@ def history_lines(
         out += forecast.lines(root, merged, now)
     if "nemik_cards_completed_24h" in wanted:
         out += completed_lines(root, now)
+    if {"nemik_arrival_pressure", "nemik_net_inflow_per_day"} & set(wanted):
+        out += flow_lines(root, merged, now)
     if "nemik_commits_24h" in wanted:
         out += commit_lines(root, now)
     if "nemik_cards_reopened_24h" in wanted:
@@ -649,6 +728,8 @@ HISTORY_FAMILIES = (
     "nemik_cards_completed_24h",
     "nemik_commits_24h",
     "nemik_cards_reopened_24h",
+    "nemik_arrival_pressure",
+    "nemik_net_inflow_per_day",
     "nemik_umbrella_forecast_days",
     "nemik_unforecastable_cards",
     "nemik_manifest_drift",
