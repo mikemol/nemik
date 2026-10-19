@@ -13,6 +13,7 @@ from pathlib import Path
 from nemik.history import (
     QueueDoc,
     diff,
+    ledger_lines_since,
     longest_gap_hours,
     main,
     queue_at,
@@ -23,6 +24,21 @@ from nemik.history import (
     time_in_state,
     weekly,
 )
+
+
+def test_ledger_lines_are_counted_from_a_stamp(tmp_path: Path) -> None:
+    """nemik:W741: only the lines stamped at or after the cutoff count; no ledger is none."""
+    ledger = tmp_path / "x.ledger"
+    ledger.write_text(
+        "2026-10-01T00:00:00Z  tick  W1\n"
+        "2026-10-05T12:00:00Z  tick  W2\n"
+        "2026-10-06T00:00:00Z  tick  W3\n",
+        encoding="utf-8",
+    )
+    kept = len(ledger.read_text(encoding="utf-8").splitlines()) - 1
+    assert ledger_lines_since(ledger, "2026-10-05T00:00:00Z") == kept
+    assert not ledger_lines_since(ledger, "2026-11-01T00:00:00Z")
+    assert not ledger_lines_since(tmp_path / "missing.ledger", "2026-10-01T00:00:00Z")
 
 
 def test_the_longest_gap_between_commits_is_in_hours() -> None:

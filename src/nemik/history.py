@@ -808,23 +808,46 @@ def longest_gap_hours(stamps: list[datetime]) -> float:
     return round(max(gaps), 1) if gaps else 0.0
 
 
+def ledger_lines_since(ledger: Path, cutoff: str) -> int:
+    """Count the ledger lines stamped at or after `cutoff` (nemik:W741).
+
+    A ledger line starts with its UTC stamp, 2026-09-26T18:54:10Z, which sorts as text.
+
+    Returns:
+        The number of such lines, 0 when the ledger cannot be read.
+
+    """
+    try:
+        text = ledger.read_text(encoding="utf-8")
+    except OSError:
+        return 0
+    return sum(1 for line in text.splitlines() if line[:20] >= cutoff)
+
+
 def _density(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> int:
-    """Print how often each repo commits its queue file and the longest gap (nemik:W739)."""
+    """Print how often each repo commits its queue file, the longest gap and its ledger rate."""
     since = args.start or "7.days.ago"
     days = 7.0
     if args.start:
         began = datetime.fromisoformat(args.start).replace(tzinfo=UTC)
         days = max((datetime.now(UTC) - began).total_seconds() / 86400, 1 / 24)
+    # nemik:W741: the ledger is written live, so its lines per day say what the commits miss
+    cutoff = datetime.fromtimestamp(
+        datetime.now(UTC).timestamp() - days * 86400, UTC
+    ).strftime("%Y-%m-%dT%H:%M:%SZ")
     rows: dict[str, dict[str, float]] = {}
     for name in names:
         out = _git(
             dirs[name], "log", f"--since={since}", "--format=%cI", "--", QUEUE_PATH
         )
         stamps = [datetime.fromisoformat(line) for line in (out or "").split()]
+        lines = ledger_lines_since(dirs[name] / ".claude" / LEDGER, cutoff)
         rows[name] = {
             "commits": len(stamps),
             "per_day": round(len(stamps) / days, 1),
             "longest_gap_hours": longest_gap_hours(stamps),
+            "ledger_lines": lines,
+            "ledger_per_day": round(lines / days, 1),
         }
     if args.json:
         sys.stdout.write(json.dumps(rows, indent=1) + "\n")
@@ -832,7 +855,8 @@ def _density(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) 
     for name, r in rows.items():
         sys.stdout.write(
             f"{name}: {int(r['commits'])} commits, {r['per_day']} a day, "
-            f"longest gap {r['longest_gap_hours']} h\n"
+            f"longest gap {r['longest_gap_hours']} h; "
+            f"ledger {int(r['ledger_lines'])} lines, {r['ledger_per_day']} a day\n"
         )
     return 0
 
