@@ -13,14 +13,17 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import statistics
 import subprocess
 import sys
+import zlib
 from dataclasses import asdict, dataclass, field
 from datetime import UTC, datetime
 from pathlib import Path
 
+from nemik.cachestore import user_dir
 from nemik.check import LEDGER, QUEUE, default_root, workstream_files
 
 QUEUE_PATH = f".claude/{QUEUE}"
@@ -32,6 +35,41 @@ _CROSS = re.compile(r"([A-Za-z0-9][A-Za-z0-9._-]*):W[1-9][0-9]*")
 # lists of strings; a parsed queue carries more (evidence, titles), which `slim` drops.
 Waypoint = dict[str, str | list[str]]
 QueueDoc = dict[str, list[Waypoint]]
+
+# nemik:W729: the slim queue of each git blob, by blob id. A blob never changes, so the answer is
+# kept for the process and, compressed, under the user cache directory: a later build reads and
+# parses only the blobs it has not seen. Best effort: a cache it cannot write is just a cold read.
+_SLIM: dict[str, QueueDoc] = {}
+
+
+def _slim_path(oid: str) -> Path:
+    return user_dir() / "slim" / f"{oid}.z"
+
+
+def _slim_known(oid: str) -> bool:
+    if oid in _SLIM:
+        return True
+    try:
+        _SLIM[oid] = json.loads(zlib.decompress(_slim_path(oid).read_bytes()))
+    except OSError:
+        return False
+    except zlib.error:
+        return False
+    except ValueError:
+        return False
+    return True
+
+
+def _slim_keep(oid: str, queue: QueueDoc) -> None:
+    _SLIM[oid] = queue
+    path = _slim_path(oid)
+    tmp = path.with_suffix(f".{os.getpid()}")
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        tmp.write_bytes(zlib.compress(json.dumps(queue).encode()))
+        tmp.replace(path)
+    except OSError:
+        return
 
 
 @dataclass
@@ -171,6 +209,23 @@ def slim(queue: QueueDoc) -> QueueDoc:
     }
 
 
+def _blob_ids(repo: Path, revs: list[str]) -> list[str]:
+    """Name the queue file's git blob at each of `revs` with one git process, '' where none.
+
+    Returns:
+        One blob id per rev, in order.
+
+    """
+    if not revs:
+        return []
+    ask = "".join(f"{rev}:{QUEUE_PATH}\n" for rev in revs).encode()
+    data = _run(repo, ("cat-file", "--batch-check"), ask)
+    if data is None:
+        return [""] * len(revs)
+    seen = [line.split(" ") for line in data.decode().splitlines()]
+    return [parts[0] if parts[1:2] == ["blob"] else "" for parts in seen]
+
+
 def queues_text_at(repo: Path, revs: list[str]) -> list[str]:
     """Read the queue file's text at each of `revs` with one git process, '' where there is none.
 
@@ -182,16 +237,26 @@ def queues_text_at(repo: Path, revs: list[str]) -> list[str]:
         One text per rev, in order.
 
     """
-    blank = [""] * len(revs)
-    if not revs:
+    return _read_blobs(repo, [f"{rev}:{QUEUE_PATH}" for rev in revs])
+
+
+def _read_blobs(repo: Path, specs: list[str]) -> list[str]:
+    """Read the text of each git object named by `specs` with one process, '' where missing.
+
+    Returns:
+        One text per spec, in order.
+
+    """
+    blank = [""] * len(specs)
+    if not specs:
         return blank
-    ask = "".join(f"{rev}:{QUEUE_PATH}\n" for rev in revs).encode()
+    ask = "".join(f"{spec}\n" for spec in specs).encode()
     data = _run(repo, ("cat-file", "--batch"), ask)
     if data is None:
         return blank
     at = 0
     out: list[str] = []
-    for _ in revs:
+    for _ in specs:
         end = data.index(b"\n", at)
         head = data[at:end].split(b" ")
         at = end + 1
@@ -374,23 +439,41 @@ def commits_since(repo: Path, since: str) -> int | None:
 Snapshot = tuple[datetime, QueueDoc]
 
 
-def snapshots(repo: Path, since: str | None = None) -> list[Snapshot]:
+def snapshots(
+    repo: Path, since: str | None = None, *, full: bool = False
+) -> list[Snapshot]:
     """Every committed state of the queue, oldest first, as (commit time, parsed queue).
 
-    `since` is a revision or date (see `resolve`): only commits after it. One `git show` per commit
-    that touched the file, read through one `git cat-file --batch` (nemik:W725), not one fork each.
+    `since` is a revision or date (see `resolve`): only commits after it. The queues are slim (see
+    `slim`) and read by blob id: a blob already seen, this process or an earlier one, is neither
+    read from git nor parsed again (nemik:W729). `full` asks for the whole queue of every commit
+    instead, read through one `git cat-file --batch` (nemik:W725); churn needs attributes.
+
+    Returns:
+        (commit time, queue) per commit that touched the queue file.
+
     """
     start = resolve(repo, since) if since else None
     span = f"{start}..HEAD" if start else "HEAD"
     log = _git(repo, "log", "--format=%H%x09%cI", "--reverse", span, "--", QUEUE_PATH)
     rows = [line.partition("\t") for line in (log or "").splitlines()]
-    texts = queues_text_at(repo, [sha for sha, _, _ in rows])
-    out: list[Snapshot] = []
-    for (sha, _, stamp), text in zip(rows, texts, strict=True):
-        queue = queue_at(repo, sha, text)
-        if queue:
-            out.append((datetime.fromisoformat(stamp), queue))
-    return out
+    shas = [sha for sha, _, _ in rows]
+    if full:
+        texts = queues_text_at(repo, shas)
+        queues = [
+            queue_at(repo, sha, text) for sha, text in zip(shas, texts, strict=True)
+        ]
+    else:
+        oids = _blob_ids(repo, shas)
+        need = sorted({oid for oid in oids if oid and not _slim_known(oid)})
+        for oid, text in zip(need, _read_blobs(repo, need), strict=True):
+            _slim_keep(oid, slim(json.loads(text) if text else {}))
+        queues = [_SLIM.get(oid, {}) for oid in oids]
+    return [
+        (datetime.fromisoformat(stamp), queue)
+        for (_, _, stamp), queue in zip(rows, queues, strict=True)
+        if queue
+    ]
 
 
 def time_in_state(snaps: list[Snapshot], now: datetime) -> dict[str, dict[str, float]]:

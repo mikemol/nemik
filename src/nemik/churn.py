@@ -117,7 +117,7 @@ def commit_classes(
 def sample(repo: Path, since: str, start: datetime) -> list[Snapshot]:
     """The repo's queue at the span's start, then every commit after it."""
     base = queue_at(repo, resolve(repo, since))
-    return [(start, base), *snapshots(repo, since)]
+    return [(start, base), *snapshots(repo, since, full=True)]
 
 
 def render(

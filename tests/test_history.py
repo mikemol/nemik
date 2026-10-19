@@ -58,6 +58,25 @@ def test_the_queue_at_many_revisions_is_read_by_one_git_process(tmp_path: Path) 
     assert queues_text_at(repo, []) == []
 
 
+def test_a_second_snapshots_call_reads_no_queue_from_git(tmp_path: Path) -> None:
+    """nemik:W729: blobs already seen are kept by id, so only the blob-id check is a git read."""
+    repo, _ = _two_commits(tmp_path)
+    trace = tmp_path / "trace.txt"
+    os.environ["NEMIK_CACHE_DIR"] = str(tmp_path / "cache")
+    try:
+        first = snapshots(repo)
+        os.environ["GIT_TRACE"] = str(trace)
+        try:
+            second = snapshots(repo)
+        finally:
+            del os.environ["GIT_TRACE"]
+    finally:
+        del os.environ["NEMIK_CACHE_DIR"]
+    assert first
+    assert first == second
+    assert trace.read_text().count("built-in: git cat-file") == 1
+
+
 def _wp(symbol: str, status: str = "ready", **more: object) -> dict:
     return {"symbol": symbol, "status": status, **more}
 
