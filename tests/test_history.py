@@ -13,6 +13,7 @@ from pathlib import Path
 from nemik.history import (
     QueueDoc,
     diff,
+    longest_gap_hours,
     main,
     queue_at,
     queues_text_at,
@@ -22,6 +23,20 @@ from nemik.history import (
     time_in_state,
     weekly,
 )
+
+
+def test_the_longest_gap_between_commits_is_in_hours() -> None:
+    """nemik:W739: three commits 2 h and 30 h apart have a longest gap of 30 hours."""
+    first = datetime(2026, 10, 1, 8, tzinfo=UTC)
+    stamps = [
+        first,
+        datetime(2026, 10, 1, 10, tzinfo=UTC),
+        datetime(2026, 10, 2, 16, tzinfo=UTC),
+    ]
+    expected = 30.0
+    assert abs(longest_gap_hours(stamps) - expected) < 1
+    assert not longest_gap_hours(stamps[:1])
+    assert not longest_gap_hours([])
 
 
 def test_slim_drops_what_no_history_reader_uses_and_keeps_its_answers() -> None:

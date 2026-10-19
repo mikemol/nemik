@@ -738,6 +738,12 @@ def main(argv: list[str] | None = None) -> int:
         "attribute-only, status flip, structural), sampled over --from..now, default a week (W495)",
     )
     mode.add_argument(
+        "--density",
+        action="store_true",
+        help="per repo: queue-file commits a day over --from..now (default 7 days) and "
+        "the longest gap between two, in hours (W739)",
+    )
+    mode.add_argument(
         "--baseline",
         nargs="?",
         const="",
@@ -755,6 +761,7 @@ def main(argv: list[str] | None = None) -> int:
         or args.weekly
         or args.toil
         or args.churn
+        or args.density
         or args.baseline is not None
     )
     if not names or (args.start is None and not series):
@@ -771,7 +778,7 @@ def main(argv: list[str] | None = None) -> int:
         return _toil(args, names, dirs)
     if args.baseline is not None:
         return _baseline(args, names, dirs)
-    if args.time_in_state or args.weekly:
+    if args.time_in_state or args.weekly or args.density:
         return _series(args, names, dirs)
     out: dict[str, Diff] = {}
     for name in names:
@@ -783,6 +790,50 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps({r: asdict(d) for r, d in out.items()}, indent=1))
     else:
         print("\n".join(render(r, d) for r, d in out.items()))
+    return 0
+
+
+def longest_gap_hours(stamps: list[datetime]) -> float:
+    """Measure the longest stretch between two consecutive commits (nemik:W739).
+
+    Returns:
+        The gap in hours, 0.0 for fewer than two commits.
+
+    """
+    ordered = sorted(stamps)
+    gaps = [
+        (ordered[i + 1] - ordered[i]).total_seconds() / 3600
+        for i in range(len(ordered) - 1)
+    ]
+    return round(max(gaps), 1) if gaps else 0.0
+
+
+def _density(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> int:
+    """Print how often each repo commits its queue file and the longest gap (nemik:W739)."""
+    since = args.start or "7.days.ago"
+    days = 7.0
+    if args.start:
+        began = datetime.fromisoformat(args.start).replace(tzinfo=UTC)
+        days = max((datetime.now(UTC) - began).total_seconds() / 86400, 1 / 24)
+    rows: dict[str, dict[str, float]] = {}
+    for name in names:
+        out = _git(
+            dirs[name], "log", f"--since={since}", "--format=%cI", "--", QUEUE_PATH
+        )
+        stamps = [datetime.fromisoformat(line) for line in (out or "").split()]
+        rows[name] = {
+            "commits": len(stamps),
+            "per_day": round(len(stamps) / days, 1),
+            "longest_gap_hours": longest_gap_hours(stamps),
+        }
+    if args.json:
+        sys.stdout.write(json.dumps(rows, indent=1) + "\n")
+        return 0
+    for name, r in rows.items():
+        sys.stdout.write(
+            f"{name}: {int(r['commits'])} commits, {r['per_day']} a day, "
+            f"longest gap {r['longest_gap_hours']} h\n"
+        )
     return 0
 
 
@@ -883,6 +934,8 @@ def _days(seconds: float) -> str:
 
 def _series(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> int:
     """`--time-in-state` and `--weekly` over the history from `--from` (default: all of it)."""
+    if args.density:
+        return _density(args, names, dirs)
     now = datetime.now(UTC)
     rolled: dict[str, list[dict]] = {}
     spent: dict[str, dict[str, tuple[str, dict[str, float]]]] = {}
