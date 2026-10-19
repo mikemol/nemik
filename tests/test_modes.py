@@ -80,3 +80,21 @@ def test_three_orders_the_list_by_the_longest_chain_beneath_each_card() -> None:
         on: object = page.evaluate(RADIO_ON, "critical")
     assert ordered is True
     assert on is True
+
+
+REPOS_TOGETHER = """() => {
+  const r = [...document.querySelectorAll('#cardlist > li > button[data-card]')]
+    .map(b => String(cy.getElementById(b.dataset.card).data('repo')));
+  return new Set(r).size > 1 && r.every((v, i) => i === 0 || r[i - 1].localeCompare(v) <= 0);
+}"""
+
+
+def test_four_groups_the_list_by_repo() -> None:
+    """Key 4 lists each repo's cards together, the repos in name order."""
+    with _viewer() as page:
+        page.evaluate(PRESS_FROM_BODY)
+        page.keyboard.press("4")
+        together: object = page.evaluate(REPOS_TOGETHER)
+        on: object = page.evaluate(RADIO_ON, "repo")
+    assert together is True
+    assert on is True
