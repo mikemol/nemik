@@ -17,6 +17,44 @@ from datetime import datetime
 Event = tuple[str, str, str, str, str, str]
 
 QUANTILE_90 = 0.9
+CLOSED = {"done", "dropped", "removed"}
+
+
+def levels_at(events: list[Event], moment: str) -> dict[str, dict[str, float]]:
+    """Count each repo's cards by state at one moment, from the events up to it.
+
+    Each card's status as of `moment` (the fold of nemik:W745, repeated here because a Codon module
+    cannot import a sibling), counted per repo: the open cards, how many are ready (the frontier),
+    working (work in progress) and blocked, and the blocked share of the open cards. A card minted
+    but not yet given a status counts as open and none of the three.
+
+    Returns:
+        {repo: {open, ready, working, blocked, blocked_share}}.
+
+    """
+    until = datetime.fromisoformat(moment)
+    standing: dict[str, str] = {}
+    for station, stamp, field, _, now, _ in events:
+        if datetime.fromisoformat(stamp) > until:
+            continue
+        if field == "card":
+            standing[station] = "" if now == "minted" else now
+        elif field == "status":
+            standing[station] = now
+    out: dict[str, dict[str, float]] = {}
+    for station, status in standing.items():
+        repo = station.partition(":")[0]
+        row = out.setdefault(
+            repo, dict.fromkeys(("open", "ready", "working", "blocked"), 0.0)
+        )
+        if status in CLOSED:
+            continue
+        row["open"] += 1
+        if status in {"ready", "working", "blocked"}:
+            row[status] += 1
+    for row in out.values():
+        row["blocked_share"] = row["blocked"] / row["open"] if row["open"] else 0.0
+    return out
 
 
 def _days(start: datetime, end: datetime) -> float:

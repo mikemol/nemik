@@ -2,7 +2,7 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W746: the climate is a repo's activity over a window, counted from its events."""
 
-from nemik.climate import climate_of
+from nemik.climate import climate_of, levels_at
 
 SHA = "abc123"
 DAY = "2026-10-%02dT00:00:00+00:00"
@@ -60,3 +60,32 @@ def test_each_repo_is_counted_apart() -> None:
     got = climate_of(events, _at(1), _at(3))
     assert got["a"]["minted"] == 1
     assert got["b"]["minted"] == len(("W1", "W2"))
+
+
+def test_levels_count_open_cards_by_state_at_a_moment() -> None:
+    """Folded up to day 5: W1 ready, W2 blocked, W3 working, W4 done, W5 not yet minted."""
+    events = [
+        ("a:W1", _at(1), "card", "", "minted", SHA),
+        ("a:W1", _at(1), "status", "", "ready", SHA),
+        ("a:W2", _at(1), "card", "", "minted", SHA),
+        ("a:W2", _at(1), "status", "", "blocked", SHA),
+        ("a:W3", _at(2), "status", "", "working", SHA),
+        ("a:W4", _at(2), "status", "", "ready", SHA),
+        ("a:W4", _at(4), "status", "ready", "done", SHA),
+        ("a:W5", _at(8), "status", "", "ready", SHA),
+    ]
+    got = levels_at(events, _at(5))["a"]
+    opened = len(("W1", "W2", "W3"))
+    assert got["open"] == opened
+    assert got["ready"] == 1
+    assert got["working"] == 1
+    assert got["blocked"] == 1
+    assert abs(got["blocked_share"] - 1 / opened) < TOLERANCE
+
+
+def test_levels_of_a_repo_with_nothing_open_has_no_blocked_share() -> None:
+    """Every card closed: the share is 0, not a division by zero."""
+    events = [("a:W1", _at(1), "status", "", "done", SHA)]
+    got = levels_at(events, _at(2))["a"]
+    assert not got["open"]
+    assert not got["blocked_share"]
