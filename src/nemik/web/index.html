@@ -100,7 +100,7 @@ aside details.sec > summary, #cardlist button, #sources button, #sources input {
   <label title="With repos picked, also show what their cards wait on in other repos, this many hops out (1 = what it waits on, 2 = and what that waits on); these cards are drawn dashed and dim"><select id="depth"><option>1</option><option selected>2</option><option>3</option></select> hops of blockers</label>
   <label title="Collapse each umbrella (a card with two or more open prerequisites in its repo) over the work beneath it that nothing else needs; its label counts what it hides (W350). Double-click an umbrella to expand or collapse it."><input type="checkbox" id="rollup"> roll up umbrellas</label>
   <label title="One treemap across the fleet: each tile holds the work beneath it, area by load, rank order reading left to right; repo is the border colour"><input type="checkbox" id="treemap"> treemap</label>
-  <span role="radiogroup" aria-label="Card list order" title="How the card list orders its cards: by rank (salience), or newest card first (by symbol number). Keys 1 and 2."><label><input type="radio" name="listmode" value="rank" checked> rank</label> <label><input type="radio" name="listmode" value="newest"> newest</label></span>
+  <span role="radiogroup" aria-label="Card list order" title="How the card list orders its cards: by rank (salience), newest card first (by symbol number), or by the longest chain beneath it. Keys 1, 2 and 3."><label><input type="radio" name="listmode" value="rank" checked> rank</label> <label><input type="radio" name="listmode" value="newest"> newest</label> <label><input type="radio" name="listmode" value="critical"> critical</label></span>
   <span class="stat" id="stat"></span>
   <button id="relayout" type="button" hidden title="The poll added or removed cards in place, leaving the rest where they were; this lays the whole graph out again"></button>
   <span class="stat" id="legnote" role="status"></span><span class="stat" id="legact"></span>
@@ -304,9 +304,34 @@ const expanded = new Set();  // nemik:W350: umbrellas the reader opened with a d
 // nemik:W727: how the card list orders its cards: by salience ("rank") or highest symbol number first ("newest")
 let listMode = "rank";
 const symbolNumber = n => Number((n.data("symbol") || "").replace(/\D/g, "")) || 0;
+// nemik:W734: "critical" puts first the card with the longest chain of cards beneath it (what it enables,
+// transitively), computed over the drawn graph each time the list is built in that mode.
+let chainOf = new Map();
+function computeChains() {
+  const next = new Map();
+  for (const e of cy.edges().toArray()) {
+    if (e.hasClass("waits")) continue;
+    const from = e.source().id();
+    if (!next.has(from)) next.set(from, []);
+    next.get(from).push(e.target().id());
+  }
+  const memo = new Map();
+  const len = (id, path) => {
+    if (memo.has(id)) return memo.get(id);
+    if (path.has(id)) return 0;  // a cycle adds nothing
+    path.add(id);
+    let d = 0;
+    for (const t of next.get(id) || []) d = Math.max(d, 1 + len(t, path));
+    path.delete(id);
+    memo.set(id, d);
+    return d;
+  };
+  chainOf = new Map(cy.nodes("[symbol]").toArray().map(n => [n.id(), len(n.id(), new Set())]));
+}
 const LIST_ORDER = {
   rank: (a, b) => (b.data("salience") || 0) - (a.data("salience") || 0),
   newest: (a, b) => symbolNumber(b) - symbolNumber(a),
+  critical: (a, b) => (chainOf.get(b.id()) || 0) - (chainOf.get(a.id()) || 0),
 };
 const closedTree = new Set();  // nemik:W725: card-list rows the reader folded (open unless listed)
 
@@ -472,6 +497,7 @@ function cardList() {
   const held = at && list.contains(at)
     ? (at.dataset.card ? `button[data-card="${CSS.escape(at.dataset.card)}"]`
       : at.dataset.toggle ? `button[data-toggle="${CSS.escape(at.dataset.toggle)}"]` : null) : null;
+  if (listMode === "critical") computeChains();
   // an unclaimed placeholder is another repo's ask, labelled with its cite, not a card of its own
   const rows = cy.nodes("[symbol]").filter(n => n.visible() && n.data("state") !== "unclaimed").toArray()
     .sort((a, b) => LIST_ORDER[listMode](a, b) || (a.id() < b.id() ? -1 : 1));
@@ -1409,6 +1435,7 @@ const ACTIONS = {
   close: () => (keyhelp.hidden ? popHide() : closeHelp()),
   orderRank: () => pickListMode("rank"),
   orderNewest: () => pickListMode("newest"),
+  orderCritical: () => pickListMode("critical"),
 };
 function pickListMode(mode) {
   listMode = mode;
@@ -1422,6 +1449,7 @@ const KEYMAP = [
   { key: "Escape", mode: "any", action: "close", description: "close this panel, or the card popover" },
   { key: "1", mode: "any", action: "orderRank", description: "order the card list by rank" },
   { key: "2", mode: "any", action: "orderNewest", description: "order the card list newest first" },
+  { key: "3", mode: "any", action: "orderCritical", description: "order the card list by longest chain beneath it" },
 ];
 document.getElementById("keylist").innerHTML = KEYMAP.map(k =>
   `<dt><kbd>${esc(k.key)}</kbd></dt><dd>${esc(k.description)}</dd>`).join("");

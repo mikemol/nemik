@@ -62,3 +62,21 @@ def test_two_orders_the_list_newest_first_and_one_restores_rank() -> None:
     assert newest_on is True
     assert rank_on is True
     assert after == before
+
+
+CHAIN_DESCENDING = """() => {
+  const n = [...document.querySelectorAll('#cardlist > li > button[data-card]')]
+    .map(b => chainOf.get(b.dataset.card) || 0);
+  return n.some(v => v > 0) && n.every((v, i) => i === 0 || n[i - 1] >= v);
+}"""
+
+
+def test_three_orders_the_list_by_the_longest_chain_beneath_each_card() -> None:
+    """Key 3 puts the card with the longest chain of cards beneath it first."""
+    with _viewer() as page:
+        page.evaluate(PRESS_FROM_BODY)
+        page.keyboard.press("3")
+        ordered: object = page.evaluate(CHAIN_DESCENDING)
+        on: object = page.evaluate(RADIO_ON, "critical")
+    assert ordered is True
+    assert on is True
