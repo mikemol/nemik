@@ -109,6 +109,23 @@ def _instant(text: str) -> Literal:
     return Literal(text, datatype=XSD.dateTime) if parsed.tzinfo else Literal(text)
 
 
+def _extended(text: str) -> str:
+    """Rewrite the writer's completed stamp in the extended ISO form (nemik:W530).
+
+    Args:
+        text: The stamp as the writer stores it, the iCalendar basic form 20261004T205827Z.
+
+    Returns:
+        The same instant as 2026-10-04T20:58:27+00:00, or '' when the text is not an instant.
+
+    """
+    try:
+        parsed = datetime.fromisoformat(text)
+    except ValueError:
+        return ""
+    return parsed.isoformat() if parsed.tzinfo else ""
+
+
 def reference_uri(repo: str, ref: str) -> URIRef:
     """A local `W<n>` or a foreign `<repo>:W<n>` (mtools 9236d5e) as a waypoint IRI."""
     if foreign := model.foreign_symbol(ref):
@@ -312,6 +329,10 @@ def _queue_graph(repo: str, state_path: Path, known: frozenset[str]) -> Graph:
             g.add((node, NEMIK.ticksBlocked, Literal(tb)))
         if issued := model.text(w, "issued_at"):
             g.add((node, DCTERMS.created, _instant(issued)))
+        # nemik:W530: the close time the writer stamps on a completed card, as oslc_cm:closeDate
+        # (OSLC CM 3.0: the date no further work is intended), typed as xsd:dateTime
+        if closed_at := _extended(model.text(w, "completed")):
+            g.add((node, OSLC_CM.closeDate, _instant(closed_at)))
         # nemik:W616: when the card was last worked, for the stalled and progress-invisible checks
         if worked := model.text(w, "last_worked"):
             g.add((node, NEMIK.lastWorked, _instant(worked)))
