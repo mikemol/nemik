@@ -1,36 +1,47 @@
 # Cold document build: where the time goes
 
 nemik:W724, corrected by W729. `serve.Model` plus `serve.static_data` over
-`/home/mikemol/github`, cold caches, under cProfile, 2026-10-19. Run it with
-`PYTHONSAFEPATH=1 PYTHONPATH=src`, so that neither the script's directory nor the installed
-`nemik` in the venv (older than the source) is imported.
+`/home/mikemol/github`, cold caches, 2026-10-19. Measure it with `PYTHONSAFEPATH=1
+PYTHONPATH=src`, so that neither the script's directory nor the installed `nemik` in the venv
+(older than the source) is imported.
 
-## The profile that counts: the repo source
+## Use a sampler, not cProfile
 
-**472.8 s** under cProfile (three commit gates were running, so the absolute time is inflated;
-the shares are what to read).
+cProfile adds a cost to every function call, so it overstates call-heavy code (rdflib, pyshacl)
+and understates tight loops. It put SHACL at 76% of the build; timed without a profiler the 14
+SPARQL constraints take 4.7 s of a 130 s build (3.6%). A stack sampler (the main thread's stack
+read every 20 ms, a few lines of Python with `sys._current_frames`) adds no per-call cost.
 
-| Share | Cost |
+## The sampled build (81 s wall)
+
+Share of samples with the function on the stack:
+
+| Share | Where |
 |---|---|
-| 76% (358 s) | `shaclinc.findings`: pyshacl validating the shapes; 322 s of it is the 14 SPARQL constraints, 83,062 evaluations, mostly rdflib's `evalFilter` and `evalDistinct` |
-| 7% (32 s) | `flow.solve`, 26 calls |
-| 2% (7 s) | git, 85 process spawns (see below) |
-| the rest | rdflib term churn, JSON decode, everything else |
+| 34% | `history.snapshots`: git reads 18%, JSON-parsing each committed queue 17% |
+| 25% | `flow.solve` (`_grounded` 22%) |
+| 21% | `check.survey` |
+| about 13% | the adapter's graph builds (`_stamped`, `queue_graph`, `ledger_graph`) |
+| under 4% | the SPARQL constraints |
 
-The cost to cut is the SHACL SPARQL constraints (W729).
+So after the git change below the targets are the history parse (W729, W731), the flow
+solve (W404 was right to be filed; a per-source cache measured 2 s and was dropped, W726),
+and the survey.
 
-## What the earlier profiles got wrong
+## What the earlier numbers got wrong
 
-Two earlier runs (184.8 s and 157.8 s) imported the **installed** `nemik`, a stale build that
-lacks the SHACL work, so they showed a subprocess-bound build (wait 23%, `flow.solve` 22%,
-JSON decode, 3,931 git forks). That picture was real for that code but is not the build that
-runs. Two claims made from it were wrong: that the earlier "496 s" figure was the commit gate's
-time (it was probably this repo-source build, which runs at that order of magnitude), and that W404
-(flow solve) should reopen at 22%. W404 was right to drop; W726 (a flow cache) was built,
-measured at 2 s saved (931 of 3,375 sources repeat), and dropped.
+- Two runs (184.8 s and 157.8 s) imported the installed `nemik`, a build older than the source,
+  so they showed a subprocess-bound build (3,931 git forks).
+- A run under cProfile (472.8 s) showed SHACL at 76%: profiler overhead, as above.
 
-## What did hold
+## What held
 
-The git fan-out was real in the code that ran it: `history.snapshots` forked `git show` once
-per queue commit (3,931 calls, 43.6 s cumulative in the stale profile). After W725 (399075e) a
-repo-source build spawns 85 git processes, 7.2 s cumulative.
+`history.snapshots` forked `git show` once per queue commit (3,931 calls). Since W725 (399075e)
+it reads them through one `git cat-file --batch`: a repo-source build spawns 85 git processes,
+7.2 s cumulative under cProfile.
+
+## Not yet measured
+
+The size of a committed queue. Today's nemik queue is 650,150 bytes over 621 commits; the
+average over the history is unmeasured, and how much is accumulated card `evidence` text is
+unknown. W731's first step measures it before anything is cached.
