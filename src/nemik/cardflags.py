@@ -5,8 +5,55 @@
 blocks.annotate writes derived triples into an rdflib graph. Each flag here is the same derivation
 over `repo:W<n>` strings, so it can run where rdflib cannot (the browser port, nemik:W508). The
 graph version stays the reference; tests/test_cardflags.py checks the two agree on a fixture queue.
-The module imports nothing, so the Codon census compiles it. One flag so far: allBlockersLanded.
+The module imports only `re`, so the Codon census compiles it. Flags so far: allBlockersLanded,
+readyBehindOpen, unresolvedBlocker.
 """
+
+import re
+
+CAL_BLOCK = re.compile(r"cal:[a-z][a-z0-9-]{0,31}/\S+")
+HOST_BLOCK = re.compile(r"host:[A-Za-z0-9][A-Za-z0-9._@-]*")
+WITNESSES = "nemik-witnesses"
+
+
+def unresolved_blockers(
+    cited: dict[str, list[str]],
+    resolved: set[str],
+    human: set[str],
+    witnessed: set[str],
+) -> dict[str, list[str]]:
+    """Find the blocked_on entries nemik can resolve to no party (the operator's 2026-09-26 defect).
+
+    A blocked card whose blocked_on names nothing nemik can resolve (no workstream, waypoint or
+    operator) draws no edge at all. A condition is resolved by its form (cal:<label>/<uid>,
+    host:<id>), and `nemik-witnesses` is a party only for a card that has a witness (nemik:W520).
+
+    Args:
+        cited: blocked card -> its blocked_on entries, as written.
+        resolved: The blocked cards that wait for at least one resolvable card.
+        human: The blocked cards whose blocked_kind is human (drawn to an operator lane).
+        witnessed: The cards that declare a witness.
+
+    Returns:
+        card -> the entries that resolve to no party, for each card that has any.
+
+    """
+    out: dict[str, list[str]] = {}
+    for card, texts in cited.items():
+        if card in resolved or card in human:
+            continue
+        bad = [
+            t
+            for t in (x.strip() for x in texts)
+            if not (
+                CAL_BLOCK.fullmatch(t)
+                or HOST_BLOCK.fullmatch(t)
+                or (t == WITNESSES and card in witnessed)
+            )
+        ]
+        if bad:
+            out[card] = bad
+    return out
 
 
 def all_blockers_landed(
