@@ -44,6 +44,22 @@ designed and not implemented. The design is that layer, with the transport left 
     the natural first transport for repos that live there.
   - **A file in `inbox/`**, the current form, kept as the fallback while the others land.
 
+## A letter is a mention; an ask is a mention with a state
+
+The operator's reading (2026-10-19): a letter is what tagging a person in a Mastodon post is.
+It fits. In ActivityPub a tag is a `Note` carrying a `Mention` tag and addressed (`to`/`cc`)
+to the tagged actor; it lands in that actor's inbox. A plain letter is exactly that, and the
+post's visibility is the egress line: a post to "mentioned people only" reaches the actors
+named and nobody else (a letter between the operator's own private repos), while a public
+post is disclosure (a letter to a public repo, which needs the releasable mark).
+
+What a mention does not carry is an obligation. An ask does: it becomes a waypoint in the
+recipient's queue, someone must claim it, and it ends in an accept, a reject or a resolve.
+So the model is two shapes of one act: a plain letter is a `Note` mentioning the recipient;
+an ask is the same `Note` plus an `Offer` of a `Ticket`, whose state the sender's waypoint
+follows. Citing `<repo>:W<n>` in a letter is like linking a post: it names the thing and
+creates no duty by itself.
+
 ## A letter as a GitHub issue
 
 | Letter today | Issue |
