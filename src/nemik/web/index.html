@@ -101,6 +101,7 @@ aside details.sec > summary, #cardlist button, #sources button, #sources input {
   <label title="Collapse each umbrella (a card with two or more open prerequisites in its repo) over the work beneath it that nothing else needs; its label counts what it hides (W350). Double-click an umbrella to expand or collapse it."><input type="checkbox" id="rollup"> roll up umbrellas</label>
   <label title="One treemap across the fleet: each tile holds the work beneath it, area by load, rank order reading left to right; repo is the border colour"><input type="checkbox" id="treemap"> treemap</label>
   <span role="radiogroup" aria-label="Card list order" title="How the card list orders its cards: by rank (salience), newest card first (by symbol number), by the longest chain beneath it, grouped by repo, the cards waiting on the operator first, or the most recently worked first. Keys 1 to 6."><label><input type="radio" name="listmode" value="rank" checked> rank</label> <label><input type="radio" name="listmode" value="newest"> newest</label> <label><input type="radio" name="listmode" value="critical"> critical</label> <label><input type="radio" name="listmode" value="repo"> repo</label> <label><input type="radio" name="listmode" value="asks"> asks</label> <label><input type="radio" name="listmode" value="recent"> recent</label></span>
+  <span id="clockgroup" role="radiogroup" aria-label="Clock for the recent order" hidden title="Which clock the recent order reads; a card with no value for it sorts last."><label><input type="radio" name="listclock" value="last_worked" checked> worked</label> <label><input type="radio" name="listclock" value="issued"> issued</label> <label><input type="radio" name="listclock" value="last_activity"> activity</label></span>
   <span class="stat" id="stat"></span>
   <button id="relayout" type="button" hidden title="The poll added or removed cards in place, leaving the rest where they were; this lays the whole graph out again"></button>
   <span class="stat" id="legnote" role="status"></span><span class="stat" id="legact"></span>
@@ -303,6 +304,9 @@ let keepOpen = new Set();
 const expanded = new Set();  // nemik:W350: umbrellas the reader opened with a double-click
 // nemik:W727: how the card list orders its cards: by salience ("rank") or highest symbol number first ("newest")
 let listMode = "rank";
+// nemik:W470: which clock the recent order reads: last_worked, issued or last_activity (a card with
+// none of it sorts last)
+let listClock = "last_worked";
 const symbolNumber = n => Number((n.data("symbol") || "").replace(/\D/g, "")) || 0;
 // nemik:W734: "critical" puts first the card with the longest chain of cards beneath it (what it enables,
 // transitively), computed over the drawn graph each time the list is built in that mode.
@@ -335,7 +339,7 @@ const LIST_ORDER = {
   // nemik:W736: each repo's cards together (repos by name), heaviest first inside a repo
   repo: (a, b) => String(a.data("repo")).localeCompare(String(b.data("repo"))) || LIST_ORDER.rank(a, b),
   // nemik:W740: the card worked on most recently first; a card with no last_worked sorts last
-  recent: (a, b) => String(b.data("last_worked") || "").localeCompare(String(a.data("last_worked") || "")),
+  recent: (a, b) => String(b.data(listClock) || "").localeCompare(String(a.data(listClock) || "")),
   // nemik:W738: the cards waiting on the operator first, then by rank
   asks: (a, b) => Number(b.data("blocked_kind") === "human") - Number(a.data("blocked_kind") === "human") || LIST_ORDER.rank(a, b),
 };
@@ -1449,9 +1453,12 @@ const ACTIONS = {
 function pickListMode(mode) {
   listMode = mode;
   document.querySelector(`input[name="listmode"][value="${mode}"]`).checked = true;
+  // nemik:W470: the clock is a choice only in the recent mode
+  document.getElementById("clockgroup").hidden = mode !== "recent";
   cardList();
 }
 for (const r of document.querySelectorAll('input[name="listmode"]')) r.onchange = () => pickListMode(r.value);
+for (const r of document.querySelectorAll('input[name="listclock"]')) r.onchange = () => { listClock = r.value; cardList(); };
 const KEYMAP = [
   { key: "?", mode: "any", action: "help", description: "show or hide this list of shortcuts" },
   { key: "/", mode: "any", action: "jump", description: "jump to a card by cite or title" },

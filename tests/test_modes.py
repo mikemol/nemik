@@ -146,3 +146,36 @@ def test_six_puts_the_most_recently_worked_card_first() -> None:
         on: object = page.evaluate(RADIO_ON, "recent")
     assert ordered is True
     assert on is True
+
+
+CLOCK_SHOWN = "() => !document.getElementById('clockgroup').hidden"
+GIVE_ISSUED = """() => {
+  // issued runs the other way from last_worked, so the two clocks give opposite orders
+  cy.nodes('[symbol]').forEach(n => n.data('issued',
+    `2026-09-01T00:00:${String(59 - (symbolNumber(n) % 60)).padStart(2, '0')}Z`));
+}"""
+ISSUED_FIRST = """() => {
+  const r = [...document.querySelectorAll('#cardlist > li > button[data-card]')]
+    .map(b => String(cy.getElementById(b.dataset.card).data('issued') || ''));
+  return r.some(v => v) && r.every((v, i) => i === 0 || r[i - 1] >= v);
+}"""
+
+
+def test_the_recent_order_offers_its_clock_only_in_that_mode() -> None:
+    """The clock radios show in the recent mode, and picking issued reorders by issued."""
+    with _viewer() as page:
+        before: object = page.evaluate(CLOCK_SHOWN)
+        page.evaluate(GIVE_CLOCKS)
+        page.evaluate(GIVE_ISSUED)
+        page.evaluate(PRESS_FROM_BODY)
+        page.keyboard.press("6")
+        shown: object = page.evaluate(CLOCK_SHOWN)
+        page.check("input[name=listclock][value=issued]")
+        by_issued: object = page.evaluate(ISSUED_FIRST)
+        page.evaluate(PRESS_FROM_BODY)
+        page.keyboard.press("1")
+        hidden_again: object = page.evaluate(CLOCK_SHOWN)
+    assert before is False
+    assert shown is True
+    assert by_issued is True
+    assert hidden_again is False
