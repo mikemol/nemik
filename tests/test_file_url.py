@@ -39,8 +39,9 @@ def test_a_page_opened_from_a_file_url_says_to_serve_the_folder(
             failures.append(str(err))
 
         page.on("pageerror", note)
+        webpage.watch(page)
         page.goto((out / "index.html").as_uri())
-        page.wait_for_function(SAYS, timeout=0)
+        webpage.until(page, SAYS)
         shown = page.inner_text("#stat")
         browser.close()
     assert "http.server" in shown

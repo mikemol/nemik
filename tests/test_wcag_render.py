@@ -206,8 +206,9 @@ def _page_rows(script: str) -> list[Row]:
         except PlaywrightError as e:
             pytest.skip(f"chromium unavailable: {e}")
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        webpage.watch(page)
         page.goto(url)
-        page.wait_for_function(webpage.CY_READY, timeout=0)
+        webpage.until(page, webpage.CY_READY)
         raw: object = page.evaluate(script)
         browser.close()
     rows: list[Row] = []

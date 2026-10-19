@@ -32,8 +32,9 @@ def page() -> Iterator[Page]:
         except PlaywrightError as e:
             pytest.skip(f"chromium unavailable: {e}")
         opened = browser.new_page(viewport={"width": 1700, "height": 1250})
+        webpage.watch(opened)
         opened.goto(url)
-        opened.wait_for_function(webpage.CY_READY, timeout=0)
+        webpage.until(opened, webpage.CY_READY)
         yield opened
         browser.close()
 

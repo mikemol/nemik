@@ -110,9 +110,7 @@ def test_a_poll_that_adds_and_removes_cards_leaves_the_rest_where_it_was(
         moved = page.evaluate(MOVED, before)
         gone = page.evaluate(TAKE_IT_AWAY, new_id)
         page.click("#relayout")
-        page.wait_for_function(
-            "() => document.getElementById('relayout').hidden", timeout=0
-        )
+        webpage.until(page, "() => document.getElementById('relayout').hidden")
         fresh = page.evaluate(
             "() => ({ rebuilt: cy.__kept !== true,"
             " hidden: document.getElementById('relayout').hidden })"
@@ -143,7 +141,7 @@ def test_a_rebuilt_card_list_keeps_the_focus_a_reader_had_in_it(server: str) -> 
             " n.state = n.state === 'ready' ? 'working' : 'ready'; render(true); }",
             held,
         )
-        page.wait_for_function(TWO_FRAMES, timeout=0)
+        webpage.until(page, TWO_FRAMES)
         now = page.evaluate("() => document.activeElement.dataset.card")
         stops = page.evaluate(
             "() => [...document.querySelectorAll('#cardlist button')]"

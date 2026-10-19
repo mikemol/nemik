@@ -80,8 +80,9 @@ def _page(p: Playwright, address: str, before: str = "") -> Page:
     page = browser.new_page(viewport={"width": 1700, "height": 1250})
     if before:
         page.add_init_script(before)
+    webpage.watch(page)
     page.goto(address)
-    page.wait_for_function(webpage.CY_READY, timeout=0)
+    webpage.until(page, webpage.CY_READY)
     page.evaluate(OPEN)
     return page
 
@@ -105,7 +106,7 @@ def test_an_added_source_is_kept_and_survives_a_reload(url: str) -> None:
         stored += '{"id":"other","url":"https://example.test/pieces"}]'
         assert _eval(page, KEPT) == stored
         page.reload()
-        page.wait_for_function(webpage.CY_READY, timeout=0)
+        webpage.until(page, webpage.CY_READY)
         assert _eval(page, SOURCES) == stored
 
 

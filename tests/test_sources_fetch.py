@@ -74,8 +74,9 @@ def _page(p: Playwright, address: str, sources: list[dict[str, str]]) -> Page:
     page = browser.new_page(viewport={"width": 1700, "height": 1250})
     stored = json.dumps(json.dumps(sources))
     page.add_init_script(f"localStorage.setItem('nemik.sources', {stored});")
+    webpage.watch(page)
     page.goto(address)
-    page.wait_for_function(webpage.CY_READY, timeout=0)
+    webpage.until(page, webpage.CY_READY)
     return page
 
 

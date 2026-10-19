@@ -79,8 +79,9 @@ def test_a_change_to_one_repo_fetches_only_its_piece(
         except PlaywrightError as e:
             pytest.skip(f"chromium unavailable: {e}")
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        webpage.watch(page)
         page.goto(url)
-        page.wait_for_function(webpage.CY_READY, timeout=0)
+        webpage.until(page, webpage.CY_READY)
         before: object = page.evaluate(FETCHED)
         page.evaluate(MARK)
         nodes_before: object = page.evaluate(NODES)

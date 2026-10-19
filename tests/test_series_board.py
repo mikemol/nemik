@@ -75,8 +75,9 @@ def _wake_text(series: Path | None) -> str:
         except PlaywrightError as e:
             pytest.skip(f"chromium unavailable: {e}")
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        webpage.watch(page)
         page.goto(url)
-        page.wait_for_function(READY, timeout=0)
+        webpage.until(page, READY)
         text: object = page.evaluate(SHOWN)
         browser.close()
     return str(text)
