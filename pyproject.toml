@@ -28,6 +28,7 @@ paperkit = { git = "https://github.com/mikemol/paperkit.git", rev = "b5877102af3
 
 [project.scripts]
 nemik-check = "nemik.check:main"
+nemik-collapse = "nemik.check:collapse_main"
 nemik-metrics = "nemik.metrics:main"
 nemik-serve = "nemik.serve:main"
 nemik-static = "nemik.staticserve:main"

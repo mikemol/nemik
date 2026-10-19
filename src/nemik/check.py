@@ -45,11 +45,32 @@ from nemik.blocks import (
     unmanifested_by_repo,
 )
 from nemik.collapse import disagreements
+from nemik.collapse import lines as collapse_lines
 from nemik.digest import collapse
 from nemik.idle import findings as idle_findings
 
 QUEUE, LEDGER = "paths-forward.json", "paths-forward.ledger"
 WRITER = "mikemol-paths-forward --state"
+
+
+def collapse_main(argv: list[str] | None = None) -> None:
+    """nemik:W711: print the fleet's collapse umbrellas and the enables edges that escape them.
+
+    Reads every queue without validating it (survey(check=False)), builds each open card's
+    (waits, enables) row and prints nemik.collapse.lines. `--root DIR` names the fleet root.
+    Nothing is applied.
+
+    Args:
+        argv: The arguments after the program name, or None for sys.argv.
+
+    """
+    args = sys.argv[1:] if argv is None else argv
+    root = Path(args[args.index("--root") + 1]) if "--root" in args else default_root()
+    whole = bind(Graph())
+    for _, g, _ in survey(root, check=False):
+        if g is not None:
+            whole += g
+    sys.stdout.write("\n".join(collapse_lines(blocked_rows(whole))) + "\n")
 
 
 def manifest_ratchet() -> dict[str, int]:

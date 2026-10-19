@@ -137,5 +137,5 @@ steps = [
 [reference]
 commands = [
   "nemik-metrics", "nemik-serve", "nemik-static", "nemik-days", "nemik-calendar-write", "nemik-history", "nemik-pins",
-  "nemik-overlaps", "nemik-wake", "nemik-ics", "nemik-tasks", "nemik-floor-asks", "nemik-operator", "nemik-critical", "nemik-work", "nemik-starved", "nemik-pacing", "nemik-replica", "nemik-ask", "nemik-export", "nemik-import", "nemik-exports",
+  "nemik-overlaps", "nemik-wake", "nemik-ics", "nemik-tasks", "nemik-floor-asks", "nemik-operator", "nemik-critical", "nemik-work", "nemik-starved", "nemik-pacing", "nemik-replica", "nemik-ask", "nemik-export", "nemik-import", "nemik-exports", "nemik-collapse",
 ]
