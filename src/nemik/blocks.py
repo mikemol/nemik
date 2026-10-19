@@ -171,6 +171,67 @@ def ready_unmanifested(g: Graph) -> list[Node]:
     return sorted(out, key=str)
 
 
+def unmanifested_by_repo(g: Graph) -> dict[str, int]:
+    """nemik:W685: how many ready cards of each repo declare no manifest of planned changes.
+
+    A ready card with no manifest cannot be stacked (nemik:W613), so the view shows it as pickable
+    while it is not. ManifestShape reports only the leaves; this counts every ready card, which is
+    what the picture promises the operator.
+
+    Args:
+        g: The merged queue graph.
+
+    Returns:
+        repo -> count, for every repo that has a workstream node (zero where all are manifested).
+
+    """
+    counts: dict[str, int] = {
+        str(ws).removeprefix(BASE): 0 for ws in g.subjects(RDF.type, NEMIK.Workstream)
+    }
+    for node in g.subjects(OSLC_CM.state, NEMIK.Ready):
+        if (node, NEMIK.plannedPath, None) not in g:
+            repo = ref(node).partition(":")[0]
+            counts[repo] = counts.get(repo, 0) + 1
+    return counts
+
+
+def over_ratchet(
+    counts: dict[str, int], declared: dict[str, int]
+) -> dict[str, tuple[int, int]]:
+    """nemik:W685: the repos whose count passes what the ratchet declares for them.
+
+    The ratchet is measured data (rank-weights.toml [manifest_ratchet]), never a typed cap, and it
+    only falls: a repo the file does not name is declared at zero.
+
+    Args:
+        counts: repo -> today's count.
+        declared: repo -> the count the ratchet allows.
+
+    Returns:
+        repo -> (count, declared) for each repo over it, sorted by repo.
+
+    """
+    return {
+        repo: (n, declared.get(repo, 0))
+        for repo, n in sorted(counts.items())
+        if n > declared.get(repo, 0)
+    }
+
+
+def lowered_ratchet(counts: dict[str, int], declared: dict[str, int]) -> dict[str, int]:
+    """nemik:W685: what the ratchet file should hold now: each repo's count, never above before.
+
+    Args:
+        counts: repo -> today's count.
+        declared: repo -> the count the ratchet allows today.
+
+    Returns:
+        repo -> min(count, declared); a repo not yet declared takes its count.
+
+    """
+    return {repo: min(n, declared.get(repo, n)) for repo, n in sorted(counts.items())}
+
+
 def node_marks(g: Graph) -> dict[str, dict[str, bool]]:
     """nemik:W477, W684: the flags the view draws on a ready card, by node id.
 

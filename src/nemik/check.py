@@ -18,6 +18,7 @@ import os
 import subprocess
 import sys
 import time
+import tomllib
 from collections.abc import Iterator
 from importlib.resources import files
 from pathlib import Path
@@ -36,12 +37,110 @@ from nemik.adapter import (
     workstream_uri,
 )
 from nemik.adoption import adoption
-from nemik.blocks import annotate, disagreements, ref
+from nemik.blocks import (
+    annotate,
+    disagreements,
+    lowered_ratchet,
+    over_ratchet,
+    ref,
+    unmanifested_by_repo,
+)
 from nemik.digest import collapse
 from nemik.idle import findings as idle_findings
 
 QUEUE, LEDGER = "paths-forward.json", "paths-forward.ledger"
 WRITER = "mikemol-paths-forward --state"
+
+
+def manifest_ratchet() -> dict[str, int]:
+    """nemik:W685: how many ready cards without a manifest each repo is declared to have.
+
+    Measured, never typed as a cap: the [manifest_ratchet] table of rank-weights.toml (the file
+    that already holds the other declared thresholds) holds each repo's count as
+    `nemik-check --unmanifested` printed it, and it only falls.
+
+    Returns:
+        repo -> the count the ratchet allows; empty when the table is absent.
+
+    """
+    text = files("nemik.data").joinpath("rank-weights.toml").read_text(encoding="utf-8")
+    document: dict[str, object] = tomllib.loads(text)
+    table = document.get("manifest_ratchet")
+    if not isinstance(table, dict):
+        return {}
+    return {str(repo): int(n) for repo, n in table.items()}
+
+
+def manifest_findings(merged: Graph, declared: dict[str, int]) -> dict[str, str]:
+    """nemik:W685: the repos whose ready cards without a manifest passed the ratchet.
+
+    A ready card with no manifest looks pickable in the view and cannot be stacked, so a repo that
+    lets the count grow past what was measured is told, as a Warning on the repo.
+
+    Args:
+        merged: The merged queue graph.
+        declared: The ratchet, repo -> the count it allows.
+
+    Returns:
+        The warning text per repo over its ratchet.
+
+    """
+    over = over_ratchet(unmanifested_by_repo(merged), declared)
+    return {
+        repo: f"{n} ready cards have no manifest, over the {allowed} the ratchet allows: give each "
+        "a manifest and size (--manifest ... --size ...) or block it on what it waits for"
+        for repo, (n, allowed) in over.items()
+    }
+
+
+def add_manifest_warnings(merged: Graph, by_repo: dict[str, list[Finding]]) -> None:
+    """nemik:W685: append each over-ratchet repo's Warning to its findings.
+
+    Args:
+        merged: The merged queue graph.
+        by_repo: The findings per repo, added to in place.
+
+    """
+    for repo, found in sorted(manifest_findings(merged, manifest_ratchet()).items()):
+        by_repo.setdefault(repo, []).append(("Warning", "--", found))
+
+
+def report_mode(report: str | None, root: Path, repo: str | None) -> int | None:
+    """nemik:W693, W685: run the one report mode the arguments ask for, if any.
+
+    Args:
+        report: "integrity", "unmanifested", or None for neither.
+        root: The directory holding the repos.
+        repo: The one repo to report on, or None for all.
+
+    Returns:
+        The report's exit status, or None when no report mode was asked for.
+
+    """
+    if report == "integrity":
+        return integrity_report(root, repo)
+    if report == "unmanifested":
+        return unmanifested_report(root)
+    return None
+
+
+def unmanifested_report(root: Path) -> int:
+    """Print the ratchet as it should stand now: each repo's count, never above the declared one.
+
+    Args:
+        root: The directory holding the repos.
+
+    Returns:
+        0.
+
+    """
+    whole = bind(Graph())
+    for _, g, _ in survey(root, check=False):
+        if g is not None:
+            whole += g
+    lowered = lowered_ratchet(unmanifested_by_repo(whole), manifest_ratchet())
+    sys.stdout.write(json.dumps(lowered, indent=1) + "\n")
+    return 0
 
 
 def blocked_rows(merged: Graph) -> dict[str, tuple[list[str], list[str]]]:
@@ -310,8 +409,6 @@ def survey(
     # nemik:W348: a repo holding more needs-you asks than the declared cap has made the operator its
     # bottleneck (the doc's "paralyzed waiting on too many parallel operator answers"). One Warning
     # on the repo, with the count and the oldest ask, so the remedy (batch, withdraw, share) is local.
-    import tomllib
-
     from rdflib import URIRef
     from rdflib.namespace import DCTERMS
 
@@ -341,6 +438,8 @@ def survey(
         oldest = next((s[:10] for s in stamps if s), "unknown")
         found = f"{len(refs)} needs-you operator asks are open (cap {cap}, oldest issued {oldest}): {remedy}"
         by_repo.setdefault(orepo, []).append(("Warning", "--", found))
+    # nemik:W685: a repo whose ready cards without a manifest passed the declared ratchet.
+    add_manifest_warnings(merged, by_repo)
     # nemik:W356: an inter-workstream SLA. A card blocked on another repo's open card for longer than
     # the declared number of loop ticks is a Warning on the BLOCKER's card, since that repo can act.
     sla = int(tomllib.loads(weights_toml).get("sla", {}).get("cross_repo_ticks", 48))
@@ -658,10 +757,21 @@ def main(argv: list[str] | None = None) -> None:
     )
     ap.add_argument(
         "--integrity",
-        action="store_true",
+        dest="report",
+        action="store_const",
+        const="integrity",
         help="dry run: for each enables edge that leaves the subtree its card waits behind "
         "(nemik:W693), print the count per repo and the two fixes as commands, drop the edge or "
         "add the blocked_on; applies nothing. Each repo's session chooses",
+    )
+    ap.add_argument(
+        "--unmanifested",
+        dest="report",
+        action="store_const",
+        const="unmanifested",
+        help="print the manifest ratchet as it should stand now (nemik:W685): each repo's ready "
+        "cards with no manifest, never above what rank-weights.toml [manifest_ratchet] "
+        "declares; applies nothing, the table is lowered by writing this output there",
     )
     ap.add_argument(
         "--digest",
@@ -688,8 +798,9 @@ def main(argv: list[str] | None = None) -> None:
         sys.exit(code)
     if args.committed is not None:
         sys.exit(committed_verdict(args.root, set(args.committed)))
-    if args.integrity:
-        sys.exit(integrity_report(args.root, args.repo))
+    dry = report_mode(args.report, args.root, args.repo)
+    if dry is not None:
+        sys.exit(dry)
 
     for line in provenance(args.root):
         print(line)

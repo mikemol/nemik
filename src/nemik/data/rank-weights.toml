@@ -171,3 +171,23 @@ paperkit = 6
 rosettapkg = 1
 substrate = 6
 summit = 1
+
+# nemik:W685: the most ready cards without a manifest each repo may carry. Measured 2026-10-18 with
+# nemik-check --unmanifested, never typed as a cap; lower a value when a repo's count falls.
+[manifest_ratchet]
+aeternum = 0
+amr-skills = 1
+el-openglo = 1
+gabion = 0
+gcalculus = 1
+github = 14
+life = 1
+linux-sources = 1
+luthen-observability = 3
+mtools = 15
+nemik = 0
+paperkit = 0
+resumes = 1
+rosettapkg = 0
+substrate = 0
+summit = 0
