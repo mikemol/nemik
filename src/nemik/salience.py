@@ -148,8 +148,13 @@ def audit(
     workable: bool = False,
     gate_weights: dict[str, Fraction] | None = None,
     toward: str = "",
+    wait_weight: Fraction = Fraction(0),
 ) -> Audit:
     """Run both arms over the ready cards of `repo`.
+
+    `wait_weight` (nemik:W699) adds that much demand per loop tick a waiting source has been
+    blocked, so the cards it waits on rank higher the longer the wait; zero leaves the flow
+    as it was.
 
     `toward` (`repo:W<n>`, nemik:W316) makes the one demand source the named milestone: salience then
     reads as what moves that card, with no operator or residue demand added.
@@ -190,6 +195,7 @@ def audit(
             gate_weight,
             workable,
             toward,
+            wait_weight,
         )
         if key in _MEMO:
             return _MEMO[key]
@@ -260,6 +266,8 @@ def audit(
                 demand[ref_of(n)] = (
                     demand.get(ref_of(n), Fraction(0)) + weights.operator
                 )
+    for card, added in wait_demand(g, sources, wait_weight, without).items():
+        demand[card] = demand.get(card, Fraction(0)) + added
     for card, entries in ({} if toward else (residue or {})).items():
         if card not in open_refs or card not in relevant or card == without:
             continue
@@ -338,6 +346,26 @@ def ask_effect(
     return AskEffect(ref, needs, displaced, stranded)
 
 
+def table_weights(name: str, text: str | None = None) -> dict[str, Fraction]:
+    """Read one numeric table of rank-weights.toml as exact fractions.
+
+    Args:
+        name: The table's name.
+        text: The rank-weights TOML, or None for the one that ships with the package.
+
+    Returns:
+        The table's entries; empty when the table is absent.
+
+    """
+    import tomllib
+    from importlib.resources import files
+
+    if text is None:
+        text = files("nemik.data").joinpath("rank-weights.toml").read_text()
+    table = tomllib.loads(text).get(name, {})
+    return {str(gate): Fraction(str(w)) for gate, w in table.items()}
+
+
 def load_gate_weights(text: str | None = None) -> dict[str, Fraction]:
     """Read the per-gate residue weights from `[residue]` in rank-weights.toml (nemik:W253).
 
@@ -347,13 +375,51 @@ def load_gate_weights(text: str | None = None) -> dict[str, Fraction]:
         the weight of one residue entry at each named gate.
 
     """
-    import tomllib
-    from importlib.resources import files
+    return table_weights("residue", text)
 
-    if text is None:
-        text = files("nemik.data").joinpath("rank-weights.toml").read_text()
-    table = tomllib.loads(text).get("residue", {})
-    return {str(gate): Fraction(str(w)) for gate, w in table.items()}
+
+def load_wait_weight(text: str | None = None) -> Fraction:
+    """Read what one loop tick of waiting adds to demand from `[wait_age]` in rank-weights.toml.
+
+    nemik:W699: a card that has waited longer on its blockers asks harder. Absent or zero means
+    waiting adds nothing, which is the ranking as it was.
+
+    Args:
+        text: The rank-weights TOML, or None for the one that ships with the package.
+
+    Returns:
+        The demand one tick of a card's `ticks_blocked` adds; zero when the table is absent.
+
+    """
+    return table_weights("wait_age", text).get("per_tick", Fraction(0))
+
+
+def wait_demand(
+    g: Graph, sources: list[Node], wait_weight: Fraction, without: str = ""
+) -> dict[str, Fraction]:
+    """Give the demand each waiting source adds for the ticks it has been blocked.
+
+    A source that waits injects demand that flows through its cone to the cards it waits on, so a
+    blocker's salience rises with the age of the waits on it (nemik:W699).
+
+    Args:
+        g: The merged queue graph.
+        sources: The waiting cards that inject demand.
+        wait_weight: The demand one tick adds (load_wait_weight).
+        without: A card whose demand is left out.
+
+    Returns:
+        card -> added demand, only for cards that have waited at least one tick.
+
+    """
+    added: dict[str, Fraction] = {}
+    if not wait_weight:
+        return added
+    for node in sources:
+        ticks = int(str(g.value(node, NEMIK.ticksBlocked) or 0))
+        if ticks and ref_of(node) != without:
+            added[ref_of(node)] = wait_weight * ticks
+    return added
 
 
 def salience_of(

@@ -191,3 +191,8 @@ resumes = 1
 rosettapkg = 0
 substrate = 0
 summit = 0
+
+# nemik:W699: the demand one loop tick of a card's ticks_blocked adds, so the cards it waits on rank
+# higher the longer the wait. Zero is the ranking without it; raising it re-baselines the rank tests.
+[wait_age]
+per_tick = 0
