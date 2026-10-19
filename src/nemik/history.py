@@ -100,17 +100,27 @@ def diff(old: dict, new: dict) -> Diff:
     return d
 
 
-def _git(repo: Path, *args: str) -> str | None:
+def _run(repo: Path, args: tuple[str, ...], stdin: bytes = b"") -> bytes | None:
     # nemik:W572: no git binary is no history, like a directory that is not a repository. The
     # image's final stage carries no git (only its test stage does), and the snapshot builder of
     # the pod (nemik-serve --publish) reaches this, so a missing binary must not stop a publish.
     try:
         run = subprocess.run(
-            ["git", "-C", str(repo), *args], capture_output=True, text=True, check=False
+            ["git", "-C", str(repo), *args],
+            capture_output=True,
+            check=False,
+            input=stdin or None,
         )
     except OSError:
         return None
     return run.stdout if run.returncode == 0 else None
+
+
+def _git(repo: Path, *args: str) -> str | None:
+    out = _run(repo, args)
+    if out is None:
+        return None
+    return out.decode()
 
 
 def resolve(repo: Path, spec: str | None) -> str | None:
@@ -129,11 +139,47 @@ def resolve(repo: Path, spec: str | None) -> str | None:
     return spec
 
 
-def queue_at(repo: Path, rev: str | None) -> dict:
-    """The parsed queue as committed at `rev`; empty when there is none then."""
+def queues_text_at(repo: Path, revs: list[str]) -> list[str]:
+    """Read the queue file's text at each of `revs` with one git process, '' where there is none.
+
+    nemik:W725: a cold document build ran `git show` once per queue commit (3,931 forks, 28% of the
+    build). `git cat-file --batch` answers `<rev>:<path>` lines on stdin with `<oid> blob <size>`
+    then the bytes, or `<spec> missing`.
+
+    Returns:
+        One text per rev, in order.
+
+    """
+    blank = [""] * len(revs)
+    if not revs:
+        return blank
+    ask = "".join(f"{rev}:{QUEUE_PATH}\n" for rev in revs).encode()
+    data = _run(repo, ("cat-file", "--batch"), ask)
+    if data is None:
+        return blank
+    at = 0
+    out: list[str] = []
+    for _ in revs:
+        end = data.index(b"\n", at)
+        head = data[at:end].split(b" ")
+        at = end + 1
+        if head[1:2] == [b"blob"]:
+            size = int(head[2])
+            out.append(data[at : at + size].decode())
+            at += size + 1
+        else:
+            out.append("")
+    return out
+
+
+def queue_at(repo: Path, rev: str | None, known: str = "") -> dict:
+    """The parsed queue as committed at `rev`; empty when there is none then.
+
+    `known` is the file's text at `rev` when a batch read already has it (nemik:W725).
+    """
     if rev is None:
         return {}
-    text = _git(repo, "show", f"{rev}:{QUEUE_PATH}")
+    text = known or _git(repo, "show", f"{rev}:{QUEUE_PATH}")
     return json.loads(text) if text else {}
 
 
@@ -300,15 +346,16 @@ def snapshots(repo: Path, since: str | None = None) -> list[Snapshot]:
     """Every committed state of the queue, oldest first, as (commit time, parsed queue).
 
     `since` is a revision or date (see `resolve`): only commits after it. One `git show` per commit
-    that touched the file, so a long history costs that many reads.
+    that touched the file, read through one `git cat-file --batch` (nemik:W725), not one fork each.
     """
     start = resolve(repo, since) if since else None
     span = f"{start}..HEAD" if start else "HEAD"
     log = _git(repo, "log", "--format=%H%x09%cI", "--reverse", span, "--", QUEUE_PATH)
+    rows = [line.partition("\t") for line in (log or "").splitlines()]
+    texts = queues_text_at(repo, [sha for sha, _, _ in rows])
     out: list[Snapshot] = []
-    for line in (log or "").splitlines():
-        sha, _, stamp = line.partition("\t")
-        queue = queue_at(repo, sha)
+    for (sha, _, stamp), text in zip(rows, texts, strict=True):
+        queue = queue_at(repo, sha, text)
         if queue:
             out.append((datetime.fromisoformat(stamp), queue))
     return out

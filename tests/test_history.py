@@ -5,6 +5,7 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 from datetime import UTC, datetime
 from pathlib import Path
@@ -13,11 +14,27 @@ from nemik.history import (
     diff,
     main,
     queue_at,
+    queues_text_at,
     resolve,
     snapshots,
     time_in_state,
     weekly,
 )
+
+
+def test_the_queue_at_many_revisions_is_read_by_one_git_process(tmp_path: Path) -> None:
+    """nemik:W725: the batch is one `git cat-file`, however many commits it reads."""
+    repo, first = _two_commits(tmp_path)
+    trace = tmp_path / "trace.txt"
+    os.environ["GIT_TRACE"] = str(trace)
+    try:
+        texts = queues_text_at(repo, [first, "HEAD"])
+    finally:
+        del os.environ["GIT_TRACE"]
+    assert all(texts)
+    assert texts[0] != texts[1]
+    assert trace.read_text().count("built-in: git cat-file") == 1
+    assert queues_text_at(repo, []) == []
 
 
 def _wp(symbol: str, status: str = "ready", **more: object) -> dict:

@@ -18,7 +18,9 @@ The first and fifth rows are one cost, per-repo subprocess fan-out (about 28% to
 the third is its output. Ordered by share: subprocess fan-out and decode, then the flow solve,
 then rdflib.
 
-The run imported `flow.py` from the scratchpad copy (`scratchpad/nemik/flow.py`) because the
-script's directory led `sys.path`; re-run from a clean directory before acting on the flow
-row. W404 (flow solve) was dropped on a wrong 6.9% figure and should be reconsidered against
-the 22% here once that is confirmed.
+The first run imported `flow.py` from a scratchpad copy because the script's directory led
+`sys.path`. A clean re-run (`PYTHONSAFEPATH=1`, the installed `nemik.flow`) took **157.8 s**:
+subprocess wait 35.8 s (23%), `flow.solve` 34.4 s (22%, 30.7 s in `_grounded`), rdflib
+`Memory.add` 21.0 s (13%), JSON decode 15.1 s (10%), fork 2.9 s (2%). The ranking holds, with
+the subprocess wait, decode and fork together at 35%. W404 (flow solve) was dropped on a wrong
+6.9% figure; 22% justifies reopening it.
