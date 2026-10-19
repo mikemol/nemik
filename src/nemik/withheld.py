@@ -68,6 +68,8 @@ def _stub(ref: str) -> dict:
         "minted_during": "",
         "effort": {},
         "last_activity": "",
+        "last_worked": "",
+        "issued": "",
         "open_blockers": 0,
         "weather": "",
     }

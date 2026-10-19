@@ -121,3 +121,28 @@ def test_five_puts_the_cards_waiting_on_the_operator_first() -> None:
         on: object = page.evaluate(RADIO_ON, "asks")
     assert first is True
     assert on is True
+
+
+GIVE_CLOCKS = """() => {
+  // every card gets a last_worked from its symbol number, then the list is rebuilt
+  cy.nodes('[symbol]').forEach(n => n.data('last_worked',
+    `2026-10-01T00:00:${String(symbolNumber(n) % 60).padStart(2, '0')}Z`));
+  cardList();
+}"""
+RECENT_FIRST = """() => {
+  const r = [...document.querySelectorAll('#cardlist > li > button[data-card]')]
+    .map(b => String(cy.getElementById(b.dataset.card).data('last_worked') || ''));
+  return r.some(v => v) && r.every((v, i) => i === 0 || r[i - 1] >= v);
+}"""
+
+
+def test_six_puts_the_most_recently_worked_card_first() -> None:
+    """Key 6 lists the cards by last_worked, latest first; a card with none sorts last."""
+    with _viewer() as page:
+        page.evaluate(GIVE_CLOCKS)
+        page.evaluate(PRESS_FROM_BODY)
+        page.keyboard.press("6")
+        ordered: object = page.evaluate(RECENT_FIRST)
+        on: object = page.evaluate(RADIO_ON, "recent")
+    assert ordered is True
+    assert on is True

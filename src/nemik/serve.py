@@ -283,6 +283,9 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
                     "want": str(g.value(n, NEMIK.wantText) or ""),
                     "effort": dict(sorted(effort.get(str(n), {}).items())),
                     "last_activity": last.get(str(n), ""),
+                    # nemik:W740: the clocks a reader may order the card list by
+                    "last_worked": str(g.value(n, NEMIK.lastWorked) or ""),
+                    "issued": str(g.value(n, DCTERMS.created) or ""),
                     "minted_during": str(g.value(n, NEMIK.mintedDuring) or ""),
                     "caused_by": str(g.value(n, PROV.wasInformedBy) or ""),
                     "weather": str(g.value(n, NEMIK.weather) or ""),
