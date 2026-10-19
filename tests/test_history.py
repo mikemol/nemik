@@ -12,6 +12,7 @@ from pathlib import Path
 
 from nemik.history import (
     QueueDoc,
+    backfill,
     diff,
     ledger_lines_since,
     longest_gap_hours,
@@ -24,6 +25,43 @@ from nemik.history import (
     time_in_state,
     weekly,
 )
+
+
+def test_the_commit_history_of_a_queue_is_a_list_of_events(tmp_path: Path) -> None:
+    """nemik:W744: the first commit mints W1, the second closes it and mints W2."""
+    repo, first = _two_commits(tmp_path)
+    got = backfill("a", repo)
+    changes = [(station, field, was, now) for station, _, field, was, now, _ in got]
+    assert changes == [
+        ("a:W1", "card", "", "minted"),
+        ("a:W1", "status", "ready", "done"),
+        ("a:W2", "card", "", "minted"),
+    ]
+    assert got[0][5] == first
+
+
+def test_a_start_date_compares_the_first_commit_after_it_with_the_state_before(
+    tmp_path: Path,
+) -> None:
+    """nemik:W744: from between the two commits, W1 is not minted again, only changed."""
+    repo, _ = _two_commits(tmp_path)
+    got = backfill("a", repo, "2026-10-03")
+    changes = [(station, field, was, now) for station, _, field, was, now, _ in got]
+    assert changes == [
+        ("a:W1", "status", "ready", "done"),
+        ("a:W2", "card", "", "minted"),
+    ]
+
+
+def test_a_null_or_empty_field_in_a_committed_queue_reads_as_empty(
+    tmp_path: Path,
+) -> None:
+    """nemik:W744: real queues store null for an unset blocked_kind; it must not raise."""
+    repo, _ = _two_commits(tmp_path)
+    card = _wp("W3", "ready", blocked_kind=None, blocked_on=[])
+    _commit(repo, {"waypoints": [card], "residue": []}, "2026-10-06T12:00:00Z")
+    third = [event for event in backfill("a", repo) if event[0] == "a:W3"]
+    assert [event[2:5] for event in third] == [("card", "", "minted")]
 
 
 def test_ledger_lines_are_counted_from_a_stamp(tmp_path: Path) -> None:

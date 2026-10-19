@@ -22,10 +22,13 @@ def _text(value: str | list[str]) -> str:
     """Write one field value as the single string an event carries.
 
     Returns:
-        The string itself, or a list joined by commas.
+        The string itself, a list joined by commas, or "" for an empty list or a null a queue
+        stores for a field that is unset.
 
     """
-    return value if isinstance(value, str) else ",".join(value)
+    if isinstance(value, str):
+        return value
+    return ",".join(value) if value else ""
 
 
 def _states(queue: Queue) -> dict[str, dict[str, str]]:

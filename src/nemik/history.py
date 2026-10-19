@@ -24,7 +24,28 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from nemik.cachestore import user_dir
+from nemik.cardevents import Event, events_of
 from nemik.check import LEDGER, QUEUE, default_root, workstream_files
+
+
+def backfill(repo: str, repo_dir: Path, since: str | None = None) -> list[Event]:
+    """Walk a repo's committed queue and list every change as an event (nemik:W744).
+
+    Each commit of the queue file is compared with the one before it (the first with an empty
+    queue, so it mints every card then in it). The fields are the slim queue's: status, blocker
+    kind, blockers and enables; title and evidence edits are not events here.
+
+    Returns:
+        The events, oldest first, each naming its commit.
+
+    """
+    out: list[Event] = []
+    before: QueueDoc = queue_at(repo_dir, resolve(repo_dir, since)) if since else {}
+    for sha, at, queue in commit_snapshots(repo_dir, since):
+        out.extend(events_of(repo, before, queue, sha, at.isoformat()))
+        before = queue
+    return out
+
 
 QUEUE_PATH = f".claude/{QUEUE}"
 MIN_LANDINGS = 3  # nemik:W616: fewer cited commits than this teach no land interval
@@ -444,13 +465,25 @@ def snapshots(
 ) -> list[Snapshot]:
     """Every committed state of the queue, oldest first, as (commit time, parsed queue).
 
+    Returns:
+        (commit time, queue) per commit that touched the queue file; see `commit_snapshots`.
+
+    """
+    return [(at, queue) for _, at, queue in commit_snapshots(repo, since, full=full)]
+
+
+def commit_snapshots(
+    repo: Path, since: str | None = None, *, full: bool = False
+) -> list[tuple[str, datetime, QueueDoc]]:
+    """Every committed state of the queue, oldest first, with the commit that made it.
+
     `since` is a revision or date (see `resolve`): only commits after it. The queues are slim (see
     `slim`) and read by blob id: a blob already seen, this process or an earlier one, is neither
     read from git nor parsed again (nemik:W729). `full` asks for the whole queue of every commit
     instead, read through one `git cat-file --batch` (nemik:W725); churn needs attributes.
 
     Returns:
-        (commit time, queue) per commit that touched the queue file.
+        (commit sha, commit time, queue) per commit that touched the queue file.
 
     """
     start = resolve(repo, since) if since else None
@@ -470,8 +503,8 @@ def snapshots(
             _slim_keep(oid, slim(json.loads(text) if text else {}))
         queues = [_SLIM.get(oid, {}) for oid in oids]
     return [
-        (datetime.fromisoformat(stamp), queue)
-        for (_, _, stamp), queue in zip(rows, queues, strict=True)
+        (sha, datetime.fromisoformat(stamp), queue)
+        for (sha, _, stamp), queue in zip(rows, queues, strict=True)
         if queue
     ]
 
@@ -738,6 +771,12 @@ def main(argv: list[str] | None = None) -> int:
         "attribute-only, status flip, structural), sampled over --from..now, default a week (W495)",
     )
     mode.add_argument(
+        "--events",
+        action="store_true",
+        help="every change to a card in the queue history, one event a line: station, time, "
+        "field, from, to, commit (W744)",
+    )
+    mode.add_argument(
         "--density",
         action="store_true",
         help="per repo: queue-file commits a day over --from..now (default 7 days) and "
@@ -762,6 +801,7 @@ def main(argv: list[str] | None = None) -> int:
         or args.toil
         or args.churn
         or args.density
+        or args.events
         or args.baseline is not None
     )
     if not names or (args.start is None and not series):
@@ -778,7 +818,7 @@ def main(argv: list[str] | None = None) -> int:
         return _toil(args, names, dirs)
     if args.baseline is not None:
         return _baseline(args, names, dirs)
-    if args.time_in_state or args.weekly or args.density:
+    if args.time_in_state or args.weekly or args.density or args.events:
         return _series(args, names, dirs)
     out: dict[str, Diff] = {}
     for name in names:
@@ -858,6 +898,22 @@ def _density(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) 
             f"longest gap {r['longest_gap_hours']} h; "
             f"ledger {int(r['ledger_lines'])} lines, {r['ledger_per_day']} a day\n"
         )
+    return 0
+
+
+def _events(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> int:
+    """Print every change to a card in the repos' queue history, one event a line (nemik:W744).
+
+    Returns:
+        0.
+
+    """
+    rows = [event for name in names for event in backfill(name, dirs[name], args.start)]
+    if args.json:
+        sys.stdout.write(json.dumps(rows, indent=1) + "\n")
+        return 0
+    for event in rows:
+        sys.stdout.write("\t".join(event) + "\n")
     return 0
 
 
@@ -960,6 +1016,8 @@ def _series(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -
     """`--time-in-state` and `--weekly` over the history from `--from` (default: all of it)."""
     if args.density:
         return _density(args, names, dirs)
+    if args.events:
+        return _events(args, names, dirs)
     now = datetime.now(UTC)
     rolled: dict[str, list[dict]] = {}
     spent: dict[str, dict[str, tuple[str, dict[str, float]]]] = {}
