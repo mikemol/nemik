@@ -173,6 +173,43 @@ def tick_kinds(rows: list[WorkRow]) -> dict[str, int]:
     return counts
 
 
+def open_leaf_stamps(queue_text: str) -> list[str]:
+    """Give the `issued_at` of every open leaf of a queue, the cards that could be worked now.
+
+    An open leaf is a card that is not done or dropped and that nothing waits on (the same leaf
+    `working_rows` uses). The stamps are text, oldest first, so the caller decides how to age them;
+    a leaf with no `issued_at` is left out rather than counted as new (nemik:W485).
+
+    Args:
+        queue_text: The text of a paths-forward.json.
+
+    Returns:
+        The stamps, sorted; empty when the text is not a queue.
+
+    """
+    cards = cards_of(queue_text)
+    try:
+        doc: object = json.loads(queue_text)
+    except ValueError:
+        return []
+    if not isinstance(doc, dict):
+        return []
+    items = doc.get("waypoints")
+    if not isinstance(items, list):
+        return []
+    out: list[str] = []
+    for card in items:
+        if not isinstance(card, dict):
+            continue
+        symbol = str(card.get("symbol"))
+        stamp = card.get("issued_at")
+        if card.get("status") in {"done", "dropped"} or not isinstance(stamp, str):
+            continue
+        if symbol in cards and is_leaf(cards, symbol):
+            out.append(stamp)
+    return sorted(out)
+
+
 Edge = tuple[str, str, str]
 
 

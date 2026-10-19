@@ -74,7 +74,45 @@ from nemik.check import (
 from nemik.realize import verdicts
 from nemik.runlogs import unmigrated_at_source
 from nemik.wake import read_liveness, roster
-from nemik.workrows import tick_kinds, working_rows
+from nemik.workrows import open_leaf_stamps, tick_kinds, working_rows
+
+
+def open_leaf_lines(root: Path, now: datetime) -> list[str]:
+    """nemik:W485: per repo, how many open leaves there are and how long they have waited.
+
+    A leaf is a card nothing waits on, so it can be worked now; a count that grows while its oldest
+    age grows is a repo that picks interior cards over the leaves in front of it. The age is a
+    summary-style gauge (quantile 0.5 the median, 1 the oldest), as nemik_waypoint_age_seconds is.
+
+    Args:
+        root: The fleet root.
+        now: The time to age the leaves against.
+
+    Returns:
+        The nemik_open_leaves and nemik_open_leaf_age_seconds lines, one set per repo.
+
+    """
+    out = [
+        "# TYPE nemik_open_leaves gauge",
+        "# TYPE nemik_open_leaf_age_seconds gauge",
+    ]
+    for repo, ledger in workstream_files(root, LEDGER):
+        queue = ledger.parent / QUEUE
+        text = queue.read_text(encoding="utf-8") if queue.is_file() else ""
+        ages: list[float] = []
+        for issued in open_leaf_stamps(text):
+            try:
+                born = datetime.fromisoformat(issued)
+            except ValueError:
+                continue
+            ages.append(max(0.0, (now - born).total_seconds()))
+        out.append(f"nemik_open_leaves{label(repo=repo)} {len(ages)}")
+        ages.sort()
+        if ages:
+            for quantile, value in (("0.5", ages[len(ages) // 2]), ("1", ages[-1])):
+                tags = label(repo=repo, quantile=quantile)
+                out.append(f"nemik_open_leaf_age_seconds{tags} {value:.0f}")
+    return out
 
 
 def working_tick_lines(root: Path) -> list[str]:
@@ -120,6 +158,8 @@ HELP = {
     "nemik_ledger_lines": "Parsed ledger lines per repo by effort class and kind.",
     "nemik_ledger_unparsed": "Legacy or malformed ledger lines mtools returned unparsed.",
     "nemik_working_ticks": "Ledger ticks per repo by card kind: directed, leaf, interior.",
+    "nemik_open_leaves": "Open cards per repo that nothing waits on.",
+    "nemik_open_leaf_age_seconds": "Age of the open leaves from issued_at, by quantile.",
     "nemik_blocks_inbound": "Open waypoints elsewhere waiting on this repo, claimed or not.",
     "nemik_waiting_on": "Open waypoints elsewhere waiting on this repo, by its liveness.",
     "nemik_pathsforward_adoption": "1 per repo naming how its queue writer is installed.",
@@ -621,6 +661,8 @@ GRAPH_FREE = frozenset(
         "nemik_ledger_lines",
         "nemik_ledger_unparsed",
         "nemik_working_ticks",
+        "nemik_open_leaves",
+        "nemik_open_leaf_age_seconds",
         "nemik_run_log_unmigrated",
         "nemik_cards_completed_24h",
         "nemik_commits_24h",
@@ -824,6 +866,10 @@ def main(argv: list[str] | None = None) -> None:
             lambda: ledger_rows(args.root),
         ),
         (("nemik_working_ticks",), lambda: working_tick_lines(args.root)),
+        (
+            ("nemik_open_leaves", "nemik_open_leaf_age_seconds"),
+            lambda: open_leaf_lines(args.root, now),
+        ),
     ]
     out += [line for names, produce in steps if asked(*names) for line in produce()]
     # nemik:W640: the survey kept its caches before the families ran; keep the flow solves the
