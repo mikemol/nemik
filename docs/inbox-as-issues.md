@@ -84,18 +84,40 @@ The operator counts a private repo as their own account. So:
 
 - Letters between the operator's repos go only to private repos of theirs: no new disclosure.
 - A letter to a public repo is disclosure. The adapter must refuse to open an issue on a
-  public repo unless the letter is marked releasable, and say why when it refuses.
+  public repo unless the letter is marked releasable, and say why when it refuses. A repo's
+  visibility can change after it was last seen, so the adapter reads it at send time and
+  never caches it.
 - No credential is written to disk by nemik: the API token comes from the environment the
   operator already provisions, and the YubiKey is never opened.
 - Nothing is sent until this design is reviewed and a card says so.
 
 ## The queue read
 
-Each repo's queue would be fetched at a pinned ref rather than opened from a sibling
-directory: `(repo, ref) -> paths-forward.json`, ref a commit sha, so a fleet read names the
-exact state it read and is repeatable. A moving ref (the default branch head) is allowed
-only where the read says it is live. The ledger and the `inbox/` fold would be fetched the
-same way. This is the harder half: the fleet read today is cheap because it is local.
+Each repo's queue would be read through one function a tool can call, not opened from a
+sibling directory:
+
+    read_queue(repo, ref_or_live, max_age) -> the paths-forward.json document, and how old it is
+
+- **`ref`** is a commit sha: repeatable, cacheable forever, and for audits (history, a fleet
+  read that must name the exact state it read).
+- **`live`** is the queue as its owner has it now. A queue is edited live and committed
+  rarely, so a sha read can be hours behind the queue a blocker watch needs ("is W1480
+  done?"). Live needs a publisher: either the owner's queue published on its own channel
+  (nemik-serve's documents carry it) or, for a repo on the same machine, a read of its
+  working tree. A branch head is not live, because nothing publishes uncommitted edits.
+- **Freshness is the caller's to state.** `max_age` is the staleness the consumer accepts: a
+  blocker watch and `nemik-inbound` ask for live with a bound of minutes; the history and the
+  viewer's documents accept a sha. The answer carries its age, so a consumer can refuse it.
+- **Offline.** A tick must not block on the network. When the read cannot be made, the answer
+  is the last good read, marked stale with its age; a caller that cannot use a stale answer
+  says so. The function never waits on a connection past a stated bound.
+
+The consumers are not only nemik: mtools' own code reads peers' queues the same way today
+(the foreign-blocker reader, `--inbound`, `--prune-landed`, the blocker watch, all opening
+`<root>/<repo>/.claude/paths-forward.json` by path), and its lint (mtools:W1708) will ratchet
+those reads to zero. They are named consumers of `read_queue`, so one interface fits both.
+The ledger and the `inbox/` fold are read the same way. This is the harder half: the fleet
+read today is cheap because it is local.
 
 ## What this leaves unsolved
 
@@ -107,8 +129,13 @@ same way. This is the harder half: the fleet read today is cheap because it is l
   point, but needs a read-only token in the pod and a decision on where it lives.
 - **Ordering and identity.** Issues number per repo; activities need a stable id. The id
   should be a URL the actor owns (ActivityStreams `id`), not the issue number alone.
-- **Local-only repos.** A repo with no remote cannot receive an issue. It stays on the
-  `inbox/` transport, which is why that transport is kept.
+- **Local-only repos, and the file fallback as a sibling reach.** A repo with no remote
+  cannot receive an issue, so it stays on the `inbox/` transport. But delivery to another
+  repo's `inbox/` is a write into `../<repo>/inbox`, exactly the reach mtools:W1708's lint
+  ratchets to zero. Proposal, for the operator to confirm: nemik's adapter is the ONE named
+  place allowed to know sibling paths, a single declared allowlist entry in the lint, so
+  exactly one repo knows; a broker for local-only delivery is the alternative, and costs a new
+  moving part for a fallback that should shrink as repos gain remotes.
 - **Summit's floor.** Asks to summit's floor use `floor/inbox/<slug>.bib`
   (`nemik-ask`); that is summit's own format and stays summit's, with the Offer mapping
   proposed to summit rather than imposed.
@@ -117,9 +144,11 @@ same way. This is the harder half: the fleet read today is cheap because it is l
 
 1. This design, reviewed by mtools:W1710's author and the operator.
 2. A pure function from a letter (path, header, body) to an activity and back, with a test
-   that round-trips every letter in the fixture fleet. No network.
+   that round-trips every letter in the fixture fleet. No network. The queue round trip uses
+   mtools' pinned fixture `hooks/tests/fixtures/queue/alpha`, byte-identical to nemik's W519
+   fixture and pinned by git blob hash, so a format change breaks both at once.
 3. An `Inbox` interface with the file transport behind it, so `nemik-inbound` and
    `nemik-check --letters` read through it and nothing else changes.
 4. A read-only GitHub transport for private repos, behind the same interface, off by default.
-5. The pinned queue fetch, with the ref cache.
+5. `read_queue` with the pinned fetch, the ref cache, the live publisher and the offline answer.
 6. Writing (opening an issue), only after 1 to 5 and an explicit go.
