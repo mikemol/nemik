@@ -79,6 +79,8 @@ aside a { color: var(--ink); text-decoration: underline dotted var(--muted); }
 /* nemik:W665 (WCAG 2.5.8, judged by data/wcag.rego): every pointer target in the panel is at least 24 px
    high, so rows of buttons and links a few pixels apart no longer crowd each other's 24 px circle. */
 aside a { display: inline-block; min-height: 24px; line-height: 24px; }
+#cardlist ul { padding-left: 12px; margin: 0; }
+#cardlist button[data-card] { max-width: 100%; overflow-wrap: anywhere; }
 aside details.sec > summary, #cardlist button, #sources button, #sources input { min-height: 24px; }
 .srcrow { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0; }
 .srcrow input { flex: 1 1 6em; min-width: 0; }
@@ -153,7 +155,7 @@ aside details.sec > summary, #cardlist button, #sources button, #sources input {
     <div id="detail" class="stat">Click a waypoint.</div>
     </details>
     <details class="sec" id="sec-cards" data-closed-by-default><summary>Cards</summary>
-    <ul id="cardlist" class="stat"></ul>
+    <ul id="cardlist" class="stat" role="tree" aria-label="Cards"></ul>
     </details>
     <details class="sec" id="sec-findings" data-closed-by-default><summary>Findings</summary>
     <div id="findings"></div>
@@ -298,6 +300,7 @@ const depEdges = () => data.edges.filter(e => e.kind === "enables" || e.kind ===
   .map(e => (e.kind === "enables" ? [e.source, e.target] : [e.target, e.source]));
 let keepOpen = new Set();
 const expanded = new Set();  // nemik:W350: umbrellas the reader opened with a double-click
+const closedTree = new Set();  // nemik:W725: card-list rows the reader folded (open unless listed)
 
 // Each card's rings, as scope ids. The view chain is over what is drawn; the selected chain over the
 // selected card's cone (everything it transitively waits on or enables), whatever is drawn.
@@ -464,18 +467,31 @@ function cardList() {
   // an unclaimed placeholder is another repo's ask, labelled with its cite, not a card of its own
   const rows = cy.nodes("[symbol]").filter(n => n.visible() && n.data("state") !== "unclaimed").toArray()
     .sort((a, b) => (b.data("salience") || 0) - (a.data("salience") || 0) || (a.id() < b.id() ? -1 : 1));
-  const html = rows.map(n => {
-    const d = n.data(), id = esc(n.id());
+  // nemik:W481, W725: the list is a tree. Each visible card sits under the heaviest visible thing it enables
+  // (treeOf, the forest the treemap uses), in the list's own order; a card with nothing under it is a leaf.
+  const byId = new Map(rows.map(n => [n.id(), n]));
+  const rank = new Map(rows.map((n, i) => [n.id(), i]));
+  const tree = treeOf(rows.map(n => n.data()), cy.edges().toArray()
+    .filter(e => byId.has(e.source().id()) && byId.has(e.target().id()))
+    .map(e => ({ kind: e.hasClass("waits") ? "waits" : "enables", source: e.source().id(), target: e.target().id() })));
+  const under = id => (tree.kids.get(id) || []).filter(k => byId.has(k)).sort((a, b) => rank.get(a) - rank.get(b));
+  const item = (id, level) => {
+    const n = byId.get(id), d = n.data(), kids = under(id), open = !closedTree.has(id), esId = esc(id);
     // nemik:W688: the badge's count is visible text (WCAG 2.5.3), so the name carries it, in words
     const warned = (d.warnings || []).length;
     const name = `${d.state || ""} ${d.symbol}${warned ? ` ${warned} warning${warned > 1 ? "s" : ""}` : ""}: ${d.title || ""}`;
-    const umbrella = d.rollup || expanded.has(n.id());
+    const umbrella = d.rollup || expanded.has(id);
     const toggle = umbrella
-      ? ` <button type="button" tabindex="-1" data-toggle="${id}" aria-expanded="${expanded.has(n.id())}">${expanded.has(n.id()) ? "collapse" : `expand ${d.rollup}`}</button>`
+      ? ` <button type="button" tabindex="-1" data-toggle="${esId}" aria-expanded="${expanded.has(id)}">${expanded.has(id) ? "collapse" : `expand ${d.rollup}`}</button>`
       : "";
-    return `<li><button type="button" tabindex="-1" data-card="${id}" aria-label="${esc(name)}"`
-      + ` aria-current="${n.id() === selectedId}">${esc(d.label || d.symbol)}</button>${toggle}</li>`;
-  }).join("");
+    const folds = kids.length ? ` aria-expanded="${open}"` : "";
+    const group = kids.length
+      ? `<ul role="group"${open ? "" : " hidden"}>${kids.map(k => item(k, level + 1)).join("")}</ul>` : "";
+    return `<li role="none"><button type="button" role="treeitem" tabindex="-1" data-card="${esId}" aria-level="${level}"${folds}`
+      + ` aria-label="${esc(name)}" aria-current="${id === selectedId}">${esc(d.label || d.symbol)}</button>${toggle}${group}</li>`;
+  };
+  const roots = rows.map(n => n.id()).filter(id => !byId.has(tree.parent.get(id)));
+  const html = roots.map(id => item(id, 1)).join("");
   if (!paint(list, html)) return;  // nothing the list shows moved: leave it, and the focus in it, alone
   // nemik:W478: one tab stop for the whole list (a roving tabindex): the focused control if it survived,
   // else the selected card's row, else the first
@@ -505,7 +521,8 @@ document.getElementById("cardlist").addEventListener("focusout", ev => {
   popHide();
 });
 document.getElementById("cardlist").addEventListener("keydown", ev => {
-  const rows = [...document.querySelectorAll("#cardlist button[data-card]")];
+  // nemik:W725: a folded row's children are hidden, so they are not stops
+  const rows = [...document.querySelectorAll("#cardlist button[data-card]")].filter(b => !b.closest("[hidden]"));
   const at = ev.target.closest("li"), i = rows.indexOf(at && at.querySelector("button[data-card]"));
   if (i < 0) return;
   let next = null;
