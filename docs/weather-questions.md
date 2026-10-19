@@ -44,6 +44,36 @@ Derived from them:
 | Every forecast kept, with its issue time and lead | 1, 2 | not yet built (nemik W747) | the shingle is append-only by design: each issue stores the features it read, so a later verification can rebuild the question it answered |
 | The climate at issue time, for the baselines | 2 | derivable from the events up to that time | W746 must be a function of (events, time), not of the live queue |
 
+## The resolution floor: what the sampling rate allows
+
+The operator's second ruling (2026-10-19, record 86072, warranted on W743): ensure the sampling
+rate is sufficient for the resolution desired, and be mindful of the boundaries the sampling rate
+of the data at hand imposes. Two sources feed the series, and they sample differently:
+
+- **Backfilled history is commit-grain.** The sample is a commit of the queue file. Every
+  mutation between two commits collapses into one diff, so a round trip inside a commit (ready,
+  working, ready) is invisible, and every timestamp is the commit's time, not the mutation's.
+  The queue is committed far less often than it is written (nemik 12 commits a day, but mtools
+  44 hours between two; three repos never; `docs/status-history-survey.md`).
+- **The live feed is mutation-grain**, once mtools:W1731 lands. Until then there is no finer
+  source.
+
+So backfilled events carry a `grain` of `commit`, and the live ones `mutation`. What each
+question can claim, at commit grain:
+
+| Question | At commit grain | Floor |
+|---|---|---|
+| Forecast read (1) | a probability for a lead is fine; it is a forecast, not an observation | none |
+| Lining up over time (2) | the truth a forecast is scored against is the commit's | do not score at a lead shorter than the repo's typical commit gap; per repo, that gap is the floor (`nemik-history --density`) |
+| Improve the forecast (3) | features are read at commit times | a feature that changes faster than the grain cannot be tested |
+| Improve the climate (4, 7) | an intervention is seen in a window of at least a few commits | before and after windows no shorter than several commit gaps |
+| Lead time ready to done (5) | the ready and done instants are the commits that first show them | understated or overstated by up to one gap each; report the gap beside the figure |
+| Reopen rate (6) | a done card that reopens and closes again inside one commit is invisible | a lower bound |
+| Time in working, stalls (8) | time in a state is measured between commits | a lower bound; a state shorter than the gap is not seen |
+
+A figure computed from the backfill states its grain, and W748 refuses to score a forecast
+whose lead is below the grain of the truth it would be scored against.
+
 ## What this asks of each owner
 
 - **nemik** (this repo): W744 emits a card's starting values on a mint, and grows its tracked
