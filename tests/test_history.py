@@ -7,6 +7,7 @@ from __future__ import annotations
 import json
 import os
 import subprocess
+import tempfile
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -26,6 +27,9 @@ from nemik.history import (
     weekly,
 )
 
+# The slim-queue cache of this run is a directory of its own, not the user's.
+os.environ["NEMIK_CACHE_DIR"] = tempfile.mkdtemp(prefix="nemik-history-cache-")
+
 
 def test_the_commit_history_of_a_queue_is_a_list_of_events(tmp_path: Path) -> None:
     """nemik:W744: the first commit mints W1, the second closes it and mints W2."""
@@ -34,8 +38,10 @@ def test_the_commit_history_of_a_queue_is_a_list_of_events(tmp_path: Path) -> No
     changes = [(station, field, was, now) for station, _, field, was, now, _ in got]
     assert changes == [
         ("a:W1", "card", "", "minted"),
+        ("a:W1", "status", "", "ready"),
         ("a:W1", "status", "ready", "done"),
         ("a:W2", "card", "", "minted"),
+        ("a:W2", "status", "", "ready"),
     ]
     assert got[0][5] == first
 
@@ -50,6 +56,7 @@ def test_a_start_date_compares_the_first_commit_after_it_with_the_state_before(
     assert changes == [
         ("a:W1", "status", "ready", "done"),
         ("a:W2", "card", "", "minted"),
+        ("a:W2", "status", "", "ready"),
     ]
 
 
@@ -61,7 +68,10 @@ def test_a_null_or_empty_field_in_a_committed_queue_reads_as_empty(
     card = _wp("W3", "ready", blocked_kind=None, blocked_on=[])
     _commit(repo, {"waypoints": [card], "residue": []}, "2026-10-06T12:00:00Z")
     third = [event for event in backfill("a", repo) if event[0] == "a:W3"]
-    assert [event[2:5] for event in third] == [("card", "", "minted")]
+    assert [event[2:5] for event in third] == [
+        ("card", "", "minted"),
+        ("status", "", "ready"),
+    ]
 
 
 def test_ledger_lines_are_counted_from_a_stamp(tmp_path: Path) -> None:
@@ -106,7 +116,8 @@ def test_slim_drops_what_no_history_reader_uses_and_keeps_its_answers() -> None:
         ],
         "residue": [{"symbol": "W0", "reason": "r" * 500}],
     }
-    assert "evidence" not in str(slim(old))
+    assert "x" * 500 not in str(slim(old))
+    assert "'evidence_len': '500'" in str(slim(old))
     assert "title" not in str(slim(new))
     assert "r" * 500 not in str(slim(new))
     assert diff(slim(old), slim(new)) == diff(old, new)

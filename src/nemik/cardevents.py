@@ -15,20 +15,31 @@ stations and the repos the regions (nemik:W743). Pure functions over parsed queu
 Event = tuple[str, str, str, str, str, str]
 Queue = dict[str, list[dict[str, str | list[str]]]]
 
-FIELDS = ("status", "blocked_kind", "blocked_on", "enables")
+FIELDS = (
+    "status",
+    "blocked_kind",
+    "blocked_on",
+    "enables",
+    "manifest",
+    "size_class",
+    "weight",
+    "touches",
+    "evidence_len",
+    "next_len",
+)
 
 
 def _text(value: str | list[str]) -> str:
     """Write one field value as the single string an event carries.
 
+    A queue reaches here in the slim form (`history.slim`), where every value is text or a list of
+    text; a null or a number has been written as text there, before an event is made.
+
     Returns:
-        The string itself, a list joined by commas, or "" for an empty list or a null a queue
-        stores for a field that is unset.
+        The string itself, or a list joined by commas.
 
     """
-    if isinstance(value, str):
-        return value
-    return ",".join(value) if value else ""
+    return value if isinstance(value, str) else ",".join(value)
 
 
 def _states(queue: Queue) -> dict[str, dict[str, str]]:
@@ -72,6 +83,12 @@ def events_of(repo: str, old: Queue, new: Queue, sha: str, stamp: str) -> list[E
         station = f"{repo}:{symbol}"
         if symbol not in before:
             out.append((station, stamp, "card", "", "minted", sha))
+            # its starting values, each as a change from nothing, so no card reads empty
+            out.extend(
+                (station, stamp, name, "", after[symbol][name], sha)
+                for name in FIELDS
+                if after[symbol][name]
+            )
             continue
         for name in FIELDS:
             was, now = before[symbol][name], after[symbol][name]

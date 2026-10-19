@@ -40,7 +40,9 @@ def backfill(repo: str, repo_dir: Path, since: str | None = None) -> list[Event]
 
     """
     out: list[Event] = []
-    before: QueueDoc = queue_at(repo_dir, resolve(repo_dir, since)) if since else {}
+    before: QueueDoc = {}
+    if since:
+        before = slim(queue_at(repo_dir, resolve(repo_dir, since)))
     for sha, at, queue in commit_snapshots(repo_dir, since):
         out.extend(events_of(repo, before, queue, sha, at.isoformat()))
         before = queue
@@ -64,7 +66,8 @@ _SLIM: dict[str, QueueDoc] = {}
 
 
 def _slim_path(oid: str) -> Path:
-    return user_dir() / "slim" / f"{oid}.z"
+    # slim2: the slim queue grew fields (W752), so a file of the older shape must not be read
+    return user_dir() / "slim2" / f"{oid}.z"
 
 
 def _slim_known(oid: str) -> bool:
@@ -205,25 +208,61 @@ def resolve(repo: Path, spec: str | None) -> str | None:
     return spec
 
 
-KEPT = ("symbol", "status", "blocked_kind", "enables", "blocked_on")
+KEPT = (
+    "symbol",
+    "status",
+    "blocked_kind",
+    "enables",
+    "blocked_on",
+    "manifest",
+    "size_class",
+    "weight",
+    "touches",
+)
+# the long text fields, kept as their length: the bits a forecast needs are that they changed and
+# by how much (docs/weather-questions.md), and they are half the bytes of a committed queue
+LENGTHS = {"evidence": "evidence_len", "next_bounded_step": "next_len"}
+
+
+def _plain(value: str | list[str] | int | None) -> str | list[str]:
+    """Write a queue value as a string or a list of strings.
+
+    A queue stores numbers (weight) and nulls (an unset field) beside text; the events and the
+    slim cache carry text only.
+
+    Returns:
+        The value as text, a list as a list of text, a null or empty value as "".
+
+    """
+    if isinstance(value, str):
+        return value
+    if isinstance(value, list):
+        return [str(item) for item in value]
+    return str(value) if value or value == 0 else ""
 
 
 def slim(queue: QueueDoc) -> QueueDoc:
-    """Keep only what the history readers use of a parsed queue (nemik:W731).
+    """Keep only what the history readers use of a parsed queue (nemik:W731, W752).
 
-    They read each waypoint's symbol, status, blocked_kind, enables and blocked_on, and each
-    residue entry's symbol. Evidence and titles are half the bytes of a committed queue and no
-    reader of history looks at them.
+    They read each waypoint's symbol, status, blocked_kind, enables, blocked_on, manifest,
+    size_class, weight and touches, and each residue entry's symbol, all as text; and, for the
+    long text fields, how long they are. Evidence and titles are half the bytes of a committed
+    queue and no reader of history looks at their text.
 
     Returns:
         A queue with those fields and no others.
 
     """
+    cards = []
+    for w in queue.get("waypoints", []):
+        card = {key: _plain(w[key]) for key in KEPT if key in w}
+        for source, name in LENGTHS.items():
+            size = len(str(_plain(w.get(source, ""))))
+            if size:
+                card[name] = str(size)
+        cards.append(card)
     return {
-        "waypoints": [
-            {key: w[key] for key in KEPT if key in w}
-            for w in queue.get("waypoints", [])
-        ],
+        "waypoints": cards,
         "residue": [
             {"symbol": r["symbol"]} for r in queue.get("residue", []) if "symbol" in r
         ],

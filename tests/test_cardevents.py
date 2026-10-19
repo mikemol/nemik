@@ -21,6 +21,7 @@ def test_a_new_card_is_minted_and_a_status_change_is_one_event() -> None:
     assert events_of("nemik", old, new, SHA, AT) == [
         ("nemik:W1", AT, "status", "ready", "done", SHA),
         ("nemik:W2", AT, "card", "", "minted", SHA),
+        ("nemik:W2", AT, "status", "", "ready", SHA),
     ]
 
 
