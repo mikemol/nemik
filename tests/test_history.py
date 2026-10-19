@@ -16,10 +16,30 @@ from nemik.history import (
     queue_at,
     queues_text_at,
     resolve,
+    slim,
     snapshots,
     time_in_state,
     weekly,
 )
+
+
+def test_slim_drops_what_no_history_reader_uses_and_keeps_its_answers() -> None:
+    """nemik:W731: evidence and titles go; the diff of two queues is the same on the slim ones."""
+    old: dict[str, list[dict[str, object]]] = {
+        "waypoints": [{"symbol": "W1", "status": "ready", "evidence": "x" * 500}],
+        "residue": [],
+    }
+    new: dict[str, list[dict[str, object]]] = {
+        "waypoints": [
+            {"symbol": "W1", "status": "done", "title": "t", "enables": ["W2"]},
+            {"symbol": "W2", "status": "blocked", "blocked_on": ["mtools:W9"]},
+        ],
+        "residue": [{"symbol": "W0", "reason": "r" * 500}],
+    }
+    assert "evidence" not in str(slim(old))
+    assert "title" not in str(slim(new))
+    assert "r" * 500 not in str(slim(new))
+    assert diff(slim(old), slim(new)) == diff(old, new)
 
 
 def test_the_queue_at_many_revisions_is_read_by_one_git_process(tmp_path: Path) -> None:

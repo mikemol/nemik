@@ -139,6 +139,33 @@ def resolve(repo: Path, spec: str | None) -> str | None:
     return spec
 
 
+KEPT = ("symbol", "status", "blocked_kind", "enables", "blocked_on")
+
+
+def slim(
+    queue: dict[str, list[dict[str, object]]],
+) -> dict[str, list[dict[str, object]]]:
+    """Keep only what the history readers use of a parsed queue (nemik:W731).
+
+    They read each waypoint's symbol, status, blocked_kind, enables and blocked_on, and each
+    residue entry's symbol. Evidence and titles are half the bytes of a committed queue and no
+    reader of history looks at them.
+
+    Returns:
+        A queue with those fields and no others.
+
+    """
+    return {
+        "waypoints": [
+            {key: w[key] for key in KEPT if key in w}
+            for w in queue.get("waypoints", [])
+        ],
+        "residue": [
+            {"symbol": r["symbol"]} for r in queue.get("residue", []) if "symbol" in r
+        ],
+    }
+
+
 def queues_text_at(repo: Path, revs: list[str]) -> list[str]:
     """Read the queue file's text at each of `revs` with one git process, '' where there is none.
 
