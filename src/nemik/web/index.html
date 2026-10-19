@@ -49,6 +49,16 @@ aside h2 { font-size: 14px; margin: 16px 0 6px; }
   background: var(--panel); color: var(--ink); border: 1px solid var(--line); border-radius: 6px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3); font-size: 12px; }
 #pop[hidden] { display: none; }
+/* nemik:W472: the shortcut list and the jump box share one dialog, built from the keymap table */
+#keyhelp { position: fixed; z-index: 20; top: 12vh; left: 50%; transform: translateX(-50%); width: min(560px, 92vw);
+  max-height: 70vh; overflow: auto; padding: 12px 16px; background: var(--panel); color: var(--ink);
+  border: 1px solid var(--line); border-radius: 8px; }
+#keyhelp[hidden] { display: none; }
+#keyhelp h2 { font-size: 15px; margin: 0 0 8px; }
+#keyhelp dl { display: grid; grid-template-columns: max-content 1fr; gap: 4px 12px; margin: 0; }
+#keyhelp dd { margin: 0; }
+#keyhelp kbd { font: inherit; border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; }
+#keyhelp input { font: inherit; color: inherit; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 4px 6px; width: 100%; }
 /* nemik:W473: read by a screen reader, not drawn */
 .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 aside details.sec > summary { font-size: 14px; font-weight: 600; margin: 16px 0 6px; cursor: pointer; }
@@ -97,6 +107,13 @@ aside details.sec > summary, #cardlist button, #sources button, #sources input {
 <main>
   <div id="cy"></div>
   <div id="pop" role="tooltip" hidden></div>
+  <div id="keyhelp" role="dialog" aria-labelledby="keyhelp-title" tabindex="-1" hidden>
+    <h2 id="keyhelp-title">Keyboard shortcuts</h2>
+    <dl id="keylist"></dl>
+    <form id="jumpform" hidden>
+      <label>Jump to a card by cite or title <input id="jump" type="text" autocomplete="off"></label>
+    </form>
+  </div>
   <aside>
     <!-- nemik:W387: every panel section folds (details/summary: keyboard-operable, announced as
          expandable); which are open is remembered per viewer. -->
@@ -1331,7 +1348,54 @@ document.getElementById("pop").addEventListener("mouseenter", () => clearTimeout
 // a pointer leaving the canvas from a card fires no cytoscape mouseout, so the canvas says so itself
 document.getElementById("cy").addEventListener("mouseleave", popLater);
 document.getElementById("pop").addEventListener("mouseleave", popLater);
-document.addEventListener("keydown", ev => { if (ev.key === "Escape") popHide(); });
+// nemik:W472: one table of keys; the key handler and the ? overlay both read it, so the help cannot drift
+// from the keys. Keys other than Escape act on their own, so they honour the "single-key shortcuts" setting
+// (WCAG 2.1.4, nemik:W471) and stay out of text fields. Escape always closes.
+const keyhelp = document.getElementById("keyhelp"), jumpform = document.getElementById("jumpform");
+let beforeHelp = null;
+function openHelp(jump) {
+  beforeHelp = document.activeElement;
+  keyhelp.hidden = false;
+  jumpform.hidden = !jump;
+  (jump ? document.getElementById("jump") : keyhelp).focus();
+}
+function closeHelp() {
+  keyhelp.hidden = true;
+  document.getElementById("jump").value = "";
+  if (beforeHelp && beforeHelp.focus) beforeHelp.focus();
+}
+const ACTIONS = {
+  help: () => (keyhelp.hidden || !jumpform.hidden ? openHelp(false) : closeHelp()),
+  jump: () => openHelp(true),
+  close: () => (keyhelp.hidden ? popHide() : closeHelp()),
+};
+const KEYMAP = [
+  { key: "?", mode: "any", action: "help", description: "show or hide this list of shortcuts" },
+  { key: "/", mode: "any", action: "jump", description: "jump to a card by cite or title" },
+  { key: "Escape", mode: "any", action: "close", description: "close this panel, or the card popover" },
+];
+document.getElementById("keylist").innerHTML = KEYMAP.map(k =>
+  `<dt><kbd>${esc(k.key)}</kbd></dt><dd>${esc(k.description)}</dd>`).join("");
+document.addEventListener("keydown", ev => {
+  if (ev.ctrlKey || ev.metaKey || ev.altKey) return;
+  const entry = KEYMAP.find(k => k.key === ev.key);
+  if (!entry) return;
+  if (entry.action !== "close") {
+    const typing = ev.target.closest && ev.target.closest("input, textarea, select, [contenteditable]");
+    if (typing || !document.getElementById("shortcuts").checked) return;
+  }
+  ev.preventDefault();
+  ACTIONS[entry.action]();
+});
+jumpform.addEventListener("submit", ev => {
+  ev.preventDefault();
+  const q = document.getElementById("jump").value.trim().toLowerCase();
+  const hit = q && (data.nodes.find(n => (n.cite || "").toLowerCase() === q)
+    || data.nodes.find(n => (n.cite || "").toLowerCase().includes(q) || (n.title || "").toLowerCase().includes(q)));
+  if (!hit) { document.getElementById("announce").textContent = `no card matches ${q}`; return; }
+  closeHelp();
+  focusCite(hit.cite);
+});
 // nemik:W462: the Selected panel's rows, also shown by the hover popover, from one source
 function detailHTML(n) {
   const e = n.effort || {};
