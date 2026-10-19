@@ -324,3 +324,28 @@ def label(blockers: list[str], enables: list[str], members: list[str]) -> str:
     waits = ", ".join(blockers) if blockers else "nothing"
     opens = ", ".join(enables) if enables else "nothing"
     return f"{len(members)} cards collapse under {waits} (they enable {opens})"
+
+
+def lines(blocked: dict[str, Row]) -> list[str]:
+    """Print the umbrellas and the escapes of a set of open cards, for nemik-collapse (W711).
+
+    Args:
+        blocked: Each open card's (waits, enables), as `repo:W<n>` references.
+
+    Returns:
+        One header line, then each umbrella with its members' addresses indented under it, then
+        one line per enables edge whose target does not wait on its source. Nothing is applied.
+
+    """
+    umbrellas = collapse(blocked)
+    address = paths(blocked, umbrellas)
+    escapes = disagreements(blocked)
+    counts = f"{len(umbrellas)} umbrella(s), {len(escapes)} escape(s)"
+    out = [f"{counts} over {len(blocked)} open card(s)"]
+    for name, blockers, enables, members in umbrellas:
+        out.append(f"{name}: {label(blockers, enables, members)}")
+        out.extend(f"  {address[member]}" for member in members)
+    out.extend(
+        f"escape: {card} enables {e}, which does not wait on it" for card, e in escapes
+    )
+    return out
