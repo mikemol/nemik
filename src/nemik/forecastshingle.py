@@ -43,6 +43,25 @@ def expected_done(leads: list[float], ages: list[float], horizon: float) -> floa
     return sum(done_by(leads, age, horizon) for age in ages)
 
 
+def shingle_rows(
+    issued: str, station: str, age: float, chances: dict[str, float]
+) -> list[list[str]]:
+    """Lay one card's issue out as shingle rows, one per lead, ready to append.
+
+    A shingle keeps every issue with its lead, so a later issue never overwrites an earlier one and
+    nemik:W748 can score each lead on its own. A row is: the issue time, the station, the lead
+    label, the card's age at issue in days, and the chance, as text.
+
+    Returns:
+        [[issued, station, lead, age, chance], ...] in the order of `chances`.
+
+    """
+    return [
+        [issued, station, lead, f"{age:g}", f"{chance:g}"]
+        for lead, chance in chances.items()
+    ]
+
+
 def issue(leads: list[float], age: float, horizons: list[float]) -> dict[str, float]:
     """Issue one card's forecast at every horizon (HORIZONS is the usual set).
 
