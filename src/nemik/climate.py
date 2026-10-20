@@ -188,6 +188,64 @@ def _quantile(sorted_values: list[float], share: float) -> float:
     return sorted_values[int(share * (len(sorted_values) - 1))]
 
 
+def leads_by_repo(events: list[Event], moment: str) -> dict[str, list[float]]:
+    """List, per repo, the days each card took from mint to its first done, by one moment.
+
+    Only cards whose minting was seen and that were done at or before `moment` count; the lists
+    are sorted ascending, the lead times a forecast (nemik:W747) is made from.
+
+    Returns:
+        {repo: [days, ...]}.
+
+    """
+    until = datetime.fromisoformat(moment)
+    born: dict[str, datetime] = {}
+    closed: set[str] = set()
+    out: dict[str, list[float]] = {}
+    for station, stamp, field, _, now, _ in events:
+        at = datetime.fromisoformat(stamp)
+        if at > until:
+            continue
+        if field == "card" and now == "minted":
+            born[station] = at
+        elif field == "status" and now == "done" and station not in closed:
+            closed.add(station)
+            if station in born:
+                repo = station.partition(":")[0]
+                out.setdefault(repo, []).append(_days(born[station], at))
+    return {repo: sorted(days) for repo, days in out.items()}
+
+
+def open_ages(events: list[Event], moment: str) -> dict[str, float]:
+    """Give the age in days, at one moment, of every card that was minted and still open.
+
+    A card's age runs from its minting; a card whose status is done, dropped or removed at
+    `moment` is left out, as is one whose minting was not seen.
+
+    Returns:
+        {station: days}.
+
+    """
+    until = datetime.fromisoformat(moment)
+    born: dict[str, datetime] = {}
+    standing: dict[str, str] = {}
+    for station, stamp, field, _, now, _ in events:
+        at = datetime.fromisoformat(stamp)
+        if at > until:
+            continue
+        if field == "card":
+            standing[station] = "" if now == "minted" else now
+            if now == "minted":
+                born[station] = at
+        elif field == "status":
+            standing[station] = now
+    return {
+        station: _days(born[station], until)
+        for station, status in standing.items()
+        if station in born and status not in CLOSED
+    }
+
+
 def climate_of(
     events: list[Event], start: str, end: str
 ) -> dict[str, dict[str, float]]:
