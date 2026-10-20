@@ -7,8 +7,10 @@ Brier score is the mean squared distance between the chances and the outcomes (0
 what saying 0.5 every time earns, 1 is certainty wrong every time). A forecast is only scored at a
 lead no finer than the grain of the truth it is scored against (operator ruling, record 8f3e501d:
 backfilled history is commit-grain, so a lead shorter than the gap between commits would be scored
-against noise). No import, no future import: compiles under Codon as written.
+against noise). Imports only datetime, no future import: compiles under Codon as written.
 """
+
+from datetime import datetime
 
 
 def brier(pairs: list[tuple[float, bool]]) -> float:
@@ -39,3 +41,39 @@ def scorable(lead_days: float, grain_days: float) -> bool:
 
     """
     return lead_days >= grain_days
+
+
+def score_shingle(
+    rows: list[list[str]], done_at: dict[str, str], now: str, grain_days: float
+) -> dict[str, float]:
+    """Score shingle rows (nemik:W747) per lead against when each card was done.
+
+    A row is [issued, station, lead, age, chance]. Its outcome is whether the station was done
+    at or before issued + lead, known only once that moment has passed (`now`), so a row whose
+    horizon is still ahead is left out; so is a row whose lead is finer than the grain. A card
+    already done when the row was issued is left out too: it was never forecast.
+
+    Args:
+        rows: The shingle rows.
+        done_at: {station: ISO time of its first done}; absent for a card not done.
+        now: The time the truth is read at.
+        grain_days: The grain of the observations, in days.
+
+    Returns:
+        {lead: Brier score} for each lead with at least one scorable row.
+
+    """
+    present = datetime.fromisoformat(now)
+    pairs: dict[str, list[tuple[float, bool]]] = {}
+    for issued, station, lead, _, chance in rows:
+        days = float(lead[1:-1])
+        began = datetime.fromisoformat(issued)
+        due = began.timestamp() + days * 86400
+        finished = done_at.get(station, "")
+        if not scorable(days, grain_days) or due > present.timestamp():
+            continue
+        if finished and datetime.fromisoformat(finished) <= began:
+            continue
+        outcome = bool(finished) and datetime.fromisoformat(finished).timestamp() <= due
+        pairs.setdefault(lead, []).append((float(chance), outcome))
+    return {lead: brier(found) for lead, found in pairs.items()}
