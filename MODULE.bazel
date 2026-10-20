@@ -75,6 +75,14 @@ vendored_wheel(
     wheel = "//:vendor/wheels/mikemol_frontier-0.1.0+9cd7e1b-py3-none-any.whl",
 )
 
+# nemik:W438/W771: mtools' cvdcore (mikemol.cvdcore.worst_view_dE, mtools:W1315), at the same sha: the
+# worst-view colour-blind distance tests/test_cvd_palette.py runs the view's palette through. A dev
+# dependency (it brings numpy and colorspacious); the image's runtime does not import it.
+vendored_wheel(
+    name = "cvdcore",
+    wheel = "//:vendor/wheels/mikemol_cvdcore-0.1.0+9cd7e1b-py3-none-any.whl",
+)
+
 # nemik:W98: opa, the witness evaluator, as a hashed input instead of whatever /usr/bin holds.
 http_file = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_file")
 http_file(

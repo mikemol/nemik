@@ -32,6 +32,12 @@ which reads the operator calendars the Akonadi helper exports (W147) for W113.
 `ruff` and `mypy` into the lock (the distribution's own dependencies). All three mtools wheels move
 together, to one sha, per mtools INSTALL.md.
 
+`mikemol_cvdcore-0.1.0+<sha>-py3-none-any.whl` (nemik:W438, W771) is mtools' cvdcore at the same sha
+(`git archive <sha> -- cvdcore`, `uv build --wheel`, the local version segment set to `+<sha>` in the
+archive's pyproject): `mikemol.cvdcore`, the worst-view colour-vision-deficiency distance and the
+Okabe-Ito floor (mtools:W1315). A dev dependency only: it brings `numpy` and `colorspacious`, which
+the image's runtime does not import. `mikemol-repin --revendor` lists it once the repo names it (mtools:W1787).
+
 ## Hashes
 
 `SHA256SUMS` beside the wheels, written by `mikemol-repin --revendor` on every bump (it replaced the hand script tools/revendor-mtools.sh, mtools:W1449; nemik:W417:

@@ -24,6 +24,7 @@ mikemol-icsstruct = { path = "vendor/wheels/mikemol_icsstruct-0.1.0+9cd7e1b-py3-
 mikemol-fence = { path = "vendor/wheels/mikemol_fence-0.1.0+9cd7e1b-py3-none-any.whl" }
 mikemol-rulerseq = { path = "vendor/wheels/mikemol_rulerseq-0.1.0+9cd7e1b-py3-none-any.whl" }
 mikemol-frontier = { path = "vendor/wheels/mikemol_frontier-0.1.0+9cd7e1b-py3-none-any.whl" }
+mikemol-cvdcore = { path = "vendor/wheels/mikemol_cvdcore-0.1.0+9cd7e1b-py3-none-any.whl" }
 paperkit = { git = "https://github.com/mikemol/paperkit.git", rev = "b5877102af3b48005fde814416bff5b8f06ba5cd" }
 
 [project.scripts]
@@ -76,6 +77,7 @@ dev = [
     "types-jsonschema",  # its stubs, for the mypy edit gate
     "pyyaml>=6.0",  # nemik:W504: tests/test_deploy_manifest.py reads deploy/*.yaml against the pod shape luthen agreed
     "types-pyyaml",  # its stubs, for the mypy edit gate
+    "mikemol-cvdcore",  # nemik:W438/W771: the worst-view colour-blind distance (mtools:W1315), for tests/test_cvd_palette.py; brings numpy and colorspacious
 ]
 
 [tool.pytest.ini_options]
