@@ -464,6 +464,10 @@ def _ledger_graph(repo: str, ledger_path: Path) -> tuple[Graph, int]:
             agent = URIRef(f"urn:uuid:{e.session}")
             g.add((agent, RDF.type, PROV.Agent))
             g.add((node, PROV.wasAssociatedWith, agent))
+        if e.actor == "operator":
+            # nemik:W770: a --lift the writer verified (mtools:W1790) is the operator's own act
+            g.add((OPERATOR, RDF.type, PROV.Agent))
+            g.add((node, PROV.wasAssociatedWith, OPERATOR))
     return g, unparsed
 
 

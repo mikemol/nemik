@@ -7,7 +7,7 @@ from pathlib import Path
 from rdflib import URIRef
 from rdflib.namespace import PROV, RDF
 
-from nemik.adapter import ledger_graph
+from nemik.adapter import OPERATOR, ledger_graph
 
 SESSION = "695f3e0a-d36f-4080-9c67-7548978cd99e"
 STAMPED = '2026-10-19T10:00:00Z  tick  W7  advanced  unblock  "a note"'
@@ -22,6 +22,17 @@ def test_a_line_with_a_session_names_its_agent(tmp_path: Path) -> None:
     assert not unparsed
     assert (agent, RDF.type, PROV.Agent) in graph
     assert len(list(graph.subject_objects(PROV.wasAssociatedWith))) == 1
+
+
+def test_an_operator_line_names_the_operator_agent(tmp_path: Path) -> None:
+    """actor=operator (a verified --lift, mtools:W1790) also names the operator (nemik:W770)."""
+    path = tmp_path / "paths-forward.ledger"
+    path.write_text(f"{STAMPED}  session={SESSION}  actor=operator\n", encoding="utf-8")
+    graph, unparsed = ledger_graph("demo", path)
+    assert not unparsed
+    assert (OPERATOR, RDF.type, PROV.Agent) in graph
+    agents = set(graph.objects(predicate=PROV.wasAssociatedWith))
+    assert agents == {OPERATOR, URIRef(f"urn:uuid:{SESSION}")}
 
 
 def test_a_line_without_a_session_has_no_agent(tmp_path: Path) -> None:
