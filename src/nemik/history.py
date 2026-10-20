@@ -26,9 +26,47 @@ from pathlib import Path
 from nemik.cachestore import user_dir
 from nemik.cardevents import Event, events_of
 from nemik.check import LEDGER, QUEUE, default_root, workstream_files
-from nemik.climate import waits_of
+from nemik.climate import leads_by_repo, open_ages, waits_of
+from nemik.forecastshingle import HORIZONS, issue, shingle_rows
 
 WAIT_QUANTILE = 0.9
+# the modes that read a whole history rather than diff two points of it, named by their option
+SERIES_MODES = (
+    "time_in_state",
+    "weekly",
+    "density",
+    "events",
+    "waits",
+    "forecast",
+)
+
+
+def is_series(args: argparse.Namespace, *, extra: tuple[str, ...] = ()) -> bool:
+    """Say whether the options ask for a mode that reads a whole history.
+
+    Returns:
+        True when any of SERIES_MODES, or of `extra`, is set.
+
+    """
+    return any(getattr(args, mode) for mode in SERIES_MODES + extra)
+
+
+def forecast_rows(events: list[Event], moment: str) -> list[list[str]]:
+    """Issue the forecast for every open card at one moment, as shingle rows (nemik:W747).
+
+    Each open card's chances at +1, +3 and +7 days, from the lead times of its repo's cards done by
+    then; one row per card and lead.
+
+    Returns:
+        The rows: issue time, station, lead, age in days, chance.
+
+    """
+    leads = leads_by_repo(events, moment)
+    rows: list[list[str]] = []
+    for station, age in sorted(open_ages(events, moment).items()):
+        chances = issue(leads.get(station.partition(":")[0], []), age, HORIZONS)
+        rows.extend(shingle_rows(moment, station, age, chances))
+    return rows
 
 
 def waits(
@@ -838,6 +876,12 @@ def main(argv: list[str] | None = None) -> int:
         "field, from, to, commit (W744)",
     )
     mode.add_argument(
+        "--forecast",
+        action="store_true",
+        help="issue the forecast now for every open card: the chance it is done within +1, +3 and "
+        "+7 days, one shingle row a line (W747)",
+    )
+    mode.add_argument(
         "--waits",
         action="store_true",
         help="per repo and status: how many stints in it finished, and their median and "
@@ -862,16 +906,7 @@ def main(argv: list[str] | None = None) -> int:
     args = ap.parse_args(argv)
     dirs = {r: p.parents[1] for r, p in workstream_files(args.root, QUEUE)}
     names = sorted(dirs) if args.all else args.repos
-    series = (
-        args.time_in_state
-        or args.weekly
-        or args.toil
-        or args.churn
-        or args.density
-        or args.events
-        or args.waits
-        or args.baseline is not None
-    )
+    series = is_series(args, extra=("toil", "churn")) or args.baseline is not None
     if not names or (args.start is None and not series):
         ap.error("name the repos (or --all) and a --from")
     for name in names:
@@ -886,7 +921,7 @@ def main(argv: list[str] | None = None) -> int:
         return _toil(args, names, dirs)
     if args.baseline is not None:
         return _baseline(args, names, dirs)
-    if args.time_in_state or args.weekly or args.density or args.events or args.waits:
+    if is_series(args):
         return _series(args, names, dirs)
     out: dict[str, Diff] = {}
     for name in names:
@@ -982,6 +1017,24 @@ def _events(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -
         return 0
     for event in rows:
         sys.stdout.write("\t".join(event) + "\n")
+    return 0
+
+
+def _forecast(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> int:
+    """Print the shingle rows for every open card, issued now, one tab-separated row a line.
+
+    Returns:
+        0.
+
+    """
+    moment = datetime.now(UTC).isoformat()
+    events = [e for name in names for e in backfill(name, dirs[name], args.start)]
+    rows = forecast_rows(events, moment)
+    if args.json:
+        sys.stdout.write(json.dumps(rows, indent=1) + "\n")
+        return 0
+    for row in rows:
+        sys.stdout.write("\t".join(row) + "\n")
     return 0
 
 
@@ -1102,12 +1155,14 @@ def _days(seconds: float) -> str:
 
 def _series(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> int:
     """`--time-in-state` and `--weekly` over the history from `--from` (default: all of it)."""
-    if args.density:
-        return _density(args, names, dirs)
-    if args.events:
-        return _events(args, names, dirs)
-    if args.waits:
-        return _waits(args, names, dirs)
+    for mode, run in (
+        ("density", _density),
+        ("events", _events),
+        ("waits", _waits),
+        ("forecast", _forecast),
+    ):
+        if getattr(args, mode):
+            return run(args, names, dirs)
     now = datetime.now(UTC)
     rolled: dict[str, list[dict]] = {}
     spent: dict[str, dict[str, tuple[str, dict[str, float]]]] = {}
