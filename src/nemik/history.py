@@ -41,6 +41,7 @@ SERIES_MODES = (
     "waits",
     "forecast",
     "score",
+    "oldest",
 )
 
 
@@ -920,6 +921,14 @@ def main(argv: list[str] | None = None) -> int:
         "field, from, to, commit (W744)",
     )
     mode.add_argument(
+        "--oldest",
+        type=int,
+        metavar="N",
+        help="the N oldest open cards of the named repos (--all for the fleet), oldest first: "
+        "repo:W<n>, age, status, blockers and title; a ready card is flagged untouched, a blocked "
+        "one stuck (W769)",
+    )
+    mode.add_argument(
         "--score",
         metavar="FILE",
         help="score a stored shingle (the rows --forecast printed) against the events: the Brier "
@@ -1055,6 +1064,90 @@ def _density(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) 
             f"{name}: {int(r['commits'])} commits, {r['per_day']} a day, "
             f"longest gap {r['longest_gap_hours']} h; "
             f"ledger {int(r['ledger_lines'])} lines, {r['ledger_per_day']} a day\n"
+        )
+    return 0
+
+
+OPEN_AGE_SKIP = frozenset({"done", "dropped"})
+# characters of a card's blockers that a text line shows (the JSON keeps all)
+WAITS_SHOWN = 50
+
+
+def oldest_cards(
+    docs: dict[str, object], now: datetime, limit: int
+) -> list[dict[str, str]]:
+    """List the oldest open cards of the queues, oldest first (nemik:W769).
+
+    A card's age runs from its `issued_at`; a card with none, or one that is done or dropped, is
+    left out. A ready card is flagged `untouched` (nobody has taken it) and a blocked one `stuck`
+    (a chain waiting), since an old ready card and an old blocked card are different problems.
+
+    Args:
+        docs: Each repo's parsed queue file, by repo.
+        now: The time the ages are taken at.
+        limit: How many cards to list.
+
+    Returns:
+        Up to `limit` rows: cite, age_days, status, flag, blocked_on, title.
+
+    """
+    order: list[tuple[datetime, str]] = []
+    rows: dict[str, dict[str, str]] = {}
+    for repo, doc in docs.items():
+        cards = doc.get("waypoints") if isinstance(doc, dict) else None
+        for card in cards if isinstance(cards, list) else []:
+            if not isinstance(card, dict):
+                continue
+            status, symbol = str(card.get("status", "")), str(card.get("symbol", ""))
+            try:
+                born = datetime.fromisoformat(str(card.get("issued_at", "")))
+            except ValueError:
+                continue
+            if status in OPEN_AGE_SKIP or not symbol:
+                continue
+            waits = card.get("blocked_on")
+            row = {
+                "cite": f"{repo}:{symbol}",
+                "age_days": f"{(now - born).total_seconds() / 86400:.1f}",
+                "status": status,
+                "flag": {"ready": "untouched", "blocked": "stuck"}.get(status, ""),
+                "blocked_on": ", ".join(str(w) for w in waits)
+                if isinstance(waits, list)
+                else "",
+                "title": str(card.get("title", "")),
+            }
+            order.append((born, row["cite"]))
+            rows[row["cite"]] = row
+    order.sort()
+    return [rows[cite] for _, cite in order[:limit]]
+
+
+def _oldest(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> int:
+    """Print the N oldest open cards of the named repos, one a line (nemik:W769).
+
+    Returns:
+        0.
+
+    """
+    docs: dict[str, object] = {}
+    for name in names:
+        try:
+            docs[name] = json.loads(
+                (dirs[name] / QUEUE_PATH).read_text(encoding="utf-8")
+            )
+        except (OSError, ValueError):
+            continue
+    rows = oldest_cards(docs, datetime.now(UTC), args.oldest)
+    if args.json:
+        sys.stdout.write(json.dumps(rows, indent=1) + "\n")
+        return 0
+    for r in rows:
+        held = r["blocked_on"]
+        cut = "..." if len(held) > WAITS_SHOWN else ""
+        waits = f"  blocked on {held[:WAITS_SHOWN]}{cut}" if held else ""
+        flag = f" [{r['flag']}]" if r["flag"] else ""
+        sys.stdout.write(
+            f"{r['cite']:24} {r['age_days']:>6} d  {r['status']}{flag}{waits}  {r['title']}\n"
         )
     return 0
 
@@ -1240,6 +1333,7 @@ def _series(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -
         ("waits", _waits),
         ("forecast", _forecast),
         ("score", _score),
+        ("oldest", _oldest),
     ):
         if getattr(args, mode):
             return run(args, names, dirs)
