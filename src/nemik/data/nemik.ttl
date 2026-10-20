@@ -121,6 +121,12 @@ nemik:finding a rdf:Property ; rdfs:comment "A retro's finding (a nemik:RetroFin
 nemik:findingCard a rdf:Property ; rdfs:comment "The card that carries a finding's fix; it needs an owner, a due date and a witness (nemik:W754, G7)." .
 nemik:findingOwner a rdf:Property ; rdfs:comment "Who owns a finding's card (nemik:W754, G7)." .
 nemik:findingWitness a rdf:Property ; rdfs:comment "What shows a finding's fix landed, a query and not prose (nemik:W754, G7)." .
+# nemik:W651 (gates G9 and G2): how strongly a retro's fix is enforced, and what changed.
+nemik:enforcementLayer a rdf:Property ; rdfs:comment "Where a retro's fix is enforced: memory, instructions, trigger, hook or gate, weakest to strongest (nemik:W651, G9)." .
+nemik:recurring a rdf:Property ; rdfs:comment "'true' when the retro's failure class has happened before; such a class below the hook layer is refused unless declared one-off (nemik:W651, G9)." .
+nemik:oneOff a rdf:Property ; rdfs:comment "'true' when the retro declares the failure a one-off, so a layer below hook is acceptable (nemik:W651, G9)." .
+nemik:delta a rdf:Property ; rdfs:comment "What the retro computed changed between prediction and outcome; empty is not a delta (nemik:W651, G2)." .
+
 # nemik:W755 (gate G8): a retro's handoff to whoever acts on it.
 nemik:RetroHandoff a rdfs:Class ; rdfs:comment "How a retro's fix is handed over: the instrument, the channel and who operates it (nemik:W755, G8)." .
 nemik:handoffInstrument a rdf:Property ; rdfs:comment "The tool or step the handoff uses (nemik:W755, G8)." .

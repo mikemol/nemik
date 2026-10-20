@@ -556,3 +556,45 @@ nemik:RetroHandoffShape a sh:NodeShape ;
                 FILTER(STR(?o) = "other")
                 FILTER NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#selfProbe> ?p . FILTER(STR(?p) = "executed-and-failed") }
             }""" ] .
+
+# A retro names how strongly its fix is enforced (nemik:W651, gate G9). The layers run weakest to
+# strongest: memory, instructions, trigger, hook, gate. A failure class that has recurred and is
+# fixed below the hook layer is refused unless the retro declares it a one-off: a reminder is what
+# failed the first time.
+nemik:RetroEnforcementShape a sh:NodeShape ;
+    sh:targetClass nemik:Retro ;
+    sh:severity sh:Violation ;
+    sh:sparql [
+        sh:message "the enforcement layer must be one of memory, instructions, trigger, hook, gate" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this <https://github.com/mikemol/nemik/ns#enforcementLayer> ?l .
+                FILTER(!(STR(?l) IN ("memory", "instructions", "trigger", "hook", "gate")))
+            }""" ] ;
+    sh:sparql [
+        sh:message "a recurring failure class is fixed below the hook layer (memory, instructions or trigger): move the fix to a hook or a gate, or declare the failure a one-off (oneOff true)" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this <https://github.com/mikemol/nemik/ns#recurring> ?r ;
+                      <https://github.com/mikemol/nemik/ns#enforcementLayer> ?l .
+                FILTER(STR(?r) = "true")
+                FILTER(STR(?l) IN ("memory", "instructions", "trigger"))
+                FILTER NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#oneOff> ?o . FILTER(STR(?o) = "true") }
+            }""" ] .
+
+# A retro carries a computed delta (nemik:W651, gate G2): what changed between the prediction and the
+# outcome, worked out and not narrated. Empty or absent is refused, since without it the retro cannot
+# say how it differed from the card's precommit.
+nemik:RetroDeltaShape a sh:NodeShape ;
+    sh:targetClass nemik:Retro ;
+    sh:severity sh:Violation ;
+    sh:sparql [
+        sh:message "a retro needs a non-empty computed delta: what changed between the prediction and the outcome" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this a <https://github.com/mikemol/nemik/ns#Retro> .
+                FILTER NOT EXISTS {
+                    $this <https://github.com/mikemol/nemik/ns#delta> ?d .
+                    FILTER(STRLEN(STR(?d)) > 0)
+                }
+            }""" ] .
