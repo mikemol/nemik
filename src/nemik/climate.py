@@ -78,6 +78,32 @@ def levels_series(
     return [(moment, levels_at(events, moment)) for moment in moments]
 
 
+def waits_of(events: list[Event]) -> dict[str, list[float]]:
+    """Collect how long each finished stint in a status lasted, in days, by status.
+
+    A stint runs from a card's status event to its next status event (or to the card's dropping or
+    removal); a stint still running has no length yet and is left out. `ready` and `blocked`
+    stints are the waits a rank's wait weight prices.
+
+    Returns:
+        {status: [days, ...]}, each list sorted ascending.
+
+    """
+    since: dict[str, tuple[str, datetime]] = {}
+    out: dict[str, list[float]] = {}
+    for station, stamp, field, _, now, _ in events:
+        if field not in {"status", "card"}:
+            continue
+        at = datetime.fromisoformat(stamp)
+        if station in since:
+            status, began = since.pop(station)
+            if status:
+                out.setdefault(status, []).append(_days(began, at))
+        if field == "status" or now == "minted":
+            since[station] = (now if field == "status" else "", at)
+    return {status: sorted(days) for status, days in out.items()}
+
+
 def _days(start: datetime, end: datetime) -> float:
     """Measure the days from one instant to another.
 
