@@ -1022,6 +1022,30 @@ def survey_inputs(root: Path, *, digest: bool) -> list[bytes]:
     return parts
 
 
+def finding_lines(
+    repo: str, findings: list[Finding], *, digest: bool
+) -> tuple[list[str], int]:
+    """Word one repo's survey result as print-ready lines (nemik:W784).
+
+    The one wording of the survey: nemik-check prints it and nemik-serve serves it, from the
+    findings each already holds. A repo whose queue could not be read carries one finding of
+    severity Unreadable.
+
+    Returns:
+        (lines, 1 when the repo violates or is unreadable, else 0).
+
+    """
+    if findings and findings[0][0] == "Unreadable":
+        return [f"UNREADABLE {repo}: {findings[0][2]}"], 1
+    violates = any(sev == "Violation" for sev, _, _ in findings)
+    lines = [f"{'VIOLATES  ' if violates else 'OK        '}{repo}"]
+    lines.extend(
+        f"  {sev:9} {focus:6} {msg}"
+        for sev, focus, msg in (collapse(findings) if digest else findings)
+    )
+    return lines, int(violates)
+
+
 def survey_lines(root: Path, *, digest: bool) -> tuple[list[str], int, Graph]:
     """Run the fleet survey and print-ready lines for it.
 
@@ -1032,18 +1056,11 @@ def survey_lines(root: Path, *, digest: bool) -> tuple[list[str], int, Graph]:
     lines: list[str] = []
     merged, failed = bind(Graph()), 0
     for repo, g, findings in survey(root):
-        if g is None:
-            lines.append(f"UNREADABLE {repo}: {findings[0][2]}")
-            failed += 1
-            continue
-        violates = any(sev == "Violation" for sev, _, _ in findings)
-        lines.append(f"{'VIOLATES  ' if violates else 'OK        '}{repo}")
-        lines.extend(
-            f"  {sev:9} {focus:6} {msg}"
-            for sev, focus, msg in (collapse(findings) if digest else findings)
-        )
-        failed += violates
-        merged += g
+        said, bad = finding_lines(repo, findings, digest=digest)
+        lines.extend(said)
+        failed += bad
+        if g is not None:
+            merged += g
     return lines, failed, merged
 
 

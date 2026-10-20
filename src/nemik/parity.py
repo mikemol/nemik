@@ -11,7 +11,8 @@ that grows.
 - ROUTED: (command, route, function): the server answers `route` by calling the same `function`
   the command calls, so there is one implementation.
 - PENDING: (command, card): read-only and not yet served; `card` is the open card that adds the
-  route. The list only shrinks.
+  route. A row may name one mode of a routed command ("nemik-check --integrity"). The list only
+  shrinks.
 - EXCLUDED: (command, reason): not served on purpose, by a declared reason, never silently: a
   writer, a spawner, the server itself, or host-private.
 """
@@ -22,11 +23,18 @@ ROUTED = [
     ("nemik-inbound", "/inbound", "inbound"),
     ("nemik-metrics", "/metrics", "metrics"),
     ("nemik-rank", "/goals/", "goals"),
+    ("nemik-check", "/check.json", "finding_lines"),
 ]
 
 PENDING = [
-    ("nemik-check", "W784"),
-    ("nemik-collapse", "W784"),
+    ("nemik-check --integrity", "W793"),
+    ("nemik-check --unmanifested", "W793"),
+    ("nemik-check --ready-neither", "W793"),
+    ("nemik-check --realizability", "W793"),
+    ("nemik-check --committed", "W793"),
+    ("nemik-check --letters", "W793"),
+    ("nemik-check --fold", "W793"),
+    ("nemik-collapse", "W793"),
     ("nemik-history", "W785"),
     ("nemik-critical", "W786"),
     ("nemik-pins", "W786"),

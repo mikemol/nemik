@@ -38,7 +38,14 @@ from rdflib.namespace import DCTERMS, PROV
 
 from nemik.adapter import BASE, NEMIK, OPERATOR, OSLC_CM, bind, ledger_graph
 from nemik.blocks import inbound, operator_asks, ref
-from nemik.check import LEDGER, QUEUE, default_root, workstream_files
+from nemik.check import (
+    LEDGER,
+    QUEUE,
+    Finding,
+    default_root,
+    finding_lines,
+    workstream_files,
+)
 from nemik.check import survey as checked_survey
 from nemik.exportwire import exports_key, withheld_by_exports
 from nemik.hostroot import HostRow, read_document, stale
@@ -58,6 +65,29 @@ VENDOR = {"cytoscape.min.js", "dagre.min.js", "cytoscape-dagre.js"}
 SERIES_FILE = "luthen-series.json"
 SERIES_MAX_AGE = 900
 SERIES_REBUILD_S = 600
+
+
+def check_board(findings: dict[str, list[Finding]]) -> dict[str, object]:
+    """Word the fleet survey the way nemik-check prints it (nemik:W784).
+
+    Args:
+        findings: Each repo's findings, as the server's last rebuild left them.
+
+    Returns:
+        {"lines": nemik-check's lines, "digest": nemik-check --digest's, "failed": how many repos
+        violate or are unreadable}; the wording is check.finding_lines, the CLI's own.
+
+    """
+    lines: list[str] = []
+    digest: list[str] = []
+    failed = 0
+    for repo in sorted(findings):
+        said, bad = finding_lines(repo, findings[repo], digest=False)
+        brief, _ = finding_lines(repo, findings[repo], digest=True)
+        lines.extend(said)
+        digest.extend(brief)
+        failed += bad
+    return {"lines": lines, "digest": digest, "failed": failed}
 
 
 def hostroot_board(path: Path | None, now: str) -> dict[str, object]:
@@ -114,6 +144,8 @@ class Model:
         # nemik:W780: the host-root frontier nemik-hostroot writes on the host (host-root.json),
         # set by main when given; read per request so its age is judged against the clock.
         self.hostroot: Path | None = None
+        # nemik:W784: each repo's findings as the last rebuild left them, worded by check_board.
+        self.findings: dict[str, list[Finding]] = {}
         # nemik:W670: luthen's loop and token snapshot (luthen-series.json), read per request so its
         # age is judged against the clock, never against the last rebuild.
         self.series = series
@@ -173,6 +205,7 @@ class Model:
                 g += runs_graph(self.runs)[0]
             phases["ledger"] = time.process_time() - t
             self.graph, self.key = g, key
+            self.findings = findings
             self.rebuilds += 1
             t = time.process_time()
             numbers = without(g, self.withheld) if self.withheld else None
@@ -213,6 +246,15 @@ class Model:
         shown: dict[str, object] = {"board": True}
         shown.update(board(snap, ready))
         return shown
+
+    def check_doc(self) -> dict[str, object]:
+        """Give the fleet survey as nemik-check words it (nemik:W784).
+
+        Returns:
+            check_board's lines, digest and failed count over the last rebuild's findings.
+
+        """
+        return check_board(self.findings)
 
     def hostroot_doc(self) -> dict[str, object]:
         """Build the host-root board from nemik-hostroot's file (nemik:W780).
@@ -643,6 +685,9 @@ def handler(model: Model) -> type[BaseHTTPRequestHandler]:
             elif self.path == "/series.json":
                 series_body = json.dumps(model.series_doc(), indent=1).encode()
                 self.send(200, "application/json", series_body)
+            elif self.path == "/check.json":
+                check_body = json.dumps(model.check_doc(), indent=1).encode()
+                self.send(200, "application/json", check_body)
             elif self.path == "/hostroot.json":
                 host_body = json.dumps(model.hostroot_doc(), indent=1).encode()
                 self.send(200, "application/json", host_body)
