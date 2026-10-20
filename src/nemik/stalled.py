@@ -14,7 +14,6 @@ A card that a queued or gating commit stack names (mikemol-commit --in-gate) is 
 in the gate, whatever the gate's length.
 """
 
-import json
 from datetime import datetime
 from pathlib import Path
 
@@ -23,50 +22,11 @@ from rdflib import Graph
 from nemik import history
 from nemik.adapter import NEMIK, OSLC_CM
 from nemik.blocks import ref
-from nemik.work import run_committer
+from nemik.work import in_gate
 
 # A card is stale after this many land intervals without activity: one interval alone would flag
 # every card worked an hour ago in a repo that lands every twenty minutes.
 FACTOR = 4
-
-
-def named_waypoints(rows: object) -> set[str]:
-    """Read the waypoints out of `mikemol-commit --in-gate --json` (a list of stack entries).
-
-    Returns:
-        Every waypoint any entry names; nothing for an answer that is not a list of entries.
-
-    """
-    named: set[str] = set()
-    if not isinstance(rows, list):
-        return named
-    for row in rows:
-        held = row.get("waypoints") if isinstance(row, dict) else None
-        if isinstance(held, list):
-            named.update(str(w) for w in held)
-    return named
-
-
-def in_gate(repo_dir: Path) -> set[str]:
-    """Name the waypoints a queued or gating commit stack of this repo carries (nemik:W682).
-
-    A card in the commit gate is being worked, however long the gate takes, so it is never called
-    stalled. The list comes from mikemol-commit's own public mode (`--in-gate --json`), never from
-    its private files under .git/mtools. A missing tool, a failure or an unreadable answer names
-    nothing: the check then falls back to the commits that cite the card.
-
-    Returns:
-        The waypoint symbols of the live stacks.
-
-    """
-    code, out = run_committer([str(repo_dir), "--in-gate", "--json"])
-    if code != 0:
-        return set()
-    try:
-        rows: object = json.loads(out)
-    except ValueError:
-        return set()
-    return named_waypoints(rows)
 
 
 def verdict(now: int, worked: int, cites: list[int], interval: int) -> str:

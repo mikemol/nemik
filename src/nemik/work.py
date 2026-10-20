@@ -111,6 +111,44 @@ def run_committer(argv: list[str]) -> tuple[int, str]:
     return run.returncode, run.stdout
 
 
+def named_waypoints(rows: object) -> set[str]:
+    """Read the waypoints out of `mikemol-commit --in-gate --json` (a list of stack entries).
+
+    Returns:
+        Every waypoint any entry names; nothing for an answer that is not a list of entries.
+
+    """
+    named: set[str] = set()
+    if not isinstance(rows, list):
+        return named
+    for row in rows:
+        held = row.get("waypoints") if isinstance(row, dict) else None
+        if isinstance(held, list):
+            named.update(str(w) for w in held)
+    return named
+
+
+def in_gate(repo_dir: Path) -> set[str]:
+    """Name the waypoints a queued or gating commit stack of this repo carries (nemik:W682, W633).
+
+    A card in the commit gate is being worked, however long the gate takes. The list comes from
+    mikemol-commit's own public mode (`--in-gate --json`), never from its private files under
+    .git/mtools. A missing tool, a failure or an unreadable answer names nothing.
+
+    Returns:
+        The waypoint symbols of the live stacks.
+
+    """
+    code, out = run_committer([str(repo_dir), "--in-gate", "--json"])
+    if code != 0:
+        return set()
+    try:
+        rows: object = json.loads(out)
+    except ValueError:
+        return set()
+    return named_waypoints(rows)
+
+
 def plan(current: list[str], symbol: str) -> list[tuple[str, str]]:
     """(symbol, status) updates that leave `symbol` the only working card."""
     return [(s, "ready") for s in current if s != symbol] + (

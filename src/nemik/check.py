@@ -52,6 +52,7 @@ from nemik.collapse import lines as collapse_lines
 from nemik.digest import collapse, delta
 from nemik.idle import findings as idle_findings
 from nemik.rolls import idle_run, stalled
+from nemik.work import in_gate
 from nemik.workrows import NO_BOUND, ready_stamps, small_done_stamps, upper_quantile
 
 QUEUE, LEDGER = "paths-forward.json", "paths-forward.ledger"
@@ -60,6 +61,19 @@ STALL_RUN = 2
 NEITHER_QUANTILE = 0.9  # the share of small cards that finished within the bound
 NEITHER_SAMPLES = 10  # fewer finished small cards than this and no bound is learned
 SECONDS_A_DAY = 86400
+
+
+def mark_gating(graph: Graph, repo: str, repo_dir: Path) -> None:
+    """Mark the cards a queued or gating commit stack of the repo names (nemik:W633).
+
+    A card in the commit gate is being worked: `nemik:inGate` makes the active-card rule count it
+    as working, whatever status the queue holds for it. The list is mikemol-commit's own public
+    mode; a repo with no such stack, or no tool to ask, marks nothing. A mark left by an earlier
+    survey in this process is cleared first, since the graph may be a cached one.
+    """
+    graph.remove((None, NEMIK.inGate, None))
+    for symbol in sorted(in_gate(repo_dir)):
+        graph.add((waypoint_uri(repo, symbol), NEMIK.inGate, Literal("gate")))
 
 
 def unseen(lines: list[str], since: Path) -> list[str]:
@@ -567,6 +581,7 @@ def survey(
                     Literal(adoption(state_path)),
                 )
             )
+            mark_gating(qg, repo, state_path.parent.parent)
             graphs[repo] = qg
             merged += qg
         except UnreadableStateError as exc:

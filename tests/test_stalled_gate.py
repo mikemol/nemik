@@ -2,7 +2,7 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W682: the waypoints a gating commit stack carries, read from the tool's public mode."""
 
-from nemik.stalled import named_waypoints
+from nemik.work import named_waypoints
 
 LIVE = [
     {"key": "1", "state": "inflight", "waypoints": ["W762"], "began_ns": 7},

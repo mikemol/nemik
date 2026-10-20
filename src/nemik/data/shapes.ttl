@@ -397,8 +397,10 @@ nemik:ActiveCardShape a sh:NodeShape ;
                 ?ready <https://github.com/mikemol/nemik/ns#workstream> $this ;
                        <http://open-services.net/ns/cm#state> <https://github.com/mikemol/nemik/ns#Ready> .
                 OPTIONAL {
-                    ?working <https://github.com/mikemol/nemik/ns#workstream> $this ;
-                             <http://open-services.net/ns/cm#state> <https://github.com/mikemol/nemik/ns#Working> .
+                    ?working <https://github.com/mikemol/nemik/ns#workstream> $this .
+                    { ?working <http://open-services.net/ns/cm#state> <https://github.com/mikemol/nemik/ns#Working> }
+                    UNION
+                    { ?working <https://github.com/mikemol/nemik/ns#inGate> ?gate }
                 }
                 FILTER(!BOUND(?working))
             }""" ] .
