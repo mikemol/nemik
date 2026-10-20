@@ -29,6 +29,22 @@ from nemik.check import LEDGER, QUEUE, default_root, workstream_files
 from nemik.climate import leads_by_repo, open_ages, waits_of
 from nemik.forecastshingle import HORIZONS, issue, shingle_rows
 from nemik.verify import score_shingle
+from nemik.wake import read_liveness
+
+
+def live_repos(root: Path) -> set[str]:
+    """Name the repos with a live session, as nemik-wake reads loop_liveness (nemik:W769).
+
+    A repo whose verdict is anything but "dormant" (ok, or stale: a session that ticked but is
+    quiet) has a session to answer; a dormant one, or one with no record, is offline.
+
+    Returns:
+        The repo names; empty when no liveness source can be read.
+
+    """
+    records, _ = read_liveness(root, None)
+    return {repo for repo, rec in records.items() if rec.get("verdict") != "dormant"}
+
 
 WAIT_QUANTILE = 0.9
 COMMIT_GRAIN_DAYS = 1.0  # backfilled history is commit-grain; docs/weather-questions.md
@@ -1071,6 +1087,104 @@ def _density(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) 
 OPEN_AGE_SKIP = frozenset({"done", "dropped"})
 # characters of a card's blockers that a text line shows (the JSON keeps all)
 WAITS_SHOWN = 50
+_CARD_REF = re.compile(r"(?:(?P<repo>[A-Za-z0-9][A-Za-z0-9._-]*):)?W[1-9][0-9]*")
+_AGENT_REF = re.compile(r"agent:(?P<repo>[^\s,]+)")
+LABEL_SHOWN = 40  # characters of a blocker that is not a card, as a hop's label
+# a hop as printed, and the repo whose session it needs ("" for none)
+Hop = tuple[str, str]
+# repo:W<n> -> (status, blocked_on entries)
+Cards = dict[str, tuple[str, list[str]]]
+
+
+def card_table(docs: dict[str, object]) -> Cards:
+    """Index every card of the queues by repo:W<n>, with its status and blockers.
+
+    Returns:
+        {repo:W<n>: (status, blocked_on entries as text)}.
+
+    """
+    table: Cards = {}
+    for repo, doc in docs.items():
+        cards = doc.get("waypoints") if isinstance(doc, dict) else None
+        for card in cards if isinstance(cards, list) else []:
+            if isinstance(card, dict) and card.get("symbol"):
+                waits = card.get("blocked_on")
+                table[f"{repo}:{card['symbol']}"] = (
+                    str(card.get("status", "")),
+                    [str(w) for w in waits] if isinstance(waits, list) else [],
+                )
+    return table
+
+
+def _hops_for(text: str, repo: str, cards: Cards, trail: frozenset[str]) -> list[Hop]:
+    """Give the path that one blocker entry leads down, or none when it has landed.
+
+    Returns:
+        The hops; a card on the trail ends it as `(cycle)` and one the queues do not hold as `(?)`.
+
+    """
+    head = (text.split(maxsplit=1) or [""])[0]
+    if _CARD_REF.fullmatch(head):
+        cite = head if ":" in head else f"{repo}:{head}"
+        mark = "cycle" if cite in trail else "" if cite in cards else "?"
+        if mark:
+            return [(f"{cite}({mark})", cite.partition(":")[0])]
+        if cards[cite][0] in OPEN_AGE_SKIP:
+            return []
+        return critical_path(cite, cards, trail)
+    agent = _AGENT_REF.match(text)
+    if agent:
+        return [(f"agent:{agent['repo']}", agent["repo"])]
+    if text.startswith("operator"):
+        return [("operator", "")]
+    return [(text[:LABEL_SHOWN], "")]
+
+
+def critical_path(
+    cite: str, cards: Cards, trail: frozenset[str] = frozenset()
+) -> list[Hop]:
+    """Give a card's critical path: the longest chain of blockers down to a leaf (nemik:W769).
+
+    Each hop is `repo:W<n>(status)`; the chain ends at a card nothing open blocks (ready or
+    working: someone can take it), at `operator`, at an `agent:<repo>` entry, or at a blocker that
+    is not a card, as written. A blocker that has landed is not a hop. Ties keep the first.
+
+    Returns:
+        The hops, the card first.
+
+    """
+    status, waits = cards[cite]
+    repo = cite.partition(":")[0]
+    best: list[Hop] = []
+    for text in waits:
+        sub = _hops_for(text, repo, cards, trail | {cite})
+        if len(sub) > len(best):
+            best = sub
+    return [(f"{cite}({status})", repo), *best]
+
+
+def with_paths(
+    rows: list[dict[str, str]], docs: dict[str, object], live: set[str]
+) -> list[dict[str, str]]:
+    """Add each row's critical path and whether it crosses a repo with no live session.
+
+    Returns:
+        The rows with `path` (hops joined by ' -> '), `offline` (the repos with no live session
+        the path needs, comma-joined) and `reach` ("OFFLINE-FREE" when none, else the repos).
+
+    """
+    cards = card_table(docs)
+    out: list[dict[str, str]] = []
+    for row in rows:
+        hops = critical_path(row["cite"], cards)
+        down = sorted({repo for _, repo in hops if repo and repo not in live})
+        named = ", ".join(down)
+        with_path = dict(row)
+        with_path["path"] = " -> ".join(label for label, _ in hops)
+        with_path["offline"] = named
+        with_path["reach"] = f"crosses offline: {named}" if down else "OFFLINE-FREE"
+        out.append(with_path)
+    return out
 
 
 def oldest_cards(
@@ -1138,6 +1252,7 @@ def _oldest(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -
         except (OSError, ValueError):
             continue
     rows = oldest_cards(docs, datetime.now(UTC), args.oldest)
+    rows = with_paths(rows, docs, live_repos(args.root))
     if args.json:
         sys.stdout.write(json.dumps(rows, indent=1) + "\n")
         return 0
@@ -1149,6 +1264,7 @@ def _oldest(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -
         sys.stdout.write(
             f"{r['cite']:24} {r['age_days']:>6} d  {r['status']}{flag}{waits}  {r['title']}\n"
         )
+        sys.stdout.write(f"    path: {r['path']}  [{r['reach']}]\n")
     return 0
 
 
