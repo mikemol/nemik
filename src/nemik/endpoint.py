@@ -35,6 +35,8 @@ def declared_base(name: str, root: Path) -> str | None:
     checkout = root / LUTHEN
     if not (checkout / "checks" / "endpoints_query.py").is_file():
         return None
+    environ = dict(os.environ)
+    environ["PYTHONPATH"] = str(checkout)
     try:
         done = subprocess.run(
             [sys.executable, "-m", "checks.endpoints_query", "--side", "host", name],
@@ -42,7 +44,7 @@ def declared_base(name: str, root: Path) -> str | None:
             text=True,
             check=False,
             cwd=checkout,
-            env={**os.environ, "PYTHONPATH": str(checkout)},
+            env=environ,
             timeout=QUERY_TIMEOUT_SECONDS,
         )
         answer: object = json.loads(done.stdout)

@@ -160,7 +160,9 @@ class Model:
             cite = f"{node['repo']}:{node.get('symbol', '')}"
             if node["state"] in {"ready", "working"} and cite not in self.withheld:
                 ready[node["repo"]] = ready.get(node["repo"], 0) + 1
-        return {"board": True, **board(snap, ready)}
+        shown: dict[str, object] = {"board": True}
+        shown.update(board(snap, ready))
+        return shown
 
     def poke(self) -> None:
         """Keep requests off the rebuild path (nemik:W69, luthen-observability:W146).
@@ -301,9 +303,9 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
     # depend on hash order (nemik:W119), so the claims are merged.
     by_blocked: dict[tuple[str, str], dict] = {}
     for blk in blocks:
-        m = by_blocked.setdefault(
-            (blk["blocked"], blk["blocker"]), {**blk, "claimed_by": []}
-        )
+        fresh = dict(blk)
+        fresh["claimed_by"] = []
+        m = by_blocked.setdefault((blk["blocked"], blk["blocker"]), fresh)
         m["claimed_by"] = sorted(set(m["claimed_by"]) | set(blk["claimed_by"]))
     for s, _, o in g.triples((None, NEMIK.waitsFor, None)):
         if o == OPERATOR:
@@ -648,18 +650,13 @@ def history_doc(
     out: dict[str, list[dict[str, Any]]] = {}
     for repo, path in workstream_files(root, QUEUE):
         hide = {r.partition(":")[2] for r in withheld if r.partition(":")[0] == repo}
-        snaps = [
-            (
-                at,
-                {
-                    **q,
-                    "waypoints": [
-                        w for w in q.get("waypoints", []) if w["symbol"] not in hide
-                    ],
-                },
-            )
-            for at, q in snapshots(path.parents[1])
-        ]
+        snaps = []
+        for at, q in snapshots(path.parents[1]):
+            kept = dict(q)
+            kept["waypoints"] = [
+                w for w in q.get("waypoints", []) if w["symbol"] not in hide
+            ]
+            snaps.append((at, kept))
         rows = weekly(snaps)
         out[repo] = [
             {k: v for k, v in r.items() if k != "oldest_blocked"} for r in rows

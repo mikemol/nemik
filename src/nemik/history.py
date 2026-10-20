@@ -1202,15 +1202,12 @@ def toil(repo: str, ledger: Path) -> list[dict]:
     for label, counts in sorted(weeks.items()):
         planned = counts.get("forecast", 0)
         unplanned = counts.get("interrupt", 0)
-        rows.append(
-            {
-                "week": label,
-                **counts,
-                "toil_share": round(unplanned / (planned + unplanned), 3)
-                if planned + unplanned
-                else None,
-            }
+        row: dict[str, object] = {"week": label}
+        row.update(counts)
+        row["toil_share"] = (
+            round(unplanned / (planned + unplanned), 3) if planned + unplanned else None
         )
+        rows.append(row)
     return rows
 
 

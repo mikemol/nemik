@@ -75,6 +75,18 @@ def _stub(ref: str) -> dict:
     }
 
 
+def _set(base: dict[str, object], key: str, value: object) -> dict[str, object]:
+    """Copy a dict with one key set, as `{**base, key: value}` does (Codon cannot parse that).
+
+    Returns:
+        A new dict; `base` is not changed.
+
+    """
+    out = dict(base)
+    out[key] = value
+    return out
+
+
 def apply(docs: dict[str, Any], refs: frozenset[str]) -> dict[str, Any]:
     """The documents with every withheld item dropped whole (stubs where a published item points)."""
     if not refs:
@@ -93,13 +105,14 @@ def apply(docs: dict[str, Any], refs: frozenset[str]) -> dict[str, Any]:
     out["graph.json"] = g
     wake = dict(docs["wake.json"])
     hide = lambda rows: [
-        w if w["blocked"] not in refs else {**w, "title": "withheld"} for w in rows
+        w if w["blocked"] not in refs else _set(w, "title", "withheld") for w in rows
     ]
-    wake["roster"] = [{**r, "waiting": hide(r["waiting"])} for r in wake["roster"]]
-    wake["operator"] = {
-        **wake["operator"],
-        "waiting": [w for w in wake["operator"]["waiting"] if w["blocked"] not in refs],
-    }
+    wake["roster"] = [_set(r, "waiting", hide(r["waiting"])) for r in wake["roster"]]
+    wake["operator"] = _set(
+        wake["operator"],
+        "waiting",
+        [w for w in wake["operator"]["waiting"] if w["blocked"] not in refs],
+    )
     out["wake.json"] = wake
     for name, doc in docs.items():
         if name.startswith("goals/"):

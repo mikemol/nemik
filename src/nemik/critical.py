@@ -298,6 +298,18 @@ def what_if(before: Critical, after: Critical, cites: list[str]) -> str:
     return "\n".join(lines)
 
 
+def _extended(base: dict[str, object], key: str, value: object) -> dict[str, object]:
+    """Copy a dict with one key added, as `{**base, key: value}` does (Codon cannot parse that).
+
+    Returns:
+        A new dict; `base` is not changed.
+
+    """
+    out = dict(base)
+    out[key] = value
+    return out
+
+
 def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     """nemik-critical: the longest chain of open work across the fleet, and what has slack."""
     from nemik.check import default_root, survey
@@ -362,7 +374,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     found = critical(g, scope)
     loops = cycles(g)
     if args.json:
-        print(json.dumps({**found._asdict(), "cycles": loops}, indent=1))
+        print(json.dumps(_extended(found._asdict(), "cycles", loops), indent=1))
         return
     print(f"critical path: {found.length} open cards deep")
     # nemik:W344: one line per rank; cards sharing a rank are tied alternatives (an antichain), joined by |
