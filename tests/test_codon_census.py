@@ -18,6 +18,7 @@ a sentinel of the same type (shapedepth.UNBOUNDED = -1), or raise and let the ca
 
 import json
 import os
+import resource
 from pathlib import Path
 
 import installed
@@ -32,6 +33,13 @@ if not _STAGED:
         allow_module_level=True,
     )
 CODON = Path(_STAGED).resolve()
+# The baseline holds modules on which Codon aborts (an assertion, SIGABRT), and each abort
+# would write a 116 MB core file through systemd-coredump and drkonqi, ten per census run, on
+# a host whose gates already time out under load. A census wants the compiler's message, not its
+# core, so the processes it starts may not dump one (nemik:W762).
+resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
+# and one BLAS thread, not one per core, in each probe (mtools-ad saw twenty started by each)
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
 BASELINE = ROOT / "codon-baseline.json"
 
 
