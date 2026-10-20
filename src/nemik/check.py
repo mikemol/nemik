@@ -49,7 +49,7 @@ from nemik.blocks import (
 from nemik.collapse import collapse as umbrellas_of
 from nemik.collapse import disagreements
 from nemik.collapse import lines as collapse_lines
-from nemik.digest import collapse
+from nemik.digest import collapse, delta
 from nemik.idle import findings as idle_findings
 from nemik.rolls import idle_run, stalled
 from nemik.workrows import NO_BOUND, ready_stamps, small_done_stamps, upper_quantile
@@ -60,6 +60,31 @@ STALL_RUN = 2
 NEITHER_QUANTILE = 0.9  # the share of small cards that finished within the bound
 NEITHER_SAMPLES = 10  # fewer finished small cards than this and no bound is learned
 SECONDS_A_DAY = 86400
+
+
+def unseen(lines: list[str], since: Path) -> list[str]:
+    """Keep what changed since the digest in `since`, and remember this one there (nemik:W766).
+
+    The file is the caller's: a per-session hook names one file per session, so each session sees
+    only what is new to it. A file that is absent or unreadable is a first sight, and an unwritable
+    one only means the next call shows everything again.
+
+    Returns:
+        The changed lines and a count of the unchanged ones (nemik.digest.delta).
+
+    """
+    try:
+        seen = since.read_text(encoding="utf-8").splitlines()
+    except OSError:
+        seen = []
+    try:
+        since.parent.mkdir(parents=True, exist_ok=True)
+        tmp = since.with_name(f".{since.name}.{os.getpid()}")
+        tmp.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        tmp.replace(since)
+    except OSError:
+        pass
+    return delta(lines, seen)
 
 
 def seconds_between(earlier: str, later: str) -> float | None:
@@ -1030,21 +1055,28 @@ def cached_survey(root: Path, *, digest: bool) -> tuple[list[str], int]:
     return lines, failed
 
 
-def run_survey(root: Path, *, digest: bool, dump: str | None) -> int:
-    """Print the fleet survey and give the exit code (nemik:W763).
+def run_survey(
+    root: Path, *, digest: bool, dump: str | None, since: str | None = None
+) -> int:
+    """Print the provenance and the fleet survey, and give the failure count (nemik:W763, W766).
 
     An unchanged fleet answers from the last run; a `dump` needs the merged graph, so it always
-    surveys.
+    surveys. With `since`, only what changed since the digest saved in that file is printed, then
+    a count of the rest (the file is kept current, one per reader).
 
     Returns:
         How many queues violate or are unreadable; main turns it into the exit code.
 
     """
+    lines = list(provenance(root))
     if dump:
-        lines, failed, merged = survey_lines(root, digest=digest)
+        found, failed, merged = survey_lines(root, digest=digest)
         merged.serialize(destination=dump, format="turtle")
     else:
-        lines, failed = cached_survey(root, digest=digest)
+        found, failed = cached_survey(root, digest=digest)
+    lines.extend(found)
+    if since:
+        lines = unseen(lines, Path(since))
     for line in lines:
         print(line)
     return failed
@@ -1141,6 +1173,12 @@ def main(argv: list[str] | None = None) -> None:
         "per-prompt hook digest, nemik:W641); Warnings and Violations stay in full. "
         "Without it, one row per card",
     )
+    ap.add_argument(
+        "--since",
+        metavar="FILE",
+        help="print only what changed since the digest saved in FILE, then a count of the "
+        "unchanged lines, and save this digest there; one file per reader (nemik:W766)",
+    )
     args = ap.parse_args(argv)
     if args.realizability:
         sys.exit(_realizability(args.root))
@@ -1163,10 +1201,8 @@ def main(argv: list[str] | None = None) -> None:
     if dry is not None:
         sys.exit(dry)
 
-    for line in provenance(args.root):
-        print(line)
     digest: bool = args.digest
-    failed = run_survey(args.root, digest=digest, dump=args.dump)
+    failed = run_survey(args.root, digest=digest, dump=args.dump, since=args.since)
     sys.exit(1 if failed else 0)
 
 
