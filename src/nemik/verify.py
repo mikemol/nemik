@@ -156,6 +156,49 @@ def score_shingle(
 ) -> dict[str, float]:
     """Score shingle rows (nemik:W747) per lead against when each card was done.
 
+    Returns:
+        {lead: Brier score} for each lead with at least one scorable row (see shingle_pairs).
+
+    """
+    found = shingle_pairs(rows, done_at, now, grain_days)
+    return {lead: brier(pairs) for lead, pairs in found.items()}
+
+
+def lead_report(pairs: list[tuple[float, bool]], bins: int) -> dict[str, float]:
+    """Judge one lead's forecasts against the two references (nemik:W761).
+
+    Args:
+        pairs: The lead's (chance, whether done) pairs.
+        bins: How many reliability bins to cut the chances into.
+
+    Returns:
+        n, brier, persistence, climatology, skill_persistence and skill_climatology (see skill),
+        and a reliability row per non-empty bin as `bin<k>_chance`, `bin<k>_share`, `bin<k>_n`.
+
+    """
+    outcomes = [done for _, done in pairs]
+    score = brier(pairs)
+    persist, climate = persistence_brier(outcomes), climatology_brier(outcomes)
+    out = {
+        "n": float(len(pairs)),
+        "brier": score,
+        "persistence": persist,
+        "climatology": climate,
+        "skill_persistence": skill(score, persist),
+        "skill_climatology": skill(score, climate),
+    }
+    for k, (chance, share, count) in enumerate(reliability(pairs, bins)):
+        out[f"bin{k}_chance"] = chance
+        out[f"bin{k}_share"] = share
+        out[f"bin{k}_n"] = float(count)
+    return out
+
+
+def shingle_pairs(
+    rows: list[list[str]], done_at: dict[str, str], now: str, grain_days: float
+) -> dict[str, list[tuple[float, bool]]]:
+    """Pair each scorable shingle row's chance with what happened, per lead (nemik:W747).
+
     A row is [issued, station, lead, age, chance]. Its outcome is whether the station was done
     at or before issued + lead, known only once that moment has passed (`now`), so a row whose
     horizon is still ahead is left out; so is a row whose lead is finer than the grain. A card
@@ -168,7 +211,7 @@ def score_shingle(
         grain_days: The grain of the observations, in days.
 
     Returns:
-        {lead: Brier score} for each lead with at least one scorable row.
+        {lead: [(chance, done), ...]} for each lead with at least one scorable row.
 
     """
     present = _instant(now)
@@ -184,4 +227,4 @@ def score_shingle(
             continue
         outcome = bool(finished) and _instant(finished) <= due
         pairs.setdefault(lead, []).append((float(chance), outcome))
-    return {lead: brier(found) for lead, found in pairs.items()}
+    return pairs

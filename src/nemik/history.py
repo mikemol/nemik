@@ -28,8 +28,10 @@ from nemik.cardevents import Event, events_of
 from nemik.check import LEDGER, QUEUE, default_root, workstream_files
 from nemik.climate import leads_by_repo, open_ages, waits_of
 from nemik.forecastshingle import HORIZONS, issue, shingle_rows
-from nemik.verify import score_shingle
+from nemik.verify import lead_report, score_shingle, shingle_pairs
 from nemik.wake import read_liveness
+
+RELIABILITY_BINS = 4  # --score cuts each lead's chances into this many bins
 
 
 def live_repos(root: Path) -> set[str]:
@@ -44,6 +46,20 @@ def live_repos(root: Path) -> set[str]:
     """
     records, _ = read_liveness(root, None)
     return {repo for repo, rec in records.items() if rec.get("verdict") != "dormant"}
+
+
+def score_report(
+    rows: list[list[str]], done_at: dict[str, str], now: str, grain_days: float
+) -> dict[str, dict[str, float]]:
+    """Judge stored shingle rows per lead, against persistence and climatology (nemik:W761).
+
+    Returns:
+        {lead: lead_report}: n, Brier, the two references' Brier, the skill against each, and the
+        reliability bins; only leads the truth's grain allows and whose horizon has passed.
+
+    """
+    found = shingle_pairs(rows, done_at, now, grain_days)
+    return {lead: lead_report(p, RELIABILITY_BINS) for lead, p in found.items()}
 
 
 WAIT_QUANTILE = 0.9
@@ -1285,10 +1301,11 @@ def _events(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -
 
 
 def _score(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> int:
-    """Print the Brier score per lead of a stored shingle, read against the events (nemik:W759).
+    """Judge a stored shingle per lead, read against the events (nemik:W759, W761).
 
     The file holds the tab-separated rows `--forecast` printed; any line that is not a row is
-    skipped.
+    skipped. Per lead: the count, the Brier score, the two references' Brier (nothing changes; the
+    base rate) with the skill against each, and the reliability bins.
 
     Returns:
         0.
@@ -1296,12 +1313,24 @@ def _score(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) ->
     """
     rows = shingle_lines(Path(args.score).read_text(encoding="utf-8"))
     events = [e for name in names for e in backfill(name, dirs[name], args.start)]
-    got = score_rows(rows, events, datetime.now(UTC).isoformat())
+    got = score_report(
+        rows, first_done(events), datetime.now(UTC).isoformat(), COMMIT_GRAIN_DAYS
+    )
     if args.json:
         sys.stdout.write(json.dumps(got, indent=1) + "\n")
         return 0
-    for lead, score in sorted(got.items()):
-        sys.stdout.write(f"{lead}\tbrier {score:.3f}\n")
+    for lead, r in sorted(got.items()):
+        sys.stdout.write(
+            f"{lead}\tn {int(r['n'])}\tbrier {r['brier']:.3f}"
+            f"\tpersistence {r['persistence']:.3f} (skill {r['skill_persistence']:.2f})"
+            f"\tclimatology {r['climatology']:.3f} (skill {r['skill_climatology']:.2f})\n"
+        )
+        for k in range(RELIABILITY_BINS):
+            if f"bin{k}_n" in r:
+                sys.stdout.write(
+                    f"\t  said {r[f'bin{k}_chance']:.2f}: {r[f'bin{k}_share']:.2f} happened"
+                    f" (n {int(r[f'bin{k}_n'])})\n"
+                )
     return 0
 
 
