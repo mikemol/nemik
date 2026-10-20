@@ -121,4 +121,10 @@ nemik:finding a rdf:Property ; rdfs:comment "A retro's finding (a nemik:RetroFin
 nemik:findingCard a rdf:Property ; rdfs:comment "The card that carries a finding's fix; it needs an owner, a due date and a witness (nemik:W754, G7)." .
 nemik:findingOwner a rdf:Property ; rdfs:comment "Who owns a finding's card (nemik:W754, G7)." .
 nemik:findingWitness a rdf:Property ; rdfs:comment "What shows a finding's fix landed, a query and not prose (nemik:W754, G7)." .
+# nemik:W755 (gate G8): a retro's handoff to whoever acts on it.
+nemik:RetroHandoff a rdfs:Class ; rdfs:comment "How a retro's fix is handed over: the instrument, the channel and who operates it (nemik:W755, G8)." .
+nemik:handoffInstrument a rdf:Property ; rdfs:comment "The tool or step the handoff uses (nemik:W755, G8)." .
+nemik:handoffChannel a rdf:Property ; rdfs:comment "Where the handoff travels: a letter, an ask, a card (nemik:W755, G8)." .
+nemik:handoffOperator a rdf:Property ; rdfs:comment "Who operates the handoff: 'self' or 'other'. 'other' needs a recorded self probe that was executed and failed (nemik:W755, G8)." .
+nemik:selfProbe a rdf:Property ; rdfs:comment "The outcome of trying the handoff oneself: 'executed-and-failed' is the only value that lets another operate it (nemik:W755, G8)." .
 nemik:certifyChange a rdf:Property ; rdfs:comment "A finding that is a --certify verdict change instead of a card: the verdict it changes (nemik:W754, G7)." .

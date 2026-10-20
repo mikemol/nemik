@@ -530,3 +530,29 @@ nemik:RetroFindingShape a sh:NodeShape ;
                     || NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#findingWitness> ?w . FILTER(STRLEN(STR(?w)) > 0) }
                 )
             }""" ] .
+
+# A retro handoff names its instrument, its channel and who operates it (nemik:W755, gate G8). Another
+# operator is refused unless the retro records that it tried the handoff itself and the try failed: a
+# step handed to someone else that its own author never tried is how asks reach the operator needlessly.
+nemik:RetroHandoffShape a sh:NodeShape ;
+    sh:targetClass nemik:RetroHandoff ;
+    sh:severity sh:Violation ;
+    sh:sparql [
+        sh:message "a retro handoff must name its instrument, its channel and its operator (self or other)" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this a <https://github.com/mikemol/nemik/ns#RetroHandoff> .
+                FILTER (
+                    NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#handoffInstrument> ?i . FILTER(STRLEN(STR(?i)) > 0) }
+                    || NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#handoffChannel> ?c . FILTER(STRLEN(STR(?c)) > 0) }
+                    || NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#handoffOperator> ?o . FILTER(STR(?o) IN ("self", "other")) }
+                )
+            }""" ] ;
+    sh:sparql [
+        sh:message "the handoff goes to another operator with no self probe recorded executed-and-failed: try it yourself first, and record the result" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this <https://github.com/mikemol/nemik/ns#handoffOperator> ?o .
+                FILTER(STR(?o) = "other")
+                FILTER NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#selfProbe> ?p . FILTER(STR(?p) = "executed-and-failed") }
+            }""" ] .
