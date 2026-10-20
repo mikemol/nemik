@@ -2,7 +2,7 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W747: the chance a card is done within a horizon, from the lead times of past cards."""
 
-from nemik.forecastshingle import done_by, issue
+from nemik.forecastshingle import done_by, expected_done, issue
 
 TOLERANCE = 1e-9
 LEADS = [1.0, 2.0, 4.0, 8.0]
@@ -31,3 +31,9 @@ def test_one_issue_has_a_chance_at_each_horizon_and_they_do_not_fall() -> None:
     got = issue(LEADS, 0.0, DAYS)
     assert list(got) == ["+1d", "+3d", "+7d"]
     assert got["+1d"] <= got["+3d"] <= got["+7d"]
+
+
+def test_the_expected_done_count_is_the_sum_of_the_cards_chances() -> None:
+    """Ages 0 and 2 within 3 days: 0.5 and 0.5 make 1.0; no cards make 0."""
+    assert abs(expected_done(LEADS, [0.0, 2.0], 3.0) - 1.0) < TOLERANCE
+    assert not expected_done(LEADS, [], 3.0)

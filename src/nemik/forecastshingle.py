@@ -30,6 +30,19 @@ def done_by(leads: list[float], age: float, horizon: float) -> float:
     return len([lead for lead in longer if lead <= age + horizon]) / len(longer)
 
 
+def expected_done(leads: list[float], ages: list[float], horizon: float) -> float:
+    """Give how many of a repo's open cards are expected done within the horizon.
+
+    The sum of each open card's `done_by` chance, by its age; chances add as expectations do,
+    whether or not the cards finish independently.
+
+    Returns:
+        The expected count, 0.0 for no open cards.
+
+    """
+    return sum(done_by(leads, age, horizon) for age in ages)
+
+
 def issue(leads: list[float], age: float, horizons: list[float]) -> dict[str, float]:
     """Issue one card's forecast at every horizon (HORIZONS is the usual set).
 
