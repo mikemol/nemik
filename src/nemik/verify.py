@@ -67,6 +67,41 @@ def mae(pairs: list[tuple[float, float]]) -> float:
     return sum(abs(expected - actual) for expected, actual in pairs) / len(pairs)
 
 
+def reliability(
+    pairs: list[tuple[float, bool]], bins: int
+) -> list[tuple[float, float, int]]:
+    """Bin forecast chances and give the share that came true in each bin.
+
+    A reliable forecast has, among the cases it said 0.3 for, about three in ten that happened.
+    The chances 0.0 to 1.0 are cut into `bins` equal-width bins (1.0 falls in the last); an empty
+    bin is left out.
+
+    Args:
+        pairs: Each forecast's chance of "done" and whether the card was done.
+        bins: How many equal-width bins.
+
+    Returns:
+        (mean chance in the bin, share that happened, count) for each non-empty bin, lowest first.
+
+    """
+    if bins < 1:
+        return []
+    chances: dict[int, list[float]] = {}
+    happened: dict[int, int] = {}
+    for chance, done in pairs:
+        slot = min(int(chance * bins), bins - 1)
+        chances.setdefault(slot, []).append(chance)
+        happened[slot] = happened.get(slot, 0) + (1 if done else 0)
+    return [
+        (
+            sum(chances[s]) / len(chances[s]),
+            happened[s] / len(chances[s]),
+            len(chances[s]),
+        )
+        for s in sorted(chances)
+    ]
+
+
 def persistence_brier(outcomes: list[bool]) -> float:
     """Score the forecast that nothing changes: every open card stays open, chance 0.
 
