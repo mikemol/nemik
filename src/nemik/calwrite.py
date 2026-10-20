@@ -110,8 +110,13 @@ def event_lines(
     alarms: Iterable[str] = (),
     rrule: str = "",
     exdates: Iterable[str] = (),
+    location: str = "",
 ) -> list[str]:
-    """One VEVENT as property lines. DTSTAMP is fixed so the feed depends only on the queues."""
+    """One VEVENT as property lines. DTSTAMP is fixed so the feed depends only on the queues.
+
+    A card with a `location` (mtools:W1687) carries it as the event's LOCATION, escaped as TEXT
+    (nemik:W722); one without writes no LOCATION line.
+    """
     triggers = sorted(alarms)
     start, end = event_times(
         dtstart, due, any(t.startswith("RELATED=END") for t in triggers)
@@ -125,6 +130,8 @@ def event_lines(
         f"DESCRIPTION:{escape(f'nemik-ref: {ref}')}",
         time_property("DTSTART", start),
     ]
+    if location:
+        lines.append(f"LOCATION:{escape(location)}")
     if end:
         lines.append(time_property("DTEND", end))
     if rrule:
@@ -186,6 +193,7 @@ def events(g: Graph, repos: Iterable[str], label: str | None = None) -> list[lis
             (str(a) for a in g.objects(n, NEMIK.alarm)),
             rrule,
             gone,
+            str(g.value(n, NEMIK.location) or ""),
         )
         found.append((repo, int(symbol.lstrip("W") or 0), lines))
     return [lines for _, _, lines in sorted(found, key=lambda f: f[:2])]

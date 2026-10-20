@@ -93,6 +93,7 @@ nemik:vector a rdf:Property ; rdfs:comment "The waypoint's WV:1 priority vector 
 nemik:vectorSource a rdf:Property ; rdfs:comment "Who wrote the vector: default, signal or agent (mtools:W248)." .
 nemik:dtstart a rdf:Property ; rdfs:comment "RFC 5545 DTSTART value as the queue stores it (mtools:W300; nemik:W134)." .
 nemik:due a rdf:Property ; rdfs:comment "RFC 5545 DUE value as the queue stores it (mtools:W300; nemik:W134)." .
+nemik:location a rdf:Property ; rdfs:comment "Where a dated waypoint takes place, free text as the queue stores it (mtools:W1687); nemik-calendar-write emits it as the event's LOCATION (nemik:W722)." .
 nemik:alarm a rdf:Property ; rdfs:comment "One RFC 5545 VALARM TRIGGER as the queue stores it (mtools:W279); resolved by nemik.alarm (nemik:W129)." .
 nemik:rrule a rdf:Property ; rdfs:comment "RFC 5545 RRULE as the queue stores it (mtools:W309)." .
 nemik:exdate a rdf:Property ; rdfs:comment "One RFC 5545 EXDATE value as the queue stores it (mtools:W309)." .

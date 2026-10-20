@@ -366,7 +366,12 @@ def _queue_graph(repo: str, state_path: Path, known: frozenset[str]) -> Graph:
             g.add((node, NEMIK.letter, Literal(attached)))
         # mtools:W300: RFC 5545 DTSTART/DUE values, kept exactly as written (a DATE, a UTC
         # DATE-TIME, or TZID=Zone:local); nemik.vtodo renders them as properties (nemik:W134).
-        for field, pred in (("dtstart", NEMIK.dtstart), ("due", NEMIK.due)):
+        # mtools:W1687 adds `location`, where it takes place, free text (nemik:W722).
+        for field, pred in (
+            ("dtstart", NEMIK.dtstart),
+            ("due", NEMIK.due),
+            ("location", NEMIK.location),
+        ):
             if val := model.text(w, field):
                 g.add((node, pred, Literal(val)))
         # mtools:W309: an RFC 5545 RRULE (verbatim) and its EXDATEs; vtodo passes them through, and
