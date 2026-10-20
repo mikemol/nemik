@@ -83,6 +83,34 @@ def check_report(name: str, graph: Graph, root: Path) -> str | None:
 
 
 VENDOR = {"cytoscape.min.js", "dagre.min.js", "cytoscape-dagre.js"}
+# nemik:W801: the page's own files beside index.html (nemik:W799 splits it by concern): the
+# stylesheet and the script modules, each served at its name and copied by the static build when
+# it exists. A name is listed here before its file lands, so a file nobody listed is never served.
+PAGE_FILES = {
+    "style.css": "text/css; charset=utf-8",
+    "graph.js": "text/javascript; charset=utf-8",
+    "cards.js": "text/javascript; charset=utf-8",
+    "panels.js": "text/javascript; charset=utf-8",
+}
+
+
+def page_file(name: str, web: Path | None = None) -> bytes | None:
+    """Read one of the page's own files out of the web directory (nemik:W801).
+
+    Args:
+        name: A file name; only those in PAGE_FILES are read.
+        web: The directory holding index.html; the package's own when not given.
+
+    Returns:
+        The file's bytes, or None for an unlisted name or a listed file not there yet.
+
+    """
+    here = Path(str(files("nemik.web"))) if web is None else web
+    if name not in PAGE_FILES or not (here / name).is_file():
+        return None
+    return (here / name).read_bytes()
+
+
 # nemik:W671: luthen's loop snapshot sits beside the queues in the export (as withheld.json and
 # liveness.json do); a published view reads it, refusing one older than SERIES_MAX_AGE, and is
 # rebuilt every SERIES_REBUILD_S although no queue changed, since the board is baked in.
@@ -666,6 +694,9 @@ def handler(model: Model) -> type[BaseHTTPRequestHandler]:
             if self.path in ("/", "/index.html"):
                 self.send(200, "text/html; charset=utf-8", page)
                 return
+            if (own := page_file(self.path.lstrip("/"))) is not None:
+                self.send(200, PAGE_FILES[self.path.lstrip("/")], own)
+                return
             if self.path.startswith("/vendor/"):
                 name = self.path.removeprefix("/vendor/")
                 if name in VENDOR:
@@ -767,6 +798,11 @@ def write_static(out: Path) -> list[Path]:
         dst = out / "vendor" / name
         dst.write_bytes(web.joinpath("vendor").joinpath(name).read_bytes())
         written.append(dst)
+    for name in sorted(PAGE_FILES):  # nemik:W801: the page's own files that exist yet
+        body = page_file(name)
+        if body is not None:
+            (out / name).write_bytes(body)
+            written.append(out / name)
     return written
 
 
