@@ -1451,15 +1451,21 @@ const ACTIONS = {
   orderAsks: () => pickListMode("asks"),
   orderRecent: () => pickListMode("recent"),
 };
+// nemik:W798: the order radios act on the Cards section, which is closed by default; choosing an order
+// opens it, so the choice shows. Before this a viewer picked an order and saw nothing change.
+function showCards() {
+  document.getElementById("sec-cards").open = true;
+}
 function pickListMode(mode) {
   listMode = mode;
   document.querySelector(`input[name="listmode"][value="${mode}"]`).checked = true;
   // nemik:W470: the clock is a choice only in the recent mode
   document.getElementById("clockgroup").hidden = mode !== "recent";
+  showCards();
   cardList();
 }
 for (const r of document.querySelectorAll('input[name="listmode"]')) r.onchange = () => pickListMode(r.value);
-for (const r of document.querySelectorAll('input[name="listclock"]')) r.onchange = () => { listClock = r.value; cardList(); };
+for (const r of document.querySelectorAll('input[name="listclock"]')) r.onchange = () => { listClock = r.value; showCards(); cardList(); };
 const KEYMAP = [
   { key: "?", mode: "any", action: "help", description: "show or hide this list of shortcuts" },
   { key: "/", mode: "any", action: "jump", description: "jump to a card by cite or title" },
