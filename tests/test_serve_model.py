@@ -72,10 +72,10 @@ def test_poke_serves_stale_while_rebuilding(tmp_path: Path) -> None:
     model.poke()
     assert model.rebuilds == 1
     real_survey = __import__("nemik.serve", fromlist=["survey"]).survey
-    gate = threading.Event()
+    released = threading.Event()
 
     def gated_survey(root, phases=None):
-        gate.wait(timeout=2)
+        released.wait(timeout=2)
         yield from real_survey(root, phases)
 
     q = tmp_path / "alpha" / ".claude" / "paths-forward.json"
@@ -87,7 +87,7 @@ def test_poke_serves_stale_while_rebuilding(tmp_path: Path) -> None:
         assert (
             time.monotonic() - t0 < 0.5 and model.rebuilds == 1
         )  # returned at once, stale
-        gate.set()
+        released.set()
         for _ in range(100):
             if model.rebuilds == 2:
                 break

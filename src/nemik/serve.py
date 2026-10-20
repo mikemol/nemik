@@ -26,6 +26,7 @@ import sys
 import threading
 import time
 from collections import Counter, defaultdict
+from functools import partial
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from importlib.metadata import PackageNotFoundError, version
 from importlib.resources import files
@@ -37,7 +38,8 @@ from rdflib.namespace import DCTERMS, PROV
 
 from nemik.adapter import BASE, NEMIK, OPERATOR, OSLC_CM, bind, ledger_graph
 from nemik.blocks import inbound, operator_asks, ref
-from nemik.check import LEDGER, QUEUE, default_root, survey, workstream_files
+from nemik.check import LEDGER, QUEUE, default_root, workstream_files
+from nemik.check import survey as checked_survey
 from nemik.exportwire import exports_key, withheld_by_exports
 from nemik.hostroot import HostRow, read_document, stale
 from nemik.luthenseries import board, load
@@ -46,6 +48,9 @@ from nemik.runlogs import runs_graph
 from nemik.wake import operator_row, read_liveness, roster
 from nemik.withheldage import require_fresh
 
+# nemik:W783: the server never starts a process, so its survey skips the gate marks that ask
+# mikemol-commit which cards a commit stack names (a spawn, for the CLIs beside the committer).
+survey = partial(checked_survey, gate="")
 VENDOR = {"cytoscape.min.js", "dagre.min.js", "cytoscape-dagre.js"}
 # nemik:W671: luthen's loop snapshot sits beside the queues in the export (as withheld.json and
 # liveness.json do); a published view reads it, refusing one older than SERIES_MAX_AGE, and is

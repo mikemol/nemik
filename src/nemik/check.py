@@ -543,8 +543,18 @@ def unchecked(
         yield repo, g, [] if g is not None else [("Unreadable", "--", refused[repo])]
 
 
+def _gate_mark(graph: Graph, repo: str, repo_dir: Path, gate: str) -> None:
+    """Mark the cards a commit stack names, unless `gate` says not to (nemik:W783)."""
+    if gate == "mark":
+        mark_gating(graph, repo, repo_dir)
+
+
 def survey(
-    root: Path, phases: dict[str, float] | None = None, *, check: bool = True
+    root: Path,
+    phases: dict[str, float] | None = None,
+    *,
+    check: bool = True,
+    gate: str = "mark",
 ) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
     """Yield (repo, graph, findings) per queue; graph is None when mtools refuses the file.
 
@@ -557,6 +567,10 @@ def survey(
 
     nemik:W620: with `check` false the graphs are read and no finding is computed, which is most of
     the cost (SHACL and the fleet checks); for a caller that wants a family built from the graphs.
+
+    nemik:W783: `gate` is "mark" to ask mikemol-commit which cards a commit stack names (a spawn,
+    for the CLIs that run beside the committer) and anything else to skip it: nemik-serve never
+    starts a process, so it passes "".
     """
     mark = [time.process_time()]
 
@@ -581,7 +595,7 @@ def survey(
                     Literal(adoption(state_path)),
                 )
             )
-            mark_gating(qg, repo, state_path.parent.parent)
+            _gate_mark(qg, repo, state_path.parent.parent, gate)
             graphs[repo] = qg
             merged += qg
         except UnreadableStateError as exc:
