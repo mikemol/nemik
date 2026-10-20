@@ -57,6 +57,68 @@ def levels_at(events: list[Event], moment: str) -> dict[str, dict[str, float]]:
     return out
 
 
+def _chain(
+    card: str, waits: dict[str, list[str]], memo: dict[str, int], trail: set[str]
+) -> int:
+    """Measure the longest run of open local blockers under one card.
+
+    Returns:
+        0 for a card that waits on no open local card, else 1 more than its deepest blocker;
+        a blocker already on the trail (a cycle) counts 0.
+
+    """
+    if card in memo:
+        return memo[card]
+    trail.add(card)
+    depth = 0
+    for blocker in waits.get(card, []):
+        if blocker not in trail:
+            depth = max(depth, 1 + _chain(blocker, waits, memo, trail))
+    trail.discard(card)
+    memo[card] = depth
+    return depth
+
+
+def depth_at(events: list[Event], moment: str) -> dict[str, float]:
+    """Give each repo's deepest chain of open cards waiting on open cards, at one moment.
+
+    The blockers are the repo's own cards named in `blocked_on` (a bare W<n> or repo:W<n> of the
+    same repo), read from the events at or before `moment`; a card closed by then no longer
+    blocks. A repo whose open cards wait on nothing local has depth 0.
+
+    Returns:
+        {repo: the longest chain, in cards beyond the first}.
+
+    """
+    until = datetime.fromisoformat(moment)
+    standing: dict[str, str] = {}
+    named: dict[str, list[str]] = {}
+    for station, stamp, field, _, now, _ in events:
+        if datetime.fromisoformat(stamp) > until:
+            continue
+        if field == "card":
+            standing[station] = "" if now == "minted" else now
+        elif field == "status":
+            standing[station] = now
+        elif field == "blocked_on":
+            named[station] = [part for part in now.split(",") if part]
+    opened = {s for s, status in standing.items() if status not in CLOSED}
+    waits: dict[str, list[str]] = {}
+    for station in opened:
+        repo = station.partition(":")[0]
+        resolved = [b if ":" in b else f"{repo}:{b}" for b in named.get(station, [])]
+        waits[station] = [
+            b for b in resolved if b in opened and b.partition(":")[0] == repo
+        ]
+    memo: dict[str, int] = {}
+    out: dict[str, float] = {}
+    for station in sorted(opened):
+        repo = station.partition(":")[0]
+        deepest = _chain(station, waits, memo, set())
+        out[repo] = max(out.get(repo, 0.0), float(deepest))
+    return out
+
+
 def levels_series(
     events: list[Event], start: str, end: str, step_days: float
 ) -> list[tuple[str, dict[str, dict[str, float]]]]:
