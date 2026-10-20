@@ -908,6 +908,124 @@ def integrity_report(root: Path, only: str | None = None) -> int:
     return 0
 
 
+DIGEST_FILE = "fleet-survey.json"
+# seconds: bounds what an input the key does not name can make stale
+DIGEST_MAX_AGE = 600
+CODE_SUFFIXES = frozenset({".py", ".ttl", ".toml", ".json"})
+
+
+def survey_inputs(root: Path, *, digest: bool) -> list[bytes]:
+    """Name what a fleet survey's answer rests on (nemik:W763).
+
+    The answer is a function of nemik's own code and data, each queue file and its ledger, and the
+    commits the history checks read; each is a part here, by content. A queue or ledger that cannot
+    be read counts as empty, so a vanished file changes the key.
+
+    Returns:
+        The parts, for cachestore.content_key.
+
+    """
+    here = Path(__file__).resolve().parent
+    parts = [b"digest" if digest else b"full"]
+    parts.extend(
+        path.read_bytes()
+        for path in sorted(here.rglob("*"))
+        if path.suffix in CODE_SUFFIXES and path.is_file()
+    )
+    for repo, state in workstream_files(root, QUEUE):
+        parts.append(repo.encode())
+        for kept in (state, state.with_name(LEDGER)):
+            try:
+                parts.append(kept.read_bytes())
+            except OSError:
+                parts.append(b"")
+        parts.append((_git(state.parent, "rev-parse", "HEAD") or "").encode())
+    return parts
+
+
+def survey_lines(root: Path, *, digest: bool) -> tuple[list[str], int, Graph]:
+    """Run the fleet survey and print-ready lines for it.
+
+    Returns:
+        (lines, how many queues violate or are unreadable, the merged graph).
+
+    """
+    lines: list[str] = []
+    merged, failed = bind(Graph()), 0
+    for repo, g, findings in survey(root):
+        if g is None:
+            lines.append(f"UNREADABLE {repo}: {findings[0][2]}")
+            failed += 1
+            continue
+        violates = any(sev == "Violation" for sev, _, _ in findings)
+        lines.append(f"{'VIOLATES  ' if violates else 'OK        '}{repo}")
+        lines.extend(
+            f"  {sev:9} {focus:6} {msg}"
+            for sev, focus, msg in (collapse(findings) if digest else findings)
+        )
+        failed += violates
+        merged += g
+    return lines, failed, merged
+
+
+def cached_survey(root: Path, *, digest: bool) -> tuple[list[str], int]:
+    """Answer the fleet survey from the last run when none of its inputs changed (nemik:W763).
+
+    Only the real fleet root is kept, as survey does for its caches. The answer is held with the
+    content key of survey_inputs and the time it was made; a hit needs the same key and an answer
+    younger than DIGEST_MAX_AGE, which bounds what an input the key does not name (an exported
+    host-apply file) can make stale. The hook that runs this on every prompt then costs a hash.
+
+    Returns:
+        (lines, failed) as survey_lines gives them.
+
+    """
+    if root.resolve() != default_root().resolve():
+        lines, failed, _ = survey_lines(root, digest=digest)
+        return lines, failed
+    key = cachestore.content_key(survey_inputs(root, digest=digest))
+    path = cachestore.user_dir() / DIGEST_FILE
+    try:
+        held: object = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        held = None
+    if isinstance(held, dict) and held.get("key") == key:
+        at, said, bad = held.get("at"), held.get("lines"), held.get("failed")
+        fresh = isinstance(at, float) and time.time() - at < DIGEST_MAX_AGE
+        if fresh and isinstance(said, list) and isinstance(bad, int):
+            return [str(line) for line in said], bad
+    lines, failed, _ = survey_lines(root, digest=digest)
+    body = json.dumps({"key": key, "at": time.time(), "lines": lines, "failed": failed})
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        tmp = path.with_name(f".{DIGEST_FILE}.{os.getpid()}")
+        tmp.write_text(body, encoding="utf-8")
+        tmp.replace(path)
+    except OSError:
+        return lines, failed
+    return lines, failed
+
+
+def run_survey(root: Path, *, digest: bool, dump: str | None) -> int:
+    """Print the fleet survey and give the exit code (nemik:W763).
+
+    An unchanged fleet answers from the last run; a `dump` needs the merged graph, so it always
+    surveys.
+
+    Returns:
+        How many queues violate or are unreadable; main turns it into the exit code.
+
+    """
+    if dump:
+        lines, failed, merged = survey_lines(root, digest=digest)
+        merged.serialize(destination=dump, format="turtle")
+    else:
+        lines, failed = cached_survey(root, digest=digest)
+    for line in lines:
+        print(line)
+    return failed
+
+
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(
         prog="nemik-check", description=(__doc__ or "").splitlines()[0]
@@ -1023,21 +1141,8 @@ def main(argv: list[str] | None = None) -> None:
 
     for line in provenance(args.root):
         print(line)
-    merged, failed = bind(Graph()), 0
     digest: bool = args.digest
-    for repo, g, findings in survey(args.root):
-        if g is None:
-            print(f"UNREADABLE {repo}: {findings[0][2]}")
-            failed += 1
-            continue
-        violates = any(sev == "Violation" for sev, _, _ in findings)
-        print(f"{'VIOLATES  ' if violates else 'OK        '}{repo}")
-        for sev, focus, msg in collapse(findings) if digest else findings:
-            print(f"  {sev:9} {focus:6} {msg}")
-        failed += violates
-        merged += g
-    if args.dump:
-        merged.serialize(destination=args.dump, format="turtle")
+    failed = run_survey(args.root, digest=digest, dump=args.dump)
     sys.exit(1 if failed else 0)
 
 

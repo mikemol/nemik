@@ -52,6 +52,22 @@ def stamp() -> str:
     return digest.hexdigest()
 
 
+def content_key(parts: list[bytes]) -> str:
+    """Name a set of inputs by their content (nemik:W763).
+
+    Each part is length-prefixed, so two lists that join to the same bytes still differ.
+
+    Returns:
+        The SHA-256 of the parts, in hex.
+
+    """
+    digest = hashlib.sha256()
+    for part in parts:
+        digest.update(len(part).to_bytes(8, "big"))
+        digest.update(part)
+    return digest.hexdigest()
+
+
 def save(directory: Path, name: str = NAME) -> int:
     """Write both caches under `directory` atomically; returns the bytes written."""
     directory.mkdir(parents=True, exist_ok=True)
