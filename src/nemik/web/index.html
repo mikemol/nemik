@@ -192,7 +192,8 @@ const needsManifest = d => d.state === "ready" && d.needs_manifest === true;
 // ASCII, this role only; the count is the text and the messages are in the Selected panel, so colour
 // carries nothing here. The payload's rows are the CLI's (nemik:W687), so a new shape shows up unaided.
 const warnMark = d => { const w = d.warnings || []; return w.length ? `${w.some(x => x.severity === "Violation") ? "!!" : "!"}${w.length}` : ""; };
-const stateMark = d => (d.state === "ready" && d.behind_open ? BEHIND_MARK : STATE_MARK[STATES.includes(d.state) ? d.state : "other"] || "");
+// nemik:W767: a card a queued or gating commit stack names is being worked, whatever its status says
+const stateMark = d => (d.stage === "gating" ? STATE_MARK.working : d.state === "ready" && d.behind_open ? BEHIND_MARK : STATE_MARK[STATES.includes(d.state) ? d.state : "other"] || "");
 document.getElementById("legend").innerHTML = [...STATES, "other"].map(s =>
   `<span><i class="dot" style="background:${color(s)}"></i>${STATE_MARK[s] || ""}${s}</span>`).join("")
   + `<span>W1${ROLLUP_MARK}3 umbrella, 3 rolled up</span><span>W1${EXPANDED_MARK} umbrella, expanded</span>`
@@ -1509,7 +1510,7 @@ function detailHTML(n) {
   return `<dl>
     <dt>cite as</dt><dd>${citeLink(n.cite)}</dd>
     <dt>title</dt><dd>${linked(n.title)}</dd>
-    <dt>state</dt><dd>${esc(n.state)}${needsManifest(n) ? " (needs a manifest: without one it cannot be stacked)" : ""}</dd>
+    <dt>state</dt><dd>${esc(n.state)}${n.stage === "gating" ? " (in a commit stack: being worked)" : ""}${needsManifest(n) ? " (needs a manifest: without one it cannot be stacked)" : ""}</dd>
     ${n.warnings && n.warnings.length ? `<dt>warnings</dt><dd>${n.warnings.map(w => `${esc(w.severity)}: ${esc(w.message)}`).join("<br>")}</dd>` : ""}
     ${n.salience !== undefined ? `<dt>salience</dt><dd>${n.salience} (flow model; band ${esc(n.band || "")}, rank ${n.rank_pos})</dd>` : ""}
     ${n.path_count ? `<dt>longest chains through it</dt><dd>${n.path_count}${n.path_count > 1 ? " (tied alternatives)" : ""}</dd>` : ""}

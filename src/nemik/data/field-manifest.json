@@ -7,7 +7,7 @@
         "id": "ref", "repo": "enum", "symbol": "ref", "cite": "ref", "for": "ref", "state": "enum",
         "title": "text", "blocked_on": "list-text", "blocked_kind": "enum", "caused_by": "text",
         "suppliers": "list-text", "want": "text",
-        "minted_during": "text", "effort": "counts", "last_activity": "time", "last_worked": "time", "issued": "time", "open_blockers": "count",
+        "minted_during": "text", "effort": "counts", "last_activity": "time", "last_worked": "time", "issued": "time", "stage": "enum", "open_blockers": "count",
         "rank_pos": "count", "salience": "count", "slack": "count", "on_path": "flag", "on_path_repo": "flag", "behind_open": "flag", "needs_manifest": "flag", "warnings": "records", "path_count": "count", "band": "enum", "weather": "ref"
       },
       "edges": {"source": "ref", "target": "ref", "kind": "enum", "satisfied": "flag", "current": "count"},

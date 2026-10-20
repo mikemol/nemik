@@ -250,6 +250,16 @@ def to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
         return _to_json(g, findings, numbers)
 
 
+def stage_of(g: Graph, n: URIRef) -> str:
+    """Say which stage a card is in beyond its status (nemik:W767).
+
+    Returns:
+        "gating" while a queued or gating commit stack names the card (nemik:inGate), else "".
+
+    """
+    return "gating" if g.value(n, NEMIK.inGate) is not None else ""
+
+
 def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
     # nemik:W309: every published number (salience, edge current, ask weight) comes from `gn`, the
     # graph without the withheld waypoints, when there are any; structure still comes from `g`.
@@ -288,6 +298,7 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
                     # nemik:W740: the clocks a reader may order the card list by
                     "last_worked": str(g.value(n, NEMIK.lastWorked) or ""),
                     "issued": str(g.value(n, DCTERMS.created) or ""),
+                    "stage": stage_of(g, URIRef(str(n))),
                     "minted_during": str(g.value(n, NEMIK.mintedDuring) or ""),
                     "caused_by": str(g.value(n, PROV.wasInformedBy) or ""),
                     "weather": str(g.value(n, NEMIK.weather) or ""),

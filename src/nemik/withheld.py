@@ -70,6 +70,7 @@ def _stub(ref: str) -> dict:
         "last_activity": "",
         "last_worked": "",
         "issued": "",
+        "stage": "",
         "open_blockers": 0,
         "weather": "",
     }
