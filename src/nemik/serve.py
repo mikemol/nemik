@@ -44,6 +44,8 @@ from nemik.check import (
     Finding,
     default_root,
     finding_lines,
+    ready_neither_text,
+    unmanifested_text,
     workstream_files,
 )
 from nemik.check import survey as checked_survey
@@ -58,6 +60,28 @@ from nemik.withheldage import require_fresh
 # nemik:W783: the server never starts a process, so its survey skips the gate marks that ask
 # mikemol-commit which cards a commit stack names (a spawn, for the CLIs beside the committer).
 survey = partial(checked_survey, gate="")
+
+
+def check_report(name: str, graph: Graph, root: Path) -> str | None:
+    """Give one of nemik-check's report modes as the CLI words it (nemik:W795).
+
+    Args:
+        name: "ready-neither" or "unmanifested".
+        graph: The merged queue graph the last rebuild left.
+        root: The fleet root, for the report that reads the queue files.
+
+    Returns:
+        The report's text, or None for a name that is no report.
+
+    """
+    if name == "ready-neither":
+        now = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+        return ready_neither_text(root, None, now)
+    if name == "unmanifested":
+        return unmanifested_text(graph)
+    return None
+
+
 VENDOR = {"cytoscape.min.js", "dagre.min.js", "cytoscape-dagre.js"}
 # nemik:W671: luthen's loop snapshot sits beside the queues in the export (as withheld.json and
 # liveness.json do); a published view reads it, refusing one older than SERIES_MAX_AGE, and is
@@ -246,6 +270,20 @@ class Model:
         shown: dict[str, object] = {"board": True}
         shown.update(board(snap, ready))
         return shown
+
+    def check_reply(self, path: str) -> tuple[int, str, bytes]:
+        """Answer GET /check/<report>.json with the report as nemik-check words it (nemik:W795).
+
+        Returns:
+            (status, content type, body): the report as JSON, or 404 for a name that is none.
+
+        """
+        name = path.removeprefix("/check/").removesuffix(".json")
+        said = check_report(name, self.graph, self.root)
+        if said is None:
+            return 404, "text/plain", b"no such report\n"
+        body: dict[str, str] = {"report": name, "text": said}
+        return 200, "application/json", json.dumps(body, indent=1).encode()
 
     def check_doc(self) -> dict[str, object]:
         """Give the fleet survey as nemik-check words it (nemik:W784).
@@ -685,6 +723,9 @@ def handler(model: Model) -> type[BaseHTTPRequestHandler]:
             elif self.path == "/series.json":
                 series_body = json.dumps(model.series_doc(), indent=1).encode()
                 self.send(200, "application/json", series_body)
+            elif self.path.startswith("/check/"):
+                answer = model.check_reply(self.path)
+                self.send(answer[0], answer[1], answer[2])
             elif self.path == "/check.json":
                 check_body = json.dumps(model.check_doc(), indent=1).encode()
                 self.send(200, "application/json", check_body)

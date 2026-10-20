@@ -36,6 +36,8 @@ ROUTES = [
     "/series.json",
     "/hostroot.json",
     "/check.json",
+    "/check/ready-neither.json",
+    "/check/unmanifested.json",
     "/graph.json",
     "/graph.ttl",
     "/vendor/cytoscape.min.js",

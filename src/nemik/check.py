@@ -315,8 +315,36 @@ def add_manifest_warnings(merged: Graph, by_repo: dict[str, list[Finding]]) -> N
         by_repo.setdefault(repo, []).append(("Warning", "--", found))
 
 
+def ready_neither_text(root: Path, repo: str | None, now: str) -> str:
+    """nemik:W489, W795: list the ready cards untouched past the learned bound, oldest first.
+
+    The one wording: nemik-check --ready-neither prints it and nemik-serve serves it.
+
+    Args:
+        root: The directory holding the repos.
+        repo: The one repo to list, or None for all.
+        now: The instant to age the cards against, as an ISO stamp.
+
+    Returns:
+        The report's text.
+
+    """
+    bound, late = ready_neither(root, now)
+    if bound < 0:
+        return "no bound learned: fewer than ten finished small cards\n"
+    out = [f"bound: {bound / SECONDS_A_DAY:.1f} d (p90 of finished small cards)\n"]
+    for name, rows in sorted(late.items()):
+        if repo is not None and name != repo:
+            continue
+        out.append(f"{name}: {len(rows)} ready cards untouched past the bound\n")
+        out.extend(
+            f"  {name}:{symbol}  {age / SECONDS_A_DAY:.1f} d\n" for age, symbol in rows
+        )
+    return "".join(out)
+
+
 def ready_neither_report(root: Path, repo: str | None) -> int:
-    """nemik:W489: list the ready cards untouched past the learned bound, oldest first.
+    """nemik:W489: print the ready-neither report.
 
     Args:
         root: The directory holding the repos.
@@ -327,20 +355,7 @@ def ready_neither_report(root: Path, repo: str | None) -> int:
 
     """
     now = dt.datetime.now(dt.UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
-    bound, late = ready_neither(root, now)
-    if bound < 0:
-        sys.stdout.write("no bound learned: fewer than ten finished small cards\n")
-        return 0
-    sys.stdout.write(
-        f"bound: {bound / SECONDS_A_DAY:.1f} d (p90 of finished small cards)\n"
-    )
-    for name, rows in sorted(late.items()):
-        if repo is not None and name != repo:
-            continue
-        sys.stdout.write(f"{name}: {len(rows)} ready cards untouched past the bound\n")
-        sys.stdout.writelines(
-            f"  {name}:{symbol}  {age / SECONDS_A_DAY:.1f} d\n" for age, symbol in rows
-        )
+    sys.stdout.write(ready_neither_text(root, repo, now))
     return 0
 
 
@@ -365,8 +380,25 @@ def report_mode(report: str | None, root: Path, repo: str | None) -> int | None:
     return None
 
 
+def unmanifested_text(whole: Graph) -> str:
+    """nemik:W795: the ratchet as it should stand now: each repo's count, never above the declared.
+
+    The one wording: nemik-check --unmanifested prints it and nemik-serve serves it, from the
+    merged graph each already holds.
+
+    Args:
+        whole: The merged queue graph.
+
+    Returns:
+        The report's text, JSON.
+
+    """
+    lowered = lowered_ratchet(unmanifested_by_repo(whole), manifest_ratchet())
+    return json.dumps(lowered, indent=1) + "\n"
+
+
 def unmanifested_report(root: Path) -> int:
-    """Print the ratchet as it should stand now: each repo's count, never above the declared one.
+    """Print the unmanifested-ratchet report.
 
     Args:
         root: The directory holding the repos.
@@ -379,8 +411,7 @@ def unmanifested_report(root: Path) -> int:
     for _, g, _ in survey(root, check=False):
         if g is not None:
             whole += g
-    lowered = lowered_ratchet(unmanifested_by_repo(whole), manifest_ratchet())
-    sys.stdout.write(json.dumps(lowered, indent=1) + "\n")
+    sys.stdout.write(unmanifested_text(whole))
     return 0
 
 

@@ -24,12 +24,12 @@ ROUTED = [
     ("nemik-metrics", "/metrics", "metrics"),
     ("nemik-rank", "/goals/", "goals"),
     ("nemik-check", "/check.json", "finding_lines"),
+    ("nemik-check --ready-neither", "/check/", "ready_neither_text"),
+    ("nemik-check --unmanifested", "/check/", "unmanifested_text"),
 ]
 
 PENDING = [
     ("nemik-check --integrity", "W793"),
-    ("nemik-check --unmanifested", "W793"),
-    ("nemik-check --ready-neither", "W793"),
     ("nemik-check --realizability", "W793"),
     ("nemik-check --committed", "W793"),
     ("nemik-check --letters", "W793"),
