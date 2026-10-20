@@ -38,6 +38,13 @@ archive's pyproject): `mikemol.cvdcore`, the worst-view colour-vision-deficiency
 Okabe-Ito floor (mtools:W1315). A dev dependency only: it brings `numpy` and `colorspacious`, which
 the image's runtime does not import. `mikemol-repin --revendor` lists it once the repo names it (mtools:W1787).
 
+`mikemol_converge-0.1.0+<sha>-py3-none-any.whl` (nemik:W652, W776) is mtools' converge dist
+(`git archive <sha> -- converge`, `uv build --wheel`, the local version segment set to `+<sha>` in the
+archive's pyproject): `mikemol.converge`, the shared converge loop (mtools:W1522), stdlib only. A runtime
+dependency: `nemik.converge` imports it (W777), and luthen's root-run code vendors the same wheel. It is at
+0f8267e while the other seven are at 4720efa, because `mikemol-repin --revendor` does not list this dist
+yet; the next repin that does moves all eight together.
+
 ## Hashes
 
 `SHA256SUMS` beside the wheels, written by `mikemol-repin --revendor` on every bump (it replaced the hand script tools/revendor-mtools.sh, mtools:W1449; nemik:W417:

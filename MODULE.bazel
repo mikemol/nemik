@@ -83,6 +83,14 @@ vendored_wheel(
     wheel = "//:vendor/wheels/mikemol_cvdcore-0.1.0+4720efa-py3-none-any.whl",
 )
 
+# nemik:W776/W652: mtools' converge (mikemol.converge, mtools:W1522) at 0f8267e: the shared converge loop,
+# stdlib only, that luthen's root-run code vendors too. Ahead of the other seven (4720efa) until the next
+# repin moves them together; mikemol-repin does not list this dist yet.
+vendored_wheel(
+    name = "converge",
+    wheel = "//:vendor/wheels/mikemol_converge-0.1.0+0f8267e-py3-none-any.whl",
+)
+
 # nemik:W98: opa, the witness evaluator, as a hashed input instead of whatever /usr/bin holds.
 http_file = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_file")
 http_file(

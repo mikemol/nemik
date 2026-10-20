@@ -311,6 +311,14 @@ wheels = [
 ]
 
 [[package]]
+name = "mikemol-converge"
+version = "0.1.0+0f8267e"
+source = { path = "vendor/wheels/mikemol_converge-0.1.0+0f8267e-py3-none-any.whl" }
+wheels = [
+    { filename = "mikemol_converge-0.1.0+0f8267e-py3-none-any.whl", hash = "sha256:56b5951dbbb35e5e8b47fe0d96c38428be3f328432f3cffbab6a4d49c750bb9f" },
+]
+
+[[package]]
 name = "mikemol-cvdcore"
 version = "0.1.0+4720efa"
 source = { path = "vendor/wheels/mikemol_cvdcore-0.1.0+4720efa-py3-none-any.whl" }
@@ -458,6 +466,7 @@ name = "nemik"
 version = "0.0.0"
 source = { editable = "." }
 dependencies = [
+    { name = "mikemol-converge" },
     { name = "mikemol-fence" },
     { name = "mikemol-frontier" },
     { name = "mikemol-hooks" },
@@ -487,6 +496,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "mikemol-converge", path = "vendor/wheels/mikemol_converge-0.1.0+0f8267e-py3-none-any.whl" },
     { name = "mikemol-fence", path = "vendor/wheels/mikemol_fence-0.1.0+4720efa-py3-none-any.whl" },
     { name = "mikemol-frontier", path = "vendor/wheels/mikemol_frontier-0.1.0+4720efa-py3-none-any.whl" },
     { name = "mikemol-hooks", path = "vendor/wheels/mikemol_hooks-0.1.0+4720efa-py3-none-any.whl" },
