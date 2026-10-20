@@ -11,13 +11,34 @@ bound (docs/weather-questions.md). No import beyond datetime, no future import: 
 under Codon as written.
 """
 
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # station, time, field, from, to, commit: nemik.cardevents.Event
 Event = tuple[str, str, str, str, str, str]
 
 QUANTILE_90 = 0.9
 CLOSED = {"done", "dropped", "removed"}
+STAMP_BODY = 19  # len("2026-10-01T00:00:00")
+OFFSET_LEN = 6  # len("+00:00")
+
+
+def _instant(stamp: str) -> datetime:
+    """Read an ISO stamp as a moment in UTC, with no zone attached.
+
+    Codon's datetime.fromisoformat accepts only a stamp with no offset, so the offset is applied
+    here: the date and time part is parsed, then the +hh:mm or -hh:mm at its end is taken off,
+    and fractional seconds are dropped. A stamp with no offset is already UTC.
+
+    Returns:
+        The moment as a naive datetime in UTC.
+
+    """
+    moment = datetime.fromisoformat(stamp[:STAMP_BODY])
+    tail = stamp[-OFFSET_LEN:]
+    if len(stamp) > STAMP_BODY and tail[0] in "+-" and tail[3] == ":":
+        shift = timedelta(hours=int(tail[1:3]), minutes=int(tail[4:6]))
+        return moment - shift if tail[0] == "+" else moment + shift
+    return moment
 
 
 def levels_at(events: list[Event], moment: str) -> dict[str, dict[str, float]]:
@@ -32,10 +53,10 @@ def levels_at(events: list[Event], moment: str) -> dict[str, dict[str, float]]:
         {repo: {open, ready, working, blocked, blocked_share}}.
 
     """
-    until = datetime.fromisoformat(moment)
+    until = _instant(moment)
     standing: dict[str, str] = {}
     for station, stamp, field, _, now, _ in events:
-        if datetime.fromisoformat(stamp) > until:
+        if _instant(stamp) > until:
             continue
         if field == "card":
             standing[station] = "" if now == "minted" else now
@@ -90,11 +111,11 @@ def depth_at(events: list[Event], moment: str) -> dict[str, float]:
         {repo: the longest chain, in cards beyond the first}.
 
     """
-    until = datetime.fromisoformat(moment)
+    until = _instant(moment)
     standing: dict[str, str] = {}
     named: dict[str, list[str]] = {}
     for station, stamp, field, _, now, _ in events:
-        if datetime.fromisoformat(stamp) > until:
+        if _instant(stamp) > until:
             continue
         if field == "card":
             standing[station] = "" if now == "minted" else now
@@ -129,12 +150,12 @@ def levels_series(
         not positive.
 
     """
-    low = datetime.fromisoformat(start)
-    span = (datetime.fromisoformat(end) - low).total_seconds()
+    low = _instant(start)
+    span = (_instant(end) - low).total_seconds()
     step = step_days * 86400
     count = int(span // step) if step > 0 else 0
     moments = [
-        datetime.fromtimestamp(low.timestamp() + i * step, tz=low.tzinfo).isoformat()
+        (low + timedelta(seconds=i * step)).isoformat() + "+00:00"
         for i in range(count + 1)
     ]
     return [(moment, levels_at(events, moment)) for moment in moments]
@@ -156,7 +177,7 @@ def waits_of(events: list[Event]) -> dict[str, list[float]]:
     for station, stamp, field, _, now, _ in events:
         if field not in {"status", "card"}:
             continue
-        at = datetime.fromisoformat(stamp)
+        at = _instant(stamp)
         if station in since:
             status, began = since.pop(station)
             if status:
@@ -198,12 +219,12 @@ def leads_by_repo(events: list[Event], moment: str) -> dict[str, list[float]]:
         {repo: [days, ...]}.
 
     """
-    until = datetime.fromisoformat(moment)
+    until = _instant(moment)
     born: dict[str, datetime] = {}
     closed: set[str] = set()
     out: dict[str, list[float]] = {}
     for station, stamp, field, _, now, _ in events:
-        at = datetime.fromisoformat(stamp)
+        at = _instant(stamp)
         if at > until:
             continue
         if field == "card" and now == "minted":
@@ -226,11 +247,11 @@ def open_ages(events: list[Event], moment: str) -> dict[str, float]:
         {station: days}.
 
     """
-    until = datetime.fromisoformat(moment)
+    until = _instant(moment)
     born: dict[str, datetime] = {}
     standing: dict[str, str] = {}
     for station, stamp, field, _, now, _ in events:
-        at = datetime.fromisoformat(stamp)
+        at = _instant(stamp)
         if at > until:
             continue
         if field == "card":
@@ -262,14 +283,14 @@ def climate_of(
         lead_p90_days, leads}}.
 
     """
-    low, high = datetime.fromisoformat(start), datetime.fromisoformat(end)
+    low, high = _instant(start), _instant(end)
     span = max(_days(low, high), 1e-9)
     born: dict[str, datetime] = {}
     closed: set[str] = set()
     counts: dict[str, dict[str, float]] = {}
     leads: dict[str, list[float]] = {}
     for station, stamp, field, was, now, _ in events:
-        at = datetime.fromisoformat(stamp)
+        at = _instant(stamp)
         repo = station.partition(":")[0]
         row = counts.setdefault(
             repo, dict.fromkeys(("minted", "done", "dropped", "reopened"), 0.0)

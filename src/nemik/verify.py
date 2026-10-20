@@ -10,7 +10,29 @@ backfilled history is commit-grain, so a lead shorter than the gap between commi
 against noise). Imports only datetime, no future import: compiles under Codon as written.
 """
 
-from datetime import datetime
+from datetime import datetime, timedelta
+
+STAMP_BODY = 19  # len("2026-10-01T00:00:00")
+OFFSET_LEN = 6  # len("+00:00")
+
+
+def _instant(stamp: str) -> datetime:
+    """Read an ISO stamp as a moment in UTC, with no zone attached.
+
+    Codon's datetime.fromisoformat accepts only a stamp with no offset, so the offset is applied
+    here (as in nemik.climate, which a Codon module cannot import): the date and time part is
+    parsed, the +hh:mm or -hh:mm at its end is taken off, and fractional seconds are dropped.
+
+    Returns:
+        The moment as a naive datetime in UTC.
+
+    """
+    moment = datetime.fromisoformat(stamp[:STAMP_BODY])
+    tail = stamp[-OFFSET_LEN:]
+    if len(stamp) > STAMP_BODY and tail[0] in "+-" and tail[3] == ":":
+        shift = timedelta(hours=int(tail[1:3]), minutes=int(tail[4:6]))
+        return moment - shift if tail[0] == "+" else moment + shift
+    return moment
 
 
 def brier(pairs: list[tuple[float, bool]]) -> float:
@@ -63,17 +85,17 @@ def score_shingle(
         {lead: Brier score} for each lead with at least one scorable row.
 
     """
-    present = datetime.fromisoformat(now)
+    present = _instant(now)
     pairs: dict[str, list[tuple[float, bool]]] = {}
     for issued, station, lead, _, chance in rows:
         days = float(lead[1:-1])
-        began = datetime.fromisoformat(issued)
-        due = began.timestamp() + days * 86400
+        began = _instant(issued)
+        due = began + timedelta(days=days)
         finished = done_at.get(station, "")
-        if not scorable(days, grain_days) or due > present.timestamp():
+        if not scorable(days, grain_days) or due > present:
             continue
-        if finished and datetime.fromisoformat(finished) <= began:
+        if finished and _instant(finished) <= began:
             continue
-        outcome = bool(finished) and datetime.fromisoformat(finished).timestamp() <= due
+        outcome = bool(finished) and _instant(finished) <= due
         pairs.setdefault(lead, []).append((float(chance), outcome))
     return {lead: brier(found) for lead, found in pairs.items()}
