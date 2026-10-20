@@ -114,3 +114,11 @@ nemik:root a rdf:Property ; rdfs:comment "Why the trigger could happen; it diffe
 nemik:contributing a rdf:Property ; rdfs:comment "A contributing factor beside the root (nemik:W648, G3)." .
 # nemik:W649 (gates G5 and G6): what a retro keeps, beside what it fixes.
 nemik:sustain a rdf:Property ; rdfs:comment "What worked and should be kept, recorded beside what went wrong; empty is thin (nemik:W649, G6)." .
+
+# nemik:W754 (gate G7): a retro's findings are actions, not observations.
+nemik:RetroFinding a rdfs:Class ; rdfs:comment "One finding of a retro: it points at a card that carries the fix, or at a --certify verdict change (nemik:W754, G7)." .
+nemik:finding a rdf:Property ; rdfs:comment "A retro's finding (a nemik:RetroFinding)." .
+nemik:findingCard a rdf:Property ; rdfs:comment "The card that carries a finding's fix; it needs an owner, a due date and a witness (nemik:W754, G7)." .
+nemik:findingOwner a rdf:Property ; rdfs:comment "Who owns a finding's card (nemik:W754, G7)." .
+nemik:findingWitness a rdf:Property ; rdfs:comment "What shows a finding's fix landed, a query and not prose (nemik:W754, G7)." .
+nemik:certifyChange a rdf:Property ; rdfs:comment "A finding that is a --certify verdict change instead of a card: the verdict it changes (nemik:W754, G7)." .

@@ -504,3 +504,29 @@ nemik:RetroSustainShape a sh:NodeShape ;
                     FILTER(STRLEN(STR(?s)) > 0)
                 }
             }""" ] .
+
+# A retro finding is an action (nemik:W754, gate G7): it references a card that carries the fix, with
+# an owner, a due date and a witness, or a --certify verdict change. A finding that is neither is an
+# observation, and a retro of observations changes nothing.
+nemik:RetroFindingShape a sh:NodeShape ;
+    sh:targetClass nemik:RetroFinding ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        sh:message "a retro finding must reference a card (findingCard) or a --certify verdict change (certifyChange); otherwise it is an observation, not an action" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this a <https://github.com/mikemol/nemik/ns#RetroFinding> .
+                FILTER NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#findingCard> ?c }
+                FILTER NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#certifyChange> ?v }
+            }""" ] ;
+    sh:sparql [
+        sh:message "a retro finding's card needs an owner (findingOwner), a due date (due) and a witness (findingWitness)" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this <https://github.com/mikemol/nemik/ns#findingCard> ?c .
+                FILTER (
+                    NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#findingOwner> ?o . FILTER(STRLEN(STR(?o)) > 0) }
+                    || NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#due> ?d . FILTER(STRLEN(STR(?d)) > 0) }
+                    || NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#findingWitness> ?w . FILTER(STRLEN(STR(?w)) > 0) }
+                )
+            }""" ] .
