@@ -43,16 +43,16 @@
  },
  "src/nemik/check.py": {
   "call-overload": 2,
-  "misc": 47,
+  "misc": 44,
   "no-untyped-def": 1,
   "type-arg": 1
  },
  "src/nemik/churn.py": {
-  "misc": 41,
+  "misc": 10,
   "type-arg": 2
  },
  "src/nemik/critical.py": {
-  "misc": 22
+  "misc": 21
  },
  "src/nemik/endpoint.py": {
   "misc": 1
@@ -70,8 +70,8 @@
   "var-annotated": 1
  },
  "src/nemik/history.py": {
-  "misc": 229,
-  "type-arg": 14
+  "misc": 181,
+  "type-arg": 8
  },
  "src/nemik/hostapply.py": {
   "misc": 2
@@ -136,7 +136,7 @@
  },
  "src/nemik/serve.py": {
   "explicit-any": 5,
-  "misc": 351,
+  "misc": 337,
   "no-untyped-def": 1,
   "operator": 1,
   "type-arg": 8
@@ -169,7 +169,7 @@
  },
  "src/nemik/withheld.py": {
   "explicit-any": 1,
-  "misc": 76,
+  "misc": 73,
   "no-untyped-call": 1,
   "type-arg": 1
  },
@@ -256,7 +256,7 @@
   "misc": 4
  },
  "tests/test_churn.py": {
-  "misc": 34,
+  "misc": 32,
   "type-arg": 2
  },
  "tests/test_containerfile.py": {
@@ -319,7 +319,7 @@
   "misc": 8
  },
  "tests/test_history.py": {
-  "misc": 90,
+  "misc": 87,
   "no-untyped-def": 1,
   "type-arg": 2
  },
@@ -376,7 +376,7 @@
   "misc": 3
  },
  "tests/test_mypy_ratchet.py": {
-  "misc": 6
+  "misc": 3
  },
  "tests/test_operator_rate.py": {
   "misc": 15,
@@ -562,7 +562,7 @@
  },
  "tests/webpage.py": {
   "explicit-any": 1,
-  "misc": 14
+  "misc": 13
  },
  "tools/check_run_rows.py": {
   "misc": 12
@@ -572,14 +572,8 @@
   "misc": 102,
   "no-any-return": 1
  },
- "tools/mypy_ratchet.py": {
-  "misc": 8
- },
  "tools/nemik_client.py": {
   "explicit-any": 2,
-  "misc": 7
- },
- "tools/ruff_ratchet.py": {
   "misc": 7
  }
 }
