@@ -28,8 +28,10 @@ from nemik.cardevents import Event, events_of
 from nemik.check import LEDGER, QUEUE, default_root, workstream_files
 from nemik.climate import leads_by_repo, open_ages, waits_of
 from nemik.forecastshingle import HORIZONS, issue, shingle_rows
+from nemik.verify import score_shingle
 
 WAIT_QUANTILE = 0.9
+COMMIT_GRAIN_DAYS = 1.0  # backfilled history is commit-grain; docs/weather-questions.md
 # the modes that read a whole history rather than diff two points of it, named by their option
 SERIES_MODES = (
     "time_in_state",
@@ -38,7 +40,49 @@ SERIES_MODES = (
     "events",
     "waits",
     "forecast",
+    "score",
 )
+
+
+SHINGLE_COLUMNS = 5  # issued, station, lead, age, chance
+
+
+def shingle_lines(text: str) -> list[list[str]]:
+    """Read the rows of a stored shingle out of its text (nemik:W759).
+
+    Returns:
+        The tab-split lines that are rows of five fields; a blank or a wrapper's status line is
+        not one and is skipped.
+
+    """
+    split = (line.split("\t") for line in text.splitlines())
+    return [row for row in split if len(row) == SHINGLE_COLUMNS]
+
+
+def first_done(events: list[Event]) -> dict[str, str]:
+    """Find when each card was first done, from the events.
+
+    Returns:
+        {station: the stamp of its first status event to done}.
+
+    """
+    out: dict[str, str] = {}
+    for station, stamp, what, _, now, _ in events:
+        if what == "status" and now == "done" and station not in out:
+            out[station] = stamp
+    return out
+
+
+def score_rows(
+    rows: list[list[str]], events: list[Event], now: str
+) -> dict[str, float]:
+    """Score stored shingle rows against the events at the commit-grain floor (nemik:W759).
+
+    Returns:
+        {lead: Brier score}, only for leads the truth's grain allows.
+
+    """
+    return score_shingle(rows, first_done(events), now, COMMIT_GRAIN_DAYS)
 
 
 def is_series(args: argparse.Namespace, *, extra: tuple[str, ...] = ()) -> bool:
@@ -876,6 +920,12 @@ def main(argv: list[str] | None = None) -> int:
         "field, from, to, commit (W744)",
     )
     mode.add_argument(
+        "--score",
+        metavar="FILE",
+        help="score a stored shingle (the rows --forecast printed) against the events: the Brier "
+        "score per lead, leaving out leads finer than the commit grain (W759)",
+    )
+    mode.add_argument(
         "--forecast",
         action="store_true",
         help="issue the forecast now for every open card: the chance it is done within +1, +3 and "
@@ -1020,6 +1070,27 @@ def _events(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -
     return 0
 
 
+def _score(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> int:
+    """Print the Brier score per lead of a stored shingle, read against the events (nemik:W759).
+
+    The file holds the tab-separated rows `--forecast` printed; any line that is not a row is
+    skipped.
+
+    Returns:
+        0.
+
+    """
+    rows = shingle_lines(Path(args.score).read_text(encoding="utf-8"))
+    events = [e for name in names for e in backfill(name, dirs[name], args.start)]
+    got = score_rows(rows, events, datetime.now(UTC).isoformat())
+    if args.json:
+        sys.stdout.write(json.dumps(got, indent=1) + "\n")
+        return 0
+    for lead, score in sorted(got.items()):
+        sys.stdout.write(f"{lead}\tbrier {score:.3f}\n")
+    return 0
+
+
 def _forecast(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> int:
     """Print the shingle rows for every open card, issued now, one tab-separated row a line.
 
@@ -1160,6 +1231,7 @@ def _series(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -
         ("events", _events),
         ("waits", _waits),
         ("forecast", _forecast),
+        ("score", _score),
     ):
         if getattr(args, mode):
             return run(args, names, dirs)
