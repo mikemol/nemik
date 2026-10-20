@@ -5,34 +5,70 @@
 import json
 from pathlib import Path
 
+import pytest
+
 from nemik.ask import blocked_on, braces_balanced, entry, slug_ok, title
 from nemik.ask_cli import main
 
 CLAIM = "fence admission records no waiter, so `hold` cannot be fair (a {nested} brace is fine)"
 
 
-def _queue(tmp_path: Path) -> Path:
-    """Write an empty queue.
+@pytest.fixture()
+def scratch_fleet(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """Make the scratch directory the home whose ~/github the writer reads the fleet from."""
+    monkeypatch.setenv("HOME", str(tmp_path))
+
+
+def _write(repo: Path, cards: list[dict[str, object]]) -> Path:
+    """Write a queue under <repo>/.claude, where the writer finds a workstream.
 
     Args:
-        tmp_path: A scratch directory.
+        repo: The repo's directory.
+        cards: Its waypoints.
 
     Returns:
         The queue file.
 
     """
     residue: list[str] = []
-    cards: list[dict[str, object]] = []
     state: dict[str, object] = {
         "version": 1,
-        "project_root": str(tmp_path),
-        "counter": 6,
+        "project_root": str(repo),
+        "counter": 12,
         "residue": residue,
         "waypoints": cards,
     }
-    path = tmp_path / "paths-forward.json"
+    path = repo / ".claude" / "paths-forward.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(state))
     return path
+
+
+def _queue(tmp_path: Path) -> Path:
+    """Write the filer's empty queue and the owner's, whose W12 is open.
+
+    The owner's queue sits beside the filer's, so the writer resolves `mtools:W12` here and not in
+    the real fleet, where W12 has since landed (a test must not depend on that).
+
+    Args:
+        tmp_path: A scratch directory, the fleet root.
+
+    Returns:
+        The filer's queue file.
+
+    """
+    owner: dict[str, object] = {
+        "symbol": "W12",
+        "title": "the owner's card",
+        "status": "ready",
+        "blocked_on": [],
+        "enables": [],
+        "touches": [],
+        "next_bounded_step": "work",
+        "evidence": "",
+    }
+    _write(tmp_path / "github" / "mtools", [owner])
+    return _write(tmp_path / "github" / "life", [])
 
 
 def _args(tmp_path: Path, *extra: str) -> list[str]:
@@ -71,6 +107,7 @@ def test_the_words_of_the_card_and_the_entry() -> None:
     assert "waypoint = {life:W7}" in text
 
 
+@pytest.mark.usefixtures("scratch_fleet")
 def test_a_dry_run_changes_nothing(tmp_path: Path) -> None:
     """Without --apply neither the queue nor the floor is touched."""
     args = _args(tmp_path)
@@ -81,6 +118,7 @@ def test_a_dry_run_changes_nothing(tmp_path: Path) -> None:
     assert list((tmp_path / "floor").iterdir()) == []
 
 
+@pytest.mark.usefixtures("scratch_fleet")
 def test_applying_mints_blocks_and_writes_then_a_second_filing_is_refused(
     tmp_path: Path,
 ) -> None:
@@ -88,14 +126,16 @@ def test_applying_mints_blocks_and_writes_then_a_second_filing_is_refused(
     args = _args(tmp_path, "--apply")
     assert main(args) == 0
     stored: dict[str, list[dict[str, object]]] = json.loads(
-        (tmp_path / "paths-forward.json").read_text(encoding="utf-8")
+        (tmp_path / "github" / "life" / ".claude" / "paths-forward.json").read_text(
+            encoding="utf-8"
+        )
     )
     (card,) = stored["waypoints"]
-    assert (card["symbol"], card["status"]) == ("W7", "blocked")
+    assert (card["symbol"], card["status"]) == ("W13", "blocked")
     assert card["blocked_on"] == ["mtools:W12"]
     written = (tmp_path / "floor" / "ask-fence-no-waiter.bib").read_text(
         encoding="utf-8"
     )
-    assert "waypoint = {life:W7}" in written
+    assert "waypoint = {life:W13}" in written
     refused = 2
     assert main(args) == refused
