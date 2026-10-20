@@ -598,3 +598,21 @@ nemik:RetroDeltaShape a sh:NodeShape ;
                     FILTER(STRLEN(STR(?d)) > 0)
                 }
             }""" ] .
+
+# A retro's timeline is frozen (nemik:W757, gate G1): the ledger lines it reasons from are written
+# once and hashed (mtools --retro-freeze), so the retro cannot be fitted to a timeline rewritten
+# afterwards. Info, not a verdict: nemik cannot check the hash against the lines, only that one was
+# recorded.
+nemik:RetroTimelineShape a sh:NodeShape ;
+    sh:targetClass nemik:Retro ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "no frozen timeline: this retro records no content hash of its write-once timeline (mikemol --retro-freeze), so the timeline can change under it" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this a <https://github.com/mikemol/nemik/ns#Retro> .
+                FILTER NOT EXISTS {
+                    $this <https://github.com/mikemol/nemik/ns#frozenTimeline> ?h .
+                    FILTER(STRLEN(STR(?h)) > 0)
+                }
+            }""" ] .
