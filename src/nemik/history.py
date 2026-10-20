@@ -953,6 +953,11 @@ def main(argv: list[str] | None = None) -> int:
         f"still open now, and the cards added since by how they were minted; without a value, "
         f"the repo's declared {BASELINE_PATH} (W318)",
     )
+    ap.add_argument(
+        "--append-to",
+        metavar="FILE",
+        help="with --forecast: append the rows to this shingle file, not print them (W747)",
+    )
     args = ap.parse_args(argv)
     dirs = {r: p.parents[1] for r, p in workstream_files(args.root, QUEUE)}
     names = sorted(dirs) if args.all else args.repos
@@ -1101,6 +1106,12 @@ def _forecast(args: argparse.Namespace, names: list[str], dirs: dict[str, Path])
     moment = datetime.now(UTC).isoformat()
     events = [e for name in names for e in backfill(name, dirs[name], args.start)]
     rows = forecast_rows(events, moment)
+    if args.append_to:
+        # the shingle is append-only: every issue is kept with its lead, none rewritten
+        with Path(args.append_to).open("a", encoding="utf-8") as shingle:
+            shingle.writelines("\t".join(row) + "\n" for row in rows)
+        sys.stdout.write(f"appended {len(rows)} rows to {args.append_to}\n")
+        return 0
     if args.json:
         sys.stdout.write(json.dumps(rows, indent=1) + "\n")
         return 0

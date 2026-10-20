@@ -327,3 +327,16 @@ def test_the_command_prints_the_diff_between_two_dates(tmp_path: Path, capsys) -
     assert code == 0
     assert "a: 1 minted, 1 closed, 0 dropped" in out
     assert "minted: W2" in out and "closed: W1" in out
+
+
+def test_each_forecast_issue_is_appended_after_the_last(tmp_path: Path) -> None:
+    """Two issues into one shingle file leave both, the second after the first."""
+    _two_commits(tmp_path)
+    shingle = tmp_path / "shingle.tsv"
+    argv = ["a", "--forecast", "--root", str(tmp_path), "--append-to", str(shingle)]
+    assert main(argv) == 0
+    first = shingle.read_text(encoding="utf-8")
+    assert main(argv) == 0
+    both = shingle.read_text(encoding="utf-8")
+    assert both.startswith(first)
+    assert len(both.splitlines()) == 2 * len(first.splitlines())
