@@ -1,0 +1,404 @@
+// nemik:W799: a part of the page's script, moved out of index.html (docs/web-modules.md).
+// A classic script: its functions and constants stay global, as they were, and index.html's
+// script calls them when it runs.
+
+// Only edges that point downstream (prerequisite above dependent) rank a layout. Each repo box is
+// laid out on its own by forest() (below); then the boxes (and operator lanes) are themselves ranked by the edges that
+// cross between them, oriented downstream: a box another box waits on sits above it. Cycles are cut
+// at DFS back edges (the edge is still drawn, just not ranked). Units with no cross edges go in a
+// last row, since nothing orders them.
+// nemik:W180 (operator 2026-10-01: "the correct layout is probably reminiscent of a treemap"; not
+// grouped by repo). Step 1, the model: the enables forest across the whole fleet, one parent each,
+// and an ordered treemap of it. Pure functions over plain data, so they can be checked headless.
+// treeOf: each open waypoint's parent is the heaviest open thing it enables (ties: lower id); a
+// second parent stays a drawn edge. Weight = 1 + the weight of everything beneath (area ~ load).
+function treeOf(nodes, edges) {
+  const open = new Set(nodes.filter(n => n.state !== "done" && n.state !== "dropped").map(n => n.id));
+  const ups = new Map([...open].map(id => [id, []]));
+  for (const e of edges) if (e.kind === "enables" && open.has(e.source) && open.has(e.target) && e.source !== e.target) ups.get(e.source).push(e.target);
+  const reach = new Map();  // number of open things each node sits under (transitively), cycle-safe
+  const depthUp = id => { if (reach.has(id)) return reach.get(id); reach.set(id, 0);
+    let d = 0; for (const u of ups.get(id)) d = Math.max(d, 1 + depthUp(u)); reach.set(id, d); return d; };
+  const parent = new Map();
+  for (const id of [...open].sort()) {
+    const cands = ups.get(id).slice().sort((a, b) => depthUp(b) - depthUp(a) || (a < b ? -1 : 1));
+    parent.set(id, cands[0] || null);
+  }
+  // A cycle in the chosen parents is cut at its lowest id, which becomes a root.
+  for (const id of [...open].sort()) {
+    const seen = new Set(); let c = id;
+    while (c && !seen.has(c)) { seen.add(c); c = parent.get(c); }
+    if (c) { const cyc = []; let x = c; do { cyc.push(x); x = parent.get(x); } while (x !== c); parent.set(cyc.sort()[0], null); }
+  }
+  const kids = new Map([...open].map(id => [id, []]));
+  for (const [id, p] of parent) if (p) kids.get(p).push(id);
+  // Own weight (step 3, operator's treemap reference: sizes must vary): 1 + how many open items
+  // this one moves downstream, over enables and waits alike, so a load-bearing leaf is a big tile.
+  const succ = new Map([...open].map(id => [id, []]));
+  for (const e of edges) {
+    const [up, down] = e.kind === "waits" ? [e.target, e.source] : [e.source, e.target];
+    if (open.has(up) && open.has(down) && up !== down) succ.get(up).push(down);
+  }
+  const own = new Map([...open].map(id => {
+    const seen = new Set([id]), st = [id];
+    while (st.length) for (const d of succ.get(st.pop())) if (!seen.has(d)) { seen.add(d); st.push(d); }
+    return [id, seen.size];
+  }));
+  const weight = new Map();
+  const w = id => weight.get(id) ?? (weight.set(id, own.get(id) + kids.get(id).reduce((a, k) => a + w(k), 0)), weight.get(id));
+  for (const id of open) w(id);
+  return { parent, kids, weight, own, roots: [...open].filter(id => !parent.get(id)) };
+}
+// orderedTreemap: an ordered *strip* treemap (Bederson et al. 2002): items in rank order fill
+// horizontal strips, a strip closing when adding the next item would worsen its worst aspect ratio.
+// Order reads left to right, top to bottom; area is proportional to weight. Plain slice-and-dice
+// (step 1) kept order too, but 272 fixture roots in one row came out as hair-thin slivers.
+function orderedTreemap(tree, order, rect, pad = 4, head = 3 * pad) {
+  const out = new Map(), rank = new Map(order.map((id, i) => [id, i]));
+  const byRank = (a, b) => (rank.get(a) ?? Infinity) - (rank.get(b) ?? Infinity) || (a < b ? -1 : 1);
+  const lay = (ids, r, depth) => {
+    if (r.w <= 0 || r.h <= 0) { for (const id of ids) out.set(id, { x: r.x, y: r.y, w: 0, h: 0, depth }); return; }
+    const items = ids.slice().sort(byRank), total = items.reduce((a, id) => a + tree.weight.get(id), 0);
+    const scale = (r.w * r.h) / total;  // area per unit weight
+    const worst = strip => { const a = strip.reduce((s, id) => s + tree.weight.get(id) * scale, 0), h = a / r.w;
+      return Math.max(...strip.map(id => { const w = tree.weight.get(id) * scale / h; return Math.max(w / h, h / w); })); };
+    const strips = [];
+    let cur = [];
+    for (const id of items) {
+      if (cur.length && worst([...cur, id]) > worst(cur)) { strips.push(cur); cur = []; }
+      cur.push(id);
+    }
+    if (cur.length) strips.push(cur);
+    let y = r.y;
+    for (const strip of strips) {
+      const h = strip.reduce((s, id) => s + tree.weight.get(id) * scale, 0) / r.w;
+      let x = r.x;
+      for (const id of strip) {
+        const w = tree.weight.get(id) * scale / h, cell = { x, y, w, h };
+        x += w;
+        out.set(id, { ...cell, depth });
+        // The header and margins shrink with a small cell, so children never leave it.
+        // Step 6 (operator: graphviz-style labelled nested clusters): a node with work beneath it is a
+        // frame; its label gets a header strip of its own and its children sit inside the margins.
+        // Header and margins shrink with a small cell, so children never leave it.
+        if (tree.kids.get(id).length) {
+          const px = Math.min(pad, cell.w / 6), top = Math.min(head, cell.h / 3), py = Math.min(pad, cell.h / 6);
+          out.get(id).head = top;
+          lay(tree.kids.get(id), { x: cell.x + px, y: cell.y + top, w: cell.w - 2 * px, h: cell.h - top - py }, depth + 1);
+        }
+      }
+      y += h;
+    }
+  };
+  lay(tree.roots, rect, 0);
+  return out;
+}
+
+// nemik:W180 step 2: draw the treemap. Positions and sizes come from orderedTreemap; an enables
+// edge to the tile's own parent is implied by containment and hidden; every other edge is drawn.
+// Operator chips and placeholders sit in a row below the map.
+function repoHue(r) { let h = 0; for (const c of r) h = (h * 31 + c.charCodeAt(0)) % 360; return `hsl(${h}, 65%, 55%)`; }
+// The largest font (px, at most 28) at which `lines` fit a w x h box: measured with the page's own
+// font on a canvas, so it holds for any string, not an average character width.
+const _measure = document.createElement("canvas").getContext("2d");
+function fitFont(lines, w, h) {
+  _measure.font = `bold 100px ${getComputedStyle(document.body).fontFamily}`;
+  const widest = Math.max(...lines.map(l => _measure.measureText(String(l)).width)) / 100;
+  return Math.floor(Math.min(28, (w * 0.92) / widest, (h * 0.9) / (lines.length * 1.2)));
+}
+function treemap() {
+  const ns = cy.nodes("[symbol]").filter(n => n.data("state") !== "unclaimed");
+  const t = treeOf(ns.map(n => n.data()), cy.edges().map(e => ({ kind: e.hasClass("waits") ? "waits" : "enables",
+    source: e.source().id(), target: e.target().id() })));
+  const order = ns.filter(n => n.data("rank_pos") !== undefined).sort((a, b) => a.data("rank_pos") - b.data("rank_pos")).map(n => n.id());
+  // Room for one label-sized leaf (about 50x50) per unit of weight, in the pane's landscape shape.
+  const total = t.roots.reduce((a, r) => a + t.weight.get(r), 0), H = Math.sqrt(total * 2500 * 0.62), W = H / 0.62;
+  const R = orderedTreemap(t, order, { x: 0, y: 0, w: W, h: H }, 4, 16);
+  cy.batch(() => {
+    // nemik:W474: a tile names its card as the graph does: its state mark, and an umbrella's roll-up
+    // (+N hidden) or expanded mark, so work folded into a tile is never silently missing.
+    const marked = n => stateMark(n.data()) + n.data("symbol") + warnMark(n.data())
+      + (n.data("rollup") ? `${ROLLUP_MARK}${n.data("rollup")}` : expanded.has(n.id()) ? EXPANDED_MARK : "");
+    ns.forEach(n => {
+      const r = R.get(n.id());
+      if (!r) { n.style("display", "none"); return; }
+      const base = { tw: Math.max(1, r.w), th: Math.max(1, r.h), repoColor: repoHue(n.data("repo")), depth: r.depth };
+      n.addClass("tile").removeClass("cluster").position({ x: r.x + r.w / 2, y: r.y + r.h / 2 });
+      if (r.head !== undefined) {
+        // A cluster: its label (symbol and title, cut to the width) in the header strip.
+        const fs = Math.min(11, r.head * 0.75), fits = Math.floor(r.w / (fs * 0.62));
+        const text = `${marked(n)} ${n.data("title") || ""}`;
+        n.data({ ...base, fs, hm: (r.head - fs) / 2 + fs, label: fs >= 6 && fits > 3 ? (text.length > fits ? text.slice(0, fits - 1) + "…" : text) : "" })
+         .addClass("cluster");
+      } else {
+        // Operator 2026-10-02: a leaf names its repo too, on its own line (vertical space is cheaper
+        // than horizontal), and the text is fitted to the tile. Two lines if they fit at a readable
+        // size, else the symbol alone, else nothing.
+        const two = [n.data("repo"), marked(n)], f2 = fitFont(two, r.w, r.h), f1 = fitFont([marked(n)], r.w, r.h);
+        const [fs, label] = f2 >= 7 ? [f2, two.join("\n")] : f1 >= 7 ? [f1, marked(n)] : [0, ""];
+        n.data({ ...base, fs, label });
+      }
+    });
+    cy.edges().forEach(e => { if (!e.hasClass("waits") && t.parent.get(e.source().id()) === e.target().id()) e.addClass("contained"); });
+    // Step 4: the repo colour key, since fill is the repo here.
+    const key = document.getElementById("repokey");
+    key.innerHTML = [...new Set(ns.map(n => n.data("repo")))].sort().map(r =>
+      `<span><i class="dot" style="background:${repoHue(r)}"></i>${esc(r)}</span>`).join(" ");
+    key.hidden = false;
+    let x = 0;
+    cy.nodes().not(ns).not(".repo").forEach(n => { n.position({ x: x + n.outerWidth() / 2, y: H + 40 }); x += n.outerWidth() + 12; });
+  });
+}
+
+// nemik:W135 (operator 2026-09-28: "a multi-headed overlapping dag/forest view ordered by
+// nemik-rank"). Inside one repo box: the HEADS are its goals (nothing open in the box follows
+// them); each hangs its prerequisites below it. Heads run left to right by the best nemik-rank
+// position (rank_pos, from the server's composed order) among the work beneath them. A waypoint
+// several heads share is drawn once, under the highest-ranked of them; its edges to the others
+// cross over (the overlap). Within a layer, ready work sits in rank order.
+function forest(box) {
+  // Operator chips are not prerequisites: they are placed after, below the askers (see end).
+  const chips = box.filter(".actor"), kids = box.not(".actor");
+  const ids = new Set(kids.map(n => n.id()));
+  const feeds = new Map(kids.map(n => [n.id(), new Set()]));   // dependent -> its prerequisites
+  const follows = new Map(kids.map(n => [n.id(), new Set()])); // prerequisite -> its dependents
+  kids.edgesWith(kids).forEach(e => {
+    let [pre, dep] = [e.source().id(), e.target().id()];     // enables: prerequisite -> dependent
+    if (e.hasClass("waits")) [pre, dep] = [dep, pre];         // waits: waiter -> what it waits for
+    if (!ids.has(pre) || !ids.has(dep) || pre === dep) return;
+    feeds.get(dep).add(pre); follows.get(pre).add(dep);
+  });
+  const rp = id => { const v = cy.getElementById(id).data("rank_pos"); return v === undefined ? Infinity : v; };
+  const sym = id => cy.getElementById(id).data("label") || id;
+  const bySal = document.getElementById("bySalience").checked;
+  const sal = id => cy.getElementById(id).data("salience") || 0;
+  const bySym = (a, b) => (sym(a) < sym(b) ? -1 : sym(a) > sym(b) ? 1 : 0);
+  // nemik:W261: "salience order" ranks by the flow model alone (highest absorbed salience first);
+  // otherwise by nemik-rank's composed position, where the band outranks the weight.
+  const byRank = bySal ? (a, b) => sal(b) - sal(a) || rp(a) - rp(b) || bySym(a, b)
+                       : (a, b) => rp(a) - rp(b) || bySym(a, b);
+  const below = h => {  // everything under a head, following prerequisites
+    const seen = new Set([h]), stack = [h];
+    while (stack.length) for (const p of feeds.get(stack.pop())) if (!seen.has(p)) { seen.add(p); stack.push(p); }
+    return seen;
+  };
+  let heads = [...ids].filter(id => follows.get(id).size === 0);
+  if (!heads.length) heads = [...ids];  // a cycle with no exit: every member is its own head
+  const trees = new Map(heads.map(h => [h, below(h)]));
+  const best = h => Math.min(...[...trees.get(h)].map(rp));
+  // A head's salience is the demand its whole cone carries: the sum over the ready cards beneath it.
+  const carried = h => [...trees.get(h)].reduce((t, n) => t + sal(n), 0);
+  heads.sort(bySal ? (a, b) => carried(b) - carried(a) || best(a) - best(b) || byRank(a, b)
+                   : (a, b) => best(a) - best(b) || byRank(a, b));
+  const owner = new Map();
+  for (const h of heads) for (const n of trees.get(h)) if (!owner.has(n)) owner.set(n, h);
+  for (const n of ids) if (!owner.has(n)) owner.set(n, heads[0]);
+  // Layer = longest path down from a head, over the DAG left after a DFS drops back edges (a
+  // cycle is cut at one edge, still drawn; without the cut, depth ran around it to its bound).
+  const dag = new Map([...ids].map(n => [n, []])), mark = new Map();
+  const cut = n => {
+    mark.set(n, 1);
+    for (const p of [...feeds.get(n)].sort()) {
+      if (mark.get(p) === 1) continue;  // back edge
+      dag.get(n).push(p);
+      if (!mark.has(p)) cut(p);
+    }
+    mark.set(n, 2);
+  };
+  for (const h of heads) if (!mark.has(h)) cut(h);
+  for (const n of [...ids].sort()) if (!mark.has(n)) cut(n);
+  const topo = [], seen = new Set();
+  const visit = n => { if (seen.has(n)) return; seen.add(n); for (const p of dag.get(n)) visit(p); topo.push(n); };
+  for (const n of [...ids].sort()) visit(n);
+  const depth = new Map([...ids].map(n => [n, 0]));
+  for (const n of topo.reverse()) for (const p of dag.get(n)) depth.set(p, Math.max(depth.get(p), depth.get(n) + 1));
+  const SEP = 8, ROW = 20;
+  const h = kids.length ? Math.max(...kids.map(n => n.outerHeight())) : 20;
+  // Each head's column, laid out at the origin: layers down, rank order across.
+  const cols = [];
+  for (const head of heads) {
+    const layers = [];
+    for (const n of ids) if (owner.get(n) === head) (layers[depth.get(n)] ||= []).push(n);
+    const place = [];
+    let w = 0;
+    layers.forEach((layer, d) => {
+      if (!layer) return;
+      layer.sort(byRank);
+      let x = 0;
+      for (const id of layer) { const nw = cy.getElementById(id).outerWidth(); place.push([id, x + nw / 2, d * (h + ROW)]); x += nw + SEP; }
+      w = Math.max(w, x - SEP);
+    });
+    if (place.length) cols.push({ place, w, h: layers.length * (h + ROW) - ROW });
+  }
+  // Shelves: columns keep rank order, left to right then top to bottom, wrapping near sqrt(area)
+  // so one repo with many lone goals does not become a single very wide row.
+  const limit = Math.max(...cols.map(c => c.w), 1.6 * Math.sqrt(cols.reduce((t, c) => t + (c.w + 3 * SEP) * (c.h + ROW), 0)));
+  let x0 = 0, y0 = 0, shelfH = 0;
+  for (const c of cols) {
+    if (x0 > 0 && x0 + c.w > limit) { x0 = 0; y0 += shelfH + 2 * ROW; shelfH = 0; }
+    for (const [id, x, y] of c.place) cy.getElementById(id).position({ x: x0 + x, y: y0 + y });
+    x0 += c.w + 3 * SEP; shelfH = Math.max(shelfH, c.h);
+  }
+  // A chip goes below everything, under the mean x of the waypoints that ask it.
+  let cx = 0;
+  const floor = y0 + shelfH + h + 2 * ROW;
+  chips.forEach(c => {
+    const xs = c.connectedEdges().map(e => e.source().position().x).filter(Number.isFinite);
+    const w = c.outerWidth();
+    const want = xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : cx + w / 2;
+    const x = Math.max(cx + w / 2, want);
+    c.position({ x, y: floor });
+    cx = x + w / 2 + SEP;
+  });
+}
+
+const dist = (p, q) => Math.hypot(p.x - q.x, p.y - q.y);
+const p95 = L => { if (!L.length) return 0; const s = [...L].sort((a, b) => a - b); return s[Math.min(s.length - 1, Math.floor(0.95 * s.length))]; };
+const lexLess = (a, b) => { for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return a[i] < b[i]; return false; };
+
+function tile() {
+  const GAP = 60;
+  const units = new Map();  // unit id -> { el: collection to shift, bb }
+  // Inside each box, the rank forest (operator 2026-10-09: the only per-repo view; the dagre
+  // alignment search it replaced is gone).
+  cy.nodes(".repo").forEach(r => {
+    const kids = r.children();
+    forest(kids);
+    units.set(r.id(), { el: kids, bb: kids.boundingBox() });
+  });
+  cy.nodes(".actor").orphans().forEach(a => units.set(a.id(), { el: a, bb: a.boundingBox() }));
+  const unitOf = n => (n.isChild() ? n.parent().id() : n.id());
+  const down = new Map([...units.keys()].map(k => [k, new Set()]));
+  const linked = new Set();
+  cy.edges().forEach(e => {
+    let [u, v] = [unitOf(e.source()), unitOf(e.target())];
+    if (u === v || !down.has(u) || !down.has(v)) return;
+    if (e.hasClass("waits")) [u, v] = [v, u];  // waiter -> blocker points upstream
+    down.get(u).add(v); linked.add(u); linked.add(v);
+  });
+  // Longest-path ranks over the DAG left after dropping DFS back edges.
+  const state = new Map(), order = [];
+  const visit = u => {
+    state.set(u, 1);
+    for (const v of down.get(u)) {
+      if (state.get(v) === 1) down.get(u).delete(v);  // back edge: cut the cycle here
+      else if (!state.has(v)) visit(v);
+    }
+    state.set(u, 2); order.push(u);
+  };
+  [...linked].sort().forEach(u => state.has(u) || visit(u));
+  const rank = new Map();
+  for (const u of order.reverse()) {
+    rank.set(u, rank.get(u) || 0);
+    for (const v of down.get(u)) rank.set(v, Math.max(rank.get(v) || 0, rank.get(u) + 1));
+  }
+  const last = Math.max(-1, ...rank.values()) + 1;
+  for (const u of units.keys()) if (!rank.has(u)) rank.set(u, last);
+  // Placement (operator 2026-09-28: shorten cross-box edges, minimize p95, and minimize the drawing's
+  // area). Rows by rank left a wide box's row mostly empty beside narrow ones, so boxes are packed
+  // skyline-style instead: in rank order, each goes as high as it can while staying below every box
+  // it depends on and clear of every box already placed, as near as it can to the mean x of its
+  // placed neighbours. Packing is tried at several target widths; the result kept minimizes
+  // area/area0 + p95/p95_0 (each relative to the first packing, so neither unit dominates).
+  const w = new Map([...units.keys()].map(k => [k, new Map()]));
+  cy.edges().forEach(e => {
+    const [u, v] = [unitOf(e.source()), unitOf(e.target())];
+    if (u === v || !w.has(u) || !w.has(v)) return;
+    w.get(u).set(v, (w.get(u).get(v) || 0) + 1);
+    w.get(v).set(u, (w.get(v).get(u) || 0) + 1);
+  });
+  const up = new Map([...units.keys()].map(k => [k, []]));
+  for (const [u, vs] of down) for (const v of vs) up.get(v).push(u);
+  const size = u => units.get(u).bb;
+  const crossEdges = [];
+  cy.edges().forEach(e => {
+    const [a, b] = [e.source(), e.target()], [u, v] = [unitOf(a), unitOf(b)];
+    if (u === v || !w.has(u) || !w.has(v)) return;
+    const rel = (n, k) => { const bb = size(k), p = n.position(); return { x: p.x - bb.x1, y: p.y - bb.y1 }; };
+    crossEdges.push([u, rel(a, u), v, rel(b, v)]);
+  });
+  // A box may be mirrored left-right when that brings its cross-linked nodes nearer their partners
+  // (a dagre layout is as valid mirrored); `flip` holds the boxes that are.
+  let pos = new Map(), flip = new Set();
+  const at = (u, r) => ({ x: pos.get(u).x + (flip.has(u) ? size(u).w - r.x : r.x), y: pos.get(u).y + r.y });
+  const cross = () => crossEdges.map(([u, ru, v, rv]) => dist(at(u, ru), at(v, rv)));
+  // nemik:W127: the area that counts is the viewport-shaped rectangle the drawing is fitted into,
+  // not the drawing's own box: minimizing it maximizes the fit-to-screen scale. A portrait packing
+  // on a landscape screen is width-poor and scale-limited by its height, whatever its own area.
+  const VW = cy.width() || 1, VH = cy.height() || 1;
+  const area = () => {
+    let x1 = Infinity, y1 = Infinity, x2 = -Infinity, y2 = -Infinity;
+    for (const [u, p] of pos) { x1 = Math.min(x1, p.x); y1 = Math.min(y1, p.y);
+      x2 = Math.max(x2, p.x + size(u).w); y2 = Math.max(y2, p.y + size(u).h); }
+    const s = Math.max((x2 - x1) / VW, (y2 - y1) / VH);
+    return s * s * VW * VH;
+  };
+  const seq = [...units.keys()].sort((a, b) => rank.get(a) - rank.get(b) || size(b).w * size(b).h - size(a).w * size(a).h || (a < b ? -1 : 1));
+  // k: how far a box will drop to stay near its neighbours (score = y + k * |x - target|).
+  // prev: the previous packing, so a second pass also aims at neighbours not yet placed.
+  // loose (nemik:W127): a box need only start no higher than the boxes it depends on, so it may sit
+  // beside them rather than below. The strict rule stacks a long cross-repo chain into a column
+  // whatever width is allowed (the rank forest's narrow boxes came out 2038x5352 on a 1360x1200
+  // view); both are tried, and the score below picks.
+  const pack = (W, k, prev, loose) => {
+    pos = new Map();
+    const placed = [];
+    for (const u of seq) {
+      const { w: uw, h: uh } = size(u);
+      let minY = 0;
+      for (const v of up.get(u)) if (pos.has(v)) minY = Math.max(minY, pos.get(v).y + (loose ? GAP : size(v).h + GAP));
+      let s = 0, n = 0;
+      for (const [v, c] of w.get(u)) {
+        const p = pos.get(v) || (prev && prev.get(v));
+        if (p) { s += c * (p.x + size(v).w / 2); n += c; }
+      }
+      const maxX = Math.max(0, W - uw);
+      const target = n ? Math.min(maxX, Math.max(0, s / n - uw / 2)) : 0;
+      const xs = new Set([target, 0, maxX]);
+      for (const r of placed) { xs.add(r.x2 + GAP); xs.add(r.x1 - uw - GAP); }
+      let best = null;
+      for (const x of xs) {
+        if (x < 0 || x > maxX) continue;
+        let y = minY, moved = true;
+        while (moved) {
+          moved = false;
+          for (const r of placed)
+            if (x < r.x2 + GAP && r.x1 < x + uw + GAP && y < r.y2 + GAP && r.y1 < y + uh + GAP) { y = r.y2 + GAP; moved = true; }
+        }
+        const score = y + k * Math.abs(x - target);
+        if (!best || score < best.score) best = { score, x, y };
+      }
+      pos.set(u, { x: best.x, y: best.y });
+      placed.push({ x1: best.x, y1: best.y, x2: best.x + uw, y2: best.y + uh });
+    }
+  };
+  const widest = Math.max(...seq.map(u => size(u).w));
+  const side = Math.sqrt(seq.reduce((t, u) => t + (size(u).w + GAP) * (size(u).h + GAP), 0));
+  let best = null, base = null;
+  // Target widths around the side of a square of the same area, scaled toward the viewport's aspect.
+  const aspect = Math.sqrt(VW / VH);
+  for (const loose of [false, true]) for (const f of [1, 1.25, 1.5, 1.75, 2, 2.5, 3].map(f => f * aspect)) for (const k of [0.25, 1, 4]) for (const again of [false, true]) {
+    pack(Math.max(widest, side * f), k, null, loose);
+    if (again) pack(Math.max(widest, side * f), k, new Map(pos), loose);
+    flip = new Set();
+    // Mirror pass: flip any box whose mirror image lowers the cross-edge p95 (then total).
+    const c = () => { const L = cross(); return [p95(L), L.reduce((a, b) => a + b, 0)]; };
+    for (let round = 0, better = true; better && round < 4; round++) {
+      better = false;
+      for (const u of seq) { const before = c(); flip.add(u); if (lexLess(c(), before)) better = true; else flip.delete(u); }
+    }
+    const m = { p95: p95(cross()) || 1, area: area() };
+    base ||= m;
+    const score = m.area / base.area + m.p95 / base.p95;
+    if (!best || score < best.score) best = { score, pos: new Map(pos), flip: new Set(flip) };
+  }
+  for (const u of best.flip) {
+    const { el, bb } = units.get(u);
+    el.forEach(n => n.position({ x: bb.x1 + bb.x2 - n.position().x, y: n.position().y }));
+  }
+  for (const [u, p] of best.pos) {
+    const { el, bb } = units.get(u);
+    el.shift({ x: p.x - bb.x1, y: p.y - bb.y1 });
+  }
+  cy.fit(undefined, 20);
+}

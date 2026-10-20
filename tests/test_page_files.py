@@ -82,12 +82,12 @@ def test_the_live_server_answers_a_listed_file_with_its_type(
 def test_the_static_build_copies_the_listed_files_that_exist(
     web: Path, tmp_path: Path
 ) -> None:
-    """The published page has the stylesheet beside index.html, and only what exists."""
-    del web
+    """The published page has each listed file that exists beside index.html, and only those."""
     out = tmp_path / "out"
     out.mkdir()
     written = {path.name for path in write_static(out)}
-    assert PROBE in written
+    present = {name for name in PAGE_FILES if (web / name).is_file()}
+    assert PROBE in present
     assert (out / PROBE).read_bytes() == BODY
-    assert "graph.js" not in written
+    assert written & set(PAGE_FILES) == present
     assert not (out / "other.css").exists()
