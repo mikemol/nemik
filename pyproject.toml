@@ -11,7 +11,7 @@ dependencies = [
     "mikemol-hooks",  # nemik: mtools' Claude Code hooks (inbound-asks, nemik-check), installed as nemik's own dependency
     "mikemol-fence",  # nemik:W378: mikemol-membudget beside the interpreter, so mikemol-commit takes its commit lock
     "mikemol-rulerseq",  # nemik:W417: the ruler-sequence generator (mtools:W1048), computed server-side by W418
-    "mikemol-converge",  # nemik:W776/W652: the shared converge loop (mtools:W1522), stdlib only; nemik.converge imports it (W777)
+    "mikemol-converge",  # nemik:W776/W652: the shared converge loop (mtools:W1522), stdlib only; nemik's own copy is gone (W777), tests/test_converge.py runs it
     "mikemol-frontier",  # nemik:W483: the fleet's shared frontier walker (mtools:W1127), rank.frontier reads through it
     "mikemol-icsstruct",  # nemik:W157: operator calendars (W113) read through mtools' lossless iCalendar reader (mtools:W304)  # nemik:W145: RRULE expansion (mtools:W309 stores the rule, nemik expands it)
 ]

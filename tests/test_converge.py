@@ -2,7 +2,7 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W533: the converge loop ends clean or stuck, gives up on a repeat, or hits a ceiling."""
 
-from nemik.converge import HALT, Policy, Verdict, World, converge
+from mikemol.converge.converge import HALT, Policy, Verdict, World, converge
 
 POLICY = Policy(done=[0, 4], max_passes=5, same_halt=3, pauses=2)
 

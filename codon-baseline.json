@@ -91,10 +91,6 @@
   "as_written": "",
   "stripped": ""
  },
- "converge": {
-  "as_written": "no module named 'collections.abc'",
-  "stripped": "no module named 'collections.abc'"
- },
  "critical": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'argparse'"
