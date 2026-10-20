@@ -56,11 +56,59 @@ def run_writer(argv: list[str]) -> tuple[int, str]:
         The writer's exit status and its output (stderr when it failed, else stdout).
 
     """
-    writer = str(Path(sys.executable).parent / "mikemol-paths-forward")
-    run = subprocess.run([writer, *argv], capture_output=True, text=True, check=False)
+    run = _spawn("mikemol-paths-forward", argv, None)
     if run.returncode:
         return run.returncode, run.stderr.strip() or run.stdout.strip()
     return 0, run.stdout.strip()
+
+
+COMMITTER_TIMEOUT = 20  # seconds the commit tool may take to answer a read-only mode
+NOT_INSTALLED, TIMED_OUT = 127, 124
+
+
+def _spawn(
+    tool: str, argv: list[str], timeout: int | None
+) -> subprocess.CompletedProcess[str]:
+    """Run one of the tools installed beside this interpreter, the only place nemik-work starts one.
+
+    A tool that is not installed, or that outlasts `timeout`, is a completed process with status
+    127 or 124 and no output, never an exception.
+
+    Returns:
+        The completed process.
+
+    """
+    path = Path(sys.executable).parent / tool
+    if not path.is_file():
+        return subprocess.CompletedProcess([tool], NOT_INSTALLED, "", "")
+    try:
+        return subprocess.run(
+            [str(path), *argv],
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=timeout,
+        )
+    except (OSError, subprocess.TimeoutExpired):
+        return subprocess.CompletedProcess([tool], TIMED_OUT, "", "")
+
+
+def run_committer(argv: list[str]) -> tuple[int, str]:
+    """Run mikemol-commit with the given arguments, as run_writer runs the writer (nemik:W682).
+
+    For its read-only modes (`REPO --in-gate --json`); a missing tool or a hang is an exit status,
+    never an exception, since the caller is a check that must not fail for it.
+
+    Args:
+        argv: The arguments after the tool's path.
+
+    Returns:
+        The exit status and the standard output; 127 and nothing when the tool is not installed,
+        124 and nothing after a timeout.
+
+    """
+    run = _spawn("mikemol-commit", argv, COMMITTER_TIMEOUT)
+    return run.returncode, run.stdout
 
 
 def plan(current: list[str], symbol: str) -> list[tuple[str, str]]:

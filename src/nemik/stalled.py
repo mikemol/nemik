@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W616, W617: a working card that looks stalled, or whose progress is invisible.
+"""nemik:W616, W617, W682: a working card that looks stalled, or whose progress is invisible.
 
 el-openglo:W558 sat `working` for a day with no children while about twenty commits landed under
 it (operator 2026-10-17: "it looks stalled, and I'm not seeing any predictive power").
@@ -10,8 +10,11 @@ Two readings of the same two facts, a card's last_worked time and the commits th
   its cited commits, times FACTOR) and no commit has cited it since;
 - PROGRESS INVISIBLE: the same staleness, yet commits citing it keep landing: the work moves but the
   card does not show it, so atomize it into children that do.
+A card that a queued or gating commit stack names (mikemol-commit --in-gate) is never either: it is
+in the gate, whatever the gate's length.
 """
 
+import json
 from datetime import datetime
 from pathlib import Path
 
@@ -20,10 +23,50 @@ from rdflib import Graph
 from nemik import history
 from nemik.adapter import NEMIK, OSLC_CM
 from nemik.blocks import ref
+from nemik.work import run_committer
 
 # A card is stale after this many land intervals without activity: one interval alone would flag
 # every card worked an hour ago in a repo that lands every twenty minutes.
 FACTOR = 4
+
+
+def named_waypoints(rows: object) -> set[str]:
+    """Read the waypoints out of `mikemol-commit --in-gate --json` (a list of stack entries).
+
+    Returns:
+        Every waypoint any entry names; nothing for an answer that is not a list of entries.
+
+    """
+    named: set[str] = set()
+    if not isinstance(rows, list):
+        return named
+    for row in rows:
+        held = row.get("waypoints") if isinstance(row, dict) else None
+        if isinstance(held, list):
+            named.update(str(w) for w in held)
+    return named
+
+
+def in_gate(repo_dir: Path) -> set[str]:
+    """Name the waypoints a queued or gating commit stack of this repo carries (nemik:W682).
+
+    A card in the commit gate is being worked, however long the gate takes, so it is never called
+    stalled. The list comes from mikemol-commit's own public mode (`--in-gate --json`), never from
+    its private files under .git/mtools. A missing tool, a failure or an unreadable answer names
+    nothing: the check then falls back to the commits that cite the card.
+
+    Returns:
+        The waypoint symbols of the live stacks.
+
+    """
+    code, out = run_committer([str(repo_dir), "--in-gate", "--json"])
+    if code != 0:
+        return set()
+    try:
+        rows: object = json.loads(out)
+    except ValueError:
+        return set()
+    return named_waypoints(rows)
 
 
 def verdict(now: int, worked: int, cites: list[int], interval: int) -> str:
@@ -80,11 +123,12 @@ def findings(root: Path, merged: Graph, now: int) -> dict[str, list[tuple[str, s
 
     Returns:
         (symbol, warning text) pairs by repo; a repo without git history or without a learned land
-        interval yields none.
+        interval yields none, and a card in the commit gate is left out.
 
     """
     found: dict[str, list[tuple[str, str]]] = {}
     intervals: dict[str, int | None] = {}
+    gated: dict[str, set[str]] = {}
     for node in merged.subjects(OSLC_CM.state, NEMIK.Working):
         stamp = merged.value(node, NEMIK.lastWorked)
         repo, _, symbol = ref(node).partition(":")
@@ -92,6 +136,9 @@ def findings(root: Path, merged: Graph, now: int) -> dict[str, list[tuple[str, s
             continue
         if repo not in intervals:
             intervals[repo] = history.land_interval(root / repo)
+            gated[repo] = in_gate(root / repo)
+        if symbol in gated[repo]:
+            continue
         interval = intervals[repo]
         cites = history.citing_epochs(root / repo, symbol)
         if interval is None or cites is None:
