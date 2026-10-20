@@ -167,6 +167,10 @@
   "as_written": "syntax error, unexpected ','",
   "stripped": "syntax error, unexpected ','"
  },
+ "hostroot_cli": {
+  "as_written": "no module named 'argparse'",
+  "stripped": "no module named 'argparse'"
+ },
  "idle": {
   "as_written": "no module named 'tomllib'",
   "stripped": "no module named 'tomllib'"

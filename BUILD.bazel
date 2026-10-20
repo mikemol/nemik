@@ -136,6 +136,7 @@ venv_from_hub(
         "nemik-critical": "nemik.critical:main",
         "nemik-work": "nemik.work:main",
         "nemik-starved": "nemik.starved:main",
+        "nemik-hostroot": "nemik.hostroot_cli:main",
         "nemik-replica": "nemik.replica_cli:main",
         "nemik-ask": "nemik.ask_cli:main",
         "nemik-pacing": "nemik.pacing:main",

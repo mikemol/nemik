@@ -56,6 +56,7 @@ nemik-stackable = "nemik.stackable_cli:main"
 nemik-floor-asks = "nemik.floorasks:main"
 nemik-overlaps = "nemik.overlaps:main"
 nemik-witnesses = "nemik.witnesses_cli:main"
+nemik-hostroot = "nemik.hostroot_cli:main"
 nemik-ics = "nemik.vtodo:main"
 nemik-tasks = "nemik.vtodo:tasks_main"
 
