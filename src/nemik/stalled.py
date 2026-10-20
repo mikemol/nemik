@@ -27,6 +27,10 @@ from nemik.work import in_gate
 # A card is stale after this many land intervals without activity: one interval alone would flag
 # every card worked an hour ago in a repo that lands every twenty minutes.
 FACTOR = 4
+# A land interval under this is no pace to judge by: commits stacked in one gate land seconds
+# apart, so the median gap can read 0 and would make every working card look stalled
+# (github-8f 2026-10-20, mtools:W1485 "0 h since last worked against a land interval of 0 min").
+MIN_INTERVAL = 60
 
 
 def verdict(now: int, worked: int, cites: list[int], interval: int) -> str:
@@ -101,7 +105,7 @@ def findings(root: Path, merged: Graph, now: int) -> dict[str, list[tuple[str, s
             continue
         interval = intervals[repo]
         cites = history.citing_epochs(root / repo, symbol)
-        if interval is None or cites is None:
+        if interval is None or interval < MIN_INTERVAL or cites is None:
             continue
         worked = int(datetime.fromisoformat(str(stamp)).timestamp())
         said = verdict(now, worked, cites, interval)

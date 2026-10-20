@@ -136,6 +136,32 @@ def test_the_finding_names_the_card_and_its_remedy(
     assert "looks stalled" in rows["a"][0][1]
 
 
+def _zero_interval(repo: Path) -> int:
+    """Answer a learned land interval of zero: stacked commits that landed in one instant.
+
+    Args:
+        repo: The repo's directory, unused.
+
+    Returns:
+        0.
+
+    """
+    del repo
+    return 0
+
+
+def test_a_land_interval_under_the_floor_judges_nothing(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """A zero interval would make every working card stale, so the shape skips the repo."""
+    monkeypatch.setattr(history, "land_interval", _zero_interval)
+    monkeypatch.setattr(history, "citing_epochs", _uncited)
+    monkeypatch.setattr(stalled, "in_gate", _no_gate)
+    merged = _queue(tmp_path, "2026-10-17T09:59:00Z")
+    now = int(datetime(2026, 10, 17, 10, tzinfo=UTC).timestamp())
+    assert findings(tmp_path, merged, now) == {}
+
+
 def test_a_card_in_the_commit_gate_is_never_called_stalled(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
