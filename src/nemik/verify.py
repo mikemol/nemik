@@ -52,6 +52,57 @@ def brier(pairs: list[tuple[float, bool]]) -> float:
     )
 
 
+def mae(pairs: list[tuple[float, float]]) -> float:
+    """Score count forecasts by the mean absolute error of their expected count.
+
+    Args:
+        pairs: Each forecast's expected count and the count that happened.
+
+    Returns:
+        The mean absolute error, 0.0 for no forecasts.
+
+    """
+    if not pairs:
+        return 0.0
+    return sum(abs(expected - actual) for expected, actual in pairs) / len(pairs)
+
+
+def persistence_brier(outcomes: list[bool]) -> float:
+    """Score the forecast that nothing changes: every open card stays open, chance 0.
+
+    Returns:
+        The Brier score of chance 0.0 for each outcome.
+
+    """
+    return brier([(0.0, done) for done in outcomes])
+
+
+def climatology_brier(outcomes: list[bool]) -> float:
+    """Score the forecast that every card has the base rate of done, whatever its age.
+
+    Returns:
+        The Brier score of the share of done outcomes, said for each outcome.
+
+    """
+    if not outcomes:
+        return 0.0
+    rate = len([done for done in outcomes if done]) / len(outcomes)
+    return brier([(rate, done) for done in outcomes])
+
+
+def skill(score: float, reference: float) -> float:
+    """Give how much better a score is than a reference forecast's, as a share of it.
+
+    Returns:
+        1.0 for a perfect score, 0.0 for no better than the reference, below 0.0 for worse;
+        0.0 when the reference is itself perfect.
+
+    """
+    if not reference:
+        return 0.0
+    return 1.0 - score / reference
+
+
 def scorable(lead_days: float, grain_days: float) -> bool:
     """Say whether a lead is coarse enough to score against truth of this grain.
 
