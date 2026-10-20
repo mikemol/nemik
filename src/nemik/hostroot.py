@@ -224,6 +224,40 @@ def records(lines: list[str]) -> list[HostRow]:
     return rows
 
 
+AS_OF_KEY = '"as_of": '
+
+
+def read_document(text: str) -> tuple[str, list[HostRow]]:
+    """Read the document nemik-hostroot writes (nemik:W780).
+
+    The writer puts the stamp on the first line and one row object per following line, so the
+    rows are read line by line through parse().
+
+    Args:
+        text: The file's text.
+
+    Returns:
+        When the document was read, and its rows.
+
+    Raises:
+        ValueError: When the first line carries no as_of or a row line cannot be read.
+
+    """
+    lines = text.splitlines()
+    head = lines[0] if lines else ""
+    at = head.find(AS_OF_KEY)
+    if at < 0:
+        message = "no as_of on the first line"
+        raise ValueError(message)
+    as_of, _ = _string(head, at + len(AS_OF_KEY))
+    rows: list[HostRow] = []
+    for line in lines[1:]:
+        body = line.strip().rstrip(",")
+        if body.startswith("{"):
+            rows.append(parse(body))
+    return as_of, rows
+
+
 def latest(rows: list[HostRow]) -> list[HostRow]:
     """Keep the newest row of each id; a later row wins a tie on as_of.
 

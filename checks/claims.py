@@ -170,10 +170,19 @@ def hub_modules_depend_on_everything_below():
     # reads one JSON file.
     # nemik:W485: and counts the ledger ticks by the kind of card worked, through workrows, a leaf
     # that imports only json.
+    # nemik:W780: and serves the host-root frontier nemik-hostroot writes, through hostroot, a leaf
+    # that reads that one document (its only nemik import is climate's stamp reader).
     expected = {
         "metrics": lower | {"realize", "runlogs", "workrows"},
         "serve": lower
-        | {"outbox", "exportwire", "runlogs", "withheldage", "luthenseries"},
+        | {
+            "outbox",
+            "exportwire",
+            "runlogs",
+            "withheldage",
+            "luthenseries",
+            "hostroot",
+        },
     }
     for hub, want in expected.items():
         deps = _imports_nemik(mods[hub])

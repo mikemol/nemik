@@ -5,6 +5,7 @@
 import json
 from pathlib import Path
 
+from nemik.hostroot import read_document
 from nemik.hostroot_cli import main
 
 OLD = (
@@ -45,6 +46,19 @@ def test_the_newest_row_of_an_id_is_written(tmp_path: Path) -> None:
     assert '"state": "done"' in written
     assert '"state": "blocked"' not in written
     assert '"as_of": "2026-10-20T11:00:00Z"' in written
+
+
+def test_the_document_reads_back_into_its_rows(tmp_path: Path) -> None:
+    """What nemik-hostroot writes, read_document returns: the stamp and each row's fields."""
+    lines = "\n".join([_record(OLD), _record(NEW)])
+    _luthen(tmp_path, f"print({lines!r})\n")
+    out = tmp_path / "host-root.json"
+    assert main(["--root", str(tmp_path), "--out", str(out)]) == 0
+    as_of, rows = read_document(out.read_text(encoding="utf-8"))
+    assert as_of.endswith("Z")
+    assert [(row.ident, row.state, row.waits_for) for row in rows] == [
+        ("a", "done", [])
+    ]
 
 
 def test_a_tool_that_fails_writes_nothing(tmp_path: Path) -> None:

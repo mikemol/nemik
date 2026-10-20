@@ -39,6 +39,7 @@ from nemik.adapter import BASE, NEMIK, OPERATOR, OSLC_CM, bind, ledger_graph
 from nemik.blocks import inbound, operator_asks, ref
 from nemik.check import LEDGER, QUEUE, default_root, survey, workstream_files
 from nemik.exportwire import exports_key, withheld_by_exports
+from nemik.hostroot import HostRow, read_document, stale
 from nemik.luthenseries import board, load
 from nemik.outbox import outbox
 from nemik.runlogs import runs_graph
@@ -54,6 +55,47 @@ SERIES_MAX_AGE = 900
 SERIES_REBUILD_S = 600
 
 
+def hostroot_board(path: Path | None, now: str) -> dict[str, object]:
+    """Build the host-root board from nemik-hostroot's file (nemik:W780).
+
+    Args:
+        path: The file, or None when the server was not given one.
+        now: The current time, an ISO stamp, against which staleness is judged.
+
+    Returns:
+        {"host": True, "as_of", "stale", "rows": [...]}, each row its id, state, waitsFor, gate,
+        reading, as_of and whether it is stale; or {"host": False, "why": ...} when there is no
+        file or it cannot be read: no board, never a guessed one.
+
+    """
+    if path is None:
+        return {"host": False, "why": "no --hostroot file"}
+    try:
+        as_of, rows = read_document(path.read_text(encoding="utf-8"))
+    except OSError:
+        return {"host": False, "why": "no document"}  # never a host path
+    except ValueError as error:
+        return {"host": False, "why": str(error)}
+    shown = [
+        {
+            "id": row.ident,
+            "state": row.state,
+            "waitsFor": row.waits_for,
+            "gate": row.gate,
+            "reading": row.reading,
+            "as_of": row.as_of,
+            "stale": stale(row, now),
+        }
+        for row in rows
+    ]
+    return {
+        "host": True,
+        "as_of": as_of,
+        "stale": stale(HostRow("", "", as_of), now),
+        "rows": shown,
+    }
+
+
 class Model:
     def __init__(
         self,
@@ -64,6 +106,9 @@ class Model:
         series_max_age: int = 900,
     ) -> None:
         self.root = root
+        # nemik:W780: the host-root frontier nemik-hostroot writes on the host (host-root.json),
+        # set by main when given; read per request so its age is judged against the clock.
+        self.hostroot: Path | None = None
         # nemik:W670: luthen's loop and token snapshot (luthen-series.json), read per request so its
         # age is judged against the clock, never against the last rebuild.
         self.series = series
@@ -163,6 +208,19 @@ class Model:
         shown: dict[str, object] = {"board": True}
         shown.update(board(snap, ready))
         return shown
+
+    def hostroot_doc(self) -> dict[str, object]:
+        """Build the host-root board from nemik-hostroot's file (nemik:W780).
+
+        Returns:
+            {"host": True, "as_of", "stale", "rows": [...]}, each row its id, state, waitsFor,
+            gate, reading, as_of and whether it is stale; or {"host": False, "why": ...} when
+            there is no file or it cannot be read: no board, never a guessed one.
+
+        """
+        return hostroot_board(
+            self.hostroot, time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+        )
 
     def poke(self) -> None:
         """Keep requests off the rebuild path (nemik:W69, luthen-observability:W146).
@@ -580,6 +638,9 @@ def handler(model: Model) -> type[BaseHTTPRequestHandler]:
             elif self.path == "/series.json":
                 series_body = json.dumps(model.series_doc(), indent=1).encode()
                 self.send(200, "application/json", series_body)
+            elif self.path == "/hostroot.json":
+                host_body = json.dumps(model.hostroot_doc(), indent=1).encode()
+                self.send(200, "application/json", host_body)
             elif self.path == "/graph.json":
                 self.send(200, "application/json", model.payload)
             elif self.path == "/graph.ttl":
@@ -875,6 +936,7 @@ class _Options(argparse.Namespace):
     runs: Path | None
     series: Path | None
     series_max_age: int
+    hostroot: Path | None
     exports: Path | None
     publish: Path | None
 
@@ -933,6 +995,14 @@ def main(argv: list[str] | None = None) -> None:
         help="refuse the series snapshot when its as_of is older than SECONDS (default 900)",
     )
     ap.add_argument(
+        "--hostroot",
+        type=Path,
+        metavar="FILE",
+        help="the live server only: the host-root frontier nemik-hostroot writes on the host "
+        "(host-root.json), served as /hostroot.json with each row's staleness; a missing or "
+        "unreadable file serves no board, and the static view never carries it (nemik:W780)",
+    )
+    ap.add_argument(
         "--exports",
         type=Path,
         metavar="DIR",
@@ -980,6 +1050,7 @@ def main(argv: list[str] | None = None) -> None:
         series=args.series,
         series_max_age=args.series_max_age,
     )
+    model.hostroot = args.hostroot
     ThreadingHTTPServer((args.bind, args.port), handler(model)).serve_forever()
 
 
