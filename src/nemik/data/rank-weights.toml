@@ -194,5 +194,8 @@ summit = 0
 
 # nemik:W699: the demand one loop tick of a card's ticks_blocked adds, so the cards it waits on rank
 # higher the longer the wait. Zero is the ranking without it; raising it re-baselines the rank tests.
+# nemik:W712: measured, not typed (docs/wait-weight.md, W753/W756): the median repo's ready card waits
+# at most 1.08 days nine times in ten, about 52 loop ticks, so a source that has waited that long adds
+# one unit of demand: 1/52, written as 0.02 (a tick over the long wait, not a tuned constant).
 [wait_age]
-per_tick = 0
+per_tick = 0.02

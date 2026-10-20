@@ -97,7 +97,7 @@ def test_a_longer_wait_raises_its_blockers_salience(tmp_path: Path) -> None:
 
 
 def test_the_table_is_read_and_absence_is_zero() -> None:
-    """The packaged table is off, a given one is read, and no table means zero."""
-    assert load_wait_weight() == 0
+    """The packaged table is the measured one (nemik:W712), a given one is read, none is zero."""
+    assert load_wait_weight() == Fraction(1, 50)
     assert load_wait_weight("[wait_age]\nper_tick = 2\n") == Fraction(2)
     assert load_wait_weight("[other]\nx = 1\n") == 0
