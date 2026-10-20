@@ -909,17 +909,38 @@ def integrity_report(root: Path, only: str | None = None) -> int:
 
 
 DIGEST_FILE = "fleet-survey.json"
-# seconds: bounds what an input the key does not name can make stale
-DIGEST_MAX_AGE = 600
 CODE_SUFFIXES = frozenset({".py", ".ttl", ".toml", ".json"})
+# what a survey reads outside the queues, by path: the root's host-apply export and loop prompt
+# (hostapply.load, idle.prompt_lag), and in each repo the loop prompt it last acknowledged and the
+# pyproject nemik.adoption reads
+ROOT_READS = ("host-apply.json", ".claude/loop-prompt.md")
+REPO_READS = (".git/mtools/loop-prompt.seen", "pyproject.toml")
+# seconds: findings about "how long ago" change with the clock, in these steps
+CLOCK_BUCKET = 600
+
+
+def _content_of(path: Path) -> bytes:
+    """Read a file's bytes for a cache key; a file that is absent or unreadable is empty.
+
+    Returns:
+        The bytes, or nothing.
+
+    """
+    try:
+        return path.read_bytes()
+    except OSError:
+        return b""
 
 
 def survey_inputs(root: Path, *, digest: bool) -> list[bytes]:
-    """Name what a fleet survey's answer rests on (nemik:W763).
+    """Name what a fleet survey's answer rests on (nemik:W763, W765).
 
-    The answer is a function of nemik's own code and data, each queue file and its ledger, and the
-    commits the history checks read; each is a part here, by content. A queue or ledger that cannot
-    be read counts as empty, so a vanished file changes the key.
+    The answer is a function of nemik's own code and data, each queue file and its ledger, the
+    commits the history checks read, the files the survey reads outside the queues (ROOT_READS,
+    REPO_READS, each repo's other pyproject.toml), the names in each inbox, and the clock; each is
+    a part here, by content. A file that cannot be read counts as empty, so a vanished file changes
+    the key. The clock is named by its bucket: some findings (a stalled card, an old ready card, an
+    idle run, the prompt's age) are functions of the time, so no content can name them.
 
     Returns:
         The parts, for cachestore.content_key.
@@ -932,14 +953,18 @@ def survey_inputs(root: Path, *, digest: bool) -> list[bytes]:
         for path in sorted(here.rglob("*"))
         if path.suffix in CODE_SUFFIXES and path.is_file()
     )
+    outside = [root / name for name in ROOT_READS]
     for repo, state in workstream_files(root, QUEUE):
         parts.append(repo.encode())
-        for kept in (state, state.with_name(LEDGER)):
-            try:
-                parts.append(kept.read_bytes())
-            except OSError:
-                parts.append(b"")
+        parts.extend(_content_of(kept) for kept in (state, state.with_name(LEDGER)))
         parts.append((_git(state.parent, "rev-parse", "HEAD") or "").encode())
+        repo_dir = state.parent.parent
+        outside.extend(repo_dir / name for name in REPO_READS)
+        outside.extend(repo_dir.glob("*/pyproject.toml"))
+    parts.extend(_content_of(path) for path in sorted(set(outside)))
+    inboxes = sorted(str(p.relative_to(root)) for p in root.glob("*/inbox/**/*"))
+    clock = str(int(time.time()) // CLOCK_BUCKET)
+    parts.extend([("\n".join(inboxes)).encode(), clock.encode()])
     return parts
 
 
@@ -972,9 +997,9 @@ def cached_survey(root: Path, *, digest: bool) -> tuple[list[str], int]:
     """Answer the fleet survey from the last run when none of its inputs changed (nemik:W763).
 
     Only the real fleet root is kept, as survey does for its caches. The answer is held with the
-    content key of survey_inputs and the time it was made; a hit needs the same key and an answer
-    younger than DIGEST_MAX_AGE, which bounds what an input the key does not name (an exported
-    host-apply file) can make stale. The hook that runs this on every prompt then costs a hash.
+    content key of survey_inputs, which names every input of the survey (nemik:W765): a hit needs
+    the same key, so freshness comes from content and the clock's bucket, not from an age check.
+    The hook that runs this on every prompt then costs a hash.
 
     Returns:
         (lines, failed) as survey_lines gives them.
@@ -990,12 +1015,11 @@ def cached_survey(root: Path, *, digest: bool) -> tuple[list[str], int]:
     except (OSError, ValueError):
         held = None
     if isinstance(held, dict) and held.get("key") == key:
-        at, said, bad = held.get("at"), held.get("lines"), held.get("failed")
-        fresh = isinstance(at, float) and time.time() - at < DIGEST_MAX_AGE
-        if fresh and isinstance(said, list) and isinstance(bad, int):
+        said, bad = held.get("lines"), held.get("failed")
+        if isinstance(said, list) and isinstance(bad, int):
             return [str(line) for line in said], bad
     lines, failed, _ = survey_lines(root, digest=digest)
-    body = json.dumps({"key": key, "at": time.time(), "lines": lines, "failed": failed})
+    body = json.dumps({"key": key, "lines": lines, "failed": failed})
     try:
         path.parent.mkdir(parents=True, exist_ok=True)
         tmp = path.with_name(f".{DIGEST_FILE}.{os.getpid()}")

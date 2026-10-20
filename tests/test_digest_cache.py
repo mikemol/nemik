@@ -47,6 +47,25 @@ def test_the_key_follows_the_content_of_the_queue_and_the_mode(tmp_path: Path) -
     assert first != _key(root)
 
 
+def test_each_outside_read_of_the_survey_is_in_the_key(tmp_path: Path) -> None:
+    """The host-apply export, the loop prompt, a repo's pyproject and an inbox each change it."""
+    root = _root(tmp_path)
+    first = _key(root)
+    (root / "host-apply.json").write_text("{}", encoding="utf-8")
+    second = _key(root)
+    assert second != first
+    (root / ".claude").mkdir()
+    (root / ".claude" / "loop-prompt.md").write_text("tick", encoding="utf-8")
+    third = _key(root)
+    assert third != second
+    (root / "a" / "pyproject.toml").write_text("[project]\n", encoding="utf-8")
+    fourth = _key(root)
+    assert fourth != third
+    (root / "a" / "inbox").mkdir()
+    (root / "a" / "inbox" / "letter.md").write_text("hi", encoding="utf-8")
+    assert _key(root) != fourth
+
+
 def test_an_unchanged_fleet_is_surveyed_once(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
