@@ -62,9 +62,11 @@ if ! out=$(env -i PATH="$PATH" HOME="$HOME" .venv/bin/python3 -m pytest --collec
     echo "gate_staged: a test module does not collect without Bazel's environment (the image's test stage would exit 2): commit refused" >&2
     exit 1
 fi
-if ! out=$(env PYTHONPATH="$wt/src" .venv/bin/python3 tools/mypy_ratchet.py 2>&1); then
+# nemik:W536: the fleet's ratchet (mtools:W1485/W1794), ruff and mypy against ruff-baseline.json and
+# mypy-baseline.json; exit 4 on a rise, 7 when nothing could be judged.
+if ! out=$(env PYTHONPATH="$wt/src" .venv/bin/mikemol-pycheck --ratchet "$wt" 2>&1); then
     printf '%s\n' "$out" | tail -n 30 >&2
-    echo "gate_staged: the mypy ratchet fails with the package importable from src (the image installs it editable): commit refused" >&2
+    echo "gate_staged: the ratchet fails with the package importable from src (the image installs it editable): commit refused" >&2
     exit 1
 fi
 # nemik:W526: every tracked shell file passes the shell checker (the edit hook checks only what an

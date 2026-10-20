@@ -42,7 +42,7 @@ def test_the_gate_replays_the_images_environment_before_the_suite() -> None:
     suite = code.index("bazel test //:precommit")
     assert clean < editable < suite
     assert "--collect-only" in code
-    assert "tools/mypy_ratchet.py" in code
+    assert "mikemol-pycheck --ratchet" in code
 
 
 def test_the_gate_checks_shell_files_and_stray_code() -> None:
