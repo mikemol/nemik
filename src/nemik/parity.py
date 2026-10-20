@@ -26,10 +26,10 @@ ROUTED = [
     ("nemik-check", "/check.json", "finding_lines"),
     ("nemik-check --ready-neither", "/check/", "ready_neither_text"),
     ("nemik-check --unmanifested", "/check/", "unmanifested_text"),
+    ("nemik-check --integrity", "/check/", "integrity_text"),
 ]
 
 PENDING = [
-    ("nemik-check --integrity", "W793"),
     ("nemik-check --realizability", "W793"),
     ("nemik-check --committed", "W793"),
     ("nemik-check --letters", "W793"),

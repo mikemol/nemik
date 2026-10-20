@@ -1,12 +1,12 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W795: the served ready-neither and unmanifested reports are the CLI's own text."""
+"""nemik:W795, W796: the served check reports are the CLI's own text."""
 
 from pathlib import Path
 
 import pytest
 
-from nemik.check import ready_neither_report, unmanifested_report
+from nemik.check import integrity_report, ready_neither_report, unmanifested_report
 from nemik.serve import Model, check_report
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
@@ -40,6 +40,15 @@ def test_the_served_unmanifested_report_is_the_clis(
     unmanifested_report(FLEET)
     printed = capsys.readouterr().out
     assert check_report("unmanifested", _model().graph, FLEET) == printed
+
+
+def test_the_served_integrity_report_is_the_clis(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    """nemik-check --integrity prints what the route serves."""
+    integrity_report(FLEET)
+    printed = capsys.readouterr().out
+    assert check_report("integrity", _model().graph, FLEET) == printed
 
 
 def test_a_name_that_is_no_report_is_none() -> None:

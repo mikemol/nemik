@@ -971,6 +971,33 @@ def committed_verdict(root: Path, named: set[str]) -> int:
     return 4 if stale else 0
 
 
+def integrity_text(whole: Graph, root: Path, only: str | None = None) -> str:
+    """nemik:W796: the integrity findings per repo with the fixes as commands, applying nothing.
+
+    The one wording: nemik-check --integrity prints it and nemik-serve serves it, from the merged
+    graph each already holds.
+
+    Args:
+        whole: The merged queue graph.
+        root: The directory holding the repos.
+        only: A repo to report on; None reports every repo. Each repo's session works its own.
+
+    Returns:
+        The report's text.
+
+    """
+    out: list[str] = []
+    for repo, said in sorted(integrity_commands(whole, root).items()):
+        if only is None or only == repo:
+            out.extend(
+                [
+                    f"{repo}: {len(said) // 3} finding(s)\n",
+                    "".join(f"{line}\n" for line in said),
+                ]
+            )
+    return "".join(out)
+
+
 def integrity_report(root: Path, only: str | None = None) -> int:
     """Print the integrity findings per repo with the fixes as commands, and apply nothing.
 
@@ -986,10 +1013,7 @@ def integrity_report(root: Path, only: str | None = None) -> int:
     for _, g, _ in survey(root, check=False):
         if g is not None:
             whole += g
-    for repo, said in sorted(integrity_commands(whole, root).items()):
-        if only is None or only == repo:
-            sys.stdout.write(f"{repo}: {len(said) // 3} finding(s)\n")
-            sys.stdout.write("".join(f"{line}\n" for line in said))
+    sys.stdout.write(integrity_text(whole, root, only))
     return 0
 
 

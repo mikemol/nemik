@@ -44,6 +44,7 @@ from nemik.check import (
     Finding,
     default_root,
     finding_lines,
+    integrity_text,
     ready_neither_text,
     unmanifested_text,
     workstream_files,
@@ -63,12 +64,12 @@ survey = partial(checked_survey, gate="")
 
 
 def check_report(name: str, graph: Graph, root: Path) -> str | None:
-    """Give one of nemik-check's report modes as the CLI words it (nemik:W795).
+    """Give one of nemik-check's report modes as the CLI words it (nemik:W795, W796).
 
     Args:
-        name: "ready-neither" or "unmanifested".
+        name: "ready-neither", "unmanifested" or "integrity".
         graph: The merged queue graph the last rebuild left.
-        root: The fleet root, for the report that reads the queue files.
+        root: The fleet root, for the reports that read the queue files.
 
     Returns:
         The report's text, or None for a name that is no report.
@@ -79,6 +80,8 @@ def check_report(name: str, graph: Graph, root: Path) -> str | None:
         return ready_neither_text(root, None, now)
     if name == "unmanifested":
         return unmanifested_text(graph)
+    if name == "integrity":
+        return integrity_text(graph, root)
     return None
 
 
