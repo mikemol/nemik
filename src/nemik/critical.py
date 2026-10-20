@@ -22,7 +22,12 @@ from rdflib.term import Node
 from nemik.adapter import BASE, NEMIK, OSLC_CM
 from nemik.blocks import bare_wait_edges, ref
 from nemik.cards import Card
+from nemik.core.chains import longest_chains
 from nemik.rank import successors
+
+# nemik:W818: the algorithm is the shared core's, over plain data; this module adapts rdflib-built
+# Cards to it and back (the page runs the same core, compiled to wasm)
+CHAINS = longest_chains
 
 
 class Critical(NamedTuple):
@@ -104,72 +109,26 @@ def critical_cards(by_cite: dict[str, Card], scope: set[str] | None = None) -> C
     nodes = {c for c, card in by_cite.items() if not card.done}
     if scope is not None:
         nodes = {c for c in nodes if c in scope}
-    succ: dict[str, set[str]] = {n: set() for n in nodes}
-    for y in nodes:
-        card = by_cite[y]
-        for x in (*card.enabled_by, *card.waits_for):
-            if x in nodes and x != y:
-                succ[x].add(y)
-    pred: dict[str, set[str]] = {n: set() for n in nodes}
-    for n, outs in succ.items():
-        for s in outs:
-            pred[s].add(n)
-
-    def longest(edges: dict[str, set[str]]) -> dict[str, int]:
-        memo: dict[str, int] = {}
-        for start in sorted(nodes, key=_key):
-            stack: list[tuple[str, list[str]]] = [
-                (start, sorted(edges[start], key=_key))
-            ]
-            on_path = {start}
-            while stack:
-                node, todo = stack[-1]
-                if node in memo:
-                    stack.pop()
-                    on_path.discard(node)
-                    continue
-                while todo and (todo[-1] in memo or todo[-1] in on_path):
-                    todo.pop()
-                if todo:
-                    nxt = todo.pop()
-                    on_path.add(nxt)
-                    stack.append((nxt, sorted(edges[nxt], key=_key)))
-                    continue
-                memo[node] = 1 + max(
-                    (memo[e] for e in edges[node] if e in memo), default=0
-                )
-                on_path.discard(node)
-                stack.pop()
-        return memo
-
-    down, up = longest(succ), longest(pred)
-    through = {n: up[n] + down[n] - 1 for n in nodes}
-    length = max(through.values(), default=0)
-    slack = {n: length - through[n] for n in nodes}
+    order = sorted(nodes, key=_key)
+    deps = [
+        (x, y)
+        for y in order
+        for x in (*by_cite[y].enabled_by, *by_cite[y].waits_for)
+        if x in nodes and x != y
+    ]
+    found = CHAINS(order, deps)
+    through = {n: found.up[n] + found.down[n] - 1 for n in nodes}
     # nemik:W344: the dependency order is a poset, so tied longest chains are alternatives, not a ranking:
     # the critical object is EVERY card on some longest chain (zero slack), graded by its rank (`up`), and
     # by how many longest chains run through it (ways in x ways out). Nothing here depends on sort order
     # except the order the list is displayed in: (rank, cite).
-    ways_in: dict[str, int] = {}
-    for n in sorted(nodes, key=lambda x: up[x]):
-        ways_in[n] = (
-            1 if up[n] == 1 else sum(ways_in[p] for p in pred[n] if up[p] == up[n] - 1)
-        )
-    ways_out: dict[str, int] = {}
-    for n in sorted(nodes, key=lambda x: down[x]):
-        ways_out[n] = (
-            1
-            if down[n] == 1
-            else sum(ways_out[s] for s in succ[n] if down[s] == down[n] - 1)
-        )
-    on_longest = [n for n in nodes if through[n] == length]
-    chain = sorted(on_longest, key=lambda n: (up[n], _key(n)))
+    chain = sorted(found.paths, key=lambda n: (found.up[n], _key(n)))
     return Critical(
-        length,
+        found.length,
         chain,
-        slack,
-        {n: up[n] for n in nodes},
-        {n: ways_in[n] * ways_out[n] for n in on_longest},
+        {n: found.length - through[n] for n in nodes},
+        {n: found.up[n] for n in nodes},
+        found.paths,
     )
 
 

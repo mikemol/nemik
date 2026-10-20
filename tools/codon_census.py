@@ -56,7 +56,14 @@ def modules(src: Path) -> list[str]:
         The module names, sorted.
 
     """
-    return sorted(p.stem for p in (src / "nemik").glob("*.py") if p.stem != "__init__")
+    top = [p.stem for p in (src / "nemik").glob("*.py") if p.stem != "__init__"]
+    # nemik:W818: the shared core is a subpackage the page runs as wasm: held to the census too
+    core = [
+        f"core.{p.stem}"
+        for p in (src / "nemik" / "core").glob("*.py")
+        if p.stem != "__init__"
+    ]
+    return sorted([*top, *core])
 
 
 def stage(src: Path, tree: Path, *, strip: bool) -> None:
@@ -74,6 +81,13 @@ def stage(src: Path, tree: Path, *, strip: bool) -> None:
         (tree / "nemik" / path.name).write_text(
             FUTURE.sub("", text) if strip else text, encoding="utf-8"
         )
+    if (src / "nemik" / "core").is_dir():
+        (tree / "nemik" / "core").mkdir()
+        for path in (src / "nemik" / "core").glob("*.py"):
+            text = path.read_text(encoding="utf-8")
+            (tree / "nemik" / "core" / path.name).write_text(
+                FUTURE.sub("", text) if strip else text, encoding="utf-8"
+            )
 
 
 def probe(build: Build, tree: Path, module: str) -> str:
@@ -88,9 +102,10 @@ def probe(build: Build, tree: Path, module: str) -> str:
         "" when it compiles, otherwise Codon's first error line.
 
     """
-    program = tree / f"probe_{module}.py"
+    flat = module.replace(".", "_")
+    program = tree / f"probe_{flat}.py"
     program.write_text(f"import nemik.{module}\n", encoding="utf-8")
-    status, stderr = build(program, tree / f"out_{module}")
+    status, stderr = build(program, tree / f"out_{flat}")
     return "" if status == 0 else first_error(stderr)
 
 
