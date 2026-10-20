@@ -26,6 +26,28 @@ from pathlib import Path
 from nemik.cachestore import user_dir
 from nemik.cardevents import Event, events_of
 from nemik.check import LEDGER, QUEUE, default_root, workstream_files
+from nemik.climate import waits_of
+
+WAIT_QUANTILE = 0.9
+
+
+def waits(
+    events: list[Event],
+) -> dict[str, dict[str, float]]:
+    """Summarize finished stints per status from events (nemik:W753).
+
+    Returns:
+        {status: {n, median_days, p90_days}}.
+
+    """
+    return {
+        status: {
+            "n": len(days),
+            "median_days": round(days[len(days) // 2], 2),
+            "p90_days": round(days[int(WAIT_QUANTILE * (len(days) - 1))], 2),
+        }
+        for status, days in waits_of(events).items()
+    }
 
 
 def backfill(repo: str, repo_dir: Path, since: str | None = None) -> list[Event]:
@@ -816,6 +838,12 @@ def main(argv: list[str] | None = None) -> int:
         "field, from, to, commit (W744)",
     )
     mode.add_argument(
+        "--waits",
+        action="store_true",
+        help="per repo and status: how many stints in it finished, and their median and "
+        "ninetieth-percentile length in days (W753)",
+    )
+    mode.add_argument(
         "--density",
         action="store_true",
         help="per repo: queue-file commits a day over --from..now (default 7 days) and "
@@ -841,6 +869,7 @@ def main(argv: list[str] | None = None) -> int:
         or args.churn
         or args.density
         or args.events
+        or args.waits
         or args.baseline is not None
     )
     if not names or (args.start is None and not series):
@@ -857,7 +886,7 @@ def main(argv: list[str] | None = None) -> int:
         return _toil(args, names, dirs)
     if args.baseline is not None:
         return _baseline(args, names, dirs)
-    if args.time_in_state or args.weekly or args.density or args.events:
+    if args.time_in_state or args.weekly or args.density or args.events or args.waits:
         return _series(args, names, dirs)
     out: dict[str, Diff] = {}
     for name in names:
@@ -953,6 +982,26 @@ def _events(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -
         return 0
     for event in rows:
         sys.stdout.write("\t".join(event) + "\n")
+    return 0
+
+
+def _waits(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> int:
+    """Print per repo and status how long finished stints lasted, in days (nemik:W753).
+
+    Returns:
+        0.
+
+    """
+    rows = {name: waits(backfill(name, dirs[name], args.start)) for name in names}
+    if args.json:
+        sys.stdout.write(json.dumps(rows, indent=1) + "\n")
+        return 0
+    for name, by_status in rows.items():
+        for status, r in sorted(by_status.items()):
+            sys.stdout.write(
+                f"{name}\t{status}\tn {int(r['n'])}\tmedian {r['median_days']} d"
+                f"\tp90 {r['p90_days']} d\n"
+            )
     return 0
 
 
@@ -1057,6 +1106,8 @@ def _series(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -
         return _density(args, names, dirs)
     if args.events:
         return _events(args, names, dirs)
+    if args.waits:
+        return _waits(args, names, dirs)
     now = datetime.now(UTC)
     rolled: dict[str, list[dict]] = {}
     spent: dict[str, dict[str, tuple[str, dict[str, float]]]] = {}
