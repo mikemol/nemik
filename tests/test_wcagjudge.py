@@ -2,7 +2,7 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W646: the Rego policy names a token pair under its WCAG bar; the real page meets them."""
 
-from importlib.resources import files
+from pagetext import page_text
 
 from nemik.wcagjudge import judge
 
@@ -61,7 +61,7 @@ def test_a_token_the_page_lacks_is_reported_not_skipped() -> None:
 
 def test_the_real_page_meets_the_bars_it_declares() -> None:
     """The view's own tokens: the result is what the page does today, reported as it stands."""
-    html = files("nemik").joinpath("web/index.html").read_text(encoding="utf-8")
+    html = page_text()
     found = judge(html)
     assert found["unjudged"] == []
     assert found["violations"] == []

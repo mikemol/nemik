@@ -2,7 +2,7 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W659: WCAG 1.4.1: the card states are not told apart by colour alone."""
 
-from importlib.resources import files
+from pagetext import page_text
 
 from nemik.wcagfacts import marks
 from nemik.wcagjudge import judge
@@ -54,7 +54,7 @@ def test_the_real_page_judged() -> None:
 
     other (a state outside the six, the legend's fifth colour) carries "* " (nemik:W661).
     """
-    html = files("nemik").joinpath("web/index.html").read_text(encoding="utf-8")
+    html = page_text()
     assert _unmarked(html) == []
     assert marks(html)["other"] == ["glyph"]
 

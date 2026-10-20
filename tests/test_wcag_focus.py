@@ -2,7 +2,7 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W658: WCAG 2.4.7: a rule that removes an outline needs a focus rule beside it."""
 
-from importlib.resources import files
+from pagetext import page_text
 
 from nemik.wcagfacts import focus
 from nemik.wcagjudge import judge
@@ -49,6 +49,6 @@ def test_a_page_that_never_removes_an_outline_keeps_the_browsers_ring() -> None:
 
 def test_the_real_page_removes_no_outline() -> None:
     """index.html: every focusable element keeps a visible focus indicator."""
-    html = files("nemik").joinpath("web/index.html").read_text(encoding="utf-8")
+    html = page_text()
     assert focus(html)["removed"] == []
     assert _focus_violations(html) == []

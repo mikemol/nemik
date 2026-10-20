@@ -2,7 +2,7 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W645: the view's colour tokens come out per theme, dark falling back to light."""
 
-from importlib.resources import files
+from pagetext import page_text
 
 from nemik.wcagfacts import tokens
 
@@ -33,7 +33,7 @@ def test_a_page_without_a_root_block_has_no_tokens() -> None:
 
 def test_the_real_page_has_both_themes_with_the_same_names() -> None:
     """index.html declares colours for light and dark, and dark covers every light token."""
-    html = files("nemik").joinpath("web/index.html").read_text(encoding="utf-8")
+    html = page_text()
     found = tokens(html)
     assert found["light"]
     assert set(found["dark"]) == set(found["light"])

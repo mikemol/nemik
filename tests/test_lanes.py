@@ -3,7 +3,8 @@
 """nemik:W467: every operator-ask category the view receives has a lane label and help text."""
 
 import re
-from importlib.resources import files
+
+from pagetext import page_text
 
 from nemik.blocks import CATEGORIES
 
@@ -13,7 +14,7 @@ UNPUBLISHED = {"errand"}
 
 def test_every_category_has_a_label_and_help() -> None:
     # the page as serve reads it, from the installed package (the gate's sandbox has no src/ tree)
-    page = files("nemik.web").joinpath("index.html").read_text()
+    page = page_text()
     table = re.search(r"const LANE = \{(.*?)\};", page)
     assert table, "the LANE table is missing"
     help_block = page[page.index("function lane(cat)") :][:2000]

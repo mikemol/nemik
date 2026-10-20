@@ -10,10 +10,10 @@ pair of state colours under the floor must differ in their mark, and the count o
 may not grow.
 """
 
-from importlib.resources import files
 from itertools import combinations
 
 from mikemol.cvdcore import reference_floor, worst_view_dE
+from pagetext import page_text
 
 STATES = ("ready", "working", "blocked", "done", "dropped", "other")
 MARKS = "const STATE_MARK = {"
@@ -32,7 +32,7 @@ def _page() -> str:
         The text of web/index.html.
 
     """
-    return files("nemik").joinpath("web/index.html").read_text(encoding="utf-8")
+    return page_text()
 
 
 def _themes() -> dict[str, dict[str, tuple[int, int, int]]]:

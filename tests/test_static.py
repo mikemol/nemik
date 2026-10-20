@@ -4,14 +4,16 @@
 
 import re
 
-from nemik.serve import VENDOR, write_static
+from nemik.serve import PAGE_FILES, VENDOR, page_file, write_static
 
 
 def test_page_and_vendor_written_with_relative_links(tmp_path) -> None:
     written = write_static(tmp_path)
+    # nemik:W802: and the page's own files that exist (the stylesheet, later the script modules)
+    own = {name for name in PAGE_FILES if page_file(name) is not None}
     assert {p.relative_to(tmp_path).as_posix() for p in written} == {"index.html"} | {
         f"vendor/{v}" for v in VENDOR
-    }
+    } | own
     html = (tmp_path / "index.html").read_text()
     for url in re.findall(r'(?:src|href)="([^"$]+)"', html) + re.findall(
         r'fetch\("([^"]+)"', html
