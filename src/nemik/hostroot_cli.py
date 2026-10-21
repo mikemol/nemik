@@ -6,6 +6,9 @@ The stream (VictoriaLogs, stream host_root_frontier, luthen-observability:W1468)
 from the host: nemik's pod has no luthen checkout. This runs on the host, reads the newest row of
 each resource, and writes {as_of, rows} to a file that nemik-serve reads with a freshness check
 (nemik:W780), as it reads luthen-series.json.
+
+With --landings it writes the commit landings instead (nemik:W751): mikemol-commit's records
+(service mikemol-commit) as nemik.landings reads them, to landings.json beside the other file.
 """
 
 import argparse
@@ -16,9 +19,16 @@ from pathlib import Path
 
 from nemik.endpoint import vlogs_lines
 from nemik.hostroot import HostRow, latest, records
+from nemik.landings import document as landings_document
+from nemik.landings import records as landings_records
 
 QUERY = "stream:host_root_frontier"
-DEFAULT_OUT = Path.home() / ".cache" / "nemik" / "host-root.json"
+LANDINGS_QUERY = "service.name:mikemol-commit"
+# one record per landing, so a few thousand reach back days; the series wants the recent ones
+LANDINGS_LIMIT = 2000
+CACHE = Path.home() / ".cache" / "nemik"
+DEFAULT_OUT = CACHE / "host-root.json"
+LANDINGS_OUT = CACHE / "landings.json"
 
 
 def _quoted(text: str) -> str:
@@ -35,7 +45,8 @@ class _Options(argparse.Namespace):
     """The command line, typed."""
 
     root: Path
-    out: Path
+    out: Path | None
+    landings: bool
 
 
 def row_json(row: HostRow) -> str:
@@ -68,6 +79,35 @@ def document(rows: list[HostRow], as_of: str) -> str:
     return f'{{"as_of": {_quoted(as_of)}, "rows": [\n  {body}\n]}}\n'
 
 
+def _write(path: Path, text: str) -> None:
+    """Write a file whole or not at all, so the server never reads half of it."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(".tmp")
+    temporary.write_text(text, encoding="utf-8")
+    temporary.replace(path)
+
+
+def landings(options: _Options, stamp: str) -> int:
+    """Read mikemol-commit's landing records and write the landings document.
+
+    Returns:
+        0 when written; 1 when luthen's tool could not answer or the answer held no landing.
+
+    """
+    try:
+        rows = landings_records(
+            vlogs_lines(LANDINGS_QUERY, options.root, LANDINGS_LIMIT)
+        )
+    except OSError as error:
+        sys.stderr.write(f"nemik-hostroot: {error}\n")
+        return 1
+    if not rows:
+        sys.stderr.write("nemik-hostroot: the stream answered with no landing record\n")
+        return 1
+    _write(options.out or LANDINGS_OUT, landings_document(rows, stamp))
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     """Read the stream and write the document.
 
@@ -77,8 +117,16 @@ def main(argv: list[str] | None = None) -> int:
     """
     parser = argparse.ArgumentParser(prog="nemik-hostroot", description=__doc__)
     parser.add_argument("--root", type=Path, default=Path.home() / "github")
-    parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
+    parser.add_argument("--out", type=Path, default=None)
+    parser.add_argument(
+        "--landings",
+        action="store_true",
+        help="write mikemol-commit's landing records (landings.json) instead of the frontier",
+    )
     options = parser.parse_args(argv, namespace=_Options())
+    stamp = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
+    if options.landings:
+        return landings(options, stamp)
     try:
         rows = latest(records(vlogs_lines(QUERY, options.root)))
     except OSError as error:
@@ -87,11 +135,7 @@ def main(argv: list[str] | None = None) -> int:
     if not rows:
         sys.stderr.write("nemik-hostroot: the stream answered with no readable row\n")
         return 1
-    stamp = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
-    options.out.parent.mkdir(parents=True, exist_ok=True)
-    temporary = options.out.with_suffix(".tmp")
-    temporary.write_text(document(rows, stamp), encoding="utf-8")
-    temporary.replace(options.out)
+    _write(options.out or DEFAULT_OUT, document(rows, stamp))
     return 0
 
 
