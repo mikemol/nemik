@@ -721,6 +721,9 @@ def test_a_static_build_refetches_only_the_pieces_whose_hash_moved(tmp_path) -> 
             one = fleet["repos"][0]
             hashes = json.loads((out / "hashes.json").read_text())
             hashes[f"graph/{one}.json"] = "moved"
+            # Last-Modified has one-second resolution: a rewrite within the second of the first
+            # read would answer 304 and look unchanged, so the rewrite waits out the second
+            time.sleep(1.1)
             (out / "hashes.json").write_text(json.dumps(hashes))
             page.evaluate("() => load()")
             second = page.evaluate("n => window.__pieceFetches.slice(n)", len(first))
