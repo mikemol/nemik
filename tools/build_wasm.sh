@@ -38,7 +38,7 @@ cp "$here/wasm/core_entry.codon" "$work/core_entry.codon"
 "$llvm/llc" -mtriple=wasm64-unknown-unknown -mcpu=generic -filetype=obj \
 	-o "$work/core_entry.o" "$work/core_entry.ll" 2>/dev/null
 # the shadow stack is 8 MiB: the default 64 KiB overflows on a graph of a couple of thousand cards
-"$llvm/wasm-ld" -mwasm64 --no-entry --export=chains --export=tree --export=cells --export=hue --export=main \
+"$llvm/wasm-ld" -mwasm64 --no-entry --export=chains --export=tree --export=cells --export=hue --export=light --export=main \
 	--export=__heap_base --allow-undefined --gc-sections --strip-all -z stack-size=8388608 \
 	-o "$out" "$work/core_entry.o"
 echo "build_wasm: $out"

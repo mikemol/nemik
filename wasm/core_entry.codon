@@ -11,7 +11,12 @@
 # caller owns. Cards are the indices 0 to n-1 in the order the caller wants ties broken.
 
 from nemik.core.chains import longest_chains
-from nemik.core.text import repo_hue
+from nemik.core.text import luminance, repo_hue
+
+
+@export
+def light(red: float, green: float, blue: float) -> float:
+    return luminance(red, green, blue)
 from nemik.core.treemap import forest_of, ordered_treemap, tree_of
 
 

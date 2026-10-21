@@ -45,6 +45,8 @@ const NemikWasm = (() => {
       seq_throw: () => { throw new Error("the Codon core raised an exception"); },
       seq_personality: () => 0,
       seq_init: () => {},
+      // the C math library the core links against: the JS Math, so the page agrees with itself
+      pow: (a, b) => Math.pow(a, b),
       // number formatting asks the locale for C strings; the core's are C-locale: "." and none
       seq_locale_decimal_point: () => state.statics.point,
       seq_locale_thousands_sep: () => state.statics.empty,
@@ -185,6 +187,17 @@ const NemikWasm = (() => {
     };
   }
 
+  // The WCAG luminance of a CSS colour (core/text.py luminance): the first three numbers in the
+  // string are its red, green and blue, as the page's old luminance read them; none reads as 0.
+  function lightFor(instance) {
+    return css => {
+      const m = String(css).match(/\d+(\.\d+)?/g);
+      if (!m) return 0;
+      const [r, g, b] = m.slice(0, 3).map(Number);
+      return instance.exports.light(r, g, b);
+    };
+  }
+
   function instantiate(bytes) {
     const rt = runtime();
     const module = new WebAssembly.Module(bytes);
@@ -200,7 +213,7 @@ const NemikWasm = (() => {
     rt.state.statics = { point: rt.cstring("."), empty: rt.cstring("") };
     // Codon sets up the module's globals inside main(); nothing else calls it, so it runs once here
     instance.exports.main(0, 0n);
-    return { chains: chainsFor(instance, rt), treeOf: treeFor(instance, rt), orderedTreemap: cellsFor(instance, rt), repoHue: hueFor(instance, rt) };
+    return { chains: chainsFor(instance, rt), treeOf: treeFor(instance, rt), orderedTreemap: cellsFor(instance, rt), repoHue: hueFor(instance, rt), luminance: lightFor(instance) };
   }
 
   return { instantiate };
