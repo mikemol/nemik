@@ -2,7 +2,7 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W822: the page's longest chain is the Python core's, run as wasm in the browser.
 
-The page computes its chains with chains.wasm, src/nemik/core/chains.py compiled by Codon, the code
+The page computes its chains with core.wasm, src/nemik/core/chains.py compiled by Codon, the code
 nemik-critical runs natively (goal W812). The legend says how long the view's longest chain is; here
 it must equal what Python computes over the same fleet. And a browser that cannot load the module
 says so and draws no chain marks: there is no JS copy (nemik:W814).
@@ -87,8 +87,8 @@ def test_the_legend_length_is_the_python_cores(server: str, page: Page) -> None:
 def test_a_browser_without_the_module_says_so_and_marks_no_chain(
     server: str, page: Page
 ) -> None:
-    """With chains.wasm unfetchable the page tells the viewer and does not draw a chain."""
-    page.route("**/chains.wasm", _refuse)
+    """With core.wasm unfetchable the page tells the viewer and does not draw a chain."""
+    page.route("**/core.wasm", _refuse)
     page.goto(server)
     page.wait_for_function(READY, timeout=0)
     expect(page.locator("#chainsoff")).to_be_visible()

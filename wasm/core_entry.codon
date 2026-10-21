@@ -1,0 +1,74 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Mike Mol
+#
+# The page's pure core as wasm entry points (nemik:W820, W817, W828).
+#
+# Codon source, not Python: `Ptr` and `@export` are Codon's, so CPython cannot import this file and
+# the importable package does not hold it. tools/build_wasm.sh stages src/nemik/core beside it and
+# compiles it.
+#
+# Every call passes plain numbers in flat arrays and the answer is written to an `out` array the
+# caller owns. Cards are the indices 0 to n-1 in the order the caller wants ties broken.
+
+from nemik.core.chains import longest_chains
+from nemik.core.treemap import forest_of, ordered_treemap, tree_of
+
+
+@export
+def chains(n: int, m: int, deps: Ptr[int], out: Ptr[int]) -> int:
+    # deps: m (prerequisite, dependent) index pairs; out: per card its up height, its down height
+    # and the number of longest chains through it (0 when on none); returns the longest length
+    ids = [str(i) for i in range(n)]
+    pairs = [(str(deps[2 * k]), str(deps[2 * k + 1])) for k in range(m)]
+    found = longest_chains(ids, pairs)
+    for i in range(n):
+        name = str(i)
+        out[3 * i] = found.up[name]
+        out[3 * i + 1] = found.down[name]
+        out[3 * i + 2] = found.paths[name] if name in found.paths else 0
+    return found.length
+
+
+@export
+def tree(n: int, m: int, opened: Ptr[int], edges: Ptr[int], out: Ptr[int]) -> int:
+    # opened: n flags; edges: m (source, target, kind) triples; out: per card its parent (-1 for
+    # none), its weight and its own weight (0 for a closed card); returns how many roots
+    flags = [opened[i] != 0 for i in range(n)]
+    triples = [(edges[3 * k], edges[3 * k + 1], edges[3 * k + 2]) for k in range(m)]
+    forest = tree_of(n, flags, triples)
+    for i in range(n):
+        out[3 * i] = forest.parent[i]
+        out[3 * i + 1] = forest.weight[i]
+        out[3 * i + 2] = forest.own[i]
+    return len(forest.roots)
+
+
+@export
+def cells(
+    n: int,
+    k: int,
+    parent: Ptr[int],
+    weight: Ptr[int],
+    order: Ptr[int],
+    geometry: Ptr[float],
+    out: Ptr[float],
+) -> int:
+    # parent, weight: per card, as tree wrote them; order: k card indices in rank order; geometry:
+    # x, y, width, height, pad, head; out: per card placed (0 or 1), x, y, w, h, depth and header
+    # height; returns how many cards were placed
+    forest = forest_of([parent[i] for i in range(n)], [weight[i] for i in range(n)])
+    rank = [order[i] for i in range(k)]
+    rect = (geometry[0], geometry[1], geometry[2], geometry[3])
+    found = ordered_treemap(forest, rank, rect, (geometry[4], geometry[5]))
+    count = 0
+    for i in range(n):
+        out[7 * i] = 1.0 if found.placed[i] else 0.0
+        out[7 * i + 1] = found.x[i]
+        out[7 * i + 2] = found.y[i]
+        out[7 * i + 3] = found.w[i]
+        out[7 * i + 4] = found.h[i]
+        out[7 * i + 5] = float(found.depth[i])
+        out[7 * i + 6] = found.head[i]
+        if found.placed[i]:
+            count += 1
+    return count

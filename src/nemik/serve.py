@@ -95,9 +95,9 @@ PAGE_FILES = {
     "cards.js": "text/javascript; charset=utf-8",
     "panels.js": "text/javascript; charset=utf-8",
     # nemik:W820: the Python core compiled to wasm64 (docs/wasm-pipeline.md) and the loader that
-    # supplies its runtime; chains.wasm is built by tools/build_wasm.sh and committed with its hash
+    # supplies its runtime; core.wasm is built by tools/build_wasm.sh and committed with its hash
     "wasm.js": "text/javascript; charset=utf-8",
-    "chains.wasm": "application/wasm",
+    "core.wasm": "application/wasm",
 }
 
 

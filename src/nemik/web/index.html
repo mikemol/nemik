@@ -192,22 +192,22 @@ const pathKey = () => { document.getElementById("pathkey").innerHTML = SCOPES.ma
 // every card among `ids` that lies on SOME longest chain (zero slack); `deps` are [prerequisite, dependent]
 // pairs. A cycle is cut where the walk meets itself. Nothing depends on iteration order.
 // nemik:W822 (goal W812): the computation is src/nemik/core/chains.py, compiled by Codon to
-// chains.wasm, the same code nemik-critical runs natively. This is its facade: it maps the page's
+// core.wasm, the same code nemik-critical runs natively. This is its facade: it maps the page's
 // ids and pairs to the module and back to the shape the callers read. wasm64 (memory64) only, no JS
-// copy (nemik:W814): a browser without it draws no chain marks and says so (loadChains).
-let chainsWasm = null, chainsFailed = false;
-async function loadChains() {
-  if (chainsWasm || chainsFailed) return;
+// copy (nemik:W814): a browser without it draws no chain marks and says so (loadCore).
+let coreWasm = null, coreFailed = false;
+async function loadCore() {
+  if (coreWasm || coreFailed) return;
   try {
-    chainsWasm = NemikWasm.instantiate(await (await fetch("chains.wasm")).arrayBuffer());
+    coreWasm = NemikWasm.instantiate(await (await fetch("core.wasm")).arrayBuffer());
   } catch (e) {
-    chainsFailed = true;
+    coreFailed = true;
     document.getElementById("chainsoff").hidden = false;
   }
 }
 function criticalSet(ids, deps) {
-  const found = chainsWasm
-    ? chainsWasm.chains([...ids], deps)
+  const found = coreWasm
+    ? coreWasm.chains([...ids], deps)
     : { length: 0, up: new Map(), down: new Map(), paths: new Map() };
   const on = [...ids].filter(id => found.paths.has(id));
   on.longest = found.length;  // nemik:W482: the legend says how long "longest" is
@@ -1242,7 +1242,7 @@ async function load() {
   drawSources();
   chips([...new Set(data.nodes.map(n => n.repo))].sort());
   await wake();  // draw() reads `liveness`, populated by wake() -- fetch it first, not alongside.
-  await loadChains();  // render() marks the longest chains through it
+  await loadCore();  // render() marks the longest chains through it
   pathKey(); render(true); findings(); goals(); weather(); history();
 }
 

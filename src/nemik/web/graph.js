@@ -8,90 +8,19 @@
 // at DFS back edges (the edge is still drawn, just not ranked). Units with no cross edges go in a
 // last row, since nothing orders them.
 // nemik:W180 (operator 2026-10-01: "the correct layout is probably reminiscent of a treemap"; not
-// grouped by repo). Step 1, the model: the enables forest across the whole fleet, one parent each,
-// and an ordered treemap of it. Pure functions over plain data, so they can be checked headless.
-// treeOf: each open waypoint's parent is the heaviest open thing it enables (ties: lower id); a
-// second parent stays a drawn edge. Weight = 1 + the weight of everything beneath (area ~ load).
+// grouped by repo): the enables forest across the whole fleet, one parent each, and an ordered strip
+// treemap of it. nemik:W826, W827, W828 (goal W812): both are src/nemik/core/treemap.py, compiled by
+// Codon to core.wasm, the code the CLI runs natively; these are their facades (wasm.js maps the page's
+// ids and Maps to the module and back). No JS copy: a browser without the module draws no treemap.
+// treeOf(nodes, edges): {parent, kids, weight, own, roots}, Maps by id over the open cards.
+// orderedTreemap(tree, order, rect, pad, head): a Map from id to {x, y, w, h, depth[, head]}.
+// Without the module (loadCore says so in #chainsoff) the forest is empty and nothing is placed.
 function treeOf(nodes, edges) {
-  const open = new Set(nodes.filter(n => n.state !== "done" && n.state !== "dropped").map(n => n.id));
-  const ups = new Map([...open].map(id => [id, []]));
-  for (const e of edges) if (e.kind === "enables" && open.has(e.source) && open.has(e.target) && e.source !== e.target) ups.get(e.source).push(e.target);
-  const reach = new Map();  // number of open things each node sits under (transitively), cycle-safe
-  const depthUp = id => { if (reach.has(id)) return reach.get(id); reach.set(id, 0);
-    let d = 0; for (const u of ups.get(id)) d = Math.max(d, 1 + depthUp(u)); reach.set(id, d); return d; };
-  const parent = new Map();
-  for (const id of [...open].sort()) {
-    const cands = ups.get(id).slice().sort((a, b) => depthUp(b) - depthUp(a) || (a < b ? -1 : 1));
-    parent.set(id, cands[0] || null);
-  }
-  // A cycle in the chosen parents is cut at its lowest id, which becomes a root.
-  for (const id of [...open].sort()) {
-    const seen = new Set(); let c = id;
-    while (c && !seen.has(c)) { seen.add(c); c = parent.get(c); }
-    if (c) { const cyc = []; let x = c; do { cyc.push(x); x = parent.get(x); } while (x !== c); parent.set(cyc.sort()[0], null); }
-  }
-  const kids = new Map([...open].map(id => [id, []]));
-  for (const [id, p] of parent) if (p) kids.get(p).push(id);
-  // Own weight (step 3, operator's treemap reference: sizes must vary): 1 + how many open items
-  // this one moves downstream, over enables and waits alike, so a load-bearing leaf is a big tile.
-  const succ = new Map([...open].map(id => [id, []]));
-  for (const e of edges) {
-    const [up, down] = e.kind === "waits" ? [e.target, e.source] : [e.source, e.target];
-    if (open.has(up) && open.has(down) && up !== down) succ.get(up).push(down);
-  }
-  const own = new Map([...open].map(id => {
-    const seen = new Set([id]), st = [id];
-    while (st.length) for (const d of succ.get(st.pop())) if (!seen.has(d)) { seen.add(d); st.push(d); }
-    return [id, seen.size];
-  }));
-  const weight = new Map();
-  const w = id => weight.get(id) ?? (weight.set(id, own.get(id) + kids.get(id).reduce((a, k) => a + w(k), 0)), weight.get(id));
-  for (const id of open) w(id);
-  return { parent, kids, weight, own, roots: [...open].filter(id => !parent.get(id)) };
+  return coreWasm ? coreWasm.treeOf(nodes, edges)
+    : { parent: new Map(), kids: new Map(), weight: new Map(), own: new Map(), roots: [] };
 }
-// orderedTreemap: an ordered *strip* treemap (Bederson et al. 2002): items in rank order fill
-// horizontal strips, a strip closing when adding the next item would worsen its worst aspect ratio.
-// Order reads left to right, top to bottom; area is proportional to weight. Plain slice-and-dice
-// (step 1) kept order too, but 272 fixture roots in one row came out as hair-thin slivers.
 function orderedTreemap(tree, order, rect, pad = 4, head = 3 * pad) {
-  const out = new Map(), rank = new Map(order.map((id, i) => [id, i]));
-  const byRank = (a, b) => (rank.get(a) ?? Infinity) - (rank.get(b) ?? Infinity) || (a < b ? -1 : 1);
-  const lay = (ids, r, depth) => {
-    if (r.w <= 0 || r.h <= 0) { for (const id of ids) out.set(id, { x: r.x, y: r.y, w: 0, h: 0, depth }); return; }
-    const items = ids.slice().sort(byRank), total = items.reduce((a, id) => a + tree.weight.get(id), 0);
-    const scale = (r.w * r.h) / total;  // area per unit weight
-    const worst = strip => { const a = strip.reduce((s, id) => s + tree.weight.get(id) * scale, 0), h = a / r.w;
-      return Math.max(...strip.map(id => { const w = tree.weight.get(id) * scale / h; return Math.max(w / h, h / w); })); };
-    const strips = [];
-    let cur = [];
-    for (const id of items) {
-      if (cur.length && worst([...cur, id]) > worst(cur)) { strips.push(cur); cur = []; }
-      cur.push(id);
-    }
-    if (cur.length) strips.push(cur);
-    let y = r.y;
-    for (const strip of strips) {
-      const h = strip.reduce((s, id) => s + tree.weight.get(id) * scale, 0) / r.w;
-      let x = r.x;
-      for (const id of strip) {
-        const w = tree.weight.get(id) * scale / h, cell = { x, y, w, h };
-        x += w;
-        out.set(id, { ...cell, depth });
-        // The header and margins shrink with a small cell, so children never leave it.
-        // Step 6 (operator: graphviz-style labelled nested clusters): a node with work beneath it is a
-        // frame; its label gets a header strip of its own and its children sit inside the margins.
-        // Header and margins shrink with a small cell, so children never leave it.
-        if (tree.kids.get(id).length) {
-          const px = Math.min(pad, cell.w / 6), top = Math.min(head, cell.h / 3), py = Math.min(pad, cell.h / 6);
-          out.get(id).head = top;
-          lay(tree.kids.get(id), { x: cell.x + px, y: cell.y + top, w: cell.w - 2 * px, h: cell.h - top - py }, depth + 1);
-        }
-      }
-      y += h;
-    }
-  };
-  lay(tree.roots, rect, 0);
-  return out;
+  return coreWasm ? coreWasm.orderedTreemap(tree, order, rect, pad, head) : new Map();
 }
 
 // nemik:W180 step 2: draw the treemap. Positions and sizes come from orderedTreemap; an enables

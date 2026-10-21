@@ -1456,7 +1456,9 @@ def test_treemap_model(server) -> None:
             pytest.skip(f"chromium unavailable: {e}")
         page = browser.new_page()
         page.goto(server)
-        page.wait_for_function("() => typeof treeOf === 'function'", timeout=0)
+        page.wait_for_function(
+            "() => typeof treeOf === 'function' && !!coreWasm", timeout=0
+        )
         m = page.evaluate(TREEMAP_INVARIANTS)
         browser.close()
     assert m["bad"] == [], m
