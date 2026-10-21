@@ -20,8 +20,8 @@ def test_page_and_vendor_written_with_relative_links(tmp_path) -> None:
     ):
         assert not url.startswith(("/", "http:", "https:")), url
     for f in re.findall(r'fetch\("([^"]+)"', html):
-        # a file name a bucket can serve
-        assert f.endswith((".json", "/")), f
+        # a file name a bucket can serve: a document, or one of the page's own files (nemik:W822)
+        assert f.endswith((".json", "/", *PAGE_FILES)), f
 
 
 def test_data_files_cover_what_the_page_fetches_and_are_manifested() -> None:

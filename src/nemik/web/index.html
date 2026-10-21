@@ -8,6 +8,7 @@
 <script src="vendor/dagre.min.js"></script>
 <script src="vendor/cytoscape-dagre.js"></script>
 <script src="graph.js"></script>
+<script src="wasm.js"></script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -23,6 +24,7 @@
   <span role="radiogroup" aria-label="Card list order" title="How the card list orders its cards: by rank (salience), newest card first (by symbol number), by the longest chain beneath it, grouped by repo, the cards waiting on the operator first, or the most recently worked first. Keys 1 to 6."><label><input type="radio" name="listmode" value="rank" checked> rank</label> <label><input type="radio" name="listmode" value="newest"> newest</label> <label><input type="radio" name="listmode" value="critical"> critical</label> <label><input type="radio" name="listmode" value="repo"> repo</label> <label><input type="radio" name="listmode" value="asks"> asks</label> <label><input type="radio" name="listmode" value="recent"> recent</label></span>
   <span id="clockgroup" role="radiogroup" aria-label="Clock for the recent order" hidden title="Which clock the recent order reads; a card with no value for it sorts last."><label><input type="radio" name="listclock" value="last_worked" checked> worked</label> <label><input type="radio" name="listclock" value="issued"> issued</label> <label><input type="radio" name="listclock" value="last_activity"> activity</label></span>
   <span class="stat" id="stat"></span>
+  <span class="stat" id="chainsoff" role="status" hidden>longest-chain marks are off: this browser cannot run the page's WebAssembly (memory64: Chrome and Firefox)</span>
   <button id="relayout" type="button" hidden title="The poll added or removed cards in place, leaving the rest where they were; this lays the whole graph out again"></button>
   <span class="stat" id="legnote" role="status"></span><span class="stat" id="legact"></span>
   <span id="announce" class="sr-only" role="status" aria-live="polite"></span>
@@ -189,32 +191,27 @@ const pathKey = () => { document.getElementById("pathkey").innerHTML = SCOPES.ma
 // nemik:W344: the dependency order is a poset, so tied longest chains are alternatives, not a ranking. This is
 // every card among `ids` that lies on SOME longest chain (zero slack); `deps` are [prerequisite, dependent]
 // pairs. A cycle is cut where the walk meets itself. Nothing depends on iteration order.
+// nemik:W822 (goal W812): the computation is src/nemik/core/chains.py, compiled by Codon to
+// chains.wasm, the same code nemik-critical runs natively. This is its facade: it maps the page's
+// ids and pairs to the module and back to the shape the callers read. wasm64 (memory64) only, no JS
+// copy (nemik:W814): a browser without it draws no chain marks and says so (loadChains).
+let chainsWasm = null, chainsFailed = false;
+async function loadChains() {
+  if (chainsWasm || chainsFailed) return;
+  try {
+    chainsWasm = NemikWasm.instantiate(await (await fetch("chains.wasm")).arrayBuffer());
+  } catch (e) {
+    chainsFailed = true;
+    document.getElementById("chainsoff").hidden = false;
+  }
+}
 function criticalSet(ids, deps) {
-  const edges = flip => {
-    const m = new Map([...ids].map(id => [id, []]));
-    deps.forEach(([a, b]) => { const [x, y] = flip ? [b, a] : [a, b]; if (m.has(x) && m.has(y) && x !== y) m.get(x).push(y); });
-    return m;
-  };
-  const height = adj => {
-    const memo = new Map(), onStack = new Set();
-    const walk = id => {
-      if (memo.has(id)) return memo.get(id);
-      onStack.add(id);
-      let best = 1;
-      for (const t of adj.get(id)) if (!onStack.has(t)) best = Math.max(best, 1 + walk(t));
-      onStack.delete(id);
-      memo.set(id, best);
-      return best;
-    };
-    ids.forEach(walk);
-    return memo;
-  };
-  const down = height(edges(false)), up = height(edges(true));
-  const through = id => up.get(id) + down.get(id) - 1;
-  const longest = Math.max(0, ...[...ids].map(through));
-  const on = [...ids].filter(id => through(id) === longest);
-  on.longest = longest;  // nemik:W482: the legend says how long "longest" is
-  on.up = up; on.down = down;  // and its edges can be found (markChainEdges)
+  const found = chainsWasm
+    ? chainsWasm.chains([...ids], deps)
+    : { length: 0, up: new Map(), down: new Map(), paths: new Map() };
+  const on = [...ids].filter(id => found.paths.has(id));
+  on.longest = found.length;  // nemik:W482: the legend says how long "longest" is
+  on.up = found.up; on.down = found.down;  // and its edges can be found (markChainEdges)
   return on;
 }
 
@@ -1245,6 +1242,7 @@ async function load() {
   drawSources();
   chips([...new Set(data.nodes.map(n => n.repo))].sort());
   await wake();  // draw() reads `liveness`, populated by wake() -- fetch it first, not alongside.
+  await loadChains();  // render() marks the longest chains through it
   pathKey(); render(true); findings(); goals(); weather(); history();
 }
 
