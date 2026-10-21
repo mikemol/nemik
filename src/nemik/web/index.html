@@ -1263,11 +1263,30 @@ function seriesBoard(s) {
     ? `<p><b>${rows.length} with work, not awake</b> (luthen's series):</p><dl>${rows.join("")}</dl>`
     : `<p class="stat">Every repo with work is awake (luthen's series).</p>`;
 }
+// nemik:W751: each repo's commit gate times from mikemol-commit's landing records (landings.json, a
+// board only when the host left a file): how many landed, the median and last gate in minutes, and
+// the recent ones as a sparkline against the repo's own slowest. No file, or host false, draws nothing.
+const SPARK = "▁▂▃▄▅▆▇█";
+function landingsBoard(l) {
+  const minutes = s => `${Math.round(s / 60)} min`;
+  const rows = Object.keys(l.series).sort().map(repo => {
+    const g = l.series[repo], sorted = [...g].sort((a, b) => a - b), top = sorted[sorted.length - 1] || 1;
+    const spark = g.slice(-12).map(s => SPARK[Math.min(SPARK.length - 1, Math.floor(s / top * SPARK.length))]).join("");
+    return `<dt>${esc(repo)}</dt><dd>${g.length} landed; gate median ${minutes(sorted[Math.floor(sorted.length / 2)])}, last ${minutes(g[g.length - 1])} <span class="stat">${spark}</span></dd>`;
+  });
+  return rows.length
+    ? `<p><b>Commit gate times</b> (mikemol-commit, read ${esc(l.as_of)}${l.stale ? ", stale" : ""}):</p><dl>${rows.join("")}</dl>`
+    : "";
+}
 async function wake() {
   const el = document.getElementById("wake");
   let w, board = "";
   try { w = await (await fetch("wake.json")).json(); } catch (e) { el.textContent = "unavailable"; return; }
   if (w.series && w.series.board) board = seriesBoard(w.series);
+  try {
+    const l = await (await fetch("landings.json")).json();
+    if (l.host) board += landingsBoard(l);
+  } catch (e) { /* static view or no host file: no landings board */ }
   liveness = Object.fromEntries(w.roster.map(r => [r.repo, r.state]));
   const sleepers = w.roster.filter(r => r.state !== "awake");
   const rows = sleepers.map(r => `<dt><b>${esc(r.repo)}</b> <span class="stat">${esc(r.state)}</span></dt>
