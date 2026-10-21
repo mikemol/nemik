@@ -1368,3 +1368,16 @@
 2026-10-21T03:55:51Z  status W829 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-21T03:55:52Z  tick  W829 advanced  collapse  "e1cec2f: repo_hue in core.text, strings cross as UTF-16 codes; luminance and esc next [blocked by W812]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-21T04:28:55Z  tick  W829 advanced  collapse  "bb9ba08: luminance in core.text via core.wasm, pow from Math.pow, bit-identical on 20006 colours [blocked by W812]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T04:59:03Z  status W826 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T04:59:07Z  tick  W826 advanced  sweep     "041d6ad: queue state committed; W826 finally marked done (the earlier call was refused by shellcheck on the bare word) [blocked by W829]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T05:14:38Z  status W749 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T05:14:52Z  status W749 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T05:14:56Z  tick  W749 advanced  sweep     "second shingle issued (1647 rows); score empty until a horizon matures [blocked by W829]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T05:47:13Z  status W751 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T05:55:32Z  status W751 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T05:55:33Z  tick  W751 advanced  collapse  "00010b0: nemik.landings reads landing records into per-repo gate series; fetch and board next [blocked by W829]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T06:25:11Z  tick  W751 advanced  collapse  "665c369: landings document writer and reader; host fetch mode, route and board next [blocked by W829]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T06:59:36Z  tick  W751 advanced  collapse  "bf318ea: nemik-hostroot --landings writes the host-side landings document from the live stream [blocked by W829]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T07:35:22Z  tick  W751 advanced  collapse  "088cf33: nemik-serve --landings and /landings.json; panel drawing next [blocked by W829]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T07:57:59Z  status W751 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T07:58:04Z  tick  W751 advanced  collapse  "de0c165: the wake panel draws commit gate times; W751 code done, operator timer and flag remain [blocked by W829]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
