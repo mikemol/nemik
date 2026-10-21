@@ -19,11 +19,21 @@ a sentinel of the same type (shapedepth.UNBOUNDED = -1), or raise and let the ca
 import json
 import os
 import resource
+import shutil
 from pathlib import Path
 
 import installed
 import pytest
-from codon_census import Census, census, failing, first_error, modules, regressions
+from codon_census import (
+    Census,
+    census,
+    failing,
+    first_error,
+    modules,
+    regressions,
+    stage,
+)
+from core_smoke import lines
 
 ROOT = Path(__file__).resolve().parents[1]
 _STAGED = os.environ.get("NEMIK_CODON")
@@ -120,3 +130,21 @@ def test_failing_counts_per_mode() -> None:
         "b": {"as_written": "e", "stripped": "e"},
     }
     assert failing(counted) == {"as_written": 2, "stripped": 1}
+
+
+def test_the_core_runs_under_release_as_it_does_under_cpython(tmp_path: Path) -> None:
+    """The wasm module is built with --release, which has an optimizer bug a plain run hides (W824).
+
+    tools/core_smoke.py calls every pure core function on a small input and prints ints and
+    strings; the pinned compiler runs it with --release and the lines must be CPython's.
+    """
+    stage(ROOT / "src", tmp_path, strip=False)
+    shutil.copy(ROOT / "tools" / "core_smoke.py", tmp_path / "core_smoke.py")
+    program = tmp_path / "main.py"
+    program.write_text(
+        "from core_smoke import lines\n\nfor line in lines():\n    print(line)\n",
+        encoding="utf-8",
+    )
+    run = installed.run(str(CODON), "run", "--release", str(program), cwd=tmp_path)
+    assert run.returncode == 0, run.stderr
+    assert run.stdout.splitlines() == lines()

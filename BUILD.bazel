@@ -32,7 +32,7 @@ exports_files(["pyproject.toml"])
             # nemik:W566: the Codon pin test runs the staged compiler
             + (["@codon//:files", "@codon//:bin/codon"] if src == "tests/test_codon_pin.py" else [])
             # nemik:W566: the Codon census compiles every module of the package with the pinned compiler
-            + (["@codon//:files", "@codon//:bin/codon", "tools/codon_census.py", "codon-baseline.json"] + glob(["src/nemik/*.py", "src/nemik/core/*.py"]) if src == "tests/test_codon_census.py" else [])
+            + (["@codon//:files", "@codon//:bin/codon", "tools/codon_census.py", "tools/core_smoke.py", "codon-baseline.json"] + glob(["src/nemik/*.py", "src/nemik/core/*.py"]) if src == "tests/test_codon_census.py" else [])
             # nemik:W541: the order-sensitive pick test reads every Python file under tests, tools and checks
             + (glob(["tests/*.py", "tools/*.py", "checks/*.py"], exclude = [src, "tests/installed.py", "tests/webpage.py", "tests/pagetext.py", "tools/nemik_client.py", "checks/claims.py"]) if src == "tests/test_order_sensitive_picks.py" else [])
             # nemik:W521: the gate test reads the hook and the script that runs the //:precommit suite
