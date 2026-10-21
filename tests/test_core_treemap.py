@@ -2,7 +2,7 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W826: the treemap model's forest over plain data."""
 
-from nemik.core.treemap import ENABLES, NONE, WAITS, tree_of
+from nemik.core.treemap import ENABLES, NONE, WAITS, forest_of, tree_of
 
 # a=0 b=1 c=2 d=3 e=4 f=5: a enables b and c, both enable d, d enables e; f stands alone
 DIAMOND = [
@@ -54,3 +54,11 @@ def test_a_cycle_among_chosen_parents_is_cut_at_its_lowest_card() -> None:
     assert tree.parent == [NONE, 0]
     assert tree.roots == [0]
     assert tree.weight[0] == tree.own[0] + tree.weight[1]
+
+
+def test_the_forest_is_rebuilt_from_parents_and_weights_alone() -> None:
+    """What the layout needs, kids and roots in ascending order, comes from two arrays."""
+    tree = tree_of(SIX, [True, True, True, False, True, True], DIAMOND)
+    again = forest_of(tree.parent, tree.weight)
+    assert again.kids == tree.kids
+    assert again.roots == tree.roots

@@ -168,6 +168,34 @@ def tree_of(n: int, is_open: list[bool], edges: list[tuple[int, int, int]]) -> T
     return Tree(parent, kids, weight, own, roots)
 
 
+def forest_of(parent: list[int], weight: list[int]) -> Tree:
+    """Rebuild a forest from each card's parent and weight; a weight of 0 marks a closed card.
+
+    The layout needs only these two, so a caller that holds them (the page, between the tree call
+    and the layout call) need not send the edges again. Kids and roots come out in ascending order,
+    as tree_of makes them; the own weights are not carried and read as 0.
+
+    Args:
+        parent: Each card's parent, NONE for a root or a closed card.
+        weight: Each card's weight, 0 for a closed card.
+
+    Returns:
+        The forest.
+
+    """
+    n = len(parent)
+    kids: list[list[int]] = [[] for _ in range(n)]
+    roots: list[int] = []
+    for card in range(n):
+        if weight[card] == 0:
+            continue
+        if parent[card] == NONE:
+            roots.append(card)
+        else:
+            kids[parent[card]].append(card)
+    return Tree(parent, kids, weight, [0] * n, roots)
+
+
 class Cells:
     """Where each card landed: a rectangle, its depth in the forest and its header height."""
 
