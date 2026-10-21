@@ -48,7 +48,10 @@ look for, or move the look with it:
    helpers the inline script defines (`esc`, `paint`), and a classic script in the head runs before
    both.
 5. W805: detail HTML, the panels, data load, boards, links and sources to `panels.js`.
-6. W806: a line ceiling per file that only falls.
+6. W806: a line ceiling per file that only falls (`tests/test_web_size.py`).
+7. W808, W809, W810: the rings and ink, the scopes, critical chains and list orders to `graph.js`;
+   render, the in-place poll follow and the draw helpers to `render.js` (graph.js would have passed
+   900 lines). `index.html` is then the markup and the statements that wire the page at load.
 
 The script is global `function`s and `let`s today, so the first split keeps them global by loading
 the modules as classic scripts in order; turning them into ES modules is a later, separate step.
