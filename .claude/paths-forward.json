@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 829,
+  "counter": 830,
   "waypoints": [
     {
       "symbol": "W1",
@@ -16250,7 +16250,7 @@
         "file:tests/test_page_landings.py!w"
       ],
       "blocked_on": [
-        "operator: act run nemik-hostroot --landings on a timer beside the hostroot one, and start nemik-serve with --landings ~/.cache/nemik/landings.json"
+        "operator: act env -C /home/mikemol/github/nemik /home/mikemol/github/nemik/.venv/bin/nemik-hostroot --landings (expected: no output, exit 0, landings.json rewritten with a fresh as_of; run it on a timer beside the host-root refresh, and start the live nemik-serve with --landings pointing at that file; done when GET /landings.json answers host true)"
       ],
       "blocked_kind": "human",
       "next_bounded_step": "Code landed (00010b0, 665c369, bf318ea, 088cf33, de0c165). Remaining is the operator's timer and server flag; then read /landings.json back from the live server",
@@ -16258,8 +16258,8 @@
       "issued_at": "2026-10-19T19:40:36Z",
       "minted_during": "tick",
       "caused_by": "mtools:W1731",
-      "last_worked": "2026-10-21T07:57:59Z",
-      "ticks_blocked": 1,
+      "last_worked": "2026-10-21T08:16:39Z",
+      "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "src/nemik/landings.py",
@@ -18287,6 +18287,34 @@
       ],
       "size_class": "medium",
       "completed": null
+    },
+    {
+      "symbol": "W830",
+      "title": "Repin the seven vendored mtools wheels past 2c1b79d (manifest-aware --close-umbrellas, Gated-* fixes)",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:pyproject.toml!w",
+        "file:MODULE.bazel!w",
+        "file:uv.lock!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Commit the queue state, then mikemol-repin --revendor --no-sync --write at 2c1b79dfd2ec01d7b3430f6cd1b45417498a2ec7; put back the converge line of SHA256SUMS; list old wheel deletions in the stack paths",
+      "evidence": "",
+      "issued_at": "2026-10-21T08:38:41Z",
+      "minted_during": "interrupt",
+      "caused_by": null,
+      "last_worked": "2026-10-21T08:38:46Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "pyproject.toml",
+        "MODULE.bazel",
+        "uv.lock",
+        "vendor/wheels/SHA256SUMS"
+      ],
+      "size_class": "small"
     }
   ],
   "residue": [
@@ -18391,14 +18419,37 @@
   ],
   "job_id": "753002c6",
   "heartbeat": "2026-10-17T17:47:00Z",
-  "lock": {
-    "holder": "claude-nemik",
-    "taken_at": "2026-10-21T08:14:25Z",
-    "pid": 1281447,
-    "start": 39974717
-  },
+  "lock": null,
   "predecessor_job_id": "6473ee18",
-  "leases": [],
+  "leases": [
+    {
+      "tag": "file:pyproject.toml!w",
+      "holder": "(unlocked)",
+      "waypoint": "W830",
+      "base_sha": "d5725149568254aec4fcca752974f2103d3565bd",
+      "taken_at": "2026-10-21T08:38:46Z",
+      "renewed_at": "2026-10-21T08:38:46Z",
+      "expires_at": "2026-10-21T09:08:46Z"
+    },
+    {
+      "tag": "file:MODULE.bazel!w",
+      "holder": "(unlocked)",
+      "waypoint": "W830",
+      "base_sha": "d5725149568254aec4fcca752974f2103d3565bd",
+      "taken_at": "2026-10-21T08:38:46Z",
+      "renewed_at": "2026-10-21T08:38:46Z",
+      "expires_at": "2026-10-21T09:08:46Z"
+    },
+    {
+      "tag": "file:uv.lock!w",
+      "holder": "(unlocked)",
+      "waypoint": "W830",
+      "base_sha": "d5725149568254aec4fcca752974f2103d3565bd",
+      "taken_at": "2026-10-21T08:38:46Z",
+      "renewed_at": "2026-10-21T08:38:46Z",
+      "expires_at": "2026-10-21T09:08:46Z"
+    }
+  ],
   "advice": [
     {
       "tool": "block-behind-open",

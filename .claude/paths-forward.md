@@ -3,7 +3,7 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 829 · heartbeat 2026-10-17T17:47:00Z · job `753002c6` · hash `v2:8a18069c7b339278`
+counter 829 · heartbeat 2026-10-17T17:47:00Z · job `753002c6` · hash `v2:1a6fa88f8353ff5e`
 
 | # | symbol | status |
 |---|---|---|
@@ -1222,8 +1222,10 @@ counter 829 · heartbeat 2026-10-17T17:47:00Z · job `753002c6` · hash `v2:8a18
      refuses without --plan) is the first case
 85. **W751** (blocked) Observations live feed: switch W744's observations from the git backfill to the
    mikemol.waypoint.event stream
-   - blocked on: operator: act run nemik-hostroot --landings on a timer beside the hostroot one, and start nemik-serve
-     with --landings ~/.cache/nemik/landings.json
+   - blocked on: operator: act env -C /home/mikemol/github/nemik /home/mikemol/github/nemik/.venv/bin/nemik-hostroot
+     --landings (expected: no output, exit 0, landings.json rewritten with a fresh as_of; run it on a timer beside the
+     host-root refresh, and start the live nemik-serve with --landings pointing at that file; done when GET
+     /landings.json answers host true)
    - next: Code landed (00010b0, 665c369, bf318ea, 088cf33, de0c165). Remaining is the operator's timer and server flag;
      then read /landings.json back from the live server
 86. **W17** (blocked) Follow up nemik:W4: re-run nemik-operator; nudge any repo whose unstated blocks remain when that

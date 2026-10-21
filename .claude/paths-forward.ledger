@@ -1381,3 +1381,6 @@
 2026-10-21T07:35:22Z  tick  W751 advanced  collapse  "088cf33: nemik-serve --landings and /landings.json; panel drawing next [blocked by W829]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-21T07:57:59Z  status W751 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-21T07:58:04Z  tick  W751 advanced  collapse  "de0c165: the wake panel draws commit gate times; W751 code done, operator timer and flag remain [blocked by W829]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T08:16:42Z  tick  W751 advanced  sweep     "d572514 queue state committed; W751's operator ask now carries the verbatim command, expected output and done condition [blocked by W829]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T08:38:41Z  interrupt W830 minted    -         "Repin the seven vendored mtools wheels past 2c1b79d (manifest-aware --close-umbrellas, Gated-* fixes)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T08:38:46Z  status W830 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
