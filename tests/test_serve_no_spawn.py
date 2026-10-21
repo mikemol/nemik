@@ -38,6 +38,7 @@ ROUTES = [
     "/landings.json",
     "/critical.json",
     "/starved.json",
+    "/overlaps.json",
     "/check.json",
     "/check/ready-neither.json",
     "/check/unmanifested.json",

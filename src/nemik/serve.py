@@ -32,7 +32,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from importlib.metadata import PackageNotFoundError, version
 from importlib.resources import files
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from rdflib import RDF, Graph, URIRef
 from rdflib.namespace import DCTERMS, PROV
@@ -58,6 +58,7 @@ from nemik.landings import read_document as read_landings
 from nemik.landings import series as landing_series
 from nemik.luthenseries import board, load
 from nemik.outbox import outbox
+from nemik.overlaps import overlaps
 from nemik.runlogs import runs_graph
 from nemik.starved import days_limit, starved_fleet
 from nemik.wake import operator_row, read_liveness, roster
@@ -89,6 +90,9 @@ def check_report(name: str, graph: Graph, root: Path) -> str | None:
         return integrity_text(graph, root)
     return None
 
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 VENDOR = {"cytoscape.min.js", "dagre.min.js", "cytoscape-dagre.js"}
 # nemik:W801: the page's own files beside index.html (nemik:W799 splits it by concern): the
@@ -198,7 +202,13 @@ def hostroot_board(path: Path | None, now: str) -> dict[str, object]:
 
 # the documents one Model.doc_for answers, by route: the boards the host writes files for
 # (nemik:W780, W751) and the longest chain, whose answer nemik-critical --json shares (nemik:W786)
-DOC_ROUTES = ["/hostroot.json", "/landings.json", "/critical.json", "/starved.json"]
+DOC_ROUTES = [
+    "/hostroot.json",
+    "/landings.json",
+    "/critical.json",
+    "/starved.json",
+    "/overlaps.json",
+]
 
 
 def landings_board(path: Path | None, now: str) -> dict[str, object]:
@@ -430,20 +440,35 @@ class Model:
         found = starved_fleet(g, [], datetime.now(UTC), days)
         return {"days": days, "starved": [s._asdict() for s in found]}
 
+    def overlaps_json(self) -> dict[str, object]:
+        """Build the work tags more than one live card touches, as nemik-overlaps finds them.
+
+        The claim holders the command appends come from a spawned mikemol-membudget, which the
+        server never starts, so they are left out.
+
+        Returns:
+            {"overlaps": {tag: [cards]}, "cross": the same for tags shared across repos}, over the
+            graph less what luthen withholds.
+
+        """
+        g = without(self.graph, self.withheld) if self.withheld else self.graph
+        return {"overlaps": overlaps(g), "cross": overlaps(g, cross=True)}
+
     def doc_for(self, route: str) -> dict[str, object]:
         """Build the document a route in DOC_ROUTES answers.
 
         Returns:
-            The landings board, the critical-path document, or the host-root board.
+            The document the route names.
 
         """
-        if route == "/landings.json":
-            return self.landings_doc()
-        if route == "/critical.json":
-            return self.critical_json()
-        if route == "/starved.json":
-            return self.starved_json()
-        return self.hostroot_doc()
+        docs: dict[str, Callable[[], dict[str, object]]] = {
+            "/hostroot.json": self.hostroot_doc,
+            "/landings.json": self.landings_doc,
+            "/critical.json": self.critical_json,
+            "/starved.json": self.starved_json,
+            "/overlaps.json": self.overlaps_json,
+        }
+        return docs[route]()
 
     def poke(self) -> None:
         """Keep requests off the rebuild path (nemik:W69, luthen-observability:W146).

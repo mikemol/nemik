@@ -29,6 +29,7 @@ ROUTED = [
     ("nemik-check --integrity", "/check/", "integrity_text"),
     ("nemik-critical", "/critical.json", "critical_doc"),
     ("nemik-starved", "/starved.json", "starved_fleet"),
+    ("nemik-overlaps", "/overlaps.json", "overlaps"),
 ]
 
 PENDING = [
@@ -42,7 +43,6 @@ PENDING = [
     ("nemik-pacing", "W786"),
     ("nemik-stackable", "W786"),
     ("nemik-floor-asks", "W786"),
-    ("nemik-overlaps", "W786"),
     ("nemik-witnesses", "W786"),
 ]
 
