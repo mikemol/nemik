@@ -24,7 +24,7 @@ def page_text() -> str:
     parts = [(web / "index.html").read_text(encoding="utf-8")]
     parts.extend(
         (web / name).read_text(encoding="utf-8")
-        for name in PAGE_FILES
-        if (web / name).is_file()
+        for name, kind in PAGE_FILES.items()
+        if kind.startswith("text/") and (web / name).is_file()
     )
     return "\n".join(parts)

@@ -132,5 +132,8 @@ def longest_chains(ids: list[str], deps: list[tuple[str, str]]) -> Chains:
     paths: dict[str, int] = {}
     for n in ids:
         if up[n] + down[n] - 1 == length:
-            paths[n] = ways_in[n] * ways_out[n]
+            # a local first: the pinned Codon under --release rewrites `d[k] = a[k] * b[k]`
+            # into an in-place update that raises KeyError on the new key (nemik:W820)
+            through = ways_in[n] * ways_out[n]
+            paths[n] = through
     return Chains(length, up, down, paths)
