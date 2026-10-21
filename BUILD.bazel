@@ -46,6 +46,8 @@ exports_files(["pyproject.toml"])
             + (["tests/umbrella_cases.py"] if src == "tests/test_umbrella_block.py" else [])
             # nemik:W621: the pre-push hook is read as text by its test
             + ([".githooks/pre-push"] if src == "tests/test_githooks_prepush.py" else [])
+            # nemik:W819: the post-commit hook is read as text by its test
+            + ([".githooks/post-commit"] if src == "tests/test_githooks_postcommit.py" else [])
             # nemik:W622: the commit-msg hook is read as text by its test
             + ([".githooks/commit-msg"] if src == "tests/test_githooks_commitmsg.py" else [])
             # nemik:W690: the queue contract's fixture is read by its test

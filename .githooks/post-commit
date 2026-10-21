@@ -10,6 +10,14 @@ git_dir=$(git rev-parse --git-dir)
 if [ -d "$git_dir/rebase-merge" ] || [ -d "$git_dir/rebase-apply" ]; then
 	exit 0
 fi
+# nemik:W819: the Bazel-built .venv symlinks each src/nemik file, so an edit is seen at once, but a file a
+# commit added, removed or renamed is not there until the venv is built again. Luthen's nemik_check gate
+# runs that venv's nemik-check: after W818 added nemik/core it crashed on import and paged unexpected_red
+# (2026-10-20). So such a commit rebuilds it, detached, whether or not there is anywhere to push.
+moved=$(git diff-tree --no-commit-id --name-only -r --diff-filter=ADR HEAD -- src/nemik)
+if [ -n "$moved" ] && command -v bazel >/dev/null 2>&1; then
+	setsid nohup bazel build //:.venv --show_result=0 --noshow_progress >/dev/null 2>&1 &
+fi
 branch=$(git symbolic-ref --quiet --short HEAD) || exit 0
 git rev-parse --abbrev-ref --symbolic-full-name '@{upstream}' >/dev/null 2>&1 || exit 0
 git push --quiet || echo "post-commit: push of $branch failed; the commit stays local" >&2
