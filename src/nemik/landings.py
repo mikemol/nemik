@@ -96,6 +96,85 @@ def records(lines: list[str]) -> list[Landing]:
     return sorted(rows, key=_stamp)
 
 
+AS_OF_KEY = '"as_of": "'
+
+
+def _quoted(text: str) -> str:
+    """Quote a string for JSON (a repo, sha or card holds nothing needing more than these).
+
+    Returns:
+        The JSON string literal for `text`.
+
+    """
+    return '"' + text.replace("\\", "\\\\").replace('"', '\\"') + '"'
+
+
+def row_json(row: Landing) -> str:
+    """Write one landing as a JSON object.
+
+    Returns:
+        The object, keys in a fixed order, the gate seconds a string as the stream has them.
+
+    """
+    return (
+        f'{{"repo": {_quoted(row.repo)}, "sha": {_quoted(row.sha)}, '
+        f'"card": {_quoted(row.card)}, "gate_s": "{row.gate_s}", "when": {_quoted(row.when)}}}'
+    )
+
+
+def document(rows: list[Landing], as_of: str) -> str:
+    """Write the document the host leaves for nemik-serve: the stamp, then a row per line.
+
+    Args:
+        rows: The landings, oldest first.
+        as_of: When the stream was read, an ISO stamp.
+
+    Returns:
+        The file's text.
+
+    """
+    body = ",\n  ".join(row_json(row) for row in rows)
+    return f'{{"as_of": {_quoted(as_of)}, "rows": [\n  {body}\n]}}\n'
+
+
+def read_document(text: str) -> tuple[str, list[Landing]]:
+    """Read the document document() writes.
+
+    Args:
+        text: The file's text.
+
+    Returns:
+        When the stream was read, and the landings in the order written.
+
+    Raises:
+        ValueError: When the first line carries no as_of or a row line cannot be read.
+
+    """
+    lines = text.splitlines()
+    head = lines[0] if lines else ""
+    at = head.find(AS_OF_KEY)
+    if at < 0:
+        message = "no as_of on the first line"
+        raise ValueError(message)
+    start = at + len(AS_OF_KEY)
+    as_of = head[start : head.find('"', start)]
+    rows: list[Landing] = []
+    for line in lines[1:]:
+        body = line.strip().rstrip(",")
+        if body.startswith("{"):
+            fields_of = fields(body)
+            rows.append(
+                Landing(
+                    _first(fields_of, "repo"),
+                    _first(fields_of, "sha"),
+                    _first(fields_of, "card"),
+                    int(_first(fields_of, "gate_s")),
+                    _first(fields_of, "when"),
+                )
+            )
+    return as_of, rows
+
+
 def series(rows: list[Landing]) -> dict[str, list[int]]:
     """Give each repo's gate seconds in the order its commits landed.
 
