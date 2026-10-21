@@ -42,7 +42,11 @@ look for, or move the look with it:
    moves until a moved file would be served.
 2. W802: the style block to `style.css`.
 3. W803: constants, helpers, critical chains, rings, render and patch, treemap, forest to `graph.js`.
-4. W804: selection, the card list, lanes, popover, help and keys to `cards.js`.
+4. W804: selection, the card list, lanes, popover, help and keys to `cards.js`. Only definitions move:
+   the statements that wire the page when it loads (`addEventListener` on the card list, the popover,
+   the key handler, the list-order radios) stay in `index.html`, because they need the DOM and the
+   helpers the inline script defines (`esc`, `paint`), and a classic script in the head runs before
+   both.
 5. W805: detail HTML, the panels, data load, boards, links and sources to `panels.js`.
 6. W806: a line ceiling per file that only falls.
 
