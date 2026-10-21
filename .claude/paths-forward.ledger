@@ -1111,3 +1111,260 @@
 2026-10-20T01:16:38Z  tick  W755 advanced  unblock   "G8 queued as stack212; next W712 (rank re-baseline touches rank.py, rank-weights.toml, test_rank.py: wants its own tick) [blocked by W712]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-20T01:48:51Z  tick  W712 advanced  unblock   "stack214 queued: wait weight on in rank --flow at the measured 1/50; stack213 (W651) gating [blocked by W651]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-20T02:04:03Z  interrupt W757 minted    -         "Retro frozen timeline: decide whether the retro node needs one, and if so what shape judges it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W492
+2026-10-20T02:46:39Z  tick  W757 advanced  unblock   "G1 timeline shape queued as stack217 beside stack216 (W747 slice 1) [blocked by W747]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T03:16:38Z  tick  W757 advanced  unblock   "W757 landed 004b731; stack218 (W747 slice 2) gating; the shingle store is next and edits the same file [blocked by W747]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T03:46:45Z  tick  W748 advanced  unblock   "verify.brier and scorable queued as stack220 beside stack219 (W747 slice 3) [blocked by W747]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T04:16:35Z  tick  W747 advanced  unblock   "climate.leads_by_repo and open_ages queued as stack221 beside stack220; nemik-history --forecast uses them next [blocked by W748]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T04:45:58Z  tick  W747 advanced  unblock   "stack221 gating; --forecast wiring waits for it to land and for the venv build that links forecastshingle [blocked by W748]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T05:16:01Z  tick  W748 advanced  unblock   "verify.score_shingle queued as stack223; Codon fromisoformat rejects +00:00 at run time, noted in the commit [blocked by W747]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T05:27:10Z  interrupt W758 minted    -         "Codon's datetime.fromisoformat rejects a +00:00 offset at run time: make climate and verify parse the event stamps in a form Codon accepts"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W748
+2026-10-20T05:45:15Z  tick  W759 minted    -         "nemik-history --score SHINGLE_FILE scores a stored shingle against the events: Brier per lead"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W748
+2026-10-20T05:45:29Z  tick  W748 advanced  collapse  "W748 atomized: W759 is the --score command, behind W758 (stack224 gating) [blocked by W758]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T06:16:08Z  tick  W747 advanced  unblock   "--append-to queued as stack226: nemik's part of the shingle store; the schedule is luthen W1419's [blocked by W748]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T06:45:03Z  tick  W760 minted    -         "verify.reliability bins forecast chances and gives the observed share done in each bin, per lead"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W748
+2026-10-20T06:45:05Z  tick  W761 minted    -         "nemik-history --score prints persistence and climatology Brier and the skill against each, beside each lead"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W748
+2026-10-20T06:45:21Z  tick  W748 advanced  collapse  "W748 atomized: W760 reliability and W761 references in --score, both after stack227 lands [blocked by W760]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T06:54:01Z  interrupt W762 minted    -         "The Codon census may not dump core: its compiler probes abort on five baseline modules and each abort wrote a 116 MB core through coredump and drkonqi"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f:W630
+2026-10-20T06:55:30Z  interrupt W763 minted    -         "nemik-check --digest takes about 14 CPU seconds on the whole fleet and runs from every session's prompt hook: cache it per queue state"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f
+2026-10-20T06:55:31Z  interrupt W764 minted    -         "The published-export loop rebuilds every 30 seconds whether or not any queue changed: skip the build when the inputs' hash is unchanged"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f
+2026-10-20T07:23:37Z  tick  W763 advanced  collapse  "digest cache queued as stack229: hit 0.25 s wall against 11.6 s; W764 paired reading taken (0.862 core) [blocked by W764]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T07:43:23Z  interrupt W765 minted    -         "Name every outside read of the fleet survey in its cache key, so freshness comes from content and the ten-minute age bound goes: the host-apply export file and any other file or process it reads"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f
+2026-10-20T07:43:24Z  interrupt W766 minted    -         "nemik-check --digest --since FILE prints only the lines that changed since that digest, with a one-line count of the unchanged ones, so a session's hook stops repeating them"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f
+2026-10-20T07:44:26Z  lease W762 lapsed    --        "lease on file:tests/test_codon_census.py!w held by (unlocked) lapsed unrenewed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T07:48:30Z  tick  W765 advanced  collapse  "survey cache key names the outside reads and the clock bucket, queued as stack230; W766 delta digest next [blocked by W766]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T08:13:50Z  status W694 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T08:14:46Z  prune W702 edge-pruned writer    "mtools:W1727"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T08:14:46Z  prune W703 edge-pruned writer    "mtools:W1666"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T08:14:46Z  prune W717 edge-pruned writer    "mtools:W1685"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T08:14:46Z  prune W733 edge-pruned writer    "mtools:W1714"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T08:14:46Z  prune W751 edge-pruned writer    "mtools:W1742"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T08:14:46Z  status W703 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T08:14:46Z  status W733 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T08:20:06Z  status W766 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T08:20:13Z  tick  W766 advanced  collapse  "delta digest queued as stack232 behind the repin stack231; the hook change is luthen's [blocked by W694]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T08:44:30Z  lease W694 lapsed    --        "lease on file:MODULE.bazel!w held by (unlocked) lapsed unrenewed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T08:44:30Z  lease W694 lapsed    --        "lease on file:pyproject.toml!w held by (unlocked) lapsed unrenewed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T08:44:30Z  lease W694 lapsed    --        "lease on file:uv.lock!w held by (unlocked) lapsed unrenewed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T08:44:30Z  lease W694 lapsed    --        "lease on file:vendor/wheels/SHA256SUMS!w held by (unlocked) lapsed unrenewed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T09:03:37Z  status W694 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T09:14:21Z  prune W633 edge-pruned writer    "nemik:W694"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T09:14:21Z  prune W682 edge-pruned writer    "nemik:W694"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T09:14:21Z  prune W722 edge-pruned writer    "nemik:W694"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T09:14:21Z  status W633 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T09:14:21Z  status W682 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T09:14:21Z  status W722 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T09:22:05Z  status W682 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T09:22:10Z  tick  W682 advanced  unblock   "in-gate cards are never stalled: queued as stack234 behind stack233 (W762); the repin landed e29624d [blocked by W762]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T09:34:13Z  status W633 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T09:39:37Z  status W633 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T09:39:37Z  status W682 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T09:47:30Z  status W722 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T09:47:35Z  tick  W722 advanced  unblock   "waypoint location to calendar LOCATION queued as stack235 [blocked by W633]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T09:57:30Z  status W719 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T09:57:30Z  status W722 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T10:08:58Z  status W766 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T10:18:57Z  status W633 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T10:19:02Z  tick  W633 advanced  unblock   "in-gate cards count as working in the active-card rule: stack236 queued; the web view's half remains [blocked by W766]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T10:29:09Z  interrupt W767 minted    -         "The web view shows a card in a commit stack as working: serve marks the nodes in_gate names and the page draws their stage and label"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W633
+2026-10-20T10:29:18Z  status W633 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T11:05:28Z  status W767 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T11:16:28Z  status W633 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T11:16:28Z  status W767 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T11:16:34Z  status W633 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T11:20:03Z  tick  W768 minted    -         "The Codon census compiles only the modules whose source changed: key each probe's verdict on the module's content, the modules it imports and the pinned compiler"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W762
+2026-10-20T11:20:14Z  status W762 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T11:29:25Z  status W766 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T11:34:35Z  tick  W769 minted    -         "nemik-history --oldest N: the N oldest open cards fleet-wide with age, status, blockers and the kind of old, then each one's critical path and whether it crosses an offline repo"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f
+2026-10-20T11:34:42Z  status W769 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T12:04:37Z  status W769 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T12:15:17Z  status W766 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T12:15:45Z  status W438 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T12:17:14Z  status W760 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T12:26:31Z  status W760 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T12:44:57Z  status W761 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T12:47:33Z  tick  W761 advanced  unblock   "--score judges per lead against persistence and climatology with reliability bins: queued as stack241 [blocked by W438]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T13:00:30Z  status W748 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T13:00:30Z  status W761 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T13:00:37Z  status W748 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T13:12:15Z  prune W743 edge-pruned writer    "nemik:W748"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T13:12:15Z  prune W749 edge-pruned writer    "nemik:W748"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T13:12:15Z  prune W750 edge-pruned writer    "nemik:W748"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T13:12:15Z  status W749 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T13:12:15Z  status W750 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T13:13:53Z  status W749 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T13:14:14Z  status W461 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T13:14:32Z  tick  W749 advanced  unblock   "first forecast shingle issued; W461 asked of luthen [blocked by W461]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T13:18:08Z  tick  W770 minted    -         "A ledger line names who acted, so the operator can be a prov:Agent beside the sessions: ask mtools for the field"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W530
+2026-10-20T13:18:17Z  status W770 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T13:18:18Z  status W530 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T13:18:23Z  tick  W530 advanced  collapse  "W530 closed; the operator half is W770, asked of mtools; W461's host-root shape agreed with luthen [blocked by W770]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T13:33:42Z  status W438 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T13:45:43Z  tick  W771 minted    -         "Vendor mikemol-cvdcore with numpy and colorspacious into the hermetic build: pyproject and MODULE.bazel entries, the wheel at the pinned sha, uv.lock"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W438
+2026-10-20T13:45:51Z  status W438 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T13:50:14Z  status W771 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T14:00:11Z  status W438 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T14:00:11Z  status W771 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T14:02:17Z  status W461 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T14:12:02Z  status W438 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T14:33:02Z  status W338 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T14:33:02Z  status W438 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T14:33:35Z  interrupt W772 minted    -         "Repin the seven mtools wheels to 4720efa for the ledger actor field (mtools:W1790)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W770
+2026-10-20T14:33:41Z  status W772 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T14:38:03Z  status W652 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T14:44:31Z  prune W533 edge-pruned writer    "mtools:W1522"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T14:44:31Z  prune W770 edge-pruned writer    "mtools:W1790"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T14:44:31Z  status W533 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T14:44:31Z  status W770 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T14:46:49Z  status W338 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T14:46:57Z  status W749 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T14:47:43Z  tick  W773 minted    -         "hostroot.latest: parse the host-root stream's lines into the newest row per id (src/nemik/hostroot.py, tests/test_hostroot.py)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W461
+2026-10-20T14:47:43Z  tick  W774 minted    -         "hostroot.fetch: read the stream through luthen's checks.vlogs_query, None when it cannot answer"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W461
+2026-10-20T14:47:43Z  tick  W775 minted    -         "serve: show the host-root rows as a read-only workstream, state to node state, waitsFor to edges, stale as_of flagged"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W461
+2026-10-20T14:51:50Z  status W773 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T14:56:12Z  status W337 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T14:56:12Z  status W772 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T15:14:05Z  status W773 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T15:15:40Z  status W770 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T15:33:53Z  status W770 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T15:39:08Z  status W774 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T15:44:36Z  status W533 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T15:44:56Z  tick  W776 minted    -         "Vendor the mikemol-converge wheel from mtools 0f8267e beside the other seven"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W652
+2026-10-20T15:44:56Z  tick  W777 minted    -         "nemik.converge imports mikemol.converge and drops its copy"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W652
+2026-10-20T15:46:50Z  status W776 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T15:52:57Z  interrupt W778 minted    -         "The stalled-working shape skips a repo whose learned land interval is under a minute"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f:W630
+2026-10-20T15:53:09Z  status W778 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T15:54:19Z  status W774 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T15:57:17Z  status W643 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T16:15:36Z  tick  W779 minted    -         "nemik-hostroot writes host-root.json from luthen's stream, run on the host"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W775
+2026-10-20T16:15:36Z  tick  W780 minted    -         "serve reads host-root.json with a freshness check and shows its rows as a read-only host workstream"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W775
+2026-10-20T16:18:30Z  status W776 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T16:18:31Z  status W778 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T16:18:41Z  status W779 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T16:44:38Z  status W337 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T17:23:01Z  status W779 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T17:24:25Z  status W777 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T17:30:12Z  status W780 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T17:44:26Z  prune W535 edge-pruned writer    "luthen-observability:W1326"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T17:44:26Z  status W535 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T17:46:39Z  status W777 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T17:46:52Z  status W533 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T17:46:52Z  status W652 blocked>done writer    "blocked -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T17:53:06Z  status W536 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T17:53:30Z  status W536 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T17:57:59Z  tick  W781 minted    -         "Goal: read-only feature parity between the nemik CLI tools and the web UI, with no process spawned through the UI"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=operator
+2026-10-20T17:58:14Z  tick  W782 minted    -         "Parity table: each read-only CLI mode, its library function and its route, or a declared exclusion, with a test that fails on a mode with neither"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W781
+2026-10-20T17:58:14Z  tick  W783 minted    -         "No spawn: a test makes subprocess, fork, exec, posix_spawn and system raise in the server and exercises every route"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W781
+2026-10-20T17:58:14Z  tick  W784 minted    -         "Routes for the check family: digest, integrity, unmanifested, ready-neither, through the CLI's own functions"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W781
+2026-10-20T17:58:14Z  tick  W785 minted    -         "Routes for history: oldest, waits, forecast, score, events, density"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W781
+2026-10-20T17:58:14Z  tick  W786 minted    -         "Routes for rank, inbound, operator, wake, overlaps, floor-asks and witnesses without apply"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W781
+2026-10-20T17:58:14Z  tick  W787 minted    -         "The view shows the CLI's Warnings and Info"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W781
+2026-10-20T17:58:14Z  tick  W788 minted    -         "Ask luthen to declare a SystemCallFilter on the serving unit as the runtime rail against spawning"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W781
+2026-10-20T18:05:28Z  status W775 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T18:05:28Z  status W780 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T18:05:34Z  status W775 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T18:05:40Z  tick  W789 minted    -         "The page draws /hostroot.json rows as read-only resource nodes: state to node state, waitsFor to edges, stale rows marked, no rank weight"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W461
+2026-10-20T18:14:52Z  status W788 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T18:22:53Z  status W783 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T18:48:00Z  status W519 blocked>done writer    "blocked -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T18:57:20Z  status W783 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T18:58:02Z  interrupt W790 minted    -         "gate_staged.sh runs mikemol-pycheck --ratchet in place of tools/mypy_ratchet.py, and the precommit-gate test and README say so"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W536
+2026-10-20T18:58:02Z  interrupt W791 minted    -         "test_ruff_ratchet and test_mypy_ratchet run the shared ratchet, and tools/ruff_ratchet.py and tools/mypy_ratchet.py are removed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W536
+2026-10-20T18:58:11Z  status W790 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T19:07:56Z  status W790 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T19:12:41Z  status W791 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T19:17:23Z  status W782 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T19:26:31Z  status W791 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T19:26:32Z  status W536 blocked>done writer    "blocked -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T19:44:20Z  status W782 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T19:48:55Z  interrupt W792 minted    -         "nemik-check's survey and digest views are served at /check.json from the CLI's own wording"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W784
+2026-10-20T19:48:55Z  interrupt W793 minted    -         "nemik-check's integrity, unmanifested, ready-neither, realizability, committed, letters and fold modes, and nemik-collapse, are served"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W784
+2026-10-20T19:51:05Z  status W792 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T19:51:19Z  interrupt W794 minted    -         "Repin to mtools 8c8abe7 so the ratchet test runs in the Bazel sandbox, and drop its skip"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W536
+2026-10-20T20:01:43Z  status W792 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T20:03:15Z  status W794 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T20:15:10Z  tick  W795 minted    -         "ready-neither and unmanifested reports return their lines, the CLI prints them and the server serves them"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W793
+2026-10-20T20:15:10Z  tick  W796 minted    -         "the integrity report returns its lines, the CLI prints them and the server serves them"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W793
+2026-10-20T20:15:10Z  tick  W797 minted    -         "realizability, committed, letters, fold and nemik-collapse are served the same way, or excluded by a stated reason"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W793
+2026-10-20T20:20:19Z  status W794 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T20:20:36Z  status W795 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T20:28:31Z  interrupt W798 minted    -         "Choosing a card-list order by radio or key opens the Cards section, so the choice shows (operator report 2026-10-20)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=operator
+2026-10-20T20:31:39Z  status W798 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T20:36:32Z  interrupt W799 minted    -         "Decompose web/index.html (1879 lines: one 1710-line script) into files by concern, with a size budget that only falls"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=operator
+2026-10-20T20:36:42Z  interrupt W800 minted    -         "Inventory index.html: each concern of the script with its line range, and every test and publisher that reads the page as text"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W799
+2026-10-20T20:36:42Z  interrupt W801 minted    -         "Serve and publish extra page files: the live server, the static build and the openapi list carry a stylesheet and script modules"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W799
+2026-10-20T20:36:42Z  interrupt W802 minted    -         "Move the style block to style.css, with the tests that read the page's CSS following it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W799
+2026-10-20T20:36:42Z  interrupt W803 minted    -         "Move the script's data load, graph build and draw into modules"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W799
+2026-10-20T20:36:42Z  interrupt W804 minted    -         "Move the card list, popover, detail and keyboard handling into modules"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W799
+2026-10-20T20:36:42Z  interrupt W805 minted    -         "Move the findings, sources, settings, weather and series panels into modules"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W799
+2026-10-20T20:36:42Z  interrupt W806 minted    -         "A size budget test: index.html and each module have a line ceiling that only falls"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W799
+2026-10-20T20:42:14Z  status W795 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T20:44:43Z  status W800 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T20:59:49Z  status W798 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T20:59:55Z  prune W751 edge-pruned writer    "mtools:W1738"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T21:10:43Z  status W800 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T21:17:13Z  status W801 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T21:28:03Z  status W801 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T21:34:45Z  status W802 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T21:47:24Z  status W796 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T21:58:36Z  status W802 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T22:14:34Z  interrupt W807 minted    -         "graph.js takes the treemap and forest: treeOf through tile"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W803
+2026-10-20T22:14:34Z  interrupt W808 minted    -         "graph.js takes rings and ink: ringMap through markChainEdges"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W803
+2026-10-20T22:14:34Z  interrupt W809 minted    -         "graph.js takes critical chains and the list orders"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W803
+2026-10-20T22:14:34Z  interrupt W810 minted    -         "graph.js takes render, patch and the in-place poll follow"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W803
+2026-10-20T22:14:34Z  interrupt W811 minted    -         "graph.js takes the constants, helpers and layout constants"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W803
+2026-10-20T22:19:38Z  status W796 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T22:19:40Z  status W807 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T22:27:46Z  interrupt W812 minted    -         "Goal: the page's pure computation is Python compiled by Codon to wasm, shared with the CLI tools, not hand-kept JS"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=operator
+2026-10-20T22:27:56Z  interrupt W813 minted    -         "Spike: one pure Codon function exported from a wasm module that node loads and calls, with a shim for the seq_ runtime"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W812
+2026-10-20T22:27:56Z  interrupt W814 minted    -         "Decide wasm32 or wasm64 for the browser, and how the build gets a pinned toolchain for the gate"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W812
+2026-10-20T22:27:56Z  interrupt W815 minted    -         "Inventory the page's JS that is pure over plain data, and which already has a Python twin in the tooling"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W812
+2026-10-20T22:27:56Z  interrupt W816 minted    -         "Port the treemap model (treeOf, orderedTreemap) to Python, check it against the JS as oracle, build it to wasm and call it from the page"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W812
+2026-10-20T22:27:56Z  interrupt W817 minted    -         "Port the critical-chain and list-order logic to the one Python source the CLI and the page share"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W812
+2026-10-20T22:30:38Z  status W813 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T22:31:33Z  interrupt W818 minted    -         "The shared core: src/nemik/core holds pure functions over plain data under the Codon census, with the CLI and the page each a thin facade over them"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W812
+2026-10-20T22:45:05Z  status W815 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T22:59:52Z  status W813 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T23:20:42Z  status W807 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T23:20:43Z  status W815 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T23:25:59Z  status W818 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T23:36:55Z  status W818 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-20T23:54:02Z  interrupt W819 minted    -         "A landing that adds a module rebuilds the live .venv, so luthen's nemik-check gate never runs a stale copy"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W1054
+2026-10-21T00:14:16Z  status W819 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T00:22:22Z  status W819 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T00:31:06Z  status W814 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T00:31:49Z  interrupt W820 minted    -         "The wasm module for the longest chains: a Codon entry over flat arrays, a build script, the built chains.wasm committed with its hash, and the server serving it as application/wasm"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W817
+2026-10-21T00:31:49Z  interrupt W821 minted    -         "A gate step rebuilds chains.wasm from its Python and compares hashes, skipping with a stated reason where the pinned Codon or the host LLVM is absent"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W817
+2026-10-21T00:31:49Z  interrupt W822 minted    -         "The page loads the module and criticalSet calls it; an end-to-end browser test checks the page's longest chain against Python's"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W817
+2026-10-21T00:31:49Z  interrupt W823 minted    -         "The JS body of criticalSet is deleted"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W817
+2026-10-21T00:33:16Z  status W814 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T00:45:20Z  interrupt W824 minted    -         "The Codon census and probes also build with --release and run a smoke call, since --release has an optimizer bug that plain builds hide"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W820
+2026-10-21T00:45:29Z  status W820 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T00:54:31Z  status W820 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T00:55:47Z  status W821 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T01:28:03Z  status W822 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T01:28:04Z  status W823 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T01:28:11Z  status W821 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T01:38:44Z  status W822 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T01:38:45Z  status W817 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T01:38:45Z  status W823 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T01:38:49Z  status W817 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T01:42:01Z  interrupt W825 minted    -         "Repin the seven mtools wheels to f2f18a1 for --intervention (mtools:W1739)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W751
+2026-10-21T01:42:12Z  status W825 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T01:45:05Z  interrupt W826 minted    -         "core.treemap.tree_of: the enables forest, parents, own weights and weights over plain data, checked against the page's treeOf"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W816
+2026-10-21T01:45:05Z  interrupt W827 minted    -         "core.treemap.ordered_treemap: the strip layout over plain data, checked against the page's orderedTreemap"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W816
+2026-10-21T01:45:05Z  interrupt W828 minted    -         "treemap.wasm: the entry, the build, the loader facade and the page's treeOf and orderedTreemap calling it, with the old JS deleted"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W816
+2026-10-21T01:47:48Z  status W826 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T01:56:31Z  status W825 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T02:14:43Z  prune W751 edge-pruned writer    "mtools:W1739"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T02:14:43Z  status W751 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T02:19:40Z  status W827 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T02:31:49Z  status W827 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T02:34:42Z  status W828 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T03:34:27Z  status W828 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T03:35:02Z  tick  W829 minted    -         "W812 next slice: strings across the wasm ABI, then repoHue/luminance/esc ported to core and called through core.wasm"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T03:35:07Z  tick  W828 advanced  collapse  "dc7870e: treemap tree and cells in core.wasm, old JS bodies retired; W829 minted for the next slice [blocked by W829]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T03:44:42Z  status W816 blocked>done writer    "blocked -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T03:44:47Z  status W829 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T03:55:51Z  status W829 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T03:55:52Z  tick  W829 advanced  collapse  "e1cec2f: repo_hue in core.text, strings cross as UTF-16 codes; luminance and esc next [blocked by W812]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T04:28:55Z  tick  W829 advanced  collapse  "bb9ba08: luminance in core.text via core.wasm, pow from Math.pow, bit-identical on 20006 colours [blocked by W812]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
