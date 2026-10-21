@@ -11,7 +11,14 @@
 # caller owns. Cards are the indices 0 to n-1 in the order the caller wants ties broken.
 
 from nemik.core.chains import longest_chains
+from nemik.core.text import repo_hue
 from nemik.core.treemap import forest_of, ordered_treemap, tree_of
+
+
+@export
+def hue(n: int, codes: Ptr[int]) -> int:
+    # a string crosses as its n UTF-16 code units, the numbers the page's charCodeAt gives
+    return repo_hue("".join([chr(codes[i]) for i in range(n)]))
 
 
 @export

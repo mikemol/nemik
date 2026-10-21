@@ -26,7 +26,8 @@ function orderedTreemap(tree, order, rect, pad = 4, head = 3 * pad) {
 // nemik:W180 step 2: draw the treemap. Positions and sizes come from orderedTreemap; an enables
 // edge to the tile's own parent is implied by containment and hidden; every other edge is drawn.
 // Operator chips and placeholders sit in a row below the map.
-function repoHue(r) { let h = 0; for (const c of r) h = (h * 31 + c.charCodeAt(0)) % 360; return `hsl(${h}, 65%, 55%)`; }
+// nemik:W829: the hue is core/text.py repo_hue through core.wasm; without the module, a grey.
+function repoHue(r) { return coreWasm ? `hsl(${coreWasm.repoHue(String(r))}, 65%, 55%)` : "hsl(0, 0%, 55%)"; }
 // The largest font (px, at most 28) at which `lines` fit a w x h box: measured with the page's own
 // font on a canvas, so it holds for any string, not an average character width.
 const _measure = document.createElement("canvas").getContext("2d");

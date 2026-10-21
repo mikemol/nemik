@@ -172,6 +172,19 @@ const NemikWasm = (() => {
     };
   }
 
+  // A repo's hue in degrees (core/text.py repo_hue): the name crosses as its UTF-16 code units.
+  function hueFor(instance, rt) {
+    return name => {
+      const mark = rt.state.top;
+      const at = rt.alloc(BigInt(Math.max(1, name.length) * 8));
+      const codes = new BigInt64Array(rt.state.memory.buffer, Number(at), Math.max(1, name.length));
+      for (let i = 0; i < name.length; i++) codes[i] = BigInt(name.charCodeAt(i));
+      const hue = Number(instance.exports.hue(BigInt(name.length), at));
+      rt.state.top = mark;
+      return hue;
+    };
+  }
+
   function instantiate(bytes) {
     const rt = runtime();
     const module = new WebAssembly.Module(bytes);
@@ -187,7 +200,7 @@ const NemikWasm = (() => {
     rt.state.statics = { point: rt.cstring("."), empty: rt.cstring("") };
     // Codon sets up the module's globals inside main(); nothing else calls it, so it runs once here
     instance.exports.main(0, 0n);
-    return { chains: chainsFor(instance, rt), treeOf: treeFor(instance, rt), orderedTreemap: cellsFor(instance, rt) };
+    return { chains: chainsFor(instance, rt), treeOf: treeFor(instance, rt), orderedTreemap: cellsFor(instance, rt), repoHue: hueFor(instance, rt) };
   }
 
   return { instantiate };
