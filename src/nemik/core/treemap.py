@@ -19,6 +19,14 @@ NONE = -1
 class Tree:
     """The enables forest of the open cards: one parent each, and what each carries."""
 
+    # fields declared at class level: Codon makes a class generic over its constructor's types
+    # otherwise, and a bare `Tree` in an annotation then means Tree[NoneType, ...]
+    parent: list[int]
+    kids: list[list[int]]
+    weight: list[int]
+    own: list[int]
+    roots: list[int]
+
     def __init__(
         self,
         parent: list[int],
@@ -158,3 +166,163 @@ def tree_of(n: int, is_open: list[bool], edges: list[tuple[int, int, int]]) -> T
         _weigh(card, kids, own, weight)
     roots = [card for card in opened if parent[card] == NONE]
     return Tree(parent, kids, weight, own, roots)
+
+
+class Cells:
+    """Where each card landed: a rectangle, its depth in the forest and its header height."""
+
+    placed: list[bool]
+    x: list[float]
+    y: list[float]
+    w: list[float]
+    h: list[float]
+    depth: list[int]
+    head: list[float]
+
+    def __init__(self, n: int) -> None:
+        """Start with no card placed."""
+        self.placed = [False] * n
+        self.x = [0.0] * n
+        self.y = [0.0] * n
+        self.w = [0.0] * n
+        self.h = [0.0] * n
+        self.depth = [0] * n
+        self.head = [0.0] * n
+
+
+class _Layout:
+    """The state of one ordered strip treemap: the forest, the ranking and the margins."""
+
+    tree: Tree
+    rank: dict[int, int]
+    unranked: int
+    pad: float
+    head: float
+    cells: Cells
+
+    def __init__(self, tree: Tree, order: list[int], pad: float, head: float) -> None:
+        """Rank the cards by their place in `order`; any card not in it sorts after all that are."""
+        self.tree = tree
+        self.rank = {card: i for i, card in enumerate(order)}
+        self.unranked = len(order)
+        self.pad = pad
+        self.head = head
+        self.cells = Cells(len(tree.parent))
+
+    def _ordered(self, ids: list[int]) -> list[int]:
+        """Put cards in rank order, the unranked last, ties to the lower index.
+
+        Returns:
+            The cards, first first.
+
+        """
+        pairs = sorted((self.rank.get(card, self.unranked), card) for card in ids)
+        return [card for _, card in pairs]
+
+    def _worst(self, strip: list[int], scale: float, width: float) -> float:
+        """Give the worst aspect ratio among the tiles a strip would hold.
+
+        Returns:
+            The largest of w/h and h/w over the strip's tiles.
+
+        """
+        area = 0.0
+        for card in strip:
+            area += self.tree.weight[card] * scale
+        height = area / width
+        worst = 0.0
+        for card in strip:
+            tile = self.tree.weight[card] * scale / height
+            worst = max(worst, tile / height, height / tile)
+        return worst
+
+    def _place(
+        self, card: int, rect: tuple[float, float, float, float], depth: int
+    ) -> None:
+        """Set a card's cell, and lay its children inside it when it has any (a frame)."""
+        x, y, w, h = rect
+        cells = self.cells
+        cells.placed[card] = True
+        cells.x[card] = x
+        cells.y[card] = y
+        cells.w[card] = w
+        cells.h[card] = h
+        cells.depth[card] = depth
+        cells.head[card] = 0.0
+        if self.tree.kids[card]:
+            # the header and margins shrink with a small cell, so children never leave it
+            px = min(self.pad, w / 6)
+            top = min(self.head, h / 3)
+            py = min(self.pad, h / 6)
+            cells.head[card] = top
+            inner = (x + px, y + top, w - 2 * px, h - top - py)
+            self.lay(self.tree.kids[card], inner, depth + 1)
+
+    def lay(
+        self, ids: list[int], rect: tuple[float, float, float, float], depth: int
+    ) -> None:
+        """Fill a rectangle with cards in horizontal strips.
+
+        A strip closes when the next card would worsen its worst aspect ratio (Bederson et al.
+        2002); area is proportional to weight.
+        """
+        rx, ry, rw, rh = rect
+        if rw <= 0 or rh <= 0:
+            for card in ids:
+                self._place(card, (rx, ry, 0.0, 0.0), depth)
+            return
+        items = self._ordered(ids)
+        total = 0
+        for card in items:
+            total += self.tree.weight[card]
+        scale = (rw * rh) / total
+        strips: list[list[int]] = []
+        current: list[int] = []
+        for card in items:
+            if current and self._worst([*current, card], scale, rw) > self._worst(
+                current, scale, rw
+            ):
+                strips.append(current)
+                current = []
+            current.append(card)
+        if current:
+            strips.append(current)
+        y = ry
+        for strip in strips:
+            area = 0.0
+            for card in strip:
+                area += self.tree.weight[card] * scale
+            height = area / rw
+            x = rx
+            for card in strip:
+                width = self.tree.weight[card] * scale / height
+                self._place(card, (x, y, width, height), depth)
+                x += width
+            y += height
+
+
+def ordered_treemap(
+    tree: Tree,
+    order: list[int],
+    rect: tuple[float, float, float, float],
+    margins: tuple[float, float],
+) -> Cells:
+    """Lay the forest out as an ordered strip treemap (the page's orderedTreemap).
+
+    Items in rank order fill horizontal strips, so order reads left to right, top to bottom, and
+    area is proportional to weight. A card with work beneath it is a frame: it gets a header strip
+    of its own and its children sit inside the margins.
+
+    Args:
+        tree: The forest from tree_of.
+        order: The cards in rank order; a card not in it sorts after those that are.
+        rect: (x, y, width, height) of the area to fill.
+        margins: (pad, head): the margin and the header height at full size.
+
+    Returns:
+        Each open card's cell.
+
+    """
+    layout = _Layout(tree, order, margins[0], margins[1])
+    layout.lay(tree.roots, rect, 0)
+    return layout.cells
