@@ -23,7 +23,12 @@ for tool in "$codon" "$llvm/llc" "$llvm/wasm-ld"; do
 		exit 3
 	fi
 done
-work=$(mktemp -d "${TMPDIR:-$HOME/scratch}/build_wasm.XXXXXX")
+# a fixed work directory, not a random one: Codon embeds the path of the sources it compiles in the
+# data of any exception they raise, and the module's hash is a check (the gate holds a lock, so
+# builds do not overlap)
+work="${TMPDIR:-$HOME/scratch}/nemik-build-wasm"
+rm -rf "$work"
+mkdir -p "$work"
 trap 'rm -rf "$work"' EXIT
 mkdir -p "$work/nemik/core"
 cp "$here"/src/nemik/core/*.py "$work/nemik/core/"

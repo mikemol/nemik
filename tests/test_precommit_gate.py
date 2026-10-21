@@ -45,6 +45,16 @@ def test_the_gate_replays_the_images_environment_before_the_suite() -> None:
     assert "mikemol-pycheck --ratchet" in code
 
 
+def test_the_gate_rebuilds_the_wasm_and_compares_its_hash_before_the_suite() -> None:
+    """W821: chains.wasm is rebuilt from the staged core; a different hash refuses the commit."""
+    code = "\n".join(_code(SCRIPT))
+    rebuild = code.index("tools/build_wasm.sh")
+    suite = code.index("bazel test //:precommit")
+    assert rebuild < suite
+    assert "src/nemik/web/chains.wasm.sha256" in code
+    assert "-eq 3" in code, "absent tools skip with a reason, they do not fail the gate"
+
+
 def test_the_gate_checks_shell_files_and_stray_code() -> None:
     """W526: shell files and stray code under .claude/ are checked ahead of the suite."""
     code = "\n".join(_code(SCRIPT))
