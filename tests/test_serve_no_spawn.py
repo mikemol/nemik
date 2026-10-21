@@ -37,6 +37,7 @@ ROUTES = [
     "/hostroot.json",
     "/landings.json",
     "/critical.json",
+    "/starved.json",
     "/check.json",
     "/check/ready-neither.json",
     "/check/unmanifested.json",

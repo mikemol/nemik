@@ -150,7 +150,7 @@
  },
  "src/nemik/starved.py": {
   "call-overload": 1,
-  "misc": 36
+  "misc": 33
  },
  "src/nemik/staticserve.py": {
   "misc": 4

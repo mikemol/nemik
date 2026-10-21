@@ -68,6 +68,21 @@ def starved(
     return sorted(found, key=lambda s: -s.waited_days)
 
 
+def starved_fleet(
+    g: Graph, repos: list[str], now: datetime, days: int = DEFAULT_DAYS
+) -> list[Starved]:
+    """`starved` over the given repos, or every repo of the graph when none is given.
+
+    Returns:
+        Each repo's starved cards, one repo after another.
+
+    """
+    found: list[Starved] = []
+    for repo in repos or fleet_repos(g):
+        found += starved(g, repo, now, days)
+    return found
+
+
 def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     """nemik-starved: ready cards overtaken by newer ones for longer than the declared age."""
     from nemik.check import default_root, survey
@@ -89,9 +104,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
                 g += qg
     days = args.days if args.days is not None else days_limit()
     now = datetime.now(UTC)
-    found: list[Starved] = []
-    for repo in args.repos or fleet_repos(g):
-        found += starved(g, repo, now, days)
+    found = starved_fleet(g, args.repos, now, days)
     if args.json:
         print(json.dumps([s._asdict() for s in found], indent=1))
         return

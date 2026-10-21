@@ -187,6 +187,7 @@ def hub_modules_depend_on_everything_below():
             "hostroot",
             "landings",
             "critical",
+            "starved",
         },
     }
     for hub, want in expected.items():

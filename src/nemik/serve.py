@@ -26,6 +26,7 @@ import sys
 import threading
 import time
 from collections import Counter, defaultdict
+from datetime import UTC, datetime
 from functools import partial
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from importlib.metadata import PackageNotFoundError, version
@@ -58,6 +59,7 @@ from nemik.landings import series as landing_series
 from nemik.luthenseries import board, load
 from nemik.outbox import outbox
 from nemik.runlogs import runs_graph
+from nemik.starved import days_limit, starved_fleet
 from nemik.wake import operator_row, read_liveness, roster
 from nemik.withheldage import require_fresh
 
@@ -195,7 +197,7 @@ def hostroot_board(path: Path | None, now: str) -> dict[str, object]:
 
 # the documents one Model.doc_for answers, by route: the boards the host writes files for
 # (nemik:W780, W751) and the longest chain, whose answer nemik-critical --json shares (nemik:W786)
-DOC_ROUTES = ["/hostroot.json", "/landings.json", "/critical.json"]
+DOC_ROUTES = ["/hostroot.json", "/landings.json", "/critical.json", "/starved.json"]
 
 
 def landings_board(path: Path | None, now: str) -> dict[str, object]:
@@ -414,6 +416,19 @@ class Model:
         g = without(self.graph, self.withheld) if self.withheld else self.graph
         return critical_doc(g)
 
+    def starved_json(self) -> dict[str, object]:
+        """Build the ready cards overtaken by newer ones for longer than the declared age.
+
+        Returns:
+            {"days": the declared age, "starved": [{cite, waited_days, overtaken_by}, ...]}, the
+            rows nemik-starved --json prints, over the graph less what luthen withholds.
+
+        """
+        g = without(self.graph, self.withheld) if self.withheld else self.graph
+        days = days_limit()
+        found = starved_fleet(g, [], datetime.now(UTC), days)
+        return {"days": days, "starved": [s._asdict() for s in found]}
+
     def doc_for(self, route: str) -> dict[str, object]:
         """Build the document a route in DOC_ROUTES answers.
 
@@ -425,6 +440,8 @@ class Model:
             return self.landings_doc()
         if route == "/critical.json":
             return self.critical_json()
+        if route == "/starved.json":
+            return self.starved_json()
         return self.hostroot_doc()
 
     def poke(self) -> None:
