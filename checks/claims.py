@@ -174,6 +174,7 @@ def hub_modules_depend_on_everything_below():
     # that reads that one document (its only nemik import is climate's stamp reader).
     # nemik:W751: and serves the commit landings nemik-hostroot --landings writes, through
     # landings, a leaf that rests on hostroot's flat-JSON reader alone.
+    # nemik:W786: and answers /critical.json with critical_doc, as nemik-critical --json does.
     expected = {
         "metrics": lower | {"realize", "runlogs", "workrows"},
         "serve": lower
@@ -185,6 +186,7 @@ def hub_modules_depend_on_everything_below():
             "luthenseries",
             "hostroot",
             "landings",
+            "critical",
         },
     }
     for hub, want in expected.items():

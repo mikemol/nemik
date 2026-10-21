@@ -84,5 +84,5 @@ def test_the_route_answers_for_both_host_boards(tmp_path: Path) -> None:
     path = tmp_path / "landings.json"
     path.write_text(document(ROWS, _stamp(0.1)), encoding="utf-8")
     model = _model(tmp_path, path)
-    assert model.host_board("/landings.json") == model.landings_doc()
-    assert model.host_board("/hostroot.json") == model.hostroot_doc()
+    assert model.doc_for("/landings.json") == model.landings_doc()
+    assert model.doc_for("/hostroot.json") == model.hostroot_doc()

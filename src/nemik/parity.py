@@ -27,6 +27,7 @@ ROUTED = [
     ("nemik-check --ready-neither", "/check/", "ready_neither_text"),
     ("nemik-check --unmanifested", "/check/", "unmanifested_text"),
     ("nemik-check --integrity", "/check/", "integrity_text"),
+    ("nemik-critical", "/critical.json", "critical_doc"),
 ]
 
 PENDING = [
@@ -36,7 +37,6 @@ PENDING = [
     ("nemik-check --fold", "W793"),
     ("nemik-collapse", "W793"),
     ("nemik-history", "W785"),
-    ("nemik-critical", "W786"),
     ("nemik-pins", "W786"),
     ("nemik-starved", "W786"),
     ("nemik-pacing", "W786"),

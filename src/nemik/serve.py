@@ -50,6 +50,7 @@ from nemik.check import (
     workstream_files,
 )
 from nemik.check import survey as checked_survey
+from nemik.critical import critical_doc
 from nemik.exportwire import exports_key, withheld_by_exports
 from nemik.hostroot import HostRow, read_document, stale
 from nemik.landings import read_document as read_landings
@@ -192,8 +193,9 @@ def hostroot_board(path: Path | None, now: str) -> dict[str, object]:
     }
 
 
-# the boards the host writes files for, by route (nemik:W780, W751)
-HOST_BOARDS = ["/hostroot.json", "/landings.json"]
+# the documents one Model.doc_for answers, by route: the boards the host writes files for
+# (nemik:W780, W751) and the longest chain, whose answer nemik-critical --json shares (nemik:W786)
+DOC_ROUTES = ["/hostroot.json", "/landings.json", "/critical.json"]
 
 
 def landings_board(path: Path | None, now: str) -> dict[str, object]:
@@ -402,14 +404,28 @@ class Model:
             self.landings, time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
         )
 
-    def host_board(self, route: str) -> dict[str, object]:
-        """Build the board a host-written file backs, by its route (HOST_BOARDS).
+    def critical_json(self) -> dict[str, object]:
+        """Build the longest chain and the cycles over the graph, less what luthen withholds.
 
         Returns:
-            The host-root board for /hostroot.json, the landings board for /landings.json.
+            What nemik-critical --json prints (nemik:W786).
 
         """
-        return self.landings_doc() if route == "/landings.json" else self.hostroot_doc()
+        g = without(self.graph, self.withheld) if self.withheld else self.graph
+        return critical_doc(g)
+
+    def doc_for(self, route: str) -> dict[str, object]:
+        """Build the document a route in DOC_ROUTES answers.
+
+        Returns:
+            The landings board, the critical-path document, or the host-root board.
+
+        """
+        if route == "/landings.json":
+            return self.landings_doc()
+        if route == "/critical.json":
+            return self.critical_json()
+        return self.hostroot_doc()
 
     def poke(self) -> None:
         """Keep requests off the rebuild path (nemik:W69, luthen-observability:W146).
@@ -836,8 +852,8 @@ def handler(model: Model) -> type[BaseHTTPRequestHandler]:
             elif self.path == "/check.json":
                 check_body = json.dumps(model.check_doc(), indent=1).encode()
                 self.send(200, "application/json", check_body)
-            elif self.path in HOST_BOARDS:
-                host_body = json.dumps(model.host_board(self.path), indent=1).encode()
+            elif self.path in DOC_ROUTES:
+                host_body = json.dumps(model.doc_for(self.path), indent=1).encode()
                 self.send(200, "application/json", host_body)
             elif self.path == "/graph.json":
                 self.send(200, "application/json", model.payload)

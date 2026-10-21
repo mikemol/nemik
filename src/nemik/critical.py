@@ -269,6 +269,17 @@ def _extended(base: dict[str, object], key: str, value: object) -> dict[str, obj
     return out
 
 
+def critical_doc(g: Graph, scope: set[str] | None = None) -> dict[str, object]:
+    """Give the longest chain and the dependency cycles as the --json answer holds them.
+
+    Returns:
+        The Critical fields (length, chain, slack, rank, paths) and the cycles, each as a pair of
+        its cards and whether the operator can break it.
+
+    """
+    return _extended(critical(g, scope)._asdict(), "cycles", cycles(g))
+
+
 def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     """nemik-critical: the longest chain of open work across the fleet, and what has slack."""
     from nemik.check import default_root, survey
@@ -330,11 +341,11 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
             return
         print(what_if(before, after, args.assume_done))
         return
+    if args.json:
+        print(json.dumps(critical_doc(g, scope), indent=1))
+        return
     found = critical(g, scope)
     loops = cycles(g)
-    if args.json:
-        print(json.dumps(_extended(found._asdict(), "cycles", loops), indent=1))
-        return
     print(f"critical path: {found.length} open cards deep")
     # nemik:W344: one line per rank; cards sharing a rank are tied alternatives (an antichain), joined by |
     levels: dict[int, list[str]] = {}
