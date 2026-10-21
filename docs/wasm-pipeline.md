@@ -45,12 +45,26 @@ There is no garbage collector: Codon's runtime uses Boehm and the shim is a bump
 call that allocates leaks until the page resets the heap (set `top` back to `__heap_base` between
 calls that return plain numbers, or copy the result out first).
 
+## Decided (nemik:W814)
+
+1. **wasm64, no fallback.** wasm32 is not a retarget of this IR: the same dict/str program, linked
+   with `llc -mtriple=wasm32` and `wasm-ld -mwasm32`, hangs, because Codon's IR carries x86_64's
+   64-bit struct sizes as constants and wasm32 lays the structs out smaller. So the module is
+   memory64. Operator, 2026-10-20: "Chrome and Firefox now, Safari later, no fallback." memory64 is
+   in the finished WebAssembly 3.0 spec ([webassembly.org](https://webassembly.org/news/2025-09-17-wasm-3.0/));
+   Chrome and Firefox ship it; Safari lists it in Technology Preview 251 and 252
+   ([251](https://webkit.org/blog/18194/release-notes-for-safari-technology-preview-251/),
+   [252](https://webkit.org/blog/18304/release-notes-for-safari-technology-preview-252/)) and not yet
+   in stable, so the page's wasm computation does not run there until it does. A page that finds no
+   memory64 says so; it does not carry a JS copy.
+2. **The built `.wasm` is committed, with its hash.** The host's LLVM 23 (`llc`, `wasm-ld`) is not
+   hermetic, so the gate does not build the module as a Bazel action. The `.wasm` sits beside its
+   Python source with a sha256, as the vendored wheels do, and a rebuild check runs where the
+   pinned Codon and the host's LLVM are present: it rebuilds from the Python and compares hashes, and
+   says why it skipped where they are not. A Bazel-pinned LLVM replaces this when one is wanted.
+
 ## Not yet shown
 
-1. A real browser: memory64 is in Chrome and Firefox now but its reach is a decision (W814): the
-   fallback is wasm32, which the IR may retarget to since Codon's sizes are explicit `i64`.
-2. A pinned toolchain for the gate: the host's LLVM 23 is not hermetic. The choices are a Bazel
-   LLVM, or committing the built `.wasm` with its hash and a rebuild check, as the vendored wheels do.
 3. Passing structured data (a list of cards with edges) in and out: flat arrays of integers and
    one string table are the likely shape, not Python objects.
 4. Exceptions that are caught inside wasm (`seq_personality` is a stub), floats, and the cost of
