@@ -35,6 +35,7 @@ ROUTES = [
     "/metrics",
     "/series.json",
     "/hostroot.json",
+    "/landings.json",
     "/check.json",
     "/check/ready-neither.json",
     "/check/unmanifested.json",

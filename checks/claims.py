@@ -172,6 +172,8 @@ def hub_modules_depend_on_everything_below():
     # that imports only json.
     # nemik:W780: and serves the host-root frontier nemik-hostroot writes, through hostroot, a leaf
     # that reads that one document (its only nemik import is climate's stamp reader).
+    # nemik:W751: and serves the commit landings nemik-hostroot --landings writes, through
+    # landings, a leaf that rests on hostroot's flat-JSON reader alone.
     expected = {
         "metrics": lower | {"realize", "runlogs", "workrows"},
         "serve": lower
@@ -182,6 +184,7 @@ def hub_modules_depend_on_everything_below():
             "withheldage",
             "luthenseries",
             "hostroot",
+            "landings",
         },
     }
     for hub, want in expected.items():

@@ -52,6 +52,8 @@ from nemik.check import (
 from nemik.check import survey as checked_survey
 from nemik.exportwire import exports_key, withheld_by_exports
 from nemik.hostroot import HostRow, read_document, stale
+from nemik.landings import read_document as read_landings
+from nemik.landings import series as landing_series
 from nemik.luthenseries import board, load
 from nemik.outbox import outbox
 from nemik.runlogs import runs_graph
@@ -190,6 +192,50 @@ def hostroot_board(path: Path | None, now: str) -> dict[str, object]:
     }
 
 
+# the boards the host writes files for, by route (nemik:W780, W751)
+HOST_BOARDS = ["/hostroot.json", "/landings.json"]
+
+
+def landings_board(path: Path | None, now: str) -> dict[str, object]:
+    """Build the commit-landings board from nemik-hostroot --landings' file (nemik:W751).
+
+    Args:
+        path: The file, or None when the server was not given one.
+        now: The current time, an ISO stamp, against which staleness is judged.
+
+    Returns:
+        {"host": True, "as_of", "stale", "series": {repo: [gate_s, ...]}, "landings": [...]}, the
+        landings oldest first with repo, sha, card, gate_s and when; or {"host": False, "why": ...}
+        when there is no file or it cannot be read: no board, never a guessed one.
+
+    """
+    if path is None:
+        return {"host": False, "why": "no --landings file"}
+    try:
+        as_of, rows = read_landings(path.read_text(encoding="utf-8"))
+    except OSError:
+        return {"host": False, "why": "no document"}  # never a host path
+    except ValueError as error:
+        return {"host": False, "why": str(error)}
+    shown = [
+        {
+            "repo": row.repo,
+            "sha": row.sha,
+            "card": row.card,
+            "gate_s": row.gate_s,
+            "when": row.when,
+        }
+        for row in rows
+    ]
+    return {
+        "host": True,
+        "as_of": as_of,
+        "stale": stale(HostRow("", "", as_of), now),
+        "series": landing_series(rows),
+        "landings": shown,
+    }
+
+
 class Model:
     def __init__(
         self,
@@ -203,6 +249,8 @@ class Model:
         # nemik:W780: the host-root frontier nemik-hostroot writes on the host (host-root.json),
         # set by main when given; read per request so its age is judged against the clock.
         self.hostroot: Path | None = None
+        # nemik:W751: mikemol-commit's landings, written by nemik-hostroot --landings.
+        self.landings: Path | None = None
         # nemik:W784: each repo's findings as the last rebuild left them, worded by check_board.
         self.findings: dict[str, list[Finding]] = {}
         # nemik:W670: luthen's loop and token snapshot (luthen-series.json), read per request so its
@@ -341,6 +389,27 @@ class Model:
         return hostroot_board(
             self.hostroot, time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
         )
+
+    def landings_doc(self) -> dict[str, object]:
+        """Build the commit-landings board from nemik-hostroot --landings' file (nemik:W751).
+
+        Returns:
+            {"host": True, "as_of", "stale", "series", "landings"}; or {"host": False, "why": ...}
+            when there is no file or it cannot be read: no board, never a guessed one.
+
+        """
+        return landings_board(
+            self.landings, time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+        )
+
+    def host_board(self, route: str) -> dict[str, object]:
+        """Build the board a host-written file backs, by its route (HOST_BOARDS).
+
+        Returns:
+            The host-root board for /hostroot.json, the landings board for /landings.json.
+
+        """
+        return self.landings_doc() if route == "/landings.json" else self.hostroot_doc()
 
     def poke(self) -> None:
         """Keep requests off the rebuild path (nemik:W69, luthen-observability:W146).
@@ -767,8 +836,8 @@ def handler(model: Model) -> type[BaseHTTPRequestHandler]:
             elif self.path == "/check.json":
                 check_body = json.dumps(model.check_doc(), indent=1).encode()
                 self.send(200, "application/json", check_body)
-            elif self.path == "/hostroot.json":
-                host_body = json.dumps(model.hostroot_doc(), indent=1).encode()
+            elif self.path in HOST_BOARDS:
+                host_body = json.dumps(model.host_board(self.path), indent=1).encode()
                 self.send(200, "application/json", host_body)
             elif self.path == "/graph.json":
                 self.send(200, "application/json", model.payload)
@@ -1071,6 +1140,7 @@ class _Options(argparse.Namespace):
     series: Path | None
     series_max_age: int
     hostroot: Path | None
+    landings: Path | None
     exports: Path | None
     publish: Path | None
 
@@ -1137,6 +1207,14 @@ def main(argv: list[str] | None = None) -> None:
         "unreadable file serves no board, and the static view never carries it (nemik:W780)",
     )
     ap.add_argument(
+        "--landings",
+        type=Path,
+        metavar="FILE",
+        help="the live server only: the commit landings nemik-hostroot --landings writes on the "
+        "host (landings.json), served as /landings.json with its staleness; a missing or "
+        "unreadable file serves no board (nemik:W751)",
+    )
+    ap.add_argument(
         "--exports",
         type=Path,
         metavar="DIR",
@@ -1185,6 +1263,7 @@ def main(argv: list[str] | None = None) -> None:
         series_max_age=args.series_max_age,
     )
     model.hostroot = args.hostroot
+    model.landings = args.landings
     ThreadingHTTPServer((args.bind, args.port), handler(model)).serve_forever()
 
 
