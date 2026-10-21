@@ -59,6 +59,7 @@ from nemik.landings import series as landing_series
 from nemik.luthenseries import board, load
 from nemik.outbox import outbox
 from nemik.overlaps import overlaps
+from nemik.pacing import limits, paces
 from nemik.runlogs import runs_graph
 from nemik.starved import days_limit, starved_fleet
 from nemik.wake import operator_row, read_liveness, roster
@@ -208,6 +209,7 @@ DOC_ROUTES = [
     "/critical.json",
     "/starved.json",
     "/overlaps.json",
+    "/pacing.json",
 ]
 
 
@@ -454,6 +456,24 @@ class Model:
         g = without(self.graph, self.withheld) if self.withheld else self.graph
         return {"overlaps": overlaps(g), "cross": overlaps(g, cross=True)}
 
+    def pacing_json(self) -> dict[str, object]:
+        """Build each repo's new cards against the declared rate and burst, as nemik-pacing does.
+
+        Returns:
+            {"rate", "burst", "days", "paces": [{repo, arrivals, overdraft, level}, ...]}, the most
+            over first, over the graph less what luthen withholds.
+
+        """
+        g = without(self.graph, self.withheld) if self.withheld else self.graph
+        rate, burst, days = limits()
+        found = paces(g, datetime.now(UTC), rate, burst, days)
+        return {
+            "rate": rate,
+            "burst": burst,
+            "days": days,
+            "paces": [p._asdict() for p in found],
+        }
+
     def doc_for(self, route: str) -> dict[str, object]:
         """Build the document a route in DOC_ROUTES answers.
 
@@ -467,6 +487,7 @@ class Model:
             "/critical.json": self.critical_json,
             "/starved.json": self.starved_json,
             "/overlaps.json": self.overlaps_json,
+            "/pacing.json": self.pacing_json,
         }
         return docs[route]()
 

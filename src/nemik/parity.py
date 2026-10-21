@@ -30,6 +30,7 @@ ROUTED = [
     ("nemik-critical", "/critical.json", "critical_doc"),
     ("nemik-starved", "/starved.json", "starved_fleet"),
     ("nemik-overlaps", "/overlaps.json", "overlaps"),
+    ("nemik-pacing", "/pacing.json", "paces"),
 ]
 
 PENDING = [
@@ -40,7 +41,6 @@ PENDING = [
     ("nemik-collapse", "W793"),
     ("nemik-history", "W785"),
     ("nemik-pins", "W786"),
-    ("nemik-pacing", "W786"),
     ("nemik-stackable", "W786"),
     ("nemik-floor-asks", "W786"),
     ("nemik-witnesses", "W786"),

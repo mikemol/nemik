@@ -189,6 +189,7 @@ def hub_modules_depend_on_everything_below():
             "critical",
             "starved",
             "overlaps",
+            "pacing",
         },
     }
     for hub, want in expected.items():
