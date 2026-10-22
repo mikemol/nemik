@@ -1448,3 +1448,10 @@
 2026-10-22T06:24:06Z  status W833 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-22T06:24:15Z  status W786 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-22T06:27:02Z  status W835 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T06:40:35Z  tick  W835 advanced  sweep     "W835 gate in flight (stack311) [blocked by W785]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T06:56:23Z  status W835 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T07:10:08Z  tick  W836 minted    -         "Publish each cross-repo wait edge's age and its blocker's rank position as OTLP gauges through mikemol-otlp (repo and rule labels only, card symbols in log records), so luthen's flow dashboard has its series"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W579
+2026-10-22T07:10:08Z  tick  W837 minted    -         "Alert on the wait SLO: multi-window multi-burn-rate over the wait ages, once the operator states the SLO and its error budget (W700)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W579
+2026-10-22T07:10:24Z  status W837 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T07:10:40Z  tick  W579 advanced  collapse  "W579's chain ended at the operator's SLO decision (W700) though luthen's dashboard needs only the series: split into W836 (publish the wait series, ready) and W837 (the SLO alert, blocked on the operator); told luthen [blocked by W836]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T07:33:56Z  status W836 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
