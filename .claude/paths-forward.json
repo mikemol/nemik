@@ -17159,26 +17159,26 @@
     {
       "symbol": "W785",
       "title": "Routes for history: oldest, waits, forecast, score, events, density",
-      "status": "blocked",
+      "status": "working",
       "enables": [
         "W781"
       ],
-      "touches": [],
-      "blocked_on": [
-        "W855",
-        "W856"
+      "touches": [
+        "file:src/nemik/parity.py!w",
+        "file:tests/test_parity.py!w"
       ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Inventory which history modes have a document today (static_data's history.json) and which do not; for each missing mode add the host-side publisher beside nemik-hostroot (same function the CLI calls, written to the cache dir) and the /history/<mode>.json route that reads it with a freshness check; waits, oldest, forecast, score, events and density each in turn",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Submit the prepared stack: nemik-history routed in the parity table, ceiling lowered",
       "evidence": "2026-10-20: 2026-10-20 scoping: the history modes read git by spawning it (history._run, _git, citing_epochs, commit_snapshots, backfill), so the server, which may not spawn (W783), cannot call them per request. The route can only read a document a host-side run of the same function published: history_doc already feeds the static build's history.json (static_data), and nemik-hostroot (W779) is the pattern for a file the server reads with a freshness check. So W785 serves the published history documents, one per CLI mode, produced by the CLI's own function on the host, and the parity row names the function that writes the document",
       "issued_at": "2026-10-20T17:58:14Z",
       "minted_during": "tick",
       "caused_by": "W781",
-      "last_worked": "2026-10-22T18:34:26Z",
+      "last_worked": "2026-10-22T22:40:53Z",
       "ticks_blocked": 0,
       "manifest": [
-        "src/nemik/serve.py",
-        "tests/test_serve_history_routes.py"
+        "src/nemik/parity.py",
+        "tests/test_parity.py"
       ],
       "size_class": "small",
       "completed": null
@@ -19005,7 +19005,7 @@
     {
       "symbol": "W855",
       "title": "A host-side publisher and a freshness-checked route for the history forecast mode",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W785"
       ],
@@ -19016,14 +19016,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Run the tests against the rebuilt venv, then submit the prepared stack: forecast and score through emit",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-22: commit 3429739; _forecast and _score go through history.emit, options typed as Opts, tests/test_history_forecast_publish.py",
       "issued_at": "2026-10-22T18:34:26Z",
       "minted_during": "interrupt",
       "caused_by": "W785",
-      "last_worked": "2026-10-22T22:11:12Z",
+      "last_worked": "2026-10-22T22:40:10Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261022T224010Z",
       "manifest": [
         "src/nemik/history.py",
         "tests/test_history_forecast_publish.py",
@@ -19034,7 +19034,7 @@
     {
       "symbol": "W856",
       "title": "A host-side publisher and a freshness-checked route for the history score mode",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W785"
       ],
@@ -19043,14 +19043,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Land with W855: the score mode goes through emit in the same change, this card carries its test",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-22: commit d1a4025; tests/test_history_score_publish.py",
       "issued_at": "2026-10-22T18:34:26Z",
       "minted_during": "interrupt",
       "caused_by": "W785",
-      "last_worked": "2026-10-22T22:11:13Z",
+      "last_worked": "2026-10-22T22:40:11Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261022T224011Z",
       "manifest": [
         "tests/test_history_score_publish.py"
       ],
@@ -19261,40 +19261,22 @@
   "predecessor_job_id": "disarmed",
   "leases": [
     {
-      "tag": "file:src/nemik/history.py!w",
+      "tag": "file:src/nemik/parity.py!w",
       "holder": "(unlocked)",
-      "waypoint": "W855",
-      "base_sha": "99da6530f2a1161bbc9cfe38f69971ed81517101",
-      "taken_at": "2026-10-22T22:11:12Z",
-      "renewed_at": "2026-10-22T22:11:12Z",
-      "expires_at": "2026-10-22T22:41:12Z"
+      "waypoint": "W785",
+      "base_sha": "d1a40258cc22c08131d641d299575a53172d3bfc",
+      "taken_at": "2026-10-22T22:40:20Z",
+      "renewed_at": "2026-10-22T22:40:20Z",
+      "expires_at": "2026-10-22T23:10:20Z"
     },
     {
-      "tag": "file:tests/test_history_forecast_publish.py!w",
+      "tag": "file:tests/test_parity.py!w",
       "holder": "(unlocked)",
-      "waypoint": "W855",
-      "base_sha": "99da6530f2a1161bbc9cfe38f69971ed81517101",
-      "taken_at": "2026-10-22T22:11:12Z",
-      "renewed_at": "2026-10-22T22:11:12Z",
-      "expires_at": "2026-10-22T22:41:12Z"
-    },
-    {
-      "tag": "file:mypy-baseline.json!w",
-      "holder": "(unlocked)",
-      "waypoint": "W855",
-      "base_sha": "99da6530f2a1161bbc9cfe38f69971ed81517101",
-      "taken_at": "2026-10-22T22:11:12Z",
-      "renewed_at": "2026-10-22T22:11:12Z",
-      "expires_at": "2026-10-22T22:41:12Z"
-    },
-    {
-      "tag": "file:tests/test_history_score_publish.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W856",
-      "base_sha": "99da6530f2a1161bbc9cfe38f69971ed81517101",
-      "taken_at": "2026-10-22T22:11:13Z",
-      "renewed_at": "2026-10-22T22:11:13Z",
-      "expires_at": "2026-10-22T22:41:13Z"
+      "waypoint": "W785",
+      "base_sha": "d1a40258cc22c08131d641d299575a53172d3bfc",
+      "taken_at": "2026-10-22T22:40:20Z",
+      "renewed_at": "2026-10-22T22:40:20Z",
+      "expires_at": "2026-10-22T23:10:20Z"
     }
   ],
   "advice": [
