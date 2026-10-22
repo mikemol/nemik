@@ -95,6 +95,10 @@
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'argparse'"
  },
+ "delivery": {
+  "as_written": "",
+  "stripped": ""
+ },
  "dictops": {
   "as_written": "",
   "stripped": ""
