@@ -15295,7 +15295,6 @@
       ],
       "blocked_on": [
         "",
-        "W847",
         "W848"
       ],
       "blocked_kind": "agent",
@@ -18791,21 +18790,21 @@
     {
       "symbol": "W847",
       "title": "Vendor mtools' webpage dist at 146ebaaf as a wheel and pin it as a dev dependency",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W717"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Build the wheel from git archive 146ebaaf, add the dev dependency and its path source, lock, add the hash line",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-22: commit 7fa5fc6; mikemol_webpage 0.1.0+146ebaaf vendored, locked, hashed",
       "issued_at": "2026-10-22T15:10:38Z",
       "minted_during": "interrupt",
       "caused_by": "W717",
-      "last_worked": "2026-10-22T15:10:48Z",
+      "last_worked": "2026-10-22T15:32:26Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261022T153226Z",
       "manifest": [
         "vendor/wheels/mikemol_webpage-0.1.0+146ebaaf-py3-none-any.whl",
         "vendor/wheels/SHA256SUMS",
@@ -18818,20 +18817,35 @@
     {
       "symbol": "W848",
       "title": "Replace the webpage helper copies with the vendored mikemol.webpage and list failed requests in a failed wait",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W717"
       ],
-      "touches": [],
+      "touches": [
+        "file:tests/webpage.py!w",
+        "file:tools/webpage_waits.py!w",
+        "file:MODULE.bazel!w",
+        "file:BUILD.bazel!w"
+      ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
+      "next_bounded_step": "Submit the prepared stack: the wheel is wired into the Bazel venv, the helpers are re-exported from the vendored package, the codemod tests import it, the tool copy is deleted",
       "evidence": "",
       "issued_at": "2026-10-22T15:10:38Z",
       "minted_during": "interrupt",
       "caused_by": "W717",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-22T15:44:48Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "tests/webpage.py",
+        "tools/webpage_waits.py",
+        "tests/test_webpage_waits.py",
+        "tests/test_webpage_adopt.py",
+        "MODULE.bazel",
+        "BUILD.bazel"
+      ],
+      "size_class": "medium"
     }
   ],
   "residue": [
