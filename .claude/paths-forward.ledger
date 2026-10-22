@@ -1439,3 +1439,6 @@
 2026-10-22T04:40:51Z  tick  W834 minted    -         "Route or exclude nemik-witnesses: serve its read-only answer, or declare the opa evaluation a spawner"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W786
 2026-10-22T04:41:09Z  tick  W786 advanced  collapse  "atomized W786 into W833 (stackable) and W834 (witnesses) while the floor-asks slice gates (stack308) [blocked by W833]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-22T05:11:29Z  status W834 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T05:40:07Z  tick  W834 advanced  sweep     "W834 gate in flight (stack309); W833 stackable waits on the parity and serve files it shares [blocked by W833]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T05:40:52Z  status W834 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T06:03:12Z  status W833 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
