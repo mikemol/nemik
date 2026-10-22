@@ -100,11 +100,11 @@ def cross_repo_citation_form():
 
 
 def oslc_cm_state_vocabulary():
-    # oslc_cm:state is the OSLC CM property; its four values are nemik's own vocabulary (mtools'
+    # oslc_cm:state is the OSLC CM property; its five values are nemik's own vocabulary (mtools'
     # status strings have no OSLC CM state URIs of their own to map onto).
     from nemik.adapter import NEMIK, OSLC_CM, STATE
 
-    assert set(STATE) == {"ready", "working", "blocked", "done"}, (
+    assert set(STATE) == {"ready", "working", "blocked", "landed", "done"}, (
         f"STATE keys drifted: {set(STATE)}"
     )
     assert all(str(v).startswith(str(NEMIK)) for v in STATE.values()), (

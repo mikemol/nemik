@@ -43,6 +43,8 @@ STATE = {
     "ready": NEMIK.Ready,
     "working": NEMIK.Working,
     "blocked": NEMIK.Blocked,
+    # nemik:W840 (mtools:W1643): committed, deploy not yet witnessed; open, so closed stays false
+    "landed": NEMIK.LandedStatus,
     "done": NEMIK.Done,
 }
 
