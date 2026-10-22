@@ -18883,25 +18883,32 @@
     {
       "symbol": "W850",
       "title": "A letter writer that sends one inbox letter per undelivered cross-repo edge of a done or dropped card",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W547",
         "W851"
       ],
-      "touches": [],
+      "touches": [
+        "file:src/nemik/witnesses.py!w",
+        "file:src/nemik/edgeletters.py!w",
+        "file:tests/test_edge_letters.py!w",
+        "file:codon-baseline.json!w"
+      ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
+      "next_bounded_step": "Submit the prepared stack: the edge letter wording, the deliver function over the record, their tests and the census entry",
       "evidence": "",
       "issued_at": "2026-10-22T16:24:52Z",
       "minted_during": "interrupt",
       "caused_by": "W547",
-      "last_worked": "2026-10-22T16:34:22Z",
+      "last_worked": "2026-10-22T17:04:41Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "src/nemik/witnesses.py",
-        "tests/test_delivery_letters.py"
+        "src/nemik/edgeletters.py",
+        "tests/test_edge_letters.py",
+        "codon-baseline.json"
       ],
       "size_class": "small"
     },
@@ -19036,7 +19043,44 @@
   "heartbeat": "2026-10-22T02:06:35Z",
   "lock": null,
   "predecessor_job_id": "disarmed",
-  "leases": [],
+  "leases": [
+    {
+      "tag": "file:src/nemik/witnesses.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W850",
+      "base_sha": "2223790c09677d142c359846b59427b9a763b1a0",
+      "taken_at": "2026-10-22T17:04:41Z",
+      "renewed_at": "2026-10-22T17:04:41Z",
+      "expires_at": "2026-10-22T17:34:41Z"
+    },
+    {
+      "tag": "file:src/nemik/edgeletters.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W850",
+      "base_sha": "2223790c09677d142c359846b59427b9a763b1a0",
+      "taken_at": "2026-10-22T17:04:41Z",
+      "renewed_at": "2026-10-22T17:04:41Z",
+      "expires_at": "2026-10-22T17:34:41Z"
+    },
+    {
+      "tag": "file:tests/test_edge_letters.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W850",
+      "base_sha": "2223790c09677d142c359846b59427b9a763b1a0",
+      "taken_at": "2026-10-22T17:04:41Z",
+      "renewed_at": "2026-10-22T17:04:41Z",
+      "expires_at": "2026-10-22T17:34:41Z"
+    },
+    {
+      "tag": "file:codon-baseline.json!w",
+      "holder": "(unlocked)",
+      "waypoint": "W850",
+      "base_sha": "2223790c09677d142c359846b59427b9a763b1a0",
+      "taken_at": "2026-10-22T17:04:41Z",
+      "renewed_at": "2026-10-22T17:04:41Z",
+      "expires_at": "2026-10-22T17:34:41Z"
+    }
+  ],
   "advice": [
     {
       "tool": "block-behind-open",
