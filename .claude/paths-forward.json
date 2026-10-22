@@ -14868,21 +14868,19 @@
     {
       "symbol": "W702",
       "title": "A card whose commit has landed but whose deploy is not witnessed reads as landed (oslc_cm:Fixed, not closed), and done only when the deploy witness holds: vocabulary, shape and rendering",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "W845"
-      ],
+      "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Agree the name with mtools-ad (W1637/W1638). Proposal: no second state scheme; WaypointStates gains landed with skos:closeMatch oslc_cm:Fixed (done keeps skos:closeMatch oslc_cm:Verified), witnessedBy the same deploy witness as ChangeLifecycle; a shape warns on done with no witness; view draws landed as its own mark",
-      "evidence": "2026-10-18: mtools-ad 2026-10-18 (W1642): status string landed between working and done; open and not workable; a waiter stays blocked until done; witness via --witness; deploys field (mtools:W1643). github-8f: landed excluded from ready and watchdog idle test; stuck-deploy Warning after a learned interval. nemik side: nemik.allBlockersLanded must not treat landed as landed; shapes: done+deploys without witness, landed without deploys | 2026-10-18: mtools-ad 2026-10-18 (W1643/W1644): field deploys boolean on the card; landed_at RFC 5545 UTC stamped once on entering landed (not last_worked, which every update rewrites); both rules agreed. Stuck-deploy Warning reads landed_at against a learned interval | 2026-10-19: github-8f relays luthen (unverified by me): serving sha readable via kube_pod_container_info{namespace,container,pod,image,image_id} (tag <epoch>-<40-hex sha>) joined to kube_pod_status_ready{condition=true}==1 on namespace,pod; extract sha with label_replace; serving pods ran 4c688c1d (W489) when sent; built revision not published until luthen-observability:W1394. Witness = serving sha equals the card's sha. To test: query it via luthen endpoints_query | 2026-10-19: 2026-10-19 github-8f: mtools:W1727 is the metrics reader (mikemol-otlp query-metrics PROMQL, JSON lines; exit 3 store unreachable, exit 4 query error), being built first; W702's witness half waits on it. The status half waits on mtools:W1642 and W1644 (the open steps of W1643, named instead of the umbrella)",
+      "next_bounded_step": null,
+      "evidence": "2026-10-18: mtools-ad 2026-10-18 (W1642): status string landed between working and done; open and not workable; a waiter stays blocked until done; witness via --witness; deploys field (mtools:W1643). github-8f: landed excluded from ready and watchdog idle test; stuck-deploy Warning after a learned interval. nemik side: nemik.allBlockersLanded must not treat landed as landed; shapes: done+deploys without witness, landed without deploys | 2026-10-18: mtools-ad 2026-10-18 (W1643/W1644): field deploys boolean on the card; landed_at RFC 5545 UTC stamped once on entering landed (not last_worked, which every update rewrites); both rules agreed. Stuck-deploy Warning reads landed_at against a learned interval | 2026-10-19: github-8f relays luthen (unverified by me): serving sha readable via kube_pod_container_info{namespace,container,pod,image,image_id} (tag <epoch>-<40-hex sha>) joined to kube_pod_status_ready{condition=true}==1 on namespace,pod; extract sha with label_replace; serving pods ran 4c688c1d (W489) when sent; built revision not published until luthen-observability:W1394. Witness = serving sha equals the card's sha. To test: query it via luthen endpoints_query | 2026-10-19: 2026-10-19 github-8f: mtools:W1727 is the metrics reader (mikemol-otlp query-metrics PROMQL, JSON lines; exit 3 store unreachable, exit 4 query error), being built first; W702's witness half waits on it. The status half waits on mtools:W1642 and W1644 (the open steps of W1643, named instead of the umbrella) | 2026-10-22: 2026-10-22: vocabulary (LandedStatus), shape (DoneDeployWitnessShape) and rendering (468c85b, W845) landed; the deploy-witness query itself is W751",
       "issued_at": "2026-10-18T23:20:29Z",
       "minted_during": "interrupt",
       "caused_by": "github-8f",
-      "last_worked": "2026-10-22T12:26:38Z",
+      "last_worked": "2026-10-22T13:51:07Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261022T135107Z",
       "manifest": [
         "src/nemik/data/nemik.ttl",
         "src/nemik/data/shapes.ttl",
@@ -18737,7 +18735,7 @@
     {
       "symbol": "W845",
       "title": "Draw the landed status in the view with a mark and a colour of its own: a state mark, a legend entry and a theme token that clears the contrast and second-channel checks",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:src/nemik/web/graph.js!w",
@@ -18745,12 +18743,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Give landed one glyph used in this role only, a theme token in both themes that clears the contrast check, a legend entry and a state mark; the browser tests for second channel and contrast must stay green; the size test's ceilings follow",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-22: commit 468c85b; landed has its own colour, mark and wcag pair",
       "issued_at": "2026-10-22T12:11:31Z",
       "minted_during": "tick",
       "caused_by": "nemik:W839",
-      "last_worked": "2026-10-22T12:40:02Z",
+      "last_worked": "2026-10-22T13:50:04Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/web/graph.js",
@@ -18761,7 +18759,7 @@
         "tests/test_cvd_palette.py"
       ],
       "size_class": "medium",
-      "completed": null
+      "completed": "20261022T135004Z"
     }
   ],
   "residue": [
@@ -18868,26 +18866,7 @@
   "heartbeat": "2026-10-22T02:06:35Z",
   "lock": null,
   "predecessor_job_id": "disarmed",
-  "leases": [
-    {
-      "tag": "file:src/nemik/web/graph.js!w",
-      "holder": "claude-nemik",
-      "waypoint": "W845",
-      "base_sha": "67521fcc786a6a7e12691128ab2e9dd86a4a7bcd",
-      "taken_at": "2026-10-22T12:40:02Z",
-      "renewed_at": "2026-10-22T13:11:25Z",
-      "expires_at": "2026-10-22T13:41:25Z"
-    },
-    {
-      "tag": "file:src/nemik/web/style.css!w",
-      "holder": "claude-nemik",
-      "waypoint": "W845",
-      "base_sha": "67521fcc786a6a7e12691128ab2e9dd86a4a7bcd",
-      "taken_at": "2026-10-22T12:40:02Z",
-      "renewed_at": "2026-10-22T13:11:25Z",
-      "expires_at": "2026-10-22T13:41:25Z"
-    }
-  ],
+  "leases": [],
   "advice": [
     {
       "tool": "block-behind-open",
