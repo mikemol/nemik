@@ -14893,7 +14893,7 @@
     {
       "symbol": "W703",
       "title": "The image build consumes the commit gate result for the same tree sha, or drops its test stage and builds only gated shas",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W571"
       ],
@@ -14904,12 +14904,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Waits on mtools:W1666; until then every push is a deploy that cannot finish. Options to put to the operator if W1666 is far: push in bursts, or an image stage that does not rerun the suite",
+      "next_bounded_step": "Landing the gated stage: build.yml picks it on a Gated-Tree trailer equal to the tree; Containerfile takes it by TESTS; test_containerfile pins both",
       "evidence": "2026-10-18: 2026-10-18 luthen vlogs_query (nemik.image-replica, sha 406e3bd, 22:12:25Z): 3 failed, 964 passed, 6 skipped in 2491.81 s; the one assert surfaced is tests/test_series_board.py:95 assert \"not awake\" not in _wake_text(None) (the Wake panel drew a board with no --series in the image, though the gate passed the same tree); the other two FAILED lines are not yet read. The image runs the suite under a different environment than the gate, which is the case for consuming the gate result | 2026-10-18: CORRECTION 2026-10-18 (luthen): the 406e3bd failures were not the not-awake assert. test_series_board.py:79 and test_sources_fetch.py:78 raised playwright TimeoutError, wait_for_function 60000 ms, under the loaded 41-minute stage; the third failure is not read yet. My earlier note that the Wake panel drew a board in the image was wrong. The wall-clock waits are W705 | 2026-10-19: 2026-10-18 luthen: with a 41 min pytest stage and a commit about every 20 min, supersession cancels the image test stage before it can finish, so consuming the gate result for the tree sha (or building only gated shas) is the real fix and makes supersession harmless; timeout=0 (b598f28) removes the other failure only | 2026-10-19: 2026-10-19 mtools-ad (claimed as mtools:W1666, not built): no gated-tree record is readable today (no git note; the stack snapshot is deleted after the run). The writer will add a Gated-Tree: <tree sha> trailer only on a commit whose own tree the gate ran on (a single commit or a stack tip); other stack entries get Gated-by: (mtools:W1651) and no Gated-Tree. So build.yml may check Gated-Tree == git rev-parse HEAD^{tree} on the pushed head and skip the pytest stage on a match; no trailer runs the full stage | 2026-10-19: 2026-10-19 ~17:54Z luthen-observability-d9 (read from the store, cluster and registry): both ready pods run tag 1792407417-4c688c1d (2026-10-19 10:56:57Z), the Flux ImagePolicy latestRef is the same and is the last tag in the registry: nemik HEAD 650a278 has no image and the registry built nothing in about 7 h; 20 commits (4c688c1d..origin/main) are unshipped. Whether supersession is still cancelling could not be read (Forgejo run state is in no series; an API read needs a token luthen will not use without the operator). build.yml has no concurrency section and the Containerfile test stage re-runs the whole pytest suite (41 min) per push, at a push cadence of about 20 min. The fix is this card: the image consumes the gate result instead of re-running it | 2026-10-21: 2026-10-20 mtools-ad: mtools:W1745 landed at c44b760: in a stack the tip commit carries Gated-Tree: <its tree> (as a single commit does since W1666) and each earlier commit Gated-by: <the tip's waypoint>; seen on c44b760 itself (a one-entry stack is its own tip). Not covered: commits the train lands for joined stacks; mtools-ad has not read whether they go through the same builder, so that part of W703 stays open on their side | 2026-10-21: 2026-10-20 mtools-ad correction to the W1745 note: traindrive.py builds the commits it lands with stackland.build over the flattened entries (line 217), so they carry the same trailers as a stack: the last entry built Gated-Tree, every other Gated-by naming that tip's waypoint (after a bisect, the green prefix's own tip). So W703 is covered for stacks and trains from c44b760; not yet seen on a real multi-submission train landing | 2026-10-21: 2026-10-21 mtools-ad: Gated-* trailers on train-landed prefix commits from c44b760 are unreliable until mtools:W1651 lands (stamped for the red tip, not the prefix); stacks and fully green trains are right | 2026-10-21: 2026-10-21 mtools-ad: mtools:W1651 landed f39dd23; Gated-* on stack and train landings is accurate from f39dd23; prefix landings between c44b760 and f39dd23 may name a red tip",
       "issued_at": "2026-10-18T23:54:59Z",
       "minted_during": "interrupt",
       "caused_by": "github-8f",
-      "last_worked": "2026-10-21T05:41:02Z",
+      "last_worked": "2026-10-22T14:02:49Z",
       "ticks_blocked": 0,
       "manifest": [
         "Containerfile",
@@ -18866,7 +18866,35 @@
   "heartbeat": "2026-10-22T02:06:35Z",
   "lock": null,
   "predecessor_job_id": "disarmed",
-  "leases": [],
+  "leases": [
+    {
+      "tag": "file:Containerfile!w",
+      "holder": "(unlocked)",
+      "waypoint": "W703",
+      "base_sha": "cc213df386ddfd074752c5bd710f637ec51d8e6b",
+      "taken_at": "2026-10-22T14:02:49Z",
+      "renewed_at": "2026-10-22T14:02:49Z",
+      "expires_at": "2026-10-22T14:32:49Z"
+    },
+    {
+      "tag": "file:BUILD.bazel!w",
+      "holder": "(unlocked)",
+      "waypoint": "W703",
+      "base_sha": "cc213df386ddfd074752c5bd710f637ec51d8e6b",
+      "taken_at": "2026-10-22T14:02:49Z",
+      "renewed_at": "2026-10-22T14:02:49Z",
+      "expires_at": "2026-10-22T14:32:49Z"
+    },
+    {
+      "tag": "file:.forgejo/workflows/build.yml!w",
+      "holder": "(unlocked)",
+      "waypoint": "W703",
+      "base_sha": "cc213df386ddfd074752c5bd710f637ec51d8e6b",
+      "taken_at": "2026-10-22T14:02:49Z",
+      "renewed_at": "2026-10-22T14:02:49Z",
+      "expires_at": "2026-10-22T14:32:49Z"
+    }
+  ],
   "advice": [
     {
       "tool": "block-behind-open",
