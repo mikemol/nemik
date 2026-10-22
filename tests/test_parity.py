@@ -8,9 +8,9 @@ from nemik.parity import EXCLUDED, PENDING, ROUTED
 
 ROOT = Path(__file__).resolve().parents[1]
 SERVE = ROOT / "src" / "nemik" / "serve.py"
-# The pending list only shrinks: lower this as W785, W786 and W793 add their routes.
-PENDING_MOST = 14
-PENDING_CARDS = {"W785", "W786", "W793"}
+# The pending list only shrinks: lower this as W785, W833 and W793 add their routes.
+PENDING_MOST = 7
+PENDING_CARDS = {"W785", "W833", "W793"}
 
 
 def _commands() -> set[str]:
