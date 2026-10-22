@@ -31,6 +31,7 @@ ROUTED = [
     ("nemik-starved", "/starved.json", "starved_fleet"),
     ("nemik-overlaps", "/overlaps.json", "overlaps"),
     ("nemik-pacing", "/pacing.json", "paces"),
+    ("nemik-floor-asks", "/floor-asks.json", "unresolved"),
 ]
 
 PENDING = [
@@ -40,9 +41,7 @@ PENDING = [
     ("nemik-check --fold", "W793"),
     ("nemik-collapse", "W793"),
     ("nemik-history", "W785"),
-    ("nemik-pins", "W786"),
     ("nemik-stackable", "W786"),
-    ("nemik-floor-asks", "W786"),
     ("nemik-witnesses", "W786"),
 ]
 
@@ -54,6 +53,7 @@ EXCLUDED = [
     ("nemik-tasks", "host-private: reads the operator's tasks"),
     ("nemik-calendar-write", "a writer: writes the operator's calendars"),
     ("nemik-work", "spawns the committer and the writer"),
+    ("nemik-pins", "spawns git and kubectl to measure how far behind a pin is"),
     ("nemik-replica", "spawns the image build"),
     ("nemik-ask", "a writer: files an ask in a peer's inbox"),
     ("nemik-export", "a writer: writes a project file format"),

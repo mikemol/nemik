@@ -53,6 +53,7 @@ from nemik.check import (
 from nemik.check import survey as checked_survey
 from nemik.critical import critical_doc
 from nemik.exportwire import exports_key, withheld_by_exports
+from nemik.floorasks import floor_asks, unresolved
 from nemik.hostroot import HostRow, read_document, stale
 from nemik.landings import read_document as read_landings
 from nemik.landings import series as landing_series
@@ -210,6 +211,7 @@ DOC_ROUTES = [
     "/starved.json",
     "/overlaps.json",
     "/pacing.json",
+    "/floor-asks.json",
 ]
 
 
@@ -474,6 +476,23 @@ class Model:
             "paces": [p._asdict() for p in found],
         }
 
+    def floor_asks_json(self) -> dict[str, object]:
+        """Build whether the summit floor asks point at live waypoints, as nemik-floor-asks does.
+
+        Returns:
+            {"asks": how many floor entries carry a waypoint, "unresolved": [{key, pointer, why}]}
+            from <root>/summit/floor; no floor directory is no asks.
+
+        """
+        floor = self.root / "summit" / "floor"
+        bad = unresolved(self.root, floor)
+        return {
+            "asks": len(floor_asks(floor)),
+            "unresolved": [
+                {"key": key, "pointer": ptr, "why": why} for key, ptr, why in bad
+            ],
+        }
+
     def doc_for(self, route: str) -> dict[str, object]:
         """Build the document a route in DOC_ROUTES answers.
 
@@ -488,6 +507,7 @@ class Model:
             "/starved.json": self.starved_json,
             "/overlaps.json": self.overlaps_json,
             "/pacing.json": self.pacing_json,
+            "/floor-asks.json": self.floor_asks_json,
         }
         return docs[route]()
 

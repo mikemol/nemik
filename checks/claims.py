@@ -190,6 +190,7 @@ def hub_modules_depend_on_everything_below():
             "starved",
             "overlaps",
             "pacing",
+            "floorasks",
         },
     }
     for hub, want in expected.items():
