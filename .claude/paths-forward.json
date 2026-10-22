@@ -11006,7 +11006,6 @@
         "notice"
       ],
       "blocked_on": [
-        "W547",
         "W548"
       ],
       "blocked_kind": "agent",
@@ -11016,12 +11015,12 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": null,
-      "ticks_blocked": 171
+      "ticks_blocked": 0
     },
     {
       "symbol": "W547",
       "title": "Delivery record and edge walk for a done or dropped card: one inbox letter per cross-repo edge, delivered once",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W546",
         "W548"
@@ -11030,27 +11029,25 @@
         "letters",
         "notice"
       ],
-      "blocked_on": [
-        "W851"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Part 1 landed 406e3bd (workrows.edges_of, the pure cross-repo edge walk over queue text). Next: the delivery record (a nemik-owned file keyed repo:W<n> -> edge, so a rerun on a later day writes no second letter and a deleted letter is not sent again), the letter writer, and wake() using this walk instead of blocked_on alone",
-      "evidence": "2026-10-15: 2026-10-15: checked mikemol-paths-forward --delivered (mtools pathsforward delivered.py, W803): it prints the queue's version 0.0.<highest done number>, not a notice record, so W547 builds its own. Idempotence by letter filename alone is not enough: wake() names the file by date, so a rerun on a later day writes a second letter, and a letter the reader deleted would be sent again. | 2026-10-18: 2026-10-18 CORRECTION to the commit body of 406e3bd: it says the Codon census stages sibling nemik modules as not importable, which is wrong on the mechanism. Tested with the pinned codon the same day: the census stages every module in one tree, an ABSOLUTE sibling import (from nemik.a import f) fails with 'no module named nemik.a', and a RELATIVE one (from .a import f) compiles. The edge walk could have stayed in its own module with a relative import of workrows; it sits in workrows.py, which still works. See W697 and the memory note new-module-must-compile-under-codon",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-15: 2026-10-15: checked mikemol-paths-forward --delivered (mtools pathsforward delivered.py, W803): it prints the queue's version 0.0.<highest done number>, not a notice record, so W547 builds its own. Idempotence by letter filename alone is not enough: wake() names the file by date, so a rerun on a later day writes a second letter, and a letter the reader deleted would be sent again. | 2026-10-18: 2026-10-18 CORRECTION to the commit body of 406e3bd: it says the Codon census stages sibling nemik modules as not importable, which is wrong on the mechanism. Tested with the pinned codon the same day: the census stages every module in one tree, an ABSOLUTE sibling import (from nemik.a import f) fails with 'no module named nemik.a', and a RELATIVE one (from .a import f) compiles. The edge walk could have stayed in its own module with a relative import of workrows; it sits in workrows.py, which still works. See W697 and the memory note new-module-must-compile-under-codon | 2026-10-22: 2026-10-22: part 1 406e3bd (edge walk), W849 2223790 (delivery record), W850 37f4357 (edge letters and deliver), W851 14a14bf (wake routes cross-repo edges through the record): one inbox letter per cross-repo edge, delivered once",
       "issued_at": "2026-10-15T19:22:44Z",
       "minted_during": "tick",
       "caused_by": "W546",
-      "last_worked": "2026-10-22T16:24:52Z",
+      "last_worked": "2026-10-22T18:11:31Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/witnesses.py"
       ],
       "size_class": "medium",
-      "completed": null
+      "completed": "20261022T181131Z"
     },
     {
       "symbol": "W548",
       "title": "Message the owning session of a delivered edge notice when it is live",
-      "status": "blocked",
+      "status": "ready",
       "enables": [
         "W546"
       ],
@@ -11058,17 +11055,15 @@
         "letters",
         "notice"
       ],
-      "blocked_on": [
-        "W547"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "After the letter is written, find the owner session through ListAgents-style discovery on the host and send one message naming the done card as <repo>:W<n>; skip silently when no session is live; the letter remains the durable copy",
       "evidence": "",
       "issued_at": "2026-10-15T19:22:45Z",
       "minted_during": "tick",
       "caused_by": "W546",
       "last_worked": null,
-      "ticks_blocked": 171
+      "ticks_blocked": 0
     },
     {
       "symbol": "W549",
@@ -18914,7 +18909,7 @@
     {
       "symbol": "W851",
       "title": "wake() walks the cross-repo edges and writes letters through the record, not blocked_on alone",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W547"
       ],
@@ -18925,14 +18920,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Submit the prepared stack: wake sends the local letter and routes every cross-repo edge through deliver",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-22: commit 14a14bf; wake keeps the local witness letter and routes every cross-repo edge through deliver and the delivery record",
       "issued_at": "2026-10-22T16:24:52Z",
       "minted_during": "interrupt",
       "caused_by": "W547",
-      "last_worked": "2026-10-22T17:45:22Z",
+      "last_worked": "2026-10-22T18:11:26Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261022T181126Z",
       "manifest": [
         "src/nemik/witnesses.py",
         "tests/test_wake_edges.py",
@@ -19045,35 +19040,7 @@
   "heartbeat": "2026-10-22T02:06:35Z",
   "lock": null,
   "predecessor_job_id": "disarmed",
-  "leases": [
-    {
-      "tag": "file:src/nemik/witnesses.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W851",
-      "base_sha": "37f43573cb205e827678b978646c2a23fd4414f7",
-      "taken_at": "2026-10-22T17:45:22Z",
-      "renewed_at": "2026-10-22T17:45:22Z",
-      "expires_at": "2026-10-22T18:15:22Z"
-    },
-    {
-      "tag": "file:tests/test_wake_edges.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W851",
-      "base_sha": "37f43573cb205e827678b978646c2a23fd4414f7",
-      "taken_at": "2026-10-22T17:45:22Z",
-      "renewed_at": "2026-10-22T17:45:22Z",
-      "expires_at": "2026-10-22T18:15:22Z"
-    },
-    {
-      "tag": "file:ruff-baseline.json!w",
-      "holder": "(unlocked)",
-      "waypoint": "W851",
-      "base_sha": "37f43573cb205e827678b978646c2a23fd4414f7",
-      "taken_at": "2026-10-22T17:45:22Z",
-      "renewed_at": "2026-10-22T17:45:22Z",
-      "expires_at": "2026-10-22T18:15:22Z"
-    }
-  ],
+  "leases": [],
   "advice": [
     {
       "tool": "block-behind-open",
