@@ -10999,16 +10999,14 @@
     {
       "symbol": "W546",
       "title": "Done or dropped card pushes one notice to every cross-repo edge on it: inbox letter, plus a message to a live session",
-      "status": "blocked",
+      "status": "ready",
       "enables": [],
       "touches": [
         "letters",
         "notice"
       ],
-      "blocked_on": [
-        "W548"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "Design: the writer emits a done/dropped event (mtools:W1215 prunes dependents at once, so the writer emits and nemik delivers, one copy of the logic); nemik reads the event and for each cross-repo edge (caused_by, enables, blocked_on) writes one inbox letter and, if the owning session is live, a message; delivered once and recorded. Children: W547 the delivery record and edge walk, W548 the live-session message. Measured: wake() in src/nemik/witnesses.py:267 is called only after nemik-witnesses --apply, covers only blocked_on waiters, and records nothing but the letter file.",
       "evidence": "",
       "issued_at": "2026-10-15T19:22:40Z",
@@ -11043,27 +11041,6 @@
       ],
       "size_class": "medium",
       "completed": "20261022T181131Z"
-    },
-    {
-      "symbol": "W548",
-      "title": "Message the owning session of a delivered edge notice when it is live",
-      "status": "ready",
-      "enables": [
-        "W546"
-      ],
-      "touches": [
-        "letters",
-        "notice"
-      ],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "After the letter is written, find the owner session through ListAgents-style discovery on the host and send one message naming the done card as <repo>:W<n>; skip silently when no session is live; the letter remains the durable copy",
-      "evidence": "",
-      "issued_at": "2026-10-15T19:22:45Z",
-      "minted_during": "tick",
-      "caused_by": "W546",
-      "last_worked": null,
-      "ticks_blocked": 0
     },
     {
       "symbol": "W549",
@@ -19033,6 +19010,13 @@
       "title": "Incremental redraw for the treemap and for repo boxes and lanes that appear or go",
       "dropped_at": "2026-10-19T15:13:13Z",
       "reason": "Measured with nemik-history --churn over 2026-10-12..19, 16 repos: at the 60 s poll 95.9 percent of polls find the queues identical and only 3.5 percent are structural (redrawn now 4.1 percent), so incremental redraw for structural changes would spare a redraw about one poll in 28. The 300 s and 3600 s polls redraw more (15.6 and 58.5 percent) but the viewer polls at 60 s. Revisit if the poll interval grows or a redraw is seen to cost the reader their place.",
+      "recoverable": true
+    },
+    {
+      "symbol": "W548",
+      "title": "Message the owning session of a delivered edge notice when it is live",
+      "dropped_at": "2026-10-22T18:23:07Z",
+      "reason": "Not buildable here: nemik's Python has no session discovery or messaging, mtools has no interface for it (mtools-ad, 2026-10-22), and ListAgents/SendMessage are harness tools; the cc-socks protocol is unread and not a stable surface. The inbox letter (W849-W851) is the only channel. Revisit if the operator asks for a harness-side bridge.",
       "recoverable": true
     }
   ],

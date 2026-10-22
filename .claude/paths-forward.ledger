@@ -1527,3 +1527,5 @@
 2026-10-22T18:11:26Z  status W851 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-22T18:11:31Z  status W547 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-22T18:11:31Z  status W548 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T18:22:23Z  status W548 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T18:23:07Z  status W546 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
