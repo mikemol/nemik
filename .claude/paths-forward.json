@@ -11031,7 +11031,6 @@
         "notice"
       ],
       "blocked_on": [
-        "W849",
         "W850",
         "W851"
       ],
@@ -18854,7 +18853,7 @@
     {
       "symbol": "W849",
       "title": "A delivery record keyed repo:W<n> to its edge, so a rerun and a deleted letter write nothing again",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W547",
         "W850"
@@ -18866,14 +18865,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Submit the prepared stack: the pure record functions, their tests and the census entry",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-22: commit 2223790; src/nemik/delivery.py key/delivered/owed/stamp, tests/test_delivery.py, codon census entry",
       "issued_at": "2026-10-22T16:24:52Z",
       "minted_during": "interrupt",
       "caused_by": "W547",
-      "last_worked": "2026-10-22T16:26:52Z",
+      "last_worked": "2026-10-22T17:02:39Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261022T170239Z",
       "manifest": [
         "src/nemik/delivery.py",
         "tests/test_delivery.py",
@@ -18897,26 +18896,40 @@
       "issued_at": "2026-10-22T16:24:52Z",
       "minted_during": "interrupt",
       "caused_by": "W547",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-22T16:34:22Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/witnesses.py",
+        "tests/test_delivery_letters.py"
+      ],
+      "size_class": "small"
     },
     {
       "symbol": "W851",
       "title": "wake() walks the cross-repo edges and writes letters through the record, not blocked_on alone",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W547"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W850"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-22T16:24:52Z",
       "minted_during": "interrupt",
       "caused_by": "W547",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-22T16:34:24Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/witnesses.py",
+        "tests/test_wake_edges.py"
+      ],
+      "size_class": "small"
     }
   ],
   "residue": [
@@ -19023,35 +19036,7 @@
   "heartbeat": "2026-10-22T02:06:35Z",
   "lock": null,
   "predecessor_job_id": "disarmed",
-  "leases": [
-    {
-      "tag": "file:src/nemik/delivery.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W849",
-      "base_sha": "1af02e587e03df670a537d4b0312d51b33b10456",
-      "taken_at": "2026-10-22T16:26:52Z",
-      "renewed_at": "2026-10-22T16:26:52Z",
-      "expires_at": "2026-10-22T16:56:52Z"
-    },
-    {
-      "tag": "file:tests/test_delivery.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W849",
-      "base_sha": "1af02e587e03df670a537d4b0312d51b33b10456",
-      "taken_at": "2026-10-22T16:26:52Z",
-      "renewed_at": "2026-10-22T16:26:52Z",
-      "expires_at": "2026-10-22T16:56:52Z"
-    },
-    {
-      "tag": "file:codon-baseline.json!w",
-      "holder": "(unlocked)",
-      "waypoint": "W849",
-      "base_sha": "1af02e587e03df670a537d4b0312d51b33b10456",
-      "taken_at": "2026-10-22T16:26:52Z",
-      "renewed_at": "2026-10-22T16:26:52Z",
-      "expires_at": "2026-10-22T16:56:52Z"
-    }
-  ],
+  "leases": [],
   "advice": [
     {
       "tool": "block-behind-open",

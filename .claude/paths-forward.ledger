@@ -1515,3 +1515,7 @@
 2026-10-22T16:24:52Z  interrupt W850 minted    -         "A letter writer that sends one inbox letter per undelivered cross-repo edge of a done or dropped card"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W547
 2026-10-22T16:24:52Z  interrupt W851 minted    -         "wake() walks the cross-repo edges and writes letters through the record, not blocked_on alone"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W547
 2026-10-22T16:26:52Z  status W849 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T16:34:22Z  status W850 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T16:34:24Z  status W851 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T17:02:39Z  status W849 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T17:02:39Z  status W850 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
