@@ -58,3 +58,14 @@ def test_a_repos_finish_rate_is_its_done_cards_over_the_days_seen() -> None:
     rates = finish_rates(EVENTS, "2026-10-05T00:00:00+00:00")
     assert rates == {"r": pytest.approx(QUARTER)}
     assert finish_rates([], "2026-10-05T00:00:00+00:00") == {}
+
+
+def test_a_card_minted_and_closed_within_the_hour_never_stood_in_line() -> None:
+    """A sweep that closes cards as it mints them adds nothing to the repo's service rate."""
+    quick = [
+        ("r:W3", "2026-10-02T00:00:00+00:00", "card", "", "minted", ""),
+        ("r:W3", "2026-10-02T00:30:00+00:00", "status", "ready", "done", ""),
+        *EVENTS,
+    ]
+    rates = finish_rates(quick, "2026-10-05T00:00:00+00:00")
+    assert rates == {"r": pytest.approx(QUARTER)}

@@ -237,11 +237,17 @@ def leads_by_repo(events: list[Event], moment: str) -> dict[str, list[float]]:
     return {repo: sorted(days) for repo, days in out.items()}
 
 
-def finish_rates(events: list[Event], moment: str) -> dict[str, float]:
-    """Give, per repo, how many cards it finished a day, over the history up to one moment.
+SERVICE_FLOOR_DAYS = 1.0
 
-    The cards counted are those `leads_by_repo` counts; the days run from the first event seen
-    (at least one day, so a short history does not divide by nothing).
+
+def finish_rates(events: list[Event], moment: str) -> dict[str, float]:
+    """Give, per repo, how many cards it finished a day after they stood in line, up to a moment.
+
+    Only the cards `leads_by_repo` counts that waited more than SERVICE_FLOOR_DAYS count: a card
+    minted and closed within the hour (a sweep, an auto-minted repin) never stood in the line, and
+    counting it made a repo that closes forty of those a day look as if it cleared forty cards of
+    the queue (nemik:W832). The days run from the first event seen (at least one day, so a short
+    history does not divide by nothing).
 
     Returns:
         {repo: finishes per day}; empty for no events.
@@ -253,7 +259,8 @@ def finish_rates(events: list[Event], moment: str) -> dict[str, float]:
     first = min(_instant(stamp) for _, stamp, _, _, _, _ in events)
     span = max(1.0, _days(first, until))
     return {
-        repo: len(days) / span for repo, days in leads_by_repo(events, moment).items()
+        repo: len([d for d in days if d > SERVICE_FLOOR_DAYS]) / span
+        for repo, days in leads_by_repo(events, moment).items()
     }
 
 

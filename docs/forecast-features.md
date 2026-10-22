@@ -39,3 +39,26 @@ Skill rose from -9.3 to -1.45, so it stays. It is still below climatology (a for
 base rate for every card scores 0.024): the remaining error is the 118 fresh cards given 0.33, none
 of which finished within a day. Next trial (W832): how many cards the repo finishes a day against
 how many stand ahead, as a cap on the rate itself.
+
+## Trial 2: the service rate counts only cards that stood in line (nemik:W832), kept
+
+The rates trial 1 used were large (mtools 37 a day, luthen-observability 43, nemik 36) because the
+count included every card minted and closed within the hour: sweeps and auto-minted repin cards that
+never stood in the line. A repo that closes forty of those a day does not clear forty cards of its
+queue. `climate.finish_rates` now counts only cards that waited more than `SERVICE_FLOOR_DAYS` (one
+day, the shortest horizon). The same two issues, regenerated:
+
+| Floor on the wait counted | +1d Brier | Skill over climatology |
+|---|---|---|
+| none (trial 1) | 0.036 | -0.51 |
+| 1 hour | 0.031 | -0.32 |
+| 6 hours | 0.026 | -0.09 |
+| one day (kept) | 0.0245 | -0.02 |
+
+(The regenerated trial 1 scores 0.036 here against 0.058 above because this run measured the rate
+over the days since 2026-10-12, not since the first event seen; the order of the rows is the same.)
+Skill rose from -1.45 to -0.02: the forecast now scores the same as saying the base rate for every
+card. That is in-sample, on 538 cards and two issues, and the floor was chosen on them. The test
+that matters is the issue of 2026-10-22, which matures on 2026-10-23: it was issued before either
+trial, so it is regenerated with both and scored out of sample. Until then the forecast is known to
+be no worse than climatology, and not yet known to be better.
