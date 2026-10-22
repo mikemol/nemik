@@ -54,6 +54,7 @@ from nemik.check import survey as checked_survey
 from nemik.critical import critical_doc
 from nemik.exportwire import exports_key, withheld_by_exports
 from nemik.floorasks import floor_asks, unresolved
+from nemik.history import oldest_rows
 from nemik.hostroot import HostRow, read_document, stale
 from nemik.landings import read_document as read_landings
 from nemik.landings import series as landing_series
@@ -204,8 +205,12 @@ def hostroot_board(path: Path | None, now: str) -> dict[str, object]:
 
 # the documents one Model.doc_for answers, by route: the boards the host writes files for
 # (nemik:W780, W751) and the longest chain, whose answer nemik-critical --json shares (nemik:W786)
+# nemik:W853: how many of the oldest open cards /oldest.json lists.
+OLDEST_SHOWN = 25
+
 DOC_ROUTES = [
     "/hostroot.json",
+    "/oldest.json",
     "/landings.json",
     "/critical.json",
     "/starved.json",
@@ -493,6 +498,20 @@ class Model:
             ],
         }
 
+    def oldest_json(self) -> dict[str, object]:
+        """List the oldest open cards, as nemik-history --oldest prints them (nemik:W853).
+
+        The same oldest_rows the command calls, over the queue files under the export root. It
+        reads files and spawns nothing.
+
+        Returns:
+            {"oldest": the rows}: cite, age_days, status, flag, blocked_on, title, path, offline and
+            reach for each of the OLDEST_SHOWN oldest open cards, oldest first.
+
+        """
+        files = dict(workstream_files(self.root, QUEUE))
+        return {"oldest": oldest_rows(files, self.root, OLDEST_SHOWN)}
+
     def doc_for(self, route: str) -> dict[str, object]:
         """Build the document a route in DOC_ROUTES answers.
 
@@ -502,6 +521,7 @@ class Model:
         """
         docs: dict[str, Callable[[], dict[str, object]]] = {
             "/hostroot.json": self.hostroot_doc,
+            "/oldest.json": self.oldest_json,
             "/landings.json": self.landings_doc,
             "/critical.json": self.critical_json,
             "/starved.json": self.starved_json,

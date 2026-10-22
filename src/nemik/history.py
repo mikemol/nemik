@@ -1270,6 +1270,31 @@ def oldest_cards(
     return [rows[cite] for _, cite in order[:limit]]
 
 
+def oldest_rows(files: dict[str, Path], root: Path, limit: int) -> list[dict[str, str]]:
+    """Read the queues and list the oldest open cards with their paths (nemik:W853).
+
+    The one function the CLI's --oldest and the server's /oldest.json both call. It reads files
+    and spawns nothing.
+
+    Args:
+        files: Each repo's name and its queue file's path; an unreadable one is left out.
+        root: The fleet root, where the liveness record is read.
+        limit: How many cards to list.
+
+    Returns:
+        Up to `limit` rows: cite, age_days, status, flag, blocked_on, title, path, offline, reach.
+
+    """
+    docs: dict[str, object] = {}
+    for name, path in files.items():
+        try:
+            docs[name] = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+    rows = oldest_cards(docs, datetime.now(UTC), limit)
+    return with_paths(rows, docs, live_repos(root))
+
+
 def _oldest(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> int:
     """Print the N oldest open cards of the named repos, one a line (nemik:W769).
 
@@ -1277,16 +1302,9 @@ def _oldest(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -
         0.
 
     """
-    docs: dict[str, object] = {}
-    for name in names:
-        try:
-            docs[name] = json.loads(
-                (dirs[name] / QUEUE_PATH).read_text(encoding="utf-8")
-            )
-        except (OSError, ValueError):
-            continue
-    rows = oldest_cards(docs, datetime.now(UTC), args.oldest)
-    rows = with_paths(rows, docs, live_repos(args.root))
+    rows = oldest_rows(
+        {name: dirs[name] / QUEUE_PATH for name in names}, args.root, args.oldest
+    )
     if args.json:
         sys.stdout.write(json.dumps(rows, indent=1) + "\n")
         return 0

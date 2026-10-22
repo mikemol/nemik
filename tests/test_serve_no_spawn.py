@@ -40,6 +40,7 @@ ROUTES = [
     "/starved.json",
     "/overlaps.json",
     "/pacing.json",
+    "/oldest.json",
     "/floor-asks.json",
     "/check.json",
     "/check/ready-neither.json",

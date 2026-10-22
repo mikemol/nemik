@@ -175,6 +175,8 @@ def hub_modules_depend_on_everything_below():
     # nemik:W751: and serves the commit landings nemik-hostroot --landings writes, through
     # landings, a leaf that rests on hostroot's flat-JSON reader alone.
     # nemik:W786: and answers /critical.json with critical_doc, as nemik-critical --json does.
+    # nemik:W853: and answers /oldest.json with history.oldest_rows, the function nemik-history
+    # --oldest calls (it reads queue files and a liveness record and starts no process).
     expected = {
         "metrics": lower | {"realize", "runlogs", "workrows"},
         "serve": lower
@@ -191,6 +193,7 @@ def hub_modules_depend_on_everything_below():
             "overlaps",
             "pacing",
             "floorasks",
+            "history",
         },
     }
     for hub, want in expected.items():
