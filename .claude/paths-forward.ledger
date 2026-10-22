@@ -1442,3 +1442,9 @@
 2026-10-22T05:40:07Z  tick  W834 advanced  sweep     "W834 gate in flight (stack309); W833 stackable waits on the parity and serve files it shares [blocked by W833]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-22T05:40:52Z  status W834 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-22T06:03:12Z  status W833 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T06:10:41Z  tick  W833 advanced  sweep     "W833 gate in flight (stack310); with it every W786 command is decided [blocked by W785]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T06:16:34Z  interrupt W835 minted    -         "digest --since delta keys on the whole line, so a count or age that moves reprints the line every turn: key on the message shape (digits normalized) and print a moved number once and compactly"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=mtools-ad:W1798
+2026-10-22T06:24:06Z  status W786 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T06:24:06Z  status W833 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T06:24:15Z  status W786 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T06:27:02Z  status W835 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
