@@ -1552,3 +1552,10 @@
 2026-10-22T19:35:36Z  status W856 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-22T19:35:36Z  status W857 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-22T19:35:36Z  status W858 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T19:35:56Z  interrupt W859 minted    -         "A history document store: a host-side writer for a named document and a freshness-checked reader the server routes use"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W785
+2026-10-22T19:36:35Z  status W854 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T19:36:35Z  status W855 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T19:36:35Z  status W856 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T19:36:35Z  status W857 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T19:36:35Z  status W858 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T19:36:48Z  status W859 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

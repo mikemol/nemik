@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 858,
+  "counter": 859,
   "waypoints": [
     {
       "symbol": "W1",
@@ -18975,13 +18975,15 @@
     {
       "symbol": "W854",
       "title": "A host-side publisher and a freshness-checked route for the history waits mode",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W785"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W859"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-22T18:34:26Z",
@@ -19000,13 +19002,15 @@
     {
       "symbol": "W855",
       "title": "A host-side publisher and a freshness-checked route for the history forecast mode",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W785"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W859"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-22T18:34:26Z",
@@ -19025,13 +19029,15 @@
     {
       "symbol": "W856",
       "title": "A host-side publisher and a freshness-checked route for the history score mode",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W785"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W859"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-22T18:34:26Z",
@@ -19050,13 +19056,15 @@
     {
       "symbol": "W857",
       "title": "A host-side publisher and a freshness-checked route for the history events mode",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W785"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W859"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-22T18:34:26Z",
@@ -19075,13 +19083,15 @@
     {
       "symbol": "W858",
       "title": "A host-side publisher and a freshness-checked route for the history density mode",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W785"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W859"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-22T18:34:26Z",
@@ -19096,6 +19106,39 @@
         "tests/test_serve_history_density.py"
       ],
       "size_class": "small"
+    },
+    {
+      "symbol": "W859",
+      "title": "A history document store: a host-side writer for a named document and a freshness-checked reader the server routes use",
+      "status": "working",
+      "enables": [
+        "W854",
+        "W855",
+        "W856",
+        "W857",
+        "W858"
+      ],
+      "touches": [
+        "file:src/nemik/histdocs.py!w",
+        "file:tests/test_histdocs.py!w",
+        "file:codon-baseline.json!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Submit the prepared stack: the pure document functions, their tests and the census entry",
+      "evidence": "2026-10-22: 2026-10-22: all five remaining history modes (waits, forecast, score, events, density) read git history (events_of, commit_snapshots, git log), so the server cannot compute them (W783); W853 oldest reads only files and was served directly. They share a published-document store modelled on hostroot (W779): a host writer and a freshness-checked reader. A new module imported by nothing yet, so no live reader breaks",
+      "issued_at": "2026-10-22T19:35:56Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W785",
+      "last_worked": "2026-10-22T19:47:43Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/histdocs.py",
+        "tests/test_histdocs.py",
+        "codon-baseline.json"
+      ],
+      "size_class": "medium"
     }
   ],
   "residue": [
@@ -19209,7 +19252,26 @@
   "heartbeat": "2026-10-22T02:06:35Z",
   "lock": null,
   "predecessor_job_id": "disarmed",
-  "leases": [],
+  "leases": [
+    {
+      "tag": "file:src/nemik/histdocs.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W859",
+      "base_sha": "b808cb7a22938d5f00d05d2d5f9a8a0dfffbfb40",
+      "taken_at": "2026-10-22T19:36:48Z",
+      "renewed_at": "2026-10-22T19:36:48Z",
+      "expires_at": "2026-10-22T20:06:48Z"
+    },
+    {
+      "tag": "file:tests/test_histdocs.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W859",
+      "base_sha": "b808cb7a22938d5f00d05d2d5f9a8a0dfffbfb40",
+      "taken_at": "2026-10-22T19:36:48Z",
+      "renewed_at": "2026-10-22T19:36:48Z",
+      "expires_at": "2026-10-22T20:06:48Z"
+    }
+  ],
   "advice": [
     {
       "tool": "block-behind-open",
