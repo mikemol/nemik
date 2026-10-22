@@ -45,6 +45,14 @@ dependency: `nemik.converge` imports it (W777), and luthen's root-run code vendo
 0f8267e while the other seven are at 4720efa, because `mikemol-repin --revendor` does not list this dist
 yet; the next repin that does moves all eight together.
 
+`mikemol_webpage-0.1.0+<sha>-py3-none-any.whl` (nemik:W717, W847) is mtools' webpage dist
+(`git archive <sha> -- webpage`, `uv build --wheel`, the local version segment set to `+<sha>` in the
+archive's pyproject): `mikemol.webpage`, the browser-test waits that end on the page's own event
+(watch, until, until_expecting, load) and the `mikemol-webpage-waits` codemod (mtools:W1684/W1685,
+probes mtools:W1820, core limit mtools:W1821). Stdlib only; a dev dependency. It is at 146ebaaf
+while the others are at d1d4ec7 or 0f8267e, because it was the first webpage pin and was taken by
+hand (`mikemol-repin --revendor` does not add a dist); the next repin that lists it moves all together.
+
 ## Hashes
 
 `SHA256SUMS` beside the wheels, written by `mikemol-repin --revendor` on every bump (it replaced the hand script tools/revendor-mtools.sh, mtools:W1449; nemik:W417:

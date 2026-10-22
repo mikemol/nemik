@@ -405,6 +405,14 @@ wheels = [
 ]
 
 [[package]]
+name = "mikemol-webpage"
+version = "0.1.0+146ebaaf"
+source = { path = "vendor/wheels/mikemol_webpage-0.1.0+146ebaaf-py3-none-any.whl" }
+wheels = [
+    { filename = "mikemol_webpage-0.1.0+146ebaaf-py3-none-any.whl", hash = "sha256:c135015aaeb95019d8ec48bacc21eae7e6b7cb5476045895a534c45086592510" },
+]
+
+[[package]]
 name = "mypy"
 version = "2.4.0"
 source = { registry = "https://pypi.org/simple" }
@@ -487,6 +495,7 @@ docs = [
 dev = [
     { name = "jsonschema" },
     { name = "mikemol-cvdcore" },
+    { name = "mikemol-webpage" },
     { name = "playwright" },
     { name = "pytest" },
     { name = "pyyaml" },
@@ -514,6 +523,7 @@ provides-extras = ["docs"]
 dev = [
     { name = "jsonschema", specifier = ">=4.23" },
     { name = "mikemol-cvdcore", path = "vendor/wheels/mikemol_cvdcore-0.1.0+d1d4ec7-py3-none-any.whl" },
+    { name = "mikemol-webpage", path = "vendor/wheels/mikemol_webpage-0.1.0+146ebaaf-py3-none-any.whl" },
     { name = "playwright", specifier = ">=1.63.0" },
     { name = "pytest", specifier = ">=9.1.1" },
     { name = "pyyaml", specifier = ">=6.0" },
