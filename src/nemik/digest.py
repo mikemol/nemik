@@ -39,12 +39,49 @@ def _keyed(lines: list[str]) -> list[Keyed]:
     return out
 
 
+def _scan(line: str) -> tuple[str, list[str]]:
+    """Split a line into its shape and the numbers in it (nemik:W835).
+
+    The shape is the line with each run of digits replaced by one marker, except the digits of a
+    waypoint symbol (W12): a card is a different finding from another card with the same words. The
+    numbers are the runs replaced, in order.
+
+    Returns:
+        (shape, numbers).
+
+    """
+    shape = ""
+    numbers: list[str] = []
+    run = ""
+    symbol = False
+    prev = ""
+    for ch in line + " ":
+        if ch.isdigit():
+            if not run:
+                symbol = prev == "W"
+            run += ch
+        else:
+            if run:
+                if symbol:
+                    shape += run
+                else:
+                    shape += "#"
+                    numbers.append(run)
+                run = ""
+            shape += ch
+        prev = ch
+    return shape[:-1], numbers
+
+
 def delta(lines: list[str], seen: list[str]) -> list[str]:
     """Keep only what changed since a digest a reader already saw (nemik:W766).
 
-    A finding that is in `seen` under the same header is left out. A header is printed when it is
-    new or when one of its findings is, so a shown finding keeps the repo it belongs to. The last
-    line counts what was left out, and the full digest is the same command without --since.
+    A finding that is in `seen` under the same header is left out. A finding whose shape is in
+    `seen` but whose numbers moved (a count, an age, a tick count) is left out too when it is Info,
+    and counted; a Warning or Violation prints with the numbers it had (nemik:W835), since a count
+    that moves there may be news. A header is printed when it is new or when one of its findings is,
+    so a shown finding keeps the repo it belongs to. The last line counts what was left out, and the
+    full digest is the same command without --since.
 
     Args:
         lines: The digest as printed now.
@@ -55,20 +92,31 @@ def delta(lines: list[str], seen: list[str]) -> list[str]:
 
     """
     before = set(_keyed(seen))
+    shapes = {(head, _scan(line)[0]): line for head, line in _keyed(seen) if line}
     shown: list[str] = []
     printed = ""
     left = 0
+    moved = 0
     for key in _keyed(lines):
         head, line = key
         if key in before:
             left += 1
             continue
+        old = shapes.get((head, _scan(line)[0])) if line else None
+        if old is not None and line.split()[0] == INFO:
+            moved += 1
+            continue
         if line and printed != head:
             shown.append(head)
             printed = head
-        shown.append(line or head)
+        if old is not None:
+            shown.append(f"{line}  (was {', '.join(_scan(old)[1])})")
+        else:
+            shown.append(line or head)
         if not line:
             printed = head
+    if moved:
+        shown.append(f"{moved} Info lines only changed their numbers, not shown")
     note = "unchanged lines not shown (nemik-check --digest without --since)"
     shown.append(f"{left} {note}")
     return shown
