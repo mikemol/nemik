@@ -1421,3 +1421,16 @@
 2026-10-21T13:55:12Z  tick  W786 advanced  sweep     "6396b6c pacing route; four of eight W786 commands routed [blocked by W829]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-21T14:07:47Z  tick  W786 disarmed  operator  "loop disengaged on the operator's order (host session 695f3e0a line 89275, human origin, relayed by github-8f): cron deleted, watchdog stopped, nothing queued; last landed 6396b6c W786 pacing route"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-22T02:10:53Z  status W749 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T02:10:59Z  tick  W749 advanced  sweep     "first forecast score: +1d brier 0.244 vs 0.024 for persistence, skill -9; the 0.99 and 0.30 bins fail; third shingle issued [blocked by W829]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T02:41:14Z  tick  W831 minted    -         "Forecast trial 1: a card's place in its repo's ready queue (rank among the ready cards) scales its chance of finishing within the lead, scored against the first shingle"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W749
+2026-10-22T02:41:14Z  tick  W832 minted    -         "Forecast trial 2: cap a repo's chance by how many cards it finishes a day against how many ready cards stand ahead of this one"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W749
+2026-10-22T02:41:33Z  status W832 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T02:41:35Z  status W831 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T02:41:39Z  tick  W749 advanced  collapse  "atomized W749 after tracing the failing forecast bins: the 0.99 bin is old cards of busy repos (mtools, luthen), so a place-in-queue feature is trial 1 (W831), a throughput cap trial 2 (W832) [blocked by W831]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T03:15:23Z  tick  W831 advanced  sweep     "W831 gate in flight (stack306); nothing else queued behind it [blocked by W832]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T03:29:53Z  status W831 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T03:29:53Z  status W832 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T03:40:06Z  status W832 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T03:59:48Z  status W749 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T03:59:48Z  status W832 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T03:59:55Z  tick  W832 advanced  sweep     "7a143de service rate counts only cards that stood in line: +1d Brier 0.0245 vs climatology 0.024 (in-sample); out-of-sample check on the 2026-10-22 issue after 2026-10-23 02:10Z [blocked by W749]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
