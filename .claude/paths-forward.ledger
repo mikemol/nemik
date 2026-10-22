@@ -1475,3 +1475,8 @@
 2026-10-22T09:44:15Z  interrupt W842 minted    -         "Landed is not done anywhere nemik reads state: allBlockersLanded keeps a waiter on a landed card blocked, and the view draws landed with a mark of its own"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W839
 2026-10-22T10:01:47Z  interrupt W843 minted    -         "Repin the seven vendored mtools wheels to d5d8110, whose writer takes the status landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W702
 2026-10-22T10:01:54Z  status W843 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T10:24:01Z  status W843 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T10:39:22Z  prune W717 edge-pruned writer    "mtools:W1686"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T10:39:22Z  status W717 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T10:40:55Z  status W717 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T10:44:24Z  status W841 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
