@@ -3,28 +3,28 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 845 · heartbeat 2026-10-22T02:06:35Z · job `1d7fe6d0` · hash `v2:3739b91af636c49f`
+counter 845 · heartbeat 2026-10-22T02:06:35Z · job `1d7fe6d0` · hash `v2:89041565d8e655a1`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W533 | ready |
-| 2 | W547 | ready |
-| 3 | W703 | ready |
-| 4 | W369 | ready |
-| 5 | W370 | ready |
-| 6 | W643 | ready |
-| 7 | W709 | ready |
-| 8 | W713 | ready |
-| 9 | W714 | ready |
-| 10 | W785 | ready |
-| 11 | W787 | ready |
-| 12 | W789 | ready |
-| 13 | W797 | ready |
-| 14 | W829 | ready |
-| 15 | W836 | ready |
-| 16 | W749 | ready |
-| 17 | W750 | ready |
-| 18 | W845 | ready |
+| 1 | W845 | working |
+| 2 | W533 | ready |
+| 3 | W547 | ready |
+| 4 | W703 | ready |
+| 5 | W369 | ready |
+| 6 | W370 | ready |
+| 7 | W643 | ready |
+| 8 | W709 | ready |
+| 9 | W713 | ready |
+| 10 | W714 | ready |
+| 11 | W785 | ready |
+| 12 | W787 | ready |
+| 13 | W789 | ready |
+| 14 | W797 | ready |
+| 15 | W829 | ready |
+| 16 | W836 | ready |
+| 17 | W749 | ready |
+| 18 | W750 | ready |
 | 19 | W611 | ready |
 | 20 | W642 | ready |
 | 21 | W696 | ready |
@@ -841,65 +841,70 @@ counter 845 · heartbeat 2026-10-22T02:06:35Z · job `1d7fe6d0` · hash `v2:3739
 
 ## waypoints
 
-1. **W533** (ready) Extract one converge library from pod_reaper.converge: one pass path, halt repeat detection, a
+1. **W845** (working) Draw the landed status in the view with a mark and a colour of its own: a state mark, a legend
+   entry and a theme token that clears the contrast and second-channel checks
+   - next: Give landed one glyph used in this role only, a theme token in both themes that clears the contrast check, a
+     legend entry and a state mark; the browser tests for second channel and contrast must stay green; the size test's
+     ceilings follow
+2. **W533** (ready) Extract one converge library from pod_reaper.converge: one pass path, halt repeat detection, a
    trigger field on every run row
    - next: Tell luthen-observability the library exists (nemik.converge.converge(world, policy, trigger)); define the
      chronic epoch nudge with luthen; make the recorded rows follow the W556 run-row schema field for field
-2. **W547** (ready) Delivery record and edge walk for a done or dropped card: one inbox letter per cross-repo edge,
+3. **W547** (ready) Delivery record and edge walk for a done or dropped card: one inbox letter per cross-repo edge,
    delivered once
    - next: Part 1 landed 406e3bd (workrows.edges_of, the pure cross-repo edge walk over queue text). Next: the delivery
      record (a nemik-owned file keyed repo:W`<n>` -> edge, so a rerun on a later day writes no second letter and a
      deleted letter is not sent again), the letter writer, and wake() using this walk instead of blocked_on alone
-3. **W703** (ready) The image build consumes the commit gate result for the same tree sha, or drops its test stage and
+4. **W703** (ready) The image build consumes the commit gate result for the same tree sha, or drops its test stage and
    builds only gated shas
    - next: Waits on mtools:W1666; until then every push is a deploy that cannot finish. Options to put to the operator
      if W1666 is far: push in bursts, or an image stage that does not rerun the suite
-4. **W369** (ready) Outbound connectors: mirror cards to Jira, GitHub/Forgejo issues and Project Online via their APIs
+5. **W369** (ready) Outbound connectors: mirror cards to Jira, GitHub/Forgejo issues and Project Online via their APIs
    - next: Part 1 landed 3736e58 (nemik.mirror.plan). Next: print the plan from nemik-export --format issues --against
      FILE (the tracker's issues as JSON); then the API client per tool, each tool's scoped token is operator: act
-5. **W370** (ready) Inbound connectors: webhooks or polls from other tools become letters or printed commands
+6. **W370** (ready) Inbound connectors: webhooks or polls from other tools become letters or printed commands
    - next: Part 1 landed e4eb31c (nemik.events.lines, payloads written to the documented shapes). Next: recorded
      payloads from a real Forgejo and GitHub as fixtures, then the delivery (webhook or poll) which needs each tool's
      token (operator: act)
-6. **W643** (ready) Stackable set by input-graph cones: cards conflict when manifest dependency cones intersect, and
+7. **W643** (ready) Stackable set by input-graph cones: cards conflict when manifest dependency cones intersect, and
    chain when one edits the other's cone
    - next: Repin to 4704f43 or later, then a nemik tool calls mikemol.hooks.footprint over a test run to write
      reads.json; then wire cones into stackable.pick. Needs a repin first; ask mtools-ad for a CLI if the library call
      is awkward
-7. **W709** (ready) The graph payload and page draw a collapse umbrella node over the blocked cards it rolls up, with
+8. **W709** (ready) The graph payload and page draw a collapse umbrella node over the blocked cards it rolls up, with
    its n-path address
    - next: Needs bazel build //:.venv to have linked nemik.collapse (no gate running). Then blocks.py adds the umbrella
      nodes from collapse.collapse to the payload, the page draws one mark per umbrella (one mark per state rule; WCAG
      2.5.3 name), tests/test_collapse_payload.py pins the payload
-8. **W713** (ready) Port the rank successor walk and class weights to plain Card edges, keeping the rdflib version as
+9. **W713** (ready) Port the rank successor walk and class weights to plain Card edges, keeping the rdflib version as
    the test reference
    - next: Part 1 landed c212ebe. Part 2: the class weights loader (rank.load_weights) and the salience step over Card
      edges in cardrank.py, tests running them against rank and salience on the fixture fleet
-9. **W714** (ready) Port the blocks.annotate derivations (operator asks, ready-behind-open, cycles) to functions of Card
-   edges that return flags, keeping annotate as the reference
+10. **W714** (ready) Port the blocks.annotate derivations (operator asks, ready-behind-open, cycles) to functions of
+   Card edges that return flags, keeping annotate as the reference
    - next: Parts 1-3 landed (e8fcada, c1e5206, c2053cd). Remaining flags: operator asks (operator_asks, categories and
      errand repos, a large function) and unclaimed blocks (inbound with claims_of); port each as its own part with a
      test against blocks on a fixture
-10. **W785** (ready) Routes for history: oldest, waits, forecast, score, events, density
+11. **W785** (ready) Routes for history: oldest, waits, forecast, score, events, density
    - next: Inventory which history modes have a document today (static_data's history.json) and which do not; for each
      missing mode add the host-side publisher beside nemik-hostroot (same function the CLI calls, written to the cache
      dir) and the /history/`<mode>`.json route that reads it with a freshness check; waits, oldest, forecast, score,
      events and density each in turn
-11. **W787** (ready) The view shows the CLI's Warnings and Info
-12. **W789** (ready) The page draws /hostroot.json rows as read-only resource nodes: state to node state, waitsFor to
+12. **W787** (ready) The view shows the CLI's Warnings and Info
+13. **W789** (ready) The page draws /hostroot.json rows as read-only resource nodes: state to node state, waitsFor to
    edges, stale rows marked, no rank weight
    - next: Fetch the host-root board in the served page only (not the static build); draw each row as a node of a
      read-only 'host' lane using adapter.resource_uri for its id, state done/ready/blocked into the existing node
      states, waitsFor into edges, a stale row dimmed with its as_of in the detail line; no rank weight. Browser test as
      the layout tests do
-13. **W797** (ready) realizability, committed, letters, fold and nemik-collapse are served the same way, or excluded by
+14. **W797** (ready) realizability, committed, letters, fold and nemik-collapse are served the same way, or excluded by
    a stated reason
-14. **W829** (ready) W812 next slice: strings across the wasm ABI, then repoHue/luminance/esc ported to core and called
+15. **W829** (ready) W812 next slice: strings across the wasm ABI, then repoHue/luminance/esc ported to core and called
    through core.wasm
    - next: luminance landed bb9ba08 (esc stays JS: string out). Next: the small text builders (findings, weather,
      linked, lane) once a string-out ABI is justified by a CLI user; otherwise close W829 and take combine (needs the
      documents' schema)
-15. **W836** (ready) Publish each cross-repo wait edge's age and its blocker's rank position as OTLP gauges through
+16. **W836** (ready) Publish each cross-repo wait edge's age and its blocker's rank position as OTLP gauges through
    mikemol-otlp (repo and rule labels only, card symbols in log records), so luthen's flow dashboard has its series
    - next: Slice 2: wait_rows(g) turning the graph's cross-repo wait edges and each waiting card's ticksBlocked into
      waitseries rows. It cannot go in the blocks module (any added Any expression raises that module's mypy baseline,
@@ -907,22 +912,17 @@ counter 845 · heartbeat 2026-10-22T02:06:35Z · job `1d7fe6d0` · hash `v2:3739
      (Graph.triples, Graph.value) and add its Codon census baseline entry, since a new rdflib module fails the census.
      Slice 3: the blocker's rank position, then the emit through mikemol-otlp from a host-side mode beside
      nemik-hostroot; cite the sha to luthen when emitted
-16. **W749** (ready) Improve the forecast: add one feature at a time, keep it only if verified skill over climatology
+17. **W749** (ready) Improve the forecast: add one feature at a time, keep it only if verified skill over climatology
    rises
    - next: Trials 1 and 2 landed (e4291d8, 7a143de): +1d Brier 0.244 to 0.0245, skill -9.3 to -0.02 in-sample. Next: on
      2026-10-23 after 02:10Z regenerate the 2026-10-22 issue with the new model, score it out of sample against the old
      model with the shingle scorer, record both in the forecast-features doc; then try one more feature (gate duration,
      blocker depth) only if the out-of-sample skill is not yet above zero
-17. **W750** (ready) Improve the climate: date each practice change as an intervention and measure the shift in a before
+18. **W750** (ready) Improve the climate: date each practice change as an intervention and measure the shift in a before
    and after window
    - next: Find where an intervention event is read back (ask mtools-ad: the station name and the store), then date the
      day's practice changes (atomize W799/W812/W817/W816/W781, stack, repin W772/W536/W794/W825) as interventions and
      write the before and after windows in docs/climate-interventions.md
-18. **W845** (ready) Draw the landed status in the view with a mark and a colour of its own: a state mark, a legend
-   entry and a theme token that clears the contrast and second-channel checks
-   - next: Give landed one glyph used in this role only, a theme token in both themes that clears the contrast check, a
-     legend entry and a state mark; the browser tests for second channel and contrast must stay green; the size test's
-     ceilings follow
 19. **W611** (ready) Manifest drift: compare each landed commit's actual diff paths to its card's manifest and alert on
    the difference (misprediction feedback)
    - next: Part 3 landed d63d8b2 (nemik_manifest_drift gauge, shared drifted finding in stackable_cli). Remaining: feed
