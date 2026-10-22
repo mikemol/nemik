@@ -32,6 +32,10 @@ ROUTED = [
     ("nemik-overlaps", "/overlaps.json", "overlaps"),
     ("nemik-pacing", "/pacing.json", "paces"),
     ("nemik-floor-asks", "/floor-asks.json", "unresolved"),
+    # nemik:W785: --oldest reads only files and is served directly; the five modes that read git
+    # are published by the host (nemik-history --publish) and served from /history/<mode>.json.
+    ("nemik-history", "/history/", "history_response"),
+    ("nemik-history --oldest", "/oldest.json", "oldest_rows"),
 ]
 
 PENDING = [
@@ -40,7 +44,6 @@ PENDING = [
     ("nemik-check --letters", "W793"),
     ("nemik-check --fold", "W793"),
     ("nemik-collapse", "W793"),
-    ("nemik-history", "W785"),
 ]
 
 EXCLUDED = [
