@@ -283,15 +283,34 @@ def open_witnesses(root: Path) -> list[tuple[str, Path, str, str, str]]:
     return out
 
 
-def waiters(root: Path, repo: str, sym: str) -> dict[str, list[str]]:
-    """{repo: [W<n>, ...]} for every open waypoint blocked on repo:sym (or on sym within repo)."""
+def queue_texts(root: Path) -> dict[str, str]:
+    """Read every workstream's queue under a fleet root (nemik:W851).
+
+    Args:
+        root: The fleet root, holding each repo's directory.
+
+    Returns:
+        {repo: the text of its paths-forward.json}; an unreadable queue is left out.
+
+    """
     from nemik.check import QUEUE, workstream_files
 
-    out: dict[str, list[str]] = {}
+    out: dict[str, str] = {}
     for other, path in workstream_files(root, QUEUE):
         try:
-            data = json.loads(path.read_text(encoding="utf-8"))
-        except (OSError, ValueError):
+            out[other] = path.read_text(encoding="utf-8")
+        except OSError:
+            continue
+    return out
+
+
+def waiters(root: Path, repo: str, sym: str) -> dict[str, list[str]]:
+    """{repo: [W<n>, ...]} for every open waypoint blocked on repo:sym (or on sym within repo)."""
+    out: dict[str, list[str]] = {}
+    for other, text in queue_texts(root).items():
+        try:
+            data = json.loads(text)
+        except ValueError:
             continue
         for w in data.get("waypoints", []):
             on = w.get("blocked_on") or []
@@ -303,28 +322,29 @@ def waiters(root: Path, repo: str, sym: str) -> dict[str, list[str]]:
 
 
 def wake(root: Path, repo: str, sym: str, query: str, now: str) -> list[Path]:
-    """nemik:W61: a letter in each waiting repo's inbox (the nemik:W4 channel). A letter reaches a
-    dormant repo at no token cost until someone wakes it. A live loop reads it on its next tick,
-    where --prune-landed (local) or the named foreign blocker shows the work is now free."""
-    written = []
-    for other, syms in sorted(waiters(root, repo, sym).items()):
-        inbox = root / other / "inbox"
-        if not inbox.is_dir():
-            continue
+    """nemik:W61, W851: a letter in each waiting repo's inbox (the nemik:W4 channel). A letter
+    reaches a dormant repo at no token cost until someone wakes it. A live loop reads it on its
+    next tick, where --prune-landed (local) or the named foreign blocker shows the work is now free.
+
+    Within the card's own repo the waiting cards get one letter that carries the witness query.
+    Across repos every edge of the card (blocked_on, caused_by, enables; workrows.edges_of) gets
+    its own letter through the delivery record (deliver, W850), so a rerun, or a letter its reader
+    deleted, sends nothing again. Waiters were the only edge kind this once saw.
+    """
+    written: list[Path] = []
+    syms = waiters(root, repo, sym).get(repo, [])
+    inbox = root / repo / "inbox"
+    if syms and inbox.is_dir():
         letter = inbox / f"{now[:10]}-nemik-witness-{repo}-{sym}.md"
-        cite = sym if other == repo else f"{repo}:{sym}"
         letter.write_text(
-            f"# nemik → {other}: {repo}:{sym} is done (its witness held)\n\n"
+            f"# nemik → {repo}: {repo}:{sym} is done (its witness held)\n\n"
             f"`nemik-witnesses --apply` observed at {now}:\n\n    {query}\n\n"
-            f"Waiting on it here: {', '.join(syms)}. Each is blocked on `{cite}`, which is now done.\n"
-            + (
-                "`mikemol-paths-forward --prune-landed --root <fleet root>` prunes it.\n"
-                if other == repo
-                else "Lift the block: `mikemol-paths-forward --state .claude/paths-forward.json --update <W> ...`.\n"
-            ),
+            f"Waiting on it here: {', '.join(syms)}. Each is blocked on `{sym}`, which is now done.\n"
+            "`mikemol-paths-forward --prune-landed --root <fleet root>` prunes it.\n",
             encoding="utf-8",
         )
         written.append(letter)
+    written += deliver(root, queue_texts(root), (repo, sym), "done", now[:10])
     return written
 
 
