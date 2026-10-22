@@ -18948,23 +18948,25 @@
       "touches": [
         "file:src/nemik/serve.py!w",
         "file:src/nemik/history.py!w",
+        "file:checks/claims.py!w",
         "file:tests/test_serve_history_oldest.py!w",
         "file:tests/test_serve_no_spawn.py!w",
         "file:mypy-baseline.json!w"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Submit the prepared stack: oldest_rows shared by the command and the /oldest.json route",
+      "next_bounded_step": "Wait for the submitted stack to land, then mark this done so the five sibling modes can follow its pattern",
       "evidence": "",
       "issued_at": "2026-10-22T18:34:26Z",
       "minted_during": "interrupt",
       "caused_by": "W785",
-      "last_worked": "2026-10-22T18:47:35Z",
+      "last_worked": "2026-10-22T18:54:02Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "src/nemik/serve.py",
         "src/nemik/history.py",
+        "checks/claims.py",
         "tests/test_serve_history_oldest.py",
         "tests/test_serve_no_spawn.py",
         "mypy-baseline.json"
