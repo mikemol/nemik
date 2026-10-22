@@ -18982,22 +18982,26 @@
       "touches": [
         "file:src/nemik/serve.py!w",
         "file:src/nemik/history.py!w",
-        "file:tests/test_serve_history_waits.py!w"
+        "file:checks/claims.py!w",
+        "file:tests/test_serve_history_waits.py!w",
+        "file:mypy-baseline.json!w"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Add the shared pieces with the waits mode: a --history-dir server flag, the /history/<mode>.json route that reads the file and wraps it through histdocs, and a nemik-history --publish DIR that writes the mode's output through histdocs.encode; then W855 to W858 only add their mode's publisher call",
+      "next_bounded_step": "Run the serve tests against the rebuilt venv, then submit the prepared stack",
       "evidence": "",
       "issued_at": "2026-10-22T18:34:26Z",
       "minted_during": "interrupt",
       "caused_by": "W785",
-      "last_worked": "2026-10-22T20:15:11Z",
+      "last_worked": "2026-10-22T20:30:00Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "src/nemik/serve.py",
         "src/nemik/history.py",
-        "tests/test_serve_history_waits.py"
+        "checks/claims.py",
+        "tests/test_serve_history_waits.py",
+        "mypy-baseline.json"
       ],
       "size_class": "small"
     },
