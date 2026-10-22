@@ -1414,3 +1414,10 @@
 2026-10-21T13:06:14Z  status W799 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-21T13:06:15Z  tick  W811 advanced  sweep     "3e0fe0a constants, marks, esc and paint to graph.js; with 9421b13 render.js, c504fbe, 83d1aaa the page split is done: index.html 1879 to 277 lines; W803 and W799 closed [blocked by W786]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-21T13:14:41Z  status W786 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T13:37:52Z  status W786 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T13:37:54Z  tick  W786 advanced  sweep     "688e08b overlaps route, doc_for a table; 07a4dae queue state committed [blocked by W829]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T13:44:37Z  status W786 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T13:55:11Z  status W786 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T13:55:12Z  tick  W786 advanced  sweep     "6396b6c pacing route; four of eight W786 commands routed [blocked by W829]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-21T14:07:47Z  tick  W786 disarmed  operator  "loop disengaged on the operator's order (host session 695f3e0a line 89275, human origin, relayed by github-8f): cron deleted, watchdog stopped, nothing queued; last landed 6396b6c W786 pacing route"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T02:10:53Z  status W749 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

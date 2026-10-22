@@ -3,7 +3,7 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 830 · heartbeat 2026-10-17T17:47:00Z · job `753002c6` · hash `v2:02888d6e14e7fb4f`
+counter 830 · heartbeat 2026-10-17T17:47:00Z · job `753002c6` · hash `v2:22e73507b194bf87`
 
 | # | symbol | status |
 |---|---|---|
@@ -840,8 +840,9 @@ counter 830 · heartbeat 2026-10-17T17:47:00Z · job `753002c6` · hash `v2:0288
    - next: Waits on mtools:W1666; until then every push is a deploy that cannot finish. Options to put to the operator
      if W1666 is far: push in bursts, or an image stage that does not rerun the suite
 4. **W786** (ready) Routes for rank, inbound, operator, wake, overlaps, floor-asks and witnesses without apply
-   - next: nemik-critical (5534f43) and nemik-starved (d3f5adc) landed. Next: pins, pacing, stackable, floor-asks,
-     overlaps and witnesses, one per slice through Model.doc_for, each moved from PENDING to ROUTED in the parity table
+   - next: critical, starved, overlaps and pacing routed (5534f43, d3f5adc, 688e08b, 6396b6c). Next: pins, stackable,
+     floor-asks and witnesses, one per slice: add the builder to doc_for's table and the route to DOC_ROUTES, move the
+     row in the parity table
 5. **W369** (ready) Outbound connectors: mirror cards to Jira, GitHub/Forgejo issues and Project Online via their APIs
    - next: Part 1 landed 3736e58 (nemik.mirror.plan). Next: print the plan from nemik-export --format issues --against
      FILE (the tracker's issues as JSON); then the API client per tool, each tool's scoped token is operator: act
