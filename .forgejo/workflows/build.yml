@@ -4,7 +4,10 @@
 # endpoints.json registry-http (`checks.endpoints_query registry-http --side pod`).
 # ⚑ THE TAG IS <unix-seconds>-<sha>: a bare sha has no order, and deploy/image-automation.yaml's
 # ImagePolicy picks the newest by the numeric prefix.
-# The Containerfile's test stage is the gate: a red commit builds no image.
+# The Containerfile's test stage is the gate: a red commit builds no image. nemik:W703: unless the
+# pushed commit carries a Gated-Tree trailer equal to its own tree (mtools:W1666/W1745/W1651 stamp it
+# only where the commit gate ran on that tree): then the gate already passed, and the image builds the
+# `gated` stage instead of rerunning the suite.
 on:
   push:
     branches: [main]
@@ -18,7 +21,11 @@ jobs:
           git -c "http.extraHeader=Authorization: token ${{ github.token }}"
           clone --depth 1 "${{ github.server_url }}/${{ github.repository }}.git" src
       - name: build and push
-        run: >-
-          buildctl build --frontend dockerfile.v0
-          --local context=src --local dockerfile=src --opt filename=Containerfile
+        run: |
+          tests=test
+          tree=$(git -C src rev-parse 'HEAD^{tree}')
+          if git -C src log -1 --format=%B | grep -qx "Gated-Tree: $tree"; then tests=gated; fi
+          echo "image test stage: $tests (tree $tree)"
+          buildctl build --frontend dockerfile.v0 --opt "build-arg:TESTS=$tests" \
+          --local context=src --local dockerfile=src --opt filename=Containerfile \
           --output "type=image,name=${{ vars.REGISTRY }}/nemik:$(date -u +%s)-${{ github.sha }},push=true"

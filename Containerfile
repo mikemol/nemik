@@ -34,6 +34,8 @@ COPY ruff-house.toml ruff-baseline.json ./
 COPY mypy-house.ini mypy-baseline.json codon-baseline.json ./
 COPY stubs ./stubs
 COPY BUILD.bazel Containerfile ./
+# nemik:W703: test_containerfile holds the workflow's gated-tree branch to the Containerfile's stages.
+COPY .forgejo ./.forgejo
 # The hooks wiring (mikemol-hook-inbound-asks, mikemol-hook-nemik-check) is tested against the settings file.
 COPY .claude/settings.json ./.claude/settings.json
 # paperkit is a pinned git source (nemik:W102), and uv needs a git binary to fetch it. The test stage
@@ -58,8 +60,15 @@ RUN date -u +"test stage: deps start %FT%TZ" && uv sync --frozen --extra docs \
 RUN date -u +"test stage: pytest start %FT%TZ" && .venv/bin/pytest -q -rs --durations=15 tests \
     && date -u +"test stage: pytest end %FT%TZ" && touch /app/.tested
 
+# nemik:W703: a tree the commit gate already ran on (a Gated-Tree trailer equal to the pushed tree,
+# checked in build.yml) takes this stage instead of `test`, so the image does not rerun a 41 min
+# suite that a newer push would cancel. BuildKit skips the stage nothing depends on.
+FROM base AS gated
+RUN touch /app/.tested
+
 FROM base
-COPY --from=test /app/.tested /app/.tested
+ARG TESTS=test
+COPY --from=${TESTS} /app/.tested /app/.tested
 USER 1000:1000
 EXPOSE 8750
 ENV NEMIK_ROOT=/export

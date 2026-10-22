@@ -46,5 +46,17 @@ def test_every_bazel_test_input_is_in_the_image_test_stage() -> None:
     )
 
 
+def test_a_gated_tree_selects_a_stage_the_containerfile_has() -> None:
+    """nemik:W703: the workflow picks `gated` on a trailer; the image takes it by TESTS."""
+    workflow = (ROOT / ".forgejo/workflows/build.yml").read_text()
+    text = (ROOT / "Containerfile").read_text()
+    assert "Gated-Tree: $tree" in workflow
+    assert "build-arg:TESTS=$tests" in workflow
+    assert "tests=gated" in workflow
+    assert "FROM base AS gated" in text
+    assert "ARG TESTS=test" in text
+    assert "COPY --from=${TESTS} /app/.tested" in text
+
+
 def test_the_check_reads_something() -> None:
     assert {"tests", "docs", "tools"} <= {p.split("/")[0] for p in _bazel_data_paths()}
