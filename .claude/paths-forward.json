@@ -17167,8 +17167,7 @@
       "blocked_on": [
         "W855",
         "W856",
-        "W857",
-        "W858"
+        "W857"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "Inventory which history modes have a document today (static_data's history.json) and which do not; for each missing mode add the host-side publisher beside nemik-hostroot (same function the CLI calls, written to the cache dir) and the /history/<mode>.json route that reads it with a freshness check; waits, oldest, forecast, score, events and density each in turn",
@@ -19057,32 +19056,36 @@
     {
       "symbol": "W857",
       "title": "A host-side publisher and a freshness-checked route for the history events mode",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W785"
       ],
-      "touches": [],
+      "touches": [
+        "file:src/nemik/history.py!w",
+        "file:tests/test_history_events_publish.py!w",
+        "file:mypy-baseline.json!w"
+      ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
+      "next_bounded_step": "Send the events mode's rows through emit, type its options as Opts, and test the published document",
       "evidence": "",
       "issued_at": "2026-10-22T18:34:26Z",
       "minted_during": "interrupt",
       "caused_by": "W785",
-      "last_worked": "2026-10-22T18:43:35Z",
+      "last_worked": "2026-10-22T21:40:34Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
-        "src/nemik/serve.py",
         "src/nemik/history.py",
-        "tests/test_serve_history_events.py"
+        "tests/test_history_events_publish.py",
+        "mypy-baseline.json"
       ],
       "size_class": "small"
     },
     {
       "symbol": "W858",
       "title": "A host-side publisher and a freshness-checked route for the history density mode",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W785"
       ],
@@ -19093,14 +19096,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Submit the prepared stack: density through emit, typed options, two tests",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-22: commit ed9eec3; _density goes through history.emit, options typed as Opts, tests/test_history_density_publish.py",
       "issued_at": "2026-10-22T18:34:26Z",
       "minted_during": "interrupt",
       "caused_by": "W785",
-      "last_worked": "2026-10-22T21:10:03Z",
+      "last_worked": "2026-10-22T21:40:27Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261022T214027Z",
       "manifest": [
         "src/nemik/history.py",
         "tests/test_history_density_publish.py",
@@ -19257,20 +19260,29 @@
     {
       "tag": "file:src/nemik/history.py!w",
       "holder": "(unlocked)",
-      "waypoint": "W858",
-      "base_sha": "5d66a729389d7549e1a18301795e9b17655c2fd1",
-      "taken_at": "2026-10-22T20:59:07Z",
-      "renewed_at": "2026-10-22T20:59:07Z",
-      "expires_at": "2026-10-22T21:29:07Z"
+      "waypoint": "W857",
+      "base_sha": "ed9eec3850b57f2888356d090bb6f3bdc2d3d691",
+      "taken_at": "2026-10-22T21:40:34Z",
+      "renewed_at": "2026-10-22T21:40:34Z",
+      "expires_at": "2026-10-22T22:10:34Z"
     },
     {
-      "tag": "file:tests/test_history_density_publish.py!w",
+      "tag": "file:tests/test_history_events_publish.py!w",
       "holder": "(unlocked)",
-      "waypoint": "W858",
-      "base_sha": "5d66a729389d7549e1a18301795e9b17655c2fd1",
-      "taken_at": "2026-10-22T20:59:07Z",
-      "renewed_at": "2026-10-22T20:59:07Z",
-      "expires_at": "2026-10-22T21:29:07Z"
+      "waypoint": "W857",
+      "base_sha": "ed9eec3850b57f2888356d090bb6f3bdc2d3d691",
+      "taken_at": "2026-10-22T21:40:34Z",
+      "renewed_at": "2026-10-22T21:40:34Z",
+      "expires_at": "2026-10-22T22:10:34Z"
+    },
+    {
+      "tag": "file:mypy-baseline.json!w",
+      "holder": "(unlocked)",
+      "waypoint": "W857",
+      "base_sha": "ed9eec3850b57f2888356d090bb6f3bdc2d3d691",
+      "taken_at": "2026-10-22T21:40:34Z",
+      "renewed_at": "2026-10-22T21:40:34Z",
+      "expires_at": "2026-10-22T22:10:34Z"
     }
   ],
   "advice": [
