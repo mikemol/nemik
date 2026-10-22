@@ -9,7 +9,7 @@ from nemik.parity import EXCLUDED, PENDING, ROUTED
 ROOT = Path(__file__).resolve().parents[1]
 SERVE = ROOT / "src" / "nemik" / "serve.py"
 # The pending list only shrinks: lower this as W793 adds its routes (W785 has added its own).
-PENDING_MOST = 5
+PENDING_MOST = 4
 PENDING_CARDS = {"W793"}
 
 

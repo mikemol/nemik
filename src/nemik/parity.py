@@ -39,7 +39,6 @@ ROUTED = [
 ]
 
 PENDING = [
-    ("nemik-check --realizability", "W793"),
     ("nemik-check --committed", "W793"),
     ("nemik-check --letters", "W793"),
     ("nemik-check --fold", "W793"),
@@ -56,6 +55,10 @@ EXCLUDED = [
     ("nemik-work", "spawns the committer and the writer"),
     ("nemik-pins", "spawns git and kubectl to measure how far behind a pin is"),
     ("nemik-witnesses", "spawns the pinned opa and reads the metrics backends"),
+    (
+        "nemik-check --realizability",
+        "spawns the pinned opa to judge every waypoint (W860)",
+    ),
     ("nemik-stackable", "runs git for the staged, cited and tracked files of a repo"),
     ("nemik-replica", "spawns the image build"),
     ("nemik-ask", "a writer: files an ask in a peer's inbox"),
