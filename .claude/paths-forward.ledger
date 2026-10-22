@@ -1435,3 +1435,7 @@
 2026-10-22T03:59:48Z  status W832 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-22T03:59:55Z  tick  W832 advanced  sweep     "7a143de service rate counts only cards that stood in line: +1d Brier 0.0245 vs climatology 0.024 (in-sample); out-of-sample check on the 2026-10-22 issue after 2026-10-23 02:10Z [blocked by W749]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-22T04:10:12Z  status W786 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T04:40:51Z  tick  W833 minted    -         "Route nemik-stackable (which ready cards one commit stack can carry) through doc_for and the parity table"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W786
+2026-10-22T04:40:51Z  tick  W834 minted    -         "Route or exclude nemik-witnesses: serve its read-only answer, or declare the opa evaluation a spawner"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W786
+2026-10-22T04:41:09Z  tick  W786 advanced  collapse  "atomized W786 into W833 (stackable) and W834 (witnesses) while the floor-asks slice gates (stack308) [blocked by W833]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T05:11:29Z  status W834 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
