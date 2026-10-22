@@ -1465,3 +1465,5 @@
 2026-10-22T08:32:24Z  status W838 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-22T08:36:29Z  tick  W840 minted    -         "Accept the status landed ahead of the writer: the waypoint shape takes nemik:LandedStatus and the adapter maps landed to it with closed false, so mtools can write the status without a Warning on every landed card"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=mtools-ad:W1806
 2026-10-22T08:36:43Z  status W840 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T08:45:33Z  tick  W840 advanced  sweep     "W840 gate in flight (stack314); mtools:W1806 waits on its sha [blocked by W839]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T08:50:47Z  status W704 blocked>done writer    "blocked -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
