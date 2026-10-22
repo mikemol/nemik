@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 848,
+  "counter": 851,
   "waypoints": [
     {
       "symbol": "W1",
@@ -10668,7 +10668,7 @@
     {
       "symbol": "W533",
       "title": "Extract one converge library from pod_reaper.converge: one pass path, halt repeat detection, a trigger field on every run row",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W517"
       ],
@@ -10677,14 +10677,16 @@
         "converge",
         "architecture"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "luthen-observability:W1501"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Tell luthen-observability the library exists (nemik.converge.converge(world, policy, trigger)); define the chronic epoch nudge with luthen; make the recorded rows follow the W556 run-row schema field for field",
-      "evidence": "2026-10-16: 2026-10-16 frontier groom: this card's third deliverable is 'a trigger field on every run row', which W534's run-row shape defines and the writers emit, so the converge library's rows wait on W534 (the schema exists, the writers are not all migrated). | 2026-10-18: part 1 landed d59c873 (pushed): nemik.converge World/Policy/converge, tests/test_converge.py. Remaining: the chronic epoch nudge and run-row (W556) conformance; luthen's W1070 ports apply_converge and pod_reaper onto it | 2026-10-18: 2026-10-17 decided via mtools-ad/luthen: rows record the verdict NESTED with trigger ({event, n, trigger, exit, verdict}); nemik's copy changed to match (stack submitted); luthen defines the acute/chronic trigger strings | 2026-10-18: part 2 landed 5586836 (pushed): rows nest the verdict ({event, n, trigger, exit, verdict}), agreed with luthen via mtools-ad. nemik.converge at 5586836 is the version mtools:W1522 should port | 2026-10-20: 2026-10-20 mtools-ad: mtools:W1522 (the mikemol-converge dist: a new dist from nemik 5586836, nested verdict, trigger a parameter, as luthen answered) has a manifest and is ready; first in their order, since it is its own stack and W652 and luthen's vendoring wait on it | 2026-10-20: 2026-10-20 mtools-ad: mtools:W1522 landed at 0f8267e; luthen can vendor mikemol-converge, nemik's copy follows via W652",
+      "evidence": "2026-10-16: 2026-10-16 frontier groom: this card's third deliverable is 'a trigger field on every run row', which W534's run-row shape defines and the writers emit, so the converge library's rows wait on W534 (the schema exists, the writers are not all migrated). | 2026-10-18: part 1 landed d59c873 (pushed): nemik.converge World/Policy/converge, tests/test_converge.py. Remaining: the chronic epoch nudge and run-row (W556) conformance; luthen's W1070 ports apply_converge and pod_reaper onto it | 2026-10-18: 2026-10-17 decided via mtools-ad/luthen: rows record the verdict NESTED with trigger ({event, n, trigger, exit, verdict}); nemik's copy changed to match (stack submitted); luthen defines the acute/chronic trigger strings | 2026-10-18: part 2 landed 5586836 (pushed): rows nest the verdict ({event, n, trigger, exit, verdict}), agreed with luthen via mtools-ad. nemik.converge at 5586836 is the version mtools:W1522 should port | 2026-10-20: 2026-10-20 mtools-ad: mtools:W1522 (the mikemol-converge dist: a new dist from nemik 5586836, nested verdict, trigger a parameter, as luthen answered) has a manifest and is ready; first in their order, since it is its own stack and W652 and luthen's vendoring wait on it | 2026-10-20: 2026-10-20 mtools-ad: mtools:W1522 landed at 0f8267e; luthen can vendor mikemol-converge, nemik's copy follows via W652 | 2026-10-22: 2026-10-22: the library is mikemol-converge (mtools:W1522, vendored W776/W777); sent luthen-observability-ab nemik:W533 asking whether pod_reaper calls it (luthen-observability:W1070) and for the acute and chronic trigger strings and the epoch of the chronic nudge. Blocked until they name the waypoint that holds each | 2026-10-22: 2026-10-22 luthen-observability-ab: pod_reaper delegates to mikemol.converge (vendored luthen-observability:W1469 c079c8eb, ported W1471 8a27b17f; umbrella W1070 done); apply_converge is not ported (W1470 dropped: the apply loop is not pass-until-clean). The acute and chronic trigger strings and the epoch of the chronic nudge are not decided: luthen-observability:W1501 holds them and they will answer there",
       "issued_at": "2026-10-15T14:28:55Z",
       "minted_during": "tick",
       "caused_by": "operator",
-      "last_worked": "2026-10-20T15:44:36Z",
+      "last_worked": "2026-10-22T16:26:05Z",
       "ticks_blocked": 0,
       "weight": 14,
       "completed": null,
@@ -11019,7 +11021,7 @@
     {
       "symbol": "W547",
       "title": "Delivery record and edge walk for a done or dropped card: one inbox letter per cross-repo edge, delivered once",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W546",
         "W548"
@@ -11028,19 +11030,24 @@
         "letters",
         "notice"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W849",
+        "W850",
+        "W851"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Part 1 landed 406e3bd (workrows.edges_of, the pure cross-repo edge walk over queue text). Next: the delivery record (a nemik-owned file keyed repo:W<n> -> edge, so a rerun on a later day writes no second letter and a deleted letter is not sent again), the letter writer, and wake() using this walk instead of blocked_on alone",
       "evidence": "2026-10-15: 2026-10-15: checked mikemol-paths-forward --delivered (mtools pathsforward delivered.py, W803): it prints the queue's version 0.0.<highest done number>, not a notice record, so W547 builds its own. Idempotence by letter filename alone is not enough: wake() names the file by date, so a rerun on a later day writes a second letter, and a letter the reader deleted would be sent again. | 2026-10-18: 2026-10-18 CORRECTION to the commit body of 406e3bd: it says the Codon census stages sibling nemik modules as not importable, which is wrong on the mechanism. Tested with the pinned codon the same day: the census stages every module in one tree, an ABSOLUTE sibling import (from nemik.a import f) fails with 'no module named nemik.a', and a RELATIVE one (from .a import f) compiles. The edge walk could have stayed in its own module with a relative import of workrows; it sits in workrows.py, which still works. See W697 and the memory note new-module-must-compile-under-codon",
       "issued_at": "2026-10-15T19:22:44Z",
       "minted_during": "tick",
       "caused_by": "W546",
-      "last_worked": "2026-10-18T22:00:02Z",
+      "last_worked": "2026-10-22T16:24:52Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/witnesses.py"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "completed": null
     },
     {
       "symbol": "W548",
@@ -18843,6 +18850,73 @@
         "BUILD.bazel"
       ],
       "size_class": "medium"
+    },
+    {
+      "symbol": "W849",
+      "title": "A delivery record keyed repo:W<n> to its edge, so a rerun and a deleted letter write nothing again",
+      "status": "working",
+      "enables": [
+        "W547",
+        "W850"
+      ],
+      "touches": [
+        "file:src/nemik/delivery.py!w",
+        "file:tests/test_delivery.py!w",
+        "file:codon-baseline.json!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Submit the prepared stack: the pure record functions, their tests and the census entry",
+      "evidence": "",
+      "issued_at": "2026-10-22T16:24:52Z",
+      "minted_during": "interrupt",
+      "caused_by": "W547",
+      "last_worked": "2026-10-22T16:26:52Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/delivery.py",
+        "tests/test_delivery.py",
+        "codon-baseline.json"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W850",
+      "title": "A letter writer that sends one inbox letter per undelivered cross-repo edge of a done or dropped card",
+      "status": "ready",
+      "enables": [
+        "W547",
+        "W851"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-22T16:24:52Z",
+      "minted_during": "interrupt",
+      "caused_by": "W547",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W851",
+      "title": "wake() walks the cross-repo edges and writes letters through the record, not blocked_on alone",
+      "status": "ready",
+      "enables": [
+        "W547"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-22T16:24:52Z",
+      "minted_during": "interrupt",
+      "caused_by": "W547",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -18949,7 +19023,35 @@
   "heartbeat": "2026-10-22T02:06:35Z",
   "lock": null,
   "predecessor_job_id": "disarmed",
-  "leases": [],
+  "leases": [
+    {
+      "tag": "file:src/nemik/delivery.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W849",
+      "base_sha": "1af02e587e03df670a537d4b0312d51b33b10456",
+      "taken_at": "2026-10-22T16:26:52Z",
+      "renewed_at": "2026-10-22T16:26:52Z",
+      "expires_at": "2026-10-22T16:56:52Z"
+    },
+    {
+      "tag": "file:tests/test_delivery.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W849",
+      "base_sha": "1af02e587e03df670a537d4b0312d51b33b10456",
+      "taken_at": "2026-10-22T16:26:52Z",
+      "renewed_at": "2026-10-22T16:26:52Z",
+      "expires_at": "2026-10-22T16:56:52Z"
+    },
+    {
+      "tag": "file:codon-baseline.json!w",
+      "holder": "(unlocked)",
+      "waypoint": "W849",
+      "base_sha": "1af02e587e03df670a537d4b0312d51b33b10456",
+      "taken_at": "2026-10-22T16:26:52Z",
+      "renewed_at": "2026-10-22T16:26:52Z",
+      "expires_at": "2026-10-22T16:56:52Z"
+    }
+  ],
   "advice": [
     {
       "tool": "block-behind-open",
