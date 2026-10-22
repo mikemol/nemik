@@ -19088,21 +19088,23 @@
       ],
       "touches": [
         "file:src/nemik/history.py!w",
-        "file:tests/test_history_density_publish.py!w"
+        "file:tests/test_history_density_publish.py!w",
+        "file:mypy-baseline.json!w"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Send the density mode's rows through emit, type its options as Opts, and test the published document",
+      "next_bounded_step": "Submit the prepared stack: density through emit, typed options, two tests",
       "evidence": "",
       "issued_at": "2026-10-22T18:34:26Z",
       "minted_during": "interrupt",
       "caused_by": "W785",
-      "last_worked": "2026-10-22T20:59:07Z",
+      "last_worked": "2026-10-22T21:10:03Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "src/nemik/history.py",
-        "tests/test_history_density_publish.py"
+        "tests/test_history_density_publish.py",
+        "mypy-baseline.json"
       ],
       "size_class": "small"
     },
