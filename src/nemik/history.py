@@ -1018,9 +1018,9 @@ def main(argv: list[str] | None = None) -> int:
         type=Path,
         default=None,
         metavar="DIR",
-        help="with --waits, --density or --events: write the rows to DIR/<mode>.json as a "
-        "stamped document the server serves as /history/<mode>.json (nemik-serve "
-        "--history-dir DIR), not print them (W854, W857, W858)",
+        help="with --waits, --forecast, --score, --events or --density: write the rows to "
+        "DIR/<mode>.json as a stamped document the server serves as /history/<mode>.json "
+        "(nemik-serve --history-dir DIR), not print them (W854 to W858)",
     )
     ap.add_argument(
         "--append-to",
@@ -1344,7 +1344,7 @@ def _events(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
     return 0
 
 
-def _score(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> int:
+def _score(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
     """Judge a stored shingle per lead, read against the events (nemik:W759, W761).
 
     The file holds the tab-separated rows `--forecast` printed; any line that is not a row is
@@ -1360,8 +1360,7 @@ def _score(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) ->
     got = score_report(
         rows, first_done(events), datetime.now(UTC).isoformat(), COMMIT_GRAIN_DAYS
     )
-    if args.json:
-        sys.stdout.write(json.dumps(got, indent=1) + "\n")
+    if emit(args, "score", got):
         return 0
     for lead, r in sorted(got.items()):
         sys.stdout.write(
@@ -1378,7 +1377,7 @@ def _score(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) ->
     return 0
 
 
-def _forecast(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> int:
+def _forecast(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
     """Print the shingle rows for every open card, issued now, one tab-separated row a line.
 
     Returns:
@@ -1394,8 +1393,7 @@ def _forecast(args: argparse.Namespace, names: list[str], dirs: dict[str, Path])
             shingle.writelines("\t".join(row) + "\n" for row in rows)
         sys.stdout.write(f"appended {len(rows)} rows to {args.append_to}\n")
         return 0
-    if args.json:
-        sys.stdout.write(json.dumps(rows, indent=1) + "\n")
+    if emit(args, "forecast", rows):
         return 0
     for row in rows:
         sys.stdout.write("\t".join(row) + "\n")
