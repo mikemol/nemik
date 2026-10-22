@@ -562,7 +562,7 @@ const closedTree = new Set();  // nemik:W725: card-list rows the reader folded (
 
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const LANE = { "needs-you": "needs you", "no-command": "no command yet", answered: "already answered", condition: "waiting on a condition", unstated: "no ask stated" };
-const STATES = ["ready", "working", "blocked", "done", "dropped", "unclaimed"];
+const STATES = ["ready", "working", "blocked", "landed", "done", "dropped", "unclaimed"];
 const color = s => css("--" + (STATES.includes(s) ? s : "other"));
 let data = null, cy = null, selectedId = null, liveness = {}, lastMode = null;
 
@@ -570,9 +570,9 @@ let data = null, cy = null, selectedId = null, liveness = {}, lastMode = null;
 // front of the card's label, so state reads without its fill colour, in the graph and the treemap alike.
 // The glyphs are ones every base font carries (U+25B8, U+2016, U+221A, U+00D7): a glyph a font lacks draws
 // as a wide placeholder box, which widened labels only under the gate's headless Chrome.
-// nemik:W661: a state outside these six (colour --other) carries "* ", ASCII and this role only ("? " is the
-// unclaimed label's), so the only state with no mark is ready (WCAG 1.4.1, judged by data/wcag.rego).
-const STATE_MARK = { ready: "", working: "▸ ", blocked: "‖ ", done: "√ ", dropped: "× ", other: "* " };
+// nemik:W661: a state outside these seven (colour --other) carries "* ", ASCII and this role only ("? " is the
+// unclaimed label's; "^ " is landed's, nemik:W845), so only ready has no mark (WCAG 1.4.1, data/wcag.rego).
+const STATE_MARK = { ready: "", working: "▸ ", blocked: "‖ ", landed: "^ ", done: "√ ", dropped: "× ", other: "* " };
 // nemik:W456: what an umbrella's label carries after its symbol, each glyph used in this role only (the
 // roll-up count once reused the working mark: "‖ W503 ▸ 3" read as working). ASCII "+" needs no font.
 const ROLLUP_MARK = " +", EXPANDED_MARK = " ▾";

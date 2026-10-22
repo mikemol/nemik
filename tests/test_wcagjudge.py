@@ -10,7 +10,8 @@ TEXT = "1.4.3"
 COMPONENT = "1.4.11"
 PAGE = """
 :root {{ --bg: {bg}; --panel: {bg}; --ink: {ink}; --muted: {ink};
-  --ready: {ink}; --working: {ink}; --blocked: {ink}; --other: {ink}; --interrupt: {ink};
+  --ready: {ink}; --working: {ink}; --blocked: {ink}; --landed: {ink}; --other: {ink};
+  --interrupt: {ink};
   --unclaimed: {ink}; --edge: {ink}; --ring-fleet: {ink}; --ring-repo: {ink}; --ring-view: {ink}; }}
 """
 

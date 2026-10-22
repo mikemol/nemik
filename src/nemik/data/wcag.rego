@@ -23,6 +23,7 @@ component_pairs := [
 	{"fg": "--ready", "bg": "--panel"},
 	{"fg": "--working", "bg": "--panel"},
 	{"fg": "--blocked", "bg": "--panel"},
+	{"fg": "--landed", "bg": "--panel"},
 	{"fg": "--other", "bg": "--panel"},
 	{"fg": "--interrupt", "bg": "--panel"},
 	{"fg": "--unclaimed", "bg": "--panel"},

@@ -1,6 +1,6 @@
 :root {
   --bg: #f7f7f5; --panel: #ffffff; --ink: #1d1d1b; --muted: #6b6b66; --line: #d9d9d4;
-  --ready: #2f7d4f; --working: #2b62c0; --blocked: #b8452c; --done: #9a9a94; --dropped: #c8c8c2;
+  --ready: #2f7d4f; --working: #2b62c0; --blocked: #b8452c; --landed: #a68d11; --done: #9a9a94; --dropped: #c8c8c2;
   --other: #8a5cc2; --interrupt: #c27c10; --unclaimed: #d0453a;
   /* nemik:W437 (WCAG 1.4.11, 3:1 against --bg): a dependency line is meaning, not a separator, so it
      gets --edge, not --line; the halo rings are Okabe-Ito, darkened for the light page. */
@@ -10,7 +10,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #161615; --panel: #1f1f1d; --ink: #ecece8; --muted: #9a9a94; --line: #34342f;
-    --ready: #5cc088; --working: #6d9cf0; --blocked: #ef7a5c; --done: #6b6b66; --dropped: #45453f;
+    --ready: #5cc088; --working: #6d9cf0; --blocked: #ef7a5c; --landed: #f2f23d; --done: #6b6b66; --dropped: #45453f;
     --other: #b38ae8; --interrupt: #f0b045; --unclaimed: #ff6b5c;
     --edge: #74746e;
     --ring-fleet: #e0a000; --ring-repo: #56b4e9; --ring-view: #cc79a7;

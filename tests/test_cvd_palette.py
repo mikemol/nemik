@@ -15,7 +15,7 @@ from itertools import combinations
 from mikemol.cvdcore import reference_floor, worst_view_dE
 from pagetext import page_text
 
-STATES = ("ready", "working", "blocked", "done", "dropped", "other")
+STATES = ("ready", "working", "blocked", "landed", "done", "dropped", "other")
 MARKS = "const STATE_MARK = {"
 DARK = "@media (prefers-color-scheme: dark)"
 HEX = 6
