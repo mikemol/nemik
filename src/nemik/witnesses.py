@@ -26,6 +26,10 @@ from pathlib import Path
 
 from mikemol.pathsforward.opa_eval import OpaUnavailableError, resolve
 
+from nemik import edgeletters
+from nemik.delivery import owed, stamp
+from nemik.workrows import edges_of
+
 # input.<observer>["<key>"], the only fact shape a witness may reference.
 # The key is a Rego string literal, so it may carry escaped quotes (a promql label matcher).
 _REF = re.compile(r'input\.(\w+)\["((?:[^"\\]|\\.)*)"\]')
@@ -320,6 +324,53 @@ def wake(root: Path, repo: str, sym: str, query: str, now: str) -> list[Path]:
             ),
             encoding="utf-8",
         )
+        written.append(letter)
+    return written
+
+
+# nemik:W850: the delivery record (nemik.delivery) is a dotfile in the fleet root, so no tool
+# mistakes it for a repo directory and a letter its reader deleted is still recorded as sent.
+RECORD = ".nemik-delivered"
+
+
+def deliver(
+    root: Path, queues: dict[str, str], card: tuple[str, str], outcome: str, day: str
+) -> list[Path]:
+    """nemik:W850 (W547): one inbox letter per cross-repo edge of a done or dropped card, once.
+
+    Walks the card's edges (workrows.edges_of), keeps those the record does not show as sent
+    (delivery.owed), writes a letter into the other repo's inbox for each, and stamps the record
+    only for a letter it wrote. A repo with no inbox is skipped and stays owed, so a later run
+    delivers it once the inbox exists.
+
+    Args:
+        root: The fleet root, holding each repo's directory.
+        queues: Each repo's name and the text of its paths-forward.json.
+        card: The finished card as (repo, symbol), the symbol `W<n>`.
+        outcome: `done` or `dropped`.
+        day: Today's date, `YYYY-MM-DD`.
+
+    Returns:
+        The letters written this run.
+
+    """
+    repo, sym = card
+    record = root / RECORD
+    try:
+        seen = record.read_text(encoding="utf-8")
+    except OSError:
+        seen = ""
+    written: list[Path] = []
+    for edge in owed(seen, repo, sym, edges_of(queues, repo, sym)):
+        inbox = root / edge[1] / "inbox"
+        if not inbox.is_dir():
+            continue
+        letter = inbox / edgeletters.name(day, repo, sym, edge)
+        letter.write_text(
+            edgeletters.text(repo, sym, edge, outcome, day), encoding="utf-8"
+        )
+        with record.open("a", encoding="utf-8") as fh:
+            fh.write(stamp(repo, sym, edge, day))
         written.append(letter)
     return written
 
