@@ -2,7 +2,7 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W706: the codemod leaves no wait_for_function call with a wall-clock bound."""
 
-from webpage_waits import rewrite
+from mikemol.webpage.waits import rewrite
 
 BOUNDED = "page.wait_for_function(READY, timeout=60000)\n"
 BARE = "page.wait_for_function(READY)\n"

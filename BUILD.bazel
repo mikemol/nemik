@@ -56,7 +56,6 @@ exports_files(["pyproject.toml"])
             + ([".githooks/pre-commit"] if src == "tests/test_githooks_snapshot.py" else [])
             + (["tools/image_replica.sh", ".githooks/post-commit"] if src == "tests/test_image_replica.py" else [])
             + (["tools/image_replica_runner.sh"] if src == "tests/test_image_replica_runner.py" else [])
-            + (["tools/webpage_waits.py"] if src in ("tests/test_webpage_waits.py", "tests/test_webpage_adopt.py") else [])
             + (glob(["src/nemik/*.py"]) if src == "tests/test_import_closure.py" else [])
             # nemik:W522: the ruff ratchet measures every Python file of the four trees against its baseline
             # nemik:W536: the shared ratchet runs ruff and mypy both, so this target also carries mypy's inputs
@@ -95,7 +94,7 @@ filegroup(
 # console script, the same entries as pyproject's [project.scripts] plus pathsforward's own.
 venv_from_hub(
     name = ".venv",
-    hub_requirements = all_requirements + ["@pathsforward//:pkg", "@icsstruct//:pkg", "@hooks//:pkg", "@fence//:pkg", "@rulerseq//:pkg", "@frontier//:pkg", "@cvdcore//:pkg", "@converge//:pkg"],
+    hub_requirements = all_requirements + ["@pathsforward//:pkg", "@icsstruct//:pkg", "@hooks//:pkg", "@fence//:pkg", "@rulerseq//:pkg", "@frontier//:pkg", "@cvdcore//:pkg", "@converge//:pkg", "@webpage//:pkg"],
     python_version = "3.13",
     python_version_short = "3.13",
     srcs = glob(["src/nemik/**"], exclude = ["**/__pycache__/**"]),

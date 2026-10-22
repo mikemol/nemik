@@ -91,6 +91,14 @@ vendored_wheel(
     wheel = "//:vendor/wheels/mikemol_converge-0.1.0+0f8267e-py3-none-any.whl",
 )
 
+# nemik:W717/W848: mtools' webpage (mikemol.webpage, mtools:W1684/W1685) at 146ebaaf: the browser-test waits that
+# end on the page's own event and the waits codemod, stdlib only. The first webpage pin, taken by hand, so it
+# sits ahead of the others until a repin that lists the dist moves them together.
+vendored_wheel(
+    name = "webpage",
+    wheel = "//:vendor/wheels/mikemol_webpage-0.1.0+146ebaaf-py3-none-any.whl",
+)
+
 # nemik:W98: opa, the witness evaluator, as a hashed input instead of whatever /usr/bin holds.
 http_file = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_file")
 http_file(

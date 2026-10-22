@@ -2,7 +2,7 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W715: the adopt mode moves waits onto webpage.until and watches the page first."""
 
-from webpage_waits import adopt
+from mikemol.webpage.waits import adopt
 
 SOURCE = (
     "import webpage\n"
