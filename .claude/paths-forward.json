@@ -17165,7 +17165,6 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W854",
         "W855",
         "W856",
         "W857",
@@ -18929,11 +18928,11 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "Ask luthen-observability to read the Forgejo build log for the first nemik image built after 9bfec9c and report whether it printed 'image test stage: gated'; if it printed test, read the commit's Gated-Tree trailer against its tree",
-      "evidence": "2026-10-22: 2026-10-22 luthen-observability-ab: opened luthen-observability:W1506 to read the first nemik image build log after 9bfec9c and report the 'image test stage' line and commit sha. Not yet verified that Forgejo build logs reach VictoriaLogs at all; if not, they will name the path that carries them",
+      "evidence": "2026-10-22: 2026-10-22 luthen-observability-ab: opened luthen-observability:W1506 to read the first nemik image build log after 9bfec9c and report the 'image test stage' line and commit sha. Not yet verified that Forgejo build logs reach VictoriaLogs at all; if not, they will name the path that carries them | 2026-10-22: 2026-10-22 20:44Z github-8f: nemik_build_no_image is firing again. Unknown whether it is a build failure from 9bfec9c (build.yml TESTS branch and the Containerfile gated stage, COPY --from=${TESTS}) or a known gap; told github-8f it is the prime suspect and that a failing build-and-push line would let me fix or revert at once. Pushes reach origin (814410c); no build log read yet | 2026-10-22: 2026-10-22 20:45Z: queried VictoriaLogs (checks.vlogs_query): no 'image test stage' or buildctl line in 3 h; k3s.service logs show pod buildbuddy/forgejo-runner-6b44c5c87-btcmv stuck terminating every ~2 s (KillPodSandbox: runc fork/exec 'function not implemented'; status forbidden: no relationship between node luthen and the pod). nemik_build_no_image is therefore the runner, not 9bfec9c; not reverted. Re-check for the build line when the runner is healthy",
       "issued_at": "2026-10-22T18:33:34Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W703",
-      "last_worked": "2026-10-22T18:35:00Z",
+      "last_worked": "2026-10-22T20:45:21Z",
       "ticks_blocked": 0,
       "completed": null
     },
@@ -18975,7 +18974,7 @@
     {
       "symbol": "W854",
       "title": "A host-side publisher and a freshness-checked route for the history waits mode",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W785"
       ],
@@ -18988,14 +18987,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Run the serve tests against the rebuilt venv, then submit the prepared stack",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-22: commit 5d66a72; nemik-history --waits --publish DIR, nemik-serve --history-dir and /history/<mode>.json (serve.history_response), typed history.Opts and emit; /series.json and /check.json moved onto DOC_ROUTES",
       "issued_at": "2026-10-22T18:34:26Z",
       "minted_during": "interrupt",
       "caused_by": "W785",
-      "last_worked": "2026-10-22T20:30:00Z",
+      "last_worked": "2026-10-22T20:59:00Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261022T205900Z",
       "manifest": [
         "src/nemik/serve.py",
         "src/nemik/history.py",
@@ -19083,25 +19082,27 @@
     {
       "symbol": "W858",
       "title": "A host-side publisher and a freshness-checked route for the history density mode",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W785"
       ],
-      "touches": [],
+      "touches": [
+        "file:src/nemik/history.py!w",
+        "file:tests/test_history_density_publish.py!w"
+      ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
+      "next_bounded_step": "Send the density mode's rows through emit, type its options as Opts, and test the published document",
       "evidence": "",
       "issued_at": "2026-10-22T18:34:26Z",
       "minted_during": "interrupt",
       "caused_by": "W785",
-      "last_worked": "2026-10-22T18:43:36Z",
+      "last_worked": "2026-10-22T20:59:07Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
-        "src/nemik/serve.py",
         "src/nemik/history.py",
-        "tests/test_serve_history_density.py"
+        "tests/test_history_density_publish.py"
       ],
       "size_class": "small"
     },
@@ -19252,31 +19253,22 @@
   "predecessor_job_id": "disarmed",
   "leases": [
     {
-      "tag": "file:src/nemik/serve.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W854",
-      "base_sha": "dbe13696638489e0b44f97d278277bcd810ce187",
-      "taken_at": "2026-10-22T20:15:11Z",
-      "renewed_at": "2026-10-22T20:15:11Z",
-      "expires_at": "2026-10-22T20:45:11Z"
-    },
-    {
       "tag": "file:src/nemik/history.py!w",
       "holder": "(unlocked)",
-      "waypoint": "W854",
-      "base_sha": "dbe13696638489e0b44f97d278277bcd810ce187",
-      "taken_at": "2026-10-22T20:15:11Z",
-      "renewed_at": "2026-10-22T20:15:11Z",
-      "expires_at": "2026-10-22T20:45:11Z"
+      "waypoint": "W858",
+      "base_sha": "5d66a729389d7549e1a18301795e9b17655c2fd1",
+      "taken_at": "2026-10-22T20:59:07Z",
+      "renewed_at": "2026-10-22T20:59:07Z",
+      "expires_at": "2026-10-22T21:29:07Z"
     },
     {
-      "tag": "file:tests/test_serve_history_waits.py!w",
+      "tag": "file:tests/test_history_density_publish.py!w",
       "holder": "(unlocked)",
-      "waypoint": "W854",
-      "base_sha": "dbe13696638489e0b44f97d278277bcd810ce187",
-      "taken_at": "2026-10-22T20:15:11Z",
-      "renewed_at": "2026-10-22T20:15:11Z",
-      "expires_at": "2026-10-22T20:45:11Z"
+      "waypoint": "W858",
+      "base_sha": "5d66a729389d7549e1a18301795e9b17655c2fd1",
+      "taken_at": "2026-10-22T20:59:07Z",
+      "renewed_at": "2026-10-22T20:59:07Z",
+      "expires_at": "2026-10-22T21:29:07Z"
     }
   ],
   "advice": [
