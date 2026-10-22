@@ -54,6 +54,7 @@ from nemik.check import survey as checked_survey
 from nemik.critical import critical_doc
 from nemik.exportwire import exports_key, withheld_by_exports
 from nemik.floorasks import floor_asks, unresolved
+from nemik.histdocs import STALE_HOURS, decode, file_name, wrap
 from nemik.history import oldest_rows
 from nemik.hostroot import HostRow, read_document, stale
 from nemik.landings import read_document as read_landings
@@ -211,6 +212,8 @@ OLDEST_SHOWN = 25
 DOC_ROUTES = [
     "/hostroot.json",
     "/oldest.json",
+    "/series.json",
+    "/check.json",
     "/landings.json",
     "/critical.json",
     "/starved.json",
@@ -275,6 +278,8 @@ class Model:
         self.hostroot: Path | None = None
         # nemik:W751: mikemol-commit's landings, written by nemik-hostroot --landings.
         self.landings: Path | None = None
+        # nemik:W854: the history documents nemik-history --publish writes on the host.
+        self.history_dir: Path | None = None
         # nemik:W784: each repo's findings as the last rebuild left them, worded by check_board.
         self.findings: dict[str, list[Finding]] = {}
         # nemik:W670: luthen's loop and token snapshot (luthen-series.json), read per request so its
@@ -522,6 +527,8 @@ class Model:
         docs: dict[str, Callable[[], dict[str, object]]] = {
             "/hostroot.json": self.hostroot_doc,
             "/oldest.json": self.oldest_json,
+            "/series.json": self.series_doc,
+            "/check.json": self.check_doc,
             "/landings.json": self.landings_doc,
             "/critical.json": self.critical_json,
             "/starved.json": self.starved_json,
@@ -881,6 +888,49 @@ def ruler_table(edges: list[dict], asks: list[dict]) -> dict[str, list[str]]:
     }
 
 
+HISTORY_PREFIX = "/history/"
+SECONDS_PER_HOUR = 3600
+
+
+def history_response(
+    directory: Path | None, path: str, now: datetime
+) -> tuple[int, str, bytes]:
+    """Answer /history/<mode>.json from the document nemik-history --publish wrote (nemik:W854).
+
+    The modes that read git cannot run here (the server never spawns), so the host runs them and
+    publishes each result; this reads the file back and says how old it is. Only the modes named
+    in histdocs.MODES have a file, so a path never reaches another one.
+
+    Args:
+        directory: The --history-dir, or None when the server was not given one.
+        path: The request path.
+        now: The time freshness is judged at.
+
+    Returns:
+        (status, content type, body): (200, JSON, the wrapped document) or (404, text, a
+        reason); no board is ever guessed.
+
+    """
+    if directory is None:
+        return 404, "text/plain", b"no --history-dir"
+    mode = path.removeprefix(HISTORY_PREFIX).removesuffix(".json")
+    name = file_name(mode)
+    if not name:
+        return 404, "text/plain", b"not a history document"
+    try:
+        text = (directory / name).read_text(encoding="utf-8")
+    except OSError:
+        return 404, "text/plain", b"no document published"
+    as_of, body = decode(text)
+    cutoff = datetime.fromtimestamp(
+        now.timestamp() - STALE_HOURS * SECONDS_PER_HOUR, UTC
+    ).strftime("%Y-%m-%dT%H:%M:%SZ")
+    wrapped = wrap(mode, as_of, body, cutoff)
+    if not wrapped:
+        return 404, "text/plain", b"unreadable document"
+    return 200, "application/json", wrapped.encode("utf-8")
+
+
 def handler(model: Model) -> type[BaseHTTPRequestHandler]:
     page = files("nemik.web").joinpath("index.html").read_bytes()
     vendor = files("nemik.web").joinpath("vendor")
@@ -947,18 +997,16 @@ def handler(model: Model) -> type[BaseHTTPRequestHandler]:
                 )
             elif self.path == "/metrics":
                 self.send(200, "text/plain; version=0.0.4", model.metrics())
-            elif self.path == "/series.json":
-                series_body = json.dumps(model.series_doc(), indent=1).encode()
-                self.send(200, "application/json", series_body)
             elif self.path.startswith("/check/"):
                 answer = model.check_reply(self.path)
                 self.send(answer[0], answer[1], answer[2])
-            elif self.path == "/check.json":
-                check_body = json.dumps(model.check_doc(), indent=1).encode()
-                self.send(200, "application/json", check_body)
             elif self.path in DOC_ROUTES:
                 host_body = json.dumps(model.doc_for(self.path), indent=1).encode()
                 self.send(200, "application/json", host_body)
+            elif self.path.startswith(HISTORY_PREFIX):
+                self.send(
+                    *history_response(model.history_dir, self.path, datetime.now(UTC))
+                )
             elif self.path == "/graph.json":
                 self.send(200, "application/json", model.payload)
             elif self.path == "/graph.ttl":
@@ -1261,6 +1309,7 @@ class _Options(argparse.Namespace):
     series_max_age: int
     hostroot: Path | None
     landings: Path | None
+    history_dir: Path | None
     exports: Path | None
     publish: Path | None
 
@@ -1335,6 +1384,14 @@ def main(argv: list[str] | None = None) -> None:
         "unreadable file serves no board (nemik:W751)",
     )
     ap.add_argument(
+        "--history-dir",
+        type=Path,
+        metavar="DIR",
+        help="the live server only: the history documents nemik-history --publish writes on the "
+        "host, served as /history/<mode>.json with their age; a missing file serves not-found "
+        "(nemik:W854)",
+    )
+    ap.add_argument(
         "--exports",
         type=Path,
         metavar="DIR",
@@ -1384,6 +1441,7 @@ def main(argv: list[str] | None = None) -> None:
     )
     model.hostroot = args.hostroot
     model.landings = args.landings
+    model.history_dir = args.history_dir
     ThreadingHTTPServer((args.bind, args.port), handler(model)).serve_forever()
 
 

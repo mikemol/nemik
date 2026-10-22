@@ -28,6 +28,7 @@ from nemik.cardevents import Event, events_of
 from nemik.check import LEDGER, QUEUE, default_root, workstream_files
 from nemik.climate import finish_rates, leads_by_repo, open_ages, waits_of
 from nemik.forecastshingle import HORIZONS, issue_in_line, shingle_rows
+from nemik.histdocs import encode, file_name
 from nemik.verify import lead_report, score_shingle, shingle_pairs
 from nemik.wake import read_liveness
 
@@ -1013,11 +1014,19 @@ def main(argv: list[str] | None = None) -> int:
         f"the repo's declared {BASELINE_PATH} (W318)",
     )
     ap.add_argument(
+        "--publish",
+        type=Path,
+        default=None,
+        metavar="DIR",
+        help="with --waits: write the rows to DIR/waits.json as a stamped document the server "
+        "serves as /history/waits.json (nemik-serve --history-dir DIR), not print them (W854)",
+    )
+    ap.add_argument(
         "--append-to",
         metavar="FILE",
         help="with --forecast: append the rows to this shingle file, not print them (W747)",
     )
-    args = ap.parse_args(argv)
+    args = ap.parse_args(argv, namespace=Opts())
     dirs = {r: p.parents[1] for r, p in workstream_files(args.root, QUEUE)}
     names = sorted(dirs) if args.all else args.repos
     series = is_series(args, extra=("toil", "churn")) or args.baseline is not None
@@ -1394,7 +1403,45 @@ def _forecast(args: argparse.Namespace, names: list[str], dirs: dict[str, Path])
     return 0
 
 
-def _waits(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> int:
+class Opts(argparse.Namespace):
+    """The options the modes that publish read, typed so reading them adds no Any (nemik:W854)."""
+
+    json: bool
+    publish: Path | None
+
+
+def emit(args: Opts, mode: str, rows: object) -> bool:
+    """Publish a mode's JSON rows as a stamped document, or print them, when asked (nemik:W854).
+
+    With --publish DIR the rows go to DIR/<mode>.json as a histdocs document, the file the
+    server's /history/<mode>.json route serves; the write goes to a sibling file and is renamed
+    into place, so a reader never sees half a document. With --json they print.
+
+    Args:
+        args: The parsed options.
+        mode: The history mode, one of histdocs.MODES.
+        rows: What the mode computed.
+
+    Returns:
+        True when it published or printed (the caller returns 0), False when the caller prints
+        the text form.
+
+    """
+    if args.publish is not None:
+        stamp = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
+        args.publish.mkdir(parents=True, exist_ok=True)
+        path = args.publish / file_name(mode)
+        partial = path.with_name(f".{path.name}.part")
+        partial.write_text(encode(stamp, json.dumps(rows, indent=1)), encoding="utf-8")
+        partial.replace(path)
+        return True
+    if args.json:
+        sys.stdout.write(json.dumps(rows, indent=1) + "\n")
+        return True
+    return False
+
+
+def _waits(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
     """Print per repo and status how long finished stints lasted, in days (nemik:W753).
 
     Returns:
@@ -1402,8 +1449,7 @@ def _waits(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) ->
 
     """
     rows = {name: waits(backfill(name, dirs[name], args.start)) for name in names}
-    if args.json:
-        sys.stdout.write(json.dumps(rows, indent=1) + "\n")
+    if emit(args, "waits", rows):
         return 0
     for name, by_status in rows.items():
         for status, r in sorted(by_status.items()):
@@ -1506,7 +1552,7 @@ def _days(seconds: float) -> str:
     return f"{seconds / 86400:.1f}d"
 
 
-def _series(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> int:
+def _series(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
     """`--time-in-state` and `--weekly` over the history from `--from` (default: all of it)."""
     for mode, run in (
         ("density", _density),

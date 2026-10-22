@@ -177,6 +177,8 @@ def hub_modules_depend_on_everything_below():
     # nemik:W786: and answers /critical.json with critical_doc, as nemik-critical --json does.
     # nemik:W853: and answers /oldest.json with history.oldest_rows, the function nemik-history
     # --oldest calls (it reads queue files and a liveness record and starts no process).
+    # nemik:W854: and answers /history/<mode>.json from the documents nemik-history --publish
+    # writes, through histdocs, a leaf of plain text that reads no file.
     expected = {
         "metrics": lower | {"realize", "runlogs", "workrows"},
         "serve": lower
@@ -194,6 +196,7 @@ def hub_modules_depend_on_everything_below():
             "pacing",
             "floorasks",
             "history",
+            "histdocs",
         },
     }
     for hub, want in expected.items():
