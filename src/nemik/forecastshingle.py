@@ -70,3 +70,33 @@ def issue(leads: list[float], age: float, horizons: list[float]) -> dict[str, fl
 
     """
     return {f"+{h:g}d": done_by(leads, age, h) for h in horizons}
+
+
+def in_line(chance: float, rate: float, ahead: int, horizon: float) -> float:
+    """Cap a card's chance by its place in its repo's line (nemik:W831).
+
+    A repo that finishes `rate` cards a day clears about rate * horizon of them in the horizon,
+    oldest first, so a card with `ahead` cards before it is reached with the chance
+    min(1, rate * horizon / (ahead + 1)); the lead-time chance is scaled by that. The lead times say
+    how long finished cards took, not how far back in the line this one stands: scoring them alone
+    gave a chance of 0.99 to 112 old cards of busy repos, one of which finished (nemik:W749).
+
+    Returns:
+        The chance times the share of the line the horizon reaches, from 0.0 to `chance`.
+
+    """
+    return chance * min(1.0, rate * horizon / (ahead + 1))
+
+
+def issue_in_line(
+    leads: list[float], age: float, horizons: list[float], rate: float, ahead: int
+) -> dict[str, float]:
+    """Issue one card's forecast at every horizon, each capped by its place in line.
+
+    Returns:
+        {"+<h>d": chance} for each horizon h, in the order given.
+
+    """
+    return {
+        f"+{h:g}d": in_line(done_by(leads, age, h), rate, ahead, h) for h in horizons
+    }

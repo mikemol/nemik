@@ -26,8 +26,8 @@ from pathlib import Path
 from nemik.cachestore import user_dir
 from nemik.cardevents import Event, events_of
 from nemik.check import LEDGER, QUEUE, default_root, workstream_files
-from nemik.climate import leads_by_repo, open_ages, waits_of
-from nemik.forecastshingle import HORIZONS, issue, shingle_rows
+from nemik.climate import finish_rates, leads_by_repo, open_ages, waits_of
+from nemik.forecastshingle import HORIZONS, issue_in_line, shingle_rows
 from nemik.verify import lead_report, score_shingle, shingle_pairs
 from nemik.wake import read_liveness
 
@@ -128,22 +128,40 @@ def is_series(args: argparse.Namespace, *, extra: tuple[str, ...] = ()) -> bool:
     return any(getattr(args, mode) for mode in SERIES_MODES + extra)
 
 
+def _oldest_first(card: tuple[str, float]) -> float:
+    """Sort key for (station, age) pairs: the oldest card first.
+
+    Returns:
+        The age, negated.
+
+    """
+    return -card[1]
+
+
 def forecast_rows(events: list[Event], moment: str) -> list[list[str]]:
     """Issue the forecast for every open card at one moment, as shingle rows (nemik:W747).
 
     Each open card's chances at +1, +3 and +7 days, from the lead times of its repo's cards done by
-    then; one row per card and lead.
+    then, each capped by the card's place in its repo's line (oldest first) against how many cards
+    the repo finishes a day (nemik:W831); one row per card and lead.
 
     Returns:
         The rows: issue time, station, lead, age in days, chance.
 
     """
     leads = leads_by_repo(events, moment)
+    rates = finish_rates(events, moment)
+    ahead: dict[str, int] = {}
     rows: list[list[str]] = []
-    for station, age in sorted(open_ages(events, moment).items()):
-        chances = issue(leads.get(station.partition(":")[0], []), age, HORIZONS)
+    for station, age in sorted(open_ages(events, moment).items(), key=_oldest_first):
+        repo = station.partition(":")[0]
+        place = ahead.get(repo, 0)
+        ahead[repo] = place + 1
+        chances = issue_in_line(
+            leads.get(repo, []), age, HORIZONS, rates.get(repo, 0.0), place
+        )
         rows.extend(shingle_rows(moment, station, age, chances))
-    return rows
+    return sorted(rows)
 
 
 def waits(

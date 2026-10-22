@@ -237,6 +237,26 @@ def leads_by_repo(events: list[Event], moment: str) -> dict[str, list[float]]:
     return {repo: sorted(days) for repo, days in out.items()}
 
 
+def finish_rates(events: list[Event], moment: str) -> dict[str, float]:
+    """Give, per repo, how many cards it finished a day, over the history up to one moment.
+
+    The cards counted are those `leads_by_repo` counts; the days run from the first event seen
+    (at least one day, so a short history does not divide by nothing).
+
+    Returns:
+        {repo: finishes per day}; empty for no events.
+
+    """
+    if not events:
+        return {}
+    until = _instant(moment)
+    first = min(_instant(stamp) for _, stamp, _, _, _, _ in events)
+    span = max(1.0, _days(first, until))
+    return {
+        repo: len(days) / span for repo, days in leads_by_repo(events, moment).items()
+    }
+
+
 def open_ages(events: list[Event], moment: str) -> dict[str, float]:
     """Give the age in days, at one moment, of every card that was minted and still open.
 
