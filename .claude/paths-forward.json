@@ -18975,21 +18975,23 @@
     {
       "symbol": "W854",
       "title": "A host-side publisher and a freshness-checked route for the history waits mode",
-      "status": "blocked",
+      "status": "working",
       "enables": [
         "W785"
       ],
-      "touches": [],
-      "blocked_on": [
-        "W859"
+      "touches": [
+        "file:src/nemik/serve.py!w",
+        "file:src/nemik/history.py!w",
+        "file:tests/test_serve_history_waits.py!w"
       ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Add the shared pieces with the waits mode: a --history-dir server flag, the /history/<mode>.json route that reads the file and wraps it through histdocs, and a nemik-history --publish DIR that writes the mode's output through histdocs.encode; then W855 to W858 only add their mode's publisher call",
       "evidence": "",
       "issued_at": "2026-10-22T18:34:26Z",
       "minted_during": "interrupt",
       "caused_by": "W785",
-      "last_worked": "2026-10-22T18:43:32Z",
+      "last_worked": "2026-10-22T20:15:11Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -19002,15 +19004,13 @@
     {
       "symbol": "W855",
       "title": "A host-side publisher and a freshness-checked route for the history forecast mode",
-      "status": "blocked",
+      "status": "ready",
       "enables": [
         "W785"
       ],
       "touches": [],
-      "blocked_on": [
-        "W859"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-22T18:34:26Z",
@@ -19029,15 +19029,13 @@
     {
       "symbol": "W856",
       "title": "A host-side publisher and a freshness-checked route for the history score mode",
-      "status": "blocked",
+      "status": "ready",
       "enables": [
         "W785"
       ],
       "touches": [],
-      "blocked_on": [
-        "W859"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-22T18:34:26Z",
@@ -19056,15 +19054,13 @@
     {
       "symbol": "W857",
       "title": "A host-side publisher and a freshness-checked route for the history events mode",
-      "status": "blocked",
+      "status": "ready",
       "enables": [
         "W785"
       ],
       "touches": [],
-      "blocked_on": [
-        "W859"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-22T18:34:26Z",
@@ -19083,15 +19079,13 @@
     {
       "symbol": "W858",
       "title": "A host-side publisher and a freshness-checked route for the history density mode",
-      "status": "blocked",
+      "status": "ready",
       "enables": [
         "W785"
       ],
       "touches": [],
-      "blocked_on": [
-        "W859"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-22T18:34:26Z",
@@ -19110,7 +19104,7 @@
     {
       "symbol": "W859",
       "title": "A history document store: a host-side writer for a named document and a freshness-checked reader the server routes use",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W854",
         "W855",
@@ -19125,14 +19119,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Submit the prepared stack: the pure document functions, their tests and the census entry",
-      "evidence": "2026-10-22: 2026-10-22: all five remaining history modes (waits, forecast, score, events, density) read git history (events_of, commit_snapshots, git log), so the server cannot compute them (W783); W853 oldest reads only files and was served directly. They share a published-document store modelled on hostroot (W779): a host writer and a freshness-checked reader. A new module imported by nothing yet, so no live reader breaks",
+      "next_bounded_step": null,
+      "evidence": "2026-10-22: 2026-10-22: all five remaining history modes (waits, forecast, score, events, density) read git history (events_of, commit_snapshots, git log), so the server cannot compute them (W783); W853 oldest reads only files and was served directly. They share a published-document store modelled on hostroot (W779): a host writer and a freshness-checked reader. A new module imported by nothing yet, so no live reader breaks | 2026-10-22: commit dbe1369; src/nemik/histdocs.py (valid, file_name, encode, decode, stale, wrap), tests/test_histdocs.py, census entry; pure text, Codon-compiled",
       "issued_at": "2026-10-22T19:35:56Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W785",
-      "last_worked": "2026-10-22T19:47:43Z",
+      "last_worked": "2026-10-22T20:15:02Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261022T201502Z",
       "manifest": [
         "src/nemik/histdocs.py",
         "tests/test_histdocs.py",
@@ -19254,22 +19248,31 @@
   "predecessor_job_id": "disarmed",
   "leases": [
     {
-      "tag": "file:src/nemik/histdocs.py!w",
+      "tag": "file:src/nemik/serve.py!w",
       "holder": "(unlocked)",
-      "waypoint": "W859",
-      "base_sha": "b808cb7a22938d5f00d05d2d5f9a8a0dfffbfb40",
-      "taken_at": "2026-10-22T19:36:48Z",
-      "renewed_at": "2026-10-22T19:36:48Z",
-      "expires_at": "2026-10-22T20:06:48Z"
+      "waypoint": "W854",
+      "base_sha": "dbe13696638489e0b44f97d278277bcd810ce187",
+      "taken_at": "2026-10-22T20:15:11Z",
+      "renewed_at": "2026-10-22T20:15:11Z",
+      "expires_at": "2026-10-22T20:45:11Z"
     },
     {
-      "tag": "file:tests/test_histdocs.py!w",
+      "tag": "file:src/nemik/history.py!w",
       "holder": "(unlocked)",
-      "waypoint": "W859",
-      "base_sha": "b808cb7a22938d5f00d05d2d5f9a8a0dfffbfb40",
-      "taken_at": "2026-10-22T19:36:48Z",
-      "renewed_at": "2026-10-22T19:36:48Z",
-      "expires_at": "2026-10-22T20:06:48Z"
+      "waypoint": "W854",
+      "base_sha": "dbe13696638489e0b44f97d278277bcd810ce187",
+      "taken_at": "2026-10-22T20:15:11Z",
+      "renewed_at": "2026-10-22T20:15:11Z",
+      "expires_at": "2026-10-22T20:45:11Z"
+    },
+    {
+      "tag": "file:tests/test_serve_history_waits.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W854",
+      "base_sha": "dbe13696638489e0b44f97d278277bcd810ce187",
+      "taken_at": "2026-10-22T20:15:11Z",
+      "renewed_at": "2026-10-22T20:15:11Z",
+      "expires_at": "2026-10-22T20:45:11Z"
     }
   ],
   "advice": [
