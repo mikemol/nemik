@@ -1018,9 +1018,9 @@ def main(argv: list[str] | None = None) -> int:
         type=Path,
         default=None,
         metavar="DIR",
-        help="with --waits or --density: write the rows to DIR/<mode>.json as a stamped document "
-        "the server serves as /history/<mode>.json (nemik-serve --history-dir DIR), not print "
-        "them (W854, W858)",
+        help="with --waits, --density or --events: write the rows to DIR/<mode>.json as a "
+        "stamped document the server serves as /history/<mode>.json (nemik-serve "
+        "--history-dir DIR), not print them (W854, W857, W858)",
     )
     ap.add_argument(
         "--append-to",
@@ -1329,7 +1329,7 @@ def _oldest(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -
     return 0
 
 
-def _events(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> int:
+def _events(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
     """Print every change to a card in the repos' queue history, one event a line (nemik:W744).
 
     Returns:
@@ -1337,8 +1337,7 @@ def _events(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -
 
     """
     rows = [event for name in names for event in backfill(name, dirs[name], args.start)]
-    if args.json:
-        sys.stdout.write(json.dumps(rows, indent=1) + "\n")
+    if emit(args, "events", rows):
         return 0
     for event in rows:
         sys.stdout.write("\t".join(event) + "\n")
