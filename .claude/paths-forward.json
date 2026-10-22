@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 859,
+  "counter": 864,
   "waypoints": [
     {
       "symbol": "W1",
@@ -17033,7 +17033,6 @@
       "touches": [],
       "blocked_on": [
         "W784",
-        "W785",
         "W787",
         "W788"
       ],
@@ -17044,7 +17043,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-20T22:31:27Z",
-      "ticks_blocked": 13,
+      "ticks_blocked": 0,
       "warrants": [
         {
           "@context": {
@@ -17159,7 +17158,7 @@
     {
       "symbol": "W785",
       "title": "Routes for history: oldest, waits, forecast, score, events, density",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W781"
       ],
@@ -17169,19 +17168,19 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Submit the prepared stack: nemik-history routed in the parity table, ceiling lowered",
-      "evidence": "2026-10-20: 2026-10-20 scoping: the history modes read git by spawning it (history._run, _git, citing_epochs, commit_snapshots, backfill), so the server, which may not spawn (W783), cannot call them per request. The route can only read a document a host-side run of the same function published: history_doc already feeds the static build's history.json (static_data), and nemik-hostroot (W779) is the pattern for a file the server reads with a freshness check. So W785 serves the published history documents, one per CLI mode, produced by the CLI's own function on the host, and the parity row names the function that writes the document",
+      "next_bounded_step": null,
+      "evidence": "2026-10-20: 2026-10-20 scoping: the history modes read git by spawning it (history._run, _git, citing_epochs, commit_snapshots, backfill), so the server, which may not spawn (W783), cannot call them per request. The route can only read a document a host-side run of the same function published: history_doc already feeds the static build's history.json (static_data), and nemik-hostroot (W779) is the pattern for a file the server reads with a freshness check. So W785 serves the published history documents, one per CLI mode, produced by the CLI's own function on the host, and the parity row names the function that writes the document | 2026-10-22: commit 9febfcc; nemik-history routed in the parity table (/history/ via history_response, --oldest via oldest_rows), pending ceiling 5 and card set W793",
       "issued_at": "2026-10-20T17:58:14Z",
       "minted_during": "tick",
       "caused_by": "W781",
-      "last_worked": "2026-10-22T22:40:53Z",
+      "last_worked": "2026-10-22T23:08:50Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/parity.py",
         "tests/test_parity.py"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261022T230850Z"
     },
     {
       "symbol": "W786",
@@ -17475,26 +17474,33 @@
     {
       "symbol": "W797",
       "title": "realizability, committed, letters, fold and nemik-collapse are served the same way, or excluded by a stated reason",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W793"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W860",
+        "W861",
+        "W862",
+        "W863",
+        "W864"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-20T20:15:10Z",
       "minted_during": "tick",
       "caused_by": "W793",
-      "last_worked": null,
+      "last_worked": "2026-10-22T23:09:09Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/serve.py",
         "src/nemik/parity.py",
         "tests/test_parity.py"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "completed": null
     },
     {
       "symbol": "W798",
@@ -19146,6 +19152,143 @@
         "codon-baseline.json"
       ],
       "size_class": "medium"
+    },
+    {
+      "symbol": "W860",
+      "title": "Serve nemik-check --realizability the way the command prints it, or exclude it by a stated reason",
+      "status": "working",
+      "enables": [
+        "W861",
+        "W862",
+        "W863",
+        "W864"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Read how check_reply serves ready-neither, unmanifested and integrity, then do the same for realizability, or add a stated exclusion row to parity.EXCLUDED",
+      "evidence": "",
+      "issued_at": "2026-10-22T23:09:09Z",
+      "minted_during": "interrupt",
+      "caused_by": "W797",
+      "last_worked": "2026-10-22T23:09:34Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/serve.py",
+        "src/nemik/parity.py",
+        "tests/test_parity.py",
+        "tests/test_serve_check_realizability.py"
+      ],
+      "size_class": "small",
+      "completed": null
+    },
+    {
+      "symbol": "W861",
+      "title": "Serve nemik-check --committed the way the command prints it, or exclude it by a stated reason",
+      "status": "blocked",
+      "enables": [
+        "W797"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "W860"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-22T23:09:09Z",
+      "minted_during": "interrupt",
+      "caused_by": "W797",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/serve.py",
+        "src/nemik/parity.py",
+        "tests/test_parity.py",
+        "tests/test_serve_check_committed.py"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W862",
+      "title": "Serve nemik-check --letters the way the command prints it, or exclude it by a stated reason",
+      "status": "blocked",
+      "enables": [
+        "W797"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "W860"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-22T23:09:09Z",
+      "minted_during": "interrupt",
+      "caused_by": "W797",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/serve.py",
+        "src/nemik/parity.py",
+        "tests/test_parity.py",
+        "tests/test_serve_check_letters.py"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W863",
+      "title": "Serve nemik-check --fold the way the command prints it, or exclude it by a stated reason",
+      "status": "blocked",
+      "enables": [
+        "W797"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "W860"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-22T23:09:09Z",
+      "minted_during": "interrupt",
+      "caused_by": "W797",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/serve.py",
+        "src/nemik/parity.py",
+        "tests/test_parity.py",
+        "tests/test_serve_check_fold.py"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W864",
+      "title": "Serve nemik-collapse the way the command prints it, or exclude it by a stated reason",
+      "status": "blocked",
+      "enables": [
+        "W797"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "W860"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-22T23:09:09Z",
+      "minted_during": "interrupt",
+      "caused_by": "W797",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/serve.py",
+        "src/nemik/parity.py",
+        "tests/test_parity.py",
+        "tests/test_serve_collapse.py"
+      ],
+      "size_class": "small"
     }
   ],
   "residue": [
@@ -19259,26 +19402,7 @@
   "heartbeat": "2026-10-22T02:06:35Z",
   "lock": null,
   "predecessor_job_id": "disarmed",
-  "leases": [
-    {
-      "tag": "file:src/nemik/parity.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W785",
-      "base_sha": "d1a40258cc22c08131d641d299575a53172d3bfc",
-      "taken_at": "2026-10-22T22:40:20Z",
-      "renewed_at": "2026-10-22T22:40:20Z",
-      "expires_at": "2026-10-22T23:10:20Z"
-    },
-    {
-      "tag": "file:tests/test_parity.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W785",
-      "base_sha": "d1a40258cc22c08131d641d299575a53172d3bfc",
-      "taken_at": "2026-10-22T22:40:20Z",
-      "renewed_at": "2026-10-22T22:40:20Z",
-      "expires_at": "2026-10-22T23:10:20Z"
-    }
-  ],
+  "leases": [],
   "advice": [
     {
       "tool": "block-behind-open",
