@@ -15286,26 +15286,23 @@
     {
       "symbol": "W717",
       "title": "Offer the browser-test helpers (webpage.watch, until, until_expecting) and the webpage_waits codemod, both modes, to mtools as a liftable tool for other repos",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:tests/webpage.py!w",
         "file:tools/webpage_waits.py!w",
         "file:pyproject.toml!w"
       ],
-      "blocked_on": [
-        "",
-        "W848"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Take the first webpage pin by hand at 48aa980f as mtools' install notes say (a vendored wheel like the seven, if they allow it), replace the copies of watch, until, until_expecting and the waits codemod, keep served() and open_page and the three probes; the chromium pin needs no change",
-      "evidence": "2026-10-19: 2026-10-19 mtools-ad: wants it as its own distribution (webpage) under the per-dist gate; claimed as mtools:W1683. Sent the sha 970d0d8 (holds tests/webpage.py last changed in 6c20bf0 and tools/webpage_waits.py) and the chromium pin 153.0.8010.12; they start after the gate stack and train work. We keep our copy until they name the mtools commit to lift from | 2026-10-19: 2026-10-19 read mtools:W1683: its open steps are W1684 (port the codemod), W1685 (port watch/until/until_expecting) and W1686 (pin chromium 153.0.8010.12 and run the probes), all of which enable W1683; they wait on mtools:W1667. All three must land before a lift can start, so W717 cites all three, not the umbrella | 2026-10-19: 2026-10-19 mtools-ad: mtools:W1684 (the dist plus the waits codemod) landed as mtools 31532d87; W1685 (watch, until, until_expecting, load) is behind their 30-entry stack; W1686 pins chromium. Our webpage_waits stays ours until a lift names a commit; the helpers are in W1685, so nothing to lift for tests/webpage.py yet | 2026-10-22: 2026-10-22 mtools-ad: W1686 (chromium and Playwright pin) still sits behind their manifest backlog W1667 and has not been started; it is large | 2026-10-22: 2026-10-22: mtools:W1686 is closed (atomized: the chromium pin landed as W1812 3b816b9d, the probes as tests moved under W1683). The webpage dist (W1684 31532d87) and the helpers (W1685 48aa980f) are in mtools' log. Asked mtools-ad which commit to vendor and whether the repin builds the webpage wheel; the copies stay until it is named | 2026-10-22: 2026-10-22 mtools-ad: vendor 48aa980fa94a9f111dfd1e87803f49436f597d19 (W1685, the last commit to touch the webpage source; the dist is 31532d87, the helpers watch/until/until_expecting/load are 48aa980f; the probes under W1816 add tests only). mikemol-repin carries pins a repo already has and does not add a dist, so the first webpage pin is taken by hand as mtools' INSTALL.md says, same sha as the other mtools specs; repin moves it after. The chromium pin is W1812 (landed) with the same archive and sha256 a9da0288...f9d1d: nemik's MODULE.bazel already names that URL and sha, so the pin is two-sided. The three probes stay nemik's until W1816 lands | 2026-10-22: 2026-10-22 mtools-ad: mtools:W1683 closed; lift from 76d601e (mtools:W1820), the probes run as bazel tests on the pinned chromium (TMPDIR needs TEST_TMPDIR; slice declared in webpage/stubs/playwright/sync_api/__init__.pyi). mtools:W1821 (RLIMIT_CORE 0 for the crash probe) lands right behind it: pin that one for the core limit. Supersedes the 48aa980 pin",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-19: 2026-10-19 mtools-ad: wants it as its own distribution (webpage) under the per-dist gate; claimed as mtools:W1683. Sent the sha 970d0d8 (holds tests/webpage.py last changed in 6c20bf0 and tools/webpage_waits.py) and the chromium pin 153.0.8010.12; they start after the gate stack and train work. We keep our copy until they name the mtools commit to lift from | 2026-10-19: 2026-10-19 read mtools:W1683: its open steps are W1684 (port the codemod), W1685 (port watch/until/until_expecting) and W1686 (pin chromium 153.0.8010.12 and run the probes), all of which enable W1683; they wait on mtools:W1667. All three must land before a lift can start, so W717 cites all three, not the umbrella | 2026-10-19: 2026-10-19 mtools-ad: mtools:W1684 (the dist plus the waits codemod) landed as mtools 31532d87; W1685 (watch, until, until_expecting, load) is behind their 30-entry stack; W1686 pins chromium. Our webpage_waits stays ours until a lift names a commit; the helpers are in W1685, so nothing to lift for tests/webpage.py yet | 2026-10-22: 2026-10-22 mtools-ad: W1686 (chromium and Playwright pin) still sits behind their manifest backlog W1667 and has not been started; it is large | 2026-10-22: 2026-10-22: mtools:W1686 is closed (atomized: the chromium pin landed as W1812 3b816b9d, the probes as tests moved under W1683). The webpage dist (W1684 31532d87) and the helpers (W1685 48aa980f) are in mtools' log. Asked mtools-ad which commit to vendor and whether the repin builds the webpage wheel; the copies stay until it is named | 2026-10-22: 2026-10-22 mtools-ad: vendor 48aa980fa94a9f111dfd1e87803f49436f597d19 (W1685, the last commit to touch the webpage source; the dist is 31532d87, the helpers watch/until/until_expecting/load are 48aa980f; the probes under W1816 add tests only). mikemol-repin carries pins a repo already has and does not add a dist, so the first webpage pin is taken by hand as mtools' INSTALL.md says, same sha as the other mtools specs; repin moves it after. The chromium pin is W1812 (landed) with the same archive and sha256 a9da0288...f9d1d: nemik's MODULE.bazel already names that URL and sha, so the pin is two-sided. The three probes stay nemik's until W1816 lands | 2026-10-22: 2026-10-22 mtools-ad: mtools:W1683 closed; lift from 76d601e (mtools:W1820), the probes run as bazel tests on the pinned chromium (TMPDIR needs TEST_TMPDIR; slice declared in webpage/stubs/playwright/sync_api/__init__.pyi). mtools:W1821 (RLIMIT_CORE 0 for the crash probe) lands right behind it: pin that one for the core limit. Supersedes the 48aa980 pin | 2026-10-22: 2026-10-22: W847 (7fa5fc6) vendored mikemol-webpage at 146ebaaf and W848 (346b043) replaced nemik's copies of watch, until, until_expecting, load and the waits codemod with it; served(), open_page and the probes stay nemik's",
       "issued_at": "2026-10-19T08:23:54Z",
       "minted_during": "interrupt",
       "caused_by": "github-8f",
-      "last_worked": "2026-10-22T15:10:38Z",
+      "last_worked": "2026-10-22T16:13:37Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261022T161337Z",
       "manifest": [
         "tests/webpage.py",
         "tools/webpage_waits.py"
@@ -18817,7 +18814,7 @@
     {
       "symbol": "W848",
       "title": "Replace the webpage helper copies with the vendored mikemol.webpage and list failed requests in a failed wait",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W717"
       ],
@@ -18829,14 +18826,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Submit the prepared stack: the wheel is wired into the Bazel venv, the helpers are re-exported from the vendored package, the codemod tests import it, the tool copy is deleted",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-22: commit 346b043; tests/webpage.py re-exports mikemol.webpage.page, the codemod tests import mikemol.webpage.waits, tools copy deleted, wheel wired in MODULE.bazel and the hub",
       "issued_at": "2026-10-22T15:10:38Z",
       "minted_during": "interrupt",
       "caused_by": "W717",
-      "last_worked": "2026-10-22T15:44:48Z",
+      "last_worked": "2026-10-22T16:13:30Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261022T161330Z",
       "manifest": [
         "tests/webpage.py",
         "tools/webpage_waits.py",
