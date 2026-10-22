@@ -1467,3 +1467,11 @@
 2026-10-22T08:36:43Z  status W840 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-22T08:45:33Z  tick  W840 advanced  sweep     "W840 gate in flight (stack314); mtools:W1806 waits on its sha [blocked by W839]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-22T08:50:47Z  status W704 blocked>done writer    "blocked -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T09:10:43Z  tick  W840 advanced  sweep     "W840 gate in flight (stack314, second run with the architecture claim fixed) [blocked by W839]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T09:21:52Z  status W840 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T09:41:20Z  tick  W836 advanced  sweep     "W702's block cited the mtools umbrella; it now cites its own child W839 (itself on mtools:W1806, now working); W836's next slice scoped around the mypy and census constraints [blocked by W839]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T09:44:09Z  status W839 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T09:44:15Z  interrupt W841 minted    -         "The adapter reads deploys and landed_at from the queue JSON, and a shape warns on a done card with deploys set and no witness"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W839
+2026-10-22T09:44:15Z  interrupt W842 minted    -         "Landed is not done anywhere nemik reads state: allBlockersLanded keeps a waiter on a landed card blocked, and the view draws landed with a mark of its own"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W839
+2026-10-22T10:01:47Z  interrupt W843 minted    -         "Repin the seven vendored mtools wheels to d5d8110, whose writer takes the status landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W702
+2026-10-22T10:01:54Z  status W843 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
