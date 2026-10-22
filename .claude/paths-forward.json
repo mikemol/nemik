@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 839,
+  "counter": 840,
   "waypoints": [
     {
       "symbol": "W1",
@@ -14874,7 +14874,6 @@
       "touches": [],
       "blocked_on": [
         "mtools:W1644",
-        "W838",
         "W839"
       ],
       "blocked_kind": "agent",
@@ -14884,7 +14883,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-22T08:06:40Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "src/nemik/data/nemik.ttl",
@@ -18546,7 +18545,7 @@
     {
       "symbol": "W838",
       "title": "Landed state vocabulary and shape: WaypointStates gains landed (skos:closeMatch oslc_cm:Fixed, witnessed by the deploy witness) and a shape warns on done with no witness, per the agreement mtools-ad reached on 2026-10-18",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W702"
       ],
@@ -18555,19 +18554,19 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Landing: landed joins the waypoint states scheme (LandedStatus, close to CM Fixed; Done close to CM Verified) with deploys and landedAt declared. The shape that warns on done with deploys and no witness moves to W839, with the adapter that reads the fields",
+      "next_bounded_step": null,
       "evidence": "",
       "issued_at": "2026-10-22T08:06:40Z",
       "minted_during": "interrupt",
       "caused_by": "W702",
-      "last_worked": "2026-10-22T08:12:26Z",
+      "last_worked": "2026-10-22T08:32:24Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/data/nemik.ttl",
         "tests/test_landed_status.py"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261022T083224Z"
     },
     {
       "symbol": "W839",
@@ -18595,6 +18594,34 @@
         "tests/test_landed_state.py"
       ],
       "size_class": "medium"
+    },
+    {
+      "symbol": "W840",
+      "title": "Accept the status landed ahead of the writer: the waypoint shape takes nemik:LandedStatus and the adapter maps landed to it with closed false, so mtools can write the status without a Warning on every landed card",
+      "status": "working",
+      "enables": [
+        "W839"
+      ],
+      "touches": [
+        "file:src/nemik/adapter.py!w",
+        "file:src/nemik/data/shapes.ttl!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Landing: STATE maps landed to LandedStatus, WaypointShape's state list takes it, closed stays false; a test with a landed card reads no vocabulary Warning and a card in a status outside the five still does",
+      "evidence": "",
+      "issued_at": "2026-10-22T08:36:29Z",
+      "minted_during": "tick",
+      "caused_by": "mtools:W1806",
+      "last_worked": "2026-10-22T08:36:43Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/adapter.py",
+        "src/nemik/data/shapes.ttl",
+        "tests/test_landed_accepted.py"
+      ],
+      "size_class": "small"
     }
   ],
   "residue": [
@@ -18708,13 +18735,22 @@
   "predecessor_job_id": "disarmed",
   "leases": [
     {
-      "tag": "file:src/nemik/data/nemik.ttl!w",
+      "tag": "file:src/nemik/adapter.py!w",
       "holder": "claude-nemik",
-      "waypoint": "W838",
-      "base_sha": "2662e3f526c1f2eebcfe3c3be2e0de69cdd4b96e",
-      "taken_at": "2026-10-22T08:12:26Z",
-      "renewed_at": "2026-10-22T08:12:26Z",
-      "expires_at": "2026-10-22T08:42:26Z"
+      "waypoint": "W840",
+      "base_sha": "fa7ddb6d9b726d920221c8c67c4985dbd5973a6b",
+      "taken_at": "2026-10-22T08:36:43Z",
+      "renewed_at": "2026-10-22T08:36:43Z",
+      "expires_at": "2026-10-22T09:06:43Z"
+    },
+    {
+      "tag": "file:src/nemik/data/shapes.ttl!w",
+      "holder": "claude-nemik",
+      "waypoint": "W840",
+      "base_sha": "fa7ddb6d9b726d920221c8c67c4985dbd5973a6b",
+      "taken_at": "2026-10-22T08:36:43Z",
+      "renewed_at": "2026-10-22T08:36:43Z",
+      "expires_at": "2026-10-22T09:06:43Z"
     }
   ],
   "advice": [
