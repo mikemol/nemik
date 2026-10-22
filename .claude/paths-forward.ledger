@@ -1489,3 +1489,9 @@
 2026-10-22T11:56:00Z  status W844 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-22T12:11:31Z  tick  W845 minted    -         "Draw the landed status in the view with a mark and a colour of its own: a state mark, a legend entry and a theme token that clears the contrast and second-channel checks"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W839
 2026-10-22T12:12:30Z  status W842 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T12:26:04Z  status W839 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T12:26:04Z  status W842 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T12:26:37Z  status W702 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T12:26:37Z  status W839 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T12:26:40Z  tick  W842 advanced  sweep     "67521fc landed-blocker rule pinned; W839 closed on W841 and W842; W702 now waits on the view mark W845 [blocked by W845]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T12:40:02Z  status W845 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
