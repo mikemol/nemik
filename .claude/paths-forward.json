@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 845,
+  "counter": 848,
   "waypoints": [
     {
       "symbol": "W1",
@@ -14893,7 +14893,7 @@
     {
       "symbol": "W703",
       "title": "The image build consumes the commit gate result for the same tree sha, or drops its test stage and builds only gated shas",
-      "status": "working",
+      "status": "landed",
       "enables": [
         "W571"
       ],
@@ -14905,11 +14905,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Landing the gated stage: build.yml picks it on a Gated-Tree trailer equal to the tree; Containerfile takes it by TESTS; test_containerfile pins both",
-      "evidence": "2026-10-18: 2026-10-18 luthen vlogs_query (nemik.image-replica, sha 406e3bd, 22:12:25Z): 3 failed, 964 passed, 6 skipped in 2491.81 s; the one assert surfaced is tests/test_series_board.py:95 assert \"not awake\" not in _wake_text(None) (the Wake panel drew a board with no --series in the image, though the gate passed the same tree); the other two FAILED lines are not yet read. The image runs the suite under a different environment than the gate, which is the case for consuming the gate result | 2026-10-18: CORRECTION 2026-10-18 (luthen): the 406e3bd failures were not the not-awake assert. test_series_board.py:79 and test_sources_fetch.py:78 raised playwright TimeoutError, wait_for_function 60000 ms, under the loaded 41-minute stage; the third failure is not read yet. My earlier note that the Wake panel drew a board in the image was wrong. The wall-clock waits are W705 | 2026-10-19: 2026-10-18 luthen: with a 41 min pytest stage and a commit about every 20 min, supersession cancels the image test stage before it can finish, so consuming the gate result for the tree sha (or building only gated shas) is the real fix and makes supersession harmless; timeout=0 (b598f28) removes the other failure only | 2026-10-19: 2026-10-19 mtools-ad (claimed as mtools:W1666, not built): no gated-tree record is readable today (no git note; the stack snapshot is deleted after the run). The writer will add a Gated-Tree: <tree sha> trailer only on a commit whose own tree the gate ran on (a single commit or a stack tip); other stack entries get Gated-by: (mtools:W1651) and no Gated-Tree. So build.yml may check Gated-Tree == git rev-parse HEAD^{tree} on the pushed head and skip the pytest stage on a match; no trailer runs the full stage | 2026-10-19: 2026-10-19 ~17:54Z luthen-observability-d9 (read from the store, cluster and registry): both ready pods run tag 1792407417-4c688c1d (2026-10-19 10:56:57Z), the Flux ImagePolicy latestRef is the same and is the last tag in the registry: nemik HEAD 650a278 has no image and the registry built nothing in about 7 h; 20 commits (4c688c1d..origin/main) are unshipped. Whether supersession is still cancelling could not be read (Forgejo run state is in no series; an API read needs a token luthen will not use without the operator). build.yml has no concurrency section and the Containerfile test stage re-runs the whole pytest suite (41 min) per push, at a push cadence of about 20 min. The fix is this card: the image consumes the gate result instead of re-running it | 2026-10-21: 2026-10-20 mtools-ad: mtools:W1745 landed at c44b760: in a stack the tip commit carries Gated-Tree: <its tree> (as a single commit does since W1666) and each earlier commit Gated-by: <the tip's waypoint>; seen on c44b760 itself (a one-entry stack is its own tip). Not covered: commits the train lands for joined stacks; mtools-ad has not read whether they go through the same builder, so that part of W703 stays open on their side | 2026-10-21: 2026-10-20 mtools-ad correction to the W1745 note: traindrive.py builds the commits it lands with stackland.build over the flattened entries (line 217), so they carry the same trailers as a stack: the last entry built Gated-Tree, every other Gated-by naming that tip's waypoint (after a bisect, the green prefix's own tip). So W703 is covered for stacks and trains from c44b760; not yet seen on a real multi-submission train landing | 2026-10-21: 2026-10-21 mtools-ad: Gated-* trailers on train-landed prefix commits from c44b760 are unreliable until mtools:W1651 lands (stamped for the red tip, not the prefix); stacks and fully green trains are right | 2026-10-21: 2026-10-21 mtools-ad: mtools:W1651 landed f39dd23; Gated-* on stack and train landings is accurate from f39dd23; prefix landings between c44b760 and f39dd23 may name a red tip",
+      "evidence": "2026-10-18: 2026-10-18 luthen vlogs_query (nemik.image-replica, sha 406e3bd, 22:12:25Z): 3 failed, 964 passed, 6 skipped in 2491.81 s; the one assert surfaced is tests/test_series_board.py:95 assert \"not awake\" not in _wake_text(None) (the Wake panel drew a board with no --series in the image, though the gate passed the same tree); the other two FAILED lines are not yet read. The image runs the suite under a different environment than the gate, which is the case for consuming the gate result | 2026-10-18: CORRECTION 2026-10-18 (luthen): the 406e3bd failures were not the not-awake assert. test_series_board.py:79 and test_sources_fetch.py:78 raised playwright TimeoutError, wait_for_function 60000 ms, under the loaded 41-minute stage; the third failure is not read yet. My earlier note that the Wake panel drew a board in the image was wrong. The wall-clock waits are W705 | 2026-10-19: 2026-10-18 luthen: with a 41 min pytest stage and a commit about every 20 min, supersession cancels the image test stage before it can finish, so consuming the gate result for the tree sha (or building only gated shas) is the real fix and makes supersession harmless; timeout=0 (b598f28) removes the other failure only | 2026-10-19: 2026-10-19 mtools-ad (claimed as mtools:W1666, not built): no gated-tree record is readable today (no git note; the stack snapshot is deleted after the run). The writer will add a Gated-Tree: <tree sha> trailer only on a commit whose own tree the gate ran on (a single commit or a stack tip); other stack entries get Gated-by: (mtools:W1651) and no Gated-Tree. So build.yml may check Gated-Tree == git rev-parse HEAD^{tree} on the pushed head and skip the pytest stage on a match; no trailer runs the full stage | 2026-10-19: 2026-10-19 ~17:54Z luthen-observability-d9 (read from the store, cluster and registry): both ready pods run tag 1792407417-4c688c1d (2026-10-19 10:56:57Z), the Flux ImagePolicy latestRef is the same and is the last tag in the registry: nemik HEAD 650a278 has no image and the registry built nothing in about 7 h; 20 commits (4c688c1d..origin/main) are unshipped. Whether supersession is still cancelling could not be read (Forgejo run state is in no series; an API read needs a token luthen will not use without the operator). build.yml has no concurrency section and the Containerfile test stage re-runs the whole pytest suite (41 min) per push, at a push cadence of about 20 min. The fix is this card: the image consumes the gate result instead of re-running it | 2026-10-21: 2026-10-20 mtools-ad: mtools:W1745 landed at c44b760: in a stack the tip commit carries Gated-Tree: <its tree> (as a single commit does since W1666) and each earlier commit Gated-by: <the tip's waypoint>; seen on c44b760 itself (a one-entry stack is its own tip). Not covered: commits the train lands for joined stacks; mtools-ad has not read whether they go through the same builder, so that part of W703 stays open on their side | 2026-10-21: 2026-10-20 mtools-ad correction to the W1745 note: traindrive.py builds the commits it lands with stackland.build over the flattened entries (line 217), so they carry the same trailers as a stack: the last entry built Gated-Tree, every other Gated-by naming that tip's waypoint (after a bisect, the green prefix's own tip). So W703 is covered for stacks and trains from c44b760; not yet seen on a real multi-submission train landing | 2026-10-21: 2026-10-21 mtools-ad: Gated-* trailers on train-landed prefix commits from c44b760 are unreliable until mtools:W1651 lands (stamped for the red tip, not the prefix); stacks and fully green trains are right | 2026-10-21: 2026-10-21 mtools-ad: mtools:W1651 landed f39dd23; Gated-* on stack and train landings is accurate from f39dd23; prefix landings between c44b760 and f39dd23 may name a red tip | 2026-10-22: commit 9bfec9c; build.yml picks the gated stage on a Gated-Tree trailer equal to the tree. Not yet seen on a real push: the first image build from a stamped commit should log 'image test stage: gated'. A first gate run also failed test_modes with 'popLater is not defined' (a flake: the same stack passed on rerun)",
       "issued_at": "2026-10-18T23:54:59Z",
       "minted_during": "interrupt",
       "caused_by": "github-8f",
-      "last_worked": "2026-10-22T14:02:49Z",
+      "last_worked": "2026-10-22T14:53:31Z",
       "ticks_blocked": 0,
       "manifest": [
         "Containerfile",
@@ -14918,7 +14918,9 @@
         "tests/test_containerfile.py"
       ],
       "size_class": "medium",
-      "completed": null
+      "completed": null,
+      "landed_at": "20261022T145331Z",
+      "deploys": true
     },
     {
       "symbol": "W704",
@@ -15284,7 +15286,7 @@
     {
       "symbol": "W717",
       "title": "Offer the browser-test helpers (webpage.watch, until, until_expecting) and the webpage_waits codemod, both modes, to mtools as a liftable tool for other repos",
-      "status": "ready",
+      "status": "blocked",
       "enables": [],
       "touches": [
         "file:tests/webpage.py!w",
@@ -15292,15 +15294,17 @@
         "file:pyproject.toml!w"
       ],
       "blocked_on": [
-        ""
+        "",
+        "W847",
+        "W848"
       ],
-      "blocked_kind": null,
+      "blocked_kind": "agent",
       "next_bounded_step": "Take the first webpage pin by hand at 48aa980f as mtools' install notes say (a vendored wheel like the seven, if they allow it), replace the copies of watch, until, until_expecting and the waits codemod, keep served() and open_page and the three probes; the chromium pin needs no change",
-      "evidence": "2026-10-19: 2026-10-19 mtools-ad: wants it as its own distribution (webpage) under the per-dist gate; claimed as mtools:W1683. Sent the sha 970d0d8 (holds tests/webpage.py last changed in 6c20bf0 and tools/webpage_waits.py) and the chromium pin 153.0.8010.12; they start after the gate stack and train work. We keep our copy until they name the mtools commit to lift from | 2026-10-19: 2026-10-19 read mtools:W1683: its open steps are W1684 (port the codemod), W1685 (port watch/until/until_expecting) and W1686 (pin chromium 153.0.8010.12 and run the probes), all of which enable W1683; they wait on mtools:W1667. All three must land before a lift can start, so W717 cites all three, not the umbrella | 2026-10-19: 2026-10-19 mtools-ad: mtools:W1684 (the dist plus the waits codemod) landed as mtools 31532d87; W1685 (watch, until, until_expecting, load) is behind their 30-entry stack; W1686 pins chromium. Our webpage_waits stays ours until a lift names a commit; the helpers are in W1685, so nothing to lift for tests/webpage.py yet | 2026-10-22: 2026-10-22 mtools-ad: W1686 (chromium and Playwright pin) still sits behind their manifest backlog W1667 and has not been started; it is large | 2026-10-22: 2026-10-22: mtools:W1686 is closed (atomized: the chromium pin landed as W1812 3b816b9d, the probes as tests moved under W1683). The webpage dist (W1684 31532d87) and the helpers (W1685 48aa980f) are in mtools' log. Asked mtools-ad which commit to vendor and whether the repin builds the webpage wheel; the copies stay until it is named | 2026-10-22: 2026-10-22 mtools-ad: vendor 48aa980fa94a9f111dfd1e87803f49436f597d19 (W1685, the last commit to touch the webpage source; the dist is 31532d87, the helpers watch/until/until_expecting/load are 48aa980f; the probes under W1816 add tests only). mikemol-repin carries pins a repo already has and does not add a dist, so the first webpage pin is taken by hand as mtools' INSTALL.md says, same sha as the other mtools specs; repin moves it after. The chromium pin is W1812 (landed) with the same archive and sha256 a9da0288...f9d1d: nemik's MODULE.bazel already names that URL and sha, so the pin is two-sided. The three probes stay nemik's until W1816 lands",
+      "evidence": "2026-10-19: 2026-10-19 mtools-ad: wants it as its own distribution (webpage) under the per-dist gate; claimed as mtools:W1683. Sent the sha 970d0d8 (holds tests/webpage.py last changed in 6c20bf0 and tools/webpage_waits.py) and the chromium pin 153.0.8010.12; they start after the gate stack and train work. We keep our copy until they name the mtools commit to lift from | 2026-10-19: 2026-10-19 read mtools:W1683: its open steps are W1684 (port the codemod), W1685 (port watch/until/until_expecting) and W1686 (pin chromium 153.0.8010.12 and run the probes), all of which enable W1683; they wait on mtools:W1667. All three must land before a lift can start, so W717 cites all three, not the umbrella | 2026-10-19: 2026-10-19 mtools-ad: mtools:W1684 (the dist plus the waits codemod) landed as mtools 31532d87; W1685 (watch, until, until_expecting, load) is behind their 30-entry stack; W1686 pins chromium. Our webpage_waits stays ours until a lift names a commit; the helpers are in W1685, so nothing to lift for tests/webpage.py yet | 2026-10-22: 2026-10-22 mtools-ad: W1686 (chromium and Playwright pin) still sits behind their manifest backlog W1667 and has not been started; it is large | 2026-10-22: 2026-10-22: mtools:W1686 is closed (atomized: the chromium pin landed as W1812 3b816b9d, the probes as tests moved under W1683). The webpage dist (W1684 31532d87) and the helpers (W1685 48aa980f) are in mtools' log. Asked mtools-ad which commit to vendor and whether the repin builds the webpage wheel; the copies stay until it is named | 2026-10-22: 2026-10-22 mtools-ad: vendor 48aa980fa94a9f111dfd1e87803f49436f597d19 (W1685, the last commit to touch the webpage source; the dist is 31532d87, the helpers watch/until/until_expecting/load are 48aa980f; the probes under W1816 add tests only). mikemol-repin carries pins a repo already has and does not add a dist, so the first webpage pin is taken by hand as mtools' INSTALL.md says, same sha as the other mtools specs; repin moves it after. The chromium pin is W1812 (landed) with the same archive and sha256 a9da0288...f9d1d: nemik's MODULE.bazel already names that URL and sha, so the pin is two-sided. The three probes stay nemik's until W1816 lands | 2026-10-22: 2026-10-22 mtools-ad: mtools:W1683 closed; lift from 76d601e (mtools:W1820), the probes run as bazel tests on the pinned chromium (TMPDIR needs TEST_TMPDIR; slice declared in webpage/stubs/playwright/sync_api/__init__.pyi). mtools:W1821 (RLIMIT_CORE 0 for the crash probe) lands right behind it: pin that one for the core limit. Supersedes the 48aa980 pin",
       "issued_at": "2026-10-19T08:23:54Z",
       "minted_during": "interrupt",
       "caused_by": "github-8f",
-      "last_worked": "2026-10-22T11:35:59Z",
+      "last_worked": "2026-10-22T15:10:38Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -18760,6 +18764,74 @@
       ],
       "size_class": "medium",
       "completed": "20261022T135004Z"
+    },
+    {
+      "symbol": "W846",
+      "title": "test_modes failed once with 'Uncaught ReferenceError: popLater is not defined' at page load, then passed on rerun of the same tree: find why a head script's definition can be missing when index.html's wiring runs",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Read the failed test log and the page's script load order; reproduce by loading the page repeatedly under load; look for a head script served incomplete or the load-time wiring running before the script that defines popLater",
+      "evidence": "2026-10-22: 2026-10-22: not reproduced: //:test_modes x15 concurrent runs all pass (bazel --runs_per_test=15). The server is threaded and reads each file whole, popLater is a hoisted declaration in cards.js, so a missing definition means cards.js did not load (a silent script-load failure). The first failure's log was overwritten by the passing rerun. Add a requestfailed and response-status listener to the vendored webpage helper (W717) so the next occurrence names the file",
+      "issued_at": "2026-10-22T14:53:40Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W703",
+      "last_worked": "2026-10-22T15:10:13Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/web/index.html",
+        "src/nemik/serve.py",
+        "tests/test_modes.py"
+      ],
+      "size_class": "small",
+      "completed": null
+    },
+    {
+      "symbol": "W847",
+      "title": "Vendor mtools' webpage dist at 146ebaaf as a wheel and pin it as a dev dependency",
+      "status": "working",
+      "enables": [
+        "W717"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Build the wheel from git archive 146ebaaf, add the dev dependency and its path source, lock, add the hash line",
+      "evidence": "",
+      "issued_at": "2026-10-22T15:10:38Z",
+      "minted_during": "interrupt",
+      "caused_by": "W717",
+      "last_worked": "2026-10-22T15:10:48Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "vendor/wheels/mikemol_webpage-0.1.0+146ebaaf-py3-none-any.whl",
+        "vendor/wheels/SHA256SUMS",
+        "vendor/wheels/README.md",
+        "pyproject.toml",
+        "uv.lock"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W848",
+      "title": "Replace the webpage helper copies with the vendored mikemol.webpage and list failed requests in a failed wait",
+      "status": "ready",
+      "enables": [
+        "W717"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-22T15:10:38Z",
+      "minted_during": "interrupt",
+      "caused_by": "W717",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -18866,35 +18938,7 @@
   "heartbeat": "2026-10-22T02:06:35Z",
   "lock": null,
   "predecessor_job_id": "disarmed",
-  "leases": [
-    {
-      "tag": "file:Containerfile!w",
-      "holder": "(unlocked)",
-      "waypoint": "W703",
-      "base_sha": "cc213df386ddfd074752c5bd710f637ec51d8e6b",
-      "taken_at": "2026-10-22T14:02:49Z",
-      "renewed_at": "2026-10-22T14:02:49Z",
-      "expires_at": "2026-10-22T14:32:49Z"
-    },
-    {
-      "tag": "file:BUILD.bazel!w",
-      "holder": "(unlocked)",
-      "waypoint": "W703",
-      "base_sha": "cc213df386ddfd074752c5bd710f637ec51d8e6b",
-      "taken_at": "2026-10-22T14:02:49Z",
-      "renewed_at": "2026-10-22T14:02:49Z",
-      "expires_at": "2026-10-22T14:32:49Z"
-    },
-    {
-      "tag": "file:.forgejo/workflows/build.yml!w",
-      "holder": "(unlocked)",
-      "waypoint": "W703",
-      "base_sha": "cc213df386ddfd074752c5bd710f637ec51d8e6b",
-      "taken_at": "2026-10-22T14:02:49Z",
-      "renewed_at": "2026-10-22T14:02:49Z",
-      "expires_at": "2026-10-22T14:32:49Z"
-    }
-  ],
+  "leases": [],
   "advice": [
     {
       "tool": "block-behind-open",

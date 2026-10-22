@@ -1499,3 +1499,10 @@
 2026-10-22T13:50:04Z  status W845 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-22T13:51:07Z  status W702 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-22T14:02:49Z  status W703 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T14:53:31Z  status W703 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T14:53:40Z  interrupt W846 minted    -         "test_modes failed once with 'Uncaught ReferenceError: popLater is not defined' at page load, then passed on rerun of the same tree: find why a head script's definition can be missing when index.html's wiring runs"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W703
+2026-10-22T15:04:28Z  status W846 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T15:10:13Z  status W846 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T15:10:38Z  interrupt W847 minted    -         "Vendor mtools' webpage dist at 146ebaaf as a wheel and pin it as a dev dependency"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W717
+2026-10-22T15:10:38Z  interrupt W848 minted    -         "Replace the webpage helper copies with the vendored mikemol.webpage and list failed requests in a failed wait"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W717
+2026-10-22T15:10:48Z  status W847 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
