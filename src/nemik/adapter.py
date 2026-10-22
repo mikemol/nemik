@@ -340,6 +340,12 @@ def _queue_graph(repo: str, state_path: Path, known: frozenset[str]) -> Graph:
         # (OSLC CM 3.0: the date no further work is intended), typed as xsd:dateTime
         if closed_at := _extended(model.text(w, "completed")):
             g.add((node, OSLC_CM.closeDate, _instant(closed_at)))
+        # nemik:W841 (mtools:W1643): a card whose change is deployed says so (deploys), and the
+        # writer stamps the moment it entered landed once (landed_at, RFC 5545 UTC, like completed)
+        if model.text(w, "deploys").lower() == "true":
+            g.add((node, NEMIK.deploys, Literal("true", datatype=XSD.boolean)))
+        if landed_at := _extended(model.text(w, "landed_at")):
+            g.add((node, NEMIK.landedAt, _instant(landed_at)))
         # nemik:W616: when the card was last worked, for the stalled and progress-invisible checks
         if worked := model.text(w, "last_worked"):
             g.add((node, NEMIK.lastWorked, _instant(worked)))
