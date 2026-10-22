@@ -1541,3 +1541,8 @@
 2026-10-22T18:34:26Z  interrupt W857 minted    -         "A host-side publisher and a freshness-checked route for the history events mode"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W785
 2026-10-22T18:34:26Z  interrupt W858 minted    -         "A host-side publisher and a freshness-checked route for the history density mode"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W785
 2026-10-22T18:35:02Z  status W853 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T18:43:32Z  status W854 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T18:43:33Z  status W855 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T18:43:34Z  status W856 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T18:43:35Z  status W857 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T18:43:36Z  status W858 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

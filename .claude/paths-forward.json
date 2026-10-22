@@ -18948,114 +18948,163 @@
       "touches": [
         "file:src/nemik/serve.py!w",
         "file:src/nemik/history.py!w",
-        "file:tests/test_serve_history_oldest.py!w"
+        "file:tests/test_serve_history_oldest.py!w",
+        "file:tests/test_serve_no_spawn.py!w",
+        "file:mypy-baseline.json!w"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Read how history_doc and the hostroot publisher write and serve a cached document, then add the oldest mode the same way",
+      "next_bounded_step": "Submit the prepared stack: oldest_rows shared by the command and the /oldest.json route",
       "evidence": "",
       "issued_at": "2026-10-22T18:34:26Z",
       "minted_during": "interrupt",
       "caused_by": "W785",
-      "last_worked": "2026-10-22T18:35:02Z",
+      "last_worked": "2026-10-22T18:47:35Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "src/nemik/serve.py",
         "src/nemik/history.py",
-        "tests/test_serve_history_oldest.py"
+        "tests/test_serve_history_oldest.py",
+        "tests/test_serve_no_spawn.py",
+        "mypy-baseline.json"
       ],
       "size_class": "small"
     },
     {
       "symbol": "W854",
       "title": "A host-side publisher and a freshness-checked route for the history waits mode",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W785"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W853"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-22T18:34:26Z",
       "minted_during": "interrupt",
       "caused_by": "W785",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-22T18:43:32Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/serve.py",
+        "src/nemik/history.py",
+        "tests/test_serve_history_waits.py"
+      ],
+      "size_class": "small"
     },
     {
       "symbol": "W855",
       "title": "A host-side publisher and a freshness-checked route for the history forecast mode",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W785"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W853"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-22T18:34:26Z",
       "minted_during": "interrupt",
       "caused_by": "W785",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-22T18:43:33Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/serve.py",
+        "src/nemik/history.py",
+        "tests/test_serve_history_forecast.py"
+      ],
+      "size_class": "small"
     },
     {
       "symbol": "W856",
       "title": "A host-side publisher and a freshness-checked route for the history score mode",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W785"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W853"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-22T18:34:26Z",
       "minted_during": "interrupt",
       "caused_by": "W785",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-22T18:43:34Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/serve.py",
+        "src/nemik/history.py",
+        "tests/test_serve_history_score.py"
+      ],
+      "size_class": "small"
     },
     {
       "symbol": "W857",
       "title": "A host-side publisher and a freshness-checked route for the history events mode",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W785"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W853"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-22T18:34:26Z",
       "minted_during": "interrupt",
       "caused_by": "W785",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-22T18:43:35Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/serve.py",
+        "src/nemik/history.py",
+        "tests/test_serve_history_events.py"
+      ],
+      "size_class": "small"
     },
     {
       "symbol": "W858",
       "title": "A host-side publisher and a freshness-checked route for the history density mode",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W785"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W853"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-22T18:34:26Z",
       "minted_during": "interrupt",
       "caused_by": "W785",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-22T18:43:36Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/serve.py",
+        "src/nemik/history.py",
+        "tests/test_serve_history_density.py"
+      ],
+      "size_class": "small"
     }
   ],
   "residue": [
