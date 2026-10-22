@@ -1529,3 +1529,15 @@
 2026-10-22T18:11:31Z  status W548 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-22T18:22:23Z  status W548 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-22T18:23:07Z  status W546 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T18:33:25Z  status W571 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T18:33:25Z  status W636 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T18:33:25Z  status W703 landed>done writer    "landed -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T18:33:34Z  interrupt W852 minted    -         "Confirm the first image build from a stamped commit ran the gated stage, not the suite: a build log line naming it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W703
+2026-10-22T18:33:42Z  status W852 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T18:34:26Z  interrupt W853 minted    -         "A host-side publisher and a freshness-checked route for the history oldest mode"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W785
+2026-10-22T18:34:26Z  interrupt W854 minted    -         "A host-side publisher and a freshness-checked route for the history waits mode"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W785
+2026-10-22T18:34:26Z  interrupt W855 minted    -         "A host-side publisher and a freshness-checked route for the history forecast mode"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W785
+2026-10-22T18:34:26Z  interrupt W856 minted    -         "A host-side publisher and a freshness-checked route for the history score mode"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W785
+2026-10-22T18:34:26Z  interrupt W857 minted    -         "A host-side publisher and a freshness-checked route for the history events mode"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W785
+2026-10-22T18:34:26Z  interrupt W858 minted    -         "A host-side publisher and a freshness-checked route for the history density mode"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W785
+2026-10-22T18:35:02Z  status W853 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

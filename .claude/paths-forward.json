@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 851,
+  "counter": 858,
   "waypoints": [
     {
       "symbol": "W1",
@@ -11007,21 +11007,24 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Design: the writer emits a done/dropped event (mtools:W1215 prunes dependents at once, so the writer emits and nemik delivers, one copy of the logic); nemik reads the event and for each cross-repo edge (caused_by, enables, blocked_on) writes one inbox letter and, if the owning session is live, a message; delivered once and recorded. Children: W547 the delivery record and edge walk, W548 the live-session message. Measured: wake() in src/nemik/witnesses.py:267 is called only after nemik-witnesses --apply, covers only blocked_on waiters, and records nothing but the letter file.",
-      "evidence": "",
+      "next_bounded_step": "Find what tells nemik a card went done or dropped when no witness applied it (the writer's done event, mtools:W1215, or the ledger line) and call deliver from that trigger; the letter is the only channel",
+      "evidence": "2026-10-22: 2026-10-22: W547 done (record W849, letters W850, wake W851); W548 dropped (no session interface). Remaining: deliver runs only from nemik-witnesses --apply via wake, so a card closed by the writer directly sends nothing; needs the trigger",
       "issued_at": "2026-10-15T19:22:40Z",
       "minted_during": "tick",
       "caused_by": "github-8f",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-22T18:23:23Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/witnesses.py"
+      ],
+      "size_class": "medium"
     },
     {
       "symbol": "W547",
       "title": "Delivery record and edge walk for a done or dropped card: one inbox letter per cross-repo edge, delivered once",
       "status": "done",
       "enables": [
-        "W546",
-        "W548"
+        "W546"
       ],
       "touches": [
         "letters",
@@ -11586,23 +11589,21 @@
     {
       "symbol": "W571",
       "title": "One test run for the commit gate and the image: a commit that breaks the image's test stage cannot land or be pushed",
-      "status": "blocked",
+      "status": "ready",
       "enables": [],
       "touches": [
         "gate",
         "image"
       ],
-      "blocked_on": [
-        "W703"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "Umbrella: W703 (image consumes the gate result or admits only gated shas, ours) and W704 (queue, never cancel, luthen) land first",
       "evidence": "2026-10-16: 2026-10-16 github-8f: agreed to land the cheap one now (collect every module with the NEMIK_* variables stripped, PLUS mypy run the way the image runs it, editable install included, so 'source file found twice' fails at the gate too). STRUCTURAL END STATE: one test definition, not two runs kept in step: the image's test stage should run the same target the gate runs (the Bazel test, or one declared command both call), so environment and data come from one place; the pre-push buildctl run is the fallback if that is not reachable soon. | 2026-10-16: 2026-10-16 committed 55f4369: tools/gate_staged.sh runs, before the suite and in the staged tree, (1) pytest --collect-only with an empty environment (env -i), the exit-2 class, and (2) tools/mypy_ratchet.py with PYTHONPATH=src, the editable-install 'source file found twice' class (reproduced: the old mypy_path gives exactly that error under PYTHONPATH=src); tests/test_precommit_gate.py holds both stages and their order. It ran green on its own commit. REMAINING: the structural end state github-8f asked for, one test definition that the Containerfile and //:precommit both call, with the pre-push buildctl run (W525) as the fallback. | 2026-10-18: 2026-10-18 github-8f/luthen (alert nemik_build_no_image): the image test stage ran pytest 2389 s on 5f4038a and passed; buildkit logs context canceled every 20 min (:06 :26 :46, 17:46Z to 23:36Z) so builds are cut off before a 40-minute stage ends; one pytest failure at 22:12Z, test not yet named. Direction: the image consumes the gate results for that tree sha (bazel test against the same remote cache) or drops its test stage and admits only gated shas. Cancel cause (wall-clock timeout breaks the no-wall-clock rule; supersession must queue) is luthen pipeline side",
       "issued_at": "2026-10-16T07:24:01Z",
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-18T23:55:12Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "Containerfile",
@@ -13063,22 +13064,20 @@
     {
       "symbol": "W636",
       "title": "The pod mounts only per-repo exports, read-only, and nothing else from a repo",
-      "status": "blocked",
+      "status": "ready",
       "enables": [
         "W516"
       ],
       "touches": [],
-      "blocked_on": [
-        "W703"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "When the image rolls to a build containing 6e6dc0c, tell luthen-observability so W1291 reads it back; W703 is what gets a build to finish",
       "evidence": "2026-10-18: part 1 landed 589ab07 (pushed): nemik-serve --publish --exports DIR, exports_key rebuild, tests/test_publish_exports.py. Remaining: the pod's deployment passes --exports, only once an exports directory exists (nemik-exports, W635 part 2 in the gate); a pod given --exports with an empty directory publishes nothing | 2026-10-18: 2026-10-17 asked luthen-observability where withheld.json exists at pod build time (path in the export mount, or fetched), before touching deploy/ | 2026-10-18: 2026-10-17 luthen-observability: the withheld list is a HOST file ~/.local/share/luthen/nemik-export/withheld.json beside the queues in the export tree the pod mounts read-only (version 1, as_of, items {ref, field, rule}), not fetched. Written only by python -m checks.nemik_egress (step 1 of checks.nemik_publish); nothing runs it on a timer: the file is dated 2026-10-03 (as_of 2026-10-03T12:30:19Z, 17 items), 15 days old. A refusal exits 2 WITHOUT writing, so a stale file stays. DEFECT: a reader today publishes a card that became sensitive since. luthen fixes the producer first (their W1283: run nemik_egress as the last step of the minute export; a refusal removes the old file so a reader fails closed). Change nothing in deploy/ until they say the list is fresh every minute; then --withheld can be required | 2026-10-18: 2026-10-17 github-8f (relayed, not independently checked by me): luthen found no build was ever served (no schedule, no ingress, Firebase site 404) and none of the 4 newly withheld cards were in the one 2026-10-03 build; operator reportedly confirmed the Firebase site was never deployed. So nothing exposed. W636 and W647 proceed once luthen-observability:W1283 lands | 2026-10-18: luthen W1283 landed 123ad3d2 (list fresh every minute). Deploy change now waits only on W647 (the --withheld-max-age check, submitted); then: builder runs nemik-exports from the mounted withheld.json then publish --exports --withheld-max-age 900 | 2026-10-18: 2026-10-17 dry run of the builder's two commands on the real export tree into scratch: 15 exports, publish exit 0, 3 withheld stubs. Part 2 submitted: deploy change + exportcompat.write leaves unchanged files alone | 2026-10-18: part 2 landed 6e6dc0c (pushed, which is a deploy): the builder loop runs nemik-exports then nemik-serve --publish --exports /tmp/exports --withheld /export/withheld.json --withheld-max-age 900. NOT yet observed on the pod: the ship and the builder's first loops have not been read back | 2026-10-18: 2026-10-18 CORRECTION: I marked this done at the push, before the ship. luthen read the cluster: nemik deployment gen 249 on image tag 1792288619-3327f720bb7f... (3327f72 is W647's commit, so nothing newer has shipped; pods 125 and 131 minutes old); the running builder is the OLD loop (no --withheld). The push of 6e6dc0c (and 9e2263e, b819107 ... since 3327f72) has not rolled | 2026-10-18: CORRECTION of my previous note: 3327f72 is the W516 document commit (not W647). git log 3327f72..HEAD lists 12 unshipped commits after it, including CODE: 376a68a W461, f425151 W645, d59c873 W533, 0c44772 W648, b819107 W507, 5586836 W533, d730f18 W646, 3371725 W647, 9e2263e W531, c97c9ba W508, 8b8f2e8 W355, 6e6dc0c W636. So a failing image build could be in any of them, not only the last | 2026-10-19: 2026-10-19: the cycle with luthen-observability:W1291 (it reads W636 back after the roll) was this card blocked on the bare repo name. What W636 waits on is the ship: the image build has not produced an image since 3327f72 because the build is cancelled by supersession and its 41 min test stage cannot finish (luthen-observability findings 2026-10-18; timeout fix b598f28). That is nemik:W703 (image consumes the gate result, waiting on mtools:W1666). Re-pointed blocked_on at W703",
       "issued_at": "2026-10-17T17:50:58Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-19T06:21:14Z",
-      "ticks_blocked": 107,
+      "ticks_blocked": 0,
       "manifest": [
         "deploy/deployment.yaml",
         "tests/test_deploy_manifest.py",
@@ -14870,7 +14869,7 @@
     {
       "symbol": "W703",
       "title": "The image build consumes the commit gate result for the same tree sha, or drops its test stage and builds only gated shas",
-      "status": "landed",
+      "status": "done",
       "enables": [
         "W571"
       ],
@@ -14881,12 +14880,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Landing the gated stage: build.yml picks it on a Gated-Tree trailer equal to the tree; Containerfile takes it by TESTS; test_containerfile pins both",
-      "evidence": "2026-10-18: 2026-10-18 luthen vlogs_query (nemik.image-replica, sha 406e3bd, 22:12:25Z): 3 failed, 964 passed, 6 skipped in 2491.81 s; the one assert surfaced is tests/test_series_board.py:95 assert \"not awake\" not in _wake_text(None) (the Wake panel drew a board with no --series in the image, though the gate passed the same tree); the other two FAILED lines are not yet read. The image runs the suite under a different environment than the gate, which is the case for consuming the gate result | 2026-10-18: CORRECTION 2026-10-18 (luthen): the 406e3bd failures were not the not-awake assert. test_series_board.py:79 and test_sources_fetch.py:78 raised playwright TimeoutError, wait_for_function 60000 ms, under the loaded 41-minute stage; the third failure is not read yet. My earlier note that the Wake panel drew a board in the image was wrong. The wall-clock waits are W705 | 2026-10-19: 2026-10-18 luthen: with a 41 min pytest stage and a commit about every 20 min, supersession cancels the image test stage before it can finish, so consuming the gate result for the tree sha (or building only gated shas) is the real fix and makes supersession harmless; timeout=0 (b598f28) removes the other failure only | 2026-10-19: 2026-10-19 mtools-ad (claimed as mtools:W1666, not built): no gated-tree record is readable today (no git note; the stack snapshot is deleted after the run). The writer will add a Gated-Tree: <tree sha> trailer only on a commit whose own tree the gate ran on (a single commit or a stack tip); other stack entries get Gated-by: (mtools:W1651) and no Gated-Tree. So build.yml may check Gated-Tree == git rev-parse HEAD^{tree} on the pushed head and skip the pytest stage on a match; no trailer runs the full stage | 2026-10-19: 2026-10-19 ~17:54Z luthen-observability-d9 (read from the store, cluster and registry): both ready pods run tag 1792407417-4c688c1d (2026-10-19 10:56:57Z), the Flux ImagePolicy latestRef is the same and is the last tag in the registry: nemik HEAD 650a278 has no image and the registry built nothing in about 7 h; 20 commits (4c688c1d..origin/main) are unshipped. Whether supersession is still cancelling could not be read (Forgejo run state is in no series; an API read needs a token luthen will not use without the operator). build.yml has no concurrency section and the Containerfile test stage re-runs the whole pytest suite (41 min) per push, at a push cadence of about 20 min. The fix is this card: the image consumes the gate result instead of re-running it | 2026-10-21: 2026-10-20 mtools-ad: mtools:W1745 landed at c44b760: in a stack the tip commit carries Gated-Tree: <its tree> (as a single commit does since W1666) and each earlier commit Gated-by: <the tip's waypoint>; seen on c44b760 itself (a one-entry stack is its own tip). Not covered: commits the train lands for joined stacks; mtools-ad has not read whether they go through the same builder, so that part of W703 stays open on their side | 2026-10-21: 2026-10-20 mtools-ad correction to the W1745 note: traindrive.py builds the commits it lands with stackland.build over the flattened entries (line 217), so they carry the same trailers as a stack: the last entry built Gated-Tree, every other Gated-by naming that tip's waypoint (after a bisect, the green prefix's own tip). So W703 is covered for stacks and trains from c44b760; not yet seen on a real multi-submission train landing | 2026-10-21: 2026-10-21 mtools-ad: Gated-* trailers on train-landed prefix commits from c44b760 are unreliable until mtools:W1651 lands (stamped for the red tip, not the prefix); stacks and fully green trains are right | 2026-10-21: 2026-10-21 mtools-ad: mtools:W1651 landed f39dd23; Gated-* on stack and train landings is accurate from f39dd23; prefix landings between c44b760 and f39dd23 may name a red tip | 2026-10-22: commit 9bfec9c; build.yml picks the gated stage on a Gated-Tree trailer equal to the tree. Not yet seen on a real push: the first image build from a stamped commit should log 'image test stage: gated'. A first gate run also failed test_modes with 'popLater is not defined' (a flake: the same stack passed on rerun)",
+      "next_bounded_step": null,
+      "evidence": "2026-10-18: 2026-10-18 luthen vlogs_query (nemik.image-replica, sha 406e3bd, 22:12:25Z): 3 failed, 964 passed, 6 skipped in 2491.81 s; the one assert surfaced is tests/test_series_board.py:95 assert \"not awake\" not in _wake_text(None) (the Wake panel drew a board with no --series in the image, though the gate passed the same tree); the other two FAILED lines are not yet read. The image runs the suite under a different environment than the gate, which is the case for consuming the gate result | 2026-10-18: CORRECTION 2026-10-18 (luthen): the 406e3bd failures were not the not-awake assert. test_series_board.py:79 and test_sources_fetch.py:78 raised playwright TimeoutError, wait_for_function 60000 ms, under the loaded 41-minute stage; the third failure is not read yet. My earlier note that the Wake panel drew a board in the image was wrong. The wall-clock waits are W705 | 2026-10-19: 2026-10-18 luthen: with a 41 min pytest stage and a commit about every 20 min, supersession cancels the image test stage before it can finish, so consuming the gate result for the tree sha (or building only gated shas) is the real fix and makes supersession harmless; timeout=0 (b598f28) removes the other failure only | 2026-10-19: 2026-10-19 mtools-ad (claimed as mtools:W1666, not built): no gated-tree record is readable today (no git note; the stack snapshot is deleted after the run). The writer will add a Gated-Tree: <tree sha> trailer only on a commit whose own tree the gate ran on (a single commit or a stack tip); other stack entries get Gated-by: (mtools:W1651) and no Gated-Tree. So build.yml may check Gated-Tree == git rev-parse HEAD^{tree} on the pushed head and skip the pytest stage on a match; no trailer runs the full stage | 2026-10-19: 2026-10-19 ~17:54Z luthen-observability-d9 (read from the store, cluster and registry): both ready pods run tag 1792407417-4c688c1d (2026-10-19 10:56:57Z), the Flux ImagePolicy latestRef is the same and is the last tag in the registry: nemik HEAD 650a278 has no image and the registry built nothing in about 7 h; 20 commits (4c688c1d..origin/main) are unshipped. Whether supersession is still cancelling could not be read (Forgejo run state is in no series; an API read needs a token luthen will not use without the operator). build.yml has no concurrency section and the Containerfile test stage re-runs the whole pytest suite (41 min) per push, at a push cadence of about 20 min. The fix is this card: the image consumes the gate result instead of re-running it | 2026-10-21: 2026-10-20 mtools-ad: mtools:W1745 landed at c44b760: in a stack the tip commit carries Gated-Tree: <its tree> (as a single commit does since W1666) and each earlier commit Gated-by: <the tip's waypoint>; seen on c44b760 itself (a one-entry stack is its own tip). Not covered: commits the train lands for joined stacks; mtools-ad has not read whether they go through the same builder, so that part of W703 stays open on their side | 2026-10-21: 2026-10-20 mtools-ad correction to the W1745 note: traindrive.py builds the commits it lands with stackland.build over the flattened entries (line 217), so they carry the same trailers as a stack: the last entry built Gated-Tree, every other Gated-by naming that tip's waypoint (after a bisect, the green prefix's own tip). So W703 is covered for stacks and trains from c44b760; not yet seen on a real multi-submission train landing | 2026-10-21: 2026-10-21 mtools-ad: Gated-* trailers on train-landed prefix commits from c44b760 are unreliable until mtools:W1651 lands (stamped for the red tip, not the prefix); stacks and fully green trains are right | 2026-10-21: 2026-10-21 mtools-ad: mtools:W1651 landed f39dd23; Gated-* on stack and train landings is accurate from f39dd23; prefix landings between c44b760 and f39dd23 may name a red tip | 2026-10-22: commit 9bfec9c; build.yml picks the gated stage on a Gated-Tree trailer equal to the tree. Not yet seen on a real push: the first image build from a stamped commit should log 'image test stage: gated'. A first gate run also failed test_modes with 'popLater is not defined' (a flake: the same stack passed on rerun) | 2026-10-22: 2026-10-22: closed on the landed commit 9bfec9c and test_containerfile; no nemik observer reads build logs, so the first gated build is confirmed by a luthen log read (the follow-up card), not by a witness here",
       "issued_at": "2026-10-18T23:54:59Z",
       "minted_during": "interrupt",
       "caused_by": "github-8f",
-      "last_worked": "2026-10-22T14:53:31Z",
+      "last_worked": "2026-10-22T18:33:25Z",
       "ticks_blocked": 0,
       "manifest": [
         "Containerfile",
@@ -14895,9 +14894,9 @@
         "tests/test_containerfile.py"
       ],
       "size_class": "medium",
-      "completed": null,
+      "completed": "20261022T183325Z",
       "landed_at": "20261022T145331Z",
-      "deploys": true
+      "deploys": false
     },
     {
       "symbol": "W704",
@@ -17160,25 +17159,33 @@
     {
       "symbol": "W785",
       "title": "Routes for history: oldest, waits, forecast, score, events, density",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W781"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W853",
+        "W854",
+        "W855",
+        "W856",
+        "W857",
+        "W858"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Inventory which history modes have a document today (static_data's history.json) and which do not; for each missing mode add the host-side publisher beside nemik-hostroot (same function the CLI calls, written to the cache dir) and the /history/<mode>.json route that reads it with a freshness check; waits, oldest, forecast, score, events and density each in turn",
       "evidence": "2026-10-20: 2026-10-20 scoping: the history modes read git by spawning it (history._run, _git, citing_epochs, commit_snapshots, backfill), so the server, which may not spawn (W783), cannot call them per request. The route can only read a document a host-side run of the same function published: history_doc already feeds the static build's history.json (static_data), and nemik-hostroot (W779) is the pattern for a file the server reads with a freshness check. So W785 serves the published history documents, one per CLI mode, produced by the CLI's own function on the host, and the parity row names the function that writes the document",
       "issued_at": "2026-10-20T17:58:14Z",
       "minted_during": "tick",
       "caused_by": "W781",
-      "last_worked": "2026-10-20T20:14:43Z",
+      "last_worked": "2026-10-22T18:34:26Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/serve.py",
         "tests/test_serve_history_routes.py"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "completed": null
     },
     {
       "symbol": "W786",
@@ -18911,6 +18918,144 @@
         "ruff-baseline.json"
       ],
       "size_class": "small"
+    },
+    {
+      "symbol": "W852",
+      "title": "Confirm the first image build from a stamped commit ran the gated stage, not the suite: a build log line naming it",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "luthen-observability:W1506"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Ask luthen-observability to read the Forgejo build log for the first nemik image built after 9bfec9c and report whether it printed 'image test stage: gated'; if it printed test, read the commit's Gated-Tree trailer against its tree",
+      "evidence": "2026-10-22: 2026-10-22 luthen-observability-ab: opened luthen-observability:W1506 to read the first nemik image build log after 9bfec9c and report the 'image test stage' line and commit sha. Not yet verified that Forgejo build logs reach VictoriaLogs at all; if not, they will name the path that carries them",
+      "issued_at": "2026-10-22T18:33:34Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W703",
+      "last_worked": "2026-10-22T18:35:00Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W853",
+      "title": "A host-side publisher and a freshness-checked route for the history oldest mode",
+      "status": "working",
+      "enables": [
+        "W785"
+      ],
+      "touches": [
+        "file:src/nemik/serve.py!w",
+        "file:src/nemik/history.py!w",
+        "file:tests/test_serve_history_oldest.py!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Read how history_doc and the hostroot publisher write and serve a cached document, then add the oldest mode the same way",
+      "evidence": "",
+      "issued_at": "2026-10-22T18:34:26Z",
+      "minted_during": "interrupt",
+      "caused_by": "W785",
+      "last_worked": "2026-10-22T18:35:02Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/serve.py",
+        "src/nemik/history.py",
+        "tests/test_serve_history_oldest.py"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W854",
+      "title": "A host-side publisher and a freshness-checked route for the history waits mode",
+      "status": "ready",
+      "enables": [
+        "W785"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-22T18:34:26Z",
+      "minted_during": "interrupt",
+      "caused_by": "W785",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W855",
+      "title": "A host-side publisher and a freshness-checked route for the history forecast mode",
+      "status": "ready",
+      "enables": [
+        "W785"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-22T18:34:26Z",
+      "minted_during": "interrupt",
+      "caused_by": "W785",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W856",
+      "title": "A host-side publisher and a freshness-checked route for the history score mode",
+      "status": "ready",
+      "enables": [
+        "W785"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-22T18:34:26Z",
+      "minted_during": "interrupt",
+      "caused_by": "W785",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W857",
+      "title": "A host-side publisher and a freshness-checked route for the history events mode",
+      "status": "ready",
+      "enables": [
+        "W785"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-22T18:34:26Z",
+      "minted_during": "interrupt",
+      "caused_by": "W785",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W858",
+      "title": "A host-side publisher and a freshness-checked route for the history density mode",
+      "status": "ready",
+      "enables": [
+        "W785"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-22T18:34:26Z",
+      "minted_during": "interrupt",
+      "caused_by": "W785",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -19024,7 +19169,35 @@
   "heartbeat": "2026-10-22T02:06:35Z",
   "lock": null,
   "predecessor_job_id": "disarmed",
-  "leases": [],
+  "leases": [
+    {
+      "tag": "file:src/nemik/serve.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W853",
+      "base_sha": "4c73e8f9b97983f0167555451723ce7f9b0fe7a4",
+      "taken_at": "2026-10-22T18:35:02Z",
+      "renewed_at": "2026-10-22T18:35:02Z",
+      "expires_at": "2026-10-22T19:05:02Z"
+    },
+    {
+      "tag": "file:src/nemik/history.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W853",
+      "base_sha": "4c73e8f9b97983f0167555451723ce7f9b0fe7a4",
+      "taken_at": "2026-10-22T18:35:02Z",
+      "renewed_at": "2026-10-22T18:35:02Z",
+      "expires_at": "2026-10-22T19:05:02Z"
+    },
+    {
+      "tag": "file:tests/test_serve_history_oldest.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W853",
+      "base_sha": "4c73e8f9b97983f0167555451723ce7f9b0fe7a4",
+      "taken_at": "2026-10-22T18:35:02Z",
+      "renewed_at": "2026-10-22T18:35:02Z",
+      "expires_at": "2026-10-22T19:05:02Z"
+    }
+  ],
   "advice": [
     {
       "tool": "block-behind-open",
