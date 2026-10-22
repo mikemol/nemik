@@ -11031,7 +11031,6 @@
         "notice"
       ],
       "blocked_on": [
-        "W850",
         "W851"
       ],
       "blocked_kind": "agent",
@@ -18883,7 +18882,7 @@
     {
       "symbol": "W850",
       "title": "A letter writer that sends one inbox letter per undelivered cross-repo edge of a done or dropped card",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W547",
         "W851"
@@ -18896,14 +18895,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Submit the prepared stack: the edge letter wording, the deliver function over the record, their tests and the census entry",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-22: commit 37f4357; src/nemik/edgeletters.py, witnesses.deliver over the .nemik-delivered record, tests/test_edge_letters.py",
       "issued_at": "2026-10-22T16:24:52Z",
       "minted_during": "interrupt",
       "caused_by": "W547",
-      "last_worked": "2026-10-22T17:04:41Z",
+      "last_worked": "2026-10-22T17:42:45Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261022T174245Z",
       "manifest": [
         "src/nemik/witnesses.py",
         "src/nemik/edgeletters.py",
@@ -18915,26 +18914,29 @@
     {
       "symbol": "W851",
       "title": "wake() walks the cross-repo edges and writes letters through the record, not blocked_on alone",
-      "status": "blocked",
+      "status": "working",
       "enables": [
         "W547"
       ],
-      "touches": [],
-      "blocked_on": [
-        "W850"
+      "touches": [
+        "file:src/nemik/witnesses.py!w",
+        "file:tests/test_wake_edges.py!w",
+        "file:ruff-baseline.json!w"
       ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Submit the prepared stack: wake sends the local letter and routes every cross-repo edge through deliver",
       "evidence": "",
       "issued_at": "2026-10-22T16:24:52Z",
       "minted_during": "interrupt",
       "caused_by": "W547",
-      "last_worked": "2026-10-22T16:34:24Z",
+      "last_worked": "2026-10-22T17:45:22Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "src/nemik/witnesses.py",
-        "tests/test_wake_edges.py"
+        "tests/test_wake_edges.py",
+        "ruff-baseline.json"
       ],
       "size_class": "small"
     }
@@ -19047,38 +19049,29 @@
     {
       "tag": "file:src/nemik/witnesses.py!w",
       "holder": "(unlocked)",
-      "waypoint": "W850",
-      "base_sha": "2223790c09677d142c359846b59427b9a763b1a0",
-      "taken_at": "2026-10-22T17:04:41Z",
-      "renewed_at": "2026-10-22T17:04:41Z",
-      "expires_at": "2026-10-22T17:34:41Z"
+      "waypoint": "W851",
+      "base_sha": "37f43573cb205e827678b978646c2a23fd4414f7",
+      "taken_at": "2026-10-22T17:45:22Z",
+      "renewed_at": "2026-10-22T17:45:22Z",
+      "expires_at": "2026-10-22T18:15:22Z"
     },
     {
-      "tag": "file:src/nemik/edgeletters.py!w",
+      "tag": "file:tests/test_wake_edges.py!w",
       "holder": "(unlocked)",
-      "waypoint": "W850",
-      "base_sha": "2223790c09677d142c359846b59427b9a763b1a0",
-      "taken_at": "2026-10-22T17:04:41Z",
-      "renewed_at": "2026-10-22T17:04:41Z",
-      "expires_at": "2026-10-22T17:34:41Z"
+      "waypoint": "W851",
+      "base_sha": "37f43573cb205e827678b978646c2a23fd4414f7",
+      "taken_at": "2026-10-22T17:45:22Z",
+      "renewed_at": "2026-10-22T17:45:22Z",
+      "expires_at": "2026-10-22T18:15:22Z"
     },
     {
-      "tag": "file:tests/test_edge_letters.py!w",
+      "tag": "file:ruff-baseline.json!w",
       "holder": "(unlocked)",
-      "waypoint": "W850",
-      "base_sha": "2223790c09677d142c359846b59427b9a763b1a0",
-      "taken_at": "2026-10-22T17:04:41Z",
-      "renewed_at": "2026-10-22T17:04:41Z",
-      "expires_at": "2026-10-22T17:34:41Z"
-    },
-    {
-      "tag": "file:codon-baseline.json!w",
-      "holder": "(unlocked)",
-      "waypoint": "W850",
-      "base_sha": "2223790c09677d142c359846b59427b9a763b1a0",
-      "taken_at": "2026-10-22T17:04:41Z",
-      "renewed_at": "2026-10-22T17:04:41Z",
-      "expires_at": "2026-10-22T17:34:41Z"
+      "waypoint": "W851",
+      "base_sha": "37f43573cb205e827678b978646c2a23fd4414f7",
+      "taken_at": "2026-10-22T17:45:22Z",
+      "renewed_at": "2026-10-22T17:45:22Z",
+      "expires_at": "2026-10-22T18:15:22Z"
     }
   ],
   "advice": [
