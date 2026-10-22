@@ -37,11 +37,24 @@ nemik:Event a rdfs:Class ; rdfs:comment "An event on an operator calendar, read 
 # provider; these are the values nemik's provider uses (mtools' STATUSES).
 nemik:WaypointStates a skos:ConceptScheme ;
     skos:prefLabel "paths-forward waypoint states" ;
-    skos:hasTopConcept nemik:Ready, nemik:Working, nemik:Blocked, nemik:Done .
+    skos:hasTopConcept nemik:Ready, nemik:Working, nemik:Blocked, nemik:LandedStatus, nemik:Done .
 nemik:Ready a skos:Concept ; skos:inScheme nemik:WaypointStates ; skos:prefLabel "ready" .
 nemik:Working a skos:Concept ; skos:inScheme nemik:WaypointStates ; skos:prefLabel "working" .
 nemik:Blocked a skos:Concept ; skos:inScheme nemik:WaypointStates ; skos:prefLabel "blocked" .
-nemik:Done a skos:Concept ; skos:inScheme nemik:WaypointStates ; skos:prefLabel "done" .
+# nemik:W838 (mtools:W1643, agreed with mtools-ad 2026-10-18): a card whose commit has landed but
+# whose deploy is not witnessed. It sits between working and done, is open and not workable, and a
+# waiter on it stays blocked until the card is done. No second state scheme: the status string
+# "landed" joins this one, close to CM's Fixed ("resolved but not yet verified"), as done is close to
+# CM's Verified. The step of that name in nemik:ChangeLifecycle (a commit on a ref) is the same fact
+# about a change on the host; this is the same fact about the card, read from the queue's status.
+nemik:LandedStatus a skos:Concept ; skos:inScheme nemik:WaypointStates ; skos:prefLabel "landed" ;
+    skos:definition "The card's commit has landed and its deploy is not yet witnessed: open, not workable, done only when the witness holds." ;
+    skos:closeMatch oslc_cm:Fixed ;
+    nemik:witnessedBy "the serving sha equals the card's sha" .
+nemik:Done a skos:Concept ; skos:inScheme nemik:WaypointStates ; skos:prefLabel "done" ;
+    skos:closeMatch oslc_cm:Verified .
+nemik:deploys a rdf:Property ; rdfs:comment "True on a card whose change is deployed somewhere, so landing is not the end of it (mtools:W1643, nemik:W838)." .
+nemik:landedAt a rdf:Property ; rdfs:comment "RFC 5545 UTC stamp of the card entering landed, written once by the queue writer (mtools:W1643, nemik:W838)." .
 # nemik:W551 (github-8f 2026-10-15): the five distinct steps of a change on the host, which sessions
 # mixed under about six words. Each has one definition and the evidence that witnesses it. A run's
 # verdict (mtools' corpus/exit-table.json, mtools:W1294) is a separate axis from the step reached.
