@@ -19163,21 +19163,22 @@
         "W863",
         "W864"
       ],
-      "touches": [],
+      "touches": [
+        "file:src/nemik/parity.py!w",
+        "file:tests/test_parity.py!w"
+      ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Read how check_reply serves ready-neither, unmanifested and integrity, then do the same for realizability, or add a stated exclusion row to parity.EXCLUDED",
-      "evidence": "",
+      "next_bounded_step": "Submit the prepared stack: realizability excluded by a stated reason, pending ceiling four",
+      "evidence": "2026-10-22: 2026-10-22: pattern found: serve.check_report(name, graph, root) answers /check/<name>.json by calling the check.py text function the CLI mode prints; each mode needs that name added or an exclusion row in parity.EXCLUDED",
       "issued_at": "2026-10-22T23:09:09Z",
       "minted_during": "interrupt",
       "caused_by": "W797",
-      "last_worked": "2026-10-22T23:09:34Z",
+      "last_worked": "2026-10-22T23:20:22Z",
       "ticks_blocked": 0,
       "manifest": [
-        "src/nemik/serve.py",
         "src/nemik/parity.py",
-        "tests/test_parity.py",
-        "tests/test_serve_check_realizability.py"
+        "tests/test_parity.py"
       ],
       "size_class": "small",
       "completed": null
