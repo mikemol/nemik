@@ -1481,3 +1481,7 @@
 2026-10-22T10:40:55Z  status W717 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-22T10:44:24Z  status W841 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-22T10:45:44Z  status W717 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T11:11:14Z  tick  W844 minted    -         "Repin the seven vendored mtools wheels past d1d4ec7, whose writer has --deploys and whose check says landed without deploys true"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W841
+2026-10-22T11:11:20Z  tick  W841 advanced  sweep     "W841 second gate run in flight (stack316); mtools:W1814 d1d4ec7 and W1815 27f892b landed the fields it reads; repin carded as W844 for after the landing [blocked by W842]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T11:25:35Z  status W841 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-22T11:25:44Z  status W844 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
