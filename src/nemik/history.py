@@ -1018,8 +1018,9 @@ def main(argv: list[str] | None = None) -> int:
         type=Path,
         default=None,
         metavar="DIR",
-        help="with --waits: write the rows to DIR/waits.json as a stamped document the server "
-        "serves as /history/waits.json (nemik-serve --history-dir DIR), not print them (W854)",
+        help="with --waits or --density: write the rows to DIR/<mode>.json as a stamped document "
+        "the server serves as /history/<mode>.json (nemik-serve --history-dir DIR), not print "
+        "them (W854, W858)",
     )
     ap.add_argument(
         "--append-to",
@@ -1090,7 +1091,7 @@ def ledger_lines_since(ledger: Path, cutoff: str) -> int:
     return sum(1 for line in text.splitlines() if line[:20] >= cutoff)
 
 
-def _density(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> int:
+def _density(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
     """Print how often each repo commits its queue file, the longest gap and its ledger rate."""
     since = args.start or "7.days.ago"
     days = 7.0
@@ -1115,8 +1116,7 @@ def _density(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) 
             "ledger_lines": lines,
             "ledger_per_day": round(lines / days, 1),
         }
-    if args.json:
-        sys.stdout.write(json.dumps(rows, indent=1) + "\n")
+    if emit(args, "density", rows):
         return 0
     for name, r in rows.items():
         sys.stdout.write(
