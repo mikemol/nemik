@@ -17207,7 +17207,7 @@
     {
       "symbol": "W786",
       "title": "Routes for rank, inbound, operator, wake, overlaps, floor-asks and witnesses without apply",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W781"
       ],
@@ -17222,10 +17222,14 @@
       "issued_at": "2026-10-20T17:58:14Z",
       "minted_during": "tick",
       "caused_by": "W781",
-      "last_worked": "2026-10-21T13:55:11Z",
+      "last_worked": "2026-10-22T04:10:12Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/serve.py",
+        "src/nemik/parity.py",
+        "checks/claims.py",
+        "tests/test_serve_floor_asks.py",
+        "tests/test_serve_no_spawn.py",
         "tests/test_serve_read_routes.py"
       ],
       "size_class": "medium",
@@ -18525,7 +18529,26 @@
     "start": 39974717
   },
   "predecessor_job_id": "disarmed",
-  "leases": [],
+  "leases": [
+    {
+      "tag": "file:src/nemik/serve.py!w",
+      "holder": "claude-nemik",
+      "waypoint": "W786",
+      "base_sha": "7a143de2af1e597000ad099da04ade5880fa19fc",
+      "taken_at": "2026-10-22T04:10:12Z",
+      "renewed_at": "2026-10-22T04:10:12Z",
+      "expires_at": "2026-10-22T04:40:12Z"
+    },
+    {
+      "tag": "file:src/nemik/parity.py!w",
+      "holder": "claude-nemik",
+      "waypoint": "W786",
+      "base_sha": "7a143de2af1e597000ad099da04ade5880fa19fc",
+      "taken_at": "2026-10-22T04:10:12Z",
+      "renewed_at": "2026-10-22T04:10:12Z",
+      "expires_at": "2026-10-22T04:40:12Z"
+    }
+  ],
   "advice": [
     {
       "tool": "block-behind-open",
