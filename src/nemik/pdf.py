@@ -31,6 +31,13 @@ REDRAWN = (
     " requestAnimationFrame(() => requestAnimationFrame(() => done(true))))"
 )
 VIEWPORT: ViewportSize = {"width": 1700, "height": 1250}
+# the PDF's page is the viewport's own size, so the header, the graph and the panels all fit on it
+PAGE_WIDTH = f"{VIEWPORT['width']}px"
+PAGE_HEIGHT = f"{VIEWPORT['height']}px"
+# the graph is a canvas, so it prints as an image: twice the pixels keeps it legible when zoomed
+SCALE = 2
+# the button that fits every repo on the screen; the page shows it when it is zoomed to one
+FIT_ALL = "#fitall"
 
 
 class _Options(argparse.Namespace):
@@ -58,6 +65,8 @@ def apply(page: Page, view: str, repo: str) -> None:
             page.click(selector)
         else:
             page.select_option(selector, value)
+    if page.locator(FIT_ALL).count():
+        page.click(FIT_ALL)
     until(page, REDRAWN)
 
 
@@ -77,10 +86,15 @@ def render(url: str, view: str, repo: str, out: Path) -> None:
             executable_path=str(Path(exe).absolute()) if exe else None
         )
         try:
-            page = browser.new_page(viewport=VIEWPORT)
+            page = browser.new_page(viewport=VIEWPORT, device_scale_factor=SCALE)
             load(page, url, CY_READY)
             apply(page, view, repo)
-            page.pdf(path=str(out), landscape=True, print_background=True)
+            page.pdf(
+                path=str(out),
+                width=PAGE_WIDTH,
+                height=PAGE_HEIGHT,
+                print_background=True,
+            )
         finally:
             browser.close()
 

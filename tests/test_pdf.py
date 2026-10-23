@@ -54,3 +54,4 @@ def test_a_view_prints_a_pdf(view: str, tmp_path: Path) -> None:
     data = out.read_bytes()
     assert data.startswith(b"%PDF")
     assert len(data) > MIN_PDF_BYTES
+    assert b"MediaBox [0 0 1275.12 937.91998]" in data
