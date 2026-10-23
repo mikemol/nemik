@@ -1693,3 +1693,8 @@
 2026-10-23T07:42:42Z  interrupt W882 minted    -         "nemik-inbound and its hook cut an ask's title at a fixed width, so a peer sees 'please r' and not the ask: show it whole or point to the entry"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=estate:W878
 2026-10-23T07:55:54Z  status W875 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T07:55:54Z  status W876 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T08:07:05Z  interrupt W883 minted    -         "Each wait row carries its blocker's rank position, read from the graph through rank's typed calls"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W876
+2026-10-23T08:07:05Z  interrupt W884 minted    -         "Vendor mtools' otlp dist as a wheel and pin it as a dependency, unused until the emit"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W876
+2026-10-23T08:07:05Z  interrupt W885 minted    -         "A host-side mode beside nemik-hostroot emits the wait samples as OTLP gauges through mikemol-otlp, repo and rule labels only"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W876
+2026-10-23T08:07:15Z  status W883 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T08:07:20Z  status W885 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 882,
+  "counter": 885,
   "waypoints": [
     {
       "symbol": "W1",
@@ -19599,26 +19599,31 @@
     {
       "symbol": "W876",
       "title": "The blocker's rank position per wait edge, and the host-side mode that emits the rows through mikemol-otlp",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W836"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W883",
+        "W884",
+        "W885"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-23T06:58:56Z",
       "minted_during": "interrupt",
       "caused_by": "W836",
-      "last_worked": null,
+      "last_worked": "2026-10-23T08:07:05Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/waitemit.py",
         "tests/test_waitemit.py",
         "codon-baseline.json"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "completed": null
     },
     {
       "symbol": "W877",
@@ -19728,6 +19733,87 @@
       "caused_by": "estate:W878",
       "last_worked": null,
       "ticks_blocked": 0
+    },
+    {
+      "symbol": "W883",
+      "title": "Each wait row carries its blocker's rank position, read from the graph through rank's typed calls",
+      "status": "working",
+      "enables": [
+        "W885"
+      ],
+      "touches": [
+        "file:src/nemik/waitrows.py!w",
+        "file:tests/test_waitrows.py!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Read how rank orders the cards (rank.py's ordering) and add the blocker's rank position to each wait row, tested on the fixture fleet",
+      "evidence": "",
+      "issued_at": "2026-10-23T08:07:05Z",
+      "minted_during": "interrupt",
+      "caused_by": "W876",
+      "last_worked": "2026-10-23T08:07:15Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/waitrows.py",
+        "tests/test_waitrows.py"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W884",
+      "title": "Vendor mtools' otlp dist as a wheel and pin it as a dependency, unused until the emit",
+      "status": "ready",
+      "enables": [
+        "W885"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-23T08:07:05Z",
+      "minted_during": "interrupt",
+      "caused_by": "W876",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "manifest": [
+        "pyproject.toml",
+        "uv.lock",
+        "MODULE.bazel",
+        "BUILD.bazel",
+        "vendor/wheels/SHA256SUMS",
+        "vendor/wheels/README.md"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W885",
+      "title": "A host-side mode beside nemik-hostroot emits the wait samples as OTLP gauges through mikemol-otlp, repo and rule labels only",
+      "status": "blocked",
+      "enables": [
+        "W876"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "W883",
+        "W884"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-23T08:07:05Z",
+      "minted_during": "interrupt",
+      "caused_by": "W876",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/waitemit.py",
+        "tests/test_waitemit.py",
+        "codon-baseline.json"
+      ],
+      "size_class": "medium"
     }
   ],
   "residue": [
@@ -19841,7 +19927,26 @@
   "heartbeat": "2026-10-22T02:06:35Z",
   "lock": null,
   "predecessor_job_id": "disarmed",
-  "leases": [],
+  "leases": [
+    {
+      "tag": "file:src/nemik/waitrows.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W883",
+      "base_sha": "51cad572eff73e7849bbec3651314b87d74294b6",
+      "taken_at": "2026-10-23T08:07:15Z",
+      "renewed_at": "2026-10-23T08:07:15Z",
+      "expires_at": "2026-10-23T08:37:15Z"
+    },
+    {
+      "tag": "file:tests/test_waitrows.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W883",
+      "base_sha": "51cad572eff73e7849bbec3651314b87d74294b6",
+      "taken_at": "2026-10-23T08:07:15Z",
+      "renewed_at": "2026-10-23T08:07:15Z",
+      "expires_at": "2026-10-23T08:37:15Z"
+    }
+  ],
   "advice": [
     {
       "tool": "block-behind-open",
