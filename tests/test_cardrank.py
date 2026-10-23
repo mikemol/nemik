@@ -3,13 +3,15 @@
 """nemik:W713: the plain-edge downstream weight equals the rdflib one on a fixture fleet."""
 
 import json
+from importlib.resources import files
 from pathlib import Path
 
+import pytest
 from rdflib import Graph
 
 from nemik.adapter import NEMIK, OSLC_CM, queue_graph
-from nemik.cardrank import downstream_weight
-from nemik.rank import Weights, ref_of, successors
+from nemik.cardrank import downstream_weight, parse_weights
+from nemik.rank import Weights, load_weights, ref_of, successors
 from nemik.rank import downstream_weight as graph_weight
 
 LOCAL, PEER, PEER_BLOCKED = 5, 3, 2
@@ -104,3 +106,31 @@ def test_a_done_card_is_not_traversed() -> None:
     succ = {"a:W1": ["a:W2"], "a:W2": ["a:W3"], "a:W3": ["a:W1"]}
     assert downstream_weight(succ, {"a:W2"}, set(), "a:W1", (1, 0, 0)) == 0
     assert downstream_weight(succ, set(), set(), "a:W1", (1, 0, 0)) == CYCLE_LEN
+
+
+def test_the_weights_read_from_text_equal_rank_load_weights() -> None:
+    """On the packaged file, parse_weights returns what rank.load_weights does (nemik:W868)."""
+    text = files("nemik.data").joinpath("rank-weights.toml").read_text()
+    want = load_weights(text)
+    assert parse_weights(text) == (
+        want.local,
+        want.peer,
+        want.peer_blocked,
+        want.operator,
+    )
+
+
+def test_an_unnamed_operator_weight_is_zero_and_a_table_is_not_read() -> None:
+    """A text without `operator` weighs an ask nothing; a later table's key is not top level."""
+    text = "local = 1\npeer = 2  # a comment\npeer_blocked = 8\n[order]\nlocal = 99\n"
+    assert parse_weights(text) == (1, 2, 8, 0)
+    assert load_weights(text).operator == 0
+
+
+def test_a_missing_required_weight_is_a_key_error_in_both_readers() -> None:
+    """The top level must name local, peer and peer_blocked; a missing one raises KeyError."""
+    text = "local = 1\npeer = 2\n"
+    with pytest.raises(KeyError, match="peer_blocked"):
+        parse_weights(text)
+    with pytest.raises(KeyError, match="peer_blocked"):
+        load_weights(text)

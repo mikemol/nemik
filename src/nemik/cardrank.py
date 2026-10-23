@@ -10,6 +10,39 @@ nothing, so the Codon census compiles it.
 """
 
 Weights = tuple[int, int, int]  # (local, peer, peer_blocked)
+WEIGHT_KEYS = ("local", "peer", "peer_blocked", "operator")
+
+
+def parse_weights(text: str) -> tuple[int, int, int, int]:
+    """Read the edge weights from the weights file's text, with no TOML library (nemik:W868).
+
+    The weights are the file's top-level integers, before its first `[table]`: `local`, `peer` and
+    `peer_blocked`, and `operator`, which a text that does not name it leaves at zero. Everything
+    after the first table header is another table's and is ignored. It reads what
+    rank.load_weights reads, and like it a missing required weight is a KeyError; the tests hold
+    the two equal on the packaged file.
+
+    Args:
+        text: The weights file's text.
+
+    Returns:
+        (local, peer, peer_blocked, operator).
+
+    """
+    found: dict[str, int] = {}
+    for raw in text.splitlines():
+        line = raw.partition("#")[0].strip()
+        if line.startswith("["):
+            break
+        key, equals, value = line.partition("=")
+        if equals and key.strip() in WEIGHT_KEYS:
+            found[key.strip()] = int(value.strip())
+    return (
+        found["local"],
+        found["peer"],
+        found["peer_blocked"],
+        found.get("operator", 0),
+    )
 
 
 def downstream_weight(
