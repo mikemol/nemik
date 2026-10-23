@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 904,
+  "counter": 911,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 482
+      "ticks_blocked": 484
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-18T21:49:48Z",
-      "ticks_blocked": 302,
+      "ticks_blocked": 304,
       "weight": 1
     },
     {
@@ -3520,7 +3520,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 158,
+      "ticks_blocked": 160,
       "weight": 2,
       "completed": null
     },
@@ -4278,7 +4278,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 331,
+      "ticks_blocked": 333,
       "weight": 2,
       "completed": null,
       "warrants": [
@@ -5405,7 +5405,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 308,
+      "ticks_blocked": 310,
       "completed": null
     },
     {
@@ -5426,7 +5426,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 323,
+      "ticks_blocked": 325,
       "completed": null
     },
     {
@@ -5485,7 +5485,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 323,
+      "ticks_blocked": 325,
       "completed": null
     },
     {
@@ -5506,7 +5506,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 323,
+      "ticks_blocked": 325,
       "completed": null
     },
     {
@@ -5546,7 +5546,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 323,
+      "ticks_blocked": 325,
       "completed": null
     },
     {
@@ -5605,7 +5605,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 323,
+      "ticks_blocked": 325,
       "completed": null
     },
     {
@@ -5645,7 +5645,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 323,
+      "ticks_blocked": 325,
       "completed": null
     },
     {
@@ -5666,7 +5666,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 323,
+      "ticks_blocked": 325,
       "completed": null
     },
     {
@@ -5706,7 +5706,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 323,
+      "ticks_blocked": 325,
       "completed": null
     },
     {
@@ -6650,7 +6650,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 123,
+      "ticks_blocked": 125,
       "completed": null
     },
     {
@@ -6789,7 +6789,7 @@
       "minted_during": "interrupt",
       "caused_by": "W346",
       "last_worked": "2026-10-19T18:16:23Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 18,
       "weight": 9,
       "completed": null,
       "manifest": [
@@ -6818,7 +6818,7 @@
       "minted_during": "interrupt",
       "caused_by": "W346",
       "last_worked": "2026-10-19T18:16:25Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 18,
       "weight": 9,
       "completed": null,
       "manifest": [
@@ -7082,7 +7082,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 236,
+      "ticks_blocked": 238,
       "completed": null
     },
     {
@@ -7698,7 +7698,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T18:43:04Z",
-      "ticks_blocked": 259,
+      "ticks_blocked": 261,
       "completed": null
     },
     {
@@ -7718,12 +7718,12 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "operator 2026-10-12: hand the measurement to luthen-observability, which tracks the fleet's metrics; these are metrics the fleet ought to track anyway. Asked luthen to card scheduled Lighthouse/web-vitals runs (LCP, INP, CLS, TTFB, bytes, serving memory cold and warm) against nemik's view and its other hosted web services, exported to its metrics store, citing nemik:W392. When the series exist: read nemik's baseline before W394 lands, and make the render tests assert budgets against those numbers.",
-      "evidence": "2026-10-12: 2026-10-12 luthen-observability carded it as luthen-observability:W870 (carded, not built): a pinned Lighthouse/headless-Chrome CronJob over views named in endpoints.json, nemik first; series luthen_web_vitals_{lcp,inp,cls,ttfb}_seconds plus transfer bytes per target; per-request container memory cold and warm from cgroup series. The baseline must be taken BEFORE W391's user-visible changes land and needs about 7 days to make a budget meaningful. | 2026-10-19: 2026-10-19: luthen-observability:W870 is an umbrella; the step that makes the series I read is W872 (the web-vitals CronJob writing luthen_web_vitals_*; blocked on its W878, held, 141 ticks), W873 (memory deltas) follows it",
+      "evidence": "2026-10-12: 2026-10-12 luthen-observability carded it as luthen-observability:W870 (carded, not built): a pinned Lighthouse/headless-Chrome CronJob over views named in endpoints.json, nemik first; series luthen_web_vitals_{lcp,inp,cls,ttfb}_seconds plus transfer bytes per target; per-request container memory cold and warm from cgroup series. The baseline must be taken BEFORE W391's user-visible changes land and needs about 7 days to make a budget meaningful. | 2026-10-19: 2026-10-19: luthen-observability:W870 is an umbrella; the step that makes the series I read is W872 (the web-vitals CronJob writing luthen_web_vitals_*; blocked on its W878, held, 141 ticks), W873 (memory deltas) follows it | 2026-10-23: 2026-10-23 luthen-observability-ab: luthen:W872 is blocked on its W878 (the held CronJob module and push); its alert W879 must exist first or the import drops the series",
       "issued_at": "2026-10-12T14:27:38Z",
       "minted_during": "interrupt",
       "caused_by": "W391",
-      "last_worked": "2026-10-19T18:47:12Z",
-      "ticks_blocked": 106,
+      "last_worked": "2026-10-23T17:58:18Z",
+      "ticks_blocked": 108,
       "completed": null,
       "witness": "time.parse_rfc3339_ns(input.now) >= time.parse_rfc3339_ns(\"2026-10-24T06:26:00Z\")",
       "witness_lang": "rego"
@@ -7773,7 +7773,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-17T07:51:49Z",
-      "ticks_blocked": 139,
+      "ticks_blocked": 141,
       "completed": null,
       "witness": "time.parse_rfc3339_ns(input.now) >= time.parse_rfc3339_ns(\"2026-10-24T06:26:00Z\")",
       "witness_lang": "rego"
@@ -7799,7 +7799,7 @@
       "minted_during": "interrupt",
       "caused_by": "W391",
       "last_worked": "2026-10-17T07:51:49Z",
-      "ticks_blocked": 139,
+      "ticks_blocked": 141,
       "completed": null,
       "witness": "time.parse_rfc3339_ns(input.now) >= time.parse_rfc3339_ns(\"2026-10-24T06:26:00Z\")",
       "witness_lang": "rego"
@@ -8346,7 +8346,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 222,
+      "ticks_blocked": 224,
       "completed": null
     },
     {
@@ -8367,7 +8367,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-16T01:35:27Z",
-      "ticks_blocked": 186,
+      "ticks_blocked": 188,
       "completed": null
     },
     {
@@ -8388,7 +8388,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 255,
+      "ticks_blocked": 257,
       "completed": null
     },
     {
@@ -9030,7 +9030,7 @@
       "minted_during": "tick",
       "caused_by": "W458",
       "last_worked": "2026-10-13T19:10:34Z",
-      "ticks_blocked": 220,
+      "ticks_blocked": 222,
       "completed": null
     },
     {
@@ -9068,7 +9068,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W943",
       "last_worked": "2026-10-20T18:05:40Z",
-      "ticks_blocked": 63,
+      "ticks_blocked": 65,
       "weight": 1,
       "manifest": [
         "src/nemik/adapter.py",
@@ -9608,7 +9608,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-19T10:16:00Z",
-      "ticks_blocked": 123,
+      "ticks_blocked": 125,
       "completed": null,
       "warrants": [
         {
@@ -9720,7 +9720,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-16T01:54:02Z",
-      "ticks_blocked": 187,
+      "ticks_blocked": 189,
       "weight": 1,
       "completed": null
     },
@@ -9740,7 +9740,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-16T01:54:03Z",
-      "ticks_blocked": 187,
+      "ticks_blocked": 189,
       "weight": 1,
       "completed": null
     },
@@ -9901,7 +9901,7 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W1051",
       "last_worked": "2026-10-18T21:49:01Z",
-      "ticks_blocked": 123,
+      "ticks_blocked": 125,
       "completed": null,
       "weight": 6,
       "warrants": [
@@ -10078,7 +10078,7 @@
       "minted_during": "tick",
       "caused_by": "W500",
       "last_worked": "2026-10-15T11:53:53Z",
-      "ticks_blocked": 123,
+      "ticks_blocked": 125,
       "completed": null
     },
     {
@@ -10123,7 +10123,7 @@
       "minted_during": "tick",
       "caused_by": "W506",
       "last_worked": "2026-10-19T02:47:58Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 18,
       "weight": 11,
       "completed": null,
       "manifest": [
@@ -10195,7 +10195,7 @@
       "minted_during": "tick",
       "caused_by": "W506",
       "last_worked": "2026-10-18T03:08:04Z",
-      "ticks_blocked": 123,
+      "ticks_blocked": 125,
       "weight": 2,
       "completed": null
     },
@@ -10219,7 +10219,7 @@
       "minted_during": "tick",
       "caused_by": "github:W35",
       "last_worked": "2026-10-15T12:00:59Z",
-      "ticks_blocked": 216,
+      "ticks_blocked": 218,
       "completed": null
     },
     {
@@ -10305,7 +10305,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T12:40:08Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 18,
       "weight": 11,
       "manifest": [
         "src/nemik/withheld.py"
@@ -10334,7 +10334,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-18T19:15:01Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 47,
       "completed": null
     },
     {
@@ -10687,7 +10687,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-22T16:26:05Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 18,
       "weight": 14,
       "completed": null,
       "manifest": [
@@ -10719,7 +10719,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-16T01:53:12Z",
-      "ticks_blocked": 187,
+      "ticks_blocked": 189,
       "weight": 13,
       "completed": null
     },
@@ -11245,11 +11245,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": null,
-      "evidence": "2026-10-15: W556 landed (6b826bd), so the shape exists. The writer is luthen's, so this is an ask to luthen-observability, not nemik work: emit ts, run_id, trigger, exit and an object verdict in apply-set-runs.jsonl while log_ship keeps reading the old rows. | 2026-10-15: 2026-10-15 luthen claimed it as luthen-observability:W1089 (ready): emit ts, run_id, trigger, exit, object verdict as additional fields, keep the old keys, test against run-row.schema.json at 6b826bd. Answered: trigger is a free non-empty string in the schema (no enum). Flagged: the old verdict key is a STRING and the schema's verdict is an OBJECT, so they cannot coexist under one key. | 2026-10-15: 2026-10-15 luthen: luthen-observability:W1089's first writer landed as dcdc1249. apply-set-runs rows carry ts (RFC 3339, same instant as the old when), run_id (uuid4 hex), trigger ('systemd-unit' when INVOCATION_ID is set, else 'hand'), exit, verdict as an object with a state; legacy text moved to verdict_json (readers checked: apply_epoch reads when/state/exit, the vmalert-logs rule reads set/state, nothing reads the verdict string); an oversize verdict collapses to {state, truncated}. Takes effect on the next apply_set run (hourly at the latest); luthen will read one real row from VictoriaLogs and confirm. Remaining under W1089, one writer at a time: reaper-runs, apply-ledger (apply_exit to exit), tier-rehearsal, drum decisions. | 2026-10-16: 2026-10-15 validated myself: tools/check_run_rows.py over /var/lib/luthen/opa_plan/apply-set-runs.jsonl: 4 rows pass the run-row schema (the last, at 2026-10-16T00:09:04Z, trigger systemd-unit, exit 3, verdict an object with state deferred, run_id present, legacy text in verdict_json), 468 older rows fail for one reason, no ts. The old rows stay as they are (an append-only log); W558 must count them as unmigrated, not guess a ts from when. | 2026-10-16: committed 4d2fb44: tools/check_run_rows.py and tests/test_check_run_rows.py (4 tests), BUILD.bazel per-test data entry. The apply-set writer's migration is verified against real rows (4 pass, 468 older lack ts). luthen-observability:W1089 continues with reaper-runs, apply-ledger, tier-rehearsal and drum decisions, one writer at a time.",
+      "evidence": "2026-10-15: W556 landed (6b826bd), so the shape exists. The writer is luthen's, so this is an ask to luthen-observability, not nemik work: emit ts, run_id, trigger, exit and an object verdict in apply-set-runs.jsonl while log_ship keeps reading the old rows. | 2026-10-15: 2026-10-15 luthen claimed it as luthen-observability:W1089 (ready): emit ts, run_id, trigger, exit, object verdict as additional fields, keep the old keys, test against run-row.schema.json at 6b826bd. Answered: trigger is a free non-empty string in the schema (no enum). Flagged: the old verdict key is a STRING and the schema's verdict is an OBJECT, so they cannot coexist under one key. | 2026-10-15: 2026-10-15 luthen: luthen-observability:W1089's first writer landed as dcdc1249. apply-set-runs rows carry ts (RFC 3339, same instant as the old when), run_id (uuid4 hex), trigger ('systemd-unit' when INVOCATION_ID is set, else 'hand'), exit, verdict as an object with a state; legacy text moved to verdict_json (readers checked: apply_epoch reads when/state/exit, the vmalert-logs rule reads set/state, nothing reads the verdict string); an oversize verdict collapses to {state, truncated}. Takes effect on the next apply_set run (hourly at the latest); luthen will read one real row from VictoriaLogs and confirm. Remaining under W1089, one writer at a time: reaper-runs, apply-ledger (apply_exit to exit), tier-rehearsal, drum decisions. | 2026-10-16: 2026-10-15 validated myself: tools/check_run_rows.py over /var/lib/luthen/opa_plan/apply-set-runs.jsonl: 4 rows pass the run-row schema (the last, at 2026-10-16T00:09:04Z, trigger systemd-unit, exit 3, verdict an object with state deferred, run_id present, legacy text in verdict_json), 468 older rows fail for one reason, no ts. The old rows stay as they are (an append-only log); W558 must count them as unmigrated, not guess a ts from when. | 2026-10-16: committed 4d2fb44: tools/check_run_rows.py and tests/test_check_run_rows.py (4 tests), BUILD.bazel per-test data entry. The apply-set writer's migration is verified against real rows (4 pass, 468 older lack ts). luthen-observability:W1089 continues with reaper-runs, apply-ledger, tier-rehearsal and drum decisions, one writer at a time. | 2026-10-23: 2026-10-23 luthen-observability-ab: luthen:W1089 waits on its W1268 (reaper read-back), then the apply-ledger and tier-rehearsal writers; the drum decisions writer is cassian skus's, not luthen's; apply-set-runs and reaper-runs already carry ts, run_id, trigger and verdict (a partial answer is coming)",
       "issued_at": "2026-10-15T23:22:20Z",
       "minted_during": "tick",
       "caused_by": "W534",
-      "last_worked": "2026-10-16T00:28:03Z",
+      "last_worked": "2026-10-23T17:58:14Z",
       "ticks_blocked": 0,
       "completed": "20261016T002803Z"
     },
@@ -11342,7 +11342,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-17T10:50:53Z",
-      "ticks_blocked": 123,
+      "ticks_blocked": 125,
       "completed": null
     },
     {
@@ -11388,7 +11388,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-18T21:49:04Z",
-      "ticks_blocked": 164,
+      "ticks_blocked": 166,
       "completed": null,
       "warrants": [
         {
@@ -11440,7 +11440,7 @@
       "minted_during": "tick",
       "caused_by": "W560",
       "last_worked": "2026-10-16T02:51:43Z",
-      "ticks_blocked": 185,
+      "ticks_blocked": 187,
       "completed": null
     },
     {
@@ -11513,7 +11513,7 @@
       "minted_during": "tick",
       "caused_by": "W566",
       "last_worked": "2026-10-16T05:23:44Z",
-      "ticks_blocked": 180,
+      "ticks_blocked": 182,
       "completed": null
     },
     {
@@ -11538,7 +11538,7 @@
       "minted_during": "tick",
       "caused_by": "W566",
       "last_worked": "2026-10-16T05:34:00Z",
-      "ticks_blocked": 180,
+      "ticks_blocked": 182,
       "completed": null
     },
     {
@@ -11562,7 +11562,7 @@
       "minted_during": "tick",
       "caused_by": "W566",
       "last_worked": "2026-10-16T04:52:53Z",
-      "ticks_blocked": 181,
+      "ticks_blocked": 183,
       "completed": null
     },
     {
@@ -11579,12 +11579,12 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "On luthen's answer: add a line to nemik-pins that reports the Forgejo build state of HEAD (failed, building, green) beside the lag, and calls the ship stuck at once when the build for HEAD failed, instead of after 5 commits",
-      "evidence": "2026-10-16: 2026-10-16 READ nemik-pins (src/nemik/pins.py:117-198): there is no 'safe to ship' check. What exists is W455: it reads the image tag the cluster's Deployment runs (kubectl, .../nemik:<epoch>-<sha40>), counts commits behind HEAD, and prints 'the ship is stuck: a stuck ship goes to luthen-observability' only past --stuck-after (default 5) commits, else 'in flight'. So a failing image build is visible only as that lag, hours and five pushes later, and it cannot tell a slow build from a failed one. It consults neither the Forgejo build result for HEAD nor any test-stage output. The data for that is luthen's build-log read (W504, named in the W528 commit 7e28fbb). Asked luthen whether the build status of a given commit can be queried; build only if it can. | 2026-10-16: 2026-10-16 luthen: no status-by-commit read exists; the earlier 'luthen-observability:W504 build-log read' was MY MIS-CITATION (their W504 is a done typing card for checks/file_mode.py). They carded the producer as luthen-observability:W1108: checks.forgejo_build --repo R --ref SHA printing failed|building|green|unknown via the Forgejo commit-status/actions API with a machine-held read token, exit 7 when unreadable; it enables this card. Answered their design question from .forgejo/workflows/build.yml: a Forgejo Actions workflow, runs-on luthen-build (git and buildctl, no node or curl), on push to main and workflow_dispatch, Containerfile test stage as the gate, tag <unix-seconds>-<sha>; the verdict is what nemik-pins needs, the failing step name and a ~20-line log tail are a welcome second field. Not started on their side.",
+      "evidence": "2026-10-16: 2026-10-16 READ nemik-pins (src/nemik/pins.py:117-198): there is no 'safe to ship' check. What exists is W455: it reads the image tag the cluster's Deployment runs (kubectl, .../nemik:<epoch>-<sha40>), counts commits behind HEAD, and prints 'the ship is stuck: a stuck ship goes to luthen-observability' only past --stuck-after (default 5) commits, else 'in flight'. So a failing image build is visible only as that lag, hours and five pushes later, and it cannot tell a slow build from a failed one. It consults neither the Forgejo build result for HEAD nor any test-stage output. The data for that is luthen's build-log read (W504, named in the W528 commit 7e28fbb). Asked luthen whether the build status of a given commit can be queried; build only if it can. | 2026-10-16: 2026-10-16 luthen: no status-by-commit read exists; the earlier 'luthen-observability:W504 build-log read' was MY MIS-CITATION (their W504 is a done typing card for checks/file_mode.py). They carded the producer as luthen-observability:W1108: checks.forgejo_build --repo R --ref SHA printing failed|building|green|unknown via the Forgejo commit-status/actions API with a machine-held read token, exit 7 when unreadable; it enables this card. Answered their design question from .forgejo/workflows/build.yml: a Forgejo Actions workflow, runs-on luthen-build (git and buildctl, no node or curl), on push to main and workflow_dispatch, Containerfile test stage as the gate, tag <unix-seconds>-<sha>; the verdict is what nemik-pins needs, the failing step name and a ~20-line log tail are a welcome second field. Not started on their side. | 2026-10-23: 2026-10-23 luthen-observability-ab: luthen:W1108 is blocked behind its W1285 umbrella of unmanifested ready cards, not yet worked; design: Forgejo Actions runs by sha, then buildctl histories for the failing step",
       "issued_at": "2026-10-16T05:59:52Z",
       "minted_during": "tick",
       "caused_by": "W541",
-      "last_worked": "2026-10-16T06:24:02Z",
-      "ticks_blocked": 178,
+      "last_worked": "2026-10-23T17:58:15Z",
+      "ticks_blocked": 180,
       "completed": null
     },
     {
@@ -11606,7 +11606,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-23T12:09:48Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 12,
       "completed": null,
       "manifest": [
         "Containerfile",
@@ -11704,7 +11704,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-17T08:09:46Z",
-      "ticks_blocked": 169,
+      "ticks_blocked": 171,
       "completed": null
     },
     {
@@ -11768,7 +11768,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-16T15:08:10Z",
-      "ticks_blocked": 108,
+      "ticks_blocked": 110,
       "completed": null
     },
     {
@@ -11793,7 +11793,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-22T07:10:08Z",
-      "ticks_blocked": 13,
+      "ticks_blocked": 15,
       "completed": null
     },
     {
@@ -11817,7 +11817,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-17T15:38:53Z",
-      "ticks_blocked": 123,
+      "ticks_blocked": 125,
       "completed": null
     },
     {
@@ -11841,7 +11841,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-19T02:01:21Z",
-      "ticks_blocked": 92,
+      "ticks_blocked": 94,
       "completed": null,
       "manifest": [
         "src/nemik/salience.py",
@@ -12563,7 +12563,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-17T13:09:34Z",
-      "ticks_blocked": 123
+      "ticks_blocked": 125
     },
     {
       "symbol": "W614",
@@ -14044,7 +14044,7 @@
       "minted_during": "interrupt",
       "caused_by": "W510",
       "last_worked": "2026-10-18T16:06:47Z",
-      "ticks_blocked": 123,
+      "ticks_blocked": 125,
       "manifest": [
         "src/nemik/web/index.html",
         "tests/test_sources_trs.py"
@@ -14070,7 +14070,7 @@
       "minted_during": "interrupt",
       "caused_by": "W510",
       "last_worked": "2026-10-18T14:33:41Z",
-      "ticks_blocked": 123,
+      "ticks_blocked": 125,
       "completed": null,
       "manifest": [
         "src/nemik/web/index.html",
@@ -14148,7 +14148,7 @@
       "minted_during": "interrupt",
       "caused_by": "W674",
       "last_worked": "2026-10-18T16:13:01Z",
-      "ticks_blocked": 123,
+      "ticks_blocked": 125,
       "manifest": [
         "src/nemik/serve.py",
         "src/nemik/web/vendor/n3.min.js",
@@ -14464,7 +14464,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-18T19:40:28Z",
-      "ticks_blocked": 123,
+      "ticks_blocked": 125,
       "warrants": [
         {
           "@context": {
@@ -14651,7 +14651,7 @@
       "minted_during": "interrupt",
       "caused_by": "W691",
       "last_worked": "2026-10-19T01:14:55Z",
-      "ticks_blocked": 123,
+      "ticks_blocked": 125,
       "completed": null,
       "manifest": [
         "src/nemik/serve.py",
@@ -14723,7 +14723,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-19T18:16:26Z",
-      "ticks_blocked": 107,
+      "ticks_blocked": 109,
       "completed": null
     },
     {
@@ -14845,7 +14845,7 @@
       "minted_during": "interrupt",
       "caused_by": "W581",
       "last_worked": "2026-10-18T23:03:49Z",
-      "ticks_blocked": 123,
+      "ticks_blocked": 125,
       "completed": null
     },
     {
@@ -15060,7 +15060,7 @@
       "minted_during": "interrupt",
       "caused_by": "el-openglo:W702",
       "last_worked": "2026-10-19T00:15:45Z",
-      "ticks_blocked": 123,
+      "ticks_blocked": 125,
       "completed": null
     },
     {
@@ -15770,7 +15770,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W728",
       "last_worked": "2026-10-19T15:12:10Z",
-      "ticks_blocked": 114,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -15974,7 +15974,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-19T23:00:26Z",
-      "ticks_blocked": 70,
+      "ticks_blocked": 72,
       "warrants": [
         {
           "@context": {
@@ -16215,7 +16215,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W743",
       "last_worked": "2026-10-23T13:31:44Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 10,
       "completed": null,
       "manifest": [
         "docs/forecast-features.md"
@@ -16269,7 +16269,7 @@
       "minted_during": "tick",
       "caused_by": "mtools:W1731",
       "last_worked": "2026-10-23T12:40:07Z",
-      "ticks_blocked": 48,
+      "ticks_blocked": 50,
       "completed": null,
       "manifest": [
         "src/nemik/landings.py",
@@ -17074,7 +17074,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-20T22:31:27Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 18,
       "warrants": [
         {
           "@context": {
@@ -17280,12 +17280,12 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "Waits on luthen-observability:W1473; when it lands, record its unit change and confirm tests/test_serve_no_spawn.py still passes",
-      "evidence": "2026-10-20: 2026-10-20 luthen-observability-d9: W1473 finding: nemik-serve is a k8s Deployment from deploy/ (Flux tenant), not a systemd unit, so the rail is a pod seccompProfile or a tenant policy; a profile cannot deny the entrypoint's own execve and RuntimeDefault allows fork/exec; they are asking linux-sources what filter can hold a Python server (clone family denied, or the drum notify gate). tests/test_serve_no_spawn.py stays the first rail; W788 waits on W1473",
+      "evidence": "2026-10-20: 2026-10-20 luthen-observability-d9: W1473 finding: nemik-serve is a k8s Deployment from deploy/ (Flux tenant), not a systemd unit, so the rail is a pod seccompProfile or a tenant policy; a profile cannot deny the entrypoint's own execve and RuntimeDefault allows fork/exec; they are asking linux-sources what filter can hold a Python server (clone family denied, or the drum notify gate). tests/test_serve_no_spawn.py stays the first rail; W788 waits on W1473 | 2026-10-23: 2026-10-23 luthen-observability-ab: luthen:W1473 waits on linux-sources' answer to luthen's letter 2026-10-20-luthen-observability-seccomp-no-spawn-for-a-python-server.md (which filter can hold a Python server that must exec once); nemik-serve is a Deployment, so the rail is a pod seccompProfile or an admission policy, not a unit's SystemCallFilter",
       "issued_at": "2026-10-20T17:58:14Z",
       "minted_during": "tick",
       "caused_by": "W781",
-      "last_worked": "2026-10-20T18:26:30Z",
-      "ticks_blocked": 62,
+      "last_worked": "2026-10-23T17:58:17Z",
+      "ticks_blocked": 64,
       "completed": null
     },
     {
@@ -17893,7 +17893,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-21T03:38:37Z",
-      "ticks_blocked": 58,
+      "ticks_blocked": 60,
       "completed": null
     },
     {
@@ -18542,7 +18542,7 @@
       "minted_during": "tick",
       "caused_by": "W579",
       "last_worked": "2026-10-22T07:10:24Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 29,
       "completed": null
     },
     {
@@ -18956,7 +18956,7 @@
       "minted_during": "interrupt",
       "caused_by": "nemik:W703",
       "last_worked": "2026-10-22T20:45:21Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -19667,7 +19667,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T07:32:14Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -19703,7 +19703,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T07:32:19Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -19722,7 +19722,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T07:32:21Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -19741,7 +19741,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T07:32:23Z",
-      "ticks_blocked": 16,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -20123,7 +20123,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T13:31:51Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 10,
       "witness": "input.now >= \"2026-10-24T02:10:00\"",
       "witness_lang": "rego",
       "completed": null
@@ -20225,23 +20225,29 @@
     {
       "symbol": "W898",
       "title": "nemik-check --repo R --warnings prints only that repo's Warning and Violates rows, so a repo's tick-open can read its own shapes without the fleet's 127 KB",
-      "status": "ready",
+      "status": "working",
       "enables": [],
-      "touches": [],
+      "touches": [
+        "file:src/nemik/check.py!w",
+        "file:tests/test_check_warnings.py!w",
+        "file:skills/nemik/SKILL.md!w"
+      ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Add --warnings to nemik-check (with --repo R): print only that repo's Warning and Violates rows; a test over a two-repo fixture",
+      "next_bounded_step": "Land stack364: nemik-check --warnings [--repo R]; then tell estate the sha",
       "evidence": "",
       "issued_at": "2026-10-23T15:42:07Z",
       "minted_during": "tick",
       "caused_by": "estate-dd",
-      "last_worked": "2026-10-23T17:10:23Z",
+      "last_worked": "2026-10-23T17:42:33Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/check.py",
-        "tests/test_check_warnings.py"
+        "tests/test_check_warnings.py",
+        "skills/nemik/SKILL.md"
       ],
-      "size_class": "medium"
+      "size_class": "small",
+      "completed": null
     },
     {
       "symbol": "W899",
@@ -20259,7 +20265,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T16:12:14Z",
-      "ticks_blocked": 0,
+      "ticks_blocked": 2,
       "completed": null
     },
     {
@@ -20323,7 +20329,9 @@
       "enables": [
         "W899"
       ],
-      "touches": [],
+      "touches": [
+        "file:docs/vector-web-view.md!w"
+      ],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Measure an SVG drawing of the web view against the canvas at the fleet's size (graphSvg of the fleet is 2.4 MB, 5300 paths, 1800 texts): load, pan and zoom cost in Chromium and Firefox; write docs/vector-web-view.md with the numbers and a recommendation",
@@ -20341,7 +20349,7 @@
     {
       "symbol": "W903",
       "title": "An unclaimed card's label is under WCAG 1.4.3 on the page: its red ink over its 15% red tint is 3.48:1 against the page background, below 4.5:1",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:src/nemik/web/render.js!w",
@@ -20349,19 +20357,19 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Land stack363: an unclaimed card's label is the page's ink (red stays in the dashed border and tint); test_svgexport no longer excludes unclaimed cards. Dark theme not measured",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: landed as f421657 after two refusals (render.js past its line ceiling of 382, fixed by trimming); unclaimed labels are the page's ink; test_svgexport covers them",
       "issued_at": "2026-10-23T16:23:47Z",
       "minted_during": "tick",
       "caused_by": "operator",
-      "last_worked": "2026-10-23T17:21:57Z",
+      "last_worked": "2026-10-23T18:12:42Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/web/render.js",
         "tests/test_svgexport.py"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261023T181242Z"
     },
     {
       "symbol": "W904",
@@ -20381,6 +20389,308 @@
       "manifest": [
         "src/nemik/pdf.py",
         "tests/test_pdf.py"
+      ],
+      "size_class": "medium"
+    },
+    {
+      "symbol": "W905",
+      "title": "Audit PROV and the card model against Toulmin, extracting the full codomain of the language and the relevant standards, under an evidential paradigm",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "W906",
+        "W907",
+        "W908",
+        "W909"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "2026-10-23: 2026-10-23 verified myself: host 695f3e0a line 91539, uuid 8fde927b, origin human, 18:02:53Z; the operator's words are the one sentence in the title. github-8f's scope (1) to (4) (codomain, Toulmin map, standards named, recommendations on mtools' demoted cards and estate's warrants) is github-8f's elaboration, derived and not quoted, and is carried by the four child cards as a plan the operator has not seen",
+      "issued_at": "2026-10-23T18:04:35Z",
+      "minted_during": "tick",
+      "caused_by": "github-8f",
+      "last_worked": "2026-10-23T18:05:00Z",
+      "ticks_blocked": 1,
+      "warrants": [
+        {
+          "@context": {
+            "prov": "http://www.w3.org/ns/prov#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "mtools": "urn:mtools:warrant#"
+          },
+          "@id": "urn:nemik:nemik/W905",
+          "prov:wasDerivedFrom": {
+            "@id": "urn:claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e#8fde927b-8aae-4617-a27d-462a2cf57072",
+            "@type": "prov:Entity",
+            "prov:generatedAtTime": {
+              "@value": "2026-10-23T18:02:53.966Z",
+              "@type": "xsd:dateTime"
+            },
+            "prov:wasAttributedTo": {
+              "@id": "urn:nemik:operator",
+              "@type": "prov:Agent"
+            },
+            "prov:wasGeneratedBy": {
+              "@id": "urn:nemik:utterance/8fde927b-8aae-4617-a27d-462a2cf57072",
+              "@type": "prov:Activity"
+            },
+            "mtools:line": 91539,
+            "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify 8fde927b-8aae-4617-a27d-462a2cf57072 --claim the operator said: Audit prov and our card model against toulmin, extracting the full codomain of the language and relevant standards under an evidenciary paradigm --line 91539"
+          }
+        },
+        {
+          "@context": {
+            "prov": "http://www.w3.org/ns/prov#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "mtools": "urn:mtools:warrant#"
+          },
+          "@id": "urn:nemik:nemik/W905",
+          "prov:wasDerivedFrom": {
+            "@id": "urn:claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e#cfd331cf-b1a6-429f-ae0e-f6cd59efbe50",
+            "@type": "prov:Entity",
+            "prov:generatedAtTime": {
+              "@value": "2026-10-23T18:07:46.185Z",
+              "@type": "xsd:dateTime"
+            },
+            "prov:wasAttributedTo": {
+              "@id": "urn:nemik:operator",
+              "@type": "prov:Agent"
+            },
+            "prov:wasGeneratedBy": {
+              "@id": "urn:nemik:utterance/cfd331cf-b1a6-429f-ae0e-f6cd59efbe50",
+              "@type": "prov:Activity"
+            },
+            "mtools:line": 91566,
+            "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify cfd331cf-b1a6-429f-ae0e-f6cd59efbe50 --claim the operator said part of the value is discovering where we lack the richness and rigor of existing literature and tooling, and learning how filling those gaps enriches our automation and automaton reasoning, auditability and transparency --line 91566"
+          }
+        },
+        {
+          "@context": {
+            "prov": "http://www.w3.org/ns/prov#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "mtools": "urn:mtools:warrant#"
+          },
+          "@id": "urn:nemik:nemik/W905",
+          "prov:wasDerivedFrom": {
+            "@id": "urn:claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e#47fd2d1f-8a8a-4cf6-ad8f-90c048489f06",
+            "@type": "prov:Entity",
+            "prov:generatedAtTime": {
+              "@value": "2026-10-23T18:09:30.596Z",
+              "@type": "xsd:dateTime"
+            },
+            "prov:wasAttributedTo": {
+              "@id": "urn:nemik:operator",
+              "@type": "prov:Agent"
+            },
+            "prov:wasGeneratedBy": {
+              "@id": "urn:nemik:utterance/47fd2d1f-8a8a-4cf6-ad8f-90c048489f06",
+              "@type": "prov:Activity"
+            },
+            "mtools:line": 91591,
+            "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify 47fd2d1f-8a8a-4cf6-ad8f-90c048489f06 --claim the operator said: And don't forget our grounding in sre, agile and observability principles --line 91591"
+          }
+        }
+      ],
+      "completed": null
+    },
+    {
+      "symbol": "W906",
+      "title": "List every term the card model and its PROV and OSLC export can express, with its type and who may write it (docs/evidence-codomain.md)",
+      "status": "ready",
+      "enables": [
+        "W905"
+      ],
+      "touches": [
+        "file:docs/evidence-codomain.md!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Read adapter.py, shapes.ttl, nemik.ttl and the writer's card fields: write the table of every term with its type, its writer and where PROV/OSLC carries it; measure against real cards (a mtools demoted card, an estate warrant)",
+      "evidence": "",
+      "issued_at": "2026-10-23T18:04:50Z",
+      "minted_during": "tick",
+      "caused_by": "W905",
+      "last_worked": "2026-10-23T18:05:02Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "docs/evidence-codomain.md"
+      ],
+      "size_class": "medium"
+    },
+    {
+      "symbol": "W907",
+      "title": "Map the codomain onto Toulmin's claim, grounds, warrant, backing, qualifier and rebuttal: where it has each, conflates them, or has none (docs/toulmin-map.md)",
+      "status": "blocked",
+      "enables": [
+        "W905"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "W906"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "After W906: map each term to a Toulmin part; mark where our warrant is backing or grounds and the inference licence implicit; qualifier and rebuttal have no field",
+      "evidence": "",
+      "issued_at": "2026-10-23T18:04:50Z",
+      "minted_during": "tick",
+      "caused_by": "W905",
+      "last_worked": "2026-10-23T18:05:05Z",
+      "ticks_blocked": 1,
+      "completed": null,
+      "manifest": [
+        "docs/toulmin-map.md"
+      ],
+      "size_class": "medium"
+    },
+    {
+      "symbol": "W908",
+      "title": "Survey PROV-O, PROV-DM, AIF, SEPIO, ECO, nanopublications, Carneades and ClaimReview, citing sources, for what each gives that the model lacks (docs/evidence-standards.md)",
+      "status": "blocked",
+      "enables": [
+        "W905"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "W910",
+        "W911"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Read each standard's primary source (W3C PROV-O and PROV-DM, AIF, SEPIO, ECO, nanopublication and micropublication papers, Carneades, schema.org ClaimReview) and cite it. Per the operator's purpose (line 91566): for each gap name the existing tool or vocabulary we could adopt (a pinned library, an ontology to import, a SHACL shape set), not only a comparison table. Needs WebFetch",
+      "evidence": "",
+      "issued_at": "2026-10-23T18:04:50Z",
+      "minted_during": "tick",
+      "caused_by": "W905",
+      "last_worked": "2026-10-23T18:12:28Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "docs/evidence-standards.md"
+      ],
+      "size_class": "large",
+      "warrants": [
+        {
+          "@context": {
+            "prov": "http://www.w3.org/ns/prov#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "mtools": "urn:mtools:warrant#"
+          },
+          "@id": "urn:nemik:nemik/W908",
+          "prov:wasDerivedFrom": {
+            "@id": "urn:claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e#cfd331cf-b1a6-429f-ae0e-f6cd59efbe50",
+            "@type": "prov:Entity",
+            "prov:generatedAtTime": {
+              "@value": "2026-10-23T18:07:46.185Z",
+              "@type": "xsd:dateTime"
+            },
+            "prov:wasAttributedTo": {
+              "@id": "urn:nemik:operator",
+              "@type": "prov:Agent"
+            },
+            "prov:wasGeneratedBy": {
+              "@id": "urn:nemik:utterance/cfd331cf-b1a6-429f-ae0e-f6cd59efbe50",
+              "@type": "prov:Activity"
+            },
+            "mtools:line": 91566,
+            "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify cfd331cf-b1a6-429f-ae0e-f6cd59efbe50 --claim the operator said part of the value is discovering where we lack the richness and rigor of existing literature and tooling that intersects with what we already do --line 91566"
+          }
+        }
+      ],
+      "completed": null
+    },
+    {
+      "symbol": "W909",
+      "title": "From the three documents, recommend the minimum changes that make a quoted, a derived and an own-judgment claim distinct, typed and checkable, tested on real cards",
+      "status": "blocked",
+      "enables": [
+        "W905"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "W907"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "After W906 to W908: the minimum changes, as cards, so that operator-said (quoted), host-inferred (derived, with a qualifier and the inferring agent) and card-own-judgment are typed and a shape checks them; test on mtools' five demoted cards and estate's warrants. Per the operator's purpose (line 91566, via github-8f's reading, derived): each fix says which agent behaviour it improves, what a session could then reason about or check that it cannot today",
+      "evidence": "",
+      "issued_at": "2026-10-23T18:04:50Z",
+      "minted_during": "tick",
+      "caused_by": "W905",
+      "last_worked": "2026-10-23T18:09:17Z",
+      "ticks_blocked": 1,
+      "completed": null,
+      "manifest": [
+        "docs/evidence-recommendations.md"
+      ],
+      "size_class": "medium",
+      "warrants": [
+        {
+          "@context": {
+            "prov": "http://www.w3.org/ns/prov#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "mtools": "urn:mtools:warrant#"
+          },
+          "@id": "urn:nemik:nemik/W909",
+          "prov:wasDerivedFrom": {
+            "@id": "urn:claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e#cfd331cf-b1a6-429f-ae0e-f6cd59efbe50",
+            "@type": "prov:Entity",
+            "prov:generatedAtTime": {
+              "@value": "2026-10-23T18:07:46.185Z",
+              "@type": "xsd:dateTime"
+            },
+            "prov:wasAttributedTo": {
+              "@id": "urn:nemik:operator",
+              "@type": "prov:Agent"
+            },
+            "prov:wasGeneratedBy": {
+              "@id": "urn:nemik:utterance/cfd331cf-b1a6-429f-ae0e-f6cd59efbe50",
+              "@type": "prov:Activity"
+            },
+            "mtools:line": 91566,
+            "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify cfd331cf-b1a6-429f-ae0e-f6cd59efbe50 --claim the operator said filling those gaps should enrich our automation and automaton reasoning, auditability and transparency through the nemik and agentic ecosystem --line 91566"
+          }
+        }
+      ]
+    },
+    {
+      "symbol": "W910",
+      "title": "Survey PROV-O, PROV-DM, AIF, SEPIO, ECO, nanopublications, Carneades and ClaimReview with sources, naming for each gap what we could adopt",
+      "status": "ready",
+      "enables": [
+        "W908"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Read each standard's primary source and cite it; one paragraph each; for every gap name the tool or vocabulary we could adopt (a pinned library, an ontology to import, a SHACL shape set). Needs WebFetch",
+      "evidence": "",
+      "issued_at": "2026-10-23T18:12:28Z",
+      "minted_during": "tick",
+      "caused_by": "W908",
+      "last_worked": "2026-10-23T18:12:35Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "docs/evidence-standards.md"
+      ],
+      "size_class": "medium"
+    },
+    {
+      "symbol": "W911",
+      "title": "Survey SRE, agile and observability practice for claims and evidence (OTel semantic conventions, OpenSLO, Sloth, postmortem templates, definition of done) with sources and what we could adopt",
+      "status": "ready",
+      "enables": [
+        "W908"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "The operator said (line 91591) not to forget our grounding in SRE, agile and observability. github-8f's reading, derived: SLOs as claims, SLIs as grounds, error budgets as qualifiers, postmortems and PRR checklists as backing; definition of done as the done-claim's warrant; OTel semconv and exemplars as the grounds channel. Survey OTel semconv, OpenSLO, Sloth and postmortem templates with sources and fold the matches into W910's gap table. Needs WebFetch",
+      "evidence": "",
+      "issued_at": "2026-10-23T18:12:28Z",
+      "minted_during": "tick",
+      "caused_by": "W908",
+      "last_worked": "2026-10-23T18:12:37Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "docs/evidence-sre-agile-observability.md"
       ],
       "size_class": "medium"
     }
@@ -20496,29 +20806,38 @@
   "heartbeat": "2026-10-22T02:06:35Z",
   "lock": {
     "holder": "claude-nemik",
-    "taken_at": "2026-10-23T17:09:18Z",
+    "taken_at": "2026-10-23T18:10:07Z",
     "pid": 1281447,
     "start": 39974717
   },
   "predecessor_job_id": "disarmed",
   "leases": [
     {
-      "tag": "file:src/nemik/web/render.js!w",
+      "tag": "file:src/nemik/check.py!w",
       "holder": "claude-nemik",
-      "waypoint": "W903",
-      "base_sha": "07eb219018a767db1f3e99e58e78dd074188a83e",
-      "taken_at": "2026-10-23T17:21:57Z",
-      "renewed_at": "2026-10-23T17:21:57Z",
-      "expires_at": "2026-10-23T17:51:57Z"
+      "waypoint": "W898",
+      "base_sha": "7201a3d60f67f8bf70d61cfb7ef73583223b9a4a",
+      "taken_at": "2026-10-23T17:42:33Z",
+      "renewed_at": "2026-10-23T18:10:07Z",
+      "expires_at": "2026-10-23T18:40:07Z"
     },
     {
-      "tag": "file:tests/test_svgexport.py!w",
+      "tag": "file:tests/test_check_warnings.py!w",
       "holder": "claude-nemik",
-      "waypoint": "W903",
-      "base_sha": "07eb219018a767db1f3e99e58e78dd074188a83e",
-      "taken_at": "2026-10-23T17:21:57Z",
-      "renewed_at": "2026-10-23T17:21:57Z",
-      "expires_at": "2026-10-23T17:51:57Z"
+      "waypoint": "W898",
+      "base_sha": "7201a3d60f67f8bf70d61cfb7ef73583223b9a4a",
+      "taken_at": "2026-10-23T17:42:33Z",
+      "renewed_at": "2026-10-23T18:10:07Z",
+      "expires_at": "2026-10-23T18:40:07Z"
+    },
+    {
+      "tag": "file:skills/nemik/SKILL.md!w",
+      "holder": "claude-nemik",
+      "waypoint": "W898",
+      "base_sha": "7201a3d60f67f8bf70d61cfb7ef73583223b9a4a",
+      "taken_at": "2026-10-23T17:42:33Z",
+      "renewed_at": "2026-10-23T18:10:07Z",
+      "expires_at": "2026-10-23T18:40:07Z"
     }
   ],
   "advice": [

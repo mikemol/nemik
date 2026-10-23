@@ -1785,3 +1785,14 @@
 2026-10-23T17:10:15Z  status W900 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T17:10:17Z  status W901 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T17:21:57Z  status W903 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T17:42:33Z  status W898 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T18:04:35Z  tick  W905 minted    -         "Audit PROV and the card model against Toulmin, extracting the full codomain of the language and the relevant standards, under an evidential paradigm"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f
+2026-10-23T18:04:50Z  tick  W906 minted    -         "List every term the card model and its PROV and OSLC export can express, with its type and who may write it (docs/evidence-codomain.md)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W905
+2026-10-23T18:04:50Z  tick  W907 minted    -         "Map the codomain onto Toulmin's claim, grounds, warrant, backing, qualifier and rebuttal: where it has each, conflates them, or has none (docs/toulmin-map.md)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W905
+2026-10-23T18:04:50Z  tick  W908 minted    -         "Survey PROV-O, PROV-DM, AIF, SEPIO, ECO, nanopublications, Carneades and ClaimReview, citing sources, for what each gives that the model lacks (docs/evidence-standards.md)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W905
+2026-10-23T18:04:50Z  tick  W909 minted    -         "From the three documents, recommend the minimum changes that make a quoted, a derived and an own-judgment claim distinct, typed and checkable, tested on real cards"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W905
+2026-10-23T18:05:05Z  status W907 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T18:05:11Z  status W909 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T18:12:28Z  tick  W910 minted    -         "Survey PROV-O, PROV-DM, AIF, SEPIO, ECO, nanopublications, Carneades and ClaimReview with sources, naming for each gap what we could adopt"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W908
+2026-10-23T18:12:28Z  tick  W911 minted    -         "Survey SRE, agile and observability practice for claims and evidence (OTel semantic conventions, OpenSLO, Sloth, postmortem templates, definition of done) with sources and what we could adopt"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W908
+2026-10-23T18:12:42Z  status W903 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
