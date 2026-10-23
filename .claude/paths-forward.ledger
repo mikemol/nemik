@@ -1816,3 +1816,5 @@
 2026-10-23T19:34:34Z  status W907 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T19:34:34Z  status W909 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T19:34:39Z  status W909 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T19:36:38Z  tick  W920 minted    -         "One wheel notch zooms the graph by about 1.2x, not the 2.5x of cytoscape's default"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=operator
+2026-10-23T19:38:15Z  status W920 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
