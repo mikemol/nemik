@@ -1706,3 +1706,11 @@
 2026-10-23T09:58:31Z  status W876 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T09:58:31Z  status W885 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T09:58:32Z  status W882 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T10:09:03Z  status W836 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T10:09:03Z  status W876 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T10:09:15Z  tick  W885 advanced  unblock   "W885 emit landed as 8fcb828, W876 closed, W882 gating as stack350 [blocked by W882]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T10:10:50Z  tick  W886 minted    -         "waitemit also sends one log record per waiting pair naming the oldest waiting card (symbols only in logs)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W836
+2026-10-23T10:10:50Z  tick  W887 minted    -         "A host timer runs python -m nemik.waitemit every half hour"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W836
+2026-10-23T10:11:02Z  tick  W836 advanced  collapse  "W836 atomized into W886 (log record, ready) and W887 (timer, operator decision); W882 still gating as stack350 [blocked by W882]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T10:13:59Z  status W887 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T10:27:52Z  status W882 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
