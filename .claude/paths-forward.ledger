@@ -1771,3 +1771,6 @@
 2026-10-23T15:19:55Z  status W896 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T15:20:37Z  status W890 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T15:31:27Z  status W897 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T15:42:07Z  tick  W898 minted    -         "nemik-check --repo R --warnings prints only that repo's Warning and Violates rows, so a repo's tick-open can read its own shapes without the fleet's 127 KB"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=estate-dd
+2026-10-23T15:43:09Z  tick  W897 advanced  sweep     "stack361 (W897 repin) gating; W898 carded for estate's per-repo warnings mode; nemik-check ran clean by hand under gate load [blocked by W898]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T16:01:28Z  status W897 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
