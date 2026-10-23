@@ -39,7 +39,6 @@ ROUTED = [
 ]
 
 PENDING = [
-    ("nemik-check --committed", "W793"),
     ("nemik-check --letters", "W793"),
     ("nemik-check --fold", "W793"),
     ("nemik-collapse", "W793"),
@@ -58,6 +57,10 @@ EXCLUDED = [
     (
         "nemik-check --realizability",
         "spawns the pinned opa to judge every waypoint (W860)",
+    ),
+    (
+        "nemik-check --committed",
+        "runs git to see whether each queue is committed (W861)",
     ),
     ("nemik-stackable", "runs git for the staged, cited and tracked files of a repo"),
     ("nemik-replica", "spawns the image build"),
