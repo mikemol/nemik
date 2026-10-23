@@ -16,7 +16,7 @@ exports_files(["pyproject.toml"])
         # property runs five of them beside five twins.
         size = "large" if src in ("tests/test_layout.py", "tests/test_codon_census.py", "tests/test_warm_equals_cold.py", "tests/test_shaclinc.py", "tests/test_cache_user.py") else "medium",
         args = ["$(rootpath " + src + ")", "-c", "$(rootpath pyproject.toml)"],
-        data = [src, "tests/installed.py", "tests/webpage.py", "tests/pagetext.py", ".claude/settings.json", "//tests/fixtures:fleet", "pyproject.toml", "ARCHITECTURE.md", "skills/nemik/SKILL.md", "docs/positioning.md", "deploy/deployment.yaml", "src/nemik/data/workflows.toml", "tools/nemik_client.py", "BUILD.bazel", "Containerfile", ".forgejo/workflows/build.yml"] + glob(["tests/corpus/**"]) + [ "src/nemik/data/shapes.ttl", "src/nemik/data/nemik.ttl", "src/nemik/data/wcag.rego", "src/nemik/data/run-row.schema.json", ":.venv", "@opa//file", "@use_of_colour_rego//file", "@chromium//:files", "@chromium//:chrome-headless-shell"]
+        data = [src, "tests/installed.py", "tests/webpage.py", "tests/pagetext.py", "tests/conftest.py", "tools/cpuline.py", ".claude/settings.json", "//tests/fixtures:fleet", "pyproject.toml", "ARCHITECTURE.md", "skills/nemik/SKILL.md", "docs/positioning.md", "deploy/deployment.yaml", "src/nemik/data/workflows.toml", "tools/nemik_client.py", "BUILD.bazel", "Containerfile", ".forgejo/workflows/build.yml"] + glob(["tests/corpus/**"]) + [ "src/nemik/data/shapes.ttl", "src/nemik/data/nemik.ttl", "src/nemik/data/wcag.rego", "src/nemik/data/run-row.schema.json", ":.venv", "@opa//file", "@use_of_colour_rego//file", "@chromium//:files", "@chromium//:chrome-headless-shell"]
             # nemik:W445: the JRE (52 MB) and MPXJ's jars go to the one test that reads with them
             + (["@temurin_jre//:files", "@temurin_jre//:bin/java", ":mpxj_classpath"] if src == "tests/test_mpxj.py" else [])
             # nemik:W518: the claims boundary test runs checks/claims.py's read-only witnesses
@@ -24,17 +24,17 @@ exports_files(["pyproject.toml"])
             # nemik:W527: the citation test reads the warrants and the witnesses they name
             + (["checks/claims.py", "warrants.bib"] if src == "tests/test_claims_cited.py" else [])
             # nemik:W523: the no-waivers test scans every Python file the repo keeps outside the package
-            + (glob(["tests/*.py", "tools/*.py", "checks/*.py"], exclude = [src, "tests/installed.py", "tests/webpage.py", "tests/pagetext.py", "tools/nemik_client.py", "checks/claims.py"]) if src == "tests/test_no_waivers.py" else [])
+            + (glob(["tests/*.py", "tools/*.py", "checks/*.py"], exclude = [src, "tests/installed.py", "tests/webpage.py", "tests/pagetext.py", "tests/conftest.py", "tools/cpuline.py", "tools/nemik_client.py", "checks/claims.py"]) if src == "tests/test_no_waivers.py" else [])
             # nemik:W557: the run-row tool runs against the schema it validates with
             + (["tools/check_run_rows.py"] if src == "tests/test_check_run_rows.py" else [])
             # nemik:W543: the mypy ratchet measures every Python file of the four trees against its baseline
-            + (["mypy-baseline.json"] + glob(["src/**/*.py", "tests/*.py", "tools/*.py", "checks/*.py"], exclude = [src, "tests/installed.py", "tests/webpage.py", "tests/pagetext.py", "tools/nemik_client.py", "checks/claims.py"], allow_empty = True) if src == "tests/test_mypy_ratchet.py" else [])
+            + (["mypy-baseline.json"] + glob(["src/**/*.py", "tests/*.py", "tools/*.py", "checks/*.py"], exclude = [src, "tests/installed.py", "tests/webpage.py", "tests/pagetext.py", "tests/conftest.py", "tools/cpuline.py", "tools/nemik_client.py", "checks/claims.py"], allow_empty = True) if src == "tests/test_mypy_ratchet.py" else [])
             # nemik:W566: the Codon pin test runs the staged compiler
             + (["@codon//:files", "@codon//:bin/codon"] if src == "tests/test_codon_pin.py" else [])
             # nemik:W566: the Codon census compiles every module of the package with the pinned compiler
             + (["@codon//:files", "@codon//:bin/codon", "tools/codon_census.py", "tools/core_smoke.py", "codon-baseline.json"] + glob(["src/nemik/*.py", "src/nemik/core/*.py"]) if src == "tests/test_codon_census.py" else [])
             # nemik:W541: the order-sensitive pick test reads every Python file under tests, tools and checks
-            + (glob(["tests/*.py", "tools/*.py", "checks/*.py"], exclude = [src, "tests/installed.py", "tests/webpage.py", "tests/pagetext.py", "tools/nemik_client.py", "checks/claims.py"]) if src == "tests/test_order_sensitive_picks.py" else [])
+            + (glob(["tests/*.py", "tools/*.py", "checks/*.py"], exclude = [src, "tests/installed.py", "tests/webpage.py", "tests/pagetext.py", "tests/conftest.py", "tools/cpuline.py", "tools/nemik_client.py", "checks/claims.py"]) if src == "tests/test_order_sensitive_picks.py" else [])
             # nemik:W521: the gate test reads the hook and the script that runs the //:precommit suite
             + ([".githooks/pre-commit", "tools/gate_staged.sh"] if src == "tests/test_precommit_gate.py" else [])
             # nemik:W589: the replica script's buildctl command line is held to the Containerfile's stage
@@ -60,7 +60,7 @@ exports_files(["pyproject.toml"])
             + (glob(["src/nemik/*.py"]) if src == "tests/test_import_closure.py" else [])
             # nemik:W522: the ruff ratchet measures every Python file of the four trees against its baseline
             # nemik:W536: the shared ratchet runs ruff and mypy both, so this target also carries mypy's inputs
-            + (["ruff-house.toml", "ruff-baseline.json", "mypy-house.ini", "mypy-baseline.json"] + glob(["src/**/*.py", "tests/*.py", "tools/*.py", "checks/*.py", "stubs/**"], exclude = [src, "tests/installed.py", "tests/webpage.py", "tests/pagetext.py", "tools/nemik_client.py", "checks/claims.py"], allow_empty = True) if src == "tests/test_ruff_ratchet.py" else [])
+            + (["ruff-house.toml", "ruff-baseline.json", "mypy-house.ini", "mypy-baseline.json"] + glob(["src/**/*.py", "tests/*.py", "tools/*.py", "checks/*.py", "stubs/**"], exclude = [src, "tests/installed.py", "tests/webpage.py", "tests/pagetext.py", "tests/conftest.py", "tools/cpuline.py", "tools/nemik_client.py", "checks/claims.py"], allow_empty = True) if src == "tests/test_ruff_ratchet.py" else [])
             # nemik:W475: the input guard reads every test's source to check what each one opens
             + (glob(["tests/test_*.py"], exclude = [src]) if src == "tests/test_test_inputs.py" else []),
         env = {
