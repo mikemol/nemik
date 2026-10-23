@@ -1743,3 +1743,9 @@
 2026-10-23T12:54:03Z  status W893 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T12:54:05Z  status W894 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T13:00:02Z  status W611 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T13:09:14Z  prune W546 edge-pruned writer    "luthen-observability:W1535"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T13:09:14Z  status W546 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T13:10:37Z  status W546 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T13:11:24Z  status W891 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T13:11:32Z  tick  W891 advanced  sweep     "W546 closed; W891 views document written, stack356 prepared; W749 stack355 gating [blocked by W749]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T13:20:44Z  status W749 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
