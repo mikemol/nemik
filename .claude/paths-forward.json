@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 874,
+  "counter": 876,
   "waypoints": [
     {
       "symbol": "W1",
@@ -10287,15 +10287,13 @@
     {
       "symbol": "W516",
       "title": "Withholding semantics live in the owning repos: each repo exports only publishable data and the nemik pod mounts only that export",
-      "status": "blocked",
+      "status": "ready",
       "enables": [],
       "touches": [
         "file:src/nemik/withheld.py!w"
       ],
-      "blocked_on": [
-        "W874"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "After W874 (nemik's writer pinned at or after mtools 5ba261f and opted in): ask the other repos to repin and run --export once, then ask luthen to retire the v1 withheld list, keeping the pod fail-closed (no export, nothing published)",
       "evidence": "2026-10-15: 2026-10-15: nemik's README Hosting section already states the intended boundary: mount only the flat queue export read-only at /export, not a whole source tree. W516 makes that export the repos' own product (their policy decides what is in it), which matches the operator's ruling that the pod should not see data that must not pass. | 2026-10-16: 2026-10-16 host ruling (github-8f): part of the client-path chain that is the next design work after the open gate items; withholding at the source is what lets the builder's merged files go. | 2026-10-17: 2026-10-17: atomized into W634 (reader), W635 (compat producer), W636 (pod mounts). Writer-side emission (mtools) and retiring luthen's v1 list are asks to mint when W634 lands. Design: docs/withholding-at-source.md | 2026-10-17: design doc landed b342a21, pushed (docs/withholding-at-source.md). Children W634 (part 1 93e92d5), W635, W636 open | 2026-10-18: status doc updated 3327f72 (pushed). Children: W634 done, W635 done, W636 blocked on luthen W1283 (stale withheld list), W647 held; writer-side emission by repos and retiring luthen's v1 list still to ask | 2026-10-19: 2026-10-19: W636 enables W516 and is blocked on luthen W1283; W516's own remaining work (asking the repos for writer-side emission, retiring luthen's v1 list) waits on W636 landing, so W516 is blocked on it, not ready | 2026-10-23: 2026-10-23: W634, W635, W636 are done (W636 rolled and read back by luthen-observability W1291); what remains is writer-side emission by the repos (an mtools writer feature) and retiring luthen's v1 list; asked mtools-ad for the card | 2026-10-23: 2026-10-23 mtools-ad: writer-side emission minted as mtools:W1835 (export.json version 2: repo, as_of, cards whole, withheld refs only; atomized: policy source as a per-card withheld flag defaulting to publish, a pure builder, a --export mode writing atomically beside the state file, a leak check with a planted-withheld-card test). Answered: luthen's v1 list withholds no mtools card today, so the default-publish flag reproduces it; evidence and warrants travel whole, a card is withheld whole or not at all | 2026-10-23: 2026-10-23 mtools-ad: mtools:W1836 (per-card withheld flag, a4c0e8e) and W1837 (pure export builder, 585bc75) landed; W1838 (--export mode, <state>.export.json) is gating. Answered their three questions from the reader: it reads exports/<repo>.json from one directory, residue symbols belong in cards, as_of must come from the state so an unchanged queue writes a byte-identical file (the pod rebuilds on export mtime, W636). The gather step is nemik:W873, blocked on mtools:W1838 | 2026-10-23: 2026-10-23: mtools:W1838 (the --export mode) landed; its output is not consumed until mtools:W1840 (state-derived as_of, residue in cards) lands, so the step that unblocks W516 is nemik:W873, the gather, blocked on W1840 | 2026-10-23: 2026-10-23: W873 landed (d97f4cb): nemik-exports uses a repo's own export when trusted; what remains is every repo's writer emitting one (nemik's: W874), then retiring luthen's v1 list",
       "issued_at": "2026-10-15T12:08:11Z",
@@ -18465,21 +18463,24 @@
     {
       "symbol": "W836",
       "title": "Publish each cross-repo wait edge's age and its blocker's rank position as OTLP gauges through mikemol-otlp (repo and rule labels only, card symbols in log records), so luthen's flow dashboard has its series",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W579"
       ],
       "touches": [
         "file:src/nemik/waitseries.py!w"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W875",
+        "W876"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Slice 2: wait_rows(g) turning the graph's cross-repo wait edges and each waiting card's ticksBlocked into waitseries rows. It cannot go in the blocks module (any added Any expression raises that module's mypy baseline, and inbound's rows are dict[str, Any]); write it as a new small module that uses only rdflib's typed calls (Graph.triples, Graph.value) and add its Codon census baseline entry, since a new rdflib module fails the census. Slice 3: the blocker's rank position, then the emit through mikemol-otlp from a host-side mode beside nemik-hostroot; cite the sha to luthen when emitted",
       "evidence": "",
       "issued_at": "2026-10-22T07:10:08Z",
       "minted_during": "tick",
       "caused_by": "W579",
-      "last_worked": "2026-10-22T10:09:17Z",
+      "last_worked": "2026-10-23T06:58:56Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/waitseries.py",
@@ -19519,7 +19520,7 @@
     {
       "symbol": "W874",
       "title": "Repin the vendored mtools wheels to a sha with the writer's --export mode, so nemik's own writer can emit its export",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:pyproject.toml!w",
@@ -19530,14 +19531,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Submit the prepared stack: the seven mtools wheels repinned to 5ba261f",
-      "evidence": "2026-10-23: 2026-10-23 mtools-ad: mtools:W1841 makes store.save refresh the export when one already exists (opt-in by having run --export once; rewritten only when bytes differ), so --update --withheld and --drop refresh it in the same write; not covered: direct state writes that bypass store.save (repair-counter among them). Pin W1841's commit, not 2a5873c. nemik's stale fallback stays: it is safe either way, and dropping it is safe only for repos pinned at or after W1841's commit | 2026-10-23: 2026-10-23 mtools-ad: mtools:W1841 landed as 5ba261f (5ba261faf5708395a2baeb38111a7d61943f91a4, verified in the mtools repo): --export writes .claude/paths-forward.export.json and every store.save refreshes an export that already exists; not covered: direct state writes that bypass store.save (repair-counter). mtools:W1835 is closed by its four children; mtools has no export file yet (opt-in by running --export once)",
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: 2026-10-23 mtools-ad: mtools:W1841 makes store.save refresh the export when one already exists (opt-in by having run --export once; rewritten only when bytes differ), so --update --withheld and --drop refresh it in the same write; not covered: direct state writes that bypass store.save (repair-counter among them). Pin W1841's commit, not 2a5873c. nemik's stale fallback stays: it is safe either way, and dropping it is safe only for repos pinned at or after W1841's commit | 2026-10-23: 2026-10-23 mtools-ad: mtools:W1841 landed as 5ba261f (5ba261faf5708395a2baeb38111a7d61943f91a4, verified in the mtools repo): --export writes .claude/paths-forward.export.json and every store.save refreshes an export that already exists; not covered: direct state writes that bypass store.save (repair-counter). mtools:W1835 is closed by its four children; mtools has no export file yet (opt-in by running --export once) | 2026-10-23: commit f05aca8; the seven mtools wheels repinned to 5ba261f (writer has --export and a withheld flag that refreshes the export on every state write); converge and webpage lines kept in SHA256SUMS, sha256sum -c passes for all nine; repinned writer passes --check on the live queue. Next: run --export once on nemik's queue to opt in, ask mtools-ad to do the same, and ask other repos to repin (W516)",
       "issued_at": "2026-10-23T04:49:17Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W516",
-      "last_worked": "2026-10-23T06:47:27Z",
+      "last_worked": "2026-10-23T07:17:08Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261023T071708Z",
       "manifest": [
         "pyproject.toml",
         "uv.lock",
@@ -19558,6 +19559,61 @@
         "vendor/wheels/mikemol_icsstruct-0.1.0+5ba261f-py3-none-any.whl",
         "vendor/wheels/mikemol_pathsforward-0.1.0+5ba261f-py3-none-any.whl",
         "vendor/wheels/mikemol_rulerseq-0.1.0+5ba261f-py3-none-any.whl"
+      ],
+      "size_class": "medium"
+    },
+    {
+      "symbol": "W875",
+      "title": "A new small rdflib module turns the graph's cross-repo wait edges and each waiting card's blocked ticks into waitseries rows",
+      "status": "working",
+      "enables": [
+        "W876"
+      ],
+      "touches": [
+        "file:src/nemik/waitrows.py!w",
+        "file:tests/test_waitrows.py!w",
+        "file:codon-baseline.json!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "After the repin stack lands: rebuild the venv, run the new module's tests and the ratchet, then submit the prepared stack: wait_rows reads the graph's cross-repo wait edges as rows, held to the grouping slice 1 already does",
+      "evidence": "",
+      "issued_at": "2026-10-23T06:58:56Z",
+      "minted_during": "interrupt",
+      "caused_by": "W836",
+      "last_worked": "2026-10-23T07:09:43Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/waitrows.py",
+        "tests/test_waitrows.py",
+        "codon-baseline.json"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W876",
+      "title": "The blocker's rank position per wait edge, and the host-side mode that emits the rows through mikemol-otlp",
+      "status": "blocked",
+      "enables": [
+        "W836"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "W875"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-23T06:58:56Z",
+      "minted_during": "interrupt",
+      "caused_by": "W836",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/waitemit.py",
+        "tests/test_waitemit.py",
+        "codon-baseline.json"
       ],
       "size_class": "medium"
     }
@@ -19675,49 +19731,31 @@
   "predecessor_job_id": "disarmed",
   "leases": [
     {
-      "tag": "file:pyproject.toml!w",
+      "tag": "file:src/nemik/waitrows.py!w",
       "holder": "(unlocked)",
-      "waypoint": "W874",
-      "base_sha": "bbeb23baf20e688fec6f1861ee2f8196481f98ce",
-      "taken_at": "2026-10-23T06:32:06Z",
-      "renewed_at": "2026-10-23T06:32:06Z",
-      "expires_at": "2026-10-23T07:02:06Z"
+      "waypoint": "W875",
+      "base_sha": "b9cfc0f9b629e629be8a1c36c55b5979641847f6",
+      "taken_at": "2026-10-23T06:59:02Z",
+      "renewed_at": "2026-10-23T06:59:02Z",
+      "expires_at": "2026-10-23T07:29:02Z"
     },
     {
-      "tag": "file:uv.lock!w",
+      "tag": "file:tests/test_waitrows.py!w",
       "holder": "(unlocked)",
-      "waypoint": "W874",
-      "base_sha": "bbeb23baf20e688fec6f1861ee2f8196481f98ce",
-      "taken_at": "2026-10-23T06:32:06Z",
-      "renewed_at": "2026-10-23T06:32:06Z",
-      "expires_at": "2026-10-23T07:02:06Z"
+      "waypoint": "W875",
+      "base_sha": "b9cfc0f9b629e629be8a1c36c55b5979641847f6",
+      "taken_at": "2026-10-23T06:59:02Z",
+      "renewed_at": "2026-10-23T06:59:02Z",
+      "expires_at": "2026-10-23T07:29:02Z"
     },
     {
-      "tag": "file:MODULE.bazel!w",
+      "tag": "file:codon-baseline.json!w",
       "holder": "(unlocked)",
-      "waypoint": "W874",
-      "base_sha": "bbeb23baf20e688fec6f1861ee2f8196481f98ce",
-      "taken_at": "2026-10-23T06:32:06Z",
-      "renewed_at": "2026-10-23T06:32:06Z",
-      "expires_at": "2026-10-23T07:02:06Z"
-    },
-    {
-      "tag": "file:vendor/wheels/SHA256SUMS!w",
-      "holder": "(unlocked)",
-      "waypoint": "W874",
-      "base_sha": "bbeb23baf20e688fec6f1861ee2f8196481f98ce",
-      "taken_at": "2026-10-23T06:32:06Z",
-      "renewed_at": "2026-10-23T06:32:06Z",
-      "expires_at": "2026-10-23T07:02:06Z"
-    },
-    {
-      "tag": "file:vendor/wheels/README.md!w",
-      "holder": "(unlocked)",
-      "waypoint": "W874",
-      "base_sha": "bbeb23baf20e688fec6f1861ee2f8196481f98ce",
-      "taken_at": "2026-10-23T06:32:06Z",
-      "renewed_at": "2026-10-23T06:32:06Z",
-      "expires_at": "2026-10-23T07:02:06Z"
+      "waypoint": "W875",
+      "base_sha": "b9cfc0f9b629e629be8a1c36c55b5979641847f6",
+      "taken_at": "2026-10-23T06:59:02Z",
+      "renewed_at": "2026-10-23T06:59:02Z",
+      "expires_at": "2026-10-23T07:29:02Z"
     }
   ],
   "advice": [

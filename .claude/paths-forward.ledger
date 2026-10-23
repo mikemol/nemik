@@ -1672,3 +1672,9 @@
 2026-10-23T06:25:26Z  status W713 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T06:25:41Z  status W713 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T06:32:06Z  status W874 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T06:58:56Z  interrupt W875 minted    -         "A new small rdflib module turns the graph's cross-repo wait edges and each waiting card's blocked ticks into waitseries rows"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W836
+2026-10-23T06:58:56Z  interrupt W876 minted    -         "The blocker's rank position per wait edge, and the host-side mode that emits the rows through mikemol-otlp"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W836
+2026-10-23T06:59:02Z  status W875 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T06:59:05Z  status W876 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T07:17:08Z  status W516 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T07:17:08Z  status W874 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
