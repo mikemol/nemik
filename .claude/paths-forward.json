@@ -6780,7 +6780,6 @@
         "wake"
       ],
       "blocked_on": [
-        "nemik:W636",
         "luthen-observability:W1295"
       ],
       "blocked_kind": "agent",
@@ -6790,7 +6789,7 @@
       "minted_during": "interrupt",
       "caused_by": "W346",
       "last_worked": "2026-10-19T18:16:23Z",
-      "ticks_blocked": 92,
+      "ticks_blocked": 0,
       "weight": 9,
       "completed": null,
       "manifest": [
@@ -6810,7 +6809,6 @@
         "file:src/nemik/luthenseries.py!w"
       ],
       "blocked_on": [
-        "nemik:W636",
         "luthen-observability:W1295"
       ],
       "blocked_kind": "agent",
@@ -6820,7 +6818,7 @@
       "minted_during": "interrupt",
       "caused_by": "W346",
       "last_worked": "2026-10-19T18:16:25Z",
-      "ticks_blocked": 92,
+      "ticks_blocked": 0,
       "weight": 9,
       "completed": null,
       "manifest": [
@@ -10290,22 +10288,20 @@
     {
       "symbol": "W516",
       "title": "Withholding semantics live in the owning repos: each repo exports only publishable data and the nemik pod mounts only that export",
-      "status": "blocked",
+      "status": "ready",
       "enables": [],
       "touches": [
         "file:src/nemik/withheld.py!w"
       ],
-      "blocked_on": [
-        "nemik:W636"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "Today luthen's withheld list is applied inside nemik's static build (withheld.py, fail closed, withhold whole never scrub). Move the decision to the repos: each repo's own writer produces an export of what may leave it (its policy, its rules), and nemik and its pod can only read exports, so the pod cannot see what must not pass. Design the export format and the migration of luthen's withheld list into per-repo declarations; keep fail-closed (no export means nothing published).",
       "evidence": "2026-10-15: 2026-10-15: nemik's README Hosting section already states the intended boundary: mount only the flat queue export read-only at /export, not a whole source tree. W516 makes that export the repos' own product (their policy decides what is in it), which matches the operator's ruling that the pod should not see data that must not pass. | 2026-10-16: 2026-10-16 host ruling (github-8f): part of the client-path chain that is the next design work after the open gate items; withholding at the source is what lets the builder's merged files go. | 2026-10-17: 2026-10-17: atomized into W634 (reader), W635 (compat producer), W636 (pod mounts). Writer-side emission (mtools) and retiring luthen's v1 list are asks to mint when W634 lands. Design: docs/withholding-at-source.md | 2026-10-17: design doc landed b342a21, pushed (docs/withholding-at-source.md). Children W634 (part 1 93e92d5), W635, W636 open | 2026-10-18: status doc updated 3327f72 (pushed). Children: W634 done, W635 done, W636 blocked on luthen W1283 (stale withheld list), W647 held; writer-side emission by repos and retiring luthen's v1 list still to ask | 2026-10-19: 2026-10-19: W636 enables W516 and is blocked on luthen W1283; W516's own remaining work (asking the repos for writer-side emission, retiring luthen's v1 list) waits on W636 landing, so W516 is blocked on it, not ready",
       "issued_at": "2026-10-15T12:08:11Z",
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-19T17:23:19Z",
-      "ticks_blocked": 93,
+      "ticks_blocked": 0,
       "weight": 11,
       "manifest": [
         "src/nemik/withheld.py"
@@ -13064,19 +13060,19 @@
     {
       "symbol": "W636",
       "title": "The pod mounts only per-repo exports, read-only, and nothing else from a repo",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W516"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "When the image rolls to a build containing 6e6dc0c, luthen-observability:W1291 reads it back; the roll waits on a healthy forgejo-runner (stuck terminating tonight) and one build from a stamped commit",
-      "evidence": "2026-10-18: part 1 landed 589ab07 (pushed): nemik-serve --publish --exports DIR, exports_key rebuild, tests/test_publish_exports.py. Remaining: the pod's deployment passes --exports, only once an exports directory exists (nemik-exports, W635 part 2 in the gate); a pod given --exports with an empty directory publishes nothing | 2026-10-18: 2026-10-17 asked luthen-observability where withheld.json exists at pod build time (path in the export mount, or fetched), before touching deploy/ | 2026-10-18: 2026-10-17 luthen-observability: the withheld list is a HOST file ~/.local/share/luthen/nemik-export/withheld.json beside the queues in the export tree the pod mounts read-only (version 1, as_of, items {ref, field, rule}), not fetched. Written only by python -m checks.nemik_egress (step 1 of checks.nemik_publish); nothing runs it on a timer: the file is dated 2026-10-03 (as_of 2026-10-03T12:30:19Z, 17 items), 15 days old. A refusal exits 2 WITHOUT writing, so a stale file stays. DEFECT: a reader today publishes a card that became sensitive since. luthen fixes the producer first (their W1283: run nemik_egress as the last step of the minute export; a refusal removes the old file so a reader fails closed). Change nothing in deploy/ until they say the list is fresh every minute; then --withheld can be required | 2026-10-18: 2026-10-17 github-8f (relayed, not independently checked by me): luthen found no build was ever served (no schedule, no ingress, Firebase site 404) and none of the 4 newly withheld cards were in the one 2026-10-03 build; operator reportedly confirmed the Firebase site was never deployed. So nothing exposed. W636 and W647 proceed once luthen-observability:W1283 lands | 2026-10-18: luthen W1283 landed 123ad3d2 (list fresh every minute). Deploy change now waits only on W647 (the --withheld-max-age check, submitted); then: builder runs nemik-exports from the mounted withheld.json then publish --exports --withheld-max-age 900 | 2026-10-18: 2026-10-17 dry run of the builder's two commands on the real export tree into scratch: 15 exports, publish exit 0, 3 withheld stubs. Part 2 submitted: deploy change + exportcompat.write leaves unchanged files alone | 2026-10-18: part 2 landed 6e6dc0c (pushed, which is a deploy): the builder loop runs nemik-exports then nemik-serve --publish --exports /tmp/exports --withheld /export/withheld.json --withheld-max-age 900. NOT yet observed on the pod: the ship and the builder's first loops have not been read back | 2026-10-18: 2026-10-18 CORRECTION: I marked this done at the push, before the ship. luthen read the cluster: nemik deployment gen 249 on image tag 1792288619-3327f720bb7f... (3327f72 is W647's commit, so nothing newer has shipped; pods 125 and 131 minutes old); the running builder is the OLD loop (no --withheld). The push of 6e6dc0c (and 9e2263e, b819107 ... since 3327f72) has not rolled | 2026-10-18: CORRECTION of my previous note: 3327f72 is the W516 document commit (not W647). git log 3327f72..HEAD lists 12 unshipped commits after it, including CODE: 376a68a W461, f425151 W645, d59c873 W533, 0c44772 W648, b819107 W507, 5586836 W533, d730f18 W646, 3371725 W647, 9e2263e W531, c97c9ba W508, 8b8f2e8 W355, 6e6dc0c W636. So a failing image build could be in any of them, not only the last | 2026-10-19: 2026-10-19: the cycle with luthen-observability:W1291 (it reads W636 back after the roll) was this card blocked on the bare repo name. What W636 waits on is the ship: the image build has not produced an image since 3327f72 because the build is cancelled by supersession and its 41 min test stage cannot finish (luthen-observability findings 2026-10-18; timeout fix b598f28). That is nemik:W703 (image consumes the gate result, waiting on mtools:W1666). Re-pointed blocked_on at W703 | 2026-10-22: 2026-10-22: told luthen-observability why W1291 waits 49 ticks: W703 landed (9bfec9c) so a stamped commit skips the 41 min suite, but the forgejo-runner pod buildbuddy/forgejo-runner-6b44c5c87-btcmv is stuck terminating (runc 'function not implemented'), so no build runs; the roll waits on the runner | 2026-10-22: 2026-10-22: the open step of luthen-observability:W1291 that unblocks W636 is luthen-observability:W1521 (the reaper retires Terminating pods on a stale shim, forgejo-runner btcmv among them); W1292 waits on an operator choice about reading a run's log, W1516 on the reaper's host procedure; neither blocks the image build",
+      "next_bounded_step": null,
+      "evidence": "2026-10-18: part 1 landed 589ab07 (pushed): nemik-serve --publish --exports DIR, exports_key rebuild, tests/test_publish_exports.py. Remaining: the pod's deployment passes --exports, only once an exports directory exists (nemik-exports, W635 part 2 in the gate); a pod given --exports with an empty directory publishes nothing | 2026-10-18: 2026-10-17 asked luthen-observability where withheld.json exists at pod build time (path in the export mount, or fetched), before touching deploy/ | 2026-10-18: 2026-10-17 luthen-observability: the withheld list is a HOST file ~/.local/share/luthen/nemik-export/withheld.json beside the queues in the export tree the pod mounts read-only (version 1, as_of, items {ref, field, rule}), not fetched. Written only by python -m checks.nemik_egress (step 1 of checks.nemik_publish); nothing runs it on a timer: the file is dated 2026-10-03 (as_of 2026-10-03T12:30:19Z, 17 items), 15 days old. A refusal exits 2 WITHOUT writing, so a stale file stays. DEFECT: a reader today publishes a card that became sensitive since. luthen fixes the producer first (their W1283: run nemik_egress as the last step of the minute export; a refusal removes the old file so a reader fails closed). Change nothing in deploy/ until they say the list is fresh every minute; then --withheld can be required | 2026-10-18: 2026-10-17 github-8f (relayed, not independently checked by me): luthen found no build was ever served (no schedule, no ingress, Firebase site 404) and none of the 4 newly withheld cards were in the one 2026-10-03 build; operator reportedly confirmed the Firebase site was never deployed. So nothing exposed. W636 and W647 proceed once luthen-observability:W1283 lands | 2026-10-18: luthen W1283 landed 123ad3d2 (list fresh every minute). Deploy change now waits only on W647 (the --withheld-max-age check, submitted); then: builder runs nemik-exports from the mounted withheld.json then publish --exports --withheld-max-age 900 | 2026-10-18: 2026-10-17 dry run of the builder's two commands on the real export tree into scratch: 15 exports, publish exit 0, 3 withheld stubs. Part 2 submitted: deploy change + exportcompat.write leaves unchanged files alone | 2026-10-18: part 2 landed 6e6dc0c (pushed, which is a deploy): the builder loop runs nemik-exports then nemik-serve --publish --exports /tmp/exports --withheld /export/withheld.json --withheld-max-age 900. NOT yet observed on the pod: the ship and the builder's first loops have not been read back | 2026-10-18: 2026-10-18 CORRECTION: I marked this done at the push, before the ship. luthen read the cluster: nemik deployment gen 249 on image tag 1792288619-3327f720bb7f... (3327f72 is W647's commit, so nothing newer has shipped; pods 125 and 131 minutes old); the running builder is the OLD loop (no --withheld). The push of 6e6dc0c (and 9e2263e, b819107 ... since 3327f72) has not rolled | 2026-10-18: CORRECTION of my previous note: 3327f72 is the W516 document commit (not W647). git log 3327f72..HEAD lists 12 unshipped commits after it, including CODE: 376a68a W461, f425151 W645, d59c873 W533, 0c44772 W648, b819107 W507, 5586836 W533, d730f18 W646, 3371725 W647, 9e2263e W531, c97c9ba W508, 8b8f2e8 W355, 6e6dc0c W636. So a failing image build could be in any of them, not only the last | 2026-10-19: 2026-10-19: the cycle with luthen-observability:W1291 (it reads W636 back after the roll) was this card blocked on the bare repo name. What W636 waits on is the ship: the image build has not produced an image since 3327f72 because the build is cancelled by supersession and its 41 min test stage cannot finish (luthen-observability findings 2026-10-18; timeout fix b598f28). That is nemik:W703 (image consumes the gate result, waiting on mtools:W1666). Re-pointed blocked_on at W703 | 2026-10-22: 2026-10-22: told luthen-observability why W1291 waits 49 ticks: W703 landed (9bfec9c) so a stamped commit skips the 41 min suite, but the forgejo-runner pod buildbuddy/forgejo-runner-6b44c5c87-btcmv is stuck terminating (runc 'function not implemented'), so no build runs; the roll waits on the runner | 2026-10-22: 2026-10-22: the open step of luthen-observability:W1291 that unblocks W636 is luthen-observability:W1521 (the reaper retires Terminating pods on a stale shim, forgejo-runner btcmv among them); W1292 waits on an operator choice about reading a run's log, W1516 on the reaper's host procedure; neither blocks the image build | 2026-10-23: 2026-10-23T02:08Z: the image rolled to a build containing 6e6dc0c (server pods on nemik:1792720020-8fa3c9d5cb45...); told luthen-observability so W1291 can read it back | 2026-10-23: 2026-10-23: luthen-observability read W636 back (W1291): pods on the 8fa3c9d image (6e6dc0c is an ancestor), 2/2 ready, builder log shows 16 exports and no publish failure. Withheld stubs: my local run of the same pipeline with the same list stubs exactly estate:W5, linux-sources:W341, linux-sources:W343, substrate:W14, all refs in withheld.json, count 4 = the pod's 4; the pod's own four ids not yet compared (asked luthen) | 2026-10-23: 2026-10-23 luthen-observability-ab: the pod's own served graph.json (API proxy) has exactly four withheld-state nodes, urn:nemik:estate/W5, urn:nemik:linux-sources/W341, urn:nemik:linux-sources/W343, urn:nemik:substrate/W14: the same four my local pipeline run stubbed; the caveat is closed",
       "issued_at": "2026-10-17T17:50:58Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-22T23:36:23Z",
+      "last_worked": "2026-10-23T02:14:51Z",
       "ticks_blocked": 0,
       "manifest": [
         "deploy/deployment.yaml",
@@ -13084,7 +13080,7 @@
         "src/nemik/serve.py"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261023T021338Z"
     },
     {
       "symbol": "W637",
@@ -17032,7 +17028,6 @@
       "enables": [],
       "touches": [],
       "blocked_on": [
-        "W787",
         "W788"
       ],
       "blocked_kind": "agent",
@@ -17213,7 +17208,7 @@
     {
       "symbol": "W787",
       "title": "The view shows the CLI's Warnings and Info",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W781"
       ],
@@ -17222,18 +17217,18 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Submit the prepared stack: a test that pins the view showing every severity the CLI prints",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: commit 234d984; tests/test_view_findings.py pins that the payload carries Warning and Info and the panel filters nothing by severity",
       "issued_at": "2026-10-20T17:58:14Z",
       "minted_during": "tick",
       "caused_by": "W781",
-      "last_worked": "2026-10-23T02:02:50Z",
+      "last_worked": "2026-10-23T02:23:23Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_view_findings.py"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261023T022323Z"
     },
     {
       "symbol": "W788",
@@ -19348,11 +19343,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": null,
-      "evidence": "2026-10-23: 2026-10-23T01:35Z: kube_pod_container_info shows the server pods on registry.../nemik:1792678617-2553320a6bbe..., the queue commit made just before 9bfec9c (W703): images were shipping until then and none since, which confirms 9bfec9c as the break; the fix is 8fa3c9d (W865) | 2026-10-23: witness held at 2026-10-23T01:55:25.333836+00:00: {\"promql\": {\"count(kube_pod_container_info{namespace=\\\"nemik\\\",container=\\\"server\\\",image!~\\\".*-2553320a.*\\\"})\": {\"empty\": false, \"values\": [1.0]}}}",
+      "evidence": "2026-10-23: 2026-10-23T01:35Z: kube_pod_container_info shows the server pods on registry.../nemik:1792678617-2553320a6bbe..., the queue commit made just before 9bfec9c (W703): images were shipping until then and none since, which confirms 9bfec9c as the break; the fix is 8fa3c9d (W865) | 2026-10-23: witness held at 2026-10-23T01:55:25.333836+00:00: {\"promql\": {\"count(kube_pod_container_info{namespace=\\\"nemik\\\",container=\\\"server\\\",image!~\\\".*-2553320a.*\\\"})\": {\"empty\": false, \"values\": [1.0]}}} | 2026-10-23: 2026-10-23T02:08Z observed (luthen checks.vm_query kube_pod_container_info): both server pods run nemik:1792720020-8fa3c9d5cb45..., an image built from 8fa3c9d (W865), not the 2553320 one; so the build converts, completes and rolls again",
       "issued_at": "2026-10-23T01:35:47Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W865",
-      "last_worked": "2026-10-23T01:55:25Z",
+      "last_worked": "2026-10-23T02:09:01Z",
       "ticks_blocked": 0,
       "witness": "input.promql[\"count(kube_pod_container_info{namespace=\\\"nemik\\\",container=\\\"server\\\",image!~\\\".*-2553320a.*\\\"})\"].values[0] > 0",
       "witness_lang": "rego",
@@ -19470,17 +19465,7 @@
   "heartbeat": "2026-10-22T02:06:35Z",
   "lock": null,
   "predecessor_job_id": "disarmed",
-  "leases": [
-    {
-      "tag": "file:tests/test_view_findings.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W787",
-      "base_sha": "a3d52c8ce9d892ac60383a1e38667a8728081f63",
-      "taken_at": "2026-10-23T02:02:50Z",
-      "renewed_at": "2026-10-23T02:02:50Z",
-      "expires_at": "2026-10-23T02:32:50Z"
-    }
-  ],
+  "leases": [],
   "advice": [
     {
       "tool": "block-behind-open",
