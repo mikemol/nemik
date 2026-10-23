@@ -1754,3 +1754,8 @@
 2026-10-23T13:42:53Z  status W891 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T13:42:53Z  status W892 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T13:46:38Z  status W892 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T13:46:55Z  tick  W892 advanced  unblock   "W891 landed (dce875b); W892 built: pdf.py, pdfviews.py, tests, census entry; first real fleet PDF printed and shows the right edge clipped (W893); queue commit then stack357 [blocked by W893]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T14:16:22Z  status W892 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T14:16:22Z  status W893 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T14:16:22Z  status W894 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T14:16:23Z  status W893 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
