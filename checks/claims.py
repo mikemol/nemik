@@ -183,6 +183,8 @@ def hub_modules_depend_on_everything_below():
     # function nemik-check --letters and --fold print (a leaf of stdlib file reads).
     # nemik:W864: and answers /collapse.json with collapse.lines, as nemik-collapse prints it (a
     # leaf of pure functions over the blocked rows).
+    # nemik:W931: and answers /queue.json with queuerows.fleet_queues: each repo's ready cards in
+    # rank's order, with their wait and the newer cards ranked ahead of them.
     expected = {
         "metrics": lower | {"realize", "runlogs", "workrows"},
         "serve": lower
@@ -196,6 +198,7 @@ def hub_modules_depend_on_everything_below():
             "landings",
             "critical",
             "starved",
+            "queuerows",
             "overlaps",
             "pacing",
             "floorasks",

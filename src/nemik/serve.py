@@ -66,6 +66,7 @@ from nemik.luthenseries import board, load
 from nemik.outbox import outbox
 from nemik.overlaps import overlaps
 from nemik.pacing import limits, paces
+from nemik.queuerows import fleet_queues
 from nemik.runlogs import runs_graph
 from nemik.starved import days_limit, starved_fleet
 from nemik.wake import operator_row, read_liveness, roster
@@ -74,6 +75,27 @@ from nemik.withheldage import require_fresh
 # nemik:W783: the server never starts a process, so its survey skips the gate marks that ask
 # mikemol-commit which cards a commit stack names (a spawn, for the CLIs beside the committer).
 survey = partial(checked_survey, gate="")
+
+
+def queue_doc(graph: Graph) -> dict[str, object]:
+    """Build every repo's ready cards as a queue, in work order (nemik:W931).
+
+    Args:
+        graph: The merged queue graph, less what luthen withholds.
+
+    Returns:
+        {"as_of": the instant waits are measured to, "queues": {repo: [{place, cite, title, weight,
+        band, waited_days, overtaken_by}, ...]}}.
+
+    """
+    now = datetime.now(UTC)
+    queues = fleet_queues(graph, [], now)
+    return {
+        "as_of": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "queues": {
+            repo: [row._asdict() for row in rows] for repo, rows in queues.items()
+        },
+    }
 
 
 def check_report(name: str, graph: Graph, root: Path) -> str | None:
@@ -226,6 +248,7 @@ DOC_ROUTES = [
     "/landings.json",
     "/critical.json",
     "/starved.json",
+    "/queue.json",
     "/overlaps.json",
     "/pacing.json",
     "/floor-asks.json",
@@ -463,6 +486,16 @@ class Model:
         found = starved_fleet(g, [], datetime.now(UTC), days)
         return {"days": days, "starved": [s._asdict() for s in found]}
 
+    def queue_json(self) -> dict[str, object]:
+        """Build every repo's ready cards as a queue (nemik:W931), over the graph less the withheld.
+
+        Returns:
+            queue_doc's document.
+
+        """
+        g = without(self.graph, self.withheld) if self.withheld else self.graph
+        return queue_doc(g)
+
     def overlaps_json(self) -> dict[str, object]:
         """Build the work tags more than one live card touches, as nemik-overlaps finds them.
 
@@ -555,6 +588,7 @@ class Model:
             "/landings.json": self.landings_doc,
             "/critical.json": self.critical_json,
             "/starved.json": self.starved_json,
+            "/queue.json": self.queue_json,
             "/overlaps.json": self.overlaps_json,
             "/pacing.json": self.pacing_json,
             "/floor-asks.json": self.floor_asks_json,

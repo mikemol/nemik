@@ -259,6 +259,10 @@
   "as_written": "class decorator got unexpected argument",
   "stripped": "class decorator got unexpected argument"
  },
+ "queuerows": {
+  "as_written": "cannot import name 'UTC' from 'datetime'",
+  "stripped": "cannot import name 'UTC' from 'datetime'"
+ },
  "rank": {
   "as_written": "syntax error, unexpected ','",
   "stripped": "syntax error, unexpected ','"
