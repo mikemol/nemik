@@ -1869,3 +1869,14 @@
 2026-10-23T22:36:33Z  status W918 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T22:36:33Z  status W921 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T22:50:15Z  status W931 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T23:10:40Z  tick  W939 minted    -         "The outbox's Ticket carries isResolved, resolved and context, and the verbs mean only real events"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W918
+2026-10-23T23:10:47Z  tick  W940 minted    -         "The outbox's Ticket carries dependsOn for blocked_on and dependedBy for enables, so the edges travel with the card"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W918
+2026-10-23T23:10:53Z  tick  W941 minted    -         "Actors and cards have http(s) identifiers a peer can fetch, which needs the public base URL for the pod"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W918
+2026-10-23T23:11:00Z  tick  W942 minted    -         "An edge letter carries one typed activity in a machine-readable block, with an id, an actor, an object and a target"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W918
+2026-10-23T23:11:06Z  tick  W943 minted    -         "A floor ask can travel as an Offer addressed to its owner, beside summit's entry"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W918
+2026-10-23T23:11:24Z  status W940 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T23:11:28Z  status W941 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T23:11:35Z  status W943 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T23:11:48Z  status W918 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T23:20:11Z  status W931 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T23:20:11Z  status W932 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
