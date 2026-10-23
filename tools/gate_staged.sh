@@ -91,6 +91,28 @@ if [ -f tools/build_wasm.sh ]; then
         exit 1
     fi
 fi
+# nemik:W866: a Containerfile that cannot be converted ships no image and shows only hours later as a
+# missing one (nemik:W865). When the commit changes the Containerfile or the workflow that builds it,
+# solve it here with BuildKit (seconds, the gated path). Where no BuildKit answers (exit 3) it says why
+# it did not solve and goes on, so a host without a daemon is not locked out.
+solve_needed=0
+while IFS= read -r f; do
+    case "$f" in
+    Containerfile | .forgejo/workflows/build.yml) solve_needed=1 ;;
+    *) ;;
+    esac
+done < <(git -C "$real_root" diff --name-only "$head_sha" "$tree")
+if [ "$solve_needed" -eq 1 ]; then
+    solve_status=0
+    solve_out=$(sh tools/image_solve.sh "$wt" 2>&1) || solve_status=$?
+    if [ "$solve_status" -eq 3 ]; then
+        echo "gate_staged: the Containerfile was not solved here: $solve_out" >&2
+    elif [ "$solve_status" -ne 0 ]; then
+        printf '%s\n' "$solve_out" | tail -n 30 >&2
+        echo "gate_staged: tools/image_solve.sh failed ($solve_status): the image build would fail: commit refused" >&2
+        exit 1
+    fi
+fi
 # nemik:W526: every tracked shell file passes the shell checker (the edit hook checks only what an
 # agent edits), and no code sits untracked under .claude/ (asked of the real checkout: the staged
 # worktree above was cleaned of untracked files).
