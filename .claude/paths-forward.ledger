@@ -1764,3 +1764,9 @@
 2026-10-23T14:42:28Z  tick  W896 minted    -         "UnwarrantedRulingShape also flags evidence that cites a transcript line or uuid for an operator ruling with no warrant record, as estate's cards phrase it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f
 2026-10-23T14:48:26Z  status W893 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T14:48:27Z  status W896 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T15:12:53Z  tick  W894 advanced  sweep     "stacks 359 (W894) and 360 (W896) submitted and gating in order [blocked by W896]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T15:18:29Z  interrupt W897 minted    -         "Repin the writer to mtools c9c0070f or later and add --claim to the --warrant hints in shapes.ttl and warrantdebt.py, since the writer now refuses a warrant without one"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f
+2026-10-23T15:19:53Z  status W890 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T15:19:53Z  status W894 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T15:19:55Z  status W896 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T15:20:37Z  status W890 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
