@@ -1723,3 +1723,6 @@
 2026-10-23T11:08:25Z  status W887 blocked>done writer    "blocked -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T11:08:28Z  status W836 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T11:12:45Z  status W888 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T11:41:48Z  status W889 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T11:42:01Z  tick  W889 advanced  sweep     "W889 built (pendingdeliver, tests, census entry) and stack353 prepared; stack352 (W888) still gating [blocked by W888]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T11:49:28Z  status W888 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
