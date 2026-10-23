@@ -20869,22 +20869,20 @@
     {
       "symbol": "W918",
       "title": "From the audit, card the minimum changes that keep each channel federable: actor IRIs, activity types on letters, dependency edges in the outbox",
-      "status": "blocked",
+      "status": "ready",
       "enables": [
         "W915"
       ],
       "touches": [],
-      "blocked_on": [
-        "W921"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "After W916 and W917: one card per gap, each saying which channel stays federable if it is fixed; the operator's boundary (a delivery, a signature or a push to another server) stays the operator's decision, as outbox.py says",
       "evidence": "",
       "issued_at": "2026-10-23T19:21:39Z",
       "minted_during": "tick",
       "caused_by": "W915",
       "last_worked": "2026-10-23T20:37:50Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "docs/federation-recommendations.md"
@@ -20944,7 +20942,7 @@
     {
       "symbol": "W921",
       "title": "Read ForgeFed's Ticket property list and the ticket-dependency vocabulary directly, which the audit's fetch tool did not reach",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W918"
       ],
@@ -20953,18 +20951,18 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Land stack374: docs/federation-audit.md now cites ForgeFed's spec source (spec.bs on Codeberg main, 2025-08-21): Ticket, TicketDependency, dependsOn and dependedBy, dependencies and dependants; the recommendation for edges in the outbox is now checked against it",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: landed as 35fc972: the audit cites ForgeFed's spec source (spec.bs, Codeberg main, 2025-08-21) for Ticket and TicketDependency",
       "issued_at": "2026-10-23T20:15:41Z",
       "minted_during": "tick",
       "caused_by": "operator",
-      "last_worked": "2026-10-23T22:12:53Z",
+      "last_worked": "2026-10-23T22:36:33Z",
       "ticks_blocked": 0,
       "manifest": [
         "docs/federation-audit.md"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261023T223633Z"
     },
     {
       "symbol": "W922",
@@ -21116,7 +21114,6 @@
       "enables": [],
       "touches": [],
       "blocked_on": [
-        "W930",
         "W931",
         "W932",
         "W933"
@@ -21128,13 +21125,13 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T21:18:09Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 0,
       "completed": null
     },
     {
       "symbol": "W930",
       "title": "Mark ready cards that cannot be worked now as blocked on what they wait for, so the head of the queue is work that can start",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W929"
       ],
@@ -21143,38 +21140,36 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Land the measurement (docs/queue-order.md): 1 of 11 old ready cards could not start (W719, an umbrella with all children done, closed with an answer to life:W52); W369 and W370 have workable first steps, so my earlier claim that the head was clogged was wrong; W931 to W933 show the order and the wait",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: landed as 2912a56: docs/queue-order.md; 1 of 11 old ready cards could not start (W719, closed)",
       "issued_at": "2026-10-23T21:18:09Z",
       "minted_during": "tick",
       "caused_by": "W929",
-      "last_worked": "2026-10-23T22:11:15Z",
+      "last_worked": "2026-10-23T22:36:32Z",
       "ticks_blocked": 0,
       "manifest": [
         "docs/queue-order.md"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261023T223632Z"
     },
     {
       "symbol": "W931",
       "title": "A /queue/<repo>.json document lists a repo's ready and working cards in work order with place, weight, band, days ready and how many newer cards were ranked ahead",
-      "status": "blocked",
+      "status": "ready",
       "enables": [
         "W929"
       ],
       "touches": [],
-      "blocked_on": [
-        "W930"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "After W930: a pure queuerows module (Codon-clean, plain lists) turns nemik.rank's ready rows plus time-in-state into [{cite, title, place, weight, band, ready_days, overtaken}] for one repo, in work order, working cards first; serve.py publishes it as /queue/<repo>.json under DOC_ROUTES; parity.py and the no-spawn route list get the route. overtaken counts cards ranked above it that became ready after it (nemik-starved has the logic)",
       "evidence": "",
       "issued_at": "2026-10-23T21:18:09Z",
       "minted_during": "tick",
       "caused_by": "W929",
       "last_worked": "2026-10-23T21:18:23Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "src/nemik/queuerows.py",
@@ -21519,24 +21514,6 @@
       "taken_at": "2026-10-23T20:48:07Z",
       "renewed_at": "2026-10-23T22:09:11Z",
       "expires_at": "2026-10-23T22:39:11Z"
-    },
-    {
-      "tag": "file:docs/queue-order.md!w",
-      "holder": "claude-nemik",
-      "waypoint": "W930",
-      "base_sha": "e76344b2c8882679765d8f2ef3afd6a17dbc5aa9",
-      "taken_at": "2026-10-23T22:11:15Z",
-      "renewed_at": "2026-10-23T22:11:15Z",
-      "expires_at": "2026-10-23T22:41:15Z"
-    },
-    {
-      "tag": "file:docs/federation-audit.md!w",
-      "holder": "claude-nemik",
-      "waypoint": "W921",
-      "base_sha": "e76344b2c8882679765d8f2ef3afd6a17dbc5aa9",
-      "taken_at": "2026-10-23T22:12:53Z",
-      "renewed_at": "2026-10-23T22:12:53Z",
-      "expires_at": "2026-10-23T22:42:53Z"
     }
   ],
   "advice": [
