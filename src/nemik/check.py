@@ -359,6 +359,31 @@ def ready_neither_report(root: Path, repo: str | None) -> int:
     return 0
 
 
+def warnings_report(root: Path, repo: str | None) -> int:
+    """nemik:W898: print only the Warning, Violation and Unreadable rows, for one repo or all.
+
+    The fleet survey is 127 KB; a repo's own tick-open wants only its rows. The wording is the
+    survey's own (finding_lines), so a row reads the same here and there.
+
+    Args:
+        root: The directory holding the repos.
+        repo: The one repo to report on, or None for all.
+
+    Returns:
+        1 when a printed repo violates or is unreadable, else 0.
+
+    """
+    failed = 0
+    for name, _, findings in survey(root):
+        if repo and name != repo:
+            continue
+        kept = [f for f in findings if f[0] in {"Warning", "Violation", "Unreadable"}]
+        lines, bad = finding_lines(name, kept, digest=False)
+        sys.stdout.write("\n".join(lines) + "\n")
+        failed += bad
+    return 1 if failed else 0
+
+
 def report_mode(report: str | None, root: Path, repo: str | None) -> int | None:
     """nemik:W693, W685, W489: run the one report mode the arguments ask for, if any.
 
@@ -377,6 +402,8 @@ def report_mode(report: str | None, root: Path, repo: str | None) -> int | None:
         return unmanifested_report(root)
     if report == "ready-neither":
         return ready_neither_report(root, repo)
+    if report == "warnings":
+        return warnings_report(root, repo)
     return None
 
 
@@ -1266,6 +1293,14 @@ def main(argv: list[str] | None = None) -> None:
         const="ready-neither",
         help="list the ready cards untouched for longer than 9 in 10 finished small cards took "
         "(nemik:W489), the bound learned from every queue; --repo REPO limits it to one repo",
+    )
+    ap.add_argument(
+        "--warnings",
+        dest="report",
+        action="store_const",
+        const="warnings",
+        help="print only the Warning, Violation and Unreadable rows (nemik:W898); --repo REPO "
+        "limits it to one repo, so its tick-open reads its own rows, not the fleet's",
     )
     ap.add_argument(
         "--digest",
