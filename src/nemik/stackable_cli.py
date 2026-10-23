@@ -94,6 +94,28 @@ def drift_lines(
     return lines
 
 
+def ride_suggestions(
+    g: Graph, name: str, cited: Callable[[str], list[str]], at_least: int
+) -> list[str]:
+    """Say which kinds of file drafts should add, from what done cards' commits keep touching.
+
+    Args:
+        g: The merged queue graph.
+        name: The repo.
+        cited: Maps a symbol to the files its citing commits touched.
+        at_least: How many cards must miss a kind of file before it is suggested.
+
+    Returns:
+        One `suggest:` line per kind missed by enough done cards' manifests, most common first.
+
+    """
+    drifts = drifted(g, name, cited)
+    return [
+        f"suggest: add {one} files to the drafts above (missed by {cards} done cards' manifests)"
+        for one, cards in ride_along([extra for _, extra in drifts], at_least)
+    ]
+
+
 def print_drift(g: Graph, repo: Path) -> None:
     """Print the drift of every done card in a repo, from its git history.
 
@@ -104,6 +126,33 @@ def print_drift(g: Graph, repo: Path) -> None:
     """
     found = drift_lines(g, repo.name, history_cited(repo), RIDE_ALONG_BAR)
     sys.stdout.write("\n".join(found) + "\n")
+
+
+def print_proposal(
+    g: Graph, repo: Path, rows: list[dict[str, object]], *, as_json: bool
+) -> None:
+    """Print a drafted manifest for each ready card without one, from the repo's git history.
+
+    Args:
+        g: The merged queue graph.
+        repo: The repo's working directory.
+        rows: The repo's ready cards in rank order.
+        as_json: Write the rows a writer applies, not the lines for a reader.
+
+    """
+    cited = {
+        str(row["symbol"]): history.cited_files(repo, str(row["symbol"]))
+        for row in rows
+    }
+    known = history.tracked_files(repo)
+    if as_json:
+        sys.stdout.write(
+            json.dumps(proposal_rows(g, repo.name, rows, cited, known), indent=1) + "\n"
+        )
+        return
+    drafts = propose(g, repo.name, rows, cited, known)
+    drafts += ride_suggestions(g, repo.name, history_cited(repo), RIDE_ALONG_BAR)
+    sys.stdout.write("\n".join(drafts) + "\n")
 
 
 def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
@@ -150,17 +199,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         return
     rows: list[dict[str, object]] = rank(g, name, load_weights())
     if proposing:
-        cited = {
-            str(row["symbol"]): history.cited_files(root / name, str(row["symbol"]))
-            for row in rows
-        }
-        known = history.tracked_files(root / name)
-        if as_json:
-            sys.stdout.write(
-                json.dumps(proposal_rows(g, name, rows, cited, known), indent=1) + "\n"
-            )
-            return
-        sys.stdout.write("\n".join(propose(g, name, rows, cited, known)) + "\n")
+        print_proposal(g, root / name, rows, as_json=as_json)
         return
     staged = history.staged_paths(root / name)
     listing = root / name / ".claude" / "generated.json"

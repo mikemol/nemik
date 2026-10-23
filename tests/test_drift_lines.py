@@ -5,7 +5,7 @@
 from rdflib import Graph, Literal
 
 from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri
-from nemik.stackable_cli import drift_lines
+from nemik.stackable_cli import drift_lines, ride_suggestions
 
 
 def _card(g: Graph, symbol: str, state: str, planned: list[str]) -> None:
@@ -44,3 +44,15 @@ def test_a_kind_missed_by_enough_cards_rides_along() -> None:
     lines = drift_lines(g, "alpha", _touched, 2)
     assert "ride-along: tests/ missed by 2 cards" in lines
     assert not any("BUILD.bazel missed" in line for line in lines)
+
+
+def test_a_ride_along_kind_becomes_a_suggestion_for_the_drafts() -> None:
+    """--propose ends with one suggest line per kind that keeps missing, and only those."""
+    g = Graph()
+    _card(g, "W1", "done", ["src/a.py"])
+    _card(g, "W3", "done", ["src/c.py"])
+    lines = ride_suggestions(g, "alpha", _touched, 2)
+    assert lines == [
+        "suggest: add tests/ files to the drafts above (missed by 2 done cards' manifests)"
+    ]
+    assert ride_suggestions(g, "alpha", _touched, 3) == []
