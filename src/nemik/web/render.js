@@ -158,7 +158,7 @@ function render(poll) {
         "border-width": "data(border)", "border-color": css("--interrupt") } },
       { selector: 'node[state = "dropped"]', style: { color: css("--ink") } },
       { selector: 'node[state = "unclaimed"]', style: { "font-size": 11, "border-style": "dashed", "border-width": 3,
-        "border-color": css("--unclaimed"), "background-opacity": 0.15, color: css("--unclaimed") } },
+        "border-color": css("--unclaimed"), "background-opacity": 0.15, color: css("--ink") } },  // W903
       // A diamond's text box is its middle half, so it needs more padding to hold the same label.
       { selector: 'node[minted_during = "interrupt"]', style: { shape: "diamond", padding: 11 } },
       { selector: ".repo", style: { "background-opacity": 0.04, "background-color": css("--ink"), "border-width": 1,

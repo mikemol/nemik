@@ -2,10 +2,10 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W900: the SVG the PDF is made from draws what the canvas draws, in the page's colours.
 
-The oracle is the page's accessibility chain, not a look at a picture: every card label that
-labelInk governs keeps the 4.5:1 contrast against its fill on the canvas (WCAG 1.4.3, measured with
-wcagfacts.luminance), no visible card or edge is dropped, and every dashed wait line keeps its dash
-(its ruler-sequence pattern is its identity, nemik:W388).
+The oracle is the page's accessibility chain, not a look at a picture: every card label keeps the
+4.5:1 contrast against its fill on the canvas (WCAG 1.4.3, unclaimed cards too, W903, measured
+with wcagfacts.luminance), no visible card or edge is dropped, and every dashed wait line keeps
+its dash (its ruler-sequence pattern is its identity, nemik:W388).
 """
 
 import re
@@ -25,7 +25,7 @@ FACTS = """() => {
   const shown = cy.elements().filter(x => x.style('display') !== 'none');
   const doc = new DOMParser().parseFromString(graphSvg(cy), 'image/svg+xml');
   const bg = getComputedStyle(document.body).backgroundColor;
-  const governed = n => !n.isParent() && n.style('label') && n.data('state') !== 'unclaimed';
+  const governed = n => !n.isParent() && n.style('label');
   return {
     bg,
     labelled: shown.nodes().filter(n => n.style('label')).length,
