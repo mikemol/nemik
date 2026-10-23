@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 866,
+  "counter": 867,
   "waypoints": [
     {
       "symbol": "W1",
@@ -17032,7 +17032,6 @@
       "enables": [],
       "touches": [],
       "blocked_on": [
-        "W784",
         "W787",
         "W788"
       ],
@@ -17132,28 +17131,26 @@
     {
       "symbol": "W784",
       "title": "Routes for the check family: digest, integrity, unmanifested, ready-neither, through the CLI's own functions",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W781"
       ],
       "touches": [],
-      "blocked_on": [
-        "W793"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: 2026-10-23: the check family is routed: /check.json (digest, check_board), /check/ready-neither, /check/unmanifested, /check/integrity (check_report, W795/W796), plus letters and fold (8d87423) in the parity table; tests are tests/test_serve_check.py and tests/test_serve_check_letters.py, not the file this card first named",
       "issued_at": "2026-10-20T17:58:14Z",
       "minted_during": "tick",
       "caused_by": "W781",
-      "last_worked": "2026-10-20T19:48:55Z",
-      "ticks_blocked": 44,
+      "last_worked": "2026-10-23T01:52:06Z",
+      "ticks_blocked": 0,
       "manifest": [
         "src/nemik/serve.py",
-        "tests/test_serve_check_routes.py"
+        "tests/test_serve_check.py"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261023T015206Z"
     },
     {
       "symbol": "W785",
@@ -17370,23 +17367,21 @@
     {
       "symbol": "W793",
       "title": "nemik-check's integrity, unmanifested, ready-neither, realizability, committed, letters and fold modes, and nemik-collapse, are served",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W784"
       ],
       "touches": [],
-      "blocked_on": [
-        "W797"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: 2026-10-23: the check modes and nemik-collapse are each served or excluded by a stated reason: integrity, unmanifested, ready-neither (earlier), letters and fold (8d87423, e7812c1), collapse (dffee37), committed and realizability excluded as spawners (1be5973, 209972d); the parity table's pending list is empty and its ceiling zero",
       "issued_at": "2026-10-20T19:48:55Z",
       "minted_during": "interrupt",
       "caused_by": "W784",
-      "last_worked": "2026-10-20T20:15:10Z",
-      "ticks_blocked": 43,
-      "completed": null
+      "last_worked": "2026-10-23T01:51:44Z",
+      "ticks_blocked": 0,
+      "completed": "20261023T015144Z"
     },
     {
       "symbol": "W794",
@@ -17474,29 +17469,23 @@
     {
       "symbol": "W797",
       "title": "realizability, committed, letters, fold and nemik-collapse are served the same way, or excluded by a stated reason",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W793"
       ],
       "touches": [],
-      "blocked_on": [
-        "W864"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: 2026-10-23: realized by its children: W860 realizability excluded (209972d), W861 committed excluded (1be5973), W862 letters and fold served (8d87423), W863 their parity rows (e7812c1), W864 collapse served (dffee37); the manifest it carried is theirs | 2026-10-23: all children done: W861, W862, W863, W864",
       "issued_at": "2026-10-20T20:15:10Z",
       "minted_during": "tick",
       "caused_by": "W793",
-      "last_worked": "2026-10-22T23:09:09Z",
+      "last_worked": "2026-10-23T01:51:34Z",
       "ticks_blocked": 0,
-      "manifest": [
-        "src/nemik/serve.py",
-        "src/nemik/parity.py",
-        "tests/test_parity.py"
-      ],
+      "manifest": null,
       "size_class": "medium",
-      "completed": null
+      "completed": "20261023T015134Z"
     },
     {
       "symbol": "W798",
@@ -19267,7 +19256,7 @@
     {
       "symbol": "W864",
       "title": "Serve nemik-collapse the way the command prints it, or exclude it by a stated reason",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W797"
       ],
@@ -19281,12 +19270,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Submit the prepared stack: collapse served and the parity table's pending list empty",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: commit dffee37; Model.collapse_json serves collapse.lines over blocked_rows at /collapse.json, nemik-collapse routed, parity pending list empty and its test ceiling zero",
       "issued_at": "2026-10-22T23:09:09Z",
       "minted_during": "interrupt",
       "caused_by": "W797",
-      "last_worked": "2026-10-23T00:54:32Z",
+      "last_worked": "2026-10-23T01:51:23Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/serve.py",
@@ -19297,12 +19286,12 @@
         "tests/test_serve_collapse.py"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261023T015123Z"
     },
     {
       "symbol": "W865",
       "title": "The image build has failed at conversion since 9bfec9c: COPY --from takes no variable, so the gated-stage choice moves to a FROM",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W866"
       ],
@@ -19312,30 +19301,29 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Land the Containerfile fix verified with buildctl: global ARG TESTS, FROM TESTS AS verdict, COPY --from=verdict; then read the first build after it for the image test stage line",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: commit 8fa3c9d; verified with buildctl before landing: TESTS=gated builds a complete image in about ten seconds, the default converts and starts the test stage. That a Forgejo build now produces an image is confirmed by nemik:W852 (luthen-observability:W1506), not here",
       "issued_at": "2026-10-23T01:03:40Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W703",
-      "last_worked": "2026-10-23T01:03:50Z",
+      "last_worked": "2026-10-23T01:33:05Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261023T013305Z",
       "manifest": [
         "Containerfile",
         "tests/test_containerfile.py"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "deploys": false
     },
     {
       "symbol": "W866",
       "title": "The commit gate solves the Containerfile in both TESTS modes when it or build.yml changes, so an unparsable image build fails the commit, not CI",
-      "status": "blocked",
+      "status": "ready",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "W865"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "Choose the cheapest solve that catches conversion errors (a buildctl solve with the dockerfile frontend's lint or check request, or a bounded build) and whether the gate host has a buildkit daemon and egress; then run it for TESTS=test and TESTS=gated from gate_staged when either file is in the commit",
       "evidence": "",
       "issued_at": "2026-10-23T01:04:54Z",
@@ -19348,6 +19336,27 @@
         "tests/test_containerfile_solve.py"
       ],
       "size_class": "medium"
+    },
+    {
+      "symbol": "W867",
+      "title": "The nemik image builds again: a server pod serves a tag newer than the last one built before 9bfec9c (2553320)",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "nemik-witnesses"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Waits on the witness: nemik-witnesses --apply marks this done when a server pod runs an image other than the one built from 2553320; the pod served 1792678617-2553320a6bbe on 2026-10-23T01:35Z",
+      "evidence": "2026-10-23: 2026-10-23T01:35Z: kube_pod_container_info shows the server pods on registry.../nemik:1792678617-2553320a6bbe..., the queue commit made just before 9bfec9c (W703): images were shipping until then and none since, which confirms 9bfec9c as the break; the fix is 8fa3c9d (W865)",
+      "issued_at": "2026-10-23T01:35:47Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W865",
+      "last_worked": "2026-10-23T01:35:55Z",
+      "ticks_blocked": 0,
+      "witness": "input.promql[\"count(kube_pod_container_info{namespace=\\\"nemik\\\",container=\\\"server\\\",image!~\\\".*-2553320a.*\\\"})\"].values[0] > 0",
+      "witness_lang": "rego",
+      "completed": null
     }
   ],
   "residue": [
@@ -19461,80 +19470,7 @@
   "heartbeat": "2026-10-22T02:06:35Z",
   "lock": null,
   "predecessor_job_id": "disarmed",
-  "leases": [
-    {
-      "tag": "file:src/nemik/serve.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W864",
-      "base_sha": "e7812c1c7ae1aea80719c75bced78a4fe4df8198",
-      "taken_at": "2026-10-23T00:53:03Z",
-      "renewed_at": "2026-10-23T00:53:03Z",
-      "expires_at": "2026-10-23T01:23:03Z"
-    },
-    {
-      "tag": "file:checks/claims.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W864",
-      "base_sha": "e7812c1c7ae1aea80719c75bced78a4fe4df8198",
-      "taken_at": "2026-10-23T00:53:03Z",
-      "renewed_at": "2026-10-23T00:53:03Z",
-      "expires_at": "2026-10-23T01:23:03Z"
-    },
-    {
-      "tag": "file:src/nemik/parity.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W864",
-      "base_sha": "e7812c1c7ae1aea80719c75bced78a4fe4df8198",
-      "taken_at": "2026-10-23T00:53:03Z",
-      "renewed_at": "2026-10-23T00:53:03Z",
-      "expires_at": "2026-10-23T01:23:03Z"
-    },
-    {
-      "tag": "file:tests/test_parity.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W864",
-      "base_sha": "e7812c1c7ae1aea80719c75bced78a4fe4df8198",
-      "taken_at": "2026-10-23T00:53:03Z",
-      "renewed_at": "2026-10-23T00:53:03Z",
-      "expires_at": "2026-10-23T01:23:03Z"
-    },
-    {
-      "tag": "file:tests/test_serve_no_spawn.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W864",
-      "base_sha": "e7812c1c7ae1aea80719c75bced78a4fe4df8198",
-      "taken_at": "2026-10-23T00:53:03Z",
-      "renewed_at": "2026-10-23T00:53:03Z",
-      "expires_at": "2026-10-23T01:23:03Z"
-    },
-    {
-      "tag": "file:tests/test_serve_collapse.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W864",
-      "base_sha": "e7812c1c7ae1aea80719c75bced78a4fe4df8198",
-      "taken_at": "2026-10-23T00:53:03Z",
-      "renewed_at": "2026-10-23T00:53:03Z",
-      "expires_at": "2026-10-23T01:23:03Z"
-    },
-    {
-      "tag": "file:Containerfile!w",
-      "holder": "(unlocked)",
-      "waypoint": "W865",
-      "base_sha": "e7812c1c7ae1aea80719c75bced78a4fe4df8198",
-      "taken_at": "2026-10-23T01:03:50Z",
-      "renewed_at": "2026-10-23T01:03:50Z",
-      "expires_at": "2026-10-23T01:33:50Z"
-    },
-    {
-      "tag": "file:tests/test_containerfile.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W865",
-      "base_sha": "e7812c1c7ae1aea80719c75bced78a4fe4df8198",
-      "taken_at": "2026-10-23T01:03:50Z",
-      "renewed_at": "2026-10-23T01:03:50Z",
-      "expires_at": "2026-10-23T01:33:50Z"
-    }
-  ],
+  "leases": [],
   "advice": [
     {
       "tool": "block-behind-open",

@@ -1608,3 +1608,15 @@
 2026-10-23T01:03:50Z  status W865 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T01:04:54Z  interrupt W866 minted    -         "The commit gate solves the Containerfile in both TESTS modes when it or build.yml changes, so an unparsable image build fails the commit, not CI"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f
 2026-10-23T01:06:05Z  status W866 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T01:33:05Z  status W865 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T01:33:05Z  status W866 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T01:35:47Z  interrupt W867 minted    -         "The nemik image builds again: a server pod serves a tag newer than the last one built before 9bfec9c (2553320)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W865
+2026-10-23T01:35:55Z  status W867 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T01:51:23Z  status W797 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T01:51:23Z  status W864 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T01:51:34Z  status W797 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T01:51:38Z  prune W793 edge-pruned writer    "W797"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T01:51:38Z  status W793 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T01:51:44Z  status W784 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T01:51:44Z  status W793 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T01:52:06Z  status W784 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
