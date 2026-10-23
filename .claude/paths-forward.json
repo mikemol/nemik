@@ -19605,7 +19605,6 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W884",
         "W885"
       ],
       "blocked_kind": "agent",
@@ -19769,7 +19768,7 @@
     {
       "symbol": "W884",
       "title": "Vendor mtools' otlp dist as a wheel and pin it as a dependency, unused until the emit",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W885"
       ],
@@ -19783,12 +19782,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Submit the prepared stack: mtools' otlp and endpoints dists vendored at 5ba261f as dev dependencies, unused until W885",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: commit ba8dcbe; mikemol-otlp and mikemol-endpoints vendored at 5ba261f as dev dependencies (first pins by hand), locked with opentelemetry-proto 1.45.1 and protobuf 7.36.2, named in MODULE.bazel and the venv hub, sha256sum -c passes for all eleven wheels; they import from nemik's venv",
       "issued_at": "2026-10-23T08:07:05Z",
       "minted_during": "interrupt",
       "caused_by": "W876",
-      "last_worked": "2026-10-23T08:48:36Z",
+      "last_worked": "2026-10-23T09:15:47Z",
       "ticks_blocked": 0,
       "manifest": [
         "pyproject.toml",
@@ -19801,33 +19800,36 @@
         "vendor/wheels/mikemol_endpoints-0.1.0+5ba261f-py3-none-any.whl"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261023T091547Z"
     },
     {
       "symbol": "W885",
       "title": "A host-side mode beside nemik-hostroot emits the wait samples as OTLP gauges through mikemol-otlp, repo and rule labels only",
-      "status": "blocked",
+      "status": "working",
       "enables": [
         "W876"
       ],
-      "touches": [],
-      "blocked_on": [
-        "W884"
+      "touches": [
+        "file:src/nemik/waitemit.py!w",
+        "file:tests/test_waitemit.py!w",
+        "file:codon-baseline.json!w"
       ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Write waitemit.py (samples from wait_edges, gauges via mikemol.otlp, send to vmsingle-http), tests with a stub poster, python -m nemik.waitemit entry",
       "evidence": "",
       "issued_at": "2026-10-23T08:07:05Z",
       "minted_during": "interrupt",
       "caused_by": "W876",
-      "last_worked": null,
+      "last_worked": "2026-10-23T09:18:27Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/waitemit.py",
         "tests/test_waitemit.py",
         "codon-baseline.json"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "completed": null
     }
   ],
   "residue": [
@@ -19943,58 +19945,31 @@
   "predecessor_job_id": "disarmed",
   "leases": [
     {
-      "tag": "file:pyproject.toml!w",
+      "tag": "file:src/nemik/waitemit.py!w",
       "holder": "(unlocked)",
-      "waypoint": "W884",
-      "base_sha": "d8f15282881724f1fb501559f86f190ec6a67760",
-      "taken_at": "2026-10-23T08:45:53Z",
-      "renewed_at": "2026-10-23T08:45:53Z",
-      "expires_at": "2026-10-23T09:15:53Z"
+      "waypoint": "W885",
+      "base_sha": "ba8dcbed9e826121b946634ca0d31bf6f2edb2c0",
+      "taken_at": "2026-10-23T09:18:27Z",
+      "renewed_at": "2026-10-23T09:18:27Z",
+      "expires_at": "2026-10-23T09:48:27Z"
     },
     {
-      "tag": "file:uv.lock!w",
+      "tag": "file:tests/test_waitemit.py!w",
       "holder": "(unlocked)",
-      "waypoint": "W884",
-      "base_sha": "d8f15282881724f1fb501559f86f190ec6a67760",
-      "taken_at": "2026-10-23T08:45:53Z",
-      "renewed_at": "2026-10-23T08:45:53Z",
-      "expires_at": "2026-10-23T09:15:53Z"
+      "waypoint": "W885",
+      "base_sha": "ba8dcbed9e826121b946634ca0d31bf6f2edb2c0",
+      "taken_at": "2026-10-23T09:18:27Z",
+      "renewed_at": "2026-10-23T09:18:27Z",
+      "expires_at": "2026-10-23T09:48:27Z"
     },
     {
-      "tag": "file:MODULE.bazel!w",
+      "tag": "file:codon-baseline.json!w",
       "holder": "(unlocked)",
-      "waypoint": "W884",
-      "base_sha": "d8f15282881724f1fb501559f86f190ec6a67760",
-      "taken_at": "2026-10-23T08:45:53Z",
-      "renewed_at": "2026-10-23T08:45:53Z",
-      "expires_at": "2026-10-23T09:15:53Z"
-    },
-    {
-      "tag": "file:BUILD.bazel!w",
-      "holder": "(unlocked)",
-      "waypoint": "W884",
-      "base_sha": "d8f15282881724f1fb501559f86f190ec6a67760",
-      "taken_at": "2026-10-23T08:45:53Z",
-      "renewed_at": "2026-10-23T08:45:53Z",
-      "expires_at": "2026-10-23T09:15:53Z"
-    },
-    {
-      "tag": "file:vendor/wheels/SHA256SUMS!w",
-      "holder": "(unlocked)",
-      "waypoint": "W884",
-      "base_sha": "d8f15282881724f1fb501559f86f190ec6a67760",
-      "taken_at": "2026-10-23T08:45:53Z",
-      "renewed_at": "2026-10-23T08:45:53Z",
-      "expires_at": "2026-10-23T09:15:53Z"
-    },
-    {
-      "tag": "file:vendor/wheels/README.md!w",
-      "holder": "(unlocked)",
-      "waypoint": "W884",
-      "base_sha": "d8f15282881724f1fb501559f86f190ec6a67760",
-      "taken_at": "2026-10-23T08:45:53Z",
-      "renewed_at": "2026-10-23T08:45:53Z",
-      "expires_at": "2026-10-23T09:15:53Z"
+      "waypoint": "W885",
+      "base_sha": "ba8dcbed9e826121b946634ca0d31bf6f2edb2c0",
+      "taken_at": "2026-10-23T09:18:27Z",
+      "renewed_at": "2026-10-23T09:18:27Z",
+      "expires_at": "2026-10-23T09:48:27Z"
     }
   ],
   "advice": [
