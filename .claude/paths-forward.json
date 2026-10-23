@@ -17213,25 +17213,27 @@
     {
       "symbol": "W787",
       "title": "The view shows the CLI's Warnings and Info",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W781"
       ],
-      "touches": [],
+      "touches": [
+        "file:tests/test_view_findings.py!w"
+      ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
+      "next_bounded_step": "Submit the prepared stack: a test that pins the view showing every severity the CLI prints",
       "evidence": "",
       "issued_at": "2026-10-20T17:58:14Z",
       "minted_during": "tick",
       "caused_by": "W781",
-      "last_worked": "2026-10-20T17:58:41Z",
+      "last_worked": "2026-10-23T02:02:50Z",
       "ticks_blocked": 0,
       "manifest": [
-        "src/nemik/web/index.html",
         "tests/test_view_findings.py"
       ],
-      "size_class": "medium"
+      "size_class": "small",
+      "completed": null
     },
     {
       "symbol": "W788",
@@ -19340,23 +19342,21 @@
     {
       "symbol": "W867",
       "title": "The nemik image builds again: a server pod serves a tag newer than the last one built before 9bfec9c (2553320)",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "nemik-witnesses"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Waits on the witness: nemik-witnesses --apply marks this done when a server pod runs an image other than the one built from 2553320; the pod served 1792678617-2553320a6bbe on 2026-10-23T01:35Z",
-      "evidence": "2026-10-23: 2026-10-23T01:35Z: kube_pod_container_info shows the server pods on registry.../nemik:1792678617-2553320a6bbe..., the queue commit made just before 9bfec9c (W703): images were shipping until then and none since, which confirms 9bfec9c as the break; the fix is 8fa3c9d (W865)",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: 2026-10-23T01:35Z: kube_pod_container_info shows the server pods on registry.../nemik:1792678617-2553320a6bbe..., the queue commit made just before 9bfec9c (W703): images were shipping until then and none since, which confirms 9bfec9c as the break; the fix is 8fa3c9d (W865) | 2026-10-23: witness held at 2026-10-23T01:55:25.333836+00:00: {\"promql\": {\"count(kube_pod_container_info{namespace=\\\"nemik\\\",container=\\\"server\\\",image!~\\\".*-2553320a.*\\\"})\": {\"empty\": false, \"values\": [1.0]}}}",
       "issued_at": "2026-10-23T01:35:47Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W865",
-      "last_worked": "2026-10-23T01:35:55Z",
+      "last_worked": "2026-10-23T01:55:25Z",
       "ticks_blocked": 0,
       "witness": "input.promql[\"count(kube_pod_container_info{namespace=\\\"nemik\\\",container=\\\"server\\\",image!~\\\".*-2553320a.*\\\"})\"].values[0] > 0",
       "witness_lang": "rego",
-      "completed": null
+      "completed": "20261023T015525Z"
     }
   ],
   "residue": [
@@ -19470,7 +19470,17 @@
   "heartbeat": "2026-10-22T02:06:35Z",
   "lock": null,
   "predecessor_job_id": "disarmed",
-  "leases": [],
+  "leases": [
+    {
+      "tag": "file:tests/test_view_findings.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W787",
+      "base_sha": "a3d52c8ce9d892ac60383a1e38667a8728081f63",
+      "taken_at": "2026-10-23T02:02:50Z",
+      "renewed_at": "2026-10-23T02:02:50Z",
+      "expires_at": "2026-10-23T02:32:50Z"
+    }
+  ],
   "advice": [
     {
       "tool": "block-behind-open",
