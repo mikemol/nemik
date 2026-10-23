@@ -235,6 +235,10 @@
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'argparse'"
  },
+ "pdf": {
+  "as_written": "no module named 'argparse'",
+  "stripped": "no module named 'argparse'"
+ },
  "pendingdeliver": {
   "as_written": "no module named 'argparse'",
   "stripped": "no module named 'argparse'"
