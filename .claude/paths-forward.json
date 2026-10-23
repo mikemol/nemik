@@ -17480,8 +17480,6 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W862",
-        "W863",
         "W864"
       ],
       "blocked_kind": "agent",
@@ -19211,7 +19209,7 @@
     {
       "symbol": "W862",
       "title": "Serve nemik-check --letters the way the command prints it, or exclude it by a stated reason",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W797"
       ],
@@ -19223,12 +19221,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Submit the prepared stack with W863: letters and fold served, parity rows routed",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: commit 8d87423; check_report answers letters and fold through letters.report, claims.py names letters, tests/test_serve_check_letters.py",
       "issued_at": "2026-10-22T23:09:09Z",
       "minted_during": "interrupt",
       "caused_by": "W797",
-      "last_worked": "2026-10-23T00:28:44Z",
+      "last_worked": "2026-10-23T00:52:40Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/serve.py",
@@ -19237,12 +19235,12 @@
         "tests/test_serve_check_letters.py"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261023T005240Z"
     },
     {
       "symbol": "W863",
       "title": "Serve nemik-check --fold the way the command prints it, or exclude it by a stated reason",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W797"
       ],
@@ -19252,44 +19250,54 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Move the letters and fold rows from pending to routed in the parity table and lower the ceiling to one",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: commit e7812c1; letters and fold routed in the parity table, pending ceiling one",
       "issued_at": "2026-10-22T23:09:09Z",
       "minted_during": "interrupt",
       "caused_by": "W797",
-      "last_worked": "2026-10-23T00:25:17Z",
+      "last_worked": "2026-10-23T00:52:41Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/parity.py",
         "tests/test_parity.py"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261023T005241Z"
     },
     {
       "symbol": "W864",
       "title": "Serve nemik-collapse the way the command prints it, or exclude it by a stated reason",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W797"
       ],
-      "touches": [],
+      "touches": [
+        "file:src/nemik/serve.py!w",
+        "file:checks/claims.py!w",
+        "file:src/nemik/parity.py!w",
+        "file:tests/test_parity.py!w",
+        "file:tests/test_serve_no_spawn.py!w",
+        "file:tests/test_serve_collapse.py!w"
+      ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
+      "next_bounded_step": "Submit the prepared stack: collapse served and the parity table's pending list empty",
       "evidence": "",
       "issued_at": "2026-10-22T23:09:09Z",
       "minted_during": "interrupt",
       "caused_by": "W797",
-      "last_worked": null,
+      "last_worked": "2026-10-23T00:54:32Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/serve.py",
+        "checks/claims.py",
         "src/nemik/parity.py",
         "tests/test_parity.py",
+        "tests/test_serve_no_spawn.py",
         "tests/test_serve_collapse.py"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "completed": null
     }
   ],
   "residue": [
@@ -19407,56 +19415,56 @@
     {
       "tag": "file:src/nemik/serve.py!w",
       "holder": "(unlocked)",
-      "waypoint": "W862",
-      "base_sha": "7c33c77d454ea9c7dfcfe58add1bef5b9a960b4c",
-      "taken_at": "2026-10-23T00:02:35Z",
-      "renewed_at": "2026-10-23T00:02:35Z",
-      "expires_at": "2026-10-23T00:32:35Z"
+      "waypoint": "W864",
+      "base_sha": "e7812c1c7ae1aea80719c75bced78a4fe4df8198",
+      "taken_at": "2026-10-23T00:53:03Z",
+      "renewed_at": "2026-10-23T00:53:03Z",
+      "expires_at": "2026-10-23T01:23:03Z"
     },
     {
       "tag": "file:checks/claims.py!w",
       "holder": "(unlocked)",
-      "waypoint": "W862",
-      "base_sha": "7c33c77d454ea9c7dfcfe58add1bef5b9a960b4c",
-      "taken_at": "2026-10-23T00:02:35Z",
-      "renewed_at": "2026-10-23T00:02:35Z",
-      "expires_at": "2026-10-23T00:32:35Z"
-    },
-    {
-      "tag": "file:tests/test_serve_no_spawn.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W862",
-      "base_sha": "7c33c77d454ea9c7dfcfe58add1bef5b9a960b4c",
-      "taken_at": "2026-10-23T00:02:35Z",
-      "renewed_at": "2026-10-23T00:02:35Z",
-      "expires_at": "2026-10-23T00:32:35Z"
-    },
-    {
-      "tag": "file:tests/test_serve_check_letters.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W862",
-      "base_sha": "7c33c77d454ea9c7dfcfe58add1bef5b9a960b4c",
-      "taken_at": "2026-10-23T00:02:35Z",
-      "renewed_at": "2026-10-23T00:02:35Z",
-      "expires_at": "2026-10-23T00:32:35Z"
+      "waypoint": "W864",
+      "base_sha": "e7812c1c7ae1aea80719c75bced78a4fe4df8198",
+      "taken_at": "2026-10-23T00:53:03Z",
+      "renewed_at": "2026-10-23T00:53:03Z",
+      "expires_at": "2026-10-23T01:23:03Z"
     },
     {
       "tag": "file:src/nemik/parity.py!w",
       "holder": "(unlocked)",
-      "waypoint": "W863",
-      "base_sha": "1be59739fff957b8ec1a4ecd892bc2822289ea7f",
-      "taken_at": "2026-10-23T00:25:17Z",
-      "renewed_at": "2026-10-23T00:25:17Z",
-      "expires_at": "2026-10-23T00:55:17Z"
+      "waypoint": "W864",
+      "base_sha": "e7812c1c7ae1aea80719c75bced78a4fe4df8198",
+      "taken_at": "2026-10-23T00:53:03Z",
+      "renewed_at": "2026-10-23T00:53:03Z",
+      "expires_at": "2026-10-23T01:23:03Z"
     },
     {
       "tag": "file:tests/test_parity.py!w",
       "holder": "(unlocked)",
-      "waypoint": "W863",
-      "base_sha": "1be59739fff957b8ec1a4ecd892bc2822289ea7f",
-      "taken_at": "2026-10-23T00:25:17Z",
-      "renewed_at": "2026-10-23T00:25:17Z",
-      "expires_at": "2026-10-23T00:55:17Z"
+      "waypoint": "W864",
+      "base_sha": "e7812c1c7ae1aea80719c75bced78a4fe4df8198",
+      "taken_at": "2026-10-23T00:53:03Z",
+      "renewed_at": "2026-10-23T00:53:03Z",
+      "expires_at": "2026-10-23T01:23:03Z"
+    },
+    {
+      "tag": "file:tests/test_serve_no_spawn.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W864",
+      "base_sha": "e7812c1c7ae1aea80719c75bced78a4fe4df8198",
+      "taken_at": "2026-10-23T00:53:03Z",
+      "renewed_at": "2026-10-23T00:53:03Z",
+      "expires_at": "2026-10-23T01:23:03Z"
+    },
+    {
+      "tag": "file:tests/test_serve_collapse.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W864",
+      "base_sha": "e7812c1c7ae1aea80719c75bced78a4fe4df8198",
+      "taken_at": "2026-10-23T00:53:03Z",
+      "renewed_at": "2026-10-23T00:53:03Z",
+      "expires_at": "2026-10-23T01:23:03Z"
     }
   ],
   "advice": [
