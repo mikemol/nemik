@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 911,
+  "counter": 919,
   "waypoints": [
     {
       "symbol": "W1",
@@ -11533,11 +11533,11 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "Use dictops.merged inside each module's own typing pass (the module being typed for Codon), not as a sweep. Candidates in the order they could first compile: the pure modules whose only blockers are constructs (critical, withheld, history after dataclass and keyword-only are settled by W567 and W569).",
-      "evidence": "2026-10-16: 2026-10-16 TRIED the rewrite and REVERTED it, with the cost measured. The helper nemik.dictops.merged[V](base, extra) (PEP 695 generic, plain dict parameters since Codon has no collections.abc; Codon runs it and keeps the spread's key order and in-place override) replaces every {**a, k: v}. Sites (a grep for '{**' misses multi-line spreads; the census hid some behind earlier errors): endpoint 1, serve 2 (lines 230 and 574), critical 1, withheld 3 (94, 96, 98), history 2 (multi-line, 475 and 529), calendars 1 (333), rank 1 (365), 11 in 7 files. Applying it cost: the house ruff rule PLC0415 for the function-level import (the edit gate refuses a top-level import split from its use) in 6 files, PLR0915 in calendars, and house-mypy misc findings UP in history (+2), rank (+3) and withheld (+6), because the helper's result is an Any-typed expression in modules whose data is untyped dicts. And none of those modules would compile under Codon yet (each also imports argparse, rdflib, subprocess or uses dataclasses). So the spread removal belongs to the module's typing pass, not before it. KEPT: src/nemik/dictops.py and tests/test_dictops.py (order, in-place override, no mutation). Also noted: mtools-ad found Codon does not report errors in source order (a bad import on line 1 and a bad decorator on line 4 reported line 4), so the census's 'first rejection' is the first Codon REPORTS, not the first by line. | 2026-10-16: committed c6771b1: src/nemik/dictops.py (merged[V]) and tests/test_dictops.py. The card stays open for the per-module use; it is not ready work today, so it is blocked on the typing passes it belongs to.",
+      "evidence": "2026-10-16: 2026-10-16 TRIED the rewrite and REVERTED it, with the cost measured. The helper nemik.dictops.merged[V](base, extra) (PEP 695 generic, plain dict parameters since Codon has no collections.abc; Codon runs it and keeps the spread's key order and in-place override) replaces every {**a, k: v}. Sites (a grep for '{**' misses multi-line spreads; the census hid some behind earlier errors): endpoint 1, serve 2 (lines 230 and 574), critical 1, withheld 3 (94, 96, 98), history 2 (multi-line, 475 and 529), calendars 1 (333), rank 1 (365), 11 in 7 files. Applying it cost: the house ruff rule PLC0415 for the function-level import (the edit gate refuses a top-level import split from its use) in 6 files, PLR0915 in calendars, and house-mypy misc findings UP in history (+2), rank (+3) and withheld (+6), because the helper's result is an Any-typed expression in modules whose data is untyped dicts. And none of those modules would compile under Codon yet (each also imports argparse, rdflib, subprocess or uses dataclasses). So the spread removal belongs to the module's typing pass, not before it. KEPT: src/nemik/dictops.py and tests/test_dictops.py (order, in-place override, no mutation). Also noted: mtools-ad found Codon does not report errors in source order (a bad import on line 1 and a bad decorator on line 4 reported line 4), so the census's 'first rejection' is the first Codon REPORTS, not the first by line. | 2026-10-16: committed c6771b1: src/nemik/dictops.py (merged[V]) and tests/test_dictops.py. The card stays open for the per-module use; it is not ready work today, so it is blocked on the typing passes it belongs to. | 2026-10-23: 2026-10-23 overlap audit (verified): mtools:W1345 is the minimal reproducer and draft upstream report for the same Codon dict-spread compiler abort; this card is the paydown in nemik's code. Cross-cited; the operator sends the report, not an agent",
       "issued_at": "2026-10-16T04:52:28Z",
       "minted_during": "tick",
       "caused_by": "W566",
-      "last_worked": "2026-10-16T05:34:00Z",
+      "last_worked": "2026-10-23T19:25:35Z",
       "ticks_blocked": 184,
       "completed": null
     },
@@ -14730,18 +14730,21 @@
       "symbol": "W696",
       "title": "Fleet consumers run nemik from a pinned build, never from the working tree: a sha-pinned wheel or built dist, with scratch worktrees for work in progress",
       "status": "ready",
-      "enables": [],
+      "enables": [
+        "luthen-observability:W1476",
+        "luthen-observability:W1461"
+      ],
       "touches": [
         "file:src/nemik/check.py!w"
       ],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Design: fleet consumers run nemik from a pinned build (a sha-pinned wheel or built dist), with scratch worktrees for work in progress; today the working-tree edits reach every peer at once",
-      "evidence": "",
+      "evidence": "2026-10-23: 2026-10-23 overlap audit (verified): luthen-observability:W1476 (the nemik_check gate reads a pinned nemik install) and W1461 (the user-tools install follows nemik's pushed main, needs nemik's ref as a trigger) wait on a pinned build, which this card makes",
       "issued_at": "2026-10-18T20:24:34Z",
       "minted_during": "interrupt",
       "caused_by": "github-8f",
-      "last_worked": "2026-10-19T00:41:57Z",
+      "last_worked": "2026-10-23T19:25:18Z",
       "ticks_blocked": 0,
       "manifest": [
         "tools/build_dist.sh",
@@ -15643,11 +15646,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "A command that compares each src/nemik module's text with the installed copy's and exits nonzero naming the stale ones; test with a temp site dir. Must compile under Codon (probe first)",
-      "evidence": "",
+      "evidence": "2026-10-23: 2026-10-23 overlap audit (verified): related to luthen-observability:W1235 (a timer publishes luthen_user_tool_behind_commits per tool, so a stale nemik install shows before it misleads); both detect a stale install, this one inside the tree, that one on the host. W1235 is blocked on luthen's W1285 as well, so no enables edge: a cross-cite only",
       "issued_at": "2026-10-19T13:36:24Z",
       "minted_during": "tick",
       "caused_by": "nemik:W729",
-      "last_worked": "2026-10-19T13:36:30Z",
+      "last_worked": "2026-10-23T19:25:19Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/stale.py",
@@ -15708,18 +15711,18 @@
     },
     {
       "symbol": "W733",
-      "title": "Run the gate's bazel through the admission wrapper mikemol-bazel-admit, as luthen did",
+      "title": "Run the gate's bazel through the admission wrapper mikemol-bazel-admit",
       "status": "ready",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "After mtools:W1714: invoke bazel in tools/gate_staged.sh through mikemol-bazel-admit (an admission line naming megabytes for the bazel verb must then show in a gate's output); nemik's gate calls /usr/bin/bazel directly today",
-      "evidence": "",
+      "evidence": "2026-10-23: 2026-10-23 overlap audit (verified): luthen-observability:W1399 adopts the same mtools admission (mikemol-bazel-admit and mikemol-membudget) for luthen's gate; the two cards share a wrapper and its failures, so a finding on one is the other's | 2026-10-23: 2026-10-23 correction (github-8f, from luthen): the title said 'as luthen did', but luthen-observability:W1399, which adopts the same wrapper, is ready and not done (read from its queue). The title no longer claims an adoption that has not happened",
       "issued_at": "2026-10-19T14:50:08Z",
       "minted_during": "tick",
       "caused_by": "github-8f",
-      "last_worked": "2026-10-19T14:50:14Z",
+      "last_worked": "2026-10-23T19:27:14Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -15969,11 +15972,11 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "umbrella. ACCEPTANCE LIST (docs/weather-questions.md): the operator's four (what the forecast reads, how it lines up over time, how to improve it, how to improve the climate) and the derived ones (lead time ready-to-done, reopen rate, which intervention moved the climate, which cards stall), each checked against the bits the source carries. Gaps owned by nemik (W752) and by mtools (W1731: the starting values of an add, via, actor, a mutation id, manifest and size as fields, big fields as length and hash, landing events, intervention markers)",
-      "evidence": "2026-10-19: 2026-10-19 sampling-rate ruling (record 86072, uuid 8f3e501d, human, warranted): backfilled history is COMMIT-GRAIN, not mutation-grain. The sample is a commit of the queue file: mutations between two commits collapse into one diff, a ready-working-ready round trip inside a commit is invisible, every timestamp is the commit's time. Reopen rate and time in working are understated until W751's live feed is per-mutation; W748 must not score forecasts against commit-grain truth at finer leads than that grain. To go into docs/weather-questions.md as a resolution floor per question after stack199 lands (the doc is in that stack). mtools-ad on W1731: takes starting values, via, mutation id, manifest/size/weight/touches/witness as fields, length+hash for big text, UTC ms; actor narrowed (agent when a tick lock is held, automation for auto prune/bump, unattributed otherwise; cannot tell operator from agent); landing event is mtools:W1738; interventions are mtools:W1739 (writer mode --intervention KIND NOTE on station fleet:intervention); counter mikemol.waypoint.event labels {repo, field, via} only, old/new in the log record",
+      "evidence": "2026-10-19: 2026-10-19 sampling-rate ruling (record 86072, uuid 8f3e501d, human, warranted): backfilled history is COMMIT-GRAIN, not mutation-grain. The sample is a commit of the queue file: mutations between two commits collapse into one diff, a ready-working-ready round trip inside a commit is invisible, every timestamp is the commit's time. Reopen rate and time in working are understated until W751's live feed is per-mutation; W748 must not score forecasts against commit-grain truth at finer leads than that grain. To go into docs/weather-questions.md as a resolution floor per question after stack199 lands (the doc is in that stack). mtools-ad on W1731: takes starting values, via, mutation id, manifest/size/weight/touches/witness as fields, length+hash for big text, UTC ms; actor narrowed (agent when a tick lock is held, automation for auto prune/bump, unattributed otherwise; cannot tell operator from agent); landing event is mtools:W1738; interventions are mtools:W1739 (writer mode --intervention KIND NOTE on station fleet:intervention); counter mikemol.waypoint.event labels {repo, field, via} only, old/new in the log record | 2026-10-23: 2026-10-23 overlap audit (verified): luthen-observability:W1417 (fleet waypoint climate: repos as regions, cards as stations, observations, climate, forecasts, verification) is the same umbrella on the same operator record; the two share children by design (W1419 stores the forecast shingle in Victoria). Cross-cited: this card keeps the model and the scoring, luthen's the store and the dashboard",
       "issued_at": "2026-10-19T19:34:47Z",
       "minted_during": "tick",
       "caused_by": "github-8f",
-      "last_worked": "2026-10-19T23:00:26Z",
+      "last_worked": "2026-10-23T19:25:28Z",
       "ticks_blocked": 74,
       "warrants": [
         {
@@ -16210,11 +16213,11 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "On or after 2026-10-24 02:10Z: nemik-history --all --score ~/.cache/nemik/shingle.tsv; the 2026-10-23 issue (appended, new model) is the first out-of-sample test; record the skill in the doc; try another feature only if it is not above zero",
-      "evidence": "2026-10-20: 2026-10-20 first shingle issued: nemik-history --all --forecast --from 2026-10-12 --append-to ~/.cache/nemik/shingle.tsv appended 1614 rows (every open card, +1d/+3d/+7d, lead times from cards minted and done since 10-12). Keep the same --from so the issues are comparable; one issue a day is enough. No skill can be judged before the +1d horizon passes (2026-10-21), the +7d one 2026-10-27 | 2026-10-21: 2026-10-21: second shingle issue appended 1647 rows; --score printed nothing (no horizon has matured yet, the first issue was 2026-10-20). Score again after 2026-10-21 evening, then daily | 2026-10-22: 2026-10-22 first score (+1d, n 538): brier 0.244 against persistence 0.024 and climatology 0.024, skill -9.1 and -9.3, so the forecast is far worse than doing nothing. Reliability: said 0.03 happened 0.04 (n 323), said 0.30 happened 0.00 (n 89), said 0.50 happened 0.00 (n 14), said 0.99 happened 0.01 (n 112). The high chances are the failure: 112 cards were given 0.99 of finishing within a day and one did. Third shingle issued (1617 rows) | 2026-10-22: 2026-10-22 where the failing bins come from (first shingle, +1d): the 0.99 bin is 108 cards, 66 mtools and 35 luthen-observability, aged 2.7 to 7 days, so the model says a repo that finishes much will finish this card within a day, whatever the card's place in the queue; the 0.30 bin is 86 cards, 72 luthen and 14 el-openglo, all aged 0.09 to 1.5 days (freshly minted); the 0.50 bin is amr-skills, luthen and nemik cards aged 1.7 to 4.5 days. The per-repo rate is not the card's chance: a position-in-the-queue feature is the first trial | 2026-10-23: 2026-10-23: old-model +1d skill -8.69 (n 1626); no as-of replay exists, so a new-model issue was appended (1623 rows) to mature 2026-10-24; doc updated | 2026-10-23: doc landed as fc5dd3f; the forward test is the next step",
+      "evidence": "2026-10-20: 2026-10-20 first shingle issued: nemik-history --all --forecast --from 2026-10-12 --append-to ~/.cache/nemik/shingle.tsv appended 1614 rows (every open card, +1d/+3d/+7d, lead times from cards minted and done since 10-12). Keep the same --from so the issues are comparable; one issue a day is enough. No skill can be judged before the +1d horizon passes (2026-10-21), the +7d one 2026-10-27 | 2026-10-21: 2026-10-21: second shingle issue appended 1647 rows; --score printed nothing (no horizon has matured yet, the first issue was 2026-10-20). Score again after 2026-10-21 evening, then daily | 2026-10-22: 2026-10-22 first score (+1d, n 538): brier 0.244 against persistence 0.024 and climatology 0.024, skill -9.1 and -9.3, so the forecast is far worse than doing nothing. Reliability: said 0.03 happened 0.04 (n 323), said 0.30 happened 0.00 (n 89), said 0.50 happened 0.00 (n 14), said 0.99 happened 0.01 (n 112). The high chances are the failure: 112 cards were given 0.99 of finishing within a day and one did. Third shingle issued (1617 rows) | 2026-10-22: 2026-10-22 where the failing bins come from (first shingle, +1d): the 0.99 bin is 108 cards, 66 mtools and 35 luthen-observability, aged 2.7 to 7 days, so the model says a repo that finishes much will finish this card within a day, whatever the card's place in the queue; the 0.30 bin is 86 cards, 72 luthen and 14 el-openglo, all aged 0.09 to 1.5 days (freshly minted); the 0.50 bin is amr-skills, luthen and nemik cards aged 1.7 to 4.5 days. The per-repo rate is not the card's chance: a position-in-the-queue feature is the first trial | 2026-10-23: 2026-10-23: old-model +1d skill -8.69 (n 1626); no as-of replay exists, so a new-model issue was appended (1623 rows) to mature 2026-10-24; doc updated | 2026-10-23: doc landed as fc5dd3f; the forward test is the next step | 2026-10-23: 2026-10-23 overlap audit (verified): the shingle is kept in ~/.cache/nemik/shingle.tsv, a file, and the fleet rule is that logs and series go to services; luthen-observability:W1419 stores the same lead-time shingle in Victoria (blocked on its W1418). This card keeps the file until W1419 lands, then reads the shingle from the store; the 2026-10-24 scoring uses the file because it is the only copy of the new-model issue",
       "issued_at": "2026-10-19T19:35:10Z",
       "minted_during": "tick",
       "caused_by": "nemik:W743",
-      "last_worked": "2026-10-23T13:31:44Z",
+      "last_worked": "2026-10-23T19:25:29Z",
       "ticks_blocked": 12,
       "completed": null,
       "manifest": [
@@ -18533,16 +18536,17 @@
       ],
       "touches": [],
       "blocked_on": [
-        "operator: decide the cross-repo wait SLO (target fraction of waits answered within what age) and its error budget, which is W700's ask; the burn-rate alert derives from it"
+        "W700",
+        "luthen-observability:W1132"
       ],
-      "blocked_kind": "human",
+      "blocked_kind": "agent",
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-10-23: 2026-10-23 overlap audit (github-8f relay of the operator's request, host 695f3e0a line 91668, verified): luthen-observability:W1132 is the same multi-window multi-burn-rate alert on the wait-edge age SLO (its W1131 defines the SLIs and SLOs); luthen owns the alert, so this card waits on it and on W700, which holds the operator's SLO decision. The operator ask that W837 carried is W700's, not repeated here",
       "issued_at": "2026-10-22T07:10:08Z",
       "minted_during": "tick",
       "caused_by": "W579",
-      "last_worked": "2026-10-22T07:10:24Z",
-      "ticks_blocked": 31,
+      "last_worked": "2026-10-23T19:25:16Z",
+      "ticks_blocked": 0,
       "completed": null
     },
     {
@@ -20399,7 +20403,6 @@
       "enables": [],
       "touches": [],
       "blocked_on": [
-        "W907",
         "W908",
         "W909"
       ],
@@ -20521,7 +20524,7 @@
     {
       "symbol": "W907",
       "title": "Map the codomain onto Toulmin's claim, grounds, warrant, backing, qualifier and rebuttal: where it has each, conflates them, or has none (docs/toulmin-map.md)",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W905"
       ],
@@ -20529,15 +20532,15 @@
         "file:docs/toulmin-map.md!w"
       ],
       "blocked_on": [],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Land the Toulmin map (docs/toulmin-map.md) after stack365; W909 tests it on mtools' five demoted cards and estate's warrants",
-      "evidence": "",
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: landed as 506a636: docs/toulmin-map.md",
       "issued_at": "2026-10-23T18:04:50Z",
       "minted_during": "tick",
       "caused_by": "W905",
-      "last_worked": "2026-10-23T19:11:54Z",
+      "last_worked": "2026-10-23T19:34:34Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261023T193434Z",
       "manifest": [
         "docs/toulmin-map.md"
       ],
@@ -20606,16 +20609,16 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W907"
+        "W908"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "After W906 to W908: the minimum changes, as cards, so that operator-said (quoted), host-inferred (derived, with a qualifier and the inferring agent) and card-own-judgment are typed and a shape checks them; test on mtools' five demoted cards and estate's warrants. Per the operator's purpose (line 91566, via github-8f's reading, derived): each fix says which agent behaviour it improves, what a session could then reason about or check that it cannot today",
-      "evidence": "",
+      "evidence": "2026-10-23: 2026-10-23 overlap audit (verified): mtools:W1863 is a writer mode that finds the transcript line or uuid a card's evidence cites, verifies it through the warrant reader and attaches it (this audit's recommendation for typed quoted claims, in the writer); luthen-observability:W1421 reviews the memory audit's nine GRANT notes and ten UNWARRANTED rows against the transcripts, which are test cases for it. Cross-cited",
       "issued_at": "2026-10-23T18:04:50Z",
       "minted_during": "tick",
       "caused_by": "W905",
-      "last_worked": "2026-10-23T18:09:17Z",
-      "ticks_blocked": 3,
+      "last_worked": "2026-10-23T19:34:39Z",
+      "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "docs/evidence-recommendations.md"
@@ -20721,6 +20724,198 @@
           }
         }
       ]
+    },
+    {
+      "symbol": "W912",
+      "title": "Check that estate's witness lattice fits nemik's use of OPA: congruent, reinforcing, complementary",
+      "status": "working",
+      "enables": [
+        "estate:W39"
+      ],
+      "touches": [
+        "file:docs/opa-estate-lattice.md!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Land the document (stack after stack366); hear estate's answer on whether the after-judgement will be Rego",
+      "evidence": "",
+      "issued_at": "2026-10-23T19:16:34Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": "2026-10-23T19:16:51Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "docs/opa-estate-lattice.md"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W913",
+      "title": "A nemik witness that is already true when its card is minted is refused, and a witness may carry a freshness bound",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Design first: at --add a witness is evaluated once and a true verdict is a defect (a check in nemik-check for a ready or blocked witnessed card whose witness holds on today's facts); then an optional fresh_since bound. Read witnesses.open_witnesses and the W59 check before editing",
+      "evidence": "2026-10-23: 2026-10-23 overlap audit (verified): luthen-observability:W1550 strengthens luthen's opa_plan after-witness toward advances and fresh_since, the same discipline this card brings to nemik's witnesses; estate:W39 states the lattice they come from (docs/opa-estate-lattice.md). Cross-cited, no edge: each lands on its own",
+      "issued_at": "2026-10-23T19:16:35Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": "2026-10-23T19:25:26Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/witnesses.py",
+        "tests/test_witness_mint.py"
+      ],
+      "size_class": "medium"
+    },
+    {
+      "symbol": "W914",
+      "title": "An observer reads a published waldo verdict, so a card can close from estate's read-back witness",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "estate"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "After estate states its witness JSON and where a verdict copy is published: add one observer to the closed set (nemik:W58) that reads it, and a card whose witness is Rego over input.verdict",
+      "evidence": "2026-10-23: 2026-10-23 estate-dd (estate:W39): leaning to ship the waldo's verdict line to the log service, not a file, for an observer to read; the after judgement is Python set equality today, Rego only if it buys something; both undecided until the witness commands exist. Fits nemik: nemik/endpoint.vlogs_lines already reads the log store on the host (nemik-hostroot), so a log observer is the same route as the promql observer | 2026-10-23: 2026-10-23 estate-dd: the record the observer reads is the shipper's activity-shaped verdict (published = fresh_since; id = plan_hash plus published); it lands with estate's witness commands, so this card waits for that record's field names",
+      "issued_at": "2026-10-23T19:16:36Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": "2026-10-23T19:27:50Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/witnesses.py",
+        "tests/test_witness_verdict.py"
+      ],
+      "size_class": "medium"
+    },
+    {
+      "symbol": "W915",
+      "title": "Keep nemik's communications aligned with the federated, ActivityPub-aligned model: audit each channel against it and card the gaps",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "W916",
+        "W917",
+        "W918"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-23T19:21:35Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": "2026-10-23T19:21:39Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W916",
+      "title": "Read the ActivityPub Recommendation and ForgeFed's ticket model, and check outbox.py's verbs and shape against them (docs/federation-audit.md part 1)",
+      "status": "ready",
+      "enables": [
+        "W915"
+      ],
+      "touches": [
+        "file:docs/federation-audit.md!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Fetch the W3C ActivityPub Recommendation and ForgeFed's ticket spec, cite them, and check outbox.py: the verbs (Offer, Accept, Resolve), the Ticket type, actor IRIs (workstream_uri is a urn, not an http IRI), the collection shape. docs/federation.md says nemik has not read ForgeFed's card model: this reads it. Needs WebFetch",
+      "evidence": "",
+      "issued_at": "2026-10-23T19:21:39Z",
+      "minted_during": "tick",
+      "caused_by": "W915",
+      "last_worked": "2026-10-23T19:21:47Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "docs/federation-audit.md"
+      ],
+      "size_class": "medium"
+    },
+    {
+      "symbol": "W917",
+      "title": "List every channel nemik's fleet uses to say something to a peer and its ActivityPub analogue: inbox letters, edge letters, floor asks, exports, the inbound hook, session messages (docs/federation-audit.md part 2)",
+      "status": "working",
+      "enables": [
+        "W915"
+      ],
+      "touches": [
+        "file:docs/federation-channels.md!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Land stack368 (docs/federation-channels.md); W916 reads the specs next; the audit's numbers: 9 channels, 42 letters in nemik/inbox, 22 edge letters on one day",
+      "evidence": "",
+      "issued_at": "2026-10-23T19:21:39Z",
+      "minted_during": "tick",
+      "caused_by": "W915",
+      "last_worked": "2026-10-23T19:22:39Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "docs/federation-channels.md"
+      ],
+      "size_class": "medium",
+      "completed": null
+    },
+    {
+      "symbol": "W918",
+      "title": "From the audit, card the minimum changes that keep each channel federable: actor IRIs, activity types on letters, dependency edges in the outbox",
+      "status": "blocked",
+      "enables": [
+        "W915"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "W917"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "After W916 and W917: one card per gap, each saying which channel stays federable if it is fixed; the operator's boundary (a delivery, a signature or a push to another server) stays the operator's decision, as outbox.py says",
+      "evidence": "",
+      "issued_at": "2026-10-23T19:21:39Z",
+      "minted_during": "tick",
+      "caused_by": "W915",
+      "last_worked": "2026-10-23T19:21:49Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "docs/federation-recommendations.md"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W919",
+      "title": "A log record that crosses between workstreams is an ActivityStreams activity in its body, with an id, an actor IRI and an address, and nemik's outbox exposes the log's activities as a collection",
+      "status": "blocked",
+      "enables": [
+        "W915"
+      ],
+      "touches": [
+        "file:docs/federation-log.md!w"
+      ],
+      "blocked_on": [
+        "W916"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "After W916 (the specs read): write docs/federation-log.md: the record body as an ActivityStreams activity (type, actor, object, published, id, to), how nemik's outbox serves a LogsQL query as a collection, what the writer tools (mikemol-commit landings, waitemit, estate's verdict) would change; the rule is in docs/federation-channels.md",
+      "evidence": "2026-10-23: 2026-10-23 estate-dd (estate:W39): the envelope is no problem for the waldo; its stdout stays one JSON verdict line and the shipper wraps it as one ActivityStreams-shaped record (type, actor estate, object = the verdict, published = the record time, id = plan_hash plus published, to when for a peer). Same record is what a card's witness reads, with fresh_since = published. Constraint: the envelope carries nothing the waldo scrubbed. Not built; lands with estate's witness commands",
+      "issued_at": "2026-10-23T19:24:29Z",
+      "minted_during": "tick",
+      "caused_by": "operator",
+      "last_worked": "2026-10-23T19:27:49Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "docs/federation-log.md"
+      ],
+      "size_class": "medium"
     }
   ],
   "residue": [
@@ -20841,13 +21036,22 @@
   "predecessor_job_id": "disarmed",
   "leases": [
     {
-      "tag": "file:docs/toulmin-map.md!w",
+      "tag": "file:docs/opa-estate-lattice.md!w",
       "holder": "claude-nemik",
-      "waypoint": "W907",
-      "base_sha": "05b8edd2fd245081ae01121b6392a2859695c615",
-      "taken_at": "2026-10-23T19:11:54Z",
-      "renewed_at": "2026-10-23T19:11:54Z",
-      "expires_at": "2026-10-23T19:41:54Z"
+      "waypoint": "W912",
+      "base_sha": "c2ffe6ec828b36d29d89f728d0abbb39731ab910",
+      "taken_at": "2026-10-23T19:16:51Z",
+      "renewed_at": "2026-10-23T19:16:51Z",
+      "expires_at": "2026-10-23T19:46:51Z"
+    },
+    {
+      "tag": "file:docs/federation-channels.md!w",
+      "holder": "claude-nemik",
+      "waypoint": "W917",
+      "base_sha": "c2ffe6ec828b36d29d89f728d0abbb39731ab910",
+      "taken_at": "2026-10-23T19:22:39Z",
+      "renewed_at": "2026-10-23T19:22:39Z",
+      "expires_at": "2026-10-23T19:52:39Z"
     }
   ],
   "advice": [

@@ -1800,3 +1800,19 @@
 2026-10-23T18:51:06Z  status W906 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T19:11:54Z  status W907 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T19:13:21Z  status W906 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T19:16:34Z  tick  W912 minted    -         "Check that estate's witness lattice fits nemik's use of OPA: congruent, reinforcing, complementary"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=operator
+2026-10-23T19:16:35Z  tick  W913 minted    -         "A nemik witness that is already true when its card is minted is refused, and a witness may carry a freshness bound"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=operator
+2026-10-23T19:16:36Z  tick  W914 minted    -         "An observer reads a published waldo verdict, so a card can close from estate's read-back witness"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=operator
+2026-10-23T19:16:51Z  status W912 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T19:16:53Z  status W914 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T19:21:35Z  tick  W915 minted    -         "Keep nemik's communications aligned with the federated, ActivityPub-aligned model: audit each channel against it and card the gaps"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=operator
+2026-10-23T19:21:39Z  tick  W916 minted    -         "Read the ActivityPub Recommendation and ForgeFed's ticket model, and check outbox.py's verbs and shape against them (docs/federation-audit.md part 1)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W915
+2026-10-23T19:21:39Z  tick  W917 minted    -         "List every channel nemik's fleet uses to say something to a peer and its ActivityPub analogue: inbox letters, edge letters, floor asks, exports, the inbound hook, session messages (docs/federation-audit.md part 2)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W915
+2026-10-23T19:21:39Z  tick  W918 minted    -         "From the audit, card the minimum changes that keep each channel federable: actor IRIs, activity types on letters, dependency edges in the outbox"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W915
+2026-10-23T19:21:49Z  status W918 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T19:22:39Z  status W917 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T19:24:29Z  tick  W919 minted    -         "A log record that crosses between workstreams is an ActivityStreams activity in its body, with an id, an actor IRI and an address, and nemik's outbox exposes the log's activities as a collection"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=operator
+2026-10-23T19:24:36Z  status W919 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T19:34:34Z  status W907 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T19:34:34Z  status W909 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T19:34:39Z  status W909 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
