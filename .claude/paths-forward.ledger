@@ -1653,3 +1653,11 @@
 2026-10-23T04:34:51Z  prune W873 edge-pruned writer    "mtools:W1838"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T04:34:51Z  status W516 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T04:34:57Z  status W516 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T04:49:16Z  prune W873 edge-pruned writer    "mtools:W1840"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T04:49:16Z  status W873 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T04:49:17Z  interrupt W874 minted    -         "Repin the vendored mtools wheels to a sha with the writer's --export mode, so nemik's own writer can emit its export"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W516
+2026-10-23T04:49:45Z  status W873 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T04:55:17Z  status W874 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T05:12:57Z  status W871 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T05:12:57Z  status W872 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T05:14:35Z  status W872 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

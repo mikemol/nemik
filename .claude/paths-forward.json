@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 873,
+  "counter": 874,
   "waypoints": [
     {
       "symbol": "W1",
@@ -19401,7 +19401,6 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W871",
         "W872"
       ],
       "blocked_kind": "agent",
@@ -19444,7 +19443,7 @@
     {
       "symbol": "W871",
       "title": "Port flow's per-source current-flow solve to cardrank without Fraction or dataclasses, so the Codon census compiles it",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W872"
       ],
@@ -19454,69 +19453,92 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Submit the prepared stack: grounded over plain floats, held to the exact solver within 1e-9",
-      "evidence": "2026-10-23: 2026-10-23: design decision: flow.py solves with exact Fraction so the answer does not depend on elimination order, and uses dataclasses and OrderedDict; Codon has no fractions module and its ints are 64-bit, so an exact rational port would overflow. The port uses floats with the same deterministic elimination order and is held to the exact solver within a tolerance the test states; salience used for ordering must keep the same ranking on the fixture fleet",
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: 2026-10-23: design decision: flow.py solves with exact Fraction so the answer does not depend on elimination order, and uses dataclasses and OrderedDict; Codon has no fractions module and its ints are 64-bit, so an exact rational port would overflow. The port uses floats with the same deterministic elimination order and is held to the exact solver within a tolerance the test states; salience used for ordering must keep the same ranking on the fixture fleet | 2026-10-23: commit 7ff947d; cardrank.grounded over plain floats (Laplacian, lowest-degree-first elimination, back substitution), held to flow.solve within 1e-9, compiles under the pinned Codon",
       "issued_at": "2026-10-23T03:46:53Z",
       "minted_during": "interrupt",
       "caused_by": "W869",
-      "last_worked": "2026-10-23T04:43:11Z",
+      "last_worked": "2026-10-23T05:12:57Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/cardrank.py",
         "tests/test_cardrank.py"
       ],
       "size_class": "medium",
-      "completed": null
+      "completed": "20261023T051257Z"
     },
     {
       "symbol": "W872",
       "title": "Port the salience sum to cardrank and hold it equal to flow.solve on the fixture fleet",
-      "status": "blocked",
+      "status": "working",
       "enables": [
         "W869"
       ],
-      "touches": [],
-      "blocked_on": [
-        "W871"
+      "touches": [
+        "file:src/nemik/cardrank.py!w",
+        "file:tests/test_cardrank.py!w"
       ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Submit the prepared stack: the salience sum over plain floats held equal to flow.solve",
+      "evidence": "2026-10-23: 2026-10-23: W870 (3eaefda) and W871 (7ff947d) landed; the float salience matches flow.solve within 1e-9 on a fleet with shared prerequisites, a ready source and a cycle with no ground",
       "issued_at": "2026-10-23T03:46:53Z",
       "minted_during": "interrupt",
       "caused_by": "W869",
-      "last_worked": null,
+      "last_worked": "2026-10-23T05:14:35Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/cardrank.py",
         "tests/test_cardrank.py"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "completed": null
     },
     {
       "symbol": "W873",
       "title": "nemik-exports uses each repo's own export when present and derives from luthen's list only for a repo that has none",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:src/nemik/exportv2.py!w",
+        "file:src/nemik/exportcli.py!w",
+        "file:tests/test_exports_gather.py!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Add exportv2.own_export (valid for the repo and no older than its state) and use it in nemik-exports before deriving; test fresh, stale, wrong-repo and invalid exports",
+      "evidence": "2026-10-23: 2026-10-23 mtools-ad: W1838 as submitted writes the run clock as as_of and no residue, so do not consume its output; mtools:W1840 fixes both (as_of from the state: newest last_worked or dropped_at, epoch when none; unflagged residue in cards, flagged as a ref; writes only when the bytes differ) and they will send both shas. Default place stays .claude/paths-forward.export.json beside the state | 2026-10-23: 2026-10-23 mtools-ad: mtools:W1838 e8bd7e6 and W1840 2a5873c landed: mikemol-paths-forward --export writes .claude/paths-forward.export.json beside the state (version 2, repo = the project_root directory name, cards = every unflagged waypoint and residue entry whole, withheld = refs of flagged ones, as_of = newest last_worked or dropped_at, rewritten only when its bytes differ). Design: use a repo's own export only when it is valid for the repo and not older than its state, else derive from luthen's list as today; the remaining leak window (a card flagged after the last export) closes only when the writer exports on every update: to ask mtools-ad",
+      "issued_at": "2026-10-23T03:56:43Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W516",
+      "last_worked": "2026-10-23T04:49:45Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/exportv2.py",
+        "src/nemik/exportcli.py",
+        "tests/test_exports_gather.py"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W874",
+      "title": "Repin the vendored mtools wheels to a sha with the writer's --export mode, so nemik's own writer can emit its export",
       "status": "blocked",
       "enables": [],
       "touches": [],
       "blocked_on": [
-        "mtools:W1840"
+        "mtools:W1841"
       ],
       "blocked_kind": "agent",
-      "next_bounded_step": "After mtools:W1840 lands: copy a repo's own export to exports/<repo>.json when it is version 2 for that repo, derive the rest as today, and keep the no-rewrite-when-unchanged rule so the pod does not rebuild every loop",
-      "evidence": "2026-10-23: 2026-10-23 mtools-ad: W1838 as submitted writes the run clock as as_of and no residue, so do not consume its output; mtools:W1840 fixes both (as_of from the state: newest last_worked or dropped_at, epoch when none; unflagged residue in cards, flagged as a ref; writes only when the bytes differ) and they will send both shas. Default place stays .claude/paths-forward.export.json beside the state",
-      "issued_at": "2026-10-23T03:56:43Z",
+      "next_bounded_step": "mtools-ad names W1841's commit sha: pin that one (not 2a5873c, which has --export without the refresh on every state write), with mikemol-repin --revendor --no-sync --sha <it> --root nemik --write, re-add the converge and webpage lines to SHA256SUMS by hand, rebuild the venv, run the suite",
+      "evidence": "2026-10-23: 2026-10-23 mtools-ad: mtools:W1841 makes store.save refresh the export when one already exists (opt-in by having run --export once; rewritten only when bytes differ), so --update --withheld and --drop refresh it in the same write; not covered: direct state writes that bypass store.save (repair-counter among them). Pin W1841's commit, not 2a5873c. nemik's stale fallback stays: it is safe either way, and dropping it is safe only for repos pinned at or after W1841's commit",
+      "issued_at": "2026-10-23T04:49:17Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W516",
-      "last_worked": "2026-10-23T04:35:03Z",
+      "last_worked": "2026-10-23T04:55:17Z",
       "ticks_blocked": 0,
-      "completed": null,
-      "manifest": [
-        "src/nemik/exportcli.py",
-        "src/nemik/exportcompat.py",
-        "tests/test_exports_gather.py"
-      ],
-      "size_class": "small"
+      "completed": null
     }
   ],
   "residue": [
@@ -19632,22 +19654,49 @@
   "predecessor_job_id": "disarmed",
   "leases": [
     {
+      "tag": "file:src/nemik/exportv2.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W873",
+      "base_sha": "842e1884cdb4292773c97573dfd012368eebe862",
+      "taken_at": "2026-10-23T04:49:45Z",
+      "renewed_at": "2026-10-23T04:49:45Z",
+      "expires_at": "2026-10-23T05:19:45Z"
+    },
+    {
+      "tag": "file:src/nemik/exportcli.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W873",
+      "base_sha": "842e1884cdb4292773c97573dfd012368eebe862",
+      "taken_at": "2026-10-23T04:49:45Z",
+      "renewed_at": "2026-10-23T04:49:45Z",
+      "expires_at": "2026-10-23T05:19:45Z"
+    },
+    {
+      "tag": "file:tests/test_exports_gather.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W873",
+      "base_sha": "842e1884cdb4292773c97573dfd012368eebe862",
+      "taken_at": "2026-10-23T04:49:45Z",
+      "renewed_at": "2026-10-23T04:49:45Z",
+      "expires_at": "2026-10-23T05:19:45Z"
+    },
+    {
       "tag": "file:src/nemik/cardrank.py!w",
       "holder": "(unlocked)",
-      "waypoint": "W871",
-      "base_sha": "3eaefdaad8a66f9fe1b5b1f4216c643f27115b93",
-      "taken_at": "2026-10-23T04:29:09Z",
-      "renewed_at": "2026-10-23T04:29:09Z",
-      "expires_at": "2026-10-23T04:59:09Z"
+      "waypoint": "W872",
+      "base_sha": "7ff947da95ed4c16d9801d52c689c10bb146a11b",
+      "taken_at": "2026-10-23T05:14:35Z",
+      "renewed_at": "2026-10-23T05:14:35Z",
+      "expires_at": "2026-10-23T05:44:35Z"
     },
     {
       "tag": "file:tests/test_cardrank.py!w",
       "holder": "(unlocked)",
-      "waypoint": "W871",
-      "base_sha": "3eaefdaad8a66f9fe1b5b1f4216c643f27115b93",
-      "taken_at": "2026-10-23T04:29:09Z",
-      "renewed_at": "2026-10-23T04:29:09Z",
-      "expires_at": "2026-10-23T04:59:09Z"
+      "waypoint": "W872",
+      "base_sha": "7ff947da95ed4c16d9801d52c689c10bb146a11b",
+      "taken_at": "2026-10-23T05:14:35Z",
+      "renewed_at": "2026-10-23T05:14:35Z",
+      "expires_at": "2026-10-23T05:44:35Z"
     }
   ],
   "advice": [
