@@ -10114,7 +10114,6 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W713",
         "W714"
       ],
       "blocked_kind": "agent",
@@ -10124,7 +10123,7 @@
       "minted_during": "tick",
       "caused_by": "W506",
       "last_worked": "2026-10-19T02:47:58Z",
-      "ticks_blocked": 107,
+      "ticks_blocked": 0,
       "weight": 11,
       "completed": null,
       "manifest": [
@@ -10294,15 +10293,15 @@
         "file:src/nemik/withheld.py!w"
       ],
       "blocked_on": [
-        "W873"
+        "W874"
       ],
       "blocked_kind": "agent",
-      "next_bounded_step": "W873 gathers each repo's own export once mtools:W1840 lands; then ask luthen to retire the v1 withheld list, keeping the pod fail-closed (no export, nothing published)",
-      "evidence": "2026-10-15: 2026-10-15: nemik's README Hosting section already states the intended boundary: mount only the flat queue export read-only at /export, not a whole source tree. W516 makes that export the repos' own product (their policy decides what is in it), which matches the operator's ruling that the pod should not see data that must not pass. | 2026-10-16: 2026-10-16 host ruling (github-8f): part of the client-path chain that is the next design work after the open gate items; withholding at the source is what lets the builder's merged files go. | 2026-10-17: 2026-10-17: atomized into W634 (reader), W635 (compat producer), W636 (pod mounts). Writer-side emission (mtools) and retiring luthen's v1 list are asks to mint when W634 lands. Design: docs/withholding-at-source.md | 2026-10-17: design doc landed b342a21, pushed (docs/withholding-at-source.md). Children W634 (part 1 93e92d5), W635, W636 open | 2026-10-18: status doc updated 3327f72 (pushed). Children: W634 done, W635 done, W636 blocked on luthen W1283 (stale withheld list), W647 held; writer-side emission by repos and retiring luthen's v1 list still to ask | 2026-10-19: 2026-10-19: W636 enables W516 and is blocked on luthen W1283; W516's own remaining work (asking the repos for writer-side emission, retiring luthen's v1 list) waits on W636 landing, so W516 is blocked on it, not ready | 2026-10-23: 2026-10-23: W634, W635, W636 are done (W636 rolled and read back by luthen-observability W1291); what remains is writer-side emission by the repos (an mtools writer feature) and retiring luthen's v1 list; asked mtools-ad for the card | 2026-10-23: 2026-10-23 mtools-ad: writer-side emission minted as mtools:W1835 (export.json version 2: repo, as_of, cards whole, withheld refs only; atomized: policy source as a per-card withheld flag defaulting to publish, a pure builder, a --export mode writing atomically beside the state file, a leak check with a planted-withheld-card test). Answered: luthen's v1 list withholds no mtools card today, so the default-publish flag reproduces it; evidence and warrants travel whole, a card is withheld whole or not at all | 2026-10-23: 2026-10-23 mtools-ad: mtools:W1836 (per-card withheld flag, a4c0e8e) and W1837 (pure export builder, 585bc75) landed; W1838 (--export mode, <state>.export.json) is gating. Answered their three questions from the reader: it reads exports/<repo>.json from one directory, residue symbols belong in cards, as_of must come from the state so an unchanged queue writes a byte-identical file (the pod rebuilds on export mtime, W636). The gather step is nemik:W873, blocked on mtools:W1838 | 2026-10-23: 2026-10-23: mtools:W1838 (the --export mode) landed; its output is not consumed until mtools:W1840 (state-derived as_of, residue in cards) lands, so the step that unblocks W516 is nemik:W873, the gather, blocked on W1840",
+      "next_bounded_step": "After W874 (nemik's writer pinned at or after mtools 5ba261f and opted in): ask the other repos to repin and run --export once, then ask luthen to retire the v1 withheld list, keeping the pod fail-closed (no export, nothing published)",
+      "evidence": "2026-10-15: 2026-10-15: nemik's README Hosting section already states the intended boundary: mount only the flat queue export read-only at /export, not a whole source tree. W516 makes that export the repos' own product (their policy decides what is in it), which matches the operator's ruling that the pod should not see data that must not pass. | 2026-10-16: 2026-10-16 host ruling (github-8f): part of the client-path chain that is the next design work after the open gate items; withholding at the source is what lets the builder's merged files go. | 2026-10-17: 2026-10-17: atomized into W634 (reader), W635 (compat producer), W636 (pod mounts). Writer-side emission (mtools) and retiring luthen's v1 list are asks to mint when W634 lands. Design: docs/withholding-at-source.md | 2026-10-17: design doc landed b342a21, pushed (docs/withholding-at-source.md). Children W634 (part 1 93e92d5), W635, W636 open | 2026-10-18: status doc updated 3327f72 (pushed). Children: W634 done, W635 done, W636 blocked on luthen W1283 (stale withheld list), W647 held; writer-side emission by repos and retiring luthen's v1 list still to ask | 2026-10-19: 2026-10-19: W636 enables W516 and is blocked on luthen W1283; W516's own remaining work (asking the repos for writer-side emission, retiring luthen's v1 list) waits on W636 landing, so W516 is blocked on it, not ready | 2026-10-23: 2026-10-23: W634, W635, W636 are done (W636 rolled and read back by luthen-observability W1291); what remains is writer-side emission by the repos (an mtools writer feature) and retiring luthen's v1 list; asked mtools-ad for the card | 2026-10-23: 2026-10-23 mtools-ad: writer-side emission minted as mtools:W1835 (export.json version 2: repo, as_of, cards whole, withheld refs only; atomized: policy source as a per-card withheld flag defaulting to publish, a pure builder, a --export mode writing atomically beside the state file, a leak check with a planted-withheld-card test). Answered: luthen's v1 list withholds no mtools card today, so the default-publish flag reproduces it; evidence and warrants travel whole, a card is withheld whole or not at all | 2026-10-23: 2026-10-23 mtools-ad: mtools:W1836 (per-card withheld flag, a4c0e8e) and W1837 (pure export builder, 585bc75) landed; W1838 (--export mode, <state>.export.json) is gating. Answered their three questions from the reader: it reads exports/<repo>.json from one directory, residue symbols belong in cards, as_of must come from the state so an unchanged queue writes a byte-identical file (the pod rebuilds on export mtime, W636). The gather step is nemik:W873, blocked on mtools:W1838 | 2026-10-23: 2026-10-23: mtools:W1838 (the --export mode) landed; its output is not consumed until mtools:W1840 (state-derived as_of, residue in cards) lands, so the step that unblocks W516 is nemik:W873, the gather, blocked on W1840 | 2026-10-23: 2026-10-23: W873 landed (d97f4cb): nemik-exports uses a repo's own export when trusted; what remains is every repo's writer emitting one (nemik's: W874), then retiring luthen's v1 list",
       "issued_at": "2026-10-15T12:08:11Z",
       "minted_during": "tick",
       "caused_by": "operator",
-      "last_worked": "2026-10-23T04:34:57Z",
+      "last_worked": "2026-10-23T06:06:30Z",
       "ticks_blocked": 0,
       "weight": 11,
       "manifest": [
@@ -15158,7 +15157,7 @@
     {
       "symbol": "W713",
       "title": "Port the rank successor walk and class weights to plain Card edges, keeping the rdflib version as the test reference",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W508"
       ],
@@ -15166,23 +15165,21 @@
         "file:src/nemik/cardrank.py!w",
         "file:tests/test_cardrank.py!w"
       ],
-      "blocked_on": [
-        "W869"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Part 1 landed c212ebe. Part 2: the class weights loader (rank.load_weights) and the salience step over Card edges in cardrank.py, tests running them against rank and salience on the fixture fleet",
-      "evidence": "2026-10-19: part 1 landed c212ebe (git log -1 subject W713 part 1)",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-19: part 1 landed c212ebe (git log -1 subject W713 part 1) | 2026-10-23: 2026-10-23: part 2 landed in slices: the weights parser W868 (004c0c7), the cone W870 (3eaefda), the float current-flow solve W871 (7ff947d), the salience sum W872 (bbeb23b); each held to the rdflib or exact-Fraction version in tests/test_cardrank.py, all compile under the pinned Codon with cardrank's census entry unchanged",
       "issued_at": "2026-10-19T02:22:47Z",
       "minted_during": "interrupt",
       "caused_by": "W508",
-      "last_worked": "2026-10-23T03:04:51Z",
+      "last_worked": "2026-10-23T06:25:41Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/cardrank.py",
         "tests/test_cardrank.py"
       ],
       "size_class": "medium",
-      "completed": null
+      "completed": "20261023T062541Z"
     },
     {
       "symbol": "W714",
@@ -18742,11 +18739,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Read the failed test log and the page's script load order; reproduce by loading the page repeatedly under load; look for a head script served incomplete or the load-time wiring running before the script that defines popLater",
-      "evidence": "2026-10-22: 2026-10-22: not reproduced: //:test_modes x15 concurrent runs all pass (bazel --runs_per_test=15). The server is threaded and reads each file whole, popLater is a hoisted declaration in cards.js, so a missing definition means cards.js did not load (a silent script-load failure). The first failure's log was overwritten by the passing rerun. Add a requestfailed and response-status listener to the vendored webpage helper (W717) so the next occurrence names the file",
+      "evidence": "2026-10-22: 2026-10-22: not reproduced: //:test_modes x15 concurrent runs all pass (bazel --runs_per_test=15). The server is threaded and reads each file whole, popLater is a hoisted declaration in cards.js, so a missing definition means cards.js did not load (a silent script-load failure). The first failure's log was overwritten by the passing rerun. Add a requestfailed and response-status listener to the vendored webpage helper (W717) so the next occurrence names the file | 2026-10-23: 2026-10-23 second occurrence: the commit gate for W873 failed //:test_sources_resolve with 'Uncaught ReferenceError: popLater is not defined' at page load, all four tests of the module at once (they share one module-scoped page); popLater is defined in cards.js, so cards.js had not run when the inline script did. Same error as the first (test_modes, 2026-10-22). Neither change under test touches the page. Reproduction attempt: bazel test //:test_sources_resolve --runs_per_test=40 --local_test_jobs=40 | 2026-10-23: 2026-10-23: not reproduced: //:test_sources_resolve x40 with --local_test_jobs=40 all pass, so load alone does not trigger it. Both occurrences were inside the commit gate (stack320, stack343) on its shared staged worktree; the repro ran in the real checkout. Next: capture the failed request when it recurs (a requestfailed and response-status listener in the page helper), or run the repro inside the gate worktree",
       "issued_at": "2026-10-22T14:53:40Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W703",
-      "last_worked": "2026-10-22T15:10:13Z",
+      "last_worked": "2026-10-23T05:56:20Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/web/index.html",
@@ -19395,23 +19392,21 @@
     {
       "symbol": "W869",
       "title": "Port the salience step to cardrank over plain Card edges, tested against rank's salience on the fixture fleet",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W713"
       ],
       "touches": [],
-      "blocked_on": [
-        "W872"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: all children done: W868, W872",
       "issued_at": "2026-10-23T03:04:51Z",
       "minted_during": "interrupt",
       "caused_by": "W713",
-      "last_worked": "2026-10-23T03:46:53Z",
+      "last_worked": "2026-10-23T06:25:19Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261023T062519Z"
     },
     {
       "symbol": "W870",
@@ -19470,7 +19465,7 @@
     {
       "symbol": "W872",
       "title": "Port the salience sum to cardrank and hold it equal to flow.solve on the fixture fleet",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W869"
       ],
@@ -19480,24 +19475,24 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Submit the prepared stack: the salience sum over plain floats held equal to flow.solve",
-      "evidence": "2026-10-23: 2026-10-23: W870 (3eaefda) and W871 (7ff947d) landed; the float salience matches flow.solve within 1e-9 on a fleet with shared prerequisites, a ready source and a cycle with no ground",
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: 2026-10-23: W870 (3eaefda) and W871 (7ff947d) landed; the float salience matches flow.solve within 1e-9 on a fleet with shared prerequisites, a ready source and a cycle with no ground | 2026-10-23: commit bbeb23b; cardrank.salience over plain floats equals flow.solve within 1e-9 on a fleet with shared prerequisites, a ready source and a cycle with no ground",
       "issued_at": "2026-10-23T03:46:53Z",
       "minted_during": "interrupt",
       "caused_by": "W869",
-      "last_worked": "2026-10-23T05:14:35Z",
+      "last_worked": "2026-10-23T06:25:17Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/cardrank.py",
         "tests/test_cardrank.py"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261023T062517Z"
     },
     {
       "symbol": "W873",
       "title": "nemik-exports uses each repo's own export when present and derives from luthen's list only for a repo that has none",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:src/nemik/exportv2.py!w",
@@ -19506,14 +19501,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Add exportv2.own_export (valid for the repo and no older than its state) and use it in nemik-exports before deriving; test fresh, stale, wrong-repo and invalid exports",
-      "evidence": "2026-10-23: 2026-10-23 mtools-ad: W1838 as submitted writes the run clock as as_of and no residue, so do not consume its output; mtools:W1840 fixes both (as_of from the state: newest last_worked or dropped_at, epoch when none; unflagged residue in cards, flagged as a ref; writes only when the bytes differ) and they will send both shas. Default place stays .claude/paths-forward.export.json beside the state | 2026-10-23: 2026-10-23 mtools-ad: mtools:W1838 e8bd7e6 and W1840 2a5873c landed: mikemol-paths-forward --export writes .claude/paths-forward.export.json beside the state (version 2, repo = the project_root directory name, cards = every unflagged waypoint and residue entry whole, withheld = refs of flagged ones, as_of = newest last_worked or dropped_at, rewritten only when its bytes differ). Design: use a repo's own export only when it is valid for the repo and not older than its state, else derive from luthen's list as today; the remaining leak window (a card flagged after the last export) closes only when the writer exports on every update: to ask mtools-ad",
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: 2026-10-23 mtools-ad: W1838 as submitted writes the run clock as as_of and no residue, so do not consume its output; mtools:W1840 fixes both (as_of from the state: newest last_worked or dropped_at, epoch when none; unflagged residue in cards, flagged as a ref; writes only when the bytes differ) and they will send both shas. Default place stays .claude/paths-forward.export.json beside the state | 2026-10-23: 2026-10-23 mtools-ad: mtools:W1838 e8bd7e6 and W1840 2a5873c landed: mikemol-paths-forward --export writes .claude/paths-forward.export.json beside the state (version 2, repo = the project_root directory name, cards = every unflagged waypoint and residue entry whole, withheld = refs of flagged ones, as_of = newest last_worked or dropped_at, rewritten only when its bytes differ). Design: use a repo's own export only when it is valid for the repo and not older than its state, else derive from luthen's list as today; the remaining leak window (a card flagged after the last export) closes only when the writer exports on every update: to ask mtools-ad | 2026-10-23: commit d97f4cb; exportv2.own_export (valid for the repo, version 2, cards and withheld lists, no older than its state) and nemik-exports using it before deriving; tests/test_exports_gather.py. Needs each repo's writer to run --export: nemik's own is W874",
       "issued_at": "2026-10-23T03:56:43Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W516",
-      "last_worked": "2026-10-23T04:49:45Z",
+      "last_worked": "2026-10-23T06:06:15Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261023T060615Z",
       "manifest": [
         "src/nemik/exportv2.py",
         "src/nemik/exportcli.py",
@@ -19524,21 +19519,27 @@
     {
       "symbol": "W874",
       "title": "Repin the vendored mtools wheels to a sha with the writer's --export mode, so nemik's own writer can emit its export",
-      "status": "blocked",
+      "status": "ready",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "mtools:W1841"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "mtools-ad names W1841's commit sha: pin that one (not 2a5873c, which has --export without the refresh on every state write), with mikemol-repin --revendor --no-sync --sha <it> --root nemik --write, re-add the converge and webpage lines to SHA256SUMS by hand, rebuild the venv, run the suite",
-      "evidence": "2026-10-23: 2026-10-23 mtools-ad: mtools:W1841 makes store.save refresh the export when one already exists (opt-in by having run --export once; rewritten only when bytes differ), so --update --withheld and --drop refresh it in the same write; not covered: direct state writes that bypass store.save (repair-counter among them). Pin W1841's commit, not 2a5873c. nemik's stale fallback stays: it is safe either way, and dropping it is safe only for repos pinned at or after W1841's commit",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Pin the vendored mtools wheels to 5ba261faf5708395a2baeb38111a7d61943f91a4 with mikemol-repin --revendor --no-sync --sha it --root nemik --write, re-add the converge and webpage lines to SHA256SUMS by hand, rebuild the venv and run the suite; then run the writer's --export once on nemik's queue to opt in, and ask mtools-ad to do the same for mtools",
+      "evidence": "2026-10-23: 2026-10-23 mtools-ad: mtools:W1841 makes store.save refresh the export when one already exists (opt-in by having run --export once; rewritten only when bytes differ), so --update --withheld and --drop refresh it in the same write; not covered: direct state writes that bypass store.save (repair-counter among them). Pin W1841's commit, not 2a5873c. nemik's stale fallback stays: it is safe either way, and dropping it is safe only for repos pinned at or after W1841's commit | 2026-10-23: 2026-10-23 mtools-ad: mtools:W1841 landed as 5ba261f (5ba261faf5708395a2baeb38111a7d61943f91a4, verified in the mtools repo): --export writes .claude/paths-forward.export.json and every store.save refreshes an export that already exists; not covered: direct state writes that bypass store.save (repair-counter). mtools:W1835 is closed by its four children; mtools has no export file yet (opt-in by running --export once)",
       "issued_at": "2026-10-23T04:49:17Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W516",
-      "last_worked": "2026-10-23T04:55:17Z",
+      "last_worked": "2026-10-23T05:30:21Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": null,
+      "manifest": [
+        "pyproject.toml",
+        "uv.lock",
+        "MODULE.bazel",
+        "vendor/wheels/SHA256SUMS",
+        "vendor/wheels/README.md"
+      ],
+      "size_class": "medium"
     }
   ],
   "residue": [
@@ -19652,53 +19653,7 @@
   "heartbeat": "2026-10-22T02:06:35Z",
   "lock": null,
   "predecessor_job_id": "disarmed",
-  "leases": [
-    {
-      "tag": "file:src/nemik/exportv2.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W873",
-      "base_sha": "842e1884cdb4292773c97573dfd012368eebe862",
-      "taken_at": "2026-10-23T04:49:45Z",
-      "renewed_at": "2026-10-23T04:49:45Z",
-      "expires_at": "2026-10-23T05:19:45Z"
-    },
-    {
-      "tag": "file:src/nemik/exportcli.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W873",
-      "base_sha": "842e1884cdb4292773c97573dfd012368eebe862",
-      "taken_at": "2026-10-23T04:49:45Z",
-      "renewed_at": "2026-10-23T04:49:45Z",
-      "expires_at": "2026-10-23T05:19:45Z"
-    },
-    {
-      "tag": "file:tests/test_exports_gather.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W873",
-      "base_sha": "842e1884cdb4292773c97573dfd012368eebe862",
-      "taken_at": "2026-10-23T04:49:45Z",
-      "renewed_at": "2026-10-23T04:49:45Z",
-      "expires_at": "2026-10-23T05:19:45Z"
-    },
-    {
-      "tag": "file:src/nemik/cardrank.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W872",
-      "base_sha": "7ff947da95ed4c16d9801d52c689c10bb146a11b",
-      "taken_at": "2026-10-23T05:14:35Z",
-      "renewed_at": "2026-10-23T05:14:35Z",
-      "expires_at": "2026-10-23T05:44:35Z"
-    },
-    {
-      "tag": "file:tests/test_cardrank.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W872",
-      "base_sha": "7ff947da95ed4c16d9801d52c689c10bb146a11b",
-      "taken_at": "2026-10-23T05:14:35Z",
-      "renewed_at": "2026-10-23T05:14:35Z",
-      "expires_at": "2026-10-23T05:44:35Z"
-    }
-  ],
+  "leases": [],
   "advice": [
     {
       "tool": "block-behind-open",
