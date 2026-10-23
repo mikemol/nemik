@@ -19401,7 +19401,6 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W870",
         "W871",
         "W872"
       ],
@@ -19418,7 +19417,7 @@
     {
       "symbol": "W870",
       "title": "Port flow's cone and grounded-node selection to cardrank over plain card edges, tested against flow on the fixture fleet",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W871"
       ],
@@ -19428,14 +19427,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Submit the prepared stack: the cone and the unknown-node selection over plain edges",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: commit 3eaefda; cardrank.cone and cardrank.unknowns over plain edges, compile under the pinned Codon, tests/test_cardrank.py",
       "issued_at": "2026-10-23T03:46:53Z",
       "minted_during": "interrupt",
       "caused_by": "W869",
-      "last_worked": "2026-10-23T03:59:26Z",
+      "last_worked": "2026-10-23T04:28:59Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261023T042859Z",
       "manifest": [
         "src/nemik/cardrank.py",
         "tests/test_cardrank.py"
@@ -19445,27 +19444,29 @@
     {
       "symbol": "W871",
       "title": "Port flow's per-source current-flow solve to cardrank without Fraction or dataclasses, so the Codon census compiles it",
-      "status": "blocked",
+      "status": "working",
       "enables": [
         "W872"
       ],
-      "touches": [],
-      "blocked_on": [
-        "W870"
+      "touches": [
+        "file:src/nemik/cardrank.py!w",
+        "file:tests/test_cardrank.py!w"
       ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Port flow._grounded's sparse elimination to cardrank with floats, same lowest-degree-first order with ties by name, and test it against flow.solve within a stated tolerance on the fixture fleet and on a diamond whose answer is known",
+      "evidence": "2026-10-23: 2026-10-23: design decision: flow.py solves with exact Fraction so the answer does not depend on elimination order, and uses dataclasses and OrderedDict; Codon has no fractions module and its ints are 64-bit, so an exact rational port would overflow. The port uses floats with the same deterministic elimination order and is held to the exact solver within a tolerance the test states; salience used for ordering must keep the same ranking on the fixture fleet",
       "issued_at": "2026-10-23T03:46:53Z",
       "minted_during": "interrupt",
       "caused_by": "W869",
-      "last_worked": null,
+      "last_worked": "2026-10-23T04:29:09Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/cardrank.py",
         "tests/test_cardrank.py"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "completed": null
     },
     {
       "symbol": "W872",
@@ -19634,20 +19635,20 @@
     {
       "tag": "file:src/nemik/cardrank.py!w",
       "holder": "(unlocked)",
-      "waypoint": "W870",
-      "base_sha": "004c0c72a75f9f59a7d91ac6049c5c5b63e557e9",
-      "taken_at": "2026-10-23T03:47:00Z",
-      "renewed_at": "2026-10-23T03:47:00Z",
-      "expires_at": "2026-10-23T04:17:00Z"
+      "waypoint": "W871",
+      "base_sha": "3eaefdaad8a66f9fe1b5b1f4216c643f27115b93",
+      "taken_at": "2026-10-23T04:29:09Z",
+      "renewed_at": "2026-10-23T04:29:09Z",
+      "expires_at": "2026-10-23T04:59:09Z"
     },
     {
       "tag": "file:tests/test_cardrank.py!w",
       "holder": "(unlocked)",
-      "waypoint": "W870",
-      "base_sha": "004c0c72a75f9f59a7d91ac6049c5c5b63e557e9",
-      "taken_at": "2026-10-23T03:47:00Z",
-      "renewed_at": "2026-10-23T03:47:00Z",
-      "expires_at": "2026-10-23T04:17:00Z"
+      "waypoint": "W871",
+      "base_sha": "3eaefdaad8a66f9fe1b5b1f4216c643f27115b93",
+      "taken_at": "2026-10-23T04:29:09Z",
+      "renewed_at": "2026-10-23T04:29:09Z",
+      "expires_at": "2026-10-23T04:59:09Z"
     }
   ],
   "advice": [
