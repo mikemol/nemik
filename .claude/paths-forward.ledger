@@ -1818,3 +1818,23 @@
 2026-10-23T19:34:39Z  status W909 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T19:36:38Z  tick  W920 minted    -         "One wheel notch zooms the graph by about 1.2x, not the 2.5x of cytoscape's default"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=operator
 2026-10-23T19:38:15Z  status W920 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T20:15:41Z  tick  W921 minted    -         "Read ForgeFed's Ticket property list and the ticket-dependency vocabulary directly, which the audit's fetch tool did not reach"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=operator
+2026-10-23T20:15:56Z  status W916 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T20:40:56Z  status W920 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T20:40:57Z  tick  W922 minted    -         "test_modes and test_metrics_gating time out at 300 s when three stacks gate at once: shard them finer, never raise the timeout"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=operator
+2026-10-23T20:44:37Z  tick  W923 minted    -         "Every nemik test target is sharded from measured times, so none of them can time out under load"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=operator
+2026-10-23T20:44:42Z  tick  W924 minted    -         "A pytest plugin selects each shard's tests from Bazel's shard environment, and a test proves the shards cover every test exactly once"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W923
+2026-10-23T20:44:42Z  tick  W925 minted    -         "A measured plan sets each sh_test's shard_count so a shard stays under 40 percent of its size's limit, from the gate's own per-target times"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W923
+2026-10-23T20:44:42Z  tick  W926 minted    -         "mtools extends its shard planner and gate refusal from mutants grids to plain test targets with shard_count"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W923
+2026-10-23T20:44:42Z  tick  W927 minted    -         "A ratchet fails a test target that declares no shard_count or whose latest reading is over half its limit"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W923
+2026-10-23T20:45:00Z  status W925 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T20:45:01Z  status W926 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T20:45:03Z  status W927 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T20:45:05Z  status W922 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T20:48:07Z  status W924 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T20:57:31Z  status W925 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T20:57:33Z  tick  W928 minted    -         "Each nemik test run prints the CPU line the gate reads, so a test's cost is measured in CPU, which host load cannot inflate"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=mtools:W1873
+2026-10-23T20:57:49Z  status W925 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T20:58:10Z  status W928 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T21:01:08Z  status W912 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T21:01:09Z  status W917 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
