@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 872,
+  "counter": 873,
   "waypoints": [
     {
       "symbol": "W1",
@@ -10298,11 +10298,11 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "mtools-ad names the card for writer-side emission of each repo's version-2 export; then ask luthen to retire the v1 withheld list once the repos emit, keeping the pod fail-closed (no export, nothing published)",
-      "evidence": "2026-10-15: 2026-10-15: nemik's README Hosting section already states the intended boundary: mount only the flat queue export read-only at /export, not a whole source tree. W516 makes that export the repos' own product (their policy decides what is in it), which matches the operator's ruling that the pod should not see data that must not pass. | 2026-10-16: 2026-10-16 host ruling (github-8f): part of the client-path chain that is the next design work after the open gate items; withholding at the source is what lets the builder's merged files go. | 2026-10-17: 2026-10-17: atomized into W634 (reader), W635 (compat producer), W636 (pod mounts). Writer-side emission (mtools) and retiring luthen's v1 list are asks to mint when W634 lands. Design: docs/withholding-at-source.md | 2026-10-17: design doc landed b342a21, pushed (docs/withholding-at-source.md). Children W634 (part 1 93e92d5), W635, W636 open | 2026-10-18: status doc updated 3327f72 (pushed). Children: W634 done, W635 done, W636 blocked on luthen W1283 (stale withheld list), W647 held; writer-side emission by repos and retiring luthen's v1 list still to ask | 2026-10-19: 2026-10-19: W636 enables W516 and is blocked on luthen W1283; W516's own remaining work (asking the repos for writer-side emission, retiring luthen's v1 list) waits on W636 landing, so W516 is blocked on it, not ready | 2026-10-23: 2026-10-23: W634, W635, W636 are done (W636 rolled and read back by luthen-observability W1291); what remains is writer-side emission by the repos (an mtools writer feature) and retiring luthen's v1 list; asked mtools-ad for the card | 2026-10-23: 2026-10-23 mtools-ad: writer-side emission minted as mtools:W1835 (export.json version 2: repo, as_of, cards whole, withheld refs only; atomized: policy source as a per-card withheld flag defaulting to publish, a pure builder, a --export mode writing atomically beside the state file, a leak check with a planted-withheld-card test). Answered: luthen's v1 list withholds no mtools card today, so the default-publish flag reproduces it; evidence and warrants travel whole, a card is withheld whole or not at all",
+      "evidence": "2026-10-15: 2026-10-15: nemik's README Hosting section already states the intended boundary: mount only the flat queue export read-only at /export, not a whole source tree. W516 makes that export the repos' own product (their policy decides what is in it), which matches the operator's ruling that the pod should not see data that must not pass. | 2026-10-16: 2026-10-16 host ruling (github-8f): part of the client-path chain that is the next design work after the open gate items; withholding at the source is what lets the builder's merged files go. | 2026-10-17: 2026-10-17: atomized into W634 (reader), W635 (compat producer), W636 (pod mounts). Writer-side emission (mtools) and retiring luthen's v1 list are asks to mint when W634 lands. Design: docs/withholding-at-source.md | 2026-10-17: design doc landed b342a21, pushed (docs/withholding-at-source.md). Children W634 (part 1 93e92d5), W635, W636 open | 2026-10-18: status doc updated 3327f72 (pushed). Children: W634 done, W635 done, W636 blocked on luthen W1283 (stale withheld list), W647 held; writer-side emission by repos and retiring luthen's v1 list still to ask | 2026-10-19: 2026-10-19: W636 enables W516 and is blocked on luthen W1283; W516's own remaining work (asking the repos for writer-side emission, retiring luthen's v1 list) waits on W636 landing, so W516 is blocked on it, not ready | 2026-10-23: 2026-10-23: W634, W635, W636 are done (W636 rolled and read back by luthen-observability W1291); what remains is writer-side emission by the repos (an mtools writer feature) and retiring luthen's v1 list; asked mtools-ad for the card | 2026-10-23: 2026-10-23 mtools-ad: writer-side emission minted as mtools:W1835 (export.json version 2: repo, as_of, cards whole, withheld refs only; atomized: policy source as a per-card withheld flag defaulting to publish, a pure builder, a --export mode writing atomically beside the state file, a leak check with a planted-withheld-card test). Answered: luthen's v1 list withholds no mtools card today, so the default-publish flag reproduces it; evidence and warrants travel whole, a card is withheld whole or not at all | 2026-10-23: 2026-10-23 mtools-ad: mtools:W1836 (per-card withheld flag, a4c0e8e) and W1837 (pure export builder, 585bc75) landed; W1838 (--export mode, <state>.export.json) is gating. Answered their three questions from the reader: it reads exports/<repo>.json from one directory, residue symbols belong in cards, as_of must come from the state so an unchanged queue writes a byte-identical file (the pod rebuilds on export mtime, W636). The gather step is nemik:W873, blocked on mtools:W1838",
       "issued_at": "2026-10-15T12:08:11Z",
       "minted_during": "tick",
       "caused_by": "operator",
-      "last_worked": "2026-10-23T03:14:02Z",
+      "last_worked": "2026-10-23T03:57:22Z",
       "ticks_blocked": 0,
       "weight": 11,
       "manifest": [
@@ -19428,12 +19428,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Read flow._cone and flow._grounded, then write the same selection in cardrank over a successor mapping and sets of strings, and test it against flow on the fixture fleet",
+      "next_bounded_step": "Submit the prepared stack: the cone and the unknown-node selection over plain edges",
       "evidence": "",
       "issued_at": "2026-10-23T03:46:53Z",
       "minted_during": "interrupt",
       "caused_by": "W869",
-      "last_worked": "2026-10-23T03:47:00Z",
+      "last_worked": "2026-10-23T03:59:26Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -19489,6 +19489,32 @@
       "manifest": [
         "src/nemik/cardrank.py",
         "tests/test_cardrank.py"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W873",
+      "title": "nemik-exports uses each repo's own export when present and derives from luthen's list only for a repo that has none",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "mtools:W1838",
+        "mtools:W1840"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "After mtools:W1838 lands: copy a repo's paths-forward.export.json to exports/<repo>.json when it is version 2 for that repo, derive the rest as today, and keep the no-rewrite-when-unchanged rule so the pod does not rebuild every loop",
+      "evidence": "2026-10-23: 2026-10-23 mtools-ad: W1838 as submitted writes the run clock as as_of and no residue, so do not consume its output; mtools:W1840 fixes both (as_of from the state: newest last_worked or dropped_at, epoch when none; unflagged residue in cards, flagged as a ref; writes only when the bytes differ) and they will send both shas. Default place stays .claude/paths-forward.export.json beside the state",
+      "issued_at": "2026-10-23T03:56:43Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W516",
+      "last_worked": "2026-10-23T03:58:22Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/exportcli.py",
+        "src/nemik/exportcompat.py",
+        "tests/test_exports_gather.py"
       ],
       "size_class": "small"
     }

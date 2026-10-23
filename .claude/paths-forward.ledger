@@ -1644,3 +1644,5 @@
 2026-10-23T03:47:00Z  status W870 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T03:47:04Z  status W871 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T03:47:04Z  status W872 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T03:56:43Z  interrupt W873 minted    -         "nemik-exports uses each repo's own export when present and derives from luthen's list only for a repo that has none"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W516
+2026-10-23T03:57:21Z  status W873 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
