@@ -1838,3 +1838,22 @@
 2026-10-23T20:58:10Z  status W928 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T21:01:08Z  status W912 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T21:01:09Z  status W917 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T21:18:02Z  tick  W929 minted    -         "A repo's queue reads as a queue on the page: each ready card's place, why it is there, how long it has waited, and what order it will be worked in"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=operator
+2026-10-23T21:18:09Z  tick  W930 minted    -         "Mark ready cards that cannot be worked now as blocked on what they wait for, so the head of the queue is work that can start"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W929
+2026-10-23T21:18:09Z  tick  W931 minted    -         "A /queue/<repo>.json document lists a repo's ready and working cards in work order with place, weight, band, days ready and how many newer cards were ranked ahead"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W929
+2026-10-23T21:18:09Z  tick  W932 minted    -         "A Queue panel for the picked repo shows that order as a numbered queue, with the reason each card sits where it does"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W929
+2026-10-23T21:18:09Z  tick  W933 minted    -         "Show a predicted start only where the forecast has verified skill, and otherwise show the order and the wait, not a time"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W929
+2026-10-23T21:18:23Z  status W931 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T21:18:24Z  status W932 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T21:18:26Z  status W933 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T21:19:55Z  tick  W934 minted    -         "The page's navigation follows its structure: views for the questions it answers, and each control next to what it acts on"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=operator
+2026-10-23T21:19:59Z  tick  W935 minted    -         "Inventory the page's controls and sections and say what the grab-bag is (docs/page-structure.md)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W934
+2026-10-23T21:19:59Z  tick  W936 minted    -         "Map every control and section to one of four views or a help drawer, with the reason each sits there (docs/page-structure-map.md)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W934
+2026-10-23T21:19:59Z  tick  W937 minted    -         "A view's state lives in the address, so a view is linkable, reachable by the keyboard and by the PDF command"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W934
+2026-10-23T21:19:59Z  tick  W938 minted    -         "Build the four views and the help drawer on the existing panels, one view per change, with the WCAG chain test as the oracle"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W934
+2026-10-23T21:20:16Z  status W935 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T21:20:17Z  status W936 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T21:20:19Z  status W937 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T21:20:21Z  status W938 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T21:33:54Z  status W916 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T21:33:54Z  status W919 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
