@@ -19530,12 +19530,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Pin the vendored mtools wheels to 5ba261faf5708395a2baeb38111a7d61943f91a4 with mikemol-repin --revendor --no-sync --sha it --root nemik --write, re-add the converge and webpage lines to SHA256SUMS by hand, rebuild the venv and run the suite; then run the writer's --export once on nemik's queue to opt in, and ask mtools-ad to do the same for mtools",
+      "next_bounded_step": "Submit the prepared stack: the seven mtools wheels repinned to 5ba261f",
       "evidence": "2026-10-23: 2026-10-23 mtools-ad: mtools:W1841 makes store.save refresh the export when one already exists (opt-in by having run --export once; rewritten only when bytes differ), so --update --withheld and --drop refresh it in the same write; not covered: direct state writes that bypass store.save (repair-counter among them). Pin W1841's commit, not 2a5873c. nemik's stale fallback stays: it is safe either way, and dropping it is safe only for repos pinned at or after W1841's commit | 2026-10-23: 2026-10-23 mtools-ad: mtools:W1841 landed as 5ba261f (5ba261faf5708395a2baeb38111a7d61943f91a4, verified in the mtools repo): --export writes .claude/paths-forward.export.json and every store.save refreshes an export that already exists; not covered: direct state writes that bypass store.save (repair-counter). mtools:W1835 is closed by its four children; mtools has no export file yet (opt-in by running --export once)",
       "issued_at": "2026-10-23T04:49:17Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W516",
-      "last_worked": "2026-10-23T06:32:06Z",
+      "last_worked": "2026-10-23T06:47:27Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -19543,7 +19543,21 @@
         "uv.lock",
         "MODULE.bazel",
         "vendor/wheels/SHA256SUMS",
-        "vendor/wheels/README.md"
+        "vendor/wheels/README.md",
+        "vendor/wheels/mikemol_cvdcore-0.1.0+d1d4ec7-py3-none-any.whl",
+        "vendor/wheels/mikemol_fence-0.1.0+d1d4ec7-py3-none-any.whl",
+        "vendor/wheels/mikemol_frontier-0.1.0+d1d4ec7-py3-none-any.whl",
+        "vendor/wheels/mikemol_hooks-0.1.0+d1d4ec7-py3-none-any.whl",
+        "vendor/wheels/mikemol_icsstruct-0.1.0+d1d4ec7-py3-none-any.whl",
+        "vendor/wheels/mikemol_pathsforward-0.1.0+d1d4ec7-py3-none-any.whl",
+        "vendor/wheels/mikemol_rulerseq-0.1.0+d1d4ec7-py3-none-any.whl",
+        "vendor/wheels/mikemol_cvdcore-0.1.0+5ba261f-py3-none-any.whl",
+        "vendor/wheels/mikemol_fence-0.1.0+5ba261f-py3-none-any.whl",
+        "vendor/wheels/mikemol_frontier-0.1.0+5ba261f-py3-none-any.whl",
+        "vendor/wheels/mikemol_hooks-0.1.0+5ba261f-py3-none-any.whl",
+        "vendor/wheels/mikemol_icsstruct-0.1.0+5ba261f-py3-none-any.whl",
+        "vendor/wheels/mikemol_pathsforward-0.1.0+5ba261f-py3-none-any.whl",
+        "vendor/wheels/mikemol_rulerseq-0.1.0+5ba261f-py3-none-any.whl"
       ],
       "size_class": "medium"
     }
