@@ -1759,3 +1759,8 @@
 2026-10-23T14:16:22Z  status W893 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T14:16:22Z  status W894 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T14:16:23Z  status W893 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T14:16:54Z  status W894 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T14:17:01Z  tick  W893 advanced  unblock   "W892 landed (de27fc2); W893 and W894 built and queued as stacks 358 and 359 behind the queue commit [blocked by W894]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T14:42:28Z  tick  W896 minted    -         "UnwarrantedRulingShape also flags evidence that cites a transcript line or uuid for an operator ruling with no warrant record, as estate's cards phrase it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f
+2026-10-23T14:48:26Z  status W893 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T14:48:27Z  status W896 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
