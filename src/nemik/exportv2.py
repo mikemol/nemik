@@ -84,3 +84,35 @@ def export_refs(repo: str, symbols: list[str], path: Path) -> set[str]:
         return everything
     published = {f"{repo}:{s}" for s in _symbols(fields.get("cards"))}
     return (everything - published) | {str(r) for r in named}
+
+
+def own_export(repo: str, path: Path, state: Path) -> dict[str, object]:
+    """Read a repo's own export when it can be trusted, and nothing when it cannot (nemik:W873).
+
+    The repo's writer emits `paths-forward.export.json` beside its state (mtools:W1838). It is
+    trusted when it is version 2 for this repo, names a list of cards and a list of withheld refs,
+    and is no older than the state it was made from: an older one may predate a card's flag, so it
+    is not used and the caller derives the export as before.
+
+    Args:
+        repo: The repo the export should belong to.
+        path: The export file beside the state.
+        state: The repo's queue file.
+
+    Returns:
+        The export's fields, or an empty mapping when it is missing, unreadable, another repo's or
+        version, malformed or stale.
+
+    """
+    fields = _fields(path)
+    if fields.get("version") != VERSION or fields.get("repo") != repo:
+        return {}
+    if not isinstance(fields.get("cards"), list):
+        return {}
+    if not isinstance(fields.get("withheld"), list):
+        return {}
+    try:
+        fresh = path.stat().st_mtime_ns >= state.stat().st_mtime_ns
+    except OSError:
+        return {}
+    return fields if fresh else {}
