@@ -19743,21 +19743,27 @@
       ],
       "touches": [
         "file:src/nemik/waitrows.py!w",
-        "file:tests/test_waitrows.py!w"
+        "file:tests/test_waitrows.py!w",
+        "file:src/nemik/rank.py!w",
+        "file:tests/test_rank.py!w",
+        "file:mypy-baseline.json!w"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Read how rank orders the cards (rank.py's ordering) and add the blocker's rank position to each wait row, tested on the fixture fleet",
+      "next_bounded_step": "Submit the prepared stack: each wait edge with its blocker's rank position, and rank_fleet typed",
       "evidence": "",
       "issued_at": "2026-10-23T08:07:05Z",
       "minted_during": "interrupt",
       "caused_by": "W876",
-      "last_worked": "2026-10-23T08:07:15Z",
+      "last_worked": "2026-10-23T08:12:12Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "src/nemik/waitrows.py",
-        "tests/test_waitrows.py"
+        "tests/test_waitrows.py",
+        "src/nemik/rank.py",
+        "tests/test_rank.py",
+        "mypy-baseline.json"
       ],
       "size_class": "small"
     },
