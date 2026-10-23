@@ -27,6 +27,8 @@ ROUTED = [
     ("nemik-check --ready-neither", "/check/", "ready_neither_text"),
     ("nemik-check --unmanifested", "/check/", "unmanifested_text"),
     ("nemik-check --integrity", "/check/", "integrity_text"),
+    ("nemik-check --letters", "/check/", "letters_report"),
+    ("nemik-check --fold", "/check/", "letters_report"),
     ("nemik-critical", "/critical.json", "critical_doc"),
     ("nemik-starved", "/starved.json", "starved_fleet"),
     ("nemik-overlaps", "/overlaps.json", "overlaps"),
@@ -39,8 +41,6 @@ ROUTED = [
 ]
 
 PENDING = [
-    ("nemik-check --letters", "W793"),
-    ("nemik-check --fold", "W793"),
     ("nemik-collapse", "W793"),
 ]
 
