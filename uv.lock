@@ -320,14 +320,14 @@ wheels = [
 
 [[package]]
 name = "mikemol-cvdcore"
-version = "0.1.0+d1d4ec7"
-source = { path = "vendor/wheels/mikemol_cvdcore-0.1.0+d1d4ec7-py3-none-any.whl" }
+version = "0.1.0+5ba261f"
+source = { path = "vendor/wheels/mikemol_cvdcore-0.1.0+5ba261f-py3-none-any.whl" }
 dependencies = [
     { name = "colorspacious" },
     { name = "numpy" },
 ]
 wheels = [
-    { filename = "mikemol_cvdcore-0.1.0+d1d4ec7-py3-none-any.whl", hash = "sha256:c09f178e844698c21f768e293e5b60c733cf2b38d33edb393bb9ace633c00090" },
+    { filename = "mikemol_cvdcore-0.1.0+5ba261f-py3-none-any.whl", hash = "sha256:81c368bd941008e46b47470f1822ae7bbcb5eb97701a25582310b8c1fdc2423c" },
 ]
 
 [package.metadata]
@@ -338,30 +338,30 @@ requires-dist = [
 
 [[package]]
 name = "mikemol-fence"
-version = "0.1.0+d1d4ec7"
-source = { path = "vendor/wheels/mikemol_fence-0.1.0+d1d4ec7-py3-none-any.whl" }
+version = "0.1.0+5ba261f"
+source = { path = "vendor/wheels/mikemol_fence-0.1.0+5ba261f-py3-none-any.whl" }
 wheels = [
-    { filename = "mikemol_fence-0.1.0+d1d4ec7-py3-none-any.whl", hash = "sha256:cfff840b54e9afb8f77f0662e1c30d798f0cbabb6655815b60ce265b912b6f01" },
+    { filename = "mikemol_fence-0.1.0+5ba261f-py3-none-any.whl", hash = "sha256:5b43918fb447efc40f5093a050f6ec528fb2b7f828ee945830971b7141e93c8f" },
 ]
 
 [[package]]
 name = "mikemol-frontier"
-version = "0.1.0+d1d4ec7"
-source = { path = "vendor/wheels/mikemol_frontier-0.1.0+d1d4ec7-py3-none-any.whl" }
+version = "0.1.0+5ba261f"
+source = { path = "vendor/wheels/mikemol_frontier-0.1.0+5ba261f-py3-none-any.whl" }
 wheels = [
-    { filename = "mikemol_frontier-0.1.0+d1d4ec7-py3-none-any.whl", hash = "sha256:eff33cf4a6710d9414564fc85d222b80ea91d7fe2d0c02513aea46dcc4d8211e" },
+    { filename = "mikemol_frontier-0.1.0+5ba261f-py3-none-any.whl", hash = "sha256:31ac141b2874d3ccb0e8aaa45f77828b48e3e0fface6bfa4d13b5c3bd1110120" },
 ]
 
 [[package]]
 name = "mikemol-hooks"
-version = "0.1.0+d1d4ec7"
-source = { path = "vendor/wheels/mikemol_hooks-0.1.0+d1d4ec7-py3-none-any.whl" }
+version = "0.1.0+5ba261f"
+source = { path = "vendor/wheels/mikemol_hooks-0.1.0+5ba261f-py3-none-any.whl" }
 dependencies = [
     { name = "mypy" },
     { name = "ruff" },
 ]
 wheels = [
-    { filename = "mikemol_hooks-0.1.0+d1d4ec7-py3-none-any.whl", hash = "sha256:f5d46cf20ababa17689c9c1b46036dba393aaf717672e3d81293e4cc3bdd9a0a" },
+    { filename = "mikemol_hooks-0.1.0+5ba261f-py3-none-any.whl", hash = "sha256:0020bc3160e3d51bbd0f17995ee938d85b201e0b0550617091953d547fd83a24" },
 ]
 
 [package.metadata]
@@ -372,14 +372,14 @@ requires-dist = [
 
 [[package]]
 name = "mikemol-icsstruct"
-version = "0.1.0+d1d4ec7"
-source = { path = "vendor/wheels/mikemol_icsstruct-0.1.0+d1d4ec7-py3-none-any.whl" }
+version = "0.1.0+5ba261f"
+source = { path = "vendor/wheels/mikemol_icsstruct-0.1.0+5ba261f-py3-none-any.whl" }
 dependencies = [
     { name = "icalendar" },
     { name = "recurring-ical-events" },
 ]
 wheels = [
-    { filename = "mikemol_icsstruct-0.1.0+d1d4ec7-py3-none-any.whl", hash = "sha256:7ee2c8a4a90ef0d88cefbedfdcd29a48be1ff539588144c9e7f344af581354bf" },
+    { filename = "mikemol_icsstruct-0.1.0+5ba261f-py3-none-any.whl", hash = "sha256:a55f8ce800b5b73e70b15791694722193b17aa7e57ae1e9aa586b6a455a64121" },
 ]
 
 [package.metadata]
@@ -390,18 +390,18 @@ requires-dist = [
 
 [[package]]
 name = "mikemol-pathsforward"
-version = "0.1.0+d1d4ec7"
-source = { path = "vendor/wheels/mikemol_pathsforward-0.1.0+d1d4ec7-py3-none-any.whl" }
+version = "0.1.0+5ba261f"
+source = { path = "vendor/wheels/mikemol_pathsforward-0.1.0+5ba261f-py3-none-any.whl" }
 wheels = [
-    { filename = "mikemol_pathsforward-0.1.0+d1d4ec7-py3-none-any.whl", hash = "sha256:b906a66d3d2fcec6c4e008a64e4506fd0851e180af7a3d4110ea90a305c321f8" },
+    { filename = "mikemol_pathsforward-0.1.0+5ba261f-py3-none-any.whl", hash = "sha256:e9f1e60f34a60c48ffccf868b696c6a93599496662cebe3d0c42102ee6950c23" },
 ]
 
 [[package]]
 name = "mikemol-rulerseq"
-version = "0.1.0+d1d4ec7"
-source = { path = "vendor/wheels/mikemol_rulerseq-0.1.0+d1d4ec7-py3-none-any.whl" }
+version = "0.1.0+5ba261f"
+source = { path = "vendor/wheels/mikemol_rulerseq-0.1.0+5ba261f-py3-none-any.whl" }
 wheels = [
-    { filename = "mikemol_rulerseq-0.1.0+d1d4ec7-py3-none-any.whl", hash = "sha256:913d2cfaab0068320551b886001a0536d81254da937f82e4da9859228c2e9777" },
+    { filename = "mikemol_rulerseq-0.1.0+5ba261f-py3-none-any.whl", hash = "sha256:7833c3c7250550c89f5a72759f5ce452a83e378d201309a6baf76f54135754fe" },
 ]
 
 [[package]]
@@ -506,12 +506,12 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "mikemol-converge", path = "vendor/wheels/mikemol_converge-0.1.0+0f8267e-py3-none-any.whl" },
-    { name = "mikemol-fence", path = "vendor/wheels/mikemol_fence-0.1.0+d1d4ec7-py3-none-any.whl" },
-    { name = "mikemol-frontier", path = "vendor/wheels/mikemol_frontier-0.1.0+d1d4ec7-py3-none-any.whl" },
-    { name = "mikemol-hooks", path = "vendor/wheels/mikemol_hooks-0.1.0+d1d4ec7-py3-none-any.whl" },
-    { name = "mikemol-icsstruct", path = "vendor/wheels/mikemol_icsstruct-0.1.0+d1d4ec7-py3-none-any.whl" },
-    { name = "mikemol-pathsforward", path = "vendor/wheels/mikemol_pathsforward-0.1.0+d1d4ec7-py3-none-any.whl" },
-    { name = "mikemol-rulerseq", path = "vendor/wheels/mikemol_rulerseq-0.1.0+d1d4ec7-py3-none-any.whl" },
+    { name = "mikemol-fence", path = "vendor/wheels/mikemol_fence-0.1.0+5ba261f-py3-none-any.whl" },
+    { name = "mikemol-frontier", path = "vendor/wheels/mikemol_frontier-0.1.0+5ba261f-py3-none-any.whl" },
+    { name = "mikemol-hooks", path = "vendor/wheels/mikemol_hooks-0.1.0+5ba261f-py3-none-any.whl" },
+    { name = "mikemol-icsstruct", path = "vendor/wheels/mikemol_icsstruct-0.1.0+5ba261f-py3-none-any.whl" },
+    { name = "mikemol-pathsforward", path = "vendor/wheels/mikemol_pathsforward-0.1.0+5ba261f-py3-none-any.whl" },
+    { name = "mikemol-rulerseq", path = "vendor/wheels/mikemol_rulerseq-0.1.0+5ba261f-py3-none-any.whl" },
     { name = "paperkit", marker = "extra == 'docs'", git = "https://github.com/mikemol/paperkit.git?rev=b5877102af3b48005fde814416bff5b8f06ba5cd" },
     { name = "pyshacl", specifier = ">=0.26" },
     { name = "python-dateutil", specifier = ">=2.9" },
@@ -522,7 +522,7 @@ provides-extras = ["docs"]
 [package.metadata.requires-dev]
 dev = [
     { name = "jsonschema", specifier = ">=4.23" },
-    { name = "mikemol-cvdcore", path = "vendor/wheels/mikemol_cvdcore-0.1.0+d1d4ec7-py3-none-any.whl" },
+    { name = "mikemol-cvdcore", path = "vendor/wheels/mikemol_cvdcore-0.1.0+5ba261f-py3-none-any.whl" },
     { name = "mikemol-webpage", path = "vendor/wheels/mikemol_webpage-0.1.0+146ebaaf-py3-none-any.whl" },
     { name = "playwright", specifier = ">=1.63.0" },
     { name = "pytest", specifier = ">=9.1.1" },
