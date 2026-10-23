@@ -343,6 +343,10 @@
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'tomllib'"
  },
+ "waitemit": {
+  "as_written": "no module named 'argparse'",
+  "stripped": "no module named 'argparse'"
+ },
  "waitrows": {
   "as_written": "no module named 'rdflib'",
   "stripped": "no module named 'rdflib'"
