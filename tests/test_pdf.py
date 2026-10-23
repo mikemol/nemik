@@ -55,3 +55,4 @@ def test_a_view_prints_a_pdf(view: str, tmp_path: Path) -> None:
     assert data.startswith(b"%PDF")
     assert len(data) > MIN_PDF_BYTES
     assert b"MediaBox [0 0 1275.12 937.91998]" in data
+    assert b"/Subtype /Image" not in data

@@ -5,11 +5,12 @@
     python -m nemik.pdf VIEW --out FILE [--repo REPO] [--url URL]
 
 The operator asked (2026-10-23) for an agent to render the graph to a file that can be read on a
-phone. The page keeps no view in its URL, so this opens it in headless Chromium through playwright,
-sets the view's controls (pdfviews), waits for the page's own redraw, and prints. It prints the
-page of a running nemik-serve (the host's, on port 8765, unless --url names another); it starts no
-server. It is a host tool: playwright and mikemol.webpage are development dependencies, not the
-pod's.
+phone, and (W899) with no raster step between the model and the page. The page keeps no view in its
+URL, so this opens it in headless Chromium through playwright, sets the view's controls (pdfviews),
+waits for the page's own redraw, redraws the graph as SVG (web/svgexport.js, W900) over its canvas,
+and prints: the PDF holds paths and text, no image of the canvas. It prints the page of a running
+nemik-serve (the host's, on port 8765, unless --url names another); it starts no server. It is a
+host tool: playwright and mikemol.webpage are development dependencies, not the pod's.
 """
 
 import argparse
@@ -34,10 +35,30 @@ VIEWPORT: ViewportSize = {"width": 1700, "height": 1250}
 # the PDF's page is the viewport's own size, so the header, the graph and the panels all fit on it
 PAGE_WIDTH = f"{VIEWPORT['width']}px"
 PAGE_HEIGHT = f"{VIEWPORT['height']}px"
-# the graph is a canvas, so it prints as an image: twice the pixels keeps it legible when zoomed
-SCALE = 2
 # the button that fits every repo on the screen; the page shows it when it is zoomed to one
 FIT_ALL = "#fitall"
+# the graph is a canvas, which prints as a picture; svgexport.js redraws it as vector (nemik:W900)
+# and this puts that drawing over the canvas, which is hidden, so the PDF holds paths and text
+SVG_EXPORT = Path(__file__).parent / "web" / "svgexport.js"
+# The container keeps the size it has on screen, in pixels: in print layout a percentage height can
+# collapse to nothing and the drawing vanishes from the page (the first vector PDF came out blank).
+VECTORIZE = """() => {
+  const host = document.getElementById('cy');
+  const box = host.getBoundingClientRect();
+  host.style.cssText += `;width:${box.width}px;height:${box.height}px;overflow:hidden`;
+  host.insertAdjacentHTML('beforeend', graphSvg(cy));
+  const svg = host.lastElementChild;
+  svg.removeAttribute('width');
+  svg.removeAttribute('height');
+  svg.style.cssText = `position:absolute;left:0;top:0;width:${box.width}px;height:${box.height}px;`
+    + 'z-index:5;background:#f7f7f5';
+  host.querySelectorAll('canvas').forEach(c => { c.style.visibility = 'hidden'; });
+}"""
+# the drawing's area on the printed page, in square pixels: zero means it would print blank
+DRAWN_AREA = (
+    "() => { const r = document.getElementById('cy').lastElementChild.getBoundingClientRect();"
+    " return r.width * r.height; }"
+)
 
 
 class _Options(argparse.Namespace):
@@ -79,6 +100,9 @@ def render(url: str, view: str, repo: str, out: Path) -> None:
         repo: The repo for the repo view.
         out: The PDF to write.
 
+    Raises:
+        RuntimeError: when the graph's drawing would have no area on the printed page.
+
     """
     exe = os.environ.get("NEMIK_CHROMIUM")
     with sync_playwright() as p:
@@ -86,9 +110,16 @@ def render(url: str, view: str, repo: str, out: Path) -> None:
             executable_path=str(Path(exe).absolute()) if exe else None
         )
         try:
-            page = browser.new_page(viewport=VIEWPORT, device_scale_factor=SCALE)
+            page = browser.new_page(viewport=VIEWPORT)
             load(page, url, CY_READY)
             apply(page, view, repo)
+            page.add_script_tag(path=str(SVG_EXPORT))
+            page.evaluate(VECTORIZE)
+            page.emulate_media(media="print")
+            area: object = page.evaluate(DRAWN_AREA)
+            if not area:
+                msg = "the graph's drawing has no area in print layout; the PDF would be blank"
+                raise RuntimeError(msg)
             page.pdf(
                 path=str(out),
                 width=PAGE_WIDTH,
