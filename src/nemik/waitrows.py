@@ -1,26 +1,57 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""waitrows: the graph's cross-repo wait edges as waitseries rows (nemik:W875, W836, W579).
+"""waitrows: the graph's cross-repo wait edges as waitseries rows (nemik:W875, W883, W836, W579).
 
 waitseries groups rows into samples over plain data. This reads the rows out of the merged queue
 graph: one per blocked card that waits on a card of another repo, as (waiting repo, blocking repo,
-ticks the waiting card has been blocked). It uses only rdflib's typed calls (Graph.triples and
-Graph.value), so it adds no untyped expression to the baselines.
+ticks the waiting card has been blocked), and the same edges with the blocker's rank position. It
+uses only rdflib's typed calls (Graph.triples and Graph.value) and rank.rank_fleet, whose rows are
+typed, so it adds no untyped expression to the baselines.
 """
 
 from rdflib import Graph
 
 from nemik.adapter import NEMIK, OSLC_CM
-from nemik.rank import ref_of
+from nemik.rank import Weights, rank_fleet, ref_of
 from nemik.waitseries import Row
 
+# (waiting repo, blocking repo, ticks blocked, the blocker's rank position; 0 when it is not ranked)
+Edge = tuple[str, str, int, int]
+UNRANKED = 0
 
-def wait_rows(g: Graph) -> list[Row]:
-    """Read a graph's cross-repo wait edges as rows.
+
+def _cross_repo(g: Graph) -> list[tuple[str, str, int, str]]:
+    """Read a graph's cross-repo wait edges, each with the cite of the card it waits on.
 
     An edge counts when its waiter is blocked, its target is a card (not a workstream or the
     operator, which have no state) and the two cards are in different repos. A card that waits on
-    two cards of another repo gives two rows, because each is a wait edge.
+    two cards of another repo gives two edges.
+
+    Args:
+        g: The merged queue graph.
+
+    Returns:
+        (waiting repo, blocking repo, ticks blocked, blocker's `repo:W<n>`), in no order.
+
+    """
+    out: list[tuple[str, str, int, str]] = []
+    for waiter, _, target in g.triples((None, NEMIK.waitsFor, None)):
+        if g.value(waiter, OSLC_CM.state) != NEMIK.Blocked:
+            continue
+        if g.value(target, OSLC_CM.state) is None:
+            continue
+        waiting = ref_of(waiter).partition(":")[0]
+        cite = ref_of(target)
+        blocking = cite.partition(":")[0]
+        if waiting == blocking:
+            continue
+        ticks = int(str(g.value(waiter, NEMIK.ticksBlocked) or 0))
+        out.append((waiting, blocking, ticks, cite))
+    return out
+
+
+def wait_rows(g: Graph) -> list[Row]:
+    """Read a graph's cross-repo wait edges as waitseries rows.
 
     Args:
         g: The merged queue graph.
@@ -29,16 +60,44 @@ def wait_rows(g: Graph) -> list[Row]:
         One (waiting repo, blocking repo, ticks blocked) per cross-repo wait edge, in no order.
 
     """
-    rows: list[Row] = []
-    for waiter, _, target in g.triples((None, NEMIK.waitsFor, None)):
-        if g.value(waiter, OSLC_CM.state) != NEMIK.Blocked:
-            continue
-        if g.value(target, OSLC_CM.state) is None:
-            continue
-        waiting = ref_of(waiter).partition(":")[0]
-        blocking = ref_of(target).partition(":")[0]
-        if waiting == blocking:
-            continue
-        ticks = int(str(g.value(waiter, NEMIK.ticksBlocked) or 0))
-        rows.append((waiting, blocking, ticks))
-    return rows
+    return [
+        (waiting, blocking, ticks) for waiting, blocking, ticks, _ in _cross_repo(g)
+    ]
+
+
+def blocker_positions(g: Graph, weights: Weights) -> dict[str, int]:
+    """Rank the fleet's ready cards from 1, as nemik-rank --all lists them.
+
+    Only a ready leaf is ranked; a card that is blocked, done or an umbrella has no position.
+
+    Args:
+        g: The merged queue graph.
+        weights: The edge weights rank_fleet composes with.
+
+    Returns:
+        `repo:W<n>` -> its place in the fleet order.
+
+    """
+    out: dict[str, int] = {}
+    for place, entry in enumerate(rank_fleet(g, weights), start=1):
+        out[str(entry["cite"])] = place
+    return out
+
+
+def wait_edges(g: Graph, weights: Weights) -> list[Edge]:
+    """Read the cross-repo wait edges with each blocker's rank position (nemik:W883).
+
+    Args:
+        g: The merged queue graph.
+        weights: The edge weights rank_fleet composes with.
+
+    Returns:
+        One (waiting repo, blocking repo, ticks blocked, blocker position) per edge, the position
+        UNRANKED (0) when the blocker is not a ready leaf; in no order.
+
+    """
+    place = blocker_positions(g, weights)
+    return [
+        (waiting, blocking, ticks, place.get(cite, UNRANKED))
+        for waiting, blocking, ticks, cite in _cross_repo(g)
+    ]

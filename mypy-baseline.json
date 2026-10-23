@@ -117,9 +117,9 @@
   "misc": 25
  },
  "src/nemik/rank.py": {
-  "misc": 269,
+  "misc": 262,
   "no-untyped-def": 3,
-  "type-arg": 20,
+  "type-arg": 19,
   "var-annotated": 1
  },
  "src/nemik/realize.py": {
@@ -407,7 +407,7 @@
   "misc": 11
  },
  "tests/test_rank.py": {
-  "misc": 144,
+  "misc": 129,
   "no-untyped-call": 7,
   "no-untyped-def": 4
  },

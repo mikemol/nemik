@@ -93,7 +93,7 @@ def test_fleet_rank_pools_repos_into_one_comparable_order() -> None:
     assert [r["cite"] for r in fleet] == ["a:W1", "b:W5"]
     assert [r["repo"] for r in fleet] == ["a", "b"]
     assert fleet[0]["downstream"] == 8  # the stalled peer c:W9 waits on a:W1
-    assert fleet[0]["weight"] > fleet[1]["weight"]
+    assert int(str(fleet[0]["weight"])) > int(str(fleet[1]["weight"]))
 
 
 def _ready(g: Graph, repo: str, sym: str, pos: int):

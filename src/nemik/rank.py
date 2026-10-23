@@ -455,7 +455,7 @@ def _fleet_composition(comp: Composition | None) -> Composition:
 
 def rank_fleet(
     g: Graph, weights: Weights, comp: Composition | None = None
-) -> list[dict]:
+) -> list[dict[str, object]]:
     """Every workstream's ready leaves in ONE composed order (nemik:W202).
 
     `rank` positions are per repo, so its `weight` and `key` cannot be compared across repos. Here
@@ -619,10 +619,11 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         if args.json:
             print(json.dumps(fleet, indent=2))
             return
-        for r in fleet:
-            head = f"{r['weight']:4} {r['cite']:32} {r['band_name']:9}"
+        for entry in fleet:
+            head = f"{entry['weight']:4} {entry['cite']:32} {entry['band_name']:9}"
             print(
-                f"{head} op={r['operator']} down={r['downstream']:<4} {r['title'][:60]}"
+                f"{head} op={entry['operator']} down={entry['downstream']:<4} "
+                f"{str(entry['title'])[:60]}"
             )
         return
     if args.item:
