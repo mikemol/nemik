@@ -1604,3 +1604,7 @@
 2026-10-23T00:52:40Z  status W862 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T00:52:41Z  status W863 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T00:53:03Z  status W864 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T01:03:40Z  interrupt W865 minted    -         "The image build has failed at conversion since 9bfec9c: COPY --from takes no variable, so the gated-stage choice moves to a FROM"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W703
+2026-10-23T01:03:50Z  status W865 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T01:04:54Z  interrupt W866 minted    -         "The commit gate solves the Containerfile in both TESTS modes when it or build.yml changes, so an unparsable image build fails the commit, not CI"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f
+2026-10-23T01:06:05Z  status W866 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
