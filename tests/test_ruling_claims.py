@@ -72,3 +72,23 @@ def test_a_card_that_claims_nothing_is_left_alone() -> None:
     """Prose without a claim phrase draws nothing."""
     assert not claims_ruling({"status": "ready", "evidence": "measured 12 s"})
     assert claims_ruling({"status": "blocked", "title": "Per the operator: decide"})
+
+
+def test_a_ruling_cited_by_transcript_line_is_claimed_whatever_its_phrasing() -> None:
+    """Estate's W3 wording has no claim phrase yet cites the record; a warrant or done clears it."""
+    estate: dict[str, object] = {
+        "status": "blocked",
+        "evidence": (
+            "operator warrant for W3 verified (host 695f3e0a line 89984, uuid f6a6e6af-1)"
+        ),
+    }
+    warranted: dict[str, object] = {**estate, "warrants": [WARRANT]}
+    landed: dict[str, object] = {**estate, "status": "done"}
+    calendar: dict[str, object] = {
+        "status": "ready",
+        "evidence": "calendar event uuid 9c1 is on line 3 of the export",
+    }
+    assert claims_ruling(estate)
+    assert not claims_ruling(warranted)
+    assert not claims_ruling(landed)
+    assert not claims_ruling(calendar)

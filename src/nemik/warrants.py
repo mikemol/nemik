@@ -40,6 +40,23 @@ def ruling_words(text: str | None = None) -> list[str]:
 WORDS = ruling_words()
 
 
+def cites_transcript(prose: str) -> bool:
+    """Say whether lowercase prose cites an operator utterance by transcript line and uuid.
+
+    Estate writes `operator warrant for W3 verified (host 695f3e0a line 89984, uuid f6a6e6af...)`:
+    no claim phrase from the declared list, yet a ruling cited by its record, which belongs in a
+    `warrants` list (nemik:W896).
+
+    Args:
+        prose: A card's title, evidence and next step, lowercased.
+
+    Returns:
+        True when the prose names the operator, a `line` and a `uuid`.
+
+    """
+    return "operator" in prose and "line " in prose and "uuid" in prose
+
+
 def claims_ruling(
     waypoint: Mapping[str, object], words: list[str] | None = None
 ) -> bool:
@@ -59,6 +76,8 @@ def claims_ruling(
     prose = " ".join(
         str(waypoint.get(key, "")) for key in ("title", "evidence", "next_bounded_step")
     ).lower()
+    if cites_transcript(prose):
+        return True
     return any(word in prose for word in (WORDS if words is None else words))
 
 
