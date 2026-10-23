@@ -3,6 +3,7 @@
 """nemik:W713: the plain-edge downstream weight equals the rdflib one on a fixture fleet."""
 
 import json
+from fractions import Fraction
 from importlib.resources import files
 from pathlib import Path
 
@@ -10,13 +11,16 @@ import pytest
 from rdflib import Graph
 
 from nemik.adapter import NEMIK, OSLC_CM, queue_graph
-from nemik.cardrank import cone, downstream_weight, parse_weights, unknowns
+from nemik.cardrank import cone, downstream_weight, grounded, parse_weights, unknowns
+from nemik.flow import solve
 from nemik.rank import Weights, load_weights, ref_of, successors
 from nemik.rank import downstream_weight as graph_weight
 
 LOCAL, PEER, PEER_BLOCKED = 5, 3, 2
 CYCLE_LEN = 2
 WEIGHTS = Weights(local=LOCAL, peer=PEER, peer_blocked=PEER_BLOCKED, operator=0)
+TOLERANCE = 1e-9
+CHAIN_RESISTANCE = 2.0
 
 
 def _card(
@@ -80,6 +84,23 @@ def _fleet(root: Path) -> Graph:
         path.write_text(json.dumps(body))
         merged += queue_graph(repo, path, known)
     return merged
+
+
+def _edges(
+    needs: dict[str, list[str]], front: set[str], nodes: list[str]
+) -> list[tuple[str, str, float]]:
+    """List a cone's dependencies as unit-conductance edges, as flow.solve builds them.
+
+    Args:
+        needs: card -> the cards it waits on.
+        front: The ready cards.
+        nodes: The cone's cards.
+
+    Returns:
+        (card, prerequisite, 1.0) for each dependency of a card that is not ready.
+
+    """
+    return [(u, p, 1.0) for u in nodes if u not in front for p in needs.get(u, [])]
 
 
 def test_every_card_weighs_the_same_both_ways(tmp_path: Path) -> None:
@@ -154,3 +175,35 @@ def test_a_card_nothing_needs_has_a_cone_of_itself() -> None:
     """A source with no prerequisites is its own cone, and with no front every card is unknown."""
     assert cone({}, set(), "a") == ["a"]
     assert unknowns(["a", "b"], set()) == ["a", "b"]
+
+
+def test_a_chain_has_the_series_resistance_and_all_the_demand_arrives() -> None:
+    """A chain a-b-d (d ready): unit edges in series, 2 at the source, all of 1 into d."""
+    needs = {"a": ["b"], "b": ["d"], "d": []}
+    front = {"d"}
+    nodes = cone(needs, front, "a")
+    into, potential = grounded(_edges(needs, front, nodes), front, nodes, "a", 1.0)
+    assert abs(potential["a"] - CHAIN_RESISTANCE) < TOLERANCE
+    assert abs(into["d"] - 1.0) < TOLERANCE
+
+
+def test_the_float_solve_matches_the_exact_one_on_a_shared_prerequisite() -> None:
+    """Branches sharing a prerequisite compete for it; floats agree with flow.solve."""
+    needs = {"a": ["b", "c"], "b": ["d", "e"], "c": ["e"], "d": [], "e": []}
+    front = {"d", "e"}
+    nodes = cone(needs, front, "a")
+    into, potential = grounded(_edges(needs, front, nodes), front, nodes, "a", 1.0)
+    exact = solve({"a": Fraction(1)}, needs, front)
+    for card in sorted(front):
+        want = float(exact.fibre.get(card, {}).get("a", Fraction(0)))
+        assert abs(into.get(card, 0.0) - want) < TOLERANCE
+    assert abs(potential["a"] - float(exact.potential["a"])) < TOLERANCE
+    assert abs(sum(into.values()) - 1.0) < TOLERANCE
+
+
+def test_a_component_with_no_ground_raises() -> None:
+    """Without a ready card in the cone no pivot can be non-zero at the end."""
+    needs = {"a": ["b"], "b": []}
+    nodes = cone(needs, set(), "a")
+    with pytest.raises(ZeroDivisionError):
+        grounded(_edges(needs, set(), nodes), set(), nodes, "a", 1.0)
