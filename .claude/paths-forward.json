@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 867,
+  "counter": 869,
   "waypoints": [
     {
       "symbol": "W1",
@@ -10294,7 +10294,7 @@
         "file:src/nemik/withheld.py!w"
       ],
       "blocked_on": [
-        "mtools:W1835"
+        "mtools:W1838"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "mtools-ad names the card for writer-side emission of each repo's version-2 export; then ask luthen to retire the v1 withheld list once the repos emit, keeping the pod fail-closed (no export, nothing published)",
@@ -10302,7 +10302,7 @@
       "issued_at": "2026-10-15T12:08:11Z",
       "minted_during": "tick",
       "caused_by": "operator",
-      "last_worked": "2026-10-23T02:25:15Z",
+      "last_worked": "2026-10-23T03:14:02Z",
       "ticks_blocked": 0,
       "weight": 11,
       "manifest": [
@@ -15158,7 +15158,7 @@
     {
       "symbol": "W713",
       "title": "Port the rank successor walk and class weights to plain Card edges, keeping the rdflib version as the test reference",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W508"
       ],
@@ -15166,14 +15166,17 @@
         "file:src/nemik/cardrank.py!w",
         "file:tests/test_cardrank.py!w"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W868",
+        "W869"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Part 1 landed c212ebe. Part 2: the class weights loader (rank.load_weights) and the salience step over Card edges in cardrank.py, tests running them against rank and salience on the fixture fleet",
       "evidence": "2026-10-19: part 1 landed c212ebe (git log -1 subject W713 part 1)",
       "issued_at": "2026-10-19T02:22:47Z",
       "minted_during": "interrupt",
       "caused_by": "W508",
-      "last_worked": "2026-10-19T06:13:28Z",
+      "last_worked": "2026-10-23T03:04:51Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/cardrank.py",
@@ -19362,6 +19365,53 @@
       "witness": "input.promql[\"count(kube_pod_container_info{namespace=\\\"nemik\\\",container=\\\"server\\\",image!~\\\".*-2553320a.*\\\"})\"].values[0] > 0",
       "witness_lang": "rego",
       "completed": "20261023T015525Z"
+    },
+    {
+      "symbol": "W868",
+      "title": "Port rank.load_weights to cardrank over plain Card edges, tested against rank on the fixture fleet",
+      "status": "working",
+      "enables": [
+        "W869"
+      ],
+      "touches": [
+        "file:src/nemik/cardrank.py!w",
+        "file:tests/test_cardrank.py!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Run the new tests against the rebuilt venv, then submit the prepared stack: the weights parser over plain strings, held equal to the TOML reader",
+      "evidence": "",
+      "issued_at": "2026-10-23T03:04:51Z",
+      "minted_during": "interrupt",
+      "caused_by": "W713",
+      "last_worked": "2026-10-23T03:14:03Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/cardrank.py",
+        "tests/test_cardrank.py"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W869",
+      "title": "Port the salience step to cardrank over plain Card edges, tested against rank's salience on the fixture fleet",
+      "status": "blocked",
+      "enables": [
+        "W713"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "W868"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-23T03:04:51Z",
+      "minted_during": "interrupt",
+      "caused_by": "W713",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -19475,7 +19525,26 @@
   "heartbeat": "2026-10-22T02:06:35Z",
   "lock": null,
   "predecessor_job_id": "disarmed",
-  "leases": [],
+  "leases": [
+    {
+      "tag": "file:src/nemik/cardrank.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W868",
+      "base_sha": "61e6c6d0006a3cc678b8d0ac5b0dc372d86e17a2",
+      "taken_at": "2026-10-23T03:05:02Z",
+      "renewed_at": "2026-10-23T03:05:02Z",
+      "expires_at": "2026-10-23T03:35:02Z"
+    },
+    {
+      "tag": "file:tests/test_cardrank.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W868",
+      "base_sha": "61e6c6d0006a3cc678b8d0ac5b0dc372d86e17a2",
+      "taken_at": "2026-10-23T03:05:02Z",
+      "renewed_at": "2026-10-23T03:05:02Z",
+      "expires_at": "2026-10-23T03:35:02Z"
+    }
+  ],
   "advice": [
     {
       "tool": "block-behind-open",

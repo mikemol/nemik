@@ -1632,3 +1632,7 @@
 2026-10-23T02:23:42Z  status W516 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T02:26:47Z  status W866 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T03:02:28Z  status W866 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T03:04:51Z  interrupt W868 minted    -         "Port rank.load_weights to cardrank over plain Card edges, tested against rank on the fixture fleet"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W713
+2026-10-23T03:04:51Z  interrupt W869 minted    -         "Port the salience step to cardrank over plain Card edges, tested against rank's salience on the fixture fleet"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W713
+2026-10-23T03:05:02Z  status W868 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T03:05:04Z  status W869 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
