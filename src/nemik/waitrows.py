@@ -17,11 +17,13 @@ from nemik.waitseries import Row
 
 # (waiting repo, blocking repo, ticks blocked, the blocker's rank position; 0 when it is not ranked)
 Edge = tuple[str, str, int, int]
+# (waiting repo, blocking repo, ticks blocked, the waiting card's cite, the blocker's cite)
+Oldest = tuple[str, str, int, str, str]
 UNRANKED = 0
 
 
-def _cross_repo(g: Graph) -> list[tuple[str, str, int, str]]:
-    """Read a graph's cross-repo wait edges, each with the cite of the card it waits on.
+def _cross_repo(g: Graph) -> list[tuple[str, str, int, str, str]]:
+    """Read a graph's cross-repo wait edges, each with the cites of both cards.
 
     An edge counts when its waiter is blocked, its target is a card (not a workstream or the
     operator, which have no state) and the two cards are in different repos. A card that waits on
@@ -31,22 +33,24 @@ def _cross_repo(g: Graph) -> list[tuple[str, str, int, str]]:
         g: The merged queue graph.
 
     Returns:
-        (waiting repo, blocking repo, ticks blocked, blocker's `repo:W<n>`), in no order.
+        (waiting repo, blocking repo, ticks blocked, blocker's `repo:W<n>`, waiter's `repo:W<n>`),
+        in no order.
 
     """
-    out: list[tuple[str, str, int, str]] = []
+    out: list[tuple[str, str, int, str, str]] = []
     for waiter, _, target in g.triples((None, NEMIK.waitsFor, None)):
         if g.value(waiter, OSLC_CM.state) != NEMIK.Blocked:
             continue
         if g.value(target, OSLC_CM.state) is None:
             continue
-        waiting = ref_of(waiter).partition(":")[0]
+        waiting_cite = ref_of(waiter)
+        waiting = waiting_cite.partition(":")[0]
         cite = ref_of(target)
         blocking = cite.partition(":")[0]
         if waiting == blocking:
             continue
         ticks = int(str(g.value(waiter, NEMIK.ticksBlocked) or 0))
-        out.append((waiting, blocking, ticks, cite))
+        out.append((waiting, blocking, ticks, cite, waiting_cite))
     return out
 
 
@@ -61,7 +65,7 @@ def wait_rows(g: Graph) -> list[Row]:
 
     """
     return [
-        (waiting, blocking, ticks) for waiting, blocking, ticks, _ in _cross_repo(g)
+        (waiting, blocking, ticks) for waiting, blocking, ticks, _, _ in _cross_repo(g)
     ]
 
 
@@ -99,5 +103,28 @@ def wait_edges(g: Graph, weights: Weights) -> list[Edge]:
     place = blocker_positions(g, weights)
     return [
         (waiting, blocking, ticks, place.get(cite, UNRANKED))
-        for waiting, blocking, ticks, cite in _cross_repo(g)
+        for waiting, blocking, ticks, cite, _ in _cross_repo(g)
     ]
+
+
+def oldest_waits(g: Graph) -> list[Oldest]:
+    """Name, per pair of repos, the card that has waited longest and the card it waits on.
+
+    Card symbols are for log records only; a metric label never carries one (nemik:W886).
+
+    Args:
+        g: The merged queue graph.
+
+    Returns:
+        One (waiting repo, blocking repo, ticks blocked, waiting cite, blocker cite) per pair, the
+        longest wait of that pair, ties to the smaller cites; ordered by the pair.
+
+    """
+    best: dict[tuple[str, str], Oldest] = {}
+    for waiting, blocking, ticks, cite, waiting_cite in _cross_repo(g):
+        pair = (waiting, blocking)
+        row = (waiting, blocking, ticks, waiting_cite, cite)
+        have = best.get(pair)
+        if have is None or (-ticks, waiting_cite, cite) < (-have[2], have[3], have[4]):
+            best[pair] = row
+    return [best[pair] for pair in sorted(best)]

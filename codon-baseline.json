@@ -347,6 +347,10 @@
   "as_written": "no module named 'argparse'",
   "stripped": "no module named 'argparse'"
  },
+ "waitlog": {
+  "as_written": "cannot import name 'TYPE_CHECKING' from 'typing'",
+  "stripped": "cannot import name 'TYPE_CHECKING' from 'typing'"
+ },
  "waitrows": {
   "as_written": "no module named 'rdflib'",
   "stripped": "no module named 'rdflib'"

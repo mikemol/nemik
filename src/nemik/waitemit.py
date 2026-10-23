@@ -7,8 +7,9 @@ reads the merged queue graph the way nemik-rank does, groups the cross-repo wait
 of repos (waitseries), and sends three gauges per pair through mikemol.otlp to the metrics store
 luthen names `vmsingle-http`: the oldest wait in loop ticks, how many cards wait, and the best
 rank position among the blockers (0 when none is a ready leaf). The labels are the two repos
-only; a card symbol is never a label. It runs on the host (`python -m nemik.waitemit`), since the
-pod has neither the queues of the other repos nor luthen's endpoints file.
+only; a card symbol is never a label, and the cards go in log records (waitlog, nemik:W886). It
+runs on the host (`python -m nemik.waitemit`), since the pod has neither the queues of the other
+repos nor luthen's endpoints file.
 """
 
 import argparse
@@ -23,9 +24,10 @@ from mikemol.otlp.metrics import Resource, Sample, gauges, resource_here
 from mikemol.otlp.sender import METRICS_PATH, Post, SendError, post, send
 from rdflib import Graph
 
+from nemik import waitlog
 from nemik.check import survey
 from nemik.rank import load_weights
-from nemik.waitrows import UNRANKED, Edge, wait_edges
+from nemik.waitrows import UNRANKED, Edge, oldest_waits, wait_edges
 from nemik.waitseries import samples
 
 if TYPE_CHECKING:
@@ -131,10 +133,10 @@ def emit(
 
 
 def main(argv: list[str] | None = None) -> int:
-    """Survey the fleet's queues and emit the wait series.
+    """Survey the fleet's queues and emit the wait series and its log records.
 
     Returns:
-        0 when sent or when nothing waits; 1 when the endpoint was unnamed or the send failed.
+        0 when both were sent or nothing waits; 1 when an endpoint was unnamed or a send failed.
 
     """
     parser = argparse.ArgumentParser(
@@ -146,10 +148,13 @@ def main(argv: list[str] | None = None) -> int:
     for _, queue_graph, _ in survey(options.root):
         if queue_graph is not None:
             g += queue_graph
-    sent = emit(wait_edges(g, load_weights()), time.time_ns(), dict(os.environ))
-    if sent < 0:
+    now = time.time_ns()
+    environ = dict(os.environ)
+    sent = emit(wait_edges(g, load_weights()), now, environ)
+    logged = waitlog.emit(oldest_waits(g), now, environ)
+    if sent < 0 or logged < 0:
         return 1
-    sys.stdout.write(f"nemik-waitemit: {sent} samples\n")
+    sys.stdout.write(f"nemik-waitemit: {sent} samples, {logged} log records\n")
     return 0
 
 
