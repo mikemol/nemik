@@ -1636,3 +1636,11 @@
 2026-10-23T03:04:51Z  interrupt W869 minted    -         "Port the salience step to cardrank over plain Card edges, tested against rank's salience on the fixture fleet"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W713
 2026-10-23T03:05:02Z  status W868 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T03:05:04Z  status W869 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T03:46:39Z  status W868 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T03:46:39Z  status W869 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T03:46:53Z  interrupt W870 minted    -         "Port flow's cone and grounded-node selection to cardrank over plain card edges, tested against flow on the fixture fleet"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W869
+2026-10-23T03:46:53Z  interrupt W871 minted    -         "Port flow's per-source current-flow solve to cardrank without Fraction or dataclasses, so the Codon census compiles it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W869
+2026-10-23T03:46:53Z  interrupt W872 minted    -         "Port the salience sum to cardrank and hold it equal to flow.solve on the fixture fleet"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W869
+2026-10-23T03:47:00Z  status W870 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T03:47:04Z  status W871 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T03:47:04Z  status W872 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

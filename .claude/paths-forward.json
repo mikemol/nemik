@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 869,
+  "counter": 872,
   "waypoints": [
     {
       "symbol": "W1",
@@ -15167,7 +15167,6 @@
         "file:tests/test_cardrank.py!w"
       ],
       "blocked_on": [
-        "W868",
         "W869"
       ],
       "blocked_kind": "agent",
@@ -19369,7 +19368,7 @@
     {
       "symbol": "W868",
       "title": "Port rank.load_weights to cardrank over plain Card edges, tested against rank on the fixture fleet",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W869"
       ],
@@ -19379,14 +19378,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Run the new tests against the rebuilt venv, then submit the prepared stack: the weights parser over plain strings, held equal to the TOML reader",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: commit 004c0c7; cardrank.parse_weights over plain strings equals rank.load_weights on the packaged file, compiles under the pinned Codon, tests/test_cardrank.py",
       "issued_at": "2026-10-23T03:04:51Z",
       "minted_during": "interrupt",
       "caused_by": "W713",
-      "last_worked": "2026-10-23T03:14:03Z",
+      "last_worked": "2026-10-23T03:46:39Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261023T034639Z",
       "manifest": [
         "src/nemik/cardrank.py",
         "tests/test_cardrank.py"
@@ -19402,7 +19401,9 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W868"
+        "W870",
+        "W871",
+        "W872"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "",
@@ -19410,8 +19411,86 @@
       "issued_at": "2026-10-23T03:04:51Z",
       "minted_during": "interrupt",
       "caused_by": "W713",
+      "last_worked": "2026-10-23T03:46:53Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W870",
+      "title": "Port flow's cone and grounded-node selection to cardrank over plain card edges, tested against flow on the fixture fleet",
+      "status": "working",
+      "enables": [
+        "W871"
+      ],
+      "touches": [
+        "file:src/nemik/cardrank.py!w",
+        "file:tests/test_cardrank.py!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Read flow._cone and flow._grounded, then write the same selection in cardrank over a successor mapping and sets of strings, and test it against flow on the fixture fleet",
+      "evidence": "",
+      "issued_at": "2026-10-23T03:46:53Z",
+      "minted_during": "interrupt",
+      "caused_by": "W869",
+      "last_worked": "2026-10-23T03:47:00Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/cardrank.py",
+        "tests/test_cardrank.py"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W871",
+      "title": "Port flow's per-source current-flow solve to cardrank without Fraction or dataclasses, so the Codon census compiles it",
+      "status": "blocked",
+      "enables": [
+        "W872"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "W870"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-23T03:46:53Z",
+      "minted_during": "interrupt",
+      "caused_by": "W869",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/cardrank.py",
+        "tests/test_cardrank.py"
+      ],
+      "size_class": "medium"
+    },
+    {
+      "symbol": "W872",
+      "title": "Port the salience sum to cardrank and hold it equal to flow.solve on the fixture fleet",
+      "status": "blocked",
+      "enables": [
+        "W869"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "W871"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-23T03:46:53Z",
+      "minted_during": "interrupt",
+      "caused_by": "W869",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/cardrank.py",
+        "tests/test_cardrank.py"
+      ],
+      "size_class": "small"
     }
   ],
   "residue": [
@@ -19529,20 +19608,20 @@
     {
       "tag": "file:src/nemik/cardrank.py!w",
       "holder": "(unlocked)",
-      "waypoint": "W868",
-      "base_sha": "61e6c6d0006a3cc678b8d0ac5b0dc372d86e17a2",
-      "taken_at": "2026-10-23T03:05:02Z",
-      "renewed_at": "2026-10-23T03:05:02Z",
-      "expires_at": "2026-10-23T03:35:02Z"
+      "waypoint": "W870",
+      "base_sha": "004c0c72a75f9f59a7d91ac6049c5c5b63e557e9",
+      "taken_at": "2026-10-23T03:47:00Z",
+      "renewed_at": "2026-10-23T03:47:00Z",
+      "expires_at": "2026-10-23T04:17:00Z"
     },
     {
       "tag": "file:tests/test_cardrank.py!w",
       "holder": "(unlocked)",
-      "waypoint": "W868",
-      "base_sha": "61e6c6d0006a3cc678b8d0ac5b0dc372d86e17a2",
-      "taken_at": "2026-10-23T03:05:02Z",
-      "renewed_at": "2026-10-23T03:05:02Z",
-      "expires_at": "2026-10-23T03:35:02Z"
+      "waypoint": "W870",
+      "base_sha": "004c0c72a75f9f59a7d91ac6049c5c5b63e557e9",
+      "taken_at": "2026-10-23T03:47:00Z",
+      "renewed_at": "2026-10-23T03:47:00Z",
+      "expires_at": "2026-10-23T04:17:00Z"
     }
   ],
   "advice": [
