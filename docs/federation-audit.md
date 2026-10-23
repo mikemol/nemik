@@ -13,9 +13,11 @@ model"; this reads it. `docs/federation-channels.md` (W917) is the inventory of 
 
 Both were read through a fetch tool that answers a question against the page with a small model, so
 the section numbers and quotations below are that tool's reading, not mine of the text. ForgeFed's
-page is 522,819 characters and I read the first 200,000. **Not read:** §6.9 (the full `Ticket`
-property list) and §8.2.7 (ticket dependencies, the vocabulary side); the later sections after 3.15.
-W921 reads them directly. What follows is marked where it rests on a part not read.
+page is 522,819 characters and I read the first 200,000. **The vocabulary half was then read
+directly** (W921, 2026-10-23), from the spec's own source, `spec.bs` on Codeberg
+(ForgeFed/ForgeFed, branch `main`, 508,054 bytes, last commit 2025-08-21, 192fa564): the fetch tool's
+later chunks never reached it. The definitions below marked **(source)** are from that file. Still
+not read: the behaviour sections for the actors other than TicketTracker's dependency handling.
 
 ## What the standards say that bears on nemik
 
@@ -42,6 +44,16 @@ ForgeFed:
   is the property `isResolved` (with `resolvedBy` and `resolved`), not an activity.
 - A `Ticket` offered for opening needs `summary`, `attributedTo`, and `content`; `context`, if given,
   must equal the Offer's target (§3.7.1).
+- **The vocabulary** **(source)**. `Ticket` extends ActivityStreams `Object`: "an item that requires
+  work or attention ... in the context of a project". Its own properties: `assignedTo` and
+  `assignments`, `isResolved`, `resolvedBy` and `resolved` (also on `Milestone` and `ReviewThread`),
+  `ticketMilestone`, and four for dependencies: **`dependsOn`** (tickets this one cannot be resolved
+  without, not functional, inverse of **`dependedBy`**) and the collections **`dependencies`** and
+  **`dependants`** (each a functional `Collection` of `TicketDependency`; "often called reverse
+  dependencies"). `TicketDependency` extends `Relationship`: it MUST specify `subject`, `object` and
+  `relationship`, and `relationship` MUST be `dependsOn`; the spec's example is an object with an `id`,
+  `attributedTo`, `summary` and `published`. The spec's own JSON-LD examples for `dependsOn`,
+  `dependedBy`, `dependencies` and `dependants` are still "TODO".
 - **Dependencies** (§3.9, §3.9.1): the author of a dependency, with triage access to the parent
   tracker P, sends an `Offer` to both P and the child tracker C, with target P and as its object a
   `TicketDependency` (subject: the parent ticket, relationship `dependsOn`, object: the child ticket),
@@ -74,15 +86,17 @@ structure, and the outbox could carry it.
 1. Say a card's state as `isResolved` and `context` on the `Ticket`, not as a verb. Keep the verbs
    for events: a real `Resolve` when a card is closed (an edge letter, W889, is one), an `Offer` when
    a card is minted.
-2. Carry each `blocked_on` as an `Offer` of a `TicketDependency` in the outbox, and each `enables` as
-   the matching dependants entry, so the outbox says what the letters and the queue say. This part
-   rests on §3.9 only; §8.2.7 (the vocabulary) is not read.
+2. Carry the edges, the lighter way first. A read-only outbox runs no tracker handshake, so the
+   `Ticket` object can say it itself with the vocabulary's `dependsOn` (for `blocked_on`) and
+   `dependedBy` (for `enables`), each a list of ticket identifiers, with no `Offer` needed; a real
+   `Offer` of a `TicketDependency` (subject, `dependsOn`, object, to both trackers, then the parent's
+   `Accept`) is the form for a delivered edge, and delivery is the operator's. Checked against the
+   source now: both forms are defined and consistent with §3.9.1.
 3. Type the actors: a `TicketTracker` per repo's queue, with an http(s) IRI. That needs a base URL.
 4. Leave delivery alone: a POST to an inbox crosses the operator's boundary.
 5. The log as a channel (W919, in `federation-channels.md`) uses the activity form drafted there.
 
 ## What this does not settle
 
-ForgeFed's `Ticket` full property list and the dependency vocabulary were not read, so point 2 is
-unchecked against them. Whether ForgeFed's capability `Grant` has any counterpart in a read-only
+The first version of this document had not read ForgeFed's vocabulary; it has now (W921). Whether ForgeFed's capability `Grant` has any counterpart in a read-only
 outbox was not looked at. And the standard is a draft: the verbs above can change.
