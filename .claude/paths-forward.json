@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 876,
+  "counter": 882,
   "waypoints": [
     {
       "symbol": "W1",
@@ -10287,19 +10287,24 @@
     {
       "symbol": "W516",
       "title": "Withholding semantics live in the owning repos: each repo exports only publishable data and the nemik pod mounts only that export",
-      "status": "ready",
+      "status": "blocked",
       "enables": [],
       "touches": [
         "file:src/nemik/withheld.py!w"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "After W874 (nemik's writer pinned at or after mtools 5ba261f and opted in): ask the other repos to repin and run --export once, then ask luthen to retire the v1 withheld list, keeping the pod fail-closed (no export, nothing published)",
-      "evidence": "2026-10-15: 2026-10-15: nemik's README Hosting section already states the intended boundary: mount only the flat queue export read-only at /export, not a whole source tree. W516 makes that export the repos' own product (their policy decides what is in it), which matches the operator's ruling that the pod should not see data that must not pass. | 2026-10-16: 2026-10-16 host ruling (github-8f): part of the client-path chain that is the next design work after the open gate items; withholding at the source is what lets the builder's merged files go. | 2026-10-17: 2026-10-17: atomized into W634 (reader), W635 (compat producer), W636 (pod mounts). Writer-side emission (mtools) and retiring luthen's v1 list are asks to mint when W634 lands. Design: docs/withholding-at-source.md | 2026-10-17: design doc landed b342a21, pushed (docs/withholding-at-source.md). Children W634 (part 1 93e92d5), W635, W636 open | 2026-10-18: status doc updated 3327f72 (pushed). Children: W634 done, W635 done, W636 blocked on luthen W1283 (stale withheld list), W647 held; writer-side emission by repos and retiring luthen's v1 list still to ask | 2026-10-19: 2026-10-19: W636 enables W516 and is blocked on luthen W1283; W516's own remaining work (asking the repos for writer-side emission, retiring luthen's v1 list) waits on W636 landing, so W516 is blocked on it, not ready | 2026-10-23: 2026-10-23: W634, W635, W636 are done (W636 rolled and read back by luthen-observability W1291); what remains is writer-side emission by the repos (an mtools writer feature) and retiring luthen's v1 list; asked mtools-ad for the card | 2026-10-23: 2026-10-23 mtools-ad: writer-side emission minted as mtools:W1835 (export.json version 2: repo, as_of, cards whole, withheld refs only; atomized: policy source as a per-card withheld flag defaulting to publish, a pure builder, a --export mode writing atomically beside the state file, a leak check with a planted-withheld-card test). Answered: luthen's v1 list withholds no mtools card today, so the default-publish flag reproduces it; evidence and warrants travel whole, a card is withheld whole or not at all | 2026-10-23: 2026-10-23 mtools-ad: mtools:W1836 (per-card withheld flag, a4c0e8e) and W1837 (pure export builder, 585bc75) landed; W1838 (--export mode, <state>.export.json) is gating. Answered their three questions from the reader: it reads exports/<repo>.json from one directory, residue symbols belong in cards, as_of must come from the state so an unchanged queue writes a byte-identical file (the pod rebuilds on export mtime, W636). The gather step is nemik:W873, blocked on mtools:W1838 | 2026-10-23: 2026-10-23: mtools:W1838 (the --export mode) landed; its output is not consumed until mtools:W1840 (state-derived as_of, residue in cards) lands, so the step that unblocks W516 is nemik:W873, the gather, blocked on W1840 | 2026-10-23: 2026-10-23: W873 landed (d97f4cb): nemik-exports uses a repo's own export when trusted; what remains is every repo's writer emitting one (nemik's: W874), then retiring luthen's v1 list",
+      "blocked_on": [
+        "W877",
+        "W879",
+        "W880",
+        "W881"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Each repo repins, flags its listed cards, runs --export once and tells nemik (W877 gabion, W878 estate, W879 el-openglo, W880 linux-sources, W881 substrate; mtools-ad for mtools); when all have an equal withheld set, tell luthen-observability, which retires its v1 list on that word, keeping the pod fail-closed",
+      "evidence": "2026-10-15: 2026-10-15: nemik's README Hosting section already states the intended boundary: mount only the flat queue export read-only at /export, not a whole source tree. W516 makes that export the repos' own product (their policy decides what is in it), which matches the operator's ruling that the pod should not see data that must not pass. | 2026-10-16: 2026-10-16 host ruling (github-8f): part of the client-path chain that is the next design work after the open gate items; withholding at the source is what lets the builder's merged files go. | 2026-10-17: 2026-10-17: atomized into W634 (reader), W635 (compat producer), W636 (pod mounts). Writer-side emission (mtools) and retiring luthen's v1 list are asks to mint when W634 lands. Design: docs/withholding-at-source.md | 2026-10-17: design doc landed b342a21, pushed (docs/withholding-at-source.md). Children W634 (part 1 93e92d5), W635, W636 open | 2026-10-18: status doc updated 3327f72 (pushed). Children: W634 done, W635 done, W636 blocked on luthen W1283 (stale withheld list), W647 held; writer-side emission by repos and retiring luthen's v1 list still to ask | 2026-10-19: 2026-10-19: W636 enables W516 and is blocked on luthen W1283; W516's own remaining work (asking the repos for writer-side emission, retiring luthen's v1 list) waits on W636 landing, so W516 is blocked on it, not ready | 2026-10-23: 2026-10-23: W634, W635, W636 are done (W636 rolled and read back by luthen-observability W1291); what remains is writer-side emission by the repos (an mtools writer feature) and retiring luthen's v1 list; asked mtools-ad for the card | 2026-10-23: 2026-10-23 mtools-ad: writer-side emission minted as mtools:W1835 (export.json version 2: repo, as_of, cards whole, withheld refs only; atomized: policy source as a per-card withheld flag defaulting to publish, a pure builder, a --export mode writing atomically beside the state file, a leak check with a planted-withheld-card test). Answered: luthen's v1 list withholds no mtools card today, so the default-publish flag reproduces it; evidence and warrants travel whole, a card is withheld whole or not at all | 2026-10-23: 2026-10-23 mtools-ad: mtools:W1836 (per-card withheld flag, a4c0e8e) and W1837 (pure export builder, 585bc75) landed; W1838 (--export mode, <state>.export.json) is gating. Answered their three questions from the reader: it reads exports/<repo>.json from one directory, residue symbols belong in cards, as_of must come from the state so an unchanged queue writes a byte-identical file (the pod rebuilds on export mtime, W636). The gather step is nemik:W873, blocked on mtools:W1838 | 2026-10-23: 2026-10-23: mtools:W1838 (the --export mode) landed; its output is not consumed until mtools:W1840 (state-derived as_of, residue in cards) lands, so the step that unblocks W516 is nemik:W873, the gather, blocked on W1840 | 2026-10-23: 2026-10-23: W873 landed (d97f4cb): nemik-exports uses a repo's own export when trusted; what remains is every repo's writer emitting one (nemik's: W874), then retiring luthen's v1 list | 2026-10-23: 2026-10-23: nemik opted in with the repinned writer's --export (876 cards, 0 withheld at first): luthen's v1 list withholds nemik:W572 (evidence, address literal), so I flagged it (--update W572 --withheld true) and re-exported: 875 cards, 1 withheld, equal to the v1 list for nemik. The same equality is owed by every repo before the v1 list can be retired: el-openglo:W77, estate:W5, gabion:W12, linux-sources W141 W341 W343 W379 and substrate:W14 must each be flagged by its owner when it repins and runs --export. The host export tree luthen builds carries only the queue and ledger per repo, so it must also carry paths-forward.export.json for the gather (W873) to see it | 2026-10-23: 2026-10-23 luthen-observability-ab: luthen-observability:W1533 landing: checks/nemik_export.py copies <repo>/.claude/paths-forward.export.json into the host export tree beside the state and ledger whenever the repo has one, and removes a stale copy when the repo stops having it; the v1 list stays until nemik says every repo has opted in with an equal withheld set. Filed the opt-in asks as summit-floor entries nemik:W877 to W881, and asked mtools-ad directly | 2026-10-23: 2026-10-23 mtools-ad: mtools opted in: --export wrote mtools' .claude/paths-forward.export.json (1854 cards, 0 withheld, equal to the v1 list for mtools, which is empty); verified on disk: repo mtools, empty withheld list. mtools' writer is at 5ba261f or later so every state write refreshes it. The file is untracked in mtools' git (read from disk). Opted in so far: nemik (875 cards, 1 withheld: W572) and mtools; owed: gabion, estate, el-openglo, linux-sources, substrate (W877 to W881)",
       "issued_at": "2026-10-15T12:08:11Z",
       "minted_during": "tick",
       "caused_by": "operator",
-      "last_worked": "2026-10-23T06:06:30Z",
+      "last_worked": "2026-10-23T07:34:34Z",
       "ticks_blocked": 0,
       "weight": 11,
       "manifest": [
@@ -11626,7 +11631,8 @@
       "caused_by": "luthen-observability:W1108",
       "last_worked": "2026-10-16T10:53:14Z",
       "ticks_blocked": 0,
-      "completed": "20261016T105314Z"
+      "completed": "20261016T105314Z",
+      "withheld": true
     },
     {
       "symbol": "W573",
@@ -18471,7 +18477,6 @@
         "file:src/nemik/waitseries.py!w"
       ],
       "blocked_on": [
-        "W875",
         "W876"
       ],
       "blocked_kind": "agent",
@@ -19565,7 +19570,7 @@
     {
       "symbol": "W875",
       "title": "A new small rdflib module turns the graph's cross-repo wait edges and each waiting card's blocked ticks into waitseries rows",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W876"
       ],
@@ -19576,14 +19581,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "After the repin stack lands: rebuild the venv, run the new module's tests and the ratchet, then submit the prepared stack: wait_rows reads the graph's cross-repo wait edges as rows, held to the grouping slice 1 already does",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: commit 586639c; waitrows.wait_rows reads the graph's cross-repo wait edges as (waiting repo, blocking repo, ticks) rows with only rdflib's typed calls; tests/test_waitrows.py; census entry for the rdflib import",
       "issued_at": "2026-10-23T06:58:56Z",
       "minted_during": "interrupt",
       "caused_by": "W836",
-      "last_worked": "2026-10-23T07:09:43Z",
+      "last_worked": "2026-10-23T07:55:54Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261023T075554Z",
       "manifest": [
         "src/nemik/waitrows.py",
         "tests/test_waitrows.py",
@@ -19594,15 +19599,13 @@
     {
       "symbol": "W876",
       "title": "The blocker's rank position per wait edge, and the host-side mode that emits the rows through mikemol-otlp",
-      "status": "blocked",
+      "status": "ready",
       "enables": [
         "W836"
       ],
       "touches": [],
-      "blocked_on": [
-        "W875"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-23T06:58:56Z",
@@ -19616,6 +19619,115 @@
         "codon-baseline.json"
       ],
       "size_class": "medium"
+    },
+    {
+      "symbol": "W877",
+      "title": "Ask gabion: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward to mtools 5ba261f or",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "gabion"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-23T07:32:13Z",
+      "minted_during": "interrupt",
+      "caused_by": null,
+      "last_worked": "2026-10-23T07:32:14Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W878",
+      "title": "Ask estate: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward to mtools 5ba261f or",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: 2026-10-23 estate-dd claimed this as an estate card; answered their questions: repin every mikemol dist to mtools 5ba261faf5708395a2baeb38111a7d61943f91a4 or later (their 419aa2d3 is an ancestor of it), one sha across all specs including the MODULE.bazel pins, then flag estate:W5 withheld, run --export once and tell nemik | 2026-10-23: 2026-10-23 estate-dd: every mtools dist repinned together to 5ba261faf5708395a2baeb38111a7d61943f91a4 (estate e4d86db), estate:W5 flagged, --export run (21 cards, 1 withheld); verified on disk: the export names repo estate and withholds estate:W5. Note: the file sits in an untracked path in estate",
+      "issued_at": "2026-10-23T07:32:16Z",
+      "minted_during": "interrupt",
+      "caused_by": null,
+      "last_worked": "2026-10-23T07:42:40Z",
+      "ticks_blocked": 0,
+      "completed": "20261023T074240Z"
+    },
+    {
+      "symbol": "W879",
+      "title": "Ask el-openglo: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward to mtools 5ba261f or",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "el-openglo"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-23T07:32:18Z",
+      "minted_during": "interrupt",
+      "caused_by": null,
+      "last_worked": "2026-10-23T07:32:19Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W880",
+      "title": "Ask linux-sources: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward to mtools 5ba261f or",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "linux-sources"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-23T07:32:20Z",
+      "minted_during": "interrupt",
+      "caused_by": null,
+      "last_worked": "2026-10-23T07:32:21Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W881",
+      "title": "Ask substrate: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward to mtools 5ba261f or",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "substrate"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-23T07:32:23Z",
+      "minted_during": "interrupt",
+      "caused_by": null,
+      "last_worked": "2026-10-23T07:32:23Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W882",
+      "title": "nemik-inbound and its hook cut an ask's title at a fixed width, so a peer sees 'please r' and not the ask: show it whole or point to the entry",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Find where the inbound row cuts the title (blocks.inbound and the hook that prints it), then show the whole title, or a stable pointer to the full ask (the summit-floor entry or the filer's card), and test a long title end to end",
+      "evidence": "",
+      "issued_at": "2026-10-23T07:42:42Z",
+      "minted_during": "interrupt",
+      "caused_by": "estate:W878",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -19729,35 +19841,7 @@
   "heartbeat": "2026-10-22T02:06:35Z",
   "lock": null,
   "predecessor_job_id": "disarmed",
-  "leases": [
-    {
-      "tag": "file:src/nemik/waitrows.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W875",
-      "base_sha": "b9cfc0f9b629e629be8a1c36c55b5979641847f6",
-      "taken_at": "2026-10-23T06:59:02Z",
-      "renewed_at": "2026-10-23T06:59:02Z",
-      "expires_at": "2026-10-23T07:29:02Z"
-    },
-    {
-      "tag": "file:tests/test_waitrows.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W875",
-      "base_sha": "b9cfc0f9b629e629be8a1c36c55b5979641847f6",
-      "taken_at": "2026-10-23T06:59:02Z",
-      "renewed_at": "2026-10-23T06:59:02Z",
-      "expires_at": "2026-10-23T07:29:02Z"
-    },
-    {
-      "tag": "file:codon-baseline.json!w",
-      "holder": "(unlocked)",
-      "waypoint": "W875",
-      "base_sha": "b9cfc0f9b629e629be8a1c36c55b5979641847f6",
-      "taken_at": "2026-10-23T06:59:02Z",
-      "renewed_at": "2026-10-23T06:59:02Z",
-      "expires_at": "2026-10-23T07:29:02Z"
-    }
-  ],
+  "leases": [],
   "advice": [
     {
       "tool": "block-behind-open",

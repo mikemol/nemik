@@ -1678,3 +1678,18 @@
 2026-10-23T06:59:05Z  status W876 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T07:17:08Z  status W516 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T07:17:08Z  status W874 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T07:28:55Z  status W516 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T07:32:13Z  interrupt W877 minted    -         "Ask gabion: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward to mtools 5ba261f or"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T07:32:14Z  status W877 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T07:32:16Z  interrupt W878 minted    -         "Ask estate: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward to mtools 5ba261f or"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T07:32:16Z  status W878 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T07:32:18Z  interrupt W879 minted    -         "Ask el-openglo: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward to mtools 5ba261f or"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T07:32:19Z  status W879 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T07:32:20Z  interrupt W880 minted    -         "Ask linux-sources: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward to mtools 5ba261f or"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T07:32:21Z  status W880 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T07:32:23Z  interrupt W881 minted    -         "Ask substrate: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward to mtools 5ba261f or"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T07:32:23Z  status W881 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T07:42:40Z  status W878 blocked>done writer    "blocked -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T07:42:42Z  interrupt W882 minted    -         "nemik-inbound and its hook cut an ask's title at a fixed width, so a peer sees 'please r' and not the ask: show it whole or point to the entry"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=estate:W878
+2026-10-23T07:55:54Z  status W875 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T07:55:54Z  status W876 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
