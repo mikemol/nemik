@@ -13064,15 +13064,13 @@
     {
       "symbol": "W636",
       "title": "The pod mounts only per-repo exports, read-only, and nothing else from a repo",
-      "status": "blocked",
+      "status": "ready",
       "enables": [
         "W516"
       ],
       "touches": [],
-      "blocked_on": [
-        "luthen-observability:W1521"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "When the image rolls to a build containing 6e6dc0c, luthen-observability:W1291 reads it back; the roll waits on a healthy forgejo-runner (stuck terminating tonight) and one build from a stamped commit",
       "evidence": "2026-10-18: part 1 landed 589ab07 (pushed): nemik-serve --publish --exports DIR, exports_key rebuild, tests/test_publish_exports.py. Remaining: the pod's deployment passes --exports, only once an exports directory exists (nemik-exports, W635 part 2 in the gate); a pod given --exports with an empty directory publishes nothing | 2026-10-18: 2026-10-17 asked luthen-observability where withheld.json exists at pod build time (path in the export mount, or fetched), before touching deploy/ | 2026-10-18: 2026-10-17 luthen-observability: the withheld list is a HOST file ~/.local/share/luthen/nemik-export/withheld.json beside the queues in the export tree the pod mounts read-only (version 1, as_of, items {ref, field, rule}), not fetched. Written only by python -m checks.nemik_egress (step 1 of checks.nemik_publish); nothing runs it on a timer: the file is dated 2026-10-03 (as_of 2026-10-03T12:30:19Z, 17 items), 15 days old. A refusal exits 2 WITHOUT writing, so a stale file stays. DEFECT: a reader today publishes a card that became sensitive since. luthen fixes the producer first (their W1283: run nemik_egress as the last step of the minute export; a refusal removes the old file so a reader fails closed). Change nothing in deploy/ until they say the list is fresh every minute; then --withheld can be required | 2026-10-18: 2026-10-17 github-8f (relayed, not independently checked by me): luthen found no build was ever served (no schedule, no ingress, Firebase site 404) and none of the 4 newly withheld cards were in the one 2026-10-03 build; operator reportedly confirmed the Firebase site was never deployed. So nothing exposed. W636 and W647 proceed once luthen-observability:W1283 lands | 2026-10-18: luthen W1283 landed 123ad3d2 (list fresh every minute). Deploy change now waits only on W647 (the --withheld-max-age check, submitted); then: builder runs nemik-exports from the mounted withheld.json then publish --exports --withheld-max-age 900 | 2026-10-18: 2026-10-17 dry run of the builder's two commands on the real export tree into scratch: 15 exports, publish exit 0, 3 withheld stubs. Part 2 submitted: deploy change + exportcompat.write leaves unchanged files alone | 2026-10-18: part 2 landed 6e6dc0c (pushed, which is a deploy): the builder loop runs nemik-exports then nemik-serve --publish --exports /tmp/exports --withheld /export/withheld.json --withheld-max-age 900. NOT yet observed on the pod: the ship and the builder's first loops have not been read back | 2026-10-18: 2026-10-18 CORRECTION: I marked this done at the push, before the ship. luthen read the cluster: nemik deployment gen 249 on image tag 1792288619-3327f720bb7f... (3327f72 is W647's commit, so nothing newer has shipped; pods 125 and 131 minutes old); the running builder is the OLD loop (no --withheld). The push of 6e6dc0c (and 9e2263e, b819107 ... since 3327f72) has not rolled | 2026-10-18: CORRECTION of my previous note: 3327f72 is the W516 document commit (not W647). git log 3327f72..HEAD lists 12 unshipped commits after it, including CODE: 376a68a W461, f425151 W645, d59c873 W533, 0c44772 W648, b819107 W507, 5586836 W533, d730f18 W646, 3371725 W647, 9e2263e W531, c97c9ba W508, 8b8f2e8 W355, 6e6dc0c W636. So a failing image build could be in any of them, not only the last | 2026-10-19: 2026-10-19: the cycle with luthen-observability:W1291 (it reads W636 back after the roll) was this card blocked on the bare repo name. What W636 waits on is the ship: the image build has not produced an image since 3327f72 because the build is cancelled by supersession and its 41 min test stage cannot finish (luthen-observability findings 2026-10-18; timeout fix b598f28). That is nemik:W703 (image consumes the gate result, waiting on mtools:W1666). Re-pointed blocked_on at W703 | 2026-10-22: 2026-10-22: told luthen-observability why W1291 waits 49 ticks: W703 landed (9bfec9c) so a stamped commit skips the 41 min suite, but the forgejo-runner pod buildbuddy/forgejo-runner-6b44c5c87-btcmv is stuck terminating (runc 'function not implemented'), so no build runs; the roll waits on the runner | 2026-10-22: 2026-10-22: the open step of luthen-observability:W1291 that unblocks W636 is luthen-observability:W1521 (the reaper retires Terminating pods on a stale shim, forgejo-runner btcmv among them); W1292 waits on an operator choice about reading a run's log, W1516 on the reaper's host procedure; neither blocks the image build",
       "issued_at": "2026-10-17T17:50:58Z",
@@ -17482,7 +17480,6 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W861",
         "W862",
         "W863",
         "W864"
@@ -19187,6 +19184,64 @@
     {
       "symbol": "W861",
       "title": "Serve nemik-check --committed the way the command prints it, or exclude it by a stated reason",
+      "status": "done",
+      "enables": [
+        "W797"
+      ],
+      "touches": [
+        "file:src/nemik/parity.py!w",
+        "file:tests/test_parity.py!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: commit 1be5973; --committed moved from pending to excluded (runs git), pending ceiling three",
+      "issued_at": "2026-10-22T23:09:09Z",
+      "minted_during": "interrupt",
+      "caused_by": "W797",
+      "last_worked": "2026-10-23T00:24:50Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/parity.py",
+        "tests/test_parity.py"
+      ],
+      "size_class": "small",
+      "completed": "20261023T002450Z"
+    },
+    {
+      "symbol": "W862",
+      "title": "Serve nemik-check --letters the way the command prints it, or exclude it by a stated reason",
+      "status": "working",
+      "enables": [
+        "W797"
+      ],
+      "touches": [
+        "file:src/nemik/serve.py!w",
+        "file:checks/claims.py!w",
+        "file:tests/test_serve_no_spawn.py!w",
+        "file:tests/test_serve_check_letters.py!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Submit the prepared stack with W863: letters and fold served, parity rows routed",
+      "evidence": "",
+      "issued_at": "2026-10-22T23:09:09Z",
+      "minted_during": "interrupt",
+      "caused_by": "W797",
+      "last_worked": "2026-10-23T00:28:44Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/serve.py",
+        "checks/claims.py",
+        "tests/test_serve_no_spawn.py",
+        "tests/test_serve_check_letters.py"
+      ],
+      "size_class": "small",
+      "completed": null
+    },
+    {
+      "symbol": "W863",
+      "title": "Serve nemik-check --fold the way the command prints it, or exclude it by a stated reason",
       "status": "working",
       "enables": [
         "W797"
@@ -19197,12 +19252,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Submit the prepared stack: committed excluded by a stated reason, pending ceiling three",
+      "next_bounded_step": "Move the letters and fold rows from pending to routed in the parity table and lower the ceiling to one",
       "evidence": "",
       "issued_at": "2026-10-22T23:09:09Z",
       "minted_during": "interrupt",
       "caused_by": "W797",
-      "last_worked": "2026-10-22T23:50:39Z",
+      "last_worked": "2026-10-23T00:25:17Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/parity.py",
@@ -19210,56 +19265,6 @@
       ],
       "size_class": "small",
       "completed": null
-    },
-    {
-      "symbol": "W862",
-      "title": "Serve nemik-check --letters the way the command prints it, or exclude it by a stated reason",
-      "status": "ready",
-      "enables": [
-        "W797"
-      ],
-      "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
-      "issued_at": "2026-10-22T23:09:09Z",
-      "minted_during": "interrupt",
-      "caused_by": "W797",
-      "last_worked": null,
-      "ticks_blocked": 0,
-      "manifest": [
-        "src/nemik/serve.py",
-        "src/nemik/parity.py",
-        "tests/test_parity.py",
-        "tests/test_serve_check_letters.py"
-      ],
-      "size_class": "small"
-    },
-    {
-      "symbol": "W863",
-      "title": "Serve nemik-check --fold the way the command prints it, or exclude it by a stated reason",
-      "status": "ready",
-      "enables": [
-        "W797"
-      ],
-      "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
-      "issued_at": "2026-10-22T23:09:09Z",
-      "minted_during": "interrupt",
-      "caused_by": "W797",
-      "last_worked": null,
-      "ticks_blocked": 0,
-      "manifest": [
-        "src/nemik/serve.py",
-        "src/nemik/parity.py",
-        "tests/test_parity.py",
-        "tests/test_serve_check_fold.py"
-      ],
-      "size_class": "small"
     },
     {
       "symbol": "W864",
@@ -19400,22 +19405,58 @@
   "predecessor_job_id": "disarmed",
   "leases": [
     {
+      "tag": "file:src/nemik/serve.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W862",
+      "base_sha": "7c33c77d454ea9c7dfcfe58add1bef5b9a960b4c",
+      "taken_at": "2026-10-23T00:02:35Z",
+      "renewed_at": "2026-10-23T00:02:35Z",
+      "expires_at": "2026-10-23T00:32:35Z"
+    },
+    {
+      "tag": "file:checks/claims.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W862",
+      "base_sha": "7c33c77d454ea9c7dfcfe58add1bef5b9a960b4c",
+      "taken_at": "2026-10-23T00:02:35Z",
+      "renewed_at": "2026-10-23T00:02:35Z",
+      "expires_at": "2026-10-23T00:32:35Z"
+    },
+    {
+      "tag": "file:tests/test_serve_no_spawn.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W862",
+      "base_sha": "7c33c77d454ea9c7dfcfe58add1bef5b9a960b4c",
+      "taken_at": "2026-10-23T00:02:35Z",
+      "renewed_at": "2026-10-23T00:02:35Z",
+      "expires_at": "2026-10-23T00:32:35Z"
+    },
+    {
+      "tag": "file:tests/test_serve_check_letters.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W862",
+      "base_sha": "7c33c77d454ea9c7dfcfe58add1bef5b9a960b4c",
+      "taken_at": "2026-10-23T00:02:35Z",
+      "renewed_at": "2026-10-23T00:02:35Z",
+      "expires_at": "2026-10-23T00:32:35Z"
+    },
+    {
       "tag": "file:src/nemik/parity.py!w",
       "holder": "(unlocked)",
-      "waypoint": "W861",
-      "base_sha": "209972dbc4cac7bcc31a6e7cd308eb96fbf90969",
-      "taken_at": "2026-10-22T23:50:39Z",
-      "renewed_at": "2026-10-22T23:50:39Z",
-      "expires_at": "2026-10-23T00:20:39Z"
+      "waypoint": "W863",
+      "base_sha": "1be59739fff957b8ec1a4ecd892bc2822289ea7f",
+      "taken_at": "2026-10-23T00:25:17Z",
+      "renewed_at": "2026-10-23T00:25:17Z",
+      "expires_at": "2026-10-23T00:55:17Z"
     },
     {
       "tag": "file:tests/test_parity.py!w",
       "holder": "(unlocked)",
-      "waypoint": "W861",
-      "base_sha": "209972dbc4cac7bcc31a6e7cd308eb96fbf90969",
-      "taken_at": "2026-10-22T23:50:39Z",
-      "renewed_at": "2026-10-22T23:50:39Z",
-      "expires_at": "2026-10-23T00:20:39Z"
+      "waypoint": "W863",
+      "base_sha": "1be59739fff957b8ec1a4ecd892bc2822289ea7f",
+      "taken_at": "2026-10-23T00:25:17Z",
+      "renewed_at": "2026-10-23T00:25:17Z",
+      "expires_at": "2026-10-23T00:55:17Z"
     }
   ],
   "advice": [
