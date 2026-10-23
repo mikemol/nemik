@@ -13249,7 +13249,35 @@
         "tests/test_cones.py"
       ],
       "size_class": "medium",
-      "completed": null
+      "completed": null,
+      "warrants": [
+        {
+          "@context": {
+            "prov": "http://www.w3.org/ns/prov#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "mtools": "urn:mtools:warrant#"
+          },
+          "@id": "urn:nemik:nemik/W643",
+          "prov:wasDerivedFrom": {
+            "@id": "urn:claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e#7a5c9732-76b5-4e6b-b03e-6dc966b85e16",
+            "@type": "prov:Entity",
+            "prov:generatedAtTime": {
+              "@value": "2026-10-17T22:24:58.725Z",
+              "@type": "xsd:dateTime"
+            },
+            "prov:wasAttributedTo": {
+              "@id": "urn:nemik:operator",
+              "@type": "prov:Agent"
+            },
+            "prov:wasGeneratedBy": {
+              "@id": "urn:nemik:utterance/7a5c9732-76b5-4e6b-b03e-6dc966b85e16",
+              "@type": "prov:Activity"
+            },
+            "mtools:line": 76547,
+            "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify 7a5c9732-76b5-4e6b-b03e-6dc966b85e16 --claim the operator said the paperkit input graph is the same class of information needed for automating grouping parallel-workable and streaming sequentially-dependent cards --line 76547"
+          }
+        }
+      ]
     },
     {
       "symbol": "W644",
@@ -20156,18 +20184,43 @@
     {
       "symbol": "W897",
       "title": "Repin the writer to mtools c9c0070f or later and add --claim to the --warrant hints in shapes.ttl and warrantdebt.py, since the writer now refuses a warrant without one",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
+      "next_bounded_step": "Land the stack: the seven wheels at c9c0070 (writer's --warrant needs --claim), the two hints say so; then restart the watchdog on the new writer if needed",
       "evidence": "",
       "issued_at": "2026-10-23T15:18:29Z",
       "minted_during": "interrupt",
       "caused_by": "github-8f",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-23T15:31:27Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "MODULE.bazel",
+        "pyproject.toml",
+        "uv.lock",
+        "src/nemik/data/shapes.ttl",
+        "src/nemik/warrantdebt.py",
+        "vendor/wheels/README.md",
+        "vendor/wheels/SHA256SUMS",
+        "vendor/wheels/mikemol_cvdcore-0.1.0+5ba261f-py3-none-any.whl",
+        "vendor/wheels/mikemol_cvdcore-0.1.0+c9c0070-py3-none-any.whl",
+        "vendor/wheels/mikemol_fence-0.1.0+5ba261f-py3-none-any.whl",
+        "vendor/wheels/mikemol_fence-0.1.0+c9c0070-py3-none-any.whl",
+        "vendor/wheels/mikemol_frontier-0.1.0+5ba261f-py3-none-any.whl",
+        "vendor/wheels/mikemol_frontier-0.1.0+c9c0070-py3-none-any.whl",
+        "vendor/wheels/mikemol_hooks-0.1.0+5ba261f-py3-none-any.whl",
+        "vendor/wheels/mikemol_hooks-0.1.0+c9c0070-py3-none-any.whl",
+        "vendor/wheels/mikemol_icsstruct-0.1.0+5ba261f-py3-none-any.whl",
+        "vendor/wheels/mikemol_icsstruct-0.1.0+c9c0070-py3-none-any.whl",
+        "vendor/wheels/mikemol_pathsforward-0.1.0+5ba261f-py3-none-any.whl",
+        "vendor/wheels/mikemol_pathsforward-0.1.0+c9c0070-py3-none-any.whl",
+        "vendor/wheels/mikemol_rulerseq-0.1.0+5ba261f-py3-none-any.whl",
+        "vendor/wheels/mikemol_rulerseq-0.1.0+c9c0070-py3-none-any.whl"
+      ],
+      "size_class": "medium"
     }
   ],
   "residue": [
