@@ -19519,9 +19519,15 @@
     {
       "symbol": "W874",
       "title": "Repin the vendored mtools wheels to a sha with the writer's --export mode, so nemik's own writer can emit its export",
-      "status": "ready",
+      "status": "working",
       "enables": [],
-      "touches": [],
+      "touches": [
+        "file:pyproject.toml!w",
+        "file:uv.lock!w",
+        "file:MODULE.bazel!w",
+        "file:vendor/wheels/SHA256SUMS!w",
+        "file:vendor/wheels/README.md!w"
+      ],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Pin the vendored mtools wheels to 5ba261faf5708395a2baeb38111a7d61943f91a4 with mikemol-repin --revendor --no-sync --sha it --root nemik --write, re-add the converge and webpage lines to SHA256SUMS by hand, rebuild the venv and run the suite; then run the writer's --export once on nemik's queue to opt in, and ask mtools-ad to do the same for mtools",
@@ -19529,7 +19535,7 @@
       "issued_at": "2026-10-23T04:49:17Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W516",
-      "last_worked": "2026-10-23T05:30:21Z",
+      "last_worked": "2026-10-23T06:32:06Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -19653,7 +19659,53 @@
   "heartbeat": "2026-10-22T02:06:35Z",
   "lock": null,
   "predecessor_job_id": "disarmed",
-  "leases": [],
+  "leases": [
+    {
+      "tag": "file:pyproject.toml!w",
+      "holder": "(unlocked)",
+      "waypoint": "W874",
+      "base_sha": "bbeb23baf20e688fec6f1861ee2f8196481f98ce",
+      "taken_at": "2026-10-23T06:32:06Z",
+      "renewed_at": "2026-10-23T06:32:06Z",
+      "expires_at": "2026-10-23T07:02:06Z"
+    },
+    {
+      "tag": "file:uv.lock!w",
+      "holder": "(unlocked)",
+      "waypoint": "W874",
+      "base_sha": "bbeb23baf20e688fec6f1861ee2f8196481f98ce",
+      "taken_at": "2026-10-23T06:32:06Z",
+      "renewed_at": "2026-10-23T06:32:06Z",
+      "expires_at": "2026-10-23T07:02:06Z"
+    },
+    {
+      "tag": "file:MODULE.bazel!w",
+      "holder": "(unlocked)",
+      "waypoint": "W874",
+      "base_sha": "bbeb23baf20e688fec6f1861ee2f8196481f98ce",
+      "taken_at": "2026-10-23T06:32:06Z",
+      "renewed_at": "2026-10-23T06:32:06Z",
+      "expires_at": "2026-10-23T07:02:06Z"
+    },
+    {
+      "tag": "file:vendor/wheels/SHA256SUMS!w",
+      "holder": "(unlocked)",
+      "waypoint": "W874",
+      "base_sha": "bbeb23baf20e688fec6f1861ee2f8196481f98ce",
+      "taken_at": "2026-10-23T06:32:06Z",
+      "renewed_at": "2026-10-23T06:32:06Z",
+      "expires_at": "2026-10-23T07:02:06Z"
+    },
+    {
+      "tag": "file:vendor/wheels/README.md!w",
+      "holder": "(unlocked)",
+      "waypoint": "W874",
+      "base_sha": "bbeb23baf20e688fec6f1861ee2f8196481f98ce",
+      "taken_at": "2026-10-23T06:32:06Z",
+      "renewed_at": "2026-10-23T06:32:06Z",
+      "expires_at": "2026-10-23T07:02:06Z"
+    }
+  ],
   "advice": [
     {
       "tool": "block-behind-open",
