@@ -20497,7 +20497,7 @@
     {
       "symbol": "W906",
       "title": "List every term the card model and its PROV and OSLC export can express, with its type and who may write it (docs/evidence-codomain.md)",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W905"
       ],
@@ -20511,12 +20511,13 @@
       "issued_at": "2026-10-23T18:04:50Z",
       "minted_during": "tick",
       "caused_by": "W905",
-      "last_worked": "2026-10-23T18:05:02Z",
+      "last_worked": "2026-10-23T18:51:06Z",
       "ticks_blocked": 0,
       "manifest": [
         "docs/evidence-codomain.md"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "completed": null
     },
     {
       "symbol": "W907",
@@ -20839,7 +20840,17 @@
     "start": 39974717
   },
   "predecessor_job_id": "disarmed",
-  "leases": [],
+  "leases": [
+    {
+      "tag": "file:docs/evidence-codomain.md!w",
+      "holder": "claude-nemik",
+      "waypoint": "W906",
+      "base_sha": "a3dada828c9053ad0fc9d4e0412342249d706b35",
+      "taken_at": "2026-10-23T18:51:06Z",
+      "renewed_at": "2026-10-23T18:51:06Z",
+      "expires_at": "2026-10-23T19:21:06Z"
+    }
+  ],
   "advice": [
     {
       "tool": "block-behind-open",
