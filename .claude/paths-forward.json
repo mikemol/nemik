@@ -19816,17 +19816,20 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Write waitemit.py (samples from wait_edges, gauges via mikemol.otlp, send to vmsingle-http), tests with a stub poster, python -m nemik.waitemit entry",
+      "next_bounded_step": "Land the stack (waitemit.py, tests, census entry, protobuf stub); then tell luthen-observability the sha for W1196",
       "evidence": "",
       "issued_at": "2026-10-23T08:07:05Z",
       "minted_during": "interrupt",
       "caused_by": "W876",
-      "last_worked": "2026-10-23T09:18:27Z",
+      "last_worked": "2026-10-23T09:35:18Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/waitemit.py",
         "tests/test_waitemit.py",
-        "codon-baseline.json"
+        "codon-baseline.json",
+        "stubs/google/__init__.pyi",
+        "stubs/google/protobuf/__init__.pyi",
+        "stubs/google/protobuf/message.pyi"
       ],
       "size_class": "medium",
       "completed": null
