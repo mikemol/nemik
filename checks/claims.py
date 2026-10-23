@@ -181,6 +181,8 @@ def hub_modules_depend_on_everything_below():
     # writes, through histdocs, a leaf of plain text that reads no file.
     # nemik:W862: and answers /check/letters.json and /check/fold.json with letters.report, the
     # function nemik-check --letters and --fold print (a leaf of stdlib file reads).
+    # nemik:W864: and answers /collapse.json with collapse.lines, as nemik-collapse prints it (a
+    # leaf of pure functions over the blocked rows).
     expected = {
         "metrics": lower | {"realize", "runlogs", "workrows"},
         "serve": lower
@@ -200,6 +202,7 @@ def hub_modules_depend_on_everything_below():
             "history",
             "histdocs",
             "letters",
+            "collapse",
         },
     }
     for hub, want in expected.items():

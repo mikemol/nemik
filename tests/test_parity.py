@@ -8,9 +8,9 @@ from nemik.parity import EXCLUDED, PENDING, ROUTED
 
 ROOT = Path(__file__).resolve().parents[1]
 SERVE = ROOT / "src" / "nemik" / "serve.py"
-# The pending list only shrinks: lower this as W793 adds its routes (W785 has added its own).
-PENDING_MOST = 1
-PENDING_CARDS = {"W793"}
+# The pending list only shrinks, and is now empty: a new command must be routed or excluded.
+PENDING_MOST = 0
+PENDING_CARDS: set[str] = set()
 
 
 def _commands() -> set[str]:

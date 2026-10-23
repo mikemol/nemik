@@ -41,6 +41,7 @@ ROUTES = [
     "/overlaps.json",
     "/pacing.json",
     "/oldest.json",
+    "/collapse.json",
     "/floor-asks.json",
     "/check.json",
     "/check/ready-neither.json",

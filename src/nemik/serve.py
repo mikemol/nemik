@@ -43,6 +43,7 @@ from nemik.check import (
     LEDGER,
     QUEUE,
     Finding,
+    blocked_rows,
     default_root,
     finding_lines,
     integrity_text,
@@ -51,6 +52,7 @@ from nemik.check import (
     workstream_files,
 )
 from nemik.check import survey as checked_survey
+from nemik.collapse import lines as collapse_lines
 from nemik.critical import critical_doc
 from nemik.exportwire import exports_key, withheld_by_exports
 from nemik.floorasks import floor_asks, unresolved
@@ -218,6 +220,7 @@ OLDEST_SHOWN = 25
 DOC_ROUTES = [
     "/hostroot.json",
     "/oldest.json",
+    "/collapse.json",
     "/series.json",
     "/check.json",
     "/landings.json",
@@ -523,6 +526,19 @@ class Model:
         files = dict(workstream_files(self.root, QUEUE))
         return {"oldest": oldest_rows(files, self.root, OLDEST_SHOWN)}
 
+    def collapse_json(self) -> dict[str, object]:
+        """List the collapse umbrellas and the enables edges that escape them (nemik:W864).
+
+        The lines nemik-collapse prints, over the graph less what luthen withholds. It reads the
+        graph the server already holds and starts no process.
+
+        Returns:
+            {"lines": the umbrella lines, one string each}.
+
+        """
+        g = without(self.graph, self.withheld) if self.withheld else self.graph
+        return {"lines": collapse_lines(blocked_rows(g))}
+
     def doc_for(self, route: str) -> dict[str, object]:
         """Build the document a route in DOC_ROUTES answers.
 
@@ -533,6 +549,7 @@ class Model:
         docs: dict[str, Callable[[], dict[str, object]]] = {
             "/hostroot.json": self.hostroot_doc,
             "/oldest.json": self.oldest_json,
+            "/collapse.json": self.collapse_json,
             "/series.json": self.series_doc,
             "/check.json": self.check_doc,
             "/landings.json": self.landings_doc,

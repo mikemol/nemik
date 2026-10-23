@@ -34,15 +34,14 @@ ROUTED = [
     ("nemik-overlaps", "/overlaps.json", "overlaps"),
     ("nemik-pacing", "/pacing.json", "paces"),
     ("nemik-floor-asks", "/floor-asks.json", "unresolved"),
+    ("nemik-collapse", "/collapse.json", "collapse_lines"),
     # nemik:W785: --oldest reads only files and is served directly; the five modes that read git
     # are published by the host (nemik-history --publish) and served from /history/<mode>.json.
     ("nemik-history", "/history/", "history_response"),
     ("nemik-history --oldest", "/oldest.json", "oldest_rows"),
 ]
 
-PENDING = [
-    ("nemik-collapse", "W793"),
-]
+PENDING: list[tuple[str, str]] = []
 
 EXCLUDED = [
     ("nemik-serve", "is the server"),
