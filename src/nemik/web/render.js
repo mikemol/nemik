@@ -147,7 +147,7 @@ function render(poll) {
   document.getElementById("relayout").hidden = true;
   if (cy) cy.destroy();
   cy = cytoscape({
-    container: document.getElementById("cy"), elements: els,
+    container: document.getElementById("cy"), elements: els, wheelSensitivity: 0.2,  // W920: 1.2x a notch
     layout: { name: "preset" },    style: [
       // nemik:W125: the label sits INSIDE its shape (operator 2026-09-28), sized to fit it, so no
       // space below each node is reserved and nothing else can cover the text. Its colour is set after
