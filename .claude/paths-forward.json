@@ -19318,7 +19318,7 @@
     {
       "symbol": "W866",
       "title": "The commit gate solves the Containerfile in both TESTS modes when it or build.yml changes, so an unparsable image build fails the commit, not CI",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:tools/image_solve.sh!w",
@@ -19328,12 +19328,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Submit the prepared stack: the gate solves the Containerfile in gated mode when it or its workflow changes",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: commit 61e6c6d; tools/image_solve.sh and the gate_staged step; checked by hand: the fixed Containerfile solves, the 9bfec9c one fails with 'failed to parse stage name'. This commit changed neither the Containerfile nor build.yml, so the gate step has not yet run on a real trigger: the first commit that touches either is its first live test",
       "issued_at": "2026-10-23T01:04:54Z",
       "minted_during": "interrupt",
       "caused_by": "github-8f",
-      "last_worked": "2026-10-23T02:33:46Z",
+      "last_worked": "2026-10-23T03:02:28Z",
       "ticks_blocked": 0,
       "manifest": [
         "tools/image_solve.sh",
@@ -19342,7 +19342,7 @@
         "BUILD.bazel"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261023T030228Z"
     },
     {
       "symbol": "W867",
@@ -19475,44 +19475,7 @@
   "heartbeat": "2026-10-22T02:06:35Z",
   "lock": null,
   "predecessor_job_id": "disarmed",
-  "leases": [
-    {
-      "tag": "file:tools/image_solve.sh!w",
-      "holder": "(unlocked)",
-      "waypoint": "W866",
-      "base_sha": "234d98450d230299b7aaa2a7355d2688da94f620",
-      "taken_at": "2026-10-23T02:26:47Z",
-      "renewed_at": "2026-10-23T02:26:47Z",
-      "expires_at": "2026-10-23T02:56:47Z"
-    },
-    {
-      "tag": "file:tools/gate_staged.sh!w",
-      "holder": "(unlocked)",
-      "waypoint": "W866",
-      "base_sha": "234d98450d230299b7aaa2a7355d2688da94f620",
-      "taken_at": "2026-10-23T02:26:47Z",
-      "renewed_at": "2026-10-23T02:26:47Z",
-      "expires_at": "2026-10-23T02:56:47Z"
-    },
-    {
-      "tag": "file:tests/test_image_solve.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W866",
-      "base_sha": "234d98450d230299b7aaa2a7355d2688da94f620",
-      "taken_at": "2026-10-23T02:26:47Z",
-      "renewed_at": "2026-10-23T02:26:47Z",
-      "expires_at": "2026-10-23T02:56:47Z"
-    },
-    {
-      "tag": "file:BUILD.bazel!w",
-      "holder": "(unlocked)",
-      "waypoint": "W866",
-      "base_sha": "234d98450d230299b7aaa2a7355d2688da94f620",
-      "taken_at": "2026-10-23T02:26:47Z",
-      "renewed_at": "2026-10-23T02:26:47Z",
-      "expires_at": "2026-10-23T02:56:47Z"
-    }
-  ],
+  "leases": [],
   "advice": [
     {
       "tool": "block-behind-open",
