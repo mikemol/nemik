@@ -19845,11 +19845,17 @@
     {
       "symbol": "W886",
       "title": "waitemit also sends one log record per waiting pair naming the oldest waiting card (symbols only in logs)",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W836"
       ],
-      "touches": [],
+      "touches": [
+        "file:src/nemik/waitlog.py!w",
+        "file:src/nemik/waitrows.py!w",
+        "file:tests/test_waitlog.py!w",
+        "file:tests/test_waitrows_oldest.py!w",
+        "file:codon-baseline.json!w"
+      ],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Extend waitemit with logs.request from mikemol.otlp: one record per pair, body names the oldest waiting card cite; send to victorialogs-http at LOGS_PATH; test with the stub poster",
@@ -19857,13 +19863,18 @@
       "issued_at": "2026-10-23T10:10:50Z",
       "minted_during": "tick",
       "caused_by": "W836",
-      "last_worked": "2026-10-23T10:10:55Z",
+      "last_worked": "2026-10-23T10:38:40Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/waitemit.py",
-        "tests/test_waitemit.py"
+        "src/nemik/waitlog.py",
+        "src/nemik/waitrows.py",
+        "tests/test_waitlog.py",
+        "tests/test_waitrows_oldest.py",
+        "codon-baseline.json"
       ],
-      "size_class": "small"
+      "size_class": "medium",
+      "completed": null
     },
     {
       "symbol": "W887",
@@ -19998,7 +20009,26 @@
   "heartbeat": "2026-10-22T02:06:35Z",
   "lock": null,
   "predecessor_job_id": "disarmed",
-  "leases": [],
+  "leases": [
+    {
+      "tag": "file:src/nemik/waitemit.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W886",
+      "base_sha": "bc5d8138321b7007fc30ba8afb42dd6a2cbe8915",
+      "taken_at": "2026-10-23T10:38:40Z",
+      "renewed_at": "2026-10-23T10:38:40Z",
+      "expires_at": "2026-10-23T11:08:40Z"
+    },
+    {
+      "tag": "file:tests/test_waitemit.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W886",
+      "base_sha": "bc5d8138321b7007fc30ba8afb42dd6a2cbe8915",
+      "taken_at": "2026-10-23T10:38:40Z",
+      "renewed_at": "2026-10-23T10:38:40Z",
+      "expires_at": "2026-10-23T11:08:40Z"
+    }
+  ],
   "advice": [
     {
       "tool": "block-behind-open",

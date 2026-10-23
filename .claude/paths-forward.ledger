@@ -1714,3 +1714,4 @@
 2026-10-23T10:11:02Z  tick  W836 advanced  collapse  "W836 atomized into W886 (log record, ready) and W887 (timer, operator decision); W882 still gating as stack350 [blocked by W882]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T10:13:59Z  status W887 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T10:27:52Z  status W882 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T10:38:40Z  status W886 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
