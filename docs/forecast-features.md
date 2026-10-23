@@ -62,3 +62,16 @@ card. That is in-sample, on 538 cards and two issues, and the floor was chosen o
 that matters is the issue of 2026-10-22, which matures on 2026-10-23: it was issued before either
 trial, so it is regenerated with both and scored out of sample. Until then the forecast is known to
 be no worse than climatology, and not yet known to be better.
+
+## Out of sample, first attempt (2026-10-23)
+
+Scoring the stored shingle (`nemik-history --all --score ~/.cache/nemik/shingle.tsv`) gives +1d n
+1626, Brier 0.204 against climatology 0.021, skill -8.69; the 0.94 bin (n 318) happened 0.01 of the
+time. That number is the old model's, not the new one's: the shingle stores each row as it was
+issued, so the issues of 2026-10-20 to 22 stay what the old model said, and `--forecast` only issues
+now. Regenerating the 2026-10-22 issue with trials 1 and 2, as planned above, is not possible without
+an as-of mode that replays the queue at a past date; there is none. So the honest out-of-sample test
+is forward: an issue with both trials was appended on 2026-10-23 (1623 rows, same `--from
+2026-10-12`), and its +1d horizon matures on 2026-10-24. Score again after that, and compare its
+skill with -8.69 (the old model) and 0 (climatology). Only if it is not yet above zero is the next
+feature (gate duration, blocker depth) worth trying.
