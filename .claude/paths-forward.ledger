@@ -1715,3 +1715,10 @@
 2026-10-23T10:13:59Z  status W887 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T10:27:52Z  status W882 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T10:38:40Z  status W886 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T10:46:54Z  tick  W888 minted    -         "witnesses gains pending_notices(graph, delivered): the done or dropped cards that a cross-repo waiter still cites and whose notice the delivery record lacks"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W546
+2026-10-23T10:46:54Z  tick  W889 minted    -         "nemik-witnesses --deliver-pending runs pending_notices through deliver and records each, so a card the writer closed directly still reaches its waiters"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W546
+2026-10-23T10:47:06Z  tick  W546 advanced  collapse  "W546 atomized into W888 (pending_notices) and W889 (--deliver-pending); W886 stack351 waits on its queue commit [blocked by W886]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T11:08:21Z  status W886 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T11:08:25Z  status W836 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T11:08:25Z  status W887 blocked>done writer    "blocked -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T11:08:28Z  status W836 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
