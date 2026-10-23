@@ -10,7 +10,7 @@ import pytest
 from rdflib import Graph
 
 from nemik.adapter import NEMIK, OSLC_CM, queue_graph
-from nemik.cardrank import downstream_weight, parse_weights
+from nemik.cardrank import cone, downstream_weight, parse_weights, unknowns
 from nemik.rank import Weights, load_weights, ref_of, successors
 from nemik.rank import downstream_weight as graph_weight
 
@@ -134,3 +134,23 @@ def test_a_missing_required_weight_is_a_key_error_in_both_readers() -> None:
         parse_weights(text)
     with pytest.raises(KeyError, match="peer_blocked"):
         load_weights(text)
+
+
+def test_a_cone_holds_the_source_and_everything_it_needs_sorted() -> None:
+    """A diamond: the source, both branches and the shared prerequisite, once each (nemik:W870)."""
+    needs = {"a": ["c", "b"], "b": ["d"], "c": ["d"], "d": []}
+    assert cone(needs, {"d"}, "a") == ["a", "b", "c", "d"]
+    assert unknowns(cone(needs, {"d"}, "a"), {"d"}) == ["a", "b", "c"]
+
+
+def test_a_ready_card_ends_the_walk_and_a_cycle_ends_on_the_visited_set() -> None:
+    """The frontier has no prerequisites to follow; a loop does not run away."""
+    assert cone({"a": ["b"], "b": ["c"], "c": []}, {"b"}, "a") == ["a", "b"]
+    assert cone({"a": ["b"], "b": ["a"]}, set(), "a") == ["a", "b"]
+    assert cone({"a": ["b"]}, {"a"}, "a") == ["a"]
+
+
+def test_a_card_nothing_needs_has_a_cone_of_itself() -> None:
+    """A source with no prerequisites is its own cone, and with no front every card is unknown."""
+    assert cone({}, set(), "a") == ["a"]
+    assert unknowns(["a", "b"], set()) == ["a", "b"]

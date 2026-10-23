@@ -45,6 +45,47 @@ def parse_weights(text: str) -> tuple[int, int, int, int]:
     )
 
 
+def cone(needs: dict[str, list[str]], front: set[str], source: str) -> list[str]:
+    """Collect a card and everything it transitively needs, over plain edges (nemik:W870).
+
+    The same selection as nemik.flow's cone. A ready card is on the frontier and has no
+    prerequisites to follow, so the walk stops there; a cycle ends on the visited set.
+
+    Args:
+        needs: card -> the cards it waits on.
+        front: The ready cards, the ground of the flow model.
+        source: The card whose prerequisite closure is wanted.
+
+    Returns:
+        The cards, sorted.
+
+    """
+    seen: set[str] = set()
+    stack = [source]
+    while stack:
+        card = stack.pop()
+        if card in seen:
+            continue
+        seen.add(card)
+        if card not in front:
+            stack.extend(needs.get(card, []))
+    return sorted(seen)
+
+
+def unknowns(nodes: list[str], front: set[str]) -> list[str]:
+    """Pick the cards a flow solve must find a potential for: everything but the ground.
+
+    Args:
+        nodes: A cone's cards.
+        front: The ready cards, held at potential zero.
+
+    Returns:
+        The cards not on the frontier, in the order given.
+
+    """
+    return [node for node in nodes if node not in front]
+
+
 def downstream_weight(
     succ: dict[str, list[str]],
     done: set[str],
