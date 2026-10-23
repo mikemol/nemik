@@ -1732,3 +1732,14 @@
 2026-10-23T12:19:22Z  status W889 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T12:19:30Z  status W546 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T12:29:58Z  status W611 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T12:42:20Z  status W749 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T12:42:29Z  tick  W749 advanced  sweep     "W749: old-model out-of-sample score recorded, forward issue appended; stack355 queued behind W611's stack354 [blocked by W611]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T12:53:12Z  interrupt W890 minted    -         "Render nemik's standard views to PDF on request, so an agent can produce and send one to the operator's phone"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=operator
+2026-10-23T12:53:28Z  interrupt W891 minted    -         "List the standard views and their URL parameters, and pick the PDF set (docs/pdf-views.md)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W890
+2026-10-23T12:53:28Z  interrupt W892 minted    -         "nemik-pdf VIEW --out FILE renders a view to PDF in headless Chromium through playwright"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W890
+2026-10-23T12:53:28Z  interrupt W893 minted    -         "Print layout: a paper size and print stylesheet so a graph page reads on a phone"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W890
+2026-10-23T12:53:28Z  interrupt W894 minted    -         "An agent skill renders a named view with nemik-pdf and sends the file with SendUserFile"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W890
+2026-10-23T12:53:59Z  status W892 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T12:54:03Z  status W893 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T12:54:05Z  status W894 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-23T13:00:02Z  status W611 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
