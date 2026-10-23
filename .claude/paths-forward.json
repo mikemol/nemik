@@ -20341,24 +20341,27 @@
     {
       "symbol": "W903",
       "title": "An unclaimed card's label is under WCAG 1.4.3 on the page: its red ink over its 15% red tint is 3.48:1 against the page background, below 4.5:1",
-      "status": "ready",
+      "status": "working",
       "enables": [],
-      "touches": [],
+      "touches": [
+        "file:src/nemik/web/render.js!w",
+        "file:tests/test_svgexport.py!w"
+      ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "After W900: make an unclaimed card's label reach 4.5:1 on its tinted fill (a darker ink or a fill with more opacity), read through test_svgexport's oracle with the unclaimed exclusion removed",
+      "next_bounded_step": "Land stack363: an unclaimed card's label is the page's ink (red stays in the dashed border and tint); test_svgexport no longer excludes unclaimed cards. Dark theme not measured",
       "evidence": "",
       "issued_at": "2026-10-23T16:23:47Z",
       "minted_during": "tick",
       "caused_by": "operator",
-      "last_worked": "2026-10-23T16:23:55Z",
+      "last_worked": "2026-10-23T17:21:57Z",
       "ticks_blocked": 0,
       "manifest": [
-        "src/nemik/web/graph.js",
         "src/nemik/web/render.js",
-        "tests/test_layout.py"
+        "tests/test_svgexport.py"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "completed": null
     },
     {
       "symbol": "W904",
@@ -20498,7 +20501,26 @@
     "start": 39974717
   },
   "predecessor_job_id": "disarmed",
-  "leases": [],
+  "leases": [
+    {
+      "tag": "file:src/nemik/web/render.js!w",
+      "holder": "claude-nemik",
+      "waypoint": "W903",
+      "base_sha": "07eb219018a767db1f3e99e58e78dd074188a83e",
+      "taken_at": "2026-10-23T17:21:57Z",
+      "renewed_at": "2026-10-23T17:21:57Z",
+      "expires_at": "2026-10-23T17:51:57Z"
+    },
+    {
+      "tag": "file:tests/test_svgexport.py!w",
+      "holder": "claude-nemik",
+      "waypoint": "W903",
+      "base_sha": "07eb219018a767db1f3e99e58e78dd074188a83e",
+      "taken_at": "2026-10-23T17:21:57Z",
+      "renewed_at": "2026-10-23T17:21:57Z",
+      "expires_at": "2026-10-23T17:51:57Z"
+    }
+  ],
   "advice": [
     {
       "tool": "block-behind-open",
