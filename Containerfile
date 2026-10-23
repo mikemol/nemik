@@ -1,6 +1,10 @@
 # syntax=docker/dockerfile:1.7
 # nemik-serve: read-only graph view. Mount the export (<repo>/paths-forward.{json,ledger}) read-only at /export.
 ARG BASE=ghcr.io/astral-sh/uv:python3.13-bookworm-slim
+# nemik:W703: which stage the final one takes the gate marker from (`test`, or `gated` when the commit
+# gate already ran on this tree). It must be a global ARG (before the first FROM) because only a
+# `FROM` expands it; a variable in a `COPY --from` fails the whole build ("failed to parse stage name").
+ARG TESTS=test
 FROM ${BASE} AS base
 # nemik:W6/H1: mikemol-pathsforward is a vendored wheel (vendor/wheels), not a build-time git+https
 # fetch, so the build has no egress to github.com. No git binary needed: nemik-serve never shells
@@ -66,9 +70,12 @@ RUN date -u +"test stage: pytest start %FT%TZ" && .venv/bin/pytest -q -rs --dura
 FROM base AS gated
 RUN touch /app/.tested
 
+# `FROM` expands a global ARG and may name an earlier stage; `COPY --from` expands nothing. So the
+# choice is made here, and the final stage copies from the fixed name `verdict`.
+FROM ${TESTS} AS verdict
+
 FROM base
-ARG TESTS=test
-COPY --from=${TESTS} /app/.tested /app/.tested
+COPY --from=verdict /app/.tested /app/.tested
 USER 1000:1000
 EXPOSE 8750
 ENV NEMIK_ROOT=/export

@@ -54,8 +54,12 @@ def test_a_gated_tree_selects_a_stage_the_containerfile_has() -> None:
     assert "build-arg:TESTS=$tests" in workflow
     assert "tests=gated" in workflow
     assert "FROM base AS gated" in text
-    assert "ARG TESTS=test" in text
-    assert "COPY --from=${TESTS} /app/.tested" in text
+    # BuildKit expands only a `FROM` from a global ARG: `COPY --from=${TESTS}` broke every build
+    # ("failed to parse stage name"), so the choice is a stage named by a global ARG.
+    assert text.index("ARG TESTS=test") < text.index("FROM ")
+    assert "FROM ${TESTS} AS verdict" in text
+    assert "COPY --from=verdict /app/.tested" in text
+    assert "--from=${" not in text
 
 
 def test_the_check_reads_something() -> None:
