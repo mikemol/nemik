@@ -28,6 +28,8 @@ mikemol-frontier = { path = "vendor/wheels/mikemol_frontier-0.1.0+5ba261f-py3-no
 mikemol-cvdcore = { path = "vendor/wheels/mikemol_cvdcore-0.1.0+5ba261f-py3-none-any.whl" }
 mikemol-converge = { path = "vendor/wheels/mikemol_converge-0.1.0+0f8267e-py3-none-any.whl" }
 mikemol-webpage = { path = "vendor/wheels/mikemol_webpage-0.1.0+146ebaaf-py3-none-any.whl" }
+mikemol-otlp = { path = "vendor/wheels/mikemol_otlp-0.1.0+5ba261f-py3-none-any.whl" }
+mikemol-endpoints = { path = "vendor/wheels/mikemol_endpoints-0.1.0+5ba261f-py3-none-any.whl" }
 paperkit = { git = "https://github.com/mikemol/paperkit.git", rev = "b5877102af3b48005fde814416bff5b8f06ba5cd" }
 
 [project.scripts]
@@ -83,6 +85,8 @@ dev = [
     "types-pyyaml",  # its stubs, for the mypy edit gate
     "mikemol-cvdcore",  # nemik:W438/W771: the worst-view colour-blind distance (mtools:W1315), for tests/test_cvd_palette.py; brings numpy and colorspacious
     "mikemol-webpage",  # nemik:W717/W847: the browser-test waits and the waits codemod (mtools:W1684/W1685), stdlib only; used from W848
+    "mikemol-otlp",  # nemik:W836/W884: OTLP metric payloads for the wait series (mtools' otlp dist); the host-side emit uses it from W885
+    "mikemol-endpoints",  # nemik:W884: otlp's one dist-to-dist dependency, the named-endpoint resolver (mtools:W1419)
 ]
 
 [tool.pytest.ini_options]

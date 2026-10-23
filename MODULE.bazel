@@ -99,6 +99,19 @@ vendored_wheel(
     wheel = "//:vendor/wheels/mikemol_webpage-0.1.0+146ebaaf-py3-none-any.whl",
 )
 
+# nemik:W836/W884: mtools' otlp (mikemol.otlp, which builds OTLP metric payloads from the published
+# opentelemetry-proto wheel) and endpoints (its one dist-to-dist dependency, mtools:W1419) at 5ba261f, the
+# same sha as the other seven. First pins, taken by hand: the host-side wait-series emit (W885) uses them.
+vendored_wheel(
+    name = "endpoints",
+    wheel = "//:vendor/wheels/mikemol_endpoints-0.1.0+5ba261f-py3-none-any.whl",
+)
+
+vendored_wheel(
+    name = "otlp",
+    wheel = "//:vendor/wheels/mikemol_otlp-0.1.0+5ba261f-py3-none-any.whl",
+)
+
 # nemik:W98: opa, the witness evaluator, as a hashed input instead of whatever /usr/bin holds.
 http_file = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_file")
 http_file(

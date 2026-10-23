@@ -54,6 +54,16 @@ while the seven the tool lists are at 5ba261f and converge at 0f8267e, because i
 pin and was taken by hand (`mikemol-repin --revendor` does not add a dist); the next repin that lists it
 moves all together.
 
+`mikemol_otlp-0.1.0+<sha>-py3-none-any.whl` and `mikemol_endpoints-0.1.0+<sha>-py3-none-any.whl`
+(nemik:W836, W884) are mtools' otlp and endpoints dists (`git archive <sha> -- otlp endpoints`,
+`uv build --wheel` each, the local version segment set to `+<sha>` in the archive's pyproject).
+`mikemol.otlp` builds OTLP metric and log payloads from the published opentelemetry-proto wheel and
+sends them to a named endpoint; `mikemol.endpoints` is the named-endpoint resolver it depends on
+(mtools:W1419), the one dist-to-dist edge, so both are pinned together. Both are dev dependencies: the
+host-side emit of the wait series (W885) uses them, the pod's image does not. They are at 5ba261f, the
+sha of the seven the repin tool lists, and were taken by hand (the tool does not add a dist); the lock
+gains opentelemetry-proto and protobuf from PyPI with them.
+
 ## Hashes
 
 `SHA256SUMS` beside the wheels, written by `mikemol-repin --revendor` on every bump (it replaced the hand script tools/revendor-mtools.sh, mtools:W1449; nemik:W417:
