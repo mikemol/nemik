@@ -59,7 +59,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         # nemik:W275: the letter files the waiting waypoint cites as evidence, after the hint.
         letters = f"  [letter: {', '.join(b['letters'])}]" if b["letters"] else ""
         print(
-            f"{b['blocker']:24} <- {b['blocked']:28} {claim:28} {b['title'][:60]}{hint}{letters}"
+            f"{b['blocker']:24} <- {b['blocked']:28} {claim:28} {b['title']}{hint}{letters}"
         )
     # nemik:W376: a letter in REPO's inbox that no waypoint cites is waiting on REPO too (one sat two
     # days unseen, luthen-observability:W722). The same UNCLAIMED token, with the --add that claims it;
