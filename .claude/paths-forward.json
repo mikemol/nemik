@@ -19605,7 +19605,6 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W883",
         "W884",
         "W885"
       ],
@@ -19737,7 +19736,7 @@
     {
       "symbol": "W883",
       "title": "Each wait row carries its blocker's rank position, read from the graph through rank's typed calls",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W885"
       ],
@@ -19750,14 +19749,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Submit the prepared stack: each wait edge with its blocker's rank position, and rank_fleet typed",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: commit d8f1528; waitrows.blocker_positions and wait_edges (UNRANKED 0 for a blocker that is not a ready leaf); rank_fleet typed as list[dict[str, object]], its callers made honest; mypy 6334 to 6311",
       "issued_at": "2026-10-23T08:07:05Z",
       "minted_during": "interrupt",
       "caused_by": "W876",
-      "last_worked": "2026-10-23T08:12:12Z",
+      "last_worked": "2026-10-23T08:45:41Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261023T084541Z",
       "manifest": [
         "src/nemik/waitrows.py",
         "tests/test_waitrows.py",
@@ -19770,19 +19769,26 @@
     {
       "symbol": "W884",
       "title": "Vendor mtools' otlp dist as a wheel and pin it as a dependency, unused until the emit",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W885"
       ],
-      "touches": [],
+      "touches": [
+        "file:pyproject.toml!w",
+        "file:uv.lock!w",
+        "file:MODULE.bazel!w",
+        "file:BUILD.bazel!w",
+        "file:vendor/wheels/SHA256SUMS!w",
+        "file:vendor/wheels/README.md!w"
+      ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
+      "next_bounded_step": "Submit the prepared stack: mtools' otlp and endpoints dists vendored at 5ba261f as dev dependencies, unused until W885",
       "evidence": "",
       "issued_at": "2026-10-23T08:07:05Z",
       "minted_during": "interrupt",
       "caused_by": "W876",
-      "last_worked": null,
+      "last_worked": "2026-10-23T08:48:36Z",
       "ticks_blocked": 0,
       "manifest": [
         "pyproject.toml",
@@ -19790,9 +19796,12 @@
         "MODULE.bazel",
         "BUILD.bazel",
         "vendor/wheels/SHA256SUMS",
-        "vendor/wheels/README.md"
+        "vendor/wheels/README.md",
+        "vendor/wheels/mikemol_otlp-0.1.0+5ba261f-py3-none-any.whl",
+        "vendor/wheels/mikemol_endpoints-0.1.0+5ba261f-py3-none-any.whl"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "completed": null
     },
     {
       "symbol": "W885",
@@ -19803,7 +19812,6 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W883",
         "W884"
       ],
       "blocked_kind": "agent",
@@ -19935,22 +19943,58 @@
   "predecessor_job_id": "disarmed",
   "leases": [
     {
-      "tag": "file:src/nemik/waitrows.py!w",
+      "tag": "file:pyproject.toml!w",
       "holder": "(unlocked)",
-      "waypoint": "W883",
-      "base_sha": "51cad572eff73e7849bbec3651314b87d74294b6",
-      "taken_at": "2026-10-23T08:07:15Z",
-      "renewed_at": "2026-10-23T08:07:15Z",
-      "expires_at": "2026-10-23T08:37:15Z"
+      "waypoint": "W884",
+      "base_sha": "d8f15282881724f1fb501559f86f190ec6a67760",
+      "taken_at": "2026-10-23T08:45:53Z",
+      "renewed_at": "2026-10-23T08:45:53Z",
+      "expires_at": "2026-10-23T09:15:53Z"
     },
     {
-      "tag": "file:tests/test_waitrows.py!w",
+      "tag": "file:uv.lock!w",
       "holder": "(unlocked)",
-      "waypoint": "W883",
-      "base_sha": "51cad572eff73e7849bbec3651314b87d74294b6",
-      "taken_at": "2026-10-23T08:07:15Z",
-      "renewed_at": "2026-10-23T08:07:15Z",
-      "expires_at": "2026-10-23T08:37:15Z"
+      "waypoint": "W884",
+      "base_sha": "d8f15282881724f1fb501559f86f190ec6a67760",
+      "taken_at": "2026-10-23T08:45:53Z",
+      "renewed_at": "2026-10-23T08:45:53Z",
+      "expires_at": "2026-10-23T09:15:53Z"
+    },
+    {
+      "tag": "file:MODULE.bazel!w",
+      "holder": "(unlocked)",
+      "waypoint": "W884",
+      "base_sha": "d8f15282881724f1fb501559f86f190ec6a67760",
+      "taken_at": "2026-10-23T08:45:53Z",
+      "renewed_at": "2026-10-23T08:45:53Z",
+      "expires_at": "2026-10-23T09:15:53Z"
+    },
+    {
+      "tag": "file:BUILD.bazel!w",
+      "holder": "(unlocked)",
+      "waypoint": "W884",
+      "base_sha": "d8f15282881724f1fb501559f86f190ec6a67760",
+      "taken_at": "2026-10-23T08:45:53Z",
+      "renewed_at": "2026-10-23T08:45:53Z",
+      "expires_at": "2026-10-23T09:15:53Z"
+    },
+    {
+      "tag": "file:vendor/wheels/SHA256SUMS!w",
+      "holder": "(unlocked)",
+      "waypoint": "W884",
+      "base_sha": "d8f15282881724f1fb501559f86f190ec6a67760",
+      "taken_at": "2026-10-23T08:45:53Z",
+      "renewed_at": "2026-10-23T08:45:53Z",
+      "expires_at": "2026-10-23T09:15:53Z"
+    },
+    {
+      "tag": "file:vendor/wheels/README.md!w",
+      "holder": "(unlocked)",
+      "waypoint": "W884",
+      "base_sha": "d8f15282881724f1fb501559f86f190ec6a67760",
+      "taken_at": "2026-10-23T08:45:53Z",
+      "renewed_at": "2026-10-23T08:45:53Z",
+      "expires_at": "2026-10-23T09:15:53Z"
     }
   ],
   "advice": [
