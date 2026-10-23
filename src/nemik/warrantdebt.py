@@ -76,6 +76,6 @@ def findings(merged: Graph, ceilings: dict[str, int]) -> dict[str, str]:
             found[repo] = (
                 f"{count} open cards claim an operator ruling with no warrant, above the "
                 f"declared {ceiling} ([warrant_debt] in rank-weights.toml): attach a warrant "
-                "(--warrant SYMBOL --transcript PATH --uuid UUID) or drop the claim"
+                "(--warrant SYMBOL --transcript PATH --uuid UUID --claim TEXT) or drop the claim"
             )
     return found

@@ -434,7 +434,7 @@ nemik:ActiveCardShape a sh:NodeShape ;
 nemik:UnwarrantedRulingShape a sh:NodeShape ;
     sh:targetSubjectsOf nemik:claimsRuling ;
     sh:property [ sh:path nemik:claimsRuling ; sh:maxCount 0 ; sh:severity sh:Warning ;
-                  sh:message "this card claims an operator ruling in prose and carries no warrant: attach the transcript record with mikemol-paths-forward --warrant SYMBOL --transcript PATH --uuid UUID (nemik:W597)" ] .
+                  sh:message "this card claims an operator ruling in prose and carries no warrant: attach the transcript record with mikemol-paths-forward --warrant SYMBOL --transcript PATH --uuid UUID --claim TEXT (nemik:W597)" ] .
 
 nemik:MalformedWarrantShape a sh:NodeShape ;
     sh:targetSubjectsOf nemik:malformedWarrant ;

@@ -42,7 +42,7 @@ the image's runtime does not import. `mikemol-repin --revendor` lists it once th
 (`git archive <sha> -- converge`, `uv build --wheel`, the local version segment set to `+<sha>` in the
 archive's pyproject): `mikemol.converge`, the shared converge loop (mtools:W1522), stdlib only. A runtime
 dependency: `nemik.converge` imports it (W777), and luthen's root-run code vendors the same wheel. It is at
-0f8267e while the other seven are at 5ba261f (the repin of nemik:W874), because `mikemol-repin --revendor`
+0f8267e while the other seven are at c9c0070 (the repin of nemik:W897), because `mikemol-repin --revendor`
 does not list this dist yet; the next repin that does moves all eight together.
 
 `mikemol_webpage-0.1.0+<sha>-py3-none-any.whl` (nemik:W717, W847) is mtools' webpage dist
@@ -50,7 +50,7 @@ does not list this dist yet; the next repin that does moves all eight together.
 archive's pyproject): `mikemol.webpage`, the browser-test waits that end on the page's own event
 (watch, until, until_expecting, load) and the `mikemol-webpage-waits` codemod (mtools:W1684/W1685,
 probes mtools:W1820, core limit mtools:W1821). Stdlib only; a dev dependency. It is at 146ebaaf
-while the seven the tool lists are at 5ba261f and converge at 0f8267e, because it was the first webpage
+while the seven the tool lists are at c9c0070 and converge at 0f8267e, because it was the first webpage
 pin and was taken by hand (`mikemol-repin --revendor` does not add a dist); the next repin that lists it
 moves all together.
 
@@ -61,8 +61,9 @@ moves all together.
 sends them to a named endpoint; `mikemol.endpoints` is the named-endpoint resolver it depends on
 (mtools:W1419), the one dist-to-dist edge, so both are pinned together. Both are dev dependencies: the
 host-side emit of the wait series (W885) uses them, the pod's image does not. They are at 5ba261f, the
-sha of the seven the repin tool lists, and were taken by hand (the tool does not add a dist); the lock
-gains opentelemetry-proto and protobuf from PyPI with them.
+sha the seven the repin tool lists had when they were taken (the seven have since moved to c9c0070,
+nemik:W897), and were taken by hand (the tool does not add a dist); the lock gains
+opentelemetry-proto and protobuf from PyPI with them.
 
 ## Hashes
 
