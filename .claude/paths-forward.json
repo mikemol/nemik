@@ -11006,15 +11006,15 @@
         "notice"
       ],
       "blocked_on": [
-        "luthen-observability"
+        "luthen-observability:W1535"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "The letters are built (W888 d11b8fd, W889 3574bf1); luthen-observability places the hourly timer for python -m nemik.pendingdeliver, then close this card; name their card in blocked_on when they claim it",
-      "evidence": "2026-10-22: 2026-10-22: W547 done (record W849, letters W850, wake W851); W548 dropped (no session interface). Remaining: deliver runs only from nemik-witnesses --apply via wake, so a card closed by the writer directly sends nothing; needs the trigger",
+      "evidence": "2026-10-22: 2026-10-22: W547 done (record W849, letters W850, wake W851); W548 dropped (no session interface). Remaining: deliver runs only from nemik-witnesses --apply via wake, so a card closed by the writer directly sends nothing; needs the trigger | 2026-10-23: luthen-observability:W1535 landed as 62c2072b (hourly luthen-nemik-pending-deliver timer, applied by the user-set loop); no pass read yet, close on the first clean one",
       "issued_at": "2026-10-15T19:22:40Z",
       "minted_during": "tick",
       "caused_by": "github-8f",
-      "last_worked": "2026-10-23T12:19:30Z",
+      "last_worked": "2026-10-23T12:32:44Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/witnesses.py"
@@ -12500,24 +12500,24 @@
     {
       "symbol": "W611",
       "title": "Manifest drift: compare each landed commit's actual diff paths to its card's manifest and alert on the difference (misprediction feedback)",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [
-        "file:src/nemik/stackable.py!w",
-        "file:src/nemik/stackable_cli.py!w"
+        "file:src/nemik/stackable_cli.py!w",
+        "file:tests/test_drift_lines.py!w"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Part 3 landed d63d8b2 (nemik_manifest_drift gauge, shared drifted finding in stackable_cli). Remaining: feed ride_along into nemik-stackable --propose as suggested additions",
+      "next_bounded_step": "Land stack354: ride_suggestions appended to nemik-stackable --propose; then close W611",
       "evidence": "2026-10-17: part 1 landed 378b112, pushed: nemik.drift (drift, kind, ride_along), tests/test_drift.py. Not wired to history.cited_files, the nemik_manifest_drift gauge or --propose",
       "issued_at": "2026-10-17T02:01:21Z",
       "minted_during": "tick",
       "caused_by": "github-8f",
-      "last_worked": "2026-10-18T20:17:59Z",
+      "last_worked": "2026-10-23T12:32:07Z",
       "ticks_blocked": 0,
       "manifest": [
-        "src/nemik/drift.py",
-        "tests/test_drift.py"
+        "src/nemik/stackable_cli.py",
+        "tests/test_drift_lines.py"
       ],
       "size_class": "small",
       "completed": null
@@ -20064,7 +20064,26 @@
   "heartbeat": "2026-10-22T02:06:35Z",
   "lock": null,
   "predecessor_job_id": "disarmed",
-  "leases": [],
+  "leases": [
+    {
+      "tag": "file:src/nemik/stackable.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W611",
+      "base_sha": "620f431a169021685414007ba07a888ee838f8b6",
+      "taken_at": "2026-10-23T12:29:58Z",
+      "renewed_at": "2026-10-23T12:29:58Z",
+      "expires_at": "2026-10-23T12:59:58Z"
+    },
+    {
+      "tag": "file:src/nemik/stackable_cli.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W611",
+      "base_sha": "620f431a169021685414007ba07a888ee838f8b6",
+      "taken_at": "2026-10-23T12:29:58Z",
+      "renewed_at": "2026-10-23T12:29:58Z",
+      "expires_at": "2026-10-23T12:59:58Z"
+    }
+  ],
   "advice": [
     {
       "tool": "block-behind-open",
