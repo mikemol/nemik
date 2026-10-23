@@ -226,6 +226,99 @@ def grounded(
     return into, potential
 
 
+def _cone_edges(
+    nodes: list[str], front: set[str], prereq: dict[str, list[str]], edge: float
+) -> list[tuple[str, str, float]]:
+    """List a cone's dependencies as edges of one conductance, as flow.solve builds them.
+
+    Args:
+        nodes: The cone's cards.
+        front: The ready cards, which have no prerequisites in the model.
+        prereq: card -> its open prerequisites.
+        edge: The conductance of one dependency.
+
+    Returns:
+        (card, prerequisite, edge) for each dependency of a card that is not ready.
+
+    """
+    return [
+        (card, prerequisite, edge)
+        for card in nodes
+        if card not in front
+        for prerequisite in prereq.get(card, [])
+    ]
+
+
+def _has_ground(nodes: list[str], front: set[str]) -> bool:
+    """Say whether a cone holds a ready card, which is where its demand can go.
+
+    Args:
+        nodes: The cone's cards.
+        front: The ready cards.
+
+    Returns:
+        True when one of the cards is ready.
+
+    """
+    return any(node in front for node in nodes)
+
+
+def salience(
+    demand: dict[str, float],
+    needs: dict[str, list[str]],
+    front: set[str],
+    edge: float = 1.0,
+) -> tuple[dict[str, float], dict[str, float]]:
+    """Propagate each source's demand to the ready frontier through its own cone (nemik:W872).
+
+    nemik.flow.solve over plain floats, for the salience and the stranded demand: for every source
+    in demand a nodal solve on its prerequisite cone (grounded), the current into each ready card
+    summed over sources. A ready source absorbs its own demand; a source whose cone holds no ready
+    card is stranded. Demand is conserved per source, to a relative tolerance of 1e-9, or it is a
+    defect and raises.
+
+    Args:
+        demand: source card -> the demand it injects.
+        needs: card -> its open prerequisites; a prerequisite named twice counts once.
+        front: The ready cards.
+        edge: The conductance of one dependency.
+
+    Returns:
+        (salience per ready card, stranded demand per source).
+
+    Raises:
+        ValueError: A source's demand is not conserved.
+
+    """
+    prereq: dict[str, list[str]] = {}
+    for card, prerequisites in needs.items():
+        if card not in front:
+            prereq[card] = sorted(set(prerequisites))
+    absorbed: dict[str, float] = {}
+    stranded: dict[str, float] = {}
+    for source in sorted(demand):
+        amount = demand[source]
+        if not amount:
+            continue
+        if source in front:
+            absorbed[source] = absorbed.get(source, 0.0) + amount
+            continue
+        nodes = cone(prereq, front, source)
+        if not _has_ground(nodes, front):
+            stranded[source] = amount
+            continue
+        edges = _cone_edges(nodes, front, prereq, edge)
+        into, _ = grounded(edges, front, nodes, source, amount)
+        total = 0.0
+        for card in sorted(into):
+            absorbed[card] = absorbed.get(card, 0.0) + into[card]
+            total += into[card]
+        if abs(total - amount) > 1e-9 * max(1.0, abs(amount)):
+            msg = f"demand at {source} is not conserved: {amount} in, {total} out"
+            raise ValueError(msg)
+    return absorbed, stranded
+
+
 def downstream_weight(
     succ: dict[str, list[str]],
     done: set[str],

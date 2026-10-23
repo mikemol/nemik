@@ -11,7 +11,14 @@ import pytest
 from rdflib import Graph
 
 from nemik.adapter import NEMIK, OSLC_CM, queue_graph
-from nemik.cardrank import cone, downstream_weight, grounded, parse_weights, unknowns
+from nemik.cardrank import (
+    cone,
+    downstream_weight,
+    grounded,
+    parse_weights,
+    salience,
+    unknowns,
+)
 from nemik.flow import solve
 from nemik.rank import Weights, load_weights, ref_of, successors
 from nemik.rank import downstream_weight as graph_weight
@@ -207,3 +214,40 @@ def test_a_component_with_no_ground_raises() -> None:
     nodes = cone(needs, set(), "a")
     with pytest.raises(ZeroDivisionError):
         grounded(_edges(needs, set(), nodes), set(), nodes, "a", 1.0)
+
+
+NEEDS = {
+    "a": ["b", "c"],
+    "b": ["d", "e"],
+    "c": ["e"],
+    "d": [],
+    "e": [],
+    "x": ["y"],
+    "y": ["x"],
+}
+FRONT = {"d", "e"}
+DEMAND = {"a": 1.0, "b": 2.0, "x": 3.0, "d": 0.5}
+
+
+def test_the_float_salience_matches_flow_solve_on_a_fleet_with_every_case() -> None:
+    """Shared prerequisites, a ready source and one with no ground: salience and stranded agree."""
+    got, stranded = salience(DEMAND, NEEDS, FRONT)
+    exact = solve({k: Fraction(v) for k, v in DEMAND.items()}, NEEDS, FRONT)
+    assert sorted(got) == sorted(exact.salience)
+    for card in got:
+        assert abs(got[card] - float(exact.salience[card])) < TOLERANCE
+    assert stranded == {k: float(v) for k, v in exact.stranded.items()}
+    assert sorted(stranded) == ["x"]
+
+
+def test_the_demand_is_all_accounted_for() -> None:
+    """What reaches the ready cards plus what is stranded is what was injected."""
+    got, stranded = salience(DEMAND, NEEDS, FRONT)
+    total = sum(got.values()) + sum(stranded.values())
+    assert abs(total - sum(DEMAND.values())) < TOLERANCE
+
+
+def test_no_demand_gives_no_salience() -> None:
+    """A source with nothing injected is skipped, and an empty demand answers nothing."""
+    assert salience({"a": 0.0}, NEEDS, FRONT) == ({}, {})
+    assert salience({}, NEEDS, FRONT) == ({}, {})
