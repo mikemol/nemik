@@ -59,6 +59,7 @@ from nemik.history import oldest_rows
 from nemik.hostroot import HostRow, read_document, stale
 from nemik.landings import read_document as read_landings
 from nemik.landings import series as landing_series
+from nemik.letters import report as letters_report
 from nemik.luthenseries import board, load
 from nemik.outbox import outbox
 from nemik.overlaps import overlaps
@@ -77,7 +78,7 @@ def check_report(name: str, graph: Graph, root: Path) -> str | None:
     """Give one of nemik-check's report modes as the CLI words it (nemik:W795, W796).
 
     Args:
-        name: "ready-neither", "unmanifested" or "integrity".
+        name: "ready-neither", "unmanifested", "integrity", "letters" or "fold".
         graph: The merged queue graph the last rebuild left.
         root: The fleet root, for the reports that read the queue files.
 
@@ -92,6 +93,11 @@ def check_report(name: str, graph: Graph, root: Path) -> str | None:
         return unmanifested_text(graph)
     if name == "integrity":
         return integrity_text(graph, root)
+    if name in {"letters", "fold"}:
+        # nemik:W862, W863: the inbox report as --letters and --fold print it; the writing mode
+        # (--apply) is not served, only the plan it would carry out.
+        known = {repo for repo, _ in workstream_files(root, QUEUE)}
+        return "\n".join(letters_report(root, known, name == "fold")[0])
     return None
 
 

@@ -179,6 +179,8 @@ def hub_modules_depend_on_everything_below():
     # --oldest calls (it reads queue files and a liveness record and starts no process).
     # nemik:W854: and answers /history/<mode>.json from the documents nemik-history --publish
     # writes, through histdocs, a leaf of plain text that reads no file.
+    # nemik:W862: and answers /check/letters.json and /check/fold.json with letters.report, the
+    # function nemik-check --letters and --fold print (a leaf of stdlib file reads).
     expected = {
         "metrics": lower | {"realize", "runlogs", "workrows"},
         "serve": lower
@@ -197,6 +199,7 @@ def hub_modules_depend_on_everything_below():
             "floorasks",
             "history",
             "histdocs",
+            "letters",
         },
     }
     for hub, want in expected.items():

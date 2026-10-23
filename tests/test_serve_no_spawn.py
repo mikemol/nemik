@@ -46,6 +46,8 @@ ROUTES = [
     "/check/ready-neither.json",
     "/check/unmanifested.json",
     "/check/integrity.json",
+    "/check/letters.json",
+    "/check/fold.json",
     "/graph.json",
     "/graph.ttl",
     "/vendor/cytoscape.min.js",
