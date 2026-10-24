@@ -68,6 +68,7 @@ class _Options(argparse.Namespace):
     out: Path
     repo: str
     url: str
+    address: str
 
 
 def apply(page: Page, view: str, repo: str) -> None:
@@ -138,17 +139,29 @@ def main(argv: list[str] | None = None) -> int:
 
     """
     parser = argparse.ArgumentParser(prog="python -m nemik.pdf", description=__doc__)
-    parser.add_argument("view", help=f"one of {', '.join(pdfviews.NAMES)}")
+    parser.add_argument(
+        "view", help=f"one of {', '.join(pdfviews.NAMES)}, or {pdfviews.ADDRESS}"
+    )
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--repo", default="", help="for the repo view")
     parser.add_argument("--url", default=HOST_URL, help="a running nemik-serve")
+    parser.add_argument(
+        "--address",
+        default="",
+        help="for the address view: #/<repo>[/W<n>], what the page opens at (nemik:W955)",
+    )
     options = parser.parse_args(argv, namespace=_Options())
     try:
         pdfviews.steps(options.view, options.repo)
+        opened = (
+            pdfviews.at(options.url, options.address)
+            if options.view == pdfviews.ADDRESS
+            else options.url
+        )
     except ValueError as error:
         sys.stderr.write(f"nemik-pdf: {error}\n")
         return 2
-    render(options.url, options.view, options.repo, options.out)
+    render(opened, options.view, options.repo, options.out)
     sys.stdout.write(f"{options.out}\n")
     return 0
 

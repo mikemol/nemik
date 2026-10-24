@@ -16,7 +16,31 @@ REPO = "repo"
 ASKS = "asks"
 RANK = "rank"
 NAMES = [FLEET, TREEMAP, REPO, ASKS, RANK]
+# nemik:W955: the page now reads its address (W953), so a view can also be reached by opening
+# the page at one: `address` sets no control, the address does the picking, and it is not one
+# of NAMES (those are settings of controls).
+ADDRESS = "address"
 HOPS = "2"
+
+
+def at(url: str, address: str) -> str:
+    """Join a page URL to an address the page reads on load.
+
+    Args:
+        url: The running nemik-serve, with or without a fragment.
+        address: `#/<repo>[/W<n>]`, as nemik.web's viewstate writes it.
+
+    Returns:
+        The URL with that fragment in place of any other.
+
+    Raises:
+        ValueError: when the address does not start with `#/`.
+
+    """
+    if not address.startswith("#/"):
+        msg = f"an address starts with #/ (for example #/mtools/W5), not {address!r}"
+        raise ValueError(msg)
+    return url.partition("#")[0] + address
 
 
 def _order(value: str) -> Step:
@@ -43,6 +67,8 @@ def steps(view: str, repo: str = "") -> list[Step]:
         ValueError: when the view is unknown, or the repo view is asked for without a repo.
 
     """
+    if view == ADDRESS:
+        return []
     if view == FLEET:
         return [("check", "#rollup", "")]
     if view == TREEMAP:

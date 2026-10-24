@@ -36,6 +36,16 @@ the PDF command has to set them itself. The controls, by element id or name in `
 Not in the set: `showDone` (a long history that no phone page needs), and `listclock` (it only
 changes the order of the recent list).
 
+## Opening at an address (W955)
+
+The page now keeps a scope in its address (W952 to W954): `#/<repo>` or `#/<repo>/W<n>`, read when it
+loads. So a view can also be reached by opening the page at one, and `nemik-pdf address --address
+'#/mtools/W5' --out FILE` prints exactly that: the repo picked and the card shown. The `address` view
+sets no control (the address does the picking), so it is not one of the table's names, and it is the
+way to print a card the named views do not reach. The address must start with `#/`; anything else is
+refused rather than guessed. The view token the address may carry is not read yet: the page has no
+views, and their names are the operator's to settle (docs/page-structure-map.md).
+
 ## What W892 has to do with this
 
 Because no URL carries a view, `nemik-pdf VIEW` sets the controls above through playwright after the

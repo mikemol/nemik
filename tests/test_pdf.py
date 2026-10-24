@@ -42,6 +42,32 @@ def test_an_unknown_view_is_refused_with_the_names() -> None:
         pdfviews.steps("poster")
 
 
+def test_the_address_view_sets_no_control_and_joins_the_address() -> None:
+    """The page picks from the address it opens at, so no steps; at() puts it in the URL."""
+    assert pdfviews.steps(pdfviews.ADDRESS) == []
+    assert pdfviews.ADDRESS not in pdfviews.NAMES
+    assert pdfviews.at("http://h:8765/", "#/mtools/W5") == "http://h:8765/#/mtools/W5"
+    assert pdfviews.at("http://h:8765/#/old", "#/new") == "http://h:8765/#/new"
+
+
+def test_an_address_must_start_with_hash_slash() -> None:
+    """A bare repo name or a path is refused, so a typo cannot print the wrong thing."""
+    for bad in ("mtools", "/mtools", "#mtools", ""):
+        with pytest.raises(ValueError, match="starts with #/"):
+            pdfviews.at("http://h:8765/", bad)
+
+
+def test_the_address_view_prints_a_pdf(tmp_path: Path) -> None:
+    """Opened at a repo's address, the page prints to a PDF as a named view does."""
+    out = tmp_path / "address.pdf"
+    with webpage.served() as url:
+        try:
+            render(pdfviews.at(url, "#/mtools"), pdfviews.ADDRESS, "", out)
+        except PlaywrightError as error:
+            pytest.skip(f"chromium unavailable: {error}")
+    assert out.read_bytes().startswith(b"%PDF")
+
+
 @pytest.mark.parametrize("view", pdfviews.NAMES)
 def test_a_view_prints_a_pdf(view: str, tmp_path: Path) -> None:
     """The fixture fleet, served and printed, gives a file that starts as a PDF."""
