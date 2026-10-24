@@ -2056,3 +2056,7 @@
 2026-10-24T15:13:16Z  status W968 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T15:13:18Z  status W966 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T15:13:23Z  tick  W966 advanced  unblock   "W966's code landed (008b09a) and the forecast was issued with it (1713 rows, 15:12:51Z); W968 witnesses the +1d horizon (2026-10-25 15:13Z) and W966 waits on it for the score; queue commit running [blocked by W968]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T15:22:53Z  interrupt W969 minted    -         "The graph payload carries a collapse umbrella node over the blocked cards it rolls up, with its n-path address, in the field manifest and the API schema"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W709
+2026-10-24T15:22:53Z  interrupt W970 minted    -         "The page draws one mark per collapse umbrella, named for assistive technology, with the WCAG chain test as its oracle"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W709
+2026-10-24T15:23:11Z  status W969 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T15:23:12Z  status W970 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

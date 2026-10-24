@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 968,
+  "counter": 970,
   "waypoints": [
     {
       "symbol": "W1",
@@ -15057,7 +15057,7 @@
     {
       "symbol": "W709",
       "title": "The graph payload and page draw a collapse umbrella node over the blocked cards it rolls up, with its n-path address",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W693"
       ],
@@ -15067,14 +15067,17 @@
         "file:src/nemik/web/index.html!w",
         "file:tests/test_collapse_payload.py!w"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W969",
+        "W970"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Needs bazel build //:.venv to have linked nemik.collapse (no gate running). Then blocks.py adds the umbrella nodes from collapse.collapse to the payload, the page draws one mark per umbrella (one mark per state rule; WCAG 2.5.3 name), tests/test_collapse_payload.py pins the payload",
       "evidence": "",
       "issued_at": "2026-10-19T01:14:37Z",
       "minted_during": "interrupt",
       "caused_by": "W693",
-      "last_worked": "2026-10-19T01:22:03Z",
+      "last_worked": "2026-10-24T15:22:53Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/blocks.py",
@@ -15082,7 +15085,8 @@
         "src/nemik/web/index.html",
         "tests/test_collapse_payload.py"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "completed": null
     },
     {
       "symbol": "W710",
@@ -22115,6 +22119,63 @@
       "witness": "input.now >= \"2026-10-25T15:14:00\"",
       "witness_lang": "rego",
       "completed": null
+    },
+    {
+      "symbol": "W969",
+      "title": "The graph payload carries a collapse umbrella node over the blocked cards it rolls up, with its n-path address, in the field manifest and the API schema",
+      "status": "working",
+      "enables": [
+        "W709"
+      ],
+      "touches": [
+        "file:src/nemik/serve.py!w",
+        "file:src/nemik/data/field-manifest.json!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Find where serve builds the graph nodes (open_blockers is set there), add one node per collapse.collapse umbrella (id from collapse.umbrella_id, its members, its n-path from collapse.paths, its label) with the field-manifest entries and withheld's treatment (a withheld member must not leak through the umbrella's members); tests/test_collapse_payload.py pins the payload and the manifest check; do not touch the page (W970)",
+      "evidence": "",
+      "issued_at": "2026-10-24T15:22:53Z",
+      "minted_during": "interrupt",
+      "caused_by": "W709",
+      "last_worked": "2026-10-24T15:23:11Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/serve.py",
+        "src/nemik/data/field-manifest.json",
+        "src/nemik/withheld.py",
+        "tests/test_collapse_payload.py"
+      ],
+      "size_class": "medium"
+    },
+    {
+      "symbol": "W970",
+      "title": "The page draws one mark per collapse umbrella, named for assistive technology, with the WCAG chain test as its oracle",
+      "status": "blocked",
+      "enables": [
+        "W709"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "nemik:W969"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "After W969: the page draws one mark per umbrella node (one mark per state rule), with an accessible name that holds its visible text (WCAG 2.5.3), tested with the WCAG chain; the page files are at their line ceilings, so a new file (collapse.js) unless a line can be traded",
+      "evidence": "",
+      "issued_at": "2026-10-24T15:22:53Z",
+      "minted_during": "interrupt",
+      "caused_by": "W709",
+      "last_worked": "2026-10-24T15:23:12Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/web/panels.js",
+        "src/nemik/web/render.js",
+        "src/nemik/web/index.html",
+        "tests/test_collapse_marks.py"
+      ],
+      "size_class": "medium"
     }
   ],
   "residue": [
@@ -22281,6 +22342,24 @@
       "renewed_at": "2026-10-24T12:59:32Z",
       "expires_at": "2026-10-24T13:29:32Z",
       "lapse_ledgered": true
+    },
+    {
+      "tag": "file:src/nemik/serve.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W969",
+      "base_sha": "4ebc5735b28aefeb5f941a8948676e8dec2af5f9",
+      "taken_at": "2026-10-24T15:23:11Z",
+      "renewed_at": "2026-10-24T15:23:11Z",
+      "expires_at": "2026-10-24T15:53:11Z"
+    },
+    {
+      "tag": "file:src/nemik/data/field-manifest.json!w",
+      "holder": "(unlocked)",
+      "waypoint": "W969",
+      "base_sha": "4ebc5735b28aefeb5f941a8948676e8dec2af5f9",
+      "taken_at": "2026-10-24T15:23:11Z",
+      "renewed_at": "2026-10-24T15:23:11Z",
+      "expires_at": "2026-10-24T15:53:11Z"
     }
   ],
   "advice": [
