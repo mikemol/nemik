@@ -9,6 +9,7 @@
 <script src="vendor/cytoscape-dagre.js"></script>
 <script src="graph.js"></script>
 <script src="render.js"></script>
+<script src="queue.js"></script>
 <script src="panels.js"></script>
 <script src="cards.js"></script>
 <script src="wasm.js"></script>
@@ -61,6 +62,9 @@
     <div id="weather" class="stat">No outage is being waited on.</div>
     </details>
     <div id="historyBox" hidden><details class="sec" id="sec-history" open><summary>History</summary><div id="history" class="stat"></div></details></div>
+    <details class="sec" id="sec-queue" open><summary>Queue</summary>
+    <div id="queue" class="stat">Pick a repo.</div>
+    </details>
     <details class="sec" id="sec-goals" open><summary>Goals</summary>
     <div id="goals" class="stat">Pick a repo.</div>
     </details>
@@ -222,7 +226,7 @@ document.getElementById("repos").onclick = ev => {
   if (picked.has(r)) picked.delete(r); else picked.add(r);
   b.setAttribute("aria-pressed", picked.has(r));
   try { localStorage.setItem("nemik.repos", JSON.stringify([...picked])); } catch (e) { /* not remembered */ }
-  draw(); findings(); goals(); weather(); history();
+  draw(); findings(); goals(); queuePanel(); weather(); history();
 };
 
 

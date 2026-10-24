@@ -52,6 +52,9 @@ look for, or move the look with it:
 7. W808, W809, W810: the rings and ink, the scopes, critical chains and list orders to `graph.js`;
    render, the in-place poll follow and the draw helpers to `render.js` (graph.js would have passed
    900 lines). `index.html` is then the markup and the statements that wire the page at load.
+8. W932: the Queue section (a repo's working cards, then its ready cards numbered in work order with
+   the reason each sits where it does, read from `/queue.json`) to `queue.js`, a file of its own so
+   `panels.js` keeps its ceiling.
 
 The script is global `function`s and `let`s today, so the first split keeps them global by loading
 the modules as classic scripts in order; turning them into ES modules is a later, separate step.
