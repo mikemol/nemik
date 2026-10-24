@@ -98,3 +98,39 @@ ones that did not), which `--score` does not print.
 So the bar W933 set stands unmet: a predicted start time is shown only for a forecast with verified
 skill over climatology, and this one has none shown. Trial 3 (gate duration, blocker depth) is
 worth trying, judged on a score that can see discrimination, not on Brier alone.
+
+## The measure, and what it says of the second attempt (2026-10-24)
+
+`nemik-history --score` now prints a discrimination per lead (W965): the chance that a card which
+finished was given a higher forecast than one which did not, ties counting half, so 0.5 is a forecast
+that ranks nothing and 1.0 one that puts every finisher first. On the 2026-10-23 issue alone (+1d, n
+541, about eleven finishers) it is 0.66. With so few finishers the standard error is about 0.09
+(Hanley and McNeil's estimate), so 0.66 is about 1.8 standard errors above 0.5: suggestive, not
+shown. Nearly all of it comes from the one card given 0.27 that finished. One issue cannot settle it;
+the score of each matured issue is kept here beside its standard error.
+
+## Trial 3, designed before it is built: status, not gate duration (nemik:W966)
+
+The plan above named gate duration. Reading `forecastshingle` and `history.forecast_rows` first shows
+a better first feature. A card's chance is its lead-time chance scaled by `min(1, rate * horizon /
+(ahead + 1))`, where `ahead` is how many cards of its repo are older than it, and the oldest-first
+order counts **every open card, blocked ones included**. Two things in that are wrong about how work
+is taken. A blocked card does not take a slot in the line: nobody can work it until what it waits for
+lands. And the line is not worked oldest first but in rank order among the cards that can start. So a
+repo with forty old blocked cards makes every younger ready card look forty places back, and a blocked
+card at the front of the line looks about to be reached.
+
+Gate duration would only change the finishing rate, which `finish_rates` already measures from what
+the repo really closed, gate included; it adds nothing the rate does not already carry.
+
+So trial 3 changes two things and scores them on discrimination: `ahead` counts only the cards that can
+start (ready or working) older than this one; and a blocked card's chance is capped by the share of
+blocked stints that ended within the horizon (`climate.waits_of`, which already measures them), since
+that, not the repo's rate, is what a blocked card waits on. Trial 4 (blocker depth, W967) refines the
+second: how long a blocked card waits depends on how deep its chain of blockers is.
+
+What is needed that is not there yet: a card's status at the moment the forecast is issued
+(`open_ages` gives ages, not states; the events hold the transitions, so it can be rebuilt as
+`levels_at` does for counts), and an as-of replay to score the feature on issues already matured,
+which does not exist. Without a replay the test is forward again: issue with the feature, wait a day,
+score on discrimination beside the 2026-10-23 issue's 0.66 and 0.09.
