@@ -347,6 +347,10 @@
   "as_written": "no module named 'tomllib'",
   "stripped": "no module named 'tomllib'"
  },
+ "tracker": {
+  "as_written": "syntax error, unexpected '='",
+  "stripped": "syntax error, unexpected '='"
+ },
  "trs": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'rdflib'"
