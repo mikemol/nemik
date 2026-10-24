@@ -2165,3 +2165,18 @@
 2026-10-24T23:11:36Z  status W1004 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T23:11:38Z  status W1005 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T23:12:17Z  tick  W1004 advanced  collapse  "W1001 atomized into W1004 (pure learned bound and overdue count, built, bazel test running, stack423 written) and W1005 (rank objective and tier); W1003 built as stack422; stack421 gating [blocked by W1005]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T23:22:24Z  status W1005 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T23:22:26Z  status W1000 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T23:22:27Z  status W1002 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T23:23:41Z  interrupt W1006 minted    -         "nemik-work never demotes a working card, and the skill states the zero-working-while-ready rule and the stale-working rule, not a count above one"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W43
+2026-10-24T23:25:03Z  status W1006 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T23:33:47Z  interrupt W1007 minted    -         "The open-commitment count per repo, from mtools' commitment ledger, is a ratchet on the pace board and gauges"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W44
+2026-10-24T23:33:49Z  interrupt W1008 minted    -         "A shape warns on an open commitment that names a card of this repo whose evidence is no newer than the statement"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W44
+2026-10-24T23:34:11Z  status W1007 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T23:34:13Z  status W1008 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T23:42:54Z  interrupt W1009 minted    -         "A shape warns on a G0 intent older than the learned bound that no landing has delta-checked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W44
+2026-10-24T23:42:56Z  interrupt W1010 minted    -         "A shape warns on a retro record with zero sustain rows"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W44
+2026-10-24T23:42:57Z  interrupt W1011 minted    -         "A shape warns on a card blocked on the operator whose evidence holds no executed probe, a command and its output"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W44
+2026-10-24T23:43:28Z  status W1010 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T23:43:31Z  status W1009 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T23:48:34Z  status W1011 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
