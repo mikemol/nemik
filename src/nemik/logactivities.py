@@ -53,6 +53,26 @@ def _activity(line: str) -> list[dict[str, str]]:
     return [out]
 
 
+def repos(lines: list[str]) -> list[str]:
+    """Name the repos whose wait activities the lines hold.
+
+    Args:
+        lines: The JSON records of a VictoriaLogs answer, one per line.
+
+    Returns:
+        Each actor's repo (the actor less `urn:nemik:`), once, sorted.
+
+    """
+    prefix = "urn:nemik:"
+    found = {
+        a["actor"][len(prefix) :]
+        for line in lines
+        for a in _activity(line)
+        if a["actor"].startswith(prefix)
+    }
+    return sorted(found)
+
+
 def _order(activity: dict[str, str]) -> tuple[str, str]:
     """Order activities by when they were published, then by id.
 
