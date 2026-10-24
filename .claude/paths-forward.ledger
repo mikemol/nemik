@@ -2118,3 +2118,8 @@
 2026-10-24T18:59:03Z  tick  W991 minted    -         "Wire the real ratchet value series from mtools into the pace computation"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W986
 2026-10-24T18:59:10Z  status W991 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T18:59:12Z  status W987 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T19:19:46Z  tick  W992 minted    -         "A shape warns, and nemik-rank shows a policy line, on a card whose only blocker is an atomize or grooming umbrella once it has been blocked longer than a learned tick count"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W37
+2026-10-24T19:28:47Z  status W990 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T19:32:38Z  status W987 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T19:32:38Z  status W988 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T19:32:38Z  status W989 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
