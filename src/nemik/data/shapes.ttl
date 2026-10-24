@@ -632,3 +632,50 @@ nemik:RetroTimelineShape a sh:NodeShape ;
                     FILTER(STRLEN(STR(?h)) > 0)
                 }
             }""" ] .
+
+# A review pass may not re-find what an earlier pass found (nemik:W983, gate G4): independence is made
+# by subtracting the union of earlier findings from the admissible set, so a repeat means the pass
+# did not decorrelate, however it was worded. Findings are compared by their key, so a rephrased
+# repeat is the author's to key the same.
+nemik:RetroPassShape a sh:NodeShape ;
+    sh:targetClass nemik:RetroPass ;
+    sh:severity sh:Violation ;
+    sh:sparql [
+        sh:message "this pass re-finds a finding of an earlier pass: the subtraction was not applied, so the pass is not decorrelated from the one before it" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this <https://github.com/mikemol/nemik/ns#passOf> ?r ;
+                      <https://github.com/mikemol/nemik/ns#passNumber> ?n ;
+                      <https://github.com/mikemol/nemik/ns#passFinding> ?f .
+                ?earlier <https://github.com/mikemol/nemik/ns#passOf> ?r ;
+                         <https://github.com/mikemol/nemik/ns#passNumber> ?m ;
+                         <https://github.com/mikemol/nemik/ns#passFinding> ?f .
+                FILTER(<http://www.w3.org/2001/XMLSchema#integer>(?m) < <http://www.w3.org/2001/XMLSchema#integer>(?n))
+            }""" ] .
+
+# A retro's fixpoint is exhausted from inside, never verified (nemik:W983, gate G8): the label is the
+# one phrase that says so, and it is only honest when the last pass returned nothing new.
+nemik:RetroFixpointShape a sh:NodeShape ;
+    sh:targetClass nemik:Retro ;
+    sh:severity sh:Violation ;
+    sh:sparql [
+        sh:message "a fixpoint is exhausted from inside, not verified: label it exhausted-not-verified" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this <https://github.com/mikemol/nemik/ns#fixpointLabel> ?l .
+                FILTER(STR(?l) != "exhausted-not-verified")
+            }""" ] ;
+    sh:sparql [
+        sh:message "this retro labels a fixpoint, but its last pass still returned findings: the chain has not reached an empty pass" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this <https://github.com/mikemol/nemik/ns#fixpointLabel> ?l .
+                ?p <https://github.com/mikemol/nemik/ns#passOf> $this ;
+                   <https://github.com/mikemol/nemik/ns#passNumber> ?n ;
+                   <https://github.com/mikemol/nemik/ns#passFinding> ?f .
+                FILTER NOT EXISTS {
+                    ?q <https://github.com/mikemol/nemik/ns#passOf> $this ;
+                       <https://github.com/mikemol/nemik/ns#passNumber> ?m .
+                    FILTER(<http://www.w3.org/2001/XMLSchema#integer>(?m) > <http://www.w3.org/2001/XMLSchema#integer>(?n))
+                }
+            }""" ] .

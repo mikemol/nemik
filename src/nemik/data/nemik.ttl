@@ -151,4 +151,10 @@ nemik:handoffInstrument a rdf:Property ; rdfs:comment "The tool or step the hand
 nemik:handoffChannel a rdf:Property ; rdfs:comment "Where the handoff travels: a letter, an ask, a card (nemik:W755, G8)." .
 nemik:handoffOperator a rdf:Property ; rdfs:comment "Who operates the handoff: 'self' or 'other'. 'other' needs a recorded self probe that was executed and failed (nemik:W755, G8)." .
 nemik:selfProbe a rdf:Property ; rdfs:comment "The outcome of trying the handoff oneself: 'executed-and-failed' is the only value that lets another operate it (nemik:W755, G8)." .
+# nemik:W983 (gates G4 and G8): the review passes of a retro, each forbidden to re-find an earlier finding.
+nemik:RetroPass a rdfs:Class ; rdfs:comment "One review pass of a retro, numbered from 1; its findings are subtracted from every later pass (nemik:W983, G4)." .
+nemik:passOf a rdf:Property ; rdfs:comment "The retro a pass belongs to (nemik:W983, G4)." .
+nemik:passNumber a rdf:Property ; rdfs:comment "A pass's place in the chain, an integer from 1 (nemik:W983, G4)." .
+nemik:passFinding a rdf:Property ; rdfs:comment "A finding a pass returned, named by a key that stays the same when later passes would re-find it (nemik:W983, G4)." .
+nemik:fixpointLabel a rdf:Property ; rdfs:comment "How a retro labels its fixpoint: only 'exhausted-not-verified', since an empty last pass shows the actor is out of findings and not that the result is correct (nemik:W983, G8)." .
 nemik:certifyChange a rdf:Property ; rdfs:comment "A finding that is a --certify verdict change instead of a card: the verdict it changes (nemik:W754, G7)." .
