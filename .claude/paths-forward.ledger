@@ -1884,3 +1884,10 @@
 2026-10-23T23:40:52Z  status W918 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T23:40:59Z  status W915 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-23T23:41:00Z  status W932 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T00:09:14Z  status W939 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T00:11:18Z  tick  W939 advanced  unblock   "W931 and W918 landed, W915 done; stack377 (W932 Queue panel, refused once on my own test expectation, fixed) and stack378 (W939 outbox Ticket state) gating [blocked by W932]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T00:20:53Z  status W932 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T00:20:53Z  status W933 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T00:41:07Z  status W939 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T00:41:07Z  status W940 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T00:42:09Z  status W940 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
