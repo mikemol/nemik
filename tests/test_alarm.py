@@ -48,7 +48,8 @@ def test_vtodo_carries_each_alarm_as_a_display_valarm() -> None:
     (todo,) = vtodos([ask], {"life"})
     assert "TRIGGER;RELATED=END:-PT2H" in todo
     assert "TRIGGER;VALUE=DATE-TIME:20261001T190000Z" in todo
-    assert todo.count("BEGIN:VALARM") == 2 and "ACTION:DISPLAY" in todo
+    assert todo.count("BEGIN:VALARM") == 2
+    assert "ACTION:DISPLAY" in todo
 
 
 def test_vtodo_carries_recurrence_as_stored() -> None:

@@ -47,8 +47,10 @@ def test_an_uncited_letter_is_an_unclaimed_row_with_its_claim(
     _repo(tmp_path)
     main(["a", "--root", str(tmp_path)])
     out = capsys.readouterr().out
-    assert "<- letter" in out and "UNCLAIMED" in out
-    assert "--add" in out and "--caused-by inbox/" in out
+    assert "<- letter" in out
+    assert "UNCLAIMED" in out
+    assert "--add" in out
+    assert "--caused-by inbox/" in out
 
 
 def test_a_cited_letter_is_not_listed(

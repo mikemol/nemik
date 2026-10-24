@@ -592,15 +592,13 @@
   "ANN001": 1,
   "D103": 5,
   "PLC0415": 4,
-  "PLR2004": 4,
-  "PT018": 1
+  "PLR2004": 4
  },
  "tests/test_alarm_delivery.py": {
   "ANN001": 3,
   "ANN202": 1,
   "D103": 4,
-  "PLR2004": 1,
-  "PT018": 2
+  "PLR2004": 1
  },
  "tests/test_apischema.py": {
   "D103": 2,
@@ -622,8 +620,7 @@
  },
  "tests/test_ask_priority.py": {
   "D103": 3,
-  "PLR2004": 1,
-  "PT018": 1
+  "PLR2004": 1
  },
  "tests/test_baseline.py": {
   "D103": 4,
@@ -645,7 +642,7 @@
   "D103": 5,
   "E501": 1,
   "PLR2004": 1,
-  "PT018": 3,
+  "PT018": 1,
   "SLF001": 3,
   "syntax": 1
  },
@@ -653,8 +650,7 @@
   "ANN001": 1,
   "D103": 2,
   "D205": 1,
-  "PLC0415": 2,
-  "PT018": 1
+  "PLC0415": 2
  },
  "tests/test_calendar_write.py": {
   "D103": 3,
@@ -687,7 +683,7 @@
   "D103": 7,
   "FBT001": 1,
   "PLR2004": 2,
-  "PT018": 4
+  "PT018": 1
  },
  "tests/test_catalog.py": {
   "D103": 1,
@@ -721,8 +717,7 @@
  "tests/test_claims_boundary.py": {
   "D103": 3,
   "DOC201": 1,
-  "E501": 3,
-  "PT018": 1
+  "E501": 3
  },
  "tests/test_containerfile.py": {
   "D103": 2,
@@ -734,8 +729,7 @@
   "ANN202": 1,
   "D103": 7,
   "PLC0415": 7,
-  "PLR2004": 4,
-  "PT018": 2
+  "PLR2004": 4
  },
  "tests/test_critical_cards.py": {
   "D103": 2,
@@ -850,7 +844,6 @@
  "tests/test_health.py": {
   "D103": 4,
   "PLR2004": 3,
-  "PT018": 2,
   "RUF069": 2
  },
  "tests/test_health_cards.py": {
@@ -887,7 +880,6 @@
  },
  "tests/test_hostapply.py": {
   "D103": 13,
-  "PT018": 7,
   "TC003": 1
  },
  "tests/test_ics_reader.py": {
@@ -911,7 +903,6 @@
  "tests/test_inbound_orphans.py": {
   "D103": 2,
   "PLC2701": 1,
-  "PT018": 2,
   "TC002": 1,
   "TC003": 1
  },
@@ -961,7 +952,6 @@
   "FBT003": 4,
   "PLC0415": 11,
   "PLR2004": 5,
-  "PT018": 5,
   "SLF001": 1,
   "TC003": 1
  },
@@ -1031,7 +1021,6 @@
  "tests/test_overlap_claims.py": {
   "D103": 3,
   "PLR2004": 1,
-  "PT018": 1,
   "RUF031": 1,
   "TC003": 1
  },
@@ -1089,7 +1078,6 @@
   "DOC201": 1,
   "E501": 4,
   "PLW1514": 1,
-  "PT018": 1,
   "S404": 1,
   "S603": 1
  },
@@ -1099,7 +1087,6 @@
  "tests/test_publish.py": {
   "D103": 7,
   "E501": 2,
-  "PT018": 3,
   "PTH115": 2,
   "S404": 1,
   "S603": 2,
@@ -1193,8 +1180,7 @@
   "E741": 1,
   "N803": 6,
   "PLR0913": 1,
-  "PLR0917": 1,
-  "PT018": 1
+  "PLR0917": 1
  },
  "tests/test_script_registries.py": {
   "D103": 2,
@@ -1301,8 +1287,7 @@
   "E501": 6,
   "PLC0415": 10,
   "PLC1901": 1,
-  "PLR2004": 4,
-  "PT018": 4
+  "PLR2004": 4
  },
  "tests/test_wake_alarms.py": {
   "ANN001": 7,
@@ -1323,8 +1308,7 @@
   "ANN001": 4,
   "ANN202": 1,
   "D103": 1,
-  "E501": 1,
-  "PT018": 1
+  "E501": 1
  },
  "tests/test_web_render.py": {
   "ANN001": 2,
@@ -1344,8 +1328,7 @@
   "D103": 5,
   "D205": 1,
   "D209": 1,
-  "PLC0415": 1,
-  "PT018": 2
+  "PLC0415": 1
  },
  "tests/test_witness_party.py": {
   "D103": 3,
@@ -1384,7 +1367,6 @@
   "DOC402": 1,
   "PLR2004": 5,
   "PLR6301": 1,
-  "PT018": 2,
   "TC003": 1,
   "UP052": 1
  },

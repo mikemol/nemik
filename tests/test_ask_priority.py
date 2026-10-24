@@ -17,7 +17,8 @@ def test_the_highest_floor_reached_sets_the_priority() -> None:
 
 
 def test_the_packaged_steps_are_declared() -> None:
-    assert priority(86.0) == 1 and priority(0.0) == 9
+    assert priority(86.0) == 1
+    assert priority(0.0) == 9
 
 
 def _ask(ref: str, salience: float | None) -> dict[str, Any]:

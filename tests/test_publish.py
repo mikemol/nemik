@@ -20,7 +20,8 @@ def test_a_publish_flips_current_and_writes_the_private_files(tmp_path: Path) ->
     snap = publish(FLEET, tmp_path / "pub", None)
     assert snap is not None
     current = tmp_path / "pub" / "current"
-    assert current.is_symlink() and (tmp_path / "pub" / os.readlink(current)) == snap
+    assert current.is_symlink()
+    assert (tmp_path / "pub" / os.readlink(current)) == snap
     for name in (
         "index.html",
         "hashes.json",
@@ -120,11 +121,13 @@ def test_a_change_of_content_is_published(tmp_path: Path) -> None:
     queue.write_text(queue.read_text() + "\n")
     assert fleet_key(root) != (first / "source-key").read_text()
     second = publish(root, tmp_path / "pub", None)
-    assert second is not None and second != first
+    assert second is not None
+    assert second != first
 
 
 def test_a_publish_keeps_the_build_caches_beside_the_snapshots(tmp_path: Path) -> None:
     # W518: the next fresh process starts warm from these
     assert publish(FLEET, tmp_path / "pub", None) is not None
     cache = tmp_path / "pub" / ".cache" / "build-caches.pickle"
-    assert cache.is_file() and cache.stat().st_size > 0
+    assert cache.is_file()
+    assert cache.stat().st_size > 0

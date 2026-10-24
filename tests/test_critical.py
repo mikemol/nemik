@@ -74,9 +74,11 @@ def test_tied_longest_chains_are_all_marked_and_graded_not_picked_by_sort_order(
     leaves = {f"a:W{i}" for i in range(2, 12)}
     assert found.length == 2
     assert set(found.chain) == leaves | {"a:W1"}  # all ten, not one by sort order
-    assert found.rank["a:W1"] == 2 and all(found.rank[c] == 1 for c in leaves)
+    assert found.rank["a:W1"] == 2
+    assert all(found.rank[c] == 1 for c in leaves)
     # W1 ends ten longest chains; each leaf starts one
-    assert found.paths["a:W1"] == 10 and all(found.paths[c] == 1 for c in leaves)
+    assert found.paths["a:W1"] == 10
+    assert all(found.paths[c] == 1 for c in leaves)
     assert "a:W12" not in found.chain
     # the answer does not depend on the order the cards were added in
     assert critical(_fan_in(list(reversed(range(1, 13))))) == found

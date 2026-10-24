@@ -71,7 +71,8 @@ def test_the_suite_covers_every_test_target() -> None:
     suite = suite[: suite.index(")\n")]
     assert 'name = "precommit"' in suite
     # the suite and the macro that makes the tests take their modules from the same glob
-    assert TESTS_GLOB in suite and f"for src in {TESTS_GLOB}" in build
+    assert TESTS_GLOB in suite
+    assert f"for src in {TESTS_GLOB}" in build
 
 
 def test_the_hook_refuses_when_bazel_is_absent(tmp_path: Path) -> None:

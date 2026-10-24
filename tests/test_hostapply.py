@@ -94,16 +94,21 @@ def test_a_row_walks_to_its_kind_and_the_units_it_touches() -> None:
 def test_the_fact_passes_only_for_a_fresh_applied_row() -> None:
     export = parse(_export())
     ok = fact(export, "beesd-verbosity", NOW)
-    assert ok is not None and ok["applied"] is True and ok["stale"] is False
+    assert ok is not None
+    assert ok["applied"] is True
+    assert ok["stale"] is False
     assert ok["digest"] == ROW_OK["digest"]
     unapplied = fact(export, "drain-tier-service", NOW)
-    assert unapplied is not None and unapplied["applied"] is False
+    assert unapplied is not None
+    assert unapplied["applied"] is False
 
 
 def test_a_stale_export_proves_nothing() -> None:
     export = parse(_export())
     late = fact(export, "beesd-verbosity", "2026-10-09T09:00:00Z")
-    assert late is not None and late["applied"] is False and late["stale"] is True
+    assert late is not None
+    assert late["applied"] is False
+    assert late["stale"] is True
 
 
 def test_a_row_the_exporter_could_not_read_is_unknown_not_pending() -> None:
@@ -124,9 +129,11 @@ def test_a_row_the_exporter_could_not_read_is_unknown_not_pending() -> None:
     assert export.rows["plain"].unobservable is False
     unknown = fact(export, "kubelet-swap", NOW)
     assert unknown is not None
-    assert unknown["unobservable"] is True and unknown["applied"] is False
+    assert unknown["unobservable"] is True
+    assert unknown["applied"] is False
     pending = fact(export, "plain", NOW)
-    assert pending is not None and pending["unobservable"] is False
+    assert pending is not None
+    assert pending["unobservable"] is False
 
 
 def test_an_unknown_row_is_an_unresolved_citation_not_a_pass() -> None:
@@ -153,7 +160,8 @@ def test_a_malformed_export_is_reported_and_never_reads_as_applied() -> None:
     assert any("duplicate id" in p for p in export.problems)
     assert any("no id" in p for p in export.problems)
     flagged = fact(export, "x", NOW)
-    assert flagged is not None and flagged["applied"] is False
+    assert flagged is not None
+    assert flagged["applied"] is False
 
 
 def test_an_unknown_effect_or_verb_is_a_problem() -> None:
@@ -176,7 +184,8 @@ def test_another_version_is_refused() -> None:
 def test_load_reads_the_file_beside_liveness_json(tmp_path: Path) -> None:
     (tmp_path / "host-apply.json").write_text(json.dumps(_export()), encoding="utf-8")
     export = load(tmp_path)
-    assert export is not None and "beesd-verbosity" in export.rows
+    assert export is not None
+    assert "beesd-verbosity" in export.rows
 
 
 def test_load_finds_nothing_when_there_is_neither_file_nor_exporter(

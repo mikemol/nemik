@@ -47,7 +47,8 @@ def test_band_table(v, want) -> None:
 def test_unscored_and_invalid_take_the_declared_default_and_say_why() -> None:
     assert band(None, B) == (B.unscored, "unscored")
     b, why = band("WV:1/R:H", B)
-    assert b == B.unscored and why.startswith("invalid:")
+    assert b == B.unscored
+    assert why.startswith("invalid:")
 
 
 def test_table_refuses_a_default_outside_its_order() -> None:

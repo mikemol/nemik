@@ -82,7 +82,8 @@ def test_unknown_is_not_false_and_a_few_blips_are_tolerated() -> None:
 def test_an_unknown_last_poll_at_the_timeout_is_exit_two_not_one() -> None:
     poll = _script((NOT_YET, "0.9"), (UNKNOWN, "probe unreachable"))
     code, line, _ = _wait(poll, timeout=10, every=10)
-    assert code == 2 and "UNKNOWN at the timeout" in line
+    assert code == 2
+    assert "UNKNOWN at the timeout" in line
 
 
 def test_durations() -> None:
@@ -162,7 +163,8 @@ def test_many_matching_series_print_a_readable_value(
 def test_a_probe_that_is_down_is_exit_two(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("NEMIK_VM_URL", "http://127.0.0.1:9")
     code, line = wait(promql_poll("up"), 5, 0.01)
-    assert code == 2 and "unreachable" in line
+    assert code == 2
+    assert "unreachable" in line
 
 
 def test_an_unset_endpoint_is_unknown_not_not_yet(

@@ -25,7 +25,8 @@ def test_a_letter_must_sit_in_the_inbox_it_names(tmp_path: Path) -> None:
     _letter(tmp_path, "nemik", "ghost.md", "nemik → nowhere: no such workstream")
     _letter(tmp_path, "nemik", "plain.md", "# a title with no addressee")
     addressed, unaddressed = headers(tmp_path)
-    assert len(addressed) == 4 and unaddressed == [("nemik", "plain.md")]
+    assert len(addressed) == 4
+    assert unaddressed == [("nemik", "plain.md")]
     found = misdelivered(addressed, {"nemik", "paperkit", "gcalculus", "life"})
     assert found == [
         "nemik/inbox/ghost.md: from nemik; names nowhere, which is no workstream",
@@ -72,7 +73,9 @@ def test_an_orphan_whose_waypoints_are_all_closed_is_archived_not_folded(
     assert len(fold_commands(tmp_path)) == 1
     assert "--caused-by inbox/open.md" in fold_commands(tmp_path)[0]
     (move,) = archive_commands(tmp_path)
-    assert move.startswith("mv ") and "done.md" in move and move.endswith("/archive/")
+    assert move.startswith("mv ")
+    assert "done.md" in move
+    assert move.endswith("/archive/")
 
 
 def test_an_old_dated_orphan_is_stale_and_the_scope_is_one_repo(tmp_path: Path) -> None:
@@ -95,7 +98,8 @@ def test_an_old_dated_orphan_is_stale_and_the_scope_is_one_repo(tmp_path: Path) 
     (add,) = fold_commands(tmp_path, repo="nemik", older_than=14, today=today)
     assert "2026-10-09-new.md" in add
     (move,) = archive_commands(tmp_path, repo="nemik", older_than=14, today=today)
-    assert "2026-08-01-old.md" in move and "life/inbox" not in move
+    assert "2026-08-01-old.md" in move
+    assert "life/inbox" not in move
     # without a cutoff nothing is stale, and every letter is live
     assert len(fold_commands(tmp_path, repo="nemik", today=today)) == 2
 
@@ -121,7 +125,8 @@ def test_an_alert_pair_needs_no_card_but_an_unresolved_opened_does(
     (card,) = fold_commands(tmp_path, repo="substrate")
     assert "stalled-opened-bbbb1111" in card  # no RESOLVED twin: still a card
     moves = archive_commands(tmp_path, repo="substrate")
-    assert len(moves) == 2 and all("a02e6095" in m for m in moves)
+    assert len(moves) == 2
+    assert all("a02e6095" in m for m in moves)
 
 
 def test_apply_mints_the_cards_and_archives_the_stale(tmp_path: Path) -> None:
@@ -180,7 +185,8 @@ def test_a_misdelivered_letter_is_copied_to_its_recipient_and_then_counts_as_del
 
     spaces = {"gcalculus", "linux-sources"}
     said, code = report(tmp_path, spaces, True, "linux-sources")
-    assert code == 5 and any(line.startswith("cp ") for line in said)
+    assert code == 5
+    assert any(line.startswith("cp ") for line in said)
     said, code = report(tmp_path, spaces, True, "linux-sources", None, True)
     assert any(line.startswith("delivered ") for line in said)
     assert code == 0  # the apply run's own verdict is the after state

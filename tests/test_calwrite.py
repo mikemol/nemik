@@ -112,9 +112,12 @@ def test_a_due_only_waypoint_sits_at_its_deadline_with_an_end_for_its_alarm(
     tmp_path: Path,
 ) -> None:
     (cpr, _) = events(_fleet(tmp_path), ["life"])
-    assert "DTSTART:20261001T220000Z" in cpr and "DTEND:20261001T220000Z" in cpr
-    assert "SUMMARY:cpr class" in cpr and "DESCRIPTION:nemik-ref: life:W9" in cpr
-    assert "TRIGGER;RELATED=END:-PT2H" in cpr and "ACTION:DISPLAY" in cpr
+    assert "DTSTART:20261001T220000Z" in cpr
+    assert "DTEND:20261001T220000Z" in cpr
+    assert "SUMMARY:cpr class" in cpr
+    assert "DESCRIPTION:nemik-ref: life:W9" in cpr
+    assert "TRIGGER;RELATED=END:-PT2H" in cpr
+    assert "ACTION:DISPLAY" in cpr
 
 
 def test_a_recurring_waypoint_keeps_its_rule_and_drops_a_completed_occurrence(

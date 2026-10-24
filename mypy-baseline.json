@@ -198,7 +198,7 @@
   "no-untyped-def": 1
  },
  "tests/test_alarm_delivery.py": {
-  "misc": 29,
+  "misc": 28,
   "no-untyped-call": 7,
   "no-untyped-def": 1,
   "type-arg": 3
@@ -501,7 +501,7 @@
   "misc": 3
  },
  "tests/test_vtodo.py": {
-  "misc": 94,
+  "misc": 90,
   "no-untyped-def": 3,
   "type-arg": 1
  },
@@ -528,7 +528,7 @@
   "no-untyped-def": 2
  },
  "tests/test_withheld.py": {
-  "misc": 76,
+  "misc": 75,
   "no-any-return": 1,
   "no-untyped-def": 7
  },

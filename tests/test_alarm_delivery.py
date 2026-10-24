@@ -13,7 +13,8 @@ def test_a_firing_is_delivered_once_across_overlapping_windows() -> None:
     seen: dict = {}
     first = undelivered([_a("2026-10-01T13:00:00Z")], seen)
     again = undelivered([_a("2026-10-01T13:00:00Z")], seen)
-    assert len(first) == 1 and again == []
+    assert len(first) == 1
+    assert again == []
 
 
 def test_occurrences_and_instants_are_distinct() -> None:
@@ -31,8 +32,12 @@ def test_errors_are_never_marked_delivered() -> None:
     bad = {**_a(""), "error": "bad trigger"}
     assert (
         undelivered([bad], seen) == [bad]
-        and undelivered([bad], seen) == [bad]
-        and seen == {}
+    )
+    assert (
+        undelivered([bad], seen) == [bad]
+    )
+    assert (
+        seen == {}
     )
 
 

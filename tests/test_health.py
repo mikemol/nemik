@@ -40,14 +40,16 @@ def test_declared_thresholds_are_read_for_each_signal() -> None:
 
 def test_a_repo_is_green_until_a_signal_crosses_its_floor() -> None:
     green = health(_repo(["ready", "ready", "blocked"]), "a", LIMITS)
-    assert green.status == "green" and green.reasons == []
+    assert green.status == "green"
+    assert green.reasons == []
 
 
 def test_the_worst_signal_decides_and_each_crossing_is_named() -> None:
     # 2 of 3 blocked is a share of 0.667 (amber); a card blocked 50 ticks is red.
     found = health(_repo(["ready", "blocked", "blocked"], ticks=50), "a", LIMITS)
     assert found.status == "red"
-    assert found.blocked_share == 0.667 and found.oldest_block_ticks == 50
+    assert found.blocked_share == 0.667
+    assert found.oldest_block_ticks == 50
     assert len(found.reasons) == 2
     assert any("oldest_block_ticks" in r and "red" in r for r in found.reasons)
     assert any("blocked_share" in r and "amber" in r for r in found.reasons)

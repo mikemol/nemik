@@ -40,7 +40,8 @@ def test_same_query_same_weather_across_repos_whitespace_aside(tmp_path) -> None
         _q(tmp_path, "b", ["  " + q.replace(" == ", "  ==\t")]),
     )
     wa = str(a.value(waypoint_uri("a", "W1"), NEMIK.weather))
-    assert wa.startswith("wx:") and wa == str(
+    assert wa.startswith("wx:")
+    assert wa == str(
         b.value(waypoint_uri("b", "W1"), NEMIK.weather)
     )
     assert a.value(waypoint_uri("a", "W2"), NEMIK.weather) is None

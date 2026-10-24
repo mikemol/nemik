@@ -56,7 +56,8 @@ def test_summary_is_the_stated_ask_and_relations_name_what_it_releases() -> None
 def test_calendar_is_crlf_folded_and_deterministic() -> None:
     text = calendar(vtodos(ASKS, {"life", "aeternum"}))
     assert text == calendar(vtodos(ASKS, {"life", "aeternum"}))
-    assert text.startswith("BEGIN:VCALENDAR\r\nVERSION:2.0\r\n") and text.endswith(
+    assert text.startswith("BEGIN:VCALENDAR\r\nVERSION:2.0\r\n")
+    assert text.endswith(
         "END:VCALENDAR\r\n"
     )
     for line in text.split("\r\n"):
@@ -119,7 +120,8 @@ def test_nemik_tasks_feeds_the_helper_and_returns_its_exit_code(tmp_path) -> Non
     r = installed.run("nemik-tasks", *base, "--helper", str(helper), "--apply")
     assert "TODOS 2" in r.stdout  # grouped by default: its repo's parent and the ask
     r = installed.run("nemik-tasks", *base, "--helper", str(tmp_path / "missing"))
-    assert r.returncode == 2 and "setup.sh" in r.stdout
+    assert r.returncode == 2
+    assert "setup.sh" in r.stdout
 
 
 def test_dtstart_and_due_pass_through_as_rfc5545_properties() -> None:
@@ -241,12 +243,19 @@ def test_apply_reruns_while_the_helper_defers_a_parent_then_converges(tmp_path) 
     r = installed.run("nemik-tasks", *base, "--apply")
     assert (
         r.returncode == 0
-        and "RETRY 1" in r.stdout
-        and "APPLIED" in r.stdout
-        and runs.read_text() == "2"
+    )
+    assert (
+        "RETRY 1" in r.stdout
+    )
+    assert (
+        "APPLIED" in r.stdout
+    )
+    assert (
+        runs.read_text() == "2"
     )
     runs.unlink()
     r = installed.run(
         "nemik-tasks", *base
     )  # plan only: a deferral is shown, never retried
-    assert "RETRY" not in r.stdout and runs.read_text() == "1"
+    assert "RETRY" not in r.stdout
+    assert runs.read_text() == "1"

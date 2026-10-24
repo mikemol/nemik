@@ -77,4 +77,5 @@ def test_a_cal_blocker_serves_no_event(tmp_path) -> None:
     m = Model(tmp_path)
     m.refresh()
     text = json.dumps(m.doc) + m.metrics().decode()
-    assert "urn:nemik:cal:" not in text and "Event" not in text
+    assert "urn:nemik:cal:" not in text
+    assert "Event" not in text

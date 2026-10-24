@@ -72,7 +72,8 @@ def test_a_cache_computed_by_other_code_is_not_trusted(
     _forget()
     monkeypatch.setattr(cachestore, "stamp", lambda: "the shapes changed")
     assert cachestore.load(tmp_path) is False
-    assert not shaclinc.export_cache() and not flow.export_solves()
+    assert not shaclinc.export_cache()
+    assert not flow.export_solves()
 
 
 def test_a_missing_or_damaged_file_is_a_cold_start(tmp_path: Path) -> None:
@@ -81,7 +82,8 @@ def test_a_missing_or_damaged_file_is_a_cold_start(tmp_path: Path) -> None:
     assert cachestore.load(tmp_path) is False
     (tmp_path / cachestore.NAME).write_bytes(b"")
     assert cachestore.load(tmp_path) is False
-    assert not shaclinc.export_cache() and not flow.export_solves()
+    assert not shaclinc.export_cache()
+    assert not flow.export_solves()
 
 
 def test_the_stamp_follows_the_shapes() -> None:

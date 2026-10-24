@@ -78,11 +78,16 @@ def test_withheld_item_is_dropped_whole_and_pointers_become_stubs(
     stub = [n for n in og["nodes"] if n["id"] == target]
     assert (
         len(stub) == 1
-        and stub[0]["title"] == "withheld"
-        and stub[0]["state"] == "withheld"
+    )
+    assert (
+        stub[0]["title"] == "withheld"
+    )
+    assert (
+        stub[0]["state"] == "withheld"
     )
     assert "SENTINEL-withheld-text" not in json.dumps(out)
-    assert all(a["ref"] != ref for a in og["operator"]) and all(
+    assert all(a["ref"] != ref for a in og["operator"])
+    assert all(
         b["blocked"] != ref for b in og["inbound"]
     )
     for name, doc in out.items():

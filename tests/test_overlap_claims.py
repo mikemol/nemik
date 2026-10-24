@@ -18,7 +18,8 @@ CLAIMS = (
 def test_claims_are_read_by_repo_and_tag() -> None:
     held = parse_claims(CLAIMS)
     assert held[("mtools", "nemik")] == Holder("69232:142119", "22s")
-    assert ("mtools", "locks") in held and len(held) == 2
+    assert ("mtools", "locks") in held
+    assert len(held) == 2
 
 
 def test_an_overlap_row_names_the_holder_when_there_is_one() -> None:
