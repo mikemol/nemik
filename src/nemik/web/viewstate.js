@@ -19,9 +19,19 @@ function parseAddress(hash) {
 
 // nemik:W953 (W937): the address is applied once, on the first load. The repo is picked before the chips
 // draw and the card is selected after the first render; a name the graph does not hold is ignored.
-let addressState = null, addressSelected = false;
+let addressState = null, addressSelected = false, addressCard = "", addressWritten = "";
+// nemik:W954: the address follows the pick and the card, one history entry per change, so the back button
+// is the way up: a step back reloads the page at that address, which applyAddress then reads.
+function writeAddress(cite) {
+  if (cite !== undefined) addressCard = cite;
+  const repo = picked.size === 1 ? [...picked][0] : "";
+  const symbol = addressCard.startsWith(repo + ":") ? addressCard.slice(repo.length + 1) : "";
+  const next = formatAddress({ scope: repo ? [repo, ...(symbol ? [symbol] : [])] : [], view: addressState ? addressState.view : "" });
+  if (next !== (location.hash || "#/")) { addressWritten = next; location.hash = next; }  // not history.pushState: W307's history() shadows it
+}
 function applyAddress() {
   if (addressState) return;
+  window.addEventListener("popstate", () => { if (location.hash !== addressWritten) location.reload(); });  // only a step the page did not write
   addressState = parseAddress(location.hash);
   const repo = addressState.scope[0];
   if (repo && data.nodes.some(n => n.repo === repo)) { picked.clear(); picked.add(repo); }

@@ -227,7 +227,7 @@ document.getElementById("repos").onclick = ev => {
   if (picked.has(r)) picked.delete(r); else picked.add(r);
   b.setAttribute("aria-pressed", picked.has(r));
   try { localStorage.setItem("nemik.repos", JSON.stringify([...picked])); } catch (e) { /* not remembered */ }
-  draw(); findings(); goals(); queuePanel(); weather(); history();
+  draw(); findings(); goals(); queuePanel(); weather(); history(); writeAddress();
 };
 
 

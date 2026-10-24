@@ -131,6 +131,34 @@ def test_the_address_picks_the_repo_and_selects_the_card(
     assert picked == [repo]
 
 
+def test_the_address_follows_the_pick_and_the_card_and_back_is_the_way_up(
+    server: str, page: Page
+) -> None:
+    """A repo toggle writes #/repo, a card #/repo/W<n>, and Back returns to the repo's address."""
+    page.goto(server)
+    page.wait_for_function(READY, timeout=0)
+    repo, symbol, cite = _first_card(page)
+    page.locator(f'#repos button[data-repo="{repo}"]').click()
+    page.wait_for_function("h => location.hash === h", arg=f"#/{repo}")
+    page.evaluate("c => focusCite(c)", cite)
+    page.wait_for_function("h => location.hash === h", arg=f"#/{repo}/{symbol}")
+    page.go_back()
+    page.wait_for_function(READY, timeout=0)
+    page.wait_for_function("h => location.hash === h", arg=f"#/{repo}")
+    picked: object = page.evaluate("() => [...picked]")
+    assert picked == [repo]
+    shown = page.locator("#detail").text_content() or ""
+    assert cite not in shown
+
+
+def test_opening_the_page_with_no_address_writes_none(server: str, page: Page) -> None:
+    """A page opened bare stays bare: loading is not a navigation."""
+    page.goto(server)
+    page.wait_for_function(READY, timeout=0)
+    hash_now: object = page.evaluate("() => location.hash")
+    assert not hash_now
+
+
 def test_an_address_naming_nothing_the_graph_holds_is_ignored(
     server: str, page: Page
 ) -> None:

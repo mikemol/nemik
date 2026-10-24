@@ -11,7 +11,7 @@ function selectCard(id) {
   if (!el.length) return;
   cy.nodes(":selected").unselect();
   el.select();
-  selectedId = id; detail(el.data()); refreshRings();
+  selectedId = id; detail(el.data()); refreshRings(); writeAddress(el.data("cite"));
   // in place, not a rebuild: rebuilding would drop the keyboard focus on the row just pressed
   for (const b of document.querySelectorAll("#cardlist button[data-card]"))
     b.setAttribute("aria-current", String(b.dataset.card === id));
@@ -29,7 +29,7 @@ function focusCite(cite) {
   if (el && el.length) {
     selectCard(n.id);
     cy.animate({ center: { eles: el }, zoom: Math.max(cy.zoom(), 1.2) });
-  } else detail(n);
+  } else { detail(n); writeAddress(n.cite); }
 }
 function toggleUmbrella(id) {
   const el = cy.getElementById(id);
