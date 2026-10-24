@@ -2101,3 +2101,20 @@
 2026-10-24T17:42:30Z  status W983 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T17:42:35Z  tick  W983 advanced  collapse  "built the G4/G8 pass-chain shapes and test (stack413 written, bazel retro tests running); stacks 411 and 412 still gating [blocked by W982]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T18:01:37Z  status W978 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T18:09:24Z  prune W751 edge-pruned writer    "luthen-observability:W1575"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T18:09:24Z  status W751 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T18:12:42Z  tick  W983 advanced  unblock   "queue commit 3a08bb0 landed; stack413 (W983) submitted; W751 unblocked by luthen's W1575 and our W978 [blocked by W982]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T18:42:08Z  tick  W751 advanced  sweep     "reworded W751's next step to clear its two warnings; stack413 (W983) still gating; the pycheck census prints no per-rule totals, so W980 needs that mode added first [blocked by W982]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T18:43:34Z  status W983 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T18:49:22Z  interrupt W986 minted    -         "A ratchet paydown rate requirement with teeth: a repo is behind when a ratchet's fall over a trailing window of landed commits is below a requirement that only rises"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W42
+2026-10-24T18:49:28Z  interrupt W987 minted    -         "Compute each repo's behind or ok fact from the ratchet value series: observed fall over the trailing window of landed commits against a required fall seeded from the measured trend and only rising"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W986
+2026-10-24T18:49:28Z  interrupt W988 minted    -         "A shape warns when a repo is behind and has no ready paydown card"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W986
+2026-10-24T18:49:28Z  interrupt W989 minted    -         "nemik-rank places paydown cards above feature work while their repo is behind, as a declared policy line"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W986
+2026-10-24T18:49:28Z  interrupt W990 minted    -         "Publish the per-repo behind or ok fact where a commit gate can read it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W986
+2026-10-24T18:49:38Z  status W987 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T18:49:39Z  status W988 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T18:49:40Z  status W989 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T18:49:41Z  status W990 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T18:59:03Z  tick  W991 minted    -         "Wire the real ratchet value series from mtools into the pace computation"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W986
+2026-10-24T18:59:10Z  status W991 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T18:59:12Z  status W987 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
