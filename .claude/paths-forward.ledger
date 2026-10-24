@@ -2151,3 +2151,7 @@
 2026-10-24T21:41:43Z  status W1000 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T21:41:52Z  tick  W999 advanced  collapse  "W992 atomized into W999 (pure languish detection, built, bazel test running, stack419 written) and W1000 (graph feed, shape, rank line); stack418 (W995) gating [blocked by W1000]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T21:43:10Z  status W995 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T22:11:44Z  status W980 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T22:12:00Z  tick  W980 advanced  unblock   "built baselinetop and measured ruff-baseline: D103 527, E501 383, PLC0415 291, DOC201 241, PT018 112 (next target); stack420 written, bazel test running; stack419 (W999) gating [blocked by W1000]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T22:20:05Z  status W999 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T22:20:05Z  status W1000 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
