@@ -47,16 +47,24 @@ be an activity.
 
 ## How nemik's outbox serves them
 
-A LogsQL query is a collection. nemik-serve would answer a repo's outbox as it does today (the cards'
-`Create` and `Resolve` activities, `outbox.py`) and append the log activities that name the repo as
-actor, in `published` order, as `orderedItems`. Two choices **(mine)**:
+A LogsQL query is a collection. A repo's outbox is its cards' `Create` and `Resolve` activities
+(`outbox.py`) and then the log activities that name the repo as actor, in `published` order, as
+`orderedItems`. Built (nemik:W947 to W950), with two choices **(mine)**:
 
-- The collection is built on request from the log store (`victorialogs-http`, resolved through
-  luthen's endpoints), not stored. The log remains the source and the outbox a view of it, the same
-  relation the outbox has to the queue.
-- A store that cannot be reached makes the log part of the collection absent, and the document says
-  so (a `summary` on the collection), instead of returning the cards alone as if they were the whole.
-  Absence is not a verdict, which is how nemik's witnesses already read "could not observe".
+- The log is read on the host and the outbox reads a file. nemik-serve never spawns a process, and
+  the log is reached through luthen's query tool, so `nemik-hostroot --log-activities` asks the log
+  store (service `nemik-waits`) and writes `log-activities.json` as one flat JSON object per line (a
+  header with `as_of`, then an activity per line), which the static build reads from beside the
+  queues (`serve.LOG_FILE`) and a changed file rebuilds the outboxes. The log remains the source and
+  the outbox a view of it, the same relation the outbox has to the queue. An earlier version of this
+  document said the collection would be built on request from the store; that cannot hold under the
+  no-spawn rule, and the file is how landings and the host-root frontier already reach the page.
+- A file that is not there, or cannot be read, makes the log part of the collection absent, and the
+  collection says so in a `summary`, instead of returning the cards alone as if they were the whole.
+  Absence is not a verdict, which is how nemik's witnesses already read "could not observe". The file
+  carries `as_of` but the outbox does not yet refuse a stale one; a stale file shows older
+  activities, never invented ones.
+- An activity that names a withheld card is dropped, as the cards are.
 
 ## What this does not fix
 
@@ -70,9 +78,8 @@ actor, in `published` order, as `orderedItems`. Two choices **(mine)**:
 
 ## Cards this implies
 
-- The wait record as an `Update` activity (`waitlog.py`, its test): the first conversion.
-- The outbox appending the log's activities for a repo, with the unreachable-store case said in the
-  document (`outbox.py`, `serve.py`).
+- Done: the wait record as an `Update` activity (W944), its reader (W947), the host file (W948, W950)
+  and the outbox appending it (W949).
 - Reading estate's verdict as the witness record: W914, which waits on estate.
 
 nemik's rank orders them with the rest of the queue.

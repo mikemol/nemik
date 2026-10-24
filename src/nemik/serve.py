@@ -167,6 +167,9 @@ def page_file(name: str, web: Path | None = None) -> bytes | None:
 # liveness.json do); a published view reads it, refusing one older than SERIES_MAX_AGE, and is
 # rebuilt every SERIES_REBUILD_S although no queue changed, since the board is baked in.
 SERIES_FILE = "luthen-series.json"
+# nemik:W949: the wait activities nemik-hostroot --log-activities writes on the host, put beside the
+# queues like the series file; each repo's outbox appends its own, and a view without it says so.
+LOG_FILE = "log-activities.json"
 SERIES_MAX_AGE = 900
 SERIES_REBUILD_S = 600
 
@@ -1242,7 +1245,9 @@ def _build_static(
         for part in ("base", "changelog"):
             bodies[f"trs/{repo}/{part}.ttl"] = feed[part]
         # nemik:W354: the repo's cards as a read-only ForgeFed outbox (ActivityStreams JSON-LD)
-        bodies[f"outbox/{repo}.jsonld"] = outbox(repo, model.graph, hidden)
+        bodies[f"outbox/{repo}.jsonld"] = outbox(
+            repo, model.graph, hidden, root / LOG_FILE
+        )
     # nemik:W451: the OSLC discovery root, pointing at each repo's tracked resource set above
     from nemik.catalog import catalog
 
@@ -1304,6 +1309,9 @@ def fleet_key(root: Path) -> str:
     for name in (QUEUE, LEDGER):
         for _, path in workstream_files(root, name):
             digest.update(str(path).encode() + b"\0" + path.read_bytes() + b"\0")
+    # nemik:W949: a changed log file rebuilds the outboxes that carry it
+    if (root / LOG_FILE).is_file():
+        digest.update(b"log\0" + (root / LOG_FILE).read_bytes() + b"\0")
     return digest.hexdigest()
 
 
