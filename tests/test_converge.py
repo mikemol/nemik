@@ -88,6 +88,28 @@ def test_every_row_names_its_trigger_and_pass() -> None:
     ]
 
 
+def test_the_decided_trigger_words_pass_through_to_the_row() -> None:
+    """nemik:W533: luthen's three words (acute, chronic, hand) are recorded as given, never mapped.
+
+    luthen-observability:W1501 decided them (2026-10-24): acute is a pass started by the set's path
+    unit on an input event, chronic one started because the epoch stamp was bumped, hand a person
+    or a session. Its nudge counts three consecutive chronic passes ending the same way; that
+    counting is luthen's, so the library only has to carry the word.
+    """
+    seen: list[str] = []
+    for word in ("acute", "chronic", "hand"):
+        rows: list[Verdict] = []
+        world = World(
+            run_pass=lambda: (0, {}),
+            record=rows.append,
+            pause=lambda: None,
+            halt_key=_key,
+        )
+        converge(world, POLICY, word)
+        seen.append(str(rows[0]["trigger"]))
+    assert seen == ["acute", "chronic", "hand"]
+
+
 def test_the_verdict_is_nested_in_the_row() -> None:
     """The run-row reader takes verdict.state from an object, so the verdict is not flattened."""
     _, rows, _ = _go([(4, {"state": "stuck"})])
