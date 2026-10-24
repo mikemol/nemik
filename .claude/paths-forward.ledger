@@ -2031,3 +2031,9 @@
 2026-10-24T12:41:33Z  tick  W370 advanced  unblock   "W370's poll reader (pollevents, on the recorded issues) built and queued as stack402 behind the queue commit for W954 to W962; the delivery waits on the operator's tokens [blocked by W963]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T12:46:05Z  status W749 blocked>ready writer    "blocked -> ready"
 2026-10-24T12:46:05Z  status W946 blocked>done writer    "blocked -> done"
+2026-10-24T12:59:32Z  status W749 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T12:59:45Z  interrupt W964 minted    -         "One sitting for three operator choices this session raised: the page-structure map, the pod's public base URL, and the tracker tokens"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W938
+2026-10-24T12:59:52Z  status W964 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T12:59:59Z  tick  W749 advanced  unblock   "scored the new-model forecast out of sample (+0.03 over climatology on 541 cards and about 11 finishers: no skill shown) and put it in the document (stack403); batched three operator asks into W964 to bring the count under the cap; stack402 (W370 poll reader) gating [blocked by W370]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T13:11:28Z  tick  W370 advanced  unblock   "stacks 402 (W370 poll reader) and 403 (forecast document) gating serially; operator asks batched in W964; nothing workable that avoids a queued file or the operator; a monitor watches [blocked by W964]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T13:19:24Z  status W370 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
