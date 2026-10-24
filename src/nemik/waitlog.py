@@ -8,6 +8,7 @@ naming the card that has waited longest and the card it waits on, sent to the lo
 names `victorialogs-http`, so the dashboard's number links to a card a reader can open.
 """
 
+import json
 from typing import TYPE_CHECKING
 
 from mikemol.endpoints.resolve import base_url
@@ -24,6 +25,52 @@ ENDPOINT = "victorialogs-http"
 SERVICE = "nemik-waits"
 NAMESPACE = "nemik"
 FAILED = -1
+CONTEXT = "https://www.w3.org/ns/activitystreams"
+
+
+def _iri(cite: str) -> str:
+    """Name a card by IRI, as the queue graph does.
+
+    Returns:
+        `urn:nemik:<repo>/W<n>` for `<repo>:W<n>`.
+
+    """
+    repo, _, symbol = cite.partition(":")
+    return f"urn:nemik:{repo}/{symbol}"
+
+
+def activity(
+    waiting: str,
+    waiting_cite: str,
+    ticks: int,
+    blocker_cite: str,
+    time_ns: int,
+) -> str:
+    """Word one wait as an ActivityStreams Update (nemik:W944, docs/federation-log.md).
+
+    Args:
+        waiting: The waiting card's repo, the actor.
+        waiting_cite: The waiting card, `<repo>:W<n>`.
+        ticks: How many ticks it has waited.
+        blocker_cite: The card it waits on.
+        time_ns: When the reading was true, in Unix nanoseconds.
+
+    Returns:
+        A JSON object whose id is the pair and the instant, so a re-sent record has the same id,
+        and whose `content` is the sentence the record carried before.
+
+    """
+    document = {
+        "@context": CONTEXT,
+        "id": f"urn:nemik:wait:{waiting_cite.replace(':', '/')}/"
+        f"{blocker_cite.replace(':', '/')}/{time_ns}",
+        "type": "Update",
+        "actor": f"urn:nemik:{waiting}",
+        "object": _iri(waiting_cite),
+        "target": _iri(blocker_cite),
+        "content": f"{waiting_cite} has waited {ticks} ticks on {blocker_cite}",
+    }
+    return json.dumps(document, sort_keys=True)
 
 
 def entries(oldest: list[Oldest], time_ns: int) -> list[Entry]:
@@ -34,12 +81,12 @@ def entries(oldest: list[Oldest], time_ns: int) -> list[Entry]:
         time_ns: When the readings were true, in Unix nanoseconds.
 
     Returns:
-        The records, the two repos as attributes and the cards in the body.
+        The records, the two repos as attributes and an ActivityStreams Update as the body.
 
     """
     return [
         Entry(
-            f"{waiting_cite} has waited {ticks} ticks on {blocker_cite}",
+            activity(waiting, waiting_cite, ticks, blocker_cite, time_ns),
             time_ns,
             "INFO",
             {"waiter": waiting, "blocker": blocking},

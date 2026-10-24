@@ -36,7 +36,15 @@ def _answer(status: int) -> Post:
 def test_a_record_names_the_cards_and_labels_the_repos() -> None:
     """The body carries both cites; the attributes carry only the two repos."""
     first = entries(OLDEST, NOW)[0]
-    assert first.body == "beta:W5 has waited 7 ticks on alpha:W1"
+    assert first.body == (
+        '{"@context": "https://www.w3.org/ns/activitystreams", '
+        '"actor": "urn:nemik:beta", '
+        '"content": "beta:W5 has waited 7 ticks on alpha:W1", '
+        f'"id": "urn:nemik:wait:beta/W5/alpha/W1/{NOW}", '
+        '"object": "urn:nemik:beta/W5", '
+        '"target": "urn:nemik:alpha/W1", '
+        '"type": "Update"}'
+    )
     assert dict(first.labels or {}) == {"waiter": "beta", "blocker": "alpha"}
     assert first.time_ns == NOW
 
