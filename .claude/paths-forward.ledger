@@ -2137,3 +2137,11 @@
 2026-10-24T20:25:44Z  interrupt W997 minted    -         "Write the pace file from the verdicts, with the series used (entry count or sum) in each row"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W991
 2026-10-24T20:25:53Z  status W997 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T20:37:56Z  status W989 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T20:40:28Z  tick  W998 minted    -         "The ratchet value series has its first samples in luthen's metric store"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W996
+2026-10-24T20:40:35Z  status W998 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T20:40:36Z  status W996 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T20:40:42Z  tick  W996 advanced  unblock   "queried luthen's metric store from the host: reachable, no mikemol_ratchet series yet; minted W998 with a promql witness for the first sample and blocked W996 on it; W989 landed c3257bb; stacks 415 and 417 wait on the queue commit [blocked by W998]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T21:10:23Z  status W990 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T21:10:23Z  status W995 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T21:10:25Z  status W988 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T21:13:33Z  status W995 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
