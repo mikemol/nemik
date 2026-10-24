@@ -173,6 +173,7 @@ def outbox(
         "attributedTo": ws,
         "totalItems": len(items),
         "orderedItems": items,
-        **extra,
     }
+    # a call, never a dict spread: the pinned Codon aborts on one (nemik:W762, W568)
+    document.update(extra)
     return json.dumps(document, indent=1)
