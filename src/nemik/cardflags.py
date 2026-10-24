@@ -91,6 +91,90 @@ def all_blockers_landed(
 UMBRELLA = 2  # open enablers of its own repo that make a ready card an umbrella
 
 
+# nemik:W971: the operator-ask category, as blocks._operator_asks decides it. The regexes are
+# copied (a Codon module cannot import a sibling) and tests/test_cardflags_asks.py checks the
+# two agree.
+EXPLICIT = re.compile(r"^\s*operator\s*:\s*(decide|act)\b", re.IGNORECASE)
+ACT_ASK = re.compile(r"^\s*operator\s*:\s*act\b", re.IGNORECASE)
+ANSWERED = re.compile(
+    r"\b(ruled|keep holding|approved|go-ahead given|decided)\b", re.IGNORECASE
+)
+CONDITION = re.compile(
+    r"^\s*(event:|a green tree|once\b|when\b|after\b)|\bresume when\b|\bonce the\b",
+    re.IGNORECASE,
+)
+DECISION = re.compile(
+    r"\b(approv\w*|go\b|go-ahead|choice|choose|decide|decision|which|whether|confirm|restart|"
+    r"act|acts|teardown|layout|owns|credential|push|commit)\b|\?",
+    re.IGNORECASE,
+)
+BARE = re.compile(
+    r"^\s*(the\s+)?(operator|user|mikemol|mike|human)\s*(\(\w+\))?\s*$", re.IGNORECASE
+)
+COMMAND = re.compile(
+    r"\benv\s+-C\s+\S+\s+/\S+\s+-m\s+\S+"
+    r"|\bsudo\s+(?:-\S+\s+)*(?:/\S+|env\s+-C\b|systemctl\s+\w|python[\d.]*\s+-m\s+\S)"
+)
+MACHINE_ACT = re.compile(
+    r"\b(sudo|root|run|apply|applies|command|install|systemctl|reaper|restore|drill)\b",
+    re.IGNORECASE,
+)
+TITLE_ASK = re.compile(r"^\s*operator\b[^:]{0,60}:", re.IGNORECASE)
+LEAD_WORD = re.compile(r"^\s*(operator|user|mikemol|mike|human)\s*[:(]?", re.IGNORECASE)
+LONG_ASK_WORDS = 3
+PRIORITY = ("needs-you", "no-command", "unstated", "condition", "answered")
+
+
+def operator_category(text: str) -> str:
+    """Categorise one blocked_on text that waits on the operator (nemik:W971).
+
+    Args:
+        text: One blocked_on entry.
+
+    Returns:
+        needs-you, no-command (an act on a machine with no command to run), answered, condition,
+        or unstated, by the same rules as blocks.operator_category.
+
+    """
+    if EXPLICIT.match(text):
+        machine = bool(MACHINE_ACT.search(text)) and not COMMAND.search(text)
+        return "no-command" if ACT_ASK.match(text) and machine else "needs-you"
+    if ANSWERED.search(text):
+        return "answered"
+    if CONDITION.search(text):
+        return "condition"
+    if BARE.match(text):
+        return "unstated"
+    lead = LEAD_WORD.match(text)
+    rest = text[lead.end() :] if lead else text
+    long_enough = len(rest.split()) >= LONG_ASK_WORDS
+    return "needs-you" if DECISION.search(rest) or long_enough else "unstated"
+
+
+def ask_category(texts: list[str], title: str, repo: str, errands: set[str]) -> str:
+    """Categorise a card's ask from all its blocked_on texts (nemik:W971).
+
+    A bare "operator" whose ask is carried in a title that starts `OPERATOR ...:` reads the title;
+    the most actionable category across several texts wins; and a no-command ask in an errand repo
+    is an errand, the operator's own business.
+
+    Args:
+        texts: The card's blocked_on entries.
+        title: The card's title.
+        repo: The card's repo.
+        errands: The repos whose machine-sounding acts are the operator's own errands.
+
+    Returns:
+        needs-you, no-command, errand, unstated, condition or answered.
+
+    """
+    if texts and all(BARE.match(t) for t in texts) and TITLE_ASK.match(title):
+        texts = [title]
+    cats = [operator_category(t) for t in texts] or ["unstated"]
+    best = next(c for c in PRIORITY if c in cats)
+    return "errand" if best == "no-command" and repo in errands else best
+
+
 def ready_behind_open(
     enablers: dict[str, list[str]], ready: set[str], open_cards: set[str]
 ) -> dict[str, list[str]]:
