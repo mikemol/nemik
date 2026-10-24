@@ -2092,3 +2092,12 @@
 2026-10-24T17:26:37Z  status W973 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T17:26:39Z  status W977 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T17:28:19Z  status W978 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T17:32:57Z  interrupt W982 minted    -         "Retro records enter the graph from a durable file, so the nine retro shapes judge real retros and not only fixtures"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f
+2026-10-24T17:32:58Z  interrupt W983 minted    -         "A shape judges a retro's pass chain: each pass's findings disjoint from the frozen union of earlier ones, the last pass empty, the handoff labelled exhausted and not verified (gates G4 and G8)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f
+2026-10-24T17:32:59Z  interrupt W984 minted    -         "A retro stub, seeded with the card's mint-time precommit, opens on a gate refusal and on a card reopened from done, then on an alert clearing and a ruling that corrects a session"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f
+2026-10-24T17:33:00Z  interrupt W985 minted    -         "A report measures gate G9 fleet-wide: the recurring failure classes of the retros by the layer their measure lives at, seeded with the host's four classes of this week"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f
+2026-10-24T17:33:12Z  status W984 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T17:33:14Z  status W985 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T17:42:30Z  status W983 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T17:42:35Z  tick  W983 advanced  collapse  "built the G4/G8 pass-chain shapes and test (stack413 written, bazel retro tests running); stacks 411 and 412 still gating [blocked by W982]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T18:01:37Z  status W978 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
