@@ -679,3 +679,24 @@ nemik:RetroFixpointShape a sh:NodeShape ;
                     FILTER(<http://www.w3.org/2001/XMLSchema#integer>(?m) > <http://www.w3.org/2001/XMLSchema#integer>(?n))
                 }
             }""" ] .
+
+# A repo behind a ratchet's required paydown rate has an open card paying it down (nemik:W988; the
+# operator's rate ruling, host 695f3e0a line 93406). A paydown card is an open card whose touches
+# name file:<the ratchet's repo-relative path>, the write suffix ignored: no new tag, since the
+# writer refuses a ratchet: prefix. Without one the rate is a demand nobody holds.
+nemik:BehindWithoutPaydownShape a sh:NodeShape ;
+    sh:targetClass nemik:Workstream ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        sh:message "this repo is behind a ratchet's paydown rate and no open card touches that ratchet's file: add a card with --touches file:<the ratchet file>!w that lowers it" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this <https://github.com/mikemol/nemik/ns#behindOn> ?r .
+                FILTER NOT EXISTS {
+                    ?c <https://github.com/mikemol/nemik/ns#workstream> $this ;
+                       <https://github.com/mikemol/nemik/ns#touches> ?t ;
+                       <http://open-services.net/ns/cm#state> ?s .
+                    FILTER(?s != <https://github.com/mikemol/nemik/ns#Done>)
+                    FILTER(STR(?t) = CONCAT("file:", STR(?r)) || STR(?t) = CONCAT("file:", STR(?r), "!w"))
+                }
+            }""" ] .

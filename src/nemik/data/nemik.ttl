@@ -157,4 +157,6 @@ nemik:passOf a rdf:Property ; rdfs:comment "The retro a pass belongs to (nemik:W
 nemik:passNumber a rdf:Property ; rdfs:comment "A pass's place in the chain, an integer from 1 (nemik:W983, G4)." .
 nemik:passFinding a rdf:Property ; rdfs:comment "A finding a pass returned, named by a key that stays the same when later passes would re-find it (nemik:W983, G4)." .
 nemik:fixpointLabel a rdf:Property ; rdfs:comment "How a retro labels its fixpoint: only 'exhausted-not-verified', since an empty last pass shows the actor is out of findings and not that the result is correct (nemik:W983, G8)." .
+# nemik:W988: the ratchets a repo is behind on, from the pace file (nemik:W987); a paydown card touches the ratchet's file.
+nemik:behindOn a rdf:Property ; rdfs:comment "A ratchet, as a repo-relative path, that the workstream is behind its required paydown rate on; a card touching file:<that path> pays it down (nemik:W988)." .
 nemik:certifyChange a rdf:Property ; rdfs:comment "A finding that is a --certify verdict change instead of a card: the verdict it changes (nemik:W754, G7)." .
