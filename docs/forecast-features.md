@@ -75,3 +75,26 @@ is forward: an issue with both trials was appended on 2026-10-23 (1623 rows, sam
 2026-10-12`), and its +1d horizon matures on 2026-10-24. Score again after that, and compare its
 skill with -8.69 (the old model) and 0 (climatology). Only if it is not yet above zero is the next
 feature (gate duration, blocker depth) worth trying.
+
+## Out of sample, second attempt (2026-10-24): no worse than climatology, not shown better
+
+The issue appended on 2026-10-23 (stamped 12:41Z, the only one made with trials 1 and 2) has matured
+at +1d. Scored alone (its rows copied to a scratch file, since `--score` has no per-issue mode): n
+541, Brier 0.021, against persistence 0.022 (skill +0.05) and climatology 0.022 (skill +0.03). By
+bin, 540 cards were given about 0.00 and 2 in 100 of them finished; one card was given 0.27 and
+finished. The whole stored shingle scores differently (n 2167, skill -6.30 against persistence and
+-6.47 against climatology) because it still holds the old model's issues; the 0.94 bin (n 318) is
+unchanged, which is the sign that those rows are old.
+
+What this shows, and what it does not. It shows the forecast is now close to the base rate and the
+out-of-sample number agrees with the in-sample one (-0.02 for trial 2): the 0.99-for-a-busy-repo error
+is gone. It does not show skill. About eleven cards finished among the 541, so a Brier difference of
+0.001 is well inside the noise a single issue has, and 540 of 541 forecasts being the same number
+means the model says "no" for nearly every card, which is climatology under another name. Brier on a
+rare event cannot separate that from a forecast that picks out which cards finish; for that the
+score needs the ranking of the finishers (did the cards that finished get higher chances than the
+ones that did not), which `--score` does not print.
+
+So the bar W933 set stands unmet: a predicted start time is shown only for a forecast with verified
+skill over climatology, and this one has none shown. Trial 3 (gate duration, blocker depth) is
+worth trying, judged on a score that can see discrimination, not on Brier alone.
