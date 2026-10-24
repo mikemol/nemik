@@ -62,6 +62,37 @@ def test_state_is_a_property_and_the_verb_is_the_event(tmp_path: Path) -> None:
     assert '"totalItems": 3' in text
 
 
+def test_a_ticket_carries_its_edges(tmp_path: Path) -> None:
+    """A wait on a card is dependsOn and an enable dependedBy; the operator is no Ticket."""
+    cards: list[dict[str, object]] = [
+        {
+            "symbol": "W1",
+            "title": "waiting",
+            "status": "blocked",
+            "blocked_on": ["W2", "operator: decide x"],
+            "enables": ["W3"],
+        },
+        {"symbol": "W2", "title": "waited", "status": "ready"},
+    ]
+    state: dict[str, object] = {
+        "version": 1,
+        "project_root": "/a",
+        "counter": 3,
+        "residue": [],
+        "waypoints": cards,
+    }
+    path = tmp_path / "a.json"
+    path.write_text(json.dumps(state), encoding="utf-8")
+    text = outbox("a", queue_graph("a", path))
+    lines = [ln.strip() for ln in text.splitlines()]
+    assert lines.count('"urn:nemik:a/W2"') == 1
+    assert lines.count('"urn:nemik:a/W3"') == 1
+    assert '"dependsOn": [' in lines
+    assert '"dependedBy": [' in lines
+    assert text.count('"dependsOn"') == 1
+    assert "operator" not in text
+
+
 def test_a_resolved_ticket_says_when(tmp_path: Path) -> None:
     """A done card's Ticket carries `resolved`, its last work; an open card's carries none."""
     cards: list[dict[str, object]] = [

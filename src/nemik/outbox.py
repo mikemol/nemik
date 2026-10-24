@@ -5,7 +5,9 @@
 ForgeFed extends ActivityPub with the vocabulary a forge speaks about tickets. A workstream is the
 actor (nemik.ttl types it so); each card is a Ticket, and the Ticket carries its own state
 (nemik:W939, docs/federation-recommendations.md R1): `isResolved` says whether it is closed,
-`resolved` when it was, and `context` the tracker it lives in. The activities are events only:
+`resolved` when it was, and `context` the tracker it lives in. Its edges (nemik:W940) are
+`dependsOn` (what it waits for) and `dependedBy` (what it enables), as card identifiers, which
+name another repo's card when the edge crosses repos. The activities are events only:
 - a card being minted is a Create of the ticket, published when it was issued;
 - a card being closed is a Resolve of it, published when it was last worked.
 A ready, blocked or working card has had one event, its minting. Working is not said as an Accept:
@@ -36,6 +38,20 @@ def is_resolved(state: str) -> bool:
 
     """
     return state == str(NEMIK.Done)
+
+
+def is_card(iri: str) -> bool:
+    """Say whether an IRI names a card, not a workstream or the operator (those are no Ticket).
+
+    Args:
+        iri: A node the queue graph points at.
+
+    Returns:
+        True when its last path segment is W followed by digits.
+
+    """
+    tail = iri.rpartition("/")[2]
+    return tail.startswith("W") and tail[1:].isdigit()
 
 
 def verb(state: str) -> str:
@@ -83,6 +99,13 @@ def outbox(repo: str, queue: Graph, withheld: frozenset[str] = frozenset()) -> s
         }
         if title is not None:
             ticket["summary"] = str(title)
+        # nemik:W940: the card's edges travel with it, as ForgeFed's dependsOn and its inverse.
+        waits = {str(t) for t in queue.objects(card, NEMIK.waitsFor)}
+        enables = {str(t) for t in queue.objects(card, NEMIK.enables)}
+        if depends := sorted(t for t in waits if is_card(t)):
+            ticket["dependsOn"] = depends
+        if depended := sorted(t for t in enables if is_card(t)):
+            ticket["dependedBy"] = depended
         if closed and when is not None:
             ticket["resolved"] = str(when)
         activity: dict[str, object] = {
