@@ -1912,3 +1912,13 @@
 2026-10-24T02:41:17Z  status W944 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T03:10:46Z  status W533 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T03:20:39Z  status W944 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T03:39:17Z  prune W945 edge-pruned writer    "nemik:W944"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T03:39:17Z  status W945 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T03:41:05Z  tick  W947 minted    -         "A pure module turns the wait log's JSON bodies into a repo's log activities in published order, with a test over real records"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W945
+2026-10-24T03:41:05Z  tick  W948 minted    -         "A host command writes the log activities for each repo to a file nemik-serve can serve, as landings.json is written"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W945
+2026-10-24T03:41:05Z  tick  W949 minted    -         "The outbox appends a repo's log activities from that file and says on the collection when the file is missing"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W945
+2026-10-24T03:41:16Z  status W948 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T03:41:18Z  status W949 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T03:41:33Z  tick  W945 advanced  collapse  "W944 landed (fcb33c4), peer found no reader of the old body; W945 atomized after finding the server cannot read the log on request (no-spawn): W947 module, W948 host command, W949 outbox; W533 test gating in stack384 [blocked by W533]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T03:43:02Z  status W533 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T03:43:07Z  status W947 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
