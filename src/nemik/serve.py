@@ -172,6 +172,9 @@ SERIES_FILE = "luthen-series.json"
 # nemik:W949: the wait activities nemik-hostroot --log-activities writes on the host, put beside the
 # queues like the series file; each repo's outbox appends its own, and a view without it says so.
 LOG_FILE = "log-activities.json"
+# nemik:W978: the commit landings nemik-hostroot --landings writes, beside the queues like the
+# log file; the pod's private build publishes the board from it, so the builder needs no flag.
+LANDINGS_FILE = "landings.json"
 SERIES_MAX_AGE = 900
 SERIES_REBUILD_S = 600
 
@@ -1325,6 +1328,9 @@ def private_files(model: Model, out: Path) -> list[Path]:
 
     rows = model.doc["inbound"]
     put("operator.json", dump(model.doc["operator"]))
+    # nemik:W978: the landings board, as /landings.json answers it live, from the file in the root
+    now = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+    put("landings.json", dump(landings_board(model.root / LANDINGS_FILE, now)))
     put("inbound.json", dump(rows))
     repos = {str(n["repo"]) for n in model.doc["nodes"] if n["repo"]}
     for repo in sorted(repos | {str(b["blocker"]) for b in rows}):
@@ -1353,6 +1359,9 @@ def fleet_key(root: Path) -> str:
     # nemik:W949: a changed log file rebuilds the outboxes that carry it
     if (root / LOG_FILE).is_file():
         digest.update(b"log\0" + (root / LOG_FILE).read_bytes() + b"\0")
+    # nemik:W978: and a changed landings file rebuilds the board baked into the private files
+    if (root / LANDINGS_FILE).is_file():
+        digest.update(b"landings\0" + (root / LANDINGS_FILE).read_bytes() + b"\0")
     return digest.hexdigest()
 
 
