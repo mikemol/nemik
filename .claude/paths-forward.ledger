@@ -1891,3 +1891,8 @@
 2026-10-24T00:41:07Z  status W939 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T00:41:07Z  status W940 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T00:42:09Z  status W940 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T01:09:41Z  status W942 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T01:11:22Z  tick  W942 advanced  unblock   "W939 landed; W940 gating (stack379), W942 queued behind it (stack380); edge letters carry a typed activity [blocked by W940]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T01:12:53Z  status W940 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T01:34:44Z  status W942 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T01:34:44Z  status W943 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
