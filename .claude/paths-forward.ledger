@@ -1922,3 +1922,11 @@
 2026-10-24T03:41:33Z  tick  W945 advanced  collapse  "W944 landed (fcb33c4), peer found no reader of the old body; W945 atomized after finding the server cannot read the log on request (no-spawn): W947 module, W948 host command, W949 outbox; W533 test gating in stack384 [blocked by W533]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T03:43:02Z  status W533 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T03:43:07Z  status W947 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T04:10:53Z  status W933 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T04:11:01Z  tick  W933 advanced  unblock   "stack385 (W947 logactivities) gating; stack386 (W933: Queue section says no start time is shown and why, rule in queue-order.md) queued behind it [blocked by W947]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T04:33:34Z  status W929 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T04:33:34Z  status W933 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T04:39:45Z  status W929 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T04:39:50Z  tick  W929 advanced  collapse  "W929 closed on its three landed children (W931, W932, W933); stack385 (W947 with its codon-baseline entry) still gating; W948 and W949 wait on it [blocked by W947]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T04:53:27Z  status W947 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T04:53:28Z  status W948 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
