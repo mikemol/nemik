@@ -18,6 +18,11 @@ WINDOW_KEY = '"window": "'
 BEHIND = "behind"
 OK = "ok"
 PACE_FILE = "ratchet-pace.json"
+GAUGE_AS_OF = "nemik_ratchet_pace_as_of"
+STAMP_LENGTH = 20  # YYYY-MM-DDTHH:MM:SSZ
+MARCH = 3
+DAYS_PER_ERA = 146097  # days in 400 Gregorian years
+DAYS_TO_1970 = 719468  # days from 0000-03-01 to 1970-01-01
 GAUGE_BEHIND = "nemik_ratchet_behind"
 GAUGE_OBSERVED = "nemik_ratchet_fall_observed"
 GAUGE_REQUIRED = "nemik_ratchet_fall_required"
@@ -76,6 +81,8 @@ def read_pace(text: str) -> tuple[str, int, list[Row]]:
     if not as_of:
         message = "no as_of on the first line"
         raise ValueError(message)
+    # a stamp that is not UTC time is refused here, not at publication
+    epoch_seconds(as_of)
     window = int(_after(head, WINDOW_KEY) or "0")
     rows: list[Row] = []
     for line in lines[1:]:
@@ -92,6 +99,45 @@ def read_pace(text: str) -> tuple[str, int, list[Row]]:
     return as_of, window, rows
 
 
+def epoch_seconds(stamp: str) -> int:
+    """Convert an ISO stamp like 2026-10-24T19:00:00Z to unix seconds, by integer arithmetic.
+
+    Args:
+        stamp: A UTC stamp, YYYY-MM-DDTHH:MM:SSZ.
+
+    Returns:
+        Seconds since 1970-01-01T00:00:00Z.
+
+    Raises:
+        ValueError: When the stamp is not that shape.
+
+    """
+    if len(stamp) < STAMP_LENGTH or stamp[4] != "-" or stamp[10] != "T":
+        message = f"not a UTC stamp: {stamp}"
+        raise ValueError(message)
+    year, month, day = int(stamp[0:4]), int(stamp[5:7]), int(stamp[8:10])
+    hour, minute, second = int(stamp[11:13]), int(stamp[14:16]), int(stamp[17:19])
+    shifted = year - 1 if month < MARCH else year
+    era = shifted // 400
+    in_era = shifted - era * 400
+    from_march = (month + 9) % 12
+    in_year = (153 * from_march + 2) // 5 + day - 1
+    in_era_days = in_era * 365 + in_era // 4 - in_era // 100 + in_year
+    days = era * DAYS_PER_ERA + in_era_days - DAYS_TO_1970
+    return days * 86400 + hour * 3600 + minute * 60 + second
+
+
+def as_of_lines(stamp: str) -> list[str]:
+    """Write the gauge that dates the pace file, Prometheus text.
+
+    Returns:
+        A TYPE line and one sample whose value is the stamp in unix seconds, so an alert reads a
+        stale verdict as age and not as a missing sample.
+
+    """
+    return [f"# TYPE {GAUGE_AS_OF} gauge", f"{GAUGE_AS_OF} {epoch_seconds(stamp)}"]
+
+
 def behind_ratchets(rows: list[Row], repo: str) -> list[str]:
     """Name the ratchets a repo is behind on.
 
@@ -106,11 +152,12 @@ def behind_ratchets(rows: list[Row], repo: str) -> list[str]:
     ]
 
 
-def metric_lines(rows: list[Row]) -> list[str]:
-    """Write the gauges for the rows, Prometheus text.
+def metric_lines(rows: list[Row], as_of: str) -> list[str]:
+    """Write the gauges for the rows and the file's age stamp, Prometheus text.
 
     Returns:
-        A TYPE line and one sample per row for each gauge; the state is 1 when behind, else 0.
+        A TYPE line and one sample per row for each gauge, the state 1 when behind and else 0, then
+        the gauge that dates the file.
 
     """
     out = [f"# TYPE {GAUGE_BEHIND} gauge"]
@@ -123,4 +170,4 @@ def metric_lines(rows: list[Row]) -> list[str]:
     out.append(f"# TYPE {GAUGE_REQUIRED} gauge")
     for repo, ratchet, _, _, owed in rows:
         out.append(f'{GAUGE_REQUIRED}{{repo="{repo}",ratchet="{ratchet}"}} {owed}')
-    return out
+    return out + as_of_lines(as_of)

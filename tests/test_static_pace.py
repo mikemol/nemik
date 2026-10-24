@@ -31,6 +31,7 @@ def test_a_pace_file_is_published_as_board_and_gauges(tmp_path: Path) -> None:
     assert '"host": true' in (snap / "ratchet-pace.json").read_text()
     gauge = 'nemik_ratchet_behind{repo="nemik",ratchet="ruff-baseline.json"} 1'
     assert gauge in (snap / "metrics").read_text()
+    assert "nemik_ratchet_pace_as_of " in (snap / "metrics").read_text()
 
 
 def test_no_pace_file_publishes_a_board_that_says_so(tmp_path: Path) -> None:

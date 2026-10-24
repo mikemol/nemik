@@ -341,7 +341,7 @@ def pace_board(path: Path) -> tuple[dict[str, object], list[str]]:
         "window": window,
         "rows": shown,
     }
-    return board, metric_lines(rows)
+    return board, metric_lines(rows, as_of)
 
 
 class Model:
