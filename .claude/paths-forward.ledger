@@ -2027,3 +2027,7 @@
 2026-10-24T12:37:22Z  interrupt W963 minted    -         "A sender posts mirrorreq's requests to a tracker with a scoped token, after a dry run prints them, and reads the result back"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W959
 2026-10-24T12:37:29Z  status W963 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T12:37:36Z  status W369 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T12:41:27Z  status W370 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T12:41:33Z  tick  W370 advanced  unblock   "W370's poll reader (pollevents, on the recorded issues) built and queued as stack402 behind the queue commit for W954 to W962; the delivery waits on the operator's tokens [blocked by W963]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T12:46:05Z  status W749 blocked>ready writer    "blocked -> ready"
+2026-10-24T12:46:05Z  status W946 blocked>done writer    "blocked -> done"
