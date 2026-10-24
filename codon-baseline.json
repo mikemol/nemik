@@ -199,6 +199,10 @@
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'shlex'"
  },
+ "logactivities": {
+  "as_written": "no module named 'nemik.hostroot'",
+  "stripped": "no module named 'nemik.hostroot'"
+ },
  "luthenseries": {
   "as_written": "",
   "stripped": ""
