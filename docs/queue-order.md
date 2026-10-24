@@ -38,8 +38,19 @@ today and W931 to W933 build: the place of each card in the order with how many 
 ranked ahead of it, and a forecast of when it will be reached, shown only once the forecast has
 verified skill (W749).
 
+## What the page shows now (W931 to W933)
+
+W931 serves the order, W932 draws it as a numbered queue with each card's weight, wait and the
+newer cards ranked ahead of it, and W933 sets the rule for a start time: **a predicted start is
+shown only for a card whose forecast has verified skill over climatology, and is labelled with that
+skill.** On 2026-10-24 no forecast has it (W749: the old model scored -8.69 at +1d; the new model's
+issue is scored once its horizon has passed, W946), so the Queue section shows the order and the wait
+and says in its heading that no start time is shown, and why. A time shown without skill would be a
+claim with no grounds. When W749 records a skill above zero, the section may add a time, with the
+skill beside it; until then the heading stays.
+
 ## What follows
 
 W931 (the queue document), W932 (the Queue panel) and W933 (the forecast, honestly labelled) stand as
-carded. The fix this measurement points at is not a different mark on a card; it is that the
+carded; W933 is this rule. The fix this measurement points at is not a different mark on a card; it is that the
 queue's order is shown and held to.

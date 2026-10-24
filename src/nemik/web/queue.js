@@ -19,7 +19,7 @@ function queueRepo(repo, doc) {
     `<li value="${r.place}">${citeLink(r.cite)} ${linked(r.title, repo)} <span class="stat">${esc(queueReason(r))}</span></li>`);
   return `<h2>${esc(repo)}</h2>`
     + (now.length ? `<p><b>Working now</b></p><ol class="queue">${now.join("")}</ol>` : "")
-    + (next.length ? `<p><b>Next, in order</b> (1 is next)</p><ol class="queue">${next.join("")}</ol>` : "<p>No ready card.</p>");
+    + (next.length ? `<p><b>Next, in order</b> (1 is next; no start time is shown: the forecast has no verified skill over climatology, nemik:W749)</p><ol class="queue">${next.join("")}</ol>` : "<p>No ready card.</p>");
 }
 
 async function queuePanel() {

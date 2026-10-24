@@ -122,6 +122,7 @@ def test_a_picked_repo_reads_as_a_numbered_queue(server: str, page: Page) -> Non
     rows = page.locator("#queue ol.queue").last.locator("li")
     expect(rows).to_have_count(2)
     assert [r.get_attribute("value") for r in rows.all()] == ["1", "2"]
+    assert "no start time is shown" in (page.locator("#queue").text_content() or "")
     first, second = (r.text_content() or "" for r in rows.all())
     assert "no newer card ahead of it" in first
     assert "waited 4 days; 1 newer card ranked ahead of it" in second
