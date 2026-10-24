@@ -2060,3 +2060,22 @@
 2026-10-24T15:22:53Z  interrupt W970 minted    -         "The page draws one mark per collapse umbrella, named for assistive technology, with the WCAG chain test as its oracle"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W709
 2026-10-24T15:23:11Z  status W969 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T15:23:12Z  status W970 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T15:23:43Z  tick  W969 advanced  unblock   "atomized W709 (collapse umbrellas on the page) into the payload W969 and the marks W970; read the payload builder and found two ways to carry an umbrella, recommended a separate list over nodes because umbrellas are a view, never a card (W691); queue commit running [blocked by W968]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T15:39:39Z  tick  W971 minted    -         "Port the operator-ask categories and errand repos of blocks.operator_asks to a function of Card edges returning flags, tested against blocks on a fixture"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W714
+2026-10-24T15:39:39Z  tick  W972 minted    -         "Port the unclaimed-block flag (inbound with claims_of) to a function of Card edges, tested against blocks on a fixture"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W714
+2026-10-24T15:40:13Z  status W971 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T15:43:14Z  tick  W971 advanced  unblock   "atomized W714 (five days idle) into the operator-ask category W971 and the unclaimed-block flag W972; W971's pure category functions built, tested against blocks on eighteen asks, and queued as stack407 [blocked by W972]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T15:52:25Z  status W971 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T15:53:05Z  status W972 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T15:57:04Z  tick  W972 advanced  unblock   "W971 landed (d80ef6f); W972 built (inbound rows and unclaimed blocks from plain edges), verified equal to blocks.inbound by a scratch run and tested directly (26 pass) before the gate, queued as stack408; saved a memory that tests run directly in a second [blocked by W968]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T16:09:21Z  lease W969 lapsed    --        "lease on file:src/nemik/serve.py!w held by (unlocked) lapsed unrenewed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T16:09:21Z  lease W969 lapsed    --        "lease on file:src/nemik/data/field-manifest.json!w held by (unlocked) lapsed unrenewed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T16:10:00Z  tick  W973 minted    -         "Payload builder emits the umbrellas list from collapse.collapse over blocked rows, withheld members dropping the umbrella, pinned by a payload test"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W969
+2026-10-24T16:10:00Z  tick  W974 minted    -         "Carry the umbrellas list through pieces split and assemble, the field manifest and the API schema"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W969
+2026-10-24T16:10:00Z  tick  W975 minted    -         "Page combine step reads the umbrellas list"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W969
+2026-10-24T16:10:06Z  status W973 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T16:13:28Z  status W714 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T16:13:28Z  status W972 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T16:13:32Z  status W508 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T16:13:32Z  status W714 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T16:20:11Z  status W974 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
