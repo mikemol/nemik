@@ -47,7 +47,14 @@ CODON = Path(_STAGED).resolve()
 # would write a 116 MB core file through systemd-coredump and drkonqi, ten per census run, on
 # a host whose gates already time out under load. A census wants the compiler's message, not its
 # core, so the processes it starts may not dump one (nemik:W762).
-resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
+# nemik:W962: a limit of 0 stops the file but the kernel still runs the core_pattern handler,
+# and systemd-coredump logs "terminated abnormally without generating a coredump" for each
+# abort, which the host's coredump alert counts. A limit of exactly 1 makes the kernel skip the
+# handler ("RLIMIT_CORE is set to 1, aborting core" in the journal). A hard limit of 0 cannot
+# be raised to 1.
+_CORE_HARD = resource.getrlimit(resource.RLIMIT_CORE)[1]
+_CORE = (0, 0) if _CORE_HARD == 0 else (1, 1)
+resource.setrlimit(resource.RLIMIT_CORE, _CORE)
 # and one BLAS thread, not one per core, in each probe (mtools-ad saw twenty started by each)
 os.environ["OPENBLAS_NUM_THREADS"] = "1"
 BASELINE = ROOT / "codon-baseline.json"
