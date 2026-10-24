@@ -259,6 +259,10 @@
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'argparse'"
  },
+ "pollevents": {
+  "as_written": "no module named 'nemik.events'",
+  "stripped": "no module named 'nemik.events'"
+ },
  "preview": {
   "as_written": "",
   "stripped": ""
