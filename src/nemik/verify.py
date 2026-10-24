@@ -138,6 +138,37 @@ def skill(score: float, reference: float) -> float:
     return 1.0 - score / reference
 
 
+UNDEFINED = -1.0
+
+
+def discrimination(pairs: list[tuple[float, bool]]) -> float:
+    """Say how well a forecast ranks the cards that finished above those that did not (nemik:W965).
+
+    Brier cannot tell a forecast that picks out the finishers from one that says the base rate for
+    every card, when finishing is rare: both score about the same. This can. It is the chance
+    that a card which finished was given a higher forecast than one which did not, a tie counting
+    half (the area under the ROC curve).
+
+    Args:
+        pairs: The lead's (chance, whether done) pairs.
+
+    Returns:
+        0.5 for a forecast that ranks no better than chance (the base rate for every card is 0.5),
+        1.0 for one that puts every finisher above every other card, below 0.5 for the reverse;
+        UNDEFINED (-1.0) when no card finished or every one did, since there is nothing to rank.
+
+    """
+    hits = [chance for chance, done in pairs if done]
+    misses = [chance for chance, done in pairs if not done]
+    if not hits or not misses:
+        return UNDEFINED
+    wins = 0.0
+    for hit in hits:
+        for miss in misses:
+            wins += 1.0 if hit > miss else 0.5 if hit == miss else 0.0
+    return wins / (len(hits) * len(misses))
+
+
 def scorable(lead_days: float, grain_days: float) -> bool:
     """Say whether a lead is coarse enough to score against truth of this grain.
 
@@ -173,7 +204,8 @@ def lead_report(pairs: list[tuple[float, bool]], bins: int) -> dict[str, float]:
 
     Returns:
         n, brier, persistence, climatology, skill_persistence and skill_climatology (see skill),
-        and a reliability row per non-empty bin as `bin<k>_chance`, `bin<k>_share`, `bin<k>_n`.
+        discrimination (see discrimination; -1.0 when undefined), and a reliability row per
+        non-empty bin as `bin<k>_chance`, `bin<k>_share`, `bin<k>_n`.
 
     """
     outcomes = [done for _, done in pairs]
@@ -186,6 +218,7 @@ def lead_report(pairs: list[tuple[float, bool]], bins: int) -> dict[str, float]:
         "climatology": climate,
         "skill_persistence": skill(score, persist),
         "skill_climatology": skill(score, climate),
+        "discrimination": discrimination(pairs),
     }
     for k, (chance, share, count) in enumerate(reliability(pairs, bins)):
         out[f"bin{k}_chance"] = chance

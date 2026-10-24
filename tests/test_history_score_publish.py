@@ -21,6 +21,7 @@ REPORT = {
         "skill_persistence": 0.1,
         "climatology": 0.4,
         "skill_climatology": 0.2,
+        "discrimination": 0.7,
     }
 }
 
@@ -87,5 +88,7 @@ def test_score_without_publish_still_prints_a_line_per_lead(
     shingle.write_text("", encoding="utf-8")
     argv = ["alpha", "--root", str(tmp_path), "--from", "2026-10-15"]
     assert main([*argv, "--score", str(shingle)]) == 0
-    assert capsys.readouterr().out.startswith("+1\tn 4")
+    printed = capsys.readouterr().out
+    assert printed.startswith("+1\tn 4")
+    assert "discrimination 0.70" in printed
     assert not list(tmp_path.glob("**/score.json"))

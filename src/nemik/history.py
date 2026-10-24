@@ -1344,6 +1344,16 @@ def _events(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
     return 0
 
 
+def _auc_text(value: float) -> str:
+    """Word a discrimination score (nemik:W965).
+
+    Returns:
+        The score to two places, or n/a when no card finished or every one did (it is negative).
+
+    """
+    return "n/a" if value < 0 else f"{value:.2f}"
+
+
 def _score(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
     """Judge a stored shingle per lead, read against the events (nemik:W759, W761).
 
@@ -1366,7 +1376,8 @@ def _score(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
         sys.stdout.write(
             f"{lead}\tn {int(r['n'])}\tbrier {r['brier']:.3f}"
             f"\tpersistence {r['persistence']:.3f} (skill {r['skill_persistence']:.2f})"
-            f"\tclimatology {r['climatology']:.3f} (skill {r['skill_climatology']:.2f})\n"
+            f"\tclimatology {r['climatology']:.3f} (skill {r['skill_climatology']:.2f})"
+            f"\tdiscrimination {_auc_text(r['discrimination'])}\n"
         )
         for k in range(RELIABILITY_BINS):
             if f"bin{k}_n" in r:
