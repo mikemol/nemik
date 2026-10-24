@@ -2079,3 +2079,10 @@
 2026-10-24T16:13:32Z  status W508 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T16:13:32Z  status W714 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T16:20:11Z  status W974 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T16:24:13Z  tick  W973 advanced  unblock   "W972/W714 landed (4917a9b); W969 atomized to W973-W975; W973 stacked as stack409 (own umbrellas document); replied to luthen on W751 [blocked by W975]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T16:41:28Z  tick  W976 minted    -         "Port nemik.critical (slack and the longest chain) to plain Card edges, held to the rdflib version in a test"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W508
+2026-10-24T16:41:28Z  tick  W977 minted    -         "Port nemik.health (the red, amber, green status from thresholds) to plain Card edges, held to the rdflib version in a test"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W508
+2026-10-24T16:44:11Z  tick  W978 minted    -         "The static --publish build accepts --landings FILE and publishes the landing series from it, as nemik-serve does live"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W1575
+2026-10-24T16:44:35Z  status W977 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T16:47:47Z  tick  W979 minted    -         "A nonzero ratchet is a priority marker: every repo with one needs an open pay-down card (a shape warns when missing), those cards rank in a high band above feature work, and a ratchet that has not fallen over a learned window raises an alert"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T16:47:53Z  status W979 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
