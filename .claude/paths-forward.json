@@ -22039,7 +22039,7 @@
     {
       "symbol": "W966",
       "title": "Forecast trial 3: gate duration as a feature, scored on the discrimination measure against the 2026-10-23 issue's rows",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W749"
       ],
@@ -22054,7 +22054,7 @@
       "issued_at": "2026-10-24T13:40:24Z",
       "minted_during": "tick",
       "caused_by": "W749",
-      "last_worked": "2026-10-24T14:12:01Z",
+      "last_worked": "2026-10-24T14:20:18Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/forecastshingle.py",
@@ -22062,7 +22062,8 @@
         "docs/forecast-features.md",
         "tests/test_forecast_shingle.py"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "completed": null
     },
     {
       "symbol": "W967",
@@ -22209,12 +22210,7 @@
   ],
   "job_id": "1d7fe6d0",
   "heartbeat": "2026-10-22T02:06:35Z",
-  "lock": {
-    "holder": "claude-nemik",
-    "taken_at": "2026-10-24T14:09:29Z",
-    "pid": 1281447,
-    "start": 39974717
-  },
+  "lock": null,
   "predecessor_job_id": "disarmed",
   "leases": [
     {
@@ -22262,6 +22258,24 @@
       "renewed_at": "2026-10-24T12:59:32Z",
       "expires_at": "2026-10-24T13:29:32Z",
       "lapse_ledgered": true
+    },
+    {
+      "tag": "file:src/nemik/forecastshingle.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W966",
+      "base_sha": "f4d928f32d7ba141730d81923b905a5bd30d5f18",
+      "taken_at": "2026-10-24T14:20:18Z",
+      "renewed_at": "2026-10-24T14:20:18Z",
+      "expires_at": "2026-10-24T14:50:18Z"
+    },
+    {
+      "tag": "file:docs/forecast-features.md!w",
+      "holder": "(unlocked)",
+      "waypoint": "W966",
+      "base_sha": "f4d928f32d7ba141730d81923b905a5bd30d5f18",
+      "taken_at": "2026-10-24T14:20:18Z",
+      "renewed_at": "2026-10-24T14:20:18Z",
+      "expires_at": "2026-10-24T14:50:18Z"
     }
   ],
   "advice": [

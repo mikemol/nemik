@@ -2046,3 +2046,4 @@
 2026-10-24T14:11:18Z  status W965 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T14:12:01Z  status W967 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T14:12:08Z  tick  W965 advanced  unblock   "W965 landed (44fe40d) and applied: the new forecast's discrimination is 0.66 on 541 cards, standard error about 0.09, so suggestive and not shown; W966 and W967 given manifests; queue commit running [blocked by W966]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T14:20:18Z  status W966 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
