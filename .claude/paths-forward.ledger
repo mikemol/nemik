@@ -2047,3 +2047,12 @@
 2026-10-24T14:12:01Z  status W967 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T14:12:08Z  tick  W965 advanced  unblock   "W965 landed (44fe40d) and applied: the new forecast's discrimination is 0.66 on 541 cards, standard error about 0.09, so suggestive and not shown; W966 and W967 given manifests; queue commit running [blocked by W966]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T14:20:18Z  status W966 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T14:43:16Z  tick  W966 advanced  unblock   "W966's design landed (b192e2b) and its code is built and queued as stack406: a blocked card takes no place in the line and is capped by how blocked stints end; the forward test follows [blocked by W967]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T14:50:52Z  status W951 blocked>done writer    "blocked -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T15:09:18Z  lease W966 lapsed    --        "lease on file:src/nemik/forecastshingle.py!w held by (unlocked) lapsed unrenewed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T15:09:18Z  lease W966 lapsed    --        "lease on file:docs/forecast-features.md!w held by (unlocked) lapsed unrenewed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T15:10:55Z  tick  W966 advanced  unblock   "stack406 (W966 code, tolerance fixed) gating alone; queue commit for W951 done and the rest waits for it; a monitor watches [blocked by W967]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T15:13:11Z  interrupt W968 minted    -         "The +1d horizon of the shingle issue stamped 2026-10-24T15:12:51Z (the first with W966's blocked-card feature) has matured (2026-10-25 15:13Z)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W966
+2026-10-24T15:13:16Z  status W968 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T15:13:18Z  status W966 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T15:13:23Z  tick  W966 advanced  unblock   "W966's code landed (008b09a) and the forecast was issued with it (1713 rows, 15:12:51Z); W968 witnesses the +1d horizon (2026-10-25 15:13Z) and W966 waits on it for the score; queue commit running [blocked by W968]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
