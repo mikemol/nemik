@@ -294,6 +294,36 @@ def open_ages(events: list[Event], moment: str) -> dict[str, float]:
     }
 
 
+def open_status(events: list[Event], moment: str) -> dict[str, str]:
+    """Give the status, at one moment, of every card that was minted and still open (nemik:W966).
+
+    The same fold open_ages uses (a Codon module cannot import a sibling): a card minted but not
+    yet given a status has the empty string; one done, dropped or removed at `moment`, or whose
+    minting was not seen, is left out.
+
+    Returns:
+        {station: status}.
+
+    """
+    until = _instant(moment)
+    born: set[str] = set()
+    standing: dict[str, str] = {}
+    for station, stamp, field, _, now, _ in events:
+        if _instant(stamp) > until:
+            continue
+        if field == "card":
+            standing[station] = "" if now == "minted" else now
+            if now == "minted":
+                born.add(station)
+        elif field == "status":
+            standing[station] = now
+    return {
+        station: status
+        for station, status in standing.items()
+        if station in born and status not in CLOSED
+    }
+
+
 def climate_of(
     events: list[Event], start: str, end: str
 ) -> dict[str, dict[str, float]]:

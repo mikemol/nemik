@@ -88,6 +88,37 @@ def in_line(chance: float, rate: float, ahead: int, horizon: float) -> float:
     return chance * min(1.0, rate * horizon / (ahead + 1))
 
 
+def stint_share(stints: list[float], horizon: float) -> float:
+    """Give the share of finished stints in a status that ended within the horizon (nemik:W966).
+
+    Returns:
+        A number from 0.0 to 1.0; 0.0 with no stints (nothing in the history says it ends).
+
+    """
+    if not stints:
+        return 0.0
+    return len([days for days in stints if days <= horizon]) / len(stints)
+
+
+def issue_blocked(
+    leads: list[float], age: float, horizons: list[float], stints: list[float]
+) -> dict[str, float]:
+    """Issue a blocked card's forecast: its lead-time chance, capped by how blocked stints end.
+
+    A blocked card is not in the line the repo's rate clears (nobody can work it until what it
+    waits for lands), so the rate does not bound it; what bounds it is how long blocked stints have
+    lasted: it cannot be done before it stops being blocked.
+
+    Returns:
+        {"+<h>d": chance} for each horizon h, in the order given.
+
+    """
+    return {
+        f"+{h:g}d": min(done_by(leads, age, h), stint_share(stints, h))
+        for h in horizons
+    }
+
+
 def issue_in_line(
     leads: list[float], age: float, horizons: list[float], rate: float, ahead: int
 ) -> dict[str, float]:

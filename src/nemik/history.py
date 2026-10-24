@@ -26,13 +26,21 @@ from pathlib import Path
 from nemik.cachestore import user_dir
 from nemik.cardevents import Event, events_of
 from nemik.check import LEDGER, QUEUE, default_root, workstream_files
-from nemik.climate import finish_rates, leads_by_repo, open_ages, waits_of
-from nemik.forecastshingle import HORIZONS, issue_in_line, shingle_rows
+from nemik.climate import (
+    finish_rates,
+    leads_by_repo,
+    open_ages,
+    open_status,
+    waits_of,
+)
+from nemik.forecastshingle import HORIZONS, issue_blocked, issue_in_line, shingle_rows
 from nemik.histdocs import encode, file_name
 from nemik.verify import lead_report, score_shingle, shingle_pairs
 from nemik.wake import read_liveness
 
 RELIABILITY_BINS = 4  # --score cuts each lead's chances into this many bins
+# nemik:W966: the status whose cards take no place in a repo's line
+BLOCKED = "blocked"
 
 
 def live_repos(root: Path) -> set[str]:
@@ -143,8 +151,10 @@ def forecast_rows(events: list[Event], moment: str) -> list[list[str]]:
     """Issue the forecast for every open card at one moment, as shingle rows (nemik:W747).
 
     Each open card's chances at +1, +3 and +7 days, from the lead times of its repo's cards done by
-    then, each capped by the card's place in its repo's line (oldest first) against how many cards
-    the repo finishes a day (nemik:W831); one row per card and lead.
+    then. A card that can start is capped by its place in its repo's line (oldest first, counting
+    only the cards that can start) against how many cards the repo finishes a day (nemik:W831); a
+    blocked card takes no place in that line and is capped instead by how long blocked stints have
+    lasted (nemik:W966). One row per card and lead.
 
     Returns:
         The rows: issue time, station, lead, age in days, chance.
@@ -152,15 +162,20 @@ def forecast_rows(events: list[Event], moment: str) -> list[list[str]]:
     """
     leads = leads_by_repo(events, moment)
     rates = finish_rates(events, moment)
+    statuses = open_status(events, moment)
+    stints = waits_of(events).get(BLOCKED, [])
     ahead: dict[str, int] = {}
     rows: list[list[str]] = []
     for station, age in sorted(open_ages(events, moment).items(), key=_oldest_first):
         repo = station.partition(":")[0]
         place = ahead.get(repo, 0)
-        ahead[repo] = place + 1
-        chances = issue_in_line(
-            leads.get(repo, []), age, HORIZONS, rates.get(repo, 0.0), place
-        )
+        if statuses.get(station) == BLOCKED:
+            chances = issue_blocked(leads.get(repo, []), age, HORIZONS, stints)
+        else:
+            ahead[repo] = place + 1
+            chances = issue_in_line(
+                leads.get(repo, []), age, HORIZONS, rates.get(repo, 0.0), place
+            )
         rows.extend(shingle_rows(moment, station, age, chances))
     return sorted(rows)
 
