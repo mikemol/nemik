@@ -39,18 +39,52 @@ def _queue(tmp_path: Path) -> Graph:
     return queue_graph("a", path)
 
 
-def test_each_state_is_the_activity_the_actor_last_did(tmp_path: Path) -> None:
-    """Ready is an Offer, working an Accept, done a Resolve, in a ForgeFed collection."""
+def test_state_is_a_property_and_the_verb_is_the_event(tmp_path: Path) -> None:
+    """Each Ticket says isResolved and its tracker; a minting is a Create, a closing a Resolve."""
     text = outbox("a", _queue(tmp_path))
-    verbs = [line.split('"')[3] for line in text.splitlines() if '"type": "' in line]
-    assert [v for v in verbs if v in {"Offer", "Accept", "Resolve"}] == [
-        "Offer",
-        "Accept",
+    lines = text.splitlines()
+    verbs = [ln.split('"')[3] for ln in lines if '"type": "' in ln]
+    assert [v for v in verbs if v in {"Create", "Resolve"}] == [
+        "Create",
+        "Create",
         "Resolve",
     ]
+    assert [ln.split(": ")[1] for ln in lines if '"isResolved"' in ln] == [
+        "false,",
+        "false,",
+        "true,",
+    ]
+    assert len({ln for ln in lines if '"context"' in ln}) == 1
+    assert "Offer" not in text
+    assert "Accept" not in text
     assert '"type": "OrderedCollection"' in text
     assert "https://forgefed.org/ns" in text
     assert '"totalItems": 3' in text
+
+
+def test_a_resolved_ticket_says_when(tmp_path: Path) -> None:
+    """A done card's Ticket carries `resolved`, its last work; an open card's carries none."""
+    cards: list[dict[str, object]] = [
+        {
+            "symbol": "W1",
+            "title": "closed",
+            "status": "done",
+            "last_worked": "2026-10-02T03:04:05Z",
+        },
+        {"symbol": "W2", "title": "open", "status": "ready"},
+    ]
+    state: dict[str, object] = {
+        "version": 1,
+        "project_root": "/a",
+        "counter": 2,
+        "residue": [],
+        "waypoints": cards,
+    }
+    path = tmp_path / "a.json"
+    path.write_text(json.dumps(state), encoding="utf-8")
+    text = outbox("a", queue_graph("a", path))
+    stamps = [ln.split('"')[3] for ln in text.splitlines() if '"resolved"' in ln]
+    assert stamps == ["2026-10-02T03:04:05+00:00"]
 
 
 def test_an_activity_is_published_when_the_card_was_last_worked(tmp_path: Path) -> None:
