@@ -66,6 +66,7 @@ from nemik.letters import report as letters_report
 from nemik.luthenseries import board, load
 from nemik.outbox import outbox
 from nemik.overlaps import overlaps
+from nemik.pacepublish import metric_lines, read_pace
 from nemik.pacing import limits, paces
 from nemik.queuerows import fleet_queues
 from nemik.runlogs import runs_graph
@@ -302,6 +303,45 @@ def landings_board(path: Path | None, now: str) -> dict[str, object]:
         "series": landing_series(rows),
         "landings": shown,
     }
+
+
+PACE_FILE = "ratchet-pace.json"
+
+
+def pace_board(path: Path) -> tuple[dict[str, object], list[str]]:
+    """Build the ratchet pace board and its gauges from the pace run's file (nemik:W990).
+
+    Args:
+        path: The file ratchetpace's run writes beside the queues.
+
+    Returns:
+        ({"host": True, "as_of", "window", "rows"}, the gauge lines), or ({"host": False, "why"},
+        no lines) when there is no file or it cannot be read: no board, never a guessed one.
+
+    """
+    try:
+        as_of, window, rows = read_pace(path.read_text(encoding="utf-8"))
+    except OSError:
+        return {"host": False, "why": "no document"}, []  # never a host path
+    except ValueError as error:
+        return {"host": False, "why": str(error)}, []
+    shown = [
+        {
+            "repo": repo,
+            "ratchet": ratchet,
+            "state": state,
+            "observed": seen,
+            "required": owed,
+        }
+        for repo, ratchet, state, seen, owed in rows
+    ]
+    board: dict[str, object] = {
+        "host": True,
+        "as_of": as_of,
+        "window": window,
+        "rows": shown,
+    }
+    return board, metric_lines(rows)
 
 
 class Model:
@@ -1342,7 +1382,13 @@ def private_files(model: Model, out: Path) -> list[Path]:
         "# TYPE nemik_snapshot_published_seconds gauge\n"
         f"nemik_snapshot_published_seconds {time.time():.0f}\n"
     )
-    put("metrics", model.metrics() + gauge.encode())
+    # nemik:W990: the ratchet pace board and its gauges, from the pace run's file in the root
+    pace, pace_lines = pace_board(model.root / PACE_FILE)
+    put("ratchet-pace.json", dump(pace))
+    put(
+        "metrics",
+        model.metrics() + gauge.encode() + "\n".join([*pace_lines, ""]).encode(),
+    )
     return made
 
 
@@ -1362,6 +1408,9 @@ def fleet_key(root: Path) -> str:
     # nemik:W978: and a changed landings file rebuilds the board baked into the private files
     if (root / LANDINGS_FILE).is_file():
         digest.update(b"landings\0" + (root / LANDINGS_FILE).read_bytes() + b"\0")
+    # nemik:W990: and a changed pace file rebuilds the board and the gauges
+    if (root / PACE_FILE).is_file():
+        digest.update(b"pace\0" + (root / PACE_FILE).read_bytes() + b"\0")
     return digest.hexdigest()
 
 

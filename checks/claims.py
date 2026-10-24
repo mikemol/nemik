@@ -185,6 +185,8 @@ def hub_modules_depend_on_everything_below():
     # leaf of pure functions over the blocked rows).
     # nemik:W931: and answers /queue.json with queuerows.fleet_queues: each repo's ready cards in
     # rank's order, with their wait and the newer cards ranked ahead of them.
+    # nemik:W990: and publishes the ratchet pace board and gauges, through pacepublish, a leaf that
+    # rests on hostroot's flat-JSON reader alone.
     expected = {
         "metrics": lower | {"realize", "runlogs", "workrows"},
         "serve": lower
@@ -206,6 +208,7 @@ def hub_modules_depend_on_everything_below():
             "histdocs",
             "letters",
             "collapse",
+            "pacepublish",
         },
     }
     for hub, want in expected.items():
