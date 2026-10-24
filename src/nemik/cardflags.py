@@ -175,6 +175,74 @@ def ask_category(texts: list[str], title: str, repo: str, errands: set[str]) -> 
     return "errand" if best == "no-command" and repo in errands else best
 
 
+def _repo(cite: str) -> str:
+    """Name the repo of a `repo:W<n>` reference.
+
+    Returns:
+        The part before the colon, or the whole text for a bare repo name.
+
+    """
+    return cite.partition(":")[0]
+
+
+def _by_blocker(row: tuple[str, str, list[str]]) -> str:
+    """Sort key for inbound rows: blocker, then waiting card, then claims, as blocks.inbound orders.
+
+    Returns:
+        One text that sorts the way the (blocker, card, claims) tuple does.
+
+    """
+    sep = chr(0)
+    return row[1] + sep + row[0] + sep + sep.join(row[2])
+
+
+def inbound_rows(
+    waits: dict[str, list[str]],
+    enablers: dict[str, list[str]],
+    informed: dict[str, list[str]],
+) -> list[tuple[str, str, list[str]]]:
+    """Find each open card's waits on another workstream, with the blocker's claiming cards (W972).
+
+    The same reading as blocks.inbound over plain edges. A wait on a bare repo is claimed by the
+    cards of that repo that enable the waiter or were caused by it; a wait on a named card is
+    claimed by that card too. A wait on the waiter's own repo is no inbound wait.
+
+    Args:
+        waits: open card -> what it waits on: a bare repo name, or a `repo:W<n>` card; the operator
+            and targets outside the graph are left out by the caller.
+        enablers: card -> the cards that enable it.
+        informed: card -> the cards caused by it.
+
+    Returns:
+        (waiting card, blocker repo, claiming cards sorted), ordered by blocker, card, claims.
+
+    """
+    rows: list[tuple[str, str, list[str]]] = []
+    for card, targets in waits.items():
+        for target in targets:
+            blocker = _repo(target)
+            if blocker == _repo(card):
+                continue
+            claims = {c for c in enablers.get(card, []) if _repo(c) == blocker}
+            claims.update(c for c in informed.get(card, []) if _repo(c) == blocker)
+            if ":" in target:
+                claims.add(target)
+            rows.append((card, blocker, sorted(claims)))
+    return sorted(rows, key=_by_blocker)
+
+
+def unclaimed_blocks(
+    rows: list[tuple[str, str, list[str]]],
+) -> list[tuple[str, str]]:
+    """List the inbound waits nothing in the blocker's repo claims (nemik:W972).
+
+    Returns:
+        (waiting card, blocker repo) for each row with no claiming card, in the rows' order.
+
+    """
+    return [(card, blocker) for card, blocker, claims in rows if not claims]
+
+
 def ready_behind_open(
     enablers: dict[str, list[str]], ready: set[str], open_cards: set[str]
 ) -> dict[str, list[str]]:
