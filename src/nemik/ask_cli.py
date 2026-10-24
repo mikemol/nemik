@@ -9,13 +9,17 @@ The waypoint is minted in the FILER's queue through the one writer (`mikemol-pat
 then blocked on the owner), never by editing the file. Only then is the entry written to the floor
 inbox with `waypoint = {<filer>:W<n>}`, because summit's place_intake refuses a pointer to a card
 that is absent. The result is checked: the entry must be on the floor after writing.
+
+nemik:W943: after filing, the same ask is printed as an ActivityStreams Offer addressed to the
+owner (nemik.ask.offer), so a peer outside summit's tooling can read it. Nothing else is written:
+summit's inbox takes bib letters only.
 """
 
 import argparse
 import sys
 from pathlib import Path
 
-from nemik.ask import blocked_on, braces_balanced, entry, slug_ok, title
+from nemik.ask import blocked_on, braces_balanced, entry, offer, slug_ok, title
 from nemik.work import run_writer
 
 DEFAULT_FLOOR = Path.home() / "github" / "summit" / "floor" / "inbox"
@@ -136,4 +140,5 @@ def main(argv: list[str] | None = None) -> int:
         sys.stderr.write(f"nemik-ask: {target} is not there after writing\n")
         return 1
     sys.stdout.write(f"filed {filer}:{symbol} blocked on {wait}; entry {target}\n")
+    sys.stdout.write(offer(slug, filer, owner, claim, symbol))
     return 0

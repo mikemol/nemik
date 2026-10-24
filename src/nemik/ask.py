@@ -97,3 +97,52 @@ def entry(slug: str, filer: str, owner: str, claim: str, symbol: str) -> str:
         f"  waypoint = {{{filer}:{symbol}}}\n"
         "}\n"
     )
+
+
+def quoted(text: str) -> str:
+    """Quote a text as a JSON string, by hand (the Codon census has no json module).
+
+    Args:
+        text: Any text.
+
+    Returns:
+        The text in double quotes, with backslash, quote and the control characters escaped.
+
+    """
+    out = text.replace("\\", "\\\\").replace('"', '\\"')
+    out = out.replace("\n", "\\n").replace("\r", "\\r").replace("\t", "\\t")
+    return '"' + out + '"'
+
+
+def offer(slug: str, filer: str, owner: str, claim: str, symbol: str) -> str:
+    """Word an ask as an ActivityStreams Offer addressed to its owner (nemik:W943, R6).
+
+    It is printed beside the floor entry, not written into summit's inbox: that directory is
+    counted file by file and read as bib letters, so a stray file there would be a letter with no
+    parseable entry.
+
+    Args:
+        slug: The entry's key, which makes the Offer's id.
+        filer: The repo filing the ask.
+        owner: The repo the ask is addressed to.
+        claim: The ask's text.
+        symbol: The filer's waypoint, W<n>.
+
+    Returns:
+        A JSON object: the filer offers its card, whose summary is the claim, to the owner.
+
+    """
+    return (
+        "{\n"
+        '  "@context": "https://www.w3.org/ns/activitystreams",\n'
+        f'  "id": "urn:nemik:ask:{slug}",\n'
+        '  "type": "Offer",\n'
+        f'  "actor": "urn:nemik:{filer}",\n'
+        '  "object": {\n'
+        '    "type": "Ticket",\n'
+        f'    "id": "urn:nemik:{filer}/{symbol}",\n'
+        f'    "summary": {quoted(claim.strip())}\n'
+        "  },\n"
+        f'  "target": "urn:nemik:{owner}"\n'
+        "}\n"
+    )
