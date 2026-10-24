@@ -1953,3 +1953,12 @@
 2026-10-24T06:28:31Z  status W395 blocked>done writer    "blocked -> done"
 2026-10-24T06:35:01Z  status W936 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T06:35:01Z  status W937 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T06:39:55Z  tick  W952 minted    -         "viewstate.js parses and formats the address (a scope path and a view token) as pure functions, with a browser test of the round trip"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W937
+2026-10-24T06:39:55Z  tick  W953 minted    -         "The page reads the address on load and picks the repos, card and view it names"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W937
+2026-10-24T06:39:55Z  tick  W954 minted    -         "The page writes the address when the pick, the card or the view changes, and the back button is the way up"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W937
+2026-10-24T06:39:55Z  tick  W955 minted    -         "nemik-pdf selects a scope and a view by address"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W937
+2026-10-24T06:40:10Z  status W953 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T06:40:11Z  status W954 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T06:40:12Z  status W955 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T06:40:16Z  status W952 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T06:46:08Z  status W391 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
