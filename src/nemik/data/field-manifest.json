@@ -21,6 +21,9 @@
       "health": {"status": "enum", "blocked_share": "count", "oldest_block_ticks": "count", "asks_owed": "count", "reasons": "list-text"},
       "ruler": {"motif": "list-text", "f": "list-text"}
     },
+    "umbrellas.json": {
+      "umbrellas": {"id": "ref", "blockers": "list-ref", "enables": "list-ref", "card": "ref", "address": "text"}
+    },
     "wake.json": {
       "top": {"liveness": "text", "roster": "records", "operator": "record", "series": "record"},
       "roster": {"repo": "enum", "state": "enum", "last_tick": "time", "last_tick_age_s": "count", "waiting": "records"},

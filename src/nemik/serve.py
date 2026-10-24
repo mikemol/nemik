@@ -52,6 +52,7 @@ from nemik.check import (
     workstream_files,
 )
 from nemik.check import survey as checked_survey
+from nemik.collapse import collapse, paths
 from nemik.collapse import lines as collapse_lines
 from nemik.critical import critical_doc
 from nemik.exportwire import exports_key, withheld_by_exports
@@ -577,6 +578,16 @@ class Model:
         g = without(self.graph, self.withheld) if self.withheld else self.graph
         return {"lines": collapse_lines(blocked_rows(g))}
 
+    def umbrellas_json(self) -> dict[str, object]:
+        """List the collapse umbrellas with their members' n-path addresses (nemik:W973).
+
+        Returns:
+            {"umbrellas": the rows umbrella_docs gives}, over the graph less what luthen withholds.
+
+        """
+        g = without(self.graph, self.withheld) if self.withheld else self.graph
+        return {"umbrellas": umbrella_docs(g)}
+
     def doc_for(self, route: str) -> dict[str, object]:
         """Build the document a route in DOC_ROUTES answers.
 
@@ -660,6 +671,33 @@ def suppliers_of(g: Graph, card: URIRef) -> list[str]:
 
     """
     return sorted(ref(o) for o in g.objects(card, NEMIK.acceptableSupplier))
+
+
+def umbrella_docs(g: Graph) -> list[dict[str, object]]:
+    """List the collapse umbrellas over a graph, as a document of their own (nemik:W973).
+
+    An umbrella is a view over blocked cards, never a card (nemik:W691), so it is not a node in
+    graph.json: it is its own document. Pass the graph without the withheld cards.
+
+    Returns:
+        One row per member of each umbrella: the umbrella's id, blockers and enables, and the
+        member card with its n-path address.
+
+    """
+    blocked = blocked_rows(g)
+    found = collapse(blocked)
+    address = paths(blocked, found)
+    return [
+        {
+            "id": name,
+            "blockers": blockers,
+            "enables": enables,
+            "card": m,
+            "address": address[m],
+        }
+        for name, blockers, enables, members in found
+        for m in members
+    ]
 
 
 def without(g: Graph, refs: frozenset[str]) -> Graph:
@@ -1138,6 +1176,8 @@ def static_data(model: Model) -> dict[str, object]:
     ):
         docs[f"goals/{repo}.json"] = goals(g, repo, weights)
     docs["history.json"] = history_doc(model.root, model.withheld)
+    open_g = without(g, model.withheld) if model.withheld else g
+    docs["umbrellas.json"] = umbrella_docs(open_g)
     return docs
 
 

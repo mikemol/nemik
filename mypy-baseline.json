@@ -18,7 +18,7 @@
  },
  "src/nemik/apischema.py": {
   "explicit-any": 10,
-  "misc": 120
+  "misc": 115
  },
  "src/nemik/blocks.py": {
   "call-overload": 1,

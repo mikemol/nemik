@@ -71,5 +71,5 @@ def unmanifested(name: str, doc) -> list[str]:
     elif key == "history.json":
         check("weeks", [row for rows in doc.values() for row in rows])
     else:
-        check("goals", doc)
+        check("umbrellas" if key == "umbrellas.json" else "goals", doc)
     return bad

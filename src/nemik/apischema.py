@@ -66,12 +66,7 @@ def schemas() -> dict[str, dict[str, Any]]:
     version = json.loads(
         files("nemik.data").joinpath("field-manifest.json").read_text()
     )["version"]
-    g, w, h, goals = (
-        m["graph.json"],
-        m["wake.json"],
-        m["history.json"],
-        m["goals/<repo>.json"],
-    )
+    g, w, h = (m["graph.json"], m["wake.json"], m["history.json"])
     # findings: per repo, a list of findings, each a list of strings (severity, focus, message)
     finding = {"type": "array", "items": {"type": "array", "items": {"type": "string"}}}
     bodies: dict[str, dict[str, Any]] = {
@@ -111,8 +106,11 @@ def schemas() -> dict[str, dict[str, Any]]:
             "additionalProperties": False,
         },
         "history.json": _by_repo(_list(h["weeks"])),
-        "goals/<repo>.json": _list(goals["goals"]),
     }
+    # the files that are one flat list of records, each under one manifest section
+    flat = (("goals/<repo>.json", "goals"), ("umbrellas.json", "umbrellas"))
+    for path, section in flat:
+        bodies[path] = _list(m[path][section])
     return {
         path: {
             "$schema": DIALECT,

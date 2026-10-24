@@ -2,17 +2,16 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W972: the inbound waits and unclaimed blocks, from plain edges, on a two-repo fleet."""
 
-import json
 from pathlib import Path
 
+from queue_cases import make_card, write_queue
 from rdflib import RDF, Graph
 from rdflib.namespace import PROV
 
-from nemik.adapter import BASE, NEMIK, OSLC_CM, queue_graph
+from nemik.adapter import BASE, NEMIK, OSLC_CM
 from nemik.cardflags import inbound_rows, unclaimed_blocks
 from nemik.rank import ref_of
 
-KNOWN = frozenset({"alpha", "beta"})
 Plain = dict[str, list[str]]
 EXPECTED = [
     ("alpha:W1", "beta", ["beta:W7"]),
@@ -20,48 +19,6 @@ EXPECTED = [
     ("alpha:W3", "beta", ["beta:W7"]),
     ("alpha:W6", "beta", []),
 ]
-
-
-def _card(
-    symbol: str,
-    status: str,
-    waits: list[str],
-    enables: list[str],
-    caused_by: str = "",
-) -> dict[str, object]:
-    """Build one queue entry.
-
-    Returns:
-        The entry.
-
-    """
-    return {
-        "symbol": symbol,
-        "title": f"card {symbol}",
-        "status": status,
-        "enables": enables,
-        "blocked_on": waits,
-        "blocked_kind": "agent" if waits else None,
-        "caused_by": caused_by,
-    }
-
-
-def _queue(path: Path, repo: str, cards: list[dict[str, object]]) -> Graph:
-    """Write a queue and read it as a graph.
-
-    Returns:
-        The repo's graph.
-
-    """
-    body: dict[str, object] = {
-        "version": 1,
-        "counter": 20,
-        "project_root": f"/fixture/{repo}",
-        "residue": [],
-        "waypoints": cards,
-    }
-    path.write_text(json.dumps(body), encoding="utf-8")
-    return queue_graph(repo, path, KNOWN)
 
 
 def fleet(root: Path) -> Graph:
@@ -75,20 +32,20 @@ def fleet(root: Path) -> Graph:
 
     """
     alpha = [
-        _card("W1", "blocked", ["beta"], []),
-        _card("W2", "blocked", ["beta"], []),
-        _card("W3", "blocked", ["beta:W7"], []),
-        _card("W4", "blocked", ["W5"], []),
-        _card("W5", "ready", [], []),
-        _card("W6", "blocked", ["beta"], []),
+        make_card("W1", "blocked", ["beta"], []),
+        make_card("W2", "blocked", ["beta"], []),
+        make_card("W3", "blocked", ["beta:W7"], []),
+        make_card("W4", "blocked", ["W5"], []),
+        make_card("W5", "ready", [], []),
+        make_card("W6", "blocked", ["beta"], []),
     ]
     beta = [
-        _card("W7", "ready", [], ["alpha:W1"]),
-        _card("W8", "ready", [], [], caused_by="alpha:W2"),
+        make_card("W7", "ready", [], ["alpha:W1"]),
+        make_card("W8", "ready", [], [], caused_by="alpha:W2"),
     ]
     merged = Graph()
-    merged += _queue(root / "alpha.json", "alpha", alpha)
-    merged += _queue(root / "beta.json", "beta", beta)
+    merged += write_queue(root / "alpha.json", "alpha", alpha)
+    merged += write_queue(root / "beta.json", "beta", beta)
     return merged
 
 

@@ -50,6 +50,8 @@ exports_files(["pyproject.toml"])
             + ([".githooks/post-commit"] if src == "tests/test_githooks_postcommit.py" else [])
             # nemik:W622: the commit-msg hook is read as text by its test
             + ([".githooks/commit-msg"] if src == "tests/test_githooks_commitmsg.py" else [])
+            # nemik:W973: two tests build their fixture queues with the shared builders
+            + (["tests/queue_cases.py"] if src in ("tests/test_collapse_payload.py", "tests/test_cardflags_inbound.py") else [])
             # nemik:W690: the queue contract's fixture is read by its test
             + (["//tests/fixtures:queue"] if src == "tests/test_queue_fixture.py" else [])
             # nemik:W957: the tracker reader is tested on recorded GitHub and Forgejo issues
