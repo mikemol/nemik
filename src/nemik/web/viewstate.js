@@ -17,6 +17,22 @@ function parseAddress(hash) {
   return scoped && (!view || ADDRESS_VIEW.test(view)) ? { scope: parts, view } : none;
 }
 
+// nemik:W953 (W937): the address is applied once, on the first load. The repo is picked before the chips
+// draw and the card is selected after the first render; a name the graph does not hold is ignored.
+let addressState = null, addressSelected = false;
+function applyAddress() {
+  if (addressState) return;
+  addressState = parseAddress(location.hash);
+  const repo = addressState.scope[0];
+  if (repo && data.nodes.some(n => n.repo === repo)) { picked.clear(); picked.add(repo); }
+}
+function selectAddressCard() {
+  if (addressSelected || !addressState) return;
+  addressSelected = true;
+  const [repo, ...symbols] = addressState.scope;
+  if (symbols.length) focusCite(`${repo}:${symbols[symbols.length - 1]}`);  // a card not drawn still shows in Selected
+}
+
 function formatAddress(state) {
   const path = state.scope.map(encodeURIComponent).join("/");
   return "#/" + path + (state.view ? "?view=" + encodeURIComponent(state.view) : "");

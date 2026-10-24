@@ -182,11 +182,11 @@ async function load() {
     drawSources();
     return;
   }
-  drawSources();
+  drawSources(); applyAddress();
   chips([...new Set(data.nodes.map(n => n.repo))].sort());
   await wake();  // draw() reads `liveness`, populated by wake() -- fetch it first, not alongside.
   await loadCore();  // render() marks the longest chains through it
-  pathKey(); render(true); findings(); goals(); queuePanel(); weather(); history();
+  pathKey(); render(true); selectAddressCard(); findings(); goals(); queuePanel(); weather(); history();
 }
 
 // Also feeds `liveness` (repo -> asleep/idle/awake) that draw() uses to color repo boxes, so the

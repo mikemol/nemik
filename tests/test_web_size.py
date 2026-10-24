@@ -21,7 +21,7 @@ CEILINGS = {
     "cards.js": 200,
     "panels.js": 312,
     "queue.js": 32,
-    "viewstate.js": 23,
+    "viewstate.js": 39,
     "render.js": 382,
     "style.css": 80,
     "wasm.js": 220,

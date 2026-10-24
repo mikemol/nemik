@@ -96,3 +96,46 @@ def test_a_malformed_address_is_no_state_at_all(server: str, page: Page) -> None
         "#/beta/%E0%A4%A",
     ):
         assert _parse(page, bad) == EMPTY, bad
+
+
+def _first_card(page: Page) -> tuple[str, str, str]:
+    """Name one card of the page's graph.
+
+    Returns:
+        Its repo, its symbol and its cite.
+
+    """
+    raw: object = page.evaluate(
+        "() => { const n = data.nodes.find(n => n.symbol && n.cite);"
+        " return [n.repo, n.symbol, n.cite].join(' '); }"
+    )
+    assert isinstance(raw, str)
+    repo, symbol, cite = raw.split(" ")
+    return repo, symbol, cite
+
+
+def test_the_address_picks_the_repo_and_selects_the_card(
+    server: str, page: Page
+) -> None:
+    """Opening an address picks its repo and shows its card in the Selected panel."""
+    page.goto(server)
+    page.wait_for_function(READY, timeout=0)
+    repo, symbol, cite = _first_card(page)
+    page.goto("about:blank")
+    page.goto(f"{server}#/{repo}/{symbol}")
+    page.wait_for_function(READY, timeout=0)
+    page.wait_for_function(
+        "c => document.getElementById('detail').textContent.includes(c)", arg=cite
+    )
+    picked: object = page.evaluate("() => [...picked]")
+    assert picked == [repo]
+
+
+def test_an_address_naming_nothing_the_graph_holds_is_ignored(
+    server: str, page: Page
+) -> None:
+    """An unknown repo picks nothing and breaks nothing: every repo stays shown."""
+    page.goto(f"{server}#/no-such-repo/W1")
+    page.wait_for_function(READY, timeout=0)
+    picked: object = page.evaluate("() => [...picked]")
+    assert picked == []
