@@ -1,0 +1,114 @@
+{
+  "url": "https://api.github.com/repos/cli/cli/issues/2000",
+  "repository_url": "https://api.github.com/repos/cli/cli",
+  "labels_url": "https://api.github.com/repos/cli/cli/issues/2000/labels{/name}",
+  "comments_url": "https://api.github.com/repos/cli/cli/issues/2000/comments",
+  "events_url": "https://api.github.com/repos/cli/cli/issues/2000/events",
+  "html_url": "https://github.com/cli/cli/issues/2000",
+  "id": 709831838,
+  "node_id": "MDU6SXNzdWU3MDk4MzE4Mzg=",
+  "number": 2000,
+  "title": "Support different default OWNER in `gh repo clone REPO`",
+  "user": {
+    "login": "Moser-ss",
+    "id": 14796637,
+    "node_id": "MDQ6VXNlcjE0Nzk2NjM3",
+    "avatar_url": "https://avatars.githubusercontent.com/u/14796637?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/Moser-ss",
+    "html_url": "https://github.com/Moser-ss",
+    "followers_url": "https://api.github.com/users/Moser-ss/followers",
+    "following_url": "https://api.github.com/users/Moser-ss/following{/other_user}",
+    "gists_url": "https://api.github.com/users/Moser-ss/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/Moser-ss/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/Moser-ss/subscriptions",
+    "organizations_url": "https://api.github.com/users/Moser-ss/orgs",
+    "repos_url": "https://api.github.com/users/Moser-ss/repos",
+    "events_url": "https://api.github.com/users/Moser-ss/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/Moser-ss/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1698076173,
+      "node_id": "MDU6TGFiZWwxNjk4MDc2MTcz",
+      "url": "https://api.github.com/repos/cli/cli/labels/enhancement",
+      "name": "enhancement",
+      "color": "0dd8ac",
+      "default": true,
+      "description": "a request to improve CLI",
+      "archived_at": null,
+      "archived_by": null
+    },
+    {
+      "id": 5976522995,
+      "node_id": "LA_kwDODKw3uc8AAAABZDqA8w",
+      "url": "https://api.github.com/repos/cli/cli/labels/gh-repo",
+      "name": "gh-repo",
+      "color": "d4c5f9",
+      "default": false,
+      "description": "relating to the gh repo command",
+      "archived_at": null,
+      "archived_by": null
+    },
+    {
+      "id": 8942156286,
+      "node_id": "LA_kwDODKw3uc8AAAACFP55_g",
+      "url": "https://api.github.com/repos/cli/cli/labels/help%20wanted%20candidate",
+      "name": "help wanted candidate",
+      "color": "043fad",
+      "default": false,
+      "description": "Issue may be marked as help-wanted but not yet ready to accept PR",
+      "archived_at": null,
+      "archived_by": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 8,
+  "created_at": "2020-09-27T22:42:32Z",
+  "updated_at": "2025-07-27T15:09:34Z",
+  "closed_at": null,
+  "assignee": null,
+  "author_association": "NONE",
+  "issue_field_values": [
+
+  ],
+  "type": null,
+  "active_lock_reason": null,
+  "sub_issues_summary": {
+    "total": 0,
+    "completed": 0,
+    "percent_completed": 0
+  },
+  "issue_dependencies_summary": {
+    "blocked_by": 0,
+    "total_blocked_by": 0,
+    "blocking": 0,
+    "total_blocking": 0
+  },
+  "body": "### Describe the feature or problem you’d like to solve\r\n\r\nThe feature to have the authenticated user as default OWNER when clone the repo is very neat, but for some people that could not be enough. For example for people that work a lot inside of a specific organization could be nice to set a different default owner\r\n\r\n### Proposed solution\r\nusing the gh config we could set a default owner, like gh config owner acme\r\n\r\nThen every time we use the gh repo clone we don't need to specify the owner\r\n\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/cli/cli/issues/2000/reactions",
+    "total_count": 20,
+    "+1": 14,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 6,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/cli/cli/issues/2000/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null,
+  "pinned_comment": null
+}
