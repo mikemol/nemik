@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 945,
+  "counter": 946,
   "waypoints": [
     {
       "symbol": "W1",
@@ -16203,21 +16203,23 @@
     {
       "symbol": "W749",
       "title": "Improve the forecast: add one feature at a time, keep it only if verified skill over climatology rises",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W743"
       ],
       "touches": [
         "file:docs/forecast-features.md!w"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "Score again after the new-model issue's own timestamp plus one day (check the issue's rows in ~/.cache/nemik/shingle.tsv for its issue time); only then record skill in docs/forecast-features.md and try the next feature if skill is not above zero",
-      "evidence": "2026-10-20: 2026-10-20 first shingle issued: nemik-history --all --forecast --from 2026-10-12 --append-to ~/.cache/nemik/shingle.tsv appended 1614 rows (every open card, +1d/+3d/+7d, lead times from cards minted and done since 10-12). Keep the same --from so the issues are comparable; one issue a day is enough. No skill can be judged before the +1d horizon passes (2026-10-21), the +7d one 2026-10-27 | 2026-10-21: 2026-10-21: second shingle issue appended 1647 rows; --score printed nothing (no horizon has matured yet, the first issue was 2026-10-20). Score again after 2026-10-21 evening, then daily | 2026-10-22: 2026-10-22 first score (+1d, n 538): brier 0.244 against persistence 0.024 and climatology 0.024, skill -9.1 and -9.3, so the forecast is far worse than doing nothing. Reliability: said 0.03 happened 0.04 (n 323), said 0.30 happened 0.00 (n 89), said 0.50 happened 0.00 (n 14), said 0.99 happened 0.01 (n 112). The high chances are the failure: 112 cards were given 0.99 of finishing within a day and one did. Third shingle issued (1617 rows) | 2026-10-22: 2026-10-22 where the failing bins come from (first shingle, +1d): the 0.99 bin is 108 cards, 66 mtools and 35 luthen-observability, aged 2.7 to 7 days, so the model says a repo that finishes much will finish this card within a day, whatever the card's place in the queue; the 0.30 bin is 86 cards, 72 luthen and 14 el-openglo, all aged 0.09 to 1.5 days (freshly minted); the 0.50 bin is amr-skills, luthen and nemik cards aged 1.7 to 4.5 days. The per-repo rate is not the card's chance: a position-in-the-queue feature is the first trial | 2026-10-23: 2026-10-23: old-model +1d skill -8.69 (n 1626); no as-of replay exists, so a new-model issue was appended (1623 rows) to mature 2026-10-24; doc updated | 2026-10-23: doc landed as fc5dd3f; the forward test is the next step | 2026-10-23: 2026-10-23 overlap audit (verified): the shingle is kept in ~/.cache/nemik/shingle.tsv, a file, and the fleet rule is that logs and series go to services; luthen-observability:W1419 stores the same lead-time shingle in Victoria (blocked on its W1418). This card keeps the file until W1419 lands, then reads the shingle from the store; the 2026-10-24 scoring uses the file because it is the only copy of the new-model issue | 2026-10-24: 2026-10-24T02:16Z: scored after W895's witness held: +1d n 1626 brier 0.204 (skill -8.48 persistence, -8.69 climatology), +3d n 538 skill -4.29/-4.71; n is the same 1626 as the old-model score of 10-23, so the new-model issue (appended 10-23) is probably not in the scored rows yet; the high bins still fail (said 0.94 happened 0.01, n 318). Not yet the out-of-sample reading",
+      "blocked_on": [
+        "W946"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "After W946's witness holds (2026-10-24T12:42Z): nemik-history --all --score ~/.cache/nemik/shingle.tsv; the issue stamped 2026-10-23T12:41Z (new model) is the first out-of-sample test; record the skill in docs/forecast-features.md; try another feature only if it is not above zero",
+      "evidence": "2026-10-20: 2026-10-20 first shingle issued: nemik-history --all --forecast --from 2026-10-12 --append-to ~/.cache/nemik/shingle.tsv appended 1614 rows (every open card, +1d/+3d/+7d, lead times from cards minted and done since 10-12). Keep the same --from so the issues are comparable; one issue a day is enough. No skill can be judged before the +1d horizon passes (2026-10-21), the +7d one 2026-10-27 | 2026-10-21: 2026-10-21: second shingle issue appended 1647 rows; --score printed nothing (no horizon has matured yet, the first issue was 2026-10-20). Score again after 2026-10-21 evening, then daily | 2026-10-22: 2026-10-22 first score (+1d, n 538): brier 0.244 against persistence 0.024 and climatology 0.024, skill -9.1 and -9.3, so the forecast is far worse than doing nothing. Reliability: said 0.03 happened 0.04 (n 323), said 0.30 happened 0.00 (n 89), said 0.50 happened 0.00 (n 14), said 0.99 happened 0.01 (n 112). The high chances are the failure: 112 cards were given 0.99 of finishing within a day and one did. Third shingle issued (1617 rows) | 2026-10-22: 2026-10-22 where the failing bins come from (first shingle, +1d): the 0.99 bin is 108 cards, 66 mtools and 35 luthen-observability, aged 2.7 to 7 days, so the model says a repo that finishes much will finish this card within a day, whatever the card's place in the queue; the 0.30 bin is 86 cards, 72 luthen and 14 el-openglo, all aged 0.09 to 1.5 days (freshly minted); the 0.50 bin is amr-skills, luthen and nemik cards aged 1.7 to 4.5 days. The per-repo rate is not the card's chance: a position-in-the-queue feature is the first trial | 2026-10-23: 2026-10-23: old-model +1d skill -8.69 (n 1626); no as-of replay exists, so a new-model issue was appended (1623 rows) to mature 2026-10-24; doc updated | 2026-10-23: doc landed as fc5dd3f; the forward test is the next step | 2026-10-23: 2026-10-23 overlap audit (verified): the shingle is kept in ~/.cache/nemik/shingle.tsv, a file, and the fleet rule is that logs and series go to services; luthen-observability:W1419 stores the same lead-time shingle in Victoria (blocked on its W1418). This card keeps the file until W1419 lands, then reads the shingle from the store; the 2026-10-24 scoring uses the file because it is the only copy of the new-model issue | 2026-10-24: 2026-10-24T02:16Z: scored after W895's witness held: +1d n 1626 brier 0.204 (skill -8.48 persistence, -8.69 climatology), +3d n 538 skill -4.29/-4.71; n is the same 1626 as the old-model score of 10-23, so the new-model issue (appended 10-23) is probably not in the scored rows yet; the high bins still fail (said 0.94 happened 0.01, n 318). Not yet the out-of-sample reading | 2026-10-24: 2026-10-24T02:20Z correction: the latest issue is stamped 2026-10-23T12:41Z in the shingle, so its +1d horizon matures 2026-10-24T12:41Z; W895's 02:10Z was wrong, so the 02:16Z score above had nothing new in it. W946 witnesses the real time",
       "issued_at": "2026-10-19T19:35:10Z",
       "minted_during": "tick",
       "caused_by": "nemik:W743",
-      "last_worked": "2026-10-24T02:16:23Z",
+      "last_worked": "2026-10-24T02:26:48Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -20888,7 +20890,7 @@
     {
       "symbol": "W919",
       "title": "A log record that crosses between workstreams is an ActivityStreams activity in its body, with an id, an actor IRI and an address, and nemik's outbox exposes the log's activities as a collection",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W915"
       ],
@@ -20897,14 +20899,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "After W916 (the specs read): write docs/federation-log.md: the record body as an ActivityStreams activity (type, actor, object, published, id, to), how nemik's outbox serves a LogsQL query as a collection, what the writer tools (mikemol-commit landings, waitemit, estate's verdict) would change; the rule is in docs/federation-channels.md",
-      "evidence": "2026-10-23: 2026-10-23 estate-dd (estate:W39): the envelope is no problem for the waldo; its stdout stays one JSON verdict line and the shipper wraps it as one ActivityStreams-shaped record (type, actor estate, object = the verdict, published = the record time, id = plan_hash plus published, to when for a peer). Same record is what a card's witness reads, with fresh_since = published. Constraint: the envelope carries nothing the waldo scrubbed. Not built; lands with estate's witness commands",
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: 2026-10-23 estate-dd (estate:W39): the envelope is no problem for the waldo; its stdout stays one JSON verdict line and the shipper wraps it as one ActivityStreams-shaped record (type, actor estate, object = the verdict, published = the record time, id = plan_hash plus published, to when for a peer). Same record is what a card's witness reads, with fresh_since = published. Constraint: the envelope carries nothing the waldo scrubbed. Not built; lands with estate's witness commands | 2026-10-24: landed e932415: docs/federation-log.md; children W944, W945",
       "issued_at": "2026-10-23T19:24:29Z",
       "minted_during": "tick",
       "caused_by": "operator",
-      "last_worked": "2026-10-24T02:10:29Z",
+      "last_worked": "2026-10-24T02:37:03Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261024T023703Z",
       "manifest": [
         "docs/federation-log.md"
       ],
@@ -21513,6 +21515,29 @@
         "tests/test_outbox_log.py"
       ],
       "size_class": "medium"
+    },
+    {
+      "symbol": "W946",
+      "title": "The +1d horizon of the shingle issue stamped 2026-10-23T12:41Z has matured (2026-10-24 12:41Z); W895 used 02:10Z, which was wrong",
+      "status": "blocked",
+      "enables": [
+        "nemik:W749"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "nemik-witnesses"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-24T02:26:39Z",
+      "minted_during": "tick",
+      "caused_by": "nemik:W749",
+      "last_worked": "2026-10-24T02:26:44Z",
+      "ticks_blocked": 0,
+      "witness": "input.now >= \"2026-10-24T12:42:00\"",
+      "witness_lang": "rego",
+      "completed": null
     }
   ],
   "residue": [
@@ -21674,15 +21699,6 @@
       "taken_at": "2026-10-23T20:48:07Z",
       "renewed_at": "2026-10-24T02:08:51Z",
       "expires_at": "2026-10-24T02:38:51Z"
-    },
-    {
-      "tag": "file:docs/federation-log.md!w",
-      "holder": "claude-nemik",
-      "waypoint": "W919",
-      "base_sha": "9162d03d51f6642ddc6c245e8f33dd09db891b2f",
-      "taken_at": "2026-10-24T02:10:29Z",
-      "renewed_at": "2026-10-24T02:10:29Z",
-      "expires_at": "2026-10-24T02:40:29Z"
     }
   ],
   "advice": [

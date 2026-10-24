@@ -1904,3 +1904,7 @@
 2026-10-24T02:12:00Z  status W749 blocked>ready writer    "blocked -> ready"
 2026-10-24T02:12:00Z  status W895 blocked>done writer    "blocked -> done"
 2026-10-24T02:15:51Z  status W943 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T02:26:39Z  tick  W946 minted    -         "The +1d horizon of the shingle issue stamped 2026-10-23T12:41Z has matured (2026-10-24 12:41Z); W895 used 02:10Z, which was wrong"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W749
+2026-10-24T02:26:44Z  status W946 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T02:26:45Z  status W749 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T02:37:03Z  status W919 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
