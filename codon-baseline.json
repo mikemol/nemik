@@ -223,6 +223,10 @@
   "as_written": "",
   "stripped": ""
  },
+ "mirrorreq": {
+  "as_written": "no module named 'nemik.mirror'",
+  "stripped": "no module named 'nemik.mirror'"
+ },
  "mspdi": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'xml.etree.ElementTree'"
