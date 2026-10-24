@@ -1962,3 +1962,14 @@
 2026-10-24T06:40:12Z  status W955 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T06:40:16Z  status W952 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T06:46:08Z  status W391 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T07:12:32Z  tick  W956 minted    -         "Record one real public GitHub issue and one real public Forgejo issue as JSON fixtures, with where each was fetched from"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W369
+2026-10-24T07:12:32Z  tick  W957 minted    -         "A typed reader of a tracker issue's nested JSON (no json.loads Any) keeping cite, title, state, body, labels and blocked_by, tested on the two fixtures"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W369
+2026-10-24T07:12:32Z  tick  W958 minted    -         "nemik-export --format issues --against FILE prints the mirror plan from a recorded tracker file"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W369
+2026-10-24T07:12:32Z  tick  W959 minted    -         "The per-tool API client sends the plan, each tool's scoped token being operator: act"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W369
+2026-10-24T07:12:42Z  status W956 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T07:13:53Z  status W370 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T07:13:57Z  tick  W956 advanced  collapse  "W369 and W370 (the two oldest ready cards) share one first step: recorded real tracker payloads; W369 atomized into W956 to W959, W370 pointed at W956; W956 fixtures queued as stack392 behind stack391 (W952) [blocked by W952]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T07:16:46Z  status W952 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T07:27:26Z  status W956 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T07:27:27Z  status W953 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T07:27:28Z  status W957 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
