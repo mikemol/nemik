@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 959,
+  "counter": 963,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 511
+      "ticks_blocked": 521
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-18T21:49:48Z",
-      "ticks_blocked": 331,
+      "ticks_blocked": 341,
       "weight": 1
     },
     {
@@ -3520,7 +3520,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 187,
+      "ticks_blocked": 197,
       "weight": 2,
       "completed": null
     },
@@ -4278,7 +4278,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 360,
+      "ticks_blocked": 370,
       "weight": 2,
       "completed": null,
       "warrants": [
@@ -5405,7 +5405,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 337,
+      "ticks_blocked": 347,
       "completed": null
     },
     {
@@ -5426,7 +5426,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 352,
+      "ticks_blocked": 362,
       "completed": null
     },
     {
@@ -5485,7 +5485,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 352,
+      "ticks_blocked": 362,
       "completed": null
     },
     {
@@ -5506,7 +5506,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 352,
+      "ticks_blocked": 362,
       "completed": null
     },
     {
@@ -5546,7 +5546,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 352,
+      "ticks_blocked": 362,
       "completed": null
     },
     {
@@ -5605,7 +5605,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 352,
+      "ticks_blocked": 362,
       "completed": null
     },
     {
@@ -5645,7 +5645,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 352,
+      "ticks_blocked": 362,
       "completed": null
     },
     {
@@ -5666,7 +5666,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 352,
+      "ticks_blocked": 362,
       "completed": null
     },
     {
@@ -5706,7 +5706,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 352,
+      "ticks_blocked": 362,
       "completed": null
     },
     {
@@ -6650,7 +6650,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 152,
+      "ticks_blocked": 162,
       "completed": null
     },
     {
@@ -6789,7 +6789,7 @@
       "minted_during": "interrupt",
       "caused_by": "W346",
       "last_worked": "2026-10-19T18:16:23Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 55,
       "weight": 9,
       "completed": null,
       "manifest": [
@@ -6818,7 +6818,7 @@
       "minted_during": "interrupt",
       "caused_by": "W346",
       "last_worked": "2026-10-19T18:16:25Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 55,
       "weight": 9,
       "completed": null,
       "manifest": [
@@ -7082,7 +7082,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 265,
+      "ticks_blocked": 275,
       "completed": null
     },
     {
@@ -7186,17 +7186,15 @@
         "api"
       ],
       "blocked_on": [
-        "W957",
-        "W958",
-        "W959"
+        "W963"
       ],
       "blocked_kind": "agent",
-      "next_bounded_step": "Part 1 landed 3736e58 (nemik.mirror.plan). Next: print the plan from nemik-export --format issues --against FILE (the tracker's issues as JSON); then the API client per tool, each tool's scoped token is operator: act",
+      "next_bounded_step": "GitHub and Forgejo: the plan print (W958) and the request builder (W959) are done; the sender is W963 and waits on the operator's scoped tokens. Not started: Jira (its CSV import carries no issue links, docs/integration-survey.md) and Project Online, each with its own API and token",
       "evidence": "2026-10-21: 2026-10-21: tried nemik-export --format issues --against FILE (mirror.plan over a recorded tracker file) and withdrew it: reading a real tracker's JSON needs a typed reader of nested objects (json.loads gives Any, which the house mypy refuses; issues.read keeps only cite, title, state and blocked_by, so body and labels would diff spuriously). Do it once a tracker's real issue shape is recorded as a fixture, with a typed reader beside it",
       "issued_at": "2026-10-12T01:34:02Z",
       "minted_during": "interrupt",
       "caused_by": "W364",
-      "last_worked": "2026-10-24T07:12:32Z",
+      "last_worked": "2026-10-24T12:37:36Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/mirror.py",
@@ -7208,7 +7206,7 @@
     {
       "symbol": "W370",
       "title": "Inbound connectors: webhooks or polls from other tools become letters or printed commands",
-      "status": "blocked",
+      "status": "ready",
       "enables": [
         "W364"
       ],
@@ -7217,10 +7215,8 @@
         "api",
         "letters"
       ],
-      "blocked_on": [
-        "nemik:W956"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "After W956: read the recorded issue payloads into nemik.events' documented shapes with W957's typed reader, tested on the two fixtures; the webhook or poll delivery is the operator's token",
       "evidence": "2026-10-24: 2026-10-24: this card's next step (recorded payloads from a real Forgejo and GitHub as fixtures) is W956, shared with W369 (collapse: one recording serves both). After it: a reader of the webhook payloads into the documented event shapes (nemik.events), then the delivery, which needs each tool's token (operator: act)",
       "issued_at": "2026-10-12T01:34:05Z",
@@ -8341,7 +8337,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 251,
+      "ticks_blocked": 261,
       "completed": null
     },
     {
@@ -8362,7 +8358,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-16T01:35:27Z",
-      "ticks_blocked": 215,
+      "ticks_blocked": 225,
       "completed": null
     },
     {
@@ -8383,7 +8379,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 284,
+      "ticks_blocked": 294,
       "completed": null
     },
     {
@@ -9025,7 +9021,7 @@
       "minted_during": "tick",
       "caused_by": "W458",
       "last_worked": "2026-10-13T19:10:34Z",
-      "ticks_blocked": 249,
+      "ticks_blocked": 259,
       "completed": null
     },
     {
@@ -9063,7 +9059,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W943",
       "last_worked": "2026-10-20T18:05:40Z",
-      "ticks_blocked": 92,
+      "ticks_blocked": 102,
       "weight": 1,
       "manifest": [
         "src/nemik/adapter.py",
@@ -9603,7 +9599,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-19T10:16:00Z",
-      "ticks_blocked": 152,
+      "ticks_blocked": 162,
       "completed": null,
       "warrants": [
         {
@@ -9715,7 +9711,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-16T01:54:02Z",
-      "ticks_blocked": 216,
+      "ticks_blocked": 226,
       "weight": 1,
       "completed": null
     },
@@ -9735,7 +9731,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-16T01:54:03Z",
-      "ticks_blocked": 216,
+      "ticks_blocked": 226,
       "weight": 1,
       "completed": null
     },
@@ -9896,7 +9892,7 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W1051",
       "last_worked": "2026-10-18T21:49:01Z",
-      "ticks_blocked": 152,
+      "ticks_blocked": 162,
       "completed": null,
       "weight": 6,
       "warrants": [
@@ -10073,7 +10069,7 @@
       "minted_during": "tick",
       "caused_by": "W500",
       "last_worked": "2026-10-15T11:53:53Z",
-      "ticks_blocked": 152,
+      "ticks_blocked": 162,
       "completed": null
     },
     {
@@ -10118,7 +10114,7 @@
       "minted_during": "tick",
       "caused_by": "W506",
       "last_worked": "2026-10-19T02:47:58Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 55,
       "weight": 11,
       "completed": null,
       "manifest": [
@@ -10190,7 +10186,7 @@
       "minted_during": "tick",
       "caused_by": "W506",
       "last_worked": "2026-10-18T03:08:04Z",
-      "ticks_blocked": 152,
+      "ticks_blocked": 162,
       "weight": 2,
       "completed": null
     },
@@ -10214,7 +10210,7 @@
       "minted_during": "tick",
       "caused_by": "github:W35",
       "last_worked": "2026-10-15T12:00:59Z",
-      "ticks_blocked": 245,
+      "ticks_blocked": 255,
       "completed": null
     },
     {
@@ -10300,7 +10296,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T12:40:08Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 55,
       "weight": 11,
       "manifest": [
         "src/nemik/withheld.py"
@@ -10328,7 +10324,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-18T19:15:01Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -10709,7 +10705,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-16T01:53:12Z",
-      "ticks_blocked": 216,
+      "ticks_blocked": 226,
       "weight": 13,
       "completed": null
     },
@@ -11332,7 +11328,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-17T10:50:53Z",
-      "ticks_blocked": 152,
+      "ticks_blocked": 162,
       "completed": null
     },
     {
@@ -11378,7 +11374,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-18T21:49:04Z",
-      "ticks_blocked": 193,
+      "ticks_blocked": 203,
       "completed": null,
       "warrants": [
         {
@@ -11430,7 +11426,7 @@
       "minted_during": "tick",
       "caused_by": "W560",
       "last_worked": "2026-10-16T02:51:43Z",
-      "ticks_blocked": 214,
+      "ticks_blocked": 224,
       "completed": null
     },
     {
@@ -11503,7 +11499,7 @@
       "minted_during": "tick",
       "caused_by": "W566",
       "last_worked": "2026-10-16T05:23:44Z",
-      "ticks_blocked": 209,
+      "ticks_blocked": 219,
       "completed": null
     },
     {
@@ -11528,7 +11524,7 @@
       "minted_during": "tick",
       "caused_by": "W566",
       "last_worked": "2026-10-23T19:25:35Z",
-      "ticks_blocked": 209,
+      "ticks_blocked": 219,
       "completed": null
     },
     {
@@ -11552,7 +11548,7 @@
       "minted_during": "tick",
       "caused_by": "W566",
       "last_worked": "2026-10-16T04:52:53Z",
-      "ticks_blocked": 210,
+      "ticks_blocked": 220,
       "completed": null
     },
     {
@@ -11574,7 +11570,7 @@
       "minted_during": "tick",
       "caused_by": "W541",
       "last_worked": "2026-10-23T17:58:15Z",
-      "ticks_blocked": 207,
+      "ticks_blocked": 217,
       "completed": null
     },
     {
@@ -11596,7 +11592,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-23T12:09:48Z",
-      "ticks_blocked": 39,
+      "ticks_blocked": 49,
       "completed": null,
       "manifest": [
         "Containerfile",
@@ -11694,7 +11690,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-17T08:09:46Z",
-      "ticks_blocked": 198,
+      "ticks_blocked": 208,
       "completed": null
     },
     {
@@ -11758,7 +11754,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-16T15:08:10Z",
-      "ticks_blocked": 137,
+      "ticks_blocked": 147,
       "completed": null
     },
     {
@@ -11783,7 +11779,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-22T07:10:08Z",
-      "ticks_blocked": 42,
+      "ticks_blocked": 52,
       "completed": null
     },
     {
@@ -11807,7 +11803,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-17T15:38:53Z",
-      "ticks_blocked": 152,
+      "ticks_blocked": 162,
       "completed": null
     },
     {
@@ -11831,7 +11827,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-19T02:01:21Z",
-      "ticks_blocked": 121,
+      "ticks_blocked": 131,
       "completed": null,
       "manifest": [
         "src/nemik/salience.py",
@@ -12553,7 +12549,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-17T13:09:34Z",
-      "ticks_blocked": 152
+      "ticks_blocked": 162
     },
     {
       "symbol": "W614",
@@ -13222,16 +13218,14 @@
         "file:src/nemik/cones.py!w",
         "file:tests/test_cones.py!w"
       ],
-      "blocked_on": [
-        ""
-      ],
+      "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Repin to 4704f43 or later, then a nemik tool calls mikemol.hooks.footprint over a test run to write reads.json; then wire cones into stackable.pick. Needs a repin first; ask mtools-ad for a CLI if the library call is awkward",
+      "next_bounded_step": "The repin is done (vendored wheels at c9c0070, past 4704f43, so mikemol.hooks.footprint is available). Next: a nemik tool calls footprint over one test run and writes the declared reads for nemik's modules, then stackable.pick uses cones.relation to chain or separate cards. Atomize before building: (1) the tool that writes reads.json from a traced test run, (2) wiring cones into stackable.pick with a test on two cards whose cones intersect, (3) the gate-cost use",
       "evidence": "2026-10-17: 2026-10-17 via github-8f (relayed, the operator's words not verified by me): the paperkit input graph (/home/mikemol/github/.claude/design-paperkit-input-granularity-2026-10-17.md) is the class of information needed to group parallel-workable cards and stream sequentially-dependent ones. Two cards conflict when their manifests' dependency cones intersect in the repo's input graph (import DAG plus declared reads); B streams after A when A edits files in B's cone. Source: mtools' importdag today, a generated dag.bzl after mtools:W1501. The same graph predicts which tests a commit runs (gate cost) for p/c ordering | 2026-10-17: WARRANT verified 2026-10-17 by mikemol-transcriptstruct: session 695f3e0a line 76547, uuid 7a5c9732-76b5-4e6b-b03e-6dc966b85e16, 2026-10-17T22:24:58Z, origin human: 'Incidentally, that input graph is the precise same class of information needed for automating grouping parallel-workable and streaming sequentially-dependent cards.' github-8f: measure importdag's coverage of nemik's own imports as step 0, since a cone over a partial graph under-reports conflicts | 2026-10-17: 2026-10-17 STEP 0 measured (scratchpad/dagcover.py, mtools venv python with PYTHONPATH=mtools/importdag/src): mikemol.importdag.resolve.derive over the 77 src/nemik/*.py modules found all 161 edges a plain AST read of every Import/ImportFrom finds (0 missing), plus 54 more that are each module's edge to src/nemik/__init__.py (correct: importing nemik.x runs the package initializer), 0 ambiguous. Limits: only src/nemik was measured, not tests/, checks/ or tools/; and data a module reads without importing (data/shapes.ttl, codon-baseline.json, mypy-baseline.json) is not an import edge, so a cone over this graph alone still under-reports those conflicts | 2026-10-17: 2026-10-17 github-8f decision: read the graph as DATA, no seventh wheel. mtools:W1503 emits the import graph as JSON beside dag.bzl from one generator with --check. Declared reads (shapes.ttl, baselines, queue files) ride in the same JSON per module (to ask mtools-ad); cones walk both import edges and declared reads, no separate nemik table | 2026-10-17: 2026-10-17 mtools-ad: mtools:W1503 built and queued, not landed. Format: <dist>/graph.json schema 1 {schema, package, modules: {path: {imports: [paths], reads: [files]}}, tests: {tests/test_x.py: {imports, reads}}}, sorted keys, byte-stable; reads DECLARED in <dist>/reads.json {owner: [files]}, generator refuses a read of a missing file or an unknown owner; generator: python -m mikemol.importdag.graph --dist DIR --package PKG [--check|--write]. Not true yet: no dist has a committed graph.json; not run on nemik; a module's import of its own package marker is not an edge (__init__.py is a node). mtools-ad sends the sha and says when a graph.json exists | 2026-10-17: 2026-10-17 mtools-ad correction: __init__.py is a key in modules with its own imports but NO edge points to it (stem_index leaves __init__ out), so the 54 edges to the package __init__ will not appear in graph.json. A cone that needs 'this module sits in package P' takes it from the path, not from an edge. Consequence for cones: editing src/nemik/__init__.py would not show as touching importers; handle that case from the path | 2026-10-17: 2026-10-17 mtools-ad: W1503 generator landed e1607be. Ran it on nemik myself (PYTHONPATH=mtools/importdag/src:mtools/atomicwrite/src, mtools venv python, python -m mikemol.importdag.graph --dist ~/github/nemik --package nemik --write): wrote graph.json covering src/nemik/*.py with imports and (empty) reads; I moved it to the scratchpad, nothing committed. No reads.json yet. Not yet compared edge-for-edge with my AST count (161 in src/nemik) | 2026-10-17: 2026-10-17 step 0 against the generator: graph.json (nemik src) has 162 import edges, the AST read finds 162, 0 missing 0 extra (scratchpad/graphcmp.py). Part 1 (nemik.cones) submitted | 2026-10-18: part 1 landed 478fc6a (pushed): nemik.cones load/cone/relation, tests/test_cones.py. Remaining: reads.json and a committed graph.json with a freshness check, stackable.pick on cone relation, gate cost | 2026-10-18: 2026-10-17 mtools-ad: the W1503 generator cannot emit audited reads (AST for imports, only checks that declared reads exist). Route: mtools:W1504, a strace footprint audit like paperkit.footdeps (files a test opens vs declared, emits candidates), carded not built; it needs a test run to trace, so nemik's own test run under the tool. Until then reads.json is a hand declaration, not derived from grep | 2026-10-18: part 2 landed f08aa3d (pushed): cones.parallel + 2 tests. Blocked on audited reads (mtools:W1504) for wiring into stackable | 2026-10-20: 2026-10-20 mtools-ad: mtools:W1504 (the footprint audit: a new hooks module and test, starting from paperkit's footdeps) has a manifest and is ready; it had sat behind the manifest umbrella W1667. No date; third in their order | 2026-10-20: 2026-10-20 mtools-ad: mtools:W1504 landed at 4704f43: hooks footprint.py, the strace opens-vs-declared audit as a library (MISSING/UNUSED, DEGRADED without strace); no CLI or per-target caller yet",
       "issued_at": "2026-10-17T22:25:51Z",
       "minted_during": "interrupt",
       "caused_by": "github-8f",
-      "last_worked": "2026-10-20T15:57:17Z",
+      "last_worked": "2026-10-24T10:33:08Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/stackable.py",
@@ -14034,7 +14028,7 @@
       "minted_during": "interrupt",
       "caused_by": "W510",
       "last_worked": "2026-10-18T16:06:47Z",
-      "ticks_blocked": 152,
+      "ticks_blocked": 162,
       "manifest": [
         "src/nemik/web/index.html",
         "tests/test_sources_trs.py"
@@ -14060,7 +14054,7 @@
       "minted_during": "interrupt",
       "caused_by": "W510",
       "last_worked": "2026-10-18T14:33:41Z",
-      "ticks_blocked": 152,
+      "ticks_blocked": 162,
       "completed": null,
       "manifest": [
         "src/nemik/web/index.html",
@@ -14138,7 +14132,7 @@
       "minted_during": "interrupt",
       "caused_by": "W674",
       "last_worked": "2026-10-18T16:13:01Z",
-      "ticks_blocked": 152,
+      "ticks_blocked": 162,
       "manifest": [
         "src/nemik/serve.py",
         "src/nemik/web/vendor/n3.min.js",
@@ -14454,7 +14448,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-18T19:40:28Z",
-      "ticks_blocked": 152,
+      "ticks_blocked": 162,
       "warrants": [
         {
           "@context": {
@@ -14641,7 +14635,7 @@
       "minted_during": "interrupt",
       "caused_by": "W691",
       "last_worked": "2026-10-19T01:14:55Z",
-      "ticks_blocked": 152,
+      "ticks_blocked": 162,
       "completed": null,
       "manifest": [
         "src/nemik/serve.py",
@@ -14713,13 +14707,13 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-19T18:16:26Z",
-      "ticks_blocked": 136,
+      "ticks_blocked": 146,
       "completed": null
     },
     {
       "symbol": "W696",
       "title": "Fleet consumers run nemik from a pinned build, never from the working tree: a sha-pinned wheel or built dist, with scratch worktrees for work in progress",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "luthen-observability:W1476",
         "luthen-observability:W1461"
@@ -14729,18 +14723,19 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Design: fleet consumers run nemik from a pinned build (a sha-pinned wheel or built dist), with scratch worktrees for work in progress; today the working-tree edits reach every peer at once",
-      "evidence": "2026-10-23: 2026-10-23 overlap audit (verified): luthen-observability:W1476 (the nemik_check gate reads a pinned nemik install) and W1461 (the user-tools install follows nemik's pushed main, needs nemik's ref as a trigger) wait on a pinned build, which this card makes",
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: 2026-10-23 overlap audit (verified): luthen-observability:W1476 (the nemik_check gate reads a pinned nemik install) and W1461 (the user-tools install follows nemik's pushed main, needs nemik's ref as a trigger) wait on a pinned build, which this card makes | 2026-10-24: 2026-10-24 read, not designed: luthen's user/tools.json already declares nemik as follow github.com/mikemol/nemik.git ref main and checks/user_tools.py installs it at that sha, by-sha with an atomic swap. nemik main moves only when the gate lands a commit and pushes it. Verified: 14a8cc9 is an ancestor of origin/main and the checkout is in sync with origin/main. So a pinned build for fleet consumers exists as luthen's follow of the gated, pushed main, and no wheel or build_dist.sh is needed for it. Open and luthen's to say: nemik-hostroot is not in tools.json's executables for nemik; whether W1476 and W1553 need anything more of nemik. Asked luthen-observability-ab to name it or drop nemik:W696 from their blocked_on. What W696 still might own: the in-tree half (hooks and the gate running through a bazel-bin link farm into a live mtools tree) is mtools:W1743, not here | 2026-10-24: 2026-10-24 luthen-observability-ab (a peer's word, then checked by me in tools.json): verified 14a8cc9 on origin/main, dropped nemik:W696 from their W1476, W1553, W1574 and W1575, and said nothing more is needed from nemik. They found luthen-nemik-hostroot.service failing 203/EXEC because nemik-hostroot was never linked into ~/.local/bin, and added it to tools.json's executables for nemik (in their gate). Closed as already met: the pin is luthen's follow of nemik's gated, pushed main. No wheel or build script written",
       "issued_at": "2026-10-18T20:24:34Z",
       "minted_during": "interrupt",
       "caused_by": "github-8f",
-      "last_worked": "2026-10-23T19:25:18Z",
+      "last_worked": "2026-10-24T08:13:51Z",
       "ticks_blocked": 0,
       "manifest": [
         "tools/build_dist.sh",
         "docs/pinned-build.md"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "completed": "20261024T081351Z"
     },
     {
       "symbol": "W697",
@@ -14838,7 +14833,7 @@
       "minted_during": "interrupt",
       "caused_by": "W581",
       "last_worked": "2026-10-18T23:03:49Z",
-      "ticks_blocked": 152,
+      "ticks_blocked": 162,
       "completed": null
     },
     {
@@ -15053,7 +15048,7 @@
       "minted_during": "interrupt",
       "caused_by": "el-openglo:W702",
       "last_worked": "2026-10-19T00:15:45Z",
-      "ticks_blocked": 152,
+      "ticks_blocked": 162,
       "completed": null
     },
     {
@@ -15765,7 +15760,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W728",
       "last_worked": "2026-10-19T15:12:10Z",
-      "ticks_blocked": 143,
+      "ticks_blocked": 153,
       "completed": null
     },
     {
@@ -15969,7 +15964,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-23T19:25:28Z",
-      "ticks_blocked": 99,
+      "ticks_blocked": 109,
       "warrants": [
         {
           "@context": {
@@ -16210,7 +16205,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W743",
       "last_worked": "2026-10-24T02:26:48Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 21,
       "completed": null,
       "manifest": [
         "docs/forecast-features.md"
@@ -16264,7 +16259,7 @@
       "minted_during": "tick",
       "caused_by": "mtools:W1731",
       "last_worked": "2026-10-24T06:48:56Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 12,
       "completed": null,
       "manifest": [
         "src/nemik/landings.py",
@@ -17069,7 +17064,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-20T22:31:27Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 55,
       "warrants": [
         {
           "@context": {
@@ -17280,7 +17275,7 @@
       "minted_during": "tick",
       "caused_by": "W781",
       "last_worked": "2026-10-23T17:58:17Z",
-      "ticks_blocked": 91,
+      "ticks_blocked": 101,
       "completed": null
     },
     {
@@ -17888,7 +17883,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-21T03:38:37Z",
-      "ticks_blocked": 87,
+      "ticks_blocked": 97,
       "completed": null
     },
     {
@@ -18538,7 +18533,7 @@
       "minted_during": "tick",
       "caused_by": "W579",
       "last_worked": "2026-10-23T19:25:16Z",
-      "ticks_blocked": 25,
+      "ticks_blocked": 35,
       "completed": null
     },
     {
@@ -18952,7 +18947,7 @@
       "minted_during": "interrupt",
       "caused_by": "nemik:W703",
       "last_worked": "2026-10-22T20:45:21Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 55,
       "completed": null
     },
     {
@@ -19663,7 +19658,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T07:32:14Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 55,
       "completed": null
     },
     {
@@ -19699,7 +19694,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T07:32:19Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 55,
       "completed": null
     },
     {
@@ -19718,7 +19713,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T07:32:21Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 55,
       "completed": null
     },
     {
@@ -19737,7 +19732,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T07:32:23Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 55,
       "completed": null
     },
     {
@@ -20259,7 +20254,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T16:12:14Z",
-      "ticks_blocked": 29,
+      "ticks_blocked": 39,
       "completed": null
     },
     {
@@ -20403,7 +20398,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-23T18:05:00Z",
-      "ticks_blocked": 25,
+      "ticks_blocked": 35,
       "warrants": [
         {
           "@context": {
@@ -20555,7 +20550,7 @@
       "minted_during": "tick",
       "caused_by": "W905",
       "last_worked": "2026-10-23T18:12:28Z",
-      "ticks_blocked": 27,
+      "ticks_blocked": 37,
       "manifest": [
         "docs/evidence-standards.md"
       ],
@@ -20608,7 +20603,7 @@
       "minted_during": "tick",
       "caused_by": "W905",
       "last_worked": "2026-10-23T19:34:39Z",
-      "ticks_blocked": 25,
+      "ticks_blocked": 35,
       "completed": null,
       "manifest": [
         "docs/evidence-recommendations.md"
@@ -20777,7 +20772,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T19:27:50Z",
-      "ticks_blocked": 25,
+      "ticks_blocked": 35,
       "completed": null,
       "manifest": [
         "src/nemik/witnesses.py",
@@ -20968,7 +20963,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T20:45:05Z",
-      "ticks_blocked": 22,
+      "ticks_blocked": 32,
       "manifest": [
         "tests/test_modes.py",
         "tests/test_metrics_gating.py"
@@ -20994,7 +20989,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T20:57:46Z",
-      "ticks_blocked": 22,
+      "ticks_blocked": 32,
       "completed": null
     },
     {
@@ -21040,7 +21035,7 @@
       "minted_during": "tick",
       "caused_by": "W923",
       "last_worked": "2026-10-23T20:57:51Z",
-      "ticks_blocked": 22,
+      "ticks_blocked": 32,
       "completed": null
     },
     {
@@ -21061,7 +21056,7 @@
       "minted_during": "tick",
       "caused_by": "W923",
       "last_worked": "2026-10-23T20:57:53Z",
-      "ticks_blocked": 22,
+      "ticks_blocked": 32,
       "completed": null,
       "manifest": [
         "tests/test_shard_declared.py"
@@ -21238,7 +21233,6 @@
       "enables": [],
       "touches": [],
       "blocked_on": [
-        "W937",
         "W938"
       ],
       "blocked_kind": "agent",
@@ -21248,7 +21242,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T21:21:43Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 0,
       "completed": null
     },
     {
@@ -21304,25 +21298,21 @@
     {
       "symbol": "W937",
       "title": "A view's state lives in the address, so a view is linkable, reachable by the keyboard and by the PDF command",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W934"
       ],
       "touches": [],
-      "blocked_on": [
-        "W953",
-        "W954",
-        "W955"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "After W936: the address holds the scale path (fleet, repo, umbrella, card) and the view, in location.hash, read on load and written on change, with the browser's back button as the way up; nemik-pdf then selects a scope and a view by address (docs/pdf-views.md); the page has no URL state today",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-24: children landed: W952 f3a7023, W953 f6281cf, W954 74ea156, W955 cfcbe40. The address holds the scope path (repo and card) read on load and written on change, Back is the way up, and nemik-pdf opens at one. Not done and not claimed: the view token is carried through the address but nothing reads or writes a view, because no view exists and the operator has not settled their names (docs/page-structure-map.md); the umbrella and sub-issue steps of the scale path are accepted by the parser but only repo and card are acted on",
       "issued_at": "2026-10-23T21:19:59Z",
       "minted_during": "tick",
       "caused_by": "W934",
-      "last_worked": "2026-10-24T06:39:55Z",
+      "last_worked": "2026-10-24T12:16:54Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261024T121654Z",
       "manifest": [
         "src/nemik/web/viewstate.js",
         "tests/test_viewstate.py"
@@ -21338,7 +21328,6 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W937",
         "operator: decide whether docs/page-structure-map.md is the page's structure before any view is built: is Orders its own view or a section of Health, is the selected card a pane or a drawer, and does Wake split between Health and Orders"
       ],
       "blocked_kind": "human",
@@ -21348,7 +21337,7 @@
       "minted_during": "tick",
       "caused_by": "W934",
       "last_worked": "2026-10-24T06:35:02Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "src/nemik/web/views.js",
@@ -21417,7 +21406,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W918",
       "last_worked": "2026-10-23T23:11:28Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 27,
       "completed": null
     },
     {
@@ -21528,7 +21517,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W749",
       "last_worked": "2026-10-24T02:26:44Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 21,
       "witness": "input.now >= \"2026-10-24T12:42:00\"",
       "witness_lang": "rego",
       "completed": null
@@ -21656,12 +21645,12 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "On luthen-observability-ab's reply naming its card: cite it here as the blocker. They own the host user units (luthen-nemik-hostroot.service is the model). Needs a pushed nemik install at 14a8cc9 or later (their W1553 and nemik W696), and the output path to equal the directory the pod's build reads (serve.LOG_FILE beside the queues)",
-      "evidence": "2026-10-24: 2026-10-24 asked luthen-observability-ab (message sent) for a oneshot unit and timer running nemik-hostroot --log-activities --out. Note nemik-hostroot's default LOG_OUT is ~/.cache/nemik/log-activities.json, while the build reads the file beside the queues, so --out is required unless the directories agree | 2026-10-24: 2026-10-24 luthen-observability-ab (a peer's word): carded as luthen-observability:W1574, a user oneshot plus timer for nemik-hostroot --log-activities modelled on luthen-nemik-hostroot.service, itself blocked on nemik:W696 (the host's pushed nemik install must carry 14a8cc9 or later). Open on their side: whether --out is the directory luthen-series.json lands in for the pod's build, which they will answer on the card",
+      "evidence": "2026-10-24: 2026-10-24 asked luthen-observability-ab (message sent) for a oneshot unit and timer running nemik-hostroot --log-activities --out. Note nemik-hostroot's default LOG_OUT is ~/.cache/nemik/log-activities.json, while the build reads the file beside the queues, so --out is required unless the directories agree | 2026-10-24: 2026-10-24 luthen-observability-ab (a peer's word): carded as luthen-observability:W1574, a user oneshot plus timer for nemik-hostroot --log-activities modelled on luthen-nemik-hostroot.service, itself blocked on nemik:W696 (the host's pushed nemik install must carry 14a8cc9 or later). Open on their side: whether --out is the directory luthen-series.json lands in for the pod's build, which they will answer on the card | 2026-10-24: 2026-10-24 luthen-observability-ab (a peer's word): luthen-series.json lands in the export tree (NEMIK_CACHE_DIR, ~/.local/state/luthen/nemik-cache, written by luthen-nemik-export.service) and passes luthen's egress gate (checks.nemik_egress, W1283) before a pod build reads it. They will put log-activities.json in that same directory and extend the gate to read it (a design step on luthen-observability:W1574 before the unit), since the file carries wait-log content. This agrees with nemik's build, which reads root / LOG_FILE the way it reads root / SERIES_FILE, so the pod build root is that directory. They also fixed the chain under it: nemik-hostroot linked into ~/.local/bin (7051622b, 1e843844) and checks.vlogs_query's yaml import under nemik's venv python (aab6c809); luthen-nemik-hostroot.service's first real run was due 05:44 EDT",
       "issued_at": "2026-10-24T06:24:22Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W945",
-      "last_worked": "2026-10-24T06:25:56Z",
-      "ticks_blocked": 3,
+      "last_worked": "2026-10-24T09:50:03Z",
+      "ticks_blocked": 13,
       "completed": null,
       "size_class": "small"
     },
@@ -21699,7 +21688,7 @@
     {
       "symbol": "W953",
       "title": "The page reads the address on load and picks the repos, card and view it names",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W937"
       ],
@@ -21708,15 +21697,15 @@
         "file:src/nemik/web/viewstate.js!w"
       ],
       "blocked_on": [],
-      "blocked_kind": "agent",
-      "next_bounded_step": "After W952: load() applies the address once the graph is drawn: picks the named repos, selects the named card, sets the view token; call it in the existing line of load() so panels.js keeps its line count; a name that is not in the graph is ignored, not an error; browser test with an address in the URL",
-      "evidence": "",
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-24: landed f6281cf: applyAddress and selectAddressCard (via focusCite, so an undrawn card still shows in Selected); first gate run caught selectCard doing nothing for a done card",
       "issued_at": "2026-10-24T06:39:55Z",
       "minted_during": "tick",
       "caused_by": "W937",
-      "last_worked": "2026-10-24T07:27:27Z",
+      "last_worked": "2026-10-24T08:36:54Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261024T083654Z",
       "manifest": [
         "src/nemik/web/viewstate.js",
         "src/nemik/web/panels.js",
@@ -21727,26 +21716,30 @@
     {
       "symbol": "W954",
       "title": "The page writes the address when the pick, the card or the view changes, and the back button is the way up",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W937"
       ],
-      "touches": [],
-      "blocked_on": [
-        "nemik:W953"
+      "touches": [
+        "file:src/nemik/web/viewstate.js!w",
+        "file:src/nemik/web/cards.js!w",
+        "file:src/nemik/web/index.html!w"
       ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "After W953: write the address when the repo pick, the selected card or the view changes (history.pushState, so the back button is the way up); call it from the existing selection function so cards.js keeps its line count; no write while the address is being applied; browser test: pick, select, back",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-24: landed 74ea156: writeAddress via location.hash (history.pushState is shadowed by the page's history() panel function), popstate reloads only for a step the page did not write; viewstate.js 49 lines; first gate run caught the shadowing and also failed the layout and PDF tests on the uncaught error",
       "issued_at": "2026-10-24T06:39:55Z",
       "minted_during": "tick",
       "caused_by": "W937",
-      "last_worked": "2026-10-24T06:40:11Z",
-      "ticks_blocked": 2,
-      "completed": null,
+      "last_worked": "2026-10-24T11:19:31Z",
+      "ticks_blocked": 0,
+      "completed": "20261024T111931Z",
       "manifest": [
         "src/nemik/web/viewstate.js",
         "src/nemik/web/cards.js",
+        "src/nemik/web/index.html",
+        "tests/test_web_size.py",
         "tests/test_viewstate.py"
       ],
       "size_class": "small"
@@ -21754,27 +21747,31 @@
     {
       "symbol": "W955",
       "title": "nemik-pdf selects a scope and a view by address",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W937"
       ],
-      "touches": [],
-      "blocked_on": [
-        "nemik:W953"
+      "touches": [
+        "file:src/nemik/pdf.py!w",
+        "file:src/nemik/pdfviews.py!w",
+        "file:skills/nemik/SKILL.md!w"
       ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "After W953: nemik.pdf takes a scope and a view as the address and opens the page at it before printing (so an agent asked for the Queue of a repo prints exactly that); the PDF test checks the right repo is drawn; docs/pdf-views.md gets the address form",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-24: landed cfcbe40: nemik-pdf address view, pdfviews.at, docs and skill row",
       "issued_at": "2026-10-24T06:39:55Z",
       "minted_during": "tick",
       "caused_by": "W937",
-      "last_worked": "2026-10-24T06:40:12Z",
-      "ticks_blocked": 2,
-      "completed": null,
+      "last_worked": "2026-10-24T12:16:47Z",
+      "ticks_blocked": 0,
+      "completed": "20261024T121647Z",
       "manifest": [
         "src/nemik/pdf.py",
+        "src/nemik/pdfviews.py",
         "tests/test_pdf.py",
-        "docs/pdf-views.md"
+        "docs/pdf-views.md",
+        "skills/nemik/SKILL.md"
       ],
       "size_class": "small"
     },
@@ -21808,24 +21805,28 @@
     {
       "symbol": "W957",
       "title": "A typed reader of a tracker issue's nested JSON (no json.loads Any) keeping cite, title, state, body, labels and blocked_by, tested on the two fixtures",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W369"
       ],
-      "touches": [],
+      "touches": [
+        "file:codon-baseline.json!w"
+      ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-24: landed ed05632: nemik.tracker typed reader, test on the recorded fixtures, fixtures filegroup, codon baseline entry (type alias is a Codon syntax error)",
       "issued_at": "2026-10-24T07:12:32Z",
       "minted_during": "tick",
       "caused_by": "W369",
-      "last_worked": "2026-10-24T07:27:28Z",
+      "last_worked": "2026-10-24T08:57:43Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261024T085743Z",
       "manifest": [
         "src/nemik/tracker.py",
         "tests/test_tracker.py",
+        "tests/fixtures/BUILD.bazel",
+        "BUILD.bazel",
         "codon-baseline.json"
       ],
       "size_class": "medium"
@@ -21833,38 +21834,157 @@
     {
       "symbol": "W958",
       "title": "nemik-export --format issues --against FILE prints the mirror plan from a recorded tracker file",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W369"
       ],
-      "touches": [],
+      "touches": [
+        "file:src/nemik/issues.py!w",
+        "file:src/nemik/mspdi.py!w",
+        "file:src/nemik/mirror.py!w",
+        "file:src/nemik/tracker.py!w"
+      ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-24: landed d73c001: nemik-export --format issues --against FILE; mirror.changes treats an absent field as unknown; typed export options (mypy 6311 to 6307)",
       "issued_at": "2026-10-24T07:12:32Z",
       "minted_during": "tick",
       "caused_by": "W369",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-24T10:42:58Z",
+      "ticks_blocked": 0,
+      "completed": "20261024T104258Z",
+      "manifest": [
+        "src/nemik/tracker.py",
+        "src/nemik/issues.py",
+        "src/nemik/mirror.py",
+        "src/nemik/mspdi.py",
+        "tests/test_issue_plan.py",
+        "BUILD.bazel",
+        "mypy-baseline.json"
+      ],
+      "size_class": "small"
     },
     {
       "symbol": "W959",
       "title": "The per-tool API client sends the plan, each tool's scoped token being operator: act",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W369"
       ],
-      "touches": [],
+      "touches": [
+        "file:src/nemik/mirrorreq.py!w",
+        "file:tests/test_mirrorreq.py!w"
+      ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-24: landed 1688048: nemik.mirrorreq builds the GitHub and Forgejo requests from a mirror plan, offline, tested; the sender is W963 (needs a scoped token, the operator's)",
       "issued_at": "2026-10-24T07:12:32Z",
       "minted_during": "tick",
       "caused_by": "W369",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-24T12:37:21Z",
+      "ticks_blocked": 0,
+      "completed": "20261024T123721Z",
+      "manifest": [
+        "src/nemik/mirrorreq.py",
+        "tests/test_mirrorreq.py",
+        "codon-baseline.json"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W960",
+      "title": "outbox builds its collection without a dict spread, so the pinned Codon stops aborting on every gate census (coredump_loop paged)",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "file:src/nemik/outbox.py!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-24: landed ee46262: outbox adds its extra keys with dict.update, no dict spread; the cause of the pinned Codon's aborts in every gate census since W949",
+      "issued_at": "2026-10-24T08:46:12Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-8f",
+      "last_worked": "2026-10-24T09:56:46Z",
+      "ticks_blocked": 0,
+      "completed": "20261024T095646Z",
+      "manifest": [
+        "src/nemik/outbox.py"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W961",
+      "title": "A test fails when a module in src/nemik builds a dict with a spread, except the one already in the Codon baseline, so a new module cannot reintroduce the abort",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "file:tests/test_no_dict_spread.py!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-24: landed 52a0a8f: tests/test_no_dict_spread.py; the first gate run found spreads in history.py and rank.py that a text search had missed, so the allowlist is calendars, history, rank (each a clean parse error in the Codon baseline)",
+      "issued_at": "2026-10-24T08:47:12Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-8f",
+      "last_worked": "2026-10-24T11:58:25Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tests/test_no_dict_spread.py"
+      ],
+      "size_class": "small",
+      "completed": "20261024T115825Z"
+    },
+    {
+      "symbol": "W962",
+      "title": "The Codon census runs each codon child with core dumps off so systemd-coredump is not invoked at all, not just a zero limit",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "file:tests/test_codon_census.py!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-24: 2026-10-24 measured: the journal shows systemd-coredump invoked for each codon abort even under the census's zero limit (terminated abnormally without generating a coredump). A transient service with LimitCORE=1 that aborts logs only the kernel line RLIMIT_CORE is set to 1, aborting core, and no systemd-coredump line: the kernel skips the pipe handler at exactly 1 (pid 926937, 05:40:42 EDT). This session's hard limit is 0, so the census sets 1 only when its hard limit allows, else 0 | 2026-10-24: landed fff9053: the census sets RLIMIT_CORE to 1 when its hard limit allows, else 0",
+      "issued_at": "2026-10-24T08:47:13Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-8f",
+      "last_worked": "2026-10-24T11:00:45Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tests/test_codon_census.py"
+      ],
+      "size_class": "small",
+      "completed": "20261024T110045Z"
+    },
+    {
+      "symbol": "W963",
+      "title": "A sender posts mirrorreq's requests to a tracker with a scoped token, after a dry run prints them, and reads the result back",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "operator: act create a fine-grained GitHub token limited to issues read and write on ONE repo you name (and a Forgejo token with the issue scope on one repo), put each where I can read it by file path outside the repo, and tell me the repo; nothing is sent before then"
+      ],
+      "blocked_kind": "human",
+      "next_bounded_step": "After a token: mirrorsend posts each mirrorreq.Request with the token in an Authorization header read from the file, prints the dry run first, sends only with --apply, checks the response status, and reads the issue back (read your writes); tested against a local fake server, never the real tracker",
+      "evidence": "",
+      "issued_at": "2026-10-24T12:37:22Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W959",
+      "last_worked": "2026-10-24T12:37:29Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/mirrorsend.py",
+        "tests/test_mirrorsend.py"
+      ],
+      "size_class": "medium"
     }
   ],
   "residue": [
@@ -21992,8 +22112,8 @@
       "waypoint": "W924",
       "base_sha": "67eb4a883831b11b5852f5d4c4fce247072ce093",
       "taken_at": "2026-10-23T20:48:07Z",
-      "renewed_at": "2026-10-24T07:11:08Z",
-      "expires_at": "2026-10-24T07:41:08Z"
+      "renewed_at": "2026-10-24T12:08:50Z",
+      "expires_at": "2026-10-24T12:38:50Z"
     },
     {
       "tag": "file:tools/shardselect.py!w",
@@ -22001,8 +22121,8 @@
       "waypoint": "W924",
       "base_sha": "67eb4a883831b11b5852f5d4c4fce247072ce093",
       "taken_at": "2026-10-23T20:48:07Z",
-      "renewed_at": "2026-10-24T07:11:08Z",
-      "expires_at": "2026-10-24T07:41:08Z"
+      "renewed_at": "2026-10-24T12:08:50Z",
+      "expires_at": "2026-10-24T12:38:50Z"
     },
     {
       "tag": "file:tests/conftest.py!w",
@@ -22010,8 +22130,8 @@
       "waypoint": "W924",
       "base_sha": "67eb4a883831b11b5852f5d4c4fce247072ce093",
       "taken_at": "2026-10-23T20:48:07Z",
-      "renewed_at": "2026-10-24T07:11:08Z",
-      "expires_at": "2026-10-24T07:41:08Z"
+      "renewed_at": "2026-10-24T12:08:50Z",
+      "expires_at": "2026-10-24T12:38:50Z"
     },
     {
       "tag": "file:tests/test_shard_select.py!w",
@@ -22019,26 +22139,8 @@
       "waypoint": "W924",
       "base_sha": "67eb4a883831b11b5852f5d4c4fce247072ce093",
       "taken_at": "2026-10-23T20:48:07Z",
-      "renewed_at": "2026-10-24T07:11:08Z",
-      "expires_at": "2026-10-24T07:41:08Z"
-    },
-    {
-      "tag": "file:src/nemik/web/panels.js!w",
-      "holder": "(unlocked)",
-      "waypoint": "W953",
-      "base_sha": "7fbfc23de7a60b793b1fd3fe4f9e67b4b41061d9",
-      "taken_at": "2026-10-24T07:27:27Z",
-      "renewed_at": "2026-10-24T07:27:27Z",
-      "expires_at": "2026-10-24T07:57:27Z"
-    },
-    {
-      "tag": "file:src/nemik/web/viewstate.js!w",
-      "holder": "(unlocked)",
-      "waypoint": "W953",
-      "base_sha": "7fbfc23de7a60b793b1fd3fe4f9e67b4b41061d9",
-      "taken_at": "2026-10-24T07:27:27Z",
-      "renewed_at": "2026-10-24T07:27:27Z",
-      "expires_at": "2026-10-24T07:57:27Z"
+      "renewed_at": "2026-10-24T12:08:50Z",
+      "expires_at": "2026-10-24T12:38:50Z"
     }
   ],
   "advice": [

@@ -1973,3 +1973,57 @@
 2026-10-24T07:27:26Z  status W956 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T07:27:27Z  status W953 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T07:27:28Z  status W957 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T07:39:18Z  prune W370 edge-pruned writer    "nemik:W956"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T07:39:18Z  status W370 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T07:43:14Z  tick  W957 advanced  unblock   "W957's typed tracker reader built and queued as stack394 behind stack393 (W953 reads the address); both gating [blocked by W953]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T07:57:05Z  status W958 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T07:57:06Z  status W959 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T08:09:02Z  lease W953 lapsed    --        "lease on file:src/nemik/web/panels.js!w held by (unlocked) lapsed unrenewed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T08:09:02Z  lease W953 lapsed    --        "lease on file:src/nemik/web/viewstate.js!w held by (unlocked) lapsed unrenewed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T08:10:58Z  status W696 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T08:11:03Z  tick  W696 advanced  collapse  "read W696 against luthen's existing follow of nemik main: the pin its dependents wait on is already there (14a8cc9 on origin/main), so asked luthen to name any remainder or drop the edge; stacks 394 and 393 gating [blocked by W957]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T08:13:51Z  status W696 blocked>done writer    "blocked -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T08:36:54Z  status W953 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T08:39:18Z  prune W954 edge-pruned writer    "nemik:W953"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T08:39:18Z  prune W955 edge-pruned writer    "nemik:W953"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T08:39:18Z  status W954 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T08:39:18Z  status W955 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T08:41:43Z  status W954 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T08:41:51Z  tick  W954 advanced  unblock   "W953 landed (f6281cf); W954 built (the address follows the pick and the card, Back reloads at the earlier address) and queued as stack395 behind stack394 (W957 tracker reader, with its codon entry) [blocked by W957]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T08:46:12Z  interrupt W960 minted    -         "outbox builds its collection without a dict spread, so the pinned Codon stops aborting on every gate census (coredump_loop paged)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f
+2026-10-24T08:46:19Z  status W960 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T08:47:12Z  interrupt W961 minted    -         "A test fails when a module in src/nemik builds a dict with a spread, except the one already in the Codon baseline, so a new module cannot reintroduce the abort"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f
+2026-10-24T08:47:13Z  interrupt W962 minted    -         "The Codon census runs each codon child with core dumps off so systemd-coredump is not invoked at all, not just a zero limit"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f
+2026-10-24T08:57:43Z  status W957 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T09:09:19Z  prune W958 edge-pruned writer    "nemik:W957"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T09:09:19Z  status W958 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T09:15:51Z  status W958 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T09:15:57Z  tick  W958 advanced  unblock   "W958 built (the mirror plan print against a tracker's recorded issues, with the typed export options lowering mypy to 6307) and queued as stack397 behind stacks 395 (W954) and 396 (W960 dict-spread fix) [blocked by W954]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T09:38:40Z  status W961 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T09:39:23Z  lease W960 lapsed    --        "lease on file:src/nemik/outbox.py!w held by (unlocked) lapsed unrenewed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T09:41:39Z  status W962 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T09:41:45Z  tick  W962 advanced  unblock   "measured why W762's zero core limit still pages (the kernel runs systemd-coredump unless the limit is exactly 1, shown with a transient service) and queued the one-line census change as stack399 behind 395 to 398 [blocked by W954]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T09:56:46Z  status W960 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T10:09:19Z  lease W961 lapsed    --        "lease on file:tests/test_no_dict_spread.py!w held by (unlocked) lapsed unrenewed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T10:11:10Z  tick  W960 advanced  unblock   "told github-8f W960 landed (ee46262, no codon abort since 05:36 EDT); stacks 395 (W954 resubmitted after the history shadowing fix), 397, 398, 399 still gating [blocked by W954]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T10:33:09Z  tick  W643 advanced  collapse  "watchdog exit 8 with four stacks gating (395, 397, 398, 399): cleaned W643's stale repin step and empty blocker rather than start a fifth stack [blocked by W954]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T10:39:35Z  tick  W958 advanced  unblock   "stacks 397, 398, 399 and the resubmitted 395 are gating serially (two live gate processes at 10:39Z); no fifth stack added; a monitor waits for the next landing [blocked by W954]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T10:42:58Z  status W958 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T11:00:45Z  status W962 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T11:09:21Z  prune W959 edge-pruned writer    "nemik:W958"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T11:09:21Z  status W959 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T11:13:19Z  status W959 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T11:15:45Z  tick  W959 advanced  unblock   "W959 part 1 (the pure GitHub and Forgejo request builder) built and queued as stack400 behind stacks 395 (W954) and 398 (W961); the sender waits on the operator's scoped tokens [blocked by W954]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T11:19:31Z  status W954 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T11:41:55Z  status W955 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T11:42:05Z  tick  W955 advanced  unblock   "W955 (nemik-pdf opens the page at an address) built and queued as stack401 behind stacks 398 (W961) and 400 (W959) [blocked by W961]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T11:58:25Z  status W961 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T12:09:48Z  tick  W955 advanced  unblock   "stacks 400 (W959, with its codon entry) and 401 (W955) gating serially; the queue commit for this stretch waits until they land; a monitor watches [blocked by W959]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T12:16:47Z  status W937 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T12:16:47Z  status W955 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T12:16:54Z  status W937 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T12:37:21Z  status W369 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T12:37:21Z  status W959 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T12:37:22Z  interrupt W963 minted    -         "A sender posts mirrorreq's requests to a tracker with a scoped token, after a dry run prints them, and reads the result back"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W959
+2026-10-24T12:37:29Z  status W963 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T12:37:36Z  status W369 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
