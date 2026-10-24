@@ -1930,3 +1930,10 @@
 2026-10-24T04:39:50Z  tick  W929 advanced  collapse  "W929 closed on its three landed children (W931, W932, W933); stack385 (W947 with its codon-baseline entry) still gating; W948 and W949 wait on it [blocked by W947]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T04:53:27Z  status W947 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T04:53:28Z  status W948 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T05:10:20Z  tick  W950 minted    -         "log-activities.json is one flat JSON object per line, a header line then one activity per line, so the server reads it with hostroot's flat reader"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W948
+2026-10-24T05:10:25Z  status W950 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T05:10:45Z  status W750 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T05:10:49Z  tick  W750 advanced  unblock   "asked mtools-ad where an intervention event is read back and blocked W750 on it; stack387 (W948) gating, with W950 minted for the log file's flat format ahead of W949 [blocked by W948]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T05:13:06Z  status W750 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T05:22:27Z  status W948 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T05:22:33Z  status W950 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
