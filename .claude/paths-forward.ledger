@@ -2145,3 +2145,9 @@
 2026-10-24T21:10:23Z  status W995 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T21:10:25Z  status W988 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T21:13:33Z  status W995 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T21:41:28Z  tick  W999 minted    -         "Find the cards that languish behind a grooming umbrella from plain blocked rows, past a bound learned from real blocks"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W992
+2026-10-24T21:41:28Z  tick  W1000 minted    -         "Decide which umbrellas are grooming ones and feed the detection from the graph, then add the shape and the rank policy line"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W992
+2026-10-24T21:41:38Z  status W999 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T21:41:43Z  status W1000 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T21:41:52Z  tick  W999 advanced  collapse  "W992 atomized into W999 (pure languish detection, built, bazel test running, stack419 written) and W1000 (graph feed, shape, rank line); stack418 (W995) gating [blocked by W1000]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T21:43:10Z  status W995 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
