@@ -16,11 +16,12 @@ from nemik.serve import PAGE_FILES
 WEB = Path(str(files("nemik.web")))
 # the text files of the page and the lines each holds today; lower a number when its file shrinks
 CEILINGS = {
-    "index.html": 281,
+    "index.html": 282,
     "graph.js": 607,
     "cards.js": 200,
     "panels.js": 312,
     "queue.js": 32,
+    "viewstate.js": 23,
     "render.js": 382,
     "style.css": 80,
     "wasm.js": 220,
