@@ -11,13 +11,18 @@ mirror's writer resolves each blocked_by cite to the issue it created; that writ
 
 Jira's CSV import documents only parent/child columns, not issue links (the survey's verified finding),
 so a Jira mirror would lose the blocking edges; it is left to the connector rather than a lossy file.
+
+nemik:W958: given a tracker's recorded issues, `plan_text` prints the calls a mirror would make
+(nemik.mirror.plan), reading them with nemik.tracker; it sends nothing.
 """
 
 from __future__ import annotations
 
 import json
 
+from nemik.mirror import plan
 from nemik.projection import Link, Task
+from nemik.tracker import read_issues, row_of
 
 
 def to_issues(tasks: list[Task]) -> list[dict[str, object]]:
@@ -37,6 +42,30 @@ def to_issues(tasks: list[Task]) -> list[dict[str, object]]:
 
 def write(tasks: list[Task]) -> str:
     return json.dumps(to_issues(tasks), indent=1)
+
+
+def plan_text(tasks: list[Task], tracker_text: str) -> str:
+    """Print the calls that would bring a tracker's recorded issues in line with the cards.
+
+    Args:
+        tasks: The cards to mirror.
+        tracker_text: The JSON array a GitHub or Forgejo issues endpoint answered.
+
+    Returns:
+        One line per call (action, cite, the fields it changes), a line per pull request skipped,
+        and a total. Issues the tracker holds that nemik did not mirror are left alone.
+
+    """
+    found = read_issues(tracker_text)
+    rows = [row_of(issue) for issue in found if not issue.is_pull_request]
+    calls = plan(to_issues(tasks), rows)
+    lines = [
+        f"{action} {cite} {','.join(sorted(fields))}".rstrip()
+        for action, cite, fields in calls
+    ]
+    lines += [f"skipped pull request #{i.number}" for i in found if i.is_pull_request]
+    lines.append(f"{len(calls)} call(s) against {len(rows)} issue(s) of the tracker")
+    return "\n".join(lines) + "\n"
 
 
 def read(text: str) -> list[Task]:

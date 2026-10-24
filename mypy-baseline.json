@@ -98,9 +98,6 @@
  "src/nemik/metrics.py": {
   "misc": 37
  },
- "src/nemik/mspdi.py": {
-  "misc": 4
- },
  "src/nemik/overlaps.py": {
   "misc": 2
  },

@@ -319,6 +319,65 @@ def _label_names(item: dict[str, Json]) -> list[str]:
     return names
 
 
+def cite_of(body: str) -> str:
+    """Find the card a mirrored issue stands for.
+
+    Args:
+        body: An issue's body; nemik.issues writes `nemik card <cite>` into every issue it mirrors.
+
+    Returns:
+        The cite after those words, or an empty string when the body does not say.
+
+    """
+    marker = "nemik card "
+    at = body.find(marker)
+    if at < 0:
+        return ""
+    words = body[at + len(marker) :].split()
+    return words[0] if words else ""
+
+
+def row_of(issue: Issue) -> dict[str, object]:
+    """Give an issue as the row nemik.mirror compares against.
+
+    Args:
+        issue: A tracker issue.
+
+    Returns:
+        cite (from the body, empty for an issue nemik did not mirror), title, body, state and
+        labels. There is no blocked_by: the issue payloads carry dependency counts only, so the
+        field is unknown here, not empty.
+
+    """
+    return {
+        "cite": cite_of(issue.body),
+        "title": issue.title,
+        "body": issue.body,
+        "state": issue.state,
+        "labels": list(issue.labels),
+    }
+
+
+def read_issues(text: str) -> list[Issue]:
+    """Read a tracker's list of issues.
+
+    Args:
+        text: The JSON array a GitHub or Forgejo issues endpoint answered.
+
+    Returns:
+        The issues in the tracker's order; text that is not JSON raises ValueError.
+
+    Raises:
+        TypeError: When the JSON is not an array of issue objects.
+
+    """
+    items = parse(text)
+    if not isinstance(items, list):
+        message = "a list of issues is a JSON array"
+        raise TypeError(message)
+    return [issue_of(item) for item in items]
+
+
 def read_issue(text: str) -> Issue:
     """Read one tracker issue.
 
@@ -330,11 +389,24 @@ def read_issue(text: str) -> Issue:
         The issue's number, title, state, body, label names, url, whether it is a pull request and
         whether it is locked.
 
+    """
+    return issue_of(parse(text))
+
+
+def issue_of(item: Json) -> Issue:
+    """Read one parsed tracker issue.
+
+    Args:
+        item: A parsed JSON value.
+
+    Returns:
+        The issue's number, title, state, body, label names, url, whether it is a pull request and
+        whether it is locked.
+
     Raises:
         TypeError: When the JSON is not an issue object or a field has the wrong type.
 
     """
-    item = parse(text)
     if not isinstance(item, dict):
         message = "an issue is a JSON object"
         raise TypeError(message)

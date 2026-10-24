@@ -58,10 +58,16 @@ def changes(want: dict[str, object], have: dict[str, object]) -> dict[str, objec
 
     Returns:
         The wanted value of each of title, body, labels and blocked_by that the tracker's differs
-        from; empty when they agree. Lists compare as sets, so a reordered label is no change.
+        from; empty when they agree. Lists compare as sets, so a reordered label is no change. A
+        field the tracker's row does not carry is unknown, not different (an issue payload holds
+        dependency counts, not the blocking issues), so it is left out rather than rewritten.
 
     """
-    return {k: want.get(k) for k in FIELDS if not same(want.get(k), have.get(k))}
+    return {
+        k: want.get(k)
+        for k in FIELDS
+        if k in have and not same(want.get(k), have.get(k))
+    }
 
 
 def plan(

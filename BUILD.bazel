@@ -53,7 +53,7 @@ exports_files(["pyproject.toml"])
             # nemik:W690: the queue contract's fixture is read by its test
             + (["//tests/fixtures:queue"] if src == "tests/test_queue_fixture.py" else [])
             # nemik:W957: the tracker reader is tested on recorded GitHub and Forgejo issues
-            + (["//tests/fixtures:trackers"] if src == "tests/test_tracker.py" else [])
+            + (["//tests/fixtures:trackers"] if src in ("tests/test_tracker.py", "tests/test_issue_plan.py") else [])
             # nemik:W623: the pre-commit hook is copied and run by its test
             + ([".githooks/pre-commit"] if src == "tests/test_githooks_snapshot.py" else [])
             + (["tools/image_replica.sh", ".githooks/post-commit"] if src == "tests/test_image_replica.py" else [])

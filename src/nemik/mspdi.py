@@ -81,6 +81,14 @@ def main(argv: list[str] | None = None) -> None:
     from nemik.check import QUEUE, default_root, workstream_files
     from nemik.projection import project
 
+    class Options(argparse.Namespace):
+        """The command line, typed (nemik:W958)."""
+
+        root: Path
+        repo: list[str] | None
+        format: str
+        against: Path | None
+
     ap = argparse.ArgumentParser(
         prog="nemik-export", description=(__doc__ or "").splitlines()[0]
     )
@@ -94,7 +102,14 @@ def main(argv: list[str] | None = None) -> None:
         default="mspdi",
         help="mspdi: MS Project XML; issues: issue-tracker JSON (W366)",
     )
-    args = ap.parse_args(argv)
+    ap.add_argument(
+        "--against",
+        type=Path,
+        default=None,
+        help="with --format issues: a tracker's issues as JSON (GitHub or Forgejo); print the "
+        "calls a mirror would make against them instead of the issues (W958)",
+    )
+    args = ap.parse_args(argv, namespace=Options())
     queues = workstream_files(args.root, QUEUE)
     known = frozenset(r for r, _ in queues)
     g = Graph()
@@ -105,6 +120,11 @@ def main(argv: list[str] | None = None) -> None:
     if args.format == "issues":
         from nemik import issues
 
+        if args.against is not None:
+            sys.stdout.write(
+                issues.plan_text(tasks, args.against.read_text(encoding="utf-8"))
+            )
+            return
         sys.stdout.write(issues.write(tasks))
         return
     sys.stdout.write(write(tasks, ",".join(args.repo) if args.repo else "nemik"))
