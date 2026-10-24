@@ -12,8 +12,8 @@ With --landings it writes the commit landings instead (nemik:W751): mikemol-comm
 
 With --log-activities it writes the wait activities nemik's own log records carry (nemik:W948,
 docs/federation-log.md): service nemik-waits, read by nemik.logactivities, to log-activities.json
-as {as_of, repos: {repo: [activity, ...]}} for the outbox to serve. The server never spawns, so the
-log is read here, on the host.
+as one flat JSON object per line (a header, then an activity per line) for the outbox. The
+server never spawns, so the log is read here, on the host.
 """
 
 import argparse
@@ -108,18 +108,14 @@ def log_document(lines: list[str], as_of: str) -> str:
         as_of: When the lines were read, an ISO stamp.
 
     Returns:
-        {"as_of": ..., "repos": {repo: [activity, ...]}} as JSON text, each repo's activities
-        oldest first and the repos sorted, so the same lines give the same bytes.
+        One flat JSON object per line (nemik:W950): the first is {"as_of": ...}, then one
+        line per activity, the repos sorted and each repo's activities oldest first, so the
+        same lines give the same bytes. Flat lines are what logactivities.read_log reads.
 
     """
-    parts = [
-        f"{_quoted(repo)}: ["
-        + ", ".join(activity_json(a) for a in activities(lines, repo))
-        + "]"
-        for repo in repos(lines)
-    ]
-    body = ",\n  ".join(parts)
-    return f'{{"as_of": {_quoted(as_of)}, "repos": {{\n  {body}\n}}}}\n'
+    header = f'{{"as_of": {_quoted(as_of)}}}'
+    rows = [activity_json(a) for repo in repos(lines) for a in activities(lines, repo)]
+    return "\n".join([header, *rows]) + "\n"
 
 
 def _write(path: Path, text: str) -> None:

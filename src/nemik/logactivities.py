@@ -53,6 +53,31 @@ def _activity(line: str) -> list[dict[str, str]]:
     return [out]
 
 
+def read_log(text: str) -> tuple[str, list[dict[str, str]]]:
+    """Read the file nemik-hostroot --log-activities writes (nemik:W950).
+
+    Args:
+        text: One flat JSON object per line: a header {"as_of": ...}, then one activity per line.
+
+    Returns:
+        (as_of, the activities in the file's order); a blank line is skipped.
+
+    Raises:
+        ValueError: When the header is missing or a line is not a flat JSON object.
+
+    """
+    rows = [line for line in text.splitlines() if line.strip()]
+    if len(rows) == 0:
+        message = "no header line"
+        raise ValueError(message)
+    as_of = _first(fields(rows[0]), "as_of")
+    found = [
+        {key: values[0] for key, values in fields(line).items() if values}
+        for line in rows[1:]
+    ]
+    return as_of, found
+
+
 def repos(lines: list[str]) -> list[str]:
     """Name the repos whose wait activities the lines hold.
 
