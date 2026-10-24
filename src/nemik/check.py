@@ -183,7 +183,7 @@ def add_ready_neither_infos(root: Path, by_repo: dict[str, list[Finding]]) -> No
             f"how long 9 in 10 small cards took to finish (oldest {symbol}, "
             f"{age / SECONDS_A_DAY:.1f} d): do each or atomize it"
         )
-        by_repo.setdefault(repo, []).append(("Info", "--", found))
+        by_repo.setdefault(repo, []).append(("Warning", "--", found))
 
 
 def add_umbrella_infos(merged: Graph, by_repo: dict[str, list[Finding]]) -> None:

@@ -110,11 +110,11 @@ def test_too_few_finished_cards_learn_no_bound(tmp_path: Path) -> None:
     assert not late
 
 
-def test_the_info_is_one_row_per_repo_with_the_count(tmp_path: Path) -> None:
-    """A repo gets one Info naming how many ready cards are late and the oldest."""
+def test_the_warning_is_one_row_per_repo_with_the_count(tmp_path: Path) -> None:
+    """A repo gets one Warning naming how many ready cards are late and the oldest."""
     _fleet(tmp_path, FINISHED)
     found: dict[str, list[Finding]] = {}
     add_ready_neither_infos(tmp_path, found)
     rows = found["alpha"]
-    assert [sev for sev, _, _ in rows] == ["Info"]
+    assert [sev for sev, _, _ in rows] == ["Warning"]
     assert "oldest W91" in rows[0][2]
