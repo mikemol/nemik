@@ -1937,3 +1937,6 @@
 2026-10-24T05:13:06Z  status W750 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T05:22:27Z  status W948 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-24T05:22:33Z  status W950 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T05:40:36Z  tick  W750 advanced  unblock   "read back the intervention: my repin of 2026-10-20 is in luthen's log (the empty result was my query); only one intervention exists so far; stack388 (W950) gating, W949 behind it [blocked by W950]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T05:52:43Z  status W950 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-24T05:52:50Z  status W949 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
