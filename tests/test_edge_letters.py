@@ -45,6 +45,23 @@ def test_a_letter_opens_with_the_header_the_inbox_reader_addresses_by() -> None:
     assert "beta:W5 is blocked on it" in body
 
 
+def test_a_letter_carries_one_typed_activity_a_reader_can_parse() -> None:
+    """The json block is a Resolve with an id, actor, object and target; a drop is an Update."""
+    body = text("alpha", "W1", EDGE, "done", DAY)
+    block = body.split("```json\n")[1].split("\n```")[0]
+    parsed: object = json.loads(block)
+    assert parsed == {
+        "@context": "https://www.w3.org/ns/activitystreams",
+        "id": "urn:nemik:edge:alpha/W1/blocked_on/beta/W5",
+        "type": "Resolve",
+        "actor": "urn:nemik:alpha",
+        "object": "urn:nemik:alpha/W1",
+        "target": "urn:nemik:beta/W5",
+        "published": DAY,
+    }
+    assert '"type": "Update"' in text("alpha", "W1", EDGE, "dropped", DAY)
+
+
 def test_each_edge_gets_one_letter_and_a_rerun_writes_none(tmp_path: Path) -> None:
     """Two edges, two letters; the second run finds both recorded."""
     _fleet(tmp_path)

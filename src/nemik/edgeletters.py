@@ -7,6 +7,11 @@ of them already had their letter. This words the letter for one edge and names i
 name carries the edge, not only the day, so two edges to one repo are two letters and a letter
 for one edge never overwrites another's. Plain strings only, so the Codon census compiles it.
 (letters.py is the reader of the inboxes; this is the writer's wording.)
+
+nemik:W942 (docs/federation-recommendations.md R4): beneath the header the letter carries one
+ActivityStreams activity as a fenced json block, with an id, an actor, an object and a target, the
+fields a federated inbox would receive. A reader filters its inbox by type and deduplicates by id
+without reading the prose; the prose stays.
 """
 
 # the same shape as workrows.Edge: (kind, other repo, other symbol)
@@ -36,6 +41,36 @@ def name(day: str, repo: str, symbol: str, edge: Edge) -> str:
     return f"{day}-nemik-edge-{repo}-{symbol}-{kind}-{other_symbol}.md"
 
 
+def activity(repo: str, symbol: str, edge: Edge, outcome: str, day: str) -> str:
+    """Word the one activity a letter carries.
+
+    Args:
+        repo: The repo that holds the finished card.
+        symbol: The finished card's symbol.
+        edge: (kind, other repo, other symbol).
+        outcome: `done` or `dropped`.
+        day: The date the letter is written.
+
+    Returns:
+        A JSON object: a Resolve (done) or an Update (dropped) of the card, addressed to the card
+        on the other end, whose id is the edge itself so a re-sent letter has the same id.
+
+    """
+    kind, other, other_symbol = edge
+    verb = "Resolve" if outcome == "done" else "Update"
+    return (
+        "{\n"
+        '  "@context": "https://www.w3.org/ns/activitystreams",\n'
+        f'  "id": "urn:nemik:edge:{repo}/{symbol}/{kind}/{other}/{other_symbol}",\n'
+        f'  "type": "{verb}",\n'
+        f'  "actor": "urn:nemik:{repo}",\n'
+        f'  "object": "urn:nemik:{repo}/{symbol}",\n'
+        f'  "target": "urn:nemik:{other}/{other_symbol}",\n'
+        f'  "published": "{day}"\n'
+        "}"
+    )
+
+
 def text(repo: str, symbol: str, edge: Edge, outcome: str, day: str) -> str:
     """Word the letter for one edge.
 
@@ -49,13 +84,15 @@ def text(repo: str, symbol: str, edge: Edge, outcome: str, day: str) -> str:
         day: The date the letter is written.
 
     Returns:
-        The letter's markdown: what happened to the card, which card here it concerns and why.
+        The letter's markdown: what happened to the card, which card here it concerns and why,
+        and the activity as a json block.
 
     """
     kind, other, other_symbol = edge
     why = WORDING.get(kind, "has an edge to it")
     return (
         f"# nemik → {other}: {repo}:{symbol} is {outcome}\n\n"
+        f"```json\n{activity(repo, symbol, edge, outcome, day)}\n```\n\n"
         f"On {day} {repo}:{symbol} was {outcome}. {other}:{other_symbol} {why}.\n\n"
         f"The edge is `{kind}`. This letter is sent once for it; nemik keeps a record.\n"
     )
