@@ -135,8 +135,15 @@ def test_umbrella_children_are_direct_feeders_not_transitive_leaves() -> None:
     assert frontier(g, w59)[0] == {w132, w78}
 
 
-def _row(sym, operator=0, band=-3, weight=0):
-    return {"symbol": sym, "operator": operator, "band": band, "weight": weight}
+def _row(
+    sym: str, operator: int = 0, band: int = -3, weight: int = 0
+) -> dict[str, object]:
+    return {
+        "symbol": sym,
+        "operator": operator,
+        "band": band,
+        "weight": weight,
+    }
 
 
 def test_compose_lexicographic_is_one_objective_per_tier() -> None:

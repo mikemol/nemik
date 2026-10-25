@@ -54,13 +54,10 @@ def test_a_card_with_open_blockers_is_refused_and_a_landed_one_goes_through(
     assert "cleared landed blocker(s): W1" in capsys.readouterr().out
 
 
-def test_the_plan_returns_the_others_to_ready_and_marks_the_target() -> None:
-    assert plan(["W1", "W2"], "W3") == [
-        ("W1", "ready"),
-        ("W2", "ready"),
-        ("W3", "working"),
-    ]
-    assert plan(["W1", "W2"], "W2") == [("W1", "ready")]  # W2 already working
+def test_the_plan_marks_the_target_and_demotes_no_other_card() -> None:
+    # nemik:W1006: no one-working-card limit (operator 2026-10-15, line 68086)
+    assert plan(["W1", "W2"], "W3") == [("W3", "working")]
+    assert plan(["W1", "W2"], "W2") == []  # W2 already working, W1 stays working
     assert plan([], "W5") == [("W5", "working")]
     assert plan(["W5"], "W5") == []  # nothing to do
 

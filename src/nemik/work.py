@@ -1,10 +1,11 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W330: nemik-work W<n>: make W<n> the one working card.
+"""nemik:W330, W1006: nemik-work W<n>: mark W<n> working.
 
-The lifecycle says exactly one card is working at a time (data/workflows.toml); nemik-check warns on
-two, and the pre-commit hook refuses a code commit with none. This does the whole move in one command:
-every OTHER working card goes back to `ready`, then W<n> is marked `working`, all through the one
+There is no limit on working cards (operator 2026-10-15, host 695f3e0a line 68086: requiring the
+count to be one "is fragile and puts backpressure in some of the wrong places"). nemik-check warns
+on none working while cards are ready, and the pre-commit hook refuses a code commit with none.
+This marks W<n> working, clears its landed blockers, and demotes no other card, all through the one
 writer, mikemol-paths-forward. It never edits the queue file itself.
 """
 
@@ -150,10 +151,12 @@ def in_gate(repo_dir: Path) -> set[str]:
 
 
 def plan(current: list[str], symbol: str) -> list[tuple[str, str]]:
-    """(symbol, status) updates that leave `symbol` the only working card."""
-    return [(s, "ready") for s in current if s != symbol] + (
-        [] if symbol in current else [(symbol, "working")]
-    )
+    """(symbol, status) updates that mark `symbol` working and touch no other card.
+
+    There is no one-working-card limit (operator 2026-10-15, host 695f3e0a line 68086): a round of
+    cards being built, queued or gating are all working, so no working card is ever demoted.
+    """
+    return [] if symbol in current else [(symbol, "working")]
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -186,15 +189,12 @@ def main(argv: list[str] | None = None) -> int:
         return 2
     steps = plan(working(args.state), args.symbol)
     for symbol, status in steps:
-        displaced = symbol != args.symbol
-        note = " (displaced: it was working)" if displaced else ""
-        if not displaced and landed:
-            note = f" (cleared landed blocker(s): {', '.join(landed)})"
+        note = f" (cleared landed blocker(s): {', '.join(landed)})" if landed else ""
         print(f"{symbol} -> {status}{note}")
         if args.dry_run:
             continue
         cmd = ["--state", str(args.state), "--update", symbol, "--status", status]
-        if not displaced and landed:
+        if landed:
             # keep only what is still open; with nothing open the list is emptied
             cmd += ["--blocked-on", *still]
         code, said = run_writer(cmd)
