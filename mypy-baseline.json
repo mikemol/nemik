@@ -179,7 +179,7 @@
  },
  "src/nemik/work.py": {
   "call-overload": 1,
-  "misc": 36
+  "misc": 32
  },
  "src/nemik/workflows.py": {
   "explicit-any": 3,
@@ -404,9 +404,8 @@
   "misc": 11
  },
  "tests/test_rank.py": {
-  "misc": 129,
-  "no-untyped-call": 7,
-  "no-untyped-def": 4
+  "misc": 116,
+  "no-untyped-def": 3
  },
  "tests/test_rank_apply.py": {
   "misc": 4
