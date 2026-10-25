@@ -745,7 +745,8 @@ def umbrella_docs(g: Graph) -> list[dict[str, object]]:
 
 def without(g: Graph, refs: frozenset[str]) -> Graph:
     """nemik:W309: a copy of `g` with every withheld waypoint (and every edge to or from it) removed,
-    the graph the public numbers are computed over."""
+    the graph the public numbers are computed over.
+    """
     from nemik.withheld import _id
 
     out = Graph()
@@ -759,7 +760,8 @@ def without(g: Graph, refs: frozenset[str]) -> Graph:
 def to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
     """The view's document. nemik:W403: built with identical flow solves answered once (the ranking,
     edge widths and operator-ask weights each asked for the same repo's solve). nemik:W412: and with
-    each graph's per-card facts indexed once."""
+    each graph's per-card facts indexed once.
+    """
     from nemik.index import indexed
     from nemik.salience import memo_audits
 
@@ -1174,7 +1176,8 @@ def handler(model: Model) -> type[BaseHTTPRequestHandler]:
 
 def write_static(out: Path) -> list[Path]:
     """nemik:W169: the page and its scripts as files under `out`, every link relative, so the view
-    works from any bucket subpath. Data files are W170's; the gate is W172's."""
+    works from any bucket subpath. Data files are W170's; the gate is W172's.
+    """
     web = files("nemik.web")
     written = [out / "index.html"]
     (out / "vendor").mkdir(parents=True, exist_ok=True)
@@ -1196,7 +1199,8 @@ def write_static(out: Path) -> list[Path]:
 def static_data(model: Model) -> dict[str, object]:
     """nemik:W170: every document the page fetches, computed once from one export, as
     {published path: document}. Only what the page reads is published: inbound/<repo>.json was
-    planned, but the page never fetches it, so it stays off the public surface."""
+    planned, but the page never fetches it, so it stays off the public surface.
+    """
     from nemik.rank import goals, load_weights
 
     model.refresh()
@@ -1262,7 +1266,8 @@ def build_static(
     """nemik:W153 (see _build_static), inside the same per-build scope the live server's document is
     built in (nemik:W412, W403): each graph indexed once and each flow solve answered once. The build
     ran outside it, so the goals, the pieces and the TRS feeds asked rdflib 1.09 M times for facts the
-    index holds (a warm publish profiled at 94 s, a third of it in rank.goals)."""
+    index holds (a warm publish profiled at 94 s, a third of it in rank.goals).
+    """
     from nemik.index import indexed
     from nemik.salience import memo_audits
 
@@ -1284,7 +1289,8 @@ def _build_static(
     files the live server answered beyond the public view are written too (see private_files).
 
     nemik:W634: with `exports`, each repo's own export (docs/withholding-at-source.md) also decides
-    what leaves it, failing closed per repo: a repo with no export publishes none of its cards."""
+    what leaves it, failing closed per repo: a repo with no export publishes none of its cards.
+    """
     from nemik.manifest import unmanifested
     from nemik.withheld import apply, load
 
@@ -1354,7 +1360,8 @@ def private_files(model: Model, out: Path) -> list[Path]:
     """nemik:W503: what the live server answered beyond the public view, as files: /operator.json,
     /inbound.json and /inbound/<repo>.json (one per repo, empty when nothing waits on it), /graph.ttl,
     /metrics with the snapshot's own age gauge, and the source key the next publish compares. Never
-    part of the public build: these name every waypoint's asks and blockers."""
+    part of the public build: these name every waypoint's asks and blockers.
+    """
     made: list[Path] = []
 
     def put(name: str, body: bytes) -> None:
@@ -1395,7 +1402,8 @@ def private_files(model: Model, out: Path) -> list[Path]:
 def fleet_key(root: Path) -> str:
     """The digest of every queue and ledger file's path and CONTENT now. Content, not mtime: an export
     that rewrites a file without changing it (luthen's does, every minute) is not a change, and a build
-    costs real CPU (luthen-observability, nemik:W504: the builder rebuilds on a changed content hash)."""
+    costs real CPU (luthen-observability, nemik:W504: the builder rebuilds on a changed content hash).
+    """
     import hashlib
 
     digest = hashlib.sha256()
@@ -1425,7 +1433,8 @@ def publish(
     with one atomic rename. The build runs in this short-lived process, so every byte of its graph is
     returned to the OS when it exits (nemik:W500: rebuilding in a long-lived process left ~20 MB of
     fragmented heap per build). Returns None when no queue or ledger changed since current/ was built.
-    The last `keep` snapshots stay, so a request already reading one is not pulled out from under it."""
+    The last `keep` snapshots stay, so a request already reading one is not pulled out from under it.
+    """
     from nemik import cachestore
 
     key = fleet_key(root)

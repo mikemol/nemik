@@ -40,7 +40,8 @@ def export_cache() -> Held:
 
 def import_cache(held: Held) -> None:
     """nemik:W518: restore runs a publisher kept: the next findings() diffs against them, so only what
-    changed since is validated again (a graph with blank nodes would revalidate every one of them)."""
+    changed since is validated again (a graph with blank nodes would revalidate every one of them).
+    """
     _LAST.update(held)
 
 
@@ -156,7 +157,8 @@ def watched_predicates(shapes: Graph, texts: list[str]) -> frozenset[str]:
 
 def findings(key: str, data: Graph, shapes: Graph) -> list[tuple[Node, str, str]]:
     """(focus, severity IRI, message) for every result, re-validating only what changed since `key`'s
-    last run (everything on the first, and always when the shapes' depth cannot be bounded)."""
+    last run (everything on the first, and always when the shapes' depth cannot be bounded).
+    """
     now = frozenset(data)
     last = _LAST.get(key)
     texts = sorted(str(t) for t in shapes.objects(None, SH.select))

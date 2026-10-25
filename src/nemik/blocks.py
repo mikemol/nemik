@@ -129,7 +129,8 @@ def inbound(g: Graph, letters: bool = False) -> list[dict[str, Any]]:
 def ready_behind_open(g: Graph) -> dict[Node, list[Node]]:
     """nemik:W465: each ready card an open card enables, with those enablers, leaving out the
     umbrellas (2+ open children of its own repo) that ReadyUmbrella already reports. A pure reading
-    of the graph, so annotate (the check) and serve (the view's mark, nemik:W477) agree."""
+    of the graph, so annotate (the check) and serve (the view's mark, nemik:W477) agree.
+    """
     out: dict[Node, list[Node]] = {}
     for node in g.subjects(OSLC_CM.state, NEMIK.Ready):
         enablers = [
@@ -304,7 +305,8 @@ def node_flags(
 def dependency_cycles(g: Graph) -> list[tuple[Node, ...]]:
     """nemik:W484 (mtools:W1134 found a ring of three ready cards blocked into a deadlock): every
     cycle of open cards that wait on or enable one another, named once from its earliest card, as
-    the fleet's shared walker (mikemol.frontier.walk, mtools:W1127) finds it. A ring can never land."""
+    the fleet's shared walker (mikemol.frontier.walk, mtools:W1127) finds it. A ring can never land.
+    """
     from mikemol.frontier.walk import frontier as walk
 
     cards = {n for n in g.subjects(OSLC_CM.state, None)}
@@ -443,7 +445,8 @@ CATEGORIES = ("needs-you", "no-command", "errand", "answered", "condition", "uns
 
 def errand_repos(text: str | None = None) -> frozenset[str]:
     """nemik:W460: the repos whose machine-sounding acts are the operator's own errands ("apply for
-    Medicaid", a "drill" session), declared under [errand] in rank-weights.toml: no tool to write."""
+    Medicaid", a "drill" session), declared under [errand] in rank-weights.toml: no tool to write.
+    """
     import tomllib
     from importlib.resources import files
 
@@ -493,7 +496,8 @@ def _ask_key(text: str) -> str:
 def waiting_behind(g: Graph, node: Node) -> set[Node]:
     """Every open waypoint, in any workstream, that waits on `node` directly or through others:
     it waits for it (blocked_on) or `node` enables it. So an operator ask held by one repo shows
-    the work queued behind it in others (resumes:W1 behind life:W21, 2026-09-28)."""
+    the work queued behind it in others (resumes:W1 behind life:W21, 2026-09-28).
+    """
     seen: set[Node] = set()
     stack = [node]
     while stack:

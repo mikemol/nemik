@@ -52,7 +52,8 @@ def overlaps(g: Graph, cross: bool = False) -> dict[str, list[str]]:
 
 def parse_claims(text: str) -> dict[tuple[str, str], Holder]:
     """{(repo, tag): Holder} from `mikemol-membudget claims` lines:
-    `claim:label:touch:<repo>:<tag> owner=<pid:start> id=<id> age=<n>s`."""
+    `claim:label:touch:<repo>:<tag> owner=<pid:start> id=<id> age=<n>s`.
+    """
     held: dict[tuple[str, str], Holder] = {}
     for line in text.splitlines():
         label, _, rest = line.strip().partition(" ")

@@ -111,7 +111,8 @@ def _closed(queue: dict) -> set[str]:
 
 def answered(repo: str, path: Path, queue: dict) -> bool:
     """True when the letter names waypoints of `repo` and every one of them is closed: what it
-    asked about has landed or been dropped. A letter naming none of `repo`'s waypoints is live."""
+    asked about has landed or been dropped. A letter naming none of `repo`'s waypoints is live.
+    """
     own = {
         f"W{m[2]}"
         for m in _REF.finditer(path.read_text(errors="replace"))
@@ -161,7 +162,8 @@ def alert_closed(
 
 def orphans(root: Path, repo: str | None = None) -> list[tuple[str, Path, bool]]:
     """(repo, letter, answered) for each letter under `<repo>/inbox/` no waypoint cites, for `repo`
-    alone when given."""
+    alone when given.
+    """
     found: list[tuple[str, Path, bool]] = []
     # nemik:W280: a letter is owned when ANY waypoint in the fleet cites its path (a sender cites
     # `<repo>/inbox/<file>` in the waiting waypoint's evidence), or its own repo's queue names the file.
@@ -290,7 +292,8 @@ def apply_fold(
 
 def held(root: Path, ltr: Letter) -> bool:
     """True when the letter's recipient holds it: in its inbox, or archived there (a repo that has
-    read a letter files it under `inbox/archive/`, which is still delivered)."""
+    read a letter files it under `inbox/archive/`, which is still delivered).
+    """
     inbox = root / ltr.recipient / "inbox"
     return (inbox / ltr.name).exists() or (inbox / "archive" / ltr.name).exists()
 
@@ -301,7 +304,8 @@ def redeliveries(
     """nemik:W310 (linux-sources, paperkit): (source, destination) for each misdelivered letter whose
     header names a workstream: a COPY into that workstream's `inbox/`, so the letter is delivered where
     it says and the sender keeps its copy (a waypoint there may cite it). Skips a letter the recipient
-    already has. `repo` keeps those that sit in, or are addressed to, that repo."""
+    already has. `repo` keeps those that sit in, or are addressed to, that repo.
+    """
     addressed, _ = headers(root)
     out: list[tuple[Path, Path]] = []
     for ltr in addressed:

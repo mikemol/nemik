@@ -35,7 +35,8 @@ def today() -> date:
 
 class Calendar(NamedTuple):
     """One opted-in calendar: its Akonadi collection, an optional summary filter (nemik:W190), and
-    optionally the repos whose dated waypoints nemik writes INTO it (nemik:W196, life's ask)."""
+    optionally the repos whose dated waypoints nemik writes INTO it (nemik:W196, life's ask).
+    """
 
     name: str
     include: tuple[str, ...] = ()
@@ -121,7 +122,8 @@ KEEP = ("uid", "start", "end", "all_day", "summary", "recurrence_id")
 
 def _venv_ics() -> str:
     """mikemol-ics from nemik's own venv (it is vendored there, nemik:W157), not from PATH: a host
-    caller runs .venv/bin/nemik-days without activating the venv (life-82, 2026-10-02)."""
+    caller runs .venv/bin/nemik-days without activating the venv (life-82, 2026-10-02).
+    """
     import sys
 
     return str(Path(sys.executable).parent / "mikemol-ics")

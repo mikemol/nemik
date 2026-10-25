@@ -50,7 +50,8 @@ def pins(root: Path) -> list[Pin]:
 
 def behind(root: Path, pin: Pin) -> int | None:
     """Commits the peer's HEAD is ahead of the pin; None when the peer is not cloned under `root`
-    or does not know the pinned commit."""
+    or does not know the pinned commit.
+    """
     clone = root / pin.peer
     if not (clone / ".git").exists():
         return None
@@ -69,7 +70,8 @@ _REV = re.compile(r"[?&]rev=([0-9a-f]{7,40})")
 
 def installed(receipt: Path) -> str | None:
     """nemik:W379: the commit the host's `uv tool install` of nemik was made from, read from uv's
-    receipt (`git = "file:///...?rev=<sha>"`); None when nemik is not installed that way."""
+    receipt (`git = "file:///...?rev=<sha>"`); None when nemik is not installed that way.
+    """
     if not receipt.is_file():
         return None
     import tomllib

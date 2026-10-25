@@ -1,7 +1,8 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
 """ARCHITECTURE.md is a paperkit projection whose claims assert against src/nemik; this keeps a
-code change that falsifies one of them from passing the suite while the document goes stale."""
+code change that falsifies one of them from passing the suite while the document goes stale.
+"""
 
 from __future__ import annotations
 

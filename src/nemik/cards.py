@@ -48,7 +48,8 @@ def cards(g: Graph) -> dict[str, Card]:
     """Every card in `g`, by cite: the only place this layer touches rdflib.
 
     nemik:W518: inside one build's `indexed()` scope it is read once per graph and shared (a Card is
-    frozen, the dict is copied), where health and critical each asked for it again."""
+    frozen, the dict is copied), where health and critical each asked for it again.
+    """
     from nemik.index import index
 
     ix = index(g)

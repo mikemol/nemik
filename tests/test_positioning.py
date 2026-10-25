@@ -2,7 +2,8 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W358: docs/positioning.md cannot drift from the tools. Every nemik command it names is a
 console script of this package, every flag it pairs with a command is one that command takes, and every
-workflow it names is modelled in data/workflows.toml."""
+workflow it names is modelled in data/workflows.toml.
+"""
 
 from __future__ import annotations
 

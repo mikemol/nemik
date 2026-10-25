@@ -1552,7 +1552,8 @@ def test_treemap_view_draws(server, tmp_path) -> None:
 def test_side_panel_never_overflows_sideways(server, width) -> None:
     """Operator 2026-10-02: the panel cut text off on the right (a long ask, URL or ref list in the
     two-column detail grid). At phone and desktop widths, with the needs-you lane open, nothing in
-    the aside is wider than the aside."""
+    the aside is wider than the aside.
+    """
     with sync_api.sync_playwright() as p:
         try:
             exe = os.environ.get("NEMIK_CHROMIUM")
@@ -1585,7 +1586,8 @@ def test_side_panel_never_overflows_sideways(server, width) -> None:
 
 def test_every_cite_in_the_panel_is_a_repo_colon_link(server) -> None:
     """Operator 2026-10-02: one cite format (repo:W<n>, never 'repo W<n>' or 'repo/W<n>'), and
-    every cite shown is a link. Checked over a waypoint's detail, a lane, findings and wake."""
+    every cite shown is a link. Checked over a waypoint's detail, a lane, findings and wake.
+    """
     with sync_api.sync_playwright() as p:
         try:
             exe = os.environ.get("NEMIK_CHROMIUM")

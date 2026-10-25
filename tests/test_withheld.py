@@ -98,7 +98,8 @@ def test_goals_entry_is_dropped_when_a_frontier_leaf_is_withheld(
     tmp_path, docs
 ) -> None:
     """luthen-observability, 2026-10-02: `outside` is the leaves' blocked_on text, so a withheld
-    leaf's text rode out under the goals it feeds. The whole entry goes."""
+    leaf's text rode out under the goals it feeds. The whole entry goes.
+    """
     name, entry = next(
         (n, e)
         for n, d in docs.items()

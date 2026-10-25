@@ -301,7 +301,8 @@ def _edges(queue: QueueDoc) -> set[tuple[str, str, str]]:
 
 def _number(symbol: str) -> tuple[int, int, str]:
     """A sort key: W<n> by number, then anything that is not a W<n> (an old or foreign symbol in a
-    committed queue, such as luthen's `R-amtool`) after them by name, never an error."""
+    committed queue, such as luthen's `R-amtool`) after them by name, never an error.
+    """
     digits = symbol.removeprefix("W")
     if symbol.startswith("W") and digits.isdigit():
         return (0, int(digits), "")
@@ -721,7 +722,8 @@ def commit_snapshots(
 
 def time_in_state(snaps: list[Snapshot], now: datetime) -> dict[str, dict[str, float]]:
     """Seconds each waypoint spent in each status: a commit's state holds until the next commit
-    (the last one until `now`)."""
+    (the last one until `now`).
+    """
     totals: dict[str, dict[str, float]] = {}
     for i, (at, queue) in enumerate(snaps):
         end = snaps[i + 1][0] if i + 1 < len(snaps) else now
@@ -843,7 +845,8 @@ BASELINE_PATH = ".claude/baseline"
 
 def baseline_spec(repo: Path, spec: str | None) -> str | None:
     """nemik:W318: the baseline to measure from: `spec` when given, else the first word of the repo's
-    declared `.claude/baseline` file (a revision or a date), else None (no baseline declared)."""
+    declared `.claude/baseline` file (a revision or a date), else None (no baseline declared).
+    """
     if spec:
         return spec
     declared = repo / BASELINE_PATH
@@ -856,7 +859,8 @@ def baseline_spec(repo: Path, spec: str | None) -> str | None:
 def variance(base: dict, now: dict) -> dict:
     """nemik:W318: planned versus actual since a baseline. The plan is the cards open at the baseline:
     how many are now closed, dropped, or still open. The unplanned is every card minted since, split by
-    how it was minted (an interrupt, a tick, or not recorded). Both arguments are parsed queues."""
+    how it was minted (an interrupt, a tick, or not recorded). Both arguments are parsed queues.
+    """
     planned = {
         s
         for s, st in _status(base).items()
@@ -891,7 +895,8 @@ def shape_drift(base: dict, now: dict) -> dict:
     """nemik:W349: how far the graph's SHAPE moved since a baseline, beside `variance`'s counts.
     Edges added and removed (enables and waits), the planned cards (open at the baseline) whose
     title changed (re-scoped) or whose own edges changed (re-wired), and the share of planned cards
-    touched either way."""
+    touched either way.
+    """
     planned = {
         s
         for s, st in _status(base).items()

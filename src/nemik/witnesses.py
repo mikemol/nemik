@@ -249,7 +249,8 @@ def witness(
     nemik:W501: a witness that is a bare PromQL expression holds while its instant query returns a
     sample, the PromQL meaning of a comparison (`x > y` returns the series only while it is true) and
     what `--wait` has always done with one; luthen-observability:W1054 stores its executor-load witness
-    that way, and no Rego wrapper (and its escaped quotes) needs writing by hand."""
+    that way, and no Rego wrapper (and its escaped quotes) needs writing by hand.
+    """
     if not is_rego(query, lang):
         stamp = (now or datetime.now(UTC)).isoformat()
         fact = _promql(query)

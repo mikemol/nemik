@@ -782,7 +782,8 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
 
 def _apply(state: str, rows: list[dict]) -> None:
     """nemik:W427: hand the ranked rows to the queue's one writer, mikemol-paths-forward, the one
-    installed beside this interpreter; nemik never writes a queue itself. Exits with its status."""
+    installed beside this interpreter; nemik never writes a queue itself. Exits with its status.
+    """
     import json
     import subprocess
     import sys

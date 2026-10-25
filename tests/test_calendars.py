@@ -146,7 +146,8 @@ def test_the_reader_is_found_in_nemiks_own_venv_not_on_path(
     tmp_path, monkeypatch
 ) -> None:
     """life-82, 2026-10-02: .venv/bin/nemik-days run without the venv on PATH could not find
-    mikemol-ics. The default is the venv's own copy; a missing reader is a stated refusal."""
+    mikemol-ics. The default is the venv's own copy; a missing reader is a stated refusal.
+    """
     from nemik.calendars import _venv_ics
 
     for k, v in installed._bin()[1].items():
@@ -209,7 +210,8 @@ CHORES = "\r\n".join(
 
 def test_calendar_entries_take_a_name_or_a_table_and_a_typo_fails(tmp_path) -> None:
     """nemik:W190 (life:W31): `label = "Name"` still works; `{ name, include }` adds the filter; an
-    unknown key (a typo'd `includes` would silently mean "no filter") and a bad include fail."""
+    unknown key (a typo'd `includes` would silently mean "no filter") and a bad include fail.
+    """
     from nemik.calendars import Calendar, load_calendars, load_collections
 
     p = tmp_path / "calendars.toml"
@@ -314,7 +316,8 @@ def _row(label, start, summary, waiting=()):
 
 def test_dedupe_merges_across_calendars_never_within_one() -> None:
     """nemik:W191: the same entry in two calendars is one row naming the other; two identical entries
-    inside one calendar are two real events; waiters from both copies are kept."""
+    inside one calendar are two real events; waiters from both copies are kept.
+    """
     from nemik.calendars import dedupe
 
     rows = [
@@ -403,7 +406,8 @@ def test_events_nemik_mirrored_are_not_read_back_as_the_operators_own(
     tmp_path, ics
 ) -> None:
     """nemik:W196: a UID of nemik:<repo>:W<n> is nemik's own write; reading it back would list
-    each dated waypoint twice, so nemik-days skips it (and does not count it)."""
+    each dated waypoint twice, so nemik-days skips it (and does not count it).
+    """
     mixed = ICS.replace("END:VCALENDAR\r\n", "").replace(
         "UID:a@t", "UID:nemik:life:W9"
     ) + ICS.replace("BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//t//EN\r\n", "")

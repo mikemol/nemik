@@ -2,7 +2,8 @@
 # Copyright (c) 2026 Mike Mol
 """The nemik skill (skills/nemik/SKILL.md, linked into ~/.claude/skills) stays current: adding a
 command or a check rule without documenting it fails here (operator 2026-09-28: "a skill that
-remains up-to-date on how to use nemik")."""
+remains up-to-date on how to use nemik").
+"""
 
 import re
 import tomllib

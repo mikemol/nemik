@@ -171,7 +171,8 @@ def test_grouped_adds_a_parent_per_repo_and_keeps_children_as_they_are() -> None
 def test_a_repo_with_no_open_asks_has_no_parent_so_the_helper_completes_it() -> None:
     """nemik:W165: the grouped feed carries a parent only for a repo that still has an ask. A repo whose
     last ask closed drops out, and the helper's existing rule (a ref missing from the feed is a closed
-    ask: COMPLETE) then completes the parent task like any other."""
+    ask: COMPLETE) then completes the parent task like any other.
+    """
     from nemik.vtodo import grouped
 
     both = grouped(vtodos(ASKS, {"life", "aeternum"}))

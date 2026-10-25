@@ -2196,3 +2196,6 @@
 2026-10-25T01:12:00Z  status W1002 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-25T01:12:01Z  tick  W1014 minted    -         "Split the composite assertions that remain in twelve test files without adding an Any-typed expression, so the mypy count does not rise"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W980
 2026-10-25T01:12:01Z  tick  W1015 minted    -         "Pay down the next ruff rule by count, D103 or E501 after PT018, with a mechanical fix that passes the ratchets"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W980
+2026-10-25T01:29:24Z  status W1013 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T01:39:48Z  tick  W1014 advanced  unblock   "measured PT018 in test_layout: 19 sites, 12 ruff-fixable, the earlier fix raised mypy by 10 there because the message is duplicated, so W1014 needs a hand-split per site; stack430 gating; W1013 done in tree [blocked by W1015]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T01:51:42Z  status W1015 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

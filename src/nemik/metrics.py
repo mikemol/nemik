@@ -222,7 +222,8 @@ def realizability_lines(root: Path) -> list[str]:
 
 def operator_lines(g: Graph) -> list[str]:
     """nemik:W300: per repo, the flow salience its needs-you operator asks hold back, summed, and how
-    many asks that is: what the operator owes that repo's work, in nemik-rank's units."""
+    many asks that is: what the operator owes that repo's work, in nemik-rank's units.
+    """
     from nemik.blocks import operator_asks, with_salience
 
     held: dict[str, float] = {}
@@ -615,7 +616,8 @@ def history_lines(
 
 def health_lines(g: Graph) -> list[str]:
     """nemik:W317: each repo's health as a gauge: 0 green, 1 amber, 2 red (nemik.health, from the
-    thresholds `[health]` declares in rank-weights.toml)."""
+    thresholds `[health]` declares in rank-weights.toml).
+    """
     from nemik.blocks import ref
     from nemik.health import STATUSES, health, thresholds
 
@@ -632,7 +634,8 @@ def age_lines(repo: str, g: Graph, now: datetime) -> list[str]:
     """nemik:W270: how long the open waypoints of `repo` have existed, per OSLC state, as a
     summary-style gauge: quantile 0.5 is the median age and quantile 1 the oldest. Per-waypoint
     series would be thousands of labels, and the question ("how long has the oldest one sat") is
-    the quantile. Age runs from `issued_at`; a waypoint with none is left out, not counted as new."""
+    the quantile. Age runs from `issued_at`; a waypoint with none is left out, not counted as new.
+    """
     ages: dict[str, list[float]] = {}
     for node, _, created in g.triples((None, DCTERMS.created, None)):
         state = g.value(node, OSLC_CM.state)
