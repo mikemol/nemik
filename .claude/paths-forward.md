@@ -3,29 +3,29 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1030 · heartbeat 2026-10-22T02:06:35Z · job `1d7fe6d0` · hash `v2:a5e32f34ca6d363e`
+counter 1030 · heartbeat 2026-10-22T02:06:35Z · job `1d7fe6d0` · hash `v2:93d90ea39c3388d0`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W991 | ready |
-| 2 | W1002 | ready |
-| 3 | W1014 | ready |
-| 4 | W1025 | ready |
-| 5 | W925 | ready |
-| 6 | W982 | ready |
-| 7 | W1016 | ready |
-| 8 | W1020 | ready |
-| 9 | W1022 | ready |
-| 10 | W902 | ready |
-| 11 | W910 | ready |
-| 12 | W911 | ready |
-| 13 | W975 | ready |
-| 14 | W976 | ready |
-| 15 | W1028 | ready |
-| 16 | W750 | ready |
-| 17 | W751 | ready |
-| 18 | W981 | ready |
-| 19 | W1030 | ready |
+| 1 | W1030 | working |
+| 2 | W991 | ready |
+| 3 | W1002 | ready |
+| 4 | W1014 | ready |
+| 5 | W1025 | ready |
+| 6 | W925 | ready |
+| 7 | W982 | ready |
+| 8 | W1016 | ready |
+| 9 | W1020 | ready |
+| 10 | W1022 | ready |
+| 11 | W902 | ready |
+| 12 | W910 | ready |
+| 13 | W911 | ready |
+| 14 | W975 | ready |
+| 15 | W976 | ready |
+| 16 | W1028 | ready |
+| 17 | W750 | ready |
+| 18 | W751 | ready |
+| 19 | W981 | ready |
 | 20 | W642 | ready |
 | 21 | W730 | ready |
 | 22 | W733 | ready |
@@ -1019,91 +1019,91 @@ counter 1030 · heartbeat 2026-10-22T02:06:35Z · job `1d7fe6d0` · hash `v2:a5e
 
 ## waypoints
 
-1. **W991** (ready) Wire the real ratchet value series from mtools into the pace computation
+1. **W1030** (working) Wire the pace and round writers: fetch the ratchet series and the rounds, write ratchet-pace.json
+   and round.json beside each other, append their gauges
+   - next: In serve.private_files, read the series with ratchetseries from the metric store, write ratchet-pace.json
+     with pacewrite and round.json with roundfile, append both gauge sets, then confirm the round file path to mtools-ad
+2. **W991** (ready) Wire the real ratchet value series from mtools into the pace computation
    - next: Read the ratchet value series for a repo from luthen's metric store by the name the endpoint tool resolves,
      order it by gate run, and write the pace file ratchetpace's verdict fills in; start by finding the series' query
      form
-2. **W1002** (ready) The count of ready cards past the learned age bound is a ratchet on the pace board, so a repo whose
+3. **W1002** (ready) The count of ready cards past the learned age bound is a ratchet on the pace board, so a repo whose
    stale-ready count is not falling lands only commits that close, block, drop or advance stale cards
    - next: Count each repo's ready cards past the learned age bound and give the count to the pace judgement as a
      ratchet series named by the stale-ready measure, published on the pace board and gauges beside the file ratchets;
      the gate refusal reads it like any other
-3. **W1014** (ready) Split the composite assertions that remain in twelve test files without adding an Any-typed
+4. **W1014** (ready) Split the composite assertions that remain in twelve test files without adding an Any-typed
    expression, so the mypy count does not rise
    - next: Offset the split's mypy rise in the heaviest test file with a typed reader for its page.evaluate results, so
      the per-line Any findings fall by more than the split adds
-4. **W1025** (ready) Round drift: the share of a repo's working set outside its round, published as a metric on the pace
+5. **W1025** (ready) Round drift: the share of a repo's working set outside its round, published as a metric on the pace
    board and gauges
    - next: Count the working cards of a repo that sit outside its round, divide by its working cards, and publish the
      share as a gauge beside the pace gauges; the gate reads it like the ratchet verdict
-5. **W925** (ready) A generator writes one Bazel target per test from pytest's collection, into hierarchical BUILD files
+6. **W925** (ready) A generator writes one Bazel target per test from pytest's collection, into hierarchical BUILD files
    - next: After W928: first MEASURE, as mtools' own exhaustive-sharding card says: how many tests nemik has (pytest
      --collect-only), what Bazel analysis and per-target startup cost at that count (a scratch package of the same
      size), and whether luthen's gate series (mikemol.gate.target.*) can carry a label per test; then a generator that
      writes a BUILD file per tests package, one target per test node id, each with the data its test reaches (importdag
      when mtools has it); the venv_pytest.sh args become file::test. Atomize when the measurement is in
-6. **W982** (ready) Retro records enter the graph from a durable file, so the nine retro shapes judge real retros and
+7. **W982** (ready) Retro records enter the graph from a durable file, so the nine retro shapes judge real retros and
    not only fixtures
    - blocked on: mtools:W1918
    - next: Decide the form of a durable retro record (a separate list, not a card kind) with mtools, since the queue
      schema is theirs; then read it into the graph and judge a fixture retro file with the nine shapes
-7. **W1016** (ready) A nemik tool traces one test run with the footprint audit and writes the declared reads for nemik's
+8. **W1016** (ready) A nemik tool traces one test run with the footprint audit and writes the declared reads for nemik's
    modules
    - next: Write readstrace: trace one test, drop .venv, __pycache__ and directories, map opens to repo-relative .py and
      data files, and list them per test as the candidate reads; run it over one test target first, then a sample
-8. **W1020** (ready) The builder container skips the rebuild when the inputs' hash is unchanged, with a before and after
+9. **W1020** (ready) The builder container skips the rebuild when the inputs' hash is unchanged, with a before and after
    CPU reading
    - next: Make the builder container's loop skip nemik-serve --publish when the content hash of the export tree is
      unchanged since the last build, then take a CPU reading over a measured interval against the 0.862 core baseline on
      W764
-9. **W1022** (ready) The page fetches the host-root board and maps its rows to nodes of a read-only host lane (state,
+10. **W1022** (ready) The page fetches the host-root board and maps its rows to nodes of a read-only host lane (state,
    waitsFor, id)
    - next: Fetch the host-root board in the served page only, and draw each row as a node of a read-only host lane using
      adapter.resource_uri for its id, with state mapped to the node states and waitsFor to edges and no rank weight
-10. **W902** (ready) Decide whether the web view itself should draw vector: measure an SVG renderer against the canvas
+11. **W902** (ready) Decide whether the web view itself should draw vector: measure an SVG renderer against the canvas
    at the fleet's size
    - next: Measure an SVG drawing of the web view against the canvas at the fleet's size (graphSvg of the fleet is 2.4
      MB, 5300 paths, 1800 texts): load, pan and zoom cost in Chromium and Firefox; write docs/vector-web-view.md with
      the numbers and a recommendation
-11. **W910** (ready) Survey PROV-O, PROV-DM, AIF, SEPIO, ECO, nanopublications, Carneades and ClaimReview with sources,
+12. **W910** (ready) Survey PROV-O, PROV-DM, AIF, SEPIO, ECO, nanopublications, Carneades and ClaimReview with sources,
    naming for each gap what we could adopt
    - next: Read each standard's primary source and cite it; one paragraph each; for every gap name the tool or
      vocabulary we could adopt (a pinned library, an ontology to import, a SHACL shape set). Needs WebFetch
-12. **W911** (ready) Survey SRE, agile and observability practice for claims and evidence (OTel semantic conventions,
+13. **W911** (ready) Survey SRE, agile and observability practice for claims and evidence (OTel semantic conventions,
    OpenSLO, Sloth, postmortem templates, definition of done) with sources and what we could adopt
    - next: The operator said (line 91591) not to forget our grounding in SRE, agile and observability. github-8f's
      reading, derived: SLOs as claims, SLIs as grounds, error budgets as qualifiers, postmortems and PRR checklists as
      backing; definition of done as the done-claim's warrant; OTel semconv and exemplars as the grounds channel. Survey
      OTel semconv, OpenSLO, Sloth and postmortem templates with sources and fold the matches into W910's gap table.
      Needs WebFetch
-13. **W975** (ready) Page combine step reads the umbrellas list
+14. **W975** (ready) Page combine step reads the umbrellas list
    - next: Make the page fetch the published umbrella rows (id, blockers, enables, card, address) once W973 lands
-14. **W976** (ready) Port nemik.critical (slack and the longest chain) to plain Card edges, held to the rdflib version
+15. **W976** (ready) Port nemik.critical (slack and the longest chain) to plain Card edges, held to the rdflib version
    in a test
    - next: Port the slack and longest-chain computation of nemik.critical to plain card edges in a module with no
      import, held to the rdflib version on a fixture; critical_cards already takes plain Cards, so start by listing what
      it still reads from rdflib
-15. **W1028** (ready) Port the page's combine step to the core once the documents' schema is fixed: take the next pure
+16. **W1028** (ready) Port the page's combine step to the core once the documents' schema is fixed: take the next pure
    function from W815's inventory and call it through core.wasm
    - next: Read the documents' schema the combine step takes, write it as plain-data functions under src/nemik/core that
      compile under the pinned Codon, and have the page call them through core.wasm
-16. **W750** (ready) Improve the climate: date each practice change as an intervention and measure the shift in a before
+17. **W750** (ready) Improve the climate: date each practice change as an intervention and measure the shift in a before
    and after window
    - next: From now send one intervention per practice change (atomize, stack, shard, repin) when it happens, and write
      the before and after windows in docs/climate-interventions.md as each matures, starting with the
      2026-10-21T02:14:31Z repin as the first window. The metric side (mikemol.waypoint.event) is not yet read back
-17. **W751** (ready) Observations live feed: switch W744's observations from the git backfill to the
+18. **W751** (ready) Observations live feed: switch W744's observations from the git backfill to the
    mikemol.waypoint.event stream
    - next: After the image with the landings board is installed on the pod, fetch the board from the pod and confirm it
      answers host true; record the readback here
-18. **W981** (ready) Pay down the mypy baseline (6302): retire the most numerous finding kind in the files I touch most,
+19. **W981** (ready) Pay down the mypy baseline (6302): retire the most numerous finding kind in the files I touch most,
    and lower the recorded count
    - next: Total the mypy baseline by file, pick the file with the most findings among those edited most, remove its
      findings by typing, and record the lower count
-19. **W1030** (ready) Wire the pace and round writers: fetch the ratchet series and the rounds, write ratchet-pace.json
-   and round.json beside each other, append their gauges
-   - next: In serve.private_files, read the series with ratchetseries from the metric store, write ratchet-pace.json
-     with pacewrite and round.json with roundfile, append both gauge sets, then confirm the round file path to mtools-ad
 20. **W642** (ready) Cache store under concurrent readers: test two writers on one dir, sweep stray temp files a killed
    run leaves, and keep the traceback tail
    - next: mtools:W1497 landed: the hook now reports the last three non-empty stderr lines of a failed run. Next time

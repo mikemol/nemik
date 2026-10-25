@@ -1155,6 +1155,26 @@ def cached_survey(root: Path, *, digest: bool) -> tuple[list[str], int]:
     return lines, failed
 
 
+def summary_line(found: list[str], failed: int) -> str:
+    """Word the one line a reader parses to learn why the exit code is what it is (nemik:W1031).
+
+    Args:
+        found: The survey's print-ready lines, before any `--since` filtering.
+        failed: How many queues violate or are unreadable.
+
+    Returns:
+        `NEMIK-CHECK exit=N violating=V unreadable=U`: N is 1 when failed is above zero, else 0; V
+        counts the VIOLATES lines and U the UNREADABLE ones, so a nonzero exit names its cause.
+
+    """
+    violating = sum(1 for line in found if line.startswith("VIOLATES "))
+    unreadable = sum(1 for line in found if line.startswith("UNREADABLE "))
+    return (
+        f"NEMIK-CHECK exit={1 if failed else 0} "
+        f"violating={violating} unreadable={unreadable}"
+    )
+
+
 def run_survey(
     root: Path, *, digest: bool, dump: str | None, since: str | None = None
 ) -> int:
@@ -1179,6 +1199,7 @@ def run_survey(
         lines = unseen(lines, Path(since))
     for line in lines:
         print(line)
+    sys.stdout.write(summary_line(found, failed) + "\n")
     return failed
 
 
@@ -1310,7 +1331,12 @@ def main(argv: list[str] | None = None) -> None:
         sys.exit(dry)
 
     digest: bool = args.digest
-    failed = run_survey(args.root, digest=digest, dump=args.dump, since=args.since)
+    try:
+        failed = run_survey(args.root, digest=digest, dump=args.dump, since=args.since)
+    except (OSError, ValueError, TypeError, KeyError, RuntimeError) as error:
+        # nemik:W1031: a crash is a cause too; name it on stdout, where the parser reads
+        sys.stdout.write(f"NEMIK-CHECK error: {type(error).__name__}: {error}\n")
+        sys.exit(3)
     sys.exit(1 if failed else 0)
 
 
