@@ -287,6 +287,10 @@
   "as_written": "syntax error, unexpected ','",
   "stripped": "syntax error, unexpected ','"
  },
+ "pacewrite": {
+  "as_written": "no module named 'nemik.pacepublish'",
+  "stripped": "no module named 'nemik.pacepublish'"
+ },
  "roundcli": {
   "as_written": "no module named 'nemik.landings'",
   "stripped": "no module named 'nemik.landings'"

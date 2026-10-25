@@ -2234,3 +2234,7 @@
 2026-10-25T03:39:58Z  status W997 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-25T03:40:02Z  tick  W1024 advanced  unblock   "W996 landed afcd5ab and marked done, W997 unblocked; stacks 434 (W1027) and 435 (W1024) gating; W1016 returned to ready. I still need to write the W997 pace file writer, W997. [blocked by W997]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-25T03:44:55Z  interrupt W1029 minted    -         "Repin the mtools wheels to 999e49b7 or later (W1941: a stack carries its queue files automatically); mikemol-repin --revendor, dry run first"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f:W1941
+2026-10-25T04:10:38Z  status W1024 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T04:10:38Z  status W1025 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T04:10:42Z  status W997 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T04:11:12Z  tick  W997 advanced  unblock   "W1024 landed 97fe254 and marked done; pacewrite.py and its test written for W997, bazel test of test_pacewrite and the census running. I still need to submit the W997 stack and then wire its caller, W997, and publish the round file, W1025. [blocked by W1025]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
