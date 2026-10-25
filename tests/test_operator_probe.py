@@ -54,6 +54,9 @@ def test_a_probe_or_a_decision_is_not_named() -> None:
     """A recorded probe clears an act; a decide ask is a choice and needs none."""
     assert not _says(_judged("c", "operator: act run the repin", probe=True))
     assert not _says(_judged("d", "operator: decide which of two", probe=False))
+    assert not _says(
+        _judged("f", "operator: act provide a read-only API token", probe=False)
+    )
 
 
 def test_the_evidence_forms_that_count_as_a_probe() -> None:

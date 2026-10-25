@@ -705,7 +705,9 @@ nemik:BehindWithoutPaydownShape a sh:NodeShape ;
 # operator asked for the ritual's anchors to find what was spoken and not persisted, host 695f3e0a
 # line 94599). The skill: a handoff with no executed local probe "feels like humility and functions as
 # evasion". `operator: decide` asks are a choice only the operator can make and need no probe; an
-# `operator: act` ask names a step, and a step that never ran here may be one this session can do.
+# `operator: act` ask names a step, and a step that never ran here may be one this session can do. An
+# ask for a token, credential, secret or password is the one act only the operator can do (key material
+# is never held by a session), so it needs no probe.
 nemik:OperatorActProbeShape a sh:NodeShape ;
     sh:targetClass oslc_cm:ChangeRequest ;
     sh:severity sh:Warning ;
@@ -716,5 +718,6 @@ nemik:OperatorActProbeShape a sh:NodeShape ;
                 $this <http://open-services.net/ns/cm#state> <https://github.com/mikemol/nemik/ns#Blocked> ;
                       <https://github.com/mikemol/nemik/ns#blockedOn> ?b .
                 FILTER(REGEX(STR(?b), "^[ ]*operator[ ]*:[ ]*act([^a-z]|$)", "i"))
+                FILTER(!REGEX(STR(?b), "token|credential|secret|password|api key", "i"))
                 FILTER NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#probeRecorded> ?p }
             }""" ] .
