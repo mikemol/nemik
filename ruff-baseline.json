@@ -643,7 +643,6 @@
  "tests/test_calendars.py": {
   "ANN202": 1,
   "ARG001": 4,
-  "D103": 7,
   "D205": 4,
   "D401": 2,
   "DOC201": 2,

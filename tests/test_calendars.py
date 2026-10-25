@@ -54,6 +54,7 @@ def ics(monkeypatch: pytest.MonkeyPatch) -> str:
 def test_occurrences_are_read_and_the_export_is_deleted(
     tmp_path: Path, ics: str
 ) -> None:
+    """The helper's export is read into occurrences, and no copy of the calendar is left."""
     got = occurrences(
         {"home": "Personal"}, start="2026-10-01", helper=_helper(tmp_path), ics=ics
     )
@@ -69,7 +70,7 @@ def test_occurrences_are_read_and_the_export_is_deleted(
 def test_a_failed_export_raises_rather_than_reading_as_a_free_day(
     tmp_path: Path, ics: str
 ) -> None:
-
+    """A helper that fails raises, so a failed export never reads as a free day."""
     with pytest.raises(subprocess.CalledProcessError):
         occurrences(
             {"home": "Personal"},
@@ -80,7 +81,7 @@ def test_a_failed_export_raises_rather_than_reading_as_a_free_day(
 
 
 def test_config_opts_calendars_in(tmp_path: Path) -> None:
-
+    """A missing config is no calendars, a table lists them, and a bad entry is refused."""
     assert load_collections(tmp_path / "missing.toml") == {}
     p = tmp_path / "calendars.toml"
     p.write_text('[calendars]\nhome = "Personal"\nwork = "Shift schedule"\n')
@@ -91,7 +92,7 @@ def test_config_opts_calendars_in(tmp_path: Path) -> None:
 
 
 def test_events_become_nodes_and_cal_refs_wait_on_the_next_occurrence() -> None:
-
+    """Each occurrence becomes an event node, and a cal: reference waits on the next one."""
     occs = [
         {
             "label": "home",
@@ -240,6 +241,7 @@ def test_calendar_entries_take_a_name_or_a_table_and_a_typo_fails(
 def test_include_keeps_case_sensitive_substring_matches_and_counts_both_ways(
     tmp_path: Path, ics: str
 ) -> None:
+    """An include list keeps case-sensitive substring matches and counts matched and all."""
     got_all: dict = {}
     occurrences(
         {"chores": "Chores"},
@@ -280,7 +282,7 @@ def test_a_filter_that_matches_nothing_is_reported_not_read_as_a_free_day(
     capsys: pytest.CaptureFixture[str],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-
+    """A filter that matches nothing is reported in the output, never read as a free day."""
     # The window starts today: pin it so the fixture dates stay inside it.
     monkeypatch.setattr("nemik.calendars.today", lambda: date(2026, 10, 1))
 
@@ -352,7 +354,7 @@ def test_days_dedupes_across_calendars_and_no_dedupe_shows_all(
     capsys: pytest.CaptureFixture[str],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-
+    """The days list merges the same entry across calendars, and --no-dedupe shows all."""
     monkeypatch.setattr("nemik.calendars.today", lambda: date(2026, 10, 1))
     cfg = tmp_path / "calendars.toml"
     cfg.write_text(
