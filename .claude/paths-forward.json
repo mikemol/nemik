@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1052,
+  "counter": 1053,
   "waypoints": [
     {
       "symbol": "W1",
@@ -24534,19 +24534,19 @@
     {
       "symbol": "W1051",
       "title": "The pace board always exports whether its file was readable, so a failed read is a signal and never an absence",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-10-25: github-8f 14:45Z: the paydown verdict went dark and nemik_ratchet_behind cleared by absence. Cause, read from the pod: the pace file was present (6487 bytes at 14:34) but the pod's pace board said host false, 'state unknown is neither behind nor ok': the image the pods ran was built before 8941e42, the host install was rebuilt past it, so the writer's new state reached a reader that refused the whole file and published no gauges. Rollout of the 8941e42 image was under way (a new pod 1/2 ready). Lesson: a writer must not emit a new value before every reader accepts it; and a failed read must export a signal, never nothing",
+      "next_bounded_step": null,
+      "evidence": "2026-10-25: github-8f 14:45Z: the paydown verdict went dark and nemik_ratchet_behind cleared by absence. Cause, read from the pod: the pace file was present (6487 bytes at 14:34) but the pod's pace board said host false, 'state unknown is neither behind nor ok': the image the pods ran was built before 8941e42, the host install was rebuilt past it, so the writer's new state reached a reader that refused the whole file and published no gauges. Rollout of the 8941e42 image was under way (a new pod 1/2 ready). Lesson: a writer must not emit a new value before every reader accepts it; and a failed read must export a signal, never nothing | 2026-10-25: landed as c1d1027 (git log showed its subject); it reaches the pods when the next image ships",
       "issued_at": "2026-10-25T14:47:45Z",
       "minted_during": "tick",
       "caused_by": "W1039",
-      "last_worked": "2026-10-25T14:47:55Z",
+      "last_worked": "2026-10-25T15:48:10Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261025T154810Z",
       "manifest": [
         "src/nemik/pacepublish.py",
         "src/nemik/serve.py",
@@ -24577,6 +24577,52 @@
       ],
       "size_class": "medium",
       "completed": null
+    },
+    {
+      "symbol": "W1053",
+      "title": "Take linux-sources' two fleet scans, peer_write_window and namespace_collision, as nemik shapes, checked against their live output",
+      "status": "ready",
+      "enables": [
+        "linux-sources:W406"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Read peer_write_window.py and namespace_collision.py from linux-sources' tree, write down what each reads and reports, then design each as a nemik shape",
+      "evidence": "2026-10-25: requested by github-8f 2026-10-25 (linux-sources:W406, sibling-path retirement). Three linux-sources tools scan every repo beside it: linux_sources/sent_census.py:44 (letters sent, which becomes an issues query under W1047), ls_gate/peer_write_window.py:39 and ls_gate/namespace_collision.py:53. The operator's wording (line 84035, human, verified): repos should stop being aware sibling paths are a thing. Plan: each of the two scans as a nemik shape checked against linux-sources' current output as sets on a live reading, then linux-sources retires its copy with a tombstone; sent_census belongs with the courier. NOT DONE: I have not yet read the three files, so their semantics are unknown to me",
+      "issued_at": "2026-10-25T15:47:00Z",
+      "minted_during": "tick",
+      "caused_by": "W1047",
+      "last_worked": "2026-10-25T15:47:58Z",
+      "ticks_blocked": 0,
+      "warrants": [
+        {
+          "@context": {
+            "prov": "http://www.w3.org/ns/prov#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "mtools": "urn:mtools:warrant#"
+          },
+          "@id": "urn:nemik:nemik/W1053",
+          "prov:wasDerivedFrom": {
+            "@id": "urn:claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e#67efb1bc-8739-4ee0-9c3d-d6cfc68907d0",
+            "@type": "prov:Entity",
+            "prov:generatedAtTime": {
+              "@value": "2026-10-19T13:07:08.462Z",
+              "@type": "xsd:dateTime"
+            },
+            "prov:wasAttributedTo": {
+              "@id": "urn:nemik:operator",
+              "@type": "prov:Agent"
+            },
+            "prov:wasGeneratedBy": {
+              "@id": "urn:nemik:utterance/67efb1bc-8739-4ee0-9c3d-d6cfc68907d0",
+              "@type": "prov:Activity"
+            },
+            "mtools:line": 84035,
+            "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify 67efb1bc-8739-4ee0-9c3d-d6cfc68907d0 --claim operator --line 84035"
+          }
+        }
+      ]
     }
   ],
   "residue": [

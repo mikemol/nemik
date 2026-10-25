@@ -18,7 +18,7 @@ ICS = (
 )
 
 
-def _helper(tmp_path, fail=False, text: str = ICS) -> Path:
+def _helper(tmp_path: Path, *, fail: bool = False, text: str = ICS) -> Path:
     """A stand-in for nemik-akonadi-tasks --export-calendar NAME --out FILE."""
     src = tmp_path / "src.ics"
     src.write_text(text, newline="")
@@ -31,14 +31,16 @@ def _helper(tmp_path, fail=False, text: str = ICS) -> Path:
 
 
 @pytest.fixture
-def ics(monkeypatch) -> str:
+def ics(monkeypatch: pytest.MonkeyPatch) -> str:
     """The venv's mikemol-ics, with the environment it needs under bazel (PYTHONHOME)."""
     for k, v in installed._bin()[1].items():
         monkeypatch.setenv(k, v)
     return installed.script("mikemol-ics")[0]
 
 
-def test_occurrences_are_read_and_the_export_is_deleted(tmp_path, ics) -> None:
+def test_occurrences_are_read_and_the_export_is_deleted(
+    tmp_path: Path, ics: str
+) -> None:
     got = occurrences(
         {"home": "Personal"}, start="2026-10-01", helper=_helper(tmp_path), ics=ics
     )
@@ -52,7 +54,7 @@ def test_occurrences_are_read_and_the_export_is_deleted(tmp_path, ics) -> None:
 
 
 def test_a_failed_export_raises_rather_than_reading_as_a_free_day(
-    tmp_path, ics
+    tmp_path: Path, ics: str
 ) -> None:
     import subprocess
 
@@ -65,7 +67,7 @@ def test_a_failed_export_raises_rather_than_reading_as_a_free_day(
         )
 
 
-def test_config_opts_calendars_in(tmp_path) -> None:
+def test_config_opts_calendars_in(tmp_path: Path) -> None:
     from nemik.calendars import load_collections
 
     assert load_collections(tmp_path / "missing.toml") == {}
@@ -115,7 +117,10 @@ def test_events_become_nodes_and_cal_refs_wait_on_the_next_occurrence() -> None:
 
 
 def test_operator_lists_the_next_days_with_waiters(
-    tmp_path, ics, capsys, monkeypatch
+    tmp_path: Path,
+    ics: str,
+    capsys: pytest.CaptureFixture[str],
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """nemik:W160/W161: nemik-days N, from opted-in calendars only."""
     from datetime import date
@@ -143,7 +148,7 @@ def test_operator_lists_the_next_days_with_waiters(
 
 
 def test_the_reader_is_found_in_nemiks_own_venv_not_on_path(
-    tmp_path, monkeypatch
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """life-82, 2026-10-02: .venv/bin/nemik-days run without the venv on PATH could not find
     mikemol-ics. The default is the venv's own copy; a missing reader is a stated refusal.
@@ -166,7 +171,9 @@ def test_the_reader_is_found_in_nemiks_own_venv_not_on_path(
         )
 
 
-def test_a_refusing_helper_is_reported_not_a_traceback(tmp_path, ics, capsys) -> None:
+def test_a_refusing_helper_is_reported_not_a_traceback(
+    tmp_path: Path, ics: str, capsys: pytest.CaptureFixture[str]
+) -> None:
     """nemik:W193: the Akonadi helper refuses when Akonadi is not running; nemik-days says so, exit 2."""
     from nemik.calendars import days_main
 
@@ -208,7 +215,9 @@ CHORES = "\r\n".join(
 )
 
 
-def test_calendar_entries_take_a_name_or_a_table_and_a_typo_fails(tmp_path) -> None:
+def test_calendar_entries_take_a_name_or_a_table_and_a_typo_fails(
+    tmp_path: Path,
+) -> None:
     """nemik:W190 (life:W31): `label = "Name"` still works; `{ name, include }` adds the filter; an
     unknown key (a typo'd `includes` would silently mean "no filter") and a bad include fail.
     """
@@ -235,7 +244,7 @@ def test_calendar_entries_take_a_name_or_a_table_and_a_typo_fails(tmp_path) -> N
 
 
 def test_include_keeps_case_sensitive_substring_matches_and_counts_both_ways(
-    tmp_path, ics
+    tmp_path: Path, ics: str
 ) -> None:
     got_all: dict = {}
     occurrences(
@@ -272,7 +281,10 @@ def test_include_keeps_case_sensitive_substring_matches_and_counts_both_ways(
 
 
 def test_a_filter_that_matches_nothing_is_reported_not_read_as_a_free_day(
-    tmp_path, ics, capsys, monkeypatch
+    tmp_path: Path,
+    ics: str,
+    capsys: pytest.CaptureFixture[str],
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     from datetime import date
 
@@ -301,7 +313,9 @@ def test_a_filter_that_matches_nothing_is_reported_not_read_as_a_free_day(
     )
 
 
-def _row(label, start, summary, waiting=()):
+def _row(
+    label: str, start: str, summary: str, waiting: tuple[str, ...] | list[str] = ()
+):
     return {
         "label": label,
         "uid": "u",
@@ -344,7 +358,10 @@ def test_dedupe_merges_across_calendars_never_within_one() -> None:
 
 
 def test_days_dedupes_across_calendars_and_no_dedupe_shows_all(
-    tmp_path, ics, capsys, monkeypatch
+    tmp_path: Path,
+    ics: str,
+    capsys: pytest.CaptureFixture[str],
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     from datetime import date
 
@@ -371,7 +388,7 @@ def test_days_dedupes_across_calendars_and_no_dedupe_shows_all(
 
 
 def test_writing_is_opt_in_twice_and_a_calendar_is_read_only_by_default(
-    tmp_path,
+    tmp_path: Path,
 ) -> None:
     """nemik:W196 (life's ask): `write = true` AND `mirror = [repos]`; either alone is refused."""
     from nemik.calendars import Calendar, load_calendars
@@ -403,7 +420,7 @@ def test_writing_is_opt_in_twice_and_a_calendar_is_read_only_by_default(
 
 
 def test_events_nemik_mirrored_are_not_read_back_as_the_operators_own(
-    tmp_path, ics
+    tmp_path: Path, ics: str
 ) -> None:
     """nemik:W196: a UID of nemik:<repo>:W<n> is nemik's own write; reading it back would list
     each dated waypoint twice, so nemik-days skips it (and does not count it).

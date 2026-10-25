@@ -229,10 +229,8 @@
   "misc": 1
  },
  "tests/test_calendars.py": {
-  "misc": 153,
-  "no-any-return": 1,
-  "no-untyped-call": 7,
-  "no-untyped-def": 15,
+  "misc": 60,
+  "no-untyped-def": 1,
   "type-arg": 3
  },
  "tests/test_calwrite.py": {
