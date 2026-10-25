@@ -13,6 +13,7 @@ from nemik.pacepublish import read_pace
 from nemik.pacewrite import pace_rows, pace_text, priors_of
 from nemik.ratchetpace import WINDOW
 from nemik.ratchetseries import ended_series, export_series, series_of
+from nemik.rebaselines import DECLARED, since
 
 ANSWER_HEAD = '{"status"'
 
@@ -28,7 +29,9 @@ def pace_document(answer: str, previous: str, stamp: str) -> str:
 
     Returns:
         The pace file's text, one row per ratchet series. A series of the export that ended while
-        its repo's others went on reads unknown (nemik:W1039), never ok and never behind.
+        its repo's others went on reads unknown (nemik:W1039), never ok and never behind. A series
+        with a declared re-baseline (nemik:W1046) is judged from the declared step on, so the
+        step earns no paydown credit.
 
     Raises:
         ValueError: When the answer holds no series, so no empty file replaces a good one.
@@ -39,7 +42,11 @@ def pace_document(answer: str, previous: str, stamp: str) -> str:
     except ValueError:
         priors = {}
     is_answer = answer.lstrip().startswith(ANSWER_HEAD)
-    series = series_of(answer) if is_answer else export_series(answer)
+    read = series_of(answer) if is_answer else export_series(answer)
+    series = [
+        (repo, ratchet, since(values, repo, ratchet, DECLARED))
+        for repo, ratchet, values in read
+    ]
     ended = [] if is_answer else ended_series(answer)
     if not series:
         message = "the answer holds no ratchet series"

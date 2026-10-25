@@ -75,6 +75,21 @@ def test_a_series_that_ended_reads_unknown_never_ok_or_behind() -> None:
     assert [(row[1], row[2]) for row in rows] == [("x", "unknown"), ("y", "behind")]
 
 
+def test_the_declared_codon_rebaseline_earns_nemik_no_credit() -> None:
+    """Nemik's codon baseline 264 to 168 changes what is counted, not the debt: still behind."""
+    values = [270] * 12 + [264, 168, 168]
+    stamps = ",".join(str(1000 + n) for n in range(len(values)))
+    text = (
+        '{"metric":{"repo":"nemik","ratchet":"codon-baseline.json"},"values":'
+        f"{values},"
+        f'"timestamps":[{stamps}]}}\n'
+    )
+    rows = read_pace(pace_document(text, "", STAMP))[2]
+    assert [(row[0], row[1], row[2]) for row in rows] == [
+        ("nemik", "codon-baseline.json", "behind")
+    ]
+
+
 def test_an_export_with_no_series_refuses_instead_of_writing_an_empty_file() -> None:
     """Nothing to judge raises, so the last good file is kept."""
     with REFUSES:
