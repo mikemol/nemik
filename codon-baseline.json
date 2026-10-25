@@ -7,6 +7,10 @@
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'tomllib'"
  },
+ "ageing": {
+  "as_written": "",
+  "stripped": ""
+ },
  "alarm": {
   "as_written": "syntax error, unexpected ','",
   "stripped": "syntax error, unexpected ','"
@@ -23,6 +27,10 @@
   "as_written": "no module named 'argparse'",
   "stripped": "no module named 'argparse'"
  },
+ "baselinetop": {
+  "as_written": "syntax error, unexpected '='",
+  "stripped": "syntax error, unexpected '='"
+ },
  "blocks": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'rdflib'"
@@ -30,10 +38,6 @@
  "blocks_cli": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'argparse'"
- },
- "baselinetop": {
-  "as_written": "no module named 'nemik.tracker'",
-  "stripped": "no module named 'nemik.tracker'"
  },
  "cachestore": {
   "as_written": "no module named '__future__'",
@@ -52,6 +56,10 @@
   "stripped": ""
  },
  "cardflags": {
+  "as_written": "",
+  "stripped": ""
+ },
+ "cardhealth": {
   "as_written": "",
   "stripped": ""
  },
@@ -95,6 +103,18 @@
   "as_written": "",
   "stripped": ""
  },
+ "core.chains": {
+  "as_written": "",
+  "stripped": ""
+ },
+ "core.text": {
+  "as_written": "",
+  "stripped": ""
+ },
+ "core.treemap": {
+  "as_written": "",
+  "stripped": ""
+ },
  "critical": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'argparse'"
@@ -125,7 +145,7 @@
  },
  "endpoint": {
   "as_written": "no module named '__future__'",
-  "stripped": "no module named 'subprocess'"
+  "stripped": "no module named 'http.client'"
  },
  "events": {
   "as_written": "",
@@ -136,16 +156,16 @@
   "stripped": "no module named 'argparse'"
  },
  "exportcompat": {
-  "as_written": "no module named 'nemik.exportv2'",
-  "stripped": "no module named 'nemik.exportv2'"
+  "as_written": "",
+  "stripped": ""
  },
  "exportv2": {
   "as_written": "",
   "stripped": ""
  },
  "exportwire": {
-  "as_written": "no module named 'nemik.check'",
-  "stripped": "no module named 'nemik.check'"
+  "as_written": "syntax error, unexpected ','",
+  "stripped": "syntax error, unexpected ','"
  },
  "floorasks": {
   "as_written": "no module named 'argparse'",
@@ -179,6 +199,10 @@
   "as_written": "syntax error, unexpected ','",
   "stripped": "syntax error, unexpected ','"
  },
+ "hostroot": {
+  "as_written": "",
+  "stripped": ""
+ },
  "hostroot_cli": {
   "as_written": "no module named 'argparse'",
   "stripped": "no module named 'argparse'"
@@ -197,15 +221,23 @@
  },
  "issues": {
   "as_written": "no module named '__future__'",
-  "stripped": "no module named 'nemik.projection'"
+  "stripped": "class decorator got unexpected argument"
+ },
+ "landings": {
+  "as_written": "",
+  "stripped": ""
+ },
+ "languish": {
+  "as_written": "",
+  "stripped": ""
  },
  "letters": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'shlex'"
  },
  "logactivities": {
-  "as_written": "no module named 'nemik.hostroot'",
-  "stripped": "no module named 'nemik.hostroot'"
+  "as_written": "",
+  "stripped": ""
  },
  "luthenseries": {
   "as_written": "",
@@ -228,8 +260,8 @@
   "stripped": ""
  },
  "mirrorreq": {
-  "as_written": "no module named 'nemik.mirror'",
-  "stripped": "no module named 'nemik.mirror'"
+  "as_written": "syntax error, unexpected '='",
+  "stripped": "syntax error, unexpected '='"
  },
  "mspdi": {
   "as_written": "no module named '__future__'",
@@ -244,16 +276,40 @@
   "stripped": "no module named 'subprocess'"
  },
  "pacepublish": {
-  "as_written": "no module named 'nemik.hostroot'",
-  "stripped": "no module named 'nemik.hostroot'"
+  "as_written": "",
+  "stripped": ""
+ },
+ "pacerun": {
+  "as_written": "syntax error, unexpected '='",
+  "stripped": "syntax error, unexpected '='"
+ },
+ "pacewrite": {
+  "as_written": "",
+  "stripped": ""
  },
  "pacing": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'argparse'"
  },
+ "parity": {
+  "as_written": "",
+  "stripped": ""
+ },
+ "paydownrank": {
+  "as_written": "",
+  "stripped": ""
+ },
  "pdf": {
   "as_written": "no module named 'argparse'",
   "stripped": "no module named 'argparse'"
+ },
+ "pdfviews": {
+  "as_written": "",
+  "stripped": ""
+ },
+ "pending": {
+  "as_written": "",
+  "stripped": ""
  },
  "pendingdeliver": {
   "as_written": "no module named 'argparse'",
@@ -261,15 +317,15 @@
  },
  "pieces": {
   "as_written": "no module named '__future__'",
-  "stripped": "no module named 'nemik.adapter'"
+  "stripped": "no module named 'collections.abc'"
  },
  "pins": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'argparse'"
  },
  "pollevents": {
-  "as_written": "no module named 'nemik.events'",
-  "stripped": "no module named 'nemik.events'"
+  "as_written": "syntax error, unexpected '='",
+  "stripped": "syntax error, unexpected '='"
  },
  "preview": {
   "as_written": "",
@@ -287,21 +343,13 @@
   "as_written": "syntax error, unexpected ','",
   "stripped": "syntax error, unexpected ','"
  },
- "pacerun": {
-  "as_written": "no module named 'nemik.pacepublish'",
-  "stripped": "no module named 'nemik.pacepublish'"
- },
- "pacewrite": {
-  "as_written": "no module named 'nemik.pacepublish'",
-  "stripped": "no module named 'nemik.pacepublish'"
- },
- "roundcli": {
-  "as_written": "no module named 'nemik.landings'",
-  "stripped": "no module named 'nemik.landings'"
+ "ratchetpace": {
+  "as_written": "",
+  "stripped": ""
  },
  "ratchetseries": {
-  "as_written": "no module named 'nemik.tracker'",
-  "stripped": "no module named 'nemik.tracker'"
+  "as_written": "syntax error, unexpected '='",
+  "stripped": "syntax error, unexpected '='"
  },
  "realize": {
   "as_written": "no module named '__future__'",
@@ -320,6 +368,18 @@
   "stripped": "cannot import name 'UTC' from 'datetime'"
  },
  "rolls": {
+  "as_written": "",
+  "stripped": ""
+ },
+ "roundcli": {
+  "as_written": "cannot import name 'UTC' from 'datetime'",
+  "stripped": "cannot import name 'UTC' from 'datetime'"
+ },
+ "roundfile": {
+  "as_written": "",
+  "stripped": ""
+ },
+ "roundof": {
   "as_written": "",
   "stripped": ""
  },
@@ -360,8 +420,8 @@
   "stripped": "no module named 'rdflib'"
  },
  "stackable_cli": {
-  "as_written": "no module named 'argparse'",
-  "stripped": "no module named 'argparse'"
+  "as_written": "syntax error, unexpected ','",
+  "stripped": "syntax error, unexpected ','"
  },
  "stalled": {
   "as_written": "no module named 'rdflib'",
@@ -407,6 +467,10 @@
   "as_written": "no module named 'rdflib'",
   "stripped": "no module named 'rdflib'"
  },
+ "waitseries": {
+  "as_written": "",
+  "stripped": ""
+ },
  "wake": {
   "as_written": "syntax error, unexpected ','",
   "stripped": "syntax error, unexpected ','"
@@ -429,11 +493,11 @@
  },
  "withheld": {
   "as_written": "no module named '__future__'",
-  "stripped": "no module named 'nemik.adapter'"
+  "stripped": "no module named 'collections.abc'"
  },
  "withheldage": {
-  "as_written": "no module named 'nemik.withheld'",
-  "stripped": "no module named 'nemik.withheld'"
+  "as_written": "no module named '__future__'",
+  "stripped": "no module named 'collections.abc'"
  },
  "witnesses": {
   "as_written": "no module named '__future__'",
@@ -441,7 +505,7 @@
  },
  "witnesses_cli": {
   "as_written": "no module named '__future__'",
-  "stripped": "no module named 'nemik'"
+  "stripped": "no module named 'importlib.metadata'"
  },
  "witwait": {
   "as_written": "syntax error, unexpected ','",

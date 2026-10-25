@@ -76,6 +76,10 @@ def stage(src: Path, tree: Path, *, strip: bool) -> None:
 
     """
     (tree / "nemik").mkdir(parents=True)
+    # nemik:W1034: Codon resolves an import from the importing file's own directory, so a module's
+    # `from nemik.x import y` looks for nemik/nemik/x.py. A link to the package inside itself lets
+    # a sibling import resolve, so the census measures a module, not whether its neighbours import.
+    (tree / "nemik" / "nemik").symlink_to(".")
     for path in (src / "nemik").glob("*.py"):
         text = path.read_text(encoding="utf-8")
         (tree / "nemik" / path.name).write_text(
