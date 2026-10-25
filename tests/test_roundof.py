@@ -7,12 +7,14 @@ from nemik.roundof import capacity, drift, outside, round_of
 RANKED = [("W5", "9.0"), ("W2", "4.5"), ("W9", "1.0"), ("W1", "0.0")]
 
 
-def test_capacity_is_the_median_stack_size_and_one_without_history() -> None:
-    """Stacks of 3, 1 and 4 cards: 3. No stacks: one card, from none."""
+def test_capacity_is_the_median_stack_size_lifted_to_the_floor() -> None:
+    """A median at the floor or above is the landings'; below it, or without stacks, the floor."""
     assert capacity([3, 1, 4]) == (3, "landings")
-    assert capacity([2, 5]) == (2, "landings")
-    assert capacity([]) == (1, "none")
-    assert capacity([0, 0]) == (1, "none")
+    assert capacity([4, 9, 6]) == (6, "landings")
+    assert capacity([2, 5]) == (3, "floor")
+    assert capacity([1, 1, 1]) == (3, "floor")
+    assert capacity([]) == (3, "floor")
+    assert capacity([0, 0]) == (3, "floor")
 
 
 def test_the_round_is_the_top_of_the_ranking_with_ranks_from_one() -> None:

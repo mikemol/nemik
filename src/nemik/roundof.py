@@ -9,12 +9,18 @@ the best N ready cards by rank, all of them worked together in one stack. A card
 afterwards is not in this round; it enters at its rank position when the next round is drawn.
 
 N is not typed. It is what a stack of this repo has carried, the median number of cards a landed
-stack held over its recent landings, and one when there is no history. Plain strings and integers
-only, no import, so the Codon census compiles it.
+stack held over its recent landings, lifted to FLOOR where that is smaller or there is no history.
+Plain strings and integers only, no import, so the Codon census compiles it.
 """
 
-NO_HISTORY = "none"
 LANDINGS = "landings"
+FLOOR_SOURCE = "floor"
+# nemik:W1041: a round never holds fewer cards than this (when the ready set has them). The landed
+# stacks undercount: mikemol-commit's records are the only landings read, so a repo that lands
+# through another path, or one card to a stack, would otherwise get a round of one, the serial
+# pattern the operator named (host 695f3e0a line 96999). A placeholder until capacity comes from
+# what the host admits.
+FLOOR = 3
 
 
 def stack_sizes(gate_seconds: list[str]) -> list[int]:
@@ -48,15 +54,18 @@ def capacity(sizes: list[int]) -> tuple[int, str]:
         sizes: The number of cards in each recently landed stack of the repo.
 
     Returns:
-        (the median size rounded up, never below one; where it came from: landings, or none when
-        there is no history and the round is one card).
+        (the median size rounded up, never below FLOOR; where it came from: landings when the
+        median alone is at least FLOOR, else floor, including when there is no history).
 
     """
     held = sorted(s for s in sizes if s > 0)
     if not held:
-        return 1, NO_HISTORY
+        return FLOOR, FLOOR_SOURCE
     middle = (len(held) + 1) // 2
-    return held[middle - 1], LANDINGS
+    median = held[middle - 1]
+    if median < FLOOR:
+        return FLOOR, FLOOR_SOURCE
+    return median, LANDINGS
 
 
 def round_of(ranked: list[tuple[str, str]], size: int) -> list[tuple[str, int, str]]:

@@ -45,31 +45,30 @@ def test_the_stack_sizes_are_the_runs_of_equal_gate_times_per_repo(
     assert sizes_of("beta", path) == [5]
 
 
-def test_the_round_is_the_median_stack_size_of_the_top_of_the_ranking(
-    tmp_path: Path,
-) -> None:
-    """Stacks of 2, 1 and 3: the median 2, so the top two cards."""
+def test_a_median_stack_below_the_floor_is_lifted_to_it(tmp_path: Path) -> None:
+    """Stacks of 2, 1 and 3: the median 2 is under the floor of 3, so the top three cards."""
     lines = round_lines("alpha", RANKED, _file(tmp_path))
-    assert lines[0] == "round alpha: 2 of 4 ready cards (size 2, from landings)"
-    assert [line.split()[1] for line in lines[1:]] == ["W5", "W2"]
+    assert lines[0] == "round alpha: 3 of 4 ready cards (size 3, from floor)"
+    assert [line.split()[1] for line in lines[1:]] == ["W5", "W2", "W9"]
 
 
-def test_without_a_landing_file_the_round_is_one_card() -> None:
-    """No history: one card, from none."""
+def test_without_a_landing_file_the_round_is_the_floor() -> None:
+    """No history: the floor, from floor, as for a repo that lands outside mikemol-commit."""
     lines = round_lines("alpha", RANKED, None)
-    assert lines[0] == "round alpha: 1 of 4 ready cards (size 1, from none)"
-    assert [line.split()[1] for line in lines[1:]] == ["W5"]
+    assert lines[0] == "round alpha: 3 of 4 ready cards (size 3, from floor)"
+    assert [line.split()[1] for line in lines[1:]] == ["W5", "W2", "W9"]
 
 
 def test_the_round_file_holds_each_repos_round_sized_by_its_own_stacks(
     tmp_path: Path,
 ) -> None:
-    """Alpha's median stack is 2; beta's single stack is 5, so it takes all three cards."""
+    """Alpha's median stack of 2 is lifted to the floor of 3; beta's one stack of 5 takes all."""
     text = round_document({"beta": ROWS, "alpha": ROWS}, _file(tmp_path), STAMP)
     assert text.splitlines() == [
         '{"as_of": "2026-10-25T00:00:00Z"}',
         '{"repo": "alpha", "symbol": "W5", "rank": "1", "salience": "9"}',
         '{"repo": "alpha", "symbol": "W2", "rank": "2", "salience": "4.5"}',
+        '{"repo": "alpha", "symbol": "W9", "rank": "3", "salience": "1"}',
         '{"repo": "beta", "symbol": "W5", "rank": "1", "salience": "9"}',
         '{"repo": "beta", "symbol": "W2", "rank": "2", "salience": "4.5"}',
         '{"repo": "beta", "symbol": "W9", "rank": "3", "salience": "1"}',

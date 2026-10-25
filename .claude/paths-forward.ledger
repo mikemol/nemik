@@ -2276,3 +2276,9 @@
 2026-10-25T11:12:02Z  tick  W1035 advanced  unblock   "W925 (rank 1 of the live round) atomized into W1035 to W1037; test count measured: 1452 collected plus five files the bare interpreter cannot load. Round and pace files confirmed live in the export tree and on the pod. I still need to time Bazel on a 1500-target scratch package, W1035, publish the round gauges, W1025, and fix roundcli's datetime import, W1034. [blocked by W1036]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-25T11:19:35Z  interrupt W1038 minted    -         "Carry mtools' guessed flag through the pace: treat every row as advisory until the label is live, then read it from the export"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1032
 2026-10-25T11:19:40Z  status W1038 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T12:16:57Z  tick  W1039 minted    -         "A ratchet whose series ended while its repo's other series went on gets no pace row, so a ratchet the census stopped counting is never behind"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1032
+2026-10-25T12:17:02Z  status W1039 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T12:22:46Z  tick  W1040 minted    -         "Read the store's retired-ratchet tombstones into the pace verdict"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1039
+2026-10-25T12:22:52Z  status W1040 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T12:56:47Z  tick  W1041 minted    -         "A round never holds fewer than three cards when the ready set has them"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1024
+2026-10-25T12:56:56Z  status W1041 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
