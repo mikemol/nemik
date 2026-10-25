@@ -19,6 +19,13 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+# nemik:W1033: the round file in the one form nemik writes and luthen's gate and mtools' reader parse.
+filegroup(
+    name = "round",
+    srcs = glob(["round/**"]),
+    visibility = ["//visibility:public"],
+)
+
 # nemik:W690: one small queue and ledger covering each field nemik reads, for the queue contract.
 filegroup(
     name = "queue",
