@@ -66,7 +66,7 @@ from nemik.letters import report as letters_report
 from nemik.luthenseries import board, load
 from nemik.outbox import outbox
 from nemik.overlaps import overlaps
-from nemik.pacepublish import metric_lines, read_pace
+from nemik.pacepublish import metric_lines, read_pace, readable_lines
 from nemik.pacing import limits, paces
 from nemik.queuerows import fleet_queues
 from nemik.runlogs import runs_graph
@@ -316,15 +316,18 @@ def pace_board(path: Path) -> tuple[dict[str, object], list[str]]:
 
     Returns:
         ({"host": True, "as_of", "window", "rows"}, the gauge lines), or ({"host": False, "why"},
-        no lines) when there is no file or it cannot be read: no board, never a guessed one.
+        the readable gauge at 0) when there is no file or it cannot be read: no board, never a
+        guessed one, and never no gauge at all (nemik:W1051): a ratchet whose gauges vanished
+        read as no longer behind, so a failed read says so.
 
     """
     try:
         as_of, window, rows = read_pace(path.read_text(encoding="utf-8"))
     except OSError:
-        return {"host": False, "why": "no document"}, []  # never a host path
+        # never a host path
+        return {"host": False, "why": "no document"}, readable_lines(0)
     except ValueError as error:
-        return {"host": False, "why": str(error)}, []
+        return {"host": False, "why": str(error)}, readable_lines(0)
     shown = [
         {
             "repo": repo,
@@ -341,7 +344,7 @@ def pace_board(path: Path) -> tuple[dict[str, object], list[str]]:
         "window": window,
         "rows": shown,
     }
-    return board, metric_lines(rows, as_of)
+    return board, [*readable_lines(1), *metric_lines(rows, as_of)]
 
 
 class Model:

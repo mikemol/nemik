@@ -22,6 +22,7 @@ UNKNOWN = "unknown"
 STATES = (BEHIND, OK, UNKNOWN)
 PACE_FILE = "ratchet-pace.json"
 GAUGE_UNKNOWN = "nemik_ratchet_unknown"
+GAUGE_READABLE = "nemik_ratchet_pace_readable"
 GAUGE_AS_OF = "nemik_ratchet_pace_as_of"
 STAMP_LENGTH = 20  # YYYY-MM-DDTHH:MM:SSZ
 MARCH = 3
@@ -140,6 +141,23 @@ def as_of_lines(stamp: str) -> list[str]:
 
     """
     return [f"# TYPE {GAUGE_AS_OF} gauge", f"{GAUGE_AS_OF} {epoch_seconds(stamp)}"]
+
+
+def readable_lines(value: int) -> list[str]:
+    """Write the gauge that says whether the pace file could be read at all (nemik:W1051).
+
+    A pace file the reader refuses used to publish no gauges, and a gauge that vanishes reads as
+    a ratchet no longer behind. This one is always there: 1 when the file was read, 0 when it was
+    missing or refused, so a failed read is a signal and absence is never the answer.
+
+    Args:
+        value: 1 when the file was read, 0 when it was missing or refused.
+
+    Returns:
+        A TYPE line and the one sample.
+
+    """
+    return [f"# TYPE {GAUGE_READABLE} gauge", f"{GAUGE_READABLE} {value}"]
 
 
 def behind_ratchets(rows: list[Row], repo: str) -> list[str]:

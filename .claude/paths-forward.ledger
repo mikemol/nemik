@@ -2303,3 +2303,8 @@
 2026-10-25T14:28:07Z  tick  W1049 minted    -         "Courier read path: nemik-inbound reads a repo's letters from its issues through the API"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1047
 2026-10-25T14:28:07Z  tick  W1050 minted    -         "Retire every repo's sibling inbox write and read, each with a tombstone"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1047
 2026-10-25T14:44:54Z  status W1045 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T14:47:45Z  tick  W1051 minted    -         "The pace board always exports whether its file was readable, so a failed read is a signal and never an absence"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1039
+2026-10-25T14:47:55Z  status W1051 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T14:54:09Z  tick  W1052 minted    -         "A shared file's writer never emits a form its deployed readers refuse"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1025
+2026-10-25T15:11:27Z  status W1052 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T15:11:38Z  tick  W1052 advanced  collapse  "class card W1052 for writer-ahead-of-reader; first list of the five shared files written. Stacks 452 and 453 gating. I still need to decide the version scheme with luthen, W1052, work W1014, and wire the round gauges, W1025. [blocked by W1025]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
