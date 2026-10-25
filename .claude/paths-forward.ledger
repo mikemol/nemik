@@ -2249,3 +2249,6 @@
 2026-10-25T06:16:55Z  tick  W1030 advanced  unblock   "stack438 (W1030 pace command) gating after two mypy fixes; round.json writer next. I still need to write round.json from each ranking and confirm its path to mtools-ad, W1025. [blocked by W1025]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-25T06:29:23Z  interrupt W1031 minted    -         "nemik-check prints one parseable summary line on every exit, NEMIK-CHECK exit=N violating=V unreadable=U, and an uncaught error prints NEMIK-CHECK error: and exits 3, so luthen's parser never sees a nonzero exit without a cause"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f:W1
 2026-10-25T06:29:39Z  status W1031 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T06:45:02Z  tick  W1031 advanced  unblock   "stack439 (W1031 nemik-check summary line) gating after a ruff fix. I still need to send luthen-observability-ab the NEMIK-CHECK line format after it lands, W1031, and write round.json, W1025. [blocked by W1025]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T06:54:26Z  status W1031 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T07:17:52Z  status W1025 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

@@ -114,9 +114,8 @@
   "misc": 25
  },
  "src/nemik/rank.py": {
-  "misc": 254,
-  "no-untyped-def": 1,
-  "type-arg": 19,
+  "misc": 252,
+  "type-arg": 17,
   "var-annotated": 1
  },
  "src/nemik/realize.py": {

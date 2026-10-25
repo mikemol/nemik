@@ -5,13 +5,19 @@
 from pathlib import Path
 
 from nemik.landings import Landing, document
-from nemik.roundcli import round_lines, sizes_of
+from nemik.roundcli import round_document, round_lines, sizes_of, write_round_file
 
 RANKED = [
     ("W5", "9.0", "first"),
     ("W2", "4.5", "second"),
     ("W9", "1.0", "third"),
     ("W1", "0.0", "fourth"),
+]
+STAMP = "2026-10-25T00:00:00Z"
+ROWS: list[dict[str, object]] = [
+    {"symbol": "W5", "salience": "9.0", "title": "first"},
+    {"symbol": "W2", "salience": "4.5", "title": "second"},
+    {"symbol": "W9", "salience": "1.0", "title": "third"},
 ]
 
 
@@ -53,3 +59,26 @@ def test_without_a_landing_file_the_round_is_one_card() -> None:
     lines = round_lines("alpha", RANKED, None)
     assert lines[0] == "round alpha: 1 of 4 ready cards (size 1, from none)"
     assert [line.split()[1] for line in lines[1:]] == ["W5"]
+
+
+def test_the_round_file_holds_each_repos_round_sized_by_its_own_stacks(
+    tmp_path: Path,
+) -> None:
+    """Alpha's median stack is 2; beta's single stack is 5, so it takes all three cards."""
+    text = round_document({"beta": ROWS, "alpha": ROWS}, _file(tmp_path), STAMP)
+    assert text.splitlines() == [
+        '{"as_of": "2026-10-25T00:00:00Z"}',
+        '{"repo": "alpha", "symbol": "W5", "rank": "1", "salience": "9"}',
+        '{"repo": "alpha", "symbol": "W2", "rank": "2", "salience": "4.5"}',
+        '{"repo": "beta", "symbol": "W5", "rank": "1", "salience": "9"}',
+        '{"repo": "beta", "symbol": "W2", "rank": "2", "salience": "4.5"}',
+        '{"repo": "beta", "symbol": "W9", "rank": "3", "salience": "1"}',
+    ]
+
+
+def test_the_round_file_is_written_whole_to_the_path_named(tmp_path: Path) -> None:
+    """The file lands at the path, with no temporary left beside it."""
+    path = tmp_path / "cache" / "round.json"
+    write_round_file({"alpha": ROWS}, None, path)
+    assert path.read_text(encoding="utf-8").splitlines()[0].startswith('{"as_of": "')
+    assert [p.name for p in path.parent.iterdir()] == ["round.json"]

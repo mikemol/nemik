@@ -21,7 +21,7 @@ from rdflib.term import Node
 
 from nemik import tiers
 from nemik.adapter import BASE, NEMIK, OSLC_CM, workstream_uri
-from nemik.roundcli import show_round
+from nemik.roundcli import show_round, write_round_file
 
 if TYPE_CHECKING:
     from nemik.score import Bands, Guarantees
@@ -96,7 +96,7 @@ def load_composition(text: str | None = None) -> Composition:
     )
 
 
-def _dominates(a: dict, b: dict, objs: tuple[str, ...]) -> bool:
+def _dominates(a: dict[str, float], b: dict[str, float], objs: tuple[str, ...]) -> bool:
     return all(a[o] >= b[o] for o in objs) and any(a[o] > b[o] for o in objs)
 
 
@@ -110,7 +110,9 @@ def compose(rows: list[dict], comp: Composition) -> list[dict]:
     from fractions import Fraction
 
     def go(
-        items: list[dict], tiers: tuple[tuple[str, ...], ...], prefix: tuple
+        items: list[dict],
+        tiers: tuple[tuple[str, ...], ...],
+        prefix: tuple[object, ...],
     ) -> list[dict]:
         if not tiers:
             for r in items:
@@ -142,7 +144,7 @@ def compose(rows: list[dict], comp: Composition) -> list[dict]:
 
 
 def objectives(
-    g: Graph, n: Node, weights: Weights, bands, salience: dict | None = None
+    g: Graph, n: Node, weights: Weights, bands: Bands, salience: dict | None = None
 ) -> dict:
     """One ready card's objectives.
 
@@ -607,6 +609,14 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         help="with --round: the landing file nemik-hostroot --landings writes, for the stack sizes",
     )
     ap.add_argument(
+        "--round-file",
+        type=Path,
+        default=None,
+        metavar="FILE",
+        help="write every repo's round to FILE as the round file (nemik:W1025), then stop; "
+        "--landings gives the stack sizes",
+    )
+    ap.add_argument(
         "--assume-done",
         nargs="+",
         metavar="REPO:W<n>",
@@ -632,6 +642,10 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         from nemik.critical import assume_done
 
         g = assume_done(g, args.assume_done)
+    if args.round_file is not None:
+        by_repo = {repo: rank(g, repo, weights) for repo in fleet_repos(g)}
+        write_round_file(by_repo, args.landings, args.round_file)  # nemik:W1025
+        return
     if args.all:
         fleet = rank_fleet(g, weights)
         if args.json:
