@@ -7,10 +7,6 @@
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'tomllib'"
  },
- "ageing": {
-  "as_written": "",
-  "stripped": ""
- },
  "alarm": {
   "as_written": "syntax error, unexpected ','",
   "stripped": "syntax error, unexpected ','"
@@ -18,10 +14,6 @@
  "apischema": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'importlib.resources'"
- },
- "ask": {
-  "as_written": "",
-  "stripped": ""
  },
  "ask_cli": {
   "as_written": "no module named 'argparse'",
@@ -51,29 +43,9 @@
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'argparse'"
  },
- "cardevents": {
-  "as_written": "",
-  "stripped": ""
- },
- "cardflags": {
-  "as_written": "",
-  "stripped": ""
- },
- "cardhealth": {
-  "as_written": "",
-  "stripped": ""
- },
- "cardrank": {
-  "as_written": "",
-  "stripped": ""
- },
  "cards": {
   "as_written": "class decorator got unexpected argument",
   "stripped": "class decorator got unexpected argument"
- },
- "cardweather": {
-  "as_written": "",
-  "stripped": ""
  },
  "catalog": {
   "as_written": "no module named '__future__'",
@@ -87,81 +59,17 @@
   "as_written": "class decorator got unexpected argument",
   "stripped": "class decorator got unexpected argument"
  },
- "climate": {
-  "as_written": "",
-  "stripped": ""
- },
- "collapse": {
-  "as_written": "",
-  "stripped": ""
- },
- "cones": {
-  "as_written": "",
-  "stripped": ""
- },
- "connectors": {
-  "as_written": "",
-  "stripped": ""
- },
- "core.chains": {
-  "as_written": "",
-  "stripped": ""
- },
- "core.text": {
-  "as_written": "",
-  "stripped": ""
- },
- "core.treemap": {
-  "as_written": "",
-  "stripped": ""
- },
  "critical": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'argparse'"
- },
- "delivery": {
-  "as_written": "",
-  "stripped": ""
- },
- "dictops": {
-  "as_written": "",
-  "stripped": ""
- },
- "digest": {
-  "as_written": "",
-  "stripped": ""
- },
- "drift": {
-  "as_written": "",
-  "stripped": ""
- },
- "edgeletters": {
-  "as_written": "",
-  "stripped": ""
- },
- "editverbs": {
-  "as_written": "",
-  "stripped": ""
  },
  "endpoint": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'http.client'"
  },
- "events": {
-  "as_written": "",
-  "stripped": ""
- },
  "exportcli": {
   "as_written": "no module named 'argparse'",
   "stripped": "no module named 'argparse'"
- },
- "exportcompat": {
-  "as_written": "",
-  "stripped": ""
- },
- "exportv2": {
-  "as_written": "",
-  "stripped": ""
  },
  "exportwire": {
   "as_written": "syntax error, unexpected ','",
@@ -179,17 +87,9 @@
   "as_written": "no module named 'rdflib'",
   "stripped": "no module named 'rdflib'"
  },
- "forecastshingle": {
-  "as_written": "",
-  "stripped": ""
- },
  "health": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'tomllib'"
- },
- "histdocs": {
-  "as_written": "",
-  "stripped": ""
  },
  "history": {
   "as_written": "syntax error, unexpected ','",
@@ -198,10 +98,6 @@
  "hostapply": {
   "as_written": "syntax error, unexpected ','",
   "stripped": "syntax error, unexpected ','"
- },
- "hostroot": {
-  "as_written": "",
-  "stripped": ""
  },
  "hostroot_cli": {
   "as_written": "no module named 'argparse'",
@@ -223,25 +119,9 @@
   "as_written": "no module named '__future__'",
   "stripped": "class decorator got unexpected argument"
  },
- "landings": {
-  "as_written": "",
-  "stripped": ""
- },
- "languish": {
-  "as_written": "",
-  "stripped": ""
- },
  "letters": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'shlex'"
- },
- "logactivities": {
-  "as_written": "",
-  "stripped": ""
- },
- "luthenseries": {
-  "as_written": "",
-  "stripped": ""
  },
  "manifest": {
   "as_written": "no module named '__future__'",
@@ -254,10 +134,6 @@
  "metrics": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'argparse'"
- },
- "mirror": {
-  "as_written": "",
-  "stripped": ""
  },
  "mirrorreq": {
   "as_written": "syntax error, unexpected '='",
@@ -275,41 +151,17 @@
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'subprocess'"
  },
- "pacepublish": {
-  "as_written": "",
-  "stripped": ""
- },
  "pacerun": {
   "as_written": "syntax error, unexpected '='",
   "stripped": "syntax error, unexpected '='"
- },
- "pacewrite": {
-  "as_written": "",
-  "stripped": ""
  },
  "pacing": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'argparse'"
  },
- "parity": {
-  "as_written": "",
-  "stripped": ""
- },
- "paydownrank": {
-  "as_written": "",
-  "stripped": ""
- },
  "pdf": {
   "as_written": "no module named 'argparse'",
   "stripped": "no module named 'argparse'"
- },
- "pdfviews": {
-  "as_written": "",
-  "stripped": ""
- },
- "pending": {
-  "as_written": "",
-  "stripped": ""
  },
  "pendingdeliver": {
   "as_written": "no module named 'argparse'",
@@ -327,10 +179,6 @@
   "as_written": "syntax error, unexpected '='",
   "stripped": "syntax error, unexpected '='"
  },
- "preview": {
-  "as_written": "",
-  "stripped": ""
- },
  "projection": {
   "as_written": "class decorator got unexpected argument",
   "stripped": "class decorator got unexpected argument"
@@ -343,10 +191,6 @@
   "as_written": "syntax error, unexpected ','",
   "stripped": "syntax error, unexpected ','"
  },
- "ratchetpace": {
-  "as_written": "",
-  "stripped": ""
- },
  "ratchetseries": {
   "as_written": "syntax error, unexpected '='",
   "stripped": "syntax error, unexpected '='"
@@ -354,10 +198,6 @@
  "realize": {
   "as_written": "no module named '__future__'",
   "stripped": "cannot import name 'TYPE_CHECKING' from 'typing'"
- },
- "replica": {
-  "as_written": "",
-  "stripped": ""
  },
  "replica_cli": {
   "as_written": "no module named 'argparse'",
@@ -367,25 +207,13 @@
   "as_written": "no module named '__future__'",
   "stripped": "cannot import name 'UTC' from 'datetime'"
  },
- "rolls": {
-  "as_written": "",
-  "stripped": ""
- },
- "roundgauges": {
-  "as_written": "no module named 'nemik.roundfile'",
-  "stripped": "no module named 'nemik.roundfile'"
- },
  "roundcli": {
   "as_written": "unsupported operand type(s) for |: 'type[Path]' and 'Optional[T.8]'",
   "stripped": "unsupported operand type(s) for |: 'type[Path]' and 'Optional[T.8]'"
  },
- "roundfile": {
-  "as_written": "",
-  "stripped": ""
- },
- "roundof": {
-  "as_written": "",
-  "stripped": ""
+ "roundgauges": {
+  "as_written": "syntax error, unexpected '='",
+  "stripped": "syntax error, unexpected '='"
  },
  "runlogs": {
   "as_written": "no module named 'rdflib'",
@@ -414,10 +242,6 @@
  "shaclinc": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'pyshacl'"
- },
- "shapedepth": {
-  "as_written": "",
-  "stripped": ""
  },
  "stackable": {
   "as_written": "no module named 'rdflib'",
@@ -451,10 +275,6 @@
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'rdflib'"
  },
- "verify": {
-  "as_written": "",
-  "stripped": ""
- },
  "vtodo": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'tomllib'"
@@ -471,10 +291,6 @@
   "as_written": "no module named 'rdflib'",
   "stripped": "no module named 'rdflib'"
  },
- "waitseries": {
-  "as_written": "",
-  "stripped": ""
- },
  "wake": {
   "as_written": "syntax error, unexpected ','",
   "stripped": "syntax error, unexpected ','"
@@ -486,10 +302,6 @@
  "warrants": {
   "as_written": "no module named 'tomllib'",
   "stripped": "no module named 'tomllib'"
- },
- "wcagfacts": {
-  "as_written": "",
-  "stripped": ""
  },
  "wcagjudge": {
   "as_written": "no module named 'importlib.resources'",
@@ -522,9 +334,5 @@
  "workflows": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'tomllib'"
- },
- "workrows": {
-  "as_written": "",
-  "stripped": ""
  }
 }

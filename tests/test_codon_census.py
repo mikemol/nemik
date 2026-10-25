@@ -30,6 +30,7 @@ from codon_census import (
     failing,
     first_error,
     modules,
+    only_failing,
     regressions,
     stage,
 )
@@ -99,7 +100,9 @@ def test_no_module_is_further_from_codon_than_the_baseline(tmp_path: Path) -> No
     worse = regressions(now, base) if base else []
     assert worse == [], "\n".join(worse)
     if os.environ.get("NEMIK_CODON_WRITE") or not base:
-        BASELINE.write_text(json.dumps(now, indent=1, sort_keys=True) + "\n")
+        BASELINE.write_text(
+            json.dumps(only_failing(now), indent=1, sort_keys=True) + "\n"
+        )
 
 
 def test_the_baseline_names_only_modules_that_exist() -> None:
@@ -122,6 +125,19 @@ def test_a_module_that_stops_compiling_or_starts_failing_is_a_regression() -> No
         "a (as_written): no module named 'x'",
         "c (stripped): q",
     ]
+
+
+def test_only_the_failing_modes_of_failing_modules_are_recorded() -> None:
+    """A compiling module and a compiling mode drop out, and dropping them changes no verdict."""
+    seen: Census = {
+        "a": {"as_written": "", "stripped": ""},
+        "b": {"as_written": "boom", "stripped": ""},
+    }
+    kept = only_failing(seen)
+    assert kept == {"b": {"as_written": "boom"}}
+    worse: Census = {**seen, "a": {"as_written": "now fails", "stripped": ""}}
+    assert regressions(worse, kept) == ["a (as_written): now fails"]
+    assert regressions(seen, kept) == []
 
 
 def test_first_error_reads_the_first_error_line() -> None:

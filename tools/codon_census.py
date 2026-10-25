@@ -157,6 +157,28 @@ def regressions(now: Census, base: Census) -> list[str]:
     ]
 
 
+def only_failing(counted: Census) -> Census:
+    """Keep what the baseline records: the modes that fail, and only the modules that have one.
+
+    A module that compiles in both modes is left out, and so is a compiling mode of a module that
+    fails in the other. An absent entry means compiled to `regressions`, so nothing it enforces
+    changes, and the file's entry count (the ratchet's value, nemik:W1045) counts failures, not
+    modules, so a new module that compiles no longer raises it.
+
+    Args:
+        counted: A census.
+
+    Returns:
+        {module: {mode: first error}} for the failing modes of the failing modules.
+
+    """
+    return {
+        name: {mode: verdict for mode, verdict in modes.items() if verdict}
+        for name, modes in counted.items()
+        if any(modes.values())
+    }
+
+
 def failing(counted: Census) -> dict[str, int]:
     """Count the modules that do not compile, per mode.
 
