@@ -54,6 +54,49 @@ def series_of(answer: str) -> list[tuple[str, str, list[int]]]:
     return sorted(out, key=_by_name)
 
 
+def export_series(text: str) -> list[tuple[str, str, list[int]]]:
+    """Read the store's raw export into one value list per repo and ratchet (nemik:W1032).
+
+    A range query answers on a clock, one point per step, so a quiet hour repeats the last value and
+    a busy one drops landings; the export (`/api/v1/export`) holds the samples as written, one per
+    gate run, which is the unit the pace counts. One JSON object per line:
+    {"metric": {...}, "values": [...], "timestamps": [...]}.
+
+    Args:
+        text: The export's lines.
+
+    Returns:
+        (repo, ratchet, values oldest first) as series_of gives them, the phantom repo left out; a
+        line that is not a series is skipped.
+
+    """
+    out: list[tuple[str, str, list[int]]] = []
+    for line in text.splitlines():
+        try:
+            body = parse(line) if line.strip() else None
+        except ValueError:
+            continue
+        if not isinstance(body, dict):
+            continue
+        metric, values, stamps = (
+            body.get("metric"),
+            body.get("values"),
+            body.get("timestamps"),
+        )
+        if not isinstance(metric, dict) or not isinstance(values, list):
+            continue
+        if not isinstance(stamps, list):
+            continue
+        repo, ratchet = str(metric.get("repo", "")), str(metric.get("ratchet", ""))
+        if repo and ratchet and repo != PHANTOM:
+            pairs: list[tuple[int, int]] = []
+            for at, value in zip(stamps, values, strict=False):
+                if isinstance(at, int | float) and isinstance(value, int | float):
+                    pairs.append((int(at), max(0, int(value))))
+            out.append((repo, ratchet, [count for _, count in sorted(pairs)]))
+    return sorted(out, key=_by_name)
+
+
 def _by_name(row: tuple[str, str, list[int]]) -> tuple[str, str]:
     """Order series by repo, then ratchet.
 

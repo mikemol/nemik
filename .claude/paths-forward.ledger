@@ -2252,3 +2252,7 @@
 2026-10-25T06:45:02Z  tick  W1031 advanced  unblock   "stack439 (W1031 nemik-check summary line) gating after a ruff fix. I still need to send luthen-observability-ab the NEMIK-CHECK line format after it lands, W1031, and write round.json, W1025. [blocked by W1025]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-25T06:54:26Z  status W1031 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-25T07:17:52Z  status W1025 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T07:39:14Z  tick  W1032 minted    -         "The host job fetches the mikemol.ratchet.value range answer from the metric store into a file and runs nemik-hostroot --answer on a timer"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1030
+2026-10-25T07:39:20Z  status W1030 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T07:43:09Z  tick  W1025 advanced  unblock   "95cebb5 landed nemik-rank --round-file; ran by hand, 16 repos; timer asked of luthen-observability-ab, path sent to mtools-ad. I still need to publish the round gauges from a caller, W1025, and build the host fetch of the store answer, W1032. [blocked by W1032]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T07:46:58Z  status W1032 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

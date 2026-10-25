@@ -4,10 +4,14 @@
 
 from pathlib import Path
 
+import pytest
+
 from nemik.hostroot_cli import main
 from nemik.pacepublish import read_pace
 from nemik.pacerun import pace_document
 
+REFUSES = pytest.raises(ValueError, match="no ratchet series")
+EXPORT = Path(__file__).parent / "fixtures" / "ratchet" / "nemik_export.jsonl"
 STAMP = "2026-10-25T05:00:00Z"
 RAISED = 7
 LAST_HEAD = '{"as_of": "2026-10-24T00:00:00Z", "window": "10"}\n'
@@ -48,6 +52,22 @@ def test_an_unreadable_last_file_seeds_nothing() -> None:
     """Text that is no pace file is ignored, not fatal."""
     rows = read_pace(pace_document(_answer([8] * 12), "not a pace file", STAMP))[2]
     assert rows[0][4] == 1
+
+
+def test_a_raw_export_is_judged_one_value_per_gate_run() -> None:
+    """The recorded export of nemik's baselines: seven runs, shorter than the window, behind."""
+    rows = read_pace(pace_document(EXPORT.read_text(encoding="utf-8"), "", STAMP))[2]
+    assert [(row[1], row[2]) for row in rows] == [
+        ("codon-baseline.json", "behind"),
+        ("mypy-baseline.json", "behind"),
+        ("ruff-baseline.json", "behind"),
+    ]
+
+
+def test_an_export_with_no_series_refuses_instead_of_writing_an_empty_file() -> None:
+    """Nothing to judge raises, so the last good file is kept."""
+    with REFUSES:
+        pace_document("", "", STAMP)
 
 
 def test_hostroot_writes_the_pace_file_from_a_stored_answer(tmp_path: Path) -> None:
