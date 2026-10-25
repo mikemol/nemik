@@ -129,7 +129,7 @@ def round_lines(
     size, source = capacity(sizes_of(repo, landings))
     taken = round_of([(symbol, salience) for symbol, salience, _ in ranked], size)
     titles = {symbol: title for symbol, _, title in ranked}
-    head = f"round {repo}: {len(taken)} of {len(ranked)} ready cards (size {size}, from {source})"
+    head = f"round {repo}: {len(taken)} of {len(ranked)} cards (size {size}, from {source})"
     return [
         head,
         *(

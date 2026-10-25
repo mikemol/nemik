@@ -1,14 +1,14 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-from rdflib import Graph, Literal
+from rdflib import Graph, Literal, URIRef
 
-from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri
-from nemik.rank import Weights, downstream_weight, load_weights
+from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri, workstream_uri
+from nemik.rank import Weights, downstream_weight, load_weights, rank
 
 W = Weights(local=1, peer=2, peer_blocked=8)
 
 
-def _wp(g: Graph, repo: str, sym: str, status: str = "ready"):
+def _wp(g: Graph, repo: str, sym: str, status: str = "ready") -> URIRef:
     node = waypoint_uri(repo, sym)
     g.add((node, OSLC_CM.state, STATE[status]))
     return node
@@ -74,6 +74,19 @@ def test_rank_orders_ready_items_by_weight_then_symbol() -> None:
     assert (
         rows[0]["weight"] > rows[1]["weight"]
     )  # `weight` carries the composed order (W132)
+
+
+def test_a_round_ranks_the_work_in_progress_among_the_ready_cards() -> None:
+    """nemik:W1059: a card being worked is not outside the round for that; it holds its place."""
+    g = Graph()
+    ws = workstream_uri("a")
+    ready, busy = _wp(g, "a", "W2"), _wp(g, "a", "W5", "working")
+    for n, s in ((ready, "W2"), (busy, "W5")):
+        g.add((n, NEMIK.workstream, ws))
+        g.add((n, NEMIK.symbol, Literal(s)))
+    g.add((_wp(g, "b", "W1", "blocked"), NEMIK.waitsFor, busy))
+    assert [r["symbol"] for r in rank(g, "a", W)] == ["W2"]
+    assert [r["symbol"] for r in rank(g, "a", W, with_working=True)] == ["W5", "W2"]
 
 
 def test_fleet_rank_pools_repos_into_one_comparable_order() -> None:

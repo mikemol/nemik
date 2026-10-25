@@ -338,10 +338,13 @@ def _rows(
     fruit_row: bool = True,
     comp: Composition | None = None,
     toward: str = "",
+    with_working: bool = False,
 ) -> list[dict]:
     """`repo`'s ready leaves as objective rows, before any ordering (for `rank`, `rank_fleet`).
 
     `toward` (`repo:W<n>`, nemik:W316) ranks by the demand of that one milestone card alone.
+    `with_working` (nemik:W1059) adds the cards in state working, each by its own salience: a
+    round holds the work in progress, so a card being worked is never outside it for that.
 
     Umbrellas are left out: their open children are what can be worked (nemik:W74). When the
     composition declares `weight = "flow"` (nemik:W241), the `weight` objective is the flow model's
@@ -351,7 +354,11 @@ def _rows(
     ready = [
         n
         for n in g.subjects(NEMIK.workstream, ws)
-        if (n, OSLC_CM.state, NEMIK.Ready) in g and not is_umbrella(g, n)
+        if (
+            (n, OSLC_CM.state, NEMIK.Ready) in g
+            or (with_working and (n, OSLC_CM.state, NEMIK.Working) in g)
+        )
+        and not is_umbrella(g, n)
     ]
     from nemik.salience import salience_of
     from nemik.score import load_bands
@@ -429,14 +436,25 @@ def rank(
     *,
     fruit_row: bool = True,
     toward: str = "",
+    with_working: bool = False,
 ) -> list[dict]:
     """Every ready leaf in `repo`, in the declared composed order (nemik:W132; lower symbol on ties).
 
     Umbrellas are left out: their open children are what can be worked (nemik:W74). With `toward`
-    (a milestone `repo:W<n>`, nemik:W316) the order is by that card's demand alone.
+    (a milestone `repo:W<n>`, nemik:W316) the order is by that card's demand alone. With
+    `with_working` (nemik:W1059) the cards in progress are ranked among the ready ones.
     """
     return _position(
-        _rows(g, repo, weights, fruit_row=fruit_row, comp=comp, toward=toward), comp
+        _rows(
+            g,
+            repo,
+            weights,
+            fruit_row=fruit_row,
+            comp=comp,
+            toward=toward,
+            with_working=with_working,
+        ),
+        comp,
     )
 
 
@@ -644,7 +662,12 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
 
         g = assume_done(g, args.assume_done)
     if args.round_file is not None:
-        by_repo = {repo: rank(g, repo, weights) for repo in fleet_repos(g)}
+        # nemik:W1059: a round holds the work in progress, so a repo with only that has one
+        busy = {_repo(n) for n in g.subjects(OSLC_CM.state, NEMIK.Working)}
+        by_repo = {
+            repo: rank(g, repo, weights, with_working=True)
+            for repo in sorted({*fleet_repos(g), *busy})
+        }
         write_round_file(by_repo, args.landings, args.round_file)  # nemik:W1025
         return
     if args.all:
@@ -800,7 +823,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
                     f"shared with {', '.join(others[:4])}"
                 )
         return
-    rows = rank(g, args.repo, weights, toward=args.toward)
+    rows = rank(g, args.repo, weights, toward=args.toward, with_working=args.round)
     if args.round:
         show_round(args.repo, rows, args.landings)  # nemik:W1024, operator 2026-10-25
         return

@@ -48,14 +48,14 @@ def test_the_stack_sizes_are_the_runs_of_equal_gate_times_per_repo(
 def test_a_median_stack_below_the_floor_is_lifted_to_it(tmp_path: Path) -> None:
     """Stacks of 2, 1 and 3: the median 2 is under the floor of 3, so the top three cards."""
     lines = round_lines("alpha", RANKED, _file(tmp_path))
-    assert lines[0] == "round alpha: 3 of 4 ready cards (size 3, from floor)"
+    assert lines[0] == "round alpha: 3 of 4 cards (size 3, from floor)"
     assert [line.split()[1] for line in lines[1:]] == ["W5", "W2", "W9"]
 
 
 def test_without_a_landing_file_the_round_is_the_floor() -> None:
     """No history: the floor, from floor, as for a repo that lands outside mikemol-commit."""
     lines = round_lines("alpha", RANKED, None)
-    assert lines[0] == "round alpha: 3 of 4 ready cards (size 3, from floor)"
+    assert lines[0] == "round alpha: 3 of 4 cards (size 3, from floor)"
     assert [line.split()[1] for line in lines[1:]] == ["W5", "W2", "W9"]
 
 
