@@ -2433,3 +2433,14 @@
 2026-10-25T22:44:25Z  status W1063 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-25T22:44:25Z  status W1065 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-25T22:44:25Z  status W1066 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T22:47:44Z  tick  W1069 minted    -         "Make W1060's weakest link a test: parse index.html's inline script and the late scripts' names, and assert the first load-time use is popLater at cards.js"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1060
+2026-10-25T22:47:45Z  tick  W1070 minted    -         "Answer luthen-observability:W1668: pin the Containerfile BASE by digest, say whether the image tag epoch can come from SOURCE_DATE_EPOCH or the commit time, and declare a registry retention rule keyed to the deployed pin"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W1668
+2026-10-25T22:47:51Z  status W1069 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T23:12:34Z  tick  W1071 minted    -         "Declare linux-sources' findings/letter-quotes-baseline.tsv re-baseline 71 to 18 (row count to sum of mismatch, joined and unjudged), so the pace gives no paydown credit"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1046
+2026-10-25T23:14:55Z  status W1071 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T23:15:22Z  status W975 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T23:15:30Z  status W1035 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T23:15:36Z  status W902 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T23:16:22Z  tick  W1072 minted    -         "Derive rebaselines.DECLARED from the fleet's ratchet declaration files (mtools W1957 format gains a re-baseline entry: ratchet, old, new, reason, the commit that changes the count), so an undeclared drop reads UNKNOWN and never paid"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1071
+2026-10-25T23:17:46Z  status W1072 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T23:30:34Z  status W1063 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
