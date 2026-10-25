@@ -151,6 +151,25 @@ _STRAYS = re.compile(
 )
 
 
+# nemik:W1011 (retro gate G8): evidence that a command was run and what it answered: the word ran or
+# executed, an exit status, or a shell prompt line. A handoff to the operator with none of these has
+# not been probed locally, which the skill calls evasion.
+_PROBE = re.compile(
+    r"\bran\b|\bexecuted\b|\bexit(?:ed)?(?:\s+(?:code|status))?\s*\d+|^\s*\$ ",
+    flags=re.IGNORECASE | re.MULTILINE,
+)
+
+
+def has_probe(text: str) -> bool:
+    """Say whether evidence records an executed probe.
+
+    Returns:
+        True when the text says a command ran, gives an exit status, or shows a shell prompt line.
+
+    """
+    return _PROBE.search(text) is not None
+
+
 def stray_words(text: str) -> list[str]:
     """Find the words in a text that blur the change-lifecycle steps.
 
@@ -316,6 +335,9 @@ def _queue_graph(repo: str, state_path: Path, known: frozenset[str]) -> Graph:
             g.add((node, NEMIK.plannedPath, Literal(planned)))
         if size := model.text(w, "size_class").strip():
             g.add((node, NEMIK.sizeClass, Literal(size)))
+        # nemik:W1011: the evidence holds an executed probe (retro gate G8)
+        if has_probe(model.text(w, "evidence")):
+            g.add((node, NEMIK.probeRecorded, Literal("true", datatype=XSD.boolean)))
         # nemik:W553 (github-8f 2026-10-15): words that blur the change-lifecycle steps.
         for word in stray_words(model.text(w, "next_bounded_step")):
             g.add((node, NEMIK.strayWord, Literal(word)))

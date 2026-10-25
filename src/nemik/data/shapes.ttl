@@ -700,3 +700,21 @@ nemik:BehindWithoutPaydownShape a sh:NodeShape ;
                     FILTER(STR(?t) = CONCAT("file:", STR(?r)) || STR(?t) = CONCAT("file:", STR(?r), "!w"))
                 }
             }""" ] .
+
+# A card handed to the operator as an act has tried it locally first (nemik:W1011, retro gate G8; the
+# operator asked for the ritual's anchors to find what was spoken and not persisted, host 695f3e0a
+# line 94599). The skill: a handoff with no executed local probe "feels like humility and functions as
+# evasion". `operator: decide` asks are a choice only the operator can make and need no probe; an
+# `operator: act` ask names a step, and a step that never ran here may be one this session can do.
+nemik:OperatorActProbeShape a sh:NodeShape ;
+    sh:targetClass oslc_cm:ChangeRequest ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        sh:message "blocked on an operator act with no executed probe in its evidence: run the step here first and record the command and what it answered (retro gate G8), or say what stopped it" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this <http://open-services.net/ns/cm#state> <https://github.com/mikemol/nemik/ns#Blocked> ;
+                      <https://github.com/mikemol/nemik/ns#blockedOn> ?b .
+                FILTER(REGEX(STR(?b), "^[ ]*operator[ ]*:[ ]*act([^a-z]|$)", "i"))
+                FILTER NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#probeRecorded> ?p }
+            }""" ] .
