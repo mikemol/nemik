@@ -287,6 +287,10 @@
   "as_written": "syntax error, unexpected ','",
   "stripped": "syntax error, unexpected ','"
  },
+ "roundcli": {
+  "as_written": "no module named 'nemik.landings'",
+  "stripped": "no module named 'nemik.landings'"
+ },
  "ratchetseries": {
   "as_written": "no module named 'nemik.tracker'",
   "stripped": "no module named 'nemik.tracker'"

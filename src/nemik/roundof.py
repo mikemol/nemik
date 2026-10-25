@@ -17,22 +17,46 @@ NO_HISTORY = "none"
 LANDINGS = "landings"
 
 
-def capacity(stack_sizes: list[int]) -> tuple[int, str]:
+def stack_sizes(gate_seconds: list[str]) -> list[int]:
+    """Count the cards of each landed stack from the landing series.
+
+    A stack of several commits is one gate run, so its landings carry the same gate seconds; a run
+    of equal values is one stack.
+
+    Args:
+        gate_seconds: The gate seconds of a repo's landings, oldest first.
+
+    Returns:
+        The size of each run of equal values, oldest first.
+
+    """
+    sizes: list[int] = []
+    previous = ""
+    for seconds in gate_seconds:
+        if sizes and seconds == previous:
+            sizes[-1] += 1
+        else:
+            sizes.append(1)
+        previous = seconds
+    return sizes
+
+
+def capacity(sizes: list[int]) -> tuple[int, str]:
     """Learn how many cards one round can hold from the stacks that landed.
 
     Args:
-        stack_sizes: The number of cards in each recently landed stack of the repo.
+        sizes: The number of cards in each recently landed stack of the repo.
 
     Returns:
         (the median size rounded up, never below one; where it came from: landings, or none when
         there is no history and the round is one card).
 
     """
-    sizes = sorted(s for s in stack_sizes if s > 0)
-    if not sizes:
+    held = sorted(s for s in sizes if s > 0)
+    if not held:
         return 1, NO_HISTORY
-    middle = (len(sizes) + 1) // 2
-    return sizes[middle - 1], LANDINGS
+    middle = (len(held) + 1) // 2
+    return held[middle - 1], LANDINGS
 
 
 def round_of(ranked: list[tuple[str, str]], size: int) -> list[tuple[str, int, str]]:

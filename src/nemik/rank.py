@@ -13,6 +13,7 @@ import re
 import tomllib
 from dataclasses import dataclass
 from importlib.resources import files
+from typing import TYPE_CHECKING
 
 from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import DCTERMS
@@ -20,6 +21,10 @@ from rdflib.term import Node
 
 from nemik import tiers
 from nemik.adapter import BASE, NEMIK, OSLC_CM, workstream_uri
+from nemik.roundcli import show_round
+
+if TYPE_CHECKING:
+    from nemik.score import Bands, Guarantees
 
 
 @dataclass(frozen=True)
@@ -589,6 +594,19 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         "moves it (nemik:W316; an umbrella is a milestone already)",
     )
     ap.add_argument(
+        "--round",
+        action="store_true",
+        help="the next round: the top N ready cards by rank, N the median landed stack "
+        "(nemik:W1024; operator 2026-10-25, host 695f3e0a line 95318)",
+    )
+    ap.add_argument(
+        "--landings",
+        type=Path,
+        default=None,
+        metavar="FILE",
+        help="with --round: the landing file nemik-hostroot --landings writes, for the stack sizes",
+    )
+    ap.add_argument(
         "--assume-done",
         nargs="+",
         metavar="REPO:W<n>",
@@ -768,6 +786,9 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
                 )
         return
     rows = rank(g, args.repo, weights, toward=args.toward)
+    if args.round:
+        show_round(args.repo, rows, args.landings)  # nemik:W1024, operator 2026-10-25
+        return
     if args.apply:
         _apply(args.apply, rows)
         return
@@ -833,7 +854,7 @@ def drift(
 
 
 def inversion(
-    g: Graph, repo: str, rows: list[dict], bands, guar
+    g: Graph, repo: str, rows: list[dict], bands: Bands, guar: Guarantees
 ) -> tuple[dict, dict] | None:
     """(next, urgent) when the next item sits below the declared floor band while a ready item
     at the floor or above exists (nemik:W133). `urgent` is the first such item in composed order.
@@ -851,7 +872,9 @@ def inversion(
     return (nxt, urgent) if urgent else None
 
 
-def policy_blocks(g: Graph, repo: str, guar) -> list[tuple[str, str, str, list[str]]]:
+def policy_blocks(
+    g: Graph, repo: str, guar: Guarantees
+) -> list[tuple[str, str, str, list[str]]]:
     """(ready, blocker, class, shared surfaces) for each policy pair in `repo` (nemik:W133).
 
     A ready waypoint is policy-blocked by an open member of a declared class (bands.toml
