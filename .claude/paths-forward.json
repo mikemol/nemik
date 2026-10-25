@@ -23851,7 +23851,7 @@
     {
       "symbol": "W1027",
       "title": "nemik's own gate sends mikemol.ratchet.value for nemik's ratchets: the pre-commit calls mikemol-ratchet-emit after the verdict with the repo name, with the ratchet dist's census available, and never changes the verdict",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W991"
       ],
@@ -23859,11 +23859,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Find how the vendored hooks wheel exposes mikemol-ratchet-emit (the module is present at 57b9f2a, the script is not in the venv's bin), vendor the ratchet dist for the census (RATCHET_BIN), and add the call to the gate after the verdict as mtools' pre-commit does, saying and ignoring a failure; check that repo=nemik series appear in the store after the next landing",
-      "evidence": "",
+      "evidence": "2026-10-25: 2026-10-25 pilot for mtools:W1928: nemik adopted mikemol-ratchet-emit by hand. (1) Built mikemol-ratchet and mikemol-atomicwrite wheels from a git archive of mtools 57b9f2ac (local version +57b9f2a, set in the extracted pyproject; mikemol-repin --revendor has no row for these dists), into vendor/wheels, SHA256SUMS lines, pyproject deps and sources, MODULE.bazel vendored_wheel rows, BUILD hub_requirements and console scripts mikemol-ratchet and mikemol-ratchet-emit, uv.lock relocked. (2) tools/gate_staged.sh calls the emitter after the ratchet check, NAME = basename of the real root, DIR = the gated worktree, RATCHET_BIN the venv's mikemol-ratchet, best effort. Census on nemik reads: codon-baseline.json value 224, mypy-baseline.json 283 (sum 6271), ruff-baseline.json 1025 (sum 2822). Witness: count by (repo) (last_over_time(mikemol.ratchet.value[30m])) shows repo=nemik after the next gate",
       "issued_at": "2026-10-25T02:48:35Z",
       "minted_during": "interrupt",
       "caused_by": "W991",
-      "last_worked": "2026-10-25T02:48:43Z",
+      "last_worked": "2026-10-25T02:56:40Z",
       "ticks_blocked": 0,
       "weight": 100,
       "manifest": [
@@ -23873,7 +23873,8 @@
         "MODULE.bazel",
         "uv.lock"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "completed": null
     }
   ],
   "residue": [

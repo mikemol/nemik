@@ -12,6 +12,13 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+# nemik:W996: a real query_range answer from luthen's metric store for one of mtools' ratchets.
+filegroup(
+    name = "ratchet",
+    srcs = glob(["ratchet/**"]),
+    visibility = ["//visibility:public"],
+)
+
 # nemik:W690: one small queue and ledger covering each field nemik reads, for the queue contract.
 filegroup(
     name = "queue",
