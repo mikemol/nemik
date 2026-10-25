@@ -66,14 +66,14 @@ def test_the_round_file_holds_each_repos_round_sized_by_its_own_stacks(
 ) -> None:
     """Alpha's median stack is 2; beta's single stack is 5, so it takes all three cards."""
     text = round_document({"beta": ROWS, "alpha": ROWS}, _file(tmp_path), STAMP)
-    assert text.splitlines() == [
-        '{"as_of": "2026-10-25T00:00:00Z"}',
-        '{"repo": "alpha", "symbol": "W5", "rank": "1", "salience": "9"}',
-        '{"repo": "alpha", "symbol": "W2", "rank": "2", "salience": "4.5"}',
-        '{"repo": "beta", "symbol": "W5", "rank": "1", "salience": "9"}',
-        '{"repo": "beta", "symbol": "W2", "rank": "2", "salience": "4.5"}',
-        '{"repo": "beta", "symbol": "W9", "rank": "3", "salience": "1"}',
-    ]
+    assert text == (
+        '{"as_of": "2026-10-25T00:00:00Z", "rows": ['
+        '{"repo": "alpha", "symbol": "W5", "rank": "1", "salience": "9"}, '
+        '{"repo": "alpha", "symbol": "W2", "rank": "2", "salience": "4.5"}, '
+        '{"repo": "beta", "symbol": "W5", "rank": "1", "salience": "9"}, '
+        '{"repo": "beta", "symbol": "W2", "rank": "2", "salience": "4.5"}, '
+        '{"repo": "beta", "symbol": "W9", "rank": "3", "salience": "1"}]}\n'
+    )
 
 
 def test_the_round_file_is_written_whole_to_the_path_named(tmp_path: Path) -> None:

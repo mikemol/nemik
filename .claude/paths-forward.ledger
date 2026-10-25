@@ -2256,3 +2256,4 @@
 2026-10-25T07:39:20Z  status W1030 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-25T07:43:09Z  tick  W1025 advanced  unblock   "95cebb5 landed nemik-rank --round-file; ran by hand, 16 repos; timer asked of luthen-observability-ab, path sent to mtools-ad. I still need to publish the round gauges from a caller, W1025, and build the host fetch of the store answer, W1032. [blocked by W1032]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-25T07:46:58Z  status W1032 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T08:10:31Z  tick  W1032 advanced  unblock   "stack441 (export reader) gating; luthen landed the round timer 3951a950 and mtools-ad adjusted to the new path and one-line form. I still need to build the host fetch of the store export, W1032, and publish the round gauges, W1025. [blocked by W1025]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

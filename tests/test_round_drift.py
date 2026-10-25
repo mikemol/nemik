@@ -8,17 +8,22 @@ STAMP = "2026-10-25T00:00:00Z"
 SECONDS = 1792886400
 
 
-def test_the_file_has_a_head_and_a_line_per_round_card() -> None:
-    """Two cards of one repo, one of another, in the order given."""
+def test_the_file_is_one_line_of_json_with_a_row_per_round_card() -> None:
+    """Two cards of one repo, one of another, in the order given, as one document."""
     text = round_text(
         STAMP, [("a", [("W5", 1, "9.0"), ("W2", 2, "4.5")]), ("b", [("W1", 1, "0.5")])]
     )
-    assert text.splitlines() == [
-        '{"as_of": "2026-10-25T00:00:00Z"}',
-        '{"repo": "a", "symbol": "W5", "rank": "1", "salience": "9.0"}',
-        '{"repo": "a", "symbol": "W2", "rank": "2", "salience": "4.5"}',
-        '{"repo": "b", "symbol": "W1", "rank": "1", "salience": "0.5"}',
-    ]
+    assert text == (
+        '{"as_of": "2026-10-25T00:00:00Z", "rows": ['
+        '{"repo": "a", "symbol": "W5", "rank": "1", "salience": "9.0"}, '
+        '{"repo": "a", "symbol": "W2", "rank": "2", "salience": "4.5"}, '
+        '{"repo": "b", "symbol": "W1", "rank": "1", "salience": "0.5"}]}\n'
+    )
+
+
+def test_a_round_of_no_cards_is_still_a_document() -> None:
+    """No repo has a ready card: an empty rows list, not a bare head."""
+    assert round_text(STAMP, []) == '{"as_of": "2026-10-25T00:00:00Z", "rows": []}\n'
 
 
 def test_drift_is_the_share_outside_and_zero_when_nothing_is_worked() -> None:

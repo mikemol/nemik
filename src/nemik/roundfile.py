@@ -3,9 +3,10 @@
 """nemik:W1025: the round file and the round-drift gauges, written from each repo's round.
 
 roundof (nemik:W1024) draws a repo's round and measures how much of its working set lies outside
-it. This writes the two things other tools read: the round file, whose first line carries `"as_of"`
-and then one flat object per line, {"repo", "symbol", "rank", "salience"}, a repo's round cards in
-rank order, numbers as quoted text the way the pace file writes them; and the Prometheus gauges
+it. This writes the two things other tools read: the round file, one line of JSON,
+{"as_of", "rows": [{"repo", "symbol", "rank", "salience"}, ...]}, a repo's round cards in rank
+order, numbers as quoted text the way the pace file writes them (the one form luthen's egress gate
+also rewrites it to, so readers parse a document, never lines); and the Prometheus gauges
 nemik_round_size, nemik_round_working, nemik_round_outside and nemik_round_drift per repo (drift is
 the share outside over working, 0 when nothing is worked), beside nemik_round_as_of in unix seconds.
 Existence of the file is what mtools:W1942's witness reads; its own as_of dates it. No import, so
@@ -31,17 +32,18 @@ def round_text(as_of: str, rounds: list[Taken]) -> str:
         rounds: Each repo with its round cards, each as (symbol, rank from 1, salience text).
 
     Returns:
-        The head line, then one line per round card, repos in the order given.
+        One line of JSON, {"as_of": ..., "rows": [...]}, a row per round card, repos in the order
+        given: the form luthen's egress gate rewrites the file to, so a reader parses one document
+        whether or not the gate dropped a row.
 
     """
-    lines = [f'{{"as_of": "{as_of}"}}']
-    for repo, cards in rounds:
-        for symbol, place, salience in cards:
-            lines.append(
-                f'{{"repo": "{repo}", "symbol": "{symbol}", "rank": "{place}", '
-                f'"salience": "{salience}"}}'
-            )
-    return "\n".join(lines) + "\n"
+    rows = [
+        f'{{"repo": "{repo}", "symbol": "{symbol}", "rank": "{place}", '
+        f'"salience": "{salience}"}}'
+        for repo, cards in rounds
+        for symbol, place, salience in cards
+    ]
+    return f'{{"as_of": "{as_of}", "rows": [{", ".join(rows)}]}}\n'
 
 
 def drift_text(outside: int, working: int) -> str:
