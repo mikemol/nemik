@@ -2199,3 +2199,31 @@
 2026-10-25T01:29:24Z  status W1013 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-25T01:39:48Z  tick  W1014 advanced  unblock   "measured PT018 in test_layout: 19 sites, 12 ruff-fixable, the earlier fix raised mypy by 10 there because the message is duplicated, so W1014 needs a hand-split per site; stack430 gating; W1013 done in tree [blocked by W1015]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-25T01:51:42Z  status W1015 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T02:12:28Z  status W1015 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T02:12:38Z  tick  W1016 minted    -         "A nemik tool traces one test run with the footprint audit and writes the declared reads for nemik's modules"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W643
+2026-10-25T02:12:38Z  tick  W1017 minted    -         "stackable.pick uses the cone relation to chain or separate cards, tested on two cards whose cones intersect"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W643
+2026-10-25T02:12:38Z  tick  W1018 minted    -         "The cone relation predicts which tests a commit runs, for gate-cost ordering"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W643
+2026-10-25T02:12:46Z  status W1017 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T02:12:47Z  status W1018 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T02:13:35Z  tick  W1016 advanced  unblock   "W1015 landed 0d639aa (ruff 2884 to 2822); W643 atomized into W1016 to W1018; first strace trace of a nemik test measured on W1016; nothing in flight [blocked by W1017]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T02:35:47Z  status W1016 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T02:38:25Z  tick  W1019 minted    -         "Answer nemik: mtools:W1909 is done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-10-24-nemik-edge-mtools-W1909-enables-W991.md
+2026-10-25T02:38:29Z  status W1019 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T02:38:47Z  status W812 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T02:38:48Z  tick  W1020 minted    -         "The builder container skips the rebuild when the inputs' hash is unchanged, with a before and after CPU reading"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W764
+2026-10-25T02:38:48Z  tick  W1021 minted    -         "One builder serves both replicas, with a before and after CPU reading"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W764
+2026-10-25T02:38:49Z  tick  W1022 minted    -         "The page fetches the host-root board and maps its rows to nodes of a read-only host lane (state, waitsFor, id)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W789
+2026-10-25T02:38:49Z  tick  W1023 minted    -         "Stale host-root rows are dimmed with their as_of in the detail line, tested in the browser"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W789
+2026-10-25T02:39:00Z  status W1021 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T02:39:02Z  status W1023 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T02:39:08Z  tick  W764 advanced  sweep     "watchdog exit 8 worked: acked the new loop prompt (W1930 guard, promote recurrences to a class card), marked W1016 working, atomized the stale cards W764 and W789, dropped W829 on its own step, answered the W1909 letter as W1019, recorded the census-per-module option on W768; W1015 landed 0d639aa; queue edits ride the next stack [blocked by W1016]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T02:39:55Z  interrupt W1024 minted    -         "nemik-rank --round REPO names the next round: the top N ready cards by rank, N from capacity, a newly unblocked card entering only at its rank position"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W46
+2026-10-25T02:39:57Z  interrupt W1025 minted    -         "Round drift: the share of a repo's working set outside its round, published as a metric on the pace board and gauges"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W46
+2026-10-25T02:40:19Z  status W1025 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T02:43:54Z  status W1024 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T02:47:02Z  interrupt W1026 minted    -         "The pace board publishes nemik_ready_overdue{repo}: the repo's ready cards past the learned age bound, a cleanup count beside the round gauges"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1025
+2026-10-25T02:47:10Z  status W1026 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T02:48:33Z  status W996 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T02:48:33Z  status W998 blocked>done writer    "blocked -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T02:48:35Z  interrupt W1027 minted    -         "nemik's own gate sends mikemol.ratchet.value for nemik's ratchets: the pre-commit calls mikemol-ratchet-emit after the verdict with the repo name, with the ratchet dist's census available, and never changes the verdict"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W991
+2026-10-25T02:48:47Z  status W996 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
