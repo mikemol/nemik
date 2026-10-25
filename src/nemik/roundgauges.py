@@ -9,9 +9,12 @@ returns the Prometheus text. A repo with a round but nothing worked has drift 0;
 absent from the round has a round of size 0 and every working card outside it.
 """
 
+from nemik.pacepublish import epoch_seconds
 from nemik.roundfile import metric_lines
 from nemik.roundof import outside
 from nemik.tracker import parse
+
+GAUGE_READABLE = "nemik_round_readable"
 
 
 def read_round(text: str) -> tuple[str, dict[str, list[str]]]:
@@ -69,3 +72,28 @@ def gauge_lines(
         taken, worked = rounds.get(repo, []), working.get(repo, [])
         stats.append((repo, len(taken), len(worked), len(outside(worked, taken))))
     return metric_lines(stats, as_of_seconds)
+
+
+def round_board(text: str, working: dict[str, list[str]]) -> list[str]:
+    """Write every round gauge, and say whether the round file could be read at all (nemik:W1025).
+
+    Same lesson as the pace board (W1051): a gauge that vanishes reads as no drift, so a missing
+    or refused file publishes nemik_round_readable at 0 and nothing else is guessed.
+
+    Args:
+        text: The round file's text, empty when there is none.
+        working: Each repo's cards being worked, as symbols.
+
+    Returns:
+        The readable gauge at 1 then the round gauges, or the readable gauge at 0 alone.
+
+    """
+    try:
+        seconds = epoch_seconds(read_round(text)[0])
+    except ValueError:
+        return [f"# TYPE {GAUGE_READABLE} gauge", f"{GAUGE_READABLE} 0"]
+    return [
+        f"# TYPE {GAUGE_READABLE} gauge",
+        f"{GAUGE_READABLE} 1",
+        *gauge_lines(text, working, seconds),
+    ]

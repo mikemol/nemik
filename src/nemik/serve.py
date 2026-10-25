@@ -69,6 +69,8 @@ from nemik.overlaps import overlaps
 from nemik.pacepublish import metric_lines, read_pace, readable_lines
 from nemik.pacing import limits, paces
 from nemik.queuerows import fleet_queues
+from nemik.roundfile import ROUND_FILE
+from nemik.roundgauges import round_board
 from nemik.runlogs import runs_graph
 from nemik.starved import days_limit, starved_fleet
 from nemik.wake import operator_row, read_liveness, roster
@@ -700,7 +702,7 @@ class Model:
         ).encode()
 
 
-def local(term) -> str:
+def local(term: object) -> str:
     """The last segment of a nemik:/oslc IRI: after '#', '/', or the urn:nemik: prefix."""
     return str(term).removeprefix("urn:nemik:").rsplit("#", 1)[-1].rsplit("/", 1)[-1]
 
@@ -1359,6 +1361,28 @@ def _build_static(
     return written
 
 
+def working_cards(nodes: list[dict[str, object]]) -> dict[str, list[str]]:
+    """Group the cards being worked by repo, for the round gauges (nemik:W1025).
+
+    Args:
+        nodes: The graph document's nodes, each with a repo, a symbol and a state.
+
+    Returns:
+        {repo: the symbols of its cards whose state is working}; a node without both is skipped.
+
+    """
+    out: dict[str, list[str]] = {}
+    for node in nodes:
+        repo, symbol = node.get("repo"), node.get("symbol")
+        if (
+            node.get("state") == "working"
+            and isinstance(repo, str)
+            and isinstance(symbol, str)
+        ):
+            out.setdefault(repo, []).append(symbol)
+    return out
+
+
 def private_files(model: Model, out: Path) -> list[Path]:
     """nemik:W503: what the live server answered beyond the public view, as files: /operator.json,
     /inbound.json and /inbound/<repo>.json (one per repo, empty when nothing waits on it), /graph.ttl,
@@ -1377,12 +1401,13 @@ def private_files(model: Model, out: Path) -> list[Path]:
         return json.dumps(doc, indent=1).encode()
 
     rows = model.doc["inbound"]
+    nodes: list[dict[str, object]] = model.doc["nodes"]
     put("operator.json", dump(model.doc["operator"]))
     # nemik:W978: the landings board, as /landings.json answers it live, from the file in the root
     now = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
     put("landings.json", dump(landings_board(model.root / LANDINGS_FILE, now)))
     put("inbound.json", dump(rows))
-    repos = {str(n["repo"]) for n in model.doc["nodes"] if n["repo"]}
+    repos = {str(n["repo"]) for n in nodes if n["repo"]}
     for repo in sorted(repos | {str(b["blocker"]) for b in rows}):
         put(f"inbound/{repo}.json", dump([b for b in rows if b["blocker"] == repo]))
     # N-Triples, which is Turtle with one triple per line: the same RDF a /graph.ttl reader parses, without
@@ -1395,9 +1420,16 @@ def private_files(model: Model, out: Path) -> list[Path]:
     # nemik:W990: the ratchet pace board and its gauges, from the pace run's file in the root
     pace, pace_lines = pace_board(model.root / PACE_FILE)
     put("ratchet-pace.json", dump(pace))
+    # nemik:W1025: the round gauges, from the published round file and the cards being worked; a
+    # missing or refused file publishes nemik_round_readable at 0, never nothing
+    round_path = model.root / ROUND_FILE
+    round_text = round_path.read_text(encoding="utf-8") if round_path.is_file() else ""
+    round_lines = round_board(round_text, working_cards(nodes))
     put(
         "metrics",
-        model.metrics() + gauge.encode() + "\n".join([*pace_lines, ""]).encode(),
+        model.metrics()
+        + gauge.encode()
+        + "\n".join([*pace_lines, *round_lines, ""]).encode(),
     )
     return made
 
@@ -1422,6 +1454,9 @@ def fleet_key(root: Path) -> str:
     # nemik:W990: and a changed pace file rebuilds the board and the gauges
     if (root / PACE_FILE).is_file():
         digest.update(b"pace\0" + (root / PACE_FILE).read_bytes() + b"\0")
+    # nemik:W1025: and a changed round file rebuilds the round gauges
+    if (root / ROUND_FILE).is_file():
+        digest.update(b"round\0" + (root / ROUND_FILE).read_bytes() + b"\0")
     return digest.hexdigest()
 
 

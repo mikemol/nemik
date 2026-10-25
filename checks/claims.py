@@ -187,6 +187,9 @@ def hub_modules_depend_on_everything_below():
     # rank's order, with their wait and the newer cards ranked ahead of them.
     # nemik:W990: and publishes the ratchet pace board and gauges, through pacepublish, a leaf that
     # rests on hostroot's flat-JSON reader alone.
+    # nemik:W1025: and publishes the round gauges, through roundgauges (a reader of the round file
+    # over pacepublish's timestamp, roundfile's gauge lines and roundof's drift), and names the file
+    # by roundfile's ROUND_FILE.
     expected = {
         "metrics": lower | {"realize", "runlogs", "workrows"},
         "serve": lower
@@ -209,6 +212,8 @@ def hub_modules_depend_on_everything_below():
             "letters",
             "collapse",
             "pacepublish",
+            "roundfile",
+            "roundgauges",
         },
     }
     for hub, want in expected.items():

@@ -6,10 +6,13 @@ from pathlib import Path
 
 import pytest
 
-from nemik.roundgauges import gauge_lines, read_round
+from nemik.pacepublish import epoch_seconds
+from nemik.roundgauges import gauge_lines, read_round, round_board
+from nemik.serve import working_cards
 
 RECORDED = Path(__file__).parent / "fixtures" / "round" / "round.jsonl"
-SECONDS = 1792918800
+SECONDS = 1792886400
+UNREADABLE = ["# TYPE nemik_round_readable gauge", "nemik_round_readable 0"]
 
 
 def test_the_recorded_round_reads_as_each_repos_symbols_in_rank_order() -> None:
@@ -44,3 +47,28 @@ def test_a_file_without_a_stamp_is_refused() -> None:
     """No head line, no round."""
     with pytest.raises(ValueError, match="no as_of"):
         read_round('{"repo": "a", "symbol": "W1", "rank": "1", "salience": "0"}\n')
+
+
+def test_the_board_of_a_readable_round_dates_it_by_its_own_stamp() -> None:
+    """Readable 1, the round's gauges, and as_of in seconds read from the file's head."""
+    lines = round_board(RECORDED.read_text(encoding="utf-8"), {"alpha": ["W5"]})
+    assert lines[:2] == ["# TYPE nemik_round_readable gauge", "nemik_round_readable 1"]
+    assert f"nemik_round_as_of {epoch_seconds('2026-10-25T09:00:00Z')}" in lines
+    assert 'nemik_round_drift{repo="alpha"} 0' in lines
+
+
+def test_a_missing_or_refused_round_file_says_so_and_guesses_nothing() -> None:
+    """Empty text and text with no stamp both publish readable 0 alone, never no gauge."""
+    assert round_board("", {"alpha": ["W5"]}) == UNREADABLE
+    assert round_board("not a round\n", {}) == UNREADABLE
+
+
+def test_the_working_cards_are_grouped_by_repo() -> None:
+    """Only cards in state working, each under its repo; a node missing a field is skipped."""
+    nodes: list[dict[str, object]] = [
+        {"repo": "a", "symbol": "W1", "state": "working"},
+        {"repo": "a", "symbol": "W2", "state": "ready"},
+        {"repo": "b", "symbol": "W3", "state": "working"},
+        {"repo": "a", "state": "working"},
+    ]
+    assert working_cards(nodes) == {"a": ["W1"], "b": ["W3"]}

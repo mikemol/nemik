@@ -132,8 +132,7 @@
  },
  "src/nemik/serve.py": {
   "explicit-any": 5,
-  "misc": 337,
-  "no-untyped-def": 1,
+  "misc": 335,
   "operator": 1,
   "type-arg": 8
  },
@@ -401,8 +400,8 @@
   "misc": 11
  },
  "tests/test_rank.py": {
-  "misc": 116,
-  "no-untyped-def": 3
+  "misc": 58,
+  "no-untyped-def": 2
  },
  "tests/test_rank_apply.py": {
   "misc": 4
