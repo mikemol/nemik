@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1053,
+  "counter": 1054,
   "waypoints": [
     {
       "symbol": "W1",
@@ -24290,12 +24290,12 @@
         "github:W48"
       ],
       "blocked_kind": "agent",
-      "next_bounded_step": "Count landings as commits that cite a card, from git history of each repo whatever path made them, then size the round from landings per gate time; until host card github:W48 converges the commit paths, read git log subjects of the form W<n>: for each repo",
-      "evidence": "2026-10-25: operator, host 695f3e0a line 97048 (relayed by github-8f, not yet verified by me): the commit paths turned into thin wrappers, not clean integration; luthen lands through checks.land, single mikemol-commit calls rather than stacks. Size a round by landings from whatever path, so a repo's N reflects its throughput. Interim floor of three cards is W1041 | 2026-10-25: mtools-ad proposed one landing record for every commit path (mtools:W1969): event landed, refused or withdrawn, repo, sha, cards list, stack, path, gate_s, landed_at, verdict, pushed. My reader (landings.py) accepts event landing only and the flat-JSON reader holds no nested objects, so the word landed and a nested stack would be skipped silently; answered 2026-10-25 with stack as flat keys, only landed counted toward N, refused counted apart as pressure. Finding behind it: mikemol-commit ships the verdict lines only with --ship and no caller passes it, so single-commit landings never reach my file",
+      "next_bounded_step": "When github:W48 says which record the converged commit path writes, size a round by landings per gate time from it, and replace roundof.FLOOR with host admission",
+      "evidence": "2026-10-25: operator, host 695f3e0a line 97048 (relayed by github-8f, not yet verified by me): the commit paths turned into thin wrappers, not clean integration; luthen lands through checks.land, single mikemol-commit calls rather than stacks. Size a round by landings from whatever path, so a repo's N reflects its throughput. Interim floor of three cards is W1041 | 2026-10-25: mtools-ad proposed one landing record for every commit path (mtools:W1969): event landed, refused or withdrawn, repo, sha, cards list, stack, path, gate_s, landed_at, verdict, pushed. My reader (landings.py) accepts event landing only and the flat-JSON reader holds no nested objects, so the word landed and a nested stack would be skipped silently; answered 2026-10-25 with stack as flat keys, only landed counted toward N, refused counted apart as pressure. Finding behind it: mikemol-commit ships the verdict lines only with --ship and no caller passes it, so single-commit landings never reach my file | 2026-10-25: inherits from W1041, which the writer closes on landing (e9712f7): the floor of three cards is a placeholder I chose, not a measured number. Still to do under W1042: round size from what the host admits (capacity), with the landed median as a floor, and landings counted from every commit path",
       "issued_at": "2026-10-25T13:01:10Z",
       "minted_during": "tick",
       "caused_by": "github:W48",
-      "last_worked": "2026-10-25T13:06:48Z",
+      "last_worked": "2026-10-25T16:09:35Z",
       "ticks_blocked": 6,
       "completed": null,
       "manifest": [
@@ -24623,6 +24623,30 @@
           }
         }
       ]
+    },
+    {
+      "symbol": "W1054",
+      "title": "The builder keeps its build cache across rollouts, so a new pod rebuilds only what its inputs changed",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "luthen-observability:W1642"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Ask luthen for a small writable PVC for the builder's cache, mount it with NEMIK_CACHE_DIR pointing at it, then measure a second build's peak memory and CPU against the cold 1.03 GiB and 276 s",
+      "evidence": "2026-10-25: page container_oomkilled_restart, builder, pod nemik-57f45cccd5-9ft6v, 2026-10-25 12:08 EDT, limit 896Mi (request 640Mi), OOMKilled exit 137. Measured by me: on the pod's own /export tree copied out (kubectl cp), nemik-exports peaks at 56 MB and takes 1.3 s; nemik-serve --publish takes 316 s wall, 276 s CPU and peaks at 1,055,216 KB (1.03 GiB), above the limit, so a cold build can exceed it by about 160 MiB. Cgroup working-set series: baseline 527-670 MB in a build, touching 939,524,096 (the limit) repeatedly across at least three image builds, so not new to one change. Twelve ReplicaSets in 7 h 42 min (one per 35-40 minutes), each a fresh builder with an empty cache: the cache is under NEMIK_CACHE_DIR, ~/.cache/nemik by default, and the pod has only a 64Mi memory emptyDir for /tmp and an emptyDir for /srv, which vanish with the pod. From the code, not yet run: cachestore's stamp covers the shapes, the cache code and engine versions, not all of nemik's code, so the SHACL cache could hit across code-only landings; survey_inputs includes every code byte, so the survey-level answer misses on each landing. The nemik-rank SHACL skip (4e934d9) is NOT in the builder's path: nemik-serve uses the checked survey, whose findings the published /check pages need. A cache that survives needs a writable volume that outlives the pod; nemik-export is read-only and luthen's | 2026-10-25: luthen declared the claim as nemik-cache (its W1643, ReadWriteOnce, local-path, 2 GiB, not yet applied). Measured cache: build-caches.pickle 12,052,696 bytes. The builder's cache path is the publish directory's .cache (serve.py), so the mount is /srv/.cache on the builder only. Prepared in the tree and passing the ratchets, NOT submitted: deploy/deployment.yaml and tests/test_deploy_manifest.py; held until luthen says the claim exists (a pod mounting a missing claim stays Pending). Untested: a write by uid 1000 to the local-path directory; and old and new pods with different stamps overwrite each other's cache during a rollout",
+      "issued_at": "2026-10-25T16:23:06Z",
+      "minted_during": "tick",
+      "caused_by": "W1043",
+      "last_worked": "2026-10-25T16:30:41Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "deploy/deployment.yaml",
+        "tests/test_deploy_manifest.py"
+      ],
+      "size_class": "medium"
     }
   ],
   "residue": [
@@ -24778,7 +24802,7 @@
   "heartbeat": "2026-10-22T02:06:35Z",
   "lock": {
     "holder": "claude-nemik",
-    "taken_at": "2026-10-25T15:39:31Z",
+    "taken_at": "2026-10-25T16:09:21Z",
     "pid": 1281447,
     "start": 39974717
   },
@@ -24790,8 +24814,8 @@
       "waypoint": "W924",
       "base_sha": "67eb4a883831b11b5852f5d4c4fce247072ce093",
       "taken_at": "2026-10-23T20:48:07Z",
-      "renewed_at": "2026-10-25T15:39:31Z",
-      "expires_at": "2026-10-25T16:09:31Z"
+      "renewed_at": "2026-10-25T16:09:21Z",
+      "expires_at": "2026-10-25T16:39:21Z"
     },
     {
       "tag": "file:tools/shardselect.py!w",
@@ -24799,8 +24823,8 @@
       "waypoint": "W924",
       "base_sha": "67eb4a883831b11b5852f5d4c4fce247072ce093",
       "taken_at": "2026-10-23T20:48:07Z",
-      "renewed_at": "2026-10-25T15:39:31Z",
-      "expires_at": "2026-10-25T16:09:31Z"
+      "renewed_at": "2026-10-25T16:09:21Z",
+      "expires_at": "2026-10-25T16:39:21Z"
     },
     {
       "tag": "file:tests/conftest.py!w",
@@ -24808,8 +24832,8 @@
       "waypoint": "W924",
       "base_sha": "67eb4a883831b11b5852f5d4c4fce247072ce093",
       "taken_at": "2026-10-23T20:48:07Z",
-      "renewed_at": "2026-10-25T15:39:31Z",
-      "expires_at": "2026-10-25T16:09:31Z"
+      "renewed_at": "2026-10-25T16:09:21Z",
+      "expires_at": "2026-10-25T16:39:21Z"
     },
     {
       "tag": "file:tests/test_shard_select.py!w",
@@ -24817,8 +24841,8 @@
       "waypoint": "W924",
       "base_sha": "67eb4a883831b11b5852f5d4c4fce247072ce093",
       "taken_at": "2026-10-23T20:48:07Z",
-      "renewed_at": "2026-10-25T15:39:31Z",
-      "expires_at": "2026-10-25T16:09:31Z"
+      "renewed_at": "2026-10-25T16:09:21Z",
+      "expires_at": "2026-10-25T16:39:21Z"
     },
     {
       "tag": "file:docs/forecast-features.md!w",
@@ -24856,8 +24880,8 @@
       "waypoint": "W1034",
       "base_sha": "2dfaad2696f866a18689b820c4b3aba541170c6e",
       "taken_at": "2026-10-25T10:45:50Z",
-      "renewed_at": "2026-10-25T15:39:31Z",
-      "expires_at": "2026-10-25T16:09:31Z"
+      "renewed_at": "2026-10-25T16:09:21Z",
+      "expires_at": "2026-10-25T16:39:21Z"
     },
     {
       "tag": "file:tools/codon_census.py!w",
@@ -24865,8 +24889,8 @@
       "waypoint": "W1034",
       "base_sha": "2dfaad2696f866a18689b820c4b3aba541170c6e",
       "taken_at": "2026-10-25T10:45:50Z",
-      "renewed_at": "2026-10-25T15:39:31Z",
-      "expires_at": "2026-10-25T16:09:31Z"
+      "renewed_at": "2026-10-25T16:09:21Z",
+      "expires_at": "2026-10-25T16:39:21Z"
     },
     {
       "tag": "file:tests/test_layout.py!w",
@@ -24875,7 +24899,8 @@
       "base_sha": "3e796f2722c0bafa65e71e1bb7557a00b3e2a644",
       "taken_at": "2026-10-25T15:18:13Z",
       "renewed_at": "2026-10-25T15:18:13Z",
-      "expires_at": "2026-10-25T15:48:13Z"
+      "expires_at": "2026-10-25T15:48:13Z",
+      "lapse_ledgered": true
     },
     {
       "tag": "file:ruff-baseline.json!w",
@@ -24884,7 +24909,8 @@
       "base_sha": "3e796f2722c0bafa65e71e1bb7557a00b3e2a644",
       "taken_at": "2026-10-25T15:18:13Z",
       "renewed_at": "2026-10-25T15:18:13Z",
-      "expires_at": "2026-10-25T15:48:13Z"
+      "expires_at": "2026-10-25T15:48:13Z",
+      "lapse_ledgered": true
     },
     {
       "tag": "file:mypy-baseline.json!w",
@@ -24893,7 +24919,8 @@
       "base_sha": "3e796f2722c0bafa65e71e1bb7557a00b3e2a644",
       "taken_at": "2026-10-25T15:18:13Z",
       "renewed_at": "2026-10-25T15:18:13Z",
-      "expires_at": "2026-10-25T15:48:13Z"
+      "expires_at": "2026-10-25T15:48:13Z",
+      "lapse_ledgered": true
     }
   ],
   "advice": [

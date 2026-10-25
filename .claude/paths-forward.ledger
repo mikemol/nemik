@@ -2316,3 +2316,9 @@
 2026-10-25T15:39:31Z  status W966 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-25T15:47:00Z  tick  W1053 minted    -         "Take linux-sources' two fleet scans, peer_write_window and namespace_collision, as nemik shapes, checked against their live output"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1047
 2026-10-25T15:48:10Z  status W1051 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T16:09:21Z  lease W1014 lapsed    --        "lease on file:tests/test_layout.py!w held by (unlocked) lapsed unrenewed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T16:09:21Z  lease W1014 lapsed    --        "lease on file:ruff-baseline.json!w held by (unlocked) lapsed unrenewed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T16:09:21Z  lease W1014 lapsed    --        "lease on file:mypy-baseline.json!w held by (unlocked) lapsed unrenewed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T16:09:21Z  tick  W1014 advanced  sweep     "first W1014 slice landed 8494261 (ruff -35, mypy -296); second slice (test_calendars, ruff -36, mypy -115) in stack455 gating; W1051 landed c1d1027; W1053 minted for linux-sources fleet scans. I still need to pay down the next family, W1014, wire the round gauges, W1025, and decide W1052's version scheme with luthen. [rolled; advanced 2]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T16:23:06Z  tick  W1054 minted    -         "The builder keeps its build cache across rollouts, so a new pod rebuilds only what its inputs changed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1043
+2026-10-25T16:23:19Z  status W1054 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

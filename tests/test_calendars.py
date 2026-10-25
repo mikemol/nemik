@@ -3,12 +3,25 @@
 """nemik:W157: calendars exported by the helper, read through mikemol-ics, temp files removed."""
 
 import stat
+import subprocess
+from datetime import date
 from pathlib import Path
 
 import installed
 import pytest
+from rdflib import Graph, Literal
 
-from nemik.calendars import occurrences
+from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri
+from nemik.calendars import (
+    Calendar,
+    _venv_ics,
+    days_main,
+    dedupe,
+    event_graph,
+    load_calendars,
+    load_collections,
+    occurrences,
+)
 
 ICS = (
     "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//t//EN\r\n"
@@ -56,7 +69,6 @@ def test_occurrences_are_read_and_the_export_is_deleted(
 def test_a_failed_export_raises_rather_than_reading_as_a_free_day(
     tmp_path: Path, ics: str
 ) -> None:
-    import subprocess
 
     with pytest.raises(subprocess.CalledProcessError):
         occurrences(
@@ -68,7 +80,6 @@ def test_a_failed_export_raises_rather_than_reading_as_a_free_day(
 
 
 def test_config_opts_calendars_in(tmp_path: Path) -> None:
-    from nemik.calendars import load_collections
 
     assert load_collections(tmp_path / "missing.toml") == {}
     p = tmp_path / "calendars.toml"
@@ -80,10 +91,6 @@ def test_config_opts_calendars_in(tmp_path: Path) -> None:
 
 
 def test_events_become_nodes_and_cal_refs_wait_on_the_next_occurrence() -> None:
-    from rdflib import Graph, Literal
-
-    from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri
-    from nemik.calendars import event_graph
 
     occs = [
         {
@@ -123,13 +130,6 @@ def test_operator_lists_the_next_days_with_waiters(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """nemik:W160/W161: nemik-days N, from opted-in calendars only."""
-    from datetime import date
-
-    from rdflib import Graph, Literal
-
-    from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri
-    from nemik.calendars import days_main
-
     monkeypatch.setattr("nemik.calendars.today", lambda: date(2026, 10, 1))
     monkeypatch.setenv(
         "PATH", str(installed._bin()[0]) + ":" + __import__("os").environ["PATH"]
@@ -153,8 +153,6 @@ def test_the_reader_is_found_in_nemiks_own_venv_not_on_path(
     """life-82, 2026-10-02: .venv/bin/nemik-days run without the venv on PATH could not find
     mikemol-ics. The default is the venv's own copy; a missing reader is a stated refusal.
     """
-    from nemik.calendars import _venv_ics
-
     for k, v in installed._bin()[1].items():
         monkeypatch.setenv(k, v)
     monkeypatch.setenv("PATH", "/usr/bin:/bin")  # the venv is not on PATH
@@ -175,8 +173,6 @@ def test_a_refusing_helper_is_reported_not_a_traceback(
     tmp_path: Path, ics: str, capsys: pytest.CaptureFixture[str]
 ) -> None:
     """nemik:W193: the Akonadi helper refuses when Akonadi is not running; nemik-days says so, exit 2."""
-    from nemik.calendars import days_main
-
     h = tmp_path / "helper"
     h.write_text(
         "#!/bin/sh\necho 'ERROR: akonadi is not running on this session bus; refusing to start it from here'\nexit 2\n"
@@ -221,8 +217,6 @@ def test_calendar_entries_take_a_name_or_a_table_and_a_typo_fails(
     """nemik:W190 (life:W31): `label = "Name"` still works; `{ name, include }` adds the filter; an
     unknown key (a typo'd `includes` would silently mean "no filter") and a bad include fail.
     """
-    from nemik.calendars import Calendar, load_calendars, load_collections
-
     p = tmp_path / "calendars.toml"
     p.write_text(
         '[calendars]\nhome = "Personal"\nchores = { name = "Chores", include = ["Mike", "Supper: Pascal"] }\n'
@@ -286,9 +280,6 @@ def test_a_filter_that_matches_nothing_is_reported_not_read_as_a_free_day(
     capsys: pytest.CaptureFixture[str],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    from datetime import date
-
-    from nemik.calendars import days_main
 
     # The window starts today: pin it so the fixture dates stay inside it.
     monkeypatch.setattr("nemik.calendars.today", lambda: date(2026, 10, 1))
@@ -332,8 +323,6 @@ def test_dedupe_merges_across_calendars_never_within_one() -> None:
     """nemik:W191: the same entry in two calendars is one row naming the other; two identical entries
     inside one calendar are two real events; waiters from both copies are kept.
     """
-    from nemik.calendars import dedupe
-
     rows = [
         _row("household", "2026-10-05T09:00", "Trash: Mike", ["life:W9"]),
         _row("main", "2026-10-05T09:00", "Trash: Mike", ["life:W10"]),
@@ -363,9 +352,6 @@ def test_days_dedupes_across_calendars_and_no_dedupe_shows_all(
     capsys: pytest.CaptureFixture[str],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    from datetime import date
-
-    from nemik.calendars import days_main
 
     monkeypatch.setattr("nemik.calendars.today", lambda: date(2026, 10, 1))
     cfg = tmp_path / "calendars.toml"
@@ -391,8 +377,6 @@ def test_writing_is_opt_in_twice_and_a_calendar_is_read_only_by_default(
     tmp_path: Path,
 ) -> None:
     """nemik:W196 (life's ask): `write = true` AND `mirror = [repos]`; either alone is refused."""
-    from nemik.calendars import Calendar, load_calendars
-
     cfg = tmp_path / "calendars.toml"
     cfg.write_text(
         '[calendars]\nplain = "Chores"\n'
