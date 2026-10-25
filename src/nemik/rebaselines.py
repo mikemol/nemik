@@ -27,6 +27,19 @@ DECLARED: list[Declared] = [
             "no failing module was fixed"
         ),
     ),
+    (
+        "linux-sources",
+        "findings/letter-quotes-baseline.tsv",
+        71,
+        18,
+        (
+            "the value is now the sum of the mismatch (2), joined (2) and unjudged (14) columns "
+            "(mtools:W1991's value expression); it was the row count with the header and 60 rows "
+            "carrying no debt, which could not see a paydown; the freeform column holds quote "
+            "lines, not failures, and is excluded; relayed by github-8f from linux-sources:W411, "
+            "not read from that repo's file by nemik (W1071)"
+        ),
+    ),
 ]
 
 
