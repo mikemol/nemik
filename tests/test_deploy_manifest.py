@@ -119,6 +119,15 @@ def test_the_snapshot_is_written_by_the_builder_and_only_read_by_the_server() ->
     assert server_path == _mounts(builder)["snapshots"]["mountPath"]
 
 
+def test_the_builder_keeps_its_cache_on_a_claim_that_outlives_the_pod() -> None:
+    """The cache serve saves under the publish directory is on luthen's claim, builder only."""
+    text = DEPLOYMENT.read_text()
+    server_part, builder_part = text.split("- name: builder")
+    assert "{name: cache, mountPath: /srv/.cache}" in builder_part
+    assert "name: cache" not in server_part, "the server only serves the snapshot"
+    assert "persistentVolumeClaim: {claimName: nemik-cache}" in builder_part
+
+
 def test_the_pod_fits_the_tenant_quota_with_a_surge_pod() -> None:
     """Replicas plus one surge pod, at their limits, stay under the tenant quota."""
     limits = sum(

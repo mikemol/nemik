@@ -95,10 +95,16 @@ spec:
           volumeMounts:
             - {name: export, mountPath: /export, readOnly: true}
             - {name: snapshots, mountPath: /srv}
+            # nemik:W1054: the build cache (about 12 MB) outlives the pod, so a new pod starts warm; a cold
+            # build needs about 1.03 GiB and 276 s of CPU, and one that is killed before it ends saves nothing
+            - {name: cache, mountPath: /srv/.cache}
             - {name: tmp, mountPath: /tmp}
       volumes:
         - name: export
           persistentVolumeClaim: {claimName: nemik-export, readOnly: true}
+        # declared by luthen-observability (its W1643), not here, so a prune of this manifest never deletes it
+        - name: cache
+          persistentVolumeClaim: {claimName: nemik-cache}
         # disk-backed: the published snapshots are not container memory (four at the peak is ~100 MB)
         - name: snapshots
           emptyDir: {sizeLimit: 256Mi}
