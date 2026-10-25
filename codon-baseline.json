@@ -371,6 +371,10 @@
   "as_written": "",
   "stripped": ""
  },
+ "roundgauges": {
+  "as_written": "no module named 'nemik.roundfile'",
+  "stripped": "no module named 'nemik.roundfile'"
+ },
  "roundcli": {
   "as_written": "unsupported operand type(s) for |: 'type[Path]' and 'Optional[T.8]'",
   "stripped": "unsupported operand type(s) for |: 'type[Path]' and 'Optional[T.8]'"
