@@ -2288,3 +2288,18 @@
 2026-10-25T13:12:51Z  status W1043 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-25T13:15:46Z  tick  W1044 minted    -         "Bazel shards a test target across the tests pytest collects; test_pdf runs in three shards"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1039
 2026-10-25T13:16:05Z  status W1044 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T13:39:21Z  prune W982 edge-pruned writer    "mtools:W1918"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T14:15:39Z  tick  W1045 minted    -         "The Codon baseline lists only failing entries, so its ratchet counts failures, not modules"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1034
+2026-10-25T14:15:46Z  status W1045 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T14:19:22Z  status W1044 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T14:19:23Z  status W1043 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T14:19:24Z  status W1039 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T14:19:24Z  status W1045 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T14:24:19Z  tick  W1046 minted    -         "A declared re-baseline restarts a ratchet's pace history, so a change of representation earns no paydown credit"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1045
+2026-10-25T14:24:30Z  status W1046 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T14:24:32Z  status W1045 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T14:26:54Z  tick  W1047 minted    -         "Build the letter courier designed in docs/inbox-as-issues.md: a letter is a GitHub issue, read through nemik-inbound"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W728
+2026-10-25T14:28:07Z  tick  W1048 minted    -         "Courier send path: a letter to a peer is written as a GitHub issue in the peer's private repo"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1047
+2026-10-25T14:28:07Z  tick  W1049 minted    -         "Courier read path: nemik-inbound reads a repo's letters from its issues through the API"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1047
+2026-10-25T14:28:07Z  tick  W1050 minted    -         "Retire every repo's sibling inbox write and read, each with a tombstone"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1047
+2026-10-25T14:44:54Z  status W1045 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
