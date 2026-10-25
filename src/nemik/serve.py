@@ -1662,7 +1662,12 @@ def main(argv: list[str] | None = None) -> None:
     model.hostroot = args.hostroot
     model.landings = args.landings
     model.history_dir = args.history_dir
-    ThreadingHTTPServer((args.bind, args.port), handler(model)).serve_forever()
+    server = ThreadingHTTPServer((args.bind, args.port), handler(model))
+    # nemik:W1060: the bound port is told once the socket listens, so a caller that passed --port 0
+    # learns it from this process and never from a number it picked, closed and hoped to keep.
+    sys.stdout.write(f"listening {server.server_address[1]}\n")
+    sys.stdout.flush()
+    server.serve_forever()
 
 
 if __name__ == "__main__":

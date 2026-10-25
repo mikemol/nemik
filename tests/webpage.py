@@ -8,10 +8,8 @@ are mtools' mikemol.webpage (nemik:W717, W848), re-exported here so the tests ke
 """
 
 import os
-import socket
 import subprocess
 import tempfile
-import time
 from collections.abc import Callable, Iterator
 from contextlib import contextmanager
 from pathlib import Path
@@ -44,6 +42,7 @@ __all__ = [
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
 HTTP_ERROR = 400
+LISTENING_WORDS = 2  # the server's line is "listening" and a port
 CY_READY = "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 1"
 
 
@@ -62,44 +61,41 @@ class Pager(Waitable, Protocol):
 
 
 @contextmanager
-def served(series: Path | None = None) -> Iterator[str]:
-    """nemik-serve over the fixture fleet, on a free port; yields its URL.
+def served(series: Path | None = None, root: Path = FLEET) -> Iterator[str]:
+    """nemik-serve over `root` (the fixture fleet), on a port it binds itself; yields its URL.
 
     `series` is luthen's snapshot file, passed as --series when given (nemik:W669).
 
+    The server is started on port 0 and says "listening <port>" once its socket listens (W1060),
+    so the port is never picked, closed and hoped for: between a pick and a bind another process
+    could take it, and the connect loop that used to follow would have succeeded against that
+    process's server.
+
     Raises:
-        RuntimeError: The server never answered; its stderr is in the message (W1060).
+        RuntimeError: The server did not say it listens; its stderr is in the message.
 
     """
-    with socket.socket() as s:
-        s.bind(("127.0.0.1", 0))
-        port = s.getsockname()[1]
     env = {**installed._bin()[1], "PYTHONHASHSEED": "0"}
     extra = ["--series", str(series)] if series is not None else []
     command = [
         *installed.script("nemik-serve"),
         "--root",
-        str(FLEET),
+        str(root),
         "--port",
-        str(port),
+        "0",
         *extra,
     ]
     with tempfile.TemporaryFile() as log:
-        proc = subprocess.Popen(command, env=env, stdout=subprocess.DEVNULL, stderr=log)
+        proc = subprocess.Popen(command, env=env, stdout=subprocess.PIPE, stderr=log)
         try:
-            for _ in range(100):
-                try:
-                    socket.create_connection(("127.0.0.1", port), timeout=0.2).close()
-                    break
-                except OSError:
-                    time.sleep(0.1)
-            else:
+            told = proc.stdout.readline().decode().split() if proc.stdout else []
+            if len(told) != LISTENING_WORDS or told[0] != "listening":
                 log.seek(0)
                 message = (
-                    f"nemik-serve never answered on port {port}: {log.read().decode()}"
+                    f"nemik-serve did not say it listens: {told}: {log.read().decode()}"
                 )
                 raise RuntimeError(message)
-            yield f"http://127.0.0.1:{port}/"
+            yield f"http://127.0.0.1:{told[1]}/"
         finally:
             proc.terminate()
             proc.wait()

@@ -337,7 +337,7 @@
   "misc": 62
  },
  "tests/test_layout.py": {
-  "misc": 417,
+  "misc": 412,
   "no-untyped-def": 36
  },
  "tests/test_letter_resolves.py": {
@@ -519,7 +519,7 @@
   "no-untyped-def": 2
  },
  "tests/test_web_render.py": {
-  "misc": 36,
+  "misc": 24,
   "no-untyped-def": 2
  },
  "tests/test_withheld.py": {
@@ -554,7 +554,7 @@
  },
  "tests/webpage.py": {
   "explicit-any": 1,
-  "misc": 13
+  "misc": 7
  },
  "tools/check_run_rows.py": {
   "misc": 12

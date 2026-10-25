@@ -6,13 +6,10 @@ by another waypoint's shape (the operator's occlusion report, nemik:W77).
 
 import json
 import os
-import socket
-import subprocess
-import time
 from pathlib import Path
 
-import installed
 import pytest
+from webpage import served
 
 sync_api = pytest.importorskip("playwright.sync_api")
 
@@ -48,36 +45,10 @@ def _queue(root: Path, repo: str, n: int) -> None:
 def server(tmp_path):
     _queue(tmp_path, "alpha", 40)
     _queue(tmp_path, "beta", 25)
-    with socket.socket() as s:
-        s.bind(("127.0.0.1", 0))
-        port = s.getsockname()[1]
-    proc = installed.popen(
-        "nemik-serve",
-        "--root",
-        str(tmp_path),
-        "--port",
-        str(port),
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-    )
-    # Wait for the server to listen, up to a minute: under host memory pressure (2026-10-12, swap
-    # full) its start took over the old 5 s and the browser met a refused connection. Never yield a
-    # server that is not up: fail here, naming why.
-    deadline = time.monotonic() + 60
-    while True:
-        try:
-            socket.create_connection(("127.0.0.1", port), timeout=0.2).close()
-            break
-        except OSError:
-            if proc.poll() is not None or time.monotonic() > deadline:
-                proc.kill()
-                pytest.fail(
-                    f"nemik-serve did not listen on {port} (exit {proc.poll()})"
-                )
-            time.sleep(0.1)
-    yield f"http://127.0.0.1:{port}/"
-    proc.terminate()
-    proc.wait()
+    # nemik:W1060: the server binds its own port and says so (webpage.served), and a server that
+    # dies before it listens fails here with its stderr, not after a wait for a clock.
+    with served(root=tmp_path) as url:
+        yield url
 
 
 OVERLAPS = """() => {

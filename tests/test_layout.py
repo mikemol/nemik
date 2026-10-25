@@ -12,14 +12,13 @@ is compared by reading two files, not by re-deriving a harness.
 
 import json
 import os
-import socket
 import subprocess
 import time
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-import installed
 import pytest
+from webpage import served
 
 if TYPE_CHECKING:
     from playwright.sync_api import Browser, Page, Playwright
@@ -129,25 +128,9 @@ METRICS = """() => {
 
 @pytest.fixture(scope="module")
 def server():
-    with socket.socket() as s:
-        s.bind(("127.0.0.1", 0))
-        port = s.getsockname()[1]
-    env = {**installed._bin()[1], "PYTHONHASHSEED": "0"}
-    proc = subprocess.Popen(
-        [*installed.script("nemik-serve"), "--root", str(FLEET), "--port", str(port)],
-        env=env,
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-    )
-    for _ in range(100):
-        try:
-            socket.create_connection(("127.0.0.1", port), timeout=0.2).close()
-            break
-        except OSError:
-            time.sleep(0.1)
-    yield f"http://127.0.0.1:{port}/"
-    proc.terminate()
-    proc.wait()
+    # nemik:W1060: the server binds its own port and says so (webpage.served), not a picked one.
+    with served() as url:
+        yield url
 
 
 NODE_OVERLAPS = """() => {

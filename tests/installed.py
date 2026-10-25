@@ -45,3 +45,19 @@ def run(
 
 def popen(name: str, *args: str, **kw) -> subprocess.Popen:
     return subprocess.Popen([*script(name), *args], env=_bin()[1], **kw)
+
+
+def announced(name: str, *args: str) -> list[str]:
+    """nemik:W1060: run a script, read the first line it writes to stdout, stop it.
+
+    Returns:
+        The line's words; an empty list when it wrote none (it exited first).
+
+    """
+    proc: subprocess.Popen[bytes] = popen(
+        name, *args, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL
+    )
+    told = proc.stdout.readline().decode().split() if proc.stdout else []
+    proc.terminate()
+    proc.wait()
+    return told
