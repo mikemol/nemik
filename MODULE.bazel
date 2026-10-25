@@ -61,6 +61,20 @@ vendored_wheel(
     wheel = "//:vendor/wheels/mikemol_fence-0.1.0+57b9f2a-py3-none-any.whl",
 )
 
+# nemik:W1027: mtools' ratchet (mikemol-ratchet, the census) and its one dependency atomicwrite, at the
+# same sha, so the gate can send nemik's own ratchet values (mtools:W1909, W1927). Built by hand from a
+# git archive of 57b9f2a with the local version +57b9f2a, as mikemol-repin --revendor builds the others;
+# that mode has no row for these two dists yet (mtools:W1928 templates the adoption from this pilot).
+vendored_wheel(
+    name = "ratchet",
+    wheel = "//:vendor/wheels/mikemol_ratchet-0.1.0+57b9f2a-py3-none-any.whl",
+)
+
+vendored_wheel(
+    name = "atomicwrite",
+    wheel = "//:vendor/wheels/mikemol_atomicwrite-0.1.0+57b9f2a-py3-none-any.whl",
+)
+
 # nemik:W417: mtools' rulerseq (mikemol.rulerseq, mtools:W1048), at the same sha: the ruler-sequence
 # patterns for halo rings and blocker lines, computed server-side (W418) instead of ported in the page.
 vendored_wheel(

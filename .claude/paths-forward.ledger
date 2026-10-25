@@ -2229,3 +2229,8 @@
 2026-10-25T02:48:47Z  status W996 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-25T02:56:40Z  status W1027 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-25T03:12:35Z  tick  W1028 minted    -         "Port the page's combine step to the core once the documents' schema is fixed: take the next pure function from W815's inventory and call it through core.wasm"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W812
+2026-10-25T03:39:52Z  status W1016 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T03:39:58Z  status W996 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T03:39:58Z  status W997 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T03:40:02Z  tick  W1024 advanced  unblock   "W996 landed afcd5ab and marked done, W997 unblocked; stacks 434 (W1027) and 435 (W1024) gating; W1016 returned to ready. I still need to write the W997 pace file writer, W997. [blocked by W997]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T03:44:55Z  interrupt W1029 minted    -         "Repin the mtools wheels to 999e49b7 or later (W1941: a stack carries its queue files automatically); mikemol-repin --revendor, dry run first"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f:W1941

@@ -311,6 +311,14 @@ wheels = [
 ]
 
 [[package]]
+name = "mikemol-atomicwrite"
+version = "0.1.0+57b9f2a"
+source = { path = "vendor/wheels/mikemol_atomicwrite-0.1.0+57b9f2a-py3-none-any.whl" }
+wheels = [
+    { filename = "mikemol_atomicwrite-0.1.0+57b9f2a-py3-none-any.whl", hash = "sha256:441966a1475cd938358c31fe875909980fc656f8d5d1c49932fdfd1af728c8f3" },
+]
+
+[[package]]
 name = "mikemol-converge"
 version = "0.1.0+0f8267e"
 source = { path = "vendor/wheels/mikemol_converge-0.1.0+0f8267e-py3-none-any.whl" }
@@ -423,6 +431,20 @@ wheels = [
 ]
 
 [[package]]
+name = "mikemol-ratchet"
+version = "0.1.0+57b9f2a"
+source = { path = "vendor/wheels/mikemol_ratchet-0.1.0+57b9f2a-py3-none-any.whl" }
+dependencies = [
+    { name = "mikemol-atomicwrite" },
+]
+wheels = [
+    { filename = "mikemol_ratchet-0.1.0+57b9f2a-py3-none-any.whl", hash = "sha256:21c7810351d8157626c14e4f6170f709e16076f988195322d3b0b8a1fb64db2b" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "mikemol-atomicwrite" }]
+
+[[package]]
 name = "mikemol-rulerseq"
 version = "0.1.0+57b9f2a"
 source = { path = "vendor/wheels/mikemol_rulerseq-0.1.0+57b9f2a-py3-none-any.whl" }
@@ -500,12 +522,14 @@ name = "nemik"
 version = "0.0.0"
 source = { editable = "." }
 dependencies = [
+    { name = "mikemol-atomicwrite" },
     { name = "mikemol-converge" },
     { name = "mikemol-fence" },
     { name = "mikemol-frontier" },
     { name = "mikemol-hooks" },
     { name = "mikemol-icsstruct" },
     { name = "mikemol-pathsforward" },
+    { name = "mikemol-ratchet" },
     { name = "mikemol-rulerseq" },
     { name = "pyshacl" },
     { name = "python-dateutil" },
@@ -533,12 +557,14 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "mikemol-atomicwrite", path = "vendor/wheels/mikemol_atomicwrite-0.1.0+57b9f2a-py3-none-any.whl" },
     { name = "mikemol-converge", path = "vendor/wheels/mikemol_converge-0.1.0+0f8267e-py3-none-any.whl" },
     { name = "mikemol-fence", path = "vendor/wheels/mikemol_fence-0.1.0+57b9f2a-py3-none-any.whl" },
     { name = "mikemol-frontier", path = "vendor/wheels/mikemol_frontier-0.1.0+57b9f2a-py3-none-any.whl" },
     { name = "mikemol-hooks", path = "vendor/wheels/mikemol_hooks-0.1.0+57b9f2a-py3-none-any.whl" },
     { name = "mikemol-icsstruct", path = "vendor/wheels/mikemol_icsstruct-0.1.0+57b9f2a-py3-none-any.whl" },
     { name = "mikemol-pathsforward", path = "vendor/wheels/mikemol_pathsforward-0.1.0+57b9f2a-py3-none-any.whl" },
+    { name = "mikemol-ratchet", path = "vendor/wheels/mikemol_ratchet-0.1.0+57b9f2a-py3-none-any.whl" },
     { name = "mikemol-rulerseq", path = "vendor/wheels/mikemol_rulerseq-0.1.0+57b9f2a-py3-none-any.whl" },
     { name = "paperkit", marker = "extra == 'docs'", git = "https://github.com/mikemol/paperkit.git?rev=b5877102af3b48005fde814416bff5b8f06ba5cd" },
     { name = "pyshacl", specifier = ">=0.26" },

@@ -69,6 +69,17 @@ if ! out=$(env PYTHONPATH="$wt/src" .venv/bin/mikemol-pycheck --ratchet "$wt" 2>
     echo "gate_staged: the ratchet fails with the package importable from src (the image installs it editable): commit refused" >&2
     exit 1
 fi
+# nemik:W1027 (the pilot for mtools:W1928): send nemik's ratchet values as mikemol.ratchet.value, one
+# gauge per ratchet file per gate run, so the pace (W987) is computable from the store. NOTHING HERE CAN
+# CHANGE THE VERDICT: an absent tool or a failed send is said and ignored. The name is the repo's own,
+# never the snapshot directory's (which labelled every series `tree`), and the census reads the tree
+# being gated. The tools come from nemik's own vendored mtools wheels (mikemol-ratchet, mikemol-hooks).
+emit_tool="$wt/.venv/bin/mikemol-ratchet-emit"
+if [ -x "$emit_tool" ]; then
+    RATCHET_BIN="$wt/.venv/bin/mikemol-ratchet" "$emit_tool" "$(basename "$real_root")" "$wt" || echo "gate_staged: mikemol-ratchet-emit failed; no ratchet values sent" >&2
+else
+    echo "gate_staged: mikemol-ratchet-emit is not in the gate's venv; no ratchet values sent" >&2
+fi
 # nemik:W821: the page's wasm is built from Python by tools/build_wasm.sh and committed with its hash
 # (docs/wasm-pipeline.md). Rebuild it from the staged tree and compare: a core change without its
 # rebuilt core.wasm, or a hand edit of the binary, is refused. The host's LLVM is not hermetic, so
