@@ -2308,3 +2308,9 @@
 2026-10-25T14:54:09Z  tick  W1052 minted    -         "A shared file's writer never emits a form its deployed readers refuse"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1025
 2026-10-25T15:11:27Z  status W1052 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-25T15:11:38Z  tick  W1052 advanced  collapse  "class card W1052 for writer-ahead-of-reader; first list of the five shared files written. Stacks 452 and 453 gating. I still need to decide the version scheme with luthen, W1052, work W1014, and wire the round gauges, W1025. [blocked by W1025]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T15:13:02Z  status W1046 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T15:13:02Z  status W1045 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T15:18:13Z  status W1014 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T15:18:27Z  status W968 blocked>done writer    "blocked -> done"
+2026-10-25T15:39:31Z  prune W966 edge-pruned writer    "nemik:W968"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T15:39:31Z  status W966 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
