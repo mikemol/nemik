@@ -14,10 +14,12 @@ A missing checkout, a tool that fails or prints something else, and a slow answe
 
 from __future__ import annotations
 
+import http.client
 import json
 import os
 import subprocess
 import sys
+import urllib.parse
 from pathlib import Path
 
 from nemik.check import default_root
@@ -25,6 +27,9 @@ from nemik.check import default_root
 LUTHEN = "luthen-observability"
 QUERY_TIMEOUT_SECONDS = 10
 VLOGS_TIMEOUT_SECONDS = 30
+EXPORT_TIMEOUT_SECONDS = 60
+# how far back the ratchet series reach: far more gate runs than one pace window
+EXPORT_SINCE = "30d"
 VLOGS_LIMIT = 2000  # a ship is ~330 lines; hours of refreshes still fit
 PORT_NAMES = {
     "NEMIK_VM_URL": "vmsingle-http",
@@ -108,6 +113,55 @@ def vlogs_lines(query: str, root: Path, limit: int = VLOGS_LIMIT) -> list[str]:
         message = f"vlogs_query exited {done.returncode}"
         raise OSError(message)
     return done.stdout.splitlines()
+
+
+def vm_export(match: str, root: Path, since: str = EXPORT_SINCE) -> str:
+    """Read the metric store's raw export of a selector, one sample as written per gate run.
+
+    Args:
+        match: The series selector, e.g. {__name__="mikemol.ratchet.value"}.
+        root: The directory holding the luthen-observability checkout, whose endpoints_query names
+            the store's address.
+        since: How far back to read, as a relative duration like 30d.
+
+    Returns:
+        The export's text, one JSON object per series per line.
+
+    Raises:
+        OSError: When the store's address cannot be found, or it cannot be reached or answers badly.
+
+    """
+    base = declared_base("vmsingle-http", root)
+    if base is None:
+        message = f"no vmsingle-http address from the {LUTHEN} checkout under {root}"
+        raise OSError(message)
+    query = urllib.parse.urlencode({"match[]": match, "start": f"-{since}"})
+    connection = http.client.HTTPConnection(
+        urllib.parse.urlsplit(base).netloc, timeout=EXPORT_TIMEOUT_SECONDS
+    )
+    try:
+        status, body = _get(connection, f"/api/v1/export?{query}")
+    except (http.client.HTTPException, ValueError) as error:
+        message = f"the store's export could not be read: {error}"
+        raise OSError(message) from error
+    finally:
+        connection.close()
+    if status != http.client.OK:
+        message = f"the store's export answered {status}"
+        raise OSError(message)
+    return body
+
+
+def _get(connection: http.client.HTTPConnection, target: str) -> tuple[int, str]:
+    """GET a path on an open connection.
+
+    Returns:
+        (the status code, the body decoded as UTF-8).
+
+    """
+    connection.request("GET", target)
+    reply = connection.getresponse()
+    return reply.status, reply.read().decode("utf-8")
 
 
 def export_defaults() -> list[str]:

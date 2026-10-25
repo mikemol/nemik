@@ -22,7 +22,7 @@ import sys
 from datetime import UTC, datetime
 from pathlib import Path
 
-from nemik.endpoint import vlogs_lines
+from nemik.endpoint import vlogs_lines, vm_export
 from nemik.hostroot import HostRow, latest, records
 from nemik.landings import document as landings_document
 from nemik.landings import records as landings_records
@@ -40,6 +40,7 @@ DEFAULT_OUT = CACHE / "host-root.json"
 LANDINGS_OUT = CACHE / "landings.json"
 LOG_OUT = CACHE / "log-activities.json"
 PACE_OUT = CACHE / "ratchet-pace.json"
+RATCHET_SELECTOR = '{__name__="mikemol.ratchet.value"}'
 
 
 def _quoted(text: str) -> str:
@@ -60,6 +61,7 @@ class _Options(argparse.Namespace):
     landings: bool
     log_activities: bool
     answer: Path | None
+    pace: bool
 
 
 def row_json(row: HostRow) -> str:
@@ -162,9 +164,55 @@ def pace_file(source: Path, target: Path | None, stamp: str) -> int:
         0 when written; 1 when the answer cannot be read or is not a successful matrix.
 
     """
-    out = target or PACE_OUT
     try:
         answer = source.read_text(encoding="utf-8")
+    except OSError as error:
+        sys.stderr.write(f"nemik-hostroot: {error}\n")
+        return 1
+    return _judge(answer, target or PACE_OUT, stamp)
+
+
+def pace_fetch(root: Path, target: Path | None, stamp: str) -> int:
+    """Read the ratchet series from the metric store and write the pace file (nemik:W1032).
+
+    Args:
+        root: The directory holding the luthen-observability checkout, which names the store.
+        target: Where to write the pace file, or None for the cache directory's.
+        stamp: When this run reads the store, a UTC stamp.
+
+    Returns:
+        0 when written; 1 when the store cannot be reached or holds no ratchet series, the old
+        file kept.
+
+    """
+    try:
+        answer = vm_export(RATCHET_SELECTOR, root)
+    except OSError as error:
+        sys.stderr.write(f"nemik-hostroot: {error}\n")
+        return 1
+    return _judge(answer, target or PACE_OUT, stamp)
+
+
+def pace_run(options: _Options, stamp: str) -> int:
+    """Write the pace file from a stored answer when one is named, else from the store.
+
+    Returns:
+        0 when written; 1 when it could not be.
+
+    """
+    if options.answer is not None:
+        return pace_file(options.answer, options.out, stamp)
+    return pace_fetch(options.root, options.out, stamp)
+
+
+def _judge(answer: str, out: Path, stamp: str) -> int:
+    """Judge an answer against the last pace file and replace it whole.
+
+    Returns:
+        0 when written; 1 when the answer is not a readable set of series.
+
+    """
+    try:
         previous = out.read_text(encoding="utf-8") if out.is_file() else ""
         text = pace_document(answer, previous, stamp)
     except (OSError, TypeError, ValueError) as error:
@@ -219,10 +267,15 @@ def main(argv: list[str] | None = None) -> int:
         default=None,
         help="write the ratchet pace file (ratchet-pace.json) from this stored range-query answer",
     )
+    parser.add_argument(
+        "--pace",
+        action="store_true",
+        help="read the ratchet series from the metric store and write the pace file instead",
+    )
     options = parser.parse_args(argv, namespace=_Options())
     stamp = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
-    if options.answer is not None:
-        return pace_file(options.answer, options.out, stamp)
+    if options.pace or options.answer is not None:
+        return pace_run(options, stamp)
     if options.landings:
         return landings(options, stamp)
     if options.log_activities:
