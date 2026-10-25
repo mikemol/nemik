@@ -16,7 +16,9 @@ exports_files(["pyproject.toml"])
         # property runs five of them beside five twins.
         size = "large" if src in ("tests/test_layout.py", "tests/test_codon_census.py", "tests/test_warm_equals_cold.py", "tests/test_shaclinc.py", "tests/test_cache_user.py") else "medium",
         # nemik:W1044: six browser PDF prints; run alone it passed, in the full gate it timed out at 300 s
-        shard_count = 3 if src == "tests/test_pdf.py" else 1,
+        # nemik:W1061: test_modes alone takes 190 s of its 300 s timeout, and test_layout 296 s of 900 s
+        # but timed out at 900 s in a loaded gate, so both run in three as well
+        shard_count = 3 if src in ("tests/test_pdf.py", "tests/test_modes.py", "tests/test_layout.py") else 1,
         args = ["$(rootpath " + src + ")", "-c", "$(rootpath pyproject.toml)"],
         data = [src, "tests/installed.py", "tests/webpage.py", "tests/pagetext.py", "tests/conftest.py", "tools/cpuline.py", ".claude/settings.json", "//tests/fixtures:fleet", "pyproject.toml", "ARCHITECTURE.md", "skills/nemik/SKILL.md", "docs/positioning.md", "deploy/deployment.yaml", "src/nemik/data/workflows.toml", "tools/nemik_client.py", "BUILD.bazel", "Containerfile", ".forgejo/workflows/build.yml"] + glob(["tests/corpus/**"]) + [ "src/nemik/data/shapes.ttl", "src/nemik/data/nemik.ttl", "src/nemik/data/wcag.rego", "src/nemik/data/run-row.schema.json", ":.venv", "@opa//file", "@use_of_colour_rego//file", "@chromium//:files", "@chromium//:chrome-headless-shell"]
             # nemik:W445: the JRE (52 MB) and MPXJ's jars go to the one test that reads with them
