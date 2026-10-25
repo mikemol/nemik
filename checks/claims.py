@@ -214,6 +214,7 @@ def hub_modules_depend_on_everything_below():
             "pacepublish",
             "roundfile",
             "roundgauges",
+            "buildcost",
         },
     }
     for hub, want in expected.items():

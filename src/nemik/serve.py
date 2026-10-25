@@ -39,6 +39,7 @@ from rdflib.namespace import DCTERMS, PROV
 
 from nemik.adapter import BASE, NEMIK, OPERATOR, OSLC_CM, bind, ledger_graph
 from nemik.blocks import inbound, operator_asks, ref
+from nemik.buildcost import build_cost_lines, peak_kib_of
 from nemik.check import (
     LEDGER,
     QUEUE,
@@ -1425,11 +1426,18 @@ def private_files(model: Model, out: Path) -> list[Path]:
     round_path = model.root / ROUND_FILE
     round_text = round_path.read_text(encoding="utf-8") if round_path.is_file() else ""
     round_lines = round_board(round_text, working_cards(nodes))
+    # nemik:W1064: what this build has cost so far, as gauges: the builder is a fresh process on
+    # every pass, so its peak is the cost of one build and the series shows whether it grows
+    status = Path("/proc/self/status")
+    status_text = status.read_text(encoding="utf-8") if status.is_file() else ""
+    cost_lines = build_cost_lines(
+        peak_kib_of(status_text), int(time.process_time() * 1000)
+    )
     put(
         "metrics",
         model.metrics()
         + gauge.encode()
-        + "\n".join([*pace_lines, *round_lines, ""]).encode(),
+        + "\n".join([*pace_lines, *round_lines, *cost_lines, ""]).encode(),
     )
     return made
 

@@ -2336,3 +2336,13 @@
 2026-10-25T17:50:48Z  tick  W1061 minted    -         "Shard test_modes into three: alone it takes 190 s of its 300 s timeout"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1044
 2026-10-25T17:50:54Z  status W1061 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-25T18:07:47Z  tick  W1062 minted    -         "A card cited by a queued commit stack counts as in progress in the rank and the round"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1059
+2026-10-25T18:48:05Z  tick  W1063 minted    -         "A test's time bound is CPU time, not wall clock, so an oversubscribed host cannot time a test out"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1044
+2026-10-25T19:05:27Z  status W1059 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T19:05:28Z  status W1061 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T19:05:30Z  status W1025 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T19:05:30Z  status W1026 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T19:09:20Z  tick  W1025 advanced  collapse  "stack459 landed (db626c9, 78cbaa4, 0669ade): the round includes working cards, the server publishes round gauges, test_layout and test_modes sharded; W1063 class card for wall-clock timeouts, W1060 flake waypoint, W1062 inGate plan. I still need to build W1062, mount the builder cache and measure a second build once luthen's claim exists, W1054, and measure per-shard times under load, W1063. [blocked by W1054]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T19:31:27Z  interrupt W1064 minted    -         "The builder publishes its own peak memory and CPU per build as gauges, so the cost is a series"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1054
+2026-10-25T19:35:36Z  status W1064 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T19:41:35Z  tick  W1065 minted    -         "Answer nemik: linux-sources:W385 is done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-10-25-nemik-edge-linux-sources-W385-enables-W880.md
+2026-10-25T19:41:35Z  tick  W1066 minted    -         "Answer nemik: mtools:W1503 is done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-10-25-nemik-edge-mtools-W1503-enables-W613.md
