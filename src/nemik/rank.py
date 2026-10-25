@@ -634,7 +634,8 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         raise SystemExit(1 if why.startswith("invalid") else 0)
     if g is None:
         g = Graph()
-        for _, qg, _ in survey(args.root):
+        # nemik:W1043: ranking reads the graphs only; the findings (SHACL) go unused
+        for _, qg, _ in survey(args.root, check=False):
             if qg is not None:
                 g += qg
     weights = load_weights()
