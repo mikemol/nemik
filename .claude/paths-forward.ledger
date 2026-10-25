@@ -2267,3 +2267,12 @@
 2026-10-25T10:16:28Z  status W1029 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-25T10:33:20Z  status W1029 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-25T10:45:50Z  status W1034 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T11:09:55Z  tick  W1035 minted    -         "Measure per-test Bazel targets: how many tests nemik collects, and the analysis and startup cost of a scratch package of that size"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W925
+2026-10-25T11:09:55Z  tick  W1036 minted    -         "Write tools/gen_test_targets.py: one Bazel target per test node id into a BUILD file per tests package"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W925
+2026-10-25T11:09:55Z  tick  W1037 minted    -         "Change venv_pytest.sh so a per-test target runs file::test"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W925
+2026-10-25T11:10:12Z  status W1036 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T11:10:13Z  status W1037 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T11:10:22Z  status W1035 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T11:12:02Z  tick  W1035 advanced  unblock   "W925 (rank 1 of the live round) atomized into W1035 to W1037; test count measured: 1452 collected plus five files the bare interpreter cannot load. Round and pace files confirmed live in the export tree and on the pod. I still need to time Bazel on a 1500-target scratch package, W1035, publish the round gauges, W1025, and fix roundcli's datetime import, W1034. [blocked by W1036]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T11:19:35Z  interrupt W1038 minted    -         "Carry mtools' guessed flag through the pace: treat every row as advisory until the label is live, then read it from the export"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1032
+2026-10-25T11:19:40Z  status W1038 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

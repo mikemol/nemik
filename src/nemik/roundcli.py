@@ -11,7 +11,7 @@ nemik:W1025: round_document writes every repo's round as the round file (roundfi
 """
 
 import sys
-from datetime import UTC, datetime
+import time
 from pathlib import Path
 
 from nemik.landings import read_document
@@ -101,7 +101,11 @@ def write_round_file(
         path: Where the round file goes.
 
     """
-    stamp = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
+    now = time.gmtime()
+    stamp = (
+        f"{now.tm_year:04}-{now.tm_mon:02}-{now.tm_mday:02}"
+        f"T{now.tm_hour:02}:{now.tm_min:02}:{now.tm_sec:02}Z"
+    )
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(".tmp")
     temporary.write_text(round_document(by_repo, landings, stamp), encoding="utf-8")
