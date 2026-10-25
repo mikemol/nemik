@@ -3,158 +3,158 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1029 · heartbeat 2026-10-22T02:06:35Z · job `1d7fe6d0` · hash `v2:fae7db1e1e40abb4`
+counter 1029 · heartbeat 2026-10-22T02:06:35Z · job `1d7fe6d0` · hash `v2:8ac97d8eda83846f`
 
 | # | symbol | status |
 |---|---|---|
 | 1 | W997 | working |
-| 2 | W1027 | working |
-| 3 | W1002 | ready |
-| 4 | W1014 | ready |
-| 5 | W1025 | ready |
-| 6 | W925 | ready |
-| 7 | W982 | ready |
-| 8 | W1016 | ready |
-| 9 | W1020 | ready |
-| 10 | W1022 | ready |
-| 11 | W902 | ready |
-| 12 | W910 | ready |
-| 13 | W911 | ready |
-| 14 | W975 | ready |
-| 15 | W976 | ready |
-| 16 | W1028 | ready |
-| 17 | W750 | ready |
-| 18 | W751 | ready |
-| 19 | W981 | ready |
-| 20 | W642 | ready |
-| 21 | W730 | ready |
-| 22 | W733 | ready |
-| 23 | W768 | ready |
-| 24 | W846 | ready |
-| 25 | W904 | ready |
-| 26 | W913 | ready |
-| 27 | W1029 | ready |
-| 28 | W991 | blocked |
-| 29 | W993 | blocked |
-| 30 | W994 | blocked |
-| 31 | W986 | blocked |
-| 32 | W1007 | blocked |
-| 33 | W1008 | blocked |
-| 34 | W1009 | blocked |
-| 35 | W1010 | blocked |
-| 36 | W1026 | blocked |
-| 37 | W534 | blocked |
-| 38 | W508 | blocked |
-| 39 | W516 | blocked |
-| 40 | W352 | blocked |
-| 41 | W353 | blocked |
-| 42 | W500 | blocked |
-| 43 | W511 | blocked |
-| 44 | W188 | blocked |
-| 45 | W224 | blocked |
-| 46 | W47 | blocked |
-| 47 | W461 | blocked |
-| 48 | W490 | blocked |
-| 49 | W491 | blocked |
-| 50 | W581 | blocked |
-| 51 | W423 | blocked |
-| 52 | W567 | blocked |
-| 53 | W569 | blocked |
-| 54 | W700 | blocked |
-| 55 | W908 | blocked |
-| 56 | W1017 | blocked |
-| 57 | W283 | blocked |
-| 58 | W286 | blocked |
-| 59 | W287 | blocked |
-| 60 | W289 | blocked |
-| 61 | W292 | blocked |
-| 62 | W294 | blocked |
-| 63 | W295 | blocked |
-| 64 | W297 | blocked |
-| 65 | W369 | blocked |
-| 66 | W370 | blocked |
-| 67 | W424 | blocked |
-| 68 | W564 | blocked |
-| 69 | W568 | blocked |
-| 70 | W575 | blocked |
-| 71 | W578 | blocked |
-| 72 | W579 | blocked |
-| 73 | W580 | blocked |
-| 74 | W643 | blocked |
-| 75 | W693 | blocked |
-| 76 | W709 | blocked |
-| 77 | W788 | blocked |
-| 78 | W789 | blocked |
-| 79 | W837 | blocked |
-| 80 | W909 | blocked |
-| 81 | W926 | blocked |
-| 82 | W927 | blocked |
-| 83 | W938 | blocked |
-| 84 | W966 | blocked |
-| 85 | W967 | blocked |
-| 86 | W969 | blocked |
-| 87 | W970 | blocked |
-| 88 | W1018 | blocked |
-| 89 | W1021 | blocked |
-| 90 | W1023 | blocked |
-| 91 | W506 | blocked |
-| 92 | W563 | blocked |
-| 93 | W674 | blocked |
-| 94 | W675 | blocked |
-| 95 | W680 | blocked |
-| 96 | W708 | blocked |
-| 97 | W749 | blocked |
-| 98 | W852 | blocked |
-| 99 | W877 | blocked |
-| 100 | W879 | blocked |
-| 101 | W880 | blocked |
-| 102 | W881 | blocked |
-| 103 | W963 | blocked |
-| 104 | W968 | blocked |
-| 105 | W980 | blocked |
-| 106 | W17 | blocked |
-| 107 | W282 | blocked |
-| 108 | W346 | blocked |
-| 109 | W364 | blocked |
-| 110 | W422 | blocked |
-| 111 | W459 | blocked |
-| 112 | W486 | blocked |
-| 113 | W512 | blocked |
-| 114 | W517 | blocked |
-| 115 | W561 | blocked |
-| 116 | W570 | blocked |
-| 117 | W571 | blocked |
-| 118 | W613 | blocked |
-| 119 | W691 | blocked |
-| 120 | W695 | blocked |
-| 121 | W735 | blocked |
-| 122 | W743 | blocked |
-| 123 | W764 | blocked |
-| 124 | W781 | blocked |
-| 125 | W812 | blocked |
-| 126 | W899 | blocked |
-| 127 | W905 | blocked |
-| 128 | W914 | blocked |
-| 129 | W922 | blocked |
-| 130 | W923 | blocked |
-| 131 | W934 | blocked |
-| 132 | W941 | blocked |
-| 133 | W964 | blocked |
-| 134 | W979 | blocked |
-| 135 | W984 | blocked |
-| 136 | W985 | blocked |
-| 137 | W987 | done |
-| 138 | W988 | done |
-| 139 | W989 | done |
-| 140 | W990 | done |
-| 141 | W995 | done |
-| 142 | W996 | done |
-| 143 | W1003 | done |
-| 144 | W1006 | done |
-| 145 | W1011 | done |
-| 146 | W1012 | done |
-| 147 | W1015 | done |
-| 148 | W1024 | done |
+| 2 | W1002 | ready |
+| 3 | W1014 | ready |
+| 4 | W1025 | ready |
+| 5 | W925 | ready |
+| 6 | W982 | ready |
+| 7 | W1016 | ready |
+| 8 | W1020 | ready |
+| 9 | W1022 | ready |
+| 10 | W902 | ready |
+| 11 | W910 | ready |
+| 12 | W911 | ready |
+| 13 | W975 | ready |
+| 14 | W976 | ready |
+| 15 | W1028 | ready |
+| 16 | W750 | ready |
+| 17 | W751 | ready |
+| 18 | W981 | ready |
+| 19 | W642 | ready |
+| 20 | W730 | ready |
+| 21 | W733 | ready |
+| 22 | W768 | ready |
+| 23 | W846 | ready |
+| 24 | W904 | ready |
+| 25 | W913 | ready |
+| 26 | W1029 | ready |
+| 27 | W991 | blocked |
+| 28 | W993 | blocked |
+| 29 | W994 | blocked |
+| 30 | W986 | blocked |
+| 31 | W1007 | blocked |
+| 32 | W1008 | blocked |
+| 33 | W1009 | blocked |
+| 34 | W1010 | blocked |
+| 35 | W1026 | blocked |
+| 36 | W534 | blocked |
+| 37 | W508 | blocked |
+| 38 | W516 | blocked |
+| 39 | W352 | blocked |
+| 40 | W353 | blocked |
+| 41 | W500 | blocked |
+| 42 | W511 | blocked |
+| 43 | W188 | blocked |
+| 44 | W224 | blocked |
+| 45 | W47 | blocked |
+| 46 | W461 | blocked |
+| 47 | W490 | blocked |
+| 48 | W491 | blocked |
+| 49 | W581 | blocked |
+| 50 | W423 | blocked |
+| 51 | W567 | blocked |
+| 52 | W569 | blocked |
+| 53 | W700 | blocked |
+| 54 | W908 | blocked |
+| 55 | W1017 | blocked |
+| 56 | W283 | blocked |
+| 57 | W286 | blocked |
+| 58 | W287 | blocked |
+| 59 | W289 | blocked |
+| 60 | W292 | blocked |
+| 61 | W294 | blocked |
+| 62 | W295 | blocked |
+| 63 | W297 | blocked |
+| 64 | W369 | blocked |
+| 65 | W370 | blocked |
+| 66 | W424 | blocked |
+| 67 | W564 | blocked |
+| 68 | W568 | blocked |
+| 69 | W575 | blocked |
+| 70 | W578 | blocked |
+| 71 | W579 | blocked |
+| 72 | W580 | blocked |
+| 73 | W643 | blocked |
+| 74 | W693 | blocked |
+| 75 | W709 | blocked |
+| 76 | W788 | blocked |
+| 77 | W789 | blocked |
+| 78 | W837 | blocked |
+| 79 | W909 | blocked |
+| 80 | W926 | blocked |
+| 81 | W927 | blocked |
+| 82 | W938 | blocked |
+| 83 | W966 | blocked |
+| 84 | W967 | blocked |
+| 85 | W969 | blocked |
+| 86 | W970 | blocked |
+| 87 | W1018 | blocked |
+| 88 | W1021 | blocked |
+| 89 | W1023 | blocked |
+| 90 | W506 | blocked |
+| 91 | W563 | blocked |
+| 92 | W674 | blocked |
+| 93 | W675 | blocked |
+| 94 | W680 | blocked |
+| 95 | W708 | blocked |
+| 96 | W749 | blocked |
+| 97 | W852 | blocked |
+| 98 | W877 | blocked |
+| 99 | W879 | blocked |
+| 100 | W880 | blocked |
+| 101 | W881 | blocked |
+| 102 | W963 | blocked |
+| 103 | W968 | blocked |
+| 104 | W980 | blocked |
+| 105 | W17 | blocked |
+| 106 | W282 | blocked |
+| 107 | W346 | blocked |
+| 108 | W364 | blocked |
+| 109 | W422 | blocked |
+| 110 | W459 | blocked |
+| 111 | W486 | blocked |
+| 112 | W512 | blocked |
+| 113 | W517 | blocked |
+| 114 | W561 | blocked |
+| 115 | W570 | blocked |
+| 116 | W571 | blocked |
+| 117 | W613 | blocked |
+| 118 | W691 | blocked |
+| 119 | W695 | blocked |
+| 120 | W735 | blocked |
+| 121 | W743 | blocked |
+| 122 | W764 | blocked |
+| 123 | W781 | blocked |
+| 124 | W812 | blocked |
+| 125 | W899 | blocked |
+| 126 | W905 | blocked |
+| 127 | W914 | blocked |
+| 128 | W922 | blocked |
+| 129 | W923 | blocked |
+| 130 | W934 | blocked |
+| 131 | W941 | blocked |
+| 132 | W964 | blocked |
+| 133 | W979 | blocked |
+| 134 | W984 | blocked |
+| 135 | W985 | blocked |
+| 136 | W987 | done |
+| 137 | W988 | done |
+| 138 | W989 | done |
+| 139 | W990 | done |
+| 140 | W995 | done |
+| 141 | W996 | done |
+| 142 | W1003 | done |
+| 143 | W1006 | done |
+| 144 | W1011 | done |
+| 145 | W1012 | done |
+| 146 | W1015 | done |
+| 147 | W1024 | done |
+| 148 | W1027 | done |
 | 149 | W999 | done |
 | 150 | W1004 | done |
 | 151 | W105 | done |
@@ -1021,241 +1021,234 @@ counter 1029 · heartbeat 2026-10-22T02:06:35Z · job `1d7fe6d0` · hash `v2:fae
 1. **W997** (working) Write the pace file from the verdicts, with the series used (entry count or sum) in each row
    - next: Judge each series with ratchetpace, carry the stored requirement forward so it only rises, and write the pace
      file lines pacepublish reads
-2. **W1027** (working) nemik's own gate sends mikemol.ratchet.value for nemik's ratchets: the pre-commit calls
-   mikemol-ratchet-emit after the verdict with the repo name, with the ratchet dist's census available, and never
-   changes the verdict
-   - next: Find how the vendored hooks wheel exposes mikemol-ratchet-emit (the module is present at 57b9f2a, the script
-     is not in the venv's bin), vendor the ratchet dist for the census (RATCHET_BIN), and add the call to the gate after
-     the verdict as mtools' pre-commit does, saying and ignoring a failure; check that repo=nemik series appear in the
-     store after the next landing
-3. **W1002** (ready) The count of ready cards past the learned age bound is a ratchet on the pace board, so a repo whose
+2. **W1002** (ready) The count of ready cards past the learned age bound is a ratchet on the pace board, so a repo whose
    stale-ready count is not falling lands only commits that close, block, drop or advance stale cards
    - next: Count each repo's ready cards past the learned age bound and give the count to the pace judgement as a
      ratchet series named by the stale-ready measure, published on the pace board and gauges beside the file ratchets;
      the gate refusal reads it like any other
-4. **W1014** (ready) Split the composite assertions that remain in twelve test files without adding an Any-typed
+3. **W1014** (ready) Split the composite assertions that remain in twelve test files without adding an Any-typed
    expression, so the mypy count does not rise
    - next: Offset the split's mypy rise in the heaviest test file with a typed reader for its page.evaluate results, so
      the per-line Any findings fall by more than the split adds
-5. **W1025** (ready) Round drift: the share of a repo's working set outside its round, published as a metric on the pace
+4. **W1025** (ready) Round drift: the share of a repo's working set outside its round, published as a metric on the pace
    board and gauges
    - next: Count the working cards of a repo that sit outside its round, divide by its working cards, and publish the
      share as a gauge beside the pace gauges; the gate reads it like the ratchet verdict
-6. **W925** (ready) A generator writes one Bazel target per test from pytest's collection, into hierarchical BUILD files
+5. **W925** (ready) A generator writes one Bazel target per test from pytest's collection, into hierarchical BUILD files
    - next: After W928: first MEASURE, as mtools' own exhaustive-sharding card says: how many tests nemik has (pytest
      --collect-only), what Bazel analysis and per-target startup cost at that count (a scratch package of the same
      size), and whether luthen's gate series (mikemol.gate.target.*) can carry a label per test; then a generator that
      writes a BUILD file per tests package, one target per test node id, each with the data its test reaches (importdag
      when mtools has it); the venv_pytest.sh args become file::test. Atomize when the measurement is in
-7. **W982** (ready) Retro records enter the graph from a durable file, so the nine retro shapes judge real retros and
+6. **W982** (ready) Retro records enter the graph from a durable file, so the nine retro shapes judge real retros and
    not only fixtures
    - blocked on: mtools:W1918
    - next: Decide the form of a durable retro record (a separate list, not a card kind) with mtools, since the queue
      schema is theirs; then read it into the graph and judge a fixture retro file with the nine shapes
-8. **W1016** (ready) A nemik tool traces one test run with the footprint audit and writes the declared reads for nemik's
+7. **W1016** (ready) A nemik tool traces one test run with the footprint audit and writes the declared reads for nemik's
    modules
    - next: Write readstrace: trace one test, drop .venv, __pycache__ and directories, map opens to repo-relative .py and
      data files, and list them per test as the candidate reads; run it over one test target first, then a sample
-9. **W1020** (ready) The builder container skips the rebuild when the inputs' hash is unchanged, with a before and after
+8. **W1020** (ready) The builder container skips the rebuild when the inputs' hash is unchanged, with a before and after
    CPU reading
    - next: Make the builder container's loop skip nemik-serve --publish when the content hash of the export tree is
      unchanged since the last build, then take a CPU reading over a measured interval against the 0.862 core baseline on
      W764
-10. **W1022** (ready) The page fetches the host-root board and maps its rows to nodes of a read-only host lane (state,
+9. **W1022** (ready) The page fetches the host-root board and maps its rows to nodes of a read-only host lane (state,
    waitsFor, id)
    - next: Fetch the host-root board in the served page only, and draw each row as a node of a read-only host lane using
      adapter.resource_uri for its id, with state mapped to the node states and waitsFor to edges and no rank weight
-11. **W902** (ready) Decide whether the web view itself should draw vector: measure an SVG renderer against the canvas
+10. **W902** (ready) Decide whether the web view itself should draw vector: measure an SVG renderer against the canvas
    at the fleet's size
    - next: Measure an SVG drawing of the web view against the canvas at the fleet's size (graphSvg of the fleet is 2.4
      MB, 5300 paths, 1800 texts): load, pan and zoom cost in Chromium and Firefox; write docs/vector-web-view.md with
      the numbers and a recommendation
-12. **W910** (ready) Survey PROV-O, PROV-DM, AIF, SEPIO, ECO, nanopublications, Carneades and ClaimReview with sources,
+11. **W910** (ready) Survey PROV-O, PROV-DM, AIF, SEPIO, ECO, nanopublications, Carneades and ClaimReview with sources,
    naming for each gap what we could adopt
    - next: Read each standard's primary source and cite it; one paragraph each; for every gap name the tool or
      vocabulary we could adopt (a pinned library, an ontology to import, a SHACL shape set). Needs WebFetch
-13. **W911** (ready) Survey SRE, agile and observability practice for claims and evidence (OTel semantic conventions,
+12. **W911** (ready) Survey SRE, agile and observability practice for claims and evidence (OTel semantic conventions,
    OpenSLO, Sloth, postmortem templates, definition of done) with sources and what we could adopt
    - next: The operator said (line 91591) not to forget our grounding in SRE, agile and observability. github-8f's
      reading, derived: SLOs as claims, SLIs as grounds, error budgets as qualifiers, postmortems and PRR checklists as
      backing; definition of done as the done-claim's warrant; OTel semconv and exemplars as the grounds channel. Survey
      OTel semconv, OpenSLO, Sloth and postmortem templates with sources and fold the matches into W910's gap table.
      Needs WebFetch
-14. **W975** (ready) Page combine step reads the umbrellas list
+13. **W975** (ready) Page combine step reads the umbrellas list
    - next: Make the page fetch the published umbrella rows (id, blockers, enables, card, address) once W973 lands
-15. **W976** (ready) Port nemik.critical (slack and the longest chain) to plain Card edges, held to the rdflib version
+14. **W976** (ready) Port nemik.critical (slack and the longest chain) to plain Card edges, held to the rdflib version
    in a test
    - next: Port the slack and longest-chain computation of nemik.critical to plain card edges in a module with no
      import, held to the rdflib version on a fixture; critical_cards already takes plain Cards, so start by listing what
      it still reads from rdflib
-16. **W1028** (ready) Port the page's combine step to the core once the documents' schema is fixed: take the next pure
+15. **W1028** (ready) Port the page's combine step to the core once the documents' schema is fixed: take the next pure
    function from W815's inventory and call it through core.wasm
    - next: Read the documents' schema the combine step takes, write it as plain-data functions under src/nemik/core that
      compile under the pinned Codon, and have the page call them through core.wasm
-17. **W750** (ready) Improve the climate: date each practice change as an intervention and measure the shift in a before
+16. **W750** (ready) Improve the climate: date each practice change as an intervention and measure the shift in a before
    and after window
    - next: From now send one intervention per practice change (atomize, stack, shard, repin) when it happens, and write
      the before and after windows in docs/climate-interventions.md as each matures, starting with the
      2026-10-21T02:14:31Z repin as the first window. The metric side (mikemol.waypoint.event) is not yet read back
-18. **W751** (ready) Observations live feed: switch W744's observations from the git backfill to the
+17. **W751** (ready) Observations live feed: switch W744's observations from the git backfill to the
    mikemol.waypoint.event stream
    - next: After the image with the landings board is installed on the pod, fetch the board from the pod and confirm it
      answers host true; record the readback here
-19. **W981** (ready) Pay down the mypy baseline (6302): retire the most numerous finding kind in the files I touch most,
+18. **W981** (ready) Pay down the mypy baseline (6302): retire the most numerous finding kind in the files I touch most,
    and lower the recorded count
    - next: Total the mypy baseline by file, pick the file with the most findings among those edited most, remove its
      findings by typing, and record the lower count
-20. **W642** (ready) Cache store under concurrent readers: test two writers on one dir, sweep stray temp files a killed
+19. **W642** (ready) Cache store under concurrent readers: test two writers on one dir, sweep stray temp files a killed
    run leaves, and keep the traceback tail
    - next: mtools:W1497 landed: the hook now reports the last three non-empty stderr lines of a failed run. Next time
      the hook says COULD NOT RUN, copy those lines onto this card and fix what they name; I saw one such report on
      2026-10-19 (exited 1: Traceback) before reading it with the new lines and could not reproduce it by hand
      (nemik-check ran clean right after), so look for the half-updated install or a mid-write kill the card already
      lists
-21. **W730** (ready) A check that the venv's installed nemik matches the source tree, so a profile or tool cannot
+20. **W730** (ready) A check that the venv's installed nemik matches the source tree, so a profile or tool cannot
    silently run old code
    - next: A command that compares each src/nemik module's text with the installed copy's and exits nonzero naming the
      stale ones; test with a temp site dir. Must compile under Codon (probe first)
-22. **W733** (ready) Run the gate's bazel through the admission wrapper mikemol-bazel-admit
+21. **W733** (ready) Run the gate's bazel through the admission wrapper mikemol-bazel-admit
    - next: After mtools:W1714: invoke bazel in tools/gate_staged.sh through mikemol-bazel-admit (an admission line
      naming megabytes for the bazel verb must then show in a gate's output); nemik's gate calls /usr/bin/bazel directly
      today
-23. **W768** (ready) The Codon census compiles only the modules whose source changed: key each probe's verdict on the
+22. **W768** (ready) The Codon census compiles only the modules whose source changed: key each probe's verdict on the
    module's content, the modules it imports and the pinned compiler
    - next: Decide between a persistent verdict store and one Bazel census target per module over the import closure; the
      second follows the operator's cache direction and needs the committed import graph
-24. **W846** (ready) test_modes failed once with 'Uncaught ReferenceError: popLater is not defined' at page load, then
+23. **W846** (ready) test_modes failed once with 'Uncaught ReferenceError: popLater is not defined' at page load, then
    passed on rerun of the same tree: find why a head script's definition can be missing when index.html's wiring runs
    - next: Read the failed test log and the page's script load order; reproduce by loading the page repeatedly under
      load; look for a head script served incomplete or the load-time wiring running before the script that defines
      popLater
-25. **W904** (ready) The vector PDF of the fleet view is 24 MB, because Chromium flattens each dashed edge into segments
+24. **W904** (ready) The vector PDF of the fleet view is 24 MB, because Chromium flattens each dashed edge into segments
    - next: Measured 2026-10-23: the dashes alone are the size (24.7 MB with them, 0.66 MB without, whole-page Chromium
      print); straight lines instead of curves still 22 MB; cairo's rsvg-convert (2.62.3, on the host) writes the graph
      SVG as a 0.44 MB PDF with native dashes. Options: print the page chrome from Chromium with the graph hidden and the
      graph from rsvg-convert, then overlay (needs a PDF tool), or send the graph PDF and the panels as two files; decide
      with the operator which reads best on a phone
-26. **W913** (ready) A nemik witness that is already true when its card is minted is refused, and a witness may carry a
+25. **W913** (ready) A nemik witness that is already true when its card is minted is refused, and a witness may carry a
    freshness bound
    - next: Design first: at --add a witness is evaluated once and a true verdict is a defect (a check in nemik-check for
      a ready or blocked witnessed card whose witness holds on today's facts); then an optional fresh_since bound. Read
      witnesses.open_witnesses and the W59 check before editing
-27. **W1029** (ready) Repin the mtools wheels to 999e49b7 or later (W1941: a stack carries its queue files
+26. **W1029** (ready) Repin the mtools wheels to 999e49b7 or later (W1941: a stack carries its queue files
    automatically); mikemol-repin --revendor, dry run first
-28. **W991** (blocked) Wire the real ratchet value series from mtools into the pace computation
-   - blocked on: W997, W1027
+27. **W991** (blocked) Wire the real ratchet value series from mtools into the pace computation
+   - blocked on: W997
    - next: Read the ratchet value series for a repo from luthen's metric store by the name the endpoint tool resolves,
      order it by gate run, and write the pace file ratchetpace's verdict fills in; start by finding the series' query
      form
-29. **W993** (blocked) nemik-rank lifts the paydown cards of a repo that is behind to the front of its ranking, reading
+28. **W993** (blocked) nemik-rank lifts the paydown cards of a repo that is behind to the front of its ranking, reading
    the pace file
    - blocked on: W991
    - next: Read the pace file once W991 fixes where it lives, and apply the lift to nemik-rank's output and its
      next-card choice
-30. **W994** (blocked) The adapter reads the pace file into the graph as behindOn facts on each workstream, so the
+29. **W994** (blocked) The adapter reads the pace file into the graph as behindOn facts on each workstream, so the
    paydown shape judges real repos
    - blocked on: W991
    - next: Once W991 fixes where the pace file lives, read it and set behindOn for each repo's behind ratchets while the
      graph is built
-31. **W986** (blocked) A ratchet paydown rate requirement with teeth: a repo is behind when a ratchet's fall over a
+30. **W986** (blocked) A ratchet paydown rate requirement with teeth: a repo is behind when a ratchet's fall over a
    trailing window of landed commits is below a requirement that only rises
    - blocked on: W991, W993, W994, W1002
-32. **W1007** (blocked) The open-commitment count per repo, from mtools' commitment ledger, is a ratchet on the pace
+31. **W1007** (blocked) The open-commitment count per repo, from mtools' commitment ledger, is a ratchet on the pace
    board and gauges
    - blocked on: mtools:W1933
    - next: When mtools publishes its commitment ledger, count each repo's open commitments into a series, judge it like
      a file ratchet, and publish it on the pace board and gauges; the gate refusal reads it
-33. **W1008** (blocked) A shape warns on an open commitment that names a card of this repo whose evidence is no newer
+32. **W1008** (blocked) A shape warns on an open commitment that names a card of this repo whose evidence is no newer
    than the statement
    - blocked on: mtools:W1933
    - next: When mtools publishes its commitment ledger, read each open commitment that names a card of this repo into
      the graph, and warn when the card's evidence is no newer than the statement
-34. **W1009** (blocked) A shape warns on a G0 intent older than the learned bound that no landing has delta-checked
+33. **W1009** (blocked) A shape warns on a G0 intent older than the learned bound that no landing has delta-checked
    - blocked on: mtools:W1933
    - next: When mtools emits each turn's G0 intents with their later delta, warn on an intent older than the learned
      bound that has no landing delta
-35. **W1010** (blocked) A shape warns on a retro record with zero sustain rows
+34. **W1010** (blocked) A shape warns on a retro record with zero sustain rows
    - blocked on: W982
    - next: Raise the sustain finding from Info to a Warning for a retro with zero sustain rows, once retro records are
      read into the graph (W982)
-36. **W1026** (blocked) The pace board publishes nemik_ready_overdue{repo}: the repo's ready cards past the learned age
+35. **W1026** (blocked) The pace board publishes nemik_ready_overdue{repo}: the repo's ready cards past the learned age
    bound, a cleanup count beside the round gauges
    - blocked on: W1025
    - next: Count each repo's ready cards past the learned age bound with the same arithmetic nemik-check --ready-neither
      uses, publish it as the gauge nemik_ready_overdue labelled by repo beside the round gauges, and treat it as a
      cleanup count, not demand
-37. **W534** (blocked) One run-row schema for apply, reaper and nudge ledgers: ts, run id, trigger, verdict, detail,
+36. **W534** (blocked) One run-row schema for apply, reaper and nudge ledgers: ts, run id, trigger, verdict, detail,
    inputs digest
    - blocked on: luthen-observability:W1089
    - next: Publish the run-row shape for the five run logs only (W556), then migrate apply-set-runs first (W557)
-38. **W508** (blocked) Every computation the view needs runs over plain Card data, so it can run in the browser
+37. **W508** (blocked) Every computation the view needs runs over plain Card data, so it can run in the browser
    - blocked on: W976
    - next: Umbrella: inventory done (c97c9ba and this commit); W713 (rank port) and W714 (blocks flags port) remain;
      salience, critical and health follow after them
-39. **W516** (blocked) Withholding semantics live in the owning repos: each repo exports only publishable data and the
+38. **W516** (blocked) Withholding semantics live in the owning repos: each repo exports only publishable data and the
    nemik pod mounts only that export
    - blocked on: W877, W879, W880, W881
    - next: Each repo repins, flags its listed cards, runs --export once and tells nemik (W877 gabion, W878 estate, W879
      el-openglo, W880 linux-sources, W881 substrate; mtools-ad for mtools); when all have an equal withheld set, tell
      luthen-observability, which retires its v1 list on that word, keeping the pod fail-closed
-40. **W352** (blocked) Liveness board: which repos had workable cards while asleep
+39. **W352** (blocked) Liveness board: which repos had workable cards while asleep
    - blocked on: luthen-observability:W1295
    - next: After the ship (W636): read the pod's wake.json back for series.board true with luthen's repos; then close
-41. **W353** (blocked) Token cost per card: tokens attributed through the ledger lines that used the card
+40. **W353** (blocked) Token cost per card: tokens attributed through the ledger lines that used the card
    - blocked on: luthen-observability:W1295
    - next: Per-card: mtools:W1546 adds session=`<uuid>` to the ledger line (mtools-ad asked whether session.own() is the
      transcript UUID; I think the lock holder is a name, told them); then join it to luthen's session label. Pod
      readback of series tokens after the ship (W636)
-42. **W500** (blocked) nemik process grows from 312 MiB to the 768Mi container limit within an hour of each start and is
+41. **W500** (blocked) nemik process grows from 312 MiB to the 768Mi container limit within an hour of each start and is
    OOMKilled: find what grows and bound it
    - blocked on: W575
    - next: W502 first: nemik-serve --serve DIR as a file server with no model and no rdflib import
-43. **W511** (blocked) Each repo publishes its own piece, and what it withholds is its own choice at the source
+42. **W511** (blocked) Each repo publishes its own piece, and what it withholds is its own choice at the source
    - blocked on: W516
    - next: After W516's writer-side emission exists: each repo's export is its Source (docs/federation.md); decide with
      mtools and luthen who serves it
-44. **W188** (blocked) Tasks read-back from Google itself (KGAPI fetch with the resource's account), so a write is
+43. **W188** (blocked) Tasks read-back from Google itself (KGAPI fetch with the resource's account), so a write is
    confirmed by a fetch, not the helper's exit or Akonadi's cache
    - blocked on: operator: act provide a read-only Google Tasks API token for the read-back helper (operator ruling
      2026-10-09: they will supply their own); no credential is used before it is given
-45. **W224** (blocked) Nested workstreams: nemik resolves, cites and ranks a workstream that contains others, such as
+44. **W224** (blocked) Nested workstreams: nemik resolves, cites and ranks a workstream that contains others, such as
    the host queue above every repo
    - blocked on: mtools
    - next: Once mtools' citation grammar accepts `<parent>`/`<child>`:W`<n>`: discover queues at depth in
      check.workstream_files, name each by its relative path, and add a nested fixture test. No parent weight aggregation
      (operator ruling 2026-10-09).
-46. **W47** (blocked) Dormant watch: when aeternum (W26), gabion (W11, W14), sre-troubleshooting (W3) or amr-skills
+45. **W47** (blocked) Dormant watch: when aeternum (W26), gabion (W11, W14), sre-troubleshooting (W3) or amr-skills
    (W76, letter in inbox) wakes, nudge or verify its unstated operator blocks
    - blocked on: gabion:W11, gabion:W14, sre-troubleshooting
    - next: Each tick: nemik-wake --json; on a wake event for one of the three, message it citing its `<repo>`:W`<n>`
-47. **W461** (blocked) Apply resources as nemik nodes: read luthen's host root published as a queue-shaped document,
+46. **W461** (blocked) Apply resources as nemik nodes: read luthen's host root published as a queue-shaped document,
    read-only, in nemik-serve
    - blocked on: , W789
    - next: When the stream has lines: read it through the endpoint name (nemik.endpoint), map each id through
      adapter.resource_uri, ingest as a read-only workstream in the view and shapes only, no rank weights
-48. **W490** (blocked) Advice as graph nodes: each deterministic advisory gets a node with its resolution derived from
+47. **W490** (blocked) Advice as graph nodes: each deterministic advisory gets a node with its resolution derived from
    the world (acted, rejected with reason, ignored)
    - blocked on: W500
    - next: after W500: read each queue's advice list (nemik.cards-style reader) into advice nodes with (tool, rule,
      repo, subject); resolution open/rejected/applied comes from the row's status, not inferred; then the nemik-check
      rows as a second source
-49. **W491** (blocked) Goals as a node type: declared, not inferred from 'nothing open follows it', realized when all
+48. **W491** (blocked) Goals as a node type: declared, not inferred from 'nothing open follows it', realized when all
    its children are, weighted by graph salience
    - blocked on: W461
    - next: today rank.goals infers a goal (an open card nothing open in its repo follows) and sorts by cross-repo
      weight, so an operator goal nobody else waits on (mtools:W1143) sorts last at 0; a goal type published by its owner
      (W461's federation), realized = all children realized (W488's derivation), its weight from W486's graph salience;
      --goals shows its open count, workable frontier and critical path (as computed for W1143 by hand today)
-50. **W581** (blocked) Wait age into rank: a blocked edge's age (in the waiting repo's ticks) adds to its blocker's
+49. **W581** (blocked) Wait age into rank: a blocked edge's age (in the waiting repo's ticks) adds to its blocker's
    salience; an SLA breach is a priority band
    - blocked on: W700
    - next: Umbrella: W699 (age adds to salience) and W700 (SLO-derived band) land first
-51. **W423** (blocked) Spike 1: pieces.split/assemble in the py2many typed subset, transpiled to TypeScript, replacing
+50. **W423** (blocked) Spike 1: pieces.split/assemble in the py2many typed subset, transpiled to TypeScript, replacing
    index.html graphText(); conformance corpus run on both
    - blocked on: W564
    - next: Transpile half waits on mtools:W1070 (websubset gate), W1071 (py2many), W1072 (runner), W1073 (harness); then
      rewrite pieces.py in the subset, run the TS side over tests/corpus/pieces, delete index.html graphText()
-52. **W567** (blocked) Codon paydown 1: @dataclass(frozen=True) in cards churn flow projection salience score, in a form
+51. **W567** (blocked) Codon paydown 1: @dataclass(frozen=True) in cards churn flow projection salience score, in a form
    Codon accepts
    - blocked on: operator: decide how a class is written so one source runs under CPython and Codon: (A) plain annotated
      class with explicit __init__ and generated __eq__/__hash__, valid in both but no frozen, (B) a Codon-only .codon
@@ -1264,7 +1257,7 @@ counter 1029 · heartbeat 2026-10-22T02:06:35Z · job `1d7fe6d0` · hash `v2:fae
    - next: Operator decision on how a class is written for both interpreters: (A) plain annotated class with explicit
      __init__ and generated __eq__/__hash__ (valid in both, no frozen), (B) Codon-only .codon core with @tuple, or (C) a
      shim. Until then do not touch the six modules.
-53. **W569** (blocked) Codon paydown 3: keyword-only marker '*,' in alarm calendars hostapply rank wake witwait
+52. **W569** (blocked) Codon paydown 3: keyword-only marker '*,' in alarm calendars hostapply rank wake witwait
    conflicts with ruff's FBT001
    - blocked on: operator: decide whether the 5 boolean keyword-only parameters in hostapply, rank and calendars become
      two-member enums so the 7 bare '*,' markers can go (Codon rejects the marker, ruff's FBT rules require it for
@@ -1272,80 +1265,80 @@ counter 1029 · heartbeat 2026-10-22T02:06:35Z · job `1d7fe6d0` · hash `v2:fae
    - next: Operator decision: take option (b), enums for the five booleans and plain positional-or-keyword for the rest?
      If yes, a codemod does the marker removal, the five booleans are hand-converted, tests run, codon-baseline.json
      lowered.
-54. **W700** (blocked) W581 part 2: the SLA breach priority band is derived from the wait SLO and its error budget, not
+53. **W700** (blocked) W581 part 2: the SLA breach priority band is derived from the wait SLO and its error budget, not
    a tick count
    - blocked on: operator: decide the cross-repo wait SLO (target fraction of waits answered within what age) and its
      error budget; the breach band derives from it (W579 bar, relayed by github-8f 2026-10-16)
    - next: After the SLO is stated: band = burn rate of the budget over the wait ages; add to salience as a band above
      ordinary work
-55. **W908** (blocked) Survey PROV-O, PROV-DM, AIF, SEPIO, ECO, nanopublications, Carneades and ClaimReview, citing
+54. **W908** (blocked) Survey PROV-O, PROV-DM, AIF, SEPIO, ECO, nanopublications, Carneades and ClaimReview, citing
    sources, for what each gives that the model lacks (docs/evidence-standards.md)
    - blocked on: W910, W911
    - next: Read each standard's primary source (W3C PROV-O and PROV-DM, AIF, SEPIO, ECO, nanopublication and
      micropublication papers, Carneades, schema.org ClaimReview) and cite it. Per the operator's purpose (line 91566):
      for each gap name the existing tool or vocabulary we could adopt (a pinned library, an ontology to import, a SHACL
      shape set), not only a comparison table. Needs WebFetch
-56. **W1017** (blocked) stackable.pick uses the cone relation to chain or separate cards, tested on two cards whose
+55. **W1017** (blocked) stackable.pick uses the cone relation to chain or separate cards, tested on two cards whose
    cones intersect
    - blocked on: W1016
    - next: Make stackable.pick chain a card behind another whose files sit in its cone and separate cards whose cones
      intersect, using the cones module over the committed graph and reads
-57. **W283** (blocked) Fold aeternum's inbox into waypoints: nemik-check --letters --fold --repo aeternum --older-than
+56. **W283** (blocked) Fold aeternum's inbox into waypoints: nemik-check --letters --fold --repo aeternum --older-than
    14, apply the mv for the stale, claim or mint a card for each live letter
    - blocked on: aeternum
    - next: Run the command in aeternum's tick, apply the printed mv lines (archive), mint the printed --add for each
      live letter, then report done to nemik:W282.
-58. **W286** (blocked) Fold gabion's inbox into waypoints: nemik-check --letters --fold --repo gabion --older-than 14,
+57. **W286** (blocked) Fold gabion's inbox into waypoints: nemik-check --letters --fold --repo gabion --older-than 14,
    apply the mv for the stale, claim or mint a card for each live letter
    - blocked on: gabion
    - next: Run the command in gabion's tick, apply the printed mv lines (archive), mint the printed --add for each live
      letter, then report done to nemik:W282.
-59. **W287** (blocked) Fold gcalculus's inbox into waypoints: nemik-check --letters --fold --repo gcalculus --older-than
+58. **W287** (blocked) Fold gcalculus's inbox into waypoints: nemik-check --letters --fold --repo gcalculus --older-than
    14, apply the mv for the stale, claim or mint a card for each live letter
    - blocked on: gcalculus
    - next: Run the command in gcalculus's tick, apply the printed mv lines (archive), mint the printed --add for each
      live letter, then report done to nemik:W282.
-60. **W289** (blocked) Fold life's inbox into waypoints: nemik-check --letters --fold --repo life --older-than 14, apply
+59. **W289** (blocked) Fold life's inbox into waypoints: nemik-check --letters --fold --repo life --older-than 14, apply
    the mv for the stale, claim or mint a card for each live letter
    - blocked on: life
    - next: Run the command in life's tick, apply the printed mv lines (archive), mint the printed --add for each live
      letter, then report done to nemik:W282.
-61. **W292** (blocked) Fold mtools's inbox into waypoints: nemik-check --letters --fold --repo mtools --older-than 14,
+60. **W292** (blocked) Fold mtools's inbox into waypoints: nemik-check --letters --fold --repo mtools --older-than 14,
    apply the mv for the stale, claim or mint a card for each live letter
    - blocked on: mtools
    - next: Run the command in mtools's tick, apply the printed mv lines (archive), mint the printed --add for each live
      letter, then report done to nemik:W282.
-62. **W294** (blocked) Fold resumes's inbox into waypoints: nemik-check --letters --fold --repo resumes --older-than 14,
+61. **W294** (blocked) Fold resumes's inbox into waypoints: nemik-check --letters --fold --repo resumes --older-than 14,
    apply the mv for the stale, claim or mint a card for each live letter
    - blocked on: resumes
    - next: Run the command in resumes's tick, apply the printed mv lines (archive), mint the printed --add for each live
      letter, then report done to nemik:W282.
-63. **W295** (blocked) Fold rosettapkg's inbox into waypoints: nemik-check --letters --fold --repo rosettapkg
+62. **W295** (blocked) Fold rosettapkg's inbox into waypoints: nemik-check --letters --fold --repo rosettapkg
    --older-than 14, apply the mv for the stale, claim or mint a card for each live letter
    - blocked on: rosettapkg
    - next: Run the command in rosettapkg's tick, apply the printed mv lines (archive), mint the printed --add for each
      live letter, then report done to nemik:W282.
-64. **W297** (blocked) Fold summit's inbox into waypoints: nemik-check --letters --fold --repo summit --older-than 14,
+63. **W297** (blocked) Fold summit's inbox into waypoints: nemik-check --letters --fold --repo summit --older-than 14,
    apply the mv for the stale, claim or mint a card for each live letter
    - blocked on: summit
    - next: Run the command in summit's tick, apply the printed mv lines (archive), mint the printed --add for each live
      letter, then report done to nemik:W282.
-65. **W369** (blocked) Outbound connectors: mirror cards to Jira, GitHub/Forgejo issues and Project Online via their
+64. **W369** (blocked) Outbound connectors: mirror cards to Jira, GitHub/Forgejo issues and Project Online via their
    APIs
    - blocked on: W963
    - next: GitHub and Forgejo: the plan print (W958) and the request builder (W959) are done; the sender is W963 and
      waits on the operator's scoped tokens. Not started: Jira (its CSV import carries no issue links,
      docs/integration-survey.md) and Project Online, each with its own API and token
-66. **W370** (blocked) Inbound connectors: webhooks or polls from other tools become letters or printed commands
+65. **W370** (blocked) Inbound connectors: webhooks or polls from other tools become letters or printed commands
    - blocked on: nemik:W964
    - next: On the tokens (W964): a poll command that fetches the issues with the token, runs pollevents, and records
      which it acted on; until then nothing in nemik reads a tracker
-67. **W424** (blocked) Spike 2: gcalculus's flow solve as the one portable source, consumed pinned by nemik in Python
+66. **W424** (blocked) Spike 2: gcalculus's flow solve as the one portable source, consumed pinned by nemik in Python
    and in the page
    - blocked on: W423
    - next: Wait on mtools:W1070 and gcalculus:W255; then contribute flow._grounded to gcalculus as the shipped sparse
      solver with the agreement corpus
-68. **W564** (blocked) Codon to wasm32: a sound target triple and a runtime that links, or another way to carry the
+67. **W564** (blocked) Codon to wasm32: a sound target triple and a runtime that links, or another way to carry the
    typed core into the browser
    - blocked on: operator: decide how the typed core reaches the browser: (1) wait for or request wasm32 output from
      Codon, (2) port Codon's runtime to wasm32 with host packages (wasi-libc, compiler-rt wasm32 builtins), or (3) run
@@ -1355,13 +1348,13 @@ counter 1029 · heartbeat 2026-10-22T02:06:35Z · job `1d7fe6d0` · hash `v2:fae
      ask upstream or find a way for codon build to emit a wasm32 triple; (2) build the runtime for wasm32 with a wasi
      sysroot and link, then run the corpus under a wasm runtime; (3) skip wasm and serve the typed core natively, the
      browser reading its JSON. Check first whether a wasi sysroot is on this host.
-69. **W568** (blocked) Codon paydown 2: dict spread {**a, 'k': v} in critical endpoint history serve withheld, rewritten
+68. **W568** (blocked) Codon paydown 2: dict spread {**a, 'k': v} in critical endpoint history serve withheld, rewritten
    as an explicit copy and update
    - blocked on: W567, W569
    - next: Use dictops.merged inside each module's own typing pass (the module being typed for Codon), not as a sweep.
      Candidates in the order they could first compile: the pure modules whose only blockers are constructs (critical,
      withheld, history after dataclass and keyword-only are settled by W567 and W569).
-70. **W575** (blocked) Retire the pod's snapshot builder when the client path serves the same views
+69. **W575** (blocked) Retire the pod's snapshot builder when the client path serves the same views
    - blocked on: W506, W516
    - next: The builder (nemik-serve --publish into a shared volume, W504) is the INTERIM ruled on 2026-10-15 for the
      OOM; the operator's later direction is no intermediate artifacts (W506 to W511, W516). RETIREMENT CONDITION: the
@@ -1369,23 +1362,23 @@ counter 1029 · heartbeat 2026-10-22T02:06:35Z · job `1d7fe6d0` · hash `v2:fae
      operator and inbound views from per-repo sources (W509), each repo publishes its own piece (W511, W516), and a test
      shows the views agree with the server-built ones. Then the pod is the static file server alone. Until then the
      builder stays and W505 sizes it.
-71. **W578** (blocked) Fleet flow: per-repo arrival, completion, WIP and Little's-law expected wait, predicting edges
+70. **W578** (blocked) Fleet flow: per-repo arrival, completion, WIP and Little's-law expected wait, predicting edges
    that will breach
    - blocked on: W579
    - next: First signal: per-day per-repo arrival vs completion series; flag any single mint larger than the trailing
      daily completion rate (about 250/day fleet-wide) or any repo net above +50/day. Then per-repo arrival, completion,
      WIP and Little's-law expected wait, predicting edges that will breach; validated against W579 before it predicts.
-72. **W579** (blocked) Edge series: per cross-repo wait edge age, blocker rank position and throughput as series through
+71. **W579** (blocked) Edge series: per cross-repo wait edge age, blocker rank position and throughput as series through
    luthen, alert on SLA breach
    - blocked on: W580, W837
    - next: Publish wait-edge series to Victoria via luthen; alert by symptom with a learned baseline on SLA breach; step
      3 of github-8f's chain; peer: luthen-observability for the alert
-73. **W580** (blocked) Rank-enforced picking: expose the next card by rank so --tick-close refuses a close that skipped
+72. **W580** (blocked) Rank-enforced picking: expose the next card by rank so --tick-close refuses a close that skipped
    a workable higher-ranked card
    - blocked on: W581
    - next: Verify fbee013 in mtools' git log; make nemik-rank cheap enough to run once per tick (user-dir cache) and
      pass --rank-from at --tick-close
-74. **W643** (blocked) Stackable set by input-graph cones: cards conflict when manifest dependency cones intersect, and
+73. **W643** (blocked) Stackable set by input-graph cones: cards conflict when manifest dependency cones intersect, and
    chain when one edits the other's cone
    - blocked on: W1016, W1017, W1018
    - next: The repin is done (vendored wheels at c9c0070, past 4704f43, so mikemol.hooks.footprint is available). Next:
@@ -1393,32 +1386,32 @@ counter 1029 · heartbeat 2026-10-22T02:06:35Z · job `1d7fe6d0` · hash `v2:fae
      stackable.pick uses cones.relation to chain or separate cards. Atomize before building: (1) the tool that writes
      reads.json from a traced test run, (2) wiring cones into stackable.pick with a test on two cards whose cones
      intersect, (3) the gate-cost use
-75. **W693** (blocked) serve.py puts each collapse class in the payload and the graph draws it as one expandable
+74. **W693** (blocked) serve.py puts each collapse class in the payload and the graph draws it as one expandable
    umbrella node, and nemik-check reports it as an Info
    - blocked on: W709
    - next: Umbrella: part 1 landed 3e54005; W709 (payload and page node), W710 (Info per umbrella) and W711
      (nemik-collapse CLI) remain
-76. **W709** (blocked) The graph payload and page draw a collapse umbrella node over the blocked cards it rolls up, with
+75. **W709** (blocked) The graph payload and page draw a collapse umbrella node over the blocked cards it rolls up, with
    its n-path address
    - blocked on: W969, W970
    - next: Needs bazel build //:.venv to have linked nemik.collapse (no gate running). Then blocks.py adds the umbrella
      nodes from collapse.collapse to the payload, the page draws one mark per umbrella (one mark per state rule; WCAG
      2.5.3 name), tests/test_collapse_payload.py pins the payload
-77. **W788** (blocked) Ask luthen to declare a SystemCallFilter on the serving unit as the runtime rail against spawning
+76. **W788** (blocked) Ask luthen to declare a SystemCallFilter on the serving unit as the runtime rail against spawning
    - blocked on: luthen-observability:W1473
    - next: Waits on luthen-observability:W1473; when it lands, record its unit change and confirm
      tests/test_serve_no_spawn.py still passes
-78. **W789** (blocked) The page draws /hostroot.json rows as read-only resource nodes: state to node state, waitsFor to
+77. **W789** (blocked) The page draws /hostroot.json rows as read-only resource nodes: state to node state, waitsFor to
    edges, stale rows marked, no rank weight
    - blocked on: W1022, W1023
    - next: Fetch the host-root board in the served page only (not the static build); draw each row as a node of a
      read-only 'host' lane using adapter.resource_uri for its id, state done/ready/blocked into the existing node
      states, waitsFor into edges, a stale row dimmed with its as_of in the detail line; no rank weight. Browser test as
      the layout tests do
-79. **W837** (blocked) Alert on the wait SLO: multi-window multi-burn-rate over the wait ages, once the operator states
+78. **W837** (blocked) Alert on the wait SLO: multi-window multi-burn-rate over the wait ages, once the operator states
    the SLO and its error budget (W700)
    - blocked on: W700, luthen-observability:W1132
-80. **W909** (blocked) From the three documents, recommend the minimum changes that make a quoted, a derived and an
+79. **W909** (blocked) From the three documents, recommend the minimum changes that make a quoted, a derived and an
    own-judgment claim distinct, typed and checkable, tested on real cards
    - blocked on: W908
    - next: After W906 to W908: the minimum changes, as cards, so that operator-said (quoted), host-inferred (derived,
@@ -1426,33 +1419,33 @@ counter 1029 · heartbeat 2026-10-22T02:06:35Z · job `1d7fe6d0` · hash `v2:fae
      five demoted cards and estate's warrants. Per the operator's purpose (line 91566, via github-8f's reading,
      derived): each fix says which agent behaviour it improves, what a session could then reason about or check that it
      cannot today
-81. **W926** (blocked) mtools plans and refuses on per-test targets, not mutants grids only
+80. **W926** (blocked) mtools plans and refuses on per-test targets, not mutants grids only
    - blocked on: mtools
    - next: Ask mtools-ad (sent; claimed as mtools:W1872): shardplan and shardgate know mutants grids; with one target
      per test they must judge a target against its own measured CPU; mtools' own mutants card moved to exhaustive
      sharding the same day (W1833)
-82. **W927** (blocked) A ratchet fails a test that is in no Bazel target or in two
+81. **W927** (blocked) A ratchet fails a test that is in no Bazel target or in two
    - blocked on: W925
    - next: After W925: a test collects every test node id and reads the generated BUILD files; any id in no target, or
      in two, fails; the count per package is kept
-83. **W938** (blocked) Build the four views and the help drawer on the existing panels, one view per change, with the
+82. **W938** (blocked) Build the four views and the help drawer on the existing panels, one view per change, with the
    WCAG chain test as the oracle
    - blocked on: nemik:W964
    - next: After W937, atomize per view: Queue (W929's panel) first, then Graph, Orders, Health, Help; each view lands
      with the WCAG chain test as its oracle (tablist semantics, 24 px targets, names, contrast) and the page files stay
      under their line ceilings, so new code goes in new files
-84. **W966** (blocked) Forecast trial 3: only cards that can start take a place in the line, and a blocked card is
+83. **W966** (blocked) Forecast trial 3: only cards that can start take a place in the line, and a blocked card is
    capped by how blocked stints end, scored on discrimination
    - blocked on: nemik:W968
    - next: After W968: copy the rows stamped 2026-10-24T15:12 to a scratch file (grep '^2026-10-24T15:12'), score them
      alone with nemik-history --all --score, and compare discrimination and its standard error with the 2026-10-23
      issue's 0.66 and 0.09; record both in docs/forecast-features.md; keep the feature only if discrimination rises
      beyond noise
-85. **W967** (blocked) Forecast trial 4: blocker depth as a feature, scored the same way
+84. **W967** (blocked) Forecast trial 4: blocker depth as a feature, scored the same way
    - blocked on: nemik:W966
    - next: After W966: the same trial with blocker depth (climate.depth_at already measures chains), scored the same
      way; same files, so after W966 lands, not beside it
-86. **W969** (blocked) The graph payload carries a collapse umbrella node over the blocked cards it rolls up, with its
+85. **W969** (blocked) The graph payload carries a collapse umbrella node over the blocked cards it rolls up, with its
    n-path address, in the field manifest and the API schema
    - blocked on: W975
    - next: Build the separate list: the umbrellas from collapse.collapse over the blocked rows go into the payload as
@@ -1460,46 +1453,46 @@ counter 1029 · heartbeat 2026-10-22T02:06:35Z · job `1d7fe6d0` · hash `v2:fae
      and the API schema, with the withheld filter dropping any umbrella that has a withheld member; the payload test
      pins the payload, the pieces round trip and the manifest check; the page reads the list in W970. First read the
      pieces module and the page's combine step to size the carry
-87. **W970** (blocked) The page draws one mark per collapse umbrella, named for assistive technology, with the WCAG
+86. **W970** (blocked) The page draws one mark per collapse umbrella, named for assistive technology, with the WCAG
    chain test as its oracle
    - blocked on: nemik:W969
    - next: After W969: the page draws one mark per umbrella node (one mark per state rule), with an accessible name that
      holds its visible text (WCAG 2.5.3), tested with the WCAG chain; the page files are at their line ceilings, so a
      new file (collapse.js) unless a line can be traded
-88. **W1018** (blocked) The cone relation predicts which tests a commit runs, for gate-cost ordering
+87. **W1018** (blocked) The cone relation predicts which tests a commit runs, for gate-cost ordering
    - blocked on: W1017
    - next: From the cone relation, list the tests a commit's files can reach, so the gate can order by cost
-89. **W1021** (blocked) One builder serves both replicas, with a before and after CPU reading
+88. **W1021** (blocked) One builder serves both replicas, with a before and after CPU reading
    - blocked on: W1020
    - next: Run one builder for both replicas, with the export written once and both replicas serving it, and read the
      CPU again over a measured interval
-90. **W1023** (blocked) Stale host-root rows are dimmed with their as_of in the detail line, tested in the browser
+89. **W1023** (blocked) Stale host-root rows are dimmed with their as_of in the detail line, tested in the browser
    - blocked on: W1022
    - next: Dim a stale host-root row and show its as_of in the detail line, with a browser test as the layout tests do
-91. **W506** (blocked) Federated client assembly: the browser builds the view from the sources its viewer names, no
+90. **W506** (blocked) Federated client assembly: the browser builds the view from the sources its viewer names, no
    central node required
    - blocked on: W508, W511
    - next: umbrella: lands when W507-W511 do. W502-W505 (a static pod that serves one source) stay: they fix the OOM now
      and make nemik one source among many
-92. **W563** (blocked) Forecast mark: per repo the cards predicted next and the expected frontier width, plus a
+91. **W563** (blocked) Forecast mark: per repo the cards predicted next and the expected frontier width, plus a
    misprediction alert
    - blocked on: W578
    - next: No budget, nothing gated. Publish per repo the cards predicted to be worked next (by salience, with wait age
      once W581 lands) and the frontier width expected after N ticks as a mark; measure it against the ledgers (cards
      actually advanced, width actually moved) as the misprediction series W490 designs; alert by symptom when
      misprediction exceeds its learned baseline. Uses W578's flow model.
-93. **W674** (blocked) Source adapter: an OSLC TRS provider (base plus change log) as a page source, its cursor the
+92. **W674** (blocked) Source adapter: an OSLC TRS provider (base plus change log) as a page source, its cursor the
    change-log position
    - blocked on: nemik:W680
    - next: In index.html a source whose kind is trs reads its base (ldp:member IRIs) and the change-log entries after
      its cursor, re-reads the graph piece of each repo that changed (the same hash cursor), and patches; a browser test
      against the served TRS files and pieces
-94. **W675** (blocked) Source adapter: a ForgeFed or ActivityPub outbox as a page source, its cursor an outbox page
+93. **W675** (blocked) Source adapter: a ForgeFed or ActivityPub outbox as a page source, its cursor an outbox page
    - blocked on: nemik:W674
    - next: In index.html a source whose kind is outbox reads the OrderedCollection pages and maps Offer, Accept and
      Resolve of a Ticket to card states (outbox.py's verb inverse), cursor the page; a browser test against the served
      outbox
-95. **W680** (blocked) The page vendors a Turtle parser (N3.js, version and hash pinned) beside cytoscape and dagre,
+94. **W680** (blocked) The page vendors a Turtle parser (N3.js, version and hash pinned) beside cytoscape and dagre,
    loaded only when a source needs it
    - blocked on: operator: decide whether the page may vendor a third-party Turtle parser: (a) N3.js (MIT, rdfjs; npm
      n3@2.13.12 has SLSA provenance), hash-pinned beside cytoscape and dagre, loaded only when a source needs it, or (b)
@@ -1507,7 +1500,7 @@ counter 1029 · heartbeat 2026-10-22T02:06:35Z · job `1d7fe6d0` · hash `v2:fae
    - next: Pick N3.js at a pinned version, add it to src/nemik/web/vendor with its licence and sha256 as the other
      vendored files have (see VENDOR in serve.py and the vendor test), serve it and write it in the static build; a
      browser test parses a TRS base Turtle from trs.py's output
-96. **W708** (blocked) The no-witness Warning fires on cards whose step is a behaviour (a command refuses without a
+95. **W708** (blocked) The no-witness Warning fires on cards whose step is a behaviour (a command refuses without a
    flag) that no observer can see: name the honest witness, a test result for a tree sha, or stop warning where none
    exists
    - blocked on: operator: decide whether a card whose step is a behaviour gets a witness from a test result for the
@@ -1515,84 +1508,84 @@ counter 1029 · heartbeat 2026-10-22T02:06:35Z · job `1d7fe6d0` · hash `v2:fae
      cards that name no observable
    - next: After the choice: add the observer or narrow the Warning in shapes.ttl; el-openglo:W702 (typing_edges --apply
      refuses without --plan) is the first case
-97. **W749** (blocked) Improve the forecast: add one feature at a time, keep it only if verified skill over climatology
+96. **W749** (blocked) Improve the forecast: add one feature at a time, keep it only if verified skill over climatology
    rises
    - blocked on: W966, W967
    - next: Trial 3 (gate duration, blocker depth) scored on a measure that sees discrimination (do the cards that
      finished carry higher chances than those that did not), not Brier alone, which a base-rate forecast ties; that
      needs a --score mode or a scratch script first. The doc update for the second attempt is stack403
-98. **W852** (blocked) Confirm the first image build from a stamped commit ran the gated stage, not the suite: a build
+97. **W852** (blocked) Confirm the first image build from a stamped commit ran the gated stage, not the suite: a build
    log line naming it
    - blocked on: luthen-observability:W1506
    - next: Ask luthen-observability to read the Forgejo build log for the first nemik image built after 9bfec9c and
      report whether it printed 'image test stage: gated'; if it printed test, read the commit's Gated-Tree trailer
      against its tree
-99. **W877** (blocked) Ask gabion: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward to
+98. **W877** (blocked) Ask gabion: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward to
    mtools 5ba261f or
    - blocked on: gabion
-100. **W879** (blocked) Ask el-openglo: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward
+99. **W879** (blocked) Ask el-openglo: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward
    to mtools 5ba261f or
    - blocked on: el-openglo
-101. **W880** (blocked) Ask linux-sources: nemik:W516 (withholding at the source): please repin your
+100. **W880** (blocked) Ask linux-sources: nemik:W516 (withholding at the source): please repin your
    mikemol-paths-forward to mtools 5ba261f or
    - blocked on: linux-sources
-102. **W881** (blocked) Ask substrate: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward
+101. **W881** (blocked) Ask substrate: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward
    to mtools 5ba261f or
    - blocked on: substrate
-103. **W963** (blocked) A sender posts mirrorreq's requests to a tracker with a scoped token, after a dry run prints
+102. **W963** (blocked) A sender posts mirrorreq's requests to a tracker with a scoped token, after a dry run prints
    them, and reads the result back
    - blocked on: nemik:W964
    - next: After a token: mirrorsend posts each mirrorreq.Request with the token in an Authorization header read from
      the file, prints the dry run first, sends only with --apply, checks the response status, and reads the issue back
      (read your writes); tested against a local fake server, never the real tracker
-104. **W968** (blocked) The +1d horizon of the shingle issue stamped 2026-10-24T15:12:51Z (the first with W966's
+103. **W968** (blocked) The +1d horizon of the shingle issue stamped 2026-10-24T15:12:51Z (the first with W966's
    blocked-card feature) has matured (2026-10-25 15:13Z)
    - blocked on: nemik-witnesses
-105. **W980** (blocked) Pay down the ruff baseline (2934): retire the most numerous rule family with a codemod that
+104. **W980** (blocked) Pay down the ruff baseline (2934): retire the most numerous rule family with a codemod that
    passes the gate, and lower the recorded count
    - blocked on: W1014
    - next: Land the measuring tool, then retire the PT018 rule (112 composite assertions in tests) with a codemod that
      passes the gate and lower ruff-baseline
-106. **W17** (blocked) Follow up nemik:W4: re-run nemik-operator; nudge any repo whose unstated blocks remain when that
+105. **W17** (blocked) Follow up nemik:W4: re-run nemik-operator; nudge any repo whose unstated blocks remain when that
    repo is next awake
    - blocked on: W47
    - next: Umbrella: done when W45-W47 are done
-107. **W282** (blocked) Letter migration: every repo folds its own inbox into waypoints, with nemik's per-repo tool
+106. **W282** (blocked) Letter migration: every repo folds its own inbox into waypoints, with nemik's per-repo tool
    - blocked on: W283, W286, W287, W289, W292, W294, W295, W297
    - next: Per repo: nemik-check --letters --fold --repo `<repo>` --older-than 14 prints the mv (stale: answered, or
      dated over 14 days with no citing waypoint) and the --add (live) lines; the repo applies the mv, mints or claims a
      card for each live letter, and reports done. One child card per repo, blocked on that repo so nemik-inbound shows
      it there as a claimable row.
-108. **W346** (blocked) Thoughts-forward second trawl: growth directions as cards (umbrella)
+107. **W346** (blocked) Thoughts-forward second trawl: growth directions as cards (umbrella)
    - blocked on: W352, W353
    - next: children W347-W356 from a full read of doc 1Ve0IFuaREPlEjzj94KxVdtE5u3sMn78wIZGdy53RimY on 2026-10-12, ranked
      by the reader: fire ripple, operator saturation, plan drift, milestone roll-up, what-if, liveness board, token
      cost, ForgeFed outbox, DORA, inter-workstream SLAs
-109. **W364** (blocked) Interop with other PM tools: files, a read API, and live app connectors
+108. **W364** (blocked) Interop with other PM tools: files, a read API, and live app connectors
    - blocked on: W369, W370
    - next: Three layers. Files: exports another tool opens (W365, W366) and imports printed as writer commands (W367). A
      read API: nemik-serve's JSON as a documented, versioned API (W368). Live connectors: sync with Jira,
      GitHub/Forgejo, MS Project Online, Google Tasks (W188 is the first) through their APIs (W369 outbound, W370
      inbound). Invariant: no connector writes a queue; inbound arrives as printed commands or a letter in the repo's
      inbox, outbound is a one-way mirror. Credentials are per tool and the operator's to give.
-110. **W422** (blocked) Census for github-8f's one-implementation spike: which nemik Python should run browser-side
+109. **W422** (blocked) Census for github-8f's one-implementation spike: which nemik Python should run browser-side
    unchanged, with types, I/O and conformance corpora
    - blocked on: W423, W424
    - next: Umbrella over W423, W424, W425; cite mtools' cards on W423 once they exist
-111. **W459** (blocked) OperatorActShape escalates Warning to Violation after N ticks, N learned from ledger history
+110. **W459** (blocked) OperatorActShape escalates Warning to Violation after N ticks, N learned from ledger history
    - blocked on: operator: decide whether the no-command lane now in the view (W467, f3a00fd) gives you enough
      visibility to let a long-standing no-command ask escalate from Warning to Violation, or what else you need to see
      first
    - next: read ticks_blocked of no-command asks over the ledger history; pick N; add a second sh:property at
      sh:Violation gated on ticksBlocked >= N
-112. **W486** (blocked) Salience from the graph alone: every unrealized node a unit demand source; alerts, asks, goals
+111. **W486** (blocked) Salience from the graph alone: every unrealized node a unit demand source; alerts, asks, goals
    as nodes with edges, age in edge capacity
    - blocked on: W581
    - next: W581 (wait age and the SLO-derived band, its children W699 done, W700 operator, W712) is step 1 of the chain
      and enables this card; then: (a) every unrealized node a unit source, rank tests re-baselined with the diff
      explained; (b) operator asks as nodes; (c) alert and goal node types published by their owners; (d) age as an edge
      capacity from the W485 report docs/working-time.md
-113. **W512** (blocked) Profile nemik client behavior and precompute server-side only the measured hot filter shapes to
+112. **W512** (blocked) Profile nemik client behavior and precompute server-side only the measured hot filter shapes to
    cut the data volume sent
    - blocked on: W500
    - next: After W500 lands (server returns source data, client does the work): record per request the view, the
@@ -1601,14 +1594,14 @@ counter 1029 · heartbeat 2026-10-22T02:06:35Z · job `1d7fe6d0` · hash `v2:fae
      source hashes plus withheld-list hash plus code identity plus canonical filter shape, TTL and size cap, the
      withheld policy still applied before storing); everything else stays client-side. Witness: median payload bytes per
      session falls with no rise in server RSS.
-114. **W517** (blocked) Promote the paths-forward architecture out of mtools into nemik: design, order and pin migration
+113. **W517** (blocked) Promote the paths-forward architecture out of mtools into nemik: design, order and pin migration
    for every consumer
    - blocked on: W534
    - next: After the dependency map (W514) and nemik's standards (W515): decide what moves (writer, ledger, lock,
      shapes, the CLI contract), how nemik becomes the single lineage, and how every repo's sha-pinned
      mikemol-pathsforward reference migrates without breaking a pin (use mtools W1229's pin table: 5 shas across 8
      consumer repos, pathsforward in 8). Chain of bounded cards, nothing moved without the operator.
-115. **W561** (blocked) All nemik Python is Codon-compatible: a census of what Codon rejects per module, a ratchet that
+114. **W561** (blocked) All nemik Python is Codon-compatible: a census of what Codon rejects per module, a ratchet that
    only falls, and a typed-record layer for documents
    - blocked on: W567, W568, W569
    - next: mtools:W1323 is not needed (mtools-ad 2026-10-17 asked): nemik's own census already is the per-repo baseline
@@ -1617,29 +1610,29 @@ counter 1029 · heartbeat 2026-10-22T02:06:35Z · job `1d7fe6d0` · hash `v2:fae
      typed-record layer for the JSON documents drawn from the schemas, and paying down the baseline (each entry names
      the first rejection per module: argparse, tomllib, rdflib, __future__, dataclasses, NamedTuple); start with the
      entries that are not a missing library
-116. **W570** (blocked) Decide whether nemik-pins' ship-is-safe check should see the image build's test stage failing
+115. **W570** (blocked) Decide whether nemik-pins' ship-is-safe check should see the image build's test stage failing
    - blocked on: luthen-observability:W1108
    - next: On luthen's answer: add a line to nemik-pins that reports the Forgejo build state of HEAD (failed, building,
      green) beside the lag, and calls the ship stuck at once when the build for HEAD failed, instead of after 5 commits
-117. **W571** (blocked) One test run for the commit gate and the image: a commit that breaks the image's test stage
+116. **W571** (blocked) One test run for the commit gate and the image: a commit that breaks the image's test stage
    cannot land or be pushed
    - blocked on: W852
    - next: W703 and W704 are done; what remains is seeing a real gated image build (W852 waits on
      luthen-observability:W1506), then close this umbrella
-118. **W613** (blocked) nemik-rank stackable mode: the disjoint ready set per repo, as a forecast mark and the
+117. **W613** (blocked) nemik-rank stackable mode: the disjoint ready set per repo, as a forecast mark and the
    nemik_stackable gauge
    - blocked on: W643
    - next: Parts 1-5 landed (latest 0ebadf6: --propose --json for mtools' --manifests-from). Remaining: the
      nemik_stackable gauge beside stack depth (luthen row); atomize the manifest-less design cards into children that
      name files
-119. **W691** (blocked) Blocked cards with the same blockers and the same enables collapse into one umbrella node A_C_u
+118. **W691** (blocked) Blocked cards with the same blockers and the same enables collapse into one umbrella node A_C_u
    in the graph, derived from the queues and never written to them
    - blocked on: W693
    - next: Umbrella (operator 2026-10-18, 695f3e0a line 80452, warranted). Read as a VIEW: derived from the queues,
      never minted as a card. Children W692 (pure classes) and W693 (payload, page, Info). Reading to confirm with the
      operator via github-8f: strict equivalence (same blocker set and same enables set), and a view-level collapse, not
      a queue umbrella
-120. **W695** (blocked) Each repo clears the enables edges whose target does not wait on them, using the dry run
+119. **W695** (blocked) Each repo clears the enables edges whose target does not wait on them, using the dry run
    nemik-check --integrity prints (274 across 11 repos at first run)
    - blocked on: luthen-observability, mtools
    - next: Counts at first run, 2026-10-18: el-openglo 155, mtools 46, luthen-observability 31, aeternum 13, nemik 9,
@@ -1647,11 +1640,11 @@ counter 1029 · heartbeat 2026-10-22T02:06:35Z · job `1d7fe6d0` · hash `v2:fae
      --root ~/github --integrity (a dry run: per finding, the command to drop the enables edge or add the blocked_on)
      and chooses per finding; nothing is applied by nemik. Sent to the three live sessions; the dormant repos' counts go
      to github-8f. The Info finding rises to a Warning on a declared ratchet from this count (W685 pattern)
-121. **W735** (blocked) Ask the operator: who may know sibling paths for local-only inbox delivery
+120. **W735** (blocked) Ask the operator: who may know sibling paths for local-only inbox delivery
    - blocked on: operator: decide whether nemik's adapter is the ONE place allowed to know sibling paths for local-only
      inbox delivery (a single allowlist entry in mtools:W1708's lint), or local-only delivery goes through a broker; see
      docs/inbox-as-issues.md, section 'What this leaves unsolved'
-122. **W743** (blocked) Track waypoint event histories as weather and climate: stations, climate, forecast shingle,
+121. **W743** (blocked) Track waypoint event histories as weather and climate: stations, climate, forecast shingle,
    verification, improvement
    - blocked on: nemik:W749, nemik:W750, nemik:W751
    - next: umbrella. ACCEPTANCE LIST (docs/weather-questions.md): the operator's four (what the forecast reads, how it
@@ -1659,46 +1652,46 @@ counter 1029 · heartbeat 2026-10-22T02:06:35Z · job `1d7fe6d0` · hash `v2:fae
      reopen rate, which intervention moved the climate, which cards stall), each checked against the bits the source
      carries. Gaps owned by nemik (W752) and by mtools (W1731: the starting values of an add, via, actor, a mutation id,
      manifest and size as fields, big fields as length and hash, landing events, intervention markers)
-123. **W764** (blocked) The published-export loop rebuilds every 30 seconds whether or not any queue changed: skip the
+122. **W764** (blocked) The published-export loop rebuilds every 30 seconds whether or not any queue changed: skip the
    build when the inputs' hash is unchanged
    - blocked on: W1020, W1021
    - next: Rate before: 0.862 core for the pair. Now (a) hash-skip in the container loop, then (b) one builder for both
      replicas; re-read the same two files over a measured interval after each ships to show the saving
-124. **W781** (blocked) Goal: read-only feature parity between the nemik CLI tools and the web UI, with no process
+123. **W781** (blocked) Goal: read-only feature parity between the nemik CLI tools and the web UI, with no process
    spawned through the UI
    - blocked on: W788
-125. **W812** (blocked) Goal: the page's pure computation is Python compiled by Codon to wasm, shared with the CLI
+124. **W812** (blocked) Goal: the page's pure computation is Python compiled by Codon to wasm, shared with the CLI
    tools, not hand-kept JS
    - blocked on: W1028
    - next: After the spike lands: name the core's seam. A package src/nemik/core/ whose functions take and return only
      plain data and compile under the pinned Codon (the census enforces it), with the CLI and the page each a thin
      facade; the first member is whichever pure function W815's inventory ranks first
-126. **W899** (blocked) The PDF draws the graph as vector, with no raster step between the model and the page
+125. **W899** (blocked) The PDF draws the graph as vector, with no raster step between the model and the page
    - blocked on: W902
-127. **W905** (blocked) Audit PROV and the card model against Toulmin, extracting the full codomain of the language and
+126. **W905** (blocked) Audit PROV and the card model against Toulmin, extracting the full codomain of the language and
    the relevant standards, under an evidential paradigm
    - blocked on: W908, W909
-128. **W914** (blocked) An observer reads a published waldo verdict, so a card can close from estate's read-back witness
+127. **W914** (blocked) An observer reads a published waldo verdict, so a card can close from estate's read-back witness
    - blocked on: estate
    - next: After estate states its witness JSON and where a verdict copy is published: add one observer to the closed
      set (nemik:W58) that reads it, and a card whose witness is Rego over input.verdict
-129. **W922** (blocked) test_modes and test_metrics_gating time out at 300 s when three stacks gate at once: shard them
+128. **W922** (blocked) test_modes and test_metrics_gating time out at 300 s when three stacks gate at once: shard them
    finer, never raise the timeout
    - blocked on: W925
    - next: Superseded by the exhaustive plan: W925 gives test_modes and test_metrics_gating their shard_count from
      measured times, so no hand split; close this card when W925 lands and the two stop timing out
-130. **W923** (blocked) Every nemik test is its own Bazel target in hierarchical BUILD files, so none times out and an
+129. **W923** (blocked) Every nemik test is its own Bazel target in hierarchical BUILD files, so none times out and an
    unchanged test is a cache hit
    - blocked on: W925, W926, W927
-131. **W934** (blocked) The page's navigation follows its structure: views for the questions it answers, and each
+130. **W934** (blocked) The page's navigation follows its structure: views for the questions it answers, and each
    control next to what it acts on
    - blocked on: W938
-132. **W941** (blocked) Actors and cards have http(s) identifiers a peer can fetch, which needs the public base URL for
+131. **W941** (blocked) Actors and cards have http(s) identifiers a peer can fetch, which needs the public base URL for
    the pod
    - blocked on: nemik:W964
    - next: After the operator's answer: a TicketTracker actor document per repo with inbox and outbox, ids under the
      base URL; docs/federation-recommendations.md R3
-133. **W964** (blocked) One sitting for three operator choices this session raised: the page-structure map, the pod's
+132. **W964** (blocked) One sitting for three operator choices this session raised: the page-structure map, the pod's
    public base URL, and the tracker tokens
    - blocked on: operator: decide three things, each answerable in a line: (1) the page structure in
      docs/page-structure-map.md: is Orders its own view or a section of Health, is the selected card a pane or a drawer,
@@ -1708,42 +1701,45 @@ counter 1029 · heartbeat 2026-10-22T02:06:35Z · job `1d7fe6d0` · hash `v2:fae
      scope on one repo, each as a file path outside the repo (nemik:W963 sends nothing before then)
    - next: On the answer, split it back: unblock W938 with the decided structure, W941 with the URL or its drop, W963
      with the token paths or its drop
-134. **W979** (blocked) A nonzero ratchet is a priority marker: every repo with one needs an open pay-down card (a shape
+133. **W979** (blocked) A nonzero ratchet is a priority marker: every repo with one needs an open pay-down card (a shape
    warns when missing), those cards rank in a high band above feature work, and a ratchet that has not fallen over a
    learned window raises an alert
    - blocked on: mtools
    - next: When mtools publishes the ratchet census, add the missing-pay-down shape, the high rank band and the
      stalled-ratchet alert
-135. **W984** (blocked) A retro stub, seeded with the card's mint-time precommit, opens on a gate refusal and on a card
+134. **W984** (blocked) A retro stub, seeded with the card's mint-time precommit, opens on a gate refusal and on a card
    reopened from done, then on an alert clearing and a ruling that corrects a session
    - blocked on: W982
    - next: Build the stub from a card's ledger history for a reopened card first, then wire the gate-refusal event, once
      W982 fixes the record form
-136. **W985** (blocked) A report measures gate G9 fleet-wide: the recurring failure classes of the retros by the layer
+135. **W985** (blocked) A report measures gate G9 fleet-wide: the recurring failure classes of the retros by the layer
    their measure lives at, seeded with the host's four classes of this week
    - blocked on: W982
    - next: Count recurring classes by enforcement layer over the ingested retros, and place the four classes of the
      host's week by what enforces each now
-137. **W987** (done) Compute each repo's behind or ok fact from the ratchet value series: observed fall over the
+136. **W987** (done) Compute each repo's behind or ok fact from the ratchet value series: observed fall over the
    trailing window of landed commits against a required fall seeded from the measured trend and only rising
-138. **W988** (done) A shape warns when a repo is behind and has no ready paydown card
-139. **W989** (done) nemik-rank places paydown cards above feature work while their repo is behind, as a declared policy
+137. **W988** (done) A shape warns when a repo is behind and has no ready paydown card
+138. **W989** (done) nemik-rank places paydown cards above feature work while their repo is behind, as a declared policy
    line
-140. **W990** (done) Publish the per-repo behind or ok fact where a commit gate can read it
-141. **W995** (done) The ratchet pace gauges carry nemik_ratchet_pace_as_of, the pace file's stamp in unix seconds, so a
+139. **W990** (done) Publish the per-repo behind or ok fact where a commit gate can read it
+140. **W995** (done) The ratchet pace gauges carry nemik_ratchet_pace_as_of, the pace file's stamp in unix seconds, so a
    stale verdict reads as age
-142. **W996** (done) Read the ratchet value series per repo and ratchet from luthen's metric store, ordered by gate run
-143. **W1003** (done) The ready-neither finding for cards past the learned age bound is a Warning, not an Info
-144. **W1006** (done) nemik-work never demotes a working card, and the skill states the zero-working-while-ready rule
+141. **W996** (done) Read the ratchet value series per repo and ratchet from luthen's metric store, ordered by gate run
+142. **W1003** (done) The ready-neither finding for cards past the learned age bound is a Warning, not an Info
+143. **W1006** (done) nemik-work never demotes a working card, and the skill states the zero-working-while-ready rule
    and the stale-working rule, not a count above one
-145. **W1011** (done) A shape warns on a card blocked on the operator whose evidence holds no executed probe, a command
+144. **W1011** (done) A shape warns on a card blocked on the operator whose evidence holds no executed probe, a command
    and its output
-146. **W1012** (done) Audit every nemik-check Info or Warning that encodes demand or waiting: does the fact already move
+145. **W1012** (done) Audit every nemik-check Info or Warning that encodes demand or waiting: does the fact already move
    nemik-rank's order, and if not, fold it into the rank as salience and let the row explain a rank position
-147. **W1015** (done) Pay down the next ruff rule by count, D103 or E501 after PT018, with a mechanical fix that passes
+146. **W1015** (done) Pay down the next ruff rule by count, D103 or E501 after PT018, with a mechanical fix that passes
    the ratchets
-148. **W1024** (done) nemik-rank --round REPO names the next round: the top N ready cards by rank, N from capacity, a
+147. **W1024** (done) nemik-rank --round REPO names the next round: the top N ready cards by rank, N from capacity, a
    newly unblocked card entering only at its rank position
+148. **W1027** (done) nemik's own gate sends mikemol.ratchet.value for nemik's ratchets: the pre-commit calls
+   mikemol-ratchet-emit after the verdict with the repo name, with the ratchet dist's census available, and never
+   changes the verdict
 149. **W999** (done) Find the cards that languish behind a grooming umbrella from plain blocked rows, past a bound
    learned from real blocks
 150. **W1004** (done) The learned age bound and a ready card's overdue count, as pure functions over seconds

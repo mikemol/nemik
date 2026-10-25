@@ -2238,3 +2238,5 @@
 2026-10-25T04:10:38Z  status W1025 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-25T04:10:42Z  status W997 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-25T04:11:12Z  tick  W997 advanced  unblock   "W1024 landed 97fe254 and marked done; pacewrite.py and its test written for W997, bazel test of test_pacewrite and the census running. I still need to submit the W997 stack and then wire its caller, W997, and publish the round file, W1025. [blocked by W1025]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T04:40:04Z  status W1027 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T04:40:15Z  tick  W1027 advanced  unblock   "W1027 landed 38b2042 and marked done; hook diff sent to mtools-ad; W1029 given manifest and caused_by mtools:W1941. I still need to check repo=nemik appears in the metric store after the next gate, W1027, and to publish the round file, W1025. [blocked by W1025]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
