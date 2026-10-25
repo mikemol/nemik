@@ -9,7 +9,7 @@ required, the numbers as quoted text. The requirement only rises: the previous f
 for the same ratchet is passed back as the prior, and the larger one is written.
 """
 
-from nemik.pacepublish import Row
+from nemik.pacepublish import UNKNOWN, Row
 from nemik.ratchetpace import verdict
 
 
@@ -24,7 +24,10 @@ def priors_of(rows: list[Row]) -> dict[str, int]:
 
 
 def pace_rows(
-    series: list[tuple[str, str, list[int]]], window: int, priors: dict[str, int]
+    series: list[tuple[str, str, list[int]]],
+    window: int,
+    priors: dict[str, int],
+    ended: list[tuple[str, str]],
 ) -> list[Row]:
     """Judge each series.
 
@@ -32,14 +35,23 @@ def pace_rows(
         series: (repo, ratchet, values oldest first), as ratchetseries reads them.
         window: How many landed commits one window spans.
         priors: The requirements the previous file stated, from priors_of.
+        ended: The (repo, ratchet) pairs whose series ended while their repo's others went on.
 
     Returns:
-        One (repo, ratchet, state, observed, required) row per series, in the order given.
+        One (repo, ratchet, state, observed, required) row per series, in the order given. An ended
+        series reads unknown, observed 0 and the requirement it last stated: absence is a reading
+        about the instrument, and only a written tombstone retires a ratchet (operator, host
+        695f3e0a line 96701), so it is neither ok nor behind.
 
     """
+    gone = set(ended)
     rows: list[Row] = []
     for repo, ratchet, values in series:
-        state, seen, owed = verdict(values, window, priors.get(f"{repo}\n{ratchet}", 0))
+        prior = priors.get(f"{repo}\n{ratchet}", 0)
+        if (repo, ratchet) in gone:
+            rows.append((repo, ratchet, UNKNOWN, 0, prior))
+            continue
+        state, seen, owed = verdict(values, window, prior)
         rows.append((repo, ratchet, state, seen, owed))
     return rows
 

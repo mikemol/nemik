@@ -15,6 +15,7 @@ from nemik.tracker import Json, parse
 
 PHANTOM = "tree"
 PAIR = 2  # a sample is [unix seconds, "value"]
+END_SLACK_MS = 60_000  # a repo's series from one gate run end within this of each other
 
 
 def series_of(answer: str) -> list[tuple[str, str, list[int]]]:
@@ -67,10 +68,51 @@ def export_series(text: str) -> list[tuple[str, str, list[int]]]:
 
     Returns:
         (repo, ratchet, values oldest first) as series_of gives them, the phantom repo left out; a
-        line that is not a series is skipped.
+        line that is not a series is skipped. A series that has ended is kept: ending is a reading
+        about the instrument, not a verdict, and ended_series names those.
 
     """
-    out: list[tuple[str, str, list[int]]] = []
+    rows, _ = _export_rows(text)
+    return sorted(
+        [(repo, ratchet, counts) for repo, ratchet, counts, _ in rows], key=_by_name
+    )
+
+
+def ended_series(text: str) -> list[tuple[str, str]]:
+    """Name the series that ended while their repo's other series went on (nemik:W1039).
+
+    A retired ratchet, a gate that did not run and a broken emitter all look the same from here,
+    so this infers nothing about which: the operator's ruling (host 695f3e0a line 96701) is that
+    only a written tombstone drops a ratchet, and a silent one is unknown.
+
+    Args:
+        text: The export's lines.
+
+    Returns:
+        (repo, ratchet) for each series whose last sample is more than END_SLACK_MS before its
+        repo's newest sample, sorted.
+
+    """
+    rows, newest = _export_rows(text)
+    return sorted(
+        (repo, ratchet)
+        for repo, ratchet, _, end in rows
+        if end < newest[repo] - END_SLACK_MS
+    )
+
+
+def _export_rows(
+    text: str,
+) -> tuple[list[tuple[str, str, list[int], int]], dict[str, int]]:
+    """Read the export's series with the time of each one's last sample.
+
+    Returns:
+        (repo, ratchet, values oldest first, last sample time) per series, and each repo's newest
+        sample time.
+
+    """
+    out: list[tuple[str, str, list[int], int]] = []
+    newest: dict[str, int] = {}
     for line in text.splitlines():
         try:
             body = parse(line) if line.strip() else None
@@ -93,8 +135,11 @@ def export_series(text: str) -> list[tuple[str, str, list[int]]]:
             for at, value in zip(stamps, values, strict=False):
                 if isinstance(at, int | float) and isinstance(value, int | float):
                     pairs.append((int(at), max(0, int(value))))
-            out.append((repo, ratchet, [count for _, count in sorted(pairs)]))
-    return sorted(out, key=_by_name)
+            ordered = sorted(pairs)
+            end = ordered[-1][0] if ordered else 0
+            out.append((repo, ratchet, [count for _, count in ordered], end))
+            newest[repo] = max(newest.get(repo, 0), end)
+    return out, newest
 
 
 def _by_name(row: tuple[str, str, list[int]]) -> tuple[str, str]:

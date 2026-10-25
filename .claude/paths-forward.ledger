@@ -2282,3 +2282,9 @@
 2026-10-25T12:22:52Z  status W1040 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-25T12:56:47Z  tick  W1041 minted    -         "A round never holds fewer than three cards when the ready set has them"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1024
 2026-10-25T12:56:56Z  status W1041 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T13:01:10Z  tick  W1042 minted    -         "Size a round by a repo's landings from any commit path, not by multi-entry stacks"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f:W48
+2026-10-25T13:01:26Z  status W1042 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T13:11:59Z  interrupt W1043 minted    -         "nemik-rank skips the SHACL pass: it ranks from the graphs and ignores the findings"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1024
+2026-10-25T13:12:51Z  status W1043 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T13:15:46Z  tick  W1044 minted    -         "Bazel shards a test target across the tests pytest collects; test_pdf runs in three shards"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1039
+2026-10-25T13:16:05Z  status W1044 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

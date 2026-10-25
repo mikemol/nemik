@@ -64,6 +64,17 @@ def test_a_raw_export_is_judged_one_value_per_gate_run() -> None:
     ]
 
 
+def test_a_series_that_ended_reads_unknown_never_ok_or_behind() -> None:
+    """Repo a's x stopped while y went on: x is unknown, observed 0, and y is judged as usual."""
+    text = (
+        '{"metric":{"repo":"a","ratchet":"x"},"values":[5,5],"timestamps":[1000,2000]}\n'
+        '{"metric":{"repo":"a","ratchet":"y"},"values":[7,7,7],"timestamps":'
+        "[1000,2000,900000]}\n"
+    )
+    rows = read_pace(pace_document(text, "", STAMP))[2]
+    assert [(row[1], row[2]) for row in rows] == [("x", "unknown"), ("y", "behind")]
+
+
 def test_an_export_with_no_series_refuses_instead_of_writing_an_empty_file() -> None:
     """Nothing to judge raises, so the last good file is kept."""
     with REFUSES:

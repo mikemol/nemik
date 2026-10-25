@@ -12,7 +12,7 @@ that is missing or unreadable seeds nothing: every requirement then starts from 
 from nemik.pacepublish import read_pace
 from nemik.pacewrite import pace_rows, pace_text, priors_of
 from nemik.ratchetpace import WINDOW
-from nemik.ratchetseries import export_series, series_of
+from nemik.ratchetseries import ended_series, export_series, series_of
 
 ANSWER_HEAD = '{"status"'
 
@@ -27,7 +27,8 @@ def pace_document(answer: str, previous: str, stamp: str) -> str:
         stamp: When this run reads the store, a UTC stamp.
 
     Returns:
-        The pace file's text, one row per ratchet series.
+        The pace file's text, one row per ratchet series. A series of the export that ended while
+        its repo's others went on reads unknown (nemik:W1039), never ok and never behind.
 
     Raises:
         ValueError: When the answer holds no series, so no empty file replaces a good one.
@@ -37,12 +38,10 @@ def pace_document(answer: str, previous: str, stamp: str) -> str:
         priors = priors_of(read_pace(previous)[2])
     except ValueError:
         priors = {}
-    series = (
-        series_of(answer)
-        if answer.lstrip().startswith(ANSWER_HEAD)
-        else export_series(answer)
-    )
+    is_answer = answer.lstrip().startswith(ANSWER_HEAD)
+    series = series_of(answer) if is_answer else export_series(answer)
+    ended = [] if is_answer else ended_series(answer)
     if not series:
         message = "the answer holds no ratchet series"
         raise ValueError(message)
-    return pace_text(pace_rows(series, WINDOW, priors), stamp, WINDOW)
+    return pace_text(pace_rows(series, WINDOW, priors, ended), stamp, WINDOW)

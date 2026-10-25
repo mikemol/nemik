@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from nemik.ratchetseries import export_series, series_of
+from nemik.ratchetseries import ended_series, export_series, series_of
 
 FIXTURE = Path(__file__).parent / "fixtures" / "ratchet" / "mtools_series.json"
 EXPORT = Path(__file__).parent / "fixtures" / "ratchet" / "nemik_export.jsonl"
@@ -45,6 +45,23 @@ def test_the_recorded_export_is_one_value_per_gate_run_for_each_ratchet() -> Non
     ]
     assert got[0][2] == [226, 228, 228, 230, 230, 230, 230]
     assert got[2][2] == [1025, 1025, 1025, 1025, 1025, 1024, 1024]
+
+
+def test_a_series_that_ended_is_named_but_kept() -> None:
+    """Repo a's x stopped while y went on: x is named as ended and still read; quiet b is not."""
+    text = (
+        '{"metric":{"repo":"a","ratchet":"x"},"values":[5,5],"timestamps":[1000,2000]}\n'
+        '{"metric":{"repo":"a","ratchet":"y"},"values":[7,7,7],"timestamps":'
+        "[1000,2000,900000]}\n"
+        '{"metric":{"repo":"b","ratchet":"z"},"values":[3],"timestamps":[1000]}\n'
+    )
+    assert ended_series(text) == [("a", "x")]
+    got = export_series(text)
+    assert [(repo, ratchet) for repo, ratchet, _ in got] == [
+        ("a", "x"),
+        ("a", "y"),
+        ("b", "z"),
+    ]
 
 
 def test_an_export_line_out_of_order_is_sorted_by_its_timestamps() -> None:

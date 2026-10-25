@@ -17,7 +17,11 @@ AS_OF_KEY = '"as_of": "'
 WINDOW_KEY = '"window": "'
 BEHIND = "behind"
 OK = "ok"
+# a series ended with no tombstone: neither ok nor behind (nemik:W1039)
+UNKNOWN = "unknown"
+STATES = (BEHIND, OK, UNKNOWN)
 PACE_FILE = "ratchet-pace.json"
+GAUGE_UNKNOWN = "nemik_ratchet_unknown"
 GAUGE_AS_OF = "nemik_ratchet_pace_as_of"
 STAMP_LENGTH = 20  # YYYY-MM-DDTHH:MM:SSZ
 MARCH = 3
@@ -90,8 +94,8 @@ def read_pace(text: str) -> tuple[str, int, list[Row]]:
         if body.startswith("{"):
             got = fields(body)
             state = _first(got, "state")
-            if state not in {BEHIND, OK}:
-                message = f"state {state} is neither behind nor ok"
+            if state not in STATES:
+                message = f"state {state} is none of behind, ok or unknown"
                 raise ValueError(message)
             repo, ratchet = _first(got, "repo"), _first(got, "ratchet")
             seen, owed = int(_first(got, "observed")), int(_first(got, "required"))
@@ -164,6 +168,10 @@ def metric_lines(rows: list[Row], as_of: str) -> list[str]:
     for repo, ratchet, state, _, _ in rows:
         value = 1 if state == BEHIND else 0
         out.append(f'{GAUGE_BEHIND}{{repo="{repo}",ratchet="{ratchet}"}} {value}')
+    out.append(f"# TYPE {GAUGE_UNKNOWN} gauge")
+    for repo, ratchet, state, _, _ in rows:
+        value = 1 if state == UNKNOWN else 0
+        out.append(f'{GAUGE_UNKNOWN}{{repo="{repo}",ratchet="{ratchet}"}} {value}')
     out.append(f"# TYPE {GAUGE_OBSERVED} gauge")
     for repo, ratchet, _, seen, _ in rows:
         out.append(f'{GAUGE_OBSERVED}{{repo="{repo}",ratchet="{ratchet}"}} {seen}')

@@ -69,7 +69,7 @@ def test_a_file_without_a_stamp_or_with_a_wrong_state_is_refused() -> None:
     with pytest.raises(ValueError, match="no as_of"):
         read_pace('{"rows": [\n]}\n')
     bad = PACE.replace('"state": "ok"', '"state": "fine"')
-    with pytest.raises(ValueError, match="neither behind nor ok"):
+    with pytest.raises(ValueError, match="none of behind, ok or unknown"):
         read_pace(bad)
     with pytest.raises(ValueError, match="not a UTC stamp"):
         read_pace(PACE.replace("2026-10-24T19:00:00Z", "yesterday"))
