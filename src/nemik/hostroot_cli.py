@@ -27,6 +27,7 @@ from nemik.hostroot import HostRow, latest, records
 from nemik.landings import document as landings_document
 from nemik.landings import records as landings_records
 from nemik.logactivities import activities, repos
+from nemik.pacerun import pace_document
 
 QUERY = "stream:host_root_frontier"
 LANDINGS_QUERY = "service.name:mikemol-commit"
@@ -38,6 +39,7 @@ CACHE = Path.home() / ".cache" / "nemik"
 DEFAULT_OUT = CACHE / "host-root.json"
 LANDINGS_OUT = CACHE / "landings.json"
 LOG_OUT = CACHE / "log-activities.json"
+PACE_OUT = CACHE / "ratchet-pace.json"
 
 
 def _quoted(text: str) -> str:
@@ -57,6 +59,7 @@ class _Options(argparse.Namespace):
     out: Path | None
     landings: bool
     log_activities: bool
+    answer: Path | None
 
 
 def row_json(row: HostRow) -> str:
@@ -147,6 +150,30 @@ def landings(options: _Options, stamp: str) -> int:
     return 0
 
 
+def pace_file(source: Path, target: Path | None, stamp: str) -> int:
+    """Judge the ratchet series of a stored store answer and write the pace file (nemik:W1030).
+
+    Args:
+        source: The stored range-query answer over mikemol.ratchet.value.
+        target: Where to write the pace file, or None for the cache directory's.
+        stamp: When this run reads the store, a UTC stamp.
+
+    Returns:
+        0 when written; 1 when the answer cannot be read or is not a successful matrix.
+
+    """
+    out = target or PACE_OUT
+    try:
+        answer = source.read_text(encoding="utf-8")
+        previous = out.read_text(encoding="utf-8") if out.is_file() else ""
+        text = pace_document(answer, previous, stamp)
+    except (OSError, TypeError, ValueError) as error:
+        sys.stderr.write(f"nemik-hostroot: {error}\n")
+        return 1
+    _write(out, text)
+    return 0
+
+
 def log_activities(options: _Options, stamp: str) -> int:
     """Read nemik's own wait records and write the log activities document.
 
@@ -186,8 +213,16 @@ def main(argv: list[str] | None = None) -> int:
         action="store_true",
         help="write nemik's wait activities from the log (log-activities.json) instead",
     )
+    parser.add_argument(
+        "--answer",
+        type=Path,
+        default=None,
+        help="write the ratchet pace file (ratchet-pace.json) from this stored range-query answer",
+    )
     options = parser.parse_args(argv, namespace=_Options())
     stamp = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
+    if options.answer is not None:
+        return pace_file(options.answer, options.out, stamp)
     if options.landings:
         return landings(options, stamp)
     if options.log_activities:
