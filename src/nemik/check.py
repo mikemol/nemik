@@ -46,7 +46,6 @@ from nemik.blocks import (
     ref,
     unmanifested_by_repo,
 )
-from nemik.collapse import collapse as umbrellas_of
 from nemik.collapse import disagreements
 from nemik.collapse import lines as collapse_lines
 from nemik.digest import collapse, delta
@@ -184,32 +183,6 @@ def add_ready_neither_infos(root: Path, by_repo: dict[str, list[Finding]]) -> No
             f"{age / SECONDS_A_DAY:.1f} d): do each or atomize it"
         )
         by_repo.setdefault(repo, []).append(("Warning", "--", found))
-
-
-def add_umbrella_infos(merged: Graph, by_repo: dict[str, list[Finding]]) -> None:
-    """nemik:W710: tell each repo how many blocked cards wait behind one of its cards.
-
-    nemik.collapse rolls blocked cards up under the node that dominates them. One Info per repo
-    (the fleet has over a hundred umbrellas, and every session's hook prints every row) names how
-    many umbrellas sit under that repo's cards, how many blocked cards they hold, and the largest.
-
-    Args:
-        merged: The merged queue graph.
-        by_repo: The findings per repo, added to in place.
-
-    """
-    held: dict[str, list[tuple[int, str]]] = {}
-    for _, blockers, _, members in umbrellas_of(blocked_rows(merged)):
-        held.setdefault(blockers[0].partition(":")[0], []).append(
-            (len(members), blockers[0])
-        )
-    for repo, found in sorted(held.items()):
-        size, card = max(found)
-        found_text = (
-            f"{len(found)} umbrella(s) hold {sum(n for n, _ in found)} blocked cards; the "
-            f"largest is {card} with {size} cards waiting behind it: nemik-collapse lists them"
-        )
-        by_repo.setdefault(repo, []).append(("Info", "--", found_text))
 
 
 def add_roll_warnings(
@@ -761,7 +734,6 @@ def survey(
     # nemik:W685: a repo whose ready cards without a manifest passed the declared ratchet.
     add_manifest_warnings(merged, by_repo)
     add_roll_warnings(root, merged, by_repo)
-    add_umbrella_infos(merged, by_repo)
     add_ready_neither_infos(root, by_repo)
     # nemik:W356: an inter-workstream SLA. A card blocked on another repo's open card for longer than
     # the declared number of loop ticks is a Warning on the BLOCKER's card, since that repo can act.
