@@ -5,6 +5,8 @@
 # invoke the venv through its bin/ path (that is what sets sys.prefix), and name the staged
 # toolchain with PYTHONHOME, since bazel resolves the interpreter symlink at staging.
 set -eu
+# nemik:W1044: a target that Bazel runs in shards must say it can (tests/conftest.py keeps its share)
+if [ -n "${TEST_SHARD_STATUS_FILE:-}" ]; then touch "$TEST_SHARD_STATUS_FILE"; fi
 venv="${RUNFILES_DIR:-$TEST_SRCDIR}/_main/.venv"
 [ -x "$venv/bin/python3" ] || { echo "venv_pytest: $venv/bin/python3 not staged" >&2; exit 1; }
 PYTHONHOME="${RUNFILES_DIR:-$TEST_SRCDIR}/$(cat "$venv/pythonhome.runfiles")"

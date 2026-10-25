@@ -15,6 +15,8 @@ exports_files(["pyproject.toml"])
         # nemik:W625: the SHACL cache tests are full surveys (a cold one is tens of seconds); the warm-equals-cold
         # property runs five of them beside five twins.
         size = "large" if src in ("tests/test_layout.py", "tests/test_codon_census.py", "tests/test_warm_equals_cold.py", "tests/test_shaclinc.py", "tests/test_cache_user.py") else "medium",
+        # nemik:W1044: six browser PDF prints; run alone it passed, in the full gate it timed out at 300 s
+        shard_count = 3 if src == "tests/test_pdf.py" else 1,
         args = ["$(rootpath " + src + ")", "-c", "$(rootpath pyproject.toml)"],
         data = [src, "tests/installed.py", "tests/webpage.py", "tests/pagetext.py", "tests/conftest.py", "tools/cpuline.py", ".claude/settings.json", "//tests/fixtures:fleet", "pyproject.toml", "ARCHITECTURE.md", "skills/nemik/SKILL.md", "docs/positioning.md", "deploy/deployment.yaml", "src/nemik/data/workflows.toml", "tools/nemik_client.py", "BUILD.bazel", "Containerfile", ".forgejo/workflows/build.yml"] + glob(["tests/corpus/**"]) + [ "src/nemik/data/shapes.ttl", "src/nemik/data/nemik.ttl", "src/nemik/data/wcag.rego", "src/nemik/data/run-row.schema.json", ":.venv", "@opa//file", "@use_of_colour_rego//file", "@chromium//:files", "@chromium//:chrome-headless-shell"]
             # nemik:W445: the JRE (52 MB) and MPXJ's jars go to the one test that reads with them
@@ -59,7 +61,7 @@ exports_files(["pyproject.toml"])
             # nemik:W996: the ratchet series reader is tested on a real metric-store answer
             + (["//tests/fixtures:ratchet"] if src in ("tests/test_ratchetseries.py", "tests/test_pacerun.py") else [])
             # nemik:W1033: the round file contract test reads the recorded round file
-            + (["//tests/fixtures:round"] if src == "tests/test_round_contract.py" else [])
+            + (["//tests/fixtures:round"] if src in ("tests/test_round_contract.py", "tests/test_roundgauges.py") else [])
             # nemik:W623: the pre-commit hook is copied and run by its test
             + ([".githooks/pre-commit"] if src == "tests/test_githooks_snapshot.py" else [])
             + (["tools/image_replica.sh", ".githooks/post-commit"] if src == "tests/test_image_replica.py" else [])
