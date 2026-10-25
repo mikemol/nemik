@@ -58,6 +58,21 @@ What it does not yet show: a trace of an actual failing run. The harness now rec
 requests (9fc2f60), so the first recurrence will say which request was refused; if that is not a
 later script, this argument is wrong and the card stays open.
 
+## Why cards.js and not another asset: by time, not by path
+
+A foreign server serves every page path alike until its own test ends and it is torn down, so the
+loss is by time. Chromium fetches at most six scripts at once, in document order; the first six
+(three vendor files, graph, render, queue) are answered, and the last four (viewstate, panels,
+cards, wasm) are the ones refused. The page errors with the first *use* of a missing name, and the
+first load-time use among those four is `popLater`.
+
+This is checked by running the page, not by reading it (tests/test_page_load_order.py, W1069): with
+all four refused, or with cards.js alone refused, the first error is `popLater is not defined`; with
+cards.js served and the other three refused, it is not. A line scan of the inline script, tried first
+to prove "no earlier use", failed on strings, template literals, comments and arrow bodies, which is
+why the proof is a browser run. What the test does not cover: a failing run of the full page tests,
+which is still untraced.
+
 ## The explicit ordering that replaces the assumed ones
 
 `nemik-serve --port 0` binds the socket itself and writes `listening <port>` to stdout after the

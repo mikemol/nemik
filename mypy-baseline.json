@@ -554,7 +554,7 @@
  },
  "tests/webpage.py": {
   "explicit-any": 1,
-  "misc": 7
+  "misc": 5
  },
  "tools/check_run_rows.py": {
   "misc": 12

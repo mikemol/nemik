@@ -53,11 +53,41 @@ class Seen(Protocol):
     status: int
 
 
+class Route(Protocol):
+    """A request the page has paused for a handler."""
+
+    def abort(self) -> None:
+        """Fail the request as a refused connection would."""
+
+
 class Pager(Waitable, Protocol):
     """A page that reports its requests and responses."""
 
     def on(self, event: str, handler: Callable[[Seen], None]) -> None:
         """Call `handler` on each `event`."""
+
+    def route(self, pattern: str, handler: Callable[[Route], None]) -> None:
+        """Call `handler` on each request whose URL matches `pattern`."""
+
+
+class Browser(Protocol):
+    """A launched browser, as far as open_page needs it."""
+
+    def new_page(self, *, viewport: dict[str, int]) -> Pager:
+        """Open a page of that size."""
+
+
+class Chromium(Protocol):
+    """Playwright's Chromium launcher."""
+
+    def launch(self, *, executable_path: str | None = None) -> Browser:
+        """Start the browser."""
+
+
+class Playwright(Protocol):
+    """What sync_playwright() yields that open_page reads."""
+
+    chromium: Chromium
 
 
 @contextmanager
@@ -101,8 +131,12 @@ def served(series: Path | None = None, root: Path = FLEET) -> Iterator[str]:
             proc.wait()
 
 
-def open_page(p: Any, url: str, wait: str = CY_READY) -> tuple[Any, Any]:
+def open_page(
+    p: Playwright, url: str, wait: str = CY_READY, block: tuple[str, ...] = ()
+) -> tuple[Any, Any]:
     """A browser and a page on `url`, once `wait` (a JS predicate) holds; skips without a browser.
+
+    `block` names files whose requests are refused, as a server that went away would (W1069).
 
     Raises:
         PageBrokenError: The page broke; the message lists the requests that failed or got an
@@ -126,6 +160,11 @@ def open_page(p: Any, url: str, wait: str = CY_READY) -> tuple[Any, Any]:
         if response.status >= HTTP_ERROR:
             refused.append(f"{response.status} {response.url}")
 
+    def refuse(route: Route) -> None:
+        route.abort()
+
+    for name in block:
+        page.route(f"**/{name}", refuse)
     page.on("requestfailed", note_failed)
     page.on("response", note_status)
     try:
@@ -134,3 +173,18 @@ def open_page(p: Any, url: str, wait: str = CY_READY) -> tuple[Any, Any]:
         message = f"{e}; requests refused or failed: {refused}"
         raise PageBrokenError(message) from e
     return browser, page
+
+
+def first_error(block: tuple[str, ...]) -> str:
+    """Load the page with the requests for `block` refused and read the error it breaks on.
+
+    Returns:
+        The page-broken message, or an empty string when the page loaded.
+
+    """
+    with served() as url, sync_api.sync_playwright() as p:
+        try:
+            open_page(p, url, block=block)
+        except PageBrokenError as e:
+            return str(e)
+    return ""
