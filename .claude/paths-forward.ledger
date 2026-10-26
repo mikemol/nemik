@@ -2615,3 +2615,5 @@
 2026-10-26T20:09:20Z  prune W1056 edge-pruned writer    "mtools:W1997"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T20:09:20Z  status W1056 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T20:11:37Z  tick  W1129 minted    -         "The required-fall alert fires only when required falls below the value, since the clamp lowers it legitimately to the value"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W1685
+2026-10-26T20:17:11Z  status W1129 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T20:18:10Z  status W1123 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

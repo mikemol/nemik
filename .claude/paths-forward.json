@@ -23453,7 +23453,6 @@
       ],
       "blocked_on": [
         "W1122",
-        "W1123",
         "W1124"
       ],
       "blocked_kind": "agent",
@@ -23463,7 +23462,7 @@
       "minted_during": "tick",
       "caused_by": "W980",
       "last_worked": "2026-10-26T17:09:40Z",
-      "ticks_blocked": 4,
+      "ticks_blocked": 0,
       "weight": 100,
       "manifest": [
         "tests/test_trs.py",
@@ -26311,7 +26310,7 @@
     {
       "symbol": "W1123",
       "title": "Pay the E501 family: long lines in src and tests",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W1014"
       ],
@@ -26320,14 +26319,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Pay the next long lines (E501 above 100) and PERF401 in small files; realize.py done in stack536",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-26: landed 941945e, pushed: ruff 2695 to 2693",
       "issued_at": "2026-10-26T17:09:40Z",
       "minted_during": "tick",
       "caused_by": "W1014",
-      "last_worked": "2026-10-26T19:41:23Z",
+      "last_worked": "2026-10-26T20:18:10Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261026T201810Z",
       "manifest": [
         "src/nemik/realize.py",
         "ruff-baseline.json"
@@ -26422,22 +26421,24 @@
       "status": "working",
       "enables": [],
       "touches": [
-        "velocity"
+        "velocity",
+        "file:src/nemik/where.py!w"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Stack537 lands the ago: spelling; then the where predicate parser (where.py) for --oldest, --events and the other modes",
+      "next_bounded_step": "where.py (parser, matches) lands in stack538 unwired; then wire --where into --oldest, --events and the other modes in history.py once stack537 (ago:) has landed",
       "evidence": "2026-10-26: 2026-10-26: verified line 282096 (origin human, 19:44:40Z): 'the proper shape probably looks a lot like the find command's filter language'; the first cited line 281985 (a queued_command) did not come back as a user record from the reader, so only 282096 is attached as the warrant, which carries the find(1) shape; the ask itself (a not-blocked mode on --oldest) is relayed from github-8f and luthen | 2026-10-26: 2026-10-26 github-8f: --baseline -45m is read by argparse as an option (only --baseline=-45m works); folded here, not W1127 (done): ago:45m, ago:1h, ago:2d now spell a window, and --help names both forms (stack537). The where language is still to build",
       "issued_at": "2026-10-26T19:47:26Z",
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W1692",
-      "last_worked": "2026-10-26T19:54:28Z",
+      "last_worked": "2026-10-26T20:17:12Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
-        "src/nemik/history.py",
         "src/nemik/where.py",
-        "tests/test_where.py"
+        "tests/test_where.py",
+        "src/nemik/history.py",
+        "tests/test_history.py"
       ],
       "warrants": [
         {
@@ -26471,19 +26472,27 @@
     },
     {
       "symbol": "W1129",
-      "title": "The required-fall alert fires only when required falls below the value, since the clamp lowers it legitimately to the value",
-      "status": "ready",
+      "title": "The required-fall alert is clamp-aware: resets_of reads the value, and fixtures cover a restored and a clamped series",
+      "status": "working",
       "enables": [],
-      "touches": [],
+      "touches": [
+        "file:src/nemik/pacerun.py!w"
+      ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
+      "next_bounded_step": "Land stack538, send luthen the sha of required-restored.jsonl and required-clamped.jsonl",
       "evidence": "",
       "issued_at": "2026-10-26T20:11:37Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W1685",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-26T20:17:11Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/pacerun.py",
+        "tests/test_required_value.py",
+        "BUILD.bazel"
+      ]
     }
   ],
   "residue": [
@@ -26756,6 +26765,15 @@
       "taken_at": "2026-10-25T10:45:50Z",
       "renewed_at": "2026-10-26T20:09:20Z",
       "expires_at": "2026-10-26T20:39:20Z"
+    },
+    {
+      "tag": "file:src/nemik/pacerun.py!w",
+      "holder": "claude-nemik",
+      "waypoint": "W1129",
+      "base_sha": "941945efe7ae699bbae3c901a18f61045ec86b01",
+      "taken_at": "2026-10-26T20:17:11Z",
+      "renewed_at": "2026-10-26T20:17:11Z",
+      "expires_at": "2026-10-26T20:47:11Z"
     }
   ],
   "advice": [

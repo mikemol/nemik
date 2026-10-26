@@ -18,6 +18,9 @@ from nemik.ratchetseries import ended_series, export_series, series_of
 from nemik.rebaselines import DECLARED, since
 
 ANSWER_HEAD = '{"status"'
+# the two metric names a required-fall export may hold, told apart by their __name__ label
+REQUIRED_NAME = '"__name__":"nemik_ratchet_fall_required"'
+VALUE_NAME = '"__name__":"mikemol.ratchet.value"'
 
 
 def floors_of(export: str) -> dict[str, int]:
@@ -53,10 +56,20 @@ def resets_of(export: str) -> list[str]:
         series only rose or held.
 
     """
+    required = [line for line in export.splitlines() if REQUIRED_NAME in line]
+    now = {
+        f"{repo}\n{ratchet}": values[-1]
+        for repo, ratchet, values in export_series(
+            "\n".join(line for line in export.splitlines() if VALUE_NAME in line)
+        )
+        if values
+    }
     return [
         f"{repo}\n{ratchet}"
-        for repo, ratchet, values in export_series(export)
-        if values and values[-1] < max(values)
+        for repo, ratchet, values in export_series("\n".join(required))
+        if values
+        and values[-1] < max(values)
+        and values[-1] < now.get(f"{repo}\n{ratchet}", values[-1] + 1)
     ]
 
 

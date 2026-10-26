@@ -1,0 +1,4 @@
+{"metric":{"__name__":"nemik_ratchet_fall_required","repo":"mtools","ratchet":"mdstruct/stubs/panflute-allowlist.txt"},"values":[6,6,6,1,1],"timestamps":[1000,2000,3000,4000,5000]}
+{"metric":{"__name__":"mikemol.ratchet.value","repo":"mtools","ratchet":"mdstruct/stubs/panflute-allowlist.txt"},"values":[6,5,3,1,1],"timestamps":[1000,2000,3000,4000,5000]}
+{"metric":{"__name__":"nemik_ratchet_fall_required","repo":"nemik","ratchet":"mypy-baseline.json"},"values":[2,2,2,1,1],"timestamps":[1000,2000,3000,4000,5000]}
+{"metric":{"__name__":"mikemol.ratchet.value","repo":"nemik","ratchet":"mypy-baseline.json"},"values":[300,299,298,297,296],"timestamps":[1000,2000,3000,4000,5000]}
