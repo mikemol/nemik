@@ -25,15 +25,18 @@ def _ring(last_state: Node) -> Graph:
 
 
 def test_a_ring_of_three_is_found_once_in_order() -> None:
+    """The walker names the ring W1, W2, W3 once, in enable order."""
     ring = [waypoint_uri("r", s) for s in ("W1", "W2", "W3")]
     assert dependency_cycles(_ring(NEMIK.Ready)) == [tuple(ring)]
 
 
 def test_a_done_member_breaks_the_ring() -> None:
+    """A finished card waits on nothing, so the ring is no longer one."""
     assert dependency_cycles(_ring(NEMIK.Done)) == []
 
 
 def test_the_deadlock_warning_names_the_ring_in_order() -> None:
+    """Each member's warning spells the ring starting at that member."""
     # three blocked cards waiting on one another round a ring, all on agents (W331 warns)
     cards = [
         {

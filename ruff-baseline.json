@@ -598,7 +598,6 @@
   "S603": 1
  },
  "tests/test_ask_priority.py": {
-  "D103": 3,
   "PLR2004": 1
  },
  "tests/test_baseline.py": {
@@ -715,7 +714,6 @@
   "PLC0415": 2
  },
  "tests/test_dependency_cycle.py": {
-  "D103": 3,
   "E501": 1
  },
  "tests/test_deterministic.py": {
