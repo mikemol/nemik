@@ -2467,3 +2467,5 @@
 2026-10-26T01:23:57Z  status W1062 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T01:23:57Z  status W1073 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T01:24:20Z  status W1075 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T01:26:40Z  tick  W1085 minted    -         "Replace test_layout's clock-bound page waits with event waits: a 30 s wait_for_selector timed out in a loaded gate with no page error named"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1060
+2026-10-26T01:27:54Z  status W1085 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

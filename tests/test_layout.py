@@ -26,6 +26,11 @@ if TYPE_CHECKING:
 sync_api = pytest.importorskip("playwright.sync_api")
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
+# nemik:W1085: the page's own readiness, awaited without a wall-clock bound (timeout=0): a 30 s
+# wait_for_selector failed a test the gate passed on the same tree, on a loaded host
+PATHKEY_DRAWN = "() => document.querySelector('#pathkey line') !== null"
+SECTIONS_DRAWN = "() => document.querySelector('details.sec') !== null"
+REPO_CHIPS_DRAWN = "() => document.querySelector('#repos button[data-repo]') !== null"
 
 
 def _launch(playwright: "Playwright") -> "Browser":
@@ -294,7 +299,7 @@ def test_scope_rings_carry_distinct_ruler_motifs_pinned_to_paperkits(server) -> 
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
         page.goto(server)
         # the legend is drawn once the first graph (and its patterns) has loaded
-        page.wait_for_selector("#pathkey line", state="attached")
+        page.wait_for_function(PATHKEY_DRAWN, timeout=0)
         motifs = page.evaluate("() => [0, 1, 2, 3].map(rulerMotif)")
         lengths = page.evaluate("() => data.ruler.f.map(p => p.length)")
         dashes = page.evaluate("() => SCOPES.map(scopeDash)")
@@ -394,7 +399,7 @@ def test_side_panel_sections_fold_and_the_choice_survives_a_reload(server) -> No
         browser = _launch(p)
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
         page.goto(server)
-        page.wait_for_selector("details.sec")
+        page.wait_for_function(SECTIONS_DRAWN, timeout=0)
         first = page.evaluate(
             "() => Object.fromEntries([...document.querySelectorAll('details.sec')].map(d => [d.id, d.open]))"
         )
@@ -409,7 +414,7 @@ def test_side_panel_sections_fold_and_the_choice_survives_a_reload(server) -> No
             " document.getElementById('goals').checkVisibility()]"
         )
         page.reload()
-        page.wait_for_selector("details.sec")
+        page.wait_for_function(SECTIONS_DRAWN, timeout=0)
         kept = page.evaluate("() => document.getElementById('sec-goals').open")
         browser.close()
     assert first["sec-weather"] is False and first["sec-findings"] is False
@@ -595,7 +600,7 @@ def test_every_meaning_the_view_colours_has_a_second_channel(
             viewport={"width": 1700, "height": 1250}, color_scheme=scheme
         )
         page.goto(server)
-        page.wait_for_selector("#pathkey line", state="attached")
+        page.wait_for_function(PATHKEY_DRAWN, timeout=0)
         measured = page.evaluate(USE_OF_COLOUR)
         browser.close()
     data = tmp_path / "input.json"
@@ -666,7 +671,7 @@ def test_every_repo_chip_names_its_health_in_words(server) -> None:
         browser = _launch(p)
         page = browser.new_page()
         page.goto(server)
-        page.wait_for_selector("#repos button[data-repo]")
+        page.wait_for_function(REPO_CHIPS_DRAWN, timeout=0)
         chips = page.evaluate(
             "() => [...document.querySelectorAll('#repos button[data-repo]')].map(b => "
             "[b.dataset.repo, b.dataset.health, b.getAttribute('aria-label'), "
@@ -1086,7 +1091,7 @@ def test_meaningful_strokes_reach_three_to_one(server, scheme) -> None:
             viewport={"width": 1700, "height": 1250}, color_scheme=scheme
         )
         page.goto(server)
-        page.wait_for_selector("#pathkey line", state="attached")
+        page.wait_for_function(PATHKEY_DRAWN, timeout=0)
         ratios = page.evaluate(NON_TEXT_CONTRAST)
         browser.close()
     low = {k: round(v, 2) for k, v in ratios.items() if v < 3}
@@ -1150,7 +1155,7 @@ def test_no_command_route_or_tools_panel_remains(server) -> None:
         browser = _launch(p)
         page = browser.new_page()
         page.goto(server)
-        page.wait_for_selector("details.sec")
+        page.wait_for_function(SECTIONS_DRAWN, timeout=0)
         tools = page.evaluate(
             "() => [document.getElementById('tool'), document.getElementById('sec-tools')]"
         )
