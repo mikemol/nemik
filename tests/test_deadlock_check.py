@@ -55,6 +55,7 @@ def _cycle_warnings(root: Path) -> list[tuple[str, str]]:
 
 
 def test_each_card_of_an_agent_deadlock_is_warned() -> None:
+    """Two cards blocked on each other, both on agents, are each warned."""
     import tempfile
 
     with tempfile.TemporaryDirectory() as tmp:
@@ -64,6 +65,7 @@ def test_each_card_of_an_agent_deadlock_is_warned() -> None:
 
 
 def test_a_cycle_with_an_operator_block_is_left_to_the_operator() -> None:
+    """A cycle that includes a card blocked on the operator draws no deadlock warning."""
     import tempfile
 
     with tempfile.TemporaryDirectory() as tmp:

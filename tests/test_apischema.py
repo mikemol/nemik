@@ -27,6 +27,7 @@ def _records(node: object) -> list[dict]:
 
 
 def test_every_manifest_field_is_in_a_schema_and_nothing_else() -> None:
+    """The generated schemas name each manifest field and no other."""
     m = load()
     generated = schemas()
     assert set(generated) == set(m)
@@ -43,6 +44,7 @@ def test_every_manifest_field_is_in_a_schema_and_nothing_else() -> None:
 
 
 def test_the_static_build_publishes_one_schema_per_file(tmp_path: Path) -> None:
+    """A static build writes one schema document beside each published file."""
     withheld = tmp_path / "withheld.json"
     withheld.write_text(json.dumps({"version": 1, "as_of": "x", "items": []}))
     out = tmp_path / "out"

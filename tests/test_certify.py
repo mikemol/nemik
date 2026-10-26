@@ -38,6 +38,7 @@ def _queue(tmp_path: Path) -> Path:
 
 
 def test_certify_judges_each_waypoint_in_one_batch(tmp_path: Path) -> None:
+    """One --certify call prints a verdict line for each waypoint it was given."""
     done = _pf(_queue(tmp_path), "--certify", "W1", "W2")
     lines = done.stdout.splitlines() + done.stderr.splitlines()
     verdicts = [json.loads(ln) for ln in lines if ln.startswith("{")]
@@ -48,6 +49,7 @@ def test_certify_judges_each_waypoint_in_one_batch(tmp_path: Path) -> None:
 
 
 def test_an_absent_field_is_residue_not_clean(tmp_path: Path) -> None:
+    """A waypoint missing a field is reported as residue and the command exits non-zero."""
     done = _pf(_queue(tmp_path), "--certify", "W1", "W2")
     assert done.returncode != 0, "a queue with residue must not exit clean"
     lines = done.stdout.splitlines() + done.stderr.splitlines()

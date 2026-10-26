@@ -579,7 +579,6 @@
   "PLR2004": 1
  },
  "tests/test_apischema.py": {
-  "D103": 2,
   "DOC201": 1
  },
  "tests/test_apply_witness.py": {
@@ -660,7 +659,6 @@
   "E501": 1
  },
  "tests/test_certify.py": {
-  "D103": 2,
   "S404": 1,
   "S603": 1
  },
@@ -708,7 +706,6 @@
   "PT018": 1
  },
  "tests/test_deadlock_check.py": {
-  "D103": 2,
   "PLC0415": 2
  },
  "tests/test_dependency_cycle.py": {

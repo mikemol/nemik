@@ -475,9 +475,6 @@
  "tests/test_toil.py": {
   "misc": 8
  },
- "tests/test_trs.py": {
-  "misc": 1
- },
  "tests/test_trs_published.py": {
   "misc": 7,
   "type-arg": 1

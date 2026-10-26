@@ -79,4 +79,4 @@ def test_orders_are_unique_integers() -> None:
     """No two events share an order and each order is an integer."""
     orders = [o for o, _, _ in _events(trs("r", *_graphs()))]
     assert len(orders) == len(set(orders))
-    assert all(isinstance(Literal(o).toPython(), int) for o in orders)
+    assert all(int(str(Literal(o))) == o for o in orders)
