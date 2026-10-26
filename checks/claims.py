@@ -190,6 +190,8 @@ def hub_modules_depend_on_everything_below():
     # nemik:W1025: and publishes the round gauges, through roundgauges (a reader of the round file
     # over pacepublish's timestamp, roundfile's gauge lines and roundof's drift), and names the file
     # by roundfile's ROUND_FILE.
+    # nemik:W1138: and publishes one series per open card, through cardseries, a leaf that rests on
+    # pacepublish's timestamp reader alone.
     expected = {
         "metrics": lower | {"realize", "runlogs", "workrows"},
         "serve": lower
@@ -215,6 +217,7 @@ def hub_modules_depend_on_everything_below():
             "roundfile",
             "roundgauges",
             "buildcost",
+            "cardseries",
         },
     }
     for hub, want in expected.items():

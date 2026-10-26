@@ -46,6 +46,7 @@ from nemik.buildcost import (
     peak_kib_of,
     swap_kib_of,
 )
+from nemik.cardseries import card_lines
 from nemik.check import (
     LEDGER,
     QUEUE,
@@ -1482,11 +1483,13 @@ def private_files(model: Model, out: Path) -> list[Path]:
     round_text = round_path.read_text(encoding="utf-8") if round_path.is_file() else ""
     round_lines = round_board(round_text, working_cards(nodes), ready_cards(nodes))
     cost_lines = cost_gauges()
+    # nemik:W1138: one series per open card, the record un-flattened, aggregated at query time
+    cards = [{k: v for k, v in n.items() if isinstance(v, str)} for n in nodes]
     put(
         "metrics",
         model.metrics()
         + gauge.encode()
-        + "\n".join([*pace_lines, *round_lines, *cost_lines, ""]).encode(),
+        + "\n".join([*pace_lines, *round_lines, *cost_lines, *card_lines(cards), ""]).encode(),
     )
     return made
 

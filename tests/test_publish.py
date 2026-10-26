@@ -36,6 +36,7 @@ def test_a_publish_flips_current_and_writes_the_private_files(tmp_path: Path) ->
         assert (snap / name).is_file(), name
     metrics = (snap / "metrics").read_text()
     assert "nemik_graph_nodes" in metrics
+    assert "# TYPE nemik_card_issued_seconds gauge" in metrics  # nemik:W1138
     assert "nemik_snapshot_published_seconds" in metrics
     hashes = json.loads((snap / "hashes.json").read_text())
     assert "operator.json" not in hashes, (
