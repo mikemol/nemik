@@ -7,7 +7,6 @@ Reads `.git/image-replica.last` (written by tools/image_replica_runner.sh, nemik
 `--gate-green` through the queue writer from what it says; this command only reads.
 """
 
-import argparse
 import sys
 from pathlib import Path
 
@@ -71,22 +70,30 @@ def shipped(gitdir: Path, sha: str) -> str:
     return "SHIPPED" if fields[1] == "0" else f"UNSHIPPED shipper exit {fields[1]}"
 
 
-def main(argv: list[str] | None = None) -> int:
-    """Print the verdict; exit 1 when the replay is RED.
+def run(words: list[str]) -> int:
+    """Print the verdict of the repository named by `--repo` (default the current one).
+
+    Read from the plain words, not argparse, which Codon does not compile (nemik:W1116).
 
     Args:
-        argv: The arguments, or None for the process's own.
+        words: The command line's arguments, not the program name.
+
+    Returns:
+        1 when the replay is RED, else 0.
+
+    """
+    at = words.index("--repo") + 1 if "--repo" in words else 0
+    repo = Path(words[at]) if 0 < at < len(words) else Path.cwd()
+    line = report(repo / ".git")
+    sys.stdout.write(line + "\n")
+    return 1 if line.startswith("RED") else 0
+
+
+def main() -> int:
+    """Print the verdict for the process's own command line; exit 1 when the replay is RED.
 
     Returns:
         The exit status.
 
     """
-    ap = argparse.ArgumentParser(
-        prog="nemik-replica", description=(main.__doc__ or "").strip()
-    )
-    ap.add_argument("--repo", type=Path, default=Path.cwd(), help="the repository root")
-    args = ap.parse_args(argv)
-    repo: Path = args.repo
-    line = report(repo / ".git")
-    sys.stdout.write(line + "\n")
-    return 1 if line.startswith("RED") else 0
+    return run(sys.argv[1:])

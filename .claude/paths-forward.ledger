@@ -2556,3 +2556,10 @@
 2026-10-26T15:22:52Z  status W1110 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T15:28:21Z  status W1115 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T15:42:18Z  tick  W1115 advanced  unblock   "stack527 (W1115 horizon in --pace, W1014 mypy 5758 to 5753) queued behind stack526 (W1114); codon row next: alarm.py bare * suspected, codon binary search running [blocked by W1114]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T15:46:07Z  status W1114 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T16:08:40Z  status W1112 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T16:08:40Z  status W1115 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T16:12:54Z  status W993 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T16:15:16Z  tick  W1116 minted    -         "Pay the codon ratchet's owed 1 by making one failing module compile whole, the smallest argparse-only CLI first"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
+2026-10-26T16:17:56Z  status W1116 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T16:18:12Z  tick  W1116 advanced  collapse  "stack529 (W1116 replica_cli off argparse, codon row owed 1) queued behind stack528 (W993); the rest of the ready cards wait on the gates, not on a blocker [reason: W1116 and W993 are both in the gate (stack528 inflight, stack529 queued); next ready cards W1092 and W969 each touch serve.py or rank.py which stack528 carries (cites W993, W1092, W969)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

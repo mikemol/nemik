@@ -4,7 +4,7 @@
 
 from pathlib import Path
 
-from nemik.replica_cli import main, pushed_sha, report, shipped
+from nemik.replica_cli import pushed_sha, report, run, shipped
 
 SHA = "c" * 40
 
@@ -46,10 +46,10 @@ def test_the_report_words_green_and_red_and_the_exit_follows(tmp_path: Path) -> 
     """GREEN exits 0, RED exits 1, and no replay yet is NONE."""
     green = tmp_path / "g"
     assert report(_gitdir(green, f"{SHA} 0 900\n", "packed")).startswith("GREEN")
-    assert main(["--repo", str(green)]) == 0
+    assert run(["--repo", str(green)]) == 0
     red = tmp_path / "r"
     _gitdir(red, f"{SHA} 2 300\n", "loose")
-    assert main(["--repo", str(red)]) == 1
+    assert run(["--repo", str(red)]) == 1
     assert report(_gitdir(tmp_path / "n", "", "packed")).startswith("NONE")
 
 
