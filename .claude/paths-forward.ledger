@@ -2501,3 +2501,18 @@
 2026-10-26T11:04:23Z  status W1082 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T11:04:24Z  status W1090 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T11:14:23Z  status W1092 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T11:35:17Z  status W1092 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T11:52:20Z  tick  W1093 minted    -         "Warn on a card blocked on a card that is done in another repo"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W59
+2026-10-26T11:52:22Z  tick  W1094 minted    -         "Warn on a queue whose ledger has no tick line for longer than its loop cadence plus slack"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W59
+2026-10-26T11:56:26Z  tick  W1095 minted    -         "Replace the ledger's Activity triples in the graph with a per-card summary (effort count by class, last activity, weekly counts) built in one streaming pass, and move serve, blocks, metrics and history onto it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1073
+2026-10-26T11:56:26Z  tick  W1096 minted    -         "Trace the 370 MiB the Model rebuild holds outside the graph: findings, annotation indices, SHACL caches, parsed JSON, the document"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1073
+2026-10-26T11:58:00Z  tick  W1097 minted    -         "Define the per-card ledger summary (effort count by class, last activity stamp, week counts) and build it in the ledger pass beside the Activity triples, with a test that it equals what the consumers compute from the triples"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1095
+2026-10-26T11:58:00Z  tick  W1098 minted    -         "Move serve._to_json's effort and last-activity onto the ledger summary, published documents byte-identical"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1095
+2026-10-26T11:58:00Z  tick  W1099 minted    -         "Move blocks.annotate's last-activity read onto the ledger summary, output unchanged"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1095
+2026-10-26T11:58:00Z  tick  W1100 minted    -         "Move metrics' last-activity and effort-class reads onto the ledger summary, output unchanged"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1095
+2026-10-26T11:58:00Z  tick  W1101 minted    -         "Move history's weekly roll-up onto the ledger summary, output unchanged"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1095
+2026-10-26T11:58:00Z  tick  W1102 minted    -         "Move idle and trs off the Activity triples onto the ledger summary, output unchanged"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1095
+2026-10-26T11:58:00Z  tick  W1103 minted    -         "Stop adding the Activity triples to the merged graph once all six consumers read the summary, and measure the build's peak"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1095
+2026-10-26T12:00:36Z  status W1083 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T12:26:44Z  status W1097 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T12:40:56Z  status W1063 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

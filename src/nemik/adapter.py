@@ -501,6 +501,30 @@ def _ledger_graph(repo: str, ledger_path: Path) -> tuple[Graph, int]:
     return g, unparsed
 
 
+def ledger_rows(ledger_path: Path) -> list[tuple[str, str, str, str]]:
+    """Reduce a ledger to the plain rows ledgersummary sums (nemik:W1097).
+
+    Args:
+        ledger_path: The ledger file.
+
+    Returns:
+        One (stamp, kind, symbol, effort class) per parsed line in file order; the symbol is empty
+        for a line that names no card.
+
+    """
+    rows: list[tuple[str, str, str, str]] = []
+    for rec in ledger.read(ledger_path):
+        if isinstance(rec, ledger.Unparsed):
+            continue
+        e = rec.entry
+        symbol = "" if e.symbol == model.NO_SYMBOL else e.symbol
+        # the stamp as the triple holds it (a dateTime literal's lexical form), so a consumer that
+        # moves from the triples to the summary publishes the same text
+        stamp = str(Literal(rec.stamp, datatype=XSD.dateTime))
+        rows.append((stamp, e.kind, symbol, KIND_CLASS.get(e.kind, "unclassified")))
+    return rows
+
+
 def tick_notes(ledger_path: Path) -> list[str]:
     """Give the notes of a ledger's tick lines, oldest first (nemik:W683).
 
