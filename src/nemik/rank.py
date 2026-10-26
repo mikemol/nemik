@@ -21,6 +21,7 @@ from rdflib.term import Node
 
 from nemik import tiers
 from nemik.adapter import BASE, NEMIK, OSLC_CM, workstream_uri
+from nemik.pacecli import pace_exit, pace_process
 from nemik.roundcli import show_round, write_round_file
 from nemik.stackable import manifest
 
@@ -646,6 +647,20 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         default=[],
         help="what-if: rank as if these cards were closed (nemik:W351)",
     )
+    ap.add_argument(
+        "--pace",
+        action="store_true",
+        help="print one line per behind or unknown ratchet from ratchet-pace.json in --root and "
+        "exit 1 when any is, 0 when none, 2 when the file is unreadable (nemik:W1107)",
+    )
+    # --pace is read-only and fast: no survey, only the pace file (nemik:W1107)
+    answered = (
+        pace_process(default_root())
+        if argv is None
+        else pace_exit(argv, default_root())
+    )
+    if answered >= 0:
+        raise SystemExit(answered)
     args = ap.parse_args(argv)
     if (
         args.band
