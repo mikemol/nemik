@@ -2,7 +2,16 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W1024: a round is the top N ready cards, N from landed stacks; drift is outside it."""
 
-from nemik.roundof import CEILING, capacity, drift, outside, round_of, supply, width
+from nemik.roundof import (
+    CEILING,
+    CEILING_TERM,
+    capacity,
+    drift,
+    outside,
+    round_of,
+    supply,
+    width,
+)
 
 RANKED = [("W5", "9.0"), ("W2", "4.5"), ("W9", "1.0"), ("W1", "0.0")]
 DISJOINT = 3  # a.py, c.py and d.py of the plans below
@@ -21,9 +30,15 @@ def test_width_follows_supply_and_names_what_binds() -> None:
     """The landed median never caps it: supply above it wins, the ceiling bounds it."""
     assert width(1, 3, "floor") == (3, "floor")
     assert width(5, 3, "floor") == (5, "supply")
-    assert width(CEILING, 3, "floor") == (CEILING, "headroom")
-    assert width(CEILING + 4, 3, "floor") == (CEILING, "headroom")
+    assert width(CEILING, 3, "floor") == (CEILING, CEILING_TERM)
+    assert width(CEILING + 4, 3, "floor") == (CEILING, CEILING_TERM)
     assert width(2, 8, "landings") == (8, "landings")
+
+
+def test_the_ceiling_says_it_is_declared_not_measured() -> None:
+    """nemik:W1092: a label must not claim a measurement the round does not have."""
+    assert "declared" in CEILING_TERM
+    assert "headroom" not in CEILING_TERM
 
 
 def test_capacity_is_the_median_stack_size_lifted_to_the_floor() -> None:

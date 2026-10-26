@@ -2497,3 +2497,7 @@
 2026-10-26T10:34:59Z  status W1082 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T10:34:59Z  status W1083 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T10:46:32Z  tick  W1091 minted    -         "Answer nemik: luthen-observability:W1644 is done; W1073 stays open for the memory cut"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-10-26-nemik-edge-luthen-observability-W1644-caused_by-W1073.md
+2026-10-26T10:51:03Z  tick  W1092 minted    -         "Say ceiling (declared 6), not headroom, until the ceiling is measured, and learn it from the gate's history"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1082
+2026-10-26T11:04:23Z  status W1082 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T11:04:24Z  status W1090 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T11:14:23Z  status W1092 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

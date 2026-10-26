@@ -69,11 +69,12 @@ def capacity(sizes: list[int]) -> tuple[int, str]:
 
 
 SUPPLY = "supply"
-HEADROOM = "headroom"
 # nemik:W1082: the most cards one gate run is taken to carry. Declared, not measured: the gate's
 # cost per entry against the host's CPU headroom (drum's admission) is not read yet, so this
-# stands for it and the round names it as the binding term when it binds.
+# stands for it. The round names it as the binding term when it binds, and says it is declared:
+# a label that claims a measurement it does not have is the defect (github-8f, 2026-10-26, W1092).
 CEILING = 6
+CEILING_TERM = f"ceiling (declared {CEILING})"
 
 
 def supply(manifests: list[list[str]], busy: list[str]) -> int:
@@ -111,12 +112,12 @@ def width(stackable: int, landed: int, landed_source: str) -> tuple[int, str]:
         landed_source: Where that came from.
 
     Returns:
-        (the width, its binding term): headroom when the supply reaches CEILING, supply when it
-        exceeds the landed width, else the landed width and its source.
+        (the width, its binding term): the declared ceiling when the supply reaches CEILING,
+        supply when it exceeds the landed width, else the landed width and its source.
 
     """
     if stackable >= CEILING:
-        return max(CEILING, landed), HEADROOM
+        return max(CEILING, landed), CEILING_TERM
     if stackable > landed:
         return stackable, SUPPLY
     return landed, landed_source

@@ -166,7 +166,8 @@ def round_lines(
         stackable: How many of its ready cards can stack together (stackable_of); 0 when unknown.
 
     Returns:
-        A header naming the round size and its binding term (supply, headroom, landings or floor),
+        A header naming the round size and its binding term (supply, the declared ceiling,
+        landings or floor),
         then one line per card of the round.
 
     """
