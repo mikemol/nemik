@@ -272,6 +272,8 @@ def test_a_baseline_time_with_a_zone_or_a_window_names_an_exact_instant(
     assert resolve(repo, "2026-10-01T12:01:00Z") == first
     assert resolve(repo, "2026-10-01T08:01:00-04:00") == first
     assert resolve(repo, "-99999d") is None
+    assert resolve(repo, "ago:99999d") is None
+    assert resolve(repo, "ago:1h") == resolve(repo, "-1h")
     # the second commit, days old, is the last one before an hour ago
     assert resolve(repo, "-1h") != first
 

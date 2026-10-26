@@ -226,7 +226,10 @@ _DATE = re.compile(r"\d{4}-\d{2}-\d{2}([T ]\d{2}:\d{2}(:\d{2})?)?")
 # nemik:W1127: a time of day names its zone (Z or an offset), or it is read as the machine's local
 # time and prints a plausible answer for the wrong instant (luthen's "12:34Z" was 12:34 local)
 _ZONED = re.compile(r"\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}(:\d{2})?(Z|[+-]\d{2}:?\d{2})")
-_RELATIVE = re.compile(r"-(\d+)([mhd])")
+# `ago:45m` is the spelling argparse accepts after `--baseline` (a value starting with `-` reads as
+# an option there); `-45m` works as `--baseline=-45m`. Bare `45m` would clash with an abbreviated
+# sha.
+_RELATIVE = re.compile(r"(?:-|ago:)(\d+)([mhd])")
 _SECONDS = {"m": 60, "h": 3600, "d": 86400}
 _CROSS = re.compile(r"([A-Za-z0-9][A-Za-z0-9._-]*):W[1-9][0-9]*")
 
@@ -1062,7 +1065,9 @@ def main(argv: list[str] | None = None) -> int:
         metavar="REV_OR_DATE",
         help="planned versus actual since a baseline: the cards open then, closed, dropped or "
         f"still open now, and the cards added since by how they were minted; without a value, "
-        f"the repo's declared {BASELINE_PATH} (W318)",
+        f"the repo's declared {BASELINE_PATH} (W318). A time names its zone (2026-10-26T14:20Z); "
+        "a window back from now is ago:45m, ago:1h or ago:2d, or --baseline=-45m (argparse "
+        "reads a bare -45m as an option) (W1127)",
     )
     ap.add_argument(
         "--publish",
