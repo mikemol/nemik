@@ -2444,3 +2444,26 @@
 2026-10-25T23:16:22Z  tick  W1072 minted    -         "Derive rebaselines.DECLARED from the fleet's ratchet declaration files (mtools W1957 format gains a re-baseline entry: ratchet, old, new, reason, the commit that changes the count), so an undeclared drop reads UNKNOWN and never paid"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1071
 2026-10-25T23:17:46Z  status W1072 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-25T23:30:34Z  status W1063 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-25T23:36:40Z  tick  W1073 minted    -         "Cut the builder's resident set in the survey and SHACL phase below its limit: the peak is 0.883 GiB against a 0.875 GiB limit, flat before and after the cache mount"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W1644
+2026-10-25T23:36:41Z  tick  W1074 minted    -         "Label the build gauges with pod (downward API into an env var) and cache_hit 0/1 so a warm build is read alone from the store"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W1644
+2026-10-26T00:03:29Z  status W1071 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T00:03:30Z  status W1069 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T00:03:31Z  status W1074 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T00:03:39Z  status W1063 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T00:39:16Z  status W1063 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T00:43:08Z  tick  W1075 minted    -         "Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa, Codon, corpus)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1035
+2026-10-26T00:43:08Z  tick  W1076 minted    -         "Decide from the split whether W1036 starts with per-test data narrowing and write the decision into docs/per-test-targets.md"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1035
+2026-10-26T01:02:53Z  tick  W1077 minted    -         "Declare a velocity band the rank puts first in every repo: a declared list of the fleet's velocity cards, the rank reading it, the floor guarantee refusing to skip them"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W50
+2026-10-26T01:03:02Z  tick  W1078 minted    -         "data/velocity.toml lists the fleet's velocity cards as repo:W<n> refs, with a loader and a test pinning the list"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1077
+2026-10-26T01:03:02Z  tick  W1079 minted    -         "The rank puts a listed card in a velocity band above critical in every repo, and the round and --check read it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1077
+2026-10-26T01:03:02Z  tick  W1080 minted    -         "bands.toml declares the velocity band first in order and the floor guarantee at it, so --check refuses a next below it while a velocity card is ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1077
+2026-10-26T01:03:02Z  tick  W1081 minted    -         "Check every listed ref against its repo's queue and report the ones that do not resolve or are done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1077
+2026-10-26T01:07:59Z  status W1078 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T01:15:35Z  tick  W1082 minted    -         "Publish round size against ready count per repo as a gauge, and derive the round's width from what the gate and the scratch builds can carry, not from a floor of three"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W46
+2026-10-26T01:15:40Z  tick  W1083 minted    -         "Flag working-mark dishonesty: ready cards that are being worked, and working cards that are idle"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W46
+2026-10-26T01:18:33Z  tick  W1084 minted    -         "Remove the one-working-card wording the tree still carries: nemik-work's help, the workflow transition text and the shape's comment"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W46
+2026-10-26T01:19:33Z  status W1084 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T01:23:17Z  status W1054 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T01:23:57Z  status W1062 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T01:23:57Z  status W1073 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T01:24:20Z  status W1075 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

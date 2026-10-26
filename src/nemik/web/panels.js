@@ -87,16 +87,15 @@ async function sourceGraph(src) {
   const parts = [...await Promise.all(fleet.repos.map(r => piece(`graph/${r}.json`))), fleet];
   const byId = (a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
   const edgeKey = e => [e.source, e.target, e.kind];
-  const byEdge = (a, b) => {
-    const [x, y] = [edgeKey(a), edgeKey(b)];
-    for (let i = 0; i < 3; i++) if (x[i] !== y[i]) return x[i] < y[i] ? -1 : 1;
-    return 0;
-  };
+  const byEdge = (a, b) => { const [x, y] = [edgeKey(a), edgeKey(b)]; for (let i = 0; i < 3; i++) if (x[i] !== y[i]) return x[i] < y[i] ? -1 : 1; return 0; };
   const merged = section => Object.fromEntries(
     parts.flatMap(p => Object.entries(p[section])).sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0));
+  // nemik:W975: the umbrella rows, a document of their own (umbrellas.json, W973); a source without one has none
+  const umbrellas = await fetch(base + "umbrellas.json").then(r => r.ok ? r.json() : []).catch(() => []);
   return {
     nodes: parts.flatMap(p => p.nodes).sort(byId),
     edges: parts.flatMap(p => p.edges).sort(byEdge),
+    umbrellas,
     inbound: fleet.inbound,
     operator: fleet.operator,
     findings: merged("findings"),
@@ -147,6 +146,7 @@ function combine(docs) {
   return {
     nodes: nodes.sort(byId),
     edges,
+    umbrellas: once(docs.flatMap(d => d.umbrellas || []), u => u.id + " " + u.card),
     inbound: docs.flatMap(d => d.inbound || []),
     operator: docs.flatMap(d => d.operator || []),
     findings: Object.assign({}, ...docs.map(d => d.findings || {})),

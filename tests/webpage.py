@@ -10,7 +10,7 @@ are mtools' mikemol.webpage (nemik:W717, W848), re-exported here so the tests ke
 import os
 import subprocess
 import tempfile
-from collections.abc import Callable, Iterator
+from collections.abc import Callable, Generator, Iterator
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Any, Protocol
@@ -32,8 +32,11 @@ __all__ = [
     "FLEET",
     "PageBrokenError",
     "Waitable",
+    "evaluated",
+    "first_error",
     "load",
     "open_page",
+    "opened_page",
     "served",
     "until",
     "until_expecting",
@@ -68,6 +71,9 @@ class Pager(Waitable, Protocol):
 
     def route(self, pattern: str, handler: Callable[[Route], None]) -> None:
         """Call `handler` on each request whose URL matches `pattern`."""
+
+    def evaluate(self, expression: str) -> object:
+        """Run the JS expression in the page and return its value, a promise awaited."""
 
 
 class Browser(Protocol):
@@ -131,9 +137,9 @@ def served(series: Path | None = None, root: Path = FLEET) -> Iterator[str]:
             proc.wait()
 
 
-def open_page(
+def opened_page(
     p: Playwright, url: str, wait: str = CY_READY, block: tuple[str, ...] = ()
-) -> tuple[Any, Any]:
+) -> tuple[Browser, Pager]:
     """A browser and a page on `url`, once `wait` (a JS predicate) holds; skips without a browser.
 
     `block` names files whose requests are refused, as a server that went away would (W1069).
@@ -150,7 +156,7 @@ def open_page(
         )
     except sync_api.Error as e:
         pytest.skip(f"chromium unavailable: {e}")
-    page: Pager = browser.new_page(viewport={"width": 1700, "height": 1250})
+    page = browser.new_page(viewport={"width": 1700, "height": 1250})
     refused: list[str] = []
 
     def note_failed(request: Seen) -> None:
@@ -175,6 +181,43 @@ def open_page(
     return browser, page
 
 
+def open_page(
+    p: Playwright, url: str, wait: str = CY_READY, block: tuple[str, ...] = ()
+) -> tuple[Any, Any]:
+    """Open the page as opened_page does, for the tests that drive it with Playwright's own API.
+
+    Returns:
+        The browser and the page, untyped.
+
+    """
+    return opened_page(p, url, wait, block)
+
+
+@contextmanager
+def session(block: tuple[str, ...] = ()) -> Generator[Pager]:
+    """Serve the fixture fleet, open the page on it and yield the page (nemik:W975).
+
+    A page that breaks while loading, with `block` refused, raises PageBrokenError.
+
+    Yields:
+        The page, once its predicate holds.
+
+    """
+    with served() as url, sync_api.sync_playwright() as p:
+        yield opened_page(p, url, block=block)[1]
+
+
+def evaluated(expr: str) -> object:
+    """Load the page and return what the JS expression `expr` gives in it.
+
+    Returns:
+        The expression's value (a promise is awaited), as the browser serialised it.
+
+    """
+    with session() as page:
+        return page.evaluate(expr)
+
+
 def first_error(block: tuple[str, ...]) -> str:
     """Load the page with the requests for `block` refused and read the error it breaks on.
 
@@ -182,9 +225,8 @@ def first_error(block: tuple[str, ...]) -> str:
         The page-broken message, or an empty string when the page loaded.
 
     """
-    with served() as url, sync_api.sync_playwright() as p:
-        try:
-            open_page(p, url, block=block)
-        except PageBrokenError as e:
-            return str(e)
-    return ""
+    try:
+        with session(block):
+            return ""
+    except PageBrokenError as e:
+        return str(e)
