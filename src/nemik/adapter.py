@@ -223,6 +223,27 @@ def load_state(state_path: Path) -> model.State:
 # that moved; a new or vanished repo changes `known` and so every queue's key. One entry per
 # (kind, repo): a moved file replaces its stale entry instead of growing the cache.
 _PARSED: dict[tuple[str, str], tuple[tuple[object, ...], Graph, int]] = {}
+# nemik:W1096: whether the cache above is kept at all. A long-lived reader wants it; a one-shot
+# build (nemik-serve --publish) parses each file once and never asks again, so the cache only holds
+# a second copy of every queue and ledger graph beside the copy it hands out (measured: the whole
+# card-and-edge graph is held several times at the build's peak).
+_KEEP = [True]
+
+
+def forget_parsed() -> None:
+    """Stop keeping parsed graphs and drop what is kept; a one-shot build calls this first."""
+    _KEEP[0] = False
+    _PARSED.clear()
+
+
+def parsed_count() -> int:
+    """Count the parsed graphs kept (nemik:W1096), to see that a one-shot build keeps none.
+
+    Returns:
+        How many (kind, repo) entries the parse cache holds.
+
+    """
+    return len(_PARSED)
 
 
 def _stamped(
@@ -233,6 +254,8 @@ def _stamped(
     build: Callable[[], tuple[Graph, int]],
 ) -> tuple[Graph, int]:
     """Answer `build()` from the cache while `path` is unchanged; always a fresh copy to mutate."""
+    if not _KEEP[0]:
+        return build()
     st = path.stat()
     key = (str(path), st.st_mtime_ns, st.st_size, st.st_ino, extra)
     hit = _PARSED.get((kind, repo))

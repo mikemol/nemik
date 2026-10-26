@@ -1530,8 +1530,10 @@ def publish(
     fragmented heap per build). Returns None when no queue or ledger changed since current/ was built.
     The last `keep` snapshots stay, so a request already reading one is not pulled out from under it.
     """
-    from nemik import cachestore, lastgood
+    from nemik import adapter, cachestore, lastgood
 
+    # nemik:W1096: this process builds once and exits, so the parse cache only doubles the graphs
+    adapter.forget_parsed()
     key = fleet_key(root)
     if exports is not None:  # nemik:W636: a changed export rebuilds the pod's view too
         key += "|exports:" + exports_key(exports)
