@@ -2482,3 +2482,7 @@
 2026-10-26T02:43:30Z  status W1086 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T02:58:02Z  tick  W1088 minted    -         "Raise the builder's memory limit to 1536Mi under the 5Gi tenant quota so a cold build finishes and a pod serves"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W1644
 2026-10-26T02:58:17Z  status W1088 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T03:02:04Z  tick  W1089 minted    -         "Repin the mtools dists to 94149f78 or later (W2031 fixes the gate-index race between concurrent gates in one repo)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W52
+2026-10-26T03:14:59Z  status W1088 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T03:15:00Z  status W1086 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T03:17:18Z  status W1089 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
