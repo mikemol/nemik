@@ -2570,3 +2570,24 @@
 2026-10-26T16:43:44Z  status W1117 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T16:43:45Z  status W1118 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T16:45:04Z  tick  W642 advanced  unblock   "claimed the two W1933 letters (W1007/W1008 re-blocked on mtools:W2048); W642 evidence: hook timeout is load, not a crash; stacks 529 (W1116) and 528 (W993) gating [blocked by W1116]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T17:01:02Z  interrupt W1119 minted    -         "Restore ratchet-pace.json: luthen's egress gate removes a row of another shape, and W1114's value and horizon keys are not in its list"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1114
+2026-10-26T17:02:26Z  interrupt W1120 minted    -         "A shared fixture for ratchet-pace.json rows that nemik's pace writer tests and luthen's egress gate both read, so a new field fails before it lands"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1119
+2026-10-26T17:02:42Z  status W1119 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T17:04:57Z  status W1120 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T17:06:11Z  status W1116 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T17:06:12Z  status W1014 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T17:09:19Z  lease W993 lapsed    --        "lease on file:src/nemik/rank.py!w held by (unlocked) lapsed unrenewed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T17:09:40Z  tick  W1121 minted    -         "Pay the D103 docstring family in the small test files, a few files a slice"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
+2026-10-26T17:09:40Z  tick  W1122 minted    -         "Pay the mypy type-arg family: bare dict and list annotations in src and tests"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
+2026-10-26T17:09:40Z  tick  W1123 minted    -         "Pay the E501 family: long lines in src and tests"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
+2026-10-26T17:09:40Z  tick  W1124 minted    -         "Pay the ANN001 family in tests/test_layout.py with typed fixtures"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
+2026-10-26T17:11:07Z  tick  W1122 advanced  sweep     "atomized W1014 into W1121-W1124 and probed the type-arg family (check.py:794 needs Node under TYPE_CHECKING; JSON-shaped dicts need typed readers); stacks 528 (W993) and 530 (W1120) still gating [blocked by W993]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T17:22:59Z  status W993 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T17:37:58Z  interrupt W1125 minted    -         "Repin mtools to 65b7491b for W2046 empty next step refused, W2043 watchdog evidence, W2048 commitments-tree"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f
+2026-10-26T17:38:25Z  status W1125 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T17:39:18Z  prune W1007 edge-pruned writer    "mtools:W2048"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T17:39:18Z  prune W1008 edge-pruned writer    "mtools:W2048"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T17:39:18Z  status W1007 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T17:39:18Z  status W1008 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T17:40:09Z  status W1121 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T17:40:21Z  tick  W1121 advanced  sweep     "six D103 docstrings paid (ruff 2701 to 2695) in stack532, queued behind stack531 (W1125 repin) and stack530 (W1120 pace fixture) [blocked by W1120]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
