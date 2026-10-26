@@ -39,7 +39,13 @@ from rdflib.namespace import DCTERMS, PROV
 
 from nemik.adapter import BASE, NEMIK, OPERATOR, OSLC_CM, bind, ledger_graph
 from nemik.blocks import inbound, operator_asks, ref
-from nemik.buildcost import build_cost_lines, peak_kib_of
+from nemik.buildcost import (
+    build_cost_lines,
+    bytes_of,
+    labels_of,
+    peak_kib_of,
+    swap_kib_of,
+)
 from nemik.check import (
     LEDGER,
     QUEUE,
@@ -1366,22 +1372,53 @@ def working_cards(nodes: list[dict[str, object]]) -> dict[str, list[str]]:
     """Group the cards being worked by repo, for the round gauges (nemik:W1025).
 
     Args:
-        nodes: The graph document's nodes, each with a repo, a symbol and a state.
+        nodes: The graph document's nodes, each with a repo, a symbol, a state and a stage.
 
     Returns:
-        {repo: the symbols of its cards whose state is working}; a node without both is skipped.
+        {repo: the symbols of its cards whose state is working or that a queued or gating commit
+        stack names (stage gating, nemik:W1062)}; a node without a repo and symbol is skipped.
 
     """
     out: dict[str, list[str]] = {}
     for node in nodes:
         repo, symbol = node.get("repo"), node.get("symbol")
         if (
-            node.get("state") == "working"
+            (node.get("state") == "working" or node.get("stage") == "gating")
             and isinstance(repo, str)
             and isinstance(symbol, str)
         ):
             out.setdefault(repo, []).append(symbol)
     return out
+
+
+def cost_gauges() -> list[str]:
+    """Write what this build has cost so far as gauges (nemik:W1064, W1074).
+
+    The builder is a fresh process on every pass, so its peak is the cost of one build and the
+    series shows whether it grows. Under a memory limit the resident peak saturates at the limit,
+    the excess going to swap, so the process's swap and the container's own peak and swap peak sit
+    beside it, and the pod and whether the build started from a restored cache label every sample.
+
+    Returns:
+        The gauge lines, Prometheus text.
+
+    """
+    status = Path("/proc/self/status")
+    status_text = status.read_text(encoding="utf-8") if status.is_file() else ""
+    peak_file = Path("/sys/fs/cgroup/memory.peak")
+    swap_file = Path("/sys/fs/cgroup/memory.swap.peak")
+    peaks = (
+        bytes_of(peak_file.read_text(encoding="utf-8") if peak_file.is_file() else ""),
+        bytes_of(swap_file.read_text(encoding="utf-8") if swap_file.is_file() else ""),
+    )
+    warm = int(os.environ.get("NEMIK_CACHE_HIT", "0") == "1")
+    return build_cost_lines(
+        peak_kib_of(status_text),
+        swap_kib_of(status_text),
+        peaks,
+        int(time.process_time() * 1000),
+        labels_of(os.environ.get("NEMIK_POD", ""), warm),
+    )
 
 
 def private_files(model: Model, out: Path) -> list[Path]:
@@ -1426,13 +1463,7 @@ def private_files(model: Model, out: Path) -> list[Path]:
     round_path = model.root / ROUND_FILE
     round_text = round_path.read_text(encoding="utf-8") if round_path.is_file() else ""
     round_lines = round_board(round_text, working_cards(nodes))
-    # nemik:W1064: what this build has cost so far, as gauges: the builder is a fresh process on
-    # every pass, so its peak is the cost of one build and the series shows whether it grows
-    status = Path("/proc/self/status")
-    status_text = status.read_text(encoding="utf-8") if status.is_file() else ""
-    cost_lines = build_cost_lines(
-        peak_kib_of(status_text), int(time.process_time() * 1000)
-    )
+    cost_lines = cost_gauges()
     put(
         "metrics",
         model.metrics()
@@ -1496,9 +1527,9 @@ def publish(
     base.mkdir(parents=True, exist_ok=True)
     stamp = time.strftime("%Y%m%dT%H%M%SZ", time.gmtime())
     snap = base / f"snap-{stamp}-{os.getpid()}"
-    cachestore.load(
-        base / ".cache"
-    )  # nemik:W518: start warm, as the long-lived server was
+    # nemik:W518: start warm, as the long-lived server was; W1074: and say so on the build's gauges
+    restored = cachestore.load(base / ".cache")
+    os.environ["NEMIK_CACHE_HIT"] = "1" if restored else "0"
     try:
         build_static(root, snap, withheld, private=True, exports=exports)
         (snap / "source-key").write_text(key)

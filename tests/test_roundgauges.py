@@ -72,3 +72,12 @@ def test_the_working_cards_are_grouped_by_repo() -> None:
         {"repo": "a", "state": "working"},
     ]
     assert working_cards(nodes) == {"a": ["W1"], "b": ["W3"]}
+
+
+def test_a_ready_card_a_commit_stack_names_is_being_worked_too() -> None:
+    """nemik:W1062: a card in the gate under a stale ready status is in progress, not idle."""
+    nodes: list[dict[str, object]] = [
+        {"repo": "a", "symbol": "W1", "state": "ready", "stage": "gating"},
+        {"repo": "a", "symbol": "W2", "state": "ready", "stage": ""},
+    ]
+    assert working_cards(nodes) == {"a": ["W1"]}
