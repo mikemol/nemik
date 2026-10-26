@@ -27,7 +27,7 @@ from nemik.hostroot import HostRow, latest, records
 from nemik.landings import document as landings_document
 from nemik.landings import records as landings_records
 from nemik.logactivities import activities, repos
-from nemik.pacerun import pace_document
+from nemik.pacerun import floors_of, pace_document_floored
 
 QUERY = "stream:host_root_frontier"
 LANDINGS_QUERY = "service.name:mikemol-commit"
@@ -40,7 +40,13 @@ DEFAULT_OUT = CACHE / "host-root.json"
 LANDINGS_OUT = CACHE / "landings.json"
 LOG_OUT = CACHE / "log-activities.json"
 PACE_OUT = CACHE / "ratchet-pace.json"
+# nemik's own copy of the last pace file written, which the requirement reads back as its prior:
+# the export beside luthen's egress gate can be deleted by it (nemik:W1126, W1119), and a cache
+# directory is deletable by definition, so this is XDG state (github-8f, 2026-10-26)
+PRIOR_DIR = Path.home() / ".local" / "state" / "nemik" / "ratchet-priors"
 RATCHET_SELECTOR = '{__name__="mikemol.ratchet.value"}'
+# the required fall nemik publishes per ratchet; its highest sample is a floor no file loss can take
+REQUIRED_SELECTOR = '{__name__="nemik_ratchet_fall_required"}'
 
 
 def _quoted(text: str) -> str:
@@ -187,10 +193,11 @@ def pace_fetch(root: Path, target: Path | None, stamp: str) -> int:
     """
     try:
         answer = vm_export(RATCHET_SELECTOR, root)
+        floors = floors_of(vm_export(REQUIRED_SELECTOR, root))
     except OSError as error:
         sys.stderr.write(f"nemik-hostroot: {error}\n")
         return 1
-    return _judge(answer, target or PACE_OUT, stamp)
+    return _judge(answer, target or PACE_OUT, stamp, floors)
 
 
 def pace_run(options: _Options, stamp: str) -> int:
@@ -205,19 +212,34 @@ def pace_run(options: _Options, stamp: str) -> int:
     return pace_fetch(options.root, options.out, stamp)
 
 
-def _judge(answer: str, out: Path, stamp: str) -> int:
+def _judge(
+    answer: str, out: Path, stamp: str, floors: dict[str, int] | None = None
+) -> int:
     """Judge an answer against the last pace file and replace it whole.
+
+    Args:
+        answer: The ratchet series, as a range-query answer or the store's raw export.
+        out: Where the pace file goes.
+        stamp: When this run reads the store, a UTC stamp.
+        floors: The requirements the store remembers, or None when it was not asked.
 
     Returns:
         0 when written; 1 when the answer is not a readable set of series.
 
     """
+    kept = PRIOR_DIR / out.name
     try:
-        previous = out.read_text(encoding="utf-8") if out.is_file() else ""
-        text = pace_document(answer, previous, stamp)
+        # the requirement only rises, so its prior is nemik's own copy first: the export can be
+        # deleted by the egress gate downstream, and a missing prior re-seeds (nemik:W1126)
+        if kept.is_file():
+            previous = kept.read_text(encoding="utf-8")
+        else:
+            previous = out.read_text(encoding="utf-8") if out.is_file() else ""
+        text = pace_document_floored(answer, previous, stamp, floors or {})
     except (OSError, TypeError, ValueError) as error:
         sys.stderr.write(f"nemik-hostroot: {error}\n")
         return 1
+    _write(kept, text)
     _write(out, text)
     return 0
 

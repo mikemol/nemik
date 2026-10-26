@@ -6,6 +6,7 @@ from pathlib import Path
 
 import pytest
 
+from nemik import hostroot_cli
 from nemik.hostroot_cli import main
 from nemik.pacepublish import read_pace
 from nemik.pacerun import pace_document
@@ -19,6 +20,11 @@ LAST_ROW = (
     '{"repo": "a", "ratchet": "x.json", "state": "behind", '
     '"observed": "0", "required": "7"}\n'
 )
+
+
+def _own_priors(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """Keep nemik's own copy of the last pace file in the test's directory, never the host's."""
+    monkeypatch.setattr(hostroot_cli, "PRIOR_DIR", tmp_path / "priors")
 
 
 def _answer(values: list[int]) -> str:
@@ -52,6 +58,21 @@ def test_an_unreadable_last_file_seeds_nothing() -> None:
     """Text that is no pace file is ignored, not fatal."""
     rows = read_pace(pace_document(_answer([8] * 12), "not a pace file", STAMP))[2]
     assert rows[0][4] == 1
+
+
+def test_a_deleted_pace_file_does_not_reset_the_requirement(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """W1126: luthen's egress gate deleted the export once; the prior is nemik's own copy."""
+    _own_priors(tmp_path, monkeypatch)
+    answer, out = tmp_path / "answer.json", tmp_path / "ratchet-pace.json"
+    answer.write_text(_answer([8] * 12), encoding="utf-8")
+    out.write_text(LAST_HEAD + LAST_ROW, encoding="utf-8")
+    assert main(["--answer", str(answer), "--out", str(out)]) == 0
+    assert read_pace(out.read_text(encoding="utf-8"))[2][0][4] == RAISED
+    out.unlink()
+    assert main(["--answer", str(answer), "--out", str(out)]) == 0
+    assert read_pace(out.read_text(encoding="utf-8"))[2][0][4] == RAISED
 
 
 def test_a_raw_export_is_judged_one_value_per_gate_run() -> None:
@@ -96,8 +117,11 @@ def test_an_export_with_no_series_refuses_instead_of_writing_an_empty_file() -> 
         pace_document("", "", STAMP)
 
 
-def test_hostroot_writes_the_pace_file_from_a_stored_answer(tmp_path: Path) -> None:
+def test_hostroot_writes_the_pace_file_from_a_stored_answer(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     """--answer reads the stored answer and writes the file named by --out."""
+    _own_priors(tmp_path, monkeypatch)
     answer, out = tmp_path / "answer.json", tmp_path / "ratchet-pace.json"
     answer.write_text(_answer([8] * 12), encoding="utf-8")
     assert main(["--answer", str(answer), "--out", str(out)]) == 0
@@ -105,8 +129,11 @@ def test_hostroot_writes_the_pace_file_from_a_stored_answer(tmp_path: Path) -> N
     assert (rows[0][0], rows[0][1], rows[0][2]) == ("a", "x.json", "behind")
 
 
-def test_hostroot_refuses_an_answer_that_is_not_a_matrix(tmp_path: Path) -> None:
+def test_hostroot_refuses_an_answer_that_is_not_a_matrix(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     """A failed query leaves no file, and the command says it did not write."""
+    _own_priors(tmp_path, monkeypatch)
     answer, out = tmp_path / "answer.json", tmp_path / "ratchet-pace.json"
     answer.write_text('{"status": "error"}', encoding="utf-8")
     assert main(["--answer", str(answer), "--out", str(out)]) == 1
