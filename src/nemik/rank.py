@@ -22,6 +22,7 @@ from rdflib.term import Node
 from nemik import tiers
 from nemik.adapter import BASE, NEMIK, OSLC_CM, workstream_uri
 from nemik.roundcli import show_round, write_round_file
+from nemik.stackable import manifest
 
 if TYPE_CHECKING:
     from nemik.score import Bands, Guarantees
@@ -383,6 +384,9 @@ def _rows(
         {
             "symbol": str(g.value(n, NEMIK.symbol)),
             "title": str(g.value(n, DCTERMS.title) or ""),
+            # nemik:W1082: the round's width is the most cards that can stack, from their manifests
+            "state": "working" if (n, OSLC_CM.state, NEMIK.Working) in g else "ready",
+            "manifest": manifest(g, repo, str(g.value(n, NEMIK.symbol))),
             **objectives(g, n, weights, bands, salience),
         }
         for n in ready

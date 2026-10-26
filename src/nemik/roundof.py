@@ -68,6 +68,60 @@ def capacity(sizes: list[int]) -> tuple[int, str]:
     return median, LANDINGS
 
 
+SUPPLY = "supply"
+HEADROOM = "headroom"
+# nemik:W1082: the most cards one gate run is taken to carry. Declared, not measured: the gate's
+# cost per entry against the host's CPU headroom (drum's admission) is not read yet, so this
+# stands for it and the round names it as the binding term when it binds.
+CEILING = 6
+
+
+def supply(manifests: list[list[str]], busy: list[str]) -> int:
+    """Count the most ready cards that can stack without sharing a file.
+
+    Args:
+        manifests: Each ready card's planned files in rank order; an empty one is a card with no
+            plan, which never stacks.
+        busy: Files the cards being worked already hold.
+
+    Returns:
+        How many cards a greedy pick in rank order takes: each is disjoint from the files taken so
+        far and from `busy`.
+
+    """
+    taken = set(busy)
+    count = 0
+    for files in manifests:
+        if not files or taken.intersection(files):
+            continue
+        count += 1
+        taken.update(files)
+    return count
+
+
+def width(stackable: int, landed: int, landed_source: str) -> tuple[int, str]:
+    """Choose a round's width from what can stack, not only from what stacked before.
+
+    The landed-stack median alone is circular: stacks are capped by the round that drew them, so
+    it can never rise above where it started (github-8f, 2026-10-26).
+
+    Args:
+        stackable: What supply counted for the repo's ready cards.
+        landed: The width capacity() gave from the landed stacks.
+        landed_source: Where that came from.
+
+    Returns:
+        (the width, its binding term): headroom when the supply reaches CEILING, supply when it
+        exceeds the landed width, else the landed width and its source.
+
+    """
+    if stackable >= CEILING:
+        return max(CEILING, landed), HEADROOM
+    if stackable > landed:
+        return stackable, SUPPLY
+    return landed, landed_source
+
+
 def round_of(ranked: list[tuple[str, str]], size: int) -> list[tuple[str, int, str]]:
     """Take the top of a ranking as the round.
 

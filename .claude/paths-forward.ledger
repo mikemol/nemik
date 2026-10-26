@@ -2486,3 +2486,14 @@
 2026-10-26T03:14:59Z  status W1088 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T03:15:00Z  status W1086 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T03:17:18Z  status W1089 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T10:28:17Z  status W1074 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T10:28:32Z  status W1089 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T10:28:33Z  status W1063 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T10:28:33Z  status W1075 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T10:28:34Z  status W902 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T10:33:09Z  tick  W1090 minted    -         "Repin the mtools dists to 0814f162 or later (watchdog exit explanation, the round check no longer demands a ready card a live stack names) and restart the watchdog"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W52
+2026-10-26T10:33:15Z  status W1090 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T10:34:58Z  status W1063 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T10:34:59Z  status W1082 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T10:34:59Z  status W1083 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T10:46:32Z  tick  W1091 minted    -         "Answer nemik: luthen-observability:W1644 is done; W1073 stays open for the memory cut"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-10-26-nemik-edge-luthen-observability-W1644-caused_by-W1073.md

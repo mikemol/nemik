@@ -2,9 +2,28 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W1024: a round is the top N ready cards, N from landed stacks; drift is outside it."""
 
-from nemik.roundof import capacity, drift, outside, round_of
+from nemik.roundof import CEILING, capacity, drift, outside, round_of, supply, width
 
 RANKED = [("W5", "9.0"), ("W2", "4.5"), ("W9", "1.0"), ("W1", "0.0")]
+DISJOINT = 3  # a.py, c.py and d.py of the plans below
+DISJOINT_BESIDE_C = 2  # with c.py busy: a.py and d.py
+
+
+def test_supply_counts_the_cards_that_can_stack_without_sharing_a_file() -> None:
+    """nemik:W1082: greedy in rank order; no plan never stacks; a busy file blocks its card."""
+    plans = [["a.py"], ["a.py", "b.py"], ["c.py"], [], ["d.py"]]
+    assert supply(plans, []) == DISJOINT  # the second plan shares a.py
+    assert supply(plans, ["c.py"]) == DISJOINT_BESIDE_C
+    assert supply([[], []], []) == 0
+
+
+def test_width_follows_supply_and_names_what_binds() -> None:
+    """The landed median never caps it: supply above it wins, the ceiling bounds it."""
+    assert width(1, 3, "floor") == (3, "floor")
+    assert width(5, 3, "floor") == (5, "supply")
+    assert width(CEILING, 3, "floor") == (CEILING, "headroom")
+    assert width(CEILING + 4, 3, "floor") == (CEILING, "headroom")
+    assert width(2, 8, "landings") == (8, "landings")
 
 
 def test_capacity_is_the_median_stack_size_lifted_to_the_floor() -> None:

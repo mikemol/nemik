@@ -74,26 +74,60 @@ def gauge_lines(
     return metric_lines(stats, as_of_seconds)
 
 
-def round_board(text: str, working: dict[str, list[str]]) -> list[str]:
+GAUGE_READY = "nemik_ready_cards"
+
+
+def ready_lines(ready: dict[str, int]) -> list[str]:
+    """Write how many cards each repo has ready, to read the round's size against (nemik:W1082).
+
+    Args:
+        ready: Each repo's count of cards in state ready.
+
+    Returns:
+        A TYPE line and one sample per repo, repos sorted; nothing when no repo has any.
+
+    """
+    if not ready:
+        return []
+    return [
+        f"# TYPE {GAUGE_READY} gauge",
+        *(f'{GAUGE_READY}{{repo="{repo}"}} {ready[repo]}' for repo in sorted(ready)),
+    ]
+
+
+def round_board(
+    text: str,
+    working: dict[str, list[str]],
+    ready: dict[str, int] | None = None,
+) -> list[str]:
     """Write every round gauge, and say whether the round file could be read at all (nemik:W1025).
 
     Same lesson as the pace board (W1051): a gauge that vanishes reads as no drift, so a missing
-    or refused file publishes nemik_round_readable at 0 and nothing else is guessed.
+    or refused file publishes nemik_round_readable at 0 and nothing else is guessed. The ready
+    counts come from the graph, not the file, so they are published either way.
 
     Args:
         text: The round file's text, empty when there is none.
         working: Each repo's cards being worked, as symbols.
+        ready: Each repo's count of ready cards; none when not given.
 
     Returns:
-        The readable gauge at 1 then the round gauges, or the readable gauge at 0 alone.
+        The readable gauge at 1 then the round gauges, or the readable gauge at 0 alone, then
+        the ready gauge.
 
     """
+    ready = ready or {}
     try:
         seconds = epoch_seconds(read_round(text)[0])
     except ValueError:
-        return [f"# TYPE {GAUGE_READABLE} gauge", f"{GAUGE_READABLE} 0"]
+        return [
+            f"# TYPE {GAUGE_READABLE} gauge",
+            f"{GAUGE_READABLE} 0",
+            *ready_lines(ready),
+        ]
     return [
         f"# TYPE {GAUGE_READABLE} gauge",
         f"{GAUGE_READABLE} 1",
         *gauge_lines(text, working, seconds),
+        *ready_lines(ready),
     ]

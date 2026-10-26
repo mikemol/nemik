@@ -1368,6 +1368,24 @@ def _build_static(
     return written
 
 
+def ready_cards(nodes: list[dict[str, object]]) -> dict[str, int]:
+    """Count the cards in state ready by repo, for the round gauges (nemik:W1082).
+
+    Args:
+        nodes: The graph document's nodes, each with a repo and a state.
+
+    Returns:
+        {repo: how many of its cards are ready}; a node with no repo is skipped.
+
+    """
+    out: dict[str, int] = {}
+    for node in nodes:
+        repo = node.get("repo")
+        if node.get("state") == "ready" and isinstance(repo, str):
+            out[repo] = out.get(repo, 0) + 1
+    return out
+
+
 def working_cards(nodes: list[dict[str, object]]) -> dict[str, list[str]]:
     """Group the cards being worked by repo, for the round gauges (nemik:W1025).
 
@@ -1462,7 +1480,7 @@ def private_files(model: Model, out: Path) -> list[Path]:
     # missing or refused file publishes nemik_round_readable at 0, never nothing
     round_path = model.root / ROUND_FILE
     round_text = round_path.read_text(encoding="utf-8") if round_path.is_file() else ""
-    round_lines = round_board(round_text, working_cards(nodes))
+    round_lines = round_board(round_text, working_cards(nodes), ready_cards(nodes))
     cost_lines = cost_gauges()
     put(
         "metrics",

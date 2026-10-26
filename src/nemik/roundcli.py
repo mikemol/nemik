@@ -16,9 +16,47 @@ from pathlib import Path
 
 from nemik.landings import read_document
 from nemik.roundfile import round_text
-from nemik.roundof import capacity, round_of, stack_sizes
+from nemik.roundof import capacity, round_of, stack_sizes, supply, width
 
 RECENT = 10  # landed stacks the capacity looks back over
+
+
+def _files(row: dict[str, object]) -> list[str]:
+    planned = row.get("manifest")
+    return [str(f) for f in planned] if isinstance(planned, list) else []
+
+
+def stackable_of(rows: list[dict[str, object]]) -> int:
+    """Count the ready cards that can stack together beside the work in progress (nemik:W1082).
+
+    Args:
+        rows: nemik-rank's rows for a repo, best first, each with a state and a manifest.
+
+    Returns:
+        roundof.supply over the ready cards' manifests, the working cards' files being busy.
+
+    """
+    ready = [_files(r) for r in rows if r.get("state") != "working"]
+    busy = [f for r in rows if r.get("state") == "working" for f in _files(r)]
+    return supply(ready, busy)
+
+
+def size_for(
+    repo: str, rows: list[dict[str, object]], landings: Path | None
+) -> tuple[int, str]:
+    """Choose a repo's round width from what can stack and what has landed (nemik:W1082).
+
+    Args:
+        repo: The repo.
+        rows: nemik-rank's rows for it, best first.
+        landings: The landing file, or None.
+
+    Returns:
+        (the width, its binding term): roundof.width over the supply and the landed stacks.
+
+    """
+    landed, source = capacity(sizes_of(repo, landings))
+    return width(stackable_of(rows), landed, source)
 
 
 def sizes_of(repo: str, landings: Path | None) -> list[int]:
@@ -65,7 +103,8 @@ def show_round(repo: str, rows: list[dict[str, object]], landings: Path | None) 
 
     """
     ranked = _ranked(rows)
-    sys.stdout.write("\n".join(round_lines(repo, ranked, landings)) + "\n")
+    lines = round_lines(repo, ranked, landings, stackable_of(rows))
+    sys.stdout.write("\n".join(lines) + "\n")
 
 
 def round_document(
@@ -84,7 +123,7 @@ def round_document(
     """
     rounds: list[tuple[str, list[tuple[str, int, str]]]] = []
     for repo in sorted(by_repo):
-        size, _ = capacity(sizes_of(repo, landings))
+        size, _ = size_for(repo, by_repo[repo], landings)
         ranked = [(symbol, salience) for symbol, salience, _ in _ranked(by_repo[repo])]
         rounds.append((repo, round_of(ranked, size)))
     return round_text(stamp, rounds)
@@ -113,7 +152,10 @@ def write_round_file(
 
 
 def round_lines(
-    repo: str, ranked: list[tuple[str, str, str]], landings: Path | None
+    repo: str,
+    ranked: list[tuple[str, str, str]],
+    landings: Path | None,
+    stackable: int = 0,
 ) -> list[str]:
     """Print the round of a repo.
 
@@ -121,12 +163,15 @@ def round_lines(
         repo: The repo.
         ranked: Its ready cards best first, each as (symbol, salience text, title).
         landings: The landing file, or None.
+        stackable: How many of its ready cards can stack together (stackable_of); 0 when unknown.
 
     Returns:
-        A header naming the round size and where it came from, then one line per card of the round.
+        A header naming the round size and its binding term (supply, headroom, landings or floor),
+        then one line per card of the round.
 
     """
-    size, source = capacity(sizes_of(repo, landings))
+    landed, landed_source = capacity(sizes_of(repo, landings))
+    size, source = width(stackable, landed, landed_source)
     taken = round_of([(symbol, salience) for symbol, salience, _ in ranked], size)
     titles = {symbol: title for symbol, _, title in ranked}
     head = f"round {repo}: {len(taken)} of {len(ranked)} cards (size {size}, from {source})"

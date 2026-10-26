@@ -7,12 +7,27 @@ from pathlib import Path
 import pytest
 
 from nemik.pacepublish import epoch_seconds
-from nemik.roundgauges import gauge_lines, read_round, round_board
-from nemik.serve import working_cards
+from nemik.roundgauges import gauge_lines, read_round, ready_lines, round_board
+from nemik.serve import ready_cards, working_cards
 
 RECORDED = Path(__file__).parent / "fixtures" / "round" / "round.jsonl"
 SECONDS = 1792886400
 UNREADABLE = ["# TYPE nemik_round_readable gauge", "nemik_round_readable 0"]
+READY = ["# TYPE nemik_ready_cards gauge", 'nemik_ready_cards{repo="a"} 2']
+
+
+def test_the_ready_cards_are_counted_by_repo_and_published_beside_the_round() -> None:
+    """nemik:W1082: the round's size reads against how many cards a repo has ready."""
+    nodes: list[dict[str, object]] = [
+        {"repo": "a", "state": "ready"},
+        {"repo": "a", "state": "ready"},
+        {"repo": "a", "state": "working"},
+        {"state": "ready"},
+    ]
+    assert ready_cards(nodes) == {"a": 2}
+    assert ready_lines({"a": 2}) == READY
+    assert ready_lines({}) == []
+    assert round_board("", {}, {"a": 2}) == [*UNREADABLE, *READY]
 
 
 def test_the_recorded_round_reads_as_each_repos_symbols_in_rank_order() -> None:
