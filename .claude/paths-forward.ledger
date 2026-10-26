@@ -2591,3 +2591,7 @@
 2026-10-26T17:39:18Z  status W1008 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T17:40:09Z  status W1121 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T17:40:21Z  tick  W1121 advanced  sweep     "six D103 docstrings paid (ruff 2701 to 2695) in stack532, queued behind stack531 (W1125 repin) and stack530 (W1120 pace fixture) [blocked by W1120]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T18:01:16Z  interrupt W1126 minted    -         "A ratchet's required fall only rises across a missing pace file: the prior lives in nemik's own state, not in the export luthen's gate can delete"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1119
+2026-10-26T18:01:17Z  interrupt W1127 minted    -         "nemik-history --baseline refuses a time with no zone and accepts a relative window such as -1h or the last ledger tick"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f
+2026-10-26T18:03:06Z  status W1126 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T18:13:41Z  tick  W1126 advanced  collapse  "W1126 now floors the required fall from the store series (github-8f's query: mypy 2 to 1 and debtplan 1 to 0 were the only resets) plus an XDG-state copy; stack533 resubmitted behind 531 (W1125), 532 (W1121), 530 (W1120) [blocked by W1125]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

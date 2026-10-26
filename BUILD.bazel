@@ -66,6 +66,8 @@ exports_files(["pyproject.toml"])
             + (["//tests/fixtures:trackers"] if src in ("tests/test_tracker.py", "tests/test_issue_plan.py", "tests/test_pollevents.py") else [])
             # nemik:W996: the ratchet series reader is tested on a real metric-store answer
             + (["//tests/fixtures:ratchet"] if src in ("tests/test_ratchetseries.py", "tests/test_pacerun.py") else [])
+            # nemik:W1120: the pace contract test reads the pace fixture and the recorded export
+            + (["//tests/fixtures:pace", "//tests/fixtures:ratchet"] if src == "tests/test_pace_contract.py" else [])
             # nemik:W1033: the round file contract test reads the recorded round file
             + (["//tests/fixtures:round"] if src in ("tests/test_round_contract.py", "tests/test_roundgauges.py") else [])
             # nemik:W623: the pre-commit hook is copied and run by its test

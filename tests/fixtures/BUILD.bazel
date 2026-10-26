@@ -19,6 +19,13 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+# nemik:W1120: ratchet-pace.json as the pace writer writes it and luthen's egress gate admits it.
+filegroup(
+    name = "pace",
+    srcs = glob(["pace/**"]),
+    visibility = ["//visibility:public"],
+)
+
 # nemik:W1033: the round file in the one form nemik writes and luthen's gate and mtools' reader parse.
 filegroup(
     name = "round",

@@ -1,0 +1,4 @@
+{"as_of": "2026-10-26T17:00:14Z", "window": "10"}
+{"repo": "nemik", "ratchet": "ruff-baseline.json", "state": "ok", "observed": "10", "required": "3", "value": "2701", "horizon": "2701"}
+{"repo": "nemik", "ratchet": "codon-baseline.json", "state": "behind", "observed": "0", "required": "1", "value": "83", "horizon": "-1"}
+{"repo": "mtools", "ratchet": ".claude/debtplan.json", "state": "unknown", "observed": "0", "required": "1", "value": "0", "horizon": "0"}
