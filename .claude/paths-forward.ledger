@@ -2599,3 +2599,7 @@
 2026-10-26T18:15:38Z  status W1121 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T18:31:58Z  status W1112 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T18:36:06Z  status W1120 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T18:42:01Z  status W1127 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T18:42:37Z  tick  W1127 advanced  collapse  "W1127 baseline zone and relative window built (stack535) behind stack534 (W1126 alert fixtures); nemik-rank --pace now shows nemik ok on ruff, mypy, codon with horizons 2505, 1385, 830 landings [blocked by W1126]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T19:03:12Z  status W1126 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T19:09:52Z  tick  W642 advanced  sweep     "closed W642 to residue (its traceback never recurred; the hook timeouts are mtools' 60 s bound under load); W733 read: prerequisite mtools:W1714 is done but editing the gate script is untestable outside a gate, left ready with that note; stack535 (W1127) gating [blocked by W1127]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

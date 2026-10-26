@@ -223,6 +223,11 @@ def backfill(repo: str, repo_dir: Path, since: str | None = None) -> list[Event]
 QUEUE_PATH = f".claude/{QUEUE}"
 MIN_LANDINGS = 3  # nemik:W616: fewer cited commits than this teach no land interval
 _DATE = re.compile(r"\d{4}-\d{2}-\d{2}([T ]\d{2}:\d{2}(:\d{2})?)?")
+# nemik:W1127: a time of day names its zone (Z or an offset), or it is read as the machine's local
+# time and prints a plausible answer for the wrong instant (luthen's "12:34Z" was 12:34 local)
+_ZONED = re.compile(r"\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}(:\d{2})?(Z|[+-]\d{2}:?\d{2})")
+_RELATIVE = re.compile(r"-(\d+)([mhd])")
+_SECONDS = {"m": 60, "h": 3600, "d": 86400}
 _CROSS = re.compile(r"([A-Za-z0-9][A-Za-z0-9._-]*):W[1-9][0-9]*")
 
 # nemik:W732: a committed queue as the history readers see it. The fields they read are strings and
@@ -367,10 +372,36 @@ def _git(repo: Path, *args: str) -> str | None:
 def resolve(repo: Path, spec: str | None) -> str | None:
     """A revision for `spec`: a date means the last commit before it, anything else is a rev.
 
-    None means there is no such point (before the repo's first commit): an empty queue.
+    None means there is no such point (before the repo's first commit): an empty queue. A time of
+    day must name its zone (`Z` or an offset), or be a window back from now such as `-1h`, `-30m`
+    or `-2d` (nemik:W1127).
+
+    Raises:
+        ValueError: When `spec` is a time of day with no zone.
+
     """
     if spec is None:
         return "HEAD"
+    relative = _RELATIVE.fullmatch(spec)
+    if relative or _ZONED.fullmatch(spec):
+        # a window back from now, or an instant with its zone: both are an exact point in time
+        at = (
+            datetime.now(UTC).timestamp()
+            - int(relative.group(1)) * _SECONDS[relative.group(2)]
+            if relative
+            else datetime.fromisoformat(spec.replace(" ", "T")).timestamp()
+        )
+        if at <= 0:
+            # a window longer than the epoch reaches before every commit; git reads no negative time
+            return None
+        out = _git(repo, "rev-list", "-1", f"--before={int(at)}", "HEAD")
+        return (out or "").strip() or None
+    if _DATE.fullmatch(spec) and len(spec) > len("YYYY-MM-DD"):
+        message = (
+            f"{spec} names a time with no zone: write it as {spec}Z (UTC) or with an "
+            "offset such as +00:00, or as a window such as -1h"
+        )
+        raise ValueError(message)
     if _DATE.fullmatch(spec):
         # git reads a bare date as that day at the CURRENT time of day, so "--from 2026-10-11" run in
         # the evening meant the evening of the 11th: pin it to the start of the day (nemik:W318).
@@ -1496,7 +1527,12 @@ def _baseline(args: argparse.Namespace, names: list[str], dirs: dict[str, Path])
         if spec is None:
             out[name] = {"baseline": None}
             continue
-        base, now = queue_at(repo, resolve(repo, spec)), queue_at(repo, "HEAD")
+        try:
+            start = resolve(repo, spec)
+        except ValueError as error:
+            sys.stderr.write(f"{name}: {error}\n")
+            return 2
+        base, now = queue_at(repo, start), queue_at(repo, "HEAD")
         out[name] = {
             "baseline": spec,
             **variance(base, now),

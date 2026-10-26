@@ -252,6 +252,30 @@ def test_the_history_is_read_by_revision_and_by_date(tmp_path: Path) -> None:
     assert queue_at(repo, resolve(repo, "2026-09-30")) == {}
 
 
+def test_a_baseline_time_with_no_zone_is_refused(tmp_path: Path) -> None:
+    """nemik:W1127: 14:20 with no zone was read as local time and printed a plausible answer."""
+    repo, _ = _two_commits(tmp_path)
+    refused = ""
+    try:
+        resolve(repo, "2026-10-26T14:20")
+    except ValueError as error:
+        refused = str(error)
+    assert "no zone" in refused
+
+
+def test_a_baseline_time_with_a_zone_or_a_window_names_an_exact_instant(
+    tmp_path: Path,
+) -> None:
+    """Z and an offset name one instant; -1h and -99999d count back from now."""
+    repo, first = _two_commits(tmp_path)
+    assert resolve(repo, "2026-10-01T11:59:00Z") is None
+    assert resolve(repo, "2026-10-01T12:01:00Z") == first
+    assert resolve(repo, "2026-10-01T08:01:00-04:00") == first
+    assert resolve(repo, "-99999d") is None
+    # the second commit, days old, is the last one before an hour ago
+    assert resolve(repo, "-1h") != first
+
+
 def test_time_in_state_and_the_weekly_roll_up_follow_the_commits(
     tmp_path: Path,
 ) -> None:
