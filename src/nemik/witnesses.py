@@ -28,6 +28,7 @@ from mikemol.pathsforward.opa_eval import OpaUnavailableError, resolve
 
 from nemik import edgeletters
 from nemik.delivery import owed, stamp
+from nemik.work import run_writer
 from nemik.workrows import edges_of
 
 # input.<observer>["<key>"], the only fact shape a witness may reference.
@@ -464,9 +465,8 @@ def main(argv: list[str] | None = None) -> None:
                     file=sys.stderr,
                 )
                 continue
-            rc = subprocess.run(
+            code, said = run_writer(
                 [
-                    str(pf),
                     "--state",
                     str(path),
                     "--update",
@@ -475,14 +475,13 @@ def main(argv: list[str] | None = None) -> None:
                     "done",
                     "--evidence-append",
                     f"witness held at {doc['now']}: {json.dumps(observed, sort_keys=True)}",
-                ],
-                capture_output=True,
-                text=True,
-                check=False,
-            ).returncode
-            if rc:
+                ]
+            )
+            if code:
+                # the writer's own refusal line, so a loop that fails every five minutes says why
                 print(
-                    f"APPLY FAILED {repo}:{sym} (mikemol-paths-forward exit {rc})",
+                    f"APPLY FAILED {repo}:{sym} (mikemol-paths-forward exit {code}): "
+                    f"{(said.splitlines() or ['no output'])[-1]}",
                     file=sys.stderr,
                 )
                 continue

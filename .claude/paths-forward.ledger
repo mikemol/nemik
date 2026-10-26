@@ -2622,3 +2622,11 @@
 2026-10-26T21:00:44Z  status W1130 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T21:00:44Z  status W1122 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T21:01:39Z  status W1129 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T21:09:26Z  tick  W1122 advanced  sweep     "stack540 inflight: W1122 mypy 5753 to 5749 first, W1130 repin to e53edaf5, W1128 tests; nothing disjoint to prepare that is not behind the paydown order github-8f set [blocked by W1130]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T21:23:21Z  status W1033 blocked>done writer    "blocked -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T21:27:36Z  status W1122 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T21:27:37Z  status W1130 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T21:28:30Z  interrupt W1131 minted    -         "The Forgejo image build fails test_layout's popover test, tests/test_layout.py:958 box is None, though the gate passes it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W938
+2026-10-26T21:28:31Z  interrupt W1132 minted    -         "nemik-witnesses --apply reports the writer's own refusal line when an apply fails, since exit 2 every five minutes said nothing"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f
+2026-10-26T21:28:37Z  status W1132 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T21:29:33Z  status W1128 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
