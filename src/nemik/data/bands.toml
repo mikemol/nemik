@@ -13,7 +13,10 @@
 # These first rules are a starting calibration against luthen's live trust-boundary items (W188);
 # luthen, the first consumer, may propose changes by letter.
 
-order = ["critical", "high", "elevated", "normal", "low"]
+# nemik:W1077: `velocity` is first. A card is in it by its owner's tag, not by a vector rule: `touches:
+# velocity` (operator, host 695f3e0a line 100702: velocity improvements come before the things we want
+# velocity to carry). It has no [[band.velocity]] rules for that reason.
+order = ["velocity", "critical", "high", "elevated", "normal", "low"]
 unscored = "normal"
 unmatched = "normal"
 

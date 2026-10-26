@@ -7,7 +7,7 @@ import json
 import pytest
 
 from nemik.adapter import NEMIK, queue_graph, waypoint_uri
-from nemik.score import band, load_bands
+from nemik.score import band, load_bands, load_guarantees, tagged_band
 
 B = load_bands()
 V = "WV:1/R:{R}/E:{E}/C:{C}/I:{I}/A:{A}/X:N/S:{S}/F:K/W:N"
@@ -15,6 +15,22 @@ V = "WV:1/R:{R}/E:{E}/C:{C}/I:{I}/A:{A}/X:N/S:{S}/F:K/W:N"
 
 def vec(R="L", E="N", C="N", I="N", A="N", S="U"):
     return V.format(R=R, E=E, C=C, I=I, A=A, S=S)
+
+
+def test_a_card_tagged_velocity_is_in_the_band_above_critical() -> None:
+    """nemik:W1077: the owner's tag puts the card first, whatever its vector says."""
+    assert B.order[0] == "velocity"
+    assert B.rank("velocity") < B.rank("critical")
+    assert tagged_band("normal", "unscored", {"velocity", "docs"}) == (
+        "velocity",
+        "touches velocity",
+    )
+    assert tagged_band("high", "S:C", {"docs"}) == ("high", "S:C")
+
+
+def test_the_floor_names_critical_so_a_ready_velocity_card_is_not_skipped() -> None:
+    """The guarantee holds at critical and above, which includes velocity, the band above it."""
+    assert load_guarantees(bands=B).floor == "critical"
 
 
 @pytest.mark.parametrize(

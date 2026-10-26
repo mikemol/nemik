@@ -153,10 +153,11 @@ def objectives(
     """
     from rdflib.namespace import PROV
 
-    from nemik.score import band
+    from nemik.score import band, tagged_band
 
     cause = str(g.value(n, PROV.wasInformedBy) or "").strip().lower()
     b, why = band(str(g.value(n, NEMIK.vector) or "") or None, bands)
+    b, why = tagged_band(b, why, {str(t) for t in g.objects(n, NEMIK.touches)})
     down = downstream_weight(g, n, weights)
     return {
         "operator": int(cause == "operator" or cause.startswith("operator:")),

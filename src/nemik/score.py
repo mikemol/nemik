@@ -68,6 +68,24 @@ def band(vector: str | None, bands: Bands) -> tuple[str, str]:
     return bands.unmatched, "unmatched"
 
 
+# nemik:W1077: a card whose owner tagged it `touches: velocity` is in the velocity band, which
+# bands.toml lists above critical: the operator's order (host 695f3e0a line 100702) is that velocity
+# work comes before the work it carries. The owner's tag is the declaration, so nemik keeps no list.
+VELOCITY = "velocity"
+
+
+def tagged_band(b: str, why: str, touches: set[str]) -> tuple[str, str]:
+    """Move a card into the velocity band when its owner tagged it so.
+
+    Returns:
+        (velocity, why) when the touches carry the velocity tag; otherwise the band and why given.
+
+    """
+    if VELOCITY in touches:
+        return VELOCITY, "touches velocity"
+    return b, why
+
+
 def _matches(values: dict[str, str], rule: dict[str, frozenset[str]]) -> bool:
     """A rule matches when every metric it names has one of the listed values."""
     return all(values[m] in allowed for m, allowed in rule.items())
