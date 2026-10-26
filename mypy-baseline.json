@@ -12,10 +12,6 @@
   "misc": 25,
   "var-annotated": 1
  },
- "src/nemik/alarm.py": {
-  "misc": 2,
-  "type-arg": 1
- },
  "src/nemik/apischema.py": {
   "explicit-any": 10,
   "misc": 115
@@ -156,7 +152,7 @@
   "var-annotated": 1
  },
  "src/nemik/wake.py": {
-  "misc": 229,
+  "misc": 228,
   "no-any-return": 1,
   "no-untyped-def": 1,
   "redundant-expr": 1,
@@ -192,7 +188,7 @@
   "type-arg": 1
  },
  "tests/test_alarm.py": {
-  "misc": 18,
+  "misc": 17,
   "no-untyped-def": 1
  },
  "tests/test_alarm_delivery.py": {

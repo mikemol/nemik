@@ -15,6 +15,12 @@ from importlib.resources import files
 
 
 def load() -> dict:
+    """Read the manifest's files section.
+
+    Returns:
+        For each published file, the fields each of its sections may carry.
+
+    """
     return json.loads(files("nemik.data").joinpath("field-manifest.json").read_text())[
         "files"
     ]

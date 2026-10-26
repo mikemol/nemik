@@ -49,7 +49,7 @@ def fires_between(
     due: str = "",
     rrule: str = "",
     exdates: tuple[str, ...] = (),
-    done: dict | None = None,
+    done: dict[str, str] | None = None,
 ) -> list[tuple[datetime, str]]:
     """Every (UTC instant, RECURRENCE-ID) in [start, end) at which `trigger` fires (nemik:W145).
 

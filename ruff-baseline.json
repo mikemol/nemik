@@ -265,7 +265,6 @@
  },
  "src/nemik/manifest.py": {
   "ANN001": 3,
-  "D103": 1,
   "DOC201": 1,
   "E501": 1
  },
