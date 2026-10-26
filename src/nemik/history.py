@@ -37,6 +37,7 @@ from nemik.forecastshingle import HORIZONS, issue_blocked, issue_in_line, shingl
 from nemik.histdocs import encode, file_name
 from nemik.verify import lead_report, score_shingle, shingle_pairs
 from nemik.wake import read_liveness
+from nemik.where import matches, parse
 
 RELIABILITY_BINS = 4  # --score cuts each lead's chances into this many bins
 # nemik:W966: the status whose cards take no place in a repo's line
@@ -1070,6 +1071,15 @@ def main(argv: list[str] | None = None) -> int:
         "reads a bare -45m as an option) (W1127)",
     )
     ap.add_argument(
+        "--where",
+        default="",
+        metavar="EXPRESSION",
+        help="with --oldest: keep only the cards a find(1)-shaped filter names, then take N. "
+        "Predicates field OP value over status, age (30m, 12h, 2d), flag, repo, blocked_on and "
+        "title, with = != < > <= >= and ~ (contains); * is any; combine with and, or, not and "
+        "parentheses. Example: 'status=ready and not blocked_on=* and age>2d' (W1128)",
+    )
+    ap.add_argument(
         "--publish",
         type=Path,
         default=None,
@@ -1287,7 +1297,10 @@ def with_paths(
 
 
 def oldest_cards(
-    docs: dict[str, object], now: datetime, limit: int
+    docs: dict[str, object],
+    now: datetime,
+    limit: int,
+    keep: tuple[str, ...] = (),
 ) -> list[dict[str, str]]:
     """List the oldest open cards of the queues, oldest first (nemik:W769).
 
@@ -1299,6 +1312,8 @@ def oldest_cards(
         docs: Each repo's parsed queue file, by repo.
         now: The time the ages are taken at.
         limit: How many cards to list.
+        keep: A filter parsed by nemik.where (nemik:W1128); only the rows it keeps count toward
+            `limit`, so "the 20 oldest that are not blocked" are 20 such cards.
 
     Returns:
         Up to `limit` rows: cite, age_days, status, flag, blocked_on, title.
@@ -1329,13 +1344,17 @@ def oldest_cards(
                 else "",
                 "title": str(card.get("title", "")),
             }
+            if keep and not matches(list(keep), row):
+                continue
             order.append((born, row["cite"]))
             rows[row["cite"]] = row
     order.sort()
     return [rows[cite] for _, cite in order[:limit]]
 
 
-def oldest_rows(files: dict[str, Path], root: Path, limit: int) -> list[dict[str, str]]:
+def oldest_rows(
+    files: dict[str, Path], root: Path, limit: int, keep: tuple[str, ...] = ()
+) -> list[dict[str, str]]:
     """Read the queues and list the oldest open cards with their paths (nemik:W853).
 
     The one function the CLI's --oldest and the server's /oldest.json both call. It reads files
@@ -1345,6 +1364,7 @@ def oldest_rows(files: dict[str, Path], root: Path, limit: int) -> list[dict[str
         files: Each repo's name and its queue file's path; an unreadable one is left out.
         root: The fleet root, where the liveness record is read.
         limit: How many cards to list.
+        keep: A parsed nemik.where filter; only the rows it keeps are listed (nemik:W1128).
 
     Returns:
         Up to `limit` rows: cite, age_days, status, flag, blocked_on, title, path, offline, reach.
@@ -1356,19 +1376,27 @@ def oldest_rows(files: dict[str, Path], root: Path, limit: int) -> list[dict[str
             docs[name] = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, ValueError):
             continue
-    rows = oldest_cards(docs, datetime.now(UTC), limit)
+    rows = oldest_cards(docs, datetime.now(UTC), limit, keep)
     return with_paths(rows, docs, live_repos(root))
 
 
-def _oldest(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> int:
+def _oldest(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
     """Print the N oldest open cards of the named repos, one a line (nemik:W769).
 
+    With --where EXPRESSION only the cards it keeps count, so `--oldest 20 --where 'not
+    blocked_on=*'` lists the 20 oldest cards that wait on nothing (nemik:W1128).
+
     Returns:
-        0.
+        0; 2 when the --where expression is not well formed, the error on stderr.
 
     """
+    try:
+        keep = tuple(parse(args.where))
+    except ValueError as error:
+        sys.stderr.write(f"nemik-history: --where: {error}\n")
+        return 2
     rows = oldest_rows(
-        {name: dirs[name] / QUEUE_PATH for name in names}, args.root, args.oldest
+        {name: dirs[name] / QUEUE_PATH for name in names}, args.root, args.oldest, keep
     )
     if args.json:
         sys.stdout.write(json.dumps(rows, indent=1) + "\n")
@@ -1472,6 +1500,9 @@ class Opts(argparse.Namespace):
 
     json: bool
     publish: Path | None
+    where: str
+    oldest: int
+    root: Path
 
 
 def emit(args: Opts, mode: str, rows: object) -> bool:
