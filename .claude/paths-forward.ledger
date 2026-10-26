@@ -2469,3 +2469,12 @@
 2026-10-26T01:24:20Z  status W1075 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T01:26:40Z  tick  W1085 minted    -         "Replace test_layout's clock-bound page waits with event waits: a 30 s wait_for_selector timed out in a loaded gate with no page error named"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1060
 2026-10-26T01:27:54Z  status W1085 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T01:52:12Z  status W969 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T01:52:12Z  status W975 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T01:52:13Z  status W1078 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T02:12:05Z  tick  W1086 minted    -         "Keep the last good snapshot on the claim so a restarted pod serves it before its first build ends, instead of staying unready for the whole cold build"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W1651
+2026-10-26T02:16:41Z  status W1085 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T02:16:42Z  status W1084 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T02:16:42Z  status W1062 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T02:19:47Z  tick  W1087 minted    -         "Size the snapshots volume from a measured snapshot: 77 MiB each, five at the build's peak, so 512Mi, not 256Mi"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W1644
+2026-10-26T02:21:20Z  status W1087 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

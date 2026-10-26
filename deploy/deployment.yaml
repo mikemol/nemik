@@ -109,8 +109,11 @@ spec:
         # declared by luthen-observability (its W1643), not here, so a prune of this manifest never deletes it
         - name: cache
           persistentVolumeClaim: {claimName: nemik-cache}
-        # disk-backed: the published snapshots are not container memory (four at the peak is ~100 MB)
+        # disk-backed: the published snapshots are not container memory. A snapshot of the fleet is 77 MiB
+        # measured (2026-10-26, nemik-serve --publish over the real root), and a build holds the three
+        # kept ones plus the one being written, five at the peak, 385 MiB: the old 256Mi limit evicted the
+        # pod twice (nemik:W1087). 512Mi is that peak with a third of headroom.
         - name: snapshots
-          emptyDir: {sizeLimit: 256Mi}
+          emptyDir: {sizeLimit: 512Mi}
         - name: tmp
           emptyDir: {medium: Memory, sizeLimit: 64Mi}

@@ -20,6 +20,8 @@ from nemik import staticserve
 ROOT = Path(__file__).resolve().parents[1]
 DEPLOYMENT = ROOT / "deploy" / "deployment.yaml"
 TENANT_QUOTA_MI = 3 * 1024  # luthen's namespace quota on limits.memory
+SNAPSHOT_MI = 77  # one published snapshot, measured 2026-10-26 (W1087)
+SNAPSHOTS_AT_PEAK = 5  # the three kept, the one served, and the one being written
 
 
 def _spec() -> dict[str, Any]:
@@ -60,6 +62,13 @@ def test_the_snapshot_volume_is_disk_backed_with_a_size_limit() -> None:
     empty = volumes["snapshots"]["emptyDir"]
     assert "medium" not in empty, "a Memory emptyDir would charge container memory"
     assert empty.get("sizeLimit"), "the snapshot volume has no declared size limit"
+
+
+def test_the_snapshot_volume_holds_every_snapshot_a_build_has_at_its_peak() -> None:
+    """The kept snapshots and the one being written fit: two evictions came of 256Mi."""
+    text = DEPLOYMENT.read_text()
+    declared = text.split("- name: snapshots\n          emptyDir: {sizeLimit: ")[1]
+    assert _mi(declared.split("}")[0]) >= SNAPSHOT_MI * SNAPSHOTS_AT_PEAK
 
 
 def test_the_builder_has_a_cpu_limit_and_memory_bounds() -> None:
