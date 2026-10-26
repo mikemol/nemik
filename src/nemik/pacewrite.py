@@ -10,7 +10,27 @@ for the same ratchet is passed back as the prior, and the larger one is written.
 """
 
 from nemik.pacepublish import UNKNOWN, Row
-from nemik.ratchetpace import verdict
+from nemik.ratchetpace import horizon, verdict
+
+
+def extras_of(
+    series: list[tuple[str, str, list[int]]], window: int
+) -> dict[str, tuple[int, int]]:
+    """State each ratchet's value and landings-to-zero (nemik:W1114).
+
+    Args:
+        series: (repo, ratchet, values oldest first), as ratchetseries reads them.
+        window: How many landed commits one window spans.
+
+    Returns:
+        (value now, horizon) under the key `repo` and `ratchet` joined by a newline; the horizon is
+        -1 when nothing fell over the window.
+
+    """
+    return {
+        f"{repo}\n{ratchet}": (values[-1] if values else 0, horizon(values, window))
+        for repo, ratchet, values in series
+    }
 
 
 def priors_of(rows: list[Row]) -> dict[str, int]:
@@ -56,13 +76,16 @@ def pace_rows(
     return rows
 
 
-def pace_text(rows: list[Row], as_of: str, window: int) -> str:
+def pace_text(
+    rows: list[Row], as_of: str, window: int, extras: dict[str, tuple[int, int]]
+) -> str:
     """Write the pace file.
 
     Args:
         rows: The verdict rows.
         as_of: When they were computed, a UTC stamp.
         window: The window in landed commits.
+        extras: Each ratchet's value and horizon, from extras_of; a row without one states neither.
 
     Returns:
         The file's text: the head line, then one row per line.
@@ -70,8 +93,12 @@ def pace_text(rows: list[Row], as_of: str, window: int) -> str:
     """
     lines = [f'{{"as_of": "{as_of}", "window": "{window}"}}']
     for repo, ratchet, state, seen, owed in rows:
+        more = ""
+        if f"{repo}\n{ratchet}" in extras:
+            value, reach = extras[f"{repo}\n{ratchet}"]
+            more = f', "value": "{value}", "horizon": "{reach}"'
         lines.append(
             f'{{"repo": "{repo}", "ratchet": "{ratchet}", "state": "{state}", '
-            f'"observed": "{seen}", "required": "{owed}"}}'
+            f'"observed": "{seen}", "required": "{owed}"{more}}}'
         )
     return "\n".join(lines) + "\n"

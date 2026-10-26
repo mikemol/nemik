@@ -2,10 +2,20 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W987: a ratchet is behind when its fall over the last landings is below what it owes."""
 
-from nemik.ratchetpace import BEHIND, OK, seed, verdict, window_fall
+from nemik.ratchetpace import (
+    BEHIND,
+    NO_HORIZON,
+    OK,
+    horizon,
+    seed,
+    verdict,
+    window_fall,
+)
 
 WINDOW = 2
 FALLING = [10, 10, 8, 8, 6, 6, 4]
+SLOWING = [10, 10, 10, 10, 9, 7]
+SLOWING_HORIZON = 5
 
 
 def test_a_ratchet_falling_at_its_own_pace_is_ok() -> None:
@@ -40,3 +50,13 @@ def test_a_series_shorter_than_a_window_is_judged_on_the_floor() -> None:
     """Too short to fall over a window, so a nonzero ratchet is behind; an empty series is ok."""
     assert verdict([5, 4], WINDOW, 0) == (BEHIND, 0, 1)
     assert verdict([], WINDOW, 0) == (OK, 0, 0)
+
+
+def test_the_horizon_is_the_value_over_the_fall_per_landing() -> None:
+    """W1112: 4 left, 2 fell over 2 landings (1 a landing): 4 landings to zero, rounded up."""
+    assert horizon(FALLING, WINDOW) == FALLING[-1]
+    # 7 left, 3 fell over 2 landings: 4.67 landings, rounded up
+    assert horizon(SLOWING, WINDOW) == SLOWING_HORIZON
+    assert horizon([10] * 7, WINDOW) == NO_HORIZON
+    assert horizon([3, 2, 1, 0, 0], WINDOW) == 0
+    assert horizon([5, 4], WINDOW) == NO_HORIZON

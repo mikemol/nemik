@@ -104,6 +104,28 @@ def read_pace(text: str) -> tuple[str, int, list[Row]]:
     return as_of, window, rows
 
 
+def read_extras(text: str) -> dict[str, tuple[int, int]]:
+    """Read the value and horizon a pace file states beside its verdicts (nemik:W1114).
+
+    Args:
+        text: The file's text. A row written before the horizon existed holds neither key.
+
+    Returns:
+        (the ratchet's value, its landings-to-zero) under the key `repo` and `ratchet` joined by a
+        newline, for each row that states both; the horizon is -1 when nothing fell.
+
+    """
+    extras: dict[str, tuple[int, int]] = {}
+    for line in text.splitlines()[1:]:
+        body = line.strip().rstrip(",")
+        if body.startswith("{"):
+            got = fields(body)
+            if "value" in got and "horizon" in got:
+                key = f"{_first(got, 'repo')}\n{_first(got, 'ratchet')}"
+                extras[key] = (int(_first(got, "value")), int(_first(got, "horizon")))
+    return extras
+
+
 def epoch_seconds(stamp: str) -> int:
     """Convert an ISO stamp like 2026-10-24T19:00:00Z to unix seconds, by integer arithmetic.
 

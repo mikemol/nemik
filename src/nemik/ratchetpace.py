@@ -16,6 +16,7 @@ compiles it.
 WINDOW = 10  # landed commits in one window
 OK = "ok"
 BEHIND = "behind"
+NO_HORIZON = -1  # nothing fell over the window, so no landings-to-zero can be stated
 
 
 def window_fall(values: list[int], window: int) -> int:
@@ -74,6 +75,29 @@ def required(values: list[int], window: int, prior: int) -> int:
     if now <= 0:
         return 0
     return min(max(prior, seed(values, window), 1), now)
+
+
+def horizon(values: list[int], window: int) -> int:
+    """Count the landings a ratchet needs to reach zero at the pace it last fell.
+
+    Not behind is not falling: ten findings a landing off 2,715 is 272 landings (W1112).
+
+    Args:
+        values: The ratchet's value after each landed commit, oldest first.
+        window: How many landings the window spans.
+
+    Returns:
+        The value now divided by the fall per landing over the last window, rounded up; 0 when
+        the value is zero; NO_HORIZON when nothing fell over the window.
+
+    """
+    now = values[-1] if values else 0
+    if now <= 0:
+        return 0
+    fell = window_fall(values, window)
+    if fell <= 0:
+        return NO_HORIZON
+    return -(-now * window // fell)
 
 
 def verdict(values: list[int], window: int, prior: int) -> tuple[str, int, int]:

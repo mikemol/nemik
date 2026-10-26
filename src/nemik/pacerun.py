@@ -10,7 +10,7 @@ that is missing or unreadable seeds nothing: every requirement then starts from 
 """
 
 from nemik.pacepublish import read_pace
-from nemik.pacewrite import pace_rows, pace_text, priors_of
+from nemik.pacewrite import extras_of, pace_rows, pace_text, priors_of
 from nemik.ratchetpace import WINDOW
 from nemik.ratchetseries import ended_series, export_series, series_of
 from nemik.rebaselines import DECLARED, since
@@ -31,7 +31,8 @@ def pace_document(answer: str, previous: str, stamp: str) -> str:
         The pace file's text, one row per ratchet series. A series of the export that ended while
         its repo's others went on reads unknown (nemik:W1039), never ok and never behind. A series
         with a declared re-baseline (nemik:W1046) is judged from the declared step on, so the
-        step earns no paydown credit.
+        step earns no paydown credit. Each row also states the ratchet's value and its horizon,
+        the landings to zero at the pace it last fell (nemik:W1114).
 
     Raises:
         ValueError: When the answer holds no series, so no empty file replaces a good one.
@@ -51,4 +52,5 @@ def pace_document(answer: str, previous: str, stamp: str) -> str:
     if not series:
         message = "the answer holds no ratchet series"
         raise ValueError(message)
-    return pace_text(pace_rows(series, WINDOW, priors, ended), stamp, WINDOW)
+    rows = pace_rows(series, WINDOW, priors, ended)
+    return pace_text(rows, stamp, WINDOW, extras_of(series, WINDOW))
