@@ -63,11 +63,12 @@ def rows(verdict: Json, source: str = "") -> list[str]:
     head = f"{verdict.get('ref')}  {verdict.get('level')}  residue={len(entries)}"
     head += f"  ({source})" if source else ""
     lines = [head]
-    for entry in entries:
-        if isinstance(entry, dict):
-            lines.append(
-                f"    {entry.get('gate')}: {entry.get('what')}  [closes by: {entry.get('closes_by')}]"
-            )
+    lines.extend(
+        f"    {entry.get('gate')}: {entry.get('what')}"
+        f"  [closes by: {entry.get('closes_by')}]"
+        for entry in entries
+        if isinstance(entry, dict)
+    )
     return lines
 
 
