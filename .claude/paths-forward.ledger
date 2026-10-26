@@ -2617,3 +2617,8 @@
 2026-10-26T20:11:37Z  tick  W1129 minted    -         "The required-fall alert fires only when required falls below the value, since the clamp lowers it legitimately to the value"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W1685
 2026-10-26T20:17:11Z  status W1129 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T20:18:10Z  status W1123 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T20:42:36Z  tick  W1128 advanced  collapse  "wired --where into nemik-history --oldest (stack539, behind stack538 which carries where.py); rebuilt the venv first so the live nemik-history kept working; mypy 5753 to 5749 from typing Opts; ago: spelling landed 47392a6 [blocked by W1129]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T21:00:34Z  interrupt W1130 minted    -         "Repin mtools to e53edaf5 so the paydown-only refusal (mtools W1920) is in nemik's commit path while a ratchet is behind"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f
+2026-10-26T21:00:44Z  status W1130 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T21:00:44Z  status W1122 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T21:01:39Z  status W1129 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
