@@ -2532,3 +2532,9 @@
 2026-10-26T13:26:58Z  status W1014 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T13:26:58Z  status W1096 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T13:36:07Z  tick  W1108 minted    -         "The pace file carries each ratchet's current value, its last paydown time and its tagged paydown card, and nemik-rank --pace prints them"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1107
+2026-10-26T13:57:46Z  tick  W1109 minted    -         "Repin mtools to 760ce3a5 or later for W2039 stack deletions under a directory, W2041 blank blockers refused, W2038 tick-open ready cards"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f
+2026-10-26T14:01:01Z  status W1107 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T14:03:49Z  tick  W1110 minted    -         "nemik-rank --pace without --root reads luthen's export tree, where ratchet-pace.json is published, not the repos root"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1107
+2026-10-26T14:03:56Z  status W1110 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T14:06:05Z  tick  W1111 minted    -         "Define the ratchet tombstone: where a repo writes one, where pacewrite reads it, and a retired ratchet leaves the pace verdict only by one"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=mtools:W2045
+2026-10-26T14:10:45Z  status W1109 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
