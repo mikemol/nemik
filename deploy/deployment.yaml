@@ -81,6 +81,10 @@ spec:
           env:
             # glibc arenas: one per thread, never returned; two bound the fragmentation (nemik:W260).
             - {name: MALLOC_ARENA_MAX, value: "2"}
+            # nemik:W1074: the build's gauges carry the pod, so two builders behind one Service scrape
+            # target read apart
+            - name: NEMIK_POD
+              valueFrom: {fieldRef: {fieldPath: metadata.name}}
           # Measured on a pod-shaped export (no git), 17 repos: the build peaked near 530 MB; luthen's 7 d
           # max_over_time of the working set (2026-10-17) read 746 MiB for the builder, uncensored, so the
           # old 768Mi limit sat 3% above it. The quota caps the pair: (96Mi + 896Mi) x 3 pods = 2.9Gi of

@@ -128,6 +128,13 @@ def test_the_builder_keeps_its_cache_on_a_claim_that_outlives_the_pod() -> None:
     assert "persistentVolumeClaim: {claimName: nemik-cache}" in builder_part
 
 
+def test_the_builder_knows_its_pod_so_its_gauges_read_apart() -> None:
+    """Two builders sit behind one scrape target: the pod name reaches the gauges (W1074)."""
+    builder_part = DEPLOYMENT.read_text().split("- name: builder")[1]
+    assert "name: NEMIK_POD" in builder_part
+    assert "fieldPath: metadata.name" in builder_part
+
+
 def test_the_pod_fits_the_tenant_quota_with_a_surge_pod() -> None:
     """Replicas plus one surge pod, at their limits, stay under the tenant quota."""
     limits = sum(
