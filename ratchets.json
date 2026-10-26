@@ -1,0 +1,15 @@
+{
+  "ratchets": [
+    {
+      "path": "ruff-baseline.json",
+      "kind": "baseline",
+      "expression": "file_rule_count"
+    },
+    {
+      "path": "mypy-baseline.json",
+      "kind": "baseline",
+      "expression": "file_rule_count"
+    },
+    {"path": "codon-baseline.json", "kind": "baseline"}
+  ]
+}

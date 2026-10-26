@@ -40,6 +40,29 @@ DECLARED: list[Declared] = [
             "not read from that repo's file by nemik (W1071)"
         ),
     ),
+    (
+        "nemik",
+        "mypy-baseline.json",
+        277,
+        5747,
+        (
+            "the value is now the sum of the counts in the file (ratchets.json, mtools:W1991's "
+            "file_rule_count); it was the entry count of the file (144 files and their rules), "
+            "which a paydown inside a file that still had findings could not move (github-8f, "
+            "2026-10-26: 5758 to 5749 findings read as fell 0); no finding was fixed by the change"
+        ),
+    ),
+    (
+        "nemik",
+        "ruff-baseline.json",
+        1000,
+        2686,
+        (
+            "the value is now the sum of the counts in the file (ratchets.json, mtools:W1991's "
+            "file_rule_count); it was the entry count of the file, which a paydown that left a "
+            "file with findings could not move; no finding was fixed by the change"
+        ),
+    ),
 ]
 
 
