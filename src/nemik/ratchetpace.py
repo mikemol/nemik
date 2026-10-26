@@ -64,14 +64,16 @@ def required(values: list[int], window: int, prior: int) -> int:
         prior: The largest requirement stated before; the new one never falls below it.
 
     Returns:
-        The larger of the prior requirement, the seed, and one while the value is above zero; a
-        ratchet at zero owes nothing.
+        The larger of the prior requirement, the seed, and one while the value is above zero, but
+        never more than the value now: a ratchet cannot fall further than zero, so it is never
+        asked for more than it holds (panflute required 6 against a value of 1, W1105); a ratchet
+        at zero owes nothing.
 
     """
     now = values[-1] if values else 0
     if now <= 0:
         return 0
-    return max(prior, seed(values, window), 1)
+    return min(max(prior, seed(values, window), 1), now)
 
 
 def verdict(values: list[int], window: int, prior: int) -> tuple[str, int, int]:

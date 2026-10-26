@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1103,
+  "counter": 1107,
   "waypoints": [
     {
       "symbol": "W1",
@@ -22521,7 +22521,6 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W991",
         "W993",
         "W994",
         "W1002"
@@ -22533,7 +22532,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W42",
       "last_worked": "2026-10-24T23:08:23Z",
-      "ticks_blocked": 60,
+      "ticks_blocked": 0,
       "completed": null,
       "warrants": [
         {
@@ -22699,21 +22698,21 @@
     {
       "symbol": "W991",
       "title": "Wire the real ratchet value series from mtools into the pace computation",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W986"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Read the ratchet value series for a repo from luthen's metric store by the name the endpoint tool resolves, order it by gate run, and write the pace file ratchetpace's verdict fills in; start by finding the series' query form",
-      "evidence": "2026-10-24: 2026-10-24 mtools-ad: a ratchet's name is its file path relative to its repo, posix, no leading slash (ruff-baseline.json, .claude/debt-ledger.json); metric mikemol.ratchet.value{repo=<repo dir name>, ratchet=<that path>} = entry count (JSON leaves or non-comment lines), floor 0; paydown card tag ratchet:<that path>; census mode mikemol-ratchet census ROOT (mtools:W1907). Accepted as spelled | 2026-10-24: 2026-10-24: mtools landed W1906 (f8659b68 kinds), W1907 (1dd445e1 census), W1909 part (17535bf7 mikemol-ratchet-emit: mikemol.ratchet.value{repo,ratchet,kind}; an unread ratchet sends nothing). I asked mtools-ad for a second series mikemol.ratchet.sum{repo,ratchet,kind} for numeric baselines, since an entry count stays flat while counts inside a key fall; W987 will judge the sum where it exists and say which it used | 2026-10-24: 2026-10-24: mtools-ad took the sum series as mtools:W1922, emitted only for the file-rule-count shape (object of objects of non-negative integers), which nemik's ruff-baseline.json and mypy-baseline.json both are (checked); other files keep the entry count alone | 2026-10-24: 2026-10-24 mtools-ad: mtools:W1909 done (emit 17535bf7, pre-commit call 4c2110f4): the next mtools gate run sends mikemol.ratchet.value{repo,ratchet,kind} for every ratchet file the census finds; value = entry count. The sum series (mtools:W1922) is in the gate behind it",
+      "next_bounded_step": null,
+      "evidence": "2026-10-24: 2026-10-24 mtools-ad: a ratchet's name is its file path relative to its repo, posix, no leading slash (ruff-baseline.json, .claude/debt-ledger.json); metric mikemol.ratchet.value{repo=<repo dir name>, ratchet=<that path>} = entry count (JSON leaves or non-comment lines), floor 0; paydown card tag ratchet:<that path>; census mode mikemol-ratchet census ROOT (mtools:W1907). Accepted as spelled | 2026-10-24: 2026-10-24: mtools landed W1906 (f8659b68 kinds), W1907 (1dd445e1 census), W1909 part (17535bf7 mikemol-ratchet-emit: mikemol.ratchet.value{repo,ratchet,kind}; an unread ratchet sends nothing). I asked mtools-ad for a second series mikemol.ratchet.sum{repo,ratchet,kind} for numeric baselines, since an entry count stays flat while counts inside a key fall; W987 will judge the sum where it exists and say which it used | 2026-10-24: 2026-10-24: mtools-ad took the sum series as mtools:W1922, emitted only for the file-rule-count shape (object of objects of non-negative integers), which nemik's ruff-baseline.json and mypy-baseline.json both are (checked); other files keep the entry count alone | 2026-10-24: 2026-10-24 mtools-ad: mtools:W1909 done (emit 17535bf7, pre-commit call 4c2110f4): the next mtools gate run sends mikemol.ratchet.value{repo,ratchet,kind} for every ratchet file the census finds; value = entry count. The sum series (mtools:W1922) is in the gate behind it | 2026-10-26: 2026-10-26 closing as realized: its purpose, a live pace, exists. nemik publishes the pace: ratchet-pace.json in the export tree and nemik_ratchet_behind{repo,ratchet} read from the metric store this session (58 series, e.g. nemik codon-baseline.json=1, mypy-baseline.json=1, ruff-baseline.json=0 at the last read), built by ratchetseries, pacewrite, pacepublish, pacerun (landed 2026-10-25). W993 reads that file",
       "issued_at": "2026-10-24T18:59:03Z",
       "minted_during": "tick",
       "caused_by": "W986",
-      "last_worked": "2026-10-25T02:48:45Z",
+      "last_worked": "2026-10-26T12:57:09Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261026T125709Z",
       "weight": 100,
       "manifest": [
         "src/nemik/ratchetpace.py"
@@ -22723,22 +22722,23 @@
     {
       "symbol": "W993",
       "title": "nemik-rank lifts the paydown cards of a repo that is behind to the front of its ranking, reading the pace file",
-      "status": "blocked",
+      "status": "ready",
       "enables": [
         "W986"
       ],
-      "touches": [],
-      "blocked_on": [
-        "W991"
+      "touches": [
+        "file:src/nemik/rank.py!w",
+        "velocity"
       ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Read the pace file once W991 fixes where it lives, and apply the lift to nemik-rank's output and its next-card choice",
-      "evidence": "",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Read ratchet-pace.json (published in the export tree, W990) and put the paydown cards of a behind repo (cards tagged file:<the ratchet file>) in the critical floor beside the velocity band: composing the operator's rulings 93549 (commitments take priority) and 100702 (velocity first), neither above the other; rank.objectives gets the band, bands.toml the floor already covers critical and above; test: a behind repo's paydown card ranks with velocity ahead of a normal card, an ok repo's does not",
+      "evidence": "2026-10-26: 2026-10-26: unblocked by closing W991 (a live pace exists). github-8f: the velocity band mechanized one ruling and left paydown losing every comparison",
       "issued_at": "2026-10-24T19:34:39Z",
       "minted_during": "tick",
       "caused_by": "W989",
-      "last_worked": "2026-10-24T19:34:46Z",
-      "ticks_blocked": 69,
+      "last_worked": "2026-10-26T12:57:23Z",
+      "ticks_blocked": 0,
       "completed": null,
       "weight": 100,
       "manifest": [
@@ -22750,22 +22750,20 @@
     {
       "symbol": "W994",
       "title": "The adapter reads the pace file into the graph as behindOn facts on each workstream, so the paydown shape judges real repos",
-      "status": "blocked",
+      "status": "ready",
       "enables": [
         "W986"
       ],
       "touches": [],
-      "blocked_on": [
-        "W991"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "Once W991 fixes where the pace file lives, read it and set behindOn for each repo's behind ratchets while the graph is built",
       "evidence": "",
       "issued_at": "2026-10-24T20:10:47Z",
       "minted_during": "tick",
       "caused_by": "W988",
       "last_worked": "2026-10-24T20:10:53Z",
-      "ticks_blocked": 67,
+      "ticks_blocked": 0,
       "completed": null,
       "weight": 100,
       "manifest": [
@@ -23468,23 +23466,24 @@
     {
       "symbol": "W1014",
       "title": "Split the composite assertions that remain in twelve test files without adding an Any-typed expression, so the mypy count does not rise",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W980"
       ],
       "touches": [
         "file:tests/test_layout.py!w",
         "file:ruff-baseline.json!w",
-        "file:mypy-baseline.json!w"
+        "file:mypy-baseline.json!w",
+        "velocity"
       ],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Pay down the next rule family in tests/test_layout.py, ANN001 or E501, with a mechanical fix, one family per commit",
-      "evidence": "2026-10-25: 2026-10-25 measured on tests/test_layout.py: ruff --fix splits 14 messageless composite assertions (ruff 2884 to 2872) but mypy rises 10 in that file (713 to 723): a split gives each operand its own line, and each line with an Any-typed operand (page.evaluate results) is its own finding. Typing the server fixture parameter in two tests moved mypy by 0 (ruff fell 2 more). So the offset has to come from the Any-typed page.evaluate results, for example annotating each result once as a TypedDict or reading it through a typed helper; reverted the file, nothing kept | 2026-10-25: tagged as the paydown card for the ruff and mypy baselines (the pace reads nemik behind on both, github-8f 14:14Z): a card is a paydown only if it touches file:<the baseline>. baselinetop: the heaviest file is tests/test_layout.py, 232 ruff and 749 mypy findings; the heaviest ruff rule is D103 (527), then E501 (378), PLC0415 (291); the heaviest mypy rule is misc (5806), which is disallow_any_expr | 2026-10-25: first slice, 2026-10-25: the 35 copies of the chromium launch in tests/test_layout.py (seven lines each, all os.path.abspath) are one typed helper _launch(playwright); done by a codemod that asserted 28 plus 7 matches, so any variation would have stopped it. Measured: ruff 2818 to 2783 (the 35 PTH100), mypy 6256 to 5960 (-296, the Any-typed chromium launch expressions); both baselines lowered with --write. Next family by baselinetop for this file: E501 (67), ANN001 (47), D103 (31), PT018 (19) | 2026-10-25: second slice, tests/test_calendars.py: its 35 ANN001 arguments annotated by a codemod from ruff's own positions (tmp_path Path, monkeypatch pytest.MonkeyPatch, capsys pytest.CaptureFixture[str], ics str, the bool fail keyword-only, _row's label, start, summary and waiting). Measured against the working-tree baselines: ruff 2783 to 2747, mypy 5960 to 5845. Baselines to be written after stack454, which carries them, lands",
+      "evidence": "2026-10-25: 2026-10-25 measured on tests/test_layout.py: ruff --fix splits 14 messageless composite assertions (ruff 2884 to 2872) but mypy rises 10 in that file (713 to 723): a split gives each operand its own line, and each line with an Any-typed operand (page.evaluate results) is its own finding. Typing the server fixture parameter in two tests moved mypy by 0 (ruff fell 2 more). So the offset has to come from the Any-typed page.evaluate results, for example annotating each result once as a TypedDict or reading it through a typed helper; reverted the file, nothing kept | 2026-10-25: tagged as the paydown card for the ruff and mypy baselines (the pace reads nemik behind on both, github-8f 14:14Z): a card is a paydown only if it touches file:<the baseline>. baselinetop: the heaviest file is tests/test_layout.py, 232 ruff and 749 mypy findings; the heaviest ruff rule is D103 (527), then E501 (378), PLC0415 (291); the heaviest mypy rule is misc (5806), which is disallow_any_expr | 2026-10-25: first slice, 2026-10-25: the 35 copies of the chromium launch in tests/test_layout.py (seven lines each, all os.path.abspath) are one typed helper _launch(playwright); done by a codemod that asserted 28 plus 7 matches, so any variation would have stopped it. Measured: ruff 2818 to 2783 (the 35 PTH100), mypy 6256 to 5960 (-296, the Any-typed chromium launch expressions); both baselines lowered with --write. Next family by baselinetop for this file: E501 (67), ANN001 (47), D103 (31), PT018 (19) | 2026-10-25: second slice, tests/test_calendars.py: its 35 ANN001 arguments annotated by a codemod from ruff's own positions (tmp_path Path, monkeypatch pytest.MonkeyPatch, capsys pytest.CaptureFixture[str], ics str, the bool fail keyword-only, _row's label, start, summary and waiting). Measured against the working-tree baselines: ruff 2783 to 2747, mypy 5960 to 5845. Baselines to be written after stack454, which carries them, lands | 2026-10-26: 2026-10-26: github-8f (ratchet half of the operator's order 'continue driving burndowns of cards AND ratchets', my transcript line 118161): none of 28 commits since 10-25T16:45Z touched a ratchet file; the pace reads nemik behind on codon, mypy (required 2) and ruff (required 3). Tagged velocity so the next round takes it | 2026-10-26: 2026-10-26 first slice since the order: ten ruff findings paid in nine small test files, no mypy change: D103 on test_catalog, test_flow (2), test_hashes, test_lanes, test_metrics_age, test_overlaps, test_saturation (2) by giving each test a one-line docstring, D100 on test_overlaps. ruff 2715 to 2705; the baseline lowered with --write",
       "issued_at": "2026-10-25T01:12:01Z",
       "minted_during": "tick",
       "caused_by": "W980",
-      "last_worked": "2026-10-25T15:44:35Z",
+      "last_worked": "2026-10-26T13:07:08Z",
       "ticks_blocked": 0,
       "weight": 100,
       "manifest": [
@@ -25712,7 +25711,6 @@
         "velocity"
       ],
       "blocked_on": [
-        "W1097",
         "W1098",
         "W1099",
         "W1100",
@@ -25727,7 +25725,7 @@
       "minted_during": "tick",
       "caused_by": "W1073",
       "last_worked": "2026-10-26T11:58:00Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 0,
       "manifest": [
         "src/nemik/adapter.py",
         "src/nemik/blocks.py",
@@ -25743,7 +25741,7 @@
     {
       "symbol": "W1096",
       "title": "Trace the 370 MiB the Model rebuild holds outside the graph: findings, annotation indices, SHACL caches, parsed JSON, the document",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W1073"
       ],
@@ -25752,22 +25750,23 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Find what holds the survey's merged graph after the generator ends (nemik.index memo, blocks memo_audits, shaclinc keys); release it; then re-trace. Then the peak: pyshacl inplace so it does not clone, and no per-repo copies kept beside the merged graph. Put the before and after traced and resident numbers here",
-      "evidence": "2026-10-26: 2026-10-26 STORE COMPARISON (github-8f's ask), same 338,778 triples as N-Triples, fresh process each, scratch env: rdflib Graph 396 MiB resident (1226 bytes per triple); pyoxigraph 0.5.13 in-memory Store 150.3 MiB (rss 25.4 to 175.7, 465 bytes per triple): 2.6 times smaller, saving about 246 MiB of the graph. Compare dropping the tick log from the rdflib graph: saves 196 MiB at no new dependency. Fleet check: no mention of oxigraph, pyoxigraph, oxrdflib or a triple store in summit or mtools (grep of their md, toml and lock files), so pyoxigraph would be a NEW pinned dependency. Cost of the swap, not measured: pyshacl, the flow model, annotate and every consumer speak the rdflib Graph API (g.subjects, g.value, SPARQL via rdflib), and the SHACL engine needs an rdflib Graph, so a store swap means an adapter (oxrdflib) or a rewrite of the consumers. Reading: do W1095 first (196 MiB, no dependency, six small stackable steps); the store swap is a second lever worth about 100 MiB more only AFTER the tick log is gone (175,690 triples: rdflib 200 MiB against about 80 MiB), and is a migration, not a slice | 2026-10-26: 2026-10-26 lead for the 370 MiB outside the merged graph: metrics (nemik_ledger_lines), history.toil, idle and trs each call ledger_graph(repo, ledger), which builds a second graph of the same Activity triples; model.metrics() runs in the pod build (private_files), so the ledgers may be parsed into graphs a second time and held by ledger_graph's _stamped cache. To measure: rss around model.metrics() in the publish path, and the cache's retained size | 2026-10-26: 2026-10-26 lead REFUTED: model.metrics() on the pod's export copy adds nothing (rss 739.5 MiB after refresh and gc, 739.5 after metrics, its output 817 bytes): it does not build ledger graphs. So the Activity triples are held once in the merged graph in the pod build, not twice. The 370 MiB outside the 396 MiB graph is still untraced | 2026-10-26: 2026-10-26 ALLOCATION TRACE (tracemalloc, the survey alone over the pod's export, after the survey and gc.collect): LIVE 192.5 MiB, peak traced 500.4 MiB; resident after the same point was 386 MiB, so about 150 MiB of the 344 MiB 'outside the graph' is allocator fragmentation, not live data. What is live: rdflib's in-memory store 130.0 MiB (858,645 blocks: the spo/pos/osp index dicts), rdflib terms 24.7 MiB, rdflib graph.py 21.5 MiB, shaclinc.py 8.4 MiB (the frozenset(data) kept for the next incremental run), json decode 3.7 MiB. So a whole Graph (about 176k triples, 180 MiB) is STILL ALIVE after the survey generator finished and nothing but my loop's last-yield variable names a repo graph: the merged graph is held by something that outlives the generator (the per-graph index memo nemik.index / blocks, or shaclinc's _LAST keys), meaning survey's merged graph and Model's own merged graph are both alive while Model builds. The peak (500 MiB traced inside the survey against 192 live after) is the transient: three copies of the queue graph plus pyshacl's clone of the data graph during validation",
+      "next_bounded_step": "adapter.forget_parsed(): turns the cache off and clears it, _stamped then returns build() without caching or copying; publish() calls it first (from nemik import adapter, cachestore, lastgood). Test: with it off nothing is retained in _PARSED and the graph equals the cached one. Then re-run the pod-shaped publish profile (phasemem3 on the pod's export copy) and put the before (1049.9 MiB process peak, 973 MiB at history_doc) and after here. Held until stack520 lands, because it carries adapter.py (edit discipline)",
+      "evidence": "2026-10-26: 2026-10-26 STORE COMPARISON (github-8f's ask), same 338,778 triples as N-Triples, fresh process each, scratch env: rdflib Graph 396 MiB resident (1226 bytes per triple); pyoxigraph 0.5.13 in-memory Store 150.3 MiB (rss 25.4 to 175.7, 465 bytes per triple): 2.6 times smaller, saving about 246 MiB of the graph. Compare dropping the tick log from the rdflib graph: saves 196 MiB at no new dependency. Fleet check: no mention of oxigraph, pyoxigraph, oxrdflib or a triple store in summit or mtools (grep of their md, toml and lock files), so pyoxigraph would be a NEW pinned dependency. Cost of the swap, not measured: pyshacl, the flow model, annotate and every consumer speak the rdflib Graph API (g.subjects, g.value, SPARQL via rdflib), and the SHACL engine needs an rdflib Graph, so a store swap means an adapter (oxrdflib) or a rewrite of the consumers. Reading: do W1095 first (196 MiB, no dependency, six small stackable steps); the store swap is a second lever worth about 100 MiB more only AFTER the tick log is gone (175,690 triples: rdflib 200 MiB against about 80 MiB), and is a migration, not a slice | 2026-10-26: 2026-10-26 lead for the 370 MiB outside the merged graph: metrics (nemik_ledger_lines), history.toil, idle and trs each call ledger_graph(repo, ledger), which builds a second graph of the same Activity triples; model.metrics() runs in the pod build (private_files), so the ledgers may be parsed into graphs a second time and held by ledger_graph's _stamped cache. To measure: rss around model.metrics() in the publish path, and the cache's retained size | 2026-10-26: 2026-10-26 lead REFUTED: model.metrics() on the pod's export copy adds nothing (rss 739.5 MiB after refresh and gc, 739.5 after metrics, its output 817 bytes): it does not build ledger graphs. So the Activity triples are held once in the merged graph in the pod build, not twice. The 370 MiB outside the 396 MiB graph is still untraced | 2026-10-26: 2026-10-26 ALLOCATION TRACE (tracemalloc, the survey alone over the pod's export, after the survey and gc.collect): LIVE 192.5 MiB, peak traced 500.4 MiB; resident after the same point was 386 MiB, so about 150 MiB of the 344 MiB 'outside the graph' is allocator fragmentation, not live data. What is live: rdflib's in-memory store 130.0 MiB (858,645 blocks: the spo/pos/osp index dicts), rdflib terms 24.7 MiB, rdflib graph.py 21.5 MiB, shaclinc.py 8.4 MiB (the frozenset(data) kept for the next incremental run), json decode 3.7 MiB. So a whole Graph (about 176k triples, 180 MiB) is STILL ALIVE after the survey generator finished and nothing but my loop's last-yield variable names a repo graph: the merged graph is held by something that outlives the generator (the per-graph index memo nemik.index / blocks, or shaclinc's _LAST keys), meaning survey's merged graph and Model's own merged graph are both alive while Model builds. The peak (500 MiB traced inside the survey against 192 live after) is the transient: three copies of the queue graph plus pyshacl's clone of the data graph during validation | 2026-10-26: 2026-10-26 HOLDER FOUND (gc.get_referrers after the survey): 14 per-repo queue graphs (174,677 triples together) stay alive after the survey generator ends, held by adapter._PARSED, the W402 parse cache: _stamped keeps the PRISTINE graph per (kind, repo) and hands out a fresh COPY each call (copy += hit[1]). So in the one-shot publish process the card-and-edge graph exists as the cached original, the copy the survey merges and keeps in its per-repo dict, the survey's merged graph, and Model's own merged graph (and the ledger graphs twice, original and copy). The cache is for a long-lived reader re-parsing only moved files; a publish parses each file once and never asks again, so there it is only a second copy",
       "issued_at": "2026-10-26T11:56:26Z",
       "minted_during": "tick",
       "caused_by": "W1073",
-      "last_worked": "2026-10-26T12:38:30Z",
+      "last_worked": "2026-10-26T13:07:08Z",
       "ticks_blocked": 0,
       "manifest": [
         "docs/builder-memory.md"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "completed": null
     },
     {
       "symbol": "W1097",
       "title": "Define the per-card ledger summary (effort count by class, last activity stamp, week counts) and build it in the ledger pass beside the Activity triples, with a test that it equals what the consumers compute from the triples",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W1095"
       ],
@@ -25776,12 +25775,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Define ledgersummary.summarize(records) -> a summary of: (a) per card symbol: count by effort class and last stamp (serve._to_json lines 798-805, blocks._operator_asks 536-540); (b) per repo: count by (class, kind) (metrics 862-875); (c) per ISO week: count by class (history.toil 1540-1548); (d) the tick lines that carry a symbol as (stamp, symbol) pairs in file order (metrics 548-555). Build it from ledger.read in one pass beside the Activity triples; the test builds both from one ledger and asserts each consumer's value is the same from the summary as from the triples",
-      "evidence": "2026-10-26: 2026-10-26 reading of the consumers (corrects my 'six consumers of the merged graph'): only serve._to_json and blocks._operator_asks read Activity triples from the MERGED graph. metrics (550, 867), history.toil (1541), idle and trs call ledger_graph(repo, ledger) themselves and read that separate graph, so they hold a second ledger graph rather than reading the merged one; whether ledger_graph's _stamped cache keeps it alive inside the pod build, doubling the Activity triples, is not yet measured",
+      "next_bounded_step": null,
+      "evidence": "2026-10-26: 2026-10-26 reading of the consumers (corrects my 'six consumers of the merged graph'): only serve._to_json and blocks._operator_asks read Activity triples from the MERGED graph. metrics (550, 867), history.toil (1541), idle and trs call ledger_graph(repo, ledger) themselves and read that separate graph, so they hold a second ledger graph rather than reading the merged one; whether ledger_graph's _stamped cache keeps it alive inside the pod build, doubling the Activity triples, is not yet measured | 2026-10-26: landed 03291a9 (pushed; git log showed the subject): ledgersummary.summarize, adapter.ledger_rows, the equivalence tests",
       "issued_at": "2026-10-26T11:58:00Z",
       "minted_during": "tick",
       "caused_by": "W1095",
-      "last_worked": "2026-10-26T12:26:44Z",
+      "last_worked": "2026-10-26T13:02:38Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/ledgersummary.py",
@@ -25789,7 +25788,7 @@
         "tests/test_ledgersummary.py"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261026T130238Z"
     },
     {
       "symbol": "W1098",
@@ -25801,10 +25800,8 @@
       "touches": [
         "velocity"
       ],
-      "blocked_on": [
-        "W1097"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-26T11:58:00Z",
@@ -25828,10 +25825,8 @@
       "touches": [
         "velocity"
       ],
-      "blocked_on": [
-        "W1097"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-26T11:58:00Z",
@@ -25855,10 +25850,8 @@
       "touches": [
         "velocity"
       ],
-      "blocked_on": [
-        "W1097"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-26T11:58:00Z",
@@ -25882,10 +25875,8 @@
       "touches": [
         "velocity"
       ],
-      "blocked_on": [
-        "W1097"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-26T11:58:00Z",
@@ -25909,10 +25900,8 @@
       "touches": [
         "velocity"
       ],
-      "blocked_on": [
-        "W1097"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "",
       "evidence": "",
       "issued_at": "2026-10-26T11:58:00Z",
@@ -25955,6 +25944,80 @@
       "manifest": [
         "src/nemik/adapter.py",
         "tests/test_ledger_graph.py"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W1105",
+      "title": "Clamp the pace so a ratchet never requires more than its current value, with a fixture (panflute requires 6 against a value of 1)",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "velocity"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Find where the pace computes 'required' (ratchetpace.py) and clamp it to at most the current value: a ratchet cannot be required to fall below where it is, only to a value it can reach (panflute required 6 against a value of 1); add the fixture (value 1, would-be required 6, required clamped to 1) before mtools' W1920 refusal bites",
+      "evidence": "",
+      "issued_at": "2026-10-26T12:56:54Z",
+      "minted_during": "tick",
+      "caused_by": "github:W59",
+      "last_worked": "2026-10-26T12:57:38Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/ratchetpace.py",
+        "tests/test_ratchetpace.py"
+      ],
+      "size_class": "small",
+      "completed": null
+    },
+    {
+      "symbol": "W1106",
+      "title": "Warn on a now-tier repo with ready cards and no landing past a learned bound, since sessionless repos are invisible to the idle check",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "velocity"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "A learned bound (the repo's own median days between landings, never a typed threshold) and a shape: a now-tier repo with ready cards and no landing past it is a Warning, and a gauge nemik_repo_dark{repo}; el-openglo has 68 ready and no commit since 10-19, gcalculus 3 and none since 10-16; the landing dates come from nemik-hostroot --landings",
+      "evidence": "",
+      "issued_at": "2026-10-26T12:56:55Z",
+      "minted_during": "tick",
+      "caused_by": "github:W59",
+      "last_worked": "2026-10-26T12:57:25Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/data/shapes.ttl",
+        "src/nemik/darkrepos.py",
+        "skills/nemik/SKILL.md",
+        "tests/test_darkrepos.py"
+      ],
+      "size_class": "medium"
+    },
+    {
+      "symbol": "W1107",
+      "title": "nemik-rank --pace prints one line per behind ratchet and exits nonzero when any repo is behind, for the host's tick hook",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "velocity"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "nemik-rank --pace: read ratchet-pace.json, print one line per behind ratchet (repo, ratchet, value, required, last paydown time, the paydown card if one is tagged) and exit 1 when any repo is behind, 0 otherwise; a flag on nemik-rank, so no new command in the five registries; the host adds it to its --tick-hooks-set",
+      "evidence": "",
+      "issued_at": "2026-10-26T12:56:56Z",
+      "minted_during": "tick",
+      "caused_by": "github:W59",
+      "last_worked": "2026-10-26T12:57:26Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/rank.py",
+        "src/nemik/pacepublish.py",
+        "tests/test_rank_pace.py",
+        "skills/nemik/SKILL.md"
       ],
       "size_class": "small"
     }
@@ -26120,6 +26183,13 @@
       "dropped_at": "2026-10-26T01:08:01Z",
       "reason": "replaced by the per-repo tag (github-8f): nemik keeps no list of refs, so there is nothing to resolve",
       "recoverable": true
+    },
+    {
+      "symbol": "W1104",
+      "title": "A behind repo's paydown cards join the critical floor beside the velocity band, composing the paydown and velocity rulings",
+      "dropped_at": "2026-10-26T12:57:22Z",
+      "reason": "duplicate of W993, which github-8f's ask (2) unblocked by closing W991; W993 carries it",
+      "recoverable": true
     }
   ],
   "job_id": "1d7fe6d0",
@@ -26218,33 +26288,30 @@
     },
     {
       "tag": "file:tests/test_layout.py!w",
-      "holder": "(unlocked)",
+      "holder": "claude-nemik",
       "waypoint": "W1014",
-      "base_sha": "3e796f2722c0bafa65e71e1bb7557a00b3e2a644",
-      "taken_at": "2026-10-25T15:18:13Z",
-      "renewed_at": "2026-10-25T15:18:13Z",
-      "expires_at": "2026-10-25T15:48:13Z",
-      "lapse_ledgered": true
+      "base_sha": "03291a9d694a09c256c9bc13bbdea239c7b2d177",
+      "taken_at": "2026-10-26T13:07:08Z",
+      "renewed_at": "2026-10-26T13:07:08Z",
+      "expires_at": "2026-10-26T13:37:08Z"
     },
     {
       "tag": "file:ruff-baseline.json!w",
-      "holder": "(unlocked)",
+      "holder": "claude-nemik",
       "waypoint": "W1014",
-      "base_sha": "3e796f2722c0bafa65e71e1bb7557a00b3e2a644",
-      "taken_at": "2026-10-25T15:18:13Z",
-      "renewed_at": "2026-10-25T15:18:13Z",
-      "expires_at": "2026-10-25T15:48:13Z",
-      "lapse_ledgered": true
+      "base_sha": "03291a9d694a09c256c9bc13bbdea239c7b2d177",
+      "taken_at": "2026-10-26T13:07:08Z",
+      "renewed_at": "2026-10-26T13:07:08Z",
+      "expires_at": "2026-10-26T13:37:08Z"
     },
     {
       "tag": "file:mypy-baseline.json!w",
-      "holder": "(unlocked)",
+      "holder": "claude-nemik",
       "waypoint": "W1014",
-      "base_sha": "3e796f2722c0bafa65e71e1bb7557a00b3e2a644",
-      "taken_at": "2026-10-25T15:18:13Z",
-      "renewed_at": "2026-10-25T15:18:13Z",
-      "expires_at": "2026-10-25T15:48:13Z",
-      "lapse_ledgered": true
+      "base_sha": "03291a9d694a09c256c9bc13bbdea239c7b2d177",
+      "taken_at": "2026-10-26T13:07:08Z",
+      "renewed_at": "2026-10-26T13:07:08Z",
+      "expires_at": "2026-10-26T13:37:08Z"
     }
   ],
   "advice": [

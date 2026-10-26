@@ -2516,3 +2516,14 @@
 2026-10-26T12:00:36Z  status W1083 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T12:26:44Z  status W1097 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T12:40:56Z  status W1063 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T12:56:53Z  tick  W1104 minted    -         "A behind repo's paydown cards join the critical floor beside the velocity band, composing the paydown and velocity rulings"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W59
+2026-10-26T12:56:54Z  tick  W1105 minted    -         "Clamp the pace so a ratchet never requires more than its current value, with a fixture (panflute requires 6 against a value of 1)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W59
+2026-10-26T12:56:55Z  tick  W1106 minted    -         "Warn on a now-tier repo with ready cards and no landing past a learned bound, since sessionless repos are invisible to the idle check"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W59
+2026-10-26T12:56:56Z  tick  W1107 minted    -         "nemik-rank --pace prints one line per behind ratchet and exits nonzero when any repo is behind, for the host's tick hook"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W59
+2026-10-26T12:57:09Z  status W991 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T12:57:09Z  status W993 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T12:57:09Z  status W994 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T12:57:38Z  status W1105 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T13:02:38Z  status W1097 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T13:07:08Z  status W1014 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T13:07:08Z  status W1096 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

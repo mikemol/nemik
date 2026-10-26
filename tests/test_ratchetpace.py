@@ -25,8 +25,15 @@ def test_a_ratchet_at_zero_owes_nothing() -> None:
 
 
 def test_the_requirement_only_rises() -> None:
-    """A prior requirement of 5 holds although the history now seeds 2."""
-    assert verdict(FALLING, WINDOW, 5) == (BEHIND, 2, 5)
+    """A prior requirement of 3 holds although the history now seeds 2."""
+    assert verdict(FALLING, WINDOW, 3) == (BEHIND, 2, 3)
+
+
+def test_a_ratchet_is_never_required_to_fall_more_than_it_holds() -> None:
+    """nemik:W1105: panflute required 6 against a value of 1; it is clamped to the value."""
+    assert verdict(FALLING, WINDOW, 5) == (BEHIND, 2, 4)  # the value is 4
+    assert verdict([6, 6, 6, 6, 6, 1], WINDOW, 6) == (OK, 5, 1)
+    assert verdict([6, 6, 6, 6, 6, 1], WINDOW, 6)[2] <= 1
 
 
 def test_a_series_shorter_than_a_window_is_judged_on_the_floor() -> None:
