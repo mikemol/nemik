@@ -15,7 +15,7 @@ import os
 import subprocess
 import time
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Literal
 
 import pytest
 from webpage import served
@@ -25,6 +25,7 @@ if TYPE_CHECKING:
 
 sync_api = pytest.importorskip("playwright.sync_api")
 
+Scheme = Literal["light", "dark"]  # the colour schemes the parametrized tests take
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
 # nemik:W1085: the page's own readiness, awaited without a wall-clock bound (timeout=0): a 30 s
 # wait_for_selector failed a test the gate passed on the same tree, on a loaded host
@@ -149,7 +150,7 @@ NODE_OVERLAPS = """() => {
 }"""
 
 
-def test_repo_toggles_and_salience_order(server, tmp_path) -> None:
+def test_repo_toggles_and_salience_order(server: str, tmp_path: Path) -> None:
     # nemik:W306: the repo filter is toggles (none lit = all), and "salience order" puts the flow
     # salience on a ready card's label and widens edges by their current.
     out = Path(os.environ.get("TEST_UNDECLARED_OUTPUTS_DIR") or tmp_path)
@@ -214,7 +215,7 @@ def test_repo_toggles_and_salience_order(server, tmp_path) -> None:
 
 
 def test_the_history_panel_shows_the_weekly_roll_up_when_there_is_one(
-    server, tmp_path
+    server: str, tmp_path: Path
 ) -> None:
     # nemik:W307: history.json exists only in a host-side static build; the panel is hidden without it.
     doc = {
@@ -259,7 +260,7 @@ LEGIBILITY = """() => {
 
 
 def test_rolling_up_umbrellas_hides_their_work_and_a_double_click_expands_one(
-    server,
+    server: str,
 ) -> None:
     # nemik:W350: with "roll up umbrellas" on, fewer cards are drawn, an umbrella counts what it
     # hides, and a double-click on it brings exactly that many back.
@@ -290,7 +291,9 @@ def test_rolling_up_umbrellas_hides_their_work_and_a_double_click_expands_one(
     assert opened >= rolled + 1
 
 
-def test_scope_rings_carry_distinct_ruler_motifs_pinned_to_paperkits(server) -> None:
+def test_scope_rings_carry_distinct_ruler_motifs_pinned_to_paperkits(
+    server: str,
+) -> None:
     # nemik:W382/W419: each path scope gets its own ruler-sequence motif, now shipped by the server from
     # mtools' mikemol.rulerseq (paperkit's emit_f, hosted). The family is pinned to paperkit's published
     # motifs, and the rings actually drawn use pairwise-distinct dash patterns.
@@ -333,7 +336,7 @@ FANS = """() => {
 
 
 def test_blocker_lines_into_one_card_carry_distinct_decodable_ruler_patterns(
-    server,
+    server: str,
 ) -> None:
     # nemik:W388: lines crowding one blocker never share a dash pattern; each pattern decodes (one dot or
     # dash per unit of the natural it encodes, len(F(n)) == n) back to its source's place in the fan.
@@ -369,7 +372,9 @@ CONTRAST = """() => {
 
 
 @pytest.mark.parametrize("scheme", ["light", "dark"])
-def test_every_card_label_meets_four_and_a_half_to_one(server, scheme) -> None:
+def test_every_card_label_meets_four_and_a_half_to_one(
+    server: str, scheme: Scheme
+) -> None:
     # nemik:W384 (W380 refuted the old claim): label text on every filled card and lane chip is at
     # least 4.5:1 against its fill (WCAG 1.4.3), in both themes.
     with sync_api.sync_playwright() as p:
@@ -392,7 +397,7 @@ def test_every_card_label_meets_four_and_a_half_to_one(server, scheme) -> None:
     assert low == [], low
 
 
-def test_side_panel_sections_fold_and_the_choice_survives_a_reload(server) -> None:
+def test_side_panel_sections_fold_and_the_choice_survives_a_reload(server: str) -> None:
     # nemik:W387: each section is a <details>; the long lists start closed, and a section the viewer
     # closes stays closed after a reload.
     with sync_api.sync_playwright() as p:
@@ -425,7 +430,7 @@ def test_side_panel_sections_fold_and_the_choice_survives_a_reload(server) -> No
 
 
 @pytest.mark.parametrize("scheme", ["light", "dark"])  # nemik:W434
-def test_the_default_view_is_legible(server, scheme) -> None:
+def test_the_default_view_is_legible(server: str, scheme: Scheme) -> None:
     # nemik:W340: the first view never shrinks a label below 8 px or a node below 12 px on screen; when
     # the whole fleet would, it shows one repo at the floor and says so, with a way to fit everything.
     with sync_api.sync_playwright() as p:
@@ -463,7 +468,7 @@ def test_the_default_view_is_legible(server, scheme) -> None:
     assert controls_in_status == 0
 
 
-def test_every_label_glyph_exists_in_this_browsers_fonts(server) -> None:
+def test_every_label_glyph_exists_in_this_browsers_fonts(server: str) -> None:
     # nemik:W398: a glyph the browser's fonts lack draws as a placeholder box, which once widened labels
     # only under the gate's headless Chrome. Each glyph the page puts in a label must measure differently
     # from a codepoint no font has (a private-use character), in the browser the test runs in.
@@ -485,7 +490,9 @@ def test_every_label_glyph_exists_in_this_browsers_fonts(server) -> None:
 
 
 @pytest.mark.parametrize("scheme", ["light", "dark"])  # nemik:W434
-def test_context_cards_have_a_rendered_cue_of_their_own(server, scheme) -> None:
+def test_context_cards_have_a_rendered_cue_of_their_own(
+    server: str, scheme: Scheme
+) -> None:
     # nemik:W385 (W380 refuted the data-flag proof): with one repo picked, the context cards drawn from
     # other repos RENDER a double border at full opacity, and no other card renders one.
     with sync_api.sync_playwright() as p:
@@ -513,7 +520,9 @@ def test_context_cards_have_a_rendered_cue_of_their_own(server, scheme) -> None:
 
 
 @pytest.mark.parametrize("scheme", ["light", "dark"])  # nemik:W434
-def test_each_card_state_differs_by_more_than_its_fill(server, scheme) -> None:
+def test_each_card_state_differs_by_more_than_its_fill(
+    server: str, scheme: Scheme
+) -> None:
     # nemik:W381 (W380 refuted the old claim): for every pair of states drawn, the cards differ in some
     # non-colour property, here the glyph that begins the label (ready has none, the rest each their own).
     with sync_api.sync_playwright() as p:
@@ -583,7 +592,7 @@ USE_OF_COLOUR = """() => {
 
 @pytest.mark.parametrize("scheme", ["light", "dark"])  # nemik:W434
 def test_every_meaning_the_view_colours_has_a_second_channel(
-    server, tmp_path, scheme
+    server: str, tmp_path: Path, scheme: Scheme
 ) -> None:
     # nemik:W429/W431: the measurement above, evaluated with el-openglo's pinned requirement
     # (W430, policy/use_of_colour.rego) by the pinned opa: no denial, and something admitted.
@@ -613,7 +622,9 @@ def test_every_meaning_the_view_colours_has_a_second_channel(
     assert len(verdict["admitted"]) == len(measured["cases"]) >= 5
 
 
-def test_a_static_build_refetches_only_the_pieces_whose_hash_moved(tmp_path) -> None:
+def test_a_static_build_refetches_only_the_pieces_whose_hash_moved(
+    tmp_path: Path,
+) -> None:
     # nemik:W416: the page reads graph.json's pieces by hashes.json, draws the same graph, and on a
     # refresh fetches only the piece whose hash changed.
     import functools
@@ -664,7 +675,7 @@ def test_a_static_build_refetches_only_the_pieces_whose_hash_moved(tmp_path) -> 
     assert second == [f"graph/{one}.json"]
 
 
-def test_every_repo_chip_names_its_health_in_words(server) -> None:
+def test_every_repo_chip_names_its_health_in_words(server: str) -> None:
     # nemik:W432: a chip's health was a glyph plus a title attribute; its accessible name now says
     # the repo, the status and the reasons, and the glyph is hidden from assistive tech.
     with sync_api.sync_playwright() as p:
@@ -685,7 +696,7 @@ def test_every_repo_chip_names_its_health_in_words(server) -> None:
         assert hidden == {"amber": "▲ ", "red": "■ "}.get(status, "")
 
 
-def test_the_card_list_selects_and_expands_from_the_keyboard(server) -> None:
+def test_the_card_list_selects_and_expands_from_the_keyboard(server: str) -> None:
     # nemik:W435: selecting a card, reading it, and expanding an umbrella were pointer-only on the
     # canvas. The Cards list does each with focus and Enter alone.
     with sync_api.sync_playwright() as p:
@@ -735,7 +746,9 @@ def test_the_card_list_selects_and_expands_from_the_keyboard(server) -> None:
     assert expanded == "true"
 
 
-def test_a_cite_link_in_the_panel_selects_its_card_and_announces_it(server) -> None:
+def test_a_cite_link_in_the_panel_selects_its_card_and_announces_it(
+    server: str,
+) -> None:
     # nemik:W473: cite links in the Selected panel and the lanes did nothing; every one now goes
     # through the same select path as a tap, and the selection is spoken in a polite live region.
     with sync_api.sync_playwright() as p:
@@ -764,7 +777,7 @@ def test_a_cite_link_in_the_panel_selects_its_card_and_announces_it(server) -> N
     assert target["cite"].rsplit(":", 1)[-1] in detail
 
 
-def test_the_view_chain_is_drawn_end_to_end_with_its_length(server) -> None:
+def test_the_view_chain_is_drawn_end_to_end_with_its_length(server: str) -> None:
     # nemik:W482 (operator 2026-10-13: chains of 2 and 3 both ringed "longest, this view"). Each ring
     # was a piece of one longest chain that ran on into another repo's box; the chain's own edges now
     # draw it end to end, and the legend says how long it is.
@@ -794,7 +807,7 @@ def test_the_view_chain_is_drawn_end_to_end_with_its_length(server) -> None:
     assert f"({got['longest']} cards" in got["legend"]
 
 
-def test_a_focused_list_row_rings_its_card_and_opens_the_popover(server) -> None:
+def test_a_focused_list_row_rings_its_card_and_opens_the_popover(server: str) -> None:
     # nemik:W479: keyboard focus on a Cards list row rings that card on the canvas and shows the same
     # popover hover opens; Esc closes it, and moving focus out of the list clears the ring.
     with sync_api.sync_playwright() as p:
@@ -826,7 +839,7 @@ def test_a_focused_list_row_rings_its_card_and_opens_the_popover(server) -> None
     assert cleared == 0, "the ring stayed after focus left the list"
 
 
-def test_the_page_script_runs_without_errors(server) -> None:
+def test_the_page_script_runs_without_errors(server: str) -> None:
     # nemik:W478: a redeclared const killed the whole page script, and every view test then failed
     # with "cy.nodes is not a function" (cy fell back to the #cy element). Name the cause instead.
     with sync_api.sync_playwright() as p:
@@ -843,7 +856,7 @@ def test_the_page_script_runs_without_errors(server) -> None:
     assert errors == []
 
 
-def test_the_card_list_is_one_tab_stop_walked_by_arrows(server) -> None:
+def test_the_card_list_is_one_tab_stop_walked_by_arrows(server: str) -> None:
     # nemik:W478: the Cards list was a tab stop per card (hundreds of Tabs to cross it). Now the list
     # is one stop, the arrows walk it, Enter selects, and Tab leaves it.
     with sync_api.sync_playwright() as p:
@@ -932,7 +945,7 @@ def _open_on_a_fake_clock(page: "Page", url: str) -> None:
     page.clock.pause_at(int(now) + 1000)
 
 
-def test_the_card_popover_follows_the_hovercard_rules(server) -> None:
+def test_the_card_popover_follows_the_hovercard_rules(server: str) -> None:
     # nemik:W462 (operator 2026-10-13: the card view as a popover on hover plus delay). WCAG 1.4.13:
     # not before the delay, hoverable (the pointer may move onto it), dismissible (Esc), and gone
     # once the pointer leaves both the card and the popover.
@@ -984,7 +997,7 @@ def test_the_card_popover_follows_the_hovercard_rules(server) -> None:
     assert left, "the popover stayed after the pointer left"
 
 
-def test_every_card_demand_crosses_carries_a_number(server) -> None:
+def test_every_card_demand_crosses_carries_a_number(server: str) -> None:
     # nemik:W464: only the frontier absorbs salience, so a waiting card's label read blank though
     # demand ran through it (the operator read that as salience lost). With salience order on, every
     # drawn card with demand leaving it says how much, in parentheses beside the frontier's number.
@@ -1013,7 +1026,7 @@ def test_every_card_demand_crosses_carries_a_number(server) -> None:
     assert bare == []
 
 
-def test_a_rolled_up_tile_says_what_it_hides(server) -> None:
+def test_a_rolled_up_tile_says_what_it_hides(server: str) -> None:
     # nemik:W474: the treemap rebuilt tile labels from the bare repo and symbol, so a rolled-up
     # umbrella (luthen-observability:W43 hiding W111) read as a plain card and its work vanished.
     with sync_api.sync_playwright() as p:
@@ -1048,7 +1061,7 @@ TILE_LABELS = """() => {
 ZOOM_IN_4X = "() => cy.zoom({ level: cy.zoom() * 4, renderedPosition: { x: 0, y: 0 } })"
 
 
-def test_treemap_labels_meet_the_floor_or_are_hidden_and_counted(server) -> None:
+def test_treemap_labels_meet_the_floor_or_are_hidden_and_counted(server: str) -> None:
     # nemik:W390: no tile label is drawn under 8 px; the ones hidden are counted on the status line, and
     # zooming in brings them back.
     with sync_api.sync_playwright() as p:
@@ -1094,7 +1107,7 @@ NON_TEXT_CONTRAST = """() => {
 
 
 @pytest.mark.parametrize("scheme", ["light", "dark"])
-def test_meaningful_strokes_reach_three_to_one(server, scheme) -> None:
+def test_meaningful_strokes_reach_three_to_one(server: str, scheme: Scheme) -> None:
     with sync_api.sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(
@@ -1122,7 +1135,7 @@ GLYPH_ROLES = """() => {
 }"""
 
 
-def test_no_label_glyph_plays_two_roles(server) -> None:
+def test_no_label_glyph_plays_two_roles(server: str) -> None:
     with sync_api.sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
@@ -1149,7 +1162,7 @@ def test_no_label_glyph_plays_two_roles(server) -> None:
     assert all(label.endswith(f"+{n}") for label, n in rolled), rolled
 
 
-def test_no_command_route_or_tools_panel_remains(server) -> None:
+def test_no_command_route_or_tools_panel_remains(server: str) -> None:
     # nemik:W397: the Tools drop-down ran CLIs through /cmd; it is retired, and every capability it
     # offered is either native to the view or CLI-only. Neither the route nor the panel may come back.
     import urllib.error
@@ -1173,7 +1186,9 @@ def test_no_command_route_or_tools_panel_remains(server) -> None:
     assert tools == [None, None]
 
 
-def test_one_picked_repo_restored_from_the_last_visit_is_legible_too(server) -> None:
+def test_one_picked_repo_restored_from_the_last_visit_is_legible_too(
+    server: str,
+) -> None:
     # nemik:W383 (W380 refuted the floor here): a single repo, picked and remembered from a previous
     # visit, is the first view on reload; its labels must still be at least 8 px.
     with sync_api.sync_playwright() as p:
@@ -1203,7 +1218,7 @@ def test_one_picked_repo_restored_from_the_last_visit_is_legible_too(server) -> 
     assert m["label_px"] >= 8, m
 
 
-def test_picked_repos_show_their_blockers_blockers_as_context(server) -> None:
+def test_picked_repos_show_their_blockers_blockers_as_context(server: str) -> None:
     # nemik:W336: pick one repo; its cards' blockers in other repos are drawn dashed as context, and one
     # more hop (the control's 2) reaches at least as many, never fewer, and never a picked repo's card.
     with sync_api.sync_playwright() as p:
@@ -1228,7 +1243,7 @@ def test_picked_repos_show_their_blockers_blockers_as_context(server) -> None:
     assert counts[1] > 0 and stray == 0, (counts, stray)
 
 
-def test_rank_forest_view(server, tmp_path) -> None:
+def test_rank_forest_view(server: str, tmp_path: Path) -> None:
     out = Path(os.environ.get("TEST_UNDECLARED_OUTPUTS_DIR") or tmp_path)
     with sync_api.sync_playwright() as p:
         browser = _launch(p)
@@ -1282,7 +1297,7 @@ TREEMAP_INVARIANTS = """async () => {
 }"""
 
 
-def test_treemap_model(server) -> None:
+def test_treemap_model(server: str) -> None:
     """nemik:W180 step 1: one parent each, children inside parents, siblings disjoint, across repos."""
     with sync_api.sync_playwright() as p:
         browser = _launch(p)
@@ -1300,7 +1315,7 @@ def test_treemap_model(server) -> None:
     assert m["repos_in_one_root"] > 1, m  # not grouped by repo: a tree spans repos
 
 
-def test_treemap_view_draws(server, tmp_path) -> None:
+def test_treemap_view_draws(server: str, tmp_path: Path) -> None:
     """nemik:W180 step 2: the toggle draws tiles nested as the model says, with no page errors."""
     out = Path(os.environ.get("TEST_UNDECLARED_OUTPUTS_DIR") or tmp_path)
     with sync_api.sync_playwright() as p:
@@ -1372,7 +1387,7 @@ def test_treemap_view_draws(server, tmp_path) -> None:
 
 
 @pytest.mark.parametrize("width", [380, 1400])
-def test_side_panel_never_overflows_sideways(server, width) -> None:
+def test_side_panel_never_overflows_sideways(server: str, width: int) -> None:
     """Operator 2026-10-02: the panel cut text off on the right (a long ask, URL or ref list in the
     two-column detail grid). At phone and desktop widths, with the needs-you lane open, nothing in
     the aside is wider than the aside.
@@ -1401,7 +1416,7 @@ def test_side_panel_never_overflows_sideways(server, width) -> None:
     assert m["wide"] == [] and m["scroll"] <= m["client"] + 1, m
 
 
-def test_every_cite_in_the_panel_is_a_repo_colon_link(server) -> None:
+def test_every_cite_in_the_panel_is_a_repo_colon_link(server: str) -> None:
     """Operator 2026-10-02: one cite format (repo:W<n>, never 'repo W<n>' or 'repo/W<n>'), and
     every cite shown is a link. Checked over a waypoint's detail, a lane, findings and wake.
     """
@@ -1433,7 +1448,7 @@ def test_every_cite_in_the_panel_is_a_repo_colon_link(server) -> None:
     assert bad == []
 
 
-def test_weather_panel_groups_one_outage(server) -> None:
+def test_weather_panel_groups_one_outage(server: str) -> None:
     """nemik:W174 step 2: waypoints sharing a weather id list as one outage with all its waiters."""
     with sync_api.sync_playwright() as p:
         browser = _launch(p)

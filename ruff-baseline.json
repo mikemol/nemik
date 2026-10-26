@@ -878,7 +878,6 @@
   "PLR6201": 1
  },
  "tests/test_layout.py": {
-  "ANN001": 47,
   "ANN201": 1,
   "ARG001": 1,
   "D103": 31,
