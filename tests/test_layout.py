@@ -938,12 +938,22 @@ def test_the_card_popover_follows_the_hovercard_rules(server) -> None:
     # once the pointer leaves both the card and the popover.
     with sync_api.sync_playwright() as p:
         browser = _launch(p)
-        page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        # 1100 high, the graph's first card lies outside the window (x -40): the choice below must
+        # skip it, which is the image build's failure made deterministic (nemik:W1131)
+        page = browser.new_page(viewport={"width": 1700, "height": 1100})
         _open_on_a_fake_clock(page, server)
+        # nemik:W1131: the first card is not always one a pointer can reach. The graph's container
+        # runs past the window's bottom edge and the card nearest it sat 96 px inside it, so a
+        # header that wraps one line more in the image build put it outside the window and the
+        # popover never opened. Take the first card whose point is in the window and on the graph.
         card = page.evaluate(
-            "() => { const n = cy.nodes('[symbol]').filter(n => n.visible()"
-            " && n.data('state') !== 'unclaimed').first();"
-            " const r = document.getElementById('cy').getBoundingClientRect(),"
+            "() => { const r = document.getElementById('cy').getBoundingClientRect();"
+            " const reach = n => { const p = n.renderedPosition(),"
+            " x = r.left + p.x, y = r.top + p.y, e = document.elementFromPoint(x, y);"
+            " return x >= 0 && y >= 0 && x < innerWidth && y < innerHeight"
+            " && !!e && e.closest('#cy') !== null; };"
+            " const n = cy.nodes('[symbol]').filter(n => n.visible()"
+            " && n.data('state') !== 'unclaimed' && reach(n)).first(),"
             " p = n.renderedPosition();"
             " return { x: r.left + p.x, y: r.top + p.y, cite: n.data('cite') }; }"
         )

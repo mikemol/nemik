@@ -2630,3 +2630,13 @@
 2026-10-26T21:28:31Z  interrupt W1132 minted    -         "nemik-witnesses --apply reports the writer's own refusal line when an apply fails, since exit 2 every five minutes said nothing"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f
 2026-10-26T21:28:37Z  status W1132 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T21:29:33Z  status W1128 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T21:31:11Z  interrupt W1133 minted    -         "Declare nemik's ratchets so mypy and ruff count findings, not the entries of their baseline files"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f
+2026-10-26T21:41:56Z  status W1133 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T21:41:58Z  status W1131 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T21:42:00Z  status W1121 done>working writer    "done -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T21:42:20Z  status W1121 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T21:42:21Z  interrupt W1134 minted    -         "Pay six D103 docstrings in test_apischema, test_certify and test_deadlock_check"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
+2026-10-26T21:42:35Z  status W1134 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T21:46:50Z  prune W1083 edge-pruned writer    "mtools:W2033"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T21:46:50Z  status W1083 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T21:46:57Z  tick  W1133 advanced  collapse  "stack541 (W1132 apply line) inflight; stack542 (W1134 docstrings and the trs Any, W1133 ratchets.json declarations, W1131 popover reach) queued behind it; the viewport-pin class work waits for test_layout.py, which 542 carries [blocked by W1131]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
