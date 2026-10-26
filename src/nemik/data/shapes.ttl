@@ -338,6 +338,19 @@ nemik:OversizeShape a sh:NodeShape ;
                        || ?state = <https://github.com/mikemol/nemik/ns#Working>)
             }""" ] .
 
+# Ready, but a queued or gating commit stack names it (nemik:W1083): it is being worked, and the queue
+# says it is not. The graph is the operator's view, so a card worked but marked ready reads as idle.
+nemik:ReadyButGatingShape a sh:NodeShape ;
+    sh:targetClass oslc_cm:ChangeRequest ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        sh:message "ready, but a queued or gating commit stack names it: it is being worked, so mark it working with --update <W> --status working" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this <http://open-services.net/ns/cm#state> <https://github.com/mikemol/nemik/ns#Ready> ;
+                      <https://github.com/mikemol/nemik/ns#inGate> ?gate .
+            }""" ] .
+
 # Ready, but an open card enables it (nemik:W465): it cannot land first. mtools:W1131's
 # --block-behind-open applies the fix.
 nemik:ReadyBehindOpenShape a sh:NodeShape ;
