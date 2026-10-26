@@ -18,6 +18,7 @@ def _queue(*cards: dict, heartbeat: str = "a") -> dict:
 
 
 def test_each_kind_of_change_is_classified() -> None:
+    """A heartbeat change, an attribute change, a status flip and a structure change each class."""
     base = _queue(_card("W1"))
     assert classify(base, _queue(_card("W1"), heartbeat="b")) == "identical"
     assert classify(base, _queue(_card("W1", title="new"))) == "attribute"
@@ -28,6 +29,7 @@ def test_each_kind_of_change_is_classified() -> None:
 
 
 def test_a_poll_takes_the_worst_class_among_the_repos_that_moved() -> None:
+    """A poll over several repos is classed by the gravest change any of them made."""
     quiet = [(T0, _queue(_card("W1")))]
     busy = [
         (T0, _queue(_card("W1"))),
@@ -44,6 +46,7 @@ def test_a_poll_takes_the_worst_class_among_the_repos_that_moved() -> None:
 
 
 def test_commits_are_counted_by_what_each_did() -> None:
+    """Each commit is counted under the class of change it made."""
     snaps = [
         (T0, _queue(_card("W1"))),
         (T0 + timedelta(seconds=10), _queue(_card("W1", "working"))),

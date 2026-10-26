@@ -675,7 +675,6 @@
   "S603": 2
  },
  "tests/test_churn.py": {
-  "D103": 3,
   "PLR2004": 3,
   "RUF069": 2
  },
@@ -697,7 +696,6 @@
   "PLR2004": 4
  },
  "tests/test_critical_cards.py": {
-  "D103": 2,
   "E501": 1,
   "PLR2004": 4,
   "PT018": 1
