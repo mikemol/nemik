@@ -12,11 +12,29 @@ sensor is loud as well. Read-only.
 import sys
 from pathlib import Path
 
-from nemik.pacepublish import BEHIND, PACE_FILE, UNKNOWN, read_pace
+from nemik.pacepublish import BEHIND, OK, PACE_FILE, UNKNOWN, read_extras, read_pace
 
 EXPORT_TREE = Path.home() / ".local" / "share" / "luthen" / "nemik-export"
 BEHIND_EXIT = 1
 UNREADABLE_EXIT = 2
+NEVER = 1 << 62  # sorts a ratchet that is not falling after every finite horizon
+
+
+def _reach(extras: dict[str, tuple[int, int]], repo: str, ratchet: str) -> str:
+    """Word a ratchet's value and landings to zero (nemik:W1115).
+
+    Returns:
+        The words, empty when the pace file states none for the ratchet; no fall is worded as no
+        way to reach zero while the value is above zero.
+
+    """
+    got = extras.get(f"{repo}\n{ratchet}")
+    if got is None:
+        return ""
+    value, landings = got
+    if landings < 0:
+        return f"; {value} left, no fall to reach zero"
+    return f"; {value} left, {landings} landings to zero"
 
 
 def pace_lines(text: str) -> list[str]:
@@ -27,22 +45,51 @@ def pace_lines(text: str) -> list[str]:
 
     Returns:
         A line per behind ratchet (repo, ratchet, the fall observed over the window, the fall
-        required, and when the pace was computed); a line per unknown one, since an unread
-        ratchet is not a paid one; empty when none is behind or unknown. A file that is not a
-        pace file is refused by read_pace with ValueError.
+        required, the value left and landings to zero when the file states them, and when the pace
+        was computed); a line per unknown one, since an unread ratchet is not a paid one; empty
+        when none is behind or unknown. A file that is not a pace file is refused by read_pace
+        with ValueError.
 
     """
     as_of, window, rows = read_pace(text)
+    extras = read_extras(text)
     lines: list[str] = []
     for repo, ratchet, state, seen, owed in rows:
         if state == BEHIND:
             lines.append(
-                f"behind {repo} {ratchet}: fell {seen} over {window} landings, owes {owed} "
-                f"(pace of {as_of})"
+                f"behind {repo} {ratchet}: fell {seen} over {window} landings, owes {owed}"
+                f"{_reach(extras, repo, ratchet)} (pace of {as_of})"
             )
         elif state == UNKNOWN:
             lines.append(f"unknown {repo} {ratchet}: no verdict (pace of {as_of})")
     return lines
+
+
+def horizon_lines(text: str) -> list[str]:
+    """Word the ratchets that are not behind but still hold a value, with their horizon.
+
+    Not behind is not falling fast enough: it reads ok while thousands of landings from zero.
+
+    Args:
+        text: The pace file's text.
+
+    Returns:
+        A line per ok ratchet that states a value above zero, longest horizon first; empty when
+        the file states none.
+
+    """
+    _, _, rows = read_pace(text)
+    extras = read_extras(text)
+    slow: list[tuple[int, str, str]] = []
+    for repo, ratchet, state, _, _ in rows:
+        value, landings = extras.get(f"{repo}\n{ratchet}", (0, 0))
+        if state == OK and value > 0:
+            slow.append((landings if landings >= 0 else NEVER, repo, ratchet))
+    slow.sort(reverse=True)
+    return [
+        f"ok {repo} {ratchet}{_reach(extras, repo, ratchet)}"
+        for _, repo, ratchet in slow
+    ]
 
 
 def pace_exit(words: list[str]) -> int:
@@ -87,12 +134,12 @@ def show_pace(root: Path) -> int:
 
     """
     try:
-        lines = pace_lines((root / PACE_FILE).read_text(encoding="utf-8"))
+        text = (root / PACE_FILE).read_text(encoding="utf-8")
+        lines = pace_lines(text)
+        slow = horizon_lines(text)
     except (OSError, ValueError) as e:
         sys.stdout.write(f"pace unreadable: {e}\n")
         return UNREADABLE_EXIT
-    if lines:
-        sys.stdout.write("\n".join(lines) + "\n")
-        return BEHIND_EXIT
-    sys.stdout.write("no ratchet is behind\n")
-    return 0
+    shown = lines or ["no ratchet is behind"]
+    sys.stdout.write("\n".join(shown + slow) + "\n")
+    return BEHIND_EXIT if lines else 0

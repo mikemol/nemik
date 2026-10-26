@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 from nemik import pacecli
-from nemik.pacecli import EXPORT_TREE, pace_exit, pace_lines, show_pace
+from nemik.pacecli import EXPORT_TREE, horizon_lines, pace_exit, pace_lines, show_pace
 from nemik.rank import main
 
 HEAD = '{"as_of": "2026-10-26T09:34:35Z", "window": "10"}\n'
@@ -27,13 +27,47 @@ BEHIND_LINE = (
     "behind nemik ruff-baseline.json: fell 0 over 10 landings, owes 3 "
     "(pace of 2026-10-26T09:34:35Z)"
 )
+STATED_LINE = (
+    "behind nemik ruff-baseline.json: fell 0 over 10 landings, owes 3; 50 left, "
+    "270 landings to zero (pace of 2026-10-26T09:34:35Z)"
+)
+NO_FALL = "50 left, no fall to reach zero"
 BEHIND_EXIT = 1
 UNREADABLE_EXIT = 2
+
+
+def _stating(row: str, value: int, landings: int) -> str:
+    """Add the value and horizon keys to a pace row.
+
+    Returns:
+        The row with both keys before its closing brace.
+
+    """
+    return row.replace("}", f', "value": "{value}", "horizon": "{landings}"}}')
 
 
 def test_a_behind_ratchet_gets_one_line_and_an_ok_one_none() -> None:
     """The line names the repo, the ratchet, what fell, what is owed and when it was drawn."""
     assert pace_lines(HEAD + BEHIND_ROW + OK_ROW) == [BEHIND_LINE]
+
+
+def test_a_row_that_states_its_horizon_gets_it_in_the_line() -> None:
+    """W1115: the value left and the landings to zero follow what is owed."""
+    assert pace_lines(HEAD + _stating(BEHIND_ROW, 50, 270)) == [STATED_LINE]
+    flat = pace_lines(HEAD + _stating(BEHIND_ROW, 50, -1))
+    assert NO_FALL in flat[0]
+
+
+def test_an_ok_ratchet_still_far_from_zero_is_listed_longest_first() -> None:
+    """W1115: not behind is not falling fast enough; ok rows with a value print their horizon."""
+    slow = _stating(OK_ROW, 2705, 27000)
+    quick = _stating(OK_ROW.replace("mypy", "codon"), 9, 2)
+    paid = _stating(OK_ROW.replace("mypy", "done"), 0, 0)
+    assert horizon_lines(HEAD + quick + slow + paid + BEHIND_ROW) == [
+        "ok nemik mypy-baseline.json; 2705 left, 27000 landings to zero",
+        "ok nemik codon-baseline.json; 9 left, 2 landings to zero",
+    ]
+    assert horizon_lines(HEAD + OK_ROW) == []
 
 
 def test_an_unread_ratchet_is_not_a_paid_one() -> None:
@@ -53,6 +87,18 @@ def test_the_exit_code_says_behind_clean_or_unreadable(tmp_path: Path) -> None:
     pace.write_text("not a pace file\n", encoding="utf-8")
     assert show_pace(tmp_path) == UNREADABLE_EXIT
     assert show_pace(tmp_path / "missing") == UNREADABLE_EXIT
+
+
+def test_a_slow_ok_ratchet_is_printed_but_does_not_change_the_exit_code(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Nothing behind exits 0 yet still shows the horizon of what is ok."""
+    pace = tmp_path / "ratchet-pace.json"
+    pace.write_text(HEAD + _stating(OK_ROW, 2705, 27000), encoding="utf-8")
+    assert show_pace(tmp_path) == 0
+    out = capsys.readouterr().out
+    assert "no ratchet is behind" in out
+    assert "2705 left, 27000 landings to zero" in out
 
 
 def test_only_a_command_line_that_asks_for_pace_is_answered(tmp_path: Path) -> None:
