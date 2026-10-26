@@ -1512,7 +1512,7 @@ def publish(
     fragmented heap per build). Returns None when no queue or ledger changed since current/ was built.
     The last `keep` snapshots stay, so a request already reading one is not pulled out from under it.
     """
-    from nemik import cachestore
+    from nemik import cachestore, lastgood
 
     key = fleet_key(root)
     if exports is not None:  # nemik:W636: a changed export rebuilds the pod's view too
@@ -1525,6 +1525,9 @@ def publish(
     if live.exists() and live.read_text() == key:
         return None
     base.mkdir(parents=True, exist_ok=True)
+    # nemik:W1086: a pod with no snapshot of its own serves the last good one kept on the claim
+    # while it builds, so a build the memory limit kills no longer leaves the Service endpointless
+    lastgood.restore(base, base / ".cache")
     stamp = time.strftime("%Y%m%dT%H%M%SZ", time.gmtime())
     snap = base / f"snap-{stamp}-{os.getpid()}"
     # nemik:W518: start warm, as the long-lived server was; W1074: and say so on the build's gauges
@@ -1543,6 +1546,11 @@ def publish(
     os.replace(link, base / "current")
     for old in sorted(p for p in base.glob("snap-*") if p.is_dir())[:-keep]:
         shutil.rmtree(old, ignore_errors=True)
+    # nemik:W1086: the next pod serves this at once; a full claim must not fail a good build
+    try:
+        lastgood.save(snap, base / ".cache")
+    except OSError as e:
+        sys.stderr.write(f"last-good not kept: {e}\n")
     return snap
 
 
