@@ -654,11 +654,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         "exit 1 when any is, 0 when none, 2 when the file is unreadable (nemik:W1107)",
     )
     # --pace is read-only and fast: no survey, only the pace file (nemik:W1107)
-    answered = (
-        pace_process(default_root())
-        if argv is None
-        else pace_exit(argv, default_root())
-    )
+    answered = pace_process() if argv is None else pace_exit(argv)
     if answered >= 0:
         raise SystemExit(answered)
     args = ap.parse_args(argv)

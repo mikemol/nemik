@@ -2538,3 +2538,9 @@
 2026-10-26T14:03:56Z  status W1110 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T14:06:05Z  tick  W1111 minted    -         "Define the ratchet tombstone: where a repo writes one, where pacewrite reads it, and a retired ratchet leaves the pace verdict only by one"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=mtools:W2045
 2026-10-26T14:10:45Z  status W1109 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T14:23:30Z  tick  W1112 minted    -         "The pace and nemik-rank --pace carry a horizon per ratchet: value over observed fall per landing, landings-to-zero and days-to-zero at the repo's landing rate"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1108
+2026-10-26T14:23:40Z  tick  W1113 minted    -         "A Rego bound on each ratchet's horizon that only tightens, with an alert when a horizon exceeds it; ruff at about 27000 landings is the first fixture"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1112
+2026-10-26T14:23:48Z  status W1113 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T14:26:27Z  tick  W1114 minted    -         "The pace file writes each ratchet's value and landings-to-zero horizon on its row"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1112
+2026-10-26T14:26:27Z  tick  W1115 minted    -         "nemik-rank --pace prints each behind ratchet's value and horizon from the pace file"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1112
+2026-10-26T14:26:33Z  status W1114 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

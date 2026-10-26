@@ -6,7 +6,8 @@ from pathlib import Path
 
 import pytest
 
-from nemik.pacecli import pace_exit, pace_lines, show_pace
+from nemik import pacecli
+from nemik.pacecli import EXPORT_TREE, pace_exit, pace_lines, show_pace
 from nemik.rank import main
 
 HEAD = '{"as_of": "2026-10-26T09:34:35Z", "window": "10"}\n'
@@ -57,10 +58,19 @@ def test_the_exit_code_says_behind_clean_or_unreadable(tmp_path: Path) -> None:
 def test_only_a_command_line_that_asks_for_pace_is_answered(tmp_path: Path) -> None:
     """Without --pace nothing is answered (-1); with it, --root names the tree to read."""
     (tmp_path / "ratchet-pace.json").write_text(HEAD + BEHIND_ROW, encoding="utf-8")
-    elsewhere = tmp_path / "elsewhere"
-    assert pace_exit(["nemik", "--round"], tmp_path) == -1
-    assert pace_exit(["--pace", "--root", str(tmp_path)], elsewhere) == BEHIND_EXIT
-    assert pace_exit(["--pace"], tmp_path) == BEHIND_EXIT
+    assert pace_exit(["nemik", "--round"]) == -1
+    assert pace_exit(["--pace", "--root", str(tmp_path)]) == BEHIND_EXIT
+
+
+def test_without_root_the_pace_file_is_read_where_luthen_publishes_it(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The default is luthen's export tree, so no caller has to know its directory."""
+    luthens = Path.home() / ".local/share/luthen/nemik-export"
+    assert luthens == EXPORT_TREE
+    monkeypatch.setattr(pacecli, "EXPORT_TREE", tmp_path)
+    (tmp_path / "ratchet-pace.json").write_text(HEAD + BEHIND_ROW, encoding="utf-8")
+    assert pace_exit(["--pace"]) == BEHIND_EXIT
 
 
 def test_the_ranking_command_answers_pace_before_it_builds_anything(

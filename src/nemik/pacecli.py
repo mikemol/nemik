@@ -14,6 +14,7 @@ from pathlib import Path
 
 from nemik.pacepublish import BEHIND, PACE_FILE, UNKNOWN, read_pace
 
+EXPORT_TREE = Path.home() / ".local" / "share" / "luthen" / "nemik-export"
 BEHIND_EXIT = 1
 UNREADABLE_EXIT = 2
 
@@ -44,15 +45,15 @@ def pace_lines(text: str) -> list[str]:
     return lines
 
 
-def pace_exit(words: list[str], default: Path) -> int:
+def pace_exit(words: list[str]) -> int:
     """Answer a command line that asks for --pace, before any survey is built.
 
     Read from the plain words, not the parsed namespace, so the check costs nothing and adds no
     untyped attribute to the ranking command.
 
     Args:
-        words: The command line's arguments (not the program name).
-        default: The root to read when --root is not given.
+        words: The command line's arguments (not the program name). Without --root the pace file
+            is read from luthen's export tree, where it is published.
 
     Returns:
         show_pace's exit code when --pace is among the arguments, else -1.
@@ -61,20 +62,17 @@ def pace_exit(words: list[str], default: Path) -> int:
     if "--pace" not in words:
         return -1
     at = words.index("--root") + 1 if "--root" in words else 0
-    return show_pace(Path(words[at]) if 0 < at < len(words) else default)
+    return show_pace(Path(words[at]) if 0 < at < len(words) else EXPORT_TREE)
 
 
-def pace_process(default: Path) -> int:
+def pace_process() -> int:
     """Answer the process's own command line when it asks for --pace.
-
-    Args:
-        default: The root to read when --root is not given.
 
     Returns:
         pace_exit's answer over the arguments the process was started with.
 
     """
-    return pace_exit(sys.argv[1:], default)
+    return pace_exit(sys.argv[1:])
 
 
 def show_pace(root: Path) -> int:
