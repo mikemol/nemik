@@ -1212,7 +1212,6 @@
   "TC003": 1
  },
  "tests/test_trs.py": {
-  "D103": 3,
   "E501": 1
  },
  "tests/test_trs_published.py": {
