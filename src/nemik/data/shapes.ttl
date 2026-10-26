@@ -397,7 +397,8 @@ nemik:AdoptionShape a sh:NodeShape ;
                   sh:severity sh:Warning ;
                   sh:message "the queue's writer is not this repo's own dependency: uv add a sha-pinned mikemol-pathsforward (mtools INSTALL.md) and run .venv/bin/mikemol-paths-forward" ] .
 
-# One active card per repo unless everything open is blocked (nemik:W177, operator 2026-10-01).
+# Some card is working while items are ready (nemik:W177). The count of working cards is not limited: the
+# operator's 2026-10-01 one-active-card rule was retired on 2026-10-15 (host 695f3e0a line 68086, W540).
 # nemik:W529: SPARQL constraints over the workstream's cards, so the rule lives here and the adapter plumbs
 # no count marker for it.
 nemik:ActiveCardShape a sh:NodeShape ;

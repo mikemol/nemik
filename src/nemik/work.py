@@ -160,7 +160,7 @@ def plan(current: list[str], symbol: str) -> list[tuple[str, str]]:
 
 
 def main(argv: list[str] | None = None) -> int:
-    """nemik-work: make one card the single working card."""
+    """nemik-work: mark one card working and clear its landed blockers, touching no other card."""
     ap = argparse.ArgumentParser(
         prog="nemik-work", description=(main.__doc__ or "").splitlines()[0]
     )

@@ -27,7 +27,7 @@ enforced_by = [
 from = "ready"
 to = "working"
 command = "nemik-work"
-when = "the one-command form of the same move: other working cards return to ready first"
+when = "the one-command form of the same move: it marks the card working and demotes no other (W330, W1006)"
 enforced_by = [{ shape = "no working card while items are ready" }]
 
 [[lifecycle.transition]]
