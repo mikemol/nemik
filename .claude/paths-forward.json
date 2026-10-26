@@ -23470,7 +23470,6 @@
         "velocity"
       ],
       "blocked_on": [
-        "W1121",
         "W1122",
         "W1123",
         "W1124"
@@ -23482,7 +23481,7 @@
       "minted_during": "tick",
       "caused_by": "W980",
       "last_worked": "2026-10-26T17:09:40Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 0,
       "weight": 100,
       "manifest": [
         "tests/test_trs.py",
@@ -26020,7 +26019,7 @@
     },
     {
       "symbol": "W1108",
-      "title": "The pace file carries each ratchet's current value, its last paydown time and its tagged paydown card, and nemik-rank --pace prints them",
+      "title": "The pace file carries each ratchet's last paydown time and its tagged paydown card, and nemik-rank --pace prints them",
       "status": "ready",
       "enables": [],
       "touches": [
@@ -26028,12 +26027,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": "The value is done (W1114, W1115). Remaining: last paydown time from the series (the last sample where the value fell) in pacewrite, the card from the open card tagged file:<ratchet>, both as new row keys, which luthen's egress gate must admit first (tell luthen-observability, extend the W1120 fixture)",
+      "evidence": "2026-10-26: 2026-10-26: value delivered by W1114/W1115; this card narrowed to the last paydown time and the paydown card",
       "issued_at": "2026-10-26T13:36:07Z",
       "minted_during": "tick",
       "caused_by": "W1107",
-      "last_worked": null,
+      "last_worked": "2026-10-26T18:32:06Z",
       "ticks_blocked": 0
     },
     {
@@ -26100,19 +26099,19 @@
     {
       "symbol": "W1112",
       "title": "The pace and nemik-rank --pace carry a horizon per ratchet: value over observed fall per landing, landings-to-zero and days-to-zero at the repo's landing rate",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-26: 2026-10-26: both parts landed: W1114 578a6db (value and horizon in the pace file), W1115 4e26f32 (--pace words them). Days-to-zero needs the repo's landing rate and is left to W1113's bound, not a card of its own",
       "issued_at": "2026-10-26T14:23:30Z",
       "minted_during": "tick",
       "caused_by": "W1108",
-      "last_worked": "2026-10-26T14:26:27Z",
+      "last_worked": "2026-10-26T18:31:58Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261026T183158Z"
     },
     {
       "symbol": "W1113",
@@ -26265,28 +26264,28 @@
     {
       "symbol": "W1120",
       "title": "A shared fixture for ratchet-pace.json rows that nemik's pace writer tests and luthen's egress gate both read, so a new field fails before it lands",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "One literal row set at tests/fixtures/pace/ratchet-pace.jsonl (the seven-key shape luthen's SHAPE now admits); tests/test_pace_contract.py asserts pace_document's rows have exactly those keys in that order and read_pace/read_extras parse the fixture; send luthen the path and sha so it copies the fixture byte for byte into its egress test, as it did round.jsonl. Same for any other file luthen egresses, one fixture each",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-26: landed 8817719, pushed",
       "issued_at": "2026-10-26T17:02:26Z",
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W1686",
-      "last_worked": "2026-10-26T17:04:57Z",
+      "last_worked": "2026-10-26T18:36:06Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/fixtures/pace/ratchet-pace.jsonl",
         "tests/test_pace_contract.py"
       ],
-      "completed": null
+      "completed": "20261026T183606Z"
     },
     {
       "symbol": "W1121",
       "title": "Pay the D103 docstring family in the small test files, a few files a slice",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W1014"
       ],
@@ -26295,14 +26294,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-26: landed 40fdee1, pushed: ruff 2701 to 2695; further D103 files are the next slice (carded as W1129 if more are wanted)",
       "issued_at": "2026-10-26T17:09:40Z",
       "minted_during": "tick",
       "caused_by": "W1014",
-      "last_worked": "2026-10-26T17:40:09Z",
+      "last_worked": "2026-10-26T18:15:38Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261026T181538Z",
       "manifest": [
         "tests/test_dependency_cycle.py",
         "tests/test_ask_priority.py",
@@ -26368,19 +26367,19 @@
     {
       "symbol": "W1125",
       "title": "Repin mtools to 65b7491b for W2046 empty next step refused, W2043 watchdog evidence, W2048 commitments-tree",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-26: landed df4e999, pushed",
       "issued_at": "2026-10-26T17:37:58Z",
       "minted_during": "interrupt",
       "caused_by": "github-8f",
-      "last_worked": "2026-10-26T17:38:25Z",
+      "last_worked": "2026-10-26T18:15:37Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261026T181537Z",
       "manifest": [
         "MODULE.bazel",
         "pyproject.toml",

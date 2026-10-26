@@ -38,6 +38,28 @@ def floors_of(export: str) -> dict[str, int]:
     }
 
 
+def resets_of(export: str) -> list[str]:
+    """Name the ratchets whose required fall now stands below a level it once held.
+
+    The requirement only rises, so a series whose last sample is under its highest has been reset
+    (mypy 2 to 1 after the pace outage, nemik:W1126): the semantics luthen's alert over
+    nemik_ratchet_fall_required carries (luthen-observability:W1685).
+
+    Args:
+        export: The store's raw export of nemik_ratchet_fall_required, one series per line.
+
+    Returns:
+        The `repo` and `ratchet` keys, joined by a newline, of the reset series; empty when every
+        series only rose or held.
+
+    """
+    return [
+        f"{repo}\n{ratchet}"
+        for repo, ratchet, values in export_series(export)
+        if values and values[-1] < max(values)
+    ]
+
+
 def pace_document(answer: str, previous: str, stamp: str) -> str:
     """Judge every ratchet series of an answer and write the pace file, with no store floors.
 

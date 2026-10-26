@@ -1,0 +1,2 @@
+{"metric":{"__name__":"nemik_ratchet_fall_required","repo":"nemik","ratchet":"mypy-baseline.json"},"values":[2,2,2,1,1],"timestamps":[1000,2000,3000,4000,5000]}
+{"metric":{"__name__":"nemik_ratchet_fall_required","repo":"nemik","ratchet":"ruff-baseline.json"},"values":[3,3,3,3,3],"timestamps":[1000,2000,3000,4000,5000]}

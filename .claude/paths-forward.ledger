@@ -2595,3 +2595,7 @@
 2026-10-26T18:01:17Z  interrupt W1127 minted    -         "nemik-history --baseline refuses a time with no zone and accepts a relative window such as -1h or the last ledger tick"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f
 2026-10-26T18:03:06Z  status W1126 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T18:13:41Z  tick  W1126 advanced  collapse  "W1126 now floors the required fall from the store series (github-8f's query: mypy 2 to 1 and debtplan 1 to 0 were the only resets) plus an XDG-state copy; stack533 resubmitted behind 531 (W1125), 532 (W1121), 530 (W1120) [blocked by W1125]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T18:15:37Z  status W1125 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T18:15:38Z  status W1121 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T18:31:58Z  status W1112 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T18:36:06Z  status W1120 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
