@@ -20,7 +20,9 @@ exports_files(["pyproject.toml"])
         # but timed out at 900 s in a loaded gate, so both run in three as well
         # nemik:W1063: test_viewer_settings (105 s alone), test_metrics_gating (60 s) and test_rank_flow
         # (30 s) each timed out at 300 s in a loaded gate with no failing assertion, so each runs in three
-        shard_count = 3 if src in ("tests/test_pdf.py", "tests/test_modes.py", "tests/test_layout.py", "tests/test_viewer_settings.py", "tests/test_metrics_gating.py", "tests/test_rank_flow.py") else 1,
+        # nemik:W1063: test_layout alone takes 124 s a shard, yet a shard timed out at 900 s in the stack508
+        # gate with no failing assertion, so it runs in six
+        shard_count = 6 if src == "tests/test_layout.py" else 3 if src in ("tests/test_pdf.py", "tests/test_modes.py", "tests/test_layout.py", "tests/test_viewer_settings.py", "tests/test_metrics_gating.py", "tests/test_rank_flow.py") else 1,
         args = ["$(rootpath " + src + ")", "-c", "$(rootpath pyproject.toml)"],
         data = [src, "tests/installed.py", "tests/webpage.py", "tests/pagetext.py", "tests/conftest.py", "tools/cpuline.py", ".claude/settings.json", "//tests/fixtures:fleet", "pyproject.toml", "ARCHITECTURE.md", "skills/nemik/SKILL.md", "docs/positioning.md", "deploy/deployment.yaml", "src/nemik/data/workflows.toml", "tools/nemik_client.py", "BUILD.bazel", "Containerfile", ".forgejo/workflows/build.yml"] + glob(["tests/corpus/**"]) + [ "src/nemik/data/shapes.ttl", "src/nemik/data/nemik.ttl", "src/nemik/data/wcag.rego", "src/nemik/data/run-row.schema.json", ":.venv", "@opa//file", "@use_of_colour_rego//file", "@chromium//:files", "@chromium//:chrome-headless-shell"]
             # nemik:W445: the JRE (52 MB) and MPXJ's jars go to the one test that reads with them
