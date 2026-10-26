@@ -12,6 +12,7 @@ FLEET = Path(__file__).parent / "fixtures" / "fleet"
 
 
 def test_every_data_file_is_hashed_and_nothing_else(tmp_path: Path) -> None:
+    """hashes.json names each published data file, and no other."""
     withheld = tmp_path / "withheld.json"
     withheld.write_text(json.dumps({"version": 1, "as_of": "x", "items": []}))
     out = tmp_path / "out"

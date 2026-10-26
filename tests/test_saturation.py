@@ -50,6 +50,7 @@ def _saturation(root: Path) -> list[str]:
 
 
 def test_more_asks_than_the_cap_is_one_warning_naming_the_oldest() -> None:
+    """Eleven asks against a cap of ten make one Warning, naming the oldest."""
     with tempfile.TemporaryDirectory() as tmp:
         found = _saturation(_root(Path(tmp), 11))
     assert len(found) == 1
@@ -58,5 +59,6 @@ def test_more_asks_than_the_cap_is_one_warning_naming_the_oldest() -> None:
 
 
 def test_at_the_cap_there_is_no_warning() -> None:
+    """Ten asks, the cap itself, say nothing."""
     with tempfile.TemporaryDirectory() as tmp:
         assert _saturation(_root(Path(tmp), 10)) == []

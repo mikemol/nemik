@@ -13,6 +13,7 @@ UNPUBLISHED = {"errand"}
 
 
 def test_every_category_has_a_label_and_help() -> None:
+    """Each lane category the page draws carries a label and a help text."""
     # the page as serve reads it, from the installed package (the gate's sandbox has no src/ tree)
     page = page_text()
     table = re.search(r"const LANE = \{(.*?)\};", page)

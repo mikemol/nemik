@@ -661,7 +661,6 @@
   "PT018": 1
  },
  "tests/test_catalog.py": {
-  "D103": 1,
   "E501": 1
  },
  "tests/test_certify.py": {
@@ -745,9 +744,6 @@
   "D103": 1,
   "PLR2004": 1
  },
- "tests/test_flow.py": {
-  "D103": 2
- },
  "tests/test_flow_cache.py": {
   "ANN001": 3,
   "ANN002": 1,
@@ -812,9 +808,6 @@
   "PLR0917": 1,
   "PLR2004": 1,
   "RUF043": 1
- },
- "tests/test_hashes.py": {
-  "D103": 1
  },
  "tests/test_health.py": {
   "D103": 4,
@@ -895,9 +888,6 @@
   "E501": 1,
   "PLR6201": 1
  },
- "tests/test_lanes.py": {
-  "D103": 1
- },
  "tests/test_layout.py": {
   "ANN001": 47,
   "ANN201": 1,
@@ -949,7 +939,6 @@
   "PLC2701": 1
  },
  "tests/test_metrics_age.py": {
-  "D103": 1,
   "TC003": 1
  },
  "tests/test_metrics_realizability.py": {
@@ -995,10 +984,6 @@
   "PLR2004": 1,
   "RUF031": 1,
   "TC003": 1
- },
- "tests/test_overlaps.py": {
-  "D100": 1,
-  "D103": 1
  },
  "tests/test_pacing.py": {
   "D103": 3,
@@ -1140,9 +1125,6 @@
  "tests/test_satisfied_edges.py": {
   "D103": 1,
   "RUF031": 4
- },
- "tests/test_saturation.py": {
-  "D103": 2
  },
  "tests/test_score.py": {
   "ANN001": 9,

@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
+"""Cards that share a touches tag are overlaps; the local ones are not cross-repo."""
+
 from rdflib import Graph, Literal
 
 from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri
@@ -14,6 +16,7 @@ def _wp(g: Graph, repo: str, sym: str, status: str, *tags: str) -> None:
 
 
 def test_live_shared_tags_grouped_and_cross_filters_local() -> None:
+    """Live cards sharing a tag are grouped; the cross filter drops the same-repo groups."""
     g = Graph()
     _wp(g, "a", "W1", "ready", "docs", "cli")
     _wp(g, "a", "W2", "working", "cli")

@@ -18,6 +18,7 @@ HALF = Fraction(1, 2)
 
 
 def test_demand_is_conserved_exactly_over_many_sources() -> None:
+    """Every source's demand arrives somewhere, with exact fractions."""
     demand = {"d": Fraction(3), "x": Fraction(2, 7), "a": HALF}
     needs = {"d": ["a", "e"], "a": ["c"], "x": ["e", "a"]}
     flow = solve(demand, needs, {"c", "e"})
@@ -27,6 +28,7 @@ def test_demand_is_conserved_exactly_over_many_sources() -> None:
 
 
 def test_the_answer_does_not_depend_on_input_order() -> None:
+    """The same needs listed in another order give the same solve."""
     needs = {"d": ["e", "a"], "a": ["c"], "x": ["a"]}
     flipped = {"x": ["a"], "a": ["c"], "d": ["a", "e"]}
     demand = {"d": ONE, "x": HALF}

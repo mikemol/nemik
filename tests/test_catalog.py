@@ -17,6 +17,7 @@ FLEET = Path(__file__).parent / "fixtures" / "fleet"
 def test_the_catalog_resolves_to_every_repos_tracked_resource_set(
     tmp_path: Path,
 ) -> None:
+    """The catalog names each repo's tracked resource set."""
     withheld = tmp_path / "withheld.json"
     withheld.write_text(json.dumps({"version": 1, "as_of": "x", "items": []}))
     out = tmp_path / "out"

@@ -17,6 +17,7 @@ def _wp(symbol: str, status: str, issued: str) -> dict:
 
 
 def test_age_is_a_median_and_an_oldest_per_open_state(tmp_path: Path) -> None:
+    """Per open state the age gauges are the median and the oldest."""
     path = tmp_path / "q.json"
     waypoints = [
         _wp("W1", "ready", "2026-10-01T00:00:00Z"),  # 4 days at the check
