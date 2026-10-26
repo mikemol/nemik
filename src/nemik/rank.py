@@ -21,7 +21,7 @@ from rdflib.term import Node
 
 from nemik import tiers
 from nemik.adapter import BASE, NEMIK, OSLC_CM, workstream_uri
-from nemik.pacecli import pace_exit, pace_process
+from nemik.pacecli import behind_files, pace_exit, pace_process
 from nemik.roundcli import show_round, write_round_file
 from nemik.stackable import manifest
 
@@ -151,7 +151,9 @@ def objectives(
     """One ready card's objectives.
 
     `salience` (nemik.salience, the flow model) replaces the `weight` objective when given; the old
-    transitive sum stays in `downstream` either way (nemik:W241).
+    transitive sum stays in `downstream` either way (nemik:W241). `bands.behind` holds the
+    `file:<ratchet>` tags of the ratchets the card's repo is behind on, whose paydown cards take
+    the velocity band (nemik:W993).
     """
     from rdflib.namespace import PROV
 
@@ -159,7 +161,8 @@ def objectives(
 
     cause = str(g.value(n, PROV.wasInformedBy) or "").strip().lower()
     b, why = band(str(g.value(n, NEMIK.vector) or "") or None, bands)
-    b, why = tagged_band(b, why, {str(t) for t in g.objects(n, NEMIK.touches)})
+    touches = {str(t) for t in g.objects(n, NEMIK.touches)}
+    b, why = tagged_band(b, why, touches, bands.behind)
     down = downstream_weight(g, n, weights)
     return {
         "operator": int(cause == "operator" or cause.startswith("operator:")),
@@ -366,7 +369,7 @@ def _rows(
     from nemik.salience import salience_of
     from nemik.score import load_bands
 
-    bands = load_bands()
+    bands = load_bands().watching(frozenset(behind_files(repo)))
     flow = (comp or load_composition()).weight_model == "flow"
     salience = (
         salience_of(

@@ -2563,3 +2563,10 @@
 2026-10-26T16:15:16Z  tick  W1116 minted    -         "Pay the codon ratchet's owed 1 by making one failing module compile whole, the smallest argparse-only CLI first"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
 2026-10-26T16:17:56Z  status W1116 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T16:18:12Z  tick  W1116 advanced  collapse  "stack529 (W1116 replica_cli off argparse, codon row owed 1) queued behind stack528 (W993); the rest of the ready cards wait on the gates, not on a blocker [reason: W1116 and W993 are both in the gate (stack528 inflight, stack529 queued); next ready cards W1092 and W969 each touch serve.py or rank.py which stack528 carries (cites W993, W1092, W969)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T16:43:19Z  tick  W1117 minted    -         "Answer nemik: mtools:W1933 is done, so W1007 reads the commitment ledger"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-10-26-nemik-edge-mtools-W1933-enables-W1007.md
+2026-10-26T16:43:20Z  tick  W1118 minted    -         "Answer nemik: mtools:W1933 is done, so W1008 reads the commitment ledger"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-10-26-nemik-edge-mtools-W1933-enables-W1008.md
+2026-10-26T16:43:38Z  status W1007 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T16:43:39Z  status W1008 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T16:43:44Z  status W1117 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T16:43:45Z  status W1118 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T16:45:04Z  tick  W642 advanced  unblock   "claimed the two W1933 letters (W1007/W1008 re-blocked on mtools:W2048); W642 evidence: hook timeout is load, not a crash; stacks 529 (W1116) and 528 (W993) gating [blocked by W1116]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

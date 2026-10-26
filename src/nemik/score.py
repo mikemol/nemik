@@ -23,10 +23,21 @@ class Bands:
     rules: dict[str, tuple[dict[str, frozenset[str]], ...]]
     unscored: str
     unmatched: str
+    # the `file:<ratchet>` tags of the ratchets the repo being ranked is behind on (nemik:W993)
+    behind: frozenset[str] = frozenset()
 
     def rank(self, band: str) -> int:
         """0 is most urgent."""
         return self.order.index(band)
+
+    def watching(self, behind: frozenset[str]) -> Bands:
+        """Say which ratchets the repo being ranked is behind on.
+
+        Returns:
+            These bands with the behind tags set, so a card that pays one down takes velocity.
+
+        """
+        return Bands(self.order, self.rules, self.unscored, self.unmatched, behind)
 
 
 def load_bands(text: str | None = None) -> Bands:
@@ -74,15 +85,32 @@ def band(vector: str | None, bands: Bands) -> tuple[str, str]:
 VELOCITY = "velocity"
 
 
-def tagged_band(b: str, why: str, touches: set[str]) -> tuple[str, str]:
-    """Move a card into the velocity band when its owner tagged it so.
+def tagged_band(
+    b: str, why: str, touches: set[str], behind: frozenset[str] = frozenset()
+) -> tuple[str, str]:
+    """Move a card into the velocity band when its owner tagged it so or it pays a behind ratchet.
+
+    A paydown card is tagged `file:<the ratchet file>` (the fleet loop prompt), and a repo behind
+    its required fall is owed that paydown ahead of feature work (operator 2026-10-24, host
+    695f3e0a lines 92679 and 93406), beside velocity and not above it (line 100702): nemik:W993.
+
+    Args:
+        b: The band the card's vector gave.
+        why: Why it gave that band.
+        touches: The card's touches.
+        behind: The `file:<ratchet>` tags of the ratchets its repo is behind on.
 
     Returns:
-        (velocity, why) when the touches carry the velocity tag; otherwise the band and why given.
+        (velocity, why) when the touches carry the velocity tag or a behind ratchet's file tag;
+        otherwise the band and why given.
 
     """
     if VELOCITY in touches:
         return VELOCITY, "touches velocity"
+    for tag in sorted(touches):
+        file = tag.removesuffix("!w")
+        if file in behind:
+            return VELOCITY, f"pays down {file}, which is behind"
     return b, why
 
 

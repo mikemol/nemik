@@ -92,6 +92,32 @@ def horizon_lines(text: str) -> list[str]:
     ]
 
 
+def behind_files(repo: str) -> list[str]:
+    """Name the ratchet files a repo is behind on, as the tags its paydown cards carry (W993).
+
+    A list, not a frozenset or a tuple: Codon has no frozenset and takes no `tuple[str, ...]`, and
+    this module is held to the census.
+
+    Args:
+        repo: The repo whose cards are being ranked.
+
+    Returns:
+        `file:<ratchet>` for each of the repo's behind rows in the export tree's pace file; empty
+        when the file is missing or unreadable, since a dark sensor must not reorder the queue
+        (it is loud elsewhere: --pace exits 2 and nemik_ratchet_pace_readable is 0).
+
+    """
+    try:
+        _, _, rows = read_pace((EXPORT_TREE / PACE_FILE).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return []
+    return [
+        f"file:{ratchet}"
+        for name, ratchet, state, _, _ in rows
+        if name == repo and state == BEHIND
+    ]
+
+
 def pace_exit(words: list[str]) -> int:
     """Answer a command line that asks for --pace, before any survey is built.
 
