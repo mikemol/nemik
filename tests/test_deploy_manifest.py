@@ -19,7 +19,7 @@ from nemik import staticserve
 
 ROOT = Path(__file__).resolve().parents[1]
 DEPLOYMENT = ROOT / "deploy" / "deployment.yaml"
-TENANT_QUOTA_MI = 3 * 1024  # luthen's namespace quota on limits.memory
+TENANT_QUOTA_MI = 5 * 1024  # luthen's namespace quota on limits.memory (5Gi)
 SNAPSHOT_MI = 77  # one published snapshot, measured 2026-10-26 (W1087)
 SNAPSHOTS_AT_PEAK = 5  # the three kept, the one served, and the one being written
 

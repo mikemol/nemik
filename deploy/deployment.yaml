@@ -17,7 +17,7 @@
 #       snapshot served rather than a restart;
 #   (d) container names and requests/limits go to luthen-observability for its workloads.json row.
 # Kept: 2 replicas (zero-downtime ship, operator 2026-09-26), the export PVC read-only (builder only),
-# restricted Pod Security. Tenant quota 3Gi: (96Mi + 896Mi) x 3 pods (2 + 1 surge) = 2.9Gi.
+# restricted Pod Security. Tenant quota 5Gi: (96Mi + 1536Mi) x 3 pods (2 + 1 surge) = 4896Mi.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -85,13 +85,15 @@ spec:
             # target read apart
             - name: NEMIK_POD
               valueFrom: {fieldRef: {fieldPath: metadata.name}}
-          # Measured on a pod-shaped export (no git), 17 repos: the build peaked near 530 MB; luthen's 7 d
-          # max_over_time of the working set (2026-10-17) read 746 MiB for the builder, uncensored, so the
-          # old 768Mi limit sat 3% above it. The quota caps the pair: (96Mi + 896Mi) x 3 pods = 2.9Gi of
-          # the 3Gi tenant quota, so 896Mi is the most headroom (20%) the namespace allows (nemik:W505).
+          # A cold build needs about 1.03 GiB resident on the host, and the kernel's kill records at the old
+          # 896Mi limit show about 1.25 GB resident plus swap (nemik:W1074), so a pod with no warm cache
+          # was killed before its first snapshot and never became ready. 1536Mi is 1.25 GB plus about 20%
+          # (luthen-observability's proposal, W1644). The request stays 640Mi, under the limit, so swap
+          # still applies. The quota (5Gi since luthen's 2026-10-26 change) caps the pair: (96Mi + 1536Mi)
+          # x 3 pods = 4896Mi.
           resources:
             requests: {memory: 640Mi, cpu: 250m}
-            limits: {memory: 896Mi, cpu: "1"}
+            limits: {memory: 1536Mi, cpu: "1"}
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true

@@ -2478,3 +2478,7 @@
 2026-10-26T02:16:42Z  status W1062 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T02:19:47Z  tick  W1087 minted    -         "Size the snapshots volume from a measured snapshot: 77 MiB each, five at the build's peak, so 512Mi, not 256Mi"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W1644
 2026-10-26T02:21:20Z  status W1087 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T02:38:08Z  status W1087 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T02:43:30Z  status W1086 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T02:58:02Z  tick  W1088 minted    -         "Raise the builder's memory limit to 1536Mi under the 5Gi tenant quota so a cold build finishes and a pod serves"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W1644
+2026-10-26T02:58:17Z  status W1088 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
