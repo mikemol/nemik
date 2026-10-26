@@ -12,7 +12,7 @@ import pytest
 
 from nemik.check import main
 
-QUEUE = {
+QUEUE: dict[str, object] = {
     "version": 1,
     "project_root": "/x",
     "counter": 1,
@@ -48,6 +48,7 @@ def _exit(root: Path, *repos: str) -> int:
 def test_committed_passes_only_when_every_named_queue_is_at_its_last_commit(
     tmp_path: Path,
 ) -> None:
+    """--committed passes a queue at its last commit and fails one edited since."""
     _repo(tmp_path, "clean", dirty=False)
     _repo(tmp_path, "edited", dirty=True)
     assert _exit(tmp_path, "clean") == 0

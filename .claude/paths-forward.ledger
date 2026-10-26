@@ -2640,3 +2640,12 @@
 2026-10-26T21:46:50Z  prune W1083 edge-pruned writer    "mtools:W2033"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T21:46:50Z  status W1083 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T21:46:57Z  tick  W1133 advanced  collapse  "stack541 (W1132 apply line) inflight; stack542 (W1134 docstrings and the trs Any, W1133 ratchets.json declarations, W1131 popover reach) queued behind it; the viewport-pin class work waits for test_layout.py, which 542 carries [blocked by W1131]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T21:50:42Z  status W1132 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T22:09:25Z  interrupt W1135 minted    -         "Publish nemik_round_binding{repo,term}: which term bounded each repo's round"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1092
+2026-10-26T22:09:25Z  interrupt W1136 minted    -         "Derive the round ceiling from luthen's W1645 series and drum's admission, with no typed threshold"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1092
+2026-10-26T22:10:49Z  tick  W1135 advanced  collapse  "read W1135's data flow (the binding term is not in the round file; route (a) computes it in the server from its graph); stack542 (W1134, W1133, W1131) still gating [blocked by W1131]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T22:12:29Z  status W1134 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T22:12:30Z  status W1133 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T22:12:30Z  status W1131 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T22:32:43Z  interrupt W1137 minted    -         "Pay mypy 3 and ruff 5 in five small files, the paydown nemik owes after the ratchets were counted in findings"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
+2026-10-26T22:32:59Z  status W1137 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

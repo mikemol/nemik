@@ -628,9 +628,7 @@
   "PLC0415": 2
  },
  "tests/test_calendar_write.py": {
-  "D103": 3,
   "D401": 1,
-  "D403": 1,
   "DOC201": 2,
   "PLR2004": 2
  },
@@ -663,7 +661,6 @@
   "S603": 1
  },
  "tests/test_check_committed.py": {
-  "D103": 1,
   "E501": 1,
   "PLR2004": 3,
   "S404": 1,

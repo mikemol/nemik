@@ -94,9 +94,6 @@
  "src/nemik/metrics.py": {
   "misc": 37
  },
- "src/nemik/overlaps.py": {
-  "misc": 2
- },
  "src/nemik/pacing.py": {
   "misc": 12,
   "var-annotated": 1
@@ -219,9 +216,6 @@
  "tests/test_calendar_boundary.py": {
   "misc": 14,
   "no-untyped-def": 1
- },
- "tests/test_calendar_write.py": {
-  "misc": 1
  },
  "tests/test_calendars.py": {
   "misc": 60,

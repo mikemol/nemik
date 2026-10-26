@@ -13,7 +13,7 @@ from nemik.calwrite import main
 
 
 def _fleet(tmp_path: Path) -> Graph:
-    """life with two open dated waypoints, one done, one undated."""
+    """Build life with two open dated waypoints, one done, one undated."""
     path = tmp_path / "life.json"
     waypoints = [
         {"symbol": "W9", "title": "cpr", "status": "ready", "due": "20261001T220000Z"},
@@ -26,8 +26,14 @@ def _fleet(tmp_path: Path) -> Graph:
         {"symbol": "W1", "title": "closed", "status": "done", "due": "20261001"},
         {"symbol": "W5", "title": "undated", "status": "ready"},
     ]
-    queue = {"version": 1, "project_root": "/x", "counter": 4, "residue": []}
-    path.write_text(json.dumps({**queue, "waypoints": waypoints}))
+    doc: dict[str, object] = {
+        "version": 1,
+        "project_root": "/x",
+        "counter": 4,
+        "residue": [],
+        "waypoints": waypoints,
+    }
+    path.write_text(json.dumps(doc))
     return queue_graph("life", path)
 
 
@@ -53,6 +59,7 @@ SHARED = 'shared = { name = "Family", write = true, mirror = ["life"] }'
 def test_nothing_is_written_unless_a_calendar_opts_in_to_writing(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
+    """A calendar not opted in to writing gets neither a write nor a mirror."""
     cfg = _config(tmp_path, 'plain = "Chores"')  # read-only: no write, no mirror
     missing = tmp_path / "no-helper"  # never reached
     code = main(["--calendars", str(cfg), "--helper", str(missing)], _fleet(tmp_path))
@@ -63,6 +70,7 @@ def test_nothing_is_written_unless_a_calendar_opts_in_to_writing(
 def test_an_opted_in_calendar_gets_its_repos_events_and_apply_is_explicit(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
+    """An opted-in calendar is planned its repos' events, and nothing is applied without --apply."""
     cfg = _config(tmp_path, SHARED)
     base = ["--calendars", str(cfg), "--helper", str(_stand_in(tmp_path))]
     assert main(base, _fleet(tmp_path)) == 0
@@ -78,6 +86,7 @@ def test_an_opted_in_calendar_gets_its_repos_events_and_apply_is_explicit(
 def test_a_refusal_from_the_helper_is_the_commands_exit_code(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
+    """When the helper refuses with 2, the command exits with 2."""
     cfg = _config(tmp_path, SHARED)
     refusing = _stand_in(tmp_path, code=2)
     argv = ["--calendars", str(cfg), "--helper", str(refusing), "--apply"]

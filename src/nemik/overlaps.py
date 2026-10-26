@@ -108,7 +108,12 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     ap.add_argument(
         "--cross", action="store_true", help="only tags shared across repos"
     )
-    args = ap.parse_args(argv)
+
+    class Opts(argparse.Namespace):
+        root: Path
+        cross: bool
+
+    args = ap.parse_args(argv, namespace=Opts())
     if g is None:
         g = Graph()
         for _, qg, _ in survey(args.root):
