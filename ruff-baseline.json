@@ -31,12 +31,6 @@
   "RUF031": 1,
   "TC003": 2
  },
- "src/nemik/adoption.py": {
-  "D400": 1,
-  "D401": 1,
-  "DOC201": 1,
-  "TC003": 1
- },
  "src/nemik/alarm.py": {
   "D401": 2,
   "DOC201": 3,

@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""Does each workstream run mikemol-paths-forward from its own environment?
+"""Say whether each workstream runs mikemol-paths-forward from its own environment.
 
 The operator's intent (2026-09-26): each repo installs the package as its own sha-pinned
 dependency and executes it from its own .venv, not from mtools' tree. This reads each repo's
@@ -17,7 +17,10 @@ from __future__ import annotations
 
 import re
 import tomllib
-from pathlib import Path
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 PACKAGE = "mikemol-pathsforward"
 _NAME = re.compile(r"^\s*([A-Za-z0-9._-]+)")
@@ -32,7 +35,12 @@ def _names(specs: object) -> set[str]:
 
 
 def adoption(queue_path: Path) -> str:
-    """The adoption state of the repo holding `queue_path`."""
+    """Return the adoption state of the repo holding `queue_path`.
+
+    Returns:
+        One of declared, owner, missing, no-pyproject or unobservable (see the module docstring).
+
+    """
     if queue_path.parent.name != ".claude":
         return "unobservable"
     repo = queue_path.parents[1]
