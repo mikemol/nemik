@@ -6,8 +6,12 @@ from __future__ import annotations
 
 import subprocess
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.pins import Pin, behind, main, pins
+
+if TYPE_CHECKING:
+    import pytest
 
 ENV = {
     "GIT_AUTHOR_NAME": "t",
@@ -72,7 +76,9 @@ def test_a_vendored_wheel_names_its_mtools_commit_in_its_file_name(
     assert pins(tmp_path) == [Pin("app", "mtools", "842ab10")]  # one pin: one commit
 
 
-def test_the_command_exits_6_only_past_the_threshold(tmp_path: Path, capsys) -> None:
+def test_the_command_exits_6_only_past_the_threshold(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
     shas = _peer(tmp_path)
     consumer = tmp_path / "app"
     consumer.mkdir()

@@ -355,10 +355,6 @@
  "tests/test_pieces_corpus.py": {
   "misc": 44
  },
- "tests/test_pins.py": {
-  "misc": 1,
-  "no-untyped-def": 1
- },
  "tests/test_positioning.py": {
   "misc": 22
  },
