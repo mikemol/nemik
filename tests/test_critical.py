@@ -4,13 +4,13 @@
 
 from __future__ import annotations
 
-from rdflib import Graph
+from rdflib import Graph, URIRef
 
 from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri
 from nemik.critical import critical
 
 
-def _card(g: Graph, sym: str, status: str = "ready"):
+def _card(g: Graph, sym: str, status: str = "ready") -> URIRef:
     node = waypoint_uri("a", sym)
     g.add((node, OSLC_CM.state, STATE[status]))
     return node

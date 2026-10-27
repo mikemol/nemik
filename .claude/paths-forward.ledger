@@ -2877,3 +2877,6 @@
 2026-10-27T17:34:15Z  status W1184 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-27T17:42:17Z  tick  W1186 minted    -         "A codemod hoists the dict literal handed to json.dumps into a typed variable across the tests"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1176
 2026-10-27T17:42:25Z  status W1186 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T17:49:43Z  tick  W1187 minted    -         "Annotate the untyped test helpers that fan Any out to their callers, ranked by call count"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
+2026-10-27T17:49:55Z  status W1187 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T17:51:38Z  status W1186 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

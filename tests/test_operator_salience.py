@@ -4,19 +4,19 @@
 
 from __future__ import annotations
 
-from rdflib import Graph, Literal
+from rdflib import Graph, Literal, URIRef
 
 from nemik.adapter import NEMIK, OPERATOR, OSLC_CM, STATE, waypoint_uri
 from nemik.blocks import operator_asks, with_salience
 
 
-def _card(g: Graph, repo: str, sym: str, status: str = "blocked"):
+def _card(g: Graph, repo: str, sym: str, status: str = "blocked") -> URIRef:
     node = waypoint_uri(repo, sym)
     g.add((node, OSLC_CM.state, STATE[status]))
     return node
 
 
-def _ask(g: Graph, repo: str, sym: str, text: str):
+def _ask(g: Graph, repo: str, sym: str, text: str) -> URIRef:
     node = _card(g, repo, sym)
     g.add((node, NEMIK.waitsFor, OPERATOR))
     g.add((node, NEMIK.blockedOn, Literal(f"operator: decide {text}")))

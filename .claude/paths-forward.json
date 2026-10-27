@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1186,
+  "counter": 1187,
   "waypoints": [
     {
       "symbol": "W1",
@@ -28155,7 +28155,7 @@
     {
       "symbol": "W1186",
       "title": "A codemod hoists the dict literal handed to json.dumps into a typed variable across the tests",
-      "status": "working",
+      "status": "ready",
       "enables": [],
       "touches": [],
       "blocked_on": [],
@@ -28165,7 +28165,7 @@
       "issued_at": "2026-10-27T17:42:17Z",
       "minted_during": "tick",
       "caused_by": "W1176",
-      "last_worked": "2026-10-27T17:44:28Z",
+      "last_worked": "2026-10-27T17:51:38Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -28173,6 +28173,38 @@
         "tests/test_apischema.py",
         "tests/test_calendar_boundary.py",
         "mypy-baseline.json"
+      ],
+      "size_class": "medium"
+    },
+    {
+      "symbol": "W1187",
+      "title": "Annotate the untyped test helpers that fan Any out to their callers, ranked by call count",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:mypy-baseline.json",
+        "file:ruff-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Done in the tree: eight helpers annotated (_wp in umbrella_block, guarantees and frontier; _card and _ask; vec; _a), mypy 5248 to 4928 and ruff 2595 to 2569, because one untyped helper turned every caller's result into Any. The census of the rest (session scratchpad script) lists test_deterministic._wp and _queue, test_calendars._row, test_wake_alarms._graph, test_withheld._write, test_witnesses.queue and _serve, test_fruit._graph, test_weather._q, test_witwait._wait and _script, test_rank._ready; annotate them next, ranked by call count",
+      "evidence": "",
+      "issued_at": "2026-10-27T17:49:43Z",
+      "minted_during": "tick",
+      "caused_by": "W1178",
+      "last_worked": "2026-10-27T17:49:55Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "tests/test_umbrella_block.py",
+        "tests/test_guarantees.py",
+        "tests/test_frontier.py",
+        "tests/test_critical.py",
+        "tests/test_operator_salience.py",
+        "tests/test_score.py",
+        "tests/test_alarm_delivery.py",
+        "mypy-baseline.json",
+        "ruff-baseline.json"
       ],
       "size_class": "medium"
     }

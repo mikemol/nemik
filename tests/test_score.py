@@ -13,7 +13,9 @@ B = load_bands()
 V = "WV:1/R:{R}/E:{E}/C:{C}/I:{I}/A:{A}/X:N/S:{S}/F:K/W:N"
 
 
-def vec(R="L", E="N", C="N", I="N", A="N", S="U"):
+def vec(
+    R: str = "L", E: str = "N", C: str = "N", I: str = "N", A: str = "N", S: str = "U"
+) -> str:
     return V.format(R=R, E=E, C=C, I=I, A=A, S=S)
 
 

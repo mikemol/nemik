@@ -6,7 +6,7 @@ Each guarantee is falsifiable: --check names the rule and the pair of items that
 """
 
 import pytest
-from rdflib import Graph, Literal
+from rdflib import Graph, Literal, URIRef
 
 from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri, workstream_uri
 from nemik.rank import Weights, inversion, main, policy_blocks, rank, unscored
@@ -26,7 +26,7 @@ def _wp(
     pos: int | None = None,
     vector: str | None = None,
     touches: tuple[str, ...] = (),
-):
+) -> URIRef:
     n = waypoint_uri("a", sym)
     g.add((n, OSLC_CM.state, STATE[status]))
     g.add((n, NEMIK.workstream, workstream_uri("a")))

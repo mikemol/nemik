@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-from rdflib import RDF, Graph, Literal
+from rdflib import RDF, Graph, Literal, URIRef
 from umbrella_cases import blocked_on_umbrellas
 
 from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri, workstream_uri
@@ -9,7 +9,7 @@ from nemik.check import shapes
 from nemik.shaclinc import findings
 
 
-def _wp(g, repo, sym, status="ready"):
+def _wp(g: Graph, repo: str, sym: str, status: str = "ready") -> URIRef:
     n = waypoint_uri(repo, sym)
     g.add((n, RDF.type, OSLC_CM.ChangeRequest))
     g.add((n, OSLC_CM.state, STATE[status]))

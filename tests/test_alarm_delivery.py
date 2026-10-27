@@ -5,7 +5,7 @@
 from nemik.wake import alarm_key, undelivered
 
 
-def _a(at, rid="", ref="life:W12"):
+def _a(at: str, rid: str = "", ref: str = "life:W12") -> dict[str, str]:
     return {"ref": ref, "recurrence_id": rid, "at": at, "trigger": "-PT15M"}
 
 
@@ -30,15 +30,9 @@ def test_occurrences_and_instants_are_distinct() -> None:
 def test_errors_are_never_marked_delivered() -> None:
     seen: dict = {}
     bad = {**_a(""), "error": "bad trigger"}
-    assert (
-        undelivered([bad], seen) == [bad]
-    )
-    assert (
-        undelivered([bad], seen) == [bad]
-    )
-    assert (
-        seen == {}
-    )
+    assert undelivered([bad], seen) == [bad]
+    assert undelivered([bad], seen) == [bad]
+    assert seen == {}
 
 
 def test_alarm_keys_cannot_collide_with_repo_keys() -> None:

@@ -1,12 +1,18 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-from rdflib import Graph, Literal
+from rdflib import Graph, Literal, URIRef
 
 from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri
 from nemik.rank import frontier
 
 
-def _wp(g, repo, sym, status="ready", blocked_on=()):
+def _wp(
+    g: Graph,
+    repo: str,
+    sym: str,
+    status: str = "ready",
+    blocked_on: list[str] | tuple[str, ...] = (),
+) -> URIRef:
     n = waypoint_uri(repo, sym)
     g.add((n, OSLC_CM.state, STATE[status]))
     for b in blocked_on:

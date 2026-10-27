@@ -178,9 +178,7 @@
   "no-untyped-def": 1
  },
  "tests/test_alarm_delivery.py": {
-  "misc": 28,
-  "no-untyped-call": 7,
-  "no-untyped-def": 1,
+  "misc": 13,
   "type-arg": 3
  },
  "tests/test_apischema.py": {
@@ -228,10 +226,6 @@
  "tests/test_containerfile.py": {
   "misc": 7
  },
- "tests/test_critical.py": {
-  "misc": 50,
-  "no-untyped-def": 1
- },
  "tests/test_deploy_manifest.py": {
   "explicit-any": 6,
   "misc": 83
@@ -256,9 +250,7 @@
   "no-untyped-def": 4
  },
  "tests/test_frontier.py": {
-  "misc": 74,
-  "no-untyped-call": 13,
-  "no-untyped-def": 1
+  "misc": 20
  },
  "tests/test_fruit.py": {
   "misc": 85,
@@ -272,7 +264,7 @@
  },
  "tests/test_guarantees.py": {
   "misc": 25,
-  "no-untyped-def": 3
+  "no-untyped-def": 2
  },
  "tests/test_history.py": {
   "misc": 87,
@@ -323,8 +315,7 @@
   "type-arg": 1
  },
  "tests/test_operator_salience.py": {
-  "misc": 33,
-  "no-untyped-def": 2
+  "misc": 9
  },
  "tests/test_pieces.py": {
   "explicit-any": 1,
@@ -365,9 +356,8 @@
   "misc": 17
  },
  "tests/test_score.py": {
-  "misc": 41,
-  "no-untyped-call": 16,
-  "no-untyped-def": 3
+  "misc": 6,
+  "no-untyped-def": 2
  },
  "tests/test_script_registries.py": {
   "misc": 14
@@ -415,10 +405,7 @@
   "type-arg": 1
  },
  "tests/test_umbrella_block.py": {
-  "misc": 83,
-  "no-untyped-call": 16,
-  "no-untyped-def": 1,
-  "operator": 4
+  "misc": 5
  },
  "tests/test_vtodo.py": {
   "misc": 74,

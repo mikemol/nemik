@@ -553,8 +553,6 @@
   "PLR2004": 4
  },
  "tests/test_alarm_delivery.py": {
-  "ANN001": 3,
-  "ANN202": 1,
   "D103": 4,
   "PLR2004": 1
  },
@@ -668,7 +666,6 @@
   "E501": 2
  },
  "tests/test_critical.py": {
-  "ANN202": 1,
   "D103": 7,
   "PLC0415": 7,
   "PLR2004": 4
@@ -726,8 +723,6 @@
   "S311": 1
  },
  "tests/test_frontier.py": {
-  "ANN001": 5,
-  "ANN202": 1,
   "D100": 1,
   "D103": 4,
   "N806": 14,
@@ -766,7 +761,6 @@
  },
  "tests/test_guarantees.py": {
   "ANN001": 2,
-  "ANN202": 1,
   "D103": 8,
   "E501": 1,
   "PLR0913": 1,
@@ -938,7 +932,6 @@
   "RUF069": 1
  },
  "tests/test_operator_salience.py": {
-  "ANN202": 2,
   "D103": 3,
   "PLC0415": 1
  },
@@ -1089,8 +1082,7 @@
   "RUF031": 4
  },
  "tests/test_score.py": {
-  "ANN001": 9,
-  "ANN201": 1,
+  "ANN001": 3,
   "D103": 5,
   "E741": 1,
   "N803": 6,
@@ -1180,8 +1172,6 @@
   "E501": 1
  },
  "tests/test_umbrella_block.py": {
-  "ANN001": 4,
-  "ANN202": 1,
   "D100": 1,
   "D103": 6,
   "PLC0415": 4
