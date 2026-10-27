@@ -34,20 +34,17 @@ def test_an_old_card_under_newer_ones_is_starved() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         queue = Path(tmp) / "a" / ".claude" / "paths-forward.json"
         queue.parent.mkdir(parents=True)
-        queue.write_text(
-            json.dumps(
-                {
-                    "version": 1,
-                    "project_root": "/x",
-                    "counter": 2,
-                    "residue": [],
-                    "waypoints": [
-                        _card("W1", "2026-08-01T00:00:00Z", "x"),
-                        _card("W2", "2026-10-10T00:00:00Z", "x"),
-                    ],
-                }
-            )
-        )
+        payload: dict[str, object] = {
+            "version": 1,
+            "project_root": "/x",
+            "counter": 2,
+            "residue": [],
+            "waypoints": [
+                _card("W1", "2026-08-01T00:00:00Z", "x"),
+                _card("W2", "2026-10-10T00:00:00Z", "x"),
+            ],
+        }
+        queue.write_text(json.dumps(payload))
         from rdflib import Graph
 
         g = Graph()

@@ -21,17 +21,14 @@ WITNESS = 'up{job="x"} == 0'
 def _unresolved(tmp_path: Path, cards: list[dict]) -> set[str]:
     queue = tmp_path / "r" / "paths-forward.json"
     queue.parent.mkdir(parents=True)
-    queue.write_text(
-        json.dumps(
-            {
-                "version": 1,
-                "project_root": "/x",
-                "counter": 9,
-                "residue": [],
-                "waypoints": cards,
-            }
-        )
-    )
+    payload: dict[str, object] = {
+        "version": 1,
+        "project_root": "/x",
+        "counter": 9,
+        "residue": [],
+        "waypoints": cards,
+    }
+    queue.write_text(json.dumps(payload))
     g: Graph = queue_graph("r", queue, frozenset({"r"}))
     annotate(g)
     return {

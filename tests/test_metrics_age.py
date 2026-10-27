@@ -25,17 +25,14 @@ def test_age_is_a_median_and_an_oldest_per_open_state(tmp_path: Path) -> None:
         _wp("W3", "ready", "2026-10-03T00:00:00Z"),  # 2
         _wp("W4", "done", "2026-09-01T00:00:00Z"),  # closed: not an age
     ]
-    path.write_text(
-        json.dumps(
-            {
-                "version": 1,
-                "project_root": "/x",
-                "counter": 4,
-                "residue": [],
-                "waypoints": waypoints,
-            }
-        )
-    )
+    payload: dict[str, object] = {
+        "version": 1,
+        "project_root": "/x",
+        "counter": 4,
+        "residue": [],
+        "waypoints": waypoints,
+    }
+    path.write_text(json.dumps(payload))
     g = queue_graph("a", path)
     lines = age_lines("a", g, datetime(2026, 10, 5, tzinfo=UTC))
     day = 86400

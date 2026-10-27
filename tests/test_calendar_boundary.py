@@ -55,25 +55,22 @@ def test_a_cal_blocker_serves_no_event(tmp_path) -> None:
 
     repo = tmp_path / "life" / ".claude"
     repo.mkdir(parents=True)
-    (repo / "paths-forward.json").write_text(
-        json.dumps(
+    payload: dict[str, object] = {
+        "version": 1,
+        "project_root": str(tmp_path / "life"),
+        "counter": 1,
+        "residue": [],
+        "waypoints": [
             {
-                "version": 1,
-                "project_root": str(tmp_path / "life"),
-                "counter": 1,
-                "residue": [],
-                "waypoints": [
-                    {
-                        "symbol": "W1",
-                        "title": "after the appointment",
-                        "status": "blocked",
-                        "blocked_on": ["cal:home/a@t"],
-                        "blocked_kind": "agent",
-                    }
-                ],
+                "symbol": "W1",
+                "title": "after the appointment",
+                "status": "blocked",
+                "blocked_on": ["cal:home/a@t"],
+                "blocked_kind": "agent",
             }
-        )
-    )
+        ],
+    }
+    (repo / "paths-forward.json").write_text(json.dumps(payload))
     m = Model(tmp_path)
     m.refresh()
     text = json.dumps(m.doc) + m.metrics().decode()

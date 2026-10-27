@@ -12,24 +12,21 @@ from nemik.work import blockers, main, plan, working
 
 def _queue(tmp_path: Path) -> Path:
     state = tmp_path / "q.json"
-    state.write_text(
-        json.dumps(
+    payload2: dict[str, object] = {
+        "waypoints": [
+            {"symbol": "W1", "status": "done"},
+            {"symbol": "W2", "status": "ready"},
+            {"symbol": "W3", "status": "blocked", "blocked_on": ["W1", "W9"]},
             {
-                "waypoints": [
-                    {"symbol": "W1", "status": "done"},
-                    {"symbol": "W2", "status": "ready"},
-                    {"symbol": "W3", "status": "blocked", "blocked_on": ["W1", "W9"]},
-                    {
-                        "symbol": "W4",
-                        "status": "blocked",
-                        "blocked_on": ["W2", "other:W7"],
-                    },
-                    {"symbol": "W5", "status": "blocked", "blocked_on": ["W1"]},
-                ],
-                "residue": [{"symbol": "W9"}],
-            }
-        )
-    )
+                "symbol": "W4",
+                "status": "blocked",
+                "blocked_on": ["W2", "other:W7"],
+            },
+            {"symbol": "W5", "status": "blocked", "blocked_on": ["W1"]},
+        ],
+        "residue": [{"symbol": "W9"}],
+    }
+    state.write_text(json.dumps(payload2))
     return state
 
 
@@ -69,5 +66,6 @@ def test_working_reads_the_queue_file(tmp_path: Path) -> None:
         {"symbol": "W2", "status": "ready"},
         {"symbol": "W3", "status": "working"},
     ]
-    state.write_text(json.dumps({"waypoints": waypoints}))
+    payload: dict[str, object] = {"waypoints": waypoints}
+    state.write_text(json.dumps(payload))
     assert working(state) == ["W1", "W3"]

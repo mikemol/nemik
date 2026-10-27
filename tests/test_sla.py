@@ -14,17 +14,14 @@ from nemik.check import survey
 def _write(root: Path, repo: str, waypoints: list[dict]) -> None:
     queue = root / repo / ".claude" / "paths-forward.json"
     queue.parent.mkdir(parents=True)
-    queue.write_text(
-        json.dumps(
-            {
-                "version": 1,
-                "project_root": "/x",
-                "counter": len(waypoints),
-                "residue": [],
-                "waypoints": waypoints,
-            }
-        )
-    )
+    payload: dict[str, object] = {
+        "version": 1,
+        "project_root": "/x",
+        "counter": len(waypoints),
+        "residue": [],
+        "waypoints": waypoints,
+    }
+    queue.write_text(json.dumps(payload))
 
 
 def _late(ticks: int, blocker_kind: str | None = None) -> list[tuple[str, str, str]]:

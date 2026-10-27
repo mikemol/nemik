@@ -38,17 +38,14 @@ def write_queue(root: Path, repo: str, *wps: dict) -> None:
     d = root / repo
     d.mkdir(parents=True)
     counter = max((int(w["symbol"][1:]) for w in wps), default=0)
-    (d / "paths-forward.json").write_text(
-        json.dumps(
-            {
-                "version": 1,
-                "project_root": f"/fixture/{repo}",
-                "counter": counter,
-                "waypoints": list(wps),
-                "residue": [],
-            }
-        )
-    )
+    payload: dict[str, object] = {
+        "version": 1,
+        "project_root": f"/fixture/{repo}",
+        "counter": counter,
+        "waypoints": list(wps),
+        "residue": [],
+    }
+    (d / "paths-forward.json").write_text(json.dumps(payload))
 
 
 def run(tool: str, root: Path, *argv: str) -> subprocess.CompletedProcess:

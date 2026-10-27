@@ -14,17 +14,14 @@ from nemik.calwrite import event_times, events, feed, uid
 
 def _queue(tmp_path: Path, repo: str, waypoints: list[dict]) -> Graph:
     path = tmp_path / f"{repo}.json"
-    path.write_text(
-        json.dumps(
-            {
-                "version": 1,
-                "project_root": "/x",
-                "counter": len(waypoints),
-                "residue": [],
-                "waypoints": waypoints,
-            }
-        )
-    )
+    payload: dict[str, object] = {
+        "version": 1,
+        "project_root": "/x",
+        "counter": len(waypoints),
+        "residue": [],
+        "waypoints": waypoints,
+    }
+    path.write_text(json.dumps(payload))
     return queue_graph(repo, path)
 
 

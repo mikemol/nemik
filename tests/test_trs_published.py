@@ -16,7 +16,8 @@ FLEET = Path(__file__).parent / "fixtures" / "fleet"
 def _build(tmp_path: Path, items: list[dict]) -> Path:
     tmp_path.mkdir(parents=True, exist_ok=True)
     withheld = tmp_path / "withheld.json"
-    withheld.write_text(json.dumps({"version": 1, "as_of": "x", "items": items}))
+    payload: dict[str, object] = {"version": 1, "as_of": "x", "items": items}
+    withheld.write_text(json.dumps(payload))
     out = tmp_path / "out"
     build_static(FLEET, out, withheld)
     return out

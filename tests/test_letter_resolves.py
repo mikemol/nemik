@@ -13,25 +13,22 @@ from nemik.check import survey
 def _root(tmp_path: Path, evidence: str) -> Path:
     queue = tmp_path / "a" / ".claude" / "paths-forward.json"
     queue.parent.mkdir(parents=True)
-    queue.write_text(
-        json.dumps(
+    payload: dict[str, object] = {
+        "version": 1,
+        "project_root": "/x",
+        "counter": 1,
+        "residue": [],
+        "waypoints": [
             {
-                "version": 1,
-                "project_root": "/x",
-                "counter": 1,
-                "residue": [],
-                "waypoints": [
-                    {
-                        "symbol": "W1",
-                        "title": "t",
-                        "status": "ready",
-                        "evidence": evidence,
-                        "next_bounded_step": "do it",
-                    }
-                ],
+                "symbol": "W1",
+                "title": "t",
+                "status": "ready",
+                "evidence": evidence,
+                "next_bounded_step": "do it",
             }
-        )
-    )
+        ],
+    }
+    queue.write_text(json.dumps(payload))
     (tmp_path / "a" / "inbox").mkdir()
     return tmp_path
 

@@ -125,28 +125,25 @@ def test_adapter_carries_recurrence_and_completed_occurrences(tmp_path) -> None:
     from nemik.adapter import NEMIK, queue_graph, waypoint_uri
 
     q = tmp_path / "q.json"
-    q.write_text(
-        json.dumps(
+    payload: dict[str, object] = {
+        "version": 1,
+        "project_root": "/x",
+        "counter": 1,
+        "residue": [],
+        "waypoints": [
             {
-                "version": 1,
-                "project_root": "/x",
-                "counter": 1,
-                "residue": [],
-                "waypoints": [
-                    {
-                        "symbol": "W30",
-                        "title": "t",
-                        "status": "ready",
-                        "dtstart": "20261005",
-                        "rrule": "FREQ=WEEKLY",
-                        "exdates": ["20261012"],
-                        "occurrences": {"20261019": "20261019T230000Z"},
-                        "alarms": ["-PT1H"],
-                    }
-                ],
+                "symbol": "W30",
+                "title": "t",
+                "status": "ready",
+                "dtstart": "20261005",
+                "rrule": "FREQ=WEEKLY",
+                "exdates": ["20261012"],
+                "occurrences": {"20261019": "20261019T230000Z"},
+                "alarms": ["-PT1H"],
             }
-        )
-    )
+        ],
+    }
+    q.write_text(json.dumps(payload))
     g = queue_graph("life", q)
     n = waypoint_uri("life", "W30")
     assert str(g.value(n, NEMIK.rrule)) == "FREQ=WEEKLY"

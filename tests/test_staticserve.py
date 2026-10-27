@@ -20,11 +20,13 @@ from nemik.staticserve import handler, resolve, snapshot
 def _publish(root: Path) -> None:
     (root / "graph").mkdir(parents=True)
     (root / "index.html").write_text("<html>view</html>")
-    piece = json.dumps({"nodes": []})
+    payload2: dict[str, object] = {"nodes": []}
+    piece = json.dumps(payload2)
     (root / "graph" / "r.json").write_text(piece)
     (root / "catalog.ttl").write_text("# turtle")
     digest = hashlib.sha256(piece.encode()).hexdigest()
-    (root / "hashes.json").write_text(json.dumps({"graph/r.json": digest}))
+    payload: dict[str, object] = {"graph/r.json": digest}
+    (root / "hashes.json").write_text(json.dumps(payload))
 
 
 @pytest.fixture

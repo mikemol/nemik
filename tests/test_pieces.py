@@ -14,7 +14,8 @@ FLEET_FIXTURE = Path(__file__).parent / "fixtures" / "fleet"
 
 def test_published_pieces_assemble_to_the_published_graph(tmp_path: Path) -> None:
     withheld = tmp_path / "withheld.json"
-    withheld.write_text(json.dumps({"version": 1, "as_of": "x", "items": []}))
+    payload: dict[str, object] = {"version": 1, "as_of": "x", "items": []}
+    withheld.write_text(json.dumps(payload))
     out = tmp_path / "out"
     build_static(FLEET_FIXTURE, out, withheld)
     whole = json.loads((out / "graph.json").read_text())

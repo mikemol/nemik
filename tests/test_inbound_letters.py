@@ -32,17 +32,14 @@ def test_the_adapter_reads_letter_paths_from_evidence_and_the_next_step(
         ".claude/letters/W1-note.md and a bare inbox word",
         "next_bounded_step": "read life/inbox/2026-10-09-x.md then act",
     }
-    path.write_text(
-        json.dumps(
-            {
-                "version": 1,
-                "project_root": "/x",
-                "counter": 1,
-                "residue": [],
-                "waypoints": [waypoint],
-            }
-        )
-    )
+    payload2: dict[str, object] = {
+        "version": 1,
+        "project_root": "/x",
+        "counter": 1,
+        "residue": [],
+        "waypoints": [waypoint],
+    }
+    path.write_text(json.dumps(payload2))
     g = queue_graph("a", path)
     found = {str(o) for o in g.objects(waypoint_uri("a", "W1"), NEMIK.letter)}
     assert found == {
@@ -61,17 +58,14 @@ def test_the_adapter_reads_mtools_attachments_as_cited_letters(tmp_path: Path) -
         "status": "ready",
         "attachments": [{"path": ".claude/letters/W1-ask.md", "sha256": "a" * 64}],
     }
-    path.write_text(
-        json.dumps(
-            {
-                "version": 1,
-                "project_root": "/x",
-                "counter": 1,
-                "residue": [],
-                "waypoints": [waypoint],
-            }
-        )
-    )
+    payload: dict[str, object] = {
+        "version": 1,
+        "project_root": "/x",
+        "counter": 1,
+        "residue": [],
+        "waypoints": [waypoint],
+    }
+    path.write_text(json.dumps(payload))
     g = queue_graph("a", path)
     found = {str(o) for o in g.objects(waypoint_uri("a", "W1"), NEMIK.letter)}
     assert found == {".claude/letters/W1-ask.md"}

@@ -17,17 +17,14 @@ import installed
 def _queue(root, repo, wps):
     d = root / repo / ".claude"
     d.mkdir(parents=True)
-    (d / "paths-forward.json").write_text(
-        json.dumps(
-            {
-                "version": 1,
-                "project_root": str(root / repo),
-                "counter": 9,
-                "waypoints": wps,
-                "residue": [],
-            }
-        )
-    )
+    payload: dict[str, object] = {
+        "version": 1,
+        "project_root": str(root / repo),
+        "counter": 9,
+        "waypoints": wps,
+        "residue": [],
+    }
+    (d / "paths-forward.json").write_text(json.dumps(payload))
 
 
 def _wp(sym, status="ready", **kw):

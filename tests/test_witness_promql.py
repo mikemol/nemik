@@ -91,16 +91,13 @@ def test_wait_and_the_queue_choose_the_same_evaluator() -> None:
 def test_the_queue_scan_finds_a_bare_promql_witness(tmp_path: Path) -> None:
     queue = tmp_path / "luthen-observability" / "paths-forward.json"
     queue.parent.mkdir()
-    queue.write_text(
-        json.dumps(
-            {
-                "waypoints": [
-                    {"symbol": "W1054", "status": "blocked", "witness": EXECUTOR_LOAD},
-                    {"symbol": "W2", "status": "done", "witness": "up == 0"},
-                ]
-            }
-        )
-    )
+    payload: dict[str, object] = {
+        "waypoints": [
+            {"symbol": "W1054", "status": "blocked", "witness": EXECUTOR_LOAD},
+            {"symbol": "W2", "status": "done", "witness": "up == 0"},
+        ]
+    }
+    queue.write_text(json.dumps(payload))
     found = open_witnesses(tmp_path)
     assert [(repo, sym, query) for repo, _, sym, query, _lang in found] == [
         ("luthen-observability", "W1054", EXECUTOR_LOAD)

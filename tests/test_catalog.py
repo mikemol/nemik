@@ -19,7 +19,8 @@ def test_the_catalog_resolves_to_every_repos_tracked_resource_set(
 ) -> None:
     """The catalog names each repo's tracked resource set."""
     withheld = tmp_path / "withheld.json"
-    withheld.write_text(json.dumps({"version": 1, "as_of": "x", "items": []}))
+    payload: dict[str, object] = {"version": 1, "as_of": "x", "items": []}
+    withheld.write_text(json.dumps(payload))
     out = tmp_path / "out"
     build_static(FLEET, out, withheld)
     cat = out / "catalog.ttl"

@@ -115,17 +115,14 @@ def test_runner_applies_only_holding_witnesses(tmp_path, monkeypatch, capsys) ->
             "witness": f'input.file["{tmp_path}/nope"].exists',
         },
     ]
-    state.write_text(
-        json.dumps(
-            {
-                "version": 1,
-                "project_root": str(tmp_path / "r"),
-                "counter": 2,
-                "waypoints": wps,
-                "residue": [],
-            }
-        )
-    )
+    payload2: dict[str, object] = {
+        "version": 1,
+        "project_root": str(tmp_path / "r"),
+        "counter": 2,
+        "waypoints": wps,
+        "residue": [],
+    }
+    state.write_text(json.dumps(payload2))
     import installed  # nemik:W97: as installed, so --apply reaches the installed mikemol-paths-forward
 
     r = installed.run("nemik-witnesses", "--root", str(tmp_path), "--apply")
@@ -212,17 +209,14 @@ def test_apply_writes_letters_to_waiting_repos(tmp_path, monkeypatch, capsys) ->
         d = tmp_path / repo / ".claude"
         d.mkdir(parents=True)
         (tmp_path / repo / "inbox").mkdir()
-        (d / "paths-forward.json").write_text(
-            json.dumps(
-                {
-                    "version": 1,
-                    "project_root": str(tmp_path / repo),
-                    "counter": 9,
-                    "waypoints": wps,
-                    "residue": [],
-                }
-            )
-        )
+        payload: dict[str, object] = {
+            "version": 1,
+            "project_root": str(tmp_path / repo),
+            "counter": 9,
+            "waypoints": wps,
+            "residue": [],
+        }
+        (d / "paths-forward.json").write_text(json.dumps(payload))
 
     queue(
         "a",

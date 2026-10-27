@@ -11,41 +11,38 @@ from nemik.wake import fired_alarms
 
 def _graph(tmp_path):
     q = tmp_path / "q.json"
-    q.write_text(
-        json.dumps(
+    payload2: dict[str, object] = {
+        "version": 1,
+        "project_root": "/x",
+        "counter": 3,
+        "residue": [],
+        "waypoints": [
             {
-                "version": 1,
-                "project_root": "/x",
-                "counter": 3,
-                "residue": [],
-                "waypoints": [
-                    {
-                        "symbol": "W9",
-                        "title": "cpr",
-                        "status": "ready",
-                        "due": "20261001T220000Z",
-                        "alarms": ["RELATED=END:-PT2H"],
-                    },
-                    {
-                        "symbol": "W30",
-                        "title": "drill",
-                        "status": "ready",
-                        "dtstart": "TZID=America/Detroit:20261005T180000",
-                        "rrule": "FREQ=WEEKLY;BYDAY=MO",
-                        "occurrences": {"TZID=America/Detroit:20261012T180000": "x"},
-                        "alarms": ["-PT15M"],
-                    },
-                    {
-                        "symbol": "W1",
-                        "title": "closed",
-                        "status": "done",
-                        "due": "20261001T220000Z",
-                        "alarms": ["RELATED=END:-PT2H"],
-                    },
-                ],
-            }
-        )
-    )
+                "symbol": "W9",
+                "title": "cpr",
+                "status": "ready",
+                "due": "20261001T220000Z",
+                "alarms": ["RELATED=END:-PT2H"],
+            },
+            {
+                "symbol": "W30",
+                "title": "drill",
+                "status": "ready",
+                "dtstart": "TZID=America/Detroit:20261005T180000",
+                "rrule": "FREQ=WEEKLY;BYDAY=MO",
+                "occurrences": {"TZID=America/Detroit:20261012T180000": "x"},
+                "alarms": ["-PT15M"],
+            },
+            {
+                "symbol": "W1",
+                "title": "closed",
+                "status": "done",
+                "due": "20261001T220000Z",
+                "alarms": ["RELATED=END:-PT2H"],
+            },
+        ],
+    }
+    q.write_text(json.dumps(payload2))
     return queue_graph("life", q)
 
 
@@ -83,7 +80,8 @@ def test_alarms_nudge_delivers_each_firing_once(tmp_path, capsys) -> None:
     from nemik.wake import main
 
     g, state = _graph(tmp_path), tmp_path / "nudges.json"
-    state.write_text(json.dumps({"life": 1.0}))  # a repo nudge already recorded there
+    payload: dict[str, object] = {"life": 1.0}
+    state.write_text(json.dumps(payload))  # a repo nudge already recorded there
     argv = [
         "--alarms",
         "--nudge",

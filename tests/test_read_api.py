@@ -22,7 +22,8 @@ FLEET = Path(__file__).parent / "fixtures" / "fleet"
 def built(tmp_path_factory: pytest.TempPathFactory) -> Path:
     tmp = tmp_path_factory.mktemp("static")
     withheld = tmp / "withheld.json"
-    withheld.write_text(json.dumps({"version": 1, "as_of": "x", "items": []}))
+    payload: dict[str, object] = {"version": 1, "as_of": "x", "items": []}
+    withheld.write_text(json.dumps(payload))
     out = tmp / "out"
     build_static(FLEET, out, withheld)
     return out

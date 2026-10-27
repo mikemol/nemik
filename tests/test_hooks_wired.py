@@ -43,9 +43,12 @@ def test_a_hook_run_with_a_session_start_payload_exits_zero(tmp_path) -> None:
         "CLAUDE_PROJECT_DIR": str(tmp_path),
         "TMPDIR": str(tmp_path),
     }
-    payload = json.dumps(
-        {"hook_event_name": "SessionStart", "session_id": "t", "cwd": str(tmp_path)}
-    )
+    payload2: dict[str, object] = {
+        "hook_event_name": "SessionStart",
+        "session_id": "t",
+        "cwd": str(tmp_path),
+    }
+    payload = json.dumps(payload2)
     for hook in HOOKS:
         r = subprocess.run(
             installed.script(hook),

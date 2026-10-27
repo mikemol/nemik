@@ -28,14 +28,11 @@ BIB = """@misc{a1,
 
 def test_each_bad_pointer_is_named(tmp_path) -> None:
     (tmp_path / "r" / ".claude").mkdir(parents=True)
-    (tmp_path / "r" / ".claude" / "paths-forward.json").write_text(
-        json.dumps(
-            {
-                "waypoints": [{"symbol": "W1", "status": "done"}],
-                "residue": [{"symbol": "W2"}],
-            }
-        )
-    )
+    payload: dict[str, object] = {
+        "waypoints": [{"symbol": "W1", "status": "done"}],
+        "residue": [{"symbol": "W2"}],
+    }
+    (tmp_path / "r" / ".claude" / "paths-forward.json").write_text(json.dumps(payload))
     floor = tmp_path / "floor"
     floor.mkdir()
     (floor / "asks.bib").write_text(BIB)

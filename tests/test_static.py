@@ -70,7 +70,8 @@ def test_static_build_end_to_end(tmp_path) -> None:
         )
     assert e.value.code == 2 and not out.exists()
     wl = tmp_path / "withheld.json"
-    wl.write_text(json.dumps({"version": 1, "as_of": "x", "items": []}))
+    payload: dict[str, object] = {"version": 1, "as_of": "x", "items": []}
+    wl.write_text(json.dumps(payload))
     main(["--root", str(fleet), "--static", str(out), "--withheld", str(wl)])
     names = {p.relative_to(out).as_posix() for p in out.rglob("*") if p.is_file()}
     assert {"index.html", "graph.json", "wake.json"} <= names and any(

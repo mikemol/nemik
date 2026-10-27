@@ -74,25 +74,22 @@ def test_table_refuses_a_default_outside_its_order() -> None:
 
 def test_adapter_carries_the_vector_as_written(tmp_path) -> None:
     q = tmp_path / "q.json"
-    q.write_text(
-        json.dumps(
+    payload: dict[str, object] = {
+        "version": 1,
+        "project_root": "/x",
+        "counter": 1,
+        "residue": [],
+        "waypoints": [
             {
-                "version": 1,
-                "project_root": "/x",
-                "counter": 1,
-                "residue": [],
-                "waypoints": [
-                    {
-                        "symbol": "W1",
-                        "title": "t",
-                        "status": "ready",
-                        "vector": vec(R="H", S="C"),
-                        "vector_source": "agent",
-                    }
-                ],
+                "symbol": "W1",
+                "title": "t",
+                "status": "ready",
+                "vector": vec(R="H", S="C"),
+                "vector_source": "agent",
             }
-        )
-    )
+        ],
+    }
+    q.write_text(json.dumps(payload))
     g = queue_graph("r", q)
     n = waypoint_uri("r", "W1")
     assert str(g.value(n, NEMIK.vector)) == vec(R="H", S="C")

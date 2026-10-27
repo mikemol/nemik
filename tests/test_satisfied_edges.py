@@ -23,17 +23,14 @@ def test_done_children_satisfy_their_edges(tmp_path: Path) -> None:
         {"symbol": "W2", "title": "done child", "status": "done", "enables": ["W1"]},
         {"symbol": "W3", "title": "open child", "status": "ready", "enables": ["W1"]},
     ]
-    (d / "paths-forward.json").write_text(
-        json.dumps(
-            {
-                "version": 1,
-                "project_root": "/x",
-                "counter": 3,
-                "waypoints": wps,
-                "residue": [],
-            }
-        )
-    )
+    payload: dict[str, object] = {
+        "version": 1,
+        "project_root": "/x",
+        "counter": 3,
+        "waypoints": wps,
+        "residue": [],
+    }
+    (d / "paths-forward.json").write_text(json.dumps(payload))
     m = Model(tmp_path)
     m.refresh()
     out = json.loads(m.payload)

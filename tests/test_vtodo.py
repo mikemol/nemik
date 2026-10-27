@@ -57,9 +57,7 @@ def test_calendar_is_crlf_folded_and_deterministic() -> None:
     text = calendar(vtodos(ASKS, {"life", "aeternum"}))
     assert text == calendar(vtodos(ASKS, {"life", "aeternum"}))
     assert text.startswith("BEGIN:VCALENDAR\r\nVERSION:2.0\r\n")
-    assert text.endswith(
-        "END:VCALENDAR\r\n"
-    )
+    assert text.endswith("END:VCALENDAR\r\n")
     for line in text.split("\r\n"):
         assert len(line.encode()) <= 75
     assert text.count("BEGIN:VTODO") == 2
@@ -83,25 +81,22 @@ def test_nemik_tasks_feeds_the_helper_and_returns_its_exit_code(tmp_path) -> Non
 
     q = tmp_path / "root" / "life" / ".claude"
     q.mkdir(parents=True)
-    (q / "paths-forward.json").write_text(
-        json.dumps(
+    payload2: dict[str, object] = {
+        "version": 1,
+        "project_root": "/x",
+        "counter": 1,
+        "residue": [],
+        "waypoints": [
             {
-                "version": 1,
-                "project_root": "/x",
-                "counter": 1,
-                "residue": [],
-                "waypoints": [
-                    {
-                        "symbol": "W9",
-                        "title": "cpr",
-                        "status": "blocked",
-                        "blocked_kind": "human",
-                        "blocked_on": ["operator: act attend the class"],
-                    }
-                ],
+                "symbol": "W9",
+                "title": "cpr",
+                "status": "blocked",
+                "blocked_kind": "human",
+                "blocked_on": ["operator: act attend the class"],
             }
-        )
-    )
+        ],
+    }
+    (q / "paths-forward.json").write_text(json.dumps(payload2))
     opt = tmp_path / "ics.toml"
     opt.write_text('repos = ["*"]\n')
     helper = tmp_path / "helper"
@@ -199,25 +194,22 @@ def test_apply_reruns_while_the_helper_defers_a_parent_then_converges(tmp_path) 
 
     q = tmp_path / "root" / "life" / ".claude"
     q.mkdir(parents=True)
-    (q / "paths-forward.json").write_text(
-        json.dumps(
+    payload: dict[str, object] = {
+        "version": 1,
+        "project_root": "/x",
+        "counter": 1,
+        "residue": [],
+        "waypoints": [
             {
-                "version": 1,
-                "project_root": "/x",
-                "counter": 1,
-                "residue": [],
-                "waypoints": [
-                    {
-                        "symbol": "W9",
-                        "title": "cpr",
-                        "status": "blocked",
-                        "blocked_kind": "human",
-                        "blocked_on": ["operator: act attend the class"],
-                    }
-                ],
+                "symbol": "W9",
+                "title": "cpr",
+                "status": "blocked",
+                "blocked_kind": "human",
+                "blocked_on": ["operator: act attend the class"],
             }
-        )
-    )
+        ],
+    }
+    (q / "paths-forward.json").write_text(json.dumps(payload))
     opt = tmp_path / "ics.toml"
     opt.write_text('repos = ["*"]\n')
     runs = tmp_path / "runs"
@@ -242,18 +234,10 @@ def test_apply_reruns_while_the_helper_defers_a_parent_then_converges(tmp_path) 
         "0",
     ]
     r = installed.run("nemik-tasks", *base, "--apply")
-    assert (
-        r.returncode == 0
-    )
-    assert (
-        "RETRY 1" in r.stdout
-    )
-    assert (
-        "APPLIED" in r.stdout
-    )
-    assert (
-        runs.read_text() == "2"
-    )
+    assert r.returncode == 0
+    assert "RETRY 1" in r.stdout
+    assert "APPLIED" in r.stdout
+    assert runs.read_text() == "2"
     runs.unlink()
     r = installed.run(
         "nemik-tasks", *base

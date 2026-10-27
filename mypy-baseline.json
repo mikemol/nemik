@@ -174,7 +174,7 @@
   "misc": 30
  },
  "tests/test_alarm.py": {
-  "misc": 17,
+  "misc": 5,
   "no-untyped-def": 1
  },
  "tests/test_alarm_delivery.py": {
@@ -184,7 +184,7 @@
   "type-arg": 3
  },
  "tests/test_apischema.py": {
-  "misc": 42,
+  "misc": 39,
   "type-arg": 2
  },
  "tests/test_apply_witness.py": {
@@ -203,7 +203,7 @@
   "type-arg": 1
  },
  "tests/test_calendar_boundary.py": {
-  "misc": 14,
+  "misc": 6,
   "no-untyped-def": 1
  },
  "tests/test_calendars.py": {
@@ -212,11 +212,8 @@
   "type-arg": 3
  },
  "tests/test_calwrite.py": {
-  "misc": 28,
+  "misc": 25,
   "type-arg": 1
- },
- "tests/test_catalog.py": {
-  "misc": 3
  },
  "tests/test_certify.py": {
   "misc": 17
@@ -240,7 +237,7 @@
   "misc": 83
  },
  "tests/test_deterministic.py": {
-  "misc": 31,
+  "misc": 28,
   "no-untyped-call": 6,
   "no-untyped-def": 3
  },
@@ -250,7 +247,7 @@
   "no-untyped-def": 3
  },
  "tests/test_floorasks.py": {
-  "misc": 14,
+  "misc": 7,
   "no-untyped-def": 1
  },
  "tests/test_flow_cache.py": {
@@ -269,7 +266,7 @@
   "no-untyped-def": 1
  },
  "tests/test_gate.py": {
-  "misc": 186,
+  "misc": 183,
   "no-untyped-def": 1,
   "type-arg": 3
  },
@@ -283,7 +280,7 @@
   "type-arg": 2
  },
  "tests/test_hooks_wired.py": {
-  "misc": 12,
+  "misc": 11,
   "no-untyped-def": 1
  },
  "tests/test_ics_reader.py": {
@@ -294,14 +291,11 @@
   "misc": 14
  },
  "tests/test_inbound_letters.py": {
-  "misc": 17
+  "misc": 7
  },
  "tests/test_layout.py": {
   "misc": 270,
   "no-untyped-def": 1
- },
- "tests/test_letter_resolves.py": {
-  "misc": 6
  },
  "tests/test_lifecycle_scheme.py": {
   "misc": 9,
@@ -318,7 +312,7 @@
   "type-arg": 1
  },
  "tests/test_metrics_age.py": {
-  "misc": 10,
+  "misc": 7,
   "type-arg": 1
  },
  "tests/test_mpxj.py": {
@@ -334,7 +328,7 @@
  },
  "tests/test_pieces.py": {
   "explicit-any": 1,
-  "misc": 64
+  "misc": 61
  },
  "tests/test_pieces_corpus.py": {
   "misc": 44
@@ -343,7 +337,7 @@
   "misc": 22
  },
  "tests/test_published_valid.py": {
-  "misc": 11
+  "misc": 8
  },
  "tests/test_rank.py": {
   "misc": 58,
@@ -356,7 +350,7 @@
   "misc": 78
  },
  "tests/test_read_api.py": {
-  "misc": 20,
+  "misc": 17,
   "no-untyped-call": 1,
   "no-untyped-def": 1
  },
@@ -368,10 +362,10 @@
   "type-arg": 1
  },
  "tests/test_satisfied_edges.py": {
-  "misc": 20
+  "misc": 17
  },
  "tests/test_score.py": {
-  "misc": 44,
+  "misc": 41,
   "no-untyped-call": 16,
   "no-untyped-def": 3
  },
@@ -397,21 +391,18 @@
   "misc": 11
  },
  "tests/test_sla.py": {
-  "misc": 11,
+  "misc": 8,
   "type-arg": 1
  },
- "tests/test_starved.py": {
-  "misc": 5
- },
  "tests/test_static.py": {
-  "misc": 30,
+  "misc": 27,
   "no-untyped-def": 3
  },
  "tests/test_static_view.py": {
   "misc": 1
  },
  "tests/test_staticserve.py": {
-  "misc": 5
+  "misc": 1
  },
  "tests/test_test_inputs.py": {
   "misc": 19
@@ -420,7 +411,7 @@
   "misc": 8
  },
  "tests/test_trs_published.py": {
-  "misc": 7,
+  "misc": 6,
   "type-arg": 1
  },
  "tests/test_umbrella_block.py": {
@@ -430,7 +421,7 @@
   "operator": 4
  },
  "tests/test_vtodo.py": {
-  "misc": 90,
+  "misc": 74,
   "no-untyped-def": 3,
   "type-arg": 1
  },
@@ -439,7 +430,7 @@
   "misc": 12
  },
  "tests/test_wake_alarms.py": {
-  "misc": 82,
+  "misc": 65,
   "no-untyped-call": 5,
   "no-untyped-def": 6
  },
@@ -448,7 +439,7 @@
   "type-arg": 1
  },
  "tests/test_weather.py": {
-  "misc": 28,
+  "misc": 25,
   "no-untyped-call": 2,
   "no-untyped-def": 2
  },
@@ -461,15 +452,15 @@
   "no-untyped-def": 7
  },
  "tests/test_witness_party.py": {
-  "misc": 14,
+  "misc": 11,
   "type-arg": 2
  },
  "tests/test_witness_promql.py": {
   "explicit-any": 2,
-  "misc": 26
+  "misc": 21
  },
  "tests/test_witnesses.py": {
-  "misc": 113,
+  "misc": 107,
   "no-untyped-call": 3,
   "no-untyped-def": 11,
   "type-arg": 1
@@ -479,7 +470,7 @@
   "no-untyped-def": 2
  },
  "tests/test_work.py": {
-  "misc": 20,
+  "misc": 2,
   "no-untyped-def": 1
  },
  "tests/test_workflows.py": {
