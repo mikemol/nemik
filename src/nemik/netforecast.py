@@ -102,37 +102,74 @@ def sweep_alerts(
     return max(0, len(nets) - past), alerts
 
 
-def sweep_lines(
+def sweep_report(
     judged: int,
     alerts: list[tuple[str, str]],
-    minutes: int,
-    days: int,
+    span: str,
     limit: int,
+    label: str = "",
 ) -> list[str]:
-    """Write a sweep's count and its alerted windows, in at most `limit` lines (W1152).
+    """Write a sweep's count, its directions and its alerted windows (nemik:W1152, W1153).
 
     Args:
         judged: How many windows were judged.
         alerts: Each alerted window's label (its end time) and direction, oldest first.
-        minutes: The windows' length in minutes.
-        days: The span swept, in days.
+        span: What was swept, as '45 minutes over 7 days'.
         limit: The most lines to give.
+        label: What kind of prediction judged them, put before the count.
 
     Returns:
-        'swept n windows of M minutes over D days: alerted k of n', then one line per alerted
-        window, and a tail line for those that did not fit.
+        'swept n windows of SPAN: alerted k of n (direction count, ...)', then one line per
+        alerted window, and a tail line for those that did not fit. The count is printed when it
+        is zero, and the parenthesis then is left off.
 
     """
+    ways = sorted({way for _, way in alerts})
+    tally = ", ".join(f"{way} {sum(1 for _, w in alerts if w == way)}" for way in ways)
     head = (
-        f"swept {judged} windows of {minutes} minutes over {days} days: "
-        f"alerted {len(alerts)} of {judged}"
+        f"{label}swept {judged} windows of {span}: alerted {len(alerts)} of {judged}"
+        + (f" ({tally})" if alerts else "")
     )
     room = limit - 1
     shown = alerts if len(alerts) <= room else alerts[: room - 1]
-    lines = [head, *(f"  {label}: {direction}" for label, direction in shown)]
+    lines = [head, *(f"  {when}: {way}" for when, way in shown)]
     if len(shown) < len(alerts):
         lines.append(f"  +{len(alerts) - len(shown)} more alerted")
     return lines
+
+
+def trailing_alerts(
+    nets: list[int], span: int, past: int
+) -> tuple[int, list[tuple[int, str]]]:
+    """Judge a run of windows, each predicted from the `span` windows just before it (W1153).
+
+    A window's prediction is the mean net of the `span` windows before it (a week of them, for
+    windows that divide the day), so it looks ahead of nothing and follows the fleet as the
+    week goes, where sweep_alerts predicts every window from the days before the first.
+
+    Args:
+        nets: The net of each window, oldest first.
+        span: How many windows before one its prediction is the mean of.
+        past: How many earlier windows' misses its baseline is learned from; each of those is
+            judged against its own trailing prediction, not this window's.
+
+    Returns:
+        (the windows judged, each alerted one's index with its direction), as sweep_alerts does.
+        A window is judged once `span` plus `past` windows precede it; the count may be zero.
+
+    """
+    first = span + past
+    alerts: list[tuple[int, str]] = []
+    for at in range(first, len(nets)):
+        predicted = sum(nets[at - span : at]) / span
+        earlier = [
+            shortfall(sum(nets[j - span : j]) / span, nets[j])
+            for j in range(at - past, at)
+        ]
+        if alert_for(predicted, nets[at], earlier):
+            worse = shortfall(predicted, nets[at]) > 0
+            alerts.append((at, "fleet wandering" if worse else "model wrong"))
+    return max(0, len(nets) - first), alerts
 
 
 def replay_row(

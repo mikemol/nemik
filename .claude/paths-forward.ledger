@@ -2740,3 +2740,10 @@
 2026-10-27T06:39:55Z  status W1091 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-27T06:40:31Z  tick  W1153 minted    -         "Trailing predictor for the net forecast, so each window is predicted from the days just before it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W563
 2026-10-27T07:01:17Z  status W846 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T07:09:57Z  status W1152 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T07:09:58Z  status W1150 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T07:09:58Z  status W846 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T07:10:33Z  status W1153 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T07:19:16Z  tick  W1153 advanced  collapse  "stack557 landed (c4f0e23 W846 test_wcag_render via the recording harness, 073489d W1152 --sweep, 50a7c02 W1150 tools/namespaces.py); linux-sources and github-8f told. Five edge-answer cards closed (W880, W1065, W1066, W1068, W1091). stack558 in the gate: W1153 trailing predictor, counts beside the fixed one (31 of 224 vs 40 of 224, directions flip to fleet wandering), sent to github-8f. Next: W1149 (needs a public git helper in history.py), manifests for W1050/W1070/W1108/W1111, W1048/W1049. [reason: W1153 is in the gate (stack558); W1149 edits history.py which it carries (cites W1149)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T07:41:15Z  interrupt W1154 minted    -         "endpoint.py narrows the store's state and address to strings and test_check_committed types its changed queue, so mypy falls 5638 to 5636 (paydown)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
+2026-10-27T07:41:25Z  status W1154 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

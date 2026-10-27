@@ -35,7 +35,10 @@ def test_a_sweep_of_no_repos_judges_every_window_and_alerts_on_none() -> None:
     """A quiet fleet: the count is printed, zero alerts included, never left out."""
     end = datetime(2026, 10, 27, 6, 0, tzinfo=UTC)
     lines = sweep_text("-45m", 7, [], {}, end)
-    assert lines == ["swept 224 windows of 45 minutes over 7 days: alerted 0 of 224"]
+    assert lines == [
+        "fixed prediction: swept 224 windows of 45 minutes over 7 days: alerted 0 of 224",
+        "trailing prediction: swept 224 windows of 45 minutes over 7 days: alerted 0 of 224",
+    ]
 
 
 def test_a_replay_of_no_repos_predicts_nothing_and_nets_nothing() -> None:

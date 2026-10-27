@@ -35,7 +35,7 @@ from nemik.climate import (
 )
 from nemik.forecastshingle import HORIZONS, issue_blocked, issue_in_line, shingle_rows
 from nemik.histdocs import encode, file_name
-from nemik.netforecast import replay_row, sweep_alerts, sweep_lines
+from nemik.netforecast import replay_row, sweep_alerts, sweep_report, trailing_alerts
 from nemik.verify import lead_report, score_shingle, shingle_pairs
 from nemik.wake import read_liveness
 from nemik.where import matches, parse
@@ -2071,15 +2071,48 @@ def _series_nets(
     return nets
 
 
+def _daily_before(names: list[str], dirs: dict[str, Path], at: datetime) -> list[int]:
+    """Count the fleet's net over each of the REPLAY_DAYS days before an instant (W1153).
+
+    Returns:
+        The daily nets, oldest first.
+
+    """
+    edges = [
+        datetime.fromtimestamp(at.timestamp() - 86400 * d, UTC)
+        for d in range(REPLAY_DAYS, -1, -1)
+    ]
+    return _series_nets(names, dirs, edges)
+
+
+def _ends(
+    edges: list[datetime], skip: int, alerts: list[tuple[int, str]]
+) -> list[tuple[str, str]]:
+    """Label each alerted window with the time it ends (W1152).
+
+    Args:
+        edges: The instants between the windows.
+        skip: How many windows of the series the alerts' indices leave out.
+        alerts: Each alerted window's index and direction.
+
+    Returns:
+        (end time, direction) for each.
+
+    """
+    stamp = "%Y-%m-%dT%H:%MZ"
+    return [(edges[skip + at + 1].strftime(stamp), way) for at, way in alerts]
+
+
 def sweep_text(
     window: str, days: int, names: list[str], dirs: dict[str, Path], end: datetime
 ) -> list[str]:
     """Sweep the windows of the last `days` days, each judged by the ones before it (W1152).
 
-    The prediction is the mean daily net of the REPLAY_DAYS before the first window, so it
-    looks ahead of none of them; each window's baseline is learned from the REPLAY_WINDOWS
-    windows just before it. The alerts are reported as a count of the windows judged, zero
-    included, and each with its end time and direction. Only committed history is swept.
+    Judged twice, side by side (W1153). The fixed prediction is the mean daily net of the
+    REPLAY_DAYS before the first window; the trailing one is the mean net of the REPLAY_DAYS of
+    windows just before each window. Neither looks ahead; each window's baseline is learned from
+    the REPLAY_WINDOWS windows before it. The alerts are reported as a count of the windows
+    judged, zero included, each with its end time and direction. Only committed history is swept.
 
     Args:
         window: The windows' length written back from now (`-45m`).
@@ -2094,23 +2127,29 @@ def sweep_text(
 
     """
     minutes = window_minutes(window)
-    step = minutes * 60
-    count = days * 24 * 60 // minutes
+    span = REPLAY_DAYS * 24 * 60 // minutes
     edges = [
-        datetime.fromtimestamp(end.timestamp() - step * k, UTC)
-        for k in range(count + REPLAY_WINDOWS, -1, -1)
-    ]
-    first = edges[0].timestamp()
-    day_edges = [
-        datetime.fromtimestamp(first - 86400 * d, UTC)
-        for d in range(REPLAY_DAYS, -1, -1)
+        datetime.fromtimestamp(end.timestamp() - minutes * 60 * k, UTC)
+        for k in range(days * 24 * 60 // minutes + REPLAY_WINDOWS + span, -1, -1)
     ]
     nets = _series_nets(names, dirs, edges)
-    daily = _series_nets(names, dirs, day_edges)
-    judged, alerts = sweep_alerts(daily, minutes, nets, REPLAY_WINDOWS)
-    stamp = "%Y-%m-%dT%H:%MZ"
-    labelled = [(edges[at + 1].strftime(stamp), direction) for at, direction in alerts]
-    return sweep_lines(judged, labelled, minutes, days, ROW_LINES)
+    daily = _daily_before(names, dirs, edges[span])
+    fixed = sweep_alerts(daily, minutes, nets[span:], REPLAY_WINDOWS)
+    trailing = trailing_alerts(nets, span, REPLAY_WINDOWS)
+    swept = f"{minutes} minutes over {days} days"
+    half = ROW_LINES // 2
+    return [
+        *sweep_report(
+            fixed[0], _ends(edges, span, fixed[1]), swept, half, "fixed prediction: "
+        ),
+        *sweep_report(
+            trailing[0],
+            _ends(edges, 0, trailing[1]),
+            swept,
+            half,
+            "trailing prediction: ",
+        ),
+    ]
 
 
 def _sweep(window: str, days: int, names: list[str], dirs: dict[str, Path]) -> int:
