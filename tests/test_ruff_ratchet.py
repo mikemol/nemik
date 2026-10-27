@@ -9,11 +9,12 @@ and a check that the ruff baseline names no vanished file. It runs in Bazel's sa
 sources too, since mtools:W1795 (8c8abe7) relativises a file as the tool reported it.
 """
 
-import json
 from pathlib import Path
 
 import pytest
 from mikemol.hooks.pycheck_cli import main
+
+from nemik.tracker import parse_tree
 
 HERE = Path(__file__).absolute().parents[1]
 ROOT = Path(__file__).resolve().parents[1]
@@ -35,5 +36,5 @@ def test_no_finding_is_above_either_baseline(
 
 def test_the_baseline_names_only_files_that_exist() -> None:
     """A baseline entry for a deleted or renamed file would hide a rise under the old name."""
-    base = json.loads((ROOT / "ruff-baseline.json").read_text())
-    assert [name for name in base if not (ROOT / name).is_file()] == []
+    tree = parse_tree((ROOT / "ruff-baseline.json").read_text())
+    assert [n for n in tree.names[tree.root] if not (ROOT / n).is_file()] == []

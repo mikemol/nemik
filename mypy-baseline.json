@@ -343,9 +343,6 @@
  "tests/test_mpxj.py": {
   "misc": 3
  },
- "tests/test_mypy_ratchet.py": {
-  "misc": 3
- },
  "tests/test_operator_rate.py": {
   "misc": 15,
   "type-arg": 1
@@ -388,9 +385,6 @@
   "misc": 20,
   "no-untyped-call": 1,
   "no-untyped-def": 1
- },
- "tests/test_ruff_ratchet.py": {
-  "misc": 3
  },
  "tests/test_ruler_table.py": {
   "misc": 13
