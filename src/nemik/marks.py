@@ -17,10 +17,14 @@ from __future__ import annotations
 import hashlib
 import json
 from datetime import datetime
-from pathlib import Path
+from typing import TYPE_CHECKING
 
-from mikemol.pathsforward.model import Json
 from mikemol.pathsforward.opa_eval import POLICY
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from mikemol.pathsforward.model import Json
 
 MARKS = "paths-forward.marks.jsonl"
 # The policy's own default (data.realizability_config.max_age_seconds, mtools:W850); a mark older

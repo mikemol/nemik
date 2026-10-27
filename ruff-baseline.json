@@ -262,10 +262,6 @@
   "DOC201": 1,
   "E501": 1
  },
- "src/nemik/marks.py": {
-  "TC002": 1,
-  "TC003": 1
- },
  "src/nemik/metrics.py": {
   "D103": 3,
   "D205": 3,
