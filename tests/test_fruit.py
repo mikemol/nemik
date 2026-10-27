@@ -36,7 +36,7 @@ def test_no_members_no_row() -> None:
     assert fruit(Graph(), "a", [{"symbol": "W1", "downstream": 2}]) is None
 
 
-def _graph(spec):
+def _graph(spec: dict[str, list[str]]) -> Graph:
     """{symbol: [what it enables]} as ready waypoints in repo a."""
     from nemik.adapter import OSLC_CM, waypoint_uri, workstream_uri
 

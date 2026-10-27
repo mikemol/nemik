@@ -4,12 +4,15 @@
 
 import json
 from datetime import UTC, datetime
+from pathlib import Path
+
+from rdflib import Graph
 
 from nemik.adapter import queue_graph
 from nemik.wake import fired_alarms
 
 
-def _graph(tmp_path):
+def _graph(tmp_path: Path) -> Graph:
     q = tmp_path / "q.json"
     payload2: dict[str, object] = {
         "version": 1,

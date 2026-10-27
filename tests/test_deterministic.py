@@ -10,11 +10,12 @@ one inbound row per (blocked, blocker) pair survived, chosen by that order.
 
 import json
 import subprocess
+from pathlib import Path
 
 import installed
 
 
-def _queue(root, repo, wps):
+def _queue(root: Path, repo: str, wps: list[dict[str, object]]) -> None:
     d = root / repo / ".claude"
     d.mkdir(parents=True)
     payload: dict[str, object] = {
@@ -27,7 +28,7 @@ def _queue(root, repo, wps):
     (d / "paths-forward.json").write_text(json.dumps(payload))
 
 
-def _wp(sym, status="ready", **kw):
+def _wp(sym: str, status: str = "ready", **kw: object) -> dict[str, object]:
     return {
         "symbol": sym,
         "title": f"item {sym}",

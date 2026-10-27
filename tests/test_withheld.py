@@ -19,7 +19,7 @@ def docs():
     return static_data(Model(FLEET))
 
 
-def _write(tmp_path, doc) -> Path:
+def _write(tmp_path: Path, doc: dict[str, object]) -> Path:
     p = tmp_path / "withheld.json"
     p.write_text(json.dumps(doc))
     return p
@@ -76,20 +76,12 @@ def test_withheld_item_is_dropped_whole_and_pointers_become_stubs(
     )
     og = out["graph.json"]
     stub = [n for n in og["nodes"] if n["id"] == target]
-    assert (
-        len(stub) == 1
-    )
-    assert (
-        stub[0]["title"] == "withheld"
-    )
-    assert (
-        stub[0]["state"] == "withheld"
-    )
+    assert len(stub) == 1
+    assert stub[0]["title"] == "withheld"
+    assert stub[0]["state"] == "withheld"
     assert "SENTINEL-withheld-text" not in json.dumps(out)
     assert all(a["ref"] != ref for a in og["operator"])
-    assert all(
-        b["blocked"] != ref for b in og["inbound"]
-    )
+    assert all(b["blocked"] != ref for b in og["inbound"])
     for name, doc in out.items():
         assert unmanifested(name, doc) == [], name
 

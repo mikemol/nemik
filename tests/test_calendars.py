@@ -308,7 +308,7 @@ def test_a_filter_that_matches_nothing_is_reported_not_read_as_a_free_day(
 
 def _row(
     label: str, start: str, summary: str, waiting: tuple[str, ...] | list[str] = ()
-):
+) -> dict[str, object]:
     return {
         "label": label,
         "uid": "u",

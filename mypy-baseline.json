@@ -205,8 +205,7 @@
   "no-untyped-def": 1
  },
  "tests/test_calendars.py": {
-  "misc": 60,
-  "no-untyped-def": 1,
+  "misc": 49,
   "type-arg": 3
  },
  "tests/test_calwrite.py": {
@@ -231,9 +230,8 @@
   "misc": 83
  },
  "tests/test_deterministic.py": {
-  "misc": 28,
-  "no-untyped-call": 6,
-  "no-untyped-def": 3
+  "misc": 3,
+  "no-untyped-def": 1
  },
  "tests/test_editable.py": {
   "misc": 9,
@@ -253,9 +251,7 @@
   "misc": 20
  },
  "tests/test_fruit.py": {
-  "misc": 85,
-  "no-untyped-call": 3,
-  "no-untyped-def": 1
+  "misc": 25
  },
  "tests/test_gate.py": {
   "misc": 183,
@@ -417,9 +413,8 @@
   "misc": 12
  },
  "tests/test_wake_alarms.py": {
-  "misc": 65,
-  "no-untyped-call": 5,
-  "no-untyped-def": 6
+  "misc": 53,
+  "no-untyped-def": 5
  },
  "tests/test_wake_nudge.py": {
   "misc": 19,
@@ -434,9 +429,8 @@
   "misc": 2
  },
  "tests/test_withheld.py": {
-  "misc": 75,
-  "no-any-return": 1,
-  "no-untyped-def": 7
+  "misc": 64,
+  "no-untyped-def": 6
  },
  "tests/test_witness_party.py": {
   "misc": 11,
