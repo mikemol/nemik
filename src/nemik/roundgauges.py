@@ -98,28 +98,58 @@ def ready_lines(ready: dict[str, int]) -> list[str]:
     ]
 
 
+GAUGE_BINDING = "nemik_round_binding"
+
+
+def binding_lines(binding: dict[str, str]) -> list[str]:
+    """Write which term bounded each repo's round, one sample per repo (nemik:W1135).
+
+    Args:
+        binding: Each repo's binding term (supply, the declared ceiling, landings or floor), as
+            roundof.width names it.
+
+    Returns:
+        A TYPE line and one sample per repo at 1 with the term as a label, repos sorted; nothing
+        when no repo states one.
+
+    """
+    if not binding:
+        return []
+    return [
+        f"# TYPE {GAUGE_BINDING} gauge",
+        *(
+            f'{GAUGE_BINDING}{{repo="{repo}",term="{binding[repo]}"}} 1'
+            for repo in sorted(binding)
+        ),
+    ]
+
+
 def round_board(
     text: str,
     working: dict[str, list[str]],
     ready: dict[str, int] | None = None,
+    binding: dict[str, str] | None = None,
 ) -> list[str]:
     """Write every round gauge, and say whether the round file could be read at all (nemik:W1025).
 
     Same lesson as the pace board (W1051): a gauge that vanishes reads as no drift, so a missing
     or refused file publishes nemik_round_readable at 0 and nothing else is guessed. The ready
-    counts come from the graph, not the file, so they are published either way.
+    counts and the binding terms come from the graph, not the file, so they are published either
+    way.
 
     Args:
         text: The round file's text, empty when there is none.
         working: Each repo's cards being worked, as symbols.
         ready: Each repo's count of ready cards; none when not given.
+        binding: Each repo's binding term; none when not given.
 
     Returns:
         The readable gauge at 1 then the round gauges, or the readable gauge at 0 alone, then
-        the ready gauge.
+        the ready gauge and the binding gauge.
 
     """
     ready = ready or {}
+    terms = binding_lines(binding or {})
     try:
         seconds = epoch_seconds(read_round(text)[0])
     except ValueError:
@@ -127,10 +157,12 @@ def round_board(
             f"# TYPE {GAUGE_READABLE} gauge",
             f"{GAUGE_READABLE} 0",
             *ready_lines(ready),
+            *terms,
         ]
     return [
         f"# TYPE {GAUGE_READABLE} gauge",
         f"{GAUGE_READABLE} 1",
         *gauge_lines(text, working, seconds),
         *ready_lines(ready),
+        *terms,
     ]

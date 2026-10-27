@@ -2796,3 +2796,16 @@
 2026-10-27T10:14:26Z  interrupt W1166 minted    -         "test_pins types its capsys fixture, so ruff falls 2607 to 2606 and mypy 5620 to 5618 (paydown)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
 2026-10-27T10:14:30Z  status W1166 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-27T10:16:44Z  tick  W1070 advanced  sweep     "Gave W1070, W1111 and W1108 manifests and next steps (no skopeo or crane on host: digest read needs a tool mode); W1165 carded for the 109/73 reset; W1166 paydown plus W1164 bound check queued as stack564 behind 562 gating and 563 queued [blocked by W1161]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T10:20:59Z  status W1160 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T10:20:59Z  status W1161 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T10:21:00Z  status W1162 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T10:21:01Z  status W1049 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T10:21:08Z  status W1049 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T10:39:30Z  interrupt W1167 minted    -         "serve computes each repo's round binding term (roundcli.size_for over its rank rows and the landings file) and passes it to round_board"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1135
+2026-10-27T10:39:33Z  status W1135 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T10:43:41Z  status W1165 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T10:44:47Z  status W1166 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T10:44:48Z  status W1164 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T10:45:32Z  interrupt W1168 minted    -         "test_publish reads hashes.json through the typed tree, so mypy falls 5618 to 5616 (paydown)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
+2026-10-27T10:45:36Z  status W1168 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T10:45:37Z  status W1155 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
