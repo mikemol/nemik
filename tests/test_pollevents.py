@@ -21,16 +21,13 @@ def _issue(
         The issue.
 
     """
-    return Issue(
-        number=number,
-        title=title or f"title {number}",
-        state=state,
-        body=body,
-        labels=[],
-        url=f"u{number}",
-        is_pull_request=pull_request,
-        locked=False,
-    )
+    issue = Issue(number)
+    issue.title = title or f"title {number}"
+    issue.state = state
+    issue.body = body
+    issue.url = f"u{number}"
+    issue.is_pull_request = pull_request
+    return issue
 
 
 def test_an_open_issue_nemik_did_not_mirror_is_a_card_to_mint() -> None:

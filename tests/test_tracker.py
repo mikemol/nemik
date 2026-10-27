@@ -6,11 +6,24 @@ from pathlib import Path
 
 import pytest
 
-from nemik.tracker import parse, read_issue
+from nemik.tracker import (
+    BOOL,
+    DICT,
+    INT,
+    LIST,
+    MISSING,
+    NULL,
+    REAL,
+    STR,
+    Tree,
+    parse_tree,
+    read_issue,
+)
 
 HERE = Path(__file__).parent
 TRACKERS = HERE / "fixtures" / "trackers"
 GITHUB_NUMBER = 2000
+LAST = 2  # the value of the second "a" in the repeated-member test
 NESTED = (
     '{"a": "x\\n\\u00e9\\ud83d\\ude00", "b": [1, -2, 3.5, 1e2], '
     '"c": {"d": [null, true]}}'
@@ -25,6 +38,33 @@ def _fixture(name: str) -> str:
 
     """
     return (TRACKERS / name).read_text(encoding="utf-8")
+
+
+def _plain(tree: Tree, at: int) -> object:
+    """Turn a parsed value into the plain Python value it stands for.
+
+    Returns:
+        A dict, list, str, bool, int, float or None.
+
+    """
+    kind = tree.kinds[at]
+    plain: object = None
+    if kind == DICT:
+        plain = {
+            name: _plain(tree, kid)
+            for name, kid in zip(tree.names[at], tree.kids[at], strict=True)
+        }
+    elif kind == LIST:
+        plain = [_plain(tree, kid) for kid in tree.kids[at]]
+    elif kind == STR:
+        plain = tree.texts[at]
+    elif kind == BOOL:
+        plain = tree.flags[at]
+    elif kind == INT:
+        plain = tree.wholes[at]
+    elif kind == REAL:
+        plain = tree.reals[at]
+    return plain
 
 
 def test_the_recorded_github_issue_is_read() -> None:
@@ -61,11 +101,21 @@ def test_an_object_under_pull_request_marks_a_pull_request() -> None:
 
 def test_the_parser_reads_escapes_numbers_and_nesting() -> None:
     """Escapes, a surrogate pair, ints and floats, nulls and nested containers."""
-    assert parse(NESTED) == {
+    tree = parse_tree(NESTED)
+    assert _plain(tree, tree.root) == {
         "a": "x\né\U0001f600",
         "b": [1, -2, 3.5, 100.0],
         "c": {"d": [None, True]},
     }
+
+
+def test_a_missing_member_reads_as_null_and_a_repeated_one_takes_the_last() -> None:
+    """The lookup never fails: a member that is absent is the null, and the last of two wins."""
+    tree = parse_tree('{"a": 1, "a": 2, "b": null}')
+    assert tree.wholes[tree.get(tree.root, "a")] == LAST
+    assert tree.kinds[tree.get(tree.root, "b")] == NULL
+    assert tree.get(tree.root, "zzz") == MISSING
+    assert not tree.string(tree.root, "a")
 
 
 @pytest.mark.parametrize(
@@ -75,7 +125,7 @@ def test_the_parser_reads_escapes_numbers_and_nesting() -> None:
 def test_text_that_is_not_json_raises_value_error(text: str) -> None:
     """A truncated, misspelt, trailing or badly escaped text is refused, never half-read."""
     with pytest.raises(ValueError, match="offset"):
-        parse(text)
+        parse_tree(text)
 
 
 @pytest.mark.parametrize(

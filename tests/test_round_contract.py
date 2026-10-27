@@ -13,7 +13,7 @@ import re
 from pathlib import Path
 
 from nemik.roundfile import round_text
-from nemik.tracker import parse
+from nemik.tracker import DICT, STR, parse_tree
 
 RECORDED = Path(__file__).parent / "fixtures" / "round" / "round.jsonl"
 STAMP = "2026-10-25T09:00:00Z"
@@ -43,12 +43,13 @@ def test_every_other_line_is_a_card_with_the_fields_the_readers_use() -> None:
     cards = RECORDED.read_text(encoding="utf-8").splitlines()[1:]
     assert cards
     for line in cards:
-        card = parse(line)
-        assert isinstance(card, dict)
-        assert isinstance(card["repo"], str)
-        assert isinstance(card["symbol"], str)
-        assert isinstance(card["rank"], str)
-        assert int(card["rank"]) >= 1
+        tree = parse_tree(line)
+        card = tree.root
+        assert tree.kinds[card] == DICT
+        assert tree.kinds[tree.get(card, "repo")] == STR
+        assert tree.kinds[tree.get(card, "symbol")] == STR
+        assert tree.kinds[tree.get(card, "rank")] == STR
+        assert int(tree.string(card, "rank")) >= 1
 
 
 def test_the_stamp_carries_a_zone_as_the_reader_requires() -> None:

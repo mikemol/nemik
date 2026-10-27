@@ -11,7 +11,7 @@ The phantom repo `tree` is left out: before mtools:W1923 the label was read from
 directory, and about forty-five such series stay in the store until they age out.
 """
 
-from nemik.tracker import Json, parse
+from nemik.tracker import DICT, INT, LIST, REAL, STR, Tree, parse_tree
 
 PHANTOM = "tree"
 PAIR = 2  # a sample is [unix seconds, "value"]
@@ -32,26 +32,25 @@ def series_of(answer: str) -> list[tuple[str, str, list[int]]]:
         TypeError: When the answer is not a successful matrix of series.
 
     """
-    body = parse(answer)
-    if not isinstance(body, dict) or body.get("status") != "success":
+    tree = parse_tree(answer)
+    body = tree.root
+    if tree.kinds[body] != DICT or tree.string(body, "status") != "success":
         message = "the answer is not a successful query"
         raise TypeError(message)
-    data = body.get("data")
-    result = data.get("result") if isinstance(data, dict) else None
-    if not isinstance(result, list):
+    result = tree.get(tree.get(body, "data"), "result")
+    if tree.kinds[result] != LIST:
         message = "the answer has no result list"
         raise TypeError(message)
     out: list[tuple[str, str, list[int]]] = []
-    for entry in result:
-        if not isinstance(entry, dict):
+    for entry in tree.kids[result]:
+        if tree.kinds[entry] != DICT:
             continue
-        metric = entry.get("metric")
-        samples = entry.get("values")
-        if not isinstance(metric, dict) or not isinstance(samples, list):
+        metric, samples = tree.get(entry, "metric"), tree.get(entry, "values")
+        if tree.kinds[metric] != DICT or tree.kinds[samples] != LIST:
             continue
-        repo, ratchet = str(metric.get("repo", "")), str(metric.get("ratchet", ""))
+        repo, ratchet = tree.string(metric, "repo"), tree.string(metric, "ratchet")
         if repo and ratchet and repo != PHANTOM:
-            out.append((repo, ratchet, _counts(samples)))
+            out.append((repo, ratchet, _counts(tree, samples)))
     return sorted(out, key=_by_name)
 
 
@@ -101,26 +100,50 @@ def ended_series(text: str) -> list[tuple[str, str]]:
     )
 
 
+def _number(tree: Tree, at: int) -> bool:
+    """Say whether a value is a number.
+
+    Returns:
+        True for an integer or a real.
+
+    """
+    return tree.kinds[at] in {INT, REAL}
+
+
+def _whole(tree: Tree, at: int) -> int:
+    """Read a number as a whole number, a real truncated.
+
+    Returns:
+        The integer.
+
+    """
+    return tree.wholes[at] if tree.kinds[at] == INT else int(tree.reals[at])
+
+
 def _hold(
     held: dict[int, tuple[int, int]],
-    stamps: list[Json],
-    values: list[Json],
+    tree: Tree,
+    stamps: int,
+    values: int,
     declared: int,
 ) -> None:
     """Add a series' samples to its ratchet's, the declared sample winning a shared instant.
 
     Args:
         held: The ratchet's samples so far, by time: (0 declared or 1 guessed, the count).
-        stamps: The series' sample times, milliseconds.
-        values: Its sample values.
+        tree: The parsed line.
+        stamps: The handle of the series' sample times, a list of milliseconds.
+        values: The handle of its sample values, a list.
         declared: 0 for a guessed=false series, 1 for any other.
 
     """
-    for at, value in zip(stamps, values, strict=False):
-        if isinstance(at, int | float) and isinstance(value, int | float):
-            mine = (declared, max(0, int(value)))
-            if int(at) not in held or mine < held[int(at)]:
-                held[int(at)] = mine
+    times, counts = tree.kids[stamps], tree.kids[values]
+    for place in range(min(len(times), len(counts))):
+        if _number(tree, times[place]) and _number(tree, counts[place]):
+            mine = (declared, max(0, _whole(tree, counts[place])))
+            when = _whole(tree, times[place])
+            if when not in held or mine < held[when]:
+                held[when] = mine
 
 
 def _export_rows(
@@ -139,25 +162,28 @@ def _export_rows(
     # read as a series that ended, and every row went unknown.
     merged: dict[tuple[str, str], dict[int, tuple[int, int]]] = {}
     for line in text.splitlines():
+        if not line.strip():
+            continue
         try:
-            body = parse(line) if line.strip() else None
+            tree = parse_tree(line)
         except ValueError:
             continue
-        if not isinstance(body, dict):
+        body = tree.root
+        if tree.kinds[body] != DICT:
             continue
-        metric, values, stamps = (
-            body.get("metric"),
-            body.get("values"),
-            body.get("timestamps"),
-        )
-        if not isinstance(metric, dict) or not isinstance(values, list):
+        metric = tree.get(body, "metric")
+        values, stamps = tree.get(body, "values"), tree.get(body, "timestamps")
+        if (
+            tree.kinds[metric] != DICT
+            or tree.kinds[values] != LIST
+            or tree.kinds[stamps] != LIST
+        ):
             continue
-        if not isinstance(stamps, list):
-            continue
-        repo, ratchet = str(metric.get("repo", "")), str(metric.get("ratchet", ""))
+        repo, ratchet = tree.string(metric, "repo"), tree.string(metric, "ratchet")
         if repo and ratchet and repo != PHANTOM:
-            declared = 0 if str(metric.get("guessed", "")) == "false" else 1
-            _hold(merged.setdefault((repo, ratchet), {}), stamps, values, declared)
+            declared = 0 if tree.string(metric, "guessed") == "false" else 1
+            held = merged.setdefault((repo, ratchet), {})
+            _hold(held, tree, stamps, values, declared)
     out: list[tuple[str, str, list[int], int]] = []
     newest: dict[str, int] = {}
     for (repo, ratchet), held in merged.items():
@@ -178,7 +204,7 @@ def _by_name(row: tuple[str, str, list[int]]) -> tuple[str, str]:
     return row[0], row[1]
 
 
-def _counts(samples: list[Json]) -> list[int]:
+def _counts(tree: Tree, samples: int) -> list[int]:
     """Turn [seconds, "value"] pairs into whole counts, oldest first.
 
     Returns:
@@ -186,9 +212,10 @@ def _counts(samples: list[Json]) -> list[int]:
 
     """
     pairs: list[tuple[int, int]] = []
-    for pair in samples:
-        if isinstance(pair, list) and len(pair) == PAIR:
-            at, value = pair
-            if isinstance(at, int | float) and isinstance(value, str):
-                pairs.append((int(at), max(0, int(float(value)))))
+    for pair in tree.kids[samples]:
+        if tree.kinds[pair] == LIST and len(tree.kids[pair]) == PAIR:
+            at, value = tree.kids[pair]
+            if _number(tree, at) and tree.kinds[value] == STR:
+                text = tree.texts[value]
+                pairs.append((_whole(tree, at), max(0, int(float(text)))))
     return [count for _, count in sorted(pairs)]

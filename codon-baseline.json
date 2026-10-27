@@ -20,8 +20,8 @@
   "stripped": "no module named 'argparse'"
  },
  "baselinetop": {
-  "as_written": "syntax error, unexpected '='",
-  "stripped": "syntax error, unexpected '='"
+  "as_written": "cannot typecheck 'number' in reasonable time",
+  "stripped": "cannot typecheck 'number' in reasonable time"
  },
  "blocks": {
   "as_written": "no module named '__future__'",
@@ -136,8 +136,8 @@
   "stripped": "no module named 'argparse'"
  },
  "mirrorreq": {
-  "as_written": "syntax error, unexpected '='",
-  "stripped": "syntax error, unexpected '='"
+  "as_written": "reference classes cannot inherit tuple classes",
+  "stripped": "reference classes cannot inherit tuple classes"
  },
  "mspdi": {
   "as_written": "no module named '__future__'",
@@ -152,8 +152,8 @@
   "stripped": "no module named 'subprocess'"
  },
  "pacerun": {
-  "as_written": "syntax error, unexpected '='",
-  "stripped": "syntax error, unexpected '='"
+  "as_written": "name 'frozenset' is not defined",
+  "stripped": "name 'frozenset' is not defined"
  },
  "pacing": {
   "as_written": "no module named '__future__'",
@@ -175,10 +175,6 @@
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'argparse'"
  },
- "pollevents": {
-  "as_written": "syntax error, unexpected '='",
-  "stripped": "syntax error, unexpected '='"
- },
  "projection": {
   "as_written": "class decorator got unexpected argument",
   "stripped": "class decorator got unexpected argument"
@@ -190,10 +186,6 @@
  "rank": {
   "as_written": "syntax error, unexpected ','",
   "stripped": "syntax error, unexpected ','"
- },
- "ratchetseries": {
-  "as_written": "syntax error, unexpected '='",
-  "stripped": "syntax error, unexpected '='"
  },
  "realize": {
   "as_written": "no module named '__future__'",
@@ -208,8 +200,8 @@
   "stripped": "unsupported operand type(s) for |: 'type[Path]' and 'Optional[T.8]'"
  },
  "roundgauges": {
-  "as_written": "syntax error, unexpected '='",
-  "stripped": "syntax error, unexpected '='"
+  "as_written": "unsupported operand type(s) for |: 'type[OrderedDict[str,int]]' and 'Optional[T.8]'",
+  "stripped": "unsupported operand type(s) for |: 'type[OrderedDict[str,int]]' and 'Optional[T.8]'"
  },
  "runlogs": {
   "as_written": "no module named 'rdflib'",
@@ -262,10 +254,6 @@
  "tiers": {
   "as_written": "no module named 'tomllib'",
   "stripped": "no module named 'tomllib'"
- },
- "tracker": {
-  "as_written": "syntax error, unexpected '='",
-  "stripped": "syntax error, unexpected '='"
  },
  "trs": {
   "as_written": "no module named '__future__'",

@@ -5,9 +5,11 @@
 W369 mirrors cards to an issue tracker and W370 reads a tracker's events. Both start from what a
 tracker really sends: a nested JSON object (a `user` object, a list of `labels` objects, nulls). The
 standard json module answers with Any, which the house type check refuses to count, so this reads
-the text itself into a recursive typed value and then picks fields out of it. The two fixtures in
-tests/fixtures/trackers/ (a GitHub issue and a Forgejo issue, recorded unedited) are what it is
-tested on.
+the text itself into a `Tree` and then picks fields out of it. A tree of parallel arrays addressed
+by integer handles, and not a recursive alias or a class that holds itself, because Codon compiles
+neither and CPython 3.13 refuses the class that holds itself without the annotations future that
+Codon refuses in turn (nemik:W1034). The two fixtures in tests/fixtures/trackers/ (a GitHub issue
+and a Forgejo issue, recorded unedited) are what it is tested on.
 
 Both trackers say the same things under different keys; the differences found in those files are
 handled here: GitHub's `locked` is Forgejo's `is_locked`, and GitHub's issues endpoint also returns
@@ -15,9 +17,8 @@ pull requests, marked by a `pull_request` object (Forgejo sends `pull_request: n
 Text that is not JSON raises ValueError; JSON of the wrong shape raises TypeError.
 """
 
-from typing import NamedTuple, NoReturn
-
-type Json = str | int | float | bool | list[Json] | dict[str, Json] | None
+NULL, BOOL, INT, REAL, STR, LIST, DICT = 0, 1, 2, 3, 4, 5, 6
+MISSING = 0  # the handle of the one null value every absent member reads as
 
 ESCAPES = {
     '"': '"',
@@ -29,7 +30,6 @@ ESCAPES = {
     "r": "\r",
     "t": "\t",
 }
-WORDS: dict[str, Json] = {"true": True, "false": False, "null": None}
 SPACE = " \t\r\n"
 NUMBER_CHARS = "+-.eE0123456789"
 HEX_DIGITS = 4
@@ -37,8 +37,91 @@ HIGH_SURROGATES = range(0xD800, 0xDC00)
 LOW_SURROGATES = range(0xDC00, 0xE000)
 
 
-class Issue(NamedTuple):
-    """One issue, as far as a mirror reads it."""
+class Tree:
+    """Parsed JSON as parallel arrays: a value is an integer, its index in each of them.
+
+    Handle 0 is a null that stands for every member that is not there. `root` is the handle of the
+    value the whole text held.
+    """
+
+    kinds: list[int]
+    flags: list[bool]
+    wholes: list[int]
+    reals: list[float]
+    texts: list[str]
+    kids: list[list[int]]
+    names: list[list[str]]
+    root: int
+
+    def __init__(self) -> None:
+        """Make a tree holding only the null at handle 0."""
+        self.kinds = []
+        self.flags = []
+        self.wholes = []
+        self.reals = []
+        self.texts = []
+        self.kids = []
+        self.names = []
+        self.root = 0
+        self.add(NULL)
+
+    def add(self, kind: int) -> int:
+        """Append an empty value of a kind (NULL, BOOL, INT, REAL, STR, LIST or DICT).
+
+        Returns:
+            Its handle.
+
+        """
+        self.kinds.append(kind)
+        self.flags.append(False)
+        self.wholes.append(0)
+        self.reals.append(0.0)
+        self.texts.append("")
+        self.kids.append([])
+        self.names.append([])
+        return len(self.kinds) - 1
+
+    def get(self, at: int, key: str) -> int:
+        """Look a member up by name.
+
+        Args:
+            at: The handle of an object.
+            key: The member's name.
+
+        Returns:
+            The member's handle (the last one when the name repeats); MISSING when `at` is not an
+            object or has no such member, since a missing member and a null one read alike here.
+
+        """
+        names = self.names[at]
+        place = len(names) - 1
+        while place >= 0:
+            if names[place] == key:
+                return self.kids[at][place]
+            place -= 1
+        return MISSING
+
+    def string(self, at: int, key: str) -> str:
+        """Read a member that is a string.
+
+        Args:
+            at: The handle of an object.
+            key: The member's name.
+
+        Returns:
+            The string; empty when the member is missing, null or not a string.
+
+        """
+        member = self.get(at, key)
+        return self.texts[member] if self.kinds[member] == STR else ""
+
+
+class Issue:
+    """One issue, as far as a mirror reads it.
+
+    A plain class and not a NamedTuple, which Codon will not make a reference class of: the
+    fields are set after construction.
+    """
 
     number: int
     title: str
@@ -49,27 +132,38 @@ class Issue(NamedTuple):
     is_pull_request: bool
     locked: bool
 
+    def __init__(self, number: int) -> None:
+        """Make an issue with its number and the other fields empty."""
+        self.number = number
+        self.title = ""
+        self.state = ""
+        self.body = ""
+        self.labels = []
+        self.url = ""
+        self.is_pull_request = False
+        self.locked = False
+
 
 class _Reader:
-    """A cursor over JSON text."""
+    """A cursor over JSON text, building a Tree."""
 
     def __init__(self, text: str) -> None:
         """Hold the text and start at its first character."""
         self.text = text
         self.at = 0
+        self.tree = Tree()
 
-    def fail(self, why: str) -> NoReturn:
+    def error(self, why: str) -> ValueError:
         """Say where the text stopped making sense.
 
         Args:
             why: What was wrong.
 
-        Raises:
-            ValueError: Always, naming the offset.
+        Returns:
+            The ValueError to raise, naming the offset.
 
         """
-        message = f"{why} at offset {self.at}"
-        raise ValueError(message)
+        return ValueError(f"{why} at offset {self.at}")
 
     def peek(self) -> str:
         """Look at the next character after whitespace.
@@ -85,8 +179,22 @@ class _Reader:
     def expect(self, char: str) -> None:
         """Take one character that must be next."""
         if self.peek() != char:
-            self.fail(f"expected {char}")
+            message = f"expected {char}"
+            raise self.error(message)
         self.at += 1
+
+    def word(self, spelled: str) -> bool:
+        """Take a bare word if it is next.
+
+        Returns:
+            Whether it was there; the cursor moves past it when it was.
+
+        """
+        end = self.at + len(spelled)
+        if self.text[self.at : end] != spelled:
+            return False
+        self.at = end
+        return True
 
     def hex4(self) -> int:
         """Read four hex digits.
@@ -101,7 +209,8 @@ class _Reader:
         except ValueError:
             value = -1
         if value < 0:
-            self.fail("a bad unicode escape")
+            message = "a bad unicode escape"
+            raise self.error(message)
         self.at += HEX_DIGITS
         return value
 
@@ -114,15 +223,18 @@ class _Reader:
         """
         code = self.hex4()
         if code in HIGH_SURROGATES:
-            if not self.text.startswith("\\u", self.at):
-                self.fail("a high surrogate without its pair")
+            if self.text[self.at : self.at + 2] != "\\u":
+                message = "a high surrogate without its pair"
+                raise self.error(message)
             self.at += 2
             low = self.hex4()
             if low not in LOW_SURROGATES:
-                self.fail("a high surrogate without its low half")
+                message = "a high surrogate without its low half"
+                raise self.error(message)
             code = 0x10000 + ((code - 0xD800) << 10) + (low - 0xDC00)
         elif code in LOW_SURROGATES:
-            self.fail("a lone low surrogate")
+            message = "a lone low surrogate"
+            raise self.error(message)
         return chr(code)
 
     def string(self) -> str:
@@ -149,73 +261,85 @@ class _Reader:
             elif key in ESCAPES:
                 out.append(ESCAPES[key])
             else:
-                self.fail("a bad escape")
-        return self.fail("an unclosed string")
+                message = "a bad escape"
+                raise self.error(message)
+        message = "an unclosed string"
+        raise self.error(message)
 
-    def number(self) -> int | float:
+    def number(self) -> int:
         """Read a number.
 
         Returns:
-            An int when it has no fraction or exponent, else a float.
+            The handle of an INT value when it has no fraction or exponent, else a REAL one.
 
         """
         start = self.at
         while self.at < len(self.text) and self.text[self.at] in NUMBER_CHARS:
             self.at += 1
         raw = self.text[start : self.at]
+        node = self.tree.add(INT if raw.lstrip("-").isdigit() else REAL)
         try:
-            return int(raw) if raw.lstrip("-").isdigit() else float(raw)
+            if self.tree.kinds[node] == INT:
+                self.tree.wholes[node] = int(raw)
+            else:
+                self.tree.reals[node] = float(raw)
         except ValueError:
-            return self.fail("a bad number")
+            message = "a bad number"
+            raise self.error(message) from None
+        return node
 
-    def array(self) -> list[Json]:
+    def array(self) -> int:
         """Read an array.
 
         Returns:
-            Its items.
+            The handle of a LIST value; its items are in `kids`.
 
         """
         self.expect("[")
-        items: list[Json] = []
+        node = self.tree.add(LIST)
         if self.peek() == "]":
             self.at += 1
-            return items
+            return node
         while True:
-            items.append(self.value())
+            item = self.value()
+            self.tree.kids[node].append(item)
             if self.peek() == ",":
                 self.at += 1
                 continue
             self.expect("]")
-            return items
+            return node
 
-    def mapping(self) -> dict[str, Json]:
+    def mapping(self) -> int:
         """Read an object.
 
         Returns:
-            Its members.
+            The handle of a DICT value: its member names in `names` and the values beside them in
+            `kids`.
 
         """
         self.expect("{")
-        members: dict[str, Json] = {}
+        node = self.tree.add(DICT)
         if self.peek() == "}":
             self.at += 1
-            return members
+            return node
         while True:
             self.peek()
-            key = self.string()
+            name = self.string()
             self.expect(":")
-            members[key] = self.value()
+            member = self.value()
+            self.tree.names[node].append(name)
+            self.tree.kids[node].append(member)
             if self.peek() == ",":
                 self.at += 1
                 continue
             self.expect("}")
-            return members
+            return node
 
-    def value(self) -> Json:
+    def value(self) -> int:
         """Read one value.
 
         Returns:
-            It, typed.
+            Its handle.
 
         """
         char = self.peek()
@@ -223,36 +347,43 @@ class _Reader:
             return self.mapping()
         if char == "[":
             return self.array()
+        node = MISSING
         if char == '"':
-            return self.string()
-        for word, meant in WORDS.items():
-            if self.text.startswith(word, self.at):
-                self.at += len(word)
-                return meant
-        if char and char in NUMBER_CHARS:
-            return self.number()
-        return self.fail("not a JSON value")
+            node = self.tree.add(STR)
+            self.tree.texts[node] = self.string()
+        elif self.word("true") or self.word("false"):
+            node = self.tree.add(BOOL)
+            self.tree.flags[node] = self.text[self.at - 4 : self.at] == "true"
+        elif self.word("null"):
+            node = self.tree.add(NULL)
+        elif char and char in NUMBER_CHARS:
+            node = self.number()
+        else:
+            message = "not a JSON value"
+            raise self.error(message)
+        return node
 
 
-def parse(text: str) -> Json:
-    """Read JSON text into a typed value.
+def parse_tree(text: str) -> Tree:
+    """Read JSON text into a tree.
 
     Args:
         text: One JSON value, as a tracker's API sent it.
 
     Returns:
-        The value: strings, numbers, booleans, None, lists and dicts of them. Text that is not
-        exactly one JSON value raises ValueError.
+        The tree, its `root` the handle of the value. Text that is not exactly one JSON value
+        raises ValueError, naming the offset.
 
     """
     reader = _Reader(text)
-    got = reader.value()
+    reader.tree.root = reader.value()
     if reader.peek():
-        reader.fail("text after the value")
-    return got
+        message = "text after the value"
+        raise reader.error(message)
+    return reader.tree
 
 
-def _text(item: dict[str, Json], key: str) -> str:
+def _text(tree: Tree, item: int, key: str) -> str:
     """Read a string member, empty when it is absent or null.
 
     Returns:
@@ -262,16 +393,16 @@ def _text(item: dict[str, Json], key: str) -> str:
         TypeError: When the member is something other than a string or null.
 
     """
-    got = item.get(key)
-    if got is None:
+    got = tree.get(item, key)
+    if tree.kinds[got] == NULL:
         return ""
-    if isinstance(got, str):
-        return got
+    if tree.kinds[got] == STR:
+        return tree.texts[got]
     message = f"{key} is not a string"
     raise TypeError(message)
 
 
-def _flag(item: dict[str, Json], key: str) -> bool:
+def _flag(tree: Tree, item: int, key: str) -> bool:
     """Read a boolean member, false when it is absent or null.
 
     Returns:
@@ -281,16 +412,16 @@ def _flag(item: dict[str, Json], key: str) -> bool:
         TypeError: When the member is something other than a boolean or null.
 
     """
-    got = item.get(key)
-    if got is None:
+    got = tree.get(item, key)
+    if tree.kinds[got] == NULL:
         return False
-    if isinstance(got, bool):
-        return got
+    if tree.kinds[got] == BOOL:
+        return tree.flags[got]
     message = f"{key} is not a boolean"
     raise TypeError(message)
 
 
-def _label_names(item: dict[str, Json]) -> list[str]:
+def _label_names(tree: Tree, item: int) -> list[str]:
     """Read the names of an issue's labels.
 
     Returns:
@@ -300,22 +431,22 @@ def _label_names(item: dict[str, Json]) -> list[str]:
         TypeError: When `labels` is not a list of objects with a string name.
 
     """
-    got = item.get("labels")
-    if got is None:
+    got = tree.get(item, "labels")
+    if tree.kinds[got] == NULL:
         return []
-    if not isinstance(got, list):
+    if tree.kinds[got] != LIST:
         message = "labels is not a list"
         raise TypeError(message)
     names: list[str] = []
-    for label in got:
-        if not isinstance(label, dict):
+    for label in tree.kids[got]:
+        if tree.kinds[label] != DICT:
             message = "a label is not an object"
             raise TypeError(message)
-        name = label.get("name")
-        if not isinstance(name, str):
+        name = tree.get(label, "name")
+        if tree.kinds[name] != STR:
             message = "a label has no string name"
             raise TypeError(message)
-        names.append(name)
+        names.append(tree.texts[name])
     return names
 
 
@@ -371,11 +502,11 @@ def read_issues(text: str) -> list[Issue]:
         TypeError: When the JSON is not an array of issue objects.
 
     """
-    items = parse(text)
-    if not isinstance(items, list):
+    tree = parse_tree(text)
+    if tree.kinds[tree.root] != LIST:
         message = "a list of issues is a JSON array"
         raise TypeError(message)
-    return [issue_of(item) for item in items]
+    return [issue_of(tree, item) for item in tree.kids[tree.root]]
 
 
 def read_issue(text: str) -> Issue:
@@ -390,14 +521,16 @@ def read_issue(text: str) -> Issue:
         whether it is locked.
 
     """
-    return issue_of(parse(text))
+    tree = parse_tree(text)
+    return issue_of(tree, tree.root)
 
 
-def issue_of(item: Json) -> Issue:
+def issue_of(tree: Tree, item: int) -> Issue:
     """Read one parsed tracker issue.
 
     Args:
-        item: A parsed JSON value.
+        tree: The parsed JSON.
+        item: The handle of the value to read.
 
     Returns:
         The issue's number, title, state, body, label names, url, whether it is a pull request and
@@ -407,20 +540,19 @@ def issue_of(item: Json) -> Issue:
         TypeError: When the JSON is not an issue object or a field has the wrong type.
 
     """
-    if not isinstance(item, dict):
+    if tree.kinds[item] != DICT:
         message = "an issue is a JSON object"
         raise TypeError(message)
-    number = item.get("number")
-    if not isinstance(number, int) or isinstance(number, bool):
+    number = tree.get(item, "number")
+    if tree.kinds[number] != INT:
         message = "an issue has an integer number"
         raise TypeError(message)
-    return Issue(
-        number,
-        _text(item, "title"),
-        _text(item, "state"),
-        _text(item, "body"),
-        _label_names(item),
-        _text(item, "html_url"),
-        item.get("pull_request") is not None,
-        _flag(item, "locked") or _flag(item, "is_locked"),
-    )
+    issue = Issue(tree.wholes[number])
+    issue.title = _text(tree, item, "title")
+    issue.state = _text(tree, item, "state")
+    issue.body = _text(tree, item, "body")
+    issue.labels = _label_names(tree, item)
+    issue.url = _text(tree, item, "html_url")
+    issue.is_pull_request = tree.kinds[tree.get(item, "pull_request")] != NULL
+    issue.locked = _flag(tree, item, "locked") or _flag(tree, item, "is_locked")
+    return issue

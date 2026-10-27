@@ -13,7 +13,7 @@ file and prints the heaviest, so the pay-down card picks its target by measureme
 import sys
 from pathlib import Path
 
-from nemik.tracker import parse
+from nemik.tracker import DICT, INT, parse_tree
 
 SHOWN = 12
 
@@ -28,20 +28,23 @@ def _counts(text: str) -> list[tuple[str, str, int]]:
         TypeError: When the baseline is not an object of objects of integers.
 
     """
-    top = parse(text)
-    if not isinstance(top, dict):
+    tree = parse_tree(text)
+    top = tree.root
+    if tree.kinds[top] != DICT:
         message = "a baseline is an object of files"
         raise TypeError(message)
     rows: list[tuple[str, str, int]] = []
-    for name, rules in top.items():
-        if not isinstance(rules, dict):
+    for at, name in enumerate(tree.names[top]):
+        rules = tree.kids[top][at]
+        if tree.kinds[rules] != DICT:
             message = f"{name} is not an object of rules"
             raise TypeError(message)
-        for rule, count in rules.items():
-            if not isinstance(count, int):
+        for place, rule in enumerate(tree.names[rules]):
+            count = tree.kids[rules][place]
+            if tree.kinds[count] != INT:
                 message = f"{name} {rule} is not a count"
                 raise TypeError(message)
-            rows.append((name, rule, count))
+            rows.append((name, rule, tree.wholes[count]))
     return rows
 
 

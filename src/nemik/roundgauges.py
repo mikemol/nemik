@@ -12,7 +12,7 @@ absent from the round has a round of size 0 and every working card outside it.
 from nemik.pacepublish import epoch_seconds
 from nemik.roundfile import metric_lines
 from nemik.roundof import outside
-from nemik.tracker import parse
+from nemik.tracker import DICT, parse_tree
 
 GAUGE_READABLE = "nemik_round_readable"
 
@@ -34,16 +34,19 @@ def read_round(text: str) -> tuple[str, dict[str, list[str]]]:
     stamp = ""
     rounds: dict[str, list[str]] = {}
     for line in text.splitlines():
+        if not line.strip():
+            continue
         try:
-            body = parse(line) if line.strip() else None
+            tree = parse_tree(line)
         except ValueError:
             continue
-        if not isinstance(body, dict):
+        if tree.kinds[tree.root] != DICT:
             continue
-        at, repo, symbol = body.get("as_of"), body.get("repo"), body.get("symbol")
-        if isinstance(at, str) and not stamp:
+        at = tree.string(tree.root, "as_of")
+        repo, symbol = tree.string(tree.root, "repo"), tree.string(tree.root, "symbol")
+        if at and not stamp:
             stamp = at
-        elif isinstance(repo, str) and isinstance(symbol, str):
+        elif repo and symbol:
             rounds.setdefault(repo, []).append(symbol)
     if not stamp:
         message = "the round file carries no as_of"

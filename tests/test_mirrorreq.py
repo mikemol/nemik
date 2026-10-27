@@ -24,16 +24,13 @@ def _issue(number: int, body: str, *, pull_request: bool = False) -> Issue:
         The issue.
 
     """
-    return Issue(
-        number=number,
-        title=f"t{number}",
-        state="open",
-        body=body,
-        labels=[],
-        url=f"u{number}",
-        is_pull_request=pull_request,
-        locked=False,
-    )
+    issue = Issue(number)
+    issue.title = f"t{number}"
+    issue.state = "open"
+    issue.body = body
+    issue.url = f"u{number}"
+    issue.is_pull_request = pull_request
+    return issue
 
 
 ISSUES = [
