@@ -2726,3 +2726,17 @@
 2026-10-27T06:05:37Z  status W1145 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-27T06:06:58Z  interrupt W1151 minted    -         "alert_for fires on a miss in either direction, worse than predicted (fleet wandering) or better (model wrong), as the ruling says"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1146
 2026-10-27T06:07:05Z  status W1151 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T06:09:09Z  tick  W1145 advanced  collapse  "stack555 landed (0e4a0fe W1112 issued_at window rule; rosettapkg -14d added 4 in compact and in pacing). W1053 atomized into W1149/W1150 (watch list confirmed by linux-sources). stack556 in the gate: W1151 two-sided alert_for (found by replaying 2026-10-27T03:13Z: predicted -2.5, realized +0, no alert) and W1145 --replay. Told github-8f the witness does not hold on the real window. Next: W1149, W1150 tools (need BUILD data lines), and a manifest sweep for the 10 unmanifested ready cards. [reason: W1145 and W1151 are in the gate (stack556) (cites W1151)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T06:12:43Z  status W1150 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T06:32:36Z  status W1151 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T06:32:37Z  status W1145 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T06:32:37Z  tick  W1152 minted    -         "Replay sweep over the last 7 days of 45-minute windows printing alerted k of n with each direction"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W563
+2026-10-27T06:33:00Z  status W1152 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T06:38:18Z  tick  W1152 advanced  collapse  "stack556 landed (2d0e132 W1151 two-sided alert; 9a9829d W1145 --replay). stack557 in the gate: W1152 --sweep (planted-window tests; real fleet: alerted 31 of 224, first eight model wrong, a finding about the predictor) and W1150 tools/namespaces.py (sets match linux-sources once dot dirs are skipped; they agreed). Told github-8f and linux-sources. Next: W1149 peer churn tool (needs a public git helper in history.py), manifest sweep, W1048/W1049 first steps. [reason: W1152 and W1150 are in the gate (stack557); W1149 needs history.py which it carries (cites W1150, W1149)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T06:39:52Z  status W880 blocked>done writer    "blocked -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T06:39:53Z  status W1065 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T06:39:54Z  status W1066 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T06:39:55Z  status W1068 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T06:39:55Z  status W1091 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T06:40:31Z  tick  W1153 minted    -         "Trailing predictor for the net forecast, so each window is predicted from the days just before it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W563
+2026-10-27T07:01:17Z  status W846 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
