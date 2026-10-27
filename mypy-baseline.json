@@ -296,9 +296,6 @@
  "tests/test_inbound_letters.py": {
   "misc": 17
  },
- "tests/test_incremental_redraw.py": {
-  "misc": 62
- },
  "tests/test_layout.py": {
   "misc": 343,
   "no-untyped-def": 1

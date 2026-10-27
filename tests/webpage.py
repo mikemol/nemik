@@ -30,6 +30,8 @@ from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import Page as LaunchedPage
 from playwright.sync_api import Playwright as Launcher
 
+from nemik.tracker import BOOL, INT, Tree, parse_tree
+
 sync_api = pytest.importorskip("playwright.sync_api")
 __all__ = [
     "CY_READY",
@@ -251,11 +253,11 @@ def session(block: tuple[str, ...] = ()) -> Generator[Pager]:
 class Evaluator(Protocol):
     """Anything that runs a JS expression: Playwright's page, whose own answer is Any."""
 
-    def evaluate(self, expression: str) -> object:
-        """Run the JS expression in the page and return its value, a promise awaited."""
+    def evaluate(self, expression: str, arg: object = None) -> object:
+        """Run the JS expression in the page, passing `arg`, and return its value."""
 
 
-def evaluate_value(page: Evaluator, expression: str) -> object:
+def evaluate_value(page: Evaluator, expression: str, arg: object = None) -> object:
     """Run a JS expression in a page and return its value as an object, never as Any.
 
     Playwright's Page.evaluate answers Any, which the house type check counts at every call.
@@ -266,7 +268,62 @@ def evaluate_value(page: Evaluator, expression: str) -> object:
         The expression's value, as the browser serialised it.
 
     """
-    return page.evaluate(expression)
+    return page.evaluate(expression, arg)
+
+
+def evaluate_text(page: Evaluator, expression: str, arg: object = None) -> str:
+    """Run a JS function in a page and return what it gave as JSON text.
+
+    The page does the serialising (JSON.stringify of the awaited result), so a test compares two
+    answers as strings or reads one through nemik.tracker, with no dict or list of Any between.
+
+    Returns:
+        The JSON text of the function's result.
+
+    Raises:
+        TypeError: When the function gave nothing JSON can carry (undefined).
+
+    """
+    wrapped = (
+        f"(arg) => Promise.resolve(({expression})(arg)).then(v => JSON.stringify(v))"
+    )
+    value = page.evaluate(wrapped, arg)
+    if not isinstance(value, str):
+        message = f"{expression[:60]!r} gave no JSON, only {value!r}"
+        raise TypeError(message)
+    return value
+
+
+def evaluate_tree(page: Evaluator, expression: str, arg: object = None) -> Tree:
+    """Run a JS function in a page and parse what it gave into a tree.
+
+    Returns:
+        The parsed result; read it with flag, whole and tree.string.
+
+    """
+    return parse_tree(evaluate_text(page, expression, arg))
+
+
+def flag(tree: Tree, key: str) -> bool:
+    """Read a boolean member of the tree's root object.
+
+    Returns:
+        True only when the member is the boolean true; absent or any other kind reads False.
+
+    """
+    at = tree.get(tree.root, key)
+    return tree.kinds[at] == BOOL and tree.flags[at]
+
+
+def whole(tree: Tree, key: str) -> int:
+    """Read an integer member of the tree's root object.
+
+    Returns:
+        The integer, or -1 when the member is absent or not an integer.
+
+    """
+    at = tree.get(tree.root, key)
+    return tree.wholes[at] if tree.kinds[at] == INT else -1
 
 
 def evaluated(expr: str) -> object:

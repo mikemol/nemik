@@ -13,8 +13,7 @@ from collections.abc import Iterator
 
 import pytest
 import webpage
-
-sync_api = pytest.importorskip("playwright.sync_api")
+from playwright.sync_api import sync_playwright
 
 # two animation frames on the page's own clock: whatever a change queued to draw has been drawn
 TWO_FRAMES = (
@@ -35,24 +34,30 @@ def server() -> Iterator[str]:
 def test_a_poll_that_only_changes_fields_follows_in_place(server: str) -> None:
     # W496: the poll rebuilt the graph whenever anything differed; a change to a card's fields now
     # writes onto the same graph: same instance, and nothing moves.
-    with sync_api.sync_playwright() as p:
-        browser, page = webpage.open_page(p, server)
-        page.evaluate("() => { cy.__kept = true; }")
-        before = page.evaluate(POSITIONS)
-        card = page.evaluate(
+    with sync_playwright() as p:
+        browser, page = webpage.launched_page(p, server)
+        webpage.evaluate_value(page, "() => { cy.__kept = true; }")
+        before = webpage.evaluate_text(page, POSITIONS)
+        card = webpage.evaluate_value(
+            page,
             "() => { const n = data.nodes.find(x => x.state === 'ready'"
             " && cy.getElementById(x.id).length);"
-            " n.state = 'working'; n.title = 'retitled by a poll'; render(true); return n.id; }"
+            " n.state = 'working'; n.title = 'retitled by a poll'; render(true); return n.id; }",
         )
-        same = page.evaluate("() => cy.__kept === true")
-        after = page.evaluate(POSITIONS)
-        label = page.evaluate(f"() => cy.getElementById({card!r}).data('label')")
-        hidden = page.evaluate("() => document.getElementById('relayout').hidden")
+        same = webpage.evaluate_value(page, "() => cy.__kept === true")
+        after = webpage.evaluate_text(page, POSITIONS)
+        label = webpage.evaluate_value(
+            page, f"() => cy.getElementById({card!r}).data('label')"
+        )
+        hidden = webpage.evaluate_value(
+            page, "() => document.getElementById('relayout').hidden"
+        )
         browser.close()
-    assert same, "the poll rebuilt the graph for a change to a card's fields"
+    assert same is True, "the poll rebuilt the graph for a change to a card's fields"
     assert after == before, "a card moved"
+    assert isinstance(label, str)
     assert "▸" in label
-    assert hidden
+    assert hidden is True
 
 
 ADD_A_CARD = """() => {
@@ -101,40 +106,48 @@ def test_a_poll_that_adds_and_removes_cards_leaves_the_rest_where_it_was(
 ) -> None:
     # W498: a new card goes beside what it is wired to, a removed one leaves its place empty, and
     # the button lays the graph out afresh.
-    with sync_api.sync_playwright() as p:
-        browser, page = webpage.open_page(p, server)
-        page.evaluate("() => { cy.__kept = true; }")
-        before = page.evaluate(POSITIONS)
-        new_id = page.evaluate(ADD_A_CARD)
-        added = page.evaluate(WHERE_IT_WENT, new_id)
-        moved = page.evaluate(MOVED, before)
-        gone = page.evaluate(TAKE_IT_AWAY, new_id)
+    with sync_playwright() as p:
+        browser, page = webpage.launched_page(p, server)
+        webpage.evaluate_value(page, "() => { cy.__kept = true; }")
+        before = webpage.evaluate_value(page, POSITIONS)
+        new_id = webpage.evaluate_value(page, ADD_A_CARD)
+        added = webpage.evaluate_tree(page, WHERE_IT_WENT, new_id)
+        moved = webpage.evaluate_text(page, MOVED, before)
+        gone = webpage.evaluate_tree(page, TAKE_IT_AWAY, new_id)
         page.click("#relayout")
         webpage.until(page, "() => document.getElementById('relayout').hidden")
-        fresh = page.evaluate(
+        fresh = webpage.evaluate_tree(
+            page,
             "() => ({ rebuilt: cy.__kept !== true,"
-            " hidden: document.getElementById('relayout').hidden })"
+            " hidden: document.getElementById('relayout').hidden })",
         )
         browser.close()
-    assert added["there"] == 1 and added["finite"], added
-    assert not added["clash"], "the new card was placed on top of another"
-    assert added["kept"] and not added["hidden"] and "1 cards" in added["text"]
-    assert moved == [], f"cards moved: {moved[:5]}"
-    assert gone["removed"] and gone["kept"] and "2 cards" in gone["text"]
-    assert fresh["rebuilt"] and fresh["hidden"], "re-layout did not start afresh"
+    assert webpage.whole(added, "there") == 1 and webpage.flag(added, "finite")
+    assert not webpage.flag(added, "clash"), "the new card was placed on top of another"
+    assert webpage.flag(added, "kept") and not webpage.flag(added, "hidden")
+    assert "1 cards" in added.string(added.root, "text")
+    assert moved == "[]", f"cards moved: {moved[:200]}"
+    assert webpage.flag(gone, "removed") and webpage.flag(gone, "kept")
+    assert "2 cards" in gone.string(gone.root, "text")
+    assert webpage.flag(fresh, "rebuilt") and webpage.flag(fresh, "hidden"), (
+        "re-layout did not start afresh"
+    )
 
 
 def test_a_rebuilt_card_list_keeps_the_focus_a_reader_had_in_it(server: str) -> None:
     # W480: a poll that changes a row's text rebuilds the list; keyboard focus stays on the same card.
-    with sync_api.sync_playwright() as p:
-        browser, page = webpage.open_page(p, server)
-        page.evaluate("() => { document.getElementById('sec-cards').open = true; }")
+    with sync_playwright() as p:
+        browser, page = webpage.launched_page(p, server)
+        webpage.evaluate_value(
+            page, "() => { document.getElementById('sec-cards').open = true; }"
+        )
         page.wait_for_selector("#cardlist button[tabindex='0']", state="attached")
         page.locator("#cardlist button[tabindex='0']").focus()
         page.keyboard.press("ArrowDown")
         page.keyboard.press("ArrowDown")
-        held = page.evaluate("() => document.activeElement.dataset.card")
-        page.evaluate(
+        held = webpage.evaluate_value(page, "() => document.activeElement.dataset.card")
+        webpage.evaluate_value(
+            page,
             "(id) => { const n = data.nodes.find(x => x.id !== id && x.symbol"
             " && cy.getElementById(x.id).length);"
             " n.title = 'retitled so the list rebuilds';"
@@ -142,10 +155,11 @@ def test_a_rebuilt_card_list_keeps_the_focus_a_reader_had_in_it(server: str) -> 
             held,
         )
         webpage.until(page, TWO_FRAMES)
-        now = page.evaluate("() => document.activeElement.dataset.card")
-        stops = page.evaluate(
+        now = webpage.evaluate_value(page, "() => document.activeElement.dataset.card")
+        stops = webpage.evaluate_value(
+            page,
             "() => [...document.querySelectorAll('#cardlist button')]"
-            ".filter(b => b.tabIndex === 0).length"
+            ".filter(b => b.tabIndex === 0).length",
         )
         browser.close()
     assert now == held, "the list's rebuild dropped the reader's focus"
@@ -155,17 +169,19 @@ def test_a_rebuilt_card_list_keeps_the_focus_a_reader_had_in_it(server: str) -> 
 def test_a_panel_whose_markup_did_not_change_is_not_rewritten(server: str) -> None:
     # W497: a panel the reader is scrolled or focused in is left alone by a poll that did not change it,
     # and one something else touched is painted again.
-    with sync_api.sync_playwright() as p:
-        browser, page = webpage.open_page(p, server)
-        survived = page.evaluate(
+    with sync_playwright() as p:
+        browser, page = webpage.launched_page(p, server)
+        survived = webpage.evaluate_value(
+            page,
             "() => { const box = document.getElementById('findings');"
             " box.firstElementChild.__kept = true; findings();"
-            " return box.firstElementChild.__kept === true; }"
+            " return box.firstElementChild.__kept === true; }",
         )
-        repainted = page.evaluate(
+        repainted = webpage.evaluate_value(
+            page,
             "() => { const box = document.getElementById('findings');"
-            " box.textContent = 'touched'; findings(); return box.textContent !== 'touched'; }"
+            " box.textContent = 'touched'; findings(); return box.textContent !== 'touched'; }",
         )
         browser.close()
-    assert survived, "findings() rebuilt a panel that had not changed"
-    assert repainted, "a panel something else touched was not repainted"
+    assert survived is True, "findings() rebuilt a panel that had not changed"
+    assert repainted is True, "a panel something else touched was not repainted"
