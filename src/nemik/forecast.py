@@ -102,7 +102,7 @@ def lines(root: Path, merged: Graph, now: datetime) -> list[str]:
 
     """
     start = (now - timedelta(days=WINDOW_DAYS)).astimezone()
-    since = start.strftime("%Y-%m-%dT%H:%M:%S")
+    since = start.isoformat(timespec="seconds")
     out = [
         "# TYPE nemik_umbrella_forecast_days gauge",
         "# TYPE nemik_unforecastable_cards gauge",

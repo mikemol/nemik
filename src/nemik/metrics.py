@@ -415,7 +415,8 @@ def completed_in(repo_dir: Path, since: str) -> int | None:
 
     Args:
         repo_dir: The repo's working directory.
-        since: A local `YYYY-MM-DDTHH:MM:SS` instant (see nemik.history.resolve).
+        since: A zoned instant such as `2026-10-13T13:07:05+00:00` (see nemik.history.resolve,
+            which refuses one with no zone).
 
     Returns:
         How many cards the committed queue closed between `since` and HEAD, or None when the
@@ -441,7 +442,7 @@ def completed_lines(root: Path, now: datetime) -> list[str]:
         The gauge's TYPE line and a sample for each repo whose git history is readable.
 
     """
-    since = (now - timedelta(days=1)).astimezone().strftime("%Y-%m-%dT%H:%M:%S")
+    since = (now - timedelta(days=1)).astimezone().isoformat(timespec="seconds")
     out = ["# TYPE nemik_cards_completed_24h gauge"]
     for repo, path in workstream_files(root, QUEUE):
         top = path.parents[1] if path.parent.name == ".claude" else path.parent
@@ -472,7 +473,7 @@ def flow_lines(root: Path, merged: Graph, now: datetime) -> list[str]:
 
     """
     arrived = arrivals_within(merged, now, FLOW_DAYS * DAY)
-    since = (now - timedelta(days=FLOW_DAYS)).astimezone().strftime("%Y-%m-%dT%H:%M:%S")
+    since = (now - timedelta(days=FLOW_DAYS)).astimezone().isoformat(timespec="seconds")
     out = [
         "# TYPE nemik_arrival_pressure gauge",
         "# TYPE nemik_net_inflow_per_day gauge",
@@ -503,7 +504,7 @@ def commit_lines(root: Path, now: datetime) -> list[str]:
         The gauge's TYPE line and a sample for each repo whose git history is readable.
 
     """
-    since = (now - timedelta(days=1)).astimezone().strftime("%Y-%m-%dT%H:%M:%S")
+    since = (now - timedelta(days=1)).astimezone().isoformat(timespec="seconds")
     out = ["# TYPE nemik_commits_24h gauge"]
     for repo, path in workstream_files(root, QUEUE):
         top = path.parents[1] if path.parent.name == ".claude" else path.parent
@@ -524,7 +525,7 @@ def reopened_lines(root: Path, now: datetime) -> list[str]:
         The gauge's TYPE line and a sample for each repo whose queue history is readable.
 
     """
-    since = (now - timedelta(days=1)).astimezone().strftime("%Y-%m-%dT%H:%M:%S")
+    since = (now - timedelta(days=1)).astimezone().isoformat(timespec="seconds")
     out = ["# TYPE nemik_cards_reopened_24h gauge"]
     for repo, path in workstream_files(root, QUEUE):
         top = path.parents[1] if path.parent.name == ".claude" else path.parent
