@@ -75,6 +75,13 @@ vendored_wheel(
     wheel = "//:vendor/wheels/mikemol_atomicwrite-0.1.0+504b80e-py3-none-any.whl",
 )
 
+# nemik:W1180: mtools' transcriptstruct (mikemol-transcriptstruct, the reader of the host transcripts
+# that warrants verify against), at the same sha, so the live tools carry it (github-8f 2026-10-27).
+vendored_wheel(
+    name = "transcriptstruct",
+    wheel = "//:vendor/wheels/mikemol_transcriptstruct-0.1.0+g504b80e-py3-none-any.whl",
+)
+
 # nemik:W417: mtools' rulerseq (mikemol.rulerseq, mtools:W1048), at the same sha: the ruler-sequence
 # patterns for halo rings and blocker lines, computed server-side (W418) instead of ported in the page.
 vendored_wheel(

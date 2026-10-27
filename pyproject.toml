@@ -15,6 +15,7 @@ dependencies = [
     "mikemol-rulerseq",  # nemik:W417: the ruler-sequence generator (mtools:W1048), computed server-side by W418
     "mikemol-converge",  # nemik:W776/W652: the shared converge loop (mtools:W1522), stdlib only; nemik's own copy is gone (W777), tests/test_converge.py runs it
     "mikemol-frontier",  # nemik:W483: the fleet's shared frontier walker (mtools:W1127), rank.frontier reads through it
+    "mikemol-transcriptstruct",  # nemik:W1180: mikemol-transcriptstruct beside the interpreter, so a warrant is read from nemik's own install (github-8f)
     "mikemol-icsstruct",  # nemik:W157: operator calendars (W113) read through mtools' lossless iCalendar reader (mtools:W304)  # nemik:W145: RRULE expansion (mtools:W309 stores the rule, nemik expands it)
 ]
 
@@ -30,6 +31,7 @@ mikemol-ratchet = { path = "vendor/wheels/mikemol_ratchet-0.1.0+504b80e-py3-none
 mikemol-atomicwrite = { path = "vendor/wheels/mikemol_atomicwrite-0.1.0+504b80e-py3-none-any.whl" }
 mikemol-frontier = { path = "vendor/wheels/mikemol_frontier-0.1.0+504b80e-py3-none-any.whl" }
 mikemol-cvdcore = { path = "vendor/wheels/mikemol_cvdcore-0.1.0+504b80e-py3-none-any.whl" }
+mikemol-transcriptstruct = { path = "vendor/wheels/mikemol_transcriptstruct-0.1.0+g504b80e-py3-none-any.whl" }
 mikemol-converge = { path = "vendor/wheels/mikemol_converge-0.1.0+0f8267e-py3-none-any.whl" }
 mikemol-webpage = { path = "vendor/wheels/mikemol_webpage-0.1.0+146ebaaf-py3-none-any.whl" }
 mikemol-otlp = { path = "vendor/wheels/mikemol_otlp-0.1.0+5ba261f-py3-none-any.whl" }

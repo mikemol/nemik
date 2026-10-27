@@ -453,6 +453,14 @@ wheels = [
 ]
 
 [[package]]
+name = "mikemol-transcriptstruct"
+version = "0.1.0+g504b80e"
+source = { path = "vendor/wheels/mikemol_transcriptstruct-0.1.0+g504b80e-py3-none-any.whl" }
+wheels = [
+    { filename = "mikemol_transcriptstruct-0.1.0+g504b80e-py3-none-any.whl", hash = "sha256:8671a48e27ed9c59e1a024e790965ecdeb1b012f4c68cf1f291a0d204e10d1e0" },
+]
+
+[[package]]
 name = "mikemol-webpage"
 version = "0.1.0+146ebaaf"
 source = { path = "vendor/wheels/mikemol_webpage-0.1.0+146ebaaf-py3-none-any.whl" }
@@ -531,6 +539,7 @@ dependencies = [
     { name = "mikemol-pathsforward" },
     { name = "mikemol-ratchet" },
     { name = "mikemol-rulerseq" },
+    { name = "mikemol-transcriptstruct" },
     { name = "pyshacl" },
     { name = "python-dateutil" },
     { name = "rdflib" },
@@ -566,6 +575,7 @@ requires-dist = [
     { name = "mikemol-pathsforward", path = "vendor/wheels/mikemol_pathsforward-0.1.0+504b80e-py3-none-any.whl" },
     { name = "mikemol-ratchet", path = "vendor/wheels/mikemol_ratchet-0.1.0+504b80e-py3-none-any.whl" },
     { name = "mikemol-rulerseq", path = "vendor/wheels/mikemol_rulerseq-0.1.0+504b80e-py3-none-any.whl" },
+    { name = "mikemol-transcriptstruct", path = "vendor/wheels/mikemol_transcriptstruct-0.1.0+g504b80e-py3-none-any.whl" },
     { name = "paperkit", marker = "extra == 'docs'", git = "https://github.com/mikemol/paperkit.git?rev=b5877102af3b48005fde814416bff5b8f06ba5cd" },
     { name = "pyshacl", specifier = ">=0.26" },
     { name = "python-dateutil", specifier = ">=2.9" },

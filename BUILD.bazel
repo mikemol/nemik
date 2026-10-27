@@ -123,7 +123,7 @@ filegroup(
 # console script, the same entries as pyproject's [project.scripts] plus pathsforward's own.
 venv_from_hub(
     name = ".venv",
-    hub_requirements = all_requirements + ["@pathsforward//:pkg", "@icsstruct//:pkg", "@hooks//:pkg", "@fence//:pkg", "@rulerseq//:pkg", "@frontier//:pkg", "@cvdcore//:pkg", "@converge//:pkg", "@webpage//:pkg", "@endpoints//:pkg", "@otlp//:pkg", "@ratchet//:pkg", "@atomicwrite//:pkg"],
+    hub_requirements = all_requirements + ["@pathsforward//:pkg", "@icsstruct//:pkg", "@hooks//:pkg", "@fence//:pkg", "@rulerseq//:pkg", "@frontier//:pkg", "@cvdcore//:pkg", "@converge//:pkg", "@webpage//:pkg", "@endpoints//:pkg", "@otlp//:pkg", "@ratchet//:pkg", "@atomicwrite//:pkg", "@transcriptstruct//:pkg"],
     python_version = "3.13",
     python_version_short = "3.13",
     srcs = glob(["src/nemik/**"], exclude = ["**/__pycache__/**"]),
@@ -164,6 +164,9 @@ venv_from_hub(
         # and the emitter, both from the pinned mtools wheels.
         "mikemol-ratchet": "mikemol.ratchet.cli:main",
         "mikemol-ratchet-emit": "mikemol.hooks.ratchet_emit:main",
+        # nemik:W1180: the transcript reader that warrants verify against, so nemik's own install
+        # carries it and the host's live tools need not fall back to mtools' editable venv.
+        "mikemol-transcriptstruct": "mikemol.transcriptstruct.cli:main",
         "nemik-days": "nemik.calendars:days_main",
         "nemik-calendar-write": "nemik.calwrite:main",
         "nemik-history": "nemik.history:main",
