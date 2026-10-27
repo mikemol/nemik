@@ -244,7 +244,7 @@ def is_rego(query: str, lang: str = "") -> bool:
 
 def witness(
     query: str, now: datetime | None = None, lang: str = ""
-) -> tuple[str, dict, list[str]]:
+) -> tuple[str, dict[str, object], list[str]]:
     """'true' | 'false' | 'undefined' for a waypoint's witness, with the facts that decided it.
 
     nemik:W501: a witness that is a bare PromQL expression holds while its instant query returns a
@@ -485,5 +485,5 @@ def main(argv: list[str] | None = None) -> None:
                     file=sys.stderr,
                 )
                 continue
-            for letter in wake(args.root, repo, sym, query, doc["now"]):
+            for letter in wake(args.root, repo, sym, query, str(doc["now"])):
                 print(f"WOKE {letter}")

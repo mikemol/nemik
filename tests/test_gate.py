@@ -17,7 +17,7 @@ import installed
 import pytest
 
 
-def waypoint(sym: str, **kw) -> dict:
+def waypoint(sym: str, **kw: object) -> dict[str, object]:
     return {
         "symbol": sym,
         "title": f"{sym} title",
@@ -34,10 +34,10 @@ def waypoint(sym: str, **kw) -> dict:
     } | kw
 
 
-def write_queue(root: Path, repo: str, *wps: dict) -> None:
+def write_queue(root: Path, repo: str, *wps: dict[str, object]) -> None:
     d = root / repo
     d.mkdir(parents=True)
-    counter = max((int(w["symbol"][1:]) for w in wps), default=0)
+    counter = max((int(str(w["symbol"])[1:]) for w in wps), default=0)
     payload: dict[str, object] = {
         "version": 1,
         "project_root": f"/fixture/{repo}",
@@ -48,7 +48,7 @@ def write_queue(root: Path, repo: str, *wps: dict) -> None:
     (d / "paths-forward.json").write_text(json.dumps(payload))
 
 
-def run(tool: str, root: Path, *argv: str) -> subprocess.CompletedProcess:
+def run(tool: str, root: Path, *argv: str) -> subprocess.CompletedProcess[str]:
     return installed.run(f"nemik-{tool}", "--root", str(root), *argv)
 
 

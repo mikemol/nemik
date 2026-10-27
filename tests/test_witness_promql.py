@@ -49,7 +49,7 @@ def test_a_sample_means_the_witness_holds(monkeypatch: pytest.MonkeyPatch) -> No
     asked = _answer(monkeypatch, [{"value": [1, "31.5"]}])
     verdict, doc, missing = witness(EXECUTOR_LOAD)
     assert (verdict, missing) == ("true", [])
-    assert doc["promql"][EXECUTOR_LOAD] == {"values": [31.5], "empty": False}
+    assert doc["promql"] == {EXECUTOR_LOAD: {"values": [31.5], "empty": False}}
     assert asked == [{"query": EXECUTOR_LOAD}], (
         "the expression went to the probe unchanged"
     )
@@ -59,7 +59,7 @@ def test_an_empty_result_means_not_yet(monkeypatch: pytest.MonkeyPatch) -> None:
     _answer(monkeypatch, [])
     verdict, doc, _ = witness(EXECUTOR_LOAD)
     assert verdict == "false"
-    assert doc["promql"][EXECUTOR_LOAD]["empty"] is True
+    assert doc["promql"] == {EXECUTOR_LOAD: {"values": [], "empty": True}}
 
 
 def test_an_unreachable_probe_is_undefined_never_false(

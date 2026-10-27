@@ -32,7 +32,7 @@ def test_file_witness_true_false(tmp_path) -> None:
     p.write_text("")
     verdict, doc, _ = witness(q)
     assert verdict == "true"
-    assert doc["file"][str(p)] == {"exists": True}
+    assert doc["file"] == {str(p): {"exists": True}}
 
 
 def test_pid_witness_sees_live_and_gone() -> None:

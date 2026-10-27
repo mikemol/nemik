@@ -34,7 +34,9 @@ def _edge(a: str, b: str, kind: str = "waits") -> dict[str, str]:
     return {"source": a, "target": b, "kind": kind}
 
 
-def _doc(nodes: list[Any], edges: list[Any], **extra: Any) -> dict[str, Any]:
+def _doc(
+    nodes: list[dict[str, str]], edges: list[dict[str, str]], **extra: object
+) -> dict[str, object]:
     return {
         "nodes": nodes,
         "edges": edges,

@@ -156,11 +156,11 @@
   "type-arg": 1
  },
  "src/nemik/witnesses.py": {
-  "misc": 101,
-  "type-arg": 11
+  "misc": 93,
+  "type-arg": 10
  },
  "src/nemik/witwait.py": {
-  "misc": 11
+  "misc": 6
  },
  "src/nemik/work.py": {
   "call-overload": 1,
@@ -254,9 +254,7 @@
   "misc": 25
  },
  "tests/test_gate.py": {
-  "misc": 183,
-  "no-untyped-def": 1,
-  "type-arg": 3
+  "misc": 17
  },
  "tests/test_guarantees.py": {
   "misc": 25,
@@ -437,10 +435,10 @@
  },
  "tests/test_witness_promql.py": {
   "explicit-any": 2,
-  "misc": 21
+  "misc": 11
  },
  "tests/test_witnesses.py": {
-  "misc": 92,
+  "misc": 69,
   "no-untyped-def": 10,
   "type-arg": 1
  },
@@ -459,8 +457,8 @@
   "misc": 12
  },
  "tools/gen_pieces_corpus.py": {
-  "explicit-any": 3,
-  "misc": 102,
+  "explicit-any": 2,
+  "misc": 45,
   "no-any-return": 1
  },
  "tools/nemik_client.py": {
