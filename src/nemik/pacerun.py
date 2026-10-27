@@ -41,6 +41,27 @@ def floors_of(export: str) -> dict[str, int]:
     }
 
 
+def retired_of(export: str) -> frozenset[str]:
+    """Name the ratchets the store lists a tombstone for (nemik:W1040).
+
+    mtools emits mikemol.ratchet.retired{repo, ratchet, reason} = 1 on every run while the tombstone
+    stands; a ratchet's absence from the value series is only a retirement when one is written.
+
+    Args:
+        export: The store's raw export of mikemol.ratchet.retired, one series per line.
+
+    Returns:
+        The `repo` and `ratchet` keys, joined by a newline, whose newest sample is 1 or more; empty
+        when the export holds no series, as before the emitter ran.
+
+    """
+    return frozenset(
+        f"{repo}\n{ratchet}"
+        for repo, ratchet, values in export_series(export)
+        if values and values[-1] >= 1
+    )
+
+
 def resets_of(export: str) -> list[str]:
     """Name the ratchets whose required fall now stands below a level it once held.
 
@@ -84,7 +105,11 @@ def pace_document(answer: str, previous: str, stamp: str) -> str:
 
 
 def pace_document_floored(
-    answer: str, previous: str, stamp: str, floors: dict[str, int]
+    answer: str,
+    previous: str,
+    stamp: str,
+    floors: dict[str, int],
+    retired: frozenset[str] = frozenset(),
 ) -> str:
     """Judge every ratchet series of an answer and write the pace file.
 
@@ -94,10 +119,13 @@ def pace_document_floored(
         previous: The pace file the last run wrote, empty when there is none.
         stamp: When this run reads the store, a UTC stamp.
         floors: The requirements the store remembers (floors_of); each only raises the prior.
+        retired: The ratchets with a tombstone in the store (retired_of).
 
     Returns:
         The pace file's text, one row per ratchet series. A series of the export that ended while
-        its repo's others went on reads unknown (nemik:W1039), never ok and never behind. A series
+        its repo's others went on reads unknown (nemik:W1039), never ok and never behind, unless
+        the store lists its tombstone (nemik:W1040), when it leaves the file: a retired ratchet
+        has no verdict to give, and one that is still written stays judged. A series
         with a declared re-baseline (nemik:W1046) is judged from the declared step on, so the
         step earns no paydown credit. Each row also states the ratchet's value and its horizon,
         the landings to zero at the pace it last fell (nemik:W1114).
@@ -114,11 +142,14 @@ def pace_document_floored(
         priors[key] = max(priors.get(key, 0), floor)
     is_answer = answer.lstrip().startswith(ANSWER_HEAD)
     read = series_of(answer) if is_answer else export_series(answer)
+    ended = [] if is_answer else ended_series(answer)
+    gone = {f"{repo}\n{ratchet}" for repo, ratchet in ended} & retired
     series = [
         (repo, ratchet, since(values, repo, ratchet, DECLARED))
         for repo, ratchet, values in read
+        if f"{repo}\n{ratchet}" not in gone
     ]
-    ended = [] if is_answer else ended_series(answer)
+    ended = [pair for pair in ended if f"{pair[0]}\n{pair[1]}" not in gone]
     if not series:
         message = "the answer holds no ratchet series"
         raise ValueError(message)

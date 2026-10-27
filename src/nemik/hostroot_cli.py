@@ -27,7 +27,7 @@ from nemik.hostroot import HostRow, latest, records
 from nemik.landings import document as landings_document
 from nemik.landings import records as landings_records
 from nemik.logactivities import activities, repos
-from nemik.pacerun import floors_of, pace_document_floored
+from nemik.pacerun import floors_of, pace_document_floored, retired_of
 
 QUERY = "stream:host_root_frontier"
 LANDINGS_QUERY = "service.name:mikemol-commit"
@@ -47,6 +47,8 @@ PRIOR_DIR = Path.home() / ".local" / "state" / "nemik" / "ratchet-priors"
 RATCHET_SELECTOR = '{__name__="mikemol.ratchet.value"}'
 # the required fall nemik publishes per ratchet; its highest sample is a floor no file loss can take
 REQUIRED_SELECTOR = '{__name__="nemik_ratchet_fall_required"}'
+# the tombstones mtools writes for a retired ratchet (mtools:W1964): 1 on every run while listed
+RETIRED_SELECTOR = '{__name__="mikemol.ratchet.retired"}'
 
 
 def _quoted(text: str) -> str:
@@ -194,10 +196,11 @@ def pace_fetch(root: Path, target: Path | None, stamp: str) -> int:
     try:
         answer = vm_export(RATCHET_SELECTOR, root)
         floors = floors_of(vm_export(REQUIRED_SELECTOR, root))
+        retired = retired_of(vm_export(RETIRED_SELECTOR, root))
     except OSError as error:
         sys.stderr.write(f"nemik-hostroot: {error}\n")
         return 1
-    return _judge(answer, target or PACE_OUT, stamp, floors)
+    return _judge(answer, target or PACE_OUT, stamp, floors, retired)
 
 
 def pace_run(options: _Options, stamp: str) -> int:
@@ -213,7 +216,11 @@ def pace_run(options: _Options, stamp: str) -> int:
 
 
 def _judge(
-    answer: str, out: Path, stamp: str, floors: dict[str, int] | None = None
+    answer: str,
+    out: Path,
+    stamp: str,
+    floors: dict[str, int] | None = None,
+    retired: frozenset[str] = frozenset(),
 ) -> int:
     """Judge an answer against the last pace file and replace it whole.
 
@@ -222,6 +229,7 @@ def _judge(
         out: Where the pace file goes.
         stamp: When this run reads the store, a UTC stamp.
         floors: The requirements the store remembers, or None when it was not asked.
+        retired: The ratchets with a tombstone in the store (nemik:W1040).
 
     Returns:
         0 when written; 1 when the answer is not a readable set of series.
@@ -235,7 +243,7 @@ def _judge(
             previous = kept.read_text(encoding="utf-8")
         else:
             previous = out.read_text(encoding="utf-8") if out.is_file() else ""
-        text = pace_document_floored(answer, previous, stamp, floors or {})
+        text = pace_document_floored(answer, previous, stamp, floors or {}, retired)
     except (OSError, TypeError, ValueError) as error:
         sys.stderr.write(f"nemik-hostroot: {error}\n")
         return 1

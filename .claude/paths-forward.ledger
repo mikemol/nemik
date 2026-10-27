@@ -2676,3 +2676,7 @@
 2026-10-27T01:39:18Z  prune W1040 edge-pruned writer    "mtools:W1964"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-27T01:39:18Z  status W1040 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-27T01:42:56Z  status W1014 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T01:45:58Z  status W1040 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T01:52:14Z  tick  W1142 minted    -         "marks.py imports Path and Json for typing only, so ruff falls 2616 to 2614 (paydown after adoption.py)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
+2026-10-27T01:52:17Z  status W1142 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T01:52:34Z  tick  W1040 advanced  unblock   "stack547 (W1014 adoption.py, ruff 2620 to 2616) in the gate; stack548 queued behind it: W1142 marks.py (ruff to 2614) and W1040 (retired tombstones leave the pace, no new row key). github-8f re-asked landings, non-git queue and importdag atomization: recorded on W1128, W1139, W1141, after the paydown. W1038 confirmed on the host (59 rows, 1 unknown). [blocked by W1014]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

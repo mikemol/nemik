@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1141,
+  "counter": 1142,
   "waypoints": [
     {
       "symbol": "W1",
@@ -24203,7 +24203,7 @@
     {
       "symbol": "W1040",
       "title": "Read the store's retired-ratchet tombstones into the pace verdict",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
@@ -24213,7 +24213,7 @@
       "issued_at": "2026-10-25T12:22:46Z",
       "minted_during": "tick",
       "caused_by": "W1039",
-      "last_worked": "2026-10-25T14:39:10Z",
+      "last_worked": "2026-10-27T01:45:58Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -26907,6 +26907,30 @@
         "BUILD.bazel"
       ],
       "size_class": "large"
+    },
+    {
+      "symbol": "W1142",
+      "title": "marks.py imports Path and Json for typing only, so ruff falls 2616 to 2614 (paydown after adoption.py)",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:ruff-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Land with stack548: marks.py TC002/TC003 under TYPE_CHECKING, ruff baseline 2616 to 2614",
+      "evidence": "",
+      "issued_at": "2026-10-27T01:52:14Z",
+      "minted_during": "tick",
+      "caused_by": "W1014",
+      "last_worked": "2026-10-27T01:52:17Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/marks.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "small"
     }
   ],
   "residue": [
@@ -27088,12 +27112,7 @@
   ],
   "job_id": "1d7fe6d0",
   "heartbeat": "2026-10-22T02:06:35Z",
-  "lock": {
-    "holder": "claude-nemik",
-    "taken_at": "2026-10-27T01:39:18Z",
-    "pid": 1281447,
-    "start": 39974717
-  },
+  "lock": null,
   "predecessor_job_id": "disarmed",
   "leases": [
     {
