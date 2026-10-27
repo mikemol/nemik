@@ -9,13 +9,7 @@ pixels, or a 24 px circle that meets no other target) and 4.1.2 and 2.5.3 (a con
 name, and the name contains the text it shows).
 """
 
-import os
-from pathlib import Path
-
-import pytest
 import webpage
-from playwright.sync_api import Error as PlaywrightError
-from playwright.sync_api import sync_playwright
 
 from nemik.wcagjudge import Row, judge_names, judge_order, judge_targets
 
@@ -39,19 +33,6 @@ def test_tab_visits_the_pages_controls_in_reading_order() -> None:
     shown = [t for t in _page_rows(TARGETS) if not t["clipped"]]
     assert len(shown) > MIN_TOOLBAR
     assert not judge_order(shown)
-
-
-def _absolute(path: str) -> str:
-    """Make a path absolute.
-
-    Args:
-        path: A path, possibly relative to the test's working directory.
-
-    Returns:
-        The absolute path.
-
-    """
-    return str(Path(path).resolve())
 
 
 CONTROLS = (
@@ -199,18 +180,9 @@ def _page_rows(script: str) -> list[Row]:
     """
     if script in SEEN:
         return SEEN[script]
-    exe = os.environ.get("NEMIK_CHROMIUM")
-    with webpage.served() as url, sync_playwright() as p:
-        try:
-            browser = p.chromium.launch(executable_path=_absolute(exe) if exe else None)
-        except PlaywrightError as e:
-            pytest.skip(f"chromium unavailable: {e}")
-        page = browser.new_page(viewport={"width": 1700, "height": 1250})
-        webpage.watch(page)
-        page.goto(url)
-        webpage.until(page, webpage.CY_READY)
-        raw: object = page.evaluate(script)
-        browser.close()
+    # nemik:W846: opened through the harness that lists the requests that failed or got an error
+    # status, so a script lost under load names the asset instead of only popLater
+    raw = webpage.evaluated(script)
     rows: list[Row] = []
     if isinstance(raw, list):
         rows = [{str(k): v for k, v in r.items()} for r in raw if isinstance(r, dict)]
