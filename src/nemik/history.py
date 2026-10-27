@@ -1071,6 +1071,13 @@ def main(argv: list[str] | None = None) -> int:
         "reads a bare -45m as an option) (W1127)",
     )
     ap.add_argument(
+        "--compact",
+        action="store_true",
+        help="with --baseline: one fleet line (closed, dropped, added, net) then only the repos "
+        f"that changed, at most {ROW_LINES} lines; a queue outside git is read from its card "
+        "stamps (W1112)",
+    )
+    ap.add_argument(
         "--where",
         default="",
         metavar="EXPRESSION",
@@ -1110,7 +1117,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.toil:
         return _toil(args, names, dirs)
     if args.baseline is not None:
-        return _baseline(args, names, dirs)
+        return _baselined(args, names, dirs)
     if is_series(args):
         return _series(args, names, dirs)
     out: dict[str, Diff] = {}
@@ -1503,6 +1510,8 @@ class Opts(argparse.Namespace):
     where: str
     oldest: int
     root: Path
+    baseline: str | None
+    compact: bool
 
 
 def emit(args: Opts, mode: str, rows: object) -> bool:
@@ -1552,6 +1561,205 @@ def _waits(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
                 f"{name}\t{status}\tn {int(r['n'])}\tmedian {r['median_days']} d"
                 f"\tp90 {r['p90_days']} d\n"
             )
+    return 0
+
+
+ROW_LINES = 10  # nemik:W1112: the most lines a hook may print, the host's tick-open cap
+
+
+def window_start(spec: str) -> datetime | None:
+    """Name the instant a window spec reaches back to, for a queue with no git history.
+
+    Args:
+        spec: A window back from now (`-45m`, `ago:2d`) or an instant with its zone.
+
+    Returns:
+        The instant, or None when `spec` is a revision or a bare date (only git reads those).
+
+    """
+    relative = _RELATIVE.fullmatch(spec)
+    if relative:
+        back = int(relative.group(1)) * _SECONDS[relative.group(2)]
+        return datetime.fromtimestamp(datetime.now(UTC).timestamp() - back, UTC)
+    if _ZONED.fullmatch(spec):
+        return datetime.fromisoformat(spec.replace(" ", "T"))
+    return None
+
+
+def _stamp(value: object) -> datetime | None:
+    """Read a queue timestamp.
+
+    Returns:
+        The instant, zoned (a bare one is read as UTC); None when absent or unreadable.
+
+    """
+    if not isinstance(value, str) or not value:
+        return None
+    try:
+        at = datetime.fromisoformat(value)
+    except ValueError:
+        return None
+    return at if at.tzinfo else at.replace(tzinfo=UTC)
+
+
+# closed, dropped, added and still open: what a window did to one queue
+Counts = tuple[int, int, int, int]
+
+
+def stamp_counts(doc: QueueDoc, since: datetime) -> Counts:
+    """Count a queue's window from its card stamps alone (nemik:W1112).
+
+    The host's queue is not under git, so its past cannot be read back. Its cards carry when they
+    were issued, completed and dropped, which is enough: a card issued since is added, one finished
+    before the window is neither planned nor counted, one finished since is closed, and a residue
+    entry dropped since is dropped.
+
+    Args:
+        doc: The queue document as it stands now.
+        since: The window's start.
+
+    Returns:
+        (closed, dropped, added, still open) where still open is the planned cards not yet done.
+
+    """
+    closed = added = still_open = 0
+    for card in doc.get("waypoints", []):
+        issued, done = _stamp(card.get("issued_at")), _stamp(card.get("completed"))
+        finished = card.get("status") == "done"
+        if issued is not None and issued >= since:
+            added += 1
+        elif finished and done is not None and done >= since:
+            closed += 1
+        elif not finished:
+            still_open += 1
+    dropped = sum(
+        1
+        for entry in doc.get("residue", [])
+        if (at := _stamp(entry.get("dropped_at"))) is not None and at >= since
+    )
+    return closed, dropped, added, still_open
+
+
+def burn_counts(base: QueueDoc, now: QueueDoc) -> Counts:
+    """Count a queue's window from two committed copies, as `variance` does (nemik:W1112).
+
+    Returns:
+        (closed, dropped, added, still open): the plan is the cards open at `base`.
+
+    """
+    gone_then, gone_now = _dropped(base), _dropped(now)
+    then, after = _status(base), _status(now)
+    planned = {
+        s
+        for s, st in then.items()
+        if st not in {"done", "dropped"} and s not in gone_then
+    }
+    closed = sum(1 for s in planned if after.get(s) == "done")
+    dropped = sum(1 for s in planned if s in gone_now)
+    still = sum(
+        1 for s in planned if s not in gone_now and after.get(s) not in {None, "done"}
+    )
+    known = set(then) | gone_then
+    added = sum(1 for s in set(after) | gone_now if s not in known)
+    return closed, dropped, added, still
+
+
+def _busiest(pair: tuple[str, Counts]) -> tuple[int, str]:
+    """Order repos by how much changed, most first, then by name.
+
+    Returns:
+        The sort key.
+
+    """
+    name, (closed, dropped, added, _) = pair
+    return -(closed + dropped + added), name
+
+
+def fleet_row(rows: dict[str, Counts], spec: str, limit: int = ROW_LINES) -> list[str]:
+    """Fold a fleet's windows into one total line and the repos that changed (nemik:W1112).
+
+    Args:
+        rows: Each repo's counts.
+        spec: The window as the operator wrote it, for the first line.
+        limit: The most lines to give.
+
+    Returns:
+        The fleet's closed, dropped and added with their net (closed plus dropped less added, so a
+        positive net is a burn-down), then one line per repo that changed, busiest first; a tail
+        line counts the repos that did not fit. At most `limit` lines.
+
+    """
+    closed, dropped, added, still = (sum(c[i] for c in rows.values()) for i in range(4))
+    head = (
+        f"fleet since {spec}: closed {closed}, dropped {dropped}, added {added}, "
+        f"net {closed + dropped - added:+d}, open {still}, {len(rows)} repos"
+    )
+    changed = sorted(
+        ((name, c) for name, c in rows.items() if c[0] + c[1] + c[2]),
+        key=_busiest,
+    )
+    room = limit - 1
+    shown = changed if len(changed) <= room else changed[: room - 1]
+    lines = [head]
+    for name, (c, d, a, _) in shown:
+        lines.append(f"{name}: closed {c}, dropped {d}, added {a}, net {c + d - a:+d}")
+    if len(shown) < len(changed):
+        lines.append(f"+{len(changed) - len(shown)} more repos changed")
+    return lines
+
+
+def _counts_for(repo: Path, spec: str) -> Counts | None:
+    """Count one repo's window: from its commits, or from its card stamps outside git.
+
+    Returns:
+        The counts; None when the repo has no queue to read. A `spec` that is a time of day with no
+        zone is refused by `resolve`, as everywhere.
+
+    """
+    now = queue_at(repo, "HEAD")
+    since = window_start(spec)
+    if since is not None and not now:
+        # a queue outside git (the host's) is read from its card stamps
+        path = repo / QUEUE_PATH
+        if not path.is_file():
+            return None
+        text = path.read_text(encoding="utf-8")
+        return stamp_counts(queue_at(repo, "HEAD", known=text), since)
+    return burn_counts(queue_at(repo, resolve(repo, spec)), now)
+
+
+def _baselined(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
+    """Run `--baseline` in its full report, or as the compact fleet row with `--compact`.
+
+    Returns:
+        The mode's exit status.
+
+    """
+    if args.compact and args.baseline is not None:
+        return _compact(args.baseline, names, dirs)
+    return _baseline(args, names, dirs)
+
+
+def _compact(baseline: str, names: list[str], dirs: dict[str, Path]) -> int:
+    """Print the fleet's burndown in at most ROW_LINES lines (nemik:W1112).
+
+    Returns:
+        0; 2 when a baseline is a time of day with no zone.
+
+    """
+    rows: dict[str, Counts] = {}
+    for name in names:
+        spec = baseline_spec(dirs[name], baseline)
+        if spec is None:
+            continue
+        try:
+            counts = _counts_for(dirs[name], spec)
+        except ValueError as error:
+            sys.stderr.write(f"{name}: {error}\n")
+            return 2
+        if counts is not None:
+            rows[name] = counts
+    sys.stdout.write("\n".join(fleet_row(rows, baseline or "declared")) + "\n")
     return 0
 
 
