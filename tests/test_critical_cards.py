@@ -7,7 +7,10 @@ from nemik.critical import critical_cards
 
 
 def _card(
-    cite: str, state: str = "ready", waits: tuple = (), enabled_by: tuple = ()
+    cite: str,
+    state: str = "ready",
+    waits: tuple[str, ...] = (),
+    enabled_by: tuple[str, ...] = (),
 ) -> Card:
     return Card(cite, state, "", tuple(waits), tuple(enabled_by))
 

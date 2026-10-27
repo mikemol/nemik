@@ -243,10 +243,6 @@
   "misc": 50,
   "no-untyped-def": 1
  },
- "tests/test_critical_cards.py": {
-  "misc": 1,
-  "type-arg": 1
- },
  "tests/test_deadlock_check.py": {
   "misc": 3
  },
