@@ -2840,3 +2840,15 @@
 2026-10-27T13:17:29Z  status W1172 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-27T13:18:05Z  interrupt W1174 minted    -         "test_hashes reads hashes.json through the typed tree, so mypy falls 5596 to 5588 (paydown)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
 2026-10-27T13:18:15Z  status W1174 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T13:39:40Z  tick  W1136 advanced  collapse  "W1056 traced to a gap in mtools (importdag not in revendor.EXTRA), asked github-8f; W1136 narrowed to named reads (W1645's series) with the pure ceiling function as step 3; stack569 (W1174 paydown, W1169 --by-peer) gating [blocked by W1174]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T13:42:10Z  status W1174 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T13:42:11Z  status W1169 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T13:51:49Z  interrupt W1175 minted    -         "Ruff in larger steps, after the Any-boundary moves: D103 (423 in tests) and D205 (68) by mechanization, PLC0415 (271) as hoists with an importdag cycle refusal turned into atomize cards, T201 (124 in src) into one output module"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
+2026-10-27T13:51:57Z  interrupt W1176 minted    -         "Typed document boundary: a typed Waypoint record that loaders and test builders return, one stack per document shape"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
+2026-10-27T13:51:57Z  interrupt W1177 minted    -         "Playwright adapter: a real import and one typed evaluate_json helper in tests/webpage.py"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
+2026-10-27T13:51:58Z  interrupt W1178 minted    -         "Fixture annotation by pycodemod annotate over the test fixtures"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
+2026-10-27T13:51:58Z  interrupt W1179 minted    -         "Codon in larger steps: thin entry points, one dispatcher and one I/O adapter"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
+2026-10-27T13:52:25Z  status W1175 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T14:04:51Z  interrupt W1180 minted    -         "Vendor mtools' transcriptstruct dist so luthen's live tools carry mikemol-transcriptstruct"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1160
+2026-10-27T14:09:26Z  status W1177 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T14:09:40Z  tick  W1177 advanced  collapse  "W1177 read: tests/webpage.py already typed by Protocol, the Any debt is in the callers of open_page; step narrowed to counting the Playwright API the six files use and a typed Protocol plus evaluate_json; large audit cards resized medium; gate empty, no stack in flight [blocked by W1056]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
