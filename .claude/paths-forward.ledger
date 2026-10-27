@@ -2659,3 +2659,14 @@
 2026-10-26T23:34:46Z  interrupt W1138 minted    -         "Publish one series per open card (issued and last-worked seconds, labelled repo, card, status) so card age is a query and not a new producer per question"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-8f
 2026-10-26T23:34:56Z  status W1138 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-26T23:43:00Z  status W1014 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-26T23:46:27Z  tick  W1139 minted    -         "The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at the landing rate"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1112
+2026-10-26T23:48:33Z  tick  W1138 advanced  unblock   "per-card series (W1138) with a docstring paydown entry (W1014) and the serve import claim fixed: stack545 gating; W1113 unblocked by the operator's days-to-zero answer and ordered after the new landing-rate child W1139 [blocked by W1139]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T00:09:36Z  tick  W1139 advanced  collapse  "W1139's data source read (landings.json, the queue history); stack545 (W1014 docstrings, W1138 per-card series) still gating; no unclaimed letters [blocked by W1138]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T00:21:42Z  status W1138 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T00:21:42Z  status W1014 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T00:39:32Z  status W1131 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T00:39:45Z  tick  W1131 advanced  collapse  "closed W1131: the image replay of 56d95df is green (exit 0), first green since the popover failures; told github-8f and luthen; the per-card series ship with the first image at or after 277b782 [blocked by W1139]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T00:40:50Z  interrupt W1140 minted    -         "Browser tests fail in the image replay on varying tests while the gate passes them: a flake population, worked by proof"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1131
+2026-10-27T00:53:43Z  status W1038 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T00:55:44Z  status W1014 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T01:09:33Z  tick  W1038 advanced  unblock   "stack546 (W1038 pace merge of guessed twins, with W1014 docstrings for the paydown refusal) inflight at the head of the gate; sensor outage waits on it; no unclaimed letters [blocked by W1139]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

@@ -101,6 +101,28 @@ def ended_series(text: str) -> list[tuple[str, str]]:
     )
 
 
+def _hold(
+    held: dict[int, tuple[int, int]],
+    stamps: list[Json],
+    values: list[Json],
+    declared: int,
+) -> None:
+    """Add a series' samples to its ratchet's, the declared sample winning a shared instant.
+
+    Args:
+        held: The ratchet's samples so far, by time: (0 declared or 1 guessed, the count).
+        stamps: The series' sample times, milliseconds.
+        values: Its sample values.
+        declared: 0 for a guessed=false series, 1 for any other.
+
+    """
+    for at, value in zip(stamps, values, strict=False):
+        if isinstance(at, int | float) and isinstance(value, int | float):
+            mine = (declared, max(0, int(value)))
+            if int(at) not in held or mine < held[int(at)]:
+                held[int(at)] = mine
+
+
 def _export_rows(
     text: str,
 ) -> tuple[list[tuple[str, str, list[int], int]], dict[str, int]]:
@@ -111,8 +133,11 @@ def _export_rows(
         sample time.
 
     """
-    out: list[tuple[str, str, list[int], int]] = []
-    newest: dict[str, int] = {}
+    # nemik:W1038: a ratchet can have two series, one per `guessed` label (mtools:W1958), the older
+    # guessed=true and the newer guessed=false. They are one ratchet: merged by sample time, the
+    # declared (guessed=false) sample winning where both stamped the same instant. Kept apart they
+    # read as a series that ended, and every row went unknown.
+    merged: dict[tuple[str, str], dict[int, tuple[int, int]]] = {}
     for line in text.splitlines():
         try:
             body = parse(line) if line.strip() else None
@@ -131,14 +156,15 @@ def _export_rows(
             continue
         repo, ratchet = str(metric.get("repo", "")), str(metric.get("ratchet", ""))
         if repo and ratchet and repo != PHANTOM:
-            pairs: list[tuple[int, int]] = []
-            for at, value in zip(stamps, values, strict=False):
-                if isinstance(at, int | float) and isinstance(value, int | float):
-                    pairs.append((int(at), max(0, int(value))))
-            ordered = sorted(pairs)
-            end = ordered[-1][0] if ordered else 0
-            out.append((repo, ratchet, [count for _, count in ordered], end))
-            newest[repo] = max(newest.get(repo, 0), end)
+            declared = 0 if str(metric.get("guessed", "")) == "false" else 1
+            _hold(merged.setdefault((repo, ratchet), {}), stamps, values, declared)
+    out: list[tuple[str, str, list[int], int]] = []
+    newest: dict[str, int] = {}
+    for (repo, ratchet), held in merged.items():
+        ordered = sorted(held.items())
+        end = ordered[-1][0] if ordered else 0
+        out.append((repo, ratchet, [count for _, (_, count) in ordered], end))
+        newest[repo] = max(newest.get(repo, 0), end)
     return out, newest
 
 
