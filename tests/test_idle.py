@@ -10,21 +10,26 @@ from nemik.check import survey
 from nemik.idle import DEFAULT_TICKS, declared, idle_run
 
 
-def _write(root: Path, status: str, outcomes: list[str]) -> None:
+def _write(
+    root: Path, status: str, outcomes: list[str], *, agent: bool = False
+) -> None:
     """Write a one-card repo named r with a ledger of tick lines.
 
     Args:
         root: The directory holding repos.
         status: The one card's status.
         outcomes: The outcome of each tick line, oldest first.
+        agent: Whether a blocked card waits on another repo's card and not on the operator.
 
     """
-    card = {
+    wait = "other:W9" if agent else "operator: decide x"
+    kind = "agent" if agent else "human"
+    card: dict[str, object] = {
         "symbol": "W1",
         "title": "t",
         "status": status,
-        "blocked_on": ["operator: decide x"] if status == "blocked" else [],
-        "blocked_kind": "human" if status == "blocked" else None,
+        "blocked_on": [wait] if status == "blocked" else [],
+        "blocked_kind": kind if status == "blocked" else None,
         "next_bounded_step": "x",
     }
     state = {
@@ -84,6 +89,17 @@ def test_a_long_idle_run_with_nothing_workable_is_a_warning() -> None:
         found = _idle_warnings(Path(tmp))
     assert len(found) == 1
     assert "disarm the loop" in found[0]
+
+
+def test_a_queue_blocked_only_on_agents_is_told_to_nudge_not_to_disarm() -> None:
+    """amr-skills disarmed on this warning with its cards waiting on agents; the prompt nudges."""
+    with tempfile.TemporaryDirectory() as tmp:
+        _write(Path(tmp), "blocked", ["idle"] * 16, agent=True)
+        found = _idle_warnings(Path(tmp))
+    assert len(found) == 1
+    assert "do not disarm" in found[0]
+    assert "other:W9" in found[0]
+    assert "disarm the loop" not in found[0]
 
 
 def test_a_ready_card_or_a_short_run_is_not() -> None:

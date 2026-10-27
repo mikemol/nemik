@@ -150,6 +150,33 @@ def prompt_lag(root: Path, repos: list[str], now: float) -> dict[str, str]:
     return found
 
 
+def agent_blockers(merged: Graph, repo: str) -> list[str]:
+    """Name what a repo's agent-blocked cards wait on (nemik:W577, github-8f 2026-10-27).
+
+    amr-skills disarmed its loop on the idle warning while both its open cards waited on agents;
+    the loop prompt disarms only when nothing is blocked on an agent, and nudges otherwise.
+
+    Args:
+        merged: The merged queue graph.
+        repo: The repo.
+
+    Returns:
+        The distinct things its blocked cards of kind agent wait on, sorted; empty when none is
+        blocked on an agent.
+
+    """
+    prefix = f"{BASE}{repo}/"
+    return sorted(
+        {
+            str(who)
+            for node in merged.subjects(OSLC_CM.state, NEMIK.Blocked)
+            if str(node).startswith(prefix)
+            and str(merged.value(node, NEMIK.blockedKind)) == "agent"
+            for who in merged.objects(node, NEMIK.blockedOn)
+        }
+    )
+
+
 def findings(root: Path, merged: Graph, repos: list[str]) -> dict[str, str]:
     """Name each repo that ticks idle for the declared run, or is behind on the loop prompt.
 
@@ -171,9 +198,16 @@ def findings(root: Path, merged: Graph, repos: list[str]) -> dict[str, str]:
             continue
         run = idle_run(tick_outcomes(ledger_graph(repo, path)[0]), idle)
         if run >= limit:
+            waits = agent_blockers(merged, repo)
+            remedy = (
+                "every open card waits on an agent, so do not disarm: nudge on backoff "
+                + ", ".join(waits)
+                if waits
+                else "disarm the loop, or block a card on what it waits for"
+            )
             found[repo] = (
                 f"its last {run} ticks advanced nothing and no card is ready or working "
-                f"(declared run {limit}): disarm the loop, or block a card on what it waits for"
+                f"(declared run {limit}): {remedy}"
             )
     for repo, said in prompt_lag(root, repos, time.time()).items():
         found[repo] = f"{found[repo]}; and it {said}" if repo in found else said
