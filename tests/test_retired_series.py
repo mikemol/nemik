@@ -23,9 +23,9 @@ KEY = "r\nx.json"
 
 def test_a_tombstone_names_the_ratchet_while_its_newest_sample_is_set() -> None:
     """The store lists a tombstone as 1 on every run; a sample of 0 is no tombstone."""
-    assert retired_of(LISTED) == frozenset({KEY})
-    assert retired_of(LAPSED) == frozenset()
-    assert retired_of("") == frozenset()
+    assert retired_of(LISTED) == [KEY]
+    assert retired_of(LAPSED) == []
+    assert retired_of("") == []
 
 
 def test_an_ended_series_with_a_tombstone_leaves_the_pace() -> None:
@@ -44,5 +44,5 @@ def test_an_ended_series_without_a_tombstone_stays_unknown() -> None:
 
 def test_a_tombstone_does_not_drop_a_series_that_is_still_written() -> None:
     """A path that reappears after its tombstone is a new ratchet, judged again."""
-    text = pace_document_floored(GOING, "", STAMP, {}, frozenset({"r\ny.json"}))
+    text = pace_document_floored(GOING, "", STAMP, {}, ["r\ny.json"])
     assert "y.json" in text

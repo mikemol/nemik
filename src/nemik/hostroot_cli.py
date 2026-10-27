@@ -225,7 +225,7 @@ def _judge(
     out: Path,
     stamp: str,
     floors: dict[str, int] | None = None,
-    retired: frozenset[str] = frozenset(),
+    retired: list[str] | None = None,
 ) -> int:
     """Judge an answer against the last pace file and replace it whole.
 
@@ -234,7 +234,7 @@ def _judge(
         out: Where the pace file goes.
         stamp: When this run reads the store, a UTC stamp.
         floors: The requirements the store remembers, or None when it was not asked.
-        retired: The ratchets with a tombstone in the store (nemik:W1040).
+        retired: The ratchets with a tombstone in the store (nemik:W1040), or None for none.
 
     Returns:
         0 when written; 1 when the answer is not a readable set of series.
@@ -248,12 +248,14 @@ def _judge(
             previous = kept.read_text(encoding="utf-8")
         else:
             previous = out.read_text(encoding="utf-8") if out.is_file() else ""
-        text = pace_document_floored(answer, previous, stamp, floors or {}, retired)
+        text = pace_document_floored(
+            answer, previous, stamp, floors or {}, retired or []
+        )
     except (OSError, TypeError, ValueError) as error:
         sys.stderr.write(f"nemik-hostroot: {error}\n")
         return 1
     # nemik:W1155: an alert and never a gate, for a row that reads behind though its series fell
-    for line in pace_contradictions(answer, previous, floors or {}, retired):
+    for line in pace_contradictions(answer, previous, floors or {}, retired or []):
         sys.stderr.write(f"nemik-hostroot: pace self-check: {line}\n")
     _write(kept, text)
     _write(out, text)

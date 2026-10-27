@@ -151,10 +151,6 @@
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'subprocess'"
  },
- "pacerun": {
-  "as_written": "name 'frozenset' is not defined",
-  "stripped": "name 'frozenset' is not defined"
- },
  "pacing": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'argparse'"

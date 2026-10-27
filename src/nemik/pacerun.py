@@ -27,6 +27,9 @@ ANSWER_HEAD = '{"status"'
 # the two metric names a required-fall export may hold, told apart by their __name__ label
 REQUIRED_NAME = '"__name__":"nemik_ratchet_fall_required"'
 VALUE_NAME = '"__name__":"mikemol.ratchet.value"'
+# no tombstones: the default of a parameter the pinned Codon reads as a list (it has no name for
+# frozenset and cannot read a tuple[str, ...] annotation); never appended to
+NO_RETIRED: list[str] = []
 
 
 def floors_of(export: str) -> dict[str, int]:
@@ -47,7 +50,7 @@ def floors_of(export: str) -> dict[str, int]:
     }
 
 
-def retired_of(export: str) -> frozenset[str]:
+def retired_of(export: str) -> list[str]:
     """Name the ratchets the store lists a tombstone for (nemik:W1040).
 
     mtools emits mikemol.ratchet.retired{repo, ratchet, reason} = 1 on every run while the tombstone
@@ -57,11 +60,11 @@ def retired_of(export: str) -> frozenset[str]:
         export: The store's raw export of mikemol.ratchet.retired, one series per line.
 
     Returns:
-        The `repo` and `ratchet` keys, joined by a newline, whose newest sample is 1 or more; empty
-        when the export holds no series, as before the emitter ran.
+        The `repo` and `ratchet` keys, joined by a newline, whose newest sample is 1 or more,
+        sorted; empty when the export holds no series, as before the emitter ran.
 
     """
-    return frozenset(
+    return sorted(
         f"{repo}\n{ratchet}"
         for repo, ratchet, values in export_series(export)
         if values and values[-1] >= 1
@@ -115,7 +118,7 @@ def pace_document_floored(
     previous: str,
     stamp: str,
     floors: dict[str, int],
-    retired: frozenset[str] = frozenset(),
+    retired: list[str] = NO_RETIRED,
 ) -> str:
     """Judge every ratchet series of an answer and write the pace file.
 
@@ -148,7 +151,7 @@ def pace_contradictions(
     answer: str,
     previous: str,
     floors: dict[str, int],
-    retired: frozenset[str] = frozenset(),
+    retired: list[str] = NO_RETIRED,
 ) -> list[str]:
     """Name the rows of a pace run that read behind though their series fell what they owed.
 
@@ -165,7 +168,7 @@ def pace_contradictions(
 
 
 def _judged(
-    answer: str, previous: str, floors: dict[str, int], retired: frozenset[str]
+    answer: str, previous: str, floors: dict[str, int], retired: list[str]
 ) -> tuple[list[tuple[str, str, list[int]]], list[Row]]:
     """Judge every ratchet series of an answer.
 
@@ -185,7 +188,7 @@ def _judged(
     is_answer = answer.lstrip().startswith(ANSWER_HEAD)
     read = series_of(answer) if is_answer else export_series(answer)
     ended = [] if is_answer else ended_series(answer)
-    gone = {f"{repo}\n{ratchet}" for repo, ratchet in ended} & retired
+    gone = {f"{repo}\n{ratchet}" for repo, ratchet in ended} & set(retired)
     series = [
         (repo, ratchet, since(values, repo, ratchet, DECLARED))
         for repo, ratchet, values in read
