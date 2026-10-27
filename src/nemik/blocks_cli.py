@@ -20,11 +20,13 @@ from nemik import tiers
 from nemik.adapter import ledger_graph
 from nemik.blocks import CATEGORIES, inbound, operator_asks, with_salience
 from nemik.check import LEDGER, default_root, survey, workstream_files
-from nemik.inbound_issues import census, letters_of, unclaimed
+from nemik.inbound_issues import by_peer, census, letters_of, unclaimed
 from nemik.letters import _split, _today, fold_commands
 
 
-def issue_letters(answer: Path, root: Path, repo: str, *, counts: bool) -> None:
+def issue_letters(
+    answer: Path, root: Path, repo: str, *, counts: bool, peers: bool = False
+) -> None:
     """Print a repo's letters read from a recorded issues answer (nemik:W1169).
 
     Args:
@@ -33,11 +35,13 @@ def issue_letters(answer: Path, root: Path, repo: str, *, counts: bool) -> None:
         repo: The repo whose queue claims the letters; empty reads no queue, so every open letter
             is unclaimed.
         counts: Print the census (sender, kind, open and closed counts) and not the UNCLAIMED rows.
+        peers: With counts, group the census by sender alone (the per-peer comparison).
 
     """
     letters = letters_of(answer.read_text(encoding="utf-8"))
     if counts:
-        sys.stdout.write("".join(f"{line}\n" for line in census(letters)))
+        lines = by_peer(letters) if peers else census(letters)
+        sys.stdout.write("".join(f"{line}\n" for line in lines))
         return
     queue = root / repo / ".claude" / "paths-forward.json"
     text = queue.read_text(encoding="utf-8") if repo and queue.is_file() else ""
@@ -57,6 +61,7 @@ class _Inbound(argparse.Namespace):
     json: bool
     issues: Path | None
     census: bool
+    by_peer: bool
 
 
 def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
@@ -83,9 +88,20 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         action="store_true",
         help="with --issues: print the letters counted by sender and kind instead",
     )
+    ap.add_argument(
+        "--by-peer",
+        action="store_true",
+        help="with --census: group by sender alone, one line per peer",
+    )
     args = ap.parse_args(argv, namespace=_Inbound())
     if args.issues is not None:
-        issue_letters(args.issues, args.root, args.repo or "", counts=args.census)
+        issue_letters(
+            args.issues,
+            args.root,
+            args.repo or "",
+            counts=args.census,
+            peers=args.by_peer,
+        )
         return
     if g is None:
         g = Graph()

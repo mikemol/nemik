@@ -2835,3 +2835,8 @@
 2026-10-27T12:53:17Z  status W1169 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-27T12:58:01Z  interrupt W1173 minted    -         "Courier: whether the letters already sent (linux-sources' 96, others') are backfilled as issues, or only letters sent after W1048 become issues and each repo's tracked manifest stays the record of the past"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1047
 2026-10-27T12:58:09Z  status W1173 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T13:11:23Z  status W1169 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T13:11:25Z  tick  W1169 advanced  collapse  "--by-peer census mode built for linux-sources' per-peer comparison; W1173 withdrawn from needs-you (default no backfill) to keep asks at the cap; stack568 (W1172) gating [blocked by W1172]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T13:17:29Z  status W1172 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T13:18:05Z  interrupt W1174 minted    -         "test_hashes reads hashes.json through the typed tree, so mypy falls 5596 to 5588 (paydown)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
+2026-10-27T13:18:15Z  status W1174 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

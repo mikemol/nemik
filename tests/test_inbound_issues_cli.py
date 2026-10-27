@@ -59,6 +59,18 @@ def test_the_open_letters_no_waypoint_cites_print_as_unclaimed_rows(
     assert "letter 3" in rows
 
 
+def test_by_peer_sums_the_kinds_into_one_line_per_sender(
+    tmp_path: Path, capsys: "pytest.CaptureFixture[str]"
+) -> None:
+    """The per-peer grouping linux-sources compares against: n letters, open and closed."""
+    argv = ["--issues", str(_saved(tmp_path)), "--census", "--by-peer"]
+    main([*argv, "--root", str(tmp_path)])
+    assert capsys.readouterr().out.splitlines() == [
+        "linux-sources 2 letter(s) open=1 closed=1",
+        "mtools 1 letter(s) open=1 closed=0",
+    ]
+
+
 def test_the_census_prints_the_counts_and_no_rows(
     tmp_path: Path, capsys: "pytest.CaptureFixture[str]"
 ) -> None:

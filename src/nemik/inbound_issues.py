@@ -91,6 +91,27 @@ def unclaimed(letters: list[dict[str, str]], queue_text: str) -> list[dict[str, 
     ]
 
 
+def by_peer(letters: list[dict[str, str]]) -> list[str]:
+    """Count the letters by sender alone, the grouping a per-peer census compares against.
+
+    Args:
+        letters: The letters, from letters_of.
+
+    Returns:
+        One line `<from> <n> letter(s) open=<n> closed=<n>` per sender, sorted; a sender the
+        issue does not name reads `-`. The same letters as census, with the kinds summed.
+
+    """
+    counts: dict[str, list[int]] = {}
+    for letter in letters:
+        row = counts.setdefault(letter["from"] or "-", [0, 0])
+        row[0 if letter["state"] == OPEN else 1] += 1
+    return [
+        f"{peer} {sum(counts[peer])} letter(s) open={counts[peer][0]} closed={counts[peer][1]}"
+        for peer in sorted(counts)
+    ]
+
+
 def census(letters: list[dict[str, str]]) -> list[str]:
     """Count the letters by sender and kind, for comparing a sent census by value.
 
