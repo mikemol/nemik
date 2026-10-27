@@ -9,14 +9,18 @@ import threading
 from collections.abc import Iterator
 from contextlib import contextmanager
 from http.server import BaseHTTPRequestHandler, HTTPServer
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik.witnesses import main
 from nemik.witwait import HELD, NOT_YET, UNKNOWN, promql_poll, seconds, wait
 
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
-def _script(*steps: tuple[str, str]):
+
+def _script(*steps: tuple[str, str]) -> Callable[[], tuple[str, str]]:
     """A poll that plays `steps` in order, then repeats the last one."""
     queue = list(steps)
 
@@ -41,7 +45,9 @@ class _Clock:
         self.sleeps += 1
 
 
-def _wait(poll, timeout: float = 100, every: float = 10) -> tuple[int, str, _Clock]:
+def _wait(
+    poll: Callable[[], tuple[str, str]], timeout: float = 100, every: float = 10
+) -> tuple[int, str, _Clock]:
     t = _Clock()
     code, line = wait(
         poll,

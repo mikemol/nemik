@@ -205,7 +205,7 @@ def test_apply_writes_letters_to_waiting_repos(tmp_path, monkeypatch, capsys) ->
     flag = tmp_path / "flag"
     flag.write_text("")
 
-    def queue(repo, wps):
+    def queue(repo: str, wps: list[dict[str, object]]) -> None:
         d = tmp_path / repo / ".claude"
         d.mkdir(parents=True)
         (tmp_path / repo / "inbox").mkdir()

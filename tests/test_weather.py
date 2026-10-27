@@ -3,11 +3,14 @@
 """nemik:W174: waypoints with the same witness query share one weather id; the query stays private."""
 
 import json
+from pathlib import Path
+
+from rdflib import Graph
 
 from nemik.adapter import NEMIK, queue_graph, waypoint_uri
 
 
-def _q(tmp_path, repo, witnesses):
+def _q(tmp_path: Path, repo: str, witnesses: list[str | None]) -> Graph:
     p = tmp_path / f"{repo}.json"
     payload: dict[str, object] = {
         "version": 1,

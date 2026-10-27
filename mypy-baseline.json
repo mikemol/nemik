@@ -327,8 +327,8 @@
   "misc": 8
  },
  "tests/test_rank.py": {
-  "misc": 58,
-  "no-untyped-def": 2
+  "misc": 51,
+  "no-untyped-def": 1
  },
  "tests/test_rank_apply.py": {
   "misc": 4
@@ -421,9 +421,8 @@
   "type-arg": 1
  },
  "tests/test_weather.py": {
-  "misc": 25,
-  "no-untyped-call": 2,
-  "no-untyped-def": 2
+  "misc": 2,
+  "no-untyped-def": 1
  },
  "tests/test_web_render.py": {
   "misc": 2
@@ -441,14 +440,9 @@
   "misc": 21
  },
  "tests/test_witnesses.py": {
-  "misc": 107,
-  "no-untyped-call": 3,
-  "no-untyped-def": 11,
+  "misc": 92,
+  "no-untyped-def": 10,
   "type-arg": 1
- },
- "tests/test_witwait.py": {
-  "misc": 10,
-  "no-untyped-def": 2
  },
  "tests/test_work.py": {
   "misc": 2,

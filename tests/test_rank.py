@@ -109,7 +109,7 @@ def test_fleet_rank_pools_repos_into_one_comparable_order() -> None:
     assert int(str(fleet[0]["weight"])) > int(str(fleet[1]["weight"]))
 
 
-def _ready(g: Graph, repo: str, sym: str, pos: int):
+def _ready(g: Graph, repo: str, sym: str, pos: int) -> URIRef:
     from nemik.adapter import workstream_uri
 
     n = _wp(g, repo, sym)
