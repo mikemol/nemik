@@ -2,7 +2,6 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W503: a snapshot is built in a fresh process, published by one atomic flip, and skipped when quiet."""
 
-import json
 import os
 import shutil
 import subprocess
@@ -12,6 +11,7 @@ from pathlib import Path
 import installed
 
 from nemik.serve import fleet_key, publish
+from nemik.tracker import parse_tree
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
 
@@ -38,8 +38,8 @@ def test_a_publish_flips_current_and_writes_the_private_files(tmp_path: Path) ->
     assert "nemik_graph_nodes" in metrics
     assert "# TYPE nemik_card_issued_seconds gauge" in metrics  # nemik:W1138
     assert "nemik_snapshot_published_seconds" in metrics
-    hashes = json.loads((snap / "hashes.json").read_text())
-    assert "operator.json" not in hashes, (
+    hashes = parse_tree((snap / "hashes.json").read_text())
+    assert "operator.json" not in hashes.names[hashes.root], (
         "the private files stay out of the published hashes"
     )
     assert (snap / "source-key").read_text() == fleet_key(FLEET)
