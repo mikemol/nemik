@@ -13,7 +13,7 @@ from nemik.check import survey
 def _write(root: Path, repo: str, cards: list[tuple[str, str, list[str]]]) -> None:
     queue = root / repo / ".claude" / "paths-forward.json"
     queue.parent.mkdir(parents=True)
-    waypoints = [
+    waypoints: list[dict[str, object]] = [
         {
             "symbol": sym,
             "title": sym,
@@ -23,17 +23,14 @@ def _write(root: Path, repo: str, cards: list[tuple[str, str, list[str]]]) -> No
         }
         for sym, status, on in cards
     ]
-    queue.write_text(
-        json.dumps(
-            {
-                "version": 1,
-                "project_root": "/x",
-                "counter": len(cards),
-                "residue": [],
-                "waypoints": waypoints,
-            }
-        )
-    )
+    body: dict[str, object] = {
+        "version": 1,
+        "project_root": "/x",
+        "counter": len(cards),
+        "residue": [],
+        "waypoints": waypoints,
+    }
+    queue.write_text(json.dumps(body))
 
 
 def _hints(root: Path) -> dict[str, str]:

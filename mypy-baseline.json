@@ -235,9 +235,6 @@
   "misc": 50,
   "no-untyped-def": 1
  },
- "tests/test_deadlock_check.py": {
-  "misc": 3
- },
  "tests/test_deploy_manifest.py": {
   "explicit-any": 6,
   "misc": 83
@@ -444,9 +441,6 @@
   "no-untyped-call": 16,
   "no-untyped-def": 1,
   "operator": 4
- },
- "tests/test_umbrella_descent.py": {
-  "misc": 3
  },
  "tests/test_vtodo.py": {
   "misc": 90,

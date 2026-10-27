@@ -13,7 +13,7 @@ from nemik.check import survey
 def _root(tmp_path: Path, kinds: tuple[str, str]) -> Path:
     queue = tmp_path / "a" / ".claude" / "paths-forward.json"
     queue.parent.mkdir(parents=True)
-    waypoints = [
+    waypoints: list[dict[str, object]] = [
         {
             "symbol": "W1",
             "title": "one",
@@ -31,17 +31,14 @@ def _root(tmp_path: Path, kinds: tuple[str, str]) -> Path:
             "next_bounded_step": "x",
         },
     ]
-    queue.write_text(
-        json.dumps(
-            {
-                "version": 1,
-                "project_root": "/x",
-                "counter": 2,
-                "residue": [],
-                "waypoints": waypoints,
-            }
-        )
-    )
+    body: dict[str, object] = {
+        "version": 1,
+        "project_root": "/x",
+        "counter": 2,
+        "residue": [],
+        "waypoints": waypoints,
+    }
+    queue.write_text(json.dumps(body))
     return tmp_path
 
 
