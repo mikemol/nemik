@@ -2772,3 +2772,17 @@
 2026-10-27T09:14:44Z  status W1159 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-27T09:14:45Z  status W1158 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-27T09:14:58Z  status W1155 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T09:25:09Z  status W1157 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T09:25:09Z  status W1053 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T09:25:09Z  status W1149 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T09:25:10Z  status W1140 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T09:25:15Z  status W1053 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T09:31:41Z  tick  W1160 minted    -         "Repin the vendored mtools wheels past 266e51fd (mtools 504b80ec), dry run first, so the host's live writer drops no tick hooks"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1029
+2026-10-27T09:33:23Z  tick  W1161 minted    -         "test_saturation builds its queue as a typed dict, so mypy falls 5625 to 5622 (paydown)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
+2026-10-27T09:33:36Z  status W1161 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T09:36:28Z  status W1160 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T09:40:10Z  status W1049 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T09:42:50Z  tick  W1162 minted    -         "hostapply reads its export through one typed loader, so mypy falls 5622 to 5620 (paydown)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
+2026-10-27T09:42:56Z  status W1162 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T09:42:58Z  tick  W1163 minted    -         "Answer nemik: estate:W39 is done (letter 2026-10-27-nemik-edge-estate-W39-enables-W914)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-10-27-nemik-edge-estate-W39-enables-W914.md
+2026-10-27T09:43:15Z  tick  W1049 advanced  collapse  "W1049 read-path doc written (gh keyring subprocess route); W1162 mypy paydown 5622 to 5620 leads stack563 behind 561 (gating) and 562 (queued: W1161 paydown, W1160 repin); W1163 minted for the estate letter [blocked by W1159]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
