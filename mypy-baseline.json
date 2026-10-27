@@ -299,9 +299,6 @@
  "tests/test_inbound_letters.py": {
   "misc": 17
  },
- "tests/test_inbound_orphans.py": {
-  "misc": 6
- },
  "tests/test_incremental_redraw.py": {
   "misc": 62
  },
@@ -313,8 +310,7 @@
   "misc": 6
  },
  "tests/test_letters.py": {
-  "misc": 6,
-  "no-untyped-def": 1
+  "misc": 5
  },
  "tests/test_lifecycle_scheme.py": {
   "misc": 9,

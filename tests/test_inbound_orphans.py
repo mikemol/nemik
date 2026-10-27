@@ -16,25 +16,21 @@ from nemik.letters import _today
 def _repo(root: Path, cites: str = "") -> None:
     queue = root / "a" / ".claude" / "paths-forward.json"
     queue.parent.mkdir(parents=True)
-    queue.write_text(
-        json.dumps(
-            {
-                "version": 1,
-                "project_root": "/x",
-                "counter": 1,
-                "residue": [],
-                "waypoints": [
-                    {
-                        "symbol": "W1",
-                        "title": "t",
-                        "status": "ready",
-                        "next_bounded_step": "x",
-                        "evidence": cites,
-                    }
-                ],
-            }
-        )
-    )
+    card: dict[str, object] = {
+        "symbol": "W1",
+        "title": "t",
+        "status": "ready",
+        "next_bounded_step": "x",
+        "evidence": cites,
+    }
+    body: dict[str, object] = {
+        "version": 1,
+        "project_root": "/x",
+        "counter": 1,
+        "residue": [],
+        "waypoints": [card],
+    }
+    queue.write_text(json.dumps(body))
     inbox = root / "a" / "inbox"
     inbox.mkdir()
     name = f"{_today().isoformat()}-b-please-do-x.md"

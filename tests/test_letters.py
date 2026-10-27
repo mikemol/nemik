@@ -216,7 +216,7 @@ def test_a_peer_waypoint_citing_the_letter_path_owns_it(tmp_path: Path) -> None:
 
 
 def test_the_command_exits_5_only_when_a_letter_is_misdelivered(
-    tmp_path: Path, capsys
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
     for repo in ("nemik", "gcalculus"):
         queue = tmp_path / repo / ".claude" / "paths-forward.json"
