@@ -15,15 +15,36 @@ from nemik.ratchetpace import (
 WINDOW = 2
 WIDE = 10  # the pace's real window of landings
 FELL = 16  # 18 down to 2
-FALLING = [10, 10, 8, 8, 6, 6, 4]
+FALLING = [14, 14, 12, 12, 10, 10, 8, 8, 6, 6, 4]
+# one window that fell 90 in a single landing, then steady: a burst, not a rate (nemik:W1158)
+BURST = [100, 100, 10, 10, 10, 10, 10, 10, 10, 10, 9, 9]
+# nemik's mypy series after its declared re-baseline: one whole earlier window, holding W1124's 104
+NEMIK_MYPY = [5747, 5744, *[5640] * 6, *[5638] * 11, 5636, 5634, 5631]
+OWED_BEFORE = 2  # what the pace stated for it before the seed turned on
 SLOWING = [10, 10, 10, 10, 9, 7]
 SLOWING_HORIZON = 5
 
 
 def test_a_ratchet_falling_at_its_own_pace_is_ok() -> None:
-    """Two earlier windows fell 4 in all, so 2 each; the last fell 2: ok."""
+    """Four earlier windows fell 2 each, so the median is 2; the last fell 2: ok."""
     assert (window_fall(FALLING, WINDOW), seed(FALLING, WINDOW)) == (2, 2)
     assert verdict(FALLING, WINDOW, 0) == (OK, 2, 2)
+
+
+def test_one_burst_is_not_a_rate() -> None:
+    """The median of the earlier windows' falls ignores the one that held the burst."""
+    assert seed(BURST, WINDOW) == 0
+    assert verdict(BURST, WINDOW, 0)[2] == 1
+
+
+def test_a_single_earlier_window_seeds_nothing() -> None:
+    """nemik:W1158: 22 samples after a declared step hold one whole earlier window, fall 109.
+
+    The mean of that one window was a requirement of 109 a window, which only rises; fewer than
+    three whole windows is not a trend, so the seed is 0 and the floor of one stands.
+    """
+    assert seed(NEMIK_MYPY, WIDE) == 0
+    assert verdict(NEMIK_MYPY, WIDE, OWED_BEFORE)[2] == OWED_BEFORE
 
 
 def test_a_stalled_nonzero_ratchet_is_behind() -> None:

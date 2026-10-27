@@ -14,6 +14,7 @@ compiles it.
 """
 
 WINDOW = 10  # landed commits in one window
+MIN_WINDOWS = 3  # whole earlier windows a trend needs before it seeds a requirement
 OK = "ok"
 BEHIND = "behind"
 NO_HORIZON = -1  # nothing fell over the window, so no landings-to-zero can be stated
@@ -60,16 +61,22 @@ def seed(values: list[int], window: int) -> int:
         window: How many landings one window spans.
 
     Returns:
-        The mean fall per whole window of the history that ends where the last window starts,
-        rounded up; 0 when that history holds no whole window.
+        The median of the falls of the whole windows of the history that ends where the last
+        window starts; 0 when that history holds fewer than MIN_WINDOWS whole windows. A trend
+        needs a few windows and a middle, not one window and its mean: nemik's mypy series, 22
+        samples after a declared re-baseline, held exactly one whole earlier window, whose fall
+        of 109 was W1124's single 104-finding paydown, and that burst became a requirement of 109
+        a window that only rises (W1158).
 
     """
     history = values[: len(values) - window] if len(values) > window else []
     steps = (len(history) - 1) // window if history else 0
-    if steps < 1:
+    if steps < MIN_WINDOWS:
         return 0
-    total = history[0] - history[steps * window]
-    return max(0, -(-total // steps))
+    falls = sorted(
+        history[at * window] - history[(at + 1) * window] for at in range(steps)
+    )
+    return max(0, falls[steps // 2])
 
 
 def required(values: list[int], window: int, prior: int) -> int:
