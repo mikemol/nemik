@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1190,
+  "counter": 1191,
   "waypoints": [
     {
       "symbol": "W1",
@@ -15615,23 +15615,24 @@
     {
       "symbol": "W730",
       "title": "A check that the venv's installed nemik matches the source tree, so a profile or tool cannot silently run old code",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "A command that compares each src/nemik module's text with the installed copy's and exits nonzero naming the stale ones; test with a temp site dir. Must compile under Codon (probe first)",
+      "next_bounded_step": "stale.stale_modules(source_dir, installed_dir) is built and compiles under the pinned Codon; still to do: a command that points it at the tree's src/nemik and the venv's installed package and exits nonzero naming the stale ones (five registries: pyproject, BUILD.bazel, SKILL.md, workflows.toml, codon-baseline)",
       "evidence": "2026-10-23: 2026-10-23 overlap audit (verified): related to luthen-observability:W1235 (a timer publishes luthen_user_tool_behind_commits per tool, so a stale nemik install shows before it misleads); both detect a stale install, this one inside the tree, that one on the host. W1235 is blocked on luthen's W1285 as well, so no enables edge: a cross-cite only",
       "issued_at": "2026-10-19T13:36:24Z",
       "minted_during": "tick",
       "caused_by": "nemik:W729",
-      "last_worked": "2026-10-23T19:25:19Z",
+      "last_worked": "2026-10-27T20:50:42Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/stale.py",
         "tests/test_stale_install.py"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "completed": null
     },
     {
       "symbol": "W731",
@@ -16214,11 +16215,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "From now send one intervention per practice change (atomize, stack, shard, repin) when it happens, and write the before and after windows in docs/climate-interventions.md as each matures, starting with the 2026-10-21T02:14:31Z repin as the first window. The metric side (mikemol.waypoint.event) is not yet read back",
-      "evidence": "2026-10-21: 2026-10-20: the live writer has --intervention (repin 5971c07, venv rebuilt by the post-commit hook after 00cb6d2). First one sent: 'repin' for the move to f2f18a1; the command printed 'intervention repin sent' and exited 0. NOT yet read back: a LogsQL query for fleet:intervention on luthen's VictoriaLogs found nothing, so the series it lands in (metrics, not logs, or a delay) is unconfirmed; ask mtools-ad where an intervention is read before relying on the series | 2026-10-24: 2026-10-24: asked mtools-ad where an intervention event is read back (store, station or series name, delay); until answered the before and after windows would be built on a series not yet read back. Named by repo only, because mtools has no card for it: nemik:W750 is the citable ref | 2026-10-24: 2026-10-24 mtools-ad (a peer's word, read from code, no store queried): 'intervention sent' means the detached mikemol-otlp children were started, not delivered, since their output goes to /dev/null and a failed POST is swallowed (mtools:W1887 cards the fix). LOG in victorialogs-http: service.name mikemol-paths-forward, repo is the state file's repo, body one JSON line with station <repo>:fleet:intervention, field the kind, new the note. So a repin from nemik's queue is station nemik:fleet:intervention. LogsQL is service.name mikemol-paths-forward with the word fleet:intervention over 7d. METRIC in vmsingle is gauge mikemol.waypoint.event with labels repo, field and via, value 1 per event, read with sum_over_time, and its PromQL name is a guess until luthen's registry row is read. No delay. To test a lost send run mikemol-otlp log once in the foreground | 2026-10-24: 2026-10-24 read back: the 2026-10-20 repin intervention IS in the store, at 2026-10-21T02:14:31Z in luthen's VictoriaLogs, station nemik:fleet:intervention, found with luthen's checks.vlogs_query and the query service.name:mikemol-paths-forward \"fleet:intervention\" -\"accepted\". My earlier query used the colon word unquoted and found nothing, so the empty result was my query and not a lost send. It is the only intervention event in the store, so no other practice change has a date there, and past changes cannot be dated honestly since an event carries its send time",
+      "evidence": "2026-10-21: 2026-10-20: the live writer has --intervention (repin 5971c07, venv rebuilt by the post-commit hook after 00cb6d2). First one sent: 'repin' for the move to f2f18a1; the command printed 'intervention repin sent' and exited 0. NOT yet read back: a LogsQL query for fleet:intervention on luthen's VictoriaLogs found nothing, so the series it lands in (metrics, not logs, or a delay) is unconfirmed; ask mtools-ad where an intervention is read before relying on the series | 2026-10-24: 2026-10-24: asked mtools-ad where an intervention event is read back (store, station or series name, delay); until answered the before and after windows would be built on a series not yet read back. Named by repo only, because mtools has no card for it: nemik:W750 is the citable ref | 2026-10-24: 2026-10-24 mtools-ad (a peer's word, read from code, no store queried): 'intervention sent' means the detached mikemol-otlp children were started, not delivered, since their output goes to /dev/null and a failed POST is swallowed (mtools:W1887 cards the fix). LOG in victorialogs-http: service.name mikemol-paths-forward, repo is the state file's repo, body one JSON line with station <repo>:fleet:intervention, field the kind, new the note. So a repin from nemik's queue is station nemik:fleet:intervention. LogsQL is service.name mikemol-paths-forward with the word fleet:intervention over 7d. METRIC in vmsingle is gauge mikemol.waypoint.event with labels repo, field and via, value 1 per event, read with sum_over_time, and its PromQL name is a guess until luthen's registry row is read. No delay. To test a lost send run mikemol-otlp log once in the foreground | 2026-10-24: 2026-10-24 read back: the 2026-10-20 repin intervention IS in the store, at 2026-10-21T02:14:31Z in luthen's VictoriaLogs, station nemik:fleet:intervention, found with luthen's checks.vlogs_query and the query service.name:mikemol-paths-forward \"fleet:intervention\" -\"accepted\". My earlier query used the colon word unquoted and found nothing, so the empty result was my query and not a lost send. It is the only intervention event in the store, so no other practice change has a date there, and past changes cannot be dated honestly since an event carries its send time | 2026-10-27: 2026-10-27: sent a stack intervention for stack583 (W1191); the command printed 'intervention stack started', which per mtools-ad means the sender was started, not delivered; read-back in VictoriaLogs still to do",
       "issued_at": "2026-10-19T19:35:14Z",
       "minted_during": "tick",
       "caused_by": "nemik:W743",
-      "last_worked": "2026-10-24T05:40:32Z",
+      "last_worked": "2026-10-27T20:49:58Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -27993,17 +27994,18 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "github-8f audit: __future__ fixes retire 0 entries because Codon records only the first error per module (80 entries). Reframe as thin entry points: argparse, tomllib and resources into one dispatcher plus one I/O adapter (about 30 entries to about 2). Probe the ',' syntax cluster with mikemol-codon-probe. Consider counting codon blockers statically so progress shows before a module compiles clean",
-      "evidence": "",
+      "next_bounded_step": "CORRECTION 2026-10-27 to the previous note on datetime.UTC (tested, not inferred): the pinned Codon's datetime module has NEITHER UTC NOR timezone ('cannot import name UTC from datetime'; 'cannot import name timezone from datetime', probed with codon run on two three-line files). So there is no ruff-versus-Codon choice to make: ruff's UP017 would flag timezone.utc (confirmed) but Codon cannot import timezone either. The four modules that import UTC (alarm, witwait, queuerows, residue) use timezone-aware datetimes, which the Codon datetime cannot express; a Codon-compatible form means those modules stop handling zoned datetimes (take and return epoch seconds or ISO text, with the zone handled in a non-census caller), an architectural change per module, not an import swap. Everything else in the previous note stands: the ',' cluster is the bare '*,' marker; pacerun left the baseline in W1190 (frozenset default became a list constant; Codon cannot read tuple[str, ...]); the tally by first error (18 argparse, 10 ',', 9 rdflib, 8 tomllib, 7 class decorator, 4 importlib.resources, 4 collections.abc, singletons) and calendars and rank aborting the compiler (rc -6) unexplained",
+      "evidence": "2026-10-27: 2026-10-27 tick: the ',' cluster is mostly keyword-only parameters after a named-arg star (history.is_series, hostapply, stackable_cli), not only a bare star line, and each also imports argparse or subprocess; removing the star alone moves none off the baseline. Next singleton candidates: letters (shlex), index (weakref), shaclcache (contextlib), endpoint (http.client) are stdlib-module gaps, so each needs a replacement, not a retype",
       "issued_at": "2026-10-27T13:51:58Z",
       "minted_during": "interrupt",
       "caused_by": "W1014",
-      "last_worked": "2026-10-27T13:52:12Z",
+      "last_worked": "2026-10-27T20:49:38Z",
       "ticks_blocked": 0,
       "size_class": "medium",
       "manifest": [
         "docs/codon-thin-entry.md"
-      ]
+      ],
+      "completed": null
     },
     {
       "symbol": "W1180",
@@ -28236,21 +28238,21 @@
     {
       "symbol": "W1189",
       "title": "Run gabion's dataflow-bundle audit on nemik's src to find recurring parameter and document shapes, installed as nemik's own dev dependency",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W1175"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "DONE in the tree 2026-10-27: gabion ran over src/nemik (144 files, ~90 s on a 50M-check budget; the default 1M stopped at 109 files) and docs/gabion-audit.md records the install findings (click undeclared, needs Python 3.14 despite requires-python >=3.11, reads repo-relative data files, maps paths against its cwd), what it found (about 80 tier-2 parameter bundles, 22 kept in its refactor plan, nearly all single-function pairs), and a verdict: a second sensor. Useful hints: the 8-name group (g, gate_weights, repo, residue, toward, weights, without, workable) across rank.py and salience.py, the now+window family across metrics, forecast, history, churn, and FleetView/Window/Series/recurrence record candidates. It cannot see the json and tomllib document shapes that are 93 percent of the mypy debt, so W1176 still derives its Waypoint record from the keys consumers read. Cross-check with the lazy-import census: rank is the first split after mspdi. Re-run it after a split",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-27: landed 19e6ac6 (pushed, gate green on the staged tree): docs/gabion-audit.md records the run, the install findings, the bundles, what gabion cannot see and the verdict (a second sensor)",
       "issued_at": "2026-10-27T19:55:55Z",
       "minted_during": "interrupt",
       "caused_by": "W1176",
-      "last_worked": "2026-10-27T20:10:08Z",
+      "last_worked": "2026-10-27T20:43:04Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261027T204304Z",
       "manifest": [
         "docs/gabion-audit.md"
       ],
@@ -28259,6 +28261,32 @@
     {
       "symbol": "W1190",
       "title": "pacerun compiles under the pinned Codon: its retired list is a list, not a frozenset, so it leaves the codon baseline (paydown)",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "file:codon-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-27: landed 3ee50a4 (pushed, gate green on the staged tree, 442/442 tests): pacerun's retired is list[str] with a NO_RETIRED module constant default, and the pacerun entry left codon-baseline.json",
+      "issued_at": "2026-10-27T20:17:39Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1179",
+      "last_worked": "2026-10-27T20:43:04Z",
+      "ticks_blocked": 0,
+      "completed": "20261027T204304Z",
+      "manifest": [
+        "src/nemik/pacerun.py",
+        "src/nemik/hostroot_cli.py",
+        "tests/test_retired_series.py",
+        "codon-baseline.json"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W1191",
+      "title": "roundcli compiles under the pinned Codon: its landing file is always a Path, NO_LANDINGS when there is none, so it leaves the codon baseline (paydown)",
       "status": "working",
       "enables": [],
       "touches": [
@@ -28268,16 +28296,18 @@
       "blocked_kind": null,
       "next_bounded_step": "",
       "evidence": "",
-      "issued_at": "2026-10-27T20:17:39Z",
-      "minted_during": "interrupt",
+      "issued_at": "2026-10-27T20:44:40Z",
+      "minted_during": "tick",
       "caused_by": "W1179",
-      "last_worked": "2026-10-27T20:17:57Z",
+      "last_worked": "2026-10-27T20:44:43Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
-        "src/nemik/pacerun.py",
-        "src/nemik/hostroot_cli.py",
-        "tests/test_retired_series.py",
+        "src/nemik/roundcli.py",
+        "src/nemik/rank.py",
+        "src/nemik/serve.py",
+        "tests/test_roundcli.py",
+        "tests/test_round_bindings.py",
         "codon-baseline.json"
       ],
       "size_class": "small"
@@ -28464,7 +28494,7 @@
   "heartbeat": "2026-10-22T02:06:35Z",
   "lock": {
     "holder": "claude-nemik",
-    "taken_at": "2026-10-27T20:18:54Z",
+    "taken_at": "2026-10-27T20:51:25Z",
     "pid": 1281447,
     "start": 39974717
   },
@@ -28476,8 +28506,8 @@
       "waypoint": "W924",
       "base_sha": "67eb4a883831b11b5852f5d4c4fce247072ce093",
       "taken_at": "2026-10-23T20:48:07Z",
-      "renewed_at": "2026-10-27T20:18:54Z",
-      "expires_at": "2026-10-27T20:48:54Z"
+      "renewed_at": "2026-10-27T20:51:25Z",
+      "expires_at": "2026-10-27T21:21:25Z"
     },
     {
       "tag": "file:tools/shardselect.py!w",
@@ -28485,8 +28515,8 @@
       "waypoint": "W924",
       "base_sha": "67eb4a883831b11b5852f5d4c4fce247072ce093",
       "taken_at": "2026-10-23T20:48:07Z",
-      "renewed_at": "2026-10-27T20:18:54Z",
-      "expires_at": "2026-10-27T20:48:54Z"
+      "renewed_at": "2026-10-27T20:51:25Z",
+      "expires_at": "2026-10-27T21:21:25Z"
     },
     {
       "tag": "file:tests/conftest.py!w",
@@ -28494,8 +28524,8 @@
       "waypoint": "W924",
       "base_sha": "67eb4a883831b11b5852f5d4c4fce247072ce093",
       "taken_at": "2026-10-23T20:48:07Z",
-      "renewed_at": "2026-10-27T20:18:54Z",
-      "expires_at": "2026-10-27T20:48:54Z"
+      "renewed_at": "2026-10-27T20:51:25Z",
+      "expires_at": "2026-10-27T21:21:25Z"
     },
     {
       "tag": "file:tests/test_shard_select.py!w",
@@ -28503,8 +28533,8 @@
       "waypoint": "W924",
       "base_sha": "67eb4a883831b11b5852f5d4c4fce247072ce093",
       "taken_at": "2026-10-23T20:48:07Z",
-      "renewed_at": "2026-10-27T20:18:54Z",
-      "expires_at": "2026-10-27T20:48:54Z"
+      "renewed_at": "2026-10-27T20:51:25Z",
+      "expires_at": "2026-10-27T21:21:25Z"
     },
     {
       "tag": "file:docs/forecast-features.md!w",

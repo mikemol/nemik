@@ -5,7 +5,13 @@
 from pathlib import Path
 
 from nemik.landings import Landing, document
-from nemik.roundcli import round_document, round_lines, sizes_of, write_round_file
+from nemik.roundcli import (
+    NO_LANDINGS,
+    round_document,
+    round_lines,
+    sizes_of,
+    write_round_file,
+)
 
 RANKED = [
     ("W5", "9.0", "first"),
@@ -52,11 +58,15 @@ def test_a_median_stack_below_the_floor_is_lifted_to_it(tmp_path: Path) -> None:
     assert [line.split()[1] for line in lines[1:]] == ["W5", "W2", "W9"]
 
 
-def test_without_a_landing_file_the_round_is_the_floor() -> None:
-    """No history: the floor, from floor, as for a repo that lands outside mikemol-commit."""
-    lines = round_lines("alpha", RANKED, None)
-    assert lines[0] == "round alpha: 3 of 4 cards (size 3, from floor)"
-    assert [line.split()[1] for line in lines[1:]] == ["W5", "W2", "W9"]
+def test_without_a_landing_file_the_round_is_the_floor(tmp_path: Path) -> None:
+    """No history: the floor, from floor, as for a repo that lands outside mikemol-commit.
+
+    A path that is not a file reads the same as NO_LANDINGS.
+    """
+    for none in (NO_LANDINGS, tmp_path / "absent.json"):
+        lines = round_lines("alpha", RANKED, none)
+        assert lines[0] == "round alpha: 3 of 4 cards (size 3, from floor)"
+        assert [line.split()[1] for line in lines[1:]] == ["W5", "W2", "W9"]
 
 
 def test_the_round_file_holds_each_repos_round_sized_by_its_own_stacks(
@@ -78,6 +88,6 @@ def test_the_round_file_holds_each_repos_round_sized_by_its_own_stacks(
 def test_the_round_file_is_written_whole_to_the_path_named(tmp_path: Path) -> None:
     """The file lands at the path, with no temporary left beside it."""
     path = tmp_path / "cache" / "round.json"
-    write_round_file({"alpha": ROWS}, None, path)
+    write_round_file({"alpha": ROWS}, NO_LANDINGS, path)
     assert path.read_text(encoding="utf-8").splitlines()[0].startswith('{"as_of": "')
     assert [p.name for p in path.parent.iterdir()] == ["round.json"]

@@ -1415,7 +1415,7 @@ def round_bindings(
             by_repo.setdefault(repo, []).append(
                 {"state": state, "manifest": manifest(graph, repo, symbol)}
             )
-    return bindings_of(by_repo, landings if landings.is_file() else None)
+    return bindings_of(by_repo, landings)
 
 
 def working_cards(nodes: list[dict[str, object]]) -> dict[str, list[str]]:

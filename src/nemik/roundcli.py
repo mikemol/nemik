@@ -19,6 +19,9 @@ from nemik.roundfile import round_text
 from nemik.roundof import capacity, round_of, stack_sizes, supply, width
 
 RECENT = 10  # landed stacks the capacity looks back over
+# nemik:W1191: no landing file. The landing file is always a Path, never None, because the pinned
+# Codon cannot read `Path | None`; this one is a directory, so it is never a file to read.
+NO_LANDINGS = Path()
 
 
 def _files(row: dict[str, object]) -> list[str]:
@@ -42,14 +45,14 @@ def stackable_of(rows: list[dict[str, object]]) -> int:
 
 
 def size_for(
-    repo: str, rows: list[dict[str, object]], landings: Path | None
+    repo: str, rows: list[dict[str, object]], landings: Path
 ) -> tuple[int, str]:
     """Choose a repo's round width from what can stack and what has landed (nemik:W1082).
 
     Args:
         repo: The repo.
         rows: nemik-rank's rows for it, best first.
-        landings: The landing file, or None.
+        landings: The landing file, or NO_LANDINGS.
 
     Returns:
         (the width, its binding term): roundof.width over the supply and the landed stacks.
@@ -60,13 +63,13 @@ def size_for(
 
 
 def bindings_of(
-    by_repo: dict[str, list[dict[str, object]]], landings: Path | None
+    by_repo: dict[str, list[dict[str, object]]], landings: Path
 ) -> dict[str, str]:
     """Name the term that bounded each repo's round (nemik:W1135, W1167).
 
     Args:
         by_repo: Each repo's rows, each with a state and a manifest, as size_for reads them.
-        landings: The landing file, or None.
+        landings: The landing file, or NO_LANDINGS.
 
     Returns:
         {repo: its binding term}, by size_for; empty for no repos.
@@ -75,18 +78,18 @@ def bindings_of(
     return {repo: size_for(repo, rows, landings)[1] for repo, rows in by_repo.items()}
 
 
-def sizes_of(repo: str, landings: Path | None) -> list[int]:
+def sizes_of(repo: str, landings: Path) -> list[int]:
     """Read a repo's recent landed-stack sizes from the landing file.
 
     Args:
         repo: The repo whose landings are read.
-        landings: The landing file, or None when there is none.
+        landings: The landing file, or NO_LANDINGS (or any path that is not a file) for none.
 
     Returns:
         The sizes of its last RECENT stacks, oldest first; empty without a readable file.
 
     """
-    if landings is None:
+    if not landings.is_file():
         return []
     try:
         _, rows = read_document(landings.read_text(encoding="utf-8"))
@@ -109,13 +112,13 @@ def _ranked(rows: list[dict[str, object]]) -> list[tuple[str, str, str]]:
     ]
 
 
-def show_round(repo: str, rows: list[dict[str, object]], landings: Path | None) -> None:
+def show_round(repo: str, rows: list[dict[str, object]], landings: Path) -> None:
     """Print the round of a repo from its ranking rows.
 
     Args:
         repo: The repo.
         rows: nemik-rank's rows for it, best first, each with symbol, salience and title.
-        landings: The landing file, or None.
+        landings: The landing file, or NO_LANDINGS.
 
     """
     ranked = _ranked(rows)
@@ -124,13 +127,13 @@ def show_round(repo: str, rows: list[dict[str, object]], landings: Path | None) 
 
 
 def round_document(
-    by_repo: dict[str, list[dict[str, object]]], landings: Path | None, stamp: str
+    by_repo: dict[str, list[dict[str, object]]], landings: Path, stamp: str
 ) -> str:
     """Write the round file for every repo that has ready cards (nemik:W1025).
 
     Args:
         by_repo: Each repo's nemik-rank rows, best first.
-        landings: The landing file, or None.
+        landings: The landing file, or NO_LANDINGS.
         stamp: When the rounds were drawn, a UTC stamp.
 
     Returns:
@@ -146,13 +149,13 @@ def round_document(
 
 
 def write_round_file(
-    by_repo: dict[str, list[dict[str, object]]], landings: Path | None, path: Path
+    by_repo: dict[str, list[dict[str, object]]], landings: Path, path: Path
 ) -> None:
     """Write the round file whole or not at all, so a reader never sees half of it (nemik:W1025).
 
     Args:
         by_repo: Each repo's nemik-rank rows, best first.
-        landings: The landing file, or None.
+        landings: The landing file, or NO_LANDINGS.
         path: Where the round file goes.
 
     """
@@ -170,7 +173,7 @@ def write_round_file(
 def round_lines(
     repo: str,
     ranked: list[tuple[str, str, str]],
-    landings: Path | None,
+    landings: Path,
     stackable: int = 0,
 ) -> list[str]:
     """Print the round of a repo.
@@ -178,7 +181,7 @@ def round_lines(
     Args:
         repo: The repo.
         ranked: Its ready cards best first, each as (symbol, salience text, title).
-        landings: The landing file, or None.
+        landings: The landing file, or NO_LANDINGS.
         stackable: How many of its ready cards can stack together (stackable_of); 0 when unknown.
 
     Returns:

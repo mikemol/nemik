@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 
 from nemik.adapter import queue_graph
-from nemik.roundcli import bindings_of
+from nemik.roundcli import NO_LANDINGS, bindings_of
 from nemik.serve import round_bindings
 
 
@@ -60,5 +60,5 @@ def test_a_working_card_keeps_its_files_busy_and_no_repo_means_no_term() -> None
             {"state": "ready", "manifest": ["a.py"]},
         ]
     }
-    assert bindings_of(rows, None) == {"r": "floor"}
-    assert bindings_of({}, None) == {}
+    assert bindings_of(rows, NO_LANDINGS) == {"r": "floor"}
+    assert bindings_of({}, NO_LANDINGS) == {}

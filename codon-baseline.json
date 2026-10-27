@@ -191,10 +191,6 @@
   "as_written": "no module named '__future__'",
   "stripped": "cannot import name 'UTC' from 'datetime'"
  },
- "roundcli": {
-  "as_written": "unsupported operand type(s) for |: 'type[Path]' and 'Optional[T.8]'",
-  "stripped": "unsupported operand type(s) for |: 'type[Path]' and 'Optional[T.8]'"
- },
  "runlogs": {
   "as_written": "no module named 'rdflib'",
   "stripped": "no module named 'rdflib'"

@@ -22,7 +22,7 @@ from rdflib.term import Node
 from nemik import tiers
 from nemik.adapter import BASE, NEMIK, OSLC_CM, workstream_uri
 from nemik.pacecli import behind_files, pace_exit, pace_process
-from nemik.roundcli import show_round, write_round_file
+from nemik.roundcli import NO_LANDINGS, show_round, write_round_file
 from nemik.stackable import manifest
 
 if TYPE_CHECKING:
@@ -631,7 +631,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     ap.add_argument(
         "--landings",
         type=Path,
-        default=None,
+        default=NO_LANDINGS,
         metavar="FILE",
         help="with --round: the landing file nemik-hostroot --landings writes, for the stack sizes",
     )
@@ -687,7 +687,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
             repo: rank(g, repo, weights, with_working=True)
             for repo in sorted({*fleet_repos(g), *busy})
         }
-        write_round_file(by_repo, args.landings, args.round_file)  # nemik:W1025
+        write_round_file(by_repo, args.landings, args.round_file)  # W1025
         return
     if args.all:
         fleet = rank_fleet(g, weights)
@@ -844,7 +844,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         return
     rows = rank(g, args.repo, weights, toward=args.toward, with_working=args.round)
     if args.round:
-        show_round(args.repo, rows, args.landings)  # nemik:W1024, operator 2026-10-25
+        show_round(args.repo, rows, args.landings)
         return
     if args.apply:
         _apply(args.apply, rows)
