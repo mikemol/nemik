@@ -115,11 +115,6 @@
   "PLC0415": 1,
   "TC002": 1
  },
- "src/nemik/catalog.py": {
-  "D401": 1,
-  "DOC201": 1,
-  "E501": 3
- },
  "src/nemik/check.py": {
   "ANN001": 1,
   "C901": 1,
