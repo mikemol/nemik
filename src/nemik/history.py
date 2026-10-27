@@ -1078,6 +1078,13 @@ def main(argv: list[str] | None = None) -> int:
         "stamps (W1112)",
     )
     ap.add_argument(
+        "--by-cause",
+        action="store_true",
+        help="with --baseline: the cards added in the window split by caused_by, as children of "
+        "an open card, promotions of a done one, outside causes and none, in at most "
+        f"{ROW_LINES} lines (W1147)",
+    )
+    ap.add_argument(
         "--where",
         default="",
         metavar="EXPRESSION",
@@ -1512,6 +1519,7 @@ class Opts(argparse.Namespace):
     root: Path
     baseline: str | None
     compact: bool
+    by_cause: bool
 
 
 def emit(args: Opts, mode: str, rows: object) -> bool:
@@ -1760,6 +1768,127 @@ def born_in(repo: Path, spec: str) -> int:
     return born_cards(adds or "", since, queue_at(repo, "HEAD"))
 
 
+# adds that are children of an open card, promotions of a done card, of an outside cause, of none
+Causes = tuple[int, int, int, int]
+_OWN_CARD = re.compile(r"W[1-9][0-9]*")
+
+
+def _cause_of(card: Waypoint, status: dict[str, str]) -> int:
+    """Say where one added card came from (nemik:W1147).
+
+    Args:
+        card: The added waypoint.
+        status: Each of this queue's cards' status now.
+
+    Returns:
+        0 for a child of a card still open (an atomization), 1 for a promotion (the card it is
+        caused by is done or gone: a finished card is never reopened, its class is minted
+        beside it), 2 for a cause outside this queue (another repo's card, a peer, the operator,
+        a letter), 3 for no cause stated.
+
+    """
+    cause = card.get("caused_by")
+    if not isinstance(cause, str) or not cause:
+        return 3
+    if not _OWN_CARD.fullmatch(cause):
+        return 2
+    return 0 if status.get(cause) not in {None, "done"} else 1
+
+
+def cause_counts(base: QueueDoc, now: QueueDoc) -> Causes:
+    """Split the cards added between two committed copies by what caused them (nemik:W1147).
+
+    Returns:
+        (children, promotions, outside, none) over the cards `now` holds that `base` did not know.
+
+    """
+    known = set(_status(base)) | _dropped(base)
+    status = _status(now)
+    tally = [0, 0, 0, 0]
+    for card in now.get("waypoints", []):
+        if str(card["symbol"]) not in known:
+            tally[_cause_of(card, status)] += 1
+    return tally[0], tally[1], tally[2], tally[3]
+
+
+def stamp_causes(doc: QueueDoc, since: datetime) -> Causes:
+    """Split the cards issued since an instant by what caused them, from the stamps alone.
+
+    Returns:
+        (children, promotions, outside, none), for a queue outside git that has no past to diff.
+
+    """
+    status = _status(doc)
+    tally = [0, 0, 0, 0]
+    for card in doc.get("waypoints", []):
+        issued = _stamp(card.get("issued_at"))
+        if issued is not None and issued >= since:
+            tally[_cause_of(card, status)] += 1
+    return tally[0], tally[1], tally[2], tally[3]
+
+
+def _most_added(pair: tuple[str, Causes]) -> tuple[int, str]:
+    """Order repos by how many cards they added, most first, then by name.
+
+    Returns:
+        The sort key.
+
+    """
+    return -sum(pair[1]), pair[0]
+
+
+def cause_row(rows: dict[str, Causes], spec: str, limit: int = ROW_LINES) -> list[str]:
+    """Fold a fleet's adds into one total line and the repos that added, by cause (nemik:W1147).
+
+    Args:
+        rows: Each repo's split.
+        spec: The window as the operator wrote it.
+        limit: The most lines to give.
+
+    Returns:
+        The fleet's adds as child, promoted, outside and none, then one line per repo that added,
+        most first, with a tail line for the ones that did not fit. At most `limit` lines.
+
+    """
+    total = [sum(c[i] for c in rows.values()) for i in range(4)]
+    head = (
+        f"fleet since {spec}: added {sum(total)}: child {total[0]}, promoted {total[1]}, "
+        f"outside {total[2]}, none {total[3]}"
+    )
+    adders = sorted(
+        ((name, c) for name, c in rows.items() if sum(c)),
+        key=_most_added,
+    )
+    entries = [
+        f"{name}: added {sum(c)}: child {c[0]}, promoted {c[1]}, outside {c[2]}, none {c[3]}"
+        for name, c in adders
+    ]
+    room = limit - 1
+    shown = entries if len(entries) <= room else entries[: room - 1]
+    lines = [head, *shown]
+    if len(shown) < len(entries):
+        lines.append(f"+{len(entries) - len(shown)} more repos added")
+    return lines
+
+
+def _causes_for(repo: Path, spec: str) -> Causes | None:
+    """Split one repo's adds in the window: from its commits, or from its stamps outside git.
+
+    Returns:
+        The split; None when the repo has no queue to read.
+
+    """
+    now = queue_at(repo, "HEAD")
+    since = window_start(spec)
+    if since is not None and not now:
+        path = repo / QUEUE_PATH
+        if not path.is_file():
+            return None
+        text = path.read_text(encoding="utf-8")
+        return stamp_causes(queue_at(repo, "HEAD", known=text), since)
+    return cause_counts(queue_at(repo, resolve(repo, spec)), now)
+
+
 def _counts_for(repo: Path, spec: str) -> Counts | None:
     """Count one repo's window: from its commits, or from its card stamps outside git.
 
@@ -1780,13 +1909,40 @@ def _counts_for(repo: Path, spec: str) -> Counts | None:
     return burn_counts(queue_at(repo, resolve(repo, spec)), now)
 
 
+def _by_cause(baseline: str, names: list[str], dirs: dict[str, Path]) -> int:
+    """Print the fleet's adds split by what caused them, in at most ROW_LINES lines (W1147).
+
+    A queue created inside the window is born and not counted, as in the compact row.
+
+    Returns:
+        0; 2 when a baseline is a time of day with no zone.
+
+    """
+    rows: dict[str, Causes] = {}
+    for name in names:
+        spec = baseline_spec(dirs[name], baseline)
+        if spec is None:
+            continue
+        try:
+            split = None if born_in(dirs[name], spec) else _causes_for(dirs[name], spec)
+        except ValueError as error:
+            sys.stderr.write(f"{name}: {error}\n")
+            return 2
+        if split is not None:
+            rows[name] = split
+    sys.stdout.write("\n".join(cause_row(rows, baseline or "declared")) + "\n")
+    return 0
+
+
 def _baselined(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
-    """Run `--baseline` in its full report, or as the compact fleet row with `--compact`.
+    """Run `--baseline` in its full report, as the compact fleet row, or split by cause.
 
     Returns:
         The mode's exit status.
 
     """
+    if args.by_cause and args.baseline is not None:
+        return _by_cause(args.baseline, names, dirs)
     if args.compact and args.baseline is not None:
         return _compact(args.baseline, names, dirs)
     return _baseline(args, names, dirs)

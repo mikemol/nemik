@@ -2703,3 +2703,8 @@
 2026-10-27T04:20:29Z  status W1144 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-27T04:20:30Z  status W1112 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-27T04:22:11Z  status W1140 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T04:23:51Z  tick  W1147 minted    -         "A window's adds split by caused_by (child of a card, promotion, or none) in ten lines or fewer"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1112
+2026-10-27T04:24:18Z  status W1147 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T04:27:05Z  tick  W1148 minted    -         "catalog.py states its summary as a command, documents its return and wraps its docstring, so ruff falls 2613 to 2608 (paydown)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
+2026-10-27T04:27:13Z  status W1148 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T04:27:19Z  tick  W1147 advanced  collapse  "stack552 (W1140 test_viewstate in three shards, 39 s alone so load-bound, then W1034 codon) in the gate; stack553 queued (W1148 catalog.py ruff to 2608; W1147 --by-cause: nemik -1d adds 56 = 28 children, 6 promotions, 22 outside, 0 none). W1112 birth landed 16aa1ce, W1143/W1144 done. github-8f told the viewstate evidence. [blocked by W1140]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
