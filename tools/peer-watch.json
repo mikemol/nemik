@@ -1,0 +1,14 @@
+{
+ "watched": [
+  {
+   "peer": "summit",
+   "why": "▣45's prose field and ▣51's capability record both wait on this tree"
+  }
+ ],
+ "handed": [
+  {
+   "peer": "summit",
+   "path": "registries/capabilities/substitutable-backing-store.md"
+  }
+ ]
+}

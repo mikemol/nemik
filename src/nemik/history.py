@@ -374,6 +374,22 @@ def _git(repo: Path, *args: str) -> str | None:
     return out.decode()
 
 
+def git_lines(repo: Path, *args: str) -> list[str] | None:
+    """Run git in a repo and give its output a line at a time (nemik:W1149).
+
+    Args:
+        repo: The repo's directory.
+        *args: The git arguments after `-C <repo>`.
+
+    Returns:
+        The lines, untouched (a leading space in `git status --porcelain` survives); an empty
+        list when git answered with nothing; None when git could not answer.
+
+    """
+    out = _git(repo, *args)
+    return None if out is None else out.splitlines()
+
+
 def resolve(repo: Path, spec: str | None) -> str | None:
     """A revision for `spec`: a date means the last commit before it, anything else is a rev.
 
