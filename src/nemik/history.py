@@ -1709,7 +1709,7 @@ def fleet_row(
     closed, dropped, added, still = (sum(c[i] for c in rows.values()) for i in range(4))
     head = (
         f"fleet since {spec}: closed {closed}, dropped {dropped}, added {added}, "
-        f"net {closed + dropped - added:+d}, open {still}, {len(rows)} repos"
+        f"net {closed + dropped - added:+d}, open (planned) {still}, {len(rows)} repos"
     )
     if born:
         head += f"; {sum(born.values())} cards born in {len(born)} new queues"
@@ -1766,6 +1766,29 @@ def born_in(repo: Path, spec: str) -> int:
         return 0
     adds = _git(repo, "log", "--diff-filter=A", "--format=%cI", "--", QUEUE_PATH)
     return born_cards(adds or "", since, queue_at(repo, "HEAD"))
+
+
+def live_queue(repo: Path, committed: QueueDoc) -> QueueDoc:
+    """Read a queue as it stands on disk, so a card minted after the last commit counts (W1112).
+
+    A queue reaches git only when the stack carrying it lands, a gate of half an hour, and a window
+    that read HEAD saw no adds in that time while a longer one rose when the commits arrived.
+
+    Args:
+        repo: The repo's directory.
+        committed: The queue as committed, for a repo with no file on disk or an unreadable one.
+
+    Returns:
+        The queue file's content now; `committed` when there is no readable file.
+
+    """
+    path = repo / QUEUE_PATH
+    if not path.is_file():
+        return committed
+    try:
+        return queue_at(repo, "HEAD", known=path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return committed
 
 
 # adds that are children of an open card, promotions of a done card, of an outside cause, of none
@@ -1886,7 +1909,7 @@ def _causes_for(repo: Path, spec: str) -> Causes | None:
             return None
         text = path.read_text(encoding="utf-8")
         return stamp_causes(queue_at(repo, "HEAD", known=text), since)
-    return cause_counts(queue_at(repo, resolve(repo, spec)), now)
+    return cause_counts(queue_at(repo, resolve(repo, spec)), live_queue(repo, now))
 
 
 def _counts_for(repo: Path, spec: str) -> Counts | None:
@@ -1906,7 +1929,7 @@ def _counts_for(repo: Path, spec: str) -> Counts | None:
             return None
         text = path.read_text(encoding="utf-8")
         return stamp_counts(queue_at(repo, "HEAD", known=text), since)
-    return burn_counts(queue_at(repo, resolve(repo, spec)), now)
+    return burn_counts(queue_at(repo, resolve(repo, spec)), live_queue(repo, now))
 
 
 def _by_cause(baseline: str, names: list[str], dirs: dict[str, Path]) -> int:
