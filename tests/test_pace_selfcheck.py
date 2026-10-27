@@ -37,6 +37,22 @@ def test_an_ok_row_and_a_row_that_owes_nothing_are_left_alone() -> None:
     assert not contradictions(series, WINDOW, rows)
 
 
+def test_a_requirement_above_the_best_window_the_series_ever_made_is_named() -> None:
+    """Forty samples falling one a landing owe 109: the best ten-landing window fell 10."""
+    steady = list(range(100, 60, -1))
+    rows = [("r", "x", "behind", 3, 109)]
+    assert contradictions([("r", "x", steady)], WINDOW, rows) == [
+        "r x owes 109 but its best 10-landing window fell 10"
+    ]
+
+
+def test_a_requirement_the_series_has_met_or_a_short_history_is_left_alone() -> None:
+    """Owing no more than the best window, or too little history to bound, says nothing."""
+    steady = list(range(100, 60, -1))
+    assert not contradictions([("r", "x", steady)], WINDOW, [("r", "x", "ok", 10, 10)])
+    assert not contradictions([("r", "x", FELL)], WINDOW, [("r", "x", "ok", 16, 109)])
+
+
 def test_the_real_pipeline_agrees_with_itself_on_the_letter_quotes_shape() -> None:
     """After the W1155 fix the verdict reads ok for that series, so the self-check finds nothing."""
     assert not pace_contradictions(EXPORT, "", {})

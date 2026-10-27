@@ -2786,3 +2786,13 @@
 2026-10-27T09:42:56Z  status W1162 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-27T09:42:58Z  tick  W1163 minted    -         "Answer nemik: estate:W39 is done (letter 2026-10-27-nemik-edge-estate-W39-enables-W914)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-10-27-nemik-edge-estate-W39-enables-W914.md
 2026-10-27T09:43:15Z  tick  W1049 advanced  collapse  "W1049 read-path doc written (gh keyring subprocess route); W1162 mypy paydown 5622 to 5620 leads stack563 behind 561 (gating) and 562 (queued: W1161 paydown, W1160 repin); W1163 minted for the estate letter [blocked by W1159]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T09:51:21Z  status W1155 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T09:51:26Z  status W1159 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T09:51:27Z  status W1158 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T09:52:40Z  interrupt W1164 minted    -         "pace self-check names a requirement above the best window its series ever made (learned bound, alert only)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1155
+2026-10-27T09:52:45Z  status W1164 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T10:13:03Z  interrupt W1165 minted    -         "Reset nemik's declared mypy and ruff requirements from 109 and 73 to 2 and 4, a declared re-baseline with its reason kept"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1158
+2026-10-27T10:13:07Z  status W1165 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T10:14:26Z  interrupt W1166 minted    -         "test_pins types its capsys fixture, so ruff falls 2607 to 2606 and mypy 5620 to 5618 (paydown)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
+2026-10-27T10:14:30Z  status W1166 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T10:16:44Z  tick  W1070 advanced  sweep     "Gave W1070, W1111 and W1108 manifests and next steps (no skopeo or crane on host: digest read needs a tool mode); W1165 carded for the 109/73 reset; W1166 paydown plus W1164 bound check queued as stack564 behind 562 gating and 563 queued [blocked by W1161]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

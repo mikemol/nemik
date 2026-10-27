@@ -10,7 +10,7 @@ for the same ratchet is passed back as the prior, and the larger one is written.
 """
 
 from nemik.pacepublish import UNKNOWN, Row
-from nemik.ratchetpace import BEHIND, horizon, verdict
+from nemik.ratchetpace import BEHIND, MIN_WINDOWS, horizon, verdict
 
 
 def extras_of(
@@ -76,16 +76,31 @@ def pace_rows(
     return rows
 
 
+def best_fall(values: list[int], window: int) -> int:
+    """Give the largest fall over any `window` landings of a series (nemik:W1155 bound check).
+
+    Returns:
+        The best window's fall, or -1 when the series holds no more than MIN_WINDOWS whole windows,
+        too little history to say what the ratchet can achieve.
+
+    """
+    if len(values) <= MIN_WINDOWS * window:
+        return -1
+    return max(values[at] - values[at + window] for at in range(len(values) - window))
+
+
 def contradictions(
     series: list[tuple[str, str, list[int]]], window: int, rows: list[Row]
 ) -> list[str]:
-    """Name the rows that read behind while their own series fell what they owed (nemik:W1155).
+    """Name the rows whose verdict and series disagree (nemik:W1155).
 
-    A self-check, an alert and never a gate: it recomputes the fall over the last `window`
-    landings of the very series a row was judged on, by its own loop and not by window_fall, and
-    says so when the row reads behind though that fall is at least the requirement. A row can only
-    do that if the verdict and the series disagree, which is how linux-sources' letter-quotes read
-    behind with observed 0 while it fell 18 to 2 (a short history, W1155).
+    A self-check, an alert and never a gate. Two disagreements are named. A row that reads behind
+    though the fall over the last `window` landings of its series, recomputed here by its own loop
+    and not by window_fall, is at least the requirement: how linux-sources' letter-quotes read
+    behind with observed 0 while it fell 18 to 2 (a short history). And a row whose requirement
+    exceeds the best `window`-landing fall its whole series ever made, the bound that would have
+    caught nemik's 109 (a burst read as a rate); it is skipped while the series holds no more than
+    MIN_WINDOWS whole windows, since a short history bounds nothing.
 
     Args:
         series: (repo, ratchet, values oldest first), the series each row was judged on.
@@ -93,12 +108,17 @@ def contradictions(
         rows: The verdict rows, in the order of `series`.
 
     Returns:
-        One line per contradicting row; none when every behind row really did fall short.
+        One line per contradiction; none when every row agrees with its series.
 
     """
     found: list[str] = []
     for at, (repo, ratchet, values) in enumerate(series):
         owed = rows[at][4]
+        best = best_fall(values, window)
+        if best >= 0 and owed > best:
+            found.append(
+                f"{repo} {ratchet} owes {owed} but its best {window}-landing window fell {best}"
+            )
         if rows[at][2] != BEHIND or owed <= 0:
             continue
         span = values[max(0, len(values) - 1 - window) :]
