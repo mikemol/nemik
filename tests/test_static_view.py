@@ -15,12 +15,12 @@ from http.server import ThreadingHTTPServer
 import installed
 import pytest
 import webpage
+from playwright.sync_api import sync_playwright
 
 from nemik.staticserve import handler
 
-sync_api = pytest.importorskip("playwright.sync_api")
-
 WITHHELD_NONE = '{"version": 1, "as_of": "test", "items": []}'
+MIN_CARDS = 10
 
 
 @pytest.fixture(scope="module")
@@ -46,19 +46,21 @@ def snapshot_url(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
 
 
 def test_the_view_draws_from_the_snapshot_files_alone(snapshot_url: str) -> None:
-    with sync_api.sync_playwright() as p:
-        browser, page = webpage.open_page(p, snapshot_url)
+    with sync_playwright() as p:
+        browser, page = webpage.launched_page(p, snapshot_url)
         errors: list[str] = []
         page.on("pageerror", lambda err: errors.append(str(err)))
         webpage.until(
             page,
             "() => document.getElementById('stat').innerText.includes('waypoints')",
         )
-        drawn = page.evaluate("() => cy.nodes('[symbol]').length")
-        fetched = page.evaluate("() => window.__pieceFetches.length")
+        drawn = webpage.evaluate_value(page, "() => cy.nodes('[symbol]').length")
+        fetched = webpage.evaluate_value(page, "() => window.__pieceFetches.length")
         stat = page.inner_text("#stat")
         browser.close()
-    assert drawn > 10, "the page drew no cards from the snapshot"
+    assert isinstance(drawn, int)
+    assert isinstance(fetched, int)
+    assert drawn > MIN_CARDS, "the page drew no cards from the snapshot"
     assert fetched > 1, "the page did not assemble the graph from pieces"
     assert "waypoints" in stat
     assert errors == []

@@ -25,6 +25,10 @@ from mikemol.webpage.page import (
     until_expecting,
     watch,
 )
+from playwright.sync_api import Browser as LaunchedBrowser
+from playwright.sync_api import Error as PlaywrightError
+from playwright.sync_api import Page as LaunchedPage
+from playwright.sync_api import Playwright as Launcher
 
 sync_api = pytest.importorskip("playwright.sync_api")
 __all__ = [
@@ -32,8 +36,10 @@ __all__ = [
     "FLEET",
     "PageBrokenError",
     "Waitable",
+    "evaluate_value",
     "evaluated",
     "first_error",
+    "launched_page",
     "load",
     "open_page",
     "opened_page",
@@ -75,12 +81,18 @@ class Pager(Waitable, Protocol):
     def evaluate(self, expression: str) -> object:
         """Run the JS expression in the page and return its value, a promise awaited."""
 
+    def inner_text(self, selector: str) -> str:
+        """Give the text of the first element matching `selector`."""
+
 
 class Browser(Protocol):
     """A launched browser, as far as open_page needs it."""
 
     def new_page(self, *, viewport: dict[str, int]) -> Pager:
         """Open a page of that size."""
+
+    def close(self) -> None:
+        """Shut the browser."""
 
 
 class Chromium(Protocol):
@@ -152,9 +164,9 @@ def opened_page(
     exe = os.environ.get("NEMIK_CHROMIUM")
     try:
         browser = p.chromium.launch(
-            executable_path=os.path.abspath(exe) if exe else None
+            executable_path=str(Path(exe).absolute()) if exe else None
         )
-    except sync_api.Error as e:
+    except PlaywrightError as e:
         pytest.skip(f"chromium unavailable: {e}")
     page = browser.new_page(viewport={"width": 1700, "height": 1250})
     refused: list[str] = []
@@ -187,10 +199,36 @@ def open_page(
     """Open the page as opened_page does, for the tests that drive it with Playwright's own API.
 
     Returns:
-        The browser and the page, untyped.
+        The browser and the page, untyped: a test moves to opened_page (typed by the Protocols
+        above) as it is converted (nemik:W1177).
 
     """
     return opened_page(p, url, wait, block)
+
+
+def launched_page(
+    p: Launcher, url: str, wait: str = CY_READY
+) -> tuple[LaunchedBrowser, LaunchedPage]:
+    """Launch Chromium with the library's own types and open `url` once `wait` holds (nemik:W1177).
+
+    The typed route for a test that drives Playwright's API itself: unlike open_page it returns
+    the library's Browser and Page, so nothing is Any except what the page's evaluate answers (read
+    that through evaluate_value). A pinned headless shell in $NEMIK_CHROMIUM is used when set.
+
+    Returns:
+        The browser and the page, once the predicate holds; skips without a browser.
+
+    """
+    exe = os.environ.get("NEMIK_CHROMIUM")
+    try:
+        browser = p.chromium.launch(
+            executable_path=str(Path(exe).absolute()) if exe else None
+        )
+    except PlaywrightError as e:
+        pytest.skip(f"chromium unavailable: {e}")
+    page = browser.new_page(viewport={"width": 1700, "height": 1250})
+    load(page, url, wait)
+    return browser, page
 
 
 @contextmanager
@@ -205,6 +243,27 @@ def session(block: tuple[str, ...] = ()) -> Generator[Pager]:
     """
     with served() as url, sync_api.sync_playwright() as p:
         yield opened_page(p, url, block=block)[1]
+
+
+class Evaluator(Protocol):
+    """Anything that runs a JS expression: Playwright's page, whose own answer is Any."""
+
+    def evaluate(self, expression: str) -> object:
+        """Run the JS expression in the page and return its value, a promise awaited."""
+
+
+def evaluate_value(page: Evaluator, expression: str) -> object:
+    """Run a JS expression in a page and return its value as an object, never as Any.
+
+    Playwright's Page.evaluate answers Any, which the house type check counts at every call.
+    Reading it through this protocol types the answer as object once, so a test narrows it with
+    isinstance where it needs a number or a string (nemik:W1177).
+
+    Returns:
+        The expression's value, as the browser serialised it.
+
+    """
+    return page.evaluate(expression)
 
 
 def evaluated(expr: str) -> object:
