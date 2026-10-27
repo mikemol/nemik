@@ -20,6 +20,7 @@ def _q(cards: dict[str, tuple[str, str]], residue: tuple[str, ...] = ()) -> dict
 
 
 def test_the_plan_is_what_was_open_at_the_baseline_and_the_rest_is_added() -> None:
+    """The cards open at the baseline are the plan; those minted since are the added."""
     base = _q(
         {"W1": ("ready", "tick"), "W2": ("blocked", "tick"), "W3": ("done", "tick")}
     )
@@ -42,6 +43,7 @@ def test_the_plan_is_what_was_open_at_the_baseline_and_the_rest_is_added() -> No
 
 
 def test_a_planned_card_dropped_since_counts_as_dropped() -> None:
+    """A card in the plan that has since gone to residue counts as dropped."""
     base = _q({"W1": ("ready", "tick")})
     now = _q({}, residue=("W1",))
     v = variance(base, now)
@@ -49,6 +51,7 @@ def test_a_planned_card_dropped_since_counts_as_dropped() -> None:
 
 
 def test_shape_drift_counts_edges_and_the_planned_cards_retitled_or_rewired() -> None:
+    """Shape drift counts the edges added and removed and the planned cards retitled or rewired."""
     # nemik:W349: W1 and W2 planned; W1 gains an edge to the new W3, W2 is retitled.
     from nemik.history import shape_drift
 
@@ -74,6 +77,7 @@ def test_shape_drift_counts_edges_and_the_planned_cards_retitled_or_rewired() ->
 
 
 def test_the_baseline_is_given_or_declared_in_the_repo(tmp_path: Path) -> None:
+    """A baseline is the one given, else the one the repo declares, else none."""
     assert baseline_spec(tmp_path, None) is None
     (tmp_path / ".claude").mkdir()
     (tmp_path / ".claude" / "baseline").write_text("2026-10-01  sprint start\n")

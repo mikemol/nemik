@@ -598,7 +598,6 @@
   "PLR2004": 1
  },
  "tests/test_baseline.py": {
-  "D103": 4,
   "PLC0415": 1,
   "PLR2004": 2,
   "PT018": 3,
@@ -614,7 +613,6 @@
   "PT018": 1
  },
  "tests/test_cachestore.py": {
-  "D103": 5,
   "E501": 1,
   "PLR2004": 1,
   "PT018": 1,
