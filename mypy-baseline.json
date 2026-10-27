@@ -306,9 +306,6 @@
  "tests/test_letter_resolves.py": {
   "misc": 6
  },
- "tests/test_letters.py": {
-  "misc": 5
- },
  "tests/test_lifecycle_scheme.py": {
   "misc": 9,
   "no-untyped-call": 1

@@ -140,17 +140,14 @@ def test_apply_mints_the_cards_and_archives_the_stale(tmp_path: Path) -> None:
 
     state = tmp_path / "a" / ".claude" / "paths-forward.json"
     state.parent.mkdir(parents=True)
-    state.write_text(
-        json.dumps(
-            {
-                "version": 1,
-                "project_root": str(tmp_path / "a"),
-                "counter": 0,
-                "residue": [],
-                "waypoints": [],
-            }
-        )
-    )
+    body: dict[str, object] = {
+        "version": 1,
+        "project_root": str(tmp_path / "a"),
+        "counter": 0,
+        "residue": [],
+        "waypoints": [],
+    }
+    state.write_text(json.dumps(body))
     _letter(tmp_path, "a", "2026-10-09-live.md", "life → a: a live question")
     _letter(tmp_path, "a", "2026-01-01-old.md", "life → a: long ago")
     done = apply_fold(
