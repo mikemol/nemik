@@ -10,7 +10,7 @@ for the same ratchet is passed back as the prior, and the larger one is written.
 """
 
 from nemik.pacepublish import UNKNOWN, Row
-from nemik.ratchetpace import horizon, verdict
+from nemik.ratchetpace import BEHIND, horizon, verdict
 
 
 def extras_of(
@@ -74,6 +74,41 @@ def pace_rows(
         state, seen, owed = verdict(values, window, prior)
         rows.append((repo, ratchet, state, seen, owed))
     return rows
+
+
+def contradictions(
+    series: list[tuple[str, str, list[int]]], window: int, rows: list[Row]
+) -> list[str]:
+    """Name the rows that read behind while their own series fell what they owed (nemik:W1155).
+
+    A self-check, an alert and never a gate: it recomputes the fall over the last `window`
+    landings of the very series a row was judged on, by its own loop and not by window_fall, and
+    says so when the row reads behind though that fall is at least the requirement. A row can only
+    do that if the verdict and the series disagree, which is how linux-sources' letter-quotes read
+    behind with observed 0 while it fell 18 to 2 (a short history, W1155).
+
+    Args:
+        series: (repo, ratchet, values oldest first), the series each row was judged on.
+        window: How many landed commits one window spans.
+        rows: The verdict rows, in the order of `series`.
+
+    Returns:
+        One line per contradicting row; none when every behind row really did fall short.
+
+    """
+    found: list[str] = []
+    for at, (repo, ratchet, values) in enumerate(series):
+        owed = rows[at][4]
+        if rows[at][2] != BEHIND or owed <= 0:
+            continue
+        span = values[max(0, len(values) - 1 - window) :]
+        fell = span[0] - span[-1] if span else 0
+        if fell >= owed:
+            found.append(
+                f"{repo} {ratchet} reads behind (owes {owed}) but fell {fell} over its "
+                f"last {len(span) - 1} landings"
+            )
+    return found
 
 
 def pace_text(

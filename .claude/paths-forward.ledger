@@ -2767,3 +2767,8 @@
 2026-10-27T09:02:53Z  status W1140 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-27T09:03:15Z  status W1048 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-27T09:07:21Z  status W1155 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T09:10:13Z  interrupt W1158 minted    -         "The required fall is seeded from one earlier window's burst and then only rises, so nemik's mypy owes 109 and ruff 73"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1155
+2026-10-27T09:14:09Z  interrupt W1159 minted    -         "test_mypy_ratchet and test_ruff_ratchet read their baseline's file names through the typed tree, so mypy falls 5631 to 5625 (paydown)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
+2026-10-27T09:14:44Z  status W1159 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T09:14:45Z  status W1158 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T09:14:58Z  status W1155 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

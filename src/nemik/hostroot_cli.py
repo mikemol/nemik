@@ -27,7 +27,12 @@ from nemik.hostroot import HostRow, latest, records
 from nemik.landings import document as landings_document
 from nemik.landings import records as landings_records
 from nemik.logactivities import activities, repos
-from nemik.pacerun import floors_of, pace_document_floored, retired_of
+from nemik.pacerun import (
+    floors_of,
+    pace_contradictions,
+    pace_document_floored,
+    retired_of,
+)
 
 QUERY = "stream:host_root_frontier"
 LANDINGS_QUERY = "service.name:mikemol-commit"
@@ -247,6 +252,9 @@ def _judge(
     except (OSError, TypeError, ValueError) as error:
         sys.stderr.write(f"nemik-hostroot: {error}\n")
         return 1
+    # nemik:W1155: an alert and never a gate, for a row that reads behind though its series fell
+    for line in pace_contradictions(answer, previous, floors or {}, retired):
+        sys.stderr.write(f"nemik-hostroot: pace self-check: {line}\n")
     _write(kept, text)
     _write(out, text)
     return 0

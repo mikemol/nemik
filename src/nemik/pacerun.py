@@ -11,8 +11,14 @@ required fall is published as nemik_ratchet_fall_required, and its highest sampl
 prior no local file loss can take away (nemik:W1126).
 """
 
-from nemik.pacepublish import read_pace
-from nemik.pacewrite import extras_of, pace_rows, pace_text, priors_of
+from nemik.pacepublish import Row, read_pace
+from nemik.pacewrite import (
+    contradictions,
+    extras_of,
+    pace_rows,
+    pace_text,
+    priors_of,
+)
 from nemik.ratchetpace import WINDOW
 from nemik.ratchetseries import ended_series, export_series, series_of
 from nemik.rebaselines import DECLARED, since
@@ -128,7 +134,41 @@ def pace_document_floored(
         has no verdict to give, and one that is still written stays judged. A series
         with a declared re-baseline (nemik:W1046) is judged from the declared step on, so the
         step earns no paydown credit. Each row also states the ratchet's value and its horizon,
-        the landings to zero at the pace it last fell (nemik:W1114).
+        the landings to zero at the pace it last fell (nemik:W1114). An answer that holds no
+        series raises ValueError, so no empty file replaces a good one.
+
+    """
+    series, rows = _judged(answer, previous, floors, retired)
+    return pace_text(rows, stamp, WINDOW, extras_of(series, WINDOW))
+
+
+def pace_contradictions(
+    answer: str,
+    previous: str,
+    floors: dict[str, int],
+    retired: frozenset[str] = frozenset(),
+) -> list[str]:
+    """Name the rows of a pace run that read behind though their series fell what they owed.
+
+    The self-check beside the pace file (nemik:W1155): an alert, never a gate. It judges the
+    answer as pace_document_floored does and lets pacewrite.contradictions compare each verdict
+    with an independent recomputation.
+
+    Returns:
+        One line per contradicting row; none when the verdicts agree with their series.
+
+    """
+    series, rows = _judged(answer, previous, floors, retired)
+    return contradictions(series, WINDOW, rows)
+
+
+def _judged(
+    answer: str, previous: str, floors: dict[str, int], retired: frozenset[str]
+) -> tuple[list[tuple[str, str, list[int]]], list[Row]]:
+    """Judge every ratchet series of an answer.
+
+    Returns:
+        The series each row was judged on (from the declared re-baseline on) and the rows.
 
     Raises:
         ValueError: When the answer holds no series, so no empty file replaces a good one.
@@ -153,5 +193,4 @@ def pace_document_floored(
     if not series:
         message = "the answer holds no ratchet series"
         raise ValueError(message)
-    rows = pace_rows(series, WINDOW, priors, ended)
-    return pace_text(rows, stamp, WINDOW, extras_of(series, WINDOW))
+    return series, pace_rows(series, WINDOW, priors, ended)
