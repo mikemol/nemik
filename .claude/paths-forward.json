@@ -15615,17 +15615,17 @@
     {
       "symbol": "W730",
       "title": "A check that the venv's installed nemik matches the source tree, so a profile or tool cannot silently run old code",
-      "status": "working",
+      "status": "ready",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "stale.stale_modules(source_dir, installed_dir) is built and compiles under the pinned Codon; still to do: a command that points it at the tree's src/nemik and the venv's installed package and exits nonzero naming the stale ones (five registries: pyproject, BUILD.bazel, SKILL.md, workflows.toml, codon-baseline)",
-      "evidence": "2026-10-23: 2026-10-23 overlap audit (verified): related to luthen-observability:W1235 (a timer publishes luthen_user_tool_behind_commits per tool, so a stale nemik install shows before it misleads); both detect a stale install, this one inside the tree, that one on the host. W1235 is blocked on luthen's W1285 as well, so no enables edge: a cross-cite only",
+      "next_bounded_step": "A command that points stale_modules at the tree's src/nemik and the venv's installed package and exits nonzero naming the stale ones (five registries: pyproject, BUILD.bazel, SKILL.md, workflows.toml, codon-baseline); it needs a Codon-clean entry or a registered baseline entry",
+      "evidence": "2026-10-23: 2026-10-23 overlap audit (verified): related to luthen-observability:W1235 (a timer publishes luthen_user_tool_behind_commits per tool, so a stale nemik install shows before it misleads); both detect a stale install, this one inside the tree, that one on the host. W1235 is blocked on luthen's W1285 as well, so no enables edge: a cross-cite only | 2026-10-27: landed e9f8c2d (pushed, gate green): nemik.stale.stale_modules(source_dir, installed_dir) names the stale modules; first submit refused on pathlib ruff findings. The command that runs it against the tree and the venv is still to do",
       "issued_at": "2026-10-19T13:36:24Z",
       "minted_during": "tick",
       "caused_by": "nemik:W729",
-      "last_worked": "2026-10-27T20:50:42Z",
+      "last_worked": "2026-10-27T22:09:17Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/stale.py",
@@ -26772,7 +26772,7 @@
     {
       "symbol": "W1136",
       "title": "Derive the round ceiling from luthen's W1645 series and drum's admission, with no typed threshold",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W1092"
       ],
@@ -26781,18 +26781,19 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Series named: luthen's gate:luthen_gate_target_cpu_seconds:median7d and :p90_7d, gate:luthen_gate_target_cpu_samples:count7d (W1645, recording rules declared; load is the main apply's). Remaining reads: (1) read that series from the store through the same export route nemik-hostroot uses for the ratchet series, (2) read drum's admission (the CPU headroom it admits) from its interface, (3) a pure roundof function ceiling(cost per entry, headroom) with no typed constant, falling back to the declared CEILING while either input is unknown. Write step (1)'s query name into this card before any code",
+      "next_bounded_step": "Step (3) is built: roundof.ceiling_of(cost_per_entry, headroom) is pure, returns whole entries, and keeps the declared CEILING while either input is unknown (<= 0). Still to do: (1) read luthen's W1645 median series through the export route nemik-hostroot uses for the ratchet series, writing the query name here first, (2) read drum's admitted CPU headroom from its interface, then call ceiling_of from width() and name the term as measured",
       "evidence": "",
       "issued_at": "2026-10-26T22:09:25Z",
       "minted_during": "interrupt",
       "caused_by": "W1092",
-      "last_worked": "2026-10-27T13:39:40Z",
+      "last_worked": "2026-10-27T21:42:50Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/roundof.py",
         "tests/test_roundof.py"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "completed": null
     },
     {
       "symbol": "W1137",
@@ -28287,21 +28288,21 @@
     {
       "symbol": "W1191",
       "title": "roundcli compiles under the pinned Codon: its landing file is always a Path, NO_LANDINGS when there is none, so it leaves the codon baseline (paydown)",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:codon-baseline.json"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-10-27: 2026-10-27 pace reading: host tick-open printed 156 left for codon-baseline.json at pinned 19e6ac6, while HEAD:codon-baseline.json holds 157 entries; the working tree holds 156 because this card's uncommitted edit removes roundcli (git diff HEAD shows 4 deletions). So the pace reader counts the working-tree file, not the pinned commit, and a pending fall shows as paid before it lands. Not yet checked: whether the 20:34:22Z pace file itself was built from the tree or HEAD (the card owning the pace reader is to say)",
+      "next_bounded_step": null,
+      "evidence": "2026-10-27: 2026-10-27 pace reading: host tick-open printed 156 left for codon-baseline.json at pinned 19e6ac6, while HEAD:codon-baseline.json holds 157 entries; the working tree holds 156 because this card's uncommitted edit removes roundcli (git diff HEAD shows 4 deletions). So the pace reader counts the working-tree file, not the pinned commit, and a pending fall shows as paid before it lands. Not yet checked: whether the 20:34:22Z pace file itself was built from the tree or HEAD (the card owning the pace reader is to say) | 2026-10-27: landed e3d539f (pushed, gate green): roundcli's landing file is a Path with NO_LANDINGS for none; codon-baseline.json loses roundcli, 157 to 156 at HEAD. The first submit was refused on ruff ERA001 and PTH201 and mypy misc +2 in rank.py (the 'or NO_LANDINGS' expressions); fixed by making NO_LANDINGS the argparse default | 2026-10-27: 2026-10-27 read-back: nemik-rank --pace at pace of 21:34:22Z prints codon-baseline.json 154 left, as 2 x 77 entries predicts after e3d539f; the earlier 156 was 2 x 78 at 19e6ac6",
       "issued_at": "2026-10-27T20:44:40Z",
       "minted_during": "tick",
       "caused_by": "W1179",
-      "last_worked": "2026-10-27T21:21:35Z",
+      "last_worked": "2026-10-27T21:39:42Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261027T213232Z",
       "manifest": [
         "src/nemik/roundcli.py",
         "src/nemik/rank.py",
@@ -28311,25 +28312,6 @@
         "codon-baseline.json"
       ],
       "size_class": "small"
-    },
-    {
-      "symbol": "W1192",
-      "title": "The pace counts the committed codon-baseline.json blob, never the working tree: find which step wrote 156 while HEAD holds 157, and make it read the pinned commit",
-      "status": "ready",
-      "enables": [],
-      "touches": [
-        "file:src/nemik/pacecli.py",
-        "file:src/nemik/pacerun.py"
-      ],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "Find the producer of ratchet-pace.json in luthen's export tree and what it counts (the ratchet emit in the gate measures the staged tree; nemik-rank --pace only reads the file). Witness: with a dirty codon-baseline.json in the tree, the pace prints HEAD's count (157), not the tree's. Hypotheses to test, none yet confirmed: the pace file was built from a tree holding an unlanded fall, or a gate's ratchet emit from a staged or refused tree reaches the pace; decide whether the pace file (the live hazard, the gate reads it) or only the --pace print has the input",
-      "evidence": "2026-10-27: 2026-10-27 warrant for the intent (github-8f swapped its own, a memory note about sibling trees, as stretching it to this tree is a reading the operator did not make): the ratchet-teeth ruling in the operator's loop prompt, its line 35, read this tick: while a repo is behind its rate the gate refuses commits that lower no ratchet, so a fall counts once it has landed; card triage is git rigor (close only against checkable proof); built is not deployed. A fall that exists only in a working tree, or in a staged tree whose gate was refused, is none of these. Witness: with a dirty or refused fall the pace reads HEAD's 157",
-      "issued_at": "2026-10-27T21:24:13Z",
-      "minted_during": "tick",
-      "caused_by": "W1191",
-      "last_worked": "2026-10-27T21:29:07Z",
-      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -28507,13 +28489,20 @@
       "dropped_at": "2026-10-26T19:09:27Z",
       "reason": "Part 1 landed (8f3aa2a: prune sweeps stale temp files, two-writer test). The traceback this card chased never recurred; every COULD NOT RUN since (10-23, 10-26) is the session-start hook's 60 s bound exceeded under gate load, and a by-hand nemik-check finishes clean. The bound belongs to mtools' hook, not nemik's cache store. Revisit if a COULD NOT RUN carries a traceback line",
       "recoverable": true
+    },
+    {
+      "symbol": "W1192",
+      "title": "The pace counts the committed codon-baseline.json blob, never the working tree: find which step wrote 156 while HEAD holds 157, and make it read the pinned commit",
+      "dropped_at": "2026-10-27T21:33:06Z",
+      "reason": "Premise false: the pace's 156 for HEAD 19e6ac6 matches the committed baseline, which holds 78 module entries and the ratchet appears to count two modes (as_written, stripped) per module, 2 x 78 = 156. I claimed HEAD held 157 without ever counting it. No tree read exists. After e3d539f removed roundcli there are 77 entries, so the next pace should read 154; if it still reads 156 or 155, reopen as a new card citing that reading",
+      "recoverable": true
     }
   ],
   "job_id": "1d7fe6d0",
   "heartbeat": "2026-10-22T02:06:35Z",
   "lock": {
     "holder": "claude-nemik",
-    "taken_at": "2026-10-27T21:09:24Z",
+    "taken_at": "2026-10-27T21:39:42Z",
     "pid": 1281447,
     "start": 39974717
   },
@@ -28525,8 +28514,8 @@
       "waypoint": "W924",
       "base_sha": "67eb4a883831b11b5852f5d4c4fce247072ce093",
       "taken_at": "2026-10-23T20:48:07Z",
-      "renewed_at": "2026-10-27T21:09:24Z",
-      "expires_at": "2026-10-27T21:39:24Z"
+      "renewed_at": "2026-10-27T21:39:42Z",
+      "expires_at": "2026-10-27T22:09:42Z"
     },
     {
       "tag": "file:tools/shardselect.py!w",
@@ -28534,8 +28523,8 @@
       "waypoint": "W924",
       "base_sha": "67eb4a883831b11b5852f5d4c4fce247072ce093",
       "taken_at": "2026-10-23T20:48:07Z",
-      "renewed_at": "2026-10-27T21:09:24Z",
-      "expires_at": "2026-10-27T21:39:24Z"
+      "renewed_at": "2026-10-27T21:39:42Z",
+      "expires_at": "2026-10-27T22:09:42Z"
     },
     {
       "tag": "file:tests/conftest.py!w",
@@ -28543,8 +28532,8 @@
       "waypoint": "W924",
       "base_sha": "67eb4a883831b11b5852f5d4c4fce247072ce093",
       "taken_at": "2026-10-23T20:48:07Z",
-      "renewed_at": "2026-10-27T21:09:24Z",
-      "expires_at": "2026-10-27T21:39:24Z"
+      "renewed_at": "2026-10-27T21:39:42Z",
+      "expires_at": "2026-10-27T22:09:42Z"
     },
     {
       "tag": "file:tests/test_shard_select.py!w",
@@ -28552,8 +28541,8 @@
       "waypoint": "W924",
       "base_sha": "67eb4a883831b11b5852f5d4c4fce247072ce093",
       "taken_at": "2026-10-23T20:48:07Z",
-      "renewed_at": "2026-10-27T21:09:24Z",
-      "expires_at": "2026-10-27T21:39:24Z"
+      "renewed_at": "2026-10-27T21:39:42Z",
+      "expires_at": "2026-10-27T22:09:42Z"
     },
     {
       "tag": "file:docs/forecast-features.md!w",

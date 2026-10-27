@@ -6,6 +6,7 @@ from nemik.roundof import (
     CEILING,
     CEILING_TERM,
     capacity,
+    ceiling_of,
     drift,
     outside,
     round_of,
@@ -16,6 +17,7 @@ from nemik.roundof import (
 RANKED = [("W5", "9.0"), ("W2", "4.5"), ("W9", "1.0"), ("W1", "0.0")]
 DISJOINT = 3  # a.py, c.py and d.py of the plans below
 DISJOINT_BESIDE_C = 2  # with c.py busy: a.py and d.py
+FITS = 4  # 100 seconds of headroom over 25 seconds an entry
 
 
 def test_supply_counts_the_cards_that_can_stack_without_sharing_a_file() -> None:
@@ -39,6 +41,20 @@ def test_the_ceiling_says_it_is_declared_not_measured() -> None:
     """nemik:W1092: a label must not claim a measurement the round does not have."""
     assert "declared" in CEILING_TERM
     assert "headroom" not in CEILING_TERM
+
+
+def test_the_derived_ceiling_is_the_whole_entries_the_headroom_holds() -> None:
+    """nemik:W1136: 100 s of headroom over 25 s an entry holds four; a dearer entry holds one."""
+    assert ceiling_of(25.0, 100.0) == FITS
+    assert ceiling_of(30.0, 100.0) == FITS - 1
+    assert ceiling_of(500.0, 100.0) == 1
+
+
+def test_an_unknown_input_leaves_the_declared_ceiling() -> None:
+    """nemik:W1136: unknown stays unknown, never zero: either input unread keeps CEILING."""
+    assert ceiling_of(0.0, 100.0) == CEILING
+    assert ceiling_of(25.0, 0.0) == CEILING
+    assert ceiling_of(-1.0, -1.0) == CEILING
 
 
 def test_capacity_is_the_median_stack_size_lifted_to_the_floor() -> None:

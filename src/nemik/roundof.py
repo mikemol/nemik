@@ -77,6 +77,26 @@ CEILING = 6
 CEILING_TERM = f"ceiling (declared {CEILING})"
 
 
+def ceiling_of(cost_per_entry: float, headroom: float) -> int:
+    """Derive the round ceiling from what an entry costs and what the host admits (nemik:W1136).
+
+    No typed threshold: the ceiling is the whole entries that fit in the headroom. An input that is
+    unknown is passed as zero or less, and an unknown stays unknown, so the declared CEILING stands
+    until both are read.
+
+    Args:
+        cost_per_entry: The gate's CPU seconds per entry (luthen's W1645 median), or <= 0 unknown.
+        headroom: The CPU seconds drum admits for one gate run, or <= 0 unknown.
+
+    Returns:
+        headroom // cost_per_entry as whole entries, at least 1; CEILING when either is unknown.
+
+    """
+    if cost_per_entry <= 0 or headroom <= 0:
+        return CEILING
+    return max(1, int(headroom // cost_per_entry))
+
+
 def supply(manifests: list[list[str]], busy: list[str]) -> int:
     """Count the most ready cards that can stack without sharing a file.
 

@@ -2906,3 +2906,7 @@
 2026-10-27T20:51:25Z  tick  W730 advanced  sweep     "stack583 (roundcli, W1191) and stack584 (nemik.stale, W730) gating; sent a stack intervention (W750); noted W1179 star-cluster findings; next: W751 pod readback, W730 command, W1184 [rolled; advanced 2]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-27T21:09:24Z  tick  W1191 advanced  sweep     "stack583 (roundcli, fixed ruff/mypy ratchet findings) and stack584 (stale, fixed pathlib findings) both resubmitted and gating [rolled; advanced 0]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-27T21:24:13Z  tick  W1192 minted    -         "The pace counts the committed codon-baseline.json blob, never the working tree: find which step wrote 156 while HEAD holds 157, and make it read the pinned commit"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1191
+2026-10-27T21:32:32Z  status W1191 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T21:39:42Z  tick  W1191 advanced  sweep     "e3d539f landed (roundcli), pace reads codon 154 as predicted; W1192 dropped (my miscount); stack584 (stale) still gating [rolled; advanced 0]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T21:42:50Z  status W1136 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T22:09:17Z  status W730 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
