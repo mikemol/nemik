@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1191,
+  "counter": 1192,
   "waypoints": [
     {
       "symbol": "W1",
@@ -28295,11 +28295,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-10-27: 2026-10-27 pace reading: host tick-open printed 156 left for codon-baseline.json at pinned 19e6ac6, while HEAD:codon-baseline.json holds 157 entries; the working tree holds 156 because this card's uncommitted edit removes roundcli (git diff HEAD shows 4 deletions). So the pace reader counts the working-tree file, not the pinned commit, and a pending fall shows as paid before it lands. Not yet checked: whether the 20:34:22Z pace file itself was built from the tree or HEAD (the card owning the pace reader is to say)",
       "issued_at": "2026-10-27T20:44:40Z",
       "minted_during": "tick",
       "caused_by": "W1179",
-      "last_worked": "2026-10-27T20:44:43Z",
+      "last_worked": "2026-10-27T21:21:35Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -28311,6 +28311,25 @@
         "codon-baseline.json"
       ],
       "size_class": "small"
+    },
+    {
+      "symbol": "W1192",
+      "title": "The pace counts the committed codon-baseline.json blob, never the working tree: find which step wrote 156 while HEAD holds 157, and make it read the pinned commit",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "file:src/nemik/pacecli.py",
+        "file:src/nemik/pacerun.py"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Find the producer of ratchet-pace.json in luthen's export tree and what it counts (the ratchet emit in the gate measures the staged tree; nemik-rank --pace only reads the file). Witness: with a dirty codon-baseline.json in the tree, the pace prints HEAD's count (157), not the tree's. Hypotheses to test, none yet confirmed: the pace file was built from a tree holding an unlanded fall, or a gate's ratchet emit from a staged or refused tree reaches the pace; decide whether the pace file (the live hazard, the gate reads it) or only the --pace print has the input",
+      "evidence": "2026-10-27: 2026-10-27 warrant for the intent (github-8f swapped its own, a memory note about sibling trees, as stretching it to this tree is a reading the operator did not make): the ratchet-teeth ruling in the operator's loop prompt, its line 35, read this tick: while a repo is behind its rate the gate refuses commits that lower no ratchet, so a fall counts once it has landed; card triage is git rigor (close only against checkable proof); built is not deployed. A fall that exists only in a working tree, or in a staged tree whose gate was refused, is none of these. Witness: with a dirty or refused fall the pace reads HEAD's 157",
+      "issued_at": "2026-10-27T21:24:13Z",
+      "minted_during": "tick",
+      "caused_by": "W1191",
+      "last_worked": "2026-10-27T21:29:07Z",
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -28494,7 +28513,7 @@
   "heartbeat": "2026-10-22T02:06:35Z",
   "lock": {
     "holder": "claude-nemik",
-    "taken_at": "2026-10-27T20:51:25Z",
+    "taken_at": "2026-10-27T21:09:24Z",
     "pid": 1281447,
     "start": 39974717
   },
@@ -28506,8 +28525,8 @@
       "waypoint": "W924",
       "base_sha": "67eb4a883831b11b5852f5d4c4fce247072ce093",
       "taken_at": "2026-10-23T20:48:07Z",
-      "renewed_at": "2026-10-27T20:51:25Z",
-      "expires_at": "2026-10-27T21:21:25Z"
+      "renewed_at": "2026-10-27T21:09:24Z",
+      "expires_at": "2026-10-27T21:39:24Z"
     },
     {
       "tag": "file:tools/shardselect.py!w",
@@ -28515,8 +28534,8 @@
       "waypoint": "W924",
       "base_sha": "67eb4a883831b11b5852f5d4c4fce247072ce093",
       "taken_at": "2026-10-23T20:48:07Z",
-      "renewed_at": "2026-10-27T20:51:25Z",
-      "expires_at": "2026-10-27T21:21:25Z"
+      "renewed_at": "2026-10-27T21:09:24Z",
+      "expires_at": "2026-10-27T21:39:24Z"
     },
     {
       "tag": "file:tests/conftest.py!w",
@@ -28524,8 +28543,8 @@
       "waypoint": "W924",
       "base_sha": "67eb4a883831b11b5852f5d4c4fce247072ce093",
       "taken_at": "2026-10-23T20:48:07Z",
-      "renewed_at": "2026-10-27T20:51:25Z",
-      "expires_at": "2026-10-27T21:21:25Z"
+      "renewed_at": "2026-10-27T21:09:24Z",
+      "expires_at": "2026-10-27T21:39:24Z"
     },
     {
       "tag": "file:tests/test_shard_select.py!w",
@@ -28533,8 +28552,8 @@
       "waypoint": "W924",
       "base_sha": "67eb4a883831b11b5852f5d4c4fce247072ce093",
       "taken_at": "2026-10-23T20:48:07Z",
-      "renewed_at": "2026-10-27T20:51:25Z",
-      "expires_at": "2026-10-27T21:21:25Z"
+      "renewed_at": "2026-10-27T21:09:24Z",
+      "expires_at": "2026-10-27T21:39:24Z"
     },
     {
       "tag": "file:docs/forecast-features.md!w",
