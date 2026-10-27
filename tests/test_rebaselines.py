@@ -24,11 +24,16 @@ def test_an_undeclared_fall_of_the_same_size_is_still_a_fall() -> None:
 
 
 def test_a_declared_drop_earns_no_paydown_credit() -> None:
-    """Judged whole, the drop reads as a fall of 97; judged from the declaration, as none."""
+    """Judged whole, the drop reads as a fall of 97; from the declaration, only what fell after.
+
+    From the declared step the series is 168, 168, 167: it fell one since, which is a real
+    payment and counts, and the 96 of the step does not.
+    """
     whole = verdict(FALL, WINDOW, 0)
     restarted = verdict(since(FALL, "a", "x.json", STEP), WINDOW, 0)
     assert whole[1] == FALL[2] - FALL[-1]
-    assert restarted[1] == 0
+    assert restarted[1] == FALL[3] - FALL[-1]
+    assert restarted[1] < whole[1]
 
 
 def test_a_fall_after_the_declared_step_is_still_credited() -> None:

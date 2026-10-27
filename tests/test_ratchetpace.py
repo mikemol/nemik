@@ -13,6 +13,8 @@ from nemik.ratchetpace import (
 )
 
 WINDOW = 2
+WIDE = 10  # the pace's real window of landings
+FELL = 16  # 18 down to 2
 FALLING = [10, 10, 8, 8, 6, 6, 4]
 SLOWING = [10, 10, 10, 10, 9, 7]
 SLOWING_HORIZON = 5
@@ -46,10 +48,23 @@ def test_a_ratchet_is_never_required_to_fall_more_than_it_holds() -> None:
     assert verdict([6, 6, 6, 6, 6, 1], WINDOW, 6)[2] <= 1
 
 
-def test_a_series_shorter_than_a_window_is_judged_on_the_floor() -> None:
-    """Too short to fall over a window, so a nonzero ratchet is behind; an empty series is ok."""
-    assert verdict([5, 4], WINDOW, 0) == (BEHIND, 0, 1)
+def test_a_series_shorter_than_a_window_is_judged_on_the_fall_it_has_seen() -> None:
+    """A short series that fell the floor is ok, one that stalled or rose is behind."""
+    assert verdict([5, 4], WINDOW, 0) == (OK, 1, 1)
+    assert verdict([5, 5], WINDOW, 0) == (BEHIND, 0, 1)
+    assert verdict([4, 5], WINDOW, 0) == (BEHIND, -1, 1)
     assert verdict([], WINDOW, 0) == (OK, 0, 0)
+
+
+def test_a_ratchet_rebaselined_a_few_landings_ago_that_has_paid_since_is_ok() -> None:
+    """nemik:W1155: linux-sources' letter-quotes from its declared step, 18 to 2 over nine samples.
+
+    The window is ten landings and the history since the declared step is nine samples, which
+    read observed 0 and behind although the value fell by sixteen.
+    """
+    since_the_step = [18, 18, 18, 13, 12, 11, 9, 5, 2]
+    assert window_fall(since_the_step, WIDE) == FELL
+    assert verdict(since_the_step, WIDE, 0) == (OK, FELL, 1)
 
 
 def test_the_horizon_is_the_value_over_the_fall_per_landing() -> None:
@@ -59,4 +74,6 @@ def test_the_horizon_is_the_value_over_the_fall_per_landing() -> None:
     assert horizon(SLOWING, WINDOW) == SLOWING_HORIZON
     assert horizon([10] * 7, WINDOW) == NO_HORIZON
     assert horizon([3, 2, 1, 0, 0], WINDOW) == 0
-    assert horizon([5, 4], WINDOW) == NO_HORIZON
+    # a series shorter than the window: 4 left, 1 fell over the one landing seen
+    assert horizon([5, 4], WINDOW) == FALLING[-1]
+    assert horizon([5, 5], WINDOW) == NO_HORIZON

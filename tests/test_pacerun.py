@@ -76,12 +76,16 @@ def test_a_deleted_pace_file_does_not_reset_the_requirement(
 
 
 def test_a_raw_export_is_judged_one_value_per_gate_run() -> None:
-    """The recorded export of nemik's baselines: seven runs, shorter than the window, behind."""
+    """The recorded export of nemik's baselines: seven runs, shorter than the window.
+
+    Judged on the fall seen: ruff and mypy fell one, which is the floor, so they are ok; codon
+    rose, so it is behind.
+    """
     rows = read_pace(pace_document(EXPORT.read_text(encoding="utf-8"), "", STAMP))[2]
     assert [(row[1], row[2]) for row in rows] == [
         ("codon-baseline.json", "behind"),
-        ("mypy-baseline.json", "behind"),
-        ("ruff-baseline.json", "behind"),
+        ("mypy-baseline.json", "ok"),
+        ("ruff-baseline.json", "ok"),
     ]
 
 

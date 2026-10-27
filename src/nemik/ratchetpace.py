@@ -27,13 +27,29 @@ def window_fall(values: list[int], window: int) -> int:
         window: How many landings the window spans.
 
     Returns:
-        The value `window` landings ago less the value now (positive means paid down); 0 when the
-        series is shorter than the window.
+        The value `window` landings ago less the value now (positive means paid down). A series
+        no longer than the window falls over the history it has: its first value less its last,
+        so a ratchet that was re-baselined a few landings ago and has paid down since is not read
+        as one that never fell (linux-sources' letter-quotes, 18 to 2 over nine samples, read
+        observed 0 and behind, W1155); an empty series, or no window, gives 0.
 
     """
-    if window < 1 or len(values) <= window:
+    if window < 1 or not values:
         return 0
+    if len(values) <= window:
+        return values[0] - values[-1]
     return values[-1 - window] - values[-1]
+
+
+def steps_seen(values: list[int], window: int) -> int:
+    """Count the landings the observed fall spans.
+
+    Returns:
+        The window, or fewer when the series is shorter: one fewer than its samples, never below
+        zero.
+
+    """
+    return max(0, min(window, len(values) - 1))
 
 
 def seed(values: list[int], window: int) -> int:
@@ -87,8 +103,9 @@ def horizon(values: list[int], window: int) -> int:
         window: How many landings the window spans.
 
     Returns:
-        The value now divided by the fall per landing over the last window, rounded up; 0 when
-        the value is zero; NO_HORIZON when nothing fell over the window.
+        The value now divided by the fall per landing over the last window (or over the landings
+        a shorter series has seen), rounded up; 0 when the value is zero; NO_HORIZON when nothing
+        fell.
 
     """
     now = values[-1] if values else 0
@@ -97,7 +114,7 @@ def horizon(values: list[int], window: int) -> int:
     fell = window_fall(values, window)
     if fell <= 0:
         return NO_HORIZON
-    return -(-now * window // fell)
+    return -(-now * steps_seen(values, window) // fell)
 
 
 def verdict(values: list[int], window: int, prior: int) -> tuple[str, int, int]:
@@ -110,7 +127,8 @@ def verdict(values: list[int], window: int, prior: int) -> tuple[str, int, int]:
 
     Returns:
         (`behind` or `ok`, the observed fall, the required fall). A series no longer than one window
-        is judged against the floor alone, so a nonzero ratchet that has not yet fallen is behind.
+        is judged on the fall it has seen against the floor, so a nonzero ratchet that has not yet
+        fallen is behind and one that has fallen the floor already is not.
 
     """
     owed = required(values, window, prior)
