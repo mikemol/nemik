@@ -59,3 +59,16 @@ answer "stale" and not wait (the offline rule of `read_queue`).
 3. The route-A transport behind the `Inbox` interface of W728 step 3, off by default.
 
 W1048 (the send path) stays after this and needs an explicit go before anything is sent.
+
+## The send path's credential route (read-only, 2026-10-27, W1048)
+
+Read with `gh auth status`, which prints the login and scopes and does not use the token: the host
+is logged in to github.com as the operator's account `mikemol`, token held in the keyring, with
+scopes `gist`, `read:org`, `repo` and `workflow`. The `repo` scope covers creating an issue in a
+private repo of that account, so route A (the gh keyring) is an authenticated write route on this
+host with no new credential, and no key material is written to disk or held by a session. Whether
+the permission applies was answered on W1047's warrant (the operator, 2026-10-19: private repos are
+equivalent to their own account for egress). What is not read: a repo-scoped fine-grained token or
+a sealed one (route B), and whether the pod can reach the keyring (not read; this route is the host's, and a
+pod send would need route B). The YubiKey is never opened. Nothing has been sent; the first send is a deliberate
+step of its own.

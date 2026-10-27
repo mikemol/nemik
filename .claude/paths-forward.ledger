@@ -2914,3 +2914,5 @@
 2026-10-27T22:12:40Z  tick  W730 advanced  sweep     "stack585 (W1136 ceiling_of) in the gate; stack586 (W730 nemik-stale command, five registries, Codon-probed) queued behind it; loop prompt acknowledged [rolled; advanced 0]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-27T22:33:07Z  status W1136 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-27T23:00:26Z  status W904 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T23:11:36Z  status W1136 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T23:23:39Z  status W1048 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
