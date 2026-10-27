@@ -74,6 +74,67 @@ def baseline_of(past_shortfalls: list[float]) -> float:
     return ordered[rank - 1]
 
 
+def sweep_alerts(
+    daily_nets: list[int], minutes: int, nets: list[int], past: int
+) -> tuple[int, list[tuple[int, str]]]:
+    """Judge a run of windows, each against the windows just before it (nemik:W1152).
+
+    Args:
+        daily_nets: The net of each of the days before the first window.
+        minutes: The windows' length in minutes.
+        nets: The net of each window, oldest first.
+        past: How many windows before one it learns its baseline from.
+
+    Returns:
+        (the windows judged, each alerted one's index with its direction): a window is judged
+        once `past` windows precede it; 'fleet wandering' when it did worse than predicted and
+        'model wrong' when it did better. The count of alerts may be zero, and is then reported
+        as zero, so a quiet alert is visibly quiet.
+
+    """
+    predicted = predicted_net(daily_nets, minutes)
+    alerts: list[tuple[int, str]] = []
+    for at in range(past, len(nets)):
+        earlier = [shortfall(predicted, net) for net in nets[at - past : at]]
+        if alert_for(predicted, nets[at], earlier):
+            worse = shortfall(predicted, nets[at]) > 0
+            alerts.append((at, "fleet wandering" if worse else "model wrong"))
+    return max(0, len(nets) - past), alerts
+
+
+def sweep_lines(
+    judged: int,
+    alerts: list[tuple[str, str]],
+    minutes: int,
+    days: int,
+    limit: int,
+) -> list[str]:
+    """Write a sweep's count and its alerted windows, in at most `limit` lines (W1152).
+
+    Args:
+        judged: How many windows were judged.
+        alerts: Each alerted window's label (its end time) and direction, oldest first.
+        minutes: The windows' length in minutes.
+        days: The span swept, in days.
+        limit: The most lines to give.
+
+    Returns:
+        'swept n windows of M minutes over D days: alerted k of n', then one line per alerted
+        window, and a tail line for those that did not fit.
+
+    """
+    head = (
+        f"swept {judged} windows of {minutes} minutes over {days} days: "
+        f"alerted {len(alerts)} of {judged}"
+    )
+    room = limit - 1
+    shown = alerts if len(alerts) <= room else alerts[: room - 1]
+    lines = [head, *(f"  {label}: {direction}" for label, direction in shown)]
+    if len(shown) < len(alerts):
+        lines.append(f"  +{len(alerts) - len(shown)} more alerted")
+    return lines
+
+
 def replay_row(
     daily_nets: list[int], minutes: int, past_nets: list[int], realized: int
 ) -> str:

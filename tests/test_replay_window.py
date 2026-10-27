@@ -1,10 +1,12 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W1145: a window written back from now is minutes, and a replay needs a zoned instant."""
+"""nemik:W1145, W1152: a window written back from now is minutes, a replay needs a zoned instant."""
+
+from datetime import UTC, datetime
 
 import pytest
 
-from nemik.history import replay_text, window_minutes
+from nemik.history import replay_text, sweep_text, window_minutes
 
 QUARTER_HOUR = 45
 TWO_HOURS = 120
@@ -27,6 +29,13 @@ def test_a_replay_instant_must_name_its_zone() -> None:
     """A time of day with no zone would read as the machine's local time."""
     with pytest.raises(ValueError, match="names no zone"):
         replay_text("-45m", "2026-10-27T03:13:00", [], {})
+
+
+def test_a_sweep_of_no_repos_judges_every_window_and_alerts_on_none() -> None:
+    """A quiet fleet: the count is printed, zero alerts included, never left out."""
+    end = datetime(2026, 10, 27, 6, 0, tzinfo=UTC)
+    lines = sweep_text("-45m", 7, [], {}, end)
+    assert lines == ["swept 224 windows of 45 minutes over 7 days: alerted 0 of 224"]
 
 
 def test_a_replay_of_no_repos_predicts_nothing_and_nets_nothing() -> None:

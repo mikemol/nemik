@@ -35,7 +35,7 @@ from nemik.climate import (
 )
 from nemik.forecastshingle import HORIZONS, issue_blocked, issue_in_line, shingle_rows
 from nemik.histdocs import encode, file_name
-from nemik.netforecast import replay_row
+from nemik.netforecast import replay_row, sweep_alerts, sweep_lines
 from nemik.verify import lead_report, score_shingle, shingle_pairs
 from nemik.wake import read_liveness
 from nemik.where import matches, parse
@@ -1095,6 +1095,15 @@ def main(argv: list[str] | None = None) -> int:
         "windows before it make normal (W1145)",
     )
     ap.add_argument(
+        "--sweep",
+        type=int,
+        default=0,
+        metavar="DAYS",
+        help="with --baseline=-45m (the windows' length): judge every window of the last DAYS days "
+        "against the ones before it and print 'alerted k of n' with each alerted window's end and "
+        "direction (fleet wandering or model wrong); k is a count even when it is zero (W1152)",
+    )
+    ap.add_argument(
         "--where",
         default="",
         metavar="EXPRESSION",
@@ -1531,6 +1540,7 @@ class Opts(argparse.Namespace):
     compact: bool
     by_cause: bool
     replay: str
+    sweep: int
 
 
 def emit(args: Opts, mode: str, rows: object) -> bool:
@@ -2028,6 +2038,97 @@ def _net_between(
     return total
 
 
+def _series_nets(
+    names: list[str], dirs: dict[str, Path], edges: list[datetime]
+) -> list[int]:
+    """Count the fleet's net over each window between consecutive instants (nemik:W1152).
+
+    Each repo's queue is read once per distinct revision across the instants, so a long run of
+    windows costs the commits that fell in it and not one read per window.
+
+    Returns:
+        Closed plus dropped less added over each window, summed over the repos, oldest first.
+
+    """
+    nets = [0] * (len(edges) - 1)
+    stamp = "%Y-%m-%dT%H:%M:%SZ"
+    for name in names:
+        repo = dirs[name]
+        docs: list[QueueDoc] = []
+        last_rev: str | None = None
+        for at, edge in enumerate(edges):
+            rev = resolve(repo, edge.astimezone(UTC).strftime(stamp))
+            if at == 0 or rev != last_rev:
+                last_rev = rev
+                docs.append(queue_at(repo, rev))
+            else:
+                docs.append(docs[-1])
+        for at in range(len(nets)):
+            if docs[at] is docs[at + 1]:
+                continue
+            closed, dropped, added, _ = burn_counts(docs[at], docs[at + 1], edges[at])
+            nets[at] += closed + dropped - added
+    return nets
+
+
+def sweep_text(
+    window: str, days: int, names: list[str], dirs: dict[str, Path], end: datetime
+) -> list[str]:
+    """Sweep the windows of the last `days` days, each judged by the ones before it (W1152).
+
+    The prediction is the mean daily net of the REPLAY_DAYS before the first window, so it
+    looks ahead of none of them; each window's baseline is learned from the REPLAY_WINDOWS
+    windows just before it. The alerts are reported as a count of the windows judged, zero
+    included, and each with its end time and direction. Only committed history is swept.
+
+    Args:
+        window: The windows' length written back from now (`-45m`).
+        days: How many days to sweep.
+        names: The repos to count.
+        dirs: Each repo's directory.
+        end: Where the last window ends.
+
+    Returns:
+        The count line and the alerted windows, at most ROW_LINES lines. A `window` that is not a
+        window, or a history too short to predict from, raises ValueError.
+
+    """
+    minutes = window_minutes(window)
+    step = minutes * 60
+    count = days * 24 * 60 // minutes
+    edges = [
+        datetime.fromtimestamp(end.timestamp() - step * k, UTC)
+        for k in range(count + REPLAY_WINDOWS, -1, -1)
+    ]
+    first = edges[0].timestamp()
+    day_edges = [
+        datetime.fromtimestamp(first - 86400 * d, UTC)
+        for d in range(REPLAY_DAYS, -1, -1)
+    ]
+    nets = _series_nets(names, dirs, edges)
+    daily = _series_nets(names, dirs, day_edges)
+    judged, alerts = sweep_alerts(daily, minutes, nets, REPLAY_WINDOWS)
+    stamp = "%Y-%m-%dT%H:%MZ"
+    labelled = [(edges[at + 1].strftime(stamp), direction) for at, direction in alerts]
+    return sweep_lines(judged, labelled, minutes, days, ROW_LINES)
+
+
+def _sweep(window: str, days: int, names: list[str], dirs: dict[str, Path]) -> int:
+    """Print a sweep over the last `days` days (W1152).
+
+    Returns:
+        0; 2 with the reason on stderr when it cannot be swept.
+
+    """
+    try:
+        lines = sweep_text(window, days, names, dirs, datetime.now(UTC))
+    except ValueError as error:
+        sys.stderr.write(f"nemik-history: --sweep: {error}\n")
+        return 2
+    sys.stdout.write("\n".join(lines) + "\n")
+    return 0
+
+
 def replay_text(
     window: str, at_spec: str, names: list[str], dirs: dict[str, Path]
 ) -> str:
@@ -2128,6 +2229,8 @@ def _baselined(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
         The mode's exit status.
 
     """
+    if args.sweep and args.baseline:
+        return _sweep(args.baseline, args.sweep, names, dirs)
     if args.replay and args.baseline:
         return _replay(args.baseline, args.replay, names, dirs)
     if args.by_cause and args.baseline is not None:
