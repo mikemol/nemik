@@ -359,9 +359,6 @@
   "TC002": 1,
   "TRY003": 2
  },
- "src/nemik/realize.py": {
-  "DOC502": 1
- },
  "src/nemik/salience.py": {
   "C901": 1,
   "D205": 1,

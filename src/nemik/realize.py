@@ -35,10 +35,9 @@ def verdicts(repo: str, state_path: Path, root: Path, now: str) -> list[Json]:
     (`<repo>/paths-forward.json`) has no `.claude` directory to read the name from.
 
     Returns:
-        one verdict per waypoint, in queue order, each {ref, level, reference_arm, residue}.
-
-    Raises:
-        OpaUnavailableError: when opa is absent, is not the pinned version, or did not evaluate.
+        one verdict per waypoint, in queue order, each {ref, level, reference_arm, residue}. An
+        OpaUnavailableError from the judge propagates when opa is absent, is not the pinned
+        version, or did not evaluate.
 
     """
     state = load_state(state_path)
