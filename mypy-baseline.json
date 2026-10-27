@@ -396,9 +396,6 @@
  "tests/test_satisfied_edges.py": {
   "misc": 20
  },
- "tests/test_saturation.py": {
-  "misc": 3
- },
  "tests/test_score.py": {
   "misc": 44,
   "no-untyped-call": 16,

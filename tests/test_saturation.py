@@ -26,17 +26,14 @@ def _root(tmp: Path, asks: int) -> Path:
         }
         for i in range(1, asks + 1)
     ]
-    queue.write_text(
-        json.dumps(
-            {
-                "version": 1,
-                "project_root": "/x",
-                "counter": asks,
-                "residue": [],
-                "waypoints": waypoints,
-            }
-        )
-    )
+    body: dict[str, object] = {
+        "version": 1,
+        "project_root": "/x",
+        "counter": asks,
+        "residue": [],
+        "waypoints": waypoints,
+    }
+    queue.write_text(json.dumps(body))
     return tmp
 
 
