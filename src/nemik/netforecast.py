@@ -74,6 +74,33 @@ def baseline_of(past_shortfalls: list[float]) -> float:
     return ordered[rank - 1]
 
 
+def replay_row(
+    daily_nets: list[int], minutes: int, past_nets: list[int], realized: int
+) -> str:
+    """Set a replayed window's prediction beside what happened, and say if they part (W1145).
+
+    The prediction comes from the days before every window it is judged against, so it looks
+    ahead of none of them; the baseline is learned from `past_nets`, the earlier windows.
+
+    Args:
+        daily_nets: The net of each of the days before the earliest past window.
+        minutes: The window's length in minutes.
+        past_nets: The net of each earlier window of that length.
+        realized: The net the replayed window actually had.
+
+    Returns:
+        A line with the prediction, the realized net and the shortfall, and a second line with
+        the alert when there is one. ValueError from the prediction or the baseline propagates:
+        too little history is not a quiet window.
+
+    """
+    predicted = predicted_net(daily_nets, minutes)
+    gap = shortfall(predicted, realized)
+    line = f"replay: predicted {predicted:+.1f}, realized {realized:+d}, shortfall {gap:+.1f}"
+    said = alert_for(predicted, realized, [shortfall(predicted, n) for n in past_nets])
+    return f"{line}\n{said}" if said else line
+
+
 def alert_for(predicted: float, realized: int, past_shortfalls: list[float]) -> str:
     """Say whether a window's net parted from its prediction beyond what is normal (W1146).
 
@@ -91,10 +118,15 @@ def alert_for(predicted: float, realized: int, past_shortfalls: list[float]) -> 
 
     """
     gap = shortfall(predicted, realized)
-    limit = baseline_of(past_shortfalls)
-    if gap <= limit:
+    limit = baseline_of([abs(past) for past in past_shortfalls])
+    if abs(gap) <= limit:
         return ""
+    verdict = (
+        "the fleet did worse than predicted: look why"
+        if gap > 0
+        else "the model expected worse than happened: fix it"
+    )
     return (
         f"misprediction: net {realized:+d} against a predicted {predicted:+.1f}, "
-        f"a shortfall of {gap:.1f} over the usual {limit:.1f}"
+        f"off by {abs(gap):.1f} over the usual {limit:.1f}; {verdict}"
     )

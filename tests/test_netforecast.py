@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W1144, W1146: the predicted net of a window, and the alert when reality parts from it."""
+"""nemik:W1144, W1146, W1151, W1145: the predicted net of a window and the alert on a miss."""
 
 import pytest
 
@@ -9,13 +9,16 @@ from nemik.netforecast import (
     alert_for,
     baseline_of,
     predicted_net,
+    replay_row,
     shortfall,
 )
 
 HOUR = 60
 DAILY_NET = 24
 PAST = [0.2, -0.1, 0.3, 0.1, 0.0, 0.2, -0.2, 0.1, 0.3, 0.2]
-LEARNED = 0.3  # the ninetieth percentile of PAST by nearest rank
+LEARNED = 0.3  # the ninetieth percentile of the absolute values of PAST by nearest rank
+DAILY = [-48, -48, -48]  # a fleet adding two cards an hour more than it closes
+QUIET_PAST = [-2, -2, -2, -2]  # earlier hours that netted what was predicted
 
 
 def test_a_whole_day_is_the_mean_daily_net() -> None:
@@ -57,23 +60,44 @@ def test_the_shortfall_is_positive_when_the_window_did_worse() -> None:
 
 def test_the_baseline_is_learned_from_the_past_windows() -> None:
     """The ninetieth percentile, nearest rank, of the shortfalls already seen."""
-    assert baseline_of(PAST) == pytest.approx(LEARNED)
+    assert baseline_of([abs(past) for past in PAST]) == pytest.approx(LEARNED)
 
 
-def test_the_alert_fires_on_a_window_that_netted_nothing_against_a_close() -> None:
-    """The 2026-10-27 replay: a predicted net of 1.0 and a realized +0 is a shortfall of 1.0."""
+def test_the_alert_fires_on_a_window_that_did_worse_than_predicted() -> None:
+    """The fleet wandering: a predicted net of 1.0 and a realized +0."""
     said = alert_for(1.0, 0, PAST)
     assert said.startswith("misprediction: net +0 against a predicted +1.0")
+    assert "look why" in said
+
+
+def test_the_alert_fires_on_a_window_that_did_better_than_predicted() -> None:
+    """The model wrong: a predicted net of 1.0 and a realized +3 is as much a miss."""
+    said = alert_for(1.0, 3, PAST)
+    assert said.startswith("misprediction: net +3 against a predicted +1.0")
+    assert "fix it" in said
 
 
 def test_the_alert_is_silent_for_a_window_that_met_its_prediction() -> None:
-    """A realized net at or above the prediction, or a small shortfall, says nothing."""
+    """A realized net at the prediction, or within the usual miss, says nothing."""
     assert not alert_for(1.0, 1, PAST)
-    assert not alert_for(1.0, 3, PAST)
     assert not alert_for(1.2, 1, PAST)
+    assert not alert_for(0.8, 1, PAST)
 
 
 def test_too_little_history_is_refused_not_read_as_a_quiet_baseline() -> None:
     """With fewer than three past windows there is no baseline to compare with."""
     with pytest.raises(ValueError, match="too few past windows"):
         alert_for(1.0, 0, [0.1, 0.2])
+
+
+def test_a_replay_that_met_its_prediction_prints_one_line() -> None:
+    """Predicted -2.0 an hour and netted -2: the line, and no alert."""
+    line = replay_row(DAILY, HOUR, QUIET_PAST, -2)
+    assert line == "replay: predicted -2.0, realized -2, shortfall +0.0"
+
+
+def test_a_replay_that_missed_prints_the_alert_beneath() -> None:
+    """Predicted -2.0 and netted +4: the model expected worse than happened."""
+    first, second = replay_row(DAILY, HOUR, QUIET_PAST, 4).split("\n")
+    assert first == "replay: predicted -2.0, realized +4, shortfall -6.0"
+    assert second.startswith("misprediction:")
