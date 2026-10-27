@@ -2826,3 +2826,12 @@
 2026-10-27T11:42:02Z  tick  W1167 advanced  unblock   "W1167 server wiring built and tested (bazel: round_bindings, roundgauges, serve_model, codon census pass); stack567 resubmitted with a ruff+mypy paydown after the refusal showed mypy no longer owed 109 (W1165 landed) but ruff owes 4; manifests given to W1169, W1163, W1070 [blocked by W1171]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-27T12:10:46Z  status W1169 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-27T12:10:47Z  tick  W1169 advanced  collapse  "W1169: the pure issues-as-letters reader built on nemik.tracker (letters_of, unclaimed, census) with tests; bazel run in flight; stack567 (W1171 paydown, W1167 wiring) gating [blocked by W1171]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T12:42:57Z  tick  W1172 minted    -         "blocks_cli reads its arguments through a typed namespace, so mypy falls 5602 to 5596 (paydown)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
+2026-10-27T12:43:08Z  status W1172 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T12:43:58Z  tick  W1169 advanced  collapse  "W1169 second slice built: nemik-inbound --issues/--census, typed namespace paydown (W1172, mypy 5602 to 5596); stack567 (W1171, W1169, W1167) gating after fixing test_architecture, PLC1901 and a mypy finding; bazel run on stack568's tests in flight [blocked by W1171]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T12:51:20Z  status W1171 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T12:51:21Z  status W1167 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T12:51:21Z  status W1135 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T12:53:17Z  status W1169 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T12:58:01Z  interrupt W1173 minted    -         "Courier: whether the letters already sent (linux-sources' 96, others') are backfilled as issues, or only letters sent after W1048 become issues and each repo's tracked manifest stays the record of the past"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1047
+2026-10-27T12:58:09Z  status W1173 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
