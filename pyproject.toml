@@ -68,6 +68,7 @@ nemik-witnesses = "nemik.witnesses_cli:main"
 nemik-hostroot = "nemik.hostroot_cli:main"
 nemik-ics = "nemik.vtodo:main"
 nemik-tasks = "nemik.vtodo:tasks_main"
+nemik-stale = "nemik.stale:main"
 
 [project.optional-dependencies]
 docs = [

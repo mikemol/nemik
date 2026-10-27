@@ -68,4 +68,8 @@ EXCLUDED = [
     ("nemik-import", "a writer: reads a project file format into a queue"),
     ("nemik-exports", "a writer: publishes the per-repo exports"),
     ("nemik-hostroot", "a writer: writes the host-root document on the host"),
+    (
+        "nemik-stale",
+        "host-private: compares the host's installed venv with a source tree (W730)",
+    ),
 ]

@@ -15615,21 +15615,25 @@
     {
       "symbol": "W730",
       "title": "A check that the venv's installed nemik matches the source tree, so a profile or tool cannot silently run old code",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "A command that points stale_modules at the tree's src/nemik and the venv's installed package and exits nonzero naming the stale ones (five registries: pyproject, BUILD.bazel, SKILL.md, workflows.toml, codon-baseline); it needs a Codon-clean entry or a registered baseline entry",
+      "next_bounded_step": "nemik-stale SOURCE_DIR INSTALLED_DIR is built (check, main, the five registries; Codon-probed, no baseline entry) and queued as stack586; remaining after it lands: a wrapper or doc line that points it at the tree's src/nemik and the venv's installed package, and a profile or hook that runs it",
       "evidence": "2026-10-23: 2026-10-23 overlap audit (verified): related to luthen-observability:W1235 (a timer publishes luthen_user_tool_behind_commits per tool, so a stale nemik install shows before it misleads); both detect a stale install, this one inside the tree, that one on the host. W1235 is blocked on luthen's W1285 as well, so no enables edge: a cross-cite only | 2026-10-27: landed e9f8c2d (pushed, gate green): nemik.stale.stale_modules(source_dir, installed_dir) names the stale modules; first submit refused on pathlib ruff findings. The command that runs it against the tree and the venv is still to do",
       "issued_at": "2026-10-19T13:36:24Z",
       "minted_during": "tick",
       "caused_by": "nemik:W729",
-      "last_worked": "2026-10-27T22:09:17Z",
+      "last_worked": "2026-10-27T22:12:32Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/stale.py",
-        "tests/test_stale_install.py"
+        "tests/test_stale_install.py",
+        "pyproject.toml",
+        "BUILD.bazel",
+        "src/nemik/data/workflows.toml",
+        "skills/nemik/SKILL.md"
       ],
       "size_class": "small",
       "completed": null
@@ -20323,23 +20327,26 @@
     {
       "symbol": "W904",
       "title": "The vector PDF of the fleet view is 24 MB, because Chromium flattens each dashed edge into segments",
-      "status": "ready",
+      "status": "blocked",
       "enables": [],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "operator: decide how the 24 MB fleet-view PDF is fixed: (a) Chromium prints the page chrome with the graph hidden and rsvg-convert prints the graph, overlaid with a PDF tool (needs a new dependency), or (b) send the graph PDF (0.44 MB, native dashes) and the panels as two files. Measured 2026-10-23: dashes alone are the size, 24.7 MB with them and 0.66 MB without"
+      ],
+      "blocked_kind": "human",
       "next_bounded_step": "Measured 2026-10-23: the dashes alone are the size (24.7 MB with them, 0.66 MB without, whole-page Chromium print); straight lines instead of curves still 22 MB; cairo's rsvg-convert (2.62.3, on the host) writes the graph SVG as a 0.44 MB PDF with native dashes. Options: print the page chrome from Chromium with the graph hidden and the graph from rsvg-convert, then overlay (needs a PDF tool), or send the graph PDF and the panels as two files; decide with the operator which reads best on a phone",
       "evidence": "",
       "issued_at": "2026-10-23T16:32:37Z",
       "minted_during": "tick",
       "caused_by": "operator",
-      "last_worked": "2026-10-23T16:32:42Z",
+      "last_worked": "2026-10-27T23:00:26Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/pdf.py",
         "tests/test_pdf.py"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "completed": null
     },
     {
       "symbol": "W905",
@@ -26772,7 +26779,7 @@
     {
       "symbol": "W1136",
       "title": "Derive the round ceiling from luthen's W1645 series and drum's admission, with no typed threshold",
-      "status": "working",
+      "status": "ready",
       "enables": [
         "W1092"
       ],
@@ -26782,11 +26789,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Step (3) is built: roundof.ceiling_of(cost_per_entry, headroom) is pure, returns whole entries, and keeps the declared CEILING while either input is unknown (<= 0). Still to do: (1) read luthen's W1645 median series through the export route nemik-hostroot uses for the ratchet series, writing the query name here first, (2) read drum's admitted CPU headroom from its interface, then call ceiling_of from width() and name the term as measured",
-      "evidence": "",
+      "evidence": "2026-10-27: landed e254920 (pushed, gate green): roundof.ceiling_of(cost_per_entry, headroom) is pure and keeps the declared CEILING while either input is <= 0; not yet called from width(). Refused twice first: an E501 docstring, then a working set holding W730 outside the round. Steps (1) and (2) are still to read",
       "issued_at": "2026-10-26T22:09:25Z",
       "minted_during": "interrupt",
       "caused_by": "W1092",
-      "last_worked": "2026-10-27T21:42:50Z",
+      "last_worked": "2026-10-27T22:33:07Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/roundof.py",
@@ -27996,11 +28003,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "CORRECTION 2026-10-27 to the previous note on datetime.UTC (tested, not inferred): the pinned Codon's datetime module has NEITHER UTC NOR timezone ('cannot import name UTC from datetime'; 'cannot import name timezone from datetime', probed with codon run on two three-line files). So there is no ruff-versus-Codon choice to make: ruff's UP017 would flag timezone.utc (confirmed) but Codon cannot import timezone either. The four modules that import UTC (alarm, witwait, queuerows, residue) use timezone-aware datetimes, which the Codon datetime cannot express; a Codon-compatible form means those modules stop handling zoned datetimes (take and return epoch seconds or ISO text, with the zone handled in a non-census caller), an architectural change per module, not an import swap. Everything else in the previous note stands: the ',' cluster is the bare '*,' marker; pacerun left the baseline in W1190 (frozenset default became a list constant; Codon cannot read tuple[str, ...]); the tally by first error (18 argparse, 10 ',', 9 rdflib, 8 tomllib, 7 class decorator, 4 importlib.resources, 4 collections.abc, singletons) and calendars and rank aborting the compiler (rc -6) unexplained",
-      "evidence": "2026-10-27: 2026-10-27 tick: the ',' cluster is mostly keyword-only parameters after a named-arg star (history.is_series, hostapply, stackable_cli), not only a bare star line, and each also imports argparse or subprocess; removing the star alone moves none off the baseline. Next singleton candidates: letters (shlex), index (weakref), shaclcache (contextlib), endpoint (http.client) are stdlib-module gaps, so each needs a replacement, not a retype",
+      "evidence": "2026-10-27: 2026-10-27 tick: the ',' cluster is mostly keyword-only parameters after a named-arg star (history.is_series, hostapply, stackable_cli), not only a bare star line, and each also imports argparse or subprocess; removing the star alone moves none off the baseline. Next singleton candidates: letters (shlex), index (weakref), shaclcache (contextlib), endpoint (http.client) are stdlib-module gaps, so each needs a replacement, not a retype | 2026-10-27: 2026-10-27 baselinetop probe: its entry fails at tracker.py:270 (Tracker.number) with 'cannot typecheck number in reasonable time', but only when baselinetop imports the tracker; nemik.tracker alone compiles. Rewriting the INT-or-REAL ternary in number() as an if statement did not clear it (probed), nor did removing the isdigit test help baselinetop, so the blow-up is in how baselinetop's use of INT, DICT and parse_tree specializes the recursive parser, not in that line. Next: probe baselinetop with parse_tree replaced by a stub to see whether the specialization is the parse_tree call or the constants. Other stdlib-gap singletons (letters also imports UTC, index imports rdflib) are not one-line fixes",
       "issued_at": "2026-10-27T13:51:58Z",
       "minted_during": "interrupt",
       "caused_by": "W1014",
-      "last_worked": "2026-10-27T20:49:38Z",
+      "last_worked": "2026-10-27T22:42:02Z",
       "ticks_blocked": 0,
       "size_class": "medium",
       "manifest": [
@@ -28502,7 +28509,7 @@
   "heartbeat": "2026-10-22T02:06:35Z",
   "lock": {
     "holder": "claude-nemik",
-    "taken_at": "2026-10-27T21:39:42Z",
+    "taken_at": "2026-10-27T22:12:40Z",
     "pid": 1281447,
     "start": 39974717
   },
@@ -28514,8 +28521,8 @@
       "waypoint": "W924",
       "base_sha": "67eb4a883831b11b5852f5d4c4fce247072ce093",
       "taken_at": "2026-10-23T20:48:07Z",
-      "renewed_at": "2026-10-27T21:39:42Z",
-      "expires_at": "2026-10-27T22:09:42Z"
+      "renewed_at": "2026-10-27T22:12:40Z",
+      "expires_at": "2026-10-27T22:42:40Z"
     },
     {
       "tag": "file:tools/shardselect.py!w",
@@ -28523,8 +28530,8 @@
       "waypoint": "W924",
       "base_sha": "67eb4a883831b11b5852f5d4c4fce247072ce093",
       "taken_at": "2026-10-23T20:48:07Z",
-      "renewed_at": "2026-10-27T21:39:42Z",
-      "expires_at": "2026-10-27T22:09:42Z"
+      "renewed_at": "2026-10-27T22:12:40Z",
+      "expires_at": "2026-10-27T22:42:40Z"
     },
     {
       "tag": "file:tests/conftest.py!w",
@@ -28532,8 +28539,8 @@
       "waypoint": "W924",
       "base_sha": "67eb4a883831b11b5852f5d4c4fce247072ce093",
       "taken_at": "2026-10-23T20:48:07Z",
-      "renewed_at": "2026-10-27T21:39:42Z",
-      "expires_at": "2026-10-27T22:09:42Z"
+      "renewed_at": "2026-10-27T22:12:40Z",
+      "expires_at": "2026-10-27T22:42:40Z"
     },
     {
       "tag": "file:tests/test_shard_select.py!w",
@@ -28541,8 +28548,8 @@
       "waypoint": "W924",
       "base_sha": "67eb4a883831b11b5852f5d4c4fce247072ce093",
       "taken_at": "2026-10-23T20:48:07Z",
-      "renewed_at": "2026-10-27T21:39:42Z",
-      "expires_at": "2026-10-27T22:09:42Z"
+      "renewed_at": "2026-10-27T22:12:40Z",
+      "expires_at": "2026-10-27T22:42:40Z"
     },
     {
       "tag": "file:docs/forecast-features.md!w",

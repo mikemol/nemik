@@ -143,6 +143,7 @@ venv_from_hub(
         "nemik-witnesses": "nemik.witnesses_cli:main",
         "nemik-ics": "nemik.vtodo:main",
         "nemik-tasks": "nemik.vtodo:tasks_main",
+        "nemik-stale": "nemik.stale:main",
         "mikemol-paths-forward": "mikemol.pathsforward.cli:main",
         "mikemol-ics": "mikemol.icsstruct.cli:main",
         "mikemol-hook-inbound-asks": "mikemol.hooks.entry:inbound_asks_main",
