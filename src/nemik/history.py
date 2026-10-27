@@ -1675,37 +1675,89 @@ def _busiest(pair: tuple[str, Counts]) -> tuple[int, str]:
     return -(closed + dropped + added), name
 
 
-def fleet_row(rows: dict[str, Counts], spec: str, limit: int = ROW_LINES) -> list[str]:
+def fleet_row(
+    rows: dict[str, Counts],
+    spec: str,
+    limit: int = ROW_LINES,
+    births: dict[str, int] | None = None,
+) -> list[str]:
     """Fold a fleet's windows into one total line and the repos that changed (nemik:W1112).
 
     Args:
         rows: Each repo's counts.
         spec: The window as the operator wrote it, for the first line.
         limit: The most lines to give.
+        births: Each repo whose queue file was created inside the window, with its card count.
+            Its cards are not work added to a plan that existed, so they stay out of every total.
 
     Returns:
         The fleet's closed, dropped and added with their net (closed plus dropped less added, so a
-        positive net is a burn-down), then one line per repo that changed, busiest first; a tail
-        line counts the repos that did not fit. At most `limit` lines.
+        positive net is a burn-down), the cards born with new queues, then one line per repo that
+        changed, busiest first, then one per new queue; a tail line counts the repos that did not
+        fit. At most `limit` lines.
 
     """
+    born = births or {}
     closed, dropped, added, still = (sum(c[i] for c in rows.values()) for i in range(4))
     head = (
         f"fleet since {spec}: closed {closed}, dropped {dropped}, added {added}, "
         f"net {closed + dropped - added:+d}, open {still}, {len(rows)} repos"
     )
+    if born:
+        head += f"; {sum(born.values())} cards born in {len(born)} new queues"
     changed = sorted(
         ((name, c) for name, c in rows.items() if c[0] + c[1] + c[2]),
         key=_busiest,
     )
+    entries = [
+        f"{name}: closed {c}, dropped {d}, added {a}, net {c + d - a:+d}"
+        for name, (c, d, a, _) in changed
+    ]
+    entries += [f"{name}: born, {born[name]} cards" for name in sorted(born)]
     room = limit - 1
-    shown = changed if len(changed) <= room else changed[: room - 1]
-    lines = [head]
-    for name, (c, d, a, _) in shown:
-        lines.append(f"{name}: closed {c}, dropped {d}, added {a}, net {c + d - a:+d}")
-    if len(shown) < len(changed):
-        lines.append(f"+{len(changed) - len(shown)} more repos changed")
+    shown = entries if len(entries) <= room else entries[: room - 1]
+    lines = [head, *shown]
+    if len(shown) < len(entries):
+        lines.append(f"+{len(entries) - len(shown)} more repos changed")
     return lines
+
+
+def born_cards(adds: str, since: datetime, doc: QueueDoc) -> int:
+    """Count a queue's cards when the file was created inside the window (nemik:W1112).
+
+    Args:
+        adds: The commit times (ISO, newest first) at which the queue file was added.
+        since: The window's start.
+        doc: The queue as it stands now.
+
+    Returns:
+        The card count when the oldest add is at or after `since`, else 0.
+
+    """
+    stamps = adds.split()
+    first = _stamp(stamps[-1]) if stamps else None
+    if first is None or first < since:
+        return 0
+    return len(doc.get("waypoints", []))
+
+
+def born_in(repo: Path, spec: str) -> int:
+    """Count the cards of a queue file that was created inside the window (nemik:W1112).
+
+    Args:
+        repo: The repo's directory.
+        spec: The window (`-1d`, `ago:45m` or a zoned instant).
+
+    Returns:
+        The queue's card count when its first commit lies in the window, else 0: a revision or a
+        bare date names no instant to compare with, and a queue outside git has no first commit.
+
+    """
+    since = window_start(spec)
+    if since is None:
+        return 0
+    adds = _git(repo, "log", "--diff-filter=A", "--format=%cI", "--", QUEUE_PATH)
+    return born_cards(adds or "", since, queue_at(repo, "HEAD"))
 
 
 def _counts_for(repo: Path, spec: str) -> Counts | None:
@@ -1748,18 +1800,24 @@ def _compact(baseline: str, names: list[str], dirs: dict[str, Path]) -> int:
 
     """
     rows: dict[str, Counts] = {}
+    births: dict[str, int] = {}
     for name in names:
         spec = baseline_spec(dirs[name], baseline)
         if spec is None:
             continue
         try:
-            counts = _counts_for(dirs[name], spec)
+            born = born_in(dirs[name], spec)
+            counts = None if born else _counts_for(dirs[name], spec)
         except ValueError as error:
             sys.stderr.write(f"{name}: {error}\n")
             return 2
-        if counts is not None:
+        if born:
+            births[name] = born
+        elif counts is not None:
             rows[name] = counts
-    sys.stdout.write("\n".join(fleet_row(rows, baseline or "declared")) + "\n")
+    sys.stdout.write(
+        "\n".join(fleet_row(rows, baseline or "declared", births=births)) + "\n"
+    )
     return 0
 
 
