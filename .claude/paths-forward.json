@@ -11369,8 +11369,7 @@
       ],
       "blocked_on": [
         "W578",
-        "W1145",
-        "W1146"
+        "W1145"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "No budget, nothing gated. Publish per repo the cards predicted to be worked next (by salience, with wait age once W581 lands) and the frontier width expected after N ticks as a mark; measure it against the ledgers (cards actually advanced, width actually moved) as the misprediction series W490 designs; alert by symptom when misprediction exceeds its learned baseline. Uses W578's flow model.",
@@ -11379,7 +11378,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-27T03:43:46Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 0,
       "completed": null,
       "warrants": [
         {
@@ -24456,12 +24455,12 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": "Send path writes a GitHub issue into a peer's PRIVATE repo: that publishes outside nemik, so first establish which credential route exists (never plaintext key material, never the operator's YubiKey opened) and whether the operator has authorised issue writes to peers' private repos; if not, block on operator: decide/act with that exact ask, citing linux-sources:W395",
+      "evidence": "2026-10-27: 2026-10-27 linux-sources asks which of W1048/W1049/W1053 comes first: W1053, then W1049, then W1048 (the send path publishes to private peer repos and needs a credential route and an authorisation I have not seen).",
       "issued_at": "2026-10-25T14:28:07Z",
       "minted_during": "tick",
       "caused_by": "W1047",
-      "last_worked": null,
+      "last_worked": "2026-10-27T05:26:14Z",
       "ticks_blocked": 0
     },
     {
@@ -24474,12 +24473,12 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": "Read path first (read-only): list which route nemik may read a repo's own issues by (the gh CLI's stored login, or an API token the operator stores sealed), then nemik-inbound reads letters from issues labelled for this repo; write down the route and what it needs before any code",
+      "evidence": "2026-10-27: 2026-10-27 linux-sources (linux-sources:W395 waits on W1048 send and W1049 read; W378 retires sibling-inbox reads and writes): both read ready and unstarted since 2026-10-25, with no step or manifest. Order taken: W1053 first (concrete, warranted, local), then W1049 (read-only), then W1048.",
       "issued_at": "2026-10-25T14:28:07Z",
       "minted_during": "tick",
       "caused_by": "W1047",
-      "last_worked": null,
+      "last_worked": "2026-10-27T05:26:12Z",
       "ticks_blocked": 0
     },
     {
@@ -26103,17 +26102,17 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "history._counts_for/_causes_for: now = the on-disk queue (committed copy on a missing or unreadable file); the compact row says 'open (planned)'; test that a mint after HEAD shows in -45m; lands after stack553, which carries history.py",
-      "evidence": "2026-10-26: 2026-10-26: both parts landed: W1114 578a6db (value and horizon in the pace file), W1115 4e26f32 (--pace words them). Days-to-zero needs the repo's landing rate and is left to W1113's bound, not a card of its own | 2026-10-26: 2026-10-26 github-8f (pass 5): add a CARDS row to the pace beside the ratchets: closures per hour, open count, horizon (open over closures per hour) and a behind verdict, so card burndown has the sensor ratchets have. Not built; W1112 is done, so the work is a child when it starts (--caused-by W1112); luthen's egress SHAPE and the W1120 fixture must admit the row first (tell luthen-observability) | 2026-10-26: 2026-10-26 github-8f, operator ruling 103846 (see W1055): the pace carries three kinds of row of one shape: ratchets, cards (open count, closures per landing) and the landing rate itself, each horizon in days at that rate. Not built; W1112 is done, so this is a child when it starts (--caused-by W1112); luthen's egress SHAPE and the W1120 fixture admit the new rows first | 2026-10-27: github-8f 2026-10-27 (host-reviewer pass 3, github:R11, due 2026-10-28): extend this witness, no new card. One nemik-history mode prints the fleet total (closed, dropped, added, as a net) plus only the repos that changed, in 10 lines or fewer for -45m and -1d, because the host tick-open caps a hook at 10 lines and nemik-history --all overflowed it (32 per-repo hooks today). The host's own queue (github) must read correctly in it (0 today). Reply to github-8f with the symbol and sha when it lands. | 2026-10-27: b40215a landed: nemik-history --all --baseline=-45m|-1d --compact (fleet line plus changed repos, at most 10 lines; queue outside git counted from card stamps); mypy 5640 to 5638. Host fleet at -1d: github closed 3 added 7. Remaining: the host swap on github-8f's side; a card added and closed inside the window shows only as added for a non-git queue. | 2026-10-27: 2026-10-27 github-8f (host-reviewer pass 5, github:R13) extends this card again, no new one: queue birth. estate's queue file was created in 9376abb at 2026-10-26T23:48Z (git log --diff-filter=A), so --compact -1d counts its 52 cards as added. Witness: a queue created inside the window reads 'born' and its cards are left out of the fleet's added count, so the -1d fleet added drops by 52. Due 2026-10-28. Approach: the first commit that added .claude/paths-forward.json (git log --diff-filter=A) dated after the window start marks the repo born; the stamp reader does the same from the file's earliest issued_at. | 2026-10-27: 2026-10-27 github-8f (host-reviewer pass 6, github:R14, due 2026-10-29), after the codon paydown and nothing else attached: one nemik-history call splits a window's adds by caused_by (atomize child of W<n>, promotion, or none) in 10 lines or fewer. Why: the host's card setpoint is now the -1d fleet net; nemik's -1d row was +53 added and the mint channel (17 interrupt, 35 tick, 1 unrecorded) cannot say whether those are atomization children or new work, which the setpoint's actuator must answer; W563's forecast consumes the same split. If this card stalls under its extensions, atomize it (github-8f's own words). Plan: the card's caused_by field names the parent (W<n>) or is absent; split = child of an own card / promoted from a done card / none. | 2026-10-27: 16aa1ce landed: queue birth (born_in/born_cards; the fleet line says N cards born in K new queues; estate reads born, 51 cards at -1d). Remaining: the caused_by split of a window's adds (github-8f pass 6, due 2026-10-29). | 2026-10-27: 2026-10-27 github-8f: -45m and -1d compact rows disagree (-1d nemik adds 53 at 04:10Z, 57 at 04:38Z; -45m added 0; open 2729 to 2733). Diagnosis (mine, reproduced 04:5xZ): both windows read the COMMITTED queue (git HEAD) for a git repo, not different sources. nemik's last queue commit was 16aa1ce at 23:54-04:00 (03:54Z); cards minted since sit in the working-tree file until the next stack lands (a gate, ~30 min), so -45m, whose baseline equals HEAD, correctly reads nothing, and -1d rose by 4 when stack551's commits landed. Different 'open' definitions also: open is the baseline-planned cards still open, not the queue's open total, so the two windows differ by definition and the git and stamp readers differ again. Fix: for a repo whose queue file is on disk, 'now' is the file as it stands, not HEAD, so a mint shows in both windows at once; a malformed or missing file falls back to HEAD; the stamp reader for a queue outside git is unchanged. Also state the open definition in the row.",
+      "next_bounded_step": "burn_counts/cause_counts take the window start and count a card new to the baseline only when its issued_at (when stamped) falls in the window; residue cards new to the window go under none; test rosettapkg-shaped case (new symbol, old issued_at: not an add) and compact == sum(by-cause) for the same pair; lands after stack554",
+      "evidence": "2026-10-26: 2026-10-26: both parts landed: W1114 578a6db (value and horizon in the pace file), W1115 4e26f32 (--pace words them). Days-to-zero needs the repo's landing rate and is left to W1113's bound, not a card of its own | 2026-10-26: 2026-10-26 github-8f (pass 5): add a CARDS row to the pace beside the ratchets: closures per hour, open count, horizon (open over closures per hour) and a behind verdict, so card burndown has the sensor ratchets have. Not built; W1112 is done, so the work is a child when it starts (--caused-by W1112); luthen's egress SHAPE and the W1120 fixture must admit the row first (tell luthen-observability) | 2026-10-26: 2026-10-26 github-8f, operator ruling 103846 (see W1055): the pace carries three kinds of row of one shape: ratchets, cards (open count, closures per landing) and the landing rate itself, each horizon in days at that rate. Not built; W1112 is done, so this is a child when it starts (--caused-by W1112); luthen's egress SHAPE and the W1120 fixture admit the new rows first | 2026-10-27: github-8f 2026-10-27 (host-reviewer pass 3, github:R11, due 2026-10-28): extend this witness, no new card. One nemik-history mode prints the fleet total (closed, dropped, added, as a net) plus only the repos that changed, in 10 lines or fewer for -45m and -1d, because the host tick-open caps a hook at 10 lines and nemik-history --all overflowed it (32 per-repo hooks today). The host's own queue (github) must read correctly in it (0 today). Reply to github-8f with the symbol and sha when it lands. | 2026-10-27: b40215a landed: nemik-history --all --baseline=-45m|-1d --compact (fleet line plus changed repos, at most 10 lines; queue outside git counted from card stamps); mypy 5640 to 5638. Host fleet at -1d: github closed 3 added 7. Remaining: the host swap on github-8f's side; a card added and closed inside the window shows only as added for a non-git queue. | 2026-10-27: 2026-10-27 github-8f (host-reviewer pass 5, github:R13) extends this card again, no new one: queue birth. estate's queue file was created in 9376abb at 2026-10-26T23:48Z (git log --diff-filter=A), so --compact -1d counts its 52 cards as added. Witness: a queue created inside the window reads 'born' and its cards are left out of the fleet's added count, so the -1d fleet added drops by 52. Due 2026-10-28. Approach: the first commit that added .claude/paths-forward.json (git log --diff-filter=A) dated after the window start marks the repo born; the stamp reader does the same from the file's earliest issued_at. | 2026-10-27: 2026-10-27 github-8f (host-reviewer pass 6, github:R14, due 2026-10-29), after the codon paydown and nothing else attached: one nemik-history call splits a window's adds by caused_by (atomize child of W<n>, promotion, or none) in 10 lines or fewer. Why: the host's card setpoint is now the -1d fleet net; nemik's -1d row was +53 added and the mint channel (17 interrupt, 35 tick, 1 unrecorded) cannot say whether those are atomization children or new work, which the setpoint's actuator must answer; W563's forecast consumes the same split. If this card stalls under its extensions, atomize it (github-8f's own words). Plan: the card's caused_by field names the parent (W<n>) or is absent; split = child of an own card / promoted from a done card / none. | 2026-10-27: 16aa1ce landed: queue birth (born_in/born_cards; the fleet line says N cards born in K new queues; estate reads born, 51 cards at -1d). Remaining: the caused_by split of a window's adds (github-8f pass 6, due 2026-10-29). | 2026-10-27: 2026-10-27 github-8f: -45m and -1d compact rows disagree (-1d nemik adds 53 at 04:10Z, 57 at 04:38Z; -45m added 0; open 2729 to 2733). Diagnosis (mine, reproduced 04:5xZ): both windows read the COMMITTED queue (git HEAD) for a git repo, not different sources. nemik's last queue commit was 16aa1ce at 23:54-04:00 (03:54Z); cards minted since sit in the working-tree file until the next stack lands (a gate, ~30 min), so -45m, whose baseline equals HEAD, correctly reads nothing, and -1d rose by 4 when stack551's commits landed. Different 'open' definitions also: open is the baseline-planned cards still open, not the queue's open total, so the two windows differ by definition and the git and stamp readers differ again. Fix: for a repo whose queue file is on disk, 'now' is the file as it stands, not HEAD, so a mint shows in both windows at once; a malformed or missing file falls back to HEAD; the stamp reader for a queue outside git is unchanged. Also state the open definition in the row. | 2026-10-27: 2026-10-27 github-8f ~05:15Z: --by-cause fleet added 208 (el-openglo 51, rosettapkg 33) against the 04:38Z --compact -1d 'added 111' that listed neither. Reproduced 05:3xZ with the same checkout: --compact -1d reads added 211 (el-openglo 51, rosettapkg 33, nemik 59, luthen 22), --by-cause reads 208 (nemik 58, luthen 20), so the large gap was code and time, not two sources: the 04:38Z row predates the live-queue read (el-openglo and rosettapkg have queue changes on disk not yet committed; both readers now take the file on disk as 'now', stack554). Remaining difference of 3 is real: compact counts a card added and dropped inside the window (it is in residue, not in waypoints), by-cause only sees waypoints and so cannot split it, and residue keeps no caused_by. Fix: cause_counts puts residue cards new to the window under 'none' (no cause recorded) so both readers' fleet added equal and each repo's row agrees; the legend says so. Witness (github-8f): same window, same fleet added and the same per-repo added in both. | 2026-10-27: 2026-10-27 github-8f pass 8 (github:R16, due 2026-10-29): nemik-pacing reads rosettapkg '4 new' while --compact/--by-cause read added 33; witness asked: pacing counts the live adds (30 or more). FINDING, which reverses the premise: pacing is right and the compact/by-cause 33 is wrong. rosettapkg's queue file was last COMMITTED on 2026-09-26 (936557d); its cards W101..W133 were issued 2026-10-05..13 (W104 issued_at 2026-10-05T17:26:51Z) and sit uncommitted in the working tree. A window's baseline is the last commit before its start, so against a 09-26 baseline the live file shows a month of cards as 'added in the last day' regardless of their issued_at. pacing counts by issued_at over 14 days and says 4. Fix: a card counts as added in a window only if its issued_at (when stamped) falls in the window; the symbol being new against the baseline is necessary but not enough. Same for by-cause. And pacing gets the live queue (it reads the survey's committed-or-snapshot graph) only if the survey reads disk: check. Also the host should not read a series break from nemik's sha: that is its own choice. | 2026-10-27: 2026-10-27 github-8f agreed and withdrew the pacing witness. Replacement witness: rosettapkg's -1d added reads about 4, and compact, by-cause and pacing agree; a new symbol counts as an add only when its issued_at falls in the window. github-8f takes rosettapkg's month of uncommitted queue edits (last commit 936557d, 2026-09-26) to rosettapkg. | 2026-10-27: a486b1e landed: the compact and by-cause rows read the queue on disk as 'now' (committed copy on a missing or half-written file); the fleet line says open (planned). -45m now sees an uncommitted mint.",
       "issued_at": "2026-10-26T14:23:30Z",
       "minted_during": "tick",
       "caused_by": "W1108",
-      "last_worked": "2026-10-27T05:12:42Z",
+      "last_worked": "2026-10-27T05:39:02Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "src/nemik/history.py",
-        "tests/test_fleet_live.py"
+        "tests/test_fleet_window.py"
       ]
     },
     {
@@ -27015,26 +27014,26 @@
     {
       "symbol": "W1146",
       "title": "Misprediction alert by symptom when realized net falls short of prediction beyond a learned baseline",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W563"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "alert_for(predicted, realized, baseline_shortfalls) fires when the shortfall exceeds the p90 of past shortfalls (learned, not declared); text only, never a gate; witness: it fires on the replay of 2026-10-27's net +0 and not on a window that met its prediction",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-27: 23fb1bf landed: netforecast.shortfall/baseline_of/alert_for; fires on a predicted +1.0 against net +0, silent when met, refuses under 3 past windows. W1145 (the replay that feeds it real windows) remains under W563.",
       "issued_at": "2026-10-27T03:43:46Z",
       "minted_during": "tick",
       "caused_by": "W563",
-      "last_worked": "2026-10-27T05:02:28Z",
+      "last_worked": "2026-10-27T05:37:02Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/netforecast.py",
         "tests/test_netforecast.py"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261027T053702Z"
     },
     {
       "symbol": "W1147",
@@ -27264,12 +27263,7 @@
   ],
   "job_id": "1d7fe6d0",
   "heartbeat": "2026-10-22T02:06:35Z",
-  "lock": {
-    "holder": "claude-nemik",
-    "taken_at": "2026-10-27T05:09:17Z",
-    "pid": 1281447,
-    "start": 39974717
-  },
+  "lock": null,
   "predecessor_job_id": "disarmed",
   "leases": [
     {

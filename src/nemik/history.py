@@ -1648,11 +1648,35 @@ def stamp_counts(doc: QueueDoc, since: datetime) -> Counts:
     return closed, dropped, added, still_open
 
 
-def burn_counts(base: QueueDoc, now: QueueDoc) -> Counts:
-    """Count a queue's window from two committed copies, as `variance` does (nemik:W1112).
+def _issued_since(card: Waypoint, since: datetime | None) -> bool:
+    """Say whether a card arrived in the window, by its issued_at stamp (nemik:W1112).
+
+    A symbol new against the baseline is not yet an add: a queue left uncommitted for a month
+    shows all of that month's cards as new against its last commit, and arrival is when a card
+    was issued, the clock nemik-pacing and the ruling both use.
 
     Returns:
-        (closed, dropped, added, still open): the plan is the cards open at `base`.
+        True when there is no window, no stamp, or the stamp is at or after the window's start.
+
+    """
+    if since is None:
+        return True
+    issued = _stamp(card.get("issued_at"))
+    return issued is None or issued >= since
+
+
+def burn_counts(base: QueueDoc, now: QueueDoc, since: datetime | None = None) -> Counts:
+    """Count a queue's window from two copies of it, as `variance` does (nemik:W1112).
+
+    Args:
+        base: The queue at the window's start.
+        now: The queue now.
+        since: The window's start when it is a time; a card new against `base` but issued before
+            it is not counted as added.
+
+    Returns:
+        (closed, dropped, added, still open): the plan is the cards open at `base`. A card added
+        and dropped inside the window is in the residue with no stamp and counts as added.
 
     """
     gone_then, gone_now = _dropped(base), _dropped(now)
@@ -1668,7 +1692,12 @@ def burn_counts(base: QueueDoc, now: QueueDoc) -> Counts:
         1 for s in planned if s not in gone_now and after.get(s) not in {None, "done"}
     )
     known = set(then) | gone_then
-    added = sum(1 for s in set(after) | gone_now if s not in known)
+    old = {
+        str(card["symbol"])
+        for card in now.get("waypoints", [])
+        if not _issued_since(card, since)
+    }
+    added = sum(1 for s in set(after) | gone_now if s not in known and s not in old)
     return closed, dropped, added, still
 
 
@@ -1818,19 +1847,30 @@ def _cause_of(card: Waypoint, status: dict[str, str]) -> int:
     return 0 if status.get(cause) not in {None, "done"} else 1
 
 
-def cause_counts(base: QueueDoc, now: QueueDoc) -> Causes:
-    """Split the cards added between two committed copies by what caused them (nemik:W1147).
+def cause_counts(
+    base: QueueDoc, now: QueueDoc, since: datetime | None = None
+) -> Causes:
+    """Split the cards added between two copies of a queue by what caused them (nemik:W1147).
+
+    Args:
+        base: The queue at the window's start.
+        now: The queue now.
+        since: The window's start when it is a time; a card new against `base` but issued before
+            it is not an add, as in burn_counts.
 
     Returns:
-        (children, promotions, outside, none) over the cards `now` holds that `base` did not know.
+        (children, promotions, outside, none) over the cards `now` holds that `base` did not know
+        and that arrived in the window. A card added and dropped inside it sits in the residue,
+        which keeps no cause, so it counts under none: the total equals burn_counts' added.
 
     """
     known = set(_status(base)) | _dropped(base)
     status = _status(now)
     tally = [0, 0, 0, 0]
     for card in now.get("waypoints", []):
-        if str(card["symbol"]) not in known:
+        if str(card["symbol"]) not in known and _issued_since(card, since):
             tally[_cause_of(card, status)] += 1
+    tally[3] += sum(1 for s in _dropped(now) if s not in known and s not in status)
     return tally[0], tally[1], tally[2], tally[3]
 
 
@@ -1909,7 +1949,8 @@ def _causes_for(repo: Path, spec: str) -> Causes | None:
             return None
         text = path.read_text(encoding="utf-8")
         return stamp_causes(queue_at(repo, "HEAD", known=text), since)
-    return cause_counts(queue_at(repo, resolve(repo, spec)), live_queue(repo, now))
+    base = queue_at(repo, resolve(repo, spec))
+    return cause_counts(base, live_queue(repo, now), since)
 
 
 def _counts_for(repo: Path, spec: str) -> Counts | None:
@@ -1929,7 +1970,8 @@ def _counts_for(repo: Path, spec: str) -> Counts | None:
             return None
         text = path.read_text(encoding="utf-8")
         return stamp_counts(queue_at(repo, "HEAD", known=text), since)
-    return burn_counts(queue_at(repo, resolve(repo, spec)), live_queue(repo, now))
+    base = queue_at(repo, resolve(repo, spec))
+    return burn_counts(base, live_queue(repo, now), since)
 
 
 def _by_cause(baseline: str, names: list[str], dirs: dict[str, Path]) -> int:
