@@ -277,9 +277,6 @@
   "misc": 25,
   "no-untyped-def": 3
  },
- "tests/test_hashes.py": {
-  "misc": 8
- },
  "tests/test_history.py": {
   "misc": 87,
   "no-untyped-def": 1,
