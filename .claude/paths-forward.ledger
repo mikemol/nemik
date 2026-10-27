@@ -2809,3 +2809,9 @@
 2026-10-27T10:45:32Z  interrupt W1168 minted    -         "test_publish reads hashes.json through the typed tree, so mypy falls 5618 to 5616 (paydown)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
 2026-10-27T10:45:36Z  status W1168 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-27T10:45:37Z  status W1155 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T10:47:22Z  status W1111 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T10:47:28Z  tick  W1165 advanced  unblock   "stack565 gating (W1168 paydown, W1165 declared requirement reset on the operator's go line 107063, W1135 round binding gauge); W1111 tombstone doc written for stack566 [blocked by W1168]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T10:51:45Z  interrupt W1169 minted    -         "nemik-inbound reads a repo's letters from its issues through the gh subprocess (route A of docs/courier-read-path.md), off by default, with a recorded gh api JSON as the fixture and a sent-census mode linux-sources can compare by value"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1049
+2026-10-27T11:11:21Z  tick  W1170 minted    -         "test_umbrella_descent and test_deadlock_check build their queue as typed dicts, so mypy falls 5616 to 5610 (paydown)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
+2026-10-27T11:11:29Z  status W1170 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T11:11:52Z  tick  W1111 advanced  sweep     "stack566 (W1170 paydown mypy 5616 to 5610, W1111 tombstone doc) submitted behind stack565 gating; W1169 minted for the courier reader, linux-sources told W1049 was a design note [blocked by W1168]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
