@@ -15620,20 +15620,15 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "nemik-stale SOURCE_DIR INSTALLED_DIR is built (check, main, the five registries; Codon-probed, no baseline entry) and queued as stack586; remaining after it lands: a wrapper or doc line that points it at the tree's src/nemik and the venv's installed package, and a profile or hook that runs it",
-      "evidence": "2026-10-23: 2026-10-23 overlap audit (verified): related to luthen-observability:W1235 (a timer publishes luthen_user_tool_behind_commits per tool, so a stale nemik install shows before it misleads); both detect a stale install, this one inside the tree, that one on the host. W1235 is blocked on luthen's W1285 as well, so no enables edge: a cross-cite only | 2026-10-27: landed e9f8c2d (pushed, gate green): nemik.stale.stale_modules(source_dir, installed_dir) names the stale modules; first submit refused on pathlib ruff findings. The command that runs it against the tree and the venv is still to do",
+      "next_bounded_step": "The command exists; remaining: a wrapper or profile line that points it at the tree's src/nemik and the venv's installed nemik package and runs it where a stale install would mislead (a tick hook or the setup script), with a test that a stale temp install exits 1 through it",
+      "evidence": "2026-10-23: 2026-10-23 overlap audit (verified): related to luthen-observability:W1235 (a timer publishes luthen_user_tool_behind_commits per tool, so a stale nemik install shows before it misleads); both detect a stale install, this one inside the tree, that one on the host. W1235 is blocked on luthen's W1285 as well, so no enables edge: a cross-cite only | 2026-10-27: landed e9f8c2d (pushed, gate green): nemik.stale.stale_modules(source_dir, installed_dir) names the stale modules; first submit refused on pathlib ruff findings. The command that runs it against the tree and the venv is still to do | 2026-10-27: landed b4b8a9f (pushed, gate green): nemik-stale SOURCE_DIR INSTALLED_DIR, exits 0/1/2, no argparse, no baseline entry. First submit refused by test_parity only (nemik-stale in none of parity.py's lists; reproduced locally); fixed by listing it EXCLUDED as host-private | 2026-10-27: 2026-10-27 after b4b8a9f: the built .venv holds a copy of every module (site-packages/nemik, stale.py included) but no nemik-stale console script yet (.venv/bin/nemik-stale: not found), so the venv needs bazel build //:.venv before the command runs; not built while stack587 gates (no foreground bazel beside the gate). First real reading waits on that rebuild: nemik-stale src/nemik .venv/lib/python3.13/site-packages/nemik",
       "issued_at": "2026-10-19T13:36:24Z",
       "minted_during": "tick",
       "caused_by": "nemik:W729",
-      "last_worked": "2026-10-27T22:12:32Z",
+      "last_worked": "2026-10-27T23:32:20Z",
       "ticks_blocked": 0,
       "manifest": [
-        "src/nemik/stale.py",
-        "tests/test_stale_install.py",
-        "pyproject.toml",
-        "BUILD.bazel",
-        "src/nemik/data/workflows.toml",
-        "skills/nemik/SKILL.md"
+        "tests/test_stale_install.py"
       ],
       "size_class": "small",
       "completed": null

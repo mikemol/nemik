@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from nemik.stale import STALE_EXIT, USAGE_EXIT, check, stale_modules
+from nemik.stale import STALE_EXIT, USAGE_EXIT, check, main, stale_modules
 
 
 def _tree(root: Path, files: dict[str, str]) -> Path:
@@ -45,6 +45,19 @@ def test_the_command_exits_one_and_prints_each_stale_module(
     (installed / "b.py").write_text("y = 2\n", encoding="utf-8")
     assert check([str(source), str(installed)]) == 0
     assert not capsys.readouterr().out
+
+
+def test_main_reads_the_process_command_line(
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The console script's entry takes its two directories from argv, as nemik-stale is run."""
+    source = _tree(tmp_path / "src", {"a.py": "x = 1\n"})
+    installed = _tree(tmp_path / "site", {"a.py": "old\n"})
+    monkeypatch.setattr("sys.argv", ["nemik-stale", str(source), str(installed)])
+    assert main() == STALE_EXIT
+    assert capsys.readouterr().out == "STALE a.py\n"
 
 
 def test_a_wrong_command_line_or_a_missing_directory_exits_two(
