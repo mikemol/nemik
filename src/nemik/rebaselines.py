@@ -66,6 +66,58 @@ DECLARED: list[Declared] = [
 ]
 
 
+# (repo, ratchet, requirement before, requirement after, reason): a declared reset of a stated
+# requirement, which otherwise only rises. Not a re-baseline of the value: the series is untouched.
+RESETS: list[Declared] = [
+    (
+        "nemik",
+        "mypy-baseline.json",
+        109,
+        2,
+        (
+            "109 was one window's burst read as a rate (W1158): the series since the 277 to 5747 "
+            "re-baseline held one whole earlier window, and its fall contained W1124's single "
+            "104-finding paydown; the last requirement stated before the burst was 2. Operator: "
+            "go, host 695f3e0a line 107063 (uuid aebb23cb-f48f-444b-87c2-5cb0de45796a), "
+            "nemik:W1165"
+        ),
+    ),
+    (
+        "nemik",
+        "ruff-baseline.json",
+        73,
+        4,
+        (
+            "73 was the same artefact (W1124's 47-finding paydown in a one-window mean seed, "
+            "W1158); the last requirement stated before the burst was 4. Operator: go, host "
+            "695f3e0a line 107063 (uuid aebb23cb-f48f-444b-87c2-5cb0de45796a), nemik:W1165"
+        ),
+    ),
+]
+
+
+def reset_table(owed: dict[str, int], resets: list[Declared]) -> dict[str, int]:
+    """Give the stated requirements after the declared resets.
+
+    Args:
+        owed: The requirements a source states (the previous pace file or the store's floors),
+            under the key `repo` and `ratchet` joined by a newline.
+        resets: The declared resets.
+
+    Returns:
+        A copy in which a requirement that a reset for the same repo and ratchet names exactly as
+        its old one reads as the declared new one; any other is unchanged, so a requirement raised
+        past the declared level since stands.
+
+    """
+    out = dict(owed)
+    for name, file, old, new, _ in resets:
+        key = f"{name}\n{file}"
+        if out.get(key) == old:
+            out[key] = new
+    return out
+
+
 def since(
     values: list[int], repo: str, ratchet: str, declared: list[Declared]
 ) -> list[int]:

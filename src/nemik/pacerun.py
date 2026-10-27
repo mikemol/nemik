@@ -21,7 +21,7 @@ from nemik.pacewrite import (
 )
 from nemik.ratchetpace import WINDOW
 from nemik.ratchetseries import ended_series, export_series, series_of
-from nemik.rebaselines import DECLARED, since
+from nemik.rebaselines import DECLARED, RESETS, reset_table, since
 
 ANSWER_HEAD = '{"status"'
 # the two metric names a required-fall export may hold, told apart by their __name__ label
@@ -133,7 +133,9 @@ def pace_document_floored(
         the store lists its tombstone (nemik:W1040), when it leaves the file: a retired ratchet
         has no verdict to give, and one that is still written stays judged. A series
         with a declared re-baseline (nemik:W1046) is judged from the declared step on, so the
-        step earns no paydown credit. Each row also states the ratchet's value and its horizon,
+        step earns no paydown credit. A stated requirement that a declared reset names (nemik:W1165)
+        is read as the declared new one, from the previous file and from the store's floor alike.
+        Each row also states the ratchet's value and its horizon,
         the landings to zero at the pace it last fell (nemik:W1114). An answer that holds no
         series raises ValueError, so no empty file replaces a good one.
 
@@ -175,10 +177,10 @@ def _judged(
 
     """
     try:
-        priors = priors_of(read_pace(previous)[2])
+        priors = reset_table(priors_of(read_pace(previous)[2]), RESETS)
     except ValueError:
         priors = {}
-    for key, floor in floors.items():
+    for key, floor in reset_table(floors, RESETS).items():
         priors[key] = max(priors.get(key, 0), floor)
     is_answer = answer.lstrip().startswith(ANSWER_HEAD)
     read = series_of(answer) if is_answer else export_series(answer)
