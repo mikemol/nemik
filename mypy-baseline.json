@@ -297,7 +297,7 @@
   "misc": 17
  },
  "tests/test_layout.py": {
-  "misc": 343,
+  "misc": 270,
   "no-untyped-def": 1
  },
  "tests/test_letter_resolves.py": {

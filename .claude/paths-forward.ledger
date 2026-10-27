@@ -2865,3 +2865,11 @@
 2026-10-27T15:38:23Z  status W1182 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-27T15:38:23Z  status W1181 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-27T15:42:06Z  status W1177 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T16:41:22Z  tick  W1184 minted    -         "test_layout takes the typed page route (350 mypy, the one browser test left in the baseline)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1177
+2026-10-27T16:41:36Z  tick  W1177 advanced  collapse  "W1177 survey shows every browser test except test_layout is already clean; test_layout (350) carded as W1184 with a tranche plan; stack574 (test_incremental_redraw, mypy 5544 to 5482) gating [blocked by W1184]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T16:52:15Z  status W1177 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T16:52:16Z  status W1184 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T17:10:49Z  status W1184 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T17:11:36Z  status W1184 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-27T17:16:12Z  tick  W1185 minted    -         "The hourly gauges build zoned windows, so luthen's nemik-history relay stops failing with 'names a time with no zone'"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1127
+2026-10-27T17:17:48Z  status W1185 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
