@@ -43,7 +43,9 @@ def page() -> Iterator[Page]:
             )
         except Error as error:
             pytest.skip(f"chromium unavailable: {error}")
-        yield browser.new_page(viewport=VIEWPORT)
+        opened = browser.new_page(viewport=VIEWPORT)
+        webpage.watch(opened)
+        yield opened
         browser.close()
 
 
@@ -61,7 +63,7 @@ def _parse(page: Page, address: str) -> object:
 def test_an_address_names_a_scope_path_and_a_view(server: str, page: Page) -> None:
     """Fleet, repo, umbrella and card are read from the path, the view from the query."""
     page.goto(server)
-    page.wait_for_function(READY, timeout=0)
+    webpage.until(page, READY)
     assert _parse(page, "#/beta/W3/W5?view=queue") == {
         "scope": ["beta", "W3", "W5"],
         "view": "queue",
@@ -74,7 +76,7 @@ def test_an_address_names_a_scope_path_and_a_view(server: str, page: Page) -> No
 def test_format_is_the_inverse_of_parse(server: str, page: Page) -> None:
     """Every state formats to an address that parses back to it."""
     page.goto(server)
-    page.wait_for_function(READY, timeout=0)
+    webpage.until(page, READY)
     states = [
         {"scope": [], "view": ""},
         {"scope": ["beta"], "view": "graph"},
@@ -88,7 +90,7 @@ def test_format_is_the_inverse_of_parse(server: str, page: Page) -> None:
 def test_a_malformed_address_is_no_state_at_all(server: str, page: Page) -> None:
     """A bad repo, a bad symbol, a bad view and bad escaping each give the empty state."""
     page.goto(server)
-    page.wait_for_function(READY, timeout=0)
+    webpage.until(page, READY)
     for bad in (
         "#/be ta/W3",
         "#/beta/card",
@@ -119,11 +121,11 @@ def test_the_address_picks_the_repo_and_selects_the_card(
 ) -> None:
     """Opening an address picks its repo and shows its card in the Selected panel."""
     page.goto(server)
-    page.wait_for_function(READY, timeout=0)
+    webpage.until(page, READY)
     repo, symbol, cite = _first_card(page)
     page.goto("about:blank")
     page.goto(f"{server}#/{repo}/{symbol}")
-    page.wait_for_function(READY, timeout=0)
+    webpage.until(page, READY)
     page.wait_for_function(
         "c => document.getElementById('detail').textContent.includes(c)", arg=cite
     )
@@ -136,14 +138,14 @@ def test_the_address_follows_the_pick_and_the_card_and_back_is_the_way_up(
 ) -> None:
     """A repo toggle writes #/repo, a card #/repo/W<n>, and Back returns to the repo's address."""
     page.goto(server)
-    page.wait_for_function(READY, timeout=0)
+    webpage.until(page, READY)
     repo, symbol, cite = _first_card(page)
     page.locator(f'#repos button[data-repo="{repo}"]').click()
     page.wait_for_function("h => location.hash === h", arg=f"#/{repo}")
     page.evaluate("c => focusCite(c)", cite)
     page.wait_for_function("h => location.hash === h", arg=f"#/{repo}/{symbol}")
     page.go_back()
-    page.wait_for_function(READY, timeout=0)
+    webpage.until(page, READY)
     page.wait_for_function("h => location.hash === h", arg=f"#/{repo}")
     picked: object = page.evaluate("() => [...picked]")
     assert picked == [repo]
@@ -154,7 +156,7 @@ def test_the_address_follows_the_pick_and_the_card_and_back_is_the_way_up(
 def test_opening_the_page_with_no_address_writes_none(server: str, page: Page) -> None:
     """A page opened bare stays bare: loading is not a navigation."""
     page.goto(server)
-    page.wait_for_function(READY, timeout=0)
+    webpage.until(page, READY)
     hash_now: object = page.evaluate("() => location.hash")
     assert not hash_now
 
@@ -164,6 +166,6 @@ def test_an_address_naming_nothing_the_graph_holds_is_ignored(
 ) -> None:
     """An unknown repo picks nothing and breaks nothing: every repo stays shown."""
     page.goto(f"{server}#/no-such-repo/W1")
-    page.wait_for_function(READY, timeout=0)
+    webpage.until(page, READY)
     picked: object = page.evaluate("() => [...picked]")
     assert picked == []
