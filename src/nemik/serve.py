@@ -77,9 +77,11 @@ from nemik.overlaps import overlaps
 from nemik.pacepublish import metric_lines, read_pace, readable_lines
 from nemik.pacing import limits, paces
 from nemik.queuerows import fleet_queues
+from nemik.roundcli import bindings_of
 from nemik.roundfile import ROUND_FILE
 from nemik.roundgauges import round_board
 from nemik.runlogs import runs_graph
+from nemik.stackable import manifest
 from nemik.starved import days_limit, starved_fleet
 from nemik.wake import operator_row, read_liveness, roster
 from nemik.withheldage import require_fresh
@@ -1387,6 +1389,35 @@ def ready_cards(nodes: list[dict[str, object]]) -> dict[str, int]:
     return out
 
 
+def round_bindings(
+    graph: Graph, nodes: list[dict[str, object]], landings: Path
+) -> dict[str, str]:
+    """Name the term that bounded each repo's round, for the round gauges (nemik:W1167).
+
+    Args:
+        graph: The merged queue graph, which holds each card's planned files.
+        nodes: The graph document's nodes, each with a repo, a symbol and a state.
+        landings: The landing file the round's stack sizes are read from.
+
+    Returns:
+        {repo: its binding term} by roundcli.size_for over the repo's ready and working cards, as
+        nemik-rank --round reads them; a repo with none is absent.
+
+    """
+    by_repo: dict[str, list[dict[str, object]]] = {}
+    for node in nodes:
+        repo, symbol, state = node.get("repo"), node.get("symbol"), node.get("state")
+        if (
+            state in {"ready", "working"}
+            and isinstance(repo, str)
+            and isinstance(symbol, str)
+        ):
+            by_repo.setdefault(repo, []).append(
+                {"state": state, "manifest": manifest(graph, repo, symbol)}
+            )
+    return bindings_of(by_repo, landings if landings.is_file() else None)
+
+
 def working_cards(nodes: list[dict[str, object]]) -> dict[str, list[str]]:
     """Group the cards being worked by repo, for the round gauges (nemik:W1025).
 
@@ -1481,7 +1512,12 @@ def private_files(model: Model, out: Path) -> list[Path]:
     # missing or refused file publishes nemik_round_readable at 0, never nothing
     round_path = model.root / ROUND_FILE
     round_text = round_path.read_text(encoding="utf-8") if round_path.is_file() else ""
-    round_lines = round_board(round_text, working_cards(nodes), ready_cards(nodes))
+    round_lines = round_board(
+        round_text,
+        working_cards(nodes),
+        ready_cards(nodes),
+        round_bindings(model.graph, nodes, model.root / LANDINGS_FILE),
+    )
     cost_lines = cost_gauges()
     # nemik:W1138: one series per open card, the record un-flattened, aggregated at query time
     cards = [{k: v for k, v in n.items() if isinstance(v, str)} for n in nodes]
@@ -1489,7 +1525,9 @@ def private_files(model: Model, out: Path) -> list[Path]:
         "metrics",
         model.metrics()
         + gauge.encode()
-        + "\n".join([*pace_lines, *round_lines, *cost_lines, *card_lines(cards), ""]).encode(),
+        + "\n".join(
+            [*pace_lines, *round_lines, *cost_lines, *card_lines(cards), ""]
+        ).encode(),
     )
     return made
 

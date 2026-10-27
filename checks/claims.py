@@ -192,6 +192,8 @@ def hub_modules_depend_on_everything_below():
     # by roundfile's ROUND_FILE.
     # nemik:W1138: and publishes one series per open card, through cardseries, a leaf that rests on
     # pacepublish's timestamp reader alone.
+    # nemik:W1167: and names each repo's round binding term, through roundcli.bindings_of (the
+    # round's width over the supply and the landed stacks) and stackable's manifest reader.
     expected = {
         "metrics": lower | {"realize", "runlogs", "workrows"},
         "serve": lower
@@ -214,10 +216,12 @@ def hub_modules_depend_on_everything_below():
             "letters",
             "collapse",
             "pacepublish",
+            "roundcli",
             "roundfile",
             "roundgauges",
             "buildcost",
             "cardseries",
+            "stackable",
         },
     }
     for hub, want in expected.items():

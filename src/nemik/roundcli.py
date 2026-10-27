@@ -59,6 +59,22 @@ def size_for(
     return width(stackable_of(rows), landed, source)
 
 
+def bindings_of(
+    by_repo: dict[str, list[dict[str, object]]], landings: Path | None
+) -> dict[str, str]:
+    """Name the term that bounded each repo's round (nemik:W1135, W1167).
+
+    Args:
+        by_repo: Each repo's rows, each with a state and a manifest, as size_for reads them.
+        landings: The landing file, or None.
+
+    Returns:
+        {repo: its binding term}, by size_for; empty for no repos.
+
+    """
+    return {repo: size_for(repo, rows, landings)[1] for repo, rows in by_repo.items()}
+
+
 def sizes_of(repo: str, landings: Path | None) -> list[int]:
     """Read a repo's recent landed-stack sizes from the landing file.
 
