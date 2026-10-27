@@ -5,19 +5,22 @@ by another waypoint's shape (the operator's occlusion report, nemik:W77).
 """
 
 import json
-import os
+from collections.abc import Iterator
 from pathlib import Path
 
 import pytest
-from webpage import served
+import webpage
+from playwright.sync_api import sync_playwright
 
-sync_api = pytest.importorskip("playwright.sync_api")
+VIEWPORT = (1400, 900)
+LOADED = "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0"
+NODES = 65
 
 
 def _queue(root: Path, repo: str, n: int) -> None:
     d = root / repo / ".claude"
     d.mkdir(parents=True)
-    wps = [
+    wps: list[dict[str, object]] = [
         {
             "symbol": f"W{i}",
             "title": f"item {i}",
@@ -28,26 +31,23 @@ def _queue(root: Path, repo: str, n: int) -> None:
         }
         for i in range(1, n + 1)
     ]
-    (d / "paths-forward.json").write_text(
-        json.dumps(
-            {
-                "version": 1,
-                "project_root": str(root / repo),
-                "counter": n,
-                "waypoints": wps,
-                "residue": [],
-            }
-        )
-    )
+    body: dict[str, object] = {
+        "version": 1,
+        "project_root": str(root / repo),
+        "counter": n,
+        "waypoints": wps,
+        "residue": [],
+    }
+    (d / "paths-forward.json").write_text(json.dumps(body))
 
 
 @pytest.fixture
-def server(tmp_path):
+def server(tmp_path: Path) -> Iterator[str]:
     _queue(tmp_path, "alpha", 40)
     _queue(tmp_path, "beta", 25)
     # nemik:W1060: the server binds its own port and says so (webpage.served), and a server that
     # dies before it listens fails here with its stderr, not after a wait for a clock.
-    with served(root=tmp_path) as url:
+    with webpage.served(root=tmp_path) as url:
         yield url
 
 
@@ -77,30 +77,18 @@ BOXES = """() => {
 }"""
 
 
-def test_labels_are_not_covered_by_other_nodes(server) -> None:
-    with sync_api.sync_playwright() as p:
-        try:
-            # nemik:W99: Bazel hands a pinned headless shell as $NEMIK_CHROMIUM; the host uses Playwright's cache.
-            exe = os.environ.get("NEMIK_CHROMIUM")
-            browser = p.chromium.launch(
-                executable_path=os.path.abspath(exe) if exe else None
-            )
-        except sync_api.Error as e:
-            pytest.skip(f"chromium unavailable: {e}")
-        page = browser.new_page(viewport={"width": 1400, "height": 900})
+def test_labels_are_not_covered_by_other_nodes(server: str) -> None:
+    with sync_playwright() as p:
+        # nemik:W99: Bazel hands a pinned headless shell as $NEMIK_CHROMIUM; launched_page uses it.
+        # nemik:W1177: the wait is webpage.load's, bounded and watching the page, not timeout=0.
+        browser, page = webpage.launched_page(p, server, LOADED, VIEWPORT)
         errors: list[str] = []
         page.on("pageerror", lambda e: errors.append(str(e)))
-        page.goto(server)
-        page.wait_for_function(
-            "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=0,
-        )
-        count, overlaps = page.evaluate(OVERLAPS)
-        boxes = page.evaluate(BOXES)
+        overlaps = webpage.evaluate_value(page, OVERLAPS)
+        boxes = webpage.evaluate_value(page, BOXES)
         browser.close()
     assert errors == []
-    assert count == 65
-    assert overlaps == []
+    assert overlaps == [NODES, []]  # every node drawn, and no label under another node
     assert (
         boxes == []
     )  # nemik:W117: rows offset toward their neighbours must not overlap

@@ -1222,14 +1222,10 @@
   "E501": 1
  },
  "tests/test_web_render.py": {
-  "ANN001": 2,
-  "ANN201": 1,
   "D103": 2,
   "D205": 1,
-  "E501": 2,
-  "PLR2004": 1,
-  "PT001": 1,
-  "PTH100": 1
+  "E501": 1,
+  "PT001": 1
  },
  "tests/test_withheld.py": {
   "ANN001": 10,

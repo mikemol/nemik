@@ -456,8 +456,7 @@
   "no-untyped-def": 2
  },
  "tests/test_web_render.py": {
-  "misc": 24,
-  "no-untyped-def": 2
+  "misc": 2
  },
  "tests/test_withheld.py": {
   "misc": 75,

@@ -207,7 +207,10 @@ def open_page(
 
 
 def launched_page(
-    p: Launcher, url: str, wait: str = CY_READY
+    p: Launcher,
+    url: str,
+    wait: str = CY_READY,
+    viewport: tuple[int, int] = (1700, 1250),
 ) -> tuple[LaunchedBrowser, LaunchedPage]:
     """Launch Chromium with the library's own types and open `url` once `wait` holds (nemik:W1177).
 
@@ -226,7 +229,7 @@ def launched_page(
         )
     except PlaywrightError as e:
         pytest.skip(f"chromium unavailable: {e}")
-    page = browser.new_page(viewport={"width": 1700, "height": 1250})
+    page = browser.new_page(viewport={"width": viewport[0], "height": viewport[1]})
     load(page, url, wait)
     return browser, page
 
