@@ -75,8 +75,10 @@ def declared_base(name: str, root: Path) -> str | None:
         return None
     if done.returncode != 0 or not isinstance(answer, dict):
         return None
-    address = answer.get("address")
-    if answer.get("state") != "answered" or not address:
+    address, state = answer.get("address"), answer.get("state")
+    if not isinstance(state, str) or state != "answered":
+        return None
+    if not isinstance(address, str) or not address:
         return None
     return f"http://{address}"
 

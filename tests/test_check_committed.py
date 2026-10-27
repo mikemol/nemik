@@ -36,7 +36,8 @@ def _repo(root: Path, name: str, *, dirty: bool) -> None:
     for args in (["init", "-q"], ["add", "-A"], ["commit", "-q", "-m", "q"]):
         subprocess.run(["git", "-C", str(repo), *args], check=True, env=env)
     if dirty:
-        path.write_text(json.dumps({**QUEUE, "counter": 2}))
+        changed: dict[str, object] = {**QUEUE, "counter": 2}
+        path.write_text(json.dumps(changed))
 
 
 def _exit(root: Path, *repos: str) -> int:
