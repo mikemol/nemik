@@ -35,6 +35,7 @@ from nemik.climate import (
 )
 from nemik.forecastshingle import HORIZONS, issue_blocked, issue_in_line, shingle_rows
 from nemik.histdocs import encode, file_name
+from nemik.netforecast import replay_row
 from nemik.verify import lead_report, score_shingle, shingle_pairs
 from nemik.wake import read_liveness
 from nemik.where import matches, parse
@@ -1085,6 +1086,15 @@ def main(argv: list[str] | None = None) -> int:
         f"{ROW_LINES} lines (W1147)",
     )
     ap.add_argument(
+        "--replay",
+        default="",
+        metavar="AT",
+        help="with --baseline=-45m (the window's length): replay the window ending at AT (a zoned "
+        "time) from committed history. Prints what was predicted for it from the days before, "
+        "what it netted, the shortfall, and an alert when the shortfall passes what the ten "
+        "windows before it make normal (W1145)",
+    )
+    ap.add_argument(
         "--where",
         default="",
         metavar="EXPRESSION",
@@ -1520,6 +1530,7 @@ class Opts(argparse.Namespace):
     baseline: str | None
     compact: bool
     by_cause: bool
+    replay: str
 
 
 def emit(args: Opts, mode: str, rows: object) -> bool:
@@ -1974,6 +1985,117 @@ def _counts_for(repo: Path, spec: str) -> Counts | None:
     return burn_counts(base, live_queue(repo, now), since)
 
 
+# the days before the earliest past window that a replayed prediction is made from
+REPLAY_DAYS = 7
+# the earlier windows a replayed alert's baseline is learned from
+REPLAY_WINDOWS = 10
+
+
+def window_minutes(spec: str) -> int:
+    """Read a window written back from now (`-45m`, `ago:2h`) as minutes.
+
+    Returns:
+        Its length in minutes.
+
+    Raises:
+        ValueError: When `spec` is not such a window.
+
+    """
+    relative = _RELATIVE.fullmatch(spec)
+    if relative is None:
+        message = f"{spec} is not a window such as -45m or ago:2h"
+        raise ValueError(message)
+    return int(relative.group(1)) * _SECONDS[relative.group(2)] // 60
+
+
+def _net_between(
+    names: list[str], dirs: dict[str, Path], start: datetime, end: datetime
+) -> int:
+    """Count the fleet's net over a past window from the queues as committed then (W1145).
+
+    Returns:
+        Closed plus dropped less added, summed over the repos.
+
+    """
+    total = 0
+    for name in names:
+        repo = dirs[name]
+        stamp = "%Y-%m-%dT%H:%M:%SZ"
+        base = queue_at(repo, resolve(repo, start.astimezone(UTC).strftime(stamp)))
+        now = queue_at(repo, resolve(repo, end.astimezone(UTC).strftime(stamp)))
+        closed, dropped, added, _ = burn_counts(base, now, start)
+        total += closed + dropped - added
+    return total
+
+
+def replay_text(
+    window: str, at_spec: str, names: list[str], dirs: dict[str, Path]
+) -> str:
+    """Replay a past window: what was predicted for it, what happened, and any alert (W1145).
+
+    The prediction is the mean daily net of the REPLAY_DAYS before the earliest of the
+    REPLAY_WINDOWS earlier windows, so it looks ahead of none; the baseline is those windows'
+    own shortfalls. Only committed history is replayed: a card that was never committed
+    cannot be seen at a past instant.
+
+    Args:
+        window: The window's length written back from now (`-45m`).
+        at_spec: The instant the window ends, with its zone.
+        names: The repos to count.
+        dirs: Each repo's directory.
+
+    Returns:
+        The replay line, and the alert beneath it when there is one.
+
+    Raises:
+        ValueError: When `window` is not a window, `at_spec` names no zone, or the history is
+            too short to predict or to learn a baseline.
+
+    """
+    minutes = window_minutes(window)
+    if not _ZONED.fullmatch(at_spec):
+        message = f"{at_spec} names no zone: write it as 2026-10-27T03:13:00Z"
+        raise ValueError(message)
+    end = datetime.fromisoformat(at_spec.replace(" ", "T"))
+    step = minutes * 60
+    edges = [
+        datetime.fromtimestamp(end.timestamp() - step * k, UTC)
+        for k in range(REPLAY_WINDOWS + 2)
+    ]
+    realized = _net_between(names, dirs, edges[1], edges[0])
+    past = [
+        _net_between(names, dirs, edges[k + 1], edges[k])
+        for k in range(1, REPLAY_WINDOWS + 1)
+    ]
+    first = edges[-1].timestamp()
+    daily = [
+        _net_between(
+            names,
+            dirs,
+            datetime.fromtimestamp(first - 86400 * (d + 1), UTC),
+            datetime.fromtimestamp(first - 86400 * d, UTC),
+        )
+        for d in range(REPLAY_DAYS)
+    ]
+    return replay_row(daily, minutes, past, realized)
+
+
+def _replay(window: str, at_spec: str, names: list[str], dirs: dict[str, Path]) -> int:
+    """Print a replayed window (W1145).
+
+    Returns:
+        0; 2 with the reason on stderr when it cannot be replayed.
+
+    """
+    try:
+        text = replay_text(window, at_spec, names, dirs)
+    except ValueError as error:
+        sys.stderr.write(f"nemik-history: --replay: {error}\n")
+        return 2
+    sys.stdout.write(text + "\n")
+    return 0
+
+
 def _by_cause(baseline: str, names: list[str], dirs: dict[str, Path]) -> int:
     """Print the fleet's adds split by what caused them, in at most ROW_LINES lines (W1147).
 
@@ -2006,6 +2128,8 @@ def _baselined(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
         The mode's exit status.
 
     """
+    if args.replay and args.baseline:
+        return _replay(args.baseline, args.replay, names, dirs)
     if args.by_cause and args.baseline is not None:
         return _by_cause(args.baseline, names, dirs)
     if args.compact and args.baseline is not None:
