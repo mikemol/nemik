@@ -27,7 +27,7 @@ def test_the_ready_cards_are_counted_by_repo_and_published_beside_the_round() ->
     assert ready_cards(nodes) == {"a": 2}
     assert ready_lines({"a": 2}) == READY
     assert ready_lines({}) == []
-    assert round_board("", {}, {"a": 2}) == [*UNREADABLE, *READY]
+    assert round_board("", {}, {"a": 2}, {}) == [*UNREADABLE, *READY]
 
 
 def test_the_recorded_round_reads_as_each_repos_symbols_in_rank_order() -> None:
@@ -66,7 +66,8 @@ def test_a_file_without_a_stamp_is_refused() -> None:
 
 def test_the_board_of_a_readable_round_dates_it_by_its_own_stamp() -> None:
     """Readable 1, the round's gauges, and as_of in seconds read from the file's head."""
-    lines = round_board(RECORDED.read_text(encoding="utf-8"), {"alpha": ["W5"]})
+    text = RECORDED.read_text(encoding="utf-8")
+    lines = round_board(text, {"alpha": ["W5"]}, {}, {})
     assert lines[:2] == ["# TYPE nemik_round_readable gauge", "nemik_round_readable 1"]
     assert f"nemik_round_as_of {epoch_seconds('2026-10-25T09:00:00Z')}" in lines
     assert 'nemik_round_drift{repo="alpha"} 0' in lines
@@ -74,8 +75,8 @@ def test_the_board_of_a_readable_round_dates_it_by_its_own_stamp() -> None:
 
 def test_a_missing_or_refused_round_file_says_so_and_guesses_nothing() -> None:
     """Empty text and text with no stamp both publish readable 0 alone, never no gauge."""
-    assert round_board("", {"alpha": ["W5"]}) == UNREADABLE
-    assert round_board("not a round\n", {}) == UNREADABLE
+    assert round_board("", {"alpha": ["W5"]}, {}, {}) == UNREADABLE
+    assert round_board("not a round\n", {}, {}, {}) == UNREADABLE
 
 
 def test_the_working_cards_are_grouped_by_repo() -> None:

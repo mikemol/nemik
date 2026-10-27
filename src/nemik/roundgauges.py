@@ -127,8 +127,8 @@ def binding_lines(binding: dict[str, str]) -> list[str]:
 def round_board(
     text: str,
     working: dict[str, list[str]],
-    ready: dict[str, int] | None = None,
-    binding: dict[str, str] | None = None,
+    ready: dict[str, int],
+    binding: dict[str, str],
 ) -> list[str]:
     """Write every round gauge, and say whether the round file could be read at all (nemik:W1025).
 
@@ -140,16 +140,15 @@ def round_board(
     Args:
         text: The round file's text, empty when there is none.
         working: Each repo's cards being worked, as symbols.
-        ready: Each repo's count of ready cards; none when not given.
-        binding: Each repo's binding term; none when not given.
+        ready: Each repo's count of ready cards; empty when it has none.
+        binding: Each repo's binding term; empty when none is stated.
 
     Returns:
         The readable gauge at 1 then the round gauges, or the readable gauge at 0 alone, then
         the ready gauge and the binding gauge.
 
     """
-    ready = ready or {}
-    terms = binding_lines(binding or {})
+    terms = binding_lines(binding)
     try:
         seconds = epoch_seconds(read_round(text)[0])
     except ValueError:

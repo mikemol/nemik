@@ -20,8 +20,8 @@ def test_each_repo_states_the_term_that_bounded_its_round_sorted_by_repo() -> No
 
 def test_the_binding_is_published_even_when_the_round_file_cannot_be_read() -> None:
     """The terms come from the graph, not the file, like the ready counts."""
-    assert round_board("", {}, None, {"b": "landings", "a": "supply"}) == [
+    assert round_board("", {}, {}, {"b": "landings", "a": "supply"}) == [
         *UNREADABLE,
         *BOUND,
     ]
-    assert round_board("", {}) == UNREADABLE
+    assert round_board("", {}, {}, {}) == UNREADABLE

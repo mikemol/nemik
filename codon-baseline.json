@@ -199,10 +199,6 @@
   "as_written": "unsupported operand type(s) for |: 'type[Path]' and 'Optional[T.8]'",
   "stripped": "unsupported operand type(s) for |: 'type[Path]' and 'Optional[T.8]'"
  },
- "roundgauges": {
-  "as_written": "unsupported operand type(s) for |: 'type[OrderedDict[str,int]]' and 'Optional[T.8]'",
-  "stripped": "unsupported operand type(s) for |: 'type[OrderedDict[str,int]]' and 'Optional[T.8]'"
- },
  "runlogs": {
   "as_written": "no module named 'rdflib'",
   "stripped": "no module named 'rdflib'"
