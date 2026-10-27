@@ -90,6 +90,11 @@ def _dict(value: object) -> dict[str, object]:
     return {str(k): v for k, v in value.items()} if isinstance(value, dict) else {}
 
 
+def _loads(text: str) -> object:
+    value: object = json.loads(text)
+    return value
+
+
 def _list(value: object) -> list[object]:
     return value if isinstance(value, list) else []
 
@@ -187,7 +192,7 @@ def load(root: Path, *, run_exporter: bool = True) -> HostApply | None:
     path = root / EXPORT
     try:
         if path.exists():
-            return parse(json.loads(path.read_text(encoding="utf-8")))
+            return parse(_loads(path.read_text(encoding="utf-8")))
         luthen = root / LUTHEN
         python = luthen / ".venv" / "bin" / "python"
         if run_exporter and python.exists():
@@ -199,7 +204,7 @@ def load(root: Path, *, run_exporter: bool = True) -> HostApply | None:
                 check=True,
                 timeout=EXPORTER_TIMEOUT_S,
             )
-            return parse(json.loads(done.stdout))
+            return parse(_loads(done.stdout))
     except (OSError, json.JSONDecodeError, subprocess.SubprocessError) as exc:
         msg = f"host-apply export unreadable: {exc}"
         raise ValueError(msg) from exc

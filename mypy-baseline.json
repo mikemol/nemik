@@ -66,9 +66,6 @@
   "misc": 167,
   "type-arg": 8
  },
- "src/nemik/hostapply.py": {
-  "misc": 2
- },
  "src/nemik/importer.py": {
   "misc": 11
  },
