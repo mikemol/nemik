@@ -68,6 +68,7 @@ from nemik.check import (
     QUEUE,
     Finding,
     default_root,
+    ready_neither,
     survey,
     workstream_files,
 )
@@ -75,6 +76,32 @@ from nemik.realize import verdicts
 from nemik.runlogs import unmigrated_at_source
 from nemik.wake import read_liveness, roster
 from nemik.workrows import open_leaf_stamps, tick_kinds, working_rows
+
+
+def ready_stale_lines(root: Path, now: datetime) -> list[str]:
+    """nemik:W489, github:R28: per repo, the ready cards untouched past the learned bound.
+
+    The count `nemik-check --ready-neither` lists for each repo, as a series luthen can alert on
+    (stale ready cards with the watchdog armed and no landings). The bound is learned from the
+    finished small cards, so a fleet that has not finished ten yields no sample at all: an unknown
+    bound is never read as a zero.
+
+    Args:
+        root: The fleet root.
+        now: The instant the cards are aged against.
+
+    Returns:
+        The gauge's TYPE line and a sample for every queue-bearing repo, 0 where none is late.
+
+    """
+    stamp_now = now.astimezone(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
+    bound, late = ready_neither(root, stamp_now)
+    out = ["# TYPE nemik_ready_stale gauge"]
+    if bound < 0:
+        return out
+    for repo, _ in workstream_files(root, QUEUE):
+        out.append(f"nemik_ready_stale{label(repo=repo)} {len(late.get(repo, []))}")
+    return out
 
 
 def open_leaf_lines(root: Path, now: datetime) -> list[str]:
@@ -179,6 +206,7 @@ HELP = {
     "nemik_unforecastable_cards": "Working cards with no children, so no forecast can be made.",
     "nemik_cards_reopened_24h": "Cards that went from done back to open in the last 24 hours.",
     "nemik_manifest_drift": "Done cards whose commits touched files outside their manifest.",
+    "nemik_ready_stale": "Ready cards untouched past how long 9 in 10 small cards take to finish.",
     "nemik_run_log_unmigrated": "Source run-log lines that predate the run-row shape, by stream.",
 }
 
@@ -752,6 +780,7 @@ GRAPH_FREE = frozenset(
         "nemik_cards_completed_24h",
         "nemik_commits_24h",
         "nemik_cards_reopened_24h",
+        "nemik_ready_stale",
         *REALIZABILITY,
     }
 )
@@ -943,6 +972,7 @@ def main(argv: list[str] | None = None) -> None:
         (("nemik_repo_tier",), lambda: tier_lines(merged)),
         (("nemik_cards_arrived_24h",), lambda: arrival_lines(merged, now)),
         (("nemik_run_log_unmigrated",), lambda: run_log_lines(args.runs)),
+        (("nemik_ready_stale",), lambda: ready_stale_lines(args.root, now)),
         (HISTORY_FAMILIES, lambda: history_lines(args.root, merged, now, asking)),
         (REALIZABILITY, lambda: realizability_lines(args.root)),
         (("nemik_prompts_total", "nemik_turns_total"), lambda: spool_lines(args.spool)),
