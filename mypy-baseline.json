@@ -176,11 +176,6 @@
  "tests/fixtures/make_fleet.py": {
   "misc": 30
  },
- "tests/installed.py": {
-  "misc": 1,
-  "no-untyped-def": 1,
-  "type-arg": 1
- },
  "tests/test_alarm.py": {
   "misc": 17,
   "no-untyped-def": 1

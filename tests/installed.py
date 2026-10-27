@@ -43,8 +43,12 @@ def run(
     )
 
 
-def popen(name: str, *args: str, **kw) -> subprocess.Popen:
-    return subprocess.Popen([*script(name), *args], env=_bin()[1], **kw)
+def popen(
+    name: str, *args: str, stdout: int | None = None, stderr: int | None = None
+) -> subprocess.Popen[bytes]:
+    return subprocess.Popen(
+        [*script(name), *args], env=_bin()[1], stdout=stdout, stderr=stderr
+    )
 
 
 def announced(name: str, *args: str) -> list[str]:
