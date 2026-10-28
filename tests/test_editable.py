@@ -8,10 +8,10 @@ import nemik
 
 
 class _Dist:
-    def __init__(self, text):
+    def __init__(self, text: str) -> None:
         self.text = text
 
-    def read_text(self, name):
+    def read_text(self, name: str) -> str:
         assert name == "direct_url.json"
         return self.text
 

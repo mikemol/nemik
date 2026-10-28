@@ -215,9 +215,7 @@
   "misc": 83
  },
  "tests/test_editable.py": {
-  "misc": 8,
-  "no-untyped-call": 1,
-  "no-untyped-def": 2
+  "misc": 5
  },
  "tests/test_flow_cache.py": {
   "attr-defined": 1,
@@ -372,8 +370,8 @@
   "misc": 1
  },
  "tests/test_withheld.py": {
-  "misc": 62,
-  "no-untyped-def": 4
+  "misc": 59,
+  "no-untyped-def": 2
  },
  "tests/test_witness_promql.py": {
   "explicit-any": 2,

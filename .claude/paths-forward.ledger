@@ -3034,3 +3034,15 @@
 2026-10-28T16:19:47Z  status W1225 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-28T16:26:36Z  tick  W1228 advanced  mechanize "mypy paydown: nine test files typed, 4221 to 4126, queued as stack623 behind 621 and 622; W1225 measured (E501 on comment and docstring lines 269 of 328, no liftable D103 text) [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-28T16:28:42Z  interrupt W1229 minted    -         "A repair of a rejected file in a stacked round uses the predecessor stack's frozen files as its base, in a scratch worktree, not git's HEAD"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1228
+2026-10-28T16:33:33Z  status W1223 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T16:34:29Z  status W1219 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T16:34:31Z  status W1220 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T16:34:32Z  status W1224 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T16:34:33Z  status W1229 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T16:39:29Z  interrupt W1230 minted    -         "mypy paydown: the untyped definitions and unannotated variables are annotated, so mypy falls below the baseline the pace owes (paydown)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1196
+2026-10-28T16:39:36Z  status W1230 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T16:53:18Z  tick  W1230 advanced  mechanize "mypy hand-annotation measured: sure-typed sites gave mypy -11, ruff -6 (stack624 queued behind 622 and 623); the rest need callers' types or the W1176 TOML accessor; Codon census passes [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T16:55:34Z  interrupt W1231 minted    -         "Bring the open operator asks to the cap of 10: merge, retire or answer from evidence each of the 11"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W904
+2026-10-28T17:09:28Z  status W1231 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T17:14:59Z  status W1231 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T17:15:00Z  tick  W1231 advanced  mechanize "ask cap: the K=3 merges audited and rejected (distinct questions), the 11 asks batched into one numbered note on W1231; stacks 622 to 624 still gating [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

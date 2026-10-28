@@ -15,7 +15,7 @@ FLEET = Path(__file__).parent / "fixtures" / "fleet"
 
 
 @pytest.fixture(scope="module")
-def docs():
+def docs() -> dict[str, object]:
     return static_data(Model(FLEET))
 
 
@@ -37,7 +37,7 @@ def test_unknown_version_fails(tmp_path: Path) -> None:
         load(_write(tmp_path, {"version": 2, "items": []}))
 
 
-def test_empty_list_withholds_nothing(tmp_path: Path, docs) -> None:
+def test_empty_list_withholds_nothing(tmp_path: Path, docs: dict[str, object]) -> None:
     assert (
         apply(docs, load(_write(tmp_path, {"version": 1, "as_of": "x", "items": []})))
         == docs
