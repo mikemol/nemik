@@ -43,7 +43,7 @@ def opted_in(path: Path) -> set[str]:
     """Repos whose asks may be projected. A missing file opts nobody in; "*" opts every repo in."""
     if not path.exists():
         return set()
-    repos = set(tomllib.loads(path.read_text()).get("repos", []))
+    repos = set(tomllib.loads(path.read_text(encoding="utf-8")).get("repos", []))
     return _Every() if "*" in repos else repos
 
 

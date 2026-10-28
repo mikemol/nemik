@@ -81,7 +81,9 @@ def installed(receipt: Path) -> str | None:
     import tomllib
 
     for req in (
-        tomllib.loads(receipt.read_text()).get("tool", {}).get("requirements", [])
+        tomllib.loads(receipt.read_text(encoding="utf-8"))
+        .get("tool", {})
+        .get("requirements", [])
     ):
         if req.get("name") == "nemik" and (m := _REV.search(str(req.get("git", "")))):
             return m[1]

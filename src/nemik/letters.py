@@ -47,7 +47,7 @@ def _today() -> date:
 
 
 def _first_line(path: Path) -> str:
-    text = path.read_text(errors="replace").splitlines()
+    text = path.read_text(encoding="utf-8", errors="replace").splitlines()
     return next((ln.strip() for ln in text if ln.strip()), "")
 
 
@@ -81,7 +81,7 @@ def misdelivered(letters: list[Letter], workstreams: set[str]) -> list[str]:
 
 def _load(path: Path) -> dict:
     try:
-        data = json.loads(path.read_text())
+        data = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
         return {}
     return data if isinstance(data, dict) else {}
@@ -118,7 +118,7 @@ def answered(repo: str, path: Path, queue: dict) -> bool:
     """
     own = {
         f"W{m[2]}"
-        for m in _REF.finditer(path.read_text(errors="replace"))
+        for m in _REF.finditer(path.read_text(encoding="utf-8", errors="replace"))
         if m[1] == repo
     }
     return bool(own) and own <= _closed(queue)

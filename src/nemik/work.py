@@ -20,7 +20,7 @@ from pathlib import Path
 
 def working(state: Path) -> list[str]:
     """The symbols of the cards currently working, read from the queue file."""
-    data = json.loads(state.read_text())
+    data = json.loads(state.read_text(encoding="utf-8"))
     return [
         w["symbol"] for w in data.get("waypoints", []) if w.get("status") == "working"
     ]
@@ -33,7 +33,7 @@ def blockers(state: Path, symbol: str) -> tuple[list[str], list[str]]:
     still open, another repo's card, free text) is open: this tool cannot see another repo's state,
     so it does not guess.
     """
-    data = json.loads(state.read_text())
+    data = json.loads(state.read_text(encoding="utf-8"))
     cards = {w["symbol"]: w for w in data.get("waypoints", [])}
     dropped = {r["symbol"] for r in data.get("residue", [])}
     entries = cards.get(symbol, {}).get("blocked_on") or []

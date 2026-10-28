@@ -37,7 +37,9 @@ def test_every_flag_the_page_gives_a_command_is_one_it_takes() -> None:
     }
     for command, flag in re.findall(r"`(nemik-[a-z-]+)[^`]*?(--[a-z-]+)", DOC):
         if command in parsers:
-            source = Path(parsers[command].__code__.co_filename).read_text()
+            source = Path(parsers[command].__code__.co_filename).read_text(
+                encoding="utf-8"
+            )
             assert f'"{flag}"' in source, f"{command} takes no {flag}"
 
 

@@ -19,7 +19,7 @@ def test_apply_calls_the_queue_writer_with_the_rows(
 
     def fake_run(cmd: list[str], check: bool) -> subprocess.CompletedProcess[str]:
         seen["cmd"] = cmd
-        seen["rows"] = json.loads(Path(cmd[-1]).read_text())
+        seen["rows"] = json.loads(Path(cmd[-1]).read_text(encoding="utf-8"))
         return subprocess.CompletedProcess(cmd, 0)
 
     monkeypatch.setattr(subprocess, "run", fake_run)

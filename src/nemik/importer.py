@@ -27,7 +27,7 @@ from nemik.projection import Task
 
 
 def _read(fmt: str, path: Path) -> list[Task]:
-    text = path.read_text()
+    text = path.read_text(encoding="utf-8")
     if fmt == "mspdi":
         from nemik.mspdi import read
 
@@ -41,7 +41,7 @@ def commands(
     tasks: list[Task], fmt: str, source: str, state: Path, writer: str
 ) -> list[list[str]]:
     """List the writer's argv lists that add `tasks` to the queue at `state`, then link them."""
-    queue = json.loads(state.read_text())
+    queue = json.loads(state.read_text(encoding="utf-8"))
     cards = queue.get("waypoints", [])
     existing = {
         str(c.get("caused_by")): c["symbol"] for c in cards if c.get("caused_by")

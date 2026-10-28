@@ -43,7 +43,7 @@ def read_liveness(root: Path, source: str | None) -> tuple[dict, str]:
         if source == "-":
             return json.load(sys.stdin)["repos"], "stdin"
         if source:
-            return json.loads(Path(source).read_text())["repos"], source
+            return json.loads(Path(source).read_text(encoding="utf-8"))["repos"], source
         export = root / "liveness.json"
         if export.exists():
             return json.loads(export.read_text())["repos"], str(export)
@@ -282,14 +282,14 @@ def due_nudges(rows: list[dict], seen: dict, now: datetime | None = None) -> lis
 
 def _read_seen(path: Path) -> dict:
     try:
-        return json.loads(path.read_text())
+        return json.loads(path.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return {}
 
 
 def _write_seen(path: Path, seen: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(seen, sort_keys=True))
+    path.write_text(json.dumps(seen, sort_keys=True), encoding="utf-8")
 
 
 def alarm_key(a: dict) -> str:

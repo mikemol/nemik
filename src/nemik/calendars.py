@@ -63,7 +63,7 @@ def load_calendars(path: Path = DEFAULT_CONFIG) -> dict[str, Calendar]:
 
     if not path.exists():
         return {}
-    cals = tomllib.loads(path.read_text()).get("calendars", {})
+    cals = tomllib.loads(path.read_text(encoding="utf-8")).get("calendars", {})
     if not isinstance(cals, dict):
         raise TypeError(
             f'{path}: [calendars] must be a table of label = "collection name"'

@@ -23,7 +23,13 @@ def _counting(monkeypatch: pytest.MonkeyPatch) -> dict[str, int]:
     def build(repo: str, path: Path, known: frozenset[str]) -> Graph:
         calls["n"] += 1
         g = Graph()
-        g.add((URIRef(f"urn:{repo}"), URIRef("urn:p"), Literal(path.read_text())))
+        g.add(
+            (
+                URIRef(f"urn:{repo}"),
+                URIRef("urn:p"),
+                Literal(path.read_text(encoding="utf-8")),
+            )
+        )
         return g
 
     monkeypatch.setattr(adapter, "_queue_graph", build)

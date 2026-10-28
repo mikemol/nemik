@@ -885,7 +885,9 @@ def _apply(state: str, rows: list[dict]) -> None:
     from pathlib import Path
 
     pf = Path(sys.executable).parent / "mikemol-paths-forward"
-    with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as f:
+    with tempfile.NamedTemporaryFile(
+        "w", encoding="utf-8", suffix=".json", delete=False
+    ) as f:
         json.dump(rows, f)
     try:
         done = subprocess.run(
