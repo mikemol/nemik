@@ -3,25 +3,26 @@
 """nemik:W238: demand flows from the cards that need something to the ready frontier, conserved.
 
 The model is gcalculus's (gcalculus:W208, `scripts/flow_reference.py`, b9196cf; design note
-W228-realizability-read-side.md): for each demand source x, a NODAL solve on x's prerequisite closure
-(x and everything it transitively needs), with the ready cards at potential 0 and the demand injected
-at x. The current into each ready card is x's salience there; summed over sources it is the card's
-salience, and per source it is the fibre a mark keeps.
+W228-realizability-read-side.md): for each demand source x, a NODAL solve on x's prerequisite
+closure (x and everything it transitively needs), with the ready cards at potential 0 and the demand
+injected at x. The current into each ready card is x's salience there; summed over sources it is the
+card's salience, and per source it is the fibre a mark keeps.
 
 Why a cone and why a nodal solve:
 - Direction is the queue's own. Outside x's cone a coupling is a leak (a card x does not need would
-  receive some of x's demand); inside it the coupling is real, the resource sensitivity: branches that
-  share a prerequisite compete for its capacity.
+  receive some of x's demand); inside it the coupling is real, the resource sensitivity: branches
+  that share a prerequisite compete for its capacity.
 - A series-parallel fold (parallel of series over the prerequisites) is the idempotent mistake: it
   counts a shared prerequisite once per branch. The nodal solve counts it once.
-- The operator's conjunctive-split ruling needs no rule fixed in advance: the solve divides x's demand
+- The operator's conjunctive-split ruling needs no rule fixed in advance: the solve divides x's
+demand
   among its prerequisites, and divides it again when one lands and leaves `needs`.
 
 The solve is exact sparse elimination (star-mesh, lowest degree first): the grounded Laplacian of a
-cone is symmetric and positive definite, so no pivoting is needed, and the cones are nearly trees, so
-the fill-in stays small (nemik:W250; the dense Gauss-Jordan it replaced cost 11 s over the fleet).
-All arithmetic is exact `Fraction`, so the answer does not depend on the elimination order, and every
-iteration is sorted (nemik:W119). Demand conserved is checked on every source.
+cone is symmetric and positive definite, so no pivoting is needed, and the cones are nearly trees,
+so the fill-in stays small (nemik:W250; the dense Gauss-Jordan it replaced cost 11 s over the
+fleet). All arithmetic is exact `Fraction`, so the answer does not depend on the elimination order,
+and every iteration is sorted (nemik:W119). Demand conserved is checked on every source.
 """
 
 from __future__ import annotations
@@ -44,8 +45,8 @@ class Flow:
 
     `salience` is the demand each ready card absorbs, summed over sources; `fibre[card][source]` is
     the part that came from each source; `stranded` is the demand of a source with no ready card in
-    its cone; `potential[source]` is the potential at the source for its injected demand, whose ratio
-    to the demand is the effective resistance from the source to the frontier. `current[(card,
+    its cone; `potential[source]` is the potential at the source for its injected demand, whose
+    ratio to the demand is the effective resistance from the source to the frontier. `current[(card,
     prerequisite)]` is the demand that crossed that dependency, summed over sources (nemik:W264).
     """
 
@@ -168,9 +169,10 @@ def solve(
     """
     front = set(frontier)
     prereq = {c: sorted(set(ps)) for c, ps in needs.items() if c not in front}
-    # nemik:W401: the answer depends only on the demand and on what lies inside the sources' cones, so
-    # that, canonicalised, is the cache key. A change anywhere else in the fleet leaves this solve's key
-    # unchanged and it is answered from the cache across rebuilds; exact, since the inputs are equal.
+    # nemik:W401: the answer depends only on the demand and on what lies inside the sources' cones,
+    # so that, canonicalised, is the cache key. A change anywhere else in the fleet leaves this
+    # solve's key unchanged and it is answered from the cache across rebuilds; exact, since the
+    # inputs are equal.
     reach: set[str] = set()
     for source in demand:
         if source not in front:
@@ -193,7 +195,8 @@ def solve(
     return result
 
 
-# The most recent solves by input; enough for every repo's two grounds in a fleet several times over.
+# The most recent solves by input; enough for every repo's two grounds in a fleet several times
+# over.
 _SOLVES: OrderedDict[tuple, Flow] = OrderedDict()
 _SOLVES_MAX = 512
 

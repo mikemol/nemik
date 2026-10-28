@@ -2,9 +2,10 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W413: nemik's cards as tasks with predecessor links, the one mapping every export reuses.
 
-Every tool the integration survey ranks (docs/integration-survey.md) reads the same structure: tasks,
-and links saying one task cannot finish before another. MS Project XML writes it as PredecessorLink
-(Type 1, finish-to-start; CrossProject for a predecessor in another project), issue trackers as
+Every tool the integration survey ranks (docs/integration-survey.md) reads the same structure:
+tasks, and links saying one task cannot finish before another. MS Project XML writes it as
+PredecessorLink (Type 1, finish-to-start; CrossProject for a predecessor in another project), issue
+trackers as
 "blocked by". So the mapping is made once, here, and each exporter (W365 MSPDI, W366 issue JSON)
 only serializes `Task`.
 
@@ -12,8 +13,9 @@ A card's predecessors are what it waits for (`waitsFor`, resolved by annotate) a
 (`enables` points from the enabler). A predecessor in another repo is a cross-project link. `decode`
 inverts the projection to (card, predecessor) pairs, so a test can pin that nothing is lost.
 
-UIDs: MSPDI wants positive integers, unique in the file. A task's UID is its index in the sorted cite
-list plus one: stable for a given set of cards, and decode never needs it (links carry the cite).
+UIDs: MSPDI wants positive integers, unique in the file. A task's UID is its index in the sorted
+cite list plus one: stable for a given set of cards, and decode never needs it (links carry the
+cite).
 """
 
 from __future__ import annotations

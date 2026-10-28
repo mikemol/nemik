@@ -2,8 +2,9 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W320: nemik's workflows as data, for checking against skills/nemik/SKILL.md.
 
-`data/workflows.toml` declares the card lifecycle, the rules the skill teaches and the cross-workstream
-workflows. This module only reads it; tests/test_workflows.py is the correspondence check.
+`data/workflows.toml` declares the card lifecycle, the rules the skill teaches and the
+cross-workstream workflows. This module only reads it; tests/test_workflows.py is the correspondence
+check.
 """
 
 from __future__ import annotations

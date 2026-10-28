@@ -12,8 +12,9 @@ from here.
 Operator direction 2026-10-10 (W275): a letter is the evidence of a waypoint in file form. So a
 letter no waypoint in the fleet cites is an orphan. Each repo migrates its own inbox (W282): an
 orphan is `stale` when its file name carries a date older than `--older-than` days (no waypoint ever
-cited it, so it produced no work) or when everything it names in its own repo is closed; the rest are
-`live`, and `--fold` prints the `--add` that gives each a waypoint and the `mv` that archives the stale.
+cited it, so it produced no work) or when everything it names in its own repo is closed; the rest
+are `live`, and `--fold` prints the `--add` that gives each a waypoint and the `mv` that archives
+the stale.
 """
 
 from __future__ import annotations
@@ -168,7 +169,8 @@ def orphans(root: Path, repo: str | None = None) -> list[tuple[str, Path, bool]]
     """
     found: list[tuple[str, Path, bool]] = []
     # nemik:W280: a letter is owned when ANY waypoint in the fleet cites its path (a sender cites
-    # `<repo>/inbox/<file>` in the waiting waypoint's evidence), or its own repo's queue names the file.
+    # `<repo>/inbox/<file>` in the waiting waypoint's evidence), or its own repo's queue names the
+    # file.
     fleet = "\n".join(
         _queue_text(_load(state))
         for state in sorted(root.glob("*/.claude/paths-forward.json"))
@@ -305,9 +307,9 @@ def redeliveries(
     root: Path, workstreams: set[str], repo: str | None = None
 ) -> list[tuple[Path, Path]]:
     """nemik:W310 (linux-sources, paperkit): (source, destination) for each misdelivered letter whose
-    header names a workstream: a COPY into that workstream's `inbox/`, so the letter is delivered where
-    it says and the sender keeps its copy (a waypoint there may cite it). Skips a letter the recipient
-    already has. `repo` keeps those that sit in, or are addressed to, that repo.
+    header names a workstream: a COPY into that workstream's `inbox/`, so the letter is delivered
+    where it says and the sender keeps its copy (a waypoint there may cite it). Skips a letter the
+    recipient already has. `repo` keeps those that sit in, or are addressed to, that repo.
     """
     addressed, _ = headers(root)
     out: list[tuple[Path, Path]] = []
@@ -342,8 +344,9 @@ def report(
         addressed = [x for x in addressed if repo in (x.inbox, x.recipient)]
     import shutil
 
-    # A misdelivered letter its recipient holds (in its inbox or archived there) is delivered (W310).
-    # With --apply the copies are made FIRST, so the verdict and the exit code are the after state.
+    # A misdelivered letter its recipient holds (in its inbox or archived there) is delivered
+    # (W310). With --apply the copies are made FIRST, so the verdict and the exit code are the after
+    # state.
     delivery: list[str] = []
     if fold:
         for src, dst in redeliveries(root, workstreams, repo):

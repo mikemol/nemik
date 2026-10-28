@@ -130,8 +130,8 @@ def apply(docs: dict[str, Any], refs: frozenset[str]) -> dict[str, Any]:
             repo = name.removeprefix("goals/").removesuffix(".json")
             # A goals entry carries its frontier leaves' blocked_on text in `outside` (nemik.rank
             # .frontier), so it holds withheld content whenever a leaf is withheld, not only when
-            # the goal is (luthen-observability found aeternum:W74's text under W75-W77, 2026-10-02).
-            # The entry is dropped whole, never scrubbed.
+            # the goal is (luthen-observability found aeternum:W74's text under W75-W77,
+            # 2026-10-02). The entry is dropped whole, never scrubbed.
             out[name] = [
                 r
                 for r in doc

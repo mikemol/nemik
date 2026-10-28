@@ -78,9 +78,9 @@ def cases() -> dict[str, dict[str, Any]]:
             health={"z": {}, "b": {}, "a": {}},
             ruler={"motif": ["·"], "f": ["", "·"]},
         ),
-        # Python sorts str by code point; JavaScript's default sort compares UTF-16 code units, so an
-        # astral character (a surrogate pair, 0xD83D...) sorts BEFORE U+FFFF there and after it here.
-        # The transpiled side needs an explicit code-point comparator (github-8f, nemik:W424).
+        # Python sorts str by code point; JavaScript's default sort compares UTF-16 code units, so
+        # an astral character (a surrogate pair, 0xD83D...) sorts BEFORE U+FFFF there and after it
+        # here. The transpiled side needs an explicit code-point comparator (github-8f, nemik:W424).
         "astral-plane-keys": _doc(
             [_node("a", "W￿"), _node("a", "W\U0001f600"), _node("a", "W1")],
             [

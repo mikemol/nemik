@@ -3,9 +3,10 @@
 """nemik:W1225: re-wrap the comment and docstring lines that pass the line limit.
 
 It rewrites layout only: a too-long comment line or docstring body line is split at the last space
-before the limit, and the words and their order are untouched. It leaves alone a docstring's first
-line (splitting a summary would make ruff's D205 fire), a line with no space to split at, a
-directive comment (noqa, type, fmt, pragma), and a doctest line.
+before the limit, the words that no longer fit move to the start of the next line of the same
+paragraph (and so on down it), and the words and their order are untouched. It leaves alone a
+docstring's first line (splitting a summary would make ruff's D205 fire), a line with no space to
+split at, a directive comment (noqa, type, fmt, pragma), and a doctest line.
 
     python tools/rewrap.py FILE... [--write] [--width N]
 
@@ -14,11 +15,13 @@ Without --write it prints how many lines it would change in each file and writes
 
 import argparse
 import ast
+import re
 import sys
 from pathlib import Path
 
 WIDTH = 100
 DIRECTIVES = ("noqa", "type:", "fmt:", "pragma", "pylint", "ruff:", "isort:", "!")
+ITEM = re.compile(r"([-*+]|\d+[.)]) ")
 
 
 def _docstring_lines(tree: ast.AST) -> tuple[set[int], set[int]]:
@@ -45,19 +48,19 @@ def _docstring_lines(tree: ast.AST) -> tuple[set[int], set[int]]:
     return body, first
 
 
-def _split(line: str, text: str, head: str, width: int) -> list[str]:
-    # split `text` into lines that each start with `head` and fit `width`; `line` when it cannot
+def _words(head: str, text: str, width: int) -> list[str]:
+    # greedy fill of `text` into lines that each fit `width` after `head`; one word may overflow
     out: list[str] = []
     current = ""
     for word in text.split(" "):
         trial = word if not current else current + " " + word
         if current and len(head + trial) > width:
-            out.append(head + current)
+            out.append(current)
             current = word
         else:
             current = trial
-    out.append(head + current)
-    return out if len(out) > 1 else [line]
+    out.append(current)
+    return out
 
 
 def _comment_text(stripped: str) -> str:
@@ -66,6 +69,21 @@ def _comment_text(stripped: str) -> str:
     if " " not in text or text.startswith(DIRECTIVES):
         return ""
     return text
+
+
+def _read(
+    number: int, line: str, body: set[int], first: set[int]
+) -> tuple[bool, str, str]:
+    # whether this tool may reflow the line, and its head (indent and comment marker) and text
+    stripped = line.lstrip()
+    indent = line[: len(line) - len(stripped)]
+    if stripped.startswith("#"):
+        text = _comment_text(stripped)
+        return (True, indent + "# ", text) if text else (False, "", "")
+    skip = stripped.startswith((">>>", '"""', '"'))
+    if number in body and number not in first and stripped and not skip:
+        return True, indent, stripped
+    return False, "", ""
 
 
 def rewrap(source: str, width: int = WIDTH) -> str:
@@ -81,18 +99,28 @@ def rewrap(source: str, width: int = WIDTH) -> str:
     """
     body, first = _docstring_lines(ast.parse(source))
     out: list[str] = []
+    carry = ""
+    carry_head = ""
     for number, line in enumerate(source.split("\n"), start=1):
-        stripped = line.lstrip()
-        indent = line[: len(line) - len(stripped)]
-        if len(line) <= width:
+        reflow, head, text = _read(number, line, body, first)
+        merged = False
+        if carry:
+            if reflow and head == carry_head and not ITEM.match(text):
+                text = carry + " " + text
+                merged = True
+            else:
+                out.append(carry_head + carry)
+            carry = ""
+        if not reflow:
             out.append(line)
-        elif stripped.startswith("#"):
-            text = _comment_text(stripped)
-            out.extend(_split(line, text, indent + "# ", width) if text else [line])
-        elif number in body and number not in first and not stripped.startswith(">>>"):
-            out.extend(_split(line, stripped, indent, width))
+        elif len(head + text) > width and " " in text:
+            parts = _words(head, text, width)
+            out.extend(head + part for part in parts[:-1])
+            carry, carry_head = parts[-1], head
         else:
-            out.append(line)
+            out.append(head + text if merged else line)
+    if carry:
+        out.append(carry_head + carry)
     return "\n".join(out)
 
 
@@ -126,7 +154,7 @@ def main(argv: list[str] | None = None) -> int:
             continue
         changed += 1
         added = len(after.split("\n")) - len(before.split("\n"))
-        sys.stdout.write(f"{path}: +{added} lines\n")
+        sys.stdout.write(f"{path}: {added:+d} lines\n")
         if args.write:
             path.write_text(after, encoding="utf-8")
     verb = "rewritten" if args.write else "would change"

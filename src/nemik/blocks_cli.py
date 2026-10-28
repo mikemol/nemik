@@ -118,7 +118,8 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         return
     for b in blocks:
         claim = ", ".join(b["claimed_by"]) or "UNCLAIMED"
-        # UNCLAIMED stays as the column token other repos' ticks read; the hint says whose move it is.
+        # UNCLAIMED stays as the column token other repos' ticks read; the hint says whose move it
+        # is.
         hint = (
             ""
             if b["claimed_by"]
@@ -129,9 +130,9 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         print(
             f"{b['blocker']:24} <- {b['blocked']:28} {claim:28} {b['title']}{hint}{letters}"
         )
-    # nemik:W376: a letter in REPO's inbox that no waypoint cites is waiting on REPO too (one sat two
-    # days unseen, luthen-observability:W722). The same UNCLAIMED token, with the --add that claims it;
-    # the fold's 14-day cutoff leaves old ones to `nemik-check --letters --fold`.
+    # nemik:W376: a letter in REPO's inbox that no waypoint cites is waiting on REPO too (one sat
+    # two days unseen, luthen-observability:W722). The same UNCLAIMED token, with the --add that
+    # claims it; the fold's 14-day cutoff leaves old ones to `nemik-check --letters --fold`.
     if args.repo:
         live = _split(Path(args.root), args.repo, 14, _today())[0]
         claims = fold_commands(Path(args.root), repo=args.repo, older_than=14)

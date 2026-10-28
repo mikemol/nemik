@@ -3,9 +3,9 @@
 """nemik:W326: starvation, the failure of a pure priority queue.
 
 A ready card is STARVED when it has waited longer than the declared age (`[starvation] days` in
-rank-weights.toml) while cards issued after it were ranked above it. Ranking by band and flow salience
-never ages a card, so a low-weight card can sit behind a stream of newer, heavier ones forever.
-This
+rank-weights.toml) while cards issued after it were ranked above it. Ranking by band and flow
+salience never ages a card, so a low-weight card can sit behind a stream of newer, heavier ones
+forever. This
 reports who is overtaken and by how many; whether to add an aging term to the order is a separate,
 declared decision (the residue term is off by default for the same reason: measure first).
 """

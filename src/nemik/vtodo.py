@@ -8,11 +8,13 @@ need the operator ("needs-you", nemik-operator's list) are projected.
 
 Privacy (life:W23, operator 2026-09-28): queues carry personal text, so this runs host-side only,
 never in nemik-serve or the export, and only for repos listed in the opt-in file
-(~/.config/nemik/ics.toml: `repos = ["life", ...]`, or `["*"]` for all). No file: nothing is written.
+(~/.config/nemik/ics.toml: `repos = ["life", ...]`, or `["*"]` for all). No file: nothing is
+written.
 
 Decide/act comes from the blocked_on prefix `operator: decide|act`, the same rule nemik-operator
 and mtools:W277 use, so the three never disagree. Time fields (DUE, VALARM, RRULE ...) pass through
-DTSTART and DUE pass through from mtools:W300 (nemik:W134); VALARMs pass through from mtools:W279 (nemik:W129); RRULE follows mtools:W278.
+DTSTART and DUE pass through from mtools:W300 (nemik:W134); VALARMs pass through from mtools:W279
+(nemik:W129); RRULE follows mtools:W278.
 """
 
 from __future__ import annotations

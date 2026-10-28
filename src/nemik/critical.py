@@ -2,11 +2,11 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W313: the critical path through the open dependency graph, and each card's slack.
 
-Every open card counts one step. `up` is the length of the longest chain of open prerequisites ending at
-the card, `down` the longest chain of open dependents starting at it; the longest path through the whole
-graph is the critical path (length L), and a card's slack is L minus the longest path through that card:
-how far it can slip before it lengthens the whole. A zero-slack card is on a longest chain. A cycle is
-cut where the walk meets itself, as the rest of nemik does.
+Every open card counts one step. `up` is the length of the longest chain of open prerequisites
+ending at the card, `down` the longest chain of open dependents starting at it; the longest path
+through the whole graph is the critical path (length L), and a card's slack is L minus the longest
+path through that card: how far it can slip before it lengthens the whole. A zero-slack card is on a
+longest chain. A cycle is cut where the walk meets itself, as the rest of nemik does.
 """
 
 from __future__ import annotations
@@ -100,7 +100,8 @@ def critical(g: Graph, scope: set[str] | None = None) -> Critical:
 
 def _key(cite: str) -> str:
     # the order the graph version visited cards in (their URIs), so cycle-breaking, which depends on
-    # visiting order, gives the same answer: "a:W1" and "a0:W1" sort differently as cites than as URIs
+    # visiting order, gives the same answer: "a:W1" and "a0:W1" sort differently as cites than as
+    # URIs
     return BASE + cite.replace(":", "/", 1)
 
 
@@ -122,10 +123,10 @@ def critical_cards(by_cite: dict[str, Card], scope: set[str] | None = None) -> C
     ]
     found = CHAINS(order, deps)
     through = {n: found.up[n] + found.down[n] - 1 for n in nodes}
-    # nemik:W344: the dependency order is a poset, so tied longest chains are alternatives, not a ranking:
-    # the critical object is EVERY card on some longest chain (zero slack), graded by its rank (`up`), and
-    # by how many longest chains run through it (ways in x ways out). Nothing here depends on sort order
-    # except the order the list is displayed in: (rank, cite).
+    # nemik:W344: the dependency order is a poset, so tied longest chains are alternatives, not a
+    # ranking: the critical object is EVERY card on some longest chain (zero slack), graded by its
+    # rank (`up`), and by how many longest chains run through it (ways in x ways out). Nothing here
+    # depends on sort order except the order the list is displayed in: (rank, cite).
     chain = sorted(found.paths, key=lambda n: (found.up[n], _key(n)))
     return Critical(
         found.length,
@@ -138,11 +139,11 @@ def critical_cards(by_cite: dict[str, Card], scope: set[str] | None = None) -> C
 
 def cycles(g: Graph) -> list[tuple[list[str], bool]]:
     """nemik:W324: the dependency cycles among open cards, each as (its sorted cards, operator
-    breakable): a strongly connected component of more than one card, or a card that waits on itself.
-    Every card in one waits on another, so it cannot clear by itself. It IS breakable when a member is
-    blocked on the operator (blocked_kind human): the `same ask as` convention makes two repos' asks
-    cite each other on purpose, and the operator's answer ends it. Any other cycle is a true
-    deadlock. Tarjan's algorithm; depth is bounded by a simple path.
+    breakable): a strongly connected component of more than one card, or a card that waits on
+    itself. Every card in one waits on another, so it cannot clear by itself. It IS breakable when a
+    member is blocked on the operator (blocked_kind human): the `same ask as` convention makes two
+    repos' asks cite each other on purpose, and the operator's answer ends it. Any other cycle is a
+    true deadlock. Tarjan's algorithm; depth is bounded by a simple path.
     """
     nodes = {
         n
@@ -356,7 +357,8 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     found = critical(g, scope)
     loops = cycles(g)
     print(f"critical path: {found.length} open cards deep")
-    # nemik:W344: one line per rank; cards sharing a rank are tied alternatives (an antichain), joined by |
+    # nemik:W344: one line per rank; cards sharing a rank are tied alternatives (an antichain),
+    # joined by |
     levels: dict[int, list[str]] = {}
     for card in found.chain:
         levels.setdefault(found.rank[card], []).append(card)

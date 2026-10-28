@@ -2,14 +2,15 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W365: cards as MS Project XML (MSPDI), read by MS Project, ProjectLibre and GanttProject.
 
-A serializer over nemik.projection (W413), nothing more: each Task becomes a <Task>, each predecessor
-a <PredecessorLink> of Type 1 (finish-to-start, Microsoft's schema reference: 0 FF, 1 FS, 2 SF, 3 SS).
-A predecessor inside the file is named by its PredecessorUID; one outside it (another repo, when one
-repo is exported) is a cross-project link, CrossProject 1 with CrossProjectName its repo, and its cite
-in the link's own text is kept so `read` gives back exactly what was written.
+A serializer over nemik.projection (W413), nothing more: each Task becomes a <Task>, each
+predecessor a <PredecessorLink> of Type 1 (finish-to-start, Microsoft's schema reference: 0 FF, 1
+FS, 2 SF, 3 SS). A predecessor inside the file is named by its PredecessorUID; one outside it
+(another repo, when one repo is exported) is a cross-project link, CrossProject 1 with
+CrossProjectName its repo, and its cite in the link's own text is kept so `read` gives back exactly
+what was written.
 
-nemik has no durations or dates, so none are invented: a task carries only its UID, ID, name, the cite
-(as a text field), and PercentComplete 100 when the card is done.
+nemik has no durations or dates, so none are invented: a task carries only its UID, ID, name, the
+cite (as a text field), and PercentComplete 100 when the card is done.
 """
 
 from __future__ import annotations
@@ -20,8 +21,8 @@ from nemik.projection import Link, Task
 
 NS = "http://schemas.microsoft.com/project"
 FS = "1"  # PredecessorLink Type: finish-to-start
-# Text1, the task field the cite rides in: "the FieldID 188743731 matches the pjCustomTaskText1 value"
-# (Microsoft Learn, FieldID Element, fetched 2026-10-12).
+# Text1, the task field the cite rides in: "the FieldID 188743731 matches the pjCustomTaskText1
+# value" (Microsoft Learn, FieldID Element, fetched 2026-10-12).
 CITE_FIELD = "188743731"
 
 

@@ -4,9 +4,9 @@
 
 nemik:W422's plan moves modules into a portable Python subset that transpiles to TypeScript (mtools:
 W1070-W1073). rdflib cannot cross that line, so the graph is read once, here, into frozen records of
-strings and tuples; projection, critical and health can then be written against `Card` alone. This is
-not nemik.index (W412): that one is a per-build cache keyed by rdflib terms for speed; this one is the
-contract a module needs to be portable.
+strings and tuples; projection, critical and health can then be written against `Card` alone. This
+is not nemik.index (W412): that one is a per-build cache keyed by rdflib terms for speed; this one
+is the contract a module needs to be portable.
 """
 
 from __future__ import annotations

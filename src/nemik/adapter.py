@@ -25,7 +25,8 @@ class _Terms(Namespace):
     """A Namespace that keeps each term once made (nemik:W411).
 
     rdflib builds a fresh URIRef on every `NEMIK.x`; the hot loops asked 1.48 M times in one rebuild
-    (5.2 s of 36). The term lands in the instance dict, so the next lookup never reaches __getattr__.
+    (5.2 s of 36). The term lands in the instance dict, so the next lookup never reaches
+    __getattr__.
     """
 
     def __getattr__(self, name: str) -> URIRef:
@@ -237,8 +238,8 @@ def load_state(state_path: Path) -> model.State:
     return store.load(state_path)
 
 
-# nemik:W402: parsed graphs by (what was asked, the file's stamp). A rebuild re-parses only the files
-# that moved; a new or vanished repo changes `known` and so every queue's key. One entry per
+# nemik:W402: parsed graphs by (what was asked, the file's stamp). A rebuild re-parses only the
+# files that moved; a new or vanished repo changes `known` and so every queue's key. One entry per
 # (kind, repo): a moved file replaces its stale entry instead of growing the cache.
 _PARSED: dict[tuple[str, str], tuple[tuple[object, ...], Graph, int]] = {}
 # nemik:W1096: whether the cache above is kept at all. A long-lived reader wants it; a one-shot
@@ -421,9 +422,9 @@ def _queue_graph(repo: str, state_path: Path, known: frozenset[str]) -> Graph:
             g.add((node, NEMIK.vector, Literal(vec)))
         if src := model.text(w, "vector_source"):
             g.add((node, NEMIK.vectorSource, Literal(src)))
-        # nemik:W275 (operator 2026-10-10: a letter is a waypoint's evidence in file form): the letter
-        # files a waypoint cites in its evidence or next step, as written. Paths only: the evidence
-        # text itself stays out of the graph.
+        # nemik:W275 (operator 2026-10-10: a letter is a waypoint's evidence in file form): the
+        # letter files a waypoint cites in its evidence or next step, as written. Paths only: the
+        # evidence text itself stays out of the graph.
         for text in (model.text(w, "evidence"), model.text(w, "next_bounded_step")):
             for path in re.findall(
                 r"(?:[\w.-]+/inbox/[\w./-]+\.md|\.claude/letters/[\w./-]+\.md)", text
@@ -475,7 +476,8 @@ def _queue_graph(repo: str, state_path: Path, known: frozenset[str]) -> Graph:
 
 
 # Ledger kind -> effort class. Only `tick` has a defined meaning upstream (see the friction report
-# on summit's floor); the rest is nemik's reading of observed use, kept explicit so it can be argued.
+# on summit's floor); the rest is nemik's reading of observed use, kept explicit so it can be
+# argued.
 KIND_CLASS = {
     "tick": "forecast",
     "arm": "forecast",

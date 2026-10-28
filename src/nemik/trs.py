@@ -2,15 +2,16 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W448: a repo's queue and ledger as an OSLC Tracked Resource Set (TRS 2.0).
 
-TRS is the incremental feed OSLC tools already consume (IBM's LQE ingests TRS sources; W373's study of
-Jazz): a trs:Base listing the tracked resources, and a trs:ChangeLog of numbered Creation, Modification
-and Deletion events, so a reader syncs by cursor instead of re-reading everything.
+TRS is the incremental feed OSLC tools already consume (IBM's LQE ingests TRS sources; W373's study
+of Jazz): a trs:Base listing the tracked resources, and a trs:ChangeLog of numbered Creation,
+Modification and Deletion events, so a reader syncs by cursor instead of re-reading everything.
 
 All of it is derived, nothing new is recorded:
 - the base is the repo's cards (every waypoint the queue holds);
 - each ledger line that names a card is an event on that card, its line number the trs:order;
 - a card's first event is its Creation, later ones Modifications;
-- a card the ledger names that the queue no longer holds was dropped: a Deletion after its last event.
+- a card the ledger names that the queue no longer holds was dropped: a Deletion after its last
+event.
 """
 
 from __future__ import annotations
@@ -34,8 +35,9 @@ def trs(
 ) -> Graph:
     """The TRS graph for `repo`: <ws>/trs/base and <ws>/trs/changelog.
 
-    A card whose URI is in `withheld` (nemik:W449: luthen's withheld list) is in neither the base nor
-    any change event; its events are skipped whole, so a reader cannot even learn that it changed.
+    A card whose URI is in `withheld` (nemik:W449: luthen's withheld list) is in neither the base
+    nor any change event; its events are skipped whole, so a reader cannot even learn that it
+    changed.
     """
     ws = workstream_uri(repo)
     base, log = URIRef(f"{ws}/trs/base"), URIRef(f"{ws}/trs/changelog")

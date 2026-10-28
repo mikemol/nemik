@@ -15,8 +15,8 @@ in a loop. Three outcomes, and unknown is not false:
   more than `TOLERATE`, or an unknown last poll at the timeout, is exit 2.
 
 A bare PromQL expression holds when its instant-query result is non-empty, the PromQL meaning of a
-comparison (`x > 0.99` returns the series only while it is true). A query that names `input.<observer>`
-is Rego, decided by opa as for a waypoint witness.
+comparison (`x > 0.99` returns the series only while it is true). A query that names
+`input.<observer>` is Rego, decided by opa as for a waypoint witness.
 """
 
 from __future__ import annotations

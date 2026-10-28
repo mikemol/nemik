@@ -2,11 +2,12 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W440: a JSON Schema per published file, generated from field-manifest.json.
 
-The manifest already decides what may be published (nemik:W154: a field outside it fails the build), so it
-is the contract; this module only writes it in a form another program can read. Record fields and their
-classes come from the manifest; the one thing it does not say is how a file arranges its records (a list,
-a map keyed by repo, a single record), so that layout is declared here, per file, once, as measured on the
-documents the static build publishes. A record allows no field the manifest does not list.
+The manifest already decides what may be published (nemik:W154: a field outside it fails the build),
+so it is the contract; this module only writes it in a form another program can read. Record fields
+and their classes come from the manifest; the one thing it does not say is how a file arranges its
+records (a list, a map keyed by repo, a single record), so that layout is declared here, per file,
+once, as measured on the documents the static build publishes. A record allows no field the manifest
+does not list.
 
 `$id` carries the manifest's version, so a client can tell which contract it was written against.
 """
@@ -23,7 +24,8 @@ DIALECT = "https://json-schema.org/draft/2020-12/schema"
 
 # A field class (the manifest's vocabulary) as a JSON Schema fragment.
 SCALAR: dict[str, dict[str, object]] = {
-    # nemik:W441: an absent reference is published as null (a goal with nothing on deck), not omitted
+    # nemik:W441: an absent reference is published as null (a goal with nothing on deck), not
+    # omitted
     "ref": {"type": ["string", "null"]},
     "enum": {"type": "string"},
     "text": {"type": "string"},
@@ -131,8 +133,8 @@ def openapi() -> dict[str, Any]:
     """nemik:W442: the read API as OpenAPI 3.1, generated, so it cannot drift from the schemas.
 
     Every published data path is a GET whose 200 response refers to the schema the same build
-    publishes beside it (OpenAPI 3.1 takes JSON Schema 2020-12 as is). hashes.json and the graph pieces
-    (W414, W415) are listed for the client that refetches only what changed.
+    publishes beside it (OpenAPI 3.1 takes JSON Schema 2020-12 as is). hashes.json and the graph
+    pieces (W414, W415) are listed for the client that refetches only what changed.
     """
     version = json.loads(
         files("nemik.data").joinpath("field-manifest.json").read_text()

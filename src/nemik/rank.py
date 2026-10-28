@@ -239,8 +239,8 @@ def frontier(g: Graph, goal: Node) -> tuple[set[Node], set[str]]:
     exactly when ddG is empty: every remaining obstacle is work this repo can do itself.
 
     nemik:W483: which of the walked cards are leaves is decided by the fleet's shared walker
-    (mikemol.frontier.walk, mtools:W1127) with `realized` = the stored state is done, over the goal's
-    local cone as plain nodes and edges (a feeder must be realized before what it feeds).
+    (mikemol.frontier.walk, mtools:W1127) with `realized` = the stored state is done, over the
+    goal's local cone as plain nodes and edges (a feeder must be realized before what it feeds).
     """
     from mikemol.frontier.walk import frontier as walk
 

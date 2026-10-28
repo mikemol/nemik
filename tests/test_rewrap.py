@@ -10,6 +10,7 @@ from typing import cast
 ROOT = Path(__file__).resolve().parents[1]
 WIDTH = 40
 SENTENCE = "one two three four five six seven eight nine ten eleven twelve"
+LONG = "aaaa bbbb cccc dddd eeee ffff gggg hhhh iiii jjjj kkkk llll"
 
 
 def _tool() -> ModuleType:
@@ -68,3 +69,29 @@ def test_the_output_parses_and_a_second_pass_changes_nothing() -> None:
     once = _rewrap(source)
     compile(once, "once", "exec")
     assert _rewrap(once) == once
+
+
+def test_the_words_that_no_longer_fit_join_the_next_line_of_the_paragraph() -> None:
+    """A remainder is not left alone on a line of its own when a line follows it."""
+    rows = _rewrap(f"# {LONG}\n# mmmm nnnn\n").split("\n")
+    assert rows == [
+        "# aaaa bbbb cccc dddd eeee ffff gggg",
+        "# hhhh iiii jjjj kkkk llll mmmm nnnn",
+        "",
+    ]
+
+
+def test_a_remainder_does_not_cross_a_blank_line_or_join_a_list_item() -> None:
+    """A paragraph break and a list item both stop the carry; the remainder stands alone."""
+    blank = _rewrap(f"# {LONG}\n#\n# mmmm\n").split("\n")
+    assert blank == [
+        "# aaaa bbbb cccc dddd eeee ffff gggg",
+        "# hhhh iiii jjjj kkkk llll",
+        "#",
+        "# mmmm",
+        "",
+    ]
+    item = _rewrap(f'"""Summary.\n\n{LONG}\n- one item\n"""\n').split("\n")
+    assert "- one item" in item
+    # eight four-letter words fit in 40 columns with no comment marker, so the rest starts at iiii
+    assert item[item.index("- one item") - 1] == "iiii jjjj kkkk llll"

@@ -4,10 +4,11 @@
 
 A rebuild asked rdflib 3.3 M triple patterns (17 s of 27) for the same few facts per card:
 its
-state, what it enables, what waits for it. Inside `indexed()` the first asker of a graph builds those
-maps once and every later asker reads them. Outside the scope nothing is cached, so a caller that
-mutates a graph between questions never reads a stale answer; inside it, an entry is checked against
-the graph's identity and size, which catches the additions a build makes (assume_done copies).
+state, what it enables, what waits for it. Inside `indexed()` the first asker of a graph builds
+those maps once and every later asker reads them. Outside the scope nothing is cached, so a caller
+that mutates a graph between questions never reads a stale answer; inside it, an entry is checked
+against the graph's identity and size, which catches the additions a build makes (assume_done
+copies).
 """
 
 from __future__ import annotations

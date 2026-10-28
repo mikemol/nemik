@@ -425,8 +425,8 @@ def resolve(repo: Path, spec: str | None) -> str | None:
         )
         raise ValueError(message)
     if _DATE.fullmatch(spec):
-        # git reads a bare date as that day at the CURRENT time of day, so "--from 2026-10-11" run in
-        # the evening meant the evening of the 11th: pin it to the start of the day (nemik:W318).
+        # git reads a bare date as that day at the CURRENT time of day, so "--from 2026-10-11" run
+        # in the evening meant the evening of the 11th: pin it to the start of the day (nemik:W318).
         when = f"{spec}T00:00" if len(spec) == len("YYYY-MM-DD") else spec
         out = _git(repo, "rev-list", "-1", f"--before={when}", "HEAD")
         return (out or "").strip() or None
@@ -821,7 +821,8 @@ def weekly(snaps: list[Snapshot]) -> list[dict]:
     for (year, week), inside in sorted(weeks.items()):
         finished: list[float] = []
         closed_now: list[str] = []
-        # nemik:W357: operator asks, a card entering or leaving blocked_kind human, counted per week.
+        # nemik:W357: operator asks, a card entering or leaving blocked_kind human, counted per
+        # week.
         asked, answered = 0, 0
         for at, queue in inside:
             now_on = {
@@ -911,8 +912,8 @@ def baseline_spec(repo: Path, spec: str | None) -> str | None:
 
 def variance(base: dict, now: dict) -> dict:
     """nemik:W318: planned versus actual since a baseline. The plan is the cards open at the baseline:
-    how many are now closed, dropped, or still open. The unplanned is every card minted since, split by
-    how it was minted (an interrupt, a tick, or not recorded). Both arguments are parsed queues.
+    how many are now closed, dropped, or still open. The unplanned is every card minted since, split
+    by how it was minted (an interrupt, a tick, or not recorded). Both arguments are parsed queues.
     """
     planned = {
         s
@@ -990,7 +991,8 @@ def render(repo: str, d: Diff) -> str:
     block("closed", d.closed)
     block("dropped", d.dropped)
     block("flipped", [f"{s} {a}->{b}" for s, a, b in d.flips])
-    # A blocked_on entry may be a paragraph (an operator ask): the line names it, --json has it whole.
+    # A blocked_on entry may be a paragraph (an operator ask): the line names it, --json has it
+    # whole.
     block("edges added", [f"{s} {k} {t[:48]}" for k, s, t in d.edges_added])
     block("edges removed", [f"{s} {k} {t[:48]}" for k, s, t in d.edges_removed])
     block(
@@ -2369,9 +2371,10 @@ def _baseline(args: argparse.Namespace, names: list[str], dirs: dict[str, Path])
 def toil(repo: str, ledger: Path) -> list[dict]:
     """nemik:W314: per ISO week, the repo's ledger activity by effort class and the interrupt share.
 
-    Each ledger line is one PROV activity with a start time and an effort class (forecast: a scheduled
-    tick or operator-typed work; interrupt: unplanned; unclassified). `toil_share` is interrupt over
-    forecast plus interrupt, the tax unplanned work levies on planned work; None when neither occurred.
+    Each ledger line is one PROV activity with a start time and an effort class (forecast: a
+    scheduled tick or operator-typed work; interrupt: unplanned; unclassified). `toil_share` is
+    interrupt over forecast plus interrupt, the tax unplanned work levies on planned work; None when
+    neither occurred.
     """
     from rdflib import RDF
     from rdflib.namespace import PROV

@@ -7,9 +7,9 @@
     /graph.ttl    the merged RDF graph (OSLC CM ChangeRequests + PROV ledger activities)
     /vendor/*     cytoscape, dagre, cytoscape-dagre, vendored so the page never leaves the host
     /metrics      Prometheus text: graph size, last rebuild cost, build info
-    /operator     open waypoints blocked on the operator: needs-you / answered / condition / unstated
-    /wake         blocked-on workstreams with their liveness: which must be woken, and for what
-    /inbound[/<repo>]  open waypoints waiting on <repo> (or anyone), each with the blocker's
+    /operator     open waypoints blocked on the operator: needs-you / answered / condition /
+    unstated /wake         blocked-on workstreams with their liveness: which must be woken, and for
+    what /inbound[/<repo>]  open waypoints waiting on <repo> (or anyone), each with the blocker's
                   claiming waypoints: what an agent reads to learn "I am the block, and on what"
 
 The graph is rebuilt only when a queue or ledger file changes (mtime key), so a page poll costs
@@ -386,7 +386,8 @@ class Model:
         # into the graph when a directory is given.
         self.runs = runs
         # nemik:W309: refs luthen withholds from the public view. They are kept out of every NUMBER
-        # the view publishes (salience, edge current, history counts), not only out of the node list.
+        # the view publishes (salience, edge current, history counts), not only out of the node
+        # list.
         self.withheld = withheld
         self.key: tuple = ()
         self.graph = bind(Graph())
@@ -397,8 +398,8 @@ class Model:
         }  # parsed once per rebuild, shared by requests
         self.rebuilds = 0
         self.rebuild_cpu = 0.0
-        # nemik:W399: the last rebuild's CPU seconds per phase (parse, annotate, shacl, fleet_checks,
-        # ledger, document), so the phase that dominates is measured, not guessed.
+        # nemik:W399: the last rebuild's CPU seconds per phase (parse, annotate, shacl,
+        # fleet_checks, ledger, document), so the phase that dominates is measured, not guessed.
         self.phases: dict[str, float] = {}
         self.nodes = self.edges = self.workstreams = 0
         # ThreadingHTTPServer: refresh() runs on every request (nemik:W19). Without this lock,
@@ -843,9 +844,9 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
     # A block on another workstream ends at the blocker's waypoint that claims it, or at an
     # "unclaimed" placeholder inside the blocker's box, never at a bare repo label.
     blocks = inbound(g)
-    # One (blocked, blocker) pair can have several inbound rows (linux-sources:W40 waits on the mtools
-    # session AND mtools:W24 AND mtools:W46). Keeping only the last row made which claims got drawn
-    # depend on hash order (nemik:W119), so the claims are merged.
+    # One (blocked, blocker) pair can have several inbound rows (linux-sources:W40 waits on the
+    # mtools session AND mtools:W24 AND mtools:W46). Keeping only the last row made which claims got
+    # drawn depend on hash order (nemik:W119), so the claims are merged.
     by_blocked: dict[tuple[str, str], dict] = {}
     for blk in blocks:
         fresh = dict(blk)
@@ -889,7 +890,8 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
             edges.append({"source": str(s), "target": ask, "kind": "waits"})
     from nemik.blocks import with_salience
 
-    # nemik:W460: an errand is the operator's own business: nemik-operator lists it, the view does not.
+    # nemik:W460: an errand is the operator's own business: nemik-operator lists it, the view does
+    # not.
     asks = [a for a in with_salience(gn, operator_asks(g)) if a["category"] != "errand"]
     for a in asks:
         lane_edge: dict[str, Any] = {
@@ -932,7 +934,8 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
                 if r.get("salience") is not None:
                     found["salience"] = round(r["salience"], 4)
     # nemik:W322: slack (nemik.critical) per open card, and which cards lie on the longest chain, so
-    # the page can mark the path that bounds the fleet. Computed over `gn` like every published number.
+    # the page can mark the path that bounds the fleet. Computed over `gn` like every published
+    # number.
     from nemik.critical import critical, repo_scope
 
     crit = critical(gn)
@@ -950,9 +953,9 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
             item["path_count"] = crit.paths.get(item["cite"], 0)
             item["on_path_repo"] = item["cite"] in repo_chain[item["repo"]]
     # nemik:W477: a card stored ready while an open card enables it (nemik:W465's finding) is drawn
-    # as waiting: its fill says ready, but the flow model counts it as waiting and gives it no salience.
-    # nemik:W684: a ready leaf with no manifest cannot be stacked, so it is drawn waiting for one.
-    # nemik:W687: and a card that throws a Warning on the CLI carries it, for the badge.
+    # as waiting: its fill says ready, but the flow model counts it as waiting and gives it no
+    # salience. nemik:W684: a ready leaf with no manifest cannot be stacked, so it is drawn waiting
+    # for one. nemik:W687: and a card that throws a Warning on the CLI carries it, for the badge.
     from nemik.blocks import node_flags
 
     marks = node_flags(g, findings)
@@ -1006,7 +1009,8 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
     for item in nodes:
         item["blocked_on"] = sorted(item["blocked_on"])
     edges.sort(key=lambda e: (e["source"], e["target"], e["kind"]))
-    # nemik:W317: each repo's red/amber/green from the declared thresholds, over `gn` like every number.
+    # nemik:W317: each repo's red/amber/green from the declared thresholds, over `gn` like every
+    # number.
     from nemik.health import health, thresholds
 
     limits = thresholds()
@@ -1027,10 +1031,11 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
 def ruler_table(edges: list[dict], asks: list[dict]) -> dict[str, list[str]]:
     """nemik:W418: the ruler-sequence patterns the page draws, from mtools' generator (mtools:W1048).
 
-    `motif[k]` is the order-k motif (one per halo scope, orders 0..3). `f[n]` is F(n), the pattern of
-    the n-th line into one blocker; which lines a view shows is the page's choice, so it indexes this
-    table rather than the server fixing each line's n. A line's n is at most the lines into its blocker
-    or into an ask chip (one per category and repo), so the table runs to the larger of those.
+    `motif[k]` is the order-k motif (one per halo scope, orders 0..3). `f[n]` is F(n), the pattern
+    of the n-th line into one blocker; which lines a view shows is the page's choice, so it indexes
+    this table rather than the server fixing each line's n. A line's n is at most the lines into its
+    blocker or into an ask chip (one per category and repo), so the table runs to the larger of
+    those.
     """
     from collections import Counter
 
@@ -1197,7 +1202,8 @@ def write_static(out: Path) -> list[Path]:
     written = [out / "index.html"]
     (out / "vendor").mkdir(parents=True, exist_ok=True)
     page = web.joinpath("index.html").read_text()
-    # nemik:W397: the page no longer has a Tools panel (W171 cut it here), so it is written as it is.
+    # nemik:W397: the page no longer has a Tools panel (W171 cut it here), so it is written as it
+    # is.
     written[0].write_text(page)
     for name in sorted(VENDOR):
         dst = out / "vendor" / name
@@ -1248,9 +1254,9 @@ def history_doc(
 ) -> dict[str, list[dict[str, Any]]]:
     """nemik:W308: the project-manager's weekly roll-up per repo, from each repo's committed queue.
 
-    Counts and days only: the roll-up row's `oldest_blocked` symbol is dropped, so nothing here names
-    a waypoint, and a withheld waypoint (nemik:W309) is left out of every snapshot before counting.
-    It needs git history, so only a host-side build has it (the pod has none).
+    Counts and days only: the roll-up row's `oldest_blocked` symbol is dropped, so nothing here
+    names a waypoint, and a withheld waypoint (nemik:W309) is left out of every snapshot before
+    counting. It needs git history, so only a host-side build has it (the pod has none).
     """
     from nemik.history import snapshots, weekly
 
@@ -1279,9 +1285,9 @@ def build_static(
     exports: Path | None = None,
 ) -> list[Path]:
     """nemik:W153 (see _build_static), inside the same per-build scope the live server's document is
-    built in (nemik:W412, W403): each graph indexed once and each flow solve answered once. The build
-    ran outside it, so the goals, the pieces and the TRS feeds asked rdflib 1.09 M times for facts the
-    index holds (a warm publish profiled at 94 s, a third of it in rank.goals).
+    built in (nemik:W412, W403): each graph indexed once and each flow solve answered once. The
+    build ran outside it, so the goals, the pieces and the TRS feeds asked rdflib 1.09 M times for
+    facts the index holds (a warm publish profiled at 94 s, a third of it in rank.goals).
     """
     from nemik.index import indexed
     from nemik.salience import memo_audits
@@ -1300,8 +1306,8 @@ def _build_static(
     """nemik:W153: the gated static view under `out`. Every check runs before anything is written,
     so a refused build leaves `out` untouched; the withheld list itself is never copied into it.
 
-    nemik:W503: `private` is the pod's own build: nothing is withheld unless a list is given, and the
-    files the live server answered beyond the public view are written too (see private_files).
+    nemik:W503: `private` is the pod's own build: nothing is withheld unless a list is given, and
+    the files the live server answered beyond the public view are written too (see private_files).
 
     nemik:W634: with `exports`, each repo's own export (docs/withholding-at-source.md) also decides
     what leaves it, failing closed per repo: a repo with no export publishes none of its cards.
@@ -1324,8 +1330,8 @@ def _build_static(
 
     for piece, cut in split(docs["graph.json"]).items():
         docs[f"graph/{piece}.json"] = cut
-    # nemik:W440: the contract the published files keep, generated from the field manifest and listed in
-    # hashes.json like the data, so a client sees when it changes
+    # nemik:W440: the contract the published files keep, generated from the field manifest and
+    # listed in hashes.json like the data, so a client sees when it changes
     from nemik.apischema import openapi, schema_path, schemas
 
     for pattern, schema in schemas().items():
@@ -1473,9 +1479,9 @@ def cost_gauges() -> list[str]:
 
 def private_files(model: Model, out: Path) -> list[Path]:
     """nemik:W503: what the live server answered beyond the public view, as files: /operator.json,
-    /inbound.json and /inbound/<repo>.json (one per repo, empty when nothing waits on it), /graph.ttl,
-    /metrics with the snapshot's own age gauge, and the source key the next publish compares. Never
-    part of the public build: these name every waypoint's asks and blockers.
+    /inbound.json and /inbound/<repo>.json (one per repo, empty when nothing waits on it),
+    /graph.ttl, /metrics with the snapshot's own age gauge, and the source key the next publish
+    compares. Never part of the public build: these name every waypoint's asks and blockers.
     """
     made: list[Path] = []
 
@@ -1498,8 +1504,9 @@ def private_files(model: Model, out: Path) -> list[Path]:
     repos = {str(n["repo"]) for n in nodes if n["repo"]}
     for repo in sorted(repos | {str(b["blocker"]) for b in rows}):
         put(f"inbound/{repo}.json", dump([b for b in rows if b["blocker"] == repo]))
-    # N-Triples, which is Turtle with one triple per line: the same RDF a /graph.ttl reader parses, without
-    # the grouping and sorting that made the Turtle serializer the costliest single write of the build
+    # N-Triples, which is Turtle with one triple per line: the same RDF a /graph.ttl reader parses,
+    # without the grouping and sorting that made the Turtle serializer the costliest single write of
+    # the build
     put("graph.ttl", model.graph.serialize(format="nt").encode())
     gauge = (
         "# TYPE nemik_snapshot_published_seconds gauge\n"
@@ -1534,8 +1541,9 @@ def private_files(model: Model, out: Path) -> list[Path]:
 
 def fleet_key(root: Path) -> str:
     """The digest of every queue and ledger file's path and CONTENT now. Content, not mtime: an export
-    that rewrites a file without changing it (luthen's does, every minute) is not a change, and a build
-    costs real CPU (luthen-observability, nemik:W504: the builder rebuilds on a changed content hash).
+    that rewrites a file without changing it (luthen's does, every minute) is not a change, and a
+    build costs real CPU (luthen-observability, nemik:W504: the builder rebuilds on a changed
+    content hash).
     """
     import hashlib
 
@@ -1566,10 +1574,11 @@ def publish(
     exports: Path | None = None,
 ) -> Path | None:
     """nemik:W503: build a private snapshot under base/snap-<stamp>-<pid>/ and flip base/current to it
-    with one atomic rename. The build runs in this short-lived process, so every byte of its graph is
-    returned to the OS when it exits (nemik:W500: rebuilding in a long-lived process left ~20 MB of
-    fragmented heap per build). Returns None when no queue or ledger changed since current/ was built.
-    The last `keep` snapshots stay, so a request already reading one is not pulled out from under it.
+    with one atomic rename. The build runs in this short-lived process, so every byte of its graph
+    is returned to the OS when it exits (nemik:W500: rebuilding in a long-lived process left ~20 MB
+    of fragmented heap per build). Returns None when no queue or ledger changed since current/ was
+    built. The last `keep` snapshots stay, so a request already reading one is not pulled out from
+    under it.
     """
     from nemik import adapter, cachestore, lastgood
 

@@ -248,9 +248,9 @@ def witness(
     """'true' | 'false' | 'undefined' for a waypoint's witness, with the facts that decided it.
 
     nemik:W501: a witness that is a bare PromQL expression holds while its instant query returns a
-    sample, the PromQL meaning of a comparison (`x > y` returns the series only while it is true) and
-    what `--wait` has always done with one; luthen-observability:W1054 stores its executor-load witness
-    that way, and no Rego wrapper (and its escaped quotes) needs writing by hand.
+    sample, the PromQL meaning of a comparison (`x > y` returns the series only while it is true)
+    and what `--wait` has always done with one; luthen-observability:W1054 stores its executor-load
+    witness that way, and no Rego wrapper (and its escaped quotes) needs writing by hand.
     """
     if not is_rego(query, lang):
         stamp = (now or datetime.now(UTC)).isoformat()
@@ -448,13 +448,15 @@ def main(argv: list[str] | None = None) -> None:
         code, line = wait(poller(args.wait, args.lang), limit, step)
         print(line)
         raise SystemExit(code)
-    # nemik:W97: the queue's one writer is the installed mikemol-paths-forward, beside this interpreter
-    # in the same .venv (host, or bazel's //:.venv). Missing is a failure, reported, never a skip.
+    # nemik:W97: the queue's one writer is the installed mikemol-paths-forward, beside this
+    # interpreter in the same .venv (host, or bazel's //:.venv). Missing is a failure, reported,
+    # never a skip.
     pf = Path(sys.executable).parent / "mikemol-paths-forward"
     for repo, path, sym, query, lang in open_witnesses(args.root):
         verdict, doc, missing = witness(query, lang=lang)
         note = f"  cannot observe {','.join(missing)}" if missing else ""
-        # nemik:W539: a witness with no declared language is sniffed; say so, so the count can fall to 0
+        # nemik:W539: a witness with no declared language is sniffed; say so, so the count can fall
+        # to 0
         sniffed = "  language sniffed (no witness_lang)" if not lang else ""
         print(f"WITNESS {repo}:{sym} {verdict}{note}{sniffed}")
         if args.apply and verdict == "true":

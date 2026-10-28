@@ -128,9 +128,9 @@ class Policy:
     name: str
     tag: str | None
     rules: tuple[dict[str, frozenset[str]], ...]
-    # nemik:W138 (luthen's letter, section 3): when set, only dependents carrying one of these touches
-    # tags are blocked ("no tenant-facing rollout while a trust-boundary item is open"); empty
-    # blocks every dependent on a shared surface, as W133 did.
+    # nemik:W138 (luthen's letter, section 3): when set, only dependents carrying one of these
+    # touches tags are blocked ("no tenant-facing rollout while a trust-boundary item is open");
+    # empty blocks every dependent on a shared surface, as W133 did.
     only: frozenset[str] = frozenset()
 
     def blocks(self, touches: set[str]) -> bool:

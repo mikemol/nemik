@@ -7,9 +7,9 @@ waypoints share. `--cross` keeps only tags shared across repos: the part a singl
 `--overlaps` cannot see. Advisory, like ATOMIZE: always exits 0.
 
 nemik:W305 (mtools:W913): a session working a card holds a fence claim
-`claim:label:touch:<repo>:<tag>` per touches tag (mtools' mikemol-hook-work-claims). Each OVERLAP row also names who holds the claim
-for its tag and how old it is, read from `mikemol-membudget claims`. Display only: no block; with no
-membudget the holder column is left out, and said once.
+`claim:label:touch:<repo>:<tag>` per touches tag (mtools' mikemol-hook-work-claims). Each OVERLAP
+row also names who holds the claim for its tag and how old it is, read from `mikemol-membudget
+claims`. Display only: no block; with no membudget the holder column is left out, and said once.
 """
 
 from __future__ import annotations

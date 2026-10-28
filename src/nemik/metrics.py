@@ -2,11 +2,13 @@
 # Copyright (c) 2026 Mike Mol
 """nemik-metrics: print nemik's state as Prometheus text exposition (for vmagent's import).
 
-    nemik_waypoints{repo,state}              waypoints per OSLC state (ready|working|blocked|done|dropped)
-    nemik_waypoints_minted{repo,during}      waypoints by mtools' minted_during (tick|interrupt);
+    nemik_waypoints{repo,state}              waypoints per OSLC state
+    (ready|working|blocked|done|dropped) nemik_waypoints_minted{repo,during}      waypoints by
+    mtools' minted_during (tick|interrupt);
                                              absent on waypoints minted before mtools 2e21902
-    nemik_findings{repo,severity}            SHACL results per severity (Violation|Warning|Unreadable)
-    nemik_prompts_total{repo,source,class}   prompts recorded by the global hook, where class is
+    nemik_findings{repo,severity}            SHACL results per severity
+    (Violation|Warning|Unreadable) nemik_prompts_total{repo,source,class}   prompts recorded by the
+    global hook, where class is
                                              forecast (scheduled or operator-typed tick),
                                              interrupt (operator, peer), internal (subagent
                                              hand-backs, background notices: the session's own
@@ -14,13 +16,15 @@
                                              this module's own CLASS map -- a new hook source,
                                              not yet classified here)
     nemik_turns_total{repo}                  turns ended (Stop events)
-    nemik_ledger_lines{repo,class,kind}      parsed ledger lines (mtools ledger.read) by effort class
-    nemik_blocks_inbound{repo,claimed}       open waypoints in OTHER workstreams waiting on repo;
+    nemik_ledger_lines{repo,class,kind}      parsed ledger lines (mtools ledger.read) by effort
+    class nemik_blocks_inbound{repo,claimed}       open waypoints in OTHER workstreams waiting on
+    repo;
                                              claimed="false" when no waypoint of repo names them
     nemik_waiting_on{repo,state}             open waypoints elsewhere waiting on repo, by repo's
                                              liveness (asleep|idle|awake|unknown)
-    nemik_pathsforward_adoption{repo,state}  1 per repo: declared|owner|missing|no-pyproject|unobservable
-    nemik_ledger_unparsed{repo}              legacy/malformed ledger lines mtools returned unparsed
+    nemik_pathsforward_adoption{repo,state}  1 per repo:
+    declared|owner|missing|no-pyproject|unobservable nemik_ledger_unparsed{repo}
+    legacy/malformed ledger lines mtools returned unparsed
     nemik_realizability_waypoints{repo,coordinate}
                                              live waypoints per realizability coordinate
                                              (none|constructible|reachable|observable|coverable),
@@ -29,7 +33,8 @@
                                              opa, an unreadable queue): absent coordinates are
                                              "not checked", never "clean"
 
-    nemik_operator_salience{repo}            flow salience the repo's needs-you operator asks hold back,
+    nemik_operator_salience{repo}            flow salience the repo's needs-you operator asks hold
+    back,
                                              summed (what the operator owes its work; W300)
     nemik_operator_asks{repo}                how many needs-you asks that is
     nemik_warrant_debt{repo}                 open cards claiming an operator ruling in prose, no
@@ -766,8 +771,9 @@ def repo_lines(
     return out
 
 
-# nemik:W620: the families that need no queue read (the spool, the ledgers, git history that does not
-# need the cards' edges, realizability and the run logs); a run naming only these skips the survey.
+# nemik:W620: the families that need no queue read (the spool, the ledgers, git history that does
+# not need the cards' edges, realizability and the run logs); a run naming only these skips the
+# survey.
 HISTORY_FAMILIES = (
     "nemik_cards_completed_24h",
     "nemik_commits_24h",

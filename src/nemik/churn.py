@@ -4,10 +4,10 @@
 
 The view polls every 60 s and redraws from scratch whenever the graph text differs. Whether to patch
 in place instead depends on WHAT changes between polls: a card's attributes (patchable where it
-stands), a status flip (a recolour), or the drawn structure itself (cards or edges added or removed).
-Two live snapshots minutes apart say nothing when the fleet is quiet, so this walks history: each
-repo's committed queue is sampled at fixed steps over a span, every repo that moved in an interval is
-classified, and the interval takes the worst class among them.
+stands), a status flip (a recolour), or the drawn structure itself (cards or edges added or
+removed). Two live snapshots minutes apart say nothing when the fleet is quiet, so this walks
+history: each repo's committed queue is sampled at fixed steps over a span, every repo that moved in
+an interval is classified, and the interval takes the worst class among them.
 
 History is commit-granular and the live view also sees uncommitted queue writes, so every share here
 is a floor on how often the view changes, never a ceiling.

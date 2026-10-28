@@ -2,12 +2,13 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W238/W240: the flow model's salience of a repo's ready cards, beside the old downstream weight.
 
-The graph side of nemik.flow, ported from gcalculus's audit script (nemik/inbox/2026-10-09-gcalculus-
-w237-audit-script.md): the open graph, a card's prerequisites (the reverse of what it moves), the
-ready frontier (open cards with no open prerequisite), and the demand each waiting card in the ranked
-repo's downstream closure injects, weighted by the class it carries relative to the ranked repo
-(local, peer, peer-blocked: the same `rank-weights.toml` classes as the old arm). Edges are unit
-conductance, the baseline; the flow model replaces the old ranking only after this audit (W241).
+The graph side of nemik.flow, ported from gcalculus's audit script
+(nemik/inbox/2026-10-09-gcalculus- w237-audit-script.md): the open graph, a card's prerequisites
+(the reverse of what it moves), the ready frontier (open cards with no open prerequisite), and the
+demand each waiting card in the ranked repo's downstream closure injects, weighted by the class it
+carries relative to the ranked repo (local, peer, peer-blocked: the same `rank-weights.toml` classes
+as the old arm). Edges are unit conductance, the baseline; the flow model replaces the old ranking
+only after this audit (W241).
 """
 
 from __future__ import annotations
@@ -31,9 +32,9 @@ if TYPE_CHECKING:
 DECIMALS = 4
 
 # nemik:W403: one document build asked for the same repo's solve up to four times (the ranking, the
-# edge widths twice, the operator-ask weights), each a full flow solve over the same graph: 58 solves,
-# 245 of 268 profiled seconds. Inside `memo_audits()` an identical audit is answered from this table;
-# outside it nothing is cached, so a CLI run computes exactly as before.
+# edge widths twice, the operator-ask weights), each a full flow solve over the same graph: 58
+# solves, 245 of 268 profiled seconds. Inside `memo_audits()` an identical audit is answered from
+# this table; outside it nothing is cached, so a CLI run computes exactly as before.
 _MEMO: dict[tuple, Audit] | None = None
 
 
@@ -156,8 +157,8 @@ def audit(
     blocked, so the cards it waits on rank higher the longer the wait; zero leaves the flow
     as it was.
 
-    `toward` (`repo:W<n>`, nemik:W316) makes the one demand source the named milestone: salience then
-    reads as what moves that card, with no operator or residue demand added.
+    `toward` (`repo:W<n>`, nemik:W316) makes the one demand source the named milestone: salience
+    then reads as what moves that card, with no operator or residue demand added.
 
     `workable` narrows the ground to cards whose state is ready or working. By default the ground
     is gcalculus's: every open card with no open prerequisite, which includes a card blocked on
@@ -180,7 +181,8 @@ def audit(
     from nemik.rank import load_weights
 
     weights = weights or load_weights()
-    # W403: residue and gate weights are per-call inputs, not part of the key, so those audits bypass it.
+    # W403: residue and gate weights are per-call inputs, not part of the key, so those audits
+    # bypass it.
     key: tuple | None = None
     if _MEMO is not None and residue is None and gate_weights is None:
         key = (

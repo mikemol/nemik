@@ -2,8 +2,8 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W442: a minimal client for nemik's read API, standard library only.
 
-It is the example another app copies: read hashes.json, fetch only the documents whose hash moved since
-the last call, and keep them by path. Run against any static build or the deployed view:
+It is the example another app copies: read hashes.json, fetch only the documents whose hash moved
+since the last call, and keep them by path. Run against any static build or the deployed view:
 
     python3 tools/nemik_client.py https://<host>/            # every document, once
     python3 tools/nemik_client.py https://<host>/ --watch 60  # poll; print what changed

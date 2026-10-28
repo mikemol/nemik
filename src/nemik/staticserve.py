@@ -5,8 +5,8 @@
 Operator ruling 2026-10-15 (W500): the pod serves prebuilt snapshots and does no graph work, so
 request count and graph churn scale independently. A request is a file read; a rebuild happens in a
 short-lived process elsewhere and is published under ROOT/current (a symlink flipped atomically) or
-simply as ROOT itself. Pieces are validated by the sha256 hashes.json already lists (nemik:W414), so a
-client revalidating with If-None-Match costs a header exchange, not a body.
+simply as ROOT itself. Pieces are validated by the sha256 hashes.json already lists (nemik:W414), so
+a client revalidating with If-None-Match costs a header exchange, not a body.
 
 stdlib only on purpose: a test holds this module to never importing rdflib.
 """

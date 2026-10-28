@@ -3,11 +3,11 @@
 """nemik:W400: validate only what a change touches, and keep every other node's findings.
 
 A rebuild validated the whole fleet (the largest phase left once the parse and solve caches landed).
-Keyed by the caller (one survey root), the last run's triples and its findings per focus node are kept.
-The next run diffs the triples; a node is re-validated when a triple about it changed, or when it
-points at a node that did (a shape such as "blocked_on names a landed waypoint" reads its target's
-state, one hop). Every other node keeps its findings. Those nodes and their neighbours make a small
-graph that is validated whole, so shape targets select exactly as in a full run.
+Keyed by the caller (one survey root), the last run's triples and its findings per focus node are
+kept. The next run diffs the triples; a node is re-validated when a triple about it changed, or when
+it points at a node that did (a shape such as "blocked_on names a landed waypoint" reads its
+target's state, one hop). Every other node keeps its findings. Those nodes and their neighbours make
+a small graph that is validated whole, so shape targets select exactly as in a full run.
 
 The claim, incremental == full, holds while the neighbourhood is as deep as the deepest shape reads
 (nemik.shapedepth derives that from the shapes; unbounded means a full run); tests/test_shaclinc.py
@@ -91,8 +91,8 @@ def _neighbourhood(
     A shape judges a card from its neighbours' state, and the neighbours can sit either side of an
     edge: ReadyUmbrellaShape reads the kids that enable the umbrella, UmbrellaBlockShape reads the
     umbrella's kids through the waiter's edge. A change to a kid must re-judge both. A hub (a
-    workstream joins every card of its repo) is re-judged when reached but not walked through, or one
-    changed card would re-judge the repo and, a hop on, the fleet.
+    workstream joins every card of its repo) is re-judged when reached but not walked through, or
+    one changed card would re-judge the repo and, a hop on, the fleet.
 
     Args:
         adjacent: The neighbours of each node.
@@ -172,7 +172,8 @@ def findings(key: str, data: Graph, shapes: Graph) -> list[tuple[Node, str, str]
             t for t in before ^ now if "?" in watched or _tail(str(t[1])) in watched
         }
         # A node is a card (or any described thing) when it is a subject; a vocabulary term such as
-        # nemik:Done is only ever an object, and following it back would reach every card in that state.
+        # nemik:Done is only ever an object, and following it back would reach every card in that
+        # state.
         subjects = {s for s, _, _ in now}
         touched = {s for s, _, _ in changed} | {
             o for _, _, o in changed if o in subjects
@@ -185,9 +186,9 @@ def findings(key: str, data: Graph, shapes: Graph) -> list[tuple[Node, str, str]
         if live:
             # Not pyshacl's focus_nodes: it applies every shape to a named node whatever the shape
             # targets. The focus nodes' own triples and their neighbours' make a subgraph validated
-            # whole, so targets select exactly as in a full run; only the focus nodes' results are kept.
-            # A hub judged here (a workstream) is judged against ALL its neighbours, or a shape over
-            # the whole repo ("no working card") would see only part of it.
+            # whole, so targets select exactly as in a full run; only the focus nodes' results are
+            # kept. A hub judged here (a workstream) is judged against ALL its neighbours, or a
+            # shape over the whole repo ("no working card") would see only part of it.
             near = _neighbourhood(adjacent, live, hops)
             for hub in live:
                 if len(adjacent.get(hub, ())) > HUB:

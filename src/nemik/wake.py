@@ -190,7 +190,8 @@ def fired_alarms(
                     done={str(r): "" for r in g.objects(n, NEMIK.occurrenceDone)},
                 )
             # One bad alarm (a hand-edited queue) must not hide the rest. What a bad one raises: the
-            # RFC 5545 and RRULE parsers' ValueError, a naive-versus-aware TypeError, a year out of range.
+            # RFC 5545 and RRULE parsers' ValueError, a naive-versus-aware TypeError, a year out of
+            # range.
             except (ValueError, TypeError, OverflowError) as e:
                 out.append(
                     {
