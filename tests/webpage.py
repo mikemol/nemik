@@ -21,10 +21,10 @@ from mikemol.webpage.page import (
     PageBrokenError,
     Waitable,
     load,
-    until,
     until_expecting,
-    watch,
 )
+from mikemol.webpage.page import until as library_until
+from mikemol.webpage.page import watch as library_watch
 from playwright.sync_api import Browser as LaunchedBrowser
 from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import Page as LaunchedPage
@@ -57,6 +57,48 @@ FLEET = Path(__file__).parent / "fixtures" / "fleet"
 HTTP_ERROR = 400
 LISTENING_WORDS = 2  # the server's line is "listening" and a port
 CY_READY = "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 1"
+# nemik:W846: records, inside the page, each resource (a script tag, a stylesheet) whose load
+# failed. An error event on such an element does not bubble, so the listener is a capture listener
+# on the window. It rests on the page alone (no Playwright event), so it works for every page that
+# `watch` is called on, whatever type the test holds.
+RECORD_FAILED = (
+    "window.__failed = [];"
+    "window.addEventListener('error', e => {"
+    " const t = e.target;"
+    " if (t && t !== window && (t.src || t.href)) window.__failed.push(String(t.src || t.href));"
+    "}, true);"
+)
+
+
+def watch(page: Waitable) -> None:
+    """Install the page's error record and the failed-resource record, before it navigates.
+
+    Args:
+        page: The Playwright page.
+
+    """
+    library_watch(page)
+    page.add_init_script(RECORD_FAILED)
+
+
+def until(page: Waitable, expr: str) -> None:
+    """Wait on a page predicate with no clock; a broken page names the resources that failed.
+
+    Args:
+        page: The Playwright page, watched before it navigated.
+        expr: A JS arrow function that is truthy once the page is ready.
+
+    Raises:
+        PageBrokenError: The page broke; the message lists the resources that failed to load, so
+            a script missing under load names the asset (W846, W1060).
+
+    """
+    try:
+        library_until(page, expr)
+    except PageBrokenError as e:
+        failed = page.evaluate("() => window.__failed || []")
+        message = f"{e}; resources that failed to load: {failed}"
+        raise PageBrokenError(message) from e
 
 
 class Seen(Protocol):

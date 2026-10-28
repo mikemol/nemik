@@ -67,6 +67,15 @@ def test_a_page_that_throws_on_purpose_hands_the_message_back() -> None:
     assert "boom" in found
 
 
+def test_a_script_that_did_not_load_is_named_when_the_page_breaks() -> None:
+    """W846: the first script is lost, the second uses it; the error names the lost asset."""
+    lost = (
+        '<script src="http://127.0.0.1:1/lost.js"></script><script>usesLost();</script>'
+    )
+    with pytest.raises(webpage.PageBrokenError, match=r"usesLost.*lost\.js"):
+        _serve(lost)
+
+
 def test_an_unwatched_page_rests_on_its_predicate_alone() -> None:
     """With no error record the wait still ends when the page is ready, and returns no error."""
     assert _serve(READIES, expecting=True, watched=False) is None
