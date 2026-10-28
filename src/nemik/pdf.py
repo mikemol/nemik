@@ -18,12 +18,14 @@ import os
 import sys
 from pathlib import Path
 
-from mikemol.webpage.page import load, until
-from playwright.sync_api import Page, ViewportSize, sync_playwright
+from mikemol.webpage.page import PageBrokenError, load, until
+from playwright.sync_api import Page, Request, Response, ViewportSize, sync_playwright
 
 from nemik import pdfviews
 
 HOST_URL = "http://127.0.0.1:8765/"
+# nemik:W846: a response at or past this status is recorded as a failed request
+HTTP_ERROR = 400
 # the page has drawn its graph
 CY_READY = "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 1"
 # two animation frames have passed, so a changed control has redrawn
@@ -92,6 +94,39 @@ def apply(page: Page, view: str, repo: str) -> None:
     until(page, REDRAWN)
 
 
+def load_naming_failures(page: Page, url: str) -> None:
+    """Open `url` and wait for the graph, naming the requests that failed if the page breaks.
+
+    A script that did not load under load leaves the page's first error as a missing name
+    (`popLater is not defined`); the list of failed requests says which file it was (nemik:W846).
+
+    Args:
+        page: A new page.
+        url: A running nemik-serve.
+
+    Raises:
+        PageBrokenError: the page broke while loading; the message lists the requests that
+            failed or got an error status.
+
+    """
+    refused: list[str] = []
+
+    def note_failed(request: Request) -> None:
+        refused.append(f"failed {request.url}")
+
+    def note_status(response: Response) -> None:
+        if response.status >= HTTP_ERROR:
+            refused.append(f"{response.status} {response.url}")
+
+    page.on("requestfailed", note_failed)
+    page.on("response", note_status)
+    try:
+        load(page, url, CY_READY)
+    except PageBrokenError as e:
+        message = f"{e}; requests refused or failed: {refused}"
+        raise PageBrokenError(message) from e
+
+
 def render(url: str, view: str, repo: str, out: Path) -> None:
     """Print a view of the page at `url` to `out`.
 
@@ -112,7 +147,7 @@ def render(url: str, view: str, repo: str, out: Path) -> None:
         )
         try:
             page = browser.new_page(viewport=VIEWPORT)
-            load(page, url, CY_READY)
+            load_naming_failures(page, url)
             apply(page, view, repo)
             page.add_script_tag(path=str(SVG_EXPORT))
             page.evaluate(VECTORIZE)
