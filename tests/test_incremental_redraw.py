@@ -138,7 +138,8 @@ def test_a_poll_that_adds_and_removes_cards_leaves_the_rest_where_it_was(
 
 
 def test_a_rebuilt_card_list_keeps_the_focus_a_reader_had_in_it(server: str) -> None:
-    # W480: a poll that changes a row's text rebuilds the list; keyboard focus stays on the same card.
+    # W480: a poll that changes a row's text rebuilds the list; keyboard focus stays on the same
+    # card.
     with sync_playwright() as p:
         browser, page = webpage.launched_page(p, server)
         webpage.evaluate_value(
@@ -170,7 +171,8 @@ def test_a_rebuilt_card_list_keeps_the_focus_a_reader_had_in_it(server: str) -> 
 
 
 def test_a_panel_whose_markup_did_not_change_is_not_rewritten(server: str) -> None:
-    # W497: a panel the reader is scrolled or focused in is left alone by a poll that did not change it,
+    # W497: a panel the reader is scrolled or focused in is left alone by a poll that did not change
+    # it,
     # and one something else touched is painted again.
     with sync_playwright() as p:
         browser, page = webpage.launched_page(p, server)

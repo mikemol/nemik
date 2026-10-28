@@ -186,7 +186,8 @@ def test_repo_toggles_and_salience_order(server: str, tmp_path: Path) -> None:
         widened = page.evaluate("() => cy.edges('[current > 0]').length")
         # nemik:W322: the cards on the longest open chain carry the halo class data
         assert page.evaluate("() => cy.nodes('[?on_path]').length") > 0
-        # nemik:W335: one ring per scope, a legend naming each, and a selected card's cone gets its own ring
+        # nemik:W335: one ring per scope, a legend naming each, and a selected card's cone gets its
+        # own ring
         assert page.evaluate("() => cy.nodes('[nrings > 0]').length") > 0
         assert (
             page.evaluate(
@@ -217,7 +218,8 @@ def test_repo_toggles_and_salience_order(server: str, tmp_path: Path) -> None:
 def test_the_history_panel_shows_the_weekly_roll_up_when_there_is_one(
     server: str, tmp_path: Path
 ) -> None:
-    # nemik:W307: history.json exists only in a host-side static build; the panel is hidden without it.
+    # nemik:W307: history.json exists only in a host-side static build; the panel is hidden without
+    # it.
     doc = {
         "nemik": [
             {
@@ -294,8 +296,10 @@ def test_rolling_up_umbrellas_hides_their_work_and_a_double_click_expands_one(
 def test_scope_rings_carry_distinct_ruler_motifs_pinned_to_paperkits(
     server: str,
 ) -> None:
-    # nemik:W382/W419: each path scope gets its own ruler-sequence motif, now shipped by the server from
-    # mtools' mikemol.rulerseq (paperkit's emit_f, hosted). The family is pinned to paperkit's published
+    # nemik:W382/W419: each path scope gets its own ruler-sequence motif, now shipped by the server
+    # from
+    # mtools' mikemol.rulerseq (paperkit's emit_f, hosted). The family is pinned to paperkit's
+    # published
     # motifs, and the rings actually drawn use pairwise-distinct dash patterns.
     with sync_playwright() as p:
         browser = _launch(p)
@@ -338,8 +342,10 @@ FANS = """() => {
 def test_blocker_lines_into_one_card_carry_distinct_decodable_ruler_patterns(
     server: str,
 ) -> None:
-    # nemik:W388: lines crowding one blocker never share a dash pattern; each pattern decodes (one dot or
-    # dash per unit of the natural it encodes, len(F(n)) == n) back to its source's place in the fan.
+    # nemik:W388: lines crowding one blocker never share a dash pattern; each pattern decodes (one
+    # dot or
+    # dash per unit of the natural it encodes, len(F(n)) == n) back to its source's place in the
+    # fan.
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
@@ -424,15 +430,18 @@ def test_side_panel_sections_fold_and_the_choice_survives_a_reload(server: str) 
         browser.close()
     assert first["sec-weather"] is False and first["sec-findings"] is False
     assert first["sec-legend"] is True and first["sec-goals"] is True
-    # closed, and its body is not rendered (Chrome hides it with content-visibility, so it keeps a box)
+    # closed, and its body is not rendered (Chrome hides it with content-visibility, so it keeps a
+    # box)
     assert hidden == [False, False], hidden
     assert kept is False
 
 
 @pytest.mark.parametrize("scheme", ["light", "dark"])  # nemik:W434
 def test_the_default_view_is_legible(server: str, scheme: Scheme) -> None:
-    # nemik:W340: the first view never shrinks a label below 8 px or a node below 12 px on screen; when
-    # the whole fleet would, it shows one repo at the floor and says so, with a way to fit everything.
+    # nemik:W340: the first view never shrinks a label below 8 px or a node below 12 px on screen;
+    # when
+    # the whole fleet would, it shows one repo at the floor and says so, with a way to fit
+    # everything.
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(
@@ -450,7 +459,8 @@ def test_the_default_view_is_legible(server: str, scheme: Scheme) -> None:
         controls_in_status = page.evaluate(
             "() => document.querySelectorAll('#legnote button, #legnote a').length"
         )
-        # nemik:W317: every repo chip carries its health, and a non-green one a glyph, not colour alone
+        # nemik:W317: every repo chip carries its health, and a non-green one a glyph, not colour
+        # alone
         chips = page.evaluate(
             "() => [...document.querySelectorAll('#repos button')]"
             ".map(b => [b.dataset.health, b.textContent])"
@@ -469,8 +479,10 @@ def test_the_default_view_is_legible(server: str, scheme: Scheme) -> None:
 
 
 def test_every_label_glyph_exists_in_this_browsers_fonts(server: str) -> None:
-    # nemik:W398: a glyph the browser's fonts lack draws as a placeholder box, which once widened labels
-    # only under the gate's headless Chrome. Each glyph the page puts in a label must measure differently
+    # nemik:W398: a glyph the browser's fonts lack draws as a placeholder box, which once widened
+    # labels
+    # only under the gate's headless Chrome. Each glyph the page puts in a label must measure
+    # differently
     # from a codepoint no font has (a private-use character), in the browser the test runs in.
     with sync_playwright() as p:
         browser = _launch(p)
@@ -493,7 +505,8 @@ def test_every_label_glyph_exists_in_this_browsers_fonts(server: str) -> None:
 def test_context_cards_have_a_rendered_cue_of_their_own(
     server: str, scheme: Scheme
 ) -> None:
-    # nemik:W385 (W380 refuted the data-flag proof): with one repo picked, the context cards drawn from
+    # nemik:W385 (W380 refuted the data-flag proof): with one repo picked, the context cards drawn
+    # from
     # other repos RENDER a double border at full opacity, and no other card renders one.
     with sync_playwright() as p:
         browser = _launch(p)
@@ -523,8 +536,10 @@ def test_context_cards_have_a_rendered_cue_of_their_own(
 def test_each_card_state_differs_by_more_than_its_fill(
     server: str, scheme: Scheme
 ) -> None:
-    # nemik:W381 (W380 refuted the old claim): for every pair of states drawn, the cards differ in some
-    # non-colour property, here the glyph that begins the label (ready has none, the rest each their own).
+    # nemik:W381 (W380 refuted the old claim): for every pair of states drawn, the cards differ in
+    # some
+    # non-colour property, here the glyph that begins the label (ready has none, the rest each their
+    # own).
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(
@@ -779,8 +794,10 @@ def test_a_cite_link_in_the_panel_selects_its_card_and_announces_it(
 
 
 def test_the_view_chain_is_drawn_end_to_end_with_its_length(server: str) -> None:
-    # nemik:W482 (operator 2026-10-13: chains of 2 and 3 both ringed "longest, this view"). Each ring
-    # was a piece of one longest chain that ran on into another repo's box; the chain's own edges now
+    # nemik:W482 (operator 2026-10-13: chains of 2 and 3 both ringed "longest, this view"). Each
+    # ring
+    # was a piece of one longest chain that ran on into another repo's box; the chain's own edges
+    # now
     # draw it end to end, and the legend says how long it is.
     with sync_playwright() as p:
         browser = _launch(p)
@@ -809,7 +826,8 @@ def test_the_view_chain_is_drawn_end_to_end_with_its_length(server: str) -> None
 
 
 def test_a_focused_list_row_rings_its_card_and_opens_the_popover(server: str) -> None:
-    # nemik:W479: keyboard focus on a Cards list row rings that card on the canvas and shows the same
+    # nemik:W479: keyboard focus on a Cards list row rings that card on the canvas and shows the
+    # same
     # popover hover opens; Esc closes it, and moving focus out of the list clears the ring.
     with sync_playwright() as p:
         browser = _launch(p)
@@ -858,7 +876,8 @@ def test_the_page_script_runs_without_errors(server: str) -> None:
 
 
 def test_the_card_list_is_one_tab_stop_walked_by_arrows(server: str) -> None:
-    # nemik:W478: the Cards list was a tab stop per card (hundreds of Tabs to cross it). Now the list
+    # nemik:W478: the Cards list was a tab stop per card (hundreds of Tabs to cross it). Now the
+    # list
     # is one stop, the arrows walk it, Enter selects, and Tab leaves it.
     with sync_playwright() as p:
         browser = _launch(p)
@@ -1063,7 +1082,8 @@ ZOOM_IN_4X = "() => cy.zoom({ level: cy.zoom() * 4, renderedPosition: { x: 0, y:
 
 
 def test_treemap_labels_meet_the_floor_or_are_hidden_and_counted(server: str) -> None:
-    # nemik:W390: no tile label is drawn under 8 px; the ones hidden are counted on the status line, and
+    # nemik:W390: no tile label is drawn under 8 px; the ones hidden are counted on the status line,
+    # and
     # zooming in brings them back.
     with sync_playwright() as p:
         browser = _launch(p)
@@ -1165,7 +1185,8 @@ def test_no_label_glyph_plays_two_roles(server: str) -> None:
 
 def test_no_command_route_or_tools_panel_remains(server: str) -> None:
     # nemik:W397: the Tools drop-down ran CLIs through /cmd; it is retired, and every capability it
-    # offered is either native to the view or CLI-only. Neither the route nor the panel may come back.
+    # offered is either native to the view or CLI-only. Neither the route nor the panel may come
+    # back.
     import urllib.error
     import urllib.request
 
@@ -1220,8 +1241,10 @@ def test_one_picked_repo_restored_from_the_last_visit_is_legible_too(
 
 
 def test_picked_repos_show_their_blockers_blockers_as_context(server: str) -> None:
-    # nemik:W336: pick one repo; its cards' blockers in other repos are drawn dashed as context, and one
-    # more hop (the control's 2) reaches at least as many, never fewer, and never a picked repo's card.
+    # nemik:W336: pick one repo; its cards' blockers in other repos are drawn dashed as context, and
+    # one
+    # more hop (the control's 2) reaches at least as many, never fewer, and never a picked repo's
+    # card.
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(viewport={"width": 1700, "height": 1250})

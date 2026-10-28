@@ -186,7 +186,8 @@ def test_the_view_ships_each_ready_cards_flow_salience(tmp_path: Path) -> None:
 
 
 def test_the_view_marks_the_critical_path_and_ships_slack(tmp_path: Path) -> None:
-    # nemik:W322: in the fleet fixture W4-W6 each need W1 and W2, W7-W8 need W3: the longest open chain
+    # nemik:W322: in the fleet fixture W4-W6 each need W1 and W2, W7-W8 need W3: the longest open
+    # chain
     # is two cards deep, so exactly one chain is on the path and every open card carries a slack.
     from nemik.serve import to_json
 
@@ -194,7 +195,8 @@ def test_the_view_marks_the_critical_path_and_ships_slack(tmp_path: Path) -> Non
     nodes = [n for n in doc["nodes"] if n["state"] != "done"]
     assert all(isinstance(n["slack"], int) for n in nodes)
     on_path = [n for n in nodes if n["on_path"]]
-    # nemik:W344: every chain of two ties (W1,W2 -> W4-W6; W3 -> W7,W8), so all eight cards are on some
+    # nemik:W344: every chain of two ties (W1,W2 -> W4-W6; W3 -> W7,W8), so all eight cards are on
+    # some
     # longest chain, and a card with two ways in (W4 over W1 and W2) has two chains through it.
     assert len(on_path) == 8
     assert all(n["slack"] == 0 and n["path_count"] >= 1 for n in on_path)

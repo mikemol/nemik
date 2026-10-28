@@ -2,7 +2,8 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W339 (gate finding): cached_sparql_parse is safe when two threads survey at once.
 
-The gate caught test_serve_model failing under host load with pyparsing errors mid-parse: two threads in
+The gate caught test_serve_model failing under host load with pyparsing errors mid-parse: two
+threads in
 the block at once, one saving the other's patch as "the originals", and pyparsing's shared state.
 """
 

@@ -2,9 +2,12 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W501: a waypoint's witness may be a bare PromQL expression, as --wait has always read one.
 
-luthen-observability:W1054 stores its executor-load witness as one PromQL string; a Rego wrapper with its
-escaped label quotes was the error-prone step nobody should write by hand. A bare PromQL holds while its
-instant query returns a sample (the PromQL meaning of a comparison), is false on an empty result, and is
+luthen-observability:W1054 stores its executor-load witness as one PromQL string; a Rego wrapper
+with its
+escaped label quotes was the error-prone step nobody should write by hand. A bare PromQL holds while
+its
+instant query returns a sample (the PromQL meaning of a comparison), is false on an empty result,
+and is
 undefined when the probe cannot answer: unknown is never false.
 """
 

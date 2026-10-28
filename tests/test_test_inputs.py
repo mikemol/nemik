@@ -65,7 +65,8 @@ def _declared() -> tuple[set[str], list[str]]:
     # only the test macro's own data list (up to its env): the venv's srcs glob is not test data
     data = build.split("data = [", 1)[1].split("env = {", 1)[0]
     files = set(re.findall(r'"([\w./-]+\.[\w]+|[\w./-]+/[\w.-]+|Containerfile)"', data))
-    # every pattern of every glob([...]): a trailing `**` covers a directory, any other pattern its matches
+    # every pattern of every glob([...]): a trailing `**` covers a directory, any other pattern its
+    # matches
     patterns = [
         item
         for group in re.findall(r"glob\(\[([^\]]*)\]", data)

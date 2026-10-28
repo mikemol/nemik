@@ -2,9 +2,12 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W513: a console script is declared in every registry it belongs in, and a gap is named at once.
 
-nemik-static (W502) was refused by three checks in turn, one gate run each: the BUILD console_scripts
-table, the skill's command table, and the workflows registry. Each of those still has its own test; this
-one reads pyproject's [project.scripts] against all of them together, so adding a command is one pass
+nemik-static (W502) was refused by three checks in turn, one gate run each: the BUILD
+console_scripts
+table, the skill's command table, and the workflows registry. Each of those still has its own test;
+this
+one reads pyproject's [project.scripts] against all of them together, so adding a command is one
+pass
 instead of one failure per registry.
 """
 

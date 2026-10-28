@@ -97,7 +97,8 @@ def _copy_fleet(tmp_path: Path) -> Path:
 
 
 def test_a_rewrite_that_changes_nothing_is_not_a_change(tmp_path: Path) -> None:
-    # luthen's export rewrites its files every minute; a build costs real CPU, so only CONTENT counts
+    # luthen's export rewrites its files every minute; a build costs real CPU, so only CONTENT
+    # counts
     root = _copy_fleet(tmp_path)
     assert publish(root, tmp_path / "pub", None) is not None
     files = list(root.glob("*/paths-forward.*"))  # the export layout

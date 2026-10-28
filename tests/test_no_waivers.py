@@ -2,7 +2,8 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W523: no suppression directive anywhere in nemik's Python, held by the gate.
 
-The house rule (mtools): a finding is fixed or the rule is changed in the one reviewed place, never waived
+The house rule (mtools): a finding is fixed or the rule is changed in the one reviewed place, never
+waived
 on a line. The edit hook enforces it on the lines an agent touches; this holds the whole tree, so a
 waiver that arrives by any other route (a merge, a hand edit, a copied snippet) fails the gate too.
 The patterns are written from pieces so that this file holds none of the directives it forbids.

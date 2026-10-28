@@ -3,7 +3,8 @@
 """nemik:W446: a real MSPDI reader, MPXJ, reads nemik-export and finds the links nemik wrote.
 
 Run under the pinned Temurin JRE with MPXJ's MSPDI closure (W445). MPXJ's own query command prints a
-relationship line per task, `ID<TAB>name<TAB>predecessor IDs<TAB>successor IDs`. The successor column
+relationship line per task, `ID<TAB>name<TAB>predecessor IDs<TAB>successor IDs`. The successor
+column
 repeats the task's own ID (the sample prints a successor relation's predecessor end), so only the
 predecessor column is read. nemik writes each task's ID as its UID, so IDs map back to cites.
 """

@@ -17,7 +17,8 @@ def _card(
 
 def test_a_chain_and_a_tie_from_cards_alone() -> None:
     """The critical chain and its tie are read from the cards' edges, done cards not counting."""
-    # r:W1 enables r:W2 and r:W3 (tied), both of which r:W4 waits on; r:W5 is done and does not count
+    # r:W1 enables r:W2 and r:W3 (tied), both of which r:W4 waits on; r:W5 is done and does not
+    # count
     cards = {
         "r:W1": _card("r:W1"),
         "r:W2": _card("r:W2", enabled_by=("r:W1",)),

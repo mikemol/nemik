@@ -58,7 +58,8 @@ def test_fold_proposes_a_waypoint_for_each_letter_no_waypoint_cites(
 def test_an_orphan_whose_waypoints_are_all_closed_is_archived_not_folded(
     tmp_path: Path,
 ) -> None:
-    # nemik:W278: what the letter names has landed, so it is answered; one naming an open card is live.
+    # nemik:W278: what the letter names has landed, so it is answered; one naming an open card is
+    # live.
     from nemik.letters import archive_commands, fold_commands
 
     queue = tmp_path / "nemik" / ".claude" / "paths-forward.json"

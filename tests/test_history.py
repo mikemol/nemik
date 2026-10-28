@@ -314,7 +314,8 @@ def test_time_in_state_and_the_weekly_roll_up_follow_the_commits(
     assert (w41["oldest_blocked"], w41["oldest_blocked_days"]) == ("W1", 2.0)
     assert (w42["opened"], w42["closed"], w42["blocked_share"]) == (0, 0, 0.0)
     assert w42["oldest_blocked"] is None
-    # nemik:W315: W2 was first committed Oct 5 and closed Oct 7: a lead time of 2 days, that week only.
+    # nemik:W315: W2 was first committed Oct 5 and closed Oct 7: a lead time of 2 days, that week
+    # only.
     assert w41["lead_time_days"] == 2.0 and w42["lead_time_days"] is None
     # nemik:W325: two arrived, one left: utilization 2.0; W1 is the one open card, so at one close a
     # week a new card waits 1 / 1 * 7 days. nemik:W328: W2 was never marked working: efficiency 0.

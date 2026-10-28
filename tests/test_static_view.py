@@ -3,7 +3,8 @@
 """nemik:W502: the view works from a published snapshot and the file server alone.
 
 A snapshot is built by the static build from the fixture fleet, served by nemik-static (no model, no
-rdflib), and opened in a browser: the page assembles the graph from hashes.json and the pieces, draws
+rdflib), and opened in a browser: the page assembles the graph from hashes.json and the pieces,
+draws
 it, and fetches nothing the server cannot answer from a file.
 """
 

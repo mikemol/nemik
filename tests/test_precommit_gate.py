@@ -2,10 +2,14 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W521: the commit gate is one bazel target, and the hook refuses when it cannot run.
 
-The operator's rule (2026-10-06): a pre-commit should be a bazel build with the gate logic in a BUILD file, so
-BuildBuddy captures its logs. nemik's gate ran `bazel test //...` from a script; it is now `//:precommit`, a
-test_suite over every test (the lint, type, shell and warrant stages join it as they land). And mtools'
-principle holds: a gate refuses when it cannot run, never skips, so a missing bazel is a refused commit that
+The operator's rule (2026-10-06): a pre-commit should be a bazel build with the gate logic in a
+BUILD file, so
+BuildBuddy captures its logs. nemik's gate ran `bazel test //...` from a script; it is now
+`//:precommit`, a
+test_suite over every test (the lint, type, shell and warrant stages join it as they land). And
+mtools'
+principle holds: a gate refuses when it cannot run, never skips, so a missing bazel is a refused
+commit that
 says why.
 """
 

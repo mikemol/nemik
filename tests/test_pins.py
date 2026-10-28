@@ -66,7 +66,8 @@ def test_a_pin_is_as_far_behind_as_the_peer_has_commits_since(tmp_path: Path) ->
 def test_a_vendored_wheel_names_its_mtools_commit_in_its_file_name(
     tmp_path: Path,
 ) -> None:
-    # nemik:W303: nemik pins mtools by wheel (vendor/wheels/mikemol_*-0.1.0+<sha>-...), not a git URL.
+    # nemik:W303: nemik pins mtools by wheel (vendor/wheels/mikemol_*-0.1.0+<sha>-...), not a git
+    # URL.
     consumer = tmp_path / "app"
     consumer.mkdir()
     (consumer / "pyproject.toml").write_text(

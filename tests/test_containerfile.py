@@ -3,9 +3,11 @@
 """nemik:W455: the image's test stage carries every repo path the Bazel test targets read.
 
 Two gates run the same tests: Bazel (the commit gate) and the Containerfile's test stage (the image
-build). Each lists its inputs on its own. When docs/positioning.md joined the Bazel data (W361) but not
+build). Each lists its inputs on its own. When docs/positioning.md joined the Bazel data (W361) but
+not
 the image, pytest stopped at collection inside the build (exit 2), so no image was pushed and the
-cluster ran 60 commits behind for ~30 hours while every commit gate was green. This holds the lists equal.
+cluster ran 60 commits behind for ~30 hours while every commit gate was green. This holds the lists
+equal.
 """
 
 import re

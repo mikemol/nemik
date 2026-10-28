@@ -2,7 +2,8 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W520: `nemik-witnesses` is a resolvable party for a card that carries a witness, and only for one.
 
-The paths-forward writer refuses a witnessed card that is ready ("a witness, not a tick, marks it done:
+The paths-forward writer refuses a witnessed card that is ready ("a witness, not a tick, marks it
+done:
 block it on nemik-witnesses") and nemik's reader then flagged that blocker as naming no party. Both
 cannot be satisfied; the process that closes the card is the party.
 """
