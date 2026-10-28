@@ -15615,17 +15615,17 @@
     {
       "symbol": "W730",
       "title": "A check that the venv's installed nemik matches the source tree, so a profile or tool cannot silently run old code",
-      "status": "working",
+      "status": "ready",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "The command exists; remaining: a wrapper or profile line that points it at the tree's src/nemik and the venv's installed nemik package and runs it where a stale install would mislead (a tick hook or the setup script), with a test that a stale temp install exits 1 through it",
-      "evidence": "2026-10-23: 2026-10-23 overlap audit (verified): related to luthen-observability:W1235 (a timer publishes luthen_user_tool_behind_commits per tool, so a stale nemik install shows before it misleads); both detect a stale install, this one inside the tree, that one on the host. W1235 is blocked on luthen's W1285 as well, so no enables edge: a cross-cite only | 2026-10-27: landed e9f8c2d (pushed, gate green): nemik.stale.stale_modules(source_dir, installed_dir) names the stale modules; first submit refused on pathlib ruff findings. The command that runs it against the tree and the venv is still to do | 2026-10-27: landed b4b8a9f (pushed, gate green): nemik-stale SOURCE_DIR INSTALLED_DIR, exits 0/1/2, no argparse, no baseline entry. First submit refused by test_parity only (nemik-stale in none of parity.py's lists; reproduced locally); fixed by listing it EXCLUDED as host-private | 2026-10-27: 2026-10-27 after b4b8a9f: the built .venv holds a copy of every module (site-packages/nemik, stale.py included) but no nemik-stale console script yet (.venv/bin/nemik-stale: not found), so the venv needs bazel build //:.venv before the command runs; not built while stack587 gates (no foreground bazel beside the gate). First real reading waits on that rebuild: nemik-stale src/nemik .venv/lib/python3.13/site-packages/nemik",
+      "evidence": "2026-10-23: 2026-10-23 overlap audit (verified): related to luthen-observability:W1235 (a timer publishes luthen_user_tool_behind_commits per tool, so a stale nemik install shows before it misleads); both detect a stale install, this one inside the tree, that one on the host. W1235 is blocked on luthen's W1285 as well, so no enables edge: a cross-cite only | 2026-10-27: landed e9f8c2d (pushed, gate green): nemik.stale.stale_modules(source_dir, installed_dir) names the stale modules; first submit refused on pathlib ruff findings. The command that runs it against the tree and the venv is still to do | 2026-10-27: landed b4b8a9f (pushed, gate green): nemik-stale SOURCE_DIR INSTALLED_DIR, exits 0/1/2, no argparse, no baseline entry. First submit refused by test_parity only (nemik-stale in none of parity.py's lists; reproduced locally); fixed by listing it EXCLUDED as host-private | 2026-10-27: 2026-10-27 after b4b8a9f: the built .venv holds a copy of every module (site-packages/nemik, stale.py included) but no nemik-stale console script yet (.venv/bin/nemik-stale: not found), so the venv needs bazel build //:.venv before the command runs; not built while stack587 gates (no foreground bazel beside the gate). First real reading waits on that rebuild: nemik-stale src/nemik .venv/lib/python3.13/site-packages/nemik | 2026-10-27: landed 0fd667a (pushed, gate green): test_stale_install covers main() through sys.argv. Remaining: venv rebuild so .venv/bin/nemik-stale exists, then the wrapper/profile line | 2026-10-28: 2026-10-27 first real reading: after bazel build //:.venv, nemik-stale src/nemik .venv/lib/python3.13/site-packages/nemik printed nothing and exited 0 (install matches the tree). The command now exists in the venv. Still to do: the wrapper/profile line that runs it where a stale install would mislead, and a reading of the stale case against a real stale install",
       "issued_at": "2026-10-19T13:36:24Z",
       "minted_during": "tick",
       "caused_by": "nemik:W729",
-      "last_worked": "2026-10-27T23:32:20Z",
+      "last_worked": "2026-10-28T00:10:12Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_stale_install.py"
@@ -24446,7 +24446,7 @@
     {
       "symbol": "W1048",
       "title": "Courier send path: a letter to a peer is written as a GitHub issue in the peer's private repo",
-      "status": "working",
+      "status": "ready",
       "enables": [
         "W1047"
       ],
@@ -24456,11 +24456,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "The route is documented; remaining: the first send is a deliberate step of its own: build the send behind an off-by-default flag with a dry run that prints the issue it would create (repo, title, body) and sends nothing, test with a recorded gh api fixture, then ask for an explicit go before the first real send",
-      "evidence": "2026-10-27: 2026-10-27 linux-sources asks which of W1048/W1049/W1053 comes first: W1053, then W1049, then W1048 (the send path publishes to private peer repos and needs a credential route and an authorisation I have not seen). | 2026-10-27: 2026-10-27 correction of my own block: the operator's ask 'may nemik write a GitHub issue into a peer's private repo' was ALREADY ANSWERED, on W1047's warrant (host 695f3e0a line 84035, human, 2026-10-19): 'we can take the inbox pattern and map it to GitHub issues (public repo or private; I will consider private repos to be equivalent to my Google account from the perspective of egress, they are mine and not disclosed)'. So there is permission for the route, and the block on the operator is lifted. What is not known is only the credential route: how a nemik process authenticates a write, with key material never plaintext and the YubiKey never opened. | 2026-10-27: 2026-10-27 read: gh auth status shows the host logged in as the operator's account mikemol (keyring), scopes gist, read:org, repo, workflow; the repo scope covers an issue write in a private repo, so route A is an authenticated write route with no new credential. Written to docs/courier-read-path.md. Not read: route B, whether the pod can reach the keyring. Nothing sent",
+      "evidence": "2026-10-27: 2026-10-27 linux-sources asks which of W1048/W1049/W1053 comes first: W1053, then W1049, then W1048 (the send path publishes to private peer repos and needs a credential route and an authorisation I have not seen). | 2026-10-27: 2026-10-27 correction of my own block: the operator's ask 'may nemik write a GitHub issue into a peer's private repo' was ALREADY ANSWERED, on W1047's warrant (host 695f3e0a line 84035, human, 2026-10-19): 'we can take the inbox pattern and map it to GitHub issues (public repo or private; I will consider private repos to be equivalent to my Google account from the perspective of egress, they are mine and not disclosed)'. So there is permission for the route, and the block on the operator is lifted. What is not known is only the credential route: how a nemik process authenticates a write, with key material never plaintext and the YubiKey never opened. | 2026-10-27: 2026-10-27 read: gh auth status shows the host logged in as the operator's account mikemol (keyring), scopes gist, read:org, repo, workflow; the repo scope covers an issue write in a private repo, so route A is an authenticated write route with no new credential. Written to docs/courier-read-path.md. Not read: route B, whether the pod can reach the keyring. Nothing sent | 2026-10-27: landed 9ff1c0b (pushed, gate green): docs/courier-read-path.md records the credential route (gh login, repo scope); nothing sent",
       "issued_at": "2026-10-25T14:28:07Z",
       "minted_during": "tick",
       "caused_by": "W1047",
-      "last_worked": "2026-10-27T23:23:39Z",
+      "last_worked": "2026-10-27T23:40:24Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -26774,23 +26774,21 @@
     {
       "symbol": "W1136",
       "title": "Derive the round ceiling from luthen's W1645 series and drum's admission, with no typed threshold",
-      "status": "blocked",
+      "status": "ready",
       "enables": [
         "W1092"
       ],
       "touches": [
         "velocity"
       ],
-      "blocked_on": [
-        "luthen-observability:W1707"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Ask luthen-observability to export luthen's gate:luthen_gate_target_cpu_seconds:median7d, :p90_7d and gate:luthen_gate_target_cpu_samples:count7d in luthen-series.json (send the ask with nemik-ask, citing nemik:W1136); then read drum's admitted headroom; then call roundof.ceiling_of from width() and name the term as measured. ceiling_of itself landed (e254920)",
-      "evidence": "2026-10-27: landed e254920 (pushed, gate green): roundof.ceiling_of(cost_per_entry, headroom) is pure and keeps the declared CEILING while either input is <= 0; not yet called from width(). Refused twice first: an E501 docstring, then a working set holding W730 outside the round. Steps (1) and (2) are still to read | 2026-10-27: 2026-10-27 step (1) read: nemik-hostroot reads ratchet series from luthen-series.json in luthen's export tree (modified 17:32 local). It holds no luthen_gate_target_cpu series (grep: 0 hits for luthen_gate_target_cpu and no gate-named key), so the W1645 median and p90 are not in the route nemik reads. Needs luthen to add them to that export (or name another route); not yet asked, and no luthen-observability card citable from here | 2026-10-27: 2026-10-27 luthen-observability-ab carded the export as luthen-observability:W1707 and asked per-repo vs per-target (a target name discloses internal targets to the public static view) and which aggregate. Answered: one number per repo, no target names; the sum over a repo's targets of the median and of the p90, plus the target count and the minimum sample count",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Read drum's admitted CPU headroom from its interface (the second input); then, when mtools-ad names a card for nemik's per-target emitter, block the wiring of ceiling_of into width() on it; until a series exists nemik keeps the declared CEILING",
+      "evidence": "2026-10-27: landed e254920 (pushed, gate green): roundof.ceiling_of(cost_per_entry, headroom) is pure and keeps the declared CEILING while either input is <= 0; not yet called from width(). Refused twice first: an E501 docstring, then a working set holding W730 outside the round. Steps (1) and (2) are still to read | 2026-10-27: 2026-10-27 step (1) read: nemik-hostroot reads ratchet series from luthen-series.json in luthen's export tree (modified 17:32 local). It holds no luthen_gate_target_cpu series (grep: 0 hits for luthen_gate_target_cpu and no gate-named key), so the W1645 median and p90 are not in the route nemik reads. Needs luthen to add them to that export (or name another route); not yet asked, and no luthen-observability card citable from here | 2026-10-27: 2026-10-27 luthen-observability-ab carded the export as luthen-observability:W1707 and asked per-repo vs per-target (a target name discloses internal targets to the public static view) and which aggregate. Answered: one number per repo, no target names; the sum over a repo's targets of the median and of the p90, plus the target count and the minimum sample count | 2026-10-28: 2026-10-27 luthen-observability:W1707 landed (7833e69b): luthen-series.json now carries gate_cost {repo: {median_s, p90_s, targets, min_samples}} with no target names. Read from luthen-observability-ab, not yet by me from the file: only mtools has gate cost today (median_s 27419.7, p90_s 32571.73, targets 874, min_samples 1); every other repo, nemik included, is ABSENT, so nemik's own ceiling stays the declared CEILING. min_samples 1 means thin targets are mixed in; the sum is an upper bound on a gate, not a landing's marginal cost | 2026-10-28: 2026-10-27 luthen-observability-ab (a peer's word, store read by them): the export is not omitting nemik; mikemol.gate.target.cpu.seconds{repo,target} exists for ONE repo, mtools (874 series). nemik's gate is in the store only as mikemol.gate.run_seconds{repo=nemik}, per run, no target label, wall vs CPU not established. nemik's gate runs about 443 bazel test targets, so the mtools emitter may apply; asked mtools-ad (no citable mtools card yet). Until then nemik keeps the declared CEILING; drum's headroom is still unread",
       "issued_at": "2026-10-26T22:09:25Z",
       "minted_during": "interrupt",
       "caused_by": "W1092",
-      "last_worked": "2026-10-27T23:11:36Z",
+      "last_worked": "2026-10-28T00:12:15Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/roundof.py",
@@ -28577,15 +28575,6 @@
       "renewed_at": "2026-10-24T15:23:11Z",
       "expires_at": "2026-10-24T15:53:11Z",
       "lapse_ledgered": true
-    },
-    {
-      "tag": "file:docs/courier-read-path.md!w",
-      "holder": "claude-nemik",
-      "waypoint": "W1048",
-      "base_sha": "e25492033398f3d637ab7d17aff62fc44a8df3cb",
-      "taken_at": "2026-10-27T23:23:39Z",
-      "renewed_at": "2026-10-27T23:23:39Z",
-      "expires_at": "2026-10-27T23:53:39Z"
     }
   ],
   "advice": [
@@ -29230,7 +29219,8 @@
     }
   ],
   "tick_hooks": [
-    "nemik-inbound nemik"
+    "nemik-inbound nemik",
+    "/home/mikemol/github/nemik/.venv/bin/nemik-stale /home/mikemol/github/nemik/src/nemik /home/mikemol/github/nemik/.venv/lib/python3.13/site-packages/nemik"
   ],
   "standing": [
     "nemik repo rules (the fleet rules live in /home/mikemol/github/.claude/loop-prompt.md):",
