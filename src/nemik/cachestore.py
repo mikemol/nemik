@@ -2,16 +2,16 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W518: the build's two caches, kept between short-lived processes.
 
-The long-lived server rebuilt in about 16 s CPU because it kept the last SHACL run (nemik:W400: only
-what changed is validated again) and the flow solves (nemik:W401). A publisher that starts a fresh
-process for every build (nemik:W503) lost both: 37-57 s CPU cold, more than a minute of one core.
-This writes them beside the snapshots after a build and reads them before the next, so each build
-costs about the warm figure and its memory still goes back to the OS when the process exits.
+The long-lived server rebuilt in about 16 s CPU because it kept the last SHACL run (nemik:W400:
+only what changed is validated again) and the flow solves (nemik:W401). A publisher that starts a
+fresh process for every build (nemik:W503) lost both: 37-57 s CPU cold, more than a minute of one
+core. This writes them beside the snapshots after a build and reads them before the next, so each
+build costs about the warm figure and its memory still goes back to the OS when the process exits.
 
-A cache is only as good as what computed it, so the file carries a stamp over the shapes, the code that
-reads them and the engines' versions; a stamp that differs, or any file that will not load, is a cold
-start, never an error. The file is the publisher's own, in a directory it writes: nothing here reads a
-pickle that came from anywhere else.
+A cache is only as good as what computed it, so the file carries a stamp over the shapes, the code
+that reads them and the engines' versions; a stamp that differs, or any file that will not load,
+is a cold start, never an error. The file is the publisher's own, in a directory it writes:
+nothing here reads a pickle that came from anywhere else.
 """
 
 from __future__ import annotations
@@ -40,7 +40,7 @@ STRAY = 3600  # seconds before a temp file a killed run left behind is swept
 
 
 def stamp() -> str:
-    """What the cached values were computed by: the shapes, the cache code, the engines."""
+    """Stamp what the cached values were computed by: the shapes, the cache code, the engines."""
     digest = hashlib.sha256(f"format {FORMAT}".encode())
     for name in WATCHED:
         digest.update(files("nemik").joinpath(name).read_bytes())
@@ -84,7 +84,7 @@ def save(directory: Path, name: str = NAME) -> int:
 
 
 def load(directory: Path, name: str = NAME) -> bool:
-    """Restore both caches from `directory`; False (a cold start) for anything that is not this code's."""
+    """Restore both caches from `directory`; False (a cold start) for anything not this code's."""
     try:
         blob = pickle.loads((directory / name).read_bytes())
         if blob["stamp"] != stamp():
