@@ -40,7 +40,7 @@ def _imports_nemik(text: str) -> set[str]:
 # -- guarantees ---------------------------------------------------------------------------------
 
 
-def single_writer_boundary():
+def single_writer_boundary() -> None:
     # adapter.py is the ONE module that parses the state file (through mtools' store.load); no
     # other module re-implements that parse.
     mods = _modules()
@@ -50,14 +50,14 @@ def single_writer_boundary():
     assert readers == ["adapter"], f"store.load() called outside adapter.py: {readers}"
 
 
-def exit_code_is_the_verdict():
+def exit_code_is_the_verdict() -> None:
     text = _src("check.py")
     assert "sys.exit(1 if failed else 0)" in text, (
         "nemik-check's exit code is no longer 1-iff-Violation"
     )
 
 
-def provenance_lines_are_stable():
+def provenance_lines_are_stable() -> None:
     text = _src("check.py")
     assert 'f"provenance: nemik {sha' in text, "the nemik provenance line prefix moved"
     assert 'f"provenance: queue {repo}' in text, (
@@ -65,21 +65,21 @@ def provenance_lines_are_stable():
     )
 
 
-def unclaimed_is_a_literal_other_repos_grep():
+def unclaimed_is_a_literal_other_repos_grep() -> None:
     text = _src("blocks_cli.py")
     assert '"UNCLAIMED"' in text, (
         "the UNCLAIMED literal other repos' tick loops grep for is gone"
     )
 
 
-def symbol_pattern_is_enforced():
+def symbol_pattern_is_enforced() -> None:
     shapes = (SRC / "data" / "shapes.ttl").read_text()
     assert 'sh:pattern "^W[0-9]+$"' in shapes, (
         "the W<n> symbol pattern shape changed or was removed"
     )
 
 
-def hermetic_vendoring():
+def hermetic_vendoring() -> None:
     pyproject = (ROOT / "pyproject.toml").read_text()
     m = re.search(r"mikemol-pathsforward\s*=\s*\{\s*path\s*=", pyproject)
     assert m, (
@@ -87,7 +87,7 @@ def hermetic_vendoring():
     )
 
 
-def cross_repo_citation_form():
+def cross_repo_citation_form() -> None:
     from nemik.adapter import reference_uri
 
     got = str(reference_uri("alpha", "beta:W3"))
@@ -99,7 +99,7 @@ def cross_repo_citation_form():
 # -- standards ------------------------------------------------------------------------------------
 
 
-def oslc_cm_state_vocabulary():
+def oslc_cm_state_vocabulary() -> None:
     # oslc_cm:state is the OSLC CM property; its five values are nemik's own vocabulary (mtools'
     # status strings have no OSLC CM state URIs of their own to map onto).
     from nemik.adapter import NEMIK, OSLC_CM, STATE
@@ -117,13 +117,13 @@ def oslc_cm_state_vocabulary():
     assert OSLC_CM  # imported and actually referenced above, not vestigial
 
 
-def prov_activity_shape():
+def prov_activity_shape() -> None:
     text = _src("adapter.py")
     for term in ("PROV.Activity", "PROV.startedAtTime", "PROV.used"):
         assert term in text, f"ledger_graph() dropped {term}"
 
 
-def prometheus_label_format():
+def prometheus_label_format() -> None:
     from nemik.metrics import label
 
     got = label(repo="alpha", state="ready")
@@ -132,7 +132,7 @@ def prometheus_label_format():
     )
 
 
-def shacl_is_the_one_validator():
+def shacl_is_the_one_validator() -> None:
     mods = _modules()
     users = [
         name
@@ -146,19 +146,19 @@ def shacl_is_the_one_validator():
 # -- modularity -----------------------------------------------------------------------------------
 
 
-def adapter_is_the_foundation_layer():
+def adapter_is_the_foundation_layer() -> None:
     assert not _imports_nemik(_src("adapter.py")), (
         "adapter.py now depends on another nemik module"
     )
 
 
-def adoption_has_no_internal_coupling():
+def adoption_has_no_internal_coupling() -> None:
     assert not _imports_nemik(_src("adoption.py")), (
         "adoption.py picked up a dependency on another nemik module"
     )
 
 
-def hub_modules_depend_on_everything_below():
+def hub_modules_depend_on_everything_below() -> None:
     mods = _modules()
     lower = {"adapter", "blocks", "wake", "check"}
     # nemik:W232: nemik-metrics also reads the realizability verdicts, through realize.py, which
@@ -233,7 +233,7 @@ def import_graph_is_acyclic():
     mods = _modules()
     graph = {name: _imports_nemik(text) for name, text in mods.items()}
 
-    def reaches(a, b, seen=frozenset()):
+    def reaches(a: str, b: str, seen: frozenset[str] = frozenset()) -> bool:
         if a in seen:
             return False
         return b in graph[a] or any(reaches(dep, b, seen | {a}) for dep in graph[a])
@@ -242,7 +242,7 @@ def import_graph_is_acyclic():
         assert not reaches(name, name), f"a cycle passes through {name}.py"
 
 
-def rdf_is_not_centralized_behind_adapter():
+def rdf_is_not_centralized_behind_adapter() -> None:
     # The honest modularity gap: rdflib is a shared foundation library every module reaches for
     # directly, not a dependency adapter.py alone encapsulates.
     mods = _modules()
@@ -257,7 +257,7 @@ def rdf_is_not_centralized_behind_adapter():
     )
 
 
-def no_versioned_schema():
+def no_versioned_schema() -> None:
     # The claim is an absence: no version negotiation between shapes.ttl and its consumers.
     # Falsifiable both ways -- this fails the moment someone adds one, which is the point.
     # nemik:W465: staging one shape at sh:Info is nemik's own per-shape choice, not a version a
@@ -269,7 +269,7 @@ def no_versioned_schema():
         )
 
 
-def nemik_never_writes_a_queue():
+def nemik_never_writes_a_queue() -> None:
     # mikemol.pathsforward.store exposes save()/write_atomic() alongside load(); nemik's own
     # source never calls either, so this package is read-only with respect to the fleet's state.
     # Word-bounded: nemik.cachestore.save() (W518) writes the build's own caches, never a queue.
@@ -281,7 +281,7 @@ def nemik_never_writes_a_queue():
             )
 
 
-def check_py_bypasses_the_adapter_boundary():
+def check_py_bypasses_the_adapter_boundary() -> None:
     # The honest exception to single_writer_boundary()'s isolation claim: check.py imports an
     # mtools exception TYPE directly, rather than through a re-export adapter.py provides.
     text = _src("check.py")
