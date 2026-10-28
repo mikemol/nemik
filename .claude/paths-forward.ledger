@@ -2961,3 +2961,11 @@
 2026-10-28T05:37:33Z  status W1203 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-28T05:49:11Z  interrupt W1204 minted    -         "blocks.py, index.py and overlaps.py lose eleven ruff findings: long comment and docstring lines wrapped and four docstring first lines made imperative or shortened, so ruff falls 2498 to 2487 (paydown)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1196
 2026-10-28T05:49:23Z  status W1204 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T06:14:30Z  status W1203 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T06:43:55Z  interrupt W1205 minted    -         "check.py loses nine ruff findings: its module docstring, comment blocks and two long f-strings wrapped, and one docstring first line made imperative, so ruff falls 2487 to 2478 (paydown)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1196
+2026-10-28T06:44:08Z  status W1205 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T06:51:33Z  interrupt W1206 minted    -         "checks/claims.py annotates its claim functions: 18 parameterless ones return None and the nested reaches is typed, so mypy falls 4441 to 4375 and ruff 22 more (paydown)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1196
+2026-10-28T06:51:45Z  status W1206 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T06:59:01Z  status W1204 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T07:13:25Z  interrupt W1207 minted    -         "Eight test files annotate their pytest fixtures and procedures: tmp_path as Path, monkeypatch as MonkeyPatch, capsys as CaptureFixture, and -> None, so mypy falls 4375 to 4325 and ruff 2456 to 2433 (paydown)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1196
+2026-10-28T07:20:31Z  status W1207 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

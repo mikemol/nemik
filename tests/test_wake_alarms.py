@@ -49,7 +49,7 @@ def _graph(tmp_path: Path) -> Graph:
     return queue_graph("life", q)
 
 
-def test_fired_alarms_in_a_window_with_owner_liveness(tmp_path) -> None:
+def test_fired_alarms_in_a_window_with_owner_liveness(tmp_path: Path) -> None:
     g = _graph(tmp_path)
     live = {"life": {"verdict": "ok"}}
     got = fired_alarms(
@@ -63,7 +63,7 @@ def test_fired_alarms_in_a_window_with_owner_liveness(tmp_path) -> None:
     ]  # the done waypoint W1 never fires
 
 
-def test_a_bad_alarm_is_reported_not_fatal(tmp_path) -> None:
+def test_a_bad_alarm_is_reported_not_fatal(tmp_path: Path) -> None:
     g = _graph(tmp_path)
     from rdflib import Literal
 
@@ -78,7 +78,7 @@ def test_a_bad_alarm_is_reported_not_fatal(tmp_path) -> None:
     )
 
 
-def test_alarms_nudge_delivers_each_firing_once(tmp_path, capsys) -> None:
+def test_alarms_nudge_delivers_each_firing_once(tmp_path: Path, capsys) -> None:
     """nemik:W167: --alarms --nudge prints a firing on the first run only, sharing the nudges state."""
     from nemik.wake import main
 
@@ -106,7 +106,9 @@ def test_alarms_nudge_delivers_each_firing_once(tmp_path, capsys) -> None:
     assert json.loads(state.read_text())["life"] == 1.0  # the repo nudge state survives
 
 
-def test_live_owner_gets_a_send_ready_line_and_a_sleeper_does_not(tmp_path) -> None:
+def test_live_owner_gets_a_send_ready_line_and_a_sleeper_does_not(
+    tmp_path: Path,
+) -> None:
     """nemik:W168: the first line stands alone and cites the waypoint; asleep owners get none."""
     g = _graph(tmp_path)
     window = (datetime(2026, 10, 1, tzinfo=UTC), datetime(2026, 10, 2, tzinfo=UTC))
@@ -119,7 +121,9 @@ def test_live_owner_gets_a_send_ready_line_and_a_sleeper_does_not(tmp_path) -> N
     assert all("message" not in a for a in asleep)
 
 
-def test_a_sleeping_owner_of_a_fired_alarm_joins_the_wake_roster(tmp_path) -> None:
+def test_a_sleeping_owner_of_a_fired_alarm_joins_the_wake_roster(
+    tmp_path: Path,
+) -> None:
     """nemik:W151: asleep owner -> roster row (then the usual nudge/wake); awake owner -> no row."""
     from nemik.wake import due_nudges, roster
 

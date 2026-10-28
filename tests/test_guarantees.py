@@ -110,7 +110,9 @@ def test_unscored_counts_open_waypoints_without_a_vector() -> None:
     assert unscored(g, "a") == 2
 
 
-def test_check_names_rule_and_pair_and_exits_one(capsys) -> None:
+def test_check_names_rule_and_pair_and_exits_one(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
     g = Graph()
     _wp(g, "W1", pos=0, touches=("opa",))
     _wp(g, "W2", pos=1, vector=V.format(R="H", S="C"), touches=("opa",))
@@ -127,7 +129,9 @@ def test_check_names_rule_and_pair_and_exits_one(capsys) -> None:
     assert not any(line.startswith("rank: OK") for line in out)
 
 
-def test_check_ok_still_reports_the_unscored_census(capsys) -> None:
+def test_check_ok_still_reports_the_unscored_census(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
     g = Graph()
     _wp(g, "W1", pos=0)
     with pytest.raises(SystemExit) as e:

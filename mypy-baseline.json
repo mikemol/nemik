@@ -1,8 +1,7 @@
 {
  "checks/claims.py": {
-  "misc": 46,
-  "no-untyped-call": 3,
-  "no-untyped-def": 20
+  "misc": 2,
+  "no-untyped-def": 1
  },
  "src/nemik/adapter.py": {
   "misc": 9
@@ -195,8 +194,7 @@
   "type-arg": 1
  },
  "tests/test_calendar_boundary.py": {
-  "misc": 6,
-  "no-untyped-def": 1
+  "misc": 1
  },
  "tests/test_calendars.py": {
   "misc": 49,
@@ -223,10 +221,6 @@
   "explicit-any": 6,
   "misc": 83
  },
- "tests/test_deterministic.py": {
-  "misc": 3,
-  "no-untyped-def": 1
- },
  "tests/test_editable.py": {
   "misc": 9,
   "no-untyped-call": 1,
@@ -251,8 +245,7 @@
   "misc": 17
  },
  "tests/test_guarantees.py": {
-  "misc": 25,
-  "no-untyped-def": 2
+  "misc": 18
  },
  "tests/test_history.py": {
   "misc": 87,
@@ -260,8 +253,7 @@
   "type-arg": 2
  },
  "tests/test_hooks_wired.py": {
-  "misc": 11,
-  "no-untyped-def": 1
+  "misc": 8
  },
  "tests/test_ics_reader.py": {
   "misc": 6,
@@ -405,23 +397,19 @@
   "misc": 12
  },
  "tests/test_wake_alarms.py": {
-  "misc": 53,
-  "no-untyped-def": 5
+  "misc": 45,
+  "no-untyped-def": 1
  },
  "tests/test_wake_nudge.py": {
   "misc": 19,
   "type-arg": 1
  },
- "tests/test_weather.py": {
-  "misc": 2,
-  "no-untyped-def": 1
- },
  "tests/test_web_render.py": {
   "misc": 2
  },
  "tests/test_withheld.py": {
-  "misc": 64,
-  "no-untyped-def": 6
+  "misc": 62,
+  "no-untyped-def": 4
  },
  "tests/test_witness_party.py": {
   "misc": 11,
@@ -432,8 +420,8 @@
   "misc": 11
  },
  "tests/test_witnesses.py": {
-  "misc": 69,
-  "no-untyped-def": 10,
+  "misc": 65,
+  "no-untyped-def": 6,
   "type-arg": 1
  },
  "tests/test_work.py": {

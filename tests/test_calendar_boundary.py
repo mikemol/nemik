@@ -48,7 +48,7 @@ def test_no_served_module_reaches_the_calendar_reader() -> None:
         assert not seen & HOST_ONLY, f"nemik.{start} reaches {seen & HOST_ONLY}"
 
 
-def test_a_cal_blocker_serves_no_event(tmp_path) -> None:
+def test_a_cal_blocker_serves_no_event(tmp_path: Path) -> None:
     import json
 
     from nemik.serve import Model

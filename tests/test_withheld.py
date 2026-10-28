@@ -25,19 +25,19 @@ def _write(tmp_path: Path, doc: dict[str, object]) -> Path:
     return p
 
 
-def test_missing_list_fails(tmp_path) -> None:
+def test_missing_list_fails(tmp_path: Path) -> None:
     with pytest.raises(WithheldError, match="did not run"):
         load(tmp_path / "withheld.json")
     with pytest.raises(WithheldError, match="did not run"):
         load(None)
 
 
-def test_unknown_version_fails(tmp_path) -> None:
+def test_unknown_version_fails(tmp_path: Path) -> None:
     with pytest.raises(WithheldError, match="unknown version"):
         load(_write(tmp_path, {"version": 2, "items": []}))
 
 
-def test_empty_list_withholds_nothing(tmp_path, docs) -> None:
+def test_empty_list_withholds_nothing(tmp_path: Path, docs) -> None:
     assert (
         apply(docs, load(_write(tmp_path, {"version": 1, "as_of": "x", "items": []})))
         == docs

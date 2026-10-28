@@ -36,7 +36,7 @@ def test_each_wired_hook_is_installed_in_the_built_venv() -> None:
         assert (installed._bin()[0] / hook).exists(), hook
 
 
-def test_a_hook_run_with_a_session_start_payload_exits_zero(tmp_path) -> None:
+def test_a_hook_run_with_a_session_start_payload_exits_zero(tmp_path: Path) -> None:
     """Both hooks never refuse: a SessionStart payload for a repo with no queue is silent, exit 0."""
     env = {
         **installed._bin()[1],

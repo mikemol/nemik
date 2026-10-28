@@ -59,7 +59,7 @@ def test_time_witness_uses_input_now() -> None:
     assert witness(q, now=datetime(2026, 10, 2, tzinfo=UTC))[0] == "true"
 
 
-def test_git_ref_witness(tmp_path, monkeypatch) -> None:
+def test_git_ref_witness(tmp_path, monkeypatch: pytest.MonkeyPatch) -> None:
     import subprocess
 
     repo = tmp_path / "r"
@@ -89,7 +89,9 @@ def test_git_ref_witness(tmp_path, monkeypatch) -> None:
     assert witness('input.git_ref["../r@main"].exists')[0] == "undefined"
 
 
-def test_runner_applies_only_holding_witnesses(tmp_path, monkeypatch, capsys) -> None:
+def test_runner_applies_only_holding_witnesses(
+    tmp_path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
     import json
 
     flag = tmp_path / "flag"
@@ -134,7 +136,7 @@ def test_runner_applies_only_holding_witnesses(tmp_path, monkeypatch, capsys) ->
     assert after["W2"]["status"] == "blocked"
 
 
-def _serve(monkeypatch, routes: dict) -> None:
+def _serve(monkeypatch: pytest.MonkeyPatch, routes: dict) -> None:
     import json
     import threading
     from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -158,7 +160,7 @@ def _serve(monkeypatch, routes: dict) -> None:
     monkeypatch.setenv("NEMIK_VM_URL", base)
 
 
-def test_alert_and_promql_witnesses(monkeypatch) -> None:
+def test_alert_and_promql_witnesses(monkeypatch: pytest.MonkeyPatch) -> None:
     alerts = [
         {"name": "Trace", "state": "firing", "labels": {"repo": "a"}},
         {"name": "Trace", "state": "pending", "labels": {"repo": "b"}},
@@ -194,12 +196,14 @@ def test_alert_and_promql_witnesses(monkeypatch) -> None:
     assert witness('input.promql["absent_metric"].empty')[0] == "true"
 
 
-def test_unset_endpoint_is_undefined(monkeypatch) -> None:
+def test_unset_endpoint_is_undefined(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.delenv("NEMIK_VM_URL", raising=False)
     assert witness('input.promql["up"].empty')[0] == "undefined"
 
 
-def test_apply_writes_letters_to_waiting_repos(tmp_path, monkeypatch, capsys) -> None:
+def test_apply_writes_letters_to_waiting_repos(
+    tmp_path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
     import json
 
     flag = tmp_path / "flag"
@@ -269,7 +273,9 @@ def test_apply_writes_letters_to_waiting_repos(tmp_path, monkeypatch, capsys) ->
     assert states["W2"] == "ready"
 
 
-def test_the_skills_weather_examples_are_valid_witnesses(monkeypatch) -> None:
+def test_the_skills_weather_examples_are_valid_witnesses(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     """nemik:W173: the witness examples SKILL.md teaches evaluate against the observers' fact shapes
     (a first draft compared input.alert[...] to a string, missing `.state`).
     """

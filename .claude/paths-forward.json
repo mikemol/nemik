@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1204,
+  "counter": 1207,
   "waypoints": [
     {
       "symbol": "W1",
@@ -26914,11 +26914,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Land test_viewstate with watched page and webpage.until as the first entry of the next stack",
-      "evidence": "2026-10-27: 2026-10-27 instances read from nemik's own replay logs (.git/image-replica-<sha>.log, the single-process pytest of the image's test stage; each shows exactly one failing test): 25658ca test_the_panel_names_the_repos_with_work_that_are_not_awake; 24b9950 test_a_poll_that_only_changes_fields_follows_in_place; 100a574 test_tab_visits_the_pages_controls_in_reading_order; 2e22663 test_picked_repos_show_their_blockers_blockers_as_context; 3736e58 test_a_static_build_refetches_only_the_pieces_whose_hash_moved; 478fc6a test_a_poll_that_only_changes_fields_follows_in_place; and the popover test (W1131, proven: an unreachable card) on 5220985, 40fdee1, 0e10f72, f6d2915, 751f9df. The replays since 56d95df are green, which is one sample and proves nothing. Only the popover instance has a proven cause; the others are not shown to share the viewport cause | 2026-10-27: 2026-10-27: not the whole story for the missing image: .forgejo/workflows/build.yml (W703) builds the Containerfile's gated stage, skipping the in-image suite, when the pushed commit's Gated-Tree trailer equals its tree; HEAD 277b782 carries a matching trailer, so its build should not run the suite at all. Open: what Forgejo's tasks 941-943 built and where they failed (luthen reads the runner logs) | 2026-10-27: 2026-10-27 luthen read Forgejo's buildkit stream: four builds failed at the in-image pytest (Solve errors 19:34:18Z, 20:42:22Z, 21:50:57Z, 22:57:37Z); the 21:50 and 22:57 ones failed tests/test_layout.py:958 'assert box is not None' (the popover test, W1131, so those tips predate the fix; the slow-call list names test_repo_toggles_and_salience_order at 87.9 s, which is not the failing one), 1 failed with 1696 and 1706 passed. A build whose pytest started 23:00:40Z passed: 1707 passed, 8 skipped in 4934 s, no failure; no registry push seen yet at 00:43Z. These builds ran the full suite, so the Gated-Tree skip (W703) did not apply to them; why is not read yet. The sha per task is not in the runner logs; Forgejo's UI or API would name it | 2026-10-27: 2026-10-27T01:14Z a new KIND of instance, in the commit gate not the image: stack546's gate TIMED OUT //:test_layout shard 4 of 6 at 900 s (the other five shards 104 s to 400 s) with exactly one test passed before the hang; no assertion failed. Shard 4 is positions 3, 9, 15, ... of the 42 collected (conftest.shard_of): scope_rings, then default_view_legible[dark], ...; locally the same shard (TEST_TOTAL_SHARDS=6 TEST_SHARD_INDEX=3) passes in 40 s. The tests wait on cy with wait_for_function(timeout=0) (W1085): a page that neither draws nor errors waits forever, which the page-error race (mikemol.webpage until/watch) does not catch. Cause not yet shown; the timed-out target is being run alone on an idle host as the rule says | 2026-10-27: 2026-10-27: //:test_layout run alone on the idle host passed all 42 tests in 100 s (six shards); so the 900 s hang of shard 4 happened only under the gate's load, and stack546 was resubmitted because it carries the ratchet sensor fix (an outage): the hang is NOT explained and this card stays open; the next instance should name the test and the pending request | 2026-10-27: 2026-10-27 instance: stack550 (W1034 codon: tracker/ratchetseries/roundgauges/baselinetop, no web or viewstate files) refused at 03:44Z: //:test_viewstate TIMEOUT in 300.2s, 424 of 425 passed, no failing assertion. Gate ran 951 s elapsed with a census of other work beside it. Per the rule the timed-out target is run alone first, once the gate in flight (stack551, which also carries no viewstate file) has given its own reading of the same target. | 2026-10-27: 0becdcc landed: test_viewstate in three shards (39 s alone, sharded run 28 s; load-bound, not a hang). The class card stays open for the other timeouts and the layout hang instrumentation. | 2026-10-27: 2026-10-27 instance after the shard fix: stack558 (W1153, history/netforecast/tests only) refused at 07:29Z: //:test_viewstate TIMEOUT in 1 of 3 shards, shard 1 of 3 at 300.1 s, the others 69 s and one more (stats over 3 runs: max 300.1 s, min 69.0 s, avg 146 s). Sharding did not prevent it, and one shard at 4x its siblings is a hang, not load: W1063's class. Run alone next (3 runs); then read the code of shard 1's tests for the blocking interleaving. | 2026-10-27: 2026-10-27 finding from reading the module (the proof, not a rerun): every READY wait in tests/test_viewstate.py is page.wait_for_function(READY, timeout=0), unbounded, and the page is never watched, so a page that fails to reach READY (a script lost under load, the W1060/W846 popLater class) cannot raise: the shard waits until the harness kills it at 300 s. That is exactly a shard at 4x its siblings with no failing assertion. The same defect W1085 fixed in test_layout. Fix: the page fixture watches the page before it navigates and the eight READY waits go through webpage.until, which raises PageBrokenError naming the page's error. This does not stop a script being lost; it turns the 300 s hang into a failure that names it (and, with the recording harness, the asset), so the flake can be traced and the gate stops losing 15 minutes to it. | 2026-10-27: bb3aa32 landed: test_viewstate watches its page and waits with webpage.until; the 300 s shard hang becomes a failure that names the page error. W1140 stays open: test_layout and the other browser tests still carry raw timeout=0 waits. | 2026-10-27: 2026-10-27 instance: stack560 (W1157, W1149: installed.py, history.py git_lines, tools, tests) refused at 08:44Z after a 1348 s gate: //:test_cardtree TIMEOUT at 300.4 s, 433 of 434 passing, no failing assertion, no web file in the stack. Run alone, three repeats: passes, about 93 s critical path of its 300 s (31 percent, under the 50 percent bar). Its page is already watched and its waits bounded (30 s default), so this is not the unbounded-wait defect of test_viewstate; it is the same load-bound class. Per the rule it is sharded finer, not given time: test_cardtree joins the three-shard list. The class card stays open: the gate runs 434 targets beside each other and browser tests take 3 to 8 times their alone time. | 2026-10-27: c9999c1 landed: test_cardtree in three shards (93 s alone, timed out at 300 s under the stack560 gate). W1140 stays open: other browser tests carry raw timeout=0 waits, and the gate still runs 434 targets beside each other.",
+      "evidence": "2026-10-27: 2026-10-27 instances read from nemik's own replay logs (.git/image-replica-<sha>.log, the single-process pytest of the image's test stage; each shows exactly one failing test): 25658ca test_the_panel_names_the_repos_with_work_that_are_not_awake; 24b9950 test_a_poll_that_only_changes_fields_follows_in_place; 100a574 test_tab_visits_the_pages_controls_in_reading_order; 2e22663 test_picked_repos_show_their_blockers_blockers_as_context; 3736e58 test_a_static_build_refetches_only_the_pieces_whose_hash_moved; 478fc6a test_a_poll_that_only_changes_fields_follows_in_place; and the popover test (W1131, proven: an unreachable card) on 5220985, 40fdee1, 0e10f72, f6d2915, 751f9df. The replays since 56d95df are green, which is one sample and proves nothing. Only the popover instance has a proven cause; the others are not shown to share the viewport cause | 2026-10-27: 2026-10-27: not the whole story for the missing image: .forgejo/workflows/build.yml (W703) builds the Containerfile's gated stage, skipping the in-image suite, when the pushed commit's Gated-Tree trailer equals its tree; HEAD 277b782 carries a matching trailer, so its build should not run the suite at all. Open: what Forgejo's tasks 941-943 built and where they failed (luthen reads the runner logs) | 2026-10-27: 2026-10-27 luthen read Forgejo's buildkit stream: four builds failed at the in-image pytest (Solve errors 19:34:18Z, 20:42:22Z, 21:50:57Z, 22:57:37Z); the 21:50 and 22:57 ones failed tests/test_layout.py:958 'assert box is not None' (the popover test, W1131, so those tips predate the fix; the slow-call list names test_repo_toggles_and_salience_order at 87.9 s, which is not the failing one), 1 failed with 1696 and 1706 passed. A build whose pytest started 23:00:40Z passed: 1707 passed, 8 skipped in 4934 s, no failure; no registry push seen yet at 00:43Z. These builds ran the full suite, so the Gated-Tree skip (W703) did not apply to them; why is not read yet. The sha per task is not in the runner logs; Forgejo's UI or API would name it | 2026-10-27: 2026-10-27T01:14Z a new KIND of instance, in the commit gate not the image: stack546's gate TIMED OUT //:test_layout shard 4 of 6 at 900 s (the other five shards 104 s to 400 s) with exactly one test passed before the hang; no assertion failed. Shard 4 is positions 3, 9, 15, ... of the 42 collected (conftest.shard_of): scope_rings, then default_view_legible[dark], ...; locally the same shard (TEST_TOTAL_SHARDS=6 TEST_SHARD_INDEX=3) passes in 40 s. The tests wait on cy with wait_for_function(timeout=0) (W1085): a page that neither draws nor errors waits forever, which the page-error race (mikemol.webpage until/watch) does not catch. Cause not yet shown; the timed-out target is being run alone on an idle host as the rule says | 2026-10-27: 2026-10-27: //:test_layout run alone on the idle host passed all 42 tests in 100 s (six shards); so the 900 s hang of shard 4 happened only under the gate's load, and stack546 was resubmitted because it carries the ratchet sensor fix (an outage): the hang is NOT explained and this card stays open; the next instance should name the test and the pending request | 2026-10-27: 2026-10-27 instance: stack550 (W1034 codon: tracker/ratchetseries/roundgauges/baselinetop, no web or viewstate files) refused at 03:44Z: //:test_viewstate TIMEOUT in 300.2s, 424 of 425 passed, no failing assertion. Gate ran 951 s elapsed with a census of other work beside it. Per the rule the timed-out target is run alone first, once the gate in flight (stack551, which also carries no viewstate file) has given its own reading of the same target. | 2026-10-27: 0becdcc landed: test_viewstate in three shards (39 s alone, sharded run 28 s; load-bound, not a hang). The class card stays open for the other timeouts and the layout hang instrumentation. | 2026-10-27: 2026-10-27 instance after the shard fix: stack558 (W1153, history/netforecast/tests only) refused at 07:29Z: //:test_viewstate TIMEOUT in 1 of 3 shards, shard 1 of 3 at 300.1 s, the others 69 s and one more (stats over 3 runs: max 300.1 s, min 69.0 s, avg 146 s). Sharding did not prevent it, and one shard at 4x its siblings is a hang, not load: W1063's class. Run alone next (3 runs); then read the code of shard 1's tests for the blocking interleaving. | 2026-10-27: 2026-10-27 finding from reading the module (the proof, not a rerun): every READY wait in tests/test_viewstate.py is page.wait_for_function(READY, timeout=0), unbounded, and the page is never watched, so a page that fails to reach READY (a script lost under load, the W1060/W846 popLater class) cannot raise: the shard waits until the harness kills it at 300 s. That is exactly a shard at 4x its siblings with no failing assertion. The same defect W1085 fixed in test_layout. Fix: the page fixture watches the page before it navigates and the eight READY waits go through webpage.until, which raises PageBrokenError naming the page's error. This does not stop a script being lost; it turns the 300 s hang into a failure that names it (and, with the recording harness, the asset), so the flake can be traced and the gate stops losing 15 minutes to it. | 2026-10-27: bb3aa32 landed: test_viewstate watches its page and waits with webpage.until; the 300 s shard hang becomes a failure that names the page error. W1140 stays open: test_layout and the other browser tests still carry raw timeout=0 waits. | 2026-10-27: 2026-10-27 instance: stack560 (W1157, W1149: installed.py, history.py git_lines, tools, tests) refused at 08:44Z after a 1348 s gate: //:test_cardtree TIMEOUT at 300.4 s, 433 of 434 passing, no failing assertion, no web file in the stack. Run alone, three repeats: passes, about 93 s critical path of its 300 s (31 percent, under the 50 percent bar). Its page is already watched and its waits bounded (30 s default), so this is not the unbounded-wait defect of test_viewstate; it is the same load-bound class. Per the rule it is sharded finer, not given time: test_cardtree joins the three-shard list. The class card stays open: the gate runs 434 targets beside each other and browser tests take 3 to 8 times their alone time. | 2026-10-27: c9999c1 landed: test_cardtree in three shards (93 s alone, timed out at 300 s under the stack560 gate). W1140 stays open: other browser tests carry raw timeout=0 waits, and the gate still runs 434 targets beside each other. | 2026-10-28: 2026-10-28 instance: stack603 (W1206 claims.py annotations, W1205 check.py ruff; no web or publish file) refused after a 1842 s gate: //:test_publish TIMEOUT at 300.5 s, 443 of 444 passing, no failing assertion ('.....' then the timeout line; the log holds nothing else). Run alone, three runs: passes (193 s elapsed for three, one run read at about 160 s, over half its 300 s). Per the rule it is sharded finer, not given time: test_publish joins the three-shard list in BUILD.bazel; sharded alone it passes with its longest shard at about 85 s. Resubmitted with the stack's content in a new stack (605); stack604, built on stack603's baselines, was withdrawn because it would have been refused by the ratchet on its own",
       "issued_at": "2026-10-27T00:40:50Z",
       "minted_during": "interrupt",
       "caused_by": "W1131",
-      "last_worked": "2026-10-27T09:25:10Z",
+      "last_worked": "2026-10-28T07:47:47Z",
       "ticks_blocked": 0,
       "manifest": [
         "BUILD.bazel"
@@ -28588,21 +28588,21 @@
     {
       "symbol": "W1203",
       "title": "pins.py, calendars.py and calwrite.py lose ten ruff findings: long comment, docstring and f-string lines rewrapped and docstring first lines made imperative, so ruff falls 2508 to 2498 (paydown)",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:ruff-baseline.json"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "stack600 queued; bazel test //:test_pins //:test_calendars //:test_calwrite passed (3 of 3); ruff 2498 against the written baseline, mypy 4441 unchanged (one f-string split in calendars was reverted because it added three mypy findings)",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-28: landed 8ebc221 (pushed, gate green): pins, calendars, calwrite lose ten ruff findings; ruff 2498. Gate: 441 fresh of 444, sent=True",
       "issued_at": "2026-10-28T05:34:54Z",
       "minted_during": "interrupt",
       "caused_by": "W1196",
-      "last_worked": "2026-10-28T05:37:33Z",
+      "last_worked": "2026-10-28T06:14:30Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261028T061430Z",
       "manifest": [
         "src/nemik/pins.py",
         "src/nemik/calendars.py",
@@ -28614,6 +28614,32 @@
     {
       "symbol": "W1204",
       "title": "blocks.py, index.py and overlaps.py lose eleven ruff findings: long comment and docstring lines wrapped and four docstring first lines made imperative or shortened, so ruff falls 2498 to 2487 (paydown)",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "file:ruff-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-28: landed e175242 (pushed, gate green): blocks, index, overlaps lose eleven ruff findings; ruff 2487",
+      "issued_at": "2026-10-28T05:49:11Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1196",
+      "last_worked": "2026-10-28T06:59:01Z",
+      "ticks_blocked": 0,
+      "completed": "20261028T065901Z",
+      "manifest": [
+        "src/nemik/blocks.py",
+        "src/nemik/index.py",
+        "src/nemik/overlaps.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W1205",
+      "title": "check.py loses nine ruff findings: its module docstring, comment blocks and two long f-strings wrapped, and one docstring first line made imperative, so ruff falls 2487 to 2478 (paydown)",
       "status": "working",
       "enables": [],
       "touches": [
@@ -28621,18 +28647,72 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "stack601 queued behind stack600; bazel test of test_overlaps, test_overlap_claims, test_index, test_witness_party, test_operator_act_shape, test_card_warnings passed (6 of 6); ruff 2487 against the written baseline, mypy 4441",
+      "next_bounded_step": "stack602 queued behind stack601; bazel test of test_sla, test_operator_probe, test_saturation, test_check_summary, test_check_committed, test_check_warnings, test_ready_neither passed (7 of 7); ruff 2478 against the written baseline, mypy 4441",
       "evidence": "",
-      "issued_at": "2026-10-28T05:49:11Z",
+      "issued_at": "2026-10-28T06:43:55Z",
       "minted_during": "interrupt",
       "caused_by": "W1196",
-      "last_worked": "2026-10-28T05:49:23Z",
+      "last_worked": "2026-10-28T06:44:08Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
-        "src/nemik/blocks.py",
-        "src/nemik/index.py",
-        "src/nemik/overlaps.py",
+        "src/nemik/check.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W1206",
+      "title": "checks/claims.py annotates its claim functions: 18 parameterless ones return None and the nested reaches is typed, so mypy falls 4441 to 4375 and ruff 22 more (paydown)",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:mypy-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "stack603 entry 1, W1205 (check.py ruff) entry 2; bazel test of test_claims_cited, test_claims_boundary, test_architecture, test_guarantees passed (4 of 4); mypy 4375 and ruff 2456 against the written baselines",
+      "evidence": "",
+      "issued_at": "2026-10-28T06:51:33Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1196",
+      "last_worked": "2026-10-28T06:51:45Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "checks/claims.py",
+        "mypy-baseline.json"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W1207",
+      "title": "Eight test files annotate their pytest fixtures and procedures: tmp_path as Path, monkeypatch as MonkeyPatch, capsys as CaptureFixture, and -> None, so mypy falls 4375 to 4325 and ruff 2456 to 2433 (paydown)",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:mypy-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "stack604 queued behind stack603; bazel test of the eight touched test targets passed (8 of 8); mypy 4325 and ruff 2433 against the written baselines. Skipped by the codemod for a missing import: ics_reader, flow_cache, score, rank, vtodo, alarm, floorasks, static, memo_audits, history, editable (they need pytest or Path imported first)",
+      "evidence": "",
+      "issued_at": "2026-10-28T07:13:25Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1196",
+      "last_worked": "2026-10-28T07:20:31Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "tests/test_witnesses.py",
+        "tests/test_hooks_wired.py",
+        "tests/test_deterministic.py",
+        "tests/test_weather.py",
+        "tests/test_wake_alarms.py",
+        "tests/test_guarantees.py",
+        "tests/test_withheld.py",
+        "tests/test_calendar_boundary.py",
+        "mypy-baseline.json",
         "ruff-baseline.json"
       ],
       "size_class": "small"
