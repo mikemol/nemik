@@ -7,7 +7,8 @@ Every run first prints `provenance:` lines: nemik's own commit (with `+uncommitt
 tree is dirty), and per queue `committed`, `uncommitted` or `untracked-source`. The exit code
 means only the verdict.
 sh:Warning results (vocabulary divergence not yet agreed across repos, stale edges into residue)
-are printed but do not fail the check: divergence is reported to summit's floor, not enforced. This is the check summit registers the capability against.
+are printed but do not fail the check: divergence is reported to summit's floor, not enforced.
+This is the check summit registers the capability against.
 """
 
 from __future__ import annotations
@@ -636,7 +637,8 @@ def survey(
     lap("annotate")
     from nemik.hostapply import HOST_REF, load
 
-    # nemik:W256: a cited host-apply row the export does not hold is an unresolved citation. Only the
+    # nemik:W256: a cited host-apply row the export does not hold is an unresolved citation.
+    # Only the
     # file is read (no exporter subprocess), and no export at all leaves the citation as it was.
     try:
         export = load(root, run_exporter=False)
@@ -701,7 +703,8 @@ def survey(
             by_repo.setdefault(mrepo, []).append(("Warning", msym, found))
     # nemik:W348: a repo holding more needs-you asks than the declared cap has made the operator its
     # bottleneck (the doc's "paralyzed waiting on too many parallel operator answers"). One Warning
-    # on the repo, with the count and the oldest ask, so the remedy (batch, withdraw, share) is local.
+    # on the repo, with the count and the oldest ask, so the remedy (batch, withdraw, share) is
+    # local.
     from rdflib import URIRef
     from rdflib.namespace import DCTERMS
 
@@ -729,13 +732,17 @@ def survey(
             for r in refs
         )
         oldest = next((s[:10] for s in stamps if s), "unknown")
-        found = f"{len(refs)} needs-you operator asks are open (cap {cap}, oldest issued {oldest}): {remedy}"
+        found = (
+            f"{len(refs)} needs-you operator asks are open "
+            f"(cap {cap}, oldest issued {oldest}): {remedy}"
+        )
         by_repo.setdefault(orepo, []).append(("Warning", "--", found))
     # nemik:W685: a repo whose ready cards without a manifest passed the declared ratchet.
     add_manifest_warnings(merged, by_repo)
     add_roll_warnings(root, merged, by_repo)
     add_ready_neither_infos(root, by_repo)
-    # nemik:W356: an inter-workstream SLA. A card blocked on another repo's open card for longer than
+    # nemik:W356: an inter-workstream SLA. A card blocked on another repo's open card for longer
+    # than
     # the declared number of loop ticks is a Warning on the BLOCKER's card, since that repo can act.
     sla = int(tomllib.loads(weights_toml).get("sla", {}).get("cross_repo_ticks", 48))
     for waiter, _, target in merged.triples((None, NEMIK.waitsFor, None)):
@@ -797,7 +804,8 @@ def survey(
             if s in open_nodes and s != n:
                 prereqs.setdefault(s, set()).add(n)
 
-    # An umbrella is what the shape calls one: two or more open children enable it. Only umbrellas are
+    # An umbrella is what the shape calls one: two or more open children enable it. Only
+    # umbrellas are
     # descended (their work IS their children); a single step that waits on something is still the
     # step you wait for, so the descent stops at the first non-umbrella.
     def umbrella(n) -> bool:
@@ -826,7 +834,10 @@ def survey(
         if len(leaves) == 1:
             (leaf,) = leaves
             # `--update=W<n>`: the same argument to argparse, and never read as a "repo W<n>" cite
-            hint = f"waits on {ref(target)}, whose open step is {leaf}: {pf} --update={wsym} --blocked-on {leaf}"
+            hint = (
+                f"waits on {ref(target)}, whose open step is {leaf}: "
+                f"{pf} --update={wsym} --blocked-on {leaf}"
+            )
         else:
             hint = (
                 f"waits on {ref(target)}, whose open steps are {', '.join(sorted(leaves))}: "
@@ -881,7 +892,7 @@ def exported_commit(queue_dir: Path) -> tuple[str, str] | None:
 
 
 def provenance(root: Path) -> list[str]:
-    """What this verdict rests on: nemik's own commit, and each queue's committed-or-not state.
+    """State what this verdict rests on: nemik's own commit and each queue's committed state.
 
     One line per fact, prefixed `provenance:`, so a reader can grep them. A queue outside any git
     tree (luthen's export) reads `untracked-source`, unless the exporter also wrote `commit.json`
@@ -926,7 +937,8 @@ def _realizability(root: Path) -> int:
 
     now, residue, unjudged = stamp(datetime.now(UTC)), 0, 0
     version = policy_version()
-    # nemik:W236: the clock is the policy's input, so the verdicts below are a function of it; say which.
+    # nemik:W236: the clock is the policy's input, so the verdicts below are a function of it;
+    # say which.
     print(f"as_of {now}  policy {version[:12]}")
     for repo, path in workstream_files(root, QUEUE):
         try:
