@@ -75,11 +75,11 @@ async function sourceGraph(src) {
     return whole.json();
   }
   const hashes = await res.json();
-  const piece = async path => {
+  const piece = path => {  // nemik:W1140: the cache holds the PROMISE, so rounds that overlap share one fetch
     const key = base + path;
     if (!pieceCache[key] || pieceCache[key].hash !== hashes[path]) {
-      window.__pieceFetches.push(key);
-      pieceCache[key] = {hash: hashes[path], doc: await (await fetch(base + path)).json()};
+      window.__pieceFetches.push(key); pieceCache[key] = {hash: hashes[path], doc: fetch(base + path).then(r => r.json())};
+      pieceCache[key].doc.catch(() => { delete pieceCache[key]; });  // a failed piece is asked for again
     }
     return pieceCache[key].doc;
   };
