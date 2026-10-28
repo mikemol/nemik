@@ -283,9 +283,11 @@ class _Reader:
                 self.tree.wholes[node] = int(raw)
             else:
                 self.tree.reals[node] = float(raw)
-        except ValueError:
+        except ValueError as e:
+            # nemik:W1179: `from None` makes the pinned Codon fail to typecheck this method in
+            # reasonable time as soon as a program calls parse_tree; `from e` compiles
             message = "a bad number"
-            raise self.error(message) from None
+            raise self.error(message) from e
         return node
 
     def array(self) -> int:

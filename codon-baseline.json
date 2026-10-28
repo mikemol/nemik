@@ -19,10 +19,6 @@
   "as_written": "no module named 'argparse'",
   "stripped": "no module named 'argparse'"
  },
- "baselinetop": {
-  "as_written": "cannot typecheck 'number' in reasonable time",
-  "stripped": "cannot typecheck 'number' in reasonable time"
- },
  "blocks": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'rdflib'"
