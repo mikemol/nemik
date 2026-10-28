@@ -22,8 +22,9 @@ _PIN = re.compile(
     r"git\+https://github\.com/[\w.-]+/([\w.-]+?)(?:\.git)?@([0-9a-f]{7,40})\b"
 )
 _FILES = ("pyproject.toml", "MODULE.bazel")
-# A vendored mtools wheel names its commit in its file name: mikemol_<dist>-0.1.0+<sha>-py3-none-any.whl
-# (vendor/wheels/README.md); every mikemol_* distribution there is built from the mtools repo.
+# A vendored mtools wheel names its commit in its file name:
+# mikemol_<dist>-0.1.0+<sha>-py3-none-any.whl (vendor/wheels/README.md); every mikemol_*
+# distribution there is built from the mtools repo.
 _WHEEL = re.compile(r"mikemol_\w+-[\d.]+\+([0-9a-f]{7,40})-py3-none-any\.whl")
 
 
@@ -49,8 +50,9 @@ def pins(root: Path) -> list[Pin]:
 
 
 def behind(root: Path, pin: Pin) -> int | None:
-    """Commits the peer's HEAD is ahead of the pin; None when the peer is not cloned under `root`
-    or does not know the pinned commit.
+    """Count the commits the peer's HEAD is ahead of the pin.
+
+    None when the peer is not cloned under `root` or does not know the pinned commit.
     """
     clone = root / pin.peer
     if not (clone / ".git").exists():
@@ -150,7 +152,8 @@ def main(argv: list[str] | None = None) -> int:
     args = ap.parse_args(argv)
     worst = 0
     # nemik:W379: the host's own install of nemik's tools is a pin too, of nemik by the operator's
-    # PATH; reinstalling stays a deliberate step, so this says how far behind it is and how to level it.
+    # PATH; reinstalling stays a deliberate step, so this says how far behind it is and how to
+    # level it.
     if not args.repos or "nemik" in args.repos:
         sha = installed(args.receipt)
         if sha is not None:

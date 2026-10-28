@@ -45,7 +45,7 @@ def _is_date(value: str) -> bool:
 
 
 def _zone(value: str) -> str:
-    """What must match for two time values to be compared: a TZID, UTC, or neither (a DATE)."""
+    """Name what must match for two time values to be compared: a TZID, UTC, or neither."""
     if value.startswith("TZID="):
         return value.partition(":")[0]
     return "Z" if value.endswith("Z") else ""
@@ -56,7 +56,7 @@ def _digits(value: str) -> str:
 
 
 def _next_day(value: str) -> str:
-    """A DATE value (YYYYMMDD) one day later: an all-day event's end is exclusive."""
+    """Add a day to a DATE value (YYYYMMDD): an all-day event's end is exclusive."""
     d = date.fromisoformat(f"{value[:4]}-{value[4:6]}-{value[6:]}") + timedelta(days=1)
     return d.strftime("%Y%m%d")
 
@@ -200,7 +200,7 @@ def events(g: Graph, repos: Iterable[str], label: str | None = None) -> list[lis
 
 
 def feed(g: Graph, repos: Iterable[str], label: str | None = None) -> str:
-    """The iCalendar text the Akonadi helper reads on stdin (CRLF, folded at 75 octets)."""
+    """Build the iCalendar text the Akonadi helper reads on stdin (CRLF, folded at 75 octets)."""
     lines = ["BEGIN:VCALENDAR", "VERSION:2.0", f"PRODID:{PRODID}"]
     body = [line for event in events(g, repos, label) for line in event]
     lines += timezones(body) + body
@@ -266,7 +266,8 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> int:
             args.helper, cal.name, feed(g, cal.mirror, label), args.apply
         )
         print(
-            f"== {label}: {len(events(g, cal.mirror, label))} dated waypoints of {', '.join(cal.mirror)}"
+            f"== {label}: {len(events(g, cal.mirror, label))} dated waypoints of "
+            f"{', '.join(cal.mirror)}"
         )
         print(out, end="")
         worst = max(worst, code)

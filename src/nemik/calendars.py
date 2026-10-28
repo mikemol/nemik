@@ -29,7 +29,7 @@ _REPO = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*")
 
 
 def today() -> date:
-    """The operator's local calendar date: where a reading window starts (a seam tests can pin)."""
+    """Say the operator's local calendar date: where a reading window starts (a test seam)."""
     return datetime.now().astimezone().date()
 
 
@@ -318,7 +318,8 @@ def days_main(argv: list[str] | None = None, g=None) -> None:
         print(f"ERROR: {e}")
         raise SystemExit(2) from e
     except subprocess.CalledProcessError as e:
-        # The helper refuses (nemik:W193) when Akonadi is not running; say what it said, not a traceback.
+        # The helper refuses (nemik:W193) when Akonadi is not running; say what it said, not a
+        # traceback.
         why = (
             (e.stdout or b"").decode(errors="replace").strip()
             or (e.stderr or b"").decode(errors="replace").strip()

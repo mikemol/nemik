@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1202,
+  "counter": 1203,
   "waypoints": [
     {
       "symbol": "W1",
@@ -18720,7 +18720,7 @@
     {
       "symbol": "W846",
       "title": "test_modes failed once with 'Uncaught ReferenceError: popLater is not defined' at page load, then passed on rerun of the same tree: find why a head script's definition can be missing when index.html's wiring runs",
-      "status": "working",
+      "status": "ready",
       "enables": [],
       "touches": [
         "file:tests/test_wcag_render.py!w"
@@ -18728,11 +18728,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Route test_viewstate's page fixture through the recording harness; then, on the next popLater occurrence, read its 'requests refused or failed' list; the proof is the interleaving witness plus a fix, not the diagnostic",
-      "evidence": "2026-10-22: 2026-10-22: not reproduced: //:test_modes x15 concurrent runs all pass (bazel --runs_per_test=15). The server is threaded and reads each file whole, popLater is a hoisted declaration in cards.js, so a missing definition means cards.js did not load (a silent script-load failure). The first failure's log was overwritten by the passing rerun. Add a requestfailed and response-status listener to the vendored webpage helper (W717) so the next occurrence names the file | 2026-10-23: 2026-10-23 second occurrence: the commit gate for W873 failed //:test_sources_resolve with 'Uncaught ReferenceError: popLater is not defined' at page load, all four tests of the module at once (they share one module-scoped page); popLater is defined in cards.js, so cards.js had not run when the inline script did. Same error as the first (test_modes, 2026-10-22). Neither change under test touches the page. Reproduction attempt: bazel test //:test_sources_resolve --runs_per_test=40 --local_test_jobs=40 | 2026-10-23: 2026-10-23: not reproduced: //:test_sources_resolve x40 with --local_test_jobs=40 all pass, so load alone does not trigger it. Both occurrences were inside the commit gate (stack320, stack343) on its shared staged worktree; the repro ran in the real checkout. Next: capture the failed request when it recurs (a requestfailed and response-status listener in the page helper), or run the repro inside the gate worktree | 2026-10-27: 2026-10-27 eleventh instance, in the stack557 gate (W1152/W1150, which touch no web file): tests/test_wcag_render.py::test_tab_visits_the_pages_controls_in_reading_order, 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined', 81 s, one of 433 targets, 432 passed. It adds no fact: this test opened its page by hand (new_page, watch, goto, until) and so bypassed the harness (tests/webpage.py opened_page) that appends the requests that failed or got an error status, which W1060 relies on to prove or refute the pick-then-bind argument. So this recurrence neither supports nor refutes efb924c. Fix, first entry of the next stack: _page_rows goes through webpage.evaluated, i.e. session/opened_page, so the next occurrence names the asset. The flake rule applies: no resubmit on this refusal. | 2026-10-27: c4f0e23 landed: test_wcag_render opens its page through webpage.evaluated, so the next popLater occurrence names the failed asset. W846 stays open until one does. Read the next occurrence's 'requests refused or failed' list: cards.js or a late script confirms W1060's argument, none refutes it. | 2026-10-28: 2026-10-28 twelfth and thirteenth instances, ONE gate (stack595: W1199, docstring rewraps in importer, issues and health, no web file): //:test_svgexport (test_the_svg_keeps_the_canvas_cards_edges_dashes_and_contrast, 21 s) and //:test_viewstate shard 2 of 3 (1 of 3 runs failed, 81 s) both 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined'; 441 of 443 passed. Read from the logs: test_svgexport waits through mikemol.webpage.page.load -> until, not through tests/webpage.py's recording opened_page, so its PageBrokenError carries NO requests-failed list; test_viewstate likewise. So again the asset is unnamed and W1060's argument is neither supported nor refuted. Two pages failing in one gate points at the shared server or host (a server that stops answering mid-load), not at a test. The flake rule applies: stack595 is NOT resubmitted unchanged | 2026-10-28: 2026-10-28 fix built: tests/webpage.py launched_page now records requestfailed and status>=400 responses and re-raises a PageBrokenError from load with 'requests refused or failed: [...]'; test_svgexport opens its page through it. Queued as stack598 entry 1 (with W1199, W1200, W1197, W1201 after it). Also: stack596 (W1200+W1197 alone) is in the gate and will be refused by the ratchet (its baseline 2513 lacks W1199's source), a failure predicted in advance but not withdrawable (inflight, leads a joined stack); stack597 was withdrawn. test_viewstate still waits without the failed-request list | 2026-10-28: diagnostic landed 0686c21 (pushed, gate green) in stack598: launched_page names the requests that failed; test_svgexport opens its page through it. The same gate ran 444 targets, 441 fresh, and no popLater failure. W846 STAYS OPEN: closes only on a proof (a forced-interleaving witness and a fix) or a traced occurrence; test_viewstate still waits without the failed-request list",
+      "evidence": "2026-10-22: 2026-10-22: not reproduced: //:test_modes x15 concurrent runs all pass (bazel --runs_per_test=15). The server is threaded and reads each file whole, popLater is a hoisted declaration in cards.js, so a missing definition means cards.js did not load (a silent script-load failure). The first failure's log was overwritten by the passing rerun. Add a requestfailed and response-status listener to the vendored webpage helper (W717) so the next occurrence names the file | 2026-10-23: 2026-10-23 second occurrence: the commit gate for W873 failed //:test_sources_resolve with 'Uncaught ReferenceError: popLater is not defined' at page load, all four tests of the module at once (they share one module-scoped page); popLater is defined in cards.js, so cards.js had not run when the inline script did. Same error as the first (test_modes, 2026-10-22). Neither change under test touches the page. Reproduction attempt: bazel test //:test_sources_resolve --runs_per_test=40 --local_test_jobs=40 | 2026-10-23: 2026-10-23: not reproduced: //:test_sources_resolve x40 with --local_test_jobs=40 all pass, so load alone does not trigger it. Both occurrences were inside the commit gate (stack320, stack343) on its shared staged worktree; the repro ran in the real checkout. Next: capture the failed request when it recurs (a requestfailed and response-status listener in the page helper), or run the repro inside the gate worktree | 2026-10-27: 2026-10-27 eleventh instance, in the stack557 gate (W1152/W1150, which touch no web file): tests/test_wcag_render.py::test_tab_visits_the_pages_controls_in_reading_order, 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined', 81 s, one of 433 targets, 432 passed. It adds no fact: this test opened its page by hand (new_page, watch, goto, until) and so bypassed the harness (tests/webpage.py opened_page) that appends the requests that failed or got an error status, which W1060 relies on to prove or refute the pick-then-bind argument. So this recurrence neither supports nor refutes efb924c. Fix, first entry of the next stack: _page_rows goes through webpage.evaluated, i.e. session/opened_page, so the next occurrence names the asset. The flake rule applies: no resubmit on this refusal. | 2026-10-27: c4f0e23 landed: test_wcag_render opens its page through webpage.evaluated, so the next popLater occurrence names the failed asset. W846 stays open until one does. Read the next occurrence's 'requests refused or failed' list: cards.js or a late script confirms W1060's argument, none refutes it. | 2026-10-28: 2026-10-28 twelfth and thirteenth instances, ONE gate (stack595: W1199, docstring rewraps in importer, issues and health, no web file): //:test_svgexport (test_the_svg_keeps_the_canvas_cards_edges_dashes_and_contrast, 21 s) and //:test_viewstate shard 2 of 3 (1 of 3 runs failed, 81 s) both 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined'; 441 of 443 passed. Read from the logs: test_svgexport waits through mikemol.webpage.page.load -> until, not through tests/webpage.py's recording opened_page, so its PageBrokenError carries NO requests-failed list; test_viewstate likewise. So again the asset is unnamed and W1060's argument is neither supported nor refuted. Two pages failing in one gate points at the shared server or host (a server that stops answering mid-load), not at a test. The flake rule applies: stack595 is NOT resubmitted unchanged | 2026-10-28: 2026-10-28 fix built: tests/webpage.py launched_page now records requestfailed and status>=400 responses and re-raises a PageBrokenError from load with 'requests refused or failed: [...]'; test_svgexport opens its page through it. Queued as stack598 entry 1 (with W1199, W1200, W1197, W1201 after it). Also: stack596 (W1200+W1197 alone) is in the gate and will be refused by the ratchet (its baseline 2513 lacks W1199's source), a failure predicted in advance but not withdrawable (inflight, leads a joined stack); stack597 was withdrawn. test_viewstate still waits without the failed-request list | 2026-10-28: diagnostic landed 0686c21 (pushed, gate green) in stack598: launched_page names the requests that failed; test_svgexport opens its page through it. The same gate ran 444 targets, 441 fresh, and no popLater failure. W846 STAYS OPEN: closes only on a proof (a forced-interleaving witness and a fix) or a traced occurrence; test_viewstate still waits without the failed-request list | 2026-10-28: landed fefe37c (pushed, gate green) in stack599: tests/webpage.py watch and until record the resources a page failed to load and name them in the PageBrokenError, for every browser test that uses them; witness in test_webpage_hangs (a refused script is named). That gate: 441 fresh of 444, sent=True, no popLater failure. W846 stays OPEN: a diagnostic, not a proof",
       "issued_at": "2026-10-22T14:53:40Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W703",
-      "last_worked": "2026-10-28T04:44:35Z",
+      "last_worked": "2026-10-28T05:15:12Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/webpage.py",
@@ -26784,12 +26784,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Decide with evidence what 'headroom' is for a round ceiling: instantaneous cores-minus-busy (flaps), a windowed median from a stored series (which series?), or the gate-jobs count; ask mtools-ad whether mikemol-gate-jobs' load figures are stored as a series. Until then ceiling_of stays unwired and nemik keeps the declared CEILING; W1193's send and luthen's gate_cost for nemik are the other input",
-      "evidence": "2026-10-27: landed e254920 (pushed, gate green): roundof.ceiling_of(cost_per_entry, headroom) is pure and keeps the declared CEILING while either input is <= 0; not yet called from width(). Refused twice first: an E501 docstring, then a working set holding W730 outside the round. Steps (1) and (2) are still to read | 2026-10-27: 2026-10-27 step (1) read: nemik-hostroot reads ratchet series from luthen-series.json in luthen's export tree (modified 17:32 local). It holds no luthen_gate_target_cpu series (grep: 0 hits for luthen_gate_target_cpu and no gate-named key), so the W1645 median and p90 are not in the route nemik reads. Needs luthen to add them to that export (or name another route); not yet asked, and no luthen-observability card citable from here | 2026-10-27: 2026-10-27 luthen-observability-ab carded the export as luthen-observability:W1707 and asked per-repo vs per-target (a target name discloses internal targets to the public static view) and which aggregate. Answered: one number per repo, no target names; the sum over a repo's targets of the median and of the p90, plus the target count and the minimum sample count | 2026-10-28: 2026-10-27 luthen-observability:W1707 landed (7833e69b): luthen-series.json now carries gate_cost {repo: {median_s, p90_s, targets, min_samples}} with no target names. Read from luthen-observability-ab, not yet by me from the file: only mtools has gate cost today (median_s 27419.7, p90_s 32571.73, targets 874, min_samples 1); every other repo, nemik included, is ABSENT, so nemik's own ceiling stays the declared CEILING. min_samples 1 means thin targets are mixed in; the sum is an upper bound on a gate, not a landing's marginal cost | 2026-10-28: 2026-10-27 luthen-observability-ab (a peer's word, store read by them): the export is not omitting nemik; mikemol.gate.target.cpu.seconds{repo,target} exists for ONE repo, mtools (874 series). nemik's gate is in the store only as mikemol.gate.run_seconds{repo=nemik}, per run, no target label, wall vs CPU not established. nemik's gate runs about 443 bazel test targets, so the mtools emitter may apply; asked mtools-ad (no citable mtools card yet). Until then nemik keeps the declared CEILING; drum's headroom is still unread | 2026-10-28: 2026-10-27 mtools-ad (a peer's word): no mtools card is needed; mikemol-gate-targets REPO BEP TESTLOGS is repo-parameterized and mtools' own pre-commit calls it. The wiring is nemik's own gate: minted nemik:W1193 (gate_staged.sh). Block on mtools:W1645 was wrong (luthen's, done); correct path: W1193 then luthen's export carries nemik | 2026-10-28: 2026-10-27 step (2) read: mikemol-gate-jobs --explain (mtools, in nemik's venv) prints the host's admission: 'gate jobs=2 cores=24 load1=79.25 floor=2 (held at the floor)' and 'gate busy=23.7 of 24 cores over 2s (/proc/stat)'. So the headroom drum-style admission exposes is cores minus busy cores, an INSTANTANEOUS figure (0.3 cores now), not a stable per-gate budget. Design consequence: a ceiling = headroom / cost per entry taken from one reading would flap with load; it needs a window (a median of readings over the last day, from a series) or a different input, e.g. the gate's own jobs count times a duration target. Not decided",
+      "next_bounded_step": "Remaining: (2) decide what 'headroom' is (mikemol-gate-jobs --explain prints an instantaneous cores-minus-busy figure; a ceiling from one reading would flap); then wire roundof.ceiling_of into width() with cost per entry = ? (the sum is per gate, not per entry: decide the per-entry cost, e.g. the sum over the cards' influence cones, W1056/mtools landing-cost) and a term that says measured and bound; until then nemik keeps the declared CEILING",
+      "evidence": "2026-10-27: landed e254920 (pushed, gate green): roundof.ceiling_of(cost_per_entry, headroom) is pure and keeps the declared CEILING while either input is <= 0; not yet called from width(). Refused twice first: an E501 docstring, then a working set holding W730 outside the round. Steps (1) and (2) are still to read | 2026-10-27: 2026-10-27 step (1) read: nemik-hostroot reads ratchet series from luthen-series.json in luthen's export tree (modified 17:32 local). It holds no luthen_gate_target_cpu series (grep: 0 hits for luthen_gate_target_cpu and no gate-named key), so the W1645 median and p90 are not in the route nemik reads. Needs luthen to add them to that export (or name another route); not yet asked, and no luthen-observability card citable from here | 2026-10-27: 2026-10-27 luthen-observability-ab carded the export as luthen-observability:W1707 and asked per-repo vs per-target (a target name discloses internal targets to the public static view) and which aggregate. Answered: one number per repo, no target names; the sum over a repo's targets of the median and of the p90, plus the target count and the minimum sample count | 2026-10-28: 2026-10-27 luthen-observability:W1707 landed (7833e69b): luthen-series.json now carries gate_cost {repo: {median_s, p90_s, targets, min_samples}} with no target names. Read from luthen-observability-ab, not yet by me from the file: only mtools has gate cost today (median_s 27419.7, p90_s 32571.73, targets 874, min_samples 1); every other repo, nemik included, is ABSENT, so nemik's own ceiling stays the declared CEILING. min_samples 1 means thin targets are mixed in; the sum is an upper bound on a gate, not a landing's marginal cost | 2026-10-28: 2026-10-27 luthen-observability-ab (a peer's word, store read by them): the export is not omitting nemik; mikemol.gate.target.cpu.seconds{repo,target} exists for ONE repo, mtools (874 series). nemik's gate is in the store only as mikemol.gate.run_seconds{repo=nemik}, per run, no target label, wall vs CPU not established. nemik's gate runs about 443 bazel test targets, so the mtools emitter may apply; asked mtools-ad (no citable mtools card yet). Until then nemik keeps the declared CEILING; drum's headroom is still unread | 2026-10-28: 2026-10-27 mtools-ad (a peer's word): no mtools card is needed; mikemol-gate-targets REPO BEP TESTLOGS is repo-parameterized and mtools' own pre-commit calls it. The wiring is nemik's own gate: minted nemik:W1193 (gate_staged.sh). Block on mtools:W1645 was wrong (luthen's, done); correct path: W1193 then luthen's export carries nemik | 2026-10-28: 2026-10-27 step (2) read: mikemol-gate-jobs --explain (mtools, in nemik's venv) prints the host's admission: 'gate jobs=2 cores=24 load1=79.25 floor=2 (held at the floor)' and 'gate busy=23.7 of 24 cores over 2s (/proc/stat)'. So the headroom drum-style admission exposes is cores minus busy cores, an INSTANTANEOUS figure (0.3 cores now), not a stable per-gate budget. Design consequence: a ceiling = headroom / cost per entry taken from one reading would flap with load; it needs a window (a median of readings over the last day, from a series) or a different input, e.g. the gate's own jobs count times a duration target. Not decided | 2026-10-28: 2026-10-28 read in luthen-series.json (nemik-export tree): gate_cost now carries nemik: median_s 5653.4, p90_s 5705.18, targets 435, min_samples 1. So the gate-cost input exists for nemik since the W1193 emit began (landed 15d9bd6 and later). It is the SUM over all targets of the 7-day median CPU seconds (an upper bound on one gate, not a landing's marginal cost), built from a few runs (min_samples 1 means thin targets are mixed in).",
       "issued_at": "2026-10-26T22:09:25Z",
       "minted_during": "interrupt",
       "caused_by": "W1092",
-      "last_worked": "2026-10-28T00:41:38Z",
+      "last_worked": "2026-10-28T05:09:53Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/roundof.py",
@@ -28562,6 +28562,32 @@
     {
       "symbol": "W1202",
       "title": "pacing.py, pieces.py and starved.py lose five ruff findings: three module docstrings rewrapped and three docstring first lines made imperative, so ruff falls 2513 to 2508 (paydown)",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "file:ruff-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-28: landed ae46a2e (pushed, gate green) in stack599: pacing, pieces, starved lose five ruff findings; ruff 2508",
+      "issued_at": "2026-10-28T04:44:27Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1196",
+      "last_worked": "2026-10-28T05:15:10Z",
+      "ticks_blocked": 0,
+      "completed": "20261028T051510Z",
+      "manifest": [
+        "src/nemik/pacing.py",
+        "src/nemik/pieces.py",
+        "src/nemik/starved.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W1203",
+      "title": "pins.py, calendars.py and calwrite.py lose ten ruff findings: long comment, docstring and f-string lines rewrapped and docstring first lines made imperative, so ruff falls 2508 to 2498 (paydown)",
       "status": "working",
       "enables": [],
       "touches": [
@@ -28569,18 +28595,18 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "stack599 entry 2, after W846's harness entry; bazel test //:test_pacing //:test_pieces //:test_starved is the check; ruff 2508 against the written baseline",
+      "next_bounded_step": "stack600 queued; bazel test //:test_pins //:test_calendars //:test_calwrite passed (3 of 3); ruff 2498 against the written baseline, mypy 4441 unchanged (one f-string split in calendars was reverted because it added three mypy findings)",
       "evidence": "",
-      "issued_at": "2026-10-28T04:44:27Z",
+      "issued_at": "2026-10-28T05:34:54Z",
       "minted_during": "interrupt",
       "caused_by": "W1196",
-      "last_worked": "2026-10-28T04:44:33Z",
+      "last_worked": "2026-10-28T05:37:33Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
-        "src/nemik/pacing.py",
-        "src/nemik/pieces.py",
-        "src/nemik/starved.py",
+        "src/nemik/pins.py",
+        "src/nemik/calendars.py",
+        "src/nemik/calwrite.py",
         "ruff-baseline.json"
       ],
       "size_class": "small"
@@ -28845,15 +28871,6 @@
       "renewed_at": "2026-10-24T15:23:11Z",
       "expires_at": "2026-10-24T15:53:11Z",
       "lapse_ledgered": true
-    },
-    {
-      "tag": "file:tests/test_wcag_render.py!w",
-      "holder": "claude-nemik",
-      "waypoint": "W846",
-      "base_sha": "4f11dbe16b56f73713b9a29b186f9da8ee82089d",
-      "taken_at": "2026-10-28T04:44:35Z",
-      "renewed_at": "2026-10-28T04:44:35Z",
-      "expires_at": "2026-10-28T05:14:35Z"
     }
   ],
   "advice": [
