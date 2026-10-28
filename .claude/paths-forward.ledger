@@ -2976,3 +2976,8 @@
 2026-10-28T08:35:34Z  status W1207 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-28T08:42:25Z  interrupt W1209 minted    -         "mirrorreq compiles under the pinned Codon: its Request is a plain class with __init__, __eq__, __hash__ and __repr__, not a NamedTuple, so it leaves the codon baseline, the paydown the pace owes (codon owes 1, fell 0 over ten landings)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1179
 2026-10-28T08:52:42Z  status W1209 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T08:56:34Z  status W1208 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T09:36:17Z  status W1209 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T09:36:18Z  status W1176 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T10:34:51Z  interrupt W1210 minted    -         "nemik exports nemik_ratchet_reset{repo,ratchet}, the required value a declared reset set (rebaselines.RESETS), while the reset is on record, so luthen's ratchet_required_fell alert can tell a declared reset from an undeclared fall"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W1712
+2026-10-28T11:12:49Z  status W1210 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

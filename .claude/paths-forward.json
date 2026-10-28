@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1209,
+  "counter": 1210,
   "waypoints": [
     {
       "symbol": "W1",
@@ -26913,15 +26913,16 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Land test_viewstate with watched page and webpage.until as the first entry of the next stack",
-      "evidence": "2026-10-27: 2026-10-27 instances read from nemik's own replay logs (.git/image-replica-<sha>.log, the single-process pytest of the image's test stage; each shows exactly one failing test): 25658ca test_the_panel_names_the_repos_with_work_that_are_not_awake; 24b9950 test_a_poll_that_only_changes_fields_follows_in_place; 100a574 test_tab_visits_the_pages_controls_in_reading_order; 2e22663 test_picked_repos_show_their_blockers_blockers_as_context; 3736e58 test_a_static_build_refetches_only_the_pieces_whose_hash_moved; 478fc6a test_a_poll_that_only_changes_fields_follows_in_place; and the popover test (W1131, proven: an unreachable card) on 5220985, 40fdee1, 0e10f72, f6d2915, 751f9df. The replays since 56d95df are green, which is one sample and proves nothing. Only the popover instance has a proven cause; the others are not shown to share the viewport cause | 2026-10-27: 2026-10-27: not the whole story for the missing image: .forgejo/workflows/build.yml (W703) builds the Containerfile's gated stage, skipping the in-image suite, when the pushed commit's Gated-Tree trailer equals its tree; HEAD 277b782 carries a matching trailer, so its build should not run the suite at all. Open: what Forgejo's tasks 941-943 built and where they failed (luthen reads the runner logs) | 2026-10-27: 2026-10-27 luthen read Forgejo's buildkit stream: four builds failed at the in-image pytest (Solve errors 19:34:18Z, 20:42:22Z, 21:50:57Z, 22:57:37Z); the 21:50 and 22:57 ones failed tests/test_layout.py:958 'assert box is not None' (the popover test, W1131, so those tips predate the fix; the slow-call list names test_repo_toggles_and_salience_order at 87.9 s, which is not the failing one), 1 failed with 1696 and 1706 passed. A build whose pytest started 23:00:40Z passed: 1707 passed, 8 skipped in 4934 s, no failure; no registry push seen yet at 00:43Z. These builds ran the full suite, so the Gated-Tree skip (W703) did not apply to them; why is not read yet. The sha per task is not in the runner logs; Forgejo's UI or API would name it | 2026-10-27: 2026-10-27T01:14Z a new KIND of instance, in the commit gate not the image: stack546's gate TIMED OUT //:test_layout shard 4 of 6 at 900 s (the other five shards 104 s to 400 s) with exactly one test passed before the hang; no assertion failed. Shard 4 is positions 3, 9, 15, ... of the 42 collected (conftest.shard_of): scope_rings, then default_view_legible[dark], ...; locally the same shard (TEST_TOTAL_SHARDS=6 TEST_SHARD_INDEX=3) passes in 40 s. The tests wait on cy with wait_for_function(timeout=0) (W1085): a page that neither draws nor errors waits forever, which the page-error race (mikemol.webpage until/watch) does not catch. Cause not yet shown; the timed-out target is being run alone on an idle host as the rule says | 2026-10-27: 2026-10-27: //:test_layout run alone on the idle host passed all 42 tests in 100 s (six shards); so the 900 s hang of shard 4 happened only under the gate's load, and stack546 was resubmitted because it carries the ratchet sensor fix (an outage): the hang is NOT explained and this card stays open; the next instance should name the test and the pending request | 2026-10-27: 2026-10-27 instance: stack550 (W1034 codon: tracker/ratchetseries/roundgauges/baselinetop, no web or viewstate files) refused at 03:44Z: //:test_viewstate TIMEOUT in 300.2s, 424 of 425 passed, no failing assertion. Gate ran 951 s elapsed with a census of other work beside it. Per the rule the timed-out target is run alone first, once the gate in flight (stack551, which also carries no viewstate file) has given its own reading of the same target. | 2026-10-27: 0becdcc landed: test_viewstate in three shards (39 s alone, sharded run 28 s; load-bound, not a hang). The class card stays open for the other timeouts and the layout hang instrumentation. | 2026-10-27: 2026-10-27 instance after the shard fix: stack558 (W1153, history/netforecast/tests only) refused at 07:29Z: //:test_viewstate TIMEOUT in 1 of 3 shards, shard 1 of 3 at 300.1 s, the others 69 s and one more (stats over 3 runs: max 300.1 s, min 69.0 s, avg 146 s). Sharding did not prevent it, and one shard at 4x its siblings is a hang, not load: W1063's class. Run alone next (3 runs); then read the code of shard 1's tests for the blocking interleaving. | 2026-10-27: 2026-10-27 finding from reading the module (the proof, not a rerun): every READY wait in tests/test_viewstate.py is page.wait_for_function(READY, timeout=0), unbounded, and the page is never watched, so a page that fails to reach READY (a script lost under load, the W1060/W846 popLater class) cannot raise: the shard waits until the harness kills it at 300 s. That is exactly a shard at 4x its siblings with no failing assertion. The same defect W1085 fixed in test_layout. Fix: the page fixture watches the page before it navigates and the eight READY waits go through webpage.until, which raises PageBrokenError naming the page's error. This does not stop a script being lost; it turns the 300 s hang into a failure that names it (and, with the recording harness, the asset), so the flake can be traced and the gate stops losing 15 minutes to it. | 2026-10-27: bb3aa32 landed: test_viewstate watches its page and waits with webpage.until; the 300 s shard hang becomes a failure that names the page error. W1140 stays open: test_layout and the other browser tests still carry raw timeout=0 waits. | 2026-10-27: 2026-10-27 instance: stack560 (W1157, W1149: installed.py, history.py git_lines, tools, tests) refused at 08:44Z after a 1348 s gate: //:test_cardtree TIMEOUT at 300.4 s, 433 of 434 passing, no failing assertion, no web file in the stack. Run alone, three repeats: passes, about 93 s critical path of its 300 s (31 percent, under the 50 percent bar). Its page is already watched and its waits bounded (30 s default), so this is not the unbounded-wait defect of test_viewstate; it is the same load-bound class. Per the rule it is sharded finer, not given time: test_cardtree joins the three-shard list. The class card stays open: the gate runs 434 targets beside each other and browser tests take 3 to 8 times their alone time. | 2026-10-27: c9999c1 landed: test_cardtree in three shards (93 s alone, timed out at 300 s under the stack560 gate). W1140 stays open: other browser tests carry raw timeout=0 waits, and the gate still runs 434 targets beside each other. | 2026-10-28: 2026-10-28 instance: stack603 (W1206 claims.py annotations, W1205 check.py ruff; no web or publish file) refused after a 1842 s gate: //:test_publish TIMEOUT at 300.5 s, 443 of 444 passing, no failing assertion ('.....' then the timeout line; the log holds nothing else). Run alone, three runs: passes (193 s elapsed for three, one run read at about 160 s, over half its 300 s). Per the rule it is sharded finer, not given time: test_publish joins the three-shard list in BUILD.bazel; sharded alone it passes with its longest shard at about 85 s. Resubmitted with the stack's content in a new stack (605); stack604, built on stack603's baselines, was withdrawn because it would have been refused by the ratchet on its own | 2026-10-28: landed 2f2e57d (pushed, gate green) in stack605: test_publish in three shards; that gate (444 targets, 441 fresh) passed with it. W1140 stays OPEN: other timeouts and the layout hang instrumentation remain",
+      "next_bounded_step": "Read the alone run of //:test_layout; then prove the interleaving from panels.js sourceGraph and the page's poll (a load stalled 60 s, a second round fetching pieces the first had not) and fix the test or the page by an explicit order, with a test that forces it; until then block feature cards on W1140 per the rule",
+      "evidence": "2026-10-27: 2026-10-27 instances read from nemik's own replay logs (.git/image-replica-<sha>.log, the single-process pytest of the image's test stage; each shows exactly one failing test): 25658ca test_the_panel_names_the_repos_with_work_that_are_not_awake; 24b9950 test_a_poll_that_only_changes_fields_follows_in_place; 100a574 test_tab_visits_the_pages_controls_in_reading_order; 2e22663 test_picked_repos_show_their_blockers_blockers_as_context; 3736e58 test_a_static_build_refetches_only_the_pieces_whose_hash_moved; 478fc6a test_a_poll_that_only_changes_fields_follows_in_place; and the popover test (W1131, proven: an unreachable card) on 5220985, 40fdee1, 0e10f72, f6d2915, 751f9df. The replays since 56d95df are green, which is one sample and proves nothing. Only the popover instance has a proven cause; the others are not shown to share the viewport cause | 2026-10-27: 2026-10-27: not the whole story for the missing image: .forgejo/workflows/build.yml (W703) builds the Containerfile's gated stage, skipping the in-image suite, when the pushed commit's Gated-Tree trailer equals its tree; HEAD 277b782 carries a matching trailer, so its build should not run the suite at all. Open: what Forgejo's tasks 941-943 built and where they failed (luthen reads the runner logs) | 2026-10-27: 2026-10-27 luthen read Forgejo's buildkit stream: four builds failed at the in-image pytest (Solve errors 19:34:18Z, 20:42:22Z, 21:50:57Z, 22:57:37Z); the 21:50 and 22:57 ones failed tests/test_layout.py:958 'assert box is not None' (the popover test, W1131, so those tips predate the fix; the slow-call list names test_repo_toggles_and_salience_order at 87.9 s, which is not the failing one), 1 failed with 1696 and 1706 passed. A build whose pytest started 23:00:40Z passed: 1707 passed, 8 skipped in 4934 s, no failure; no registry push seen yet at 00:43Z. These builds ran the full suite, so the Gated-Tree skip (W703) did not apply to them; why is not read yet. The sha per task is not in the runner logs; Forgejo's UI or API would name it | 2026-10-27: 2026-10-27T01:14Z a new KIND of instance, in the commit gate not the image: stack546's gate TIMED OUT //:test_layout shard 4 of 6 at 900 s (the other five shards 104 s to 400 s) with exactly one test passed before the hang; no assertion failed. Shard 4 is positions 3, 9, 15, ... of the 42 collected (conftest.shard_of): scope_rings, then default_view_legible[dark], ...; locally the same shard (TEST_TOTAL_SHARDS=6 TEST_SHARD_INDEX=3) passes in 40 s. The tests wait on cy with wait_for_function(timeout=0) (W1085): a page that neither draws nor errors waits forever, which the page-error race (mikemol.webpage until/watch) does not catch. Cause not yet shown; the timed-out target is being run alone on an idle host as the rule says | 2026-10-27: 2026-10-27: //:test_layout run alone on the idle host passed all 42 tests in 100 s (six shards); so the 900 s hang of shard 4 happened only under the gate's load, and stack546 was resubmitted because it carries the ratchet sensor fix (an outage): the hang is NOT explained and this card stays open; the next instance should name the test and the pending request | 2026-10-27: 2026-10-27 instance: stack550 (W1034 codon: tracker/ratchetseries/roundgauges/baselinetop, no web or viewstate files) refused at 03:44Z: //:test_viewstate TIMEOUT in 300.2s, 424 of 425 passed, no failing assertion. Gate ran 951 s elapsed with a census of other work beside it. Per the rule the timed-out target is run alone first, once the gate in flight (stack551, which also carries no viewstate file) has given its own reading of the same target. | 2026-10-27: 0becdcc landed: test_viewstate in three shards (39 s alone, sharded run 28 s; load-bound, not a hang). The class card stays open for the other timeouts and the layout hang instrumentation. | 2026-10-27: 2026-10-27 instance after the shard fix: stack558 (W1153, history/netforecast/tests only) refused at 07:29Z: //:test_viewstate TIMEOUT in 1 of 3 shards, shard 1 of 3 at 300.1 s, the others 69 s and one more (stats over 3 runs: max 300.1 s, min 69.0 s, avg 146 s). Sharding did not prevent it, and one shard at 4x its siblings is a hang, not load: W1063's class. Run alone next (3 runs); then read the code of shard 1's tests for the blocking interleaving. | 2026-10-27: 2026-10-27 finding from reading the module (the proof, not a rerun): every READY wait in tests/test_viewstate.py is page.wait_for_function(READY, timeout=0), unbounded, and the page is never watched, so a page that fails to reach READY (a script lost under load, the W1060/W846 popLater class) cannot raise: the shard waits until the harness kills it at 300 s. That is exactly a shard at 4x its siblings with no failing assertion. The same defect W1085 fixed in test_layout. Fix: the page fixture watches the page before it navigates and the eight READY waits go through webpage.until, which raises PageBrokenError naming the page's error. This does not stop a script being lost; it turns the 300 s hang into a failure that names it (and, with the recording harness, the asset), so the flake can be traced and the gate stops losing 15 minutes to it. | 2026-10-27: bb3aa32 landed: test_viewstate watches its page and waits with webpage.until; the 300 s shard hang becomes a failure that names the page error. W1140 stays open: test_layout and the other browser tests still carry raw timeout=0 waits. | 2026-10-27: 2026-10-27 instance: stack560 (W1157, W1149: installed.py, history.py git_lines, tools, tests) refused at 08:44Z after a 1348 s gate: //:test_cardtree TIMEOUT at 300.4 s, 433 of 434 passing, no failing assertion, no web file in the stack. Run alone, three repeats: passes, about 93 s critical path of its 300 s (31 percent, under the 50 percent bar). Its page is already watched and its waits bounded (30 s default), so this is not the unbounded-wait defect of test_viewstate; it is the same load-bound class. Per the rule it is sharded finer, not given time: test_cardtree joins the three-shard list. The class card stays open: the gate runs 434 targets beside each other and browser tests take 3 to 8 times their alone time. | 2026-10-27: c9999c1 landed: test_cardtree in three shards (93 s alone, timed out at 300 s under the stack560 gate). W1140 stays open: other browser tests carry raw timeout=0 waits, and the gate still runs 434 targets beside each other. | 2026-10-28: 2026-10-28 instance: stack603 (W1206 claims.py annotations, W1205 check.py ruff; no web or publish file) refused after a 1842 s gate: //:test_publish TIMEOUT at 300.5 s, 443 of 444 passing, no failing assertion ('.....' then the timeout line; the log holds nothing else). Run alone, three runs: passes (193 s elapsed for three, one run read at about 160 s, over half its 300 s). Per the rule it is sharded finer, not given time: test_publish joins the three-shard list in BUILD.bazel; sharded alone it passes with its longest shard at about 85 s. Resubmitted with the stack's content in a new stack (605); stack604, built on stack603's baselines, was withdrawn because it would have been refused by the ratchet on its own | 2026-10-28: landed 2f2e57d (pushed, gate green) in stack605: test_publish in three shards; that gate (444 targets, 441 fresh) passed with it. W1140 stays OPEN: other timeouts and the layout hang instrumentation remain | 2026-10-28: 2026-10-28 instance: stack608 (W1176 schema slice: a new data file, a test, a doc, BUILD.bazel; no web, serve or test_layout file) refused after a 2393 s gate: //:test_layout FAILED in 1 of 6 shards (shard 6, 270.6 s; the others 119.6 s to well under; 444 of 445 targets passing), test_a_static_build_refetches_only_the_pieces_whose_hash_moved, 'AssertionError: sorted(first) == sorted(_fleet + repos)': 'Left contains 3 more items, first extra item graph/substrate.json'. This test was already an instance in W1140's list (image replay, 3736e58). READ from the shard log's server lines: the page fetched hashes.json and 15 repo pieces at 10:00:02, then NOTHING for a full minute; hashes.json was requested again at 10:01:02 (304) and only then graph/rosettapkg.json, graph/substrate.json and graph/summit.json, umbrellas, wake and core.wasm. So under gate load the page's first load stalled for about 60 s (the wait_for_function has timeout=0), a poll round completed it, and the three late pieces landed in __pieceFetches after the test's expected list was built from the _fleet.json it read; the test's assumption that the first load fetches exactly the fleet's repos once is not held by construction. Not caused by stack608. The flake rule: run alone first (running), no identical resubmit | 2026-10-28: 2026-10-28 cause proven from the code and the shard log, and fixed (stack610 entry 1): panels.js piece() stored a fetch's document after it returned, so overlapping rounds fetched the same piece twice (the '3 more items'); the cache now holds the promise. Witness tests/test_piece_fetch_once.py fails on the old code (38 fetches, 19 distinct) and passes on the fix. test_layout alone passed, so it was load-dependent through a 60 s stall that made the rounds overlap. Stays OPEN for the other timeouts",
       "issued_at": "2026-10-27T00:40:50Z",
       "minted_during": "interrupt",
       "caused_by": "W1131",
-      "last_worked": "2026-10-28T08:35:35Z",
+      "last_worked": "2026-10-28T10:42:50Z",
       "ticks_blocked": 0,
       "manifest": [
-        "BUILD.bazel"
+        "src/nemik/web/panels.js",
+        "tests/test_piece_fetch_once.py"
       ],
       "size_class": "medium",
       "completed": null
@@ -27859,25 +27860,26 @@
     {
       "symbol": "W1176",
       "title": "Typed document boundary: a typed Waypoint record that loaders and test builders return, one stack per document shape",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [
         "file:mypy-baseline.json"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "RE-DESIGN 2026-10-27 (the user, on seeing that gabion cannot see json and tomllib document shapes: 'This is what ABC and JSON Schema are for'): do not derive the Waypoint record from the keys consumers read. Declare each document's shape ONCE as a JSON Schema and read it through an abstract base class. Precedent in this repo: src/nemik/runrows.py validates run rows against src/nemik/data/run-row.schema.json with jsonschema (a dev dependency already, types-jsonschema installed), and shapes.ttl does the same for the queue graph. Plan: (1) inventory the documents nemik reads and writes (a queue and its ledger, graph.json, wake.json, the pace and round files, the landing file, the published pieces, the weights and bands TOML) and write one schema per document under src/nemik/data/*.schema.json, starting with the queue's waypoint (the keys mtools' model.State leaves as list[Json], asked of mtools via github-8f); (2) an abstract base class per document with typed accessors (a Document ABC whose subclasses are the Tree-backed readers: nemik.tracker's flat Tree stays the Codon-safe core, the ABC is the interface consumers type against); (3) the schema is the source for both the runtime check (jsonschema, in a non-census boundary module because jsonschema does not compile under Codon) and the accessor list, so a field is declared once and a test fails when the two drift; (4) migrate consumers one document at a time, each stack paying down mypy as the json.loads sites go. First slice: the queue waypoint, because every consumer reads it. gabion (docs/gabion-audit.md) is advisory only for the parameter piles (FleetView, Window)",
-      "evidence": "",
+      "next_bounded_step": "After the waypoint accessors (stack609) land: the TOML half. One schema per TOML document under src/nemik/data/*.schema.json, starting with rank-weights.toml (it is read by the most modules; its tables are [health], [pacing], [starvation], [ask_priority], [order] and others, to be listed from the file), then bands.toml, connectors.toml, workflows.toml, then the host config (calendars.toml, ics.toml); a test per schema that validates the shipped file (tomllib in tests/, outside the Codon census) and refuses a wrong-typed table; a Codon-clean accessor per document where a module reads it, migrating health.py first (its thresholds() builds dict[str, tuple[float, float]] from an Any table and carries the module's mypy findings). Then the first consumer migration for the JSON half (wake.py)",
+      "evidence": "2026-10-28: 2026-10-28 first slice built: src/nemik/data/waypoint.schema.json (core of 5 required keys plus typed optional keys; $defs/full adds the 14 keys the writer stamps), tests/test_waypoint_schema.py (6 tests), docs/typed-boundary.md. Measured against the fleet before it was written: all 1183 cards of this queue pass $defs/full with 0 refusals; the 19 fixture queues' cards pass the core; the first draft required blocked_kind and three older cards lack it, which the test found, so it is optional in the core and required in full. NOT built: the ABC and accessors (src/nemik/waypoint.py), the schema/accessor drift test, any consumer migration | 2026-10-28: 2026-10-28 Codon probes for the ABC half (stage tree, pinned Codon): 'from abc import ABC, abstractmethod' fails with 'no module named abc'; 'from typing import Protocol' fails with 'cannot import name Protocol from typing'; a PLAIN base class whose methods raise NotImplementedError, with subclasses overriding them, compiles (rc 0). Every top-level src/nemik module is in the Codon census (tools/codon_census.py globs src/nemik/*.py), and a module that fails adds a codon-baseline entry, a ratchet rise. So an abc.ABC cannot live in src/nemik without a rise. The ruling's intent (one declared shape, typed accessors consumers type against) can be met with a plain interface class; mypy then does not enforce abstractness. The operator's wording was ABC; this is the tension between that and 'all Python Codon-compatible' (standing 4), put to github-8f | 2026-10-28: 2026-10-28 CORRECTION of attribution (github-8f asked for the record, and found 0 hits in the host transcript): the words 'ABC and JSON SCHEMA' are NOT host line 107476 (that line is the operator's separate ruling to audit the ratchet targets for larger paydown steps, which is this card's other warrant). They are a human message in nemik's OWN session transcript (session ca6f3699-66ac-4ffa-a3ca-6ececbab791f, line 138830, uuid 31bdf58f-b473-4b05-a566-1295693efbe7, 2026-10-27T20:11:45Z): verbatim, with the quoted lead-in from my report: '`cannot see the json and tomllib document shapes` ... This is what ABC and JSON SCHEMA are for.' Attached as a warrant. The words name ABC (an abstract base class) and JSON Schema; they do not say the abc.ABC module, so a Codon-clean plain interface class in src/nemik plus the real abc and jsonschema drift test in tests/ is a reading of them, not a certain one. My earlier notes (W1176 re-design entry, docs/typed-boundary.md in stack608) cite the wrong line and the doc is corrected in the next stack | 2026-10-28: 2026-10-28 github-8f (a peer's word, who read the ruling raw): the ruling (session line 138830) names BOTH families, 'the json and tomllib document shapes'; stack608 covers the queue JSON only, so the TOML half is OWED and not dropped. Inventory read: 17 src/nemik modules import tomllib (calendars, check, adoption, blocks, health, pacing, rank, pins, warrantdebt, starved, vtodo, idle, warrants, score, tiers, workflows, salience); the packaged TOML documents are src/nemik/data/rank-weights.toml (tables read by health, pacing, starved, rank, salience, tiers and others), bands.toml, connectors.toml and workflows.toml; the host-side config documents are ~/.config/nemik/calendars.toml and ics.toml (calendars.py, vtodo.py). JSON Schema validates a parsed TOML mapping as well as parsed JSON",
       "issued_at": "2026-10-27T13:51:57Z",
       "minted_during": "interrupt",
       "caused_by": "W1014",
-      "last_worked": "2026-10-27T20:12:41Z",
+      "last_worked": "2026-10-28T10:18:55Z",
       "ticks_blocked": 0,
       "size_class": "medium",
       "manifest": [
         "docs/typed-boundary.md",
-        "src/nemik/waypoint.py",
-        "tests/test_waypoint.py"
+        "src/nemik/data/waypoint.schema.json",
+        "tests/test_waypoint_schema.py",
+        "BUILD.bazel"
       ],
       "warrants": [
         {
@@ -27933,8 +27935,36 @@
             "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify 81f034b6-1657-41dd-a984-fd8b5207ddd5 --claim operator --line 107690"
           },
           "mtools:reason": "operator, 2026-10-27T13:55:42Z, human: splitting should read as shifting of debt, not new debt; a split that nemik's baselines or pace read as new debt is a defect to fix before W1176 splits a file"
+        },
+        {
+          "@context": {
+            "prov": "http://www.w3.org/ns/prov#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "mtools": "urn:mtools:warrant#"
+          },
+          "@id": "urn:nemik:nemik/W1176",
+          "prov:wasDerivedFrom": {
+            "@id": "urn:claude:transcript:-home-mikemol-github-nemik/ca6f3699-66ac-4ffa-a3ca-6ececbab791f#31bdf58f-b473-4b05-a566-1295693efbe7",
+            "@type": "prov:Entity",
+            "prov:generatedAtTime": {
+              "@value": "2026-10-27T20:11:45.486Z",
+              "@type": "xsd:dateTime"
+            },
+            "prov:wasAttributedTo": {
+              "@id": "urn:nemik:operator",
+              "@type": "prov:Agent"
+            },
+            "prov:wasGeneratedBy": {
+              "@id": "urn:nemik:utterance/31bdf58f-b473-4b05-a566-1295693efbe7",
+              "@type": "prov:Activity"
+            },
+            "mtools:line": 138830,
+            "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github-nemik/ca6f3699-66ac-4ffa-a3ca-6ececbab791f --verify 31bdf58f-b473-4b05-a566-1295693efbe7 --claim operator --line 138830"
+          },
+          "mtools:reason": "the user, replying in nemik's own session to the gabion audit finding that gabion cannot see json and tomllib document shapes, said: 'This is what ABC and JSON SCHEMA are for.' (an abstract base class concept and JSON Schema; it does not say the abc.ABC module)"
         }
-      ]
+      ],
+      "completed": null
     },
     {
       "symbol": "W1177",
@@ -28720,21 +28750,21 @@
     {
       "symbol": "W1208",
       "title": "Eleven more test files annotate their pytest fixtures and procedures, adding the import the annotation needs and moving a type-only pytest import under TYPE_CHECKING, so mypy falls 4325 to 4227 and ruff 2433 to 2416 (paydown)",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:mypy-baseline.json"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "stack606 queued behind stack605; bazel test of the eleven targets passed (11 of 11); mypy 4227 and ruff 2416 against the written baselines",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-28: landed 65d1c07 (pushed, gate green): eleven more test files annotated; mypy 4227, ruff 2416",
       "issued_at": "2026-10-28T08:23:22Z",
       "minted_during": "interrupt",
       "caused_by": "W1196",
-      "last_worked": "2026-10-28T08:23:35Z",
+      "last_worked": "2026-10-28T08:56:34Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261028T085634Z",
       "manifest": [
         "tests/test_ics_reader.py",
         "tests/test_flow_cache.py",
@@ -28755,26 +28785,52 @@
     {
       "symbol": "W1209",
       "title": "mirrorreq compiles under the pinned Codon: its Request is a plain class with __init__, __eq__, __hash__ and __repr__, not a NamedTuple, so it leaves the codon baseline, the paydown the pace owes (codon owes 1, fell 0 over ten landings)",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:codon-baseline.json"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "stack607 queued behind stack606; probed with the pinned Codon in the stage tree (rc 0, compiles); test_mirrorreq and test_codon_census under bazel are the checks; ruff 2416 and mypy 4227 unchanged",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-28: landed 919f6e8 (pushed, gate green): mirrorreq.Request is a plain class; mirrorreq leaves codon-baseline.json (the first codon fall of this session's paydowns); the Codon census and test_mirrorreq passed under bazel before submit",
       "issued_at": "2026-10-28T08:42:25Z",
       "minted_during": "interrupt",
       "caused_by": "W1179",
-      "last_worked": "2026-10-28T08:52:42Z",
+      "last_worked": "2026-10-28T09:36:17Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261028T093617Z",
       "manifest": [
         "src/nemik/mirrorreq.py",
         "codon-baseline.json"
       ],
       "size_class": "small"
+    },
+    {
+      "symbol": "W1210",
+      "title": "nemik exports nemik_ratchet_reset{repo,ratchet}, the required value a declared reset set (rebaselines.RESETS), while the reset is on record, so luthen's ratchet_required_fell alert can tell a declared reset from an undeclared fall",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:src/nemik/pacepublish.py",
+        "file:src/nemik/rebaselines.py"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Wait for bazel test of test_reset_gauge, test_pacepublish, test_pace_board, test_static_pace, test_rebaselines, test_codon_census and test_architecture (the census matters: pacepublish now imports rebaselines); queue as the stack after 610; tell luthen-observability-ab the sha once it lands",
+      "evidence": "2026-10-28: 2026-10-28 design agreed with luthen-observability-ab (a peer's word; their card luthen-observability:W1712): the gauge EXPIRES. nemik_ratchet_reset{repo,ratchet} = the NEW required value, present from the reset's date for 48 h, from a date field on each RESETS entry. Reason (luthen): their alert compares the requirement with its own 24 h high, so a declared fall keeps showing 24 h after it happens; the gauge must outlast 24 h plus one hourly pace run and a scrape (about 26 h), and 48 h clears it; a standing gauge would silence a later undeclared fall to the same number. Their join: a fall below the 24 h high is silent only while a reset gauge for the same (repo, ratchet) equals the current required; absent (expired or not served) the alert fires, the safe direction. They will add the registry row and a vmalert replay (10-27 11:36Z quiet with the gauge, firing without) and want the sha when it ships. The 2026-10-27 resets (mypy 2, ruff 4, 11:36Z) expire 2026-10-29 11:36Z | 2026-10-28: 2026-10-28 built, not yet landed: rebaselines.RESET_DATES (both resets dated 2026-10-27T11:34:22Z, the pace run that first stated the new requirement) and RESET_GAUGE_SECONDS (48 h); pacepublish.reset_lines(as_of) writes nemik_ratchet_reset{repo,ratchet} = the new requirement (mypy 2, ruff 4) while 0 <= age < 48 h, TYPE line always present, judged against the pace file's own stamp (pure, no clock); metric_lines includes it before the as_of gauge. tests/test_reset_gauge.py (5 tests): inside the window, the edges (present at the date and 47 h 59 m 59 s, absent a second before and at 48 h), the TYPE line after expiry, inclusion in metric_lines, and a drift test that every RESETS entry has a date and every date a reset. Direct run of those and test_pacepublish and test_rebaselines passes (15); ratchets unchanged. The expiry window is measured on the pace stamp, so a pace file that stops updating would keep the gauge; luthen's alert on a stale pace covers that",
+      "issued_at": "2026-10-28T10:34:51Z",
+      "minted_during": "interrupt",
+      "caused_by": "luthen-observability:W1712",
+      "last_worked": "2026-10-28T11:12:49Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/rebaselines.py",
+        "src/nemik/pacepublish.py",
+        "tests/test_reset_gauge.py"
+      ],
+      "size_class": "small",
+      "completed": null
     }
   ],
   "residue": [
