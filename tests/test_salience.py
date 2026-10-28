@@ -129,7 +129,8 @@ def test_a_gap_that_names_the_card_that_closes_it_pulls_that_card_up(
 ) -> None:
     """W4 needs only W1.
 
-    Its gap names a:W2 as the closer, so W2 becomes a prerequisite of W4.
+    Its gap names a:W2 as the closer, so W2 becomes a prerequisite of W4: W2's score rises and
+    nothing is stranded.
     """
     graph = _graph(_fleet(tmp_path))
     plain = audit(graph, "a", residue={"a:W4": [{"gate": "g"}]})

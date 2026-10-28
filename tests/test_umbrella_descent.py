@@ -48,7 +48,10 @@ def _hints(root: Path) -> dict[str, str]:
 def test_an_umbrella_is_descended_through_umbrellas_to_its_steps(
     tmp_path: Path,
 ) -> None:
-    """b:W1 is an umbrella over b:W2 (itself an umbrella over b:W3, b:W4) and b:W5."""
+    """b:W1 is an umbrella over b:W2 (itself an umbrella over b:W3, b:W4) and b:W5.
+
+    The hint names b:W3, b:W4 and b:W5 and passes through b:W2.
+    """
     _write(
         tmp_path,
         "b",

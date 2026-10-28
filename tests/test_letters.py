@@ -200,7 +200,10 @@ def test_a_misdelivered_letter_is_copied_to_its_recipient_and_then_counts_as_del
 
 
 def test_a_peer_waypoint_citing_the_letter_path_owns_it(tmp_path: Path) -> None:
-    """nemik:W280: the sender's waiting waypoint cites `<repo>/inbox/<file>` in its evidence."""
+    """nemik:W280: the sender's waiting waypoint cites `<repo>/inbox/<file>` in its evidence.
+
+    So the cited letter is owned and only the uncited one is an orphan.
+    """
     from nemik.letters import orphans
 
     for repo, evidence in (("nemik", ""), ("life", "Letter: nemik/inbox/asked.md")):

@@ -101,7 +101,10 @@ def test_provenance_untracked_by_default_for_export_layout(root: Path) -> None:
 
 
 def test_provenance_reads_exported_commit_json(root: Path) -> None:
-    """nemik:W7: luthen's exporter writes commit.json beside the export-layout queue."""
+    """nemik:W7: check reads commit.json beside each queue and prints its provenance.
+
+    A clean tree reads committed@<sha> and a dirty one uncommitted@<sha>.
+    """
     (root / "alpha" / "commit.json").write_text(
         '{"sha": "abc123def456", "dirty": false}'
     )

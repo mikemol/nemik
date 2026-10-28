@@ -83,7 +83,10 @@ def test_symbol_with_prose_attached_is_malformed_and_clean_forms_are_not() -> No
 
 
 def test_operator_ask_lists_the_work_waiting_behind_it_across_repos() -> None:
-    """life:W21 holds the operator's approval; resumes:W1 waits on it, and resumes:W3 on W1."""
+    """life:W21 holds the operator's approval; resumes:W1 waits on it, and resumes:W3 on W1.
+
+    The ask lists both waiters, across repos and transitively, and not the done card it enables.
+    """
     from nemik.adapter import OPERATOR
     from nemik.blocks import operator_asks
 

@@ -89,7 +89,8 @@ def test_what_if_closing_the_head_of_the_chain_shortens_it_and_leaves_the_graph_
 ):
     """nemik:W351: a:W1 -> a:W2 -> a:W3 is the chain; a:W4 hangs off a:W1.
 
-    Assume a:W1 done.
+    Assuming a:W1 done shortens the chain from 3 to 2, drops a:W1 from the slack and leaves
+    the real graph untouched.
     """
     from nemik.critical import assume_done, critical, what_if
 
