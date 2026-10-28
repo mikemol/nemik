@@ -2981,3 +2981,8 @@
 2026-10-28T09:36:18Z  status W1176 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-28T10:34:51Z  interrupt W1210 minted    -         "nemik exports nemik_ratchet_reset{repo,ratchet}, the required value a declared reset set (rebaselines.RESETS), while the reset is on record, so luthen's ratchet_required_fell alert can tell a declared reset from an undeclared fall"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W1712
 2026-10-28T11:12:49Z  status W1210 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T11:58:32Z  status W1210 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T11:58:35Z  status W1176 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T12:11:35Z  status W1176 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T12:12:06Z  intervention --   other     intervention "reviewed-loop adopted by nemik 2026-10-28 (loop prompt line 31): G0 before tick-open, G1 after tick-close, one token spender"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T12:12:27Z  status W750 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
