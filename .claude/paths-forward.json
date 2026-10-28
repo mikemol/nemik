@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1210,
+  "counter": 1212,
   "waypoints": [
     {
       "symbol": "W1",
@@ -15687,17 +15687,17 @@
     {
       "symbol": "W733",
       "title": "Run the gate's bazel through the admission wrapper mikemol-bazel-admit",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "After mtools:W1714: invoke bazel in tools/gate_staged.sh through mikemol-bazel-admit (an admission line naming megabytes for the bazel verb must then show in a gate's output); nemik's gate calls /usr/bin/bazel directly today",
-      "evidence": "2026-10-23: 2026-10-23 overlap audit (verified): luthen-observability:W1399 adopts the same mtools admission (mikemol-bazel-admit and mikemol-membudget) for luthen's gate; the two cards share a wrapper and its failures, so a finding on one is the other's | 2026-10-23: 2026-10-23 correction (github-8f, from luthen): the title said 'as luthen did', but luthen-observability:W1399, which adopts the same wrapper, is ready and not done (read from its queue). The title no longer claims an adoption that has not happened",
+      "evidence": "2026-10-23: 2026-10-23 overlap audit (verified): luthen-observability:W1399 adopts the same mtools admission (mikemol-bazel-admit and mikemol-membudget) for luthen's gate; the two cards share a wrapper and its failures, so a finding on one is the other's | 2026-10-23: 2026-10-23 correction (github-8f, from luthen): the title said 'as luthen did', but luthen-observability:W1399, which adopts the same wrapper, is ready and not done (read from its queue). The title no longer claims an adoption that has not happened | 2026-10-28: 2026-10-28: mtools:W1714 is done (landed 9cd7e1b2, read from mtools' queue), so the step is unblocked. tools/gate_staged.sh now defines a bazel function that runs /usr/bin/bazel through mikemol-bazel-admit (resolved at the real root's .venv, refused if missing); checked by hand in the real root: bazel info answers through it and bazel test //:test_skill printed 'membudget: hold 4096MB [bazel]'. The proof the card asks for, that line in a gate's own output, comes with the gate that runs this change.",
       "issued_at": "2026-10-19T14:50:08Z",
       "minted_during": "tick",
       "caused_by": "github-8f",
-      "last_worked": "2026-10-23T19:27:14Z",
+      "last_worked": "2026-10-28T12:19:00Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -28831,6 +28831,61 @@
       ],
       "size_class": "small",
       "completed": "20261028T115832Z"
+    },
+    {
+      "symbol": "W1211",
+      "title": "Health, Pace, Pin, Letter and Starved gain class docstrings, so ruff falls 2416 to 2411 (paydown)",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:ruff-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-28T12:15:36Z",
+      "minted_during": "tick",
+      "caused_by": "W1196",
+      "last_worked": "2026-10-28T12:15:44Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/health.py",
+        "src/nemik/pacing.py",
+        "src/nemik/pins.py",
+        "src/nemik/letters.py",
+        "src/nemik/starved.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W1212",
+      "title": "Critical, Fire, Bands, Guarantees, Weights, Composition and Holder gain class docstrings, so ruff falls 2411 to 2404 (paydown)",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:ruff-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-28T12:17:29Z",
+      "minted_during": "tick",
+      "caused_by": "W1196",
+      "last_worked": "2026-10-28T12:17:38Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/critical.py",
+        "src/nemik/score.py",
+        "src/nemik/rank.py",
+        "src/nemik/overlaps.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "small"
     }
   ],
   "residue": [

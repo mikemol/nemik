@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nemik.dev/schema/rank-weights.schema.json",
+  "title": "rank-weights.toml (nemik:W1176)",
+  "description": "The shape of data/rank-weights.toml, read through tomllib. Every table the file declares is required; a table or key the schema does not name is allowed, so a new section lands in the file before the schema.",
+  "type": "object",
+  "required": [
+    "local", "peer", "peer_blocked", "operator", "order", "residue",
+    "ask_priority", "errand", "starvation", "health", "saturation", "tiers",
+    "rulings", "sla", "idle", "pacing", "warrant_debt", "manifest_ratchet", "wait_age"
+  ],
+  "properties": {
+    "local": {"$ref": "#/$defs/demand"},
+    "peer": {"$ref": "#/$defs/demand"},
+    "peer_blocked": {"$ref": "#/$defs/demand"},
+    "operator": {"$ref": "#/$defs/demand"},
+    "order": {
+      "description": "weight sits here, not at the top: it follows [order] in the file, so TOML scopes it to the table.",
+      "type": "object",
+      "required": ["tiers", "scalarize", "weight"],
+      "properties": {
+        "weight": {"enum": ["flow", "downstream"]},
+        "tiers": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "items": {"enum": ["operator", "band", "weight"]}
+          }
+        },
+        "scalarize": {
+          "type": "object",
+          "required": ["operator", "band", "weight"],
+          "properties": {
+            "operator": {"type": "number"},
+            "band": {"type": "number"},
+            "weight": {"type": "number"}
+          }
+        }
+      }
+    },
+    "residue": {
+      "type": "object",
+      "required": ["constructible", "reachable", "observable", "coverable"],
+      "properties": {
+        "constructible": {"$ref": "#/$defs/demand"},
+        "reachable": {"$ref": "#/$defs/demand"},
+        "observable": {"$ref": "#/$defs/demand"},
+        "coverable": {"$ref": "#/$defs/demand"}
+      }
+    },
+    "ask_priority": {
+      "description": "A floor of salience (a decimal string) and the RFC 5545 PRIORITY it earns, 1 highest to 9 lowest.",
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {"pattern": "^[0-9]+(\\.[0-9]+)?$"},
+      "additionalProperties": {"type": "integer", "minimum": 1, "maximum": 9}
+    },
+    "errand": {
+      "type": "object",
+      "required": ["repos"],
+      "properties": {"repos": {"$ref": "#/$defs/names"}}
+    },
+    "starvation": {
+      "type": "object",
+      "required": ["days"],
+      "properties": {"days": {"$ref": "#/$defs/count"}}
+    },
+    "health": {
+      "type": "object",
+      "required": ["blocked_share", "oldest_block_ticks", "asks_owed"],
+      "properties": {
+        "blocked_share": {"$ref": "#/$defs/threshold"},
+        "oldest_block_ticks": {"$ref": "#/$defs/threshold"},
+        "asks_owed": {"$ref": "#/$defs/threshold"}
+      }
+    },
+    "saturation": {
+      "type": "object",
+      "required": ["needs_you_per_repo"],
+      "properties": {"needs_you_per_repo": {"$ref": "#/$defs/count"}}
+    },
+    "tiers": {
+      "description": "Each repo appears in exactly one tier (the test checks that; a schema cannot).",
+      "type": "object",
+      "required": ["now", "later", "only-when-blocking", "lowest"],
+      "additionalProperties": {"$ref": "#/$defs/names"}
+    },
+    "rulings": {
+      "type": "object",
+      "required": ["words"],
+      "properties": {"words": {"$ref": "#/$defs/names"}}
+    },
+    "sla": {
+      "type": "object",
+      "required": ["cross_repo_ticks"],
+      "properties": {"cross_repo_ticks": {"$ref": "#/$defs/count"}}
+    },
+    "idle": {
+      "type": "object",
+      "required": ["ticks", "outcomes"],
+      "properties": {
+        "ticks": {"$ref": "#/$defs/count"},
+        "outcomes": {"$ref": "#/$defs/names"}
+      }
+    },
+    "pacing": {
+      "type": "object",
+      "required": ["rate", "burst", "window_days"],
+      "properties": {
+        "rate": {"$ref": "#/$defs/count"},
+        "burst": {"$ref": "#/$defs/count"},
+        "window_days": {"$ref": "#/$defs/count"}
+      }
+    },
+    "warrant_debt": {"$ref": "#/$defs/ceilings"},
+    "manifest_ratchet": {"$ref": "#/$defs/ceilings"},
+    "wait_age": {
+      "type": "object",
+      "required": ["per_tick"],
+      "properties": {"per_tick": {"$ref": "#/$defs/demand"}}
+    }
+  },
+  "$defs": {
+    "demand": {"type": "number", "minimum": 0},
+    "count": {"type": "integer", "minimum": 0},
+    "names": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "threshold": {
+      "description": "[amber, red]: red is at least amber.",
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {"type": "number", "minimum": 0}
+    },
+    "ceilings": {
+      "description": "A per-repo ceiling that may only fall: a non-negative count for each repo.",
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"$ref": "#/$defs/count"}
+    }
+  }
+}

@@ -60,6 +60,17 @@ subset of the schema's declared keys and covers its required ones (step 3, the d
 `abc.ABC` with one abstract method per field is concrete under `TreeWaypoint`, so a field the
 accessors lose or the schema gains shows there; and the plain interface refuses to answer.
 
+## Built: the weights TOML schema (the TOML half, first document)
+
+`src/nemik/data/rank-weights.schema.json` declares `rank-weights.toml` as read through `tomllib`:
+every table the file declares is required and typed, and a key the schema does not name is allowed.
+`tests/test_rank_weights_schema.py` (6 tests) validates the shipped file, names each missing table,
+refuses a wrong type or value, and states the two rules a schema cannot (a repo is in one burn-down
+tier; a health pair is `[amber, red]` with red no lower). Writing it found a misreading: the file's
+`weight = "flow"` follows `[order]`, so TOML scopes it to that table, though the comment above it
+reads as if it were top-level; the schema puts it under `order`, as `rank.py` reads it. Owed for
+this document: an accessor (`health.py` first), then `bands.toml`, `connectors.toml`, `workflows.toml`.
+
 ## Not built yet
 
 - Any consumer migrated (step 4). The first would be `wake.py`, whose bare `dict` annotations
