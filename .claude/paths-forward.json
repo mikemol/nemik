@@ -20331,7 +20331,7 @@
     {
       "symbol": "W904",
       "title": "The fleet-view PDF is the graph SVG rendered by rsvg-convert: no panels, no Chromium print",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
@@ -20341,7 +20341,7 @@
       "issued_at": "2026-10-23T16:32:37Z",
       "minted_during": "tick",
       "caused_by": "operator",
-      "last_worked": "2026-10-28T23:16:37Z",
+      "last_worked": "2026-10-28T23:32:26Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/pdf.py",

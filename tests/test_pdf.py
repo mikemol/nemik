@@ -12,6 +12,7 @@ from nemik import pdfviews
 from nemik.pdf import render
 
 MIN_PDF_BYTES = 1000
+MAX_PDF_BYTES = 2_000_000
 
 
 def test_each_view_is_steps_on_known_controls() -> None:
@@ -80,5 +81,6 @@ def test_a_view_prints_a_pdf(view: str, tmp_path: Path) -> None:
     data = out.read_bytes()
     assert data.startswith(b"%PDF")
     assert len(data) > MIN_PDF_BYTES
-    assert b"MediaBox [0 0 1275.12 937.91998]" in data
     assert b"/Subtype /Image" not in data
+    # nemik:W904: rsvg-convert draws the graph, not Chromium's print, so dashes stay native
+    assert len(data) < MAX_PDF_BYTES
