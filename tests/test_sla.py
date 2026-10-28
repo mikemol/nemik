@@ -11,7 +11,7 @@ from pathlib import Path
 from nemik.check import survey
 
 
-def _write(root: Path, repo: str, waypoints: list[dict]) -> None:
+def _write(root: Path, repo: str, waypoints: list[dict[str, object]]) -> None:
     queue = root / repo / ".claude" / "paths-forward.json"
     queue.parent.mkdir(parents=True)
     payload: dict[str, object] = {

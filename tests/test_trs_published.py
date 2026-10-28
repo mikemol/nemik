@@ -13,7 +13,7 @@ from nemik.trs import LDP, TRS
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
 
 
-def _build(tmp_path: Path, items: list[dict]) -> Path:
+def _build(tmp_path: Path, items: list[dict[str, object]]) -> Path:
     tmp_path.mkdir(parents=True, exist_ok=True)
     withheld = tmp_path / "withheld.json"
     payload: dict[str, object] = {"version": 1, "as_of": "x", "items": items}

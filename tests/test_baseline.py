@@ -9,7 +9,9 @@ from pathlib import Path
 from nemik.history import baseline_spec, variance
 
 
-def _q(cards: dict[str, tuple[str, str]], residue: tuple[str, ...] = ()) -> dict:
+def _q(
+    cards: dict[str, tuple[str, str]], residue: tuple[str, ...] = ()
+) -> dict[str, object]:
     return {
         "waypoints": [
             {"symbol": s, "status": st, "minted_during": during}

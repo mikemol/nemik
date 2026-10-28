@@ -12,7 +12,7 @@ from nemik.adapter import queue_graph
 from nemik.metrics import age_lines
 
 
-def _wp(symbol: str, status: str, issued: str) -> dict:
+def _wp(symbol: str, status: str, issued: str) -> dict[str, object]:
     return {"symbol": symbol, "title": symbol, "status": status, "issued_at": issued}
 
 

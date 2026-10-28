@@ -12,7 +12,7 @@ from nemik.adapter import queue_graph
 from nemik.calwrite import event_times, events, feed, uid
 
 
-def _queue(tmp_path: Path, repo: str, waypoints: list[dict]) -> Graph:
+def _queue(tmp_path: Path, repo: str, waypoints: list[dict[str, object]]) -> Graph:
     path = tmp_path / f"{repo}.json"
     payload: dict[str, object] = {
         "version": 1,

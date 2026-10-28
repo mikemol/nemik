@@ -18,7 +18,7 @@ from nemik.blocks import annotate
 WITNESS = 'up{job="x"} == 0'
 
 
-def _unresolved(tmp_path: Path, cards: list[dict]) -> set[str]:
+def _unresolved(tmp_path: Path, cards: list[dict[str, object]]) -> set[str]:
     queue = tmp_path / "r" / "paths-forward.json"
     queue.parent.mkdir(parents=True)
     payload: dict[str, object] = {
@@ -37,7 +37,7 @@ def _unresolved(tmp_path: Path, cards: list[dict]) -> set[str]:
     }
 
 
-def _card(symbol: str, blocked_on: str, **more: str) -> dict:
+def _card(symbol: str, blocked_on: str, **more: str) -> dict[str, object]:
     return {
         "symbol": symbol,
         "title": symbol,

@@ -170,8 +170,7 @@
   "misc": 2
  },
  "tests/test_alarm_delivery.py": {
-  "misc": 13,
-  "type-arg": 3
+  "misc": 7
  },
  "tests/test_apischema.py": {
   "misc": 39,
@@ -185,8 +184,7 @@
   "misc": 12
  },
  "tests/test_baseline.py": {
-  "misc": 24,
-  "type-arg": 1
+  "misc": 20
  },
  "tests/test_cachestore.py": {
   "misc": 9,
@@ -198,10 +196,6 @@
  "tests/test_calendars.py": {
   "misc": 48,
   "type-arg": 3
- },
- "tests/test_calwrite.py": {
-  "misc": 25,
-  "type-arg": 1
  },
  "tests/test_certify.py": {
   "misc": 17
@@ -273,10 +267,6 @@
   "no-untyped-def": 1,
   "type-arg": 1
  },
- "tests/test_metrics_age.py": {
-  "misc": 7,
-  "type-arg": 1
- },
  "tests/test_mpxj.py": {
   "misc": 2
  },
@@ -318,8 +308,7 @@
   "misc": 13
  },
  "tests/test_run_row_schema.py": {
-  "misc": 7,
-  "type-arg": 1
+  "misc": 5
  },
  "tests/test_satisfied_edges.py": {
   "misc": 17
@@ -349,10 +338,6 @@
  "tests/test_skill.py": {
   "misc": 11
  },
- "tests/test_sla.py": {
-  "misc": 8,
-  "type-arg": 1
- },
  "tests/test_static.py": {
   "misc": 7
  },
@@ -364,10 +349,6 @@
  },
  "tests/test_toil.py": {
   "misc": 8
- },
- "tests/test_trs_published.py": {
-  "misc": 6,
-  "type-arg": 1
  },
  "tests/test_umbrella_block.py": {
   "misc": 5
@@ -385,8 +366,7 @@
   "no-untyped-def": 1
  },
  "tests/test_wake_nudge.py": {
-  "misc": 19,
-  "type-arg": 1
+  "misc": 5
  },
  "tests/test_web_render.py": {
   "misc": 1
@@ -394,10 +374,6 @@
  "tests/test_withheld.py": {
   "misc": 62,
   "no-untyped-def": 4
- },
- "tests/test_witness_party.py": {
-  "misc": 11,
-  "type-arg": 2
  },
  "tests/test_witness_promql.py": {
   "explicit-any": 2,

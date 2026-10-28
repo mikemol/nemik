@@ -25,7 +25,7 @@ CLEAN = {
 }
 
 
-def _errors(row: dict) -> list[str]:
+def _errors(row: dict[str, object]) -> list[str]:
     schema = json.loads(SCHEMA.read_text())
     validator = jsonschema.Draft202012Validator(
         schema, format_checker=jsonschema.FormatChecker()
