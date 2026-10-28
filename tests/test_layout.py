@@ -635,7 +635,8 @@ def test_a_static_build_refetches_only_the_pieces_whose_hash_moved(
     from nemik.serve import build_static
 
     withheld = tmp_path / "withheld.json"
-    withheld.write_text(json.dumps({"version": 1, "as_of": "x", "items": []}))
+    payload: dict[str, object] = {"version": 1, "as_of": "x", "items": []}
+    withheld.write_text(json.dumps(payload))
     out = tmp_path / "out"
     build_static(FLEET, out, withheld)
     whole = json.loads((out / "graph.json").read_text())
