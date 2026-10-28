@@ -29,6 +29,8 @@ from playwright.sync_api import Browser as LaunchedBrowser
 from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import Page as LaunchedPage
 from playwright.sync_api import Playwright as Launcher
+from playwright.sync_api import Request as LaunchedRequest
+from playwright.sync_api import Response as LaunchedResponse
 
 from nemik.tracker import BOOL, INT, Tree, parse_tree
 
@@ -223,6 +225,10 @@ def launched_page(
     Returns:
         The browser and the page, once the predicate holds; skips without a browser.
 
+    Raises:
+        PageBrokenError: The page broke; the message lists the requests that failed or got an
+            error status, so a script missing under load names the asset (W846, W1060).
+
     """
     exe = os.environ.get("NEMIK_CHROMIUM")
     try:
@@ -232,7 +238,22 @@ def launched_page(
     except PlaywrightError as e:
         pytest.skip(f"chromium unavailable: {e}")
     page = browser.new_page(viewport={"width": viewport[0], "height": viewport[1]})
-    load(page, url, wait)
+    refused: list[str] = []
+
+    def note_failed(request: LaunchedRequest) -> None:
+        refused.append(f"failed {request.url}")
+
+    def note_status(response: LaunchedResponse) -> None:
+        if response.status >= HTTP_ERROR:
+            refused.append(f"{response.status} {response.url}")
+
+    page.on("requestfailed", note_failed)
+    page.on("response", note_status)
+    try:
+        load(page, url, wait)
+    except PageBrokenError as e:
+        message = f"{e}; requests refused or failed: {refused}"
+        raise PageBrokenError(message) from e
     return browser, page
 
 

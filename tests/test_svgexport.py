@@ -10,9 +10,7 @@ its dash (its ruler-sequence pattern is its identity, nemik:W388).
 
 import re
 
-import pytest
 import webpage
-from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import sync_playwright
 
 from nemik.pdf import SVG_EXPORT
@@ -121,13 +119,9 @@ def _weak(facts: dict[object, object]) -> list[str]:
 def test_the_svg_keeps_the_canvas_cards_edges_dashes_and_contrast() -> None:
     """Nothing visible is dropped, no picture is embedded, and the labels stay legible."""
     with webpage.served() as url, sync_playwright() as p:
+        # nemik:W846: launched_page names the requests that failed if the page breaks on load
+        browser, page = webpage.launched_page(p, url)
         try:
-            browser = p.chromium.launch()
-        except PlaywrightError as error:
-            pytest.skip(f"chromium unavailable: {error}")
-        try:
-            page = browser.new_page(viewport={"width": 1700, "height": 1250})
-            webpage.load(page, url, webpage.CY_READY)
             page.add_script_tag(path=str(SVG_EXPORT))
             facts: object = page.evaluate(FACTS)
         finally:
