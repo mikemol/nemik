@@ -22,9 +22,15 @@ if TYPE_CHECKING:
 
 def _pf(state: Path, *args: str) -> None:
     cmd = [*installed.script("mikemol-paths-forward"), "--state", str(state), *args]
-    assert (
-        subprocess.run(cmd, capture_output=True, text=True, check=False).returncode == 0
-    )
+    # W1244: a gate run once stalled here for 300 s with no output; bound the call and name it
+    try:
+        done = subprocess.run(
+            cmd, capture_output=True, text=True, check=False, timeout=120
+        )
+    except subprocess.TimeoutExpired as e:
+        stalled = f"the writer stalled 120 s on {args}: {e.stderr!r}"
+        raise AssertionError(stalled) from e
+    assert done.returncode == 0, done.stderr
 
 
 def _wait(state: Path, card: str, on: list[str]) -> None:
@@ -110,7 +116,7 @@ def test_the_gap_between_the_arms_is_the_contested_sources(tmp_path: Path) -> No
 def test_a_recorded_gap_on_a_waiting_card_adds_demand_that_flows_to_its_cone(
     tmp_path: Path,
 ) -> None:
-    # W3 needs W1 and W2; one gap on W3 adds 1 of demand, split between them.
+    """W3 needs W1 and W2; one gap on W3 adds 1 of demand, split between them."""
     gap: dict[str, object] = {"gate": "constructible"}
     result = audit(_graph(_fleet(tmp_path)), "a", residue={"a:W3": [gap]})
     local = Fraction(load_weights().local)
@@ -121,7 +127,10 @@ def test_a_recorded_gap_on_a_waiting_card_adds_demand_that_flows_to_its_cone(
 def test_a_gap_that_names_the_card_that_closes_it_pulls_that_card_up(
     tmp_path: Path,
 ) -> None:
-    # W4 needs only W1. Its gap names a:W2 as the closer, so W2 becomes a prerequisite of W4.
+    """W4 needs only W1.
+
+    Its gap names a:W2 as the closer, so W2 becomes a prerequisite of W4.
+    """
     graph = _graph(_fleet(tmp_path))
     plain = audit(graph, "a", residue={"a:W4": [{"gate": "g"}]})
     closer = audit(graph, "a", residue={"a:W4": [{"gate": "g", "closes_ref": "a:W2"}]})
