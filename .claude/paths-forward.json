@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1192,
+  "counter": 1193,
   "waypoints": [
     {
       "symbol": "W1",
@@ -15620,12 +15620,12 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "The command exists; remaining: a wrapper or profile line that points it at the tree's src/nemik and the venv's installed nemik package and runs it where a stale install would mislead (a tick hook or the setup script), with a test that a stale temp install exits 1 through it",
-      "evidence": "2026-10-23: 2026-10-23 overlap audit (verified): related to luthen-observability:W1235 (a timer publishes luthen_user_tool_behind_commits per tool, so a stale nemik install shows before it misleads); both detect a stale install, this one inside the tree, that one on the host. W1235 is blocked on luthen's W1285 as well, so no enables edge: a cross-cite only | 2026-10-27: landed e9f8c2d (pushed, gate green): nemik.stale.stale_modules(source_dir, installed_dir) names the stale modules; first submit refused on pathlib ruff findings. The command that runs it against the tree and the venv is still to do | 2026-10-27: landed b4b8a9f (pushed, gate green): nemik-stale SOURCE_DIR INSTALLED_DIR, exits 0/1/2, no argparse, no baseline entry. First submit refused by test_parity only (nemik-stale in none of parity.py's lists; reproduced locally); fixed by listing it EXCLUDED as host-private | 2026-10-27: 2026-10-27 after b4b8a9f: the built .venv holds a copy of every module (site-packages/nemik, stale.py included) but no nemik-stale console script yet (.venv/bin/nemik-stale: not found), so the venv needs bazel build //:.venv before the command runs; not built while stack587 gates (no foreground bazel beside the gate). First real reading waits on that rebuild: nemik-stale src/nemik .venv/lib/python3.13/site-packages/nemik | 2026-10-27: landed 0fd667a (pushed, gate green): test_stale_install covers main() through sys.argv. Remaining: venv rebuild so .venv/bin/nemik-stale exists, then the wrapper/profile line | 2026-10-28: 2026-10-27 first real reading: after bazel build //:.venv, nemik-stale src/nemik .venv/lib/python3.13/site-packages/nemik printed nothing and exited 0 (install matches the tree). The command now exists in the venv. Still to do: the wrapper/profile line that runs it where a stale install would mislead, and a reading of the stale case against a real stale install",
+      "next_bounded_step": "At the next --tick-open, read that the nemik-stale hook ran (and silent); then test a stale case (a temp copy with one changed module through the command, exit 1) and close",
+      "evidence": "2026-10-23: 2026-10-23 overlap audit (verified): related to luthen-observability:W1235 (a timer publishes luthen_user_tool_behind_commits per tool, so a stale nemik install shows before it misleads); both detect a stale install, this one inside the tree, that one on the host. W1235 is blocked on luthen's W1285 as well, so no enables edge: a cross-cite only | 2026-10-27: landed e9f8c2d (pushed, gate green): nemik.stale.stale_modules(source_dir, installed_dir) names the stale modules; first submit refused on pathlib ruff findings. The command that runs it against the tree and the venv is still to do | 2026-10-27: landed b4b8a9f (pushed, gate green): nemik-stale SOURCE_DIR INSTALLED_DIR, exits 0/1/2, no argparse, no baseline entry. First submit refused by test_parity only (nemik-stale in none of parity.py's lists; reproduced locally); fixed by listing it EXCLUDED as host-private | 2026-10-27: 2026-10-27 after b4b8a9f: the built .venv holds a copy of every module (site-packages/nemik, stale.py included) but no nemik-stale console script yet (.venv/bin/nemik-stale: not found), so the venv needs bazel build //:.venv before the command runs; not built while stack587 gates (no foreground bazel beside the gate). First real reading waits on that rebuild: nemik-stale src/nemik .venv/lib/python3.13/site-packages/nemik | 2026-10-27: landed 0fd667a (pushed, gate green): test_stale_install covers main() through sys.argv. Remaining: venv rebuild so .venv/bin/nemik-stale exists, then the wrapper/profile line | 2026-10-28: 2026-10-27 first real reading: after bazel build //:.venv, nemik-stale src/nemik .venv/lib/python3.13/site-packages/nemik printed nothing and exited 0 (install matches the tree). The command now exists in the venv. Still to do: the wrapper/profile line that runs it where a stale install would mislead, and a reading of the stale case against a real stale install | 2026-10-28: landed a36e9ff (pushed, gate green): tick_hooks now run nemik-stale. NOT yet confirmed: that --tick-open runs the hook and what it does with an exit 1; read at the next tick-open before closing this card",
       "issued_at": "2026-10-19T13:36:24Z",
       "minted_during": "tick",
       "caused_by": "nemik:W729",
-      "last_worked": "2026-10-28T00:10:12Z",
+      "last_worked": "2026-10-28T00:14:56Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_stale_install.py"
@@ -26784,11 +26784,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Read drum's admitted CPU headroom from its interface (the second input); then, when mtools-ad names a card for nemik's per-target emitter, block the wiring of ceiling_of into width() on it; until a series exists nemik keeps the declared CEILING",
-      "evidence": "2026-10-27: landed e254920 (pushed, gate green): roundof.ceiling_of(cost_per_entry, headroom) is pure and keeps the declared CEILING while either input is <= 0; not yet called from width(). Refused twice first: an E501 docstring, then a working set holding W730 outside the round. Steps (1) and (2) are still to read | 2026-10-27: 2026-10-27 step (1) read: nemik-hostroot reads ratchet series from luthen-series.json in luthen's export tree (modified 17:32 local). It holds no luthen_gate_target_cpu series (grep: 0 hits for luthen_gate_target_cpu and no gate-named key), so the W1645 median and p90 are not in the route nemik reads. Needs luthen to add them to that export (or name another route); not yet asked, and no luthen-observability card citable from here | 2026-10-27: 2026-10-27 luthen-observability-ab carded the export as luthen-observability:W1707 and asked per-repo vs per-target (a target name discloses internal targets to the public static view) and which aggregate. Answered: one number per repo, no target names; the sum over a repo's targets of the median and of the p90, plus the target count and the minimum sample count | 2026-10-28: 2026-10-27 luthen-observability:W1707 landed (7833e69b): luthen-series.json now carries gate_cost {repo: {median_s, p90_s, targets, min_samples}} with no target names. Read from luthen-observability-ab, not yet by me from the file: only mtools has gate cost today (median_s 27419.7, p90_s 32571.73, targets 874, min_samples 1); every other repo, nemik included, is ABSENT, so nemik's own ceiling stays the declared CEILING. min_samples 1 means thin targets are mixed in; the sum is an upper bound on a gate, not a landing's marginal cost | 2026-10-28: 2026-10-27 luthen-observability-ab (a peer's word, store read by them): the export is not omitting nemik; mikemol.gate.target.cpu.seconds{repo,target} exists for ONE repo, mtools (874 series). nemik's gate is in the store only as mikemol.gate.run_seconds{repo=nemik}, per run, no target label, wall vs CPU not established. nemik's gate runs about 443 bazel test targets, so the mtools emitter may apply; asked mtools-ad (no citable mtools card yet). Until then nemik keeps the declared CEILING; drum's headroom is still unread",
+      "evidence": "2026-10-27: landed e254920 (pushed, gate green): roundof.ceiling_of(cost_per_entry, headroom) is pure and keeps the declared CEILING while either input is <= 0; not yet called from width(). Refused twice first: an E501 docstring, then a working set holding W730 outside the round. Steps (1) and (2) are still to read | 2026-10-27: 2026-10-27 step (1) read: nemik-hostroot reads ratchet series from luthen-series.json in luthen's export tree (modified 17:32 local). It holds no luthen_gate_target_cpu series (grep: 0 hits for luthen_gate_target_cpu and no gate-named key), so the W1645 median and p90 are not in the route nemik reads. Needs luthen to add them to that export (or name another route); not yet asked, and no luthen-observability card citable from here | 2026-10-27: 2026-10-27 luthen-observability-ab carded the export as luthen-observability:W1707 and asked per-repo vs per-target (a target name discloses internal targets to the public static view) and which aggregate. Answered: one number per repo, no target names; the sum over a repo's targets of the median and of the p90, plus the target count and the minimum sample count | 2026-10-28: 2026-10-27 luthen-observability:W1707 landed (7833e69b): luthen-series.json now carries gate_cost {repo: {median_s, p90_s, targets, min_samples}} with no target names. Read from luthen-observability-ab, not yet by me from the file: only mtools has gate cost today (median_s 27419.7, p90_s 32571.73, targets 874, min_samples 1); every other repo, nemik included, is ABSENT, so nemik's own ceiling stays the declared CEILING. min_samples 1 means thin targets are mixed in; the sum is an upper bound on a gate, not a landing's marginal cost | 2026-10-28: 2026-10-27 luthen-observability-ab (a peer's word, store read by them): the export is not omitting nemik; mikemol.gate.target.cpu.seconds{repo,target} exists for ONE repo, mtools (874 series). nemik's gate is in the store only as mikemol.gate.run_seconds{repo=nemik}, per run, no target label, wall vs CPU not established. nemik's gate runs about 443 bazel test targets, so the mtools emitter may apply; asked mtools-ad (no citable mtools card yet). Until then nemik keeps the declared CEILING; drum's headroom is still unread | 2026-10-28: 2026-10-27 mtools-ad (a peer's word): no mtools card is needed; mikemol-gate-targets REPO BEP TESTLOGS is repo-parameterized and mtools' own pre-commit calls it. The wiring is nemik's own gate: minted nemik:W1193 (gate_staged.sh). Block on mtools:W1645 was wrong (luthen's, done); correct path: W1193 then luthen's export carries nemik",
       "issued_at": "2026-10-26T22:09:25Z",
       "minted_during": "interrupt",
       "caused_by": "W1092",
-      "last_worked": "2026-10-28T00:12:15Z",
+      "last_worked": "2026-10-28T00:15:08Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/roundof.py",
@@ -28314,6 +28314,31 @@
         "codon-baseline.json"
       ],
       "size_class": "small"
+    },
+    {
+      "symbol": "W1193",
+      "title": "nemik's gate emits per-target CPU seconds: gate_staged.sh runs bazel test with a build-events file and calls mikemol-gate-targets nemik after it, so luthen's gate_cost carries nemik",
+      "status": "working",
+      "enables": [
+        "W1136"
+      ],
+      "touches": [
+        "file:tools/gate_staged.sh"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "mtools-ad 2026-10-27 (a peer's word, from mtools' own pre-commit lines ~857-915): mikemol-gate-targets REPO BEP TESTLOGS (hooks dist, console script registered) sends mikemol.gate.target.cpu.seconds, wall, children, failed {target, kind, repo} and mikemol.gate.run.emitted{repo}; mtools runs bazel test with --build_event_json_file and passes bazel info bazel-testlogs; cached results are not emitted; best effort, exit 0. Read first: mtools' pre-commit lines to copy the shape; nemik's py_tests already print the shard cpu line in their logs. Then add the BEP flag to the bazel test in gate_staged.sh and the call after it; check the tool is the pinned one (mikemol-hooks is nemik's dependency) and that a failed emit leaves the gate's exit code unchanged. Same file as W733 (mikemol-bazel-admit): successive entries, not parallel",
+      "evidence": "",
+      "issued_at": "2026-10-28T00:15:01Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1136",
+      "last_worked": "2026-10-28T00:33:28Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tools/gate_staged.sh"
+      ],
+      "size_class": "small",
+      "completed": null
     }
   ],
   "residue": [

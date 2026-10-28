@@ -146,7 +146,23 @@ if [ -n "$stray" ]; then
 fi
 # nemik:W521: the gate is one bazel target, //:precommit (a test_suite over every test; the lint, type,
 # shell and warrant stages join it as they land), so BuildBuddy captures its logs as one invocation.
-if bazel test //:precommit --noshow_progress; then
+# nemik:W1193: the build events go to a local file too, for mikemol-gate-targets below, which sends each
+# freshly run target's CPU seconds so luthen's gate cost carries nemik. The send is best effort and
+# cannot change the verdict: the gate's own exit status is read before it and kept after it.
+bep="$(mktemp)"
+gate_rc=0
+bazel test //:precommit --noshow_progress --build_event_json_file="$bep" || gate_rc=$?
+targets_tool="$wt/.venv/bin/mikemol-gate-targets"
+if [ -x "$targets_tool" ] && [ -s "$bep" ]; then
+    testlogs="$(bazel info bazel-testlogs 2>/dev/null)" || testlogs=""
+    if [ -n "$testlogs" ]; then
+        "$targets_tool" nemik "$bep" "$testlogs" || echo "gate_staged: mikemol-gate-targets failed; no measurements sent" >&2
+    fi
+else
+    echo "gate_staged: mikemol-gate-targets not built or no build events; no measurements sent" >&2
+fi
+rm -f "$bep"
+if [ "$gate_rc" -eq 0 ]; then
     echo "gate_staged: green on the staged tree ($wt)" >&2
     exit 0
 fi
