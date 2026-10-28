@@ -2,10 +2,11 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W317: repo health, red / amber / green, from declared thresholds.
 
-Three signals per repo, each read live from the graph: the share of its open cards that are blocked, how
-many loop ticks its longest-blocked card has waited (`ticks_blocked`), and how many needs-you operator
-asks it holds. `[health]` in rank-weights.toml declares an `[amber, red]` pair for each; a repo is as
-unhealthy as its worst signal, and the verdict names every signal that crossed a threshold.
+Three signals per repo, each read live from the graph: the share of its open cards that are
+blocked, how many loop ticks its longest-blocked card has waited (`ticks_blocked`), and how many
+needs-you operator asks it holds. `[health]` in rank-weights.toml declares an `[amber, red]` pair
+for each; a repo is as unhealthy as its worst signal, and the verdict names every signal that
+crossed a threshold.
 """
 
 from __future__ import annotations
@@ -32,7 +33,7 @@ class Health(NamedTuple):
 
 
 def thresholds(text: str | None = None) -> dict[str, tuple[float, float]]:
-    """The declared `[health]` table: for each signal, its (amber, red) floor."""
+    """Read the declared `[health]` table: for each signal, its (amber, red) floor."""
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
     table = tomllib.loads(text).get("health", {})
@@ -50,7 +51,7 @@ def health_cards(
     repo: str,
     limits: dict[str, tuple[float, float]],
 ) -> Health:
-    """nemik:W454: `health` over plain Cards and the operator asks as plain rows: the portable core."""
+    """nemik:W454: `health` over plain Cards and the asks as plain rows: the portable core."""
     open_cards = [c for c in by_cite.values() if not c.done and c.repo == repo]
     blocked = [c for c in open_cards if c.state == "blocked"]
     share = len(blocked) / len(open_cards) if open_cards else 0.0

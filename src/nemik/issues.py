@@ -2,15 +2,17 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W366: cards as issue-tracker issues (GitHub / Forgejo shape), a read-only mirror.
 
-A serializer over nemik.projection (W413). Each Task becomes an issue: its title, a body that names the
-cite (so a mirrored issue always leads back to the card), `state` open or closed, the repo as a label,
-and `blocked_by`, the cites of its predecessors. GitHub's issue-dependency endpoints and Forgejo's
-dependency endpoints both take "this issue is blocked by that one" (docs/integration-survey.md), so the
-mirror's writer resolves each blocked_by cite to the issue it created; that writer is a connector
-(W371), not this module. Nothing here writes anywhere: `nemik-export --format issues` prints JSON.
+A serializer over nemik.projection (W413). Each Task becomes an issue: its title, a body that
+names the cite (so a mirrored issue always leads back to the card), `state` open or closed, the
+repo as a label, and `blocked_by`, the cites of its predecessors. GitHub's issue-dependency
+endpoints and Forgejo's dependency endpoints both take "this issue is blocked by that one"
+(docs/integration-survey.md), so the mirror's writer resolves each blocked_by cite to the issue
+it created; that writer is a connector (W371), not this module. Nothing here writes anywhere:
+`nemik-export --format issues` prints JSON.
 
-Jira's CSV import documents only parent/child columns, not issue links (the survey's verified finding),
-so a Jira mirror would lose the blocking edges; it is left to the connector rather than a lossy file.
+Jira's CSV import documents only parent/child columns, not issue links (the survey's verified
+finding), so a Jira mirror would lose the blocking edges; it is left to the connector rather
+than a lossy file.
 
 nemik:W958: given a tracker's recorded issues, `plan_text` prints the calls a mirror would make
 (nemik.mirror.plan), reading them with nemik.tracker; it sends nothing.
@@ -69,7 +71,7 @@ def plan_text(tasks: list[Task], tracker_text: str) -> str:
 
 
 def read(text: str) -> list[Task]:
-    """The tasks an issues document written by `write` holds (for the round-trip test)."""
+    """Read the tasks an issues document written by `write` holds (for the round-trip test)."""
     rows = json.loads(text)
     return [
         Task(
