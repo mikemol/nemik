@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W94: every nemik command imports this package, so this is where an editable install is flagged.
+"""nemik:W94: every nemik command imports this package, so an editable install is flagged here.
 
 An editable install runs the working tree, not what was installed: a CLI then behaves as whatever
 is checked out at the moment, and Bazel's sandbox cannot see it. The install is meant to be a real
@@ -16,7 +16,13 @@ from typing import cast
 
 
 def editable_install() -> bool:
-    """True when the installed `nemik` distribution records itself as editable (PEP 610 direct_url.json)."""
+    """Say whether the installed `nemik` distribution records itself as editable.
+
+    Returns:
+        True when PEP 610's direct_url.json marks the install editable, else False (including
+        when the distribution is not installed).
+
+    """
     try:
         text = distribution("nemik").read_text("direct_url.json")
     except PackageNotFoundError:
@@ -35,7 +41,7 @@ def editable_install() -> bool:
 
 
 if editable_install():
-    print(
-        "nemik: WARNING running from an editable install; use the built venv: ./setup.sh (bazel build //:.venv)",
-        file=sys.stderr,
+    sys.stderr.write(
+        "nemik: WARNING running from an editable install; "
+        "use the built venv: ./setup.sh (bazel build //:.venv)\n"
     )
