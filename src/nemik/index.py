@@ -14,7 +14,7 @@ copies).
 from __future__ import annotations
 
 import weakref
-from collections.abc import Iterator
+from collections.abc import Generator
 from contextlib import contextmanager
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
@@ -75,7 +75,7 @@ _SCOPE: dict[int, tuple[weakref.ref[Graph], int, Index]] | None = None
 
 
 @contextmanager
-def indexed() -> Iterator[None]:
+def indexed() -> Generator[None]:
     """Keep each graph's index for the duration of the block (one build)."""
     global _SCOPE
     outer, _SCOPE = _SCOPE, {} if _SCOPE is None else _SCOPE

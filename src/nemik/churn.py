@@ -156,11 +156,11 @@ def render(
     ]
     for row in rows:
         shares = ", ".join(f"{c} {row.share(c):.1%}" for c in CLASSES)
-        lines.append(f"polls every {row.step:>4} s ({row.polls}): {shares}")
-        lines.append(
+        redrawn = (
             f"    redrawn now {row.redraws_now():.1%}; "
             f"redrawn if attributes and recolours patch in place {row.redraws_patching_attributes():.1%}"
         )
+        lines.extend((f"polls every {row.step:>4} s ({row.polls}): {shares}", redrawn))
     return "\n".join(lines)
 
 

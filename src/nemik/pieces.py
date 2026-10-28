@@ -15,6 +15,7 @@ collide.
 
 from __future__ import annotations
 
+import operator
 from typing import Any
 
 from nemik.adapter import BASE
@@ -56,7 +57,7 @@ def assemble(pieces: dict[str, dict[str, Any]]) -> dict[str, Any]:
     nodes = sorted((n for p in parts for n in p["nodes"]), key=lambda n: str(n["id"]))
     edges = sorted(
         (e for p in parts for e in p["edges"]),
-        key=lambda e: (e["source"], e["target"], e["kind"]),
+        key=operator.itemgetter("source", "target", "kind"),
     )
     doc: dict[str, Any] = {
         "nodes": nodes,

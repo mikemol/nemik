@@ -6,7 +6,7 @@ from __future__ import annotations
 
 import json
 import threading
-from collections.abc import Iterator
+from collections.abc import Generator
 from contextlib import contextmanager
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from typing import TYPE_CHECKING
@@ -113,7 +113,7 @@ def test_a_bad_duration_on_the_command_line_is_exit_two(
 
 
 @contextmanager
-def _victoria(series: list[list[str]]) -> Iterator[str]:
+def _victoria(series: list[list[str]]) -> Generator[str]:
     """A local /api/v1/query that answers each request with the next list of sample values."""
     answers = list(series)
 

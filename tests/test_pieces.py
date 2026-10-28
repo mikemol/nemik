@@ -3,6 +3,7 @@
 """nemik:W415: graph.json's per-repo pieces put back together give graph.json."""
 
 import json
+import operator
 from pathlib import Path
 from typing import Any
 
@@ -25,7 +26,7 @@ def test_published_pieces_assemble_to_the_published_graph(tmp_path: Path) -> Non
         r: json.loads((out / "graph" / f"{r}.json").read_text()) for r in fleet["repos"]
     }
     back = assemble(pieces)
-    whole["nodes"] = sorted(whole["nodes"], key=lambda n: n["id"])
+    whole["nodes"] = sorted(whole["nodes"], key=operator.itemgetter("id"))
     assert back == whole
 
 
@@ -51,7 +52,7 @@ def test_a_repo_piece_holds_only_that_repo() -> None:
     assert len(pieces["a"]["edges"]) == 1
     assert set(pieces[FLEET]["findings"]) == {"c"}
     assert assemble(pieces) == doc | {
-        "nodes": sorted(doc["nodes"], key=lambda n: n["id"]),
+        "nodes": sorted(doc["nodes"], key=operator.itemgetter("id")),
         "findings": {"a": [], "c": []},
         "ruler": {},
     }

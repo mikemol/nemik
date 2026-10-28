@@ -33,7 +33,7 @@ from rdflib.plugins.sparql import processor
 _LOCK = threading.RLock()
 
 if TYPE_CHECKING:
-    from collections.abc import Iterator
+    from collections.abc import Generator
 
 
 class _Text:
@@ -44,7 +44,7 @@ class _Text:
 
 
 @contextmanager
-def cached_sparql_parse() -> Iterator[None]:
+def cached_sparql_parse() -> Generator[None]:
     """Reuse the translated form of each distinct SPARQL query for the duration of the block.
 
     Yields:

@@ -7,6 +7,7 @@ field, the report github-8f asked for, rather than a bare pass or fail.
 """
 
 import json
+import operator
 from pathlib import Path
 
 import pytest
@@ -57,9 +58,9 @@ def test_split_then_assemble_is_identity(case: Path) -> None:
     c = json.loads(case.read_text(encoding="utf-8"))
     doc = dict(c["doc"])
     # assemble's canonical order: nodes by id, edges by (source, target, kind)
-    doc["nodes"] = sorted(doc["nodes"], key=lambda n: n["id"])
+    doc["nodes"] = sorted(doc["nodes"], key=operator.itemgetter("id"))
     doc["edges"] = sorted(
-        doc["edges"], key=lambda e: (e["source"], e["target"], e["kind"])
+        doc["edges"], key=operator.itemgetter("source", "target", "kind")
     )
     for section in ("findings", "health"):
         doc[section] = dict(sorted(doc[section].items()))

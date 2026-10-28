@@ -65,9 +65,8 @@ def load_calendars(path: Path = DEFAULT_CONFIG) -> dict[str, Calendar]:
         return {}
     cals = tomllib.loads(path.read_text(encoding="utf-8")).get("calendars", {})
     if not isinstance(cals, dict):
-        raise TypeError(
-            f'{path}: [calendars] must be a table of label = "collection name"'
-        )
+        msg = f'{path}: [calendars] must be a table of label = "collection name"'
+        raise TypeError(msg)
     out: dict[str, Calendar] = {}
     for label, spec in cals.items():
         bad = f"{path}: bad entry {label!r}: "
@@ -149,9 +148,8 @@ def occurrences(
     """
     ics = ics or _venv_ics()
     if not Path(ics).exists() and not shutil.which(ics):
-        raise FileNotFoundError(
-            f"the calendar reader {ics} is missing: rebuild nemik's venv (bazel build //:.venv)"
-        )
+        msg = f"the calendar reader {ics} is missing: rebuild nemik's venv (bazel build //:.venv)"
+        raise FileNotFoundError(msg)
     tmp = Path(tempfile.mkdtemp(prefix="nemik-cal-"))  # mkdtemp is 0700
     try:
         out: list[dict] = []

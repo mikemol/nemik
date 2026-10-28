@@ -15,6 +15,7 @@ The `nemik-inbound` and `nemik-operator` commands are in `nemik.blocks_cli`: the
 
 from __future__ import annotations
 
+import operator
 import re
 from typing import Any
 
@@ -123,7 +124,7 @@ def inbound(g: Graph, letters: bool = False) -> list[dict[str, Any]]:
         if letters:
             row["letters"] = sorted(str(o) for o in g.objects(node, NEMIK.letter))
         out.append(row)
-    return sorted(out, key=lambda b: (b["blocker"], b["blocked"], b["claimed_by"]))
+    return sorted(out, key=operator.itemgetter("blocker", "blocked", "claimed_by"))
 
 
 def ready_behind_open(g: Graph) -> dict[Node, list[Node]]:
@@ -309,7 +310,7 @@ def dependency_cycles(g: Graph) -> list[tuple[Node, ...]]:
     """
     from mikemol.frontier.walk import frontier as walk
 
-    cards = {n for n in g.subjects(OSLC_CM.state, None)}
+    cards = set(g.subjects(OSLC_CM.state, None))
     edges = {(str(a), str(b)) for a, _, b in g.triples((None, NEMIK.enables, None))}
     edges |= {(str(b), str(a)) for a, _, b in g.triples((None, NEMIK.waitsFor, None))}
     edges |= {(str(claim), str(waiter)) for claim, waiter in bare_wait_edges(g)}

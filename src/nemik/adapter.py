@@ -281,7 +281,7 @@ def _stamped(
     if hit is None or hit[0] != key:
         g, n = build()
         hit = (key, g, n)
-        _PARSED[(kind, repo)] = hit
+        _PARSED[kind, repo] = hit
     copy = Graph()
     for prefix, ns in hit[1].namespaces():
         copy.bind(prefix, ns, override=True)

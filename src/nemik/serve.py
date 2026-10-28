@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import operator
 import os
 import shutil
 import sys
@@ -1005,10 +1006,10 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
     # str hashes per process, so without this every server start (and every rebuild after an
     # insertion) handed the layout the same graph in a different order, and dagre/cytoscape laid it
     # out differently: the view "jumped around" with no data change (operator 2026-09-28).
-    nodes.sort(key=lambda n: n["id"])
+    nodes.sort(key=operator.itemgetter("id"))
     for item in nodes:
         item["blocked_on"] = sorted(item["blocked_on"])
-    edges.sort(key=lambda e: (e["source"], e["target"], e["kind"]))
+    edges.sort(key=operator.itemgetter("source", "target", "kind"))
     # nemik:W317: each repo's red/amber/green from the declared thresholds, over `gn` like every
     # number.
     from nemik.health import health, thresholds
@@ -1102,7 +1103,7 @@ def handler(model: Model) -> type[BaseHTTPRequestHandler]:
 
     class H(BaseHTTPRequestHandler):
         def do_GET(self) -> None:
-            if self.path in ("/", "/index.html"):
+            if self.path in {"/", "/index.html"}:
                 self.send(200, "text/html; charset=utf-8", page)
                 return
             if (own := page_file(self.path.lstrip("/"))) is not None:
@@ -1121,7 +1122,7 @@ def handler(model: Model) -> type[BaseHTTPRequestHandler]:
                 self.path != "/metrics"
             ):  # a scrape reports the model; it never drives a rebuild
                 model.poke()
-            if self.path in ("/wake", "/wake.json"):
+            if self.path in {"/wake", "/wake.json"}:
                 g = model.graph
                 live, source = read_liveness(model.root, None)
                 wake_body = {
@@ -1135,7 +1136,7 @@ def handler(model: Model) -> type[BaseHTTPRequestHandler]:
                     "application/json",
                     json.dumps(wake_body, indent=1).encode(),
                 )
-            elif self.path in ("/operator", "/operator.json"):
+            elif self.path in {"/operator", "/operator.json"}:
                 operator_body = json.dumps(model.doc["operator"], indent=1).encode()
                 self.send(200, "application/json", operator_body)
             elif self.path.startswith("/inbound"):

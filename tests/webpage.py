@@ -10,7 +10,7 @@ are mtools' mikemol.webpage (nemik:W717, W848), re-exported here so the tests ke
 import os
 import subprocess
 import tempfile
-from collections.abc import Callable, Generator, Iterator
+from collections.abc import Callable, Generator
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Any, Protocol
@@ -155,7 +155,7 @@ class Playwright(Protocol):
 
 
 @contextmanager
-def served(series: Path | None = None, root: Path = FLEET) -> Iterator[str]:
+def served(series: Path | None = None, root: Path = FLEET) -> Generator[str]:
     """nemik-serve over `root` (the fixture fleet), on a port it binds itself; yields its URL.
 
     `series` is luthen's snapshot file, passed as --series when given (nemik:W669).

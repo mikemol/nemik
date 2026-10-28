@@ -38,4 +38,4 @@ def test_every_issue_names_its_card_and_repo() -> None:
     for issue in to_issues(project(_fleet())):
         assert str(issue["cite"]) in str(issue["body"])
         assert issue["labels"] == [str(issue["cite"]).partition(":")[0]]
-        assert issue["state"] in ("open", "closed")
+        assert issue["state"] in {"open", "closed"}

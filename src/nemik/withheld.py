@@ -16,6 +16,7 @@ content, not losing the dependency). An edge between two withheld items is dropp
 from __future__ import annotations
 
 import json
+import operator
 from pathlib import Path
 from typing import Any
 
@@ -38,24 +39,22 @@ def load(path: Path | None) -> frozenset[str]:
 
     """
     if path is None or not path.exists():
-        raise WithheldError(
-            f"withheld list {path} is missing: the gate did not run, refusing to publish"
-        )
+        msg = f"withheld list {path} is missing: the gate did not run, refusing to publish"
+        raise WithheldError(msg)
     try:
         doc = json.loads(path.read_text())
     except ValueError as e:
-        raise WithheldError(f"withheld list {path} is not JSON: {e}") from e
+        msg = f"withheld list {path} is not JSON: {e}"
+        raise WithheldError(msg) from e
     if doc.get("version") != 1:
-        raise WithheldError(
-            f"withheld list {path}: unknown version {doc.get('version')!r}"
-        )
+        msg = f"withheld list {path}: unknown version {doc.get('version')!r}"
+        raise WithheldError(msg)
     items = doc.get("items")
     if not isinstance(items, list) or not all(
         isinstance(i, dict) and isinstance(i.get("ref"), str) for i in items
     ):
-        raise WithheldError(
-            f"withheld list {path}: items must be a list of {{ref, field, rule}}"
-        )
+        msg = f"withheld list {path}: items must be a list of {{ref, field, rule}}"
+        raise WithheldError(msg)
     return frozenset(i["ref"] for i in items)
 
 
@@ -109,15 +108,19 @@ def apply(docs: dict[str, Any], refs: frozenset[str]) -> dict[str, Any]:
     edges = [e for e in g["edges"] if not (e["source"] in ids and e["target"] in ids)]
     pointed = {end for e in edges for end in (e["source"], e["target"]) if end in ids}
     nodes += [_stub(r) for r in sorted(refs) if _id(r) in pointed]
-    g["nodes"] = sorted(nodes, key=lambda n: n["id"])
+    g["nodes"] = sorted(nodes, key=operator.itemgetter("id"))
     g["edges"] = edges
     g["inbound"] = [b for b in g["inbound"] if b["blocked"] not in refs]
     g["operator"] = [a for a in g["operator"] if a["ref"] not in refs]
     out["graph.json"] = g
     wake = dict(docs["wake.json"])
-    hide = lambda rows: [
-        w if w["blocked"] not in refs else _set(w, "title", "withheld") for w in rows
-    ]
+
+    def hide(rows: list[dict[str, object]]) -> list[dict[str, object]]:
+        return [
+            w if w["blocked"] not in refs else _set(w, "title", "withheld")
+            for w in rows
+        ]
+
     wake["roster"] = [_set(r, "waiting", hide(r["waiting"])) for r in wake["roster"]]
     wake["operator"] = _set(
         wake["operator"],

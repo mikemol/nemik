@@ -13,7 +13,7 @@ only after this audit (W241).
 
 from __future__ import annotations
 
-from collections.abc import Iterator
+from collections.abc import Generator
 from contextlib import contextmanager
 from dataclasses import dataclass
 from fractions import Fraction
@@ -39,7 +39,7 @@ _MEMO: dict[tuple, Audit] | None = None
 
 
 @contextmanager
-def memo_audits() -> Iterator[None]:
+def memo_audits() -> Generator[None]:
     """Answer repeated identical audits from a table for the duration of the block (one build)."""
     global _MEMO
     outer, _MEMO = _MEMO, {} if _MEMO is None else _MEMO

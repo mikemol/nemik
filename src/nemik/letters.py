@@ -221,10 +221,11 @@ def fold_commands(
     for owner, path in _split(root, repo, older_than, today or _today())[0]:
         line = _first_line(path)
         head = _HEADER.match(line)
-        if head:
-            title = f"Answer {head[1]}: {line[len(head[0]) :].strip()}"
-        else:
-            title = line.lstrip("# ")
+        title = (
+            f"Answer {head[1]}: {line[len(head[0]) :].strip()}"
+            if head
+            else line.lstrip("# ")
+        )
         state = root / owner / ".claude" / "paths-forward.json"
         out.append(
             f"{pf} --state {shlex.quote(str(state))} --add {shlex.quote(title[:140])} "
@@ -274,10 +275,11 @@ def apply_fold(
     for owner, path in live:
         line = _first_line(path)
         head = _HEADER.match(line)
-        if head:
-            title = f"Answer {head[1]}: {line[len(head[0]) :].strip()}"
-        else:
-            title = line.lstrip("# ")
+        title = (
+            f"Answer {head[1]}: {line[len(head[0]) :].strip()}"
+            if head
+            else line.lstrip("# ")
+        )
         state = root / owner / ".claude" / "paths-forward.json"
         cmd = [writer, "--state", str(state), "--add", title[:140]]
         run = subprocess.run(
@@ -316,7 +318,7 @@ def redeliveries(
     for ltr in addressed:
         if ltr.recipient == ltr.inbox or ltr.recipient not in workstreams:
             continue
-        if repo and repo not in (ltr.inbox, ltr.recipient):
+        if repo and repo not in {ltr.inbox, ltr.recipient}:
             continue
         dest = root / ltr.recipient / "inbox" / ltr.name
         if dest.parent.is_dir() and not held(root, ltr):
@@ -341,7 +343,7 @@ def report(
     """
     addressed, unaddressed = headers(root)
     if repo:
-        addressed = [x for x in addressed if repo in (x.inbox, x.recipient)]
+        addressed = [x for x in addressed if repo in {x.inbox, x.recipient}]
     import shutil
 
     # A misdelivered letter its recipient holds (in its inbox or archived there) is delivered

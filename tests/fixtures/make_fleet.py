@@ -28,10 +28,9 @@ def scrub_block(text: str) -> str:
     m = re.match(r"^(operator)\s*:\s*(decide|act)\b", t, re.IGNORECASE)
     if m:
         return f"operator: {m[2].lower()} (fixture)"
-    head = re.split(r"[\s:,(/]", t, maxsplit=1)[
+    return re.split(r"[\s:,(/]", t, maxsplit=1)[
         0
     ]  # a repo or session name, the part nemik resolves
-    return head
 
 
 def main(root: Path, out: Path) -> None:

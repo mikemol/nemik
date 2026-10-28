@@ -18,7 +18,7 @@
  "src/nemik/blocks.py": {
   "call-overload": 1,
   "explicit-any": 8,
-  "misc": 126
+  "misc": 121
  },
  "src/nemik/blocks_cli.py": {
   "misc": 37
@@ -33,7 +33,7 @@
   "var-annotated": 3
  },
  "src/nemik/calwrite.py": {
-  "misc": 11,
+  "misc": 9,
   "no-untyped-def": 1
  },
  "src/nemik/check.py": {
@@ -90,7 +90,7 @@
  },
  "src/nemik/pieces.py": {
   "explicit-any": 5,
-  "misc": 88
+  "misc": 85
  },
  "src/nemik/pins.py": {
   "call-overload": 1,
@@ -112,7 +112,7 @@
  },
  "src/nemik/serve.py": {
   "explicit-any": 5,
-  "misc": 335,
+  "misc": 328,
   "operator": 1,
   "type-arg": 8
  },
@@ -131,12 +131,12 @@
   "misc": 4
  },
  "src/nemik/vtodo.py": {
-  "misc": 87,
+  "misc": 84,
   "type-arg": 2,
   "var-annotated": 1
  },
  "src/nemik/wake.py": {
-  "misc": 227,
+  "misc": 221,
   "no-any-return": 1,
   "no-untyped-def": 1,
   "redundant-expr": 1,
@@ -144,8 +144,7 @@
  },
  "src/nemik/withheld.py": {
   "explicit-any": 1,
-  "misc": 73,
-  "no-untyped-call": 1,
+  "misc": 65,
   "type-arg": 1
  },
  "src/nemik/witnesses.py": {
@@ -277,10 +276,10 @@
  },
  "tests/test_pieces.py": {
   "explicit-any": 1,
-  "misc": 61
+  "misc": 59
  },
  "tests/test_pieces_corpus.py": {
-  "misc": 44
+  "misc": 41
  },
  "tests/test_positioning.py": {
   "misc": 22

@@ -89,14 +89,12 @@ def load_composition(text: str | None = None) -> Composition:
     tiers = tuple(tuple(t) for t in o.get("tiers", [["weight"]]))
     unknown = {x for t in tiers for x in t} - set(OBJECTIVES)
     if unknown:
-        raise ValueError(
-            f"rank-weights.toml [order]: unknown objectives {sorted(unknown)}"
-        )
+        msg = f"rank-weights.toml [order]: unknown objectives {sorted(unknown)}"
+        raise ValueError(msg)
     model = str(o.get("weight", "downstream"))
     if model not in WEIGHT_MODELS:
-        raise ValueError(
-            f"rank-weights.toml [order]: weight must be one of {WEIGHT_MODELS}"
-        )
+        msg = f"rank-weights.toml [order]: weight must be one of {WEIGHT_MODELS}"
+        raise ValueError(msg)
     return Composition(
         tiers, {k: float(v) for k, v in o.get("scalarize", {}).items()}, model
     )

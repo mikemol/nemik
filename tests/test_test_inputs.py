@@ -102,11 +102,13 @@ def _covered(path: str, files: set[str], prefixes: list[str]) -> bool:
 
 def test_paths_are_declared_inputs() -> None:
     files, prefixes = _declared()
-    missing = []
+    missing: list[str] = []
     for test in sorted(HERE.glob("test_*.py")):
-        for path in sorted(_paths(test.read_text())):
-            if not _covered(path, files, prefixes):
-                missing.append(f"{test.name}: {path}")
+        missing.extend(
+            f"{test.name}: {path}"
+            for path in sorted(_paths(test.read_text()))
+            if not _covered(path, files, prefixes)
+        )
     assert not missing, HINT + "\n".join(missing)
 
 

@@ -846,7 +846,7 @@ def weekly(snaps: list[Snapshot]) -> list[dict]:
         end_at, end = inside[-1]
         change = diff(before, end)
         at_end = _status(end)
-        open_cards = [s for s, st in at_end.items() if st not in ("done", "dropped")]
+        open_cards = [s for s, st in at_end.items() if st not in {"done", "dropped"}]
         blocked = [s for s in open_cards if at_end[s] == "blocked"]
         oldest = min(blocked, key=lambda s: blocked_since[s], default=None)
         rows.append(
@@ -918,13 +918,13 @@ def variance(base: dict, now: dict) -> dict:
     planned = {
         s
         for s, st in _status(base).items()
-        if st not in ("done", "dropped") and s not in _dropped(base)
+        if st not in {"done", "dropped"} and s not in _dropped(base)
     }
     after, gone = _status(now), _dropped(now)
     closed = sorted((s for s in planned if after.get(s) == "done"), key=_number)
     dropped = sorted((s for s in planned if s in gone), key=_number)
     still = sorted(
-        (s for s in planned if s not in gone and after.get(s) not in (None, "done")),
+        (s for s in planned if s not in gone and after.get(s) not in {None, "done"}),
         key=_number,
     )
     known = set(_status(base)) | _dropped(base)
@@ -954,7 +954,7 @@ def shape_drift(base: dict, now: dict) -> dict:
     planned = {
         s
         for s, st in _status(base).items()
-        if st not in ("done", "dropped") and s not in _dropped(base)
+        if st not in {"done", "dropped"} and s not in _dropped(base)
     }
     old_e, new_e = _edges(base), _edges(now)
     titles = {w["symbol"]: w.get("title", "") for w in base.get("waypoints", [])}
@@ -2415,7 +2415,7 @@ def _toil(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> 
         for row in rows:
             share = "-" if row["toil_share"] is None else f"{row['toil_share']:.0%}"
             counts = "  ".join(
-                f"{k} {v}" for k, v in row.items() if k not in ("week", "toil_share")
+                f"{k} {v}" for k, v in row.items() if k not in {"week", "toil_share"}
             )
             print(f"  {row['week']}  interrupt share {share:>4}  {counts}")
     return 0
@@ -2450,7 +2450,7 @@ def _series(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
         spent[name] = {
             s: (latest[s], by_state[s])
             for s in sorted(latest, key=_number)
-            if latest[s] not in ("done", "dropped")
+            if latest[s] not in {"done", "dropped"}
         }
     if args.json:
         doc = rolled if args.weekly else spent

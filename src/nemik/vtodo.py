@@ -19,6 +19,7 @@ DTSTART and DUE pass through from mtools:W300 (nemik:W134); VALARMs pass through
 
 from __future__ import annotations
 
+import operator
 import re
 import tomllib
 from pathlib import Path
@@ -128,7 +129,7 @@ def priority(salience: float, text: str | None = None) -> int:
 def vtodos(asks: list[dict], repos: set[str], link: str = "") -> list[list[str]]:
     """One VTODO (as property lines) per needs-you ask from an opted-in repo, in ref order."""
     out = []
-    for a in sorted(asks, key=lambda a: a["ref"]):
+    for a in sorted(asks, key=operator.itemgetter("ref")):
         repo = a["ref"].partition(":")[0]
         if a["category"] != "needs-you" or repo not in repos:
             continue
@@ -214,9 +215,9 @@ def grouped(todos: list[list[str]]) -> list[list[str]]:
                     ),
                 )
             )
-        out.append(parent + ["END:VTODO"])
+        out.append([*parent, "END:VTODO"])
         out += [
-            k[:-1] + [f"RELATED-TO;RELTYPE=PARENT:nemik:repo:{repo}", k[-1]]
+            [*k[:-1], f"RELATED-TO;RELTYPE=PARENT:nemik:repo:{repo}", k[-1]]
             for k in kids
         ]
     return out

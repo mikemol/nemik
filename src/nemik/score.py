@@ -56,10 +56,12 @@ def load_bands(text: str | None = None) -> Bands:
     }
     for key in ("unscored", "unmatched"):
         if d[key] not in order:
-            raise ValueError(f"bands.toml: {key} = {d[key]!r} is not in order")
+            msg = f"bands.toml: {key} = {d[key]!r} is not in order"
+            raise ValueError(msg)
     stray = set(d.get("band", {})) - set(order)
     if stray:
-        raise ValueError(f"bands.toml: bands {sorted(stray)} are not in order")
+        msg = f"bands.toml: bands {sorted(stray)} are not in order"
+        raise ValueError(msg)
     return Bands(order, rules, d["unscored"], d["unmatched"])
 
 
@@ -166,7 +168,8 @@ def load_guarantees(text: str | None = None, bands: Bands | None = None) -> Guar
     d = tomllib.loads(text)
     floor = d.get("guarantee", {}).get("floor")
     if floor is not None and floor not in bands.order:
-        raise ValueError(f"bands.toml: guarantee.floor = {floor!r} is not in order")
+        msg = f"bands.toml: guarantee.floor = {floor!r} is not in order"
+        raise ValueError(msg)
     policies = tuple(
         Policy(
             p["class"],

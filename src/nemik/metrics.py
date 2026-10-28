@@ -281,8 +281,12 @@ def operator_lines(g: Graph) -> list[str]:
         count[repo] = count.get(repo, 0) + 1
     out = ["# TYPE nemik_operator_salience gauge", "# TYPE nemik_operator_asks gauge"]
     for repo in sorted(held):
-        out.append(f"nemik_operator_salience{label(repo=repo)} {held[repo]:.2f}")
-        out.append(f"nemik_operator_asks{label(repo=repo)} {count[repo]}")
+        out.extend(
+            (
+                f"nemik_operator_salience{label(repo=repo)} {held[repo]:.2f}",
+                f"nemik_operator_asks{label(repo=repo)} {count[repo]}",
+            )
+        )
     return out
 
 
@@ -692,7 +696,7 @@ def age_lines(repo: str, g: Graph, now: datetime) -> list[str]:
         except ValueError:
             continue
         name = str(state).rsplit("#", 1)[-1].lower()
-        if name in ("done", "dropped"):
+        if name in {"done", "dropped"}:
             continue
         ages.setdefault(name, []).append(max(0.0, (now - born).total_seconds()))
     out: list[str] = []

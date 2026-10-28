@@ -20,6 +20,7 @@ through its venv, when that tree exists beside the root.
 from __future__ import annotations
 
 import json
+import operator
 import subprocess
 import sys
 from datetime import UTC, datetime
@@ -222,13 +223,13 @@ def fired_alarms(
     # first line stands alone (the recipient previews only it) and cites the waypoint. An asleep or
     # unknown owner gets none; waking it is the roster's job (nemik:W151).
     for a in out:
-        if a["state"] in ("awake", "idle") and not a.get("error"):
+        if a["state"] in {"awake", "idle"} and not a.get("error"):
             occ = f" (occurrence {a['recurrence_id']})" if a["recurrence_id"] else ""
             a["message"] = (
                 f"nemik → {a['repo']}: alarm on {a['ref']} fired at {a['at']}{occ}: {a['title']}\n"
                 f"Trigger {a['trigger']}, as stored on the waypoint. Act on it, or move the alarm."
             )
-    return sorted(out, key=lambda a: (a["at"], a["ref"], a["trigger"]))
+    return sorted(out, key=operator.itemgetter("at", "ref", "trigger"))
 
 
 def operator_row(g: Graph) -> dict:
@@ -271,7 +272,7 @@ def due_nudges(rows: list[dict], seen: dict, now: datetime | None = None) -> lis
     now = now or datetime.now(UTC)
     due = []
     for r in rows:
-        if r["state"] not in ("asleep", "idle") or not r["waiting"]:
+        if r["state"] not in {"asleep", "idle"} or not r["waiting"]:
             continue
         if not should_nudge(seen.get(r["repo"]), now):
             continue
