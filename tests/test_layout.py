@@ -18,9 +18,9 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Literal
 
 import pytest
+import webpage
 from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import sync_playwright
-from webpage import served
 
 if TYPE_CHECKING:
     from playwright.sync_api import Browser, Page, Playwright
@@ -140,7 +140,7 @@ def server():
         The server's base URL.
 
     """
-    with served() as url:
+    with webpage.served() as url:
         yield url
 
 
@@ -164,10 +164,11 @@ def test_repo_toggles_and_salience_order(server: str, tmp_path: Path) -> None:
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
         errors: list[str] = []
         page.on("pageerror", lambda e: errors.append(str(e)))
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(
+        webpage.until(
+            page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=0,
         )
         everything = page.evaluate("() => cy.nodes('[symbol]').length")
         repos = page.evaluate(
@@ -246,10 +247,9 @@ def test_the_history_panel_shows_the_weekly_roll_up_when_there_is_one(
                 status=200, content_type="application/json", body=json.dumps(doc)
             ),
         )
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(
-            "() => !document.getElementById('historyBox').hidden", timeout=0
-        )
+        webpage.until(page, "() => !document.getElementById('historyBox').hidden")
         text = page.inner_text("#history")
         browser.close()
     assert "W41" in text and "+5" in text and "50% blocked" in text
@@ -274,10 +274,11 @@ def test_rolling_up_umbrellas_hides_their_work_and_a_double_click_expands_one(
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(
+        webpage.until(
+            page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=0,
         )
         page.click("#repos button[data-repo='nemik']")
         _settle(page)
@@ -309,9 +310,10 @@ def test_scope_rings_carry_distinct_ruler_motifs_pinned_to_paperkits(
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        webpage.watch(page)
         page.goto(server)
         # the legend is drawn once the first graph (and its patterns) has loaded
-        page.wait_for_function(PATHKEY_DRAWN, timeout=0)
+        webpage.until(page, PATHKEY_DRAWN)
         motifs = page.evaluate("() => [0, 1, 2, 3].map(rulerMotif)")
         lengths = page.evaluate("() => data.ruler.f.map(p => p.length)")
         dashes = page.evaluate("() => SCOPES.map(scopeDash)")
@@ -354,10 +356,11 @@ def test_blocker_lines_into_one_card_carry_distinct_decodable_ruler_patterns(
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(
+        webpage.until(
+            page,
             "() => typeof cy !== 'undefined' && cy && cy.edges('.waits').length > 0",
-            timeout=0,
         )
         fans = page.evaluate(FANS)
         browser.close()
@@ -393,10 +396,11 @@ def test_every_card_label_meets_four_and_a_half_to_one(
         page = browser.new_page(
             viewport={"width": 1700, "height": 1250}, color_scheme=scheme
         )
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(
+        webpage.until(
+            page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=0,
         )
         page.check("#showDone")
         _settle(page)
@@ -414,23 +418,24 @@ def test_side_panel_sections_fold_and_the_choice_survives_a_reload(server: str) 
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(SECTIONS_DRAWN, timeout=0)
+        webpage.until(page, SECTIONS_DRAWN)
         first = page.evaluate(
             "() => Object.fromEntries([...document.querySelectorAll('details.sec')].map(d => [d.id, d.open]))"
         )
         page.click("#sec-goals > summary")
-        page.wait_for_function(
+        webpage.until(
+            page,
             "() => !document.getElementById('goals').checkVisibility()"
             " && (localStorage.getItem('nemik.sections') || '').includes('\"sec-goals\":false')",
-            timeout=0,
         )
         hidden = page.evaluate(
             "() => [document.getElementById('sec-goals').open,"
             " document.getElementById('goals').checkVisibility()]"
         )
         page.reload()
-        page.wait_for_function(SECTIONS_DRAWN, timeout=0)
+        webpage.until(page, SECTIONS_DRAWN)
         kept = page.evaluate("() => document.getElementById('sec-goals').open")
         browser.close()
     assert first["sec-weather"] is False and first["sec-findings"] is False
@@ -452,10 +457,11 @@ def test_the_default_view_is_legible(server: str, scheme: Scheme) -> None:
         page = browser.new_page(
             viewport={"width": 1700, "height": 1250}, color_scheme=scheme
         )
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(
+        webpage.until(
+            page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=0,
         )
         _settle(page)
         m = page.evaluate(LEGIBILITY)
@@ -492,8 +498,9 @@ def test_every_label_glyph_exists_in_this_browsers_fonts(server: str) -> None:
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page()
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function("() => typeof STATE_MARK === 'object'", timeout=0)
+        webpage.until(page, "() => typeof STATE_MARK === 'object'")
         missing = page.evaluate(
             "() => { const c = document.createElement('canvas').getContext('2d');"
             " c.font = 'bold 10px sans-serif';"
@@ -518,10 +525,11 @@ def test_context_cards_have_a_rendered_cue_of_their_own(
         page = browser.new_page(
             viewport={"width": 1700, "height": 1250}, color_scheme=scheme
         )
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(
+        webpage.until(
+            page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=0,
         )
         page.click("#repos button[data-repo='nemik']")
         _settle(page)
@@ -550,10 +558,11 @@ def test_each_card_state_differs_by_more_than_its_fill(
         page = browser.new_page(
             viewport={"width": 1700, "height": 1250}, color_scheme=scheme
         )
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(
+        webpage.until(
+            page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=0,
         )
         page.check("#showDone")
         _settle(page)
@@ -628,8 +637,9 @@ def test_every_meaning_the_view_colours_has_a_second_channel(
         page = browser.new_page(
             viewport={"width": 1700, "height": 1250}, color_scheme=scheme
         )
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(PATHKEY_DRAWN, timeout=0)
+        webpage.until(page, PATHKEY_DRAWN)
         measured = page.evaluate(USE_OF_COLOUR)
         browser.close()
     data = tmp_path / "input.json"
@@ -671,10 +681,9 @@ def test_a_static_build_refetches_only_the_pieces_whose_hash_moved(
         with sync_playwright() as p:
             browser = _launch(p)
             page = browser.new_page()
+            webpage.watch(page)
             page.goto(url)
-            page.wait_for_function(
-                "() => typeof data !== 'undefined' && data", timeout=0
-            )
+            webpage.until(page, "() => typeof data !== 'undefined' && data")
             drawn = page.evaluate("() => data.nodes.length")
             first = page.evaluate("() => [...window.__pieceFetches]")
             one = fleet["repos"][0]
@@ -702,8 +711,9 @@ def test_every_repo_chip_names_its_health_in_words(server: str) -> None:
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page()
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(REPO_CHIPS_DRAWN, timeout=0)
+        webpage.until(page, REPO_CHIPS_DRAWN)
         chips = page.evaluate(
             "() => [...document.querySelectorAll('#repos button[data-repo]')].map(b => "
             "[b.dataset.repo, b.dataset.health, b.getAttribute('aria-label'), "
@@ -723,10 +733,11 @@ def test_the_card_list_selects_and_expands_from_the_keyboard(server: str) -> Non
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(
+        webpage.until(
+            page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=0,
         )
         page.click("#repos button[data-repo='nemik']")
         page.check("#rollup")
@@ -775,10 +786,11 @@ def test_a_cite_link_in_the_panel_selects_its_card_and_announces_it(
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(
+        webpage.until(
+            page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 1",
-            timeout=0,
         )
         target = page.evaluate(
             "() => { const n = cy.nodes('[symbol]').filter(n => n.visible()"
@@ -807,10 +819,11 @@ def test_the_view_chain_is_drawn_end_to_end_with_its_length(server: str) -> None
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(
+        webpage.until(
+            page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=0,
         )
         _settle(page)
         got = page.evaluate(
@@ -837,10 +850,11 @@ def test_a_focused_list_row_rings_its_card_and_opens_the_popover(server: str) ->
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(
+        webpage.until(
+            page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 1",
-            timeout=0,
         )
         page.evaluate("() => { document.getElementById('sec-cards').open = true; }")
         _settle(page)
@@ -871,10 +885,11 @@ def test_the_page_script_runs_without_errors(server: str) -> None:
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
         errors: list[str] = []
         page.on("pageerror", lambda err: errors.append(str(err)))
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(
+        webpage.until(
+            page,
             "() => document.getElementById('stat').innerText.includes('waypoints')",
-            timeout=0,
         )
         browser.close()
     assert errors == []
@@ -888,10 +903,11 @@ def test_the_card_list_is_one_tab_stop_walked_by_arrows(server: str) -> None:
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(
+        webpage.until(
+            page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 1",
-            timeout=0,
         )
         page.evaluate("() => { document.getElementById('sec-cards').open = true; }")
         _settle(page)
@@ -937,10 +953,10 @@ def _settle(page: "Page") -> None:
         page: A page whose graph is up.
 
     """
-    page.wait_for_function(
+    webpage.until(
+        page,
         "() => new Promise(done => requestAnimationFrame("
         "() => requestAnimationFrame(() => done(typeof cy === 'undefined' || !cy.animated()))))",
-        timeout=0,
     )
 
 
@@ -958,14 +974,12 @@ def _open_on_a_fake_clock(page: "Page", url: str) -> None:
 
     """
     page.clock.install()
+    webpage.watch(page)
     page.goto(url)
-    page.wait_for_function(
-        "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-        timeout=0,
+    webpage.until(
+        page, "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0"
     )
-    page.wait_for_function(
-        "() => document.getElementById('wake').innerText.length > 5", timeout=0
-    )
+    webpage.until(page, "() => document.getElementById('wake').innerText.length > 5")
     now: object = page.evaluate("Date.now()")
     assert isinstance(now, int | float)
     page.clock.pause_at(int(now) + 1000)
@@ -1032,10 +1046,11 @@ def test_every_card_demand_crosses_carries_a_number(server: str) -> None:
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(
+        webpage.until(
+            page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=0,
         )
         page.check("#bySalience")
         _settle(page)
@@ -1060,10 +1075,11 @@ def test_a_rolled_up_tile_says_what_it_hides(server: str) -> None:
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(
+        webpage.until(
+            page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=0,
         )
         page.check("#rollup")
         page.check("#treemap")
@@ -1096,13 +1112,14 @@ def test_treemap_labels_meet_the_floor_or_are_hidden_and_counted(server: str) ->
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(
+        webpage.until(
+            page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=0,
         )
         page.check("#treemap")
-        page.wait_for_function("() => cy.nodes('.tile').length > 0", timeout=0)
+        webpage.until(page, "() => cy.nodes('.tile').length > 0")
         _settle(page)
         fit = page.evaluate(TILE_LABELS)
         page.evaluate(ZOOM_IN_4X)
@@ -1142,8 +1159,9 @@ def test_meaningful_strokes_reach_three_to_one(server: str, scheme: Scheme) -> N
         page = browser.new_page(
             viewport={"width": 1700, "height": 1250}, color_scheme=scheme
         )
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(PATHKEY_DRAWN, timeout=0)
+        webpage.until(page, PATHKEY_DRAWN)
         ratios = page.evaluate(NON_TEXT_CONTRAST)
         browser.close()
     low = {k: round(v, 2) for k, v in ratios.items() if v < 3}
@@ -1168,10 +1186,11 @@ def test_no_label_glyph_plays_two_roles(server: str) -> None:
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(
+        webpage.until(
+            page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=0,
         )
         roles = page.evaluate(GLYPH_ROLES)
         page.click("#repos button[data-repo='nemik']")
@@ -1207,8 +1226,9 @@ def test_no_command_route_or_tools_panel_remains(server: str) -> None:
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page()
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(SECTIONS_DRAWN, timeout=0)
+        webpage.until(page, SECTIONS_DRAWN)
         tools = page.evaluate(
             "() => [document.getElementById('tool'), document.getElementById('sec-tools')]"
         )
@@ -1224,10 +1244,11 @@ def test_one_picked_repo_restored_from_the_last_visit_is_legible_too(
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(viewport={"width": 900, "height": 600})
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(
+        webpage.until(
+            page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=0,
         )
         # the repo with the most cards, so its fit is the one most likely to fall under the floor
         big = page.evaluate(
@@ -1238,9 +1259,9 @@ def test_one_picked_repo_restored_from_the_last_visit_is_legible_too(
             f"() => localStorage.setItem('nemik.repos', JSON.stringify(['{big}']))"
         )
         page.reload()
-        page.wait_for_function(
+        webpage.until(
+            page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=0,
         )
         _settle(page)
         m = page.evaluate(LEGIBILITY)
@@ -1256,10 +1277,11 @@ def test_picked_repos_show_their_blockers_blockers_as_context(server: str) -> No
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(
+        webpage.until(
+            page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=0,
         )
         page.click("#repos button[data-repo='nemik']")
         counts = []
@@ -1284,10 +1306,11 @@ def test_rank_forest_view(server: str, tmp_path: Path) -> None:
         )
         errors: list[str] = []
         page.on("pageerror", lambda e: errors.append(str(e)))
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(
+        webpage.until(
+            page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=0,
         )
         ranked = page.evaluate("() => cy.nodes('[rank_pos]').length")
         _settle(page)
@@ -1334,10 +1357,9 @@ def test_treemap_model(server: str) -> None:
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page()
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(
-            "() => typeof treeOf === 'function' && !!coreWasm", timeout=0
-        )
+        webpage.until(page, "() => typeof treeOf === 'function' && !!coreWasm")
         m = page.evaluate(TREEMAP_INVARIANTS)
         browser.close()
     assert m["bad"] == [], m
@@ -1357,16 +1379,17 @@ def test_treemap_view_draws(server: str, tmp_path: Path) -> None:
         )
         errors: list[str] = []
         page.on("pageerror", lambda e: errors.append(str(e)))
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(
+        webpage.until(
+            page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=0,
         )
         page.evaluate(
             "() => { cy.zoom(4); cy.pan({x: -3000, y: -2000}); }"
         )  # the reader had zoomed in
         page.check("#treemap")
-        page.wait_for_function("() => cy.nodes('.tile').length > 0", timeout=0)
+        webpage.until(page, "() => cy.nodes('.tile').length > 0")
         # W185: toggling the view refits; the old zoom/pan scaled one tile off the page.
         fit = page.evaluate("""() => { const b = cy.elements(':visible').renderedBoundingBox();
           return b.x1 >= -1 && b.y1 >= -1 && b.x2 <= cy.width() + 1 && b.y2 <= cy.height() + 1; }""")
@@ -1427,10 +1450,11 @@ def test_side_panel_never_overflows_sideways(server: str, width: int) -> None:
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(viewport={"width": width, "height": 1200})
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(
+        webpage.until(
+            page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=0,
         )
         # The fixture's text is stripped, so give the asks the shapes that overflowed live: a long
         # URL with no break opportunity, and a long ask.
@@ -1455,10 +1479,11 @@ def test_every_cite_in_the_panel_is_a_repo_colon_link(server: str) -> None:
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(viewport={"width": 1400, "height": 1000})
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(
+        webpage.until(
+            page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=0,
         )
         _settle(page)
         bad = page.evaluate("""() => {
@@ -1485,10 +1510,11 @@ def test_weather_panel_groups_one_outage(server: str) -> None:
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page()
+        webpage.watch(page)
         page.goto(server)
-        page.wait_for_function(
+        webpage.until(
+            page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
-            timeout=0,
         )
         m = page.evaluate("""() => {
           const open = data.nodes.filter(n => n.state === 'blocked' && n.cite).slice(0, 3);
