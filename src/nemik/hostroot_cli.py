@@ -20,7 +20,9 @@ import argparse
 import json
 import sys
 from datetime import UTC, datetime
+from importlib.metadata import PackageNotFoundError, distribution
 from pathlib import Path
+from typing import cast
 
 from nemik.endpoint import vlogs_lines, vm_export
 from nemik.hostroot import HostRow, latest, records
@@ -54,6 +56,12 @@ RATCHET_SELECTOR = '{__name__="mikemol.ratchet.value"}'
 REQUIRED_SELECTOR = '{__name__="nemik_ratchet_fall_required"}'
 # the tombstones mtools writes for a retired ratchet (mtools:W1964): 1 on every run while listed
 RETIRED_SELECTOR = '{__name__="mikemol.ratchet.retired"}'
+# nemik:W1197: what the pace file's header says when the install records no commit. luthen's egress
+# gate (luthen-observability:W1711) accepts a 40-hex lower-case sha or exactly this word, and
+# removes the file for anything else, so a short, upper-case or guessed value is never written.
+UNKNOWN_BUILD = "unknown"
+SHA_LENGTH = 40
+HEX_DIGITS = frozenset("0123456789abcdef")
 
 
 def _quoted(text: str) -> str:
@@ -64,6 +72,55 @@ def _quoted(text: str) -> str:
 
     """
     return json.dumps(text)
+
+
+def build_sha() -> str:
+    """Read the commit the installed nemik was built from (nemik:W1197).
+
+    The install's direct_url.json (PEP 610) records it under vcs_info for a git install; an
+    editable or a directory install records none, and nothing is guessed.
+
+    Returns:
+        The 40-hex lower-case commit sha, or UNKNOWN_BUILD when the install records none.
+
+    """
+    try:
+        text = distribution("nemik").read_text("direct_url.json")
+        loaded = cast("object", json.loads(text or ""))
+    except (PackageNotFoundError, ValueError):
+        return UNKNOWN_BUILD
+    info = (
+        cast("dict[str, object]", loaded).get("vcs_info")
+        if isinstance(loaded, dict)
+        else None
+    )
+    commit = (
+        cast("dict[str, object]", info).get("commit_id")
+        if isinstance(info, dict)
+        else None
+    )
+    if (
+        isinstance(commit, str)
+        and len(commit) == SHA_LENGTH
+        and set(commit) <= HEX_DIGITS
+    ):
+        return commit
+    return UNKNOWN_BUILD
+
+
+def with_build(text: str, build: str) -> str:
+    """Add the build to a pace file's header line (nemik:W1197).
+
+    Args:
+        text: A pace file whose first line is {"as_of": ..., "window": ...}.
+        build: The commit sha, or UNKNOWN_BUILD.
+
+    Returns:
+        The same file with `"build": "<build>"` as the header's third key.
+
+    """
+    head, newline, rest = text.partition("\n")
+    return f'{head.removesuffix("}")}, "build": "{build}"}}{newline}{rest}'
 
 
 class _Options(argparse.Namespace):
@@ -248,8 +305,9 @@ def _judge(
             previous = kept.read_text(encoding="utf-8")
         else:
             previous = out.read_text(encoding="utf-8") if out.is_file() else ""
-        text = pace_document_floored(
-            answer, previous, stamp, floors or {}, retired or []
+        text = with_build(
+            pace_document_floored(answer, previous, stamp, floors or {}, retired or []),
+            build_sha(),
         )
     except (OSError, TypeError, ValueError) as error:
         sys.stderr.write(f"nemik-hostroot: {error}\n")
