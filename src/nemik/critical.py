@@ -31,6 +31,8 @@ CHAINS = longest_chains
 
 
 class Critical(NamedTuple):
+    """A scope's critical path: its length, its chain, each card's slack and each card's height."""
+
     length: int
     chain: list[
         str
@@ -203,6 +205,8 @@ def assume_done(g: Graph, cites: list[str]) -> Graph:
 
 
 class Fire(NamedTuple):
+    """An open interrupt card, the planned work it holds up and the delay it adds."""
+
     cite: str
     planned: list[str]  # open forecast (tick-minted) cards downstream of it
     delay: int  # how many cards longer the scope's critical path is because it is open

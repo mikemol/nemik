@@ -19,6 +19,8 @@ from mikemol.pathsforward.vector import parse
 
 @dataclass(frozen=True)
 class Bands:
+    """The urgency bands from bands.toml: their order, the rules for each and the two fallbacks."""
+
     order: tuple[str, ...]
     rules: dict[str, tuple[dict[str, frozenset[str]], ...]]
     unscored: str
@@ -150,6 +152,8 @@ class Policy:
 
 @dataclass(frozen=True)
 class Guarantees:
+    """The bands.toml guarantee: the floor band and the policies that block shared surfaces."""
+
     floor: str | None
     policies: tuple[Policy, ...]
 

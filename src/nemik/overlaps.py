@@ -33,6 +33,8 @@ DEFAULT_MEMBUDGET = (
 
 
 class Holder(NamedTuple):
+    """Who holds a touched surface and how long it has been held."""
+
     owner: str
     age: str
 

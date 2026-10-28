@@ -31,6 +31,8 @@ if TYPE_CHECKING:
 
 @dataclass(frozen=True)
 class Weights:
+    """The edge weights of rank-weights.toml: one per class of downstream card."""
+
     local: int
     peer: int
     peer_blocked: int
@@ -66,6 +68,8 @@ WEIGHT_MODELS = ("flow", "downstream")
 
 @dataclass(frozen=True)
 class Composition:
+    """How the objectives compose into one order: tiers, scalarization and weight model."""
+
     tiers: tuple[tuple[str, ...], ...]
     scalarize: dict[str, float]
     weight_model: str = "downstream"
