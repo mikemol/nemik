@@ -141,3 +141,14 @@ def test_json_of_the_wrong_shape_raises_type_error(text: str) -> None:
     """Valid JSON that is not an issue is a different error from text that is not JSON."""
     with pytest.raises(TypeError):
         read_issue(text)
+
+
+def test_a_malformed_number_names_the_offset_and_chains_its_cause() -> None:
+    """The error a user sees says what and where; the number's own ValueError is its cause.
+
+    nemik:W1179 changed `from None` to `from e` so the pinned Codon can typecheck parse_tree;
+    the message the CLI prints is the same, and the original error is now kept as the cause.
+    """
+    with pytest.raises(ValueError, match="a bad number at offset") as raised:
+        parse_tree("[1-2]")
+    assert isinstance(raised.value.__cause__, ValueError)
