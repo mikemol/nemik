@@ -17,13 +17,15 @@ from __future__ import annotations
 
 import operator
 import re
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from rdflib import RDF, Graph, Literal, URIRef
 from rdflib.namespace import DCTERMS, PROV
-from rdflib.term import Node
 
 from nemik.adapter import BASE, NEMIK, OSLC_CM
+
+if TYPE_CHECKING:
+    from rdflib.term import Node
 
 CAL_BLOCK = re.compile(
     r"cal:[a-z][a-z0-9-]{0,31}/\S+"

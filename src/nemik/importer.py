@@ -22,8 +22,10 @@ import json
 import shlex
 import sys
 from pathlib import Path
+from typing import TYPE_CHECKING
 
-from nemik.projection import Task
+if TYPE_CHECKING:
+    from nemik.projection import Task
 
 
 def _read(fmt: str, path: Path) -> list[Task]:

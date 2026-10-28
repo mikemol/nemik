@@ -6,7 +6,6 @@ from __future__ import annotations
 
 import json
 import threading
-from collections.abc import Generator
 from contextlib import contextmanager
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from typing import TYPE_CHECKING
@@ -17,7 +16,7 @@ from nemik.witnesses import main
 from nemik.witwait import HELD, NOT_YET, UNKNOWN, promql_poll, seconds, wait
 
 if TYPE_CHECKING:
-    from collections.abc import Callable
+    from collections.abc import Callable, Generator
 
 
 def _script(*steps: tuple[str, str]) -> Callable[[], tuple[str, str]]:

@@ -17,13 +17,15 @@ from __future__ import annotations
 import os
 import subprocess
 from pathlib import Path
-from typing import NamedTuple
+from typing import TYPE_CHECKING, NamedTuple
 
 from rdflib import Graph
-from rdflib.term import Node
 
 from nemik.adapter import NEMIK, OSLC_CM, STATE
 from nemik.blocks import _repo, ref
+
+if TYPE_CHECKING:
+    from rdflib.term import Node
 
 LIVE = {STATE["ready"], STATE["working"]}
 CLAIM = "claim:label:touch:"

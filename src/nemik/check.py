@@ -21,9 +21,9 @@ import subprocess
 import sys
 import time
 import tomllib
-from collections.abc import Iterator
 from importlib.resources import files
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from mikemol.pathsforward.store import UnreadableStateError
 from rdflib import Graph, Literal
@@ -54,6 +54,9 @@ from nemik.idle import findings as idle_findings
 from nemik.rolls import idle_run, stalled
 from nemik.work import in_gate
 from nemik.workrows import NO_BOUND, ready_stamps, small_done_stamps, upper_quantile
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 QUEUE, LEDGER = "paths-forward.json", "paths-forward.ledger"
 WRITER = "mikemol-paths-forward --state"

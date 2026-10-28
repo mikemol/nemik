@@ -16,11 +16,15 @@ event.
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from rdflib import RDF, Graph, Literal, Namespace, URIRef
 from rdflib.namespace import PROV, XSD
-from rdflib.term import Node
 
 from nemik.adapter import NEMIK, OSLC_CM, workstream_uri
+
+if TYPE_CHECKING:
+    from rdflib.term import Node
 
 TRS = Namespace("http://open-services.net/ns/core/trs#")
 LDP = Namespace("http://www.w3.org/ns/ldp#")

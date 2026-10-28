@@ -17,7 +17,6 @@ from typing import TYPE_CHECKING
 
 from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import DCTERMS
-from rdflib.term import Node
 
 from nemik import tiers
 from nemik.adapter import BASE, NEMIK, OSLC_CM, workstream_uri
@@ -26,6 +25,8 @@ from nemik.roundcli import NO_LANDINGS, show_round, write_round_file
 from nemik.stackable import manifest
 
 if TYPE_CHECKING:
+    from rdflib.term import Node
+
     from nemik.score import Bands, Guarantees
 
 

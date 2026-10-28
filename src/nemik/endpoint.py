@@ -20,9 +20,12 @@ import os
 import subprocess
 import sys
 import urllib.parse
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.check import default_root
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 LUTHEN = "luthen-observability"
 QUERY_TIMEOUT_SECONDS = 10

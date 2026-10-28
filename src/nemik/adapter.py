@@ -9,9 +9,8 @@ reader, so schema drift across repos is mtools' problem to absorb, not a second 
 from __future__ import annotations
 
 import re
-from collections.abc import Callable
 from datetime import datetime
-from pathlib import Path
+from typing import TYPE_CHECKING
 from urllib.parse import quote, unquote
 
 from mikemol.pathsforward import ledger, model, store
@@ -19,6 +18,10 @@ from rdflib import RDF, Graph, Literal, Namespace, URIRef
 from rdflib.namespace import DCTERMS, PROV, RDFS, XSD
 
 from nemik import editverbs, warrants
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
+    from pathlib import Path
 
 
 class _Terms(Namespace):

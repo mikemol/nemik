@@ -14,17 +14,18 @@ copies).
 from __future__ import annotations
 
 import weakref
-from collections.abc import Generator
 from contextlib import contextmanager
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
-from rdflib import Graph
-from rdflib.term import Node
-
 from nemik.adapter import NEMIK, OSLC_CM
 
 if TYPE_CHECKING:
+    from collections.abc import Generator
+
+    from rdflib import Graph
+    from rdflib.term import Node
+
     from nemik.cards import Card
 
 

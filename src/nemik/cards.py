@@ -12,12 +12,15 @@ is the contract a module needs to be portable.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import TYPE_CHECKING
 
-from rdflib import Graph
 from rdflib.namespace import DCTERMS
 
 from nemik.adapter import NEMIK, OSLC_CM
 from nemik.blocks import ref
+
+if TYPE_CHECKING:
+    from rdflib import Graph
 
 
 @dataclass(frozen=True)

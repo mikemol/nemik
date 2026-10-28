@@ -14,16 +14,19 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
-from typing import NamedTuple
+from typing import TYPE_CHECKING, NamedTuple
 
 from rdflib import Graph, Literal
-from rdflib.term import Node
 
 from nemik.adapter import BASE, NEMIK, OSLC_CM
 from nemik.blocks import bare_wait_edges, ref
-from nemik.cards import Card
 from nemik.core.chains import longest_chains
 from nemik.rank import successors
+
+if TYPE_CHECKING:
+    from rdflib.term import Node
+
+    from nemik.cards import Card
 
 # nemik:W818: the algorithm is the shared core's, over plain data; this module adapts rdflib-built
 # Cards to it and back (the page runs the same core, compiled to wasm)

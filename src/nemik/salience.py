@@ -13,7 +13,6 @@ only after this audit (W241).
 
 from __future__ import annotations
 
-from collections.abc import Generator
 from contextlib import contextmanager
 from dataclasses import dataclass
 from fractions import Fraction
@@ -24,6 +23,8 @@ from nemik.flow import Flow, solve
 from nemik.rank import _open, _repo, downstream_weight, ref_of, successors
 
 if TYPE_CHECKING:
+    from collections.abc import Generator
+
     from rdflib import Graph
     from rdflib.term import Node
 

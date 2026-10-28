@@ -19,9 +19,9 @@ import argparse
 import operator
 import re
 import subprocess
-from collections.abc import Iterable
 from datetime import date, timedelta
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from mikemol.pathsforward.ics import escape, serialize
 from rdflib import Graph
@@ -31,6 +31,9 @@ from nemik.adapter import BASE, NEMIK, OSLC_CM
 from nemik.calendars import DEFAULT_CONFIG, load_calendars
 from nemik.check import default_root, survey
 from nemik.vtodo import DEFAULT_HELPER, time_property, timezones
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable
 
 PRODID = "-//nemik//dated waypoints//EN"
 OWNED = "nemik:"  # a UID with this prefix is nemik's own event, in any calendar

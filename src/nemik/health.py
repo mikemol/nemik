@@ -13,12 +13,13 @@ from __future__ import annotations
 
 import tomllib
 from importlib.resources import files
-from typing import Any, NamedTuple
-
-from rdflib import Graph
+from typing import TYPE_CHECKING, Any, NamedTuple
 
 from nemik.blocks import operator_asks
 from nemik.cards import Card, cards
+
+if TYPE_CHECKING:
+    from rdflib import Graph
 
 STATUSES = ("green", "amber", "red")
 SIGNALS = ("blocked_share", "oldest_block_ticks", "asks_owed")

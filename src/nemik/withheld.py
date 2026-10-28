@@ -17,10 +17,12 @@ from __future__ import annotations
 
 import json
 import operator
-from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from nemik.adapter import BASE
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 class WithheldError(ValueError):

@@ -25,12 +25,16 @@ import subprocess
 import sys
 from datetime import UTC, datetime
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from mikemol.hooks import rewake
 from rdflib import Graph
 from rdflib.namespace import DCTERMS
 
 from nemik.blocks import inbound, operator_asks
+
+if TYPE_CHECKING:
+    from rdflib.term import Node
 
 # nemik:W549: mtools' mikemol.hooks.rewake (mtools:W1299) owns the constant and the pure pair.
 REWAKE_S = rewake.REWAKE_S
@@ -163,8 +167,6 @@ def fired_alarms(
     Alarms live on waypoints (mtools:W279), with their anchors (W300) and recurrence (W309/W310);
     nemik.alarm resolves each to its instants. The owner's liveness says who can act on it now.
     """
-    from rdflib.term import Node
-
     from nemik.adapter import BASE, NEMIK, OSLC_CM
     from nemik.alarm import fires_between
 
