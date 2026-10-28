@@ -40,6 +40,12 @@ git -C "$wt" clean -fdxq -e 'bazel-*' -e .venv || exit 1
 tree="$(GIT_INDEX_FILE="$idx" git -C "$real_root" write-tree)" || exit 1
 git -C "$wt" read-tree --reset -u "$tree" || exit 1
 
+# nemik:W733: every bazel call below goes through mtools' admission (mikemol-bazel-admit), which holds
+# memory for it and prints the hold line; `bazel` is this function, /usr/bin/bazel the real one.
+admit="$real_root/.venv/bin/mikemol-bazel-admit"
+[ -x "$admit" ] || { echo "gate_staged: $admit is missing; bazel runs only through admission" >&2; exit 1; }
+bazel() { "$admit" -- /usr/bin/bazel "$@"; }
+
 cd "$wt" || exit 1
 # The tree's .venv is a bazel output, never tracked, and some checks run it by path (paper.toml's
 # `claim:` check is `.venv/bin/python3 checks/claims.py`): build it here as the checkout has it.
