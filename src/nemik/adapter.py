@@ -50,6 +50,12 @@ STATE = {
 
 
 def bind(g: Graph) -> Graph:
+    """Give the graph nemik's namespace prefixes.
+
+    Returns:
+        The same graph, bound.
+
+    """
     g.bind("oslc_cm", OSLC_CM)
     g.bind("oslc", OSLC)
     g.bind("nemik", NEMIK)
@@ -58,10 +64,22 @@ def bind(g: Graph) -> Graph:
 
 
 def workstream_uri(repo: str) -> URIRef:
+    """Name a repo's workstream.
+
+    Returns:
+        The workstream's IRI.
+
+    """
     return URIRef(f"{BASE}{repo}")
 
 
 def waypoint_uri(repo: str, symbol: str) -> URIRef:
+    """Name a card.
+
+    Returns:
+        The card's IRI under its repo's workstream.
+
+    """
     return URIRef(f"{BASE}{repo}/{symbol}")
 
 

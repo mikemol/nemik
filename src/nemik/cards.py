@@ -37,10 +37,12 @@ class Card:
 
     @property
     def repo(self) -> str:
+        """The repo the card lives in."""
         return self.cite.partition(":")[0]
 
     @property
     def done(self) -> bool:
+        """Whether the card is done."""
         return self.state == "done"
 
 

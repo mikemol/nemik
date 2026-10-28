@@ -42,13 +42,31 @@ class Index:
     cards: dict[str, Card] | None = None
 
     def successors(self, node: Node) -> set[Node]:
+        """Find the cards that wait on this one.
+
+        Returns:
+            The cards it enables and the cards blocked on it.
+
+        """
         return self.enables.get(node, set()) | self.waited_by.get(node, set())
 
     def open(self, node: Node) -> bool:
+        """Judge whether a card is open.
+
+        Returns:
+            True when the card has a state and is not done.
+
+        """
         s = self.state.get(node, set())
         return bool(s) and NEMIK.Done not in s
 
     def has_state(self, node: Node, state: Node) -> bool:
+        """Judge whether a card is in a state.
+
+        Returns:
+            True when the card carries the state.
+
+        """
         return state in self.state.get(node, ())
 
 

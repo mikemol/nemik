@@ -459,6 +459,12 @@ def errand_repos(text: str | None = None) -> frozenset[str]:
 
 
 def operator_category(text: str) -> str:
+    """Sort an operator block's text by what it asks.
+
+    Returns:
+        One of no-command, needs-you, answered, condition or unstated.
+
+    """
     if m := EXPLICIT.match(text):
         if (
             m[1].lower() == "act"

@@ -47,6 +47,7 @@ class Task:
 
     @property
     def repo(self) -> str:
+        """The repo the task lives in."""
         return self.cite.partition(":")[0]
 
 
