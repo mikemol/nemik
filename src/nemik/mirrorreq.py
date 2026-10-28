@@ -20,8 +20,6 @@ number. Where they differ:
 - blocked_by is never in a body: the dependency edges are separate endpoints, a step of their own.
 """
 
-from typing import NamedTuple
-
 from nemik.mirror import CLOSE, CREATE, REOPEN, UPDATE, Call
 from nemik.tracker import Issue, cite_of
 
@@ -31,12 +29,54 @@ BODY_FIELDS = ("title", "body", "labels")
 STATES = {CLOSE: "closed", REOPEN: "open"}
 
 
-class Request(NamedTuple):
-    """One HTTP request to a tracker's issue API."""
+class Request:
+    """One HTTP request to a tracker's issue API.
+
+    A plain class, not a NamedTuple: the pinned Codon cannot inherit a tuple class (nemik:W1209).
+    It is built and compared whole, never unpacked.
+    """
 
     method: str
     path: str
     body: dict[str, object]
+
+    def __init__(self, method: str, path: str, body: dict[str, object]) -> None:
+        """Hold the method, the path and the JSON body."""
+        self.method = method
+        self.path = path
+        self.body = body
+
+    def __eq__(self, other: object) -> bool:
+        """Compare two requests by method, path and body.
+
+        Returns:
+            Whether `other` is a Request with the same three fields.
+
+        """
+        return (
+            isinstance(other, Request)
+            and self.method == other.method
+            and self.path == other.path
+            and self.body == other.body
+        )
+
+    def __hash__(self) -> int:
+        """Hash by method and path; the body is a dict and is not hashable.
+
+        Returns:
+            A hash equal for requests that compare equal.
+
+        """
+        return hash((self.method, self.path))
+
+    def __repr__(self) -> str:
+        """Show the request as the constructor call that builds it.
+
+        Returns:
+            `Request(method, path, body)` with each field's repr.
+
+        """
+        return f"Request({self.method!r}, {self.path!r}, {self.body!r})"
 
 
 def numbers(issues: list[Issue]) -> dict[str, int]:

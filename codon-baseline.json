@@ -135,10 +135,6 @@
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'argparse'"
  },
- "mirrorreq": {
-  "as_written": "reference classes cannot inherit tuple classes",
-  "stripped": "reference classes cannot inherit tuple classes"
- },
  "mspdi": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'xml.etree.ElementTree'"
