@@ -33,6 +33,8 @@ _DATED = re.compile(r"^(\d{4})-(\d{2})-(\d{2})-")
 
 
 class Letter(NamedTuple):
+    """One letter: the inbox it sits in, its file name, who wrote it and who it is addressed to."""
+
     inbox: str
     name: str
     sender: str

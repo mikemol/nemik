@@ -29,6 +29,8 @@ _WHEEL = re.compile(r"mikemol_\w+-[\d.]+\+([0-9a-f]{7,40})-py3-none-any\.whl")
 
 
 class Pin(NamedTuple):
+    """One repo's pin of a peer: the repo that holds it, the peer and the pinned sha."""
+
     repo: str
     peer: str
     sha: str

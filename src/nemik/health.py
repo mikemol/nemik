@@ -25,6 +25,8 @@ SIGNALS = ("blocked_share", "oldest_block_ticks", "asks_owed")
 
 
 class Health(NamedTuple):
+    """One repo's verdict, the signals behind it and the reasons it is not green."""
+
     status: str
     blocked_share: float
     oldest_block_ticks: int

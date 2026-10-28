@@ -26,6 +26,8 @@ from nemik.blocks import ref
 
 
 class Pace(NamedTuple):
+    """One repo's token bucket after its window of new cards."""
+
     repo: str
     arrivals: int  # new cards in the window
     overdraft: float  # how far below zero the bucket went (0 when it never did)

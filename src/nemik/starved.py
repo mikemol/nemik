@@ -30,6 +30,8 @@ DEFAULT_DAYS = 14
 
 
 class Starved(NamedTuple):
+    """A ready card that waited past the limit while newer cards ranked above it."""
+
     cite: str
     waited_days: float
     overtaken_by: int
