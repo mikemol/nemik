@@ -1,13 +1,13 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""Fleet-wide touches[] overlap (nemik:W53), in the line shape of mtools' `--overlaps` (mtools:W118).
+"""Fleet-wide touches[] overlap (nemik:W53), in the shape of mtools' `--overlaps` (mtools:W118).
 
 `OVERLAP <tag>: <repo>:W<a>,<repo>:W<b>` for each tag that two or more live (ready or working)
 waypoints share. `--cross` keeps only tags shared across repos: the part a single queue's own
 `--overlaps` cannot see. Advisory, like ATOMIZE: always exits 0.
 
-nemik:W305 (mtools:W913): a session working a card holds a fence claim `claim:label:touch:<repo>:<tag>`
-per touches tag (mtools' mikemol-hook-work-claims). Each OVERLAP row also names who holds the claim
+nemik:W305 (mtools:W913): a session working a card holds a fence claim
+`claim:label:touch:<repo>:<tag>` per touches tag (mtools' mikemol-hook-work-claims). Each OVERLAP row also names who holds the claim
 for its tag and how old it is, read from `mikemol-membudget claims`. Display only: no block; with no
 membudget the holder column is left out, and said once.
 """
@@ -66,7 +66,7 @@ def parse_claims(text: str) -> dict[tuple[str, str], Holder]:
 
 
 def read_claims(membudget: Path | None = None) -> dict[tuple[str, str], Holder] | None:
-    """The live work claims, or None when mikemol-membudget cannot be run (not built, not found).
+    """Read the live work claims, or None when mikemol-membudget cannot be run.
 
     $NEMIK_MEMBUDGET names the binary; otherwise mtools' fence venv is tried.
     """

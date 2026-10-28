@@ -32,7 +32,7 @@ HOST_BLOCK = re.compile(r"host:[A-Za-z0-9][A-Za-z0-9._@-]*")
 
 
 def ref(node: Node) -> str:
-    """The citable form of a waypoint IRI: `<repo>:W<n>`."""
+    """Name the citable form of a waypoint IRI: `<repo>:W<n>`."""
     repo, _, sym = str(node).removeprefix(BASE).partition("/")
     return f"{repo}:{sym}"
 
@@ -338,10 +338,11 @@ def annotate(g: Graph) -> None:
                 # nemik:W256: host:<id> likewise by form here; `check.survey` then holds it against
                 # the host-apply export, where the export is readable.
                 cited = str(text).strip()
-                # nemik:W520 (luthen-observability, 2026-10-15): the writer refuses a witnessed card that
-                # is ready and tells its owner to block it on `nemik-witnesses`, the process that closes
-                # it. That is a party, for a card that has a witness (the graph keeps only its hash, as
-                # NEMIK.weather); for any other card it still names nothing.
+                # nemik:W520 (luthen-observability, 2026-10-15): the writer refuses a
+                # witnessed card that is ready and tells its owner to block it on
+                # `nemik-witnesses`, the process that closes it. That is a party, for a card
+                # that has a witness (the graph keeps only its hash, as NEMIK.weather); for
+                # any other card it still names nothing.
                 witnessed = (
                     cited == "nemik-witnesses" and (node, NEMIK.weather, None) in g
                 )
@@ -364,7 +365,8 @@ def annotate(g: Graph) -> None:
 
     # A block on a waypoint that has already landed (done, or dropped to residue) is stale: the
     # waiter should have been lifted to ready, or its blocked_on trimmed (nemik:W110, paperkit
-    # found 8 such in its own queue, some a day old). All of them landed means mis-stated as blocked.
+    # found 8 such in its own queue, some a day old). All of them landed means mis-stated as
+    # blocked.
     for node in set(g.subjects(NEMIK.waitsFor, None)):
         if (node, OSLC_CM.state, NEMIK.Done) in g:
             continue
@@ -425,7 +427,8 @@ BARE = re.compile(
     r"^\s*(the\s+)?(operator|user|mikemol|mike|human)\s*(\(\w+\))?\s*$", re.IGNORECASE
 )
 
-# nemik:W458 (github-8f, luthen-observability:W69 stood 93 ticks as "operator: act the host-root sudo
+# nemik:W458 (github-8f, luthen-observability:W69 stood 93 ticks as "operator: act the host-root
+# sudo
 # applies" with nothing to run): an act ask carries the command in a standard shape, an
 # `env -C <repo> <abs interpreter> -m <module>` line or a sudo-prefixed one. Without it the owner
 # still owes the tool, and the ask is not the operator's yet.
@@ -620,7 +623,8 @@ def with_salience(g: Graph, asks: list[dict[str, Any]]) -> list[dict[str, Any]]:
     signal): how much demand waits behind each ask.
 
     Each ask is a card with no open prerequisite, so in the flow model it is ground: it absorbs the
-    demand of the cards that need it, weighted by the class weights of rank-weights.toml (as seen from
+    demand of the cards that need it, weighted by the class weights of rank-weights.toml (as
+    seen from
     the ask's own repo). That absorbed salience is what answering the ask would release, in the same
     units as nemik-rank. An ask that itself needs another open card carries 0 (its demand flows to
     that card). Within a category the heaviest ask comes first; ticks blocked break ties.

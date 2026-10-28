@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1203,
+  "counter": 1204,
   "waypoints": [
     {
       "symbol": "W1",
@@ -28607,6 +28607,32 @@
         "src/nemik/pins.py",
         "src/nemik/calendars.py",
         "src/nemik/calwrite.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W1204",
+      "title": "blocks.py, index.py and overlaps.py lose eleven ruff findings: long comment and docstring lines wrapped and four docstring first lines made imperative or shortened, so ruff falls 2498 to 2487 (paydown)",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:ruff-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "stack601 queued behind stack600; bazel test of test_overlaps, test_overlap_claims, test_index, test_witness_party, test_operator_act_shape, test_card_warnings passed (6 of 6); ruff 2487 against the written baseline, mypy 4441",
+      "evidence": "",
+      "issued_at": "2026-10-28T05:49:11Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1196",
+      "last_worked": "2026-10-28T05:49:23Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/blocks.py",
+        "src/nemik/index.py",
+        "src/nemik/overlaps.py",
         "ruff-baseline.json"
       ],
       "size_class": "small"

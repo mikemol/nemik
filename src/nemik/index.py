@@ -2,7 +2,8 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W412: one pass over a graph into plain dicts, read by the hot loops for one build.
 
-A rebuild asked rdflib 3.3 M triple patterns (17 s of 27) for the same few facts per card: its
+A rebuild asked rdflib 3.3 M triple patterns (17 s of 27) for the same few facts per card:
+its
 state, what it enables, what waits for it. Inside `indexed()` the first asker of a graph builds those
 maps once and every later asker reads them. Outside the scope nothing is cached, so a caller that
 mutates a graph between questions never reads a stale answer; inside it, an entry is checked against
@@ -35,7 +36,8 @@ class Index:
     waited_by: dict[Node, set[Node]] = field(default_factory=dict)
     # a whole-graph answer asked more than once per build (once per repo's health)
     operator_asks: list[dict[str, object]] | None = None
-    # nemik:W518: every card as plain data, read from the graph once (health and critical asked for it
+    # nemik:W518: every card as plain data, read from the graph once (health and critical asked
+    # for it
     # 31 times in one build, 10 s of a warm publish)
     cards: dict[str, Card] | None = None
 
@@ -65,7 +67,7 @@ def indexed() -> Iterator[None]:
 
 
 def index(g: Graph) -> Index | None:
-    """The graph's index inside `indexed()`, else None (the caller asks the graph)."""
+    """Give the graph's index inside `indexed()`, else None (the caller asks the graph)."""
     if _SCOPE is None:
         return None
     hit = _SCOPE.get(id(g))
