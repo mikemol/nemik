@@ -58,7 +58,8 @@ def rows(verdict: Json, source: str = "") -> list[str]:
 
     """
     residue = verdict.get("residue")
-    entries = residue if isinstance(residue, list) else []
+    no_entries: list[object] = []
+    entries = residue if isinstance(residue, list) else no_entries
     head = f"{verdict.get('ref')}  {verdict.get('level')}  residue={len(entries)}"
     head += f"  ({source})" if source else ""
     lines = [head]

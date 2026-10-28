@@ -17,7 +17,7 @@ from __future__ import annotations
 import hashlib
 import json
 from datetime import datetime
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 from mikemol.pathsforward.opa_eval import POLICY
 
@@ -31,6 +31,16 @@ MARKS = "paths-forward.marks.jsonl"
 # than this is stale for the same reason a lapsed fact floors its gate.
 MAX_AGE_SECONDS = 3600
 MARK, DERIVED, STALE = "mark", "derived", "stale"
+
+
+def _decoded(raw: str) -> object:
+    """Decode one JSON line as an opaque value, so each caller narrows it.
+
+    Returns:
+        what json.loads read, typed as object.
+
+    """
+    return cast("object", json.loads(raw))
 
 
 def policy_version() -> str:
@@ -58,15 +68,19 @@ def read(path: Path) -> tuple[dict[str, Json], int]:
         if not raw.strip():
             continue
         try:
-            record = json.loads(raw)
+            record = _decoded(raw)
         except json.JSONDecodeError:
             unreadable += 1
             continue
-        symbol = record.get("symbol") if isinstance(record, dict) else None
+        if not isinstance(record, dict):
+            unreadable += 1
+            continue
+        fields = cast("Json", record)
+        symbol = fields.get("symbol")
         if not isinstance(symbol, str):
             unreadable += 1
             continue
-        latest[symbol] = record
+        latest[symbol] = fields
     return latest, unreadable
 
 

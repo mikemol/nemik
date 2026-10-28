@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1194,
+  "counter": 1198,
   "waypoints": [
     {
       "symbol": "W1",
@@ -28363,6 +28363,126 @@
         "ruff-baseline.json"
       ],
       "size_class": "small"
+    },
+    {
+      "symbol": "W1195",
+      "title": "marks.py and realize.py lose four mypy findings: json.loads is read as an opaque object and narrowed, and the empty list is annotated, so mypy falls 4448 to 4444 (paydown)",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:mypy-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "stack594 queued behind stack593; bazel test //:test_realize //:test_marks is the check; mypy ratchet reads 4444 against the lowered baseline",
+      "evidence": "",
+      "issued_at": "2026-10-28T01:02:13Z",
+      "minted_during": "tick",
+      "caused_by": "W1014",
+      "last_worked": "2026-10-28T01:02:22Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/marks.py",
+        "src/nemik/realize.py",
+        "mypy-baseline.json"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W1196",
+      "title": "The pace states mypy required 109 and ruff 49 again at 00:34:23Z, after W1165's operator-approved reset to 2 and 4: find what put 109 back and why the reset did not hold, before any paydown is judged against it",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "file:src/nemik/pacerun.py",
+        "file:src/nemik/rebaselines.py"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-28: 2026-10-27 read from the pace file (ratchet-pace.json, as_of 2026-10-28T00:34:23Z, window 10): nemik mypy-baseline.json state behind, observed 0, required 109, value 4448, horizon -1; and github-8f's reading for ruff: required 49. My own reading of the pace at 2026-10-27T21:34:22Z (nemik-rank --pace): ruff ok, 2542 left, 480 landings to zero; mypy ok, 4448 left, 41 landings to zero. So the requirement jumped between those two files. rebaselines.RESETS holds mypy-baseline.json 109 to 2 (W1165, operator go at host line 107063) and the pace file did not honour it at 00:34Z. The pace file holds only the current rows; no history. NOT KNOWN: what the store's nemik_ratchet_fall_required series (floors_of takes its highest sample) held at 21:34Z and 00:34Z, whether the host job's installed nemik carries RESETS, and why ruff shows 49 when no ruff reset names it. Two readings of the submit gate are one sensor (github-8f) | 2026-10-28: 2026-10-27 github-8f (a peer's word): opened host incident github:W70, blocked on this card; asked luthen-observability, which owns the store and the pace job, for the required-fall series for mypy and ruff over 24 h and for which nemik build the pace job runs and whether it changed between 21:34Z and 00:34Z. Their note: the pinned install moved e254920 to 9ff1c0b to dfec698 in that window (hashes as relayed; mine landed: e254920 W1136, 9ff1c0b W1048, dfec698 W730 close). The answer comes to me directly; github-8f sends only incident asks until github:W70 closes | 2026-10-28: 2026-10-27 install-to-commit map (git log --until=<install time, UTC> -1 on main, read): 08:32:37 -> 9b480a2 (before W1165's 6e5542f, which landed 06:46 EDT = 10:46Z; no RESETS, so 109 is expected: explained); 11:23:24 -> ef93782 (after W1165; required 2); 18:09:25 -> 1763636 (after W1165; required 38); 00:19:52 -> a36e9ff (after W1165; required 109). Pace-relevant source changes between 1763636 and a36e9ff (git log 1763636..a36e9ff -- src/nemik, read): only 3ee50a4 W1190 (pacerun, hostroot_cli); its diff is types (frozenset to list, retired or []) and I read no semantic change to reset_table or the priors. And the 11:23 and 18:09 builds have identical pace code yet gave 2 and 38, so at least those two moves are data, not code. The reset is exact-match on a STATED requirement (reset_table: out.get(key) == old); a requirement computed afresh from the value series is not reset. Hypothesis, NOT shown: the series window re-derives the 104-finding burst, and 109/38 are computed rises that the stated-requirement reset cannot touch | 2026-10-28: 2026-10-27 read raw (host session 695f3e0a, lines 107043, 107049, 107063): the operator's words at 107063 (human origin, 2026-10-27T10:37:19Z, uuid aebb23cb-f48f-444b-87c2-5cb0de45796a) are '1 go, 2 allow, 3 allow'. The ask it answers, host line 107049, item 1: 'reset nemik's mypy and ruff requirements from 109 and 73 back to 2 and 4, with the reason kept. Answer go or no reset. Nothing is applied until you answer.' Line 107043 gave the reason as 'a counting error that took one large catch-up commit as a rate' and the alternative: 'With no reset, nemik keeps landing only paydown commits until its values work down to 109 and 73.' So the ruling covers resetting the STATED requirement 109 and 73 to 2 and 4. It says nothing about a requirement later re-derived from the series, which is what 38 then 109 look like. The question for the operator is written: options (a) a reset holds until the window no longer holds the pre-reset burst, (b) the seed is the median per-landing fall and not the window sum, (c) leave it, a burst raises the bar | 2026-10-28: 2026-10-27 raw input of the 00:34:23Z run, from luthen-observability-ab (a peer's word, read by them from the store): mikemol.ratchet.value{repo=nemik} newer series (guessed=false): mypy 5248, 4928, 4788, 4723, 4448 up to 1793127506, then ten samples at 4448 (1793129164 to 1793146395); ruff 2554, 2544, 2542, then ten samples at 2542. The ten newest samples at or before the run's as_of are all flat, so the window saw NO fall: observed 0 is a true reading. At the 23:34Z run the ten newest still held the 4788/4723 to 4448 fall. The first fully flat window is exactly 00:34, matching the verdict flip. READ ACROSS: ten consecutive gate runs of mine lowered no ratchet (docs, queue stacks, tests, tools: stacks 582 to 592), and nemik was already behind the rate by the stated rule 'a fall counts once landed'; so BEHIND is the ratchet teeth working as written, not a defect. What remains open is only the SIZE of the requirement (109 mypy, 49 ruff versus 2 and 4): unexplained. Not shown: why required is 109 and not the 2 the reset set; the ruling (L107063) reset the stated value only | 2026-10-28: 2026-10-28 closed on the operator's ruling (warrant attached; host L110859, human, uuid 19285e01-24fa-4d6b-bc04-2e436e330092, 'W70-c.', answering the ask at L110826 with options a, b, c): option (c), leave it: a burst raises the bar and nemik pays down until it is met. Cause established from luthen's raw samples: the 00:34Z window was the first fully flat one (ten gate runs of mine lowered nothing), so behind is the rule working as written. The size of the requirement is the ruled behaviour, not a defect. W1197 (build in the header) and W1198 (a fall counted before landing) are the findings that remain",
+      "issued_at": "2026-10-28T01:05:57Z",
+      "minted_during": "tick",
+      "caused_by": "W1165",
+      "last_worked": "2026-10-28T01:27:04Z",
+      "ticks_blocked": 0,
+      "warrants": [
+        {
+          "@context": {
+            "prov": "http://www.w3.org/ns/prov#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "mtools": "urn:mtools:warrant#"
+          },
+          "@id": "urn:nemik:nemik/W1196",
+          "prov:wasDerivedFrom": {
+            "@id": "urn:claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e#19285e01-24fa-4d6b-bc04-2e436e330092",
+            "@type": "prov:Entity",
+            "prov:generatedAtTime": {
+              "@value": "2026-10-28T01:21:29.352Z",
+              "@type": "xsd:dateTime"
+            },
+            "prov:wasAttributedTo": {
+              "@id": "urn:nemik:operator",
+              "@type": "prov:Agent"
+            },
+            "prov:wasGeneratedBy": {
+              "@id": "urn:nemik:utterance/19285e01-24fa-4d6b-bc04-2e436e330092",
+              "@type": "prov:Activity"
+            },
+            "mtools:line": 110859,
+            "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify 19285e01-24fa-4d6b-bc04-2e436e330092 --claim operator --line 110859"
+          },
+          "mtools:reason": "the operator ruled W70-1 option (c): leave it, a burst raises the bar and nemik pays down until it is met (mypy 109, ruff 49 over 10 landings); the options were put at host line 110826"
+        }
+      ],
+      "completed": "20261028T012704Z"
+    },
+    {
+      "symbol": "W1197",
+      "title": "The pace file header names the build that computed it: nemik-hostroot --pace writes {as_of, window, build}, build the installed nemik's commit sha, so a verdict is self-describing",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "file:src/nemik/pacepublish.py",
+        "file:src/nemik/pacewrite.py"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Asked by luthen-observability-ab (a peer's word) 2026-10-27 so a verdict names its build. Read first: where the header is written (pacewrite.pace_text) and read (pacepublish.read_pace) and that the reader tolerates a third key; where a sha is available at run time (importlib.metadata direct_url.json vcs_info.commit_id for a git install; not available for an editable one, so write 'unknown', never a guess). Do NOT ship before luthen confirms its egress gate (W1618) accepts the new header shape: tell luthen-observability-ab the exact new header line first. Codon: pacewrite may be under the census; probe before importing importlib.metadata (witnesses_cli is in the baseline for it), so take the sha in hostroot_cli (not under the census) and pass it as a string",
+      "evidence": "",
+      "issued_at": "2026-10-28T01:15:24Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1196",
+      "last_worked": "2026-10-28T01:15:38Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/pacepublish.py",
+        "src/nemik/pacewrite.py",
+        "tests/test_pace_publish.py"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W1198",
+      "title": "A gate's ratchet emit sends the STAGED tree's value to the store before the verdict, so a fall that never lands (a refused stack) is counted as paid: the pace should count a fall only once it has landed",
+      "status": "blocked",
+      "enables": [],
+      "touches": [
+        "file:tools/gate_staged.sh"
+      ],
+      "blocked_on": [
+        "mtools-ad: emit the ratchet value after the gate's verdict, or tag it with the gate key so the pace counts only landed ones (asked 2026-10-28 with two readings; no mtools card cited yet, mtools-ad to name one)"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Read where the emit runs in the gate sequence (mtools' gate hook; nemik's gate_staged.sh runs the ratchet then bazel test) and whether it is sent before the verdict; the fix is the emitter's to send after the verdict, or the pace's to count only samples whose landing exists (a landing row); ask mtools-ad; witness: a refused stack that lowers a ratchet leaves the series unchanged",
+      "evidence": "2026-10-28: 2026-10-27 instance, read: --in-gate --json shows stack593 (W1194, W1193; key 1793148659731848899) inflight since 1793148661 (00:51:01Z) and git log shows HEAD still dfec698, nothing landed; luthen-observability-ab (a peer's word, from the store) reports mikemol.ratchet.value ruff 2536 at 1793149137.4 (00:58:57Z) and mypy 4448. 2536 is the value of the STAGED tree of stack593 (W1194's ruff fall), so it was sent mid-gate, before any verdict. An earlier gate log shows the line 'ratchet emit: 5 ratchet(s), sent=True' printed before the final bazel run (stack582's output, read). If stack593 is refused, a refused fall stays in the series. This is the hypothesis I recorded and dropped as W1192 on a wrong premise; the evidence is new. Related: W1196 (the pace reads these samples as landings) | 2026-10-28: 2026-10-28 sent to mtools-ad with the two readings. github-8f (a peer's word) confirms from two host readings: stack593 inflight at 00:46Z and about 01:22Z, HEAD dfec698 at both",
+      "issued_at": "2026-10-28T01:20:23Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1196",
+      "last_worked": "2026-10-28T01:27:15Z",
+      "ticks_blocked": 0,
+      "completed": null
     }
   ],
   "residue": [

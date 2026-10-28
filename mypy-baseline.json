@@ -82,9 +82,6 @@
   "no-untyped-def": 3,
   "type-arg": 1
  },
- "src/nemik/marks.py": {
-  "misc": 3
- },
  "src/nemik/metrics.py": {
   "misc": 37
  },
@@ -104,9 +101,6 @@
   "misc": 252,
   "type-arg": 17,
   "var-annotated": 1
- },
- "src/nemik/realize.py": {
-  "misc": 1
  },
  "src/nemik/salience.py": {
   "misc": 25,
