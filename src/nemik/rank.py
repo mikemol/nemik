@@ -279,6 +279,12 @@ def frontier(g: Graph, goal: Node) -> tuple[set[Node], set[str]]:
 
 
 def ref_of(node: Node) -> str:
+    """Name a card node by its citation.
+
+    Returns:
+        The card as `<repo>:W<n>`.
+
+    """
     r, _, sym = str(node).removeprefix(BASE).partition("/")
     return f"{r}:{sym}"
 
@@ -332,6 +338,12 @@ def is_umbrella(g: Graph, n: Node) -> bool:
 
 
 def umbrellas(g: Graph, repo: str) -> list[Node]:
+    """Find a repo's umbrellas.
+
+    Returns:
+        The repo's ready items that have open work under them.
+
+    """
     ws = workstream_uri(repo)
     return [
         n

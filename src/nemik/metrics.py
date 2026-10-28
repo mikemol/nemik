@@ -221,11 +221,23 @@ CLASS = {
 
 
 def spool_path() -> Path:
+    """Locate the event spool.
+
+    Returns:
+        events.jsonl under $XDG_STATE_HOME (or ~/.local/state), in the nemik directory.
+
+    """
     state = os.environ.get("XDG_STATE_HOME") or os.path.expanduser("~/.local/state")
     return Path(state) / "nemik" / "events.jsonl"
 
 
 def label(**kv: str) -> str:
+    """Format a Prometheus label set.
+
+    Returns:
+        The `{key="value",...}` text for the given pairs.
+
+    """
     return "{" + ",".join(f'{k}="{v}"' for k, v in kv.items()) + "}"
 
 

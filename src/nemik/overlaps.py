@@ -40,6 +40,12 @@ class Holder(NamedTuple):
 
 
 def overlaps(g: Graph, cross: bool = False) -> dict[str, list[str]]:
+    """Find the touched surfaces that more than one live card names.
+
+    Returns:
+        Each such surface tag with the cards that touch it.
+
+    """
     by_tag: dict[str, set[Node]] = {}
     for node, tag in g.subject_objects(NEMIK.touches):
         if g.value(node, OSLC_CM.state) in LIVE:

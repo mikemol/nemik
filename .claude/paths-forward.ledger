@@ -2991,3 +2991,15 @@
 2026-10-28T12:17:29Z  tick  W1212 minted    -         "Critical, Fire, Bands, Guarantees, Weights, Composition and Holder gain class docstrings, so ruff falls 2411 to 2404 (paydown)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1196
 2026-10-28T12:17:38Z  status W1212 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-28T12:19:00Z  status W733 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T12:26:45Z  status W750 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T12:41:48Z  interrupt W1213 minted    -         "ref_of, umbrellas and overlaps gain docstrings with Returns sections, so ruff falls 2404 to 2401 (paydown)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1196
+2026-10-28T12:41:55Z  status W1213 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T13:19:17Z  status W1176 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T13:19:23Z  status W1211 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T13:19:24Z  status W1212 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T13:41:50Z  interrupt W1214 minted    -         "metrics.spool_path and metrics.label gain docstrings with Returns sections, so ruff falls 2401 to 2399 (paydown)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1196
+2026-10-28T13:41:57Z  status W1214 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T13:42:52Z  status W733 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T14:05:51Z  status W733 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T14:08:33Z  status W846 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T14:18:51Z  interrupt W1215 minted    -         "Adopt the reviewed-loop in nemik: one persistent warm reviewer subagent over this session's control law, G0 before each tick-open, G0 and G1 sent after each tick-close, retro JSON added with --add-retro, a cold reviewer at each fixpoint"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=operator

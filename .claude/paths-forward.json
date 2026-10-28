@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1212,
+  "counter": 1215,
   "waypoints": [
     {
       "symbol": "W1",
@@ -15687,19 +15687,19 @@
     {
       "symbol": "W733",
       "title": "Run the gate's bazel through the admission wrapper mikemol-bazel-admit",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "After mtools:W1714: invoke bazel in tools/gate_staged.sh through mikemol-bazel-admit (an admission line naming megabytes for the bazel verb must then show in a gate's output); nemik's gate calls /usr/bin/bazel directly today",
-      "evidence": "2026-10-23: 2026-10-23 overlap audit (verified): luthen-observability:W1399 adopts the same mtools admission (mikemol-bazel-admit and mikemol-membudget) for luthen's gate; the two cards share a wrapper and its failures, so a finding on one is the other's | 2026-10-23: 2026-10-23 correction (github-8f, from luthen): the title said 'as luthen did', but luthen-observability:W1399, which adopts the same wrapper, is ready and not done (read from its queue). The title no longer claims an adoption that has not happened | 2026-10-28: 2026-10-28: mtools:W1714 is done (landed 9cd7e1b2, read from mtools' queue), so the step is unblocked. tools/gate_staged.sh now defines a bazel function that runs /usr/bin/bazel through mikemol-bazel-admit (resolved at the real root's .venv, refused if missing); checked by hand in the real root: bazel info answers through it and bazel test //:test_skill printed 'membudget: hold 4096MB [bazel]'. The proof the card asks for, that line in a gate's own output, comes with the gate that runs this change.",
+      "next_bounded_step": null,
+      "evidence": "2026-10-23: 2026-10-23 overlap audit (verified): luthen-observability:W1399 adopts the same mtools admission (mikemol-bazel-admit and mikemol-membudget) for luthen's gate; the two cards share a wrapper and its failures, so a finding on one is the other's | 2026-10-23: 2026-10-23 correction (github-8f, from luthen): the title said 'as luthen did', but luthen-observability:W1399, which adopts the same wrapper, is ready and not done (read from its queue). The title no longer claims an adoption that has not happened | 2026-10-28: 2026-10-28: mtools:W1714 is done (landed 9cd7e1b2, read from mtools' queue), so the step is unblocked. tools/gate_staged.sh now defines a bazel function that runs /usr/bin/bazel through mikemol-bazel-admit (resolved at the real root's .venv, refused if missing); checked by hand in the real root: bazel info answers through it and bazel test //:test_skill printed 'membudget: hold 4096MB [bazel]'. The proof the card asks for, that line in a gate's own output, comes with the gate that runs this change. | 2026-10-28: 2026-10-28: landed b1d744d (pushed). Its own gate ran the staged tree before the new script took effect, so the 'membudget: hold ... [bazel]' line is read from the NEXT gate (stack617, W1213); still to read and record. | 2026-10-28: 2026-10-28: PROOF read from stack617's gate output (the first gate to run b1d744d's script): three 'membudget: hold 4096MB [bazel]' lines, ahead of the .venv build, the fast registry pass and the precommit test, so the gate's bazel runs through admission. (That gate was refused by an unrelated test_pdf failure; see the flake card.)",
       "issued_at": "2026-10-19T14:50:08Z",
       "minted_during": "tick",
       "caused_by": "github-8f",
-      "last_worked": "2026-10-28T12:19:00Z",
+      "last_worked": "2026-10-28T14:05:51Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261028T140551Z",
       "manifest": [
         "tools/gate_staged.sh"
       ],
@@ -16204,7 +16204,7 @@
     {
       "symbol": "W750",
       "title": "Improve the climate: date each practice change as an intervention and measure the shift in a before and after window",
-      "status": "working",
+      "status": "ready",
       "enables": [
         "W743"
       ],
@@ -16214,11 +16214,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "From now send one intervention per practice change (atomize, stack, shard, repin) when it happens, and write the before and after windows in docs/climate-interventions.md as each matures, starting with the 2026-10-21T02:14:31Z repin as the first window. The metric side (mikemol.waypoint.event) is not yet read back",
-      "evidence": "2026-10-21: 2026-10-20: the live writer has --intervention (repin 5971c07, venv rebuilt by the post-commit hook after 00cb6d2). First one sent: 'repin' for the move to f2f18a1; the command printed 'intervention repin sent' and exited 0. NOT yet read back: a LogsQL query for fleet:intervention on luthen's VictoriaLogs found nothing, so the series it lands in (metrics, not logs, or a delay) is unconfirmed; ask mtools-ad where an intervention is read before relying on the series | 2026-10-24: 2026-10-24: asked mtools-ad where an intervention event is read back (store, station or series name, delay); until answered the before and after windows would be built on a series not yet read back. Named by repo only, because mtools has no card for it: nemik:W750 is the citable ref | 2026-10-24: 2026-10-24 mtools-ad (a peer's word, read from code, no store queried): 'intervention sent' means the detached mikemol-otlp children were started, not delivered, since their output goes to /dev/null and a failed POST is swallowed (mtools:W1887 cards the fix). LOG in victorialogs-http: service.name mikemol-paths-forward, repo is the state file's repo, body one JSON line with station <repo>:fleet:intervention, field the kind, new the note. So a repin from nemik's queue is station nemik:fleet:intervention. LogsQL is service.name mikemol-paths-forward with the word fleet:intervention over 7d. METRIC in vmsingle is gauge mikemol.waypoint.event with labels repo, field and via, value 1 per event, read with sum_over_time, and its PromQL name is a guess until luthen's registry row is read. No delay. To test a lost send run mikemol-otlp log once in the foreground | 2026-10-24: 2026-10-24 read back: the 2026-10-20 repin intervention IS in the store, at 2026-10-21T02:14:31Z in luthen's VictoriaLogs, station nemik:fleet:intervention, found with luthen's checks.vlogs_query and the query service.name:mikemol-paths-forward \"fleet:intervention\" -\"accepted\". My earlier query used the colon word unquoted and found nothing, so the empty result was my query and not a lost send. It is the only intervention event in the store, so no other practice change has a date there, and past changes cannot be dated honestly since an event carries its send time | 2026-10-27: 2026-10-27: sent a stack intervention for stack583 (W1191); the command printed 'intervention stack started', which per mtools-ad means the sender was started, not delivered; read-back in VictoriaLogs still to do | 2026-10-28: 2026-10-28: sent intervention 'other' for the reviewed-loop adoption (printed 'intervention other started'; read-back pending); docs/climate-interventions.md now exists, listing the repin (read back), stack583 and this one with their read-back state; no window has matured.",
+      "evidence": "2026-10-21: 2026-10-20: the live writer has --intervention (repin 5971c07, venv rebuilt by the post-commit hook after 00cb6d2). First one sent: 'repin' for the move to f2f18a1; the command printed 'intervention repin sent' and exited 0. NOT yet read back: a LogsQL query for fleet:intervention on luthen's VictoriaLogs found nothing, so the series it lands in (metrics, not logs, or a delay) is unconfirmed; ask mtools-ad where an intervention is read before relying on the series | 2026-10-24: 2026-10-24: asked mtools-ad where an intervention event is read back (store, station or series name, delay); until answered the before and after windows would be built on a series not yet read back. Named by repo only, because mtools has no card for it: nemik:W750 is the citable ref | 2026-10-24: 2026-10-24 mtools-ad (a peer's word, read from code, no store queried): 'intervention sent' means the detached mikemol-otlp children were started, not delivered, since their output goes to /dev/null and a failed POST is swallowed (mtools:W1887 cards the fix). LOG in victorialogs-http: service.name mikemol-paths-forward, repo is the state file's repo, body one JSON line with station <repo>:fleet:intervention, field the kind, new the note. So a repin from nemik's queue is station nemik:fleet:intervention. LogsQL is service.name mikemol-paths-forward with the word fleet:intervention over 7d. METRIC in vmsingle is gauge mikemol.waypoint.event with labels repo, field and via, value 1 per event, read with sum_over_time, and its PromQL name is a guess until luthen's registry row is read. No delay. To test a lost send run mikemol-otlp log once in the foreground | 2026-10-24: 2026-10-24 read back: the 2026-10-20 repin intervention IS in the store, at 2026-10-21T02:14:31Z in luthen's VictoriaLogs, station nemik:fleet:intervention, found with luthen's checks.vlogs_query and the query service.name:mikemol-paths-forward \"fleet:intervention\" -\"accepted\". My earlier query used the colon word unquoted and found nothing, so the empty result was my query and not a lost send. It is the only intervention event in the store, so no other practice change has a date there, and past changes cannot be dated honestly since an event carries its send time | 2026-10-27: 2026-10-27: sent a stack intervention for stack583 (W1191); the command printed 'intervention stack started', which per mtools-ad means the sender was started, not delivered; read-back in VictoriaLogs still to do | 2026-10-28: 2026-10-28: sent intervention 'other' for the reviewed-loop adoption (printed 'intervention other started'; read-back pending); docs/climate-interventions.md now exists, listing the repin (read back), stack583 and this one with their read-back state; no window has matured. | 2026-10-28: 2026-10-28: landed f880c1e (pushed, gate green): docs/climate-interventions.md lists the three interventions sent; no window has matured; the 'other' and stack ones are not yet read back in VictoriaLogs.",
       "issued_at": "2026-10-19T19:35:14Z",
       "minted_during": "tick",
       "caused_by": "nemik:W743",
-      "last_worked": "2026-10-28T12:12:27Z",
+      "last_worked": "2026-10-28T12:26:45Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -18720,7 +18720,7 @@
     {
       "symbol": "W846",
       "title": "test_modes failed once with 'Uncaught ReferenceError: popLater is not defined' at page load, then passed on rerun of the same tree: find why a head script's definition can be missing when index.html's wiring runs",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [
         "file:tests/test_wcag_render.py!w"
@@ -18728,13 +18728,14 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Route test_viewstate's page fixture through the recording harness; then, on the next popLater occurrence, read its 'requests refused or failed' list; the proof is the interleaving witness plus a fix, not the diagnostic",
-      "evidence": "2026-10-22: 2026-10-22: not reproduced: //:test_modes x15 concurrent runs all pass (bazel --runs_per_test=15). The server is threaded and reads each file whole, popLater is a hoisted declaration in cards.js, so a missing definition means cards.js did not load (a silent script-load failure). The first failure's log was overwritten by the passing rerun. Add a requestfailed and response-status listener to the vendored webpage helper (W717) so the next occurrence names the file | 2026-10-23: 2026-10-23 second occurrence: the commit gate for W873 failed //:test_sources_resolve with 'Uncaught ReferenceError: popLater is not defined' at page load, all four tests of the module at once (they share one module-scoped page); popLater is defined in cards.js, so cards.js had not run when the inline script did. Same error as the first (test_modes, 2026-10-22). Neither change under test touches the page. Reproduction attempt: bazel test //:test_sources_resolve --runs_per_test=40 --local_test_jobs=40 | 2026-10-23: 2026-10-23: not reproduced: //:test_sources_resolve x40 with --local_test_jobs=40 all pass, so load alone does not trigger it. Both occurrences were inside the commit gate (stack320, stack343) on its shared staged worktree; the repro ran in the real checkout. Next: capture the failed request when it recurs (a requestfailed and response-status listener in the page helper), or run the repro inside the gate worktree | 2026-10-27: 2026-10-27 eleventh instance, in the stack557 gate (W1152/W1150, which touch no web file): tests/test_wcag_render.py::test_tab_visits_the_pages_controls_in_reading_order, 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined', 81 s, one of 433 targets, 432 passed. It adds no fact: this test opened its page by hand (new_page, watch, goto, until) and so bypassed the harness (tests/webpage.py opened_page) that appends the requests that failed or got an error status, which W1060 relies on to prove or refute the pick-then-bind argument. So this recurrence neither supports nor refutes efb924c. Fix, first entry of the next stack: _page_rows goes through webpage.evaluated, i.e. session/opened_page, so the next occurrence names the asset. The flake rule applies: no resubmit on this refusal. | 2026-10-27: c4f0e23 landed: test_wcag_render opens its page through webpage.evaluated, so the next popLater occurrence names the failed asset. W846 stays open until one does. Read the next occurrence's 'requests refused or failed' list: cards.js or a late script confirms W1060's argument, none refutes it. | 2026-10-28: 2026-10-28 twelfth and thirteenth instances, ONE gate (stack595: W1199, docstring rewraps in importer, issues and health, no web file): //:test_svgexport (test_the_svg_keeps_the_canvas_cards_edges_dashes_and_contrast, 21 s) and //:test_viewstate shard 2 of 3 (1 of 3 runs failed, 81 s) both 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined'; 441 of 443 passed. Read from the logs: test_svgexport waits through mikemol.webpage.page.load -> until, not through tests/webpage.py's recording opened_page, so its PageBrokenError carries NO requests-failed list; test_viewstate likewise. So again the asset is unnamed and W1060's argument is neither supported nor refuted. Two pages failing in one gate points at the shared server or host (a server that stops answering mid-load), not at a test. The flake rule applies: stack595 is NOT resubmitted unchanged | 2026-10-28: 2026-10-28 fix built: tests/webpage.py launched_page now records requestfailed and status>=400 responses and re-raises a PageBrokenError from load with 'requests refused or failed: [...]'; test_svgexport opens its page through it. Queued as stack598 entry 1 (with W1199, W1200, W1197, W1201 after it). Also: stack596 (W1200+W1197 alone) is in the gate and will be refused by the ratchet (its baseline 2513 lacks W1199's source), a failure predicted in advance but not withdrawable (inflight, leads a joined stack); stack597 was withdrawn. test_viewstate still waits without the failed-request list | 2026-10-28: diagnostic landed 0686c21 (pushed, gate green) in stack598: launched_page names the requests that failed; test_svgexport opens its page through it. The same gate ran 444 targets, 441 fresh, and no popLater failure. W846 STAYS OPEN: closes only on a proof (a forced-interleaving witness and a fix) or a traced occurrence; test_viewstate still waits without the failed-request list | 2026-10-28: landed fefe37c (pushed, gate green) in stack599: tests/webpage.py watch and until record the resources a page failed to load and name them in the PageBrokenError, for every browser test that uses them; witness in test_webpage_hangs (a refused script is named). That gate: 441 fresh of 444, sent=True, no popLater failure. W846 stays OPEN: a diagnostic, not a proof",
+      "evidence": "2026-10-22: 2026-10-22: not reproduced: //:test_modes x15 concurrent runs all pass (bazel --runs_per_test=15). The server is threaded and reads each file whole, popLater is a hoisted declaration in cards.js, so a missing definition means cards.js did not load (a silent script-load failure). The first failure's log was overwritten by the passing rerun. Add a requestfailed and response-status listener to the vendored webpage helper (W717) so the next occurrence names the file | 2026-10-23: 2026-10-23 second occurrence: the commit gate for W873 failed //:test_sources_resolve with 'Uncaught ReferenceError: popLater is not defined' at page load, all four tests of the module at once (they share one module-scoped page); popLater is defined in cards.js, so cards.js had not run when the inline script did. Same error as the first (test_modes, 2026-10-22). Neither change under test touches the page. Reproduction attempt: bazel test //:test_sources_resolve --runs_per_test=40 --local_test_jobs=40 | 2026-10-23: 2026-10-23: not reproduced: //:test_sources_resolve x40 with --local_test_jobs=40 all pass, so load alone does not trigger it. Both occurrences were inside the commit gate (stack320, stack343) on its shared staged worktree; the repro ran in the real checkout. Next: capture the failed request when it recurs (a requestfailed and response-status listener in the page helper), or run the repro inside the gate worktree | 2026-10-27: 2026-10-27 eleventh instance, in the stack557 gate (W1152/W1150, which touch no web file): tests/test_wcag_render.py::test_tab_visits_the_pages_controls_in_reading_order, 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined', 81 s, one of 433 targets, 432 passed. It adds no fact: this test opened its page by hand (new_page, watch, goto, until) and so bypassed the harness (tests/webpage.py opened_page) that appends the requests that failed or got an error status, which W1060 relies on to prove or refute the pick-then-bind argument. So this recurrence neither supports nor refutes efb924c. Fix, first entry of the next stack: _page_rows goes through webpage.evaluated, i.e. session/opened_page, so the next occurrence names the asset. The flake rule applies: no resubmit on this refusal. | 2026-10-27: c4f0e23 landed: test_wcag_render opens its page through webpage.evaluated, so the next popLater occurrence names the failed asset. W846 stays open until one does. Read the next occurrence's 'requests refused or failed' list: cards.js or a late script confirms W1060's argument, none refutes it. | 2026-10-28: 2026-10-28 twelfth and thirteenth instances, ONE gate (stack595: W1199, docstring rewraps in importer, issues and health, no web file): //:test_svgexport (test_the_svg_keeps_the_canvas_cards_edges_dashes_and_contrast, 21 s) and //:test_viewstate shard 2 of 3 (1 of 3 runs failed, 81 s) both 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined'; 441 of 443 passed. Read from the logs: test_svgexport waits through mikemol.webpage.page.load -> until, not through tests/webpage.py's recording opened_page, so its PageBrokenError carries NO requests-failed list; test_viewstate likewise. So again the asset is unnamed and W1060's argument is neither supported nor refuted. Two pages failing in one gate points at the shared server or host (a server that stops answering mid-load), not at a test. The flake rule applies: stack595 is NOT resubmitted unchanged | 2026-10-28: 2026-10-28 fix built: tests/webpage.py launched_page now records requestfailed and status>=400 responses and re-raises a PageBrokenError from load with 'requests refused or failed: [...]'; test_svgexport opens its page through it. Queued as stack598 entry 1 (with W1199, W1200, W1197, W1201 after it). Also: stack596 (W1200+W1197 alone) is in the gate and will be refused by the ratchet (its baseline 2513 lacks W1199's source), a failure predicted in advance but not withdrawable (inflight, leads a joined stack); stack597 was withdrawn. test_viewstate still waits without the failed-request list | 2026-10-28: diagnostic landed 0686c21 (pushed, gate green) in stack598: launched_page names the requests that failed; test_svgexport opens its page through it. The same gate ran 444 targets, 441 fresh, and no popLater failure. W846 STAYS OPEN: closes only on a proof (a forced-interleaving witness and a fix) or a traced occurrence; test_viewstate still waits without the failed-request list | 2026-10-28: landed fefe37c (pushed, gate green) in stack599: tests/webpage.py watch and until record the resources a page failed to load and name them in the PageBrokenError, for every browser test that uses them; witness in test_webpage_hangs (a refused script is named). That gate: 441 fresh of 444, sent=True, no popLater failure. W846 stays OPEN: a diagnostic, not a proof | 2026-10-28: 2026-10-28 fourteenth instance, stack617 gate (W1213, docstrings only, no web file): //:test_pdf shard 3, test_a_view_prints_a_pdf[rank], 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined', 1 of 3 runs, 449 targets, 448 passed. nemik.pdf.render opened its page with the library's load directly, so the error carried no failed-request list (the same gap as test_viewstate and test_svgexport before). Fix: nemik/pdf.py load_naming_failures records requestfailed and status>=400 responses and re-raises with 'requests refused or failed: [...]', so a pdf failure now names the asset. Stack617 is not resubmitted unchanged; its docstring entries ride in the next stack after this one. A diagnostic, not a proof: W846 stays open.",
       "issued_at": "2026-10-22T14:53:40Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W703",
-      "last_worked": "2026-10-28T05:15:12Z",
+      "last_worked": "2026-10-28T14:08:33Z",
       "ticks_blocked": 0,
       "manifest": [
+        "src/nemik/pdf.py",
         "tests/webpage.py",
         "tests/test_webpage_hangs.py"
       ],
@@ -27860,7 +27861,7 @@
     {
       "symbol": "W1176",
       "title": "Typed document boundary: a typed Waypoint record that loaders and test builders return, one stack per document shape",
-      "status": "working",
+      "status": "ready",
       "enables": [],
       "touches": [
         "file:mypy-baseline.json"
@@ -27868,11 +27869,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "The TOML half: src/nemik/data/rank-weights.schema.json first (read the file's tables), a test in tests/ that validates the shipped file with tomllib and refuses a wrong-typed table, then a Codon-clean accessor and health.py as the first consumer (its thresholds() builds from an Any table). Then bands.toml, connectors.toml, workflows.toml, then the host config (calendars.toml, ics.toml). Then wake.py for the JSON half",
-      "evidence": "2026-10-28: 2026-10-28 first slice built: src/nemik/data/waypoint.schema.json (core of 5 required keys plus typed optional keys; $defs/full adds the 14 keys the writer stamps), tests/test_waypoint_schema.py (6 tests), docs/typed-boundary.md. Measured against the fleet before it was written: all 1183 cards of this queue pass $defs/full with 0 refusals; the 19 fixture queues' cards pass the core; the first draft required blocked_kind and three older cards lack it, which the test found, so it is optional in the core and required in full. NOT built: the ABC and accessors (src/nemik/waypoint.py), the schema/accessor drift test, any consumer migration | 2026-10-28: 2026-10-28 Codon probes for the ABC half (stage tree, pinned Codon): 'from abc import ABC, abstractmethod' fails with 'no module named abc'; 'from typing import Protocol' fails with 'cannot import name Protocol from typing'; a PLAIN base class whose methods raise NotImplementedError, with subclasses overriding them, compiles (rc 0). Every top-level src/nemik module is in the Codon census (tools/codon_census.py globs src/nemik/*.py), and a module that fails adds a codon-baseline entry, a ratchet rise. So an abc.ABC cannot live in src/nemik without a rise. The ruling's intent (one declared shape, typed accessors consumers type against) can be met with a plain interface class; mypy then does not enforce abstractness. The operator's wording was ABC; this is the tension between that and 'all Python Codon-compatible' (standing 4), put to github-8f | 2026-10-28: 2026-10-28 CORRECTION of attribution (github-8f asked for the record, and found 0 hits in the host transcript): the words 'ABC and JSON SCHEMA' are NOT host line 107476 (that line is the operator's separate ruling to audit the ratchet targets for larger paydown steps, which is this card's other warrant). They are a human message in nemik's OWN session transcript (session ca6f3699-66ac-4ffa-a3ca-6ececbab791f, line 138830, uuid 31bdf58f-b473-4b05-a566-1295693efbe7, 2026-10-27T20:11:45Z): verbatim, with the quoted lead-in from my report: '`cannot see the json and tomllib document shapes` ... This is what ABC and JSON SCHEMA are for.' Attached as a warrant. The words name ABC (an abstract base class) and JSON Schema; they do not say the abc.ABC module, so a Codon-clean plain interface class in src/nemik plus the real abc and jsonschema drift test in tests/ is a reading of them, not a certain one. My earlier notes (W1176 re-design entry, docs/typed-boundary.md in stack608) cite the wrong line and the doc is corrected in the next stack | 2026-10-28: 2026-10-28 github-8f (a peer's word, who read the ruling raw): the ruling (session line 138830) names BOTH families, 'the json and tomllib document shapes'; stack608 covers the queue JSON only, so the TOML half is OWED and not dropped. Inventory read: 17 src/nemik modules import tomllib (calendars, check, adoption, blocks, health, pacing, rank, pins, warrantdebt, starved, vtodo, idle, warrants, score, tiers, workflows, salience); the packaged TOML documents are src/nemik/data/rank-weights.toml (tables read by health, pacing, starved, rank, salience, tiers and others), bands.toml, connectors.toml and workflows.toml; the host-side config documents are ~/.config/nemik/calendars.toml and ics.toml (calendars.py, vtodo.py). JSON Schema validates a parsed TOML mapping as well as parsed JSON | 2026-10-28: landed a489573 (the waypoint schema) and 4cf10bc (the typed accessors, nemik.waypoint) in stack611, pushed, gate green. Built: schema (1183 live cards pass full), TreeWaypoint accessors (oracle over 19 fixture queues), drift test, real abc check in tests, docs/typed-boundary.md. OWED: the TOML half of the ruling (a schema per document, rank-weights.toml first), the first consumer migration (wake.py), and schemas for the other JSON documents | 2026-10-28: G0 (precommit, 2026-10-28): this tick advances W1176 (TOML half). Actuator: a JSON Schema for rank-weights.toml plus a test in tests/ and a Codon-clean accessor, built in a scratch stack. Sensor: bazel test of the new test target, pycheck --changed clean, ratchets mypy 4227 / ruff 2416 not rising. Expected: schema measured against the live file with 0 refusals; no baseline entry added.",
+      "evidence": "2026-10-28: 2026-10-28 first slice built: src/nemik/data/waypoint.schema.json (core of 5 required keys plus typed optional keys; $defs/full adds the 14 keys the writer stamps), tests/test_waypoint_schema.py (6 tests), docs/typed-boundary.md. Measured against the fleet before it was written: all 1183 cards of this queue pass $defs/full with 0 refusals; the 19 fixture queues' cards pass the core; the first draft required blocked_kind and three older cards lack it, which the test found, so it is optional in the core and required in full. NOT built: the ABC and accessors (src/nemik/waypoint.py), the schema/accessor drift test, any consumer migration | 2026-10-28: 2026-10-28 Codon probes for the ABC half (stage tree, pinned Codon): 'from abc import ABC, abstractmethod' fails with 'no module named abc'; 'from typing import Protocol' fails with 'cannot import name Protocol from typing'; a PLAIN base class whose methods raise NotImplementedError, with subclasses overriding them, compiles (rc 0). Every top-level src/nemik module is in the Codon census (tools/codon_census.py globs src/nemik/*.py), and a module that fails adds a codon-baseline entry, a ratchet rise. So an abc.ABC cannot live in src/nemik without a rise. The ruling's intent (one declared shape, typed accessors consumers type against) can be met with a plain interface class; mypy then does not enforce abstractness. The operator's wording was ABC; this is the tension between that and 'all Python Codon-compatible' (standing 4), put to github-8f | 2026-10-28: 2026-10-28 CORRECTION of attribution (github-8f asked for the record, and found 0 hits in the host transcript): the words 'ABC and JSON SCHEMA' are NOT host line 107476 (that line is the operator's separate ruling to audit the ratchet targets for larger paydown steps, which is this card's other warrant). They are a human message in nemik's OWN session transcript (session ca6f3699-66ac-4ffa-a3ca-6ececbab791f, line 138830, uuid 31bdf58f-b473-4b05-a566-1295693efbe7, 2026-10-27T20:11:45Z): verbatim, with the quoted lead-in from my report: '`cannot see the json and tomllib document shapes` ... This is what ABC and JSON SCHEMA are for.' Attached as a warrant. The words name ABC (an abstract base class) and JSON Schema; they do not say the abc.ABC module, so a Codon-clean plain interface class in src/nemik plus the real abc and jsonschema drift test in tests/ is a reading of them, not a certain one. My earlier notes (W1176 re-design entry, docs/typed-boundary.md in stack608) cite the wrong line and the doc is corrected in the next stack | 2026-10-28: 2026-10-28 github-8f (a peer's word, who read the ruling raw): the ruling (session line 138830) names BOTH families, 'the json and tomllib document shapes'; stack608 covers the queue JSON only, so the TOML half is OWED and not dropped. Inventory read: 17 src/nemik modules import tomllib (calendars, check, adoption, blocks, health, pacing, rank, pins, warrantdebt, starved, vtodo, idle, warrants, score, tiers, workflows, salience); the packaged TOML documents are src/nemik/data/rank-weights.toml (tables read by health, pacing, starved, rank, salience, tiers and others), bands.toml, connectors.toml and workflows.toml; the host-side config documents are ~/.config/nemik/calendars.toml and ics.toml (calendars.py, vtodo.py). JSON Schema validates a parsed TOML mapping as well as parsed JSON | 2026-10-28: landed a489573 (the waypoint schema) and 4cf10bc (the typed accessors, nemik.waypoint) in stack611, pushed, gate green. Built: schema (1183 live cards pass full), TreeWaypoint accessors (oracle over 19 fixture queues), drift test, real abc check in tests, docs/typed-boundary.md. OWED: the TOML half of the ruling (a schema per document, rank-weights.toml first), the first consumer migration (wake.py), and schemas for the other JSON documents | 2026-10-28: G0 (precommit, 2026-10-28): this tick advances W1176 (TOML half). Actuator: a JSON Schema for rank-weights.toml plus a test in tests/ and a Codon-clean accessor, built in a scratch stack. Sensor: bazel test of the new test target, pycheck --changed clean, ratchets mypy 4227 / ruff 2416 not rising. Expected: schema measured against the live file with 0 refusals; no baseline entry added. | 2026-10-28: 2026-10-28: landed aed9831 (pushed, gate green): rank-weights.schema.json plus tests/test_rank_weights_schema.py, the TOML half's first document. Owed: an accessor (health.py first), then bands, connectors, workflows.",
       "issued_at": "2026-10-27T13:51:57Z",
       "minted_during": "interrupt",
       "caused_by": "W1014",
-      "last_worked": "2026-10-28T12:11:35Z",
+      "last_worked": "2026-10-28T13:19:17Z",
       "ticks_blocked": 0,
       "size_class": "medium",
       "manifest": [
@@ -28835,21 +28836,21 @@
     {
       "symbol": "W1211",
       "title": "Health, Pace, Pin, Letter and Starved gain class docstrings, so ruff falls 2416 to 2411 (paydown)",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:ruff-baseline.json"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-28: 2026-10-28: landed 8c3b35c (pushed, gate green): five class docstrings, ruff 2416 to 2411",
       "issued_at": "2026-10-28T12:15:36Z",
       "minted_during": "tick",
       "caused_by": "W1196",
-      "last_worked": "2026-10-28T12:15:44Z",
+      "last_worked": "2026-10-28T13:19:23Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261028T131923Z",
       "manifest": [
         "src/nemik/health.py",
         "src/nemik/pacing.py",
@@ -28863,6 +28864,33 @@
     {
       "symbol": "W1212",
       "title": "Critical, Fire, Bands, Guarantees, Weights, Composition and Holder gain class docstrings, so ruff falls 2411 to 2404 (paydown)",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "file:ruff-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-28: 2026-10-28: landed 792f622 (pushed, gate green): seven class docstrings, ruff 2411 to 2404",
+      "issued_at": "2026-10-28T12:17:29Z",
+      "minted_during": "tick",
+      "caused_by": "W1196",
+      "last_worked": "2026-10-28T13:19:24Z",
+      "ticks_blocked": 0,
+      "completed": "20261028T131924Z",
+      "manifest": [
+        "src/nemik/critical.py",
+        "src/nemik/score.py",
+        "src/nemik/rank.py",
+        "src/nemik/overlaps.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W1213",
+      "title": "ref_of, umbrellas, overlaps, spool_path and label gain docstrings with Returns sections, so ruff falls 2404 to 2399 (paydown)",
       "status": "working",
       "enables": [],
       "touches": [
@@ -28872,20 +28900,63 @@
       "blocked_kind": null,
       "next_bounded_step": "",
       "evidence": "",
-      "issued_at": "2026-10-28T12:17:29Z",
-      "minted_during": "tick",
+      "issued_at": "2026-10-28T12:41:48Z",
+      "minted_during": "interrupt",
       "caused_by": "W1196",
-      "last_worked": "2026-10-28T12:17:38Z",
+      "last_worked": "2026-10-28T14:08:52Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
-        "src/nemik/critical.py",
-        "src/nemik/score.py",
         "src/nemik/rank.py",
         "src/nemik/overlaps.py",
+        "src/nemik/metrics.py",
         "ruff-baseline.json"
       ],
       "size_class": "small"
+    },
+    {
+      "symbol": "W1215",
+      "title": "Adopt the reviewed-loop in nemik: one persistent warm reviewer subagent over this session's control law, G0 before each tick-open, G0 and G1 sent after each tick-close, retro JSON added with --add-retro, a cold reviewer at each fixpoint",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-10-28: G0 (precommit, written before the tick this card advances; the reviewer did not yet exist for the earlier rounds of 2026-10-28): this tick advances W1215 (spawn the warm reviewer) and W846 (stack619 entry 1) with W1213. Actuator: Agent spawn of one general-purpose reviewer seeded with the reviewed-loop and retrospective-ritual skills; mikemol-commit --stack stack619. Sensor: the reviewer's first reply naming both skills; --in-gate lists stack619; the gate output. Expected: the reviewer replies 'ready' without touching the repo; stack619 lands with ruff 2404 to 2399 and W846 stays open.",
+      "issued_at": "2026-10-28T14:18:51Z",
+      "minted_during": "interrupt",
+      "caused_by": "operator",
+      "last_worked": "2026-10-28T14:19:08Z",
+      "ticks_blocked": 0,
+      "warrants": [
+        {
+          "@context": {
+            "prov": "http://www.w3.org/ns/prov#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "mtools": "urn:mtools:warrant#"
+          },
+          "@id": "urn:nemik:nemik/W1215",
+          "prov:wasDerivedFrom": {
+            "@id": "urn:claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e#eda0ad33-4b2a-4454-aa2c-85d405d5158f",
+            "@type": "prov:Entity",
+            "prov:generatedAtTime": {
+              "@value": "2026-10-28T14:14:20.126Z",
+              "@type": "xsd:dateTime"
+            },
+            "prov:wasAttributedTo": {
+              "@id": "urn:nemik:operator",
+              "@type": "prov:Agent"
+            },
+            "prov:wasGeneratedBy": {
+              "@id": "urn:nemik:utterance/eda0ad33-4b2a-4454-aa2c-85d405d5158f",
+              "@type": "prov:Activity"
+            },
+            "mtools:line": 113731,
+            "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify eda0ad33-4b2a-4454-aa2c-85d405d5158f --claim Nemik needs a nudge to spawn the reviewer loop. --line 113731"
+          }
+        }
+      ]
     }
   ],
   "residue": [
@@ -29070,6 +29141,13 @@
       "dropped_at": "2026-10-27T21:33:06Z",
       "reason": "Premise false: the pace's 156 for HEAD 19e6ac6 matches the committed baseline, which holds 78 module entries and the ratchet appears to count two modes (as_written, stripped) per module, 2 x 78 = 156. I claimed HEAD held 157 without ever counting it. No tree read exists. After e3d539f removed roundcli there are 77 entries, so the next pace should read 154; if it still reads 156 or 155, reopen as a new card citing that reading",
       "recoverable": true
+    },
+    {
+      "symbol": "W1214",
+      "title": "metrics.spool_path and metrics.label gain docstrings with Returns sections, so ruff falls 2401 to 2399 (paydown)",
+      "dropped_at": "2026-10-28T14:08:30Z",
+      "reason": "folded into W1213: stack618 was built on stack617's unlanded baseline (617 was refused by test_pdf), so the two paydowns ship as one entry whose baseline is the sum, 2399",
+      "recoverable": true
     }
   ],
   "job_id": "1d7fe6d0",
@@ -29149,13 +29227,13 @@
       "lapse_ledgered": true
     },
     {
-      "tag": "file:docs/climate-interventions.md!w",
+      "tag": "file:tests/test_wcag_render.py!w",
       "holder": "claude-nemik",
-      "waypoint": "W750",
-      "base_sha": "4cf10bc2cca3ee653a4bb995fdd674275d6ab59e",
-      "taken_at": "2026-10-28T12:12:27Z",
-      "renewed_at": "2026-10-28T12:12:27Z",
-      "expires_at": "2026-10-28T12:42:27Z"
+      "waypoint": "W846",
+      "base_sha": "b1d744dc3d3da5a5d00a899c70fecdb30935a191",
+      "taken_at": "2026-10-28T14:08:33Z",
+      "renewed_at": "2026-10-28T14:08:33Z",
+      "expires_at": "2026-10-28T14:38:33Z"
     }
   ],
   "advice": [
