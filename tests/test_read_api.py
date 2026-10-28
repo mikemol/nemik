@@ -9,6 +9,7 @@ import json
 import threading
 from collections.abc import Iterator
 from pathlib import Path
+from types import ModuleType
 
 import pytest
 
@@ -40,7 +41,9 @@ def served(built: Path) -> Iterator[str]:
     httpd.shutdown()
 
 
-def _client_module():  # tools/ is not a package: load the example as the reader would run it
+def _client_module() -> (
+    ModuleType
+):  # tools/ is not a package: load the example as the reader would run it
     spec = importlib.util.spec_from_file_location(
         "nemik_client", ROOT / "tools" / "nemik_client.py"
     )

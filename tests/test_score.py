@@ -59,7 +59,7 @@ def test_the_floor_names_critical_so_a_ready_velocity_card_is_not_skipped() -> N
         (vec(C="L"), "normal"),  # local, some impact: no rule -> unmatched
     ],
 )
-def test_band_table(v, want) -> None:
+def test_band_table(v: str, want: str) -> None:
     assert band(v, B)[0] == want
 
 

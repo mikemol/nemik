@@ -3052,3 +3052,10 @@
 2026-10-28T17:33:15Z  status W1230 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-28T17:41:15Z  status W1225 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-28T18:03:29Z  status W1179 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T18:15:10Z  tick  W1179 advanced  mechanize "codon paydown: the cause of baselinetop's compile blow-up found (raise from None in tracker.number), fixed, entry removed; the rewrap tool's first run (ruff -58) rides in the same stack626 [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T18:40:09Z  interrupt W1233 minted    -         "Four untyped test definitions are annotated (capsys twice, a parametrized pair, a module loader), so mypy and ruff fall (paydown)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1196
+2026-10-28T18:40:24Z  status W1233 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T18:47:22Z  status W1179 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T18:47:24Z  status W1225 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T18:49:45Z  status W1225 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T18:49:48Z  status W1179 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

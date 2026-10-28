@@ -6,6 +6,7 @@ import json
 from datetime import UTC, datetime
 from pathlib import Path
 
+import pytest
 from rdflib import Graph
 
 from nemik.adapter import queue_graph
@@ -78,7 +79,9 @@ def test_a_bad_alarm_is_reported_not_fatal(tmp_path: Path) -> None:
     )
 
 
-def test_alarms_nudge_delivers_each_firing_once(tmp_path: Path, capsys) -> None:
+def test_alarms_nudge_delivers_each_firing_once(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
     """nemik:W167: --alarms --nudge prints a firing on the first run only, sharing the nudges state."""
     from nemik.wake import main
 

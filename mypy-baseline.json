@@ -298,9 +298,7 @@
   "misc": 78
  },
  "tests/test_read_api.py": {
-  "misc": 17,
-  "no-untyped-call": 1,
-  "no-untyped-def": 1
+  "misc": 17
  },
  "tests/test_ruler_table.py": {
   "misc": 13
@@ -310,10 +308,6 @@
  },
  "tests/test_satisfied_edges.py": {
   "misc": 17
- },
- "tests/test_score.py": {
-  "misc": 3,
-  "no-untyped-def": 1
  },
  "tests/test_script_registries.py": {
   "misc": 14
@@ -360,8 +354,7 @@
   "misc": 12
  },
  "tests/test_wake_alarms.py": {
-  "misc": 45,
-  "no-untyped-def": 1
+  "misc": 45
  },
  "tests/test_wake_nudge.py": {
   "misc": 5
@@ -381,10 +374,6 @@
   "misc": 65,
   "no-untyped-def": 6,
   "type-arg": 1
- },
- "tests/test_work.py": {
-  "misc": 2,
-  "no-untyped-def": 1
  },
  "tests/test_workflows.py": {
   "misc": 57

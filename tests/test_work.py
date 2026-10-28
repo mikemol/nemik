@@ -6,8 +6,12 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.work import blockers, main, plan, working
+
+if TYPE_CHECKING:
+    import pytest
 
 
 def _queue(tmp_path: Path) -> Path:
@@ -41,7 +45,7 @@ def test_landed_blockers_are_done_or_dropped_and_the_rest_are_open(
 
 
 def test_a_card_with_open_blockers_is_refused_and_a_landed_one_goes_through(
-    tmp_path: Path, capsys
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
     state = _queue(tmp_path)
     assert main(["W4", "--state", str(state), "--dry-run"]) == 2
