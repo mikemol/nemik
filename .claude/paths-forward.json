@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1198,
+  "counter": 1201,
   "waypoints": [
     {
       "symbol": "W1",
@@ -18720,22 +18720,23 @@
     {
       "symbol": "W846",
       "title": "test_modes failed once with 'Uncaught ReferenceError: popLater is not defined' at page load, then passed on rerun of the same tree: find why a head script's definition can be missing when index.html's wiring runs",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [
         "file:tests/test_wcag_render.py!w"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Wait for the next popLater occurrence and read the requests refused or failed list in its PageBrokenError, then confirm or refute W1060's pick-then-bind argument from it",
-      "evidence": "2026-10-22: 2026-10-22: not reproduced: //:test_modes x15 concurrent runs all pass (bazel --runs_per_test=15). The server is threaded and reads each file whole, popLater is a hoisted declaration in cards.js, so a missing definition means cards.js did not load (a silent script-load failure). The first failure's log was overwritten by the passing rerun. Add a requestfailed and response-status listener to the vendored webpage helper (W717) so the next occurrence names the file | 2026-10-23: 2026-10-23 second occurrence: the commit gate for W873 failed //:test_sources_resolve with 'Uncaught ReferenceError: popLater is not defined' at page load, all four tests of the module at once (they share one module-scoped page); popLater is defined in cards.js, so cards.js had not run when the inline script did. Same error as the first (test_modes, 2026-10-22). Neither change under test touches the page. Reproduction attempt: bazel test //:test_sources_resolve --runs_per_test=40 --local_test_jobs=40 | 2026-10-23: 2026-10-23: not reproduced: //:test_sources_resolve x40 with --local_test_jobs=40 all pass, so load alone does not trigger it. Both occurrences were inside the commit gate (stack320, stack343) on its shared staged worktree; the repro ran in the real checkout. Next: capture the failed request when it recurs (a requestfailed and response-status listener in the page helper), or run the repro inside the gate worktree | 2026-10-27: 2026-10-27 eleventh instance, in the stack557 gate (W1152/W1150, which touch no web file): tests/test_wcag_render.py::test_tab_visits_the_pages_controls_in_reading_order, 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined', 81 s, one of 433 targets, 432 passed. It adds no fact: this test opened its page by hand (new_page, watch, goto, until) and so bypassed the harness (tests/webpage.py opened_page) that appends the requests that failed or got an error status, which W1060 relies on to prove or refute the pick-then-bind argument. So this recurrence neither supports nor refutes efb924c. Fix, first entry of the next stack: _page_rows goes through webpage.evaluated, i.e. session/opened_page, so the next occurrence names the asset. The flake rule applies: no resubmit on this refusal. | 2026-10-27: c4f0e23 landed: test_wcag_render opens its page through webpage.evaluated, so the next popLater occurrence names the failed asset. W846 stays open until one does. Read the next occurrence's 'requests refused or failed' list: cards.js or a late script confirms W1060's argument, none refutes it.",
+      "next_bounded_step": "stack598 entry 1 lands the diagnostic (launched_page names failed requests). W846 STAYS OPEN past it (loop prompt line 27, github-8f 2026-10-28): the card closes only on a proof, a forced-interleaving test that makes cards.js not load while the inline script runs and a fix that holds under it, or on a trace of a real occurrence. Next: after a popLater occurrence names its asset, or from the code, write the interleaving witness; then test_viewstate through the recording harness",
+      "evidence": "2026-10-22: 2026-10-22: not reproduced: //:test_modes x15 concurrent runs all pass (bazel --runs_per_test=15). The server is threaded and reads each file whole, popLater is a hoisted declaration in cards.js, so a missing definition means cards.js did not load (a silent script-load failure). The first failure's log was overwritten by the passing rerun. Add a requestfailed and response-status listener to the vendored webpage helper (W717) so the next occurrence names the file | 2026-10-23: 2026-10-23 second occurrence: the commit gate for W873 failed //:test_sources_resolve with 'Uncaught ReferenceError: popLater is not defined' at page load, all four tests of the module at once (they share one module-scoped page); popLater is defined in cards.js, so cards.js had not run when the inline script did. Same error as the first (test_modes, 2026-10-22). Neither change under test touches the page. Reproduction attempt: bazel test //:test_sources_resolve --runs_per_test=40 --local_test_jobs=40 | 2026-10-23: 2026-10-23: not reproduced: //:test_sources_resolve x40 with --local_test_jobs=40 all pass, so load alone does not trigger it. Both occurrences were inside the commit gate (stack320, stack343) on its shared staged worktree; the repro ran in the real checkout. Next: capture the failed request when it recurs (a requestfailed and response-status listener in the page helper), or run the repro inside the gate worktree | 2026-10-27: 2026-10-27 eleventh instance, in the stack557 gate (W1152/W1150, which touch no web file): tests/test_wcag_render.py::test_tab_visits_the_pages_controls_in_reading_order, 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined', 81 s, one of 433 targets, 432 passed. It adds no fact: this test opened its page by hand (new_page, watch, goto, until) and so bypassed the harness (tests/webpage.py opened_page) that appends the requests that failed or got an error status, which W1060 relies on to prove or refute the pick-then-bind argument. So this recurrence neither supports nor refutes efb924c. Fix, first entry of the next stack: _page_rows goes through webpage.evaluated, i.e. session/opened_page, so the next occurrence names the asset. The flake rule applies: no resubmit on this refusal. | 2026-10-27: c4f0e23 landed: test_wcag_render opens its page through webpage.evaluated, so the next popLater occurrence names the failed asset. W846 stays open until one does. Read the next occurrence's 'requests refused or failed' list: cards.js or a late script confirms W1060's argument, none refutes it. | 2026-10-28: 2026-10-28 twelfth and thirteenth instances, ONE gate (stack595: W1199, docstring rewraps in importer, issues and health, no web file): //:test_svgexport (test_the_svg_keeps_the_canvas_cards_edges_dashes_and_contrast, 21 s) and //:test_viewstate shard 2 of 3 (1 of 3 runs failed, 81 s) both 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined'; 441 of 443 passed. Read from the logs: test_svgexport waits through mikemol.webpage.page.load -> until, not through tests/webpage.py's recording opened_page, so its PageBrokenError carries NO requests-failed list; test_viewstate likewise. So again the asset is unnamed and W1060's argument is neither supported nor refuted. Two pages failing in one gate points at the shared server or host (a server that stops answering mid-load), not at a test. The flake rule applies: stack595 is NOT resubmitted unchanged | 2026-10-28: 2026-10-28 fix built: tests/webpage.py launched_page now records requestfailed and status>=400 responses and re-raises a PageBrokenError from load with 'requests refused or failed: [...]'; test_svgexport opens its page through it. Queued as stack598 entry 1 (with W1199, W1200, W1197, W1201 after it). Also: stack596 (W1200+W1197 alone) is in the gate and will be refused by the ratchet (its baseline 2513 lacks W1199's source), a failure predicted in advance but not withdrawable (inflight, leads a joined stack); stack597 was withdrawn. test_viewstate still waits without the failed-request list",
       "issued_at": "2026-10-22T14:53:40Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W703",
-      "last_worked": "2026-10-27T07:09:58Z",
+      "last_worked": "2026-10-28T03:16:09Z",
       "ticks_blocked": 0,
       "manifest": [
-        "tests/test_wcag_render.py"
+        "tests/webpage.py",
+        "tests/test_svgexport.py"
       ],
       "size_class": "small",
       "completed": null
@@ -28318,7 +28319,7 @@
     {
       "symbol": "W1193",
       "title": "nemik's gate emits per-target CPU seconds: gate_staged.sh runs bazel test with a build-events file and calls mikemol-gate-targets nemik after it, so luthen's gate_cost carries nemik",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W1136"
       ],
@@ -28327,37 +28328,37 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Land the fallback; the next gate that executes tests (any change to a tested module) is the reading: its output should show no 'no measurements sent' line, and luthen's gate_cost should gain nemik after its next export",
-      "evidence": "2026-10-28: landed cd48fcc (pushed, gate green): gate_staged.sh passes --build_event_json_file and runs mikemol-gate-targets nemik after bazel test, exit status unchanged. NOT yet read: that the gate sends (the run that carried this change used the old script) | 2026-10-28: 2026-10-27 first gate with the new script (stack591, dfec698): printed 'gate_staged: mikemol-gate-targets not built or no build events; no measurements sent'. Read: bazel reported 'Build Event Protocol files produced successfully' (so the file was written), 0 of 443 tests executed (all cached, which the tool never emits), and the worktree's .venv link points at bazel-bin/.venv, which has no bazel-bin in the worktree after the gate (ls: no such file), so the tool path under the worktree did not resolve. Fix: fall back to the real root's built venv (which has mikemol-gate-targets). A fully cached run will still send nothing by design; the reading needs a gate that executes tests",
+      "next_bounded_step": null,
+      "evidence": "2026-10-28: landed cd48fcc (pushed, gate green): gate_staged.sh passes --build_event_json_file and runs mikemol-gate-targets nemik after bazel test, exit status unchanged. NOT yet read: that the gate sends (the run that carried this change used the old script) | 2026-10-28: 2026-10-27 first gate with the new script (stack591, dfec698): printed 'gate_staged: mikemol-gate-targets not built or no build events; no measurements sent'. Read: bazel reported 'Build Event Protocol files produced successfully' (so the file was written), 0 of 443 tests executed (all cached, which the tool never emits), and the worktree's .venv link points at bazel-bin/.venv, which has no bazel-bin in the worktree after the gate (ls: no such file), so the tool path under the worktree did not resolve. Fix: fall back to the real root's built venv (which has mikemol-gate-targets). A fully cached run will still send nothing by design; the reading needs a gate that executes tests | 2026-10-28: landed 15d9bd6 (pushed, gate green): gate_staged.sh falls back to the real root's venv for mikemol-gate-targets. The gate that carried it ran the OLD script (no emit line either way). Reading still owed: the next gate that executes tests | 2026-10-28: 2026-10-28 read in stack594's gate log (landed ec56d66): 'INFO: Build Event Protocol files produced successfully.' then 'gate targets: 440 fresh of 443, sent=True', then 'gate_staged: green'. So the gate now sends per-target CPU measurements for the targets it ran; 3 cached were skipped by design. Landed: cd48fcc, 15d9bd6. Still to read: a nemik entry in luthen's gate_cost after its next export (W1136's input)",
       "issued_at": "2026-10-28T00:15:01Z",
       "minted_during": "interrupt",
       "caused_by": "W1136",
-      "last_worked": "2026-10-28T00:48:10Z",
+      "last_worked": "2026-10-28T02:06:03Z",
       "ticks_blocked": 0,
       "manifest": [
         "tools/gate_staged.sh"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261028T020603Z"
     },
     {
       "symbol": "W1194",
       "title": "nemik/__init__.py loses six ruff findings: its long lines wrapped, its predicate docstring made imperative with a Returns section, and its warning written with sys.stderr.write, so ruff falls 2542 to 2536 (paydown)",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:ruff-baseline.json"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "stack593 queued first, then W1193's fallback entry; test_editable passes; ratchet reads ruff 2536 against the lowered baseline",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-28: landed 1378791 (pushed, gate green): nemik/__init__.py loses six ruff findings, ruff 2542 to 2536",
       "issued_at": "2026-10-28T00:50:42Z",
       "minted_during": "tick",
       "caused_by": "W1014",
-      "last_worked": "2026-10-28T00:50:53Z",
+      "last_worked": "2026-10-28T01:30:53Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261028T013053Z",
       "manifest": [
         "src/nemik/__init__.py",
         "ruff-baseline.json"
@@ -28367,21 +28368,21 @@
     {
       "symbol": "W1195",
       "title": "marks.py and realize.py lose four mypy findings: json.loads is read as an opaque object and narrowed, and the empty list is annotated, so mypy falls 4448 to 4444 (paydown)",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:mypy-baseline.json"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "stack594 queued behind stack593; bazel test //:test_realize //:test_marks is the check; mypy ratchet reads 4444 against the lowered baseline",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-28: landed ec56d66 (pushed, gate green): marks.py and realize.py lose four mypy findings, mypy 4448 to 4444",
       "issued_at": "2026-10-28T01:02:13Z",
       "minted_during": "tick",
       "caused_by": "W1014",
-      "last_worked": "2026-10-28T01:02:22Z",
+      "last_worked": "2026-10-28T02:06:04Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261028T020604Z",
       "manifest": [
         "src/nemik/marks.py",
         "src/nemik/realize.py",
@@ -28441,7 +28442,7 @@
     {
       "symbol": "W1197",
       "title": "The pace file header names the build that computed it: nemik-hostroot --pace writes {as_of, window, build}, build the installed nemik's commit sha, so a verdict is self-describing",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [
         "file:src/nemik/pacepublish.py",
@@ -28449,19 +28450,19 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Asked by luthen-observability-ab (a peer's word) 2026-10-27 so a verdict names its build. Read first: where the header is written (pacewrite.pace_text) and read (pacepublish.read_pace) and that the reader tolerates a third key; where a sha is available at run time (importlib.metadata direct_url.json vcs_info.commit_id for a git install; not available for an editable one, so write 'unknown', never a guess). Do NOT ship before luthen confirms its egress gate (W1618) accepts the new header shape: tell luthen-observability-ab the exact new header line first. Codon: pacewrite may be under the census; probe before importing importlib.metadata (witnesses_cli is in the baseline for it), so take the sha in hostroot_cli (not under the census) and pass it as a string",
+      "next_bounded_step": "stack596 queued: build_sha() reads direct_url.json vcs_info.commit_id (40 lower-case hex) else 'unknown'; with_build adds it as the header's third key in _judge. Luthen's egress gate accepts it (luthen-observability:W1711, 328883a0); luthen reads the first file that carries build after it ships. Read: the first pace file carrying build and that the gate kept it",
       "evidence": "",
       "issued_at": "2026-10-28T01:15:24Z",
       "minted_during": "interrupt",
       "caused_by": "W1196",
-      "last_worked": "2026-10-28T01:15:38Z",
+      "last_worked": "2026-10-28T02:09:35Z",
       "ticks_blocked": 0,
       "manifest": [
-        "src/nemik/pacepublish.py",
-        "src/nemik/pacewrite.py",
-        "tests/test_pace_publish.py"
+        "src/nemik/hostroot_cli.py",
+        "tests/test_pace_build.py"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "completed": null
     },
     {
       "symbol": "W1198",
@@ -28472,17 +28473,91 @@
         "file:tools/gate_staged.sh"
       ],
       "blocked_on": [
-        "mtools-ad: emit the ratchet value after the gate's verdict, or tag it with the gate key so the pace counts only landed ones (asked 2026-10-28 with two readings; no mtools card cited yet, mtools-ad to name one)"
+        "mtools:W1980"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "Read where the emit runs in the gate sequence (mtools' gate hook; nemik's gate_staged.sh runs the ratchet then bazel test) and whether it is sent before the verdict; the fix is the emitter's to send after the verdict, or the pace's to count only samples whose landing exists (a landing row); ask mtools-ad; witness: a refused stack that lowers a ratchet leaves the series unchanged",
-      "evidence": "2026-10-28: 2026-10-27 instance, read: --in-gate --json shows stack593 (W1194, W1193; key 1793148659731848899) inflight since 1793148661 (00:51:01Z) and git log shows HEAD still dfec698, nothing landed; luthen-observability-ab (a peer's word, from the store) reports mikemol.ratchet.value ruff 2536 at 1793149137.4 (00:58:57Z) and mypy 4448. 2536 is the value of the STAGED tree of stack593 (W1194's ruff fall), so it was sent mid-gate, before any verdict. An earlier gate log shows the line 'ratchet emit: 5 ratchet(s), sent=True' printed before the final bazel run (stack582's output, read). If stack593 is refused, a refused fall stays in the series. This is the hypothesis I recorded and dropped as W1192 on a wrong premise; the evidence is new. Related: W1196 (the pace reads these samples as landings) | 2026-10-28: 2026-10-28 sent to mtools-ad with the two readings. github-8f (a peer's word) confirms from two host readings: stack593 inflight at 00:46Z and about 01:22Z, HEAD dfec698 at both",
+      "evidence": "2026-10-28: 2026-10-27 instance, read: --in-gate --json shows stack593 (W1194, W1193; key 1793148659731848899) inflight since 1793148661 (00:51:01Z) and git log shows HEAD still dfec698, nothing landed; luthen-observability-ab (a peer's word, from the store) reports mikemol.ratchet.value ruff 2536 at 1793149137.4 (00:58:57Z) and mypy 4448. 2536 is the value of the STAGED tree of stack593 (W1194's ruff fall), so it was sent mid-gate, before any verdict. An earlier gate log shows the line 'ratchet emit: 5 ratchet(s), sent=True' printed before the final bazel run (stack582's output, read). If stack593 is refused, a refused fall stays in the series. This is the hypothesis I recorded and dropped as W1192 on a wrong premise; the evidence is new. Related: W1196 (the pace reads these samples as landings) | 2026-10-28: 2026-10-28 sent to mtools-ad with the two readings. github-8f (a peer's word) confirms from two host readings: stack593 inflight at 00:46Z and about 01:22Z, HEAD dfec698 at both | 2026-10-28: 2026-10-28 stack593's own log (read): 'ratchet emit: 5 ratchet(s), sent=True' is line 21 of 47, before the final bazel run and before the COMMITTED lines, confirming the emit precedes the verdict. This gate happened to pass, so the sent 2536 landed; a refused one would not | 2026-10-28: 2026-10-28 live instance (luthen-observability-ab's read of the 01:34:23Z pace, build dfec698, via github-8f): ruff 'observed 6, value 2536' was credited while stack593 was still in the gate (inflight at 00:46Z and about 01:22Z, HEAD dfec698). Stack593 then landed as 1378791, so this credit proved true; had it been refused the window would have kept a fall that never happened. Same read: codon-baseline.json now reads behind (observed 0, required 1), its window flat | 2026-10-28: 2026-10-28 mtools-ad (a peer's word) claimed it as mtools:W1980: emit AFTER the verdict, from the landed tree (the pre-commit hook's ratchet emit step and the stack path in commit_kata move to after COMMITTED), not tag-and-filter; not started, two hooks stacks ahead of it. Witness stays mine: a refused stack that lowers a ratchet leaves mikemol.ratchet.value unchanged; it moves only when the commit lands | 2026-10-28: 2026-10-28 verdict for the live instance: stack593 LANDED, not refused: git log shows 1378791 (W1194) and 15d9bd6 (W1193), both in main and pushed (status: main level with origin/main). Why a host read missed it: both commits carry the committer date 2026-10-27T20:51:01-0400 = 00:51:01Z, which is the gate's BEGIN time (--in-gate began_ns 1793148661 = 00:51:01Z), not the landing time (about 01:5xZ, after the 01:34Z pace). So a 'commits in the last 45 min' hook dates a stacked commit by when its gate began, and a stack that gates for an hour looks absent until much later. The pace credit of 6 at 01:34Z preceded the landing but the landing then happened, so no false credit survived this time | 2026-10-28: 2026-10-28 CORRECTION of my 'live instance' entries above (github-8f read the reflog; I re-read it): git reflog show main gives 15d9bd6 (stack593) at main@{2026-10-27 21:30:06 -0400} = 01:30:06Z and ec56d66 (stack594) at 22:05:05 -0400 = 02:05:05Z. So the 01:34:23Z pace crediting ruff 'fell 6, 2536' FOLLOWED the landing: it was not an unlanded credit, and my line that it 'preceded the landing' read committer dates, which are the gate's BEGIN time, not the landing time. The real live instance is the 02:34Z pace, 'ruff fell 24, 2518 left' (github-8f, via luthen): 2518 is stack595's staged value (W1199); stack595 was REFUSED by the popLater flake (log read: REFUSED ... HEAD is still ec56d66), so that fall never landed and the store still holds a ruff sample 2518 that HEAD does not. HEAD's ruff is 2536. Witness for mtools:W1980 stands: recomputing 02:34 with land-time crediting gives ruff 2536, not 2518",
       "issued_at": "2026-10-28T01:20:23Z",
       "minted_during": "interrupt",
       "caused_by": "W1196",
-      "last_worked": "2026-10-28T01:27:15Z",
+      "last_worked": "2026-10-28T03:10:08Z",
       "ticks_blocked": 0,
       "completed": null
+    },
+    {
+      "symbol": "W1199",
+      "title": "importer.py, issues.py and health.py lose 18 ruff findings: their module docstrings rewrapped to the line limit and two predicate docstrings made imperative, so ruff falls 2536 to 2518 (paydown)",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:ruff-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "stack595 queued behind stack594; bazel test //:test_importer //:test_issues //:test_health is the check (the direct run's two importer failures are the python3.14 script lookup); ruff ratchet reads 2518 against the lowered baseline",
+      "evidence": "",
+      "issued_at": "2026-10-28T01:39:48Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1196",
+      "last_worked": "2026-10-28T01:39:58Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/importer.py",
+        "src/nemik/issues.py",
+        "src/nemik/health.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W1200",
+      "title": "cachestore.py loses five ruff findings: its module docstring rewrapped, two docstring first lines shortened or made imperative, so ruff falls 2518 to 2513 (paydown)",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:ruff-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "stack596 entry 1, W1197 entry 2; the submit gate refused a stack that lowered no owed ratchet, so this paydown rides first; test_cachestore passes in a direct run; ruff reads 2513 against the written baseline",
+      "evidence": "",
+      "issued_at": "2026-10-28T02:13:44Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1196",
+      "last_worked": "2026-10-28T02:14:27Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/cachestore.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W1201",
+      "title": "test_layout.py loses three mypy findings: the dict literal handed to json.dumps is a typed variable, so mypy falls 4444 to 4441 (paydown)",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:mypy-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "The mypy bar (109 over ten landings) is not reachable by hand edits of this kind: ~11 findings per landing against ~3 per landing so far. Candidates for a landing-sized mypy fall: (1) a typed accessor over nemik.tracker for one heavy file (wake: its liveness and alarm dicts), proving the W1176 shape on a real file; (2) stubs for pyshacl and rdflib calls (a handful of misc each in shaclinc and others); (3) pytest decorator findings (overloaded function Any) which may be a config matter. Pick (1) on wake, and ask github-8f to put the mypy bar's reachability to the operator if (1) cannot land at ~11 per landing",
+      "evidence": "2026-10-28: 2026-10-28 census and one experiment, both read. Tally of the house mypy over src, tests and checks: 4372 findings, 4087 of them 'Expression has type/contains Any' (misc), 107 type-arg (bare generic), 48 explicit-any, 77 untyped defs; the heaviest files are serve (349), rank (270), test_layout (268), wake (245), history (175), blocks (135), calendars (133), apischema (125). EXPERIMENT: wake.py has 17 bare 'dict' annotations whose dict[Any, Any] cascades into most of its 245 findings; an AST codemod giving each dict[str, object] (scratch bare_dict.py) produced 30 NEW findings across wake, history, metrics and three wake tests (attr-defined, arg-type, index, call-overload), because callers index those dicts as if their values were typed; reverted, tree back at ruff 2513, mypy 4441. So bare-dict typing is not a mechanical win: each use must be narrowed, which is the W1176 typed-document boundary, not a codemod. The codemods that do pay (json.dumps literals) are exhausted: tests hold none now",
+      "issued_at": "2026-10-28T02:17:51Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1196",
+      "last_worked": "2026-10-28T02:39:43Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "tests/test_layout.py",
+        "mypy-baseline.json"
+      ],
+      "size_class": "small"
     }
   ],
   "residue": [
@@ -28744,6 +28819,15 @@
       "renewed_at": "2026-10-24T15:23:11Z",
       "expires_at": "2026-10-24T15:53:11Z",
       "lapse_ledgered": true
+    },
+    {
+      "tag": "file:tests/test_wcag_render.py!w",
+      "holder": "claude-nemik",
+      "waypoint": "W846",
+      "base_sha": "ec56d66bc4362e57bb860645452fef48ae4f9e5d",
+      "taken_at": "2026-10-28T02:54:54Z",
+      "renewed_at": "2026-10-28T02:54:54Z",
+      "expires_at": "2026-10-28T03:24:54Z"
     }
   ],
   "advice": [
