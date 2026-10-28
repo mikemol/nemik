@@ -26,7 +26,9 @@ exports_files(["pyproject.toml"])
         # with no failing assertion (424 of 425 passed), and passed in the next gate: load-bound, so it runs in three
         # nemik:W1140: test_cardtree passes alone in about 93 s, yet timed out at 300 s in the stack560 gate (22 minutes,
         # 433 of 434 passing, no failing assertion) beside a stack that touches no web file: load-bound, so it runs in three
-        shard_count = 6 if src == "tests/test_layout.py" else 3 if src in ("tests/test_pdf.py", "tests/test_modes.py", "tests/test_layout.py", "tests/test_viewer_settings.py", "tests/test_metrics_gating.py", "tests/test_rank_flow.py", "tests/test_viewstate.py", "tests/test_cardtree.py") else 1,
+        # nemik:W1140: test_publish takes about 160 s a run alone (over half its 300 s) and timed out at 300 s in the
+        # stack603 gate (443 of 444 passing, no failing assertion), passing alone three runs in a row: load-bound, so it runs in three
+        shard_count = 6 if src == "tests/test_layout.py" else 3 if src in ("tests/test_pdf.py", "tests/test_modes.py", "tests/test_layout.py", "tests/test_viewer_settings.py", "tests/test_metrics_gating.py", "tests/test_rank_flow.py", "tests/test_viewstate.py", "tests/test_cardtree.py", "tests/test_publish.py") else 1,
         args = ["$(rootpath " + src + ")", "-c", "$(rootpath pyproject.toml)"],
         data = [src, "tests/installed.py", "tests/webpage.py", "tests/pagetext.py", "tests/conftest.py", "tools/cpuline.py", ".claude/settings.json", "//tests/fixtures:fleet", "pyproject.toml", "ARCHITECTURE.md", "skills/nemik/SKILL.md", "docs/positioning.md", "deploy/deployment.yaml", "src/nemik/data/workflows.toml", "tools/nemik_client.py", "BUILD.bazel", "Containerfile", ".forgejo/workflows/build.yml"] + glob(["tests/corpus/**"]) + [ "src/nemik/data/shapes.ttl", "src/nemik/data/nemik.ttl", "src/nemik/data/wcag.rego", "src/nemik/data/run-row.schema.json", ":.venv", "@opa//file", "@use_of_colour_rego//file", "@chromium//:files", "@chromium//:chrome-headless-shell"]
             # nemik:W445: the JRE (52 MB) and MPXJ's jars go to the one test that reads with them
