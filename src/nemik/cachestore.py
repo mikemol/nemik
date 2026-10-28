@@ -79,7 +79,7 @@ def save(directory: Path, name: str = NAME) -> int:
     body = pickle.dumps(blob, protocol=pickle.HIGHEST_PROTOCOL)
     tmp = directory / f".{name}.{os.getpid()}"
     tmp.write_bytes(body)
-    os.replace(tmp, directory / name)
+    Path(tmp).replace(directory / name)
     return len(body)
 
 

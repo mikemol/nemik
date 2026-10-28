@@ -44,10 +44,10 @@ def pins(root: Path) -> list[Pin]:
             if path.parent.name.startswith("."):
                 continue  # a worktree of another repo, not a repo (see check.workstream_files)
             text = path.read_text(errors="replace")
-            for m in _PIN.finditer(text):
-                found.add(Pin(path.parent.name, m[1], m[2]))
-            for w in _WHEEL.finditer(text):
-                found.add(Pin(path.parent.name, "mtools", w[1]))
+            found.update(Pin(path.parent.name, m[1], m[2]) for m in _PIN.finditer(text))
+            found.update(
+                Pin(path.parent.name, "mtools", w[1]) for w in _WHEEL.finditer(text)
+            )
     return sorted(found)
 
 

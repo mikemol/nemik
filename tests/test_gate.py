@@ -52,7 +52,7 @@ def run(tool: str, root: Path, *argv: str) -> subprocess.CompletedProcess[str]:
     return installed.run(f"nemik-{tool}", "--root", str(root), *argv)
 
 
-@pytest.fixture
+@pytest.fixture()
 def root(tmp_path: Path) -> Path:
     # alpha:W1 waits on beta:W1, which claims it; alpha:W2 waits on beta with nothing claiming it.
     write_queue(

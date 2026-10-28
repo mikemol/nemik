@@ -69,7 +69,7 @@ def parse_claims(text: str) -> dict[tuple[str, str], Holder]:
             continue
         repo, _, tag = label.removeprefix(CLAIM).partition(":")
         fields = dict(f.split("=", 1) for f in rest.split() if "=" in f)
-        held[(repo, tag)] = Holder(fields.get("owner", "?"), fields.get("age", "?"))
+        held[repo, tag] = Holder(fields.get("owner", "?"), fields.get("age", "?"))
     return held
 
 

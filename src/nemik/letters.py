@@ -261,6 +261,7 @@ def apply_fold(
 
     Returns:
         one line per letter: the symbol minted, mtools' refusal, or the archive move.
+
     """
     import subprocess
     import sys

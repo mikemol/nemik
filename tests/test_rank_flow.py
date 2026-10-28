@@ -215,8 +215,8 @@ def test_the_view_ships_the_current_across_each_dependency(tmp_path: Path) -> No
         for e in doc["edges"]
         if "current" in e
     }
-    assert current[("W7", "W3")] == 1.0
-    assert current[("W4", "W1")] == current[("W4", "W2")] == 0.5
+    assert current["W7", "W3"] == 1.0
+    assert current["W4", "W1"] == current["W4", "W2"] == 0.5
 
 
 def test_the_view_weighs_the_edges_that_wait_on_the_operator(tmp_path: Path) -> None:

@@ -136,7 +136,7 @@
   "var-annotated": 1
  },
  "src/nemik/wake.py": {
-  "misc": 228,
+  "misc": 227,
   "no-any-return": 1,
   "no-untyped-def": 1,
   "redundant-expr": 1,
@@ -196,7 +196,7 @@
   "misc": 1
  },
  "tests/test_calendars.py": {
-  "misc": 49,
+  "misc": 48,
   "type-arg": 3
  },
  "tests/test_calwrite.py": {
@@ -237,7 +237,7 @@
   "misc": 25
  },
  "tests/test_gate.py": {
-  "misc": 17
+  "misc": 16
  },
  "tests/test_guarantees.py": {
   "misc": 18
@@ -278,7 +278,7 @@
   "type-arg": 1
  },
  "tests/test_mpxj.py": {
-  "misc": 3
+  "misc": 2
  },
  "tests/test_operator_rate.py": {
   "misc": 15,
@@ -359,9 +359,6 @@
  "tests/test_static_view.py": {
   "misc": 1
  },
- "tests/test_staticserve.py": {
-  "misc": 1
- },
  "tests/test_test_inputs.py": {
   "misc": 19
  },
@@ -392,7 +389,7 @@
   "type-arg": 1
  },
  "tests/test_web_render.py": {
-  "misc": 2
+  "misc": 1
  },
  "tests/test_withheld.py": {
   "misc": 62,

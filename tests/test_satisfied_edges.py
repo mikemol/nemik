@@ -40,9 +40,9 @@ def test_done_children_satisfy_their_edges(tmp_path: Path) -> None:
         ]
         for e in out["edges"]
     }
-    assert edges[("W2", "W1", "enables")] is True
-    assert edges[("W3", "W1", "enables")] is False
+    assert edges["W2", "W1", "enables"] is True
+    assert edges["W3", "W1", "enables"] is False
     parent = next(n for n in out["nodes"] if n["symbol"] == "W1")
-    assert edges[("W1", "W2", "waits")] is True
-    assert edges[("W1", "W3", "waits")] is False
+    assert edges["W1", "W2", "waits"] is True
+    assert edges["W1", "W3", "waits"] is False
     assert parent["open_blockers"] == 1  # W3 only, counted once across both edge kinds

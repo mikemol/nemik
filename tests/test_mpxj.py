@@ -69,8 +69,7 @@ def test_mpxj_reads_every_in_file_link(tmp_path: Path) -> None:
     for line in out.splitlines():
         m = RELATION.match(line)
         if m and m[2]:
-            for pred in m[2].split(","):
-                read.add((cite[int(m[1])], cite[int(pred)]))
+            read.update((cite[int(m[1])], cite[int(pred)]) for pred in m[2].split(","))
     assert read == expected, (
         f"missing {sorted(expected - read)[:5]}, extra {sorted(read - expected)[:5]}"
     )

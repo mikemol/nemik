@@ -877,7 +877,7 @@ def spool_lines(spool: Path) -> list[str]:
             repo = e.get("repo") or "none"
             if e.get("event") == "UserPromptSubmit":
                 src = e.get("source") or "unknown"
-                prompts[(repo, src, CLASS.get(src, "unknown"))] += 1
+                prompts[repo, src, CLASS.get(src, "unknown")] += 1
             elif e.get("event") == "Stop":
                 turns[repo] += 1
     out = ["# TYPE nemik_prompts_total counter"]

@@ -3024,3 +3024,13 @@
 2026-10-28T15:39:33Z  status W1225 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-28T15:42:54Z  tick  W1225 advanced  mechanize "W1225 scoped by measurement: the codemod takes only E501 and D205 (about 395 findings, 17 percent of 2382), not D103 or DOC201; stacks 620 and 621 still gating [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-28T15:44:53Z  interrupt W1226 minted    -         "Every due NUDGE line that tick-open prints gets a recorded disposition at the close, sent or backed off"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1215
+2026-10-28T15:46:35Z  status W1221 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T15:49:33Z  interrupt W1227 minted    -         "Ruff's own safe fixes are applied to twenty-two files, so ruff falls 2382 to 2342 and mypy 4227 to 4221 (paydown)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1225
+2026-10-28T15:49:43Z  status W1227 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T15:55:12Z  status W1225 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T16:09:41Z  status W1225 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T16:12:58Z  tick  W1228 minted    -         "mypy paydown: the cheapest cluster of the 4221 findings, measured by code and file, is fixed so mypy falls and the pace reads ok (paydown)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1196
+2026-10-28T16:19:17Z  status W1228 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T16:19:47Z  status W1225 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T16:26:36Z  tick  W1228 advanced  mechanize "mypy paydown: nine test files typed, 4221 to 4126, queued as stack623 behind 621 and 622; W1225 measured (E501 on comment and docstring lines 269 of 328, no liftable D103 text) [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T16:28:42Z  interrupt W1229 minted    -         "A repair of a rejected file in a stacked round uses the predecessor stack's frozen files as its base, in a scratch worktree, not git's HEAD"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1228

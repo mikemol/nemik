@@ -43,7 +43,7 @@ def _helper(tmp_path: Path, *, fail: bool = False, text: str = ICS) -> Path:
     return h
 
 
-@pytest.fixture
+@pytest.fixture()
 def ics(monkeypatch: pytest.MonkeyPatch) -> str:
     """The venv's mikemol-ics, with the environment it needs under bazel (PYTHONHOME)."""
     for k, v in installed._bin()[1].items():
@@ -145,7 +145,8 @@ def test_operator_lists_the_next_days_with_waiters(
     cfg.write_text('[calendars]\nhome = "Personal"\n')
     days_main(["14", "--calendars", str(cfg), "--helper", str(_helper(tmp_path))], g)
     out = capsys.readouterr().out
-    assert "dentist" in out and "<- life:W9" in out
+    assert "dentist" in out
+    assert "<- life:W9" in out
 
 
 def test_the_reader_is_found_in_nemiks_own_venv_not_on_path(
@@ -160,7 +161,8 @@ def test_the_reader_is_found_in_nemiks_own_venv_not_on_path(
     got = occurrences(
         {"home": "Personal"}, start="2026-10-01", helper=_helper(tmp_path)
     )
-    assert [r["uid"] for r in got] == ["a@t"] and _venv_ics().endswith("/mikemol-ics")
+    assert [r["uid"] for r in got] == ["a@t"]
+    assert _venv_ics().endswith("/mikemol-ics")
     with pytest.raises(FileNotFoundError, match="calendar reader"):
         occurrences(
             {"home": "Personal"},
@@ -188,7 +190,8 @@ def test_a_refusing_helper_is_reported_not_a_traceback(
         )
     assert e.value.code == 2
     out = capsys.readouterr().out
-    assert "refusing to start it" in out and "Traceback" not in out
+    assert "refusing to start it" in out
+    assert "Traceback" not in out
 
 
 CHORES = "\r\n".join(
@@ -263,7 +266,8 @@ def test_include_keeps_case_sensitive_substring_matches_and_counts_both_ways(
     assert [r["summary"] for r in got] == [
         "Trash: Mike",
         "Supper: Pascal",
-    ] and stats == {"chores": (2, 4)}
+    ]
+    assert stats == {"chores": (2, 4)}
     none: dict = {}
     assert not occurrences(
         {"chores": "Chores"},
@@ -299,11 +303,9 @@ def test_a_filter_that_matches_nothing_is_reported_not_read_as_a_free_day(
         __import__("rdflib").Graph(),
     )
     out = capsys.readouterr().out
-    assert (
-        "next 14 days (0)" in out
-        and "filter chores: 0 of 4 matched" in out
-        and "not a free day" in out
-    )
+    assert "next 14 days (0)" in out
+    assert "filter chores: 0 of 4 matched" in out
+    assert "not a free day" in out
 
 
 def _row(
@@ -370,7 +372,8 @@ def test_days_dedupes_across_calendars_and_no_dedupe_shows_all(
     g = __import__("rdflib").Graph()
     days_main(base, g)
     out = capsys.readouterr().out
-    assert "next 14 days (4)" in out and "[also: main]" in out
+    assert "next 14 days (4)" in out
+    assert "[also: main]" in out
     days_main([*base, "--no-dedupe"], g)
     assert "next 14 days (8)" in capsys.readouterr().out
 
@@ -386,7 +389,8 @@ def test_writing_is_opt_in_twice_and_a_calendar_is_read_only_by_default(
     )
     got = load_calendars(cfg)
     assert got["plain"] == Calendar("Chores")  # read-only, nothing mirrored
-    assert got["plain"].write is False and got["plain"].mirror == ()
+    assert got["plain"].write is False
+    assert got["plain"].mirror == ()
     assert got["shared"] == Calendar("Family", (), True, ("life", "mtools"))
     for entry, why in (
         ('{ name = "F", write = true }', "needs `mirror"),
@@ -422,4 +426,5 @@ def test_events_nemik_mirrored_are_not_read_back_as_the_operators_own(
         ics=ics,
         stats=stats,
     )
-    assert [r["uid"] for r in got] == ["a@t"] and stats == {"home": (1, 1)}
+    assert [r["uid"] for r in got] == ["a@t"]
+    assert stats == {"home": (1, 1)}

@@ -17,7 +17,7 @@ CLAIMS = (
 
 def test_claims_are_read_by_repo_and_tag() -> None:
     held = parse_claims(CLAIMS)
-    assert held[("mtools", "nemik")] == Holder("69232:142119", "22s")
+    assert held["mtools", "nemik"] == Holder("69232:142119", "22s")
     assert ("mtools", "locks") in held
     assert len(held) == 2
 

@@ -54,7 +54,7 @@ def _pid(key: str) -> dict | None:
 
 
 def _file(key: str) -> dict | None:
-    return {"exists": os.path.exists(key)}
+    return {"exists": Path(key).exists()}
 
 
 def _git_ref(key: str) -> dict | None:

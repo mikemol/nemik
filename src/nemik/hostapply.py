@@ -259,7 +259,7 @@ def fact(export: HostApply, row_id: str, now: str) -> dict[str, object] | None:
     except (ValueError, TypeError):
         age = float("inf")
     stale = age > MAX_AGE_SECONDS
-    at, digest = row.applied if row.applied else (None, None)
+    at, digest = row.applied or (None, None)
     return {
         "applied": row.applied is not None and not stale and not export.problems,
         "unobservable": row.unobservable,

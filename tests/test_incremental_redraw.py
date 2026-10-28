@@ -122,12 +122,15 @@ def test_a_poll_that_adds_and_removes_cards_leaves_the_rest_where_it_was(
             " hidden: document.getElementById('relayout').hidden })",
         )
         browser.close()
-    assert webpage.whole(added, "there") == 1 and webpage.flag(added, "finite")
+    assert webpage.whole(added, "there") == 1
+    assert webpage.flag(added, "finite")
     assert not webpage.flag(added, "clash"), "the new card was placed on top of another"
-    assert webpage.flag(added, "kept") and not webpage.flag(added, "hidden")
+    assert webpage.flag(added, "kept")
+    assert not webpage.flag(added, "hidden")
     assert "1 cards" in added.string(added.root, "text")
     assert moved == "[]", f"cards moved: {moved[:200]}"
-    assert webpage.flag(gone, "removed") and webpage.flag(gone, "kept")
+    assert webpage.flag(gone, "removed")
+    assert webpage.flag(gone, "kept")
     assert "2 cards" in gone.string(gone.root, "text")
     assert webpage.flag(fresh, "rebuilt") and webpage.flag(fresh, "hidden"), (
         "re-layout did not start afresh"

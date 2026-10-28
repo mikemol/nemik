@@ -104,8 +104,7 @@ def roster(
         if (
             a.get("error")
             or a["state"] == "awake"
-            or a.get("message")
-            and a["state"] == "idle"
+            or (a.get("message") and a["state"] == "idle")
         ):
             continue
         rec = liveness.get(a["repo"])

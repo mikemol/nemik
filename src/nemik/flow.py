@@ -246,7 +246,7 @@ def _solve(
         for u, p, w in edges:
             across = w * (volts.get(u, ZERO) - volts.get(p, ZERO))
             if across:
-                current[(u, p)] = current.get((u, p), ZERO) + across
+                current[u, p] = current.get((u, p), ZERO) + across
         for card, absorbed in into.items():
             fibre.setdefault(card, {})[source] = absorbed
     salience = {

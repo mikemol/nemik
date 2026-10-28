@@ -21,6 +21,7 @@ import sys
 import zlib
 from dataclasses import asdict, dataclass, field
 from datetime import UTC, datetime
+from itertools import starmap
 from pathlib import Path
 
 from nemik.cachestore import user_dir
@@ -1171,7 +1172,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.json:
         print(json.dumps({r: asdict(d) for r, d in out.items()}, indent=1))
     else:
-        print("\n".join(render(r, d) for r, d in out.items()))
+        print("\n".join(starmap(render, out.items())))
     return 0
 
 

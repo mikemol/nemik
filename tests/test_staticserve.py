@@ -29,7 +29,7 @@ def _publish(root: Path) -> None:
     (root / "hashes.json").write_text(json.dumps(payload))
 
 
-@pytest.fixture
+@pytest.fixture()
 def served(tmp_path: Path) -> Iterator[tuple[Path, int]]:
     root = tmp_path / "pub"
     root.mkdir()

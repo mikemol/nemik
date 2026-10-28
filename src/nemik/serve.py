@@ -1604,7 +1604,7 @@ def publish(
     link = base / f".current-{os.getpid()}"
     link.unlink(missing_ok=True)
     link.symlink_to(snap.name)
-    os.replace(link, base / "current")
+    Path(link).replace(base / "current")
     for old in sorted(p for p in base.glob("snap-*") if p.is_dir())[:-keep]:
         shutil.rmtree(old, ignore_errors=True)
     # nemik:W1086: the next pod serves this at once; a full claim must not fail a good build
@@ -1739,7 +1739,7 @@ def main(argv: list[str] | None = None) -> None:
         except ValueError as e:
             print(f"ERROR: {e}", file=sys.stderr)
             raise SystemExit(2) from e
-        print(snap if snap else "unchanged")
+        print(snap or "unchanged")
         return
     if args.static:
         try:

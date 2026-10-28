@@ -41,7 +41,7 @@ def _queue(root: Path, repo: str, n: int) -> None:
     (d / "paths-forward.json").write_text(json.dumps(body))
 
 
-@pytest.fixture
+@pytest.fixture()
 def server(tmp_path: Path) -> Iterator[str]:
     _queue(tmp_path, "alpha", 40)
     _queue(tmp_path, "beta", 25)

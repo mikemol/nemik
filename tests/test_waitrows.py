@@ -137,8 +137,10 @@ def test_each_edge_carries_the_rank_position_of_its_blocker(tmp_path: Path) -> N
     assert sorted(position for _, _, ticks, position in edges if ticks == W5_TICKS) == [
         place["alpha:W1"]
     ]
-    assert sorted(position for _, _, ticks, position in edges if ticks == W6_TICKS) == sorted(
-        [place["alpha:W1"], place["alpha:W3"]]
-    )
-    assert [position for _, _, ticks, position in edges if ticks == W11_TICKS] == [UNRANKED]
+    assert sorted(
+        position for _, _, ticks, position in edges if ticks == W6_TICKS
+    ) == sorted([place["alpha:W1"], place["alpha:W3"]])
+    assert [position for _, _, ticks, position in edges if ticks == W11_TICKS] == [
+        UNRANKED
+    ]
     assert UNRANKED not in place.values()
