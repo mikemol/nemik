@@ -284,16 +284,12 @@
  },
  "src/nemik/pacing.py": {
   "D101": 1,
-  "D401": 1,
   "DOC201": 3,
-  "E501": 1,
   "PLC0415": 1,
   "T201": 2
  },
  "src/nemik/pieces.py": {
-  "D401": 1,
   "DOC201": 2,
-  "E501": 1,
   "FURB118": 1
  },
  "src/nemik/pins.py": {
@@ -406,7 +402,6 @@
  },
  "src/nemik/starved.py": {
   "D101": 1,
-  "D401": 1,
   "DOC201": 2,
   "E501": 1,
   "PLC0415": 1,

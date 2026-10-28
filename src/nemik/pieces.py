@@ -7,9 +7,10 @@ number), so a page holding `hashes.json` (W414) refetches only those (W416). The
 the document as published, after the withheld list is applied, so each holds only fields graph.json
 may hold: the manifest's check of graph.json covers them.
 
-A node belongs to its repo when its id is a waypoint (`urn:nemik:<repo>/...`); an edge belongs to its
-source's owner. Anything else (the operator, cross-repo references, inbound and the asks) is fleet.
-The fleet piece is named `_fleet` because a repo name starts alphanumeric and so cannot collide.
+A node belongs to its repo when its id is a waypoint (`urn:nemik:<repo>/...`); an edge belongs
+to its source's owner. Anything else (the operator, cross-repo references, inbound and the asks)
+is fleet. The fleet piece is named `_fleet` because a repo name starts alphanumeric and so cannot
+collide.
 """
 
 from __future__ import annotations
@@ -49,7 +50,7 @@ def split(doc: dict[str, Any]) -> dict[str, dict[str, Any]]:
 
 
 def assemble(pieces: dict[str, dict[str, Any]]) -> dict[str, Any]:
-    """The graph document the pieces were cut from (nodes by id, edges in the published order)."""
+    """Rebuild the graph document the pieces were cut from (nodes by id, edges in order)."""
     fleet = pieces[FLEET]
     parts = [pieces[r] for r in fleet["repos"]] + [fleet]
     nodes = sorted((n for p in parts for n in p["nodes"]), key=lambda n: str(n["id"]))

@@ -4,7 +4,8 @@
 
 A ready card is STARVED when it has waited longer than the declared age (`[starvation] days` in
 rank-weights.toml) while cards issued after it were ranked above it. Ranking by band and flow salience
-never ages a card, so a low-weight card can sit behind a stream of newer, heavier ones forever. This
+never ages a card, so a low-weight card can sit behind a stream of newer, heavier ones forever.
+This
 reports who is overtaken and by how many; whether to add an aging term to the order is a separate,
 declared decision (the residue term is off by default for the same reason: measure first).
 """
@@ -35,7 +36,7 @@ class Starved(NamedTuple):
 
 
 def days_limit(text: str | None = None) -> int:
-    """The declared age in days (`[starvation] days`), or 14 when the table is absent."""
+    """Read the declared age in days (`[starvation] days`), or 14 when the table is absent."""
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
     return int(tomllib.loads(text).get("starvation", {}).get("days", DEFAULT_DAYS))

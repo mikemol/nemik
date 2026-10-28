@@ -3,9 +3,10 @@
 """nemik:W327: arrival pacing, a token bucket over each repo's new cards.
 
 A repo may mint cards at a declared rate per day with a declared burst on top (`[pacing]` in
-rank-weights.toml). The bucket starts full at `burst`, refills at `rate` per day up to `burst`, and each
-new card (its `issued_at`) takes one token. When the bucket goes negative the repo is minting faster
-than its pace; the deepest it went over the window is the overdraft. This only REPORTS: whether to
+rank-weights.toml). The bucket starts full at `burst`, refills at `rate` per day up to `burst`,
+and each new card (its `issued_at`) takes one token. When the bucket goes negative the repo is
+minting faster than its pace; the deepest it went over the window is the overdraft. This only
+REPORTS: whether to
 enforce a pace is a separate decision (the doc's "advisory first").
 """
 
@@ -32,7 +33,7 @@ class Pace(NamedTuple):
 
 
 def limits(text: str | None = None) -> tuple[float, float, int]:
-    """The declared (rate per day, burst, window days); 50, 150, 14 when the table is absent."""
+    """Read the declared (rate per day, burst, window days); 50, 150, 14 if the table is absent."""
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
     t = tomllib.loads(text).get("pacing", {})
