@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nemik:schema:waypoint",
+  "title": "A waypoint of a paths-forward queue (nemik:W1176)",
+  "description": "The root is the shape every reader of a queue can rely on: the five keys every card in every fleet queue carries (symbol, title, status, enables, blocked_on; blocked_kind is absent from a few older cards). $defs/full is the shape the writer's own state file holds, which adds the keys mikemol-paths-forward stamps on every card. Other keys the writer sets on some cards are declared in $defs/core with their types, so a field is declared once: a key not declared is allowed, but a declared key with the wrong type is refused.",
+  "$ref": "#/$defs/core",
+  "$defs": {
+    "core": {
+      "type": "object",
+      "required": ["symbol", "title", "status", "enables", "blocked_on"],
+      "properties": {
+        "symbol": {"type": "string", "pattern": "^W[0-9]+$"},
+        "title": {"type": "string", "minLength": 1},
+        "status": {"enum": ["ready", "blocked", "working", "landed", "done"]},
+        "enables": {"type": "array", "items": {"type": "string"}},
+        "touches": {"type": "array", "items": {"type": "string"}},
+        "blocked_on": {"type": "array", "items": {"type": "string"}},
+        "blocked_kind": {"enum": ["agent", "human", null]},
+        "next_bounded_step": {"type": ["string", "null"]},
+        "evidence": {"type": "string"},
+        "issued_at": {"type": "string"},
+        "minted_during": {"type": "string"},
+        "caused_by": {"type": ["string", "null"]},
+        "last_worked": {"type": "string"},
+        "ticks_blocked": {"type": "integer", "minimum": 0},
+        "completed": {"type": ["string", "null"]},
+        "manifest": {"type": ["array", "null"], "items": {"type": "string"}},
+        "size_class": {"type": ["string", "null"]},
+        "weight": {"type": "integer"},
+        "warrants": {"type": "array", "items": {"type": "object"}},
+        "vector": {"type": "string"},
+        "vector_source": {"type": "string"},
+        "witness": {"type": "string"},
+        "witness_lang": {"type": "string"},
+        "deploys": {"type": "boolean"},
+        "withheld": {"type": "boolean"},
+        "attachments": {"type": "array"},
+        "landed_at": {"type": "string"}
+      }
+    },
+    "full": {
+      "description": "A waypoint as the writer's state file holds it: every card carries these keys.",
+      "allOf": [{"$ref": "#/$defs/core"}],
+      "required": [
+        "symbol", "title", "status", "enables", "touches", "blocked_on", "blocked_kind",
+        "next_bounded_step", "evidence", "issued_at", "minted_during", "caused_by",
+        "last_worked", "ticks_blocked"
+      ]
+    }
+  }
+}
