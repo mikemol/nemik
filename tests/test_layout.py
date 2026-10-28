@@ -134,7 +134,12 @@ METRICS = """() => {
 
 @pytest.fixture(scope="module")
 def server():
-    # nemik:W1060: the server binds its own port and says so (webpage.served), not a picked one.
+    """nemik:W1060: the server binds its own port and says so (webpage.served), not a picked one.
+
+    Yields:
+        The server's base URL.
+
+    """
     with served() as url:
         yield url
 
@@ -794,11 +799,11 @@ def test_a_cite_link_in_the_panel_selects_its_card_and_announces_it(
 
 
 def test_the_view_chain_is_drawn_end_to_end_with_its_length(server: str) -> None:
-    # nemik:W482 (operator 2026-10-13: chains of 2 and 3 both ringed "longest, this view"). Each
-    # ring
-    # was a piece of one longest chain that ran on into another repo's box; the chain's own edges
-    # now
-    # draw it end to end, and the legend says how long it is.
+    """nemik:W482 (operator 2026-10-13: chains of 2 and 3 both ringed "longest, this view").
+
+    Each ring was a piece of one longest chain that ran on into another repo's box; the chain's own
+    edges now draw it end to end, and the legend says how long it is.
+    """
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
@@ -876,9 +881,10 @@ def test_the_page_script_runs_without_errors(server: str) -> None:
 
 
 def test_the_card_list_is_one_tab_stop_walked_by_arrows(server: str) -> None:
-    # nemik:W478: the Cards list was a tab stop per card (hundreds of Tabs to cross it). Now the
-    # list
-    # is one stop, the arrows walk it, Enter selects, and Tab leaves it.
+    """nemik:W478: the Cards list was a tab stop per card (hundreds of Tabs to cross it).
+
+    Now the list is one stop, the arrows walk it, Enter selects, and Tab leaves it.
+    """
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
@@ -966,9 +972,11 @@ def _open_on_a_fake_clock(page: "Page", url: str) -> None:
 
 
 def test_the_card_popover_follows_the_hovercard_rules(server: str) -> None:
-    # nemik:W462 (operator 2026-10-13: the card view as a popover on hover plus delay). WCAG 1.4.13:
-    # not before the delay, hoverable (the pointer may move onto it), dismissible (Esc), and gone
-    # once the pointer leaves both the card and the popover.
+    """nemik:W462 (operator 2026-10-13: the card view as a popover on hover plus delay).
+
+    WCAG 1.4.13: not before the delay, hoverable (the pointer may move onto it), dismissible (Esc),
+    and gone once the pointer leaves both the card and the popover.
+    """
     with sync_playwright() as p:
         browser = _launch(p)
         # 1100 high, the graph's first card lies outside the window (x -40): the choice below must

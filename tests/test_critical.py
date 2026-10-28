@@ -36,7 +36,7 @@ def test_the_longest_chain_has_zero_slack_and_a_side_branch_has_some() -> None:
 
 
 def test_a_scope_bounds_the_chain_to_a_repo_or_a_cone() -> None:
-    # nemik:W333: a:W1 -> b:W1 -> b:W2 crosses repos; a:W9 stands alone in a.
+    """nemik:W333: a:W1 -> b:W1 -> b:W2 crosses repos; a:W9 stands alone in a."""
     from nemik.critical import cone, critical, repo_scope
 
     g = Graph()
@@ -87,7 +87,10 @@ def test_tied_longest_chains_are_all_marked_and_graded_not_picked_by_sort_order(
 def test_what_if_closing_the_head_of_the_chain_shortens_it_and_leaves_the_graph_alone() -> (
     None
 ):
-    # nemik:W351: a:W1 -> a:W2 -> a:W3 is the chain; a:W4 hangs off a:W1. Assume a:W1 done.
+    """nemik:W351: a:W1 -> a:W2 -> a:W3 is the chain; a:W4 hangs off a:W1.
+
+    Assume a:W1 done.
+    """
     from nemik.critical import assume_done, critical, what_if
 
     g = Graph()
@@ -127,7 +130,10 @@ def test_a_fire_is_an_interrupt_card_holding_up_planned_work() -> None:
 
 
 def test_a_cycle_is_reported_and_a_chain_is_not() -> None:
-    # nemik:W324: x -> y -> z -> x never clears; a -> b is a chain; w waits on itself.
+    """nemik:W324: x -> y -> z -> x never clears; a -> b is a chain; w waits on itself.
+
+    A cycle with a member blocked on the operator is flagged as one the operator can break.
+    """
     from nemik.critical import cycles
 
     g = Graph()

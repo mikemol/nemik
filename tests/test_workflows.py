@@ -69,7 +69,7 @@ def test_every_documented_command_has_a_workflow_or_is_reference() -> None:
 
 
 def test_what_is_taught_but_not_enforced_is_the_reviewed_set() -> None:
-    # Adding an unenforced transition or rule changes this set on purpose, in a reviewed diff.
+    """Adding an unenforced transition or rule changes this set on purpose, in a reviewed diff."""
     assert advice_only(MODEL) == [
         "working->done (--status done)",
         "ready->dropped (--drop)",

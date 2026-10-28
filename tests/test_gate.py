@@ -101,7 +101,7 @@ def test_provenance_untracked_by_default_for_export_layout(root: Path) -> None:
 
 
 def test_provenance_reads_exported_commit_json(root: Path) -> None:
-    # nemik:W7: luthen's exporter writes commit.json beside the export-layout queue.
+    """nemik:W7: luthen's exporter writes commit.json beside the export-layout queue."""
     (root / "alpha" / "commit.json").write_text(
         '{"sha": "abc123def456", "dirty": false}'
     )
@@ -177,7 +177,7 @@ def test_operator_long_free_text_reads_as_needs_you(tmp_path: Path) -> None:
 
 
 def test_bundled_title_on_done_waypoint_does_not_warn(tmp_path: Path) -> None:
-    # nemik:W116: decomposing finished work is noise; only open waypoints take the advice.
+    """nemik:W116: decomposing finished work is noise; only open waypoints take the advice."""
     bundled = "x" * 80 + "; " + "y" * 80
     write_queue(
         tmp_path,
@@ -193,9 +193,11 @@ def test_bundled_title_on_done_waypoint_does_not_warn(tmp_path: Path) -> None:
 
 
 def test_caused_by_unresolved_reference_warns_and_names_it(root: Path) -> None:
-    # nemik:W108: caused_by resolves like enables. A wrong repo prefix (luthen for
-    # luthen-observability) or a missing symbol is named; a resolving one, a dropped one and
-    # free text are not.
+    """nemik:W108: caused_by resolves like enables.
+
+    A wrong repo prefix (luthen for luthen-observability) or a missing symbol is named; a resolving
+    one, a dropped one and free text are not.
+    """
     write_queue(
         root,
         "gamma",

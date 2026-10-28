@@ -19,8 +19,7 @@
   "PLC0415": 2,
   "PLR0912": 1,
   "PLR0915": 1,
-  "RUF001": 1,
-  "TC003": 2
+  "RUF001": 1
  },
  "src/nemik/alarm.py": {
   "D401": 2,
@@ -43,8 +42,7 @@
   "PLC0415": 6,
   "PLR0912": 1,
   "PLR0914": 1,
-  "PLR2004": 2,
-  "TC002": 1
+  "PLR2004": 2
  },
  "src/nemik/blocks_cli.py": {
   "E501": 1,
@@ -78,14 +76,12 @@
   "PLR0917": 1,
   "S404": 1,
   "S603": 1,
-  "T201": 4,
-  "TC003": 1
+  "T201": 4
  },
  "src/nemik/cards.py": {
   "DOC201": 1,
   "E501": 1,
-  "PLC0415": 1,
-  "TC002": 1
+  "PLC0415": 1
  },
  "src/nemik/check.py": {
   "ANN001": 1,
@@ -101,8 +97,7 @@
   "S404": 1,
   "S603": 1,
   "S607": 1,
-  "T201": 6,
-  "TC003": 1
+  "T201": 6
  },
  "src/nemik/churn.py": {
   "D205": 1,
@@ -122,15 +117,12 @@
   "PLR0912": 1,
   "PLR0914": 1,
   "PLR2004": 1,
-  "T201": 11,
-  "TC001": 1,
-  "TC002": 1
+  "T201": 11
  },
  "src/nemik/endpoint.py": {
   "DOC201": 2,
   "S404": 1,
-  "S603": 1,
-  "TC003": 1
+  "S603": 1
  },
  "src/nemik/floorasks.py": {
   "DOC201": 2,
@@ -146,8 +138,7 @@
  },
  "src/nemik/health.py": {
   "DOC201": 3,
-  "PLR2004": 1,
-  "TC002": 1
+  "PLR2004": 1
  },
  "src/nemik/history.py": {
   "D103": 1,
@@ -169,14 +160,11 @@
  "src/nemik/importer.py": {
   "DOC201": 2,
   "PLC0415": 2,
-  "T201": 1,
-  "TC001": 1
+  "T201": 1
  },
  "src/nemik/index.py": {
   "DOC201": 1,
-  "PLW0603": 1,
-  "TC002": 2,
-  "TC003": 1
+  "PLW0603": 1
  },
  "src/nemik/issues.py": {
   "DOC201": 2
@@ -227,8 +215,7 @@
   "PLR2004": 2,
   "S404": 1,
   "S603": 1,
-  "T201": 2,
-  "TC002": 1
+  "T201": 2
  },
  "src/nemik/pacing.py": {
   "DOC201": 3,
@@ -268,8 +255,7 @@
   "PLR0915": 1,
   "S404": 1,
   "S603": 1,
-  "T201": 27,
-  "TC002": 1
+  "T201": 27
  },
  "src/nemik/salience.py": {
   "C901": 1,
@@ -285,8 +271,7 @@
   "PLR0914": 1,
   "PLR0915": 1,
   "PLR0917": 3,
-  "PLW0603": 1,
-  "TC003": 1
+  "PLW0603": 1
  },
  "src/nemik/score.py": {
   "D103": 1,
@@ -342,8 +327,7 @@
  },
  "src/nemik/trs.py": {
   "D401": 2,
-  "DOC201": 2,
-  "TC002": 1
+  "DOC201": 2
  },
  "src/nemik/vtodo.py": {
   "D103": 2,
@@ -369,15 +353,14 @@
   "D401": 1,
   "DOC201": 8,
   "E501": 1,
-  "PLC0415": 9,
+  "PLC0415": 8,
   "PLR0912": 1,
   "PLR0915": 1,
   "PLW0717": 1,
   "PTH111": 1,
   "S404": 1,
   "S603": 1,
-  "T201": 10,
-  "TC002": 1
+  "T201": 10
  },
  "src/nemik/web/__init__.py": {
   "D104": 1
@@ -385,8 +368,7 @@
  "src/nemik/withheld.py": {
   "D401": 1,
   "DOC201": 1,
-  "E501": 1,
-  "TC003": 1
+  "E501": 1
  },
  "src/nemik/witnesses.py": {
   "D103": 1,
@@ -541,7 +523,7 @@
   "DOC201": 2
  },
  "tests/test_critical.py": {
-  "D103": 7,
+  "D103": 4,
   "PLC0415": 7,
   "PLR2004": 4
  },
@@ -610,7 +592,7 @@
   "PT018": 4
  },
  "tests/test_gate.py": {
-  "D103": 18,
+  "D103": 15,
   "E741": 10
  },
  "tests/test_gate_weights.py": {
@@ -627,7 +609,7 @@
   "RUF043": 1
  },
  "tests/test_health.py": {
-  "D103": 4,
+  "D103": 3,
   "PLR2004": 3,
   "RUF069": 2
  },
@@ -637,7 +619,7 @@
   "RUF069": 1
  },
  "tests/test_history.py": {
-  "D103": 8,
+  "D103": 6,
   "PLC0415": 3,
   "PLR2004": 1,
   "PT018": 4,
@@ -654,7 +636,7 @@
   "SLF001": 2
  },
  "tests/test_host_citations.py": {
-  "D103": 4,
+  "D103": 3,
   "S404": 1,
   "S603": 1
  },
@@ -697,7 +679,7 @@
  "tests/test_layout.py": {
   "ANN201": 1,
   "ARG001": 1,
-  "D103": 31,
+  "D103": 27,
   "D205": 3,
   "E501": 44,
   "PLC0415": 9,
@@ -712,7 +694,7 @@
   "D103": 3
  },
  "tests/test_letters.py": {
-  "D103": 9,
+  "D103": 7,
   "E501": 1,
   "FBT003": 4,
   "PLC0415": 11,
@@ -769,7 +751,7 @@
   "RUF069": 1
  },
  "tests/test_operator_salience.py": {
-  "D103": 3,
+  "D103": 2,
   "PLC0415": 1
  },
  "tests/test_overlap_claims.py": {
@@ -851,7 +833,7 @@
   "SLF001": 2
  },
  "tests/test_rank_flow.py": {
-  "D103": 14,
+  "D103": 12,
   "PLC0415": 5,
   "PLR2004": 10,
   "RUF069": 10,
@@ -887,7 +869,7 @@
   "PLR2004": 2
  },
  "tests/test_salience.py": {
-  "D103": 11,
+  "D103": 9,
   "E501": 1,
   "S404": 1,
   "S603": 1
@@ -977,11 +959,10 @@
  },
  "tests/test_umbrella_block.py": {
   "D100": 1,
-  "D103": 6,
+  "D103": 5,
   "PLC0415": 4
  },
  "tests/test_umbrella_descent.py": {
-  "D103": 2,
   "E501": 1
  },
  "tests/test_vtodo.py": {
@@ -1052,8 +1033,7 @@
   "DOC201": 1,
   "DOC402": 1,
   "PLR2004": 5,
-  "PLR6301": 1,
-  "TC003": 1
+  "PLR6301": 1
  },
  "tests/test_work.py": {
   "D103": 4,
@@ -1061,7 +1041,7 @@
   "PLR2004": 1
  },
  "tests/test_workflows.py": {
-  "D103": 7,
+  "D103": 6,
   "D205": 1,
   "E501": 1
  },

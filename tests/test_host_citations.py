@@ -68,7 +68,7 @@ def test_a_cited_row_the_export_does_not_hold_is_unresolved(tmp_path: Path) -> N
 
 
 def test_without_an_export_the_citation_stays_as_written(tmp_path: Path) -> None:
-    # The check cannot read what is not there; it does not guess either way.
+    """The check cannot read what is not there; it does not guess either way."""
     assert _unresolved(_fleet(tmp_path, "host:home-mount")) == []
 
 

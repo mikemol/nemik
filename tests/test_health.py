@@ -45,7 +45,10 @@ def test_a_repo_is_green_until_a_signal_crosses_its_floor() -> None:
 
 
 def test_the_worst_signal_decides_and_each_crossing_is_named() -> None:
-    # 2 of 3 blocked is a share of 0.667 (amber); a card blocked 50 ticks is red.
+    """2 of 3 blocked is a share of 0.667 (amber); a card blocked 50 ticks is red.
+
+    The worst signal decides the status (red), and each crossing is named as a reason.
+    """
     found = health(_repo(["ready", "blocked", "blocked"], ticks=50), "a", LIMITS)
     assert found.status == "red"
     assert found.blocked_share == 0.667

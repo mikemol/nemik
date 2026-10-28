@@ -179,7 +179,7 @@ def test_an_operator_ask_is_a_demand_source_with_the_declared_weight(
 
 
 def test_the_view_ships_each_ready_cards_flow_salience(tmp_path: Path) -> None:
-    # nemik:W261: graph.json carries the salience the card absorbs, so the page can order by it.
+    """nemik:W261: graph.json carries the salience the card absorbs, so the page can order by it."""
     from nemik.serve import to_json
 
     doc = to_json(_fleet(tmp_path), {})
@@ -225,8 +225,11 @@ def test_the_view_ships_the_current_across_each_dependency(tmp_path: Path) -> No
 
 
 def test_the_view_weighs_the_edges_that_wait_on_the_operator(tmp_path: Path) -> None:
-    # nemik:W298: W1 is an ask; W2 and W3 wait on it. The lane edge carries what the ask holds back
-    # (2), and each waiter's edge into the ask carries its own demand (1).
+    """nemik:W298: W1 is an ask; W2 and W3 wait on it.
+
+    The lane edge carries what the ask holds back (2), and each waiter's edge into the ask carries
+    its own demand (1).
+    """
     from nemik.serve import to_json
 
     (tmp_path / "a" / ".claude").mkdir(parents=True)

@@ -134,7 +134,7 @@ def test_an_alert_pair_needs_no_card_but_an_unresolved_opened_does(
 
 
 def test_apply_mints_the_cards_and_archives_the_stale(tmp_path: Path) -> None:
-    # nemik:W301: --fold --apply does what --fold prints; a second run finds nothing to do.
+    """nemik:W301: applying the fold mints a card for the live letter and archives the stale one."""
     import json
     from datetime import date
 
@@ -200,7 +200,7 @@ def test_a_misdelivered_letter_is_copied_to_its_recipient_and_then_counts_as_del
 
 
 def test_a_peer_waypoint_citing_the_letter_path_owns_it(tmp_path: Path) -> None:
-    # nemik:W280: the sender's waiting waypoint cites `<repo>/inbox/<file>` in its evidence.
+    """nemik:W280: the sender's waiting waypoint cites `<repo>/inbox/<file>` in its evidence."""
     from nemik.letters import orphans
 
     for repo, evidence in (("nemik", ""), ("life", "Letter: nemik/inbox/asked.md")):

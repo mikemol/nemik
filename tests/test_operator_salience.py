@@ -35,7 +35,10 @@ def test_an_ask_carries_the_demand_of_the_cards_waiting_behind_it() -> None:
 
 
 def test_the_metrics_sum_each_repos_asks_and_count_them() -> None:
-    # nemik:W300: two asks of repo a hold back 3 and 1; repo b has one with nothing behind it.
+    """nemik:W300: two asks of repo a hold back 3 and 1; repo b has one with nothing behind it.
+
+    Repo a sums to salience 4.00 over 2 asks; repo b is 0.00.
+    """
     from nemik.metrics import operator_lines
 
     g = Graph()

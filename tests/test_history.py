@@ -328,7 +328,7 @@ def test_time_in_state_and_the_weekly_roll_up_follow_the_commits(
 def test_the_static_history_names_no_waypoint_and_passes_the_manifest(
     tmp_path: Path,
 ) -> None:
-    # nemik:W308: history.json is counts and days; the oldest-blocked symbol is dropped.
+    """nemik:W308: history.json is counts and days; the oldest-blocked symbol is dropped."""
     from nemik.manifest import unmanifested
     from nemik.serve import history_doc
 
@@ -343,7 +343,7 @@ def test_the_static_history_names_no_waypoint_and_passes_the_manifest(
 def test_a_withheld_waypoint_is_not_counted_in_the_published_history(
     tmp_path: Path,
 ) -> None:
-    # nemik:W309: _two_commits mints W1 then W2; withholding a:W2 leaves one opened card.
+    """nemik:W309: _two_commits mints W1 then W2; withholding a:W2 leaves one opened card."""
     from nemik.serve import history_doc
 
     _two_commits(tmp_path)

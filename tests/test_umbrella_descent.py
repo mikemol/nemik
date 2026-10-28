@@ -48,7 +48,7 @@ def _hints(root: Path) -> dict[str, str]:
 def test_an_umbrella_is_descended_through_umbrellas_to_its_steps(
     tmp_path: Path,
 ) -> None:
-    # b:W1 is an umbrella over b:W2 (itself an umbrella over b:W3, b:W4) and b:W5.
+    """b:W1 is an umbrella over b:W2 (itself an umbrella over b:W3, b:W4) and b:W5."""
     _write(
         tmp_path,
         "b",
@@ -69,7 +69,7 @@ def test_an_umbrella_is_descended_through_umbrellas_to_its_steps(
 
 
 def test_a_single_step_blocker_is_left_alone(tmp_path: Path) -> None:
-    # b:W1 waits on one step of its own: it is still the step a:W1 waits for.
+    """b:W1 waits on one step of its own: it is still the step a:W1 waits for."""
     _write(tmp_path, "b", [("W1", "blocked", ["W2"]), ("W2", "ready", [])])
     _write(tmp_path, "a", [("W1", "blocked", ["b:W1"])])
     assert _hints(tmp_path) == {}
