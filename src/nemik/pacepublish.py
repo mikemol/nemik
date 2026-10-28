@@ -12,6 +12,7 @@ state as the 0/1 value (1 is behind), beside `nemik_ratchet_fall_observed` and
 """
 
 from nemik.hostroot import fields
+from nemik.rebaselines import RESET_DATES, RESET_GAUGE_SECONDS, RESETS
 
 AS_OF_KEY = '"as_of": "'
 WINDOW_KEY = '"window": "'
@@ -31,8 +32,38 @@ DAYS_TO_1970 = 719468  # days from 0000-03-01 to 1970-01-01
 GAUGE_BEHIND = "nemik_ratchet_behind"
 GAUGE_OBSERVED = "nemik_ratchet_fall_observed"
 GAUGE_REQUIRED = "nemik_ratchet_fall_required"
+GAUGE_RESET = "nemik_ratchet_reset"
 
 Row = tuple[str, str, str, int, int]
+
+
+def reset_lines(as_of: str) -> list[str]:
+    """Write the gauge of the declared resets still within their window (nemik:W1210).
+
+    A reset that lowers a ratchet's stated requirement (rebaselines.RESETS, with the operator's go)
+    would read as a violation to luthen's alert on the requirement falling below its own 24 h high;
+    this gauge says it was declared. It is present from the reset's date for RESET_GAUGE_SECONDS,
+    judged against the pace file's own stamp, and absent after, so a later undeclared fall to the
+    same number is not silenced.
+
+    Args:
+        as_of: The pace file's stamp, a UTC stamp; the clock this judges the window against.
+
+    Returns:
+        The TYPE line always, then one sample per reset whose date is not after `as_of` and not
+        RESET_GAUGE_SECONDS or more before it, valued at the requirement the reset set.
+
+    """
+    out = [f"# TYPE {GAUGE_RESET} gauge"]
+    now = epoch_seconds(as_of)
+    for repo, ratchet, _, new, _ in RESETS:
+        dated = RESET_DATES.get(f"{repo}\n{ratchet}", "")
+        if not dated:
+            continue
+        age = now - epoch_seconds(dated)
+        if 0 <= age < RESET_GAUGE_SECONDS:
+            out.append(f'{GAUGE_RESET}{{repo="{repo}",ratchet="{ratchet}"}} {new}')
+    return out
 
 
 def _after(head: str, key: str) -> str:
@@ -218,4 +249,4 @@ def metric_lines(rows: list[Row], as_of: str) -> list[str]:
     out.append(f"# TYPE {GAUGE_REQUIRED} gauge")
     for repo, ratchet, _, _, owed in rows:
         out.append(f'{GAUGE_REQUIRED}{{repo="{repo}",ratchet="{ratchet}"}} {owed}')
-    return out + as_of_lines(as_of)
+    return out + reset_lines(as_of) + as_of_lines(as_of)

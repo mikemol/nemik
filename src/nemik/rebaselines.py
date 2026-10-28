@@ -95,6 +95,18 @@ RESETS: list[Declared] = [
     ),
 ]
 
+# nemik:W1210: when each reset took effect, the UTC stamp of the pace run that first stated the new
+# requirement, under the key `repo` and `ratchet` joined by a newline. luthen's alert
+# ratchet_required_fell reads the requirement against its own 24 h high, so a declared fall shows
+# for 24 h; the gauge nemik_ratchet_reset stays for RESET_GAUGE_SECONDS from this stamp (luthen
+# needs more than 26 h: that 24 h, one hourly pace run and a scrape; 48 h clears it), and then the
+# entry is history. A test holds every RESETS entry to a date here.
+RESET_DATES: dict[str, str] = {
+    "nemik\nmypy-baseline.json": "2026-10-27T11:34:22Z",
+    "nemik\nruff-baseline.json": "2026-10-27T11:34:22Z",
+}
+RESET_GAUGE_SECONDS = 48 * 3600
+
 
 def reset_table(owed: dict[str, int], resets: list[Declared]) -> dict[str, int]:
     """Give the stated requirements after the declared resets.
