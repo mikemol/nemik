@@ -6,7 +6,7 @@ from __future__ import annotations
 
 import subprocess
 from fractions import Fraction
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import installed
 from rdflib import Graph
@@ -14,6 +14,9 @@ from rdflib import Graph
 from nemik.check import survey
 from nemik.rank import load_weights
 from nemik.salience import audit, load_gate_weights
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def _pf(state: Path, *args: str) -> None:

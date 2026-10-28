@@ -12,10 +12,13 @@ from __future__ import annotations
 
 import threading
 import time
-from pathlib import Path
+from typing import TYPE_CHECKING
 from unittest import mock
 
 from nemik.serve import Model
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def write_queue(root: Path, repo: str) -> None:

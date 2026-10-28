@@ -446,9 +446,7 @@
  "tests/test_apply_witness.py": {
   "D103": 6,
   "FBT001": 1,
-  "FBT003": 4,
-  "TC002": 1,
-  "TC003": 1
+  "FBT003": 4
  },
  "tests/test_architecture.py": {
   "D103": 1,
@@ -463,8 +461,7 @@
   "PLC0415": 1,
   "PLR2004": 2,
   "PT018": 3,
-  "RUF069": 2,
-  "TC003": 1
+  "RUF069": 2
  },
  "tests/test_build_scope.py": {
   "D103": 2,
@@ -521,8 +518,7 @@
   "PLR2004": 3,
   "S404": 1,
   "S603": 1,
-  "S607": 1,
-  "TC003": 1
+  "S607": 1
  },
  "tests/test_check_realizability.py": {
   "D103": 2,
@@ -615,15 +611,12 @@
  },
  "tests/test_gate.py": {
   "D103": 18,
-  "E741": 10,
-  "S404": 1,
-  "TC003": 2
+  "E741": 10
  },
  "tests/test_gate_weights.py": {
   "D103": 3,
   "S404": 1,
-  "S603": 1,
-  "TC003": 1
+  "S603": 1
  },
  "tests/test_guarantees.py": {
   "D103": 8,
@@ -651,8 +644,7 @@
   "RUF069": 3,
   "S404": 1,
   "S603": 4,
-  "S607": 4,
-  "TC003": 1
+  "S607": 4
  },
  "tests/test_hooks_wired.py": {
   "D103": 2,
@@ -664,12 +656,10 @@
  "tests/test_host_citations.py": {
   "D103": 4,
   "S404": 1,
-  "S603": 1,
-  "TC003": 1
+  "S603": 1
  },
  "tests/test_hostapply.py": {
-  "D103": 13,
-  "TC003": 1
+  "D103": 13
  },
  "tests/test_ics_reader.py": {
   "D103": 1,
@@ -685,14 +675,11 @@
   "S603": 2
  },
  "tests/test_inbound_letters.py": {
-  "D103": 3,
-  "TC003": 1
+  "D103": 3
  },
  "tests/test_inbound_orphans.py": {
   "D103": 2,
-  "PLC2701": 1,
-  "TC002": 1,
-  "TC003": 1
+  "PLC2701": 1
  },
  "tests/test_incremental_redraw.py": {
   "D103": 5,
@@ -722,8 +709,7 @@
   "S603": 1
  },
  "tests/test_letter_resolves.py": {
-  "D103": 3,
-  "TC003": 1
+  "D103": 3
  },
  "tests/test_letters.py": {
   "D103": 9,
@@ -731,8 +717,7 @@
   "FBT003": 4,
   "PLC0415": 11,
   "PLR2004": 5,
-  "SLF001": 1,
-  "TC003": 1
+  "SLF001": 1
  },
  "tests/test_manifest.py": {
   "ANN202": 1,
@@ -743,8 +728,7 @@
  "tests/test_marks.py": {
   "D103": 8,
   "E501": 1,
-  "PLR2004": 2,
-  "TC003": 1
+  "PLR2004": 2
  },
  "tests/test_memo_audits.py": {
   "ANN002": 1,
@@ -753,9 +737,6 @@
   "D103": 1,
   "E501": 1,
   "PLC2701": 1
- },
- "tests/test_metrics_age.py": {
-  "TC003": 1
  },
  "tests/test_metrics_realizability.py": {
   "D103": 2,
@@ -793,8 +774,7 @@
  },
  "tests/test_overlap_claims.py": {
   "D103": 3,
-  "PLR2004": 1,
-  "TC003": 1
+  "PLR2004": 1
  },
  "tests/test_pacing.py": {
   "D103": 3,
@@ -819,12 +799,10 @@
   "PLR2004": 2,
   "S404": 1,
   "S603": 1,
-  "S607": 1,
-  "TC003": 1
+  "S607": 1
  },
  "tests/test_pins_host.py": {
-  "D103": 2,
-  "TC003": 1
+  "D103": 2
  },
  "tests/test_positioning.py": {
   "D103": 3,
@@ -878,8 +856,7 @@
   "PLR2004": 10,
   "RUF069": 10,
   "S404": 1,
-  "S603": 1,
-  "TC003": 1
+  "S603": 1
  },
  "tests/test_read_api.py": {
   "D103": 4,
@@ -913,8 +890,7 @@
   "D103": 11,
   "E501": 1,
   "S404": 1,
-  "S603": 1,
-  "TC003": 1
+  "S603": 1
  },
  "tests/test_satisfied_edges.py": {
   "D103": 1
@@ -936,8 +912,7 @@
   "D103": 3,
   "PLC0415": 1,
   "PLR2004": 3,
-  "PT018": 1,
-  "TC003": 1
+  "PT018": 1
  },
  "tests/test_shaclcache.py": {
   "D103": 4,
@@ -991,8 +966,7 @@
   "D103": 1,
   "PLR2004": 1,
   "PT018": 1,
-  "RUF069": 2,
-  "TC003": 1
+  "RUF069": 2
  },
  "tests/test_trs.py": {
   "E501": 1
@@ -1008,8 +982,7 @@
  },
  "tests/test_umbrella_descent.py": {
   "D103": 2,
-  "E501": 1,
-  "TC003": 1
+  "E501": 1
  },
  "tests/test_vtodo.py": {
   "D103": 4,
@@ -1049,8 +1022,7 @@
  },
  "tests/test_witness_party.py": {
   "D103": 3,
-  "E501": 1,
-  "TC002": 1
+  "E501": 1
  },
  "tests/test_witness_promql.py": {
   "ARG001": 2,
@@ -1086,8 +1058,7 @@
  "tests/test_work.py": {
   "D103": 4,
   "ERA001": 1,
-  "PLR2004": 1,
-  "TC003": 1
+  "PLR2004": 1
  },
  "tests/test_workflows.py": {
   "D103": 7,

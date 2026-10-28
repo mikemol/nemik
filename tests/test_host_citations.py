@@ -6,11 +6,14 @@ from __future__ import annotations
 
 import json
 import subprocess
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import installed
 
 from nemik.check import survey
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 EXPORT = {
     "version": 1,

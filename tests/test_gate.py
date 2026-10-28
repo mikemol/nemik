@@ -10,11 +10,14 @@ root in the export layout (<root>/<repo>/paths-forward.json), which is what the 
 from __future__ import annotations
 
 import json
-import subprocess
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import installed
 import pytest
+
+if TYPE_CHECKING:
+    import subprocess
+    from pathlib import Path
 
 
 def waypoint(sym: str, **kw: object) -> dict[str, object]:

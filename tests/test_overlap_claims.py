@@ -4,9 +4,12 @@
 
 from __future__ import annotations
 
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.overlaps import Holder, parse_claims, read_claims, row
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 CLAIMS = (
     "claim:label:touch:mtools:nemik owner=69232:142119 id=a658761a3fca age=22s\n"

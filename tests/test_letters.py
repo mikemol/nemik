@@ -4,12 +4,15 @@
 
 from __future__ import annotations
 
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik.check import main
 from nemik.letters import headers, misdelivered
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def _letter(root: Path, inbox: str, name: str, first: str) -> None:

@@ -5,12 +5,13 @@
 from __future__ import annotations
 
 import subprocess
-from pathlib import Path
 from typing import TYPE_CHECKING
 
 from nemik.pins import Pin, behind, main, pins
 
 if TYPE_CHECKING:
+    from pathlib import Path
+
     import pytest
 
 ENV = {

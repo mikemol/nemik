@@ -10,11 +10,13 @@ cannot be satisfied; the process that closes the card is the party.
 
 import json
 from pathlib import Path
-
-from rdflib import Graph
+from typing import TYPE_CHECKING
 
 from nemik.adapter import NEMIK, queue_graph
 from nemik.blocks import annotate
+
+if TYPE_CHECKING:
+    from rdflib import Graph
 
 WITNESS = 'up{job="x"} == 0'
 

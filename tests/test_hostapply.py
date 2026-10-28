@@ -5,11 +5,14 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik.hostapply import effect_of, fact, load, parse, restarts_of
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 NOW = "2026-10-09T06:00:00Z"
 ROW_OK = {"at": "2026-10-09T05:47:12Z", "digest": "ab" * 32}

@@ -6,10 +6,13 @@ from __future__ import annotations
 
 import json
 from datetime import UTC, datetime
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.adapter import queue_graph
 from nemik.metrics import age_lines
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def _wp(symbol: str, status: str, issued: str) -> dict[str, object]:

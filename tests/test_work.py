@@ -5,12 +5,13 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
 from typing import TYPE_CHECKING
 
 from nemik.work import blockers, main, plan, working
 
 if TYPE_CHECKING:
+    from pathlib import Path
+
     import pytest
 
 

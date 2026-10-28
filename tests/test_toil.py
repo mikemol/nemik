@@ -4,9 +4,12 @@
 
 from __future__ import annotations
 
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.history import toil
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 LEDGER = (
     '2026-10-05T10:00:00Z  tick  W1  advanced  unblock  "planned one"\n'

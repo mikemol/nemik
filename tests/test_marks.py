@@ -5,9 +5,12 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.marks import DERIVED, MARK, STALE, policy_version, provenance, read
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 NOW = "2026-10-08T12:00:00Z"
 VERSION = "v1"

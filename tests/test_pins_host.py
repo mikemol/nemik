@@ -4,9 +4,12 @@
 
 from __future__ import annotations
 
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.pins import installed
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 SHA = "697942ebd41dd2dbb17d77facef34c84f581f9ee"
 

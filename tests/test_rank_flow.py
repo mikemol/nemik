@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 import subprocess
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import installed
 import pytest
@@ -13,6 +13,9 @@ from rdflib import Graph
 
 from nemik.check import survey
 from nemik.rank import load_composition, load_weights, rank
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 TIERS = '[order]\ntiers = [["weight"]]\n'
 

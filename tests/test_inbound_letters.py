@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from rdflib import RDF, Graph, Literal
 
@@ -18,6 +18,9 @@ from nemik.adapter import (
     workstream_uri,
 )
 from nemik.blocks import inbound
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def test_the_adapter_reads_letter_paths_from_evidence_and_the_next_step(

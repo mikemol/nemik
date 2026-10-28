@@ -5,12 +5,15 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
-
-import pytest
+from typing import TYPE_CHECKING
 
 from nemik.blocks_cli import main
 from nemik.letters import _today
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    import pytest
 
 
 def _repo(root: Path, cites: str = "") -> None:

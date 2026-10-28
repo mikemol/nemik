@@ -5,9 +5,12 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.check import survey
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def _write(root: Path, repo: str, cards: list[tuple[str, str, list[str]]]) -> None:

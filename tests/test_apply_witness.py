@@ -6,11 +6,14 @@ from __future__ import annotations
 
 import json
 from datetime import UTC, datetime
-from pathlib import Path
-
-import pytest
+from typing import TYPE_CHECKING
 
 from nemik.witnesses import facts
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    import pytest
 
 QUERY = 'input.apply["home-mount"].applied == true'
 

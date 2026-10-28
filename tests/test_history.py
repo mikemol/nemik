@@ -9,7 +9,6 @@ import os
 import subprocess
 import tempfile
 from datetime import UTC, datetime
-from pathlib import Path
 from typing import TYPE_CHECKING
 
 from nemik.history import (
@@ -29,6 +28,8 @@ from nemik.history import (
 )
 
 if TYPE_CHECKING:
+    from pathlib import Path
+
     import pytest
 
 # The slim-queue cache of this run is a directory of its own, not the user's.
