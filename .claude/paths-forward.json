@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1193,
+  "counter": 1194,
   "waypoints": [
     {
       "symbol": "W1",
@@ -28318,7 +28318,7 @@
     {
       "symbol": "W1193",
       "title": "nemik's gate emits per-target CPU seconds: gate_staged.sh runs bazel test with a build-events file and calls mikemol-gate-targets nemik after it, so luthen's gate_cost carries nemik",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W1136"
       ],
@@ -28327,18 +28327,42 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Read the NEXT gate's output for either a send or the 'no measurements sent' line; then check luthen's luthen-series.json gate_cost for a nemik entry after luthen's next export; close W1193 on that reading, then take W1136's remaining read (drum headroom) and wire ceiling_of",
-      "evidence": "2026-10-28: landed cd48fcc (pushed, gate green): gate_staged.sh passes --build_event_json_file and runs mikemol-gate-targets nemik after bazel test, exit status unchanged. NOT yet read: that the gate sends (the run that carried this change used the old script)",
+      "next_bounded_step": "Land the fallback; the next gate that executes tests (any change to a tested module) is the reading: its output should show no 'no measurements sent' line, and luthen's gate_cost should gain nemik after its next export",
+      "evidence": "2026-10-28: landed cd48fcc (pushed, gate green): gate_staged.sh passes --build_event_json_file and runs mikemol-gate-targets nemik after bazel test, exit status unchanged. NOT yet read: that the gate sends (the run that carried this change used the old script) | 2026-10-28: 2026-10-27 first gate with the new script (stack591, dfec698): printed 'gate_staged: mikemol-gate-targets not built or no build events; no measurements sent'. Read: bazel reported 'Build Event Protocol files produced successfully' (so the file was written), 0 of 443 tests executed (all cached, which the tool never emits), and the worktree's .venv link points at bazel-bin/.venv, which has no bazel-bin in the worktree after the gate (ls: no such file), so the tool path under the worktree did not resolve. Fix: fall back to the real root's built venv (which has mikemol-gate-targets). A fully cached run will still send nothing by design; the reading needs a gate that executes tests",
       "issued_at": "2026-10-28T00:15:01Z",
       "minted_during": "interrupt",
       "caused_by": "W1136",
-      "last_worked": "2026-10-28T00:35:53Z",
+      "last_worked": "2026-10-28T00:48:10Z",
       "ticks_blocked": 0,
       "manifest": [
         "tools/gate_staged.sh"
       ],
       "size_class": "small",
       "completed": null
+    },
+    {
+      "symbol": "W1194",
+      "title": "nemik/__init__.py loses six ruff findings: its long lines wrapped, its predicate docstring made imperative with a Returns section, and its warning written with sys.stderr.write, so ruff falls 2542 to 2536 (paydown)",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:ruff-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "stack593 queued first, then W1193's fallback entry; test_editable passes; ratchet reads ruff 2536 against the lowered baseline",
+      "evidence": "",
+      "issued_at": "2026-10-28T00:50:42Z",
+      "minted_during": "tick",
+      "caused_by": "W1014",
+      "last_worked": "2026-10-28T00:50:53Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/__init__.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "small"
     }
   ],
   "residue": [

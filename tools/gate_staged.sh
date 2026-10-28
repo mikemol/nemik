@@ -153,6 +153,8 @@ bep="$(mktemp)"
 gate_rc=0
 bazel test //:precommit --noshow_progress --build_event_json_file="$bep" || gate_rc=$?
 targets_tool="$wt/.venv/bin/mikemol-gate-targets"
+# The worktree's venv link may not carry the tool when the gate ends; the real root's built venv does.
+[ -x "$targets_tool" ] || targets_tool="$real_root/.venv/bin/mikemol-gate-targets"
 if [ -x "$targets_tool" ] && [ -s "$bep" ]; then
     testlogs="$(bazel info bazel-testlogs 2>/dev/null)" || testlogs=""
     if [ -n "$testlogs" ]; then
