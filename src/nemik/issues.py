@@ -43,6 +43,12 @@ def to_issues(tasks: list[Task]) -> list[dict[str, object]]:
 
 
 def write(tasks: list[Task]) -> str:
+    """Render the cards as issues.
+
+    Returns:
+        The issues as indented JSON.
+
+    """
     return json.dumps(to_issues(tasks), indent=1)
 
 

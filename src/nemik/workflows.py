@@ -21,6 +21,12 @@ def load(text: str | None = None) -> dict[str, Any]:
 
 
 def transitions(model: dict[str, Any]) -> list[dict[str, Any]]:
+    """List the lifecycle's transitions.
+
+    Returns:
+        The transition tables of the workflow model.
+
+    """
     return list(model["lifecycle"]["transition"])
 
 

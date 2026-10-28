@@ -58,6 +58,12 @@ class Churn:
     counts: dict[str, int]
 
     def share(self, cls: str) -> float:
+        """Measure how much of the polling a change class took.
+
+        Returns:
+            The class's count over all polls, 0.0 when there were none.
+
+        """
         return self.counts.get(cls, 0) / self.polls if self.polls else 0.0
 
     def redraws_now(self) -> float:
@@ -127,6 +133,18 @@ def render(
     commits: dict[str, int],
     rows: list[Churn],
 ) -> str:
+    """Print the churn report.
+
+    Args:
+        span: The first and last time covered.
+        repos: How many repos were read.
+        commits: Commits by change class.
+        rows: The churn rows to report.
+
+    Returns:
+        The report text.
+
+    """
     start, end = span
     total = sum(commits.values())
     head = f"queue churn {start:%Y-%m-%d %H:%M} .. {end:%Y-%m-%d %H:%M}, {repos} repos"

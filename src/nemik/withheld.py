@@ -27,6 +27,16 @@ class WithheldError(ValueError):
 
 
 def load(path: Path | None) -> frozenset[str]:
+    """Read the withheld list the gate wrote.
+
+    Returns:
+        The refs it withholds.
+
+    Raises:
+        WithheldError: the list is missing, is not JSON, has an unknown version or has items
+            that are not refs.
+
+    """
     if path is None or not path.exists():
         raise WithheldError(
             f"withheld list {path} is missing: the gate did not run, refusing to publish"

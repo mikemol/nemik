@@ -83,7 +83,6 @@
  },
  "src/nemik/calwrite.py": {
   "ANN001": 1,
-  "D103": 1,
   "DOC201": 9,
   "FBT001": 2,
   "FURB118": 1,
@@ -119,8 +118,6 @@
   "TC003": 1
  },
  "src/nemik/churn.py": {
-  "D102": 1,
-  "D103": 1,
   "D205": 1,
   "D401": 3,
   "DOC201": 8,
@@ -150,7 +147,6 @@
   "TC003": 1
  },
  "src/nemik/floorasks.py": {
-  "D103": 1,
   "DOC201": 2,
   "T201": 2
  },
@@ -205,7 +201,6 @@
   "UP052": 1
  },
  "src/nemik/issues.py": {
-  "D103": 1,
   "DOC201": 2
  },
  "src/nemik/letters.py": {
@@ -446,7 +441,6 @@
   "D104": 1
  },
  "src/nemik/withheld.py": {
-  "D103": 1,
   "D401": 1,
   "DOC201": 1,
   "E501": 2,
@@ -484,7 +478,6 @@
   "T201": 3
  },
  "src/nemik/workflows.py": {
-  "D103": 1,
   "D401": 2,
   "DOC201": 2,
   "E501": 1

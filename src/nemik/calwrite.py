@@ -37,6 +37,12 @@ _DATE = re.compile(r"\d{8}")
 
 
 def uid(ref: str) -> str:
+    """Name a card's calendar object.
+
+    Returns:
+        The card's ref under the prefix nemik owns.
+
+    """
     return f"{OWNED}{ref}"
 
 

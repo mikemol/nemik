@@ -59,6 +59,12 @@ def unresolved(root: Path, floor: Path) -> list[tuple[str, str, str]]:
 
 
 def main(argv: list[str] | None = None) -> None:
+    """Report the floor asks that point at nothing.
+
+    Raises:
+        SystemExit: always; 1 when an ask does not resolve, else 0.
+
+    """
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument(
         "--root",
