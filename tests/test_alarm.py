@@ -3,6 +3,7 @@
 """nemik:W129: a waypoint's alarm resolves to the instant it fires; VTODOs carry it as a VALARM."""
 
 from datetime import UTC, datetime
+from pathlib import Path
 
 from nemik.alarm import duration, fires_at
 from nemik.vtodo import vtodos
@@ -119,7 +120,7 @@ def test_one_shot_and_absolute_alarms_fire_once_inside_the_window() -> None:
     ]
 
 
-def test_adapter_carries_recurrence_and_completed_occurrences(tmp_path) -> None:
+def test_adapter_carries_recurrence_and_completed_occurrences(tmp_path: Path) -> None:
     import json
 
     from nemik.adapter import NEMIK, queue_graph, waypoint_uri

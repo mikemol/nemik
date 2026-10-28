@@ -2,6 +2,8 @@
 # Copyright (c) 2026 Mike Mol
 import json
 
+import pytest
+
 import nemik
 
 
@@ -14,7 +16,9 @@ class _Dist:
         return self.text
 
 
-def test_editable_install_is_detected_and_a_package_install_is_not(monkeypatch) -> None:
+def test_editable_install_is_detected_and_a_package_install_is_not(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     for text, want in (
         (json.dumps({"url": "file:///x", "dir_info": {"editable": True}}), True),
         (json.dumps({"url": "file:///x", "dir_info": {}}), False),

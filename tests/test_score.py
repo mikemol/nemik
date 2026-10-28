@@ -3,6 +3,7 @@
 """nemik:W131: WV:1 vectors -> declared bands; unscored and invalid are visible, never a zero."""
 
 import json
+from pathlib import Path
 
 import pytest
 
@@ -74,7 +75,7 @@ def test_table_refuses_a_default_outside_its_order() -> None:
         load_bands('order = ["a"]\nunscored = "b"\nunmatched = "a"\n')
 
 
-def test_adapter_carries_the_vector_as_written(tmp_path) -> None:
+def test_adapter_carries_the_vector_as_written(tmp_path: Path) -> None:
     q = tmp_path / "q.json"
     payload: dict[str, object] = {
         "version": 1,

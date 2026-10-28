@@ -2,6 +2,8 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W128: operator asks as RFC 5545 VTODOs, opt-in per repo."""
 
+from pathlib import Path
+
 from nemik.vtodo import calendar, stated_ask, vtodos
 
 ASKS: list[dict] = [
@@ -63,7 +65,7 @@ def test_calendar_is_crlf_folded_and_deterministic() -> None:
     assert text.count("BEGIN:VTODO") == 2
 
 
-def test_star_opts_every_repo_in(tmp_path) -> None:
+def test_star_opts_every_repo_in(tmp_path: Path) -> None:
     from nemik.vtodo import opted_in
 
     f = tmp_path / "ics.toml"
@@ -72,7 +74,7 @@ def test_star_opts_every_repo_in(tmp_path) -> None:
     assert opted_in(tmp_path / "missing.toml") == set()
 
 
-def test_nemik_tasks_feeds_the_helper_and_returns_its_exit_code(tmp_path) -> None:
+def test_nemik_tasks_feeds_the_helper_and_returns_its_exit_code(tmp_path: Path) -> None:
     """nemik:W121: one entry point for luthen's timer: no shell pipe, the helper's 0/1/2 preserved."""
     import json
     import sys
@@ -185,7 +187,9 @@ def test_a_repo_with_no_open_asks_has_no_parent_so_the_helper_completes_it() -> 
     assert grouped([]) == []  # no asks at all: no parents, everything completes
 
 
-def test_apply_reruns_while_the_helper_defers_a_parent_then_converges(tmp_path) -> None:
+def test_apply_reruns_while_the_helper_defers_a_parent_then_converges(
+    tmp_path: Path,
+) -> None:
     """nemik:W148: DEFER-PARENT means the parent is not on Google yet; wait for the sync and rerun."""
     import json
     import sys

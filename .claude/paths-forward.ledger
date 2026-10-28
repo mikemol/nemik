@@ -2969,3 +2969,5 @@
 2026-10-28T06:59:01Z  status W1204 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-28T07:13:25Z  interrupt W1207 minted    -         "Eight test files annotate their pytest fixtures and procedures: tmp_path as Path, monkeypatch as MonkeyPatch, capsys as CaptureFixture, and -> None, so mypy falls 4375 to 4325 and ruff 2456 to 2433 (paydown)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1196
 2026-10-28T07:20:31Z  status W1207 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-28T08:23:22Z  interrupt W1208 minted    -         "Eleven more test files annotate their pytest fixtures and procedures, adding the import the annotation needs and moving a type-only pytest import under TYPE_CHECKING, so mypy falls 4325 to 4227 and ruff 2433 to 2416 (paydown)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1196
+2026-10-28T08:23:35Z  status W1208 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

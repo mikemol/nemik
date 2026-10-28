@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
+import pytest
 from rdflib import Graph, Literal, URIRef
 
 from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri, workstream_uri
@@ -209,7 +210,9 @@ def test_composition_refuses_an_unknown_objective() -> None:
         load_composition('[order]\ntiers = [["age"]]\n')
 
 
-def test_band_mode_names_the_band_of_any_vector(capsys) -> None:
+def test_band_mode_names_the_band_of_any_vector(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
     """el-openglo:W176's vector, checked while the item was still open."""
     import pytest
 

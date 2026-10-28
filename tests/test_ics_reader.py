@@ -3,6 +3,7 @@
 """nemik:W157: mtools' mikemol-ics is installed in nemik's venv and reads an exported calendar."""
 
 import subprocess
+from pathlib import Path
 
 import installed
 
@@ -21,7 +22,7 @@ ICS = (
 )
 
 
-def test_mikemol_ics_reads_an_exported_calendar(tmp_path) -> None:
+def test_mikemol_ics_reads_an_exported_calendar(tmp_path: Path) -> None:
     src = tmp_path / "cal.ics"
     src.write_text(ICS, newline="")
     out = subprocess.run(

@@ -5,11 +5,15 @@
 from __future__ import annotations
 
 from fractions import Fraction
+from typing import TYPE_CHECKING
 
 from nemik import flow
 
+if TYPE_CHECKING:
+    import pytest
 
-def _counting(monkeypatch) -> dict[str, int]:
+
+def _counting(monkeypatch: pytest.MonkeyPatch) -> dict[str, int]:
     calls = {"n": 0}
     real = flow._solve
 
@@ -22,7 +26,9 @@ def _counting(monkeypatch) -> dict[str, int]:
     return calls
 
 
-def test_a_change_outside_the_cones_is_answered_from_the_cache(monkeypatch) -> None:
+def test_a_change_outside_the_cones_is_answered_from_the_cache(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     calls = _counting(monkeypatch)
     demand = {"x": Fraction(1)}
     needs = {"x": ["a", "b"], "y": ["c"]}  # y's cone is outside x's
@@ -35,7 +41,9 @@ def test_a_change_outside_the_cones_is_answered_from_the_cache(monkeypatch) -> N
     assert second == first
 
 
-def test_a_change_inside_a_cone_is_solved_again(monkeypatch) -> None:
+def test_a_change_inside_a_cone_is_solved_again(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     calls = _counting(monkeypatch)
     demand = {"x": Fraction(1)}
     first = flow.solve(demand, {"x": ["a", "b"]}, {"a", "b"})

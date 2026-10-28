@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1207,
+  "counter": 1208,
   "waypoints": [
     {
       "symbol": "W1",
@@ -28712,6 +28712,41 @@
         "tests/test_guarantees.py",
         "tests/test_withheld.py",
         "tests/test_calendar_boundary.py",
+        "mypy-baseline.json",
+        "ruff-baseline.json"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W1208",
+      "title": "Eleven more test files annotate their pytest fixtures and procedures, adding the import the annotation needs and moving a type-only pytest import under TYPE_CHECKING, so mypy falls 4325 to 4227 and ruff 2433 to 2416 (paydown)",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:mypy-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "stack606 queued behind stack605; bazel test of the eleven targets passed (11 of 11); mypy 4227 and ruff 2416 against the written baselines",
+      "evidence": "",
+      "issued_at": "2026-10-28T08:23:22Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1196",
+      "last_worked": "2026-10-28T08:23:35Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "tests/test_ics_reader.py",
+        "tests/test_flow_cache.py",
+        "tests/test_score.py",
+        "tests/test_rank.py",
+        "tests/test_vtodo.py",
+        "tests/test_alarm.py",
+        "tests/test_floorasks.py",
+        "tests/test_static.py",
+        "tests/test_memo_audits.py",
+        "tests/test_history.py",
+        "tests/test_editable.py",
         "mypy-baseline.json",
         "ruff-baseline.json"
       ],

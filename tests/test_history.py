@@ -10,6 +10,7 @@ import subprocess
 import tempfile
 from datetime import UTC, datetime
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.history import (
     QueueDoc,
@@ -26,6 +27,9 @@ from nemik.history import (
     time_in_state,
     weekly,
 )
+
+if TYPE_CHECKING:
+    import pytest
 
 # The slim-queue cache of this run is a directory of its own, not the user's.
 os.environ["NEMIK_CACHE_DIR"] = tempfile.mkdtemp(prefix="nemik-history-cache-")
@@ -346,7 +350,9 @@ def test_a_withheld_waypoint_is_not_counted_in_the_published_history(
     assert (full, kept) == (2, 1)
 
 
-def test_the_command_prints_the_diff_between_two_dates(tmp_path: Path, capsys) -> None:
+def test_the_command_prints_the_diff_between_two_dates(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
     _two_commits(tmp_path)
     code = main(["a", "--from", "2026-10-02", "--root", str(tmp_path)])
     out = capsys.readouterr().out

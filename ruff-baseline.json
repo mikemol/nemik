@@ -517,7 +517,6 @@
   "S603": 1
  },
  "tests/test_alarm.py": {
-  "ANN001": 1,
   "D103": 5,
   "PLC0415": 4,
   "PLR2004": 4
@@ -656,7 +655,7 @@
   "SLF001": 2
  },
  "tests/test_editable.py": {
-  "ANN001": 3,
+  "ANN001": 2,
   "ANN202": 1,
   "ANN204": 1,
   "D100": 1,
@@ -666,13 +665,11 @@
   "D103": 6
  },
  "tests/test_floorasks.py": {
-  "ANN001": 1,
   "D100": 1,
   "D103": 1,
   "PLR2004": 1
  },
  "tests/test_flow_cache.py": {
-  "ANN001": 3,
   "ANN002": 1,
   "ANN003": 1,
   "ANN202": 1,
@@ -740,7 +737,6 @@
   "RUF069": 1
  },
  "tests/test_history.py": {
-  "ANN001": 1,
   "D103": 8,
   "E501": 1,
   "PLC0415": 3,
@@ -770,7 +766,6 @@
   "TC003": 1
  },
  "tests/test_ics_reader.py": {
-  "ANN001": 1,
   "D103": 1,
   "PT018": 1,
   "S404": 1,
@@ -847,7 +842,6 @@
   "TC003": 1
  },
  "tests/test_memo_audits.py": {
-  "ANN001": 1,
   "ANN002": 1,
   "ANN003": 1,
   "ANN202": 1,
@@ -972,7 +966,6 @@
   "PLR6201": 1
  },
  "tests/test_rank.py": {
-  "ANN001": 1,
   "D100": 1,
   "D103": 13,
   "PLC0415": 14,
@@ -1041,7 +1034,7 @@
   "RUF031": 4
  },
  "tests/test_score.py": {
-  "ANN001": 3,
+  "ANN001": 2,
   "D103": 5,
   "E741": 1,
   "N803": 6,
@@ -1088,7 +1081,6 @@
   "PLR2004": 3
  },
  "tests/test_static.py": {
-  "ANN001": 3,
   "D103": 4,
   "PLC0415": 7,
   "PLR2004": 1,
@@ -1141,7 +1133,6 @@
   "TC003": 1
  },
  "tests/test_vtodo.py": {
-  "ANN001": 3,
   "D103": 4,
   "D205": 1,
   "E501": 6,

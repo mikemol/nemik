@@ -3,11 +3,12 @@
 """nemik:W169: the static page and its scripts, with only relative links."""
 
 import re
+from pathlib import Path
 
 from nemik.serve import PAGE_FILES, VENDOR, page_file, write_static
 
 
-def test_page_and_vendor_written_with_relative_links(tmp_path) -> None:
+def test_page_and_vendor_written_with_relative_links(tmp_path: Path) -> None:
     written = write_static(tmp_path)
     # nemik:W802: and the page's own files that exist (the stylesheet, later the script modules)
     own = {name for name in PAGE_FILES if page_file(name) is not None}
@@ -41,13 +42,13 @@ def test_data_files_cover_what_the_page_fetches_and_are_manifested() -> None:
         assert unmanifested(name, doc) == [], name
 
 
-def test_static_page_has_no_tools_panel(tmp_path) -> None:
+def test_static_page_has_no_tools_panel(tmp_path: Path) -> None:
     write_static(tmp_path)
     html = (tmp_path / "index.html").read_text()
     assert 'id="tool"' not in html and "cmd/" not in html.split("<script>")[0]
 
 
-def test_static_build_end_to_end(tmp_path) -> None:
+def test_static_build_end_to_end(tmp_path: Path) -> None:
     import json
     from pathlib import Path
 

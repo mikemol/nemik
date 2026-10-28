@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
 import json
+from pathlib import Path
 
 from nemik.floorasks import floor_asks, unresolved
 
@@ -26,7 +27,7 @@ BIB = """@misc{a1,
 """
 
 
-def test_each_bad_pointer_is_named(tmp_path) -> None:
+def test_each_bad_pointer_is_named(tmp_path: Path) -> None:
     (tmp_path / "r" / ".claude").mkdir(parents=True)
     payload: dict[str, object] = {
         "waypoints": [{"symbol": "W1", "status": "done"}],

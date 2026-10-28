@@ -6,12 +6,16 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from rdflib import Graph
 
 from nemik import flow
 from nemik.check import survey
 from nemik.serve import _to_json, to_json
+
+if TYPE_CHECKING:
+    import pytest
 
 FIXTURE = Path(__file__).parent / "fixtures" / "fleet"
 
@@ -25,7 +29,9 @@ def _graph() -> tuple[Graph, dict]:
     return g, findings
 
 
-def test_the_memo_changes_no_number_and_cuts_the_solves(monkeypatch) -> None:
+def test_the_memo_changes_no_number_and_cuts_the_solves(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     g, findings = _graph()
     calls = {"n": 0}
     real = flow.solve
