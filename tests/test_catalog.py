@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W451: the published OSLC catalog lists every repo, and its TRS links resolve to published files."""
+"""nemik:W451: the published OSLC catalog lists every repo and its TRS links resolve."""
 
 import json
 from pathlib import Path

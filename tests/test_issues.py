@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W366: the issue-tracker export reads back to the projected tasks and keeps every blocker."""
+"""nemik:W366: the issue-tracker export reads back to the projected tasks, keeping every blocker."""
 
 from pathlib import Path
 

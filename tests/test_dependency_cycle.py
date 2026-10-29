@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W484: a ring is named in order by the shared walker, and W331's warning carries the name."""
+"""nemik:W484: a ring is named in order by the shared walker; W331's warning carries the name."""
 
 import json
 import tempfile

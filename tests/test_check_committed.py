@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W272 (gcalculus:W224): nemik-check --committed asserts a peer is read at its last commit."""
+"""nemik:W272 (gcalculus:W224): nemik-check --committed reads a peer at its last commit."""
 
 from __future__ import annotations
 

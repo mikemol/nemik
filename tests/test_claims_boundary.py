@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W518: the architecture's read-only claims name the `store` module, not any name ending in it.
+"""nemik:W518: the architecture's read-only claims name the `store` module, not a suffix of it.
 
 nemik.cachestore keeps the build's own caches (never a queue) and its load()/save() tripped two
 claims

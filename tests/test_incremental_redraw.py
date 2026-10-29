@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W494: the 60 s poll follows the fleet in place instead of destroying the graph and laying it out again.
+"""nemik:W494: the 60 s poll follows the fleet in place and does not rebuild the whole layout.
 
 nemik-history --churn (W495) measured what a poll finds: structural changes (cards minted, closed,
 rewired) are 76% of commits, a card's fields 20%, status flips 2%. So both are followed in place:

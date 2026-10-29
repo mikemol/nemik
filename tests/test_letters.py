@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W271 (gcalculus:W224): nemik-check --letters finds a letter that sits in the wrong inbox."""
+"""nemik:W271 (gcalculus:W224): nemik-check --letters finds a letter in the wrong inbox."""
 
 from __future__ import annotations
 

@@ -449,7 +449,6 @@
   "PT018": 1
  },
  "tests/test_cachestore.py": {
-  "E501": 1,
   "PLR2004": 1,
   "PT018": 1,
   "SLF001": 3,
@@ -482,15 +481,11 @@
   "PLR2004": 2,
   "PT018": 1
  },
- "tests/test_catalog.py": {
-  "E501": 1
- },
  "tests/test_certify.py": {
   "S404": 1,
   "S603": 1
  },
  "tests/test_check_committed.py": {
-  "E501": 1,
   "PLR2004": 3,
   "S404": 1,
   "S603": 1,
@@ -508,8 +503,7 @@
  },
  "tests/test_claims_boundary.py": {
   "D103": 3,
-  "DOC201": 1,
-  "E501": 1
+  "DOC201": 1
  },
  "tests/test_containerfile.py": {
   "D103": 2,
@@ -527,9 +521,6 @@
  },
  "tests/test_deadlock_check.py": {
   "PLC0415": 2
- },
- "tests/test_dependency_cycle.py": {
-  "E501": 1
  },
  "tests/test_deterministic.py": {
   "D103": 1,
@@ -656,7 +647,6 @@
  },
  "tests/test_incremental_redraw.py": {
   "D103": 5,
-  "E501": 1,
   "PT018": 1
  },
  "tests/test_index.py": {
@@ -664,8 +654,7 @@
   "PLC2701": 2
  },
  "tests/test_issues.py": {
-  "D103": 2,
-  "E501": 1
+  "D103": 2
  },
  "tests/test_layout.py": {
   "ARG001": 1,
@@ -684,7 +673,6 @@
  },
  "tests/test_letters.py": {
   "D103": 7,
-  "E501": 1,
   "FBT003": 4,
   "PLC0415": 11,
   "PLR2004": 5,
