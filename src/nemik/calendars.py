@@ -19,9 +19,12 @@ import sys
 import tempfile
 from datetime import date, datetime
 from pathlib import Path
-from typing import NamedTuple
+from typing import TYPE_CHECKING, NamedTuple
 
 from nemik.vtodo import DEFAULT_HELPER
+
+if TYPE_CHECKING:
+    from rdflib import Graph
 
 DEFAULT_CONFIG = Path.home() / ".config" / "nemik" / "calendars.toml"
 _LABEL = re.compile(r"[a-z][a-z0-9-]{0,31}")
@@ -223,7 +226,7 @@ def dedupe(rows: list[dict]) -> list[dict]:
 CAL_REF = re.compile(r"cal:([a-z][a-z0-9-]{0,31})/(\S+)")
 
 
-def event_graph(occs: list[dict], queues):
+def event_graph(occs: list[dict], queues: Graph) -> Graph:
     """nemik:W159: occurrences as nemik:Event nodes, with the waypoints waiting for each next one.
 
     Every open waypoint whose blocked_on cites `cal:<label>/<uid>` waits for that event's next
@@ -259,7 +262,7 @@ def event_graph(occs: list[dict], queues):
     return g
 
 
-def days_main(argv: list[str] | None = None, g=None) -> None:
+def days_main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     """nemik-days: the next N days of the operator's opted-in calendars, each with its waiters.
 
     A separate command, not a flag on nemik-operator (nemik:W161): nemik-serve runs nemik-operator

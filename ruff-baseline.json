@@ -42,8 +42,6 @@
   "S403": 1
  },
  "src/nemik/calendars.py": {
-  "ANN001": 2,
-  "ANN201": 1,
   "C901": 2,
   "DOC201": 7,
   "DOC501": 4,
