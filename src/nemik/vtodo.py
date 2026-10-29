@@ -49,6 +49,15 @@ def opted_in(path: Path) -> set[str]:
 
 
 def uid(ref: str) -> str:
+    """Name a card's iCalendar UID: nemik: followed by its ref (nemik:W196 reads it back).
+
+    Args:
+        ref: The card's repo:W<n> reference.
+
+    Returns:
+        The UID nemik's own calendar writes carry, nemik:<repo>:W<n>.
+
+    """
     return f"nemik:{ref}"
 
 
