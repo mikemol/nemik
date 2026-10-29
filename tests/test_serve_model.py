@@ -18,7 +18,12 @@ from unittest import mock
 from nemik.serve import Model
 
 if TYPE_CHECKING:
+    from collections.abc import Iterator
     from pathlib import Path
+
+    from rdflib import Graph
+
+    from nemik.check import Finding
 
 
 def write_queue(root: Path, repo: str) -> None:
@@ -34,13 +39,15 @@ def test_concurrent_refresh_rebuilds_once(tmp_path: Path) -> None:
     model = Model(tmp_path)
     real_survey = __import__("nemik.serve", fromlist=["survey"]).survey
 
-    def slow_survey(root, phases=None):
+    def slow_survey(
+        root: Path, phases: dict[str, float] | None = None
+    ) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
         time.sleep(0.05)  # widen the race window so concurrent callers actually overlap
         yield from real_survey(root, phases)
 
     barrier = threading.Barrier(5)
 
-    def hit():
+    def hit() -> None:
         barrier.wait(timeout=2)
         model.refresh()
 
@@ -77,7 +84,9 @@ def test_poke_serves_stale_while_rebuilding(tmp_path: Path) -> None:
     real_survey = __import__("nemik.serve", fromlist=["survey"]).survey
     released = threading.Event()
 
-    def gated_survey(root, phases=None):
+    def gated_survey(
+        root: Path, phases: dict[str, float] | None = None
+    ) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
         released.wait(timeout=2)
         yield from real_survey(root, phases)
 

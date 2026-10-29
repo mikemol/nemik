@@ -213,9 +213,7 @@
   "misc": 5
  },
  "tests/test_flow_cache.py": {
-  "attr-defined": 1,
-  "misc": 3,
-  "no-untyped-def": 1
+  "attr-defined": 1
  },
  "tests/test_frontier.py": {
   "misc": 20
@@ -307,8 +305,7 @@
   "misc": 14
  },
  "tests/test_serve_model.py": {
-  "misc": 9,
-  "no-untyped-def": 3
+  "misc": 4
  },
  "tests/test_shaclcache.py": {
   "misc": 17

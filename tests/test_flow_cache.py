@@ -10,6 +10,8 @@ from typing import TYPE_CHECKING
 from nemik import flow
 
 if TYPE_CHECKING:
+    from collections.abc import Mapping
+
     import pytest
 
 
@@ -17,9 +19,15 @@ def _counting(monkeypatch: pytest.MonkeyPatch) -> dict[str, int]:
     calls = {"n": 0}
     real = flow._solve
 
-    def counted(*args, **kwargs):
+    def counted(
+        demand: Mapping[str, Fraction],
+        front: set[str],
+        prereq: dict[str, list[str]],
+        weights: Mapping[tuple[str, str], Fraction] | None,
+        edge: Fraction,
+    ) -> flow.Flow:
         calls["n"] += 1
-        return real(*args, **kwargs)
+        return real(demand, front, prereq, weights, edge)
 
     monkeypatch.setattr(flow, "_solve", counted)
     monkeypatch.setattr(flow, "_SOLVES", flow.OrderedDict())

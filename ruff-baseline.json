@@ -556,9 +556,6 @@
   "PLR2004": 1
  },
  "tests/test_flow_cache.py": {
-  "ANN002": 1,
-  "ANN003": 1,
-  "ANN202": 1,
   "D103": 2,
   "PLR2004": 1,
   "SLF001": 1
@@ -888,8 +885,6 @@
   "E501": 1
  },
  "tests/test_serve_model.py": {
-  "ANN001": 4,
-  "ANN202": 3,
   "D103": 3,
   "PLC0415": 1,
   "PLR2004": 3,
