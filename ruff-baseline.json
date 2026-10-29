@@ -2,7 +2,6 @@
  "checks/claims.py": {
   "ANN201": 1,
   "D103": 20,
-  "D205": 1,
   "E501": 1,
   "PLC0415": 3,
   "PLR2004": 1,
@@ -469,7 +468,6 @@
  },
  "tests/test_calendars.py": {
   "ARG001": 4,
-  "D205": 4,
   "D401": 2,
   "DOC201": 2,
   "E501": 4,
@@ -954,8 +952,7 @@
  },
  "tests/test_vtodo.py": {
   "D103": 4,
-  "D205": 1,
-  "E501": 5,
+  "E501": 4,
   "PLC0415": 10,
   "PLC1901": 1,
   "PLR2004": 4
@@ -983,7 +980,6 @@
  "tests/test_withheld.py": {
   "ANN001": 4,
   "D103": 5,
-  "D205": 1,
   "PLC0415": 1
  },
  "tests/test_witness_party.py": {
@@ -1001,7 +997,6 @@
   "ARG005": 1,
   "D100": 1,
   "D103": 10,
-  "D205": 1,
   "E501": 2,
   "PLC0415": 12,
   "PT018": 5,
@@ -1035,9 +1030,7 @@
  },
  "tools/gen_pieces_corpus.py": {
   "D103": 2,
-  "D205": 1,
-  "DOC201": 1,
-  "E501": 1
+  "DOC201": 1
  },
  "tools/nemik_client.py": {
   "ANN401": 1,

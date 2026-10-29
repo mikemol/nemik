@@ -282,8 +282,9 @@ def test_apply_writes_letters_to_waiting_repos(
 def test_the_skills_weather_examples_are_valid_witnesses(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """nemik:W173: the witness examples SKILL.md teaches evaluate against the observers' fact shapes
-    (a first draft compared input.alert[...] to a string, missing `.state`).
+    """nemik:W173: the witness examples SKILL.md teaches evaluate against the observers' shapes.
+
+    A first draft compared input.alert[...] to a string, missing `.state`.
     """
     import re
     from pathlib import Path

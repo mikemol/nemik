@@ -29783,11 +29783,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Hand-fix the 14 tests, tools and checks files' D205 findings (a blank line after the summary, or split the first sentence): list from ruff check --select D205 --output-format concise; the 53 src D205 findings are a separate stack (needs the Codon census at the first edit).",
-      "evidence": "",
+      "evidence": "2026-10-29: 2026-10-29: seven module docstrings landed in stack 649 as 8dcf458 (printed by mikemol-commit), reflog 03:44:42 -0400 = 07:44:42Z, green, 9 fresh of 451, about 1 min 30 s wall from the 07:43:12Z begin (began_ns 1793259792855611715); ruff 1962 to 1954. Loadavg: 28.60, 25.44, 26.45 at the submit and 27.60, 26.72, 26.83 at the verdict (R31-F2, both read by me with /proc/loadavg). Twelve D205 sites remain (test_calendars 4, test_layout 3, test_vtodo 1, test_withheld 1, test_witnesses 1, tools/gen_pieces_corpus.py 1, checks/claims.py 1). Card back to ready.",
       "issued_at": "2026-10-28T22:03:51Z",
       "minted_during": "interrupt",
       "caused_by": "W1225",
-      "last_worked": "2026-10-29T07:43:09Z",
+      "last_worked": "2026-10-29T07:47:54Z",
       "ticks_blocked": 0,
       "weight": 2,
       "manifest": [

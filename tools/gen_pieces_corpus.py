@@ -94,8 +94,9 @@ def cases() -> dict[str, dict[str, Any]]:
 
 
 def _first_repos(doc: dict[str, Any], n: int) -> dict[str, Any]:
-    """Real data at a reviewable size: the fixture fleet cut to its first `n` repos (the whole fleet is
-    3 MB of JSON; tests/test_pieces.py already runs it in Python).
+    """Real data at a reviewable size: the fixture fleet cut to its first `n` repos.
+
+    The whole fleet is 3 MB of JSON; tests/test_pieces.py already runs it in Python.
     """
     keep = sorted({str(x["repo"]) for x in doc["nodes"] if x["repo"]})[:n]
     nodes = [x for x in doc["nodes"] if x["repo"] in keep]

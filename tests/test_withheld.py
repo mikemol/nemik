@@ -89,8 +89,9 @@ def test_withheld_item_is_dropped_whole_and_pointers_become_stubs(
 def test_goals_entry_is_dropped_when_a_frontier_leaf_is_withheld(
     tmp_path, docs
 ) -> None:
-    """luthen-observability, 2026-10-02: `outside` is the leaves' blocked_on text, so a withheld
-    leaf's text rode out under the goals it feeds. The whole entry goes.
+    """luthen-observability, 2026-10-02: a withheld leaf's text rode out under the goals it feeds.
+
+    `outside` is the leaves' blocked_on text, so it carried the leaf's text. The whole entry goes.
     """
     name, entry = next(
         (n, e)

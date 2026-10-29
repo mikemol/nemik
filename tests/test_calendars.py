@@ -152,8 +152,10 @@ def test_operator_lists_the_next_days_with_waiters(
 def test_the_reader_is_found_in_nemiks_own_venv_not_on_path(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """life-82, 2026-10-02: .venv/bin/nemik-days run without the venv on PATH could not find
-    mikemol-ics. The default is the venv's own copy; a missing reader is a stated refusal.
+    """life-82, 2026-10-02: .venv/bin/nemik-days run without the venv on PATH could not find ics.
+
+    It could not find mikemol-ics. The default is the venv's own copy; a missing reader is a stated
+    refusal.
     """
     for k, v in installed._bin()[1].items():
         monkeypatch.setenv(k, v)
@@ -218,8 +220,9 @@ CHORES = "\r\n".join(
 def test_calendar_entries_take_a_name_or_a_table_and_a_typo_fails(
     tmp_path: Path,
 ) -> None:
-    """nemik:W190 (life:W31): `label = "Name"` still works; `{ name, include }` adds the filter; an
-    unknown key (a typo'd `includes` would silently mean "no filter") and a bad include fail.
+    """nemik:W190 (life:W31): `label = "Name"` still works; `{ name, include }` adds the filter.
+
+    An unknown key (a typo'd `includes` would silently mean "no filter") and a bad include fail.
     """
     p = tmp_path / "calendars.toml"
     p.write_text(
@@ -324,8 +327,9 @@ def _row(
 
 
 def test_dedupe_merges_across_calendars_never_within_one() -> None:
-    """nemik:W191: the same entry in two calendars is one row naming the other; two identical entries
-    inside one calendar are two real events; waiters from both copies are kept.
+    """nemik:W191: the same entry in two calendars is one row naming the other.
+
+    Two identical entries inside one calendar are two real events; waiters from both copies are kept.
     """
     rows = [
         _row("household", "2026-10-05T09:00", "Trash: Mike", ["life:W9"]),
@@ -412,8 +416,10 @@ def test_writing_is_opt_in_twice_and_a_calendar_is_read_only_by_default(
 def test_events_nemik_mirrored_are_not_read_back_as_the_operators_own(
     tmp_path: Path, ics: str
 ) -> None:
-    """nemik:W196: a UID of nemik:<repo>:W<n> is nemik's own write; reading it back would list
-    each dated waypoint twice, so nemik-days skips it (and does not count it).
+    """nemik:W196: a UID of nemik:<repo>:W<n> is nemik's own write.
+
+    Reading it back would list each dated waypoint twice, so nemik-days skips it (and does not
+    count it).
     """
     mixed = ICS.replace("END:VCALENDAR\r\n", "").replace(
         "UID:a@t", "UID:nemik:life:W9"

@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""Per-claim discriminating witnesses -- the `claim:` check type (registered in
-paper.toml as `[checks.claim] cmd = "python3 checks/claims.py {target}"`).
+"""Per-claim discriminating witnesses, the `claim:` check type.
+
+It is registered in paper.toml as `[checks.claim] cmd = "python3 checks/claims.py {target}"`.
 
 Each function asserts the SPECIFIC proposition its claim makes about nemik's source, so a claim
 that goes false as the code changes fails its own check rather than a shared one standing in for
