@@ -1,7 +1,8 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W271 (gcalculus:W224), W277, W278, W282: is every letter in the inbox it is addressed to, and
-does a waypoint own it?
+"""nemik:W271 (gcalculus:W224), W277, W278, W282: every letter sits in its inbox and is owned.
+
+The questions: is every letter in the inbox it is addressed to, and does a waypoint own it?
 
 A letter is a file under `<repo>/inbox/`. Its first line says who wrote it and to whom
 (`gcalculus → nemik: ...`, or with `->`). This reads the receiving side only: a letter whose header

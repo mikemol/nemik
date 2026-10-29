@@ -80,7 +80,7 @@ def age_seconds(last_tick: str | None, now: datetime | None = None) -> float | N
 def should_nudge(
     last_nudged: float | None, now: datetime | None = None, rewake_s: int = REWAKE_S
 ) -> bool:
-    """Is it time to nudge again, given when (unix seconds, or None if never) it was last nudged?
+    """Say whether to nudge again, given when (unix seconds, or None) it was last nudged.
 
     nemik:W18/luthen W117: the backoff+dedup decision luthen's checks/waker.py currently
     reinvents per-repo (a REWAKE_S threshold plus a seen-timestamp file). This is that decision,

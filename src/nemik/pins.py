@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W273 (gcalculus:W225): how far behind a peer's HEAD is each repo's pin of it?
+"""nemik:W273 (gcalculus:W225): how far each repo's pin of a peer trails the peer's HEAD.
 
 A pin is `git+https://github.com/<owner>/<peer>[.git]@<sha>` in a repo's pyproject.toml or
 MODULE.bazel. For each pin of a peer that is also cloned under the root, this prints how many
