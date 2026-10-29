@@ -93,9 +93,8 @@
   "misc": 25
  },
  "src/nemik/rank.py": {
-  "misc": 252,
-  "type-arg": 17,
-  "var-annotated": 1
+  "misc": 232,
+  "type-arg": 17
  },
  "src/nemik/salience.py": {
   "misc": 20,

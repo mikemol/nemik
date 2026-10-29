@@ -86,8 +86,13 @@ def load_composition(text: str | None = None) -> Composition:
     """
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
-    o = tomllib.loads(text).get("order", {})
-    tiers = tuple(tuple(t) for t in o.get("tiers", [["weight"]]))
+    o = _toml_table(tomllib.loads(text).get("order"))
+    raw_tiers = o.get("tiers", [["weight"]])
+    tiers = (
+        tuple(tuple(str(x) for x in t) for t in raw_tiers)
+        if isinstance(raw_tiers, list)
+        else ()
+    )
     unknown = {x for t in tiers for x in t} - set(OBJECTIVES)
     if unknown:
         msg = f"rank-weights.toml [order]: unknown objectives {sorted(unknown)}"
@@ -96,9 +101,18 @@ def load_composition(text: str | None = None) -> Composition:
     if model not in WEIGHT_MODELS:
         msg = f"rank-weights.toml [order]: weight must be one of {WEIGHT_MODELS}"
         raise ValueError(msg)
-    return Composition(
-        tiers, {k: float(v) for k, v in o.get("scalarize", {}).items()}, model
-    )
+    scalarize = _toml_table(o.get("scalarize"))
+    return Composition(tiers, {k: float(str(v)) for k, v in scalarize.items()}, model)
+
+
+def _toml_table(value: object) -> dict[str, object]:
+    """Read a TOML value as a table, or as an empty one when it is anything else (nemik:W1253).
+
+    Returns:
+        The table's entries, keyed by string, or {} when the value is not a table.
+
+    """
+    return {str(k): v for k, v in value.items()} if isinstance(value, dict) else {}
 
 
 def _dominates(a: dict[str, float], b: dict[str, float], objs: tuple[str, ...]) -> bool:
