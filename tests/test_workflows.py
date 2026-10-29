@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W320: the workflow model (data/workflows.toml) corresponds to skills/nemik/SKILL.md and to the
-code that enforces it. Each direction is checked, so a rule the skill teaches but the model lacks,
-or a
-model step the skill never mentions, fails here.
+"""nemik:W320: the workflow model (data/workflows.toml) matches skills/nemik/SKILL.md and the code.
+
+Each direction is checked, so a rule the skill teaches but the model lacks, or a model step the
+skill never mentions, fails here.
 """
 
 from __future__ import annotations

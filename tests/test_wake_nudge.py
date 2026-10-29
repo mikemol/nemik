@@ -1,7 +1,9 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W18 (luthen W117): age_seconds/should_nudge/due_nudges own the "is it time to nudge,
-and have I already nudged recently" decision, so a caller doesn't reinvent REWAKE_S bookkeeping.
+"""nemik:W18 (luthen W117): age_seconds, should_nudge and due_nudges own the nudge decision.
+
+They answer "is it time to nudge, and have I already nudged recently", so a caller does not
+reinvent REWAKE_S bookkeeping.
 """
 
 from __future__ import annotations

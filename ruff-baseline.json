@@ -432,7 +432,6 @@
  },
  "tests/test_architecture.py": {
   "D103": 1,
-  "D205": 1,
   "S404": 1,
   "S603": 1
  },
@@ -461,7 +460,6 @@
  },
  "tests/test_calendar_boundary.py": {
   "D103": 2,
-  "D205": 1,
   "PLC0415": 2
  },
  "tests/test_calendar_write.py": {
@@ -781,7 +779,6 @@
  },
  "tests/test_positioning.py": {
   "D103": 3,
-  "D205": 1,
   "PLC0415": 1
  },
  "tests/test_precommit_gate.py": {
@@ -900,8 +897,7 @@
   "PLC2701": 1
  },
  "tests/test_skill.py": {
-  "D103": 2,
-  "D205": 1
+  "D103": 2
  },
  "tests/test_sla.py": {
   "D103": 2,
@@ -973,7 +969,6 @@
  },
  "tests/test_wake_nudge.py": {
   "D103": 6,
-  "D205": 1,
   "PLR2004": 1,
   "RUF069": 1
  },
@@ -983,7 +978,6 @@
  },
  "tests/test_web_render.py": {
   "D103": 2,
-  "D205": 1,
   "E501": 1
  },
  "tests/test_withheld.py": {
@@ -1029,9 +1023,7 @@
   "PLR2004": 1
  },
  "tests/test_workflows.py": {
-  "D103": 6,
-  "D205": 1,
-  "E501": 1
+  "D103": 6
  },
  "tests/webpage.py": {
   "D401": 1,

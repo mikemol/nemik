@@ -1,7 +1,9 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W161: operator calendars stay host-side. Event text and the account credential never reach
-the graph nemik-serve builds, the metrics, the export or the static build (operator 2026-09-28).
+"""nemik:W161: operator calendars stay host-side (operator 2026-09-28).
+
+Event text and the account credential never reach the graph nemik-serve builds, the metrics, the
+export or the static build.
 
 Two witnesses. Structural: no module on the served/exported path imports the calendar reader, at
 any depth (the import graph is read from the source, so a new import fails here first). Behavioural:
