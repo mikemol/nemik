@@ -22,14 +22,14 @@ __all__ = ["duration", "fires_at", "fires_between", "recurrence_id"]
 
 
 def fires_at(trigger: str, dtstart: str = "", due: str = "") -> datetime | None:
-    """The UTC instant `trigger` fires, or None when its anchor is unset."""
+    """Give the UTC instant `trigger` fires, or None when its anchor is unset."""
     # An aware datetime always has a tzinfo; the fallback only satisfies the type.
     host_zone = datetime.now().astimezone().tzinfo or UTC
     return _fires_at(trigger, dtstart, due, day_zone=host_zone)
 
 
 def recurrence_id(when: datetime | date, dtstart: str) -> str:
-    """An occurrence's RECURRENCE-ID written in DTSTART's own form, the key mtools:W310 uses."""
+    """Give an occurrence's RECURRENCE-ID in DTSTART's own form, the key mtools:W310 uses."""
     if dtstart.startswith("TZID="):
         zone = dtstart.removeprefix("TZID=").partition(":")[0]
         assert isinstance(when, datetime)

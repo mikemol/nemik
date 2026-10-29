@@ -39,14 +39,14 @@ SCALAR: dict[str, dict[str, object]] = {
 
 
 def field(cls: str) -> dict[str, Any]:
-    """The schema of one field class; `list-X` is an array of X."""
+    """Give the schema of one field class; `list-X` is an array of X."""
     if cls.startswith("list-"):
         return {"type": "array", "items": field(cls.removeprefix("list-"))}
     return SCALAR[cls]
 
 
 def record(fields: dict[str, str]) -> dict[str, Any]:
-    """An object holding only the manifest's fields for it (none required: absent means unknown)."""
+    """Give an object of only the manifest's fields for it (none required: absent means unknown)."""
     return {
         "type": "object",
         "properties": {name: field(cls) for name, cls in sorted(fields.items())},
@@ -63,7 +63,7 @@ def _by_repo(value: dict[str, Any]) -> dict[str, Any]:
 
 
 def schemas() -> dict[str, dict[str, Any]]:
-    """{published path pattern: its schema}, from the manifest."""
+    """Give {published path pattern: its schema}, from the manifest."""
     m = load()
     version = json.loads(
         files("nemik.data").joinpath("field-manifest.json").read_text()

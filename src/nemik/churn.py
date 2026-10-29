@@ -80,7 +80,7 @@ def _times(snaps: list[Snapshot]) -> list[datetime]:
 
 
 def _state(snaps: list[Snapshot], when: datetime) -> dict:
-    """The queue as it stood at `when`: the last commit at or before it."""
+    """Give the queue as it stood at `when`: the last commit at or before it."""
     at = bisect.bisect_right(_times(snaps), when)
     return snaps[at - 1][1] if at else {}
 
@@ -114,7 +114,7 @@ def churn(
 def commit_classes(
     fleet: dict[str, list[Snapshot]], start: datetime, end: datetime
 ) -> dict[str, int]:
-    """What each commit in the span did, by class, independent of any poll step."""
+    """Count what each commit in the span did, by class, independent of any poll step."""
     out: Counter[str] = Counter()
     for snaps in fleet.values():
         for i in range(1, len(snaps)):
@@ -124,7 +124,7 @@ def commit_classes(
 
 
 def sample(repo: Path, since: str, start: datetime) -> list[Snapshot]:
-    """The repo's queue at the span's start, then every commit after it."""
+    """Give the repo's queue at the span's start, then every commit after it."""
     base = queue_at(repo, resolve(repo, since))
     return [(start, base), *snapshots(repo, since, full=True)]
 

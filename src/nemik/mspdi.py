@@ -33,7 +33,7 @@ def _sub(parent: ET.Element, tag: str, text: str) -> ET.Element:
 
 
 def write(tasks: list[Task], name: str = "nemik") -> str:
-    """The MSPDI document for `tasks`."""
+    """Build the MSPDI document for `tasks`."""
     ET.register_namespace("", NS)
     project = ET.Element(f"{{{NS}}}Project")
     _sub(project, "Name", name)
@@ -132,7 +132,7 @@ def main(argv: list[str] | None = None) -> None:
 
 
 def read(text: str) -> list[Task]:
-    """The tasks an MSPDI document written by `write` holds (for the round-trip test)."""
+    """Read the tasks an MSPDI document written by `write` holds (for the round-trip test)."""
     q = {"p": NS}
     project = ET.fromstring(text)
     rows = project.findall("p:Tasks/p:Task", q)

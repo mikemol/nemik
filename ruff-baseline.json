@@ -20,14 +20,12 @@
   "RUF001": 1
  },
  "src/nemik/alarm.py": {
-  "D401": 2,
   "DOC201": 3,
   "PLC0415": 2,
   "PLR0913": 1,
   "S101": 2
  },
  "src/nemik/apischema.py": {
-  "D401": 3,
   "DOC201": 5
  },
  "src/nemik/blocks.py": {
@@ -95,7 +93,6 @@
   "T201": 6
  },
  "src/nemik/churn.py": {
-  "D401": 3,
   "DOC201": 8,
   "E501": 2,
   "FBT001": 1,
@@ -185,7 +182,6 @@
   "T201": 1
  },
  "src/nemik/mspdi.py": {
-  "D401": 2,
   "DOC201": 2,
   "FBT003": 1,
   "PLC0415": 9,
