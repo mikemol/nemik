@@ -3256,3 +3256,7 @@
 2026-10-29T12:42:27Z  status W1242 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-29T12:42:29Z  status W1269 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-29T12:51:48Z  status W1269 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-29T12:55:43Z  status W1242 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-29T13:11:57Z  interrupt W1271 minted    -         "Decide the round ceiling's headroom as a windowed median of cores-minus-busy readings, not one reading, and write the choice with its reason on W1136"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1136
+2026-10-29T13:11:57Z  interrupt W1272 minted    -         "Wire roundof.ceiling_of into width() with a per-entry cost from the gate_cost series, and test that the declared CEILING holds while either input is unmeasured"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1136
+2026-10-29T13:12:18Z  status W1242 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

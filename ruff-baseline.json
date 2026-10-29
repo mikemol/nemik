@@ -782,7 +782,6 @@
   "ARG001": 1,
   "ARG005": 1,
   "D103": 2,
-  "E501": 1,
   "FBT001": 1,
   "PLR2004": 1,
   "S404": 1,
@@ -826,7 +825,6 @@
  },
  "tests/test_salience.py": {
   "D103": 9,
-  "E501": 1,
   "S404": 1,
   "S603": 1
  },
@@ -851,8 +849,7 @@
   "PT018": 1
  },
  "tests/test_shaclcache.py": {
-  "D103": 4,
-  "E501": 1
+  "D103": 4
  },
  "tests/test_shaclcache_threads.py": {
   "D103": 2,
@@ -866,8 +863,7 @@
   "D103": 2
  },
  "tests/test_sla.py": {
-  "D103": 2,
-  "E501": 1
+  "D103": 2
  },
  "tests/test_starved.py": {
   "D103": 2,

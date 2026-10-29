@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W427: nemik-rank --apply hands its rows to mikemol-paths-forward --weights-from, never the file."""
+"""nemik:W427: nemik-rank --apply hands its rows to the writer's --weights-from, never the file."""
 
 import json
 import subprocess
