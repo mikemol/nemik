@@ -54,7 +54,12 @@ class Task:
 
 
 def project(g: Graph, repos: set[str] | None = None) -> list[Task]:
-    """Give the cards of `repos` (every repo when None) as tasks, in cite order."""
+    """Give the cards of `repos` (every repo when None) as tasks, in cite order.
+
+    Returns:
+        One Task per card of the chosen repos, in cite order.
+
+    """
     return project_cards(cards(g), repos)
 
 
@@ -65,6 +70,11 @@ def project_cards(
 
     A card's predecessors are what it waits for and what enables it; one in another repo is a
     cross-project link.
+
+    Returns:
+        One Task per card of the chosen repos, numbered from 1 in cite order, with its
+        predecessor links.
+
     """
     chosen = [
         c for cite, c in sorted(by_cite.items()) if repos is None or c.repo in repos
@@ -85,5 +95,10 @@ def project_cards(
 
 
 def decode(tasks: list[Task]) -> set[tuple[str, str]]:
-    """(card, predecessor) cite pairs: what `project` was given, for a round-trip test."""
+    """(card, predecessor) cite pairs: what `project` was given, for a round-trip test.
+
+    Returns:
+        The set of (card cite, predecessor cite) pairs across the tasks.
+
+    """
     return {(t.cite, link.cite) for t in tasks for link in t.preds}

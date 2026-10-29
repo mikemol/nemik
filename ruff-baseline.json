@@ -19,7 +19,6 @@
   "RUF001": 1
  },
  "src/nemik/alarm.py": {
-  "DOC201": 3,
   "PLC0415": 2,
   "PLR0913": 1,
   "S101": 2
@@ -177,7 +176,6 @@
   "T201": 1
  },
  "src/nemik/mspdi.py": {
-  "DOC201": 2,
   "FBT003": 1,
   "PLC0415": 9,
   "S314": 1,
@@ -202,15 +200,12 @@
   "DOC201": 2
  },
  "src/nemik/pins.py": {
-  "DOC201": 5,
+  "DOC201": 1,
   "PLC0415": 1,
   "S404": 1,
   "S603": 3,
   "S607": 3,
   "T201": 7
- },
- "src/nemik/projection.py": {
-  "DOC201": 3
  },
  "src/nemik/rank.py": {
   "C901": 1,

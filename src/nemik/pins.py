@@ -37,7 +37,12 @@ class Pin(NamedTuple):
 
 
 def pins(root: Path) -> list[Pin]:
-    """Every distinct (repo, peer, sha) pin in the pin files of each repo under `root`."""
+    """Every distinct (repo, peer, sha) pin in the pin files of each repo under `root`.
+
+    Returns:
+        The distinct pins, sorted.
+
+    """
     found: set[Pin] = set()
     for name in _FILES:
         for path in sorted(root.glob(f"*/{name}")):
@@ -55,6 +60,10 @@ def behind(root: Path, pin: Pin) -> int | None:
     """Count the commits the peer's HEAD is ahead of the pin.
 
     None when the peer is not cloned under `root` or does not know the pinned commit.
+
+    Returns:
+        The commit count, or None when the peer is not cloned or does not know the commit.
+
     """
     clone = root / pin.peer
     if not (clone / ".git").exists():
@@ -77,6 +86,11 @@ def installed(receipt: Path) -> str | None:
 
     Read from uv's receipt (`git = "file:///...?rev=<sha>"`); None when nemik is not installed that
     way.
+
+    Returns:
+        The rev in the receipt's nemik requirement, or None when there is no receipt or no such
+        requirement.
+
     """
     if not receipt.is_file():
         return None
@@ -102,6 +116,11 @@ def deployed(namespace: str = "nemik") -> str | None:
 
     Found 2026-10-13: pushes were confirmed on origin, but the ship stopped at 3470e43 and the page
     ran 60 commits behind for a day and a half with nothing saying so.
+
+    Returns:
+        The 40-hex commit at the end of the image tag, or None when kubectl or the cluster cannot
+        be read or the tag carries none.
+
     """
     try:
         run = subprocess.run(

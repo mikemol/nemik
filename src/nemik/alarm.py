@@ -22,14 +22,25 @@ __all__ = ["duration", "fires_at", "fires_between", "recurrence_id"]
 
 
 def fires_at(trigger: str, dtstart: str = "", due: str = "") -> datetime | None:
-    """Give the UTC instant `trigger` fires, or None when its anchor is unset."""
+    """Give the UTC instant `trigger` fires, or None when its anchor is unset.
+
+    Returns:
+        The instant in UTC, or None when the DTSTART or DUE the trigger counts from is unset.
+
+    """
     # An aware datetime always has a tzinfo; the fallback only satisfies the type.
     host_zone = datetime.now().astimezone().tzinfo or UTC
     return _fires_at(trigger, dtstart, due, day_zone=host_zone)
 
 
 def recurrence_id(when: datetime | date, dtstart: str) -> str:
-    """Give an occurrence's RECURRENCE-ID in DTSTART's own form, the key mtools:W310 uses."""
+    """Give an occurrence's RECURRENCE-ID in DTSTART's own form, the key mtools:W310 uses.
+
+    Returns:
+        TZID=<zone>:<local time> for a zoned DTSTART, a bare date for a date DTSTART, else the
+        UTC instant with a trailing Z.
+
+    """
     if dtstart.startswith("TZID="):
         zone = dtstart.removeprefix("TZID=").partition(":")[0]
         assert isinstance(when, datetime)
@@ -57,6 +68,11 @@ def fires_between(
     the rule from DTSTART shifts the trigger by its distance from DTSTART (a DUE-relative trigger
     too, since an occurrence's DUE moves with its start), except occurrences that are EXDATEs or
     completed (`done`, mtools:W310's {RECURRENCE-ID: COMPLETED}). An absolute trigger fires once.
+
+    Returns:
+        The (UTC instant, RECURRENCE-ID) pairs in [start, end), empty when the trigger has no
+        anchor to count from.
+
     """
     base = fires_at(trigger, dtstart, due)
     if base is None:

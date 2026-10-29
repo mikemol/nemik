@@ -33,7 +33,13 @@ def _sub(parent: ET.Element, tag: str, text: str) -> ET.Element:
 
 
 def write(tasks: list[Task], name: str = "nemik") -> str:
-    """Build the MSPDI document for `tasks`."""
+    """Build the MSPDI document for `tasks`.
+
+    Returns:
+        The XML text, with a declaration, one Task per task, its predecessor links, and its cite
+        in an extended attribute.
+
+    """
     ET.register_namespace("", NS)
     project = ET.Element(f"{{{NS}}}Project")
     _sub(project, "Name", name)
@@ -132,7 +138,13 @@ def main(argv: list[str] | None = None) -> None:
 
 
 def read(text: str) -> list[Task]:
-    """Read the tasks an MSPDI document written by `write` holds (for the round-trip test)."""
+    """Read the tasks an MSPDI document written by `write` holds (for the round-trip test).
+
+    Returns:
+        One Task per Task element: uid, cite, name, done when PercentComplete is 100, and its
+        predecessor links, cross-project ones marked as such.
+
+    """
     q = {"p": NS}
     project = ET.fromstring(text)
     rows = project.findall("p:Tasks/p:Task", q)
