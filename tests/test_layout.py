@@ -1,13 +1,13 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W125: the web view's layout quality, measured on a fixed fleet-shaped graph and held to
-budgets, in both colour schemes.
+"""nemik:W125: the web view's layout quality, held to budgets in both colour schemes.
 
-The operator's objective (2026-09-28): minimize the 95th-percentile edge length, inside boxes and
-across them, with every label inside its shape. tests/fixtures/fleet/ is the fleet's real shape with
-its content removed (make_fleet.py). Metrics and screenshots are written as test outputs
-(bazel: bazel-testlogs/test_layout/test.outputs/; host: the pytest tmp dir), so a layout change
-is compared by reading two files, not by re-deriving a harness.
+It is measured on a fixed fleet-shaped graph. The operator's objective (2026-09-28): minimize the
+95th-percentile edge length, inside boxes and across them, with every label inside its shape.
+tests/fixtures/fleet/ is the fleet's real shape with its content removed (make_fleet.py). Metrics
+and screenshots are written as test outputs (bazel: bazel-testlogs/test_layout/test.outputs/;
+host: the pytest tmp dir), so a layout change is compared by reading two files, not by re-deriving
+a harness.
 """
 
 import json
@@ -1445,9 +1445,10 @@ def test_treemap_view_draws(server: str, tmp_path: Path) -> None:
 
 @pytest.mark.parametrize("width", [380, 1400])
 def test_side_panel_never_overflows_sideways(server: str, width: int) -> None:
-    """Operator 2026-10-02: the panel cut text off on the right (a long ask, URL or ref list in the
-    two-column detail grid). At phone and desktop widths, with the needs-you lane open, nothing in
-    the aside is wider than the aside.
+    """Operator 2026-10-02: the panel cut text off on the right.
+
+    A long ask, URL or ref list in the two-column detail grid was cut off. At phone and desktop
+    widths, with the needs-you lane open, nothing in the aside is wider than the aside.
     """
     with sync_playwright() as p:
         browser = _launch(p)
@@ -1475,8 +1476,9 @@ def test_side_panel_never_overflows_sideways(server: str, width: int) -> None:
 
 
 def test_every_cite_in_the_panel_is_a_repo_colon_link(server: str) -> None:
-    """Operator 2026-10-02: one cite format (repo:W<n>, never 'repo W<n>' or 'repo/W<n>'), and
-    every cite shown is a link. Checked over a waypoint's detail, a lane, findings and wake.
+    """Operator 2026-10-02: one cite format (repo:W<n>, never 'repo W<n>' or 'repo/W<n>').
+
+    Every cite shown is a link. Checked over a waypoint's detail, a lane, findings and wake.
     """
     with sync_playwright() as p:
         browser = _launch(p)
