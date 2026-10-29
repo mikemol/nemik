@@ -3277,3 +3277,7 @@
 2026-10-29T15:40:08Z  status W1014 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-29T15:42:09Z  status W1014 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-29T15:51:07Z  status W1273 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-29T16:06:14Z  status W1014 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-29T16:12:18Z  status W1014 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-29T16:18:33Z  tick  W1274 minted    -         "Read G1-HANDOFF from the rebuilt writer's own tick-close output and tell luthen-observability the nemik sha c0a10be"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1273
+2026-10-29T16:18:41Z  status W1273 landed>done writer    "landed -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

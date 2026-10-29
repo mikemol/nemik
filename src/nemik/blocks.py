@@ -130,9 +130,11 @@ def inbound(g: Graph, letters: bool = False) -> list[dict[str, Any]]:
 
 
 def ready_behind_open(g: Graph) -> dict[Node, list[Node]]:
-    """nemik:W465: each ready card an open card enables, with those enablers, leaving out the
-    umbrellas (2+ open children of its own repo) that ReadyUmbrella already reports. A pure reading
-    of the graph, so annotate (the check) and serve (the view's mark, nemik:W477) agree.
+    """nemik:W465: each ready card an open card enables, with those enablers.
+
+    Umbrellas (2+ open children of its own repo) that ReadyUmbrella already reports are left out.
+    A pure reading of the graph, so annotate (the check) and serve (the view's mark, nemik:W477)
+    agree.
     """
     out: dict[Node, list[Node]] = {}
     for node in g.subjects(OSLC_CM.state, NEMIK.Ready):
@@ -306,9 +308,11 @@ def node_flags(
 
 
 def dependency_cycles(g: Graph) -> list[tuple[Node, ...]]:
-    """nemik:W484 (mtools:W1134 found a ring of three ready cards blocked into a deadlock): every
-    cycle of open cards that wait on or enable one another, named once from its earliest card, as
-    the fleet's shared walker (mikemol.frontier.walk, mtools:W1127) finds it. A ring can never land.
+    """nemik:W484: every cycle of open cards that wait on or enable one another, named once.
+
+    mtools:W1134 found a ring of three ready cards blocked into a deadlock. Each cycle is named
+    from its earliest card, as the fleet's shared walker (mikemol.frontier.walk, mtools:W1127)
+    finds it. A ring can never land.
     """
     from mikemol.frontier.walk import frontier as walk
 
@@ -450,8 +454,10 @@ CATEGORIES = ("needs-you", "no-command", "errand", "answered", "condition", "uns
 
 
 def errand_repos(text: str | None = None) -> frozenset[str]:
-    """nemik:W460: the repos whose machine-sounding acts are the operator's own errands ("apply for
-    Medicaid", a "drill" session), declared under [errand] in rank-weights.toml: no tool to write.
+    """nemik:W460: the repos whose machine-sounding acts are the operator's own errands.
+
+    The acts are such as "apply for Medicaid" or a "drill" session, declared under [errand] in
+    rank-weights.toml: no tool to write.
     """
     import tomllib
     from importlib.resources import files
@@ -506,8 +512,9 @@ def _ask_key(text: str) -> str:
 
 
 def waiting_behind(g: Graph, node: Node) -> set[Node]:
-    """Every open waypoint, in any workstream, that waits on `node` directly or through others:
-    it waits for it (blocked_on) or `node` enables it. So an operator ask held by one repo shows
+    """Every open waypoint, in any workstream, that waits on `node` directly or through others.
+
+    It waits for it (blocked_on) or `node` enables it. So an operator ask held by one repo shows
     the work queued behind it in others (resumes:W1 behind life:W21, 2026-09-28).
     """
     seen: set[Node] = set()
@@ -679,8 +686,10 @@ def _operator_asks(g: Graph) -> list[dict[str, Any]]:
 
 
 def with_salience(g: Graph, asks: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """nemik:W298 (operator 2026-10-10: the waiting-on-operator machinery must carry the salience
-    signal): how much demand waits behind each ask.
+    """nemik:W298: how much demand waits behind each operator ask.
+
+    The operator ruled (2026-10-10) that the waiting-on-operator machinery must carry the salience
+    signal.
 
     Each ask is a card with no open prerequisite, so in the flow model it is ground: it absorbs the
     demand of the cards that need it, weighted by the class weights of rank-weights.toml (as

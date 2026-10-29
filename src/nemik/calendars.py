@@ -34,8 +34,9 @@ def today() -> date:
 
 
 class Calendar(NamedTuple):
-    """One opted-in calendar: its Akonadi collection, an optional summary filter (nemik:W190), and
-    optionally the repos whose dated waypoints nemik writes INTO it (nemik:W196, life's ask).
+    """One opted-in calendar: its Akonadi collection and an optional summary filter (nemik:W190).
+
+    It may also name the repos whose dated waypoints nemik writes INTO it (nemik:W196, life's ask).
     """
 
     name: str
@@ -122,8 +123,9 @@ KEEP = ("uid", "start", "end", "all_day", "summary", "recurrence_id")
 
 
 def _venv_ics() -> str:
-    """mikemol-ics from nemik's own venv (it is vendored there, nemik:W157), not from PATH: a host
-    caller runs .venv/bin/nemik-days without activating the venv (life-82, 2026-10-02).
+    """Locate mikemol-ics in nemik's own venv (it is vendored there, nemik:W157), not on PATH.
+
+    A host caller runs .venv/bin/nemik-days without activating the venv (life-82, 2026-10-02).
     """
     import sys
 
@@ -222,8 +224,10 @@ CAL_REF = re.compile(r"cal:([a-z][a-z0-9-]{0,31})/(\S+)")
 
 
 def event_graph(occs: list[dict], queues):
-    """nemik:W159: occurrences as nemik:Event nodes, and every open waypoint whose blocked_on cites
-    `cal:<label>/<uid>` waiting for that event's next occurrence (nemik:waitsFor).
+    """nemik:W159: occurrences as nemik:Event nodes, with the waypoints waiting for each next one.
+
+    Every open waypoint whose blocked_on cites `cal:<label>/<uid>` waits for that event's next
+    occurrence (nemik:waitsFor).
 
     HOST-SIDE ONLY: the result carries event text, so it is merged into a graph for nemik-operator
     on the host, never into nemik-serve, the export or metrics (operator 2026-09-28).
