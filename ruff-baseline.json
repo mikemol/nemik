@@ -709,9 +709,6 @@
   "PLR2004": 2
  },
  "tests/test_memo_audits.py": {
-  "ANN002": 1,
-  "ANN003": 1,
-  "ANN202": 1,
   "D103": 1,
   "E501": 1,
   "PLC2701": 1

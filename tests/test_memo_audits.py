@@ -15,6 +15,9 @@ from nemik.check import survey
 from nemik.serve import _to_json, to_json
 
 if TYPE_CHECKING:
+    from collections.abc import Collection, Mapping
+    from fractions import Fraction
+
     import pytest
 
 FIXTURE = Path(__file__).parent / "fixtures" / "fleet"
@@ -36,9 +39,15 @@ def test_the_memo_changes_no_number_and_cuts_the_solves(
     calls = {"n": 0}
     real = flow.solve
 
-    def counted(*args, **kwargs):
+    def counted(
+        demand: Mapping[str, Fraction],
+        needs: Mapping[str, Collection[str]],
+        frontier: Collection[str],
+        weights: Mapping[tuple[str, str], Fraction] | None = None,
+        edge: Fraction = flow.ONE,
+    ) -> flow.Flow:
         calls["n"] += 1
-        return real(*args, **kwargs)
+        return real(demand, needs, frontier, weights, edge)
 
     monkeypatch.setattr("nemik.salience.solve", counted)
     plain = _to_json(g, findings)

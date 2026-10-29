@@ -253,8 +253,7 @@
   "no-untyped-def": 1
  },
  "tests/test_memo_audits.py": {
-  "misc": 8,
-  "no-untyped-def": 1,
+  "misc": 5,
   "type-arg": 1
  },
  "tests/test_mpxj.py": {
