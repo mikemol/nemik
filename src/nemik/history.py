@@ -311,8 +311,9 @@ def _edges(queue: QueueDoc) -> set[tuple[str, str, str]]:
 
 
 def _number(symbol: str) -> tuple[int, int, str]:
-    """A sort key: W<n> by number, then anything that is not a W<n> (an old or foreign symbol in a
-    committed queue, such as luthen's `R-amtool`) after them by name, never an error.
+    """A sort key: W<n> by number, then any other symbol by name, never an error.
+
+    Another symbol is an old or foreign one in a committed queue, such as luthen's `R-amtool`.
     """
     digits = symbol.removeprefix("W")
     if symbol.startswith("W") and digits.isdigit():
@@ -774,8 +775,9 @@ def commit_snapshots(
 
 
 def time_in_state(snaps: list[Snapshot], now: datetime) -> dict[str, dict[str, float]]:
-    """Seconds each waypoint spent in each status: a commit's state holds until the next commit
-    (the last one until `now`).
+    """Seconds each waypoint spent in each status.
+
+    A commit's state holds until the next commit (the last one until `now`).
     """
     totals: dict[str, dict[str, float]] = {}
     for i, (at, queue) in enumerate(snaps):
@@ -801,8 +803,10 @@ def _flow_efficiency(
 
 
 def weekly(snaps: list[Snapshot]) -> list[dict]:
-    """One row per ISO week that saw a commit: opened and closed that week, how much of what was
-    open at the week's last commit was blocked, and the longest-running block then.
+    """One row per ISO week that saw a commit.
+
+    Each row has what opened and closed that week, how much of what was open at the week's last
+    commit was blocked, and the longest-running block then.
 
     A block's age runs from the commit where the card last entered `blocked`.
     """
@@ -898,8 +902,10 @@ BASELINE_PATH = ".claude/baseline"
 
 
 def baseline_spec(repo: Path, spec: str | None) -> str | None:
-    """nemik:W318: the baseline to measure from: `spec` when given, else the first word of the repo's
-    declared `.claude/baseline` file (a revision or a date), else None (no baseline declared).
+    """nemik:W318: the baseline to measure from.
+
+    That is `spec` when given, else the first word of the repo's declared `.claude/baseline` file
+    (a revision or a date), else None (no baseline declared).
     """
     if spec:
         return spec
@@ -911,9 +917,11 @@ def baseline_spec(repo: Path, spec: str | None) -> str | None:
 
 
 def variance(base: dict, now: dict) -> dict:
-    """nemik:W318: planned versus actual since a baseline. The plan is the cards open at the baseline:
-    how many are now closed, dropped, or still open. The unplanned is every card minted since, split
-    by how it was minted (an interrupt, a tick, or not recorded). Both arguments are parsed queues.
+    """nemik:W318: planned versus actual since a baseline.
+
+    The plan is the cards open at the baseline: how many are now closed, dropped, or still open.
+    The unplanned is every card minted since, split by how it was minted (an interrupt, a tick, or
+    not recorded). Both arguments are parsed queues.
     """
     planned = {
         s
@@ -947,9 +955,10 @@ def variance(base: dict, now: dict) -> dict:
 
 def shape_drift(base: dict, now: dict) -> dict:
     """nemik:W349: how far the graph's SHAPE moved since a baseline, beside `variance`'s counts.
-    Edges added and removed (enables and waits), the planned cards (open at the baseline) whose
-    title changed (re-scoped) or whose own edges changed (re-wired), and the share of planned cards
-    touched either way.
+
+    It counts edges added and removed (enables and waits), the planned cards (open at the baseline)
+    whose title changed (re-scoped) or whose own edges changed (re-wired), and the share of planned
+    cards touched either way.
     """
     planned = {
         s

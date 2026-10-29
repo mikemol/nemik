@@ -114,8 +114,10 @@ def _closed(queue: dict) -> set[str]:
 
 
 def answered(repo: str, path: Path, queue: dict) -> bool:
-    """True when the letter names waypoints of `repo` and every one of them is closed: what it
-    asked about has landed or been dropped. A letter naming none of `repo`'s waypoints is live.
+    """True when the letter names waypoints of `repo` and every one of them is closed.
+
+    What it asked about has landed or been dropped. A letter naming none of `repo`'s waypoints is
+    live.
     """
     own = {
         f"W{m[2]}"
@@ -165,8 +167,9 @@ def alert_closed(
 
 
 def orphans(root: Path, repo: str | None = None) -> list[tuple[str, Path, bool]]:
-    """(repo, letter, answered) for each letter under `<repo>/inbox/` no waypoint cites, for `repo`
-    alone when given.
+    """(repo, letter, answered) for each letter under `<repo>/inbox/` no waypoint cites.
+
+    For `repo` alone when given.
     """
     found: list[tuple[str, Path, bool]] = []
     # nemik:W280: a letter is owned when ANY waypoint in the fleet cites its path (a sender cites
