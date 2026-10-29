@@ -68,8 +68,9 @@ def repo_scope(g: Graph, repo: str) -> set[str]:
 
 
 def cone(g: Graph, card: str) -> set[str]:
-    """nemik:W333: `card` with everything it transitively waits on and everything transitively
-    waiting on it (open cards only): the scope of the selected card's longest chain.
+    """nemik:W333: `card` with all it transitively waits on and all that transitively waits on it.
+
+    Open cards only: the scope of the selected card's longest chain.
     """
     nodes = _open(g)
     start = next((n for n in nodes if ref(n) == card), None)
@@ -92,9 +93,11 @@ def cone(g: Graph, card: str) -> set[str]:
 
 
 def critical(g: Graph, scope: set[str] | None = None) -> Critical:
-    """The critical path of the open graph: its length, its zero-slack cards in dependency order,
-    and every open card's slack. With `scope` (a set of cites, W333) only those cards count, so the
-    path and slack are the longest within a repo, a visible set, or one card's cone.
+    """The critical path of the open graph: its length, zero-slack cards and every card's slack.
+
+    The zero-slack cards come in dependency order. With `scope` (a set of cites, W333) only those
+    cards count, so the path and slack are the longest within a repo, a visible set, or one card's
+    cone.
     """
     from nemik.cards import cards
 
@@ -217,10 +220,11 @@ class Fire(NamedTuple):
 
 
 def fires(g: Graph, scope: set[str] | None = None) -> list[Fire]:
-    """nemik:W347: fire ripple. Each open card minted during an interrupt, with the planned work it
-    holds up: the open tick-minted cards downstream of it, and how much longer the scope's critical
-    path is while it stays open (its length now, minus the length if it were done). Only fires that
-    hold up planned work are listed, heaviest delay first.
+    """nemik:W347: fire ripple: each interrupt-minted open card and the planned work it holds up.
+
+    That work is the open tick-minted cards downstream of it, and how much longer the scope's
+    critical path is while it stays open (its length now, minus the length if it were done). Only
+    fires that hold up planned work are listed, heaviest delay first.
     """
     nodes = _open(g)
     if scope is not None:
@@ -250,8 +254,10 @@ def fires(g: Graph, scope: set[str] | None = None) -> list[Fire]:
 
 
 def what_if(before: Critical, after: Critical, cites: list[str]) -> str:
-    """The delta a what-if makes: path length, the cards that leave or join a longest chain, and the
-    open cards whose slack changed (the closed ones themselves are not counted).
+    """The delta a what-if makes: path length, chain changes and slack changes.
+
+    It covers the cards that leave or join a longest chain and the open cards whose slack changed
+    (the closed ones themselves are not counted).
     """
     left = sorted(set(before.chain) - set(after.chain) - set(cites))
     joined = sorted(set(after.chain) - set(before.chain))

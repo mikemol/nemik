@@ -88,8 +88,10 @@ def _state(snaps: list[Snapshot], when: datetime) -> dict:
 def churn(
     fleet: dict[str, list[Snapshot]], start: datetime, end: datetime, step: int
 ) -> Churn:
-    """Classify every `step`-second poll in [start, end): compare each moved repo's queue at the
-    poll's two ends, and count the interval under its worst class.
+    """Classify every `step`-second poll in [start, end).
+
+    Compare each moved repo's queue at the poll's two ends, and count the interval under its worst
+    class.
     """
     counts: Counter[str] = Counter()
     times = {repo: _times(snaps) for repo, snaps in fleet.items()}

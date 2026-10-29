@@ -73,8 +73,10 @@ _REV = re.compile(r"[?&]rev=([0-9a-f]{7,40})")
 
 
 def installed(receipt: Path) -> str | None:
-    """nemik:W379: the commit the host's `uv tool install` of nemik was made from, read from uv's
-    receipt (`git = "file:///...?rev=<sha>"`); None when nemik is not installed that way.
+    """nemik:W379: the commit the host's `uv tool install` of nemik was made from.
+
+    Read from uv's receipt (`git = "file:///...?rev=<sha>"`); None when nemik is not installed that
+    way.
     """
     if not receipt.is_file():
         return None
@@ -94,8 +96,9 @@ _IMAGE_SHA = re.compile(r"-([0-9a-f]{40})$")
 
 
 def deployed(namespace: str = "nemik") -> str | None:
-    """nemik:W455: the commit the cluster's nemik Deployment runs, from its image tag
-    (`.../nemik:<epoch>-<sha40>`); None when kubectl or the cluster cannot be read.
+    """nemik:W455: the commit the cluster's nemik Deployment runs, from its image tag.
+
+    The tag reads `.../nemik:<epoch>-<sha40>`; None when kubectl or the cluster cannot be read.
 
     Found 2026-10-13: pushes were confirmed on origin, but the ship stopped at 3470e43 and the page
     ran 60 commits behind for a day and a half with nothing saying so.
