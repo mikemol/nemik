@@ -3295,3 +3295,5 @@
 2026-10-29T18:04:34Z  interrupt W1277 minted    -         "Find why the pace file is stale: nemik-rank --pace reads as-of 2026-10-29T04:25:05Z, about 13.5 h old, so the producer stopped or its egress did"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-42
 2026-10-29T18:05:13Z  status W1014 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-29T18:06:58Z  status W1277 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-29T18:33:13Z  status W1014 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-29T18:42:21Z  status W1014 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

@@ -1265,9 +1265,11 @@ def write_static(out: Path) -> list[Path]:
 
 
 def static_data(model: Model) -> dict[str, object]:
-    """nemik:W170: every document the page fetches, computed once from one export, as
-    {published path: document}. Only what the page reads is published: inbound/<repo>.json was
-    planned, but the page never fetches it, so it stays off the public surface.
+    """nemik:W170: every document the page fetches, computed once from one export.
+
+    Shaped as {published path: document}. Only what the page reads is published:
+    inbound/<repo>.json was planned, but the page never fetches it, so it stays off the public
+    surface.
     """
     from nemik.rank import goals, load_weights
 
@@ -1331,10 +1333,12 @@ def build_static(
     private: bool = False,
     exports: Path | None = None,
 ) -> list[Path]:
-    """nemik:W153 (see _build_static), inside the same per-build scope the live server's document is
-    built in (nemik:W412, W403): each graph indexed once and each flow solve answered once. The
-    build ran outside it, so the goals, the pieces and the TRS feeds asked rdflib 1.09 M times for
-    facts the index holds (a warm publish profiled at 94 s, a third of it in rank.goals).
+    """nemik:W153 (see _build_static), inside the live server's per-build scope (nemik:W412, W403).
+
+    The scope is the one the live server's document is built in: each graph indexed once and each
+    flow solve answered once. The build ran outside it, so the goals, the pieces and the TRS feeds
+    asked rdflib 1.09 M times for facts the index holds (a warm publish profiled at 94 s, a third
+    of it in rank.goals).
     """
     from nemik.index import indexed
     from nemik.salience import memo_audits
@@ -1350,8 +1354,10 @@ def _build_static(
     private: bool = False,
     exports: Path | None = None,
 ) -> list[Path]:
-    """nemik:W153: the gated static view under `out`. Every check runs before anything is written,
-    so a refused build leaves `out` untouched; the withheld list itself is never copied into it.
+    """nemik:W153: the gated static view under `out`.
+
+    Every check runs before anything is written, so a refused build leaves `out` untouched; the
+    withheld list itself is never copied into it.
 
     nemik:W503: `private` is the pod's own build: nothing is withheld unless a list is given, and
     the files the live server answered beyond the public view are written too (see private_files).
@@ -1525,10 +1531,12 @@ def cost_gauges() -> list[str]:
 
 
 def private_files(model: Model, out: Path) -> list[Path]:
-    """nemik:W503: what the live server answered beyond the public view, as files: /operator.json,
-    /inbound.json and /inbound/<repo>.json (one per repo, empty when nothing waits on it),
-    /graph.ttl, /metrics with the snapshot's own age gauge, and the source key the next publish
-    compares. Never part of the public build: these name every waypoint's asks and blockers.
+    """nemik:W503: what the live server answered beyond the public view, as files.
+
+    They are /operator.json, /inbound.json and /inbound/<repo>.json (one per repo, empty when
+    nothing waits on it), /graph.ttl, /metrics with the snapshot's own age gauge, and the source
+    key the next publish compares. Never part of the public build: these name every waypoint's
+    asks and blockers.
     """
     made: list[Path] = []
 
@@ -1587,10 +1595,11 @@ def private_files(model: Model, out: Path) -> list[Path]:
 
 
 def fleet_key(root: Path) -> str:
-    """The digest of every queue and ledger file's path and CONTENT now. Content, not mtime: an export
-    that rewrites a file without changing it (luthen's does, every minute) is not a change, and a
-    build costs real CPU (luthen-observability, nemik:W504: the builder rebuilds on a changed
-    content hash).
+    """The digest of every queue and ledger file's path and CONTENT now.
+
+    Content, not mtime: an export that rewrites a file without changing it (luthen's does, every
+    minute) is not a change, and a build costs real CPU (luthen-observability, nemik:W504: the
+    builder rebuilds on a changed content hash).
     """
     import hashlib
 
@@ -1620,12 +1629,13 @@ def publish(
     keep: int = 3,
     exports: Path | None = None,
 ) -> Path | None:
-    """nemik:W503: build a private snapshot under base/snap-<stamp>-<pid>/ and flip base/current to it
-    with one atomic rename. The build runs in this short-lived process, so every byte of its graph
-    is returned to the OS when it exits (nemik:W500: rebuilding in a long-lived process left ~20 MB
-    of fragmented heap per build). Returns None when no queue or ledger changed since current/ was
-    built. The last `keep` snapshots stay, so a request already reading one is not pulled out from
-    under it.
+    """nemik:W503: build a private snapshot under base/snap-<stamp>-<pid>/ and flip current to it.
+
+    The flip is one atomic rename. The build runs in this short-lived process, so every byte of
+    its graph is returned to the OS when it exits (nemik:W500: rebuilding in a long-lived process
+    left ~20 MB of fragmented heap per build). Returns None when no queue or ledger changed since
+    current/ was built. The last `keep` snapshots stay, so a request already reading one is not
+    pulled out from under it.
     """
     from nemik import adapter, cachestore, lastgood
 

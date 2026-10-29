@@ -144,12 +144,14 @@ def critical_cards(by_cite: dict[str, Card], scope: set[str] | None = None) -> C
 
 
 def cycles(g: Graph) -> list[tuple[list[str], bool]]:
-    """nemik:W324: the dependency cycles among open cards, each as (its sorted cards, operator
-    breakable): a strongly connected component of more than one card, or a card that waits on
-    itself. Every card in one waits on another, so it cannot clear by itself. It IS breakable when a
-    member is blocked on the operator (blocked_kind human): the `same ask as` convention makes two
-    repos' asks cite each other on purpose, and the operator's answer ends it. Any other cycle is a
-    true deadlock. Tarjan's algorithm; depth is bounded by a simple path.
+    """nemik:W324: the dependency cycles among open cards, each with its operator-breakable flag.
+
+    Each is (its sorted cards, operator breakable): a strongly connected component of more than one
+    card, or a card that waits on itself. Every card in one waits on another, so it cannot clear by
+    itself. It IS breakable when a member is blocked on the operator (blocked_kind human): the
+    `same ask as` convention makes two repos' asks cite each other on purpose, and the operator's
+    answer ends it. Any other cycle is a true deadlock. Tarjan's algorithm; depth is bounded by a
+    simple path.
     """
     nodes = {
         n
