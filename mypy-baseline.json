@@ -311,8 +311,7 @@
   "misc": 4
  },
  "tests/test_shaclinc.py": {
-  "misc": 20,
-  "type-arg": 1
+  "misc": 2
  },
  "tests/test_skill.py": {
   "misc": 11

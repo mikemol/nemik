@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1258,
+  "counter": 1260,
   "waypoints": [
     {
       "symbol": "W1",
@@ -24306,16 +24306,16 @@
       "enables": [],
       "touches": [],
       "blocked_on": [
-        "github:W48"
+        "mtools:W1969"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "When github:W48 says which record the converged commit path writes, size a round by landings per gate time from it, and replace roundof.FLOOR with host admission",
-      "evidence": "2026-10-25: operator, host 695f3e0a line 97048 (relayed by github-8f, not yet verified by me): the commit paths turned into thin wrappers, not clean integration; luthen lands through checks.land, single mikemol-commit calls rather than stacks. Size a round by landings from whatever path, so a repo's N reflects its throughput. Interim floor of three cards is W1041 | 2026-10-25: mtools-ad proposed one landing record for every commit path (mtools:W1969): event landed, refused or withdrawn, repo, sha, cards list, stack, path, gate_s, landed_at, verdict, pushed. My reader (landings.py) accepts event landing only and the flat-JSON reader holds no nested objects, so the word landed and a nested stack would be skipped silently; answered 2026-10-25 with stack as flat keys, only landed counted toward N, refused counted apart as pressure. Finding behind it: mikemol-commit ships the verdict lines only with --ship and no caller passes it, so single-commit landings never reach my file | 2026-10-25: inherits from W1041, which the writer closes on landing (e9712f7): the floor of three cards is a placeholder I chose, not a measured number. Still to do under W1042: round size from what the host admits (capacity), with the landed median as a floor, and landings counted from every commit path | 2026-10-29: 2026-10-29: the cycle nemik:W1042 -> github:W48 -> nemik:W1042 that nemik-check warned about is broken by dropping W1042's enables edge to github:W48 (the card is caused_by github:W48 and blocked on it, it does not enable it; the weaker edge is the enables one). Assumption: nothing waits on W1042 through that edge. | 2026-10-29: 2026-10-29 correction: nemik-check still prints the W1042 <-> github:W48 cycle after the enables edge was dropped here, so the other edge (github:W48 reaching W1042) is on the github side; the github queue file is not in this fleet's readable set ('github has no queue file'), so the cycle is the host session's to break; asked there when next messaging github-8f.",
+      "evidence": "2026-10-25: operator, host 695f3e0a line 97048 (relayed by github-8f, not yet verified by me): the commit paths turned into thin wrappers, not clean integration; luthen lands through checks.land, single mikemol-commit calls rather than stacks. Size a round by landings from whatever path, so a repo's N reflects its throughput. Interim floor of three cards is W1041 | 2026-10-25: mtools-ad proposed one landing record for every commit path (mtools:W1969): event landed, refused or withdrawn, repo, sha, cards list, stack, path, gate_s, landed_at, verdict, pushed. My reader (landings.py) accepts event landing only and the flat-JSON reader holds no nested objects, so the word landed and a nested stack would be skipped silently; answered 2026-10-25 with stack as flat keys, only landed counted toward N, refused counted apart as pressure. Finding behind it: mikemol-commit ships the verdict lines only with --ship and no caller passes it, so single-commit landings never reach my file | 2026-10-25: inherits from W1041, which the writer closes on landing (e9712f7): the floor of three cards is a placeholder I chose, not a measured number. Still to do under W1042: round size from what the host admits (capacity), with the landed median as a floor, and landings counted from every commit path | 2026-10-29: 2026-10-29: the cycle nemik:W1042 -> github:W48 -> nemik:W1042 that nemik-check warned about is broken by dropping W1042's enables edge to github:W48 (the card is caused_by github:W48 and blocked on it, it does not enable it; the weaker edge is the enables one). Assumption: nothing waits on W1042 through that edge. | 2026-10-29: 2026-10-29 correction: nemik-check still prints the W1042 <-> github:W48 cycle after the enables edge was dropped here, so the other edge (github:W48 reaching W1042) is on the github side; the github queue file is not in this fleet's readable set ('github has no queue file'), so the cycle is the host session's to break; asked there when next messaging github-8f. | 2026-10-29: 2026-10-29 nudge to github-42 (host) sent, message id a2fbe0fb-434c-496e-8efe-9229501d04c2, asking it to drop the weaker of the two edges on github:W48's side; delivery is confirmed by the send tool's 'in that session's inbox' line only, not read back; the cycle line in nemik-check is the system-of-record check, due 2026-11-02 (R29). | 2026-10-29: 2026-10-29 github-42 (host, a peer): the cycle was mine. github:W48 is blocked on nemik:W1042 and that edge is correct (W48 is the umbrella for one commit path fleet-wide, W1042 its nemik child); the weaker edge was W1042's blocked_on github:W48, since what W1042 really waits on is the landing-record format, mtools:W1969 (working). Re-blocked on mtools:W1969, caused_by github:W48 kept. | 2026-10-29: 2026-10-29 mtools (peer) on mtools:W1969: the single-commit path writes no landing record with or without --ship (only the stack path does, via commit_span.emit_stack); --ship ships a different record. The fix is atomized as mtools:W2126 (one builder, the final flat shape), W2127 (single commit), W2128 (refused, withdrawn, train), W2129 (NOTE lines). Nothing built yet; mtools' gate is down with the cluster. W1042 stays blocked on mtools:W1969.",
       "issued_at": "2026-10-25T13:01:10Z",
       "minted_during": "tick",
       "caused_by": "github:W48",
-      "last_worked": "2026-10-29T04:43:28Z",
-      "ticks_blocked": 119,
+      "last_worked": "2026-10-29T05:34:44Z",
+      "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "src/nemik/landings.py",
@@ -27936,13 +27936,12 @@
     {
       "symbol": "W1176",
       "title": "Typed document boundary: a typed Waypoint record that loaders and test builders return, one stack per document shape",
-      "status": "blocked",
+      "status": "working",
       "enables": [],
       "touches": [
         "file:mypy-baseline.json"
       ],
       "blocked_on": [
-        "W1253",
         "W1255"
       ],
       "blocked_kind": "agent",
@@ -27951,13 +27950,12 @@
       "issued_at": "2026-10-27T13:51:57Z",
       "minted_during": "interrupt",
       "caused_by": "W1014",
-      "last_worked": "2026-10-29T04:38:07Z",
-      "ticks_blocked": 2,
+      "last_worked": "2026-10-29T05:45:54Z",
+      "ticks_blocked": 0,
       "size_class": "medium",
       "manifest": [
-        "tests/test_layout.py",
-        "mypy-baseline.json",
-        "ruff-baseline.json"
+        "tests/test_shaclinc.py",
+        "mypy-baseline.json"
       ],
       "warrants": [
         {
@@ -29907,11 +29905,11 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "Build the one table (mikemol-gate-targets REPO BEP-FILE TESTLOGS-DIR) and one stack that shards every target over the threshold; stack 640 (W1176) is in the gate meanwhile.",
-      "evidence": "2026-10-28: 2026-10-28: second consecutive gate refusal by timeout with no failing assertion. Stack 633 refused at ~22:33:04Z: //:test_layout shard 4 of 6 TIMEOUT 900.1 s (six runs: min 198.9, avg 334.1, max 900.1), 18 fresh of 451, 450 pass. Run alone afterward the whole file passed in 466.9 s (cpu 117.4 s). Not resubmitted. Instances: W1244 (test_salience), this. | 2026-10-28: 2026-10-28 ~22:50Z: /proc/loadavg reads 96.04 113.18 114.21 on 24 CPUs (load 4-5 per CPU) with no nemik gate in flight (--in-gate is empty), so the load is other sessions' or other repos' work, not this stack's own parallelism. Both timeouts fit a host run at several times its core count. Next: attribute the load by process owner (repo) over a gate window, then ask drum/luthen whether admission bounds it. | 2026-10-28: Correction: the loadavg reading above was taken at about 22:45Z, not the 22:50Z I wrote (the G0 ledger line is 22:46:31Z); the 22:50Z was a guess. Stack 634 (W1245 BUILD.bazel shards, then W1237, W1244, W1225) submitted after G0 22:46:31Z and the BUILD.bazel edit. | 2026-10-28: 2026-10-28 R19: killed test_layout shard 4 log holds only three dots then 'Test timed out at 22:33:04 UTC': three tests passed, then one wait never ended; siblings about 221 s, so a hang not uniform slowness (hypothesis, unverified: a failed script load as in W846). /proc/pressure/cpu some avg300=50.20, io some avg300=11.34, full io near 0: CPU contention. W924 is dropped (successor W925, blocked); its BUILD.bazel/tools/tests leases are stale. | 2026-10-28: 2026-10-28 github-8f (peer, not an operator word): saturation coincides with mtools' train (a bisect probe since about 22:07Z) and paperkit's W547 gate (24 actions); observed from --in-gate, not a measured attribution. It routes the drum question to mtools. It reminds that the fix is in nemik's own targets: shard finer (stack 634) and where a timeout must exist, bound by CPU not wall (memory no-wall-clock-timeouts). Carried: W1244's timeout=120 is a wall bound and is temporary; the browser-wait helper (R19-F36) should end a wait on page errors, not on wall time. | 2026-10-28: 2026-10-28 R20-C3: conftest selects position % total == index, so the killed layout shard 4 of 6 (index 3) ran positions 3, 9, 15 (three dots) and hung on position 21, collected with pytest --collect-only -q -p no:cacheprovider (42 tests): tests/test_layout.py::test_the_view_chain_is_drawn_end_to_end_with_its_length (the W482 view-chain test). Not proof of a hang rather than slowness. | 2026-10-28: 2026-10-28: shard bump landed as 84334f9 (stack 634, tip 5eb0644 at 23:14:59Z); the stack's gate passed 451 of 451 with 448 fresh, wall about 27 min 45 s from the 22:47:14Z begin (kind: wall; both stamps derived, begin from began_ns). A green gate does not prove the cause (R18/R19); the children W1247 to W1250 carry the proof. | 2026-10-29: 2026-10-29 stack 639 refused BEFORE any check ran: 'fatal: Unable to create .git/worktrees/-nemik-gate-wt/index.lock: File exists' (another git process in the gate worktree); when I looked minutes later no lock file existed and --in-gate was empty, so it was a transient lock in the gate's own worktree, not a test. Not a test flake and no check was gated, so I resubmit it unchanged; if it recurs it is an mtools gate-worktree card, not nemik's. | 2026-10-29: 2026-10-29: the test_keymap shard landed as f861c3f (stack 639, tip 4eb245a at 01:34:39Z), green after the transient gate-worktree lock refusal. Four shard bumps so far (salience, layout, keymap) and one infra lock; the host-load cause stays open. | 2026-10-29: 2026-10-29 R24-F48: the gate-worktree index.lock instance (stack 639 first submit, error line quoted) and the codon-probe diagnosis were sent to mtools-ad, message id 22ba7396-d455-49c4-bad7-a28b122963b5. R24-F46: a table of every test target with alone time and timeout is owed (mikemol-gate-targets), with a threshold of timeout over the worst observed load factor; not built. | 2026-10-29: 2026-10-29 mtools-ad (peer): the gate-worktree index.lock race, with the 637 and 639 instance, is taken as mtools:W2122 (no open gate-worktree card existed). Not built yet. | 2026-10-29: 2026-10-29: stack 642 refused by //:test_page_queue TIMEOUT 300.3 s at 02:20:03Z with no test finished (alone 35.3 s, 12% of the timeout); answered with the wait adoption, not a shard: stack 643 landed 49a1d6b (8 raw waits in four browser tests onto webpage.until), tip c7244b4 at 02:46:42Z. Fifth timeout instance and the first in the hang pattern. test_viewstate and test_cardtree keep raw waits the codemod skips. The mark is set blocked on W1249 and W1250 now, in the same step, so no working mark is left on a landed card (R25-F52).",
+      "evidence": "2026-10-28: 2026-10-28: second consecutive gate refusal by timeout with no failing assertion. Stack 633 refused at ~22:33:04Z: //:test_layout shard 4 of 6 TIMEOUT 900.1 s (six runs: min 198.9, avg 334.1, max 900.1), 18 fresh of 451, 450 pass. Run alone afterward the whole file passed in 466.9 s (cpu 117.4 s). Not resubmitted. Instances: W1244 (test_salience), this. | 2026-10-28: 2026-10-28 ~22:50Z: /proc/loadavg reads 96.04 113.18 114.21 on 24 CPUs (load 4-5 per CPU) with no nemik gate in flight (--in-gate is empty), so the load is other sessions' or other repos' work, not this stack's own parallelism. Both timeouts fit a host run at several times its core count. Next: attribute the load by process owner (repo) over a gate window, then ask drum/luthen whether admission bounds it. | 2026-10-28: Correction: the loadavg reading above was taken at about 22:45Z, not the 22:50Z I wrote (the G0 ledger line is 22:46:31Z); the 22:50Z was a guess. Stack 634 (W1245 BUILD.bazel shards, then W1237, W1244, W1225) submitted after G0 22:46:31Z and the BUILD.bazel edit. | 2026-10-28: 2026-10-28 R19: killed test_layout shard 4 log holds only three dots then 'Test timed out at 22:33:04 UTC': three tests passed, then one wait never ended; siblings about 221 s, so a hang not uniform slowness (hypothesis, unverified: a failed script load as in W846). /proc/pressure/cpu some avg300=50.20, io some avg300=11.34, full io near 0: CPU contention. W924 is dropped (successor W925, blocked); its BUILD.bazel/tools/tests leases are stale. | 2026-10-28: 2026-10-28 github-8f (peer, not an operator word): saturation coincides with mtools' train (a bisect probe since about 22:07Z) and paperkit's W547 gate (24 actions); observed from --in-gate, not a measured attribution. It routes the drum question to mtools. It reminds that the fix is in nemik's own targets: shard finer (stack 634) and where a timeout must exist, bound by CPU not wall (memory no-wall-clock-timeouts). Carried: W1244's timeout=120 is a wall bound and is temporary; the browser-wait helper (R19-F36) should end a wait on page errors, not on wall time. | 2026-10-28: 2026-10-28 R20-C3: conftest selects position % total == index, so the killed layout shard 4 of 6 (index 3) ran positions 3, 9, 15 (three dots) and hung on position 21, collected with pytest --collect-only -q -p no:cacheprovider (42 tests): tests/test_layout.py::test_the_view_chain_is_drawn_end_to_end_with_its_length (the W482 view-chain test). Not proof of a hang rather than slowness. | 2026-10-28: 2026-10-28: shard bump landed as 84334f9 (stack 634, tip 5eb0644 at 23:14:59Z); the stack's gate passed 451 of 451 with 448 fresh, wall about 27 min 45 s from the 22:47:14Z begin (kind: wall; both stamps derived, begin from began_ns). A green gate does not prove the cause (R18/R19); the children W1247 to W1250 carry the proof. | 2026-10-29: 2026-10-29 stack 639 refused BEFORE any check ran: 'fatal: Unable to create .git/worktrees/-nemik-gate-wt/index.lock: File exists' (another git process in the gate worktree); when I looked minutes later no lock file existed and --in-gate was empty, so it was a transient lock in the gate's own worktree, not a test. Not a test flake and no check was gated, so I resubmit it unchanged; if it recurs it is an mtools gate-worktree card, not nemik's. | 2026-10-29: 2026-10-29: the test_keymap shard landed as f861c3f (stack 639, tip 4eb245a at 01:34:39Z), green after the transient gate-worktree lock refusal. Four shard bumps so far (salience, layout, keymap) and one infra lock; the host-load cause stays open. | 2026-10-29: 2026-10-29 R24-F48: the gate-worktree index.lock instance (stack 639 first submit, error line quoted) and the codon-probe diagnosis were sent to mtools-ad, message id 22ba7396-d455-49c4-bad7-a28b122963b5. R24-F46: a table of every test target with alone time and timeout is owed (mikemol-gate-targets), with a threshold of timeout over the worst observed load factor; not built. | 2026-10-29: 2026-10-29 mtools-ad (peer): the gate-worktree index.lock race, with the 637 and 639 instance, is taken as mtools:W2122 (no open gate-worktree card existed). Not built yet. | 2026-10-29: 2026-10-29: stack 642 refused by //:test_page_queue TIMEOUT 300.3 s at 02:20:03Z with no test finished (alone 35.3 s, 12% of the timeout); answered with the wait adoption, not a shard: stack 643 landed 49a1d6b (8 raw waits in four browser tests onto webpage.until), tip c7244b4 at 02:46:42Z. Fifth timeout instance and the first in the hang pattern. test_viewstate and test_cardtree keep raw waits the codemod skips. The mark is set blocked on W1249 and W1250 now, in the same step, so no working mark is left on a landed card (R25-F52). | 2026-10-29: 2026-10-29 R30-F1 telemetry, from //:test_page_queue's own test.xml in the bazel cache (a run inside the stack 646 gate, written 01:24:40 -0400 = 05:24:40Z, after 49a1d6b): 2 passed, test time 41 s as bazel recorded it, pytest wall 38.29 s, the shard's cpu line 27.8 s (user plus sys), idle_wall 38.3 s; the timeout is 300 s, so 14% of it. Loadavg at that moment was NOT recorded; the host reads 12.5, 28.2, 35.6 now (post-reboot, much lower than the 98 to 117 of the earlier timeouts), so this run says only that the target passes in 41 s on a quiet host: it does not show that the wait change removes the stall under load. The earlier stall (02:20:03Z, 300.3 s, no test finished) needs a loaded gate to answer; the instrument that gives the three times is the test's own test.xml plus the shard cpu line, and a loadavg sample at the gate's start, which no tool records per gate yet.",
       "issued_at": "2026-10-28T22:41:42Z",
       "minted_during": "interrupt",
       "caused_by": "W1244",
-      "last_worked": "2026-10-29T02:47:34Z",
+      "last_worked": "2026-10-29T05:31:57Z",
       "ticks_blocked": 2,
       "completed": null,
       "manifest": [
@@ -30087,19 +30085,19 @@
     {
       "symbol": "W1253",
       "title": "Annotate the mixed-value tomllib reads in adoption.py, rank.py and calendars.py with a typed accessor",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W1176"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "In stack 646: rank.py _toml_table and the [order] read; after it lands the card is done (no untyped TOML read left in W1253's list).",
-      "evidence": "2026-10-29: 2026-10-29: calendars.py (cals, include, mirror annotated object) landed in stack 644 as d48e6cd (printed by mikemol-commit), reflog 2026-10-29 00:29:17 -0400 = 04:29:17Z, gate green, 448 fresh of 451 (a src edit, so the full gate): mypy 3984 to 3977, per file calendars.py var-annotated -3 and misc -4. Resubmitted after the zram incident (the first submit never started); the Codon census was green before it (7 passed, 487 s). Not done: adoption.py 60 and rank.py 89 need a typed accessor; card stays ready. | 2026-10-29: 2026-10-29: adoption.py's _table accessor landed in stack 645 as f3daea9 (printed by mikemol-commit), reflog 2026-10-29 01:07:11 -0400 = 05:07:11Z, gate green, 448 fresh of 451 (src edit, full gate); mypy 3977 to 3963 (-14: var-annotated -1 and 13 Any-flow rows). The Codon census ran from the first edit, 7 passed in 462.87 s, before the submit. Remainder: rank.py 89 only.",
+      "next_bounded_step": null,
+      "evidence": "2026-10-29: 2026-10-29: calendars.py (cals, include, mirror annotated object) landed in stack 644 as d48e6cd (printed by mikemol-commit), reflog 2026-10-29 00:29:17 -0400 = 04:29:17Z, gate green, 448 fresh of 451 (a src edit, so the full gate): mypy 3984 to 3977, per file calendars.py var-annotated -3 and misc -4. Resubmitted after the zram incident (the first submit never started); the Codon census was green before it (7 passed, 487 s). Not done: adoption.py 60 and rank.py 89 need a typed accessor; card stays ready. | 2026-10-29: 2026-10-29: adoption.py's _table accessor landed in stack 645 as f3daea9 (printed by mikemol-commit), reflog 2026-10-29 01:07:11 -0400 = 05:07:11Z, gate green, 448 fresh of 451 (src edit, full gate); mypy 3977 to 3963 (-14: var-annotated -1 and 13 Any-flow rows). The Codon census ran from the first edit, 7 passed in 462.87 s, before the submit. Remainder: rank.py 89 only. | 2026-10-29: 2026-10-29: the last untyped read (rank.py [order] via a private _toml_table) landed in stack 646 as c0a8e2f (printed by mikemol-commit), reflog 2026-10-29 01:31:01 -0400 = 05:31:01Z, gate green, 448 fresh of 451; began 05:16:02Z (began_ns 1793250962415111104), so 15 min wall (kind: wall). mypy 3963 to 3942 (-21); the Codon census from the first edit, 7 passed in 304.8 s. W1253 is done across its landings: calendars.py d48e6cd, adoption.py f3daea9, rank.py c0a8e2f. The three behaviour changes named in the rank.py G0 are not yet tied to one test each (R30-F2, due 2026-10-31).",
       "issued_at": "2026-10-29T01:50:34Z",
       "minted_during": "tick",
       "caused_by": "W1176",
-      "last_worked": "2026-10-29T05:10:20Z",
+      "last_worked": "2026-10-29T05:31:56Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/rank.py",
@@ -30107,7 +30105,7 @@
       ],
       "size_class": "small",
       "weight": 6,
-      "completed": null
+      "completed": "20261029T053156Z"
     },
     {
       "symbol": "W1254",
@@ -30221,6 +30219,48 @@
       "caused_by": "linux-sources:W498",
       "last_worked": "2026-10-29T02:53:10Z",
       "ticks_blocked": 0
+    },
+    {
+      "symbol": "W1259",
+      "title": "The fleet reader excludes the root workstream (/home/mikemol/github/.claude/paths-forward.json, 77 symbols), so every host edge such as github:W48 is invisible to nemik-check, the cycle check and the rank",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "reader",
+        "fleet"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Read first: how nemik finds each workstream's queue (the fleet reader walks ~/github/<repo>/.claude/paths-forward.json; the root workstream's queue sits at ~/github/.claude/paths-forward.json, one directory up, and 'github' resolves to ~/github/github/.claude/..., which does not exist, hence 'github has no queue file'); then add the root queue as the workstream named github, in the survey and in the writer's resolution of github:W<n> refs (the writer is mtools', so this may split into a nemik reader card and an mtools writer card); witness: nemik-check no longer prints 'github has no queue file' for W1042-class refs, and a host edge (github:W48) shows up in the cycle and inbound readings.",
+      "evidence": "2026-10-29: 2026-10-29 github-42 (peer): the root queue exists with 77 symbols; the reader excludes the root workstream, so every host edge is invisible to nemik's checks. The tick-open and nemik-check lines 'github has no queue file' were this. Not yet read by me: the reader source; the claim is the peer's, and the path check is mine to make first.",
+      "issued_at": "2026-10-29T05:17:53Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-42",
+      "last_worked": "2026-10-29T05:18:07Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W1260",
+      "title": "One test per named behaviour change of rank.py's typed [order] read (a non-table order, a non-table scalarize, numbers as floats, a boolean refused)",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "tests",
+        "rank"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-29T05:45:41Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1253",
+      "last_worked": "2026-10-29T05:45:52Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "tests/test_tier_rank.py"
+      ]
     }
   ],
   "residue": [
@@ -30423,12 +30463,7 @@
   ],
   "job_id": "481476b5",
   "heartbeat": "2026-10-29T04:11:13Z",
-  "lock": {
-    "holder": "claude",
-    "taken_at": "2026-10-29T05:11:49Z",
-    "pid": 13948,
-    "start": 34592
-  },
+  "lock": null,
   "predecessor_job_id": "1d7fe6d0",
   "leases": [
     {
@@ -32982,7 +33017,63 @@
         "operator": "other"
       },
       "id": "nemik:R29"
+    },
+    {
+      "card": "W1246",
+      "trigger": "round 26: stack 646 (W1253, rank.py 89) in the gate before the send; mypy 3963->3942 (-21); tick opened (ready 74, 0 nudges, UNSCORED 205); W1042 nudge sent to github-42",
+      "root": "R29-F1, F3 and F4 were met in the next round, which is the loop working as designed. What stays open is evidence of effect: the W1245 telemetry is a third round owed, and the W1042 nudge is not read back. The ratio per annotation is now 1.3, 14 and 21, so the deltas say little about the work done.",
+      "contributing": [
+        "A paydown number is reported per stack but never next to the cost of its edit, so 'widest range in the G0' is a statement, not a ranking.",
+        "UNSCORED has held at 205 across three ticks; nothing says whether it is falling.",
+        "The behaviour changes of 646 (non-table [order] now reads empty, scalarize through float(str(v))) are named in the G0 but not tied to a test that exercises them."
+      ],
+      "precommit": "G0 ledger 05:09:17Z, after R29 was added and before the first edit, K [0, 1] with the behaviour changes named. Held by your report; I did not read the ledger line.",
+      "delta": "Reported: in the gate before the send; Codon census 7 passed in 304.8 s before the submit; mypy -21, ruff unchanged; 23 tests passed alone in 0.95 s; the empty interval was about 8 min 50 s. Not checked: the gate verdict, which is not yet in.",
+      "sustain": [
+        "Building the stack before the send; the empty interval is small and mostly the Codon census.",
+        "Naming the behaviour changes in the G0 (bool or numeric-string scalarize, str()'d tiers).",
+        "Recording the delivery limit honestly: the send tool's inbox line is not a read back, and the system-of-record check is named with a date."
+      ],
+      "enforcement_layer": "gate",
+      "recurring": true,
+      "one_off": false,
+      "findings": [
+        {
+          "finding": "The W1245 telemetry is owed a third round. When 646 lands, read the //:test_page_queue wall, user and sys seconds and the loadavg from its gate log and write them on the card even if the number looks fine. If the log does not print them, say so and name the instrument that would.",
+          "finding_card": "W1245",
+          "finding_owner": "nemik session",
+          "due": "2026-10-30",
+          "finding_witness": "a card evidence line with wall, user and sys seconds and loadavg for //:test_page_queue from the 646 gate log, or a line naming the missing instrument"
+        },
+        {
+          "finding": "The behaviour changes in 646 (a non-table [order] or scalarize now reads empty; scalarize through float(str(v)) differs for a bool or a numeric string; tiers are str()'d) are tested only by the 23 existing tests. Add or point to one test per named change, so the G0's statement is checked and not just written.",
+          "finding_card": "W1253",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "three test names, one per named behaviour change, each passing in the run directly (pytest) and in the gate"
+        },
+        {
+          "finding": "The W1042 nudge to github-42 is shown delivered only by the sender's own line. Read the cycle back on or before the due date: nemik-check must print no cycle for W1042. If it still prints one after 2026-11-02, redo the nudge to the live session name (W1224).",
+          "finding_card": "W1042",
+          "finding_owner": "nemik session",
+          "due": "2026-11-02",
+          "finding_witness": "nemik-check output with no W1042 cycle line, or a second nudge ledger line to the resolved live session name"
+        },
+        {
+          "finding": "UNSCORED has read 205 across three ticks, and the owed items (W1240, W1242 and W1250 manifests, W1231 decisions) have no date this round. Put one date on each, or say in the ledger that none will be taken before the next fixpoint, so the owed list shrinks or is named as parked.",
+          "finding_card": "W1231",
+          "finding_owner": "nemik session",
+          "due": "2026-11-01",
+          "finding_witness": "a ledger line listing each owed item with a date or a 'parked' mark, and the next tick-open UNSCORED count"
+        }
+      ],
+      "handoff": {
+        "instrument": "nemik-paths-forward --add-retro, then the 646 gate log for the W1245 numbers",
+        "channel": "the cold review",
+        "operator": "other"
+      },
+      "id": "nemik:R30"
     }
   ],
-  "retro_counter": 29
+  "retro_counter": 30
 }

@@ -7,6 +7,7 @@ from pathlib import Path
 
 import pytest
 from rdflib import Graph, Literal
+from rdflib.term import Node
 
 from nemik.adapter import NEMIK, OSLC_CM, queue_graph
 from nemik.blocks import annotate
@@ -26,7 +27,7 @@ def _fleet() -> Graph:
     return g
 
 
-def _cards(g: Graph) -> list:
+def _cards(g: Graph) -> list[Node]:
     return sorted(set(g.subjects(OSLC_CM.state, None)), key=str)
 
 
