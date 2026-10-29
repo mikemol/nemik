@@ -15,7 +15,8 @@
       "operator": {
         "ref": "ref", "category": "enum", "title": "text", "ask": "text", "waiting": "list-ref", "salience": "count",
         "same_ask": "list-ref", "ticks_blocked": "count", "last_activity": "time", "dtstart": "time",
-        "due": "time", "rrule": "text", "exdates": "list-time", "alarms": "list-text"
+        "due": "time", "rrule": "text", "exdates": "list-time", "alarms": "list-text",
+        "apply_loop_cannot": "flag", "sudo_shaped": "flag"
       },
       "findings": {"*": "list-text"},
       "health": {"status": "enum", "blocked_share": "count", "oldest_block_ticks": "count", "asks_owed": "count", "reasons": "list-text"},

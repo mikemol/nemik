@@ -526,6 +526,29 @@ def waiting_behind(g: Graph, node: Node) -> set[Node]:
     return seen
 
 
+# nemik:W1264 (github:W76, host retro R96): an 'operator: act' ask that names a root-shaped command
+# is the host apply loop's to carry, unless the card says why it cannot ('apply loop cannot: ...').
+_ROOT_SHAPED = re.compile(
+    r"\bsudo\b|\broot\b|\bchown\b|\binstall\s+-d\b|\bmkfs\b|\bmount\b|\bsystemctl\s+--system\b",
+    flags=re.IGNORECASE,
+)
+_ACT_ASK = re.compile(r"(?:^|\|\s*)operator:\s*act\b", flags=re.IGNORECASE)
+
+
+def sudo_shaped(ask: str) -> bool:
+    """Say whether an ask is an 'operator: act' that names a root-shaped command.
+
+    Args:
+        ask: The blocked_on texts of a card, joined by ' | '.
+
+    Returns:
+        True when one of them starts 'operator: act' and the text names sudo, root, chown,
+        install -d, mkfs, mount or systemctl --system as a whole word.
+
+    """
+    return _ACT_ASK.search(ask) is not None and _ROOT_SHAPED.search(ask) is not None
+
+
 def operator_asks(g: Graph) -> list[dict[str, Any]]:
     """Every open waypoint waiting on the operator, categorised, with duplicate asks grouped.
 
@@ -582,11 +605,15 @@ def _operator_asks(g: Graph) -> list[dict[str, Any]]:
         )
         if cat == "no-command" and ref(node).partition(":")[0] in errands:
             cat = "errand"
+        # nemik:W1264: the card says why the root apply loop could not carry it (nemik:W1263)
+        excused = (node, NEMIK.applyLoopCannot, None) in g
         out.append(
             {
                 "ref": ref(node),
                 "title": str(g.value(node, DCTERMS.title) or ""),
                 "ask": text,
+                "apply_loop_cannot": excused,
+                "sudo_shaped": sudo_shaped(text) and not excused,
                 "category": cat,
                 "ticks_blocked": int(str(g.value(node, NEMIK.ticksBlocked) or 0)),
                 "last_activity": last.get(node, ""),
