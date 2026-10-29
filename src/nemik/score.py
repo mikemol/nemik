@@ -43,6 +43,19 @@ class Bands:
 
 
 def load_bands(text: str | None = None) -> Bands:
+    """Read the band rules from bands.toml: the order, each band's rules and the two fallbacks.
+
+    Args:
+        text: The TOML text to read; None reads the packaged bands.toml.
+
+    Returns:
+        The bands, with each band's rules as tuples of method to frozenset of values.
+
+    Raises:
+        ValueError: when unscored or unmatched names a band that is not in order, or the file
+            holds a band that is not in order.
+
+    """
     if text is None:
         text = files("nemik.data").joinpath("bands.toml").read_text()
     d = tomllib.loads(text)
