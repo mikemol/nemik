@@ -58,6 +58,8 @@ from nemik.workrows import NO_BOUND, ready_stamps, small_done_stamps, upper_quan
 if TYPE_CHECKING:
     from collections.abc import Iterator
 
+    from rdflib.term import Node
+
 QUEUE, LEDGER = "paths-forward.json", "paths-forward.ledger"
 WRITER = "mikemol-paths-forward --state"
 STALL_RUN = 2
@@ -817,7 +819,7 @@ def survey(
     # umbrellas are
     # descended (their work IS their children); a single step that waits on something is still the
     # step you wait for, so the descent stops at the first non-umbrella.
-    def umbrella(n) -> bool:
+    def umbrella(n: Node) -> bool:
         return len(prereqs.get(n, ())) >= 2
 
     for waiter, _, target in merged.triples((None, NEMIK.waitsFor, None)):

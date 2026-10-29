@@ -27,13 +27,11 @@
   "type-arg": 7
  },
  "src/nemik/calwrite.py": {
-  "misc": 9,
-  "no-untyped-def": 1
+  "misc": 8
  },
  "src/nemik/check.py": {
   "call-overload": 2,
   "misc": 44,
-  "no-untyped-def": 1,
   "type-arg": 1
  },
  "src/nemik/churn.py": {
@@ -125,10 +123,8 @@
   "type-arg": 2
  },
  "src/nemik/wake.py": {
-  "misc": 221,
+  "misc": 220,
   "no-any-return": 1,
-  "no-untyped-def": 1,
-  "redundant-expr": 1,
   "type-arg": 14
  },
  "src/nemik/withheld.py": {
