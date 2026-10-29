@@ -71,7 +71,7 @@
  "src/nemik/manifest.py": {
   "misc": 37,
   "no-any-return": 1,
-  "no-untyped-def": 3,
+  "no-untyped-def": 1,
   "type-arg": 1
  },
  "src/nemik/metrics.py": {

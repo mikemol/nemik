@@ -27944,15 +27944,15 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "The TOML half: src/nemik/data/rank-weights.schema.json first (read the file's tables), a test in tests/ that validates the shipped file with tomllib and refuses a wrong-typed table, then a Codon-clean accessor and health.py as the first consumer (its thresholds() builds from an Any table). Then bands.toml, connectors.toml, workflows.toml, then the host config (calendars.toml, ics.toml). Then wake.py for the JSON half",
-      "evidence": "2026-10-28: 2026-10-28 first slice built: src/nemik/data/waypoint.schema.json (core of 5 required keys plus typed optional keys; $defs/full adds the 14 keys the writer stamps), tests/test_waypoint_schema.py (6 tests), docs/typed-boundary.md. Measured against the fleet before it was written: all 1183 cards of this queue pass $defs/full with 0 refusals; the 19 fixture queues' cards pass the core; the first draft required blocked_kind and three older cards lack it, which the test found, so it is optional in the core and required in full. NOT built: the ABC and accessors (src/nemik/waypoint.py), the schema/accessor drift test, any consumer migration | 2026-10-28: 2026-10-28 Codon probes for the ABC half (stage tree, pinned Codon): 'from abc import ABC, abstractmethod' fails with 'no module named abc'; 'from typing import Protocol' fails with 'cannot import name Protocol from typing'; a PLAIN base class whose methods raise NotImplementedError, with subclasses overriding them, compiles (rc 0). Every top-level src/nemik module is in the Codon census (tools/codon_census.py globs src/nemik/*.py), and a module that fails adds a codon-baseline entry, a ratchet rise. So an abc.ABC cannot live in src/nemik without a rise. The ruling's intent (one declared shape, typed accessors consumers type against) can be met with a plain interface class; mypy then does not enforce abstractness. The operator's wording was ABC; this is the tension between that and 'all Python Codon-compatible' (standing 4), put to github-8f | 2026-10-28: 2026-10-28 CORRECTION of attribution (github-8f asked for the record, and found 0 hits in the host transcript): the words 'ABC and JSON SCHEMA' are NOT host line 107476 (that line is the operator's separate ruling to audit the ratchet targets for larger paydown steps, which is this card's other warrant). They are a human message in nemik's OWN session transcript (session ca6f3699-66ac-4ffa-a3ca-6ececbab791f, line 138830, uuid 31bdf58f-b473-4b05-a566-1295693efbe7, 2026-10-27T20:11:45Z): verbatim, with the quoted lead-in from my report: '`cannot see the json and tomllib document shapes` ... This is what ABC and JSON SCHEMA are for.' Attached as a warrant. The words name ABC (an abstract base class) and JSON Schema; they do not say the abc.ABC module, so a Codon-clean plain interface class in src/nemik plus the real abc and jsonschema drift test in tests/ is a reading of them, not a certain one. My earlier notes (W1176 re-design entry, docs/typed-boundary.md in stack608) cite the wrong line and the doc is corrected in the next stack | 2026-10-28: 2026-10-28 github-8f (a peer's word, who read the ruling raw): the ruling (session line 138830) names BOTH families, 'the json and tomllib document shapes'; stack608 covers the queue JSON only, so the TOML half is OWED and not dropped. Inventory read: 17 src/nemik modules import tomllib (calendars, check, adoption, blocks, health, pacing, rank, pins, warrantdebt, starved, vtodo, idle, warrants, score, tiers, workflows, salience); the packaged TOML documents are src/nemik/data/rank-weights.toml (tables read by health, pacing, starved, rank, salience, tiers and others), bands.toml, connectors.toml and workflows.toml; the host-side config documents are ~/.config/nemik/calendars.toml and ics.toml (calendars.py, vtodo.py). JSON Schema validates a parsed TOML mapping as well as parsed JSON | 2026-10-28: landed a489573 (the waypoint schema) and 4cf10bc (the typed accessors, nemik.waypoint) in stack611, pushed, gate green. Built: schema (1183 live cards pass full), TreeWaypoint accessors (oracle over 19 fixture queues), drift test, real abc check in tests, docs/typed-boundary.md. OWED: the TOML half of the ruling (a schema per document, rank-weights.toml first), the first consumer migration (wake.py), and schemas for the other JSON documents | 2026-10-28: G0 (precommit, 2026-10-28): this tick advances W1176 (TOML half). Actuator: a JSON Schema for rank-weights.toml plus a test in tests/ and a Codon-clean accessor, built in a scratch stack. Sensor: bazel test of the new test target, pycheck --changed clean, ratchets mypy 4227 / ruff 2416 not rising. Expected: schema measured against the live file with 0 refusals; no baseline entry added. | 2026-10-28: 2026-10-28: landed aed9831 (pushed, gate green): rank-weights.schema.json plus tests/test_rank_weights_schema.py, the TOML half's first document. Owed: an accessor (health.py first), then bands, connectors, workflows. | 2026-10-29: 2026-10-29 R23-F42 attribution from baseline_delta.py on mypy-baseline.json (net -24 over 8 file/rule rows): var-annotated -1 each in health, pacing, salience, vtodo (= K 4); misc (Expression has type Any / contains Any) pacing -7, salience -5, vtodo -5, health -3 (= 20): the Any-typed expressions that flowed from the unannotated name. One cause per file; my expected -4 to -8 counted only the var-annotated rows and missed the flow. Message-level sample not taken. | 2026-10-29: 2026-10-29 R23-F41: the Codon census (tests/test_codon_census.py) ran locally with NEMIK_CODON set to the bazel-cache codon (/var/cache/bazel-mikemol/8b442e1a.../external/+_repo_rules3+codon/bin/codon), 7 passed in 731.75 s wall (cpu 1760.8 s), against the working tree holding the four annotated modules. It finished AFTER stack 637 began gating (inflight at began_ns 1793233095352441167), so the order census-before-submit was again not met (third instance of R8-F17 plus this one); the result is green, so no withdraw. The earlier belief that no codon binary was available was wrong: it needs NEMIK_CODON, and mikemol-codon-probe fails with 'the codon block has no url' here. | 2026-10-29: 2026-10-29: the eight annotations landed as 805fb87 (stack 639, tip 4eb245a at 01:34:39Z): mypy 4065 to 4002, ruff 1983 to 1979 per pycheck --ratchet before submit. Card stays open: adoption.py, rank.py and calendars.py still hold mixed-value tomllib reads. | 2026-10-29: 2026-10-29: the server-fixture annotation landed as 2c45116 (stack 640, printed by mikemol-commit), reflog 21:47:34 -0400 = 01:47:34Z, gate green, 6 fresh of 451 (a tests-only stack, about 13 min after the 4eb245a landing at 01:34:39Z: ruff 1979 to 1978, mypy 4002 to 4000). The first submit had been refused with no check run because W1245 was still marked working. | 2026-10-29: 2026-10-29 R28-F5 per-code mypy tally (house config, 3977 rows): misc 3790 (the Any-expression rows), type-arg 95, explicit-any 52, no-untyped-def 15, call-overload 8, attr-defined 7, no-any-return 3, no-untyped-call 3, var-annotated 2, redundant-expr 1, operator 1. Heaviest per file: serve.py 342, rank.py 270, test_layout.py 266, wake.py 238, history.py 175. type-arg is the largest non-misc code (rank.py 20, wake.py 16, witnesses.py 10, history.py 8, calendars.py 7, serve.py 8): a bare dict or tuple that needs its real type argument, and the real type is the queue's (churn.py's queue type, dict[str, list[dict[str, str | list[str]]]]), not dict[str, object]: a trial on tests/test_churn.py with dict[str, object] was refused by the pycheck hook with three new dict-item errors, so the type-arg paydown needs the production aliases imported, which is a typed-boundary job (W1253's accessor family), not a one-line edit. Next paydown stack's G0 quotes this tally. | 2026-10-29: 2026-10-29: tests/test_shaclinc.py _cards -> list[Node] landed as a95cd40 (stack 647, tip at 05:49:34Z, reflog 01:49:34 -0400): mypy 3942 to 3923 (-19: one type-arg row and 18 Any-flow rows). Blocked on its one open child W1255 in the same step (W1253 and W1254 are done), so no working mark is left on a landed stack.",
+      "evidence": "2026-10-28: 2026-10-28 first slice built: src/nemik/data/waypoint.schema.json (core of 5 required keys plus typed optional keys; $defs/full adds the 14 keys the writer stamps), tests/test_waypoint_schema.py (6 tests), docs/typed-boundary.md. Measured against the fleet before it was written: all 1183 cards of this queue pass $defs/full with 0 refusals; the 19 fixture queues' cards pass the core; the first draft required blocked_kind and three older cards lack it, which the test found, so it is optional in the core and required in full. NOT built: the ABC and accessors (src/nemik/waypoint.py), the schema/accessor drift test, any consumer migration | 2026-10-28: 2026-10-28 Codon probes for the ABC half (stage tree, pinned Codon): 'from abc import ABC, abstractmethod' fails with 'no module named abc'; 'from typing import Protocol' fails with 'cannot import name Protocol from typing'; a PLAIN base class whose methods raise NotImplementedError, with subclasses overriding them, compiles (rc 0). Every top-level src/nemik module is in the Codon census (tools/codon_census.py globs src/nemik/*.py), and a module that fails adds a codon-baseline entry, a ratchet rise. So an abc.ABC cannot live in src/nemik without a rise. The ruling's intent (one declared shape, typed accessors consumers type against) can be met with a plain interface class; mypy then does not enforce abstractness. The operator's wording was ABC; this is the tension between that and 'all Python Codon-compatible' (standing 4), put to github-8f | 2026-10-28: 2026-10-28 CORRECTION of attribution (github-8f asked for the record, and found 0 hits in the host transcript): the words 'ABC and JSON SCHEMA' are NOT host line 107476 (that line is the operator's separate ruling to audit the ratchet targets for larger paydown steps, which is this card's other warrant). They are a human message in nemik's OWN session transcript (session ca6f3699-66ac-4ffa-a3ca-6ececbab791f, line 138830, uuid 31bdf58f-b473-4b05-a566-1295693efbe7, 2026-10-27T20:11:45Z): verbatim, with the quoted lead-in from my report: '`cannot see the json and tomllib document shapes` ... This is what ABC and JSON SCHEMA are for.' Attached as a warrant. The words name ABC (an abstract base class) and JSON Schema; they do not say the abc.ABC module, so a Codon-clean plain interface class in src/nemik plus the real abc and jsonschema drift test in tests/ is a reading of them, not a certain one. My earlier notes (W1176 re-design entry, docs/typed-boundary.md in stack608) cite the wrong line and the doc is corrected in the next stack | 2026-10-28: 2026-10-28 github-8f (a peer's word, who read the ruling raw): the ruling (session line 138830) names BOTH families, 'the json and tomllib document shapes'; stack608 covers the queue JSON only, so the TOML half is OWED and not dropped. Inventory read: 17 src/nemik modules import tomllib (calendars, check, adoption, blocks, health, pacing, rank, pins, warrantdebt, starved, vtodo, idle, warrants, score, tiers, workflows, salience); the packaged TOML documents are src/nemik/data/rank-weights.toml (tables read by health, pacing, starved, rank, salience, tiers and others), bands.toml, connectors.toml and workflows.toml; the host-side config documents are ~/.config/nemik/calendars.toml and ics.toml (calendars.py, vtodo.py). JSON Schema validates a parsed TOML mapping as well as parsed JSON | 2026-10-28: landed a489573 (the waypoint schema) and 4cf10bc (the typed accessors, nemik.waypoint) in stack611, pushed, gate green. Built: schema (1183 live cards pass full), TreeWaypoint accessors (oracle over 19 fixture queues), drift test, real abc check in tests, docs/typed-boundary.md. OWED: the TOML half of the ruling (a schema per document, rank-weights.toml first), the first consumer migration (wake.py), and schemas for the other JSON documents | 2026-10-28: G0 (precommit, 2026-10-28): this tick advances W1176 (TOML half). Actuator: a JSON Schema for rank-weights.toml plus a test in tests/ and a Codon-clean accessor, built in a scratch stack. Sensor: bazel test of the new test target, pycheck --changed clean, ratchets mypy 4227 / ruff 2416 not rising. Expected: schema measured against the live file with 0 refusals; no baseline entry added. | 2026-10-28: 2026-10-28: landed aed9831 (pushed, gate green): rank-weights.schema.json plus tests/test_rank_weights_schema.py, the TOML half's first document. Owed: an accessor (health.py first), then bands, connectors, workflows. | 2026-10-29: 2026-10-29 R23-F42 attribution from baseline_delta.py on mypy-baseline.json (net -24 over 8 file/rule rows): var-annotated -1 each in health, pacing, salience, vtodo (= K 4); misc (Expression has type Any / contains Any) pacing -7, salience -5, vtodo -5, health -3 (= 20): the Any-typed expressions that flowed from the unannotated name. One cause per file; my expected -4 to -8 counted only the var-annotated rows and missed the flow. Message-level sample not taken. | 2026-10-29: 2026-10-29 R23-F41: the Codon census (tests/test_codon_census.py) ran locally with NEMIK_CODON set to the bazel-cache codon (/var/cache/bazel-mikemol/8b442e1a.../external/+_repo_rules3+codon/bin/codon), 7 passed in 731.75 s wall (cpu 1760.8 s), against the working tree holding the four annotated modules. It finished AFTER stack 637 began gating (inflight at began_ns 1793233095352441167), so the order census-before-submit was again not met (third instance of R8-F17 plus this one); the result is green, so no withdraw. The earlier belief that no codon binary was available was wrong: it needs NEMIK_CODON, and mikemol-codon-probe fails with 'the codon block has no url' here. | 2026-10-29: 2026-10-29: the eight annotations landed as 805fb87 (stack 639, tip 4eb245a at 01:34:39Z): mypy 4065 to 4002, ruff 1983 to 1979 per pycheck --ratchet before submit. Card stays open: adoption.py, rank.py and calendars.py still hold mixed-value tomllib reads. | 2026-10-29: 2026-10-29: the server-fixture annotation landed as 2c45116 (stack 640, printed by mikemol-commit), reflog 21:47:34 -0400 = 01:47:34Z, gate green, 6 fresh of 451 (a tests-only stack, about 13 min after the 4eb245a landing at 01:34:39Z: ruff 1979 to 1978, mypy 4002 to 4000). The first submit had been refused with no check run because W1245 was still marked working. | 2026-10-29: 2026-10-29 R28-F5 per-code mypy tally (house config, 3977 rows): misc 3790 (the Any-expression rows), type-arg 95, explicit-any 52, no-untyped-def 15, call-overload 8, attr-defined 7, no-any-return 3, no-untyped-call 3, var-annotated 2, redundant-expr 1, operator 1. Heaviest per file: serve.py 342, rank.py 270, test_layout.py 266, wake.py 238, history.py 175. type-arg is the largest non-misc code (rank.py 20, wake.py 16, witnesses.py 10, history.py 8, calendars.py 7, serve.py 8): a bare dict or tuple that needs its real type argument, and the real type is the queue's (churn.py's queue type, dict[str, list[dict[str, str | list[str]]]]), not dict[str, object]: a trial on tests/test_churn.py with dict[str, object] was refused by the pycheck hook with three new dict-item errors, so the type-arg paydown needs the production aliases imported, which is a typed-boundary job (W1253's accessor family), not a one-line edit. Next paydown stack's G0 quotes this tally. | 2026-10-29: 2026-10-29: tests/test_shaclinc.py _cards -> list[Node] landed as a95cd40 (stack 647, tip at 05:49:34Z, reflog 01:49:34 -0400): mypy 3942 to 3923 (-19: one type-arg row and 18 Any-flow rows). Blocked on its one open child W1255 in the same step (W1253 and W1254 are done), so no working mark is left on a landed stack. | 2026-10-29: 2026-10-29: checks/claims.py import_graph_is_acyclic -> None landed in stack 652 as 44edeee (reflog 08:35:37Z): ruff 1940 to 1939, mypy 3921 to 3918. Set back to ready (no open child), not left working.",
       "issued_at": "2026-10-27T13:51:57Z",
       "minted_during": "interrupt",
       "caused_by": "W1014",
-      "last_worked": "2026-10-29T08:13:42Z",
+      "last_worked": "2026-10-29T08:42:18Z",
       "ticks_blocked": 0,
       "size_class": "medium",
       "manifest": [
-        "checks/claims.py",
+        "src/nemik/manifest.py",
         "mypy-baseline.json",
         "ruff-baseline.json"
       ],
@@ -29965,12 +29965,12 @@
         "mtools:W2088"
       ],
       "blocked_kind": "agent",
-      "next_bounded_step": "Wait for mtools' reply; meanwhile nothing to edit here. The goto/watch count in tests/test_layout.py is 35 and 35.",
-      "evidence": "2026-10-29: 2026-10-29: cause found by the reviewer (R22): the validator checks only a top-level findings list, and nemik's retros were stored as a flat list under retros, so nothing was validated. R22 is the first record in the validated shape and the writer accepted it. Peer request sent to mtools-ad (message id 55428125-bc18-4a11-93f8-4c43a50962f2) to refuse a retro with no findings list or an unknown top-level key and render each finding. The 20 stored records are not edited. | 2026-10-29: 2026-10-29 mtools-ad (peer): taken on mtools:W2088, extended, no new card: it will refuse a retro with no findings list or an unknown top-level key and render each finding's id, card, due and witness. Not built yet. Related, built but unstacked: W2091 --migrate-retros (cause to root).",
+      "next_bounded_step": "Watch the next three tick-open outputs for the gate line; then decide whether a second hook (a gap figure at tick-close) is wanted.",
+      "evidence": "2026-10-29: 2026-10-29: cause found by the reviewer (R22): the validator checks only a top-level findings list, and nemik's retros were stored as a flat list under retros, so nothing was validated. R22 is the first record in the validated shape and the writer accepted it. Peer request sent to mtools-ad (message id 55428125-bc18-4a11-93f8-4c43a50962f2) to refuse a retro with no findings list or an unknown top-level key and render each finding. The 20 stored records are not edited. | 2026-10-29: 2026-10-29 mtools-ad (peer): taken on mtools:W2088, extended, no new card: it will refuse a retro with no findings list or an unknown top-level key and render each finding's id, card, due and witness. Not built yet. Related, built but unstacked: W2091 --migrate-retros (cause to root). | 2026-10-29: 2026-10-29 R32-F1: the empty-gate hook is stored with --tick-hooks-set (3 commands: nemik-inbound, nemik-stale, and mikemol-commit REPO --in-gate --json); it prints the commit gate's queue at every tick-open, so a tick that opens with the gate empty reads '[]' at once. It does NOT start a G0 or build a stack: that part of the finding stays a practice, and the gap-at-tick-close figure is not printed either. The writer refused the first list because it dropped the stored 'nemik-inbound nemik' (it asks for '# replaces:' or '# retires:' lines): the stored form is the bare name.",
       "issued_at": "2026-10-28T23:04:15Z",
       "minted_during": "interrupt",
       "caused_by": "W1215",
-      "last_worked": "2026-10-29T00:12:04Z",
+      "last_worked": "2026-10-29T08:21:53Z",
       "ticks_blocked": 3,
       "completed": null
     },
@@ -30304,7 +30304,6 @@
         "operator"
       ],
       "blocked_on": [
-        "W1263",
         "W1264",
         "W1265"
       ],
@@ -30322,6 +30321,31 @@
     {
       "symbol": "W1263",
       "title": "The adapter sets a boolean predicate from an 'apply loop cannot:' line in a card's evidence",
+      "status": "done",
+      "enables": [
+        "W1262"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-29: 2026-10-29: landed in stack 652 as dc4b876 (printed by mikemol-commit), stack tip 44edeee at reflog 04:35:37 -0400 = 08:35:37Z, gate green, 449 fresh of 452 (a new test target, so 452); began 08:19:56Z (began_ns 1793261996722002324), 15 min 41 s wall. The Codon census from the first edit: 7 passed in 384.40 s before the submit. Loadavg at the submit 56.58, 50.51, 44.98; at the verdict 42.83, 48.02, 50.52. Nothing reads the predicate yet: W1264 and W1265 are next.",
+      "issued_at": "2026-10-29T08:11:48Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1262",
+      "last_worked": "2026-10-29T08:36:23Z",
+      "ticks_blocked": 0,
+      "completed": "20261029T083623Z",
+      "manifest": [
+        "src/nemik/adapter.py",
+        "src/nemik/data/nemik.ttl",
+        "tests/test_apply_loop.py"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W1264",
+      "title": "A sudo-shaped word match on an operator ask, and the flag on the ask row",
       "status": "working",
       "enables": [
         "W1262"
@@ -30334,33 +30358,15 @@
       "issued_at": "2026-10-29T08:11:48Z",
       "minted_during": "interrupt",
       "caused_by": "W1262",
-      "last_worked": "2026-10-29T08:13:40Z",
+      "last_worked": "2026-10-29T08:42:16Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
-        "src/nemik/adapter.py",
-        "src/nemik/data/nemik.ttl",
-        "tests/test_apply_loop.py"
+        "src/nemik/blocks.py",
+        "src/nemik/data/field-manifest.json",
+        "tests/test_sudo_shaped.py"
       ],
       "size_class": "small"
-    },
-    {
-      "symbol": "W1264",
-      "title": "A sudo-shaped word match on an operator ask, and the flag on the ask row",
-      "status": "ready",
-      "enables": [
-        "W1262"
-      ],
-      "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
-      "issued_at": "2026-10-29T08:11:48Z",
-      "minted_during": "interrupt",
-      "caused_by": "W1262",
-      "last_worked": null,
-      "ticks_blocked": 0
     },
     {
       "symbol": "W1265",
@@ -31379,7 +31385,8 @@
   ],
   "tick_hooks": [
     "nemik-inbound nemik",
-    "/home/mikemol/github/nemik/.venv/bin/nemik-stale /home/mikemol/github/nemik/src/nemik /home/mikemol/github/nemik/.venv/lib/python3.13/site-packages/nemik"
+    "/home/mikemol/github/nemik/.venv/bin/nemik-stale /home/mikemol/github/nemik/src/nemik /home/mikemol/github/nemik/.venv/lib/python3.13/site-packages/nemik",
+    "/home/mikemol/github/nemik/.venv/bin/mikemol-commit /home/mikemol/github/nemik --in-gate --json"
   ],
   "standing": [
     "nemik repo rules (the fleet rules live in /home/mikemol/github/.claude/loop-prompt.md):",
@@ -33249,7 +33256,72 @@
         "operator": "other"
       },
       "id": "nemik:R31"
+    },
+    {
+      "card": "W1246",
+      "trigger": "round 28: stacks 648-652 (652 in the gate before the send); gaps between stacks 29, 3, 4 and 16 min, down from 1 h 24 min; loadavg now in landing lines; tick hook still not built; tick not opened",
+      "root": "The gap fell because the session built stacks in the same turns, which is effort, not mechanism. It is the third round the hook was named and the third it is not built (W1246 witness open). Host load reads 27 to 57 with no timeout this round, so the load/timeout question (W1245) now has data, but nobody has compared it with the earlier 98 to 117 timeouts.",
+      "contributing": [
+        "The 29 min gap was spent writing batch 1 and its G0; the G0 comes after the planning, so the gate waits on the writing.",
+        "ruff at the default 88 columns was run twice by accident again, one flood. The correct command exists only in W1242's manifest, not in the habit or a hook.",
+        "A G0 stated 'needs a paydown I do not have built' and one was found a few minutes later (claims.py, ruff -1, mypy -3): the claim was made before a search.",
+        "A tick was again not opened this round, so UNSCORED and nudges due have no reading for it."
+      ],
+      "precommit": "G0 for W1263 at 08:12:09Z, before its first edit, K 'four tests' held. One cost was wrong: it said no paydown was built, and one was found.",
+      "delta": "Held by your report: the gaps; loadavg in each W1241 landing line; the Codon census (6 min 24 s, 7 passed) before the submit; W1242's manifest naming the house ruff config (143 E501: 47 in src, 96 elsewhere). Not held: the tick hook, and the G0 paydown claim.",
+      "sustain": [
+        "Putting loadavg at each submit and verdict into the landing line (R31-F2).",
+        "Answering luthen-observability from git log (f6d2915, d9d902b) instead of rebuilding fixtures.",
+        "Atomizing W1262 into W1263, W1264 and W1265 and copying W1011's has_probe for the predicate.",
+        "Saying plainly that the hook is not built."
+      ],
+      "enforcement_layer": "hook",
+      "recurring": true,
+      "one_off": false,
+      "findings": [
+        {
+          "finding": "The tick hook is the open witness from R31-F1 and the gaps show it is wanted, not luck. Write it now with --tick-hooks-set: on a tick that opens with the gate empty and a ready mechanizable item, print the item and start its G0, and at tick-close print the gap since the last verdict. Do the G0 first, so the gate is not waiting on planning.",
+          "finding_card": "W1246",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "the --tick-hooks-set text naming the empty-gate check, and the next tick-close printing a gap figure"
+        },
+        {
+          "finding": "Make the house ruff command the only way: add it to W1242's manifest (done) and to a wrapper or alias the session runs, or have the hook refuse bare ruff on this tree. Two accidents in two rounds show the habit does not hold. Cite the command and the 143 E501 baseline in each stack's G0 that touches E501.",
+          "finding_card": "W1242",
+          "finding_owner": "nemik session",
+          "due": "2026-11-01",
+          "finding_witness": "a wrapper or hook that runs ruff --config ruff-house.toml, and the next E501 stack's G0 quoting 143 as its baseline"
+        },
+        {
+          "finding": "Compare the loadavg now recorded (27 to 57 at submit and verdict, no timeout) with the earlier timeouts at 98 to 117. Write one line on W1245 stating the load above which //:test_page_queue and the sharded targets timed out, so the sharding and until decisions can be judged against a threshold, not a mood.",
+          "finding_card": "W1245",
+          "finding_owner": "nemik session",
+          "due": "2026-11-02",
+          "finding_witness": "a W1245 evidence line quoting the loadavg at each earlier timeout and each quiet run, and the threshold or a statement that the data cannot give one"
+        },
+        {
+          "finding": "Search for a built paydown before a G0 says there is none: a G0 claim of 'not built' should be preceded by one grep or one nemik-check run, and the command quoted. It cost a re-plan this round (claims.py, ruff -1, mypy -3).",
+          "finding_card": "W1176",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "the next G0 that says no paydown is built quoting the command that found none"
+        },
+        {
+          "finding": "W1264 and W1265 follow W1263 in 652 and W1042 and W1259 depend on mtools:W2126 and W2133. At 652's landing, nudge mtools about W2126 and W2133 and confirm by read-back (W1224), and open a tick so UNSCORED and nudges due are read this round.",
+          "finding_card": "W1259",
+          "finding_owner": "nemik session",
+          "due": "2026-11-02",
+          "finding_witness": "a tick-open line with the readings, a ledger nudge line to mtools, and nemik-check output without the W1042 cycle"
+        }
+      ],
+      "handoff": {
+        "instrument": "nemik-paths-forward --add-retro, then --tick-hooks-set for the empty-gate hook",
+        "channel": "the cold review",
+        "operator": "other"
+      },
+      "id": "nemik:R32"
     }
   ],
-  "retro_counter": 31
+  "retro_counter": 32
 }

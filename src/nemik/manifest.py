@@ -26,7 +26,7 @@ def load() -> dict:
     ]
 
 
-def _fields(rows) -> set[str]:
+def _fields(rows: object) -> set[str]:
     return {k for r in rows for k in r} if isinstance(rows, list) else set()
 
 
@@ -39,7 +39,7 @@ def unmanifested(name: str, doc) -> list[str]:
     spec = m[key]
     bad: list[str] = []
 
-    def check(section: str, rows) -> None:
+    def check(section: str, rows: object) -> None:
         bad.extend(
             f"{name} {section}.{k}" for k in sorted(_fields(rows) - set(spec[section]))
         )
