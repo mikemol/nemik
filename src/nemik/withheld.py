@@ -100,7 +100,7 @@ def _set(base: dict[str, object], key: str, value: object) -> dict[str, object]:
 
 
 def apply(docs: dict[str, Any], refs: frozenset[str]) -> dict[str, Any]:
-    """The documents with every withheld item dropped whole (stubs where a published item points)."""
+    """Drop every withheld item whole from the documents (stubs where a published item points)."""
     if not refs:
         return docs
     ids = {_id(r) for r in refs}

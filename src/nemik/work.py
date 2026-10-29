@@ -19,7 +19,7 @@ from pathlib import Path
 
 
 def working(state: Path) -> list[str]:
-    """The symbols of the cards currently working, read from the queue file."""
+    """Give the symbols of the cards currently working, read from the queue file."""
     data = json.loads(state.read_text(encoding="utf-8"))
     return [
         w["symbol"] for w in data.get("waypoints", []) if w.get("status") == "working"

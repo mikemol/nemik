@@ -220,7 +220,7 @@ def _repo(node: Node) -> str:
 
 
 def successors(g: Graph, node: Node) -> set[Node]:
-    """What this waypoint moves: what it `enables`, and every waypoint that `waitsFor` it."""
+    """Give what this waypoint moves: what it `enables`, and every waypoint that `waitsFor` it."""
     from nemik.index import index
 
     ix = index(g)
@@ -362,13 +362,13 @@ def goals(g: Graph, repo: str, weights: Weights) -> list[dict]:
 
 
 def children(g: Graph, n: Node) -> set[Node]:
-    """The open waypoints in n's own repo that directly feed it (enable it, or it waits for them)."""
+    """List the open waypoints in n's repo that feed it directly (enable it, or it waits for them)."""
     feeders = set(g.subjects(NEMIK.enables, n)) | set(g.objects(n, NEMIK.waitsFor))
     return {f for f in feeders if _repo(f) == _repo(n) and _open(g, f)}
 
 
 def is_umbrella(g: Graph, n: Node) -> bool:
-    """A ready item with open work under it (nemik:W74): its frontier is not itself, so it is not a leaf."""
+    """Find a ready item with open work under it (nemik:W74): its frontier is not itself."""
     return frontier(g, n)[0] != {n}
 
 
@@ -937,7 +937,7 @@ def _apply(state: str, rows: list[dict]) -> None:
 
 
 def _next(g: Graph, repo: str, rows: list[dict]) -> dict:
-    """The ready row mtools puts first: `nemik:queuePosition`, from `model.ordered`."""
+    """Give the ready row mtools puts first: `nemik:queuePosition`, from `model.ordered`."""
     ws = workstream_uri(repo)
     pos = {
         str(g.value(n, NEMIK.symbol)): int(str(g.value(n, NEMIK.queuePosition)))

@@ -93,7 +93,7 @@ def cone(g: Graph, card: str) -> set[str]:
 
 
 def critical(g: Graph, scope: set[str] | None = None) -> Critical:
-    """The critical path of the open graph: its length, zero-slack cards and every card's slack.
+    """Give the critical path of the open graph: its length, zero-slack cards and each card's slack.
 
     The zero-slack cards come in dependency order. With `scope` (a set of cites, W333) only those
     cards count, so the path and slack are the longest within a repo, a visible set, or one card's
@@ -256,7 +256,7 @@ def fires(g: Graph, scope: set[str] | None = None) -> list[Fire]:
 
 
 def what_if(before: Critical, after: Critical, cites: list[str]) -> str:
-    """The delta a what-if makes: path length, chain changes and slack changes.
+    """Give the delta a what-if makes: path length, chain changes and slack changes.
 
     It covers the cards that leave or join a longest chain and the open cards whose slack changed
     (the closed ones themselves are not counted).

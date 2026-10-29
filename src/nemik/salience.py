@@ -469,7 +469,7 @@ def edge_currents(
     operator: int = 0,
     workable: bool = True,
 ) -> dict[tuple[str, str], float]:
-    """The demand that crossed each dependency in `repo`'s solve, by (needing card, prerequisite).
+    """Give the demand across each dependency in `repo`'s solve, by (needing card, prerequisite).
 
     Each key is the `repo:W<n>` of the card that needs and of its prerequisite: what the view draws
     as an edge's width (nemik:W264). Floats: the view needs a magnitude, not the exact fraction.

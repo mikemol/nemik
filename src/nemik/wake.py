@@ -322,7 +322,7 @@ def alarm_key(a: dict) -> str:
 def undelivered(
     fired: list[dict], seen: dict, now: datetime | None = None
 ) -> list[dict]:
-    """Fired alarms not yet delivered, each marked delivered in `seen` (mutated, like due_nudges).
+    """Pick undelivered fired alarms, marking each delivered in `seen` (mutated, like due_nudges).
 
     A firing is delivered once: the same (ref, occurrence, instant) seen again by an overlapping
     window is skipped. Error rows (a bad trigger) have no instant, are never marked, and so stay

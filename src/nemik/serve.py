@@ -745,7 +745,7 @@ class Model:
 
 
 def local(term: object) -> str:
-    """The last segment of a nemik:/oslc IRI: after '#', '/', or the urn:nemik: prefix."""
+    """Give the last segment of a nemik:/oslc IRI: after '#', '/', or the urn:nemik: prefix."""
     return str(term).removeprefix("urn:nemik:").rsplit("#", 1)[-1].rsplit("/", 1)[-1]
 
 
@@ -1595,7 +1595,7 @@ def private_files(model: Model, out: Path) -> list[Path]:
 
 
 def fleet_key(root: Path) -> str:
-    """The digest of every queue and ledger file's path and CONTENT now.
+    """Give the digest of every queue and ledger file's path and CONTENT now.
 
     Content, not mtime: an export that rewrites a file without changing it (luthen's does, every
     minute) is not a change, and a build costs real CPU (luthen-observability, nemik:W504: the

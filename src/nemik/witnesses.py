@@ -129,7 +129,7 @@ def _alert(key: str) -> dict | None:
 
 
 def _promql(key: str) -> dict | None:
-    """An instant query: its sample values, and whether the result is empty."""
+    """Run an instant query: its sample values, and whether the result is empty."""
     body = _get("NEMIK_VM_URL", "/api/v1/query", {"query": key})
     if body is None:
         return None
@@ -138,7 +138,7 @@ def _promql(key: str) -> dict | None:
 
 
 def _apply(key: str) -> dict | None:
-    """A row id of luthen's host-apply export: whether its live file matches the declared source.
+    """Say whether a row of luthen's host-apply export has a live file matching its source.
 
     nemik:W233. `applied` is true only for a fresh, well-formed export that carries an applied
     mark for the row; a row the export does not hold, or an export that cannot be read, is
@@ -215,7 +215,7 @@ def opa_json(query: str, doc: object, data: list[str]) -> object:
 
 
 def evaluate(query: str, doc: dict, missing: list[str]) -> str:
-    """'true' | 'false' | 'undefined'."""
+    """Give 'true', 'false' or 'undefined'."""
     if missing:
         return "undefined"
     parsed = opa_json(query, doc, [])
@@ -245,7 +245,7 @@ def is_rego(query: str, lang: str = "") -> bool:
 def witness(
     query: str, now: datetime | None = None, lang: str = ""
 ) -> tuple[str, dict[str, object], list[str]]:
-    """'true' | 'false' | 'undefined' for a waypoint's witness, with the facts that decided it.
+    """Give 'true', 'false' or 'undefined' for a waypoint's witness, with the facts that decided it.
 
     nemik:W501: a witness that is a bare PromQL expression holds while its instant query returns a
     sample, the PromQL meaning of a comparison (`x > y` returns the series only while it is true)
