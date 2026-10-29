@@ -62,10 +62,20 @@ class Hashes:
     """hashes.json, reread only when its file changes."""
 
     def __init__(self) -> None:
+        """Start with no table read and nothing seen."""
         self._seen: tuple[Path, int] | None = None
         self._table: dict[str, str] = {}
 
     def table(self, base: Path) -> dict[str, str]:
+        """Give the snapshot's published hashes, rereading hashes.json only when its file moved.
+
+        Args:
+            base: the snapshot directory that holds hashes.json.
+
+        Returns:
+            Path to sha256 hex, or an empty table when the file is missing or unreadable.
+
+        """
         path = base.resolve() / "hashes.json"
         try:
             stamp = (path, path.stat().st_mtime_ns)

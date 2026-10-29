@@ -361,6 +361,8 @@ def pace_board(path: Path) -> tuple[dict[str, object], list[str]]:
 
 
 class Model:
+    """The live view's state: the surveyed graph and its JSON, rebuilt when a source moves."""
+
     def __init__(
         self,
         root: Path,
@@ -369,6 +371,16 @@ class Model:
         series: Path | None = None,
         series_max_age: int = 900,
     ) -> None:
+        """Set up an empty model over one root; the first refresh builds the graph.
+
+        Args:
+            root: the workspace root whose queues and ledgers are surveyed.
+            withheld: refs kept out of every published number.
+            runs: luthen's published run logs, read as activity rows when given.
+            series: luthen's loop and token snapshot, read per request when given.
+            series_max_age: seconds after which the series snapshot is refused.
+
+        """
         self.root = root
         # nemik:W780: the host-root frontier nemik-hostroot writes on the host (host-root.json),
         # set by main when given; read per request so its age is judged against the clock.
@@ -410,6 +422,12 @@ class Model:
         self._lock = threading.Lock()
 
     def sources(self) -> list[Path]:
+        """List the files whose change rebuilds the view: every queue and ledger, and the run logs.
+
+        Returns:
+            The queue and ledger paths under the root, plus each run log when --runs is given.
+
+        """
         found = [
             p for name in (QUEUE, LEDGER) for _, p in workstream_files(self.root, name)
         ]
@@ -418,6 +436,11 @@ class Model:
         return found
 
     def refresh(self) -> None:
+        """Rebuild the graph, findings and JSON document when a source file has moved.
+
+        The rebuild runs under a lock, so concurrent requests do not each redo it, and it records
+        the CPU seconds per phase. Nothing changes when the sources' mtimes match the last key.
+        """
         key = tuple((str(p), p.stat().st_mtime_ns) for p in self.sources())
         if key == self.key:
             return
@@ -686,6 +709,13 @@ class Model:
             threading.Thread(target=self.refresh, daemon=True).start()
 
     def metrics(self) -> bytes:
+        """Render the model's own gauges in the Prometheus text format.
+
+        Returns:
+            The build version, graph size, rebuild count and the CPU seconds of the last rebuild
+            and of each of its phases.
+
+        """
         try:
             ver = version("nemik")
         except PackageNotFoundError:

@@ -23501,17 +23501,17 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Pay the next ruff and mypy families in small files; codon owes 1 (W1034)",
-      "evidence": "2026-10-25: 2026-10-25 measured on tests/test_layout.py: ruff --fix splits 14 messageless composite assertions (ruff 2884 to 2872) but mypy rises 10 in that file (713 to 723): a split gives each operand its own line, and each line with an Any-typed operand (page.evaluate results) is its own finding. Typing the server fixture parameter in two tests moved mypy by 0 (ruff fell 2 more). So the offset has to come from the Any-typed page.evaluate results, for example annotating each result once as a TypedDict or reading it through a typed helper; reverted the file, nothing kept | 2026-10-25: tagged as the paydown card for the ruff and mypy baselines (the pace reads nemik behind on both, github-8f 14:14Z): a card is a paydown only if it touches file:<the baseline>. baselinetop: the heaviest file is tests/test_layout.py, 232 ruff and 749 mypy findings; the heaviest ruff rule is D103 (527), then E501 (378), PLC0415 (291); the heaviest mypy rule is misc (5806), which is disallow_any_expr | 2026-10-25: first slice, 2026-10-25: the 35 copies of the chromium launch in tests/test_layout.py (seven lines each, all os.path.abspath) are one typed helper _launch(playwright); done by a codemod that asserted 28 plus 7 matches, so any variation would have stopped it. Measured: ruff 2818 to 2783 (the 35 PTH100), mypy 6256 to 5960 (-296, the Any-typed chromium launch expressions); both baselines lowered with --write. Next family by baselinetop for this file: E501 (67), ANN001 (47), D103 (31), PT018 (19) | 2026-10-25: second slice, tests/test_calendars.py: its 35 ANN001 arguments annotated by a codemod from ruff's own positions (tmp_path Path, monkeypatch pytest.MonkeyPatch, capsys pytest.CaptureFixture[str], ics str, the bool fail keyword-only, _row's label, start, summary and waiting). Measured against the working-tree baselines: ruff 2783 to 2747, mypy 5960 to 5845. Baselines to be written after stack454, which carries them, lands | 2026-10-26: 2026-10-26: github-8f (ratchet half of the operator's order 'continue driving burndowns of cards AND ratchets', my transcript line 118161): none of 28 commits since 10-25T16:45Z touched a ratchet file; the pace reads nemik behind on codon, mypy (required 2) and ruff (required 3). Tagged velocity so the next round takes it | 2026-10-26: 2026-10-26 first slice since the order: ten ruff findings paid in nine small test files, no mypy change: D103 on test_catalog, test_flow (2), test_hashes, test_lanes, test_metrics_age, test_overlaps, test_saturation (2) by giving each test a one-line docstring, D100 on test_overlaps. ruff 2715 to 2705; the baseline lowered with --write | 2026-10-26: landed 75cdc5b: ruff 2715 to 2705 | 2026-10-26: 5220985: test_trs, ruff 2705 to 2702, pushed | 2026-10-26: 6a00758: mypy 5758 to 5753, ruff 2702 to 2701, pushed; codon row still owes 1 | 2026-10-27: 3345ebe: test_churn and test_critical_cards, ruff 2634 to 2629, pushed | 2026-10-27: fea8dfb: test_baseline and test_cachestore, ruff 2629 to 2620, pushed | 2026-10-27: 893d1c9 landed: adoption.py (D400, D401, DOC201, TC003), ruff 2620 to 2616. Next paydowns tagged under W1142 (marks.py, 2616 to 2614, queued in stack548); mypy 2 and codon 1 still owed. | 2026-10-29: G0 2026-10-29 (the paydown companion to the W1273 repin, before its first edit): N=3 D400 first lines in src (letters.py 3, pins.py 3, wake.py 83 should_nudge), K=3: each read, a statement-form first line drafted that keeps the claim (letters and pins move their question to a body line or restate it, should_nudge becomes imperative 'Say whether to nudge again...' which also clears its D401 if it is counted). Other small families seen and left for a later pass: D101/D107/D102 in serve.py 363 to 688 and staticserve.py 64 and 68 (classes and methods not yet read), web/__init__.py D104. Expected ruff 1880 to 1877 (range 1876 to 1877 if D401 clears too). src, so the census runs from the first edit. | 2026-10-29: Codon census green (356.80 s wall) for stack 667. ruff 1880 to 1875, mypy 3914 unchanged. Submitting.",
+      "evidence": "2026-10-25: 2026-10-25 measured on tests/test_layout.py: ruff --fix splits 14 messageless composite assertions (ruff 2884 to 2872) but mypy rises 10 in that file (713 to 723): a split gives each operand its own line, and each line with an Any-typed operand (page.evaluate results) is its own finding. Typing the server fixture parameter in two tests moved mypy by 0 (ruff fell 2 more). So the offset has to come from the Any-typed page.evaluate results, for example annotating each result once as a TypedDict or reading it through a typed helper; reverted the file, nothing kept | 2026-10-25: tagged as the paydown card for the ruff and mypy baselines (the pace reads nemik behind on both, github-8f 14:14Z): a card is a paydown only if it touches file:<the baseline>. baselinetop: the heaviest file is tests/test_layout.py, 232 ruff and 749 mypy findings; the heaviest ruff rule is D103 (527), then E501 (378), PLC0415 (291); the heaviest mypy rule is misc (5806), which is disallow_any_expr | 2026-10-25: first slice, 2026-10-25: the 35 copies of the chromium launch in tests/test_layout.py (seven lines each, all os.path.abspath) are one typed helper _launch(playwright); done by a codemod that asserted 28 plus 7 matches, so any variation would have stopped it. Measured: ruff 2818 to 2783 (the 35 PTH100), mypy 6256 to 5960 (-296, the Any-typed chromium launch expressions); both baselines lowered with --write. Next family by baselinetop for this file: E501 (67), ANN001 (47), D103 (31), PT018 (19) | 2026-10-25: second slice, tests/test_calendars.py: its 35 ANN001 arguments annotated by a codemod from ruff's own positions (tmp_path Path, monkeypatch pytest.MonkeyPatch, capsys pytest.CaptureFixture[str], ics str, the bool fail keyword-only, _row's label, start, summary and waiting). Measured against the working-tree baselines: ruff 2783 to 2747, mypy 5960 to 5845. Baselines to be written after stack454, which carries them, lands | 2026-10-26: 2026-10-26: github-8f (ratchet half of the operator's order 'continue driving burndowns of cards AND ratchets', my transcript line 118161): none of 28 commits since 10-25T16:45Z touched a ratchet file; the pace reads nemik behind on codon, mypy (required 2) and ruff (required 3). Tagged velocity so the next round takes it | 2026-10-26: 2026-10-26 first slice since the order: ten ruff findings paid in nine small test files, no mypy change: D103 on test_catalog, test_flow (2), test_hashes, test_lanes, test_metrics_age, test_overlaps, test_saturation (2) by giving each test a one-line docstring, D100 on test_overlaps. ruff 2715 to 2705; the baseline lowered with --write | 2026-10-26: landed 75cdc5b: ruff 2715 to 2705 | 2026-10-26: 5220985: test_trs, ruff 2705 to 2702, pushed | 2026-10-26: 6a00758: mypy 5758 to 5753, ruff 2702 to 2701, pushed; codon row still owes 1 | 2026-10-27: 3345ebe: test_churn and test_critical_cards, ruff 2634 to 2629, pushed | 2026-10-27: fea8dfb: test_baseline and test_cachestore, ruff 2629 to 2620, pushed | 2026-10-27: 893d1c9 landed: adoption.py (D400, D401, DOC201, TC003), ruff 2620 to 2616. Next paydowns tagged under W1142 (marks.py, 2616 to 2614, queued in stack548); mypy 2 and codon 1 still owed. | 2026-10-29: G0 2026-10-29 (the paydown companion to the W1273 repin, before its first edit): N=3 D400 first lines in src (letters.py 3, pins.py 3, wake.py 83 should_nudge), K=3: each read, a statement-form first line drafted that keeps the claim (letters and pins move their question to a body line or restate it, should_nudge becomes imperative 'Say whether to nudge again...' which also clears its D401 if it is counted). Other small families seen and left for a later pass: D101/D107/D102 in serve.py 363 to 688 and staticserve.py 64 and 68 (classes and methods not yet read), web/__init__.py D104. Expected ruff 1880 to 1877 (range 1876 to 1877 if D401 clears too). src, so the census runs from the first edit. | 2026-10-29: Codon census green (356.80 s wall) for stack 667. ruff 1880 to 1875, mypy 3914 unchanged. Submitting. | 2026-10-29: landed 8886074 (printed by mikemol-commit, subject matches) at 2026-10-29 11:38:33 -0400 (15:38:33Z) from reflog, with c0a10be (W1273) in stack 667. Gate began_ns 1793287278271830404 = 15:21:18Z, so 17 min 15 s wall. ruff 1880 to 1875, mypy 3914 unchanged, census 356.80 s. Loadavg at verdict 26.69, 36.34, 40.71. Residue check after landing: git status under vendor, pyproject.toml, MODULE.bazel, uv.lock, src, tests prints nothing (staged 0, untracked 0). Remaining D-family singles: D101/D107/D102 in serve.py 363 to 688 and staticserve.py 64 and 68, web/__init__.py D104. | 2026-10-29: G0 2026-10-29 (second slice, a ready small batch for the empty gate, before its first edit): N=8 undocumented sites in src: serve.py class Model (363), Model.__init__ (364), Model.sources (412), Model.refresh (420), Model.metrics (688), staticserve.py Hashes.__init__ (64), Hashes.table (68), and web/__init__.py (D104, package docstring). K=8: each body was read in full (Model 358 to 496 and 682 to 714, Hashes 55 to 79, web/__init__.py is two comment lines and empty). Docstrings only, with Args and Returns where the body returns and a blank line before the closing quotes (D413), imperative first lines (D401). Expected ruff 1875 to 1867 (range 1866 to 1867), mypy unchanged. src, so the census runs from the first edit. | 2026-10-29: Codon census green on the final tree for stack 668 (started after the last edit): 7 passed in 337.20 s wall. ruff 1875 to 1867, mypy 3914 unchanged. Submitting as stack 668.",
       "issued_at": "2026-10-25T01:12:01Z",
       "minted_during": "tick",
       "caused_by": "W980",
-      "last_worked": "2026-10-29T15:21:07Z",
+      "last_worked": "2026-10-29T15:49:57Z",
       "ticks_blocked": 0,
       "weight": 31,
       "manifest": [
-        "src/nemik/letters.py",
-        "src/nemik/pins.py",
-        "src/nemik/wake.py",
+        "src/nemik/serve.py",
+        "src/nemik/staticserve.py",
+        "src/nemik/web/__init__.py",
         "ruff-baseline.json"
       ],
       "size_class": "medium",
@@ -30577,7 +30577,7 @@
     {
       "symbol": "W1273",
       "title": "Answer luthen-observability:W1783: re-vendor nemik's mtools wheels to cfe689c or later so the pinned writer prints G1-HANDOFF",
-      "status": "working",
+      "status": "landed",
       "enables": [
         "luthen-observability:W1783"
       ],
@@ -30585,11 +30585,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "After W1269 lands: mikemol-repin --revendor --sha cfe689cdafd1582c4e898368fb285ba10f99eb27 --root nemik --write --no-sync, check the transcriptstruct pin line by hand (the +g defect, mtools to card), uv lock, bazel build //:.venv, git add -f the new wheels, census, stack with a paydown companion. Verified in mtools git: cfe689c is mtools HEAD (W2154, G1-HANDOFF), 2026-10-29 09:46:58 -0400.",
-      "evidence": "2026-10-29: 2026-10-29 peer message from mtools (not an operator ruling): the mikemol-repin --revendor defect is carded as mtools:W2155 (caused by nemik:W1259): the rewritten config paths must keep the new wheel's real file name and uv lock's stderr must be printed on failure. Note: their text says the real name carries the +g local version, but what I saw was a wheel built as +bb2c5c7 (no g) and a config rewritten to +gbb2c5c7, so the revendor will need the transcriptstruct pin line checked by hand again until W2155 lands. Cite mtools:W2155 as the blocker-in-practice, not a block (the repin can proceed with the hand check). | 2026-10-29: G0 2026-10-29 (before the first edit, after tick-open): repin of the vendored mtools wheels from bb2c5c7 to cfe689cdafd1582c4e898368fb285ba10f99eb27 (mtools HEAD, read in mtools git) with mikemol-repin --revendor --write --no-sync. N=1 repin, K=1. Pre-submit checks to run BEFORE the first submit (R38-F2): git status for untracked files under the stack's paths (vendor/wheels/.gitignore hides the wheels, so git add -f each new one and list it in the stack paths), a manifest on every card in the stack, no manifest drift. By hand: the transcriptstruct pin line in pyproject.toml and MODULE.bazel (mtools:W2155 until it lands). A paydown companion in the rank round is needed (the repin lowers no ratchet). The pinned writer after this must print G1-HANDOFF at tick close, which luthen-observability:W1783 will read. | 2026-10-29: Codon census green on the cfe689c tree for stack 667: 7 passed in 356.80 s wall. ruff 1880 to 1875, mypy 3914 unchanged. Submitting as stack 667 with W1014 beside it.",
+      "evidence": "2026-10-29: 2026-10-29 peer message from mtools (not an operator ruling): the mikemol-repin --revendor defect is carded as mtools:W2155 (caused by nemik:W1259): the rewritten config paths must keep the new wheel's real file name and uv lock's stderr must be printed on failure. Note: their text says the real name carries the +g local version, but what I saw was a wheel built as +bb2c5c7 (no g) and a config rewritten to +gbb2c5c7, so the revendor will need the transcriptstruct pin line checked by hand again until W2155 lands. Cite mtools:W2155 as the blocker-in-practice, not a block (the repin can proceed with the hand check). | 2026-10-29: G0 2026-10-29 (before the first edit, after tick-open): repin of the vendored mtools wheels from bb2c5c7 to cfe689cdafd1582c4e898368fb285ba10f99eb27 (mtools HEAD, read in mtools git) with mikemol-repin --revendor --write --no-sync. N=1 repin, K=1. Pre-submit checks to run BEFORE the first submit (R38-F2): git status for untracked files under the stack's paths (vendor/wheels/.gitignore hides the wheels, so git add -f each new one and list it in the stack paths), a manifest on every card in the stack, no manifest drift. By hand: the transcriptstruct pin line in pyproject.toml and MODULE.bazel (mtools:W2155 until it lands). A paydown companion in the rank round is needed (the repin lowers no ratchet). The pinned writer after this must print G1-HANDOFF at tick close, which luthen-observability:W1783 will read. | 2026-10-29: Codon census green on the cfe689c tree for stack 667: 7 passed in 356.80 s wall. ruff 1880 to 1875, mypy 3914 unchanged. Submitting as stack 667 with W1014 beside it. | 2026-10-29: repin landed c0a10be (printed by mikemol-commit, subject matches) at 2026-10-29 11:38:33 -0400 (15:38:33Z), stack 667, 17 min 15 s wall. The stale 504b80e and bb2c5c7 wheels are removed in it. Open: a read-back that a pinned writer prints G1-HANDOFF at tick close (the next --tick-close output of the rebuilt //:.venv writer, not the commit), then tell luthen-observability the nemik sha c0a10be. | 2026-10-29: 2026-10-29 status set to landed: c0a10be is on main. Not done: the G1-HANDOFF read-back from the rebuilt writer's own tick-close output, and telling luthen-observability the sha. A working mark on a landed card made the gate refuse stack 668 (round cards ready, W1273 not in the round).",
       "issued_at": "2026-10-29T14:37:36Z",
       "minted_during": "tick",
       "caused_by": "luthen-observability:W1783",
-      "last_worked": "2026-10-29T15:21:06Z",
+      "last_worked": "2026-10-29T15:51:07Z",
       "ticks_blocked": 0,
       "manifest": [
         "pyproject.toml",
@@ -30598,7 +30598,8 @@
         "vendor/wheels/SHA256SUMS"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": null,
+      "landed_at": "20261029T155107Z"
     }
   ],
   "residue": [
@@ -30883,28 +30884,28 @@
       "tag": "file:tests/test_layout.py!w",
       "holder": "nemik-session",
       "waypoint": "W1014",
-      "base_sha": "458acf8e83f23d92d0829814b02e08e27389b4e1",
-      "taken_at": "2026-10-29T15:21:07Z",
-      "renewed_at": "2026-10-29T15:21:07Z",
-      "expires_at": "2026-10-29T15:51:07Z"
+      "base_sha": "8886074ea69ed065cbb00529095e3761376f14aa",
+      "taken_at": "2026-10-29T15:49:57Z",
+      "renewed_at": "2026-10-29T15:49:57Z",
+      "expires_at": "2026-10-29T16:19:57Z"
     },
     {
       "tag": "file:ruff-baseline.json!w",
       "holder": "nemik-session",
       "waypoint": "W1014",
-      "base_sha": "458acf8e83f23d92d0829814b02e08e27389b4e1",
-      "taken_at": "2026-10-29T15:21:07Z",
-      "renewed_at": "2026-10-29T15:21:07Z",
-      "expires_at": "2026-10-29T15:51:07Z"
+      "base_sha": "8886074ea69ed065cbb00529095e3761376f14aa",
+      "taken_at": "2026-10-29T15:49:57Z",
+      "renewed_at": "2026-10-29T15:49:57Z",
+      "expires_at": "2026-10-29T16:19:57Z"
     },
     {
       "tag": "file:mypy-baseline.json!w",
       "holder": "nemik-session",
       "waypoint": "W1014",
-      "base_sha": "458acf8e83f23d92d0829814b02e08e27389b4e1",
-      "taken_at": "2026-10-29T15:21:07Z",
-      "renewed_at": "2026-10-29T15:21:07Z",
-      "expires_at": "2026-10-29T15:51:07Z"
+      "base_sha": "8886074ea69ed065cbb00529095e3761376f14aa",
+      "taken_at": "2026-10-29T15:49:57Z",
+      "renewed_at": "2026-10-29T15:49:57Z",
+      "expires_at": "2026-10-29T16:19:57Z"
     }
   ],
   "advice": [
@@ -33920,7 +33921,65 @@
         "operator": "other"
       },
       "id": "nemik:R38"
+    },
+    {
+      "card": "W1246",
+      "trigger": "round 35: 665 (0ae97d5, 82ac64e) landed 14:11:53Z; 666 (e393597 W1269, 458acf8 W1242 batch 6) landed 14:57:34Z; 667 (W1273 re-vendor to mtools cfe689c + W1014) inflight about 15:21:18Z; empty-gate gaps 33 min 15 s and 23 min 40 s",
+      "root": "Gaps of 33 and 24 minutes are worse than last round's 25. R38-F1 (submit the ready small batch before the repin) was not met for 667, and the repin was built first again. The same pattern put a stale-wheel residue into 665: wheel removals left staged and unlanded, found only at the next repin. The habit is to build the large item in the quiet period, so the gate waits for it.",
+      "contributing": [
+        "Both empty intervals were repin or rebuild work, the same class as round 34.",
+        "665 left the 504b80e wheel removals staged and unlanded; nothing checked that the staged set was empty after landing.",
+        "W1259 was closed as not nemik's reader with the limit stated: no card is blocked on a github ref, so the live path was not exercised. That limit is a coverable gap, not a result.",
+        "667 carries two cards (W1273 and W1014) plus the stale-set removal, so the stack is larger than the gap it was meant to fill."
+      ],
+      "precommit": "W1273, W1014 and W1242 batch 6: G0 before the first edit for each. Expected: ruff 1880 to 1875 for W1014; census green (356.80 s).",
+      "delta": "Held by your report: the pre-submit checklist (667 accepted first time); W1269 landed with its own census 379.62 s and no rank-round refusal; ruff 1890 to 1885 to 1880; G0 before the first edit. Not held: R38-F1 (small batch first); the gap figures of 33 min 15 s and 23 min 40 s. Open: the 667 verdict.",
+      "sustain": [
+        "Running the pre-submit checklist (R38-F2 met).",
+        "Landing W1269 with its own census and no second card in the tree.",
+        "Stating the limit when closing W1259 instead of claiming the reader was verified.",
+        "Finding and landing the stale wheel removals with the repin."
+      ],
+      "enforcement_layer": "gate",
+      "recurring": true,
+      "one_off": false,
+      "findings": [
+        {
+          "finding": "The gate empties whenever the next stack is large. A rule that depends on remembering has not held in four rounds. Make the tick-close refuse (or print a blocking line) when the gate has been empty over 10 min and a ready batch exists, naming the batch. This is W1246's hook half, now with six instances.",
+          "finding_card": "W1246",
+          "finding_owner": "mtools",
+          "due": "2026-11-03",
+          "finding_witness": "a tick-close output line naming the empty-gate minutes and the ready batch, in a tick where the gate was empty"
+        },
+        {
+          "finding": "After each landing, check that the staged set is empty and no vendor/wheels path is untracked, and write the result in the landing ledger line. The 504b80e removals sat staged from 665 until the 667 repin found them.",
+          "finding_card": "W1219",
+          "finding_owner": "nemik session",
+          "due": "2026-11-01",
+          "finding_witness": "the next landing ledger lines each carrying git status staged-count and untracked-count, both zero"
+        },
+        {
+          "finding": "W1259 was closed with its live path unexercised. Add a one-line note on the card, or a child card, with the case that would exercise it (a card blocked_on a github ref) and what to read when one appears, so the limit is held as a witness and not a closure.",
+          "finding_card": "W1259",
+          "finding_owner": "nemik session",
+          "due": "2026-11-02",
+          "finding_witness": "a W1259 line naming the exercising case, or a child card with a witness"
+        },
+        {
+          "finding": "Read the 667 verdict and record it with the ruff count (1880 to 1875) and the loadavg at submit and verdict. Then confirm to luthen-observability that the pinned writer prints G1-HANDOFF (W1783), with a read-back from the writer's output, not the commit.",
+          "finding_card": "W1273",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "the 667 landing ledger line with the counts, and a writer output line showing G1-HANDOFF quoted to luthen-observability"
+        }
+      ],
+      "handoff": {
+        "instrument": "nemik-paths-forward --add-retro",
+        "channel": "the cold review",
+        "operator": "other"
+      },
+      "id": "nemik:R39"
     }
   ],
-  "retro_counter": 38
+  "retro_counter": 39
 }
