@@ -170,7 +170,7 @@ def fired_alarms(
     from nemik.adapter import BASE, NEMIK, OSLC_CM
     from nemik.alarm import fires_between
 
-    def val(n: Node, p) -> str:
+    def val(n: Node, p: Node) -> str:
         return str(g.value(n, p) or "")
 
     out = []

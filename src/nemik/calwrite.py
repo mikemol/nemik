@@ -35,6 +35,8 @@ from nemik.vtodo import DEFAULT_HELPER, time_property, timezones
 if TYPE_CHECKING:
     from collections.abc import Iterable
 
+    from rdflib.term import Node
+
 PRODID = "-//nemik//dated waypoints//EN"
 OWNED = "nemik:"  # a UID with this prefix is nemik's own event, in any calendar
 _DATE = re.compile(r"\d{8}")
@@ -156,7 +158,7 @@ def event_lines(
 ROUTE = "calendar:"
 
 
-def routed_elsewhere(g: Graph, n, label: str | None) -> bool:
+def routed_elsewhere(g: Graph, n: Node, label: str | None) -> bool:
     """nemik:W263 (life:W40): a waypoint touching `calendar:<other>` belongs only to that calendar.
 
     The tag is a route, not a filter: the named calendar takes the waypoint (when its own `mirror`
