@@ -112,12 +112,13 @@ def _pick(page: Page) -> str:
 
 def test_a_picked_repo_reads_as_a_numbered_queue(server: str, page: Page) -> None:
     """Places run from 1, each row says why: its weight, its wait and who passed it."""
+    webpage.watch(page)
     page.goto(server)
-    page.wait_for_function(READY, timeout=0)
+    webpage.until(page, READY)
     repo = page.locator("#repos button").first.get_attribute("data-repo") or ""
     page.route("**/queue.json", _answer(json.dumps(_rows(repo)), 200))
     page.reload()
-    page.wait_for_function(READY, timeout=0)
+    webpage.until(page, READY)
     _pick(page)
     rows = page.locator("#queue ol.queue").last.locator("li")
     expect(rows).to_have_count(2)
@@ -131,8 +132,9 @@ def test_a_picked_repo_reads_as_a_numbered_queue(server: str, page: Page) -> Non
 def test_a_view_without_the_order_says_so(server: str, page: Page) -> None:
     """With no queue.json the section says no order is published, and draws none."""
     page.route("**/queue.json", _answer("{}", NO_QUEUE))
+    webpage.watch(page)
     page.goto(server)
-    page.wait_for_function(READY, timeout=0)
+    webpage.until(page, READY)
     _pick(page)
     expect(page.locator("#queue")).to_contain_text("publishes no queue order")
     expect(page.locator("#queue ol.queue")).to_have_count(0)

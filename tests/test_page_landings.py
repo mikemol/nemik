@@ -75,8 +75,9 @@ def _answer(body: str) -> Callable[[Route], None]:
 def test_a_host_board_is_drawn_per_repo(server: str, page: Page) -> None:
     """Each repo's count, median and last gate and a sparkline appear under the wake panel."""
     page.route("**/landings.json", _answer(BOARD))
+    webpage.watch(page)
     page.goto(server)
-    page.wait_for_function(READY, timeout=0)
+    webpage.until(page, READY)
     wake = page.locator("#wake")
     expect(wake).to_contain_text("Commit gate times", use_inner_text=False)
     text = wake.text_content() or ""
@@ -87,8 +88,9 @@ def test_a_host_board_is_drawn_per_repo(server: str, page: Page) -> None:
 def test_no_host_board_draws_nothing(server: str, page: Page) -> None:
     """With host false the wake panel carries no gate-time section."""
     page.route("**/landings.json", _answer(NO_BOARD))
+    webpage.watch(page)
     page.goto(server)
-    page.wait_for_function(READY, timeout=0)
+    webpage.until(page, READY)
     expect(page.locator("#wake")).not_to_contain_text(
         "Commit gate times", use_inner_text=False
     )

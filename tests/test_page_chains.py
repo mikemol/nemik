@@ -75,8 +75,9 @@ def test_the_legend_length_is_the_python_cores(server: str, page: Page) -> None:
     model = Model(FLEET)
     model.refresh()
     expected = critical(model.graph).length
+    webpage.watch(page)
     page.goto(server)
-    page.wait_for_function(READY, timeout=0)
+    webpage.until(page, READY)
     legend = page.locator("#pathkey")
     expect(legend).to_contain_text("longest chain, this view (")
     found = LEGEND.search(legend.inner_text())
@@ -89,8 +90,9 @@ def test_a_browser_without_the_module_says_so_and_marks_no_chain(
 ) -> None:
     """With core.wasm unfetchable the page tells the viewer and does not draw a chain."""
     page.route("**/core.wasm", _refuse)
+    webpage.watch(page)
     page.goto(server)
-    page.wait_for_function(READY, timeout=0)
+    webpage.until(page, READY)
     expect(page.locator("#chainsoff")).to_be_visible()
     expect(page.locator("#chainsoff")).to_contain_text("longest-chain marks are off")
     assert LEGEND.search(page.locator("#pathkey").inner_text()) is None

@@ -48,8 +48,9 @@ def page(server: str) -> Iterator[Page]:
         except Error as error:
             pytest.skip(f"chromium unavailable: {error}")
         opened = browser.new_page(viewport=VIEWPORT)
+        webpage.watch(opened)
         opened.goto(server)
-        opened.wait_for_function(READY, timeout=0)
+        webpage.until(opened, READY)
         yield opened
         browser.close()
 
