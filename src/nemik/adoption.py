@@ -26,6 +26,16 @@ PACKAGE = "mikemol-pathsforward"
 _NAME = re.compile(r"^\s*([A-Za-z0-9._-]+)")
 
 
+def _table(value: object) -> dict[str, object]:
+    """Read a TOML value as a table, or as an empty one when it is anything else (nemik:W1253).
+
+    Returns:
+        The table's entries, keyed by string, or {} when the value is not a table.
+
+    """
+    return {str(k): v for k, v in value.items()} if isinstance(value, dict) else {}
+
+
 def _names(specs: object) -> set[str]:
     out = set()
     for spec in specs if isinstance(specs, list) else []:
@@ -57,10 +67,10 @@ def adoption(queue_path: Path) -> str:
         doc = tomllib.loads(py.read_text())
     except (OSError, tomllib.TOMLDecodeError):
         return "missing"
-    project = doc.get("project", {})
+    project = _table(doc.get("project"))
     deps = _names(project.get("dependencies"))
-    for group in (project.get("optional-dependencies") or {}).values():
+    for group in _table(project.get("optional-dependencies")).values():
         deps |= _names(group)
-    for group in (doc.get("dependency-groups") or {}).values():
+    for group in _table(doc.get("dependency-groups")).values():
         deps |= _names(group)
     return "declared" if PACKAGE in deps else "missing"

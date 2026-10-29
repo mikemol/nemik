@@ -8,8 +8,7 @@
  },
  "src/nemik/adoption.py": {
   "call-overload": 1,
-  "misc": 25,
-  "var-annotated": 1
+  "misc": 12
  },
  "src/nemik/apischema.py": {
   "explicit-any": 10,
