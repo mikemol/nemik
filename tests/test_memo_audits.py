@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W403: a document build answers identical flow solves once, and the document is unchanged."""
+"""nemik:W403: a document build answers identical flow solves once; the document is unchanged."""
 
 from __future__ import annotations
 

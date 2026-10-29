@@ -672,22 +672,18 @@
  "tests/test_manifest.py": {
   "ANN202": 1,
   "D103": 3,
-  "E501": 1,
   "S105": 1
  },
  "tests/test_marks.py": {
   "D103": 8,
-  "E501": 1,
   "PLR2004": 2
  },
  "tests/test_memo_audits.py": {
   "D103": 1,
-  "E501": 1,
   "PLC2701": 1
  },
  "tests/test_metrics_realizability.py": {
   "D103": 2,
-  "E501": 1,
   "S404": 1,
   "S603": 1
  },
@@ -699,7 +695,6 @@
  },
  "tests/test_mspdi.py": {
   "D103": 3,
-  "E501": 1,
   "S314": 2,
   "S405": 1
  },
@@ -731,7 +726,6 @@
  "tests/test_parse_cache.py": {
   "ARG001": 1,
   "D103": 3,
-  "E501": 1,
   "PLR2004": 3
  },
  "tests/test_pieces.py": {
@@ -767,7 +761,6 @@
  },
  "tests/test_publish.py": {
   "D103": 7,
-  "E501": 1,
   "PTH115": 2,
   "S404": 1,
   "S603": 2,
@@ -777,7 +770,6 @@
   "D103": 3,
   "D401": 1,
   "DOC201": 1,
-  "E501": 1,
   "PLR2004": 1
  },
  "tests/test_rank.py": {

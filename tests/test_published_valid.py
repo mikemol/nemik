@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W441: every document the static build publishes validates against the schema it publishes."""
+"""nemik:W441: every document the static build publishes validates against its published schema."""
 
 import json
 from pathlib import Path

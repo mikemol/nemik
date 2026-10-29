@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W234/W236: marks are read from the writer's file, and a stale one is never read as current."""
+"""nemik:W234/W236: marks are read from the writer's file, and a stale one is never current."""
 
 from __future__ import annotations
 

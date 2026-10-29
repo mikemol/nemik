@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W402: a queue or ledger is re-parsed only when its file moved, and the caller may mutate."""
+"""nemik:W402: a queue or ledger is re-parsed only when its file moved; the caller may mutate."""
 
 from __future__ import annotations
 

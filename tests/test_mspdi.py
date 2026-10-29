@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W365: the MSPDI export reads back to exactly the projected tasks, whole fleet or one repo."""
+"""nemik:W365: the MSPDI export reads back to exactly the projected tasks, fleet or one repo."""
 
 import xml.etree.ElementTree as ET
 from pathlib import Path
