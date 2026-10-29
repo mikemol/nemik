@@ -83,8 +83,9 @@ def timezones(lines: list[str]) -> list[str]:
 
 
 def _stamp(iso: str) -> str:
-    """An ISO-8601 UTC ledger stamp as an iCalendar DATE-TIME; the epoch when there is none, so
-    the output depends only on the queues, never on when it ran (nemik:W119).
+    """An ISO-8601 UTC ledger stamp as an iCalendar DATE-TIME, the epoch when there is none.
+
+    So the output depends only on the queues, never on when it ran (nemik:W119).
     """
     digits = re.sub(r"[^0-9]", "", iso)[:14]
     return f"{digits[:8]}T{digits[8:14]}Z" if len(digits) == 14 else "19700101T000000Z"

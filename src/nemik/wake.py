@@ -312,8 +312,9 @@ def _write_seen(path: Path, seen: dict) -> None:
 
 
 def alarm_key(a: dict) -> str:
-    """nemik:W166: one firing's identity: (ref, RECURRENCE-ID, instant), in the nudges state's key
-    space. Repo names (the state's other keys) never contain '|', so the two cannot collide.
+    """nemik:W166: a firing's identity, (ref, RECURRENCE-ID, instant), in the nudges state's keys.
+
+    Repo names (the state's other keys) never contain '|', so the two cannot collide.
     """
     return f"alarm|{a['ref']}|{a['recurrence_id']}|{a['at']}"
 

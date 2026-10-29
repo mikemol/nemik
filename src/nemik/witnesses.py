@@ -324,9 +324,11 @@ def waiters(root: Path, repo: str, sym: str) -> dict[str, list[str]]:
 
 
 def wake(root: Path, repo: str, sym: str, query: str, now: str) -> list[Path]:
-    """nemik:W61, W851: a letter in each waiting repo's inbox (the nemik:W4 channel). A letter
-    reaches a dormant repo at no token cost until someone wakes it. A live loop reads it on its
-    next tick, where --prune-landed (local) or the named foreign blocker shows the work is now free.
+    """nemik:W61, W851: a letter in each waiting repo's inbox (the nemik:W4 channel).
+
+    A letter reaches a dormant repo at no token cost until someone wakes it. A live loop reads it
+    on its next tick, where --prune-landed (local) or the named foreign blocker shows the work is
+    now free.
 
     Within the card's own repo the waiting cards get one letter that carries the witness query.
     Across repos every edge of the card (blocked_on, caused_by, enables; workrows.edges_of) gets

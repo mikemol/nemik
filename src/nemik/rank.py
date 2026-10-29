@@ -888,8 +888,10 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
 
 
 def _apply(state: str, rows: list[dict]) -> None:
-    """nemik:W427: hand the ranked rows to the queue's one writer, mikemol-paths-forward, the one
-    installed beside this interpreter; nemik never writes a queue itself. Exits with its status.
+    """nemik:W427: hand the ranked rows to the queue's one writer, mikemol-paths-forward.
+
+    It is the one installed beside this interpreter; nemik never writes a queue itself. Exits with
+    its status.
     """
     import json
     import subprocess
@@ -944,8 +946,10 @@ def drift(
 def inversion(
     g: Graph, repo: str, rows: list[dict], bands: Bands, guar: Guarantees
 ) -> tuple[dict, dict] | None:
-    """(next, urgent) when the next item sits below the declared floor band while a ready item
-    at the floor or above exists (nemik:W133). `urgent` is the first such item in composed order.
+    """(next, urgent) when the next item sits below the declared floor band (nemik:W133).
+
+    That holds while a ready item at the floor or above exists. `urgent` is the first such item in
+    composed order.
 
     ⚑ A rule, not a weight: the composed order may itself put an item below the floor first (an
     operator ask outranks any band), and this is where that disagreement becomes visible.

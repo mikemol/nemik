@@ -469,10 +469,12 @@ def edge_currents(
     operator: int = 0,
     workable: bool = True,
 ) -> dict[tuple[str, str], float]:
-    """The demand that crossed each dependency in `repo`'s solve, by (`repo:W<n>` of the card that
-    needs, of its prerequisite): what the view draws as an edge's width (nemik:W264). Floats: the
-    view needs a magnitude, not the exact fraction. `workable` False takes the open ground, so the
-    edges into an operator ask (a card waiting outside the graph) carry their current too (W298).
+    """The demand that crossed each dependency in `repo`'s solve, by (needing card, prerequisite).
+
+    Each key is the `repo:W<n>` of the card that needs and of its prerequisite: what the view draws
+    as an edge's width (nemik:W264). Floats: the view needs a magnitude, not the exact fraction.
+    `workable` False takes the open ground, so the edges into an operator ask (a card waiting
+    outside the graph) carry their current too (W298).
     """
     from nemik.rank import Weights
 
