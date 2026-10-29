@@ -1,6 +1,9 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W246: nemik.realize judges every live waypoint in one batch and never reads an unjudged one as clean."""
+"""nemik:W246: nemik.realize judges every live waypoint in one batch.
+
+It never reads an unjudged one as clean.
+"""
 
 from __future__ import annotations
 

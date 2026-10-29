@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""Operator 2026-10-04: mtools' two context hooks (inbound-asks, nemik-check) are wired for this repo.
+"""Operator 2026-10-04: mtools' two context hooks (inbound-asks, nemik-check) are wired here.
 
 The hooks are nemik's own dependency (the vendored mikemol-hooks wheel, installed in the built
 venv), armed in .claude/settings.json on SessionStart and UserPromptSubmit exactly as mtools'

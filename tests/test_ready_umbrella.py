@@ -1,6 +1,8 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W436: a ready umbrella over two or more open children of its own is flagged; a chain step is not.
+"""nemik:W436: a ready umbrella over two or more open children of its own is flagged.
+
+A chain step is not flagged.
 
 nemik:W529: ReadyUmbrellaShape is a SPARQL constraint in shapes.ttl over the enables edges.
 """

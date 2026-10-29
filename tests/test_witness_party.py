@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W520: `nemik-witnesses` is a resolvable party for a card that carries a witness, and only for one.
+"""nemik:W520: `nemik-witnesses` is a resolvable party for a witnessed card, and only for one.
 
 The paths-forward writer refuses a witnessed card that is ready ("a witness, not a tick, marks it
 done:

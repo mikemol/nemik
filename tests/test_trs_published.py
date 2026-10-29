@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W449: the static build publishes each repo's TRS as Turtle, and a withheld card is not in it."""
+"""nemik:W449: the static build publishes each repo's TRS as Turtle, minus any withheld card."""
 
 import json
 from pathlib import Path

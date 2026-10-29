@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W174: waypoints with the same witness query share one weather id; the query stays private."""
+"""nemik:W174: waypoints with one witness query share one weather id; the query stays private."""
 
 import json
 from pathlib import Path

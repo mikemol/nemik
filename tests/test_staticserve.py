@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W502: the snapshot file server: types, validators, containment, readiness, and no rdflib."""
+"""nemik:W502: the snapshot file server: types, validators, containment, readiness, no rdflib."""
 
 import hashlib
 import http.client
