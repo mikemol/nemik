@@ -791,8 +791,9 @@ def umbrella_docs(g: Graph) -> list[dict[str, object]]:
 
 
 def without(g: Graph, refs: frozenset[str]) -> Graph:
-    """nemik:W309: a copy of `g` with every withheld waypoint (and every edge to or from it) removed,
-    the graph the public numbers are computed over.
+    """nemik:W309: a copy of `g` without every withheld waypoint and every edge to or from it.
+
+    It is the graph the public numbers are computed over.
     """
     from nemik.withheld import _id
 
@@ -805,9 +806,11 @@ def without(g: Graph, refs: frozenset[str]) -> Graph:
 
 
 def to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
-    """The view's document. nemik:W403: built with identical flow solves answered once (the ranking,
-    edge widths and operator-ask weights each asked for the same repo's solve). nemik:W412: and with
-    each graph's per-card facts indexed once.
+    """Build the view's document.
+
+    nemik:W403: built with identical flow solves answered once (the ranking, edge widths and
+    operator-ask weights each asked for the same repo's solve). nemik:W412: and with each graph's
+    per-card facts indexed once.
     """
     from nemik.index import indexed
     from nemik.salience import memo_audits
@@ -1238,8 +1241,9 @@ def handler(model: Model) -> type[BaseHTTPRequestHandler]:
 
 
 def write_static(out: Path) -> list[Path]:
-    """nemik:W169: the page and its scripts as files under `out`, every link relative, so the view
-    works from any bucket subpath. Data files are W170's; the gate is W172's.
+    """nemik:W169: the page and its scripts as files under `out`, every link relative.
+
+    So the view works from any bucket subpath. Data files are W170's, the gate is W172's.
     """
     web = files("nemik.web")
     written = [out / "index.html"]

@@ -302,8 +302,9 @@ def apply_fold(
 
 
 def held(root: Path, ltr: Letter) -> bool:
-    """True when the letter's recipient holds it: in its inbox, or archived there (a repo that has
-    read a letter files it under `inbox/archive/`, which is still delivered).
+    """True when the letter's recipient holds it: in its inbox, or archived there.
+
+    A repo that has read a letter files it under `inbox/archive/`, which is still delivered.
     """
     inbox = root / ltr.recipient / "inbox"
     return (inbox / ltr.name).exists() or (inbox / "archive" / ltr.name).exists()
@@ -312,10 +313,12 @@ def held(root: Path, ltr: Letter) -> bool:
 def redeliveries(
     root: Path, workstreams: set[str], repo: str | None = None
 ) -> list[tuple[Path, Path]]:
-    """nemik:W310 (linux-sources, paperkit): (source, destination) for each misdelivered letter whose
-    header names a workstream: a COPY into that workstream's `inbox/`, so the letter is delivered
-    where it says and the sender keeps its copy (a waypoint there may cite it). Skips a letter the
-    recipient already has. `repo` keeps those that sit in, or are addressed to, that repo.
+    """nemik:W310 (linux-sources, paperkit): (source, destination) for each misdelivered letter.
+
+    The header names a workstream, and the result is a COPY into that workstream's `inbox/`, so the
+    letter is delivered where it says and the sender keeps its copy (a waypoint there may cite
+    it). Skips a letter the recipient already has. `repo` keeps those that sit in, or are
+    addressed to, that repo.
     """
     addressed, _ = headers(root)
     out: list[tuple[Path, Path]] = []
