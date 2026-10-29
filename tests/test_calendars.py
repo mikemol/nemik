@@ -177,7 +177,7 @@ def test_the_reader_is_found_in_nemiks_own_venv_not_on_path(
 def test_a_refusing_helper_is_reported_not_a_traceback(
     tmp_path: Path, ics: str, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    """nemik:W193: the Akonadi helper refuses when Akonadi is not running; nemik-days says so, exit 2."""
+    """nemik:W193: the Akonadi helper refuses when Akonadi is down; nemik-days says so, exit 2."""
     h = tmp_path / "helper"
     h.write_text(
         "#!/bin/sh\necho 'ERROR: akonadi is not running on this session bus; refusing to start it from here'\nexit 2\n"
@@ -329,7 +329,7 @@ def _row(
 def test_dedupe_merges_across_calendars_never_within_one() -> None:
     """nemik:W191: the same entry in two calendars is one row naming the other.
 
-    Two identical entries inside one calendar are two real events; waiters from both copies are kept.
+    Two identical entries in one calendar are two real events; waiters from both copies are kept.
     """
     rows = [
         _row("household", "2026-10-05T09:00", "Trash: Mike", ["life:W9"]),

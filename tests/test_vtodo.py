@@ -75,7 +75,7 @@ def test_star_opts_every_repo_in(tmp_path: Path) -> None:
 
 
 def test_nemik_tasks_feeds_the_helper_and_returns_its_exit_code(tmp_path: Path) -> None:
-    """nemik:W121: one entry point for luthen's timer: no shell pipe, the helper's 0/1/2 preserved."""
+    """nemik:W121: one entry point for luthen's timer: no shell pipe, helper's 0/1/2 preserved."""
     import json
     import sys
 
@@ -191,7 +191,7 @@ def test_a_repo_with_no_open_asks_has_no_parent_so_the_helper_completes_it() -> 
 def test_apply_reruns_while_the_helper_defers_a_parent_then_converges(
     tmp_path: Path,
 ) -> None:
-    """nemik:W148: DEFER-PARENT means the parent is not on Google yet; wait for the sync and rerun."""
+    """nemik:W148: DEFER-PARENT means the parent is not on Google yet; wait for sync and rerun."""
     import json
     import sys
 

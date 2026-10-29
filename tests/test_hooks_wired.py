@@ -37,7 +37,7 @@ def test_each_wired_hook_is_installed_in_the_built_venv() -> None:
 
 
 def test_a_hook_run_with_a_session_start_payload_exits_zero(tmp_path: Path) -> None:
-    """Both hooks never refuse: a SessionStart payload for a repo with no queue is silent, exit 0."""
+    """Both hooks never refuse: a SessionStart for a repo with no queue is silent, exit 0."""
     env = {
         **installed._bin()[1],
         "CLAUDE_PROJECT_DIR": str(tmp_path),
