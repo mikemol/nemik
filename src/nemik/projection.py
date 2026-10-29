@@ -54,7 +54,7 @@ class Task:
 
 
 def project(g: Graph, repos: set[str] | None = None) -> list[Task]:
-    """The cards of `repos` (every repo when None) as tasks, in cite order."""
+    """Give the cards of `repos` (every repo when None) as tasks, in cite order."""
     return project_cards(cards(g), repos)
 
 

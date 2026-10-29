@@ -153,7 +153,7 @@ def _extended(text: str) -> str:
 
 
 def reference_uri(repo: str, ref: str) -> URIRef:
-    """A local `W<n>` or a foreign `<repo>:W<n>` (mtools 9236d5e) as a waypoint IRI."""
+    """Give a local `W<n>` or a foreign `<repo>:W<n>` (mtools 9236d5e) as a waypoint IRI."""
     if foreign := model.foreign_symbol(ref):
         return waypoint_uri(foreign[0], f"W{foreign[1]}")
     return waypoint_uri(repo, ref)
@@ -252,7 +252,7 @@ def resolve_blocker(repo: str, text: str, known: frozenset[str]) -> URIRef | Non
 
 
 def load_state(state_path: Path) -> model.State:
-    """A queue as mtools' own loader reads it, for the modules that judge a queue unchanged.
+    """Give a queue as mtools' own loader reads it, for the modules that judge it unchanged.
 
     This module stays the one place that calls `store.load` (the single-writer-boundary claim).
     Raises store.UnreadableStateError if mtools refuses it.

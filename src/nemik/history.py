@@ -311,7 +311,7 @@ def _edges(queue: QueueDoc) -> set[tuple[str, str, str]]:
 
 
 def _number(symbol: str) -> tuple[int, int, str]:
-    """A sort key: W<n> by number, then any other symbol by name, never an error.
+    """Give a sort key: W<n> by number, then any other symbol by name, never an error.
 
     Another symbol is an old or foreign one in a committed queue, such as luthen's `R-amtool`.
     """
@@ -322,7 +322,7 @@ def _number(symbol: str) -> tuple[int, int, str]:
 
 
 def diff(old: QueueDoc, new: QueueDoc) -> Diff:
-    """The changes from `old` to `new`, both parsed queues (an empty dict is a repo with no queue)."""
+    """Give the changes from `old` to `new`, both parsed queues (an empty dict: no queue)."""
     before, after = _status(old), _status(new)
     known = set(before) | _dropped(old)
     d = Diff()
@@ -393,7 +393,7 @@ def git_lines(repo: Path, *args: str) -> list[str] | None:
 
 
 def resolve(repo: Path, spec: str | None) -> str | None:
-    """A revision for `spec`: a date means the last commit before it, anything else is a rev.
+    """Resolve `spec` to a revision: a date means the last commit before it, anything else a rev.
 
     None means there is no such point (before the repo's first commit): an empty queue. A time of
     day must name its zone (`Z` or an offset), or be a window back from now such as `-1h`, `-30m`
@@ -556,7 +556,7 @@ def _read_blobs(repo: Path, specs: list[str]) -> list[str]:
 
 
 def queue_at(repo: Path, rev: str | None, known: str = "") -> QueueDoc:
-    """The parsed queue as committed at `rev`; empty when there is none then.
+    """Give the parsed queue as committed at `rev`; empty when there is none then.
 
     `known` is the file's text at `rev` when a batch read already has it (nemik:W725).
     """

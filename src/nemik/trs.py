@@ -37,7 +37,7 @@ def _line(activity: Node) -> int:
 def trs(
     repo: str, queue: Graph, ledger: Graph, withheld: frozenset[str] = frozenset()
 ) -> Graph:
-    """The TRS graph for `repo`: <ws>/trs/base and <ws>/trs/changelog.
+    """Give the TRS graph for `repo`: <ws>/trs/base and <ws>/trs/changelog.
 
     A card whose URI is in `withheld` (nemik:W449: luthen's withheld list) is in neither the base
     nor any change event; its events are skipped whole, so a reader cannot even learn that it
@@ -79,7 +79,7 @@ def trs(
 def turtle(
     repo: str, queue: Graph, ledger: Graph, withheld: frozenset[str] = frozenset()
 ) -> dict[str, str]:
-    """{"base": Turtle, "changelog": Turtle} for `repo`: the two resources a TRS reader fetches."""
+    """Give {"base": Turtle, "changelog": Turtle} for `repo`: two resources a TRS reader fetches."""
     g = trs(repo, queue, ledger, withheld)
     ws = workstream_uri(repo)
     log = URIRef(f"{ws}/trs/changelog")

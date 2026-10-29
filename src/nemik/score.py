@@ -132,7 +132,7 @@ def tagged_band(
 
 
 def _matches(values: dict[str, str], rule: dict[str, frozenset[str]]) -> bool:
-    """A rule matches when every metric it names has one of the listed values."""
+    """Say whether a rule matches: every metric it names has one of the listed values."""
     return all(values[m] in allowed for m, allowed in rule.items())
 
 

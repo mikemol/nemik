@@ -83,7 +83,7 @@ def timezones(lines: list[str]) -> list[str]:
 
 
 def _stamp(iso: str) -> str:
-    """An ISO-8601 UTC ledger stamp as an iCalendar DATE-TIME, the epoch when there is none.
+    """Convert an ISO-8601 UTC ledger stamp to iCalendar DATE-TIME, the epoch when there is none.
 
     So the output depends only on the queues, never on when it ran (nemik:W119).
     """
@@ -92,7 +92,9 @@ def _stamp(iso: str) -> str:
 
 
 def time_property(name: str, value: str) -> str:
-    """An mtools:W300 value as an RFC 5545 property line, or "" when there is none (nemik:W134).
+    """Render an mtools:W300 value as an RFC 5545 property line (nemik:W134).
+
+    The result is "" when there is none.
 
     mtools stores the value as written: DATE `20261001`, UTC `20261001T203000Z`, or
     `TZID=Zone/Name:20261001T163000` (floating times are refused at write, so none arrive here).
@@ -256,7 +258,7 @@ def calendar(todos: list[list[str]]) -> str:
 
 
 def feed(root: Path, opt_in: Path, link: str = "", group: bool = False) -> str:
-    """The iCalendar text nemik-ics prints, built in-process."""
+    """Build the iCalendar text nemik-ics prints, in-process."""
     from rdflib import Graph
 
     from nemik.adapter import ledger_graph

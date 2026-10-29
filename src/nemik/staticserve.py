@@ -33,13 +33,13 @@ METRICS_TYPE = "text/plain; version=0.0.4"
 
 
 def snapshot(root: Path) -> Path:
-    """The directory being served: ROOT/current when a publisher flips that link, else ROOT."""
+    """Pick the directory to serve: ROOT/current when a publisher flips that link, else ROOT."""
     live = root / "current"
     return live if live.is_dir() else root
 
 
 def resolve(base: Path, target: str) -> Path | None:
-    """The file a URL path names under `base`, or None when it names nothing there or escapes it."""
+    """Find the file a URL path names under `base`, or None when it names nothing or escapes it."""
     parts = [p for p in unquote(urlsplit(target).path).split("/") if p]
     if any(p in {".", ".."} or "\\" in p or "\x00" in p for p in parts):
         return None
@@ -89,7 +89,7 @@ class Hashes:
 
 
 def etag(base: Path, real: Path, table: dict[str, str]) -> str:
-    """A file's validator: its published sha256 when hashes.json lists it, else size and mtime."""
+    """Give a file's validator: its sha256 when hashes.json lists it, else size and mtime."""
     rel = real.relative_to(base.resolve()).as_posix()
     if digest := table.get(rel):
         return f'"{digest}"'
@@ -136,7 +136,7 @@ def handler(root: Path) -> type[BaseHTTPRequestHandler]:
                 self.wfile.write(body)
 
         def stream(self, real: Path, ctype: str, tag: str) -> None:
-            """A file in 64 KiB chunks: memory does not grow with the file or with concurrent reads."""
+            """Stream a file in 64 KiB chunks: memory does not grow with its size or other reads."""
             try:
                 with real.open("rb") as f:
                     self.send_response(200)
@@ -196,7 +196,7 @@ def handler(root: Path) -> type[BaseHTTPRequestHandler]:
 
 
 def parser() -> argparse.ArgumentParser:
-    """The command line, separate from main so a deployment manifest can be checked against it."""
+    """Give the command line, apart from main so a deployment manifest can be checked against it."""
     ap = argparse.ArgumentParser(
         prog="nemik-static",
         description="serve a published nemik snapshot as files (W502)",

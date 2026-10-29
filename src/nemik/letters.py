@@ -114,7 +114,7 @@ def _closed(queue: dict) -> set[str]:
 
 
 def answered(repo: str, path: Path, queue: dict) -> bool:
-    """True when the letter names waypoints of `repo` and every one of them is closed.
+    """Say whether the letter names waypoints of `repo` and every one of them is closed.
 
     What it asked about has landed or been dropped. A letter naming none of `repo`'s waypoints is
     live.
@@ -302,7 +302,7 @@ def apply_fold(
 
 
 def held(root: Path, ltr: Letter) -> bool:
-    """True when the letter's recipient holds it: in its inbox, or archived there.
+    """Say whether the letter's recipient holds it: in its inbox, or archived there.
 
     A repo that has read a letter files it under `inbox/archive/`, which is still delivered.
     """
