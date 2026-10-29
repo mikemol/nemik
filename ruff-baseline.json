@@ -1003,8 +1003,6 @@
   "E501": 2
  },
  "tests/test_witnesses.py": {
-  "ANN002": 1,
-  "ANN202": 2,
   "ARG001": 5,
   "ARG005": 1,
   "D100": 1,

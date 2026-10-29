@@ -149,14 +149,14 @@ def _serve(monkeypatch: pytest.MonkeyPatch, routes: dict) -> None:
     from urllib.parse import parse_qs, urlparse
 
     class H(BaseHTTPRequestHandler):
-        def do_GET(self):
+        def do_GET(self) -> None:
             u = urlparse(self.path)
             body = routes[u.path](parse_qs(u.query))
             self.send_response(200)
             self.end_headers()
             self.wfile.write(json.dumps(body).encode())
 
-        def log_message(self, *a):
+        def log_message(self, *a: object) -> None:
             pass
 
     srv = HTTPServer(("127.0.0.1", 0), H)

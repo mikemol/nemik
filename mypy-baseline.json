@@ -358,7 +358,6 @@
  },
  "tests/test_witnesses.py": {
   "misc": 30,
-  "no-untyped-def": 2,
   "type-arg": 1
  },
  "tests/test_workflows.py": {
