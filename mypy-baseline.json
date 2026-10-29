@@ -1,8 +1,4 @@
 {
- "checks/claims.py": {
-  "misc": 2,
-  "no-untyped-def": 1
- },
  "src/nemik/adapter.py": {
   "misc": 9
  },

@@ -230,7 +230,7 @@ def hub_modules_depend_on_everything_below() -> None:
         assert deps == want, f"{hub}.py's dependency set changed: {deps}"
 
 
-def import_graph_is_acyclic():
+def import_graph_is_acyclic() -> None:
     mods = _modules()
     graph = {name: _imports_nemik(text) for name, text in mods.items()}
 

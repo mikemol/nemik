@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1261,
+  "counter": 1265,
   "waypoints": [
     {
       "symbol": "W1",
@@ -27936,7 +27936,7 @@
     {
       "symbol": "W1176",
       "title": "Typed document boundary: a typed Waypoint record that loaders and test builders return, one stack per document shape",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [
         "file:mypy-baseline.json"
@@ -27948,12 +27948,13 @@
       "issued_at": "2026-10-27T13:51:57Z",
       "minted_during": "interrupt",
       "caused_by": "W1014",
-      "last_worked": "2026-10-29T05:50:27Z",
+      "last_worked": "2026-10-29T08:13:42Z",
       "ticks_blocked": 0,
       "size_class": "medium",
       "manifest": [
-        "tests/test_shaclinc.py",
-        "mypy-baseline.json"
+        "checks/claims.py",
+        "mypy-baseline.json",
+        "ruff-baseline.json"
       ],
       "warrants": [
         {
@@ -29267,7 +29268,6 @@
       ],
       "blocked_on": [
         "W1240",
-        "W1241",
         "W1242",
         "W1243"
       ],
@@ -29278,7 +29278,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1196",
       "last_worked": "2026-10-29T00:01:22Z",
-      "ticks_blocked": 3,
+      "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "tools/liftdoc.py",
@@ -29775,19 +29775,19 @@
     {
       "symbol": "W1241",
       "title": "Pay down D205 (67) by hand: summary line split from body",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W1225"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Hand-fix the 14 tests, tools and checks files' D205 findings (a blank line after the summary, or split the first sentence): list from ruff check --select D205 --output-format concise; the 53 src D205 findings are a separate stack (needs the Codon census at the first edit).",
-      "evidence": "2026-10-29: 2026-10-29: seven module docstrings landed in stack 649 as 8dcf458 (printed by mikemol-commit), reflog 03:44:42 -0400 = 07:44:42Z, green, 9 fresh of 451, about 1 min 30 s wall from the 07:43:12Z begin (began_ns 1793259792855611715); ruff 1962 to 1954. Loadavg: 28.60, 25.44, 26.45 at the submit and 27.60, 26.72, 26.83 at the verdict (R31-F2, both read by me with /proc/loadavg). Twelve D205 sites remain (test_calendars 4, test_layout 3, test_vtodo 1, test_withheld 1, test_witnesses 1, tools/gen_pieces_corpus.py 1, checks/claims.py 1). Card back to ready. | 2026-10-29: 2026-10-29: batch 2 (nine docstrings) landed in stack 650 as 1532f82 (printed by mikemol-commit), reflog 03:56:16 -0400 = 07:56:16Z, green, 11 fresh of 451; began 07:48:01Z (began_ns 1793260081617437422), about 8 min 15 s wall; ruff 1954 to 1943. Loadavg at submit 37.71, 30.52, 28.20; at the verdict 52.98, 43.82, 36.31 (R31-F2). Remaining: tests/test_layout.py's three D205 sites (3, 1448, 1478), which rerun the layout shards.",
+      "next_bounded_step": null,
+      "evidence": "2026-10-29: 2026-10-29: seven module docstrings landed in stack 649 as 8dcf458 (printed by mikemol-commit), reflog 03:44:42 -0400 = 07:44:42Z, green, 9 fresh of 451, about 1 min 30 s wall from the 07:43:12Z begin (began_ns 1793259792855611715); ruff 1962 to 1954. Loadavg: 28.60, 25.44, 26.45 at the submit and 27.60, 26.72, 26.83 at the verdict (R31-F2, both read by me with /proc/loadavg). Twelve D205 sites remain (test_calendars 4, test_layout 3, test_vtodo 1, test_withheld 1, test_witnesses 1, tools/gen_pieces_corpus.py 1, checks/claims.py 1). Card back to ready. | 2026-10-29: 2026-10-29: batch 2 (nine docstrings) landed in stack 650 as 1532f82 (printed by mikemol-commit), reflog 03:56:16 -0400 = 07:56:16Z, green, 11 fresh of 451; began 07:48:01Z (began_ns 1793260081617437422), about 8 min 15 s wall; ruff 1954 to 1943. Loadavg at submit 37.71, 30.52, 28.20; at the verdict 52.98, 43.82, 36.31 (R31-F2). Remaining: tests/test_layout.py's three D205 sites (3, 1448, 1478), which rerun the layout shards. | 2026-10-29: 2026-10-29: batch 3 landed in stack 651 as de20855 (printed by mikemol-commit), reflog 04:08:41 -0400 = 08:08:41Z, green, only 6 fresh of 451 (a docstring-only change reuses the cached layout shards: my G0 feared a heavy gate, wrong: the bazel cache answered it); ruff 1943 to 1940. W1241 is done across three landings: 8dcf458 (7 files, ruff -8), 1532f82 (9 files, -11), de20855 (test_layout, -3), 22 ruff findings in all. Loadavg at the submit 47.22, 47.02, 38.70; at the verdict 43.31, 42.62, 39.69.",
       "issued_at": "2026-10-28T22:03:51Z",
       "minted_during": "interrupt",
       "caused_by": "W1225",
-      "last_worked": "2026-10-29T07:59:06Z",
+      "last_worked": "2026-10-29T08:09:24Z",
       "ticks_blocked": 0,
       "weight": 2,
       "manifest": [
@@ -29808,7 +29808,7 @@
         "ruff-baseline.json"
       ],
       "size_class": "medium",
-      "completed": null
+      "completed": "20261029T080924Z"
     },
     {
       "symbol": "W1242",
@@ -30293,6 +30293,92 @@
         "tests/test_cardtree.py"
       ],
       "size_class": "small"
+    },
+    {
+      "symbol": "W1262",
+      "title": "A nemik-check rule: a human-blocked 'operator: act' ask naming sudo, root, chown, install -d, mkfs, mount or systemctl --system is flagged unless its evidence carries an 'apply loop cannot: <reason, card>' line, and the check exits nonzero",
+      "status": "blocked",
+      "enables": [],
+      "touches": [
+        "check",
+        "operator"
+      ],
+      "blocked_on": [
+        "W1263",
+        "W1264",
+        "W1265"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Atomize into: (a) adapter: a boolean predicate from the evidence's 'apply loop cannot:' line (adapter.py, nemik.ttl, a test); (b) blocks: sudo_shaped(ask) word match and the flag on the ask row (blocks.py, a test); (c) blocks_cli --sudo-shaped and the check Warning (blocks_cli.py, check.py, skill, tests); witness at the end: the sudo-shaped run on luthen-observability:W1752's earlier blocked_on (git history) flags it.",
+      "evidence": "2026-10-29: 2026-10-29 github-42 (host, a peer), from host retro github:R96, an operator-caught escape: for about 3 h the host relayed a peer's 'operator: act sudo install -d ...' when the root host apply loop could carry it; the operator caught it with 'We have the root tf apply loop, don't we?'. Requested: a nemik-check rule or a nemik-operator section flagging every human-blocked 'operator: act' ask naming sudo, root, chown, install -d, mkfs, mount or systemctl --system unless the evidence carries 'apply loop cannot: <reason, card>'; exit nonzero on a flag (host tick hook). Cites github:W76. Not verified by me: the operator line (the quote is the host's, relayed) and that the rule would have flagged luthen-observability:W1752; the quote is the host's to warrant if I use it as a ruling, I do not: this card is built on the peer's request, not on a ruling of mine. | 2026-10-29: 2026-10-29 github-42 (peer) on the open question: neither a Violation nor a nonzero nemik-check exit, because a Violation pages the operator through luthen and the point is to keep this off the operator's plate. Design asked: a Warning in nemik-check, plus a mode that exits nonzero only on these flags (for example nemik-operator --sudo-shaped), so the host's tick hook reads it without paging. Witness: run it against luthen-observability:W1752's earlier state (its blocked_on is in git history). Read of the repo: nemik-operator already exists (pyproject.toml line 61, nemik.blocks_cli:operator_main), so the mode is a flag on an existing command, not a new command; the memory rule about a NEW command needing five registries then does not apply, but tests/test_skill.py still requires the skill to document any new flag or check rule. | 2026-10-29: 2026-10-29 READ for the design: the ask rows (blocks._operator_asks, blocks.py:545 to 601) carry the ask text (blocked_on joined) but not the card's evidence: adapter.py:428 to 431 says 'the evidence text itself stays out of the graph'; the only evidence-derived fact in the graph is the W1011 has_probe predicate (adapter.py:383). So the 'apply loop cannot: <reason, card>' exception needs one new graph predicate set by the adapter from the evidence text (a boolean, like has_probe), then an 'applyLoopCannot' flag on the ask row, then the sudo-shaped test (word match on the ask text), the Warning rule in check.py, the --sudo-shaped flag on nemik-operator (blocks_cli.py:145, argparse, exit 1 only on a flag), nemik.ttl (the new predicate), skills/nemik/SKILL.md (tests/test_skill.py) and tests. Medium, src (adapter, blocks, blocks_cli, check) so the full gate and a Codon census at the first edit; not built this tick.",
+      "issued_at": "2026-10-29T08:06:52Z",
+      "minted_during": "interrupt",
+      "caused_by": "github:W76",
+      "last_worked": "2026-10-29T08:11:48Z",
+      "ticks_blocked": 0,
+      "size_class": "medium",
+      "completed": null
+    },
+    {
+      "symbol": "W1263",
+      "title": "The adapter sets a boolean predicate from an 'apply loop cannot:' line in a card's evidence",
+      "status": "working",
+      "enables": [
+        "W1262"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-29T08:11:48Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1262",
+      "last_worked": "2026-10-29T08:13:40Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/adapter.py",
+        "src/nemik/data/nemik.ttl",
+        "tests/test_apply_loop.py"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W1264",
+      "title": "A sudo-shaped word match on an operator ask, and the flag on the ask row",
+      "status": "ready",
+      "enables": [
+        "W1262"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-29T08:11:48Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1262",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W1265",
+      "title": "nemik-operator --sudo-shaped exits 1 on a flag, and nemik-check warns on the same asks",
+      "status": "ready",
+      "enables": [
+        "W1262"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-29T08:11:48Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1262",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
