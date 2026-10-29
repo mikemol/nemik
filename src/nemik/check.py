@@ -551,6 +551,12 @@ def workstream_files(root: Path, name: str) -> list[tuple[str, Path]]:
 
 
 def shapes() -> Graph:
+    """Read the SHACL shapes shipped with nemik (data/shapes.ttl) into a graph.
+
+    Returns:
+        The parsed shapes graph the survey validates each queue against.
+
+    """
     g = Graph()
     g.parse(
         data=files("nemik.data").joinpath("shapes.ttl").read_text(), format="turtle"

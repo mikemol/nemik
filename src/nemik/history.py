@@ -979,6 +979,17 @@ def shape_drift(base: dict, now: dict) -> dict:
 
 
 def render(repo: str, d: Diff) -> str:
+    """Render one repo's graph diff as text: a count line, then a line per change that happened.
+
+    Args:
+        repo: The workstream the diff is of.
+        d: The diff between two revisions or dates.
+
+    Returns:
+        The count header (minted, closed, dropped), then each non-empty kind of change on its own
+        line: flipped, edges added, edges removed and new blocks on other workstreams.
+
+    """
     lines = [
         f"{repo}: {len(d.minted)} minted, {len(d.closed)} closed, {len(d.dropped)} dropped"
     ]

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1268,
+  "counter": 1269,
   "waypoints": [
     {
       "symbol": "W1",
@@ -29814,7 +29814,7 @@
     {
       "symbol": "W1242",
       "title": "Pay down E501 on code lines (59)",
-      "status": "working",
+      "status": "ready",
       "enables": [
         "W1225"
       ],
@@ -29822,11 +29822,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Wrap or split the 43 over-long code lines of tests/test_layout.py (the JS string literals; ruff format cannot wrap a string), listed by: .venv/bin/python3 -m ruff check --config ruff-house.toml --select E501 --output-format concise tests/test_layout.py ; the count under the house config (100 columns) is 143 over src, tests, tools and checks (47 in src, 96 outside it; 55 of the 96 in test_layout.py's JS strings, most others are module docstring first lines, W1241's family). Never run ruff without --config ruff-house.toml here: the default is 88 columns and floods.",
-      "evidence": "2026-10-29: 2026-10-29 R31-F3: the E501 count under the house config is 143 (47 in src, 96 in tests, tools and checks), of which tests/test_layout.py holds about 55 in its JS string literals, which is the code-line part this card names; module docstring first lines at line 3 of many tests belong to W1241's family. The earlier default-88 run was the wrong config.",
+      "evidence": "2026-10-29: 2026-10-29 R31-F3: the E501 count under the house config is 143 (47 in src, 96 in tests, tools and checks), of which tests/test_layout.py holds about 55 in its JS string literals, which is the code-line part this card names; module docstring first lines at line 3 of many tests belong to W1241's family. The earlier default-88 run was the wrong config. | 2026-10-29: 2026-10-29: batch 1 (eight test docstrings) landed in stack 657 as 799f5fc (printed by mikemol-commit), reflog 06:33:43 -0400 = 10:33:43Z, green, 13 fresh of 455, about 12 min wall from the 10:21:25Z gate end (submit about 10:23Z); house-config E501 140 before and 132 after (ruff --config ruff-house.toml --select E501 --statistics), ruff 1935 to 1927. Loadavg at the verdict 28.35, 37.78, 40.88. 132 sites remain: 85 non-src (about 55 JS string literals in test_layout.py) and 47 in src. Card back to ready, manifest to be reset per batch.",
       "issued_at": "2026-10-28T22:03:51Z",
       "minted_during": "interrupt",
       "caused_by": "W1225",
-      "last_worked": "2026-10-29T10:22:34Z",
+      "last_worked": "2026-10-29T10:34:28Z",
       "ticks_blocked": 0,
       "weight": 2,
       "manifest": [
@@ -30415,7 +30415,7 @@
     {
       "symbol": "W1266",
       "title": "Write the D103 docstrings in check.py (553, 1221), history.py (981) and metrics.py (931)",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W1243"
       ],
@@ -30427,7 +30427,7 @@
       "issued_at": "2026-10-29T10:22:23Z",
       "minted_during": "interrupt",
       "caused_by": "W1243",
-      "last_worked": null,
+      "last_worked": "2026-10-29T10:35:26Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/check.py",
@@ -30435,7 +30435,8 @@
         "src/nemik/metrics.py",
         "ruff-baseline.json"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "completed": null
     },
     {
       "symbol": "W1267",
@@ -30484,6 +30485,29 @@
         "src/nemik/vtodo.py",
         "src/nemik/wake.py",
         "ruff-baseline.json"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W1269",
+      "title": "Declare the substrate tsv header fix (466 to 465) in nemik's re-baselines list",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "ratchet"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Add (substrate, scripts/selftest_reach_baseline.tsv, 466, 465, 'census counted the header line') to DECLARED in src/nemik/rebaselines.py with a test in tests/test_rebaselines.py; src (Codon-compiled plain strings): full gate, census at the first edit, a ratchet-lowering commit beside it; confirm to mtools when it lands. linux-sources needs none (see evidence).",
+      "evidence": "2026-10-29: 2026-10-29 mtools (peer, mtools:W1992) asked that two declarations be held BEFORE its change lands: linux-sources findings/letter-quotes-baseline.tsv 71 to 70 and substrate scripts/selftest_reach_baseline.tsv 466 to 465, reason 'census counted the header line'; mtools has no tsv ratchet. It first named nemik:W1046, which is done (landed a2004d1): the list is DECLARED in src/nemik/rebaselines.py, so a new card (this one) is the carrier. Read of the file: DECLARED already holds (linux-sources, findings/letter-quotes-baseline.tsv, 71, 18, ...) from mtools:W1991's value expression (the sum of three columns), relayed by github-8f and not read from that repo's file by nemik (W1071): the same file with the same old value 71 and a different step, so the linux-sources pair needs clarifying. substrate has no entry. | 2026-10-29: 2026-10-29 mtools (peer), from source (ratchet/expression.py): linux-sources needs NO declaration: a declared sum_of_columns or rows_where_nonzero table is read through _table, which splits the header off before any cell is summed, and never calls kinds.value_of, so the series it reads now (the 18) does not count a header; the 71 to 70 they quoted was the row count under the OLD name-classifier path, a series that already ended at 71 to 18; withdrawn. W1992 changes only what goes through kinds.value_of's text branch: a GUESSED tsv ratchet (no declaration) and a declared rows expression. So: land substrate's 466 to 465 (a guessed file) alone, and tell mtools of any other repo that declares a tsv with expression rows. My check of that: a grep for tsv across the ratchets.json files under the workspace finds only linux-sources (findings/letter-quotes-baseline.tsv, and the same file in its gate worktree copy); the grep could not read luthen-observability's .kube directory (permission denied), which holds no ratchets.json I know of. The expression key of the linux-sources entry I did not read.",
+      "issued_at": "2026-10-29T10:25:48Z",
+      "minted_during": "interrupt",
+      "caused_by": "mtools:W1992",
+      "last_worked": "2026-10-29T10:28:09Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/rebaselines.py",
+        "tests/test_rebaselines.py"
       ],
       "size_class": "small"
     }
