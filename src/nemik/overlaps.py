@@ -104,6 +104,17 @@ def row(
 
 
 def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
+    """Print the tags that more than one open waypoint touches, with who holds a claim on each.
+
+    Builds the graph from the survey of --root unless one is passed; --cross keeps only tags
+    shared across repos. When there are overlaps but mikemol-membudget is unavailable it says so
+    first and prints the rows without owners.
+
+    Args:
+        argv: the command line, or None for sys.argv.
+        g: a graph to read instead of surveying the root.
+
+    """
     import argparse
 
     from nemik.check import default_root, survey

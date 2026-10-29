@@ -235,6 +235,16 @@ def fired_alarms(
 
 
 def operator_row(g: Graph) -> dict:
+    """Return the operator as a roster row: every needs-you ask waiting, heaviest first.
+
+    Args:
+        g: the graph the asks are read from.
+
+    Returns:
+        A roster row with repo "operator" and state "you", whose waiting entries carry each ask's
+        ref, title and salience.
+
+    """
     from nemik.blocks import with_salience
 
     # nemik:W298: heaviest first, each with the demand waiting behind it.
@@ -258,6 +268,12 @@ def operator_row(g: Graph) -> dict:
 
 
 def nudges_path() -> Path:
+    """Locate the nudge state file: nemik/nudges.json under XDG_STATE_HOME, or ~/.local/state.
+
+    Returns:
+        The path of nudges.json.
+
+    """
     import os
 
     state = os.environ.get("XDG_STATE_HOME") or os.path.expanduser("~/.local/state")
@@ -326,6 +342,17 @@ def undelivered(
 
 
 def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
+    """Run nemik-wake: print the roster of workstreams, or with --alarms the alarms that fired.
+
+    The roster lists the workstreams that are not awake (all with --all) plus the operator row.
+    --nudge keeps only rows due a nudge, or only alarms not yet delivered, and records them in
+    the nudges state file. --json prints machine-readable output.
+
+    Args:
+        argv: the command line, or None for sys.argv.
+        g: a graph to read instead of surveying the root.
+
+    """
     import argparse
 
     from nemik.check import default_root, survey

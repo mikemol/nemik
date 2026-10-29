@@ -233,6 +233,15 @@ def grouped(todos: list[list[str]]) -> list[list[str]]:
 
 
 def calendar(todos: list[list[str]]) -> str:
+    """Wrap the VTODO blocks in one VCALENDAR named "nemik: needs you", with the timezones they use.
+
+    Args:
+        todos: the VTODO blocks, each a list of content lines.
+
+    Returns:
+        The serialized iCalendar text.
+
+    """
     lines = [
         "BEGIN:VCALENDAR",
         "VERSION:2.0",
