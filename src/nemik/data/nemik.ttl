@@ -161,4 +161,6 @@ nemik:fixpointLabel a rdf:Property ; rdfs:comment "How a retro labels its fixpoi
 nemik:behindOn a rdf:Property ; rdfs:comment "A ratchet, as a repo-relative path, that the workstream is behind its required paydown rate on; a card touching file:<that path> pays it down (nemik:W988)." .
 # nemik:W1011 (gate G8): a card's evidence records an executed probe.
 nemik:probeRecorded a rdf:Property ; rdfs:comment "True when a card's evidence says a command ran, gives an exit status, or shows a shell prompt line: the local probe the retrospective ritual requires before a step is handed to the operator (nemik:W1011, G8)." .
+# nemik:W1263 (github:W76, host retro R96): a card's evidence says why the root apply loop could not carry an operator act.
+nemik:applyLoopCannot a rdf:Property ; rdfs:comment "True when a card's evidence has a line 'apply loop cannot: <reason, card>': the exception that lets an 'operator: act' ask name sudo, root, chown, install -d, mkfs, mount or systemctl --system (nemik:W1263, github:W76)." .
 nemik:certifyChange a rdf:Property ; rdfs:comment "A finding that is a --certify verdict change instead of a card: the verdict it changes (nemik:W754, G7)." .

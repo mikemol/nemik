@@ -192,6 +192,25 @@ def has_probe(text: str) -> bool:
     return _PROBE.search(text) is not None
 
 
+# nemik:W1263 (github:W76, host retro R96): a card blocked on an 'operator: act' that names a
+# root-shaped command carries a line 'apply loop cannot: <reason, card>' saying why the root apply
+# loop could not carry it. The line is the exception; its text stays out of the graph, only that
+# it is there.
+_APPLY_LOOP_CANNOT = re.compile(
+    r"^\s*apply loop cannot:\s*\S", flags=re.IGNORECASE | re.MULTILINE
+)
+
+
+def apply_loop_cannot(text: str) -> bool:
+    """Say whether evidence has an 'apply loop cannot: <reason>' line.
+
+    Returns:
+        True when a line of the text starts 'apply loop cannot:' and gives a reason after it.
+
+    """
+    return _APPLY_LOOP_CANNOT.search(text) is not None
+
+
 def stray_words(text: str) -> list[str]:
     """Find the words in a text that blur the change-lifecycle steps.
 
@@ -383,6 +402,9 @@ def _queue_graph(repo: str, state_path: Path, known: frozenset[str]) -> Graph:
         # nemik:W1011: the evidence holds an executed probe (retro gate G8)
         if has_probe(model.text(w, "evidence")):
             g.add((node, NEMIK.probeRecorded, Literal("true", datatype=XSD.boolean)))
+        # nemik:W1263: the evidence says why the root apply loop could not carry an operator act
+        if apply_loop_cannot(model.text(w, "evidence")):
+            g.add((node, NEMIK.applyLoopCannot, Literal("true", datatype=XSD.boolean)))
         # nemik:W553 (github-8f 2026-10-15): words that blur the change-lifecycle steps.
         for word in stray_words(model.text(w, "next_bounded_step")):
             g.add((node, NEMIK.strayWord, Literal(word)))
