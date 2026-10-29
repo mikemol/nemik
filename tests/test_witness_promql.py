@@ -35,7 +35,7 @@ EXECUTOR_LOAD = (
 def _answer(
     monkeypatch: pytest.MonkeyPatch, result: list[Any] | None
 ) -> list[dict[str, str]]:
-    """Make the VictoriaMetrics probe answer `result` (None: unreachable); returns the queries asked."""
+    """Make the VictoriaMetrics probe answer `result` (None: unreachable) and return the queries."""
     asked: list[dict[str, str]] = []
 
     def get(env: str, path: str, params: dict[str, str]) -> dict[str, Any] | None:
@@ -86,7 +86,10 @@ def test_what_is_rego_and_what_is_promql() -> None:
 
 def test_wait_and_the_queue_choose_the_same_evaluator() -> None:
     assert poller(EXECUTOR_LOAD).__qualname__ == promql_poll(EXECUTOR_LOAD).__qualname__
-    time_witness = 'time.parse_rfc3339_ns(input.now) >= time.parse_rfc3339_ns("2026-10-01T00:00:00Z")'
+    time_witness = (
+        "time.parse_rfc3339_ns(input.now) >= "
+        'time.parse_rfc3339_ns("2026-10-01T00:00:00Z")'
+    )
     # a time witness names no observer fact but is Rego: it used to be sent to the PromQL probe
     assert poller(time_witness).__qualname__ == rego_poll(time_witness).__qualname__
 

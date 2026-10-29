@@ -131,7 +131,7 @@ def test_runner_applies_only_holding_witnesses(
         "residue": [],
     }
     state.write_text(json.dumps(payload2))
-    import installed  # nemik:W97: as installed, so --apply reaches the installed mikemol-paths-forward
+    import installed  # nemik:W97: as installed, so --apply reaches the installed writer
 
     r = installed.run("nemik-witnesses", "--root", str(tmp_path), "--apply")
     assert r.returncode == 0 and "APPLY FAILED" not in r.stderr, r.stderr
@@ -261,7 +261,7 @@ def test_apply_writes_letters_to_waiting_repos(
         ],
     )
     queue("c", [{"symbol": "W7", "title": "unrelated", "status": "ready"}])
-    import installed  # nemik:W97: as installed, so --apply reaches the installed mikemol-paths-forward
+    import installed  # nemik:W97: as installed, so --apply reaches the installed writer
 
     r = installed.run("nemik-witnesses", "--root", str(tmp_path), "--apply")
     assert r.returncode == 0 and "APPLY FAILED" not in r.stderr, r.stderr

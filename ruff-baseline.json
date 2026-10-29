@@ -909,7 +909,6 @@
  },
  "tests/test_wake_alarms.py": {
   "D103": 2,
-  "E501": 1,
   "PLC0415": 4,
   "PT018": 4,
   "RUF069": 1
@@ -937,15 +936,13 @@
  "tests/test_witness_promql.py": {
   "ARG001": 2,
   "D103": 6,
-  "DOC201": 1,
-  "E501": 2
+  "DOC201": 1
  },
  "tests/test_witnesses.py": {
   "ARG001": 5,
   "ARG005": 1,
   "D100": 1,
   "D103": 10,
-  "E501": 2,
   "PLC0415": 12,
   "PT018": 5,
   "S404": 1,
