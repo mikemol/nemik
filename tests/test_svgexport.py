@@ -29,7 +29,8 @@ FACTS = """() => {
     labelled: shown.nodes().filter(n => n.style('label')).length,
     edges: shown.edges().length,
     dashed: shown.edges().filter(e => e.style('line-style') === 'dashed').length,
-    texts: doc.querySelectorAll('text').length,
+    texts: doc.querySelectorAll('text:not(#legend *)').length,
+    legend: [...doc.querySelectorAll('#legend text')].map(t => t.textContent),
     paths: doc.querySelectorAll('path').length,
     dashedPaths: doc.querySelectorAll('path[stroke-dasharray]').length,
     images: doc.querySelectorAll('image').length,
@@ -131,5 +132,20 @@ def test_the_svg_keeps_the_canvas_cards_edges_dashes_and_contrast() -> None:
     assert _count(facts, "paths") == _count(facts, "edges")
     assert _count(facts, "dashedPaths") == _count(facts, "dashed")
     assert _count(facts, "images") == 0
+    # nemik:W1251: the printed graph carries its own key, one entry for every card state
+    legend = facts.get("legend")
+    assert isinstance(legend, list)
+    states = (
+        "ready",
+        "working",
+        "blocked",
+        "landed",
+        "done",
+        "dropped",
+        "unclaimed",
+        "other",
+    )
+    for state in states:
+        assert any(state in str(entry) for entry in legend), state
     weak = _weak(facts)
     assert not weak, f"{len(weak)} labels under {MIN_CONTRAST}:1: {weak[:3]}"

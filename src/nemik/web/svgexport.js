@@ -71,13 +71,36 @@ function svgEdge(e) {
     `stroke-width="${e.numericStyle("width")}"${dash}/>${svgArrow(e, last, b, o)}`;
 }
 
-// The whole graph as one SVG document string, in the graph's own coordinates (zoom 1, no pan).
+// nemik:W1251: the key a printed graph needs, drawn under it (the page's side panel is not in the PDF).
+const LEGEND_ROW = 18;
+const LEGEND_MIN_W = 900;
+const LEGEND_STEP = 110;
+const LEGEND_NOTES = [
+  "Border thickness: interrupt share of ledger activity on that waypoint. Diamond: minted during an interrupt.",
+  "Dashed red: waits for, ending at the blocker's claiming waypoint. Faded: satisfied, the upstream end is done.",
+  "Halos mark the longest chain of open work in each scope; a card on several shows its rings stacked.",
+];
+function legendSvg(x, y) {
+  const names = [...STATES, "other"];
+  const swatches = names.map((s, i) => {
+    const cx = x + LEGEND_STEP * i;
+    return `<circle cx="${num(cx + 6)}" cy="${num(y + 10)}" r="6" fill="${color(s)}"/>` +
+      `<text x="${num(cx + 16)}" y="${num(y + 14)}">${svgEsc((STATE_MARK[s] || "") + s)}</text>`;
+  });
+  const notes = LEGEND_NOTES.map((t, i) => `<text x="${num(x)}" y="${num(y + LEGEND_ROW * (i + 2) + 4)}">${svgEsc(t)}</text>`);
+  return `<g id="legend" font-family="sans-serif" font-size="12" fill="#222222">${swatches.join("")}${notes.join("")}</g>`;
+}
+
+// The whole graph as one SVG document string, in the graph's own coordinates (zoom 1, no pan),
+// with the legend under it.
 function graphSvg(g) {
   const shown = g.elements().filter(x => x.style("display") !== "none");
   const bb = shown.boundingBox({ includeLabels: true, includeOverlays: false });
-  const x0 = bb.x1 - SVG_PAD, y0 = bb.y1 - SVG_PAD, w = bb.w + 2 * SVG_PAD, h = bb.h + 2 * SVG_PAD;
+  const x0 = bb.x1 - SVG_PAD, y0 = bb.y1 - SVG_PAD, h = bb.h + 2 * SVG_PAD;
+  const w = Math.max(bb.w + 2 * SVG_PAD, LEGEND_MIN_W), total = h + LEGEND_ROW * (LEGEND_NOTES.length + 3);
   const parents = shown.nodes(":parent").sort((p, q) => p.ancestors().length - q.ancestors().length);
   const leaves = shown.nodes().filter(n => !n.isParent());
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${num(x0)} ${num(y0)} ${num(w)} ${num(h)}" width="${num(w)}" height="${num(h)}">` +
-    parents.map(svgNode).join("") + shown.edges().map(svgEdge).join("") + leaves.map(svgNode).join("") + "</svg>";
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${num(x0)} ${num(y0)} ${num(w)} ${num(total)}" width="${num(w)}" height="${num(total)}">` +
+    parents.map(svgNode).join("") + shown.edges().map(svgEdge).join("") + leaves.map(svgNode).join("") +
+    legendSvg(x0 + SVG_PAD, y0 + h) + "</svg>";
 }
