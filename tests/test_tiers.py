@@ -2,7 +2,8 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W600: the burn-down tiers are declared data, read in order, one tier per repo."""
 
-from nemik.tiers import ORDER, UNLISTED, load, rank
+from nemik.rank import load_tiers as load
+from nemik.tiers import ORDER, UNLISTED, rank
 
 
 def test_the_declared_tiers_follow_the_operators_order() -> None:

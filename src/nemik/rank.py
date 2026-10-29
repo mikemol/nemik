@@ -61,7 +61,29 @@ def load_weights(text: str | None = None) -> Weights:
 # urgent repo. One value per repo: in a per-repo ranking it ties every row and changes nothing, and
 # in the fleet pool it orders the repos. It is a tier of the composition only when [order] names it.
 OBJECTIVES = ("operator", "band", "weight", "tier")
-TIERS = tiers.load()
+
+
+def load_tiers(text: str | None = None) -> dict[str, str]:
+    """Read each repo's tier from rank-weights.toml (nemik:W600).
+
+    Args:
+        text: The rank-weights TOML, or None for the one that ships with the package.
+
+    Returns:
+        The tier name by repo; empty when the table is absent.
+
+    """
+    if text is None:
+        text = (
+            files("nemik.data")
+            .joinpath("rank-weights.toml")
+            .read_text(encoding="utf-8")
+        )
+    document: dict[str, object] = tomllib.loads(text)
+    return tiers.parse(document)
+
+
+TIERS = load_tiers()
 
 
 WEIGHT_MODELS = ("flow", "downstream")

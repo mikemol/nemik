@@ -77,6 +77,7 @@ from nemik.check import (
     survey,
     workstream_files,
 )
+from nemik.rank import TIERS
 from nemik.realize import verdicts
 from nemik.runlogs import unmigrated_at_source
 from nemik.wake import read_liveness, roster
@@ -387,7 +388,7 @@ def tier_lines(g: Graph) -> list[str]:
         tier change leaves no stale series (luthen-observability's cardinality caveat).
 
     """
-    declared = tiers.load()
+    declared = TIERS
     repos = sorted({ref(n).partition(":")[0] for n in g.subjects(OSLC_CM.state, None)})
     out = ["# TYPE nemik_repo_tier gauge"]
     for repo in repos:

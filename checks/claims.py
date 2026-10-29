@@ -195,8 +195,11 @@ def hub_modules_depend_on_everything_below() -> None:
     # pacepublish's timestamp reader alone.
     # nemik:W1167: and names each repo's round binding term, through roundcli.bindings_of (the
     # round's width over the supply and the landed stacks) and stackable's manifest reader.
+    # nemik:W1179: and reads each repo's burn-down tier from rank.TIERS, since tiers.py no longer
+    # reads the file itself (rank.load_tiers does, so tiers compiles on Codon); rank rests on
+    # adapter and the lower stack.
     expected = {
-        "metrics": lower | {"realize", "runlogs", "workrows"},
+        "metrics": lower | {"realize", "runlogs", "workrows", "rank"},
         "serve": lower
         | {
             "outbox",

@@ -7,31 +7,24 @@ tier now, then later, then only when one blocks a priority repo, then lowest. Th
 ordering and the view read, never a gate. This module only reads the declaration.
 """
 
-import tomllib
-from importlib.resources import files
-
 ORDER = ["now", "later", "only-when-blocking", "lowest"]
 UNLISTED = "unlisted"
 
 
-def load(text: str | None = None) -> dict[str, str]:
-    """Read each repo's tier.
+def parse(document: dict[str, object]) -> dict[str, str]:
+    """Read each repo's tier from a parsed rank-weights document.
+
+    Reading and parsing the TOML file is rank.load_tiers(), so this module needs no file or TOML
+    import and is a pure function of the document it is given.
 
     Args:
-        text: The rank-weights TOML, or None for the one that ships with the package.
+        document: The parsed rank-weights TOML.
 
     Returns:
         The tier name by repo; empty when the table is absent. A repo named in two tiers keeps the
         earlier (more urgent) one.
 
     """
-    if text is None:
-        text = (
-            files("nemik.data")
-            .joinpath("rank-weights.toml")
-            .read_text(encoding="utf-8")
-        )
-    document: dict[str, object] = tomllib.loads(text)
     table = document.get("tiers")
     found: dict[str, str] = {}
     if not isinstance(table, dict):
