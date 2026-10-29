@@ -18,7 +18,13 @@ from rdflib import Graph
 
 from nemik import tiers
 from nemik.adapter import ledger_graph
-from nemik.blocks import CATEGORIES, inbound, operator_asks, with_salience
+from nemik.blocks import (
+    CATEGORIES,
+    inbound,
+    operator_asks,
+    sudo_shaped_asks,
+    with_salience,
+)
 from nemik.check import LEDGER, default_root, survey, workstream_files
 from nemik.inbound_issues import by_peer, census, letters_of, unclaimed
 from nemik.letters import _split, _today, fold_commands
@@ -51,6 +57,14 @@ def issue_letters(
             f"{repo or '-':24} <- issue {letter['url']:51} UNCLAIMED"
             f"  -- {letter['kind']} from {sender}: {letter['title']}\n"
         )
+
+
+class _Operator(argparse.Namespace):
+    """The arguments of nemik-operator, typed so reading them names no Any (nemik:W1265)."""
+
+    root: Path
+    json: bool
+    sudo_shaped: bool
 
 
 class _Inbound(argparse.Namespace):
@@ -142,6 +156,20 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
             )
 
 
+def _report_sudo_shaped(g: Graph) -> None:
+    """Print the flagged asks and exit 1 when there is one (nemik:W1265).
+
+    Args:
+        g: The fleet graph.
+
+    """
+    flagged = sudo_shaped_asks(g)
+    for ref, ask in flagged:
+        sys.stdout.write(f"{ref:28} {ask[:70]}\n")
+    if flagged:
+        sys.exit(1)
+
+
 def operator_main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     """nemik-operator: blocks on the operator, sorted into needs-you / answered / condition / unstated."""
     ap = argparse.ArgumentParser(
@@ -154,7 +182,16 @@ def operator_main(argv: list[str] | None = None, g: Graph | None = None) -> None
         help="~/github, or the export layout root",
     )
     ap.add_argument("--json", action="store_true", help="machine-readable output")
-    args = ap.parse_args(argv)
+    ap.add_argument(
+        "--sudo-shaped",
+        action="store_true",
+        help=(
+            "print each 'operator: act' ask that names a root-shaped command and has no "
+            "'apply loop cannot:' line in its evidence (nemik:W1265); exit 1 only when there is "
+            "one, 0 otherwise, so a tick hook can read it without anything paging"
+        ),
+    )
+    args = ap.parse_args(argv, namespace=_Operator())
 
     root = Path(args.root)
     if g is None:
@@ -164,6 +201,9 @@ def operator_main(argv: list[str] | None = None, g: Graph | None = None) -> None
                 g += qg
         for repo, path in workstream_files(root, LEDGER):
             g += ledger_graph(repo, path)[0]
+    if args.sudo_shaped:
+        _report_sudo_shaped(g)
+        return
     asks = with_salience(g, operator_asks(g))
     if args.json:
         print(json.dumps(asks, indent=2))

@@ -549,6 +549,30 @@ def sudo_shaped(ask: str) -> bool:
     return _ACT_ASK.search(ask) is not None and _ROOT_SHAPED.search(ask) is not None
 
 
+def sudo_shaped_asks(g: Graph) -> list[tuple[str, str]]:
+    """List the blocked cards whose root-shaped 'operator: act' ask is not excused (nemik:W1265).
+
+    A card is excused by an 'apply loop cannot:' line in its evidence (nemik:W1263).
+
+    Args:
+        g: The fleet graph.
+
+    Returns:
+        (ref, ask text) for each flagged card, in ref order.
+
+    """
+    out: list[tuple[str, str]] = []
+    for node in sorted(set(g.subjects(NEMIK.blockedOn, None)), key=str):
+        if (node, OSLC_CM.state, NEMIK.Blocked) not in g:
+            continue
+        if (node, NEMIK.applyLoopCannot, None) in g:
+            continue
+        text = " | ".join(sorted(str(o) for o in g.objects(node, NEMIK.blockedOn)))
+        if sudo_shaped(text):
+            out.append((ref(node), text))
+    return out
+
+
 def operator_asks(g: Graph) -> list[dict[str, Any]]:
     """Every open waypoint waiting on the operator, categorised, with duplicate asks grouped.
 

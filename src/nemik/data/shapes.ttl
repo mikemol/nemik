@@ -735,3 +735,22 @@ nemik:OperatorActProbeShape a sh:NodeShape ;
                 FILTER(!REGEX(STR(?b), "token|credential|secret|password|api key", "i"))
                 FILTER NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#probeRecorded> ?p }
             }""" ] .
+
+# An `operator: act` ask that names a root-shaped command is the host apply loop's to carry, not the
+# operator's (nemik:W1265, github:W76, host retro R96: for about 3 h the host relayed a peer's
+# "operator: act sudo install -d ..." when the root apply loop could carry it; the operator caught it).
+# The exception is a line 'apply loop cannot: <reason, card>' in the card's evidence (nemik:W1263).
+# SPARQL REGEX has no word-boundary escape, so each word is fenced by a non-word character or an end.
+nemik:OperatorActRootShape a sh:NodeShape ;
+    sh:targetClass oslc_cm:ChangeRequest ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        sh:message "blocked on an operator act that names a root-shaped command (sudo, root, chown, install -d, mkfs, mount, systemctl --system): the host apply loop may carry it; try it there, or add an evidence line 'apply loop cannot: <reason, card>'" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this <http://open-services.net/ns/cm#state> <https://github.com/mikemol/nemik/ns#Blocked> ;
+                      <https://github.com/mikemol/nemik/ns#blockedOn> ?b .
+                FILTER(REGEX(STR(?b), "^[ ]*operator[ ]*:[ ]*act([^a-z]|$)", "i"))
+                FILTER(REGEX(STR(?b), "(^|[^a-z0-9_])(sudo|root|chown|install +-d|mkfs|mount|systemctl +--system)([^a-z0-9_]|$)", "i"))
+                FILTER NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#applyLoopCannot> ?p }
+            }""" ] .
