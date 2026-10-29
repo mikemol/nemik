@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1256,
+  "counter": 1258,
   "waypoints": [
     {
       "symbol": "W1",
@@ -11545,11 +11545,11 @@
       ],
       "blocked_kind": "human",
       "next_bounded_step": "Operator decision: take option (b), enums for the five booleans and plain positional-or-keyword for the rest? If yes, a codemod does the marker removal, the five booleans are hand-converted, tests run, codon-baseline.json lowered.",
-      "evidence": "2026-10-16: 2026-10-16 measured the cost: the bare '*,' marker stands alone on a line in alarm (1), calendars (1), rank (2), wake (1) and witwait (1), with hostapply using it at another indent, so roughly 7 sites in 6 modules; boolean parameters with defaults (': bool = ') are hostapply 2, rank 2, calendars 1, five in all, and alarm, wake and witwait have none. So the conflict between ruff's FBT001/FBT002 and Codon is SMALL: five booleans would become two-member enums (or separate functions), and the other keyword-only parameters (strings such as dtstart and due) lose only call-site enforcement when the marker goes. That makes option (b) cheap, so the recommendation stands with a known price.",
+      "evidence": "2026-10-16: 2026-10-16 measured the cost: the bare '*,' marker stands alone on a line in alarm (1), calendars (1), rank (2), wake (1) and witwait (1), with hostapply using it at another indent, so roughly 7 sites in 6 modules; boolean parameters with defaults (': bool = ') are hostapply 2, rank 2, calendars 1, five in all, and alarm, wake and witwait have none. So the conflict between ruff's FBT001/FBT002 and Codon is SMALL: five booleans would become two-member enums (or separate functions), and the other keyword-only parameters (strings such as dtstart and due) lose only call-site enforcement when the marker goes. That makes option (b) cheap, so the recommendation stands with a known price. | 2026-10-29: 2026-10-29: a third option exists for the operator's choice, carded as W1257 (class card, from github-8f's suggestion): keep keyword-only enforcement in a Codon-parsable form, one typed parameter object (a plain class with a typed __init__ if dataclass arguments fail in the pinned Codon) in place of '*, a, b'. The enums-for-booleans option (b) stays as recommended below; this does not change the ask, it widens it.",
       "issued_at": "2026-10-16T04:52:29Z",
       "minted_during": "tick",
       "caused_by": "W566",
-      "last_worked": "2026-10-16T04:52:53Z",
+      "last_worked": "2026-10-29T02:48:39Z",
       "ticks_blocked": 389,
       "completed": null
     },
@@ -27945,7 +27945,6 @@
       ],
       "blocked_on": [
         "W1253",
-        "W1254",
         "W1255"
       ],
       "blocked_kind": "agent",
@@ -28111,11 +28110,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "CORRECTION 2026-10-27 to the previous note on datetime.UTC (tested, not inferred): the pinned Codon's datetime module has NEITHER UTC NOR timezone ('cannot import name UTC from datetime'; 'cannot import name timezone from datetime', probed with codon run on two three-line files). So there is no ruff-versus-Codon choice to make: ruff's UP017 would flag timezone.utc (confirmed) but Codon cannot import timezone either. The four modules that import UTC (alarm, witwait, queuerows, residue) use timezone-aware datetimes, which the Codon datetime cannot express; a Codon-compatible form means those modules stop handling zoned datetimes (take and return epoch seconds or ISO text, with the zone handled in a non-census caller), an architectural change per module, not an import swap. Everything else in the previous note stands: the ',' cluster is the bare '*,' marker; pacerun left the baseline in W1190 (frozenset default became a list constant; Codon cannot read tuple[str, ...]); the tally by first error (18 argparse, 10 ',', 9 rdflib, 8 tomllib, 7 class decorator, 4 importlib.resources, 4 collections.abc, singletons) and calendars and rank aborting the compiler (rc -6) unexplained",
-      "evidence": "2026-10-27: 2026-10-27 tick: the ',' cluster is mostly keyword-only parameters after a named-arg star (history.is_series, hostapply, stackable_cli), not only a bare star line, and each also imports argparse or subprocess; removing the star alone moves none off the baseline. Next singleton candidates: letters (shlex), index (weakref), shaclcache (contextlib), endpoint (http.client) are stdlib-module gaps, so each needs a replacement, not a retype | 2026-10-27: 2026-10-27 baselinetop probe: its entry fails at tracker.py:270 (Tracker.number) with 'cannot typecheck number in reasonable time', but only when baselinetop imports the tracker; nemik.tracker alone compiles. Rewriting the INT-or-REAL ternary in number() as an if statement did not clear it (probed), nor did removing the isdigit test help baselinetop, so the blow-up is in how baselinetop's use of INT, DICT and parse_tree specializes the recursive parser, not in that line. Next: probe baselinetop with parse_tree replaced by a stub to see whether the specialization is the parse_tree call or the constants. Other stdlib-gap singletons (letters also imports UTC, index imports rdflib) are not one-line fixes | 2026-10-28: G0 (2026-10-28T18:0xZ; written AFTER the edit and the probes but BEFORE the stack is submitted, which is what standing rule 11 asks; the edit itself had no precommit): the gate refused stack625 at submit: 'codon-baseline.json: required fall 1, observed 0; paydown cards: W1179'. N = 1 owed entry. K = 1, verified before this line by the pinned Codon: scratchpad/tracker_variants.py staged tracker.py with three edits and compiled baselinetop each time: removing 'from None' compiles, removing the try compiles, dropping isdigit's lstrip does not; and 'except ValueError as e: raise ... from e' compiles. So the cause of baselinetop's 'cannot typecheck number in reasonable time' is 'raise ... from None' in tracker.Reader.number (the whole-module reachability matters: waypoint.py calls parse_tree too but only inside functions no probe instantiates). Fix: tracker.py number() uses 'from e'; baselinetop's entry is removed from codon-baseline.json. Stage-tree probe after the edit: 'baselinetop 0 compiles', 'tracker 0 compiles', 'waypoint 0 compiles'. Expected: test_codon_census passes with the entry gone, codon-baseline.json falls by one module (two modes), the pace reads codon ok; the bazel test is running. This stack touches src (tracker.py), so unlike stack624 it reads the full gate. | 2026-10-28: 2026-10-28 R11-F25, the Codon findings, deposited here so they survive the scratchpad (luthen reaps /var/tmp after 6 h). (1) The compile results, pinned Codon, stripped mode, baselinetop against staged edits of tracker.py (scratchpad/tracker_variants.py): unedited = 'cannot typecheck number in reasonable time'; no_from_none = compiles; no_try = compiles; no_isdigit (lstrip dropped) = 'cannot typecheck number in reasonable time'; from_e (except ValueError as e ... from e) = compiles. THE VARIANT THAT LANDED in stack626 is from_e. (2) The mechanism: Codon typechecks a function when a program reaches it. waypoint.py also calls parse_tree but import nemik.waypoint reaches no function, so it compiled all along; baselinetop's module-level main reaches parse_tree and with it number(), and raise ... from None in the reachable method is what the compiler cannot typecheck in time. Rule for the Codon-rigor program: do not write raise ... from None in any src/nemik module a program reaches. (3) Modules the pinned Codon does NOT import (probed with scratchpad/stdlib_probe.py, one import per file): contextlib, shlex, weakref, http.client, urllib.request, subprocess, argparse, tomllib, hashlib, fractions, importlib.resources, collections.abc, enum, dataclasses. It DOES import: json, re, os, pathlib, datetime, itertools, functools, bisect, typing. (4) Why the other class-decorator modules did not move: flow's decorator was removed in a probe and it then failed 'no module named fractions'; churn imports history, projection imports cards (rdflib), score imports tomllib and importlib.resources, salience imports fractions and contextlib. (5) The user-visible effect and its test: the CLI prints the same message ('a bad number at offset N'); only the exception chain differs (the number's own ValueError is now the cause, it was suppressed). No test covered this path, so tests/test_tracker.py gains test_a_malformed_number_names_the_offset_and_chains_its_cause (parse_tree('[1-2]') raises ValueError 'a bad number at offset', __cause__ is a ValueError); 18 passed. It rides in the next stack because stack626 was already submitted. (6) The probes: tracker_variants.py, stdlib_probe.py and stage_probe.py are DECLARED ONE-OFF in scratchpad: the reusable part is tools/codon_census.stage plus a 20-line compile loop, and the results above are the record. | 2026-10-28: 2026-10-28: landed 8fd63db (pushed, gate green) in stack626: tracker.Reader.number raises from the caught error, baselinetop leaves the codon baseline (the entry is removed). Gate: 'gate targets: 447 fresh of 450', began 18:14:59Z (began_ns 1793211299), landed before 18:47:13Z, at most 32 min 14 s wall. W1179 stays open (larger steps: thin entry points, one dispatcher, one I/O adapter); the pace should now read codon ok, which the host's next reading will say, not this card. | 2026-10-28: 2026-10-28: landed 8c2d8d6 (pushed, gate green) in stack627: the test that covers the malformed-number error path (message unchanged, the number's own ValueError is now the cause). | 2026-10-29: 2026-10-29 codon owes a fall of 1 (github-8f pace reading 00:34:29Z: fell 0 over 10 landings). Looked for a cheap removal in codon-baseline.json (75 entries): queuerows, residue (UTC from datetime), realize, waitlog (TYPE_CHECKING from typing) and the rest import rdflib, mikemol.pathsforward, mikemol.otlp or argparse, so fixing the first error only exposes the next; no entry clears by a one-line edit. The census passes locally with NEMIK_CODON set to the bazel-cache codon (7 tests, 731.75 s). | 2026-10-29: 2026-10-29 R24-F45: mikemol-codon-probe diagnosis (the block regex ends at the first line starting with ')' inside build_file_content) sent to mtools-ad, message id 22ba7396-d455-49c4-bad7-a28b122963b5. Until fixed the only Codon check is the 12 min census with NEMIK_CODON set to the bazel-cache codon; it must start at the first edit of a src stack. | 2026-10-29: 2026-10-29 mtools-ad (peer): the codon-probe regex defect is taken as mtools:W2121 (no open card owned the probe's block parse; the earlier one landed 3112af4). Not built yet.",
+      "evidence": "2026-10-27: 2026-10-27 tick: the ',' cluster is mostly keyword-only parameters after a named-arg star (history.is_series, hostapply, stackable_cli), not only a bare star line, and each also imports argparse or subprocess; removing the star alone moves none off the baseline. Next singleton candidates: letters (shlex), index (weakref), shaclcache (contextlib), endpoint (http.client) are stdlib-module gaps, so each needs a replacement, not a retype | 2026-10-27: 2026-10-27 baselinetop probe: its entry fails at tracker.py:270 (Tracker.number) with 'cannot typecheck number in reasonable time', but only when baselinetop imports the tracker; nemik.tracker alone compiles. Rewriting the INT-or-REAL ternary in number() as an if statement did not clear it (probed), nor did removing the isdigit test help baselinetop, so the blow-up is in how baselinetop's use of INT, DICT and parse_tree specializes the recursive parser, not in that line. Next: probe baselinetop with parse_tree replaced by a stub to see whether the specialization is the parse_tree call or the constants. Other stdlib-gap singletons (letters also imports UTC, index imports rdflib) are not one-line fixes | 2026-10-28: G0 (2026-10-28T18:0xZ; written AFTER the edit and the probes but BEFORE the stack is submitted, which is what standing rule 11 asks; the edit itself had no precommit): the gate refused stack625 at submit: 'codon-baseline.json: required fall 1, observed 0; paydown cards: W1179'. N = 1 owed entry. K = 1, verified before this line by the pinned Codon: scratchpad/tracker_variants.py staged tracker.py with three edits and compiled baselinetop each time: removing 'from None' compiles, removing the try compiles, dropping isdigit's lstrip does not; and 'except ValueError as e: raise ... from e' compiles. So the cause of baselinetop's 'cannot typecheck number in reasonable time' is 'raise ... from None' in tracker.Reader.number (the whole-module reachability matters: waypoint.py calls parse_tree too but only inside functions no probe instantiates). Fix: tracker.py number() uses 'from e'; baselinetop's entry is removed from codon-baseline.json. Stage-tree probe after the edit: 'baselinetop 0 compiles', 'tracker 0 compiles', 'waypoint 0 compiles'. Expected: test_codon_census passes with the entry gone, codon-baseline.json falls by one module (two modes), the pace reads codon ok; the bazel test is running. This stack touches src (tracker.py), so unlike stack624 it reads the full gate. | 2026-10-28: 2026-10-28 R11-F25, the Codon findings, deposited here so they survive the scratchpad (luthen reaps /var/tmp after 6 h). (1) The compile results, pinned Codon, stripped mode, baselinetop against staged edits of tracker.py (scratchpad/tracker_variants.py): unedited = 'cannot typecheck number in reasonable time'; no_from_none = compiles; no_try = compiles; no_isdigit (lstrip dropped) = 'cannot typecheck number in reasonable time'; from_e (except ValueError as e ... from e) = compiles. THE VARIANT THAT LANDED in stack626 is from_e. (2) The mechanism: Codon typechecks a function when a program reaches it. waypoint.py also calls parse_tree but import nemik.waypoint reaches no function, so it compiled all along; baselinetop's module-level main reaches parse_tree and with it number(), and raise ... from None in the reachable method is what the compiler cannot typecheck in time. Rule for the Codon-rigor program: do not write raise ... from None in any src/nemik module a program reaches. (3) Modules the pinned Codon does NOT import (probed with scratchpad/stdlib_probe.py, one import per file): contextlib, shlex, weakref, http.client, urllib.request, subprocess, argparse, tomllib, hashlib, fractions, importlib.resources, collections.abc, enum, dataclasses. It DOES import: json, re, os, pathlib, datetime, itertools, functools, bisect, typing. (4) Why the other class-decorator modules did not move: flow's decorator was removed in a probe and it then failed 'no module named fractions'; churn imports history, projection imports cards (rdflib), score imports tomllib and importlib.resources, salience imports fractions and contextlib. (5) The user-visible effect and its test: the CLI prints the same message ('a bad number at offset N'); only the exception chain differs (the number's own ValueError is now the cause, it was suppressed). No test covered this path, so tests/test_tracker.py gains test_a_malformed_number_names_the_offset_and_chains_its_cause (parse_tree('[1-2]') raises ValueError 'a bad number at offset', __cause__ is a ValueError); 18 passed. It rides in the next stack because stack626 was already submitted. (6) The probes: tracker_variants.py, stdlib_probe.py and stage_probe.py are DECLARED ONE-OFF in scratchpad: the reusable part is tools/codon_census.stage plus a 20-line compile loop, and the results above are the record. | 2026-10-28: 2026-10-28: landed 8fd63db (pushed, gate green) in stack626: tracker.Reader.number raises from the caught error, baselinetop leaves the codon baseline (the entry is removed). Gate: 'gate targets: 447 fresh of 450', began 18:14:59Z (began_ns 1793211299), landed before 18:47:13Z, at most 32 min 14 s wall. W1179 stays open (larger steps: thin entry points, one dispatcher, one I/O adapter); the pace should now read codon ok, which the host's next reading will say, not this card. | 2026-10-28: 2026-10-28: landed 8c2d8d6 (pushed, gate green) in stack627: the test that covers the malformed-number error path (message unchanged, the number's own ValueError is now the cause). | 2026-10-29: 2026-10-29 codon owes a fall of 1 (github-8f pace reading 00:34:29Z: fell 0 over 10 landings). Looked for a cheap removal in codon-baseline.json (75 entries): queuerows, residue (UTC from datetime), realize, waitlog (TYPE_CHECKING from typing) and the rest import rdflib, mikemol.pathsforward, mikemol.otlp or argparse, so fixing the first error only exposes the next; no entry clears by a one-line edit. The census passes locally with NEMIK_CODON set to the bazel-cache codon (7 tests, 731.75 s). | 2026-10-29: 2026-10-29 R24-F45: mikemol-codon-probe diagnosis (the block regex ends at the first line starting with ')' inside build_file_content) sent to mtools-ad, message id 22ba7396-d455-49c4-bad7-a28b122963b5. Until fixed the only Codon check is the 12 min census with NEMIK_CODON set to the bazel-cache codon; it must start at the first edit of a src stack. | 2026-10-29: 2026-10-29 mtools-ad (peer): the codon-probe regex defect is taken as mtools:W2121 (no open card owned the probe's block parse; the earlier one landed 3112af4). Not built yet. | 2026-10-29: 2026-10-29 github-8f asked (second fresh pace, codon fell 0 over 10 landings, owes 1) which entry falls. Search result: 75 entries; 10 modules (alarm, calendars, check, exportwire, history, hostapply, rank, stackable_cli, wake, witwait) first fail on the keyword-only marker '*,' in a signature (alarm.py:47, compiled with the bazel-cache codon); removing it only moves each to its next first error (imports of mikemol.pathsforward, rdflib, other failing nemik modules); the rest fail on argparse, tomllib, importlib.resources, __future__ or dataclass decorator arguments. No entry falls from a small edit. Reply sent to github-8f; the keyword-only change touches W569's ask (enums for boolean keyword-only parameters) and is a design call.",
       "issued_at": "2026-10-27T13:51:58Z",
       "minted_during": "interrupt",
       "caused_by": "W1014",
-      "last_worked": "2026-10-29T01:49:26Z",
+      "last_worked": "2026-10-29T02:46:44Z",
       "ticks_blocked": 0,
       "size_class": "medium",
       "manifest": [
@@ -29898,7 +29897,7 @@
     {
       "symbol": "W1245",
       "title": "Class: gate tests time out under load and pass alone (test_salience, test_layout shard 4) with no failing assertion",
-      "status": "working",
+      "status": "blocked",
       "enables": [],
       "touches": [
         "gate",
@@ -29910,11 +29909,11 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "Build the one table (mikemol-gate-targets REPO BEP-FILE TESTLOGS-DIR) and one stack that shards every target over the threshold; stack 640 (W1176) is in the gate meanwhile.",
-      "evidence": "2026-10-28: 2026-10-28: second consecutive gate refusal by timeout with no failing assertion. Stack 633 refused at ~22:33:04Z: //:test_layout shard 4 of 6 TIMEOUT 900.1 s (six runs: min 198.9, avg 334.1, max 900.1), 18 fresh of 451, 450 pass. Run alone afterward the whole file passed in 466.9 s (cpu 117.4 s). Not resubmitted. Instances: W1244 (test_salience), this. | 2026-10-28: 2026-10-28 ~22:50Z: /proc/loadavg reads 96.04 113.18 114.21 on 24 CPUs (load 4-5 per CPU) with no nemik gate in flight (--in-gate is empty), so the load is other sessions' or other repos' work, not this stack's own parallelism. Both timeouts fit a host run at several times its core count. Next: attribute the load by process owner (repo) over a gate window, then ask drum/luthen whether admission bounds it. | 2026-10-28: Correction: the loadavg reading above was taken at about 22:45Z, not the 22:50Z I wrote (the G0 ledger line is 22:46:31Z); the 22:50Z was a guess. Stack 634 (W1245 BUILD.bazel shards, then W1237, W1244, W1225) submitted after G0 22:46:31Z and the BUILD.bazel edit. | 2026-10-28: 2026-10-28 R19: killed test_layout shard 4 log holds only three dots then 'Test timed out at 22:33:04 UTC': three tests passed, then one wait never ended; siblings about 221 s, so a hang not uniform slowness (hypothesis, unverified: a failed script load as in W846). /proc/pressure/cpu some avg300=50.20, io some avg300=11.34, full io near 0: CPU contention. W924 is dropped (successor W925, blocked); its BUILD.bazel/tools/tests leases are stale. | 2026-10-28: 2026-10-28 github-8f (peer, not an operator word): saturation coincides with mtools' train (a bisect probe since about 22:07Z) and paperkit's W547 gate (24 actions); observed from --in-gate, not a measured attribution. It routes the drum question to mtools. It reminds that the fix is in nemik's own targets: shard finer (stack 634) and where a timeout must exist, bound by CPU not wall (memory no-wall-clock-timeouts). Carried: W1244's timeout=120 is a wall bound and is temporary; the browser-wait helper (R19-F36) should end a wait on page errors, not on wall time. | 2026-10-28: 2026-10-28 R20-C3: conftest selects position % total == index, so the killed layout shard 4 of 6 (index 3) ran positions 3, 9, 15 (three dots) and hung on position 21, collected with pytest --collect-only -q -p no:cacheprovider (42 tests): tests/test_layout.py::test_the_view_chain_is_drawn_end_to_end_with_its_length (the W482 view-chain test). Not proof of a hang rather than slowness. | 2026-10-28: 2026-10-28: shard bump landed as 84334f9 (stack 634, tip 5eb0644 at 23:14:59Z); the stack's gate passed 451 of 451 with 448 fresh, wall about 27 min 45 s from the 22:47:14Z begin (kind: wall; both stamps derived, begin from began_ns). A green gate does not prove the cause (R18/R19); the children W1247 to W1250 carry the proof. | 2026-10-29: 2026-10-29 stack 639 refused BEFORE any check ran: 'fatal: Unable to create .git/worktrees/-nemik-gate-wt/index.lock: File exists' (another git process in the gate worktree); when I looked minutes later no lock file existed and --in-gate was empty, so it was a transient lock in the gate's own worktree, not a test. Not a test flake and no check was gated, so I resubmit it unchanged; if it recurs it is an mtools gate-worktree card, not nemik's. | 2026-10-29: 2026-10-29: the test_keymap shard landed as f861c3f (stack 639, tip 4eb245a at 01:34:39Z), green after the transient gate-worktree lock refusal. Four shard bumps so far (salience, layout, keymap) and one infra lock; the host-load cause stays open. | 2026-10-29: 2026-10-29 R24-F48: the gate-worktree index.lock instance (stack 639 first submit, error line quoted) and the codon-probe diagnosis were sent to mtools-ad, message id 22ba7396-d455-49c4-bad7-a28b122963b5. R24-F46: a table of every test target with alone time and timeout is owed (mikemol-gate-targets), with a threshold of timeout over the worst observed load factor; not built. | 2026-10-29: 2026-10-29 mtools-ad (peer): the gate-worktree index.lock race, with the 637 and 639 instance, is taken as mtools:W2122 (no open gate-worktree card existed). Not built yet.",
+      "evidence": "2026-10-28: 2026-10-28: second consecutive gate refusal by timeout with no failing assertion. Stack 633 refused at ~22:33:04Z: //:test_layout shard 4 of 6 TIMEOUT 900.1 s (six runs: min 198.9, avg 334.1, max 900.1), 18 fresh of 451, 450 pass. Run alone afterward the whole file passed in 466.9 s (cpu 117.4 s). Not resubmitted. Instances: W1244 (test_salience), this. | 2026-10-28: 2026-10-28 ~22:50Z: /proc/loadavg reads 96.04 113.18 114.21 on 24 CPUs (load 4-5 per CPU) with no nemik gate in flight (--in-gate is empty), so the load is other sessions' or other repos' work, not this stack's own parallelism. Both timeouts fit a host run at several times its core count. Next: attribute the load by process owner (repo) over a gate window, then ask drum/luthen whether admission bounds it. | 2026-10-28: Correction: the loadavg reading above was taken at about 22:45Z, not the 22:50Z I wrote (the G0 ledger line is 22:46:31Z); the 22:50Z was a guess. Stack 634 (W1245 BUILD.bazel shards, then W1237, W1244, W1225) submitted after G0 22:46:31Z and the BUILD.bazel edit. | 2026-10-28: 2026-10-28 R19: killed test_layout shard 4 log holds only three dots then 'Test timed out at 22:33:04 UTC': three tests passed, then one wait never ended; siblings about 221 s, so a hang not uniform slowness (hypothesis, unverified: a failed script load as in W846). /proc/pressure/cpu some avg300=50.20, io some avg300=11.34, full io near 0: CPU contention. W924 is dropped (successor W925, blocked); its BUILD.bazel/tools/tests leases are stale. | 2026-10-28: 2026-10-28 github-8f (peer, not an operator word): saturation coincides with mtools' train (a bisect probe since about 22:07Z) and paperkit's W547 gate (24 actions); observed from --in-gate, not a measured attribution. It routes the drum question to mtools. It reminds that the fix is in nemik's own targets: shard finer (stack 634) and where a timeout must exist, bound by CPU not wall (memory no-wall-clock-timeouts). Carried: W1244's timeout=120 is a wall bound and is temporary; the browser-wait helper (R19-F36) should end a wait on page errors, not on wall time. | 2026-10-28: 2026-10-28 R20-C3: conftest selects position % total == index, so the killed layout shard 4 of 6 (index 3) ran positions 3, 9, 15 (three dots) and hung on position 21, collected with pytest --collect-only -q -p no:cacheprovider (42 tests): tests/test_layout.py::test_the_view_chain_is_drawn_end_to_end_with_its_length (the W482 view-chain test). Not proof of a hang rather than slowness. | 2026-10-28: 2026-10-28: shard bump landed as 84334f9 (stack 634, tip 5eb0644 at 23:14:59Z); the stack's gate passed 451 of 451 with 448 fresh, wall about 27 min 45 s from the 22:47:14Z begin (kind: wall; both stamps derived, begin from began_ns). A green gate does not prove the cause (R18/R19); the children W1247 to W1250 carry the proof. | 2026-10-29: 2026-10-29 stack 639 refused BEFORE any check ran: 'fatal: Unable to create .git/worktrees/-nemik-gate-wt/index.lock: File exists' (another git process in the gate worktree); when I looked minutes later no lock file existed and --in-gate was empty, so it was a transient lock in the gate's own worktree, not a test. Not a test flake and no check was gated, so I resubmit it unchanged; if it recurs it is an mtools gate-worktree card, not nemik's. | 2026-10-29: 2026-10-29: the test_keymap shard landed as f861c3f (stack 639, tip 4eb245a at 01:34:39Z), green after the transient gate-worktree lock refusal. Four shard bumps so far (salience, layout, keymap) and one infra lock; the host-load cause stays open. | 2026-10-29: 2026-10-29 R24-F48: the gate-worktree index.lock instance (stack 639 first submit, error line quoted) and the codon-probe diagnosis were sent to mtools-ad, message id 22ba7396-d455-49c4-bad7-a28b122963b5. R24-F46: a table of every test target with alone time and timeout is owed (mikemol-gate-targets), with a threshold of timeout over the worst observed load factor; not built. | 2026-10-29: 2026-10-29 mtools-ad (peer): the gate-worktree index.lock race, with the 637 and 639 instance, is taken as mtools:W2122 (no open gate-worktree card existed). Not built yet. | 2026-10-29: 2026-10-29: stack 642 refused by //:test_page_queue TIMEOUT 300.3 s at 02:20:03Z with no test finished (alone 35.3 s, 12% of the timeout); answered with the wait adoption, not a shard: stack 643 landed 49a1d6b (8 raw waits in four browser tests onto webpage.until), tip c7244b4 at 02:46:42Z. Fifth timeout instance and the first in the hang pattern. test_viewstate and test_cardtree keep raw waits the codemod skips. The mark is set blocked on W1249 and W1250 now, in the same step, so no working mark is left on a landed card (R25-F52).",
       "issued_at": "2026-10-28T22:41:42Z",
       "minted_during": "interrupt",
       "caused_by": "W1244",
-      "last_worked": "2026-10-29T02:37:21Z",
+      "last_worked": "2026-10-29T02:47:34Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -30090,32 +30089,6 @@
     {
       "symbol": "W1253",
       "title": "Annotate the mixed-value tomllib reads in adoption.py, rank.py and calendars.py with a typed accessor",
-      "status": "ready",
-      "enables": [
-        "W1176"
-      ],
-      "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
-      "issued_at": "2026-10-29T01:50:34Z",
-      "minted_during": "tick",
-      "caused_by": "W1176",
-      "last_worked": null,
-      "ticks_blocked": 0,
-      "manifest": [
-        "src/nemik/adoption.py",
-        "src/nemik/rank.py",
-        "src/nemik/calendars.py",
-        "mypy-baseline.json"
-      ],
-      "size_class": "small",
-      "weight": 6
-    },
-    {
-      "symbol": "W1254",
-      "title": "Annotate the nested counted and slow_survey wrappers in test_flow_cache, test_memo_audits and test_serve_model",
       "status": "working",
       "enables": [
         "W1176"
@@ -30123,12 +30096,37 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "In stack 641: the counted wrapper in tests/test_flow_cache.py and slow_survey, gated_survey and hit in tests/test_serve_model.py take their wrapped types; remainder: tests/test_memo_audits.py's counted (flow.solve with the ONE default).",
-      "evidence": "2026-10-29: 2026-10-29: landed in stack 641 as d8282b4 (printed by mikemol-commit), reflog 21:59:41 -0400 = 01:59:41Z, gate green, 7 fresh of 451; began 01:54:14Z (began_ns 1793238853626180051), so 5 min 27 s wall (kind: wall, both stamps derived). ruff 1978 to 1968, mypy 4000 to 3988. Marked ready, not done: tests/test_memo_audits.py's counted wrapper is the remainder.",
+      "next_bounded_step": "In stack 644: calendars.py cals, include, mirror annotated object; remainder: adoption.py 60 (project table read with .values()) and rank.py 89 need a typed accessor.",
+      "evidence": "",
       "issued_at": "2026-10-29T01:50:34Z",
       "minted_during": "tick",
       "caused_by": "W1176",
-      "last_worked": "2026-10-29T02:11:11Z",
+      "last_worked": "2026-10-29T03:12:45Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/calendars.py",
+        "mypy-baseline.json"
+      ],
+      "size_class": "small",
+      "weight": 6,
+      "completed": null
+    },
+    {
+      "symbol": "W1254",
+      "title": "Annotate the nested counted and slow_survey wrappers in test_flow_cache, test_memo_audits and test_serve_model",
+      "status": "done",
+      "enables": [
+        "W1176"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-29: 2026-10-29: landed in stack 641 as d8282b4 (printed by mikemol-commit), reflog 21:59:41 -0400 = 01:59:41Z, gate green, 7 fresh of 451; began 01:54:14Z (began_ns 1793238853626180051), so 5 min 27 s wall (kind: wall, both stamps derived). ruff 1978 to 1968, mypy 4000 to 3988. Marked ready, not done: tests/test_memo_audits.py's counted wrapper is the remainder. | 2026-10-29: 2026-10-29: the last wrapper (tests/test_memo_audits.py) landed in stack 643 as 37e3626 (printed by mikemol-commit), stack tip c7244b4 at reflog 22:46:42 -0400 = 02:46:42Z, green, 9 fresh of 451: ruff 1968 to 1965, mypy 3988 to 3984. All five nested wrappers of the card are typed.",
+      "issued_at": "2026-10-29T01:50:34Z",
+      "minted_during": "tick",
+      "caused_by": "W1176",
+      "last_worked": "2026-10-29T02:47:33Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_memo_audits.py",
@@ -30136,7 +30134,7 @@
         "ruff-baseline.json"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261029T024733Z"
     },
     {
       "symbol": "W1255",
@@ -30166,24 +30164,65 @@
     {
       "symbol": "W1256",
       "title": "The Containerfile test stage's librsvg2-bin install ends with rsvg-convert --version, so a wrong package name fails the build in seconds",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "Containerfile"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-10-29: 2026-10-29: landed in stack 643 as c7244b4 (printed by mikemol-commit), reflog 02:46:42Z, green. The RUN line now ends the chromium unzip with rsvg-convert --version. The image build has still not run here, so a wrong package name is still unproven until it does; the build now fails in seconds instead of after the suite.",
       "issued_at": "2026-10-29T02:10:55Z",
       "minted_during": "interrupt",
       "caused_by": "W1252",
-      "last_worked": "2026-10-29T02:11:12Z",
+      "last_worked": "2026-10-29T02:47:34Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261029T024734Z",
       "manifest": [
         "Containerfile"
       ]
+    },
+    {
+      "symbol": "W1257",
+      "title": "Class: keyword-only call enforcement that Codon parses, a typed parameter object in place of '*,' across the ten modules",
+      "status": "ready",
+      "enables": [
+        "W561"
+      ],
+      "touches": [
+        "portability",
+        "typing"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Probe, with the bazel-cache codon (NEMIK_CODON), whether a plain class with a typed __init__ taking named fields compiles, and whether @dataclass without arguments does (frozen=True and slots=True fail with 'class decorator got unexpected argument'); then pick the shortest-chain module among alarm, witwait, exportwire (imports mikemol.pathsforward or nemik.witnesses/check, so its chain is the imports, not the marker) and write the first leaf card for it. Do not drop either ruling: Codon-compatible Python (memory) and the typed-boundary keyword-only enforcement W569 wants.",
+      "evidence": "2026-10-29: 2026-10-29 github-8f ruling relayed (a peer, so a design suggestion, not the operator's word): do not drop either of Codon-compatibility and keyword-only enforcement; find the common structure, one typed parameter object in place of '*, a, b' so call sites name fields (a frozen dataclass; if dataclass arguments fail in the pinned Codon, a plain class with a typed __init__). Read before mint: W569 already holds the operator ask (option b: enums for 5 booleans and positional-or-keyword for the rest; blocked 389 ticks on the operator) and W568, W561; this class card is the alternative that keeps enforcement, so the operator's W569 choice should now name three options. The 10 modules and the evidence are on W1179 (alarm.py:47 compiled with the cached codon). Codon's paydown path; codon stays STARVED recorded as this design debt.",
+      "issued_at": "2026-10-29T02:48:26Z",
+      "minted_during": "interrupt",
+      "caused_by": "W569",
+      "last_worked": "2026-10-29T02:48:33Z",
+      "ticks_blocked": 0,
+      "want": "a Codon-parsable form of keyword-only enforcement"
+    },
+    {
+      "symbol": "W1258",
+      "title": "Report a past structured due on any open card (not only operator asks) beside the ready-overdue count, without ranking",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "metrics",
+        "calendar"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Read first: where NEMIK.due is read today (adapter.py:442 stores it, blocks.py:596 carries it on operator-ask rows, wake.py:190 on wake rows, calwrite.py:192 and vtodo.py:157 project it to the calendar; nemik-ics exports only the operator asks, so an agent card's due reaches no consumer). Then decide with the operator whether a past due on a non-ask card is a REPORT (a count and the oldest, on the pace board beside the age-based ready-overdue cleanup count), never a ranking input (operator host 695f3e0a line 94798, W1005 dropped); the report would answer the operator's 2026-10-16 ask for monitoring of past-SLA waits (line 70556).",
+      "evidence": "2026-10-29: 2026-10-29 linux-sources asked (their W498): should a past structured --due on a non-needs-you card appear anywhere. Read of nemik's source: due is stored in the graph (adapter.py:442), carried by operator-ask rows (blocks.py:596) and wake rows (wake.py:190), and projected to the calendar (calwrite.py:192, vtodo.py:157); nothing reports a past due on an agent card, which matches their measurement (2 of 91 exported tasks carry a DUE, both operator asks). | 2026-10-29: 2026-10-29 linux-sources (peer) corrected its own measurement: the 0 linux-sources UIDs in the nemik-ics export are explained by that repo having no operator-ask cards (0 'operator: ' blocked_on lines against 14 in luthen-observability, 12 UIDs exported), so the export says nothing about due. The 'no consumer' conclusion therefore rests on nemik's source reading (adapter.py:442, blocks.py:596, wake.py:190, calwrite.py:192, vtodo.py:157) alone, which linux-sources has not read; I have not run a second check. Their W498 is blocked on nemik:W1258.",
+      "issued_at": "2026-10-29T02:49:20Z",
+      "minted_during": "interrupt",
+      "caused_by": "linux-sources:W498",
+      "last_worked": "2026-10-29T02:53:10Z",
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -30384,10 +30423,10 @@
       "recoverable": true
     }
   ],
-  "job_id": "1d7fe6d0",
-  "heartbeat": "2026-10-22T02:06:35Z",
+  "job_id": "481476b5",
+  "heartbeat": "2026-10-29T04:11:13Z",
   "lock": null,
-  "predecessor_job_id": "disarmed",
+  "predecessor_job_id": "1d7fe6d0",
   "leases": [
     {
       "tag": "file:BUILD.bazel!w",

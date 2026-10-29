@@ -63,7 +63,7 @@ def load_calendars(path: Path = DEFAULT_CONFIG) -> dict[str, Calendar]:
 
     if not path.exists():
         return {}
-    cals = tomllib.loads(path.read_text(encoding="utf-8")).get("calendars", {})
+    cals: object = tomllib.loads(path.read_text(encoding="utf-8")).get("calendars", {})
     if not isinstance(cals, dict):
         msg = f'{path}: [calendars] must be a table of label = "collection name"'
         raise TypeError(msg)
@@ -80,8 +80,10 @@ def load_calendars(path: Path = DEFAULT_CONFIG) -> dict[str, Calendar]:
                 bad + "a name string, or a table with only `name`, `include`, "
                 "`write` and `mirror`"
             )
-        name, include = spec.get("name"), spec.get("include", [])
-        write, mirror = spec.get("write", False), spec.get("mirror", [])
+        name = spec.get("name")
+        include: object = spec.get("include", [])
+        write = spec.get("write", False)
+        mirror: object = spec.get("mirror", [])
         if not isinstance(name, str) or not name:
             raise ValueError(bad + "`name` must be a non-empty string")
         if not isinstance(include, list) or not all(

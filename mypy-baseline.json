@@ -27,10 +27,9 @@
   "misc": 7
  },
  "src/nemik/calendars.py": {
-  "misc": 120,
+  "misc": 116,
   "no-untyped-def": 3,
-  "type-arg": 7,
-  "var-annotated": 3
+  "type-arg": 7
  },
  "src/nemik/calwrite.py": {
   "misc": 9,
