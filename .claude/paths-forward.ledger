@@ -3298,3 +3298,8 @@
 2026-10-29T18:33:13Z  status W1014 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-29T18:42:21Z  status W1014 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-29T20:23:08Z  status W1179 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-29T20:55:28Z  interrupt W1278 minted    -         "Answer luthen-observability:W1798: re-vendor nemik's mtools wheels to bb7fc9c or later so the pinned bin carries mikemol-hook-precompact"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W1798
+2026-10-29T21:07:12Z  status W1179 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-29T21:07:14Z  status W1014 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-29T21:12:03Z  status W1278 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-29T21:12:58Z  status W1014 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
