@@ -398,6 +398,20 @@ def deliver(
 
 
 def main(argv: list[str] | None = None) -> None:
+    """Run nemik-witnesses: evaluate every open witness, or wait on one query.
+
+    With --wait it polls the query and exits 0 when it held, 1 on timeout and 2 when it cannot be
+    evaluated or its interval is malformed. Otherwise it prints a verdict per open witness, and
+    with --apply marks the waypoints whose witness held as done through the installed writer,
+    then writes a wake letter to each waiting repo.
+
+    Args:
+        argv: the command line, or None for sys.argv.
+
+    Raises:
+        SystemExit: with the --wait code.
+
+    """
     import argparse
 
     from nemik.check import default_root

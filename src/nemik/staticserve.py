@@ -96,6 +96,19 @@ def matches(header: str | None, tag: str) -> bool:
 
 
 def handler(root: Path) -> type[BaseHTTPRequestHandler]:
+    """Build the static server's request handler class over one publish root.
+
+    Each request resolves its path in the current snapshot, answers 304 when the ETag matches,
+    and otherwise streams the file. /healthz answers apart from any snapshot, and /metrics
+    answers 503 until a build has written one.
+
+    Args:
+        root: the publish root, or one build.
+
+    Returns:
+        The handler class, for ThreadingHTTPServer to instantiate per request.
+
+    """
     hashes = Hashes()
 
     class H(BaseHTTPRequestHandler):
@@ -187,6 +200,12 @@ def parser() -> argparse.ArgumentParser:
 
 
 def main(argv: list[str] | None = None) -> None:
+    """Serve a published snapshot as files until the process is stopped.
+
+    Args:
+        argv: the command line, or None for sys.argv.
+
+    """
     args = parser().parse_args(argv)
     ThreadingHTTPServer((args.bind, args.port), handler(args.root)).serve_forever()
 

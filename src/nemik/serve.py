@@ -1098,6 +1098,18 @@ def history_response(
 
 
 def handler(model: Model) -> type[BaseHTTPRequestHandler]:
+    """Build the live server's request handler class over one model.
+
+    The page and the vendor directory are read once here; each GET pokes the model (except a
+    metrics scrape) and answers from its cached graph and documents.
+
+    Args:
+        model: the model every request reads, and pokes to refresh.
+
+    Returns:
+        The handler class, for ThreadingHTTPServer to instantiate per request.
+
+    """
     page = files("nemik.web").joinpath("index.html").read_bytes()
     vendor = files("nemik.web").joinpath("vendor")
 
@@ -1645,6 +1657,20 @@ class _Options(argparse.Namespace):
 
 
 def main(argv: list[str] | None = None) -> None:
+    """Run nemik-serve: publish a snapshot, write the static view, or serve the live one.
+
+    With --publish it builds a private snapshot and exits, printing its path or "unchanged".
+    With --static it writes the view as files and exits. Otherwise it serves the live model and
+    prints the bound port once the socket listens. A stale withheld list, or a build error,
+    exits 2 with the cause on stderr.
+
+    Args:
+        argv: the command line, or None for sys.argv.
+
+    Raises:
+        SystemExit: with 2 when the withheld list is stale or a build fails.
+
+    """
     ap = argparse.ArgumentParser(
         prog="nemik-serve", description=(__doc__ or "").splitlines()[0]
     )
