@@ -153,7 +153,13 @@ def _extended(text: str) -> str:
 
 
 def reference_uri(repo: str, ref: str) -> URIRef:
-    """Give a local `W<n>` or a foreign `<repo>:W<n>` (mtools 9236d5e) as a waypoint IRI."""
+    """Give a local `W<n>` or a foreign `<repo>:W<n>` (mtools 9236d5e) as a waypoint IRI.
+
+    Returns:
+        The foreign repo's waypoint IRI when `ref` is `<repo>:W<n>`, else the waypoint IRI in
+        `repo`.
+
+    """
     if foreign := model.foreign_symbol(ref):
         return waypoint_uri(foreign[0], f"W{foreign[1]}")
     return waypoint_uri(repo, ref)
@@ -234,6 +240,11 @@ def resolve_blocker(repo: str, text: str, known: frozenset[str]) -> URIRef | Non
       <repo>:W<n>          a waypoint in another workstream (the form ledgers already use)
       <repo>, <repo>-<hh>  that workstream (a repo name, or a session name for it)
       operator|user|...    the operator
+
+    Returns:
+        The IRI of the waypoint, workstream or operator the text names, or None when it names
+        none unambiguously.
+
     """
     t = text.strip()
     if model.symbol_number(t) is not None:
@@ -256,6 +267,10 @@ def load_state(state_path: Path) -> model.State:
 
     This module stays the one place that calls `store.load` (the single-writer-boundary claim).
     Raises store.UnreadableStateError if mtools refuses it.
+
+    Returns:
+        The state mtools loads from `state_path`.
+
     """
     return store.load(state_path)
 
@@ -294,7 +309,13 @@ def _stamped(
     extra: object,
     build: Callable[[], tuple[Graph, int]],
 ) -> tuple[Graph, int]:
-    """Answer `build()` from the cache while `path` is unchanged; always a fresh copy to mutate."""
+    """Answer `build()` from the cache while `path` is unchanged; always a fresh copy to mutate.
+
+    Returns:
+        The (graph, count) pair `build()` gives, the graph a fresh copy of the cached one while
+        `path` is unchanged.
+
+    """
     if not _KEEP[0]:
         return build()
     st = path.stat()
@@ -314,7 +335,12 @@ def _stamped(
 def queue_graph(
     repo: str, state_path: Path, known: frozenset[str] = frozenset()
 ) -> Graph:
-    """Translate one repo's queue. Raises store.UnreadableStateError if mtools refuses it."""
+    """Translate one repo's queue. Raises store.UnreadableStateError if mtools refuses it.
+
+    Returns:
+        The repo's queue as a graph.
+
+    """
     return _stamped(
         "queue",
         repo,
@@ -526,6 +552,10 @@ def ledger_graph(repo: str, ledger_path: Path) -> tuple[Graph, int]:
     Read through mtools' `ledger.read`, never re-split here. Each parsed line is a prov:Activity
     that, when it names a symbol, prov:used that waypoint, so interrupt and forecast effort land on
     the same nodes the dependency edges join.
+
+    Returns:
+        The graph of PROV activities and the count of ledger lines mtools could not parse.
+
     """
     return _stamped(
         "ledger", repo, ledger_path, None, lambda: _ledger_graph(repo, ledger_path)

@@ -39,14 +39,24 @@ SCALAR: dict[str, dict[str, object]] = {
 
 
 def field(cls: str) -> dict[str, Any]:
-    """Give the schema of one field class; `list-X` is an array of X."""
+    """Give the schema of one field class; `list-X` is an array of X.
+
+    Returns:
+        An array schema of the inner class's schema for `list-X`, else the scalar's schema.
+
+    """
     if cls.startswith("list-"):
         return {"type": "array", "items": field(cls.removeprefix("list-"))}
     return SCALAR[cls]
 
 
 def record(fields: dict[str, str]) -> dict[str, Any]:
-    """Give an object of only the manifest's fields for it (none required: absent means unknown)."""
+    """Give an object of only the manifest's fields for it (none required: absent means unknown).
+
+    Returns:
+        An object schema with a property per field, sorted by name, and no other property allowed.
+
+    """
     return {
         "type": "object",
         "properties": {name: field(cls) for name, cls in sorted(fields.items())},
@@ -63,7 +73,12 @@ def _by_repo(value: dict[str, Any]) -> dict[str, Any]:
 
 
 def schemas() -> dict[str, dict[str, Any]]:
-    """Give {published path pattern: its schema}, from the manifest."""
+    """Give {published path pattern: its schema}, from the manifest.
+
+    Returns:
+        The schema of each published data path, keyed by its path pattern.
+
+    """
     m = load()
     version = json.loads(
         files("nemik.data").joinpath("field-manifest.json").read_text()
@@ -125,7 +140,12 @@ def schemas() -> dict[str, dict[str, Any]]:
 
 
 def schema_path(pattern: str) -> str:
-    """Where the static build publishes the schema for a data path pattern."""
+    """Where the static build publishes the schema for a data path pattern.
+
+    Returns:
+        The path under schema/, with `<repo>` written as `repo` and a .schema.json suffix.
+
+    """
     return "schema/" + pattern.replace("<repo>", "repo") + ".schema.json"
 
 
@@ -135,6 +155,10 @@ def openapi() -> dict[str, Any]:
     Every published data path is a GET whose 200 response refers to the schema the same build
     publishes beside it (OpenAPI 3.1 takes JSON Schema 2020-12 as is). hashes.json and the graph
     pieces (W414, W415) are listed for the client that refetches only what changed.
+
+    Returns:
+        The OpenAPI 3.1 document.
+
     """
     version = json.loads(
         files("nemik.data").joinpath("field-manifest.json").read_text()

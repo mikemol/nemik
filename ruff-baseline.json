@@ -12,7 +12,6 @@
  },
  "src/nemik/adapter.py": {
   "C901": 1,
-  "DOC201": 6,
   "PLC0415": 2,
   "PLR0912": 1,
   "PLR0915": 1,
@@ -23,12 +22,9 @@
   "PLR0913": 1,
   "S101": 2
  },
- "src/nemik/apischema.py": {
-  "DOC201": 5
- },
  "src/nemik/blocks.py": {
   "C901": 2,
-  "DOC201": 9,
+  "DOC201": 4,
   "FBT001": 1,
   "FBT002": 1,
   "FBT003": 1,
@@ -42,7 +38,6 @@
   "T201": 6
  },
  "src/nemik/cachestore.py": {
-  "DOC201": 3,
   "S301": 1,
   "S403": 1
  },
@@ -61,7 +56,6 @@
   "T201": 8
  },
  "src/nemik/calwrite.py": {
-  "ANN001": 1,
   "DOC201": 9,
   "FBT001": 2,
   "PLR0913": 1,
@@ -76,7 +70,6 @@
   "PLC0415": 1
  },
  "src/nemik/check.py": {
-  "ANN001": 1,
   "C901": 1,
   "DOC201": 5,
   "DOC402": 1,
@@ -290,7 +283,6 @@
   "T201": 4
  },
  "src/nemik/wake.py": {
-  "ANN001": 1,
   "C901": 1,
   "DOC201": 8,
   "E501": 1,

@@ -40,7 +40,12 @@ STRAY = 3600  # seconds before a temp file a killed run left behind is swept
 
 
 def stamp() -> str:
-    """Stamp what the cached values were computed by: the shapes, the cache code, the engines."""
+    """Stamp what the cached values were computed by: the shapes, the cache code, the engines.
+
+    Returns:
+        The SHA-256 hex digest of the format, the watched files and the engine versions.
+
+    """
     digest = hashlib.sha256(f"format {FORMAT}".encode())
     for name in WATCHED:
         digest.update(files("nemik").joinpath(name).read_bytes())
@@ -69,7 +74,12 @@ def content_key(parts: list[bytes]) -> str:
 
 
 def save(directory: Path, name: str = NAME) -> int:
-    """Write both caches under `directory` atomically; returns the bytes written."""
+    """Write both caches under `directory` atomically; returns the bytes written.
+
+    Returns:
+        The number of bytes written.
+
+    """
     directory.mkdir(parents=True, exist_ok=True)
     blob = {
         "stamp": stamp(),
@@ -84,7 +94,12 @@ def save(directory: Path, name: str = NAME) -> int:
 
 
 def load(directory: Path, name: str = NAME) -> bool:
-    """Restore both caches from `directory`; False (a cold start) for anything not this code's."""
+    """Restore both caches from `directory`; False (a cold start) for anything not this code's.
+
+    Returns:
+        True when both caches were restored, False for a cold start.
+
+    """
     try:
         blob = pickle.loads((directory / name).read_bytes())
         if blob["stamp"] != stamp():

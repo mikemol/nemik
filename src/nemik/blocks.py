@@ -35,7 +35,12 @@ HOST_BLOCK = re.compile(r"host:[A-Za-z0-9][A-Za-z0-9._@-]*")
 
 
 def ref(node: Node) -> str:
-    """Name the citable form of a waypoint IRI: `<repo>:W<n>`."""
+    """Name the citable form of a waypoint IRI: `<repo>:W<n>`.
+
+    Returns:
+        The `<repo>:W<n>` citation of the node.
+
+    """
     repo, _, sym = str(node).removeprefix(BASE).partition("/")
     return f"{repo}:{sym}"
 
@@ -94,6 +99,11 @@ def inbound(g: Graph, letters: bool = False) -> list[dict[str, Any]]:
     With `letters`, each row also carries the letter files the waiting waypoint cites (nemik:W275):
     the CLI shows them; the served and published documents leave them out, since a file name can
     say more than the title it sits beside.
+
+    Returns:
+        One row per waiting waypoint (blocked, title, blocked_on, blocker, claimed_by, and the
+        letters when asked), sorted by blocker, blocked and claimed_by.
+
     """
     out: list[dict[str, Any]] = []
     for node, _, target in g.triples((None, NEMIK.waitsFor, None)):
@@ -135,6 +145,10 @@ def ready_behind_open(g: Graph) -> dict[Node, list[Node]]:
     Umbrellas (2+ open children of its own repo) that ReadyUmbrella already reports are left out.
     A pure reading of the graph, so annotate (the check) and serve (the view's mark, nemik:W477)
     agree.
+
+    Returns:
+        The enablers of each such ready card, sorted by name, keyed by the card.
+
     """
     out: dict[Node, list[Node]] = {}
     for node in g.subjects(OSLC_CM.state, NEMIK.Ready):
@@ -313,6 +327,10 @@ def dependency_cycles(g: Graph) -> list[tuple[Node, ...]]:
     mtools:W1134 found a ring of three ready cards blocked into a deadlock. Each cycle is named
     from its earliest card, as the fleet's shared walker (mikemol.frontier.walk, mtools:W1127)
     finds it. A ring can never land.
+
+    Returns:
+        One tuple of card IRIs per cycle.
+
     """
     from mikemol.frontier.walk import frontier as walk
 
@@ -458,6 +476,13 @@ def errand_repos(text: str | None = None) -> frozenset[str]:
 
     The acts are such as "apply for Medicaid" or a "drill" session, declared under [errand] in
     rank-weights.toml: no tool to write.
+
+    Args:
+        text: The rank-weights TOML, or None for the one that ships with the package.
+
+    Returns:
+        The repos listed under [errand], empty when there are none.
+
     """
     import tomllib
     from importlib.resources import files
