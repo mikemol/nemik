@@ -38,7 +38,7 @@ def limits(text: str | None = None) -> tuple[float, float, int]:
     """Read the declared (rate per day, burst, window days); 50, 150, 14 if the table is absent."""
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
-    t = tomllib.loads(text).get("pacing", {})
+    t: dict[str, float] = tomllib.loads(text).get("pacing", {})
     return (
         float(t.get("rate", 50)),
         float(t.get("burst", 150)),

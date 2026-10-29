@@ -39,7 +39,7 @@ def thresholds(text: str | None = None) -> dict[str, tuple[float, float]]:
     """Read the declared `[health]` table: for each signal, its (amber, red) floor."""
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
-    table = tomllib.loads(text).get("health", {})
+    table: dict[str, list[float]] = tomllib.loads(text).get("health", {})
     return {s: (float(table[s][0]), float(table[s][1])) for s in SIGNALS if s in table}
 
 

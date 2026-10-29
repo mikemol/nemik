@@ -117,7 +117,7 @@ def priority(salience: float, text: str | None = None) -> int:
 
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
-    steps = tomllib.loads(text).get("ask_priority", {})
+    steps: dict[str, int] = tomllib.loads(text).get("ask_priority", {})
     for floor, level in sorted(
         ((float(k), int(v)) for k, v in steps.items()), reverse=True
     ):

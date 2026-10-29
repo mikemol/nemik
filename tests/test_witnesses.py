@@ -1,11 +1,17 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
+from __future__ import annotations
+
 import os
 import shutil
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik.witnesses import witness
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 # nemik:W98: Bazel hands the test a pinned opa as $NEMIK_OPA; the host falls back to PATH.
 # nemik:W603: a skip is not a gate. When NEMIK_OPA is NAMED (Bazel and the image stage always name
@@ -25,7 +31,7 @@ def test_a_named_opa_exists() -> None:
         )
 
 
-def test_file_witness_true_false(tmp_path) -> None:
+def test_file_witness_true_false(tmp_path: Path) -> None:
     p = tmp_path / "flag"
     q = f'input.file["{p}"].exists'
     assert witness(q)[0] == "false"
@@ -59,7 +65,7 @@ def test_time_witness_uses_input_now() -> None:
     assert witness(q, now=datetime(2026, 10, 2, tzinfo=UTC))[0] == "true"
 
 
-def test_git_ref_witness(tmp_path, monkeypatch: pytest.MonkeyPatch) -> None:
+def test_git_ref_witness(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     import subprocess
 
     repo = tmp_path / "r"
@@ -90,7 +96,7 @@ def test_git_ref_witness(tmp_path, monkeypatch: pytest.MonkeyPatch) -> None:
 
 
 def test_runner_applies_only_holding_witnesses(
-    tmp_path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
     import json
 
@@ -202,7 +208,7 @@ def test_unset_endpoint_is_undefined(monkeypatch: pytest.MonkeyPatch) -> None:
 
 
 def test_apply_writes_letters_to_waiting_repos(
-    tmp_path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
     import json
 

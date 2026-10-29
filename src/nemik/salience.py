@@ -365,7 +365,7 @@ def table_weights(name: str, text: str | None = None) -> dict[str, Fraction]:
 
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
-    table = tomllib.loads(text).get(name, {})
+    table: dict[str, object] = tomllib.loads(text).get(name, {})
     return {str(gate): Fraction(str(w)) for gate, w in table.items()}
 
 

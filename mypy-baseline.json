@@ -58,8 +58,7 @@
  },
  "src/nemik/health.py": {
   "explicit-any": 1,
-  "misc": 11,
-  "var-annotated": 1
+  "misc": 8
  },
  "src/nemik/history.py": {
   "misc": 167,
@@ -85,8 +84,7 @@
   "misc": 37
  },
  "src/nemik/pacing.py": {
-  "misc": 12,
-  "var-annotated": 1
+  "misc": 5
  },
  "src/nemik/pieces.py": {
   "explicit-any": 5,
@@ -102,9 +100,8 @@
   "var-annotated": 1
  },
  "src/nemik/salience.py": {
-  "misc": 25,
-  "type-arg": 2,
-  "var-annotated": 1
+  "misc": 20,
+  "type-arg": 2
  },
  "src/nemik/score.py": {
   "call-overload": 1,
@@ -131,9 +128,8 @@
   "misc": 4
  },
  "src/nemik/vtodo.py": {
-  "misc": 84,
-  "type-arg": 2,
-  "var-annotated": 1
+  "misc": 79,
+  "type-arg": 2
  },
  "src/nemik/wake.py": {
   "misc": 221,
@@ -370,8 +366,8 @@
   "misc": 11
  },
  "tests/test_witnesses.py": {
-  "misc": 65,
-  "no-untyped-def": 6,
+  "misc": 30,
+  "no-untyped-def": 2,
   "type-arg": 1
  },
  "tests/test_workflows.py": {
