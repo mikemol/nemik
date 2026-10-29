@@ -23,6 +23,8 @@ from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import sync_playwright
 
 if TYPE_CHECKING:
+    from collections.abc import Iterator
+
     from playwright.sync_api import Browser, Page, Playwright
 
 Scheme = Literal["light", "dark"]  # the colour schemes the parametrized tests take
@@ -133,7 +135,7 @@ METRICS = """() => {
 
 
 @pytest.fixture(scope="module")
-def server():
+def server() -> "Iterator[str]":
     """nemik:W1060: the server binds its own port and says so (webpage.served), not a picked one.
 
     Yields:

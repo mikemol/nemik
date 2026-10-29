@@ -243,8 +243,7 @@
   "misc": 7
  },
  "tests/test_layout.py": {
-  "misc": 267,
-  "no-untyped-def": 1
+  "misc": 266
  },
  "tests/test_lifecycle_scheme.py": {
   "misc": 9,
