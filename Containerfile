@@ -56,7 +56,7 @@ ADD --checksum=sha256:a9da028861a0cf789ff25c2fed45f5f1aaf969ed9247835b6a7821a4f7
     https://cdn.playwright.dev/builds/cft/153.0.8010.12/linux64/chrome-headless-shell-linux64.zip /tmp/chs.zip
 # nemik:W904: the PDF tests draw the graph's SVG with rsvg-convert (librsvg2-bin), test stage only.
 RUN apt-get update && apt-get install -y --no-install-recommends unzip librsvg2-bin && unzip -q /tmp/chs.zip -d /opt && rm /tmp/chs.zip \
-    && rm -rf /var/lib/apt/lists/*
+    && rsvg-convert --version && rm -rf /var/lib/apt/lists/*
 ENV NEMIK_CHROMIUM=/opt/chrome-headless-shell-linux64/chrome-headless-shell
 # nemik:W660: each long step stamps the time it starts and ends, so a run the server cancels leaves a log
 # that names the step it was in (the image build was cancelled 20:00 after each start, 2026-10-18).

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1255,
+  "counter": 1256,
   "waypoints": [
     {
       "symbol": "W1",
@@ -16224,7 +16224,8 @@
       "manifest": [
         "docs/climate-interventions.md"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "weight": 3
     },
     {
       "symbol": "W751",
@@ -18747,7 +18748,8 @@
         "tests/test_webpage_hangs.py"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": null,
+      "weight": 9
     },
     {
       "symbol": "W847",
@@ -20301,7 +20303,8 @@
         "docs/vector-web-view.md"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": null,
+      "weight": 24
     },
     {
       "symbol": "W903",
@@ -20656,7 +20659,8 @@
       "manifest": [
         "docs/evidence-standards.md"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "weight": 10
     },
     {
       "symbol": "W911",
@@ -20706,7 +20710,8 @@
             "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify 47fd2d1f-8a8a-4cf6-ad8f-90c048489f06 --claim the operator said: And don't forget our grounding in sre, agile and observability principles --line 91591"
           }
         }
-      ]
+      ],
+      "weight": 10
     },
     {
       "symbol": "W912",
@@ -20752,7 +20757,8 @@
         "src/nemik/witnesses.py",
         "tests/test_witness_mint.py"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "weight": 30
     },
     {
       "symbol": "W914",
@@ -22059,7 +22065,8 @@
         "tests/test_forecast_shingle.py"
       ],
       "size_class": "medium",
-      "completed": null
+      "completed": null,
+      "weight": 12
     },
     {
       "symbol": "W967",
@@ -22137,7 +22144,8 @@
         "src/nemik/withheld.py",
         "tests/test_collapse_payload.py"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "weight": 26
     },
     {
       "symbol": "W970",
@@ -22314,7 +22322,8 @@
         "src/nemik/cardcritical.py",
         "tests/test_cardcritical.py"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "weight": 17
     },
     {
       "symbol": "W977",
@@ -22431,7 +22440,8 @@
       "manifest": [
         "mypy-baseline.json"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "weight": 4
     },
     {
       "symbol": "W982",
@@ -22453,7 +22463,8 @@
         "tests/test_retro_ingest.py",
         "docs/retro-audit.md"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "weight": 16
     },
     {
       "symbol": "W983",
@@ -22778,7 +22789,7 @@
       "last_worked": "2026-10-24T20:10:53Z",
       "ticks_blocked": 0,
       "completed": null,
-      "weight": 100,
+      "weight": 5,
       "manifest": [
         "src/nemik/adapter.py",
         "tests/test_pace_ingest.py"
@@ -22952,7 +22963,7 @@
           }
         }
       ],
-      "weight": 100,
+      "weight": 8,
       "manifest": [
         "src/nemik/ratchetpace.py",
         "src/nemik/pacepublish.py",
@@ -23253,7 +23264,7 @@
         }
       ],
       "completed": null,
-      "weight": 100,
+      "weight": 11,
       "manifest": [
         "src/nemik/data/shapes.ttl",
         "src/nemik/data/nemik.ttl",
@@ -23496,7 +23507,7 @@
       "caused_by": "W980",
       "last_worked": "2026-10-27T01:57:12Z",
       "ticks_blocked": 0,
-      "weight": 1000,
+      "weight": 29,
       "manifest": [
         "src/nemik/adoption.py",
         "ruff-baseline.json"
@@ -23550,7 +23561,8 @@
         "tests/test_readstrace.py"
       ],
       "size_class": "medium",
-      "completed": null
+      "completed": null,
+      "weight": 20
     },
     {
       "symbol": "W1017",
@@ -23642,7 +23654,8 @@
         "deploy/deployment.yaml",
         "tests/test_deploy_manifest.py"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "weight": 13
     },
     {
       "symbol": "W1021",
@@ -23692,7 +23705,8 @@
         "src/nemik/serve.py",
         "tests/test_view_hostroot.py"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "weight": 18
     },
     {
       "symbol": "W1023",
@@ -23851,7 +23865,7 @@
       "last_worked": "2026-10-25T02:47:10Z",
       "ticks_blocked": 0,
       "completed": null,
-      "weight": 100,
+      "weight": 14,
       "manifest": [
         "src/nemik/pacepublish.py",
         "src/nemik/check.py",
@@ -23909,7 +23923,8 @@
         "src/nemik/web/panels.js",
         "tests/test_core_combine.py"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "weight": 24
     },
     {
       "symbol": "W1029",
@@ -24024,7 +24039,8 @@
         "tests/test_endpoint_vm_export.py"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": null,
+      "weight": 7
     },
     {
       "symbol": "W1033",
@@ -24177,7 +24193,8 @@
         "src/nemik/ratchetseries.py",
         "tests/test_guessed_series.py"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "weight": 1
     },
     {
       "symbol": "W1039",
@@ -24279,7 +24296,8 @@
         "tests/test_roundof.py",
         "tests/test_roundcli.py"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "weight": 1
     },
     {
       "symbol": "W1042",
@@ -24502,7 +24520,8 @@
       "manifest": [
         "docs/courier-read-path.md"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "weight": 28
     },
     {
       "symbol": "W1049",
@@ -24595,7 +24614,8 @@
         "docs/shared-file-versions.md"
       ],
       "size_class": "medium",
-      "completed": null
+      "completed": null,
+      "weight": 1
     },
     {
       "symbol": "W1053",
@@ -24770,7 +24790,8 @@
         "tests/test_landcost.py"
       ],
       "size_class": "medium",
-      "completed": null
+      "completed": null,
+      "weight": 31
     },
     {
       "symbol": "W1057",
@@ -25036,7 +25057,8 @@
           },
           "mtools:reason": "If something takes longer than 50% of a wall timeout, it should be sharded before its next run."
         }
-      ]
+      ],
+      "weight": 21
     },
     {
       "symbol": "W1064",
@@ -25186,7 +25208,8 @@
         "tests/test_containerfile.py",
         "docs/image-pinning.md"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "weight": 1
     },
     {
       "symbol": "W1071",
@@ -25300,7 +25323,8 @@
         "docs/per-test-targets.md"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": null,
+      "weight": 32
     },
     {
       "symbol": "W1076",
@@ -25425,7 +25449,8 @@
         "src/nemik/rank.py",
         "tests/test_rank.py"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "weight": 1
     },
     {
       "symbol": "W1082",
@@ -25475,7 +25500,8 @@
         "tests/test_workmarks.py"
       ],
       "size_class": "medium",
-      "completed": null
+      "completed": null,
+      "weight": 21
     },
     {
       "symbol": "W1084",
@@ -25727,7 +25753,8 @@
         "skills/nemik/SKILL.md",
         "tests/test_blocked_on_done.py"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "weight": 21
     },
     {
       "symbol": "W1094",
@@ -25752,7 +25779,8 @@
         "skills/nemik/SKILL.md",
         "tests/test_stale_ledger.py"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "weight": 21
     },
     {
       "symbol": "W1095",
@@ -25815,7 +25843,8 @@
         "docs/builder-memory.md"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": null,
+      "weight": 25
     },
     {
       "symbol": "W1097",
@@ -25867,7 +25896,8 @@
         "src/nemik/serve.py",
         "tests/test_ledger_effort.py"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "weight": 23
     },
     {
       "symbol": "W1099",
@@ -25892,7 +25922,8 @@
         "src/nemik/blocks.py",
         "tests/test_blocks_activity.py"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "weight": 23
     },
     {
       "symbol": "W1100",
@@ -25917,7 +25948,8 @@
         "src/nemik/metrics.py",
         "tests/test_metrics_activity.py"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "weight": 23
     },
     {
       "symbol": "W1101",
@@ -25942,7 +25974,8 @@
         "src/nemik/history.py",
         "tests/test_history_activity.py"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "weight": 23
     },
     {
       "symbol": "W1102",
@@ -25968,7 +26001,8 @@
         "src/nemik/trs.py",
         "tests/test_idle_summary.py"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "weight": 23
     },
     {
       "symbol": "W1103",
@@ -26048,7 +26082,8 @@
         "skills/nemik/SKILL.md",
         "tests/test_darkrepos.py"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "weight": 21
     },
     {
       "symbol": "W1107",
@@ -26098,7 +26133,8 @@
         "src/nemik/pacerun.py",
         "tests/test_pace_rows.py"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "weight": 21
     },
     {
       "symbol": "W1109",
@@ -26633,7 +26669,8 @@
           },
           "mtools:reason": "the operator's find(1)-shaped filter language for nemik-history, relayed by luthen-observability:W1692"
         }
-      ]
+      ],
+      "weight": 21
     },
     {
       "symbol": "W1129",
@@ -26831,7 +26868,8 @@
         "tests/test_roundof.py"
       ],
       "size_class": "medium",
-      "completed": null
+      "completed": null,
+      "weight": 33
     },
     {
       "symbol": "W1137",
@@ -26936,7 +26974,8 @@
         "src/nemik/pacerun.py",
         "tests/test_pace_contract.py"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "weight": 27
     },
     {
       "symbol": "W1140",
@@ -26960,7 +26999,8 @@
         "tests/test_piece_fetch_once.py"
       ],
       "size_class": "medium",
-      "completed": null
+      "completed": null,
+      "weight": 21
     },
     {
       "symbol": "W1141",
@@ -27011,7 +27051,8 @@
       "manifest": [
         "BUILD.bazel"
       ],
-      "size_class": "large"
+      "size_class": "large",
+      "weight": 21
     },
     {
       "symbol": "W1142",
@@ -27569,7 +27610,8 @@
       "manifest": [
         "docs/estate-w39-answer.md"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "weight": 1
     },
     {
       "symbol": "W1164",
@@ -27746,7 +27788,8 @@
         "tests/test_inbound_issues_cli.py"
       ],
       "size_class": "medium",
-      "completed": null
+      "completed": null,
+      "weight": 19
     },
     {
       "symbol": "W1170",
@@ -28054,7 +28097,8 @@
         "tests/test_wake_alarms.py",
         "mypy-baseline.json",
         "ruff-baseline.json"
-      ]
+      ],
+      "weight": 21
     },
     {
       "symbol": "W1179",
@@ -28078,7 +28122,8 @@
         "src/nemik/tracker.py",
         "codon-baseline.json"
       ],
-      "completed": null
+      "completed": null,
+      "weight": 21
     },
     {
       "symbol": "W1180",
@@ -28205,7 +28250,8 @@
         "ruff-baseline.json"
       ],
       "size_class": "large",
-      "completed": null
+      "completed": null,
+      "weight": 1
     },
     {
       "symbol": "W1185",
@@ -28252,7 +28298,8 @@
         "tests/test_calendar_boundary.py",
         "mypy-baseline.json"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "weight": 1
     },
     {
       "symbol": "W1187",
@@ -28282,7 +28329,8 @@
         "mypy-baseline.json",
         "ruff-baseline.json"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "weight": 21
     },
     {
       "symbol": "W1188",
@@ -28531,7 +28579,8 @@
         "tests/test_pace_build.py"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": null,
+      "weight": 1
     },
     {
       "symbol": "W1198",
@@ -28961,11 +29010,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Run the one fresh cold reviewer when the warm reviewer declares a fixpoint (a pass that returns nothing new), with the brief it asked for (rules 11, 12 and 13 first, and the instruments it named from memory: file mtime and git log %cI), then send the result to the warm reviewer. Switch the close to --tick-close --reviewing AGENT-ID when the pinned writer carries mtools:W2038",
-      "evidence": "2026-10-28: G0 (precommit, written before the tick this card advances; the reviewer did not yet exist for the earlier rounds of 2026-10-28): this tick advances W1215 (spawn the warm reviewer) and W846 (stack619 entry 1) with W1213. Actuator: Agent spawn of one general-purpose reviewer seeded with the reviewed-loop and retrospective-ritual skills; mikemol-commit --stack stack619. Sensor: the reviewer's first reply naming both skills; --in-gate lists stack619; the gate output. Expected: the reviewer replies 'ready' without touching the repo; stack619 lands with ruff 2404 to 2399 and W846 stays open. | 2026-10-28: 2026-10-28: warm reviewer ad347cd spawned (reply 'ready'); first pass returned and recorded as nemik:R1. DEVIATION RETIRED: the tick closed with --blocked-by W1215 and --reason 'warm reviewer in flight' (github-8f's interim, read in closegate.py judge() lines 283-297), accepted: 'closing on a named block (blocked by W1215)'. The earlier G0/G1 went out before the close; later rounds close first. The first-class mode is asked of mtools by github-8f. | 2026-10-28: G0 (precommit, before tick-open, 2026-10-28): this tick advances W1215 (R2-F4b, the standing-set edit). Actuator: --standing-set FILE with one added rule: while the warm reviewer runs, close with --tick-close ... --reason 'warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87)' and send G0/G1 right after, then idle; use mtools:W2038 --reviewing once the pin carries it. Sensor: --standing prints the new rule; the close is accepted; the reviewer returns. Expected: standing rule count 8 to 9; close accepted ('closing on a named block'); stack619 verdict arrives this tick or the next. | 2026-10-28: 2026-10-28: R2-F4b done in the queue: the standing set now has rule 9 (close with --reason 'warm reviewer in flight ... github:W71 ...' only when G0/G1 follow and the session idles; a close with no hand-back after it is a dodge; switch to --reviewing once the pin carries mtools:W2038). Read back with --standing (standing 9 prints it). The queue file carrying it reaches main with the next stack. | 2026-10-28: 2026-10-28 R4-F7 and R4-F8 witness: the backgrounded tick-open output was read after the close. Readings: acquired by claude-nemik, MOVED x4 on W924's shardselect files (a base-not-HEAD notice), BLOCKER W743 <- nemik:W751 ready -> blocked (my W846 block), 1 nudge due (mtools:W1980, 1 card behind it: W1198), inbound: no unclaimed asks, check OK 1220 of 1220, ready 62 (take W750, W902, W910), W846 and W1213 left working (GATING 1793197242913924914), standing 1-9 printed with rule 9 present. Nothing was missed by closing before reading it. Cause of the 120 s overrun is not measured: the call reads a dozen peer queues and the host was under gate load, so I will time it next tick. In flight means from the send until the reviewer's hand-back. Rule 9 is quoted whole in the G1 that follows. | 2026-10-28: 2026-10-28 R4-F7 cause measured: a foreground --tick-open takes 2m21s real (2m04s user), CPU-bound. Its HOOK nemik-inbound alone is 47.5 s real (33.9 s user), so one third of it. Carded W1222 (cache the fleet graph by queue hashes). The remaining two thirds is the writer's own cross-repo block re-judging (KEPT lines read a dozen peer queues), mtools'. Run --tick-open in the background from now, and read its output before the close. | 2026-10-28: 2026-10-28 R12-F27 RECOMPUTED with landing stamps from git reflog (a commit's own date is the gate's BEGIN time, which I once read as a landing time; github-8f's reflog read corrected it): landings 27d4605 = 11:45:32 -0400 = 15:45:32Z; 9991b7e 16:29:44Z; 1610ae9 (and 84a80d0) 17:17:21Z; 2837cad 17:32:18Z; 2d0a841 (and 8fd63db) 18:46:29Z. EMPTY-GATE INTERVALS (wall): (a) 17:32:18Z to the stack626 submit 18:14:58Z = 42 min 40 s; (b) 18:46:29Z to the stack627 submit 19:01:13Z = 14 min 44 s. Cause of (b), with the stamps I have: stack626 had to land before the improved tools/rewrap.py and tests/test_rewrap.py (files 626 carried) could replace them; my first look at the gate after the landing read 18:47:13Z, the bazel check of seven targets including the Codon census started at about 18:49:51Z (the date printed right after launching it) and its notification arrived before 19:01:13Z (end stamp not read), so the wait is: about 3 min 22 s to notice the landing and move the files in, then the check, and the check could not start before the files were in place. It was NOT possible to run the check during 626's gate, because the tool and its test under check did not exist in the tree yet. Gate durations recomputed from the same stamps: stack620 15:10:29Z to 15:45:32Z = 35 min 3 s; stack621 15:45:37Z to 16:29:44Z = 44 min 7 s; stack622 16:29:53Z to 17:17:21Z = 47 min 28 s; stack624 17:17:37Z to 17:32:18Z = 14 min 41 s; stack626 18:14:59Z to 18:46:29Z = 31 min 30 s.",
+      "evidence": "2026-10-28: G0 (precommit, written before the tick this card advances; the reviewer did not yet exist for the earlier rounds of 2026-10-28): this tick advances W1215 (spawn the warm reviewer) and W846 (stack619 entry 1) with W1213. Actuator: Agent spawn of one general-purpose reviewer seeded with the reviewed-loop and retrospective-ritual skills; mikemol-commit --stack stack619. Sensor: the reviewer's first reply naming both skills; --in-gate lists stack619; the gate output. Expected: the reviewer replies 'ready' without touching the repo; stack619 lands with ruff 2404 to 2399 and W846 stays open. | 2026-10-28: 2026-10-28: warm reviewer ad347cd spawned (reply 'ready'); first pass returned and recorded as nemik:R1. DEVIATION RETIRED: the tick closed with --blocked-by W1215 and --reason 'warm reviewer in flight' (github-8f's interim, read in closegate.py judge() lines 283-297), accepted: 'closing on a named block (blocked by W1215)'. The earlier G0/G1 went out before the close; later rounds close first. The first-class mode is asked of mtools by github-8f. | 2026-10-28: G0 (precommit, before tick-open, 2026-10-28): this tick advances W1215 (R2-F4b, the standing-set edit). Actuator: --standing-set FILE with one added rule: while the warm reviewer runs, close with --tick-close ... --reason 'warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87)' and send G0/G1 right after, then idle; use mtools:W2038 --reviewing once the pin carries it. Sensor: --standing prints the new rule; the close is accepted; the reviewer returns. Expected: standing rule count 8 to 9; close accepted ('closing on a named block'); stack619 verdict arrives this tick or the next. | 2026-10-28: 2026-10-28: R2-F4b done in the queue: the standing set now has rule 9 (close with --reason 'warm reviewer in flight ... github:W71 ...' only when G0/G1 follow and the session idles; a close with no hand-back after it is a dodge; switch to --reviewing once the pin carries mtools:W2038). Read back with --standing (standing 9 prints it). The queue file carrying it reaches main with the next stack. | 2026-10-28: 2026-10-28 R4-F7 and R4-F8 witness: the backgrounded tick-open output was read after the close. Readings: acquired by claude-nemik, MOVED x4 on W924's shardselect files (a base-not-HEAD notice), BLOCKER W743 <- nemik:W751 ready -> blocked (my W846 block), 1 nudge due (mtools:W1980, 1 card behind it: W1198), inbound: no unclaimed asks, check OK 1220 of 1220, ready 62 (take W750, W902, W910), W846 and W1213 left working (GATING 1793197242913924914), standing 1-9 printed with rule 9 present. Nothing was missed by closing before reading it. Cause of the 120 s overrun is not measured: the call reads a dozen peer queues and the host was under gate load, so I will time it next tick. In flight means from the send until the reviewer's hand-back. Rule 9 is quoted whole in the G1 that follows. | 2026-10-28: 2026-10-28 R4-F7 cause measured: a foreground --tick-open takes 2m21s real (2m04s user), CPU-bound. Its HOOK nemik-inbound alone is 47.5 s real (33.9 s user), so one third of it. Carded W1222 (cache the fleet graph by queue hashes). The remaining two thirds is the writer's own cross-repo block re-judging (KEPT lines read a dozen peer queues), mtools'. Run --tick-open in the background from now, and read its output before the close. | 2026-10-28: 2026-10-28 R12-F27 RECOMPUTED with landing stamps from git reflog (a commit's own date is the gate's BEGIN time, which I once read as a landing time; github-8f's reflog read corrected it): landings 27d4605 = 11:45:32 -0400 = 15:45:32Z; 9991b7e 16:29:44Z; 1610ae9 (and 84a80d0) 17:17:21Z; 2837cad 17:32:18Z; 2d0a841 (and 8fd63db) 18:46:29Z. EMPTY-GATE INTERVALS (wall): (a) 17:32:18Z to the stack626 submit 18:14:58Z = 42 min 40 s; (b) 18:46:29Z to the stack627 submit 19:01:13Z = 14 min 44 s. Cause of (b), with the stamps I have: stack626 had to land before the improved tools/rewrap.py and tests/test_rewrap.py (files 626 carried) could replace them; my first look at the gate after the landing read 18:47:13Z, the bazel check of seven targets including the Codon census started at about 18:49:51Z (the date printed right after launching it) and its notification arrived before 19:01:13Z (end stamp not read), so the wait is: about 3 min 22 s to notice the landing and move the files in, then the check, and the check could not start before the files were in place. It was NOT possible to run the check during 626's gate, because the tool and its test under check did not exist in the tree yet. Gate durations recomputed from the same stamps: stack620 15:10:29Z to 15:45:32Z = 35 min 3 s; stack621 15:45:37Z to 16:29:44Z = 44 min 7 s; stack622 16:29:53Z to 17:17:21Z = 47 min 28 s; stack624 17:17:37Z to 17:32:18Z = 14 min 41 s; stack626 18:14:59Z to 18:46:29Z = 31 min 30 s. | 2026-10-29: 2026-10-29 R25-F51: nemik-rank nemik --apply stored 69 weights (tick-open had printed UNSCORED 201; the count after is printed by the next tick-open). nemik-rank --round, 6 of 70 cards: 1 W1136 (derive the round ceiling from luthen's W1645 series), 2 W1075 (an idle-host staging figure for one test target and splitting it: directly about W1245's timeouts), 3 W1056 (a cost field per card), 4 W913, 5 W1014, 6 W1048. The card I chose, W1254 (a mypy paydown), is not in that round: the gate refuses a stack that lowers no owed ratchet (mypy owes 109, observed 61) and line 36 puts paydown ahead of feature work while behind, so the paydown stacks lead; W1075 and W1136 are the next candidates and W1075 bears on W1245. The 1 nudge due at tick-open is not identified (--bump-blocked --verbose not run, it counts ticks); the peer messages I sent this session (mtools-ad W1246/W1179/W1245, github-8f) are the nudges.",
       "issued_at": "2026-10-28T14:18:51Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-10-28T20:54:35Z",
+      "last_worked": "2026-10-29T01:55:20Z",
       "ticks_blocked": 0,
       "warrants": [
         {
@@ -28998,7 +29047,8 @@
       "manifest": [
         ".claude/paths-forward.json"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "weight": 22
     },
     {
       "symbol": "W1216",
@@ -29023,7 +29073,8 @@
         "tests/test_import_graph.py",
         "BUILD.bazel"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "weight": 15
     },
     {
       "symbol": "W1217",
@@ -29163,7 +29214,8 @@
       "manifest": [
         "src/nemik/blocks_cli.py"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "weight": 1
     },
     {
       "symbol": "W1223",
@@ -29272,7 +29324,8 @@
       "manifest": [
         ".claude/tick-hooks.txt"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "weight": 1
     },
     {
       "symbol": "W1227",
@@ -29433,7 +29486,8 @@
         ".claude/paths-forward.json"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": null,
+      "weight": 1
     },
     {
       "symbol": "W1232",
@@ -29454,7 +29508,8 @@
       "manifest": [
         "BUILD.bazel"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "weight": 1
     },
     {
       "symbol": "W1233",
@@ -29721,7 +29776,8 @@
       "minted_during": "interrupt",
       "caused_by": "W1225",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 2
     },
     {
       "symbol": "W1241",
@@ -29733,13 +29789,32 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
+      "next_bounded_step": "Hand-fix the 14 tests, tools and checks files' D205 findings (a blank line after the summary, or split the first sentence): list from ruff check --select D205 --output-format concise; the 53 src D205 findings are a separate stack (needs the Codon census at the first edit).",
       "evidence": "",
       "issued_at": "2026-10-28T22:03:51Z",
       "minted_during": "interrupt",
       "caused_by": "W1225",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-29T02:30:44Z",
+      "ticks_blocked": 0,
+      "weight": 2,
+      "manifest": [
+        "tests/test_architecture.py",
+        "tests/test_calendar_boundary.py",
+        "tests/test_calendars.py",
+        "tests/test_layout.py",
+        "tests/test_positioning.py",
+        "tests/test_skill.py",
+        "tests/test_vtodo.py",
+        "tests/test_wake_nudge.py",
+        "tests/test_web_render.py",
+        "tests/test_withheld.py",
+        "tests/test_witnesses.py",
+        "tests/test_workflows.py",
+        "tools/gen_pieces_corpus.py",
+        "checks/claims.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "medium"
     },
     {
       "symbol": "W1242",
@@ -29757,7 +29832,8 @@
       "minted_during": "interrupt",
       "caused_by": "W1225",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 2
     },
     {
       "symbol": "W1243",
@@ -29769,13 +29845,28 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
+      "next_bounded_step": "Write the 16 src D103 docstrings by hand from each function's body (none is liftable by tools/liftdoc.py); list from ruff check --select D103 --output-format concise src; src edits: start the Codon census at the first edit.",
       "evidence": "",
       "issued_at": "2026-10-28T22:03:51Z",
       "minted_during": "interrupt",
       "caused_by": "W1225",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-29T02:30:41Z",
+      "ticks_blocked": 0,
+      "weight": 2,
+      "manifest": [
+        "src/nemik/check.py",
+        "src/nemik/history.py",
+        "src/nemik/metrics.py",
+        "src/nemik/overlaps.py",
+        "src/nemik/score.py",
+        "src/nemik/serve.py",
+        "src/nemik/staticserve.py",
+        "src/nemik/vtodo.py",
+        "src/nemik/wake.py",
+        "src/nemik/witnesses.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "medium"
     },
     {
       "symbol": "W1244",
@@ -29801,12 +29892,13 @@
       "completed": null,
       "manifest": [
         "tests/test_salience.py"
-      ]
+      ],
+      "weight": 1
     },
     {
       "symbol": "W1245",
       "title": "Class: gate tests time out under load and pass alone (test_salience, test_layout shard 4) with no failing assertion",
-      "status": "blocked",
+      "status": "working",
       "enables": [],
       "touches": [
         "gate",
@@ -29822,11 +29914,14 @@
       "issued_at": "2026-10-28T22:41:42Z",
       "minted_during": "interrupt",
       "caused_by": "W1244",
-      "last_worked": "2026-10-29T01:49:26Z",
-      "ticks_blocked": 1,
+      "last_worked": "2026-10-29T02:37:21Z",
+      "ticks_blocked": 0,
       "completed": null,
       "manifest": [
-        "BUILD.bazel"
+        "tests/test_page_queue.py",
+        "tests/test_page_landings.py",
+        "tests/test_page_chains.py",
+        "tests/test_list_order_opens_cards.py"
       ],
       "warrants": [
         {
@@ -29921,7 +30016,8 @@
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_salience.py"
-      ]
+      ],
+      "weight": 4
     },
     {
       "symbol": "W1250",
@@ -29939,7 +30035,8 @@
       "minted_during": "interrupt",
       "caused_by": "W1245",
       "last_worked": null,
-      "ticks_blocked": 0
+      "ticks_blocked": 0,
+      "weight": 4
     },
     {
       "symbol": "W1251",
@@ -30013,7 +30110,8 @@
         "src/nemik/calendars.py",
         "mypy-baseline.json"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "weight": 6
     },
     {
       "symbol": "W1254",
@@ -30026,15 +30124,14 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "In stack 641: the counted wrapper in tests/test_flow_cache.py and slow_survey, gated_survey and hit in tests/test_serve_model.py take their wrapped types; remainder: tests/test_memo_audits.py's counted (flow.solve with the ONE default).",
-      "evidence": "",
+      "evidence": "2026-10-29: 2026-10-29: landed in stack 641 as d8282b4 (printed by mikemol-commit), reflog 21:59:41 -0400 = 01:59:41Z, gate green, 7 fresh of 451; began 01:54:14Z (began_ns 1793238853626180051), so 5 min 27 s wall (kind: wall, both stamps derived). ruff 1978 to 1968, mypy 4000 to 3988. Marked ready, not done: tests/test_memo_audits.py's counted wrapper is the remainder.",
       "issued_at": "2026-10-29T01:50:34Z",
       "minted_during": "tick",
       "caused_by": "W1176",
-      "last_worked": "2026-10-29T01:54:09Z",
+      "last_worked": "2026-10-29T02:11:11Z",
       "ticks_blocked": 0,
       "manifest": [
-        "tests/test_flow_cache.py",
-        "tests/test_serve_model.py",
+        "tests/test_memo_audits.py",
         "mypy-baseline.json",
         "ruff-baseline.json"
       ],
@@ -30063,7 +30160,30 @@
         "tests/test_manifest.py",
         "mypy-baseline.json"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "weight": 6
+    },
+    {
+      "symbol": "W1256",
+      "title": "The Containerfile test stage's librsvg2-bin install ends with rsvg-convert --version, so a wrong package name fails the build in seconds",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "Containerfile"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-29T02:10:55Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1252",
+      "last_worked": "2026-10-29T02:11:12Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "Containerfile"
+      ]
     }
   ],
   "residue": [
@@ -32605,7 +32725,100 @@
         "operator": "other"
       },
       "id": "nemik:R25"
+    },
+    {
+      "card": "W1254",
+      "trigger": "pass 24 over the G1 of round 23 returned no new finding: the R25 findings were answered and the rest are open commitments already on cards",
+      "root": "none new; the open commitments are tracked on W1224, W1225, W1231, W1245, W1176, W1179 and W1252 with dates",
+      "contributing": [
+        "the mypy companion ratio varies between 2 and 6 per annotation",
+        "the due nudge is still unidentified"
+      ],
+      "precommit": "the G0 for W1254 (ledger 01:52:38Z) preceded its edits and wrote K as a range [0, 5]",
+      "delta": "K held at 4; ruff -10 and mypy -12 attributed per file; the empty interval was 6 min 40 s",
+      "sustain": [
+        "the stack was queued before the send",
+        "rule 11 and rule 12 followed in the same round",
+        "the ranking was synced and the deviation named"
+      ],
+      "enforcement_layer": "gate",
+      "recurring": false,
+      "one_off": true,
+      "findings": [
+        {
+          "certify_change": "R25-F50 met: stack641 queued before the send; began_ns 1793238853 is 01:54:14Z, so the empty interval after 2c45116 (01:47:34Z) was 6 min 40 s wall"
+        },
+        {
+          "certify_change": "R25-F51 met in form: nemik-rank --apply stored 69 weights, the round of 6 is named and the deviation has its reason; the nudge line is still unidentified and --bump-blocked --verbose is untested"
+        },
+        {
+          "certify_change": "R25-F52 met: the W1245 mark instance is on W1219's evidence and this stack carries its cards' marks; R24-F47 attribution given for this batch (ruff -10, mypy -12 with two Any-flow rows per annotation)"
+        }
+      ],
+      "handoff": {
+        "instrument": "a fresh reader of the stored retros and the standing rules 9 to 14",
+        "channel": "the cold review",
+        "operator": "other"
+      },
+      "id": "nemik:R26"
+    },
+    {
+      "card": "W1215",
+      "trigger": "second cold review (after the warm reviewer's fixpoint at round 23): paydown chosen for cheapness to unblock stacks; W904 marked done before the test-stage dependency W1252 existed; timeouts answered by sharding while the host load is the cause; reviewer output not stored so round yield cannot be counted",
+      "root": "the owed-ratchet refusal rewards the cheapest annotation, W904's witness was not named when it was written, rule 25's 50 percent threshold has no load clause, and the writer accepts a retro with no findings list so no round's value is countable",
+      "contributing": [
+        "rules 11 to 13 still break without enforcement (mtools:W2098)",
+        "W1176 advanced four times without landing before it was atomized",
+        "fresh atomized children were minted without manifests"
+      ],
+      "precommit": "the cold reviewer read the loop prompt, standing rules 1-13, the mirror's retros, 40 ledger lines and 15 commits; not the transcript or MEMORY.md",
+      "delta": "landed 634, 635, 636, 639, 640 since the first cold review; 641 inflight",
+      "sustain": [
+        "the first cold review's findings were answered with cards the same day"
+      ],
+      "enforcement_layer": "gate",
+      "recurring": true,
+      "one_off": false,
+      "findings": [
+        {
+          "finding": "paydown is bought by cheapness to clear the owed-ratchet refusal, and the G0 grades the estimate, not whether a typed boundary was removed or whether the card was chosen for rank",
+          "finding_card": "W1176",
+          "finding_owner": "nemik session",
+          "due": "2026-10-30",
+          "finding_witness": "each paydown G0 states why this card over the rank's top ready cards (nemik-rank --round) or says it was chosen only to clear the ratchet refusal; W1253 (the tomllib reads that remove a boundary) is taken before more test annotations"
+        },
+        {
+          "finding": "W904 went done before the test-stage dependency it needs (W1252 librsvg2-bin) existed; a dependency was added without the stage that runs the suite",
+          "finding_card": "W1252",
+          "finding_owner": "nemik session",
+          "due": "2026-10-29",
+          "finding_witness": "the RUN line that installs librsvg2-bin ends with && rsvg-convert --version; from now a card that adds a tool names, at minting, where the suite runs it (Containerfile test stage) in its manifest and witness"
+        },
+        {
+          "finding": "timeouts are fixed by sharding although the host load is the cause, and rule 25's 50 percent threshold has no load-adjusted clause",
+          "finding_card": "W1245",
+          "finding_owner": "nemik session",
+          "due": "2026-10-30",
+          "finding_witness": "W1075 (idle-host staging figure for one target) or W1245's all-targets table states the load factor and the threshold as timeout over that factor, and W1250 (drum admission, routed to mtools) is chased; the card stays a class card that blocks feature work, not a toggle"
+        },
+        {
+          "finding": "reviewer output is not stored faithfully so no round's yield (findings landed as code) can be counted, and the mirror lags the ledger",
+          "finding_card": "W1246",
+          "finding_owner": "nemik session",
+          "due": "2026-10-30",
+          "finding_witness": "mtools:W2088 lands and renders each finding; a per-round count of findings that landed as code is added to the retro shape or computed from the ledger; until then the G1 quotes the landed count"
+        },
+        {
+          "certify_change": "the cold reviewer could not check the transcript, R1 to R21 contents, MEMORY.md or 641's verdict; the five findings are the reviewer's, three of them already on cards"
+        }
+      ],
+      "handoff": {
+        "instrument": "a fresh reader of the stored retros R22 onward and the standing rules 9 to 14",
+        "channel": "the cold review",
+        "operator": "other"
+      },
+      "id": "nemik:R27"
     }
   ],
-  "retro_counter": 25
+  "retro_counter": 27
 }
