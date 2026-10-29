@@ -3307,3 +3307,11 @@
 2026-10-29T21:45:51Z  status W1014 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-29T22:10:53Z  status W1014 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-29T22:15:04Z  status W1056 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-29T22:23:14Z  tick  W1279 minted    -         "Pay down DOC201 in src: a Returns section written from each function body, in slices of about 12 sites on files no neighbour slice shares"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1014
+2026-10-29T22:42:38Z  tick  W1280 minted    -         "Ask whether the gate can compute the lowered ratchet baseline at land time, or keep baselines per file, so paydown stacks stop serializing on one baseline file"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-42
+2026-10-29T22:44:23Z  status W980 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-29T22:44:23Z  status W1014 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-29T22:44:31Z  status W1279 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-29T22:46:48Z  status W1176 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-29T23:15:01Z  status W846 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-29T23:17:08Z  status W1187 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
