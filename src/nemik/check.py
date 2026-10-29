@@ -1225,6 +1225,16 @@ def run_survey(
 
 
 def main(argv: list[str] | None = None) -> None:
+    """Survey every queue under --root and print its findings, or run one of the modes.
+
+    --realizability, --letters, --committed and --report each print their own report and exit with
+    its code. With none of them the survey runs and the process exits 0 when no queue fails, 1 when
+    one does, and 3 when the survey crashed, with the cause named on stdout (nemik:W1031).
+
+    Args:
+        argv: The command line; None reads sys.argv.
+
+    """
     ap = argparse.ArgumentParser(
         prog="nemik-check", description=(__doc__ or "").splitlines()[0]
     )

@@ -929,6 +929,16 @@ def ledger_rows(root: Path) -> list[str]:
 
 
 def main(argv: list[str] | None = None) -> None:
+    """Print the fleet's Prometheus metrics, or only the families named with --family.
+
+    It surveys the queues under --root, builds each asked family (a run that names only families
+    that need no queue does not read the queues), keeps the flow solves in the user cache when
+    --root is the real root, and prints the rendered text.
+
+    Args:
+        argv: The command line; None reads sys.argv.
+
+    """
     ap = argparse.ArgumentParser(
         prog="nemik-metrics", description=(__doc__ or "").splitlines()[0]
     )
