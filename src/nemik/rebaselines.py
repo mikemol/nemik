@@ -53,6 +53,17 @@ DECLARED: list[Declared] = [
         ),
     ),
     (
+        "substrate",
+        "scripts/selftest_reach_baseline.tsv",
+        466,
+        465,
+        (
+            "the census counted the table's header line as an entry, so a table of 465 rows read "
+            "466 (mtools:W1992, which stops that); no row was fixed by the change; relayed by "
+            "mtools, not read from substrate's file by nemik (nemik:W1269)"
+        ),
+    ),
+    (
         "nemik",
         "ruff-baseline.json",
         1000,

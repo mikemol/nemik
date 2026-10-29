@@ -44,6 +44,18 @@ def test_a_fall_after_the_declared_step_is_still_credited() -> None:
     assert verdict(restarted, WINDOW, 0)[1] == 168 - 160
 
 
+def test_the_substrate_header_fix_is_declared() -> None:
+    """The tsv whose census counted its header line restarts its history at 466 to 465 (W1269)."""
+    table = "scripts/selftest_reach_baseline.tsv"
+    steps = [
+        (old, new)
+        for repo, file, old, new, _ in DECLARED
+        if repo == "substrate" and file == table
+    ]
+    assert steps == [(466, 465)]
+    assert since([470, 466, 465, 464], "substrate", table, DECLARED) == [465, 464]
+
+
 def test_every_declaration_kept_gives_its_reason() -> None:
     """A declaration without a reason is a hidden exemption."""
     assert all(entry[4] for entry in DECLARED)
