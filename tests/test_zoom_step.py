@@ -2,9 +2,7 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W920: one wheel notch zooms the graph by a small step, not by cytoscape's default 2.5x."""
 
-import pytest
 import webpage
-from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import sync_playwright
 
 NOTCH = 100  # a mouse wheel notch is a deltaY of 100 pixels in Chromium
@@ -16,13 +14,9 @@ HIGHEST_STEP = 1.35
 def test_a_wheel_notch_changes_the_zoom_by_a_small_step() -> None:
     """The zoom ratio of one notch in and one notch out is between 5% and 35%."""
     with webpage.served() as url, sync_playwright() as p:
+        # nemik:W846: launched_page names the requests that failed if the page breaks on load
+        browser, page = webpage.launched_page(p, url)
         try:
-            browser = p.chromium.launch()
-        except PlaywrightError as error:
-            pytest.skip(f"chromium unavailable: {error}")
-        try:
-            page = browser.new_page(viewport={"width": 1700, "height": 1250})
-            webpage.load(page, url, webpage.CY_READY)
             before: object = page.evaluate("() => cy.zoom()")
             page.mouse.move(*CENTRE)
             page.mouse.wheel(0, -NOTCH)

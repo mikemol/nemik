@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 710
+      "ticks_blocked": 711
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-18T21:49:48Z",
-      "ticks_blocked": 530,
+      "ticks_blocked": 531,
       "weight": 1
     },
     {
@@ -3520,7 +3520,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 386,
+      "ticks_blocked": 387,
       "weight": 2,
       "completed": null
     },
@@ -4278,7 +4278,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 559,
+      "ticks_blocked": 560,
       "weight": 2,
       "completed": null,
       "warrants": [
@@ -5405,7 +5405,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 536,
+      "ticks_blocked": 537,
       "completed": null
     },
     {
@@ -5426,7 +5426,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 551,
+      "ticks_blocked": 552,
       "completed": null
     },
     {
@@ -5485,7 +5485,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 551,
+      "ticks_blocked": 552,
       "completed": null
     },
     {
@@ -5506,7 +5506,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 551,
+      "ticks_blocked": 552,
       "completed": null
     },
     {
@@ -5546,7 +5546,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 551,
+      "ticks_blocked": 552,
       "completed": null
     },
     {
@@ -5605,7 +5605,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 551,
+      "ticks_blocked": 552,
       "completed": null
     },
     {
@@ -5645,7 +5645,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 551,
+      "ticks_blocked": 552,
       "completed": null
     },
     {
@@ -5666,7 +5666,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 551,
+      "ticks_blocked": 552,
       "completed": null
     },
     {
@@ -5706,7 +5706,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 551,
+      "ticks_blocked": 552,
       "completed": null
     },
     {
@@ -6650,7 +6650,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 351,
+      "ticks_blocked": 352,
       "completed": null
     },
     {
@@ -6789,7 +6789,7 @@
       "minted_during": "interrupt",
       "caused_by": "W346",
       "last_worked": "2026-10-19T18:16:23Z",
-      "ticks_blocked": 244,
+      "ticks_blocked": 245,
       "weight": 9,
       "completed": null,
       "manifest": [
@@ -6818,7 +6818,7 @@
       "minted_during": "interrupt",
       "caused_by": "W346",
       "last_worked": "2026-10-19T18:16:25Z",
-      "ticks_blocked": 244,
+      "ticks_blocked": 245,
       "weight": 9,
       "completed": null,
       "manifest": [
@@ -7082,7 +7082,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 464,
+      "ticks_blocked": 465,
       "completed": null
     },
     {
@@ -7195,7 +7195,7 @@
       "minted_during": "interrupt",
       "caused_by": "W364",
       "last_worked": "2026-10-24T12:37:36Z",
-      "ticks_blocked": 189,
+      "ticks_blocked": 190,
       "manifest": [
         "src/nemik/mirror.py",
         "tests/test_mirror.py"
@@ -7224,7 +7224,7 @@
       "minted_during": "interrupt",
       "caused_by": "W364",
       "last_worked": "2026-10-24T13:19:24Z",
-      "ticks_blocked": 187,
+      "ticks_blocked": 188,
       "manifest": [
         "src/nemik/pollevents.py",
         "tests/test_pollevents.py",
@@ -8340,7 +8340,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 450,
+      "ticks_blocked": 451,
       "completed": null
     },
     {
@@ -8361,7 +8361,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-16T01:35:27Z",
-      "ticks_blocked": 414,
+      "ticks_blocked": 415,
       "completed": null
     },
     {
@@ -8382,7 +8382,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 483,
+      "ticks_blocked": 484,
       "completed": null
     },
     {
@@ -9024,7 +9024,7 @@
       "minted_during": "tick",
       "caused_by": "W458",
       "last_worked": "2026-10-13T19:10:34Z",
-      "ticks_blocked": 448,
+      "ticks_blocked": 449,
       "completed": null
     },
     {
@@ -9062,7 +9062,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W943",
       "last_worked": "2026-10-20T18:05:40Z",
-      "ticks_blocked": 291,
+      "ticks_blocked": 292,
       "weight": 1,
       "manifest": [
         "src/nemik/adapter.py",
@@ -9602,7 +9602,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-19T10:16:00Z",
-      "ticks_blocked": 351,
+      "ticks_blocked": 352,
       "completed": null,
       "warrants": [
         {
@@ -9714,7 +9714,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-16T01:54:02Z",
-      "ticks_blocked": 415,
+      "ticks_blocked": 416,
       "weight": 1,
       "completed": null
     },
@@ -9734,7 +9734,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-16T01:54:03Z",
-      "ticks_blocked": 415,
+      "ticks_blocked": 416,
       "weight": 1,
       "completed": null
     },
@@ -9895,7 +9895,7 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W1051",
       "last_worked": "2026-10-18T21:49:01Z",
-      "ticks_blocked": 351,
+      "ticks_blocked": 352,
       "completed": null,
       "weight": 6,
       "warrants": [
@@ -10072,7 +10072,7 @@
       "minted_during": "tick",
       "caused_by": "W500",
       "last_worked": "2026-10-15T11:53:53Z",
-      "ticks_blocked": 351,
+      "ticks_blocked": 352,
       "completed": null
     },
     {
@@ -10117,7 +10117,7 @@
       "minted_during": "tick",
       "caused_by": "W506",
       "last_worked": "2026-10-24T16:41:28Z",
-      "ticks_blocked": 179,
+      "ticks_blocked": 180,
       "weight": 11,
       "completed": null,
       "manifest": [
@@ -10189,7 +10189,7 @@
       "minted_during": "tick",
       "caused_by": "W506",
       "last_worked": "2026-10-18T03:08:04Z",
-      "ticks_blocked": 351,
+      "ticks_blocked": 352,
       "weight": 2,
       "completed": null
     },
@@ -10213,7 +10213,7 @@
       "minted_during": "tick",
       "caused_by": "github:W35",
       "last_worked": "2026-10-15T12:00:59Z",
-      "ticks_blocked": 444,
+      "ticks_blocked": 445,
       "completed": null
     },
     {
@@ -10298,7 +10298,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T12:40:08Z",
-      "ticks_blocked": 69,
+      "ticks_blocked": 70,
       "weight": 11,
       "manifest": [
         "src/nemik/withheld.py"
@@ -10326,7 +10326,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-18T19:15:01Z",
-      "ticks_blocked": 207,
+      "ticks_blocked": 208,
       "completed": null
     },
     {
@@ -10707,7 +10707,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-16T01:53:12Z",
-      "ticks_blocked": 415,
+      "ticks_blocked": 416,
       "weight": 13,
       "completed": null
     },
@@ -11330,7 +11330,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-17T10:50:53Z",
-      "ticks_blocked": 351,
+      "ticks_blocked": 352,
       "completed": null
     },
     {
@@ -11376,7 +11376,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-27T06:32:37Z",
-      "ticks_blocked": 68,
+      "ticks_blocked": 69,
       "completed": null,
       "warrants": [
         {
@@ -11428,7 +11428,7 @@
       "minted_during": "tick",
       "caused_by": "W560",
       "last_worked": "2026-10-16T02:51:43Z",
-      "ticks_blocked": 413,
+      "ticks_blocked": 414,
       "completed": null
     },
     {
@@ -11501,7 +11501,7 @@
       "minted_during": "tick",
       "caused_by": "W566",
       "last_worked": "2026-10-16T05:23:44Z",
-      "ticks_blocked": 408,
+      "ticks_blocked": 409,
       "completed": null
     },
     {
@@ -11526,7 +11526,7 @@
       "minted_during": "tick",
       "caused_by": "W566",
       "last_worked": "2026-10-23T19:25:35Z",
-      "ticks_blocked": 408,
+      "ticks_blocked": 409,
       "completed": null
     },
     {
@@ -11550,7 +11550,7 @@
       "minted_during": "tick",
       "caused_by": "W566",
       "last_worked": "2026-10-29T02:48:39Z",
-      "ticks_blocked": 409,
+      "ticks_blocked": 410,
       "completed": null
     },
     {
@@ -11572,7 +11572,7 @@
       "minted_during": "tick",
       "caused_by": "W541",
       "last_worked": "2026-10-23T17:58:15Z",
-      "ticks_blocked": 406,
+      "ticks_blocked": 407,
       "completed": null
     },
     {
@@ -11594,7 +11594,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-23T12:09:48Z",
-      "ticks_blocked": 238,
+      "ticks_blocked": 239,
       "completed": null,
       "manifest": [
         "Containerfile",
@@ -11692,7 +11692,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-17T08:09:46Z",
-      "ticks_blocked": 397,
+      "ticks_blocked": 398,
       "completed": null
     },
     {
@@ -11756,7 +11756,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-16T15:08:10Z",
-      "ticks_blocked": 336,
+      "ticks_blocked": 337,
       "completed": null
     },
     {
@@ -11781,7 +11781,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-22T07:10:08Z",
-      "ticks_blocked": 241,
+      "ticks_blocked": 242,
       "completed": null
     },
     {
@@ -11805,7 +11805,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-17T15:38:53Z",
-      "ticks_blocked": 351,
+      "ticks_blocked": 352,
       "completed": null
     },
     {
@@ -11829,7 +11829,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-19T02:01:21Z",
-      "ticks_blocked": 320,
+      "ticks_blocked": 321,
       "completed": null,
       "manifest": [
         "src/nemik/salience.py",
@@ -12551,7 +12551,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-17T13:09:34Z",
-      "ticks_blocked": 351
+      "ticks_blocked": 352
     },
     {
       "symbol": "W614",
@@ -13210,7 +13210,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-25T02:12:38Z",
-      "ticks_blocked": 160,
+      "ticks_blocked": 161,
       "manifest": [
         "src/nemik/stackable.py",
         "src/nemik/cones.py",
@@ -14012,7 +14012,7 @@
       "minted_during": "interrupt",
       "caused_by": "W510",
       "last_worked": "2026-10-18T16:06:47Z",
-      "ticks_blocked": 351,
+      "ticks_blocked": 352,
       "manifest": [
         "src/nemik/web/index.html",
         "tests/test_sources_trs.py"
@@ -14038,7 +14038,7 @@
       "minted_during": "interrupt",
       "caused_by": "W510",
       "last_worked": "2026-10-18T14:33:41Z",
-      "ticks_blocked": 351,
+      "ticks_blocked": 352,
       "completed": null,
       "manifest": [
         "src/nemik/web/index.html",
@@ -14116,7 +14116,7 @@
       "minted_during": "interrupt",
       "caused_by": "W674",
       "last_worked": "2026-10-18T16:13:01Z",
-      "ticks_blocked": 351,
+      "ticks_blocked": 352,
       "manifest": [
         "src/nemik/serve.py",
         "src/nemik/web/vendor/n3.min.js",
@@ -14432,7 +14432,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-18T19:40:28Z",
-      "ticks_blocked": 351,
+      "ticks_blocked": 352,
       "warrants": [
         {
           "@context": {
@@ -14619,7 +14619,7 @@
       "minted_during": "interrupt",
       "caused_by": "W691",
       "last_worked": "2026-10-19T01:14:55Z",
-      "ticks_blocked": 351,
+      "ticks_blocked": 352,
       "completed": null,
       "manifest": [
         "src/nemik/serve.py",
@@ -14691,7 +14691,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-19T18:16:26Z",
-      "ticks_blocked": 335,
+      "ticks_blocked": 336,
       "completed": null
     },
     {
@@ -14817,7 +14817,7 @@
       "minted_during": "interrupt",
       "caused_by": "W581",
       "last_worked": "2026-10-18T23:03:49Z",
-      "ticks_blocked": 351,
+      "ticks_blocked": 352,
       "completed": null
     },
     {
@@ -15032,7 +15032,7 @@
       "minted_during": "interrupt",
       "caused_by": "el-openglo:W702",
       "last_worked": "2026-10-19T00:15:45Z",
-      "ticks_blocked": 351,
+      "ticks_blocked": 352,
       "completed": null
     },
     {
@@ -15059,7 +15059,7 @@
       "minted_during": "interrupt",
       "caused_by": "W693",
       "last_worked": "2026-10-24T15:22:53Z",
-      "ticks_blocked": 183,
+      "ticks_blocked": 184,
       "manifest": [
         "src/nemik/blocks.py",
         "src/nemik/serve.py",
@@ -15748,7 +15748,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W728",
       "last_worked": "2026-10-19T15:12:10Z",
-      "ticks_blocked": 342,
+      "ticks_blocked": 343,
       "completed": null
     },
     {
@@ -15952,7 +15952,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-23T19:25:28Z",
-      "ticks_blocked": 298,
+      "ticks_blocked": 299,
       "warrants": [
         {
           "@context": {
@@ -16194,7 +16194,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W743",
       "last_worked": "2026-10-24T14:11:42Z",
-      "ticks_blocked": 185,
+      "ticks_blocked": 186,
       "completed": null,
       "manifest": [
         "docs/forecast-features.md"
@@ -16249,7 +16249,7 @@
       "minted_during": "tick",
       "caused_by": "mtools:W1731",
       "last_worked": "2026-10-24T18:42:00Z",
-      "ticks_blocked": 39,
+      "ticks_blocked": 40,
       "completed": null,
       "manifest": [
         "src/nemik/landings.py",
@@ -16609,7 +16609,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-25T02:38:48Z",
-      "ticks_blocked": 158,
+      "ticks_blocked": 159,
       "manifest": [
         "deploy/deployment.yaml",
         "tests/test_deploy_manifest.py"
@@ -16724,7 +16724,7 @@
       "minted_during": "tick",
       "caused_by": "W762",
       "last_worked": "2026-10-28T14:21:12Z",
-      "ticks_blocked": 39,
+      "ticks_blocked": 40,
       "manifest": [
         "tools/codon_census.py",
         "tests/test_codon_census.py",
@@ -17063,7 +17063,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-20T22:31:27Z",
-      "ticks_blocked": 244,
+      "ticks_blocked": 245,
       "warrants": [
         {
           "@context": {
@@ -17274,7 +17274,7 @@
       "minted_during": "tick",
       "caused_by": "W781",
       "last_worked": "2026-10-23T17:58:17Z",
-      "ticks_blocked": 290,
+      "ticks_blocked": 291,
       "completed": null
     },
     {
@@ -17300,7 +17300,7 @@
       "minted_during": "tick",
       "caused_by": "W461",
       "last_worked": "2026-10-25T02:38:49Z",
-      "ticks_blocked": 158,
+      "ticks_blocked": 159,
       "manifest": [
         "src/nemik/web/index.html",
         "src/nemik/serve.py",
@@ -17886,7 +17886,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-25T03:12:35Z",
-      "ticks_blocked": 157,
+      "ticks_blocked": 158,
       "completed": null
     },
     {
@@ -18501,7 +18501,7 @@
       "minted_during": "tick",
       "caused_by": "W579",
       "last_worked": "2026-10-23T19:25:16Z",
-      "ticks_blocked": 224,
+      "ticks_blocked": 225,
       "completed": null
     },
     {
@@ -18728,7 +18728,7 @@
     {
       "symbol": "W846",
       "title": "test_modes failed once with 'Uncaught ReferenceError: popLater is not defined' at page load, then passed on rerun of the same tree: find why a head script's definition can be missing when index.html's wiring runs",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [
         "file:tests/test_wcag_render.py!w"
@@ -18736,16 +18736,17 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Route test_viewstate's page fixture through the recording harness; then, on the next popLater occurrence, read its 'requests refused or failed' list; the proof is the interleaving witness plus a fix, not the diagnostic",
-      "evidence": "2026-10-22: 2026-10-22: not reproduced: //:test_modes x15 concurrent runs all pass (bazel --runs_per_test=15). The server is threaded and reads each file whole, popLater is a hoisted declaration in cards.js, so a missing definition means cards.js did not load (a silent script-load failure). The first failure's log was overwritten by the passing rerun. Add a requestfailed and response-status listener to the vendored webpage helper (W717) so the next occurrence names the file | 2026-10-23: 2026-10-23 second occurrence: the commit gate for W873 failed //:test_sources_resolve with 'Uncaught ReferenceError: popLater is not defined' at page load, all four tests of the module at once (they share one module-scoped page); popLater is defined in cards.js, so cards.js had not run when the inline script did. Same error as the first (test_modes, 2026-10-22). Neither change under test touches the page. Reproduction attempt: bazel test //:test_sources_resolve --runs_per_test=40 --local_test_jobs=40 | 2026-10-23: 2026-10-23: not reproduced: //:test_sources_resolve x40 with --local_test_jobs=40 all pass, so load alone does not trigger it. Both occurrences were inside the commit gate (stack320, stack343) on its shared staged worktree; the repro ran in the real checkout. Next: capture the failed request when it recurs (a requestfailed and response-status listener in the page helper), or run the repro inside the gate worktree | 2026-10-27: 2026-10-27 eleventh instance, in the stack557 gate (W1152/W1150, which touch no web file): tests/test_wcag_render.py::test_tab_visits_the_pages_controls_in_reading_order, 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined', 81 s, one of 433 targets, 432 passed. It adds no fact: this test opened its page by hand (new_page, watch, goto, until) and so bypassed the harness (tests/webpage.py opened_page) that appends the requests that failed or got an error status, which W1060 relies on to prove or refute the pick-then-bind argument. So this recurrence neither supports nor refutes efb924c. Fix, first entry of the next stack: _page_rows goes through webpage.evaluated, i.e. session/opened_page, so the next occurrence names the asset. The flake rule applies: no resubmit on this refusal. | 2026-10-27: c4f0e23 landed: test_wcag_render opens its page through webpage.evaluated, so the next popLater occurrence names the failed asset. W846 stays open until one does. Read the next occurrence's 'requests refused or failed' list: cards.js or a late script confirms W1060's argument, none refutes it. | 2026-10-28: 2026-10-28 twelfth and thirteenth instances, ONE gate (stack595: W1199, docstring rewraps in importer, issues and health, no web file): //:test_svgexport (test_the_svg_keeps_the_canvas_cards_edges_dashes_and_contrast, 21 s) and //:test_viewstate shard 2 of 3 (1 of 3 runs failed, 81 s) both 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined'; 441 of 443 passed. Read from the logs: test_svgexport waits through mikemol.webpage.page.load -> until, not through tests/webpage.py's recording opened_page, so its PageBrokenError carries NO requests-failed list; test_viewstate likewise. So again the asset is unnamed and W1060's argument is neither supported nor refuted. Two pages failing in one gate points at the shared server or host (a server that stops answering mid-load), not at a test. The flake rule applies: stack595 is NOT resubmitted unchanged | 2026-10-28: 2026-10-28 fix built: tests/webpage.py launched_page now records requestfailed and status>=400 responses and re-raises a PageBrokenError from load with 'requests refused or failed: [...]'; test_svgexport opens its page through it. Queued as stack598 entry 1 (with W1199, W1200, W1197, W1201 after it). Also: stack596 (W1200+W1197 alone) is in the gate and will be refused by the ratchet (its baseline 2513 lacks W1199's source), a failure predicted in advance but not withdrawable (inflight, leads a joined stack); stack597 was withdrawn. test_viewstate still waits without the failed-request list | 2026-10-28: diagnostic landed 0686c21 (pushed, gate green) in stack598: launched_page names the requests that failed; test_svgexport opens its page through it. The same gate ran 444 targets, 441 fresh, and no popLater failure. W846 STAYS OPEN: closes only on a proof (a forced-interleaving witness and a fix) or a traced occurrence; test_viewstate still waits without the failed-request list | 2026-10-28: landed fefe37c (pushed, gate green) in stack599: tests/webpage.py watch and until record the resources a page failed to load and name them in the PageBrokenError, for every browser test that uses them; witness in test_webpage_hangs (a refused script is named). That gate: 441 fresh of 444, sent=True, no popLater failure. W846 stays OPEN: a diagnostic, not a proof | 2026-10-28: 2026-10-28 fourteenth instance, stack617 gate (W1213, docstrings only, no web file): //:test_pdf shard 3, test_a_view_prints_a_pdf[rank], 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined', 1 of 3 runs, 449 targets, 448 passed. nemik.pdf.render opened its page with the library's load directly, so the error carried no failed-request list (the same gap as test_viewstate and test_svgexport before). Fix: nemik/pdf.py load_naming_failures records requestfailed and status>=400 responses and re-raises with 'requests refused or failed: [...]', so a pdf failure now names the asset. Stack617 is not resubmitted unchanged; its docstring entries ride in the next stack after this one. A diagnostic, not a proof: W846 stays open. | 2026-10-28: 2026-10-28 DECISION on loop prompt line 27 (R2-F5, recorded so it is auditable): I take the NARROW reading, not a waiver. The rule's 'open feature cards' that a popLater failure can put at risk are the ones whose change touches the page or its browser tests. Measured with --block-matching on each web file tag: only file:src/nemik/web/index.html!w matches an open card (W751); cards.js and the other web files match none. W751 is now blocked on W846 (BLOCKED W751 on W846). The block lifts when W846 closes: a forced-interleaving witness plus a fix, or a traced occurrence now that load_naming_failures (stack619) and tests/webpage.py name the asset. It does not lift on a diagnostic. Not blocked: ratchet paydowns and cards that touch no page file; an unrelated stack refused by this flake is a refusal of the gate, not of the card (stack617 was a docstring stack). My earlier 'too broad' was a judgment against the rule with no record; this replaces it. | 2026-10-28: 2026-10-28 R3-F6 witness: popLater is defined in src/nemik/web/cards.js (line 115), so the web-file net was right for where it lives; the failing PATH in stack617 was //:test_pdf shard 3 through nemik.pdf.render, so the pdf net was run too. block-matching 'file:src/nemik/pdf.py!w' on W846: 'REFUSED: no open card carries the touches tag' = none. scan-literal 'pdf' finds W904 (manifest holds pdf files) and closed cards; W904 is already blocked on an operator decision, so it is not ready work. Block set stays W751 alone. | 2026-10-28: 2026-10-28: landed 6a5bb9d (pushed, gate green) in stack619: nemik.pdf.load_naming_failures. That gate ran 449 targets, 446 fresh, no popLater failure. W846 STAYS OPEN: a diagnostic, not a proof. W751 stays blocked on it. | 2026-10-29: 2026-10-29 stack 681 REFUSED by the popLater flake class (rule: a flake is a blocker, never a resubmit): the gate ran 455 targets (452 fresh, 454 pass) and //:test_keymap FAILED in 1 of 3 shards, shard_1_of_3, 64.8 s (runs 59.1 to 64.8 s), tests/test_keymap.py::test_every_key_in_the_table_has_a_handler_and_a_help_row: 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined', raised from webpage.load -> until in _viewer (tests/test_keymap.py:44). Read from the shard log. The stack touched no web file (alarm-free docstrings, two typed parameters, three docstring files): HEAD is still ecf7694. This occurrence names NO asset: test_keymap._viewer opens the page by hand (browser.new_page, webpage.load), not through tests/webpage.py launched_page, so it has no failed-request list, the same gap as test_wcag_render (fixed c4f0e23) and test_svgexport (fixed 0686c21). G0 (written before the first edit): N=1 test opening the page without the recording harness (test_keymap.py _viewer, four tests share it), K=1 verified by reading: launched_page(p, url) returns (browser, page) with the same default viewport (1700, 1250), skips without a browser, and names the failed or >=400 requests in the PageBrokenError; test_svgexport.py:124 is the precedent. Fix: _viewer opens through webpage.launched_page; the now-unused imports (os, Path, PlaywrightError, pytest) leave in the same write. Expected: no change in what the tests assert, the next popLater occurrence in this module names the asset. Does NOT close W846 (a diagnostic, not a proof). | 2026-10-29: landed 54e441b (printed by mikemol-commit, subject matches, [PUSHED]) in stack 683 at 2026-10-29 19:36:46 -0400 (23:36:46Z) from reflog; submitted 23:17:18Z (date), gate began_ns 1793315838454775239 = 23:17:18Z, 19 min 28 s wall; READ BACK git ls-remote origin refs/heads/main = 9c0dbb62d0dbe53cc440d1f9b4a759eddab0dc9b (the stack's last commit). test_keymap now opens through launched_page. This landing had NO popLater failure (455 targets). W846 stays OPEN: a diagnostic, not a proof; the next occurrence in test_keymap names the asset. Instance count for this card: the 681 refusal (test_keymap shard 1 of 3, 22:56Z to 23:1xZ) is the next after the fourteenth (2026-10-28, stack617) and later ones recorded above.",
+      "evidence": "2026-10-22: 2026-10-22: not reproduced: //:test_modes x15 concurrent runs all pass (bazel --runs_per_test=15). The server is threaded and reads each file whole, popLater is a hoisted declaration in cards.js, so a missing definition means cards.js did not load (a silent script-load failure). The first failure's log was overwritten by the passing rerun. Add a requestfailed and response-status listener to the vendored webpage helper (W717) so the next occurrence names the file | 2026-10-23: 2026-10-23 second occurrence: the commit gate for W873 failed //:test_sources_resolve with 'Uncaught ReferenceError: popLater is not defined' at page load, all four tests of the module at once (they share one module-scoped page); popLater is defined in cards.js, so cards.js had not run when the inline script did. Same error as the first (test_modes, 2026-10-22). Neither change under test touches the page. Reproduction attempt: bazel test //:test_sources_resolve --runs_per_test=40 --local_test_jobs=40 | 2026-10-23: 2026-10-23: not reproduced: //:test_sources_resolve x40 with --local_test_jobs=40 all pass, so load alone does not trigger it. Both occurrences were inside the commit gate (stack320, stack343) on its shared staged worktree; the repro ran in the real checkout. Next: capture the failed request when it recurs (a requestfailed and response-status listener in the page helper), or run the repro inside the gate worktree | 2026-10-27: 2026-10-27 eleventh instance, in the stack557 gate (W1152/W1150, which touch no web file): tests/test_wcag_render.py::test_tab_visits_the_pages_controls_in_reading_order, 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined', 81 s, one of 433 targets, 432 passed. It adds no fact: this test opened its page by hand (new_page, watch, goto, until) and so bypassed the harness (tests/webpage.py opened_page) that appends the requests that failed or got an error status, which W1060 relies on to prove or refute the pick-then-bind argument. So this recurrence neither supports nor refutes efb924c. Fix, first entry of the next stack: _page_rows goes through webpage.evaluated, i.e. session/opened_page, so the next occurrence names the asset. The flake rule applies: no resubmit on this refusal. | 2026-10-27: c4f0e23 landed: test_wcag_render opens its page through webpage.evaluated, so the next popLater occurrence names the failed asset. W846 stays open until one does. Read the next occurrence's 'requests refused or failed' list: cards.js or a late script confirms W1060's argument, none refutes it. | 2026-10-28: 2026-10-28 twelfth and thirteenth instances, ONE gate (stack595: W1199, docstring rewraps in importer, issues and health, no web file): //:test_svgexport (test_the_svg_keeps_the_canvas_cards_edges_dashes_and_contrast, 21 s) and //:test_viewstate shard 2 of 3 (1 of 3 runs failed, 81 s) both 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined'; 441 of 443 passed. Read from the logs: test_svgexport waits through mikemol.webpage.page.load -> until, not through tests/webpage.py's recording opened_page, so its PageBrokenError carries NO requests-failed list; test_viewstate likewise. So again the asset is unnamed and W1060's argument is neither supported nor refuted. Two pages failing in one gate points at the shared server or host (a server that stops answering mid-load), not at a test. The flake rule applies: stack595 is NOT resubmitted unchanged | 2026-10-28: 2026-10-28 fix built: tests/webpage.py launched_page now records requestfailed and status>=400 responses and re-raises a PageBrokenError from load with 'requests refused or failed: [...]'; test_svgexport opens its page through it. Queued as stack598 entry 1 (with W1199, W1200, W1197, W1201 after it). Also: stack596 (W1200+W1197 alone) is in the gate and will be refused by the ratchet (its baseline 2513 lacks W1199's source), a failure predicted in advance but not withdrawable (inflight, leads a joined stack); stack597 was withdrawn. test_viewstate still waits without the failed-request list | 2026-10-28: diagnostic landed 0686c21 (pushed, gate green) in stack598: launched_page names the requests that failed; test_svgexport opens its page through it. The same gate ran 444 targets, 441 fresh, and no popLater failure. W846 STAYS OPEN: closes only on a proof (a forced-interleaving witness and a fix) or a traced occurrence; test_viewstate still waits without the failed-request list | 2026-10-28: landed fefe37c (pushed, gate green) in stack599: tests/webpage.py watch and until record the resources a page failed to load and name them in the PageBrokenError, for every browser test that uses them; witness in test_webpage_hangs (a refused script is named). That gate: 441 fresh of 444, sent=True, no popLater failure. W846 stays OPEN: a diagnostic, not a proof | 2026-10-28: 2026-10-28 fourteenth instance, stack617 gate (W1213, docstrings only, no web file): //:test_pdf shard 3, test_a_view_prints_a_pdf[rank], 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined', 1 of 3 runs, 449 targets, 448 passed. nemik.pdf.render opened its page with the library's load directly, so the error carried no failed-request list (the same gap as test_viewstate and test_svgexport before). Fix: nemik/pdf.py load_naming_failures records requestfailed and status>=400 responses and re-raises with 'requests refused or failed: [...]', so a pdf failure now names the asset. Stack617 is not resubmitted unchanged; its docstring entries ride in the next stack after this one. A diagnostic, not a proof: W846 stays open. | 2026-10-28: 2026-10-28 DECISION on loop prompt line 27 (R2-F5, recorded so it is auditable): I take the NARROW reading, not a waiver. The rule's 'open feature cards' that a popLater failure can put at risk are the ones whose change touches the page or its browser tests. Measured with --block-matching on each web file tag: only file:src/nemik/web/index.html!w matches an open card (W751); cards.js and the other web files match none. W751 is now blocked on W846 (BLOCKED W751 on W846). The block lifts when W846 closes: a forced-interleaving witness plus a fix, or a traced occurrence now that load_naming_failures (stack619) and tests/webpage.py name the asset. It does not lift on a diagnostic. Not blocked: ratchet paydowns and cards that touch no page file; an unrelated stack refused by this flake is a refusal of the gate, not of the card (stack617 was a docstring stack). My earlier 'too broad' was a judgment against the rule with no record; this replaces it. | 2026-10-28: 2026-10-28 R3-F6 witness: popLater is defined in src/nemik/web/cards.js (line 115), so the web-file net was right for where it lives; the failing PATH in stack617 was //:test_pdf shard 3 through nemik.pdf.render, so the pdf net was run too. block-matching 'file:src/nemik/pdf.py!w' on W846: 'REFUSED: no open card carries the touches tag' = none. scan-literal 'pdf' finds W904 (manifest holds pdf files) and closed cards; W904 is already blocked on an operator decision, so it is not ready work. Block set stays W751 alone. | 2026-10-28: 2026-10-28: landed 6a5bb9d (pushed, gate green) in stack619: nemik.pdf.load_naming_failures. That gate ran 449 targets, 446 fresh, no popLater failure. W846 STAYS OPEN: a diagnostic, not a proof. W751 stays blocked on it. | 2026-10-29: 2026-10-29 stack 681 REFUSED by the popLater flake class (rule: a flake is a blocker, never a resubmit): the gate ran 455 targets (452 fresh, 454 pass) and //:test_keymap FAILED in 1 of 3 shards, shard_1_of_3, 64.8 s (runs 59.1 to 64.8 s), tests/test_keymap.py::test_every_key_in_the_table_has_a_handler_and_a_help_row: 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined', raised from webpage.load -> until in _viewer (tests/test_keymap.py:44). Read from the shard log. The stack touched no web file (alarm-free docstrings, two typed parameters, three docstring files): HEAD is still ecf7694. This occurrence names NO asset: test_keymap._viewer opens the page by hand (browser.new_page, webpage.load), not through tests/webpage.py launched_page, so it has no failed-request list, the same gap as test_wcag_render (fixed c4f0e23) and test_svgexport (fixed 0686c21). G0 (written before the first edit): N=1 test opening the page without the recording harness (test_keymap.py _viewer, four tests share it), K=1 verified by reading: launched_page(p, url) returns (browser, page) with the same default viewport (1700, 1250), skips without a browser, and names the failed or >=400 requests in the PageBrokenError; test_svgexport.py:124 is the precedent. Fix: _viewer opens through webpage.launched_page; the now-unused imports (os, Path, PlaywrightError, pytest) leave in the same write. Expected: no change in what the tests assert, the next popLater occurrence in this module names the asset. Does NOT close W846 (a diagnostic, not a proof). | 2026-10-29: landed 54e441b (printed by mikemol-commit, subject matches, [PUSHED]) in stack 683 at 2026-10-29 19:36:46 -0400 (23:36:46Z) from reflog; submitted 23:17:18Z (date), gate began_ns 1793315838454775239 = 23:17:18Z, 19 min 28 s wall; READ BACK git ls-remote origin refs/heads/main = 9c0dbb62d0dbe53cc440d1f9b4a759eddab0dc9b (the stack's last commit). test_keymap now opens through launched_page. This landing had NO popLater failure (455 targets). W846 stays OPEN: a diagnostic, not a proof; the next occurrence in test_keymap names the asset. Instance count for this card: the 681 refusal (test_keymap shard 1 of 3, 22:56Z to 23:1xZ) is the next after the fourteenth (2026-10-28, stack617) and later ones recorded above. | 2026-10-29: 2026-10-29 R48-F1 grep result (command: grep -rln 'new_page(\\|chromium.launch(' tests, then grep -L 'launched_page\\|opened_page\\|open_page' on each): 17 test files open a page by hand and use NO recording helper, so none names the failed request when popLater breaks: test_file_url, test_modes, test_sources_fetch, test_sources_resolve, test_sources_setting, test_page_landings, test_layout, test_cardtree, test_page_chains, test_warning_badge, test_list_order_opens_cards, test_zoom_step, test_sources_incremental, test_page_queue, test_viewstate, test_viewer_settings, test_series_board (tests/webpage.py itself and test_webpage_hangs excluded by design). Already converted: test_wcag_render, test_svgexport, test_keymap, test_web_render, test_incremental_redraw, test_static_view, test_piece_fetch_once. Plan: convert each file's page open to webpage.launched_page in slices of 3 to 4 files per stack (test_layout last: it has 42 raw waits already on webpage.until and is the largest); each slice is a tests-only stack that lowers ruff by the imports it drops; the hook refuses an import and its use split, so each file is a Write or a scratch codemod. Not started. | 2026-10-30: G0 2026-10-30 (hand-opened pages, slice A, written after the tick-open started and before the first edit): N=17 test files open a page by hand (grep, listed above), K=4 read in full and judged convertible: test_zoom_step.py, test_warning_badge.py, test_series_board.py, test_viewer_settings.py, each moving its launch/new_page/watch/goto/until to webpage.launched_page(p, url[, wait]) (same 1700x1250 viewport, the same skip without a browser, and it now honours $NEMIK_CHROMIUM where test_zoom_step ignored it), with the unused imports (os, Path where unused, pytest, PlaywrightError) and the _absolute helpers leaving in the same write. test_file_url.py is read and NOT convertible this way: it opens a file: URL and waits for the page's own text, not the graph, and attaches a pageerror listener, so launched_page's CY_READY wait does not fit; it stays a named exception (a launched_page variant with a custom URL would be a design call). Expected ruff down by the dropped imports and helpers (about 8 to 12), mypy unchanged or lower. Tests only: no census owed. Pace: the tick-open hook prints it. | 2026-10-30: Slice A converted (four files): measured ruff 1721 and mypy 3888 UNCHANGED by it alone, so it travels behind a mypy fall (W1187 wake.py nudges state, mypy 3888 to 3875) in stack 685. 13 files left on the grep list (test_file_url is a named exception): test_modes, test_sources_fetch, test_sources_resolve, test_sources_setting, test_page_landings, test_layout, test_cardtree, test_page_chains, test_list_order_opens_cards, test_sources_incremental, test_page_queue, test_viewstate, plus test_file_url.",
       "issued_at": "2026-10-22T14:53:40Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W703",
-      "last_worked": "2026-10-29T23:37:45Z",
+      "last_worked": "2026-10-30T00:16:28Z",
       "ticks_blocked": 0,
       "manifest": [
-        "src/nemik/pdf.py",
-        "tests/webpage.py",
-        "tests/test_webpage_hangs.py"
+        "tests/test_zoom_step.py",
+        "tests/test_warning_badge.py",
+        "tests/test_series_board.py",
+        "tests/test_viewer_settings.py"
       ],
       "size_class": "small",
       "completed": null,
@@ -18918,7 +18919,7 @@
       "minted_during": "interrupt",
       "caused_by": "nemik:W703",
       "last_worked": "2026-10-22T20:45:21Z",
-      "ticks_blocked": 244,
+      "ticks_blocked": 245,
       "completed": null
     },
     {
@@ -19629,7 +19630,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T07:32:14Z",
-      "ticks_blocked": 244,
+      "ticks_blocked": 245,
       "completed": null
     },
     {
@@ -19665,7 +19666,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T07:32:19Z",
-      "ticks_blocked": 244,
+      "ticks_blocked": 245,
       "completed": null
     },
     {
@@ -19701,7 +19702,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T07:32:23Z",
-      "ticks_blocked": 244,
+      "ticks_blocked": 245,
       "completed": null
     },
     {
@@ -20223,7 +20224,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T16:12:14Z",
-      "ticks_blocked": 228,
+      "ticks_blocked": 229,
       "completed": null
     },
     {
@@ -20399,7 +20400,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-24T17:33:15Z",
-      "ticks_blocked": 224,
+      "ticks_blocked": 225,
       "warrants": [
         {
           "@context": {
@@ -20551,7 +20552,7 @@
       "minted_during": "tick",
       "caused_by": "W905",
       "last_worked": "2026-10-23T18:12:28Z",
-      "ticks_blocked": 226,
+      "ticks_blocked": 227,
       "manifest": [
         "docs/evidence-standards.md"
       ],
@@ -20604,7 +20605,7 @@
       "minted_during": "tick",
       "caused_by": "W905",
       "last_worked": "2026-10-23T19:34:39Z",
-      "ticks_blocked": 224,
+      "ticks_blocked": 225,
       "completed": null,
       "manifest": [
         "docs/evidence-recommendations.md"
@@ -20776,7 +20777,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-27T02:41:06Z",
-      "ticks_blocked": 224,
+      "ticks_blocked": 225,
       "completed": null,
       "manifest": [
         "src/nemik/witnesses.py",
@@ -20967,7 +20968,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T20:45:05Z",
-      "ticks_blocked": 221,
+      "ticks_blocked": 222,
       "manifest": [
         "tests/test_modes.py",
         "tests/test_metrics_gating.py"
@@ -20993,7 +20994,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T20:57:46Z",
-      "ticks_blocked": 221,
+      "ticks_blocked": 222,
       "completed": null
     },
     {
@@ -21016,7 +21017,7 @@
       "minted_during": "tick",
       "caused_by": "W923",
       "last_worked": "2026-10-25T11:09:55Z",
-      "ticks_blocked": 140,
+      "ticks_blocked": 141,
       "completed": null,
       "manifest": [
         "tools/gen_test_targets.py",
@@ -21043,7 +21044,7 @@
       "minted_during": "tick",
       "caused_by": "W923",
       "last_worked": "2026-10-23T20:57:51Z",
-      "ticks_blocked": 221,
+      "ticks_blocked": 222,
       "completed": null
     },
     {
@@ -21064,7 +21065,7 @@
       "minted_during": "tick",
       "caused_by": "W923",
       "last_worked": "2026-10-23T20:57:53Z",
-      "ticks_blocked": 221,
+      "ticks_blocked": 222,
       "completed": null,
       "manifest": [
         "tests/test_shard_declared.py"
@@ -21250,7 +21251,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T21:21:43Z",
-      "ticks_blocked": 189,
+      "ticks_blocked": 190,
       "completed": null
     },
     {
@@ -21345,7 +21346,7 @@
       "minted_during": "tick",
       "caused_by": "W934",
       "last_worked": "2026-10-24T12:59:53Z",
-      "ticks_blocked": 188,
+      "ticks_blocked": 189,
       "completed": null,
       "manifest": [
         "src/nemik/web/views.js",
@@ -21414,7 +21415,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W918",
       "last_worked": "2026-10-24T12:59:54Z",
-      "ticks_blocked": 188,
+      "ticks_blocked": 189,
       "completed": null
     },
     {
@@ -21982,7 +21983,7 @@
       "minted_during": "interrupt",
       "caused_by": "nemik:W959",
       "last_worked": "2026-10-24T12:59:55Z",
-      "ticks_blocked": 188,
+      "ticks_blocked": 189,
       "completed": null,
       "manifest": [
         "src/nemik/mirrorsend.py",
@@ -22006,7 +22007,7 @@
       "minted_during": "interrupt",
       "caused_by": "nemik:W938",
       "last_worked": "2026-10-24T12:59:52Z",
-      "ticks_blocked": 188,
+      "ticks_blocked": 189,
       "completed": null,
       "size_class": "small"
     },
@@ -22086,7 +22087,7 @@
       "minted_during": "tick",
       "caused_by": "W749",
       "last_worked": "2026-10-24T14:12:01Z",
-      "ticks_blocked": 185,
+      "ticks_blocked": 186,
       "completed": null,
       "manifest": [
         "src/nemik/forecastshingle.py",
@@ -22165,7 +22166,7 @@
       "minted_during": "interrupt",
       "caused_by": "W709",
       "last_worked": "2026-10-24T15:23:12Z",
-      "ticks_blocked": 183,
+      "ticks_blocked": 184,
       "completed": null,
       "manifest": [
         "src/nemik/web/panels.js",
@@ -22389,7 +22390,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-24T16:47:53Z",
-      "ticks_blocked": 180,
+      "ticks_blocked": 181,
       "completed": null
     },
     {
@@ -22503,7 +22504,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-24T17:33:12Z",
-      "ticks_blocked": 179,
+      "ticks_blocked": 180,
       "completed": null,
       "manifest": [
         "src/nemik/retrostub.py",
@@ -22527,7 +22528,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-24T17:33:14Z",
-      "ticks_blocked": 179,
+      "ticks_blocked": 180,
       "completed": null,
       "manifest": [
         "src/nemik/retrolayers.py",
@@ -22554,7 +22555,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W42",
       "last_worked": "2026-10-24T23:08:23Z",
-      "ticks_blocked": 96,
+      "ticks_blocked": 97,
       "completed": null,
       "warrants": [
         {
@@ -23121,7 +23122,7 @@
       "minted_during": "interrupt",
       "caused_by": "inbox/2026-10-26-nemik-edge-mtools-W2048-enables-W1007.md",
       "last_worked": "2026-10-26T19:39:34Z",
-      "ticks_blocked": 91,
+      "ticks_blocked": 92,
       "warrants": [
         {
           "@context": {
@@ -23177,7 +23178,7 @@
       "minted_during": "interrupt",
       "caused_by": "inbox/2026-10-26-nemik-edge-mtools-W2048-enables-W1008.md",
       "last_worked": "2026-10-26T19:39:37Z",
-      "ticks_blocked": 91,
+      "ticks_blocked": 92,
       "warrants": [
         {
           "@context": {
@@ -23289,7 +23290,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W44",
       "last_worked": "2026-10-24T23:43:28Z",
-      "ticks_blocked": 166,
+      "ticks_blocked": 167,
       "warrants": [
         {
           "@context": {
@@ -23583,7 +23584,7 @@
       "minted_during": "tick",
       "caused_by": "W643",
       "last_worked": "2026-10-25T02:12:46Z",
-      "ticks_blocked": 160,
+      "ticks_blocked": 161,
       "completed": null,
       "manifest": [
         "src/nemik/stackable.py",
@@ -23609,7 +23610,7 @@
       "minted_during": "tick",
       "caused_by": "W643",
       "last_worked": "2026-10-25T02:12:47Z",
-      "ticks_blocked": 160,
+      "ticks_blocked": 161,
       "completed": null,
       "manifest": [
         "src/nemik/cones.py",
@@ -23676,7 +23677,7 @@
       "minted_during": "tick",
       "caused_by": "W764",
       "last_worked": "2026-10-25T02:39:00Z",
-      "ticks_blocked": 158,
+      "ticks_blocked": 159,
       "completed": null,
       "manifest": [
         "deploy/deployment.yaml",
@@ -23727,7 +23728,7 @@
       "minted_during": "tick",
       "caused_by": "W789",
       "last_worked": "2026-10-25T02:39:02Z",
-      "ticks_blocked": 158,
+      "ticks_blocked": 159,
       "completed": null,
       "manifest": [
         "src/nemik/web/index.html",
@@ -23985,7 +23986,7 @@
       "minted_during": "tick",
       "caused_by": "W997",
       "last_worked": "2026-10-25T07:39:20Z",
-      "ticks_blocked": 148,
+      "ticks_blocked": 149,
       "manifest": [
         "src/nemik/pacerun.py",
         "src/nemik/hostroot_cli.py",
@@ -24116,7 +24117,7 @@
       "minted_during": "tick",
       "caused_by": "W925",
       "last_worked": "2026-10-26T00:43:08Z",
-      "ticks_blocked": 116,
+      "ticks_blocked": 117,
       "manifest": [
         "docs/per-test-targets.md"
       ],
@@ -24141,7 +24142,7 @@
       "minted_during": "tick",
       "caused_by": "W925",
       "last_worked": "2026-10-25T18:42:04Z",
-      "ticks_blocked": 140,
+      "ticks_blocked": 141,
       "completed": null,
       "manifest": [
         "tools/gen_test_targets.py",
@@ -24167,7 +24168,7 @@
       "minted_during": "tick",
       "caused_by": "W925",
       "last_worked": "2026-10-25T11:10:13Z",
-      "ticks_blocked": 140,
+      "ticks_blocked": 141,
       "completed": null,
       "manifest": [
         "tests/venv_pytest.sh"
@@ -24316,7 +24317,7 @@
       "minted_during": "tick",
       "caused_by": "github:W48",
       "last_worked": "2026-10-29T08:59:07Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "completed": null,
       "manifest": [
         "src/nemik/landings.py",
@@ -24465,7 +24466,7 @@
       "minted_during": "tick",
       "caused_by": "W728",
       "last_worked": "2026-10-25T14:28:23Z",
-      "ticks_blocked": 62,
+      "ticks_blocked": 63,
       "warrants": [
         {
           "@context": {
@@ -24565,7 +24566,7 @@
       "minted_during": "tick",
       "caused_by": "W1047",
       "last_worked": "2026-10-27T07:42:42Z",
-      "ticks_blocked": 62,
+      "ticks_blocked": 63,
       "completed": null
     },
     {
@@ -24707,7 +24708,7 @@
       "minted_during": "tick",
       "caused_by": "github:W50",
       "last_worked": "2026-10-26T23:05:10Z",
-      "ticks_blocked": 130,
+      "ticks_blocked": 131,
       "warrants": [
         {
           "@context": {
@@ -24785,7 +24786,7 @@
       "minted_during": "tick",
       "caused_by": "W1055",
       "last_worked": "2026-10-29T23:48:39Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "manifest": [
         "src/nemik/landcost.py",
         "tests/test_landcost.py"
@@ -24814,7 +24815,7 @@
       "minted_during": "tick",
       "caused_by": "W1055",
       "last_worked": "2026-10-25T17:06:49Z",
-      "ticks_blocked": 130,
+      "ticks_blocked": 131,
       "completed": null,
       "manifest": [
         "src/nemik/rank.py",
@@ -24843,7 +24844,7 @@
       "minted_during": "tick",
       "caused_by": "W1055",
       "last_worked": "2026-10-25T17:11:59Z",
-      "ticks_blocked": 130,
+      "ticks_blocked": 131,
       "completed": null,
       "manifest": [
         "tests/test_orderrank.py"
@@ -25250,7 +25251,7 @@
       "minted_during": "tick",
       "caused_by": "W1071",
       "last_worked": "2026-10-25T23:18:55Z",
-      "ticks_blocked": 119,
+      "ticks_blocked": 120,
       "completed": null
     },
     {
@@ -25272,7 +25273,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W1644",
       "last_worked": "2026-10-26T11:56:26Z",
-      "ticks_blocked": 107,
+      "ticks_blocked": 108,
       "completed": null
     },
     {
@@ -25369,7 +25370,7 @@
       "minted_during": "tick",
       "caused_by": "github:W50",
       "last_worked": "2026-10-26T01:03:02Z",
-      "ticks_blocked": 114,
+      "ticks_blocked": 115,
       "warrants": [
         {
           "@context": {
@@ -25720,7 +25721,7 @@
       "minted_during": "tick",
       "caused_by": "W1082",
       "last_worked": "2026-10-26T22:09:25Z",
-      "ticks_blocked": 57,
+      "ticks_blocked": 58,
       "manifest": [
         "src/nemik/roundof.py",
         "src/nemik/roundgauges.py",
@@ -25808,7 +25809,7 @@
       "minted_during": "tick",
       "caused_by": "W1073",
       "last_worked": "2026-10-26T11:58:00Z",
-      "ticks_blocked": 105,
+      "ticks_blocked": 106,
       "manifest": [
         "src/nemik/adapter.py",
         "src/nemik/blocks.py",
@@ -26240,7 +26241,7 @@
       "minted_during": "tick",
       "caused_by": "inbox/2026-10-27-nemik-edge-github-W63-enables-W1113.md",
       "last_worked": "2026-10-27T00:42:25Z",
-      "ticks_blocked": 83,
+      "ticks_blocked": 84,
       "completed": null,
       "warrants": [
         {
@@ -26866,7 +26867,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1092",
       "last_worked": "2026-10-29T13:11:57Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "manifest": [
         "src/nemik/roundof.py",
         "tests/test_roundof.py"
@@ -27890,7 +27891,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1047",
       "last_worked": "2026-10-27T13:02:58Z",
-      "ticks_blocked": 57,
+      "ticks_blocked": 58,
       "completed": null
     },
     {
@@ -28318,15 +28319,16 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Done in the tree: eight helpers annotated (_wp in umbrella_block, guarantees and frontier; _card and _ask; vec; _a), mypy 5248 to 4928 and ruff 2595 to 2569, because one untyped helper turned every caller's result into Any. The census of the rest (session scratchpad script) lists test_deterministic._wp and _queue, test_calendars._row, test_wake_alarms._graph, test_withheld._write, test_witnesses.queue and _serve, test_fruit._graph, test_weather._q, test_witwait._wait and _script, test_rank._ready; annotate them next, ranked by call count",
-      "evidence": "2026-10-29: G0 2026-10-29 (written while stack 681 gates, before the first edit; the card is not set working because 681's W1176 entry holds the mypy-baseline.json lease): the pace of 22:25:10Z has mypy owed (fell 88, owes 122). N=8 no-untyped-def rows from my mypy_rows script (manifest.py 33, check.py 820, calendars.py 226 twice and 262, test_withheld.py 47 and 89, test_manifest.py 15). K=1 verified derivable by reading its body: check.py 820 umbrella(n) takes an rdflib Node (it is called with graph subjects and indexes prereqs.get(n, ())); the others need a type I cannot name without more reading (manifest doc is indexed as a dict, calendars g is a Graph not imported there, the test_withheld docs fixture failed typing as dict[str, object] earlier). So range [1, 1]. Expected mypy 3909 to about 3908. Measure WITHOUT --write (681 carries mypy-baseline.json), census once after the measure. Held behind 681 on mypy-baseline.json and ruff-baseline.json under loop prompt line 40. | 2026-10-29: Built, held behind 681 on mypy-baseline.json and ruff-baseline.json: check.py umbrella(n: Node) with the Node import under TYPE_CHECKING by codemod; measured without --write: mypy 3909 to 3908, ruff 1730 to 1729 (the blocks.py DOC201 entry takes ruff to 1724 in the same stack 682). Census running once on the tree. | 2026-10-29: Codon census green on the whole src tree (check.py annotation, blocks.py, adapter, apischema, cachestore, calwrite, wake): 7 passed in 401.26 s wall, run once after the measure. Whole tree: mypy 3914 to 3908, ruff 1746 to 1724. Submitting inside stack 683 behind the W846 fix. | 2026-10-29: landed 219100d (printed by mikemol-commit, subject matches, [PUSHED]) in stack 683 at 2026-10-29 19:36:46 -0400 (23:36:46Z); check.py umbrella(n: Node). mypy ends at 3908 (3914 at the start of this stack). Seven no-untyped-def rows remain on the card (manifest.py 33, calendars.py 226 twice and 262, test_withheld.py 47 and 89, test_manifest.py 15): each needs a type read from its body first. | 2026-10-29: G0 2026-10-29 (before the first edit; pace line read at tick-open: the pace of 23:25:11Z, BEFORE the 683 landing at 23:36:46Z, still reads mypy-baseline.json behind: fell 80, owes 122, so the next stack leads with a mypy fall; codon and ruff ok). N=7 rows left from ruff --select ANN: calendars.py event_graph (226: untyped queues, no return type) and days_main (262: untyped g), manifest.py 33 (doc), tests/test_manifest.py 15 (_documents no return), tests/test_withheld.py 48 and 90 (tmp_path, docs; a dict[str, object] annotation on docs failed to index earlier). K=3 verified by reading the bodies: event_graph(queues: Graph) -> Graph (it builds and returns a Graph, calls queues.triples and 'in queues'), days_main(g: Graph | None = None) (g is the optional merged graph the callers pass, test_calendars passes a Graph), both under 'from __future__ import annotations' with Graph imported under TYPE_CHECKING. The cascade is the point: event_graph's missing return type turns its callers' results into Any (test_calendars.py 120). Expected mypy 3908 down by 3 to 100+ (range 3 to 120). Measure with --write (no stack in the gate), census once after. | 2026-10-29: Built: calendars.py event_graph(occs, queues: Graph) -> Graph and days_main(g: Graph | None = None), Graph imported under TYPE_CHECKING (codemod, three replacements each matching once). Measured with --write: mypy 3908 to 3888 (-20: the missing return type of event_graph fanned Any out to its callers), ruff 1724 to 1721. Direct run: test_calendar_boundary passes; the test_calendars tests that need the venv's mikemol-ics cannot run under the system python3.14 (installed.py asserts the script beside the interpreter), the bazel gate runs them. Import-graph claim run directly: passes. Census running once. Stack 684. | 2026-10-29: Codon census green on the calendars tree for stack 684: 7 passed in 388.33 s wall, run once after the measure. mypy 3908 to 3888, ruff 1724 to 1721. Pace read at tick-open (hook): 23:25:11Z, mypy behind (owes 122): this stack leads with a mypy fall. Submitting as stack 684.",
+      "evidence": "2026-10-29: G0 2026-10-29 (written while stack 681 gates, before the first edit; the card is not set working because 681's W1176 entry holds the mypy-baseline.json lease): the pace of 22:25:10Z has mypy owed (fell 88, owes 122). N=8 no-untyped-def rows from my mypy_rows script (manifest.py 33, check.py 820, calendars.py 226 twice and 262, test_withheld.py 47 and 89, test_manifest.py 15). K=1 verified derivable by reading its body: check.py 820 umbrella(n) takes an rdflib Node (it is called with graph subjects and indexes prereqs.get(n, ())); the others need a type I cannot name without more reading (manifest doc is indexed as a dict, calendars g is a Graph not imported there, the test_withheld docs fixture failed typing as dict[str, object] earlier). So range [1, 1]. Expected mypy 3909 to about 3908. Measure WITHOUT --write (681 carries mypy-baseline.json), census once after the measure. Held behind 681 on mypy-baseline.json and ruff-baseline.json under loop prompt line 40. | 2026-10-29: Built, held behind 681 on mypy-baseline.json and ruff-baseline.json: check.py umbrella(n: Node) with the Node import under TYPE_CHECKING by codemod; measured without --write: mypy 3909 to 3908, ruff 1730 to 1729 (the blocks.py DOC201 entry takes ruff to 1724 in the same stack 682). Census running once on the tree. | 2026-10-29: Codon census green on the whole src tree (check.py annotation, blocks.py, adapter, apischema, cachestore, calwrite, wake): 7 passed in 401.26 s wall, run once after the measure. Whole tree: mypy 3914 to 3908, ruff 1746 to 1724. Submitting inside stack 683 behind the W846 fix. | 2026-10-29: landed 219100d (printed by mikemol-commit, subject matches, [PUSHED]) in stack 683 at 2026-10-29 19:36:46 -0400 (23:36:46Z); check.py umbrella(n: Node). mypy ends at 3908 (3914 at the start of this stack). Seven no-untyped-def rows remain on the card (manifest.py 33, calendars.py 226 twice and 262, test_withheld.py 47 and 89, test_manifest.py 15): each needs a type read from its body first. | 2026-10-29: G0 2026-10-29 (before the first edit; pace line read at tick-open: the pace of 23:25:11Z, BEFORE the 683 landing at 23:36:46Z, still reads mypy-baseline.json behind: fell 80, owes 122, so the next stack leads with a mypy fall; codon and ruff ok). N=7 rows left from ruff --select ANN: calendars.py event_graph (226: untyped queues, no return type) and days_main (262: untyped g), manifest.py 33 (doc), tests/test_manifest.py 15 (_documents no return), tests/test_withheld.py 48 and 90 (tmp_path, docs; a dict[str, object] annotation on docs failed to index earlier). K=3 verified by reading the bodies: event_graph(queues: Graph) -> Graph (it builds and returns a Graph, calls queues.triples and 'in queues'), days_main(g: Graph | None = None) (g is the optional merged graph the callers pass, test_calendars passes a Graph), both under 'from __future__ import annotations' with Graph imported under TYPE_CHECKING. The cascade is the point: event_graph's missing return type turns its callers' results into Any (test_calendars.py 120). Expected mypy 3908 down by 3 to 100+ (range 3 to 120). Measure with --write (no stack in the gate), census once after. | 2026-10-29: Built: calendars.py event_graph(occs, queues: Graph) -> Graph and days_main(g: Graph | None = None), Graph imported under TYPE_CHECKING (codemod, three replacements each matching once). Measured with --write: mypy 3908 to 3888 (-20: the missing return type of event_graph fanned Any out to its callers), ruff 1724 to 1721. Direct run: test_calendar_boundary passes; the test_calendars tests that need the venv's mikemol-ics cannot run under the system python3.14 (installed.py asserts the script beside the interpreter), the bazel gate runs them. Import-graph claim run directly: passes. Census running once. Stack 684. | 2026-10-29: Codon census green on the calendars tree for stack 684: 7 passed in 388.33 s wall, run once after the measure. mypy 3908 to 3888, ruff 1724 to 1721. Pace read at tick-open (hook): 23:25:11Z, mypy behind (owes 122): this stack leads with a mypy fall. Submitting as stack 684. | 2026-10-29: 2026-10-29 R48-F4: the calendars change of stack 684 was NOT run directly with the venv's python: under the system python3.14 the tests that need the venv's mikemol-ics (8 in test_calendars.py) error at setup (tests/installed.py asserts the script beside the interpreter) and one fails for the same cause; the 7 that ran, including test_calendar_boundary, passed. Those 8 ride on the bazel gate alone. The venv has no python3 binary (.venv/bin/python is absent), so a direct venv run is not available here; this is the limit, stated, not coverage. | 2026-10-30: landed aa5b573 (printed by mikemol-commit, subject matches, [PUSHED]) at 2026-10-29 20:04:34 -0400 (00:04:34Z 2026-10-30) from reflog; submitted 23:51:28Z (date), gate began_ns 1793317888759623400 = 23:51:28Z, 13 min 6 s wall; READ BACK git ls-remote origin refs/heads/main = aa5b57331e307579e49f2429f0bfafabec42c404. mypy 3908 to 3888, ruff 1724 to 1721, census 388.33 s. Residue after landing: git status shows only .claude/paths-forward.json modified (the queue file). Gap before the submit: 9c0dbb6 23:36:46Z to 23:51:28Z = 14 min 42 s. Four rows remain on this card: manifest.py 33 (doc), tests/test_manifest.py 15 (_documents), tests/test_withheld.py 48 and 90 (tmp_path, docs). | 2026-10-30: G0 2026-10-30 (before the edit; pace read: nemik-rank --pace at 00:13Z still prints 'pace of 2026-10-29T23:25:11Z', mypy behind, owes 122, which predates my 683 and 684 landings, the next pace is due about 00:25Z): the hand-opened-pages slice (W846, four test files) lowers neither ruff nor mypy (measured, both unchanged), so it needs a companion that lowers mypy. N=5 bare-dict sites in wake.py's nudges-state helpers (mypy type-arg and one no-any-return): _read_seen, _write_seen, due_nudges.seen, undelivered.seen, alarm_key.a. K=5 verified by reading the bodies (seen maps repo or alarm key to unix seconds: seen.get(...) feeds should_nudge, seen[k] = now.timestamp(), json.dumps(seen)). Fix: dict[str, float] for the four seen/return types (with a typed local in _read_seen for the json.loads Any) and dict[str, object] for alarm_key's a, by scratch codemod (five replacements, each must match once). Expected mypy 3888 down by 5 or more, ruff unchanged or lower. wake.py is in the census (an entry already) but the census runs once after the measure. | 2026-10-30: Built: wake.py nudges-state helpers typed dict[str, float] (codemod, one replacement reverted: alarm_key stays bare dict because the tests pass dict[str, str]); tests/test_alarm_delivery.py seen annotations dict[str, float]. mypy 3888 to 3875 (-13), ruff unchanged. 9 alarm tests pass run directly. Census running once. Stack 685 behind the W846 slice A entry. | 2026-10-30: Codon census green on the wake.py tree for stack 685: 7 passed in 368.65 s wall, run once after the measure. mypy 3888 to 3875, ruff unchanged at 1721. Submitting as stack 685.",
       "issued_at": "2026-10-27T17:49:43Z",
       "minted_during": "tick",
       "caused_by": "W1178",
-      "last_worked": "2026-10-29T23:51:21Z",
+      "last_worked": "2026-10-30T00:23:03Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
-        "src/nemik/calendars.py",
+        "src/nemik/wake.py",
+        "tests/test_alarm_delivery.py",
         "mypy-baseline.json",
         "ruff-baseline.json"
       ],
@@ -28601,7 +28603,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1196",
       "last_worked": "2026-10-28T03:10:08Z",
-      "ticks_blocked": 40,
+      "ticks_blocked": 41,
       "completed": null
     },
     {
@@ -29144,7 +29146,7 @@
       "minted_during": "interrupt",
       "caused_by": "W733",
       "last_worked": "2026-10-29T23:18:43Z",
-      "ticks_blocked": 35,
+      "ticks_blocked": 36,
       "completed": null
     },
     {
@@ -29163,7 +29165,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1213",
       "last_worked": "2026-10-29T04:37:24Z",
-      "ticks_blocked": 35,
+      "ticks_blocked": 36,
       "completed": null
     },
     {
@@ -29262,7 +29264,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1215",
       "last_worked": "2026-10-29T04:37:26Z",
-      "ticks_blocked": 35,
+      "ticks_blocked": 36,
       "completed": null
     },
     {
@@ -29285,7 +29287,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1196",
       "last_worked": "2026-10-29T00:01:22Z",
-      "ticks_blocked": 18,
+      "ticks_blocked": 19,
       "completed": null,
       "manifest": [
         "tools/liftdoc.py",
@@ -29411,7 +29413,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1228",
       "last_worked": "2026-10-29T04:37:28Z",
-      "ticks_blocked": 35,
+      "ticks_blocked": 36,
       "completed": null,
       "warrants": [
         {
@@ -29476,11 +29478,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "The consolidated note goes to the operator in a visible message (10 asks, each answerable in a line, recommendations as stated); apply each answer with --update --blocked-on or close the card; the count only falls when the operator answers.",
-      "evidence": "2026-10-28: 2026-10-28 R9-F18. The 11 open needs-you asks are nemik's cards W188, W459, W564, W567, W569, W680, W700, W708, W735, W904 and W964 (read from blocked_on in the queue file; the oldest, W188, was issued 2026-10-02). FIRST DISPOSITIONS, proposed and not yet applied, each decision mine to make or to put to the operator: W564 (how the typed core reaches the browser), W567 (how a class is written for CPython and Codon: A, B or C) and W569 (five bool keyword-only parameters to two-member enums) are three Codon design questions. MERGE candidate: one ask 'Codon strategy' on W567, with W564 and W569 citing it (same ask as nemik:W567), which removes two. W567's option A is already the practice: nemik.mirrorreq.Request and nemik.waypoint use a plain class with an explicit __init__, __eq__ and __hash__ and compile under the pinned Codon, so the recommended answer is in use; confirm it with the operator in one line rather than retire it. W735 (is nemik's adapter the one place that may know sibling paths) overlaps W964's (3) courier question: MERGE under W964. KEEP with the reason: W188 (a credential only the operator can give), W904 (the PDF choice, measured), W680 (vendoring a Turtle parser), W700 (the cross-repo wait SLO), W708 (witness from a test result), W459 (let a no-command ask escalate). That is 11 minus 2 (Codon merge) minus 1 (W735 under W964) = 8 asks. NOT applied yet: whether the merge changes nemik-check's count depends on whether it counts a card citing a shared ask, which I will measure by doing W735 first and re-running nemik-check --warnings --repo nemik. | 2026-10-28: G0 (precommit, before tick-open, 2026-10-28T17:10Z, sized per standing rule 12): N = 11 open needs-you asks, K = 3 of them with a derivable merge (W735 under W964 on the courier question; W564 and W569 under W567 on Codon). Actuator: re-word W735's blocked_on to cite W964 ('same ask as nemik:W964'), then re-run nemik-check --warnings --repo nemik. Sensor: the 'N needs-you operator asks are open (cap 10 ...)' line. Expected: if nemik-check counts a card that cites a shared ask as one ask, the count falls by 1 after W735 and by 3 after all three; if it does not, it stays 11 and I record that the merge is not the lever. A miss is judged against K=3. Stack622 (W1227) is inflight and 623 and 624 are queued; their verdicts are unread. | 2026-10-28: 2026-10-28 COLLAPSE AUDITED AND REJECTED (paths-forward-loop section 3: a collapse is a claim of equivalence). My proposal to merge W735 under W964 and W564/W569 under W567 does not hold. W735 asks who may know sibling paths for LOCAL-ONLY inbox delivery (adapter allowlist vs broker); W964 (3) asks for issue tokens for a courier that sends through issues. If the issue courier replaces local delivery, W735 becomes moot, but that is a consequence of an answer, not the same question, so citing it as 'same ask as W964' would be false. W564 (wasm for the typed core), W567 (class form A/B/C) and W569 (bool keyword-only to enums) are three distinct Codon decisions with different options. So the K=3 merges of the G0 are rejected, and the miss is judged against K: expected a fall of up to 3, actual 0, because no merge is legitimate. The honest remedies left in nemik-check's own words are: batch the asks into ONE operator note (a single numbered list with a recommended answer for each, one line to answer), withdraw those another path answers, or answer from evidence. Evidence answers found so far: none. The consolidated note is the next step; the count only falls when the operator answers. | 2026-10-28: 2026-10-28 THE ONE NOTE (batched, each from the card's own text; recommendations only where the card states one): (1) W188: a read-only Google Tasks API token, as a file path outside the repo. (2) W459: does the no-command lane now in the view (W467, f3a00fd) give enough visibility to let a long-standing no-command ask escalate from Warning to Violation? (3) W564: how the typed core reaches the browser: wait for Codon wasm32 output, port Codon's runtime to wasm32, or run the typed core natively and let the browser read its JSON (no recommendation on the card). (4) W567: how a class is written for CPython and Codon: A plain annotated class with explicit __init__/__eq__/__hash__ (RECOMMENDED, and already the practice in nemik.mirrorreq and nemik.waypoint), B Codon-only .codon core, or C a shim. (5) W569: turn the 5 boolean keyword-only parameters in hostapply, rank and calendars into two-member enums so the 7 bare '*,' markers can go (RECOMMENDED yes). (6) W680: may the page vendor a Turtle parser: N3.js hash-pinned, or a small parser of our own for the Turtle shapes TRS providers emit. (7) W700: the cross-repo wait SLO (target fraction of waits answered within what age) and its error budget. (8) W708: may a card whose step is a behaviour get a witness from a test result for the tree sha (a new nemik-witnesses observer, input.test), or drop the no-witness Warning for cards that name no observable. (9) W735: is nemik's adapter the ONE place allowed to know sibling paths for local-only inbox delivery (one allowlist entry in mtools:W1708's lint), or does local-only delivery go through a broker. (10) W904: the 24 MB fleet-view PDF: (a) Chromium prints the chrome with the graph hidden and rsvg-convert prints the graph, overlaid with a PDF tool (a new dependency), or (b) send the graph PDF (0.44 MB) and the panels as two files. (11) W964: the page structure in docs/page-structure-map.md (is Orders its own view, is the selected card a pane or a drawer, does Wake split), the public base URL for actors and cards or none yet, and whether to give a fine-grained GitHub issues token and a Forgejo issues token as file paths outside the repo. | 2026-10-29: 2026-10-29 DISPOSITION PER ASK (R9-F18, due 2026-10-30; the note above is updated, not replaced): (10) W904 RETIRED: answered by the operator's ruling 2026-10-28T23:15:24Z (graph from its SVG via rsvg-convert, no panels, legend its own card); carried out in 0645c68 and 4eb245a, the card is done, so the open ask count is 10, at the cap. (5) W569 KEEP, WIDENED: a third option now exists, W1257 (a typed parameter object that keeps keyword-only enforcement and that Codon parses), so the ask names three options (enums for the booleans, positional-or-keyword for the rest, or the parameter object); recommendation unchanged (enums). (4) W567 KEEP, answer already in practice: option A (plain annotated class with explicit __init__, __eq__, __hash__) is how nemik.mirrorreq and nemik.waypoint compile under the pinned Codon; one-line confirmation only. (3) W564 KEEP (no recommendation on the card). (1) W188 KEEP (a credential only the operator can give). (2) W459 KEEP (the no-command lane has been visible since f3a00fd). (6) W680, (7) W700, (8) W708, (9) W735, (11) W964 KEEP, each the operator's own decision as worded; (9) and (11) are NOT merged (collapse audited and rejected 2026-10-28). Nothing can be answered from evidence beyond (10). nemik-check's cap warning read gone after (10) was ruled. The note goes to the operator in the next visible message. | 2026-10-29: 2026-10-29 R42-F3 one reading: tick-open printed UNSCORED 209 (ready 78); then nemik-rank nemik --apply STATE printed 'weights set: 73; state_hash=v2:0a61c57e6741087e', the same state_hash as the update just before it, so the apply changed nothing in the queue and UNSCORED stays 209 by that evidence (not re-read from a tool line after the apply; the next tick-open prints it). The rise from 206 came from W1275, W1276 and W1277 being minted unscored, and the apply does not score them: scoring them is a decision (a --vector or a --weight per card), not the apply. | 2026-10-29: 2026-10-29 R44-F2 scored by hand: W1275 --weight 10, W1276 --weight 25, W1277 --weight 20 (three separate updates, each printed 'updated'). UNSCORED before: 209 (tick-open 2026-10-29 about 18:3xZ). After: not read yet, the next tick-open prints it. Caveat: it is unknown to me whether UNSCORED counts cards without a weight or without a vector, and host standing 16 says a weight alone is overwritten by --weights-from, so the next nemik-rank --apply may undo these three. | 2026-10-29: 2026-10-29 finding on R44-F2: I set --weight on W1275 (10), W1276 (25), W1277 (20) and W1278 (20, at mint). UNSCORED read 209 before the weights and 210 at the next tick-open (W1278 minted, weighted): so --weight does NOT move UNSCORED. UNSCORED therefore counts cards without a vector, not without a weight. The scoring decision is a --vector per card (flags: --vector WV, --vector-source default|signal|agent), which I have not set. Next: read what a vector is (the writer's --vector help and an existing card's vector) before setting four. | 2026-10-29: 2026-10-29 R45-F4 read of the writer's --help (not memory): there is a selector for exactly this, 'W974 --update-many SYMBOL_OR_SELECTOR ...: operands are symbols or a selector: unscored, unmanifested or open; a dry run without --write', and the vector is 'a WV:1 vector (W248); --vector-source {default,signal,agent} required with --vector', with --vectors-from FILE storing [{symbol, vector, vector_source}] all or nothing. What I do NOT know is the WV:1 string form or what a 'default' vector is. Next step (due 2026-10-30): run --update-many unscored with --vector-source default as a DRY RUN to see what it proposes, read an existing scored card's vector, then decide and write UNSCORED before and after in one ledger line.",
+      "evidence": "2026-10-28: 2026-10-28 R9-F18. The 11 open needs-you asks are nemik's cards W188, W459, W564, W567, W569, W680, W700, W708, W735, W904 and W964 (read from blocked_on in the queue file; the oldest, W188, was issued 2026-10-02). FIRST DISPOSITIONS, proposed and not yet applied, each decision mine to make or to put to the operator: W564 (how the typed core reaches the browser), W567 (how a class is written for CPython and Codon: A, B or C) and W569 (five bool keyword-only parameters to two-member enums) are three Codon design questions. MERGE candidate: one ask 'Codon strategy' on W567, with W564 and W569 citing it (same ask as nemik:W567), which removes two. W567's option A is already the practice: nemik.mirrorreq.Request and nemik.waypoint use a plain class with an explicit __init__, __eq__ and __hash__ and compile under the pinned Codon, so the recommended answer is in use; confirm it with the operator in one line rather than retire it. W735 (is nemik's adapter the one place that may know sibling paths) overlaps W964's (3) courier question: MERGE under W964. KEEP with the reason: W188 (a credential only the operator can give), W904 (the PDF choice, measured), W680 (vendoring a Turtle parser), W700 (the cross-repo wait SLO), W708 (witness from a test result), W459 (let a no-command ask escalate). That is 11 minus 2 (Codon merge) minus 1 (W735 under W964) = 8 asks. NOT applied yet: whether the merge changes nemik-check's count depends on whether it counts a card citing a shared ask, which I will measure by doing W735 first and re-running nemik-check --warnings --repo nemik. | 2026-10-28: G0 (precommit, before tick-open, 2026-10-28T17:10Z, sized per standing rule 12): N = 11 open needs-you asks, K = 3 of them with a derivable merge (W735 under W964 on the courier question; W564 and W569 under W567 on Codon). Actuator: re-word W735's blocked_on to cite W964 ('same ask as nemik:W964'), then re-run nemik-check --warnings --repo nemik. Sensor: the 'N needs-you operator asks are open (cap 10 ...)' line. Expected: if nemik-check counts a card that cites a shared ask as one ask, the count falls by 1 after W735 and by 3 after all three; if it does not, it stays 11 and I record that the merge is not the lever. A miss is judged against K=3. Stack622 (W1227) is inflight and 623 and 624 are queued; their verdicts are unread. | 2026-10-28: 2026-10-28 COLLAPSE AUDITED AND REJECTED (paths-forward-loop section 3: a collapse is a claim of equivalence). My proposal to merge W735 under W964 and W564/W569 under W567 does not hold. W735 asks who may know sibling paths for LOCAL-ONLY inbox delivery (adapter allowlist vs broker); W964 (3) asks for issue tokens for a courier that sends through issues. If the issue courier replaces local delivery, W735 becomes moot, but that is a consequence of an answer, not the same question, so citing it as 'same ask as W964' would be false. W564 (wasm for the typed core), W567 (class form A/B/C) and W569 (bool keyword-only to enums) are three distinct Codon decisions with different options. So the K=3 merges of the G0 are rejected, and the miss is judged against K: expected a fall of up to 3, actual 0, because no merge is legitimate. The honest remedies left in nemik-check's own words are: batch the asks into ONE operator note (a single numbered list with a recommended answer for each, one line to answer), withdraw those another path answers, or answer from evidence. Evidence answers found so far: none. The consolidated note is the next step; the count only falls when the operator answers. | 2026-10-28: 2026-10-28 THE ONE NOTE (batched, each from the card's own text; recommendations only where the card states one): (1) W188: a read-only Google Tasks API token, as a file path outside the repo. (2) W459: does the no-command lane now in the view (W467, f3a00fd) give enough visibility to let a long-standing no-command ask escalate from Warning to Violation? (3) W564: how the typed core reaches the browser: wait for Codon wasm32 output, port Codon's runtime to wasm32, or run the typed core natively and let the browser read its JSON (no recommendation on the card). (4) W567: how a class is written for CPython and Codon: A plain annotated class with explicit __init__/__eq__/__hash__ (RECOMMENDED, and already the practice in nemik.mirrorreq and nemik.waypoint), B Codon-only .codon core, or C a shim. (5) W569: turn the 5 boolean keyword-only parameters in hostapply, rank and calendars into two-member enums so the 7 bare '*,' markers can go (RECOMMENDED yes). (6) W680: may the page vendor a Turtle parser: N3.js hash-pinned, or a small parser of our own for the Turtle shapes TRS providers emit. (7) W700: the cross-repo wait SLO (target fraction of waits answered within what age) and its error budget. (8) W708: may a card whose step is a behaviour get a witness from a test result for the tree sha (a new nemik-witnesses observer, input.test), or drop the no-witness Warning for cards that name no observable. (9) W735: is nemik's adapter the ONE place allowed to know sibling paths for local-only inbox delivery (one allowlist entry in mtools:W1708's lint), or does local-only delivery go through a broker. (10) W904: the 24 MB fleet-view PDF: (a) Chromium prints the chrome with the graph hidden and rsvg-convert prints the graph, overlaid with a PDF tool (a new dependency), or (b) send the graph PDF (0.44 MB) and the panels as two files. (11) W964: the page structure in docs/page-structure-map.md (is Orders its own view, is the selected card a pane or a drawer, does Wake split), the public base URL for actors and cards or none yet, and whether to give a fine-grained GitHub issues token and a Forgejo issues token as file paths outside the repo. | 2026-10-29: 2026-10-29 DISPOSITION PER ASK (R9-F18, due 2026-10-30; the note above is updated, not replaced): (10) W904 RETIRED: answered by the operator's ruling 2026-10-28T23:15:24Z (graph from its SVG via rsvg-convert, no panels, legend its own card); carried out in 0645c68 and 4eb245a, the card is done, so the open ask count is 10, at the cap. (5) W569 KEEP, WIDENED: a third option now exists, W1257 (a typed parameter object that keeps keyword-only enforcement and that Codon parses), so the ask names three options (enums for the booleans, positional-or-keyword for the rest, or the parameter object); recommendation unchanged (enums). (4) W567 KEEP, answer already in practice: option A (plain annotated class with explicit __init__, __eq__, __hash__) is how nemik.mirrorreq and nemik.waypoint compile under the pinned Codon; one-line confirmation only. (3) W564 KEEP (no recommendation on the card). (1) W188 KEEP (a credential only the operator can give). (2) W459 KEEP (the no-command lane has been visible since f3a00fd). (6) W680, (7) W700, (8) W708, (9) W735, (11) W964 KEEP, each the operator's own decision as worded; (9) and (11) are NOT merged (collapse audited and rejected 2026-10-28). Nothing can be answered from evidence beyond (10). nemik-check's cap warning read gone after (10) was ruled. The note goes to the operator in the next visible message. | 2026-10-29: 2026-10-29 R42-F3 one reading: tick-open printed UNSCORED 209 (ready 78); then nemik-rank nemik --apply STATE printed 'weights set: 73; state_hash=v2:0a61c57e6741087e', the same state_hash as the update just before it, so the apply changed nothing in the queue and UNSCORED stays 209 by that evidence (not re-read from a tool line after the apply; the next tick-open prints it). The rise from 206 came from W1275, W1276 and W1277 being minted unscored, and the apply does not score them: scoring them is a decision (a --vector or a --weight per card), not the apply. | 2026-10-29: 2026-10-29 R44-F2 scored by hand: W1275 --weight 10, W1276 --weight 25, W1277 --weight 20 (three separate updates, each printed 'updated'). UNSCORED before: 209 (tick-open 2026-10-29 about 18:3xZ). After: not read yet, the next tick-open prints it. Caveat: it is unknown to me whether UNSCORED counts cards without a weight or without a vector, and host standing 16 says a weight alone is overwritten by --weights-from, so the next nemik-rank --apply may undo these three. | 2026-10-29: 2026-10-29 finding on R44-F2: I set --weight on W1275 (10), W1276 (25), W1277 (20) and W1278 (20, at mint). UNSCORED read 209 before the weights and 210 at the next tick-open (W1278 minted, weighted): so --weight does NOT move UNSCORED. UNSCORED therefore counts cards without a vector, not without a weight. The scoring decision is a --vector per card (flags: --vector WV, --vector-source default|signal|agent), which I have not set. Next: read what a vector is (the writer's --vector help and an existing card's vector) before setting four. | 2026-10-29: 2026-10-29 R45-F4 read of the writer's --help (not memory): there is a selector for exactly this, 'W974 --update-many SYMBOL_OR_SELECTOR ...: operands are symbols or a selector: unscored, unmanifested or open; a dry run without --write', and the vector is 'a WV:1 vector (W248); --vector-source {default,signal,agent} required with --vector', with --vectors-from FILE storing [{symbol, vector, vector_source}] all or nothing. What I do NOT know is the WV:1 string form or what a 'default' vector is. Next step (due 2026-10-30): run --update-many unscored with --vector-source default as a DRY RUN to see what it proposes, read an existing scored card's vector, then decide and write UNSCORED before and after in one ledger line. | 2026-10-29: 2026-10-29 R48-F3 DRY RUN DONE (no --write, nothing saved): mikemol-paths-forward --update-many unscored --vector WV:1/R:L/E:Y/C:L/I:L/A:L/X:P/S:U/F:U/W:N --vector-source default printed WOULD UPDATE for 209 cards and 'advice: 209 proposed, 0 rejected, 198 new'. The vector string is the one every currently scored card carries (source agent). I read src/nemik/data/bands.toml: a card with no vector takes the band 'unscored' = normal, and that vector matches no band rule (R=L with C, I, A = L is not the low rule, which needs all N) so it takes 'unmatched' = normal: applying it would be band-neutral for the ranking. DECISION, recorded as a decision: NOT applied. It would make UNSCORED read 0 by asserting the same risk metrics (egress Y, confidentiality, integrity and availability L, precondition P, fix unknown, no witness) for 209 cards nobody judged, which turns a sensor of unjudged cards into a number I made small; the 'default' source marks it but the metrics are still claims. UNSCORED stays 209 on purpose. What moves it honestly: judge a card's vector when its owner touches it (a --vector with --vector-source agent on the cards I work: W1187, W1279, W1179, W1276, W1277, W1278, W1280 first), or ask mtools/luthen whether a neutral 'unjudged' vector exists. Parked with that reason; the reviewer allowed a parked mark.",
       "issued_at": "2026-10-28T16:55:34Z",
       "minted_during": "interrupt",
       "caused_by": "W904",
-      "last_worked": "2026-10-29T21:28:26Z",
+      "last_worked": "2026-10-29T23:54:10Z",
       "ticks_blocked": 0,
       "manifest": [
         ".claude/paths-forward.json"
@@ -29924,7 +29926,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1244",
       "last_worked": "2026-10-29T09:19:21Z",
-      "ticks_blocked": 20,
+      "ticks_blocked": 21,
       "completed": null,
       "manifest": [
         "tests/test_page_queue.py",
@@ -29981,7 +29983,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1215",
       "last_worked": "2026-10-29T19:24:04Z",
-      "ticks_blocked": 21,
+      "ticks_blocked": 22,
       "completed": null
     },
     {
@@ -30690,7 +30692,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-42",
       "last_worked": "2026-10-29T18:57:42Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null,
       "manifest": [
         "docs/pace-producer.md"
@@ -30979,7 +30981,7 @@
   "heartbeat": "2026-10-29T04:11:13Z",
   "lock": {
     "holder": "nemik-session",
-    "taken_at": "2026-10-29T23:41:53Z",
+    "taken_at": "2026-10-30T00:11:51Z",
     "pid": 13948,
     "start": 34592
   },
@@ -31054,6 +31056,15 @@
       "renewed_at": "2026-10-24T15:23:11Z",
       "expires_at": "2026-10-24T15:53:11Z",
       "lapse_ledgered": true
+    },
+    {
+      "tag": "file:tests/test_wcag_render.py!w",
+      "holder": "nemik-session",
+      "waypoint": "W846",
+      "base_sha": "aa5b57331e307579e49f2429f0bfafabec42c404",
+      "taken_at": "2026-10-30T00:12:17Z",
+      "renewed_at": "2026-10-30T00:12:17Z",
+      "expires_at": "2026-10-30T00:42:17Z"
     }
   ],
   "advice": [
@@ -31171,7 +31182,7 @@
       "subject": "W508",
       "action": "update W508",
       "first_run": "2026-10-18T14:50:32Z",
-      "last_run": "2026-10-18T14:50:32Z",
+      "last_run": "2026-10-29T23:53:37Z",
       "status": "applied"
     },
     {
@@ -31189,7 +31200,7 @@
       "subject": "W700",
       "action": "update W700",
       "first_run": "2026-10-18T23:03:56Z",
-      "last_run": "2026-10-18T23:03:56Z",
+      "last_run": "2026-10-29T23:53:37Z",
       "status": "applied"
     },
     {
@@ -31594,7 +31605,7 @@
       "subject": "W1048",
       "action": "update W1048",
       "first_run": "2026-10-26T21:10:31Z",
-      "last_run": "2026-10-27T06:04:18Z",
+      "last_run": "2026-10-29T23:53:37Z",
       "status": "applied"
     },
     {
@@ -31612,7 +31623,7 @@
       "subject": "W1050",
       "action": "update W1050",
       "first_run": "2026-10-26T21:10:31Z",
-      "last_run": "2026-10-27T06:04:18Z",
+      "last_run": "2026-10-29T23:53:37Z",
       "status": "applied"
     },
     {
@@ -31657,7 +31668,7 @@
       "subject": "W1070",
       "action": "update W1070",
       "first_run": "2026-10-26T21:10:31Z",
-      "last_run": "2026-10-27T06:04:18Z",
+      "last_run": "2026-10-29T23:53:37Z",
       "status": "applied"
     },
     {
@@ -31675,7 +31686,7 @@
       "subject": "W1108",
       "action": "update W1108",
       "first_run": "2026-10-26T21:10:31Z",
-      "last_run": "2026-10-27T06:04:18Z",
+      "last_run": "2026-10-29T23:53:37Z",
       "status": "applied"
     },
     {
@@ -31712,7 +31723,7 @@
       "action": "update W1238",
       "first_run": "2026-10-29T00:06:58Z",
       "last_run": "2026-10-29T00:06:58Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -31720,7 +31731,7 @@
       "subject": "W1240",
       "action": "update W1240",
       "first_run": "2026-10-29T00:06:58Z",
-      "last_run": "2026-10-29T00:06:58Z",
+      "last_run": "2026-10-29T23:53:37Z",
       "status": "open"
     },
     {
@@ -31730,7 +31741,7 @@
       "action": "update W1241",
       "first_run": "2026-10-29T00:06:58Z",
       "last_run": "2026-10-29T00:06:58Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -31738,7 +31749,7 @@
       "subject": "W1242",
       "action": "update W1242",
       "first_run": "2026-10-29T00:06:58Z",
-      "last_run": "2026-10-29T00:06:58Z",
+      "last_run": "2026-10-29T23:53:37Z",
       "status": "open"
     },
     {
@@ -31747,7 +31758,7 @@
       "subject": "W1243",
       "action": "update W1243",
       "first_run": "2026-10-29T00:06:58Z",
-      "last_run": "2026-10-29T00:06:58Z",
+      "last_run": "2026-10-29T23:53:37Z",
       "status": "open"
     },
     {
@@ -31756,7 +31767,7 @@
       "subject": "W1246",
       "action": "update W1246",
       "first_run": "2026-10-29T00:06:58Z",
-      "last_run": "2026-10-29T00:06:58Z",
+      "last_run": "2026-10-29T23:53:37Z",
       "status": "open"
     },
     {
@@ -31766,7 +31777,7 @@
       "action": "update W1248",
       "first_run": "2026-10-29T00:06:58Z",
       "last_run": "2026-10-29T00:06:58Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -31774,7 +31785,1789 @@
       "subject": "W1250",
       "action": "update W1250",
       "first_run": "2026-10-29T00:06:58Z",
-      "last_run": "2026-10-29T00:06:58Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W17",
+      "action": "update W17",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W47",
+      "action": "update W47",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W188",
+      "action": "update W188",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W224",
+      "action": "update W224",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W282",
+      "action": "update W282",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W283",
+      "action": "update W283",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W286",
+      "action": "update W286",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W287",
+      "action": "update W287",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W289",
+      "action": "update W289",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W292",
+      "action": "update W292",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W294",
+      "action": "update W294",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W295",
+      "action": "update W295",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W297",
+      "action": "update W297",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W346",
+      "action": "update W346",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W352",
+      "action": "update W352",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W353",
+      "action": "update W353",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W364",
+      "action": "update W364",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W369",
+      "action": "update W369",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W370",
+      "action": "update W370",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W422",
+      "action": "update W422",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W423",
+      "action": "update W423",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W424",
+      "action": "update W424",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W459",
+      "action": "update W459",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W461",
+      "action": "update W461",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W486",
+      "action": "update W486",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W490",
+      "action": "update W490",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W491",
+      "action": "update W491",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W500",
+      "action": "update W500",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W506",
+      "action": "update W506",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W511",
+      "action": "update W511",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W512",
+      "action": "update W512",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W516",
+      "action": "update W516",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W517",
+      "action": "update W517",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W534",
+      "action": "update W534",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W561",
+      "action": "update W561",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W563",
+      "action": "update W563",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W564",
+      "action": "update W564",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W567",
+      "action": "update W567",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W568",
+      "action": "update W568",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W569",
+      "action": "update W569",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W570",
+      "action": "update W570",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W571",
+      "action": "update W571",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W575",
+      "action": "update W575",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W578",
+      "action": "update W578",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W579",
+      "action": "update W579",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W580",
+      "action": "update W580",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W581",
+      "action": "update W581",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W613",
+      "action": "update W613",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W643",
+      "action": "update W643",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W674",
+      "action": "update W674",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W675",
+      "action": "update W675",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W680",
+      "action": "update W680",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W691",
+      "action": "update W691",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W693",
+      "action": "update W693",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W695",
+      "action": "update W695",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W708",
+      "action": "update W708",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W709",
+      "action": "update W709",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W735",
+      "action": "update W735",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W743",
+      "action": "update W743",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W749",
+      "action": "update W749",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W750",
+      "action": "update W750",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W751",
+      "action": "update W751",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W764",
+      "action": "update W764",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W768",
+      "action": "update W768",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W781",
+      "action": "update W781",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W788",
+      "action": "update W788",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W789",
+      "action": "update W789",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W812",
+      "action": "update W812",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W837",
+      "action": "update W837",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W846",
+      "action": "update W846",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W852",
+      "action": "update W852",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W877",
+      "action": "update W877",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W879",
+      "action": "update W879",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W881",
+      "action": "update W881",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W899",
+      "action": "update W899",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W902",
+      "action": "update W902",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W905",
+      "action": "update W905",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W908",
+      "action": "update W908",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W909",
+      "action": "update W909",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W910",
+      "action": "update W910",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W911",
+      "action": "update W911",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W913",
+      "action": "update W913",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W914",
+      "action": "update W914",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W922",
+      "action": "update W922",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W923",
+      "action": "update W923",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W925",
+      "action": "update W925",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W926",
+      "action": "update W926",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W927",
+      "action": "update W927",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W934",
+      "action": "update W934",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W938",
+      "action": "update W938",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W941",
+      "action": "update W941",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W963",
+      "action": "update W963",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W964",
+      "action": "update W964",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W966",
+      "action": "update W966",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W967",
+      "action": "update W967",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W969",
+      "action": "update W969",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W970",
+      "action": "update W970",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W976",
+      "action": "update W976",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W979",
+      "action": "update W979",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W980",
+      "action": "update W980",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W981",
+      "action": "update W981",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W982",
+      "action": "update W982",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W984",
+      "action": "update W984",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W985",
+      "action": "update W985",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W986",
+      "action": "update W986",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W994",
+      "action": "update W994",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1002",
+      "action": "update W1002",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1007",
+      "action": "update W1007",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1008",
+      "action": "update W1008",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1009",
+      "action": "update W1009",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1010",
+      "action": "update W1010",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1016",
+      "action": "update W1016",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1017",
+      "action": "update W1017",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1018",
+      "action": "update W1018",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1020",
+      "action": "update W1020",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1021",
+      "action": "update W1021",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1022",
+      "action": "update W1022",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1023",
+      "action": "update W1023",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1026",
+      "action": "update W1026",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1028",
+      "action": "update W1028",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1030",
+      "action": "update W1030",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1032",
+      "action": "update W1032",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1035",
+      "action": "update W1035",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1036",
+      "action": "update W1036",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1037",
+      "action": "update W1037",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1038",
+      "action": "update W1038",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1041",
+      "action": "update W1041",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1042",
+      "action": "update W1042",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1047",
+      "action": "update W1047",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1052",
+      "action": "update W1052",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1055",
+      "action": "update W1055",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1056",
+      "action": "update W1056",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1057",
+      "action": "update W1057",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1058",
+      "action": "update W1058",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1063",
+      "action": "update W1063",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1072",
+      "action": "update W1072",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1073",
+      "action": "update W1073",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1075",
+      "action": "update W1075",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1076",
+      "action": "update W1076",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1077",
+      "action": "update W1077",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1079",
+      "action": "update W1079",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1083",
+      "action": "update W1083",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1092",
+      "action": "update W1092",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1093",
+      "action": "update W1093",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1094",
+      "action": "update W1094",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1095",
+      "action": "update W1095",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1096",
+      "action": "update W1096",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1098",
+      "action": "update W1098",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1099",
+      "action": "update W1099",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1100",
+      "action": "update W1100",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1101",
+      "action": "update W1101",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1102",
+      "action": "update W1102",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1103",
+      "action": "update W1103",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1106",
+      "action": "update W1106",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1113",
+      "action": "update W1113",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1128",
+      "action": "update W1128",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1136",
+      "action": "update W1136",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1139",
+      "action": "update W1139",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1140",
+      "action": "update W1140",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1141",
+      "action": "update W1141",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1163",
+      "action": "update W1163",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1169",
+      "action": "update W1169",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1173",
+      "action": "update W1173",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1175",
+      "action": "update W1175",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1178",
+      "action": "update W1178",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1179",
+      "action": "update W1179",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1184",
+      "action": "update W1184",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1186",
+      "action": "update W1186",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1187",
+      "action": "update W1187",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1197",
+      "action": "update W1197",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1198",
+      "action": "update W1198",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1215",
+      "action": "update W1215",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1216",
+      "action": "update W1216",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1217",
+      "action": "update W1217",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1218",
+      "action": "update W1218",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1219",
+      "action": "update W1219",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1220",
+      "action": "update W1220",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1222",
+      "action": "update W1222",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1224",
+      "action": "update W1224",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1225",
+      "action": "update W1225",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1226",
+      "action": "update W1226",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1229",
+      "action": "update W1229",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1231",
+      "action": "update W1231",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1232",
+      "action": "update W1232",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1244",
+      "action": "update W1244",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1245",
+      "action": "update W1245",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1249",
+      "action": "update W1249",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1257",
+      "action": "update W1257",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1258",
+      "action": "update W1258",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1261",
+      "action": "update W1261",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1270",
+      "action": "update W1270",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1271",
+      "action": "update W1271",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1272",
+      "action": "update W1272",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1275",
+      "action": "update W1275",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1276",
+      "action": "update W1276",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1277",
+      "action": "update W1277",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1279",
+      "action": "update W1279",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1280",
+      "action": "update W1280",
+      "first_run": "2026-10-29T23:53:37Z",
+      "last_run": "2026-10-29T23:53:37Z",
       "status": "open"
     }
   ],
@@ -34590,7 +36383,66 @@
         "operator": "other"
       },
       "id": "nemik:R47"
+    },
+    {
+      "card": "W846",
+      "trigger": "round 44: 681 refused by the popLater flake class (//:test_keymap shard 1 of 3), the fix (open through webpage.launched_page) folded into stack 683, which landed pushed 23:36:46Z (54e441b, 720aa5e, 219100d, 9c0dbb6), ls-remote read back, 684 (W1187 calendars.py) inflight 23:51:28Z, gaps 34 min 20 s and 14 min 42 s, pace now in the tick hooks",
+      "root": "The flake was treated as a blocker and not as a resubmit, the shard log was read, and the cause found was the third test that opens its page by hand without a failed-request list (after test_wcag_render and test_svgexport). The fix is in, but W846 stays open because one clean gate is a diagnostic and not a proof. The gap of 34 min 20 s includes a 16 min refused gate, so the real cost of the flake was a full gate cycle plus the diagnosis.",
+      "contributing": [
+        "Three test files opened their pages by hand, there is no check that finds the pattern, so the next one is found by a flake.",
+        "The pace in the tick hooks (R47-F1 done in a hook) is read at tick-open, but 'PENDING by host standing 12' means the reading predates the landing, the G0 quoted it.",
+        "R47-F3 (W1280, ask mtools about the baseline) and the UNSCORED dry run were not done, again.",
+        "The venv-script calendar tests for 684 cannot run under the system python3.14, the direct boundary tests passed and the rest rides on the gate."
+      ],
+      "precommit": "W846 G0 before the edit, W1187 G0 for the calendars change written before the codemod, 684: mypy 3908 to 3888, ruff 1724 to 1721, census 388.33 s green.",
+      "delta": "Held by your report: 683 landed pushed with no popLater failure and ls-remote read back, the pace in the tick hooks (4 commands) and quoted in 684's G0, G0 order for W1187, mtools' queue read with --show. Not held: W1280 and the UNSCORED dry run, W846 as a proof. Open: the 684 verdict.",
+      "sustain": [
+        "Treating the flake as a blocker: reading the shard log and fixing the cause, not resubmitting.",
+        "Folding the fix, the paydown items and the family slices into one stack that landed.",
+        "Putting the pace in the tick hooks (R47-F1) and quoting it in the G0.",
+        "Keeping W846 open as a diagnostic.",
+        "Reading mtools' state with --show, read only."
+      ],
+      "enforcement_layer": "hook",
+      "recurring": true,
+      "one_off": false,
+      "findings": [
+        {
+          "finding": "Find every browser test that opens its page by hand without the failed-request list, and move them onto webpage.launched_page in one pass. Three have been found by flakes (test_wcag_render, test_svgexport, test_keymap). A single grep or a registry check would find the rest before they fail.",
+          "finding_card": "W846",
+          "finding_owner": "nemik session",
+          "due": "2026-11-02",
+          "finding_witness": "a W846 line with the grep result listing every test that opens a page by hand, and a registry check or the list emptied"
+        },
+        {
+          "finding": "Do the W1280 ask to mtools now: read how the gate checks a baseline (land time or per file), write the answer on the card, and nudge mtools with a read-back. The shared baseline files serialize stacks every round, and this card has been due since 2026-10-30.",
+          "finding_card": "W1280",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "a W1280 line quoting the gate's baseline check and a confirmed nudge reply from mtools"
+        },
+        {
+          "finding": "Do the UNSCORED dry run: nemik-rank --update-many unscored with a selector, --vector-source set, dry run, and write the selection count. It is the fifth round owed. If the dry run cannot select anything, say that and park the unscored with a reason.",
+          "finding_card": "W1231",
+          "finding_owner": "nemik session",
+          "due": "2026-10-30",
+          "finding_witness": "a ledger line with the dry-run selection count, or a parked mark with a reason"
+        },
+        {
+          "finding": "The venv-script calendar tests for 684 cannot run under the system python3.14. Run them with the venv's python before the gate verdict is trusted, or record that they ride on the gate alone, so the direct run is not mistaken for coverage.",
+          "finding_card": "W1187",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "a W1187 line with the venv-python run of the calendar tests, or an explicit note that they were not run directly"
+        }
+      ],
+      "handoff": {
+        "instrument": "nemik-paths-forward --add-retro",
+        "channel": "the cold review",
+        "operator": "other"
+      },
+      "id": "nemik:R48"
     }
   ],
-  "retro_counter": 47
+  "retro_counter": 48
 }

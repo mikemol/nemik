@@ -3,30 +3,14 @@
 """nemik:W669: the Wake panel names the repos with work that are not awake, from luthen's series."""
 
 import json
-import os
 import time
 from pathlib import Path
 
-import pytest
 import webpage
-from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import sync_playwright
 
 READY = "() => document.getElementById('wake').innerText.length > 5"
 SHOWN = "() => document.getElementById('wake').innerText"
-
-
-def _absolute(path: str) -> str:
-    """Make a path absolute.
-
-    Args:
-        path: A path, possibly relative to the test's working directory.
-
-    Returns:
-        The absolute path.
-
-    """
-    return str(Path(path).resolve())
 
 
 def _snapshot(path: Path) -> Path:
@@ -68,16 +52,9 @@ def _wake_text(series: Path | None) -> str:
         The panel's visible text.
 
     """
-    exe = os.environ.get("NEMIK_CHROMIUM")
     with webpage.served(series) as url, sync_playwright() as p:
-        try:
-            browser = p.chromium.launch(executable_path=_absolute(exe) if exe else None)
-        except PlaywrightError as e:
-            pytest.skip(f"chromium unavailable: {e}")
-        page = browser.new_page(viewport={"width": 1700, "height": 1250})
-        webpage.watch(page)
-        page.goto(url)
-        webpage.until(page, READY)
+        # nemik:W846: launched_page names the requests that failed if the page breaks on load
+        browser, page = webpage.launched_page(p, url, READY)
         text: object = page.evaluate(SHOWN)
         browser.close()
     return str(text)

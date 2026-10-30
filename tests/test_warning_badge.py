@@ -7,12 +7,7 @@ indicator in the UI. The badge is ASCII after the card's symbol, "!" and the cou
 a Violation), so the count is the text and colour carries nothing; the messages are in Selected.
 """
 
-import os
-from pathlib import Path
-
-import pytest
 import webpage
-from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import sync_playwright
 
 BADGES = """() => {
@@ -39,19 +34,6 @@ PANEL = """() => {
 }"""
 
 
-def _absolute(path: str) -> str:
-    """Make a path absolute.
-
-    Args:
-        path: A path, possibly relative to the test's working directory.
-
-    Returns:
-        The absolute path.
-
-    """
-    return str(Path(path).resolve())
-
-
 def _ask(script: str) -> str:
     """Run a script in the page over the fleet fixture once the graph is drawn.
 
@@ -62,16 +44,9 @@ def _ask(script: str) -> str:
         What it returned.
 
     """
-    exe = os.environ.get("NEMIK_CHROMIUM")
     with webpage.served() as url, sync_playwright() as p:
-        try:
-            browser = p.chromium.launch(executable_path=_absolute(exe) if exe else None)
-        except PlaywrightError as e:
-            pytest.skip(f"chromium unavailable: {e}")
-        page = browser.new_page(viewport={"width": 1700, "height": 1250})
-        webpage.watch(page)
-        page.goto(url)
-        webpage.until(page, webpage.CY_READY)
+        # nemik:W846: launched_page names the requests that failed if the page breaks on load
+        browser, page = webpage.launched_page(p, url)
         answer: object = page.evaluate(script)
         browser.close()
     return str(answer)
