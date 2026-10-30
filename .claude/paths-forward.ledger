@@ -3354,3 +3354,7 @@
 2026-10-30T04:10:38Z  status W1279 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-30T04:15:40Z  status W1286 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-30T04:18:45Z  status W1286 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T04:19:06Z  tick  W1279 advanced  sweep     "692 landed e954f20 (19 DOC201, ruff 1720 to 1700). 693 submitted: 10 more DOC201 in calwrite and withheld, ruff 1700 to 1690, census 376 s; first submit refused for W1286 marked working early. W1285 closed on luthen's witness, W1286 carded for github-42 (series-only, option b), mtools:W2171 on the series question. [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T04:22:06Z  status W1283 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T04:33:08Z  status W1279 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T04:42:26Z  status W1279 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

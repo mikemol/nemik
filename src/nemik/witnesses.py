@@ -37,7 +37,12 @@ _REF = re.compile(r'input\.(\w+)\["((?:[^"\\]|\\.)*)"\]')
 
 
 def _pid(key: str) -> dict | None:
-    """`localhost/<pid>[@<starttime>]`. Only the local host is observable for now (design, open question)."""
+    """`localhost/<pid>[@<starttime>]`. Only the local host is observable for now (design, open question).
+
+    Returns:
+        The process's alive flag and start time, or None when it cannot be observed.
+
+    """
     host, _, rest = key.partition("/")
     if host != "localhost":
         return None
@@ -58,7 +63,12 @@ def _file(key: str) -> dict | None:
 
 
 def _git_ref(key: str) -> dict | None:
-    """`<repo>@<ref>` in the local clone under the nemik root: whether it resolves, and to what."""
+    """`<repo>@<ref>` in the local clone under the nemik root: whether it resolves, and to what.
+
+    Returns:
+        Whether the ref resolves and its sha, or None when the key is not an observable ref.
+
+    """
     from nemik.check import default_root
 
     repo, sep, rev = key.partition("@")
@@ -94,6 +104,10 @@ def _get(env: str, path: str, params: dict) -> dict | None:
 
     The address comes from the environment, not from here: on luthen,
     `luthen-observability/checks/endpoints_query --side host vmalert-http|vmsingle-http`.
+
+    Returns:
+        The parsed JSON body of a successful query, or None when it cannot be observed.
+
     """
     import urllib.parse
     import urllib.request
@@ -111,7 +125,12 @@ def _get(env: str, path: str, params: dict) -> dict | None:
 
 
 def _alert(key: str) -> dict | None:
-    """`<alertname>[{label="v",...}]`: firing | pending | inactive (absent from vmalert's list)."""
+    """`<alertname>[{label="v",...}]`: firing | pending | inactive (absent from vmalert's list).
+
+    Returns:
+        The alert's state, or None when it cannot be observed.
+
+    """
     m = re.fullmatch(r"(\w+)(?:\{(.*)\})?", key)
     body = _get("NEMIK_VMALERT_URL", "/api/v1/alerts", {}) if m else None
     if m is None or body is None:
@@ -129,7 +148,12 @@ def _alert(key: str) -> dict | None:
 
 
 def _promql(key: str) -> dict | None:
-    """Run an instant query: its sample values, and whether the result is empty."""
+    """Run an instant query: its sample values, and whether the result is empty.
+
+    Returns:
+        The sample values and whether the result is empty, or None when unobservable.
+
+    """
     body = _get("NEMIK_VM_URL", "/api/v1/query", {"query": key})
     if body is None:
         return None
@@ -143,6 +167,10 @@ def _apply(key: str) -> dict | None:
     nemik:W233. `applied` is true only for a fresh, well-formed export that carries an applied
     mark for the row; a row the export does not hold, or an export that cannot be read, is
     undefined (never counted as done).
+
+    Returns:
+        The row's host-apply fact, or None when it is undefined.
+
     """
     from nemik.check import default_root
     from nemik.hostapply import fact, load
@@ -169,7 +197,12 @@ OBSERVERS = {
 
 
 def facts(query: str, now: datetime | None = None) -> tuple[dict, list[str]]:
-    """(input document, unobservable refs) for exactly the facts `query` references."""
+    """(input document, unobservable refs) for exactly the facts `query` references.
+
+    Returns:
+        The input document, and the refs that could not be observed.
+
+    """
     doc: dict = {"now": (now or datetime.now(UTC)).isoformat()}
     missing = []
     for obs, raw in _REF.findall(query):
@@ -215,7 +248,12 @@ def opa_json(query: str, doc: object, data: list[str]) -> object:
 
 
 def evaluate(query: str, doc: dict, missing: list[str]) -> str:
-    """Give 'true', 'false' or 'undefined'."""
+    """Give 'true', 'false' or 'undefined'.
+
+    Returns:
+        The verdict string.
+
+    """
     if missing:
         return "undefined"
     parsed = opa_json(query, doc, [])
@@ -236,6 +274,10 @@ def is_rego(query: str, lang: str = "") -> bool:
     `witness_lang`), and that is read first. Only a witness without the field is sniffed: it is
     Rego when it reads `input` (an observer fact, or `input.now`), since a PromQL expression cannot
     name `input.` (a metric name has no dot), and anything else is PromQL.
+
+    Returns:
+        True when the witness is Rego, false when it is PromQL.
+
     """
     if lang in {"rego", "promql"}:
         return lang == "rego"
@@ -251,6 +293,10 @@ def witness(
     sample, the PromQL meaning of a comparison (`x > y` returns the series only while it is true)
     and what `--wait` has always done with one; luthen-observability:W1054 stores its executor-load
     witness that way, and no Rego wrapper (and its escaped quotes) needs writing by hand.
+
+    Returns:
+        The verdict, the facts that decided it, and the refs that could not be observed.
+
     """
     if not is_rego(query, lang):
         stamp = (now or datetime.now(UTC)).isoformat()
@@ -267,6 +313,10 @@ def open_witnesses(root: Path) -> list[tuple[str, Path, str, str, str]]:
     """(repo, queue path, symbol, query, lang) for every witnessed waypoint not yet done.
 
     `lang` is the card's declared witness_lang, or "" when it declares none (nemik:W539).
+
+    Returns:
+        One (repo, queue path, symbol, query, lang) tuple per open witnessed card.
+
     """
     from nemik.check import QUEUE, workstream_files
 
@@ -307,7 +357,12 @@ def queue_texts(root: Path) -> dict[str, str]:
 
 
 def waiters(root: Path, repo: str, sym: str) -> dict[str, list[str]]:
-    """{repo: [W<n>, ...]} for every open waypoint blocked on repo:sym (or on sym within repo)."""
+    """{repo: [W<n>, ...]} for every open waypoint blocked on repo:sym (or on sym within repo).
+
+    Returns:
+        The symbols of the waiting cards, by repo.
+
+    """
     out: dict[str, list[str]] = {}
     for other, text in queue_texts(root).items():
         try:
@@ -334,6 +389,10 @@ def wake(root: Path, repo: str, sym: str, query: str, now: str) -> list[Path]:
     Across repos every edge of the card (blocked_on, caused_by, enables; workrows.edges_of) gets
     its own letter through the delivery record (deliver, W850), so a rerun, or a letter its reader
     deleted, sends nothing again. Waiters were the only edge kind this once saw.
+
+    Returns:
+        The paths of the letters written.
+
     """
     written: list[Path] = []
     syms = waiters(root, repo, sym).get(repo, [])
