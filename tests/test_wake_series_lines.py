@@ -154,3 +154,58 @@ def test_series_only_refuses_a_stale_snapshot_like_series_lines(
     assert refused.value.code == 1
     assert not captured.out
     assert "series: as_of is" in captured.err
+
+
+def _fresh_snapshot(path: Path) -> None:
+    repos: dict[str, object] = {
+        "nemik": {"verdict": "ok"},
+        "mtools": {"verdict": "ok"},
+        "estate": {"verdict": "dormant"},
+    }
+    path.write_text(_text(repos, int(time.time())), encoding="utf-8")
+
+
+def test_only_prints_exactly_the_named_repos(
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The series' other repos are left out; a named repo with no series reads no sample."""
+    monkeypatch.setattr("nemik.check.survey", _forbidden)
+    snapshot = tmp_path / "luthen-series.json"
+    _fresh_snapshot(snapshot)
+    argv = ["--series-only", "--only", "--series", str(snapshot)]
+    main([*argv, "--repo", "nemik", "--repo", "github"])
+    lines = capsys.readouterr().out.splitlines()
+    assert [ln.split()[:2] for ln in lines] == [["github", "no"], ["nemik", "ok"]]
+
+
+def test_only_without_a_repo_refuses_and_prints_nothing(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Naming nothing under --only is a mistake, not an empty success."""
+    snapshot = tmp_path / "luthen-series.json"
+    _fresh_snapshot(snapshot)
+    with pytest.raises(SystemExit) as refused:
+        main(["--series-only", "--only", "--series", str(snapshot)])
+    captured = capsys.readouterr()
+    assert refused.value.code == 1
+    assert not captured.out
+    assert "--only needs at least one --repo" in captured.err
+
+
+def test_the_default_snapshot_is_in_luthens_export_tree(
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """With no --series and none under the root, the export tree's file is read."""
+    export = tmp_path / "export"
+    export.mkdir()
+    _fresh_snapshot(export / "luthen-series.json")
+    root = tmp_path / "root"
+    root.mkdir()
+    monkeypatch.setattr("nemik.wake.EXPORT_TREE", export)
+    main(["--series-only", "--only", "--root", str(root), "--repo", "mtools"])
+    lines = capsys.readouterr().out.splitlines()
+    assert [ln.split()[:2] for ln in lines] == [["mtools", "ok"]]

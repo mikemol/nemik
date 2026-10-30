@@ -35,6 +35,7 @@ from rdflib.namespace import DCTERMS
 from nemik.adapter import BASE, NEMIK
 from nemik.blocks import inbound, operator_asks
 from nemik.luthenseries import load
+from nemik.pacecli import EXPORT_TREE
 
 if TYPE_CHECKING:
     from rdflib.term import Node
@@ -433,7 +434,9 @@ def undelivered(
     return out
 
 
-def series_lines(series: Series, repos: list[str]) -> list[str]:
+def series_lines(
+    series: Series, repos: list[str], *, only: bool = False
+) -> list[str]:
     """One '<repo> <verdict> <as_of>' line per repo, from luthen's series snapshot (nemik:W1281).
 
     A repo the series has no entry for, or an entry with no verdict, reads 'no sample': never ok or
@@ -443,6 +446,7 @@ def series_lines(series: Series, repos: list[str]) -> list[str]:
     Args:
         series: The snapshot, already refused if it was stale.
         repos: The repos to report, joined with the series' own.
+        only: Report exactly `repos`, and none of the series' others (nemik:W1287).
 
     Returns:
         The lines, sorted by repo.
@@ -450,7 +454,8 @@ def series_lines(series: Series, repos: list[str]) -> list[str]:
     """
     as_of = datetime.fromtimestamp(series.as_of, UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
     out: list[str] = []
-    for repo in sorted(set(repos) | set(series.repos)):
+    names = set(repos) if only else set(repos) | set(series.repos)
+    for repo in sorted(names):
         entry = series.repos.get(repo)
         verdict = entry.verdict if entry is not None and entry.verdict else "no sample"
         out.append(f"{repo} {verdict} {as_of}")
@@ -472,36 +477,45 @@ def workstreams(g: Graph) -> list[str]:
     )
 
 
-def series_report(repos: list[str], series_file: Path, max_age: int) -> None:
+def series_report(
+    repos: list[str], series_file: Path, max_age: int, *, only: bool = False
+) -> None:
     """Print the series lines, or refuse when the snapshot cannot be trusted (nemik:W1281).
 
     Args:
         repos: Repos to report beside the series' own; one the series lacks reads 'no sample'.
         series_file: luthen-series.json.
         max_age: The oldest as_of accepted, in seconds.
+        only: Print exactly `repos`; with none named there is nothing to print (nemik:W1287).
 
     Raises:
-        SystemExit: The file is missing, unreadable, unversioned, malformed or too old; the reason
-            is on stderr and nothing is on stdout.
+        SystemExit: The file is missing, unreadable, unversioned, malformed or too old, or --only
+            names no repo; the reason is on stderr and nothing is on stdout.
 
     """
+    if only and not repos:
+        sys.stderr.write("series: --only needs at least one --repo\n")
+        raise SystemExit(1)
     now = int(datetime.now(UTC).timestamp())
     try:
         series = load(series_file, now, max_age)
     except (OSError, ValueError, TypeError) as exc:
         sys.stderr.write(f"series: {exc}\n")
         raise SystemExit(1) from exc
-    sys.stdout.write("\n".join(series_lines(series, repos)) + "\n")
+    sys.stdout.write("\n".join(series_lines(series, repos, only=only)) + "\n")
 
 
 def series_path(args: Options) -> Path:
-    """Locate the series snapshot: --series, else luthen-series.json under the root.
+    """Locate the series snapshot: --series, else the root's, else luthen's export tree.
 
     Returns:
-        The snapshot's path.
+        The snapshot's path; luthen's export tree when the root holds none (nemik:W1287).
 
     """
-    return args.series or args.root / "luthen-series.json"
+    if args.series:
+        return args.series
+    here = args.root / "luthen-series.json"
+    return here if here.exists() else EXPORT_TREE / "luthen-series.json"
 
 
 class Options(argparse.Namespace):
@@ -518,6 +532,7 @@ class Options(argparse.Namespace):
     until: str | None
     series_lines: bool
     series_only: bool
+    only: bool
     repo: list[str] | None
     series: Path | None
     series_max_age: int
@@ -587,13 +602,20 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         help="read the series alone, loading no queue; the repos are its own plus --repo",
     )
     ap.add_argument(
+        "--only",
+        action="store_true",
+        help="with --series-only: print just the repos named with --repo",
+    )
+    ap.add_argument(
         "--repo",
         action="append",
         help="a repo to report even if the series has none (repeat); it reads no sample",
     )
     args = ap.parse_args(argv, namespace=Options())
     if args.series_only:
-        series_report(args.repo or [], series_path(args), args.series_max_age)
+        series_report(
+            args.repo or [], series_path(args), args.series_max_age, only=args.only
+        )
         return
     if g is None:
         g = Graph()
