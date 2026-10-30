@@ -48,7 +48,7 @@
   "misc": 8
  },
  "src/nemik/history.py": {
-  "misc": 167,
+  "misc": 161,
   "type-arg": 8
  },
  "src/nemik/importer.py": {
@@ -68,7 +68,7 @@
   "type-arg": 1
  },
  "src/nemik/metrics.py": {
-  "misc": 37
+  "misc": 34
  },
  "src/nemik/pacing.py": {
   "misc": 5
@@ -95,7 +95,7 @@
  },
  "src/nemik/serve.py": {
   "explicit-any": 5,
-  "misc": 328,
+  "misc": 322,
   "operator": 1,
   "type-arg": 8
  },
@@ -118,8 +118,8 @@
   "type-arg": 2
  },
  "src/nemik/wake.py": {
-  "misc": 210,
-  "type-arg": 13
+  "misc": 185,
+  "type-arg": 10
  },
  "src/nemik/withheld.py": {
   "explicit-any": 1,
@@ -231,7 +231,7 @@
   "no-untyped-call": 1
  },
  "tests/test_manifest.py": {
-  "misc": 33,
+  "misc": 30,
   "no-untyped-call": 2,
   "no-untyped-def": 1
  },
@@ -326,7 +326,7 @@
   "misc": 12
  },
  "tests/test_wake_alarms.py": {
-  "misc": 44
+  "misc": 39
  },
  "tests/test_wake_nudge.py": {
   "misc": 5

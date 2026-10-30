@@ -10,7 +10,7 @@ import pytest
 from rdflib import Graph
 
 from nemik.adapter import queue_graph
-from nemik.wake import fired_alarms
+from nemik.wake import Liveness, fired_alarms
 
 
 def _graph(tmp_path: Path) -> Graph:
@@ -52,7 +52,7 @@ def _graph(tmp_path: Path) -> Graph:
 
 def test_fired_alarms_in_a_window_with_owner_liveness(tmp_path: Path) -> None:
     g = _graph(tmp_path)
-    live = {"life": {"verdict": "ok"}}
+    live: Liveness = {"life": {"verdict": "ok"}}
     got = fired_alarms(
         g, datetime(2026, 10, 1, tzinfo=UTC), datetime(2026, 10, 20, tzinfo=UTC), live
     )
@@ -132,14 +132,14 @@ def test_a_sleeping_owner_of_a_fired_alarm_joins_the_wake_roster(
 
     g = _graph(tmp_path)
     window = (datetime(2026, 10, 1, tzinfo=UTC), datetime(2026, 10, 2, tzinfo=UTC))
-    asleep = {"life": {"verdict": "dormant"}}
+    asleep: Liveness = {"life": {"verdict": "dormant"}}
     rows = roster(g, asleep, alarms=fired_alarms(g, *window, asleep))
     (life,) = [r for r in rows if r["repo"] == "life"]
     assert life["state"] == "asleep" and life["waiting"][0]["blocked"] == "life:W9"
     assert (
         due_nudges(rows, {}) and due_nudges(rows, {"life": 9e18}) == []
     )  # backoff applies as for blockers
-    awake = {"life": {"verdict": "ok"}}
+    awake: Liveness = {"life": {"verdict": "ok"}}
     assert not [
         r
         for r in roster(g, awake, alarms=fired_alarms(g, *window, awake))

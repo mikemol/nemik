@@ -25,7 +25,7 @@ import subprocess
 import sys
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, TypedDict
 
 from mikemol.hooks import rewake
 from rdflib import Graph
@@ -42,7 +42,18 @@ REWAKE_S = rewake.REWAKE_S
 AWAKE = {"ok": "awake", "dormant": "asleep"}
 
 
-def read_liveness(root: Path, source: str | None) -> tuple[dict, str]:
+class LivenessRecord(TypedDict, total=False):
+    """One repo's loop liveness as luthen's checks.loop_liveness writes it."""
+
+    verdict: str
+    last_tick: str
+    history: list[list[str]]
+
+
+Liveness = dict[str, LivenessRecord]
+
+
+def read_liveness(root: Path, source: str | None) -> tuple[Liveness, str]:
     """Return ({repo: record}, where it came from); ({}, reason) when there is none."""
     try:
         if source == "-":
@@ -93,7 +104,7 @@ def should_nudge(
 
 def roster(
     g: Graph,
-    liveness: dict,
+    liveness: Liveness,
     *,
     now: datetime | None = None,
     alarms: list[dict] | None = None,
@@ -140,7 +151,7 @@ def roster(
                 "repo": b["blocker"],
                 "state": "unknown"
                 if rec is None
-                else AWAKE.get(rec.get("verdict"), "idle"),
+                else AWAKE.get(rec.get("verdict", ""), "idle"),
                 "last_tick": last_tick,
                 "last_tick_age_s": age_seconds(last_tick, now),
                 "waiting": [],
@@ -160,7 +171,7 @@ def roster(
 
 
 def fired_alarms(
-    g: Graph, start: datetime, end: datetime, liveness: dict
+    g: Graph, start: datetime, end: datetime, liveness: Liveness
 ) -> list[dict]:
     """Every alarm that fired in [start, end) on an open waypoint, oldest first (nemik:W149).
 
@@ -179,7 +190,7 @@ def fired_alarms(
             continue
         repo, _, sym = str(n).removeprefix(BASE).partition("/")
         rec = liveness.get(repo)
-        state = "unknown" if rec is None else AWAKE.get(rec.get("verdict"), "idle")
+        state = "unknown" if rec is None else AWAKE.get(rec.get("verdict", ""), "idle")
         for trig in sorted(str(t) for t in g.objects(n, NEMIK.alarm)):
             try:
                 hits = fires_between(
