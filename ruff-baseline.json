@@ -273,7 +273,7 @@
  },
  "src/nemik/witnesses.py": {
   "E501": 3,
-  "PLC0415": 10,
+  "PLC0415": 9,
   "S310": 1,
   "S404": 1,
   "S603": 2,
@@ -305,7 +305,6 @@
   "S603": 1
  },
  "tests/test_alarm.py": {
-  "D103": 5,
   "PLC0415": 4,
   "PLR2004": 4
  },
@@ -317,7 +316,6 @@
   "DOC201": 1
  },
  "tests/test_apply_witness.py": {
-  "D103": 6,
   "FBT001": 1,
   "FBT003": 4
  },
@@ -370,7 +368,6 @@
   "SLF001": 3
  },
  "tests/test_calwrite.py": {
-  "D103": 7,
   "FBT001": 1,
   "PLR2004": 2,
   "PT018": 1
@@ -425,9 +422,6 @@
  "tests/test_editable.py": {
   "D100": 1,
   "D103": 1
- },
- "tests/test_endpoint.py": {
-  "D103": 6
  },
  "tests/test_floorasks.py": {
   "D100": 1,
@@ -494,7 +488,6 @@
   "RUF069": 1
  },
  "tests/test_history.py": {
-  "D103": 6,
   "PLC0415": 3,
   "PLR2004": 1,
   "PT018": 4,
@@ -561,7 +554,6 @@
   "D103": 3
  },
  "tests/test_letters.py": {
-  "D103": 7,
   "FBT003": 4,
   "PLC0415": 11,
   "PLR2004": 5,
@@ -657,7 +649,6 @@
   "D103": 3
  },
  "tests/test_publish.py": {
-  "D103": 7,
   "PTH115": 2,
   "S404": 1,
   "S603": 2,
@@ -671,7 +662,7 @@
  },
  "tests/test_rank.py": {
   "D100": 1,
-  "D103": 13,
+  "D103": 1,
   "PLC0415": 14,
   "PLR2004": 5
  },
@@ -715,7 +706,6 @@
   "PLR2004": 2
  },
  "tests/test_salience.py": {
-  "D103": 9,
   "S404": 1,
   "S603": 1
  },
@@ -810,7 +800,6 @@
   "RUF069": 1
  },
  "tests/test_wake_nudge.py": {
-  "D103": 6,
   "PLR2004": 1,
   "RUF069": 1
  },
@@ -831,14 +820,13 @@
  },
  "tests/test_witness_promql.py": {
   "ARG001": 2,
-  "D103": 6,
   "DOC201": 1
  },
  "tests/test_witnesses.py": {
   "ARG001": 5,
   "ARG005": 1,
   "D100": 1,
-  "D103": 10,
+  "D103": 4,
   "PLC0415": 12,
   "PT018": 5,
   "S404": 1,
@@ -856,9 +844,6 @@
   "D103": 4,
   "ERA001": 1,
   "PLR2004": 1
- },
- "tests/test_workflows.py": {
-  "D103": 6
  },
  "tests/webpage.py": {
   "D401": 1,

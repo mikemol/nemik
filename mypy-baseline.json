@@ -34,7 +34,7 @@
   "type-arg": 2
  },
  "src/nemik/critical.py": {
-  "misc": 19
+  "misc": 7
  },
  "src/nemik/floorasks.py": {
   "misc": 17
@@ -122,7 +122,7 @@
   "type-arg": 1
  },
  "src/nemik/witnesses.py": {
-  "misc": 93,
+  "misc": 86,
   "type-arg": 10
  },
  "src/nemik/witwait.py": {

@@ -335,6 +335,17 @@ def critical_doc(g: Graph, scope: set[str] | None = None) -> dict[str, object]:
     return _extended(critical(g, scope)._asdict(), "cycles", cycles(g))
 
 
+class Options(argparse.Namespace):
+    """nemik-critical's parsed command line, typed so each option reads as its own type."""
+
+    root: Path
+    json: bool
+    repo: str | None
+    card: str | None
+    assume_done: list[str]
+    fires: bool
+
+
 def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     """nemik-critical: the longest chain of open work across the fleet, and what has slack."""
     from nemik.check import default_root, survey
@@ -361,7 +372,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         help="each open interrupt card that holds up planned (tick-minted) work, and how much "
         "longer the critical path is while it stays open (W347)",
     )
-    args = ap.parse_args(argv)
+    args = ap.parse_args(argv, namespace=Options())
     if g is None:
         g = Graph()
         for _, qg, _ in survey(args.root):

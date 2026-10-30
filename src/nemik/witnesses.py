@@ -16,6 +16,7 @@ key they could not resolve.
 
 from __future__ import annotations
 
+import argparse
 import json
 import os
 import re
@@ -458,6 +459,17 @@ def deliver(
     return written
 
 
+class Options(argparse.Namespace):
+    """nemik-witnesses's parsed command line, typed so each option reads as its own type."""
+
+    root: Path
+    apply: bool
+    wait: str | None
+    lang: str
+    timeout: str
+    every: str
+
+
 def main(argv: list[str] | None = None) -> None:
     """Run nemik-witnesses: evaluate every open witness, or wait on one query.
 
@@ -473,8 +485,6 @@ def main(argv: list[str] | None = None) -> None:
         SystemExit: with the --wait code.
 
     """
-    import argparse
-
     from nemik.check import default_root
 
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
@@ -511,7 +521,7 @@ def main(argv: list[str] | None = None) -> None:
         default="30s",
         help="with --wait: poll this often (90s, 30m, 12h, 1d)",
     )
-    args = ap.parse_args(argv)
+    args = ap.parse_args(argv, namespace=Options())
     if args.wait:
         from nemik.witwait import poller, seconds, wait
 
