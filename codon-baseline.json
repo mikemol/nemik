@@ -286,9 +286,5 @@
  "work": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'argparse'"
- },
- "workflows": {
-  "as_written": "no module named '__future__'",
-  "stripped": "no module named 'tomllib'"
  }
 }

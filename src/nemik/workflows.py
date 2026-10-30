@@ -3,50 +3,25 @@
 """nemik:W320: nemik's workflows as data, for checking against skills/nemik/SKILL.md.
 
 `data/workflows.toml` declares the card lifecycle, the rules the skill teaches and the
-cross-workstream workflows. This module only reads it; tests/test_workflows.py is the correspondence
-check.
+cross-workstream workflows. This module only reads parsed tables of it (nemik:W1179: no import,
+so the Codon census can compile it; the file and TOML read is in tests/test_workflows.py, the
+correspondence check).
 """
 
-from __future__ import annotations
 
-import tomllib
-from importlib.resources import files
-from typing import Any
-
-
-def load(text: str | None = None) -> dict[str, Any]:
-    """Load the workflow model; `text` overrides the packaged file (for tests).
-
-    Returns:
-        The parsed workflow model.
-
-    """
-    if text is None:
-        text = files("nemik.data").joinpath("workflows.toml").read_text()
-    return tomllib.loads(text)
-
-
-def transitions(model: dict[str, Any]) -> list[dict[str, Any]]:
-    """List the lifecycle's transitions.
-
-    Returns:
-        The transition tables of the workflow model.
-
-    """
-    return list(model["lifecycle"]["transition"])
-
-
-def advice_only(model: dict[str, Any]) -> list[str]:
+def advice_only(transitions: list[dict[str, object]], rules: list[dict[str, object]]) -> list[str]:
     """List what the skill teaches but nothing checks: lifecycle commands and unenforced rules.
+
+    Args:
+        transitions: The lifecycle's transition tables.
+        rules: The rule tables.
 
     Returns:
         One entry per unenforced lifecycle command or rule.
 
     """
     loose = [
-        f"{t['from']}->{t['to']} ({t['command']})"
-        for t in transitions(model)
-        if not t["enforced_by"]
+        f"{t['from']}->{t['to']} ({t['command']})" for t in transitions if not t["enforced_by"]
     ]
-    loose += [f"rule {r['id']}" for r in model["rule"] if not r["enforced_by"]]
+    loose += [f"rule {r['id']}" for r in rules if not r["enforced_by"]]
     return loose

@@ -3388,3 +3388,20 @@
 2026-10-30T07:37:21Z  status W1187 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-30T07:38:21Z  tick  W1187 advanced  sweep     "700 landed 445bf88 (tests-only D103, 3 min 41 s gate, ruff 1617 to 1548). 07:25 pace current: ruff ok, codon and mypy behind. 701 submitted: 93 more test docstrings (ruff -89) and nemik-witnesses and nemik-critical on a typed Namespace (mypy 3548 to 3529), census 371 s. Reverted unsubmitted: witnesses dict[str, object] (8 new index errors). github-42 told the label prints only when a repo is named. [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-30T07:57:36Z  status W846 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T07:58:08Z  tick  W846 advanced  unblock   "701 REFUSED by the popLater flake in two tests outside it; the served() diagnostic fired: server alive, stderr empty, four scripts failed; fix built (request.failure text) and witnessed; resubmitted as 702 with the 701 entries (W1288 slice 2, W1187 two typed CLIs). stack_reason read: any one owed baseline admits. K for slice 2 was 89 (my hand sum said 93). [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T08:21:54Z  status W1288 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T08:21:55Z  status W1187 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T08:21:57Z  status W846 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T08:32:18Z  interrupt W1289 minted    -         "Codon fall: workflows.py loses its tomllib/importlib reads to tests/test_workflows.py and compiles under Codon; mypy falls 3529 to 3508"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1187
+2026-10-30T08:32:23Z  status W1289 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T08:45:27Z  interrupt W1290 minted    -         "nemik-check reads a typed Namespace, so mypy falls by its untyped args reads"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1187
+2026-10-30T08:49:25Z  status W1289 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T09:01:19Z  status W846 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T09:01:20Z  status W1290 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T09:01:22Z  status W1289 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T09:17:00Z  status W1289 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T09:17:01Z  status W1290 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T09:17:03Z  status W846 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T09:25:34Z  status W846 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T09:25:35Z  status W1290 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T09:25:36Z  status W1289 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

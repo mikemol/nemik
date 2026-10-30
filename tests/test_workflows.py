@@ -9,33 +9,35 @@ skill never mentions, fails here.
 from __future__ import annotations
 
 import re
+import tomllib
 from importlib.resources import files
 from pathlib import Path
 
-from nemik.workflows import advice_only, load, transitions
+from nemik.workflows import advice_only
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILL = (ROOT / "skills/nemik/SKILL.md").read_text()
 SHAPES = files("nemik.data").joinpath("shapes.ttl").read_text()
-MODEL = load()
+MODEL = tomllib.loads(files("nemik.data").joinpath("workflows.toml").read_text())
+TRANSITIONS = MODEL["lifecycle"]["transition"]
 
 
 def test_every_transition_joins_declared_states() -> None:
     """Every transition joins declared states."""
     states = set(MODEL["lifecycle"]["states"])
-    assert all({t["from"], t["to"]} <= states for t in transitions(MODEL))
+    assert all({t["from"], t["to"]} <= states for t in TRANSITIONS)
 
 
 def test_the_skill_teaches_every_lifecycle_command() -> None:
     """The skill teaches every lifecycle command."""
-    taught = [t["command"] for t in transitions(MODEL) if t["command"] in SKILL]
-    missing = [t["command"] for t in transitions(MODEL) if t["command"] not in taught]
+    taught = [t["command"] for t in TRANSITIONS if t["command"] in SKILL]
+    missing = [t["command"] for t in TRANSITIONS if t["command"] not in taught]
     assert not missing, f"skills/nemik/SKILL.md never teaches {missing}"
 
 
 def test_every_enforcer_the_model_names_exists() -> None:
     """Every enforcer the model names exists."""
-    declared = [e for t in transitions(MODEL) for e in t["enforced_by"]]
+    declared = [e for t in TRANSITIONS for e in t["enforced_by"]]
     declared += [e for r in MODEL["rule"] for e in r["enforced_by"]]
     for e in declared:
         if "shape" in e:
@@ -76,7 +78,7 @@ def test_every_documented_command_has_a_workflow_or_is_reference() -> None:
 
 def test_what_is_taught_but_not_enforced_is_the_reviewed_set() -> None:
     """Adding an unenforced transition or rule changes this set on purpose, in a reviewed diff."""
-    assert advice_only(MODEL) == [
+    assert advice_only(TRANSITIONS, MODEL["rule"]) == [
         "working->done (--status done)",
         "ready->dropped (--drop)",
     ]
