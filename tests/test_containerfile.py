@@ -37,6 +37,7 @@ def _image_copies() -> set[str]:
 
 
 def test_every_bazel_test_input_is_in_the_image_test_stage() -> None:
+    """Every bazel test input is in the image test stage."""
     copies = _image_copies()
     missing = sorted(
         p

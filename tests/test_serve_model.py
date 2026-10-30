@@ -64,6 +64,7 @@ def test_concurrent_refresh_rebuilds_once(tmp_path: Path) -> None:
 
 
 def test_refresh_is_idempotent_when_nothing_changed(tmp_path: Path) -> None:
+    """Refresh is idempotent when nothing changed."""
     write_queue(tmp_path, "alpha")
     model = Model(tmp_path)
     model.refresh()

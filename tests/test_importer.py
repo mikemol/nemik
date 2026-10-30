@@ -38,6 +38,7 @@ def _queue(tmp_path: Path) -> Path:
 
 
 def test_the_printed_commands_run_and_rebuild_the_links(tmp_path: Path) -> None:
+    """The printed commands run and rebuild the links."""
     state = _queue(tmp_path)
     cmds = commands(_tasks(), "mspdi", "plan.xml", state, WRITER)
     assert all(shlex.split(shlex.join(c)) == c for c in cmds)  # survives printing
@@ -58,6 +59,7 @@ def test_the_printed_commands_run_and_rebuild_the_links(tmp_path: Path) -> None:
 
 
 def test_a_reimport_prints_nothing_already_imported(tmp_path: Path) -> None:
+    """A reimport prints nothing already imported."""
     state = _queue(tmp_path)
     _run(commands(_tasks(), "mspdi", "plan.xml", state, WRITER))
     again = commands(_tasks(), "mspdi", "plan.xml", state, WRITER)

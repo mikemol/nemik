@@ -39,6 +39,7 @@ def _imports(mod: str) -> set[str]:
 
 
 def test_no_served_module_reaches_the_calendar_reader() -> None:
+    """No served module reaches the calendar reader."""
     for start in SERVED:
         seen, stack = set(), [f"nemik.{start}"]
         while stack:
@@ -51,6 +52,7 @@ def test_no_served_module_reaches_the_calendar_reader() -> None:
 
 
 def test_a_cal_blocker_serves_no_event(tmp_path: Path) -> None:
+    """A cal blocker serves no event."""
     import json
 
     from nemik.serve import Model

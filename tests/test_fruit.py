@@ -9,6 +9,7 @@ from nemik.rank import fruit
 
 
 def test_members_are_leaves_moving_nothing_or_tagged() -> None:
+    """Members are leaves moving nothing or tagged."""
     rows = [
         {"symbol": "W1", "downstream": 0},
         {"symbol": "W2", "downstream": 5},
@@ -20,6 +21,7 @@ def test_members_are_leaves_moving_nothing_or_tagged() -> None:
 
 
 def test_tagged_item_joins_with_its_downstream() -> None:
+    """Tagged item joins with its downstream."""
     from nemik.adapter import waypoint_uri, workstream_uri
 
     g = Graph()
@@ -60,6 +62,7 @@ def _graph(spec: dict[str, list[str]]) -> Graph:
 
 
 def test_pile_outweighs_a_deep_item_and_leads() -> None:
+    """Pile outweighs a deep item and leads."""
     from nemik.rank import load_weights, rank
 
     g = _graph(
@@ -81,6 +84,7 @@ def test_pile_outweighs_a_deep_item_and_leads() -> None:
 
 
 def test_deep_item_outweighing_the_pile_leads() -> None:
+    """Deep item outweighing the pile leads."""
     from nemik.rank import load_weights, rank
 
     g = _graph({"W1": ["W90"], "W2": [], "W3": []})  # one stalled peer (8) > fruit 2

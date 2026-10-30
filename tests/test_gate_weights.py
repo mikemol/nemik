@@ -52,6 +52,7 @@ def _graph(tmp_path: Path) -> Graph:
 
 
 def test_the_packaged_weights_skip_the_universal_gates() -> None:
+    """The packaged weights skip the universal gates."""
     weights = load_gate_weights()
     assert weights["constructible"] == 1
     assert weights["reachable"] == 1
@@ -62,6 +63,7 @@ def test_the_packaged_weights_skip_the_universal_gates() -> None:
 def test_an_unnamed_gate_weighs_one_and_a_zero_gate_adds_nothing(
     tmp_path: Path,
 ) -> None:
+    """An unnamed gate weighs one and a zero gate adds nothing."""
     g = _graph(tmp_path)
     local = Fraction(load_weights().local)
     gaps: dict[str, list[dict[str, object]]] = {
@@ -78,4 +80,5 @@ def test_an_unnamed_gate_weighs_one_and_a_zero_gate_adds_nothing(
 
 
 def test_text_overrides_the_packaged_file() -> None:
+    """Text overrides the packaged file."""
     assert load_gate_weights("[residue]\nreachable = 3\n") == {"reachable": Fraction(3)}

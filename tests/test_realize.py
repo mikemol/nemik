@@ -43,6 +43,7 @@ def _queue(tmp_path: Path) -> Path:
 def test_every_live_waypoint_is_judged_and_a_done_one_is_not(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """Every live waypoint is judged and a done one is not."""
     monkeypatch.setenv("OPA_BIN", str(Path(shutil.which(OPA) or OPA).resolve()))
     found = verdicts("alpha", _queue(tmp_path), tmp_path, NOW)
     assert [v["ref"] for v in found] == ["alpha:W1", "alpha:W2"]
@@ -51,6 +52,7 @@ def test_every_live_waypoint_is_judged_and_a_done_one_is_not(
 def test_an_absent_opa_raises_rather_than_reading_clean(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """An absent opa raises rather than reading clean."""
     from mikemol.pathsforward.opa_eval import OpaUnavailableError
 
     monkeypatch.setenv("OPA_BIN", str(tmp_path / "no-such-opa"))

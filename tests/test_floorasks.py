@@ -28,6 +28,7 @@ BIB = """@misc{a1,
 
 
 def test_each_bad_pointer_is_named(tmp_path: Path) -> None:
+    """Each bad pointer is named."""
     (tmp_path / "r" / ".claude").mkdir(parents=True)
     payload: dict[str, object] = {
         "waypoints": [{"symbol": "W1", "status": "done"}],

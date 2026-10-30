@@ -22,6 +22,7 @@ LEDGER = (
 def test_the_interrupt_share_is_unplanned_over_planned_plus_unplanned(
     tmp_path: Path,
 ) -> None:
+    """The interrupt share is unplanned over planned plus unplanned."""
     ledger = tmp_path / "paths-forward.ledger"
     ledger.write_text(LEDGER)
     first, second = toil("a", ledger)

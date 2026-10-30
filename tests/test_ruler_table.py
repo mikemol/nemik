@@ -10,6 +10,7 @@ from nemik.serve import Model, ruler_table
 
 
 def test_the_table_is_mtools_generator_and_decodes_by_length() -> None:
+    """The table is mtools generator and decodes by length."""
     edges = [{"source": f"s{i}", "target": "t", "kind": "waits"} for i in range(5)] + [
         {"source": "x", "target": "t", "kind": "enables"}
     ]
@@ -24,6 +25,7 @@ def test_the_table_is_mtools_generator_and_decodes_by_length() -> None:
 
 
 def test_the_fixture_graph_covers_every_line_it_draws() -> None:
+    """The fixture graph covers every line it draws."""
     model = Model(Path(__file__).parent / "fixtures" / "fleet")
     model.refresh()
     doc = model.doc

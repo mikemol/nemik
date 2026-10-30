@@ -47,6 +47,7 @@ def snapshot_url(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
 
 
 def test_the_view_draws_from_the_snapshot_files_alone(snapshot_url: str) -> None:
+    """The view draws from the snapshot files alone."""
     with sync_playwright() as p:
         browser, page = webpage.launched_page(p, snapshot_url)
         errors: list[str] = []

@@ -24,6 +24,7 @@ def _ask(g: Graph, repo: str, sym: str, text: str) -> URIRef:
 
 
 def test_an_ask_carries_the_demand_of_the_cards_waiting_behind_it() -> None:
+    """An ask carries the demand of the cards waiting behind it."""
     g = Graph()
     heavy = _ask(g, "a", "W1", "the heavy one")
     light = _ask(g, "a", "W2", "the light one")
@@ -55,6 +56,7 @@ def test_the_metrics_sum_each_repos_asks_and_count_them() -> None:
 
 
 def test_the_heaviest_ask_leads_its_category() -> None:
+    """The heaviest ask leads its category."""
     g = Graph()
     old = _ask(g, "a", "W1", "old but light")
     g.add((old, NEMIK.ticksBlocked, Literal(50)))

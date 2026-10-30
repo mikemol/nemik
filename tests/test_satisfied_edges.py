@@ -9,6 +9,7 @@ from nemik.serve import Model
 
 
 def test_done_children_satisfy_their_edges(tmp_path: Path) -> None:
+    """Done children satisfy their edges."""
     d = tmp_path / "a" / ".claude"
     d.mkdir(parents=True)
     wps = [

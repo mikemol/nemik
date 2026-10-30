@@ -26,6 +26,7 @@ if TYPE_CHECKING:
 def test_the_adapter_reads_letter_paths_from_evidence_and_the_next_step(
     tmp_path: Path,
 ) -> None:
+    """The adapter reads letter paths from evidence and the next step."""
     path = tmp_path / "q.json"
     waypoint = {
         "symbol": "W1",
@@ -53,6 +54,7 @@ def test_the_adapter_reads_letter_paths_from_evidence_and_the_next_step(
 
 
 def test_the_adapter_reads_mtools_attachments_as_cited_letters(tmp_path: Path) -> None:
+    """The adapter reads mtools attachments as cited letters."""
     # nemik:W276: mtools' `--attach PATH` stores {path, sha256}; the path is the citation.
     path = tmp_path / "q.json"
     waypoint = {
@@ -75,6 +77,7 @@ def test_the_adapter_reads_mtools_attachments_as_cited_letters(tmp_path: Path) -
 
 
 def test_inbound_carries_the_letters_only_when_asked() -> None:
+    """Inbound carries the letters only when asked."""
     g = Graph()
     g.add((workstream_uri("b"), RDF.type, NEMIK.Workstream))
     waiter = waypoint_uri("a", "W9")

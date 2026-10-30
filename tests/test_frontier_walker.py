@@ -52,6 +52,7 @@ def _old_frontier(g: Graph, goal: Node) -> tuple[set[Node], set[str]]:
 
 
 def test_the_walker_agrees_with_the_old_walk_on_every_open_card() -> None:
+    """The walker agrees with the old walk on every open card."""
     model = Model(FLEET)
     model.refresh()
     g = model.graph

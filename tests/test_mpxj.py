@@ -38,6 +38,7 @@ def _fleet() -> Graph:
 
 
 def test_mpxj_reads_every_in_file_link(tmp_path: Path) -> None:
+    """Mpxj reads every in file link."""
     java = os.environ.get("NEMIK_JAVA")
     classpath = os.environ.get("NEMIK_MPXJ_CLASSPATH")
     if not java or not classpath:

@@ -36,6 +36,7 @@ ASKS: list[dict] = [
 
 
 def test_only_needs_you_asks_from_opted_in_repos() -> None:
+    """Only needs you asks from opted in repos."""
     uids = [
         line for t in vtodos(ASKS, {"life"}) for line in t if line.startswith("UID:")
     ]
@@ -44,6 +45,7 @@ def test_only_needs_you_asks_from_opted_in_repos() -> None:
 
 
 def test_summary_is_the_stated_ask_and_relations_name_what_it_releases() -> None:
+    """Summary is the stated ask and relations name what it releases."""
     assert stated_ask(ASKS[0]["ask"])[0] == "decide"
     (todo,) = vtodos(ASKS, {"life"}, link="http://nemik:8750")
     assert (
@@ -56,6 +58,7 @@ def test_summary_is_the_stated_ask_and_relations_name_what_it_releases() -> None
 
 
 def test_calendar_is_crlf_folded_and_deterministic() -> None:
+    """Calendar is crlf folded and deterministic."""
     text = calendar(vtodos(ASKS, {"life", "aeternum"}))
     assert text == calendar(vtodos(ASKS, {"life", "aeternum"}))
     assert text.startswith("BEGIN:VCALENDAR\r\nVERSION:2.0\r\n")
@@ -66,6 +69,7 @@ def test_calendar_is_crlf_folded_and_deterministic() -> None:
 
 
 def test_star_opts_every_repo_in(tmp_path: Path) -> None:
+    """Star opts every repo in."""
     from nemik.vtodo import opted_in
 
     f = tmp_path / "ics.toml"

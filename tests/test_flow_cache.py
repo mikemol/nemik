@@ -37,6 +37,7 @@ def _counting(monkeypatch: pytest.MonkeyPatch) -> dict[str, int]:
 def test_a_change_outside_the_cones_is_answered_from_the_cache(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    """A change outside the cones is answered from the cache."""
     calls = _counting(monkeypatch)
     demand = {"x": Fraction(1)}
     needs = {"x": ["a", "b"], "y": ["c"]}  # y's cone is outside x's
@@ -52,6 +53,7 @@ def test_a_change_outside_the_cones_is_answered_from_the_cache(
 def test_a_change_inside_a_cone_is_solved_again(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    """A change inside a cone is solved again."""
     calls = _counting(monkeypatch)
     demand = {"x": Fraction(1)}
     first = flow.solve(demand, {"x": ["a", "b"]}, {"a", "b"})

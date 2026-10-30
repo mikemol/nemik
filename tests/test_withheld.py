@@ -47,6 +47,7 @@ def test_empty_list_withholds_nothing(tmp_path: Path, docs: dict[str, object]) -
 def test_withheld_item_is_dropped_whole_and_pointers_become_stubs(
     tmp_path, docs
 ) -> None:
+    """Withheld item is dropped whole and pointers become stubs."""
     import copy
 
     docs = copy.deepcopy(docs)

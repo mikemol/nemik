@@ -34,6 +34,7 @@ def _tree(root: Path) -> dict[str, bytes]:
 def test_the_scoped_build_publishes_exactly_what_the_unscoped_one_does(
     tmp_path: Path,
 ) -> None:
+    """The scoped build publishes exactly what the unscoped one does."""
     unscoped, scoped = tmp_path / "unscoped", tmp_path / "scoped"
     _build_static(FLEET, unscoped, None, True)
     build_static(FLEET, scoped, None, True)
@@ -51,6 +52,7 @@ def _graph(state: Node) -> Graph:
 
 
 def test_cards_are_read_once_per_graph_inside_a_scope_and_never_stale_outside() -> None:
+    """Cards are read once per graph inside a scope and never stale outside."""
     g = _graph(NEMIK.Ready)
     with indexed():
         first, second = cards(g), cards(g)

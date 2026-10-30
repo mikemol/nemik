@@ -36,6 +36,7 @@ def _fleet(tmp_path: Path) -> Path:
 def test_each_coordinate_is_counted_per_repo(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """Each coordinate is counted per repo."""
     monkeypatch.setenv("OPA_BIN", str(Path(shutil.which(OPA) or OPA).resolve()))
     lines = realizability_lines(_fleet(tmp_path))
     counted = [ln for ln in lines if ln.startswith("nemik_realizability_waypoints{")]
@@ -50,6 +51,7 @@ def test_each_coordinate_is_counted_per_repo(
 def test_an_unjudged_queue_is_flagged_not_zeroed(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """An unjudged queue is flagged not zeroed."""
     monkeypatch.setenv("OPA_BIN", str(tmp_path / "no-such-opa"))
     lines = realizability_lines(_fleet(tmp_path))
     assert 'nemik_realizability_unjudged{repo="alpha"} 1' in lines

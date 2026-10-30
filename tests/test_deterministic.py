@@ -41,6 +41,7 @@ def _wp(sym: str, status: str = "ready", **kw: object) -> dict[str, object]:
 
 
 def test_graph_json_is_identical_across_hash_seeds(tmp_path: Path) -> None:
+    """Graph json is identical across hash seeds."""
     # linux-sources:W40's shape: several blocked_on entries landing on one workstream, one of them
     # its session name, plus peers claiming and not claiming.
     _queue(tmp_path, "tools", [_wp("W24"), _wp("W46"), _wp("W7", enables=["app:W3"])])

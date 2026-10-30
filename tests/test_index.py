@@ -24,6 +24,7 @@ def _graph() -> Graph:
 
 
 def test_indexed_answers_equal_the_graphs() -> None:
+    """Indexed answers equal the graphs."""
     g = _graph()
     nodes = sorted(set(g.subjects()), key=str)
     plain = (
@@ -41,10 +42,12 @@ def test_indexed_answers_equal_the_graphs() -> None:
 
 
 def test_no_index_outside_a_build() -> None:
+    """No index outside a build."""
     assert index(_graph()) is None
 
 
 def test_a_grown_graph_is_indexed_again() -> None:
+    """A grown graph is indexed again."""
     g = _graph()
     d = waypoint_uri("r", "W4")
     with indexed():

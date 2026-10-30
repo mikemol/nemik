@@ -44,6 +44,7 @@ def test_the_corpus_is_there() -> None:
 
 @pytest.mark.parametrize("case", CASES, ids=lambda p: p.stem)
 def test_python_agrees_with_the_corpus(case: Path) -> None:
+    """Python agrees with the corpus."""
     c = json.loads(case.read_text(encoding="utf-8"))
     got_split = json.loads(json.dumps(split(c["doc"]), default=str))
     got_back = json.loads(json.dumps(assemble(got_split), default=str))
@@ -55,6 +56,7 @@ def test_python_agrees_with_the_corpus(case: Path) -> None:
 
 @pytest.mark.parametrize("case", CASES, ids=lambda p: p.stem)
 def test_split_then_assemble_is_identity(case: Path) -> None:
+    """Split then assemble is identity."""
     c = json.loads(case.read_text(encoding="utf-8"))
     doc = dict(c["doc"])
     # assemble's canonical order: nodes by id, edges by (source, target, kind)

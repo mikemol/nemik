@@ -32,6 +32,7 @@ def _schema_for(name: str) -> str:
 
 
 def test_every_schema_is_a_valid_2020_12_schema(built: Path) -> None:
+    """Every schema is a valid 2020 12 schema."""
     schemas = list((built / "schema").rglob("*.schema.json"))
     assert schemas
     for p in schemas:

@@ -56,6 +56,7 @@ EDITS: list[Callable[[Graph], None]] = [_done, _blocked, _bad_blocker, _untitled
 
 @pytest.mark.parametrize("edit", EDITS, ids=lambda e: e.__name__)
 def test_incremental_equals_full_after_an_edit(edit: Callable[[Graph], None]) -> None:
+    """Incremental equals full after an edit."""
     g, sh = _fleet(), shapes()
     key = f"test-{edit.__name__}"
     findings(key, g, sh)
@@ -66,6 +67,7 @@ def test_incremental_equals_full_after_an_edit(edit: Callable[[Graph], None]) ->
 
 
 def test_edits_in_sequence_stay_equal() -> None:
+    """Edits in sequence stay equal."""
     g, sh = _fleet(), shapes()
     findings("test-sequence", g, sh)
     for edit in EDITS:

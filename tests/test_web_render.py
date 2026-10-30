@@ -80,6 +80,7 @@ BOXES = """() => {
 
 
 def test_labels_are_not_covered_by_other_nodes(server: str) -> None:
+    """Labels are not covered by other nodes."""
     with sync_playwright() as p:
         # nemik:W99: Bazel hands a pinned headless shell as $NEMIK_CHROMIUM; launched_page uses it.
         # nemik:W1177: the wait is webpage.load's, bounded and watching the page, not timeout=0.

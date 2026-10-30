@@ -60,6 +60,7 @@ def _cone(needs: dict[str, list[str]], front: set[str], source: str) -> list[str
 def test_the_sparse_elimination_equals_the_dense_solve_on_random_graphs(
     seed: int,
 ) -> None:
+    """The sparse elimination equals the dense solve on random graphs."""
     rng = random.Random(seed)
     cards = [f"c{i}" for i in range(18)]
     front = {c for c in cards if rng.random() < 0.3}

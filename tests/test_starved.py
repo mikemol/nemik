@@ -31,6 +31,7 @@ def test_declared_age_is_read() -> None:
 
 
 def test_an_old_card_under_newer_ones_is_starved() -> None:
+    """An old card under newer ones is starved."""
     with tempfile.TemporaryDirectory() as tmp:
         queue = Path(tmp) / "a" / ".claude" / "paths-forward.json"
         queue.parent.mkdir(parents=True)

@@ -64,6 +64,7 @@ def test_band_table(v: str, want: str) -> None:
 
 
 def test_unscored_and_invalid_take_the_declared_default_and_say_why() -> None:
+    """Unscored and invalid take the declared default and say why."""
     assert band(None, B) == (B.unscored, "unscored")
     b, why = band("WV:1/R:H", B)
     assert b == B.unscored
@@ -71,11 +72,13 @@ def test_unscored_and_invalid_take_the_declared_default_and_say_why() -> None:
 
 
 def test_table_refuses_a_default_outside_its_order() -> None:
+    """Table refuses a default outside its order."""
     with pytest.raises(ValueError, match="not in order"):
         load_bands('order = ["a"]\nunscored = "b"\nunmatched = "a"\n')
 
 
 def test_adapter_carries_the_vector_as_written(tmp_path: Path) -> None:
+    """Adapter carries the vector as written."""
     q = tmp_path / "q.json"
     payload: dict[str, object] = {
         "version": 1,

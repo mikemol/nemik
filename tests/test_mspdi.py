@@ -27,11 +27,13 @@ def _fleet() -> Graph:
 
 
 def test_the_whole_fleet_round_trips() -> None:
+    """The whole fleet round trips."""
     tasks = project(_fleet())
     assert read(write(tasks)) == tasks
 
 
 def test_one_repo_round_trips_with_its_cross_project_links() -> None:
+    """One repo round trips with its cross project links."""
     g = _fleet()
     tasks = project(g)
     repo = next(t.repo for t in tasks if any(link.cross_repo for link in t.preds))
@@ -45,6 +47,7 @@ def test_one_repo_round_trips_with_its_cross_project_links() -> None:
 
 
 def test_every_link_is_finish_to_start() -> None:
+    """Every link is finish to start."""
     root = ET.fromstring(write(project(_fleet())))
     types = {el.text for el in root.iter(f"{{{NS}}}Type")}
     assert types == {"1"}

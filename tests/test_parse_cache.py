@@ -40,6 +40,7 @@ def _counting(monkeypatch: pytest.MonkeyPatch) -> dict[str, int]:
 def test_an_unchanged_file_is_parsed_once(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """An unchanged file is parsed once."""
     calls = _counting(monkeypatch)
     a, b = tmp_path / "a.json", tmp_path / "b.json"
     a.write_text("1")
@@ -59,6 +60,7 @@ def test_an_unchanged_file_is_parsed_once(
 def test_a_new_repo_invalidates_every_queue(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """A new repo invalidates every queue."""
     calls = _counting(monkeypatch)
     a = tmp_path / "a.json"
     a.write_text("1")
@@ -70,6 +72,7 @@ def test_a_new_repo_invalidates_every_queue(
 def test_a_mutated_answer_does_not_reach_the_cache(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """A mutated answer does not reach the cache."""
     _counting(monkeypatch)
     a = tmp_path / "a.json"
     a.write_text("1")

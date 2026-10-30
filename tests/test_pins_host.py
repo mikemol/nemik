@@ -15,6 +15,7 @@ SHA = "697942ebd41dd2dbb17d77facef34c84f581f9ee"
 
 
 def test_the_receipt_names_the_installed_commit(tmp_path: Path) -> None:
+    """The receipt names the installed commit."""
     receipt = tmp_path / "uv-receipt.toml"
     receipt.write_text(
         "[tool]\n"
@@ -24,6 +25,7 @@ def test_the_receipt_names_the_installed_commit(tmp_path: Path) -> None:
 
 
 def test_no_receipt_or_another_tool_is_not_an_install(tmp_path: Path) -> None:
+    """No receipt or another tool is not an install."""
     assert installed(tmp_path / "absent.toml") is None
     other = tmp_path / "uv-receipt.toml"
     other.write_text('[tool]\nrequirements = [{ name = "ruff" }]\n')

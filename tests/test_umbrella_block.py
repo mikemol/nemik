@@ -18,6 +18,7 @@ def _wp(g: Graph, repo: str, sym: str, status: str = "ready") -> URIRef:
 
 
 def test_peer_block_on_umbrella_is_flagged_and_on_child_is_not() -> None:
+    """Peer block on umbrella is flagged and on child is not."""
     g = Graph()
     umbrella, child, sibling = (
         _wp(g, "b", "W43"),
@@ -34,6 +35,7 @@ def test_peer_block_on_umbrella_is_flagged_and_on_child_is_not() -> None:
 
 
 def test_umbrella_whose_children_are_all_done_is_not_flagged() -> None:
+    """Umbrella whose children are all done is not flagged."""
     g = Graph()
     umbrella, child = _wp(g, "b", "W1"), _wp(g, "b", "W2", "done")
     g.add((child, NEMIK.enables, umbrella))
@@ -43,6 +45,7 @@ def test_umbrella_whose_children_are_all_done_is_not_flagged() -> None:
 
 
 def test_block_on_a_landed_waypoint_is_flagged_and_all_landed_means_ready() -> None:
+    """Block on a landed waypoint is flagged and all landed means ready."""
     g = Graph()
     done, live = _wp(g, "p", "W111", "done"), _wp(g, "p", "W120")
     all_landed, mixed = _wp(g, "p", "W117", "blocked"), _wp(g, "p", "W119", "blocked")
@@ -67,6 +70,7 @@ def test_block_on_a_landed_waypoint_is_flagged_and_all_landed_means_ready() -> N
 
 
 def test_symbol_with_prose_attached_is_malformed_and_clean_forms_are_not() -> None:
+    """Symbol with prose attached is malformed and clean forms are not."""
     g = Graph()
     w = _wp(g, "p", "W19", "blocked")
     for text in (

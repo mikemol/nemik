@@ -32,6 +32,7 @@ def _code(path: Path) -> list[str]:
 
 
 def test_the_gate_is_the_precommit_suite() -> None:
+    """The gate is the precommit suite."""
     assert "bazel test //:precommit" in "\n".join(_code(SCRIPT))
     assert not [line for line in _code(SCRIPT) if "bazel test //..." in line], (
         "the gate went back to //..., which is no named target"
@@ -70,6 +71,7 @@ def test_the_gate_checks_shell_files_and_stray_code() -> None:
 
 
 def test_the_suite_covers_every_test_target() -> None:
+    """The suite covers every test target."""
     build = (ROOT / "BUILD.bazel").read_text()
     suite = build[build.index("test_suite(") :]
     suite = suite[: suite.index(")\n")]
@@ -80,6 +82,7 @@ def test_the_suite_covers_every_test_target() -> None:
 
 
 def test_the_hook_refuses_when_bazel_is_absent(tmp_path: Path) -> None:
+    """The hook refuses when bazel is absent."""
     empty = tmp_path / "empty"
     empty.mkdir()
     run = subprocess.run(
@@ -96,4 +99,5 @@ def test_the_hook_refuses_when_bazel_is_absent(tmp_path: Path) -> None:
 
 
 def test_the_hook_names_bazel_in_code_not_only_comments() -> None:
+    """The hook names bazel in code not only comments."""
     assert any("bazel" in line for line in _code(HOOK))

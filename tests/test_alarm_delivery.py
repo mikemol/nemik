@@ -10,6 +10,7 @@ def _a(at: str, rid: str = "", ref: str = "life:W12") -> Alarm:
 
 
 def test_a_firing_is_delivered_once_across_overlapping_windows() -> None:
+    """A firing is delivered once across overlapping windows."""
     seen: dict[str, float] = {}
     first = undelivered([_a("2026-10-01T13:00:00Z")], seen)
     again = undelivered([_a("2026-10-01T13:00:00Z")], seen)
@@ -18,6 +19,7 @@ def test_a_firing_is_delivered_once_across_overlapping_windows() -> None:
 
 
 def test_occurrences_and_instants_are_distinct() -> None:
+    """Occurrences and instants are distinct."""
     seen: dict[str, float] = {}
     rows = [
         _a("2026-10-01T13:00:00Z", "20261001"),
@@ -28,6 +30,7 @@ def test_occurrences_and_instants_are_distinct() -> None:
 
 
 def test_errors_are_never_marked_delivered() -> None:
+    """Errors are never marked delivered."""
     seen: dict[str, float] = {}
     bad: Alarm = {**_a(""), "error": "bad trigger"}
     assert undelivered([bad], seen) == [bad]
@@ -36,4 +39,5 @@ def test_errors_are_never_marked_delivered() -> None:
 
 
 def test_alarm_keys_cannot_collide_with_repo_keys() -> None:
+    """Alarm keys cannot collide with repo keys."""
     assert "|" in alarm_key(_a("x"))

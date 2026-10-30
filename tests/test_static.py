@@ -9,6 +9,7 @@ from nemik.serve import PAGE_FILES, VENDOR, page_file, write_static
 
 
 def test_page_and_vendor_written_with_relative_links(tmp_path: Path) -> None:
+    """Page and vendor written with relative links."""
     written = write_static(tmp_path)
     # nemik:W802: and the page's own files that exist (the stylesheet, later the script modules)
     own = {name for name in PAGE_FILES if page_file(name) is not None}
@@ -26,6 +27,7 @@ def test_page_and_vendor_written_with_relative_links(tmp_path: Path) -> None:
 
 
 def test_data_files_cover_what_the_page_fetches_and_are_manifested() -> None:
+    """Data files cover what the page fetches and are manifested."""
     from pathlib import Path
 
     from nemik.manifest import unmanifested
@@ -43,6 +45,7 @@ def test_data_files_cover_what_the_page_fetches_and_are_manifested() -> None:
 
 
 def test_static_page_has_no_tools_panel(tmp_path: Path) -> None:
+    """Static page has no tools panel."""
     write_static(tmp_path)
     html = (tmp_path / "index.html").read_text()
     assert 'id="tool"' not in html
@@ -50,6 +53,7 @@ def test_static_page_has_no_tools_panel(tmp_path: Path) -> None:
 
 
 def test_static_build_end_to_end(tmp_path: Path) -> None:
+    """Static build end to end."""
     import json
     from pathlib import Path
 

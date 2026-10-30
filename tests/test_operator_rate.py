@@ -17,6 +17,7 @@ def _q(on_operator: list[str], other: list[str]) -> dict:
 
 
 def test_asks_entering_and_leaving_the_operator_are_counted_per_week() -> None:
+    """Asks entering and leaving the operator are counted per week."""
     monday = datetime(2026, 10, 5, tzinfo=UTC)
     tuesday = datetime(2026, 10, 6, tzinfo=UTC)
     snaps = [

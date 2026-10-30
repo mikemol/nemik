@@ -53,15 +53,18 @@ def _card(symbol: str, blocked_on: str, **more: str) -> dict[str, object]:
 
 
 def test_a_witnessed_card_may_be_blocked_on_the_witness_runner(tmp_path: Path) -> None:
+    """A witnessed card may be blocked on the witness runner."""
     cards = [_card("W1", "nemik-witnesses", witness=WITNESS)]
     assert _unresolved(tmp_path, cards) == set()
 
 
 def test_a_card_without_a_witness_still_names_no_party(tmp_path: Path) -> None:
+    """A card without a witness still names no party."""
     cards = [_card("W1", "nemik-witnesses")]
     assert _unresolved(tmp_path, cards) == {"W1"}
 
 
 def test_a_witnessed_card_blocked_on_nonsense_is_still_flagged(tmp_path: Path) -> None:
+    """A witnessed card blocked on nonsense is still flagged."""
     cards = [_card("W1", "somebody-else", witness=WITNESS)]
     assert _unresolved(tmp_path, cards) == {"W1"}

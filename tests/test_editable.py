@@ -19,6 +19,7 @@ class _Dist:
 def test_editable_install_is_detected_and_a_package_install_is_not(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    """Editable install is detected and a package install is not."""
     for text, want in (
         (json.dumps({"url": "file:///x", "dir_info": {"editable": True}}), True),
         (json.dumps({"url": "file:///x", "dir_info": {}}), False),

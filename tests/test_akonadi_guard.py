@@ -19,6 +19,7 @@ from nemik.vtodo import DEFAULT_HELPER
     not DEFAULT_HELPER.exists(), reason="the Akonadi helper is a host build"
 )
 def test_helper_refuses_without_a_session_bus() -> None:
+    """Helper refuses without a session bus."""
     env = {
         "HOME": os.environ.get("HOME", "/"),
         "PATH": "/usr/bin:/bin",

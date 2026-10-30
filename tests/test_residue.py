@@ -39,6 +39,7 @@ def _fleet(tmp_path: Path) -> Path:
 def test_every_judged_card_with_a_gap_is_keyed_by_its_ref(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """Every judged card with a gap is keyed by its ref."""
     monkeypatch.setenv("OPA_BIN", str(Path(shutil.which(OPA) or OPA).resolve()))
     gaps = by_card(_fleet(tmp_path))
     assert set(gaps) == {"alpha:W1", "alpha:W2"}
@@ -48,6 +49,7 @@ def test_every_judged_card_with_a_gap_is_keyed_by_its_ref(
 def test_an_absent_opa_raises_rather_than_reporting_no_gaps(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """An absent opa raises rather than reporting no gaps."""
     from mikemol.pathsforward.opa_eval import OpaUnavailableError
 
     monkeypatch.setenv("OPA_BIN", str(tmp_path / "no-such-opa"))

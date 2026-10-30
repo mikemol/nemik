@@ -24,6 +24,7 @@ def _build(tmp_path: Path, items: list[dict[str, object]]) -> Path:
 
 
 def test_every_repo_has_a_parsable_base_and_change_log(tmp_path: Path) -> None:
+    """Every repo has a parsable base and change log."""
     out = _build(tmp_path, [])
     repos = sorted(p.name for p in (out / "trs").iterdir())
     assert repos
@@ -43,6 +44,7 @@ def test_every_repo_has_a_parsable_base_and_change_log(tmp_path: Path) -> None:
 
 
 def test_a_withheld_card_is_in_neither_the_base_nor_the_log(tmp_path: Path) -> None:
+    """A withheld card is in neither the base nor the log."""
     first = _build(tmp_path / "a", [])
     repo = min(p.name for p in (first / "trs").iterdir())
     base = Graph().parse(first / "trs" / repo / "base.ttl", format="turtle")

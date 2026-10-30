@@ -30,11 +30,13 @@ def _documents():
 
 
 def test_every_rendered_field_is_manifested() -> None:
+    """Every rendered field is manifested."""
     for name, doc in _documents():
         assert unmanifested(name, doc) == [], name
 
 
 def test_a_new_field_is_flagged() -> None:
+    """A new field is flagged."""
     docs = dict(_documents())
     docs["graph.json"]["nodes"][0]["secret"] = "x"
     assert unmanifested("graph.json", docs["graph.json"]) == ["graph.json nodes.secret"]

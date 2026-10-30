@@ -35,6 +35,7 @@ def _edges(g: Graph) -> set[tuple[str, str]]:
 
 
 def test_the_projection_decodes_to_every_blocking_edge() -> None:
+    """The projection decodes to every blocking edge."""
     g = _fleet()
     tasks = project(g)
     assert tasks, "the fixture fleet has cards"
@@ -43,6 +44,7 @@ def test_the_projection_decodes_to_every_blocking_edge() -> None:
 
 
 def test_uids_are_positive_unique_and_cross_repo_links_are_marked() -> None:
+    """Uids are positive unique and cross repo links are marked."""
     tasks = project(_fleet())
     assert sorted(t.uid for t in tasks) == list(range(1, len(tasks) + 1))
     for t in tasks:
@@ -51,6 +53,7 @@ def test_uids_are_positive_unique_and_cross_repo_links_are_marked() -> None:
 
 
 def test_one_repo_keeps_its_links_into_others() -> None:
+    """One repo keeps its links into others."""
     g = _fleet()
     repo = project(g)[0].repo
     mine = project(g, {repo})

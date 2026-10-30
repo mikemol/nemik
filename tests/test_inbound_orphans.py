@@ -43,6 +43,7 @@ def _repo(root: Path, cites: str = "") -> None:
 def test_an_uncited_letter_is_an_unclaimed_row_with_its_claim(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
+    """An uncited letter is an unclaimed row with its claim."""
     _repo(tmp_path)
     main(["a", "--root", str(tmp_path)])
     out = capsys.readouterr().out
@@ -55,6 +56,7 @@ def test_an_uncited_letter_is_an_unclaimed_row_with_its_claim(
 def test_a_cited_letter_is_not_listed(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
+    """A cited letter is not listed."""
     name = f"{_today().isoformat()}-b-please-do-x.md"
     _repo(tmp_path, cites=f"a/inbox/{name}")
     main(["a", "--root", str(tmp_path)])

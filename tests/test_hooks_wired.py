@@ -19,6 +19,7 @@ EVENTS = ["SessionStart", "UserPromptSubmit"]
 
 
 def test_settings_wire_both_hooks_on_both_events() -> None:
+    """Settings wire both hooks on both events."""
     settings = json.loads((ROOT / ".claude" / "settings.json").read_text())["hooks"]
     for event in EVENTS:
         cmds = [
@@ -32,6 +33,7 @@ def test_settings_wire_both_hooks_on_both_events() -> None:
 
 
 def test_each_wired_hook_is_installed_in_the_built_venv() -> None:
+    """Each wired hook is installed in the built venv."""
     for hook in HOOKS:
         assert (installed._bin()[0] / hook).exists(), hook
 

@@ -32,6 +32,7 @@ def server() -> Iterator[str]:
 
 
 def test_a_poll_that_only_changes_fields_follows_in_place(server: str) -> None:
+    """A poll that only changes fields follows in place."""
     # W496: the poll rebuilt the graph whenever anything differed; a change to a card's fields now
     # writes onto the same graph: same instance, and nothing moves.
     with sync_playwright() as p:
@@ -104,6 +105,7 @@ MOVED = """(before) => {
 def test_a_poll_that_adds_and_removes_cards_leaves_the_rest_where_it_was(
     server: str,
 ) -> None:
+    """A poll that adds and removes cards leaves the rest where it was."""
     # W498: a new card goes beside what it is wired to, a removed one leaves its place empty, and
     # the button lays the graph out afresh.
     with sync_playwright() as p:
@@ -138,6 +140,7 @@ def test_a_poll_that_adds_and_removes_cards_leaves_the_rest_where_it_was(
 
 
 def test_a_rebuilt_card_list_keeps_the_focus_a_reader_had_in_it(server: str) -> None:
+    """A rebuilt card list keeps the focus a reader had in it."""
     # W480: a poll that changes a row's text rebuilds the list; keyboard focus stays on the same
     # card.
     with sync_playwright() as p:
@@ -171,6 +174,7 @@ def test_a_rebuilt_card_list_keeps_the_focus_a_reader_had_in_it(server: str) -> 
 
 
 def test_a_panel_whose_markup_did_not_change_is_not_rewritten(server: str) -> None:
+    """A panel whose markup did not change is not rewritten."""
     # W497: a panel the reader is scrolled or focused in is left alone by a poll that did not change
     # it,
     # and one something else touched is painted again.

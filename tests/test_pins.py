@@ -48,6 +48,7 @@ def _peer(root: Path) -> list[str]:
 
 
 def test_a_pin_is_as_far_behind_as_the_peer_has_commits_since(tmp_path: Path) -> None:
+    """A pin is as far behind as the peer has commits since."""
     shas = _peer(tmp_path)
     consumer = tmp_path / "app"
     consumer.mkdir()
@@ -67,6 +68,7 @@ def test_a_pin_is_as_far_behind_as_the_peer_has_commits_since(tmp_path: Path) ->
 def test_a_vendored_wheel_names_its_mtools_commit_in_its_file_name(
     tmp_path: Path,
 ) -> None:
+    """A vendored wheel names its mtools commit in its file name."""
     # nemik:W303: nemik pins mtools by wheel (vendor/wheels/mikemol_*-0.1.0+<sha>-...), not a git
     # URL.
     consumer = tmp_path / "app"
@@ -81,6 +83,7 @@ def test_a_vendored_wheel_names_its_mtools_commit_in_its_file_name(
 def test_the_command_exits_6_only_past_the_threshold(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
+    """The command exits 6 only past the threshold."""
     shas = _peer(tmp_path)
     consumer = tmp_path / "app"
     consumer.mkdir()

@@ -19,9 +19,7 @@ from nemik.workflows import advice_only
 ROOT = Path(__file__).resolve().parents[1]
 SKILL = (ROOT / "skills/nemik/SKILL.md").read_text()
 SHAPES = files("nemik.data").joinpath("shapes.ttl").read_text()
-MODEL = table(
-    tomllib.loads(files("nemik.data").joinpath("workflows.toml").read_text())
-)
+MODEL = table(tomllib.loads(files("nemik.data").joinpath("workflows.toml").read_text()))
 LIFECYCLE = table(MODEL["lifecycle"])
 TRANSITIONS = tables(LIFECYCLE["transition"])
 RULES = tables(MODEL["rule"])
@@ -40,7 +38,9 @@ def test_every_transition_joins_declared_states() -> None:
 def test_the_skill_teaches_every_lifecycle_command() -> None:
     """The skill teaches every lifecycle command."""
     taught = [str(t["command"]) for t in TRANSITIONS if str(t["command"]) in SKILL]
-    missing = [str(t["command"]) for t in TRANSITIONS if str(t["command"]) not in taught]
+    missing = [
+        str(t["command"]) for t in TRANSITIONS if str(t["command"]) not in taught
+    ]
     assert not missing, f"skills/nemik/SKILL.md never teaches {missing}"
 
 
@@ -51,7 +51,9 @@ def test_every_enforcer_the_model_names_exists() -> None:
     for e in declared:
         if "shape" in e:
             assert str(e["shape"]) in SHAPES, f"no shape message holds {e['shape']!r}"
-        elif (ROOT / str(e["hook"])).exists():  # the hook is not in a Bazel test sandbox
+        elif (
+            ROOT / str(e["hook"])
+        ).exists():  # the hook is not in a Bazel test sandbox
             assert str(e["text"]) in (ROOT / str(e["hook"])).read_text()
 
 

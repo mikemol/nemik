@@ -113,6 +113,7 @@ def test_paths_are_declared_inputs() -> None:
 
 
 def test_the_reader_finds_the_index_html_case() -> None:
+    """The reader finds the index html case."""
     # the expression that cost W467 its commit, before the fix
     src = 'PAGE = Path(__file__).parents[1] / "src" / "nemik" / "web" / "index.html"\n'
     assert _paths(src) == {"src/nemik/web/index.html"}

@@ -30,6 +30,7 @@ def _gaps(script: str, build: str, skill: str, workflows: str) -> list[str]:
 
 
 def test_every_nemik_command_is_declared_in_every_registry() -> None:
+    """Every nemik command is declared in every registry."""
     scripts = tomllib.loads((ROOT / "pyproject.toml").read_text())["project"]["scripts"]
     build = (ROOT / "BUILD.bazel").read_text()
     skill = (ROOT / "skills" / "nemik" / "SKILL.md").read_text()
@@ -45,6 +46,7 @@ def test_every_nemik_command_is_declared_in_every_registry() -> None:
 
 
 def test_a_command_missing_from_a_registry_is_named_with_all_its_gaps() -> None:
+    """A command missing from a registry is named with all its gaps."""
     assert _gaps("nemik-new", '"nemik-old": "x"', "`nemik-old`", '"nemik-old"') == [
         "BUILD.bazel console_scripts",
         "skills/nemik/SKILL.md commands table",

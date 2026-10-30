@@ -12,6 +12,7 @@ START = datetime(2026, 10, 1, tzinfo=UTC)
 
 
 def test_within_the_burst_the_bucket_never_goes_over() -> None:
+    """Within the burst the bucket never goes over."""
     stamps = [START + timedelta(hours=i) for i in range(10)]
     overdraft, level = bucket(
         stamps, rate=5, burst=10, start=START, now=START + timedelta(hours=10)
@@ -21,6 +22,7 @@ def test_within_the_burst_the_bucket_never_goes_over() -> None:
 
 
 def test_a_flood_past_the_burst_is_an_overdraft_that_refills_at_the_rate() -> None:
+    """A flood past the burst is an overdraft that refills at the rate."""
     flood = [
         START + timedelta(minutes=i) for i in range(30)
     ]  # 30 cards in half an hour
@@ -35,5 +37,6 @@ def test_a_flood_past_the_burst_is_an_overdraft_that_refills_at_the_rate() -> No
 
 
 def test_the_declared_table_is_read_and_defaults_otherwise() -> None:
+    """The declared table is read and defaults otherwise."""
     assert limits("[pacing]\nrate = 3\nburst = 7\nwindow_days = 2\n") == (3.0, 7.0, 2)
     assert limits("") == (50.0, 150.0, 14)

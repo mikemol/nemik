@@ -19,6 +19,7 @@ CLAIMS = (
 
 
 def test_claims_are_read_by_repo_and_tag() -> None:
+    """Claims are read by repo and tag."""
     held = parse_claims(CLAIMS)
     assert held["mtools", "nemik"] == Holder("69232:142119", "22s")
     assert ("mtools", "locks") in held
@@ -26,6 +27,7 @@ def test_claims_are_read_by_repo_and_tag() -> None:
 
 
 def test_an_overlap_row_names_the_holder_when_there_is_one() -> None:
+    """An overlap row names the holder when there is one."""
     held = parse_claims(CLAIMS)
     assert (
         row("nemik", ["mtools:W913", "nemik:W305"], held)
@@ -36,4 +38,5 @@ def test_an_overlap_row_names_the_holder_when_there_is_one() -> None:
 
 
 def test_an_absent_membudget_reads_as_no_claims(tmp_path: Path) -> None:
+    """An absent membudget reads as no claims."""
     assert read_claims(tmp_path / "no-such-membudget") is None

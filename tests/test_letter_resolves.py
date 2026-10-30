@@ -46,12 +46,14 @@ def _letter_findings(root: Path) -> list[str]:
 
 
 def test_a_cited_letter_that_does_not_exist_is_a_warning(tmp_path: Path) -> None:
+    """A cited letter that does not exist is a warning."""
     root = _root(tmp_path, "Letter: a/inbox/gone.md")
     (found,) = _letter_findings(root)
     assert "a/inbox/gone.md" in found
 
 
 def test_a_cited_letter_that_exists_or_was_archived_is_fine(tmp_path: Path) -> None:
+    """A cited letter that exists or was archived is fine."""
     root = _root(tmp_path, "Letters: a/inbox/here.md and a/inbox/old.md")
     (root / "a" / "inbox" / "here.md").write_text("x")
     (root / "a" / "inbox" / "archive").mkdir()
@@ -60,6 +62,7 @@ def test_a_cited_letter_that_exists_or_was_archived_is_fine(tmp_path: Path) -> N
 
 
 def test_a_root_with_no_inbox_is_not_asked(tmp_path: Path) -> None:
+    """A root with no inbox is not asked."""
     root = _root(tmp_path, "Letter: a/inbox/gone.md")
     (root / "a" / "inbox").rmdir()
     assert _letter_findings(root) == []

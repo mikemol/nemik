@@ -25,6 +25,7 @@ def _graph() -> Graph:
 
 
 def test_a_chain_of_ready_cards_flags_all_but_its_head() -> None:
+    """A chain of ready cards flags all but its head."""
     g = _graph()
     annotate(g)
     flagged = {s for s, _, _ in g.triples((None, NEMIK.readyBehindOpen, None))}
@@ -32,6 +33,7 @@ def test_a_chain_of_ready_cards_flags_all_but_its_head() -> None:
 
 
 def test_a_landed_enabler_does_not_count() -> None:
+    """A landed enabler does not count."""
     g = _graph()
     annotate(g)
     assert (waypoint_uri("r", "W5"), NEMIK.readyBehindOpen, None) not in g

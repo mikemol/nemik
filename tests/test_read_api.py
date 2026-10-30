@@ -54,6 +54,7 @@ def _client_module() -> (
 
 
 def test_every_openapi_ref_is_a_published_schema(built: Path) -> None:
+    """Every openapi ref is a published schema."""
     api = json.loads((built / "openapi.json").read_text())
     assert api["openapi"].startswith("3.1")
     refs = [
@@ -69,6 +70,7 @@ def test_every_openapi_ref_is_a_published_schema(built: Path) -> None:
 
 
 def test_the_example_client_fetches_once_then_only_what_moved(served: str) -> None:
+    """The example client fetches once then only what moved."""
     client = _client_module().Client(served)
     first = client.refresh()
     assert "graph.json" in first and "openapi.json" in first

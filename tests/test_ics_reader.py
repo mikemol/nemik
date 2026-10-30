@@ -23,6 +23,7 @@ ICS = (
 
 
 def test_mikemol_ics_reads_an_exported_calendar(tmp_path: Path) -> None:
+    """Mikemol ics reads an exported calendar."""
     src = tmp_path / "cal.ics"
     src.write_text(ICS, newline="")
     out = subprocess.run(

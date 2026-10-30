@@ -56,12 +56,14 @@ def _unresolved(root: Path) -> list[str]:
 
 
 def test_a_cited_row_the_export_holds_is_resolved(tmp_path: Path) -> None:
+    """A cited row the export holds is resolved."""
     root = _fleet(tmp_path, "host:home-mount")
     (root / "host-apply.json").write_text(json.dumps(EXPORT), encoding="utf-8")
     assert _unresolved(root) == []
 
 
 def test_a_cited_row_the_export_does_not_hold_is_unresolved(tmp_path: Path) -> None:
+    """A cited row the export does not hold is unresolved."""
     root = _fleet(tmp_path, "host:home-mount-typo")
     (root / "host-apply.json").write_text(json.dumps(EXPORT), encoding="utf-8")
     assert len(_unresolved(root)) == 1
@@ -73,6 +75,7 @@ def test_without_an_export_the_citation_stays_as_written(tmp_path: Path) -> None
 
 
 def test_an_unreadable_export_does_not_break_the_survey(tmp_path: Path) -> None:
+    """An unreadable export does not break the survey."""
     root = _fleet(tmp_path, "host:home-mount")
     (root / "host-apply.json").write_text("{not json", encoding="utf-8")
     assert _unresolved(root) == []

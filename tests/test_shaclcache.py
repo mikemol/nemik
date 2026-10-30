@@ -27,6 +27,7 @@ def _values(g: Graph, this: URIRef) -> list[str]:
 
 
 def test_one_translated_query_answers_correctly_for_different_bindings() -> None:
+    """One translated query answers correctly for different bindings."""
     g = _graph()
     with cached_sparql_parse():
         first = _values(g, EX.a)
@@ -38,6 +39,7 @@ def test_one_translated_query_answers_correctly_for_different_bindings() -> None
 
 
 def test_the_text_is_translated_once_however_often_it_is_asked() -> None:
+    """The text is translated once however often it is asked."""
     g = _graph()
     translated: list[str] = []
     original = vars(processor)["translateQuery"]
@@ -57,6 +59,7 @@ def test_the_text_is_translated_once_however_often_it_is_asked() -> None:
 
 
 def test_the_originals_are_back_after_the_block() -> None:
+    """The originals are back after the block."""
     before = vars(processor)["parseQuery"], vars(processor)["translateQuery"]
     with cached_sparql_parse():
         assert vars(processor)["parseQuery"] is not before[0]
@@ -65,4 +68,5 @@ def test_the_originals_are_back_after_the_block() -> None:
 
 
 def test_a_query_outside_the_block_parses_as_always() -> None:
+    """A query outside the block parses as always."""
     assert _values(_graph(), EX.b) == ["second"]

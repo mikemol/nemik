@@ -35,6 +35,7 @@ def _graph() -> tuple[Graph, dict]:
 def test_the_memo_changes_no_number_and_cuts_the_solves(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    """The memo changes no number and cuts the solves."""
     g, findings = _graph()
     calls = {"n": 0}
     real = flow.solve

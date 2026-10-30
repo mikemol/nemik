@@ -34,6 +34,7 @@ def _q(tmp_path: Path, repo: str, witnesses: list[str | None]) -> Graph:
 
 
 def test_same_query_same_weather_across_repos_whitespace_aside(tmp_path: Path) -> None:
+    """Same query same weather across repos whitespace aside."""
     q = 'input.alert["RegistryDown"].state == "inactive"'
     a, b = (
         _q(tmp_path, "a", [q, None, 'input.now > "2026-10-03"']),

@@ -17,6 +17,7 @@ def _card(g: Graph, sym: str, status: str = "ready") -> URIRef:
 
 
 def test_the_longest_chain_has_zero_slack_and_a_side_branch_has_some() -> None:
+    """The longest chain has zero slack and a side branch has some."""
     g = Graph()
     a, b, c, d = (_card(g, s) for s in ("W1", "W2", "W3", "W4"))
     _card(g, "W5")  # stands alone
@@ -108,6 +109,7 @@ def test_what_if_closing_the_head_of_the_chain_shortens_it_and_leaves_the_graph_
 
 
 def test_a_fire_is_an_interrupt_card_holding_up_planned_work() -> None:
+    """A fire is an interrupt card holding up planned work."""
     # nemik:W347: interrupt a:W1 -> planned a:W2 -> planned a:W3; interrupt a:W4 holds up nothing.
     from rdflib import Literal
 
@@ -150,6 +152,7 @@ def test_a_cycle_is_reported_and_a_chain_is_not() -> None:
 
 
 def test_a_done_card_leaves_the_path_and_a_cycle_does_not_hang() -> None:
+    """A done card leaves the path and a cycle does not hang."""
     g = Graph()
     a, b, c = _card(g, "W1"), _card(g, "W2", "done"), _card(g, "W3")
     g.add((a, NEMIK.enables, b))

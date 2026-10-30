@@ -51,6 +51,7 @@ def _graph(tmp_path: Path) -> Graph:
 
 
 def test_fired_alarms_in_a_window_with_owner_liveness(tmp_path: Path) -> None:
+    """Fired alarms in a window with owner liveness."""
     g = _graph(tmp_path)
     live: Liveness = {"life": {"verdict": "ok"}}
     got = fired_alarms(
@@ -65,6 +66,7 @@ def test_fired_alarms_in_a_window_with_owner_liveness(tmp_path: Path) -> None:
 
 
 def test_a_bad_alarm_is_reported_not_fatal(tmp_path: Path) -> None:
+    """A bad alarm is reported not fatal."""
     g = _graph(tmp_path)
     from rdflib import Literal
 

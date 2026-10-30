@@ -31,17 +31,20 @@ def _claims() -> ModuleType:
 
 
 def test_the_real_store_module_is_still_caught() -> None:
+    """The real store module is still caught."""
     assert LOAD.search("data = store.load(path)")
     assert LOAD.search("mikemol.pathsforward.store.load (path)")
     assert LOAD.search("x = (store.load(p))")
 
 
 def test_a_name_ending_in_store_is_not_the_store_module() -> None:
+    """A name ending in store is not the store module."""
     assert not LOAD.search("cachestore.load(directory)")
     assert not LOAD.search("datastore.load(x)")
 
 
 def test_the_claims_hold_on_the_current_source() -> None:
+    """The claims hold on the current source."""
     claims = _claims()
     claims.single_writer_boundary()
     claims.nemik_never_writes_a_queue()

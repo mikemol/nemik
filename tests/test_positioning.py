@@ -22,12 +22,14 @@ def _scripts() -> set[str]:
 
 
 def test_every_command_the_page_names_exists() -> None:
+    """Every command the page names exists."""
     named = set(re.findall(r"`(nemik-[a-z-]+)", DOC))
     assert named, "the page names no command"
     assert sorted(named - _scripts()) == []
 
 
 def test_every_flag_the_page_gives_a_command_is_one_it_takes() -> None:
+    """Every flag the page gives a command is one it takes."""
     from nemik import critical, history, rank
 
     parsers = {
@@ -44,6 +46,7 @@ def test_every_flag_the_page_gives_a_command_is_one_it_takes() -> None:
 
 
 def test_every_workflow_the_page_names_is_modelled() -> None:
+    """Every workflow the page names is modelled."""
     model = tomllib.loads((ROOT / "src/nemik/data/workflows.toml").read_text())
     names = {w["name"] for w in model["workflow"]}
     cited = set(re.findall(r"`workflow:([a-z-]+)`", DOC))

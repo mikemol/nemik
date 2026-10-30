@@ -26,6 +26,7 @@ def _fleet() -> Graph:
 
 
 def test_issues_round_trip_to_the_projection() -> None:
+    """Issues round trip to the projection."""
     tasks = project(_fleet())
     back = read(write(tasks))
     assert [(t.cite, t.name, t.done, t.preds) for t in back] == [
@@ -35,6 +36,7 @@ def test_issues_round_trip_to_the_projection() -> None:
 
 
 def test_every_issue_names_its_card_and_repo() -> None:
+    """Every issue names its card and repo."""
     for issue in to_issues(project(_fleet())):
         assert str(issue["cite"]) in str(issue["body"])
         assert issue["labels"] == [str(issue["cite"]).partition(":")[0]]

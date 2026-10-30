@@ -14,6 +14,7 @@ FLEET_FIXTURE = Path(__file__).parent / "fixtures" / "fleet"
 
 
 def test_published_pieces_assemble_to_the_published_graph(tmp_path: Path) -> None:
+    """Published pieces assemble to the published graph."""
     withheld = tmp_path / "withheld.json"
     payload: dict[str, object] = {"version": 1, "as_of": "x", "items": []}
     withheld.write_text(json.dumps(payload))
@@ -31,6 +32,7 @@ def test_published_pieces_assemble_to_the_published_graph(tmp_path: Path) -> Non
 
 
 def test_a_repo_piece_holds_only_that_repo() -> None:
+    """A repo piece holds only that repo."""
     doc: dict[str, Any] = {
         "nodes": [
             {"id": "urn:nemik:a/W1", "repo": "a"},

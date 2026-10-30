@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1296,
+  "counter": 1297,
   "waypoints": [
     {
       "symbol": "W1",
@@ -31118,23 +31118,46 @@
     {
       "symbol": "W1296",
       "title": "nemik.tomlview reads a parsed TOML through builtin types and test_workflows uses it, so tomllib's Any stops at one call and mypy falls",
-      "status": "working",
+      "status": "ready",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): nemik.tomlview (table, tables, strings; no import, no X|None annotation) and tests/test_workflows.py reading the model through it; mikemol-pycheck --ratchet: mypy 3076 to 3031 (-45), ruff 1458 flat, baseline written with nothing queued (710 landed 02ac3ec); 7 tests of test_workflows pass. CENSUS: the first run FAILED on the new module (tomlview text(): unsupported operand type(s) for |: type[str] and Optional, the pinned Codon cannot compile str | None); I removed the unused text(), reran: 7 passed in 412.18 s after the last src edit. Pace of 12:25:14Z is PENDING for landing 13:07:58Z: codon 144, mypy 3203, ruff 1458, all ok (unlanded sample); paydown ahead of need. Gate empty. Loadavg at submit 28.09 39.41 44.53.",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): nemik.tomlview (table, tables, strings; no import, no X|None annotation) and tests/test_workflows.py reading the model through it; mikemol-pycheck --ratchet: mypy 3076 to 3031 (-45), ruff 1458 flat, baseline written with nothing queued (710 landed 02ac3ec); 7 tests of test_workflows pass. CENSUS: the first run FAILED on the new module (tomlview text(): unsupported operand type(s) for |: type[str] and Optional, the pinned Codon cannot compile str | None); I removed the unused text(), reran: 7 passed in 412.18 s after the last src edit. Pace of 12:25:14Z is PENDING for landing 13:07:58Z: codon 144, mypy 3203, ruff 1458, all ok (unlanded sample); paydown ahead of need. Gate empty. Loadavg at submit 28.09 39.41 44.53. | 2026-10-30: 2026-10-30 LANDED stack 711 (key 1793366281492572793, submitted 13:18:00Z) as 807c67f, subject mine (git log), origin/main read back 807c67f6f9282e2aafb70eb460471c644a9aeb0c. Card set ready BEFORE this line. Loadavg at verdict 23.68 36.20 44.18. Landed fall: mypy 3076 to 3031 (-45, MEASURED before submit). The shared accessors are now public (nemik.tomlview) but score.py still carries its private copies: a later slice moves it onto the module (small, a few lines), and other TOML readers (health, pins, manifest, floorasks) can use it.",
       "issued_at": "2026-10-30T13:01:13Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1187",
-      "last_worked": "2026-10-30T13:17:55Z",
+      "last_worked": "2026-10-30T13:34:37Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "src/nemik/tomlview.py",
         "tests/test_workflows.py",
         "mypy-baseline.json"
+      ]
+    },
+    {
+      "symbol": "W1297",
+      "title": "171 more tests in 69 files get a docstring taken from their sentence names, so ruff falls 1458 to 1287 and the owed fall of 49 is paid",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): doc_from_names2.py wrote 171 docstrings in 77 test files (197 candidates counted, 26 of tests/test_layout.py left out); tests/test_workflows.py reformatted with the repo config; mikemol-pycheck --ratchet: ruff 1458 to 1287 (-171, exactly the count), mypy 3031 flat; ruff baseline written with nothing queued; repo-config format check of tests/ clean; 52 tests of nine of the edited files pass; collect-only over tests/ raised no error. No src module changed, so no census. Pace of 13:25:14Z, PENDING for landing 13:33:37Z: ruff BEHIND (fell 0 over 10 landings, owes 49, 1458 left), codon 144 ok, mypy 3031 ok. The stack names ruff-baseline.json; EXPECTED to pay the owed 49 with 171. Honest limits: these docstrings restate names; a few read oddly (another repos card, Mikemol ics); the independent read of 20 of the docstrings is still owed (R65, R66, due 2026-11-01). Gate empty. Loadavg at submit: see the next ledger line (read in the call before this one).",
+      "issued_at": "2026-10-30T13:44:31Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W1288",
+      "last_worked": "2026-10-30T13:45:51Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "tests/test_work.py",
+        "tests/test_vtodo.py",
+        "tests/test_pins.py",
+        "ruff-baseline.json"
       ]
     }
   ],

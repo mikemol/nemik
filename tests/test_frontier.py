@@ -23,6 +23,7 @@ def _wp(
 
 
 def test_goal_frontier_and_its_outside_boundary() -> None:
+    """Goal frontier and its outside boundary."""
     # G <- U (umbrella) <- {L1 ready, L2 blocked on b:W9, L3 done}; G <- X foreign open enabler
     g = Graph()
     G = _wp(g, "a", "W1", "blocked", ["W2"])
@@ -41,6 +42,7 @@ def test_goal_frontier_and_its_outside_boundary() -> None:
 
 
 def test_clear_path_has_empty_outside_and_lone_goal_is_its_own_frontier() -> None:
+    """Clear path has empty outside and lone goal is its own frontier."""
     g = Graph()
     G, L = _wp(g, "a", "W1", "blocked", ["W2"]), _wp(g, "a", "W2")
     g.add((L, NEMIK.enables, G))
@@ -50,6 +52,7 @@ def test_clear_path_has_empty_outside_and_lone_goal_is_its_own_frontier() -> Non
 
 
 def test_ready_item_with_open_feeder_is_an_umbrella() -> None:
+    """Ready item with open feeder is an umbrella."""
     from nemik.rank import is_umbrella
 
     g = Graph()
@@ -61,6 +64,7 @@ def test_ready_item_with_open_feeder_is_an_umbrella() -> None:
 
 
 def test_goals_pick_terminal_items_with_on_deck_leaf_and_outside_waits() -> None:
+    """Goals pick terminal items with on deck leaf and outside waits."""
     from nemik.adapter import workstream_uri
     from nemik.rank import goals, load_weights
 

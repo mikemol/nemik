@@ -28,6 +28,7 @@ def _graph() -> Graph:
 def test_concurrent_blocks_answer_correctly_and_restore_the_originals(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    """Concurrent blocks answer correctly and restore the originals."""
     parse, translate = processor.parseQuery, processor.translateQuery
     g = _graph()
     errors: list[object] = []
@@ -54,6 +55,7 @@ def test_concurrent_blocks_answer_correctly_and_restore_the_originals(
 
 
 def test_a_nested_block_still_answers_and_restores() -> None:
+    """A nested block still answers and restores."""
     parse = processor.parseQuery
     g = _graph()
     with cached_sparql_parse():

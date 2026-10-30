@@ -64,6 +64,7 @@ def _late(ticks: int, blocker_kind: str | None = None) -> list[tuple[str, str, s
 
 
 def test_past_the_sla_the_blockers_card_is_warned() -> None:
+    """Past the sla the blockers card is warned."""
     found = _late(49)
     assert found == [
         (
@@ -78,5 +79,6 @@ def test_past_the_sla_the_blockers_card_is_warned() -> None:
 
 
 def test_within_the_sla_or_blocked_on_the_operator_nothing_is_warned() -> None:
+    """Within the sla or blocked on the operator nothing is warned."""
     assert _late(48) == []
     assert _late(60, blocker_kind="human") == []

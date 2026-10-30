@@ -15,6 +15,7 @@ from nemik import rank
 def test_apply_calls_the_queue_writer_with_the_rows(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    """Apply calls the queue writer with the rows."""
     seen: dict[str, object] = {}
 
     def fake_run(cmd: list[str], check: bool) -> subprocess.CompletedProcess[str]:
@@ -34,6 +35,7 @@ def test_apply_calls_the_queue_writer_with_the_rows(
 
 
 def test_a_refusing_writer_fails_the_command(monkeypatch: pytest.MonkeyPatch) -> None:
+    """A refusing writer fails the command."""
     monkeypatch.setattr(
         subprocess, "run", lambda cmd, check: subprocess.CompletedProcess(cmd, 2)
     )

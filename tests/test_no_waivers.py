@@ -41,6 +41,7 @@ def _sources() -> list[Path]:
 
 
 def test_no_python_file_waives_a_check() -> None:
+    """No python file waives a check."""
     sources = _sources()
     assert len(sources) > 100, "the scan found almost no files"
     found = [
@@ -56,6 +57,7 @@ def test_no_python_file_waives_a_check() -> None:
 
 
 def test_the_detector_sees_each_directive() -> None:
+    """The detector sees each directive."""
     samples = [
         "x = 1  # " + "no" + "qa: E501",
         "y = f()  # type: " + "ig" + "nore[arg-type]",

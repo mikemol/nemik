@@ -27,6 +27,7 @@ def _repo(states: list[str], ticks: int = 0) -> Graph:
 
 
 def test_declared_thresholds_are_read_for_each_signal() -> None:
+    """Declared thresholds are read for each signal."""
     declared = thresholds(
         "[health]\nblocked_share = [0.4, 0.9]\noldest_block_ticks = [8, 20]\nasks_owed = [2, 4]\n"
     )
@@ -39,6 +40,7 @@ def test_declared_thresholds_are_read_for_each_signal() -> None:
 
 
 def test_a_repo_is_green_until_a_signal_crosses_its_floor() -> None:
+    """A repo is green until a signal crosses its floor."""
     green = health(_repo(["ready", "ready", "blocked"]), "a", LIMITS)
     assert green.status == "green"
     assert green.reasons == []
@@ -59,6 +61,7 @@ def test_the_worst_signal_decides_and_each_crossing_is_named() -> None:
 
 
 def test_a_done_card_and_another_repos_card_do_not_count() -> None:
+    """A done card and another repos card do not count."""
     g = _repo(["blocked", "done"], ticks=60)
     other = waypoint_uri("b", "W1")
     g.add((other, OSLC_CM.state, STATE["ready"]))

@@ -47,6 +47,7 @@ def _run(root: Path, opa: str) -> subprocess.CompletedProcess[str]:
 
 
 def test_each_live_waypoint_gets_a_coordinate_and_its_residue(tmp_path: Path) -> None:
+    """Each live waypoint gets a coordinate and its residue."""
     done = _run(_fleet(tmp_path), str(Path(shutil.which(OPA) or OPA).resolve()))
     assert done.returncode == 1, done.stdout + done.stderr
     assert done.stdout.startswith("as_of 20"), done.stdout
@@ -56,6 +57,7 @@ def test_each_live_waypoint_gets_a_coordinate_and_its_residue(tmp_path: Path) ->
 
 
 def test_an_absent_opa_is_not_judged_and_never_clean(tmp_path: Path) -> None:
+    """An absent opa is not judged and never clean."""
     done = _run(_fleet(tmp_path), str(tmp_path / "no-such-opa"))
     assert done.returncode == 2, done.stdout + done.stderr
     assert "NOT JUDGED alpha" in done.stdout
