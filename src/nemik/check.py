@@ -28,7 +28,7 @@ from typing import TYPE_CHECKING
 from mikemol.pathsforward.store import UnreadableStateError
 from rdflib import Graph, Literal
 
-from nemik import cachestore, warrantdebt
+from nemik import adoption, cachestore, warrantdebt
 from nemik.adapter import (
     BASE,
     NEMIK,
@@ -39,7 +39,6 @@ from nemik.adapter import (
     waypoint_uri,
     workstream_uri,
 )
-from nemik.adoption import adoption
 from nemik.blocks import (
     annotate,
     lowered_ratchet,
@@ -586,6 +585,36 @@ def unchecked(
         yield repo, g, [] if g is not None else [("Unreadable", "--", refused[repo])]
 
 
+def adoption_state(queue_path: Path) -> str:
+    """Say how the repo holding `queue_path` installs its queue writer (nemik:W1179).
+
+    The file and TOML reads live here and the judgements on the parsed documents in nemik.adoption,
+    a pure module the Codon census can compile.
+
+    Returns:
+        One of declared, owner, missing, no-pyproject or unobservable (see nemik.adoption).
+
+    """
+    if queue_path.parent.name != ".claude":
+        return "unobservable"
+    repo = queue_path.parents[1]
+    for sub in repo.glob("*/pyproject.toml"):
+        try:
+            owned: dict[str, object] = tomllib.loads(sub.read_text())
+        except (OSError, tomllib.TOMLDecodeError):
+            continue
+        if adoption.owns(owned):
+            return "owner"
+    py = repo / "pyproject.toml"
+    if not py.exists():
+        return "no-pyproject"
+    try:
+        doc: dict[str, object] = tomllib.loads(py.read_text())
+    except (OSError, tomllib.TOMLDecodeError):
+        return "missing"
+    return "declared" if adoption.declares(doc) else "missing"
+
+
 def _gate_mark(graph: Graph, repo: str, repo_dir: Path, gate: str) -> None:
     """Mark the cards a commit stack names, unless `gate` says not to (nemik:W783)."""
     if gate == "mark":
@@ -635,7 +664,7 @@ def survey(
                 (
                     workstream_uri(repo),
                     NEMIK.pathsforwardAdoption,
-                    Literal(adoption(state_path)),
+                    Literal(adoption_state(state_path)),
                 )
             )
             _gate_mark(qg, repo, state_path.parent.parent, gate)
