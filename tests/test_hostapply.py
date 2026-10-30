@@ -59,6 +59,7 @@ def _export(**over: object) -> dict[str, object]:
 
 
 def test_the_real_shape_parses_without_problems() -> None:
+    """The real shape parses without problems."""
     export = parse(_export())
     assert export.problems == ()
     assert sorted(export.rows) == [
@@ -71,6 +72,7 @@ def test_the_real_shape_parses_without_problems() -> None:
 
 
 def test_an_empty_after_is_ordering_unknown_not_independent() -> None:
+    """An empty after is ordering unknown not independent."""
     assert parse(_export()).ordering == "none"
     stated = _export(
         rows=[
@@ -84,6 +86,7 @@ def test_an_empty_after_is_ordering_unknown_not_independent() -> None:
 
 
 def test_a_row_walks_to_its_kind_and_the_units_it_touches() -> None:
+    """A row walks to its kind and the units it touches."""
     export = parse(_export())
     assert restarts_of(export, "beesd-verbosity") == [
         ("beesd@*.service", "try-restart")
@@ -95,6 +98,7 @@ def test_a_row_walks_to_its_kind_and_the_units_it_touches() -> None:
 
 
 def test_the_fact_passes_only_for_a_fresh_applied_row() -> None:
+    """The fact passes only for a fresh applied row."""
     export = parse(_export())
     ok = fact(export, "beesd-verbosity", NOW)
     assert ok is not None
@@ -107,6 +111,7 @@ def test_the_fact_passes_only_for_a_fresh_applied_row() -> None:
 
 
 def test_a_stale_export_proves_nothing() -> None:
+    """A stale export proves nothing."""
     export = parse(_export())
     late = fact(export, "beesd-verbosity", "2026-10-09T09:00:00Z")
     assert late is not None
@@ -117,6 +122,7 @@ def test_a_stale_export_proves_nothing() -> None:
 def test_a_row_the_exporter_could_not_read_is_unknown_not_pending() -> None:
     # luthen's W680: applied:null on a root-only path is UNKNOWN. An export without the flag
     # (older) reads as observable, the previous behaviour.
+    """A row the exporter could not read is unknown not pending."""
     rows = [
         {
             "id": "kubelet-swap",
@@ -140,10 +146,12 @@ def test_a_row_the_exporter_could_not_read_is_unknown_not_pending() -> None:
 
 
 def test_an_unknown_row_is_an_unresolved_citation_not_a_pass() -> None:
+    """An unknown row is an unresolved citation not a pass."""
     assert fact(parse(_export()), "home-mount-typo", NOW) is None
 
 
 def test_a_malformed_export_is_reported_and_never_reads_as_applied() -> None:
+    """A malformed export is reported and never reads as applied."""
     export = parse(
         _export(
             rows=[
@@ -168,6 +176,7 @@ def test_a_malformed_export_is_reported_and_never_reads_as_applied() -> None:
 
 
 def test_an_unknown_effect_or_verb_is_a_problem() -> None:
+    """An unknown effect or verb is a problem."""
     bad = _export(
         kinds={
             "k": {"effect": "explode", "restarts": [{"unit": "u", "verb": "detonate"}]}
@@ -180,11 +189,13 @@ def test_an_unknown_effect_or_verb_is_a_problem() -> None:
 
 
 def test_another_version_is_refused() -> None:
+    """Another version is refused."""
     with pytest.raises(ValueError, match="not a host-apply export v1"):
         parse(_export(version=2))
 
 
 def test_load_reads_the_file_beside_liveness_json(tmp_path: Path) -> None:
+    """Load reads the file beside liveness json."""
     (tmp_path / "host-apply.json").write_text(json.dumps(_export()), encoding="utf-8")
     export = load(tmp_path)
     assert export is not None
@@ -194,10 +205,12 @@ def test_load_reads_the_file_beside_liveness_json(tmp_path: Path) -> None:
 def test_load_finds_nothing_when_there_is_neither_file_nor_exporter(
     tmp_path: Path,
 ) -> None:
+    """Load finds nothing when there is neither file nor exporter."""
     assert load(tmp_path) is None
 
 
 def test_load_refuses_a_file_that_is_not_json(tmp_path: Path) -> None:
+    """Load refuses a file that is not json."""
     (tmp_path / "host-apply.json").write_text("{not json", encoding="utf-8")
     with pytest.raises(ValueError, match="unreadable"):
         load(tmp_path)

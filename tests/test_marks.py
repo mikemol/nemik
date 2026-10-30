@@ -21,22 +21,27 @@ def _mark(as_of: str, version: str = VERSION) -> dict[str, object]:
 
 
 def test_no_mark_is_derived() -> None:
+    """No mark is derived."""
     assert provenance(None, NOW, VERSION) == DERIVED
 
 
 def test_a_fresh_mark_judged_by_this_policy_is_a_mark() -> None:
+    """A fresh mark judged by this policy is a mark."""
     assert provenance(_mark("2026-10-08T11:30:00Z"), NOW, VERSION) == MARK
 
 
 def test_a_mark_older_than_the_policy_max_age_is_stale() -> None:
+    """A mark older than the policy max age is stale."""
     assert provenance(_mark("2026-10-08T10:00:00Z"), NOW, VERSION) == STALE
 
 
 def test_a_mark_judged_by_another_policy_is_stale_however_fresh() -> None:
+    """A mark judged by another policy is stale however fresh."""
     assert provenance(_mark(NOW, "v0"), NOW, VERSION) == STALE
 
 
 def test_an_unreadable_as_of_is_stale_never_current() -> None:
+    """An unreadable as of is stale never current."""
     assert provenance(_mark("yesterday"), NOW, VERSION) == STALE
     assert provenance(_mark("2026-10-08T11:59:00"), NOW, VERSION) == STALE
 
@@ -44,6 +49,7 @@ def test_an_unreadable_as_of_is_stale_never_current() -> None:
 def test_the_latest_mark_per_symbol_wins_and_bad_lines_are_counted(
     tmp_path: Path,
 ) -> None:
+    """The latest mark per symbol wins and bad lines are counted."""
     path = tmp_path / "paths-forward.marks.jsonl"
     older, newer = _mark("2026-10-08T10:00:00Z"), _mark("2026-10-08T11:00:00Z")
     path.write_text(
@@ -56,8 +62,10 @@ def test_the_latest_mark_per_symbol_wins_and_bad_lines_are_counted(
 
 
 def test_an_absent_marks_file_reads_empty(tmp_path: Path) -> None:
+    """An absent marks file reads empty."""
     assert read(tmp_path / "none.jsonl") == ({}, 0)
 
 
 def test_the_policy_version_is_a_sha256_of_the_shipped_policy() -> None:
+    """The policy version is a sha256 of the shipped policy."""
     assert len(policy_version()) == 64

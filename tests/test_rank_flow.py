@@ -69,10 +69,12 @@ def _order(g: Graph, model: str) -> list[str]:
 def test_the_downstream_arm_still_counts_a_shared_source_in_full(
     tmp_path: Path,
 ) -> None:
+    """The downstream arm still counts a shared source in full."""
     assert _order(_fleet(tmp_path), "downstream") == ["W1", "W2", "W3"]
 
 
 def test_the_flow_arm_splits_it_so_the_sole_dependents_win(tmp_path: Path) -> None:
+    """The flow arm splits it so the sole dependents win."""
     assert _order(_fleet(tmp_path), "flow") == ["W3", "W1", "W2"]
 
 
@@ -81,6 +83,7 @@ def test_ranking_toward_a_milestone_counts_only_that_cards_demand(
 ) -> None:
     # nemik:W316: toward a:W4 the only demand is W4's, which needs W1 and W2 equally; W3 serves W7
     # and W8 only, so it absorbs nothing and falls below both.
+    """Ranking toward a milestone counts only that cards demand."""
     g = _fleet(tmp_path)
     comp = load_composition(f'{TIERS}weight = "flow"\n')
     toward = rank(g, "a", load_weights(), comp, fruit_row=False, toward="a:W4")
@@ -131,19 +134,23 @@ def _blocked_sharer(tmp_path: Path) -> Graph:
 
 
 def test_a_card_blocked_outside_the_graph_absorbs_no_demand(tmp_path: Path) -> None:
+    """A card blocked outside the graph absorbs no demand."""
     assert _order(_blocked_sharer(tmp_path), "flow") == ["W1", "W2"]
 
 
 def test_a_composition_that_names_no_model_keeps_the_old_sum() -> None:
+    """A composition that names no model keeps the old sum."""
     assert load_composition(TIERS).weight_model == "downstream"
 
 
 def test_an_unknown_model_is_refused() -> None:
+    """An unknown model is refused."""
     with pytest.raises(ValueError, match="weight must be one of"):
         load_composition(f'{TIERS}weight = "vibes"\n')
 
 
 def test_the_packaged_composition_declares_flow() -> None:
+    """The packaged composition declares flow."""
     assert load_composition().weight_model == "flow"
 
 
@@ -172,6 +179,7 @@ def _ranked(g: Graph, operator: int) -> list[str]:
 def test_an_operator_ask_is_a_demand_source_with_the_declared_weight(
     tmp_path: Path,
 ) -> None:
+    """An operator ask is a demand source with the declared weight."""
     g = _ask_fleet(tmp_path)
     no_term = _ranked(g, 0)  # a tie between equal leaves: the lower symbol leads
     assert no_term == ["W1", "W2"]
@@ -192,6 +200,7 @@ def test_the_view_marks_the_critical_path_and_ships_slack(tmp_path: Path) -> Non
     # nemik:W322: in the fleet fixture W4-W6 each need W1 and W2, W7-W8 need W3: the longest open
     # chain
     # is two cards deep, so exactly one chain is on the path and every open card carries a slack.
+    """The view marks the critical path and ships slack."""
     from nemik.serve import to_json
 
     doc = to_json(_fleet(tmp_path), {})
@@ -212,6 +221,7 @@ def test_the_view_marks_the_critical_path_and_ships_slack(tmp_path: Path) -> Non
 def test_the_view_ships_the_current_across_each_dependency(tmp_path: Path) -> None:
     # nemik:W264: W7 and W8 each need only B (W3), so each dependency carries exactly their demand
     # of 1; W4 needs A and E equally, so it splits its demand of 1 in half across the two.
+    """The view ships the current across each dependency."""
     from nemik.serve import to_json
 
     doc = to_json(_fleet(tmp_path), {})
@@ -275,6 +285,7 @@ def test_the_view_weighs_the_edges_that_wait_on_the_operator(tmp_path: Path) -> 
 def test_a_withheld_waiter_shapes_no_published_number(tmp_path: Path) -> None:
     # nemik:W309: the public view is computed over the graph WITHOUT withheld waypoints, so hiding
     # a waiter does not leave its weight behind in the ask's salience or its edge current.
+    """A withheld waiter shapes no published number."""
     from nemik.serve import to_json, without
 
     (tmp_path / "a" / ".claude").mkdir(parents=True)
@@ -318,4 +329,5 @@ def test_a_withheld_waiter_shapes_no_published_number(tmp_path: Path) -> None:
 
 
 def test_the_packaged_operator_weight_is_declared() -> None:
+    """The packaged operator weight is declared."""
     assert load_weights().operator == 15

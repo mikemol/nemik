@@ -69,6 +69,7 @@ def root(tmp_path: Path) -> Path:
 
 
 def test_check_conforming_exits_zero_with_provenance(root: Path) -> None:
+    """Check conforming exits zero with provenance."""
     r = run("check", root)
     assert r.returncode == 0, r.stdout + r.stderr
     lines = r.stdout.splitlines()
@@ -80,6 +81,7 @@ def test_check_conforming_exits_zero_with_provenance(root: Path) -> None:
 
 def test_check_violation_exits_one_and_names_repo(root: Path) -> None:
     # enables into a symbol no workstream has is a Violation (shapes.ttl); most shapes are Warnings.
+    """Check violation exits one and names repo."""
     write_queue(root, "gamma", waypoint("W1", enables=["alpha:W9"]))
     r = run("check", root)
     assert r.returncode == 1, r.stdout + r.stderr
@@ -87,6 +89,7 @@ def test_check_violation_exits_one_and_names_repo(root: Path) -> None:
 
 
 def test_inbound_keeps_unclaimed_column_and_hint(root: Path) -> None:
+    """Inbound keeps unclaimed column and hint."""
     r = run("inbound", root, "beta")
     assert r.returncode == 0, r.stderr
     rows = {l.split()[2]: l for l in r.stdout.splitlines()}
@@ -96,6 +99,7 @@ def test_inbound_keeps_unclaimed_column_and_hint(root: Path) -> None:
 
 
 def test_provenance_untracked_by_default_for_export_layout(root: Path) -> None:
+    """Provenance untracked by default for export layout."""
     r = run("check", root)
     assert "provenance: queue alpha untracked-source" in r.stdout.splitlines()
 
@@ -118,6 +122,7 @@ def test_provenance_reads_exported_commit_json(root: Path) -> None:
 def test_long_bundled_title_warns_to_decompose(tmp_path: Path) -> None:
     # nemik:W23: length alone isn't the signal -- a long title with a clause separator
     # (';', em-dash, or ' -- ') reads as several steps bundled flat.
+    """Long bundled title warns to decompose."""
     write_queue(tmp_path, "alpha", waypoint("W1", title="x" * 80 + "; " + "y" * 80))
     r = run("check", tmp_path)
     assert r.returncode == 0, r.stdout + r.stderr  # a Warning, not a Violation
@@ -125,6 +130,7 @@ def test_long_bundled_title_warns_to_decompose(tmp_path: Path) -> None:
 
 
 def test_short_title_does_not_warn(tmp_path: Path) -> None:
+    """Short title does not warn."""
     write_queue(tmp_path, "alpha", waypoint("W1", title="x" * 150))
     r = run("check", tmp_path)
     assert not any("title over 150 chars" in l for l in r.stdout.splitlines())
@@ -133,12 +139,14 @@ def test_short_title_does_not_warn(tmp_path: Path) -> None:
 def test_long_atomic_title_does_not_warn(tmp_path: Path) -> None:
     # nemik:W23: a long title with no clause separator is one verbose idea, not a
     # decomposition candidate -- the length-only rule's ~50% false-positive case.
+    """Long atomic title does not warn."""
     write_queue(tmp_path, "alpha", waypoint("W1", title="x" * 200))
     r = run("check", tmp_path)
     assert not any("title over 150 chars" in l for l in r.stdout.splitlines())
 
 
 def test_operator_categories(tmp_path: Path) -> None:
+    """Operator categories."""
     write_queue(
         tmp_path,
         "alpha",
@@ -163,6 +171,7 @@ def test_operator_long_free_text_reads_as_needs_you(tmp_path: Path) -> None:
     # lands in unstated. It doesn't -- only a truly bare blocked_on does; several words of
     # free text with no decide/act keyword is still read as needs-you. Fixed the docs to match
     # the code rather than the reverse, since undercounting a real ask is the worse failure.
+    """Operator long free text reads as needs you."""
     write_queue(
         tmp_path,
         "alpha",
@@ -286,6 +295,7 @@ def test_stray_lifecycle_words_in_a_next_step_warn(root: Path) -> None:
 
 
 def test_caused_by_into_residue_resolves(tmp_path: Path) -> None:
+    """Caused by into residue resolves."""
     write_queue(tmp_path, "alpha", waypoint("W2", caused_by="W1"))
     q = tmp_path / "alpha" / "paths-forward.json"
     doc = json.loads(q.read_text())
@@ -302,6 +312,7 @@ def test_single_repo_root_given_as_dot_is_named_by_its_directory(
 ) -> None:
     # nemik:W142: Path(".").name is '', so `--root .` inside a repo left the workstream unnamed and
     # its own alpha:W<n> causes unresolved.
+    """Single repo root given as dot is named by its directory."""
     repo = tmp_path / "alpha"
     (repo / ".claude").mkdir(parents=True)
     write_queue(

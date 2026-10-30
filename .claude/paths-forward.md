@@ -3,7 +3,7 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1287 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:5b58b017dbc3d954`
+counter 1287 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:747247155082f3d8`
 
 | # | symbol | status |
 |---|---|---|
@@ -4609,3 +4609,12 @@ counter 1287 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:5b5
   10-landing window, but nobody has read ratchetseries.py's dedupe, so the pace's window sum, on which the ruff debt
   arithmetic (52 against 73 owed) depends, is not known to be what the session's records say. That is a shared
   unverified claim.; 4 finding(s)
+- **nemik:R62** (gate) round 58: 697 (ebb44c9, 47c1f87) landed pushed 06:18:16Z, ls-remote read back, ruff 1660 to 1650;
+  ratchetseries.py read (the only dedupe is by sample time, not by commit, stack or verdict); 698 (W1279 slice 6, 15
+  Returns sections, ruff 1650 to 1635) inflight 06:19:53Z; gap 1 min 34 s; W1282 waits a fifth round: root The read of
+  ratchetseries.py changes the debt arithmetic: the pace's window counts one sample per gate run, deduped only by
+  timestamp, so refused gates, re-gates and runs of stacks that do not touch a ratchet (flat samples) each occupy a
+  slot. That is why ruff-neutral landings dilute the window, and why a refusal costs a slot as well as a gate cycle. The
+  unread half, ratchetpace.py (how fell and owes come from the 10 samples), decides whether the 73 can be cleared, and
+  neither the session nor mtools has read it. The process rules (landing 8 of 8, starting 5 of 5) hold; the open risk is
+  that the plan is built on a half-read producer.; 4 finding(s)

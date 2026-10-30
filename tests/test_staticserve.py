@@ -55,6 +55,7 @@ def _get(
 def test_files_are_served_with_their_types_and_published_validators(
     served: tuple[Path, int],
 ) -> None:
+    """Files are served with their types and published validators."""
     root, port = served
     _publish(root)
     status, head, body = _get(port, "/graph/r.json")
@@ -72,6 +73,7 @@ def test_files_are_served_with_their_types_and_published_validators(
 def test_a_matching_validator_is_answered_without_a_body(
     served: tuple[Path, int],
 ) -> None:
+    """A matching validator is answered without a body."""
     root, port = served
     _publish(root)
     tag = _get(port, "/graph/r.json")[1]["etag"]
@@ -82,6 +84,7 @@ def test_a_matching_validator_is_answered_without_a_body(
 
 
 def test_a_path_cannot_leave_the_snapshot(served: tuple[Path, int]) -> None:
+    """A path cannot leave the snapshot."""
     root, port = served
     _publish(root)
     (root.parent / "secret.txt").write_text("secret")
@@ -99,6 +102,7 @@ def test_a_path_cannot_leave_the_snapshot(served: tuple[Path, int]) -> None:
 def test_readiness_waits_for_a_snapshot_and_liveness_does_not(
     served: tuple[Path, int],
 ) -> None:
+    """Readiness waits for a snapshot and liveness does not."""
     root, port = served
     assert _get(port, "/healthz")[0] == 200
     assert _get(port, "/metrics")[0] == 503
@@ -109,6 +113,7 @@ def test_readiness_waits_for_a_snapshot_and_liveness_does_not(
 
 
 def test_a_published_current_link_is_what_is_served(served: tuple[Path, int]) -> None:
+    """A published current link is what is served."""
     root, port = served
     for name in ("snap-1", "snap-2"):
         (root / name).mkdir()
@@ -126,6 +131,7 @@ def test_the_live_servers_extensionless_paths_still_answer(
 ) -> None:
     # W503: /wake, /operator, /inbound, /inbound/<repo> and /goals/<repo> were routes of the dynamic
     # server; the snapshot holds them as .json files and the file server maps the old spelling on.
+    """The live servers extensionless paths still answer."""
     root, port = served
     (root / "inbound").mkdir()
     (root / "goals").mkdir()
@@ -141,6 +147,7 @@ def test_the_live_servers_extensionless_paths_still_answer(
 
 
 def test_the_server_never_imports_rdflib() -> None:
+    """The server never imports rdflib."""
     probe = "import nemik.staticserve, sys; sys.exit('rdflib' in sys.modules)"
     run = subprocess.run([sys.executable, "-I", "-c", probe], check=False)
     assert run.returncode == 0, "nemik.staticserve pulled in rdflib"

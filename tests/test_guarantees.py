@@ -41,6 +41,7 @@ def _wp(
 
 
 def test_packaged_guarantees_load_and_refuse_an_unknown_floor() -> None:
+    """Packaged guarantees load and refuse an unknown floor."""
     guar = load_guarantees()
     assert guar.floor in B.order
     assert [p.name for p in guar.policies] == ["trust-boundary"]
@@ -50,6 +51,7 @@ def test_packaged_guarantees_load_and_refuse_an_unknown_floor() -> None:
 
 
 def test_inversion_names_the_next_item_and_the_urgent_one() -> None:
+    """Inversion names the next item and the urgent one."""
     g = Graph()
     _wp(g, "W1", pos=0)  # unscored -> normal, and mtools works it next
     _wp(g, "W2", pos=1, vector=V.format(R="H", S="C"))  # critical
@@ -64,6 +66,7 @@ def test_inversion_names_the_next_item_and_the_urgent_one() -> None:
 def test_no_inversion_when_the_next_item_is_at_the_floor_or_nothing_reaches_it() -> (
     None
 ):
+    """No inversion when the next item is at the floor or nothing reaches it."""
     g = Graph()
     _wp(g, "W1", pos=0, vector=V.format(R="H", S="C"))
     _wp(g, "W2", pos=1)
@@ -77,6 +80,7 @@ def test_no_inversion_when_the_next_item_is_at_the_floor_or_nothing_reaches_it()
 
 
 def test_policy_blocks_a_ready_item_sharing_a_surface_with_an_open_member() -> None:
+    """Policy blocks a ready item sharing a surface with an open member."""
     g = Graph()
     _wp(g, "W1", "blocked", touches=("trust-boundary", "opa"))  # a member by tag, open
     _wp(g, "W2", touches=("opa", "dashboard"))  # shares the opa surface
@@ -94,6 +98,7 @@ def test_policy_blocks_a_ready_item_sharing_a_surface_with_an_open_member() -> N
 
 
 def test_a_done_member_blocks_nothing_and_the_class_tag_alone_is_no_surface() -> None:
+    """A done member blocks nothing and the class tag alone is no surface."""
     g = Graph()
     _wp(g, "W1", "done", touches=("trust-boundary", "opa"))
     _wp(g, "W2", touches=("opa",))
@@ -102,6 +107,7 @@ def test_a_done_member_blocks_nothing_and_the_class_tag_alone_is_no_surface() ->
 
 
 def test_unscored_counts_open_waypoints_without_a_vector() -> None:
+    """Unscored counts open waypoints without a vector."""
     g = Graph()
     _wp(g, "W1")
     _wp(g, "W2", "blocked")
@@ -113,6 +119,7 @@ def test_unscored_counts_open_waypoints_without_a_vector() -> None:
 def test_check_names_rule_and_pair_and_exits_one(
     capsys: pytest.CaptureFixture[str],
 ) -> None:
+    """Check names rule and pair and exits one."""
     g = Graph()
     _wp(g, "W1", pos=0, touches=("opa",))
     _wp(g, "W2", pos=1, vector=V.format(R="H", S="C"), touches=("opa",))
@@ -132,6 +139,7 @@ def test_check_names_rule_and_pair_and_exits_one(
 def test_check_ok_still_reports_the_unscored_census(
     capsys: pytest.CaptureFixture[str],
 ) -> None:
+    """Check ok still reports the unscored census."""
     g = Graph()
     _wp(g, "W1", pos=0)
     with pytest.raises(SystemExit) as e:

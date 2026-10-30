@@ -468,7 +468,7 @@
   "PT018": 4
  },
  "tests/test_gate.py": {
-  "D103": 15,
+  "D103": 4,
   "E741": 10
  },
  "tests/test_gate_weights.py": {
@@ -477,7 +477,6 @@
   "S603": 1
  },
  "tests/test_guarantees.py": {
-  "D103": 8,
   "E501": 1,
   "PLR0913": 1,
   "PLR0917": 1,
@@ -514,9 +513,6 @@
   "D103": 3,
   "S404": 1,
   "S603": 1
- },
- "tests/test_hostapply.py": {
-  "D103": 13
  },
  "tests/test_ics_reader.py": {
   "D103": 1,
@@ -577,7 +573,6 @@
   "S105": 1
  },
  "tests/test_marks.py": {
-  "D103": 8,
   "PLR2004": 2
  },
  "tests/test_memo_audits.py": {
@@ -690,7 +685,6 @@
   "SLF001": 2
  },
  "tests/test_rank_flow.py": {
-  "D103": 12,
   "PLC0415": 5,
   "PLR2004": 10,
   "RUF069": 10,
@@ -778,7 +772,7 @@
   "SLF001": 1
  },
  "tests/test_staticserve.py": {
-  "D103": 8,
+  "D103": 1,
   "PLR2004": 5,
   "S404": 1,
   "S603": 1
@@ -852,7 +846,6 @@
   "S607": 2
  },
  "tests/test_witwait.py": {
-  "D103": 10,
   "D401": 2,
   "DOC201": 1,
   "DOC402": 1,

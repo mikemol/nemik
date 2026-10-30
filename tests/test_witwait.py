@@ -60,6 +60,7 @@ def _wait(
 
 
 def test_it_returns_zero_with_the_value_that_crossed() -> None:
+    """It returns zero with the value that crossed."""
     poll = _script((NOT_YET, "0.4"), (NOT_YET, "0.9"), (HELD, "0.995"))
     code, line, t = _wait(poll)
     assert code == 0
@@ -68,12 +69,14 @@ def test_it_returns_zero_with_the_value_that_crossed() -> None:
 
 
 def test_it_times_out_with_the_last_value_never_an_empty_line() -> None:
+    """It times out with the last value never an empty line."""
     code, line, _ = _wait(_script((NOT_YET, "0.9")), timeout=35, every=10)
     assert code == 1
     assert line == "TIMEOUT, last value: 0.9"
 
 
 def test_unknown_is_not_false_and_a_few_blips_are_tolerated() -> None:
+    """Unknown is not false and a few blips are tolerated."""
     blips = _script(
         (UNKNOWN, "probe"), (UNKNOWN, "probe"), (UNKNOWN, "probe"), (HELD, "1")
     )
@@ -85,6 +88,7 @@ def test_unknown_is_not_false_and_a_few_blips_are_tolerated() -> None:
 
 
 def test_an_unknown_last_poll_at_the_timeout_is_exit_two_not_one() -> None:
+    """An unknown last poll at the timeout is exit two not one."""
     poll = _script((NOT_YET, "0.9"), (UNKNOWN, "probe unreachable"))
     code, line, _ = _wait(poll, timeout=10, every=10)
     assert code == 2
@@ -92,6 +96,7 @@ def test_an_unknown_last_poll_at_the_timeout_is_exit_two_not_one() -> None:
 
 
 def test_durations() -> None:
+    """Durations."""
     assert (seconds("90s"), seconds("30m"), seconds("12h"), seconds("1d")) == (
         90.0,
         1800.0,
@@ -105,6 +110,7 @@ def test_durations() -> None:
 def test_a_bad_duration_on_the_command_line_is_exit_two(
     capsys: pytest.CaptureFixture[str],
 ) -> None:
+    """A bad duration on the command line is exit two."""
     with pytest.raises(SystemExit) as stop:
         main(["--wait", "up", "--timeout", "forever"])
     assert stop.value.code == 2
@@ -145,6 +151,7 @@ def test_a_series_crossing_the_threshold_between_polls_returns_zero(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     # `x > 0.99` returns the series only while it is true: empty, empty, then the crossing value.
+    """A series crossing the threshold between polls returns zero."""
     with _victoria([[], [], ["0.995"]]) as url:
         monkeypatch.setenv("NEMIK_VM_URL", url)
         code, line = wait(
@@ -159,6 +166,7 @@ def test_a_series_crossing_the_threshold_between_polls_returns_zero(
 def test_many_matching_series_print_a_readable_value(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    """Many matching series print a readable value."""
     with _victoria([[str(i) for i in range(8)]]) as url:
         monkeypatch.setenv("NEMIK_VM_URL", url)
         code, line = wait(promql_poll("up == 1"), 5, 0.01, stamp=lambda: "T")
@@ -166,6 +174,7 @@ def test_many_matching_series_print_a_readable_value(
 
 
 def test_a_probe_that_is_down_is_exit_two(monkeypatch: pytest.MonkeyPatch) -> None:
+    """A probe that is down is exit two."""
     monkeypatch.setenv("NEMIK_VM_URL", "http://127.0.0.1:9")
     code, line = wait(promql_poll("up"), 5, 0.01)
     assert code == 2
@@ -175,5 +184,6 @@ def test_a_probe_that_is_down_is_exit_two(monkeypatch: pytest.MonkeyPatch) -> No
 def test_an_unset_endpoint_is_unknown_not_not_yet(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    """An unset endpoint is unknown not not yet."""
     monkeypatch.delenv("NEMIK_VM_URL", raising=False)
     assert promql_poll("up")()[0] == UNKNOWN
