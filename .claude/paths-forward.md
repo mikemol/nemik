@@ -3,12 +3,12 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1286 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:d4e75890c55b75a5`
+counter 1287 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:07e7158704a8f64a`
 
 | # | symbol | status |
 |---|---|---|
 | 1 | W1279 | working |
-| 2 | W1284 | working |
+| 2 | W1287 | working |
 | 3 | W1075 | ready |
 | 4 | W1139 | ready |
 | 5 | W913 | ready |
@@ -1264,7 +1264,8 @@ counter 1286 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:d4e
 | 1255 | W1262 | done |
 | 1256 | W1281 | done |
 | 1257 | W1283 | done |
-| 1258 | W1285 | done |
+| 1258 | W1284 | done |
+| 1259 | W1285 | done |
 
 ## waypoints
 
@@ -1274,15 +1275,16 @@ counter 1286 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:d4e
      cachestore.py (3) = 14 sites, none shared with 679 (alarm, mspdi, pins, projection); read each function body first,
      write Returns from it, keep first lines, measure without --write while a stack carries ruff-baseline.json, census
      once after the measure.
-2. **W1284** (working) nemik-rank --pace prints the pace as_of beside the repo's newest landing time and labels a
-   ratchet PENDING when the pace is older than that landing
-   - next: G0 first. nemik-rank REPO --pace (rank.py main, the pace printing around the behind and ok lines) reads the
-     repo's newest default-branch landing time from git reflog show --date=iso on main (the ref-update time, converted
-     to UTC) and prints it beside the pace as_of, and prefixes PENDING to each ratchet line when as_of is older than
-     that landing. Witness test: a fixture pace file stamped before a fixture landing prints PENDING on every ratchet
-     line, a pace stamped after prints none. Read the pace-printing code in rank.py first, and how the reflog is read
-     elsewhere (the landings stamp). Note rank.py is a W1282 file: this card and W1282 slice 1a share it, so they are
-     successive entries of one stack, never two stacks
+2. **W1287** (working) nemik-wake --only prints just the named repos, and --series defaults to luthen's export tree when
+   the root has none
+   - next: G0 first, figures labelled MEASURED or EXPECTED, card not marked working until the stack is submitted. After
+     stack 696 lands. In src/nemik/wake.py: (a) Options gains only: bool and --only prints just the repos named with
+     --repo (series lines filtered to the named set, a named repo with no series still prints no sample), and with
+     --only and no --repo it refuses with a message; (b) series_path(args) falls back to luthen's export tree (the same
+     EXPORT_TREE pacecli holds, nemik-export under the user's share/luthen directory) when --series is absent and the
+     root holds no luthen-series.json, so the host hook needs no path. Tests: only filters to the named set, a missing
+     name prints no sample, only without repo refuses, and the default path resolves in the export tree (monkeypatch the
+     tree). Pair with a DOC201 slice (about 10 sites, files nothing queued carries) for the ruff fall, MEASURED
 3. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 4. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -4185,7 +4187,9 @@ counter 1286 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:d4e
    sample, max-age refusal
 1257. **W1283** (done) Answer luthen-observability:W1805: are nemik images rebuildable and which old tags may a
    retention rule drop (unread: gated build time, tags still pulled)
-1258. **W1285** (done) Read back luthen's W1804 witness: the pinned nemik-wake --series-lines prints linux-sources
+1258. **W1284** (done) nemik-rank --pace prints the pace as_of beside the repo's newest landing time and labels a
+   ratchet PENDING when the pace is older than that landing
+1259. **W1285** (done) Read back luthen's W1804 witness: the pinned nemik-wake --series-lines prints linux-sources
    dormant and nemik ok with as_of times
 
 ## residue
@@ -4587,3 +4591,12 @@ counter 1286 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:d4e
   690 codon, 691 -1) in the window lower the ruff sum, and while ruff is behind every landing should carry a ruff fall.
   The session stated what it did not read (how pacewrite raises 49 to 73). That is the working explanation of the rising
   requirement and it changes the stack plan.; 4 finding(s)
+- **nemik:R60** (gate) round 56: 695 (03aaee8) landed pushed 05:24:48Z, ruff 1677 to 1669, ls-remote read back; 696
+  (W1279 slice 4 vtodo.py 9 Returns sections, plus W1284 PENDING label in nemik-rank --pace) inflight 05:26:17Z; gap 1
+  min 27 s; the live witness caught a flaw before the submit; pace after 695: ruff fell 52 over 10 landings, owes 73:
+  root The best act of the round is the live witness on W1284: the first version marked mtools' two rows PENDING for a
+  nemik landing, which the real pace output showed, and the fix (mark only the named repo's lines, with a test carrying
+  an mtools row) was made before any submit. The session also respected pacecli.py's Codon census constraint by reading
+  the plain-text reflog and doing integer calendar arithmetic, stopped a census when source changed after it started,
+  and reran it once. The estimate for the ruff rate (about 52) held against the pace's printed 52. The gap fell to 1 min
+  27 s by building during 695's gate. The remaining ruff gap is 52 against 73 owed.; 4 finding(s)

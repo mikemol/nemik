@@ -32,7 +32,12 @@ _REPO = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*")
 
 
 def today() -> date:
-    """Say the operator's local calendar date: where a reading window starts (a test seam)."""
+    """Say the operator's local calendar date: where a reading window starts (a test seam).
+
+    Returns:
+        The local date.
+
+    """
     return datetime.now().astimezone().date()
 
 
@@ -62,6 +67,10 @@ def load_calendars(path: Path = DEFAULT_CONFIG) -> dict[str, Calendar]:
     No file reads no calendar: the operator opts each one in, as with ics.toml. A label must be
     short lowercase (it appears in refs). A bad entry or an unknown key fails rather than being
     skipped: a typo'd `includes` would otherwise silently mean "no filter".
+
+    Returns:
+        The calendars by label, in sorted order.
+
     """
     import tomllib
 
@@ -118,7 +127,12 @@ def load_calendars(path: Path = DEFAULT_CONFIG) -> dict[str, Calendar]:
 
 
 def load_collections(path: Path = DEFAULT_CONFIG) -> dict[str, str]:
-    """{label: Akonadi collection name}: load_calendars without the filters (nemik:W158)."""
+    """{label: Akonadi collection name}: load_calendars without the filters (nemik:W158).
+
+    Returns:
+        The Akonadi collection name by label.
+
+    """
     return {label: c.name for label, c in load_calendars(path).items()}
 
 
@@ -129,6 +143,10 @@ def _venv_ics() -> str:
     """Locate mikemol-ics in nemik's own venv (it is vendored there, nemik:W157), not on PATH.
 
     A host caller runs .venv/bin/nemik-days without activating the venv (life-82, 2026-10-02).
+
+    Returns:
+        The path of the venv's mikemol-ics.
+
     """
     import sys
 
@@ -152,6 +170,10 @@ def occurrences(
     a free day. `includes` filters a label's events to those whose summary contains a pattern
     (nemik:W190); `stats`, when given, is filled with {label: (matched, total)} for every label, so
     a filter that matches nothing is reported as "0 of N", never as a free day.
+
+    Returns:
+        The occurrence rows for every collection, sorted by start.
+
     """
     ics = ics or _venv_ics()
     if not Path(ics).exists() and not shutil.which(ics):
@@ -204,6 +226,10 @@ def dedupe(rows: list[dict]) -> list[dict]:
     citing either copy still shows. Two identical entries inside ONE calendar are two real events
     and both stay: only a calendar not yet represented under that key is merged. Display only: the
     event graph keeps every occurrence, so cal:<label>/<uid> refs still resolve to their own copy.
+
+    Returns:
+        The rows with duplicates across different calendars merged.
+
     """
     out: list[dict] = []
     first: dict[tuple, dict] = {}
@@ -234,6 +260,10 @@ def event_graph(occs: list[dict], queues: Graph) -> Graph:
 
     HOST-SIDE ONLY: the result carries event text, so it is merged into a graph for nemik-operator
     on the host, never into nemik-serve, the export or metrics (operator 2026-09-28).
+
+    Returns:
+        The graph of events, with the waits on their next occurrence.
+
     """
     from rdflib import Graph, Literal, URIRef
     from rdflib.namespace import DCTERMS, RDF

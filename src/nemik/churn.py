@@ -38,6 +38,10 @@ def classify(old: dict, new: dict) -> str:
     structural: a card minted, closed (done leaves the default view) or dropped, or an edge added or
     removed; state: only status flips among open cards; attribute: any other change to a card;
     identical: nothing a card shows moved (the lock, heartbeat and counter are not drawn).
+
+    Returns:
+        The change class: identical, attribute, state or structural.
+
     """
     d = diff(old, new)
     if d.minted or d.closed or d.dropped or d.edges_added or d.edges_removed:
@@ -67,11 +71,21 @@ class Churn:
         return self.counts.get(cls, 0) / self.polls if self.polls else 0.0
 
     def redraws_now(self) -> float:
-        """Today every change redraws everything."""
+        """Today every change redraws everything.
+
+        Returns:
+            The share of polls that redraw today: every poll that found a change.
+
+        """
         return 1.0 - self.share("identical")
 
     def redraws_patching_attributes(self) -> float:
-        """Patching attributes and recolours in place leaves only structure to redraw."""
+        """Patching attributes and recolours in place leaves only structure to redraw.
+
+        Returns:
+            The share of polls that would still redraw: the structural ones.
+
+        """
         return self.share("structural")
 
 
@@ -80,7 +94,12 @@ def _times(snaps: list[Snapshot]) -> list[datetime]:
 
 
 def _state(snaps: list[Snapshot], when: datetime) -> dict:
-    """Give the queue as it stood at `when`: the last commit at or before it."""
+    """Give the queue as it stood at `when`: the last commit at or before it.
+
+    Returns:
+        The parsed queue at that time, empty before the first commit.
+
+    """
     at = bisect.bisect_right(_times(snaps), when)
     return snaps[at - 1][1] if at else {}
 
@@ -92,6 +111,10 @@ def churn(
 
     Compare each moved repo's queue at the poll's two ends, and count the interval under its worst
     class.
+
+    Returns:
+        The churn: how many polls, and how many found each class of change.
+
     """
     counts: Counter[str] = Counter()
     times = {repo: _times(snaps) for repo, snaps in fleet.items()}
@@ -114,7 +137,12 @@ def churn(
 def commit_classes(
     fleet: dict[str, list[Snapshot]], start: datetime, end: datetime
 ) -> dict[str, int]:
-    """Count what each commit in the span did, by class, independent of any poll step."""
+    """Count what each commit in the span did, by class, independent of any poll step.
+
+    Returns:
+        The number of commits in each change class.
+
+    """
     out: Counter[str] = Counter()
     for snaps in fleet.values():
         for i in range(1, len(snaps)):
@@ -124,7 +152,12 @@ def commit_classes(
 
 
 def sample(repo: Path, since: str, start: datetime) -> list[Snapshot]:
-    """Give the repo's queue at the span's start, then every commit after it."""
+    """Give the repo's queue at the span's start, then every commit after it.
+
+    Returns:
+        The queue at the span's start, then a snapshot per later commit.
+
+    """
     base = queue_at(repo, resolve(repo, since))
     return [(start, base), *snapshots(repo, since, full=True)]
 
@@ -169,7 +202,12 @@ def render(
 def run(
     dirs: dict[str, Path], names: list[str], since: str | None, as_json: bool
 ) -> int:
-    """nemik-history --churn: walk the span's history and report how a poll finds the fleet."""
+    """nemik-history --churn: walk the span's history and report how a poll finds the fleet.
+
+    Returns:
+        The exit code, always 0.
+
+    """
     end = datetime.now(UTC)
     when = since or (end - timedelta(days=7)).strftime("%Y-%m-%d")
     start = datetime.fromisoformat(when)
