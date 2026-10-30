@@ -41,7 +41,12 @@ class _Every(set):
 
 
 def opted_in(path: Path) -> set[str]:
-    """Repos whose asks may be projected. A missing file opts nobody in; "*" opts every repo in."""
+    """Repos whose asks may be projected. A missing file opts nobody in; "*" opts every repo in.
+
+    Returns:
+        The opted-in repos, or an object that contains every repo when the file lists "*".
+
+    """
     if not path.exists():
         return set()
     repos = set(tomllib.loads(path.read_text(encoding="utf-8")).get("repos", []))
@@ -71,6 +76,10 @@ def timezones(lines: list[str]) -> list[str]:
     pathsforward's calendar writes it, so a recurrence's near future is covered too. The folding,
     escaping and the zone rules are pathsforward's (mikemol.pathsforward.ics and .vtimezone), not
     a copy here.
+
+    Returns:
+        The VTIMEZONE content lines, one block per zone used, zones in sorted order.
+
     """
     years: dict[str, list[int]] = {}
     for line in lines:
@@ -86,6 +95,10 @@ def _stamp(iso: str) -> str:
     """Convert an ISO-8601 UTC ledger stamp to iCalendar DATE-TIME, the epoch when there is none.
 
     So the output depends only on the queues, never on when it ran (nemik:W119).
+
+    Returns:
+        The DATE-TIME text, YYYYMMDDTHHMMSSZ.
+
     """
     digits = re.sub(r"[^0-9]", "", iso)[:14]
     return f"{digits[:8]}T{digits[8:14]}Z" if len(digits) == 14 else "19700101T000000Z"
@@ -98,6 +111,10 @@ def time_property(name: str, value: str) -> str:
 
     mtools stores the value as written: DATE `20261001`, UTC `20261001T203000Z`, or
     `TZID=Zone/Name:20261001T163000` (floating times are refused at write, so none arrive here).
+
+    Returns:
+        The property line, or an empty string when the value is empty.
+
     """
     if not value:
         return ""
@@ -110,7 +127,12 @@ def time_property(name: str, value: str) -> str:
 
 
 def stated_ask(ask: str) -> tuple[str, str]:
-    """(verb, what) from an ask that may join several blocked_on values with ' | '."""
+    """(verb, what) from an ask that may join several blocked_on values with ' | '.
+
+    Returns:
+        The verb and what is asked; (decide, the whole ask) when none is stated.
+
+    """
     for part in ask.split(" | "):
         if m := EXPLICIT.match(part):
             return m[1].lower(), part[m.end() :].strip(" :—-")
@@ -123,6 +145,10 @@ def priority(salience: float, text: str | None = None) -> int:
     The steps are declared data (`[ask_priority]` in rank-weights.toml: a floor of salience and the
     level it earns, the highest floor reached wins); an ask below every floor is 9. `text` overrides
     the packaged file (for tests).
+
+    Returns:
+        The RFC 5545 PRIORITY, 1 to 9.
+
     """
     import tomllib
     from importlib.resources import files
@@ -139,7 +165,12 @@ def priority(salience: float, text: str | None = None) -> int:
 
 
 def vtodos(asks: list[dict], repos: set[str], link: str = "") -> list[list[str]]:
-    """One VTODO (as property lines) per needs-you ask from an opted-in repo, in ref order."""
+    """One VTODO (as property lines) per needs-you ask from an opted-in repo, in ref order.
+
+    Returns:
+        The property lines of each VTODO, in ref order.
+
+    """
     out = []
     for a in sorted(asks, key=operator.itemgetter("ref")):
         repo = a["ref"].partition(":")[0]
@@ -199,6 +230,10 @@ def grouped(todos: list[list[str]]) -> list[list[str]]:
     summary `<repo> (<n asks>)`, its DUE the earliest child DUE, as stored. Children keep their
     UIDs and dates, so an existing task is re-parented in place, not recreated. A repo whose last
     ask closes drops out of the feed and the helper completes its parent like any closed ask.
+
+    Returns:
+        The parent and child VTODOs, repos in sorted order, each parent before its subtasks.
+
     """
     by_repo: dict[str, list[list[str]]] = {}
     for t in todos:
@@ -258,7 +293,12 @@ def calendar(todos: list[list[str]]) -> str:
 
 
 def feed(root: Path, opt_in: Path, link: str = "", group: bool = False) -> str:
-    """Build the iCalendar text nemik-ics prints, in-process."""
+    """Build the iCalendar text nemik-ics prints, in-process.
+
+    Returns:
+        The iCalendar text.
+
+    """
     from rdflib import Graph
 
     from nemik.adapter import ledger_graph
