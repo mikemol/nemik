@@ -3417,3 +3417,6 @@
 2026-10-30T11:19:58Z  interrupt W1293 minted    -         "Repin the vendored mtools wheels to a sha with e6dc759e (mikemol-transcriptstruct --since-last) so luthen's live nemik tools carry it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:R187
 2026-10-30T11:33:22Z  status W1292 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-30T11:33:33Z  status W1293 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T11:59:23Z  interrupt W1294 minted    -         "apischema.py builds its JSON Schemas as dict[str, object] with a typed manifest, so the Any rows of the schema generator go and mypy falls"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1187
+2026-10-30T12:06:32Z  status W1293 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T12:08:39Z  status W1294 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

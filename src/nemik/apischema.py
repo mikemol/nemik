@@ -16,14 +16,18 @@ from __future__ import annotations
 
 import json
 from importlib.resources import files
-from typing import Any
 
 from nemik.manifest import load
 
 DIALECT = "https://json-schema.org/draft/2020-12/schema"
 
+# A JSON Schema fragment, or any JSON object: values are read only by the json module.
+Schema = dict[str, object]
+# The manifest's files section: file -> section -> field -> field class.
+Manifest = dict[str, dict[str, dict[str, str]]]
+
 # A field class (the manifest's vocabulary) as a JSON Schema fragment.
-SCALAR: dict[str, dict[str, object]] = {
+SCALAR: dict[str, Schema] = {
     # nemik:W441: an absent reference is published as null (a goal with nothing on deck), not
     # omitted
     "ref": {"type": ["string", "null"]},
@@ -38,7 +42,7 @@ SCALAR: dict[str, dict[str, object]] = {
 }
 
 
-def field(cls: str) -> dict[str, Any]:
+def field(cls: str) -> Schema:
     """Give the schema of one field class; `list-X` is an array of X.
 
     Returns:
@@ -50,7 +54,7 @@ def field(cls: str) -> dict[str, Any]:
     return SCALAR[cls]
 
 
-def record(fields: dict[str, str]) -> dict[str, Any]:
+def record(fields: dict[str, str]) -> Schema:
     """Give an object of only the manifest's fields for it (none required: absent means unknown).
 
     Returns:
@@ -64,29 +68,44 @@ def record(fields: dict[str, str]) -> dict[str, Any]:
     }
 
 
-def _list(fields: dict[str, str]) -> dict[str, Any]:
+def _list(fields: dict[str, str]) -> Schema:
     return {"type": "array", "items": record(fields)}
 
 
-def _by_repo(value: dict[str, Any]) -> dict[str, Any]:
+def _by_repo(value: Schema) -> Schema:
     return {"type": "object", "additionalProperties": value}
 
 
-def schemas() -> dict[str, dict[str, Any]]:
+def _waiting(fields: dict[str, str], waiting: dict[str, str]) -> Schema:
+    # a record whose properties also carry `waiting`, a list of the waiting records
+    properties = {name: field(cls) for name, cls in sorted(fields.items())}
+    return record(fields) | {"properties": properties | {"waiting": _list(waiting)}}
+
+
+def _version() -> str:
+    # the manifest's version, which the schemas' `$id` carries
+    document: object = json.loads(
+        files("nemik.data").joinpath("field-manifest.json").read_text()
+    )
+    return str(document["version"]) if isinstance(document, dict) else ""
+
+
+def schemas() -> dict[str, Schema]:
     """Give {published path pattern: its schema}, from the manifest.
 
     Returns:
         The schema of each published data path, keyed by its path pattern.
 
     """
-    m = load()
-    version = json.loads(
-        files("nemik.data").joinpath("field-manifest.json").read_text()
-    )["version"]
+    m: Manifest = load()
+    version = _version()
     g, w, h = (m["graph.json"], m["wake.json"], m["history.json"])
     # findings: per repo, a list of findings, each a list of strings (severity, focus, message)
-    finding = {"type": "array", "items": {"type": "array", "items": {"type": "string"}}}
-    bodies: dict[str, dict[str, Any]] = {
+    finding: Schema = {
+        "type": "array",
+        "items": {"type": "array", "items": {"type": "string"}},
+    }
+    bodies: dict[str, Schema] = {
         "graph.json": {
             "type": "object",
             "properties": {
@@ -108,17 +127,9 @@ def schemas() -> dict[str, dict[str, Any]]:
                 "series": SCALAR["record"],
                 "roster": {
                     "type": "array",
-                    "items": record(w["roster"])
-                    | {
-                        "properties": record(w["roster"])["properties"]
-                        | {"waiting": _list(w["waiting"])}
-                    },
+                    "items": _waiting(w["roster"], w["waiting"]),
                 },
-                "operator": record(w["operator"])
-                | {
-                    "properties": record(w["operator"])["properties"]
-                    | {"waiting": _list(w["waiting"])}
-                },
+                "operator": _waiting(w["operator"], w["waiting"]),
             },
             "additionalProperties": False,
         },
@@ -149,7 +160,29 @@ def schema_path(pattern: str) -> str:
     return "schema/" + pattern.replace("<repo>", "repo") + ".schema.json"
 
 
-def openapi() -> dict[str, Any]:
+def _get(summary: str, schema: Schema, param: str | None = None) -> Schema:
+    op: Schema = {
+        "summary": summary,
+        "responses": {
+            "200": {
+                "description": "the document",
+                "content": {"application/json": {"schema": schema}},
+            }
+        },
+    }
+    if param:
+        op["parameters"] = [
+            {
+                "name": param,
+                "in": "path",
+                "required": True,
+                "schema": {"type": "string"},
+            }
+        ]
+    return {"get": op}
+
+
+def openapi() -> Schema:
     """nemik:W442: the read API as OpenAPI 3.1, generated, so it cannot drift from the schemas.
 
     Every published data path is a GET whose 200 response refers to the schema the same build
@@ -160,46 +193,19 @@ def openapi() -> dict[str, Any]:
         The OpenAPI 3.1 document.
 
     """
-    version = json.loads(
-        files("nemik.data").joinpath("field-manifest.json").read_text()
-    )["version"]
-
-    def get(
-        summary: str, schema: dict[str, Any], param: str | None = None
-    ) -> dict[str, Any]:
-        op: dict[str, Any] = {
-            "summary": summary,
-            "responses": {
-                "200": {
-                    "description": "the document",
-                    "content": {"application/json": {"schema": schema}},
-                }
-            },
-        }
-        if param:
-            op["parameters"] = [
-                {
-                    "name": param,
-                    "in": "path",
-                    "required": True,
-                    "schema": {"type": "string"},
-                }
-            ]
-        return {"get": op}
-
-    paths: dict[str, Any] = {}
+    paths: Schema = {}
     for pattern in schemas():
         url = "/" + pattern.replace("<repo>", "{repo}")
-        paths[url] = get(
+        paths[url] = _get(
             f"nemik {pattern}",
             {"$ref": schema_path(pattern)},
             "repo" if "<repo>" in pattern else None,
         )
-    paths["/hashes.json"] = get(
+    paths["/hashes.json"] = _get(
         "every published path with the sha256 of its bytes (W414): refetch only what moved",
         {"type": "object", "additionalProperties": {"type": "string"}},
     )
-    paths["/graph/{piece}.json"] = get(
+    paths["/graph/{piece}.json"] = _get(
         "one repo's piece of graph.json, or _fleet (W415); assembling them gives graph.json",
         {"type": "object"},
         "piece",
@@ -208,7 +214,7 @@ def openapi() -> dict[str, Any]:
         "openapi": "3.1.0",
         "info": {
             "title": "nemik read API",
-            "version": str(version),
+            "version": _version(),
             "description": "Read-only. Every document is a static file; the field manifest is the "
             "contract, and a field outside it fails nemik's build.",
         },

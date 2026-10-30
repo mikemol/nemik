@@ -2,10 +2,6 @@
  "src/nemik/adapter.py": {
   "misc": 9
  },
- "src/nemik/apischema.py": {
-  "explicit-any": 10,
-  "misc": 115
- },
  "src/nemik/blocks.py": {
   "call-overload": 1,
   "explicit-any": 5,
@@ -90,7 +86,7 @@
  },
  "src/nemik/serve.py": {
   "explicit-any": 5,
-  "misc": 301,
+  "misc": 297,
   "operator": 1,
   "type-arg": 8
  },
@@ -138,7 +134,7 @@
   "misc": 2
  },
  "tests/test_apischema.py": {
-  "misc": 39,
+  "misc": 35,
   "type-arg": 2
  },
  "tests/test_apply_witness.py": {

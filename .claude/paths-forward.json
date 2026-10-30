@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1293,
+  "counter": 1294,
   "waypoints": [
     {
       "symbol": "W1",
@@ -31051,7 +31051,7 @@
     {
       "symbol": "W1293",
       "title": "Repin the vendored mtools wheels to a sha with e6dc759e (mikemol-transcriptstruct --since-last) so luthen's live nemik tools carry it",
-      "status": "working",
+      "status": "ready",
       "enables": [
         "luthen-observability:W1833"
       ],
@@ -31059,17 +31059,38 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-10-30: 2026-10-30 Also asked by luthen-observability:W1833 (relayed from github-42, host-reviewer R187). Witness they name: the pinned mikemol-transcriptstruct --help (luthen's live nemik bin) lists --since-last, after luthen-user-tools.timer installs the landed nemik commit. The current pin is nemik 132130a, vendored at mtools bb7fc9c (W1278); e6dc759e is later. Not started: waits behind stack 707 in the gate. | 2026-10-30: 2026-10-30 DRY RUN (no --write) of mikemol-repin --revendor --sha e6dc759e14eb8947dcc2e86602f89c1545e3cab3 --root nemik, MEASURED output: archives ten dists (hooks pathsforward fence icsstruct rulerseq frontier atomicwrite cvdcore ratchet transcriptstruct) from mtools, builds ten wheels at +e6dc759, checks the new writer's --hash on a COPY of the queue == live, git rm of the bb7fc9c wheels and git add -f of the new, moves the ten wheel paths in pyproject.toml and MODULE.bazel, runs uv lock and uv sync --frozen (which REMOVES packages not in uv.lock from .venv), rewrites the checksum file. e6dc759e is an ancestor of mtools HEAD f13e0abb. Files it touches: vendor/wheels/*, pyproject.toml, MODULE.bazel, uv.lock, the checksum file; shares NO code path with stack 707 (src/nemik/blocks.py, mypy-baseline.json). What it does share with a running gate is the .venv: the apply runs uv sync on the venv the commit tools and hooks run from, so applying it while 707 is gated could change the tools under it. Plan: apply after 707's verdict, then bazel build //:.venv (the venv is a build input), run the Codon census (ratchet and hooks unchanged for src), pycheck, write the stack and submit. | 2026-10-30: 2026-10-30 G0 (MEASURED unless marked): repin APPLIED at e6dc759 with the gate empty (707 landed db5a2cb 11:32:40Z); the venv rebuilt by bazel build //:.venv; its mikemol-transcriptstruct --help lists --since-last; ruff 1458 and mypy 3336 flat; 18 tests of pins, skill, workflows, adoption pass; nemik-pins reports the e6dc759 pin behind 11. No src module changed, so no census. Stack 708 = this entry, 27 paths (ten renames, SHA256SUMS, MODULE.bazel, pyproject.toml, uv.lock, queue files). No ratchet falls: pace of 11:25:14Z PENDING for landing 11:32:40Z, all three ok (codon 144, mypy 3336, ruff 1458), none behind, so the paydown check has nothing owed to refuse on (EXPECTED, first stack of this kind at this pace). The gate-venv question github-42 asked stays UNREAD: no gate process was running when I applied. Loadavg at submit 49.44 42.60 48.44.",
+      "evidence": "2026-10-30: 2026-10-30 Also asked by luthen-observability:W1833 (relayed from github-42, host-reviewer R187). Witness they name: the pinned mikemol-transcriptstruct --help (luthen's live nemik bin) lists --since-last, after luthen-user-tools.timer installs the landed nemik commit. The current pin is nemik 132130a, vendored at mtools bb7fc9c (W1278); e6dc759e is later. Not started: waits behind stack 707 in the gate. | 2026-10-30: 2026-10-30 DRY RUN (no --write) of mikemol-repin --revendor --sha e6dc759e14eb8947dcc2e86602f89c1545e3cab3 --root nemik, MEASURED output: archives ten dists (hooks pathsforward fence icsstruct rulerseq frontier atomicwrite cvdcore ratchet transcriptstruct) from mtools, builds ten wheels at +e6dc759, checks the new writer's --hash on a COPY of the queue == live, git rm of the bb7fc9c wheels and git add -f of the new, moves the ten wheel paths in pyproject.toml and MODULE.bazel, runs uv lock and uv sync --frozen (which REMOVES packages not in uv.lock from .venv), rewrites the checksum file. e6dc759e is an ancestor of mtools HEAD f13e0abb. Files it touches: vendor/wheels/*, pyproject.toml, MODULE.bazel, uv.lock, the checksum file; shares NO code path with stack 707 (src/nemik/blocks.py, mypy-baseline.json). What it does share with a running gate is the .venv: the apply runs uv sync on the venv the commit tools and hooks run from, so applying it while 707 is gated could change the tools under it. Plan: apply after 707's verdict, then bazel build //:.venv (the venv is a build input), run the Codon census (ratchet and hooks unchanged for src), pycheck, write the stack and submit. | 2026-10-30: 2026-10-30 G0 (MEASURED unless marked): repin APPLIED at e6dc759 with the gate empty (707 landed db5a2cb 11:32:40Z); the venv rebuilt by bazel build //:.venv; its mikemol-transcriptstruct --help lists --since-last; ruff 1458 and mypy 3336 flat; 18 tests of pins, skill, workflows, adoption pass; nemik-pins reports the e6dc759 pin behind 11. No src module changed, so no census. Stack 708 = this entry, 27 paths (ten renames, SHA256SUMS, MODULE.bazel, pyproject.toml, uv.lock, queue files). No ratchet falls: pace of 11:25:14Z PENDING for landing 11:32:40Z, all three ok (codon 144, mypy 3336, ruff 1458), none behind, so the paydown check has nothing owed to refuse on (EXPECTED, first stack of this kind at this pace). The gate-venv question github-42 asked stays UNREAD: no gate process was running when I applied. Loadavg at submit 49.44 42.60 48.44. | 2026-10-30: 2026-10-30 LANDED stack 708 (key 1793360177424970543, submitted 11:36:16Z) as 391dde3, subject mine (git log), origin/main read back 391dde3cd489be834d8ad3472f9e5462dc29f945. Card set ready BEFORE this line. Loadavg at verdict 51.19 64.99 64.17. NOT yet witnessed: luthen's pinned mikemol-transcriptstruct --help listing --since-last (their timer installs the landed commit; luthen-observability:W1833 holds that reading). Card stays ready, not done, until luthen reports it; the venv-in-gate question stays UNREAD.",
       "issued_at": "2026-10-30T11:19:58Z",
       "minted_during": "interrupt",
       "caused_by": "github:R187",
-      "last_worked": "2026-10-30T11:36:11Z",
+      "last_worked": "2026-10-30T12:06:42Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "pyproject.toml",
         "MODULE.bazel",
         "uv.lock"
+      ]
+    },
+    {
+      "symbol": "W1294",
+      "title": "apischema.py builds its JSON Schemas as dict[str, object] with a typed manifest, so the Any rows of the schema generator go and mypy falls",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): apischema.py schemas typed dict[str, object] over a typed Manifest; _waiting, _version, _get helpers; mikemol-pycheck --ratchet: mypy 3336 to 3203 (-133), ruff 1458 flat, baseline written; 6 tests of apischema, manifest, static_view pass; Codon census 7 passed in 492.94 s after the last src edit. The gate is empty (708 landed 391dde3 at 12:05:45Z). Pace of 11:25:14Z is PENDING for that landing: codon 144, mypy 3336, ruff 1458, all ok (unlanded sample); this is paydown ahead of need. Loadavg at submit 44.43 56.43 61.04.",
+      "issued_at": "2026-10-30T11:59:23Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W1187",
+      "last_worked": "2026-10-30T12:09:44Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/apischema.py",
+        "mypy-baseline.json"
       ]
     }
   ],
