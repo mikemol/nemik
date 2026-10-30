@@ -234,6 +234,14 @@ def parser() -> argparse.ArgumentParser:
     return ap
 
 
+class Options(argparse.Namespace):
+    """The parsed command line of nemik-static (nemik:W1187)."""
+
+    root: Path
+    bind: str
+    port: int
+
+
 def main(argv: list[str] | None = None) -> None:
     """Serve a published snapshot as files until the process is stopped.
 
@@ -241,7 +249,7 @@ def main(argv: list[str] | None = None) -> None:
         argv: the command line, or None for sys.argv.
 
     """
-    args = parser().parse_args(argv)
+    args = parser().parse_args(argv, namespace=Options())
     ThreadingHTTPServer((args.bind, args.port), handler(args.root)).serve_forever()
 
 

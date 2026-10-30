@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1310,
+  "counter": 1311,
   "waypoints": [
     {
       "symbol": "W1",
@@ -31428,22 +31428,45 @@
     {
       "symbol": "W1310",
       "title": "the last three functions without a Returns section, in check, get one written from their bodies, so ruff falls 1200 to 1197 and DOC201 reaches zero in src",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): 3 Returns sections from the bodies; ruff 1200 to 1197 (-3), mypy 2755 flat; baseline written with nothing queued (722 landed 130a231); format check clean; 10 tests pass. Docstrings only: no census (stated, not run). DOC201 in src after it: zero (a ruff-house listing over src showed exactly these three). Pace 18:25:16Z PENDING for landings: all ok, none behind. Gate empty. Loadavg at submit 14.92 17.97 27.14. | 2026-10-30: 2026-10-30 LANDED stack 723 (key 1793388750767940704, submitted 19:32:25Z) as d908726, [PUSHED] first try; origin/main read back d908726d2a76c4fa1ba5df301075e9409c74ac59; subject mine (git log); landing stamp 19:46:09Z. Card set ready BEFORE this line. Loadavg at the submit 14.92 17.97 27.14, at the verdict 22.79 35.64 37.72. Landed fall: ruff 1200 to 1197 (-3, MEASURED before submit). DOC201 in src is zero. Pace of 19:25:16Z (PENDING for this landing): codon 142, mypy 2755, ruff 1200, all ok, none behind. Gate wall about 14 min.",
+      "issued_at": "2026-10-30T19:32:03Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W1279",
+      "last_worked": "2026-10-30T19:47:06Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/check.py",
+        "ruff-baseline.json"
+      ]
+    },
+    {
+      "symbol": "W1311",
+      "title": "calwrite, staticserve and pacing read a typed Namespace and pacing reads its TOML through nemik.tomlview, so mypy falls 2755 to 2746",
       "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): 3 Returns sections from the bodies; ruff 1200 to 1197 (-3), mypy 2755 flat; baseline written with nothing queued (722 landed 130a231); format check clean; 10 tests pass. Docstrings only: no census (stated, not run). DOC201 in src after it: zero (a ruff-house listing over src showed exactly these three). Pace 18:25:16Z PENDING for landings: all ok, none behind. Gate empty. Loadavg at submit 14.92 17.97 27.14.",
-      "issued_at": "2026-10-30T19:32:03Z",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): typed Options in calwrite, staticserve, pacing; pacing.limits through tomlview; mikemol-pycheck --ratchet: mypy 2755 to 2746 (-9), ruff 1197 flat; baseline written with nothing queued (723 landed d908726); repo-config format check clean after one reformat; 41 tests pass. No census (modules stay failing on their first import; stated, not run). Pace 19:25:16Z PENDING: all ok, none behind. Gate empty. Loadavg at submit 28.97 28.23 33.76.",
+      "issued_at": "2026-10-30T19:51:15Z",
       "minted_during": "interrupt",
-      "caused_by": "nemik:W1279",
-      "last_worked": "2026-10-30T19:32:24Z",
+      "caused_by": "nemik:W1187",
+      "last_worked": "2026-10-30T19:52:11Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
-        "src/nemik/check.py",
-        "ruff-baseline.json"
+        "src/nemik/calwrite.py",
+        "src/nemik/staticserve.py",
+        "src/nemik/pacing.py",
+        "mypy-baseline.json"
       ]
     }
   ],

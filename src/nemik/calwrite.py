@@ -277,6 +277,15 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> int:
         The exit code: 0 ok or nothing opted in, 1 some writes failed, 2 refused.
 
     """
+
+    class Options(argparse.Namespace):
+        """The parsed command line of nemik-calendar-write (nemik:W1187)."""
+
+        root: Path
+        calendars: Path
+        helper: Path
+        apply: bool
+
     ap = argparse.ArgumentParser(
         prog="nemik-calendar-write", description=(main.__doc__ or "").splitlines()[0]
     )
@@ -295,7 +304,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> int:
         action="store_true",
         help="write; without it only the plan is printed",
     )
-    args = ap.parse_args(argv)
+    args = ap.parse_args(argv, namespace=Options())
     targets = {
         label: c for label, c in load_calendars(args.calendars).items() if c.write
     }

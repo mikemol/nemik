@@ -23,6 +23,7 @@ from rdflib import Graph
 from rdflib.namespace import DCTERMS
 
 from nemik.blocks import ref
+from nemik.tomlview import table
 
 
 class Pace(NamedTuple):
@@ -44,11 +45,11 @@ def limits(text: str | None = None) -> tuple[float, float, int]:
     """
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
-    t: dict[str, float] = tomllib.loads(text).get("pacing", {})
+    t = table(table(tomllib.loads(text)).get("pacing"))
     return (
-        float(t.get("rate", 50)),
-        float(t.get("burst", 150)),
-        int(t.get("window_days", 14)),
+        float(str(t.get("rate", 50))),
+        float(str(t.get("burst", 150))),
+        int(str(t.get("window_days", 14))),
     )
 
 
@@ -87,12 +88,18 @@ def paces(g: Graph, now: datetime, rate: float, burst: float, days: int) -> list
         except ValueError:
             continue
         stamps.setdefault(ref(node).partition(":")[0], []).append(at)
-    out = []
+    out: list[Pace] = []
     for repo, seen in stamps.items():
         overdraft, level = bucket(seen, rate, burst, start, now)
         arrivals = sum(1 for s in seen if start <= s <= now)
         out.append(Pace(repo, arrivals, overdraft, level))
     return sorted(out, key=lambda p: (-p.overdraft, p.repo))
+
+
+class Options(argparse.Namespace):
+    """The parsed command line of nemik-pacing (nemik:W1187)."""
+
+    root: Path
 
 
 def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
@@ -103,7 +110,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         prog="nemik-pacing", description=(main.__doc__ or "").splitlines()[0]
     )
     ap.add_argument("--root", type=Path, default=default_root(), help="~/github")
-    args = ap.parse_args(argv)
+    args = ap.parse_args(argv, namespace=Options())
     if g is None:
         g = Graph()
         for _, qg, _ in survey(args.root):
