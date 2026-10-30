@@ -16,18 +16,34 @@ collide.
 from __future__ import annotations
 
 import operator
-from typing import Any
+from typing import TypedDict
 
 from nemik.adapter import BASE
 
 FLEET = "_fleet"
 
+# One row of graph.json (a node, an edge, an inbound or operator entry); only json reads it.
+Row = dict[str, object]
 
-def _owner(node: dict[str, Any]) -> str:
+
+class GraphDoc(TypedDict, total=False):
+    """graph.json, and each piece of it (a piece adds `repos` on the fleet piece only)."""
+
+    nodes: list[Row]
+    edges: list[Row]
+    inbound: list[Row]
+    operator: list[Row]
+    findings: dict[str, object]
+    health: dict[str, object]
+    ruler: dict[str, object]
+    repos: list[str]
+
+
+def _owner(node: Row) -> str:
     return str(node["repo"]) if str(node["id"]).startswith(BASE) else FLEET
 
 
-def split(doc: dict[str, Any]) -> dict[str, dict[str, Any]]:
+def split(doc: GraphDoc) -> dict[str, GraphDoc]:
     """{piece name: piece} for a graph document; `assemble` inverts it.
 
     Returns:
@@ -36,7 +52,7 @@ def split(doc: dict[str, Any]) -> dict[str, dict[str, Any]]:
     """
     owner = {str(n["id"]): _owner(n) for n in doc["nodes"]}
     names = sorted(set(owner.values()) - {FLEET})
-    pieces: dict[str, dict[str, Any]] = {
+    pieces: dict[str, GraphDoc] = {
         name: {"nodes": [], "edges": [], "findings": {}, "health": {}}
         for name in [*names, FLEET]
     }
@@ -44,9 +60,10 @@ def split(doc: dict[str, Any]) -> dict[str, dict[str, Any]]:
         pieces[owner[str(node["id"])]]["nodes"].append(node)
     for edge in doc["edges"]:
         pieces[owner.get(str(edge["source"]), FLEET)]["edges"].append(edge)
-    for section in ("findings", "health"):
-        for repo, value in doc.get(section, {}).items():
-            pieces[repo if repo in names else FLEET][section][repo] = value
+    for repo, finding in doc.get("findings", {}).items():
+        pieces[repo if repo in names else FLEET]["findings"][repo] = finding
+    for repo, status in doc.get("health", {}).items():
+        pieces[repo if repo in names else FLEET]["health"][repo] = status
     fleet = pieces[FLEET]
     fleet["inbound"] = doc.get("inbound", [])
     fleet["operator"] = doc.get("operator", [])
@@ -55,7 +72,7 @@ def split(doc: dict[str, Any]) -> dict[str, dict[str, Any]]:
     return pieces
 
 
-def assemble(pieces: dict[str, dict[str, Any]]) -> dict[str, Any]:
+def assemble(pieces: dict[str, GraphDoc]) -> GraphDoc:
     """Rebuild the graph document the pieces were cut from (nodes by id, edges in order).
 
     Returns:
@@ -69,17 +86,17 @@ def assemble(pieces: dict[str, dict[str, Any]]) -> dict[str, Any]:
         (e for p in parts for e in p["edges"]),
         key=operator.itemgetter("source", "target", "kind"),
     )
-    doc: dict[str, Any] = {
+    findings: dict[str, object] = {}
+    health: dict[str, object] = {}
+    for p in parts:
+        findings.update(p["findings"])
+        health.update(p["health"])
+    return {
         "nodes": nodes,
         "edges": edges,
         "inbound": fleet["inbound"],
         "operator": fleet["operator"],
-        "findings": {},
-        "health": {},
+        "findings": dict(sorted(findings.items())),
+        "health": dict(sorted(health.items())),
         "ruler": fleet["ruler"],
     }
-    for section in ("findings", "health"):
-        for p in parts:
-            doc[section].update(p[section])
-        doc[section] = dict(sorted(doc[section].items()))
-    return doc

@@ -17,10 +17,13 @@ from __future__ import annotations
 import json
 import sys
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any, cast
 
 from nemik.pieces import assemble, split
 from nemik.serve import Model
+
+if TYPE_CHECKING:
+    from nemik.pieces import GraphDoc
 
 HERE = Path(__file__).resolve().parents[1]
 OUT = HERE / "tests" / "corpus" / "pieces"
@@ -114,7 +117,7 @@ def _first_repos(doc: dict[str, Any], n: int) -> dict[str, Any]:
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     for name, doc in cases().items():
-        cut = split(doc)
+        cut = split(cast("GraphDoc", doc))
         case = {"name": name, "doc": doc, "split": cut, "assemble": assemble(cut)}
         (OUT / f"{name}.json").write_text(
             json.dumps(case, indent=1, sort_keys=True, default=str) + "\n"

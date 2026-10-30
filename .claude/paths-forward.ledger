@@ -3445,3 +3445,6 @@
 2026-10-30T15:33:56Z  status W1299 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-30T15:58:13Z  interrupt W1302 minted    -         "10 functions in rank get a Returns section written from their bodies, so ruff falls 1263 to 1252"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1279
 2026-10-30T15:58:39Z  status W1302 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T16:21:19Z  interrupt W1303 minted    -         "pieces.py cuts and joins graph.json as a typed GraphDoc, so the piece code and its test and corpus tool stop handling Any and mypy falls"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1187
+2026-10-30T16:22:03Z  status W1302 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T16:22:48Z  status W1303 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

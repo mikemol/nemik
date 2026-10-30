@@ -63,8 +63,7 @@
   "misc": 5
  },
  "src/nemik/pieces.py": {
-  "explicit-any": 5,
-  "misc": 85
+  "misc": 2
  },
  "src/nemik/pins.py": {
   "call-overload": 1,
@@ -83,7 +82,7 @@
  },
  "src/nemik/serve.py": {
   "explicit-any": 5,
-  "misc": 297,
+  "misc": 294,
   "operator": 1,
   "type-arg": 8
  },
@@ -226,11 +225,10 @@
   "misc": 9
  },
  "tests/test_pieces.py": {
-  "explicit-any": 1,
-  "misc": 59
+  "misc": 11
  },
  "tests/test_pieces_corpus.py": {
-  "misc": 41
+  "misc": 39
  },
  "tests/test_positioning.py": {
   "misc": 22
@@ -331,7 +329,7 @@
  },
  "tools/gen_pieces_corpus.py": {
   "explicit-any": 2,
-  "misc": 45,
+  "misc": 41,
   "no-any-return": 1
  },
  "tools/nemik_client.py": {

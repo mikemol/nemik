@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1302,
+  "counter": 1303,
   "waypoints": [
     {
       "symbol": "W1",
@@ -31253,22 +31253,45 @@
     {
       "symbol": "W1302",
       "title": "10 functions in rank get a Returns section written from their bodies, so ruff falls 1263 to 1252",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): 10 Returns sections written from the bodies; mikemol-pycheck --ratchet: ruff 1263 to 1252 (-11, one more than the ten edited), mypy 2992 flat; baseline written with nothing queued; repo-config format check clean; 39 tests of rank, rank_flow, frontier, rank_paydown pass. Docstrings only: no census (stated, not run). Pace of 15:25:15Z PENDING for landing 15:33:03Z: codon 142, ruff 1263, mypy 2992 all ok; none behind, so the paydown check should admit a ruff stack (EXPECTED; the operator ruled 15:39:37Z, line 135344, uuid 6455aa3c, that the rule stands). Gate empty. Loadavg at submit: read in the call before this one. | 2026-10-30: 2026-10-30 LANDED stack 716 (key 1793375938334317447, submitted 15:58:57Z) as 20277de, [PUSHED] on the first try; origin/main read back 20277de47ad955b6d508b1a63b599c8adf8e1ca2; subject mine (git log). Card set ready BEFORE this line. Loadavg at the submit 48.11 44.97 39.94 (read before the G0 line), at the verdict 46.24 56.22 59.06. Landed fall: ruff 1263 to 1252 (-11, MEASURED before submit). The paydown check admitted it with nothing behind.",
+      "issued_at": "2026-10-30T15:58:13Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W1279",
+      "last_worked": "2026-10-30T16:22:19Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/rank.py",
+        "ruff-baseline.json"
+      ]
+    },
+    {
+      "symbol": "W1303",
+      "title": "pieces.py cuts and joins graph.json as a typed GraphDoc, so the piece code and its test and corpus tool stop handling Any and mypy falls",
       "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): 10 Returns sections written from the bodies; mikemol-pycheck --ratchet: ruff 1263 to 1252 (-11, one more than the ten edited), mypy 2992 flat; baseline written with nothing queued; repo-config format check clean; 39 tests of rank, rank_flow, frontier, rank_paydown pass. Docstrings only: no census (stated, not run). Pace of 15:25:15Z PENDING for landing 15:33:03Z: codon 142, ruff 1263, mypy 2992 all ok; none behind, so the paydown check should admit a ruff stack (EXPECTED; the operator ruled 15:39:37Z, line 135344, uuid 6455aa3c, that the rule stands). Gate empty. Loadavg at submit: read in the call before this one.",
-      "issued_at": "2026-10-30T15:58:13Z",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): pieces.py GraphDoc TypedDict (total=False) and Row = dict[str, object]; section loops unrolled; test fixture and expected typed as GraphDoc; the corpus tool casts once at split; mikemol-pycheck --ratchet: mypy 2992 to 2846 (-146), ruff 1252 flat; strict mypy on the three files prints nothing; baseline written with nothing queued (716 landed 20277de); repo-config format check clean; 18 tests of pieces, pieces_corpus, static_view, read_api pass. Type-only change, no Codon census (stated, not run). Pace of 15:25:15Z PENDING for landing 16:20:15Z: codon 142, ruff 1263, mypy 2992 all ok, none behind. Gate empty. Loadavg at submit 39.18 52.35 57.55.",
+      "issued_at": "2026-10-30T16:21:19Z",
       "minted_during": "interrupt",
-      "caused_by": "nemik:W1279",
-      "last_worked": "2026-10-30T15:58:51Z",
+      "caused_by": "nemik:W1187",
+      "last_worked": "2026-10-30T16:23:15Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
-        "src/nemik/rank.py",
-        "ruff-baseline.json"
+        "src/nemik/pieces.py",
+        "tests/test_pieces.py",
+        "tools/gen_pieces_corpus.py",
+        "mypy-baseline.json"
       ]
     }
   ],

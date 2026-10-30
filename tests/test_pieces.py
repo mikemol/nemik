@@ -5,9 +5,8 @@
 import json
 import operator
 from pathlib import Path
-from typing import Any
 
-from nemik.pieces import FLEET, assemble, split
+from nemik.pieces import FLEET, GraphDoc, assemble, split
 from nemik.serve import build_static
 
 FLEET_FIXTURE = Path(__file__).parent / "fixtures" / "fleet"
@@ -33,7 +32,7 @@ def test_published_pieces_assemble_to_the_published_graph(tmp_path: Path) -> Non
 
 def test_a_repo_piece_holds_only_that_repo() -> None:
     """A repo piece holds only that repo."""
-    doc: dict[str, Any] = {
+    doc: GraphDoc = {
         "nodes": [
             {"id": "urn:nemik:a/W1", "repo": "a"},
             {"id": "urn:nemik:b/W1", "repo": "b"},
@@ -53,8 +52,10 @@ def test_a_repo_piece_holds_only_that_repo() -> None:
     assert [n["id"] for n in pieces["a"]["nodes"]] == ["urn:nemik:a/W1"]
     assert len(pieces["a"]["edges"]) == 1
     assert set(pieces[FLEET]["findings"]) == {"c"}
-    assert assemble(pieces) == doc | {
+    expected: GraphDoc = {
+        **doc,
         "nodes": sorted(doc["nodes"], key=operator.itemgetter("id")),
         "findings": {"a": [], "c": []},
         "ruler": {},
     }
+    assert assemble(pieces) == expected
