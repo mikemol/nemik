@@ -53,7 +53,12 @@ def _first_line(path: Path) -> str:
 
 
 def headers(root: Path) -> tuple[list[Letter], list[tuple[str, str]]]:
-    """(addressed letters, [(inbox, file)] with no `from → to` header) under every `<repo>/inbox`."""
+    """(addressed letters, [(inbox, file)] with no `from → to` header) under every `<repo>/inbox`.
+
+    Returns:
+        The addressed letters, and the (inbox, file name) of each letter with no header.
+
+    """
     addressed: list[Letter] = []
     unaddressed: list[tuple[str, str]] = []
     for path in sorted(root.glob("*/inbox/*.md")):
@@ -67,7 +72,13 @@ def headers(root: Path) -> tuple[list[Letter], list[tuple[str, str]]]:
 
 
 def misdelivered(letters: list[Letter], workstreams: set[str]) -> list[str]:
-    """One line per letter whose recipient is not the inbox it sits in, or is no workstream."""
+    """One line per letter whose recipient is not the inbox it sits in, or is no workstream.
+
+    Returns:
+        One line per misdelivered letter, naming where it belongs or that its recipient
+        is no workstream.
+
+    """
     out: list[str] = []
     for ltr in letters:
         if ltr.recipient != ltr.inbox:
@@ -89,7 +100,12 @@ def _load(path: Path) -> dict:
 
 
 def _queue_text(queue: dict) -> str:
-    """Every string in a parsed queue, joined: a letter is cited if its file name appears in it."""
+    """Every string in a parsed queue, joined: a letter is cited if its file name appears in it.
+
+    Returns:
+        The strings, joined by newlines.
+
+    """
     strings: list[str] = []
 
     def walk(node: object) -> None:
@@ -118,6 +134,10 @@ def answered(repo: str, path: Path, queue: dict) -> bool:
 
     What it asked about has landed or been dropped. A letter naming none of `repo`'s waypoints is
     live.
+
+    Returns:
+        True when the letter names at least one of the repo's waypoints and all are closed.
+
     """
     own = {
         f"W{m[2]}"
@@ -128,7 +148,12 @@ def answered(repo: str, path: Path, queue: dict) -> bool:
 
 
 def age_days(path: Path, today: date) -> int | None:
-    """Days since the date in the letter's file name (`YYYY-MM-DD-...`); None when it has none."""
+    """Days since the date in the letter's file name (`YYYY-MM-DD-...`); None when it has none.
+
+    Returns:
+        The age in whole days, or None when the name has no date or the date is invalid.
+
+    """
     m = _DATED.match(path.name)
     if not m:
         return None
@@ -142,7 +167,12 @@ _ALERT = re.compile(r"-alert-(.+)-(opened|resolved)-([0-9a-f]+)\.md$")
 
 
 def alert_key(path: Path) -> tuple[str, str, str] | None:
-    """(alert name, opened|resolved, alert id) of a machine-generated alert letter, else None."""
+    """(alert name, opened|resolved, alert id) of a machine-generated alert letter, else None.
+
+    Returns:
+        The alert name, its state and its id, or None when the file is not an alert letter.
+
+    """
     m = _ALERT.search(path.name)
     return (m[1], m[2], m[3]) if m else None
 
@@ -156,6 +186,11 @@ def alert_closed(
     answered by construction when a `resolved` letter of the same alert name and id is dated the
     same day or later; an `opened` with none stays live. `resolved` maps (owner, name, id) to the
     latest resolved date (the file name's `YYYY-MM-DD`).
+
+    Returns:
+        True for a resolved letter, or an opened one whose resolved twin is dated the same
+        day or later; False otherwise.
+
     """
     key = alert_key(path)
     if key is None:
@@ -170,6 +205,10 @@ def orphans(root: Path, repo: str | None = None) -> list[tuple[str, Path, bool]]
     """(repo, letter, answered) for each letter under `<repo>/inbox/` no waypoint cites.
 
     For `repo` alone when given.
+
+    Returns:
+        The (repo, letter path, answered) triples, in path order.
+
     """
     found: list[tuple[str, Path, bool]] = []
     # nemik:W280: a letter is owned when ANY waypoint in the fleet cites its path (a sender cites
@@ -203,7 +242,12 @@ def orphans(root: Path, repo: str | None = None) -> list[tuple[str, Path, bool]]
 def _split(
     root: Path, repo: str | None, older_than: int | None, today: date
 ) -> tuple[list[tuple[str, Path]], list[tuple[str, Path]]]:
-    """(live, stale) orphans: stale is answered, or dated more than `older_than` days ago."""
+    """(live, stale) orphans: stale is answered, or dated more than `older_than` days ago.
+
+    Returns:
+        The live and the stale orphans, each as (owner, path) pairs.
+
+    """
     live: list[tuple[str, Path]] = []
     stale: list[tuple[str, Path]] = []
     for owner, path, closed in orphans(root, repo):
@@ -220,7 +264,12 @@ def fold_commands(
     older_than: int | None = None,
     today: date | None = None,
 ) -> list[str]:
-    """One `--add` per live orphan letter: a waypoint in the recipient whose caused_by is the letter."""
+    """One `--add` per live orphan letter: a waypoint in the recipient whose caused_by is the letter.
+
+    Returns:
+        The shell commands, one `--add` per live orphan.
+
+    """
     out: list[str] = []
     for owner, path in _split(root, repo, older_than, today or _today())[0]:
         line = _first_line(path)
@@ -244,7 +293,12 @@ def archive_commands(
     older_than: int | None = None,
     today: date | None = None,
 ) -> list[str]:
-    """One `mv` per stale orphan, into that repo's `inbox/archive/`."""
+    """One `mv` per stale orphan, into that repo's `inbox/archive/`.
+
+    Returns:
+        The `mv` commands, one per stale orphan.
+
+    """
     return [
         f"mv {shlex.quote(str(path))} {shlex.quote(str(path.parent / 'archive'))}/"
         for _, path in _split(root, repo, older_than, today or _today())[1]
@@ -305,6 +359,10 @@ def held(root: Path, ltr: Letter) -> bool:
     """Say whether the letter's recipient holds it: in its inbox, or archived there.
 
     A repo that has read a letter files it under `inbox/archive/`, which is still delivered.
+
+    Returns:
+        True when the letter is in the recipient's inbox or its archive.
+
     """
     inbox = root / ltr.recipient / "inbox"
     return (inbox / ltr.name).exists() or (inbox / "archive" / ltr.name).exists()
@@ -319,6 +377,10 @@ def redeliveries(
     letter is delivered where it says and the sender keeps its copy (a waypoint there may cite
     it). Skips a letter the recipient already has. `repo` keeps those that sit in, or are
     addressed to, that repo.
+
+    Returns:
+        The (source, destination) pairs to copy.
+
     """
     addressed, _ = headers(root)
     out: list[tuple[Path, Path]] = []
@@ -347,6 +409,10 @@ def report(
     commands into inbox/archive; with `apply` as well they are carried out instead (apply_fold).
     `repo` scopes the orphan listing AND the misdelivery lines to letters that sit in or are
     addressed to that repo; `older_than` makes a dated orphan stale after that many days.
+
+    Returns:
+        The lines to print and the exit code.
+
     """
     addressed, unaddressed = headers(root)
     if repo:

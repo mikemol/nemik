@@ -36,7 +36,12 @@ class Health(NamedTuple):
 
 
 def thresholds(text: str | None = None) -> dict[str, tuple[float, float]]:
-    """Read the declared `[health]` table: for each signal, its (amber, red) floor."""
+    """Read the declared `[health]` table: for each signal, its (amber, red) floor.
+
+    Returns:
+        The (amber, red) floor for each declared signal.
+
+    """
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
     table: dict[str, list[float]] = tomllib.loads(text).get("health", {})
@@ -44,7 +49,12 @@ def thresholds(text: str | None = None) -> dict[str, tuple[float, float]]:
 
 
 def health(g: Graph, repo: str, limits: dict[str, tuple[float, float]]) -> Health:
-    """`repo`'s verdict: the worst of its signals against `limits`, with a reason per crossing."""
+    """`repo`'s verdict: the worst of its signals against `limits`, with a reason per crossing.
+
+    Returns:
+        The repo's Health: its status, signals and the reasons it is not green.
+
+    """
     return health_cards(cards(g), operator_asks(g), repo, limits)
 
 
@@ -54,7 +64,12 @@ def health_cards(
     repo: str,
     limits: dict[str, tuple[float, float]],
 ) -> Health:
-    """nemik:W454: `health` over plain Cards and the asks as plain rows: the portable core."""
+    """nemik:W454: `health` over plain Cards and the asks as plain rows: the portable core.
+
+    Returns:
+        The same Health, computed from plain Cards and ask rows.
+
+    """
     open_cards = [c for c in by_cite.values() if not c.done and c.repo == repo]
     blocked = [c for c in open_cards if c.state == "blocked"]
     share = len(blocked) / len(open_cards) if open_cards else 0.0

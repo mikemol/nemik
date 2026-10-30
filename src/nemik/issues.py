@@ -28,7 +28,12 @@ from nemik.tracker import read_issues, row_of
 
 
 def to_issues(tasks: list[Task]) -> list[dict[str, object]]:
-    """One issue per task, in cite order."""
+    """One issue per task, in cite order.
+
+    Returns:
+        The issue rows, one per task: cite, title, body, state, labels and blocked_by.
+
+    """
     return [
         {
             "cite": t.cite,
@@ -77,7 +82,12 @@ def plan_text(tasks: list[Task], tracker_text: str) -> str:
 
 
 def read(text: str) -> list[Task]:
-    """Read the tasks an issues document written by `write` holds (for the round-trip test)."""
+    """Read the tasks an issues document written by `write` holds (for the round-trip test).
+
+    Returns:
+        The tasks, numbered from 1, each with its blocked-by links.
+
+    """
     rows = json.loads(text)
     return [
         Task(

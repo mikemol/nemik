@@ -115,7 +115,6 @@
   "PLR0912": 1
  },
  "src/nemik/health.py": {
-  "DOC201": 3,
   "PLR2004": 1
  },
  "src/nemik/history.py": {
@@ -140,12 +139,8 @@
   "DOC201": 1,
   "PLW0603": 1
  },
- "src/nemik/issues.py": {
-  "DOC201": 2
- },
  "src/nemik/letters.py": {
-  "DOC201": 14,
-  "E501": 3,
+  "E501": 2,
   "FBT001": 2,
   "FBT002": 2,
   "PLC0415": 3,
