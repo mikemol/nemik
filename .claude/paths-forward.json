@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1309,
+  "counter": 1310,
   "waypoints": [
     {
       "symbol": "W1",
@@ -31220,11 +31220,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-10-30: 2026-10-30 PROBED with the pinned Codon (scratch scripts probe_codon.py and probe_snippets.py, MEASURED output, the census's own build command): letters.py's first error is no module named shlex, and each stdlib import it uses, tried alone: json OK, re OK, datetime date/datetime OK, pathlib OK, os OK; datetime.UTC NO (cannot import name UTC), class R(NamedTuple) NO (reference classes cannot inherit tuple classes), subprocess NO, shutil NO, shlex NO, sys.executable NO (cannot import name executable from sys). letters.py uses shlex.join/quote, UTC, NamedTuple rows, subprocess.run and sys.executable (the minting of waypoints through the writer, at about line 327) and shutil (the archive move, about line 420). So it can compile only if (a) the NamedTuple rows become plain classes, (b) shlex use is replaced by a small quote function, (c) UTC becomes timezone.utc or its use is moved, (d) the subprocess/sys/shutil code (the apply path) moves to a module of its own. That is a split of one module into a pure core and an effects module with the callers and tests rewired, estimated 2 to 3 stacks, and it falls codon by 2 (letters out of the baseline) only when ALL of (a) to (d) are done. Not started.",
+      "evidence": "2026-10-30: 2026-10-30 PROBED with the pinned Codon (scratch scripts probe_codon.py and probe_snippets.py, MEASURED output, the census's own build command): letters.py's first error is no module named shlex, and each stdlib import it uses, tried alone: json OK, re OK, datetime date/datetime OK, pathlib OK, os OK; datetime.UTC NO (cannot import name UTC), class R(NamedTuple) NO (reference classes cannot inherit tuple classes), subprocess NO, shutil NO, shlex NO, sys.executable NO (cannot import name executable from sys). letters.py uses shlex.join/quote, UTC, NamedTuple rows, subprocess.run and sys.executable (the minting of waypoints through the writer, at about line 327) and shutil (the archive move, about line 420). So it can compile only if (a) the NamedTuple rows become plain classes, (b) shlex use is replaced by a small quote function, (c) UTC becomes timezone.utc or its use is moved, (d) the subprocess/sys/shutil code (the apply path) moves to a module of its own. That is a split of one module into a pure core and an effects module with the callers and tests rewired, estimated 2 to 3 stacks, and it falls codon by 2 (letters out of the baseline) only when ALL of (a) to (d) are done. Not started. | 2026-10-30: 2026-10-30 PLAN for the three stacks, from reading letters.py lines 1-130 (not started): (1) PURE SIDE, no baseline written: Letter NamedTuple to a plain class (4 fields, 1 constructor site, 3 readers); shlex.quote (used in fold_commands and archive_commands) to a local _quote; _today's datetime.now(UTC) to a caller-supplied date or a probed Codon form (datetime.now() is naive local, so keep UTC by passing the date from the effects side); the 15 X | None annotations to sentinels (repo '' for all, older_than -1 for none, today a date supplied by the caller, writer '' , env {} ), each with its callers; except (OSError, json.JSONDecodeError) in _load is an except TUPLE, which the notes say the pinned Codon rejects: probe it before assuming. (2) EFFECTS: apply_fold (subprocess, sys.executable) and report's shutil move go to a module already in the baseline (blocks_cli.py or check.py), NOT a new module (a new module that fails the census is a regression). (3) remove the letters block from codon-baseline.json after a census with it removed passes. Probes still owed before stack 1: except-tuple, json.JSONDecodeError, re named features used by _HEADER/_REF/_DATED, str.splitlines, Path.glob('*/inbox/*.md'), next(generator, default). Cost estimate unchanged: 3 stacks, about 2 hours to the first submit. | 2026-10-30: 2026-10-30 PROBES round 4 with the pinned Codon (MEASURED): OK: except ValueError, except json.JSONDecodeError, except OSError (single handlers), re with a word boundary, re.MULTILINE, Path.glob('*/*.conf'), next(generator, default), splitlines, read_text(encoding, errors), Path.parents[1].name, join over a generator, date arithmetic. FAIL: except (OSError, ValueError) (a tuple: 'expected type expression') so letters._load needs two handlers; PASSING A DICT AS AN object ARGUMENT ('OrderedDict[int,int]' does not match expected type 'object', so letters._queue_text's walk(queue) over object does not compile and needs a typed redesign); a nested closure taking object (realization failed); one regex probe failed on my snippet's Optional mixing (m[1] if m else ''), unresolved. So stack 1 grows: _load (two handlers), _queue_text (typed walk, not object), plus the NamedTuple, shlex, UTC and 15 Optional sites. Still 3 stacks; first submit later than the 2 hours I told github-42.",
       "issued_at": "2026-10-30T14:46:53Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1179",
-      "last_worked": "2026-10-30T14:47:15Z",
+      "last_worked": "2026-10-30T19:03:29Z",
       "ticks_blocked": 0
     },
     {
@@ -31385,7 +31385,7 @@
     {
       "symbol": "W1308",
       "title": "15 functions in history get a Returns section written from their bodies, so ruff falls 1215 to 1200",
-      "status": "working",
+      "status": "ready",
       "enables": [],
       "touches": [],
       "blocked_on": [],
@@ -31395,7 +31395,7 @@
       "issued_at": "2026-10-30T18:09:58Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1279",
-      "last_worked": "2026-10-30T18:36:03Z",
+      "last_worked": "2026-10-30T19:03:12Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -31406,23 +31406,44 @@
     {
       "symbol": "W1309",
       "title": "starved.py and work.py read a typed Namespace and their TOML and JSON through nemik.tomlview, so mypy falls 2812 to 2755",
-      "status": "working",
+      "status": "ready",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-10-30: 2026-10-30 Built, not submitted: mypy 2812 to 2755 (-57 MEASURED by mikemol-pycheck --ratchet), 12 tests pass. Waiting on stack 721 (ruff-baseline.json in flight) because pycheck --write rewrites both baselines. Asked mtools (message to the mtools session, 18:3xZ) for a scoped write (--write mypy), citing this card; github-42 says: do not hand-lower a baseline, wait for 721, and send them the symbol mtools names. mtools:W2172 may be the same card. The symbol is NOT yet received. | 2026-10-30: 2026-10-30 mtools named the symbol: mtools:W2181 (mikemol-pycheck --ratchet --write taking a ratchet name, so only that baseline is rewritten and the other stays byte-identical); related to mtools:W2172 (the write refusal while a queued stack carries the file), which a scoped write may make unnecessary. Not built, no time promised. Until it lands, an independent baseline write waits for the verdict of the stack that carries the other baseline. | 2026-10-30: 2026-10-30 G0 (MEASURED unless marked): starved.py and work.py typed Options and tomlview accessors; mikemol-pycheck --ratchet: mypy 2812 to 2755 (-57); baselines written together with nothing queued (721 landed 9e0133e), ruff 1215 to 1200 from W1308 in the same tree; repo-config format check clean; 12 tests pass. No census (both modules stay failing on their first import; stated, not run). Pace of 18:25:16Z, PENDING for landing 18:34:26Z: codon 142, mypy 2812, ruff 1215, all ok, none behind. Stack 722 = W1309 then W1308 (history.py, ruff -15, 23 tests, docstrings only). Gate empty. Loadavg at submit: 29.45 50.02 55.83 (read at the verdict, two calls earlier).",
+      "evidence": "2026-10-30: 2026-10-30 Built, not submitted: mypy 2812 to 2755 (-57 MEASURED by mikemol-pycheck --ratchet), 12 tests pass. Waiting on stack 721 (ruff-baseline.json in flight) because pycheck --write rewrites both baselines. Asked mtools (message to the mtools session, 18:3xZ) for a scoped write (--write mypy), citing this card; github-42 says: do not hand-lower a baseline, wait for 721, and send them the symbol mtools names. mtools:W2172 may be the same card. The symbol is NOT yet received. | 2026-10-30: 2026-10-30 mtools named the symbol: mtools:W2181 (mikemol-pycheck --ratchet --write taking a ratchet name, so only that baseline is rewritten and the other stays byte-identical); related to mtools:W2172 (the write refusal while a queued stack carries the file), which a scoped write may make unnecessary. Not built, no time promised. Until it lands, an independent baseline write waits for the verdict of the stack that carries the other baseline. | 2026-10-30: 2026-10-30 G0 (MEASURED unless marked): starved.py and work.py typed Options and tomlview accessors; mikemol-pycheck --ratchet: mypy 2812 to 2755 (-57); baselines written together with nothing queued (721 landed 9e0133e), ruff 1215 to 1200 from W1308 in the same tree; repo-config format check clean; 12 tests pass. No census (both modules stay failing on their first import; stated, not run). Pace of 18:25:16Z, PENDING for landing 18:34:26Z: codon 142, mypy 2812, ruff 1215, all ok, none behind. Stack 722 = W1309 then W1308 (history.py, ruff -15, 23 tests, docstrings only). Gate empty. Loadavg at submit: 29.45 50.02 55.83 (read at the verdict, two calls earlier). | 2026-10-30: 2026-10-30 LANDED stack 722 (key 1793385383542338719, submitted 18:36:15Z) as 8419759 (W1309) and 130a231 (W1308), both [PUSHED] first try; origin/main read back 130a231871eee3a9a095467f195c0faa9e066788; subjects mine (git log). Cards set ready BEFORE this line. Loadavg at the verdict 41.47 50.89 55.91. Landed falls: mypy 2812 to 2755 (-57) and ruff 1215 to 1200 (-15), both MEASURED before submit.",
       "issued_at": "2026-10-30T18:24:11Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1187",
-      "last_worked": "2026-10-30T18:36:14Z",
+      "last_worked": "2026-10-30T19:03:28Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "src/nemik/starved.py",
         "src/nemik/work.py",
         "mypy-baseline.json"
+      ]
+    },
+    {
+      "symbol": "W1310",
+      "title": "the last three functions without a Returns section, in check, get one written from their bodies, so ruff falls 1200 to 1197 and DOC201 reaches zero in src",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): 3 Returns sections from the bodies; ruff 1200 to 1197 (-3), mypy 2755 flat; baseline written with nothing queued (722 landed 130a231); format check clean; 10 tests pass. Docstrings only: no census (stated, not run). DOC201 in src after it: zero (a ruff-house listing over src showed exactly these three). Pace 18:25:16Z PENDING for landings: all ok, none behind. Gate empty. Loadavg at submit 14.92 17.97 27.14.",
+      "issued_at": "2026-10-30T19:32:03Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W1279",
+      "last_worked": "2026-10-30T19:32:24Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/check.py",
+        "ruff-baseline.json"
       ]
     }
   ],

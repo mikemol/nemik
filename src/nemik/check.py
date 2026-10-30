@@ -931,6 +931,11 @@ def exported_commit(queue_dir: Path) -> tuple[str, str] | None:
     blanket `untracked-source` for every repo (the export tree has no .git of its own to read).
     Returns (state, sha) or None if the file is absent, unreadable, or malformed -- callers then
     fall back to the untracked-source reading.
+
+    Returns:
+        (state, sha), the state `uncommitted` when the file says dirty, else
+        `committed`; None when the file is absent, unreadable or malformed.
+
     """
     try:
         data = json.loads((queue_dir / "commit.json").read_text())
@@ -946,6 +951,10 @@ def provenance(root: Path) -> list[str]:
     One line per fact, prefixed `provenance:`, so a reader can grep them. A queue outside any git
     tree (luthen's export) reads `untracked-source`, unless the exporter also wrote `commit.json`
     beside it (nemik:W7), in which case the real state and sha are reported, suffixed `@<sha>`.
+
+    Returns:
+        The `provenance:` lines: nemik's own commit, then one per queue naming its state.
+
     """
     here = Path(__file__).resolve().parent
     sha = _git(here, "rev-parse", "--short=12", "HEAD")
@@ -975,6 +984,11 @@ def _realizability(root: Path) -> int:
 
     Exit 0 when every waypoint is runtime-valid, 1 when any carries residue, 2 when a queue could
     not be judged (no pinned opa, an unreadable queue): not checked never reads as clean.
+
+    Returns:
+        0 when every waypoint is runtime-valid, 1 when any carries residue, 2 when a
+        queue could not be judged.
+
     """
     from datetime import UTC, datetime
 
