@@ -177,7 +177,7 @@ def solve(
     for source in demand:
         if source not in front:
             reach.update(_cone(prereq, front, source))
-    key = (
+    key: SolveKey = (
         tuple(sorted((s, a) for s, a in demand.items() if a)),
         tuple((c, tuple(prereq.get(c, ()))) for c in sorted(reach)),
         tuple(sorted(c for c in reach if c in front)),
@@ -197,16 +197,23 @@ def solve(
 
 # The most recent solves by input; enough for every repo's two grounds in a fleet several times
 # over.
-_SOLVES: OrderedDict[tuple, Flow] = OrderedDict()
+SolveKey = tuple[
+    tuple[tuple[str, Fraction], ...],
+    tuple[tuple[str, tuple[str, ...]], ...],
+    tuple[str, ...],
+    tuple[tuple[tuple[str, str], Fraction], ...],
+    Fraction,
+]
+_SOLVES: OrderedDict[SolveKey, Flow] = OrderedDict()
 _SOLVES_MAX = 512
 
 
-def export_solves() -> dict[tuple, Flow]:
+def export_solves() -> dict[SolveKey, Flow]:
     """nemik:W518: the cached solves, for a publisher to keep between its short-lived processes."""
     return dict(_SOLVES)
 
 
-def import_solves(held: dict[tuple, Flow]) -> None:
+def import_solves(held: dict[SolveKey, Flow]) -> None:
     """nemik:W518: restore solves a publisher kept; the bound still holds, oldest dropped first."""
     for key, flow in held.items():
         _SOLVES[key] = flow

@@ -19,7 +19,7 @@
   "misc": 35
  },
  "src/nemik/cachestore.py": {
-  "misc": 7
+  "misc": 4
  },
  "src/nemik/calendars.py": {
   "misc": 103,
@@ -42,10 +42,6 @@
  },
  "src/nemik/floorasks.py": {
   "misc": 17
- },
- "src/nemik/flow.py": {
-  "misc": 15,
-  "type-arg": 3
  },
  "src/nemik/health.py": {
   "explicit-any": 1,
@@ -169,7 +165,7 @@
   "misc": 20
  },
  "tests/test_cachestore.py": {
-  "misc": 9,
+  "misc": 1,
   "type-arg": 1
  },
  "tests/test_calendar_boundary.py": {
