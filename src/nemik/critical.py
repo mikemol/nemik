@@ -63,7 +63,12 @@ def _open(g: Graph) -> set[Node]:
 
 
 def repo_scope(g: Graph, repo: str) -> set[str]:
-    """nemik:W333: the open cards of one repo, as cites: the scope of that repo's own critical path."""
+    """nemik:W333: the open cards of one repo, as cites: the scope of that repo's own critical path.
+
+    Returns:
+        The cites of the repo's open cards.
+
+    """
     return {c for c in (ref(n) for n in _open(g)) if c.partition(":")[0] == repo}
 
 
@@ -71,6 +76,10 @@ def cone(g: Graph, card: str) -> set[str]:
     """nemik:W333: `card` with all it transitively waits on and all that transitively waits on it.
 
     Open cards only: the scope of the selected card's longest chain.
+
+    Returns:
+        The cites in the cone, empty when the card is not open.
+
     """
     nodes = _open(g)
     start = next((n for n in nodes if ref(n) == card), None)
@@ -98,6 +107,10 @@ def critical(g: Graph, scope: set[str] | None = None) -> Critical:
     The zero-slack cards come in dependency order. With `scope` (a set of cites, W333) only those
     cards count, so the path and slack are the longest within a repo, a visible set, or one card's
     cone.
+
+    Returns:
+        The critical path: its length, the zero-slack chain and each card's slack.
+
     """
     from nemik.cards import cards
 
@@ -116,6 +129,10 @@ def critical_cards(by_cite: dict[str, Card], scope: set[str] | None = None) -> C
 
     A card's successors are what it enables and what waits for it, so `y` follows `x` when `x` is in
     `y.enabled_by` or `y.waits_for`. Open means not done, as the graph version counted it.
+
+    Returns:
+        The same Critical, computed from plain Cards.
+
     """
     nodes = {c for c, card in by_cite.items() if not card.done}
     if scope is not None:
@@ -152,6 +169,10 @@ def cycles(g: Graph) -> list[tuple[list[str], bool]]:
     `same ask as` convention makes two repos' asks cite each other on purpose, and the operator's
     answer ends it. Any other cycle is a true deadlock. Tarjan's algorithm; depth is bounded by a
     simple path.
+
+    Returns:
+        Each cycle as (its sorted cards, operator breakable), sorted.
+
     """
     nodes = {
         n
@@ -202,7 +223,12 @@ def cycles(g: Graph) -> list[tuple[list[str], bool]]:
 
 
 def assume_done(g: Graph, cites: list[str]) -> Graph:
-    """nemik:W351: a copy of `g` in which each named card (`repo:W<n>`) is closed. `g` is untouched."""
+    """nemik:W351: a copy of `g` in which each named card (`repo:W<n>`) is closed. `g` is untouched.
+
+    Returns:
+        A copy of the graph with the named cards closed.
+
+    """
     out = Graph()
     out += g
     wanted = set(cites)
@@ -227,6 +253,10 @@ def fires(g: Graph, scope: set[str] | None = None) -> list[Fire]:
     That work is the open tick-minted cards downstream of it, and how much longer the scope's
     critical path is while it stays open (its length now, minus the length if it were done). Only
     fires that hold up planned work are listed, heaviest delay first.
+
+    Returns:
+        The fires that hold up planned work, heaviest delay first.
+
     """
     nodes = _open(g)
     if scope is not None:
@@ -260,6 +290,10 @@ def what_if(before: Critical, after: Critical, cites: list[str]) -> str:
 
     It covers the cards that leave or join a longest chain and the open cards whose slack changed
     (the closed ones themselves are not counted).
+
+    Returns:
+        The delta as printed lines, joined by newlines.
+
     """
     left = sorted(set(before.chain) - set(after.chain) - set(cites))
     joined = sorted(set(after.chain) - set(before.chain))

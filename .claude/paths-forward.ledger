@@ -3365,3 +3365,9 @@
 2026-10-30T05:25:36Z  status W1286 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-30T05:26:04Z  status W1279 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-30T05:26:05Z  status W1284 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T05:26:41Z  tick  W1284 advanced  unblock   "694 landed 49f85cf (witnesses DOC201). 695 landed 03aaee8 (nemik-wake --series-only, wake.py DOC201, ruff 1677 to 1669). 696 submitted: vtodo DOC201 (ruff 1669 to 1660) plus nemik-rank --pace PENDING label (W1284), census 527 s, live witness taken. W1283 closed (7-day tag window), luthen and github-42 told 03aaee8. [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T05:31:13Z  interrupt W1287 minted    -         "nemik-wake --only prints just the named repos, and --series defaults to luthen's export tree when the root has none"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:R159
+2026-10-30T05:52:20Z  status W1279 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T05:52:21Z  status W1284 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T05:52:54Z  status W1279 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T05:52:55Z  status W1287 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
