@@ -453,6 +453,12 @@ def _rows(
     Umbrellas are left out: their open children are what can be worked (nemik:W74). When the
     composition declares `weight = "flow"` (nemik:W241), the `weight` objective is the flow model's
     exact salience for this repo, solved once for all its ready cards.
+
+    Returns:
+        One row per ready leaf (and per working card when asked): symbol, title,
+        state, manifest and the objectives, with the fruit stand-in's weight and
+        class set when it applies.
+
     """
     ws = workstream_uri(repo)
     ready = [
@@ -523,7 +529,13 @@ def _rows(
 
 
 def _position(rows: list[dict], comp: Composition | None) -> list[dict]:
-    """Order `rows` by the declared composition; write each row's `weight` and `key`."""
+    """Order `rows` by the declared composition; write each row's `weight` and `key`.
+
+    Returns:
+        The rows in composed order: `weight` is the 1-based position, highest
+        first, and `key` is printable.
+
+    """
     out = compose(rows, comp or load_composition())
     # mtools sorts a queue by stored `weight` (--weights-from), so `weight` carries the COMPOSED
     # order: highest first, distinct unless two rows truly tie. The raw sum stays in `downstream`.
@@ -550,6 +562,11 @@ def rank(
     Umbrellas are left out: their open children are what can be worked (nemik:W74). With `toward`
     (a milestone `repo:W<n>`, nemik:W316) the order is by that card's demand alone. With
     `with_working` (nemik:W1059) the cards in progress are ranked among the ready ones.
+
+    Returns:
+        The ready leaves as rows in composed order, each with its `weight` position
+        and `key`.
+
     """
     return _position(
         _rows(
@@ -566,7 +583,12 @@ def rank(
 
 
 def fleet_repos(g: Graph) -> list[str]:
-    """Every workstream with a ready waypoint, by directory name, sorted."""
+    """Every workstream with a ready waypoint, by directory name, sorted.
+
+    Returns:
+        The repo names, sorted.
+
+    """
     return sorted({_repo(n) for n in g.subjects(OSLC_CM.state, NEMIK.Ready)})
 
 
@@ -595,6 +617,10 @@ def rank_fleet(
     weighted sums and the resulting position are drawn from one pool. Each row carries its `repo`
     and its `cite` (`<repo>:W<n>`, the nemik skill's rule 1). Ties break by symbol number, then by
     repo name, so one graph always yields one order.
+
+    Returns:
+        Every repo's rows in one composed order, each with `repo` and `cite` added.
+
     """
     rows = []
     for repo in fleet_repos(g):
@@ -618,6 +644,11 @@ def fruit(
     `touches: fruit`. Each member carries the attention it costs to keep on the queue (1) plus what
     it moves; the class weighs their sum, so it outranks a deep item exactly when the pile does, and
     lightens as members land (operator 2026-10-01: no time box, the weightiest row wins).
+
+    Returns:
+        The FRUIT row (symbol, title, members and class_weight), or None when no
+        member qualifies.
+
     """
     tagged = {
         str(g.value(n, NEMIK.symbol))
@@ -984,7 +1015,13 @@ def _apply(state: str, rows: list[dict]) -> None:
 
 
 def _next(g: Graph, repo: str, rows: list[dict]) -> dict:
-    """Give the ready row mtools puts first: `nemik:queuePosition`, from `model.ordered`."""
+    """Give the ready row mtools puts first: `nemik:queuePosition`, from `model.ordered`.
+
+    Returns:
+        The row whose card has the lowest queue position; a card without one sorts
+        last.
+
+    """
     ws = workstream_uri(repo)
     pos = {
         str(g.value(n, NEMIK.symbol)): int(str(g.value(n, NEMIK.queuePosition)))
@@ -1002,6 +1039,11 @@ def drift(
     ⚑ "Next" is mtools' own order (`nemik:queuePosition`, from `model.ordered`), not this
     module's: the witness compares what the session WILL work against what nemik-rank says it
     should, so it fails exactly when the two disagree on the top item.
+
+    Returns:
+        (next, heavier) when the top composed row outweighs mtools' next row, else
+        None (also None when there are no rows).
+
     """
     rows = rank(g, repo, weights) if rows is None else rows
     if not rows:
@@ -1022,6 +1064,11 @@ def inversion(
 
     ⚑ A rule, not a weight: the composed order may itself put an item below the floor first (an
     operator ask outranks any band), and this is where that disagreement becomes visible.
+
+    Returns:
+        (next, urgent) when next sits below the floor band and an urgent row
+        exists, else None.
+
     """
     if not rows or guar.floor is None:
         return None
@@ -1041,6 +1088,11 @@ def policy_blocks(
     A ready waypoint is policy-blocked by an open member of a declared class (bands.toml
     [[policy]]) when their touches share a tag other than the class's own. Members are never
     blocked by one another. Touches tags are a repo's own vocabulary, so pairs stay in one repo.
+
+    Returns:
+        One (ready, blocker, class, shared tags) tuple per blocked pair, sorted by
+        the two symbol numbers, then class.
+
     """
     ws = workstream_uri(repo)
     nodes = [n for n in g.subjects(NEMIK.workstream, ws) if _open(g, n)]
@@ -1066,7 +1118,12 @@ def policy_blocks(
 
 
 def unscored(g: Graph, repo: str) -> int:
-    """How many open waypoints in `repo` carry no vector (they rank at bands.toml `unscored`)."""
+    """How many open waypoints in `repo` carry no vector (they rank at bands.toml `unscored`).
+
+    Returns:
+        The count.
+
+    """
     ws = workstream_uri(repo)
     return sum(
         1

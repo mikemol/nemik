@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1303,
+  "counter": 1304,
   "waypoints": [
     {
       "symbol": "W1",
@@ -31274,17 +31274,17 @@
     {
       "symbol": "W1303",
       "title": "pieces.py cuts and joins graph.json as a typed GraphDoc, so the piece code and its test and corpus tool stop handling Any and mypy falls",
-      "status": "working",
+      "status": "ready",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): pieces.py GraphDoc TypedDict (total=False) and Row = dict[str, object]; section loops unrolled; test fixture and expected typed as GraphDoc; the corpus tool casts once at split; mikemol-pycheck --ratchet: mypy 2992 to 2846 (-146), ruff 1252 flat; strict mypy on the three files prints nothing; baseline written with nothing queued (716 landed 20277de); repo-config format check clean; 18 tests of pieces, pieces_corpus, static_view, read_api pass. Type-only change, no Codon census (stated, not run). Pace of 15:25:15Z PENDING for landing 16:20:15Z: codon 142, ruff 1263, mypy 2992 all ok, none behind. Gate empty. Loadavg at submit 39.18 52.35 57.55.",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): pieces.py GraphDoc TypedDict (total=False) and Row = dict[str, object]; section loops unrolled; test fixture and expected typed as GraphDoc; the corpus tool casts once at split; mikemol-pycheck --ratchet: mypy 2992 to 2846 (-146), ruff 1252 flat; strict mypy on the three files prints nothing; baseline written with nothing queued (716 landed 20277de); repo-config format check clean; 18 tests of pieces, pieces_corpus, static_view, read_api pass. Type-only change, no Codon census (stated, not run). Pace of 15:25:15Z PENDING for landing 16:20:15Z: codon 142, ruff 1263, mypy 2992 all ok, none behind. Gate empty. Loadavg at submit 39.18 52.35 57.55. | 2026-10-30: 2026-10-30 LANDED stack 717 (key 1793377403219579987, submitted 16:23:22Z) as c34f8a1, [PUSHED] first try; origin/main read back c34f8a1d0c41b7315d03f3798a8264e23da76b32; subject mine (git log). Card set ready BEFORE this line. Loadavg at the submit 39.18 52.35 57.55, at the verdict 19.82 42.58 51.56. Landed fall: mypy 2992 to 2846 (-146, MEASURED before submit). Pace of 16:25:15Z, label PENDING for landing 16:47:30Z: codon 142, ruff 1252, mypy 2992 all ok; none behind. Gate wall about 24 min.",
       "issued_at": "2026-10-30T16:21:19Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1187",
-      "last_worked": "2026-10-30T16:23:15Z",
+      "last_worked": "2026-10-30T16:49:03Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -31292,6 +31292,27 @@
         "tests/test_pieces.py",
         "tools/gen_pieces_corpus.py",
         "mypy-baseline.json"
+      ]
+    },
+    {
+      "symbol": "W1304",
+      "title": "11 more functions in rank get a Returns section written from their bodies, so ruff falls 1252 to 1241",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): 11 Returns sections from the bodies read in full; mikemol-pycheck --ratchet: ruff 1252 to 1241 (-11, exactly the count), mypy 2846 flat; baseline written with nothing queued (717 landed c34f8a1); repo-config format check clean; 50 tests of rank, rank_flow, fruit, guarantees, rank_paydown pass. Docstrings only: no census (stated, not run). Pace of 16:25:15Z PENDING for landing 16:47:30Z: codon 142, ruff 1252, mypy 2992 (its 2846 is landed, the pace is older) all ok; none behind, so this is paydown ahead of need. Gate empty. Loadavg at submit 18.22 31.34 45.38.",
+      "issued_at": "2026-10-30T16:50:57Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W1279",
+      "last_worked": "2026-10-30T16:51:43Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/rank.py",
+        "ruff-baseline.json"
       ]
     }
   ],
