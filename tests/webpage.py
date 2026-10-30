@@ -55,6 +55,12 @@ __all__ = [
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
 HTTP_ERROR = 400
+# nemik:W846: Chromium aborts every request in flight when the host's network configuration
+# changes (an interface or address event on a busy host), whatever the server did; the page then
+# fails to load through no fault of the code under test, so a load that lost only to that is tried
+# again on a fresh page.
+NETWORK_CHANGED = "net::ERR_NETWORK_CHANGED"
+LOAD_TRIES = 3
 LISTENING_WORDS = 2  # the server's line is "listening" and a port
 CY_READY = "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 1"
 # nemik:W846: records, inside the page, each resource (a script tag, a stylesheet) whose load
@@ -84,6 +90,11 @@ def watch(page: Waitable) -> None:
 def until(page: Waitable, expr: str) -> None:
     """Wait on a page predicate with no clock; a broken page names the resources that failed.
 
+    A page that lost scripts or stylesheets is loaded again, at most LOAD_TRIES times in all: the
+    host's network can change under a gate run and Chromium then aborts every request in flight
+    (net::ERR_NETWORK_CHANGED, W846), which no code under test caused. A resource that is really
+    missing fails the same way on each try, so the retry costs time and hides nothing.
+
     Args:
         page: The Playwright page, watched before it navigated.
         expr: A JS arrow function that is truthy once the page is ready.
@@ -93,12 +104,17 @@ def until(page: Waitable, expr: str) -> None:
             a script missing under load names the asset (W846, W1060).
 
     """
-    try:
-        library_until(page, expr)
-    except PageBrokenError as e:
-        failed = page.evaluate("() => window.__failed || []")
-        message = f"{e}; resources that failed to load: {failed}"
-        raise PageBrokenError(message) from e
+    for tries in range(1, LOAD_TRIES + 1):
+        try:
+            library_until(page, expr)
+        except PageBrokenError as e:
+            failed = page.evaluate("() => window.__failed || []")
+            if failed and tries < LOAD_TRIES:
+                page.goto(str(page.evaluate("() => location.href")))
+                continue
+            message = f"{e}; resources that failed to load: {failed}"
+            raise PageBrokenError(message) from e
+        return
 
 
 class Seen(Protocol):
@@ -264,6 +280,54 @@ def open_page(
     return opened_page(p, url, wait, block)
 
 
+def lost_to_a_network_change(refused: list[str]) -> bool:
+    """Say whether the load failed only because the host's network configuration changed (W846).
+
+    Args:
+        refused: The requests the page listed as failed or refused.
+
+    Returns:
+        True when there are some and every one of them died of net::ERR_NETWORK_CHANGED.
+
+    """
+    return bool(refused) and all(r.endswith(f"({NETWORK_CHANGED})") for r in refused)
+
+
+def first_load(
+    browser: LaunchedBrowser, url: str, wait: str, viewport: tuple[int, int]
+) -> tuple[LaunchedPage, list[str], PageBrokenError | None]:
+    """Open a fresh page on `url` once and record the requests that failed (nemik:W846).
+
+    Args:
+        browser: The launched browser.
+        url: The page to open.
+        wait: The JS predicate that says the page is ready.
+        viewport: The page's width and height.
+
+    Returns:
+        The page, the requests that failed or got an error status, and the error when it broke.
+
+    """
+    page = browser.new_page(viewport={"width": viewport[0], "height": viewport[1]})
+    refused: list[str] = []
+
+    def note_failed(request: LaunchedRequest) -> None:
+        # nemik:W846: the error text says why (net::ERR_CONNECTION_RESET, ...), not only which URL
+        refused.append(f"failed {request.url} ({request.failure})")
+
+    def note_status(response: LaunchedResponse) -> None:
+        if response.status >= HTTP_ERROR:
+            refused.append(f"{response.status} {response.url}")
+
+    page.on("requestfailed", note_failed)
+    page.on("response", note_status)
+    try:
+        load(page, url, wait)
+    except PageBrokenError as e:
+        return page, refused, e
+    return page, refused, None
+
+
 def launched_page(
     p: Launcher,
     url: str,
@@ -291,25 +355,17 @@ def launched_page(
         )
     except PlaywrightError as e:
         pytest.skip(f"chromium unavailable: {e}")
-    page = browser.new_page(viewport={"width": viewport[0], "height": viewport[1]})
-    refused: list[str] = []
-
-    def note_failed(request: LaunchedRequest) -> None:
-        # nemik:W846: the error text says why (net::ERR_CONNECTION_RESET, ...), not only which URL
-        refused.append(f"failed {request.url} ({request.failure})")
-
-    def note_status(response: LaunchedResponse) -> None:
-        if response.status >= HTTP_ERROR:
-            refused.append(f"{response.status} {response.url}")
-
-    page.on("requestfailed", note_failed)
-    page.on("response", note_status)
-    try:
-        load(page, url, wait)
-    except PageBrokenError as e:
-        message = f"{e}; requests refused or failed: {refused}"
-        raise PageBrokenError(message) from e
-    return browser, page
+    tries = 0
+    while True:
+        tries += 1
+        page, refused, broke = first_load(browser, url, wait, viewport)
+        if broke is None:
+            return browser, page
+        if tries < LOAD_TRIES and lost_to_a_network_change(refused):
+            page.close()
+            continue
+        message = f"{broke}; requests refused or failed: {refused}"
+        raise PageBrokenError(message) from broke
 
 
 @contextmanager
