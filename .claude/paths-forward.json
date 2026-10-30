@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1306,
+  "counter": 1307,
   "waypoints": [
     {
       "symbol": "W1",
@@ -31318,17 +31318,17 @@
     {
       "symbol": "W1305",
       "title": "12 functions in score, blocks and check get a Returns section written from their bodies, so ruff falls 1241 to 1228",
-      "status": "working",
+      "status": "ready",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): 12 Returns sections from the bodies (score 6, blocks 4, check 2); mikemol-pycheck --ratchet: ruff 1241 to 1228 (-13), mypy 2846 flat; baseline written with nothing queued (718 landed 654f123); repo-config format check clean; 38 tests pass. Docstrings only: no census (stated, not run). Pace of 16:25:15Z PENDING for landing 17:13:59Z: all three ok, none behind. Gate empty. Loadavg at submit 18.23 28.97 39.15.",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): 12 Returns sections from the bodies (score 6, blocks 4, check 2); mikemol-pycheck --ratchet: ruff 1241 to 1228 (-13), mypy 2846 flat; baseline written with nothing queued (718 landed 654f123); repo-config format check clean; 38 tests pass. Docstrings only: no census (stated, not run). Pace of 16:25:15Z PENDING for landing 17:13:59Z: all three ok, none behind. Gate empty. Loadavg at submit 18.23 28.97 39.15. | 2026-10-30: 2026-10-30 LANDED stack 719 (key 1793380629062206910, submitted 17:17:07Z) as 33ea6f3, [PUSHED] first try; origin/main read back 33ea6f33424bbefb1798bbf2bd727ac4840ed1e2; subject mine (git log). Card set ready BEFORE this line. Loadavg at the submit 18.23 28.97 39.15, at the verdict 44.81 54.85 55.33. Landed fall: ruff 1241 to 1228 (-13, MEASURED before submit). Stack 720 (W1306) queued behind it is now in flight (began_ns 1793382191325896279 = 17:43:11Z).",
       "issued_at": "2026-10-30T17:16:16Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1279",
-      "last_worked": "2026-10-30T17:17:01Z",
+      "last_worked": "2026-10-30T17:44:12Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -31358,6 +31358,28 @@
         "src/nemik/pins.py",
         "src/nemik/floorasks.py",
         "mypy-baseline.json"
+      ]
+    },
+    {
+      "symbol": "W1307",
+      "title": "13 functions in serve and staticserve get a Returns section written from their bodies, so ruff falls 1228 to 1215",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): 13 Returns sections from the bodies (serve 12, staticserve 1); mikemol-pycheck --ratchet: ruff 1228 to 1215 (-13, exactly the count), mypy 2812 flat; baseline written (719 landed 33ea6f3); repo-config format check clean; 17 tests pass. Docstrings only: no census (stated, not run). Remaining DOC201 in src after it: 18 (ruff --statistics), not the 17 my earlier tally said. Pace 16:25:15Z is older than the landings, all ok, none behind. Queued behind 720 (W1306, in flight): disjoint (720 carries the mypy baseline, this the ruff one). Loadavg at submit 87.02 78.60 63.76 (high: the host is busy, expect a slow gate).",
+      "issued_at": "2026-10-30T18:02:30Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W1279",
+      "last_worked": "2026-10-30T18:04:27Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/serve.py",
+        "src/nemik/staticserve.py",
+        "ruff-baseline.json"
       ]
     }
   ],

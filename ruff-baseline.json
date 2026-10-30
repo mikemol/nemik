@@ -204,7 +204,6 @@
  },
  "src/nemik/serve.py": {
   "C901": 3,
-  "DOC201": 12,
   "DOC501": 1,
   "E501": 2,
   "FBT001": 2,
@@ -229,7 +228,6 @@
  },
  "src/nemik/staticserve.py": {
   "C901": 1,
-  "DOC201": 1,
   "PLW0717": 1
  },
  "src/nemik/vtodo.py": {

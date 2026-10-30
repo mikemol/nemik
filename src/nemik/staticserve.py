@@ -216,7 +216,12 @@ def handler(root: Path) -> type[BaseHTTPRequestHandler]:
 
 
 def parser() -> argparse.ArgumentParser:
-    """Give the command line, apart from main so a deployment manifest can be checked against it."""
+    """Give the command line, apart from main so a deployment manifest can be checked against it.
+
+    Returns:
+        The argument parser: --root, --bind and --port.
+
+    """
     ap = argparse.ArgumentParser(
         prog="nemik-static",
         description="serve a published nemik snapshot as files (W502)",

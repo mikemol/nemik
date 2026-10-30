@@ -745,7 +745,12 @@ class Model:
 
 
 def local(term: object) -> str:
-    """Give the last segment of a nemik:/oslc IRI: after '#', '/', or the urn:nemik: prefix."""
+    """Give the last segment of a nemik:/oslc IRI: after '#', '/', or the urn:nemik: prefix.
+
+    Returns:
+        The term's last segment, after any urn:nemik: prefix, '#' or '/'.
+
+    """
     return str(term).removeprefix("urn:nemik:").rsplit("#", 1)[-1].rsplit("/", 1)[-1]
 
 
@@ -794,6 +799,10 @@ def without(g: Graph, refs: frozenset[str]) -> Graph:
     """nemik:W309: a copy of `g` without every withheld waypoint and every edge to or from it.
 
     It is the graph the public numbers are computed over.
+
+    Returns:
+        A new graph holding every triple that touches no withheld waypoint.
+
     """
     from nemik.withheld import _id
 
@@ -811,6 +820,10 @@ def to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
     nemik:W403: built with identical flow solves answered once (the ranking, edge widths and
     operator-ask weights each asked for the same repo's solve). nemik:W412: and with each graph's
     per-card facts indexed once.
+
+    Returns:
+        The view's document, as _to_json builds it inside the memo and index scopes.
+
     """
     from nemik.index import indexed
     from nemik.salience import memo_audits
@@ -1070,6 +1083,11 @@ def ruler_table(edges: list[dict], asks: list[dict]) -> dict[str, list[str]]:
     this table rather than the server fixing each line's n. A line's n is at most the lines into its
     blocker or into an ask chip (one per category and repo), so the table runs to the larger of
     those.
+
+    Returns:
+        The patterns: `motif` (orders 0 to 3) and `f` (F(n) for n up to the larger
+        line count).
+
     """
     from collections import Counter
 
@@ -1244,6 +1262,11 @@ def write_static(out: Path) -> list[Path]:
     """nemik:W169: the page and its scripts as files under `out`, every link relative.
 
     So the view works from any bucket subpath. Data files are W170's, the gate is W172's.
+
+    Returns:
+        The files written: index.html, the vendor files and the page's own files that
+        exist.
+
     """
     web = files("nemik.web")
     written = [out / "index.html"]
@@ -1270,6 +1293,11 @@ def static_data(model: Model) -> dict[str, object]:
     Shaped as {published path: document}. Only what the page reads is published:
     inbound/<repo>.json was planned, but the page never fetches it, so it stays off the public
     surface.
+
+    Returns:
+        The documents by published path: graph, wake, goals per repo, history and
+        umbrellas.
+
     """
     from nemik.rank import goals, load_weights
 
@@ -1306,6 +1334,10 @@ def history_doc(
     Counts and days only: the roll-up row's `oldest_blocked` symbol is dropped, so nothing here
     names a waypoint, and a withheld waypoint (nemik:W309) is left out of every snapshot before
     counting. It needs git history, so only a host-side build has it (the pod has none).
+
+    Returns:
+        Per repo, the weekly roll-up rows without the `oldest_blocked` field.
+
     """
     from nemik.history import snapshots, weekly
 
@@ -1339,6 +1371,10 @@ def build_static(
     flow solve answered once. The build ran outside it, so the goals, the pieces and the TRS feeds
     asked rdflib 1.09 M times for facts the index holds (a warm publish profiled at 94 s, a third
     of it in rank.goals).
+
+    Returns:
+        The files written, as _build_static returns them.
+
     """
     from nemik.index import indexed
     from nemik.salience import memo_audits
@@ -1364,6 +1400,11 @@ def _build_static(
 
     nemik:W634: with `exports`, each repo's own export (docs/withholding-at-source.md) also decides
     what leaves it, failing closed per repo: a repo with no export publishes none of its cards.
+
+    Returns:
+        The files written under `out`: the page, the data documents, the feeds and
+        hashes.json, and the private files when `private`.
+
     """
     from nemik.apischema import unmanifested
     from nemik.withheld import apply, load
@@ -1537,6 +1578,10 @@ def private_files(model: Model, out: Path) -> list[Path]:
     nothing waits on it), /graph.ttl, /metrics with the snapshot's own age gauge, and the source
     key the next publish compares. Never part of the public build: these name every waypoint's
     asks and blockers.
+
+    Returns:
+        The files written under `out`.
+
     """
     made: list[Path] = []
 
@@ -1600,6 +1645,10 @@ def fleet_key(root: Path) -> str:
     Content, not mtime: an export that rewrites a file without changing it (luthen's does, every
     minute) is not a change, and a build costs real CPU (luthen-observability, nemik:W504: the
     builder rebuilds on a changed content hash).
+
+    Returns:
+        The sha256 hex digest.
+
     """
     import hashlib
 
@@ -1636,6 +1685,11 @@ def publish(
     left ~20 MB of fragmented heap per build). Returns None when no queue or ledger changed since
     current/ was built. The last `keep` snapshots stay, so a request already reading one is not
     pulled out from under it.
+
+    Returns:
+        The new snapshot's path, or None when no queue or ledger changed since
+        current/ was built.
+
     """
     from nemik import adapter, cachestore, lastgood
 

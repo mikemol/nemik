@@ -3456,3 +3456,6 @@
 2026-10-30T17:16:38Z  status W1305 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-30T17:33:13Z  interrupt W1306 minted    -         "pins.py and floorasks.py read a typed Namespace and their JSON and TOML through nemik.tomlview, so mypy falls"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1187
 2026-10-30T17:33:48Z  status W1306 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T17:44:03Z  status W1305 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T18:02:30Z  interrupt W1307 minted    -         "13 functions in serve and staticserve get a Returns section written from their bodies, so ruff falls 1228 to 1215"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1279
+2026-10-30T18:03:51Z  status W1307 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
