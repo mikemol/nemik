@@ -122,9 +122,8 @@
   "type-arg": 2
  },
  "src/nemik/wake.py": {
-  "misc": 220,
-  "no-any-return": 1,
-  "type-arg": 14
+  "misc": 210,
+  "type-arg": 13
  },
  "src/nemik/withheld.py": {
   "explicit-any": 1,
@@ -331,7 +330,7 @@
   "misc": 12
  },
  "tests/test_wake_alarms.py": {
-  "misc": 45
+  "misc": 44
  },
  "tests/test_wake_nudge.py": {
   "misc": 5

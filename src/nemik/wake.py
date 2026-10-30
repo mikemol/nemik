@@ -280,7 +280,9 @@ def nudges_path() -> Path:
     return Path(state) / "nemik" / "nudges.json"
 
 
-def due_nudges(rows: list[dict], seen: dict, now: datetime | None = None) -> list[dict]:
+def due_nudges(
+    rows: list[dict], seen: dict[str, float], now: datetime | None = None
+) -> list[dict]:
     """Rows worth nudging now (asleep or idle, something waiting, backoff not active).
 
     `seen` is {repo: unix_seconds_last_nudged}, read and written by the caller (nudges_path() by
@@ -299,14 +301,15 @@ def due_nudges(rows: list[dict], seen: dict, now: datetime | None = None) -> lis
     return due
 
 
-def _read_seen(path: Path) -> dict:
+def _read_seen(path: Path) -> dict[str, float]:
     try:
-        return json.loads(path.read_text(encoding="utf-8"))
+        seen: dict[str, float] = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return {}
+    return seen
 
 
-def _write_seen(path: Path, seen: dict) -> None:
+def _write_seen(path: Path, seen: dict[str, float]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(seen, sort_keys=True), encoding="utf-8")
 
@@ -320,7 +323,7 @@ def alarm_key(a: dict) -> str:
 
 
 def undelivered(
-    fired: list[dict], seen: dict, now: datetime | None = None
+    fired: list[dict], seen: dict[str, float], now: datetime | None = None
 ) -> list[dict]:
     """Pick undelivered fired alarms, marking each delivered in `seen` (mutated, like due_nudges).
 
