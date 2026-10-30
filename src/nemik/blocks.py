@@ -539,7 +539,13 @@ def operator_category(text: str) -> str:
 
 
 def _ask_key(text: str) -> str:
-    """Normalise an ask so the same decision asked from several repos groups together."""
+    """Normalise an ask so the same decision asked from several repos groups together.
+
+    Returns:
+        The lower-cased ask without its leading operator word, filler words and punctuation,
+        cut to 40 characters.
+
+    """
     t = re.sub(
         r"^\s*(operator|user|mikemol|mike)\s*[:(]?\s*", "", text, flags=re.IGNORECASE
     ).lower()
@@ -552,6 +558,10 @@ def waiting_behind(g: Graph, node: Node) -> set[Node]:
 
     It waits for it (blocked_on) or `node` enables it. So an operator ask held by one repo shows
     the work queued behind it in others (resumes:W1 behind life:W21, 2026-09-28).
+
+    Returns:
+        The open waypoints that wait on `node`, directly or through others.
+
     """
     seen: set[Node] = set()
     stack = [node]
@@ -621,6 +631,10 @@ def operator_asks(g: Graph) -> list[dict[str, Any]]:
 
     nemik:W412: answered once per graph inside a build (health asks it once per repo); each caller
     gets its own copies of the rows, so a caller that annotates them touches nothing shared.
+
+    Returns:
+        The rows of every open waypoint waiting on the operator, copied for the caller.
+
     """
     from nemik.index import index
 
@@ -733,6 +747,11 @@ def with_salience(g: Graph, asks: list[dict[str, Any]]) -> list[dict[str, Any]]:
     the ask's own repo). That absorbed salience is what answering the ask would release, in the same
     units as nemik-rank. An ask that itself needs another open card carries 0 (its demand flows to
     that card). Within a category the heaviest ask comes first; ticks blocked break ties.
+
+    Returns:
+        The asks with `salience` added, ordered by category, then heaviest, then
+        ticks blocked, then ref.
+
     """
     from nemik.salience import audit
 

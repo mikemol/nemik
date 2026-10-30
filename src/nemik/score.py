@@ -29,7 +29,12 @@ class Bands:
     behind: frozenset[str] = frozenset()
 
     def rank(self, band: str) -> int:
-        """0 is most urgent."""
+        """0 is most urgent.
+
+        Returns:
+            The band's position in the declared order.
+
+        """
         return self.order.index(band)
 
     def watching(self, behind: frozenset[str]) -> Bands:
@@ -124,7 +129,13 @@ def load_bands(text: str | None = None) -> Bands:
 
 
 def band(vector: str | None, bands: Bands) -> tuple[str, str]:
-    """(band, why) for a vector; why is 'unscored', 'invalid: ...', 'unmatched' or the rule matched."""
+    """(band, why) for a vector; why is 'unscored', 'invalid: ...', 'unmatched' or the rule matched.
+
+    Returns:
+        (band, why): the unscored band for a missing or invalid vector, the first band whose
+        rule matches, else the unmatched band.
+
+    """
     if not vector:
         return bands.unscored, "unscored"
     try:
@@ -177,7 +188,12 @@ def tagged_band(
 
 
 def _matches(values: dict[str, str], rule: dict[str, frozenset[str]]) -> bool:
-    """Say whether a rule matches: every metric it names has one of the listed values."""
+    """Say whether a rule matches: every metric it names has one of the listed values.
+
+    Returns:
+        True when every metric the rule names has one of its listed values.
+
+    """
     return all(values[m] in allowed for m, allowed in rule.items())
 
 
@@ -194,11 +210,21 @@ class Policy:
     only: frozenset[str] = frozenset()
 
     def blocks(self, touches: set[str]) -> bool:
-        """Whether a dependent with these touches is in the class's scope at all."""
+        """Whether a dependent with these touches is in the class's scope at all.
+
+        Returns:
+            True when the class has no `only` tags or the touches carry one of them.
+
+        """
         return not self.only or bool(self.only & touches)
 
     def member(self, vector: str | None, touches: set[str]) -> bool:
-        """In the class when it carries the tag, or its vector matches one of the rules."""
+        """In the class when it carries the tag, or its vector matches one of the rules.
+
+        Returns:
+            True for a card tagged with the class, or whose valid vector matches a rule.
+
+        """
         if self.tag is not None and self.tag in touches:
             return True
         try:
@@ -219,7 +245,12 @@ class Guarantees:
 
 
 def load_guarantees(text: str | None = None, bands: Bands | None = None) -> Guarantees:
-    """Read [guarantee] and [[policy]] from bands.toml (nemik:W133); `text` overrides it."""
+    """Read [guarantee] and [[policy]] from bands.toml (nemik:W133); `text` overrides it.
+
+    Returns:
+        The floor band (or None) and one Policy per [[policy]] table.
+
+    """
     if text is None:
         text = files("nemik.data").joinpath("bands.toml").read_text()
     bands = bands or load_bands(text)

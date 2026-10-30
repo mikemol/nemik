@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1304,
+  "counter": 1305,
   "waypoints": [
     {
       "symbol": "W1",
@@ -31297,21 +31297,44 @@
     {
       "symbol": "W1304",
       "title": "11 more functions in rank get a Returns section written from their bodies, so ruff falls 1252 to 1241",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): 11 Returns sections from the bodies read in full; mikemol-pycheck --ratchet: ruff 1252 to 1241 (-11, exactly the count), mypy 2846 flat; baseline written with nothing queued (717 landed c34f8a1); repo-config format check clean; 50 tests of rank, rank_flow, fruit, guarantees, rank_paydown pass. Docstrings only: no census (stated, not run). Pace of 16:25:15Z PENDING for landing 16:47:30Z: codon 142, ruff 1252, mypy 2992 (its 2846 is landed, the pace is older) all ok; none behind, so this is paydown ahead of need. Gate empty. Loadavg at submit 18.22 31.34 45.38. | 2026-10-30: 2026-10-30 LANDED stack 718 (key 1793379108730029595, submitted 16:51:47Z) as 654f123, [PUSHED] first try; origin/main read back 654f123e3d2047f79de167a74c79bca19ab7ac49; subject mine (git log); landing stamp 17:13:59Z. Card set ready BEFORE this line. Loadavg at the submit 18.22 31.34 45.38, at the verdict 23.28 35.33 42.40. Landed fall: ruff 1252 to 1241 (-11, MEASURED before submit). Pace of 16:25:15Z is older than this landing (PENDING): all three ok, none behind. Gate wall about 22 min.",
+      "issued_at": "2026-10-30T16:50:57Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W1279",
+      "last_worked": "2026-10-30T17:14:57Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/rank.py",
+        "ruff-baseline.json"
+      ]
+    },
+    {
+      "symbol": "W1305",
+      "title": "12 functions in score, blocks and check get a Returns section written from their bodies, so ruff falls 1241 to 1228",
       "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): 11 Returns sections from the bodies read in full; mikemol-pycheck --ratchet: ruff 1252 to 1241 (-11, exactly the count), mypy 2846 flat; baseline written with nothing queued (717 landed c34f8a1); repo-config format check clean; 50 tests of rank, rank_flow, fruit, guarantees, rank_paydown pass. Docstrings only: no census (stated, not run). Pace of 16:25:15Z PENDING for landing 16:47:30Z: codon 142, ruff 1252, mypy 2992 (its 2846 is landed, the pace is older) all ok; none behind, so this is paydown ahead of need. Gate empty. Loadavg at submit 18.22 31.34 45.38.",
-      "issued_at": "2026-10-30T16:50:57Z",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): 12 Returns sections from the bodies (score 6, blocks 4, check 2); mikemol-pycheck --ratchet: ruff 1241 to 1228 (-13), mypy 2846 flat; baseline written with nothing queued (718 landed 654f123); repo-config format check clean; 38 tests pass. Docstrings only: no census (stated, not run). Pace of 16:25:15Z PENDING for landing 17:13:59Z: all three ok, none behind. Gate empty. Loadavg at submit 18.23 28.97 39.15.",
+      "issued_at": "2026-10-30T17:16:16Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1279",
-      "last_worked": "2026-10-30T16:51:43Z",
+      "last_worked": "2026-10-30T17:17:01Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
-        "src/nemik/rank.py",
+        "src/nemik/score.py",
+        "src/nemik/blocks.py",
+        "src/nemik/check.py",
         "ruff-baseline.json"
       ]
     }

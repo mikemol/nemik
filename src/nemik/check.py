@@ -521,7 +521,12 @@ def integrity_findings(merged: Graph) -> dict[str, list[tuple[str, str]]]:
 
 
 def default_root() -> Path:
-    """$NEMIK_ROOT, else ~/github."""
+    """$NEMIK_ROOT, else ~/github.
+
+    Returns:
+        The directory named by $NEMIK_ROOT, else ~/github.
+
+    """
     return Path(os.environ.get("NEMIK_ROOT") or Path.home() / "github")
 
 
@@ -530,6 +535,10 @@ def workstream_files(root: Path, name: str) -> list[tuple[str, Path]]:
 
     ~/github layout: <root>/<repo>/.claude/<name>. Export layout (luthen's host-side copy, which
     carries only these two files per repo): <root>/<repo>/<name>.
+
+    Returns:
+        The (repo, path) pairs sorted by repo, leaving out dot-named directories.
+
     """
     found = {p.parents[1].name: p for p in root.glob(f"*/.claude/{name}")}
     found |= {
