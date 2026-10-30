@@ -53,16 +53,53 @@ class LivenessRecord(TypedDict, total=False):
 Liveness = dict[str, LivenessRecord]
 
 
+class Alarm(TypedDict, total=False):
+    """One fired alarm as fired_alarms builds it; an error row has no message."""
+
+    ref: str
+    repo: str
+    trigger: str
+    error: str
+    state: str
+    at: str
+    recurrence_id: str
+    title: str
+    message: str
+
+
+class Waiter(TypedDict, total=False):
+    """One thing a roster row waits on; only the operator's carry a salience."""
+
+    blocked: str
+    claimed_by: list[str]
+    title: str
+    salience: float
+
+
+class WakeRow(TypedDict, total=False):
+    """One roster row: a workstream, its liveness, and what waits on it."""
+
+    repo: str
+    state: str
+    last_tick: str
+    last_tick_age_s: float | None
+    waiting: list[Waiter]
+
+
 def read_liveness(root: Path, source: str | None) -> tuple[Liveness, str]:
     """Return ({repo: record}, where it came from); ({}, reason) when there is none."""
+    document: dict[str, Liveness]
     try:
         if source == "-":
-            return json.load(sys.stdin)["repos"], "stdin"
+            document = json.load(sys.stdin)
+            return document["repos"], "stdin"
         if source:
-            return json.loads(Path(source).read_text(encoding="utf-8"))["repos"], source
+            document = json.loads(Path(source).read_text(encoding="utf-8"))
+            return document["repos"], source
         export = root / "liveness.json"
         if export.exists():
-            return json.loads(export.read_text())["repos"], str(export)
+            document = json.loads(export.read_text())
+            return document["repos"], str(export)
         luthen = root / "luthen-observability"
         py = luthen / ".venv" / "bin" / "python"
         if py.exists():
@@ -73,7 +110,8 @@ def read_liveness(root: Path, source: str | None) -> tuple[Liveness, str]:
                 text=True,
                 check=True,
             ).stdout
-            return json.loads(out)["repos"], "luthen-observability checks.loop_liveness"
+            document = json.loads(out)
+            return document["repos"], "luthen-observability checks.loop_liveness"
     except (OSError, ValueError, KeyError, subprocess.CalledProcessError) as exc:
         return {}, f"unreadable: {exc}"
     return {}, "no liveness source"
@@ -107,15 +145,15 @@ def roster(
     liveness: Liveness,
     *,
     now: datetime | None = None,
-    alarms: list[dict] | None = None,
-) -> list[dict]:
+    alarms: list[Alarm] | None = None,
+) -> list[WakeRow]:
     """One row per workstream something is waiting on, sleepers with waiters first.
 
     nemik:W151: a fired alarm (fired_alarms) whose owner is not awake also puts the owner on the
     roster, waiting on itself, so the same wake/nudge path that wakes a blocker wakes it. An awake
     owner gets W168's send-ready line instead and no row.
     """
-    rows: dict[str, dict] = {}
+    rows: dict[str, WakeRow] = {}
     for a in alarms or []:
         if (
             a.get("error")
@@ -172,7 +210,7 @@ def roster(
 
 def fired_alarms(
     g: Graph, start: datetime, end: datetime, liveness: Liveness
-) -> list[dict]:
+) -> list[Alarm]:
     """Every alarm that fired in [start, end) on an open waypoint, oldest first (nemik:W149).
 
     Alarms live on waypoints (mtools:W279), with their anchors (W300) and recurrence (W309/W310);
@@ -184,7 +222,7 @@ def fired_alarms(
     def val(n: Node, p: Node) -> str:
         return str(g.value(n, p) or "")
 
-    out = []
+    out: list[Alarm] = []
     for n in sorted(set(g.subjects(NEMIK.alarm, None)), key=str):
         if (n, OSLC_CM.state, NEMIK.Done) in g:
             continue
@@ -245,7 +283,7 @@ def fired_alarms(
     return sorted(out, key=operator.itemgetter("at", "ref", "trigger"))
 
 
-def operator_row(g: Graph) -> dict:
+def operator_row(g: Graph) -> WakeRow:
     """Return the operator as a roster row: every needs-you ask waiting, heaviest first.
 
     Args:
@@ -292,8 +330,8 @@ def nudges_path() -> Path:
 
 
 def due_nudges(
-    rows: list[dict], seen: dict[str, float], now: datetime | None = None
-) -> list[dict]:
+    rows: list[WakeRow], seen: dict[str, float], now: datetime | None = None
+) -> list[WakeRow]:
     """Rows worth nudging now (asleep or idle, something waiting, backoff not active).
 
     `seen` is {repo: unix_seconds_last_nudged}, read and written by the caller (nudges_path() by
@@ -325,7 +363,7 @@ def _write_seen(path: Path, seen: dict[str, float]) -> None:
     path.write_text(json.dumps(seen, sort_keys=True), encoding="utf-8")
 
 
-def alarm_key(a: dict) -> str:
+def alarm_key(a: Alarm) -> str:
     """nemik:W166: a firing's identity, (ref, RECURRENCE-ID, instant), in the nudges state's keys.
 
     Repo names (the state's other keys) never contain '|', so the two cannot collide.
@@ -334,8 +372,8 @@ def alarm_key(a: dict) -> str:
 
 
 def undelivered(
-    fired: list[dict], seen: dict[str, float], now: datetime | None = None
-) -> list[dict]:
+    fired: list[Alarm], seen: dict[str, float], now: datetime | None = None
+) -> list[Alarm]:
     """Pick undelivered fired alarms, marking each delivered in `seen` (mutated, like due_nudges).
 
     A firing is delivered once: the same (ref, occurrence, instant) seen again by an overlapping
@@ -343,7 +381,7 @@ def undelivered(
     visible every run until the queue is fixed.
     """
     now = now or datetime.now(UTC)
-    out = []
+    out: list[Alarm] = []
     for a in fired:
         if a.get("error"):
             out.append(a)

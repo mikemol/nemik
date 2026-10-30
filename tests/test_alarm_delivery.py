@@ -2,10 +2,10 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W166: each alarm firing is delivered once, keyed (ref, RECURRENCE-ID, instant)."""
 
-from nemik.wake import alarm_key, undelivered
+from nemik.wake import Alarm, alarm_key, undelivered
 
 
-def _a(at: str, rid: str = "", ref: str = "life:W12") -> dict[str, str]:
+def _a(at: str, rid: str = "", ref: str = "life:W12") -> Alarm:
     return {"ref": ref, "recurrence_id": rid, "at": at, "trigger": "-PT15M"}
 
 
@@ -29,7 +29,7 @@ def test_occurrences_and_instants_are_distinct() -> None:
 
 def test_errors_are_never_marked_delivered() -> None:
     seen: dict[str, float] = {}
-    bad = {**_a(""), "error": "bad trigger"}
+    bad: Alarm = {**_a(""), "error": "bad trigger"}
     assert undelivered([bad], seen) == [bad]
     assert undelivered([bad], seen) == [bad]
     assert seen == {}

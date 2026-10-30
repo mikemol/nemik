@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from datetime import UTC, datetime, timedelta
 
-from nemik.wake import age_seconds, due_nudges, should_nudge
+from nemik.wake import WakeRow, age_seconds, due_nudges, should_nudge
 
 
 def test_age_seconds_computes_from_iso_last_tick() -> None:
@@ -45,7 +45,7 @@ def test_should_nudge_true_once_rewake_window_elapses() -> None:
 
 def test_due_nudges_filters_state_waiting_and_backoff_then_records_seen() -> None:
     now = datetime(2026, 9, 26, 12, 0, 0, tzinfo=UTC)
-    rows: list[dict[str, object]] = [
+    rows: list[WakeRow] = [
         {"repo": "alpha", "state": "asleep", "waiting": [{"blocked": "x"}]},
         {
             "repo": "beta",
