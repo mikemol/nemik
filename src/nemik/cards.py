@@ -54,6 +54,10 @@ def cards(g: Graph) -> dict[str, Card]:
 
     nemik:W518: inside one build's `indexed()` scope it is read once per graph and shared (a Card is
     frozen, the dict is copied), where health and critical each asked for it again.
+
+    Returns:
+        The cards by cite; inside a scope, a copy of the shared read.
+
     """
     from nemik.index import index
 

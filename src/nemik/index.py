@@ -87,7 +87,13 @@ def indexed() -> Generator[None]:
 
 
 def index(g: Graph) -> Index | None:
-    """Give the graph's index inside `indexed()`, else None (the caller asks the graph)."""
+    """Give the graph's index inside `indexed()`, else None (the caller asks the graph).
+
+    Returns:
+        The graph's index inside an `indexed()` scope, built on first use and built
+        again when the graph's size changed; None outside a scope.
+
+    """
     if _SCOPE is None:
         return None
     hit = _SCOPE.get(id(g))

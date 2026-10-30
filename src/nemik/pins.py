@@ -145,7 +145,12 @@ def deployed(namespace: str = "nemik") -> str | None:
 
 
 def main(argv: list[str] | None = None) -> int:
-    """nemik-pins: how many commits each repo's pin of a peer is behind that peer's HEAD."""
+    """nemik-pins: how many commits each repo's pin of a peer is behind that peer's HEAD.
+
+    Returns:
+        6 when --max-behind is given and some pin is further behind than it, else 0.
+
+    """
     ap = argparse.ArgumentParser(
         prog="nemik-pins", description=(main.__doc__ or "").splitlines()[0]
     )

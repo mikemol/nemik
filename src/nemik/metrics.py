@@ -248,7 +248,13 @@ def label(**kv: str) -> str:
 
 
 def realizability_lines(root: Path) -> list[str]:
-    """One gauge row per repo and coordinate; a queue that cannot be judged is flagged, not zeroed."""
+    """One gauge row per repo and coordinate; a queue that cannot be judged is flagged, not zeroed.
+
+    Returns:
+        The two TYPE headers, then per repo a waypoint count per coordinate, or an
+        unjudged 1 for a queue that cannot be judged.
+
+    """
     out = ["# TYPE nemik_realizability_waypoints gauge"]
     out.append("# TYPE nemik_realizability_unjudged gauge")
     now = stamp(datetime.now(UTC))
@@ -270,6 +276,11 @@ def operator_lines(g: Graph) -> list[str]:
     """nemik:W300: per repo, the summed flow salience its needs-you asks hold back, and their count.
 
     That is what the operator owes that repo's work, in nemik-rank's units.
+
+    Returns:
+        The two TYPE headers, then per repo the summed salience of its needs-you
+        asks and their count.
+
     """
     from nemik.blocks import operator_asks, with_salience
 
@@ -671,6 +682,10 @@ def health_lines(g: Graph) -> list[str]:
 
     The status comes from nemik.health, with the thresholds `[health]` declares in
     rank-weights.toml.
+
+    Returns:
+        The TYPE header, then one gauge per repo: 0 green, 1 amber, 2 red.
+
     """
     from nemik.blocks import ref
     from nemik.health import STATUSES, health, thresholds
@@ -690,6 +705,10 @@ def age_lines(repo: str, g: Graph, now: datetime) -> list[str]:
     It is summary-style: quantile 0.5 is the median age and quantile 1 the oldest. Per-waypoint
     series would be thousands of labels, and the question ("how long has the oldest one sat") is
     the quantile. Age runs from `issued_at`; a waypoint with none is left out, not counted as new.
+
+    Returns:
+        Per state, a row for the median age and a row for the oldest, in seconds.
+
     """
     ages: dict[str, list[float]] = {}
     for node, _, created in g.triples((None, DCTERMS.created, None)):

@@ -475,6 +475,11 @@ def edge_currents(
     as an edge's width (nemik:W264). Floats: the view needs a magnitude, not the exact fraction.
     `workable` False takes the open ground, so the edges into an operator ask (a card waiting
     outside the graph) carry their current too (W298).
+
+    Returns:
+        The demand on each dependency as a float, keyed by (needing card,
+        prerequisite).
+
     """
     from nemik.rank import Weights
 

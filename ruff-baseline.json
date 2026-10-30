@@ -61,7 +61,6 @@
   "T201": 4
  },
  "src/nemik/cards.py": {
-  "DOC201": 1,
   "E501": 1,
   "PLC0415": 1
  },
@@ -101,7 +100,6 @@
  },
  "src/nemik/flow.py": {
   "C901": 1,
-  "DOC201": 1,
   "DOC502": 1,
   "E501": 1,
   "PLC0415": 1,
@@ -128,7 +126,6 @@
   "T201": 1
  },
  "src/nemik/index.py": {
-  "DOC201": 1,
   "PLW0603": 1
  },
  "src/nemik/letters.py": {
@@ -142,13 +139,9 @@
   "S603": 1
  },
  "src/nemik/manifest.py": {
-  "ANN001": 1,
-  "DOC201": 1,
-  "E501": 1
+  "ANN001": 1
  },
  "src/nemik/metrics.py": {
-  "DOC201": 4,
-  "E501": 1,
   "PLC0415": 4,
   "PTH111": 1,
   "T201": 1
@@ -173,7 +166,6 @@
   "T201": 2
  },
  "src/nemik/pins.py": {
-  "DOC201": 1,
   "PLC0415": 1,
   "S404": 1,
   "S603": 3,
@@ -198,7 +190,6 @@
  },
  "src/nemik/salience.py": {
   "C901": 1,
-  "DOC201": 1,
   "E501": 1,
   "FBT001": 2,
   "FBT002": 2,

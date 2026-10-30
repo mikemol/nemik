@@ -209,7 +209,12 @@ _SOLVES_MAX = 512
 
 
 def export_solves() -> dict[SolveKey, Flow]:
-    """nemik:W518: the cached solves, for a publisher to keep between its short-lived processes."""
+    """nemik:W518: the cached solves, for a publisher to keep between its short-lived processes.
+
+    Returns:
+        A copy of the solves cache, by solve key.
+
+    """
     return dict(_SOLVES)
 
 
