@@ -314,6 +314,10 @@ def _number(symbol: str) -> tuple[int, int, str]:
     """Give a sort key: W<n> by number, then any other symbol by name, never an error.
 
     Another symbol is an old or foreign one in a committed queue, such as luthen's `R-amtool`.
+
+    Returns:
+        (0, number, '') for W<n>, (1, 0, symbol) for any other symbol.
+
     """
     digits = symbol.removeprefix("W")
     if symbol.startswith("W") and digits.isdigit():
@@ -322,7 +326,13 @@ def _number(symbol: str) -> tuple[int, int, str]:
 
 
 def diff(old: QueueDoc, new: QueueDoc) -> Diff:
-    """Give the changes from `old` to `new`, both parsed queues (an empty dict: no queue)."""
+    """Give the changes from `old` to `new`, both parsed queues (an empty dict: no queue).
+
+    Returns:
+        The minted, closed, dropped and flipped symbols, the edges added and removed,
+        and the new blocks on other workstreams.
+
+    """
     before, after = _status(old), _status(new)
     known = set(before) | _dropped(old)
     d = Diff()
@@ -398,6 +408,10 @@ def resolve(repo: Path, spec: str | None) -> str | None:
     None means there is no such point (before the repo's first commit): an empty queue. A time of
     day must name its zone (`Z` or an offset), or be a window back from now such as `-1h`, `-30m`
     or `-2d` (nemik:W1127).
+
+    Returns:
+        The revision to read: HEAD for no spec, else the last commit before a date or
+        window; None when there is no such point.
 
     Raises:
         ValueError: When `spec` is a time of day with no zone.
@@ -559,6 +573,10 @@ def queue_at(repo: Path, rev: str | None, known: str = "") -> QueueDoc:
     """Give the parsed queue as committed at `rev`; empty when there is none then.
 
     `known` is the file's text at `rev` when a batch read already has it (nemik:W725).
+
+    Returns:
+        The parsed queue, or an empty dict when there is no revision or no queue then.
+
     """
     if rev is None:
         return {}
@@ -778,6 +796,10 @@ def time_in_state(snaps: list[Snapshot], now: datetime) -> dict[str, dict[str, f
     """Seconds each waypoint spent in each status.
 
     A commit's state holds until the next commit (the last one until `now`).
+
+    Returns:
+        Per waypoint, the seconds spent in each status.
+
     """
     totals: dict[str, dict[str, float]] = {}
     for i, (at, queue) in enumerate(snaps):
@@ -792,7 +814,12 @@ def time_in_state(snaps: list[Snapshot], now: datetime) -> dict[str, dict[str, f
 def _flow_efficiency(
     closed: list[str], spent: dict[str, dict[str, float]]
 ) -> float | None:
-    """Working time over all live time (ready, working, blocked) summed over `closed`, or None."""
+    """Working time over all live time (ready, working, blocked) summed over `closed`, or None.
+
+    Returns:
+        The ratio rounded to three decimals, or None when `closed` had no live time.
+
+    """
     active = sum(spent.get(s, {}).get("working", 0.0) for s in closed)
     live = sum(
         spent.get(s, {}).get(k, 0.0)
@@ -809,6 +836,11 @@ def weekly(snaps: list[Snapshot]) -> list[dict]:
     commit was blocked, and the longest-running block then.
 
     A block's age runs from the commit where the card last entered `blocked`.
+
+    Returns:
+        One row per ISO week that saw a commit, oldest first: what opened and closed,
+        the ratios and the oldest block.
+
     """
     weeks: dict[tuple[int, int], list[Snapshot]] = {}
     for at, queue in snaps:
@@ -906,6 +938,11 @@ def baseline_spec(repo: Path, spec: str | None) -> str | None:
 
     That is `spec` when given, else the first word of the repo's declared `.claude/baseline` file
     (a revision or a date), else None (no baseline declared).
+
+    Returns:
+        The spec when given, else the first word of the repo's `.claude/baseline`,
+        else None.
+
     """
     if spec:
         return spec
@@ -922,6 +959,11 @@ def variance(base: dict, now: dict) -> dict:
     The plan is the cards open at the baseline: how many are now closed, dropped, or still open.
     The unplanned is every card minted since, split by how it was minted (an interrupt, a tick, or
     not recorded). Both arguments are parsed queues.
+
+    Returns:
+        The planned count, the closed, dropped and still-open symbols, the added ones
+        by how they were minted, and the done share (None when nothing was planned).
+
     """
     planned = {
         s
@@ -959,6 +1001,11 @@ def shape_drift(base: dict, now: dict) -> dict:
     It counts edges added and removed (enables and waits), the planned cards (open at the baseline)
     whose title changed (re-scoped) or whose own edges changed (re-wired), and the share of planned
     cards touched either way.
+
+    Returns:
+        The counts of edges added and removed, the retitled and rewired symbols and
+        the touched share (None when nothing was planned).
+
     """
     planned = {
         s
@@ -1023,7 +1070,13 @@ def render(repo: str, d: Diff) -> str:
 
 
 def main(argv: list[str] | None = None) -> int:
-    """nemik-history: what changed in a workstream's graph between two revisions or dates."""
+    """nemik-history: what changed in a workstream's graph between two revisions or dates.
+
+    Returns:
+        The exit status: 2 for a name with no workstream under --root, else the
+        status of the mode that ran (0 on success).
+
+    """
     ap = argparse.ArgumentParser(
         prog="nemik-history", description=(main.__doc__ or "").splitlines()[0]
     )
@@ -1230,7 +1283,12 @@ def ledger_lines_since(ledger: Path, cutoff: str) -> int:
 
 
 def _density(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
-    """Print how often each repo commits its queue file, the longest gap and its ledger rate."""
+    """Print how often each repo commits its queue file, the longest gap and its ledger rate.
+
+    Returns:
+        0.
+
+    """
     since = args.start or "7.days.ago"
     days = 7.0
     if args.start:
@@ -2395,6 +2453,10 @@ def toil(repo: str, ledger: Path) -> list[dict]:
     scheduled tick or operator-typed work; interrupt: unplanned; unclassified). `toil_share` is
     interrupt over forecast plus interrupt, the tax unplanned work levies on planned work; None when
     neither occurred.
+
+    Returns:
+        One row per ISO week: the counts by effort class and `toil_share`.
+
     """
     from rdflib import RDF
     from rdflib.namespace import PROV
@@ -2425,7 +2487,12 @@ def toil(repo: str, ledger: Path) -> list[dict]:
 
 
 def _toil(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> int:
-    """`--toil`: the weekly interrupt share per repo, from each repo's ledger."""
+    """`--toil`: the weekly interrupt share per repo, from each repo's ledger.
+
+    Returns:
+        0, after printing the rows or the JSON.
+
+    """
     doc = {n: toil(n, dirs[n] / ".claude" / LEDGER) for n in names}
     if args.json:
         print(json.dumps(doc, indent=1))
@@ -2446,7 +2513,12 @@ def _days(seconds: float) -> str:
 
 
 def _series(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
-    """`--time-in-state` and `--weekly` over the history from `--from` (default: all of it)."""
+    """`--time-in-state` and `--weekly` over the history from `--from` (default: all of it).
+
+    Returns:
+        The status of the other mode asked for, else 0 after printing.
+
+    """
     for mode, run in (
         ("density", _density),
         ("events", _events),
