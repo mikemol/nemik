@@ -35,8 +35,8 @@
   "misc": 1
  },
  "src/nemik/history.py": {
-  "misc": 161,
-  "type-arg": 8
+  "misc": 98,
+  "type-arg": 5
  },
  "src/nemik/importer.py": {
   "misc": 11
@@ -124,9 +124,6 @@
   "type-arg": 2
  },
  "tests/test_apply_witness.py": {
-  "misc": 20
- },
- "tests/test_baseline.py": {
   "misc": 20
  },
  "tests/test_cachestore.py": {

@@ -3475,3 +3475,8 @@
 2026-10-30T20:16:05Z  status W1311 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-30T20:30:03Z  interrupt W1312 minted    -         "operator_asks answers a typed AskRow, so its nine consumers and their tests read keys, not Any, and mypy falls 2746 to 2449"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1187
 2026-10-30T20:30:34Z  status W1312 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T20:47:01Z  status W1312 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T20:52:26Z  interrupt W1313 minted    -         "history.weekly answers a typed WeeklyRow and its consumers read keys, not Any, so mypy falls"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1187
+2026-10-30T20:52:27Z  interrupt W1314 minted    -         "history.variance, shape_drift and the baseline report answer typed rows over the QueueDoc the module already declares, so mypy falls"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1187
+2026-10-30T20:52:29Z  interrupt W1315 minted    -         "history.toil answers a typed ToilRow and its printer reads keys, not Any, so mypy falls"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1187
+2026-10-30T20:54:41Z  status W1314 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

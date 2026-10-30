@@ -11,10 +11,10 @@ from nemik.history import baseline_spec, variance
 if TYPE_CHECKING:
     from pathlib import Path
 
+    from nemik.history import QueueDoc
 
-def _q(
-    cards: dict[str, tuple[str, str]], residue: tuple[str, ...] = ()
-) -> dict[str, object]:
+
+def _q(cards: dict[str, tuple[str, str]], residue: tuple[str, ...] = ()) -> QueueDoc:
     return {
         "waypoints": [
             {"symbol": s, "status": st, "minted_during": during}
@@ -60,14 +60,14 @@ def test_shape_drift_counts_edges_and_the_planned_cards_retitled_or_rewired() ->
     # nemik:W349: W1 and W2 planned; W1 gains an edge to the new W3, W2 is retitled.
     from nemik.history import shape_drift
 
-    base = {
+    base: QueueDoc = {
         "waypoints": [
             {"symbol": "W1", "status": "ready", "title": "one", "enables": []},
             {"symbol": "W2", "status": "ready", "title": "two", "enables": []},
         ],
         "residue": [],
     }
-    now = {
+    now: QueueDoc = {
         "waypoints": [
             {"symbol": "W1", "status": "ready", "title": "one", "enables": ["W3"]},
             {"symbol": "W2", "status": "ready", "title": "two, narrower"},

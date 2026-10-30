@@ -23,6 +23,7 @@ from dataclasses import asdict, dataclass, field
 from datetime import UTC, datetime
 from itertools import starmap
 from pathlib import Path
+from typing import TypedDict
 
 from nemik.cachestore import user_dir
 from nemik.cardevents import Event, events_of
@@ -953,7 +954,35 @@ def baseline_spec(repo: Path, spec: str | None) -> str | None:
     return None
 
 
-def variance(base: dict, now: dict) -> dict:
+class Variance(TypedDict, total=False):
+    """Planned versus actual since a baseline: what `variance` answers."""
+
+    planned: int
+    closed: list[str]
+    dropped: list[str]
+    still_open: list[str]
+    added: dict[str, list[str]]
+    done_share: float | None
+
+
+class ShapeDrift(TypedDict, total=False):
+    """How far the graph's shape moved since a baseline: what `shape_drift` answers."""
+
+    edges_added: int
+    edges_removed: int
+    retitled: list[str]
+    rewired: list[str]
+    touched_share: float | None
+
+
+class BaselineReport(Variance, total=False):
+    """One repo's line of the baseline report: the variance, the shape and the baseline named."""
+
+    baseline: str | None
+    shape: ShapeDrift
+
+
+def variance(base: QueueDoc, now: QueueDoc) -> Variance:
     """nemik:W318: planned versus actual since a baseline.
 
     The plan is the cards open at the baseline: how many are now closed, dropped, or still open.
@@ -979,7 +1008,7 @@ def variance(base: dict, now: dict) -> dict:
     )
     known = set(_status(base)) | _dropped(base)
     minted_during = {
-        w["symbol"]: w.get("minted_during") or "unrecorded"
+        str(w["symbol"]): str(w.get("minted_during") or "unrecorded")
         for w in now.get("waypoints", [])
     }
     added: dict[str, list[str]] = {}
@@ -995,7 +1024,7 @@ def variance(base: dict, now: dict) -> dict:
     }
 
 
-def shape_drift(base: dict, now: dict) -> dict:
+def shape_drift(base: QueueDoc, now: QueueDoc) -> ShapeDrift:
     """nemik:W349: how far the graph's SHAPE moved since a baseline, beside `variance`'s counts.
 
     It counts edges added and removed (enables and waits), the planned cards (open at the baseline)
@@ -2406,7 +2435,7 @@ def _compact(baseline: str, names: list[str], dirs: dict[str, Path]) -> int:
 
 
 def _baseline(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> int:
-    out: dict[str, dict] = {}
+    out: dict[str, BaselineReport] = {}
     for name in names:
         repo = dirs[name]
         spec = baseline_spec(repo, args.baseline)
