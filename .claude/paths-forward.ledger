@@ -3328,3 +3328,6 @@
 2026-10-30T00:37:39Z  status W846 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-30T00:37:40Z  status W1187 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-30T00:42:23Z  status W1187 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T01:07:32Z  status W1187 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T01:11:43Z  status W1187 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T01:32:35Z  tick  W1281 minted    -         "nemik-wake mode prints one liveness line per repo from luthen-series.json: repo verdict as_of, no sample, max-age refusal"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W1804

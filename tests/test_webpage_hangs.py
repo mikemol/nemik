@@ -76,6 +76,18 @@ def test_a_script_that_did_not_load_is_named_when_the_page_breaks() -> None:
         _serve(lost)
 
 
+def test_a_broken_page_under_served_says_whether_the_server_still_ran() -> None:
+    """W846: the page broke while nemik-serve served it, so the error reports the server's state."""
+
+    def break_under_served() -> None:
+        with webpage.served():
+            message = "boom"
+            raise webpage.PageBrokenError(message)
+
+    with pytest.raises(webpage.PageBrokenError, match=r"boom; nemik-serve alive: True"):
+        break_under_served()
+
+
 def test_an_unwatched_page_rests_on_its_predicate_alone() -> None:
     """With no error record the wait still ends when the page is ready, and returns no error."""
     assert _serve(READIES, expecting=True, watched=False) is None

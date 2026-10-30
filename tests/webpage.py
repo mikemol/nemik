@@ -167,6 +167,8 @@ def served(series: Path | None = None, root: Path = FLEET) -> Generator[str]:
 
     Raises:
         RuntimeError: The server did not say it listens; its stderr is in the message.
+        PageBrokenError: A page broke inside the block; the message adds whether the server still
+            ran and the tail of its stderr (W846).
 
     """
     env = {**installed._bin()[1], "PYTHONHASHSEED": "0"}
@@ -189,7 +191,17 @@ def served(series: Path | None = None, root: Path = FLEET) -> Generator[str]:
                     f"nemik-serve did not say it listens: {told}: {log.read().decode()}"
                 )
                 raise RuntimeError(message)
-            yield f"http://127.0.0.1:{told[1]}/"
+            try:
+                yield f"http://127.0.0.1:{told[1]}/"
+            except PageBrokenError as e:
+                # nemik:W846: five scripts failed at once under the gate, which points at the
+                # server, so a broken page says whether nemik-serve still ran and what it wrote.
+                log.seek(0)
+                message = (
+                    f"{e}; nemik-serve alive: {proc.poll() is None}; "
+                    f"its stderr: {log.read().decode()[-2000:]}"
+                )
+                raise PageBrokenError(message) from e
         finally:
             proc.terminate()
             proc.wait()
