@@ -114,7 +114,7 @@
   "type-arg": 2
  },
  "src/nemik/wake.py": {
-  "misc": 41
+  "misc": 25
  },
  "src/nemik/withheld.py": {
   "explicit-any": 1,

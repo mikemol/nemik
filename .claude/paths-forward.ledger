@@ -3338,3 +3338,6 @@
 2026-10-30T02:33:49Z  interrupt W1283 minted    -         "Answer luthen-observability:W1805: are nemik images rebuildable and which old tags may a retention rule drop (unread: gated build time, tags still pulled)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W1805
 2026-10-30T02:38:55Z  status W1179 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-30T02:54:54Z  status W1187 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T02:55:22Z  tick  W1179 advanced  collapse  "689 landed 8d0b14b (wake.py rows, mypy 3795 to 3577). Pace flipped: codon behind (owes 1). adoption.py made pure like tiers.py after a first census failure on TYPE_CHECKING, check.adoption_state holds the reads, test_adoption.py new. Stack 690 gating, first submit refused (W1187 left working). [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T03:12:29Z  status W1179 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T03:13:33Z  status W1281 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

@@ -19,6 +19,7 @@ through its venv, when that tree exists beside the root.
 
 from __future__ import annotations
 
+import argparse
 import json
 import operator
 import subprocess
@@ -31,10 +32,14 @@ from mikemol.hooks import rewake
 from rdflib import Graph
 from rdflib.namespace import DCTERMS
 
+from nemik.adapter import BASE, NEMIK
 from nemik.blocks import inbound, operator_asks
+from nemik.luthenseries import load
 
 if TYPE_CHECKING:
     from rdflib.term import Node
+
+    from nemik.luthenseries import Series
 
 # nemik:W549: mtools' mikemol.hooks.rewake (mtools:W1299) owns the constant and the pure pair.
 REWAKE_S = rewake.REWAKE_S
@@ -394,6 +399,75 @@ def undelivered(
     return out
 
 
+def series_lines(series: Series, repos: list[str]) -> list[str]:
+    """One '<repo> <verdict> <as_of>' line per repo, from luthen's series snapshot (nemik:W1281).
+
+    A repo the series has no entry for, or an entry with no verdict, reads 'no sample': never ok or
+    dormant, which would state a liveness nobody measured. Every line carries the snapshot's as_of,
+    so a reader can judge whether the reading postdates the event it classifies.
+
+    Args:
+        series: The snapshot, already refused if it was stale.
+        repos: The repos to report, joined with the series' own.
+
+    Returns:
+        The lines, sorted by repo.
+
+    """
+    as_of = datetime.fromtimestamp(series.as_of, UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
+    out: list[str] = []
+    for repo in sorted(set(repos) | set(series.repos)):
+        entry = series.repos.get(repo)
+        verdict = entry.verdict if entry is not None and entry.verdict else "no sample"
+        out.append(f"{repo} {verdict} {as_of}")
+    return out
+
+
+def series_report(g: Graph, series_file: Path, max_age: int) -> None:
+    """Print the series lines, or refuse when the snapshot cannot be trusted (nemik:W1281).
+
+    Args:
+        g: The graph whose workstreams are reported.
+        series_file: luthen-series.json.
+        max_age: The oldest as_of accepted, in seconds.
+
+    Raises:
+        SystemExit: The file is missing, unreadable, unversioned, malformed or too old; the reason
+            is on stderr and nothing is on stdout.
+
+    """
+    now = int(datetime.now(UTC).timestamp())
+    try:
+        series = load(series_file, now, max_age)
+    except (OSError, ValueError, TypeError) as exc:
+        sys.stderr.write(f"series: {exc}\n")
+        raise SystemExit(1) from exc
+    repos = sorted(
+        {
+            str(n).removeprefix(BASE).partition("/")[0]
+            for n in g.subjects(NEMIK.workstream, None)
+        }
+    )
+    sys.stdout.write("\n".join(series_lines(series, repos)) + "\n")
+
+
+class Options(argparse.Namespace):
+    """nemik-wake's parsed command line, typed so each option reads as its own type."""
+
+    root: Path
+    liveness: str | None
+    all: bool
+    json: bool
+    nudge: bool
+    nudges_state: Path
+    alarms: bool
+    since: str | None
+    until: str | None
+    series_lines: bool
+    series: Path | None
+    series_max_age: int
+
+
 def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     """Run nemik-wake: print the roster of workstreams, or with --alarms the alarms that fired.
 
@@ -406,8 +480,6 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         g: a graph to read instead of surveying the root.
 
     """
-    import argparse
-
     from nemik.check import default_root, survey
 
     ap = argparse.ArgumentParser(
@@ -438,12 +510,33 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         "--since", help="ISO-8601 instant (default: 15 minutes before --until)"
     )
     ap.add_argument("--until", help="ISO-8601 instant (default: now)")
-    args = ap.parse_args(argv)
+    ap.add_argument(
+        "--series-lines",
+        action="store_true",
+        help="print one line per repo, <repo> <verdict> <as_of>, from luthen's series snapshot",
+    )
+    ap.add_argument(
+        "--series",
+        type=Path,
+        help="the snapshot (default: <root>/luthen-series.json)",
+    )
+    ap.add_argument(
+        "--series-max-age",
+        type=int,
+        default=900,
+        help="seconds after which the series snapshot is refused (default 900)",
+    )
+    args = ap.parse_args(argv, namespace=Options())
     if g is None:
         g = Graph()
         for _, qg, _ in survey(args.root):
             if qg is not None:
                 g += qg
+    if args.series_lines:
+        series_report(
+            g, args.series or args.root / "luthen-series.json", args.series_max_age
+        )
+        return
     live, source = read_liveness(args.root, args.liveness)
     if args.alarms:
         from datetime import timedelta
