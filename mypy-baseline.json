@@ -86,8 +86,7 @@
   "type-arg": 2
  },
  "src/nemik/score.py": {
-  "call-overload": 1,
-  "misc": 47
+  "misc": 2
  },
  "src/nemik/serve.py": {
   "explicit-any": 5,

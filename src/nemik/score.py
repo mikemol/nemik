@@ -42,6 +42,56 @@ class Bands:
         return Bands(self.order, self.rules, self.unscored, self.unmatched, behind)
 
 
+def _table(value: object) -> dict[str, object]:
+    """Read a TOML value as a table, or an empty one when it is anything else.
+
+    Returns:
+        The table's entries, keyed by string.
+
+    """
+    return {str(k): v for k, v in value.items()} if isinstance(value, dict) else {}
+
+
+def _tables(value: object) -> list[dict[str, object]]:
+    """Read a TOML value as an array of tables, or an empty list when it is anything else.
+
+    Returns:
+        One table per element.
+
+    """
+    return [_table(v) for v in value] if isinstance(value, list) else []
+
+
+def _strings(value: object) -> list[str]:
+    """Read a TOML value as an array of strings, or an empty list when it is anything else.
+
+    Returns:
+        One string per element.
+
+    """
+    return [str(v) for v in value] if isinstance(value, list) else []
+
+
+def _text(value: object) -> str | None:
+    """Read an optional TOML string.
+
+    Returns:
+        The value as a string, or None when it is absent.
+
+    """
+    return None if value is None else str(value)
+
+
+def _rule(value: dict[str, object]) -> dict[str, frozenset[str]]:
+    """Read one rule table: each metric to the set of values it allows.
+
+    Returns:
+        The rule, keyed by metric.
+
+    """
+    return {m: frozenset(_strings(v)) for m, v in value.items()}
+
+
 def load_bands(text: str | None = None) -> Bands:
     """Read the band rules from bands.toml: the order, each band's rules and the two fallbacks.
 
@@ -58,24 +108,19 @@ def load_bands(text: str | None = None) -> Bands:
     """
     if text is None:
         text = files("nemik.data").joinpath("bands.toml").read_text()
-    d = tomllib.loads(text)
-    order = tuple(d["order"])
-    rules = {
-        b: tuple(
-            {m: frozenset(v) for m, v in r.items()}
-            for r in d.get("band", {}).get(b, [])
-        )
-        for b in order
-    }
+    d = _table(tomllib.loads(text))
+    order = tuple(_strings(d["order"]))
+    listed = _table(d.get("band"))
+    rules = {b: tuple(_rule(r) for r in _tables(listed.get(b))) for b in order}
     for key in ("unscored", "unmatched"):
         if d[key] not in order:
             msg = f"bands.toml: {key} = {d[key]!r} is not in order"
             raise ValueError(msg)
-    stray = set(d.get("band", {})) - set(order)
+    stray = set(listed) - set(order)
     if stray:
         msg = f"bands.toml: bands {sorted(stray)} are not in order"
         raise ValueError(msg)
-    return Bands(order, rules, d["unscored"], d["unmatched"])
+    return Bands(order, rules, str(d["unscored"]), str(d["unmatched"]))
 
 
 def band(vector: str | None, bands: Bands) -> tuple[str, str]:
@@ -178,18 +223,18 @@ def load_guarantees(text: str | None = None, bands: Bands | None = None) -> Guar
     if text is None:
         text = files("nemik.data").joinpath("bands.toml").read_text()
     bands = bands or load_bands(text)
-    d = tomllib.loads(text)
-    floor = d.get("guarantee", {}).get("floor")
+    d = _table(tomllib.loads(text))
+    floor = _text(_table(d.get("guarantee")).get("floor"))
     if floor is not None and floor not in bands.order:
         msg = f"bands.toml: guarantee.floor = {floor!r} is not in order"
         raise ValueError(msg)
     policies = tuple(
         Policy(
-            p["class"],
-            p.get("tag"),
-            tuple({m: frozenset(v) for m, v in r.items()} for r in p.get("vector", [])),
-            frozenset(p.get("only", [])),
+            str(p["class"]),
+            _text(p.get("tag")),
+            tuple(_rule(r) for r in _tables(p.get("vector"))),
+            frozenset(_strings(p.get("only"))),
         )
-        for p in d.get("policy", [])
+        for p in _tables(d.get("policy"))
     )
     return Guarantees(floor, policies)
