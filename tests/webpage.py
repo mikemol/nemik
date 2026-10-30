@@ -295,7 +295,8 @@ def launched_page(
     refused: list[str] = []
 
     def note_failed(request: LaunchedRequest) -> None:
-        refused.append(f"failed {request.url}")
+        # nemik:W846: the error text says why (net::ERR_CONNECTION_RESET, ...), not only which URL
+        refused.append(f"failed {request.url} ({request.failure})")
 
     def note_status(response: LaunchedResponse) -> None:
         if response.status >= HTTP_ERROR:

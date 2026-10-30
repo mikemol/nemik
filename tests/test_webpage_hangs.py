@@ -88,6 +88,16 @@ def test_a_broken_page_under_served_says_whether_the_server_still_ran() -> None:
         break_under_served()
 
 
+def test_a_failed_request_names_the_network_error_text() -> None:
+    """W846: launched_page says why a request failed (the network error), not only which one."""
+    lost = (
+        '<script src="http://127.0.0.1:1/lost.js"></script><script>usesLost();</script>'
+    )
+    named = r"failed http://127\.0\.0\.1:1/lost\.js \(net::ERR_[A-Z_]+\)"
+    with sync_playwright() as p, pytest.raises(webpage.PageBrokenError, match=named):
+        webpage.launched_page(p, "data:text/html," + quote(lost))
+
+
 def test_an_unwatched_page_rests_on_its_predicate_alone() -> None:
     """With no error record the wait still ends when the page is ready, and returns no error."""
     assert _serve(READIES, expecting=True, watched=False) is None
