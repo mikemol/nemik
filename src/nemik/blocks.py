@@ -17,7 +17,7 @@ from __future__ import annotations
 
 import operator
 import re
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, TypedDict
 
 from rdflib import RDF, Graph, Literal, URIRef
 from rdflib.namespace import DCTERMS, PROV
@@ -93,7 +93,18 @@ def bare_wait_edges(g: Graph) -> list[tuple[Node, Node]]:
     return found
 
 
-def inbound(g: Graph, letters: bool = False) -> list[dict[str, Any]]:
+class InboundRow(TypedDict, total=False):
+    """One waypoint waiting on another workstream: what `inbound` returns per waiting waypoint."""
+
+    blocked: str
+    title: str
+    blocked_on: list[str]
+    blocker: str
+    claimed_by: list[str]
+    letters: list[str]
+
+
+def inbound(g: Graph, letters: bool = False) -> list[InboundRow]:
     """Every open waypoint waiting on another workstream, with the blocker's claiming waypoints.
 
     With `letters`, each row also carries the letter files the waiting waypoint cites (nemik:W275):
@@ -105,7 +116,7 @@ def inbound(g: Graph, letters: bool = False) -> list[dict[str, Any]]:
         letters when asked), sorted by blocker, blocked and claimed_by.
 
     """
-    out: list[dict[str, Any]] = []
+    out: list[InboundRow] = []
     for node, _, target in g.triples((None, NEMIK.waitsFor, None)):
         if (node, OSLC_CM.state, NEMIK.Done) in g:
             continue
@@ -126,7 +137,7 @@ def inbound(g: Graph, letters: bool = False) -> list[dict[str, Any]]:
         claims = claims_of(g, node, blocker)
         if named is not None:
             claims.add(named)
-        row: dict[str, Any] = {
+        row: InboundRow = {
             "blocked": ref(node),
             "title": str(g.value(node, DCTERMS.title) or ""),
             "blocked_on": sorted(str(o) for o in g.objects(node, NEMIK.blockedOn)),

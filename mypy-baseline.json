@@ -8,11 +8,11 @@
  },
  "src/nemik/blocks.py": {
   "call-overload": 1,
-  "explicit-any": 8,
-  "misc": 121
+  "explicit-any": 5,
+  "misc": 100
  },
  "src/nemik/blocks_cli.py": {
-  "misc": 35
+  "misc": 15
  },
  "src/nemik/cachestore.py": {
   "misc": 4
@@ -64,7 +64,7 @@
   "type-arg": 1
  },
  "src/nemik/metrics.py": {
-  "misc": 31
+  "misc": 18
  },
  "src/nemik/pacing.py": {
   "misc": 5
@@ -90,7 +90,7 @@
  },
  "src/nemik/serve.py": {
   "explicit-any": 5,
-  "misc": 312,
+  "misc": 301,
   "operator": 1,
   "type-arg": 8
  },
@@ -113,7 +113,7 @@
   "type-arg": 2
  },
  "src/nemik/wake.py": {
-  "misc": 25
+  "misc": 15
  },
  "src/nemik/withheld.py": {
   "explicit-any": 1,
@@ -206,9 +206,6 @@
  },
  "tests/test_importer.py": {
   "misc": 14
- },
- "tests/test_inbound_letters.py": {
-  "misc": 7
  },
  "tests/test_layout.py": {
   "misc": 266
