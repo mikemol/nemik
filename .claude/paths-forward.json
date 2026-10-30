@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1305,
+  "counter": 1306,
   "waypoints": [
     {
       "symbol": "W1",
@@ -31336,6 +31336,28 @@
         "src/nemik/blocks.py",
         "src/nemik/check.py",
         "ruff-baseline.json"
+      ]
+    },
+    {
+      "symbol": "W1306",
+      "title": "pins.py and floorasks.py read a typed Namespace and their JSON and TOML through nemik.tomlview, so mypy falls",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): pins.py and floorasks.py: Options (typed Namespace) and nemik.tomlview accessors; mikemol-pycheck --ratchet: mypy 2846 to 2812 (-34), ruff 1228 flat; baseline written (719 carries the ruff baseline, this stack the mypy one: disjoint); repo-config format check clean after one reformat; 8 tests pass. No census (both modules stay failing on their first import; stated, not run). Pace of 16:25:15Z PENDING (older than the last landings): all ok, none behind. Queued behind 719 (key 1793380629062206910, in flight).",
+      "issued_at": "2026-10-30T17:33:13Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W1187",
+      "last_worked": "2026-10-30T17:34:00Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/pins.py",
+        "src/nemik/floorasks.py",
+        "mypy-baseline.json"
       ]
     }
   ],

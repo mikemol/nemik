@@ -12,6 +12,7 @@ import re
 from pathlib import Path
 
 from nemik.check import QUEUE, default_root, workstream_files
+from nemik.tomlview import table, tables
 
 # Same field regex as summit's scripts/place_intake.py (`waypoint` is a real top-level field).
 _WAYPOINT = re.compile(r"^\s*waypoint\s*=\s*\{([^}]*)\}", re.MULTILINE)
@@ -36,9 +37,12 @@ def floor_asks(floor: Path) -> list[tuple[str, str]]:
 
 
 def _statuses(path: Path) -> dict[str, str]:
-    data = json.loads(path.read_text(encoding="utf-8"))
-    st = {w["symbol"]: w.get("status", "") for w in data.get("waypoints", [])}
-    st.update({r["symbol"]: "dropped" for r in data.get("residue", [])})
+    data = table(json.loads(path.read_text(encoding="utf-8")))
+    st = {
+        str(w["symbol"]): str(w.get("status", ""))
+        for w in tables(data.get("waypoints"))
+    }
+    st.update({str(r["symbol"]): "dropped" for r in tables(data.get("residue"))})
     return st
 
 
@@ -68,6 +72,13 @@ def unresolved(root: Path, floor: Path) -> list[tuple[str, str, str]]:
     return bad
 
 
+class Options(argparse.Namespace):
+    """The parsed command line of nemik-floor-asks (nemik:W1187)."""
+
+    root: Path
+    floor: Path | None
+
+
 def main(argv: list[str] | None = None) -> None:
     """Report the floor asks that point at nothing.
 
@@ -83,7 +94,7 @@ def main(argv: list[str] | None = None) -> None:
         help="~/github, or the export layout root",
     )
     ap.add_argument("--floor", type=Path, help="default: <root>/summit/floor")
-    args = ap.parse_args(argv)
+    args = ap.parse_args(argv, namespace=Options())
     floor = args.floor or args.root / "summit" / "floor"
     n = len(floor_asks(floor))
     bad = unresolved(args.root, floor)

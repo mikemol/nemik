@@ -32,7 +32,7 @@
   "misc": 7
  },
  "src/nemik/floorasks.py": {
-  "misc": 17
+  "misc": 8
  },
  "src/nemik/health.py": {
   "explicit-any": 1,
@@ -66,8 +66,7 @@
   "misc": 2
  },
  "src/nemik/pins.py": {
-  "call-overload": 1,
-  "misc": 25
+  "misc": 1
  },
  "src/nemik/rank.py": {
   "misc": 232,

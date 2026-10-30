@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import NamedTuple
 
 from nemik.check import default_root
+from nemik.tomlview import table, tables
 
 _PIN = re.compile(
     r"git\+https://github\.com/[\w.-]+/([\w.-]+?)(?:\.git)?@([0-9a-f]{7,40})\b"
@@ -96,11 +97,8 @@ def installed(receipt: Path) -> str | None:
         return None
     import tomllib
 
-    for req in (
-        tomllib.loads(receipt.read_text(encoding="utf-8"))
-        .get("tool", {})
-        .get("requirements", [])
-    ):
+    tool = table(table(tomllib.loads(receipt.read_text(encoding="utf-8"))).get("tool"))
+    for req in tables(tool.get("requirements")):
         if req.get("name") == "nemik" and (m := _REV.search(str(req.get("git", "")))):
             return m[1]
     return None
@@ -144,6 +142,17 @@ def deployed(namespace: str = "nemik") -> str | None:
     return m[1] if m else None
 
 
+class Options(argparse.Namespace):
+    """The parsed command line of nemik-pins (nemik:W1187)."""
+
+    repos: list[str]
+    root: Path
+    max_behind: int | None
+    receipt: Path
+    cluster: bool
+    stuck_after: int
+
+
 def main(argv: list[str] | None = None) -> int:
     """nemik-pins: how many commits each repo's pin of a peer is behind that peer's HEAD.
 
@@ -180,7 +189,7 @@ def main(argv: list[str] | None = None) -> int:
         default=5,
         help="call the ship stuck past this many commits (a fresh push is always briefly behind)",
     )
-    args = ap.parse_args(argv)
+    args = ap.parse_args(argv, namespace=Options())
     worst = 0
     # nemik:W379: the host's own install of nemik's tools is a pin too, of nemik by the operator's
     # PATH; reinstalling stays a deliberate step, so this says how far behind it is and how to
