@@ -3414,3 +3414,6 @@
 2026-10-30T10:40:53Z  status W1291 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-30T11:05:48Z  interrupt W1292 minted    -         "blocks.inbound returns a typed InboundRow, so its five consumers read keys, not Any, and mypy falls"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1187
 2026-10-30T11:13:41Z  status W1292 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T11:19:58Z  interrupt W1293 minted    -         "Repin the vendored mtools wheels to a sha with e6dc759e (mikemol-transcriptstruct --since-last) so luthen's live nemik tools carry it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:R187
+2026-10-30T11:33:22Z  status W1292 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T11:33:33Z  status W1293 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

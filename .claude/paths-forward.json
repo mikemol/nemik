@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1292,
+  "counter": 1293,
   "waypoints": [
     {
       "symbol": "W1",
@@ -31030,22 +31030,46 @@
     {
       "symbol": "W1292",
       "title": "blocks.inbound returns a typed InboundRow, so its five consumers read keys, not Any, and mypy falls",
-      "status": "working",
+      "status": "ready",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): blocks.inbound returns InboundRow (TypedDict, total=False); mikemol-pycheck --ratchet: mypy 3421 to 3336 (-85), ruff 1458 flat, baseline written with nothing queued; 30 tests of inbound_letters, metrics_gating, wake_series_lines, check_summary, integrity_report, serve_model pass; Codon census 7 passed in 436.74 s after the last src edit. Pace of 10:25:13Z is PENDING for landing 10:40:09Z: codon 144, mypy 3421, ruff 1458, all ok, none behind (unlanded sample per standing 12). Paydown ahead of need, not owed. The stack names mypy-baseline.json. Loadavg at submit 46.68 49.17 45.70.",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): blocks.inbound returns InboundRow (TypedDict, total=False); mikemol-pycheck --ratchet: mypy 3421 to 3336 (-85), ruff 1458 flat, baseline written with nothing queued; 30 tests of inbound_letters, metrics_gating, wake_series_lines, check_summary, integrity_report, serve_model pass; Codon census 7 passed in 436.74 s after the last src edit. Pace of 10:25:13Z is PENDING for landing 10:40:09Z: codon 144, mypy 3421, ruff 1458, all ok, none behind (unlanded sample per standing 12). Paydown ahead of need, not owed. The stack names mypy-baseline.json. Loadavg at submit 46.68 49.17 45.70. | 2026-10-30: 2026-10-30 LANDED stack 707 (key 1793358867772274368, submitted 11:14:26Z) as db5a2cb, subject mine (git log), origin/main read back db5a2cb8a9e328ef1e6fb25c884cf7d34c2d081f. Card set ready BEFORE this line. Loadavg at verdict 25.79 40.47 49.31. Landed fall: mypy 3421 to 3336 (-85, MEASURED before submit). Next on blocks.py: the operator_asks rows (lines 666-741) as an Ask TypedDict; the repin W1293 goes first because the gate is empty.",
       "issued_at": "2026-10-30T11:05:48Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1187",
-      "last_worked": "2026-10-30T11:14:22Z",
+      "last_worked": "2026-10-30T11:33:31Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "src/nemik/blocks.py",
         "mypy-baseline.json"
+      ]
+    },
+    {
+      "symbol": "W1293",
+      "title": "Repin the vendored mtools wheels to a sha with e6dc759e (mikemol-transcriptstruct --since-last) so luthen's live nemik tools carry it",
+      "status": "working",
+      "enables": [
+        "luthen-observability:W1833"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-10-30: 2026-10-30 Also asked by luthen-observability:W1833 (relayed from github-42, host-reviewer R187). Witness they name: the pinned mikemol-transcriptstruct --help (luthen's live nemik bin) lists --since-last, after luthen-user-tools.timer installs the landed nemik commit. The current pin is nemik 132130a, vendored at mtools bb7fc9c (W1278); e6dc759e is later. Not started: waits behind stack 707 in the gate. | 2026-10-30: 2026-10-30 DRY RUN (no --write) of mikemol-repin --revendor --sha e6dc759e14eb8947dcc2e86602f89c1545e3cab3 --root nemik, MEASURED output: archives ten dists (hooks pathsforward fence icsstruct rulerseq frontier atomicwrite cvdcore ratchet transcriptstruct) from mtools, builds ten wheels at +e6dc759, checks the new writer's --hash on a COPY of the queue == live, git rm of the bb7fc9c wheels and git add -f of the new, moves the ten wheel paths in pyproject.toml and MODULE.bazel, runs uv lock and uv sync --frozen (which REMOVES packages not in uv.lock from .venv), rewrites the checksum file. e6dc759e is an ancestor of mtools HEAD f13e0abb. Files it touches: vendor/wheels/*, pyproject.toml, MODULE.bazel, uv.lock, the checksum file; shares NO code path with stack 707 (src/nemik/blocks.py, mypy-baseline.json). What it does share with a running gate is the .venv: the apply runs uv sync on the venv the commit tools and hooks run from, so applying it while 707 is gated could change the tools under it. Plan: apply after 707's verdict, then bazel build //:.venv (the venv is a build input), run the Codon census (ratchet and hooks unchanged for src), pycheck, write the stack and submit. | 2026-10-30: 2026-10-30 G0 (MEASURED unless marked): repin APPLIED at e6dc759 with the gate empty (707 landed db5a2cb 11:32:40Z); the venv rebuilt by bazel build //:.venv; its mikemol-transcriptstruct --help lists --since-last; ruff 1458 and mypy 3336 flat; 18 tests of pins, skill, workflows, adoption pass; nemik-pins reports the e6dc759 pin behind 11. No src module changed, so no census. Stack 708 = this entry, 27 paths (ten renames, SHA256SUMS, MODULE.bazel, pyproject.toml, uv.lock, queue files). No ratchet falls: pace of 11:25:14Z PENDING for landing 11:32:40Z, all three ok (codon 144, mypy 3336, ruff 1458), none behind, so the paydown check has nothing owed to refuse on (EXPECTED, first stack of this kind at this pace). The gate-venv question github-42 asked stays UNREAD: no gate process was running when I applied. Loadavg at submit 49.44 42.60 48.44.",
+      "issued_at": "2026-10-30T11:19:58Z",
+      "minted_during": "interrupt",
+      "caused_by": "github:R187",
+      "last_worked": "2026-10-30T11:36:11Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "pyproject.toml",
+        "MODULE.bazel",
+        "uv.lock"
       ]
     }
   ],
