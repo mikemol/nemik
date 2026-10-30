@@ -45,6 +45,11 @@ def load_weights(text: str | None = None) -> Weights:
 
     `operator` (nemik:W249) is the demand an operator ask injects as a source in the flow model; a
     text that does not name it weighs an ask nothing beyond its class.
+
+    Returns:
+        The local, peer, peer_blocked and operator weights; operator is 0 when the
+        text omits it.
+
     """
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
@@ -105,6 +110,10 @@ def load_composition(text: str | None = None) -> Composition:
     nodal current-flow salience (nemik.flow, audited in W240), or `downstream`, the old transitive
     sum. A text that names neither keeps the old sum, so a caller that predates the switch is
     unchanged; the packaged file declares `flow`.
+
+    Returns:
+        The tiers of objectives, the scalarize weights and the weight model.
+
     """
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
@@ -147,6 +156,10 @@ def compose(rows: list[dict], comp: Composition) -> list[dict]:
     Across tiers: lexicographic. Within a tier: Pareto fronts (non-dominated sorting), then the
     tier's weighted sum inside a front, then the next tier on what is still tied. The sum is exact
     (`Fraction`): an exact flow salience must not lose a near-tie to a float (nemik:W241).
+
+    Returns:
+        The rows in the declared order, each with its `key` set.
+
     """
     from fractions import Fraction
 
@@ -193,6 +206,11 @@ def objectives(
     transitive sum stays in `downstream` either way (nemik:W241). `bands.behind` holds the
     `file:<ratchet>` tags of the ratchets the card's repo is behind on, whose paydown cards take
     the velocity band (nemik:W993).
+
+    Returns:
+        The card's operator, tier, band (with its name and why), weight, downstream
+        and salience values.
+
     """
     from rdflib.namespace import PROV
 
@@ -220,7 +238,12 @@ def _repo(node: Node) -> str:
 
 
 def successors(g: Graph, node: Node) -> set[Node]:
-    """Give what this waypoint moves: what it `enables`, and every waypoint that `waitsFor` it."""
+    """Give what this waypoint moves: what it `enables`, and every waypoint that `waitsFor` it.
+
+    Returns:
+        The waypoints it enables and those that wait for it.
+
+    """
     from nemik.index import index
 
     ix = index(g)
@@ -234,6 +257,11 @@ def downstream_weight(g: Graph, node: Node, weights: Weights) -> int:
 
     ⚑ A `done` waypoint contributes nothing and is not traversed through: finished work is not
     waiting on anything. A cycle terminates on the visited set; `node` itself never counts.
+
+    Returns:
+        The total weight: `local` for each successor in the node's repo,
+        `peer_blocked` for a blocked one elsewhere, else `peer`.
+
     """
     origin = _repo(node)
     seen: set[Node] = {node}
@@ -276,6 +304,10 @@ def frontier(g: Graph, goal: Node) -> tuple[set[Node], set[str]]:
     nemik:W483: which of the walked cards are leaves is decided by the fleet's shared walker
     (mikemol.frontier.walk, mtools:W1127) with `realized` = the stored state is done, over the
     goal's local cone as plain nodes and edges (a feeder must be realized before what it feeds).
+
+    Returns:
+        The leaves dG, and ddG: what they wait on from outside the repo.
+
     """
     from mikemol.frontier.walk import frontier as walk
 
@@ -331,6 +363,11 @@ def goals(g: Graph, repo: str, weights: Weights) -> list[dict]:
     purpose lies outside the repo, or it is an end in itself. For each goal: its frontier dG, the
     on-deck leaf (the heaviest ready leaf), and ddG, what the leaves wait on from outside. The path
     to G is clear exactly when ddG is empty.
+
+    Returns:
+        One row per goal (symbol, title, weight, frontier, on-deck leaf, outside
+        waits and whether the path is clear), heaviest first.
+
     """
     ws = workstream_uri(repo)
     out = []
@@ -362,13 +399,23 @@ def goals(g: Graph, repo: str, weights: Weights) -> list[dict]:
 
 
 def children(g: Graph, n: Node) -> set[Node]:
-    """List the open waypoints in n's repo that feed it directly (enable it, or it waits for them)."""
+    """List the open waypoints in n's repo that feed it directly (enable it, or it waits for them).
+
+    Returns:
+        The open waypoints in the repo that enable `n` or that it waits for.
+
+    """
     feeders = set(g.subjects(NEMIK.enables, n)) | set(g.objects(n, NEMIK.waitsFor))
     return {f for f in feeders if _repo(f) == _repo(n) and _open(g, f)}
 
 
 def is_umbrella(g: Graph, n: Node) -> bool:
-    """Find a ready item with open work under it (nemik:W74): its frontier is not itself."""
+    """Find a ready item with open work under it (nemik:W74): its frontier is not itself.
+
+    Returns:
+        True when the frontier of `n` is anything but `n` itself.
+
+    """
     return frontier(g, n)[0] != {n}
 
 

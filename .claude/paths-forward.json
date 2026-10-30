@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1301,
+  "counter": 1302,
   "waypoints": [
     {
       "symbol": "W1",
@@ -31187,7 +31187,7 @@
     {
       "symbol": "W1299",
       "title": "12 functions in metrics, index, cards, flow, pins, salience and manifest get a Returns section written from their bodies, so ruff falls 1275 to 1263",
-      "status": "working",
+      "status": "ready",
       "enables": [],
       "touches": [],
       "blocked_on": [],
@@ -31197,7 +31197,7 @@
       "issued_at": "2026-10-30T14:16:08Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1279",
-      "last_worked": "2026-10-30T15:16:04Z",
+      "last_worked": "2026-10-30T15:33:56Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -31230,17 +31230,17 @@
     {
       "symbol": "W1301",
       "title": "manifest.py takes the manifest as an argument and imports nothing, with the file read in apischema, so it compiles under Codon and codon falls 144 to 142",
-      "status": "working",
+      "status": "ready",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): manifest.py pure (takes m: Manifest, imports nothing, no __future__, no X | None); apischema.load and apischema.unmanifested read the packaged file; serve.py and six tests import from apischema; pinned Codon build of the new manifest.py rc 0 (probe_codon.py); CENSUS with the manifest block removed from codon-baseline.json: 7 passed in 411.77 s, after the last src edit. mikemol-pycheck --ratchet: mypy 3031 to 2992 (-39), ruff 1263 flat (the W1299 docstrings are in the stack's second entry; the ruff baseline is written at 1263 and rides in that entry), codon EXPECTED 144 to 142 (two leaves per module, mtools kinds.py _weight; not yet measured by the tool on a landed file). 20 tests of manifest, apischema, series_serve, withheld, static pass. Pace of 14:25:15Z, CURRENT for landing 14:21:24Z: codon BEHIND (fell 0 over 10, owes 2); the stack names codon-baseline.json, so the paydown check should admit it. Gate empty. Loadavg at submit 34.27 38.74 31.10.",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): manifest.py pure (takes m: Manifest, imports nothing, no __future__, no X | None); apischema.load and apischema.unmanifested read the packaged file; serve.py and six tests import from apischema; pinned Codon build of the new manifest.py rc 0 (probe_codon.py); CENSUS with the manifest block removed from codon-baseline.json: 7 passed in 411.77 s, after the last src edit. mikemol-pycheck --ratchet: mypy 3031 to 2992 (-39), ruff 1263 flat (the W1299 docstrings are in the stack's second entry; the ruff baseline is written at 1263 and rides in that entry), codon EXPECTED 144 to 142 (two leaves per module, mtools kinds.py _weight; not yet measured by the tool on a landed file). 20 tests of manifest, apischema, series_serve, withheld, static pass. Pace of 14:25:15Z, CURRENT for landing 14:21:24Z: codon BEHIND (fell 0 over 10, owes 2); the stack names codon-baseline.json, so the paydown check should admit it. Gate empty. Loadavg at submit 34.27 38.74 31.10. | 2026-10-30: 2026-10-30 LANDED stack 715 (key 1793373386159131113, submitted 15:16:25Z): bef5eb1 W1301 and 004ec26 W1299, both [PUSHED] on the first try; origin/main read back 004ec26d8b0500a4d15ea41561c7d01375bddc32; subjects mine (git log). Cards set ready BEFORE this line. Loadavg at verdict 18.72 34.19 40.33. Committed codon-baseline.json at HEAD has NO manifest entry (read from HEAD; 72 modules left). Pace of 15:25:15Z, label PENDING for landing 15:33:03Z: codon 142 ok, ruff 1263 ok, mypy 2992 ok; none behind. The codon 142 is the gate-run sample of this very stack (W2171), now equal to the committed file, so it is also true. Landed falls: codon 144 to 142 (two leaves, by the committed file), mypy 3031 to 2992, ruff 1275 to 1263. Gate wall about 17 min (15:16:25Z to 15:33:03Z).",
       "issued_at": "2026-10-30T15:08:31Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1179",
-      "last_worked": "2026-10-30T15:16:19Z",
+      "last_worked": "2026-10-30T15:34:09Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -31248,6 +31248,27 @@
         "src/nemik/apischema.py",
         "codon-baseline.json",
         "mypy-baseline.json"
+      ]
+    },
+    {
+      "symbol": "W1302",
+      "title": "10 functions in rank get a Returns section written from their bodies, so ruff falls 1263 to 1252",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): 10 Returns sections written from the bodies; mikemol-pycheck --ratchet: ruff 1263 to 1252 (-11, one more than the ten edited), mypy 2992 flat; baseline written with nothing queued; repo-config format check clean; 39 tests of rank, rank_flow, frontier, rank_paydown pass. Docstrings only: no census (stated, not run). Pace of 15:25:15Z PENDING for landing 15:33:03Z: codon 142, ruff 1263, mypy 2992 all ok; none behind, so the paydown check should admit a ruff stack (EXPECTED; the operator ruled 15:39:37Z, line 135344, uuid 6455aa3c, that the rule stands). Gate empty. Loadavg at submit: read in the call before this one.",
+      "issued_at": "2026-10-30T15:58:13Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W1279",
+      "last_worked": "2026-10-30T15:58:51Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/rank.py",
+        "ruff-baseline.json"
       ]
     }
   ],
