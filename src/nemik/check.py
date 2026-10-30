@@ -1228,7 +1228,7 @@ def summary_line(found: list[str], failed: int) -> str:
 
 
 def run_survey(
-    root: Path, *, digest: bool, dump: str | None, since: str | None = None
+    root: Path, *, digest: bool, dump: Path | None, since: str | None = None
 ) -> int:
     """Print the provenance and the fleet survey, and give the failure count (nemik:W763, W766).
 
@@ -1253,6 +1253,23 @@ def run_survey(
         print(line)
     sys.stdout.write(summary_line(found, failed) + "\n")
     return failed
+
+
+class Options(argparse.Namespace):
+    """The parsed command line of nemik-check, typed so no read of it is an Any (nemik:W1187)."""
+
+    root: Path
+    dump: Path | None
+    realizability: bool
+    committed: list[str] | None
+    letters: bool
+    fold: bool
+    repo: str | None
+    older_than: int | None
+    apply: bool
+    report: str | None
+    digest: bool
+    since: str | None
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -1370,7 +1387,7 @@ def main(argv: list[str] | None = None) -> None:
         help="print only what changed since the digest saved in FILE, then a count of the "
         "unchanged lines, and save this digest there; one file per reader (nemik:W766)",
     )
-    args = ap.parse_args(argv)
+    args = ap.parse_args(argv, namespace=Options())
     if args.realizability:
         sys.exit(_realizability(args.root))
     if args.letters:

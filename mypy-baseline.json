@@ -18,7 +18,7 @@
   "misc": 4
  },
  "src/nemik/calendars.py": {
-  "misc": 103,
+  "misc": 95,
   "type-arg": 7
  },
  "src/nemik/calwrite.py": {
@@ -26,7 +26,7 @@
  },
  "src/nemik/check.py": {
   "call-overload": 2,
-  "misc": 44,
+  "misc": 31,
   "type-arg": 1
  },
  "src/nemik/churn.py": {
@@ -110,7 +110,7 @@
   "misc": 4
  },
  "src/nemik/vtodo.py": {
-  "misc": 79,
+  "misc": 59,
   "type-arg": 2
  },
  "src/nemik/wake.py": {
@@ -131,10 +131,6 @@
  "src/nemik/work.py": {
   "call-overload": 1,
   "misc": 32
- },
- "src/nemik/workflows.py": {
-  "explicit-any": 3,
-  "misc": 13
  },
  "tests/fixtures/make_fleet.py": {
   "misc": 30
@@ -336,7 +332,7 @@
   "type-arg": 1
  },
  "tests/test_workflows.py": {
-  "misc": 57
+  "misc": 52
  },
  "tests/webpage.py": {
   "explicit-any": 1,

@@ -335,6 +335,20 @@ def tasks_main(argv: list[str] | None = None) -> None:
 
     from nemik.check import default_root
 
+    class Options(argparse.Namespace):
+        """The parsed command line of nemik-tasks (nemik:W1187)."""
+
+        root: Path
+        opt_in: Path
+        link: str
+        helper: Path
+        tasks_list: str
+        create_list: bool
+        apply: bool
+        only: list[str]
+        flat: bool
+        retry_wait: int
+
     ap = argparse.ArgumentParser(
         prog="nemik-tasks", description=(tasks_main.__doc__ or "").splitlines()[0]
     )
@@ -356,7 +370,9 @@ def tasks_main(argv: list[str] | None = None) -> None:
         default=DEFAULT_HELPER,
         help="the nemik-akonadi-tasks binary",
     )
-    ap.add_argument("--list", required=True, help="the Google Tasks list, by name")
+    ap.add_argument(
+        "--list", dest="tasks_list", required=True, help="the Google Tasks list, by name"
+    )
     ap.add_argument(
         "--create-list",
         action="store_true",
@@ -385,7 +401,7 @@ def tasks_main(argv: list[str] | None = None) -> None:
         help="with --apply, rerun while the helper defers a child's parent, waiting this long for the "
         "Google resource to sync (at most 3 reruns; nemik:W148)",
     )
-    args = ap.parse_args(argv)
+    args = ap.parse_args(argv, namespace=Options())
     if not args.helper.exists():
         print(f"ERROR: {args.helper} is missing; build it with ./setup.sh", flush=True)
         raise SystemExit(2)
@@ -394,7 +410,7 @@ def tasks_main(argv: list[str] | None = None) -> None:
     except Exception as e:
         print(f"ERROR: feed: {e}", flush=True)
         raise SystemExit(2) from e
-    cmd = [str(args.helper), "--list", args.list]
+    cmd = [str(args.helper), "--list", args.tasks_list]
     cmd += ["--create-list"] * args.create_list + ["--apply"] * args.apply
     for r in args.only:
         cmd += ["--only", r]
@@ -431,6 +447,14 @@ def main(argv: list[str] | None = None) -> None:
 
     from nemik.check import default_root
 
+    class Options(argparse.Namespace):
+        """The parsed command line of nemik-ics (nemik:W1187)."""
+
+        root: Path
+        opt_in: Path
+        link: str
+        out: Path | None
+
     ap = argparse.ArgumentParser(
         prog="nemik-ics", description=(main.__doc__ or "").splitlines()[0]
     )
@@ -449,7 +473,7 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument(
         "--out", type=Path, help="write here (atomically) instead of stdout"
     )
-    args = ap.parse_args(argv)
+    args = ap.parse_args(argv, namespace=Options())
 
     text = feed(args.root, args.opt_in, args.link)
     if args.out is None:

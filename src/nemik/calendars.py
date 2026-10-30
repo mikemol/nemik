@@ -308,6 +308,16 @@ def days_main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     from nemik.check import default_root, survey
     from nemik.vtodo import DEFAULT_HELPER
 
+    class Options(argparse.Namespace):
+        """The parsed command line of nemik-days (nemik:W1187)."""
+
+        days: int
+        root: Path
+        calendars: Path
+        helper: Path
+        json: bool
+        no_dedupe: bool
+
     ap = argparse.ArgumentParser(
         prog="nemik-days", description=(days_main.__doc__ or "").splitlines()[0]
     )
@@ -330,7 +340,7 @@ def days_main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         action="store_true",
         help="list every calendar's copy of an entry that repeats across calendars (nemik:W191)",
     )
-    args = ap.parse_args(argv)
+    args = ap.parse_args(argv, namespace=Options())
     cals = load_calendars(args.calendars)
     cols = {label: c.name for label, c in cals.items()}
     if not cols:
