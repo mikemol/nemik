@@ -3424,3 +3424,6 @@
 2026-10-30T12:34:35Z  status W1294 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-30T12:43:15Z  interrupt W1295 minted    -         "calendars.py reads and writes its rows as a typed Occurrence, so days_main and dedupe stop handling Any and mypy falls"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1187
 2026-10-30T12:49:31Z  status W1295 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T13:01:13Z  interrupt W1296 minted    -         "nemik.tomlview reads a parsed TOML through builtin types and test_workflows uses it, so tomllib's Any stops at one call and mypy falls"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1187
+2026-10-30T13:08:45Z  status W1295 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T13:17:37Z  status W1296 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

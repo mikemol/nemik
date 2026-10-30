@@ -322,7 +322,7 @@
   "type-arg": 1
  },
  "tests/test_workflows.py": {
-  "misc": 52
+  "misc": 7
  },
  "tests/webpage.py": {
   "explicit-any": 1,

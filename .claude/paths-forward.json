@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1295,
+  "counter": 1296,
   "waypoints": [
     {
       "symbol": "W1",
@@ -31096,22 +31096,44 @@
     {
       "symbol": "W1295",
       "title": "calendars.py reads and writes its rows as a typed Occurrence, so days_main and dedupe stop handling Any and mypy falls",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): calendars.py rows are a typed Occurrence (TypedDict, total=False), built field by field through _text and _flag; KEEP removed; tests/test_calendars.py fixture rows typed; mikemol-pycheck --ratchet: mypy 3203 to 3076 (-127), ruff 1458 flat, baseline written with nothing queued; strict mypy on the two files prints nothing; 25 tests of calendars, calendar_boundary, alarm, ics_roundtrip pass; Codon census 7 passed in 341.67 s after the last src edit. Pace of 12:25:14Z PENDING for landing 12:33:49Z: codon 144, mypy 3203, ruff 1458, all ok (unlanded sample); paydown ahead of need. The gate is empty. Loadavg at submit 31.41 28.12 39.48. | 2026-10-30: 2026-10-30 LANDED stack 710 (key 1793364601550410585, submitted 12:50:00Z) as 02ac3ec, subject mine (git log), origin/main read back 02ac3ec4bf4eb08939cb717cb168a0afeffd424a. Card set ready BEFORE this line. Loadavg at verdict 38.75 46.80 50.24. Landed fall: mypy 3203 to 3076 (-127, MEASURED before submit). With 710 landed nothing queued carries mypy-baseline.json, so W1296 (tomlview, 3076 to 3031 measured) can write its baseline and go.",
+      "issued_at": "2026-10-30T12:43:15Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W1187",
+      "last_worked": "2026-10-30T13:08:55Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/calendars.py",
+        "tests/test_calendars.py",
+        "mypy-baseline.json"
+      ]
+    },
+    {
+      "symbol": "W1296",
+      "title": "nemik.tomlview reads a parsed TOML through builtin types and test_workflows uses it, so tomllib's Any stops at one call and mypy falls",
       "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): calendars.py rows are a typed Occurrence (TypedDict, total=False), built field by field through _text and _flag; KEEP removed; tests/test_calendars.py fixture rows typed; mikemol-pycheck --ratchet: mypy 3203 to 3076 (-127), ruff 1458 flat, baseline written with nothing queued; strict mypy on the two files prints nothing; 25 tests of calendars, calendar_boundary, alarm, ics_roundtrip pass; Codon census 7 passed in 341.67 s after the last src edit. Pace of 12:25:14Z PENDING for landing 12:33:49Z: codon 144, mypy 3203, ruff 1458, all ok (unlanded sample); paydown ahead of need. The gate is empty. Loadavg at submit 31.41 28.12 39.48.",
-      "issued_at": "2026-10-30T12:43:15Z",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): nemik.tomlview (table, tables, strings; no import, no X|None annotation) and tests/test_workflows.py reading the model through it; mikemol-pycheck --ratchet: mypy 3076 to 3031 (-45), ruff 1458 flat, baseline written with nothing queued (710 landed 02ac3ec); 7 tests of test_workflows pass. CENSUS: the first run FAILED on the new module (tomlview text(): unsupported operand type(s) for |: type[str] and Optional, the pinned Codon cannot compile str | None); I removed the unused text(), reran: 7 passed in 412.18 s after the last src edit. Pace of 12:25:14Z is PENDING for landing 13:07:58Z: codon 144, mypy 3203, ruff 1458, all ok (unlanded sample); paydown ahead of need. Gate empty. Loadavg at submit 28.09 39.41 44.53.",
+      "issued_at": "2026-10-30T13:01:13Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1187",
-      "last_worked": "2026-10-30T12:49:54Z",
+      "last_worked": "2026-10-30T13:17:55Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
-        "src/nemik/calendars.py",
-        "tests/test_calendars.py",
+        "src/nemik/tomlview.py",
+        "tests/test_workflows.py",
         "mypy-baseline.json"
       ]
     }
