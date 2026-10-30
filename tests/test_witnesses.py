@@ -42,22 +42,26 @@ def test_file_witness_true_false(tmp_path: Path) -> None:
 
 
 def test_pid_witness_sees_live_and_gone() -> None:
+    """Pid witness sees live and gone."""
     live = f'not input.pid["localhost/{os.getpid()}"].alive'
     assert witness(live)[0] == "false"
     assert witness('not input.pid["localhost/999999999"].alive')[0] == "true"
 
 
 def test_pid_reuse_guard_treats_other_starttime_as_gone() -> None:
+    """Pid reuse guard treats other starttime as gone."""
     assert witness(f'not input.pid["localhost/{os.getpid()}@1"].alive')[0] == "true"
 
 
 def test_unobservable_fact_is_undefined_not_false() -> None:
+    """Unobservable fact is undefined not false."""
     verdict, _, missing = witness('not input.pid["otherhost/1"].alive')
     assert verdict == "undefined" and missing == ['pid["otherhost/1"]']
     assert witness('input.nosuch["x"].ok')[0] == "undefined"
 
 
 def test_time_witness_uses_input_now() -> None:
+    """Time witness uses input now."""
     from datetime import UTC, datetime
 
     q = 'time.parse_rfc3339_ns(input.now) >= time.parse_rfc3339_ns("2026-10-01T00:00:00Z")'
@@ -98,6 +102,7 @@ def test_git_ref_witness(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Non
 def test_runner_applies_only_holding_witnesses(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
+    """Runner applies only holding witnesses."""
     import json
 
     flag = tmp_path / "flag"
@@ -210,6 +215,7 @@ def test_unset_endpoint_is_undefined(monkeypatch: pytest.MonkeyPatch) -> None:
 def test_apply_writes_letters_to_waiting_repos(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
+    """Apply writes letters to waiting repos."""
     import json
 
     flag = tmp_path / "flag"

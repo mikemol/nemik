@@ -167,6 +167,7 @@ def _wp(symbol: str, status: str = "ready", **more: object) -> dict:
 
 
 def test_diff_names_every_class_of_change() -> None:
+    """Diff names every class of change."""
     old = {
         "waypoints": [
             _wp("W1"),
@@ -199,6 +200,7 @@ def test_diff_names_every_class_of_change() -> None:
 
 
 def test_a_symbol_that_is_not_w_n_sorts_last_instead_of_raising() -> None:
+    """A symbol that is not W<n> sorts last instead of raising."""
     # luthen's committed history holds `R-amtool`, which is not a W<n>.
     new = {"waypoints": [_wp("W10"), _wp("R-amtool"), _wp("W2")], "residue": []}
     d = diff({}, new)
@@ -206,6 +208,7 @@ def test_a_symbol_that_is_not_w_n_sorts_last_instead_of_raising() -> None:
 
 
 def test_a_repo_with_no_queue_yet_reads_as_empty() -> None:
+    """A repo with no queue yet reads as empty."""
     d = diff({}, {"waypoints": [_wp("W1", "done")], "residue": []})
     assert d.minted == ["W1"] and d.closed == ["W1"]
 
@@ -250,6 +253,7 @@ def _two_commits(tmp_path: Path) -> tuple[Path, str]:
 
 
 def test_the_history_is_read_by_revision_and_by_date(tmp_path: Path) -> None:
+    """The history is read by revision and by date."""
     repo, first = _two_commits(tmp_path)
     assert queue_at(repo, first)["waypoints"][0]["status"] == "ready"
     assert resolve(repo, "2026-09-30") is None  # before the first commit
@@ -286,6 +290,7 @@ def test_a_baseline_time_with_a_zone_or_a_window_names_an_exact_instant(
 def test_time_in_state_and_the_weekly_roll_up_follow_the_commits(
     tmp_path: Path,
 ) -> None:
+    """Time in state and the weekly roll up follow the commits."""
     repo = tmp_path / "a"
     repo.mkdir()
     subprocess.run(["git", "-C", str(repo), "init", "-q"], check=True)
@@ -355,6 +360,7 @@ def test_a_withheld_waypoint_is_not_counted_in_the_published_history(
 def test_the_command_prints_the_diff_between_two_dates(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
+    """The command prints the diff between two dates."""
     _two_commits(tmp_path)
     code = main(["a", "--from", "2026-10-02", "--root", str(tmp_path)])
     out = capsys.readouterr().out

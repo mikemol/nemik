@@ -10,12 +10,14 @@ from nemik.vtodo import vtodos
 
 
 def test_duration_reads_every_rfc5545_part() -> None:
+    """Duration reads every rfc5545 part."""
     assert duration("-PT15M").total_seconds() == -900
     assert duration("P1DT2H").total_seconds() == 93600
     assert duration("+P1W").days == 7
 
 
 def test_relative_triggers_count_from_their_anchor() -> None:
+    """Relative triggers count from their anchor."""
     start, due = "TZID=America/Detroit:20261001T163000", "20261001T220000Z"
     # 4:30 PM EDT is 20:30 UTC; 15 minutes before is 20:15.
     assert fires_at("-PT15M", dtstart=start) == datetime(
@@ -36,6 +38,7 @@ def test_relative_triggers_count_from_their_anchor() -> None:
 
 
 def test_vtodo_carries_each_alarm_as_a_display_valarm() -> None:
+    """Vtodo carries each alarm as a display valarm."""
     ask = {
         "ref": "life:W9",
         "title": "cpr",
@@ -96,6 +99,7 @@ def test_recurring_alarms_fire_per_occurrence_skipping_exdates_and_completed() -
 
 
 def test_one_shot_and_absolute_alarms_fire_once_inside_the_window() -> None:
+    """One shot and absolute alarms fire once inside the window."""
     from nemik.alarm import fires_between
 
     w = (datetime(2026, 10, 1, tzinfo=UTC), datetime(2026, 10, 2, tzinfo=UTC))
@@ -121,6 +125,7 @@ def test_one_shot_and_absolute_alarms_fire_once_inside_the_window() -> None:
 
 
 def test_adapter_carries_recurrence_and_completed_occurrences(tmp_path: Path) -> None:
+    """Adapter carries recurrence and completed occurrences."""
     import json
 
     from nemik.adapter import NEMIK, queue_graph, waypoint_uri

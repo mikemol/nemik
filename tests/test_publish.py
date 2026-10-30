@@ -17,6 +17,7 @@ FLEET = Path(__file__).parent / "fixtures" / "fleet"
 
 
 def test_a_publish_flips_current_and_writes_the_private_files(tmp_path: Path) -> None:
+    """A publish flips current and writes the private files."""
     snap = publish(FLEET, tmp_path / "pub", None)
     assert snap is not None
     current = tmp_path / "pub" / "current"
@@ -46,6 +47,7 @@ def test_a_publish_flips_current_and_writes_the_private_files(tmp_path: Path) ->
 
 
 def test_a_quiet_fleet_is_not_published_again(tmp_path: Path) -> None:
+    """A quiet fleet is not published again."""
     first = publish(FLEET, tmp_path / "pub", None)
     assert first is not None
     assert publish(FLEET, tmp_path / "pub", None) is None
@@ -55,6 +57,7 @@ def test_a_quiet_fleet_is_not_published_again(tmp_path: Path) -> None:
 def test_a_changed_fleet_is_published_and_only_the_last_snapshots_stay(
     tmp_path: Path,
 ) -> None:
+    """A changed fleet is published and only the last snapshots stay."""
     base = tmp_path / "pub"
     for stale in (
         "snap-20200101T000000Z-1",
@@ -72,6 +75,7 @@ def test_a_changed_fleet_is_published_and_only_the_last_snapshots_stay(
 
 
 def test_the_publish_command_runs_in_its_own_process(tmp_path: Path) -> None:
+    """The publish command runs in its own process."""
     # the point of W503: every byte of the build's graph goes back to the OS when the process exits
     cmd = [
         *installed.script("nemik-serve"),
@@ -97,6 +101,7 @@ def _copy_fleet(tmp_path: Path) -> Path:
 
 
 def test_a_rewrite_that_changes_nothing_is_not_a_change(tmp_path: Path) -> None:
+    """A rewrite that changes nothing is not a change."""
     # luthen's export rewrites its files every minute; a build costs real CPU, so only CONTENT
     # counts
     root = _copy_fleet(tmp_path)
@@ -109,6 +114,7 @@ def test_a_rewrite_that_changes_nothing_is_not_a_change(tmp_path: Path) -> None:
 
 
 def test_a_change_of_content_is_published(tmp_path: Path) -> None:
+    """A change of content is published."""
     root = _copy_fleet(tmp_path)
     first = publish(root, tmp_path / "pub", None)
     assert first is not None
@@ -128,6 +134,7 @@ def test_a_change_of_content_is_published(tmp_path: Path) -> None:
 
 
 def test_a_publish_keeps_the_build_caches_beside_the_snapshots(tmp_path: Path) -> None:
+    """A publish keeps the build caches beside the snapshots."""
     # W518: the next fresh process starts warm from these
     assert publish(FLEET, tmp_path / "pub", None) is not None
     cache = tmp_path / "pub" / ".cache" / "build-caches.pickle"

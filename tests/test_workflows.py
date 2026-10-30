@@ -21,17 +21,20 @@ MODEL = load()
 
 
 def test_every_transition_joins_declared_states() -> None:
+    """Every transition joins declared states."""
     states = set(MODEL["lifecycle"]["states"])
     assert all({t["from"], t["to"]} <= states for t in transitions(MODEL))
 
 
 def test_the_skill_teaches_every_lifecycle_command() -> None:
+    """The skill teaches every lifecycle command."""
     taught = [t["command"] for t in transitions(MODEL) if t["command"] in SKILL]
     missing = [t["command"] for t in transitions(MODEL) if t["command"] not in taught]
     assert not missing, f"skills/nemik/SKILL.md never teaches {missing}"
 
 
 def test_every_enforcer_the_model_names_exists() -> None:
+    """Every enforcer the model names exists."""
     declared = [e for t in transitions(MODEL) for e in t["enforced_by"]]
     declared += [e for r in MODEL["rule"] for e in r["enforced_by"]]
     for e in declared:
@@ -42,6 +45,7 @@ def test_every_enforcer_the_model_names_exists() -> None:
 
 
 def test_the_skill_numbers_exactly_the_rules_the_model_declares() -> None:
+    """The skill numbers exactly the rules the model declares."""
     rules = MODEL["rule"]
     section = SKILL.split("## The four rules that make the graph work")[1].split(
         "\n## "
@@ -55,11 +59,13 @@ def test_the_skill_numbers_exactly_the_rules_the_model_declares() -> None:
 
 
 def test_every_workflow_step_command_appears_in_the_skill() -> None:
+    """Every workflow step command appears in the skill."""
     commands = [s["command"] for w in MODEL["workflow"] for s in w["steps"]]
     assert [c for c in commands if c not in SKILL] == []
 
 
 def test_every_documented_command_has_a_workflow_or_is_reference() -> None:
+    """Every documented command has a workflow or is reference."""
     table = re.findall(r"^\| `(nemik-[a-z-]+)", SKILL, flags=re.MULTILINE)
     steps = {s["command"] for w in MODEL["workflow"] for s in w["steps"]}
     placed = steps | set(MODEL["reference"]["commands"])

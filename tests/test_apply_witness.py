@@ -42,6 +42,7 @@ def _export(root: Path, as_of: str, applied: bool) -> None:
 def test_a_fresh_applied_row_is_a_true_fact(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """A fresh applied row is a true fact."""
     monkeypatch.setenv("NEMIK_ROOT", str(tmp_path))
     _export(tmp_path, _now(), True)
     doc, missing = facts(QUERY)
@@ -52,6 +53,7 @@ def test_a_fresh_applied_row_is_a_true_fact(
 def test_an_unapplied_row_is_false_not_undefined(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """An unapplied row is false not undefined."""
     monkeypatch.setenv("NEMIK_ROOT", str(tmp_path))
     _export(tmp_path, _now(), False)
     doc, missing = facts(QUERY)
@@ -62,6 +64,7 @@ def test_an_unapplied_row_is_false_not_undefined(
 def test_a_stale_export_is_never_applied(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """A stale export is never applied."""
     monkeypatch.setenv("NEMIK_ROOT", str(tmp_path))
     _export(tmp_path, "2026-01-01T00:00:00Z", True)
     doc, _ = facts(QUERY)
@@ -72,6 +75,7 @@ def test_a_stale_export_is_never_applied(
 def test_a_row_the_export_does_not_hold_is_undefined(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """A row the export does not hold is undefined."""
     monkeypatch.setenv("NEMIK_ROOT", str(tmp_path))
     _export(tmp_path, _now(), True)
     _, missing = facts('input.apply["no-such-row"].applied == true')
@@ -81,6 +85,7 @@ def test_a_row_the_export_does_not_hold_is_undefined(
 def test_a_row_the_exporter_could_not_read_is_undefined_not_false(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """A row the exporter could not read is undefined not false."""
     monkeypatch.setenv("NEMIK_ROOT", str(tmp_path))
     row: dict[str, object] = {
         "id": "kubelet-swap",
@@ -103,6 +108,7 @@ def test_a_row_the_exporter_could_not_read_is_undefined_not_false(
 def test_no_export_at_all_is_undefined(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """No export at all is undefined."""
     monkeypatch.setenv("NEMIK_ROOT", str(tmp_path))
     _, missing = facts(QUERY)
     assert missing == ['apply["home-mount"]']

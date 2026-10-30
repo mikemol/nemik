@@ -16,6 +16,7 @@ def _wp(g: Graph, repo: str, sym: str, status: str = "ready") -> URIRef:
 
 
 def test_packaged_weights_rank_stalled_peers_highest() -> None:
+    """Packaged weights rank stalled peers highest."""
     w = load_weights()
     assert w.peer_blocked > w.peer > w.local
 
@@ -25,6 +26,7 @@ def test_weights_override_from_text() -> None:
 
 
 def test_short_chain_with_stalled_peer_outranks_long_local_reach() -> None:
+    """Short chain with stalled peer outranks long local reach."""
     # luthen's case (nemik:W38): W79 reaches a long local chain; W45 unblocks a stalled peer.
     g = Graph()
     w79, w45 = _wp(g, "a", "W79"), _wp(g, "a", "W45")
@@ -40,6 +42,7 @@ def test_short_chain_with_stalled_peer_outranks_long_local_reach() -> None:
 
 
 def test_transitive_across_three_repos_and_done_is_pruned() -> None:
+    """Transitive across three repos and done is pruned."""
     g = Graph()
     a1, b1, c1 = _wp(g, "a", "W1"), _wp(g, "b", "W1"), _wp(g, "c", "W1")
     g.add((a1, NEMIK.enables, b1))
@@ -51,6 +54,7 @@ def test_transitive_across_three_repos_and_done_is_pruned() -> None:
 
 
 def test_cycle_terminates_and_counts_each_node_once() -> None:
+    """Cycle terminates and counts each node once."""
     g = Graph()
     x, y = _wp(g, "a", "W1"), _wp(g, "a", "W2")
     g.add((x, NEMIK.enables, y))
@@ -59,6 +63,7 @@ def test_cycle_terminates_and_counts_each_node_once() -> None:
 
 
 def test_rank_orders_ready_items_by_weight_then_symbol() -> None:
+    """Rank orders ready items by weight then symbol."""
     from nemik.adapter import workstream_uri
     from nemik.rank import rank
 
@@ -91,6 +96,7 @@ def test_a_round_ranks_the_work_in_progress_among_the_ready_cards() -> None:
 
 
 def test_fleet_rank_pools_repos_into_one_comparable_order() -> None:
+    """Fleet rank pools repos into one comparable order."""
     # nemik:W202: each repo's lone ready item is position 1 in its own `rank`, so `weight`
     # cannot be compared across repos; `rank_fleet` composes the pool once.
     from nemik.adapter import workstream_uri
@@ -121,6 +127,7 @@ def _ready(g: Graph, repo: str, sym: str, pos: int) -> URIRef:
 
 
 def test_drift_fires_when_next_item_is_outweighed_and_clears_when_it_leads() -> None:
+    """Drift fires when next item is outweighed and clears when it leads."""
     from nemik.rank import drift
 
     g = Graph()
@@ -137,6 +144,7 @@ def test_drift_fires_when_next_item_is_outweighed_and_clears_when_it_leads() -> 
 
 
 def test_umbrella_children_are_direct_feeders_not_transitive_leaves() -> None:
+    """Umbrella children are direct feeders not transitive leaves."""
     # paperkit's W59 (nemik:W112): W59 waits on W60, which W132 and W78 enable.
     from nemik.rank import children, frontier
 
@@ -161,6 +169,7 @@ def _row(
 
 
 def test_compose_lexicographic_is_one_objective_per_tier() -> None:
+    """Compose lexicographic is one objective per tier."""
     from nemik.rank import Composition, compose
 
     rows = [
@@ -173,6 +182,7 @@ def test_compose_lexicographic_is_one_objective_per_tier() -> None:
 
 
 def test_compose_pareto_front_then_scalarized_within_it() -> None:
+    """Compose pareto front then scalarized within it."""
     from nemik.rank import Composition, compose
 
     # W1 (band -3, weight 50) and W2 (band -1, weight 0) are both on the first front of
@@ -190,6 +200,7 @@ def test_compose_pareto_front_then_scalarized_within_it() -> None:
 
 
 def test_operator_asks_are_not_a_tier_in_the_packaged_composition() -> None:
+    """Operator asks are not a tier in the packaged composition."""
     # nemik:W249: an ask is a demand source inside `weight` (rank-weights.toml `operator`), not a
     # tier above the order; the objective is still printed, and the strict tier is one declaration
     # away.
@@ -202,6 +213,7 @@ def test_operator_asks_are_not_a_tier_in_the_packaged_composition() -> None:
 
 
 def test_composition_refuses_an_unknown_objective() -> None:
+    """Composition refuses an unknown objective."""
     import pytest
 
     from nemik.rank import load_composition

@@ -22,6 +22,7 @@ def _letter(root: Path, inbox: str, name: str, first: str) -> None:
 
 
 def test_a_letter_must_sit_in_the_inbox_it_names(tmp_path: Path) -> None:
+    """A letter must sit in the inbox it names."""
     _letter(tmp_path, "nemik", "ok.md", "gcalculus → nemik: a question")
     _letter(tmp_path, "nemik", "ascii.md", "life -> nemik: arrow in ascii")
     _letter(tmp_path, "paperkit", "wrong.md", "nemik → gcalculus: not for paperkit")
@@ -40,6 +41,7 @@ def test_a_letter_must_sit_in_the_inbox_it_names(tmp_path: Path) -> None:
 def test_fold_proposes_a_waypoint_for_each_letter_no_waypoint_cites(
     tmp_path: Path,
 ) -> None:
+    """Fold proposes a waypoint for each letter no waypoint cites."""
     # nemik:W277: a letter is a waypoint's evidence in file form, so an uncited one is an orphan.
     from nemik.letters import fold_commands
 
@@ -61,6 +63,7 @@ def test_fold_proposes_a_waypoint_for_each_letter_no_waypoint_cites(
 def test_an_orphan_whose_waypoints_are_all_closed_is_archived_not_folded(
     tmp_path: Path,
 ) -> None:
+    """An orphan whose waypoints are all closed is archived not folded."""
     # nemik:W278: what the letter names has landed, so it is answered; one naming an open card is
     # live.
     from nemik.letters import archive_commands, fold_commands
@@ -83,6 +86,7 @@ def test_an_orphan_whose_waypoints_are_all_closed_is_archived_not_folded(
 
 
 def test_an_old_dated_orphan_is_stale_and_the_scope_is_one_repo(tmp_path: Path) -> None:
+    """An old dated orphan is stale and the scope is one repo."""
     # nemik:W282: each repo migrates its own inbox; a letter nothing cited for N days is archived.
     from datetime import date
 
@@ -111,6 +115,7 @@ def test_an_old_dated_orphan_is_stale_and_the_scope_is_one_repo(tmp_path: Path) 
 def test_an_alert_pair_needs_no_card_but_an_unresolved_opened_does(
     tmp_path: Path,
 ) -> None:
+    """An alert pair needs no card but an unresolved opened does."""
     # nemik:W301 (substrate): luthen's `alert OPENED` / `alert RESOLVED` letters pair by alert id.
     from nemik.letters import archive_commands, fold_commands
 
@@ -170,6 +175,7 @@ def test_apply_mints_the_cards_and_archives_the_stale(tmp_path: Path) -> None:
 def test_a_misdelivered_letter_is_copied_to_its_recipient_and_then_counts_as_delivered(
     tmp_path: Path,
 ) -> None:
+    """A misdelivered letter is copied to its recipient and then counts as delivered."""
     # nemik:W310: a letter addressed to linux-sources that sits in gcalculus/inbox is copied over.
     for repo in ("gcalculus", "linux-sources"):
         queue = tmp_path / repo / ".claude" / "paths-forward.json"
@@ -222,6 +228,7 @@ def test_a_peer_waypoint_citing_the_letter_path_owns_it(tmp_path: Path) -> None:
 def test_the_command_exits_5_only_when_a_letter_is_misdelivered(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
+    """The command exits 5 only when a letter is misdelivered."""
     for repo in ("nemik", "gcalculus"):
         queue = tmp_path / repo / ".claude" / "paths-forward.json"
         queue.parent.mkdir(parents=True)

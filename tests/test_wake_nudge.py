@@ -14,12 +14,14 @@ from nemik.wake import WakeRow, age_seconds, due_nudges, should_nudge
 
 
 def test_age_seconds_computes_from_iso_last_tick() -> None:
+    """Age seconds computes from iso last tick."""
     now = datetime(2026, 9, 26, 12, 0, 0, tzinfo=UTC)
     then = (now - timedelta(hours=1)).isoformat()
     assert age_seconds(then, now) == 3600.0
 
 
 def test_age_seconds_none_for_empty_or_unparsable() -> None:
+    """Age seconds none for empty or unparsable."""
     now = datetime(2026, 9, 26, 12, 0, 0, tzinfo=UTC)
     assert age_seconds("", now) is None
     assert age_seconds(None, now) is None
@@ -27,23 +29,27 @@ def test_age_seconds_none_for_empty_or_unparsable() -> None:
 
 
 def test_should_nudge_true_when_never_nudged() -> None:
+    """Should nudge true when never nudged."""
     now = datetime(2026, 9, 26, 12, 0, 0, tzinfo=UTC)
     assert should_nudge(None, now) is True
 
 
 def test_should_nudge_backs_off_within_rewake_window() -> None:
+    """Should nudge backs off within rewake window."""
     now = datetime(2026, 9, 26, 12, 0, 0, tzinfo=UTC)
     last_nudged = now.timestamp() - 10 * 60  # 10 min ago, default rewake is 30 min
     assert should_nudge(last_nudged, now, rewake_s=1800) is False
 
 
 def test_should_nudge_true_once_rewake_window_elapses() -> None:
+    """Should nudge true once rewake window elapses."""
     now = datetime(2026, 9, 26, 12, 0, 0, tzinfo=UTC)
     last_nudged = now.timestamp() - 31 * 60
     assert should_nudge(last_nudged, now, rewake_s=1800) is True
 
 
 def test_due_nudges_filters_state_waiting_and_backoff_then_records_seen() -> None:
+    """Due nudges filters state waiting and backoff then records seen."""
     now = datetime(2026, 9, 26, 12, 0, 0, tzinfo=UTC)
     rows: list[WakeRow] = [
         {"repo": "alpha", "state": "asleep", "waiting": [{"blocked": "x"}]},

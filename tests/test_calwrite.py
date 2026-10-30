@@ -69,6 +69,7 @@ def _fleet(tmp_path: Path) -> Graph:
 def test_only_open_dated_waypoints_of_the_opted_in_repos_become_events(
     tmp_path: Path,
 ) -> None:
+    """Only open dated waypoints of the opted in repos become events."""
     g = _fleet(tmp_path)
     got = [e[1] for e in events(g, ["life"])]
     want = [f"UID:{uid('life:W9')}", f"UID:{uid('life:W30')}"]
@@ -80,6 +81,7 @@ def test_only_open_dated_waypoints_of_the_opted_in_repos_become_events(
 def test_a_calendar_touch_routes_a_waypoint_to_that_calendar_only(
     tmp_path: Path,
 ) -> None:
+    """A calendar touch routes a waypoint to that calendar only."""
     # nemik:W263 (life:W40): `calendar:main` keeps the waypoint off every other calendar, so the
     # household mirror drops it; untagged waypoints go wherever their repo is mirrored, as before.
     # A caller that names no calendar reads no tags.
@@ -108,6 +110,7 @@ def test_a_calendar_touch_routes_a_waypoint_to_that_calendar_only(
 def test_a_due_only_waypoint_sits_at_its_deadline_with_an_end_for_its_alarm(
     tmp_path: Path,
 ) -> None:
+    """A due only waypoint sits at its deadline with an end for its alarm."""
     (cpr, _) = events(_fleet(tmp_path), ["life"])
     assert "DTSTART:20261001T220000Z" in cpr
     assert "DTEND:20261001T220000Z" in cpr
@@ -120,6 +123,7 @@ def test_a_due_only_waypoint_sits_at_its_deadline_with_an_end_for_its_alarm(
 def test_a_recurring_waypoint_keeps_its_rule_and_drops_a_completed_occurrence(
     tmp_path: Path,
 ) -> None:
+    """A recurring waypoint keeps its rule and drops a completed occurrence."""
     (_, drill) = events(_fleet(tmp_path), ["life"])
     assert "DTSTART;TZID=America/Detroit:20261005T180000" in drill
     assert "RRULE:FREQ=WEEKLY;BYDAY=MO" in drill
@@ -130,6 +134,7 @@ def test_a_recurring_waypoint_keeps_its_rule_and_drops_a_completed_occurrence(
 def test_an_all_day_range_ends_the_day_after_its_inclusive_due(
     tmp_path: Path,
 ) -> None:
+    """An all day range ends the day after its inclusive due."""
     (trip,) = events(_fleet(tmp_path), ["mtools"])
     assert "DTSTART;VALUE=DATE:20261010" in trip
     assert "DTEND;VALUE=DATE:20261013" in trip
@@ -161,12 +166,14 @@ def test_an_all_day_range_ends_the_day_after_its_inclusive_due(
 def test_event_times_never_invent_a_wrong_end(
     dtstart: str, due: str, needs_end: bool, want: tuple[str, str]
 ) -> None:
+    """Event times never invent a wrong end."""
     assert event_times(dtstart, due, needs_end) == want
 
 
 def test_the_feed_is_crlf_folded_deterministic_and_carries_only_what_was_asked(
     tmp_path: Path,
 ) -> None:
+    """The feed is crlf folded deterministic and carries only what was asked."""
     g = _fleet(tmp_path)
     text = feed(g, ["life"])
     assert text == feed(g, ["life"])  # a function of the queues alone

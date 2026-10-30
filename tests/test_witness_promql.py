@@ -49,6 +49,7 @@ def _answer(
 
 
 def test_a_sample_means_the_witness_holds(monkeypatch: pytest.MonkeyPatch) -> None:
+    """A sample means the witness holds."""
     asked = _answer(monkeypatch, [{"value": [1, "31.5"]}])
     verdict, doc, missing = witness(EXECUTOR_LOAD)
     assert (verdict, missing) == ("true", [])
@@ -59,6 +60,7 @@ def test_a_sample_means_the_witness_holds(monkeypatch: pytest.MonkeyPatch) -> No
 
 
 def test_an_empty_result_means_not_yet(monkeypatch: pytest.MonkeyPatch) -> None:
+    """An empty result means not yet."""
     _answer(monkeypatch, [])
     verdict, doc, _ = witness(EXECUTOR_LOAD)
     assert verdict == "false"
@@ -68,6 +70,7 @@ def test_an_empty_result_means_not_yet(monkeypatch: pytest.MonkeyPatch) -> None:
 def test_an_unreachable_probe_is_undefined_never_false(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    """An unreachable probe is undefined never false."""
     _answer(monkeypatch, None)
     verdict, _, missing = witness(EXECUTOR_LOAD)
     assert verdict == "undefined"
@@ -75,6 +78,7 @@ def test_an_unreachable_probe_is_undefined_never_false(
 
 
 def test_what_is_rego_and_what_is_promql() -> None:
+    """What is rego and what is promql."""
     assert is_rego('input.file["/x"].exists')
     assert is_rego(
         'time.parse_rfc3339_ns(input.now) >= time.parse_rfc3339_ns("2026-10-01T00:00:00Z")'
@@ -85,6 +89,7 @@ def test_what_is_rego_and_what_is_promql() -> None:
 
 
 def test_wait_and_the_queue_choose_the_same_evaluator() -> None:
+    """Wait and the queue choose the same evaluator."""
     assert poller(EXECUTOR_LOAD).__qualname__ == promql_poll(EXECUTOR_LOAD).__qualname__
     time_witness = (
         "time.parse_rfc3339_ns(input.now) >= "
@@ -95,6 +100,7 @@ def test_wait_and_the_queue_choose_the_same_evaluator() -> None:
 
 
 def test_the_queue_scan_finds_a_bare_promql_witness(tmp_path: Path) -> None:
+    """The queue scan finds a bare promql witness."""
     queue = tmp_path / "luthen-observability" / "paths-forward.json"
     queue.parent.mkdir()
     payload: dict[str, object] = {

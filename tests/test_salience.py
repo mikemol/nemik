@@ -83,6 +83,7 @@ def _graph(root: Path) -> Graph:
 def test_a_conjunctive_card_splits_its_demand_and_a_sole_dependent_does_not(
     tmp_path: Path,
 ) -> None:
+    """A conjunctive card splits its demand and a sole dependent does not."""
     result = audit(_graph(_fleet(tmp_path)), "a")
     local = Fraction(load_weights().local)
     by_ref = {r.ref: r for r in result.rows}
@@ -96,12 +97,14 @@ def test_a_conjunctive_card_splits_its_demand_and_a_sole_dependent_does_not(
 def test_both_arms_agree_when_the_split_does_not_change_the_order(
     tmp_path: Path,
 ) -> None:
+    """Both arms agree when the split does not change the order."""
     result = audit(_graph(_fleet(tmp_path)), "a")
     assert result.old_order() == result.new_order() == ["a:W1", "a:W2"]
     assert result.disagreements() == []
 
 
 def test_the_gap_between_the_arms_is_the_contested_sources(tmp_path: Path) -> None:
+    """The gap between the arms is the contested sources."""
     result = audit(_graph(_fleet(tmp_path)), "a")
     local = Fraction(load_weights().local)
     # W1 is reached by W3 (shared with W2) and W4 (W1 alone): only W3 is contested.
@@ -141,18 +144,21 @@ def test_a_gap_that_names_the_card_that_closes_it_pulls_that_card_up(
 
 
 def test_a_gap_on_a_card_that_is_not_open_is_ignored(tmp_path: Path) -> None:
+    """A gap on a card that is not open is ignored."""
     graph = _graph(_fleet(tmp_path))
     gaps: dict[str, list[dict[str, object]]] = {"a:W99": [{"gate": "g"}]}
     assert audit(graph, "a", residue=gaps).rows == audit(graph, "a").rows
 
 
 def test_display_rounds_but_the_value_stays_exact() -> None:
+    """Display rounds but the value stays exact."""
     value = Fraction(1, 3)
     assert show(value) == "0.3333"
     assert value * 3 == 1
 
 
 def test_nemik_rank_flow_prints_both_arms(tmp_path: Path) -> None:
+    """Nemik rank flow prints both arms."""
     done = installed.run("nemik-rank", "a", "--flow", "--root", str(_fleet(tmp_path)))
     assert done.returncode == 0, done.stdout + done.stderr
     assert "flow a: 2 ready" in done.stdout
@@ -160,6 +166,7 @@ def test_nemik_rank_flow_prints_both_arms(tmp_path: Path) -> None:
 
 
 def test_an_ask_shows_what_it_needs_and_whom_it_displaces(tmp_path: Path) -> None:
+    """An ask shows what it needs and whom it displaces."""
     effect = ask_effect(_graph(_ask_fleet(tmp_path)), "a", "a:W5")
     local = Fraction(load_weights().local)
     assert effect.needs == [("a:W2", local)]
@@ -168,11 +175,13 @@ def test_an_ask_shows_what_it_needs_and_whom_it_displaces(tmp_path: Path) -> Non
 
 
 def test_an_ask_outside_the_ranking_is_refused(tmp_path: Path) -> None:
+    """An ask outside the ranking is refused."""
     with pytest.raises(ValueError, match="injects no demand"):
         ask_effect(_graph(_ask_fleet(tmp_path)), "a", "a:W99")
 
 
 def test_nemik_rank_ask_prints_needs_and_overrides(tmp_path: Path) -> None:
+    """Nemik rank ask prints needs and overrides."""
     done = installed.run(
         "nemik-rank", "a", "--ask", "a:W5", "--root", str(_ask_fleet(tmp_path))
     )

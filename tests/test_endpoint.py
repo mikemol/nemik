@@ -39,6 +39,7 @@ def clear(monkeypatch: pytest.MonkeyPatch, root: Path) -> None:
 def test_unset_variables_come_from_luthens_declaration(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """Unset variables come from luthen's declaration."""
     stub_luthen(tmp_path, ANSWER)
     clear(monkeypatch, tmp_path)
     assert sorted(endpoint.export_defaults()) == ["NEMIK_VMALERT_URL", "NEMIK_VM_URL"]
@@ -48,6 +49,7 @@ def test_unset_variables_come_from_luthens_declaration(
 def test_the_environment_wins_over_the_declaration(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """The environment wins over the declaration."""
     stub_luthen(tmp_path, ANSWER)
     clear(monkeypatch, tmp_path)
     monkeypatch.setenv("NEMIK_VM_URL", "http://override.test:1")
@@ -58,6 +60,7 @@ def test_the_environment_wins_over_the_declaration(
 def test_no_checkout_leaves_the_variables_unset(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """No checkout leaves the variables unset."""
     clear(monkeypatch, tmp_path)
     assert endpoint.export_defaults() == []
     assert "NEMIK_VM_URL" not in os.environ
@@ -66,6 +69,7 @@ def test_no_checkout_leaves_the_variables_unset(
 def test_an_unanswered_tool_gives_no_address(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """An unanswered tool gives no address."""
     stub_luthen(tmp_path, '{"state": "unknown", "name": "vmsingle-http"}')
     clear(monkeypatch, tmp_path)
     assert endpoint.declared_base("vmsingle-http", tmp_path) is None
@@ -75,6 +79,7 @@ def test_an_unanswered_tool_gives_no_address(
 def test_the_tool_exiting_nonzero_gives_no_address(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """The tool exiting nonzero gives no address."""
     stub_luthen(tmp_path, ANSWER, code=2)
     clear(monkeypatch, tmp_path)
     assert endpoint.declared_base("vmsingle-http", tmp_path) is None
@@ -83,6 +88,7 @@ def test_the_tool_exiting_nonzero_gives_no_address(
 def test_the_entry_point_exports_then_runs_witnesses(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """The entry point exports then runs witnesses."""
     stub_luthen(tmp_path, ANSWER)
     clear(monkeypatch, tmp_path)
     seen: list[str] = []
