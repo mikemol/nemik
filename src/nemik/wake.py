@@ -92,7 +92,13 @@ class WakeRow(TypedDict, total=False):
 
 
 def read_liveness(root: Path, source: str | None) -> tuple[Liveness, str]:
-    """Return ({repo: record}, where it came from); ({}, reason) when there is none."""
+    """Return ({repo: record}, where it came from); ({}, reason) when there is none.
+
+    Returns:
+        The liveness record by repo, and where it came from; empty and the reason when
+        there is none.
+
+    """
     document: dict[str, Liveness]
     try:
         if source == "-":
@@ -127,6 +133,10 @@ def age_seconds(last_tick: str | None, now: datetime | None = None) -> float | N
 
     A caller gets an age, not a raw timestamp it has to subtract itself -- the gap luthen's W117
     named (nemik:W18).
+
+    Returns:
+        The age in seconds, or None when the stamp is unusable.
+
     """
     return rewake.age_seconds(last_tick, now or datetime.now(UTC))
 
@@ -141,6 +151,10 @@ def should_nudge(
     factored out as a pure function -- it takes no side effect and owns no state file itself;
     the caller decides WHICH rows are nudge candidates (e.g. state in asleep/idle, or
     stale/future/unknown) and where `last_nudged` came from and gets recorded.
+
+    Returns:
+        True when the backoff has elapsed or the repo was never nudged.
+
     """
     return rewake.should_nudge(last_nudged, now or datetime.now(UTC), rewake_s)
 
@@ -157,6 +171,10 @@ def roster(
     nemik:W151: a fired alarm (fired_alarms) whose owner is not awake also puts the owner on the
     roster, waiting on itself, so the same wake/nudge path that wakes a blocker wakes it. An awake
     owner gets W168's send-ready line instead and no row.
+
+    Returns:
+        The roster rows, sleepers with waiters first.
+
     """
     rows: dict[str, WakeRow] = {}
     for a in alarms or []:
@@ -220,6 +238,10 @@ def fired_alarms(
 
     Alarms live on waypoints (mtools:W279), with their anchors (W300) and recurrence (W309/W310);
     nemik.alarm resolves each to its instants. The owner's liveness says who can act on it now.
+
+    Returns:
+        The fired alarms, oldest first; a bad alarm is an error row.
+
     """
     from nemik.adapter import BASE, NEMIK, OSLC_CM
     from nemik.alarm import fires_between
@@ -342,6 +364,10 @@ def due_nudges(
     `seen` is {repo: unix_seconds_last_nudged}, read and written by the caller (nudges_path() by
     default) -- should_nudge() itself owns no state file. Mutates `seen` in place for the repos
     returned, so a caller can write it straight back out.
+
+    Returns:
+        The rows to nudge, with `seen` updated for them.
+
     """
     now = now or datetime.now(UTC)
     due = []
@@ -372,6 +398,10 @@ def alarm_key(a: Alarm) -> str:
     """nemik:W166: a firing's identity, (ref, RECURRENCE-ID, instant), in the nudges state's keys.
 
     Repo names (the state's other keys) never contain '|', so the two cannot collide.
+
+    Returns:
+        The key, `alarm|<ref>|<recurrence id>|<instant>`.
+
     """
     return f"alarm|{a['ref']}|{a['recurrence_id']}|{a['at']}"
 
@@ -384,6 +414,10 @@ def undelivered(
     A firing is delivered once: the same (ref, occurrence, instant) seen again by an overlapping
     window is skipped. Error rows (a bad trigger) have no instant, are never marked, and so stay
     visible every run until the queue is fixed.
+
+    Returns:
+        The alarms not yet delivered, error rows included.
+
     """
     now = now or datetime.now(UTC)
     out: list[Alarm] = []
@@ -423,11 +457,26 @@ def series_lines(series: Series, repos: list[str]) -> list[str]:
     return out
 
 
-def series_report(g: Graph, series_file: Path, max_age: int) -> None:
+def workstreams(g: Graph) -> list[str]:
+    """Name the repos whose workstreams the graph holds.
+
+    Returns:
+        The repo names, sorted.
+
+    """
+    return sorted(
+        {
+            str(n).removeprefix(BASE).partition("/")[0]
+            for n in g.subjects(NEMIK.workstream, None)
+        }
+    )
+
+
+def series_report(repos: list[str], series_file: Path, max_age: int) -> None:
     """Print the series lines, or refuse when the snapshot cannot be trusted (nemik:W1281).
 
     Args:
-        g: The graph whose workstreams are reported.
+        repos: Repos to report beside the series' own; one the series lacks reads 'no sample'.
         series_file: luthen-series.json.
         max_age: The oldest as_of accepted, in seconds.
 
@@ -442,13 +491,17 @@ def series_report(g: Graph, series_file: Path, max_age: int) -> None:
     except (OSError, ValueError, TypeError) as exc:
         sys.stderr.write(f"series: {exc}\n")
         raise SystemExit(1) from exc
-    repos = sorted(
-        {
-            str(n).removeprefix(BASE).partition("/")[0]
-            for n in g.subjects(NEMIK.workstream, None)
-        }
-    )
     sys.stdout.write("\n".join(series_lines(series, repos)) + "\n")
+
+
+def series_path(args: Options) -> Path:
+    """Locate the series snapshot: --series, else luthen-series.json under the root.
+
+    Returns:
+        The snapshot's path.
+
+    """
+    return args.series or args.root / "luthen-series.json"
 
 
 class Options(argparse.Namespace):
@@ -464,6 +517,8 @@ class Options(argparse.Namespace):
     since: str | None
     until: str | None
     series_lines: bool
+    series_only: bool
+    repo: list[str] | None
     series: Path | None
     series_max_age: int
 
@@ -526,7 +581,20 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         default=900,
         help="seconds after which the series snapshot is refused (default 900)",
     )
+    ap.add_argument(
+        "--series-only",
+        action="store_true",
+        help="read the series alone, loading no queue; the repos are its own plus --repo",
+    )
+    ap.add_argument(
+        "--repo",
+        action="append",
+        help="a repo to report even if the series has none (repeat); it reads no sample",
+    )
     args = ap.parse_args(argv, namespace=Options())
+    if args.series_only:
+        series_report(args.repo or [], series_path(args), args.series_max_age)
+        return
     if g is None:
         g = Graph()
         for _, qg, _ in survey(args.root):
@@ -534,7 +602,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
                 g += qg
     if args.series_lines:
         series_report(
-            g, args.series or args.root / "luthen-series.json", args.series_max_age
+            workstreams(g) + (args.repo or []), series_path(args), args.series_max_age
         )
         return
     live, source = read_liveness(args.root, args.liveness)

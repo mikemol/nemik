@@ -101,3 +101,56 @@ def test_a_missing_snapshot_is_refused_the_same_way(
         )
     assert refused.value.code == 1
     assert capsys.readouterr().err.startswith("series: ")
+
+
+def _forbidden(*_args: object) -> object:
+    message = "the series-only mode loaded the queue graph"
+    raise AssertionError(message)
+
+
+def test_series_only_names_the_given_repos_and_loads_no_queue(
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A repo passed with --repo and absent from the series reads no sample; survey never runs."""
+    monkeypatch.setattr("nemik.check.survey", _forbidden)
+    snapshot = tmp_path / "luthen-series.json"
+    repos: dict[str, object] = {"nemik": {"verdict": "ok"}}
+    snapshot.write_text(_text(repos, int(time.time())))
+    argv = ["--series-only", "--series", str(snapshot), "--repo", "github"]
+    main(argv)
+    lines = capsys.readouterr().out.splitlines()
+    assert [ln.split()[:2] for ln in lines] == [["github", "no"], ["nemik", "ok"]]
+    assert lines[0].split()[1:3] == ["no", "sample"]
+
+
+def test_series_only_without_repos_lists_just_the_series(
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """With no --repo the lines are the series' own repos, and the queue is still not loaded."""
+    monkeypatch.setattr("nemik.check.survey", _forbidden)
+    snapshot = tmp_path / "luthen-series.json"
+    repos: dict[str, object] = {"nemik": {"verdict": "ok"}}
+    snapshot.write_text(_text(repos, int(time.time())))
+    main(["--series-only", "--series", str(snapshot)])
+    lines = capsys.readouterr().out.splitlines()
+    assert [ln.split()[:2] for ln in lines] == [["nemik", "ok"]]
+
+
+def test_series_only_refuses_a_stale_snapshot_like_series_lines(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """The max-age refusal is shared: reason on stderr, nothing on stdout, exit 1."""
+    snapshot = tmp_path / "luthen-series.json"
+    repos: dict[str, object] = {"nemik": {"verdict": "ok"}}
+    snapshot.write_text(_text(repos))
+    argv = ["--series-only", "--series", str(snapshot), "--series-max-age", "60"]
+    with pytest.raises(SystemExit) as refused:
+        main(argv)
+    captured = capsys.readouterr()
+    assert refused.value.code == 1
+    assert not captured.out
+    assert "series: as_of is" in captured.err
