@@ -7,6 +7,12 @@ Nothing printed which ratchets are behind, so a session lost them in prose and t
 unsupervised for 13 hours (github-8f, 2026-10-26). This prints one line per behind ratchet and
 exits 1 when any repo is behind, 0 when none is, and 2 when the file cannot be read, so a dark
 sensor is loud as well. Read-only.
+
+nemik:W1284: a pace is a reading at a time. When the command names a repo, the header gives the
+pace's as_of beside the repo's newest landing (the last ref update of its main branch, read from
+the plain-text reflog, so this module needs no git and stays inside the Codon census), and every
+ratchet line is marked PENDING while the pace is older than that landing: a reading that predates
+the work it judges does not classify it (host standing 12).
 """
 
 import sys
@@ -18,6 +24,81 @@ EXPORT_TREE = Path.home() / ".local" / "share" / "luthen" / "nemik-export"
 BEHIND_EXIT = 1
 UNREADABLE_EXIT = 2
 NEVER = 1 << 62  # sorts a ratchet that is not falling after every finite horizon
+REFLOG = ".git/logs/refs/heads/main"  # one line per ref update
+DAY = 86400
+EPOCH_DAYS = 719468  # days from 0000-03-01 to 1970-01-01, the civil-calendar offset
+ERA_DAYS = 146097  # days in a 400-year era
+STAMP_LENGTH = 20  # YYYY-MM-DDTHH:MM:SSZ
+MARCH = 3
+WRAP = 10  # the March-based month index (Jan, Feb) that belongs to the next civil year
+
+
+def epoch_of(stamp: str) -> int:
+    """Read an ISO UTC stamp (`YYYY-MM-DDTHH:MM:SSZ`) as epoch seconds.
+
+    Returns:
+        The epoch seconds, or 0 when the text is not such a stamp.
+
+    """
+    if len(stamp) != STAMP_LENGTH or stamp[10] != "T" or not stamp.endswith("Z"):
+        return 0
+    try:
+        year, month, day = int(stamp[0:4]), int(stamp[5:7]), int(stamp[8:10])
+        hour, minute, second = int(stamp[11:13]), int(stamp[14:16]), int(stamp[17:19])
+    except ValueError:
+        return 0
+    year -= 1 if month < MARCH else 0
+    era = year // 400
+    yoe = year - era * 400
+    doy = (153 * (month + (-3 if month >= MARCH else 9)) + 2) // 5 + day - 1
+    doe = yoe * 365 + yoe // 4 - yoe // 100 + doy
+    days = era * ERA_DAYS + doe - EPOCH_DAYS
+    return days * DAY + hour * 3600 + minute * 60 + second
+
+
+def iso_of(epoch: int) -> str:
+    """Write epoch seconds as an ISO UTC stamp (`YYYY-MM-DDTHH:MM:SSZ`).
+
+    Returns:
+        The stamp.
+
+    """
+    days, rest = divmod(epoch, DAY)
+    z = days + EPOCH_DAYS
+    era = z // ERA_DAYS
+    doe = z - era * ERA_DAYS
+    yoe = (doe - doe // 1460 + doe // 36524 - doe // 146096) // 365
+    doy = doe - (365 * yoe + yoe // 4 - yoe // 100)
+    mp = (5 * doy + 2) // 153
+    day = doy - (153 * mp + 2) // 5 + 1
+    month = mp + (3 if mp < WRAP else -9)
+    year = yoe + era * 400 + (1 if month < MARCH else 0)
+    hour, rest = divmod(rest, 3600)
+    minute, second = divmod(rest, 60)
+    return f"{year:04d}-{month:02d}-{day:02d}T{hour:02d}:{minute:02d}:{second:02d}Z"
+
+
+def newest_landing(repo_dir: Path) -> int:
+    """Read when a repo's main branch last moved, from its plain-text reflog.
+
+    Each reflog line ends `<author> <epoch> <zone><tab><message>`; the last line is the newest
+    ref update, which for a gated repo is its newest landing. No git is run.
+
+    Returns:
+        The epoch seconds, or 0 when the reflog is missing, empty or not in that shape.
+
+    """
+    try:
+        lines = (repo_dir / REFLOG).read_text(encoding="utf-8").splitlines()
+    except OSError:
+        return 0
+    if not lines:
+        return 0
+    words = lines[-1].split("\t")[0].split()
+    try:
+        return int(words[-2])
+    except (IndexError, ValueError):
+        return 0
 
 
 def _reach(extras: dict[str, tuple[int, int]], repo: str, ratchet: str) -> str:
@@ -118,6 +199,20 @@ def behind_files(repo: str) -> list[str]:
     ]
 
 
+def _repo_in(words: list[str]) -> str:
+    """Find the repo a --pace command line names: its first word that is not an option.
+
+    Returns:
+        The repo name, or "" when the line names none (the value after --root is not a repo).
+
+    """
+    skip = words.index("--root") + 1 if "--root" in words else -1
+    for at, word in enumerate(words):
+        if word and not word.startswith("-") and at != skip:
+            return word
+    return ""
+
+
 def pace_exit(words: list[str]) -> int:
     """Answer a command line that asks for --pace, before any survey is built.
 
@@ -126,7 +221,8 @@ def pace_exit(words: list[str]) -> int:
 
     Args:
         words: The command line's arguments (not the program name). Without --root the pace file
-            is read from luthen's export tree, where it is published.
+            is read from luthen's export tree, where it is published. A repo named among them
+            adds the newest-landing header and the PENDING marks (nemik:W1284).
 
     Returns:
         show_pace's exit code when --pace is among the arguments, else -1.
@@ -135,7 +231,10 @@ def pace_exit(words: list[str]) -> int:
     if "--pace" not in words:
         return -1
     at = words.index("--root") + 1 if "--root" in words else 0
-    return show_pace(Path(words[at]) if 0 < at < len(words) else EXPORT_TREE)
+    root = Path(words[at]) if 0 < at < len(words) else EXPORT_TREE
+    repo = _repo_in(words)
+    landed = newest_landing(Path.home() / "github" / repo) if repo else 0
+    return show_pace(root, landed, repo)
 
 
 def pace_process() -> int:
@@ -148,11 +247,30 @@ def pace_process() -> int:
     return pace_exit(sys.argv[1:])
 
 
-def show_pace(root: Path) -> int:
+def _marked(line: str, repo: str) -> str:
+    """Mark a pace line PENDING when it judges `repo`, the repo whose landing postdates the pace.
+
+    A line about another repo is left alone: this repo's landing says nothing about whether the
+    pace of that repo's ratchets is stale. The all-clear line judges the named repo too.
+
+    Returns:
+        The line, with PENDING in front when it is about `repo`.
+
+    """
+    words = line.split()
+    about = words[1] if len(words) > 1 else ""
+    return f"PENDING {line}" if about == repo or line.startswith("no ratchet") else line
+
+
+def show_pace(root: Path, landed: int = 0, repo: str = "") -> int:
     """Print the behind rows of the fleet's pace file and say by the exit code whether any exist.
 
     Args:
         root: The export tree that holds ratchet-pace.json.
+        landed: Epoch seconds of the repo's newest landing, or 0 when none is known. With it the
+            output starts with the pace's as_of beside that landing, and every ratchet line is
+            marked PENDING while the pace is older than the landing.
+        repo: The repo the landing belongs to, for the header.
 
     Returns:
         1 when a ratchet is behind or unknown, 0 when none is, 2 when the file is missing or not a
@@ -163,9 +281,16 @@ def show_pace(root: Path) -> int:
         text = (root / PACE_FILE).read_text(encoding="utf-8")
         lines = pace_lines(text)
         slow = horizon_lines(text)
+        as_of = read_pace(text)[0]
     except (OSError, ValueError) as e:
         sys.stdout.write(f"pace unreadable: {e}\n")
         return UNREADABLE_EXIT
-    shown = lines or ["no ratchet is behind"]
-    sys.stdout.write("\n".join(shown + slow) + "\n")
+    shown = (lines or ["no ratchet is behind"]) + slow
+    if landed:
+        pending = epoch_of(as_of) < landed
+        head = f"pace of {as_of}; newest landing of {repo} {iso_of(landed)}"
+        shown = [head + (": PENDING" if pending else ": current"), *shown]
+        if pending:
+            shown = [shown[0], *[_marked(line, repo) for line in shown[1:]]]
+    sys.stdout.write("\n".join(shown) + "\n")
     return BEHIND_EXIT if lines else 0
