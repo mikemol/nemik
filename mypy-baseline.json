@@ -35,8 +35,8 @@
   "misc": 1
  },
  "src/nemik/history.py": {
-  "misc": 98,
-  "type-arg": 5
+  "misc": 81,
+  "type-arg": 4
  },
  "src/nemik/importer.py": {
   "misc": 11
@@ -264,9 +264,6 @@
  },
  "tests/test_test_inputs.py": {
   "misc": 19
- },
- "tests/test_toil.py": {
-  "misc": 8
  },
  "tests/test_wake_alarms.py": {
   "misc": 4

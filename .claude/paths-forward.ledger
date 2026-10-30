@@ -3480,3 +3480,5 @@
 2026-10-30T20:52:27Z  interrupt W1314 minted    -         "history.variance, shape_drift and the baseline report answer typed rows over the QueueDoc the module already declares, so mypy falls"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1187
 2026-10-30T20:52:29Z  interrupt W1315 minted    -         "history.toil answers a typed ToilRow and its printer reads keys, not Any, so mypy falls"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1187
 2026-10-30T20:54:41Z  status W1314 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T21:13:22Z  status W1314 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T21:14:43Z  status W1315 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

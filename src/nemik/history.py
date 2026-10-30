@@ -2475,7 +2475,7 @@ def _baseline(args: argparse.Namespace, names: list[str], dirs: dict[str, Path])
     return 0
 
 
-def toil(repo: str, ledger: Path) -> list[dict]:
+def toil(repo: str, ledger: Path) -> list[dict[str, object]]:
     """nemik:W314: per ISO week, the repo's ledger activity by effort class and the interrupt share.
 
     Each ledger line is one PROV activity with a start time and an effort class (forecast: a
@@ -2502,7 +2502,7 @@ def toil(repo: str, ledger: Path) -> list[dict]:
         cls = str(g.value(act, NEMIK.effortClass) or "unclassified")
         week = weeks.setdefault(f"{iso.year}-W{iso.week:02d}", {})
         week[cls] = week.get(cls, 0) + 1
-    rows = []
+    rows: list[dict[str, object]] = []
     for label, counts in sorted(weeks.items()):
         planned = counts.get("forecast", 0)
         unplanned = counts.get("interrupt", 0)
@@ -2529,7 +2529,8 @@ def _toil(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> 
     for name, rows in doc.items():
         print(name)
         for row in rows:
-            share = "-" if row["toil_share"] is None else f"{row['toil_share']:.0%}"
+            value = row["toil_share"]
+            share = f"{value:.0%}" if isinstance(value, float) else "-"
             counts = "  ".join(
                 f"{k} {v}" for k, v in row.items() if k not in {"week", "toil_share"}
             )

@@ -31511,17 +31511,17 @@
     {
       "symbol": "W1314",
       "title": "history.variance, shape_drift and the baseline report answer typed rows over the QueueDoc the module already declares, so mypy falls",
-      "status": "working",
+      "status": "ready",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): Variance, ShapeDrift and BaselineReport TypedDicts; variance/shape_drift over QueueDoc; minted_during through str(); test_baseline fixtures typed as QueueDoc; mikemol-pycheck --ratchet: mypy 2449 to 2363 (-86), ruff 1197 flat; baseline written with nothing queued (725 landed df423bc); format check clean after one reformat; 27 tests pass. No census (history stays failing on its first import; stated, not run). Pace 20:25:16Z: all ok, none behind. Gate empty. Loadavg at submit 26.02 34.22 53.50.",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): Variance, ShapeDrift and BaselineReport TypedDicts; variance/shape_drift over QueueDoc; minted_during through str(); test_baseline fixtures typed as QueueDoc; mikemol-pycheck --ratchet: mypy 2449 to 2363 (-86), ruff 1197 flat; baseline written with nothing queued (725 landed df423bc); format check clean after one reformat; 27 tests pass. No census (history stays failing on its first import; stated, not run). Pace 20:25:16Z: all ok, none behind. Gate empty. Loadavg at submit 26.02 34.22 53.50. | 2026-10-30: 2026-10-30 LANDED stack 726 (key 1793393699573769650, submitted 20:54:53Z) as 70d50a5, [PUSHED] first try; origin/main read back 70d50a5ea248edee1ea4b428b351ca96a2811197; subject mine (git log). Card set ready BEFORE this line. Loadavg at the submit 26.02 34.22 53.50, at the verdict 53.91 63.07 63.25. Landed fall: mypy 2449 to 2363 (-86, MEASURED before submit). history.py is free for W1315 (toil rows) and W1313 (WeeklyRow).",
       "issued_at": "2026-10-30T20:52:27Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1187",
-      "last_worked": "2026-10-30T20:54:51Z",
+      "last_worked": "2026-10-30T21:13:31Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -31533,18 +31533,23 @@
     {
       "symbol": "W1315",
       "title": "history.toil answers a typed ToilRow and its printer reads keys, not Any, so mypy falls",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): toil answers list[dict[str, object]], _toil formats the share only when it is a float; mikemol-pycheck --ratchet: mypy 2363 to 2337 (-26), ruff 1197 flat; baseline written with nothing queued (726 landed 70d50a5); format check clean; 24 tests pass. No census (stated, not run). Pace 20:25:16Z: all ok, none behind. Gate empty. Loadavg at submit 42.79 57.17 61.16.",
       "issued_at": "2026-10-30T20:52:29Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1187",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-30T21:14:51Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/history.py",
+        "mypy-baseline.json"
+      ]
     }
   ],
   "residue": [
