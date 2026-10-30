@@ -64,6 +64,10 @@ def parse_claims(text: str) -> dict[tuple[str, str], Holder]:
     """{(repo, tag): Holder} from `mikemol-membudget claims` lines.
 
     Each line reads `claim:label:touch:<repo>:<tag> owner=<pid:start> id=<id> age=<n>s`.
+
+    Returns:
+        The holder of each claimed (repo, tag), with `?` for a missing owner or age.
+
     """
     held: dict[tuple[str, str], Holder] = {}
     for line in text.splitlines():
@@ -80,6 +84,10 @@ def read_claims(membudget: Path | None = None) -> dict[tuple[str, str], Holder] 
     """Read the live work claims, or None when mikemol-membudget cannot be run.
 
     $NEMIK_MEMBUDGET names the binary; otherwise mtools' fence venv is tried.
+
+    Returns:
+        The parsed claims, or None when the binary cannot be run or exits non-zero.
+
     """
     path = membudget or Path(os.environ.get("NEMIK_MEMBUDGET") or DEFAULT_MEMBUDGET)
     try:
@@ -94,7 +102,13 @@ def read_claims(membudget: Path | None = None) -> dict[tuple[str, str], Holder] 
 def row(
     tag: str, refs: list[str], held: dict[tuple[str, str], Holder] | None = None
 ) -> str:
-    """One OVERLAP line, with the claim holder of each ref's repo for this tag appended."""
+    """One OVERLAP line, with the claim holder of each ref's repo for this tag appended.
+
+    Returns:
+        The line `OVERLAP <tag>: <refs>`, followed by the holders in brackets when
+        any repo holds a claim.
+
+    """
     line = f"OVERLAP {tag}: {','.join(refs)}"
     owners = [
         f"{repo} held by {h.owner} ({h.age})"

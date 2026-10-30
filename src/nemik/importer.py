@@ -42,7 +42,13 @@ def _read(fmt: str, path: Path) -> list[Task]:
 def commands(
     tasks: list[Task], fmt: str, source: str, state: Path, writer: str
 ) -> list[list[str]]:
-    """List the writer's argv lists that add `tasks` to the queue at `state`, then link them."""
+    """List the writer's argv lists that add `tasks` to the queue at `state`, then link them.
+
+    Returns:
+        The writer's --add argv lists for tasks not yet in the queue, then the
+        --update lists that mark them done or blocked.
+
+    """
     queue = json.loads(state.read_text(encoding="utf-8"))
     cards = queue.get("waypoints", [])
     existing = {
@@ -89,7 +95,12 @@ def commands(
 
 
 def main(argv: list[str] | None = None) -> int:
-    """nemik-import: print the commands that bring another tool's tasks into a queue."""
+    """nemik-import: print the commands that bring another tool's tasks into a queue.
+
+    Returns:
+        0, after printing one shell-quoted command per line.
+
+    """
     ap = argparse.ArgumentParser(
         prog="nemik-import", description=(main.__doc__ or "").splitlines()[0]
     )

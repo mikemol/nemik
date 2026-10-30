@@ -124,7 +124,6 @@
   "S603": 1
  },
  "src/nemik/importer.py": {
-  "DOC201": 2,
   "PLC0415": 2,
   "T201": 1
  },
@@ -161,7 +160,6 @@
   "S405": 1
  },
  "src/nemik/overlaps.py": {
-  "DOC201": 3,
   "FBT001": 1,
   "FBT002": 1,
   "PLC0415": 2,
@@ -171,7 +169,6 @@
   "T201": 2
  },
  "src/nemik/pacing.py": {
-  "DOC201": 3,
   "PLC0415": 1,
   "T201": 2
  },
@@ -245,7 +242,7 @@
  },
  "src/nemik/staticserve.py": {
   "C901": 1,
-  "DOC201": 5,
+  "DOC201": 1,
   "PLW0717": 1
  },
  "src/nemik/vtodo.py": {

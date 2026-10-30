@@ -33,13 +33,23 @@ METRICS_TYPE = "text/plain; version=0.0.4"
 
 
 def snapshot(root: Path) -> Path:
-    """Pick the directory to serve: ROOT/current when a publisher flips that link, else ROOT."""
+    """Pick the directory to serve: ROOT/current when a publisher flips that link, else ROOT.
+
+    Returns:
+        ROOT/current when that is a directory, else ROOT.
+
+    """
     live = root / "current"
     return live if live.is_dir() else root
 
 
 def resolve(base: Path, target: str) -> Path | None:
-    """Find the file a URL path names under `base`, or None when it names nothing or escapes it."""
+    """Find the file a URL path names under `base`, or None when it names nothing or escapes it.
+
+    Returns:
+        The resolved file, or None when the path names nothing, escapes `base` or is not a file.
+
+    """
     parts = [p for p in unquote(urlsplit(target).path).split("/") if p]
     if any(p in {".", ".."} or "\\" in p or "\x00" in p for p in parts):
         return None
@@ -89,7 +99,12 @@ class Hashes:
 
 
 def etag(base: Path, real: Path, table: dict[str, str]) -> str:
-    """Give a file's validator: its sha256 when hashes.json lists it, else size and mtime."""
+    """Give a file's validator: its sha256 when hashes.json lists it, else size and mtime.
+
+    Returns:
+        A quoted sha256 when `table` lists the file, else a weak validator of its mtime and size.
+
+    """
     rel = real.relative_to(base.resolve()).as_posix()
     if digest := table.get(rel):
         return f'"{digest}"'
@@ -98,7 +113,12 @@ def etag(base: Path, real: Path, table: dict[str, str]) -> str:
 
 
 def matches(header: str | None, tag: str) -> bool:
-    """Whether an If-None-Match header covers `tag`."""
+    """Whether an If-None-Match header covers `tag`.
+
+    Returns:
+        True when the header lists `tag` (strong or weak form) or `*`; False for an absent header.
+
+    """
     if not header:
         return False
     wanted = [t.strip() for t in header.split(",")]

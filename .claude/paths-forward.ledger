@@ -3430,3 +3430,6 @@
 2026-10-30T13:34:31Z  status W1296 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-30T13:44:31Z  interrupt W1297 minted    -         "171 more tests in 69 files get a docstring taken from their sentence names, so ruff falls 1458 to 1287 and the owed fall of 49 is paid"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1288
 2026-10-30T13:45:17Z  status W1297 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T13:52:25Z  status W1297 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T14:04:47Z  interrupt W1298 minted    -         "12 functions in pacing, overlaps, importer and staticserve get a Returns section written from their bodies, so ruff falls 1287 to 1275"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1279
+2026-10-30T14:05:23Z  status W1298 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

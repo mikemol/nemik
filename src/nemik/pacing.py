@@ -35,7 +35,13 @@ class Pace(NamedTuple):
 
 
 def limits(text: str | None = None) -> tuple[float, float, int]:
-    """Read the declared (rate per day, burst, window days); 50, 150, 14 if the table is absent."""
+    """Read the declared (rate per day, burst, window days); 50, 150, 14 if the table is absent.
+
+    Returns:
+        The declared (rate per day, burst, window days), or (50, 150, 14) for any
+        key the table lacks.
+
+    """
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
     t: dict[str, float] = tomllib.loads(text).get("pacing", {})
@@ -49,7 +55,13 @@ def limits(text: str | None = None) -> tuple[float, float, int]:
 def bucket(
     stamps: list[datetime], rate: float, burst: float, start: datetime, now: datetime
 ) -> tuple[float, float]:
-    """(overdraft, level now) for arrivals `stamps` from `start` to `now`."""
+    """(overdraft, level now) for arrivals `stamps` from `start` to `now`.
+
+    Returns:
+        The overdraft (how far below zero the bucket went, 0 when it never did)
+        and the level now, each rounded to one decimal.
+
+    """
     level, worst, at = burst, 0.0, start
     for t in sorted(s for s in stamps if start <= s <= now):
         level = min(burst, level + rate * (t - at).total_seconds() / 86400)
@@ -61,7 +73,12 @@ def bucket(
 
 
 def paces(g: Graph, now: datetime, rate: float, burst: float, days: int) -> list[Pace]:
-    """Every repo's pace over the last `days` days, the most over first."""
+    """Every repo's pace over the last `days` days, the most over first.
+
+    Returns:
+        One Pace per repo that has a created card, sorted by overdraft descending, then repo.
+
+    """
     start = now - timedelta(days=days)
     stamps: dict[str, list[datetime]] = {}
     for node, _, stamp in g.triples((None, DCTERMS.created, None)):
