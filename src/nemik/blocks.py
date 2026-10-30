@@ -626,7 +626,28 @@ def sudo_shaped_asks(g: Graph) -> list[tuple[str, str]]:
     return out
 
 
-def operator_asks(g: Graph) -> list[dict[str, Any]]:
+class AskRow(TypedDict, total=False):
+    """One open waypoint waiting on the operator, as `operator_asks` and `with_salience` give it."""
+
+    ref: str
+    title: str
+    ask: str
+    apply_loop_cannot: bool
+    sudo_shaped: bool
+    category: str
+    ticks_blocked: int
+    last_activity: str
+    waiting: list[str]
+    dtstart: str
+    due: str
+    alarms: list[str]
+    rrule: str
+    exdates: list[str]
+    same_ask: list[str]
+    salience: float
+
+
+def operator_asks(g: Graph) -> list[AskRow]:
     """Every open waypoint waiting on the operator, categorised, with duplicate asks grouped.
 
     nemik:W412: answered once per graph inside a build (health asks it once per repo); each caller
@@ -643,10 +664,10 @@ def operator_asks(g: Graph) -> list[dict[str, Any]]:
         return _operator_asks(g)
     if ix.operator_asks is None:
         ix.operator_asks = _operator_asks(g)
-    return [dict(row) for row in ix.operator_asks]
+    return [row.copy() for row in ix.operator_asks]
 
 
-def _operator_asks(g: Graph) -> list[dict[str, Any]]:
+def _operator_asks(g: Graph) -> list[AskRow]:
     from nemik.adapter import OPERATOR
 
     last: dict[Node, str] = {}
@@ -654,7 +675,8 @@ def _operator_asks(g: Graph) -> list[dict[str, Any]]:
         stamp = str(g.value(act, PROV.startedAtTime) or "")
         for wp in g.objects(act, PROV.used):
             last[wp] = max(last.get(wp, ""), stamp)
-    out: list[dict[str, Any]] = []
+    out: list[AskRow] = []
+    keys: dict[str, str] = {}
     # On the operator: resolved to them, or declared blocked_kind human (e.g. "event: ...", "a
     # GREEN tree - operator RULED ...", which name a condition but were filed against the human).
     human = set(g.subjects(NEMIK.waitsFor, OPERATOR)) | {
@@ -688,6 +710,7 @@ def _operator_asks(g: Graph) -> list[dict[str, Any]]:
             cat = "errand"
         # nemik:W1264: the card says why the root apply loop could not carry it (nemik:W1263)
         excused = (node, NEMIK.applyLoopCannot, None) in g
+        keys[ref(node)] = _ask_key(text) if cat == "needs-you" else ""
         out.append(
             {
                 "ref": ref(node),
@@ -698,7 +721,6 @@ def _operator_asks(g: Graph) -> list[dict[str, Any]]:
                 "category": cat,
                 "ticks_blocked": int(str(g.value(node, NEMIK.ticksBlocked) or 0)),
                 "last_activity": last.get(node, ""),
-                "key": _ask_key(text) if cat == "needs-you" else "",
                 "waiting": sorted(ref(w) for w in waiting_behind(g, node)),
                 "dtstart": str(g.value(node, NEMIK.dtstart) or ""),
                 "due": str(g.value(node, NEMIK.due) or ""),
@@ -709,33 +731,36 @@ def _operator_asks(g: Graph) -> list[dict[str, Any]]:
         )
     groups: dict[str, set[str]] = {}
     for a in out:
-        if a["key"]:
-            groups.setdefault(a["key"], set()).add(a["ref"])
+        if keys[a["ref"]]:
+            groups.setdefault(keys[a["ref"]], set()).add(a["ref"])
     by_ref = {a["ref"]: a for a in out}
+    same_of: dict[str, set[str]] = {}
+    named_by: dict[str, set[str]] = {}
     for a in out:
-        same = set(groups.get(a.pop("key"), ())) - {a["ref"]}
+        same = set(groups.get(keys[a["ref"]], ())) - {a["ref"]}
         # an ask that names another blocked waypoint ("... for linux-sources W24 ...") is that ask
         for m in re.finditer(r"([\w.-]+)[: ]W(\d+)\b", a["ask"]):
             other = f"{m[1]}:W{m[2]}"
             if m[1] in repos and other in by_ref and other != a["ref"]:
                 same.add(other)
-                by_ref[other].setdefault("_named_by", set()).add(a["ref"])
-        a["same_ask"] = same
-    for a in out:
-        a["same_ask"] = sorted(a["same_ask"] | a.pop("_named_by", set()))
+                named_by.setdefault(other, set()).add(a["ref"])
+        same_of[a["ref"]] = same
+    same_ask = {r: sorted(s | named_by.get(r, set())) for r, s in same_of.items()}
     # close each group over itself, so every member lists every other
     for a in out:
-        members = {a["ref"], *a["same_ask"]}
+        members = {a["ref"], *same_ask[a["ref"]]}
         for r in list(members):
-            members |= set(by_ref[r]["same_ask"])
-        a["same_ask"] = sorted(members - {a["ref"]})
+            members |= set(same_ask[r])
+        same_ask[a["ref"]] = sorted(members - {a["ref"]})
+    for a in out:
+        a["same_ask"] = same_ask[a["ref"]]
     order = {c: i for i, c in enumerate(CATEGORIES)}
     return sorted(
         out, key=lambda a: (order[a["category"]], -a["ticks_blocked"], a["ref"])
     )
 
 
-def with_salience(g: Graph, asks: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def with_salience(g: Graph, asks: list[AskRow]) -> list[AskRow]:
     """nemik:W298: how much demand waits behind each operator ask.
 
     The operator ruled (2026-10-10) that the waiting-on-operator machinery must carry the salience

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1311,
+  "counter": 1312,
   "waypoints": [
     {
       "symbol": "W1",
@@ -31449,23 +31449,46 @@
     {
       "symbol": "W1311",
       "title": "calwrite, staticserve and pacing read a typed Namespace and pacing reads its TOML through nemik.tomlview, so mypy falls 2755 to 2746",
-      "status": "working",
+      "status": "ready",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): typed Options in calwrite, staticserve, pacing; pacing.limits through tomlview; mikemol-pycheck --ratchet: mypy 2755 to 2746 (-9), ruff 1197 flat; baseline written with nothing queued (723 landed d908726); repo-config format check clean after one reformat; 41 tests pass. No census (modules stay failing on their first import; stated, not run). Pace 19:25:16Z PENDING: all ok, none behind. Gate empty. Loadavg at submit 28.97 28.23 33.76.",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): typed Options in calwrite, staticserve, pacing; pacing.limits through tomlview; mikemol-pycheck --ratchet: mypy 2755 to 2746 (-9), ruff 1197 flat; baseline written with nothing queued (723 landed d908726); repo-config format check clean after one reformat; 41 tests pass. No census (modules stay failing on their first import; stated, not run). Pace 19:25:16Z PENDING: all ok, none behind. Gate empty. Loadavg at submit 28.97 28.23 33.76. | 2026-10-30: 2026-10-30 LANDED stack 724 (key 1793389939442074511, submitted 19:52:13Z) as 607ed58, [PUSHED] first try; origin/main read back 607ed582a3e89be9184651594ca579767fda4f4a; subject mine (git log). Card set ready BEFORE this line. Loadavg at the submit 28.97 28.23 33.76, at the verdict 48.62 60.71 60.91. Landed fall: mypy 2755 to 2746 (-9, MEASURED before submit).",
       "issued_at": "2026-10-30T19:51:15Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1187",
-      "last_worked": "2026-10-30T19:52:11Z",
+      "last_worked": "2026-10-30T20:16:14Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "src/nemik/calwrite.py",
         "src/nemik/staticserve.py",
         "src/nemik/pacing.py",
+        "mypy-baseline.json"
+      ]
+    },
+    {
+      "symbol": "W1312",
+      "title": "operator_asks answers a typed AskRow, so its nine consumers and their tests read keys, not Any, and mypy falls 2746 to 2449",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): AskRow TypedDict (total=False) in blocks.py; _operator_asks keeps key, named-by and same_ask in side dicts (final same_ask lists unchanged by the order-preserving closure; EXPECTED, 66 tests pass incl. umbrella_block and operator_salience); consumers health, index, vtodo, serve, blocks_cli typed; 8 tests typed (4 with TYPE_CHECKING imports); mikemol-pycheck --ratchet: mypy 2746 to 2449 (-297), ruff 1197 flat; baseline written with nothing queued (724 landed 607ed58); format check clean after one reformat; no census (modules stay failing on their first import; stated, not run). Pace of 20:25:16Z is CURRENT for landing 20:15:13Z: codon 142, ruff 1197, mypy 2746 all ok, none behind. Gate empty. Loadavg at submit 38.81 43.51 50.47.",
+      "issued_at": "2026-10-30T20:30:03Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W1187",
+      "last_worked": "2026-10-30T20:30:52Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/blocks.py",
+        "src/nemik/vtodo.py",
+        "src/nemik/serve.py",
         "mypy-baseline.json"
       ]
     }

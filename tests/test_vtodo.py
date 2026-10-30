@@ -4,9 +4,10 @@
 
 from pathlib import Path
 
+from nemik.blocks import AskRow
 from nemik.vtodo import calendar, stated_ask, vtodos
 
-ASKS: list[dict] = [
+ASKS: list[AskRow] = [
     {
         "ref": "life:W21",
         "title": "Resume, approve",
@@ -136,7 +137,7 @@ def test_dtstart_and_due_pass_through_as_rfc5545_properties() -> None:
         == "DTSTART;TZID=America/Detroit:20261001T163000"
     )
     assert time_property("DUE", "") == ""
-    ask = {**ASKS[0], "due": "TZID=America/Detroit:20261001T163000"}
+    ask: AskRow = {**ASKS[0], "due": "TZID=America/Detroit:20261001T163000"}
     (todo,) = vtodos([ask], {"life"})
     assert "DUE;TZID=America/Detroit:20261001T163000" in todo
 
@@ -145,7 +146,7 @@ def test_grouped_adds_a_parent_per_repo_and_keeps_children_as_they_are() -> None
     """nemik:W163: one parent VTODO per repo; asks keep their UID and gain RELATED-TO PARENT."""
     from nemik.vtodo import grouped
 
-    asks = [
+    asks: list[AskRow] = [
         {**ASKS[0]},
         {**ASKS[2]},
         {**ASKS[2], "ref": "aeternum:W49", "due": "20261005"},

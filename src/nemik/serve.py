@@ -143,6 +143,8 @@ def check_report(name: str, graph: Graph, root: Path) -> str | None:
 if TYPE_CHECKING:
     from collections.abc import Callable
 
+    from nemik.blocks import AskRow
+
 VENDOR = {"cytoscape.min.js", "dagre.min.js", "cytoscape-dagre.js"}
 # nemik:W801: the page's own files beside index.html (nemik:W799 splits it by concern): the
 # stylesheet and the script modules, each served at its name and copied by the static build when
@@ -1075,7 +1077,7 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
     }
 
 
-def ruler_table(edges: list[dict], asks: list[dict]) -> dict[str, list[str]]:
+def ruler_table(edges: list[dict], asks: list[AskRow]) -> dict[str, list[str]]:
     """nemik:W418: the ruler-sequence patterns the page draws, from mtools' generator (mtools:W1048).
 
     `motif[k]` is the order-k motif (one per halo scope, orders 0..3). `f[n]` is F(n), the pattern

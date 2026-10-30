@@ -3472,3 +3472,6 @@
 2026-10-30T19:46:55Z  status W1310 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-30T19:51:15Z  interrupt W1311 minted    -         "calwrite, staticserve and pacing read a typed Namespace and pacing reads its TOML through nemik.tomlview, so mypy falls 2755 to 2746"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1187
 2026-10-30T19:51:59Z  status W1311 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T20:16:05Z  status W1311 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T20:30:03Z  interrupt W1312 minted    -         "operator_asks answers a typed AskRow, so its nine consumers and their tests read keys, not Any, and mypy falls 2746 to 2449"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1187
+2026-10-30T20:30:34Z  status W1312 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

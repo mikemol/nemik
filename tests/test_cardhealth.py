@@ -2,9 +2,14 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W977: cardhealth's verdict agrees with nemik.health.health_cards on a table of repos."""
 
+from typing import TYPE_CHECKING
+
 from nemik.cardhealth import STATUSES, share_of, verdict
 from nemik.cards import Card
 from nemik.health import health_cards
+
+if TYPE_CHECKING:
+    from nemik.blocks import AskRow
 
 LIMITS = {
     "blocked_share": (0.4, 0.7),
@@ -54,7 +59,7 @@ def test_the_verdict_agrees_with_health_cards_on_a_table() -> None:
     ]
     for cards, owed in table:
         by_cite = {c.cite: c for c in cards}
-        asks = [{"category": "needs-you", "ref": "alpha:W9"}] * owed
+        asks: list[AskRow] = [{"category": "needs-you", "ref": "alpha:W9"}] * owed
         ref = health_cards(by_cite, asks, "alpha", LIMITS)
         assert judged(cards, owed) == (
             ref.status,

@@ -212,7 +212,7 @@ def operator_main(argv: list[str] | None = None, g: Graph | None = None) -> None
     for cat in CATEGORIES:
         declared = TIERS
         # nemik:W600: grouped by the repo's burn-down tier, heaviest first inside a tier.
-        rows = [asks[i] for i in tiers.order(asks, cat, declared)]
+        rows = [asks[i] for i in tiers.order([dict(a) for a in asks], cat, declared)]
         # nemik:W458: an act ask with nothing to run is the owner's debt, not the operator's.
         label = {
             "no-command": "no command yet: the owner owes a tool",

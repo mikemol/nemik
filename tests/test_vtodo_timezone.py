@@ -2,12 +2,11 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W528: a TZID in the output is defined by a VTIMEZONE (RFC 5545 3.2.19)."""
 
-from typing import Any
-
+from nemik.blocks import AskRow
 from nemik.vtodo import calendar, timezones, vtodos
 
 ZONE = "America/New_York"
-ASK: dict[str, Any] = {
+ASK: AskRow = {
     "ref": "life:W21",
     "title": "Resume, approve",
     "category": "needs-you",
@@ -30,7 +29,9 @@ def test_a_tzid_gets_its_vtimezone_before_the_todos() -> None:
 
 def test_no_tzid_means_no_vtimezone() -> None:
     """A feed with only UTC and date values defines no zone."""
-    plain = {k: v for k, v in ASK.items() if k not in {"dtstart", "due"}}
+    plain = ASK.copy()
+    plain.pop("dtstart")
+    plain.pop("due")
     assert "VTIMEZONE" not in calendar(vtodos([plain], {"life"}))
 
 

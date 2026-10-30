@@ -26,6 +26,7 @@ if TYPE_CHECKING:
     from rdflib import Graph
     from rdflib.term import Node
 
+    from nemik.blocks import AskRow
     from nemik.cards import Card
 
 
@@ -37,7 +38,7 @@ class Index:
     enables: dict[Node, set[Node]] = field(default_factory=dict)
     waited_by: dict[Node, set[Node]] = field(default_factory=dict)
     # a whole-graph answer asked more than once per build (once per repo's health)
-    operator_asks: list[dict[str, object]] | None = None
+    operator_asks: list[AskRow] | None = None
     # nemik:W518: every card as plain data, read from the graph once (health and critical asked
     # for it
     # 31 times in one build, 10 s of a warm publish)

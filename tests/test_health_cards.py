@@ -2,8 +2,13 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W454: repo health computed from plain Cards and ask rows alone, no graph."""
 
+from typing import TYPE_CHECKING
+
 from nemik.cards import Card
 from nemik.health import health_cards
+
+if TYPE_CHECKING:
+    from nemik.blocks import AskRow
 
 
 def test_signals_from_cards_alone() -> None:
@@ -13,7 +18,7 @@ def test_signals_from_cards_alone() -> None:
         "r:W3": Card("r:W3", "done", "", (), ()),
         "s:W1": Card("s:W1", "blocked", "", (), (), ticks_blocked=99),
     }
-    asks = [
+    asks: list[AskRow] = [
         {"category": "needs-you", "ref": "r:W1"},
         {"category": "fyi", "ref": "r:W2"},
         {"category": "needs-you", "ref": "s:W1"},

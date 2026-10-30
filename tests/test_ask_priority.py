@@ -4,9 +4,12 @@
 
 from __future__ import annotations
 
-from typing import Any
+from typing import TYPE_CHECKING
 
 from nemik.vtodo import priority, vtodos
+
+if TYPE_CHECKING:
+    from nemik.blocks import AskRow
 
 STEPS = '[ask_priority]\n"40" = 1\n"15" = 3\n"5" = 5\n"0.01" = 7\n'
 
@@ -23,8 +26,8 @@ def test_the_packaged_steps_are_declared() -> None:
     assert priority(0.0) == 9
 
 
-def _ask(ref: str, salience: float | None) -> dict[str, Any]:
-    ask: dict[str, Any] = {
+def _ask(ref: str, salience: float | None) -> AskRow:
+    ask: AskRow = {
         "ref": ref,
         "title": "t",
         "ask": "operator: decide it",

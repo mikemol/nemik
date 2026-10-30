@@ -3,10 +3,14 @@
 """nemik:W418: graph.json ships the ruler patterns from mtools' generator, enough for every line."""
 
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from mikemol.rulerseq import morse_motif
 
 from nemik.serve import Model, ruler_table
+
+if TYPE_CHECKING:
+    from nemik.blocks import AskRow
 
 
 def test_the_table_is_mtools_generator_and_decodes_by_length() -> None:
@@ -14,7 +18,7 @@ def test_the_table_is_mtools_generator_and_decodes_by_length() -> None:
     edges = [{"source": f"s{i}", "target": "t", "kind": "waits"} for i in range(5)] + [
         {"source": "x", "target": "t", "kind": "enables"}
     ]
-    asks = [{"category": "needs-you", "ref": "r:W1"}] * 7
+    asks: list[AskRow] = [{"category": "needs-you", "ref": "r:W1"}] * 7
     table = ruler_table(edges, asks)
     assert table["motif"] == [morse_motif(k) for k in range(4)]
     assert len(table["f"]) == 8  # the 7 asks in one chip outnumber the 5 lines into t

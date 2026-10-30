@@ -4,11 +4,8 @@
  },
  "src/nemik/blocks.py": {
   "call-overload": 1,
-  "explicit-any": 5,
-  "misc": 100
- },
- "src/nemik/blocks_cli.py": {
-  "misc": 15
+  "explicit-any": 1,
+  "misc": 20
  },
  "src/nemik/cachestore.py": {
   "misc": 4
@@ -21,7 +18,7 @@
  },
  "src/nemik/check.py": {
   "call-overload": 2,
-  "misc": 31,
+  "misc": 23,
   "type-arg": 1
  },
  "src/nemik/churn.py": {
@@ -35,8 +32,7 @@
   "misc": 8
  },
  "src/nemik/health.py": {
-  "explicit-any": 1,
-  "misc": 8
+  "misc": 1
  },
  "src/nemik/history.py": {
   "misc": 161,
@@ -57,7 +53,7 @@
   "no-untyped-def": 1
  },
  "src/nemik/metrics.py": {
-  "misc": 18
+  "misc": 10
  },
  "src/nemik/pacing.py": {
   "misc": 4
@@ -81,7 +77,7 @@
  },
  "src/nemik/serve.py": {
   "explicit-any": 5,
-  "misc": 294,
+  "misc": 266,
   "operator": 1,
   "type-arg": 8
  },
@@ -99,11 +95,11 @@
   "misc": 2
  },
  "src/nemik/vtodo.py": {
-  "misc": 59,
-  "type-arg": 2
+  "misc": 10,
+  "type-arg": 1
  },
  "src/nemik/wake.py": {
-  "misc": 15
+  "misc": 5
  },
  "src/nemik/withheld.py": {
   "explicit-any": 1,
@@ -123,19 +119,12 @@
  "tests/fixtures/make_fleet.py": {
   "misc": 30
  },
- "tests/test_alarm.py": {
-  "misc": 2
- },
  "tests/test_apischema.py": {
   "misc": 16,
   "type-arg": 2
  },
  "tests/test_apply_witness.py": {
   "misc": 20
- },
- "tests/test_ask_priority.py": {
-  "explicit-any": 2,
-  "misc": 12
  },
  "tests/test_baseline.py": {
   "misc": 20
@@ -218,9 +207,6 @@
   "misc": 15,
   "type-arg": 1
  },
- "tests/test_operator_salience.py": {
-  "misc": 9
- },
  "tests/test_pieces.py": {
   "misc": 11
  },
@@ -284,17 +270,6 @@
  },
  "tests/test_toil.py": {
   "misc": 8
- },
- "tests/test_umbrella_block.py": {
-  "misc": 5
- },
- "tests/test_vtodo.py": {
-  "misc": 42,
-  "type-arg": 1
- },
- "tests/test_vtodo_timezone.py": {
-  "explicit-any": 1,
-  "misc": 12
  },
  "tests/test_wake_alarms.py": {
   "misc": 4

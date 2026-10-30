@@ -4,9 +4,13 @@
 
 from datetime import UTC, datetime
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.alarm import duration, fires_at
 from nemik.vtodo import vtodos
+
+if TYPE_CHECKING:
+    from nemik.blocks import AskRow
 
 
 def test_duration_reads_every_rfc5545_part() -> None:
@@ -39,7 +43,7 @@ def test_relative_triggers_count_from_their_anchor() -> None:
 
 def test_vtodo_carries_each_alarm_as_a_display_valarm() -> None:
     """Vtodo carries each alarm as a display valarm."""
-    ask = {
+    ask: AskRow = {
         "ref": "life:W9",
         "title": "cpr",
         "category": "needs-you",
@@ -58,7 +62,7 @@ def test_vtodo_carries_each_alarm_as_a_display_valarm() -> None:
 
 def test_vtodo_carries_recurrence_as_stored() -> None:
     """mtools:W309: RRULE verbatim, each EXDATE in its stored value form."""
-    ask = {
+    ask: AskRow = {
         "ref": "life:W30",
         "title": "drill",
         "category": "needs-you",

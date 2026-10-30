@@ -13,13 +13,15 @@ from __future__ import annotations
 
 import tomllib
 from importlib.resources import files
-from typing import TYPE_CHECKING, Any, NamedTuple
+from typing import TYPE_CHECKING, NamedTuple
 
 from nemik.blocks import operator_asks
 from nemik.cards import Card, cards
 
 if TYPE_CHECKING:
     from rdflib import Graph
+
+    from nemik.blocks import AskRow
 
 STATUSES = ("green", "amber", "red")
 SIGNALS = ("blocked_share", "oldest_block_ticks", "asks_owed")
@@ -60,7 +62,7 @@ def health(g: Graph, repo: str, limits: dict[str, tuple[float, float]]) -> Healt
 
 def health_cards(
     by_cite: dict[str, Card],
-    asks: list[dict[str, Any]],
+    asks: list[AskRow],
     repo: str,
     limits: dict[str, tuple[float, float]],
 ) -> Health:

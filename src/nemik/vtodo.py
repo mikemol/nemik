@@ -23,11 +23,15 @@ import operator
 import re
 import tomllib
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from mikemol.pathsforward.ics import escape, serialize
 from mikemol.pathsforward.vtimezone import vtimezone
 
 from nemik.blocks import EXPLICIT
+
+if TYPE_CHECKING:
+    from nemik.blocks import AskRow
 
 PRODID = "-//nemik//operator asks//EN"
 DEFAULT_OPT_IN = Path.home() / ".config" / "nemik" / "ics.toml"
@@ -164,7 +168,7 @@ def priority(salience: float, text: str | None = None) -> int:
     return 9
 
 
-def vtodos(asks: list[dict], repos: set[str], link: str = "") -> list[list[str]]:
+def vtodos(asks: list[AskRow], repos: set[str], link: str = "") -> list[list[str]]:
     """One VTODO (as property lines) per needs-you ask from an opted-in repo, in ref order.
 
     Returns:
@@ -197,8 +201,11 @@ def vtodos(asks: list[dict], repos: set[str], link: str = "") -> list[list[str]]
         # The waypoints this ask releases, as RFC 5545 relations (RELTYPE=CHILD: they follow it).
         lines += [
             prop
-            for name, key in (("DTSTART", "dtstart"), ("DUE", "due"))
-            if (prop := time_property(name, a.get(key, "")))
+            for name, value in (
+                ("DTSTART", a.get("dtstart", "")),
+                ("DUE", a.get("due", "")),
+            )
+            if (prop := time_property(name, value))
         ]
         # mtools:W309: recurrence rides along as stored (nemik:W145 expands it for firing).
         if a.get("rrule"):
@@ -371,7 +378,10 @@ def tasks_main(argv: list[str] | None = None) -> None:
         help="the nemik-akonadi-tasks binary",
     )
     ap.add_argument(
-        "--list", dest="tasks_list", required=True, help="the Google Tasks list, by name"
+        "--list",
+        dest="tasks_list",
+        required=True,
+        help="the Google Tasks list, by name",
     )
     ap.add_argument(
         "--create-list",

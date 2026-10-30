@@ -8,11 +8,12 @@ from pathlib import Path
 from icalendar import Calendar
 
 from nemik.adapter import queue_graph
+from nemik.blocks import AskRow
 from nemik.calwrite import feed
 from nemik.vtodo import calendar, vtodos
 
 TITLE = "trip; to, the lake \\ " + "x" * 120
-ASK: dict[str, object] = {
+ASK: AskRow = {
     "ref": "life:W21",
     "title": "Resume, approve",
     "category": "needs-you",
@@ -68,7 +69,7 @@ def test_the_calendar_feed_parses_and_keeps_the_title_whole(tmp_path: Path) -> N
 
 def test_the_needs_you_calendar_parses_with_its_summary_unescaped() -> None:
     """The VTODO projection is valid iCalendar and its comma comes back as a comma."""
-    asks: list[dict[str, object]] = [ASK]
+    asks: list[AskRow] = [ASK]
     parsed = Calendar.from_ical(calendar(vtodos(asks, {"life"})))
     (todo,) = list(parsed.walk("VTODO"))
     assert "approve notes/resume.md as-is, or say what to change" in str(
