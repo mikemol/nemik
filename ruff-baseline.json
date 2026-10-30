@@ -54,7 +54,6 @@
   "T201": 8
  },
  "src/nemik/calwrite.py": {
-  "DOC201": 9,
   "FBT001": 2,
   "PLR0913": 1,
   "PLR0917": 1,
@@ -287,9 +286,6 @@
   "S404": 1,
   "S603": 1,
   "T201": 10
- },
- "src/nemik/withheld.py": {
-  "DOC201": 1
  },
  "src/nemik/witnesses.py": {
   "DOC201": 13,

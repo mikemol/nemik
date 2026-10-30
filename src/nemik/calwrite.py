@@ -57,7 +57,12 @@ def _is_date(value: str) -> bool:
 
 
 def _zone(value: str) -> str:
-    """Name what must match for two time values to be compared: a TZID, UTC, or neither."""
+    """Name what must match for two time values to be compared: a TZID, UTC, or neither.
+
+    Returns:
+        The zone marker: the TZID= part, "Z" for UTC, or "" for neither.
+
+    """
     if value.startswith("TZID="):
         return value.partition(":")[0]
     return "Z" if value.endswith("Z") else ""
@@ -68,7 +73,12 @@ def _digits(value: str) -> str:
 
 
 def _next_day(value: str) -> str:
-    """Add a day to a DATE value (YYYYMMDD): an all-day event's end is exclusive."""
+    """Add a day to a DATE value (YYYYMMDD): an all-day event's end is exclusive.
+
+    Returns:
+        The next day as YYYYMMDD.
+
+    """
     d = date.fromisoformat(f"{value[:4]}-{value[4:6]}-{value[6:]}") + timedelta(days=1)
     return d.strftime("%Y%m%d")
 
@@ -81,6 +91,10 @@ def event_times(dtstart: str, due: str, needs_end: bool) -> tuple[str, str]:
     alarm is relative to the END and the event would otherwise have none, since such a trigger has
     nothing to count from. Mixed kinds (a DATE with a date-time, or two zones) get no end rather
     than a wrong one.
+
+    Returns:
+        The start, and the end ("" when the event has none).
+
     """
     start = dtstart or due
     end = ""
@@ -128,6 +142,10 @@ def event_lines(
 
     A card with a `location` (mtools:W1687) carries it as the event's LOCATION, escaped as TEXT
     (nemik:W722); one without writes no LOCATION line.
+
+    Returns:
+        The VEVENT's property lines, BEGIN:VEVENT through END:VEVENT.
+
     """
     triggers = sorted(alarms)
     start, end = event_times(
@@ -164,6 +182,10 @@ def routed_elsewhere(g: Graph, n: Node, label: str | None) -> bool:
     The tag is a route, not a filter: the named calendar takes the waypoint (when its own `mirror`
     lists the repo, as ever), every other calendar leaves it out, so a mirror that wrote it earlier
     drops it on the next run. `label` None means the caller names no calendar: tags are not read.
+
+    Returns:
+        True when the waypoint is routed to a calendar other than `label`.
+
     """
     if label is None:
         return False
@@ -180,6 +202,10 @@ def events(g: Graph, repos: Iterable[str], label: str | None = None) -> list[lis
 
     `label` is the calendar being written; a waypoint routed to another calendar by a
     `calendar:<label>` touch is left out (nemik:W263).
+
+    Returns:
+        The property lines of each event, in repo then waypoint order.
+
     """
     want = set(repos)
     found: list[tuple[str, int, list[str]]] = []
@@ -212,7 +238,12 @@ def events(g: Graph, repos: Iterable[str], label: str | None = None) -> list[lis
 
 
 def feed(g: Graph, repos: Iterable[str], label: str | None = None) -> str:
-    """Build the iCalendar text the Akonadi helper reads on stdin (CRLF, folded at 75 octets)."""
+    """Build the iCalendar text the Akonadi helper reads on stdin (CRLF, folded at 75 octets).
+
+    Returns:
+        The calendar text, with its time zones, CRLF-terminated and folded.
+
+    """
     lines = ["BEGIN:VCALENDAR", "VERSION:2.0", f"PRODID:{PRODID}"]
     body = [line for event in events(g, repos, label) for line in event]
     lines += timezones(body) + body
@@ -221,7 +252,12 @@ def feed(g: Graph, repos: Iterable[str], label: str | None = None) -> str:
 
 
 def _write(helper: Path, name: str, text: str, apply: bool) -> tuple[int, str]:
-    """Run the Akonadi helper's --write-calendar on one calendar; (exit code, its output)."""
+    """Run the Akonadi helper's --write-calendar on one calendar; (exit code, its output).
+
+    Returns:
+        The helper's exit code and its decoded output.
+
+    """
     cmd = [str(helper), "--write-calendar", name]
     if apply:
         cmd.append("--apply")
@@ -236,6 +272,10 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> int:
     gets one event per open dated waypoint of those repos (nemik.calwrite), upserted by UID, and
     loses the events of waypoints that are done or no longer dated. Plans unless --apply. Exit 0 ok,
     1 some writes failed, 2 refused (no write rights on the calendar, Akonadi not running).
+
+    Returns:
+        The exit code: 0 ok or nothing opted in, 1 some writes failed, 2 refused.
+
     """
     ap = argparse.ArgumentParser(
         prog="nemik-calendar-write", description=(main.__doc__ or "").splitlines()[0]

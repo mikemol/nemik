@@ -3347,3 +3347,10 @@
 2026-10-30T03:43:07Z  tick  W1285 minted    -         "Read back luthen's W1804 witness: the pinned nemik-wake --series-lines prints linux-sources dormant and nemik ok with as_of times"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W1804
 2026-10-30T03:43:15Z  status W1285 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-30T03:44:25Z  status W1279 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T03:53:04Z  tick  W1279 advanced  sweep     "691 landed 65f3615 (nemik-wake --series-lines, luthen told, W1285 read-back card). 692 submitted: 19 DOC201 Returns sections in letters, health and issues, ruff 1720 to 1700, census 404 s. The pace owes ruff. Pace unit read: gate-time values enter the series, so a pace can count a baseline still in the gate; W1284 carded for the PENDING label. [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T03:54:42Z  status W1285 blocked>done writer    "blocked -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T03:54:44Z  interrupt W1286 minted    -         "nemik-wake --series-only: print the series lines without loading the whole queue graph, so the tick-open hook can afford it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W1804
+2026-10-30T04:09:54Z  status W1279 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T04:10:38Z  status W1279 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T04:15:40Z  status W1286 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T04:18:45Z  status W1286 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
