@@ -16,16 +16,17 @@ from __future__ import annotations
 
 import json
 from importlib.resources import files
+from typing import TYPE_CHECKING
 
-from nemik.manifest import load
+from nemik import manifest
+
+if TYPE_CHECKING:
+    from nemik.manifest import Manifest
 
 DIALECT = "https://json-schema.org/draft/2020-12/schema"
 
 # A JSON Schema fragment, or any JSON object: values are read only by the json module.
 Schema = dict[str, object]
-# The manifest's files section: file -> section -> field -> field class.
-Manifest = dict[str, dict[str, dict[str, str]]]
-
 # A field class (the manifest's vocabulary) as a JSON Schema fragment.
 SCALAR: dict[str, Schema] = {
     # nemik:W441: an absent reference is published as null (a goal with nothing on deck), not
@@ -40,6 +41,35 @@ SCALAR: dict[str, Schema] = {
     "records": {"type": "array", "items": {"type": "object"}},
     "record": {"type": ["object", "null"]},
 }
+
+
+def load() -> Manifest:
+    """Read the manifest's files section from the packaged field-manifest.json.
+
+    Returns:
+        For each published file, the fields each of its sections may carry.
+
+    """
+    document: object = json.loads(
+        files("nemik.data").joinpath("field-manifest.json").read_text()
+    )
+    section: Manifest = document["files"] if isinstance(document, dict) else {}
+    return section
+
+
+def unmanifested(name: str, doc: object, m: Manifest | None = None) -> list[str]:
+    """`path.field` for every field of `doc` (the parsed published file `name`) not in the manifest.
+
+    Args:
+        name: The published path of the file, such as `graph.json`.
+        doc: The parsed published file.
+        m: The manifest's files section; None reads the packaged one.
+
+    Returns:
+        One `name section.field` entry per field the manifest does not list.
+
+    """
+    return manifest.unmanifested(name, doc, m or load())
 
 
 def field(cls: str) -> Schema:

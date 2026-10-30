@@ -3433,3 +3433,11 @@
 2026-10-30T13:52:25Z  status W1297 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-30T14:04:47Z  interrupt W1298 minted    -         "12 functions in pacing, overlaps, importer and staticserve get a Returns section written from their bodies, so ruff falls 1287 to 1275"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1279
 2026-10-30T14:05:23Z  status W1298 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T14:16:08Z  interrupt W1299 minted    -         "12 functions in metrics, index, cards, flow, pins, salience and manifest get a Returns section written from their bodies, so ruff falls 1275 to 1263"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1279
+2026-10-30T14:30:15Z  status W1298 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T14:30:48Z  status W1299 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T14:32:43Z  status W1299 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T14:46:53Z  interrupt W1300 minted    -         "letters.py compiles under Codon: its NamedTuple rows become plain classes, shlex and UTC go, and its subprocess, shutil and sys.executable code moves to a module of its own, so codon falls 2"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1179
+2026-10-30T15:08:31Z  interrupt W1301 minted    -         "manifest.py takes the manifest as an argument and imports nothing, with the file read in apischema, so it compiles under Codon and codon falls 144 to 142"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1179
+2026-10-30T15:16:02Z  status W1301 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T15:16:04Z  status W1299 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

@@ -1365,7 +1365,7 @@ def _build_static(
     nemik:W634: with `exports`, each repo's own export (docs/withholding-at-source.md) also decides
     what leaves it, failing closed per repo: a repo with no export publishes none of its cards.
     """
-    from nemik.manifest import unmanifested
+    from nemik.apischema import unmanifested
     from nemik.withheld import apply, load
 
     refs = (

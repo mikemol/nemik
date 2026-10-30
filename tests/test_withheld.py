@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from nemik.manifest import unmanifested
+from nemik.apischema import unmanifested
 from nemik.serve import Model, static_data
 from nemik.withheld import WithheldError, apply, load
 

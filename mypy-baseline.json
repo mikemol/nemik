@@ -53,10 +53,8 @@
   "type-arg": 4
  },
  "src/nemik/manifest.py": {
-  "misc": 37,
-  "no-any-return": 1,
-  "no-untyped-def": 1,
-  "type-arg": 1
+  "misc": 28,
+  "no-untyped-def": 1
  },
  "src/nemik/metrics.py": {
   "misc": 18
@@ -133,7 +131,7 @@
   "misc": 2
  },
  "tests/test_apischema.py": {
-  "misc": 35,
+  "misc": 16,
   "type-arg": 2
  },
  "tests/test_apply_witness.py": {
@@ -209,7 +207,7 @@
   "no-untyped-call": 1
  },
  "tests/test_manifest.py": {
-  "misc": 26,
+  "misc": 17,
   "no-untyped-call": 2,
   "no-untyped-def": 1
  },

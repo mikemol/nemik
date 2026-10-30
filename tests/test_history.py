@@ -334,7 +334,7 @@ def test_the_static_history_names_no_waypoint_and_passes_the_manifest(
     tmp_path: Path,
 ) -> None:
     """nemik:W308: history.json is counts and days; the oldest-blocked symbol is dropped."""
-    from nemik.manifest import unmanifested
+    from nemik.apischema import unmanifested
     from nemik.serve import history_doc
 
     _two_commits(tmp_path)

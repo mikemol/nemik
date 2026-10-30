@@ -6,7 +6,7 @@ import json
 import time
 from pathlib import Path
 
-from nemik.manifest import unmanifested
+from nemik.apischema import unmanifested
 from nemik.serve import SERIES_FILE, Model, static_data
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"

@@ -5,8 +5,7 @@
 import json
 from pathlib import Path
 
-from nemik.apischema import schemas
-from nemik.manifest import load
+from nemik.apischema import load, schemas
 from nemik.serve import build_static
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"

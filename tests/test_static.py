@@ -30,7 +30,7 @@ def test_data_files_cover_what_the_page_fetches_and_are_manifested() -> None:
     """Data files cover what the page fetches and are manifested."""
     from pathlib import Path
 
-    from nemik.manifest import unmanifested
+    from nemik.apischema import unmanifested
     from nemik.serve import Model, static_data
 
     docs = static_data(Model(Path(__file__).parent / "fixtures" / "fleet"))

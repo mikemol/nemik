@@ -6,33 +6,33 @@
 the fields a rendered document has that the manifest does not, so the static build (nemik:W153)
 fails instead of publishing a field nobody classified (operator 2026-10-01, luthen's withhold-whole
 contract). It checks the export's shape, not its values: which items are withheld is luthen's list.
+
+This module is the pure half (nemik:W1179): it takes the manifest as a parsed argument and imports
+nothing, like nemik.tiers and nemik.adoption, so the Codon census can compile it. Reading the
+manifest file is apischema.load's, and apischema.unmanifested is the call with the packaged one.
 """
 
-from __future__ import annotations
-
-import json
-from importlib.resources import files
-
-
-def load() -> dict:
-    """Read the manifest's files section.
-
-    Returns:
-        For each published file, the fields each of its sections may carry.
-
-    """
-    return json.loads(files("nemik.data").joinpath("field-manifest.json").read_text())[
-        "files"
-    ]
+# For each published file, the fields each of its sections may carry.
+Manifest = dict[str, dict[str, dict[str, str]]]
 
 
 def _fields(rows: object) -> set[str]:
     return {k for r in rows for k in r} if isinstance(rows, list) else set()
 
 
-def unmanifested(name: str, doc) -> list[str]:
-    """`path.field` for every field of `doc` (the parsed published file `name`) not in the manifest."""
-    m = load()
+def unmanifested(name: str, doc, m: Manifest) -> list[str]:
+    """`path.field` for every field of `doc` (the parsed published file `name`) not in `m`.
+
+    Args:
+        name: The published path of the file, such as `graph.json` or `goals/<repo>.json`.
+        doc: The parsed published file.
+        m: The manifest's files section.
+
+    Returns:
+        One `name section.field` entry per field the manifest does not list, or one
+        entry when the file is not in the manifest.
+
+    """
     key = "goals/<repo>.json" if name.startswith("goals/") else name
     if key not in m:
         return [f"{name}: file is not in the manifest"]

@@ -115,10 +115,6 @@
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'shlex'"
  },
- "manifest": {
-  "as_written": "no module named '__future__'",
-  "stripped": "no module named 'importlib.resources'"
- },
  "marks": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'hashlib'"
