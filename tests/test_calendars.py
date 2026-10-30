@@ -14,6 +14,7 @@ from rdflib import Graph, Literal
 from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri
 from nemik.calendars import (
     Calendar,
+    Occurrence,
     _venv_ics,
     days_main,
     dedupe,
@@ -93,7 +94,7 @@ def test_config_opts_calendars_in(tmp_path: Path) -> None:
 
 def test_events_become_nodes_and_cal_refs_wait_on_the_next_occurrence() -> None:
     """Each occurrence becomes an event node, and a cal: reference waits on the next one."""
-    occs = [
+    occs: list[Occurrence] = [
         {
             "label": "home",
             "uid": "a@t",
@@ -248,7 +249,7 @@ def test_include_keeps_case_sensitive_substring_matches_and_counts_both_ways(
     tmp_path: Path, ics: str
 ) -> None:
     """An include list keeps case-sensitive substring matches and counts matched and all."""
-    got_all: dict = {}
+    got_all: dict[str, tuple[int, int]] = {}
     occurrences(
         {"chores": "Chores"},
         start="2026-10-01",
@@ -257,7 +258,7 @@ def test_include_keeps_case_sensitive_substring_matches_and_counts_both_ways(
         stats=got_all,
     )
     assert got_all == {"chores": (4, 4)}  # no include: everything
-    stats: dict = {}
+    stats: dict[str, tuple[int, int]] = {}
     got = occurrences(
         {"chores": "Chores"},
         start="2026-10-01",
@@ -271,7 +272,7 @@ def test_include_keeps_case_sensitive_substring_matches_and_counts_both_ways(
         "Supper: Pascal",
     ]
     assert stats == {"chores": (2, 4)}
-    none: dict = {}
+    none: dict[str, tuple[int, int]] = {}
     assert not occurrences(
         {"chores": "Chores"},
         start="2026-10-01",
@@ -313,7 +314,7 @@ def test_a_filter_that_matches_nothing_is_reported_not_read_as_a_free_day(
 
 def _row(
     label: str, start: str, summary: str, waiting: tuple[str, ...] | list[str] = ()
-) -> dict[str, object]:
+) -> Occurrence:
     return {
         "label": label,
         "uid": "u",

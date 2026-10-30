@@ -14,8 +14,7 @@
   "misc": 4
  },
  "src/nemik/calendars.py": {
-  "misc": 95,
-  "type-arg": 7
+  "misc": 16
  },
  "src/nemik/calwrite.py": {
   "misc": 8
@@ -155,8 +154,7 @@
   "misc": 1
  },
  "tests/test_calendars.py": {
-  "misc": 44,
-  "type-arg": 3
+  "misc": 6
  },
  "tests/test_certify.py": {
   "misc": 17

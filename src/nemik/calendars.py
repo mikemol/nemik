@@ -19,7 +19,7 @@ import sys
 import tempfile
 from datetime import date, datetime
 from pathlib import Path
-from typing import TYPE_CHECKING, NamedTuple
+from typing import TYPE_CHECKING, NamedTuple, TypedDict
 
 from nemik.vtodo import DEFAULT_HELPER
 
@@ -136,7 +136,28 @@ def load_collections(path: Path = DEFAULT_CONFIG) -> dict[str, str]:
     return {label: c.name for label, c in load_calendars(path).items()}
 
 
-KEEP = ("uid", "start", "end", "all_day", "summary", "recurrence_id")
+class Occurrence(TypedDict, total=False):
+    """One calendar row: an event occurrence, then what days_main and dedupe add to it."""
+
+    label: str
+    uid: str | None
+    start: str | None
+    end: str | None
+    all_day: bool | None
+    summary: str | None
+    recurrence_id: str | None
+    also: list[str]
+    waiting: list[str]
+
+
+def _text(value: object) -> str | None:
+    # a string field of the helper's JSON line, or None when it is absent or not a string
+    return value if isinstance(value, str) else None
+
+
+def _flag(value: object) -> bool | None:
+    # a boolean field of the helper's JSON line, or None when it is absent or not a boolean
+    return value if isinstance(value, bool) else None
 
 
 def _venv_ics() -> str:
@@ -162,7 +183,7 @@ def occurrences(
     ics: str | None = None,
     includes: dict[str, tuple[str, ...]] | None = None,
     stats: dict[str, tuple[int, int]] | None = None,
-) -> list[dict]:
+) -> list[Occurrence]:
     """[{label, uid, start, end, all_day, summary, recurrence_id}] for every collection, by start.
 
     `collections` maps a short label (what waypoints cite as cal:<label>/<uid>) to the Akonadi
@@ -181,7 +202,7 @@ def occurrences(
         raise FileNotFoundError(msg)
     tmp = Path(tempfile.mkdtemp(prefix="nemik-cal-"))  # mkdtemp is 0700
     try:
-        out: list[dict] = []
+        out: list[Occurrence] = []
         for label, name in sorted(collections.items()):
             f = tmp / f"{label}.ics"
             subprocess.run(
@@ -198,7 +219,7 @@ def occurrences(
             pats = (includes or {}).get(label, ())
             total = matched = 0
             for line in text.splitlines():
-                rec = json.loads(line)
+                rec: dict[str, object] = json.loads(line)
                 if rec.get("kind") != "occurrence":
                     continue
                 # Events nemik itself mirrored into a calendar (nemik:W196) are not the operator's
@@ -206,10 +227,21 @@ def occurrences(
                 if str(rec.get("uid") or "").startswith("nemik:"):
                     continue
                 total += 1
-                if pats and not any(p in (rec.get("summary") or "") for p in pats):
+                summary = _text(rec.get("summary"))
+                if pats and not any(p in (summary or "") for p in pats):
                     continue
                 matched += 1
-                out.append({"label": label, **{k: rec.get(k) for k in KEEP}})
+                out.append(
+                    Occurrence(
+                        label=label,
+                        uid=_text(rec.get("uid")),
+                        start=_text(rec.get("start")),
+                        end=_text(rec.get("end")),
+                        all_day=_flag(rec.get("all_day")),
+                        summary=summary,
+                        recurrence_id=_text(rec.get("recurrence_id")),
+                    )
+                )
             if stats is not None:
                 stats[label] = (matched, total)
             f.unlink()
@@ -218,7 +250,7 @@ def occurrences(
         shutil.rmtree(tmp, ignore_errors=True)
 
 
-def dedupe(rows: list[dict]) -> list[dict]:
+def dedupe(rows: list[Occurrence]) -> list[Occurrence]:
     """nemik:W191 (life-82): one row per (start, summary) across DIFFERENT calendars.
 
     The household and main calendars repeat some entries (same chore, same instant). The first
@@ -231,20 +263,20 @@ def dedupe(rows: list[dict]) -> list[dict]:
         The rows with duplicates across different calendars merged.
 
     """
-    out: list[dict] = []
-    first: dict[tuple, dict] = {}
+    out: list[Occurrence] = []
+    first: dict[tuple[str | None, str | None], Occurrence] = {}
     for r in rows:
         k = (r["start"], r["summary"])
         p = first.get(k)
         if p is None:
-            first[k] = r = dict(r)
+            first[k] = r = r.copy()
             out.append(r)
         elif r["label"] != p["label"] and r["label"] not in p.get("also", []):
             p["also"] = [*p.get("also", []), r["label"]]
             p["waiting"] = sorted({*p.get("waiting", []), *r.get("waiting", [])})
         else:
             out.append(
-                dict(r)
+                r.copy()
             )  # a second event in a calendar already represented: a real one
     return out
 
@@ -252,7 +284,7 @@ def dedupe(rows: list[dict]) -> list[dict]:
 CAL_REF = re.compile(r"cal:([a-z][a-z0-9-]{0,31})/(\S+)")
 
 
-def event_graph(occs: list[dict], queues: Graph) -> Graph:
+def event_graph(occs: list[Occurrence], queues: Graph) -> Graph:
     """nemik:W159: occurrences as nemik:Event nodes, with the waypoints waiting for each next one.
 
     Every open waypoint whose blocked_on cites `cal:<label>/<uid>` waits for that event's next
@@ -271,7 +303,7 @@ def event_graph(occs: list[dict], queues: Graph) -> Graph:
     from nemik.adapter import NEMIK, OSLC_CM
 
     g = Graph()
-    nxt: dict[tuple[str, str], URIRef] = {}
+    nxt: dict[tuple[str, str | None], URIRef] = {}
     for o in (
         occs
     ):  # sorted by start, so the first seen per (label, uid) is the next occurrence
@@ -375,7 +407,7 @@ def days_main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         print(f"ERROR: the calendar export failed: {why.splitlines()[-1]}")
         raise SystemExit(2) from e
     eg = event_graph(occs, g)
-    rows = []
+    rows: list[Occurrence] = []
     for o in occs:
         ev = f"urn:nemik:cal:{o['label']}/{o['uid']}/{o['recurrence_id'] or o['start']}"
         rows.append(

@@ -3420,3 +3420,7 @@
 2026-10-30T11:59:23Z  interrupt W1294 minted    -         "apischema.py builds its JSON Schemas as dict[str, object] with a typed manifest, so the Any rows of the schema generator go and mypy falls"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1187
 2026-10-30T12:06:32Z  status W1293 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-30T12:08:39Z  status W1294 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T12:15:57Z  status W1293 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T12:34:35Z  status W1294 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T12:43:15Z  interrupt W1295 minted    -         "calendars.py reads and writes its rows as a typed Occurrence, so days_main and dedupe stop handling Any and mypy falls"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1187
+2026-10-30T12:49:31Z  status W1295 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
