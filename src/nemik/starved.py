@@ -25,6 +25,7 @@ from rdflib.namespace import DCTERMS
 
 from nemik.adapter import waypoint_uri
 from nemik.rank import fleet_repos, load_composition, load_weights, rank
+from nemik.tomlview import table
 
 DEFAULT_DAYS = 14
 
@@ -46,7 +47,8 @@ def days_limit(text: str | None = None) -> int:
     """
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
-    return int(tomllib.loads(text).get("starvation", {}).get("days", DEFAULT_DAYS))
+    section = table(table(tomllib.loads(text)).get("starvation"))
+    return int(str(section.get("days", DEFAULT_DAYS)))
 
 
 def starved(
@@ -59,21 +61,22 @@ def starved(
 
     """
     order = rank(g, repo, load_weights(), load_composition())
+    symbols = [str(row["symbol"]) for row in order]
     issued: dict[str, datetime] = {}
-    for row in order:
-        stamp = g.value(waypoint_uri(repo, row["symbol"]), DCTERMS.created)
+    for symbol in symbols:
+        stamp = g.value(waypoint_uri(repo, symbol), DCTERMS.created)
         if stamp is not None:
-            issued[row["symbol"]] = datetime.fromisoformat(str(stamp))
+            issued[symbol] = datetime.fromisoformat(str(stamp))
     found: list[Starved] = []
-    for i, row in enumerate(order):
-        born = issued.get(row["symbol"])
+    for i, symbol in enumerate(symbols):
+        born = issued.get(symbol)
         if born is None or (now - born).days <= days:
             continue
-        ahead = [r["symbol"] for r in order[:i] if issued.get(r["symbol"], born) > born]
+        ahead = [s for s in symbols[:i] if issued.get(s, born) > born]
         if ahead:
             found.append(
                 Starved(
-                    f"{repo}:{row['symbol']}",
+                    f"{repo}:{symbol}",
                     round((now - born).total_seconds() / 86400, 1),
                     len(ahead),
                 )
@@ -96,6 +99,15 @@ def starved_fleet(
     return found
 
 
+class Options(argparse.Namespace):
+    """The parsed command line of nemik-starved (nemik:W1187)."""
+
+    repos: list[str]
+    root: Path
+    days: int | None
+    json: bool
+
+
 def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     """nemik-starved: ready cards overtaken by newer ones for longer than the declared age."""
     from nemik.check import default_root, survey
@@ -109,7 +121,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         "--days", type=int, default=None, help="age limit (default: the declared)"
     )
     ap.add_argument("--json", action="store_true")
-    args = ap.parse_args(argv)
+    args = ap.parse_args(argv, namespace=Options())
     if g is None:
         g = Graph()
         for _, qg, _ in survey(args.root):

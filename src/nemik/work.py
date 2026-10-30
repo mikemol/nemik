@@ -17,6 +17,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from nemik.tomlview import strings, table, tables
+
 
 def working(state: Path) -> list[str]:
     """Give the symbols of the cards currently working, read from the queue file.
@@ -25,9 +27,11 @@ def working(state: Path) -> list[str]:
         The symbols of the working cards.
 
     """
-    data = json.loads(state.read_text(encoding="utf-8"))
+    data = table(json.loads(state.read_text(encoding="utf-8")))
     return [
-        w["symbol"] for w in data.get("waypoints", []) if w.get("status") == "working"
+        str(w["symbol"])
+        for w in tables(data.get("waypoints"))
+        if w.get("status") == "working"
     ]
 
 
@@ -42,10 +46,10 @@ def blockers(state: Path, symbol: str) -> tuple[list[str], list[str]]:
         The open entries, and the landed ones.
 
     """
-    data = json.loads(state.read_text(encoding="utf-8"))
-    cards = {w["symbol"]: w for w in data.get("waypoints", [])}
-    dropped = {r["symbol"] for r in data.get("residue", [])}
-    entries = cards.get(symbol, {}).get("blocked_on") or []
+    data = table(json.loads(state.read_text(encoding="utf-8")))
+    cards = {str(w["symbol"]): w for w in tables(data.get("waypoints"))}
+    dropped = {str(r["symbol"]) for r in tables(data.get("residue"))}
+    entries = strings(cards.get(symbol, {}).get("blocked_on"))
     landed = [
         b
         for b in entries
@@ -172,6 +176,15 @@ def plan(current: list[str], symbol: str) -> list[tuple[str, str]]:
     return [] if symbol in current else [(symbol, "working")]
 
 
+class Options(argparse.Namespace):
+    """The parsed command line of nemik-work (nemik:W1187)."""
+
+    symbol: str
+    state: Path
+    dry_run: bool
+    force: bool
+
+
 def main(argv: list[str] | None = None) -> int:
     """nemik-work: mark one card working and clear its landed blockers, touching no other card.
 
@@ -195,7 +208,7 @@ def main(argv: list[str] | None = None) -> int:
         action="store_true",
         help="work it even though blocked_on names something not known to have landed",
     )
-    args = ap.parse_args(argv)
+    args = ap.parse_args(argv, namespace=Options())
     still, landed = blockers(args.state, args.symbol)
     if still and not args.force:
         # nemik:W443: working a blocked card left it 'working' with a stale blocked_on (W441).

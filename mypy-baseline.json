@@ -93,8 +93,7 @@
   "misc": 3
  },
  "src/nemik/starved.py": {
-  "call-overload": 1,
-  "misc": 33
+  "misc": 8
  },
  "src/nemik/staticserve.py": {
   "misc": 4
@@ -119,8 +118,7 @@
   "misc": 6
  },
  "src/nemik/work.py": {
-  "call-overload": 1,
-  "misc": 32
+  "misc": 2
  },
  "tests/fixtures/make_fleet.py": {
   "misc": 30

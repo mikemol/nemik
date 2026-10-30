@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1307,
+  "counter": 1309,
   "waypoints": [
     {
       "symbol": "W1",
@@ -31341,17 +31341,17 @@
     {
       "symbol": "W1306",
       "title": "pins.py and floorasks.py read a typed Namespace and their JSON and TOML through nemik.tomlview, so mypy falls",
-      "status": "working",
+      "status": "ready",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): pins.py and floorasks.py: Options (typed Namespace) and nemik.tomlview accessors; mikemol-pycheck --ratchet: mypy 2846 to 2812 (-34), ruff 1228 flat; baseline written (719 carries the ruff baseline, this stack the mypy one: disjoint); repo-config format check clean after one reformat; 8 tests pass. No census (both modules stay failing on their first import; stated, not run). Pace of 16:25:15Z PENDING (older than the last landings): all ok, none behind. Queued behind 719 (key 1793380629062206910, in flight).",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): pins.py and floorasks.py: Options (typed Namespace) and nemik.tomlview accessors; mikemol-pycheck --ratchet: mypy 2846 to 2812 (-34), ruff 1228 flat; baseline written (719 carries the ruff baseline, this stack the mypy one: disjoint); repo-config format check clean after one reformat; 8 tests pass. No census (both modules stay failing on their first import; stated, not run). Pace of 16:25:15Z PENDING (older than the last landings): all ok, none behind. Queued behind 719 (key 1793380629062206910, in flight). | 2026-10-30: 2026-10-30 LANDED stack 720 (key 1793381651370111342, submitted 17:34:09Z, began 17:43:11Z) as 3d44533, [PUSHED] first try; origin/main read back 3d44533a892fcd30d3a31ff5e36799fb394a203d; subject mine (git log). Card set ready BEFORE this line. Loadavg at the submit 73.43 68.94 55.16, at the verdict 66.26 84.09 71.22. Landed fall: mypy 2846 to 2812 (-34, MEASURED before submit). Stack 721 (W1307) is now inflight (began_ns 1793383696227162106).",
       "issued_at": "2026-10-30T17:33:13Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1187",
-      "last_worked": "2026-10-30T17:34:00Z",
+      "last_worked": "2026-10-30T18:09:28Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -31363,23 +31363,66 @@
     {
       "symbol": "W1307",
       "title": "13 functions in serve and staticserve get a Returns section written from their bodies, so ruff falls 1228 to 1215",
-      "status": "working",
+      "status": "ready",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): 13 Returns sections from the bodies (serve 12, staticserve 1); mikemol-pycheck --ratchet: ruff 1228 to 1215 (-13, exactly the count), mypy 2812 flat; baseline written (719 landed 33ea6f3); repo-config format check clean; 17 tests pass. Docstrings only: no census (stated, not run). Remaining DOC201 in src after it: 18 (ruff --statistics), not the 17 my earlier tally said. Pace 16:25:15Z is older than the landings, all ok, none behind. Queued behind 720 (W1306, in flight): disjoint (720 carries the mypy baseline, this the ruff one). Loadavg at submit 87.02 78.60 63.76 (high: the host is busy, expect a slow gate).",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): 13 Returns sections from the bodies (serve 12, staticserve 1); mikemol-pycheck --ratchet: ruff 1228 to 1215 (-13, exactly the count), mypy 2812 flat; baseline written (719 landed 33ea6f3); repo-config format check clean; 17 tests pass. Docstrings only: no census (stated, not run). Remaining DOC201 in src after it: 18 (ruff --statistics), not the 17 my earlier tally said. Pace 16:25:15Z is older than the landings, all ok, none behind. Queued behind 720 (W1306, in flight): disjoint (720 carries the mypy baseline, this the ruff one). Loadavg at submit 87.02 78.60 63.76 (high: the host is busy, expect a slow gate). | 2026-10-30: 2026-10-30 LANDED stack 721 (key 1793383478127248554, submitted 18:04:34Z, began 18:08:16Z) as 9e0133e, [PUSHED] first try; origin/main read back 9e0133ea83d79d094423da2900b4bf88bade6fdc; subject mine (git log). Card set ready BEFORE this line. Loadavg at the submit 87.02 78.60 63.76, at the verdict 29.45 50.02 55.83. Landed fall: ruff 1228 to 1215 (-13, MEASURED before submit). Baselines for W1308 and W1309 then written (nothing queued).",
       "issued_at": "2026-10-30T18:02:30Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1279",
-      "last_worked": "2026-10-30T18:04:27Z",
+      "last_worked": "2026-10-30T18:35:48Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "src/nemik/serve.py",
         "src/nemik/staticserve.py",
         "ruff-baseline.json"
+      ]
+    },
+    {
+      "symbol": "W1308",
+      "title": "15 functions in history get a Returns section written from their bodies, so ruff falls 1215 to 1200",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-30T18:09:58Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W1279",
+      "last_worked": "2026-10-30T18:36:03Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/history.py",
+        "ruff-baseline.json"
+      ]
+    },
+    {
+      "symbol": "W1309",
+      "title": "starved.py and work.py read a typed Namespace and their TOML and JSON through nemik.tomlview, so mypy falls 2812 to 2755",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-10-30: 2026-10-30 Built, not submitted: mypy 2812 to 2755 (-57 MEASURED by mikemol-pycheck --ratchet), 12 tests pass. Waiting on stack 721 (ruff-baseline.json in flight) because pycheck --write rewrites both baselines. Asked mtools (message to the mtools session, 18:3xZ) for a scoped write (--write mypy), citing this card; github-42 says: do not hand-lower a baseline, wait for 721, and send them the symbol mtools names. mtools:W2172 may be the same card. The symbol is NOT yet received. | 2026-10-30: 2026-10-30 mtools named the symbol: mtools:W2181 (mikemol-pycheck --ratchet --write taking a ratchet name, so only that baseline is rewritten and the other stays byte-identical); related to mtools:W2172 (the write refusal while a queued stack carries the file), which a scoped write may make unnecessary. Not built, no time promised. Until it lands, an independent baseline write waits for the verdict of the stack that carries the other baseline. | 2026-10-30: 2026-10-30 G0 (MEASURED unless marked): starved.py and work.py typed Options and tomlview accessors; mikemol-pycheck --ratchet: mypy 2812 to 2755 (-57); baselines written together with nothing queued (721 landed 9e0133e), ruff 1215 to 1200 from W1308 in the same tree; repo-config format check clean; 12 tests pass. No census (both modules stay failing on their first import; stated, not run). Pace of 18:25:16Z, PENDING for landing 18:34:26Z: codon 142, mypy 2812, ruff 1215, all ok, none behind. Stack 722 = W1309 then W1308 (history.py, ruff -15, 23 tests, docstrings only). Gate empty. Loadavg at submit: 29.45 50.02 55.83 (read at the verdict, two calls earlier).",
+      "issued_at": "2026-10-30T18:24:11Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W1187",
+      "last_worked": "2026-10-30T18:36:14Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/starved.py",
+        "src/nemik/work.py",
+        "mypy-baseline.json"
       ]
     }
   ],

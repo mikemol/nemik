@@ -3459,3 +3459,9 @@
 2026-10-30T17:44:03Z  status W1305 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-30T18:02:30Z  interrupt W1307 minted    -         "13 functions in serve and staticserve get a Returns section written from their bodies, so ruff falls 1228 to 1215"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1279
 2026-10-30T18:03:51Z  status W1307 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T18:09:14Z  status W1306 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T18:09:58Z  interrupt W1308 minted    -         "15 functions in history get a Returns section written from their bodies, so ruff falls 1215 to 1200"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1279
+2026-10-30T18:24:11Z  interrupt W1309 minted    -         "starved.py and work.py read a typed Namespace and their TOML and JSON through nemik.tomlview, so mypy falls 2812 to 2755"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1187
+2026-10-30T18:35:18Z  status W1307 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T18:36:02Z  status W1309 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-30T18:36:03Z  status W1308 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
