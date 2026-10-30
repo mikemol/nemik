@@ -42,6 +42,10 @@ def trs(
     A card whose URI is in `withheld` (nemik:W449: luthen's withheld list) is in neither the base
     nor any change event; its events are skipped whole, so a reader cannot even learn that it
     changed.
+
+    Returns:
+        The TRS graph.
+
     """
     ws = workstream_uri(repo)
     base, log = URIRef(f"{ws}/trs/base"), URIRef(f"{ws}/trs/changelog")
@@ -79,7 +83,12 @@ def trs(
 def turtle(
     repo: str, queue: Graph, ledger: Graph, withheld: frozenset[str] = frozenset()
 ) -> dict[str, str]:
-    """Give {"base": Turtle, "changelog": Turtle} for `repo`: two resources a TRS reader fetches."""
+    """Give {"base": Turtle, "changelog": Turtle} for `repo`: two resources a TRS reader fetches.
+
+    Returns:
+        The base and the changelog as Turtle text, by name.
+
+    """
     g = trs(repo, queue, ledger, withheld)
     ws = workstream_uri(repo)
     log = URIRef(f"{ws}/trs/changelog")

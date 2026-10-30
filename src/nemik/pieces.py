@@ -28,7 +28,12 @@ def _owner(node: dict[str, Any]) -> str:
 
 
 def split(doc: dict[str, Any]) -> dict[str, dict[str, Any]]:
-    """{piece name: piece} for a graph document; `assemble` inverts it."""
+    """{piece name: piece} for a graph document; `assemble` inverts it.
+
+    Returns:
+        The pieces by name, one per repo plus the fleet piece.
+
+    """
     owner = {str(n["id"]): _owner(n) for n in doc["nodes"]}
     names = sorted(set(owner.values()) - {FLEET})
     pieces: dict[str, dict[str, Any]] = {
@@ -51,7 +56,12 @@ def split(doc: dict[str, Any]) -> dict[str, dict[str, Any]]:
 
 
 def assemble(pieces: dict[str, dict[str, Any]]) -> dict[str, Any]:
-    """Rebuild the graph document the pieces were cut from (nodes by id, edges in order)."""
+    """Rebuild the graph document the pieces were cut from (nodes by id, edges in order).
+
+    Returns:
+        The graph document: nodes by id, edges in order.
+
+    """
     fleet = pieces[FLEET]
     parts = [pieces[r] for r in fleet["repos"]] + [fleet]
     nodes = sorted((n for p in parts for n in p["nodes"]), key=lambda n: str(n["id"]))

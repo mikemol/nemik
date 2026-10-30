@@ -15,7 +15,12 @@ from typing import Any
 
 
 def load(text: str | None = None) -> dict[str, Any]:
-    """Load the workflow model; `text` overrides the packaged file (for tests)."""
+    """Load the workflow model; `text` overrides the packaged file (for tests).
+
+    Returns:
+        The parsed workflow model.
+
+    """
     if text is None:
         text = files("nemik.data").joinpath("workflows.toml").read_text()
     return tomllib.loads(text)
@@ -32,7 +37,12 @@ def transitions(model: dict[str, Any]) -> list[dict[str, Any]]:
 
 
 def advice_only(model: dict[str, Any]) -> list[str]:
-    """List what the skill teaches but nothing checks: lifecycle commands and unenforced rules."""
+    """List what the skill teaches but nothing checks: lifecycle commands and unenforced rules.
+
+    Returns:
+        One entry per unenforced lifecycle command or rule.
+
+    """
     loose = [
         f"{t['from']}->{t['to']} ({t['command']})"
         for t in transitions(model)

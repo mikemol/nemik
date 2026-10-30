@@ -93,12 +93,10 @@
   "T201": 11
  },
  "src/nemik/endpoint.py": {
-  "DOC201": 2,
   "S404": 1,
   "S603": 1
  },
  "src/nemik/floorasks.py": {
-  "DOC201": 2,
   "T201": 2
  },
  "src/nemik/flow.py": {
@@ -177,9 +175,6 @@
   "PLC0415": 1,
   "T201": 2
  },
- "src/nemik/pieces.py": {
-  "DOC201": 2
- },
  "src/nemik/pins.py": {
   "DOC201": 1,
   "PLC0415": 1,
@@ -242,11 +237,9 @@
   "E501": 1
  },
  "src/nemik/shaclinc.py": {
-  "DOC201": 2,
   "PLC0415": 1
  },
  "src/nemik/starved.py": {
-  "DOC201": 2,
   "PLC0415": 1,
   "T201": 3
  },
@@ -254,9 +247,6 @@
   "C901": 1,
   "DOC201": 5,
   "PLW0717": 1
- },
- "src/nemik/trs.py": {
-  "DOC201": 2
  },
  "src/nemik/vtodo.py": {
   "DOC501": 1,
@@ -294,13 +284,9 @@
   "PLR0913": 1
  },
  "src/nemik/work.py": {
-  "DOC201": 4,
   "S404": 1,
   "S603": 1,
   "T201": 3
- },
- "src/nemik/workflows.py": {
-  "DOC201": 2
  },
  "tests/fixtures/make_fleet.py": {
   "D103": 2

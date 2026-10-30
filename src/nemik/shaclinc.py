@@ -34,7 +34,12 @@ HUB = 40  # a node with more neighbours than this (a workstream) is judged, not 
 
 
 def export_cache() -> Held:
-    """nemik:W518: the last runs, for a publisher to keep between its short-lived processes."""
+    """nemik:W518: the last runs, for a publisher to keep between its short-lived processes.
+
+    Returns:
+        A copy of the held runs.
+
+    """
     return dict(_LAST)
 
 
@@ -162,6 +167,10 @@ def findings(key: str, data: Graph, shapes: Graph) -> list[tuple[Node, str, str]
 
     Changed means since `key`'s last run: everything on the first, and always when the shapes'
     depth cannot be bounded.
+
+    Returns:
+        The (focus, severity IRI, message) rows for every result.
+
     """
     now = frozenset(data)
     last = _LAST.get(key)

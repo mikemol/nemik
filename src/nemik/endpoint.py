@@ -63,7 +63,12 @@ def _luthen(
 
 
 def declared_base(name: str, root: Path) -> str | None:
-    """Return http://<address> for the port `name` as luthen's endpoints_query prints it."""
+    """Return http://<address> for the port `name` as luthen's endpoints_query prints it.
+
+    Returns:
+        The base URL, or None when luthen's query is missing or does not answer.
+
+    """
     checkout = root / LUTHEN
     if not (checkout / "checks" / "endpoints_query.py").is_file():
         return None
@@ -170,7 +175,12 @@ def _get(connection: http.client.HTTPConnection, target: str) -> tuple[int, str]
 
 
 def export_defaults() -> list[str]:
-    """Set each unset backend variable from luthen's declaration; return the ones it set."""
+    """Set each unset backend variable from luthen's declaration; return the ones it set.
+
+    Returns:
+        The names of the variables it set.
+
+    """
     exported: list[str] = []
     for env, name in PORT_NAMES.items():
         if os.environ.get(env):

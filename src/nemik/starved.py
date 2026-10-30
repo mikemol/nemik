@@ -38,7 +38,12 @@ class Starved(NamedTuple):
 
 
 def days_limit(text: str | None = None) -> int:
-    """Read the declared age in days (`[starvation] days`), or 14 when the table is absent."""
+    """Read the declared age in days (`[starvation] days`), or 14 when the table is absent.
+
+    Returns:
+        The number of days.
+
+    """
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
     return int(tomllib.loads(text).get("starvation", {}).get("days", DEFAULT_DAYS))
@@ -47,7 +52,12 @@ def days_limit(text: str | None = None) -> int:
 def starved(
     g: Graph, repo: str, now: datetime, days: int = DEFAULT_DAYS
 ) -> list[Starved]:
-    """`repo`'s ready cards that waited over `days` while later-issued cards ranked above them."""
+    """`repo`'s ready cards that waited over `days` while later-issued cards ranked above them.
+
+    Returns:
+        The starved cards, longest wait first.
+
+    """
     order = rank(g, repo, load_weights(), load_composition())
     issued: dict[str, datetime] = {}
     for row in order:

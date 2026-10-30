@@ -20,7 +20,12 @@ _ENTRY = re.compile(r"^@\w+\{.*?^\}", re.MULTILINE | re.DOTALL)
 
 
 def floor_asks(floor: Path) -> list[tuple[str, str]]:
-    """(bib key, waypoint pointer) for every floor entry carrying a waypoint field."""
+    """(bib key, waypoint pointer) for every floor entry carrying a waypoint field.
+
+    Returns:
+        The (bib key, waypoint pointer) pairs, key `?` when the entry has none.
+
+    """
     out = []
     for bib in sorted(floor.glob("*.bib")):
         for block in _ENTRY.findall(bib.read_text(encoding="utf-8", errors="replace")):
@@ -38,7 +43,12 @@ def _statuses(path: Path) -> dict[str, str]:
 
 
 def unresolved(root: Path, floor: Path) -> list[tuple[str, str, str]]:
-    """(key, pointer, why) for each ask whose waypoint is malformed, unknown, or dropped."""
+    """(key, pointer, why) for each ask whose waypoint is malformed, unknown, or dropped.
+
+    Returns:
+        The (key, pointer, reason) triples of the asks that do not resolve.
+
+    """
     queues = dict(workstream_files(root, QUEUE))
     cache: dict[str, dict[str, str]] = {}
     bad = []

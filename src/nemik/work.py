@@ -19,7 +19,12 @@ from pathlib import Path
 
 
 def working(state: Path) -> list[str]:
-    """Give the symbols of the cards currently working, read from the queue file."""
+    """Give the symbols of the cards currently working, read from the queue file.
+
+    Returns:
+        The symbols of the working cards.
+
+    """
     data = json.loads(state.read_text(encoding="utf-8"))
     return [
         w["symbol"] for w in data.get("waypoints", []) if w.get("status") == "working"
@@ -32,6 +37,10 @@ def blockers(state: Path, symbol: str) -> tuple[list[str], list[str]]:
     A local W<n> that is done, or dropped into residue, has landed. Anything else (a local card
     still open, another repo's card, free text) is open: this tool cannot see another repo's state,
     so it does not guess.
+
+    Returns:
+        The open entries, and the landed ones.
+
     """
     data = json.loads(state.read_text(encoding="utf-8"))
     cards = {w["symbol"]: w for w in data.get("waypoints", [])}
@@ -155,12 +164,21 @@ def plan(current: list[str], symbol: str) -> list[tuple[str, str]]:
 
     There is no one-working-card limit (operator 2026-10-15, host 695f3e0a line 68086): a round of
     cards being built, queued or gating are all working, so no working card is ever demoted.
+
+    Returns:
+        The (symbol, status) updates; none when the card is already working.
+
     """
     return [] if symbol in current else [(symbol, "working")]
 
 
 def main(argv: list[str] | None = None) -> int:
-    """nemik-work: mark one card working and clear its landed blockers, touching no other card."""
+    """nemik-work: mark one card working and clear its landed blockers, touching no other card.
+
+    Returns:
+        0 when done, 2 when the card is blocked, else the writer's nonzero code.
+
+    """
     ap = argparse.ArgumentParser(
         prog="nemik-work", description=(main.__doc__ or "").splitlines()[0]
     )
