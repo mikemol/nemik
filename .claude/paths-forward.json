@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1319,
+  "counter": 1320,
   "waypoints": [
     {
       "symbol": "W1",
@@ -31628,23 +31628,46 @@
     {
       "symbol": "W1319",
       "title": "17 more test helpers, fixtures and tools get a Returns section or a docstring written from their bodies, so ruff falls 1155 to 1138",
-      "status": "working",
+      "status": "ready",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-10-31: 2026-10-31 G0 (MEASURED unless marked): 13 Returns sections (11 helpers plus webpage.opened_page and gen_pieces_corpus._first_repos) and 4 helper docstrings with Returns; mikemol-pycheck --ratchet: ruff 1155 to 1138 (-17, exactly the count), mypy 2266 flat; baseline written with nothing queued (730 landed 98ac7c0); format check clean; 97 tests of 12 edited files pass. Docstrings only: no census (stated, not run). Pace of 2026-10-31T16:25:21Z is CURRENT for landing 15:52:28Z: codon ok (140, the W1318 fall counted), mypy ok, RUFF BEHIND (fell 60 over 10, owes 73); this stack names ruff-baseline.json. Gate empty. Loadavg at submit 21.63 17.98 20.67.",
+      "evidence": "2026-10-31: 2026-10-31 G0 (MEASURED unless marked): 13 Returns sections (11 helpers plus webpage.opened_page and gen_pieces_corpus._first_repos) and 4 helper docstrings with Returns; mikemol-pycheck --ratchet: ruff 1155 to 1138 (-17, exactly the count), mypy 2266 flat; baseline written with nothing queued (730 landed 98ac7c0); format check clean; 97 tests of 12 edited files pass. Docstrings only: no census (stated, not run). Pace of 2026-10-31T16:25:21Z is CURRENT for landing 15:52:28Z: codon ok (140, the W1318 fall counted), mypy ok, RUFF BEHIND (fell 60 over 10, owes 73); this stack names ruff-baseline.json. Gate empty. Loadavg at submit 21.63 17.98 20.67. | 2026-10-31: 2026-10-31 LANDED stack 731 (key 1793464407438795837, submitted 16:33:20Z) as a2408d7, [PUSHED] first try; origin/main read back a2408d7eeb5af372857d7a38d359262404a404fa; subject mine (git log); 18 paths committed. Card set ready BEFORE this line. Loadavg at the submit 21.63 17.98 20.67, at the verdict 29.76 41.56 42.93. Landed fall: ruff 1155 to 1138 (-17, MEASURED before submit). Gate wall about 12 minutes.",
       "issued_at": "2026-10-31T16:32:23Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1279",
-      "last_worked": "2026-10-31T16:33:19Z",
+      "last_worked": "2026-10-31T16:50:08Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "tests/webpage.py",
         "tests/test_test_inputs.py",
         "tools/nemik_client.py",
+        "ruff-baseline.json"
+      ]
+    },
+    {
+      "symbol": "W1320",
+      "title": "15 over-long docstring lines (E501) are shortened and wake.py and workflows.py are formatted, so ruff falls 1138 to 1123",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-10-31: 2026-10-31 G0 (MEASURED unless marked): 15 docstring first lines shortened (E501), wake.py and workflows.py formatted by the repo config; mikemol-pycheck --ratchet: ruff 1138 to 1123 (-15, exactly the count), mypy 2266 flat; baseline written with nothing queued (731 landed a2408d7); format check of src, tests and tools clean; 62 tests of the touched modules pass; Codon census (workflows.py is compiled) 7 passed in 408.61 s after the last src edit. Pace of 2026-10-31T16:25:21Z, PENDING for landing 16:49:10Z: ruff BEHIND (owes 73), codon ok, mypy ok; this stack names ruff-baseline.json. Nuance lost in three rewordings is listed in the stack body. Gate empty. Loadavg at submit 26.21 36.54 39.48.",
+      "issued_at": "2026-10-31T17:02:40Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W1288",
+      "last_worked": "2026-10-31T17:10:38Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/vtodo.py",
+        "src/nemik/witnesses.py",
+        "src/nemik/workflows.py",
         "ruff-baseline.json"
       ]
     }

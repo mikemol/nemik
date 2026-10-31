@@ -264,7 +264,7 @@ def fold_commands(
     older_than: int | None = None,
     today: date | None = None,
 ) -> list[str]:
-    """One `--add` per live orphan letter: a waypoint in the recipient whose caused_by is the letter.
+    """One `--add` per live orphan letter: a waypoint in the recipient caused by the letter.
 
     Returns:
         The shell commands, one `--add` per live orphan.
@@ -313,7 +313,7 @@ def apply_fold(
     writer: str | None = None,
     env: dict[str, str] | None = None,
 ) -> list[str]:
-    """nemik:W301 (substrate): carry out what `--fold` prints, so the act does not stall at the plan.
+    """nemik:W301 (substrate): run what `--fold` prints, so the act does not stall at the plan.
 
     Each live orphan gets its `--add` through this venv's mikemol-paths-forward (the one writer of a
     queue; `writer` and `env` override it, for a sandbox), and each stale one is moved into its

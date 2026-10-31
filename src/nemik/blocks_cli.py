@@ -172,7 +172,7 @@ def _report_sudo_shaped(g: Graph) -> None:
 
 
 def operator_main(argv: list[str] | None = None, g: Graph | None = None) -> None:
-    """nemik-operator: blocks on the operator, sorted into needs-you / answered / condition / unstated."""
+    """nemik-operator: blocks on the operator, by needs-you / answered / condition / unstated."""
     ap = argparse.ArgumentParser(
         prog="nemik-operator", description=(operator_main.__doc__ or "").splitlines()[0]
     )

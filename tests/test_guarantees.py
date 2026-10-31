@@ -153,7 +153,7 @@ def test_check_ok_still_reports_the_unscored_census(
 
 
 def test_only_narrows_the_blocked_dependents_to_named_tags() -> None:
-    """nemik:W138 (luthen's letter §3): only tenant-facing rollouts wait on an open trust-boundary item."""
+    """nemik:W138 (luthen §3): only tenant-facing rollouts wait on an open trust-boundary item."""
     text = (
         load_guarantees.__globals__["files"]("nemik.data")
         .joinpath("bands.toml")

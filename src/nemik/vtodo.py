@@ -144,7 +144,7 @@ def stated_ask(ask: str) -> tuple[str, str]:
 
 
 def priority(salience: float, text: str | None = None) -> int:
-    """nemik:W299: the RFC 5545 PRIORITY (1 highest .. 9 lowest) of an ask that holds back `salience`.
+    """nemik:W299: the RFC 5545 PRIORITY (1 highest .. 9 lowest) of an ask holding back `salience`.
 
     The steps are declared data (`[ask_priority]` in rank-weights.toml: a floor of salience and the
     level it earns, the highest floor reached wins); an ask below every floor is 9. `text` overrides
@@ -231,7 +231,7 @@ def vtodos(asks: list[AskRow], repos: set[str], link: str = "") -> list[list[str
 
 
 def grouped(todos: list[list[str]]) -> list[list[str]]:
-    """nemik:W163 (W148): one parent VTODO per repo, each ask its subtask (RELATED-TO;RELTYPE=PARENT).
+    """nemik:W163 (W148): one parent VTODO per repo, each ask a subtask (RELATED-TO;RELTYPE=PARENT).
 
     The parent's UID is nemik:repo:<repo> (the Tasks helper keys it as ref `repo:<repo>`), its
     summary `<repo> (<n asks>)`, its DUE the earliest child DUE, as stored. Children keep their
@@ -452,7 +452,7 @@ def tasks_main(argv: list[str] | None = None) -> None:
 
 
 def main(argv: list[str] | None = None) -> None:
-    """nemik-ics: the operator's needs-you asks, from opted-in repos, as an iCalendar file of VTODOs."""
+    """nemik-ics: the operator's needs-you asks, from opted-in repos, as iCalendar VTODOs."""
     import argparse
 
     from nemik.check import default_root

@@ -1078,7 +1078,7 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
 
 
 def ruler_table(edges: list[dict], asks: list[AskRow]) -> dict[str, list[str]]:
-    """nemik:W418: the ruler-sequence patterns the page draws, from mtools' generator (mtools:W1048).
+    """nemik:W418: the ruler patterns the page draws, from mtools' generator (mtools:W1048).
 
     `motif[k]` is the order-k motif (one per halo scope, orders 0..3). `f[n]` is F(n), the pattern
     of the n-th line into one blocker; which lines a view shows is the page's choice, so it indexes

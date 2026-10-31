@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""FFI waypoints (nemik:W58 rev 3, W60): a declared Rego witness over facts from a closed set of observers.
+"""FFI waypoints (nemik:W58 rev 3, W60): a declared Rego witness over facts from closed observers.
 
 Nothing in a queue is executed. A waypoint's `witness` is a Rego query over `input`. nemik's
 observers (read-only, fixed here) gather exactly the facts the query references, as
@@ -38,7 +38,7 @@ _REF = re.compile(r'input\.(\w+)\["((?:[^"\\]|\\.)*)"\]')
 
 
 def _pid(key: str) -> dict | None:
-    """`localhost/<pid>[@<starttime>]`. Only the local host is observable for now (design, open question).
+    """`localhost/<pid>[@<starttime>]`. Only the local host is observable for now (open question).
 
     Returns:
         The process's alive flag and start time, or None when it cannot be observed.

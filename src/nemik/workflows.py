@@ -9,7 +9,9 @@ correspondence check).
 """
 
 
-def advice_only(transitions: list[dict[str, object]], rules: list[dict[str, object]]) -> list[str]:
+def advice_only(
+    transitions: list[dict[str, object]], rules: list[dict[str, object]]
+) -> list[str]:
     """List what the skill teaches but nothing checks: lifecycle commands and unenforced rules.
 
     Args:
@@ -21,7 +23,9 @@ def advice_only(transitions: list[dict[str, object]], rules: list[dict[str, obje
 
     """
     loose = [
-        f"{t['from']}->{t['to']} ({t['command']})" for t in transitions if not t["enforced_by"]
+        f"{t['from']}->{t['to']} ({t['command']})"
+        for t in transitions
+        if not t["enforced_by"]
     ]
     loose += [f"rule {r['id']}" for r in rules if not r["enforced_by"]]
     return loose

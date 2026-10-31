@@ -557,7 +557,7 @@ def rank(
     toward: str = "",
     with_working: bool = False,
 ) -> list[dict]:
-    """Every ready leaf in `repo`, in the declared composed order (nemik:W132; lower symbol on ties).
+    """Every ready leaf in `repo`, in the declared composed order (nemik:W132; lower symbol first).
 
     Umbrellas are left out: their open children are what can be worked (nemik:W74). With `toward`
     (a milestone `repo:W<n>`, nemik:W316) the order is by that card's demand alone. With

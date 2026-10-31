@@ -25,7 +25,10 @@ if TYPE_CHECKING:
 
 @dataclass(frozen=True)
 class Card:
-    """One card: its cite, state word, title and its links, as cites. Sorted, so equal cards compare equal."""
+    """One card: its cite, state word, title and its links, as cites.
+
+    The links are sorted, so equal cards compare equal.
+    """
 
     cite: str
     state: (

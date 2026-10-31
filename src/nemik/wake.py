@@ -434,9 +434,7 @@ def undelivered(
     return out
 
 
-def series_lines(
-    series: Series, repos: list[str], *, only: bool = False
-) -> list[str]:
+def series_lines(series: Series, repos: list[str], *, only: bool = False) -> list[str]:
     """One '<repo> <verdict> <as_of>' line per repo, from luthen's series snapshot (nemik:W1281).
 
     A repo the series has no entry for, or an entry with no verdict, reads 'no sample': never ok or

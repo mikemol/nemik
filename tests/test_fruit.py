@@ -98,7 +98,7 @@ def test_deep_item_outweighing_the_pile_leads() -> None:
 
 
 def test_a_working_fruit_member_holds_the_class_slot() -> None:
-    """luthen-observability 2026-10-02: with a fruit member working, no other member inherits the class weight."""
+    """Luthen 2026-10-02: with a fruit member working, no other member inherits the class weight."""
     from nemik.adapter import OSLC_CM, waypoint_uri
     from nemik.rank import load_weights, rank
 
