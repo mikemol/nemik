@@ -295,7 +295,6 @@
  "tests/test_baseline.py": {
   "PLC0415": 1,
   "PLR2004": 2,
-  "PT018": 3,
   "RUF069": 2
  },
  "tests/test_build_scope.py": {
@@ -426,7 +425,6 @@
  "tests/test_history.py": {
   "PLC0415": 3,
   "PLR2004": 1,
-  "PT018": 4,
   "RUF069": 3,
   "S404": 1,
   "S603": 4,
@@ -635,7 +633,6 @@
  },
  "tests/test_toil.py": {
   "PLR2004": 1,
-  "PT018": 1,
   "RUF069": 2
  },
  "tests/test_umbrella_block.py": {

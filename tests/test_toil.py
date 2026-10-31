@@ -26,6 +26,7 @@ def test_the_interrupt_share_is_unplanned_over_planned_plus_unplanned(
     ledger = tmp_path / "paths-forward.ledger"
     ledger.write_text(LEDGER)
     first, second = toil("a", ledger)
-    assert first["week"] == "2026-W41" and second["week"] == "2026-W42"
+    assert first["week"] == "2026-W41"
+    assert second["week"] == "2026-W42"
     assert first["toil_share"] == 0.333  # one interrupt among three
     assert second["toil_share"] == 0.0

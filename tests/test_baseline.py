@@ -41,7 +41,9 @@ def test_the_plan_is_what_was_open_at_the_baseline_and_the_rest_is_added() -> No
     )
     v = variance(base, now)
     assert v["planned"] == 2  # W3 was already done at the baseline
-    assert v["closed"] == ["W1"] and v["still_open"] == ["W2"] and v["dropped"] == []
+    assert v["closed"] == ["W1"]
+    assert v["still_open"] == ["W2"]
+    assert v["dropped"] == []
     assert v["done_share"] == 0.5
     # W4 was minted and dropped after the baseline: added, with no record of how
     assert v["added"] == {"interrupt": ["W5"], "tick": ["W6"], "unrecorded": ["W4"]}
@@ -52,7 +54,9 @@ def test_a_planned_card_dropped_since_counts_as_dropped() -> None:
     base = _q({"W1": ("ready", "tick")})
     now = _q({}, residue=("W1",))
     v = variance(base, now)
-    assert v["dropped"] == ["W1"] and v["closed"] == [] and v["still_open"] == []
+    assert v["dropped"] == ["W1"]
+    assert v["closed"] == []
+    assert v["still_open"] == []
 
 
 def test_shape_drift_counts_edges_and_the_planned_cards_retitled_or_rewired() -> None:
@@ -77,7 +81,8 @@ def test_shape_drift_counts_edges_and_the_planned_cards_retitled_or_rewired() ->
     }
     sh = shape_drift(base, now)
     assert (sh["edges_added"], sh["edges_removed"]) == (1, 0)
-    assert sh["retitled"] == ["W2"] and sh["rewired"] == ["W1"]
+    assert sh["retitled"] == ["W2"]
+    assert sh["rewired"] == ["W1"]
     assert sh["touched_share"] == 1.0
 
 

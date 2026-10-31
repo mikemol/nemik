@@ -210,7 +210,8 @@ def test_a_symbol_that_is_not_w_n_sorts_last_instead_of_raising() -> None:
 def test_a_repo_with_no_queue_yet_reads_as_empty() -> None:
     """A repo with no queue yet reads as empty."""
     d = diff({}, {"waypoints": [_wp("W1", "done")], "residue": []})
-    assert d.minted == ["W1"] and d.closed == ["W1"]
+    assert d.minted == ["W1"]
+    assert d.closed == ["W1"]
 
 
 def _commit(repo: Path, queue: dict, when: str) -> str:
@@ -322,12 +323,14 @@ def test_time_in_state_and_the_weekly_roll_up_follow_the_commits(
     assert w42["oldest_blocked"] is None
     # nemik:W315: W2 was first committed Oct 5 and closed Oct 7: a lead time of 2 days, that week
     # only.
-    assert w41["lead_time_days"] == 2.0 and w42["lead_time_days"] is None
+    assert w41["lead_time_days"] == 2.0
+    assert w42["lead_time_days"] is None
     # nemik:W325: two arrived, one left: utilization 2.0; W1 is the one open card, so at one close a
     # week a new card waits 1 / 1 * 7 days. nemik:W328: W2 was never marked working: efficiency 0.
     assert (w41["utilization"], w41["implied_wait_days"]) == (2.0, 7.0)
     assert w41["flow_efficiency"] == 0.0
-    assert w42["utilization"] is None and w42["flow_efficiency"] is None
+    assert w42["utilization"] is None
+    assert w42["flow_efficiency"] is None
 
 
 def test_the_static_history_names_no_waypoint_and_passes_the_manifest(
@@ -366,7 +369,8 @@ def test_the_command_prints_the_diff_between_two_dates(
     out = capsys.readouterr().out
     assert code == 0
     assert "a: 1 minted, 1 closed, 0 dropped" in out
-    assert "minted: W2" in out and "closed: W1" in out
+    assert "minted: W2" in out
+    assert "closed: W1" in out
 
 
 def test_each_forecast_issue_is_appended_after_the_last(tmp_path: Path) -> None:
