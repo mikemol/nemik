@@ -446,7 +446,8 @@ def days_main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         waits = f"  <- {', '.join(d['waiting'])}" if d["waiting"] else ""
         also = f"  [also: {', '.join(d['also'])}]" if d.get("also") else ""
         print(
-            f"  {(d['start'] or '')[:16]:16} {d['label']:10} {(d['summary'] or '')[:60]}{also}{waits}"
+            f"  {(d['start'] or '')[:16]:16} {d['label']:10} "
+            f"{(d['summary'] or '')[:60]}{also}{waits}"
         )
     for line in report:
         print(f"  {line}")

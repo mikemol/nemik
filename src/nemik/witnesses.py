@@ -403,7 +403,8 @@ def wake(root: Path, repo: str, sym: str, query: str, now: str) -> list[Path]:
         letter.write_text(
             f"# nemik → {repo}: {repo}:{sym} is done (its witness held)\n\n"
             f"`nemik-witnesses --apply` observed at {now}:\n\n    {query}\n\n"
-            f"Waiting on it here: {', '.join(syms)}. Each is blocked on `{sym}`, which is now done.\n"
+            f"Waiting on it here: {', '.join(syms)}. "
+            f"Each is blocked on `{sym}`, which is now done.\n"
             "`mikemol-paths-forward --prune-landed --root <fleet root>` prunes it.\n",
             encoding="utf-8",
         )

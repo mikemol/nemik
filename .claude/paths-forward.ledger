@@ -3506,3 +3506,7 @@
 2026-10-31T17:30:03Z  status W1246 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-31T17:36:24Z  tick  W1321 minted    -         "54 PT018 composite assertions in tests are split by ruff's fix, so ruff falls toward 1069"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1288
 2026-10-31T17:38:08Z  status W1321 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T17:39:58Z  status W1321 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T17:40:04Z  tick  W1321 advanced  mechanize "W1321 landed 73b24d8d: PT018 splits, ruff 1123 to 1115, six files reverted for mypy; gate was idle until 17:38:13Z submit [blocked by W1288]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T18:03:16Z  tick  W1322 minted    -         "20 over-long code lines (E501) outside test_layout are split, so ruff falls toward 1095"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1288
+2026-10-31T18:03:22Z  status W1322 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

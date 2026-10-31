@@ -1858,8 +1858,8 @@ def main(argv: list[str] | None = None) -> None:
         "--publish",
         type=Path,
         metavar="BASE",
-        help="build a private snapshot under BASE and flip BASE/current to it atomically, then exit "
-        "(nemik:W503); skipped when nothing changed; --withheld is optional (the pod is not the "
+        help="build a private snapshot under BASE and flip BASE/current to it atomically, "
+        "then exit (nemik:W503); skipped when nothing changed; --withheld is optional (the pod is not the "
         "public view)",
     )
     args = ap.parse_args(argv, namespace=_Options())

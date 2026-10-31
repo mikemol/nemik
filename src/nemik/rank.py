@@ -697,7 +697,8 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     ap.add_argument(
         "--apply",
         metavar="STATE",
-        help="write the ranked weights into that queue through mikemol-paths-forward --weights-from "
+        help="write the ranked weights into that queue through "
+        "mikemol-paths-forward --weights-from "
         "(nemik:W427: one call instead of --json to a file and then --weights-from)",
     )
     ap.add_argument(

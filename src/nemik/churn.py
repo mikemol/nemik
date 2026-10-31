@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik:W495: how often a poll of the fleet's graph finds it changed, and how, walked from git history.
+"""nemik:W495: how often a poll of the fleet's graph finds it changed, and how, from git history.
 
 The view polls every 60 s and redraws from scratch whenever the graph text differs. Whether to patch
 in place instead depends on WHAT changes between polls: a card's attributes (patchable where it
@@ -193,7 +193,8 @@ def render(
         shares = ", ".join(f"{c} {row.share(c):.1%}" for c in CLASSES)
         redrawn = (
             f"    redrawn now {row.redraws_now():.1%}; "
-            f"redrawn if attributes and recolours patch in place {row.redraws_patching_attributes():.1%}"
+            "redrawn if attributes and recolours patch in place "
+            f"{row.redraws_patching_attributes():.1%}"
         )
         lines.extend((f"polls every {row.step:>4} s ({row.polls}): {shares}", redrawn))
     return "\n".join(lines)

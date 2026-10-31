@@ -401,15 +401,16 @@ def tasks_main(argv: list[str] | None = None) -> None:
     ap.add_argument(
         "--flat",
         action="store_true",
-        help="one task per ask, no per-repo parent (default: a parent task per repo, nemik:W148/W163)",
+        help="one task per ask, no per-repo parent "
+        "(default: a parent task per repo, nemik:W148/W163)",
     )
     ap.add_argument(
         "--retry-wait",
         type=int,
         default=25,
         metavar="SECONDS",
-        help="with --apply, rerun while the helper defers a child's parent, waiting this long for the "
-        "Google resource to sync (at most 3 reruns; nemik:W148)",
+        help="with --apply, rerun while the helper defers a child's parent, "
+        "waiting this long for the Google resource to sync (at most 3 reruns; nemik:W148)",
     )
     args = ap.parse_args(argv, namespace=Options())
     if not args.helper.exists():
@@ -444,7 +445,8 @@ def tasks_main(argv: list[str] | None = None) -> None:
         ):
             break
         print(
-            f"RETRY {attempt + 1}: parents are not on Google yet; waiting {args.retry_wait}s for the resource to sync",
+            f"RETRY {attempt + 1}: parents are not on Google yet; "
+            f"waiting {args.retry_wait}s for the resource to sync",
             flush=True,
         )
         time.sleep(args.retry_wait)

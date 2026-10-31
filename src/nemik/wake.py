@@ -692,7 +692,8 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     print(f"liveness: {source}")
     for r in rows:
         print(
-            f"\n{r['state'].upper():7} {r['repo']}  ({len(r['waiting'])} waiting; last tick {r['last_tick'] or 'none'})"
+            f"\n{r['state'].upper():7} {r['repo']}  "
+            f"({len(r['waiting'])} waiting; last tick {r['last_tick'] or 'none'})"
         )
         for w in r["waiting"]:
             claim = (

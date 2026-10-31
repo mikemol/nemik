@@ -256,7 +256,10 @@ def _solve(
         into, volts = _grounded(edges, front, cone, source, amount)
         potential[source] = volts.get(source, ZERO)
         if sum(into.values(), ZERO) != amount:
-            msg = f"demand at {source} is not conserved: {amount} in, {sum(into.values(), ZERO)} out"
+            msg = (
+                f"demand at {source} is not conserved: "
+                f"{amount} in, {sum(into.values(), ZERO)} out"
+            )
             raise ValueError(msg)
         for u, p, w in edges:
             across = w * (volts.get(u, ZERO) - volts.get(p, ZERO))
