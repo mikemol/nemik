@@ -549,7 +549,6 @@
   "SLF001": 2
  },
  "tests/test_rank_flow.py": {
-  "PLC0415": 5,
   "PLR2004": 10,
   "RUF069": 10,
   "S404": 1,

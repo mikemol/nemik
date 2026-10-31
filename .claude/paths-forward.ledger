@@ -3535,3 +3535,15 @@
 2026-10-31T22:30:14Z  interrupt W1328 minted    -         "tests/test_layout.py's 26 public functions without a docstring get one written from reading each, so ruff falls toward 1065"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1288
 2026-10-31T22:30:26Z  status W1328 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-31T22:34:56Z  tick  W1328 advanced  mechanize "W1328 stack 739 ready: 27 test_layout docstrings, ruff 1091 to 1064, mypy flat; pace 22:25:24Z: ruff behind (fell 64 owes 90), mypy behind (fell 118 owes 122), codon ok; a mypy-touching second stack is next [blocked by W1288]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T22:38:42Z  status W1328 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T22:39:10Z  status W1328 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T22:39:18Z  status W1327 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T22:39:19Z  status W1326 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T22:39:20Z  status W1324 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T22:39:22Z  status W1323 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T22:39:23Z  status W1322 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T22:39:24Z  status W1321 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T22:39:26Z  status W1320 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T23:00:43Z  interrupt W1329 minted    -         "test_rank_flow.py reads rank rows and to_json documents through test-side TypedDicts and one top-level to_json import, so mypy falls by the bare-dict cascade and ruff by its local imports"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1288
+2026-10-31T23:00:53Z  status W1329 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T23:07:07Z  tick  W1329 advanced  mechanize "W1329 stack 740 ready: test_rank_flow.py TypedDicts, mypy 2148 to 2076, ruff 1064 to 1059; pace 22:25:24Z both behind (mypy owes 122 fell 118; ruff owes 90 fell 64), codon ok [blocked by W1288]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

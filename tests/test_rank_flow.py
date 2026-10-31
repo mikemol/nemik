@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 import subprocess
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, TypedDict, cast
 
 import installed
 import pytest
@@ -13,11 +13,54 @@ from rdflib import Graph
 
 from nemik.check import survey
 from nemik.rank import load_composition, load_weights, rank
+from nemik.serve import to_json, without
 
 if TYPE_CHECKING:
     from pathlib import Path
 
 TIERS = '[order]\ntiers = [["weight"]]\n'
+
+
+class _Row(TypedDict, total=False):
+    """A rank row, as far as these tests read it."""
+
+    symbol: str
+    salience: float
+
+
+class _Node(TypedDict, total=False):
+    """A node of graph.json, as far as these tests read it."""
+
+    symbol: str
+    state: str
+    repo: str
+    salience: float
+    slack: int
+    on_path: bool
+    on_path_repo: bool
+    path_count: int
+
+
+class _Edge(TypedDict, total=False):
+    """An edge of graph.json."""
+
+    source: str
+    target: str
+    current: float
+
+
+class _Ask(TypedDict, total=False):
+    """An operator entry of graph.json."""
+
+    salience: float
+
+
+class _Doc(TypedDict, total=False):
+    """graph.json, as far as these tests read it."""
+
+    nodes: list[_Node]
+    edges: list[_Edge]
+    operator: list[_Ask]
 
 
 def _pf(state: Path, *args: str) -> None:
@@ -63,7 +106,8 @@ def _fleet(tmp_path: Path) -> Graph:
 
 def _order(g: Graph, model: str) -> list[str]:
     comp = load_composition(f'{TIERS}weight = "{model}"\n')
-    return [r["symbol"] for r in rank(g, "a", load_weights(), comp, fruit_row=False)]
+    rows = cast("list[_Row]", rank(g, "a", load_weights(), comp, fruit_row=False))
+    return [r["symbol"] for r in rows]
 
 
 def test_the_downstream_arm_still_counts_a_shared_source_in_full(
@@ -86,7 +130,10 @@ def test_ranking_toward_a_milestone_counts_only_that_cards_demand(
     """Ranking toward a milestone counts only that cards demand."""
     g = _fleet(tmp_path)
     comp = load_composition(f'{TIERS}weight = "flow"\n')
-    toward = rank(g, "a", load_weights(), comp, fruit_row=False, toward="a:W4")
+    toward = cast(
+        "list[_Row]",
+        rank(g, "a", load_weights(), comp, fruit_row=False, toward="a:W4"),
+    )
     assert [r["symbol"] for r in toward] == ["W1", "W2", "W3"]
     assert toward[0]["salience"] == toward[1]["salience"] == 0.5
     assert toward[2]["salience"] == 0
@@ -173,7 +220,8 @@ def _ranked(g: Graph, operator: int) -> list[str]:
         f"local = 1\npeer = 2\npeer_blocked = 8\noperator = {operator}\n"
     )
     comp = load_composition(f'{TIERS}weight = "flow"\n')
-    return [r["symbol"] for r in rank(g, "a", weights, comp, fruit_row=False)]
+    rows = cast("list[_Row]", rank(g, "a", weights, comp, fruit_row=False))
+    return [r["symbol"] for r in rows]
 
 
 def test_an_operator_ask_is_a_demand_source_with_the_declared_weight(
@@ -188,9 +236,7 @@ def test_an_operator_ask_is_a_demand_source_with_the_declared_weight(
 
 def test_the_view_ships_each_ready_cards_flow_salience(tmp_path: Path) -> None:
     """nemik:W261: graph.json carries the salience the card absorbs, so the page can order by it."""
-    from nemik.serve import to_json
-
-    doc = to_json(_fleet(tmp_path), {})
+    doc = cast("_Doc", to_json(_fleet(tmp_path), {}))
     by_symbol = {n["symbol"]: n for n in doc["nodes"] if n["state"] == "ready"}
     assert by_symbol["W3"]["salience"] == 2.0  # B absorbs both sole dependents' demand
     assert by_symbol["W1"]["salience"] == by_symbol["W2"]["salience"] == 1.5
@@ -201,9 +247,7 @@ def test_the_view_marks_the_critical_path_and_ships_slack(tmp_path: Path) -> Non
     # chain
     # is two cards deep, so exactly one chain is on the path and every open card carries a slack.
     """The view marks the critical path and ships slack."""
-    from nemik.serve import to_json
-
-    doc = to_json(_fleet(tmp_path), {})
+    doc = cast("_Doc", to_json(_fleet(tmp_path), {}))
     nodes = [n for n in doc["nodes"] if n["state"] != "done"]
     assert all(isinstance(n["slack"], int) for n in nodes)
     on_path = [n for n in nodes if n["on_path"]]
@@ -222,9 +266,7 @@ def test_the_view_ships_the_current_across_each_dependency(tmp_path: Path) -> No
     # nemik:W264: W7 and W8 each need only B (W3), so each dependency carries exactly their demand
     # of 1; W4 needs A and E equally, so it splits its demand of 1 in half across the two.
     """The view ships the current across each dependency."""
-    from nemik.serve import to_json
-
-    doc = to_json(_fleet(tmp_path), {})
+    doc = cast("_Doc", to_json(_fleet(tmp_path), {}))
     current = {
         (e["source"].rsplit("/", 1)[-1], e["target"].rsplit("/", 1)[-1]): e["current"]
         for e in doc["edges"]
@@ -240,8 +282,6 @@ def test_the_view_weighs_the_edges_that_wait_on_the_operator(tmp_path: Path) -> 
     The lane edge carries what the ask holds back (2), and each waiter's edge into the ask carries
     its own demand (1).
     """
-    from nemik.serve import to_json
-
     (tmp_path / "a" / ".claude").mkdir(parents=True)
     state = tmp_path / "a" / ".claude" / "paths-forward.json"
     _pf(state, "--init")
@@ -274,7 +314,7 @@ def test_the_view_weighs_the_edges_that_wait_on_the_operator(tmp_path: Path) -> 
     for _, qg, _ in survey(tmp_path):
         if qg is not None:
             g += qg
-    doc = to_json(g, {})
+    doc = cast("_Doc", to_json(g, {}))
     (lane,) = [e for e in doc["edges"] if e["target"].startswith("operator:")]
     assert lane["current"] == 2.0
     into = [e for e in doc["edges"] if e["target"].endswith("/W1") and "current" in e]
@@ -286,8 +326,6 @@ def test_a_withheld_waiter_shapes_no_published_number(tmp_path: Path) -> None:
     # nemik:W309: the public view is computed over the graph WITHOUT withheld waypoints, so hiding
     # a waiter does not leave its weight behind in the ask's salience or its edge current.
     """A withheld waiter shapes no published number."""
-    from nemik.serve import to_json, without
-
     (tmp_path / "a" / ".claude").mkdir(parents=True)
     state = tmp_path / "a" / ".claude" / "paths-forward.json"
     _pf(state, "--init")
@@ -320,9 +358,9 @@ def test_a_withheld_waiter_shapes_no_published_number(tmp_path: Path) -> None:
     for _, qg, _ in survey(tmp_path):
         if qg is not None:
             g += qg
-    assert to_json(g, {})["operator"][0]["salience"] == 2.0
+    assert cast("_Doc", to_json(g, {}))["operator"][0]["salience"] == 2.0
     hidden = frozenset({"a:W3"})
-    doc = to_json(g, {}, without(g, hidden))
+    doc = cast("_Doc", to_json(g, {}, without(g, hidden)))
     assert doc["operator"][0]["salience"] == 1.0  # W3's demand is not in it
     (lane,) = [e for e in doc["edges"] if e["target"].startswith("operator:")]
     assert lane["current"] == 1.0
