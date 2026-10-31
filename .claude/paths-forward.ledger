@@ -3515,3 +3515,7 @@
 2026-10-31T18:36:00Z  tick  W1323 minted    -         "nemik_stackable gauge beside stack depth (luthen row), split off W613 so the landed --propose --json output stops holding mtools:W1428"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W613
 2026-10-31T18:36:23Z  tick  W613 advanced  nudge     "pace 18:25:22Z: nemik ruff ok (1105), codon ok, mypy ok; answered the 104-tick W613 wait on mtools:W1428 by message 312fdcde and split the gauge into W1323; gate empty this tick (no stack built) [blocked by W1323]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-31T19:05:09Z  status W1323 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T19:35:58Z  status W1323 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T19:36:06Z  tick  W1323 advanced  mechanize "W1323 landed ef807aeb: nemik_stackable gauge; first submit refused by test_architecture (my miss: not run before submit), fixed in checks/claims.py; ratchets flat and ok [blocked by W613]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T20:05:42Z  tick  W1324 minted    -         "witnesses.py's observer facts, vmalert and VictoriaMetrics answers and queue reads get TypedDicts, so mypy falls by about 80"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1288
+2026-10-31T20:05:51Z  status W1324 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

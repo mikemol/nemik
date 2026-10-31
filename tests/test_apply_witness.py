@@ -8,7 +8,7 @@ import json
 from datetime import UTC, datetime
 from typing import TYPE_CHECKING
 
-from nemik.witnesses import facts
+from nemik.witnesses import fact_of, facts
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -47,7 +47,7 @@ def test_a_fresh_applied_row_is_a_true_fact(
     _export(tmp_path, _now(), True)
     doc, missing = facts(QUERY)
     assert missing == []
-    assert doc["apply"]["home-mount"]["applied"] is True
+    assert fact_of(doc, "apply", "home-mount")["applied"] is True
 
 
 def test_an_unapplied_row_is_false_not_undefined(
@@ -58,7 +58,7 @@ def test_an_unapplied_row_is_false_not_undefined(
     _export(tmp_path, _now(), False)
     doc, missing = facts(QUERY)
     assert missing == []
-    assert doc["apply"]["home-mount"]["applied"] is False
+    assert fact_of(doc, "apply", "home-mount")["applied"] is False
 
 
 def test_a_stale_export_is_never_applied(
@@ -68,8 +68,8 @@ def test_a_stale_export_is_never_applied(
     monkeypatch.setenv("NEMIK_ROOT", str(tmp_path))
     _export(tmp_path, "2026-01-01T00:00:00Z", True)
     doc, _ = facts(QUERY)
-    assert doc["apply"]["home-mount"]["applied"] is False
-    assert doc["apply"]["home-mount"]["stale"] is True
+    assert fact_of(doc, "apply", "home-mount")["applied"] is False
+    assert fact_of(doc, "apply", "home-mount")["stale"] is True
 
 
 def test_a_row_the_export_does_not_hold_is_undefined(

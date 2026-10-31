@@ -24,6 +24,7 @@ import subprocess
 import sys
 from datetime import UTC, datetime
 from pathlib import Path
+from typing import TYPE_CHECKING, TypedDict, cast
 
 from mikemol.pathsforward.opa_eval import OpaUnavailableError, resolve
 
@@ -32,12 +33,79 @@ from nemik.delivery import owed, stamp
 from nemik.work import run_writer
 from nemik.workrows import edges_of
 
+if TYPE_CHECKING:
+    from collections.abc import Callable
+
 # input.<observer>["<key>"], the only fact shape a witness may reference.
 # The key is a Rego string literal, so it may carry escaped quotes (a promql label matcher).
 _REF = re.compile(r'input\.(\w+)\["((?:[^"\\]|\\.)*)"\]')
 
+Fact = dict[str, object]
 
-def _pid(key: str) -> dict | None:
+
+class Alert(TypedDict):
+    """One alert in vmalert's answer."""
+
+    name: str
+    state: str
+    labels: dict[str, str]
+
+
+class Sample(TypedDict):
+    """One series of a VictoriaMetrics instant query: its timestamp and value, as text."""
+
+    value: list[str]
+
+
+class Data(TypedDict, total=False):
+    """The `data` of either answer: `alerts` from vmalert, `result` from a query."""
+
+    alerts: list[Alert]
+    result: list[Sample]
+
+
+class Body(TypedDict, total=False):
+    """A successful answer of vmalert or VictoriaMetrics."""
+
+    status: str
+    data: Data
+
+
+class Expression(TypedDict):
+    """One expression of an opa eval answer."""
+
+    value: object
+
+
+class OpaResult(TypedDict):
+    """One result of an opa eval answer."""
+
+    expressions: list[Expression]
+
+
+class OpaAnswer(TypedDict, total=False):
+    """opa eval's `--format json` answer."""
+
+    result: list[OpaResult]
+
+
+class Card(TypedDict, total=False):
+    """The fields of a queue card that this module reads."""
+
+    symbol: str
+    status: str
+    witness: str
+    witness_lang: str
+    blocked_on: list[str]
+
+
+class Queue(TypedDict, total=False):
+    """A paths-forward.json, as far as this module reads it."""
+
+    waypoints: list[Card]
+
+
+def _pid(key: str) -> Fact | None:
     """`localhost/<pid>[@<starttime>]`. Only the local host is observable for now (open question).
 
     Returns:
@@ -59,11 +127,11 @@ def _pid(key: str) -> dict | None:
     return {"alive": not start or fields[19] == start, "start": fields[19]}
 
 
-def _file(key: str) -> dict | None:
+def _file(key: str) -> Fact | None:
     return {"exists": Path(key).exists()}
 
 
-def _git_ref(key: str) -> dict | None:
+def _git_ref(key: str) -> Fact | None:
     """`<repo>@<ref>` in the local clone under the nemik root: whether it resolves, and to what.
 
     Returns:
@@ -100,7 +168,7 @@ def _git_ref(key: str) -> dict | None:
     return {"exists": out.returncode == 0, "sha": out.stdout.strip()}
 
 
-def _get(env: str, path: str, params: dict) -> dict | None:
+def _get(env: str, path: str, params: dict[str, str]) -> Body | None:
     """GET <$env><path> as JSON; None when the endpoint is unset or unreachable (cannot observe).
 
     The address comes from the environment, not from here: on luthen,
@@ -119,13 +187,13 @@ def _get(env: str, path: str, params: dict) -> dict | None:
     url = f"{base.rstrip('/')}{path}?{urllib.parse.urlencode(params)}"
     try:
         with urllib.request.urlopen(url, timeout=5) as r:
-            body = json.load(r)
+            body: Body = json.load(r)
     except (OSError, ValueError):
         return None
     return body if body.get("status") == "success" else None
 
 
-def _alert(key: str) -> dict | None:
+def _alert(key: str) -> Fact | None:
     """`<alertname>[{label="v",...}]`: firing | pending | inactive (absent from vmalert's list).
 
     Returns:
@@ -136,7 +204,8 @@ def _alert(key: str) -> dict | None:
     body = _get("NEMIK_VMALERT_URL", "/api/v1/alerts", {}) if m else None
     if m is None or body is None:
         return None
-    want = dict(re.findall(r'(\w+)="([^"]*)"', m.group(2) or ""))
+    pairs: list[tuple[str, str]] = re.findall(r'(\w+)="([^"]*)"', m.group(2) or "")
+    want = dict(pairs)
     states = [
         a["state"]
         for a in body["data"]["alerts"]
@@ -148,7 +217,7 @@ def _alert(key: str) -> dict | None:
     }
 
 
-def _promql(key: str) -> dict | None:
+def _promql(key: str) -> Fact | None:
     """Run an instant query: its sample values, and whether the result is empty.
 
     Returns:
@@ -162,7 +231,7 @@ def _promql(key: str) -> dict | None:
     return {"values": values, "empty": not values}
 
 
-def _apply(key: str) -> dict | None:
+def _apply(key: str) -> Fact | None:
     """Say whether a row of luthen's host-apply export has a live file matching its source.
 
     nemik:W233. `applied` is true only for a fresh, well-formed export that carries an applied
@@ -187,7 +256,7 @@ def _apply(key: str) -> dict | None:
 
 # `input.now` (RFC 3339, UTC) is always present, so a time witness needs no observer:
 # `time.parse_rfc3339_ns(input.now) >= time.parse_rfc3339_ns("2026-10-01T00:00:00Z")`.
-OBSERVERS = {
+OBSERVERS: dict[str, Callable[[str], Fact | None]] = {
     "pid": _pid,
     "file": _file,
     "git_ref": _git_ref,
@@ -197,24 +266,42 @@ OBSERVERS = {
 }
 
 
-def facts(query: str, now: datetime | None = None) -> tuple[dict, list[str]]:
+def facts(query: str, now: datetime | None = None) -> tuple[Fact, list[str]]:
     """(input document, unobservable refs) for exactly the facts `query` references.
 
     Returns:
         The input document, and the refs that could not be observed.
 
     """
-    doc: dict = {"now": (now or datetime.now(UTC)).isoformat()}
-    missing = []
-    for obs, raw in _REF.findall(query):
-        key = json.loads(f'"{raw}"')  # Rego and JSON share string escapes
+    observed: dict[str, dict[str, Fact]] = {}
+    missing: list[str] = []
+    refs: list[tuple[str, str]] = _REF.findall(query)
+    for obs, raw in refs:
+        key: str = json.loads(f'"{raw}"')  # Rego and JSON share string escapes
         fn = OBSERVERS.get(obs)
         fact = fn(key) if fn else None
         if fact is None:
             missing.append(f'{obs}["{key}"]')
         else:
-            doc.setdefault(obs, {})[key] = fact
+            observed.setdefault(obs, {})[key] = fact
+    doc: Fact = {"now": (now or datetime.now(UTC)).isoformat()}
+    doc.update(observed)
     return doc, missing
+
+
+def fact_of(doc: Fact, observer: str, key: str) -> Fact:
+    """Read one observed fact out of an input document that `facts` built.
+
+    Args:
+        doc: The input document.
+        observer: The observer's name, as in `input.<observer>["<key>"]`.
+        key: The observer's key.
+
+    Returns:
+        The fact the observer gave for the key.
+
+    """
+    return cast("dict[str, Fact]", doc[observer])[key]
 
 
 def opa_json(query: str, doc: object, data: list[str]) -> object:
@@ -245,10 +332,13 @@ def opa_json(query: str, doc: object, data: list[str]) -> object:
         text=True,
         check=False,
     )
-    return None if out.returncode != 0 else json.loads(out.stdout)
+    if out.returncode != 0:
+        return None
+    answer: object = json.loads(out.stdout)
+    return answer
 
 
-def evaluate(query: str, doc: dict, missing: list[str]) -> str:
+def evaluate(query: str, doc: Fact, missing: list[str]) -> str:
     """Give 'true', 'false' or 'undefined'.
 
     Returns:
@@ -260,7 +350,7 @@ def evaluate(query: str, doc: dict, missing: list[str]) -> str:
     parsed = opa_json(query, doc, [])
     if not isinstance(parsed, dict):
         return "undefined"
-    result = parsed.get("result") or []
+    result = cast("OpaAnswer", parsed).get("result") or []
     return (
         "true"
         if result and all(e["value"] is not False for e in result[0]["expressions"])
@@ -324,9 +414,7 @@ def open_witnesses(root: Path) -> list[tuple[str, Path, str, str, str]]:
     out: list[tuple[str, Path, str, str, str]] = []
     for repo, path in workstream_files(root, QUEUE):
         try:
-            data: dict[str, list[dict[str, str]]] = json.loads(
-                path.read_text(encoding="utf-8")
-            )
+            data: Queue = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, ValueError):
             continue
         for w in data.get("waypoints", []):
@@ -367,7 +455,7 @@ def waiters(root: Path, repo: str, sym: str) -> dict[str, list[str]]:
     out: dict[str, list[str]] = {}
     for other, text in queue_texts(root).items():
         try:
-            data = json.loads(text)
+            data: Queue = json.loads(text)
         except ValueError:
             continue
         for w in data.get("waypoints", []):

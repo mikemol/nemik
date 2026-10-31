@@ -106,11 +106,10 @@
   "type-arg": 1
  },
  "src/nemik/witnesses.py": {
-  "misc": 86,
-  "type-arg": 10
+  "misc": 3
  },
  "src/nemik/witwait.py": {
-  "misc": 6
+  "misc": 1
  },
  "src/nemik/work.py": {
   "misc": 2
@@ -121,9 +120,6 @@
  "tests/test_apischema.py": {
   "misc": 16,
   "type-arg": 2
- },
- "tests/test_apply_witness.py": {
-  "misc": 20
  },
  "tests/test_cachestore.py": {
   "misc": 1,
