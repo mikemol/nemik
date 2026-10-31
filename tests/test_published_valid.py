@@ -31,7 +31,7 @@ def built(tmp_path_factory: pytest.TempPathFactory) -> Path:
 
 
 def _schema_for(name: str) -> str:
-    """The published schema path for a published data path (goals/<repo>.json share one).
+    """Give the published schema path for a data path (goals/<repo>.json share one).
 
     Returns:
         The path under schema/.

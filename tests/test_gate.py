@@ -95,7 +95,7 @@ def test_check_conforming_exits_zero_with_provenance(root: Path) -> None:
     assert lines[0].startswith("provenance: nemik ")
     assert "provenance: queue alpha untracked-source" in lines
     assert "provenance: queue beta untracked-source" in lines
-    assert any(l.startswith("OK        alpha") for l in lines)
+    assert any(row.startswith("OK        alpha") for row in lines)
 
 
 def test_check_violation_exits_one_and_names_repo(root: Path) -> None:
@@ -104,14 +104,14 @@ def test_check_violation_exits_one_and_names_repo(root: Path) -> None:
     write_queue(root, "gamma", waypoint("W1", enables=["alpha:W9"]))
     r = run("check", root)
     assert r.returncode == 1, r.stdout + r.stderr
-    assert any(l.startswith("VIOLATES  gamma") for l in r.stdout.splitlines())
+    assert any(row.startswith("VIOLATES  gamma") for row in r.stdout.splitlines())
 
 
 def test_inbound_keeps_unclaimed_column_and_hint(root: Path) -> None:
     """Inbound keeps unclaimed column and hint."""
     r = run("inbound", root, "beta")
     assert r.returncode == 0, r.stderr
-    rows = {l.split()[2]: l for l in r.stdout.splitlines()}
+    rows = {row.split()[2]: row for row in r.stdout.splitlines()}
     assert rows["alpha:W1"].split()[3] == "beta:W1"
     assert rows["alpha:W2"].split()[3] == "UNCLAIMED"
     assert rows["alpha:W2"].endswith("-- waiting on you, claim with --enables alpha:W2")
@@ -145,14 +145,14 @@ def test_long_bundled_title_warns_to_decompose(tmp_path: Path) -> None:
     write_queue(tmp_path, "alpha", waypoint("W1", title="x" * 80 + "; " + "y" * 80))
     r = run("check", tmp_path)
     assert r.returncode == 0, r.stdout + r.stderr  # a Warning, not a Violation
-    assert any("title over 150 chars" in l for l in r.stdout.splitlines())
+    assert any("title over 150 chars" in row for row in r.stdout.splitlines())
 
 
 def test_short_title_does_not_warn(tmp_path: Path) -> None:
     """Short title does not warn."""
     write_queue(tmp_path, "alpha", waypoint("W1", title="x" * 150))
     r = run("check", tmp_path)
-    assert not any("title over 150 chars" in l for l in r.stdout.splitlines())
+    assert not any("title over 150 chars" in row for row in r.stdout.splitlines())
 
 
 def test_long_atomic_title_does_not_warn(tmp_path: Path) -> None:
@@ -161,7 +161,7 @@ def test_long_atomic_title_does_not_warn(tmp_path: Path) -> None:
     """Long atomic title does not warn."""
     write_queue(tmp_path, "alpha", waypoint("W1", title="x" * 200))
     r = run("check", tmp_path)
-    assert not any("title over 150 chars" in l for l in r.stdout.splitlines())
+    assert not any("title over 150 chars" in row for row in r.stdout.splitlines())
 
 
 def test_operator_categories(tmp_path: Path) -> None:
@@ -218,7 +218,7 @@ def test_bundled_title_on_done_waypoint_does_not_warn(tmp_path: Path) -> None:
     )
     r = run("check", tmp_path)
     warned = [
-        l.split()[1] for l in r.stdout.splitlines() if "title over 150 chars" in l
+        row.split()[1] for row in r.stdout.splitlines() if "title over 150 chars" in row
     ]
     assert warned == ["W2"], r.stdout
 
@@ -240,7 +240,9 @@ def test_caused_by_unresolved_reference_warns_and_names_it(root: Path) -> None:
     )
     r = run("check", root)
     assert r.returncode == 0, r.stdout + r.stderr  # a Warning, not a Violation
-    named = {l.split()[1]: l for l in r.stdout.splitlines() if "caused_by names" in l}
+    named = {
+        row.split()[1]: row for row in r.stdout.splitlines() if "caused_by names" in row
+    }
     assert set(named) == {"W1", "W2"}, r.stdout
     assert "caused_by names luthen:W190," in named["W1"]
     assert "caused_by names beta:W9," in named["W2"]
@@ -323,7 +325,7 @@ def test_caused_by_into_residue_resolves(tmp_path: Path) -> None:
     ]
     q.write_text(json.dumps(doc))
     r = run("check", tmp_path)
-    assert not any("caused_by names" in l for l in r.stdout.splitlines()), r.stdout
+    assert not any("caused_by names" in row for row in r.stdout.splitlines()), r.stdout
 
 
 def test_single_repo_root_given_as_dot_is_named_by_its_directory(
@@ -343,4 +345,4 @@ def test_single_repo_root_given_as_dot_is_named_by_its_directory(
     r = installed.run("nemik-check", "--root", ".", cwd=repo)
     lines = r.stdout.splitlines()
     assert "OK        alpha" in lines, r.stdout + r.stderr
-    assert not any("caused_by names" in l for l in lines), r.stdout
+    assert not any("caused_by names" in row for row in lines), r.stdout

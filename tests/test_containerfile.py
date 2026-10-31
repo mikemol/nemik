@@ -31,7 +31,7 @@ def _bazel_data_paths() -> set[str]:
 
 
 def _image_copies() -> set[str]:
-    """The sources the Containerfile copies into the test stage (and the base it builds on).
+    """List the sources the Containerfile copies into the test stage (and its base).
 
     Returns:
         The sources named by its COPY lines that do not copy from another stage.

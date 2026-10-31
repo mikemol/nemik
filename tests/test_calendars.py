@@ -33,7 +33,7 @@ ICS = (
 
 
 def _helper(tmp_path: Path, *, fail: bool = False, text: str = ICS) -> Path:
-    """A stand-in for nemik-akonadi-tasks --export-calendar NAME --out FILE.
+    """Stand in for nemik-akonadi-tasks --export-calendar NAME --out FILE.
 
     Returns:
         The path of the executable stand-in helper.
@@ -51,7 +51,7 @@ def _helper(tmp_path: Path, *, fail: bool = False, text: str = ICS) -> Path:
 
 @pytest.fixture()
 def ics(monkeypatch: pytest.MonkeyPatch) -> str:
-    """The venv's mikemol-ics, with the environment it needs under bazel (PYTHONHOME).
+    """Give the venv's mikemol-ics, with the environment it needs under bazel (PYTHONHOME).
 
     Returns:
         The command that runs the venv's mikemol-ics.

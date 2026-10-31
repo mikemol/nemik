@@ -226,7 +226,7 @@ def served(series: Path | None = None, root: Path = FLEET) -> Generator[str]:
 def opened_page(
     p: Playwright, url: str, wait: str = CY_READY, block: tuple[str, ...] = ()
 ) -> tuple[Browser, Pager]:
-    """A browser and a page on `url`, once `wait` (a JS predicate) holds; skips without a browser.
+    """Give a browser and a page on `url` once `wait` (a JS predicate) holds; skips without one.
 
     `block` names files whose requests are refused, as a server that went away would (W1069).
 

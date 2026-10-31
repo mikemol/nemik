@@ -3,11 +3,11 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1331 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:92659438f97c3fb4`
+counter 1332 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:b7b6f8d929962995`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1331 | working |
+| 1 | W1332 | working |
 | 2 | W1075 | ready |
 | 3 | W1139 | ready |
 | 4 | W1279 | ready |
@@ -1310,11 +1310,12 @@ counter 1331 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:926
 | 1301 | W1328 | done |
 | 1302 | W1329 | done |
 | 1303 | W1330 | done |
+| 1304 | W1331 | done |
 
 ## waypoints
 
-1. **W1331** (working) Standing rule 14 cites nemik:R66 finding 5 (file retro-r68.json), restoring the writer's id that
-   W1330 replaced
+1. **W1332** (working) Eleven D401 docstrings, ten E741 loop names and fourteen N806 test names are rewritten, so ruff
+   falls toward 1023
 2. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 3. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -4319,6 +4320,8 @@ counter 1331 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:926
    top-level to_json import, so mypy falls by the bare-dict cascade and ruff by its local imports
 1303. **W1330** (done) Standing rule 14's citation is corrected and the 14-rule list is diffed against git HEAD's, from
    reviewer findings R69-F1 and R69-F2
+1304. **W1331** (done) Standing rule 14 cites nemik:R66 finding 5 (file retro-r68.json), restoring the writer's id that
+   W1330 replaced
 
 ## residue
 
@@ -4826,3 +4829,36 @@ counter 1331 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:926
   tick-open 23:10:38.1Z, script 23:13:34Z). The defect in this round is mine: R69-F1 told the session a correct citation
   was wrong, and the session's replacement is the less resolvable one. The G1's candidate list is again from memory.; 2
   finding(s)
+- **nemik:R72** (-) round 74: tick-w1332, W1331 (standing rule 14 citation restored to the writer's id), stack 742
+  submitted 23:22:49Z; previous landing a2216358 23:19:36Z (reflog); FIXPOINT DECLARED: root Nothing new beyond R70 to
+  R73 (writer ids nemik:R68 to nemik:R71). Verified: reflog landing a2216358 19:19:36 -0400 = 23:19:36Z; gate 741 submit
+  23:14:23.2Z to landing 5 min 13 s wall (the G1 says about 5 min); gate-empty 23:19:36Z to 23:22:49Z, 3 min 13 s wall;
+  G0 (date -u 23:20:27Z, card minted 23:20:26Z) before tick-open and before the script; rules 1..13 identical 13 of 13
+  against HEAD; --scan-literal for 'nemik:R66 finding 5' finds standing rule 14 (n=1) and the card's own
+  G0/ledger/mirror lines (6 hits in all, the extra ones being citations of it); R73-F1 is answered correctly, with the
+  id table written on W1331. A second stack behind a 3 min queue-only gate was not buildable (stated with the reason and
+  the candidates). The one unforced miss, not closing the roughly 20 stale ready cards during 742's gate, is the open
+  R72 finding on W613 (due 2026-11-01), not a new finding. Still open, each with its card and due date and unchanged:
+  R72 findings on W1288 (second stack in the same wake), W1329 (K above 0 from the tool's list), W613 (landed cards to
+  done), W846 (test_layout 2 min 23 s gate: fresh or cached), and R73-F2 on W1288 (PT018 46 sites per-file mypy delta,
+  nemik-stackable output was printed this round at 38 of 101 ready). No pace was read beyond 22:25:24Z because the 23:25
+  run had not written; that is the right reading.; 0 finding(s)
+- **nemik:R73** (-) round 75: cold review of retro-r68..r74, the standing set (14 rules), cards W1320..W1331, git log
+  -14 and the main reflog: root The record holds almost everywhere: every ratchet fall in the titles W1320 to W1329
+  equals the baseline-file total in git (ruff 1138>1123>1115>1105 flat 1105>1091>1064>1059; mypy 2266 flat then 2148 at
+  e95627a3 and 2076 at 651a1f46), every landing hash is in the reflog, and every duration in R72 to R74 recomputes from
+  the stamps. One stamp contradicts the reflog (W1320). The queue's own W1331 is still working (not landed), so the
+  fixpoint declared in R74 stands on an unlanded stack 742.; 2 finding(s)
+- **nemik:R74** (-) round 76: R75 (nemik:R73, cold review) folded in; stack 742 (W1331) still inflight at the read
+  below, key 1793488970920538899, began_ns 1793488972395283613; HEAD a2216358: root The R74 fixpoint declaration does
+  not stand until stack 742 lands: mikemol-commit --in-gate shows W1331 inflight, git reflog main still ends at a2216358
+  (19:19:36 -0400 = 23:19:36Z), and W1331 is working. It is WITHDRAWN here and re-declared only after the landing stamp
+  is read from the reflog, the landing is read back (origin and HEAD subject W1331), --standing at HEAD and live both
+  end 'nemik:R66 finding 5, file retro-r68.json, W1219', and W1331 is set done. The cold reviewer's two findings (W1320
+  LANDED stamp 17:24:21Z against the reflog's 17:23:30Z; the fixpoint on an unlanded stack) are both right; the first is
+  one I saw in R68 (the 51 s difference, which I noted in passing) and did not carry as a finding, so it was owed by me,
+  and it is now correctly carried on W1320 in R75. Nothing else is new: R75's other claims (ratchet totals equal the
+  baseline files; every landing hash in the reflog; R72 to R74 durations recompute) I did not re-judge. The mapping of
+  retro files to writer ids stays unverified by independence (R75): the only record is W1331's table, written from the
+  --add-retro answers. R75 findings stay as its own open findings on W1320 (due 2026-11-02) and W1331 (due 2026-11-01);
+  the earlier R70 to R73 findings stay open as listed in R74.; 0 finding(s)

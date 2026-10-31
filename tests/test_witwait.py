@@ -20,7 +20,7 @@ if TYPE_CHECKING:
 
 
 def _script(*steps: tuple[str, str]) -> Callable[[], tuple[str, str]]:
-    """A poll that plays `steps` in order, then repeats the last one.
+    """Make a poll that plays `steps` in order, then repeats the last one.
 
     Returns:
         The poll function.
@@ -124,7 +124,7 @@ def test_a_bad_duration_on_the_command_line_is_exit_two(
 
 @contextmanager
 def _victoria(series: list[list[str]]) -> Generator[str]:
-    """A local /api/v1/query that answers each request with the next list of sample values."""
+    """Serve a local /api/v1/query that answers each request with the next sample list."""
     answers = list(series)
 
     class Handler(BaseHTTPRequestHandler):

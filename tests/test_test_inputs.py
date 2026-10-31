@@ -21,7 +21,7 @@ HINT = (
 
 
 def _base(node: ast.expr) -> str | None:
-    """The repo-relative directory an expression names, or None when it is not a known base.
+    """Give the repo-relative directory an expression names, or None for an unknown base.
 
     Returns:
         '' for the repo root, 'tests' for the tests directory, else None.
@@ -70,7 +70,7 @@ def _paths(source: str) -> set[str]:
 
 
 def _declared() -> tuple[set[str], list[str]]:
-    """The test macro's data: exact files, and directory prefixes (globs and fixture packages).
+    """Give the test macro's data: exact files and directory prefixes (globs, fixtures).
 
     Returns:
         The exact files, and the directory prefixes.

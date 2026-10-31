@@ -43,7 +43,7 @@ def _fleet(tmp_path: Path) -> Graph:
 
 
 def _stand_in(tmp_path: Path, code: int = 0) -> Path:
-    """A stand-in for nemik-akonadi-tasks: echoes its arguments, counts the events on stdin.
+    """Stand in for nemik-akonadi-tasks: echo its arguments, count the events on stdin.
 
     Returns:
         The path of the executable stand-in script.
