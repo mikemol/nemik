@@ -31,6 +31,12 @@ def _publish(root: Path) -> None:
 
 @pytest.fixture()
 def served(tmp_path: Path) -> Iterator[tuple[Path, int]]:
+    """Serve a fresh published directory from a local HTTP server.
+
+    Yields:
+        The published directory and the port the server listens on.
+
+    """
     root = tmp_path / "pub"
     root.mkdir()
     server = ThreadingHTTPServer(("127.0.0.1", 0), handler(root))

@@ -364,11 +364,7 @@
   "S603": 1,
   "SLF001": 2
  },
- "tests/test_editable.py": {
-  "D100": 1
- },
  "tests/test_floorasks.py": {
-  "D100": 1,
   "PLR2004": 1
  },
  "tests/test_flow_cache.py": {
@@ -381,7 +377,6 @@
   "S311": 1
  },
  "tests/test_frontier.py": {
-  "D100": 1,
   "N806": 14,
   "PLC0415": 3,
   "PT018": 3
@@ -448,7 +443,6 @@
   "PLC2701": 1
  },
  "tests/test_incremental_redraw.py": {
-  "D103": 1,
   "PT018": 1
  },
  "tests/test_index.py": {
@@ -544,7 +538,6 @@
   "PLR2004": 1
  },
  "tests/test_rank.py": {
-  "D100": 1,
   "PLC0415": 14,
   "PLR2004": 5
  },
@@ -564,7 +557,6 @@
   "S603": 1
  },
  "tests/test_read_api.py": {
-  "D103": 1,
   "PT018": 2
  },
  "tests/test_realize.py": {
@@ -591,7 +583,6 @@
   "PLR0917": 1
  },
  "tests/test_serve_model.py": {
-  "D103": 1,
   "PLC0415": 1,
   "PLR2004": 3,
   "PT018": 1
@@ -611,13 +602,11 @@
   "PLR2004": 1
  },
  "tests/test_static_view.py": {
-  "D103": 1,
   "S404": 1,
   "S603": 1,
   "SLF001": 1
  },
  "tests/test_staticserve.py": {
-  "D103": 1,
   "PLR2004": 5,
   "S404": 1,
   "S603": 1
@@ -630,7 +619,6 @@
   "RUF069": 2
  },
  "tests/test_umbrella_block.py": {
-  "D100": 1,
   "PLC0415": 4
  },
  "tests/test_vtodo.py": {
@@ -649,12 +637,10 @@
   "RUF069": 1
  },
  "tests/test_web_render.py": {
-  "D103": 1,
   "E501": 1
  },
  "tests/test_withheld.py": {
   "ANN001": 4,
-  "D103": 1,
   "PLC0415": 1
  },
  "tests/test_witness_promql.py": {
@@ -663,7 +649,6 @@
  "tests/test_witnesses.py": {
   "ARG001": 5,
   "ARG005": 1,
-  "D100": 1,
   "PLC0415": 12,
   "PT018": 5,
   "S404": 1,
@@ -689,7 +674,6 @@
  },
  "tools/nemik_client.py": {
   "ANN401": 1,
-  "D107": 1,
   "S310": 1,
   "T201": 1
  }

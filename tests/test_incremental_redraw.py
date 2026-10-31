@@ -27,6 +27,12 @@ POSITIONS = (
 
 @pytest.fixture(scope="module")
 def server() -> Iterator[str]:
+    """Serve the fixture fleet's page for this module's tests.
+
+    Yields:
+        The page's URL.
+
+    """
     with webpage.served() as url:
         yield url
 

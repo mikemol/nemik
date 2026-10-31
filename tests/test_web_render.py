@@ -45,6 +45,12 @@ def _queue(root: Path, repo: str, n: int) -> None:
 
 @pytest.fixture()
 def server(tmp_path: Path) -> Iterator[str]:
+    """Serve nemik-serve over two generated repo queues.
+
+    Yields:
+        The served page's URL.
+
+    """
     _queue(tmp_path, "alpha", 40)
     _queue(tmp_path, "beta", 25)
     # nemik:W1060: the server binds its own port and says so (webpage.served), and a server that

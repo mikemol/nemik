@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
+"""floorasks: each bad waypoint pointer in a bibliography is named."""
+
 import json
 from pathlib import Path
 

@@ -27,6 +27,7 @@ if TYPE_CHECKING:
 
 
 def write_queue(root: Path, repo: str) -> None:
+    """Write an empty queue for `repo` under `root`."""
     d = root / repo / ".claude"
     d.mkdir(parents=True)
     (d / "paths-forward.json").write_text(

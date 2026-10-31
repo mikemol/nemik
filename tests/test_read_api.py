@@ -38,6 +38,12 @@ def built(tmp_path_factory: pytest.TempPathFactory) -> Path:
 
 @pytest.fixture(scope="module")
 def served(built: Path) -> Iterator[str]:
+    """Serve the built directory from a local HTTP server.
+
+    Yields:
+        The server's base URL.
+
+    """
     handler = functools.partial(
         http.server.SimpleHTTPRequestHandler, directory=str(built)
     )

@@ -3527,3 +3527,7 @@
 2026-10-31T21:30:07Z  interrupt W1326 minted    -         "Standing rule 14: the guard tests run directly before a submit, from the reviewer's R66 finding on refused stacks 735 and 736"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1219
 2026-10-31T21:30:18Z  status W1326 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-31T21:33:52Z  tick  W1326 advanced  warrant   "standing rule 14 (pre-submit guard tests) stored, 14 rules read back, first 13 unchanged; queue-only stack 737 next; pace 20:25:23Z: nemik codon, ruff, mypy ok [blocked by W1288]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T21:36:10Z  status W1326 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T22:00:13Z  interrupt W1327 minted    -         "Six test modules and eight test helpers outside test_layout get a docstring written from reading them, so ruff falls toward 1091"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1288
+2026-10-31T22:00:20Z  status W1327 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T22:06:26Z  tick  W1327 advanced  mechanize "W1327 stack 738 ready: 14 docstrings, ruff 1105 to 1091, mypy flat; pace 21:25:23Z PENDING: ruff behind (fell 84, owes 90), mypy behind (fell 118, owes 122), codon ok [blocked by W1288]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

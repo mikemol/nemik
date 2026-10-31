@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
+"""nemik.editable_install tells an editable install from a package install."""
+
 import json
 
 import pytest

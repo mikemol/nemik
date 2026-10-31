@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
+"""blocks.annotate: a peer block on an umbrella is flagged, one on a child is not."""
+
 from rdflib import RDF, Graph, Literal, URIRef
 from umbrella_cases import blocked_on_umbrellas
 

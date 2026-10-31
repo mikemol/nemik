@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
+"""witnesses.witness: Rego witnesses over the file, git_ref, alert and promql observers."""
+
 from __future__ import annotations
 
 import os

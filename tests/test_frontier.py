@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
+"""rank.frontier: a goal's frontier leaves and the boundary outside them."""
+
 from rdflib import Graph, Literal, URIRef
 
 from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri

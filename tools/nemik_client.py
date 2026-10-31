@@ -24,6 +24,7 @@ class Client:
     """Keeps the documents it has fetched, keyed by path, with the hash it fetched them at."""
 
     def __init__(self, base: str) -> None:
+        """Remember `base` with a trailing slash and start with no documents fetched."""
         self.base = base.rstrip("/") + "/"
         self.docs: dict[str, Any] = {}
         self.seen: dict[str, str] = {}

@@ -16,6 +16,12 @@ FLEET = Path(__file__).parent / "fixtures" / "fleet"
 
 @pytest.fixture(scope="module")
 def docs() -> dict[str, object]:
+    """Build the static documents of the fixture fleet.
+
+    Returns:
+        The documents by path.
+
+    """
     return static_data(Model(FLEET))
 
 

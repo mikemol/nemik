@@ -26,6 +26,12 @@ MIN_CARDS = 10
 
 @pytest.fixture(scope="module")
 def snapshot_url(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
+    """Build a snapshot with nemik-serve --static, withholding nothing, and serve it.
+
+    Yields:
+        The served snapshot's URL.
+
+    """
     root = tmp_path_factory.mktemp("published")
     withheld = root / "withheld.json"
     withheld.write_text(WITHHELD_NONE)

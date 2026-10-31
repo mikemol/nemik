@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
+"""rank: packaged weights, weight overrides, downstream weight and the order."""
+
 import pytest
 from rdflib import Graph, Literal, URIRef
 
