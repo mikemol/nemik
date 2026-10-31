@@ -290,9 +290,6 @@
  "tests/test_alarm_delivery.py": {
   "PLR2004": 1
  },
- "tests/test_apischema.py": {
-  "DOC201": 1
- },
  "tests/test_apply_witness.py": {
   "FBT001": 1,
   "FBT003": 4
@@ -328,13 +325,11 @@
  },
  "tests/test_calendar_write.py": {
   "D401": 1,
-  "DOC201": 2,
   "PLR2004": 2
  },
  "tests/test_calendars.py": {
   "ARG001": 4,
   "D401": 2,
-  "DOC201": 2,
   "E501": 2,
   "FBT003": 1,
   "PLC2701": 1,
@@ -367,13 +362,9 @@
   "PLR2004": 3,
   "RUF069": 2
  },
- "tests/test_claims_boundary.py": {
-  "DOC201": 1
- },
  "tests/test_containerfile.py": {
   "D103": 1,
-  "D401": 1,
-  "DOC201": 2
+  "D401": 1
  },
  "tests/test_critical.py": {
   "D103": 1,

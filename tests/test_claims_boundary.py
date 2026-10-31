@@ -19,7 +19,12 @@ LOAD = re.compile(r"(?<![A-Za-z0-9_])store\.load\s?\(")
 
 
 def _claims() -> ModuleType:
-    """checks/claims.py, which is a script and not a package."""
+    """checks/claims.py, which is a script and not a package.
+
+    Returns:
+        The loaded checks/claims module.
+
+    """
     spec = importlib.util.spec_from_file_location(
         "claims", ROOT / "checks" / "claims.py"
     )

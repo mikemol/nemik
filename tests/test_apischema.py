@@ -12,7 +12,12 @@ FLEET = Path(__file__).parent / "fixtures" / "fleet"
 
 
 def _records(node: object) -> list[dict]:
-    """Every object schema that pins its properties (a record), anywhere in `node`."""
+    """Every object schema that pins its properties (a record), anywhere in `node`.
+
+    Returns:
+        The record schemas found, in walk order.
+
+    """
     out: list[dict] = []
     if isinstance(node, dict):
         if node.get("additionalProperties") is False and "properties" in node:

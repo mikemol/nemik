@@ -17,7 +17,12 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def _bazel_data_paths() -> set[str]:
-    """Repo-relative paths named in the test targets' data (labels and @repos skipped)."""
+    """Repo-relative paths named in the test targets' data (labels and @repos skipped).
+
+    Returns:
+        The named paths whose first segment exists at the repo root.
+
+    """
     build = (ROOT / "BUILD.bazel").read_text()
     block = build[build.index("sh_test(") : build.index("for src in glob")]
     names = set(re.findall(r'"([A-Za-z.][^":@$]*)"', block))
@@ -26,7 +31,12 @@ def _bazel_data_paths() -> set[str]:
 
 
 def _image_copies() -> set[str]:
-    """The sources the Containerfile copies into the test stage (and the base it builds on)."""
+    """The sources the Containerfile copies into the test stage (and the base it builds on).
+
+    Returns:
+        The sources named by its COPY lines that do not copy from another stage.
+
+    """
     text = (ROOT / "Containerfile").read_text()
     copied: set[str] = set()
     for line in text.splitlines():

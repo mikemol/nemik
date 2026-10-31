@@ -13,7 +13,12 @@ from nemik.calwrite import main
 
 
 def _fleet(tmp_path: Path) -> Graph:
-    """Build life with two open dated waypoints, one done, one undated."""
+    """Build life with two open dated waypoints, one done, one undated.
+
+    Returns:
+        The queue graph of the life repo.
+
+    """
     path = tmp_path / "life.json"
     waypoints = [
         {"symbol": "W9", "title": "cpr", "status": "ready", "due": "20261001T220000Z"},
@@ -38,7 +43,12 @@ def _fleet(tmp_path: Path) -> Graph:
 
 
 def _stand_in(tmp_path: Path, code: int = 0) -> Path:
-    """A stand-in for nemik-akonadi-tasks: echoes its arguments, counts the events on stdin."""
+    """A stand-in for nemik-akonadi-tasks: echoes its arguments, counts the events on stdin.
+
+    Returns:
+        The path of the executable stand-in script.
+
+    """
     helper = tmp_path / "helper"
     helper.write_text(
         f'#!/bin/sh\nn=$(grep -c BEGIN:VEVENT)\necho "ARGS $* EVENTS $n"\nexit {code}\n'
