@@ -3547,3 +3547,14 @@
 2026-10-31T23:00:43Z  interrupt W1329 minted    -         "test_rank_flow.py reads rank rows and to_json documents through test-side TypedDicts and one top-level to_json import, so mypy falls by the bare-dict cascade and ruff by its local imports"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1288
 2026-10-31T23:00:53Z  status W1329 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-31T23:07:07Z  tick  W1329 advanced  mechanize "W1329 stack 740 ready: test_rank_flow.py TypedDicts, mypy 2148 to 2076, ruff 1064 to 1059; pace 22:25:24Z both behind (mypy owes 122 fell 118; ruff owes 90 fell 64), codon ok [blocked by W1288]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T23:10:02Z  status W1329 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T23:10:11Z  status W1291 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T23:10:13Z  status W1292 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T23:10:15Z  status W1313 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T23:10:18Z  status W1316 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T23:10:20Z  status W1317 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T23:10:21Z  status W1318 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T23:10:23Z  status W1319 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T23:10:29Z  interrupt W1330 minted    -         "Standing rule 14's citation is corrected and the 14-rule list is diffed against git HEAD's, from reviewer findings R69-F1 and R69-F2"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1326
+2026-10-31T23:10:39Z  status W1330 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T23:14:12Z  tick  W1330 advanced  warrant   "standing rule 14 citation corrected; HEAD text diff of the standing set 13 of 13 identical; queue-only stack 741 next; W1329 landed 651a1f46 and closed done with W1291, W1292, W1313, W1316 to W1319; R72 added as nemik:R70 [blocked by W1288]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
