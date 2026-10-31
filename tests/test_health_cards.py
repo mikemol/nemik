@@ -12,6 +12,7 @@ if TYPE_CHECKING:
 
 
 def test_signals_from_cards_alone() -> None:
+    """Signals from cards alone."""
     cards = {
         "r:W1": Card("r:W1", "blocked", "", (), (), ticks_blocked=9),
         "r:W2": Card("r:W2", "ready", "", (), ()),

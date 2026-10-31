@@ -76,4 +76,5 @@ def test_a_gated_tree_selects_a_stage_the_containerfile_has() -> None:
 
 
 def test_the_check_reads_something() -> None:
+    """The check reads something."""
     assert {"tests", "docs", "tools"} <= {p.split("/")[0] for p in _bazel_data_paths()}

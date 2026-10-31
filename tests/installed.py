@@ -25,6 +25,12 @@ def _bin() -> tuple[Path, dict[str, str]]:
 
 
 def script(name: str) -> list[str]:
+    """Give the argv of an installed script.
+
+    Returns:
+        The script's path, as a one-item argv list.
+
+    """
     path = _bin()[0] / name
     assert path.exists(), f"{name} is not installed in {path.parent}"
     return [str(path)]
@@ -33,6 +39,12 @@ def script(name: str) -> list[str]:
 def run(
     name: str, *args: str, cwd: Path | None = None
 ) -> subprocess.CompletedProcess[str]:
+    """Run an installed script to completion, capturing its output as text.
+
+    Returns:
+        The finished process; a nonzero exit is left to the caller.
+
+    """
     return subprocess.run(
         [*script(name), *args],
         env=_bin()[1],
@@ -46,6 +58,12 @@ def run(
 def popen(
     name: str, *args: str, stdout: int | None = None, stderr: int | None = None
 ) -> subprocess.Popen[bytes]:
+    """Start an installed script without waiting for it.
+
+    Returns:
+        The running process.
+
+    """
     return subprocess.Popen(
         [*script(name), *args], env=_bin()[1], stdout=stdout, stderr=stderr
     )

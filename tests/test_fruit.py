@@ -35,6 +35,7 @@ def test_tagged_item_joins_with_its_downstream() -> None:
 
 
 def test_no_members_no_row() -> None:
+    """No members no row."""
     assert fruit(Graph(), "a", [{"symbol": "W1", "downstream": 2}]) is None
 
 

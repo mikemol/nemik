@@ -28,10 +28,12 @@ def test_an_errand_is_the_operators_not_a_tool() -> None:
 
 
 def test_a_decision_is_unchanged() -> None:
+    """A decision is unchanged."""
     assert operator_category("operator: decide which store") == "needs-you"
 
 
 def test_errand_repos_are_declared() -> None:
+    """Errand repos are declared."""
     # nemik:W460: a machine-sounding act in these repos is an errand, not an unwritten tool
     assert errand_repos('[errand]\nrepos = ["life"]\n') == {"life"}
     assert errand_repos("") == frozenset()

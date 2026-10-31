@@ -48,6 +48,12 @@ class Client:
 
 
 def main(argv: list[str] | None = None) -> int:
+    """Fetch the published view's changed paths, once or on each poll with --watch.
+
+    Returns:
+        0, after printing the paths fetched.
+
+    """
     ap = argparse.ArgumentParser(
         prog="nemik_client", description=(__doc__ or "").splitlines()[0]
     )

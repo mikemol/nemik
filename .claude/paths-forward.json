@@ -31495,17 +31495,17 @@
     {
       "symbol": "W1313",
       "title": "history.weekly answers a typed WeeklyRow and its consumers read keys, not Any, so mypy falls",
-      "status": "working",
+      "status": "ready",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-10-31: 2026-10-31 Stack 728 (key 1793396663619474772, W1313 then W1316, submitted 2026-10-30T21:44:16Z) did NOT land: the session ended while its submit process was running, the background task was marked stopped and its output file reads [killed]; the gate queue is empty, HEAD and origin are still de4cfd96106f6c8ca1bdcf8850f9d398d5a7b421, and no refusal was printed. This is not a gate verdict on the code. Working tree intact (history.py WeeklyRow, five test files, both baselines at 2266 and 1189). Cron job 19341093 survived; the watchdog was restarted from the pinned install. Resubmitting the same stack file unchanged, since the cause was the process, not the content. Pace of 2026-10-31T14:25:21Z (current for landing 2026-10-30T21:39:23Z): codon BEHIND (owes 2), ruff BEHIND (fell 52, owes 73), mypy ok.",
+      "evidence": "2026-10-31: 2026-10-31 Stack 728 (key 1793396663619474772, W1313 then W1316, submitted 2026-10-30T21:44:16Z) did NOT land: the session ended while its submit process was running, the background task was marked stopped and its output file reads [killed]; the gate queue is empty, HEAD and origin are still de4cfd96106f6c8ca1bdcf8850f9d398d5a7b421, and no refusal was printed. This is not a gate verdict on the code. Working tree intact (history.py WeeklyRow, five test files, both baselines at 2266 and 1189). Cron job 19341093 survived; the watchdog was restarted from the pinned install. Resubmitting the same stack file unchanged, since the cause was the process, not the content. Pace of 2026-10-31T14:25:21Z (current for landing 2026-10-30T21:39:23Z): codon BEHIND (owes 2), ruff BEHIND (fell 52, owes 73), mypy ok. | 2026-10-31: 2026-10-31 LANDED the resubmitted stack 728 (key 1793458084896993236, submitted 2026-10-31T14:48:00Z) as 2b0c576 (W1313) and 2077a8f (W1316), both [PUSHED] first try; origin/main read back 2077a8fb34821d92ec8d35a347eaaab67f259a5b; subjects mine (git log); 14 paths committed. Cards set ready BEFORE this line. Loadavg at the resubmit 39.19 47.13 47.29, at the verdict 40.81 49.70 51.66. Landed falls: mypy 2337 to 2266 (-71) and ruff 1197 to 1189 (-8), both MEASURED before submit. The first submit (2026-10-30T21:44:16Z) was killed with the session; the gate then ran the identical content once to a pass.",
       "issued_at": "2026-10-30T20:52:26Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1187",
-      "last_worked": "2026-10-31T14:47:59Z",
+      "last_worked": "2026-10-31T15:01:50Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -31559,7 +31559,7 @@
     {
       "symbol": "W1316",
       "title": "8 test helpers in five test files get a Returns section written from their bodies, so ruff falls 1197 to 1189",
-      "status": "working",
+      "status": "ready",
       "enables": [],
       "touches": [],
       "blocked_on": [],
@@ -31569,7 +31569,7 @@
       "issued_at": "2026-10-30T21:43:32Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1279",
-      "last_worked": "2026-10-30T21:44:15Z",
+      "last_worked": "2026-10-31T15:01:39Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -31582,18 +31582,25 @@
     {
       "symbol": "W1317",
       "title": "34 helpers and tests without a docstring (tests, test fixtures and two tools) get one, so ruff falls 1189 to 1155",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-10-31: 2026-10-31 G0 (MEASURED unless marked): 34 docstrings (12 hand-written helpers with Returns where they return a value, 22 name-derived fragment tests); mikemol-pycheck --ratchet: ruff 1189 to 1155 (-34, exactly the count), mypy 2266 flat; baseline written with nothing queued (728 landed 2077a8f); format check of tests and tools clean; 118 tests of 15 edited files pass (run before the test_containerfile docstring went back in, which is a docstring only). The earlier 33 and 1156 in my message to the host counted that file's docstring as withheld; it is back. Docstrings only: no census (stated, not run). Pace of 2026-10-31T14:25:21Z, PENDING for landing 15:00:46Z: codon BEHIND, ruff BEHIND (owes 73), mypy ok; this stack names ruff-baseline.json. Gate empty. Loadavg at submit 44.58 48.34 50.95.",
       "issued_at": "2026-10-30T21:52:30Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1288",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-31T15:03:24Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "tests/installed.py",
+        "tests/test_gate.py",
+        "tools/gen_pieces_corpus.py",
+        "ruff-baseline.json"
+      ]
     }
   ],
   "residue": [

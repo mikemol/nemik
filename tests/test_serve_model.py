@@ -35,6 +35,7 @@ def write_queue(root: Path, repo: str) -> None:
 
 
 def test_concurrent_refresh_rebuilds_once(tmp_path: Path) -> None:
+    """Concurrent refresh rebuilds once."""
     write_queue(tmp_path, "alpha")
     model = Model(tmp_path)
     real_survey = __import__("nemik.serve", fromlist=["survey"]).survey

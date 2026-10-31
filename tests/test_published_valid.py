@@ -40,6 +40,7 @@ def test_every_schema_is_a_valid_2020_12_schema(built: Path) -> None:
 
 
 def test_every_contracted_document_validates(built: Path) -> None:
+    """Every contracted document validates."""
     checked = 0
     for doc in sorted(built.rglob("*.json")):
         name = str(doc.relative_to(built))

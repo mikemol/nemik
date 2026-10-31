@@ -53,6 +53,12 @@ def _doc(
 
 
 def cases() -> dict[str, dict[str, Any]]:
+    """Build the corpus: hand-made documents and the fixture fleet cut to three repos.
+
+    Returns:
+        Each case's name and its graph document.
+
+    """
     a1, b1 = "urn:nemik:a/W1", "urn:nemik:b/W1"
     model = Model(HERE / "tests" / "fixtures" / "fleet")
     model.refresh()
@@ -115,6 +121,7 @@ def _first_repos(doc: dict[str, Any], n: int) -> dict[str, Any]:
 
 
 def main() -> None:
+    """Write each case's document, its pieces and their assembly as one JSON file."""
     OUT.mkdir(parents=True, exist_ok=True)
     for name, doc in cases().items():
         cut = split(cast("GraphDoc", doc))

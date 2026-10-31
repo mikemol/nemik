@@ -132,6 +132,7 @@ def test_a_calendar_block_is_a_condition_not_unresolved() -> None:
 
 
 def test_cal_forms_agree() -> None:
+    """Cal forms agree."""
     from nemik.blocks import CAL_BLOCK
     from nemik.calendars import CAL_REF
 

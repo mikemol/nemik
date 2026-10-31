@@ -21,6 +21,12 @@ if TYPE_CHECKING:
 
 
 def waypoint(sym: str, **kw: object) -> dict[str, object]:
+    """Build one ready waypoint of the fixture queue, with `kw` overriding its fields.
+
+    Returns:
+        The waypoint as the queue file stores it.
+
+    """
     return {
         "symbol": sym,
         "title": f"{sym} title",
@@ -38,6 +44,7 @@ def waypoint(sym: str, **kw: object) -> dict[str, object]:
 
 
 def write_queue(root: Path, repo: str, *wps: dict[str, object]) -> None:
+    """Write a repo's queue file under `root` from the given waypoints."""
     d = root / repo
     d.mkdir(parents=True)
     counter = max((int(str(w["symbol"])[1:]) for w in wps), default=0)
@@ -52,6 +59,12 @@ def write_queue(root: Path, repo: str, *wps: dict[str, object]) -> None:
 
 
 def run(tool: str, root: Path, *argv: str) -> subprocess.CompletedProcess[str]:
+    """Run one nemik tool against the fixture root.
+
+    Returns:
+        The finished process.
+
+    """
     return installed.run(f"nemik-{tool}", "--root", str(root), *argv)
 
 

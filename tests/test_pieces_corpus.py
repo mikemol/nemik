@@ -39,6 +39,7 @@ def _diff(path: str, want: object, got: object) -> list[str]:
 
 
 def test_the_corpus_is_there() -> None:
+    """The corpus is there."""
     assert len(CASES) >= 5
 
 

@@ -32,6 +32,7 @@ def test_a_named_opa_exists() -> None:
 
 
 def test_file_witness_true_false(tmp_path: Path) -> None:
+    """File witness true false."""
     p = tmp_path / "flag"
     q = f'input.file["{p}"].exists'
     assert witness(q)[0] == "false"
@@ -70,6 +71,7 @@ def test_time_witness_uses_input_now() -> None:
 
 
 def test_git_ref_witness(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """Git ref witness."""
     import subprocess
 
     repo = tmp_path / "r"
@@ -172,6 +174,7 @@ def _serve(monkeypatch: pytest.MonkeyPatch, routes: dict) -> None:
 
 
 def test_alert_and_promql_witnesses(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Alert and promql witnesses."""
     alerts = [
         {"name": "Trace", "state": "firing", "labels": {"repo": "a"}},
         {"name": "Trace", "state": "pending", "labels": {"repo": "b"}},
@@ -208,6 +211,7 @@ def test_alert_and_promql_witnesses(monkeypatch: pytest.MonkeyPatch) -> None:
 
 
 def test_unset_endpoint_is_undefined(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Unset endpoint is undefined."""
     monkeypatch.delenv("NEMIK_VM_URL", raising=False)
     assert witness('input.promql["up"].empty')[0] == "undefined"
 

@@ -22,6 +22,7 @@ def test_packaged_weights_rank_stalled_peers_highest() -> None:
 
 
 def test_weights_override_from_text() -> None:
+    """Weights override from text."""
     assert load_weights("local = 2\npeer = 5\npeer_blocked = 9\n") == Weights(2, 5, 9)
 
 

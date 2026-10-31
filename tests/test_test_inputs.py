@@ -101,6 +101,7 @@ def _covered(path: str, files: set[str], prefixes: list[str]) -> bool:
 
 
 def test_paths_are_declared_inputs() -> None:
+    """Paths are declared inputs."""
     files, prefixes = _declared()
     missing: list[str] = []
     for test in sorted(HERE.glob("test_*.py")):

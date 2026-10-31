@@ -69,6 +69,7 @@ def _fan_in(order: list[int]) -> Graph:
 def test_tied_longest_chains_are_all_marked_and_graded_not_picked_by_sort_order() -> (
     None
 ):
+    """Tied longest chains are all marked and graded not picked by sort order."""
     from nemik.critical import critical
 
     found = critical(_fan_in(list(range(1, 13))))

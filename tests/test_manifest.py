@@ -47,6 +47,7 @@ def test_a_new_field_is_flagged() -> None:
 
 
 def test_manifest_classes_are_known() -> None:
+    """Manifest classes are known."""
     known = {
         "ref",
         "enum",

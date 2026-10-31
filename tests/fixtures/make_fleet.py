@@ -22,6 +22,13 @@ REF = re.compile(r"^(?:[\w.-]+:)?W\d+$")
 
 
 def scrub_block(text: str) -> str:
+    """Reduce a blocked_on entry to what nemik resolves, keeping no private text.
+
+    Returns:
+        A card reference as written, `operator: decide` or `operator: act` with a fixture
+        marker, else the leading repo or session name.
+
+    """
     t = text.strip()
     if REF.match(t):
         return t
@@ -34,6 +41,7 @@ def scrub_block(text: str) -> str:
 
 
 def main(root: Path, out: Path) -> None:
+    """Rebuild the fixture fleet under `out` from the queues under `root`, scrubbed."""
     shutil.rmtree(out, ignore_errors=True)
     for q in sorted(root.glob("*/.claude/paths-forward.json")):
         repo = q.parent.parent.name

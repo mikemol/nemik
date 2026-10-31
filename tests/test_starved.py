@@ -26,6 +26,7 @@ def _card(symbol: str, issued: str, next_step: str) -> dict[str, object]:
 
 
 def test_declared_age_is_read() -> None:
+    """Declared age is read."""
     assert days_limit("[starvation]\ndays = 3\n") == 3
     assert days_limit("") == 14
 
