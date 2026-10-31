@@ -77,9 +77,10 @@ from nemik.check import (
     survey,
     workstream_files,
 )
-from nemik.rank import TIERS
+from nemik.rank import TIERS, load_weights, rank
 from nemik.realize import verdicts
 from nemik.runlogs import unmigrated_at_source
+from nemik.stackable import stackable_count
 from nemik.wake import read_liveness, roster
 from nemik.workrows import open_leaf_stamps, tick_kinds, working_rows
 
@@ -212,6 +213,7 @@ HELP = {
     "nemik_unforecastable_cards": "Working cards with no children, so no forecast can be made.",
     "nemik_cards_reopened_24h": "Cards that went from done back to open in the last 24 hours.",
     "nemik_manifest_drift": "Done cards whose commits touched files outside their manifest.",
+    "nemik_stackable": "Ready cards one commit stack can carry now: pairwise disjoint manifests.",
     "nemik_ready_stale": "Ready cards untouched past how long 9 in 10 small cards take to finish.",
     "nemik_run_log_unmigrated": "Source run-log lines that predate the run-row shape, by stream.",
 }
@@ -643,6 +645,29 @@ def drift_lines(root: Path, merged: Graph) -> list[str]:
     return out
 
 
+def stackable_lines(root: Path, merged: Graph) -> list[str]:
+    """nemik:W613: per repo, how many ready cards one commit stack can carry now.
+
+    Ranking a repo reads every ready card, which is slow on a wide fleet, so this is computed only
+    when asked for by name, as the drift gauge is.
+
+    Args:
+        root: The fleet root.
+        merged: The merged queue graph (a card's manifest is read from it).
+
+    Returns:
+        The gauge's TYPE line and a sample for each repo with a queue.
+
+    """
+    out = ["# TYPE nemik_stackable gauge"]
+    for repo, _ in workstream_files(root, QUEUE):
+        ranked: list[dict[str, object]] = rank(merged, repo, load_weights())
+        out.append(
+            f"nemik_stackable{label(repo=repo)} {stackable_count(merged, repo, ranked, [])}"
+        )
+    return out
+
+
 def history_lines(
     root: Path, merged: Graph, now: datetime, wanted: list[str]
 ) -> list[str]:
@@ -674,6 +699,8 @@ def history_lines(
         out += reopened_lines(root, now)
     if "nemik_manifest_drift" in wanted:
         out += drift_lines(root, merged)
+    if "nemik_stackable" in wanted:
+        out += stackable_lines(root, merged)
     return out
 
 
@@ -811,6 +838,7 @@ HISTORY_FAMILIES = (
     "nemik_umbrella_forecast_days",
     "nemik_unforecastable_cards",
     "nemik_manifest_drift",
+    "nemik_stackable",
 )
 REALIZABILITY = ("nemik_realizability_waypoints", "nemik_realizability_unjudged")
 GRAPH_FREE = frozenset(

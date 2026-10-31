@@ -198,8 +198,10 @@ def hub_modules_depend_on_everything_below() -> None:
     # nemik:W1179: and reads each repo's burn-down tier from rank.TIERS, since tiers.py no longer
     # reads the file itself (rank.load_tiers does, so tiers compiles on Codon); rank rests on
     # adapter and the lower stack.
+    # nemik:W1323: and counts each repo's stackable ready cards for the nemik_stackable gauge,
+    # through stackable.stackable_count (the function nemik-stackable's report uses).
     expected = {
-        "metrics": lower | {"realize", "runlogs", "workrows", "rank"},
+        "metrics": lower | {"realize", "runlogs", "workrows", "rank", "stackable"},
         "serve": lower
         | {
             "outbox",

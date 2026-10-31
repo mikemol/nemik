@@ -207,6 +207,60 @@ def proposal_rows(
     return rows
 
 
+def planned(
+    g: Graph,
+    repo: str,
+    ranked: list[dict[str, object]],
+    generated: frozenset[str],
+) -> tuple[list[str], list[list[str]], list[list[str]]]:
+    """Read each ranked card's plan and the files that count in the overlap test.
+
+    Args:
+        g: The merged queue graph.
+        repo: The repo's name.
+        ranked: The repo's ready cards in rank order (nemik.rank.rank rows).
+        generated: The repo's generated files, which leave the overlap test.
+
+    Returns:
+        The cards' citations, each card's planned files, and each card's files for the overlap
+        test (a card whose plan is all generated files stands in as `(generated) <cite>`).
+
+    """
+    cards = [f"{repo}:{row['symbol']}" for row in ranked]
+    plans = [manifest(g, repo, str(row["symbol"])) for row in ranked]
+    tested = [
+        [path for path in files if path not in generated] or [f"(generated) {cite}"]
+        if files
+        else []
+        for cite, files in zip(cards, plans, strict=True)
+    ]
+    return cards, plans, tested
+
+
+def stackable_count(
+    g: Graph,
+    repo: str,
+    ranked: list[dict[str, object]],
+    in_flight: list[str],
+    generated: frozenset[str] = frozenset(),
+) -> int:
+    """Count the ready cards one stack can carry now.
+
+    Args:
+        g: The merged queue graph.
+        repo: The repo's name.
+        ranked: The repo's ready cards in rank order (nemik.rank.rank rows).
+        in_flight: Files already staged.
+        generated: The repo's generated files.
+
+    Returns:
+        How many cards `report` would mark STACK.
+
+    """
+    cards, _, tested = planned(g, repo, ranked, generated)
+    return len(pick(cards, tested, in_flight))
+
+
 def report(
     g: Graph,
     repo: str,
@@ -231,14 +285,7 @@ def report(
         have no manifest.
 
     """
-    cards = [f"{repo}:{row['symbol']}" for row in ranked]
-    plans = [manifest(g, repo, str(row["symbol"])) for row in ranked]
-    tested = [
-        [path for path in files if path not in generated] or [f"(generated) {cite}"]
-        if files
-        else []
-        for cite, files in zip(cards, plans, strict=True)
-    ]
+    cards, plans, tested = planned(g, repo, ranked, generated)
     chosen = set(pick(cards, tested, in_flight))
     out = [
         f"{'STACK  ' if cite in chosen else 'WAITING'} {cite}  {' '.join(files)}"
