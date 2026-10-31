@@ -3558,3 +3558,7 @@
 2026-10-31T23:10:29Z  interrupt W1330 minted    -         "Standing rule 14's citation is corrected and the 14-rule list is diffed against git HEAD's, from reviewer findings R69-F1 and R69-F2"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1326
 2026-10-31T23:10:39Z  status W1330 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-31T23:14:12Z  tick  W1330 advanced  warrant   "standing rule 14 citation corrected; HEAD text diff of the standing set 13 of 13 identical; queue-only stack 741 next; W1329 landed 651a1f46 and closed done with W1291, W1292, W1313, W1316 to W1319; R72 added as nemik:R70 [blocked by W1288]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T23:20:24Z  status W1330 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T23:20:26Z  interrupt W1331 minted    -         "Standing rule 14 cites nemik:R66 finding 5 (file retro-r68.json), restoring the writer's id that W1330 replaced"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1330
+2026-10-31T23:20:33Z  status W1331 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T23:22:39Z  tick  W1331 advanced  warrant   "standing rule 14 citation restored to nemik:R66 finding 5 (file retro-r68.json); a221635 W1330 landed, closed done; nemik-stackable check printed on W1288; R73 added as nemik:R71 [blocked by W1288]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

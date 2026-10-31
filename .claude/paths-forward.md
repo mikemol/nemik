@@ -3,11 +3,11 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1330 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:7017bf9eb7a94184`
+counter 1331 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:92659438f97c3fb4`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1330 | working |
+| 1 | W1331 | working |
 | 2 | W1075 | ready |
 | 3 | W1139 | ready |
 | 4 | W1279 | ready |
@@ -1309,11 +1309,12 @@ counter 1330 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:701
 | 1300 | W1327 | done |
 | 1301 | W1328 | done |
 | 1302 | W1329 | done |
+| 1303 | W1330 | done |
 
 ## waypoints
 
-1. **W1330** (working) Standing rule 14's citation is corrected and the 14-rule list is diffed against git HEAD's, from
-   reviewer findings R69-F1 and R69-F2
+1. **W1331** (working) Standing rule 14 cites nemik:R66 finding 5 (file retro-r68.json), restoring the writer's id that
+   W1330 replaced
 2. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 3. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -4316,6 +4317,8 @@ counter 1330 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:701
    so ruff falls toward 1065
 1302. **W1329** (done) test_rank_flow.py reads rank rows and to_json documents through test-side TypedDicts and one
    top-level to_json import, so mypy falls by the bare-dict cascade and ruff by its local imports
+1303. **W1330** (done) Standing rule 14's citation is corrected and the 14-rule list is diffed against git HEAD's, from
+   reviewer findings R69-F1 and R69-F2
 
 ## residue
 
@@ -4815,4 +4818,11 @@ counter 1330 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:701
   remaining defects are structural: the gate-empty gap of 29 min 49 s is wake latency, not work (stack 739 gated 2 min
   23 s: submit 22:35:06.4Z, landing 22:37:29Z; the last tool call before the 23:00:42.3Z wake was 22:38:46.7Z, 21 min 56
   s of nothing), K=0 is now vacuous for three G0s in a row, and cards that owe retro findings were closed done.; 5
+  finding(s)
+- **nemik:R71** (-) round 73: tick-w1331, W1330 (standing rule 14 citation and HEAD diff), stack 741 submitted
+  23:14:23.2Z; previous landing 651a1f46 23:08:42Z (reflog): root The loop is now in order and fast (gap 5 min 41 s
+  wall, 23:08:42Z to 23:14:23.2Z, down from 29 min 49 s; --add-retro 23:09:13Z, landing checked 23:09:49Z, W1329 and
+  seven landed cards set done 23:09:58Z to 23:10:10Z, mint 23:10:27.8Z, date -u 23:10:28.1Z, G0 appended 23:10:37.4Z,
+  tick-open 23:10:38.1Z, script 23:13:34Z). The defect in this round is mine: R69-F1 told the session a correct citation
+  was wrong, and the session's replacement is the less resolvable one. The G1's candidate list is again from memory.; 2
   finding(s)
