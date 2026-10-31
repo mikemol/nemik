@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1315,
+  "counter": 1317,
   "waypoints": [
     {
       "symbol": "W1",
@@ -31495,18 +31495,23 @@
     {
       "symbol": "W1313",
       "title": "history.weekly answers a typed WeeklyRow and its consumers read keys, not Any, so mypy falls",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-10-31: 2026-10-31 Stack 728 (key 1793396663619474772, W1313 then W1316, submitted 2026-10-30T21:44:16Z) did NOT land: the session ended while its submit process was running, the background task was marked stopped and its output file reads [killed]; the gate queue is empty, HEAD and origin are still de4cfd96106f6c8ca1bdcf8850f9d398d5a7b421, and no refusal was printed. This is not a gate verdict on the code. Working tree intact (history.py WeeklyRow, five test files, both baselines at 2266 and 1189). Cron job 19341093 survived; the watchdog was restarted from the pinned install. Resubmitting the same stack file unchanged, since the cause was the process, not the content. Pace of 2026-10-31T14:25:21Z (current for landing 2026-10-30T21:39:23Z): codon BEHIND (owes 2), ruff BEHIND (fell 52, owes 73), mypy ok.",
       "issued_at": "2026-10-30T20:52:26Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1187",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-10-31T14:47:59Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/history.py",
+        "mypy-baseline.json"
+      ]
     },
     {
       "symbol": "W1314",
@@ -31533,23 +31538,62 @@
     {
       "symbol": "W1315",
       "title": "history.toil answers a typed ToilRow and its printer reads keys, not Any, so mypy falls",
-      "status": "working",
+      "status": "ready",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): toil answers list[dict[str, object]], _toil formats the share only when it is a float; mikemol-pycheck --ratchet: mypy 2363 to 2337 (-26), ruff 1197 flat; baseline written with nothing queued (726 landed 70d50a5); format check clean; 24 tests pass. No census (stated, not run). Pace 20:25:16Z: all ok, none behind. Gate empty. Loadavg at submit 42.79 57.17 61.16.",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): toil answers list[dict[str, object]], _toil formats the share only when it is a float; mikemol-pycheck --ratchet: mypy 2363 to 2337 (-26), ruff 1197 flat; baseline written with nothing queued (726 landed 70d50a5); format check clean; 24 tests pass. No census (stated, not run). Pace 20:25:16Z: all ok, none behind. Gate empty. Loadavg at submit 42.79 57.17 61.16. | 2026-10-30: 2026-10-30 LANDED stack 727 (key 1793394897553422920, submitted 21:14:53Z) as de4cfd9, [PUSHED] first try; origin/main read back de4cfd96106f6c8ca1bdcf8850f9d398d5a7b421; subject mine (git log). Card set ready BEFORE this line. Loadavg at the submit 42.79 57.17 61.16, at the verdict 45.16 62.70 64.11. Landed fall: mypy 2363 to 2337 (-26, MEASURED before submit). history.py is free for W1313.",
       "issued_at": "2026-10-30T20:52:29Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1187",
-      "last_worked": "2026-10-30T21:14:51Z",
+      "last_worked": "2026-10-30T21:40:20Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "src/nemik/history.py",
         "mypy-baseline.json"
       ]
+    },
+    {
+      "symbol": "W1316",
+      "title": "8 test helpers in five test files get a Returns section written from their bodies, so ruff falls 1197 to 1189",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-10-30: 2026-10-30 G0 (MEASURED unless marked): 8 Returns sections in five test files; ruff 1197 to 1189 (-8), mypy 2266 flat (W1313's fall is in the same tree, entry one); baselines written together with nothing queued (727 landed de4cfd9); format check clean; 25 tests pass. Tests only: no census (stated, not run). Pace of 21:25:17Z, PENDING for landing 21:39:23Z: codon BEHIND (fell 0 over 10, owes 2), ruff BEHIND (fell 55, owes 73), mypy ok. W1313's entry alone names mypy-baseline.json only and would be refused by the paydown check; this entry names ruff-baseline.json, an owed ratchet (EXPECTED to admit the stack, per stack_reason's any-owed rule, not yet observed with this pace). Gate empty. Loadavg at submit 25.43 43.31 55.91.",
+      "issued_at": "2026-10-30T21:43:32Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W1279",
+      "last_worked": "2026-10-30T21:44:15Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "tests/test_apischema.py",
+        "tests/test_calendar_write.py",
+        "tests/test_calendars.py",
+        "ruff-baseline.json"
+      ]
+    },
+    {
+      "symbol": "W1317",
+      "title": "34 helpers and tests without a docstring (tests, test fixtures and two tools) get one, so ruff falls 1189 to 1155",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-10-30T21:52:30Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W1288",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [

@@ -830,7 +830,27 @@ def _flow_efficiency(
     return round(active / live, 3) if live else None
 
 
-def weekly(snaps: list[Snapshot]) -> list[dict]:
+class WeeklyRow(TypedDict):
+    """One ISO week that saw a commit: what `weekly` answers per week."""
+
+    week: str
+    opened: int
+    closed: int
+    lead_time_days: float | None
+    open: int
+    utilization: float | None
+    implied_wait_days: float | None
+    flow_efficiency: float | None
+    blocked_share: float
+    operator_asked: int
+    operator_answered: int
+    operator_open: int
+    operator_wait_days: float | None
+    oldest_blocked: str | None
+    oldest_blocked_days: float | None
+
+
+def weekly(snaps: list[Snapshot]) -> list[WeeklyRow]:
     """One row per ISO week that saw a commit.
 
     Each row has what opened and closed that week, how much of what was open at the week's last
@@ -847,8 +867,8 @@ def weekly(snaps: list[Snapshot]) -> list[dict]:
     for at, queue in snaps:
         iso = at.isocalendar()
         weeks.setdefault((iso.year, iso.week), []).append((at, queue))
-    rows: list[dict] = []
-    before: dict = {}
+    rows: list[WeeklyRow] = []
+    before: QueueDoc = {}
     blocked_since: dict[str, datetime] = {}
     born: dict[str, datetime] = {}
     done_at: dict[str, datetime] = {}
@@ -2560,7 +2580,7 @@ def _series(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
         if getattr(args, mode):
             return run(args, names, dirs)
     now = datetime.now(UTC)
-    rolled: dict[str, list[dict]] = {}
+    rolled: dict[str, list[WeeklyRow]] = {}
     spent: dict[str, dict[str, tuple[str, dict[str, float]]]] = {}
     for name in names:
         snaps = snapshots(dirs[name], args.start)

@@ -35,8 +35,7 @@
   "misc": 1
  },
  "src/nemik/history.py": {
-  "misc": 81,
-  "type-arg": 4
+  "misc": 55
  },
  "src/nemik/importer.py": {
   "misc": 11
@@ -77,7 +76,7 @@
  },
  "src/nemik/serve.py": {
   "explicit-any": 5,
-  "misc": 266,
+  "misc": 259,
   "operator": 1,
   "type-arg": 8
  },
@@ -172,7 +171,7 @@
   "misc": 18
  },
  "tests/test_history.py": {
-  "misc": 84,
+  "misc": 59,
   "type-arg": 2
  },
  "tests/test_hooks_wired.py": {
@@ -201,7 +200,7 @@
   "misc": 2
  },
  "tests/test_operator_rate.py": {
-  "misc": 15,
+  "misc": 6,
   "type-arg": 1
  },
  "tests/test_pieces.py": {
