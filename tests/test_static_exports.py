@@ -5,6 +5,7 @@
 import json
 from pathlib import Path
 
+from nemik.check import QUEUE, workstream_files
 from nemik.exportwire import repo_symbols
 from nemik.serve import build_static
 
@@ -61,7 +62,7 @@ def test_exports_that_publish_every_card_equal_a_build_without_exports(
     """Each repo's export publishing all its cards gives the same graph as no exports at all."""
     exports = tmp_path / "exports"
     exports.mkdir()
-    for repo, symbols in repo_symbols(FLEET).items():
+    for repo, symbols in repo_symbols(workstream_files(FLEET, QUEUE)).items():
         export = {
             "version": 2,
             "repo": repo,

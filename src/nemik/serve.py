@@ -1415,7 +1415,7 @@ def _build_static(
         frozenset() if private and withheld is None else load(withheld)
     )  # public fails closed
     if exports is not None:
-        refs |= withheld_by_exports(root, exports)
+        refs |= withheld_by_exports(workstream_files(root, QUEUE), exports)
     model = Model(root, refs, series=root / SERIES_FILE, series_max_age=SERIES_MAX_AGE)
     docs = apply(static_data(model), refs)
     if bad := [f for name, doc in docs.items() for f in unmanifested(name, doc)]:

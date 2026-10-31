@@ -3490,3 +3490,6 @@
 2026-10-31T15:01:38Z  status W1313 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-31T15:01:39Z  status W1316 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-10-31T15:03:13Z  status W1317 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T15:27:29Z  status W1317 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-10-31T15:31:34Z  interrupt W1318 minted    -         "exportwire.py takes the queue files as an argument and imports nothing from check, so it compiles under Codon and codon falls 142 to 140"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1179
+2026-10-31T15:37:29Z  status W1318 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1317,
+  "counter": 1318,
   "waypoints": [
     {
       "symbol": "W1",
@@ -31582,17 +31582,17 @@
     {
       "symbol": "W1317",
       "title": "34 helpers and tests without a docstring (tests, test fixtures and two tools) get one, so ruff falls 1189 to 1155",
-      "status": "working",
+      "status": "ready",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-10-31: 2026-10-31 G0 (MEASURED unless marked): 34 docstrings (12 hand-written helpers with Returns where they return a value, 22 name-derived fragment tests); mikemol-pycheck --ratchet: ruff 1189 to 1155 (-34, exactly the count), mypy 2266 flat; baseline written with nothing queued (728 landed 2077a8f); format check of tests and tools clean; 118 tests of 15 edited files pass (run before the test_containerfile docstring went back in, which is a docstring only). The earlier 33 and 1156 in my message to the host counted that file's docstring as withheld; it is back. Docstrings only: no census (stated, not run). Pace of 2026-10-31T14:25:21Z, PENDING for landing 15:00:46Z: codon BEHIND, ruff BEHIND (owes 73), mypy ok; this stack names ruff-baseline.json. Gate empty. Loadavg at submit 44.58 48.34 50.95.",
+      "evidence": "2026-10-31: 2026-10-31 G0 (MEASURED unless marked): 34 docstrings (12 hand-written helpers with Returns where they return a value, 22 name-derived fragment tests); mikemol-pycheck --ratchet: ruff 1189 to 1155 (-34, exactly the count), mypy 2266 flat; baseline written with nothing queued (728 landed 2077a8f); format check of tests and tools clean; 118 tests of 15 edited files pass (run before the test_containerfile docstring went back in, which is a docstring only). The earlier 33 and 1156 in my message to the host counted that file's docstring as withheld; it is back. Docstrings only: no census (stated, not run). Pace of 2026-10-31T14:25:21Z, PENDING for landing 15:00:46Z: codon BEHIND, ruff BEHIND (owes 73), mypy ok; this stack names ruff-baseline.json. Gate empty. Loadavg at submit 44.58 48.34 50.95. | 2026-10-31: 2026-10-31 LANDED stack 729 (key 1793459010276565729, submitted 2026-10-31T15:03:25Z) as 5e6d169, [PUSHED] first try; origin/main read back 5e6d16944377c05b970d07ceae11636cdf362d14; subject mine (git log); 26 paths committed; landing stamp 15:26:36Z. Card set ready BEFORE this line. Loadavg at the submit 44.58 48.34 50.95, at the verdict 30.46 41.10 46.85. Landed fall: ruff 1189 to 1155 (-34, MEASURED before submit). Pace of 2026-10-31T15:25:21Z, PENDING for this landing: ruff now OK (1155 left, 159 landings to zero), mypy ok 2266, CODON BEHIND (fell 0 over 10, owes 2): with only codon behind, the paydown check admits only stacks touching codon-baseline.json again.",
       "issued_at": "2026-10-30T21:52:30Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1288",
-      "last_worked": "2026-10-31T15:03:24Z",
+      "last_worked": "2026-10-31T15:27:48Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -31600,6 +31600,29 @@
         "tests/test_gate.py",
         "tools/gen_pieces_corpus.py",
         "ruff-baseline.json"
+      ]
+    },
+    {
+      "symbol": "W1318",
+      "title": "exportwire.py takes the queue files as an argument and imports nothing from check, so it compiles under Codon and codon falls 142 to 140",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-10-31: 2026-10-31 G0 (MEASURED unless marked): exportwire pure (files argument, no check import); serve, exportcli and three tests pass workstream_files(root, QUEUE); scratch probe of the split exportwire built rc 0 under the pinned Codon; CENSUS with the exportwire block removed: 7 passed in 347.65 s, after the last src edit; 15 export tests pass; ruff 1155 and mypy 2266 unchanged; format check of the six files clean. Codon 142 to 140 EXPECTED (two leaves, mtools kinds.py _weight), not yet counted by the tool on a landed file. Pace of 2026-10-31T15:25:21Z, PENDING for landing 15:26:36Z: only codon BEHIND (owes 2); this stack touches codon-baseline.json. Gate empty. Loadavg at submit 16.48 28.87 38.82.",
+      "issued_at": "2026-10-31T15:31:34Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W1179",
+      "last_worked": "2026-10-31T15:37:39Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/exportwire.py",
+        "src/nemik/exportcli.py",
+        "src/nemik/serve.py",
+        "codon-baseline.json"
       ]
     }
   ],

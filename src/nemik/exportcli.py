@@ -48,8 +48,9 @@ def main(argv: list[str] | None = None) -> None:
     args = ap.parse_args(argv, namespace=_Options())
     refs = set(load(args.withheld))
     args.out.mkdir(parents=True, exist_ok=True)
-    found = repo_symbols(args.root)
-    states = dict(workstream_files(args.root, QUEUE))
+    files = workstream_files(args.root, QUEUE)
+    found = repo_symbols(files)
+    states = dict(files)
     own = 0
     for repo, symbols in found.items():
         mine: dict[str, object] = {}

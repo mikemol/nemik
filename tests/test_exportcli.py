@@ -5,6 +5,7 @@
 import json
 from pathlib import Path
 
+from nemik.check import QUEUE, workstream_files
 from nemik.exportcli import main
 from nemik.exportwire import repo_symbols
 from nemik.serve import build_static
@@ -41,7 +42,9 @@ def _derive(withheld: Path, out: Path) -> None:
 
 def test_derived_exports_publish_what_the_v1_list_publishes(tmp_path: Path) -> None:
     """One withheld ref: a build from the derived exports equals a build from the v1 list."""
-    repo, symbols = next((r, s) for r, s in repo_symbols(FLEET).items() if s)
+    repo, symbols = next(
+        (r, s) for r, s in repo_symbols(workstream_files(FLEET, QUEUE)).items() if s
+    )
     v1: dict[str, object] = {
         "version": 1,
         "as_of": "x",
@@ -63,4 +66,4 @@ def test_one_export_is_written_per_repo(tmp_path: Path) -> None:
     withheld.write_text(json.dumps(doc), encoding="utf-8")
     _derive(withheld, tmp_path / "e")
     written = sorted(p.stem for p in (tmp_path / "e").glob("*.json"))
-    assert written == sorted(repo_symbols(FLEET))
+    assert written == sorted(repo_symbols(workstream_files(FLEET, QUEUE)))

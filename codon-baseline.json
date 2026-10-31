@@ -63,10 +63,6 @@
   "as_written": "no module named 'argparse'",
   "stripped": "no module named 'argparse'"
  },
- "exportwire": {
-  "as_written": "syntax error, unexpected ','",
-  "stripped": "syntax error, unexpected ','"
- },
  "floorasks": {
   "as_written": "no module named 'argparse'",
   "stripped": "no module named 'argparse'"
