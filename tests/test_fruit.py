@@ -40,7 +40,12 @@ def test_no_members_no_row() -> None:
 
 
 def _graph(spec: dict[str, list[str]]) -> Graph:
-    """{symbol: [what it enables]} as ready waypoints in repo a."""
+    """{symbol: [what it enables]} as ready waypoints in repo a.
+
+    Returns:
+        The graph holding those waypoints.
+
+    """
     from nemik.adapter import OSLC_CM, waypoint_uri, workstream_uri
 
     g = Graph()

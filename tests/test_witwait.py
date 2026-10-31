@@ -20,7 +20,12 @@ if TYPE_CHECKING:
 
 
 def _script(*steps: tuple[str, str]) -> Callable[[], tuple[str, str]]:
-    """A poll that plays `steps` in order, then repeats the last one."""
+    """A poll that plays `steps` in order, then repeats the last one.
+
+    Returns:
+        The poll function.
+
+    """
     queue = list(steps)
 
     def poll() -> tuple[str, str]:

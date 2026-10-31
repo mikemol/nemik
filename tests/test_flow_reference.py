@@ -15,7 +15,12 @@ from nemik.flow import solve
 def _dense(
     cone: list[str], front: set[str], edges: list[tuple[str, str]], source: str
 ) -> dict[str, Fraction]:
-    """Gauss-Jordan over the rationals on the grounded Laplacian: the reference."""
+    """Gauss-Jordan over the rationals on the grounded Laplacian: the reference.
+
+    Returns:
+        For each front node, the sum of the potentials of the unknown nodes joined to it.
+
+    """
     unknown = [n for n in cone if n not in front]
     idx = {n: i for i, n in enumerate(unknown)}
     n = len(unknown)

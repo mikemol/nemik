@@ -17,6 +17,12 @@ V = "WV:1/R:{R}/E:{E}/C:{C}/I:{I}/A:{A}/X:N/S:{S}/F:K/W:N"
 def vec(
     R: str = "L", E: str = "N", C: str = "N", I: str = "N", A: str = "N", S: str = "U"
 ) -> str:
+    """Build a WV:1 vector string from the given metric values.
+
+    Returns:
+        The vector.
+
+    """
     return V.format(R=R, E=E, C=C, I=I, A=A, S=S)
 
 

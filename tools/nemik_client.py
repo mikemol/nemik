@@ -34,7 +34,12 @@ class Client:
             return json.load(r) if path.endswith(".json") else r.read().decode()
 
     def refresh(self, prefix: str = "") -> list[str]:
-        """Fetch every path under `prefix` whose hash moved; return the paths fetched."""
+        """Fetch every path under `prefix` whose hash moved; return the paths fetched.
+
+        Returns:
+            The paths fetched, in sorted order.
+
+        """
         hashes: dict[str, str] = self._get("hashes.json")
         moved = [
             p

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1318,
+  "counter": 1319,
   "waypoints": [
     {
       "symbol": "W1",
@@ -31605,17 +31605,17 @@
     {
       "symbol": "W1318",
       "title": "exportwire.py takes the queue files as an argument and imports nothing from check, so it compiles under Codon and codon falls 142 to 140",
-      "status": "working",
+      "status": "ready",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-10-31: 2026-10-31 G0 (MEASURED unless marked): exportwire pure (files argument, no check import); serve, exportcli and three tests pass workstream_files(root, QUEUE); scratch probe of the split exportwire built rc 0 under the pinned Codon; CENSUS with the exportwire block removed: 7 passed in 347.65 s, after the last src edit; 15 export tests pass; ruff 1155 and mypy 2266 unchanged; format check of the six files clean. Codon 142 to 140 EXPECTED (two leaves, mtools kinds.py _weight), not yet counted by the tool on a landed file. Pace of 2026-10-31T15:25:21Z, PENDING for landing 15:26:36Z: only codon BEHIND (owes 2); this stack touches codon-baseline.json. Gate empty. Loadavg at submit 16.48 28.87 38.82.",
+      "evidence": "2026-10-31: 2026-10-31 G0 (MEASURED unless marked): exportwire pure (files argument, no check import); serve, exportcli and three tests pass workstream_files(root, QUEUE); scratch probe of the split exportwire built rc 0 under the pinned Codon; CENSUS with the exportwire block removed: 7 passed in 347.65 s, after the last src edit; 15 export tests pass; ruff 1155 and mypy 2266 unchanged; format check of the six files clean. Codon 142 to 140 EXPECTED (two leaves, mtools kinds.py _weight), not yet counted by the tool on a landed file. Pace of 2026-10-31T15:25:21Z, PENDING for landing 15:26:36Z: only codon BEHIND (owes 2); this stack touches codon-baseline.json. Gate empty. Loadavg at submit 16.48 28.87 38.82. | 2026-10-31: 2026-10-31 LANDED stack 730 (key 1793461064971035797, submitted 15:37:39Z) as 98ac7c0, [PUSHED] first try; origin/main read back 98ac7c0f30605b675d73daa0fa910fde77466766; subject mine (git log); 10 paths committed; landing stamp 15:52:28Z. Card set ready BEFORE this line. Loadavg at the submit 16.48 28.87 38.82, at the verdict 18.94 31.85 40.75. Codon 142 to 140 by the committed file (the census removed the exportwire block and passed); the pace of 15:25:21Z, PENDING for this landing, still shows codon behind (owes 2, fell 0), so a fresh pace after 15:52Z has to show the fall counted. Gate wall about 15 min.",
       "issued_at": "2026-10-31T15:31:34Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1179",
-      "last_worked": "2026-10-31T15:37:39Z",
+      "last_worked": "2026-10-31T15:53:40Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -31623,6 +31623,29 @@
         "src/nemik/exportcli.py",
         "src/nemik/serve.py",
         "codon-baseline.json"
+      ]
+    },
+    {
+      "symbol": "W1319",
+      "title": "17 more test helpers, fixtures and tools get a Returns section or a docstring written from their bodies, so ruff falls 1155 to 1138",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-10-31: 2026-10-31 G0 (MEASURED unless marked): 13 Returns sections (11 helpers plus webpage.opened_page and gen_pieces_corpus._first_repos) and 4 helper docstrings with Returns; mikemol-pycheck --ratchet: ruff 1155 to 1138 (-17, exactly the count), mypy 2266 flat; baseline written with nothing queued (730 landed 98ac7c0); format check clean; 97 tests of 12 edited files pass. Docstrings only: no census (stated, not run). Pace of 2026-10-31T16:25:21Z is CURRENT for landing 15:52:28Z: codon ok (140, the W1318 fall counted), mypy ok, RUFF BEHIND (fell 60 over 10, owes 73); this stack names ruff-baseline.json. Gate empty. Loadavg at submit 21.63 17.98 20.67.",
+      "issued_at": "2026-10-31T16:32:23Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W1279",
+      "last_worked": "2026-10-31T16:33:19Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "tests/webpage.py",
+        "tests/test_test_inputs.py",
+        "tools/nemik_client.py",
+        "ruff-baseline.json"
       ]
     }
   ],

@@ -230,6 +230,9 @@ def opened_page(
 
     `block` names files whose requests are refused, as a server that went away would (W1069).
 
+    Returns:
+        The browser and the page, once the predicate holds.
+
     Raises:
         PageBrokenError: The page broke; the message lists the requests that failed or got an
             error status, so a script missing under load names the asset (W1060).

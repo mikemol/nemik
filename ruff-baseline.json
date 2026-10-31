@@ -389,7 +389,6 @@
  },
  "tests/test_flow_reference.py": {
   "C901": 1,
-  "DOC201": 1,
   "PLR2004": 1,
   "S311": 1
  },
@@ -400,19 +399,16 @@
   "PT018": 3
  },
  "tests/test_frontier_walker.py": {
-  "DOC201": 1,
   "PLC2701": 2,
   "PLR2004": 1
  },
  "tests/test_fruit.py": {
-  "DOC201": 1,
   "E501": 1,
   "PLC0415": 6,
   "PLR2004": 3,
   "PT018": 4
  },
  "tests/test_gate.py": {
-  "D103": 1,
   "E741": 10
  },
  "tests/test_gate_weights.py": {
@@ -549,7 +545,6 @@
  },
  "tests/test_precommit_gate.py": {
   "D401": 1,
-  "DOC201": 1,
   "S404": 1,
   "S603": 1
  },
@@ -560,9 +555,7 @@
   "SLF001": 2
  },
  "tests/test_published_valid.py": {
-  "D103": 1,
   "D401": 1,
-  "DOC201": 1,
   "PLR2004": 1
  },
  "tests/test_rank.py": {
@@ -586,7 +579,7 @@
   "S603": 1
  },
  "tests/test_read_api.py": {
-  "D103": 2,
+  "D103": 1,
   "PT018": 2
  },
  "tests/test_realize.py": {
@@ -607,7 +600,6 @@
   "S603": 1
  },
  "tests/test_score.py": {
-  "D103": 1,
   "E741": 1,
   "N803": 6,
   "PLR0913": 1,
@@ -646,8 +638,7 @@
   "S603": 1
  },
  "tests/test_test_inputs.py": {
-  "D401": 2,
-  "DOC201": 3
+  "D401": 2
  },
  "tests/test_toil.py": {
   "PLR2004": 1,
@@ -683,8 +674,7 @@
   "PLC0415": 1
  },
  "tests/test_witness_promql.py": {
-  "ARG001": 2,
-  "DOC201": 1
+  "ARG001": 2
  },
  "tests/test_witnesses.py": {
   "ARG001": 5,
@@ -698,7 +688,6 @@
  },
  "tests/test_witwait.py": {
   "D401": 2,
-  "DOC201": 1,
   "DOC402": 1,
   "PLR2004": 5,
   "PLR6301": 1
@@ -709,19 +698,14 @@
  },
  "tests/webpage.py": {
   "D401": 1,
-  "DOC201": 1,
   "DOC402": 1,
   "S404": 1,
   "S603": 1,
   "SLF001": 1
  },
- "tools/gen_pieces_corpus.py": {
-  "DOC201": 1
- },
  "tools/nemik_client.py": {
   "ANN401": 1,
   "D107": 1,
-  "DOC201": 1,
   "S310": 1,
   "T201": 1
  }

@@ -23,7 +23,12 @@ TESTS_GLOB = 'glob(["tests/test_*.py"])'
 
 
 def _code(path: Path) -> list[str]:
-    """The non-comment lines of a shell file."""
+    """The non-comment lines of a shell file.
+
+    Returns:
+        The stripped lines that are neither blank nor comments.
+
+    """
     return [
         line.strip()
         for line in path.read_text(encoding="utf-8").splitlines()

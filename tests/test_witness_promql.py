@@ -35,7 +35,12 @@ EXECUTOR_LOAD = (
 def _answer(
     monkeypatch: pytest.MonkeyPatch, result: list[Any] | None
 ) -> list[dict[str, str]]:
-    """Make the VictoriaMetrics probe answer `result` (None: unreachable) and return the queries."""
+    """Make the VictoriaMetrics probe answer `result` (None: unreachable) and return the queries.
+
+    Returns:
+        The list that each query's parameters are appended to.
+
+    """
     asked: list[dict[str, str]] = []
 
     def get(env: str, path: str, params: dict[str, str]) -> dict[str, Any] | None:

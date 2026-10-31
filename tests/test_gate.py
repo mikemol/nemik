@@ -70,6 +70,12 @@ def run(tool: str, root: Path, *argv: str) -> subprocess.CompletedProcess[str]:
 
 @pytest.fixture()
 def root(tmp_path: Path) -> Path:
+    """Build the fleet root: alpha:W1 waits on beta:W1, which claims it; alpha:W2 waits on beta.
+
+    Returns:
+        The scratch root holding both queues.
+
+    """
     # alpha:W1 waits on beta:W1, which claims it; alpha:W2 waits on beta with nothing claiming it.
     write_queue(
         tmp_path,

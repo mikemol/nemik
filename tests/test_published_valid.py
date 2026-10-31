@@ -15,6 +15,12 @@ FLEET = Path(__file__).parent / "fixtures" / "fleet"
 
 @pytest.fixture(scope="module")
 def built(tmp_path_factory: pytest.TempPathFactory) -> Path:
+    """Build the static view once for the module.
+
+    Returns:
+        The directory it was built into.
+
+    """
     tmp = tmp_path_factory.mktemp("static")
     withheld = tmp / "withheld.json"
     payload: dict[str, object] = {"version": 1, "as_of": "x", "items": []}
@@ -25,7 +31,12 @@ def built(tmp_path_factory: pytest.TempPathFactory) -> Path:
 
 
 def _schema_for(name: str) -> str:
-    """The published schema path for a published data path (goals/<repo>.json share one)."""
+    """The published schema path for a published data path (goals/<repo>.json share one).
+
+    Returns:
+        The path under schema/.
+
+    """
     if name.startswith("goals/"):
         return "schema/goals/repo.json.schema.json"
     return f"schema/{name}.schema.json"

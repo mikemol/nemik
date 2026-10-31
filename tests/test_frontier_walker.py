@@ -22,7 +22,12 @@ FLEET = Path(__file__).parent / "fixtures" / "fleet"
 
 
 def _old_frontier(g: Graph, goal: Node) -> tuple[set[Node], set[str]]:
-    """rank.frontier as it was before W483, verbatim: the reference the walker must agree with."""
+    """rank.frontier as it was before W483, verbatim: the reference the walker must agree with.
+
+    Returns:
+        The leaves, and what they wait on from outside the repo.
+
+    """
     repo = _repo(goal)
     seen, stack, leaves, outside = {goal}, [goal], set(), set()
     while stack:

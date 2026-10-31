@@ -21,7 +21,12 @@ HINT = (
 
 
 def _base(node: ast.expr) -> str | None:
-    """The repo-relative directory an expression names, or None when it is not a known base."""
+    """The repo-relative directory an expression names, or None when it is not a known base.
+
+    Returns:
+        '' for the repo root, 'tests' for the tests directory, else None.
+
+    """
     if isinstance(node, ast.Name) and node.id == "ROOT":
         return ""
     text = ast.unparse(node)
@@ -33,7 +38,12 @@ def _base(node: ast.expr) -> str | None:
 
 
 def _paths(source: str) -> set[str]:
-    """Every repo-relative path a module builds from a known base and string parts."""
+    """Every repo-relative path a module builds from a known base and string parts.
+
+    Returns:
+        The paths found.
+
+    """
     found: set[str] = set()
     inner: set[int] = (
         set()
@@ -60,7 +70,12 @@ def _paths(source: str) -> set[str]:
 
 
 def _declared() -> tuple[set[str], list[str]]:
-    """The test macro's data: exact files, and directory prefixes (globs and fixture packages)."""
+    """The test macro's data: exact files, and directory prefixes (globs and fixture packages).
+
+    Returns:
+        The exact files, and the directory prefixes.
+
+    """
     build = (REPO / "BUILD.bazel").read_text()
     # only the test macro's own data list (up to its env): the venv's srcs glob is not test data
     data = build.split("data = [", 1)[1].split("env = {", 1)[0]
