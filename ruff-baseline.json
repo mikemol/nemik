@@ -486,9 +486,6 @@
   "S404": 1,
   "S603": 1
  },
- "tests/test_read_api.py": {
-  "PT018": 2
- },
  "tests/test_realize.py": {
   "S404": 1,
   "S603": 1
@@ -546,7 +543,7 @@
  },
  "tests/test_witnesses.py": {
   "ARG005": 1,
-  "PT018": 5,
+  "PT018": 2,
   "S404": 1,
   "S603": 2,
   "S607": 2

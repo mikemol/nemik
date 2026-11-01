@@ -84,7 +84,8 @@ def _client_module() -> (
     spec = importlib.util.spec_from_file_location(
         "nemik_client", ROOT / "tools" / "nemik_client.py"
     )
-    assert spec and spec.loader
+    assert spec
+    assert spec.loader
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
@@ -121,6 +122,7 @@ def test_the_example_client_fetches_once_then_only_what_moved(served: str) -> No
     """The example client fetches once then only what moved."""
     client = _client_class()(served)
     first = client.refresh()
-    assert "graph.json" in first and "openapi.json" in first
+    assert "graph.json" in first
+    assert "openapi.json" in first
     assert client.refresh() == []  # nothing moved, nothing fetched
     assert client.docs["graph.json"]["nodes"]

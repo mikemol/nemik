@@ -68,7 +68,8 @@ def test_pid_reuse_guard_treats_other_starttime_as_gone() -> None:
 def test_unobservable_fact_is_undefined_not_false() -> None:
     """Unobservable fact is undefined not false."""
     verdict, _, missing = witness('not input.pid["otherhost/1"].alive')
-    assert verdict == "undefined" and missing == ['pid["otherhost/1"]']
+    assert verdict == "undefined"
+    assert missing == ['pid["otherhost/1"]']
     assert witness('input.nosuch["x"].ok')[0] == "undefined"
 
 
@@ -145,10 +146,12 @@ def test_runner_applies_only_holding_witnesses(tmp_path: Path) -> None:
     r = installed.run("nemik-witnesses", "--root", str(tmp_path), "--apply")
     assert r.returncode == 0 and "APPLY FAILED" not in r.stderr, r.stderr
     out = r.stdout
-    assert "WITNESS r:W1 true" in out and "WITNESS r:W2 false" in out
+    assert "WITNESS r:W1 true" in out
+    assert "WITNESS r:W2 false" in out
     doc: dict[str, list[dict[str, str]]] = json.loads(state.read_text())
     after = {w["symbol"]: w for w in doc["waypoints"]}
-    assert after["W1"]["status"] == "done" and "witness held" in after["W1"]["evidence"]
+    assert after["W1"]["status"] == "done"
+    assert "witness held" in after["W1"]["evidence"]
     assert after["W2"]["status"] == "blocked"
 
 

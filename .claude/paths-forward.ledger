@@ -3759,3 +3759,7 @@
 2026-11-01T13:06:52Z  interrupt W1379 minted    -         "The float asserts that were exact on purpose keep exact equality: pytest.approx with zero tolerance in eleven test files (R106)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1376
 2026-11-01T13:09:25Z  status W1379 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T13:13:05Z  status W1377 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T13:24:08Z  status W1378 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T13:24:09Z  status W1379 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T13:25:27Z  interrupt W1380 minted    -         "Seven composite assertions in two test files split into one assertion each where it costs no mypy finding (PT018), so ruff falls by seven"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1288
+2026-11-01T13:26:56Z  status W1380 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
