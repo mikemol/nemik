@@ -3587,3 +3587,30 @@
 2026-11-01T02:00:21Z  interrupt W1337 minted    -         "test_withheld.py reads the static documents through test-side TypedDicts and casts, so mypy falls by the Any cascade"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1288
 2026-11-01T02:00:32Z  status W1337 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T02:05:53Z  tick  W1337 advanced  mechanize "W1337 stack 748 ready: test_withheld.py TypedDicts and casts, mypy 1989 to 1928, ruff 985 to 981; W1336 landed a7f3cfad and closed done; R83 added as nemik:R81; pace 01:25:25Z PENDING: mypy the only owed ratchet [blocked by W1288]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T02:08:36Z  status W1337 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T02:31:13Z  interrupt W1338 minted    -         "Twenty-five landed cards still at ready are closed done from the git subjects that name them, so the stackable list and the ready count stop counting landed work"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W613
+2026-11-01T02:31:24Z  status W1338 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T02:35:33Z  status W1286 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T02:35:34Z  status W1287 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T02:35:35Z  status W1290 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T02:35:36Z  status W1294 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T02:35:37Z  status W1295 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T02:35:38Z  status W1296 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T02:35:39Z  status W1297 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T02:35:40Z  status W1298 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T02:35:41Z  status W1299 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T02:35:43Z  status W1301 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T02:35:44Z  status W1302 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T02:35:45Z  status W1303 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T02:35:47Z  status W1304 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T02:35:48Z  status W1305 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T02:35:49Z  status W1306 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T02:35:50Z  status W1307 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T02:35:52Z  status W1308 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T02:35:53Z  status W1309 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T02:35:54Z  status W1310 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T02:35:55Z  status W1311 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T02:35:56Z  status W1312 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T02:35:57Z  status W1314 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T02:35:59Z  status W1315 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T02:36:57Z  tick  W1338 advanced  sweep     "W1338 sweep: 23 landed slice cards closed done, 7 umbrellas/partials left; stack 749 queue-only; W1337 landed d24a7850 (mypy 1928, ruff 981); R84 added as nemik:R82; pace 02:25:25Z all nemik ratchets ok [blocked by W1288]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
