@@ -117,10 +117,6 @@
  "tests/fixtures/make_fleet.py": {
   "misc": 30
  },
- "tests/test_apischema.py": {
-  "misc": 16,
-  "type-arg": 2
- },
  "tests/test_cachestore.py": {
   "misc": 1,
   "type-arg": 1
