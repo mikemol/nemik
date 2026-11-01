@@ -22,6 +22,8 @@ import os
 import re
 import subprocess
 import sys
+import urllib.parse
+import urllib.request
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import TYPE_CHECKING, TypedDict, cast
@@ -29,7 +31,9 @@ from typing import TYPE_CHECKING, TypedDict, cast
 from mikemol.pathsforward.opa_eval import OpaUnavailableError, resolve
 
 from nemik import edgeletters
+from nemik.check import QUEUE, default_root, workstream_files
 from nemik.delivery import owed, stamp
+from nemik.hostapply import fact, load
 from nemik.work import run_writer
 from nemik.workrows import edges_of
 
@@ -138,8 +142,6 @@ def _git_ref(key: str) -> Fact | None:
         Whether the ref resolves and its sha, or None when the key is not an observable ref.
 
     """
-    from nemik.check import default_root
-
     repo, sep, rev = key.partition("@")
     path = default_root() / repo
     # Queue data, not trusted: a plain repo name, and a ref git cannot read as an option.
@@ -178,9 +180,6 @@ def _get(env: str, path: str, params: dict[str, str]) -> Body | None:
         The parsed JSON body of a successful query, or None when it cannot be observed.
 
     """
-    import urllib.parse
-    import urllib.request
-
     base = os.environ.get(env)
     if not base:
         return None
@@ -242,9 +241,6 @@ def _apply(key: str) -> Fact | None:
         The row's host-apply fact, or None when it is undefined.
 
     """
-    from nemik.check import default_root
-    from nemik.hostapply import fact, load
-
     try:
         export = load(default_root())
     except ValueError:
@@ -409,8 +405,6 @@ def open_witnesses(root: Path) -> list[tuple[str, Path, str, str, str]]:
         One (repo, queue path, symbol, query, lang) tuple per open witnessed card.
 
     """
-    from nemik.check import QUEUE, workstream_files
-
     out: list[tuple[str, Path, str, str, str]] = []
     for repo, path in workstream_files(root, QUEUE):
         try:
@@ -434,8 +428,6 @@ def queue_texts(root: Path) -> dict[str, str]:
         {repo: the text of its paths-forward.json}; an unreadable queue is left out.
 
     """
-    from nemik.check import QUEUE, workstream_files
-
     out: dict[str, str] = {}
     for other, path in workstream_files(root, QUEUE):
         try:
@@ -574,8 +566,6 @@ def main(argv: list[str] | None = None) -> None:
         SystemExit: with the --wait code.
 
     """
-    from nemik.check import default_root
-
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument(
         "--root",
