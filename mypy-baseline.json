@@ -28,9 +28,6 @@
  "src/nemik/critical.py": {
   "misc": 7
  },
- "src/nemik/floorasks.py": {
-  "misc": 8
- },
  "src/nemik/health.py": {
   "misc": 1
  },

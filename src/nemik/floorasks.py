@@ -27,17 +27,24 @@ def floor_asks(floor: Path) -> list[tuple[str, str]]:
         The (bib key, waypoint pointer) pairs, key `?` when the entry has none.
 
     """
-    out = []
+    out: list[tuple[str, str]] = []
     for bib in sorted(floor.glob("*.bib")):
-        for block in _ENTRY.findall(bib.read_text(encoding="utf-8", errors="replace")):
+        text = bib.read_text(encoding="utf-8", errors="replace")
+        blocks: list[str] = _ENTRY.findall(text)
+        for block in blocks:
             wp, key = _WAYPOINT.search(block), _KEY.search(block)
             if wp:
-                out.append((key.group(1) if key else "?", wp.group(1).strip()))
+                name = "?"
+                if key:
+                    name = key.group(1)
+                pointer: str = wp.group(1)
+                out.append((name, pointer.strip()))
     return out
 
 
 def _statuses(path: Path) -> dict[str, str]:
-    data = table(json.loads(path.read_text(encoding="utf-8")))
+    raw: object = json.loads(path.read_text(encoding="utf-8"))
+    data = table(raw)
     st = {
         str(w["symbol"]): str(w.get("status", ""))
         for w in tables(data.get("waypoints"))
