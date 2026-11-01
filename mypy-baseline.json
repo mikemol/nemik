@@ -138,8 +138,7 @@
   "misc": 4
  },
  "tests/test_churn.py": {
-  "misc": 32,
-  "type-arg": 2
+  "misc": 2
  },
  "tests/test_containerfile.py": {
   "misc": 7

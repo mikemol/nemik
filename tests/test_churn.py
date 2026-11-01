@@ -2,19 +2,32 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W495: a poll's change is classified by what the drawn graph must do to follow it."""
 
+from __future__ import annotations
+
 from datetime import UTC, datetime, timedelta
+from typing import TYPE_CHECKING, cast
 
 from nemik.churn import churn, classify, commit_classes
+
+if TYPE_CHECKING:
+    from nemik.history import QueueDoc, Waypoint
 
 T0 = datetime(2026, 10, 1, tzinfo=UTC)
 
 
-def _card(symbol: str, status: str = "ready", title: str = "t", **more: object) -> dict:
-    return {"symbol": symbol, "title": title, "status": status, **more}
+def _card(
+    symbol: str, status: str = "ready", title: str = "t", **more: object
+) -> Waypoint:
+    return cast(
+        "Waypoint", {"symbol": symbol, "title": title, "status": status, **more}
+    )
 
 
-def _queue(*cards: dict, heartbeat: str = "a") -> dict:
-    return {"waypoints": list(cards), "residue": [], "heartbeat": heartbeat}
+def _queue(*cards: Waypoint, heartbeat: str = "a") -> QueueDoc:
+    return cast(
+        "QueueDoc",
+        {"waypoints": list(cards), "residue": [], "heartbeat": heartbeat},
+    )
 
 
 def test_each_kind_of_change_is_classified() -> None:
