@@ -151,6 +151,7 @@ def audit(
     without: str = "",
     residue: dict[str, list[dict[str, object]]] | None = None,
     gate_weight: Fraction = Fraction(1),
+    *,
     workable: bool = False,
     gate_weights: dict[str, Fraction] | None = None,
     toward: str = "",
@@ -467,6 +468,7 @@ def edge_currents(
     peer: int,
     peer_blocked: int,
     operator: int = 0,
+    *,
     workable: bool = True,
 ) -> dict[tuple[str, str], float]:
     """Give the demand across each dependency in `repo`'s solve, by (needing card, prerequisite).

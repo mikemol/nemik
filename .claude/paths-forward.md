@@ -3,12 +3,12 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1404 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:c038720e03f9309c`
+counter 1405 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:3cf6dcebe16ab11c`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1403 | working |
-| 2 | W1404 | working |
+| 1 | W1404 | working |
+| 2 | W1405 | working |
 | 3 | W1075 | ready |
 | 4 | W1139 | ready |
 | 5 | W1279 | ready |
@@ -86,10 +86,10 @@ counter 1404 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:c03
 | 77 | W1383 | ready |
 | 78 | W1384 | ready |
 | 79 | W1385 | ready |
-| 80 | W980 | ready |
-| 81 | W1282 | ready |
-| 82 | W1325 | ready |
-| 83 | W1396 | ready |
+| 80 | W1396 | ready |
+| 81 | W980 | ready |
+| 82 | W1282 | ready |
+| 83 | W1325 | ready |
 | 84 | W1229 | ready |
 | 85 | W1246 | ready |
 | 86 | W1288 | ready |
@@ -1383,13 +1383,15 @@ counter 1404 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:c03
 | 1374 | W1398 | done |
 | 1375 | W1401 | done |
 | 1376 | W1402 | done |
+| 1377 | W1403 | done |
 
 ## waypoints
 
-1. **W1403** (working) Three flags become keyword-only in overlaps.overlaps, vtodo.feed and blocks.inbound with their
-   one positional caller fixed, so ruff falls by six
-2. **W1404** (working) letters.report takes fold, repo, older_than and apply keyword-only with its two positional
+1. **W1404** (working) letters.report takes fold, repo, older_than and apply keyword-only with its two positional
    callers fixed, so ruff falls by four
+   - next: Next time a G0 for a keyword-only conversion names PLR0917 as a companion finding the star can clear.
+2. **W1405** (working) salience.audit and edge_currents take workable keyword-only, with every caller already naming it,
+   so ruff falls by four or more
 3. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 4. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -1742,25 +1744,25 @@ counter 1404 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:c03
    - next: Decide the convention on one file (a module constant named for what is counted, e.g. ASKS = 7, placed beside
      the fixture); read ten more sites before deciding, since the first ten were all assertion expectations; a
      per-file-ignores entry in ruff-house.toml is a waiver and is out
-80. **W980** (ready) Pay down the ruff baseline (2934): retire the most numerous rule family with a codemod that passes
+80. **W1396** (ready) Answer nemik: mtools:W1614 is done - check the built venv for --clear-dead-enables, then lift
+   W695's wait on mtools
+   - next: Rebuild the venv (bazel build //:.venv, not beside a gate), run --help, then the dry run, then lift W695's
+     wait on mtools.
+81. **W980** (ready) Pay down the ruff baseline (2934): retire the most numerous rule family with a codemod that passes
    the gate, and lower the recorded count
    - next: Land the measuring tool, then retire the PT018 rule (112 composite assertions in tests) with a codemod that
      passes the gate and lower ruff-baseline
-81. **W1282** (ready) rank.py: a RankRow TypedDict for the rank row dict (objectives, compose, _next), so mypy falls by
+82. **W1282** (ready) rank.py: a RankRow TypedDict for the rank row dict (objectives, compose, _next), so mypy falls by
    the bare-dict cascade
    - next: G0 first. rank.py has about 150 mypy rows through one bare dict row (objectives line 187, compose line 144,
      _next line 939, lines 565 and 912 to 986). Define RankRow as a total=False TypedDict of the keys objectives writes
      (operator, tier, band, band_name, band_why, weight, downstream, salience) plus symbol and key, then type the
      callers. Disjoint from wake.py (stack 688). Measure with mikemol-pycheck --ratchet before writing the baseline, and
      read the tests that build rows by hand first
-82. **W1325** (ready) Configuration-mechanism census, fleet half: align each repo's per-surface rows (declaration site,
+83. **W1325** (ready) Configuration-mechanism census, fleet half: align each repo's per-surface rows (declaration site,
    change path, load path, review path) side by side and show where the mechanisms differ
    - next: When mtools:W2201 lands, read its per-repo output schema (four columns per surface), then add a nemik
      side-by-side mode that runs or collects each repo's output and aligns rows by surface
-83. **W1396** (ready) Answer nemik: mtools:W1614 is done - check the built venv for --clear-dead-enables, then lift
-   W695's wait on mtools
-   - next: Rebuild the venv (bazel build //:.venv, not beside a gate), run --help, then the dry run, then lift W695's
-     wait on mtools.
 84. **W1229** (ready) A repair of a rejected file in a stacked round uses the predecessor stack's frozen files as its
    base, in a scratch worktree, not git's HEAD
    - next: mtools-ad: a mode that restores a file as of a queued stack's frozen files, in mikemol-scratch; nemik:W1229
@@ -2345,7 +2347,7 @@ counter 1404 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:c03
      a queue umbrella
 192. **W695** (blocked) Each repo clears the enables edges whose target does not wait on them, using the dry run
    nemik-check --integrity prints (274 across 11 repos at first run)
-   - blocked on: luthen-observability, mtools
+   - blocked on: luthen-observability, mtools, W1396
    - next: After the next bazel build //:.venv, run mikemol-paths-forward --help and look for --clear-dead-enables, then
      a dry run here (W1396).
 193. **W735** (blocked) Ask the operator: who may know sibling paths for local-only inbox delivery
@@ -4537,6 +4539,8 @@ counter 1404 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:c03
    eight, with the witwait import left local
 1376. **W1402** (done) Twelve function-local imports in src/nemik/calendars.py and salience.py move to module scope,
    with the clashing rdflib and nemik.rank imports left local
+1377. **W1403** (done) Three flags become keyword-only in overlaps.overlaps, vtodo.feed and blocks.inbound with their
+   one positional caller fixed, so ruff falls by six
 
 ## residue
 
@@ -5754,3 +5758,29 @@ counter 1404 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:c03
   on W1376, R108 on W1382, R112 on W1288 (hooks untimed), R114 on W1288 (pace file after 19:25Z) and on W1395 (reply and
   adopters), R116 on W1383 (19 flag sites by module, due 2026-11-02); codon owed with no stack; hooks-venv rebuild and
   census (W1325) not done.; 0 finding(s)
+- **nemik:R116** (-) round 118: nemik-101, stack 800 (W1401) landed e72bf710 = 19:10:13Z and stack 801 (W1402) landed
+  df70c78f = 19:34:41Z; stack 802 (W1403, six FBT sites, key 1793561776097189652) inflight; stack 803 (W1404,
+  letters.report, ruff 622 to 617) staged; W1383 listing recorded: root NO NEW FINDINGS, OPEN FINDINGS CARRIED WITH
+  OWNERS AND DUE DATES (not a fixpoint declaration). Verified from source (TZ=UTC reflog): e406644f 18:44:17Z, e72bf710
+  19:10:13Z, df70c78f 19:34:41Z (14:34:41 -0500); --in-gate lists W1403 inflight; `mikemol-pycheck --ratchet` prints
+  ruff 617/622 and mypy 1396/1396 (the live 617 is W1404's staged -5 against stack 802's baseline 622). The send re-read
+  the state just before sending (R117's lesson applied and stated). Intervals as Z pairs: 800 gated 18:45:59Z to
+  19:10:13Z (24 min 14 s), gate empty 19:10:13Z to the 801 submit 19:13:09Z (2 min 56 s), 801 gated 21 min 32 s to
+  19:34:41Z, gate empty 19:34:41Z to the 802 submit 19:36:17Z (1 min 36 s). Tick-open 19:32:05Z to 19:34:53.3Z = 2 min
+  48 s, faster than the 4 min 40 s of the last three, so its base is not fixed (the G1 says so). The W1383 listing R116
+  asked for is recorded (19 findings = 9 defs counted twice plus one call, six modules, all failing codon entries by
+  grep; I re-counted the bare-star definitions last round and they matched). The pace file stat is the third missing
+  run: the producer did not write at 16:25Z, 18:25Z or 19:25Z (written at 15:25Z and 17:25Z), so the newest pace is 2 h
+  4 min 36 s old at 19:30:05Z, and luthen's answer (the unit killed at its 120 CPU-second limit, status 9) stands; the
+  fix is luthen-observability:W1890, not ours. One item the G1 leaves honestly open and which I could not settle from
+  here: W1404's measured -5 against K=4. The G1 says the extra finding is 'most likely PLR0917', a guess until the
+  baseline diff after stack 802 lands (rule 12: the miss attributed per file from the baseline diff); keep that on W1404
+  as the line to write once the baseline is written. A same-file ruff comparison against the parent revision from
+  outside src is not usable (per-file ignores differ), so I did not attribute it. Carried open findings, status on
+  2026-11-01: R95 second finding on W1349, R95 third, R97 first, R98, R111 first and R102 on W1219, R94 on W1348, R93 on
+  W1347, R92 on W1346 and W1288, R91 on W1345, R72 on W846, R84 on W695, R100 on W910, R101 on W1288, R105 on W1288, R85
+  on W613, R106 on W1376, R108 on W1382, R112 on W1288 (hooks untimed), R114 on W1288 (pace producer:
+  luthen-observability:W1890) and on W1395 (mtools reply not looked for this tick, adopters), R116 on W1383 (listing
+  done; the sites not yet taken: salience 154 and 470, serve 1367 and 1392, blocks 419), W1404's -5 attribution (after
+  802 lands) (all 2026-11-02 or on landing); codon owed with no stack; hooks-venv rebuild and census (W1325) not done.;
+  0 finding(s)
