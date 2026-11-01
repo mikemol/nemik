@@ -209,9 +209,6 @@
  "tests/test_published_valid.py": {
   "misc": 8
  },
- "tests/test_rank.py": {
-  "misc": 50
- },
  "tests/test_rank_apply.py": {
   "misc": 4
  },

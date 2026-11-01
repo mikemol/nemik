@@ -2,6 +2,8 @@
 # Copyright (c) 2026 Mike Mol
 """rank: packaged weights, weight overrides, downstream weight and the order."""
 
+from typing import TypedDict, cast
+
 import pytest
 from rdflib import Graph, Literal, URIRef
 
@@ -9,6 +11,14 @@ from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri, workstream_uri
 from nemik.rank import Weights, downstream_weight, load_weights, rank
 
 W = Weights(local=1, peer=2, peer_blocked=8)
+
+
+class _Row(TypedDict, total=False):
+    """A rank row, as far as these tests read it."""
+
+    symbol: str
+    downstream: int
+    weight: int
 
 
 def _wp(g: Graph, repo: str, sym: str, status: str = "ready") -> URIRef:
@@ -77,7 +87,7 @@ def test_rank_orders_ready_items_by_weight_then_symbol() -> None:
         g.add((n, NEMIK.workstream, ws))
         g.add((n, NEMIK.symbol, Literal(s)))
     g.add((_wp(g, "b", "W1", "blocked"), NEMIK.waitsFor, hi))
-    rows = rank(g, "a", W)
+    rows = cast("list[_Row]", rank(g, "a", W))
     assert [r["symbol"] for r in rows] == ["W9", "W2"]  # blocked W3 excluded
     assert rows[0]["downstream"] == 8  # the raw cross-repo sum
     assert (
@@ -94,8 +104,10 @@ def test_a_round_ranks_the_work_in_progress_among_the_ready_cards() -> None:
         g.add((n, NEMIK.workstream, ws))
         g.add((n, NEMIK.symbol, Literal(s)))
     g.add((_wp(g, "b", "W1", "blocked"), NEMIK.waitsFor, busy))
-    assert [r["symbol"] for r in rank(g, "a", W)] == ["W2"]
-    assert [r["symbol"] for r in rank(g, "a", W, with_working=True)] == ["W5", "W2"]
+    ranked = cast("list[_Row]", rank(g, "a", W))
+    assert [r["symbol"] for r in ranked] == ["W2"]
+    working = cast("list[_Row]", rank(g, "a", W, with_working=True))
+    assert [r["symbol"] for r in working] == ["W5", "W2"]
 
 
 def test_fleet_rank_pools_repos_into_one_comparable_order() -> None:
@@ -111,7 +123,9 @@ def test_fleet_rank_pools_repos_into_one_comparable_order() -> None:
         g.add((n, NEMIK.workstream, workstream_uri(repo)))
         g.add((n, NEMIK.symbol, Literal(sym)))
     g.add((_wp(g, "c", "W9", "blocked"), NEMIK.waitsFor, waypoint_uri("a", "W1")))
-    assert rank(g, "a", W)[0]["weight"] == rank(g, "b", W)[0]["weight"] == 1
+    first_repo = cast("list[_Row]", rank(g, "a", W))
+    second_repo = cast("list[_Row]", rank(g, "b", W))
+    assert first_repo[0]["weight"] == second_repo[0]["weight"] == 1
     fleet = rank_fleet(g, W)
     assert [r["cite"] for r in fleet] == ["a:W1", "b:W5"]
     assert [r["repo"] for r in fleet] == ["a", "b"]
@@ -137,13 +151,13 @@ def test_drift_fires_when_next_item_is_outweighed_and_clears_when_it_leads() -> 
     first, heavy = _ready(g, "a", "W1", 0), _ready(g, "a", "W2", 1)
     stalled = _wp(g, "b", "W9", "blocked")
     g.add((stalled, NEMIK.waitsFor, heavy))
-    found = drift(g, "a", W)
+    found = cast("tuple[_Row, _Row] | None", drift(g, "a", W))
     assert found is not None
     nxt, top = found
     assert (nxt["symbol"], top["symbol"]) == ("W1", "W2")
     g.remove((stalled, NEMIK.waitsFor, heavy))
     g.add((stalled, NEMIK.waitsFor, first))
-    assert drift(g, "a", W) is None
+    assert cast("tuple[_Row, _Row] | None", drift(g, "a", W)) is None
 
 
 def test_umbrella_children_are_direct_feeders_not_transitive_leaves() -> None:
@@ -181,7 +195,8 @@ def test_compose_lexicographic_is_one_objective_per_tier() -> None:
         _row("W3", operator=1, band=-4),
     ]
     lex = Composition((("operator",), ("band",), ("weight",)), {})
-    assert [r["symbol"] for r in compose(rows, lex)] == ["W3", "W2", "W1"]
+    got = cast("list[_Row]", compose(rows, lex))
+    assert [r["symbol"] for r in got] == ["W3", "W2", "W1"]
 
 
 def test_compose_pareto_front_then_scalarized_within_it() -> None:
@@ -196,10 +211,12 @@ def test_compose_pareto_front_then_scalarized_within_it() -> None:
         _row("W4", band=-3, weight=10),
     ]
     comp = Composition((("operator",), ("band", "weight")), {"band": 100, "weight": 1})
-    assert [r["symbol"] for r in compose(rows, comp)] == ["W2", "W1", "W4"]
+    got = cast("list[_Row]", compose(rows, comp))
+    assert [r["symbol"] for r in got] == ["W2", "W1", "W4"]
     # Weight the trade the other way and the same front flips; the dominated W4 stays last.
     comp = Composition((("operator",), ("band", "weight")), {"band": 10, "weight": 1})
-    assert [r["symbol"] for r in compose(rows, comp)] == ["W1", "W2", "W4"]
+    flipped = cast("list[_Row]", compose(rows, comp))
+    assert [r["symbol"] for r in flipped] == ["W1", "W2", "W4"]
 
 
 def test_operator_asks_are_not_a_tier_in_the_packaged_composition() -> None:
@@ -210,9 +227,11 @@ def test_operator_asks_are_not_a_tier_in_the_packaged_composition() -> None:
     from nemik.rank import compose, load_composition
 
     rows = [_row("W1", band=0, weight=999), _row("W2", operator=1, band=-4, weight=0)]
-    assert [r["symbol"] for r in compose(rows, load_composition())] == ["W1", "W2"]
+    packaged = cast("list[_Row]", compose(rows, load_composition()))
+    assert [r["symbol"] for r in packaged] == ["W1", "W2"]
     strict = load_composition('[order]\ntiers = [["operator"], ["band", "weight"]]\n')
-    assert [r["symbol"] for r in compose(rows, strict)] == ["W2", "W1"]
+    ordered = cast("list[_Row]", compose(rows, strict))
+    assert [r["symbol"] for r in ordered] == ["W2", "W1"]
 
 
 def test_composition_refuses_an_unknown_objective() -> None:

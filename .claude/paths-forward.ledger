@@ -3632,3 +3632,7 @@
 2026-11-01T04:30:58Z  interrupt W1342 minted    -         "test_history.py types its queue helpers with history.Waypoint and reads history_doc through WeeklyRow, so mypy falls by the bare-dict cascade"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1288
 2026-11-01T04:31:09Z  status W1342 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T04:36:06Z  tick  W1342 advanced  mechanize "W1342 stack 753 ready: test_history.py Waypoint and WeeklyRow, mypy 1928 to 1869, ruff flat; W1341 landed c41015e8 closed done; R88 added as nemik:R86; pace 04:25:25Z: mypy the owed ratchet (fell 148 owes 190) [blocked by W1288]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T04:39:09Z  status W1342 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T04:39:53Z  interrupt W1343 minted    -         "test_rank.py reads rank, drift and compose answers through a test-side _Row and casts, so mypy falls by the bare-dict cascade"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1288
+2026-11-01T04:40:03Z  status W1343 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T04:43:04Z  tick  W1343 advanced  mechanize "W1343 stack 754 ready: test_rank.py _Row and casts, mypy 1869 to 1819 (K=50 probed in a scratch copy first), ruff flat; W1342 landed 5c244337 closed done; R89 added as nemik:R87; pace 04:25:25Z: mypy the owed ratchet [blocked by W1288]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

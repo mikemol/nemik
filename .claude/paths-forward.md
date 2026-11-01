@@ -3,11 +3,11 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1342 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:631167be0366d515`
+counter 1343 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:99a18cb18a0781ee`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1342 | working |
+| 1 | W1343 | working |
 | 2 | W1075 | ready |
 | 3 | W1139 | ready |
 | 4 | W1279 | ready |
@@ -1321,11 +1321,12 @@ counter 1342 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:631
 | 1312 | W1339 | done |
 | 1313 | W1340 | done |
 | 1314 | W1341 | done |
+| 1315 | W1342 | done |
 
 ## waypoints
 
-1. **W1342** (working) test_history.py types its queue helpers with history.Waypoint and reads history_doc through
-   WeeklyRow, so mypy falls by the bare-dict cascade
+1. **W1343** (working) test_rank.py reads rank, drift and compose answers through a test-side _Row and casts, so mypy
+   falls by the bare-dict cascade
 2. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 3. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -4332,6 +4333,8 @@ counter 1342 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:631
    falls by 25
 1314. **W1341** (done) checks/claims.py: the vestigial-import check in oslc_cm_state_vocabulary says what its failure
    means, from reviewer R87
+1315. **W1342** (done) test_history.py types its queue helpers with history.Waypoint and reads history_doc through
+   WeeklyRow, so mypy falls by the bare-dict cascade
 
 ## residue
 
@@ -5026,3 +5029,15 @@ counter 1342 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:631
   (2026-11-02); R84 on W695 OPEN (2026-11-02); R85 on W613 closes on read-back of the 36-of-76 line; R86 on W1288 and
   R86 on W1339 (W1187 reconciled by the session): met; R87 on W1340: met by the python3 -O run recorded on W1340 and the
   message fix.; 0 finding(s)
+- **nemik:R87** (-) round 89: tick-w1343, W1342 (tests/test_history.py typed through history.Waypoint, QueueDoc and
+  WeeklyRow, mypy 1928 to 1869); stack 753 inflight (key 1793507781065499588, W1342); previous landing c41015e8
+  04:06:48Z (reflog 00:06:48 -0400): root Verified from source: reflog c41015e8 = 04:06:48Z; --in-gate lists W1342
+  inflight; `mikemol-pycheck --ratchet` prints ruff 952/952 and mypy 1869/1869, so -59 recomputes; W1342's G0 is alone
+  and before the edit, reads the pace first (mypy the owed ratchet, owes 190, fell 148, so -59 pays it), cites the
+  existing types by line and keeps the null-field test as an explicit dict. Gate-empty 04:06:48Z to 04:36:19Z = 29 min
+  31 s wall (about 24 min with no tool call before the 04:30 wake). One finding: the R72 K finding on W1329 was closed
+  on the ruff/ast evidence a few rounds ago and the mypy class has just repeated it. Carried open findings, status on
+  2026-11-01: R72 on W1288 (second stack in the same wake) due today, still untried; R83 on W1288 (wake on the pace,
+  2026-11-02) untried; R73-F2 on W1288 (PT018 per-file mypy delta for the 46 sites, due today) open; R72 on W846
+  (2026-11-02) open; R84 on W695 (2026-11-02) open; R85 on W613 closes on read-back; R80 on W1288 closed by 752's
+  landing and the 52-finding explanation. No fixpoint is declared.; 1 finding(s)
