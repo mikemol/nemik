@@ -41,10 +41,6 @@
   "misc": 20,
   "type-arg": 4
  },
- "src/nemik/manifest.py": {
-  "misc": 28,
-  "no-untyped-def": 1
- },
  "src/nemik/metrics.py": {
   "misc": 10
  },

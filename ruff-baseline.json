@@ -121,9 +121,6 @@
   "S404": 1,
   "S603": 1
  },
- "src/nemik/manifest.py": {
-  "ANN001": 1
- },
  "src/nemik/metrics.py": {
   "PLC0415": 4,
   "PTH111": 1,

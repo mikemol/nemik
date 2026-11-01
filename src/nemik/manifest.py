@@ -16,11 +16,34 @@ manifest file is apischema.load's, and apischema.unmanifested is the call with t
 Manifest = dict[str, dict[str, dict[str, str]]]
 
 
+def _dict(value: object) -> dict[str, object]:
+    """Read a parsed JSON value as an object, or an empty one when it is anything else.
+
+    Returns:
+        The object's entries, keyed by string.
+
+    """
+    return {str(k): v for k, v in value.items()} if isinstance(value, dict) else {}
+
+
+def _list(value: object) -> list[object]:
+    """Read a parsed JSON value as an array, or an empty one when it is anything else.
+
+    Returns:
+        The array's elements.
+
+    """
+    if isinstance(value, list):
+        items: list[object] = value
+        return items
+    return []
+
+
 def _fields(rows: object) -> set[str]:
-    return {k for r in rows for k in r} if isinstance(rows, list) else set()
+    return {k for r in _list(rows) for k in _dict(r)}
 
 
-def unmanifested(name: str, doc, m: Manifest) -> list[str]:
+def unmanifested(name: str, doc: object, m: Manifest) -> list[str]:
     """`path.field` for every field of `doc` (the parsed published file `name`) not in `m`.
 
     Args:
@@ -38,6 +61,7 @@ def unmanifested(name: str, doc, m: Manifest) -> list[str]:
         return [f"{name}: file is not in the manifest"]
     spec = m[key]
     bad: list[str] = []
+    top = _dict(doc)
 
     def check(section: str, rows: object) -> None:
         bad.extend(
@@ -46,36 +70,41 @@ def unmanifested(name: str, doc, m: Manifest) -> list[str]:
 
     if key == "graph.json":
         for section in ("nodes", "edges", "inbound", "operator"):
-            check(section, doc.get(section))
-        check("health", list(doc.get("health", {}).values()))
+            check(section, top.get(section))
+        check("health", list(_dict(top.get("health")).values()))
         bad += [
             f"{name} top.{k}"
             for k in sorted(
-                set(doc)
+                set(top)
                 - set(spec)
                 - {"nodes", "edges", "inbound", "operator", "findings"}
             )
         ]
         bad += [
             f"{name} findings.{r}"
-            for r, fs in doc.get("findings", {}).items()
+            for r, fs in _dict(top.get("findings")).items()
             if any(
-                not isinstance(f, list) or not all(isinstance(x, str) for x in f)
-                for f in fs
+                not isinstance(f, list) or not all(isinstance(x, str) for x in _list(f))
+                for f in _list(fs)
             )
         ]
     elif key == "wake.json":
-        bad += [f"{name} top.{k}" for k in sorted(set(doc) - set(spec["top"]))]
-        check("roster", doc.get("roster"))
+        bad += [f"{name} top.{k}" for k in sorted(set(top) - set(spec["top"]))]
+        check("roster", top.get("roster"))
         check(
-            "waiting", [w for r in doc.get("roster", []) for w in r.get("waiting", [])]
+            "waiting",
+            [
+                w
+                for r in _list(top.get("roster"))
+                for w in _list(_dict(r).get("waiting"))
+            ],
         )
         bad += [
             f"{name} operator.{k}"
-            for k in sorted(set(doc.get("operator", {})) - set(spec["operator"]))
+            for k in sorted(set(_dict(top.get("operator"))) - set(spec["operator"]))
         ]
     elif key == "history.json":
-        check("weeks", [row for rows in doc.values() for row in rows])
+        check("weeks", [row for rows in top.values() for row in _list(rows)])
     else:
         check("umbrellas" if key == "umbrellas.json" else "goals", doc)
     return bad

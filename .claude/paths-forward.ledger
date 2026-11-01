@@ -3790,3 +3790,8 @@
 2026-11-01T15:08:59Z  interrupt W1391 minted    -         "src/nemik/issues.py reads its issues document through a TypedDict row, so mypy falls by ten"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
 2026-11-01T15:10:15Z  status W1391 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T15:17:04Z  status W1386 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T15:42:27Z  status W1391 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T15:42:29Z  status W1387 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T15:42:30Z  status W1388 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T15:42:38Z  tick  W1392 minted    -         "src/nemik/manifest.py reads the parsed document through two narrowing helpers, so mypy falls by twenty-nine"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
+2026-11-01T15:45:28Z  status W1392 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
