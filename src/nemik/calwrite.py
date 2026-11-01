@@ -16,7 +16,6 @@ without being asked. HOST-SIDE ONLY, like nemik.calendars: the feed carries wayp
 from __future__ import annotations
 
 import argparse
-import operator
 import re
 import subprocess
 from datetime import date, timedelta
@@ -236,7 +235,7 @@ def events(g: Graph, repos: Iterable[str], label: str | None = None) -> list[lis
             str(g.value(n, NEMIK.location) or ""),
         )
         found.append((repo, int(symbol.lstrip("W") or 0), lines))
-    return [lines for _, _, lines in sorted(found, key=operator.itemgetter(slice(2)))]
+    return [lines for _, _, lines in sorted(found)]
 
 
 def feed(g: Graph, repos: Iterable[str], label: str | None = None) -> str:

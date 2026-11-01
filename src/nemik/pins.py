@@ -97,7 +97,8 @@ def installed(receipt: Path) -> str | None:
     if not receipt.is_file():
         return None
 
-    tool = table(table(tomllib.loads(receipt.read_text(encoding="utf-8"))).get("tool"))
+    parsed: object = tomllib.loads(receipt.read_text(encoding="utf-8"))
+    tool = table(table(parsed).get("tool"))
     for req in tables(tool.get("requirements")):
         if req.get("name") == "nemik" and (m := _REV.search(str(req.get("git", "")))):
             return m[1]

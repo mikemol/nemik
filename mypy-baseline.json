@@ -13,9 +13,6 @@
  "src/nemik/calendars.py": {
   "misc": 16
  },
- "src/nemik/calwrite.py": {
-  "misc": 2
- },
  "src/nemik/check.py": {
   "call-overload": 2,
   "misc": 23,
@@ -49,9 +46,6 @@
  },
  "src/nemik/pieces.py": {
   "misc": 2
- },
- "src/nemik/pins.py": {
-  "misc": 1
  },
  "src/nemik/rank.py": {
   "misc": 232,
