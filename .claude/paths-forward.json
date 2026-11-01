@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1352,
+  "counter": 1354,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 756
+      "ticks_blocked": 757
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-18T21:49:48Z",
-      "ticks_blocked": 576,
+      "ticks_blocked": 577,
       "weight": 1
     },
     {
@@ -3520,7 +3520,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 432,
+      "ticks_blocked": 433,
       "weight": 2,
       "completed": null
     },
@@ -4278,7 +4278,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 605,
+      "ticks_blocked": 606,
       "weight": 2,
       "completed": null,
       "warrants": [
@@ -5405,7 +5405,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 582,
+      "ticks_blocked": 583,
       "completed": null
     },
     {
@@ -5426,7 +5426,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 597,
+      "ticks_blocked": 598,
       "completed": null
     },
     {
@@ -5485,7 +5485,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 597,
+      "ticks_blocked": 598,
       "completed": null
     },
     {
@@ -5506,7 +5506,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 597,
+      "ticks_blocked": 598,
       "completed": null
     },
     {
@@ -5546,7 +5546,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 597,
+      "ticks_blocked": 598,
       "completed": null
     },
     {
@@ -5605,7 +5605,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 597,
+      "ticks_blocked": 598,
       "completed": null
     },
     {
@@ -5645,7 +5645,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 597,
+      "ticks_blocked": 598,
       "completed": null
     },
     {
@@ -5666,7 +5666,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 597,
+      "ticks_blocked": 598,
       "completed": null
     },
     {
@@ -5706,7 +5706,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 597,
+      "ticks_blocked": 598,
       "completed": null
     },
     {
@@ -6650,7 +6650,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 397,
+      "ticks_blocked": 398,
       "completed": null
     },
     {
@@ -6789,7 +6789,7 @@
       "minted_during": "interrupt",
       "caused_by": "W346",
       "last_worked": "2026-10-19T18:16:23Z",
-      "ticks_blocked": 290,
+      "ticks_blocked": 291,
       "weight": 9,
       "completed": null,
       "manifest": [
@@ -6818,7 +6818,7 @@
       "minted_during": "interrupt",
       "caused_by": "W346",
       "last_worked": "2026-10-19T18:16:25Z",
-      "ticks_blocked": 290,
+      "ticks_blocked": 291,
       "weight": 9,
       "completed": null,
       "manifest": [
@@ -7082,7 +7082,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 510,
+      "ticks_blocked": 511,
       "completed": null
     },
     {
@@ -7195,7 +7195,7 @@
       "minted_during": "interrupt",
       "caused_by": "W364",
       "last_worked": "2026-10-24T12:37:36Z",
-      "ticks_blocked": 235,
+      "ticks_blocked": 236,
       "manifest": [
         "src/nemik/mirror.py",
         "tests/test_mirror.py"
@@ -7224,7 +7224,7 @@
       "minted_during": "interrupt",
       "caused_by": "W364",
       "last_worked": "2026-10-24T13:19:24Z",
-      "ticks_blocked": 233,
+      "ticks_blocked": 234,
       "manifest": [
         "src/nemik/pollevents.py",
         "tests/test_pollevents.py",
@@ -8340,7 +8340,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 496,
+      "ticks_blocked": 497,
       "completed": null
     },
     {
@@ -8361,7 +8361,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-16T01:35:27Z",
-      "ticks_blocked": 460,
+      "ticks_blocked": 461,
       "completed": null
     },
     {
@@ -8382,7 +8382,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 529,
+      "ticks_blocked": 530,
       "completed": null
     },
     {
@@ -9024,7 +9024,7 @@
       "minted_during": "tick",
       "caused_by": "W458",
       "last_worked": "2026-10-13T19:10:34Z",
-      "ticks_blocked": 494,
+      "ticks_blocked": 495,
       "completed": null
     },
     {
@@ -9062,7 +9062,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W943",
       "last_worked": "2026-10-20T18:05:40Z",
-      "ticks_blocked": 337,
+      "ticks_blocked": 338,
       "weight": 1,
       "manifest": [
         "src/nemik/adapter.py",
@@ -9602,7 +9602,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-19T10:16:00Z",
-      "ticks_blocked": 397,
+      "ticks_blocked": 398,
       "completed": null,
       "warrants": [
         {
@@ -9714,7 +9714,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-16T01:54:02Z",
-      "ticks_blocked": 461,
+      "ticks_blocked": 462,
       "weight": 1,
       "completed": null
     },
@@ -9734,7 +9734,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-16T01:54:03Z",
-      "ticks_blocked": 461,
+      "ticks_blocked": 462,
       "weight": 1,
       "completed": null
     },
@@ -9895,7 +9895,7 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W1051",
       "last_worked": "2026-10-18T21:49:01Z",
-      "ticks_blocked": 397,
+      "ticks_blocked": 398,
       "completed": null,
       "weight": 6,
       "warrants": [
@@ -10072,7 +10072,7 @@
       "minted_during": "tick",
       "caused_by": "W500",
       "last_worked": "2026-10-15T11:53:53Z",
-      "ticks_blocked": 397,
+      "ticks_blocked": 398,
       "completed": null
     },
     {
@@ -10117,7 +10117,7 @@
       "minted_during": "tick",
       "caused_by": "W506",
       "last_worked": "2026-10-24T16:41:28Z",
-      "ticks_blocked": 225,
+      "ticks_blocked": 226,
       "weight": 11,
       "completed": null,
       "manifest": [
@@ -10189,7 +10189,7 @@
       "minted_during": "tick",
       "caused_by": "W506",
       "last_worked": "2026-10-18T03:08:04Z",
-      "ticks_blocked": 397,
+      "ticks_blocked": 398,
       "weight": 2,
       "completed": null
     },
@@ -10213,7 +10213,7 @@
       "minted_during": "tick",
       "caused_by": "github:W35",
       "last_worked": "2026-10-15T12:00:59Z",
-      "ticks_blocked": 490,
+      "ticks_blocked": 491,
       "completed": null
     },
     {
@@ -10298,7 +10298,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T12:40:08Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "weight": 11,
       "manifest": [
         "src/nemik/withheld.py"
@@ -10326,7 +10326,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-18T19:15:01Z",
-      "ticks_blocked": 253,
+      "ticks_blocked": 254,
       "completed": null
     },
     {
@@ -10707,7 +10707,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-16T01:53:12Z",
-      "ticks_blocked": 461,
+      "ticks_blocked": 462,
       "weight": 13,
       "completed": null
     },
@@ -11330,7 +11330,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-17T10:50:53Z",
-      "ticks_blocked": 397,
+      "ticks_blocked": 398,
       "completed": null
     },
     {
@@ -11376,7 +11376,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-27T06:32:37Z",
-      "ticks_blocked": 114,
+      "ticks_blocked": 115,
       "completed": null,
       "warrants": [
         {
@@ -11428,7 +11428,7 @@
       "minted_during": "tick",
       "caused_by": "W560",
       "last_worked": "2026-10-16T02:51:43Z",
-      "ticks_blocked": 459,
+      "ticks_blocked": 460,
       "completed": null
     },
     {
@@ -11501,7 +11501,7 @@
       "minted_during": "tick",
       "caused_by": "W566",
       "last_worked": "2026-10-16T05:23:44Z",
-      "ticks_blocked": 454,
+      "ticks_blocked": 455,
       "completed": null
     },
     {
@@ -11526,7 +11526,7 @@
       "minted_during": "tick",
       "caused_by": "W566",
       "last_worked": "2026-10-23T19:25:35Z",
-      "ticks_blocked": 454,
+      "ticks_blocked": 455,
       "completed": null
     },
     {
@@ -11550,7 +11550,7 @@
       "minted_during": "tick",
       "caused_by": "W566",
       "last_worked": "2026-10-29T02:48:39Z",
-      "ticks_blocked": 455,
+      "ticks_blocked": 456,
       "completed": null
     },
     {
@@ -11572,7 +11572,7 @@
       "minted_during": "tick",
       "caused_by": "W541",
       "last_worked": "2026-10-23T17:58:15Z",
-      "ticks_blocked": 452,
+      "ticks_blocked": 453,
       "completed": null
     },
     {
@@ -11594,7 +11594,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-23T12:09:48Z",
-      "ticks_blocked": 284,
+      "ticks_blocked": 285,
       "completed": null,
       "manifest": [
         "Containerfile",
@@ -11692,7 +11692,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-17T08:09:46Z",
-      "ticks_blocked": 443,
+      "ticks_blocked": 444,
       "completed": null
     },
     {
@@ -11756,7 +11756,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-16T15:08:10Z",
-      "ticks_blocked": 382,
+      "ticks_blocked": 383,
       "completed": null
     },
     {
@@ -11781,7 +11781,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-22T07:10:08Z",
-      "ticks_blocked": 287,
+      "ticks_blocked": 288,
       "completed": null
     },
     {
@@ -11805,7 +11805,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-17T15:38:53Z",
-      "ticks_blocked": 397,
+      "ticks_blocked": 398,
       "completed": null
     },
     {
@@ -11829,7 +11829,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-19T02:01:21Z",
-      "ticks_blocked": 366,
+      "ticks_blocked": 367,
       "completed": null,
       "manifest": [
         "src/nemik/salience.py",
@@ -12551,7 +12551,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-11-01T03:11:01Z",
-      "ticks_blocked": 21,
+      "ticks_blocked": 22,
       "completed": null
     },
     {
@@ -13211,7 +13211,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-25T02:12:38Z",
-      "ticks_blocked": 206,
+      "ticks_blocked": 207,
       "manifest": [
         "src/nemik/stackable.py",
         "src/nemik/cones.py",
@@ -14013,7 +14013,7 @@
       "minted_during": "interrupt",
       "caused_by": "W510",
       "last_worked": "2026-10-18T16:06:47Z",
-      "ticks_blocked": 397,
+      "ticks_blocked": 398,
       "manifest": [
         "src/nemik/web/index.html",
         "tests/test_sources_trs.py"
@@ -14039,7 +14039,7 @@
       "minted_during": "interrupt",
       "caused_by": "W510",
       "last_worked": "2026-10-18T14:33:41Z",
-      "ticks_blocked": 397,
+      "ticks_blocked": 398,
       "completed": null,
       "manifest": [
         "src/nemik/web/index.html",
@@ -14117,7 +14117,7 @@
       "minted_during": "interrupt",
       "caused_by": "W674",
       "last_worked": "2026-10-18T16:13:01Z",
-      "ticks_blocked": 397,
+      "ticks_blocked": 398,
       "manifest": [
         "src/nemik/serve.py",
         "src/nemik/web/vendor/n3.min.js",
@@ -14433,7 +14433,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-18T19:40:28Z",
-      "ticks_blocked": 397,
+      "ticks_blocked": 398,
       "warrants": [
         {
           "@context": {
@@ -14620,7 +14620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W691",
       "last_worked": "2026-10-19T01:14:55Z",
-      "ticks_blocked": 397,
+      "ticks_blocked": 398,
       "completed": null,
       "manifest": [
         "src/nemik/serve.py",
@@ -14692,7 +14692,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-11-01T02:08:38Z",
-      "ticks_blocked": 381,
+      "ticks_blocked": 382,
       "completed": null
     },
     {
@@ -14818,7 +14818,7 @@
       "minted_during": "interrupt",
       "caused_by": "W581",
       "last_worked": "2026-10-18T23:03:49Z",
-      "ticks_blocked": 397,
+      "ticks_blocked": 398,
       "completed": null
     },
     {
@@ -15033,7 +15033,7 @@
       "minted_during": "interrupt",
       "caused_by": "el-openglo:W702",
       "last_worked": "2026-10-19T00:15:45Z",
-      "ticks_blocked": 397,
+      "ticks_blocked": 398,
       "completed": null
     },
     {
@@ -15060,7 +15060,7 @@
       "minted_during": "interrupt",
       "caused_by": "W693",
       "last_worked": "2026-10-24T15:22:53Z",
-      "ticks_blocked": 229,
+      "ticks_blocked": 230,
       "manifest": [
         "src/nemik/blocks.py",
         "src/nemik/serve.py",
@@ -15749,7 +15749,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W728",
       "last_worked": "2026-10-19T15:12:10Z",
-      "ticks_blocked": 388,
+      "ticks_blocked": 389,
       "completed": null
     },
     {
@@ -15953,7 +15953,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-23T19:25:28Z",
-      "ticks_blocked": 344,
+      "ticks_blocked": 345,
       "warrants": [
         {
           "@context": {
@@ -16195,7 +16195,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W743",
       "last_worked": "2026-10-24T14:11:42Z",
-      "ticks_blocked": 231,
+      "ticks_blocked": 232,
       "completed": null,
       "manifest": [
         "docs/forecast-features.md"
@@ -16250,7 +16250,7 @@
       "minted_during": "tick",
       "caused_by": "mtools:W1731",
       "last_worked": "2026-10-24T18:42:00Z",
-      "ticks_blocked": 85,
+      "ticks_blocked": 86,
       "completed": null,
       "manifest": [
         "src/nemik/landings.py",
@@ -16610,7 +16610,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-25T02:38:48Z",
-      "ticks_blocked": 204,
+      "ticks_blocked": 205,
       "manifest": [
         "deploy/deployment.yaml",
         "tests/test_deploy_manifest.py"
@@ -16725,7 +16725,7 @@
       "minted_during": "tick",
       "caused_by": "W762",
       "last_worked": "2026-10-28T14:21:12Z",
-      "ticks_blocked": 85,
+      "ticks_blocked": 86,
       "manifest": [
         "tools/codon_census.py",
         "tests/test_codon_census.py",
@@ -17064,7 +17064,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-20T22:31:27Z",
-      "ticks_blocked": 290,
+      "ticks_blocked": 291,
       "warrants": [
         {
           "@context": {
@@ -17275,7 +17275,7 @@
       "minted_during": "tick",
       "caused_by": "W781",
       "last_worked": "2026-10-23T17:58:17Z",
-      "ticks_blocked": 336,
+      "ticks_blocked": 337,
       "completed": null
     },
     {
@@ -17301,7 +17301,7 @@
       "minted_during": "tick",
       "caused_by": "W461",
       "last_worked": "2026-10-25T02:38:49Z",
-      "ticks_blocked": 204,
+      "ticks_blocked": 205,
       "manifest": [
         "src/nemik/web/index.html",
         "src/nemik/serve.py",
@@ -17887,7 +17887,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-25T03:12:35Z",
-      "ticks_blocked": 203,
+      "ticks_blocked": 204,
       "completed": null
     },
     {
@@ -18502,7 +18502,7 @@
       "minted_during": "tick",
       "caused_by": "W579",
       "last_worked": "2026-10-23T19:25:16Z",
-      "ticks_blocked": 270,
+      "ticks_blocked": 271,
       "completed": null
     },
     {
@@ -18918,7 +18918,7 @@
       "minted_during": "interrupt",
       "caused_by": "nemik:W703",
       "last_worked": "2026-10-22T20:45:21Z",
-      "ticks_blocked": 290,
+      "ticks_blocked": 291,
       "completed": null
     },
     {
@@ -19629,7 +19629,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T07:32:14Z",
-      "ticks_blocked": 290,
+      "ticks_blocked": 291,
       "completed": null
     },
     {
@@ -19665,7 +19665,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T07:32:19Z",
-      "ticks_blocked": 290,
+      "ticks_blocked": 291,
       "completed": null
     },
     {
@@ -19701,7 +19701,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T07:32:23Z",
-      "ticks_blocked": 290,
+      "ticks_blocked": 291,
       "completed": null
     },
     {
@@ -20223,7 +20223,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T16:12:14Z",
-      "ticks_blocked": 274,
+      "ticks_blocked": 275,
       "completed": null
     },
     {
@@ -20399,7 +20399,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-24T17:33:15Z",
-      "ticks_blocked": 270,
+      "ticks_blocked": 271,
       "warrants": [
         {
           "@context": {
@@ -20551,7 +20551,7 @@
       "minted_during": "tick",
       "caused_by": "W905",
       "last_worked": "2026-10-23T18:12:28Z",
-      "ticks_blocked": 272,
+      "ticks_blocked": 273,
       "manifest": [
         "docs/evidence-standards.md"
       ],
@@ -20604,7 +20604,7 @@
       "minted_during": "tick",
       "caused_by": "W905",
       "last_worked": "2026-10-23T19:34:39Z",
-      "ticks_blocked": 270,
+      "ticks_blocked": 271,
       "completed": null,
       "manifest": [
         "docs/evidence-recommendations.md"
@@ -20776,7 +20776,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-27T02:41:06Z",
-      "ticks_blocked": 270,
+      "ticks_blocked": 271,
       "completed": null,
       "manifest": [
         "src/nemik/witnesses.py",
@@ -20967,7 +20967,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T20:45:05Z",
-      "ticks_blocked": 267,
+      "ticks_blocked": 268,
       "manifest": [
         "tests/test_modes.py",
         "tests/test_metrics_gating.py"
@@ -20993,7 +20993,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T20:57:46Z",
-      "ticks_blocked": 267,
+      "ticks_blocked": 268,
       "completed": null
     },
     {
@@ -21016,7 +21016,7 @@
       "minted_during": "tick",
       "caused_by": "W923",
       "last_worked": "2026-10-25T11:09:55Z",
-      "ticks_blocked": 186,
+      "ticks_blocked": 187,
       "completed": null,
       "manifest": [
         "tools/gen_test_targets.py",
@@ -21043,7 +21043,7 @@
       "minted_during": "tick",
       "caused_by": "W923",
       "last_worked": "2026-10-23T20:57:51Z",
-      "ticks_blocked": 267,
+      "ticks_blocked": 268,
       "completed": null
     },
     {
@@ -21064,7 +21064,7 @@
       "minted_during": "tick",
       "caused_by": "W923",
       "last_worked": "2026-10-23T20:57:53Z",
-      "ticks_blocked": 267,
+      "ticks_blocked": 268,
       "completed": null,
       "manifest": [
         "tests/test_shard_declared.py"
@@ -21250,7 +21250,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T21:21:43Z",
-      "ticks_blocked": 235,
+      "ticks_blocked": 236,
       "completed": null
     },
     {
@@ -21345,7 +21345,7 @@
       "minted_during": "tick",
       "caused_by": "W934",
       "last_worked": "2026-10-24T12:59:53Z",
-      "ticks_blocked": 234,
+      "ticks_blocked": 235,
       "completed": null,
       "manifest": [
         "src/nemik/web/views.js",
@@ -21414,7 +21414,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W918",
       "last_worked": "2026-10-24T12:59:54Z",
-      "ticks_blocked": 234,
+      "ticks_blocked": 235,
       "completed": null
     },
     {
@@ -21982,7 +21982,7 @@
       "minted_during": "interrupt",
       "caused_by": "nemik:W959",
       "last_worked": "2026-10-24T12:59:55Z",
-      "ticks_blocked": 234,
+      "ticks_blocked": 235,
       "completed": null,
       "manifest": [
         "src/nemik/mirrorsend.py",
@@ -22006,7 +22006,7 @@
       "minted_during": "interrupt",
       "caused_by": "nemik:W938",
       "last_worked": "2026-10-24T12:59:52Z",
-      "ticks_blocked": 234,
+      "ticks_blocked": 235,
       "completed": null,
       "size_class": "small"
     },
@@ -22086,7 +22086,7 @@
       "minted_during": "tick",
       "caused_by": "W749",
       "last_worked": "2026-10-24T14:12:01Z",
-      "ticks_blocked": 231,
+      "ticks_blocked": 232,
       "completed": null,
       "manifest": [
         "src/nemik/forecastshingle.py",
@@ -22165,7 +22165,7 @@
       "minted_during": "interrupt",
       "caused_by": "W709",
       "last_worked": "2026-10-24T15:23:12Z",
-      "ticks_blocked": 229,
+      "ticks_blocked": 230,
       "completed": null,
       "manifest": [
         "src/nemik/web/panels.js",
@@ -22389,7 +22389,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-24T16:47:53Z",
-      "ticks_blocked": 226,
+      "ticks_blocked": 227,
       "completed": null
     },
     {
@@ -22503,7 +22503,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-24T17:33:12Z",
-      "ticks_blocked": 225,
+      "ticks_blocked": 226,
       "completed": null,
       "manifest": [
         "src/nemik/retrostub.py",
@@ -22527,7 +22527,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-24T17:33:14Z",
-      "ticks_blocked": 225,
+      "ticks_blocked": 226,
       "completed": null,
       "manifest": [
         "src/nemik/retrolayers.py",
@@ -22554,7 +22554,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W42",
       "last_worked": "2026-10-24T23:08:23Z",
-      "ticks_blocked": 142,
+      "ticks_blocked": 143,
       "completed": null,
       "warrants": [
         {
@@ -23121,7 +23121,7 @@
       "minted_during": "interrupt",
       "caused_by": "inbox/2026-10-26-nemik-edge-mtools-W2048-enables-W1007.md",
       "last_worked": "2026-10-26T19:39:34Z",
-      "ticks_blocked": 137,
+      "ticks_blocked": 138,
       "warrants": [
         {
           "@context": {
@@ -23177,7 +23177,7 @@
       "minted_during": "interrupt",
       "caused_by": "inbox/2026-10-26-nemik-edge-mtools-W2048-enables-W1008.md",
       "last_worked": "2026-10-26T19:39:37Z",
-      "ticks_blocked": 137,
+      "ticks_blocked": 138,
       "warrants": [
         {
           "@context": {
@@ -23289,7 +23289,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W44",
       "last_worked": "2026-10-24T23:43:28Z",
-      "ticks_blocked": 212,
+      "ticks_blocked": 213,
       "warrants": [
         {
           "@context": {
@@ -23583,7 +23583,7 @@
       "minted_during": "tick",
       "caused_by": "W643",
       "last_worked": "2026-10-25T02:12:46Z",
-      "ticks_blocked": 206,
+      "ticks_blocked": 207,
       "completed": null,
       "manifest": [
         "src/nemik/stackable.py",
@@ -23609,7 +23609,7 @@
       "minted_during": "tick",
       "caused_by": "W643",
       "last_worked": "2026-10-25T02:12:47Z",
-      "ticks_blocked": 206,
+      "ticks_blocked": 207,
       "completed": null,
       "manifest": [
         "src/nemik/cones.py",
@@ -23676,7 +23676,7 @@
       "minted_during": "tick",
       "caused_by": "W764",
       "last_worked": "2026-10-25T02:39:00Z",
-      "ticks_blocked": 204,
+      "ticks_blocked": 205,
       "completed": null,
       "manifest": [
         "deploy/deployment.yaml",
@@ -23727,7 +23727,7 @@
       "minted_during": "tick",
       "caused_by": "W789",
       "last_worked": "2026-10-25T02:39:02Z",
-      "ticks_blocked": 204,
+      "ticks_blocked": 205,
       "completed": null,
       "manifest": [
         "src/nemik/web/index.html",
@@ -23985,7 +23985,7 @@
       "minted_during": "tick",
       "caused_by": "W997",
       "last_worked": "2026-10-25T07:39:20Z",
-      "ticks_blocked": 194,
+      "ticks_blocked": 195,
       "manifest": [
         "src/nemik/pacerun.py",
         "src/nemik/hostroot_cli.py",
@@ -24116,7 +24116,7 @@
       "minted_during": "tick",
       "caused_by": "W925",
       "last_worked": "2026-10-26T00:43:08Z",
-      "ticks_blocked": 162,
+      "ticks_blocked": 163,
       "manifest": [
         "docs/per-test-targets.md"
       ],
@@ -24141,7 +24141,7 @@
       "minted_during": "tick",
       "caused_by": "W925",
       "last_worked": "2026-10-25T18:42:04Z",
-      "ticks_blocked": 186,
+      "ticks_blocked": 187,
       "completed": null,
       "manifest": [
         "tools/gen_test_targets.py",
@@ -24167,7 +24167,7 @@
       "minted_during": "tick",
       "caused_by": "W925",
       "last_worked": "2026-10-25T11:10:13Z",
-      "ticks_blocked": 186,
+      "ticks_blocked": 187,
       "completed": null,
       "manifest": [
         "tests/venv_pytest.sh"
@@ -24316,7 +24316,7 @@
       "minted_during": "tick",
       "caused_by": "github:W48",
       "last_worked": "2026-10-29T08:59:07Z",
-      "ticks_blocked": 64,
+      "ticks_blocked": 65,
       "completed": null,
       "manifest": [
         "src/nemik/landings.py",
@@ -24465,7 +24465,7 @@
       "minted_during": "tick",
       "caused_by": "W728",
       "last_worked": "2026-10-25T14:28:23Z",
-      "ticks_blocked": 108,
+      "ticks_blocked": 109,
       "warrants": [
         {
           "@context": {
@@ -24565,7 +24565,7 @@
       "minted_during": "tick",
       "caused_by": "W1047",
       "last_worked": "2026-10-27T07:42:42Z",
-      "ticks_blocked": 108,
+      "ticks_blocked": 109,
       "completed": null
     },
     {
@@ -24707,7 +24707,7 @@
       "minted_during": "tick",
       "caused_by": "github:W50",
       "last_worked": "2026-10-26T23:05:10Z",
-      "ticks_blocked": 176,
+      "ticks_blocked": 177,
       "warrants": [
         {
           "@context": {
@@ -24785,7 +24785,7 @@
       "minted_during": "tick",
       "caused_by": "W1055",
       "last_worked": "2026-10-29T23:48:39Z",
-      "ticks_blocked": 47,
+      "ticks_blocked": 48,
       "manifest": [
         "src/nemik/landcost.py",
         "tests/test_landcost.py"
@@ -24814,7 +24814,7 @@
       "minted_during": "tick",
       "caused_by": "W1055",
       "last_worked": "2026-10-25T17:06:49Z",
-      "ticks_blocked": 176,
+      "ticks_blocked": 177,
       "completed": null,
       "manifest": [
         "src/nemik/rank.py",
@@ -24843,7 +24843,7 @@
       "minted_during": "tick",
       "caused_by": "W1055",
       "last_worked": "2026-10-25T17:11:59Z",
-      "ticks_blocked": 176,
+      "ticks_blocked": 177,
       "completed": null,
       "manifest": [
         "tests/test_orderrank.py"
@@ -25250,7 +25250,7 @@
       "minted_during": "tick",
       "caused_by": "W1071",
       "last_worked": "2026-10-25T23:18:55Z",
-      "ticks_blocked": 165,
+      "ticks_blocked": 166,
       "completed": null
     },
     {
@@ -25272,7 +25272,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W1644",
       "last_worked": "2026-10-26T11:56:26Z",
-      "ticks_blocked": 153,
+      "ticks_blocked": 154,
       "completed": null
     },
     {
@@ -25369,7 +25369,7 @@
       "minted_during": "tick",
       "caused_by": "github:W50",
       "last_worked": "2026-10-26T01:03:02Z",
-      "ticks_blocked": 160,
+      "ticks_blocked": 161,
       "warrants": [
         {
           "@context": {
@@ -25720,7 +25720,7 @@
       "minted_during": "tick",
       "caused_by": "W1082",
       "last_worked": "2026-10-26T22:09:25Z",
-      "ticks_blocked": 103,
+      "ticks_blocked": 104,
       "manifest": [
         "src/nemik/roundof.py",
         "src/nemik/roundgauges.py",
@@ -25808,7 +25808,7 @@
       "minted_during": "tick",
       "caused_by": "W1073",
       "last_worked": "2026-10-26T11:58:00Z",
-      "ticks_blocked": 151,
+      "ticks_blocked": 152,
       "manifest": [
         "src/nemik/adapter.py",
         "src/nemik/blocks.py",
@@ -26240,7 +26240,7 @@
       "minted_during": "tick",
       "caused_by": "inbox/2026-10-27-nemik-edge-github-W63-enables-W1113.md",
       "last_worked": "2026-10-27T00:42:25Z",
-      "ticks_blocked": 129,
+      "ticks_blocked": 130,
       "completed": null,
       "warrants": [
         {
@@ -26866,7 +26866,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1092",
       "last_worked": "2026-10-29T13:11:57Z",
-      "ticks_blocked": 57,
+      "ticks_blocked": 58,
       "manifest": [
         "src/nemik/roundof.py",
         "tests/test_roundof.py"
@@ -27890,7 +27890,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1047",
       "last_worked": "2026-10-27T13:02:58Z",
-      "ticks_blocked": 103,
+      "ticks_blocked": 104,
       "completed": null
     },
     {
@@ -28600,7 +28600,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1196",
       "last_worked": "2026-10-28T03:10:08Z",
-      "ticks_blocked": 86,
+      "ticks_blocked": 87,
       "completed": null
     },
     {
@@ -29143,7 +29143,7 @@
       "minted_during": "interrupt",
       "caused_by": "W733",
       "last_worked": "2026-10-30T04:20:28Z",
-      "ticks_blocked": 81,
+      "ticks_blocked": 82,
       "completed": null
     },
     {
@@ -29162,7 +29162,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1213",
       "last_worked": "2026-10-29T04:37:24Z",
-      "ticks_blocked": 81,
+      "ticks_blocked": 82,
       "completed": null
     },
     {
@@ -29261,7 +29261,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1215",
       "last_worked": "2026-10-29T04:37:26Z",
-      "ticks_blocked": 81,
+      "ticks_blocked": 82,
       "completed": null
     },
     {
@@ -29284,7 +29284,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1196",
       "last_worked": "2026-10-29T00:01:22Z",
-      "ticks_blocked": 64,
+      "ticks_blocked": 65,
       "completed": null,
       "manifest": [
         "tools/liftdoc.py",
@@ -29921,7 +29921,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1244",
       "last_worked": "2026-10-29T09:19:21Z",
-      "ticks_blocked": 66,
+      "ticks_blocked": 67,
       "completed": null,
       "manifest": [
         "tests/test_page_queue.py",
@@ -30685,7 +30685,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-42",
       "last_worked": "2026-10-29T18:57:42Z",
-      "ticks_blocked": 51,
+      "ticks_blocked": 52,
       "completed": null,
       "manifest": [
         "docs/pace-producer.md"
@@ -30770,7 +30770,7 @@
       "minted_during": "tick",
       "caused_by": "github-42",
       "last_worked": "2026-10-30T01:47:29Z",
-      "ticks_blocked": 45,
+      "ticks_blocked": 46,
       "completed": null,
       "weight": 20,
       "manifest": [
@@ -32436,24 +32436,71 @@
     },
     {
       "symbol": "W1352",
-      "title": "Unused fixture parameters leave nine test signatures (ARG001), so ruff falls by up to nine",
-      "status": "working",
+      "title": "Unused fixture parameters leave ten test signatures (ARG001), so ruff falls by ten",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-11-01: G0 2026-11-01T08:04:45Z (date -u in the preceding call), BEFORE the first edit of these files. Advances W1352. Actuator: drop the unused tests parameters monkeypatch and capsys (tests/test_witnesses.py x5 sites in 3 functions) and tmp_path (test_layout.py 238), and move the four unused ics fixtures of tests/test_calendars.py to pytest.mark.usefixtures. N=10 ARG001 sites listed by ruff concise at 08:0xZ; K=5-6 verified: the three test_witnesses signatures and test_layout's are shown unused in the lines read; test_calendars' four ics are fixture-for-side-effect, unverified until each body is read, so the range is [5, 10]. Companion findings: none expected; follow-on: a removed capsys changes only captured output display, and usefixtures needs pytest imported (it is, line 11). Sensor: mikemol-pycheck --ratchet, ruff vs 889 (stack 760's value), mypy vs 1760. Expected ruff 889 to between 879 and 884, mypy flat or lower.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-01: G0 2026-11-01T08:04:45Z (date -u in the preceding call), BEFORE the first edit of these files. Advances W1352. Actuator: drop the unused tests parameters monkeypatch and capsys (tests/test_witnesses.py x5 sites in 3 functions) and tmp_path (test_layout.py 238), and move the four unused ics fixtures of tests/test_calendars.py to pytest.mark.usefixtures. N=10 ARG001 sites listed by ruff concise at 08:0xZ; K=5-6 verified: the three test_witnesses signatures and test_layout's are shown unused in the lines read; test_calendars' four ics are fixture-for-side-effect, unverified until each body is read, so the range is [5, 10]. Companion findings: none expected; follow-on: a removed capsys changes only captured output display, and usefixtures needs pytest imported (it is, line 11). Sensor: mikemol-pycheck --ratchet, ruff vs 889 (stack 760's value), mypy vs 1760. Expected ruff 889 to between 879 and 884, mypy flat or lower. | 2026-11-01: R96 corrections (read at 2026-11-01T08:26:27Z): the title said nine; ten sites cleared (pycheck 889 to 879). The G0's 'ruff concise at 08:0xZ' was a placeholder, not a stamp: the listing was read between the tick-open at 08:00:02Z and the G0 at 08:04:45Z, and no closer stamp was taken. | 2026-11-01: Landed c316a1d4 (COMMITTED line printed it; git log -1 subject is W1352's) at 2026-11-01T08:35:44Z by TZ=UTC reflog (03:35:44 -0500). Submitted 08:24:09Z: 11 min 35 s wall in the gate. Measured ruff 889 to 879, mypy flat 1760. The commit subject says 'eight test signatures'; the stack touched nine functions (three test_witnesses, one test_layout, four test_calendars, one more is not counted): the subject's count is approximate and the title on this card is the corrected one. | 2026-11-01: Correction to the line above: the stack touched 8 functions (3 in test_witnesses, 1 in test_layout, 4 in test_calendars), so the subject's 'eight test signatures' is right and ten is the count of unused parameters; the 'nine functions' remark was a miscount.",
       "issued_at": "2026-11-01T08:04:44Z",
       "minted_during": "tick",
       "caused_by": "W1288",
-      "last_worked": "2026-11-01T08:06:32Z",
+      "last_worked": "2026-11-01T08:37:19Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_witnesses.py",
         "tests/test_layout.py",
         "tests/test_calendars.py",
         "ruff-baseline.json"
+      ],
+      "size_class": "small",
+      "completed": "20261101T083713Z"
+    },
+    {
+      "symbol": "W1353",
+      "title": "Four single-site test files move their function-local import to the top of the file (PLC0415), so ruff falls by four",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-11-01: G0 2026-11-01T08:30:25Z (date -u in the preceding call), BEFORE the first edit. Advances W1353. Actuator: move one function-local import each to module scope in test_withheld.py (import copy), test_baseline.py (shape_drift joins the existing nemik.history import), test_operator_salience.py (nemik.metrics.operator_lines) and test_positioning.py (nemik critical, history, rank). N=4 files, 4 findings listed by ruff concise at the tick (08:30:01Z stamp); K=4 verified for the first three from the import lines read (the module imports its siblings at the top already: test_residue imports nemik.metrics, test_baseline imports nemik.history); test_positioning unverified (its three modules are imported where a function runs, which may be to dodge an import cost), so the range is [3, 4]. Follow-on findings: I001 import order and F401 if a name is then unused; ruff format. Sensor: mikemol-pycheck --ratchet vs 879 (stack 761's value), mypy 1760. Expected: ruff 879 to 875..876, mypy flat.",
+      "issued_at": "2026-11-01T08:30:23Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1288",
+      "last_worked": "2026-11-01T08:32:17Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tests/test_withheld.py",
+        "tests/test_baseline.py",
+        "tests/test_operator_salience.py",
+        "tests/test_positioning.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "small",
+      "completed": null
+    },
+    {
+      "symbol": "W1354",
+      "title": "tests/test_churn.py types its two queue helpers as dict[str, object], so mypy falls by up to 32 and the owed mypy ratchet is paid",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-11-01: G0 2026-11-01T08:38:23Z (date -u in the preceding call), BEFORE the first edit. Advances W1354 (W1178's class: the mypy paydown). Premise: stack 762 (ruff only, W1353) was REFUSED at submit at 08:37:21Z: 'behind its ratchet paydown and this stack lowers none of the ratchets it owes (codon-baseline.json: required fall 2, observed 0; mypy-baseline.json: required fall 190, observed 168)'; pace 08:25:26Z shows ruff ok (889 left, 97 landings to zero) and mypy and codon behind. Actuator: tests/test_churn.py: _card returns dict[str, object] and _queue takes *cards: dict[str, object] and returns dict[str, object] (lines 12 and 16, read). N=34 mypy findings in the file (mypy --show-column-numbers just now); K=2 verified derivable (the two type-arg lines); the other 32 are Expression-contains-Any lines that descend from the bare dict return types, unverified: range [2, 34]. churn.classify and churn.churn take bare dict (churn.py lines 35, 96), so any Any inside their signatures stays: expected result lands at the low end if a call argument still carries dict[Any, Any]. Sensor: mikemol-pycheck --ratchet, mypy vs 1760, ruff vs 875. Expected mypy 1760 to a value in [1726, 1758], ruff flat.",
+      "issued_at": "2026-11-01T08:38:22Z",
+      "minted_during": "tick",
+      "caused_by": "W1178",
+      "last_worked": "2026-11-01T08:39:53Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tests/test_churn.py",
+        "mypy-baseline.json"
       ],
       "size_class": "small",
       "completed": null
@@ -32661,7 +32708,7 @@
   "heartbeat": "2026-10-29T04:11:13Z",
   "lock": {
     "holder": "nemik-94",
-    "taken_at": "2026-11-01T08:00:06Z",
+    "taken_at": "2026-11-01T08:32:22Z",
     "pid": 337543,
     "start": 21144718
   },
@@ -39787,7 +39834,14 @@
         }
       ],
       "id": "nemik:R93"
+    },
+    {
+      "card": "W1351",
+      "trigger": "round 96: nemik-94 second tick since R95, W1351 (three Yields docstrings and one empty-string comparison, ruff 893 to 889, landed 79e501c1 = 08:22:34Z) and W1352 (ten unused-parameter sites, ruff 889 to 879, stack 761 inflight, key 1793521447841521332); also W1350 landed 6461e38b = 07:54:46Z",
+      "root": "NO NEW FINDINGS, OPEN FINDINGS CARRIED WITH OWNERS AND DUE DATES (not a fixpoint declaration). Verified from source with `env TZ=UTC git reflog show --date=iso`: 6461e38b 07:54:46Z (02:54:46 -0500), 79e501c1 08:22:34Z (03:22:34 -0500), c86f06c5 07:42:56Z; --in-gate lists W1352 inflight; `mikemol-pycheck --ratchet` prints ruff 879/879 and mypy 1760/1760 (so -10 for stack 761 is on the real tree, at the top of the G0 range [5, 10]). Intervals as two Z stamps: 07:42:56Z to 07:44:04.6Z (1 min 09 s, W1350), 07:54:46Z to 07:55:50Z (1 min 04 s, W1351), 08:22:34Z to 08:24:09Z (1 min 35 s, W1352); the gate walls 10 min 41 s and 26 min 44 s. Judgement: the witness of R72 and R83 on W1288 (a landing-to-submit interval short, repeated, with the next stack built during the gate and the turn not ended) is met three landings running; stack 761 could not be queued behind 760 because both carry ruff-baseline.json (the shared-baseline rule), so submitting 1 min 35 s after the landing is the minimum. Both findings are CLOSED here. The G1's honest signals are good: G0 for W1351 recorded as late (standing 11 miss), the CronList reading and an unverified DST hypothesis for the 06:20 to 07:24 outage recorded (R95 first finding answered, cause open), the D413 first try and the path error stated. Still open and carried, with the day's status: R95 first finding on W1288 (cause of the missing wakes, due today; CronList shows job 19341093 armed at minutes 28 and 58 and the DST repeat-hour hypothesis is the only candidate, the cron fires at local clock times and the 01:28 and 01:58 times occurred in both 01:xx hours); R95 second finding on W1349 (stamps: W1352's evidence still reads 'listed by ruff concise at 08:0xZ', a fourth placeholder stamp, and W1351's G0 was again written after the edits, so its witness is unmet), due 2026-11-02; R95 third finding on W1219 (pre-submit script; this tick's stacks submitted by full path, no NO-MANIFEST refusal), due 2026-11-02; R94 on W1288 and W1348, R93 on W1347, R92 on W1346 and W1288, R91 on W1345 (2026-11-02), R72 on W846, R84 on W695 (2026-11-02), R85 on W613 (read-back). New facts for them: W1352's title says 'nine' while the sites are ten and the measured fall is ten; mtools' mikemol-surfaces message (63b06c00) is still unanswered; the rank.py E501 pair waits for typed rows.",
+      "findings": [],
+      "id": "nemik:R94"
     }
   ],
-  "retro_counter": 93
+  "retro_counter": 94
 }

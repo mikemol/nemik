@@ -3668,3 +3668,9 @@
 2026-11-01T08:04:44Z  tick  W1352 minted    -         "Unused fixture parameters leave nine test signatures (ARG001), so ruff falls by up to nine"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1288
 2026-11-01T08:06:32Z  status W1352 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T08:23:34Z  status W1351 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T08:24:18Z  tick  W1351 advanced  sweep     "W1351 landed 79e501c1 (ruff 893 to 889); W1350 landed 6461e38b earlier this session; stack 761 for W1352 submitted 08:24:09Z; R95 added and F1 answered on W1288 [blocked by W1352]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T08:30:23Z  interrupt W1353 minted    -         "Four single-site test files move their function-local import to the top of the file (PLC0415), so ruff falls by four"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1288
+2026-11-01T08:32:17Z  status W1353 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T08:37:13Z  status W1352 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T08:38:22Z  tick  W1354 minted    -         "tests/test_churn.py types its two queue helpers as dict[str, object], so mypy falls by up to 32 and the owed mypy ratchet is paid"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
+2026-11-01T08:39:53Z  status W1354 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

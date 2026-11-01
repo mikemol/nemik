@@ -6,7 +6,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from nemik.history import baseline_spec, variance
+from nemik.history import baseline_spec, shape_drift, variance
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -62,8 +62,6 @@ def test_a_planned_card_dropped_since_counts_as_dropped() -> None:
 def test_shape_drift_counts_edges_and_the_planned_cards_retitled_or_rewired() -> None:
     """Shape drift counts the edges added and removed and the planned cards retitled or rewired."""
     # nemik:W349: W1 and W2 planned; W1 gains an edge to the new W3, W2 is retitled.
-    from nemik.history import shape_drift
-
     base: QueueDoc = {
         "waypoints": [
             {"symbol": "W1", "status": "ready", "title": "one", "enables": []},

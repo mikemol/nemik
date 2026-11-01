@@ -278,7 +278,6 @@
   "PLR2004": 1
  },
  "tests/test_baseline.py": {
-  "PLC0415": 1,
   "PLR2004": 2,
   "RUF069": 2
  },
@@ -464,9 +463,6 @@
   "PLR2004": 2,
   "RUF069": 1
  },
- "tests/test_operator_salience.py": {
-  "PLC0415": 1
- },
  "tests/test_overlap_claims.py": {
   "PLR2004": 1
  },
@@ -486,9 +482,6 @@
   "S404": 1,
   "S603": 1,
   "S607": 1
- },
- "tests/test_positioning.py": {
-  "PLC0415": 1
  },
  "tests/test_precommit_gate.py": {
   "S404": 1,
@@ -593,9 +586,6 @@
  "tests/test_wake_nudge.py": {
   "PLR2004": 1,
   "RUF069": 1
- },
- "tests/test_withheld.py": {
-  "PLC0415": 1
  },
  "tests/test_witness_promql.py": {
   "ARG001": 2

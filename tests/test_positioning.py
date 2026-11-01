@@ -12,6 +12,8 @@ import re
 import tomllib
 from pathlib import Path
 
+from nemik import critical, history, rank
+
 ROOT = Path(__file__).resolve().parents[1]
 DOC = (ROOT / "docs" / "positioning.md").read_text()
 
@@ -30,8 +32,6 @@ def test_every_command_the_page_names_exists() -> None:
 
 def test_every_flag_the_page_gives_a_command_is_one_it_takes() -> None:
     """Every flag the page gives a command is one it takes."""
-    from nemik import critical, history, rank
-
     parsers = {
         "nemik-rank": rank.main,
         "nemik-history": history.main,

@@ -3,11 +3,11 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1350 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:e34c3b3cb6955869`
+counter 1352 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:b1b5ffe595aad92f`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1350 | working |
+| 1 | W1352 | working |
 | 2 | W1075 | ready |
 | 3 | W1139 | ready |
 | 4 | W1279 | ready |
@@ -1329,11 +1329,12 @@ counter 1350 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:e34
 | 1320 | W1346 | done |
 | 1321 | W1348 | done |
 | 1322 | W1349 | done |
+| 1323 | W1350 | done |
+| 1324 | W1351 | done |
 
 ## waypoints
 
-1. **W1350** (working) Five single-site test findings clear by direct rewrites (Path.readlink twice, not note, a raw
-   match pattern, a comment ERA001 read as code), so ruff falls 898 to 893
+1. **W1352** (working) Unused fixture parameters leave nine test signatures (ARG001), so ruff falls by up to nine
 2. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 3. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -4362,6 +4363,10 @@ counter 1350 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:e34
    test_critical_cards, test_serve_model), so ruff PT018 falls by 4 with mypy flat
 1322. **W1349** (done) Six over-long string and JS lines in serve.py and three test files wrap without changing a token,
    so ruff falls 904 to 898
+1323. **W1350** (done) Five single-site test findings clear by direct rewrites (Path.readlink twice, not note, a raw
+   match pattern, a comment ERA001 read as code), so ruff falls 898 to 893
+1324. **W1351** (done) Four single-site findings clear: three Yields sections for generator docstrings (DOC402) and one
+   empty-string comparison (PLC1901), so ruff falls 893 to 889
 
 ## residue
 
@@ -5144,3 +5149,19 @@ counter 1350 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:e34
   status on 2026-11-01: R72 on W1288 (today; the gate-empty interval is 31 min 23 s again), R83 on W1288, R92 on W1346
   and W1288, R93 on W1347 (two) and W1288 (met by this landing), R91 on W1345, R72 on W846, R84 on W695 (2026-11-02),
   R85 on W613 (read-back).; 2 finding(s)
+- **nemik:R93** (-) round 95: nemik-94, W1349 (six E501 lines wrapped, ruff 904 to 898, landed c86f06c5 = 07:42:56Z) and
+  W1350 (five direct rewrites, ruff 898 to 893, stack 759 inflight, key 1793519045317749291, submitted 07:44:04.6Z);
+  previous landing b35480ce 06:16:39Z: root Verified from source: `env TZ=UTC git reflog` style stamps (R94's finding
+  met: the G1 used TZ=UTC at 07:43:36Z); reflog c86f06c5 = 02:42:56 -0500 = 07:42:56Z, b35480ce 01:16:39 -0500 =
+  06:16:39Z; --in-gate lists W1350 inflight. What the G1 leaves out is the large fact: after the W1348 tick closed at
+  06:20:10Z the transcript has NO tool call until 07:24:16Z, 64 min 06 s, and no tick ran at 06:30 or 07:00; the
+  watchdog exited 8 ('idle 2718 s, 83 ready') and was restarted at 07:24:51Z. Stack 758 was submitted at 07:28:06.9Z
+  (exit 127, bare mikemol-commit), refused at 07:28:41Z (NO-MANIFEST, none marked working), accepted at 07:29:30.6Z. So
+  the gate sat empty 06:16:39Z to 07:29:30.6Z = 72 min 51 s wall (the interval to the first attempt, 71 min 28 s),
+  against the G1's only reported 1 min 09 s (07:42:56Z to 07:44:05Z) for the second pair. Standing 13 asks every
+  interval. Findings below; no fixpoint is declared. Carried open findings, status on 2026-11-01 (it is the day of R72
+  on W1288's due date): R72 on W1288 open; R83 on W1288 open; R92 on W1346 and W1288, R91 on W1345, R93 on W1347, R94 on
+  W1288 and W1348 (all 2026-11-02 or sooner), R72 on W846 and R84 on W695 (2026-11-02), R85 on W613. New facts for them:
+  hooks/record_event.py is outside the four ratchet trees (pycheck stayed 904 after taking it from 22 to 20 findings),
+  so R93's 'next candidate hooks/record_event.py' was wrong and is withdrawn; W1325 was UNBLOCKED at tick-open
+  (mtools:W2201 done) and mtools' mikemol-surfaces landing message (63b06c00) is unanswered.; 3 finding(s)

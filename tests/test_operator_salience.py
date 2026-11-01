@@ -8,6 +8,7 @@ from rdflib import Graph, Literal, URIRef
 
 from nemik.adapter import NEMIK, OPERATOR, OSLC_CM, STATE, waypoint_uri
 from nemik.blocks import operator_asks, with_salience
+from nemik.metrics import operator_lines
 
 
 def _card(g: Graph, repo: str, sym: str, status: str = "blocked") -> URIRef:
@@ -40,8 +41,6 @@ def test_the_metrics_sum_each_repos_asks_and_count_them() -> None:
 
     Repo a sums to salience 4.00 over 2 asks; repo b is 0.00.
     """
-    from nemik.metrics import operator_lines
-
     g = Graph()
     heavy = _ask(g, "a", "W1", "heavy")
     light = _ask(g, "a", "W2", "light")

@@ -2,6 +2,7 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W172: luthen's withheld list, failing closed, withholding whole."""
 
+import copy
 import json
 from pathlib import Path
 from typing import TypedDict, cast
@@ -103,8 +104,6 @@ def test_withheld_item_is_dropped_whole_and_pointers_become_stubs(
     tmp_path: Path, docs: dict[str, object]
 ) -> None:
     """Withheld item is dropped whole and pointers become stubs."""
-    import copy
-
     docs = copy.deepcopy(docs)
     g = cast("_Graph", docs["graph.json"])
     # an item something else points at, so a stub must appear
