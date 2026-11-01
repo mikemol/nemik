@@ -3,12 +3,12 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1378 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:e1bf92be8db8eff8`
+counter 1381 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:84c52c5ffae5b22c`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1377 | working |
-| 2 | W1378 | working |
+| 1 | W1380 | working |
+| 2 | W1381 | working |
 | 3 | W1075 | ready |
 | 4 | W1139 | ready |
 | 5 | W1279 | ready |
@@ -1357,12 +1357,16 @@ counter 1378 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:e1b
 | 1348 | W1374 | done |
 | 1349 | W1375 | done |
 | 1350 | W1376 | done |
+| 1351 | W1377 | done |
+| 1352 | W1378 | done |
+| 1353 | W1379 | done |
 
 ## waypoints
 
-1. **W1377** (working) Three test helpers take their boolean parameter keyword-only (FBT001), so ruff falls by three
-2. **W1378** (working) tests/test_history.py compares its three floats through pytest.approx once pytest is a runtime
-   import (RUF069), so ruff falls by four
+1. **W1380** (working) Five composite assertions in two test files split into one assertion each where it costs no mypy
+   finding (PT018), so ruff falls by five
+2. **W1381** (working) Three src functions take their boolean parameter keyword-only and their callers say so (FBT001),
+   so ruff falls by three
 3. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 4. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -4444,6 +4448,11 @@ counter 1378 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:e1b
    falls by four
 1350. **W1376** (done) Twenty-four float-equality asserts in ten test files become pytest.approx comparisons (RUF069),
    so ruff falls by forty with sixteen magic-value findings
+1351. **W1377** (done) Three test helpers take their boolean parameter keyword-only (FBT001), so ruff falls by three
+1352. **W1378** (done) tests/test_history.py compares its three floats through pytest.approx once pytest is a runtime
+   import (RUF069), so ruff falls by four
+1353. **W1379** (done) The float asserts that were exact on purpose keep exact equality: pytest.approx with zero
+   tolerance in eleven test files (R106)
 
 ## residue
 
@@ -5423,3 +5432,22 @@ counter 1378 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:e1b
   W846, R84 on W695, R100 on W910 (unbuilt), R101 on W1288 (115 PLR2004 sites unread) (2026-11-02), R85 on W613
   (read-back). Codon owed with no stack; ruff is owed again at the 12:25:27Z pace (fell 75, owes 90) so the next entry
   should be a ruff paydown.; 1 finding(s)
+- **nemik:R104** (-) round 106: nemik-94 twelfth tick, W1376 (24 RUF069 float comparisons through pytest.approx in ten
+  test files, ruff 764 to 724, landed 1df34c15 = 13:01:24Z), W1377 (3 FBT001, stack 783 inflight, key
+  1793538145297640751), W1378 (4 findings in test_history.py, staged as stack 784); landings c1523ea7 12:38:44Z,
+  987507a9 12:50:08Z: root Verified from source (TZ=UTC reflog): 8e09499b 12:25:06Z, c1523ea7 12:38:44Z (stack 780),
+  987507a9 12:50:08Z (781), 1df34c15 13:01:24Z (782); --in-gate lists W1377 inflight; `mikemol-pycheck --ratchet` prints
+  ruff 717/721 and mypy 1452/1452 (the live 717 is W1378's staged -4 against stack 783's baseline 721; -40 and -3 then
+  take ruff 764 to 721). Intervals as Z pairs: 780 gate 12:26:10Z to 12:38:44Z (12 min 34 s), gate empty 12:38:44Z to
+  the accepted 781 submit 12:40:58Z (2 min 14 s, the first submit at 12:40:08Z refused), 781 gate 9 min 10 s, gate empty
+  12:50:08Z to 12:51:18Z (1 min 10 s), 782 gate 10 min 06 s, gate empty 13:01:24Z to 13:02:25Z (1 min 01 s). The
+  staged-successor invariant held; the one refusal was the session's own race (a background submit in the same call
+  batch as the done mark), the seventh instance of the working-mark class (W1219: W733, W1245, W1273, W1187, W1286,
+  W1334, now W1374) and it cost 50 s; it belongs in the pre-submit script already owed on W1219 (set the finished card
+  done in an earlier call, read the working set back with --show, then submit). R105's outage analysis is recorded on
+  W1288 as 'consistent, not proven', which is the right strength. One finding about what W1376 changed. No fixpoint is
+  declared. Carried open findings, status on 2026-11-01: R95 second finding on W1349, R95 third, R97 first and R98
+  findings on W1219 (script, citations), R102 on W1219, R94 on W1348, R93 on W1347, R92 on W1346 and W1288, R91 on
+  W1345, R72 on W846, R84 on W695, R100 on W910 (unbuilt), R101 on W1288 (PLR2004 115 unread), R105 on W1288 (answered,
+  closes on read-back) (2026-11-01 or 2026-11-02), R85 on W613 (read-back). Codon owed with no stack; hooks-venv rebuild
+  and census (W1325) not done.; 1 finding(s)

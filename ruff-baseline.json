@@ -45,7 +45,6 @@
   "T201": 8
  },
  "src/nemik/calwrite.py": {
-  "FBT001": 2,
   "PLR0913": 1,
   "PLR0917": 1,
   "S404": 1,
@@ -68,7 +67,6 @@
   "T201": 6
  },
  "src/nemik/churn.py": {
-  "FBT001": 1,
   "T201": 2
  },
  "src/nemik/critical.py": {

@@ -201,7 +201,7 @@ def render(
 
 
 def run(
-    dirs: dict[str, Path], names: list[str], since: str | None, as_json: bool
+    dirs: dict[str, Path], names: list[str], since: str | None, *, as_json: bool
 ) -> int:
     """nemik-history --churn: walk the span's history and report how a poll finds the fleet.
 

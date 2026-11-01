@@ -83,7 +83,7 @@ def _next_day(value: str) -> str:
     return d.strftime("%Y%m%d")
 
 
-def event_times(dtstart: str, due: str, needs_end: bool) -> tuple[str, str]:
+def event_times(dtstart: str, due: str, *, needs_end: bool) -> tuple[str, str]:
     """(DTSTART, DTEND) values as mtools stores them; DTEND is "" when the event has none.
 
     With both, the event runs from the start to the due (an all-day due is inclusive, so the end is
@@ -149,7 +149,9 @@ def event_lines(
     """
     triggers = sorted(alarms)
     start, end = event_times(
-        dtstart, due, any(t.startswith("RELATED=END") for t in triggers)
+        dtstart,
+        due,
+        needs_end=any(t.startswith("RELATED=END") for t in triggers),
     )
     summary = escape(title)
     lines = [
@@ -251,7 +253,7 @@ def feed(g: Graph, repos: Iterable[str], label: str | None = None) -> str:
     return serialize(lines)
 
 
-def _write(helper: Path, name: str, text: str, apply: bool) -> tuple[int, str]:
+def _write(helper: Path, name: str, text: str, *, apply: bool) -> tuple[int, str]:
     """Run the Akonadi helper's --write-calendar on one calendar; (exit code, its output).
 
     Returns:
@@ -324,7 +326,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> int:
     worst = 0
     for label, cal in targets.items():
         code, out = _write(
-            args.helper, cal.name, feed(g, cal.mirror, label), args.apply
+            args.helper, cal.name, feed(g, cal.mirror, label), apply=args.apply
         )
         print(
             f"== {label}: {len(events(g, cal.mirror, label))} dated waypoints of "

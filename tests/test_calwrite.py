@@ -167,7 +167,7 @@ def test_event_times_never_invent_a_wrong_end(
     dtstart: str, due: str, *, needs_end: bool, want: tuple[str, str]
 ) -> None:
     """Event times never invent a wrong end."""
-    assert event_times(dtstart, due, needs_end) == want
+    assert event_times(dtstart, due, needs_end=needs_end) == want
 
 
 def test_the_feed_is_crlf_folded_deterministic_and_carries_only_what_was_asked(

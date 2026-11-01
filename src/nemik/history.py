@@ -1280,7 +1280,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.churn:
         from nemik.churn import run
 
-        return run(dirs, names, args.start, args.json)
+        return run(dirs, names, args.start, as_json=args.json)
     if args.toil:
         return _toil(args, names, dirs)
     if args.baseline is not None:
