@@ -35,8 +35,7 @@
   "misc": 11
  },
  "src/nemik/letters.py": {
-  "misc": 20,
-  "type-arg": 4
+  "misc": 1
  },
  "src/nemik/metrics.py": {
   "misc": 10

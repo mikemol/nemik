@@ -30,6 +30,8 @@ from datetime import UTC, date, datetime
 from pathlib import Path
 from typing import NamedTuple
 
+from nemik.tomlview import table, tables
+
 _HEADER = re.compile(
     r"^(?:#\s*)?([A-Za-z0-9][\w.-]*)\s*(?:→|->)\s*([A-Za-z0-9][\w.-]*)\s*[:(]"
 )
@@ -94,15 +96,15 @@ def misdelivered(letters: list[Letter], workstreams: set[str]) -> list[str]:
     return out
 
 
-def _load(path: Path) -> dict:
+def _load(path: Path) -> dict[str, object]:
     try:
-        data = json.loads(path.read_text(encoding="utf-8"))
+        data: object = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
         return {}
-    return data if isinstance(data, dict) else {}
+    return table(data)
 
 
-def _queue_text(queue: dict) -> str:
+def _queue_text(queue: dict[str, object]) -> str:
     """Every string in a parsed queue, joined: a letter is cited if its file name appears in it.
 
     Returns:
@@ -125,14 +127,16 @@ def _queue_text(queue: dict) -> str:
     return "\n".join(strings)
 
 
-def _closed(queue: dict) -> set[str]:
+def _closed(queue: dict[str, object]) -> set[str]:
     done = {
-        w["symbol"] for w in queue.get("waypoints", []) if w.get("status") == "done"
+        str(w["symbol"])
+        for w in tables(queue.get("waypoints"))
+        if w.get("status") == "done"
     }
-    return done | {r["symbol"] for r in queue.get("residue", [])}
+    return done | {str(r["symbol"]) for r in tables(queue.get("residue"))}
 
 
-def answered(repo: str, path: Path, queue: dict) -> bool:
+def answered(repo: str, path: Path, queue: dict[str, object]) -> bool:
     """Say whether the letter names waypoints of `repo` and every one of them is closed.
 
     What it asked about has landed or been dropped. A letter naming none of `repo`'s waypoints is
