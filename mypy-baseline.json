@@ -145,8 +145,7 @@
   "misc": 7
  },
  "tests/test_deploy_manifest.py": {
-  "explicit-any": 6,
-  "misc": 83
+  "misc": 2
  },
  "tests/test_editable.py": {
   "misc": 5

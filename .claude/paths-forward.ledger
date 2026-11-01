@@ -3578,3 +3578,8 @@
 2026-11-01T00:41:19Z  status W1335 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T00:58:03Z  tick  W1335 advanced  mechanize "W1335 stack 746 ready: residue.py pure, codon 140 to 138 (census passes under bazel), W1334 docstrings ride, ruff 985 mypy 2076; stack 745 had been refused at submit for the stale pace (R81); pace 00:25:25Z: codon the only owed ratchet [blocked by W1288]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T00:59:07Z  status W1334 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T01:15:09Z  status W1335 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T01:15:12Z  status W1334 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T01:30:36Z  interrupt W1336 minted    -         "test_deploy_manifest.py reads the deployment YAML through TypedDicts, so mypy falls by the Any cascade"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1288
+2026-11-01T01:30:45Z  status W1336 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T01:36:13Z  tick  W1336 advanced  mechanize "W1336 stack 747 ready: deploy YAML TypedDicts, mypy 2076 to 1989, ruff flat; W1335 landed 379ee401 (codon 140 to 138) and closed done with W1334; R82 added as nemik:R80; pace 01:25:25Z: mypy the only owed ratchet [blocked by W1288]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

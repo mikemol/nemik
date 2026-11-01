@@ -10,7 +10,7 @@ command lines, so a flag renamed in the tool cannot leave the pod crash-looping.
 """
 
 from pathlib import Path
-from typing import Any
+from typing import TypedDict
 
 import installed
 import yaml
@@ -24,17 +24,124 @@ SNAPSHOT_MI = 77  # one published snapshot, measured 2026-10-26 (W1087)
 SNAPSHOTS_AT_PEAK = 5  # the three kept, the one served, and the one being written
 
 
-def _spec() -> dict[str, Any]:
-    doc: dict[str, Any] = yaml.safe_load(DEPLOYMENT.read_text())
+class Mount(TypedDict, total=False):
+    """A volumeMounts entry of a container."""
+
+    name: str
+    mountPath: str
+    readOnly: bool
+
+
+class Port(TypedDict, total=False):
+    """A ports entry of a container."""
+
+    containerPort: int
+
+
+class HttpGet(TypedDict, total=False):
+    """The httpGet of a probe."""
+
+    path: str
+
+
+class Probe(TypedDict, total=False):
+    """A liveness or readiness probe."""
+
+    httpGet: HttpGet
+
+
+class Quantities(TypedDict, total=False):
+    """A requests or limits table."""
+
+    cpu: str
+    memory: str
+
+
+class Resources(TypedDict, total=False):
+    """The resources of a container."""
+
+    requests: Quantities
+    limits: Quantities
+
+
+class Capabilities(TypedDict, total=False):
+    """The capabilities of a securityContext."""
+
+    drop: list[str]
+
+
+class SecurityContext(TypedDict, total=False):
+    """The securityContext of a container."""
+
+    allowPrivilegeEscalation: bool
+    readOnlyRootFilesystem: bool
+    capabilities: Capabilities
+
+
+class Container(TypedDict, total=False):
+    """A container of the pod, as far as these tests read it."""
+
+    name: str
+    command: list[str]
+    args: list[str]
+    ports: list[Port]
+    volumeMounts: list[Mount]
+    resources: Resources
+    livenessProbe: Probe
+    readinessProbe: Probe
+    securityContext: SecurityContext
+
+
+class EmptyDir(TypedDict, total=False):
+    """The emptyDir of a volume."""
+
+    medium: str
+    sizeLimit: str
+
+
+class Volume(TypedDict, total=False):
+    """A volume of the pod."""
+
+    name: str
+    emptyDir: EmptyDir
+
+
+class PodSpec(TypedDict, total=False):
+    """The pod spec."""
+
+    containers: list[Container]
+    volumes: list[Volume]
+
+
+class Template(TypedDict, total=False):
+    """The pod template."""
+
+    spec: PodSpec
+
+
+class DeploymentSpec(TypedDict, total=False):
+    """The deployment spec."""
+
+    replicas: int
+    template: Template
+
+
+class Deployment(TypedDict, total=False):
+    """deploy/deployment.yaml."""
+
+    spec: DeploymentSpec
+
+
+def _spec() -> Deployment:
+    doc: Deployment = yaml.safe_load(DEPLOYMENT.read_text())
     return doc
 
 
-def _pod() -> dict[str, Any]:
-    pod: dict[str, Any] = _spec()["spec"]["template"]["spec"]
-    return pod
+def _pod() -> PodSpec:
+    return _spec()["spec"]["template"]["spec"]
 
 
-def _containers() -> dict[str, dict[str, Any]]:
+def _containers() -> dict[str, Container]:
     return {c["name"]: c for c in _pod()["containers"]}
 
 
@@ -47,7 +154,7 @@ def _mi(quantity: str) -> float:
     raise AssertionError(message)
 
 
-def _mounts(container: dict[str, Any]) -> dict[str, dict[str, Any]]:
+def _mounts(container: Container) -> dict[str, Mount]:
     return {m["name"]: m for m in container["volumeMounts"]}
 
 
