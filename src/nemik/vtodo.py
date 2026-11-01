@@ -304,7 +304,7 @@ def calendar(todos: list[list[str]]) -> str:
     return serialize(lines)
 
 
-def feed(root: Path, opt_in: Path, link: str = "", group: bool = False) -> str:
+def feed(root: Path, opt_in: Path, link: str = "", *, group: bool = False) -> str:
     """Build the iCalendar text nemik-ics prints, in-process.
 
     Returns:
@@ -411,7 +411,7 @@ def tasks_main(argv: list[str] | None = None) -> None:
         print(f"ERROR: {args.helper} is missing; build it with ./setup.sh", flush=True)
         raise SystemExit(2)
     try:
-        text = feed(args.root, args.opt_in, args.link, not args.flat)
+        text = feed(args.root, args.opt_in, args.link, group=not args.flat)
     except Exception as e:
         print(f"ERROR: feed: {e}", flush=True)
         raise SystemExit(2) from e

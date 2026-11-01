@@ -109,7 +109,7 @@ class InboundRow(TypedDict, total=False):
     letters: list[str]
 
 
-def inbound(g: Graph, letters: bool = False) -> list[InboundRow]:
+def inbound(g: Graph, *, letters: bool = False) -> list[InboundRow]:
     """Every open waypoint waiting on another workstream, with the blocker's claiming waypoints.
 
     With `letters`, each row also carries the letter files the waiting waypoint cites (nemik:W275):

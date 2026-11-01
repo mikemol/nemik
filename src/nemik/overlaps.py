@@ -43,7 +43,7 @@ class Holder(NamedTuple):
     age: str
 
 
-def overlaps(g: Graph, cross: bool = False) -> dict[str, list[str]]:
+def overlaps(g: Graph, *, cross: bool = False) -> dict[str, list[str]]:
     """Find the touched surfaces that more than one live card names.
 
     Returns:
@@ -153,7 +153,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         for _, qg, _ in survey(args.root):
             if qg is not None:
                 g += qg
-    found = overlaps(g, args.cross)
+    found = overlaps(g, cross=args.cross)
     held = read_claims() if found else None
     if found and held is None:
         print("(no claim holders: mikemol-membudget is not available)")
