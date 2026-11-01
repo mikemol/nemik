@@ -46,7 +46,8 @@ def limits(text: str | None = None) -> tuple[float, float, int]:
     """
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
-    t = table(table(tomllib.loads(text)).get("pacing"))
+    parsed: object = tomllib.loads(text)
+    t = table(table(parsed).get("pacing"))
     return (
         float(str(t.get("rate", 50))),
         float(str(t.get("burst", 150))),

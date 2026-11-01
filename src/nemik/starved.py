@@ -48,7 +48,8 @@ def days_limit(text: str | None = None) -> int:
     """
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
-    section = table(table(tomllib.loads(text)).get("starvation"))
+    parsed: object = tomllib.loads(text)
+    section = table(table(parsed).get("starvation"))
     return int(str(section.get("days", DEFAULT_DAYS)))
 
 

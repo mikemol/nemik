@@ -41,7 +41,7 @@
   "misc": 10
  },
  "src/nemik/pacing.py": {
-  "misc": 4
+  "misc": 3
  },
  "src/nemik/pieces.py": {
   "misc": 2
@@ -68,7 +68,7 @@
   "misc": 3
  },
  "src/nemik/starved.py": {
-  "misc": 8
+  "misc": 7
  },
  "src/nemik/vtodo.py": {
   "misc": 5
