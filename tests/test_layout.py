@@ -57,10 +57,11 @@ def _launch(playwright: "Playwright") -> "Browser":
 #   W125 labels inside:            2548, 387, 14.2M px^2
 #   W126 skyline packing, spacing: 2200, 370, 10.8M px^2
 #   W127 fit zoom in the 1360x1200 graph pane: 0.37 (unchanged: the strict packing still wins here)
-#   W118 rows reordered toward partners: 2209, 329 (cross total 86381 -> 74166, cross p50 1091 -> 761)
+# W118 rows reordered toward partners: 2209, 329 (cross total 86381 -> 74166, cross p50 1091 ->
+#  761)
 #   W139 measured (in-box crossings, upward cross-box edges): before W118 105, 16; now 109, 16
 #   W141 fixture regenerated from the live fleet (455 -> 501 open nodes): 2381, 324, 4106x3022,
-#        fit 0.328, crossings 195, upward 15. A bigger graph, not a worse layout: re-based, ~10% headroom.
+# fit 0.328, crossings 195, upward 15. A bigger graph, not a worse layout: re-based, ~10% headroom.
 # (The per-repo dagre layout these numbers measured was retired 2026-10-09: the rank forest is the
 # only view, so FOREST_BUDGET below is the only budget. The history stays as residue.)
 # The rank forest (W135), same rules. History (cross p95, fit zoom):
@@ -72,9 +73,9 @@ def _launch(playwright: "Playwright") -> "Browser":
 #        (operator 2026-10-01); the budget is re-based on it, same ~10% headroom as before.
 #   W141 regenerated fixture (501 open nodes): 2357, 0.45; crossings 190, upward 20. Re-based.
 #   W381 (2026-10-12): a state glyph now begins every non-ready card's label (WCAG 1.4.1), widening
-#        those labels and so the boxes' packing; upward measured 24 on the host. The price of the a11y
-#        constraint, not a layout regression; upward re-based with the same ~10% headroom. (A first set
-#        of glyphs missing from the gate's headless-Chrome fonts drew as wide boxes and dropped fit_zoom
+# those labels and so the boxes' packing; upward measured 24 on the host. The price of the a11y
+# constraint, not a layout regression; upward re-based with the same ~10% headroom. (A first set
+# of glyphs missing from the gate's headless-Chrome fonts drew as wide boxes and dropped fit_zoom
 #        to 0.367 there; the glyphs were changed to ones every base font has, not the budget.) With
 #        those, the gate measured fit_zoom 0.407: the glyphs' real width; re-based to 0.37 with the
 #        same headroom. The first view's readability is W340's 8 px floor, not this number.
@@ -95,7 +96,8 @@ METRICS = """() => {
   const shape = () => {
     const seg = e => [e.source().position(), e.target().position()];
     const turn = (a, b, c) => Math.sign((b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x));
-    const meets = ([p, q], [r, s]) => turn(p, q, r) * turn(p, q, s) < 0 && turn(r, s, p) * turn(r, s, q) < 0;
+    const meets = ([p, q], [r, s]) => turn(p, q, r) * turn(p, q, s) < 0 && turn(r, s, p) * turn(r,
+      s, q) < 0;
     const byBox = new Map();
     let up = 0;
     cy.edges().forEach(e => { if (!e.visible()) return;
@@ -116,7 +118,8 @@ METRICS = """() => {
   cy.edges().forEach(e => { if (!e.visible()) return;
     const p = e.source().position(), q = e.target().position();
     (unit(e.source()) === unit(e.target()) ? I : X).push(Math.hypot(p.x - q.x, p.y - q.y)); });
-  const q = (L, f) => { const s = [...L].sort((a, b) => a - b); return Math.round(s[Math.min(s.length - 1, Math.floor(f * s.length))] || 0); };
+  const q = (L, f) => { const s = [...L].sort((a, b) => a - b);
+    return Math.round(s[Math.min(s.length - 1, Math.floor(f * s.length))] || 0); };
   const sum = L => Math.round(L.reduce((a, b) => a + b, 0));
   const bb = cy.elements().boundingBox();
   // A label is inside its shape when its box lies within the node's own box (labels excluded).
@@ -130,7 +133,8 @@ METRICS = """() => {
            width: Math.round(bb.w), height: Math.round(bb.h), labels_outside: outside,
            ...shape(),
            // nemik:W127: the scale the first draw fits the whole graph to, in this viewport.
-           fit_zoom: Math.round(1000 * Math.min(cy.width() / (bb.w + 40), cy.height() / (bb.h + 40))) / 1000 };
+           fit_zoom: Math.round(1000 * Math.min(cy.width() / (bb.w + 40),
+             cy.height() / (bb.h + 40))) / 1000 };
 }"""
 
 
@@ -149,10 +153,13 @@ def server() -> "Iterator[str]":
 NODE_OVERLAPS = """() => {
   const ns = cy.nodes("[symbol], .actor").filter(n => n.visible());
   const hit = (a, b) => a.x1 < b.x2 && b.x1 < a.x2 && a.y1 < b.y2 && b.y1 < a.y2;
-  // the node body, not its halo rings (nemik:W335: bounds-expansion makes boundingBox() include them)
-  const body = n => { const p = n.position(), w = n.outerWidth() / 2, h = n.outerHeight() / 2; return { x1: p.x - w, x2: p.x + w, y1: p.y - h, y2: p.y + h }; };
+  // the node body, not its halo rings (nemik:W335: bounds-expansion makes boundingBox() include
+  // them)
+  const body = n => { const p = n.position(), w = n.outerWidth() / 2, h = n.outerHeight() / 2;
+    return { x1: p.x - w, x2: p.x + w, y1: p.y - h, y2: p.y + h }; };
   const out = [];
-  ns.forEach(a => ns.forEach(b => { if (a.id() < b.id() && hit(body(a), body(b))) out.push(a.id() + " x " + b.id()); }));
+  ns.forEach(a => ns.forEach(b => { if (a.id() < b.id() && hit(body(a),
+    body(b))) out.push(a.id() + " x " + b.id()); }));
   return out;
 }"""
 
@@ -302,7 +309,8 @@ def test_rolling_up_umbrellas_hides_their_work_and_a_double_click_expands_one(
         _settle(page)
         rolled = page.evaluate("() => cy.nodes('[symbol]').length")
         umbrella = page.evaluate(
-            "() => { const u = cy.nodes('[rollup > 0]')[0]; return u ? [u.id(), u.data('rollup')] : null; }"
+            "() => { const u = cy.nodes('[rollup > 0]')[0];"
+            " return u ? [u.id(), u.data('rollup')] : null; }"
         )
         assert umbrella is not None
         page.evaluate(f"() => cy.getElementById('{umbrella[0]}').emit('dbltap')")
@@ -403,9 +411,12 @@ CONTRAST = """() => {
   const lum = css => { const [r, g, b] = css.match(/\\d+(\\.\\d+)?/g).slice(0, 3).map(v => {
     const c = +v / 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; });
     return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
-  const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); };
-  return cy.nodes("[symbol], .actor").filter(n => !n.hasClass("tile") && n.data("state") !== "unclaimed")
-    .map(n => [n.data("state") || n.data("lane"), +ratio(n.style("color"), n.style("background-color")).toFixed(2)]);
+  const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p);
+    return (x + 0.05) / (y + 0.05); };
+  return cy.nodes("[symbol], .actor").filter(n => !n.hasClass("tile")
+    && n.data("state") !== "unclaimed")
+    .map(n => [n.data("state") || n.data("lane"), +ratio(n.style("color"),
+      n.style("background-color")).toFixed(2)]);
 }"""
 
 
@@ -454,7 +465,8 @@ def test_side_panel_sections_fold_and_the_choice_survives_a_reload(server: str) 
         page.goto(server)
         webpage.until(page, SECTIONS_DRAWN)
         first = page.evaluate(
-            "() => Object.fromEntries([...document.querySelectorAll('details.sec')].map(d => [d.id, d.open]))"
+            "() => Object.fromEntries([...document.querySelectorAll('details.sec')]"
+            ".map(d => [d.id, d.open]))"
         )
         page.click("#sec-goals > summary")
         webpage.until(
@@ -640,9 +652,11 @@ USE_OF_COLOUR = """() => {
   const byState = {};
   cy.nodes("[symbol]").forEach(n => {
     // the state mark is the label's leading run before the first letter or digit ("" for ready,
-    // "? " for an unclaimed ask, "▸ " for working, ...): a card's symbol or cite starts alphanumeric
+    // "? " for an unclaimed ask, "▸ " for working, ...): a card's symbol or cite starts
+    // alphanumeric
     // nemik:W477: a ready card behind an open enabler is drawn as a state of its own ("~ ")
-    const s = n.data("state") === "ready" && n.data("behind_open") ? "ready-behind-open" : n.data("state");
+    const s = n.data("state") === "ready" && n.data("behind_open") ? "ready-behind-open"
+      : n.data("state");
     const label = n.data("label") || "";
     (byState[s] = byState[s] || new Set()).add(label.match(/^[^A-Za-z0-9]*/)[0]);
   });
@@ -664,7 +678,8 @@ USE_OF_COLOUR = """() => {
   if (waits.length)
     cases.push({ id: "wait-line", file: "index.html", line: 0, meaning: "waits on its target",
                  colour: [{ kind: "hue" }],
-                 cues: waits.every(e => (e.data("dash") || []).length) ? [{ kind: "stroke" }] : [] });
+                 cues: waits.every(e => (e.data("dash") || []).length) ? [{ kind: "stroke" }]
+                   : [] });
   return { cases, withheld: [] };
 }"""
 
@@ -1229,12 +1244,17 @@ def test_treemap_labels_meet_the_floor_or_are_hidden_and_counted(server: str) ->
 
 
 NON_TEXT_CONTRAST = """() => {
-  // nemik:W437: WCAG 1.4.11, 3:1 for graphical objects that carry meaning, measured on rendered colours
-  const rgb = c => { const x = document.createElement('div'); x.style.color = c; document.body.appendChild(x);
-    const m = getComputedStyle(x).color.match(/\\d+(\\.\\d+)?/g).map(Number); x.remove(); return m.slice(0, 3); };
-  const lum = c => { const [r, g, b] = rgb(c).map(v => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; });
+  // nemik:W437: WCAG 1.4.11, 3:1 for graphical objects that carry meaning, measured on rendered
+  // colours
+  const rgb = c => { const x = document.createElement('div'); x.style.color = c;
+    document.body.appendChild(x);
+    const m = getComputedStyle(x).color.match(/\\d+(\\.\\d+)?/g).map(Number); x.remove();
+      return m.slice(0, 3); };
+  const lum = c => { const [r, g, b] = rgb(c).map(v => { v /= 255; return v <= 0.03928
+    ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; });
     return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
-  const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); };
+  const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p);
+    return (x + 0.05) / (y + 0.05); };
   const bg = getComputedStyle(document.body).backgroundColor;
   const out = {};
   SCOPES.forEach(s => { out['ring ' + s.id] = ratio(scopeColor(s.color), bg); });
@@ -1265,7 +1285,8 @@ def test_meaningful_strokes_reach_three_to_one(server: str, scheme: Scheme) -> N
 
 
 GLYPH_ROLES = """() => {
-  // nemik:W456: every glyph a card label can carry, by the role it plays; a glyph in two roles makes
+  // nemik:W456: every glyph a card label can carry, by the role it plays; a glyph in two roles
+  // makes
   // a label ambiguous ("‖ W503 ▸ 3" once read as working)
   const glyphs = s => [...s].filter(c => c.trim() && !/[A-Za-z0-9]/.test(c));
   return {
@@ -1452,25 +1473,31 @@ def test_rank_forest_view(server: str, tmp_path: Path) -> None:
 TREEMAP_INVARIANTS = """async () => {
   const g = await (await fetch("graph.json")).json();
   const t = treeOf(g.nodes, g.edges);
-  const order = g.nodes.filter(n => n.rank_pos !== undefined).sort((a, b) => a.rank_pos - b.rank_pos).map(n => n.id);
+  const order = g.nodes.filter(n => n.rank_pos !== undefined).sort((a, b) =>
+    a.rank_pos - b.rank_pos).map(n => n.id);
   const R = orderedTreemap(t, order, { x: 0, y: 0, w: 1600, h: 1000 });
   const bad = [];
   for (const [id, p] of t.parent) {
     if (!R.has(id)) bad.push("unplaced " + id);
     const r = R.get(id), q = p && R.get(p);
-    if (q && !(r.x >= q.x - 1e-6 && r.y >= q.y - 1e-6 && r.x + r.w <= q.x + q.w + 1e-6 && r.y + r.h <= q.y + q.h + 1e-6)) bad.push("outside parent " + id);
+    if (q && !(r.x >= q.x - 1e-6 && r.y >= q.y - 1e-6 && r.x + r.w <= q.x + q.w + 1e-6
+      && r.y + r.h <= q.y + q.h + 1e-6)) bad.push("outside parent " + id);
   }
   const sibs = [t.roots, ...t.kids.values()];
-  const hit = (a, b) => a.x < b.x + b.w - 1e-6 && b.x < a.x + a.w - 1e-6 && a.y < b.y + b.h - 1e-6 && b.y < a.y + a.h - 1e-6;
-  for (const s of sibs) for (let i = 0; i < s.length; i++) for (let j = i + 1; j < s.length; j++) if (hit(R.get(s[i]), R.get(s[j]))) bad.push("overlap " + s[i] + " " + s[j]);
+  const hit = (a, b) => a.x < b.x + b.w - 1e-6 && b.x < a.x + a.w - 1e-6
+    && a.y < b.y + b.h - 1e-6 && b.y < a.y + a.h - 1e-6;
+  for (const s of sibs) for (let i = 0; i < s.length; i++) for (let j = i + 1; j < s.length;
+    j++) if (hit(R.get(s[i]), R.get(s[j]))) bad.push("overlap " + s[i] + " " + s[j]);
   const tot = [...R.keys()].filter(k => !k.endsWith("#self")).length;
   return { bad: bad.slice(0, 5), n: t.parent.size, roots: t.roots.length, total: tot,
-           repos_in_one_root: Math.max(...t.roots.map(r => { const s = new Set(), st = [r]; while (st.length) { const x = st.pop(); s.add(x.split("/").slice(-2)[0]); st.push(...t.kids.get(x)); } return s.size; })) };
+           repos_in_one_root: Math.max(...t.roots.map(r => { const s = new Set(), st = [r];
+             while (st.length) { const x = st.pop(); s.add(x.split("/").slice(-2)[0]);
+               st.push(...t.kids.get(x)); } return s.size; })) };
 }"""
 
 
 def test_treemap_model(server: str) -> None:
-    """nemik:W180 step 1: one parent each, children inside parents, siblings disjoint, across repos."""
+    """nemik:W180 step 1: one parent each, children inside parents, siblings disjoint."""
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page()
@@ -1509,20 +1536,25 @@ def test_treemap_view_draws(server: str, tmp_path: Path) -> None:
         webpage.until(page, "() => cy.nodes('.tile').length > 0")
         # W185: toggling the view refits; the old zoom/pan scaled one tile off the page.
         fit = page.evaluate("""() => { const b = cy.elements(':visible').renderedBoundingBox();
-          return b.x1 >= -1 && b.y1 >= -1 && b.x2 <= cy.width() + 1 && b.y2 <= cy.height() + 1; }""")
+          return b.x1 >= -1 && b.y1 >= -1 && b.x2 <= cy.width() + 1 && b.y2 <= cy.height() + 1;
+            }""")
         m = page.evaluate("""() => {
           // Step 6: nested clusters. A child lies inside its parent's frame (below the header); two
           // tiles overlap only when one contains the other.
           const tiles = cy.nodes('.tile').filter(n => n.visible()), bad = [];
           const rect = n => { const p = n.position(), w = n.data('tw') / 2, h = n.data('th') / 2;
             return { x1: p.x - w, x2: p.x + w, y1: p.y - h, y2: p.y + h }; };
-          const inside = (c, q) => c.x1 >= q.x1 - 0.5 && c.y1 >= q.y1 - 0.5 && c.x2 <= q.x2 + 0.5 && c.y2 <= q.y2 + 0.5;
-          cy.edges('.contained').forEach(e => { if (!inside(rect(e.source()), rect(e.target()))) bad.push('outside ' + e.source().id()); });
+          const inside = (c, q) => c.x1 >= q.x1 - 0.5 && c.y1 >= q.y1 - 0.5
+            && c.x2 <= q.x2 + 0.5 && c.y2 <= q.y2 + 0.5;
+          cy.edges('.contained').forEach(e => { if (!inside(rect(e.source()),
+            rect(e.target()))) bad.push('outside ' + e.source().id()); });
           const bbs = tiles.map(n => [n.id(), rect(n)]);
-          const hit = (a, b) => a.x1 < b.x2 - 0.5 && b.x1 < a.x2 - 0.5 && a.y1 < b.y2 - 0.5 && b.y1 < a.y2 - 0.5;
+          const hit = (a, b) => a.x1 < b.x2 - 0.5 && b.x1 < a.x2 - 0.5 && a.y1 < b.y2 - 0.5
+            && b.y1 < a.y2 - 0.5;
           for (let i = 0; i < bbs.length; i++) for (let j = i + 1; j < bbs.length; j++) {
             const [a, b] = [bbs[i][1], bbs[j][1]];
-            if (hit(a, b) && !inside(a, b) && !inside(b, a)) bad.push(bbs[i][0] + " x " + bbs[j][0]);
+            if (hit(a, b) && !inside(a, b) && !inside(b,
+              a)) bad.push(bbs[i][0] + " x " + bbs[j][0]);
           }
           // Leaf labels: repo on the first line, and the text inside its tile (canvas-measured).
           const ctx = document.createElement('canvas').getContext('2d'), clipped = [];
@@ -1532,14 +1564,19 @@ def test_treemap_view_draws(server: str, tmp_path: Path) -> None:
             if (lines.length === 2 && lines[0] === n.data('repo')) twoLine++;
             ctx.font = `bold ${n.data('fs')}px ${getComputedStyle(document.body).fontFamily}`;
             const w = Math.max(...lines.map(l => ctx.measureText(l).width));
-            if (w > n.data('tw') + 0.5 || lines.length * n.data('fs') * 1.2 > n.data('th') + 0.5) clipped.push(n.id());
+            if (w > n.data('tw') + 0.5
+              || lines.length * n.data('fs') * 1.2 > n.data('th') + 0.5) clipped.push(n.id());
           });
           const repos = new Set(tiles.map(n => n.data('repo')));
           const bb = cy.elements(':visible').boundingBox();
           const key = document.getElementById('repokey');
-          return { two_line: twoLine, clipped: clipped.slice(0, 5), groups: cy.nodes('.tile.cluster').length, key_repos: key.hidden ? 0 : key.querySelectorAll('span').length, tiles: tiles.length, contained: cy.edges('.contained').length, outside: bad.slice(0, 5),
+          return { two_line: twoLine, clipped: clipped.slice(0, 5),
+            groups: cy.nodes('.tile.cluster').length, key_repos: key.hidden ? 0
+              : key.querySelectorAll('span').length, tiles: tiles.length,
+                contained: cy.edges('.contained').length, outside: bad.slice(0, 5),
                    repo_boxes: cy.nodes('.repo').length, repos: repos.size,
-                   fit_zoom: Math.round(1000 * Math.min(cy.width() / (bb.w + 40), cy.height() / (bb.h + 40))) / 1000 };
+                   fit_zoom: Math.round(1000 * Math.min(cy.width() / (bb.w + 40),
+                     cy.height() / (bb.h + 40))) / 1000 };
         }""")
         page.evaluate("() => cy.fit(undefined, 20)")
         page.screenshot(path=str(out / "treemap-dark.png"))
@@ -1577,14 +1614,19 @@ def test_side_panel_never_overflows_sideways(server: str, width: int) -> None:
         # The fixture's text is stripped, so give the asks the shapes that overflowed live: a long
         # URL with no break opportunity, and a long ask.
         page.evaluate("""() => { for (const a of data.operator) {
-            a.ask = 'operator: act open https://store.kde.org/p/0000000000/very-long-path-without-any-break-opportunity-at-all in your browser and approve the KubeVirt stage-1 apply after reviewing ten in-place component diffs';
+            a.ask = 'operator: act open '
+              + 'https://store.kde.org/p/0000000000/'
+              + 'very-long-path-without-any-break-opportunity-at-all'
+              + ' in your browser and approve the KubeVirt stage-1 apply after reviewing'
+              + ' ten in-place component diffs';
             a.waiting = Array.from({length: 12}, (_, i) => 'luthen-observability:W1' + i); }
           lane('needs-you'); }""")
         _settle(page)
         m = page.evaluate("""() => { const a = document.querySelector('aside');
           const r = a.getBoundingClientRect(), wide = [];
           a.querySelectorAll('*').forEach(e => { const b = e.getBoundingClientRect();
-            if (b.width && b.right > r.right + 1) wide.push(e.tagName + ':' + (e.textContent || '').slice(0, 40)); });
+            if (b.width && b.right > r.right + 1) wide.push(e.tagName + ':' + (e.textContent
+              || '').slice(0, 40)); });
           return { scroll: a.scrollWidth, client: a.clientWidth, wide: wide.slice(0, 5) }; }""")
         browser.close()
     assert m["wide"] == [] and m["scroll"] <= m["client"] + 1, m
@@ -1608,14 +1650,16 @@ def test_every_cite_in_the_panel_is_a_repo_colon_link(server: str) -> None:
         bad = page.evaluate("""() => {
           const out = [], pat = /\\b[a-z][a-z0-9-]*(?:[:\\/]| )W\\d+\\b/;
           const scan = where => {
-            const walk = document.createTreeWalker(document.querySelector('aside'), NodeFilter.SHOW_TEXT);
+            const walk = document.createTreeWalker(document.querySelector('aside'),
+              NodeFilter.SHOW_TEXT);
             for (let t; (t = walk.nextNode());) {
               if (t.parentElement.closest('a[data-cite], select, #toolout, p.stat')) continue;
               const m = t.textContent.match(pat);
               if (m) out.push(where + ': ' + m[0]);
             }
           };
-          const ns = cy.nodes('[symbol]').filter(n => n.data('caused_by') && n.data('blocked_on').length);
+          const ns = cy.nodes('[symbol]').filter(n => n.data('caused_by')
+            && n.data('blocked_on').length);
           if (ns.length) { detail(ns[0].data()); scan('detail'); }
           lane('needs-you'); scan('lane');
           return [...new Set(out)].slice(0, 8);
@@ -1641,7 +1685,8 @@ def test_weather_panel_groups_one_outage(server: str) -> None:
           weather();
           const once = weatherOnce(open.map(n => n.cite));
           return { rows: document.querySelectorAll('#weather dt').length,
-                   waiters: document.querySelectorAll('#weather dd > a[data-cite]').length, once: once.length };
+                   waiters: document.querySelectorAll('#weather dd > a[data-cite]').length,
+                     once: once.length };
         }""")
         browser.close()
     assert m == {"rows": 1, "waiters": 3, "once": 1}, m
