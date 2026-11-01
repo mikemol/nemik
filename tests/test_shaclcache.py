@@ -4,14 +4,46 @@
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from rdflib import Graph, Literal, Namespace, URIRef, Variable
 from rdflib.plugins.sparql import processor
 
 from nemik.shaclcache import cached_sparql_parse
 
+if TYPE_CHECKING:
+    from collections.abc import Callable
+
 EX = Namespace("urn:t:")
 QUERY = "SELECT ?v WHERE { ?this <urn:t:p> ?v }"
 V = Variable("v")
+
+
+def _get(name: str) -> object:
+    """Read one slot of rdflib's SPARQL processor module.
+
+    Returns:
+        Whatever the module holds under that name.
+
+    """
+    value: object = getattr(processor, name)
+    return value
+
+
+def _fn(name: str) -> Callable[[object, object, object], object]:
+    """Read one function slot of rdflib's SPARQL processor module.
+
+    Returns:
+        The function under that name.
+
+    """
+    fn: Callable[[object, object, object], object] = getattr(processor, name)
+    return fn
+
+
+def _put(name: str, value: object) -> None:
+    """Replace one slot of rdflib's SPARQL processor module."""
+    setattr(processor, name, value)
 
 
 def _graph() -> Graph:
@@ -42,28 +74,28 @@ def test_the_text_is_translated_once_however_often_it_is_asked() -> None:
     """The text is translated once however often it is asked."""
     g = _graph()
     translated: list[str] = []
-    original = vars(processor)["translateQuery"]
+    original = _fn("translateQuery")
 
     def spy(tree: object, base: object = None, init_ns: object = None) -> object:
         translated.append(type(tree).__name__)
         return original(tree, base, init_ns)
 
-    vars(processor)["translateQuery"] = spy
+    _put("translateQuery", spy)
     try:
         with cached_sparql_parse():
             for _ in range(5):
                 _values(g, EX.a)
     finally:
-        vars(processor)["translateQuery"] = original
+        _put("translateQuery", original)
     assert len(translated) == 1
 
 
 def test_the_originals_are_back_after_the_block() -> None:
     """The originals are back after the block."""
-    before = vars(processor)["parseQuery"], vars(processor)["translateQuery"]
+    before = _get("parseQuery"), _get("translateQuery")
     with cached_sparql_parse():
-        assert vars(processor)["parseQuery"] is not before[0]
-    after = vars(processor)["parseQuery"], vars(processor)["translateQuery"]
+        assert _get("parseQuery") is not before[0]
+    after = _get("parseQuery"), _get("translateQuery")
     assert after == before
 
 
