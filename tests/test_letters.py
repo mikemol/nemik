@@ -4,12 +4,23 @@
 
 from __future__ import annotations
 
+import json
+from datetime import date
 from typing import TYPE_CHECKING
 
+import installed
 import pytest
 
 from nemik.check import main
-from nemik.letters import headers, misdelivered
+from nemik.letters import (
+    apply_fold,
+    archive_commands,
+    fold_commands,
+    headers,
+    misdelivered,
+    orphans,
+    report,
+)
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -43,7 +54,6 @@ def test_fold_proposes_a_waypoint_for_each_letter_no_waypoint_cites(
 ) -> None:
     """Fold proposes a waypoint for each letter no waypoint cites."""
     # nemik:W277: a letter is a waypoint's evidence in file form, so an uncited one is an orphan.
-    from nemik.letters import fold_commands
 
     queue = tmp_path / "nemik" / ".claude" / "paths-forward.json"
     queue.parent.mkdir(parents=True)
@@ -66,7 +76,6 @@ def test_an_orphan_whose_waypoints_are_all_closed_is_archived_not_folded(
     """An orphan whose waypoints are all closed is archived not folded."""
     # nemik:W278: what the letter names has landed, so it is answered; one naming an open card is
     # live.
-    from nemik.letters import archive_commands, fold_commands
 
     queue = tmp_path / "nemik" / ".claude" / "paths-forward.json"
     queue.parent.mkdir(parents=True)
@@ -88,9 +97,6 @@ def test_an_orphan_whose_waypoints_are_all_closed_is_archived_not_folded(
 def test_an_old_dated_orphan_is_stale_and_the_scope_is_one_repo(tmp_path: Path) -> None:
     """An old dated orphan is stale and the scope is one repo."""
     # nemik:W282: each repo migrates its own inbox; a letter nothing cited for N days is archived.
-    from datetime import date
-
-    from nemik.letters import archive_commands, fold_commands
 
     for repo in ("nemik", "life"):
         queue = tmp_path / repo / ".claude" / "paths-forward.json"
@@ -117,7 +123,6 @@ def test_an_alert_pair_needs_no_card_but_an_unresolved_opened_does(
 ) -> None:
     """An alert pair needs no card but an unresolved opened does."""
     # nemik:W301 (substrate): luthen's `alert OPENED` / `alert RESOLVED` letters pair by alert id.
-    from nemik.letters import archive_commands, fold_commands
 
     queue = tmp_path / "substrate" / ".claude" / "paths-forward.json"
     queue.parent.mkdir(parents=True)
@@ -140,13 +145,6 @@ def test_an_alert_pair_needs_no_card_but_an_unresolved_opened_does(
 
 def test_apply_mints_the_cards_and_archives_the_stale(tmp_path: Path) -> None:
     """nemik:W301: applying the fold mints a card for the live letter and archives the stale one."""
-    import json
-    from datetime import date
-
-    import installed
-
-    from nemik.letters import apply_fold, orphans
-
     state = tmp_path / "a" / ".claude" / "paths-forward.json"
     state.parent.mkdir(parents=True)
     body: dict[str, object] = {
@@ -188,7 +186,6 @@ def test_a_misdelivered_letter_is_copied_to_its_recipient_and_then_counts_as_del
     _letter(
         tmp_path, "gcalculus", "2026-08-21-misfiled.md", "gcalculus → linux-sources: x"
     )
-    from nemik.letters import report
 
     spaces = {"gcalculus", "linux-sources"}
     said, code = report(tmp_path, spaces, fold=True, repo="linux-sources")
@@ -212,8 +209,6 @@ def test_a_peer_waypoint_citing_the_letter_path_owns_it(tmp_path: Path) -> None:
 
     So the cited letter is owned and only the uncited one is an orphan.
     """
-    from nemik.letters import orphans
-
     for repo, evidence in (("nemik", ""), ("life", "Letter: nemik/inbox/asked.md")):
         queue = tmp_path / repo / ".claude" / "paths-forward.json"
         queue.parent.mkdir(parents=True)

@@ -2,10 +2,22 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W169: the static page and its scripts, with only relative links."""
 
+import json
 import re
 from pathlib import Path
 
-from nemik.serve import PAGE_FILES, VENDOR, page_file, write_static
+import pytest
+
+from nemik.apischema import unmanifested
+from nemik.serve import (
+    PAGE_FILES,
+    VENDOR,
+    Model,
+    main,
+    page_file,
+    static_data,
+    write_static,
+)
 
 
 def test_page_and_vendor_written_with_relative_links(tmp_path: Path) -> None:
@@ -28,11 +40,6 @@ def test_page_and_vendor_written_with_relative_links(tmp_path: Path) -> None:
 
 def test_data_files_cover_what_the_page_fetches_and_are_manifested() -> None:
     """Data files cover what the page fetches and are manifested."""
-    from pathlib import Path
-
-    from nemik.apischema import unmanifested
-    from nemik.serve import Model, static_data
-
     docs = static_data(Model(Path(__file__).parent / "fixtures" / "fleet"))
     assert {"graph.json", "wake.json"} <= set(docs)
     assert any(k.startswith("goals/") for k in docs)
@@ -54,13 +61,6 @@ def test_static_page_has_no_tools_panel(tmp_path: Path) -> None:
 
 def test_static_build_end_to_end(tmp_path: Path) -> None:
     """Static build end to end."""
-    import json
-    from pathlib import Path
-
-    import pytest
-
-    from nemik.serve import main
-
     fleet = Path(__file__).parent / "fixtures" / "fleet"
     out = tmp_path / "out"
     with pytest.raises(SystemExit) as e:  # no list: refused, nothing written

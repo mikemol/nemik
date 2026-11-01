@@ -4,8 +4,8 @@
 
 from rdflib import Graph, Literal
 
-from nemik.adapter import NEMIK
-from nemik.rank import fruit
+from nemik.adapter import NEMIK, OSLC_CM, waypoint_uri, workstream_uri
+from nemik.rank import fruit, load_weights, rank
 
 
 def test_members_are_leaves_moving_nothing_or_tagged() -> None:
@@ -22,8 +22,6 @@ def test_members_are_leaves_moving_nothing_or_tagged() -> None:
 
 def test_tagged_item_joins_with_its_downstream() -> None:
     """Tagged item joins with its downstream."""
-    from nemik.adapter import waypoint_uri, workstream_uri
-
     g = Graph()
     n = waypoint_uri("a", "W2")
     g.add((n, NEMIK.symbol, Literal("W2")))
@@ -46,8 +44,6 @@ def _graph(spec: dict[str, list[str]]) -> Graph:
         The graph holding those waypoints.
 
     """
-    from nemik.adapter import OSLC_CM, waypoint_uri, workstream_uri
-
     g = Graph()
     for sym, en in spec.items():
         n = waypoint_uri("a", sym)
@@ -69,8 +65,6 @@ def _graph(spec: dict[str, list[str]]) -> Graph:
 
 def test_pile_outweighs_a_deep_item_and_leads() -> None:
     """Pile outweighs a deep item and leads."""
-    from nemik.rank import load_weights, rank
-
     g = _graph(
         {
             "W1": ["W90"],
@@ -91,17 +85,12 @@ def test_pile_outweighs_a_deep_item_and_leads() -> None:
 
 def test_deep_item_outweighing_the_pile_leads() -> None:
     """Deep item outweighing the pile leads."""
-    from nemik.rank import load_weights, rank
-
     g = _graph({"W1": ["W90"], "W2": [], "W3": []})  # one stalled peer (8) > fruit 2
     assert rank(g, "a", load_weights())[0]["symbol"] == "W1"
 
 
 def test_a_working_fruit_member_holds_the_class_slot() -> None:
     """Luthen 2026-10-02: with a fruit member working, no other member inherits the class weight."""
-    from nemik.adapter import OSLC_CM, waypoint_uri
-    from nemik.rank import load_weights, rank
-
     g = _graph(
         {
             "W1": ["W90"],

@@ -3699,3 +3699,7 @@
 2026-11-01T09:55:42Z  status W1360 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T09:56:15Z  interrupt W1361 minted    -         "Twenty-one function-local imports in four more test files move to module scope (PLC0415), so ruff falls by twenty-one"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1359
 2026-11-01T09:56:59Z  status W1361 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T10:04:06Z  tick  W1362 minted    -         "Forty-five function-local imports in five more test files move to module scope, redundant ones dropped (PLC0415), so ruff falls by forty-five"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1359
+2026-11-01T10:05:04Z  status W1362 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T10:05:11Z  tick  W1361 advanced  sweep     "W1360 landed 7c525837 (ruff 862 to 860); stack 769 for W1361 (21 hoisted imports, ruff 860 to 839) gating since 09:57:03Z; stack 770 for W1362 (45 hoisted imports, 839 to 794) staged behind it [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87); W1361 is gating as stack 769 and W1362 waits on its ruff-baseline.json (cites github:W71, W1362)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T10:07:36Z  status W1361 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

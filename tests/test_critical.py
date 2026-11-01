@@ -4,10 +4,18 @@
 
 from __future__ import annotations
 
-from rdflib import Graph, URIRef
+from rdflib import Graph, Literal, URIRef
 
 from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri
-from nemik.critical import critical
+from nemik.critical import (
+    assume_done,
+    cone,
+    critical,
+    cycles,
+    fires,
+    repo_scope,
+    what_if,
+)
 
 
 def _card(g: Graph, sym: str, status: str = "ready") -> URIRef:
@@ -38,8 +46,6 @@ def test_the_longest_chain_has_zero_slack_and_a_side_branch_has_some() -> None:
 
 def test_a_scope_bounds_the_chain_to_a_repo_or_a_cone() -> None:
     """nemik:W333: a:W1 -> b:W1 -> b:W2 crosses repos; a:W9 stands alone in a."""
-    from nemik.critical import cone, critical, repo_scope
-
     g = Graph()
     a1 = waypoint_uri("a", "W1")
     b1, b2 = waypoint_uri("b", "W1"), waypoint_uri("b", "W2")
@@ -70,8 +76,6 @@ def test_tied_longest_chains_are_all_marked_and_graded_not_picked_by_sort_order(
     None
 ):
     """Tied longest chains are all marked and graded not picked by sort order."""
-    from nemik.critical import critical
-
     found = critical(_fan_in(list(range(1, 13))))
     leaves = {f"a:W{i}" for i in range(2, 12)}
     assert found.length == 2
@@ -94,8 +98,6 @@ def test_what_if_closing_the_head_of_the_chain_shortens_it_and_leaves_the_graph_
     Assuming a:W1 done shortens the chain from 3 to 2, drops a:W1 from the slack and leaves
     the real graph untouched.
     """
-    from nemik.critical import assume_done, critical, what_if
-
     g = Graph()
     a, b, c, d = (_card(g, s) for s in ("W1", "W2", "W3", "W4"))
     for src, dst in ((a, b), (b, c), (a, d)):
@@ -112,9 +114,6 @@ def test_what_if_closing_the_head_of_the_chain_shortens_it_and_leaves_the_graph_
 def test_a_fire_is_an_interrupt_card_holding_up_planned_work() -> None:
     """A fire is an interrupt card holding up planned work."""
     # nemik:W347: interrupt a:W1 -> planned a:W2 -> planned a:W3; interrupt a:W4 holds up nothing.
-    from rdflib import Literal
-
-    from nemik.critical import fires
 
     g = Graph()
     cards = {s: _card(g, s) for s in ("W1", "W2", "W3", "W4")}
@@ -138,15 +137,12 @@ def test_a_cycle_is_reported_and_a_chain_is_not() -> None:
 
     A cycle with a member blocked on the operator is flagged as one the operator can break.
     """
-    from nemik.critical import cycles
-
     g = Graph()
     x, y, z, a, b, w = (_card(g, s) for s in ("W1", "W2", "W3", "W4", "W5", "W6"))
     for src, dst in ((x, y), (y, z), (z, x), (a, b), (w, w)):
         g.add((src, NEMIK.enables, dst))
     assert cycles(g) == [(["a:W1", "a:W2", "a:W3"], False), (["a:W6"], False)]
     # the same cycle with one member blocked on the operator is one the operator can break
-    from rdflib import Literal
 
     g.add((y, NEMIK.blockedKind, Literal("human")))
     assert cycles(g)[0] == (["a:W1", "a:W2", "a:W3"], True)

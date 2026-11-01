@@ -324,7 +324,6 @@
   "RUF069": 2
  },
  "tests/test_critical.py": {
-  "PLC0415": 7,
   "PLR2004": 4
  },
  "tests/test_critical_cards.py": {
@@ -355,7 +354,6 @@
   "PLR2004": 1
  },
  "tests/test_fruit.py": {
-  "PLC0415": 6,
   "PLR2004": 3,
   "PT018": 4
  },
@@ -420,7 +418,6 @@
   "S603": 1
  },
  "tests/test_letters.py": {
-  "PLC0415": 11,
   "PLR2004": 5,
   "SLF001": 1
  },
@@ -487,7 +484,6 @@
   "PLR2004": 1
  },
  "tests/test_rank.py": {
-  "PLC0415": 14,
   "PLR2004": 5
  },
  "tests/test_rank_apply.py": {
@@ -541,7 +537,6 @@
   "PLR2004": 3
  },
  "tests/test_static.py": {
-  "PLC0415": 7,
   "PLR2004": 1
  },
  "tests/test_static_view.py": {
