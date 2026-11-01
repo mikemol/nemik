@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1357,
+  "counter": 1358,
   "waypoints": [
     {
       "symbol": "W1",
@@ -32552,20 +32552,43 @@
     {
       "symbol": "W1357",
       "title": "tests/test_test_inputs.py reads its regex matches through a typed helper and an annotated pair list, so mypy falls by 19",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-01: G0 2026-11-01T09:05:03Z (date -u in the preceding call), BEFORE the first edit of the real file. Advances W1357 (W1178's class: the mypy paydown). Pace: nemik-rank nemik --pace --json read at 09:00:54Z (my tick stamp), pace of 2026-11-01T08:25:26Z, mypy behind (owes 190, fell 168), codon behind, ruff ok; the landing 08:57:41Z still PENDING. Actuator: tests/test_test_inputs.py: a helper _strings(pattern, text) -> list[str] annotates the one findall result, used for the files set and the two glob loops; the pkgs findall is annotated list[tuple[str, str]]. K PROBE BEFORE THIS G0: scratchpad/w1357_types.py applied to tests/probe_w1357.py (deleted): mypy 'Success: no issues found' (19 to 0); ruff on the copy only the 3 S101 its non-test filename adds, the original 0. N=19, K=19, expected -19: mypy 1675 (stack 764's value) to 1656, ruff flat at 875. Premise read: baseline tests/test_test_inputs.py misc 19. | 2026-11-01: Landed 9f7a1016 (COMMITTED line printed it; git log -1 subject is W1357's) at 2026-11-01T09:21:25Z by TZ=UTC reflog (04:21:25 -0500). Submitted 09:10:52Z: 10 min 33 s wall in the gate. Measured mypy 1675 to 1656 (-19, equal to the K probe's), ruff flat 875.",
+      "issued_at": "2026-11-01T09:05:02Z",
+      "minted_during": "tick",
+      "caused_by": "W1178",
+      "last_worked": "2026-11-01T09:22:09Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tests/test_test_inputs.py",
+        "mypy-baseline.json"
+      ],
+      "size_class": "small",
+      "completed": "20261101T092209Z"
+    },
+    {
+      "symbol": "W1358",
+      "title": "tests/test_skill.py and tests/test_pieces.py annotate the Any their tomllib, re and json calls return, so mypy falls by 22",
       "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-11-01: G0 2026-11-01T09:05:03Z (date -u in the preceding call), BEFORE the first edit of the real file. Advances W1357 (W1178's class: the mypy paydown). Pace: nemik-rank nemik --pace --json read at 09:00:54Z (my tick stamp), pace of 2026-11-01T08:25:26Z, mypy behind (owes 190, fell 168), codon behind, ruff ok; the landing 08:57:41Z still PENDING. Actuator: tests/test_test_inputs.py: a helper _strings(pattern, text) -> list[str] annotates the one findall result, used for the files set and the two glob loops; the pkgs findall is annotated list[tuple[str, str]]. K PROBE BEFORE THIS G0: scratchpad/w1357_types.py applied to tests/probe_w1357.py (deleted): mypy 'Success: no issues found' (19 to 0); ruff on the copy only the 3 S101 its non-test filename adds, the original 0. N=19, K=19, expected -19: mypy 1675 (stack 764's value) to 1656, ruff flat at 875. Premise read: baseline tests/test_test_inputs.py misc 19.",
-      "issued_at": "2026-11-01T09:05:02Z",
-      "minted_during": "tick",
+      "evidence": "2026-11-01: G0 2026-11-01T09:23:17Z (date -u in the preceding call), BEFORE the first edit of the real files. Advances W1358 (W1178's class: the mypy paydown). Pace: last read nemik-rank nemik --pace --json at 09:00:54Z, stamp 2026-11-01T08:25:26Z, mypy behind (owes 190, fell 168); the 09:25:26Z pace is not yet due at this stamp, so no newer one was readable. Actuator: tests/test_skill.py annotates the pyproject tomllib result as nested str dicts and the shapes findall as list[str]; tests/test_pieces.py reads each graph piece through a _piece(path) -> GraphDoc helper (json.loads annotated GraphDoc, read_text with encoding utf-8). K PROBE BEFORE THIS G0: scratchpad/w1358_types.py probe wrote tests/probe_w1358_skill.py and probe_w1358_pieces.py (deleted): first try mypy 0 but ruff +1 PLW1514 (read_text with no encoding in the helper), fixed with encoding utf-8; second try mypy 'Success: no issues found' (22 to 0) and ruff only the 9 S101 from the probes' non-test filenames, the originals 0. N=22 (baseline: test_skill misc 11 plus test_pieces misc 11), K=22, expected -22: mypy 1656 to 1634, ruff flat at 875.",
+      "issued_at": "2026-11-01T09:23:16Z",
+      "minted_during": "interrupt",
       "caused_by": "W1178",
-      "last_worked": "2026-11-01T09:05:50Z",
+      "last_worked": "2026-11-01T09:24:21Z",
       "ticks_blocked": 0,
       "manifest": [
-        "tests/test_test_inputs.py",
+        "tests/test_skill.py",
+        "tests/test_pieces.py",
         "mypy-baseline.json"
       ],
       "size_class": "small",

@@ -16,14 +16,17 @@ SKILL = (ROOT / "skills/nemik/SKILL.md").read_text()
 
 def test_every_nemik_command_is_documented() -> None:
     """Every nemik command is documented."""
-    scripts = tomllib.loads((ROOT / "pyproject.toml").read_text())["project"]["scripts"]
+    data: dict[str, dict[str, dict[str, str]]] = tomllib.loads(
+        (ROOT / "pyproject.toml").read_text()
+    )
+    scripts = data["project"]["scripts"]
     missing = [s for s in scripts if s.startswith("nemik-") and f"`{s}" not in SKILL]
     assert not missing, f"skills/nemik/SKILL.md does not document {missing}"
 
 
 def test_every_check_shape_is_documented() -> None:
     """Every check shape is documented."""
-    shapes = re.findall(
+    shapes: list[str] = re.findall(
         r"^nemik:(\w+Shape) a sh:NodeShape",
         (ROOT / "src/nemik/data/shapes.ttl").read_text(),
         re.MULTILINE,

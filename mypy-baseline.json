@@ -196,9 +196,6 @@
   "misc": 6,
   "type-arg": 1
  },
- "tests/test_pieces.py": {
-  "misc": 11
- },
  "tests/test_published_valid.py": {
   "misc": 8
  },
@@ -235,9 +232,6 @@
  },
  "tests/test_shaclinc.py": {
   "misc": 2
- },
- "tests/test_skill.py": {
-  "misc": 11
  },
  "tests/test_static.py": {
   "misc": 7
