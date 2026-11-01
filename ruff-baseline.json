@@ -190,7 +190,6 @@
  "src/nemik/serve.py": {
   "C901": 3,
   "DOC501": 1,
-  "E501": 1,
   "FBT001": 2,
   "FBT002": 2,
   "PLC0415": 26,
@@ -303,7 +302,6 @@
  },
  "tests/test_calendars.py": {
   "ARG001": 4,
-  "E501": 2,
   "PLC2701": 1,
   "PLR2004": 2,
   "S404": 1,
@@ -590,7 +588,6 @@
   "PLC0415": 4
  },
  "tests/test_vtodo.py": {
-  "E501": 2,
   "PLC0415": 10,
   "PLC1901": 1,
   "PLR2004": 4
@@ -603,9 +600,6 @@
  "tests/test_wake_nudge.py": {
   "PLR2004": 1,
   "RUF069": 1
- },
- "tests/test_web_render.py": {
-  "E501": 1
  },
  "tests/test_withheld.py": {
   "PLC0415": 1

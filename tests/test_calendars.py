@@ -190,7 +190,9 @@ def test_a_refusing_helper_is_reported_not_a_traceback(
     """nemik:W193: the Akonadi helper refuses when Akonadi is down; nemik-days says so, exit 2."""
     h = tmp_path / "helper"
     h.write_text(
-        "#!/bin/sh\necho 'ERROR: akonadi is not running on this session bus; refusing to start it from here'\nexit 2\n"
+        "#!/bin/sh\n"
+        "echo 'ERROR: akonadi is not running on this session bus; refusing to start it from here'\n"
+        "exit 2\n"
     )
     h.chmod(0o755)
     cfg = tmp_path / "calendars.toml"
@@ -236,7 +238,8 @@ def test_calendar_entries_take_a_name_or_a_table_and_a_typo_fails(
     """
     p = tmp_path / "calendars.toml"
     p.write_text(
-        '[calendars]\nhome = "Personal"\nchores = { name = "Chores", include = ["Mike", "Supper: Pascal"] }\n'
+        '[calendars]\nhome = "Personal"\n'
+        'chores = { name = "Chores", include = ["Mike", "Supper: Pascal"] }\n'
     )
     assert load_calendars(p) == {
         "chores": Calendar("Chores", ("Mike", "Supper: Pascal")),

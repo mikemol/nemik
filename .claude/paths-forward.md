@@ -3,7 +3,7 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1347 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:3e2c737fef28ac37`
+counter 1348 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:d3c3f75da37cdfdd`
 
 | # | symbol | status |
 |---|---|---|
@@ -1326,6 +1326,7 @@ counter 1347 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:3e2
 | 1317 | W1343 | done |
 | 1318 | W1344 | done |
 | 1319 | W1346 | done |
+| 1320 | W1348 | done |
 
 ## waypoints
 
@@ -4354,6 +4355,8 @@ counter 1347 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:3e2
    documents through GraphDoc and small TypedDicts, so mypy falls by their Any cascade
 1319. **W1346** (done) tests/test_layout.py wraps its 43 over-long lines (comments, docstring, JS in Python strings)
    without changing a token, so ruff E501 falls by 43
+1320. **W1348** (done) Four test files split their one composite assertion each (test_calendars, test_calwrite,
+   test_critical_cards, test_serve_model), so ruff PT018 falls by 4 with mypy flat
 
 ## residue
 
@@ -5108,3 +5111,17 @@ counter 1347 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:3e2
   been met once in six rounds. No fixpoint is declared. Carried open findings, status on 2026-11-01: R72 on W1288
   (today), R83 on W1288 (2026-11-02), R73-F2 on W1288 (table given by the session, closes when on W1288), R72 on W846
   (2026-11-02), R84 on W695 (2026-11-02), R85 on W613 (read-back), R91 on W1345 (2026-11-02).; 2 finding(s)
+- **nemik:R91** (-) round 93: tick-w1347 closed with nothing landed; W1347 (PT018 autofix on tests/test_layout.py, then
+  on five more test files) refused by measurement and reverted; HEAD 525ad379 (05:43:20Z), --in-gate prints [] at
+  06:10:13Z: root Verified from source: --in-gate [] (no stack), HEAD unchanged, `git status` clean for src tests tools
+  checks and the three baselines, `mikemol-pycheck --ratchet` ruff 908/908 and mypy 1760/1760, so the reverts are
+  complete. The refusal by measurement is sound practice (ratchet rose per file, nothing committed), but it was
+  predictable from a table the session already holds: the PT018 per-file mypy delta given for R73-F2 (46 sites, 15
+  files; 4 safe in test_calendars, test_calwrite, test_critical_cards and test_serve_model; mypy rising +1 frontier, +8
+  fruit, +6 layout, +1 read_api, +1 wake_alarms, +1 witnesses) matches the run exactly (layout 266 to 272 is +6, the
+  five-file run +1, +8, +1, +1, +1). The G0 chose test_layout.py, the +6 file, and wrote 'this file's values are all
+  Any, so none expected'. The cost: one tick, about 6 min of work, and the gate empty since 05:43:20Z (26 min 53 s at
+  06:10:13Z, still empty). Three findings below; no fixpoint is declared. Carried open findings, status on 2026-11-01:
+  R72 on W1288 (today), R83 on W1288 (2026-11-02), R73-F2 (closes when the table is on W1288; this round shows it was
+  right), R72 on W846, R84 on W695, R91 on W1345, R92 on W1346 and W1288 (all 2026-11-02), R85 on W613 (read-back).; 3
+  finding(s)

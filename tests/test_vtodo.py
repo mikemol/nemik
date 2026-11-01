@@ -12,7 +12,8 @@ ASKS: list[AskRow] = [
         "ref": "life:W21",
         "title": "Resume, approve",
         "category": "needs-you",
-        "ask": "life-0e | operator: decide approve notes/life-ems-resume.md as-is, or say what to change",
+        "ask": "life-0e | operator: decide approve notes/life-ems-resume.md as-is, "
+        "or say what to change",
         "waiting": ["life:W10", "resumes:W1"],
         "same_ask": ["resumes:W2"],
         "last_activity": "2026-09-28T13:02:06Z",
@@ -226,7 +227,8 @@ def test_apply_reruns_while_the_helper_defers_a_parent_then_converges(
     helper = tmp_path / "helper"
     # Defers on the first run, succeeds on the second: the count of past runs is the state.
     helper.write_text(
-        f"#!{sys.executable}\nimport sys, pathlib\nsys.stdin.read()\nr = pathlib.Path({str(runs)!r})\n"
+        f"#!{sys.executable}\nimport sys, pathlib\nsys.stdin.read()\n"
+        f"r = pathlib.Path({str(runs)!r})\n"
         "n = int(r.read_text()) if r.exists() else 0\nr.write_text(str(n + 1))\n"
         "print('DEFER-PARENT life:W9' if n == 0 else 'APPLIED (0 failed)')\n"
     )

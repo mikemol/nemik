@@ -64,7 +64,8 @@ OVERLAPS = """() => {
   const hit = (a, b) => a.x1 < b.x2 && b.x1 < a.x2 && a.y1 < b.y2 && b.y1 < a.y2;
   const out = [];
   ns.forEach(n => {
-    const label = n.boundingBox({ includeNodes: false, includeLabels: true, includeOverlays: false });
+    const label = n.boundingBox({
+      includeNodes: false, includeLabels: true, includeOverlays: false });
     ns.forEach(m => {
       if (m !== n && hit(label, m.boundingBox({ includeLabels: false, includeOverlays: false })))
         out.push(n.data("label") + " under " + m.data("label"));
