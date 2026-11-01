@@ -12,6 +12,7 @@ from pathlib import Path
 import pytest
 from installed import script
 
+from nemik.metrics import judged_cards
 from nemik.residue import by_card
 
 OPA = os.environ.get("NEMIK_OPA", "opa")
@@ -41,7 +42,7 @@ def test_every_judged_card_with_a_gap_is_keyed_by_its_ref(
 ) -> None:
     """Every judged card with a gap is keyed by its ref."""
     monkeypatch.setenv("OPA_BIN", str(Path(shutil.which(OPA) or OPA).resolve()))
-    gaps = by_card(_fleet(tmp_path))
+    gaps = by_card(judged_cards(_fleet(tmp_path)))
     assert set(gaps) == {"alpha:W1", "alpha:W2"}
     assert all(entry.get("gate") for entries in gaps.values() for entry in entries)
 
@@ -54,4 +55,4 @@ def test_an_absent_opa_raises_rather_than_reporting_no_gaps(
 
     monkeypatch.setenv("OPA_BIN", str(tmp_path / "no-such-opa"))
     with pytest.raises(OpaUnavailableError):
-        by_card(_fleet(tmp_path))
+        by_card(judged_cards(_fleet(tmp_path)))

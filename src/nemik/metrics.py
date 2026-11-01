@@ -79,10 +79,45 @@ from nemik.check import (
 )
 from nemik.rank import TIERS, load_weights, rank
 from nemik.realize import verdicts
+from nemik.residue import by_card
 from nemik.runlogs import unmigrated_at_source
 from nemik.stackable import stackable_count
 from nemik.wake import read_liveness, roster
 from nemik.workrows import open_leaf_stamps, tick_kinds, working_rows
+
+
+def judged_cards(root: Path) -> list[dict[str, object]]:
+    """Judge every live waypoint of every workstream under `root` with the pinned policy.
+
+    Args:
+        root: The fleet root.
+
+    Returns:
+        One verdict per judged card, each {ref, level, reference_arm, residue}. An opa that is
+        absent raises (`nemik.realize.verdicts`), so a card that was not judged never reads as
+        one with no gaps.
+
+    """
+    now = stamp(datetime.now(UTC))
+    return [
+        dict(verdict)
+        for repo, path in workstream_files(root, QUEUE)
+        for verdict in verdicts(repo, path, root, now)
+    ]
+
+
+def residue_gaps(root: Path) -> dict[str, list[dict[str, object]]]:
+    """Collect every recorded gap in the fleet, by card (nemik:W251).
+
+    Args:
+        root: The fleet root.
+
+    Returns:
+        `repo:W<n>` to its residue entries, for every judged card that has any; an opa that is
+        absent raises.
+
+    """
+    return by_card(judged_cards(root))
 
 
 def ready_stale_lines(root: Path, now: datetime) -> list[str]:

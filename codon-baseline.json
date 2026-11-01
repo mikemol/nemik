@@ -167,10 +167,6 @@
   "as_written": "no module named '__future__'",
   "stripped": "cannot import name 'TYPE_CHECKING' from 'typing'"
  },
- "residue": {
-  "as_written": "no module named '__future__'",
-  "stripped": "cannot import name 'UTC' from 'datetime'"
- },
  "runlogs": {
   "as_written": "no module named 'rdflib'",
   "stripped": "no module named 'rdflib'"

@@ -929,12 +929,12 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         # nemik:W240: the old downstream weight beside the flow model's salience (exact; shown
         # rounded), and every pair the two order differently. The model replaces the old order
         # only after this audit agrees (W241).
-        from nemik.residue import by_card
+        from nemik.metrics import residue_gaps
         from nemik.salience import audit, load_gate_weights, load_wait_weight, show
 
         # nemik:W251: --residue adds each recorded gap (the policy's residue) as demand at its card,
         # weighted by gate from rank-weights.toml [residue] (W253); off by default.
-        gaps = by_card(args.root) if args.residue else None
+        gaps = residue_gaps(args.root) if args.residue else None
         # nemik:W712: the time a blocked card has waited adds demand at what it waits on, at the
         # per_tick measured in docs/wait-weight.md
         result = audit(

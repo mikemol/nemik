@@ -42,6 +42,7 @@ def _imports_nemik(text: str) -> set[str]:
 
 
 def single_writer_boundary() -> None:
+    """Only adapter.py parses the state file, through mtools' store.load."""
     # adapter.py is the ONE module that parses the state file (through mtools' store.load); no
     # other module re-implements that parse.
     mods = _modules()
@@ -52,6 +53,7 @@ def single_writer_boundary() -> None:
 
 
 def exit_code_is_the_verdict() -> None:
+    """nemik-check exits 1 exactly when a Violation is found, 0 otherwise."""
     text = _src("check.py")
     assert "sys.exit(1 if failed else 0)" in text, (
         "nemik-check's exit code is no longer 1-iff-Violation"
@@ -59,6 +61,7 @@ def exit_code_is_the_verdict() -> None:
 
 
 def provenance_lines_are_stable() -> None:
+    """Keep the provenance line prefixes of nemik-check where they are."""
     text = _src("check.py")
     assert 'f"provenance: nemik {sha' in text, "the nemik provenance line prefix moved"
     assert 'f"provenance: queue {repo}' in text, (
@@ -67,6 +70,7 @@ def provenance_lines_are_stable() -> None:
 
 
 def unclaimed_is_a_literal_other_repos_grep() -> None:
+    """Keep the UNCLAIMED literal that other repos' tick loops grep for."""
     text = _src("blocks_cli.py")
     assert '"UNCLAIMED"' in text, (
         "the UNCLAIMED literal other repos' tick loops grep for is gone"
@@ -74,6 +78,7 @@ def unclaimed_is_a_literal_other_repos_grep() -> None:
 
 
 def symbol_pattern_is_enforced() -> None:
+    """shapes.ttl still enforces the W<n> symbol pattern."""
     shapes = (SRC / "data" / "shapes.ttl").read_text()
     assert 'sh:pattern "^W[0-9]+$"' in shapes, (
         "the W<n> symbol pattern shape changed or was removed"
@@ -81,6 +86,7 @@ def symbol_pattern_is_enforced() -> None:
 
 
 def hermetic_vendoring() -> None:
+    """pyproject.toml pins mikemol-pathsforward to a local vendored path."""
     pyproject = (ROOT / "pyproject.toml").read_text()
     m = re.search(r"mikemol-pathsforward\s*=\s*\{\s*path\s*=", pyproject)
     assert m, (
@@ -89,6 +95,7 @@ def hermetic_vendoring() -> None:
 
 
 def cross_repo_citation_form() -> None:
+    """Citations resolve to urn:nemik:<repo>/W<n>, foreign ones to their own repo."""
     from nemik.adapter import reference_uri
 
     got = str(reference_uri("alpha", "beta:W3"))
@@ -101,6 +108,7 @@ def cross_repo_citation_form() -> None:
 
 
 def oslc_cm_state_vocabulary() -> None:
+    """oslc_cm:state holds nemik's five-value vocabulary, set by queue_graph()."""
     # oslc_cm:state is the OSLC CM property; its five values are nemik's own vocabulary (mtools'
     # status strings have no OSLC CM state URIs of their own to map onto).
     from nemik.adapter import NEMIK, OSLC_CM, STATE
@@ -119,12 +127,14 @@ def oslc_cm_state_vocabulary() -> None:
 
 
 def prov_activity_shape() -> None:
+    """ledger_graph() models each tick as a PROV Activity (started, used)."""
     text = _src("adapter.py")
     for term in ("PROV.Activity", "PROV.startedAtTime", "PROV.used"):
         assert term in text, f"ledger_graph() dropped {term}"
 
 
 def prometheus_label_format() -> None:
+    """metrics.label renders labels as {repo="alpha",state="ready"}."""
     from nemik.metrics import label
 
     got = label(repo="alpha", state="ready")
@@ -134,6 +144,7 @@ def prometheus_label_format() -> None:
 
 
 def shacl_is_the_one_validator() -> None:
+    """Only shaclinc.py imports pyshacl; check.py calls it."""
     mods = _modules()
     users = [
         name
@@ -148,18 +159,21 @@ def shacl_is_the_one_validator() -> None:
 
 
 def adapter_is_the_foundation_layer() -> None:
+    """adapter.py imports no other nemik module."""
     assert not _imports_nemik(_src("adapter.py")), (
         "adapter.py now depends on another nemik module"
     )
 
 
 def adoption_has_no_internal_coupling() -> None:
+    """adoption.py imports no other nemik module."""
     assert not _imports_nemik(_src("adoption.py")), (
         "adoption.py picked up a dependency on another nemik module"
     )
 
 
 def hub_modules_depend_on_everything_below() -> None:
+    """Hold metrics and serve to exactly their declared set of nemik modules."""
     mods = _modules()
     lower = {"adapter", "blocks", "wake", "check"}
     # nemik:W232: nemik-metrics also reads the realizability verdicts, through realize.py, which
@@ -198,10 +212,13 @@ def hub_modules_depend_on_everything_below() -> None:
     # nemik:W1179: and reads each repo's burn-down tier from rank.TIERS, since tiers.py no longer
     # reads the file itself (rank.load_tiers does, so tiers compiles on Codon); rank rests on
     # adapter and the lower stack.
+    # nemik:W1335: and gathers the fleet's recorded gaps for nemik-rank --flow --residue, through
+    # residue.by_card (a pure function of the judged verdicts, so it compiles under Codon).
     # nemik:W1323: and counts each repo's stackable ready cards for the nemik_stackable gauge,
     # through stackable.stackable_count (the function nemik-stackable's report uses).
     expected = {
-        "metrics": lower | {"realize", "runlogs", "workrows", "rank", "stackable"},
+        "metrics": lower
+        | {"realize", "residue", "runlogs", "workrows", "rank", "stackable"},
         "serve": lower
         | {
             "outbox",
@@ -236,6 +253,7 @@ def hub_modules_depend_on_everything_below() -> None:
 
 
 def import_graph_is_acyclic() -> None:
+    """No nemik module reaches itself through the import graph."""
     mods = _modules()
     graph = {name: _imports_nemik(text) for name, text in mods.items()}
 
@@ -249,6 +267,7 @@ def import_graph_is_acyclic() -> None:
 
 
 def rdf_is_not_centralized_behind_adapter() -> None:
+    """Two or more modules besides adapter.py import rdflib: the declared gap."""
     # The honest modularity gap: rdflib is a shared foundation library every module reaches for
     # directly, not a dependency adapter.py alone encapsulates.
     mods = _modules()
@@ -264,6 +283,7 @@ def rdf_is_not_centralized_behind_adapter() -> None:
 
 
 def no_versioned_schema() -> None:
+    """shapes.ttl carries no version marker: no version is negotiated."""
     # The claim is an absence: no version negotiation between shapes.ttl and its consumers.
     # Falsifiable both ways -- this fails the moment someone adds one, which is the point.
     # nemik:W465: staging one shape at sh:Info is nemik's own per-shape choice, not a version a
@@ -276,6 +296,7 @@ def no_versioned_schema() -> None:
 
 
 def nemik_never_writes_a_queue() -> None:
+    """No nemik module calls the writer's store.save, write_atomic or ledger.write."""
     # mikemol.pathsforward.store exposes save()/write_atomic() alongside load(); nemik's own
     # source never calls either, so this package is read-only with respect to the fleet's state.
     # Word-bounded: nemik.cachestore.save() (W518) writes the build's own caches, never a queue.
@@ -288,6 +309,7 @@ def nemik_never_writes_a_queue() -> None:
 
 
 def check_py_bypasses_the_adapter_boundary() -> None:
+    """check.py imports UnreadableStateError directly; adapter.py does not re-export."""
     # The honest exception to single_writer_boundary()'s isolation claim: check.py imports an
     # mtools exception TYPE directly, rather than through a re-export adapter.py provides.
     text = _src("check.py")
@@ -323,6 +345,15 @@ CLAIMS = {
 
 
 def main(argv: list[str]) -> int:
+    """Run one claim check by key.
+
+    Args:
+        argv: The command line after the program name: exactly one claim key.
+
+    Returns:
+        0 when the claim holds, 1 when it fails, 2 for a missing or unknown key.
+
+    """
     if len(argv) != 1 or argv[0] not in CLAIMS:
         print(f"usage: claims.py <{'|'.join(CLAIMS)}>", file=sys.stderr)
         return 2
