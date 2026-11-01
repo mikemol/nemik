@@ -51,8 +51,7 @@
   "type-arg": 17
  },
  "src/nemik/salience.py": {
-  "misc": 20,
-  "type-arg": 2
+  "misc": 11
  },
  "src/nemik/serve.py": {
   "explicit-any": 5,

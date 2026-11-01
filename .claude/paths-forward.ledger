@@ -3869,3 +3869,10 @@
 2026-11-01T22:19:10Z  status W1413 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T22:19:11Z  status W1408 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T22:19:27Z  status W1415 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T22:31:50Z  interrupt W1416 minted    -         "salience.py types its memo key as a tuple of objects instead of a bare tuple, so mypy falls by eleven"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
+2026-11-01T22:38:48Z  tick  W1416 advanced  sweep     "stack 808 landed cac87f08 and 878ab5c6 22:18:26Z (W1413, W1408 policy done); stack 809 (W1415 withheld.py, -66) gating since 22:19:31Z; stack 810 staged (W1416 salience memo key, -11, K probed first); new withheld.load run over the real list: 30 items, 0 refused (R123) [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T22:41:47Z  interrupt W1417 minted    -         "Answer nemik: luthen-observability:W1890 is done - the pace unit runs again, recorded on W1288, lift any wait that named it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-11-01-nemik-edge-luthen-observability-W1890-enables-W1288.md
+2026-11-01T22:41:49Z  interrupt W1418 minted    -         "Answer the three mtools letters that say W2088 and W2099 are done: read W1246 and W1229, lift the waits they name or say why not"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-10-30-nemik-edge-mtools-W2088-blocked_on-W1246.md
+2026-11-01T22:42:39Z  status W1415 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T22:42:40Z  status W1417 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T22:42:55Z  status W1416 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

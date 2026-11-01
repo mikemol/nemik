@@ -40,7 +40,7 @@ DECIMALS = 4
 # edge widths twice, the operator-ask weights), each a full flow solve over the same graph: 58
 # solves, 245 of 268 profiled seconds. Inside `memo_audits()` an identical audit is answered from
 # this table; outside it nothing is cached, so a CLI run computes exactly as before.
-_MEMO: dict[tuple, Audit] | None = None
+_MEMO: dict[tuple[object, ...], Audit] | None = None
 
 
 @contextmanager
@@ -189,7 +189,7 @@ def audit(
     weights = weights or load_weights()
     # W403: residue and gate weights are per-call inputs, not part of the key, so those audits
     # bypass it.
-    key: tuple | None = None
+    key: tuple[object, ...] | None = None
     if _MEMO is not None and residue is None and gate_weights is None:
         key = (
             id(g),
