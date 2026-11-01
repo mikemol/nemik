@@ -103,9 +103,7 @@ def test_git_ref_witness(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Non
     assert witness('input.git_ref["../r@main"].exists')[0] == "undefined"
 
 
-def test_runner_applies_only_holding_witnesses(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
-) -> None:
+def test_runner_applies_only_holding_witnesses(tmp_path: Path) -> None:
     """Runner applies only holding witnesses."""
     import json
 
@@ -218,9 +216,7 @@ def test_unset_endpoint_is_undefined(monkeypatch: pytest.MonkeyPatch) -> None:
     assert witness('input.promql["up"].empty')[0] == "undefined"
 
 
-def test_apply_writes_letters_to_waiting_repos(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
-) -> None:
+def test_apply_writes_letters_to_waiting_repos(tmp_path: Path) -> None:
     """Apply writes letters to waiting repos."""
     import json
 
@@ -291,9 +287,7 @@ def test_apply_writes_letters_to_waiting_repos(
     assert states["W2"] == "ready"
 
 
-def test_the_skills_weather_examples_are_valid_witnesses(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
+def test_the_skills_weather_examples_are_valid_witnesses() -> None:
     """nemik:W173: the witness examples SKILL.md teaches evaluate against the observers' shapes.
 
     A first draft compared input.alert[...] to a string, missing `.state`.

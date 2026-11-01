@@ -134,9 +134,9 @@ def test_events_become_nodes_and_cal_refs_wait_on_the_next_occurrence() -> None:
     ]
 
 
+@pytest.mark.usefixtures("ics")
 def test_operator_lists_the_next_days_with_waiters(
     tmp_path: Path,
-    ics: str,
     capsys: pytest.CaptureFixture[str],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -184,8 +184,9 @@ def test_the_reader_is_found_in_nemiks_own_venv_not_on_path(
         )
 
 
+@pytest.mark.usefixtures("ics")
 def test_a_refusing_helper_is_reported_not_a_traceback(
-    tmp_path: Path, ics: str, capsys: pytest.CaptureFixture[str]
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
     """nemik:W193: the Akonadi helper refuses when Akonadi is down; nemik-days says so, exit 2."""
     h = tmp_path / "helper"
@@ -296,9 +297,9 @@ def test_include_keeps_case_sensitive_substring_matches_and_counts_both_ways(
     assert none == {"chores": (0, 4)}
 
 
+@pytest.mark.usefixtures("ics")
 def test_a_filter_that_matches_nothing_is_reported_not_read_as_a_free_day(
     tmp_path: Path,
-    ics: str,
     capsys: pytest.CaptureFixture[str],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -367,9 +368,9 @@ def test_dedupe_merges_across_calendars_never_within_one() -> None:
     assert "also" not in rows[0]  # the input is not mutated
 
 
+@pytest.mark.usefixtures("ics")
 def test_days_dedupes_across_calendars_and_no_dedupe_shows_all(
     tmp_path: Path,
-    ics: str,
     capsys: pytest.CaptureFixture[str],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:

@@ -300,7 +300,6 @@
   "PLR2004": 2
  },
  "tests/test_calendars.py": {
-  "ARG001": 4,
   "PLC2701": 1,
   "PLR2004": 2,
   "S404": 1,
@@ -423,7 +422,6 @@
   "PLC2701": 2
  },
  "tests/test_layout.py": {
-  "ARG001": 1,
   "PLC0415": 9,
   "PLR2004": 13,
   "PT018": 19,
@@ -603,7 +601,6 @@
   "ARG001": 2
  },
  "tests/test_witnesses.py": {
-  "ARG001": 5,
   "ARG005": 1,
   "PLC0415": 12,
   "PT018": 5,

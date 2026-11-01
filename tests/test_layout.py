@@ -235,7 +235,7 @@ def test_repo_toggles_and_salience_order(server: str, tmp_path: Path) -> None:
 
 
 def test_the_history_panel_shows_the_weekly_roll_up_when_there_is_one(
-    server: str, tmp_path: Path
+    server: str,
 ) -> None:
     """The history panel shows the weekly roll-up only when history.json exists.
 

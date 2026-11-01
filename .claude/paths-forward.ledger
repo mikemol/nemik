@@ -3665,3 +3665,6 @@
 2026-11-01T07:47:37Z  interrupt W1351 minted    -         "Four single-site findings clear: three Yields sections for generator docstrings (DOC402) and one empty-string comparison (PLC1901), so ruff falls 893 to 889"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1288
 2026-11-01T07:48:11Z  status W1351 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T07:55:46Z  status W1350 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T08:04:44Z  tick  W1352 minted    -         "Unused fixture parameters leave nine test signatures (ARG001), so ruff falls by up to nine"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1288
+2026-11-01T08:06:32Z  status W1352 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T08:23:34Z  status W1351 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
