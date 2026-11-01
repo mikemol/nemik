@@ -3709,3 +3709,9 @@
 2026-11-01T10:31:34Z  status W1363 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T10:32:32Z  tick  W1364 minted    -         "Three test files annotate the Any their tomllib, json and re calls return, so mypy falls by twenty-nine"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
 2026-11-01T10:33:26Z  status W1364 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T10:34:09Z  tick  W1364 advanced  sweep     "W1362 landed c3fcc8b4 (ruff 839 to 794) and W1363 290be156 (794 to 782); pace 10:25:26Z has ruff ok, mypy and codon behind; stack 772 for W1364 (three typed test files, mypy 1634 to 1605) submitted 10:34:02Z [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87); W1364 is gating as stack 772 (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T10:38:34Z  interrupt W1365 minted    -         "tests/test_certify.py reads its certify verdict lines through a typed helper and a Verdict TypedDict, so mypy falls by seventeen"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
+2026-11-01T10:38:36Z  interrupt W1366 minted    -         "Forty-one function-local imports in rank.py and serve.py move to module scope, cycle sites left alone (PLC0415), so ruff falls by forty-one"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1288
+2026-11-01T10:42:58Z  status W1365 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T10:43:01Z  status W1366 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T10:44:09Z  status W1364 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

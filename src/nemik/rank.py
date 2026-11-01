@@ -9,19 +9,29 @@ downstream waypoint weighted by `data/rank-weights.toml`.
 
 from __future__ import annotations
 
+import argparse
+import json
 import re
+import subprocess
+import sys
+import tempfile
 import tomllib
 from dataclasses import dataclass
+from fractions import Fraction
 from importlib.resources import files
+from pathlib import Path
 from typing import TYPE_CHECKING
 
+from mikemol.frontier.walk import frontier as walk
 from rdflib import Graph, Literal, URIRef
-from rdflib.namespace import DCTERMS
+from rdflib.namespace import DCTERMS, PROV
 
 from nemik import tiers
 from nemik.adapter import BASE, NEMIK, OSLC_CM, workstream_uri
+from nemik.index import index
 from nemik.pacecli import behind_files, pace_exit, pace_process
 from nemik.roundcli import NO_LANDINGS, show_round, write_round_file
+from nemik.score import band, load_bands, load_guarantees, tagged_band
 from nemik.stackable import manifest
 
 if TYPE_CHECKING:
@@ -161,7 +171,6 @@ def compose(rows: list[dict], comp: Composition) -> list[dict]:
         The rows in the declared order, each with its `key` set.
 
     """
-    from fractions import Fraction
 
     def go(
         items: list[dict],
@@ -212,10 +221,6 @@ def objectives(
         and salience values.
 
     """
-    from rdflib.namespace import PROV
-
-    from nemik.score import band, tagged_band
-
     cause = str(g.value(n, PROV.wasInformedBy) or "").strip().lower()
     b, why = band(str(g.value(n, NEMIK.vector) or "") or None, bands)
     touches = {str(t) for t in g.objects(n, NEMIK.touches)}
@@ -244,8 +249,6 @@ def successors(g: Graph, node: Node) -> set[Node]:
         The waypoints it enables and those that wait for it.
 
     """
-    from nemik.index import index
-
     ix = index(g)
     if ix is not None:
         return ix.successors(node)
@@ -283,7 +286,6 @@ def downstream_weight(g: Graph, node: Node, weights: Weights) -> int:
 
 
 def _open(g: Graph, n: Node) -> bool:
-    from nemik.index import index
 
     ix = index(g)
     if ix is not None:
@@ -309,8 +311,6 @@ def frontier(g: Graph, goal: Node) -> tuple[set[Node], set[str]]:
         The leaves dG, and ddG: what they wait on from outside the repo.
 
     """
-    from mikemol.frontier.walk import frontier as walk
-
     repo = _repo(goal)
     seen, stack, outside = {goal}, [goal], set()
     nodes, edges = {goal}, set()
@@ -471,7 +471,6 @@ def _rows(
         and not is_umbrella(g, n)
     ]
     from nemik.salience import salience_of
-    from nemik.score import load_bands
 
     bands = load_bands().watching(frozenset(behind_files(repo)))
     flow = (comp or load_composition()).weight_model == "flow"
@@ -670,10 +669,6 @@ def fruit(
 
 def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     """nemik-rank REPO: REPO's ready waypoints ordered by cross-repo downstream weight."""
-    import argparse
-    import json
-    from pathlib import Path
-
     from nemik.check import default_root, survey
 
     ap = argparse.ArgumentParser(
@@ -794,8 +789,6 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     if (
         args.band
     ):  # nemik:W152 (el-openglo:W176): check a vector's band before the item closes
-        from nemik.score import band, load_bands
-
         b, why = band(args.band, load_bands())
         print(f"{b}  ({why})")
         raise SystemExit(1 if why.startswith("invalid") else 0)
@@ -832,8 +825,6 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
             )
         return
     if args.item:
-        from nemik.score import band, load_bands
-
         repo_, _, sym = args.item.partition(":")
         n = URIRef(f"{BASE}{repo_}/{sym}")
         if (n, NEMIK.symbol, None) not in g:
@@ -867,7 +858,6 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
             )
             failed = True
         # nemik:W133: the declared guarantees (bands.toml), each naming the rule and the pair.
-        from nemik.score import load_bands, load_guarantees
 
         bands = load_bands()
         guar = load_guarantees(bands=bands)
@@ -994,12 +984,6 @@ def _apply(state: str, rows: list[dict]) -> None:
     It is the one installed beside this interpreter; nemik never writes a queue itself. Exits with
     its status.
     """
-    import json
-    import subprocess
-    import sys
-    import tempfile
-    from pathlib import Path
-
     pf = Path(sys.executable).parent / "mikemol-paths-forward"
     with tempfile.NamedTemporaryFile(
         "w", encoding="utf-8", suffix=".json", delete=False
