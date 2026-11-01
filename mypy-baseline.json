@@ -154,9 +154,6 @@
  "tests/test_history.py": {
   "misc": 2
  },
- "tests/test_importer.py": {
-  "misc": 14
- },
  "tests/test_layout.py": {
   "misc": 266
  },
@@ -197,9 +194,6 @@
  },
  "tests/test_run_row_schema.py": {
   "misc": 5
- },
- "tests/test_satisfied_edges.py": {
-  "misc": 17
  },
  "tests/test_serve_model.py": {
   "misc": 4

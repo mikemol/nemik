@@ -4,8 +4,32 @@
 
 import json
 from pathlib import Path
+from typing import TypedDict
 
 from nemik.serve import Model
+
+
+class _Edge(TypedDict):
+    """One edge of the published graph."""
+
+    source: str
+    target: str
+    kind: str
+    satisfied: bool
+
+
+class _Node(TypedDict):
+    """One node of the published graph."""
+
+    symbol: str
+    open_blockers: int
+
+
+class _Out(TypedDict):
+    """The parts of the published graph this test reads."""
+
+    edges: list[_Edge]
+    nodes: list[_Node]
 
 
 def test_done_children_satisfy_their_edges(tmp_path: Path) -> None:
@@ -34,7 +58,7 @@ def test_done_children_satisfy_their_edges(tmp_path: Path) -> None:
     (d / "paths-forward.json").write_text(json.dumps(payload))
     m = Model(tmp_path)
     m.refresh()
-    out = json.loads(m.payload)
+    out: _Out = json.loads(m.payload)
     edges = {
         (e["source"].rsplit("/", 1)[-1], e["target"].rsplit("/", 1)[-1], e["kind"]): e[
             "satisfied"

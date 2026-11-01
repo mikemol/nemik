@@ -7,11 +7,27 @@ import shlex
 import subprocess
 import sys
 from pathlib import Path
+from typing import TypedDict
 
 from nemik.importer import commands
 from nemik.projection import Link, Task
 
 WRITER = str(Path(sys.executable).parent / "mikemol-paths-forward")
+
+
+class _Card(TypedDict, total=False):
+    """The fields of a queue card this test reads."""
+
+    symbol: str
+    status: str
+    blocked_on: list[str]
+    caused_by: str
+
+
+class _Queue(TypedDict):
+    """The part of a queue file this test reads."""
+
+    waypoints: list[_Card]
 
 
 def _tasks() -> list[Task]:
@@ -55,7 +71,8 @@ def test_the_printed_commands_run_and_rebuild_the_links(tmp_path: Path) -> None:
     cmds = commands(_tasks(), "mspdi", "plan.xml", state, WRITER)
     assert all(shlex.split(shlex.join(c)) == c for c in cmds)  # survives printing
     _run(cmds)
-    cards = {c["symbol"]: c for c in json.loads(state.read_text())["waypoints"]}
+    doc: _Queue = json.loads(state.read_text())
+    cards = {c["symbol"]: c for c in doc["waypoints"]}
     by_source = {c.get("caused_by"): c for c in cards.values()}
     w1, w2, w3, w4 = (by_source[f"mspdi:plan.xml#{u}"] for u in (1, 2, 3, 4))
     assert [w1["symbol"], w2["symbol"], w3["symbol"], w4["symbol"]] == [

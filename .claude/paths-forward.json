@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1368,
+  "counter": 1369,
   "waypoints": [
     {
       "symbol": "W1",
@@ -32810,20 +32810,43 @@
     {
       "symbol": "W1368",
       "title": "tests/test_apischema.py walks schema records through a property-name helper and annotated variables, so mypy falls by eighteen",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-01: G0 2026-11-01T11:30:58Z (date -u in the preceding call), BEFORE the first edit of the real file. Advances W1368 (W1178's class: the mypy paydown). Pace: nemik-rank nemik --pace read at 11:30:02Z (tick stamp), pace of 2026-11-01T11:25:26Z, newest landing 11:18:47Z 'current': mypy behind (fell 103 over 10 landings, owes 190; 1572 left), codon behind, ruff ok (764 left, 69 landings to zero). Actuator: scratchpad/w1368_types.py: _records(node) -> list[dict] becomes _record_names(node) -> list[str] (the property names of every record schema, read into an annotated dict[str, object]), the one caller takes set(_record_names(...)), and the json.loads result at the end is annotated dict[str, str]. K PROBE BEFORE THIS G0: probe copy tests/probe_w1368_test_apischema.py (deleted): mypy 'Success: no issues found' (baseline misc 16 type-arg 2 = 18 to 0), ruff only the 6 S101 its filename adds. N=18, K=18, expected -18: mypy 1572 to 1554, ruff flat at 764. Gate empty since the 11:18:47Z landing (so no baseline wait). | 2026-11-01: Landed 9c1e4774 (COMMITTED line printed it; git log subject matched W1368's) at 2026-11-01T11:34:43Z by TZ=UTC reflog (06:34:43 -0500). Submitted 11:32:08Z: 2 min 35 s wall in the gate (a small stack landing in the shortest observed time; the gate was warm). Measured mypy 1572 to 1554 (-18, equal to the K probe's), ruff flat 764.",
+      "issued_at": "2026-11-01T11:30:56Z",
+      "minted_during": "tick",
+      "caused_by": "W1178",
+      "last_worked": "2026-11-01T11:35:33Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tests/test_apischema.py",
+        "mypy-baseline.json"
+      ],
+      "size_class": "small",
+      "completed": "20261101T113533Z"
+    },
+    {
+      "symbol": "W1369",
+      "title": "tests/test_satisfied_edges.py and tests/test_importer.py read their parsed JSON through TypedDicts, so mypy falls by thirty-one",
       "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-11-01: G0 2026-11-01T11:30:58Z (date -u in the preceding call), BEFORE the first edit of the real file. Advances W1368 (W1178's class: the mypy paydown). Pace: nemik-rank nemik --pace read at 11:30:02Z (tick stamp), pace of 2026-11-01T11:25:26Z, newest landing 11:18:47Z 'current': mypy behind (fell 103 over 10 landings, owes 190; 1572 left), codon behind, ruff ok (764 left, 69 landings to zero). Actuator: scratchpad/w1368_types.py: _records(node) -> list[dict] becomes _record_names(node) -> list[str] (the property names of every record schema, read into an annotated dict[str, object]), the one caller takes set(_record_names(...)), and the json.loads result at the end is annotated dict[str, str]. K PROBE BEFORE THIS G0: probe copy tests/probe_w1368_test_apischema.py (deleted): mypy 'Success: no issues found' (baseline misc 16 type-arg 2 = 18 to 0), ruff only the 6 S101 its filename adds. N=18, K=18, expected -18: mypy 1572 to 1554, ruff flat at 764. Gate empty since the 11:18:47Z landing (so no baseline wait).",
-      "issued_at": "2026-11-01T11:30:56Z",
-      "minted_during": "tick",
+      "evidence": "2026-11-01: G0 2026-11-01T11:36:19Z (date -u in the preceding call), BEFORE the first edit of the real files. Advances W1369 (W1178's class: the mypy paydown). Pace: nemik-rank nemik --pace read at 11:30:02Z, pace of 2026-11-01T11:25:26Z: mypy behind (fell 103 over 10 landings, owes 190), codon behind, ruff ok. Actuator: scratchpad/w1369_types.py: test_satisfied_edges.py gets _Edge, _Node and _Out TypedDicts and 'out: _Out = json.loads(m.payload)'; test_importer.py gets _Card (total=False) and _Queue TypedDicts and 'doc: _Queue = json.loads(...)'. K PROBE BEFORE THIS G0: two probe copies (deleted): mypy 'Success: no issues found' on both (baseline misc 17 + 14 = 31 to 0), ruff only the 12 S101 their filenames add, the originals 0 new. N=31, K=31, expected -31: mypy 1554 (stack 775's value, landed 11:34:43Z) to 1523, ruff flat at 764.",
+      "issued_at": "2026-11-01T11:36:16Z",
+      "minted_during": "interrupt",
       "caused_by": "W1178",
-      "last_worked": "2026-11-01T11:32:03Z",
+      "last_worked": "2026-11-01T11:37:58Z",
       "ticks_blocked": 0,
       "manifest": [
-        "tests/test_apischema.py",
+        "tests/test_satisfied_edges.py",
+        "tests/test_importer.py",
         "mypy-baseline.json"
       ],
       "size_class": "small",
@@ -33030,12 +33053,7 @@
   ],
   "job_id": "481476b5",
   "heartbeat": "2026-10-29T04:11:13Z",
-  "lock": {
-    "holder": "nemik-94",
-    "taken_at": "2026-11-01T11:30:11Z",
-    "pid": 337543,
-    "start": 21144718
-  },
+  "lock": null,
   "predecessor_job_id": "1d7fe6d0",
   "leases": [
     {
@@ -35632,7 +35650,7 @@
     "- A duration quoted in a G1 carries both timestamps it was computed from, their difference and its kind (wall or CPU), or comes from a tool line that prints the elapsed time; never a figure estimated from memory (R7-F14).",
     "- A dated G0 line is written on the card a stack advances BEFORE the first edit of the files that stack carries, and before the stack is submitted; the next G1 pairs three full stamps for each stack: the G0's, the earliest edit's and the submit's. The earliest edit is the stamp of the first Edit, Write, codemod or command tool call that touched the stack's files, read from the session transcript (mikemol-transcriptstruct --grep prints it as \"at\"); a file mtime is the last write and does not count. Remove this rule only when mtools:W2098 has landed with the same comparison (R9-F19, R11-F23, R12-F26).",
     "- A paydown card's G0 states N sites and K, the number of them whose fix was verified derivable BEFORE the G0 (a per-site decision from the tool's own output), candidates not yet verified are written as the range [0, K], and a premise about a tool cites the line of its definition that was read. The expectation is K, and a miss is judged against K, not N. For a batch of mechanical fixes the G0 also names the companion findings a fix can clear on the same line (EM102 clears TRY003, a TYPE_CHECKING move that removes a function-local import clears PLC0415) and the follow-on findings it can leave (I001, F401, ISC004, D202), and states the expected net as a range that counts both. A batch that applies fixes the tool labels unsafe names in its G0 the behaviour change the tool warns of and the check that covers it. An excess or a miss outside the range is attributed per file from the baseline diff in the same round (R9-F20, R10-F21, R13-F28, R14-F30, R15-F31, R16-C1).",
-    "- Before a G1 is sent, --in-gate lists at least one stack, or the G1 says why none could be queued (nothing ready and mechanizable, with the check that shows it), the G1 gives every interval the gate sat empty as two full stamps, their difference and its kind (wall). The interval starts at the landing stamp from `TZ=UTC git reflog show --date=iso main`, read in UTC because the local zone repeats an hour when daylight time ends (nemik:R92 finding 1, file retro-r94.json: 01:43 -0400 and 01:16 -0500 on 2026-11-01), so every interval is two Z stamps (a commit's own date is the gate's begin time, not its landing) and ends at the next submit's stamp, a check that caused the wait is given with its own start and end stamps. The G1 also gives the stamp at which the previous reviewer round returned, and sets the in-gate stack's expected remaining time (from the recent gate wall times) against a review round plus the next stack's build and check time: where the gate would empty first, a second stack on files no queued stack carries is queued before the send, or the G1 says none exists and shows the check. After a reviewer return, the next stack's G0 is written before the first answer to a reviewer item, or the G1 says why an answer was a prerequisite, and the G1 gives the return stamp, that G0's stamp and the first answer's stamp (R11-F24, R12-F27, R14-F29, R16-F32).",
+    "- Before a G1 is sent, --in-gate lists at least one stack, or the G1 says why none could be queued (nothing ready and mechanizable, with the check that shows it), the G1 gives every interval the gate sat empty as two full stamps, their difference and its kind (wall). The interval starts at the landing stamp from `TZ=UTC git reflog show --date=iso main`, read in UTC because the local zone repeats an hour when daylight time ends (nemik:R92 finding 1, file retro-r94.json: 01:43 -0400 and 01:16 -0500 on 2026-11-01), so every interval is two Z stamps (a commit's own date is the gate's begin time, not its landing) and ends at the next submit's stamp, a check that caused the wait is given with its own start and end stamps. The G1 also gives the stamp at which the previous reviewer round returned, and sets the in-gate stack's expected remaining time (from the recent gate wall times) against a review round plus the next stack's build and check time: where the gate would empty first, a second stack on files no queued stack carries is queued before the send, or the G1 says none exists and shows the check. After a reviewer return, the next stack's G0 is written before the first answer to a reviewer item, or the G1 says why an answer was a prerequisite, and the G1 gives the return stamp, that G0's stamp and the first answer's stamp (R11-F24, R12-F27, R14-F29, R16-F32). A turn never ends with a stack in the gate and no staged successor, unless the G1 names why none can be built and shows the check; staged means the real-file edit is made, mikemol-pycheck is read, the guards are run and the stack json is written, waiting only on a shared baseline (nemik:R101 finding 1, file retro-r103.json: the gate sat empty 13 min 21 s from 11:18:47Z to 11:32:08Z after a turn ended with no successor, and 72 min 51 s from 06:16:39Z to 07:29:30.6Z).",
     "- Before a submit, run directly (the venv python, PYTHONPATH=src:tests) the guards a gate refusal has cost this repo: tests/test_architecture.py, test_no_dict_spread.py, test_no_waivers.py, test_namespaces.py, test_nested.py, and the tests of each touched module; a stack that adds an import to metrics.py or serve.py also runs checks/claims.py hub-modules-depend-on-everything-below. A refusal by a guard that was not run is recorded on the card as a miss (nemik:R66 finding 5, file retro-r68.json, W1219).",
     "- Before a stack is chosen, run `nemik-rank nemik --pace` yourself as the tick's first command and quote its stamp: the tick-open hook line prints the pace as of the open and can be a round old (nemik:R95 finding 1, file retro-r97.json, fourth miss: W1353 was chosen ruff-only from the 07:25:26Z hook line while the 08:25:26Z pace already had ruff ok and mypy and codon owed, and the gate refused the submit). The stack's first entry lowers a baseline the newest pace lists as behind; a paydown G0 names that stamp and that baseline, and the K probe (a scratch copy edited and measured before the G0) is run for any mypy paydown so the range is not [K, N] (nemik:R95 finding 2, file retro-r97.json); for a probe of a src file the K probe also runs tests/test_architecture.py and tests/test_namespaces.py on the probe tree before the G0, because checks/claims.py pins the module set of serve.py and metrics.py and the per-file ratchet does not see it (nemik:R100 finding 1, file retro-r102.json: the serve.py hoist passed ruff and mypy as a probe and failed test_architecture as the real file)."
   ],
@@ -40263,7 +40281,22 @@
         }
       ],
       "id": "nemik:R100"
+    },
+    {
+      "card": "W1368",
+      "trigger": "round 103: nemik-94 ninth tick, W1368 (tests/test_apischema.py, mypy 1572 to 1554, stack 775 inflight, key 1793532727748333159); previous landings 87ebced5 (tip of stack 773, W1365 then W1366) 11:06:50Z and 1991598d (W1367) 11:18:47Z",
+      "root": "Verified from source (TZ=UTC reflog): 87ebced5 = 11:06:50Z (06:06:50 -0500), 1991598d = 11:18:47Z; --in-gate lists W1368 inflight; `mikemol-pycheck --ratchet` prints ruff 764/764 and mypy 1554/1554 (-18); `--scan-literal 'nemik:R100 finding 1'` finds standing rule 15 once, so the R102 extension is stored. Intervals as Z pairs: 773 gate 10:44:13Z to 11:06:50Z (22 min 37 s, a src stack), gate empty 11:06:50Z to the 774 submit 11:08:01Z (1 min 11 s), 774 gate 10 min 46 s to 11:18:47Z, gate empty 11:18:47Z to the 775 submit 11:32:08Z (13 min 21 s). The 13 min 21 s is the session's own: it ended the turn after the W1367 landing with no next stack built and the 11:19Z summary said the next tick would start it. That reopens the substance of R72 and R83 on W1288, closed in R96 on three short intervals in a row, because those intervals all had a successor staged during the previous gate; here 774's gate (11:08 to 11:18) was spent handling R102 and ending the turn. No fixpoint is declared. Carried open findings, status on 2026-11-01: R95 first finding on W1288 (cause of the 06:20 to 07:24 outage, due today, still open); R95 second finding on W1349, R95 third, R97 first and R98 findings on W1219, R102 on W1219 (met in text by the stored rule 15 extension; closes on the HEAD-versus-live diff), R94 on W1348, R93 on W1347, R92 on W1346 and W1288, R91 on W1345, R72 on W846, R84 on W695, R100 on W910 (still unbuilt), R101 on W1288 (PLR2004 125 unsampled) (all 2026-11-02), R85 on W613 (read-back). Codon owed with no stack; hooks-venv rebuild and census (W1325) not done.",
+      "findings": [
+        {
+          "finding": "The empty gate came back (13 min 21 s, 11:18:47Z to 11:32:08Z) after three short ones, and its cause is a turn that ended with the gate occupied and no successor staged. Short intervals have all had a stack built and staged during the previous gate (W1357 behind 764, W1362 behind 769, W1367 behind 773); where the turn ended instead (06:20:10Z, 11:19Z) the interval ran 72 min 51 s and 13 min 21 s. Make it an invariant: never end a turn with a stack in the gate and no staged successor, unless the G1 names why none can be built (the check shown, as standing 13 says); stage means the real-file edit made, pycheck read, guards run and the stack json written, waiting only for the shared baseline. Reopen R72 and R83 on W1288 on this evidence, and add the invariant as a sentence in standing 13.",
+          "finding_card": "W1288",
+          "finding_owner": "nemik session",
+          "finding_witness": "Three consecutive landings each followed by a submit within 5 minutes (two-stamp pairs from TZ=UTC git reflog), with a staged successor stated in each G1 at the time its predecessor was in the gate.",
+          "due": "2026-11-02"
+        }
+      ],
+      "id": "nemik:R101"
     }
   ],
-  "retro_counter": 100
+  "retro_counter": 101
 }
