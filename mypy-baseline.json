@@ -61,9 +61,6 @@
   "misc": 20,
   "type-arg": 2
  },
- "src/nemik/score.py": {
-  "misc": 2
- },
  "src/nemik/serve.py": {
   "explicit-any": 5,
   "misc": 259,
@@ -100,9 +97,6 @@
  },
  "src/nemik/witwait.py": {
   "misc": 1
- },
- "src/nemik/work.py": {
-  "misc": 2
  },
  "tests/fixtures/make_fleet.py": {
   "misc": 30

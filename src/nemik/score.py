@@ -113,7 +113,8 @@ def load_bands(text: str | None = None) -> Bands:
     """
     if text is None:
         text = files("nemik.data").joinpath("bands.toml").read_text()
-    d = _table(tomllib.loads(text))
+    parsed: object = tomllib.loads(text)
+    d = _table(parsed)
     order = tuple(_strings(d["order"]))
     listed = _table(d.get("band"))
     rules = {b: tuple(_rule(r) for r in _tables(listed.get(b))) for b in order}
@@ -254,7 +255,8 @@ def load_guarantees(text: str | None = None, bands: Bands | None = None) -> Guar
     if text is None:
         text = files("nemik.data").joinpath("bands.toml").read_text()
     bands = bands or load_bands(text)
-    d = _table(tomllib.loads(text))
+    parsed: object = tomllib.loads(text)
+    d = _table(parsed)
     floor = _text(_table(d.get("guarantee")).get("floor"))
     if floor is not None and floor not in bands.order:
         msg = f"bands.toml: guarantee.floor = {floor!r} is not in order"

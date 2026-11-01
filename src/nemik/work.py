@@ -27,7 +27,8 @@ def working(state: Path) -> list[str]:
         The symbols of the working cards.
 
     """
-    data = table(json.loads(state.read_text(encoding="utf-8")))
+    raw: object = json.loads(state.read_text(encoding="utf-8"))
+    data = table(raw)
     return [
         str(w["symbol"])
         for w in tables(data.get("waypoints"))
@@ -46,7 +47,8 @@ def blockers(state: Path, symbol: str) -> tuple[list[str], list[str]]:
         The open entries, and the landed ones.
 
     """
-    data = table(json.loads(state.read_text(encoding="utf-8")))
+    raw: object = json.loads(state.read_text(encoding="utf-8"))
+    data = table(raw)
     cards = {str(w["symbol"]): w for w in tables(data.get("waypoints"))}
     dropped = {str(r["symbol"]) for r in tables(data.get("residue"))}
     entries = strings(cards.get(symbol, {}).get("blocked_on"))
