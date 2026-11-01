@@ -186,17 +186,11 @@
  "tests/test_rank_flow.py": {
   "misc": 6
  },
- "tests/test_ruler_table.py": {
-  "misc": 13
- },
  "tests/test_run_row_schema.py": {
   "misc": 5
  },
  "tests/test_serve_model.py": {
   "misc": 4
- },
- "tests/test_shaclcache.py": {
-  "misc": 17
  },
  "tests/test_shaclcache_threads.py": {
   "attr-defined": 6,

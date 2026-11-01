@@ -3730,3 +3730,8 @@
 2026-11-01T11:39:22Z  interrupt W1370 minted    -         "tests/test_read_api.py types the OpenAPI document and the example client it loads, so mypy falls by seventeen"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
 2026-11-01T11:41:09Z  status W1370 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T11:48:31Z  status W1369 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T11:49:16Z  interrupt W1371 minted    -         "tests/test_shaclcache.py reads and replaces rdflib's processor slots through typed helpers, so mypy falls by seventeen"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
+2026-11-01T11:50:30Z  status W1371 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T12:01:04Z  tick  W1372 minted    -         "tests/test_ruler_table.py reads the served graph through a local TypedDict and a cast, so mypy falls by thirteen"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
+2026-11-01T12:03:37Z  status W1370 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T12:03:40Z  status W1372 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

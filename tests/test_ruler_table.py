@@ -3,7 +3,7 @@
 """nemik:W418: graph.json ships the ruler patterns from mtools' generator, enough for every line."""
 
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, TypedDict, cast
 
 from mikemol.rulerseq import morse_motif
 
@@ -11,6 +11,19 @@ from nemik.serve import Model, ruler_table
 
 if TYPE_CHECKING:
     from nemik.blocks import AskRow
+
+
+class _Ruler(TypedDict):
+    """The ruler part of the served graph."""
+
+    f: list[str]
+
+
+class _Doc(TypedDict):
+    """The parts of the served graph this test reads."""
+
+    edges: list[dict[str, str]]
+    ruler: _Ruler
 
 
 def test_the_table_is_mtools_generator_and_decodes_by_length() -> None:
@@ -32,7 +45,7 @@ def test_the_fixture_graph_covers_every_line_it_draws() -> None:
     """The fixture graph covers every line it draws."""
     model = Model(Path(__file__).parent / "fixtures" / "fleet")
     model.refresh()
-    doc = model.doc
+    doc = cast("_Doc", model.doc)
     waits = [e for e in doc["edges"] if e["kind"] == "waits"]
     widest = max(
         (
