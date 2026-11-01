@@ -261,7 +261,6 @@
   "S603": 1
  },
  "tests/test_alarm.py": {
-  "PLC0415": 4,
   "PLR2004": 4
  },
  "tests/test_alarm_delivery.py": {
@@ -291,9 +290,6 @@
   "PT018": 1,
   "SLF001": 3,
   "syntax": 1
- },
- "tests/test_calendar_boundary.py": {
-  "PLC0415": 2
  },
  "tests/test_calendar_write.py": {
   "PLR2004": 2
@@ -334,9 +330,6 @@
  "tests/test_critical_cards.py": {
   "PLR2004": 4
  },
- "tests/test_deadlock_check.py": {
-  "PLC0415": 2
- },
  "tests/test_deterministic.py": {
   "S404": 1,
   "S603": 1,
@@ -355,7 +348,6 @@
   "S311": 1
  },
  "tests/test_frontier.py": {
-  "PLC0415": 3,
   "PT018": 3
  },
  "tests/test_frontier_walker.py": {
@@ -540,7 +532,6 @@
   "PLR0917": 1
  },
  "tests/test_serve_model.py": {
-  "PLC0415": 1,
   "PLR2004": 3
  },
  "tests/test_shaclcache_threads.py": {
@@ -550,7 +541,6 @@
   "PLC2701": 1
  },
  "tests/test_starved.py": {
-  "PLC0415": 1,
   "PLR2004": 3
  },
  "tests/test_static.py": {

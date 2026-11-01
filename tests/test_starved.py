@@ -9,6 +9,8 @@ import tempfile
 from datetime import UTC, datetime
 from pathlib import Path
 
+from rdflib import Graph
+
 from nemik.check import survey
 from nemik.starved import days_limit, starved
 
@@ -47,7 +49,6 @@ def test_an_old_card_under_newer_ones_is_starved() -> None:
             ],
         }
         queue.write_text(json.dumps(payload))
-        from rdflib import Graph
 
         g = Graph()
         for _, qg, _ in survey(Path(tmp)):

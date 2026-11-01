@@ -11,9 +11,11 @@ a queue blocked on cal:<label>/<uid> yields a served document with no event in i
 """
 
 import ast
+import json
 from pathlib import Path
 
 import nemik
+from nemik.serve import Model
 
 SRC = Path(nemik.__file__).parent
 SERVED = ["serve", "metrics", "check", "manifest", "withheld", "tools", "export"]
@@ -53,10 +55,6 @@ def test_no_served_module_reaches_the_calendar_reader() -> None:
 
 def test_a_cal_blocker_serves_no_event(tmp_path: Path) -> None:
     """A cal blocker serves no event."""
-    import json
-
-    from nemik.serve import Model
-
     repo = tmp_path / "life" / ".claude"
     repo.mkdir(parents=True)
     payload: dict[str, object] = {

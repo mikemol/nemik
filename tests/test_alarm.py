@@ -2,11 +2,13 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W129: a waypoint's alarm resolves to the instant it fires; VTODOs carry it as a VALARM."""
 
+import json
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-from nemik.alarm import duration, fires_at
+from nemik.adapter import NEMIK, queue_graph, waypoint_uri
+from nemik.alarm import duration, fires_at, fires_between
 from nemik.vtodo import vtodos
 
 if TYPE_CHECKING:
@@ -80,8 +82,6 @@ def test_vtodo_carries_recurrence_as_stored() -> None:
 
 def test_recurring_alarms_fire_per_occurrence_skipping_exdates_and_completed() -> None:
     """nemik:W145: weekly Mondays 6 PM Detroit, 15 min before; 10-12 excluded, 10-19 completed."""
-    from nemik.alarm import fires_between
-
     got = fires_between(
         "-PT15M",
         datetime(2026, 10, 1, tzinfo=UTC),
@@ -104,8 +104,6 @@ def test_recurring_alarms_fire_per_occurrence_skipping_exdates_and_completed() -
 
 def test_one_shot_and_absolute_alarms_fire_once_inside_the_window() -> None:
     """One shot and absolute alarms fire once inside the window."""
-    from nemik.alarm import fires_between
-
     w = (datetime(2026, 10, 1, tzinfo=UTC), datetime(2026, 10, 2, tzinfo=UTC))
     assert fires_between("RELATED=END:-PT2H", *w, due="20261001T220000Z") == [
         (datetime(2026, 10, 1, 20, 0, tzinfo=UTC), "")
@@ -130,10 +128,6 @@ def test_one_shot_and_absolute_alarms_fire_once_inside_the_window() -> None:
 
 def test_adapter_carries_recurrence_and_completed_occurrences(tmp_path: Path) -> None:
     """Adapter carries recurrence and completed occurrences."""
-    import json
-
-    from nemik.adapter import NEMIK, queue_graph, waypoint_uri
-
     q = tmp_path / "q.json"
     payload: dict[str, object] = {
         "version": 1,

@@ -4,8 +4,8 @@
 
 from rdflib import Graph, Literal, URIRef
 
-from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri
-from nemik.rank import frontier
+from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri, workstream_uri
+from nemik.rank import frontier, goals, is_umbrella, load_weights
 
 
 def _wp(
@@ -61,8 +61,6 @@ def test_clear_path_has_empty_outside_and_lone_goal_is_its_own_frontier() -> Non
 
 def test_ready_item_with_open_feeder_is_an_umbrella() -> None:
     """Ready item with open feeder is an umbrella."""
-    from nemik.rank import is_umbrella
-
     g = Graph()
     umbrella, leaf = _wp(g, "a", "W1"), _wp(g, "a", "W2")
     g.add((leaf, NEMIK.enables, umbrella))
@@ -73,9 +71,6 @@ def test_ready_item_with_open_feeder_is_an_umbrella() -> None:
 
 def test_goals_pick_terminal_items_with_on_deck_leaf_and_outside_waits() -> None:
     """Goals pick terminal items with on deck leaf and outside waits."""
-    from nemik.adapter import workstream_uri
-    from nemik.rank import goals, load_weights
-
     g = Graph()
     goal, leaf1, leaf2 = (
         _wp(g, "a", "W1", "blocked", ["W2", "W3"]),

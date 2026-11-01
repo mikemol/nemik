@@ -10,6 +10,7 @@ accepting connections for 10+ minutes after a burst of concurrent requests).
 
 from __future__ import annotations
 
+import os
 import threading
 import time
 from typing import TYPE_CHECKING
@@ -78,8 +79,6 @@ def test_refresh_is_idempotent_when_nothing_changed(tmp_path: Path) -> None:
 
 def test_poke_serves_stale_while_rebuilding(tmp_path: Path) -> None:
     """nemik:W69: after the first build, a changed export rebuilds in the background."""
-    import os
-
     write_queue(tmp_path, "alpha")
     model = Model(tmp_path)
     model.poke()
