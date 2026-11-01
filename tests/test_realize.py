@@ -14,6 +14,7 @@ from pathlib import Path
 
 import pytest
 from installed import script
+from mikemol.pathsforward.opa_eval import OpaUnavailableError
 
 from nemik.realize import verdicts
 
@@ -53,8 +54,6 @@ def test_an_absent_opa_raises_rather_than_reading_clean(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """An absent opa raises rather than reading clean."""
-    from mikemol.pathsforward.opa_eval import OpaUnavailableError
-
     monkeypatch.setenv("OPA_BIN", str(tmp_path / "no-such-opa"))
     with pytest.raises(OpaUnavailableError):
         verdicts("alpha", _queue(tmp_path), tmp_path, NOW)

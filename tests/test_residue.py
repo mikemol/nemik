@@ -11,6 +11,7 @@ from pathlib import Path
 
 import pytest
 from installed import script
+from mikemol.pathsforward.opa_eval import OpaUnavailableError
 
 from nemik.metrics import judged_cards
 from nemik.residue import by_card
@@ -51,8 +52,6 @@ def test_an_absent_opa_raises_rather_than_reporting_no_gaps(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """An absent opa raises rather than reporting no gaps."""
-    from mikemol.pathsforward.opa_eval import OpaUnavailableError
-
     monkeypatch.setenv("OPA_BIN", str(tmp_path / "no-such-opa"))
     with pytest.raises(OpaUnavailableError):
         by_card(judged_cards(_fleet(tmp_path)))

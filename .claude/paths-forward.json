@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1359,
+  "counter": 1360,
   "waypoints": [
     {
       "symbol": "W1",
@@ -32597,17 +32597,17 @@
     {
       "symbol": "W1359",
       "title": "Thirteen function-local imports in six test files move to module scope by an AST codemod (PLC0415), so ruff falls by thirteen",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-11-01: G0 2026-11-01T09:34:56Z (date -u in the preceding call), BEFORE the first edit of the real files. Advances W1359. Pace: nemik-rank nemik --pace read at 09:30:03Z (tick stamp), pace of 2026-11-01T09:25:26Z, newest landing 09:21:25Z 'current': ruff behind (fell 77 over 10 landings, owes 90; 875 left), mypy behind (fell 104, owes 190), codon behind (owes 2). Actuator: scratchpad/hoist_imports.py + hoist_run.py move every function-local import of six test files to module scope after the last top-level import, then ruff check --select I,F401,D202 --fix and ruff format sort them and drop the blank line the removal leaves after a docstring. N=13 PLC0415 sites (ruff concise listing of the 8 candidate files at 09:30Z: test_alarm 4, calendar_boundary 2, deadlock_check 2, frontier 3, serve_model 1, starved 1). Test_realize and test_residue were left out: their import is OpaUnavailableError from mikemol.pathsforward, which may be guarded on purpose. K PROBE BEFORE THIS G0: the pipeline run on six probe copies (deleted): ruff house counts on the copies equal the originals except 13 PLC0415 gone (the copies' S101 are their non-test filenames), mypy 25 on the originals and 25 on the copies (no delta), D202 follow-on fixed by the pipeline in the probe of calendar_boundary. N=13, K=13, expected -13: ruff 875 to 862, mypy flat at 1634.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-01: G0 2026-11-01T09:34:56Z (date -u in the preceding call), BEFORE the first edit of the real files. Advances W1359. Pace: nemik-rank nemik --pace read at 09:30:03Z (tick stamp), pace of 2026-11-01T09:25:26Z, newest landing 09:21:25Z 'current': ruff behind (fell 77 over 10 landings, owes 90; 875 left), mypy behind (fell 104, owes 190), codon behind (owes 2). Actuator: scratchpad/hoist_imports.py + hoist_run.py move every function-local import of six test files to module scope after the last top-level import, then ruff check --select I,F401,D202 --fix and ruff format sort them and drop the blank line the removal leaves after a docstring. N=13 PLC0415 sites (ruff concise listing of the 8 candidate files at 09:30Z: test_alarm 4, calendar_boundary 2, deadlock_check 2, frontier 3, serve_model 1, starved 1). Test_realize and test_residue were left out: their import is OpaUnavailableError from mikemol.pathsforward, which may be guarded on purpose. K PROBE BEFORE THIS G0: the pipeline run on six probe copies (deleted): ruff house counts on the copies equal the originals except 13 PLC0415 gone (the copies' S101 are their non-test filenames), mypy 25 on the originals and 25 on the copies (no delta), D202 follow-on fixed by the pipeline in the probe of calendar_boundary. N=13, K=13, expected -13: ruff 875 to 862, mypy flat at 1634. | 2026-11-01: R99 answer (R99 added as nemik:R97; read 2026-11-01): tests/test_residue.py line 54 and tests/test_realize.py line 56 are both 'from mikemol.pathsforward.opa_eval import OpaUnavailableError' as the first statement of one test body, with no try/except ImportError around it and no skipif above it (lines 50-58 and 52-60 read), so neither is a deliberate guard: both are hoistable, and my 'may be guarded on purpose' was a guess. They are the next K=2 stack, probed before its G0. | 2026-11-01: Landed cd5fa099 (COMMITTED line printed it; git log -1 subject is W1359's) at 2026-11-01T09:44:09Z by TZ=UTC reflog (04:44:09 -0500). Submitted 09:35:49Z: 8 min 20 s wall in the gate. Measured ruff 875 to 862 (-13, equal to the K probe's), mypy flat 1634.",
       "issued_at": "2026-11-01T09:34:55Z",
       "minted_during": "tick",
       "caused_by": "W1288",
-      "last_worked": "2026-11-01T09:35:45Z",
+      "last_worked": "2026-11-01T09:45:06Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_calendar_boundary.py",
@@ -32616,6 +32616,29 @@
         "tests/test_deadlock_check.py",
         "tests/test_frontier.py",
         "tests/test_starved.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "small",
+      "completed": "20261101T094506Z"
+    },
+    {
+      "symbol": "W1360",
+      "title": "Two OpaUnavailableError imports in test_residue.py and test_realize.py move to module scope (PLC0415), so ruff falls by two",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-11-01: G0 2026-11-01T09:38:08Z (date -u in the preceding call), BEFORE the first edit of the real files. Advances W1360. Pace: nemik-rank nemik --pace read at 09:30:03Z, stamp 2026-11-01T09:25:26Z (the 09:55 pace not yet due): ruff behind (owes 90, fell 77), mypy behind, codon behind. Premise read: tests/test_residue.py line 54 and tests/test_realize.py line 56 are 'from mikemol.pathsforward.opa_eval import OpaUnavailableError' as the first statement of a test body with no try/except ImportError and no skipif (lines 50-58 and 52-60). Actuator: scratchpad/hoist_run.py on the two files. K PROBE BEFORE THIS G0: both copies (deleted): ruff house counts equal the originals except the 2 PLC0415 gone (the copies' S101 are their filenames), mypy 'Success: no issues found' on the four files. N=2, K=2, expected -2: ruff 862 (stack 767's value) to 860, mypy flat at 1634. It waits for stack 767: both carry ruff-baseline.json.",
+      "issued_at": "2026-11-01T09:38:07Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1359",
+      "last_worked": "2026-11-01T09:38:55Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tests/test_residue.py",
+        "tests/test_realize.py",
         "ruff-baseline.json"
       ],
       "size_class": "small",
@@ -32822,12 +32845,7 @@
   ],
   "job_id": "481476b5",
   "heartbeat": "2026-10-29T04:11:13Z",
-  "lock": {
-    "holder": "nemik-94",
-    "taken_at": "2026-11-01T09:30:09Z",
-    "pid": 337543,
-    "start": 21144718
-  },
+  "lock": null,
   "predecessor_job_id": "1d7fe6d0",
   "leases": [
     {
@@ -39995,7 +40013,22 @@
         }
       ],
       "id": "nemik:R96"
+    },
+    {
+      "card": "W1359",
+      "trigger": "round 99: nemik-94 fifth tick, W1358 (annotated Any in tests/test_skill.py and tests/test_pieces.py, mypy 1656 to 1634, landed 41ef1d80 = 09:33:15Z) and W1359 (thirteen function-local imports hoisted in six test files, ruff 875 to 862, stack 767 inflight, key 1793525748965885277); also 80434a1e (W1356) 09:09:46Z and 9f7a1016 (W1357) 09:21:25Z",
+      "root": "Verified from source (TZ=UTC reflog): 80434a1e 09:09:46Z, 9f7a1016 09:21:25Z, 41ef1d80 09:33:15Z; --in-gate lists W1359 inflight; `mikemol-pycheck --ratchet` prints ruff 862/862 and mypy 1634/1634, so -13 and the earlier -22, -19, -22 recompute. Intervals as Z pairs: 765 submit 09:10:52Z to landing 09:21:25Z (10 min 33 s); 764 landing to 765 submit (1 min 06 s); 765 landing 09:21:25Z to 766 submit 09:24:25Z (3 min 00 s, the probe, G0 and codemod inside it); 766 gate 8 min 50 s; 766 landing 09:33:15Z to 767 submit 09:35:49Z (2 min 34 s). A second stack could not be queued behind a landing stack in these windows because every stack carries the three queue files, and 766 and 765 also shared mypy-baseline.json; the minimum gap is the build time, which is what the session achieved. Standing 15 was followed (pace as the first command at 09:30:03Z, stamp quoted, the first entry's baseline listed as behind) and the K probes (six copies, counts equal except the 13) are the form R97 asked for. One unverified premise. No fixpoint is declared. Carried open findings, status on 2026-11-01: R95 first finding on W1288 (cause of the 06:20 to 07:24 outage, due today, still open); R95 second finding on W1349 (read-back), R95 third and R97 first and R98 findings on W1219 (script; rule 13 and 15 citations in writer ids), R94 on W1348, R93 on W1347, R92 on W1346 and W1288, R91 on W1345, R72 on W846, R84 on W695 (all 2026-11-02), R85 on W613 (read-back). Codon is still owed (fall 2) with no stack; hooks-venv rebuild and census (W1325) not done.",
+      "findings": [
+        {
+          "finding": "W1359 leaves two sites out on a premise nobody read: 'test_realize and test_residue were left out: their import is OpaUnavailableError from mikemol.pathsforward, which may be guarded on purpose'. Rule 12 asks a premise about code to cite the line read; 'may be' is a guess, and those two sites are PLC0415 findings still in the baseline. Open the two files, read the import and its surrounding try or skip, and write on W1359 whether it is a deliberate guard (then name the line and the reason) or hoistable (then it is the next two-site K=2 stack).",
+          "finding_card": "W1359",
+          "finding_owner": "nemik session",
+          "finding_witness": "A W1359 evidence line quoting the import line and its guard from test_realize.py and test_residue.py, with the decision, or a stack hoisting them with ruff 862 to 860.",
+          "due": "2026-11-02"
+        }
+      ],
+      "id": "nemik:R97"
     }
   ],
-  "retro_counter": 96
+  "retro_counter": 97
 }

@@ -509,12 +509,10 @@
   "PT018": 2
  },
  "tests/test_realize.py": {
-  "PLC0415": 1,
   "S404": 1,
   "S603": 1
  },
  "tests/test_residue.py": {
-  "PLC0415": 1,
   "S404": 1,
   "S603": 1
  },
