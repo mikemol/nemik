@@ -2,10 +2,14 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W128: operator asks as RFC 5545 VTODOs, opt-in per repo."""
 
+import json
+import sys
 from pathlib import Path
 
+import installed
+
 from nemik.blocks import AskRow
-from nemik.vtodo import calendar, stated_ask, vtodos
+from nemik.vtodo import calendar, grouped, opted_in, stated_ask, time_property, vtodos
 
 ASKS: list[AskRow] = [
     {
@@ -72,8 +76,6 @@ def test_calendar_is_crlf_folded_and_deterministic() -> None:
 
 def test_star_opts_every_repo_in(tmp_path: Path) -> None:
     """Star opts every repo in."""
-    from nemik.vtodo import opted_in
-
     f = tmp_path / "ics.toml"
     f.write_text('repos = ["*"]\n')
     assert len(vtodos(ASKS, opted_in(f))) == 2  # both needs-you asks, any repo
@@ -82,11 +84,6 @@ def test_star_opts_every_repo_in(tmp_path: Path) -> None:
 
 def test_nemik_tasks_feeds_the_helper_and_returns_its_exit_code(tmp_path: Path) -> None:
     """nemik:W121: one entry point for luthen's timer: no shell pipe, helper's 0/1/2 preserved."""
-    import json
-    import sys
-
-    import installed
-
     q = tmp_path / "root" / "life" / ".claude"
     q.mkdir(parents=True)
     payload2: dict[str, object] = {
@@ -129,8 +126,6 @@ def test_nemik_tasks_feeds_the_helper_and_returns_its_exit_code(tmp_path: Path) 
 
 def test_dtstart_and_due_pass_through_as_rfc5545_properties() -> None:
     """nemik:W134: mtools:W300's three value forms each become the right property line."""
-    from nemik.vtodo import time_property
-
     assert time_property("DUE", "20261001") == "DUE;VALUE=DATE:20261001"
     assert time_property("DUE", "20261001T203000Z") == "DUE:20261001T203000Z"
     assert (
@@ -145,8 +140,6 @@ def test_dtstart_and_due_pass_through_as_rfc5545_properties() -> None:
 
 def test_grouped_adds_a_parent_per_repo_and_keeps_children_as_they_are() -> None:
     """nemik:W163: one parent VTODO per repo; asks keep their UID and gain RELATED-TO PARENT."""
-    from nemik.vtodo import grouped
-
     asks: list[AskRow] = [
         {**ASKS[0]},
         {**ASKS[2]},
@@ -177,8 +170,6 @@ def test_a_repo_with_no_open_asks_has_no_parent_so_the_helper_completes_it() -> 
     A repo whose last ask closed drops out, and the helper's existing rule (a ref missing from the
     feed is a closed ask: COMPLETE) then completes the parent task like any other.
     """
-    from nemik.vtodo import grouped
-
     both = grouped(vtodos(ASKS, {"life", "aeternum"}))
     parents = [t[1] for t in both if t[1].startswith("UID:nemik:repo:")]
     assert parents == ["UID:nemik:repo:aeternum", "UID:nemik:repo:life"]
@@ -198,11 +189,6 @@ def test_apply_reruns_while_the_helper_defers_a_parent_then_converges(
     tmp_path: Path,
 ) -> None:
     """nemik:W148: DEFER-PARENT means the parent is not on Google yet; wait for sync and rerun."""
-    import json
-    import sys
-
-    import installed
-
     q = tmp_path / "root" / "life" / ".claude"
     q.mkdir(parents=True)
     payload: dict[str, object] = {

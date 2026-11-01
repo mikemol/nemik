@@ -3696,3 +3696,6 @@
 2026-11-01T09:38:07Z  interrupt W1360 minted    -         "Two OpaUnavailableError imports in test_residue.py and test_realize.py move to module scope (PLC0415), so ruff falls by two"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1359
 2026-11-01T09:38:55Z  status W1360 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T09:45:06Z  status W1359 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T09:55:42Z  status W1360 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T09:56:15Z  interrupt W1361 minted    -         "Twenty-one function-local imports in four more test files move to module scope (PLC0415), so ruff falls by twenty-one"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1359
+2026-11-01T09:56:59Z  status W1361 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

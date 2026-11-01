@@ -11,6 +11,7 @@ import tempfile
 from datetime import UTC, datetime
 from typing import TYPE_CHECKING, cast
 
+from nemik.apischema import unmanifested
 from nemik.history import (
     QueueDoc,
     Waypoint,
@@ -28,6 +29,7 @@ from nemik.history import (
     time_in_state,
     weekly,
 )
+from nemik.serve import history_doc
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -347,9 +349,6 @@ def test_the_static_history_names_no_waypoint_and_passes_the_manifest(
     tmp_path: Path,
 ) -> None:
     """nemik:W308: history.json is counts and days; the oldest-blocked symbol is dropped."""
-    from nemik.apischema import unmanifested
-    from nemik.serve import history_doc
-
     _two_commits(tmp_path)
     doc = cast("dict[str, list[WeeklyRow]]", history_doc(tmp_path))
     assert list(doc) == ["a"]
@@ -362,8 +361,6 @@ def test_a_withheld_waypoint_is_not_counted_in_the_published_history(
     tmp_path: Path,
 ) -> None:
     """nemik:W309: _two_commits mints W1 then W2; withholding a:W2 leaves one opened card."""
-    from nemik.serve import history_doc
-
     _two_commits(tmp_path)
     everything = cast("dict[str, list[WeeklyRow]]", history_doc(tmp_path))
     withheld = cast(

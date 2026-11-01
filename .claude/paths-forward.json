@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1360,
+  "counter": 1361,
   "waypoints": [
     {
       "symbol": "W1",
@@ -32624,21 +32624,46 @@
     {
       "symbol": "W1360",
       "title": "Two OpaUnavailableError imports in test_residue.py and test_realize.py move to module scope (PLC0415), so ruff falls by two",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-01: G0 2026-11-01T09:38:08Z (date -u in the preceding call), BEFORE the first edit of the real files. Advances W1360. Pace: nemik-rank nemik --pace read at 09:30:03Z, stamp 2026-11-01T09:25:26Z (the 09:55 pace not yet due): ruff behind (owes 90, fell 77), mypy behind, codon behind. Premise read: tests/test_residue.py line 54 and tests/test_realize.py line 56 are 'from mikemol.pathsforward.opa_eval import OpaUnavailableError' as the first statement of a test body with no try/except ImportError and no skipif (lines 50-58 and 52-60). Actuator: scratchpad/hoist_run.py on the two files. K PROBE BEFORE THIS G0: both copies (deleted): ruff house counts equal the originals except the 2 PLC0415 gone (the copies' S101 are their filenames), mypy 'Success: no issues found' on the four files. N=2, K=2, expected -2: ruff 862 (stack 767's value) to 860, mypy flat at 1634. It waits for stack 767: both carry ruff-baseline.json. | 2026-11-01: Landed 7c525837 (COMMITTED line printed it; git log -1 subject is W1360's) at 2026-11-01T09:54:57Z by TZ=UTC reflog (04:54:57 -0500). Submitted 09:45:09Z: 9 min 48 s wall in the gate. Measured ruff 862 to 860 (-2, equal to the K probe's), mypy flat 1634.",
+      "issued_at": "2026-11-01T09:38:07Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1359",
+      "last_worked": "2026-11-01T09:55:42Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tests/test_residue.py",
+        "tests/test_realize.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "small",
+      "completed": "20261101T095542Z"
+    },
+    {
+      "symbol": "W1361",
+      "title": "Twenty-one function-local imports in four more test files move to module scope (PLC0415), so ruff falls by twenty-one",
       "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-11-01: G0 2026-11-01T09:38:08Z (date -u in the preceding call), BEFORE the first edit of the real files. Advances W1360. Pace: nemik-rank nemik --pace read at 09:30:03Z, stamp 2026-11-01T09:25:26Z (the 09:55 pace not yet due): ruff behind (owes 90, fell 77), mypy behind, codon behind. Premise read: tests/test_residue.py line 54 and tests/test_realize.py line 56 are 'from mikemol.pathsforward.opa_eval import OpaUnavailableError' as the first statement of a test body with no try/except ImportError and no skipif (lines 50-58 and 52-60). Actuator: scratchpad/hoist_run.py on the two files. K PROBE BEFORE THIS G0: both copies (deleted): ruff house counts equal the originals except the 2 PLC0415 gone (the copies' S101 are their filenames), mypy 'Success: no issues found' on the four files. N=2, K=2, expected -2: ruff 862 (stack 767's value) to 860, mypy flat at 1634. It waits for stack 767: both carry ruff-baseline.json.",
-      "issued_at": "2026-11-01T09:38:07Z",
+      "evidence": "2026-11-01: G0 2026-11-01T09:56:15Z (date -u in the preceding call), BEFORE the first edit of the real files. Advances W1361. Pace: nemik-rank nemik --pace read at 09:30:03Z, stamp 2026-11-01T09:25:26Z (the 09:55 pace may be newer; not re-read before this G0): ruff behind (owes 90, fell 77), mypy behind, codon behind; the 09:44:09Z and 09:54:57Z landings are the ones to be counted. Actuator: scratchpad/hoist_run.py on four test files. N=21 PLC0415 (ruff house statistics on the four originals at 09:55Z). K PROBE BEFORE THIS G0: ten files were probed, six SKIPPED by the codemod's own assertions (test_critical: 'critical' already bound at module scope; test_fruit: waypoint_uri imported two ways; test_letters: fold_commands two ways; test_rank: workstream_uri already bound; test_static and test_witnesses: Path already bound by a TYPE_CHECKING import), four made: ruff house counts on the four probes equal the originals except 21 PLC0415 gone (probes' extra S101 are their filenames), mypy 6 on the originals and 6 on the probes (no delta). N=21, K=21, expected -21: ruff 860 (stack 768's value) to 839, mypy flat at 1634. Probe copies deleted.",
+      "issued_at": "2026-11-01T09:56:15Z",
       "minted_during": "interrupt",
       "caused_by": "W1359",
-      "last_worked": "2026-11-01T09:38:55Z",
+      "last_worked": "2026-11-01T09:56:59Z",
       "ticks_blocked": 0,
       "manifest": [
-        "tests/test_residue.py",
-        "tests/test_realize.py",
+        "tests/test_history.py",
+        "tests/test_umbrella_block.py",
+        "tests/test_vtodo.py",
+        "tests/test_wake_alarms.py",
         "ruff-baseline.json"
       ],
       "size_class": "small",

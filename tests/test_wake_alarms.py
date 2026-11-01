@@ -7,10 +7,10 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 import pytest
-from rdflib import Graph
+from rdflib import Graph, Literal
 
-from nemik.adapter import queue_graph
-from nemik.wake import Liveness, fired_alarms
+from nemik.adapter import NEMIK, queue_graph, waypoint_uri
+from nemik.wake import Liveness, due_nudges, fired_alarms, main, roster
 
 
 def _graph(tmp_path: Path) -> Graph:
@@ -68,9 +68,6 @@ def test_fired_alarms_in_a_window_with_owner_liveness(tmp_path: Path) -> None:
 def test_a_bad_alarm_is_reported_not_fatal(tmp_path: Path) -> None:
     """A bad alarm is reported not fatal."""
     g = _graph(tmp_path)
-    from rdflib import Literal
-
-    from nemik.adapter import NEMIK, waypoint_uri
 
     g.add((waypoint_uri("life", "W9"), NEMIK.alarm, Literal("not-a-trigger")))
     got = fired_alarms(
@@ -85,8 +82,6 @@ def test_alarms_nudge_delivers_each_firing_once(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
     """nemik:W167: --alarms --nudge prints a firing on the first run only, sharing nudges state."""
-    from nemik.wake import main
-
     g, state = _graph(tmp_path), tmp_path / "nudges.json"
     payload: dict[str, object] = {"life": 1.0}
     state.write_text(json.dumps(payload))  # a repo nudge already recorded there
@@ -130,8 +125,6 @@ def test_a_sleeping_owner_of_a_fired_alarm_joins_the_wake_roster(
     tmp_path: Path,
 ) -> None:
     """nemik:W151: asleep owner -> roster row (then the usual nudge/wake); awake owner -> no row."""
-    from nemik.wake import due_nudges, roster
-
     g = _graph(tmp_path)
     window = (datetime(2026, 10, 1, tzinfo=UTC), datetime(2026, 10, 2, tzinfo=UTC))
     asleep: Liveness = {"life": {"verdict": "dormant"}}

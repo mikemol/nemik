@@ -377,7 +377,6 @@
   "RUF069": 1
  },
  "tests/test_history.py": {
-  "PLC0415": 3,
   "PLR2004": 1,
   "RUF069": 3,
   "S404": 1,
@@ -559,15 +558,10 @@
   "PLR2004": 1,
   "RUF069": 2
  },
- "tests/test_umbrella_block.py": {
-  "PLC0415": 4
- },
  "tests/test_vtodo.py": {
-  "PLC0415": 10,
   "PLR2004": 4
  },
  "tests/test_wake_alarms.py": {
-  "PLC0415": 4,
   "PT018": 4,
   "RUF069": 1
  },

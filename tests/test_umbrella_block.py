@@ -5,8 +5,9 @@
 from rdflib import RDF, Graph, Literal, URIRef
 from umbrella_cases import blocked_on_umbrellas
 
-from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri, workstream_uri
-from nemik.blocks import annotate
+from nemik.adapter import NEMIK, OPERATOR, OSLC_CM, STATE, waypoint_uri, workstream_uri
+from nemik.blocks import CAL_BLOCK, annotate, operator_asks
+from nemik.calendars import CAL_REF
 from nemik.check import shapes
 from nemik.shaclinc import findings
 
@@ -93,9 +94,6 @@ def test_operator_ask_lists_the_work_waiting_behind_it_across_repos() -> None:
 
     The ask lists both waiters, across repos and transitively, and not the done card it enables.
     """
-    from nemik.adapter import OPERATOR
-    from nemik.blocks import operator_asks
-
     g = Graph()
     ask = _wp(g, "life", "W21", "blocked")
     g.add((ask, NEMIK.blockedOn, Literal("operator: decide approve the resume")))
@@ -135,7 +133,4 @@ def test_a_calendar_block_is_a_condition_not_unresolved() -> None:
 
 def test_cal_forms_agree() -> None:
     """Cal forms agree."""
-    from nemik.blocks import CAL_BLOCK
-    from nemik.calendars import CAL_REF
-
     assert CAL_BLOCK.pattern == CAL_REF.pattern.replace("(", "").replace(")", "")
