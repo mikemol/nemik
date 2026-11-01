@@ -3,12 +3,12 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1401 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:06c85b8a0d24da33`
+counter 1402 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:9423b692196ae328`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1398 | working |
-| 2 | W1401 | working |
+| 1 | W1401 | working |
+| 2 | W1402 | working |
 | 3 | W1075 | ready |
 | 4 | W1139 | ready |
 | 5 | W1279 | ready |
@@ -1380,13 +1380,14 @@ counter 1401 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:06c
 | 1371 | W1393 | done |
 | 1372 | W1394 | done |
 | 1373 | W1397 | done |
+| 1374 | W1398 | done |
 
 ## waypoints
 
-1. **W1398** (working) src/nemik/pins.py and calwrite.py bind the parsed TOML as object and sort with a lambda, so mypy
-   falls by three
-2. **W1401** (working) Eight function-local imports in src/nemik/witnesses.py move to module scope, so ruff falls by
+1. **W1401** (working) Eight function-local imports in src/nemik/witnesses.py move to module scope, so ruff falls by
    eight, with the witwait import left local
+2. **W1402** (working) Twelve function-local imports in src/nemik/calendars.py and salience.py move to module scope,
+   with the clashing rdflib and nemik.rank imports left local
 3. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 4. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -1770,6 +1771,8 @@ counter 1401 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:06c
      tick-close) is wanted.
 86. **W1288** (ready) Tests without a docstring (D103, 398): one sentence per test function, taken from its name, a file
    at a time
+   - next: After 19:25:29Z, stat ratchet-pace.json and read nemik-rank nemik --pace; record whether the 19:25Z run
+     wrote.
 87. **W1300** (ready) letters.py compiles under Codon: its NamedTuple rows become plain classes, shlex and UTC go, and
    its subprocess, shutil and sys.executable code moves to a module of its own, so codon falls 2
 88. **W1345** (ready) tests/corpus/pieces/fixture-fleet-3-repos.json is stale against the current check output:
@@ -1796,8 +1799,8 @@ counter 1401 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:06c
      mtools has the answer.
 92. **W1400** (ready) Codon paydown: pick the failing baseline entries one fix from compiling, using scratchpad
    codon_one.py, since a bare star and datetime.UTC both fail it
-   - next: Count the bare-star parameter lists in src per module, then probe check, history, hostapply with the star
-     removed in a scratch copy to see each next error.
+   - next: List W1383's 19 flag sites by module, mark each compiled or failing against codon-baseline.json, and write
+     the result on W1383 and here.
 93. **W986** (blocked) A ratchet paydown rate requirement with teeth: a repo is behind when a ratchet's fall over a
    trailing window of landed commits is below a requirement that only rises
    - blocked on: W994, W1002
@@ -4528,6 +4531,8 @@ counter 1401 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:06c
    falls by four
 1373. **W1397** (done) src/nemik/staticserve.py reads hashes.json through the table helper instead of an Any dict, so
    mypy falls by two
+1374. **W1398** (done) src/nemik/pins.py and calwrite.py bind the parsed TOML as object and sort with a lambda, so mypy
+   falls by three
 
 ## residue
 
@@ -5702,3 +5707,23 @@ counter 1401 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:06c
   on W910 (unbuilt), R101 on W1288, R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288 (hooks
   inside the 4 min 40 s untimed), R114 on W1288 (16:25Z pace; due 2026-11-02) and on W1395 (send record and adopters;
   due today); codon owed with no stack; hooks-venv rebuild and census (W1325) not done.; 1 finding(s)
+- **nemik:R114** (-) round 116: nemik-99, stack 798 (W1397) landed 46f95b1c = 18:17:44Z; stack 799 (W1398) inflight, key
+  1793557130164045589; stack 800 (W1401, witnesses.py 8 imports, ruff 648 to 640) staged; W1400 minted for the codon
+  probes: root Verified from source (TZ=UTC reflog): 9d128fcd 17:48:59Z, 46f95b1c 18:17:44Z (13:17:44 -0500); --in-gate
+  lists W1398 inflight; `mikemol-pycheck --ratchet` prints ruff 640/640 and mypy 1396/1396 (W1401's staged -8 is already
+  written to the ruff baseline; stack 799 does not carry ruff-baseline.json). Intervals as Z pairs: 798 submitted
+  17:50:06Z, landed 18:17:44Z (gate 27 min 38 s); gate empty 18:17:44Z to the 799 submit 18:18:51Z (1 min 07 s). The two
+  stamps R114 asked for are present (pace age 1 h 4 min 35 s at 18:30:04Z, both stamps given; tick-open 18:33:56Z to
+  18:38:34.4Z = 4 min 38 s against 4 min 40 s last tick, so the uncontended base is stable and the hooks inside it are
+  still unattributed). The pace finding of R114 gets a second sample: no 18:25Z pace was readable at 18:30Z, and 16:25Z
+  was missing last time while 17:25:29Z existed, so alternate hours are absent since 16:25 (written at 15:25 and 17:25);
+  the producer check on W1288 is still to do. The placeholder stamp is repeated: W1400 carries a CORRECTION that its
+  earlier line stamped 18:50Z was typed ahead of the probes that ran 18:30:04Z to 18:33:44Z, a future time, the fifth
+  placeholder stamp of the segment (R95's second finding on W1349 is still open). The dotted-import fix to the hoist
+  codemod is correct (witnesses went from refused to 9 to 0 with a cycle through witwait, then 9 to 1 with that import
+  skipped) and the G0 quotes the complete probe line. One finding about a conflict the probes found. No fixpoint is
+  declared. Carried open findings, status on 2026-11-01: R95 second finding on W1349, R95 third, R97 first, R98, R111
+  first and R102 on W1219, R94 on W1348, R93 on W1347, R92 on W1346 and W1288, R91 on W1345, R72 on W846, R84 on W695,
+  R100 on W910, R101 on W1288, R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288 (hooks untimed),
+  R114 on W1288 (16:25Z and now 18:25Z pace) and on W1395 (send record; W2186 reply not looked for this tick)
+  (2026-11-02 or today for W1395); codon owed with no stack, probes on W1400.; 1 finding(s)

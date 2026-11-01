@@ -11,16 +11,23 @@ never leaves KWallet, the event text never goes to the export, metrics or nemik-
 
 from __future__ import annotations
 
+import argparse
 import json
 import re
 import shutil
 import subprocess
 import sys
 import tempfile
+import tomllib
 from datetime import date, datetime
 from pathlib import Path
 from typing import TYPE_CHECKING, NamedTuple, TypedDict
 
+from rdflib.namespace import DCTERMS, RDF
+
+from nemik.adapter import NEMIK, OSLC_CM
+from nemik.blocks import ref
+from nemik.check import default_root, survey
 from nemik.vtodo import DEFAULT_HELPER
 
 if TYPE_CHECKING:
@@ -72,8 +79,6 @@ def load_calendars(path: Path = DEFAULT_CONFIG) -> dict[str, Calendar]:
         The calendars by label, in sorted order.
 
     """
-    import tomllib
-
     if not path.exists():
         return {}
     cals: object = tomllib.loads(path.read_text(encoding="utf-8")).get("calendars", {})
@@ -169,8 +174,6 @@ def _venv_ics() -> str:
         The path of the venv's mikemol-ics.
 
     """
-    import sys
-
     return str(Path(sys.executable).parent / "mikemol-ics")
 
 
@@ -298,9 +301,6 @@ def event_graph(occs: list[Occurrence], queues: Graph) -> Graph:
 
     """
     from rdflib import Graph, Literal, URIRef
-    from rdflib.namespace import DCTERMS, RDF
-
-    from nemik.adapter import NEMIK, OSLC_CM
 
     g = Graph()
     nxt: dict[tuple[str, str | None], URIRef] = {}
@@ -331,14 +331,7 @@ def days_main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     for its Tools panel, so anything nemik-operator can reach is on the served path. This module is
     reachable from no served module (tests/test_calendar_boundary.py).
     """
-    import argparse
-
     from rdflib import Graph
-
-    from nemik.adapter import NEMIK
-    from nemik.blocks import ref
-    from nemik.check import default_root, survey
-    from nemik.vtodo import DEFAULT_HELPER
 
     class Options(argparse.Namespace):
         """The parsed command line of nemik-days (nemik:W1187)."""

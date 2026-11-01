@@ -13,10 +13,14 @@ only after this audit (W241).
 
 from __future__ import annotations
 
+import tomllib
 from contextlib import contextmanager
 from dataclasses import dataclass
 from fractions import Fraction
+from importlib.resources import files
 from typing import TYPE_CHECKING
+
+from rdflib.namespace import PROV
 
 from nemik.adapter import NEMIK, OSLC_CM
 from nemik.flow import Flow, solve
@@ -260,7 +264,6 @@ def audit(
         # nemik:W249: an operator ask is a demand source with a declared class weight, not a strict
         # tier above the order. A ready ask absorbs its own demand; a waiting one sends it through
         # its cone. Additive to the class weight the card already carries.
-        from rdflib.namespace import PROV
 
         for n in sorted(nodes, key=str):
             cause = str(g.value(n, PROV.wasInformedBy) or "").strip().lower()
@@ -360,9 +363,6 @@ def table_weights(name: str, text: str | None = None) -> dict[str, Fraction]:
         The table's entries; empty when the table is absent.
 
     """
-    import tomllib
-    from importlib.resources import files
-
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
     table: dict[str, object] = tomllib.loads(text).get(name, {})
