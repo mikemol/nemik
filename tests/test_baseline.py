@@ -46,7 +46,7 @@ def test_the_plan_is_what_was_open_at_the_baseline_and_the_rest_is_added() -> No
     assert v["closed"] == ["W1"]
     assert v["still_open"] == ["W2"]
     assert v["dropped"] == []
-    assert v["done_share"] == pytest.approx(0.5)
+    assert v["done_share"] == pytest.approx(0.5, rel=0, abs=0)
     # W4 was minted and dropped after the baseline: added, with no record of how
     assert v["added"] == {"interrupt": ["W5"], "tick": ["W6"], "unrecorded": ["W4"]}
 
@@ -83,7 +83,7 @@ def test_shape_drift_counts_edges_and_the_planned_cards_retitled_or_rewired() ->
     assert (sh["edges_added"], sh["edges_removed"]) == (1, 0)
     assert sh["retitled"] == ["W2"]
     assert sh["rewired"] == ["W1"]
-    assert sh["touched_share"] == pytest.approx(1.0)
+    assert sh["touched_share"] == pytest.approx(1.0, rel=0, abs=0)
 
 
 def test_the_baseline_is_given_or_declared_in_the_repo(tmp_path: Path) -> None:

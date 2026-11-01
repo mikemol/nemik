@@ -56,8 +56,8 @@ def test_a_poll_takes_the_worst_class_among_the_repos_that_moved() -> None:
     # polls: [0,60) identical, [60,120) attribute, [120,180) structural, [180,240) identical
     assert result.polls == 4
     assert result.counts == {"identical": 2, "attribute": 1, "structural": 1}
-    assert result.redraws_now() == pytest.approx(0.5)
-    assert result.redraws_patching_attributes() == pytest.approx(0.25)
+    assert result.redraws_now() == pytest.approx(0.5, rel=0, abs=0)
+    assert result.redraws_patching_attributes() == pytest.approx(0.25, rel=0, abs=0)
 
 
 def test_commits_are_counted_by_what_each_did() -> None:

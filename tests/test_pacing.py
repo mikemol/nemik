@@ -19,7 +19,7 @@ def test_within_the_burst_the_bucket_never_goes_over() -> None:
     overdraft, level = bucket(
         stamps, rate=5, burst=10, start=START, now=START + timedelta(hours=10)
     )
-    assert overdraft == pytest.approx(0.0)
+    assert overdraft == pytest.approx(0.0, rel=0, abs=0)
     assert 0 < level <= 10
 
 

@@ -135,7 +135,11 @@ def test_ranking_toward_a_milestone_counts_only_that_cards_demand(
         rank(g, "a", load_weights(), comp, fruit_row=False, toward="a:W4"),
     )
     assert [r["symbol"] for r in toward] == ["W1", "W2", "W3"]
-    assert toward[0]["salience"] == toward[1]["salience"] == pytest.approx(0.5)
+    assert (
+        toward[0]["salience"]
+        == toward[1]["salience"]
+        == pytest.approx(0.5, rel=0, abs=0)
+    )
     assert toward[2]["salience"] == 0
     # toward nothing named, the fleet-wide order is unchanged
     assert _order(g, "flow") == ["W3", "W1", "W2"]
@@ -239,10 +243,12 @@ def test_the_view_ships_each_ready_cards_flow_salience(tmp_path: Path) -> None:
     doc = cast("_Doc", to_json(_fleet(tmp_path), {}))
     by_symbol = {n["symbol"]: n for n in doc["nodes"] if n["state"] == "ready"}
     assert by_symbol["W3"]["salience"] == pytest.approx(
-        2.0
+        2.0, rel=0, abs=0
     )  # B absorbs both sole dependents' demand
     assert (
-        by_symbol["W1"]["salience"] == by_symbol["W2"]["salience"] == pytest.approx(1.5)
+        by_symbol["W1"]["salience"]
+        == by_symbol["W2"]["salience"]
+        == pytest.approx(1.5, rel=0, abs=0)
     )
 
 
@@ -276,8 +282,10 @@ def test_the_view_ships_the_current_across_each_dependency(tmp_path: Path) -> No
         for e in doc["edges"]
         if "current" in e
     }
-    assert current["W7", "W3"] == pytest.approx(1.0)
-    assert current["W4", "W1"] == current["W4", "W2"] == pytest.approx(0.5)
+    assert current["W7", "W3"] == pytest.approx(1.0, rel=0, abs=0)
+    assert (
+        current["W4", "W1"] == current["W4", "W2"] == pytest.approx(0.5, rel=0, abs=0)
+    )
 
 
 def test_the_view_weighs_the_edges_that_wait_on_the_operator(tmp_path: Path) -> None:
@@ -320,10 +328,10 @@ def test_the_view_weighs_the_edges_that_wait_on_the_operator(tmp_path: Path) -> 
             g += qg
     doc = cast("_Doc", to_json(g, {}))
     (lane,) = [e for e in doc["edges"] if e["target"].startswith("operator:")]
-    assert lane["current"] == pytest.approx(2.0)
+    assert lane["current"] == pytest.approx(2.0, rel=0, abs=0)
     into = [e for e in doc["edges"] if e["target"].endswith("/W1") and "current" in e]
     assert sorted(e["current"] for e in into) == [1.0, 1.0]
-    assert doc["operator"][0]["salience"] == pytest.approx(2.0)
+    assert doc["operator"][0]["salience"] == pytest.approx(2.0, rel=0, abs=0)
 
 
 def test_a_withheld_waiter_shapes_no_published_number(tmp_path: Path) -> None:
@@ -362,14 +370,16 @@ def test_a_withheld_waiter_shapes_no_published_number(tmp_path: Path) -> None:
     for _, qg, _ in survey(tmp_path):
         if qg is not None:
             g += qg
-    assert cast("_Doc", to_json(g, {}))["operator"][0]["salience"] == pytest.approx(2.0)
+    assert cast("_Doc", to_json(g, {}))["operator"][0]["salience"] == pytest.approx(
+        2.0, rel=0, abs=0
+    )
     hidden = frozenset({"a:W3"})
     doc = cast("_Doc", to_json(g, {}, without(g, hidden)))
     assert doc["operator"][0]["salience"] == pytest.approx(
-        1.0
+        1.0, rel=0, abs=0
     )  # W3's demand is not in it
     (lane,) = [e for e in doc["edges"] if e["target"].startswith("operator:")]
-    assert lane["current"] == pytest.approx(1.0)
+    assert lane["current"] == pytest.approx(1.0, rel=0, abs=0)
 
 
 def test_the_packaged_operator_weight_is_declared() -> None:

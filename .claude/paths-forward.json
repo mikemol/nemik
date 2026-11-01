@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1377,
+  "counter": 1379,
   "waypoints": [
     {
       "symbol": "W1",
@@ -32994,11 +32994,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": null,
-      "evidence": "2026-11-01: G0 2026-11-01T12:42:54Z (date -u in the preceding call), BEFORE the first edit of the real files. Advances W1376, the staged successor of stack 781. Pace: nemik-rank nemik --pace read at 12:30:09Z, pace of 2026-11-01T12:25:27Z: ruff behind (fell 75 over 10 landings, owes 90; 764 left), mypy behind (fell 165, owes 190), codon behind. Premise read: ruff's RUF069 listing (27 sites, all tests; no [*] fix mark); pytest.approx compares with a 1e-6 relative tolerance, so a value stored rounded (0.667, 0.333) still matches. Actuator: scratchpad/w1376_approx.py: on each flagged line the one '== <float>' becomes '== pytest.approx(<float>)', 'import pytest' is added after the last top-level import where absent, then ruff --select I --fix and ruff format. test_history.py (3 sites) is left out: its pytest import sits under TYPE_CHECKING. K PROBE BEFORE THIS G0: ten probe copies (deleted): ruff house counts on the originals RUF069 24, PLR2004 28, PT018 4, S603 1, S404 1; on the probes RUF069 0, PLR2004 12, PT018 4 (their 105 S101 are their filenames): the approx form also stops PLR2004 flagging 16 of the same lines; mikemol-pycheck --ratchet on the probes: mypy churn 2, rank_flow 6, wake_alarms 4, equal to the originals' baseline rows. N=24, K=24 RUF069 plus 16 PLR2004, expected -40: ruff 764 to 724, mypy flat at 1452. Waits for stack 781 (queue files). | 2026-11-01: Landed 1df34c15 (COMMITTED line printed it; git log -1 subject is W1376's) at 2026-11-01T13:01:24Z by TZ=UTC reflog (08:01:24 -0500). Submitted 12:51:18Z: 10 min 6 s wall in the gate. Measured ruff 764 to 724 (-40: 24 RUF069 and 16 PLR2004, equal to the K probe's), mypy flat 1452.",
+      "evidence": "2026-11-01: G0 2026-11-01T12:42:54Z (date -u in the preceding call), BEFORE the first edit of the real files. Advances W1376, the staged successor of stack 781. Pace: nemik-rank nemik --pace read at 12:30:09Z, pace of 2026-11-01T12:25:27Z: ruff behind (fell 75 over 10 landings, owes 90; 764 left), mypy behind (fell 165, owes 190), codon behind. Premise read: ruff's RUF069 listing (27 sites, all tests; no [*] fix mark); pytest.approx compares with a 1e-6 relative tolerance, so a value stored rounded (0.667, 0.333) still matches. Actuator: scratchpad/w1376_approx.py: on each flagged line the one '== <float>' becomes '== pytest.approx(<float>)', 'import pytest' is added after the last top-level import where absent, then ruff --select I --fix and ruff format. test_history.py (3 sites) is left out: its pytest import sits under TYPE_CHECKING. K PROBE BEFORE THIS G0: ten probe copies (deleted): ruff house counts on the originals RUF069 24, PLR2004 28, PT018 4, S603 1, S404 1; on the probes RUF069 0, PLR2004 12, PT018 4 (their 105 S101 are their filenames): the approx form also stops PLR2004 flagging 16 of the same lines; mikemol-pycheck --ratchet on the probes: mypy churn 2, rank_flow 6, wake_alarms 4, equal to the originals' baseline rows. N=24, K=24 RUF069 plus 16 PLR2004, expected -40: ruff 764 to 724, mypy flat at 1452. Waits for stack 781 (queue files). | 2026-11-01: Landed 1df34c15 (COMMITTED line printed it; git log -1 subject is W1376's) at 2026-11-01T13:01:24Z by TZ=UTC reflog (08:01:24 -0500). Submitted 12:51:18Z: 10 min 6 s wall in the gate. Measured ruff 764 to 724 (-40: 24 RUF069 and 16 PLR2004, equal to the K probe's), mypy flat 1452. | 2026-11-01: R106 answer (R106 added as nemik:R104; read 2026-11-01T13:10Z): the 24 float asserts were classified from git show 1df34c15: 23 exactness-intended, 1 tolerance-intended (test_pacing 'later == 10.0', a float refill over three days). pytest.approx loosened the 23 to a 1e-6 relative tolerance. Restored by W1379 as pytest.approx(x, rel=0, abs=0) (exact equality, not a bare float-literal compare, so RUF069 stays clear), second entry of stack 784; the 3 test_history sites (W1378) take the same form. The ruff gain of W1376 (-40) is unchanged by it.",
       "issued_at": "2026-11-01T12:42:49Z",
       "minted_during": "interrupt",
       "caused_by": "W1288",
-      "last_worked": "2026-11-01T13:02:21Z",
+      "last_worked": "2026-11-01T13:09:35Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_baseline.py",
@@ -33019,23 +33019,76 @@
     {
       "symbol": "W1377",
       "title": "Three test helpers take their boolean parameter keyword-only (FBT001), so ruff falls by three",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-11-01: G0 2026-11-01T12:51:45Z (date -u in the preceding call), BEFORE the first edit of these files. Advances W1377, the staged successor of stack 782. Pace: nemik-rank nemik --pace read at 12:30:09Z, pace of 2026-11-01T12:25:27Z: ruff behind (owes 90, fell 75), mypy behind, codon behind. Premise read: ruff's FBT listing at 12:51Z (25 sites; the three in tests are test_apply_witness._export(root, as_of, applied: bool), test_calwrite's parametrized test_event_times_never_invent_a_wrong_end(dtstart, due, needs_end: bool, want) and test_rank_apply's fake_run(cmd, check: bool)); grep shows all four callers of _export pass applied=True/False by keyword; fake_run replaces subprocess.run, which src calls with check= by keyword (the earlier ARG001 on this parameter stays). Actuator: Edit a '*,' before each boolean parameter (test_calwrite's want after it also becomes keyword-only: pytest passes parametrized values by name). N=3 FBT001, K=3 (each signature read; no positional caller). K probe: the three tests run directly after the edit, before the submit. Expected -3: ruff 724 (stack 782's value) to 721, mypy flat at 1452. The 22 src FBT sites are not read.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-01: G0 2026-11-01T12:51:45Z (date -u in the preceding call), BEFORE the first edit of these files. Advances W1377, the staged successor of stack 782. Pace: nemik-rank nemik --pace read at 12:30:09Z, pace of 2026-11-01T12:25:27Z: ruff behind (owes 90, fell 75), mypy behind, codon behind. Premise read: ruff's FBT listing at 12:51Z (25 sites; the three in tests are test_apply_witness._export(root, as_of, applied: bool), test_calwrite's parametrized test_event_times_never_invent_a_wrong_end(dtstart, due, needs_end: bool, want) and test_rank_apply's fake_run(cmd, check: bool)); grep shows all four callers of _export pass applied=True/False by keyword; fake_run replaces subprocess.run, which src calls with check= by keyword (the earlier ARG001 on this parameter stays). Actuator: Edit a '*,' before each boolean parameter (test_calwrite's want after it also becomes keyword-only: pytest passes parametrized values by name). N=3 FBT001, K=3 (each signature read; no positional caller). K probe: the three tests run directly after the edit, before the submit. Expected -3: ruff 724 (stack 782's value) to 721, mypy flat at 1452. The 22 src FBT sites are not read. | 2026-11-01: Landed 63a2c2c9 (COMMITTED line printed it; git log -1 subject is W1377's) at 2026-11-01T13:12:17Z by TZ=UTC reflog (08:12:17 -0500). Submitted 13:02:25Z: 9 min 52 s wall in the gate. Measured ruff 724 to 721 (-3, equal to K), mypy flat 1452.",
       "issued_at": "2026-11-01T12:51:44Z",
       "minted_during": "interrupt",
       "caused_by": "W1288",
-      "last_worked": "2026-11-01T12:52:34Z",
+      "last_worked": "2026-11-01T13:13:05Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_apply_witness.py",
         "tests/test_calwrite.py",
         "tests/test_rank_apply.py",
         "ruff-baseline.json"
+      ],
+      "size_class": "small",
+      "completed": "20261101T131305Z"
+    },
+    {
+      "symbol": "W1378",
+      "title": "tests/test_history.py compares its three floats through pytest.approx once pytest is a runtime import (RUF069), so ruff falls by four",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-11-01: G0 2026-11-01T13:03:10Z (date -u in the preceding call), BEFORE the first edit of the real file. Advances W1378, the staged successor of stack 783. Pace: nemik-rank nemik --pace read at 13:00:03Z (tick stamp), pace of 2026-11-01T12:25:27Z, newest landing 12:50:08Z PENDING: ruff behind (owes 90, fell 75), mypy behind, codon behind. Premise read: tests/test_history.py imports pytest only under TYPE_CHECKING (line 37) and uses it once, in an annotation (line 375): so it can become a runtime import without a duplicate. Actuator: scratchpad/w1378_history.py: drop pytest from the TYPE_CHECKING block, add it as a top-level import, turn the three w41[...] == <float> asserts (lines 332, 338, 343) into pytest.approx; then ruff --select I --fix and ruff format. K PROBE BEFORE THIS G0: probe copy tests/probe_w1378_test_history.py (deleted): ruff house counts on the original RUF069 3, PLR2004 1, S607 4, S603 4, S404 1; on the probe RUF069 0, PLR2004 0, the S-rules equal (its 70 S101 are its filename); mypy 2 on both. N=3 RUF069 plus 1 PLR2004, expected -4: ruff 721 (stack 783's value) to 717, mypy flat at 1452. Waits for stack 783 (queue files, ruff-baseline.json).",
+      "issued_at": "2026-11-01T13:03:09Z",
+      "minted_during": "tick",
+      "caused_by": "W1376",
+      "last_worked": "2026-11-01T13:04:25Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tests/test_history.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "small",
+      "completed": null
+    },
+    {
+      "symbol": "W1379",
+      "title": "The float asserts that were exact on purpose keep exact equality: pytest.approx with zero tolerance in eleven test files (R106)",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-11-01: G0 2026-11-01T13:06:53Z (date -u in the preceding call), BEFORE the first edit. Advances W1379, the second entry of stack 784 (it lowers no ratchet itself, so it rides behind W1378's ruff entry). Cause: R106 (added as nemik:R104) on W1376. Classification of the 24 landed sites plus the 3 staged in test_history, read from git show 1df34c15: EXACTNESS-INTENDED 26: shares and ratios of integer counts (test_baseline done_share 0.5, touched_share 1.0; test_churn redraws 0.5 and 0.25; test_health_cards 0.5; test_health blocked_share 1.0 and the 3-digit rounded 0.667; test_toil 0.333 rounded, 0.0; test_operator_rate wait days 14.0; test_wake_nudge age_seconds 3600.0 from timedelta seconds; test_rank_flow's ten Fraction-derived saliences and currents 0.5, 1.5, 2.0, 1.0; test_wake_alarms stored state 1.0; test_pacing overdraft 0.0; the three test_history values 1.0, 2.0, 0.0); TOLERANCE-INTENDED 1: test_pacing later == 10.0 (float refill over three days at a rate). Every one of the 24 was an exact == before W1376 and passed, so restoring exactness cannot fail a test. Actuator: scratchpad/w1379_exact.py: every pytest.approx(x) in the eleven files becomes pytest.approx(x, rel=0, abs=0) (zero tolerance: exact equality, and still not a bare float literal compare, so RUF069 does not return) except the one tolerance site; then ruff format. K PROBE: the same codemod on probe copies before the real run (below). Expected ruff flat at 717 (stack 784's value after W1378), mypy flat at 1452; E501 is checked because the longer call can overflow 100 columns. | 2026-11-01: Standing 12 miss (read 2026-11-01T13:10Z): this G0 was written BEFORE its K probe (the G0 says 'K PROBE: the same codemod on probe copies before the real run (below)'). The edit itself still followed the G0 (first edit 13:07Z after the 13:06:53Z stamp), and the probe preceded the real run: eleven probe copies read ruff counts equal to the current files with no E501; real files ruff 717 / mypy 1452, 76 tests passed. The expectation 'ruff flat' held. Reason it came first: the change restores the original assertion strength, so the expected delta was zero by construction; that is not an exemption from probing first.",
+      "issued_at": "2026-11-01T13:06:52Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1376",
+      "last_worked": "2026-11-01T13:09:27Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tests/test_baseline.py",
+        "tests/test_churn.py",
+        "tests/test_health.py",
+        "tests/test_health_cards.py",
+        "tests/test_operator_rate.py",
+        "tests/test_pacing.py",
+        "tests/test_rank_flow.py",
+        "tests/test_toil.py",
+        "tests/test_wake_alarms.py",
+        "tests/test_wake_nudge.py",
+        "tests/test_history.py"
       ],
       "size_class": "small",
       "completed": null
@@ -33241,12 +33294,7 @@
   ],
   "job_id": "481476b5",
   "heartbeat": "2026-10-29T04:11:13Z",
-  "lock": {
-    "holder": "nemik-94",
-    "taken_at": "2026-11-01T13:00:14Z",
-    "pid": 337543,
-    "start": 21144718
-  },
+  "lock": null,
   "predecessor_job_id": "1d7fe6d0",
   "leases": [
     {
@@ -40511,7 +40559,22 @@
         }
       ],
       "id": "nemik:R103"
+    },
+    {
+      "card": "W1376",
+      "trigger": "round 106: nemik-94 twelfth tick, W1376 (24 RUF069 float comparisons through pytest.approx in ten test files, ruff 764 to 724, landed 1df34c15 = 13:01:24Z), W1377 (3 FBT001, stack 783 inflight, key 1793538145297640751), W1378 (4 findings in test_history.py, staged as stack 784); landings c1523ea7 12:38:44Z, 987507a9 12:50:08Z",
+      "root": "Verified from source (TZ=UTC reflog): 8e09499b 12:25:06Z, c1523ea7 12:38:44Z (stack 780), 987507a9 12:50:08Z (781), 1df34c15 13:01:24Z (782); --in-gate lists W1377 inflight; `mikemol-pycheck --ratchet` prints ruff 717/721 and mypy 1452/1452 (the live 717 is W1378's staged -4 against stack 783's baseline 721; -40 and -3 then take ruff 764 to 721). Intervals as Z pairs: 780 gate 12:26:10Z to 12:38:44Z (12 min 34 s), gate empty 12:38:44Z to the accepted 781 submit 12:40:58Z (2 min 14 s, the first submit at 12:40:08Z refused), 781 gate 9 min 10 s, gate empty 12:50:08Z to 12:51:18Z (1 min 10 s), 782 gate 10 min 06 s, gate empty 13:01:24Z to 13:02:25Z (1 min 01 s). The staged-successor invariant held; the one refusal was the session's own race (a background submit in the same call batch as the done mark), the seventh instance of the working-mark class (W1219: W733, W1245, W1273, W1187, W1286, W1334, now W1374) and it cost 50 s; it belongs in the pre-submit script already owed on W1219 (set the finished card done in an earlier call, read the working set back with --show, then submit). R105's outage analysis is recorded on W1288 as 'consistent, not proven', which is the right strength. One finding about what W1376 changed. No fixpoint is declared. Carried open findings, status on 2026-11-01: R95 second finding on W1349, R95 third, R97 first and R98 findings on W1219 (script, citations), R102 on W1219, R94 on W1348, R93 on W1347, R92 on W1346 and W1288, R91 on W1345, R72 on W846, R84 on W695, R100 on W910 (unbuilt), R101 on W1288 (PLR2004 115 unread), R105 on W1288 (answered, closes on read-back) (2026-11-01 or 2026-11-02), R85 on W613 (read-back). Codon owed with no stack; hooks-venv rebuild and census (W1325) not done.",
+      "findings": [
+        {
+          "finding": "W1376 turned 24 float equalities into pytest.approx across ten test files. The K probe measured lint and mypy (ruff RUF069 24 to 0 and PLR2004 down 16; mypy equal), not what the assertions mean: pytest.approx compares to a 1e-6 relative tolerance, so every site that was exact on purpose (a value computed from integers, a determinism check, a default of 0.0 or 1.0, 'the same input yields the same score') now passes for any nearby value. Classify the 24 sites: tolerance intended (a float computed by division or a decay), or exactness intended. For the exact ones either keep the equality with the reasoning written in a comment and the finding left in the baseline, or use `math.isclose(a, b, rel_tol=0.0, abs_tol=0.0)` style exact comparison that RUF069 accepts, or compare the integer numerators; do not leave an exactness test on approx.",
+          "finding_card": "W1376",
+          "finding_owner": "nemik session",
+          "finding_witness": "A W1376 evidence line with the 24 sites (file:line) classified tolerance-intended or exactness-intended, and for each exactness-intended site the replacement that keeps it exact, or a statement that none exist.",
+          "due": "2026-11-02"
+        }
+      ],
+      "id": "nemik:R104"
     }
   ],
-  "retro_counter": 103
+  "retro_counter": 104
 }

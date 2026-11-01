@@ -36,5 +36,5 @@ def test_asks_entering_and_leaving_the_operator_are_counted_per_week() -> None:
     assert (row["operator_asked"], row["operator_answered"]) == (3, 1)
     assert row["operator_open"] == 2
     assert row["operator_wait_days"] == pytest.approx(
-        14.0
+        14.0, rel=0, abs=0
     )  # 2 open over 1 answered a week

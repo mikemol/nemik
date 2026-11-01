@@ -54,7 +54,7 @@ def test_the_worst_signal_decides_and_each_crossing_is_named() -> None:
     """
     found = health(_repo(["ready", "blocked", "blocked"], ticks=50), "a", LIMITS)
     assert found.status == "red"
-    assert found.blocked_share == pytest.approx(0.667)
+    assert found.blocked_share == pytest.approx(0.667, rel=0, abs=0)
     assert found.oldest_block_ticks == 50
     assert len(found.reasons) == 2
     assert any("oldest_block_ticks" in r and "red" in r for r in found.reasons)
@@ -66,5 +66,5 @@ def test_a_done_card_and_another_repos_card_do_not_count() -> None:
     g = _repo(["blocked", "done"], ticks=60)
     other = waypoint_uri("b", "W1")
     g.add((other, OSLC_CM.state, STATE["ready"]))
-    assert health(g, "a", LIMITS).blocked_share == pytest.approx(1.0)
+    assert health(g, "a", LIMITS).blocked_share == pytest.approx(1.0, rel=0, abs=0)
     assert health(g, "b", LIMITS).status == "green"

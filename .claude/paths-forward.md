@@ -3,12 +3,12 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1375 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:2d1f872209f59706`
+counter 1378 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:e1bf92be8db8eff8`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1374 | working |
-| 2 | W1375 | working |
+| 1 | W1377 | working |
+| 2 | W1378 | working |
 | 3 | W1075 | ready |
 | 4 | W1139 | ready |
 | 5 | W1279 | ready |
@@ -1354,13 +1354,15 @@ counter 1375 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:2d1
 | 1345 | W1371 | done |
 | 1346 | W1372 | done |
 | 1347 | W1373 | done |
+| 1348 | W1374 | done |
+| 1349 | W1375 | done |
+| 1350 | W1376 | done |
 
 ## waypoints
 
-1. **W1374** (working) tests/test_operator_rate.py and tests/test_memo_audits.py type their fixture documents, so mypy
-   falls by thirteen
-2. **W1375** (working) tests/test_check_run_rows.py reads the loaded tool's main and exit code as typed names, so mypy
-   falls by four
+1. **W1377** (working) Three test helpers take their boolean parameter keyword-only (FBT001), so ruff falls by three
+2. **W1378** (working) tests/test_history.py compares its three floats through pytest.approx once pytest is a runtime
+   import (RUF069), so ruff falls by four
 3. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 4. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -4436,6 +4438,12 @@ counter 1375 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:2d1
 1346. **W1372** (done) tests/test_ruler_table.py reads the served graph through a local TypedDict and a cast, so mypy
    falls by thirteen
 1347. **W1373** (done) tests/test_workflows.py annotates the Any its tomllib and re calls return, so mypy falls by seven
+1348. **W1374** (done) tests/test_operator_rate.py and tests/test_memo_audits.py type their fixture documents, so mypy
+   falls by thirteen
+1349. **W1375** (done) tests/test_check_run_rows.py reads the loaded tool's main and exit code as typed names, so mypy
+   falls by four
+1350. **W1376** (done) Twenty-four float-equality asserts in ten test files become pytest.approx comparisons (RUF069),
+   so ruff falls by forty with sixteen magic-value findings
 
 ## residue
 
@@ -5397,3 +5405,21 @@ counter 1375 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:2d1
   HEAD-versus-live diff), R94 on W1348, R93 on W1347, R92 on W1346 and W1288, R91 on W1345, R72 on W846, R84 on W695,
   R100 on W910 (still unbuilt), R101 on W1288 (PLR2004 125 unsampled) (all 2026-11-02), R85 on W613 (read-back). Codon
   still owed with no stack; hooks-venv rebuild and census (W1325) not done.; 0 finding(s)
+- **nemik:R103** (-) round 105: nemik-94 eleventh tick, W1374 (13 mypy findings in test_operator_rate.py and
+  test_memo_audits.py, stack 780 inflight, key 1793535969994863176) and W1375 (4 in test_check_run_rows.py, staged as
+  stack 781); landings fcb7de4a (tip of stack 778, W1371 then W1372) 12:14:05Z and 8e09499b (W1373) 12:25:06Z: root
+  Verified from source (TZ=UTC reflog): 8b96cde6 12:01:36Z, fcb7de4a 12:14:05Z, 8e09499b 12:25:06Z; --in-gate lists
+  W1374 inflight; `mikemol-pycheck --ratchet` prints ruff 764/764 and mypy 1452/1456 (the live 1452 is W1375's staged -4
+  against stack 780's baseline 1456; W1374 -13 and W1375 -4 take 1469 to 1452). Intervals as Z pairs: 778 gate 10 min 10
+  s, gate empty 12:14:05Z to 12:15:49Z (1 min 44 s), 779 gate 9 min 17 s, gate empty 12:25:06Z to 12:26:10Z (1 min 04
+  s). The staged-successor invariant held again (781 staged while 780 gated). The R101 PLR2004 sample (ten sites, all
+  the expected value of an assertion, a named constant is the fix, a per-file-ignores entry would be a waiver) is honest
+  and answers that finding in part (115 of 125 unread). Stamp note: the W1375 G0 (12:27:14Z) quotes the 11:25:26Z pace,
+  but the 12:25:27Z pace was already readable; the stack still passes because mypy is owed on both. The substantive new
+  result is not the session's: the R95 first finding on W1288 (why no tick ran 06:30 and 07:00) is answerable from the
+  transcript, below. No fixpoint is declared. Carried open findings, status on 2026-11-01: R95 first finding on W1288
+  (due today, answered below), R95 second finding on W1349, R95 third, R97 first and R98 findings on W1219, R102 on
+  W1219 (closes on the HEAD-versus-live diff), R94 on W1348, R93 on W1347, R92 on W1346 and W1288, R91 on W1345, R72 on
+  W846, R84 on W695, R100 on W910 (unbuilt), R101 on W1288 (115 PLR2004 sites unread) (2026-11-02), R85 on W613
+  (read-back). Codon owed with no stack; ruff is owed again at the 12:25:27Z pace (fell 75, owes 90) so the next entry
+  should be a ruff paydown.; 1 finding(s)

@@ -3753,3 +3753,9 @@
 2026-11-01T12:51:44Z  interrupt W1377 minted    -         "Three test helpers take their boolean parameter keyword-only (FBT001), so ruff falls by three"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1288
 2026-11-01T12:52:34Z  status W1377 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T13:02:21Z  status W1376 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T13:03:09Z  tick  W1378 minted    -         "tests/test_history.py compares its three floats through pytest.approx once pytest is a runtime import (RUF069), so ruff falls by four"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1376
+2026-11-01T13:04:25Z  status W1378 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T13:04:26Z  tick  W1376 advanced  sweep     "W1375 landed 987507a9 (mypy 1456 to 1452) and W1376 1df34c15 (ruff 764 to 724, 24 float asserts to pytest.approx); stack 783 for W1377 (three keyword-only booleans, 724 to 721) submitted 13:02:25Z after a 1 min 1 s gap; stack 784 for W1378 (test_history, 721 to 717) staged behind it; R105 outage analysis written on W1288 [blocked by W1377]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T13:06:52Z  interrupt W1379 minted    -         "The float asserts that were exact on purpose keep exact equality: pytest.approx with zero tolerance in eleven test files (R106)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1376
+2026-11-01T13:09:25Z  status W1379 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T13:13:05Z  status W1377 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

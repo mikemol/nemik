@@ -19,7 +19,7 @@ def test_age_seconds_computes_from_iso_last_tick() -> None:
     """Age seconds computes from iso last tick."""
     now = datetime(2026, 9, 26, 12, 0, 0, tzinfo=UTC)
     then = (now - timedelta(hours=1)).isoformat()
-    assert age_seconds(then, now) == pytest.approx(3600.0)
+    assert age_seconds(then, now) == pytest.approx(3600.0, rel=0, abs=0)
 
 
 def test_age_seconds_none_for_empty_or_unparsable() -> None:
