@@ -19,7 +19,10 @@ from nemik.workflows import advice_only
 ROOT = Path(__file__).resolve().parents[1]
 SKILL = (ROOT / "skills/nemik/SKILL.md").read_text()
 SHAPES = files("nemik.data").joinpath("shapes.ttl").read_text()
-MODEL = table(tomllib.loads(files("nemik.data").joinpath("workflows.toml").read_text()))
+RAW: dict[str, object] = tomllib.loads(
+    files("nemik.data").joinpath("workflows.toml").read_text()
+)
+MODEL = table(RAW)
 LIFECYCLE = table(MODEL["lifecycle"])
 TRANSITIONS = tables(LIFECYCLE["transition"])
 RULES = tables(MODEL["rule"])
@@ -63,7 +66,9 @@ def test_the_skill_numbers_exactly_the_rules_the_model_declares() -> None:
     section = SKILL.split("## The four rules that make the graph work")[1].split(
         "\n## "
     )[0]
-    numbered = re.findall(r"^\d+\. \*\*(.+?)\*\*", section, flags=re.MULTILINE)
+    numbered: list[str] = re.findall(
+        r"^\d+\. \*\*(.+?)\*\*", section, flags=re.MULTILINE
+    )
     assert len(numbered) == len(rules)
     for rule in rules:
         assert str(rule["skill_anchor"]) in section, (
@@ -78,7 +83,9 @@ def test_every_workflow_step_command_appears_in_the_skill() -> None:
 
 def test_every_documented_command_has_a_workflow_or_is_reference() -> None:
     """Every documented command has a workflow or is reference."""
-    documented = re.findall(r"^\| `(nemik-[a-z-]+)", SKILL, flags=re.MULTILINE)
+    documented: list[str] = re.findall(
+        r"^\| `(nemik-[a-z-]+)", SKILL, flags=re.MULTILINE
+    )
     placed = set(STEP_COMMANDS) | set(COMMANDS)
     assert [c for c in documented if c not in placed] == []
     # and the reference list names only commands the skill documents
