@@ -179,10 +179,21 @@ def test_operator_categories(tmp_path: Path) -> None:
     )
     r = run("operator", tmp_path, "--json")
     assert r.returncode == 0, r.stderr
-    asks = json.loads(r.stdout)
-    asks = asks if isinstance(asks, list) else asks["asks"]
-    cat = {a["ref"]: a["category"] for a in asks}
+    cat = {a["ref"]: a["category"] for a in _asks(r.stdout)}
     assert cat == {"alpha:W1": "needs-you", "alpha:W2": "unstated"}
+
+
+def _asks(stdout: str) -> list[dict[str, str]]:
+    """Read the asks of `nemik-operator --json`, a bare list or an object with `asks`.
+
+    Returns:
+        The ask rows.
+
+    """
+    doc: list[dict[str, str]] | dict[str, list[dict[str, str]]] = json.loads(stdout)
+    if isinstance(doc, list):
+        return doc
+    return doc["asks"]
 
 
 def test_operator_long_free_text_reads_as_needs_you(tmp_path: Path) -> None:
@@ -202,9 +213,9 @@ def test_operator_long_free_text_reads_as_needs_you(tmp_path: Path) -> None:
         ),
     )
     r = run("operator", tmp_path, "--json")
-    asks = json.loads(r.stdout)
-    asks = asks if isinstance(asks, list) else asks["asks"]
-    assert {a["ref"]: a["category"] for a in asks} == {"alpha:W1": "needs-you"}
+    assert {a["ref"]: a["category"] for a in _asks(r.stdout)} == {
+        "alpha:W1": "needs-you"
+    }
 
 
 def test_bundled_title_on_done_waypoint_does_not_warn(tmp_path: Path) -> None:
@@ -319,7 +330,7 @@ def test_caused_by_into_residue_resolves(tmp_path: Path) -> None:
     """Caused by into residue resolves."""
     write_queue(tmp_path, "alpha", waypoint("W2", caused_by="W1"))
     q = tmp_path / "alpha" / "paths-forward.json"
-    doc = json.loads(q.read_text())
+    doc: dict[str, list[dict[str, str]]] = json.loads(q.read_text())
     doc["residue"] = [
         {"symbol": "W1", "title": "dropped cause", "reason": "superseded"}
     ]

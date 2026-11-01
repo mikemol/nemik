@@ -3715,3 +3715,8 @@
 2026-11-01T10:42:58Z  status W1365 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T10:43:01Z  status W1366 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T10:44:09Z  status W1364 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T11:01:15Z  tick  W1367 minted    -         "tests/test_gate.py reads its operator asks and queue JSON through an annotated helper and variable, so mypy falls by sixteen"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
+2026-11-01T11:03:59Z  status W1367 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T11:04:12Z  tick  W1365 advanced  sweep     "W1364 landed 183bc40f (mypy 1634 to 1605); stack 773 (W1365 test_certify mypy 1605 to 1588, then W1366 rank.py 18 hoisted imports, ruff 782 to 764) gating since 10:44:13Z; serve.py hoist reverted after the hub-modules architecture claim failed; stack 774 for W1367 (test_gate, mypy 1588 to 1572) staged behind it [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87); W1365 and W1366 are gating as stack 773 and W1367 waits on its mypy-baseline.json (cites github:W71, W1366, W1367)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T11:07:55Z  status W1365 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T11:07:56Z  status W1366 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

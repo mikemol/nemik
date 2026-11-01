@@ -152,9 +152,6 @@
  "tests/test_fruit.py": {
   "misc": 25
  },
- "tests/test_gate.py": {
-  "misc": 16
- },
  "tests/test_guarantees.py": {
   "misc": 18
  },
