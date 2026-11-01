@@ -8,6 +8,7 @@ command is one that command takes, and every workflow it names is modelled in da
 
 from __future__ import annotations
 
+import inspect
 import re
 import tomllib
 from pathlib import Path
@@ -19,13 +20,16 @@ DOC = (ROOT / "docs" / "positioning.md").read_text()
 
 
 def _scripts() -> set[str]:
-    data = tomllib.loads((ROOT / "pyproject.toml").read_text())
+    data: dict[str, dict[str, dict[str, str]]] = tomllib.loads(
+        (ROOT / "pyproject.toml").read_text()
+    )
     return set(data["project"]["scripts"])
 
 
 def test_every_command_the_page_names_exists() -> None:
     """Every command the page names exists."""
-    named = set(re.findall(r"`(nemik-[a-z-]+)", DOC))
+    found: list[str] = re.findall(r"`(nemik-[a-z-]+)", DOC)
+    named = set(found)
     assert named, "the page names no command"
     assert sorted(named - _scripts()) == []
 
@@ -33,22 +37,24 @@ def test_every_command_the_page_names_exists() -> None:
 def test_every_flag_the_page_gives_a_command_is_one_it_takes() -> None:
     """Every flag the page gives a command is one it takes."""
     parsers = {
-        "nemik-rank": rank.main,
-        "nemik-history": history.main,
-        "nemik-critical": critical.main,
+        "nemik-rank": rank,
+        "nemik-history": history,
+        "nemik-critical": critical,
     }
-    for command, flag in re.findall(r"`(nemik-[a-z-]+)[^`]*?(--[a-z-]+)", DOC):
+    pairs: list[tuple[str, str]] = re.findall(r"`(nemik-[a-z-]+)[^`]*?(--[a-z-]+)", DOC)
+    for command, flag in pairs:
         if command in parsers:
-            source = Path(parsers[command].__code__.co_filename).read_text(
-                encoding="utf-8"
-            )
+            source = Path(inspect.getfile(parsers[command])).read_text(encoding="utf-8")
             assert f'"{flag}"' in source, f"{command} takes no {flag}"
 
 
 def test_every_workflow_the_page_names_is_modelled() -> None:
     """Every workflow the page names is modelled."""
-    model = tomllib.loads((ROOT / "src/nemik/data/workflows.toml").read_text())
+    model: dict[str, list[dict[str, str]]] = tomllib.loads(
+        (ROOT / "src/nemik/data/workflows.toml").read_text()
+    )
     names = {w["name"] for w in model["workflow"]}
-    cited = set(re.findall(r"`workflow:([a-z-]+)`", DOC))
+    cited_found: list[str] = re.findall(r"`workflow:([a-z-]+)`", DOC)
+    cited = set(cited_found)
     assert cited, "the page names no workflow"
     assert sorted(cited - names) == []

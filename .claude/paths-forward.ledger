@@ -3679,3 +3679,6 @@
 2026-11-01T08:44:37Z  status W1355 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T08:47:47Z  status W1354 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T08:47:48Z  status W1353 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T08:58:26Z  status W1355 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T08:59:32Z  interrupt W1356 minted    -         "tests/test_positioning.py annotates the Any its tomllib and re calls return and reads its parsers' files through inspect, so mypy falls by 22"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
+2026-11-01T09:00:04Z  status W1356 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1355,
+  "counter": 1356,
   "waypoints": [
     {
       "symbol": "W1",
@@ -32508,20 +32508,42 @@
     {
       "symbol": "W1355",
       "title": "tests/test_witnesses.py annotates the Any its json.loads and re.findall calls return and types its route table, so mypy falls by 31",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-01: G0 2026-11-01T08:43:49Z (date -u in the preceding call), BEFORE the first edit of the real file. Advances W1355 (W1178's class: the mypy paydown). Pace: nemik-rank nemik --pace read at 08:42Z, pace stamp 2026-11-01T08:25:26Z (still the newest), mypy 'behind: fell 168 over 10 landings, owes 190; 1760 left', codon behind, ruff ok. Actuator: tests/test_witnesses.py: json.loads results annotated dict[str, list[dict[str, str]]] (lines 147 and 285), re.findall result annotated list[str] (line 300), _serve's routes typed dict[str, Callable[[dict[str, list[str]]], object]] (line 152), Callable imported under TYPE_CHECKING. K PROBE RUN BEFORE THIS G0: scratchpad/w1355_types.py applied the five replacements to a copy tests/probe_w1355.py (deleted after): mypy 'Success: no issues found' (31 to 0), ruff on the copy the same classes as the original (the copy's extra S101 are its non-test filename). So N=31 and K=31, expected result exactly -31: mypy 1728 (stack 762's value) to 1697, ruff flat at 875. Follow-on findings: none seen in the probe. Premise read: Callable argument typing of parse_qs is dict[str, list[str]], from the probe's pass. | 2026-11-01: Landed a2a3d059 (COMMITTED line printed it; git log -1 subject is W1355's) at 2026-11-01T08:57:41Z by TZ=UTC reflog (03:57:41 -0500). Submitted 08:47:52Z: 9 min 49 s wall in the gate. Measured mypy 1728 to 1697 (-31, equal to the K probe's), ruff flat 875. The probe's K=31 matched exactly.",
+      "issued_at": "2026-11-01T08:43:48Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1178",
+      "last_worked": "2026-11-01T08:58:26Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tests/test_witnesses.py",
+        "mypy-baseline.json"
+      ],
+      "size_class": "small",
+      "completed": "20261101T085826Z"
+    },
+    {
+      "symbol": "W1356",
+      "title": "tests/test_positioning.py annotates the Any its tomllib and re calls return and reads its parsers' files through inspect, so mypy falls by 22",
       "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-11-01: G0 2026-11-01T08:43:49Z (date -u in the preceding call), BEFORE the first edit of the real file. Advances W1355 (W1178's class: the mypy paydown). Pace: nemik-rank nemik --pace read at 08:42Z, pace stamp 2026-11-01T08:25:26Z (still the newest), mypy 'behind: fell 168 over 10 landings, owes 190; 1760 left', codon behind, ruff ok. Actuator: tests/test_witnesses.py: json.loads results annotated dict[str, list[dict[str, str]]] (lines 147 and 285), re.findall result annotated list[str] (line 300), _serve's routes typed dict[str, Callable[[dict[str, list[str]]], object]] (line 152), Callable imported under TYPE_CHECKING. K PROBE RUN BEFORE THIS G0: scratchpad/w1355_types.py applied the five replacements to a copy tests/probe_w1355.py (deleted after): mypy 'Success: no issues found' (31 to 0), ruff on the copy the same classes as the original (the copy's extra S101 are its non-test filename). So N=31 and K=31, expected result exactly -31: mypy 1728 (stack 762's value) to 1697, ruff flat at 875. Follow-on findings: none seen in the probe. Premise read: Callable argument typing of parse_qs is dict[str, list[str]], from the probe's pass.",
-      "issued_at": "2026-11-01T08:43:48Z",
+      "evidence": "2026-11-01: G0 2026-11-01T08:59:33Z (date -u in the preceding call), BEFORE the first edit of the real file. Advances W1356 (W1178's class: the mypy paydown). Pace: nemik-rank nemik --pace read at 08:42Z, stamp 2026-11-01T08:25:26Z, mypy behind (fell 168 over 10 landings, owes 190); not re-read since (the 09:25Z pace is not yet due). Actuator: tests/test_positioning.py: tomllib.loads results annotated dict[str, dict[str, dict[str, str]]] (pyproject) and dict[str, list[dict[str, str]]] (workflows), re.findall results annotated list[str] (x2) and list[tuple[str, str]], and the parsers dict maps each command to its module so inspect.getfile(module) replaces main.__code__.co_filename (same file). K PROBE BEFORE THIS G0: scratchpad/w1356_types.py applied to a copy tests/probe_w1356.py (deleted): mypy first showed 1 error (inspect.getfile of a 'function'), fixed by the module mapping, then 'Success: no issues found' (22 to 0); ruff on the copy: only S101 from its non-test filename, the original has 0. N=22, K=22, expected -22: mypy 1697 to 1675, ruff flat at 875. Premise read: the baseline says tests/test_positioning.py misc 22.",
+      "issued_at": "2026-11-01T08:59:32Z",
       "minted_during": "interrupt",
       "caused_by": "W1178",
-      "last_worked": "2026-11-01T08:44:37Z",
+      "last_worked": "2026-11-01T09:00:04Z",
       "ticks_blocked": 0,
       "manifest": [
-        "tests/test_witnesses.py",
+        "tests/test_positioning.py",
         "mypy-baseline.json"
       ],
       "size_class": "small",
