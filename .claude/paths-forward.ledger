@@ -3795,3 +3795,7 @@
 2026-11-01T15:42:30Z  status W1388 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T15:42:38Z  tick  W1392 minted    -         "src/nemik/manifest.py reads the parsed document through two narrowing helpers, so mypy falls by twenty-nine"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
 2026-11-01T15:45:28Z  status W1392 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T15:45:44Z  tick  W1391 advanced  sweep     "W1386 landed 89d0bc9b (mypy 1452 to 1444); stack 792 landed f224d464, 52871d08, 5d91bfc6 (W1391 issues.py mypy 1444 to 1434, W1387 mspdi.py ruff 684 to 675, W1388 wake.py 675 to 668); stack 793 for W1392 (manifest.py, mypy 1434 to 1405, ruff 668 to 667, verified with the real pinned Codon) submitted 15:45:33Z [blocked by W1392]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T15:48:43Z  interrupt W1393 minted    -         "manifest.py keeps raising on a wrong-typed document and a test pins it (R111), a follow-up to W1392"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1392
+2026-11-01T15:54:31Z  status W1389 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T16:07:23Z  status W1392 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

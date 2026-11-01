@@ -17,12 +17,17 @@ from __future__ import annotations
 
 import operator
 import re
+import tomllib
+from importlib.resources import files
 from typing import TYPE_CHECKING, Any, TypedDict
 
+from mikemol.frontier.walk import frontier as walk
 from rdflib import RDF, Graph, Literal, URIRef
 from rdflib.namespace import DCTERMS, PROV
 
-from nemik.adapter import BASE, NEMIK, OSLC_CM
+from nemik.adapter import BASE, NEMIK, OPERATOR, OSLC_CM
+from nemik.index import index
+from nemik.salience import audit
 
 if TYPE_CHECKING:
     from rdflib.term import Node
@@ -343,8 +348,6 @@ def dependency_cycles(g: Graph) -> list[tuple[Node, ...]]:
         One tuple of card IRIs per cycle.
 
     """
-    from mikemol.frontier.walk import frontier as walk
-
     cards = set(g.subjects(OSLC_CM.state, None))
     edges = {(str(a), str(b)) for a, _, b in g.triples((None, NEMIK.enables, None))}
     edges |= {(str(b), str(a)) for a, _, b in g.triples((None, NEMIK.waitsFor, None))}
@@ -495,9 +498,6 @@ def errand_repos(text: str | None = None) -> frozenset[str]:
         The repos listed under [errand], empty when there are none.
 
     """
-    import tomllib
-    from importlib.resources import files
-
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
     return frozenset(tomllib.loads(text).get("errand", {}).get("repos", []))
@@ -657,8 +657,6 @@ def operator_asks(g: Graph) -> list[AskRow]:
         The rows of every open waypoint waiting on the operator, copied for the caller.
 
     """
-    from nemik.index import index
-
     ix = index(g)
     if ix is None:
         return _operator_asks(g)
@@ -668,7 +666,6 @@ def operator_asks(g: Graph) -> list[AskRow]:
 
 
 def _operator_asks(g: Graph) -> list[AskRow]:
-    from nemik.adapter import OPERATOR
 
     last: dict[Node, str] = {}
     for act in g.subjects(RDF.type, PROV.Activity):
@@ -778,8 +775,6 @@ def with_salience(g: Graph, asks: list[AskRow]) -> list[AskRow]:
         ticks blocked, then ref.
 
     """
-    from nemik.salience import audit
-
     solved: dict[str, dict[str, Any]] = {}
     for ask in asks:
         repo = str(ask["ref"]).partition(":")[0]
