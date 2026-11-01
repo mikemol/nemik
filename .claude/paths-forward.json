@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1420,
+  "counter": 1421,
   "waypoints": [
     {
       "symbol": "W1",
@@ -29402,17 +29402,19 @@
     {
       "symbol": "W1229",
       "title": "A repair of a rejected file in a stacked round uses the predecessor stack's frozen files as its base, in a scratch worktree, not git's HEAD",
-      "status": "ready",
+      "status": "blocked",
       "enables": [],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W1396"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "mtools-ad: a mode that restores a file as of a queued stack's frozen files, in mikemol-scratch; nemik:W1229 holds the case (test_calendars.py, stack622)",
       "evidence": "2026-10-28: 2026-10-28 mtools-ad claimed it: mtools:W2099 (mikemol-scratch restores a file as of a queued stack's frozen files, not HEAD; family of W2075). | 2026-10-28: 2026-10-28 R13-C1: the reviewer certified that R8-F15 is met by DISCIPLINE and not by a mode: build the next stack from main on files no queued stack carries, or wait for the landing. This session did it twice today (stack627's five held files were left alone until c0b9772 landed at 19:30:48Z, then passed in stack628). github-8f's warning of 2026-10-28 (mikemol-commit <scratch worktree> --stack is NOT refused: it takes its own lease, gates in parallel and lands on the worktree's HEAD, not main; build in a scratch worktree, mikemol-scratch land, then submit from main; mtools is adding a refusal) is why a scratch worktree is not used for submits here. The mtools:W2099 ask (restore a file as of a queued stack's frozen files) stays open for the cases the discipline cannot cover. | 2026-10-28: 2026-10-28 CORRECTION from github-8f to the scratch-worktree warning above (relayed, not yet verified by me against the host transcript): the rule is 'not UNDECLARED', not 'never'. A submit from a linked worktree opens a separate queue on that worktree's branch and lands there, not on main. Until that is a declared mode (mtools:W2103 part 0), nemik submits from main, which is unchanged. They cite the operator, host 695f3e0a line 115151, uuid d733374f-c184-4fe1-ae4f-9a4782294e93, 2026-10-28T19:33:16Z; I have not run mikemol-transcriptstruct --verify on it, so I act on nothing that depends on it. | 2026-10-29: 2026-10-29 mtools (peer): mtools:W2099 carded, not started, READY; behind W2067 and W2117.",
       "issued_at": "2026-10-28T16:28:42Z",
       "minted_during": "interrupt",
       "caused_by": "W1228",
-      "last_worked": "2026-10-29T04:37:28Z",
+      "last_worked": "2026-11-01T23:13:19Z",
       "ticks_blocked": 0,
       "completed": null,
       "warrants": [
@@ -29967,20 +29969,22 @@
     {
       "symbol": "W1246",
       "title": "The queue mirror lists each retro as '0 finding(s)', so no finding or its witness can be audited from it",
-      "status": "ready",
+      "status": "blocked",
       "enables": [],
       "touches": [
         "retros",
         "mirror"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W1396"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Watch the next three tick-open outputs for the gate line; then decide whether a second hook (a gap figure at tick-close) is wanted.",
       "evidence": "2026-10-29: 2026-10-29: cause found by the reviewer (R22): the validator checks only a top-level findings list, and nemik's retros were stored as a flat list under retros, so nothing was validated. R22 is the first record in the validated shape and the writer accepted it. Peer request sent to mtools-ad (message id 55428125-bc18-4a11-93f8-4c43a50962f2) to refuse a retro with no findings list or an unknown top-level key and render each finding. The 20 stored records are not edited. | 2026-10-29: 2026-10-29 mtools-ad (peer): taken on mtools:W2088, extended, no new card: it will refuse a retro with no findings list or an unknown top-level key and render each finding's id, card, due and witness. Not built yet. Related, built but unstacked: W2091 --migrate-retros (cause to root). | 2026-10-29: 2026-10-29 R32-F1: the empty-gate hook is stored with --tick-hooks-set (3 commands: nemik-inbound, nemik-stale, and mikemol-commit REPO --in-gate --json); it prints the commit gate's queue at every tick-open, so a tick that opens with the gate empty reads '[]' at once. It does NOT start a G0 or build a stack: that part of the finding stays a practice, and the gap-at-tick-close figure is not printed either. The writer refused the first list because it dropped the stored 'nemik-inbound nemik' (it asks for '# replaces:' or '# retires:' lines): the stored form is the bare name. | 2026-10-29: 2026-10-29 R33-F2: the late G0 of W1265 (ledger 08:45:10Z) was caused by backticks in the ledger text, which the shell hook reads as command substitution (SC2006) and refuses. Backtick-safe route: write the G0 text with no backticks (plain quotes or none), and write it BEFORE the first edit; if a hook refuses it, rewrite the text and retry before touching a file, never edit first. Recorded as practice here; a standing-rule line is the reviewer's due 2026-11-01 and I have not added one. R33-F3: nemik-rank nemik --apply ran at this tick (weights set: 70, up from 69): the next tick-open reads UNSCORED (206 now); the 3 nudges due at the last open were not identified (the open prints no per-card nudge line), so their disposition is: the peer messages sent this session (mtools nudge c099e6b0, github-42, luthen-observability) are the only nudges I sent. | 2026-10-29: 2026-10-29 R44-F1 the working-ahead method, as practised for slice 9 (gap 9 min 27 s, the first under 10 min): (1) while stack N gates, edit and measure slice N+1 on files that stack N does not carry (read stack N's paths first); (2) measure with mikemol-pycheck --ratchet WITHOUT --write, because stack N carries ruff-baseline.json and a queued stack's files are never edited; (3) when the measure passes, run the Codon census once; (4) when N lands, write the baseline with --write, record N's landing, record the census verdict, submit N+1. If slice N+1 shares a file with N, it waits for N to land (loop prompt line 40). The next two gaps under 10 min are to be quoted from date stamps here. | 2026-10-30: 2026-10-30 R58-F2 G0 template: every figure in a G0 is labelled MEASURED (a tool printed it, say which) or EXPECTED (a reasoned prediction not yet run). The PT018 G0 wrote 'mypy unchanged 3548' as a plain claim; it was an EXPECTED figure and the measure showed mypy +36. From the next G0 on, the line reads for example 'ruff 1690 to 1677 EXPECTED, mypy unchanged EXPECTED (docstrings only)' and the build line gives the MEASURED figures beside them. | 2026-10-30: 2026-10-30 R59-F2 G0 template line added: while a queued stack carries a baseline file, MEASURE with mikemol-pycheck --ratchet and WITHOUT --write, and write the baseline after that stack lands; read a baseline by key (ruff-baseline.json is 400 lines, never print it whole). Instance that prompted it: the 05:00Z ruff --write while 694 gated (no effect, checked, said out loud). Whether mtools should refuse --write while a gate holds the file is NOT asked yet; the ask goes to mtools with this instance, due 2026-11-02. | 2026-10-30: 2026-10-30 R60-F3 SENT to mtools: the ask that pycheck --ratchet --write refuse while a gate stack carries the baseline file, with the one observed case (04:55Z, 694, ruff-baseline.json 1677 to 1669, no effect, checked by reading HEAD after landing). Read-back owed: their reply or card number; due 2026-11-02. | 2026-10-30: 2026-10-30 R60-F3 read-back: mtools replied with mtools:W2172 (pycheck --write refuses while an --in-gate stack's paths name the baseline file, naming the stack key). Minted only; mtools has not yet confirmed that mikemol-pycheck is its own tool. Open step: none for nemik beyond citing mtools:W2172. | 2026-10-30: 2026-10-30 R61-F3 read from mtools' own queue (read-only --show): mtools:W2172 is a real card there, status ready, caused by nemik:W1246, next step 'confirm mikemol-pycheck is mtools'; then in --write read mikemol-commit --in-gate stacks' paths and refuse naming the stack key when one carries the baseline file'; evidence empty, last_worked null, so it is a ticket the peer holds but has not started. Also read mtools:W2171: status working, its next step is the ratchetseries.py dedupe read that I did and sent them (the dedupe is by sample time only). | 2026-10-30: 2026-10-30 R63-F1 gate-time hypothesis, data so far (the result is written when 699 lands): load average read at 06:53:35Z, two minutes into 699's gate with nothing of mine running beside it: 44.47 52.68 55.50 (1, 5 and 15 minute) over 32 runnable of 6555 tasks. So the host carries a 1-minute load of 44 to 55 BY ITSELF (the cluster, the build farm and the other sessions), which my censuses add to but do not create: the hypothesis that my censuses slow the gate may be small against that baseline. The expected finish stays about 07:08Z if the hypothesis holds and 07:15Z or later if not; with a baseline load of 44 I now expect the second. | 2026-10-30: 2026-10-30 R63-F1 RESULT of the gate-time hypothesis, read: stack 699 gated 20 min 42 s wall (submit 06:51:37Z to the landing stamp 07:12:19Z) with NOTHING heavy of mine beside it (no census, no long test run; only card writes and short reads). Stated before: about 07:08Z (16 to 17 min) if my censuses were the cause, 07:15Z or later (23 min or more) if not. Observed: 07:12:19Z, 20 min 42 s, between the two. The earlier gates: 13 to 17 min (684 to 690 at 13 min 6 s, 18 min 40 s, 15 min 15 s, 17 min 0 s), then 22 min 8 s (688), 24 min 12 s (695), 24 min 48 s (696), 25 min 15 s (697), 27 min 20 s (698) while a census of 6 to 9 min ran beside each. LOAD AVERAGE: 44.47 52.68 55.50 at 06:53:35Z (2 min into 699) and 43.01 62.03 61.64 at 07:12:xxZ at its verdict, with nothing of mine running: the host baseline is 43 to 62 (1 min) on its own. READING: removing my census shaved about 4 to 7 minutes off (27 min to 20 min), so it accounts for part of the lengthening, not all of it; the host's own load (cluster, other sessions, builds) accounts for the rest, and the gate was 13 to 17 min when that load was lower. DECISION for the working-ahead rule: keep building the next stack during a gate (the gap to the next submit is what the rule is for), but run the CODON CENSUS LAST: start it only when the gate is within 5 minutes of its expected verdict, or run it right after the previous landing and before the submit, not through the middle of a gate; the census is owed once per stack and its 6 to 9 minutes can sit between landing and submit when the gate is empty. What it gives up: a stack waits an extra 6 to 9 minutes before submit when its census has not finished, in return for a gate that finishes a few minutes sooner; I judge the trade even, so the rule is a preference not a requirement. | 2026-10-30: 2026-10-30 R64-F4 gate wall time and load, as far as I recorded them (submit to landing stamp; load average read only at 699): 694 15 min 2 s (load not read), 695 24 min 12 s (not read), 696 24 min 48 s (not read), 697 25 min 15 s (not read), 698 27 min 20 s (not read), 699 20 min 42 s (44.47 52.68 55.50 at 06:53:35Z, 43.01 62.03 61.64 at the verdict). Five of six have NO load reading: I cannot read the lengthening against load for them, and said so. From stack 700 on, the load average is read (cat /proc/loadavg) at the submit and at the verdict and written in the landing line, so six gates will have both.",
       "issued_at": "2026-10-28T23:04:15Z",
       "minted_during": "interrupt",
       "caused_by": "W1215",
-      "last_worked": "2026-10-30T07:22:24Z",
+      "last_worked": "2026-11-01T23:13:18Z",
       "ticks_blocked": 0,
       "completed": null
     },
@@ -33206,11 +33210,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Probe first: which of the 124 src prints are the CLI's contract (stdout) versus diagnostics; check the Codon census (tests/test_codon_census.py) for a new module, and the hub-module claim; then decide the output module's shape before editing a single print",
-      "evidence": "2026-11-01: Atomized from W1175 on 2026-11-01. A new src/nemik module imported by the adapter or check breaks the relay, hooks and commands until bazel build //:.venv (standing 6), and a module with typing.cast, dataclasses, except tuples or an rdflib import fails the codon census: probe-compile with the bazel-cache codon before writing it. Large: not one tick.",
+      "evidence": "2026-11-01: Atomized from W1175 on 2026-11-01. A new src/nemik module imported by the adapter or check breaks the relay, hooks and commands until bazel build //:.venv (standing 6), and a module with typing.cast, dataclasses, except tuples or an rdflib import fails the codon census: probe-compile with the bazel-cache codon before writing it. Large: not one tick. | 2026-11-01: 2026-11-01T23:10:15Z (read by stampnote): R125 (nemik:R123) finding 1 PROBE, the one W1384's next step asked for, written BEFORE any print is edited. (1) Which prints are the CLI contract: ruff --select T201 lists 123 prints in 24 src modules (rank 27, history 14, critical 11, wake 10, pins 7, witnesses 6, blocks_cli 6, calendars 8, check 6, vtodo 4, serve 4 and the rest 1 to 4); in blocks_cli.py all six are plain stdout (JSON dumps and tables, the command's interface); across src only ten use a keyword: print(..., end='') 2, file=sys.stderr 6, flush=True 2. So three functions cover the shapes: say(text) a line to stdout, say_raw(text) stdout with no newline, warn(text) a line to stderr (stderr is unbuffered, so flush=True on stdout is the only open case: two sites). (2) Shape of the output module: src/nemik/say.py, pure, stdlib sys only, NO boolean parameter (FBT) and NO bare star (the pinned Codon cannot parse one, W1400), so three functions rather than one with flags. (3) Codon: the probe compiled say.py with the pinned compiler through scratchpad/codon_one.py: 'say as_written empty, say stripped empty', both modes compile, so the census (a new module must not start failing) accepts it. (4) Hub claim: say.py imports nothing from nemik, so it adds no edge to serve.py or metrics.py; the 4 prints in serve.py can move to it later without changing the pinned module set beyond one import line, which checks/claims.py pins and must be run first. (5) Registry: modules are globbed (BUILD.bazel srcs glob src/nemik/*.py), tomlview is registered nowhere, so no registry edit. Standing 6: a new module imported by adapter or check breaks the relay until bazel build //:.venv; blocks_cli is a command, imported by neither, so the build between landing and use is the only exposure. DECISION: route the prints through nemik.say, module by module, smallest first (blocks_cli, 6), each stack lowering ruff by the count of prints moved. K for the first module: 6 (T201 x6 in blocks_cli), companions none expected; the new import can move other findings only if it creates one (I001 sort order, handled by ruff --fix). ",
       "issued_at": "2026-11-01T13:56:52Z",
       "minted_during": "interrupt",
       "caused_by": "W1175",
-      "last_worked": "2026-11-01T13:57:12Z",
+      "last_worked": "2026-11-01T23:10:15Z",
       "ticks_blocked": 0,
       "manifest": [
         "ruff-baseline.json"
@@ -33466,11 +33470,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Find where the mtools sha is pinned (pyproject.toml or the bazel module), bump it to a sha at or after 5357b346 as its own paydown-free card, rebuild, then run --help and the dry run.",
-      "evidence": "2026-11-01: 2026-11-01T17:47Z: checked the writer this repo runs: --help has no --clear-dead-enables (options end at --jwk, modes at --repair-counter). Result recorded on W695. The card closes when a built venv prints the flag and a dry run here has been read. | 2026-11-01: R119 (nemik:R117) rebuild done, 2026-11-01T20:21Z, gate empty (stack 803 landed 0cf12183 at 20:20:56Z, stack 804 not yet submitted): bazel build //:.venv finished 'up-to-date' (Target //:.venv up-to-date, bazel-bin/.venv/...). Read of the BUILT venv's writer, bazel-bin/.venv/bin/mikemol-paths-forward --help: the option list runs --status ... --jwk and the mode list ends at --repair-counter, so it has NO --clear-dead-enables either. The rebuild did not change the pinned writer: the pinned mtools sha predates mtools 5357b346 (W1614). So the flag cannot be used from either venv until the mtools pin moves; this card waits on a pin bump, not on a rebuild. The editable-install warning on every command is separate (the .venv here is an editable install, the built one is under bazel-bin).",
+      "evidence": "2026-11-01: 2026-11-01T17:47Z: checked the writer this repo runs: --help has no --clear-dead-enables (options end at --jwk, modes at --repair-counter). Result recorded on W695. The card closes when a built venv prints the flag and a dry run here has been read. | 2026-11-01: R119 (nemik:R117) rebuild done, 2026-11-01T20:21Z, gate empty (stack 803 landed 0cf12183 at 20:20:56Z, stack 804 not yet submitted): bazel build //:.venv finished 'up-to-date' (Target //:.venv up-to-date, bazel-bin/.venv/...). Read of the BUILT venv's writer, bazel-bin/.venv/bin/mikemol-paths-forward --help: the option list runs --status ... --jwk and the mode list ends at --repair-counter, so it has NO --clear-dead-enables either. The rebuild did not change the pinned writer: the pinned mtools sha predates mtools 5357b346 (W1614). So the flag cannot be used from either venv until the mtools pin moves; this card waits on a pin bump, not on a rebuild. The editable-install warning on every command is separate (the .venv here is an editable install, the built one is under bazel-bin). | 2026-11-01: 2026-11-01T23:13:44Z (read by stampnote): Pin located, R119 and R125 follow-up. The writer this repo runs comes from the vendored wheels (pyproject.toml tool.uv.sources, e.g. vendor/wheels/mikemol_pathsforward-0.1.0+e6dc759-py3-none-any.whl, all mtools wheels at one sha per vendor/wheels/README.md). THE BUMP is one command, per that README: mikemol-repin --revendor --sha SHA --no-sync --write (it touches exactly the files tools/revendor-mtools.sh does and rewrites the wheels, pyproject sources and uv.lock), against the fleet par kept in luthen-observability repin_par.txt. OPEN QUESTION (a choice between two shapes, not asked of the operator yet): bump to the fleet par, which is safe and may still predate mtools 5357b346 (W1614) and W2088/W2099, or to mtools' latest by the host's order as W614 and the 52de4de bump did. Test before choosing: read repin_par.txt (a read only; nothing is written in a sibling checkout) and check whether git -C the mtools checkout merge-base --is-ancestor 5357b346 PAR says the par has the flag. Three cards now wait on this pin: W695 and W1396 (--clear-dead-enables), W1246 (the retro mirror renders each finding, mtools:W2088) and W1229 (a mikemol-scratch restore mode, mtools:W2099).",
       "issued_at": "2026-11-01T17:31:46Z",
       "minted_during": "tick",
       "caused_by": "inbox/2026-11-01-nemik-edge-mtools-W1614-enables-W695.md",
-      "last_worked": "2026-11-01T20:22:34Z",
+      "last_worked": "2026-11-01T23:13:45Z",
       "ticks_blocked": 0
     },
     {
@@ -33921,7 +33925,7 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": null,
-      "evidence": "2026-11-01: 2026-11-01T22:41:56Z (read by stampnote): Claimed from the inbox this tick (the letter says luthen-observability:W1890 is done and enables nemik:W1288). Already handled: W1288's evidence records the pace unit's fix (memory cap raised, luthen-observability:W1890, landed 54f2b307; ten-minute timer W1891 landed 1cfcabbf) with my own stat of ratchet-pace.json and the pace now reading current. Nothing more to lift: W1288 still waits on the per-hook tick-open timing (R112), not on luthen. Closing this card as answered. --next ",
+      "evidence": "2026-11-01: 2026-11-01T22:41:56Z (read by stampnote): Claimed from the inbox this tick (the letter says luthen-observability:W1890 is done and enables nemik:W1288). Already handled: W1288's evidence records the pace unit's fix (memory cap raised, luthen-observability:W1890, landed 54f2b307; ten-minute timer W1891 landed 1cfcabbf) with my own stat of ratchet-pace.json and the pace now reading current. Nothing more to lift: W1288 still waits on the per-hook tick-open timing (R112), not on luthen. Closing this card as answered. ",
       "issued_at": "2026-11-01T22:41:47Z",
       "minted_during": "interrupt",
       "caused_by": "inbox/2026-11-01-nemik-edge-luthen-observability-W1890-enables-W1288.md",
@@ -33938,16 +33942,64 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-11-01: 2026-11-01T23:13:20Z (read by stampnote): R125 (nemik:R123) finding 2 answered with a decision per letter, each tested against the pinned tools instead of asked. (a) mtools:W2088 done, enables nemik:W1246 (the mirror lists each retro as 0 findings): tested by reading the mirror: R120 to R122 now render a root text and 'N finding(s)' but NOT each finding's id, card, due and witness, which is what W2088 was to add; the pinned writer is the one W1396 found lacking mtools 5357b346, so W2088 is in mtools' source and not in this pin. DECISION: W1246 is blocked on W1396 (set, blocked_kind agent). (b) mtools:W2099 done, enables nemik:W1229 (a scratch mode that restores a file as of a queued stack's frozen files): tested by mikemol-scratch --help in this venv: it offers only open, close and land, so the mode is not in the pin. DECISION: W1229 is blocked on W1396 (set). (c) the third letter (W2099 blocked_on W1229) is the same fact as (b) from the other side; one answer covers both. Common structure: one pin, three waits, so the single next step is W1396's: find where the mtools sha is pinned and bump it. First-step date for W1396: 2026-11-02 (the same due date as its reviewer finding R119); until then these three cards stay blocked on it rather than ready with nothing to do. Nothing sent to mtools: their letters say done, my answer is that I have not picked it up yet and why.",
       "issued_at": "2026-11-01T22:41:49Z",
       "minted_during": "interrupt",
       "caused_by": "inbox/2026-10-30-nemik-edge-mtools-W2088-blocked_on-W1246.md",
-      "last_worked": null,
+      "last_worked": "2026-11-01T23:13:21Z",
       "ticks_blocked": 0
     },
     {
       "symbol": "W1419",
       "title": "calendars.py imports rdflib's Graph, Literal and URIRef at module scope instead of under TYPE_CHECKING and inside two functions, so ruff falls by two",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "file:ruff-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-01: 2026-11-01T23:01:03Z (read by stampnote): G0, BEFORE the first edit of src/nemik/calendars.py and BEFORE --tick-open of nemik-108. Stack 811, successor of stack 810 (W1416, in the gate since 22:42:59Z). Pace: nemik-rank nemik --pace first command of tick nemik-108 at 23:00:05Z, pace of 2026-11-01T22:54:06Z (6 min old, current): ruff fell 27 over 10 landings owes 90 (30 percent of its required rate, now the furthest behind in relative terms), mypy fell 118 owes 190 (62 percent), codon fell 0 owes 2. So this stack LEADS WITH RUFF. Sites, each verified from the tool's own output (ruff --select PLC0415 at HEAD 869cf448): calendars.py:303 (from rdflib import Graph, Literal, URIRef inside event_graph) and :334 (from rdflib import Graph inside days_main); the module binds Graph under if TYPE_CHECKING at line 33 and already imports rdflib.namespace at module scope (line 26), so a real top-level from rdflib import Graph, Literal, URIRef adds no dependency. Companions: the TYPE_CHECKING block then holds nothing and the TYPE_CHECKING name becomes an unused import (F401), so the codemod removes both together. N=2, K=2, expected -2: ruff 613 (stack 810 changes only mypy) to 611, mypy flat at 1278 (stack 810's value). Behaviour: none. calendars is a failing entry in codon-baseline.json. Actuator: scratchpad/w1419_calendars.py (the Edit hook refuses an import and its use split across calls). Waits on stack 810 for the queue files and mypy-baseline.json is not carried by this stack.  | 2026-11-01: landed 13ed2930 (stack 811, pushed, reflog 18:29:22 -0500 = 23:29:22Z); ruff 613 to 607 together with W1420",
+      "issued_at": "2026-11-01T23:00:52Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1390",
+      "last_worked": "2026-11-01T23:30:07Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/calendars.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "small",
+      "completed": "20261101T233007Z"
+    },
+    {
+      "symbol": "W1420",
+      "title": "serve.build_static and _build_static take private and exports keyword-only with their one positional call fixed, so ruff falls by four",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "file:ruff-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-01: 2026-11-01T23:02:32Z (read by stampnote): G0, BEFORE the first edit of src/nemik/serve.py, stack 811 entry 2 behind W1419 (calendars, K=2, already measured). Pace: pace of 2026-11-01T22:54:06Z, ruff fell 27 owes 90 (30 percent of the required rate, furthest behind). Sites from ruff --select FBT at HEAD 869cf448: serve.py:1367 (build_static) and :1392 (_build_static), each private: bool = False (FBT001 and FBT002), four findings. Callers read by grep of src, tests and tools: _build_static(root, out, withheld, private, exports) at serve.py:1385 passes private and exports positionally (inside build_static itself); every other caller passes them by keyword: serve.py:1720 (private=True, exports=exports), :1882 (exports=args.exports), tests/test_build_scope.py:39 and :40 (private=True), and the other twelve test calls pass only root, out, withheld or exports= by keyword. The edit adds no import to serve.py (the pinned hub module set is imports). serve is a failing entry in codon-baseline.json, so the bare star cannot trip the census. Companions: none expected (PLR0913 needs more than five arguments and there are five). N=4, K=4, expected -4: ruff 611 (with W1419's -2) to 607, mypy flat at 1278. Actuator: scratchpad/w1420_serve.py: a bare star before private in both defs and private=private, exports=exports at the one call. hub-modules-depend-on-everything-below (checks/claims.py via tests/test_architecture.py) runs before the submit.  | 2026-11-01: landed 13ed2930 inside W1419's entry (stack 811, reflog 23:29:22Z); serve.build_static and _build_static keyword-only, four FBT findings gone",
+      "issued_at": "2026-11-01T23:02:24Z",
+      "minted_during": "tick",
+      "caused_by": "W1383",
+      "last_worked": "2026-11-01T23:30:08Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/serve.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "small",
+      "completed": "20261101T233008Z"
+    },
+    {
+      "symbol": "W1421",
+      "title": "blocks_cli writes its output through the new nemik.say module instead of bare print calls, so ruff falls by six and the output contract has one home",
       "status": "working",
       "enables": [],
       "touches": [
@@ -33956,41 +34008,20 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-11-01: 2026-11-01T23:01:03Z (read by stampnote): G0, BEFORE the first edit of src/nemik/calendars.py and BEFORE --tick-open of nemik-108. Stack 811, successor of stack 810 (W1416, in the gate since 22:42:59Z). Pace: nemik-rank nemik --pace first command of tick nemik-108 at 23:00:05Z, pace of 2026-11-01T22:54:06Z (6 min old, current): ruff fell 27 over 10 landings owes 90 (30 percent of its required rate, now the furthest behind in relative terms), mypy fell 118 owes 190 (62 percent), codon fell 0 owes 2. So this stack LEADS WITH RUFF. Sites, each verified from the tool's own output (ruff --select PLC0415 at HEAD 869cf448): calendars.py:303 (from rdflib import Graph, Literal, URIRef inside event_graph) and :334 (from rdflib import Graph inside days_main); the module binds Graph under if TYPE_CHECKING at line 33 and already imports rdflib.namespace at module scope (line 26), so a real top-level from rdflib import Graph, Literal, URIRef adds no dependency. Companions: the TYPE_CHECKING block then holds nothing and the TYPE_CHECKING name becomes an unused import (F401), so the codemod removes both together. N=2, K=2, expected -2: ruff 613 (stack 810 changes only mypy) to 611, mypy flat at 1278 (stack 810's value). Behaviour: none. calendars is a failing entry in codon-baseline.json. Actuator: scratchpad/w1419_calendars.py (the Edit hook refuses an import and its use split across calls). Waits on stack 810 for the queue files and mypy-baseline.json is not carried by this stack. --next ",
-      "issued_at": "2026-11-01T23:00:52Z",
+      "evidence": "2026-11-01: 2026-11-01T23:10:25Z (read by stampnote): G0, BEFORE the first edit of src/nemik/blocks_cli.py (src/nemik/say.py was already written as a NEW untracked file, probed under the pinned Codon: both modes compile). Stack 812, successor of stack 811 (W1419, in the gate since 23:06:51Z). Pace: pace of 2026-11-01T22:54:06Z read at 23:00:05Z: ruff fell 27 over 10 landings owes 90 (furthest behind in relative terms). Sites from ruff --select T201 at HEAD b8503692: blocks_cli.py:132, :145, :155, :210, :221, :227, all print with one string argument (json.dumps output, f-strings): N=6, K=6, expected -6: ruff 607 (stack 811's value) to 601, mypy flat at 1278. Actuator: scratchpad/w1421_blocks_cli.py: print( to say( at those six sites plus from nemik.say import say after the last nemik import, then ruff --fix I,F401 and ruff format. New file tests/test_say.py (capsys) pins the three functions. blocks_cli is a failing entry in codon-baseline.json. Waits on stack 811 for ruff-baseline.json and the queue files. ",
+      "issued_at": "2026-11-01T23:10:02Z",
       "minted_during": "interrupt",
-      "caused_by": "W1390",
-      "last_worked": "2026-11-01T23:06:45Z",
+      "caused_by": "W1384",
+      "last_worked": "2026-11-01T23:30:55Z",
       "ticks_blocked": 0,
       "manifest": [
-        "src/nemik/calendars.py",
+        "src/nemik/say.py",
+        "src/nemik/blocks_cli.py",
+        "tests/test_say.py",
         "ruff-baseline.json"
       ],
       "size_class": "small",
       "completed": null
-    },
-    {
-      "symbol": "W1420",
-      "title": "serve.build_static and _build_static take private and exports keyword-only with their one positional call fixed, so ruff falls by four",
-      "status": "ready",
-      "enables": [],
-      "touches": [
-        "file:ruff-baseline.json"
-      ],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-11-01: 2026-11-01T23:02:32Z (read by stampnote): G0, BEFORE the first edit of src/nemik/serve.py, stack 811 entry 2 behind W1419 (calendars, K=2, already measured). Pace: pace of 2026-11-01T22:54:06Z, ruff fell 27 owes 90 (30 percent of the required rate, furthest behind). Sites from ruff --select FBT at HEAD 869cf448: serve.py:1367 (build_static) and :1392 (_build_static), each private: bool = False (FBT001 and FBT002), four findings. Callers read by grep of src, tests and tools: _build_static(root, out, withheld, private, exports) at serve.py:1385 passes private and exports positionally (inside build_static itself); every other caller passes them by keyword: serve.py:1720 (private=True, exports=exports), :1882 (exports=args.exports), tests/test_build_scope.py:39 and :40 (private=True), and the other twelve test calls pass only root, out, withheld or exports= by keyword. The edit adds no import to serve.py (the pinned hub module set is imports). serve is a failing entry in codon-baseline.json, so the bare star cannot trip the census. Companions: none expected (PLR0913 needs more than five arguments and there are five). N=4, K=4, expected -4: ruff 611 (with W1419's -2) to 607, mypy flat at 1278. Actuator: scratchpad/w1420_serve.py: a bare star before private in both defs and private=private, exports=exports at the one call. hub-modules-depend-on-everything-below (checks/claims.py via tests/test_architecture.py) runs before the submit. --next ",
-      "issued_at": "2026-11-01T23:02:24Z",
-      "minted_during": "tick",
-      "caused_by": "W1383",
-      "last_worked": "2026-11-01T23:02:33Z",
-      "ticks_blocked": 0,
-      "manifest": [
-        "src/nemik/serve.py",
-        "ruff-baseline.json"
-      ],
-      "size_class": "small"
     }
   ],
   "residue": [
@@ -41737,7 +41768,29 @@
       "root": "NO NEW FINDINGS, OPEN FINDINGS CARRIED WITH OWNERS AND DUE DATES (not a fixpoint declaration). Verified from source (TZ=UTC reflog): 5d2de321 21:53:25Z, 878ab5c6 22:18:26Z (17:18:26 -0500, tip of stack 808); --in-gate lists W1415 inflight; `mikemol-pycheck --ratchet` prints ruff 613/613 and mypy 1278/1289 (the live 1278 is W1416's staged -11 against stack 809's baseline 1289). Intervals as Z pairs: 808 submitted 21:54:29Z, landed 22:18:26Z (gate 23 min 57 s); gate empty 22:18:26Z to the 809 submit 22:19:31Z (1 min 05 s). The G1 closes the gaps R121 and R123 left: W1413 and W1408 were each marked done in their own call and read back with --show (completed 22:19:10Z and 22:19:11Z), the real withheld list was loaded by the new code before the 809 submit (30 items, 0 with a missing or empty ref, 29 distinct refs, 0 refused, recorded 22:15:19Z), and the stamps in the G0 come from the script (22:32:03Z printed with rc 0). The draft with a noqa comment was caught by the session before it ran, which is the no-waivers rule working at the source. The probe for W1416 was complete first (22 findings, 11 on the probe, K=11, result -11). The tick-open ran 5 min 02 s alongside a 287 s test run (readings 4:40 to 5:02, unattributed). Carried open findings, status on 2026-11-01: R95 second finding on W1349 (the stamp script works; the durable copy is still owed), R95 third, R97 first, R98, R111 first and R102 on W1219, R94 on W1348, R93 on W1347, R92 on W1346 and W1288, R91 on W1345, R72 on W846, R100 on W910, R101 on W1288, R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288, R114 on W1395 (mtools reply not looked for), R116 on W1383 (left: serve 1367 and 1392, blocks 419), R119 on W1396 (pin bump) (all 2026-11-02); codon: W1414's argparse probe not run, W1325 census not done.",
       "findings": [],
       "id": "nemik:R122"
+    },
+    {
+      "card": "W1419",
+      "trigger": "round 125: nemik-108, stack 809 (W1415 withheld.py) landed 869cf448 = 22:41:53Z and stack 810 (W1416 salience.py) landed b8503692 = 23:05:53Z; stack 811 (W1419 calendars.py with W1420 serve.py folded in, ruff 613 to 607) inflight since 23:06:51Z, key 1793574411442458555",
+      "root": "Verified from source (TZ=UTC reflog): 878ab5c6 22:18:26Z, 869cf448 22:41:53Z (17:41:53 -0500), b8503692 23:05:53Z (18:05:53 -0500); --in-gate lists W1419 inflight; `mikemol-pycheck --ratchet` prints ruff 607/607 and mypy 1278/1278 (W1419's -2 and W1420's -4 are written to the baseline for stack 811). Intervals as Z pairs: 809 submitted 22:19:31Z, landed 22:41:53Z (gate 22 min 22 s); gate empty 22:41:53Z to the 810 submit 22:42:59Z (1 min 06 s); 810 gated 22 min 54 s to 23:05:53Z; gate empty 23:05:53Z to the 811 submit 23:06:51Z (58 s). The G1 was written after the landing was read and the next stack submitted, which is why it is not stale in the R117 sense; I checked and --in-gate still lists W1419 only. The pace flip is read correctly (ruff 27 of 90, 30 percent of its rate; mypy 118 of 190, 62 percent) and 811 leads with ruff. The edits and the guard run (test_architecture covering the hub claim) are as stated; W1420 folded into W1419's stack entry because both lower ruff-baseline.json and a stack's files freeze at submit, with W1420 marked done at the landing (a card with a landing named by a subject but marked ready until then). One minor artifact I saw: W1420's evidence ends with a fragment '--next ', a stray command-line token in the text. Two findings. No fixpoint is declared. Carried open findings, status on 2026-11-01: R95 second finding on W1349 (durable stamp script), R95 third, R97 first, R98, R111 first and R102 on W1219, R94 on W1348, R93 on W1347, R92 on W1346 and W1288, R91 on W1345, R72 on W846, R100 on W910, R101 on W1288, R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288, R114 on W1395 (no mtools reply in the inbox), R116 on W1383 (left: blocks.py:419 FBT003), R119 on W1396 (pin bump) (all 2026-11-02); codon: W1414's argparse probe not run, W1325 census not done.",
+      "findings": [
+        {
+          "finding": "The G1 concludes 'nothing mechanical and meaningful at scale among T201/PLR2004' while the biggest remaining class is T201: 124 src prints, a fifth of the 607 left, with a card for it (W1384) whose own next step is a probe that has not been run ('which of the 124 src prints are the CLI's contract (stdout) versus diagnostics; check the Codon census for a new module and the hub-module claim; then decide the output module's shape'). A verdict without that probe is a guess, and ruff is the ratchet that is furthest behind (27 of 90). Run W1384's probe: classify the 124 prints by module into stdout contract and diagnostics (a sample of ten per large module is enough to start: rank 27, history 14, critical 11, wake 10), say which modules are already failing codon entries (a new output module must compile if imported by a compiled module), and write the decision on W1384 with a K for the first module (blocks_cli.py's six prints is the smallest start).",
+          "finding_card": "W1384",
+          "finding_owner": "nemik session",
+          "finding_witness": "A W1384 evidence line with the 124 prints classified by module (stdout contract or diagnostic), the codon status of the modules involved, and the first module chosen with its K.",
+          "due": "2026-11-02"
+        },
+        {
+          "finding": "W1418 holds three claimed mtools letters (W2088 done enables W1246, W2099 done enables W1229, and one more) that the session read and left because 'a decision' is needed, with no date and no statement of the decision. A claimed letter is a promise to the sender, and these are two peer cards finished on the other side that unblock nemik cards. Write the decision for each as a question with its options (W1229's ask is a mikemol-scratch mode, W1246's the retro validator) and give W1418 a first-step date, or set W1246 and W1229 ready with the new fact if nothing needs deciding.",
+          "finding_card": "W1418",
+          "finding_owner": "nemik session",
+          "finding_witness": "A W1418 evidence line (by stampnote) stating the decision needed for W1246 and W1229 or the updated state of both cards, and a first-step date on W1418.",
+          "due": "2026-11-02"
+        }
+      ],
+      "id": "nemik:R123"
     }
   ],
-  "retro_counter": 122
+  "retro_counter": 123
 }

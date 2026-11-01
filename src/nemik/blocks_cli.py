@@ -29,6 +29,7 @@ from nemik.check import LEDGER, default_root, survey, workstream_files
 from nemik.inbound_issues import by_peer, census, letters_of, unclaimed
 from nemik.letters import _split, _today, fold_commands
 from nemik.rank import TIERS
+from nemik.say import say
 
 
 def issue_letters(
@@ -129,7 +130,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         if not args.repo or b["blocker"] == args.repo
     ]
     if args.json:
-        print(json.dumps(blocks, indent=2))
+        say(json.dumps(blocks, indent=2))
         return
     for b in blocks:
         claim = ", ".join(b["claimed_by"]) or "UNCLAIMED"
@@ -142,7 +143,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         )
         # nemik:W275: the letter files the waiting waypoint cites as evidence, after the hint.
         letters = f"  [letter: {', '.join(b['letters'])}]" if b["letters"] else ""
-        print(
+        say(
             f"{b['blocker']:24} <- {b['blocked']:28} {claim:28} {b['title']}{hint}{letters}"
         )
     # nemik:W376: a letter in REPO's inbox that no waypoint cites is waiting on REPO too (one sat
@@ -152,7 +153,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         live = _split(Path(args.root), args.repo, 14, _today())[0]
         claims = fold_commands(Path(args.root), repo=args.repo, older_than=14)
         for (_, path), cmd in zip(live, claims, strict=True):
-            print(
+            say(
                 f"{args.repo:24} <- letter {path.name:51} UNCLAIMED  -- claim with: {cmd}"
             )
 
@@ -207,7 +208,7 @@ def operator_main(argv: list[str] | None = None, g: Graph | None = None) -> None
         return
     asks = with_salience(g, operator_asks(g))
     if args.json:
-        print(json.dumps(asks, indent=2))
+        say(json.dumps(asks, indent=2))
         return
     for cat in CATEGORIES:
         declared = TIERS
@@ -218,10 +219,10 @@ def operator_main(argv: list[str] | None = None, g: Graph | None = None) -> None
             "no-command": "no command yet: the owner owes a tool",
             "errand": "errand: yours, no tool to write",
         }.get(cat, cat)
-        print(f"\n{label} ({len(rows)}), heaviest first")
+        say(f"\n{label} ({len(rows)}), heaviest first")
         for a in rows:
             dup = f"  same ask as {', '.join(a['same_ask'])}" if a["same_ask"] else ""
             behind = f"  <- {', '.join(a['waiting'])}" if a["waiting"] else ""
             # nemik:W298: the demand that waits behind the ask, in nemik-rank's units.
             weight = f"{a['salience']:6.1f}"
-            print(f"  {weight} {a['ref']:28} {a['ask'][:70]}{dup}{behind}")
+            say(f"  {weight} {a['ref']:28} {a['ask'][:70]}{dup}{behind}")

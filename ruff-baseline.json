@@ -23,9 +23,6 @@
   "PLR0914": 1,
   "PLR2004": 2
  },
- "src/nemik/blocks_cli.py": {
-  "T201": 6
- },
  "src/nemik/cachestore.py": {
   "S301": 1,
   "S403": 1
