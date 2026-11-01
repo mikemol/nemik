@@ -306,14 +306,12 @@
   "E501": 2,
   "PLC2701": 1,
   "PLR2004": 2,
-  "PT018": 1,
   "S404": 1,
   "SLF001": 3
  },
  "tests/test_calwrite.py": {
   "FBT001": 1,
-  "PLR2004": 2,
-  "PT018": 1
+  "PLR2004": 2
  },
  "tests/test_certify.py": {
   "S404": 1,
@@ -339,8 +337,7 @@
   "PLR2004": 4
  },
  "tests/test_critical_cards.py": {
-  "PLR2004": 4,
-  "PT018": 1
+  "PLR2004": 4
  },
  "tests/test_deadlock_check.py": {
   "PLC0415": 2
@@ -559,8 +556,7 @@
  },
  "tests/test_serve_model.py": {
   "PLC0415": 1,
-  "PLR2004": 3,
-  "PT018": 1
+  "PLR2004": 3
  },
  "tests/test_shaclcache_threads.py": {
   "PLR2004": 2

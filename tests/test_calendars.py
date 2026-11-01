@@ -73,9 +73,8 @@ def test_occurrences_are_read_and_the_export_is_deleted(
         ("home", "a@t", "dentist")
     ]
     exported = Path((tmp_path / "seen").read_text().strip())
-    assert (
-        not exported.exists() and not exported.parent.exists()
-    )  # no copy of the calendar is left
+    assert not exported.exists()
+    assert not exported.parent.exists()
 
 
 def test_a_failed_export_raises_rather_than_reading_as_a_free_day(

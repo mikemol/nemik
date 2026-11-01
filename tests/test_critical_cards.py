@@ -30,9 +30,8 @@ def test_a_chain_and_a_tie_from_cards_alone() -> None:
     assert found.length == 3
     assert found.chain == ["r:W1", "r:W2", "r:W3", "r:W4"]
     assert found.rank == {"r:W1": 1, "r:W2": 2, "r:W3": 2, "r:W4": 3}
-    assert (
-        found.paths["r:W1"] == 2 and found.paths["r:W2"] == 1
-    )  # two longest chains, tied
+    assert found.paths["r:W1"] == 2
+    assert found.paths["r:W2"] == 1
     assert "r:W5" not in found.slack
 
 

@@ -179,7 +179,8 @@ def test_the_feed_is_crlf_folded_deterministic_and_carries_only_what_was_asked(
     assert text == feed(g, ["life"])  # a function of the queues alone
     assert text.startswith("BEGIN:VCALENDAR\r\nVERSION:2.0\r\n")
     assert text.endswith("END:VEVENT\r\nEND:VCALENDAR\r\n")
-    assert "life:W2" not in text and "trip" not in text  # mtools was not opted in
+    assert "life:W2" not in text
+    assert "trip" not in text
     long = _queue(
         tmp_path,
         "life",

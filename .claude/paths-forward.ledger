@@ -3644,3 +3644,11 @@
 2026-11-01T05:11:14Z  status W1344 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T05:33:48Z  interrupt W1346 minted    -         "tests/test_layout.py wraps its 43 over-long lines (comments, docstring, JS in Python strings) without changing a token, so ruff E501 falls by 43"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1288
 2026-11-01T05:41:22Z  status W1346 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T05:44:02Z  status W1346 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T05:44:11Z  tick  W1346 advanced  mechanize "W1346 landed 525ad379: test_layout.py 43 E501 wrapped without a token change, ruff 952 to 908 (K=43 probed on a scratch copy; pace 05:25:25Z ruff owed); mypy flat 1760 [blocked by W1288]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T06:03:43Z  interrupt W1347 minted    -         "tests/test_layout.py splits its 14 autofixable composite assertions, so ruff PT018 falls by 14"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1288
+2026-11-01T06:03:50Z  status W1347 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T06:09:19Z  status W1347 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T06:09:25Z  tick  W1347 blocked   measure   "W1347: PT018 autofix measured and reverted, nothing landed: ruff falls 12 to 15 but mypy rises 1 to 8 per file in six test files (pycheck back at ruff 908, mypy 1760); the split of assert a and b, msg repeats the Any operands; next step types the values first or takes hooks/record_event.py [blocked by W1288]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T06:11:26Z  interrupt W1348 minted    -         "Four test files split their one composite assertion each (test_calendars, test_calwrite, test_critical_cards, test_serve_model), so ruff PT018 falls by 4 with mypy flat"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1288
+2026-11-01T06:11:33Z  status W1348 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

@@ -99,9 +99,8 @@ def test_poke_serves_stale_while_rebuilding(tmp_path: Path) -> None:
         t0 = time.monotonic()
         model.poke()
         model.poke()  # a second request while the rebuild is in flight starts nothing new
-        assert (
-            time.monotonic() - t0 < 0.5 and model.rebuilds == 1
-        )  # returned at once, stale
+        assert time.monotonic() - t0 < 0.5
+        assert model.rebuilds == 1
         released.set()
         for _ in range(100):
             if model.rebuilds == 2:
