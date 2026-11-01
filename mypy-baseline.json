@@ -200,9 +200,6 @@
  "tests/test_pieces.py": {
   "misc": 11
  },
- "tests/test_pieces_corpus.py": {
-  "misc": 39
- },
  "tests/test_positioning.py": {
   "misc": 22
  },
@@ -280,9 +277,7 @@
   "misc": 12
  },
  "tools/gen_pieces_corpus.py": {
-  "explicit-any": 2,
-  "misc": 41,
-  "no-any-return": 1
+  "misc": 24
  },
  "tools/nemik_client.py": {
   "explicit-any": 2,

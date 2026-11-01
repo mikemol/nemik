@@ -17,7 +17,7 @@ from __future__ import annotations
 import json
 import sys
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, cast
+from typing import TYPE_CHECKING, cast
 
 from nemik.pieces import assemble, split
 from nemik.serve import Model
@@ -38,21 +38,27 @@ def _edge(a: str, b: str, kind: str = "waits") -> dict[str, str]:
 
 
 def _doc(
-    nodes: list[dict[str, str]], edges: list[dict[str, str]], **extra: object
-) -> dict[str, object]:
-    return {
-        "nodes": nodes,
-        "edges": edges,
-        "inbound": [],
-        "operator": [],
-        "findings": {},
-        "health": {},
-        "ruler": {},
-        **extra,
-    }
+    nodes: list[dict[str, str]],
+    edges: list[dict[str, str]],
+    findings: dict[str, object] | None = None,
+    health: dict[str, object] | None = None,
+    ruler: dict[str, object] | None = None,
+) -> GraphDoc:
+    return cast(
+        "GraphDoc",
+        {
+            "nodes": nodes,
+            "edges": edges,
+            "inbound": [],
+            "operator": [],
+            "findings": findings or {},
+            "health": health or {},
+            "ruler": ruler or {},
+        },
+    )
 
 
-def cases() -> dict[str, dict[str, Any]]:
+def cases() -> dict[str, GraphDoc]:
     """Build the corpus: hand-made documents and the fixture fleet cut to three repos.
 
     Returns:
@@ -98,11 +104,11 @@ def cases() -> dict[str, dict[str, Any]]:
             ],
             findings={"a": []},
         ),
-        "fixture-fleet-3-repos": _first_repos(dict(model.doc), 3),
+        "fixture-fleet-3-repos": _first_repos(cast("GraphDoc", dict(model.doc)), 3),
     }
 
 
-def _first_repos(doc: dict[str, Any], n: int) -> dict[str, Any]:
+def _first_repos(doc: GraphDoc, n: int) -> GraphDoc:
     """Real data at a reviewable size: the fixture fleet cut to its first `n` repos.
 
     The whole fleet is 3 MB of JSON; tests/test_pieces.py already runs it in Python.
@@ -115,21 +121,27 @@ def _first_repos(doc: dict[str, Any], n: int) -> dict[str, Any]:
     keep = sorted({str(x["repo"]) for x in doc["nodes"] if x["repo"]})[:n]
     nodes = [x for x in doc["nodes"] if x["repo"] in keep]
     ids = {x["id"] for x in nodes}
-    return doc | {
-        "nodes": nodes,
-        "edges": [e for e in doc["edges"] if e["source"] in ids and e["target"] in ids],
-        "findings": {r: v for r, v in doc["findings"].items() if r in keep},
-        "health": {r: v for r, v in doc["health"].items() if r in keep},
-        "inbound": [],
-        "operator": [],
-    }
+    return cast(
+        "GraphDoc",
+        {
+            **doc,
+            "nodes": nodes,
+            "edges": [
+                e for e in doc["edges"] if e["source"] in ids and e["target"] in ids
+            ],
+            "findings": {r: v for r, v in doc["findings"].items() if r in keep},
+            "health": {r: v for r, v in doc["health"].items() if r in keep},
+            "inbound": [],
+            "operator": [],
+        },
+    )
 
 
 def main() -> None:
     """Write each case's document, its pieces and their assembly as one JSON file."""
     OUT.mkdir(parents=True, exist_ok=True)
     for name, doc in cases().items():
-        cut = split(cast("GraphDoc", doc))
+        cut = split(doc)
         case = {"name": name, "doc": doc, "split": cut, "assemble": assemble(cut)}
         (OUT / f"{name}.json").write_text(
             json.dumps(case, indent=1, sort_keys=True, default=str) + "\n"
