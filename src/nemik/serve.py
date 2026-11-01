@@ -136,7 +136,7 @@ def check_report(name: str, graph: Graph, root: Path) -> str | None:
         # nemik:W862, W863: the inbox report as --letters and --fold print it; the writing mode
         # (--apply) is not served, only the plan it would carry out.
         known = {repo for repo, _ in workstream_files(root, QUEUE)}
-        return "\n".join(letters_report(root, known, name == "fold")[0])
+        return "\n".join(letters_report(root, known, fold=name == "fold")[0])
     return None
 
 

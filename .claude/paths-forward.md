@@ -3,12 +3,12 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1402 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:9423b692196ae328`
+counter 1404 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:c038720e03f9309c`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1401 | working |
-| 2 | W1402 | working |
+| 1 | W1403 | working |
+| 2 | W1404 | working |
 | 3 | W1075 | ready |
 | 4 | W1139 | ready |
 | 5 | W1279 | ready |
@@ -1381,13 +1381,15 @@ counter 1402 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:942
 | 1372 | W1394 | done |
 | 1373 | W1397 | done |
 | 1374 | W1398 | done |
+| 1375 | W1401 | done |
+| 1376 | W1402 | done |
 
 ## waypoints
 
-1. **W1401** (working) Eight function-local imports in src/nemik/witnesses.py move to module scope, so ruff falls by
-   eight, with the witwait import left local
-2. **W1402** (working) Twelve function-local imports in src/nemik/calendars.py and salience.py move to module scope,
-   with the clashing rdflib and nemik.rank imports left local
+1. **W1403** (working) Three flags become keyword-only in overlaps.overlaps, vtodo.feed and blocks.inbound with their
+   one positional caller fixed, so ruff falls by six
+2. **W1404** (working) letters.report takes fold, repo, older_than and apply keyword-only with its two positional
+   callers fixed, so ruff falls by four
 3. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 4. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -1729,10 +1731,8 @@ counter 1402 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:942
    - next: After W1217: drop the whole-glob census target and add a test that the per-module targets equal the set of
      src/nemik modules
 77. **W1383** (ready) Read every positional caller of the 19 src FBT signatures, then make each flag keyword-only
-   - next: For each flagged def (blocks.py 107, letters.py 401 and 404, overlaps.py 44, salience.py 150 and 470,
-     serve.py 1367 and 1392, vtodo.py 302 and the rest ruff lists), grep every positional caller in src, tests, tools
-     and checks, then edit the def and its callers in one codemod write per file, as W1381 did for calwrite, churn and
-     history
+   - next: Per def, grep every positional caller in src, tests, tools and checks; start with the defs with the fewest
+     callers.
 78. **W1384** (ready) Route the 124 src prints (T201) through one output module
    - next: Probe first: which of the 124 src prints are the CLI's contract (stdout) versus diagnostics; check the Codon
      census (tests/test_codon_census.py) for a new module, and the hub-module claim; then decide the output module's
@@ -1771,8 +1771,8 @@ counter 1402 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:942
      tick-close) is wanted.
 86. **W1288** (ready) Tests without a docstring (D103, 398): one sentence per test function, taken from its name, a file
    at a time
-   - next: After 19:25:29Z, stat ratchet-pace.json and read nemik-rank nemik --pace; record whether the 19:25Z run
-     wrote.
+   - next: Ask luthen only if the file is still unchanged after 20:25Z; otherwise record the newer as_of when one
+     appears.
 87. **W1300** (ready) letters.py compiles under Codon: its NamedTuple rows become plain classes, shlex and UTC go, and
    its subprocess, shutil and sys.executable code moves to a module of its own, so codon falls 2
 88. **W1345** (ready) tests/corpus/pieces/fixture-fleet-3-repos.json is stale against the current check output:
@@ -4533,6 +4533,10 @@ counter 1402 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:942
    mypy falls by two
 1374. **W1398** (done) src/nemik/pins.py and calwrite.py bind the parsed TOML as object and sort with a lambda, so mypy
    falls by three
+1375. **W1401** (done) Eight function-local imports in src/nemik/witnesses.py move to module scope, so ruff falls by
+   eight, with the witwait import left local
+1376. **W1402** (done) Twelve function-local imports in src/nemik/calendars.py and salience.py move to module scope,
+   with the clashing rdflib and nemik.rank imports left local
 
 ## residue
 
@@ -5727,3 +5731,26 @@ counter 1402 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:942
   R100 on W910, R101 on W1288, R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288 (hooks untimed),
   R114 on W1288 (16:25Z and now 18:25Z pace) and on W1395 (send record; W2186 reply not looked for this tick)
   (2026-11-02 or today for W1395); codon owed with no stack, probes on W1400.; 1 finding(s)
+- **nemik:R115** (-) round 117: nemik-100, stack 799 (W1398) landed e406644f = 18:44:17Z; stack 800 (W1401,
+  witnesses.py) landed e72bf710 = 19:10:13Z while the G1 was being written; stack 801 (W1402, calendars.py and
+  salience.py, ruff 640 to 628) staged; pace producer answered by luthen: root NO NEW FINDINGS, OPEN FINDINGS CARRIED
+  WITH OWNERS AND DUE DATES (not a fixpoint declaration). Verified from source (TZ=UTC reflog): 46f95b1c 18:17:44Z,
+  e406644f 18:44:17Z (13:44:17 -0500), e72bf710 19:10:13Z (14:10:13 -0500). The G1 says stack 800 is gating; by my read
+  at 19:11:07Z it had landed (--in-gate prints []), so the gate has been empty since 19:10:13Z with 801 written at
+  19:10:07Z and not yet submitted; its baseline must be written (live ruff 628 against baseline 640) before the submit,
+  and the interval to its submit is the next G1's number. `mikemol-pycheck --ratchet` prints ruff 628/640 and mypy
+  1396/1396. Intervals as Z pairs: 799 submitted 18:18:51Z, landed 18:44:17Z (gate 25 min 26 s); gate empty 18:44:17Z to
+  the 800 submit 18:45:59Z (1 min 42 s); 800 gated 18:45:59Z to 19:10:13Z (24 min 14 s). Checks I ran: the bare-star
+  count R116 asked for recomputes to 15 definitions in 9 modules (single-line defs wake 1, check 3, calwrite 2,
+  hostapply 1, history 1, alarm and calendars 0, plus stars on their own line: wake 1, check 1, rank 2, witwait 1, alarm
+  1, calendars 1), matching the G1's wake 2, check 4, calwrite 2, rank 2, witwait 1, calendars 1, alarm 1, hostapply 1,
+  history 1; that all nine are failing codon entries I did not re-check. W1395 now carries the send record (msg id
+  394c5c1d present), so that half of R114's finding is met; the reply and the adopter cards are open. The pace-producer
+  answer is a good use of a peer (the luthen unit luthen-nemik-pace.service was killed at its 120 CPU-second limit at
+  16:25Z and 18:25Z, the ok runs used 96 and 119.6 CPU s, matching the pace stamps I saw missing at those hours); it
+  closes on the 19:25Z run's mtime, which the G1 says it will stat. Carried open findings, status on 2026-11-01: R95
+  second finding on W1349, R95 third, R97 first, R98, R111 first and R102 on W1219, R94 on W1348, R93 on W1347, R92 on
+  W1346 and W1288, R91 on W1345, R72 on W846, R84 on W695, R100 on W910, R101 on W1288, R105 on W1288, R85 on W613, R106
+  on W1376, R108 on W1382, R112 on W1288 (hooks untimed), R114 on W1288 (pace file after 19:25Z) and on W1395 (reply and
+  adopters), R116 on W1383 (19 flag sites by module, due 2026-11-02); codon owed with no stack; hooks-venv rebuild and
+  census (W1325) not done.; 0 finding(s)

@@ -3832,3 +3832,7 @@
 2026-11-01T19:31:27Z  interrupt W1403 minted    -         "Three flags become keyword-only in overlaps.overlaps, vtodo.feed and blocks.inbound with their one positional caller fixed, so ruff falls by six"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
 2026-11-01T19:31:41Z  status W1403 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T19:35:55Z  status W1402 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T19:36:34Z  tick  W1404 minted    -         "letters.report takes fold, repo, older_than and apply keyword-only with its two positional callers fixed, so ruff falls by four"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
+2026-11-01T19:36:46Z  status W1404 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T19:37:41Z  tick  W1404 advanced  sweep     "stack 801 landed df70c78f 19:34:41Z; stack 802 (W1403 FBT slice, ruff 628 to 622) gating since 19:36:17Z; stack 803 staged (W1404 letters.report, ruff 622 to 617); 19:25Z pace did not write (W1288); W1383 sites listed and codon status marked [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T19:58:14Z  status W1403 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

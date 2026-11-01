@@ -398,6 +398,7 @@ def redeliveries(
 def report(
     root: Path,
     workstreams: set[str],
+    *,
     fold: bool = False,
     repo: str | None = None,
     older_than: int | None = None,

@@ -1418,10 +1418,10 @@ def main(argv: list[str] | None = None) -> None:
         said, code = report(
             args.root,
             {repo for repo, _ in workstream_files(args.root, QUEUE)},
-            args.fold,
-            args.repo,
-            args.older_than,
-            args.apply,
+            fold=args.fold,
+            repo=args.repo,
+            older_than=args.older_than,
+            apply=args.apply,
         )
         print("\n".join(said))
         sys.exit(code)
