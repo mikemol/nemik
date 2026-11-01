@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1409,
+  "counter": 1413,
   "waypoints": [
     {
       "symbol": "W1",
@@ -33536,20 +33536,25 @@
     {
       "symbol": "W1400",
       "title": "Codon paydown: pick the failing baseline entries one fix from compiling, using scratchpad codon_one.py, since a bare star and datetime.UTC both fail it",
-      "status": "ready",
+      "status": "blocked",
       "enables": [],
       "touches": [
         "file:codon-baseline.json"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W1410",
+        "W1411",
+        "W1412"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "List W1383's 19 flag sites by module, mark each compiled or failing against codon-baseline.json, and write the result on W1383 and here.",
       "evidence": "2026-11-01: 2026-11-01T18:50Z, tick nemik-99, first probe of the Codon ratchet (pace 17:25:29Z: codon fell 0 over 10 landings, owes 2, 138 left; no stack has paid it). Tools: scratchpad/codon_one.py MODULE... compiles a module in both census modes with the pinned compiler through tools/codon_census.py's own stage and probe (alarm, flow and cards reproduced their baseline verdicts exactly), scratchpad/codon_err.py MODULE prints the compiler's full stderr with the line. Findings: (1) alarm's 'syntax error, unexpected comma' is the bare star of a keyword-only parameter list (alarm.py fires_between, the stripped file's line 58 is the original's 59): the pinned Codon does not parse a bare star. The FBT keyword-only fixes of this session (W1376 to W1381) use the same syntax, so they cannot reach a module that compiles today (the gate's census would refuse) and cannot help any failing entry reach compiling. (2) Removing that star clears the syntax error but ruff PLR0917 rises 0 to 1 and Codon then fails on 'cannot import name UTC from datetime' (stripped), so alarm is not one fix from compiling. (3) flow and cards fail on 'class decorator got unexpected argument' (a dataclass decorator argument), a different class. Conclusion: no codon entry is one fix away yet among the three probed; the next step is to probe every failing entry whose as_written and stripped errors are the same (no __future__ involved) and rank by distance. No source file changed: alarm.py was edited and restored, git diff clean. | 2026-11-01: CORRECTION: the 18:50Z stamp above is wrong, it was a placeholder I typed: the probes ran between the 18:30:04Z tick start and 18:33:44Z (date -u just now). G0 2026-11-01T18:33:44Z (date -u in the preceding call), written AFTER the codon probes of this tick and BEFORE --tick-open of nemik-99 and before any edit of a file a stack carries (the one src edit, alarm.py, was restored and git diff shows it clean). Pace: nemik-rank nemik --pace first command, pace of 2026-11-01T17:25:29Z, 1 h 4 min 35 s old at 18:30:04Z (R114 finding 1: no 16:25Z and no 18:25Z pace seen, so the producer's hourly :25 run is not visible every hour; the producer's record is still to read, W1288). Advances W1400 (codon, owed since the 17:25 pace) and the successor of stack 799 (W1398, in the gate since 18:18:51Z). Actuator: codon_one.py over the failing entries with equal verdicts. Sensor: the verdict lines. Expected: at least one entry within one fix of compiling, or the ranking says none is. | 2026-11-01: 2026-11-01T18:39Z probe over the equal-verdict failing entries, pinned compiler, both modes (codon_one.py): calendars \"syntax error, unexpected '='\" (the baseline records unexpected comma: the first error moved), check, history, hostapply and churn each \"syntax error, unexpected ','\" in both modes. The baseline records churn as 'class decorator got unexpected argument': today's first error for churn is the bare star, so the keyword-only booleans this session added (W1376 to W1381 touched calwrite, churn, history) moved churn's FIRST error from the decorator to the star. The census does not see it (it ratchets compiled-or-not, and these still fail) but the distance to compiling is hidden: Codon reports one error at a time and a new star is a second blocker in front of the old one. CONFLICT to resolve, not to pick a side: ruff FBT001/FBT002 asks for keyword-only booleans, which need a bare star, and the pinned Codon does not parse one. Common structure to look for: a boolean parameter that does not need to be a boolean (an enum or a one-field options record, or two functions), which satisfies FBT with no star. Any fix that adds a bare star to a module not in codon-baseline.json is refused by the census, so the star is only ever added where Codon already fails. Next: count the bare-star sites in src (git grep for a line that is just a star and comma in a def), split them into modules that compile today (none can have one) and failing ones, and decide per failing module whether its distance matters. | 2026-11-01: R116 (nemik:R114) ask, star count per module, 2026-11-01 tick nemik-100, from grep of src/nemik for a def with a bare star: wake 2 (lines 169, 434), check 4 (647, 1119, 1179, 1197), calwrite 2 (85, 255), rank 2 (441, 554), witwait 1 (119), calendars 1 (179), alarm 1 (59), hostapply 1 (178), history 1 (134) = 15 definitions in 9 modules. Every one of the nine modules is a failing entry in codon-baseline.json (checked wake, witwait, rank, then check, calendars, alarm, hostapply, calwrite, history earlier), so no star sits in a module that compiles today, and the census would refuse one added there. So the stars lengthen the road to compiling for nine failing modules and cost the census nothing yet. W1383 (19 flag sites): its sites still need listing by module and marking compiled or failing before it lands anything; for any site in a module that is not a baseline entry the form must be one Codon parses (an enum or options record), not a star.",
       "issued_at": "2026-11-01T18:33:28Z",
       "minted_during": "interrupt",
       "caused_by": "W561",
-      "last_worked": "2026-11-01T19:01:27Z",
-      "ticks_blocked": 0
+      "last_worked": "2026-11-01T21:29:12Z",
+      "ticks_blocked": 0,
+      "completed": null
     },
     {
       "symbol": "W1401",
@@ -33684,7 +33689,7 @@
     {
       "symbol": "W1407",
       "title": "importer.py reads the receiving queue through the tomlview helpers instead of an Any dict, so mypy falls",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "src/nemik/importer.py",
@@ -33692,14 +33697,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Land stack 806; then W1408 makes letters._load strict as its next entry.",
-      "evidence": "2026-11-01: G0 2026-11-01T20:30:36Z (date -u in the preceding call), BEFORE the first edit of src/nemik/importer.py and BEFORE --tick-open of nemik-103. Staged second successor: stack 804 (W1405) is gating since 20:22:21Z and stack 805 (W1406 letters.py, mypy 1396 to 1373) is staged behind it. Pace: nemik-rank nemik --pace first command of tick nemik-103 at 20:30:03Z, pace of 2026-11-01T20:25:29Z (4 min 34 s old, current): mypy fell 9 over 10 landings owes 190 (furthest behind), ruff fell 50 owes 90, codon fell 0 owes 2. Sites from mypy on importer.py at HEAD 0cf12183 (scratchpad/mypy_by_file.py: 11 findings): importer.py:52, :53, :54 (two), :55, :57, :63, :64 (two), :71 and :118. Premise read: the queue is parsed by json.loads straight into queue.get and cards loops (lines 49 to 57), so the Any flows into existing, counter and every later use; tomlview.py:14 table and :24 tables take object and answer builtin types. Actuator: scratchpad/w1407_importer.py: raw bound as object, queue = table(raw), cards = tables(queue.get('waypoints')), existing keyed by str, counter = int(str(queue.get('counter', 0))); one nemik.tomlview import in the same codemod. Behaviour: a queue whose waypoints is null or the wrong type reads as no cards where the old code raised. importer is a failing entry in codon-baseline.json. K not verified before this G0: range [0, 11], expected mypy 1373 (stack 805's value) down to between 1373 and 1362, ruff flat at 613. Line 118 (args.fmt, an argparse Namespace Any) may remain. | 2026-11-01: 2026-11-01T20:45Z: stack 805 was REFUSED at submit (20:44:44Z) with 'W1139 is in this repository's round and ready, but the working set includes W1407, which is not' (and five more such rows), because W1407 was marked working while only staged. Set back to ready until its own stack 806 is submitted; stack 806 is written and unchanged. This is the working-mark class again (W1390 at 17:20Z): a card marked working in advance is refused when it is not in the round. | 2026-11-01: R121 (nemik:R119), 2026-11-01T21:16Z: before this stack's submit the staged importer.py was changed from tolerant to strict (a present non-object queue, or a present non-array waypoints, raises TypeError; None stays empty) with a test in tests/test_importer.py that feeds a list, an object-valued waypoints and null: 18 passed in 8.5 s wall with the guards. Reason the G0's tolerant actuator changed after the G0: W1408's policy (written at 20:50Z) says a reader that decides what a writer is told to add must raise, and the reviewer pointed out that landing it tolerant ships a defect already named. mypy unchanged by the change (1357 on the full staged tree before and after; 1363 for this stack alone). Marked working here, in the same call sequence as the submit.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-01: G0 2026-11-01T20:30:36Z (date -u in the preceding call), BEFORE the first edit of src/nemik/importer.py and BEFORE --tick-open of nemik-103. Staged second successor: stack 804 (W1405) is gating since 20:22:21Z and stack 805 (W1406 letters.py, mypy 1396 to 1373) is staged behind it. Pace: nemik-rank nemik --pace first command of tick nemik-103 at 20:30:03Z, pace of 2026-11-01T20:25:29Z (4 min 34 s old, current): mypy fell 9 over 10 landings owes 190 (furthest behind), ruff fell 50 owes 90, codon fell 0 owes 2. Sites from mypy on importer.py at HEAD 0cf12183 (scratchpad/mypy_by_file.py: 11 findings): importer.py:52, :53, :54 (two), :55, :57, :63, :64 (two), :71 and :118. Premise read: the queue is parsed by json.loads straight into queue.get and cards loops (lines 49 to 57), so the Any flows into existing, counter and every later use; tomlview.py:14 table and :24 tables take object and answer builtin types. Actuator: scratchpad/w1407_importer.py: raw bound as object, queue = table(raw), cards = tables(queue.get('waypoints')), existing keyed by str, counter = int(str(queue.get('counter', 0))); one nemik.tomlview import in the same codemod. Behaviour: a queue whose waypoints is null or the wrong type reads as no cards where the old code raised. importer is a failing entry in codon-baseline.json. K not verified before this G0: range [0, 11], expected mypy 1373 (stack 805's value) down to between 1373 and 1362, ruff flat at 613. Line 118 (args.fmt, an argparse Namespace Any) may remain. | 2026-11-01: 2026-11-01T20:45Z: stack 805 was REFUSED at submit (20:44:44Z) with 'W1139 is in this repository's round and ready, but the working set includes W1407, which is not' (and five more such rows), because W1407 was marked working while only staged. Set back to ready until its own stack 806 is submitted; stack 806 is written and unchanged. This is the working-mark class again (W1390 at 17:20Z): a card marked working in advance is refused when it is not in the round. | 2026-11-01: R121 (nemik:R119), 2026-11-01T21:16Z: before this stack's submit the staged importer.py was changed from tolerant to strict (a present non-object queue, or a present non-array waypoints, raises TypeError; None stays empty) with a test in tests/test_importer.py that feeds a list, an object-valued waypoints and null: 18 passed in 8.5 s wall with the guards. Reason the G0's tolerant actuator changed after the G0: W1408's policy (written at 20:50Z) says a reader that decides what a writer is told to add must raise, and the reviewer pointed out that landing it tolerant ships a defect already named. mypy unchanged by the change (1357 on the full staged tree before and after; 1363 for this stack alone). Marked working here, in the same call sequence as the submit. | 2026-11-01: CORRECTION: the stamp '2026-11-01T21:16Z' in the R121 line above is wrong, a typed placeholder (the sixth of the segment): the strictness change and the submit happened between 21:08Z and 21:10:48Z (date -u after the submit call). Stack 805 (W1406) landed f2e3e465 at 21:07:46Z (reflog 16:07:46 -0500); the gate was empty 21:07:46Z to 21:10:48Z = 3 min 2 s (wall) while I made the importer strict and rewrote the stack body. | 2026-11-01: landed f03fb6d4 (stack 806, pushed, reflog 21:31:29Z); mypy 1373 to 1363; importer.commands now refuses a corrupt queue (TypeError), pinned by test_importer",
       "issued_at": "2026-11-01T20:30:35Z",
       "minted_during": "interrupt",
       "caused_by": "W1178",
-      "last_worked": "2026-11-01T21:10:44Z",
+      "last_worked": "2026-11-01T21:32:27Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261101T213227Z",
       "manifest": [
         "src/nemik/importer.py",
         "tests/test_importer.py",
@@ -33733,7 +33738,7 @@
     {
       "symbol": "W1409",
       "title": "vtodo.py reads the opt-in and ask-priority TOML through the tomlview helpers and types its set subclass, so mypy falls by six",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [
         "file:mypy-baseline.json"
@@ -33745,10 +33750,89 @@
       "issued_at": "2026-11-01T21:01:40Z",
       "minted_during": "interrupt",
       "caused_by": "W1178",
-      "last_worked": "2026-11-01T21:01:56Z",
+      "last_worked": "2026-11-01T21:32:50Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/vtodo.py",
+        "mypy-baseline.json"
+      ],
+      "size_class": "small",
+      "completed": null
+    },
+    {
+      "symbol": "W1410",
+      "title": "Histogram the first Codon error of every failing baseline module in the stripped mode with a scratch script, and write the classes with counts on W1400",
+      "status": "ready",
+      "enables": [
+        "W1400"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-01T21:29:12Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1400",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W1411",
+      "title": "Find the dataclass decorator argument Codon rejects in flow, cards and churn, and whether a form it accepts keeps the tests green",
+      "status": "ready",
+      "enables": [
+        "W1400"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-01T21:29:12Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1400",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W1412",
+      "title": "List modules whose only stripped-mode blocker is one missing stdlib name such as datetime.UTC, and replace it where an equivalent compiles",
+      "status": "ready",
+      "enables": [
+        "W1400"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-01T21:29:12Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1400",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W1413",
+      "title": "starved.py and pacing.py bind the parsed rank-weights TOML as object before the table helper, so mypy falls by two",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "file:mypy-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Run the codemod real, measure, stack as entry 1 of 808, entry 2 is W1408 letters strict.",
+      "evidence": "2026-11-01: G0 2026-11-01T21:30:40Z (date -u in the preceding call), BEFORE the first edit of src/nemik/starved.py and pacing.py and BEFORE --tick-open of nemik-105. Stack 808 entry 1, behind staged 807 (W1409) and gating 806 (W1407, since 21:10:48Z). Pace: nemik-rank nemik --pace first command of tick nemik-105 at 21:30:05Z, pace of 2026-11-01T21:24:02Z (6 min 3 s old, current): mypy fell 42 over 10 landings owes 190, ruff fell 35 owes 90, codon fell 0 owes 2. COMPLETE K PROBE BEFORE THIS G0 (scratchpad/w1413_parsed.py probe, copies deleted by exact path afterwards): mypy on starved.py and pacing.py at HEAD f2e3e465 reports 12 findings (pacing 4, starved 8); mypy on the probe copies reports 10 (pacing 3, starved 7): K=2, and the sites are pacing.py:49 and starved.py:51, both 'Expression type contains Any (dict[str, Any])' from tomllib.loads feeding table(table(...)). The other ten are rank() and key-lambda Any, not touched. Premise read: tomlview.py:14 table(value: object); table is already imported in both. Behaviour: none (an annotation and a name). Both modules are failing entries in codon-baseline.json (verified earlier for pacing and starved). N=2, K=2, expected -2: mypy 1357 (stack 807's value) to 1355, ruff flat at 613. Actuator: scratchpad/w1413_parsed.py real. Waits on stack 807 for mypy-baseline.json and the queue files.",
+      "issued_at": "2026-11-01T21:30:39Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1178",
+      "last_worked": "2026-11-01T21:30:49Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/starved.py",
+        "src/nemik/pacing.py",
         "mypy-baseline.json"
       ],
       "size_class": "small"

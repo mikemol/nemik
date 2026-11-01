@@ -71,8 +71,7 @@
   "misc": 8
  },
  "src/nemik/vtodo.py": {
-  "misc": 10,
-  "type-arg": 1
+  "misc": 5
  },
  "src/nemik/wake.py": {
   "misc": 5

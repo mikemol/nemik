@@ -37,6 +37,7 @@ from rdflib import Graph
 from nemik.adapter import ledger_graph
 from nemik.blocks import EXPLICIT, operator_asks, with_salience
 from nemik.check import LEDGER, default_root, survey, workstream_files
+from nemik.tomlview import strings, table
 
 if TYPE_CHECKING:
     from nemik.blocks import AskRow
@@ -45,7 +46,7 @@ PRODID = "-//nemik//operator asks//EN"
 DEFAULT_OPT_IN = Path.home() / ".config" / "nemik" / "ics.toml"
 
 
-class _Every(set):
+class _Every(set[str]):
     """`repos = ["*"]`: every repo (operator 2026-09-30: "All repos")."""
 
     def __contains__(self, _repo: object) -> bool:
@@ -61,7 +62,8 @@ def opted_in(path: Path) -> set[str]:
     """
     if not path.exists():
         return set()
-    repos = set(tomllib.loads(path.read_text(encoding="utf-8")).get("repos", []))
+    parsed: object = tomllib.loads(path.read_text(encoding="utf-8"))
+    repos = set(strings(table(parsed).get("repos")))
     return _Every() if "*" in repos else repos
 
 
@@ -164,9 +166,10 @@ def priority(salience: float, text: str | None = None) -> int:
     """
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
-    steps: dict[str, int] = tomllib.loads(text).get("ask_priority", {})
+    parsed: object = tomllib.loads(text)
+    steps = table(table(parsed).get("ask_priority"))
     for floor, level in sorted(
-        ((float(k), int(v)) for k, v in steps.items()), reverse=True
+        ((float(k), int(str(v))) for k, v in steps.items()), reverse=True
     ):
         if salience >= floor:
             return level
