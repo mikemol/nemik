@@ -617,7 +617,6 @@
   "E501": 1
  },
  "tests/test_withheld.py": {
-  "ANN001": 4,
   "PLC0415": 1
  },
  "tests/test_witness_promql.py": {

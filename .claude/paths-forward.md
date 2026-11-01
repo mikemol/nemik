@@ -3,11 +3,11 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1336 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:15a7948e248f9632`
+counter 1337 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:3210d390fa3856e3`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1336 | working |
+| 1 | W1337 | working |
 | 2 | W1075 | ready |
 | 3 | W1139 | ready |
 | 4 | W1279 | ready |
@@ -1315,11 +1315,12 @@ counter 1336 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:15a
 | 1306 | W1333 | done |
 | 1307 | W1334 | done |
 | 1308 | W1335 | done |
+| 1309 | W1336 | done |
 
 ## waypoints
 
-1. **W1336** (working) test_deploy_manifest.py reads the deployment YAML through TypedDicts, so mypy falls by the Any
-   cascade
+1. **W1337** (working) test_withheld.py reads the static documents through test-side TypedDicts and casts, so mypy falls
+   by the Any cascade
 2. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 3. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -4334,6 +4335,8 @@ counter 1336 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:15a
    ruff falls toward 985
 1308. **W1335** (done) residue.py becomes pure (judged verdicts passed in, gathered in metrics.py) so it compiles under
    Codon and codon falls 140 to 138
+1309. **W1336** (done) test_deploy_manifest.py reads the deployment YAML through TypedDicts, so mypy falls by the Any
+   cascade
 
 ## residue
 
@@ -4947,3 +4950,18 @@ counter 1336 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:15a
   stack 746 is not known at this read; the codon fall is MEASURED by the census, not yet landed. No fixpoint is
   declared; open findings carried: R72 on W1288, W1329, W613, W846; R73-F2 and R80 on W1288; R81 on W1334 (correction
   done) and W1179 (this stack is its witness if it lands).; 2 finding(s)
+- **nemik:R81** (-) round 83: tick-w1337, W1336 (test_deploy_manifest.py TypedDicts, mypy 2076 to 1989); stack 747
+  inflight (key 1793496986570943270, W1336) at read; previous landing 379ee401 01:14:18Z (reflog 21:14:18 -0400);
+  pycheck 985/985 ruff, 1989/1989 mypy: root The card is well made and nothing in it needs a finding: pace read first
+  and quoted (01:25:25Z, mypy the only owed ratchet), G0 01:30:35.7Z (date -u 01:30:35.7Z; text 01:30:37Z) alone, read
+  back, then tick-open; probe of the camelCase TypedDict against the house ruff before the edit; manifest set up front
+  and equal to the stack's tests/test_deploy_manifest.py and mypy-baseline.json; per-file baseline diff given
+  (explicit-any 6, misc 83 to misc 2, -87, inside [60, 89]); pycheck run by me prints ruff 985/985 and mypy 1989/1989.
+  Gate-empty 01:14:18Z to the 01:36:23.7Z submit = 22 min 05 s wall (the G1's 22 min 07 s uses the 01:36:25Z stamp).
+  What the transcript adds is where those 22 minutes went: the last tool call before the landing was 01:01:02.9Z, the
+  close-out calls ran 01:15:05Z to 01:15:07.7Z, and the next call was the 01:30:02.6Z pace read, so 14 min 55 s
+  (01:15:07.7Z to 01:30:02.6Z) had no tool call, of which the wait for a pace run newer than the landing (01:14:18Z to
+  01:25:25Z, 11 min 07 s) is a named check and the remaining 4 min 37 s to the wake is not. The one finding is the
+  pace-wait mechanism; it extends R72-F1 and R80 (second stack in the same wake), whose open items stay carried (R72 on
+  W1288, W1329, W613, W846; R73-F2 and R80 on W1288; R81-F2 on W1179 is witnessed by 746's landing, accepted with codon
+  140 to 138).; 1 finding(s)

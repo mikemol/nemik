@@ -265,10 +265,6 @@
  "tests/test_web_render.py": {
   "misc": 1
  },
- "tests/test_withheld.py": {
-  "misc": 59,
-  "no-untyped-def": 2
- },
  "tests/test_witness_promql.py": {
   "explicit-any": 2,
   "misc": 11
