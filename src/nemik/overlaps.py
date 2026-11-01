@@ -25,6 +25,7 @@ from rdflib import Graph
 from nemik.adapter import NEMIK, OSLC_CM, STATE
 from nemik.blocks import _repo, ref
 from nemik.check import default_root, survey
+from nemik.say import say
 
 if TYPE_CHECKING:
     from rdflib.term import Node
@@ -156,6 +157,6 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     found = overlaps(g, cross=args.cross)
     held = read_claims() if found else None
     if found and held is None:
-        print("(no claim holders: mikemol-membudget is not available)")
+        say("(no claim holders: mikemol-membudget is not available)")
     for tag, refs in found.items():
-        print(row(tag, refs, held))
+        say(row(tag, refs, held))

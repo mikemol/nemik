@@ -26,6 +26,7 @@ from rdflib.namespace import DCTERMS
 from nemik.adapter import waypoint_uri
 from nemik.check import default_root, survey
 from nemik.rank import fleet_repos, load_composition, load_weights, rank
+from nemik.say import say
 from nemik.tomlview import table
 
 DEFAULT_DAYS = 14
@@ -131,10 +132,10 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     now = datetime.now(UTC)
     found = starved_fleet(g, args.repos, now, days)
     if args.json:
-        print(json.dumps([s._asdict() for s in found], indent=1))
+        say(json.dumps([s._asdict() for s in found], indent=1))
         return
-    print(
+    say(
         f"starved ready cards (waited over {days} days, overtaken by newer ones): {len(found)}"
     )
     for s in found:
-        print(f"  {s.cite}  waited {s.waited_days}d, overtaken by {s.overtaken_by}")
+        say(f"  {s.cite}  waited {s.waited_days}d, overtaken by {s.overtaken_by}")

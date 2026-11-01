@@ -17,6 +17,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+from nemik.say import say, warn
 from nemik.tomlview import strings, table, tables
 
 
@@ -214,16 +215,15 @@ def main(argv: list[str] | None = None) -> int:
     still, landed = blockers(args.state, args.symbol)
     if still and not args.force:
         # nemik:W443: working a blocked card left it 'working' with a stale blocked_on (W441).
-        print(
+        warn(
             f"nemik-work: {args.symbol} is blocked on {', '.join(still)}; "
-            "land or unblock those first, or pass --force",
-            file=sys.stderr,
+            "land or unblock those first, or pass --force"
         )
         return 2
     steps = plan(working(args.state), args.symbol)
     for symbol, status in steps:
         note = f" (cleared landed blocker(s): {', '.join(landed)})" if landed else ""
-        print(f"{symbol} -> {status}{note}")
+        say(f"{symbol} -> {status}{note}")
         if args.dry_run:
             continue
         cmd = ["--state", str(args.state), "--update", symbol, "--status", status]
@@ -232,7 +232,7 @@ def main(argv: list[str] | None = None) -> int:
             cmd += ["--blocked-on", *still]
         code, said = run_writer(cmd)
         if code:
-            print(said, file=sys.stderr)
+            warn(said)
             return code
     return 0
 

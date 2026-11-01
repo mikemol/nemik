@@ -26,6 +26,7 @@ from typing import TYPE_CHECKING
 
 from nemik.issues import read as read_issues
 from nemik.mspdi import read
+from nemik.say import say
 from nemik.tomlview import table, tables
 
 if TYPE_CHECKING:
@@ -131,7 +132,7 @@ def main(argv: list[str] | None = None) -> int:
     for cmd in commands(
         _read(args.fmt, args.file), args.fmt, args.file.name, args.state, writer
     ):
-        print(shlex.join(cmd))
+        say(shlex.join(cmd))
     return 0
 
 

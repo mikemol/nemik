@@ -3892,3 +3892,8 @@
 2026-11-01T23:30:07Z  status W1419 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T23:30:08Z  status W1420 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T23:30:55Z  status W1421 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T23:32:04Z  interrupt W1422 minted    -         "Seven small commands write through nemik.say instead of bare print calls, so ruff falls by fifteen"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1384
+2026-11-01T23:35:06Z  tick  W1423 minted    -         "Ten larger commands write through nemik.say instead of bare print calls (the plan converts 97), so ruff falls by about ninety-seven"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1384
+2026-11-01T23:37:56Z  tick  W1423 advanced  sweep     "stack 811 landed 13ed2930 23:29:22Z (W1419, W1420); stack 812 (W1421 nemik.say plus blocks_cli) gating since 23:30:59Z; stacks 813 (W1422 seven small commands, -15) and 814 (W1423 ten larger commands, -97) staged; R125 answered: probe and decision on W1384, three letter waits traced to the pin (W1396), stray --next tokens cleaned [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T23:53:59Z  status W1421 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T23:54:20Z  status W1422 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

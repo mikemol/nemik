@@ -24,6 +24,7 @@ from rdflib.namespace import DCTERMS
 
 from nemik.blocks import ref
 from nemik.check import default_root, survey
+from nemik.say import say
 from nemik.tomlview import table
 
 
@@ -117,10 +118,10 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
             if qg is not None:
                 g += qg
     rate, burst, days = limits()
-    print(f"pace: {rate:g} new cards a day, burst {burst:g}, over the last {days} days")
+    say(f"pace: {rate:g} new cards a day, burst {burst:g}, over the last {days} days")
     for p in paces(g, datetime.now(UTC), rate, burst, days):
         flag = "  OVER PACE NOW" if p.level < 0 else ""
-        print(
+        say(
             f"  {p.repo:22} {p.arrivals:4} new, went {p.overdraft:g} over, "
             f"{p.level:g} tokens left{flag}"
         )

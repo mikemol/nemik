@@ -23,6 +23,7 @@ from datetime import UTC, datetime, timedelta
 from typing import TYPE_CHECKING
 
 from nemik.history import Snapshot, diff, queue_at, resolve, snapshots
+from nemik.say import say
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -218,7 +219,7 @@ def run(
     commits = commit_classes(fleet, start, end)
     if as_json:
         out = {"commits": commits, "polls": [asdict(r) for r in rows]}
-        print(json.dumps(out, indent=1))
+        say(json.dumps(out, indent=1))
     else:
-        print(render((start, end), len(names), commits, rows))
+        say(render((start, end), len(names), commits, rows))
     return 0

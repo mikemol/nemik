@@ -12,6 +12,7 @@ import re
 from pathlib import Path
 
 from nemik.check import QUEUE, default_root, workstream_files
+from nemik.say import say
 from nemik.tomlview import table, tables
 
 # Same field regex as summit's scripts/place_intake.py (`waypoint` is a real top-level field).
@@ -106,6 +107,6 @@ def main(argv: list[str] | None = None) -> None:
     n = len(floor_asks(floor))
     bad = unresolved(args.root, floor)
     for key, ptr, why in bad:
-        print(f"floor-asks: {key}: {ptr}: {why}")
-    print(f"floor-asks: {n - len(bad)} of {n} waypoint pointers resolve")
+        say(f"floor-asks: {key}: {ptr}: {why}")
+    say(f"floor-asks: {n - len(bad)} of {n} waypoint pointers resolve")
     raise SystemExit(1 if bad else 0)

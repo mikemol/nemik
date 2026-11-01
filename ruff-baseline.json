@@ -58,9 +58,6 @@
   "S607": 1,
   "T201": 6
  },
- "src/nemik/churn.py": {
-  "T201": 2
- },
  "src/nemik/critical.py": {
   "C901": 2,
   "PLC0415": 3,
@@ -72,9 +69,6 @@
  "src/nemik/endpoint.py": {
   "S404": 1,
   "S603": 1
- },
- "src/nemik/floorasks.py": {
-  "T201": 2
  },
  "src/nemik/flow.py": {
   "C901": 1,
@@ -95,9 +89,6 @@
  "src/nemik/hostapply.py": {
   "S404": 1,
   "S603": 1
- },
- "src/nemik/importer.py": {
-  "T201": 1
  },
  "src/nemik/index.py": {
   "PLW0603": 1
@@ -120,11 +111,7 @@
  "src/nemik/overlaps.py": {
   "PLR2004": 2,
   "S404": 1,
-  "S603": 1,
-  "T201": 2
- },
- "src/nemik/pacing.py": {
-  "T201": 2
+  "S603": 1
  },
  "src/nemik/pins.py": {
   "S404": 1,
@@ -176,9 +163,6 @@
  "src/nemik/shaclinc.py": {
   "PLC0415": 1
  },
- "src/nemik/starved.py": {
-  "T201": 3
- },
  "src/nemik/staticserve.py": {
   "C901": 1,
   "PLW0717": 1
@@ -213,8 +197,7 @@
  },
  "src/nemik/work.py": {
   "S404": 1,
-  "S603": 1,
-  "T201": 3
+  "S603": 1
  },
  "tests/installed.py": {
   "S101": 1,
