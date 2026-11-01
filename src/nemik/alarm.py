@@ -15,7 +15,8 @@ from __future__ import annotations
 import re
 from datetime import UTC, date, datetime, time, timedelta
 
-from mikemol.pathsforward.timevalue import duration
+from dateutil.rrule import rrulestr
+from mikemol.pathsforward.timevalue import duration, parse
 from mikemol.pathsforward.timevalue import fires_at as _fires_at
 
 __all__ = ["duration", "fires_at", "fires_between", "recurrence_id"]
@@ -79,8 +80,6 @@ def fires_between(
         return []
     if not rrule or trigger.startswith("VALUE=DATE-TIME:"):
         return [(base, "")] if start <= base < end else []
-    from dateutil.rrule import rrulestr
-    from mikemol.pathsforward.timevalue import parse
 
     first = parse(dtstart).when
     anchor = (

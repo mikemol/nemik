@@ -27,6 +27,7 @@ and every iteration is sorted (nemik:W119). Demand conserved is checked on every
 
 from __future__ import annotations
 
+import heapq
 from collections import OrderedDict
 from dataclasses import dataclass, field
 from fractions import Fraction
@@ -111,7 +112,6 @@ def _grounded(
     # elimination order the old full scan chose, at a fraction of its cost: the scan ran once per
     # elimination over every remaining node (20 M key calls in one fleet rebuild). An entry whose
     # degree is stale is skipped; every degree change pushes a fresh entry.
-    import heapq
 
     heap = [(len(link[n]), n) for n in link]
     heapq.heapify(heap)

@@ -24,6 +24,7 @@ from rdflib import Graph
 from rdflib.namespace import DCTERMS
 
 from nemik.adapter import waypoint_uri
+from nemik.check import default_root, survey
 from nemik.rank import fleet_repos, load_composition, load_weights, rank
 from nemik.tomlview import table
 
@@ -110,8 +111,6 @@ class Options(argparse.Namespace):
 
 def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     """nemik-starved: ready cards overtaken by newer ones for longer than the declared age."""
-    from nemik.check import default_root, survey
-
     ap = argparse.ArgumentParser(
         prog="nemik-starved", description=(main.__doc__ or "").splitlines()[0]
     )

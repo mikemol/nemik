@@ -13,6 +13,7 @@ from __future__ import annotations
 import argparse
 import re
 import subprocess
+import tomllib
 from pathlib import Path
 from typing import NamedTuple
 
@@ -95,7 +96,6 @@ def installed(receipt: Path) -> str | None:
     """
     if not receipt.is_file():
         return None
-    import tomllib
 
     tool = table(table(tomllib.loads(receipt.read_text(encoding="utf-8"))).get("tool"))
     for req in tables(tool.get("requirements")):

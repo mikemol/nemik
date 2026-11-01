@@ -13,7 +13,6 @@
   "RUF001": 1
  },
  "src/nemik/alarm.py": {
-  "PLC0415": 2,
   "PLR0913": 1,
   "S101": 2
  },
@@ -86,7 +85,6 @@
  "src/nemik/flow.py": {
   "C901": 1,
   "DOC502": 1,
-  "PLC0415": 1,
   "PLR0912": 1
  },
  "src/nemik/health.py": {
@@ -139,11 +137,9 @@
   "T201": 2
  },
  "src/nemik/pacing.py": {
-  "PLC0415": 1,
   "T201": 2
  },
  "src/nemik/pins.py": {
-  "PLC0415": 1,
   "S404": 1,
   "S603": 3,
   "S607": 3,
@@ -198,7 +194,6 @@
   "PLC0415": 1
  },
  "src/nemik/starved.py": {
-  "PLC0415": 1,
   "T201": 3
  },
  "src/nemik/staticserve.py": {

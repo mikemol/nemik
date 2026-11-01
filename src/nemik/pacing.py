@@ -23,6 +23,7 @@ from rdflib import Graph
 from rdflib.namespace import DCTERMS
 
 from nemik.blocks import ref
+from nemik.check import default_root, survey
 from nemik.tomlview import table
 
 
@@ -104,8 +105,6 @@ class Options(argparse.Namespace):
 
 def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     """nemik-pacing: each repo's new cards against a declared rate and burst (a token bucket)."""
-    from nemik.check import default_root, survey
-
     ap = argparse.ArgumentParser(
         prog="nemik-pacing", description=(main.__doc__ or "").splitlines()[0]
     )
