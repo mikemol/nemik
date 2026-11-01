@@ -21,17 +21,15 @@ import tempfile
 import tomllib
 from datetime import date, datetime
 from pathlib import Path
-from typing import TYPE_CHECKING, NamedTuple, TypedDict
+from typing import NamedTuple, TypedDict
 
+from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import DCTERMS, RDF
 
 from nemik.adapter import NEMIK, OSLC_CM
 from nemik.blocks import ref
 from nemik.check import default_root, survey
 from nemik.vtodo import DEFAULT_HELPER
-
-if TYPE_CHECKING:
-    from rdflib import Graph
 
 DEFAULT_CONFIG = Path.home() / ".config" / "nemik" / "calendars.toml"
 _LABEL = re.compile(r"[a-z][a-z0-9-]{0,31}")
@@ -300,8 +298,6 @@ def event_graph(occs: list[Occurrence], queues: Graph) -> Graph:
         The graph of events, with the waits on their next occurrence.
 
     """
-    from rdflib import Graph, Literal, URIRef
-
     g = Graph()
     nxt: dict[tuple[str, str | None], URIRef] = {}
     for o in (
@@ -331,7 +327,6 @@ def days_main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     for its Tools panel, so anything nemik-operator can reach is on the served path. This module is
     reachable from no served module (tests/test_calendar_boundary.py).
     """
-    from rdflib import Graph
 
     class Options(argparse.Namespace):
         """The parsed command line of nemik-days (nemik:W1187)."""

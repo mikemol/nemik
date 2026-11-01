@@ -1364,6 +1364,7 @@ def build_static(
     root: Path,
     out: Path,
     withheld: Path | None,
+    *,
     private: bool = False,
     exports: Path | None = None,
 ) -> list[Path]:
@@ -1382,13 +1383,14 @@ def build_static(
     from nemik.salience import memo_audits
 
     with memo_audits(), indexed():
-        return _build_static(root, out, withheld, private, exports)
+        return _build_static(root, out, withheld, private=private, exports=exports)
 
 
 def _build_static(
     root: Path,
     out: Path,
     withheld: Path | None,
+    *,
     private: bool = False,
     exports: Path | None = None,
 ) -> list[Path]:
