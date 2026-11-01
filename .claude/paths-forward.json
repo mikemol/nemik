@@ -33335,11 +33335,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Per module, run src_probe.py with a skip list for the clashing statements: calendars.py (11 sites; refused: Graph is bound under a module-level block), witnesses.py (9; refused: urllib imported two ways), salience.py (6; refused: Weights bound under a module-level block). Hoist the rest and leave the clash statements local as split candidates. The 13 small modules (adapter 2, alarm 2, cards 1, critical 3, flow 1, history 4, importer 2, letters 3, overlaps 2, pacing 1, pins 1, shaclinc 1, starved 1) get probed after",
-      "evidence": "2026-11-01: Probed 2026-11-01T14:42Z: calendars REFUSED (name bound under a module-level block: Graph), witnesses REFUSED (same name, different imports: urllib), salience REFUSED (name bound under a module-level block: Weights). 26 sites in the three, 71 unpinned src sites left in all (111 total minus serve 26, rank 6, check 3, metrics 4, and the 1 vtodo-free remainder). | 2026-11-01: G0 2026-11-01T16:35:31Z (date -u in the preceding call), BEFORE the first edit of the five modules. Advances W1390 (the small-module hoists). Pace: nemik-rank nemik --pace read at 16:30Z, pace of 2026-11-01T15:25:28Z still newest: ruff behind (fell 80, owes 90). Gate sat empty after stack 794 landed 16:30:46Z, so this is the quick successor. Actuator: scratchpad/hoist_run.py (HOIST_DIR=src/nemik, no skips) on alarm.py, pacing.py, starved.py, flow.py, pins.py. COMPLETE K PROBE BEFORE THIS G0 (scratchpad/src_probe.py MODULE each, HEAD 75430a4e), lines: alarm PLC0415 2->0 mypy 0->0 guards 6 passed; pacing 1->0 mypy 4->4 6 passed; starved 1->0 mypy 8->8 6 passed; flow 1->0 mypy 0->0 6 passed; pins 1->0 mypy 1->1 6 passed; no cycle-reaching targets; all five already failing codon entries so the census is not run. Left out: cards (mypy 0->2), shaclinc (a guard failed). N=6, K=6, expected -6: ruff 661 to 655, mypy flat at 1405.",
+      "evidence": "2026-11-01: Probed 2026-11-01T14:42Z: calendars REFUSED (name bound under a module-level block: Graph), witnesses REFUSED (same name, different imports: urllib), salience REFUSED (name bound under a module-level block: Weights). 26 sites in the three, 71 unpinned src sites left in all (111 total minus serve 26, rank 6, check 3, metrics 4, and the 1 vtodo-free remainder). | 2026-11-01: G0 2026-11-01T16:35:31Z (date -u in the preceding call), BEFORE the first edit of the five modules. Advances W1390 (the small-module hoists). Pace: nemik-rank nemik --pace read at 16:30Z, pace of 2026-11-01T15:25:28Z still newest: ruff behind (fell 80, owes 90). Gate sat empty after stack 794 landed 16:30:46Z, so this is the quick successor. Actuator: scratchpad/hoist_run.py (HOIST_DIR=src/nemik, no skips) on alarm.py, pacing.py, starved.py, flow.py, pins.py. COMPLETE K PROBE BEFORE THIS G0 (scratchpad/src_probe.py MODULE each, HEAD 75430a4e), lines: alarm PLC0415 2->0 mypy 0->0 guards 6 passed; pacing 1->0 mypy 4->4 6 passed; starved 1->0 mypy 8->8 6 passed; flow 1->0 mypy 0->0 6 passed; pins 1->0 mypy 1->1 6 passed; no cycle-reaching targets; all five already failing codon entries so the census is not run. Left out: cards (mypy 0->2), shaclinc (a guard failed). N=6, K=6, expected -6: ruff 661 to 655, mypy flat at 1405. | 2026-11-01: G0 2026-11-01T16:37:15Z (date -u in the preceding call), BEFORE the first edit of letters.py, overlaps.py and importer.py. Staged successor of stack 795, same card W1390. Pace: 15:25:28Z still newest (read this tick first). Actuator: scratchpad/hoist_run.py (HOIST_DIR=src/nemik, no skips) on those three. COMPLETE K PROBE BEFORE THIS G0 (src_probe.py each, HEAD 75430a4e): letters PLC0415 3->0 mypy 24->24 guards 6 passed; overlaps 2->0 mypy 0->0 6 passed; importer 2->0 mypy 11->11 6 passed; no cycle-reaching targets; all failing codon entries. critical probed and left out (reaches check, gains F402). N=7, K=7, expected -7: ruff 655 (stack 795's value) to 648, mypy flat at 1405. Waits for stack 795 (ruff-baseline.json, queue files).",
       "issued_at": "2026-11-01T14:38:21Z",
       "minted_during": "interrupt",
       "caused_by": "W1382",
-      "last_worked": "2026-11-01T16:36:28Z",
+      "last_worked": "2026-11-01T16:37:25Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/calendars.py",
@@ -33617,12 +33617,7 @@
   ],
   "job_id": "481476b5",
   "heartbeat": "2026-10-29T04:11:13Z",
-  "lock": {
-    "holder": "nemik-95",
-    "taken_at": "2026-11-01T16:30:11Z",
-    "pid": 337543,
-    "start": 21144718
-  },
+  "lock": null,
   "predecessor_job_id": "1d7fe6d0",
   "leases": [
     {
@@ -40982,7 +40977,22 @@
         }
       ],
       "id": "nemik:R109"
+    },
+    {
+      "card": "W1390",
+      "trigger": "round 112: nemik-95, W1392 landed f94d2b24 (16:06:22Z), W1389 landed 75430a4e (16:30:46Z), W1390 sweep stacks 795 (alarm, pacing, starved, flow, pins; 6 imports) inflight (key 1793550994262208029) and 796 (letters, overlaps, importer; 7) staged",
+      "root": "Verified from source (TZ=UTC reflog): 5d91bfc6 15:41:11Z, f94d2b24 16:06:22Z (11:06:22 -0500, stack 793), 75430a4e 16:30:46Z (11:30:46 -0500, stack 794); --in-gate lists W1390 inflight; `mikemol-pycheck --ratchet` prints ruff 648/655 and mypy 1405/1405 (the live 648 is stack 796's staged -7 against stack 795's baseline 655, then 667 minus 6 minus 6 minus 7 gives 648). The reflog stamps the G1 says it did not read, read from the transcript: stack 793 submitted 15:45:32Z so its gate was 20 min 50 s; stack 794 submitted 16:07:50Z (gate empty 16:06:22Z to 16:07:50Z = 1 min 28 s) and gated 22 min 56 s to 16:30:46Z; stack 795 submitted 16:36:33.5Z, so the gate was empty 16:30:46Z to 16:36:33.5Z = 5 min 47 s wall (the 794-to-795 interval the G1 left uncomputed). No staged successor existed behind 794 at its landing; the tick-open that began at 16:30:10.7Z was still running when the session looked at 16:33:00Z (pgrep), and the session's own estimate of its length, 'about 6 minutes', is from memory, not from two stamps. The codemod refusals are the tool working (salience, witnesses, calendars: names bound twice or under a module-level block; `import urllib.*` cannot be skipped by its skip list, so witnesses stays out). The standing-13 successor is staged behind 795 (796). Two small slips are self-reported honestly. One finding: the tick-open duration. No fixpoint is declared. Carried open findings, status on 2026-11-01: R95 second finding on W1349, R95 third, R97 first and R98 findings on W1219, R111 first on W1219 (probe census skip) and R111 second on W1392 (now W1393 for the raise and tests, ready, unmanifested behind a paydown entry), R102 on W1219, R94 on W1348, R93 on W1347, R92 on W1346 and W1288, R91 on W1345, R72 on W846, R84 on W695, R100 on W910 (unbuilt), R101 on W1288 (115 PLR2004 sites and the remaining src PLC0415 sites unread), R105 on W1288, R85 on W613, R106 on W1376 and R108 on W1382 (read-backs) (all 2026-11-02). Codon owed with no stack; hooks-venv rebuild and census (W1325) not done.",
+      "findings": [
+        {
+          "finding": "A tick-open that runs for minutes inside the empty gate is now the biggest single item in the landing-to-submit interval, and its length is a number from memory. The tick-open that began at 16:30:10.7Z was still running at 16:33:00Z; the gate was empty 16:30:46Z to 16:36:33.5Z (5 min 47 s), and the G1 says 'about 6 min' without stamps (standing 10). Earlier tick-opens finished in seconds. Measure it: write the start and end Z stamps of every tick-open on the G1, and time the hooks it runs (the tick-hooks list, the check, bump-blocked, inbound, nemik-rank --pace) one at a time on an idle moment and on a gating moment. If a hook is the slow part (the check over many repos competes with the gate's bazel load), move it off the critical path (run it in the background after the first stack is staged) or lengthen nothing else: the staged-successor sentence in standing 13 only helps if the tick-open does not sit in front of the submit.",
+          "finding_card": "W1288",
+          "finding_owner": "nemik session",
+          "finding_witness": "A W1288 evidence line with the tick-open start and end Z stamps for this tick (from the transcript) and a per-hook timing table, and the next G1 giving tick-open stamps.",
+          "due": "2026-11-02"
+        }
+      ],
+      "id": "nemik:R110"
     }
   ],
-  "retro_counter": 109
+  "retro_counter": 110
 }

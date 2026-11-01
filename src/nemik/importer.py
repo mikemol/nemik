@@ -24,6 +24,9 @@ import sys
 from pathlib import Path
 from typing import TYPE_CHECKING
 
+from nemik.issues import read as read_issues
+from nemik.mspdi import read
+
 if TYPE_CHECKING:
     from nemik.projection import Task
 
@@ -31,10 +34,7 @@ if TYPE_CHECKING:
 def _read(fmt: str, path: Path) -> list[Task]:
     text = path.read_text(encoding="utf-8")
     if fmt == "mspdi":
-        from nemik.mspdi import read
-
         return read(text)
-    from nemik.issues import read as read_issues
 
     return read_issues(text)
 

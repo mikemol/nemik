@@ -14,6 +14,7 @@ claims`. Display only: no block; with no membudget the holder column is left out
 
 from __future__ import annotations
 
+import argparse
 import os
 import subprocess
 from pathlib import Path
@@ -23,6 +24,7 @@ from rdflib import Graph
 
 from nemik.adapter import NEMIK, OSLC_CM, STATE
 from nemik.blocks import _repo, ref
+from nemik.check import default_root, survey
 
 if TYPE_CHECKING:
     from rdflib.term import Node
@@ -130,10 +132,6 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         g: a graph to read instead of surveying the root.
 
     """
-    import argparse
-
-    from nemik.check import default_root, survey
-
     ap = argparse.ArgumentParser(description=(__doc__ or "").splitlines()[0])
     ap.add_argument(
         "--root",

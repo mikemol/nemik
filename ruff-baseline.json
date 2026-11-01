@@ -103,7 +103,6 @@
   "S603": 1
  },
  "src/nemik/importer.py": {
-  "PLC0415": 2,
   "T201": 1
  },
  "src/nemik/index.py": {
@@ -112,7 +111,6 @@
  "src/nemik/letters.py": {
   "FBT001": 2,
   "FBT002": 2,
-  "PLC0415": 3,
   "PLR0913": 2,
   "PLR0917": 2,
   "S404": 1,
@@ -130,7 +128,6 @@
  "src/nemik/overlaps.py": {
   "FBT001": 1,
   "FBT002": 1,
-  "PLC0415": 2,
   "PLR2004": 2,
   "S404": 1,
   "S603": 1,

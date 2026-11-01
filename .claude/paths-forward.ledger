@@ -3801,3 +3801,4 @@
 2026-11-01T16:07:23Z  status W1392 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T16:32:53Z  status W1389 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T16:36:28Z  status W1390 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T16:38:13Z  tick  W1390 advanced  sweep     "W1389 landed 75430a4e (ruff 667 to 661); stack 795 (alarm, pacing, starved, flow, pins; ruff 661 to 655) gating; stack 796 (letters, overlaps, importer; 655 to 648) staged [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

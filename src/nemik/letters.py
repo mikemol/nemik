@@ -23,6 +23,9 @@ from __future__ import annotations
 import json
 import re
 import shlex
+import shutil
+import subprocess
+import sys
 from datetime import UTC, date, datetime
 from pathlib import Path
 from typing import NamedTuple
@@ -324,9 +327,6 @@ def apply_fold(
         one line per letter: the symbol minted, mtools' refusal, or the archive move.
 
     """
-    import subprocess
-    import sys
-
     writer = writer or str(Path(sys.executable).parent / "mikemol-paths-forward")
     live, stale = _split(root, repo, older_than, today or _today())
     done: list[str] = []
@@ -417,7 +417,6 @@ def report(
     addressed, unaddressed = headers(root)
     if repo:
         addressed = [x for x in addressed if repo in {x.inbox, x.recipient}]
-    import shutil
 
     # A misdelivered letter its recipient holds (in its inbox or archived there) is delivered
     # (W310). With --apply the copies are made FIRST, so the verdict and the exit code are the after
