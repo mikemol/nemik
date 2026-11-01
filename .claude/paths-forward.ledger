@@ -3773,3 +3773,6 @@
 2026-11-01T13:56:52Z  interrupt W1385 minted    -         "Choose a naming convention for the 115 test assertion expectations (PLR2004), then name them per file"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1175
 2026-11-01T14:01:26Z  status W1382 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T14:04:55Z  status W1381 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T14:06:36Z  tick  W1382 advanced  sweep     "W1380 landed 8bb09800 (ruff 717 to 712) and W1381 90541a71 (712 to 709, a 26 min src gate); W1175 atomized into W1382 to W1385; W1382 (12 hoisted imports in check.py, 709 to 697) submitted as stack 787 at 14:06:27Z after a 3 min 10 s gap; the first hoist of 14 was refused by the ratchet for two name clashes and redone [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87); W1382 is gating as stack 787 (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T14:26:34Z  status W1382 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T14:28:04Z  status W1382 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

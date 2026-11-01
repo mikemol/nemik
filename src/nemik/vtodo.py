@@ -19,16 +19,24 @@ DTSTART and DUE pass through from mtools:W300 (nemik:W134); VALARMs pass through
 
 from __future__ import annotations
 
+import argparse
 import operator
 import re
+import subprocess
+import sys
+import time
 import tomllib
+from importlib.resources import files
 from pathlib import Path
 from typing import TYPE_CHECKING
 
 from mikemol.pathsforward.ics import escape, serialize
 from mikemol.pathsforward.vtimezone import vtimezone
+from rdflib import Graph
 
-from nemik.blocks import EXPLICIT
+from nemik.adapter import ledger_graph
+from nemik.blocks import EXPLICIT, operator_asks, with_salience
+from nemik.check import LEDGER, default_root, survey, workstream_files
 
 if TYPE_CHECKING:
     from nemik.blocks import AskRow
@@ -154,9 +162,6 @@ def priority(salience: float, text: str | None = None) -> int:
         The RFC 5545 PRIORITY, 1 to 9.
 
     """
-    import tomllib
-    from importlib.resources import files
-
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
     steps: dict[str, int] = tomllib.loads(text).get("ask_priority", {})
@@ -306,12 +311,6 @@ def feed(root: Path, opt_in: Path, link: str = "", group: bool = False) -> str:
         The iCalendar text.
 
     """
-    from rdflib import Graph
-
-    from nemik.adapter import ledger_graph
-    from nemik.blocks import operator_asks, with_salience
-    from nemik.check import LEDGER, survey, workstream_files
-
     g = Graph()
     for _, qg, _ in survey(root):
         if qg is not None:
@@ -336,11 +335,6 @@ def tasks_main(argv: list[str] | None = None) -> None:
     code is returned: 0 ok, 1 some writes failed, 2 no unique list or Akonadi unreachable. A missing
     helper or a failed feed is also 2.
     """
-    import argparse
-    import subprocess
-    import sys
-
-    from nemik.check import default_root
 
     class Options(argparse.Namespace):
         """The parsed command line of nemik-tasks (nemik:W1187)."""
@@ -430,7 +424,6 @@ def tasks_main(argv: list[str] | None = None) -> None:
     # Google resource has uploaded the parent. The first apply creates parents and the helper prints
     # DEFER-PARENT for children it could not attach yet; wait for the sync and rerun, so one
     # invocation converges (the timer would otherwise need two ticks).
-    import time
 
     tries = 1 + (3 if args.apply and not args.flat else 0)
     for attempt in range(tries):
@@ -455,9 +448,6 @@ def tasks_main(argv: list[str] | None = None) -> None:
 
 def main(argv: list[str] | None = None) -> None:
     """nemik-ics: the operator's needs-you asks, from opted-in repos, as iCalendar VTODOs."""
-    import argparse
-
-    from nemik.check import default_root
 
     class Options(argparse.Namespace):
         """The parsed command line of nemik-ics (nemik:W1187)."""
