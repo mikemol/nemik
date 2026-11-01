@@ -77,9 +77,7 @@
   "misc": 5
  },
  "src/nemik/withheld.py": {
-  "explicit-any": 1,
-  "misc": 65,
-  "type-arg": 1
+  "explicit-any": 1
  },
  "src/nemik/witnesses.py": {
   "misc": 3

@@ -85,6 +85,25 @@ def test_missing_list_fails(tmp_path: Path) -> None:
         load(None)
 
 
+def test_a_list_that_is_not_an_object_fails(tmp_path: Path) -> None:
+    """A withheld list that parses to a non-object is refused by name, not by an AttributeError."""
+    p = tmp_path / "withheld.json"
+    p.write_text("[]")
+    with pytest.raises(WithheldError, match="expected an object"):
+        load(p)
+
+
+def test_a_malformed_document_is_refused_not_published(docs: dict[str, object]) -> None:
+    """A document part that is not the shape apply reads raises TypeError instead of passing."""
+    broken = copy.deepcopy(docs)
+    broken["graph.json"] = {"nodes": {}, "edges": [], "inbound": [], "operator": []}
+    with pytest.raises(TypeError, match="expected an array"):
+        apply(broken, frozenset({"alpha:W1"}))
+    broken["graph.json"] = []
+    with pytest.raises(TypeError, match="expected an object"):
+        apply(broken, frozenset({"alpha:W1"}))
+
+
 def test_unknown_version_fails(tmp_path: Path) -> None:
     """Unknown version fails."""
     with pytest.raises(WithheldError, match="unknown version"):

@@ -3864,3 +3864,8 @@
 2026-11-01T21:54:08Z  status W1409 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T21:54:24Z  status W1413 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T21:54:25Z  status W1408 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T22:01:08Z  interrupt W1415 minted    -         "withheld.py reads the gate's list and applies it through strict object helpers instead of dict[str, Any], so mypy falls by about sixty"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
+2026-11-01T22:12:44Z  tick  W1415 advanced  sweep     "stack 807 landed 5d2de321 21:53:25Z; stack 808 (W1413 starved and pacing, W1408 letters strict) gating since 21:54:29Z; stack 809 staged (W1415 withheld.py mypy 1355 to 1289, strict helpers, two tests); stampnote.py built for dated lines (R122) [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T22:19:10Z  status W1413 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T22:19:11Z  status W1408 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T22:19:27Z  status W1415 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
