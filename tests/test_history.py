@@ -11,6 +11,8 @@ import tempfile
 from datetime import UTC, datetime
 from typing import TYPE_CHECKING, cast
 
+import pytest
+
 from nemik.apischema import unmanifested
 from nemik.history import (
     QueueDoc,
@@ -33,8 +35,6 @@ from nemik.serve import history_doc
 
 if TYPE_CHECKING:
     from pathlib import Path
-
-    import pytest
 
 # The slim-queue cache of this run is a directory of its own, not the user's.
 os.environ["NEMIK_CACHE_DIR"] = tempfile.mkdtemp(prefix="nemik-history-cache-")
@@ -329,18 +329,20 @@ def test_time_in_state_and_the_weekly_roll_up_follow_the_commits(
     assert spent["W2"] == {"ready": 2 * day, "done": 7 * day}
     w41, w42 = weekly(snaps)
     assert (w41["week"], w41["opened"], w41["closed"]) == ("2026-W41", 2, 1)
-    assert w41["blocked_share"] == 1.0  # W1 is the only open card and it is blocked
+    assert w41["blocked_share"] == pytest.approx(
+        1.0, rel=0, abs=0
+    )  # W1 is the only open card and it is blocked
     assert (w41["oldest_blocked"], w41["oldest_blocked_days"]) == ("W1", 2.0)
     assert (w42["opened"], w42["closed"], w42["blocked_share"]) == (0, 0, 0.0)
     assert w42["oldest_blocked"] is None
     # nemik:W315: W2 was first committed Oct 5 and closed Oct 7: a lead time of 2 days, that week
     # only.
-    assert w41["lead_time_days"] == 2.0
+    assert w41["lead_time_days"] == pytest.approx(2.0, rel=0, abs=0)
     assert w42["lead_time_days"] is None
     # nemik:W325: two arrived, one left: utilization 2.0; W1 is the one open card, so at one close a
     # week a new card waits 1 / 1 * 7 days. nemik:W328: W2 was never marked working: efficiency 0.
     assert (w41["utilization"], w41["implied_wait_days"]) == (2.0, 7.0)
-    assert w41["flow_efficiency"] == 0.0
+    assert w41["flow_efficiency"] == pytest.approx(0.0, rel=0, abs=0)
     assert w42["utilization"] is None
     assert w42["flow_efficiency"] is None
 
