@@ -3674,3 +3674,8 @@
 2026-11-01T08:37:13Z  status W1352 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T08:38:22Z  tick  W1354 minted    -         "tests/test_churn.py types its two queue helpers as dict[str, object], so mypy falls by up to 32 and the owed mypy ratchet is paid"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
 2026-11-01T08:39:53Z  status W1354 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T08:40:06Z  tick  W1354 advanced  sweep     "W1352 landed c316a1d4 (ruff 889 to 879); stack 762 refused at submit 08:37:21Z for lowering no owed ratchet (ruff ok, mypy and codon behind); rebuilt as W1354 (mypy 1760 to 1728 in test_churn.py) then W1353 (ruff 879 to 875), submitted 08:39:58Z [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87); W1354 and W1353 are gating as stack 762 (cites github:W71, W1353)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T08:43:48Z  interrupt W1355 minted    -         "tests/test_witnesses.py annotates the Any its json.loads and re.findall calls return and types its route table, so mypy falls by 31"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
+2026-11-01T08:44:37Z  status W1355 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T08:47:47Z  status W1354 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T08:47:48Z  status W1353 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

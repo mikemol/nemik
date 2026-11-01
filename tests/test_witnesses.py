@@ -13,6 +13,7 @@ import pytest
 from nemik.witnesses import witness
 
 if TYPE_CHECKING:
+    from collections.abc import Callable
     from pathlib import Path
 
 # nemik:W98: Bazel hands the test a pinned opa as $NEMIK_OPA; the host falls back to PATH.
@@ -144,12 +145,16 @@ def test_runner_applies_only_holding_witnesses(tmp_path: Path) -> None:
     assert r.returncode == 0 and "APPLY FAILED" not in r.stderr, r.stderr
     out = r.stdout
     assert "WITNESS r:W1 true" in out and "WITNESS r:W2 false" in out
-    after = {w["symbol"]: w for w in json.loads(state.read_text())["waypoints"]}
+    doc: dict[str, list[dict[str, str]]] = json.loads(state.read_text())
+    after = {w["symbol"]: w for w in doc["waypoints"]}
     assert after["W1"]["status"] == "done" and "witness held" in after["W1"]["evidence"]
     assert after["W2"]["status"] == "blocked"
 
 
-def _serve(monkeypatch: pytest.MonkeyPatch, routes: dict) -> None:
+def _serve(
+    monkeypatch: pytest.MonkeyPatch,
+    routes: dict[str, Callable[[dict[str, list[str]]], object]],
+) -> None:
     import json
     import threading
     from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -282,7 +287,9 @@ def test_apply_writes_letters_to_waiting_repos(tmp_path: Path) -> None:
     assert "W5" in lb.read_text()
     assert not list((tmp_path / "a" / "inbox").iterdir())
     assert not list((tmp_path / "c" / "inbox").iterdir())
-    freed = json.loads((tmp_path / "a" / ".claude" / "paths-forward.json").read_text())
+    freed: dict[str, list[dict[str, str]]] = json.loads(
+        (tmp_path / "a" / ".claude" / "paths-forward.json").read_text()
+    )
     states = {w["symbol"]: w["status"] for w in freed["waypoints"]}
     assert states["W2"] == "ready"
 
@@ -297,11 +304,8 @@ def test_the_skills_weather_examples_are_valid_witnesses() -> None:
 
     text = (Path(__file__).parents[1] / "skills" / "nemik" / "SKILL.md").read_text()
     section = text.split("## Waiting on an outage (weather)")[1].split("\n## ")[0]
-    examples = [
-        q.replace('\\\\"', '\\"')
-        for q in re.findall(r"`(input\.[^`]+)`", section)
-        if "==" in q
-    ]
+    found: list[str] = re.findall(r"`(input\.[^`]+)`", section)
+    examples = [q.replace('\\\\"', '\\"') for q in found if "==" in q]
     assert examples
     for q in examples:
         assert ".state" in q or ".values" in q, q

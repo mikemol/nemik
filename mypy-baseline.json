@@ -261,10 +261,6 @@
   "explicit-any": 2,
   "misc": 11
  },
- "tests/test_witnesses.py": {
-  "misc": 30,
-  "type-arg": 1
- },
  "tests/test_workflows.py": {
   "misc": 7
  },
