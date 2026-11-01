@@ -569,7 +569,6 @@
  },
  "tests/test_witnesses.py": {
   "ARG005": 1,
-  "PLC0415": 12,
   "PT018": 5,
   "S404": 1,
   "S603": 2,

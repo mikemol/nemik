@@ -4,17 +4,25 @@
 
 from __future__ import annotations
 
+import json
 import os
+import re
 import shutil
+import subprocess
+import threading
+from datetime import UTC, datetime
+from http.server import BaseHTTPRequestHandler, HTTPServer
+from pathlib import Path
 from typing import TYPE_CHECKING
+from urllib.parse import parse_qs, urlparse
 
+import installed
 import pytest
 
 from nemik.witnesses import witness
 
 if TYPE_CHECKING:
     from collections.abc import Callable
-    from pathlib import Path
 
 # nemik:W98: Bazel hands the test a pinned opa as $NEMIK_OPA; the host falls back to PATH.
 # nemik:W603: a skip is not a gate. When NEMIK_OPA is NAMED (Bazel and the image stage always name
@@ -66,8 +74,6 @@ def test_unobservable_fact_is_undefined_not_false() -> None:
 
 def test_time_witness_uses_input_now() -> None:
     """Time witness uses input now."""
-    from datetime import UTC, datetime
-
     q = 'time.parse_rfc3339_ns(input.now) >= time.parse_rfc3339_ns("2026-10-01T00:00:00Z")'
     assert witness(q, now=datetime(2026, 9, 30, tzinfo=UTC))[0] == "false"
     assert witness(q, now=datetime(2026, 10, 2, tzinfo=UTC))[0] == "true"
@@ -75,8 +81,6 @@ def test_time_witness_uses_input_now() -> None:
 
 def test_git_ref_witness(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     """Git ref witness."""
-    import subprocess
-
     repo = tmp_path / "r"
     subprocess.run(["git", "init", "-q", "-b", "main", str(repo)], check=True)
     subprocess.run(
@@ -106,8 +110,6 @@ def test_git_ref_witness(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Non
 
 def test_runner_applies_only_holding_witnesses(tmp_path: Path) -> None:
     """Runner applies only holding witnesses."""
-    import json
-
     flag = tmp_path / "flag"
     flag.write_text("")
     q = tmp_path / "r" / ".claude"
@@ -139,7 +141,6 @@ def test_runner_applies_only_holding_witnesses(tmp_path: Path) -> None:
         "residue": [],
     }
     state.write_text(json.dumps(payload2))
-    import installed  # nemik:W97: as installed, so --apply reaches the installed writer
 
     r = installed.run("nemik-witnesses", "--root", str(tmp_path), "--apply")
     assert r.returncode == 0 and "APPLY FAILED" not in r.stderr, r.stderr
@@ -155,10 +156,6 @@ def _serve(
     monkeypatch: pytest.MonkeyPatch,
     routes: dict[str, Callable[[dict[str, list[str]]], object]],
 ) -> None:
-    import json
-    import threading
-    from http.server import BaseHTTPRequestHandler, HTTPServer
-    from urllib.parse import parse_qs, urlparse
 
     class H(BaseHTTPRequestHandler):
         def do_GET(self) -> None:
@@ -223,8 +220,6 @@ def test_unset_endpoint_is_undefined(monkeypatch: pytest.MonkeyPatch) -> None:
 
 def test_apply_writes_letters_to_waiting_repos(tmp_path: Path) -> None:
     """Apply writes letters to waiting repos."""
-    import json
-
     flag = tmp_path / "flag"
     flag.write_text("")
 
@@ -274,7 +269,6 @@ def test_apply_writes_letters_to_waiting_repos(tmp_path: Path) -> None:
         ],
     )
     queue("c", [{"symbol": "W7", "title": "unrelated", "status": "ready"}])
-    import installed  # nemik:W97: as installed, so --apply reaches the installed writer
 
     r = installed.run("nemik-witnesses", "--root", str(tmp_path), "--apply")
     assert r.returncode == 0 and "APPLY FAILED" not in r.stderr, r.stderr
@@ -299,9 +293,6 @@ def test_the_skills_weather_examples_are_valid_witnesses() -> None:
 
     A first draft compared input.alert[...] to a string, missing `.state`.
     """
-    import re
-    from pathlib import Path
-
     text = (Path(__file__).parents[1] / "skills" / "nemik" / "SKILL.md").read_text()
     section = text.split("## Waiting on an outage (weather)")[1].split("\n## ")[0]
     found: list[str] = re.findall(r"`(input\.[^`]+)`", section)

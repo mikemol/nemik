@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1362,
+  "counter": 1363,
   "waypoints": [
     {
       "symbol": "W1",
@@ -20650,11 +20650,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Read each standard's primary source and cite it; one paragraph each; for every gap name the tool or vocabulary we could adopt (a pinned library, an ontology to import, a SHACL shape set). Needs WebFetch",
-      "evidence": "",
+      "evidence": "2026-11-01: 2026-11-01T10:07:40Z disposition (R100, added as nemik:R98): W910 is among the 57 ready cards the tick-open warns about (oldest, 8.7 d). Why it sat: it is a docs survey (docs/evidence-standards.md, eight standards, WebFetch for each primary source) that lowers no ratchet, and the commit gate refuses a stack that lowers none of the ratchets the pace lists as owed (ruff, mypy and codon have been behind all day), so a docs card cannot land alone. Plan: it rides as the SECOND entry of a paydown stack, as W1353 rode behind W1354 and W1335 carried W1334's files. It is medium, eight standards: the first entry of the next stack is a paydown, the second is W910 split into one paragraph per standard if the fetch budget allows, otherwise atomized into per-standard children with --atomize at that tick. I still need to land W910 behind a paydown entry, W910.",
       "issued_at": "2026-10-23T18:12:28Z",
       "minted_during": "tick",
       "caused_by": "W908",
-      "last_worked": "2026-10-23T18:12:35Z",
+      "last_worked": "2026-11-01T10:07:51Z",
       "ticks_blocked": 0,
       "manifest": [
         "docs/evidence-standards.md"
@@ -32672,17 +32672,17 @@
     {
       "symbol": "W1362",
       "title": "Forty-five function-local imports in five more test files move to module scope, redundant ones dropped (PLC0415), so ruff falls by forty-five",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-11-01: G0 2026-11-01T10:04:07Z (date -u in the preceding call), BEFORE the first edit of the real files. Advances W1362. Pace: nemik-rank nemik --pace read at 10:00:01Z (tick stamp), pace of 2026-11-01T09:25:26Z, landing 09:54:57Z PENDING: ruff behind (owes 90, fell 77), mypy behind (owes 190), codon behind. Actuator: scratchpad/hoist_imports.py (now drops a local import that an identical module-level import already binds; refuses a name bound differently or under a module-level if/try) and hoist_run.py on five test files; the first version refused these files for names it bound twice, the second wrongly counted every function's own imports as guarded (fixed to module-level If/Try only). K PROBE BEFORE THIS G0: the five probe copies (deleted): ruff house counts on the originals 45 PLC0415 + 18 PLR2004 + 4 PT018 + 1 SLF001, on the probes the same without the PLC0415 (their 114 S101 are their filenames); mypy 32 on the originals and 32 on the probes. test_witnesses was refused again (Path is bound by a TYPE_CHECKING import, a real conflict) and is left out. N=45, K=45, expected -45: ruff 839 (stack 769's value) to 794, mypy flat at 1634. It waits for stack 769 (both carry ruff-baseline.json).",
+      "next_bounded_step": null,
+      "evidence": "2026-11-01: G0 2026-11-01T10:04:07Z (date -u in the preceding call), BEFORE the first edit of the real files. Advances W1362. Pace: nemik-rank nemik --pace read at 10:00:01Z (tick stamp), pace of 2026-11-01T09:25:26Z, landing 09:54:57Z PENDING: ruff behind (owes 90, fell 77), mypy behind (owes 190), codon behind. Actuator: scratchpad/hoist_imports.py (now drops a local import that an identical module-level import already binds; refuses a name bound differently or under a module-level if/try) and hoist_run.py on five test files; the first version refused these files for names it bound twice, the second wrongly counted every function's own imports as guarded (fixed to module-level If/Try only). K PROBE BEFORE THIS G0: the five probe copies (deleted): ruff house counts on the originals 45 PLC0415 + 18 PLR2004 + 4 PT018 + 1 SLF001, on the probes the same without the PLC0415 (their 114 S101 are their filenames); mypy 32 on the originals and 32 on the probes. test_witnesses was refused again (Path is bound by a TYPE_CHECKING import, a real conflict) and is left out. N=45, K=45, expected -45: ruff 839 (stack 769's value) to 794, mypy flat at 1634. It waits for stack 769 (both carry ruff-baseline.json). | 2026-11-01: Landed c3fcc8b4 (COMMITTED line printed it; git log -1 subject is W1362's) at 2026-11-01T10:18:19Z by TZ=UTC reflog (05:18:19 -0500). Submitted 10:07:40Z: 10 min 39 s wall in the gate. Measured ruff 839 to 794 (-45, equal to the K probe's), mypy flat 1634.",
       "issued_at": "2026-11-01T10:04:06Z",
       "minted_during": "tick",
       "caused_by": "W1359",
-      "last_worked": "2026-11-01T10:05:04Z",
+      "last_worked": "2026-11-01T10:19:07Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_critical.py",
@@ -32690,6 +32690,28 @@
         "tests/test_letters.py",
         "tests/test_rank.py",
         "tests/test_static.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "small",
+      "completed": "20261101T101907Z"
+    },
+    {
+      "symbol": "W1363",
+      "title": "Twelve function-local imports in tests/test_witnesses.py move to module scope once Path is a runtime import (PLC0415), so ruff falls by twelve",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-11-01: G0 2026-11-01T10:19:54Z (date -u in the preceding call), BEFORE the first edit of the real file. Advances W1363. Pace: nemik-rank nemik --pace read at 10:00:01Z, pace of 2026-11-01T09:25:26Z (the 10:25:26Z pace is not yet due); ruff behind (owes 90, fell 77), mypy and codon behind. Actuator: scratchpad/w1363_pre.py moves test_witnesses.py's 'from pathlib import Path' out of the TYPE_CHECKING block to a runtime import (the cause of the earlier refusals: a name bound under a module-level if), then hoist_run.py hoists the 12 function-local imports and ruff sorts and formats. K PROBE BEFORE THIS G0: probe copies (deleted): ruff house counts on the probe equal the original except the 12 PLC0415 gone (probe's S101 are its filename; no TC003 appeared), mypy 'Success' on both. N=12, K=12, expected -12: ruff 794 to 782, mypy flat at 1634.",
+      "issued_at": "2026-11-01T10:19:53Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1359",
+      "last_worked": "2026-11-01T10:21:02Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tests/test_witnesses.py",
         "ruff-baseline.json"
       ],
       "size_class": "small",
