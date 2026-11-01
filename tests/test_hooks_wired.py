@@ -20,7 +20,10 @@ EVENTS = ["SessionStart", "UserPromptSubmit"]
 
 def test_settings_wire_both_hooks_on_both_events() -> None:
     """Settings wire both hooks on both events."""
-    settings = json.loads((ROOT / ".claude" / "settings.json").read_text())["hooks"]
+    doc: dict[str, dict[str, list[dict[str, list[dict[str, str]]]]]] = json.loads(
+        (ROOT / ".claude" / "settings.json").read_text()
+    )
+    settings = doc["hooks"]
     for event in EVENTS:
         cmds = [
             h["command"]

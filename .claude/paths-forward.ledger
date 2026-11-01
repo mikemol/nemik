@@ -3706,3 +3706,6 @@
 2026-11-01T10:19:07Z  status W1362 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T10:19:53Z  interrupt W1363 minted    -         "Twelve function-local imports in tests/test_witnesses.py move to module scope once Path is a runtime import (PLC0415), so ruff falls by twelve"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1359
 2026-11-01T10:21:02Z  status W1363 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T10:31:34Z  status W1363 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T10:32:32Z  tick  W1364 minted    -         "Three test files annotate the Any their tomllib, json and re calls return, so mypy falls by twenty-nine"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
+2026-11-01T10:33:26Z  status W1364 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

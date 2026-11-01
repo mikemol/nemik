@@ -140,9 +140,6 @@
  "tests/test_churn.py": {
   "misc": 2
  },
- "tests/test_containerfile.py": {
-  "misc": 7
- },
  "tests/test_deploy_manifest.py": {
   "misc": 2
  },
@@ -166,9 +163,6 @@
  },
  "tests/test_history.py": {
   "misc": 2
- },
- "tests/test_hooks_wired.py": {
-  "misc": 8
  },
  "tests/test_importer.py": {
   "misc": 14
@@ -216,9 +210,6 @@
  },
  "tests/test_satisfied_edges.py": {
   "misc": 17
- },
- "tests/test_script_registries.py": {
-  "misc": 14
  },
  "tests/test_serve_model.py": {
   "misc": 4

@@ -16,6 +16,17 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def _strings(pattern: str, text: str) -> list[str]:
+    """Give every match of a one-group pattern.
+
+    Returns:
+        The matched groups, as `re.findall` returns them.
+
+    """
+    found: list[str] = re.findall(pattern, text)
+    return found
+
+
 def _bazel_data_paths() -> set[str]:
     """Repo-relative paths named in the test targets' data (labels and @repos skipped).
 
@@ -25,8 +36,8 @@ def _bazel_data_paths() -> set[str]:
     """
     build = (ROOT / "BUILD.bazel").read_text()
     block = build[build.index("sh_test(") : build.index("for src in glob")]
-    names = set(re.findall(r'"([A-Za-z.][^":@$]*)"', block))
-    names |= set(re.findall(r'glob\(\["([^"*]+)', block))
+    names = set(_strings(r'"([A-Za-z.][^":@$]*)"', block))
+    names |= set(_strings(r'glob\(\["([^"*]+)', block))
     return {n for n in names if (ROOT / n.split("/")[0]).exists()}
 
 
@@ -42,7 +53,8 @@ def _image_copies() -> set[str]:
     for line in text.splitlines():
         m = re.match(r"COPY (?!--from)(.+) \S+$", line.strip())
         if m:
-            copied |= set(m[1].split())
+            body: str = m[1]
+            copied |= set(body.split())
     return copied
 
 

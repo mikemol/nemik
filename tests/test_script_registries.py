@@ -31,7 +31,10 @@ def _gaps(script: str, build: str, skill: str, workflows: str) -> list[str]:
 
 def test_every_nemik_command_is_declared_in_every_registry() -> None:
     """Every nemik command is declared in every registry."""
-    scripts = tomllib.loads((ROOT / "pyproject.toml").read_text())["project"]["scripts"]
+    data: dict[str, dict[str, dict[str, str]]] = tomllib.loads(
+        (ROOT / "pyproject.toml").read_text()
+    )
+    scripts = data["project"]["scripts"]
     build = (ROOT / "BUILD.bazel").read_text()
     skill = (ROOT / "skills" / "nemik" / "SKILL.md").read_text()
     workflows = files("nemik.data").joinpath("workflows.toml").read_text()
