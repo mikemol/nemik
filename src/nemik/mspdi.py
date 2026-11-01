@@ -15,9 +15,18 @@ cite (as a text field), and PercentComplete 100 when the card is done.
 
 from __future__ import annotations
 
+import argparse
+import sys
 import xml.etree.ElementTree as ET
+from pathlib import Path
 
-from nemik.projection import Link, Task
+from rdflib import Graph
+
+from nemik import issues
+from nemik.adapter import queue_graph
+from nemik.blocks import annotate
+from nemik.check import QUEUE, default_root, workstream_files
+from nemik.projection import Link, Task, project
 
 NS = "http://schemas.microsoft.com/project"
 FS = "1"  # PredecessorLink Type: finish-to-start
@@ -77,16 +86,6 @@ def write(tasks: list[Task], name: str = "nemik") -> str:
 
 def main(argv: list[str] | None = None) -> None:
     """nemik-export: the fleet's cards (or one repo's) as MSPDI on stdout, read-only."""
-    import argparse
-    import sys
-    from pathlib import Path
-
-    from rdflib import Graph
-
-    from nemik.adapter import queue_graph
-    from nemik.blocks import annotate
-    from nemik.check import QUEUE, default_root, workstream_files
-    from nemik.projection import project
 
     class Options(argparse.Namespace):
         """The command line, typed (nemik:W958)."""
@@ -125,8 +124,6 @@ def main(argv: list[str] | None = None) -> None:
     annotate(g)
     tasks = project(g, set(args.repo) if args.repo else None)
     if args.format == "issues":
-        from nemik import issues
-
         if args.against is not None:
             sys.stdout.write(
                 issues.plan_text(tasks, args.against.read_text(encoding="utf-8"))
