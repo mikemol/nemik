@@ -3,11 +3,11 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1339 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:165f484c5bca3551`
+counter 1340 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:dc57438f5998bfc2`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1339 | working |
+| 1 | W1340 | working |
 | 2 | W1075 | ready |
 | 3 | W1139 | ready |
 | 4 | W1279 | ready |
@@ -1318,11 +1318,12 @@ counter 1339 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:165
 | 1309 | W1336 | done |
 | 1310 | W1337 | done |
 | 1311 | W1338 | done |
+| 1312 | W1339 | done |
 
 ## waypoints
 
-1. **W1339** (working) The twenty cards below W1200 named by a landed subject are classified: two closed done, eighteen
-   annotated as partial, umbrella or stale-next with the reason
+1. **W1340** (working) checks/claims.py states its 25 claims through one _require helper instead of assert, so ruff S101
+   falls by 25
 2. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 3. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -4323,6 +4324,8 @@ counter 1339 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:165
    by the Any cascade
 1311. **W1338** (done) Twenty-five landed cards still at ready are closed done from the git subjects that name them, so
    the stackable list and the ready count stop counting landed work
+1312. **W1339** (done) The twenty cards below W1200 named by a landed subject are classified: two closed done, eighteen
+   annotated as partial, umbrella or stale-next with the reason
 
 ## residue
 
@@ -4977,3 +4980,13 @@ counter 1339 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:165
   declared umbrellas or partials (W1225, W1242 to W1245, W1279, W1288), the rest are not accounted for. No fixpoint is
   declared. Carried open findings: R72 on W1288 (second stack in the same wake), W1329 (K above 0), W846 (test_layout
   gate timing); R73-F2 and R80 on W1288; R83 on W1288 (2026-11-02); R84 on W695 (2026-11-02).; 1 finding(s)
+- **nemik:R84** (-) round 86: tick-w1340, W1339 (classification of 20 cards below W1200, queue-only); stack 750 inflight
+  (key 1793502380587710141, W1339); previous landing d6ee4ed9 02:38:05Z (reflog 22:38:05 -0400): root Verified from
+  source: reflog d6ee4ed9 = 02:38:05Z, 749 gated 53 s; --in-gate lists W1339 inflight; W1339's evidence matches the G1
+  (pace read first and quoted, scan criterion stated, '20 of 20 accepted; 2 closed done', K carries an honest caveat
+  that titles and next steps were read, not code). Gate-empty 02:38:05Z to 03:06:19Z = 28 min 14 s wall; the first tool
+  call after the landing was the 03:00 pace read, so about 22 min were waiting for the wake (R83 on W1288, wake on the
+  pace, still untried, due 2026-11-02). R85's finding on W613 is answered by the criterion and the 20 classifications;
+  it closes when nemik-stackable is rerun after 750 lands. Two small defects below. No fixpoint is declared. Carried
+  open findings: R72 on W1288, W1329, W846; R73-F2, R80 and R83 on W1288; R84 on W695 (2026-11-02); R85 on W613
+  (2026-11-02, the rerun still to do).; 2 finding(s)
