@@ -37,9 +37,6 @@
  "src/nemik/importer.py": {
   "misc": 11
  },
- "src/nemik/issues.py": {
-  "misc": 10
- },
  "src/nemik/letters.py": {
   "misc": 20,
   "type-arg": 4

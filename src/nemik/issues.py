@@ -21,10 +21,20 @@ nemik:W958: given a tracker's recorded issues, `plan_text` prints the calls a mi
 from __future__ import annotations
 
 import json
+from typing import TypedDict
 
 from nemik.mirror import plan
 from nemik.projection import Link, Task
 from nemik.tracker import read_issues, row_of
+
+
+class _Row(TypedDict):
+    """The fields of one issue row that `read` takes back."""
+
+    cite: str
+    title: str
+    state: str
+    blocked_by: list[str]
 
 
 def to_issues(tasks: list[Task]) -> list[dict[str, object]]:
@@ -88,7 +98,7 @@ def read(text: str) -> list[Task]:
         The tasks, numbered from 1, each with its blocked-by links.
 
     """
-    rows = json.loads(text)
+    rows: list[_Row] = json.loads(text)
     return [
         Task(
             uid=i,
