@@ -77,9 +77,6 @@
  "src/nemik/starved.py": {
   "misc": 8
  },
- "src/nemik/staticserve.py": {
-  "misc": 2
- },
  "src/nemik/vtodo.py": {
   "misc": 10,
   "type-arg": 1

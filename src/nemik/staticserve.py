@@ -22,6 +22,8 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
+from nemik.tomlview import table
+
 TYPES = {
     ".html": "text/html; charset=utf-8",
     ".js": "text/javascript",
@@ -90,10 +92,10 @@ class Hashes:
         try:
             stamp = (path, path.stat().st_mtime_ns)
             if stamp != self._seen:
-                loaded = json.loads(path.read_text())
-                self._table = {str(k): str(v) for k, v in loaded.items()}
+                loaded: object = json.loads(path.read_text())
+                self._table = {str(k): str(v) for k, v in table(loaded).items()}
                 self._seen = stamp
-        except (OSError, ValueError, AttributeError):
+        except (OSError, ValueError):
             self._table, self._seen = {}, None
         return self._table
 
