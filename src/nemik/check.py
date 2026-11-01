@@ -21,12 +21,16 @@ import subprocess
 import sys
 import time
 import tomllib
+from datetime import UTC, datetime
 from importlib.resources import files
 from pathlib import Path
 from typing import TYPE_CHECKING
 
+from mikemol.pathsforward.lock import stamp
+from mikemol.pathsforward.opa_eval import OpaUnavailableError
 from mikemol.pathsforward.store import UnreadableStateError
-from rdflib import Graph, Literal
+from rdflib import Graph, Literal, URIRef
+from rdflib.namespace import DCTERMS
 
 from nemik import adoption, cachestore, warrantdebt
 from nemik.adapter import (
@@ -41,16 +45,23 @@ from nemik.adapter import (
 )
 from nemik.blocks import (
     annotate,
+    dependency_cycles,
     lowered_ratchet,
+    operator_asks,
     over_ratchet,
     ref,
     unmanifested_by_repo,
 )
 from nemik.collapse import disagreements
 from nemik.collapse import lines as collapse_lines
+from nemik.critical import cycles
 from nemik.digest import collapse, delta
+from nemik.hostapply import HOST_REF, load
 from nemik.idle import findings as idle_findings
+from nemik.letters import report
+from nemik.rank import successors
 from nemik.rolls import idle_run, stalled
+from nemik.shaclinc import findings as shacl_findings
 from nemik.work import in_gate
 from nemik.workrows import NO_BOUND, ready_stamps, small_done_stamps, upper_quantile
 
@@ -688,7 +699,6 @@ def survey(
     lap("parse")
     annotate(merged)
     lap("annotate")
-    from nemik.hostapply import HOST_REF, load
 
     # nemik:W256: a cited host-apply row the export does not hold is an unresolved citation.
     # Only the
@@ -705,7 +715,6 @@ def survey(
     if not check:
         yield from unchecked(graphs, refused)
         return
-    from nemik.shaclinc import findings as shacl_findings
 
     # nemik:W400: a rebuild in the same process re-validates only the nodes its change touches.
     # nemik:W625: and a fresh process starts from the last reader's caches (142 s CPU cold, 11 s
@@ -727,7 +736,6 @@ def survey(
     # nemik:W331: every card on a dependency cycle that the operator cannot break is a Warning, so
     # the cause is fixed where it is written (usually an umbrella that lists its children under
     # `enables` and is blocked_on them). nemik.critical classifies the cycles.
-    from nemik.critical import cycles
 
     cause = (
         "none of them can become ready (an umbrella listing its children under "
@@ -735,7 +743,6 @@ def survey(
     )
     # nemik:W484 (mtools:W1134's ring of three): name the ring in order, "a:W1 -> a:W2 -> a:W1",
     # as the fleet's shared walker finds it, rather than as an unordered set of members.
-    from nemik.blocks import dependency_cycles
 
     rings = [[ref(n) for n in ring] for ring in dependency_cycles(merged)]
     for members, operator_can_break in cycles(merged):
@@ -758,10 +765,6 @@ def survey(
     # bottleneck (the doc's "paralyzed waiting on too many parallel operator answers"). One Warning
     # on the repo, with the count and the oldest ask, so the remedy (batch, withdraw, share) is
     # local.
-    from rdflib import URIRef
-    from rdflib.namespace import DCTERMS
-
-    from nemik.blocks import operator_asks
 
     weights_toml = files("nemik.data").joinpath("rank-weights.toml").read_text()
     cap = int(
@@ -844,7 +847,6 @@ def survey(
     # umbrella, or a card a peer has since atomized) gets the leaves to cite instead, with the exact
     # re-point command, so the fix is one command rather than a hand search (three hand re-points of
     # nemik:W392 in one day, W870 -> W872 -> W878). Info only: it never changes the verdict.
-    from nemik.rank import successors
 
     open_nodes = {
         n
@@ -994,11 +996,6 @@ def _realizability(root: Path) -> int:
         queue could not be judged.
 
     """
-    from datetime import UTC, datetime
-
-    from mikemol.pathsforward.lock import stamp
-    from mikemol.pathsforward.opa_eval import OpaUnavailableError
-
     from nemik.marks import MARKS, policy_version, provenance, read
     from nemik.realize import rows, runtime_valid, verdicts
 
@@ -1418,8 +1415,6 @@ def main(argv: list[str] | None = None) -> None:
     if args.realizability:
         sys.exit(_realizability(args.root))
     if args.letters:
-        from nemik.letters import report
-
         said, code = report(
             args.root,
             {repo for repo, _ in workstream_files(args.root, QUEUE)},
