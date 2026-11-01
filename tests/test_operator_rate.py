@@ -7,6 +7,8 @@ from __future__ import annotations
 from datetime import UTC, datetime
 from typing import TYPE_CHECKING, cast
 
+import pytest
+
 from nemik.history import weekly
 
 if TYPE_CHECKING:
@@ -33,4 +35,6 @@ def test_asks_entering_and_leaving_the_operator_are_counted_per_week() -> None:
     (row,) = weekly(snaps)
     assert (row["operator_asked"], row["operator_answered"]) == (3, 1)
     assert row["operator_open"] == 2
-    assert row["operator_wait_days"] == 14.0  # 2 open over 1 answered a week
+    assert row["operator_wait_days"] == pytest.approx(
+        14.0
+    )  # 2 open over 1 answered a week

@@ -103,7 +103,9 @@ def test_alarms_nudge_delivers_each_firing_once(
     main(argv, g)
     second = json.loads(capsys.readouterr().out)["alarms"]
     assert first and second == []
-    assert json.loads(state.read_text())["life"] == 1.0  # the repo nudge state survives
+    assert json.loads(state.read_text())["life"] == pytest.approx(
+        1.0
+    )  # the repo nudge state survives
 
 
 def test_live_owner_gets_a_send_ready_line_and_a_sleeper_does_not(

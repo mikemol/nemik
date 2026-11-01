@@ -4,6 +4,8 @@
 
 from typing import TYPE_CHECKING
 
+import pytest
+
 from nemik.cards import Card
 from nemik.health import health_cards
 
@@ -30,7 +32,7 @@ def test_signals_from_cards_alone() -> None:
         "asks_owed": (2, 5),
     }
     found = health_cards(cards, asks, "r", limits)
-    assert found.blocked_share == 0.5
+    assert found.blocked_share == pytest.approx(0.5)
     assert found.oldest_block_ticks == 9
     assert found.asks_owed == 1
     assert found.status == "amber"

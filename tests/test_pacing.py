@@ -6,6 +6,8 @@ from __future__ import annotations
 
 from datetime import UTC, datetime, timedelta
 
+import pytest
+
 from nemik.pacing import bucket, limits
 
 START = datetime(2026, 10, 1, tzinfo=UTC)
@@ -17,7 +19,7 @@ def test_within_the_burst_the_bucket_never_goes_over() -> None:
     overdraft, level = bucket(
         stamps, rate=5, burst=10, start=START, now=START + timedelta(hours=10)
     )
-    assert overdraft == 0.0
+    assert overdraft == pytest.approx(0.0)
     assert 0 < level <= 10
 
 
@@ -33,7 +35,7 @@ def test_a_flood_past_the_burst_is_an_overdraft_that_refills_at_the_rate() -> No
     later = bucket(
         flood, rate=10, burst=10, start=START, now=START + timedelta(days=3)
     )[1]
-    assert later == 10.0  # three days at 10 a day refill it to the burst
+    assert later == pytest.approx(10.0)  # three days at 10 a day refill it to the burst
 
 
 def test_the_declared_table_is_read_and_defaults_otherwise() -> None:

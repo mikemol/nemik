@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1375,
+  "counter": 1376,
   "waypoints": [
     {
       "symbol": "W1",
@@ -32966,23 +32966,54 @@
     {
       "symbol": "W1375",
       "title": "tests/test_check_run_rows.py reads the loaded tool's main and exit code as typed names, so mypy falls by four",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-11-01: G0 2026-11-01T12:27:14Z (date -u in the preceding call), BEFORE the first edit of the real file. Advances W1375 (W1178's class: the mypy paydown), the staged successor of stack 780. Pace: nemik-rank nemik --pace read at 12:00:03Z, pace of 2026-11-01T11:25:26Z: mypy behind (owes 190, fell 103), codon behind, ruff ok. Actuator: scratchpad/w1375_types.py: after the tool is loaded by file path, 'MAIN: Callable[[list[str]], int] = TOOL.main' and 'UNREADABLE: int = TOOL.UNREADABLE' take the module's Any attributes into annotated names, and the five uses read MAIN and UNREADABLE. K PROBE BEFORE THIS G0: probe copy tests/probe_w1375_test_check_run_rows.py (deleted): mypy 'Success: no issues found' (baseline misc 4 to 0), ruff only the 9 S101 its filename adds, the original 0. N=4, K=4, expected -4: mypy 1456 (stack 780's value) to 1452, ruff flat at 764. Waits for stack 780 (mypy-baseline.json).",
+      "next_bounded_step": null,
+      "evidence": "2026-11-01: G0 2026-11-01T12:27:14Z (date -u in the preceding call), BEFORE the first edit of the real file. Advances W1375 (W1178's class: the mypy paydown), the staged successor of stack 780. Pace: nemik-rank nemik --pace read at 12:00:03Z, pace of 2026-11-01T11:25:26Z: mypy behind (owes 190, fell 103), codon behind, ruff ok. Actuator: scratchpad/w1375_types.py: after the tool is loaded by file path, 'MAIN: Callable[[list[str]], int] = TOOL.main' and 'UNREADABLE: int = TOOL.UNREADABLE' take the module's Any attributes into annotated names, and the five uses read MAIN and UNREADABLE. K PROBE BEFORE THIS G0: probe copy tests/probe_w1375_test_check_run_rows.py (deleted): mypy 'Success: no issues found' (baseline misc 4 to 0), ruff only the 9 S101 its filename adds, the original 0. N=4, K=4, expected -4: mypy 1456 (stack 780's value) to 1452, ruff flat at 764. Waits for stack 780 (mypy-baseline.json). | 2026-11-01: Landed 987507a9 (COMMITTED line printed it; git log -1 subject is W1375's) at 2026-11-01T12:50:08Z by TZ=UTC reflog (07:50:08 -0500). Accepted at the gate 12:40:58Z (the first submit at 12:40:08Z was refused: it raced my own --status done on W1374, so W1374 was still in the working set): 9 min 10 s wall in the gate. Measured mypy 1456 to 1452 (-4, equal to the K probe's), ruff flat 764.",
       "issued_at": "2026-11-01T12:27:12Z",
       "minted_during": "interrupt",
       "caused_by": "W1178",
-      "last_worked": "2026-11-01T12:28:41Z",
+      "last_worked": "2026-11-01T12:51:13Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_check_run_rows.py",
         "mypy-baseline.json"
       ],
       "size_class": "small",
+      "completed": "20261101T125113Z"
+    },
+    {
+      "symbol": "W1376",
+      "title": "Twenty-four float-equality asserts in ten test files become pytest.approx comparisons (RUF069), so ruff falls by forty with sixteen magic-value findings",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-11-01: G0 2026-11-01T12:42:54Z (date -u in the preceding call), BEFORE the first edit of the real files. Advances W1376, the staged successor of stack 781. Pace: nemik-rank nemik --pace read at 12:30:09Z, pace of 2026-11-01T12:25:27Z: ruff behind (fell 75 over 10 landings, owes 90; 764 left), mypy behind (fell 165, owes 190), codon behind. Premise read: ruff's RUF069 listing (27 sites, all tests; no [*] fix mark); pytest.approx compares with a 1e-6 relative tolerance, so a value stored rounded (0.667, 0.333) still matches. Actuator: scratchpad/w1376_approx.py: on each flagged line the one '== <float>' becomes '== pytest.approx(<float>)', 'import pytest' is added after the last top-level import where absent, then ruff --select I --fix and ruff format. test_history.py (3 sites) is left out: its pytest import sits under TYPE_CHECKING. K PROBE BEFORE THIS G0: ten probe copies (deleted): ruff house counts on the originals RUF069 24, PLR2004 28, PT018 4, S603 1, S404 1; on the probes RUF069 0, PLR2004 12, PT018 4 (their 105 S101 are their filenames): the approx form also stops PLR2004 flagging 16 of the same lines; mikemol-pycheck --ratchet on the probes: mypy churn 2, rank_flow 6, wake_alarms 4, equal to the originals' baseline rows. N=24, K=24 RUF069 plus 16 PLR2004, expected -40: ruff 764 to 724, mypy flat at 1452. Waits for stack 781 (queue files).",
+      "issued_at": "2026-11-01T12:42:49Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1288",
+      "last_worked": "2026-11-01T12:45:02Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tests/test_baseline.py",
+        "tests/test_churn.py",
+        "tests/test_health.py",
+        "tests/test_health_cards.py",
+        "tests/test_operator_rate.py",
+        "tests/test_pacing.py",
+        "tests/test_rank_flow.py",
+        "tests/test_toil.py",
+        "tests/test_wake_alarms.py",
+        "tests/test_wake_nudge.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "medium",
       "completed": null
     }
   ],

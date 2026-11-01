@@ -277,8 +277,7 @@
   "PLR2004": 1
  },
  "tests/test_baseline.py": {
-  "PLR2004": 2,
-  "RUF069": 2
+  "PLR2004": 1
  },
  "tests/test_build_scope.py": {
   "PLC2701": 1,
@@ -320,8 +319,7 @@
   "S603": 2
  },
  "tests/test_churn.py": {
-  "PLR2004": 3,
-  "RUF069": 2
+  "PLR2004": 1
  },
  "tests/test_critical.py": {
   "PLR2004": 4
@@ -367,12 +365,10 @@
   "PLR2004": 1
  },
  "tests/test_health.py": {
-  "PLR2004": 3,
-  "RUF069": 2
+  "PLR2004": 2
  },
  "tests/test_health_cards.py": {
-  "PLR2004": 3,
-  "RUF069": 1
+  "PLR2004": 2
  },
  "tests/test_history.py": {
   "PLR2004": 1,
@@ -448,15 +444,13 @@
   "PLR2004": 1
  },
  "tests/test_operator_rate.py": {
-  "PLR2004": 2,
-  "RUF069": 1
+  "PLR2004": 1
  },
  "tests/test_overlap_claims.py": {
   "PLR2004": 1
  },
  "tests/test_pacing.py": {
-  "PLR2004": 3,
-  "RUF069": 2
+  "PLR2004": 2
  },
  "tests/test_parse_cache.py": {
   "ARG001": 1,
@@ -495,8 +489,7 @@
   "SLF001": 2
  },
  "tests/test_rank_flow.py": {
-  "PLR2004": 10,
-  "RUF069": 10,
+  "PLR2004": 3,
   "S404": 1,
   "S603": 1
  },
@@ -549,20 +542,11 @@
   "S404": 1,
   "S603": 1
  },
- "tests/test_toil.py": {
-  "PLR2004": 1,
-  "RUF069": 2
- },
  "tests/test_vtodo.py": {
   "PLR2004": 4
  },
  "tests/test_wake_alarms.py": {
-  "PT018": 4,
-  "RUF069": 1
- },
- "tests/test_wake_nudge.py": {
-  "PLR2004": 1,
-  "RUF069": 1
+  "PT018": 4
  },
  "tests/test_witness_promql.py": {
   "ARG001": 2

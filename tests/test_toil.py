@@ -6,6 +6,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+import pytest
+
 from nemik.history import toil
 
 if TYPE_CHECKING:
@@ -28,5 +30,5 @@ def test_the_interrupt_share_is_unplanned_over_planned_plus_unplanned(
     first, second = toil("a", ledger)
     assert first["week"] == "2026-W41"
     assert second["week"] == "2026-W42"
-    assert first["toil_share"] == 0.333  # one interrupt among three
-    assert second["toil_share"] == 0.0
+    assert first["toil_share"] == pytest.approx(0.333)  # one interrupt among three
+    assert second["toil_share"] == pytest.approx(0.0)
