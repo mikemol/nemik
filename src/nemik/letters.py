@@ -97,10 +97,23 @@ def misdelivered(letters: list[Letter], workstreams: set[str]) -> list[str]:
 
 
 def _load(path: Path) -> dict[str, object]:
+    """Read a queue file as an object; an unreadable or unparseable one reads as empty.
+
+    Returns:
+        The queue's entries, keyed by string.
+
+    Raises:
+        TypeError: when the file parses to a value that is not an object, since the readers
+            decide whether a letter is owned and a corrupt queue must not hide an orphan.
+
+    """
     try:
         data: object = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
         return {}
+    if not isinstance(data, dict):
+        msg = f"{path}: expected a queue object, got {type(data).__name__}"
+        raise TypeError(msg)
     return table(data)
 
 

@@ -242,3 +242,17 @@ def test_the_command_exits_5_only_when_a_letter_is_misdelivered(
         main(["--root", str(tmp_path), "--letters"])
     assert stop.value.code == 5
     assert "MISDELIVERED gcalculus/inbox/lost.md" in capsys.readouterr().out
+
+
+def test_a_corrupt_queue_is_refused_not_read_as_owning_nothing(tmp_path: Path) -> None:
+    """A queue that parses to a non-object raises TypeError, so no orphan is hidden or invented."""
+    _letter(tmp_path, "alpha", "2026-10-01-note.md", "# note")
+    state = tmp_path / "alpha" / ".claude" / "paths-forward.json"
+    state.parent.mkdir(parents=True)
+    state.write_text("[]")
+    with pytest.raises(TypeError, match="queue object"):
+        orphans(tmp_path)
+    state.write_text("{not json")
+    assert orphans(tmp_path) == [
+        ("alpha", tmp_path / "alpha/inbox/2026-10-01-note.md", False)
+    ]

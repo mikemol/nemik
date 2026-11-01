@@ -3858,3 +3858,9 @@
 2026-11-01T21:30:39Z  interrupt W1413 minted    -         "starved.py and pacing.py bind the parsed rank-weights TOML as object before the table helper, so mypy falls by two"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
 2026-11-01T21:32:27Z  status W1407 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T21:32:50Z  status W1409 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T21:35:52Z  status W1410 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T21:35:59Z  tick  W1414 minted    -         "Probe whether moving main and its argparse import into a cli module lets pacing, pins, starved or work compile under Codon, using codon_one.py on a scratch split"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1400
+2026-11-01T21:37:08Z  tick  W1413 advanced  sweep     "stack 806 landed f03fb6d4 21:31:29Z (importer strict after R121); stack 807 (W1409 vtodo) gating since 21:32:59Z; stack 808 staged (W1413 starved and pacing mypy -2, then W1408 letters strict); codon histogram done, 69 of 144 modules fail, 37 on a missing stdlib module; W1400 atomized into W1410 to W1412 and W1414 [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T21:54:08Z  status W1409 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T21:54:24Z  status W1413 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T21:54:25Z  status W1408 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
