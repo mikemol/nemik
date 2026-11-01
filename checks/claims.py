@@ -19,6 +19,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+MIN_DIRECT_RDFLIB_IMPORTERS = (
+    2  # the claim is a gap: rdflib is not behind adapter alone
+)
 SRC = ROOT / "src" / "nemik"
 sys.path.insert(0, str(ROOT / "src"))
 
@@ -155,8 +158,9 @@ def oslc_cm_state_vocabulary() -> None:
         "queue_graph() no longer asserts state through the oslc_cm:state property",
     )
     _require(
-        OSLC_CM, "OSLC_CM"
-    )  # imported and actually referenced above, not vestigial
+        OSLC_CM,
+        "the OSLC_CM namespace is gone or empty: the state vocabulary has nothing to hang on",
+    )
 
 
 def prov_activity_shape() -> None:
@@ -313,7 +317,7 @@ def rdf_is_not_centralized_behind_adapter() -> None:
         and re.search(r"^from rdflib|^import rdflib", text, re.MULTILINE)
     ]
     _require(
-        len(direct_importers) >= 2,
+        len(direct_importers) >= MIN_DIRECT_RDFLIB_IMPORTERS,
         f"rdflib turned out to be centralized after all: {direct_importers}",
     )
 
@@ -353,7 +357,8 @@ def check_py_bypasses_the_adapter_boundary() -> None:
     text = _src("check.py")
     _require(
         "from mikemol.pathsforward.store import UnreadableStateError" in text,
-        "check.py no longer bypasses adapter.py for this import -- update the claim, don't just delete it",
+        "check.py no longer bypasses adapter.py for this import "
+        "-- update the claim, don't just delete it",
     )
     _require(
         "import UnreadableStateError" not in _src("adapter.py"),
@@ -395,12 +400,12 @@ def main(argv: list[str]) -> int:
 
     """
     if len(argv) != 1 or argv[0] not in CLAIMS:
-        print(f"usage: claims.py <{'|'.join(CLAIMS)}>", file=sys.stderr)
+        sys.stderr.write(f"usage: claims.py <{'|'.join(CLAIMS)}>\n")
         return 2
     try:
         CLAIMS[argv[0]]()
     except AssertionError as exc:
-        print(f"claims.py: {argv[0]}: {exc}", file=sys.stderr)
+        sys.stderr.write(f"claims.py: {argv[0]}: {exc}\n")
         return 1
     return 0
 

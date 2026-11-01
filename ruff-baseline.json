@@ -1,9 +1,6 @@
 {
  "checks/claims.py": {
-  "E501": 1,
-  "PLC0415": 3,
-  "PLR2004": 1,
-  "T201": 2
+  "PLC0415": 3
  },
  "src/nemik/__init__.py": {
   "RUF067": 2

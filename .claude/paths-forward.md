@@ -3,11 +3,11 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1340 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:dc57438f5998bfc2`
+counter 1341 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:4e5d78860f5984b9`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1340 | working |
+| 1 | W1341 | working |
 | 2 | W1075 | ready |
 | 3 | W1139 | ready |
 | 4 | W1279 | ready |
@@ -1319,11 +1319,12 @@ counter 1340 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:dc5
 | 1310 | W1337 | done |
 | 1311 | W1338 | done |
 | 1312 | W1339 | done |
+| 1313 | W1340 | done |
 
 ## waypoints
 
-1. **W1340** (working) checks/claims.py states its 25 claims through one _require helper instead of assert, so ruff S101
-   falls by 25
+1. **W1341** (working) checks/claims.py: the vestigial-import check in oslc_cm_state_vocabulary says what its failure
+   means, from reviewer R87
 2. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 3. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -4326,6 +4327,8 @@ counter 1340 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:dc5
    the stackable list and the ready count stop counting landed work
 1312. **W1339** (done) The twenty cards below W1200 named by a landed subject are classified: two closed done, eighteen
    annotated as partial, umbrella or stale-next with the reason
+1313. **W1340** (done) checks/claims.py states its 25 claims through one _require helper instead of assert, so ruff S101
+   falls by 25
 
 ## residue
 
@@ -4990,3 +4993,14 @@ counter 1340 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:dc5
   it closes when nemik-stackable is rerun after 750 lands. Two small defects below. No fixpoint is declared. Carried
   open findings: R72 on W1288, W1329, W846; R73-F2, R80 and R83 on W1288; R84 on W695 (2026-11-02); R85 on W613
   (2026-11-02, the rerun still to do).; 2 finding(s)
+- **nemik:R85** (-) round 87: tick-w1341, W1340 (checks/claims.py 25 asserts through _require, ruff 981 to 956); stack
+  751 inflight (key 1793504191783014664, W1340); previous landing f64a7722 03:07:27Z (reflog 23:07:27 -0400): root
+  Verified from source: reflog f64a7722 = 03:07:27Z; --in-gate lists W1340 inflight; I read `git diff --
+  checks/claims.py` (81 insertions, 41 deletions: one _require helper, every assert turned into a _require call with its
+  own message, trailing comments kept) and W1340's evidence; the G0 is before the edit, K=25 is derived from the ast,
+  the negative check is given with its four exit codes, and the paydown candidate and two rejected alternatives are
+  named, which answers R86's finding (its witness, a code stack in --in-gate, is met by 751 once it lands). Gate-empty
+  03:07:27Z to 03:36:30Z = 29 min 03 s wall, again about 20 min with no tool call before the 03:30 wake (R83 on W1288
+  still untried, due 2026-11-02). One defect in the change, none new in the loop. No fixpoint is declared. Carried open
+  findings: R72 on W1288, W1329, W846; R73-F2, R80, R83 and R86 on W1288 (R86's witness is met when 751 lands); R84 on
+  W695 (2026-11-02); R85 on W613 (witness recorded: nemik-stackable 36 of 76 ready, closes on read-back).; 1 finding(s)
