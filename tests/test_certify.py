@@ -14,6 +14,7 @@ import os
 import shutil
 import subprocess
 from pathlib import Path
+from typing import TypedDict
 
 import pytest
 from installed import script
@@ -28,6 +29,30 @@ def _pf(state: Path, *args: str) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, env=env, capture_output=True, text=True, check=False)
 
 
+class Verdict(TypedDict):
+    """One line of `--certify` output."""
+
+    ref: str
+    level: str
+    reference_arm: str
+    residue: list[dict[str, str]]
+
+
+def _verdicts(done: subprocess.CompletedProcess[str]) -> list[Verdict]:
+    """Read the verdict lines of a `--certify` run, from stdout and stderr.
+
+    Returns:
+        One verdict per JSON line.
+
+    """
+    found: list[Verdict] = []
+    for line in done.stdout.splitlines() + done.stderr.splitlines():
+        if line.startswith("{"):
+            verdict: Verdict = json.loads(line)
+            found.append(verdict)
+    return found
+
+
 def _queue(tmp_path: Path) -> Path:
     (tmp_path / ".claude").mkdir()
     state = tmp_path / ".claude" / "paths-forward.json"
@@ -40,8 +65,7 @@ def _queue(tmp_path: Path) -> Path:
 def test_certify_judges_each_waypoint_in_one_batch(tmp_path: Path) -> None:
     """One --certify call prints a verdict line for each waypoint it was given."""
     done = _pf(_queue(tmp_path), "--certify", "W1", "W2")
-    lines = done.stdout.splitlines() + done.stderr.splitlines()
-    verdicts = [json.loads(ln) for ln in lines if ln.startswith("{")]
+    verdicts = _verdicts(done)
     assert [v["ref"].rsplit(":", 1)[-1] for v in verdicts] == ["W1", "W2"]
     assert all(
         {"ref", "level", "reference_arm", "residue"} <= v.keys() for v in verdicts
@@ -52,11 +76,7 @@ def test_an_absent_field_is_residue_not_clean(tmp_path: Path) -> None:
     """A waypoint missing a field is reported as residue and the command exits non-zero."""
     done = _pf(_queue(tmp_path), "--certify", "W1", "W2")
     assert done.returncode != 0, "a queue with residue must not exit clean"
-    lines = done.stdout.splitlines() + done.stderr.splitlines()
-    by_ref = {
-        v["ref"].rsplit(":", 1)[-1]: v
-        for v in map(json.loads, (ln for ln in lines if ln.startswith("{")))
-    }
+    by_ref = {v["ref"].rsplit(":", 1)[-1]: v for v in _verdicts(done)}
     assert any(r["gate"] == "coverable" for r in by_ref["W1"]["residue"])
     assert by_ref["W2"]["level"] == "none"
     assert any(r["gate"] == "constructible" for r in by_ref["W2"]["residue"])
