@@ -5,15 +5,21 @@
 from __future__ import annotations
 
 from datetime import UTC, datetime
+from typing import TYPE_CHECKING, cast
 
 from nemik.history import weekly
 
+if TYPE_CHECKING:
+    from nemik.history import QueueDoc, Waypoint
 
-def _q(on_operator: list[str], other: list[str]) -> dict:
+
+def _q(on_operator: list[str], other: list[str]) -> QueueDoc:
     cards = [
         {"symbol": s, "status": "blocked", "blocked_kind": "human"} for s in on_operator
     ] + [{"symbol": s, "status": "ready"} for s in other]
-    return {"waypoints": cards, "residue": []}
+    waypoints = cast("list[Waypoint]", cards)
+    residue: list[Waypoint] = []
+    return {"waypoints": waypoints, "residue": residue}
 
 
 def test_asks_entering_and_leaving_the_operator_are_counted_per_week() -> None:

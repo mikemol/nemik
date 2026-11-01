@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1373,
+  "counter": 1374,
   "waypoints": [
     {
       "symbol": "W1",
@@ -32921,20 +32921,43 @@
     {
       "symbol": "W1373",
       "title": "tests/test_workflows.py annotates the Any its tomllib and re calls return, so mypy falls by seven",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-01: G0 2026-11-01T12:04:45Z (date -u in the preceding call), BEFORE the first edit of the real file. Advances W1373 (W1178's class: the mypy paydown), the staged successor of stack 778. Pace: nemik-rank nemik --pace read at 12:00:03Z, pace of 2026-11-01T11:25:26Z: mypy behind (owes 190, fell 103), codon behind, ruff ok. Actuator: scratchpad/w1373_types.py: RAW: dict[str, object] = tomllib.loads(...) then MODEL = table(RAW) (nemik.tomlview.table takes object, line 14 read), and numbered / documented annotated list[str] on their re.findall results. K PROBE BEFORE THIS G0: probe copy tests/probe_w1373_test_workflows.py (deleted): mypy 'Success: no issues found' (baseline misc 7 to 0), ruff only the 10 S101 its filename adds, the original 0. N=7, K=7, expected -7: mypy 1476 (stack 778's value) to 1469, ruff flat at 764. Waits for stack 778 (mypy-baseline.json). | 2026-11-01: Landed 8e09499b (COMMITTED line printed it; git log -1 subject is W1373's) at 2026-11-01T12:25:06Z by TZ=UTC reflog (07:25:06 -0500). Submitted 12:15:49Z: 9 min 17 s wall in the gate. Measured mypy 1476 to 1469 (-7, equal to the K probe's), ruff flat 764.",
+      "issued_at": "2026-11-01T12:04:44Z",
+      "minted_during": "tick",
+      "caused_by": "W1178",
+      "last_worked": "2026-11-01T12:26:05Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tests/test_workflows.py",
+        "mypy-baseline.json"
+      ],
+      "size_class": "small",
+      "completed": "20261101T122605Z"
+    },
+    {
+      "symbol": "W1374",
+      "title": "tests/test_operator_rate.py and tests/test_memo_audits.py type their fixture documents, so mypy falls by thirteen",
       "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-11-01: G0 2026-11-01T12:04:45Z (date -u in the preceding call), BEFORE the first edit of the real file. Advances W1373 (W1178's class: the mypy paydown), the staged successor of stack 778. Pace: nemik-rank nemik --pace read at 12:00:03Z, pace of 2026-11-01T11:25:26Z: mypy behind (owes 190, fell 103), codon behind, ruff ok. Actuator: scratchpad/w1373_types.py: RAW: dict[str, object] = tomllib.loads(...) then MODEL = table(RAW) (nemik.tomlview.table takes object, line 14 read), and numbered / documented annotated list[str] on their re.findall results. K PROBE BEFORE THIS G0: probe copy tests/probe_w1373_test_workflows.py (deleted): mypy 'Success: no issues found' (baseline misc 7 to 0), ruff only the 10 S101 its filename adds, the original 0. N=7, K=7, expected -7: mypy 1476 (stack 778's value) to 1469, ruff flat at 764. Waits for stack 778 (mypy-baseline.json).",
-      "issued_at": "2026-11-01T12:04:44Z",
-      "minted_during": "tick",
+      "evidence": "2026-11-01: G0 2026-11-01T12:17:32Z (date -u in the preceding call), BEFORE the first edit of the real files. Advances W1374 (W1178's class: the mypy paydown), the staged successor of stack 779. Pace: nemik-rank nemik --pace read at 12:00:03Z, pace of 2026-11-01T11:25:26Z: mypy behind (owes 190, fell 103), codon behind, ruff ok (the 12:25Z pace is not yet due). Actuator: scratchpad/w1374_types.py: test_operator_rate._q returns QueueDoc (waypoints cast to list[Waypoint], an annotated empty residue list); test_memo_audits._graph returns tuple[Graph, dict[str, list[Finding]]] with an annotated findings dict, and plain and memoized are annotated dict[str, object]; then ruff --select I --fix and ruff format. K PROBE BEFORE THIS G0: two probe copies (deleted): the first try left 5 mypy findings (an empty [] in the cast dict; src to_json returns dict[Any, Any]) and one I001 (an import block), fixed by the second form, which read 'Success: no issues found' (baseline misc 6+1 and 5+1 = 13 to 0), ruff only the 6 S101 their filenames add. N=13, K=13, expected -13: mypy 1469 (stack 779's value) to 1456, ruff flat at 764. Waits for stack 779 (mypy-baseline.json).",
+      "issued_at": "2026-11-01T12:17:29Z",
+      "minted_during": "interrupt",
       "caused_by": "W1178",
-      "last_worked": "2026-11-01T12:05:24Z",
+      "last_worked": "2026-11-01T12:19:18Z",
       "ticks_blocked": 0,
       "manifest": [
-        "tests/test_workflows.py",
+        "tests/test_operator_rate.py",
+        "tests/test_memo_audits.py",
         "mypy-baseline.json"
       ],
       "size_class": "small",

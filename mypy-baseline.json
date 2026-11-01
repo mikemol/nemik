@@ -166,16 +166,8 @@
   "no-untyped-call": 2,
   "no-untyped-def": 1
  },
- "tests/test_memo_audits.py": {
-  "misc": 5,
-  "type-arg": 1
- },
  "tests/test_mpxj.py": {
   "misc": 2
- },
- "tests/test_operator_rate.py": {
-  "misc": 6,
-  "type-arg": 1
  },
  "tests/test_published_valid.py": {
   "misc": 8

@@ -3740,3 +3740,6 @@
 2026-11-01T12:05:30Z  tick  W1371 advanced  sweep     "W1369 landed 4b8dc494 and W1370 8b96cde6 (mypy 1554 to 1506); stack 778 (W1371 test_shaclcache, W1372 test_ruler_table, mypy 1506 to 1476) submitted 12:03:55Z after a 2 min 19 s gap; stack 779 for W1373 (test_workflows, 1476 to 1469) staged behind it [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87); W1371 and W1372 are gating as stack 778 and W1373 waits on its mypy-baseline.json (cites github:W71, W1372, W1373)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T12:15:39Z  status W1371 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T12:15:44Z  status W1372 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T12:17:29Z  interrupt W1374 minted    -         "tests/test_operator_rate.py and tests/test_memo_audits.py type their fixture documents, so mypy falls by thirteen"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
+2026-11-01T12:19:18Z  status W1374 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T12:26:05Z  status W1373 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
