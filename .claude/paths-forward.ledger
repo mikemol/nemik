@@ -3682,3 +3682,7 @@
 2026-11-01T08:58:26Z  status W1355 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T08:59:32Z  interrupt W1356 minted    -         "tests/test_positioning.py annotates the Any its tomllib and re calls return and reads its parsers' files through inspect, so mypy falls by 22"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
 2026-11-01T09:00:04Z  status W1356 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T09:05:02Z  tick  W1357 minted    -         "tests/test_test_inputs.py reads its regex matches through a typed helper and an annotated pair list, so mypy falls by 19"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
+2026-11-01T09:05:50Z  status W1357 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T09:05:58Z  tick  W1356 advanced  sweep     "W1355 landed a2a3d059 (mypy 1728 to 1697); stack 764 for W1356 (mypy 1697 to 1675) gating since 09:00:14Z; stack 765 for W1357 (mypy 1675 to 1656) staged behind it [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87); W1356 is gating as stack 764 and W1357 waits on its mypy-baseline.json (cites github:W71, W1357)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T09:10:47Z  status W1356 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

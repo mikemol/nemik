@@ -3,12 +3,12 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1354 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:0b4e6f25ea20e612`
+counter 1357 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:9ed575431d0ab7eb`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1353 | working |
-| 2 | W1354 | working |
+| 1 | W1356 | working |
+| 2 | W1357 | working |
 | 3 | W1075 | ready |
 | 4 | W1139 | ready |
 | 5 | W1279 | ready |
@@ -1333,13 +1333,16 @@ counter 1354 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:0b4
 | 1324 | W1350 | done |
 | 1325 | W1351 | done |
 | 1326 | W1352 | done |
+| 1327 | W1353 | done |
+| 1328 | W1354 | done |
+| 1329 | W1355 | done |
 
 ## waypoints
 
-1. **W1353** (working) Four single-site test files move their function-local import to the top of the file (PLC0415), so
-   ruff falls by four
-2. **W1354** (working) tests/test_churn.py types its two queue helpers as dict[str, object], so mypy falls by up to 32
-   and the owed mypy ratchet is paid
+1. **W1356** (working) tests/test_positioning.py annotates the Any its tomllib and re calls return and reads its
+   parsers' files through inspect, so mypy falls by 22
+2. **W1357** (working) tests/test_test_inputs.py reads its regex matches through a typed helper and an annotated pair
+   list, so mypy falls by 19
 3. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 4. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -2400,8 +2403,9 @@ counter 1354 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:0b4
 211. **W1219** (blocked) The land step resolves a landed card's working mark: the commit or submit refuses, or the
    writer auto-resolves, a done card still marked working, with a test that builds that state
    - blocked on: mtools:W2097
-   - next: mtools-ad: the commit gate refuses, or the writer auto-resolves, a done card still marked working
-     (mikemol-commit is mtools'); nemik:W1219 holds the evidence
+   - next: Write the one pre-submit script: manifest equals git's changed files, card set working in its own call,
+     newest pace read and its owed baselines required in the stack's paths, five guards plus touched modules' tests run
+     with stamps, then submit by full path
 212. **W1220** (blocked) Stack construction checks a ratchet baseline against the tree it will be gated on (and against
    stacks queued ahead), so a stack built on an unlanded baseline is refused at build, not after a gate
    - blocked on: mtools:W2078
@@ -4373,6 +4377,12 @@ counter 1354 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:0b4
 1325. **W1351** (done) Four single-site findings clear: three Yields sections for generator docstrings (DOC402) and one
    empty-string comparison (PLC1901), so ruff falls 893 to 889
 1326. **W1352** (done) Unused fixture parameters leave ten test signatures (ARG001), so ruff falls by ten
+1327. **W1353** (done) Four single-site test files move their function-local import to the top of the file (PLC0415), so
+   ruff falls by four
+1328. **W1354** (done) tests/test_churn.py types its two queue helpers as dict[str, object], so mypy falls by up to 32
+   and the owed mypy ratchet is paid
+1329. **W1355** (done) tests/test_witnesses.py annotates the Any its json.loads and re.findall calls return and types
+   its route table, so mypy falls by 31
 
 ## residue
 
@@ -5194,3 +5204,19 @@ counter 1354 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:0b4
   W1346 and W1288, R91 on W1345 (2026-11-02), R72 on W846, R84 on W695 (2026-11-02), R85 on W613 (read-back). New facts
   for them: W1352's title says 'nine' while the sites are ten and the measured fall is ten; mtools' mikemol-surfaces
   message (63b06c00) is still unanswered; the rank.py E501 pair waits for typed rows.; 0 finding(s)
+- **nemik:R95** (-) round 97: nemik-94 third tick since R96, W1353 (four function-local imports hoisted, ruff 879 to
+  \875) and W1354 (tests/test_churn.py typed through QueueDoc and Waypoint, mypy 1760 to 1728), one two-entry stack 762
+  (key 1793522397754310931) inflight at 08:41:03Z; previous landing c316a1d4 08:35:44Z (TZ=UTC reflog): root Verified
+  from source: reflog c316a1d4 = 08:35:44Z (03:35:44 -0500), --in-gate lists W1354 and W1353 inflight, `mikemol-pycheck
+  --ratchet` prints ruff 875/875 and mypy 1728/1728 (so -4 and -32 recompute). Intervals: 761 submitted 08:24:09Z,
+  landed 08:35:44Z (gate 11 min 35 s); gate empty 08:35:44Z to the accepted submit 08:39:58Z = 4 min 14 s wall, of which
+  the first stack-762 submit at 08:37:21Z (1 min 37 s after the landing) was refused at submit. The loop is behaving: G0
+  for both cards before the edits with date -u stamps, the Edit-hook refusals (import and use in one write) met with a
+  one-match scratch codemod, the wrong 'nine' on W1352 corrected, the refusal text quoted, the stack rebuilt as two
+  entries with their own baselines. Two defects remain. No fixpoint is declared. Carried open findings, status on
+  2026-11-01: R95 first finding on W1288 (cause of the 06:20 to 07:24 outage, due today, cause open), R95 second finding
+  on W1349 (stamps, 2026-11-02; this tick's G0s used date -u, so its witness is met for W1353 and W1354 and closes on
+  read-back of the W1349 correction), R95 third finding on W1219 (pre-submit script; this round adds a requirement
+  below), R94 on W1288 and W1348, R93 on W1347, R92 on W1346 and W1288, R91 on W1345, R72 on W846, R84 on W695
+  (2026-11-02), R85 on W613 (read-back); the mtools reply (msg 8fd63ba5) leaves the hooks-venv rebuild and the census as
+  the session's.; 2 finding(s)

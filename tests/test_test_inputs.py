@@ -69,6 +69,17 @@ def _paths(source: str) -> set[str]:
     return found
 
 
+def _strings(pattern: str, text: str) -> list[str]:
+    """Give every match of a one-group pattern.
+
+    Returns:
+        The matched groups, as `re.findall` returns them.
+
+    """
+    found: list[str] = re.findall(pattern, text)
+    return found
+
+
 def _declared() -> tuple[set[str], list[str]]:
     """Give the test macro's data: exact files and directory prefixes (globs, fixtures).
 
@@ -79,17 +90,17 @@ def _declared() -> tuple[set[str], list[str]]:
     build = (REPO / "BUILD.bazel").read_text()
     # only the test macro's own data list (up to its env): the venv's srcs glob is not test data
     data = build.split("data = [", 1)[1].split("env = {", 1)[0]
-    files = set(re.findall(r'"([\w./-]+\.[\w]+|[\w./-]+/[\w.-]+|Containerfile)"', data))
+    files = set(_strings(r'"([\w./-]+\.[\w]+|[\w./-]+/[\w.-]+|Containerfile)"', data))
     # every pattern of every glob([...]): a trailing `**` covers a directory, any other pattern its
     # matches
     patterns = [
         item
-        for group in re.findall(r"glob\(\[([^\]]*)\]", data)
-        for item in re.findall(r'"([^"]+)"', group)
+        for group in _strings(r"glob\(\[([^\]]*)\]", data)
+        for item in _strings(r'"([^"]+)"', group)
     ]
     prefixes = [item.split("*")[0] for item in patterns if item.endswith("**")]
     files |= {item for item in patterns if not item.endswith("**")}
-    pkgs = re.findall(r'"//([\w/]+):(\w+)"', data)
+    pkgs: list[tuple[str, str]] = re.findall(r'"//([\w/]+):(\w+)"', data)
     prefixes += [f"{pkg}/{name}/" for pkg, name in pkgs]
     return files, prefixes
 

@@ -245,9 +245,6 @@
  "tests/test_static_view.py": {
   "misc": 1
  },
- "tests/test_test_inputs.py": {
-  "misc": 19
- },
  "tests/test_wake_alarms.py": {
   "misc": 4
  },
