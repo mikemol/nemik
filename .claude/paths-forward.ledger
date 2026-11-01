@@ -3628,3 +3628,7 @@
 2026-11-01T03:40:03Z  interrupt W1341 minted    -         "checks/claims.py: the vestigial-import check in oslc_cm_state_vocabulary says what its failure means, from reviewer R87"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1340
 2026-11-01T04:00:31Z  status W1341 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T04:05:22Z  tick  W1341 advanced  mechanize "W1341 stack 752 ready: claims.py PLR2004 1, E501 1, T201 2 and the OSLC_CM message, ruff 956 to 952, mypy flat; W1340 landed ec5c757a closed done; pace 03:25:25Z PENDING: ruff the owed ratchet [blocked by W1288]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T04:08:00Z  status W1341 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T04:30:58Z  interrupt W1342 minted    -         "test_history.py types its queue helpers with history.Waypoint and reads history_doc through WeeklyRow, so mypy falls by the bare-dict cascade"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1288
+2026-11-01T04:31:09Z  status W1342 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T04:36:06Z  tick  W1342 advanced  mechanize "W1342 stack 753 ready: test_history.py Waypoint and WeeklyRow, mypy 1928 to 1869, ruff flat; W1341 landed c41015e8 closed done; R88 added as nemik:R86; pace 04:25:25Z: mypy the owed ratchet (fell 148 owes 190) [blocked by W1288]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

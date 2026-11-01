@@ -166,8 +166,7 @@
   "misc": 18
  },
  "tests/test_history.py": {
-  "misc": 59,
-  "type-arg": 2
+  "misc": 2
  },
  "tests/test_hooks_wired.py": {
   "misc": 8

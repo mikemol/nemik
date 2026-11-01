@@ -3,11 +3,11 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1341 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:4e5d78860f5984b9`
+counter 1342 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:631167be0366d515`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1341 | working |
+| 1 | W1342 | working |
 | 2 | W1075 | ready |
 | 3 | W1139 | ready |
 | 4 | W1279 | ready |
@@ -1320,11 +1320,12 @@ counter 1341 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:4e5
 | 1311 | W1338 | done |
 | 1312 | W1339 | done |
 | 1313 | W1340 | done |
+| 1314 | W1341 | done |
 
 ## waypoints
 
-1. **W1341** (working) checks/claims.py: the vestigial-import check in oslc_cm_state_vocabulary says what its failure
-   means, from reviewer R87
+1. **W1342** (working) test_history.py types its queue helpers with history.Waypoint and reads history_doc through
+   WeeklyRow, so mypy falls by the bare-dict cascade
 2. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 3. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -4329,6 +4330,8 @@ counter 1341 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:4e5
    annotated as partial, umbrella or stale-next with the reason
 1313. **W1340** (done) checks/claims.py states its 25 claims through one _require helper instead of assert, so ruff S101
    falls by 25
+1314. **W1341** (done) checks/claims.py: the vestigial-import check in oslc_cm_state_vocabulary says what its failure
+   means, from reviewer R87
 
 ## residue
 
@@ -5004,3 +5007,22 @@ counter 1341 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:4e5
   still untried, due 2026-11-02). One defect in the change, none new in the loop. No fixpoint is declared. Carried open
   findings: R72 on W1288, W1329, W846; R73-F2, R80, R83 and R86 on W1288 (R86's witness is met when 751 lands); R84 on
   W695 (2026-11-02); R85 on W613 (witness recorded: nemik-stackable 36 of 76 ready, closes on read-back).; 1 finding(s)
+- **nemik:R86** (-) round 88: tick-w1342, W1341 (OSLC_CM message and four ruff findings in checks/claims.py); stack 752
+  inflight (key 1793505935700905333, W1341); previous landing ec5c757a 03:39:11Z (reflog 23:39:11 -0400): root NO NEW
+  FINDINGS, OPEN FINDINGS CARRIED WITH OWNERS AND DUE DATES (not a fixpoint declaration). Verified from source: reflog
+  ec5c757a = 03:39:11Z; --in-gate lists W1341 inflight; `mikemol-pycheck --ratchet` prints ruff 952/952 and mypy
+  1928/1928, so -4 ruff recomputes; I read `git diff -- checks/claims.py`: the OSLC_CM message now says what the claim
+  asserts (R87's finding, closed), the magic 2 became MIN_DIRECT_RDFLIB_IMPORTERS with a comment, one wrapped message,
+  and the two usage and error prints in main became sys.stderr.write with the same text (T201's flagged construct
+  replaced by an equivalent in a CLI that writes its verdict to stderr; harmless here and stated in the card as T201 2).
+  The three PLC0415 left are reasoned (E402 risk after the sys.path insert). Gate-empty 03:39:11Z to 04:05:34Z = 26 min
+  23 s wall, about 21 min with no tool call before the 04:00 wake. Status of carried items on 2026-11-01: R72 on W1288
+  (second stack in the same wake) OPEN, never met, due 2026-11-01, the R83 wake-on-pace change due 2026-11-02 is the
+  same mechanism and is untried; R72 on W1329 (K above 0): met in practice by W1340 (K=25 from the ast) and W1341 (K=4),
+  to be closed by a line on W1329 citing them; R72 on W846 (test_layout gate timing, due 2026-11-02) OPEN; R72 on W613:
+  closed (landed cards done, nemik-stackable 36 of 76 ready recorded); R73-F2 on W1288: nemik-stackable output recorded
+  on W613, PT018 per-file mypy delta for the 46 sites OPEN, due 2026-11-01; R80 on W1288: the 52 findings explained
+  (checks/claims.py, W1334) and a code stack in the gate (751, 752) so both closed once 752 lands; R83 on W1288 OPEN
+  (2026-11-02); R84 on W695 OPEN (2026-11-02); R85 on W613 closes on read-back of the 36-of-76 line; R86 on W1288 and
+  R86 on W1339 (W1187 reconciled by the session): met; R87 on W1340: met by the python3 -O run recorded on W1340 and the
+  message fix.; 0 finding(s)

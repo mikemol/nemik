@@ -9,10 +9,12 @@ import os
 import subprocess
 import tempfile
 from datetime import UTC, datetime
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 from nemik.history import (
     QueueDoc,
+    Waypoint,
+    WeeklyRow,
     backfill,
     diff,
     ledger_lines_since,
@@ -70,7 +72,12 @@ def test_a_null_or_empty_field_in_a_committed_queue_reads_as_empty(
 ) -> None:
     """nemik:W744: real queues store null for an unset blocked_kind; it must not raise."""
     repo, _ = _two_commits(tmp_path)
-    card = _wp("W3", "ready", blocked_kind=None, blocked_on=[])
+    card: dict[str, object] = {
+        "symbol": "W3",
+        "status": "ready",
+        "blocked_kind": None,
+        "blocked_on": [],
+    }
     _commit(repo, {"waypoints": [card], "residue": []}, "2026-10-06T12:00:00Z")
     third = [event for event in backfill("a", repo) if event[0] == "a:W3"]
     assert [event[2:5] for event in third] == [
@@ -162,13 +169,13 @@ def test_a_second_snapshots_call_reads_no_queue_from_git(tmp_path: Path) -> None
     assert trace.read_text().count("built-in: git cat-file") == 1
 
 
-def _wp(symbol: str, status: str = "ready", **more: object) -> dict:
+def _wp(symbol: str, status: str = "ready", **more: str | list[str]) -> Waypoint:
     return {"symbol": symbol, "status": status, **more}
 
 
 def test_diff_names_every_class_of_change() -> None:
     """Diff names every class of change."""
-    old = {
+    old: QueueDoc = {
         "waypoints": [
             _wp("W1"),
             _wp("W2"),
@@ -177,7 +184,7 @@ def test_diff_names_every_class_of_change() -> None:
         ],
         "residue": [],
     }
-    new = {
+    new: QueueDoc = {
         "waypoints": [
             _wp("W1", "done"),
             _wp("W2", "working"),
@@ -202,7 +209,10 @@ def test_diff_names_every_class_of_change() -> None:
 def test_a_symbol_that_is_not_w_n_sorts_last_instead_of_raising() -> None:
     """A symbol that is not W<n> sorts last instead of raising."""
     # luthen's committed history holds `R-amtool`, which is not a W<n>.
-    new = {"waypoints": [_wp("W10"), _wp("R-amtool"), _wp("W2")], "residue": []}
+    new: QueueDoc = {
+        "waypoints": [_wp("W10"), _wp("R-amtool"), _wp("W2")],
+        "residue": [],
+    }
     d = diff({}, new)
     assert d.minted == ["W2", "W10", "R-amtool"]
 
@@ -214,7 +224,7 @@ def test_a_repo_with_no_queue_yet_reads_as_empty() -> None:
     assert d.closed == ["W1"]
 
 
-def _commit(repo: Path, queue: dict, when: str) -> str:
+def _commit(repo: Path, queue: dict[str, object], when: str) -> str:
     path = repo / ".claude" / "paths-forward.json"
     path.parent.mkdir(exist_ok=True)
     path.write_text(json.dumps(queue))
@@ -341,7 +351,7 @@ def test_the_static_history_names_no_waypoint_and_passes_the_manifest(
     from nemik.serve import history_doc
 
     _two_commits(tmp_path)
-    doc = history_doc(tmp_path)
+    doc = cast("dict[str, list[WeeklyRow]]", history_doc(tmp_path))
     assert list(doc) == ["a"]
     assert all("oldest_blocked" not in row for row in doc["a"])
     assert {"week", "opened", "closed", "open", "blocked_share"} <= set(doc["a"][0])
@@ -355,8 +365,12 @@ def test_a_withheld_waypoint_is_not_counted_in_the_published_history(
     from nemik.serve import history_doc
 
     _two_commits(tmp_path)
-    full = sum(row["opened"] for row in history_doc(tmp_path)["a"])
-    kept = sum(row["opened"] for row in history_doc(tmp_path, frozenset({"a:W2"}))["a"])
+    everything = cast("dict[str, list[WeeklyRow]]", history_doc(tmp_path))
+    withheld = cast(
+        "dict[str, list[WeeklyRow]]", history_doc(tmp_path, frozenset({"a:W2"}))
+    )
+    full = sum(row["opened"] for row in everything["a"])
+    kept = sum(row["opened"] for row in withheld["a"])
     assert (full, kept) == (2, 1)
 
 
