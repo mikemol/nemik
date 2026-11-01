@@ -3750,3 +3750,6 @@
 2026-11-01T12:42:49Z  interrupt W1376 minted    -         "Twenty-four float-equality asserts in ten test files become pytest.approx comparisons (RUF069), so ruff falls by forty with sixteen magic-value findings"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1288
 2026-11-01T12:45:02Z  status W1376 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T12:51:13Z  status W1375 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T12:51:44Z  interrupt W1377 minted    -         "Three test helpers take their boolean parameter keyword-only (FBT001), so ruff falls by three"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1288
+2026-11-01T12:52:34Z  status W1377 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T13:02:21Z  status W1376 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

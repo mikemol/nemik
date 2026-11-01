@@ -266,9 +266,6 @@
  "tests/test_alarm_delivery.py": {
   "PLR2004": 1
  },
- "tests/test_apply_witness.py": {
-  "FBT001": 1
- },
  "tests/test_architecture.py": {
   "S404": 1,
   "S603": 1
@@ -300,7 +297,6 @@
   "SLF001": 3
  },
  "tests/test_calwrite.py": {
-  "FBT001": 1,
   "PLR2004": 2
  },
  "tests/test_certify.py": {
@@ -483,7 +479,6 @@
  "tests/test_rank_apply.py": {
   "ARG001": 1,
   "ARG005": 1,
-  "FBT001": 1,
   "PLR2004": 1,
   "S404": 1,
   "SLF001": 2

@@ -164,7 +164,7 @@ def test_an_all_day_range_ends_the_day_after_its_inclusive_due(
     ],
 )
 def test_event_times_never_invent_a_wrong_end(
-    dtstart: str, due: str, needs_end: bool, want: tuple[str, str]
+    dtstart: str, due: str, *, needs_end: bool, want: tuple[str, str]
 ) -> None:
     """Event times never invent a wrong end."""
     assert event_times(dtstart, due, needs_end) == want

@@ -18,7 +18,7 @@ def test_apply_calls_the_queue_writer_with_the_rows(
     """Apply calls the queue writer with the rows."""
     seen: dict[str, object] = {}
 
-    def fake_run(cmd: list[str], check: bool) -> subprocess.CompletedProcess[str]:
+    def fake_run(cmd: list[str], *, check: bool) -> subprocess.CompletedProcess[str]:
         seen["cmd"] = cmd
         seen["rows"] = json.loads(Path(cmd[-1]).read_text(encoding="utf-8"))
         return subprocess.CompletedProcess(cmd, 0)

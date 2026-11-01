@@ -22,7 +22,7 @@ def _now() -> str:
     return datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def _export(root: Path, as_of: str, applied: bool) -> None:
+def _export(root: Path, as_of: str, *, applied: bool) -> None:
     mark = {"at": as_of, "digest": "cd" * 32} if applied else None
     row: dict[str, object] = {
         "id": "home-mount",
