@@ -4,6 +4,8 @@
 
 from pathlib import Path
 
+import pytest
+
 from nemik.apischema import load, unmanifested
 from nemik.rank import goals, load_weights
 from nemik.serve import Model
@@ -44,6 +46,22 @@ def test_a_new_field_is_flagged() -> None:
         "goals/x.json goals.leak"
     ]
     assert unmanifested("extra.json", {}) == ["extra.json: file is not in the manifest"]
+
+
+def test_a_missing_section_reads_as_no_fields() -> None:
+    """A document without a section carries none of its fields."""
+    assert unmanifested("graph.json", {}) == []
+    assert unmanifested("wake.json", {"roster": None}) == []
+
+
+def test_a_wrong_typed_document_is_refused() -> None:
+    """A present value of the wrong type raises instead of reading as empty."""
+    with pytest.raises(TypeError, match="expected an object"):
+        unmanifested("graph.json", [])
+    with pytest.raises(TypeError, match="expected an object"):
+        unmanifested("graph.json", {"health": []})
+    with pytest.raises(TypeError, match="expected an array"):
+        unmanifested("history.json", {"2026-W01": {"a": 1}})
 
 
 def test_manifest_classes_are_known() -> None:

@@ -3802,3 +3802,8 @@
 2026-11-01T16:32:53Z  status W1389 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T16:36:28Z  status W1390 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T16:38:13Z  tick  W1390 advanced  sweep     "W1389 landed 75430a4e (ruff 667 to 661); stack 795 (alarm, pacing, starved, flow, pins; ruff 661 to 655) gating; stack 796 (letters, overlaps, importer; 655 to 648) staged [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T17:03:18Z  tick  W1394 minted    -         "src/nemik/work.py and score.py annotate the Any their json and tomllib calls return, so mypy falls by four"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
+2026-11-01T17:03:28Z  status W1394 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T17:10:17Z  status W1393 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T17:17:21Z  tick  W1394 advanced  sweep     "stack 795 landed 83b05489 at 16:54:00Z; stack 796 gating since 16:54:54Z; stack 797 staged (W1394 mypy 1405 to 1401, then W1393 manifest raise and tests, real census 7 passed) [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T17:21:00Z  status W1390 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

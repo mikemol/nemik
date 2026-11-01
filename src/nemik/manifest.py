@@ -17,29 +17,46 @@ Manifest = dict[str, dict[str, dict[str, str]]]
 
 
 def _dict(value: object) -> dict[str, object]:
-    """Read a parsed JSON value as an object, or an empty one when it is anything else.
+    """Read a parsed JSON value as an object; a missing one (None) reads as empty.
 
     Returns:
         The object's entries, keyed by string.
 
+    Raises:
+        TypeError: when the value is present and is not an object, so a corrupt document is
+            refused instead of reading as no fields.
+
     """
-    return {str(k): v for k, v in value.items()} if isinstance(value, dict) else {}
+    if value is None:
+        return {}
+    if isinstance(value, dict):
+        return {str(k): v for k, v in value.items()}
+    msg = f"expected an object, got {type(value).__name__}"
+    raise TypeError(msg)
 
 
 def _list(value: object) -> list[object]:
-    """Read a parsed JSON value as an array, or an empty one when it is anything else.
+    """Read a parsed JSON value as an array; a missing one (None) reads as empty.
 
     Returns:
         The array's elements.
 
+    Raises:
+        TypeError: when the value is present and is not an array.
+
     """
+    if value is None:
+        return []
     if isinstance(value, list):
         items: list[object] = value
         return items
-    return []
+    msg = f"expected an array, got {type(value).__name__}"
+    raise TypeError(msg)
 
 
 def _fields(rows: object) -> set[str]:
+    if not isinstance(rows, list):
+        return set()
     return {k for r in _list(rows) for k in _dict(r)}
 
 
@@ -61,7 +78,7 @@ def unmanifested(name: str, doc: object, m: Manifest) -> list[str]:
         return [f"{name}: file is not in the manifest"]
     spec = m[key]
     bad: list[str] = []
-    top = _dict(doc)
+    top = _dict(doc) if key in {"graph.json", "wake.json", "history.json"} else {}
 
     def check(section: str, rows: object) -> None:
         bad.extend(
