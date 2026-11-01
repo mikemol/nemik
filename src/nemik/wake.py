@@ -22,9 +22,10 @@ from __future__ import annotations
 import argparse
 import json
 import operator
+import os
 import subprocess
 import sys
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import TYPE_CHECKING, TypedDict
 
@@ -32,8 +33,10 @@ from mikemol.hooks import rewake
 from rdflib import Graph
 from rdflib.namespace import DCTERMS
 
-from nemik.adapter import BASE, NEMIK
-from nemik.blocks import inbound, operator_asks
+from nemik.adapter import BASE, NEMIK, OSLC_CM
+from nemik.alarm import fires_between
+from nemik.blocks import inbound, operator_asks, with_salience
+from nemik.check import default_root, survey
 from nemik.luthenseries import load
 from nemik.pacecli import EXPORT_TREE
 
@@ -244,8 +247,6 @@ def fired_alarms(
         The fired alarms, oldest first; a bad alarm is an error row.
 
     """
-    from nemik.adapter import BASE, NEMIK, OSLC_CM
-    from nemik.alarm import fires_between
 
     def val(n: Node, p: Node) -> str:
         return str(g.value(n, p) or "")
@@ -322,8 +323,6 @@ def operator_row(g: Graph) -> WakeRow:
         ref, title and salience.
 
     """
-    from nemik.blocks import with_salience
-
     # nemik:W298: heaviest first, each with the demand waiting behind it.
     needs = [
         a for a in with_salience(g, operator_asks(g)) if a["category"] == "needs-you"
@@ -351,8 +350,6 @@ def nudges_path() -> Path:
         The path of nudges.json.
 
     """
-    import os
-
     state = os.environ.get("XDG_STATE_HOME") or os.path.expanduser("~/.local/state")
     return Path(state) / "nemik" / "nudges.json"
 
@@ -548,8 +545,6 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         g: a graph to read instead of surveying the root.
 
     """
-    from nemik.check import default_root, survey
-
     ap = argparse.ArgumentParser(
         prog="nemik-wake", description=(__doc__ or "").splitlines()[0]
     )
@@ -627,8 +622,6 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         return
     live, source = read_liveness(args.root, args.liveness)
     if args.alarms:
-        from datetime import timedelta
-
         until = datetime.fromisoformat(args.until) if args.until else datetime.now(UTC)
         since = (
             datetime.fromisoformat(args.since)
@@ -667,7 +660,6 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
             if a.get("message"):
                 print(f"      send: {a['message'].splitlines()[0]}")
         return
-    from datetime import timedelta
 
     end = datetime.now(UTC)
     rows = [
