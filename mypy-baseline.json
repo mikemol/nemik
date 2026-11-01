@@ -186,9 +186,6 @@
  "tests/test_rank_flow.py": {
   "misc": 6
  },
- "tests/test_read_api.py": {
-  "misc": 17
- },
  "tests/test_ruler_table.py": {
   "misc": 13
  },

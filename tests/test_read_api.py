@@ -7,9 +7,10 @@ import http.server
 import importlib.util
 import json
 import threading
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 from pathlib import Path
 from types import ModuleType
+from typing import Protocol, TypedDict
 
 import pytest
 
@@ -17,6 +18,30 @@ from nemik.serve import build_static
 
 ROOT = Path(__file__).resolve().parents[1]
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
+
+_Media = dict[str, dict[str, str]]
+_Content = dict[str, _Media]
+_Response = dict[str, _Content]
+_Responses = dict[str, _Response]
+_Get = dict[str, _Responses]
+_Op = dict[str, _Get]
+
+
+class _Api(TypedDict):
+    """The parts of the generated OpenAPI document this test reads."""
+
+    openapi: str
+    paths: dict[str, _Op]
+
+
+class _Client(Protocol):
+    """The example client's surface this test uses."""
+
+    docs: dict[str, dict[str, object]]
+
+    def refresh(self) -> list[str]:
+        """Fetch what moved."""
+        ...
 
 
 @pytest.fixture(scope="module")
@@ -65,17 +90,28 @@ def _client_module() -> (
     return module
 
 
+def _client_class() -> Callable[[str], _Client]:
+    """Load the example client's class.
+
+    Returns:
+        The class, called with the base URL.
+
+    """
+    cls: Callable[[str], _Client] = _client_module().Client
+    return cls
+
+
 def test_every_openapi_ref_is_a_published_schema(built: Path) -> None:
     """Every openapi ref is a published schema."""
-    api = json.loads((built / "openapi.json").read_text())
+    api: _Api = json.loads((built / "openapi.json").read_text())
     assert api["openapi"].startswith("3.1")
-    refs = [
+    found = [
         op["get"]["responses"]["200"]["content"]["application/json"]["schema"].get(
             "$ref"
         )
         for op in api["paths"].values()
     ]
-    refs = [r for r in refs if r]
+    refs = [r for r in found if r]
     assert refs
     for ref in refs:
         assert (built / ref).exists(), ref
@@ -83,7 +119,7 @@ def test_every_openapi_ref_is_a_published_schema(built: Path) -> None:
 
 def test_the_example_client_fetches_once_then_only_what_moved(served: str) -> None:
     """The example client fetches once then only what moved."""
-    client = _client_module().Client(served)
+    client = _client_class()(served)
     first = client.refresh()
     assert "graph.json" in first and "openapi.json" in first
     assert client.refresh() == []  # nothing moved, nothing fetched

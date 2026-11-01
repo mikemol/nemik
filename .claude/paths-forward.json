@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1369,
+  "counter": 1370,
   "waypoints": [
     {
       "symbol": "W1",
@@ -32832,21 +32832,43 @@
     {
       "symbol": "W1369",
       "title": "tests/test_satisfied_edges.py and tests/test_importer.py read their parsed JSON through TypedDicts, so mypy falls by thirty-one",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-01: G0 2026-11-01T11:36:19Z (date -u in the preceding call), BEFORE the first edit of the real files. Advances W1369 (W1178's class: the mypy paydown). Pace: nemik-rank nemik --pace read at 11:30:02Z, pace of 2026-11-01T11:25:26Z: mypy behind (fell 103 over 10 landings, owes 190), codon behind, ruff ok. Actuator: scratchpad/w1369_types.py: test_satisfied_edges.py gets _Edge, _Node and _Out TypedDicts and 'out: _Out = json.loads(m.payload)'; test_importer.py gets _Card (total=False) and _Queue TypedDicts and 'doc: _Queue = json.loads(...)'. K PROBE BEFORE THIS G0: two probe copies (deleted): mypy 'Success: no issues found' on both (baseline misc 17 + 14 = 31 to 0), ruff only the 12 S101 their filenames add, the originals 0 new. N=31, K=31, expected -31: mypy 1554 (stack 775's value, landed 11:34:43Z) to 1523, ruff flat at 764. | 2026-11-01: Landed 4b8dc494 (COMMITTED line printed it; git log -1 subject is W1369's) at 2026-11-01T11:47:14Z by TZ=UTC reflog (06:47:14 -0500). Submitted 11:38:06Z: 9 min 8 s wall in the gate. Measured mypy 1554 to 1523 (-31, equal to the K probe's), ruff flat 764.",
+      "issued_at": "2026-11-01T11:36:16Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1178",
+      "last_worked": "2026-11-01T11:48:31Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tests/test_satisfied_edges.py",
+        "tests/test_importer.py",
+        "mypy-baseline.json"
+      ],
+      "size_class": "small",
+      "completed": "20261101T114831Z"
+    },
+    {
+      "symbol": "W1370",
+      "title": "tests/test_read_api.py types the OpenAPI document and the example client it loads, so mypy falls by seventeen",
       "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-11-01: G0 2026-11-01T11:36:19Z (date -u in the preceding call), BEFORE the first edit of the real files. Advances W1369 (W1178's class: the mypy paydown). Pace: nemik-rank nemik --pace read at 11:30:02Z, pace of 2026-11-01T11:25:26Z: mypy behind (fell 103 over 10 landings, owes 190), codon behind, ruff ok. Actuator: scratchpad/w1369_types.py: test_satisfied_edges.py gets _Edge, _Node and _Out TypedDicts and 'out: _Out = json.loads(m.payload)'; test_importer.py gets _Card (total=False) and _Queue TypedDicts and 'doc: _Queue = json.loads(...)'. K PROBE BEFORE THIS G0: two probe copies (deleted): mypy 'Success: no issues found' on both (baseline misc 17 + 14 = 31 to 0), ruff only the 12 S101 their filenames add, the originals 0 new. N=31, K=31, expected -31: mypy 1554 (stack 775's value, landed 11:34:43Z) to 1523, ruff flat at 764.",
-      "issued_at": "2026-11-01T11:36:16Z",
+      "evidence": "2026-11-01: G0 2026-11-01T11:39:29Z (date -u in the preceding call), BEFORE the first edit of the real file. Advances W1370 (W1178's class: the mypy paydown), the staged successor of stack 776 (standing 13's new sentence: no turn ends with a stack in the gate and no staged successor). Pace: nemik-rank nemik --pace read at 11:30:02Z, pace of 2026-11-01T11:25:26Z: mypy behind (owes 190, fell 103), codon behind, ruff ok. Actuator: scratchpad/w1370_types.py: _Api TypedDict plus the nested dict aliases for the OpenAPI document (api annotated _Api), a _Client Protocol and _client_class() -> Callable[[str], _Client] that annotates the module's Client attribute, and the refs list built through a differently named variable. K PROBE BEFORE THIS G0: probe copy tests/probe_w1370_test_read_api.py (deleted): mypy 'Success: no issues found' (baseline misc 17 to 0), ruff only the 7 S101 its filename adds. N=17, K=17, expected -17: mypy 1523 (stack 776's value) to 1506, ruff flat at 764. Waits for stack 776 (mypy-baseline.json).",
+      "issued_at": "2026-11-01T11:39:22Z",
       "minted_during": "interrupt",
       "caused_by": "W1178",
-      "last_worked": "2026-11-01T11:37:58Z",
+      "last_worked": "2026-11-01T11:41:09Z",
       "ticks_blocked": 0,
       "manifest": [
-        "tests/test_satisfied_edges.py",
-        "tests/test_importer.py",
+        "tests/test_read_api.py",
         "mypy-baseline.json"
       ],
       "size_class": "small",
