@@ -406,7 +406,9 @@ def test_writing_is_opt_in_twice_and_a_calendar_is_read_only_by_default(
     assert got["plain"] == Calendar("Chores")  # read-only, nothing mirrored
     assert got["plain"].write is False
     assert got["plain"].mirror == ()
-    assert got["shared"] == Calendar("Family", (), True, ("life", "mtools"))
+    assert got["shared"] == Calendar(
+        "Family", (), write=True, mirror=("life", "mtools")
+    )
     for entry, why in (
         ('{ name = "F", write = true }', "needs `mirror"),
         ('{ name = "F", mirror = ["life"] }', "needs `write = true`"),

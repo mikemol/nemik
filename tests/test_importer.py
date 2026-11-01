@@ -16,10 +16,22 @@ WRITER = str(Path(sys.executable).parent / "mikemol-paths-forward")
 
 def _tasks() -> list[Task]:
     return [
-        Task(1, "x:W1", "design the thing", False),
-        Task(2, "x:W2", "build the thing", False, (Link("x:W1", False),)),
-        Task(3, "x:W3", "ship it", False, (Link("x:W2", False), Link("y:W9", True))),
-        Task(4, "x:W4", "an old step", True),
+        Task(1, "x:W1", "design the thing", done=False),
+        Task(
+            2,
+            "x:W2",
+            "build the thing",
+            done=False,
+            preds=(Link("x:W1", cross_repo=False),),
+        ),
+        Task(
+            3,
+            "x:W3",
+            "ship it",
+            done=False,
+            preds=(Link("x:W2", cross_repo=False), Link("y:W9", cross_repo=True)),
+        ),
+        Task(4, "x:W4", "an old step", done=True),
     ]
 
 

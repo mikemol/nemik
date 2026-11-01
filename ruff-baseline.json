@@ -138,7 +138,6 @@
   "T201": 1
  },
  "src/nemik/mspdi.py": {
-  "FBT003": 1,
   "PLC0415": 9,
   "S314": 1,
   "S405": 1
@@ -276,8 +275,7 @@
   "PLR2004": 1
  },
  "tests/test_apply_witness.py": {
-  "FBT001": 1,
-  "FBT003": 4
+  "FBT001": 1
  },
  "tests/test_architecture.py": {
   "S404": 1,
@@ -292,7 +290,6 @@
   "RUF069": 2
  },
  "tests/test_build_scope.py": {
-  "FBT003": 2,
   "PLC2701": 1,
   "PLR2004": 1,
   "PT018": 1
@@ -312,7 +309,6 @@
  "tests/test_calendars.py": {
   "ARG001": 4,
   "E501": 2,
-  "FBT003": 1,
   "PLC2701": 1,
   "PLR2004": 2,
   "PT018": 1,
@@ -426,7 +422,6 @@
   "SLF001": 1
  },
  "tests/test_importer.py": {
-  "FBT003": 7,
   "S404": 1,
   "S603": 2
  },
@@ -451,7 +446,6 @@
   "S603": 1
  },
  "tests/test_letters.py": {
-  "FBT003": 4,
   "PLC0415": 11,
   "PLR2004": 5,
   "SLF001": 1

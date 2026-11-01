@@ -3,11 +3,11 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1332 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:b7b6f8d929962995`
+counter 1333 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:0d0a0a4165ea8364`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1332 | working |
+| 1 | W1333 | working |
 | 2 | W1075 | ready |
 | 3 | W1139 | ready |
 | 4 | W1279 | ready |
@@ -1311,11 +1311,12 @@ counter 1332 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:b7b
 | 1302 | W1329 | done |
 | 1303 | W1330 | done |
 | 1304 | W1331 | done |
+| 1305 | W1332 | done |
 
 ## waypoints
 
-1. **W1332** (working) Eleven D401 docstrings, ten E741 loop names and fourteen N806 test names are rewritten, so ruff
-   falls toward 1023
+1. **W1333** (working) Nineteen boolean positional arguments in tests and mspdi.py are passed by keyword, so ruff falls
+   toward 1005
 2. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 3. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -4322,6 +4323,8 @@ counter 1332 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:b7b
    reviewer findings R69-F1 and R69-F2
 1304. **W1331** (done) Standing rule 14 cites nemik:R66 finding 5 (file retro-r68.json), restoring the writer's id that
    W1330 replaced
+1305. **W1332** (done) Eleven D401 docstrings, ten E741 loop names and fourteen N806 test names are rewritten, so ruff
+   falls toward 1023
 
 ## residue
 
@@ -4862,3 +4865,10 @@ counter 1332 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:b7b
   retro files to writer ids stays unverified by independence (R75): the only record is W1331's table, written from the
   --add-retro answers. R75 findings stay as its own open findings on W1320 (due 2026-11-02) and W1331 (due 2026-11-01);
   the earlier R70 to R73 findings stay open as listed in R74.; 0 finding(s)
+- **nemik:R75** (-) round 77: tick-w1333, W1332 (35 sites D401/E741/N806 in ten test files), stack 743 submitted
+  23:37:15.7Z; previous landing 9a421a5c 23:30:43Z (reflog); W1331 conditions checked: root W1331's conditions hold on
+  source: reflog main@{19:30:43 -0400} = 23:30:43Z for 9a421a5c, `git grep -c 'nemik:R66 finding 5, file retro-r68.json,
+  W1219' HEAD -- .claude/paths-forward.json` prints 2, gate wall for 742 23:22:48.2Z to 23:30:43Z = 7 min 55 s. W1332
+  itself is well measured (pace read at 23:31:37Z before the G0, K=35 with the one unverified site dropped, ruff 1059 to
+  1024 exactly -35 with per-file diff). One order slip of the kind R33-F1 already described remains, so no fixpoint is
+  declared this round.; 1 finding(s)

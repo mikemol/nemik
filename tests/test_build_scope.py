@@ -36,8 +36,8 @@ def test_the_scoped_build_publishes_exactly_what_the_unscoped_one_does(
 ) -> None:
     """The scoped build publishes exactly what the unscoped one does."""
     unscoped, scoped = tmp_path / "unscoped", tmp_path / "scoped"
-    _build_static(FLEET, unscoped, None, True)
-    build_static(FLEET, scoped, None, True)
+    _build_static(FLEET, unscoped, None, private=True)
+    build_static(FLEET, scoped, None, private=True)
     a, b = _tree(unscoped), _tree(scoped)
     assert a.keys() == b.keys()
     different = [name for name in a if a[name] != b[name] and name != "metrics"]

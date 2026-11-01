@@ -44,7 +44,7 @@ def test_a_fresh_applied_row_is_a_true_fact(
 ) -> None:
     """A fresh applied row is a true fact."""
     monkeypatch.setenv("NEMIK_ROOT", str(tmp_path))
-    _export(tmp_path, _now(), True)
+    _export(tmp_path, _now(), applied=True)
     doc, missing = facts(QUERY)
     assert missing == []
     assert fact_of(doc, "apply", "home-mount")["applied"] is True
@@ -55,7 +55,7 @@ def test_an_unapplied_row_is_false_not_undefined(
 ) -> None:
     """An unapplied row is false not undefined."""
     monkeypatch.setenv("NEMIK_ROOT", str(tmp_path))
-    _export(tmp_path, _now(), False)
+    _export(tmp_path, _now(), applied=False)
     doc, missing = facts(QUERY)
     assert missing == []
     assert fact_of(doc, "apply", "home-mount")["applied"] is False
@@ -66,7 +66,7 @@ def test_a_stale_export_is_never_applied(
 ) -> None:
     """A stale export is never applied."""
     monkeypatch.setenv("NEMIK_ROOT", str(tmp_path))
-    _export(tmp_path, "2026-01-01T00:00:00Z", True)
+    _export(tmp_path, "2026-01-01T00:00:00Z", applied=True)
     doc, _ = facts(QUERY)
     assert fact_of(doc, "apply", "home-mount")["applied"] is False
     assert fact_of(doc, "apply", "home-mount")["stale"] is True
@@ -77,7 +77,7 @@ def test_a_row_the_export_does_not_hold_is_undefined(
 ) -> None:
     """A row the export does not hold is undefined."""
     monkeypatch.setenv("NEMIK_ROOT", str(tmp_path))
-    _export(tmp_path, _now(), True)
+    _export(tmp_path, _now(), applied=True)
     _, missing = facts('input.apply["no-such-row"].applied == true')
     assert missing == ['apply["no-such-row"]']
 

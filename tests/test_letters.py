@@ -191,10 +191,12 @@ def test_a_misdelivered_letter_is_copied_to_its_recipient_and_then_counts_as_del
     from nemik.letters import report
 
     spaces = {"gcalculus", "linux-sources"}
-    said, code = report(tmp_path, spaces, True, "linux-sources")
+    said, code = report(tmp_path, spaces, fold=True, repo="linux-sources")
     assert code == 5
     assert any(line.startswith("cp ") for line in said)
-    said, code = report(tmp_path, spaces, True, "linux-sources", None, True)
+    said, code = report(
+        tmp_path, spaces, fold=True, repo="linux-sources", older_than=None, apply=True
+    )
     assert any(line.startswith("delivered ") for line in said)
     assert code == 0  # the apply run's own verdict is the after state
     copy = tmp_path / "linux-sources" / "inbox" / "2026-08-21-misfiled.md"
@@ -202,7 +204,7 @@ def test_a_misdelivered_letter_is_copied_to_its_recipient_and_then_counts_as_del
     # the recipient reads it and files it under archive/: still delivered, not misdelivered again
     (copy.parent / "archive").mkdir()
     copy.rename(copy.parent / "archive" / copy.name)
-    assert report(tmp_path, spaces, True, "linux-sources")[1] == 0
+    assert report(tmp_path, spaces, fold=True, repo="linux-sources")[1] == 0
 
 
 def test_a_peer_waypoint_citing_the_letter_path_owns_it(tmp_path: Path) -> None:

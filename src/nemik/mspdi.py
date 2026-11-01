@@ -159,7 +159,7 @@ def read(text: str) -> list[Task]:
         for pl in r.findall("p:PredecessorLink", q):
             if pl.findtext("p:CrossProject", "0", q) == "1":
                 other = pl.findtext("p:CrossProjectName", "", q).partition("\\")[2]
-                links.append(Link(other, True))
+                links.append(Link(other, cross_repo=True))
             else:
                 other = cite_of[pl.findtext("p:PredecessorUID", "", q)]
                 links.append(
