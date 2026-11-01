@@ -57,7 +57,6 @@
  },
  "src/nemik/check.py": {
   "C901": 1,
-  "DOC402": 1,
   "PLC0415": 15,
   "PLR0912": 1,
   "PLR0914": 1,
@@ -586,7 +585,6 @@
  },
  "tests/test_vtodo.py": {
   "PLC0415": 10,
-  "PLC1901": 1,
   "PLR2004": 4
  },
  "tests/test_wake_alarms.py": {
@@ -614,7 +612,6 @@
   "S607": 2
  },
  "tests/test_witwait.py": {
-  "DOC402": 1,
   "PLR2004": 5,
   "PLR6301": 1
  },
@@ -622,7 +619,6 @@
   "PLR2004": 1
  },
  "tests/webpage.py": {
-  "DOC402": 1,
   "S404": 1,
   "S603": 1,
   "SLF001": 1

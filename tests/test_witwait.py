@@ -124,7 +124,12 @@ def test_a_bad_duration_on_the_command_line_is_exit_two(
 
 @contextmanager
 def _victoria(series: list[list[str]]) -> Generator[str]:
-    """Serve a local /api/v1/query that answers each request with the next sample list."""
+    """Serve a local /api/v1/query that answers each request with the next sample list.
+
+    Yields:
+        The server's base URL.
+
+    """
     answers = list(series)
 
     class Handler(BaseHTTPRequestHandler):

@@ -3661,3 +3661,7 @@
 2026-11-01T07:41:28Z  tick  W1350 minted    -         "Five single-site test findings clear by direct rewrites (Path.readlink twice, not note, a raw match pattern, a comment ERA001 read as code), so ruff falls 898 to 893"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1288
 2026-11-01T07:41:40Z  status W1350 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-01T07:43:55Z  status W1349 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T07:44:10Z  tick  W1349 advanced  sweep     "W1349 landed c86f06c5 (ruff 904 to 898, mypy flat); stack 759 for W1350 submitted 07:44:05Z; rank.py E501 pair and hooks/record_event.py reverted with reasons [blocked by W1350]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T07:47:37Z  interrupt W1351 minted    -         "Four single-site findings clear: three Yields sections for generator docstrings (DOC402) and one empty-string comparison (PLC1901), so ruff falls 893 to 889"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1288
+2026-11-01T07:48:11Z  status W1351 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-01T07:55:46Z  status W1350 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

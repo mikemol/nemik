@@ -181,6 +181,9 @@ def served(series: Path | None = None, root: Path = FLEET) -> Generator[str]:
     could take it, and the connect loop that used to follow would have succeeded against that
     process's server.
 
+    Yields:
+        The server's base URL.
+
     Raises:
         RuntimeError: The server did not say it listens; its stderr is in the message.
         PageBrokenError: A page broke inside the block; the message adds whether the server still

@@ -137,7 +137,7 @@ def test_dtstart_and_due_pass_through_as_rfc5545_properties() -> None:
         time_property("DTSTART", "TZID=America/Detroit:20261001T163000")
         == "DTSTART;TZID=America/Detroit:20261001T163000"
     )
-    assert time_property("DUE", "") == ""
+    assert not time_property("DUE", "")
     ask: AskRow = {**ASKS[0], "due": "TZID=America/Detroit:20261001T163000"}
     (todo,) = vtodos([ask], {"life"})
     assert "DUE;TZID=America/Detroit:20261001T163000" in todo

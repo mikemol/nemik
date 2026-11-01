@@ -652,6 +652,10 @@ def survey(
     nemik:W783: `gate` is "mark" to ask mikemol-commit which cards a commit stack names (a spawn,
     for the CLIs that run beside the committer) and anything else to skip it: nemik-serve never
     starts a process, so it passes "".
+
+    Yields:
+        One (repo, graph, findings) row per queue.
+
     """
     mark = [time.process_time()]
 
