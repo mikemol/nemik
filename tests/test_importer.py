@@ -9,6 +9,8 @@ import sys
 from pathlib import Path
 from typing import TypedDict
 
+import pytest
+
 from nemik.importer import commands
 from nemik.projection import Link, Task
 
@@ -93,3 +95,16 @@ def test_a_reimport_prints_nothing_already_imported(tmp_path: Path) -> None:
     _run(commands(_tasks(), "mspdi", "plan.xml", state, WRITER))
     again = commands(_tasks(), "mspdi", "plan.xml", state, WRITER)
     assert again == []
+
+
+def test_a_corrupt_queue_is_refused_not_read_as_no_cards(tmp_path: Path) -> None:
+    """A queue that is not an object, or whose waypoints is not an array, raises TypeError."""
+    state = tmp_path / "q.json"
+    state.write_text("[]", encoding="utf-8")
+    with pytest.raises(TypeError, match="queue object"):
+        commands(_tasks(), "mspdi", "plan.xml", state, WRITER)
+    state.write_text('{"waypoints": {}}', encoding="utf-8")
+    with pytest.raises(TypeError, match="not an array"):
+        commands(_tasks(), "mspdi", "plan.xml", state, WRITER)
+    state.write_text("null", encoding="utf-8")
+    assert commands(_tasks(), "mspdi", "plan.xml", state, WRITER)

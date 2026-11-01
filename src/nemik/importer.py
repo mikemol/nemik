@@ -26,6 +26,7 @@ from typing import TYPE_CHECKING
 
 from nemik.issues import read as read_issues
 from nemik.mspdi import read
+from nemik.tomlview import table, tables
 
 if TYPE_CHECKING:
     from nemik.projection import Task
@@ -48,13 +49,26 @@ def commands(
         The writer's --add argv lists for tasks not yet in the queue, then the
         --update lists that mark them done or blocked.
 
+    Raises:
+        TypeError: when the queue file holds a value that is not an object, or its
+            waypoints is present and not an array: the importer decides which cards
+            already exist, so a corrupt queue must not read as no cards.
+
     """
-    queue = json.loads(state.read_text(encoding="utf-8"))
-    cards = queue.get("waypoints", [])
+    raw: object = json.loads(state.read_text(encoding="utf-8"))
+    if raw is not None and not isinstance(raw, dict):
+        msg = f"{state}: expected a queue object, got {type(raw).__name__}"
+        raise TypeError(msg)
+    queue = table(raw)
+    waypoints = queue.get("waypoints")
+    if waypoints is not None and not isinstance(waypoints, list):
+        msg = f"{state}: waypoints is {type(waypoints).__name__}, not an array"
+        raise TypeError(msg)
+    cards = tables(waypoints)
     existing = {
-        str(c.get("caused_by")): c["symbol"] for c in cards if c.get("caused_by")
+        str(c.get("caused_by")): str(c["symbol"]) for c in cards if c.get("caused_by")
     }
-    counter = int(queue.get("counter", 0))
+    counter = int(str(queue.get("counter", 0)))
     sid = {t.cite: f"{fmt}:{source}#{t.uid}" for t in tasks}
     symbol: dict[str, str] = {}
     base = [writer, "--state", str(state)]
