@@ -39,7 +39,7 @@ def test_landed_blockers_are_done_or_dropped_and_the_rest_are_open(
     tmp_path: Path,
 ) -> None:
     """Landed blockers are done or dropped and the rest are open."""
-    # nemik:W443
+    # see nemik:W443
     state = _queue(tmp_path)
     assert blockers(state, "W3") == ([], ["W1", "W9"])
     assert blockers(state, "W4") == (["W2", "other:W7"], [])

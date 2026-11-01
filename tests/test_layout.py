@@ -533,7 +533,7 @@ def test_the_default_view_is_legible(server: str, scheme: Scheme) -> None:
     assert m["in_view"] > 0
     assert m["label_px"] >= 8, m
     assert m["min_target_px"] >= 12, m
-    assert note == "" or "readable size" in note
+    assert not note or "readable size" in note
     assert controls_in_status == 0
 
 

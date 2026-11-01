@@ -22,7 +22,7 @@ def test_a_publish_flips_current_and_writes_the_private_files(tmp_path: Path) ->
     assert snap is not None
     current = tmp_path / "pub" / "current"
     assert current.is_symlink()
-    assert (tmp_path / "pub" / os.readlink(current)) == snap
+    assert (tmp_path / "pub" / current.readlink()) == snap
     for name in (
         "index.html",
         "hashes.json",
@@ -71,7 +71,7 @@ def test_a_changed_fleet_is_published_and_only_the_last_snapshots_stay(
     assert snap is not None
     kept = sorted(p.name for p in base.glob("snap-*"))
     assert kept == ["snap-20200103T000000Z-1", snap.name]
-    assert os.readlink(base / "current") == snap.name
+    assert (base / "current").readlink() == Path(snap.name)
 
 
 def test_the_publish_command_runs_in_its_own_process(tmp_path: Path) -> None:

@@ -46,7 +46,7 @@ def test_packaged_guarantees_load_and_refuse_an_unknown_floor() -> None:
     assert guar.floor in B.order
     assert [p.name for p in guar.policies] == ["trust-boundary"]
     text = 'order = ["a"]\nunscored = "a"\nunmatched = "a"\n[guarantee]\nfloor = "z"\n'
-    with pytest.raises(ValueError, match="guarantee.floor"):
+    with pytest.raises(ValueError, match=r"guarantee\.floor"):
         load_guarantees(text)
 
 

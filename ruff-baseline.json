@@ -377,8 +377,7 @@
  "tests/test_guarantees.py": {
   "PLR0913": 1,
   "PLR0917": 1,
-  "PLR2004": 1,
-  "RUF043": 1
+  "PLR2004": 1
  },
  "tests/test_health.py": {
   "PLR2004": 3,
@@ -427,7 +426,6 @@
  "tests/test_layout.py": {
   "ARG001": 1,
   "PLC0415": 9,
-  "PLC1901": 1,
   "PLR2004": 13,
   "PT018": 19,
   "S310": 1,
@@ -500,7 +498,6 @@
   "S603": 1
  },
  "tests/test_publish.py": {
-  "PTH115": 2,
   "S404": 1,
   "S603": 2,
   "SLF001": 2
@@ -622,7 +619,6 @@
   "PLR6301": 1
  },
  "tests/test_work.py": {
-  "ERA001": 1,
   "PLR2004": 1
  },
  "tests/webpage.py": {
