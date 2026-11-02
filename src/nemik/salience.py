@@ -24,7 +24,15 @@ from rdflib.namespace import PROV
 
 from nemik.adapter import NEMIK, OSLC_CM
 from nemik.flow import Flow, solve
-from nemik.rank import _open, _repo, downstream_weight, ref_of, successors
+from nemik.rank import (
+    Weights,
+    _open,
+    _repo,
+    downstream_weight,
+    load_weights,
+    ref_of,
+    successors,
+)
 from nemik.tomlview import table
 
 if TYPE_CHECKING:
@@ -32,8 +40,6 @@ if TYPE_CHECKING:
 
     from rdflib import Graph
     from rdflib.term import Node
-
-    from nemik.rank import Weights
 
 DECIMALS = 4
 
@@ -193,8 +199,6 @@ def audit(
         the rows (ready cards of `repo`, in symbol order), the flow solve and the source count.
 
     """
-    from nemik.rank import load_weights
-
     weights = weights or load_weights()
     # W403: residue and gate weights are per-call inputs, not part of the key, so those audits
     # bypass it.
@@ -462,8 +466,6 @@ def salience_of(
         the salience of every workable card of `repo` that absorbs any demand.
 
     """
-    from nemik.rank import Weights
-
     return audit(
         g,
         repo,
@@ -495,8 +497,6 @@ def edge_currents(
         prerequisite).
 
     """
-    from nemik.rank import Weights
-
     flow = audit(
         g, repo, Weights(local, peer, peer_blocked, operator), workable=workable
     ).flow

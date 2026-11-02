@@ -125,7 +125,6 @@
  },
  "src/nemik/salience.py": {
   "C901": 1,
-  "PLC0415": 3,
   "PLR0912": 1,
   "PLR0913": 3,
   "PLR0914": 1,

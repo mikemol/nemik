@@ -3956,3 +3956,7 @@
 2026-11-02T05:32:17Z  status W1438 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T05:33:09Z  interrupt W1439 minted    -         "tools/check_run_rows.py declares its parsed options and reads the schema and each row as object, so mypy falls by about eight"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
 2026-11-02T05:34:33Z  status W1439 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T05:38:29Z  tick  W1439 advanced  sweep     "stack 829 (W1439 check_run_rows via Options and tomlview, mypy 1111 to 1103) gating after a 5 min empty gate; stack 828 landed 57a84704; W1438 (PT018, ruff -23) reverted: mypy +16, blocked on W1282 [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T05:41:31Z  status W1439 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T06:01:03Z  interrupt W1440 minted    -         "salience.py imports Weights and load_weights from nemik.rank once at module scope, so ruff falls by three"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
+2026-11-02T06:03:46Z  status W1440 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
