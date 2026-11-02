@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1482,
+  "counter": 1483,
   "waypoints": [
     {
       "symbol": "W1",
@@ -35446,21 +35446,21 @@
     {
       "symbol": "W1481",
       "title": "src/nemik/serve.py types its graph nodes and edges as NodeRow and EdgeRow TypedDicts, so mypy falls by about 140 in serve.py (W1282 step 2, first slice)",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:mypy-baseline.json"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Apply the codemod, fix the ruler_table test, hookcheck, tests, the ratchet read and write, then the stack json, submit at once: the gate is empty.",
-      "evidence": "2026-11-02: 2026-11-02T18:02:37Z (read by stampnote): G0 BEFORE the first edit of the real src/nemik/serve.py. The gate has been EMPTY since 2026-11-02T17:31:29Z (869 landed); this is the W1282 step 2 first slice. Pace stamp 2026-11-02T17:54:45Z: mypy 869 left; ruff owes 90, 340. Two probes on scratch copies (probe_w1482_serve.py, deleted by exact path both times), read through the house mypy and the ratchet. Probe 1, only the three Any annotations changed to object: NEGATIVE, 17 new-code errors (index, call-overload, attr-defined, arg-type, type-var) because every node read became object; recorded on W1282. Probe 2, NodeRow (functional TypedDict, 31 keys, total=False, because the key for is a keyword) and EdgeRow (5 keys) with nodes, edges and lane_edge typed, the item.update(marks) merge replaced by three literal-key assignments (behind_open, needs_manifest, and warnings copied through an isinstance check), and ruler_table's edges parameter typed EdgeRow: NO new code in serve.py; counts serve.py baseline 262 (misc 248, type-arg 8, explicit-any 5, operator 1) to probe 121 (misc 112, type-arg 7, explicit-any 2); K=141. Ruff on the probe equals serve.py's baseline except one E501 from my own comment, fixed by shortening it before this G0. Cascade, unmeasured: tests/test_ruler_table.py passes a list of dict literals to ruler_table and will need EdgeRow rows. serve.py is hook-imported: hookcheck runs after. Behaviour: none intended; the warnings value is copied with str keys and values where it was the same list object, equal on every read. Differential: nemik-serve's published documents are the witness, so the stack runs test_static, test_staticserve, test_serve_*, test_published_valid (it builds the static site over the fleet fixture) directly.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-02: 2026-11-02T18:02:37Z (read by stampnote): G0 BEFORE the first edit of the real src/nemik/serve.py. The gate has been EMPTY since 2026-11-02T17:31:29Z (869 landed); this is the W1282 step 2 first slice. Pace stamp 2026-11-02T17:54:45Z: mypy 869 left; ruff owes 90, 340. Two probes on scratch copies (probe_w1482_serve.py, deleted by exact path both times), read through the house mypy and the ratchet. Probe 1, only the three Any annotations changed to object: NEGATIVE, 17 new-code errors (index, call-overload, attr-defined, arg-type, type-var) because every node read became object; recorded on W1282. Probe 2, NodeRow (functional TypedDict, 31 keys, total=False, because the key for is a keyword) and EdgeRow (5 keys) with nodes, edges and lane_edge typed, the item.update(marks) merge replaced by three literal-key assignments (behind_open, needs_manifest, and warnings copied through an isinstance check), and ruler_table's edges parameter typed EdgeRow: NO new code in serve.py; counts serve.py baseline 262 (misc 248, type-arg 8, explicit-any 5, operator 1) to probe 121 (misc 112, type-arg 7, explicit-any 2); K=141. Ruff on the probe equals serve.py's baseline except one E501 from my own comment, fixed by shortening it before this G0. Cascade, unmeasured: tests/test_ruler_table.py passes a list of dict literals to ruler_table and will need EdgeRow rows. serve.py is hook-imported: hookcheck runs after. Behaviour: none intended; the warnings value is copied with str keys and values where it was the same list object, equal on every read. Differential: nemik-serve's published documents are the witness, so the stack runs test_static, test_staticserve, test_serve_*, test_published_valid (it builds the static site over the fleet fixture) directly. | 2026-11-02: Landed 2b7e10b4 in stack 870 at 2026-11-02T18:28:43Z (reflog), after W1482 (172932b6) in the same stack; mypy 869 to 728 as K=141 predicted, ruff 340 to 339.",
       "issued_at": "2026-11-02T18:02:25Z",
       "minted_during": "interrupt",
       "caused_by": "W1282",
-      "last_worked": "2026-11-02T18:02:37Z",
+      "last_worked": "2026-11-02T18:29:37Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261102T182937Z",
       "manifest": [
         "src/nemik/serve.py",
         "tests/test_ruler_table.py",
@@ -35470,6 +35470,29 @@
     {
       "symbol": "W1482",
       "title": "tools/nemik_client.py writes the paths it fetches to stdout instead of printing them, so ruff falls by one",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "file:ruff-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-02: 2026-11-02T18:09:48Z (read by stampnote): G0 BEFORE the edit of tools/nemik_client.py. The submit of stack 870 (W1481, mypy 869 to 728) was REFUSED at submit at 2026-11-02T18:08:06Z with: nemik is behind its ratchet paydown and the stack lowers none of the ratchets it owes (codon-baseline.json required fall 2, observed 0; ruff-baseline.json required fall 90, observed 27). Cause: the pace gate no longer counts mypy as owed, because mypy 869 (the tree's baseline after stack 869) is ahead of its required fall, so a mypy-only stack lowers nothing it owes. The first entry of a stack must lower ruff or codon. This card is that entry: tools/nemik_client.py line 83 prints each fetched path (ruff T201, K=1); the edit replaces print(path) with sys.stdout.write(f'{path}\\n') and adds import sys, in one codemod because the edit gate refuses an import split from its use. The client is the standard-library-only example another app copies, so it keeps no nemik import. Expected: ruff 340 to 339, mypy flat at 728 on top of W1481 (the client's own mypy findings are unchanged). Stack: this entry first, W1481 second, one stack, one gate run. Behaviour: the output text is the same line with the same newline. Covering check: test_read_api runs the client directly. | 2026-11-02: Landed 172932b6 in stack 870 at 2026-11-02T18:28:43Z (reflog), first entry; ruff 340 to 339.",
+      "issued_at": "2026-11-02T18:09:21Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1383",
+      "last_worked": "2026-11-02T18:29:38Z",
+      "ticks_blocked": 0,
+      "completed": "20261102T182938Z",
+      "manifest": [
+        "tools/nemik_client.py",
+        "ruff-baseline.json"
+      ]
+    },
+    {
+      "symbol": "W1483",
+      "title": "tests (mpxj, rank_apply, parse_cache, witness_promql, witnesses, score) clear their unused arguments, absolute paths and uppercase parameter names, so ruff falls by about fifteen",
       "status": "working",
       "enables": [],
       "touches": [
@@ -35477,16 +35500,21 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Apply the codemod, measure the ratchet, rebuild the stack json with this entry first and W1481 second, submit.",
-      "evidence": "2026-11-02: 2026-11-02T18:09:48Z (read by stampnote): G0 BEFORE the edit of tools/nemik_client.py. The submit of stack 870 (W1481, mypy 869 to 728) was REFUSED at submit at 2026-11-02T18:08:06Z with: nemik is behind its ratchet paydown and the stack lowers none of the ratchets it owes (codon-baseline.json required fall 2, observed 0; ruff-baseline.json required fall 90, observed 27). Cause: the pace gate no longer counts mypy as owed, because mypy 869 (the tree's baseline after stack 869) is ahead of its required fall, so a mypy-only stack lowers nothing it owes. The first entry of a stack must lower ruff or codon. This card is that entry: tools/nemik_client.py line 83 prints each fetched path (ruff T201, K=1); the edit replaces print(path) with sys.stdout.write(f'{path}\\n') and adds import sys, in one codemod because the edit gate refuses an import split from its use. The client is the standard-library-only example another app copies, so it keeps no nemik import. Expected: ruff 340 to 339, mypy flat at 728 on top of W1481 (the client's own mypy findings are unchanged). Stack: this entry first, W1481 second, one stack, one gate run. Behaviour: the output text is the same line with the same newline. Covering check: test_read_api runs the client directly.",
-      "issued_at": "2026-11-02T18:09:21Z",
+      "next_bounded_step": "Apply the codemod, run the six tests, the ratchet write, then the stack json (this entry alone lowers ruff), submit.",
+      "evidence": "2026-11-02: 2026-11-02T18:32:37Z (read by stampnote): G0 BEFORE the first edit of the six test files. Fresh pace read first, stamp 2026-11-02T18:24:46Z (PENDING for the 18:28:43Z landing of stack 870): mypy is ok at 728 left, 22 landings to zero; ruff owes 90 (339 left, fell 28, 122 to zero); codon owes 2. The gate has been EMPTY since 2026-11-02T18:28:43Z (870 landed as 172932b6 and 2b7e10b4, reflog), 2 min 38 s at the read of 18:31:21Z. A stack must lower ruff or codon now (a mypy-only stack is refused at submit, learned at 18:08:06Z). Ruff by rule (python3 -m ruff --statistics): the cheap vein is the single-rule test hygiene sites, read from the ruff output: test_score.py 18 six uppercase parameter names R E C I A S (N803) and the same I as E741, K=7, fixed by lowercase parameters and the vec() call sites renamed (V.format keeps its template names); test_mpxj.py 59 and 61 os.path.abspath (PTH100, K=2) to Path(x).absolute(), which keeps a symlink unresolved as abspath did; test_rank_apply.py 23 and 42 an unused check argument of a fake subprocess.run (ARG001, ARG005, K=2) to a **_kwargs catch-all; test_parse_cache.py 26 an unused known (ARG001, K=1) to _known; test_witness_promql.py 46 unused env and path (K=2) to _env and _path; test_witnesses.py 190 an unused lambda argument (K=1) to _q. K=15. The fakes are called by position for those arguments except the rank_apply one (keyword check=), so the tests are the witness for the renames and run directly. Companions: F401 if os is no longer used in test_mpxj (checked by the ratchet); follow-ons none expected. Expected: ruff 339 to 324, mypy flat at 728. Behaviour: none in src; tests only. Not hook-imported.",
+      "issued_at": "2026-11-02T18:32:19Z",
       "minted_during": "interrupt",
       "caused_by": "W1383",
-      "last_worked": "2026-11-02T18:09:48Z",
+      "last_worked": "2026-11-02T18:32:37Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
-        "tools/nemik_client.py",
+        "tests/test_mpxj.py",
+        "tests/test_rank_apply.py",
+        "tests/test_parse_cache.py",
+        "tests/test_witness_promql.py",
+        "tests/test_witnesses.py",
+        "tests/test_score.py",
         "ruff-baseline.json"
       ]
     }

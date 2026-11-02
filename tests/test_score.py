@@ -15,7 +15,7 @@ V = "WV:1/R:{R}/E:{E}/C:{C}/I:{I}/A:{A}/X:N/S:{S}/F:K/W:N"
 
 
 def vec(
-    R: str = "L", E: str = "N", C: str = "N", I: str = "N", A: str = "N", S: str = "U"
+    r: str = "L", e: str = "N", c: str = "N", i: str = "N", a: str = "N", s: str = "U"
 ) -> str:
     """Build a WV:1 vector string from the given metric values.
 
@@ -23,7 +23,7 @@ def vec(
         The vector.
 
     """
-    return V.format(R=R, E=E, C=C, I=I, A=A, S=S)
+    return V.format(R=r, E=e, C=c, I=i, A=a, S=s)
 
 
 def test_a_card_tagged_velocity_is_in_the_band_above_critical() -> None:
@@ -47,22 +47,22 @@ def test_the_floor_names_critical_so_a_ready_velocity_card_is_not_skipped() -> N
     [
         # luthen's W137 calibration: crossing a boundary from the host is critical only with some
         # impact; with every impact N it is a boundary crossing and lands in high.
-        (vec(R="H", S="C", I="L"), "critical"),
-        (vec(R="H", S="C", C="L"), "critical"),
-        (vec(R="H", S="C", A="L"), "critical"),
-        (vec(R="H", S="C"), "high"),
-        (vec(E="Y", C="H"), "critical"),
+        (vec(r="H", s="C", i="L"), "critical"),
+        (vec(r="H", s="C", c="L"), "critical"),
+        (vec(r="H", s="C", a="L"), "critical"),
+        (vec(r="H", s="C"), "high"),
+        (vec(e="Y", c="H"), "critical"),
         # Cluster reach floods high unless something is at stake; host reach with availability at
         # risk is high, and bare host or cluster reach is elevated.
-        (vec(R="C", I="L"), "high"),
-        (vec(R="C", A="L"), "high"),
-        (vec(R="C"), "elevated"),
-        (vec(R="H", A="H"), "high"),
-        (vec(R="H"), "elevated"),
-        (vec(S="C"), "high"),
-        (vec(R="T"), "elevated"),
+        (vec(r="C", i="L"), "high"),
+        (vec(r="C", a="L"), "high"),
+        (vec(r="C"), "elevated"),
+        (vec(r="H", a="H"), "high"),
+        (vec(r="H"), "elevated"),
+        (vec(s="C"), "high"),
+        (vec(r="T"), "elevated"),
         (vec(), "low"),
-        (vec(C="L"), "normal"),  # local, some impact: no rule -> unmatched
+        (vec(c="L"), "normal"),  # local, some impact: no rule -> unmatched
     ],
 )
 def test_band_table(v: str, want: str) -> None:
@@ -97,7 +97,7 @@ def test_adapter_carries_the_vector_as_written(tmp_path: Path) -> None:
                 "symbol": "W1",
                 "title": "t",
                 "status": "ready",
-                "vector": vec(R="H", S="C"),
+                "vector": vec(r="H", s="C"),
                 "vector_source": "agent",
             }
         ],
@@ -105,5 +105,5 @@ def test_adapter_carries_the_vector_as_written(tmp_path: Path) -> None:
     q.write_text(json.dumps(payload))
     g = queue_graph("r", q)
     n = waypoint_uri("r", "W1")
-    assert str(g.value(n, NEMIK.vector)) == vec(R="H", S="C")
+    assert str(g.value(n, NEMIK.vector)) == vec(r="H", s="C")
     assert str(g.value(n, NEMIK.vectorSource)) == "agent"

@@ -23,7 +23,7 @@ THREE_PARSES = 3
 def _counting(monkeypatch: pytest.MonkeyPatch) -> dict[str, int]:
     calls = {"n": 0}
 
-    def build(repo: str, path: Path, known: frozenset[str]) -> Graph:
+    def build(repo: str, path: Path, _known: frozenset[str]) -> Graph:
         calls["n"] += 1
         g = Graph()
         g.add(

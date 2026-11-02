@@ -187,7 +187,7 @@ def test_alert_and_promql_witnesses(monkeypatch: pytest.MonkeyPatch) -> None:
     _serve(
         monkeypatch,
         {
-            "/api/v1/alerts": lambda q: {
+            "/api/v1/alerts": lambda _q: {
                 "status": "success",
                 "data": {"alerts": alerts},
             },

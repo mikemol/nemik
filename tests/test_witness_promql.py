@@ -43,7 +43,7 @@ def _answer(
     """
     asked: list[dict[str, str]] = []
 
-    def get(env: str, path: str, params: dict[str, str]) -> dict[str, Any] | None:
+    def get(_env: str, _path: str, params: dict[str, str]) -> dict[str, Any] | None:
         asked.append(params)
         if result is None:
             return None

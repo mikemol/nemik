@@ -4110,3 +4110,7 @@
 2026-11-02T18:02:35Z  status W1481 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T18:09:21Z  interrupt W1482 minted    -         "tools/nemik_client.py writes the paths it fetches to stdout instead of printing them, so ruff falls by one"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
 2026-11-02T18:09:46Z  status W1482 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T18:29:37Z  status W1481 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T18:29:38Z  status W1482 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T18:32:19Z  interrupt W1483 minted    -         "tests (mpxj, rank_apply, parse_cache, witness_promql, witnesses, score) clear their unused arguments, absolute paths and uppercase parameter names, so ruff falls by about fifteen"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
+2026-11-02T18:32:35Z  status W1483 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

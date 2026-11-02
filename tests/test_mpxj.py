@@ -56,9 +56,9 @@ def test_mpxj_reads_every_in_file_link(tmp_path: Path) -> None:
     doc.write_text(write(tasks))
     out = subprocess.run(
         [
-            os.path.abspath(java),
+            str(Path(java).absolute()),
             "-cp",
-            ":".join(os.path.abspath(p) for p in classpath.split()),
+            ":".join(str(Path(p).absolute()) for p in classpath.split()),
             "org.mpxj.sample.MpxjQuery",
             str(doc),
         ],

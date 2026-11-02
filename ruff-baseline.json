@@ -291,16 +291,12 @@
   "S603": 1
  },
  "tests/test_mpxj.py": {
-  "PTH100": 2,
   "S404": 1,
   "S603": 1
  },
  "tests/test_mspdi.py": {
   "S314": 2,
   "S405": 1
- },
- "tests/test_parse_cache.py": {
-  "ARG001": 1
  },
  "tests/test_pins.py": {
   "S404": 1,
@@ -317,8 +313,6 @@
   "SLF001": 2
  },
  "tests/test_rank_apply.py": {
-  "ARG001": 1,
-  "ARG005": 1,
   "S404": 1,
   "SLF001": 2
  },
@@ -339,8 +333,6 @@
   "S603": 1
  },
  "tests/test_score.py": {
-  "E741": 1,
-  "N803": 6,
   "PLR0913": 1,
   "PLR0917": 1
  },
@@ -359,11 +351,7 @@
  "tests/test_wake_alarms.py": {
   "PT018": 4
  },
- "tests/test_witness_promql.py": {
-  "ARG001": 2
- },
  "tests/test_witnesses.py": {
-  "ARG005": 1,
   "PT018": 2,
   "S404": 1,
   "S603": 2,
