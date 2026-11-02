@@ -11,6 +11,7 @@ from nemik.vtodo import priority, vtodos
 if TYPE_CHECKING:
     from nemik.blocks import AskRow
 
+TOP_PRIORITY = 9
 STEPS = '[ask_priority]\n"40" = 1\n"15" = 3\n"5" = 5\n"0.01" = 7\n'
 
 
@@ -23,7 +24,7 @@ def test_the_highest_floor_reached_sets_the_priority() -> None:
 def test_the_packaged_steps_are_declared() -> None:
     """The steps shipped in the package give the top and the bottom priority."""
     assert priority(86.0) == 1
-    assert priority(0.0) == 9
+    assert priority(0.0) == TOP_PRIORITY
 
 
 def _ask(ref: str, salience: float | None) -> AskRow:

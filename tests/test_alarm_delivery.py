@@ -4,6 +4,8 @@
 
 from nemik.wake import Alarm, alarm_key, undelivered
 
+UNDELIVERED = 3
+
 
 def _a(at: str, rid: str = "", ref: str = "life:W12") -> Alarm:
     return {"ref": ref, "recurrence_id": rid, "at": at, "trigger": "-PT15M"}
@@ -26,7 +28,7 @@ def test_occurrences_and_instants_are_distinct() -> None:
         _a("2026-10-02T13:00:00Z", "20261002"),
         _a("2026-10-01T12:00:00Z", "20261001"),
     ]  # a second alarm on the same occurrence
-    assert len(undelivered(rows, seen)) == 3
+    assert len(undelivered(rows, seen)) == UNDELIVERED
 
 
 def test_errors_are_never_marked_delivered() -> None:

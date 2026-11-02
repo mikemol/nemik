@@ -7,6 +7,8 @@ from pathlib import Path
 
 from nemik.floorasks import floor_asks, unresolved
 
+FLOOR_ASKS = 5
+
 BIB = """@misc{a1,
   title = {x},
   waypoint = {r:W1}
@@ -40,7 +42,7 @@ def test_each_bad_pointer_is_named(tmp_path: Path) -> None:
     floor = tmp_path / "floor"
     floor.mkdir()
     (floor / "asks.bib").write_text(BIB)
-    assert len(floor_asks(floor)) == 5
+    assert len(floor_asks(floor)) == FLOOR_ASKS
     assert {(k, why) for k, _, why in unresolved(tmp_path, floor)} == {
         ("a2", "dropped"),
         ("a3", "no such waypoint"),

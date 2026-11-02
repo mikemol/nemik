@@ -4033,3 +4033,6 @@
 2026-11-02T10:36:14Z  tick  W1455 advanced  sweep     "backfill: 5530822d landed 2026-11-02T09:57:56Z (reflog), ruff 427 to 423; no tick line was written that turn (R145)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T10:36:14Z  tick  W1456 advanced  sweep     "backfill: 7ad5130e landed 2026-11-02T10:08:51Z (reflog), ruff 423 to 418; no tick line was written that turn (R145)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T10:36:15Z  tick  W1457 advanced  sweep     "backfill: f6ea5c46 landed 2026-11-02T10:19:39Z (reflog), ruff 418 to 413; no tick line was written that turn (R145)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T10:42:26Z  status W1459 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T10:42:39Z  interrupt W1461 minted    -         "tests/test_alarm_delivery.py, test_ask_priority.py, test_baseline.py, test_churn.py and test_floorasks.py name the undelivered count, the top priority, the planned count, the polls and the floor asks they compare with, so ruff falls by five"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
+2026-11-02T10:42:46Z  status W1461 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

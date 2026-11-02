@@ -15,6 +15,8 @@ if TYPE_CHECKING:
 
     from nemik.history import QueueDoc
 
+PLANNED = 2
+
 
 def _q(cards: dict[str, tuple[str, str]], residue: tuple[str, ...] = ()) -> QueueDoc:
     return {
@@ -42,7 +44,7 @@ def test_the_plan_is_what_was_open_at_the_baseline_and_the_rest_is_added() -> No
         residue=("W4",),
     )
     v = variance(base, now)
-    assert v["planned"] == 2  # W3 was already done at the baseline
+    assert v["planned"] == PLANNED  # W3 was already done at the baseline
     assert v["closed"] == ["W1"]
     assert v["still_open"] == ["W2"]
     assert v["dropped"] == []

@@ -15,6 +15,7 @@ if TYPE_CHECKING:
     from nemik.history import QueueDoc, Waypoint
 
 T0 = datetime(2026, 10, 1, tzinfo=UTC)
+POLLS = 4
 
 
 def _card(
@@ -54,7 +55,7 @@ def test_a_poll_takes_the_worst_class_among_the_repos_that_moved() -> None:
     end = T0 + timedelta(seconds=240)
     result = churn({"quiet": quiet, "busy": busy}, T0, end, 60)
     # polls: [0,60) identical, [60,120) attribute, [120,180) structural, [180,240) identical
-    assert result.polls == 4
+    assert result.polls == POLLS
     assert result.counts == {"identical": 2, "attribute": 1, "structural": 1}
     assert result.redraws_now() == pytest.approx(0.5, rel=0, abs=0)
     assert result.redraws_patching_attributes() == pytest.approx(0.25, rel=0, abs=0)

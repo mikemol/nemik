@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1460,
+  "counter": 1461,
   "waypoints": [
     {
       "symbol": "W1",
@@ -34910,21 +34910,21 @@
     {
       "symbol": "W1459",
       "title": "tests/test_calendars.py, test_calendar_write.py and test_calwrite.py name the event count, the exit code and the line limit they compare with, so ruff falls by six",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:ruff-baseline.json"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Edit the three files, run tests and guards, mikemol-pycheck --ratchet --write, write stack849.json, submit behind 848.",
-      "evidence": "2026-11-02: G0 BEFORE the first edit of the three test files, queued behind stack 848 (W1458, inflight alone). Landed: 847 as f6ea5c46 (W1457, ruff 418 to 413). Pace stamps 2026-11-02T09:04:26Z and 09:14:26Z: ruff-baseline.json behind, owes 90, 406 left after 848. 47 PLR2004 sites left in tests/ (python3 -m ruff, ruff-house.toml). K=6 by the lines read: test_calendars.py line 131 compares an event count with 2 and line 206 an exit code with 2; test_calendar_write.py line 103 compares main's return with 2 and line 107 gone with 2; test_calwrite.py line 107 compares an event count with 2 and line 190 a wrapped line length with 75. Edit: module constants TWO_EVENTS, EXIT_USAGE = 2 (argparse usage exit, to check), TWO_GONE and FOLD_LIMIT = 75 as named per file. Companions none; follow-ons none (no import change). Expected: ruff 406 to 400 on top of 848, mypy flat at 1092. Behaviour: none. Covering check: the three tests run directly. Not hook-imported.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-02: G0 BEFORE the first edit of the three test files, queued behind stack 848 (W1458, inflight alone). Landed: 847 as f6ea5c46 (W1457, ruff 418 to 413). Pace stamps 2026-11-02T09:04:26Z and 09:14:26Z: ruff-baseline.json behind, owes 90, 406 left after 848. 47 PLR2004 sites left in tests/ (python3 -m ruff, ruff-house.toml). K=6 by the lines read: test_calendars.py line 131 compares an event count with 2 and line 206 an exit code with 2; test_calendar_write.py line 103 compares main's return with 2 and line 107 gone with 2; test_calwrite.py line 107 compares an event count with 2 and line 190 a wrapped line length with 75. Edit: module constants TWO_EVENTS, EXIT_USAGE = 2 (argparse usage exit, to check), TWO_GONE and FOLD_LIMIT = 75 as named per file. Companions none; follow-ons none (no import change). Expected: ruff 406 to 400 on top of 848, mypy flat at 1092. Behaviour: none. Covering check: the three tests run directly. Not hook-imported. | 2026-11-02: Landed 529b8fa4 in stack 849; ruff 406 to 400, mypy flat 1092.",
       "issued_at": "2026-11-02T10:20:42Z",
       "minted_during": "interrupt",
       "caused_by": "W1383",
-      "last_worked": "2026-11-02T10:20:49Z",
+      "last_worked": "2026-11-02T10:42:26Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261102T104226Z",
       "manifest": [
         "tests/test_calendars.py",
         "tests/test_calendar_write.py",
@@ -34954,6 +34954,33 @@
         "tests/test_pins.py",
         "tests/test_marks.py",
         "tests/test_akonadi_guard.py",
+        "ruff-baseline.json"
+      ]
+    },
+    {
+      "symbol": "W1461",
+      "title": "tests/test_alarm_delivery.py, test_ask_priority.py, test_baseline.py, test_churn.py and test_floorasks.py name the undelivered count, the top priority, the planned count, the polls and the floor asks they compare with, so ruff falls by five",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:ruff-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Edit the five files, run tests and guards, mikemol-pycheck --ratchet --write, write stack851.json, submit behind 850.",
+      "evidence": "2026-11-02: G0 BEFORE the first edit of the five test files, queued behind stack 850 (W1460, inflight alone). Landed: 849 as 529b8fa4 (W1459, ruff 406 to 400). Pace 2026-11-02T10:24:28Z (PENDING for the 10:30:43Z landing): ruff-baseline.json behind, owes 90, 395 left after 850. 36 PLR2004 sites left in tests/ after 850 (41 minus these five is 36 after 851). K=5 by the lines read, one per file: test_alarm_delivery.py line 29 undelivered count 3; test_ask_priority.py line 26 priority 9; test_baseline.py line 45 planned 2; test_churn.py line 57 polls 4; test_floorasks.py line 43 floor asks 5. Edit: one module constant each (UNDELIVERED = 3, TOP_PRIORITY = 9, PLANNED = 2, POLLS = 4, FLOOR_ASKS = 5) after the imports or the TYPE_CHECKING block. Companions none; follow-ons none. Expected: ruff 395 to 390 on top of 850, mypy flat at 1092. Behaviour: none. Covering check: the five tests run directly. Not hook-imported.",
+      "issued_at": "2026-11-02T10:42:39Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1383",
+      "last_worked": "2026-11-02T10:42:46Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "tests/test_alarm_delivery.py",
+        "tests/test_ask_priority.py",
+        "tests/test_baseline.py",
+        "tests/test_churn.py",
+        "tests/test_floorasks.py",
         "ruff-baseline.json"
       ]
     }
