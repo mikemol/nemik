@@ -17,6 +17,10 @@ from nemik.critical import (
     what_if,
 )
 
+THREE_CARD_CHAIN = 3  # W1 -> W2 -> W3
+FAN_IN_LENGTH = 2  # a leaf and the card they all enable
+TIED_CHAINS = 10  # W2..W11 each start one longest chain into W1
+
 
 def _card(g: Graph, sym: str, status: str = "ready") -> URIRef:
     node = waypoint_uri("a", sym)
@@ -33,7 +37,7 @@ def test_the_longest_chain_has_zero_slack_and_a_side_branch_has_some() -> None:
     g.add((b, NEMIK.enables, c))
     g.add((a, NEMIK.enables, d))  # a -> d is a short side branch; e stands alone
     found = critical(g)
-    assert found.length == 3
+    assert found.length == THREE_CARD_CHAIN
     assert found.chain == ["a:W1", "a:W2", "a:W3"]
     assert found.slack == {
         "a:W1": 0,
@@ -78,12 +82,12 @@ def test_tied_longest_chains_are_all_marked_and_graded_not_picked_by_sort_order(
     """Tied longest chains are all marked and graded not picked by sort order."""
     found = critical(_fan_in(list(range(1, 13))))
     leaves = {f"a:W{i}" for i in range(2, 12)}
-    assert found.length == 2
+    assert found.length == FAN_IN_LENGTH
     assert set(found.chain) == leaves | {"a:W1"}  # all ten, not one by sort order
-    assert found.rank["a:W1"] == 2
+    assert found.rank["a:W1"] == FAN_IN_LENGTH
     assert all(found.rank[c] == 1 for c in leaves)
     # W1 ends ten longest chains; each leaf starts one
-    assert found.paths["a:W1"] == 10
+    assert found.paths["a:W1"] == TIED_CHAINS
     assert all(found.paths[c] == 1 for c in leaves)
     assert "a:W12" not in found.chain
     # the answer does not depend on the order the cards were added in

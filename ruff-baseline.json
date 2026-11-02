@@ -251,9 +251,6 @@
  "tests/test_churn.py": {
   "PLR2004": 1
  },
- "tests/test_critical.py": {
-  "PLR2004": 4
- },
  "tests/test_critical_cards.py": {
   "PLR2004": 4
  },
