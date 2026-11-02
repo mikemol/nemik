@@ -40,6 +40,16 @@ class Starved(NamedTuple):
     overtaken_by: int
 
 
+def _longest_waiting(card: Starved) -> float:
+    """Order starved cards by how long they waited, longest first.
+
+    Returns:
+        The sort key: the waited days, negated.
+
+    """
+    return -card.waited_days
+
+
 def days_limit(text: str | None = None) -> int:
     """Read the declared age in days (`[starvation] days`), or 14 when the table is absent.
 
@@ -84,7 +94,7 @@ def starved(
                     len(ahead),
                 )
             )
-    return sorted(found, key=lambda s: -s.waited_days)
+    return sorted(found, key=_longest_waiting)
 
 
 def starved_fleet(

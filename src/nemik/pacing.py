@@ -37,6 +37,16 @@ class Pace(NamedTuple):
     level: float  # tokens left now
 
 
+def _worst_first(pace: Pace) -> tuple[float, str]:
+    """Order paces by how far below zero the bucket went, then by repo.
+
+    Returns:
+        The sort key: the most overdrawn first, ties by repo name.
+
+    """
+    return (-pace.overdraft, pace.repo)
+
+
 def limits(text: str | None = None) -> tuple[float, float, int]:
     """Read the declared (rate per day, burst, window days); 50, 150, 14 if the table is absent.
 
@@ -96,7 +106,7 @@ def paces(g: Graph, now: datetime, rate: float, burst: float, days: int) -> list
         overdraft, level = bucket(seen, rate, burst, start, now)
         arrivals = sum(1 for s in seen if start <= s <= now)
         out.append(Pace(repo, arrivals, overdraft, level))
-    return sorted(out, key=lambda p: (-p.overdraft, p.repo))
+    return sorted(out, key=_worst_first)
 
 
 class Options(argparse.Namespace):

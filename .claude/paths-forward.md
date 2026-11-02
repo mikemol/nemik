@@ -3,12 +3,12 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1467 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:8e246a5fb34e7d93`
+counter 1468 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:d4e10c9a6205a602`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1466 | working |
-| 2 | W1467 | working |
+| 1 | W1467 | working |
+| 2 | W1468 | working |
 | 3 | W1075 | ready |
 | 4 | W1139 | ready |
 | 5 | W1279 | ready |
@@ -1446,16 +1446,17 @@ counter 1467 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:8e2
 | 1437 | W1463 | done |
 | 1438 | W1464 | done |
 | 1439 | W1465 | done |
+| 1440 | W1466 | done |
 
 ## waypoints
 
-1. **W1466** (working) src/nemik/blocks.py and check.py name the own-enabler floor, the needs-you word floor and the
-   umbrella prerequisite count they compare with, so ruff falls by three
-   - next: Run w1466_src.py, the four hook commands with exit codes, the guards, mikemol-pycheck --ratchet --write,
-     write stack856.json, submit behind 855.
-2. **W1467** (working) src/nemik/churn.py types its queue documents as QueueDoc, so mypy falls by nine
+1. **W1467** (working) src/nemik/churn.py types its queue documents as QueueDoc, so mypy falls by nine
    - next: Run w1467_churn.py real, the four hook commands, tests, mikemol-pycheck --ratchet --write, write
      stack857.json, submit behind 856.
+2. **W1468** (working) src/nemik/pacing.py and starved.py sort with typed key functions instead of lambdas over Any, so
+   mypy falls by five
+   - next: Run w1468_pacing.py real, hookcheck, tests, mikemol-pycheck --ratchet --write, write stack858.json, submit
+     behind 857.
 3. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 4. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -4727,6 +4728,8 @@ counter 1467 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:8e2
    test_work.py name the checked floor, the case floor and the exit codes they compare with, so ruff falls by five
 1439. **W1465** (done) src/nemik/health.py, overlaps.py, vtodo.py and critical.py name the red level, the sharing floor,
    the stamp digits and the planned-list cap they compare with, so ruff falls by five
+1440. **W1466** (done) src/nemik/blocks.py and check.py name the own-enabler floor, the needs-you word floor and the
+   umbrella prerequisite count they compare with, so ruff falls by three
 
 ## residue
 
@@ -6577,3 +6580,24 @@ counter 1467 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:8e2
   W1347, R92 on W1346, R91 on W1345, R72 on W846, R100 on W910, R101 and R105 on W1288, R85 on W613, R106 on W1376, R108
   on W1382, R112 on W1288, R114 on W1395, R116 on W1383, R119 and R135 on W1396, R134 on W1282, R138 on W1288, R142 on
   W1451, R143 on W1246; two UNCLAIMED mtools:W2099 letters; codon owed with no stack.; 0 finding(s)
+- **nemik:R146** (-) round 148: stacks 854 (W1464) 683b34ba = 11:39:10Z and 855 (W1465, health, overlaps, vtodo,
+  critical) aceca896 = 12:02:08Z landed; stack 856 (W1466 blocks.py and check.py, ruff 370 to 367) inflight, key
+  1793619699823500123, began_ns 1793620932933902987; stack 857 (W1467 churn.py QueueDoc typing, mypy 1092 to 1083)
+  queued: root Verified from source (TZ=UTC reflog): e1418363 11:27:10Z, 683b34ba main@{06:39:10 -0500} = 11:39:10Z,
+  aceca896 07:02:08 -0500 = 12:02:08Z; --in-gate lists W1466 inflight and W1467 queued; `mikemol-pycheck --ratchet`
+  prints ruff 367/367 and mypy 1083/1083 (370 - 3 and 1092 - 9 with both live in the tree); nemik-stale against the two
+  directories prints no STALE row. Intervals as Z pairs: 854 gated 11:27:10Z to 11:39:10Z (12 min 00 s), 855 (a src
+  stack with the census in its test set) 11:39:10Z to 12:02:08Z (22 min 58 s), the gate empty 0 s at both landings (the
+  invariant now sixteen in a row). The round has the first mypy lead since stack 843 (W1467, churn.py, K probe 12 to 3
+  on a scratch copy, K=9 equal to the measured fall), taken after the 11:54Z pace read said mypy 'fell 0 over 10
+  landings, no fall to reach zero'. R147's follow-through is honest and partly done: the standing-11 table for 844 to
+  855 was written on W1288 at 11:37:46Z with G0 and submit stamps from the transcript, the earliest-edit column is still
+  not extracted, and a hand-typed '09:24Z' in W1454's G0 text (real write 09:20:15Z) is named as a lapse. The G1's
+  epistemics on the standing-6 exit codes are right: the Bash tool prints an exit code only when it is nonzero, so 'no
+  code printed' is an inference of 0, not a printed 0, and it says so. One finding makes that a fact. No fixpoint is
+  declared. Carried open findings, status on 2026-11-02 12:08Z: R145 on W1458 (the earliest-edit column and the table's
+  tail), R146 on W1175 (wrapper design and K), R95 second finding on W1349, R95 third, R97 first, R98, R111 first, R102,
+  R127 and R128 on W1219, R94 on W1348, R93 on W1347, R92 on W1346, R91 on W1345, R72 on W846, R100 on W910, R101 and
+  R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288, R114 on W1395, R116 on W1383, R119 and R135
+  on W1396, R134 on W1282, R138 on W1288, R142 on W1451, R143 on W1246 (843's wall now has its load from the later
+  read); two UNCLAIMED mtools:W2099 letters; codon owed with no stack.; 1 finding(s)
