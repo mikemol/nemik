@@ -404,9 +404,6 @@
  "tests/test_published_valid.py": {
   "PLR2004": 1
  },
- "tests/test_rank.py": {
-  "PLR2004": 5
- },
  "tests/test_rank_apply.py": {
   "ARG001": 1,
   "ARG005": 1,

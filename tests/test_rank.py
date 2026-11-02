@@ -24,6 +24,9 @@ from nemik.rank import (
 )
 
 W = Weights(local=1, peer=2, peer_blocked=8)
+LONG_CHAIN_WEIGHT = 5  # W79's local chain
+STALLED_PEER_WEIGHT = 8  # one stalled peer, at W.peer_blocked
+TWO_PEERS_WEIGHT = 4  # two reachable peers, at W.peer each
 
 
 class _Row(TypedDict, total=False):
@@ -63,8 +66,8 @@ def test_short_chain_with_stalled_peer_outranks_long_local_reach() -> None:
         prev = nxt
     stalled = _wp(g, "b", "W124", "blocked")
     g.add((stalled, NEMIK.waitsFor, w45))
-    assert downstream_weight(g, w79, W) == 5
-    assert downstream_weight(g, w45, W) == 8
+    assert downstream_weight(g, w79, W) == LONG_CHAIN_WEIGHT
+    assert downstream_weight(g, w45, W) == STALLED_PEER_WEIGHT
 
 
 def test_transitive_across_three_repos_and_done_is_pruned() -> None:
@@ -73,7 +76,7 @@ def test_transitive_across_three_repos_and_done_is_pruned() -> None:
     a1, b1, c1 = _wp(g, "a", "W1"), _wp(g, "b", "W1"), _wp(g, "c", "W1")
     g.add((a1, NEMIK.enables, b1))
     g.add((b1, NEMIK.enables, c1))
-    assert downstream_weight(g, a1, W) == 4  # two reachable peers
+    assert downstream_weight(g, a1, W) == TWO_PEERS_WEIGHT  # two reachable peers
     g.add((b1, OSLC_CM.state, STATE["done"]))
     g.remove((b1, OSLC_CM.state, STATE["ready"]))
     assert downstream_weight(g, a1, W) == 0
@@ -99,7 +102,7 @@ def test_rank_orders_ready_items_by_weight_then_symbol() -> None:
     g.add((_wp(g, "b", "W1", "blocked"), NEMIK.waitsFor, hi))
     rows = cast("list[_Row]", rank(g, "a", W))
     assert [r["symbol"] for r in rows] == ["W9", "W2"]  # blocked W3 excluded
-    assert rows[0]["downstream"] == 8  # the raw cross-repo sum
+    assert rows[0]["downstream"] == STALLED_PEER_WEIGHT  # the raw cross-repo sum
     assert (
         rows[0]["weight"] > rows[1]["weight"]
     )  # `weight` carries the composed order (W132)
@@ -137,7 +140,7 @@ def test_fleet_rank_pools_repos_into_one_comparable_order() -> None:
     fleet = rank_fleet(g, W)
     assert [r["cite"] for r in fleet] == ["a:W1", "b:W5"]
     assert [r["repo"] for r in fleet] == ["a", "b"]
-    assert fleet[0]["downstream"] == 8  # the stalled peer c:W9 waits on a:W1
+    assert fleet[0]["downstream"] == STALLED_PEER_WEIGHT  # c:W9 waits on a:W1
     assert int(str(fleet[0]["weight"])) > int(str(fleet[1]["weight"]))
 
 
