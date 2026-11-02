@@ -1633,7 +1633,7 @@ def _score(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
         0.
 
     """
-    rows = shingle_lines(Path(args.score).read_text(encoding="utf-8"))
+    rows = shingle_lines(Path(str(args.score)).read_text(encoding="utf-8"))
     events = [e for name in names for e in backfill(name, dirs[name], args.start)]
     got = score_report(
         rows, first_done(events), datetime.now(UTC).isoformat(), COMMIT_GRAIN_DAYS
@@ -1688,6 +1688,9 @@ class Opts(argparse.Namespace):
     to: str | None
     toil: bool
     churn: bool
+    weekly: bool
+    score: str | None
+    append_to: str | None
     json: bool
     publish: Path | None
     where: str
@@ -2465,7 +2468,7 @@ def _compact(baseline: str, names: list[str], dirs: dict[str, Path]) -> int:
     return 0
 
 
-def _baseline(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> int:
+def _baseline(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
     out: dict[str, BaselineReport] = {}
     for name in names:
         repo = dirs[name]
@@ -2546,7 +2549,7 @@ def toil(repo: str, ledger: Path) -> list[dict[str, object]]:
     return rows
 
 
-def _toil(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> int:
+def _toil(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
     """`--toil`: the weekly interrupt share per repo, from each repo's ledger.
 
     Returns:

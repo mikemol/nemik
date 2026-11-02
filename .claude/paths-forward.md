@@ -3,12 +3,12 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1433 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:bf84abaeeaeb79ca`
+counter 1434 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:a358f1332ab10a6c`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1432 | working |
-| 2 | W1433 | working |
+| 1 | W1433 | working |
+| 2 | W1434 | working |
 | 3 | W1075 | ready |
 | 4 | W1139 | ready |
 | 5 | W1279 | ready |
@@ -1412,12 +1412,13 @@ counter 1433 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:bf8
 | 1403 | W1429 | done |
 | 1404 | W1430 | done |
 | 1405 | W1431 | done |
+| 1406 | W1432 | done |
 
 ## waypoints
 
-1. **W1432** (working) calendars.py and critical.py type their sort keys as functions and calendars reads
-   CalledProcessError output through one helper, so mypy falls by about fifteen
-2. **W1433** (working) salience.py and history.py type their sort keys as functions, so mypy falls by about thirteen
+1. **W1433** (working) salience.py and history.py type their sort keys as functions, so mypy falls by about thirteen
+2. **W1434** (working) history.Opts declares weekly, score and append_to and the baseline and toil modes take Opts, so
+   mypy falls by about eight
 3. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 4. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -4623,6 +4624,8 @@ counter 1433 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:bf8
    tomlview, so mypy falls by about twenty-four
 1405. **W1431** (done) blocks.py types the ask sort keys as nested functions and the solved salience map as Fractions,
    so mypy falls by about fifteen
+1406. **W1432** (done) calendars.py and critical.py type their sort keys as functions and calendars reads
+   CalledProcessError output through one helper, so mypy falls by about fifteen
 
 ## residue
 
@@ -6151,3 +6154,23 @@ counter 1433 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:bf8
   W910, R101 on W1288, R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288, R114 on W1395, R116 on
   W1383, R119 on W1396 (the pin bump now gates W1399 as well), R131 on W1398 and W1399 (answered; read-back); two
   UNCLAIMED mtools:W2099 letters; codon W1414 argparse probe and W1325 census not done.; 0 finding(s)
+- **nemik:R131** (-) round 133: nemik-116, stack 822 (W1431) landed d732238b = 03:29:04Z; stack 823 (W1432) inflight
+  since 03:29:08Z, key 1793589170918565899; stack 824 (W1433 salience.py and history.py, mypy 1184 to 1171) queued
+  behind it, key 1793590485556153835: root NO NEW FINDINGS, OPEN FINDINGS CARRIED WITH OWNERS AND DUE DATES (not a
+  fixpoint declaration). Verified from source (TZ=UTC reflog): aa989984 03:07:41Z, d732238b 03:29:04Z (22:29:04 -0500);
+  --in-gate lists W1432 inflight (began_ns set) and W1433 queued (began_ns null); `mikemol-pycheck --ratchet` prints
+  ruff 475/475 and mypy 1171/1171 (1199 - 15 for 823 - 13 for 824 = 1171, both staged stacks live in the tree).
+  Intervals as Z pairs: 822 gated 03:07:44Z to 03:29:04Z (21 min 20 s wall), and 823 was submitted before that landing
+  (queued behind 822) and began on it, so the gate was empty 0 s; 824 is queued behind 823 the same way. The invariant
+  that failed four times earlier today has now held on four landings in a row (4a4af6a4, 1d3afef2, aa989984, d732238b).
+  A contingency worth stating, not a finding: 824's baseline text (1171) assumes 823 lands; if 823 were refused, 824
+  would carry a baseline below the real count and the gate would refuse it on the rise, so a refusal of 823 means
+  rebuilding 824's baseline from the then-HEAD before resubmitting. The G1 is candid about its choices: the pace line
+  read PENDING at the first command (newest landing 03:29:04Z) and was used as directional while the tick-open pace
+  (03:34:15Z, current) agrees; the K probe caught a return-type slip (history._number returns a tuple) and was re-run
+  before the G0; the watchdog's exit 8 in a quiet gate window is expected noise during a 21-minute gate. Carried open
+  findings, status on 2026-11-02 03:39Z: R95 second finding on W1349 (durable stamp script), R95 third, R97 first, R98,
+  R111 first, R102, R127 and R128 on W1219, R94 on W1348, R93 on W1347, R92 on W1346, R91 on W1345, R72 on W846, R100 on
+  W910, R101 on W1288, R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288, R114 on W1395, R116 on
+  W1383, R119 on W1396 (the pin bump, which also gates W1399); two UNCLAIMED mtools:W2099 letters; codon W1414 argparse
+  probe and W1325 census not done, and codon still owed with no stack.; 0 finding(s)
