@@ -3931,3 +3931,7 @@
 2026-11-02T03:08:26Z  status W1430 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T03:11:21Z  interrupt W1432 minted    -         "calendars.py and critical.py type their sort keys as functions and calendars reads CalledProcessError output through one helper, so mypy falls by about fifteen"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
 2026-11-02T03:12:49Z  status W1432 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T03:30:19Z  status W1431 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T03:32:26Z  interrupt W1433 minted    -         "salience.py and history.py type their sort keys as functions, so mypy falls by about thirteen"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
+2026-11-02T03:34:44Z  status W1433 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T03:37:35Z  tick  W1433 advanced  sweep     "stack 823 (W1432 calendars and critical sort keys, mypy 1199 to 1184) gating, stack 824 (W1433 salience and history sort keys, mypy 1184 to 1171) queued behind it; stack 822 landed d732238b [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

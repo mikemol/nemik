@@ -3,12 +3,12 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1431 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:6db4e1058f5e4ea1`
+counter 1433 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:bf84abaeeaeb79ca`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1430 | working |
-| 2 | W1431 | working |
+| 1 | W1432 | working |
+| 2 | W1433 | working |
 | 3 | W1075 | ready |
 | 4 | W1139 | ready |
 | 5 | W1279 | ready |
@@ -1410,13 +1410,14 @@ counter 1431 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:6db
 | 1401 | W1427 | done |
 | 1402 | W1428 | done |
 | 1403 | W1429 | done |
+| 1404 | W1430 | done |
+| 1405 | W1431 | done |
 
 ## waypoints
 
-1. **W1430** (working) check.py types its prerequisite map and reads the declared integers and commit.json through
-   tomlview, so mypy falls by about twenty-four
-2. **W1431** (working) blocks.py types the ask sort keys as nested functions and the solved salience map as Fractions,
-   so mypy falls by about fifteen
+1. **W1432** (working) calendars.py and critical.py type their sort keys as functions and calendars reads
+   CalledProcessError output through one helper, so mypy falls by about fifteen
+2. **W1433** (working) salience.py and history.py type their sort keys as functions, so mypy falls by about thirteen
 3. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 4. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -4618,6 +4619,10 @@ counter 1431 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:6db
    chained Any get, so mypy falls by one
 1403. **W1429** (done) history.Opts declares the repos, all, start, to, toil and churn options main reads, so reading
    them adds no Any and mypy falls by about thirty
+1404. **W1430** (done) check.py types its prerequisite map and reads the declared integers and commit.json through
+   tomlview, so mypy falls by about twenty-four
+1405. **W1431** (done) blocks.py types the ask sort keys as nested functions and the solved salience map as Fractions,
+   so mypy falls by about fifteen
 
 ## residue
 
@@ -6123,3 +6128,26 @@ counter 1431 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:6db
   R115 on W1398 (scratch path: the slip recurred, below), R116 on W1383, R119 on W1396, R129 first on W1288 and R130 on
   W1288 (met once, to be shown on three landings; due 2026-11-02), two UNCLAIMED mtools:W2099 letters; codon W1414
   argparse probe and W1325 census not done.; 2 finding(s)
+- **nemik:R130** (-) round 132: nemik-115, stacks 820 (W1429 history.Opts) landed 1d3afef2 = 02:45:09Z and 821 (W1430
+  check.py) landed aa989984 = 03:07:41Z; stack 822 (W1431 blocks.py, mypy 1214 to 1199) inflight, key
+  1793588613850005282, began on the 821 landing: root NO NEW FINDINGS, OPEN FINDINGS CARRIED WITH OWNERS AND DUE DATES
+  (not a fixpoint declaration). Verified from source (TZ=UTC reflog): 4a4af6a4 02:19:01Z, 1d3afef2 02:45:09Z (21:45:09
+  -0500), aa989984 03:07:41Z (22:07:41 -0500); --in-gate lists W1431 inflight with began_ns set; `mikemol-pycheck
+  --ratchet` prints ruff 475/475 and mypy 1199/1199 (1214 - 15 = 1199, the K the probe gave). I checked the claim the G1
+  cites about mtools: git log f3281135 in the mtools repo prints 'W2191 (on W2186 ...): mikemol-pycheck --ratchet
+  --write lowers a per-module mypy baseline part by part', so the block on mtools:W2191 was wrong and W1399 is correctly
+  re-pointed (its blocked_on reads W1396, our pin bump); W1399's evidence carries both stampnote lines. The new writer
+  also lets two stacks lower different modules without both rewriting one file, which will relieve the shared-baseline
+  wait for good once W1396 lands the pin. CLOSED here: R129 first finding and R130 finding on W1288 (the staged
+  successor and the large-K choice). Their witness (three consecutive landings, each followed by a submit within five
+  minutes, the successor's work done before the previous landing) is met: 4a4af6a4 02:19:01Z with stack 820 beginning on
+  it (its began_ns follows), 1d3afef2 02:45:09Z with 821 beginning on it, aa989984 03:07:41Z with 822 beginning on it,
+  all with zero empty gate, and the entries are K=32, 24 and 15. Intervals as Z pairs: 820 gated 02:19:05Z to 02:45:09Z
+  (26 min 04 s), 821 gated 02:45:09Z to 03:07:41Z (22 min 32 s). The G1 states the remaining gap honestly (nothing
+  staged behind 822 at the send) and catches its own draft error (821 shown inflight; re-read before sending). R131's
+  two findings are answered on cards (the symlink for the scratchpad, the W2191 escalation). Carried open findings,
+  status on 2026-11-02 03:12Z: R95 second finding on W1349 (durable stamp script), R95 third, R97 first, R98, R111
+  first, R102, R127 and R128 on W1219, R94 on W1348, R93 on W1347, R92 on W1346, R91 on W1345, R72 on W846, R100 on
+  W910, R101 on W1288, R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288, R114 on W1395, R116 on
+  W1383, R119 on W1396 (the pin bump now gates W1399 as well), R131 on W1398 and W1399 (answered; read-back); two
+  UNCLAIMED mtools:W2099 letters; codon W1414 argparse probe and W1325 census not done.; 0 finding(s)

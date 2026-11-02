@@ -25,7 +25,7 @@
   "misc": 1
  },
  "src/nemik/history.py": {
-  "misc": 24
+  "misc": 21
  },
  "src/nemik/importer.py": {
   "misc": 1
@@ -45,9 +45,6 @@
  "src/nemik/rank.py": {
   "misc": 232,
   "type-arg": 17
- },
- "src/nemik/salience.py": {
-  "misc": 10
  },
  "src/nemik/serve.py": {
   "explicit-any": 5,

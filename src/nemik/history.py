@@ -352,7 +352,7 @@ def diff(old: QueueDoc, new: QueueDoc) -> Diff:
             for s, st in after.items()
             if s in before and before[s] != st and st != "done"
         ),
-        key=lambda f: _number(f[0]),
+        key=_flip_number,
     )
     old_edges, new_edges = _edges(old), _edges(new)
     d.edges_added = sorted(new_edges - old_edges)
@@ -569,6 +569,10 @@ def _read_blobs(repo: Path, specs: list[str]) -> list[str]:
         else:
             out.append("")
     return out
+
+
+def _flip_number(f: tuple[str, str, str]) -> tuple[int, int, str]:
+    return _number(f[0])
 
 
 def queue_at(repo: Path, rev: str | None, known: str = "") -> QueueDoc:
@@ -906,7 +910,7 @@ def weekly(snaps: list[Snapshot]) -> list[WeeklyRow]:
         at_end = _status(end)
         open_cards = [s for s, st in at_end.items() if st not in {"done", "dropped"}]
         blocked = [s for s in open_cards if at_end[s] == "blocked"]
-        oldest = min(blocked, key=lambda s: blocked_since[s], default=None)
+        oldest = min(blocked, key=blocked_since.__getitem__, default=None)
         rows.append(
             {
                 "week": f"{year}-W{week:02d}",

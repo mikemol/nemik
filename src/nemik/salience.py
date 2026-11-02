@@ -64,6 +64,18 @@ class Row:
     new: Fraction
 
 
+def _old_key(r: Row) -> tuple[int, int]:
+    return (-r.old, _number(r.ref))
+
+
+def _new_key(r: Row) -> tuple[Fraction, int]:
+    return (-r.new, _number(r.ref))
+
+
+def _need_key(item: tuple[str, Fraction]) -> tuple[Fraction, str]:
+    return (-item[1], item[0])
+
+
 @dataclass(frozen=True)
 class Audit:
     """Both arms over one repo's ready cards, and the flow's own account of the solve."""
@@ -100,9 +112,7 @@ class Audit:
             the card refs.
 
         """
-        return [
-            r.ref for r in sorted(self.rows, key=lambda r: (-r.old, _number(r.ref)))
-        ]
+        return [r.ref for r in sorted(self.rows, key=_old_key)]
 
     def new_order(self) -> list[str]:
         """Order the cards by the flow salience, the lower symbol first on a tie.
@@ -111,9 +121,7 @@ class Audit:
             the card refs.
 
         """
-        return [
-            r.ref for r in sorted(self.rows, key=lambda r: (-r.new, _number(r.ref)))
-        ]
+        return [r.ref for r in sorted(self.rows, key=_new_key)]
 
     def disagreements(self) -> list[tuple[str, str]]:
         """List the pairs the old weight strictly orders one way and the flow the other.
@@ -222,9 +230,11 @@ def audit(
             if (n, OSLC_CM.state, NEMIK.Ready) in g
             or (n, OSLC_CM.state, NEMIK.Working) in g
         }
-    mine = sorted(
-        (n for n in ready if _repo(n) == repo), key=lambda n: _number(ref_of(n))
-    )
+
+    def node_number(n: Node) -> int:
+        return _number(ref_of(n))
+
+    mine = sorted((n for n in ready if _repo(n) == repo), key=node_number)
 
     def klass(x: Node) -> int:
         if _repo(x) == repo:
@@ -350,7 +360,7 @@ def ask_effect(
     displaced = [
         (c, before[c] + 1, after[c] + 1) for c in sorted(after) if after[c] > before[c]
     ]
-    needs = sorted(absorbed, key=lambda item: (-item[1], item[0]))
+    needs = sorted(absorbed, key=_need_key)
     return AskEffect(ref, needs, displaced, stranded)
 
 
