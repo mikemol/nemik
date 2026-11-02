@@ -175,7 +175,7 @@
   "misc": 12
  },
  "tools/gen_pieces_corpus.py": {
-  "misc": 24
+  "misc": 1
  },
  "tools/nemik_client.py": {
   "explicit-any": 2,

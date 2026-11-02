@@ -3943,3 +3943,7 @@
 2026-11-02T04:31:24Z  interrupt W1435 minted    -         "tests/fixtures/make_fleet.py reads each queue through nemik.tomlview, so mypy falls by about twenty-eight"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
 2026-11-02T04:33:09Z  status W1435 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T04:40:20Z  tick  W1435 advanced  sweep     "stack 825 (W1434 history Opts, mypy 1171 to 1162) gating, stack 826 (W1435 make_fleet via tomlview, mypy 1162 to 1134) queued behind it; stack 824 landed 8e52d440; W1396 answered: the fleet par lacks W1614, bump to mtools latest [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T04:43:43Z  status W1434 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T04:54:38Z  status W1435 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T04:55:20Z  interrupt W1436 minted    -         "tools/gen_pieces_corpus.py builds its GraphDoc literals directly instead of through cast, so mypy falls by about twenty-three"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
+2026-11-02T04:57:08Z  status W1436 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

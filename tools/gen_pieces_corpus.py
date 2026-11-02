@@ -19,7 +19,7 @@ import sys
 from pathlib import Path
 from typing import TYPE_CHECKING, cast
 
-from nemik.pieces import assemble, split
+from nemik.pieces import Row, assemble, split
 from nemik.serve import Model
 
 if TYPE_CHECKING:
@@ -29,33 +29,31 @@ HERE = Path(__file__).resolve().parents[1]
 OUT = HERE / "tests" / "corpus" / "pieces"
 
 
-def _node(repo: str, sym: str) -> dict[str, str]:
+def _node(repo: str, sym: str) -> Row:
     return {"id": f"urn:nemik:{repo}/{sym}", "repo": repo}
 
 
-def _edge(a: str, b: str, kind: str = "waits") -> dict[str, str]:
+def _edge(a: str, b: str, kind: str = "waits") -> Row:
     return {"source": a, "target": b, "kind": kind}
 
 
 def _doc(
-    nodes: list[dict[str, str]],
-    edges: list[dict[str, str]],
+    nodes: list[Row],
+    edges: list[Row],
     findings: dict[str, object] | None = None,
     health: dict[str, object] | None = None,
     ruler: dict[str, object] | None = None,
 ) -> GraphDoc:
-    return cast(
-        "GraphDoc",
-        {
-            "nodes": nodes,
-            "edges": edges,
-            "inbound": [],
-            "operator": [],
-            "findings": findings or {},
-            "health": health or {},
-            "ruler": ruler or {},
-        },
-    )
+    doc: GraphDoc = {
+        "nodes": nodes,
+        "edges": edges,
+        "inbound": [],
+        "operator": [],
+        "findings": findings or {},
+        "health": health or {},
+        "ruler": ruler or {},
+    }
+    return doc
 
 
 def cases() -> dict[str, GraphDoc]:
@@ -121,20 +119,16 @@ def _first_repos(doc: GraphDoc, n: int) -> GraphDoc:
     keep = sorted({str(x["repo"]) for x in doc["nodes"] if x["repo"]})[:n]
     nodes = [x for x in doc["nodes"] if x["repo"] in keep]
     ids = {x["id"] for x in nodes}
-    return cast(
-        "GraphDoc",
-        {
-            **doc,
-            "nodes": nodes,
-            "edges": [
-                e for e in doc["edges"] if e["source"] in ids and e["target"] in ids
-            ],
-            "findings": {r: v for r, v in doc["findings"].items() if r in keep},
-            "health": {r: v for r, v in doc["health"].items() if r in keep},
-            "inbound": [],
-            "operator": [],
-        },
-    )
+    cut: GraphDoc = {
+        **doc,
+        "nodes": nodes,
+        "edges": [e for e in doc["edges"] if e["source"] in ids and e["target"] in ids],
+        "findings": {r: v for r, v in doc["findings"].items() if r in keep},
+        "health": {r: v for r, v in doc["health"].items() if r in keep},
+        "inbound": [],
+        "operator": [],
+    }
+    return cut
 
 
 def main() -> None:
