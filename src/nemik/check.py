@@ -78,6 +78,7 @@ STALL_RUN = 2
 NEITHER_QUANTILE = 0.9  # the share of small cards that finished within the bound
 NEITHER_SAMPLES = 10  # fewer finished small cards than this and no bound is learned
 SECONDS_A_DAY = 86400
+UMBRELLA_PREREQS = 2
 
 
 def mark_gating(graph: Graph, repo: str, repo_dir: Path) -> None:
@@ -864,7 +865,7 @@ def survey(
     # descended (their work IS their children); a single step that waits on something is still the
     # step you wait for, so the descent stops at the first non-umbrella.
     def umbrella(n: Node) -> bool:
-        return len(prereqs.get(n, ())) >= 2
+        return len(prereqs.get(n, ())) >= UMBRELLA_PREREQS
 
     for waiter, _, target in merged.triples((None, NEMIK.waitsFor, None)):
         if not umbrella(target) or waiter not in open_nodes:

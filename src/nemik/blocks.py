@@ -177,7 +177,7 @@ def ready_behind_open(g: Graph) -> dict[Node, list[Node]]:
             if (c, OSLC_CM.state, None) in g and (c, OSLC_CM.state, NEMIK.Done) not in g
         ]
         own = [c for c in enablers if _repo(c) == _repo(node)]
-        if enablers and len(own) < 2:
+        if enablers and len(own) < MIN_OWN_ENABLERS:
             out[node] = sorted(enablers, key=str)
     return out
 
@@ -291,6 +291,7 @@ def node_marks(g: Graph) -> dict[str, dict[str, bool]]:
 
 
 SHOWN_SEVERITIES = ("Warning", "Violation")
+MIN_OWN_ENABLERS = 2
 
 
 def warnings_by_card(
@@ -486,6 +487,7 @@ MACHINE_ACT = re.compile(
 )
 
 CATEGORIES = ("needs-you", "no-command", "errand", "answered", "condition", "unstated")
+NEEDS_YOU_WORDS = 3
 
 
 def errand_repos(text: str | None = None) -> frozenset[str]:
@@ -539,7 +541,9 @@ def operator_category(text: str) -> str:
     # here means a real ask silently drops off the operator's radar, which is worse than an
     # occasional over-alert. Only a truly bare blocked_on (BARE, above) reliably lands unstated.
     return (
-        "needs-you" if DECISION.search(rest) or len(rest.split()) >= 3 else "unstated"
+        "needs-you"
+        if DECISION.search(rest) or len(rest.split()) >= NEEDS_YOU_WORDS
+        else "unstated"
     )
 
 
