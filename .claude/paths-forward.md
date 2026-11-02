@@ -3,12 +3,12 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1471 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:df2eae806bc55921`
+counter 1473 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:953eaa192e620c38`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1470 | working |
-| 2 | W1471 | working |
+| 1 | W1472 | working |
+| 2 | W1473 | working |
 | 3 | W1075 | ready |
 | 4 | W1139 | ready |
 | 5 | W1279 | ready |
@@ -1450,17 +1450,19 @@ counter 1471 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:df2
 | 1441 | W1467 | done |
 | 1442 | W1468 | done |
 | 1443 | W1469 | done |
+| 1444 | W1470 | done |
+| 1445 | W1471 | done |
 
 ## waypoints
 
-1. **W1470** (working) src/nemik/pieces.py and vtodo.py sort and take minima with typed key functions instead of lambdas
-   over Any, so mypy falls by four
-   - next: Run w1470_keys.py real, hookcheck, tests, mikemol-pycheck --ratchet --write, write stack860.json, submit
-     behind 859.
-2. **W1471** (working) tests/test_rank_flow.py names the on-path card count, the paths through W4 and the operator
-   weight it compares with, so ruff falls by three
-   - next: Edit the file, run tests and guards, mikemol-pycheck --ratchet --write, write stack861.json, submit behind
-     \860.
+1. **W1472** (working) tests/test_layout.py names the thirteen thresholds and counts it compares with, so ruff falls by
+   thirteen
+   - next: Run the codemod for this card, collect the browser tests, run mikemol-pycheck --ratchet --write, write the
+     stack json, submit behind the queued stack.
+2. **W1473** (working) src/nemik/calendars.py and score.py document the exceptions their loaders raise, so ruff falls by
+   four
+   - next: Add the Raises sections, run hookcheck and the tests, write the ratchet, write the stack json, submit behind
+     the queued stack.
 3. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 4. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -4739,6 +4741,10 @@ counter 1471 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:df2
    mypy falls by five
 1443. **W1469** (done) src/nemik/wake.py orders its roster with a typed key function instead of a lambda over Any, so
    mypy falls by three
+1444. **W1470** (done) src/nemik/pieces.py and vtodo.py sort and take minima with typed key functions instead of lambdas
+   over Any, so mypy falls by four
+1445. **W1471** (done) tests/test_rank_flow.py names the on-path card count, the paths through W4 and the operator
+   weight it compares with, so ruff falls by three
 
 ## residue
 
@@ -6659,3 +6665,29 @@ counter 1471 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:df2
   W1383, R119 and R135 on W1396, R134 on W1282 (the rank.py lambdas are the next piece of it), R138 on W1288, R142 on
   W1451, R143 on W1246, R148 on W1219 (read-back); two UNCLAIMED mtools:W2099 letters; codon owed with no stack.; 0
   finding(s)
+- **nemik:R149** (-) round 151: stacks 858 (W1468) and 859 (W1469) landed as one train, tip f2b2ee97 = 13:16:18Z; stack
+  860 (W1470 pieces.py and vtodo.py, mypy 1075 to 1071) inflight, key 1793623977448032573, began_ns 1793625383024852576;
+  stack 861 (W1471 test_rank_flow.py, ruff 367 to 364) queued: root NO NEW FINDINGS, OPEN FINDINGS CARRIED WITH OWNERS
+  AND DUE DATES (not a fixpoint declaration). Verified from source (TZ=UTC reflog): 31554fc9 12:49:51Z, f2b2ee97
+  main@{08:16:18 -0500} = 13:16:18Z (the reflog shows only the tip of the 858 and 859 train, the G1's 01d812bf being its
+  parent); --in-gate lists W1470 inflight and W1471 queued; `mikemol-pycheck --ratchet` prints ruff 364/364 and mypy
+  1071/1071 (1075 - 4, 367 - 3 with both live in the tree); HEAD is f2b2ee97 and 860 has not landed, as the G1 says.
+  Gate walls: 858 and 859 together 12:49:56Z to 13:16:18Z (about 26 min 22 s for two stacks, 'three in two' in the G1's
+  words); the gate empty 0 s at the landing, the invariant at nineteen landings running with a successor queued each
+  time. The practice holds in every detail this round (K probes first with the house config, the write measuring K
+  exactly, hookcheck rc=0 after the one hook-imported edit, the G0 stamps from stampnote, tests quoted with their
+  times), and the flag the G1 raises on test_rank_flow (61 s of the stack's 61.56 s total test time, noted in the stack
+  body and left alone) is the right size of note. The consequential statement is the diagnosis of the mypy vein: with
+  the house config run over rank.py it reports about 190 findings, whose roots are rank()'s dict[Any, Any] rows (rank.py
+  164, 177 and 180 type-arg) that every consumer inherits (starved.py 66, 67 and 135 and others), so the sort-key
+  lambdas are spent and the next mypy lead is the typed-rows design on W1282. That makes W1282 the critical path for the
+  remaining mypy ratchet: mypy fell 17 over 10 landings at the 13:24Z pace and sits at 1071 with three files holding
+  about two thirds of it, and rank.py's rows alone are the largest cascade source. The 26-minute gates are the time to
+  do the design probe, and R134 (due today) is the card that carries it. Carried open findings, status on 2026-11-02
+  13:40Z: R134 on W1282 (now the critical path: the typed-rows design for rank.py, the NodeRow/EdgeRow unit for serve.py
+  and per-test narrowing for test_layout.py, with a first step to land), R145 on W1458 (earliest-edit column), R146 on
+  W1175 (wrapper design and K), R95 second finding on W1349 (durable stamp and hook scripts), R95 third, R97 first, R98,
+  R111 first, R102, R127 and R128 on W1219, R94 on W1348, R93 on W1347, R92 on W1346, R91 on W1345, R72 on W846, R100 on
+  W910, R101 and R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288, R114 on W1395, R116 on W1383,
+  R119 and R135 on W1396, R138 on W1288, R142 on W1451, R143 on W1246, R148 on W1219 (read-back); two UNCLAIMED
+  mtools:W2099 letters; codon owed with no stack.; 0 finding(s)

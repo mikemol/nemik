@@ -1410,6 +1410,9 @@ def _build_static(
         The files written under `out`: the page, the data documents, the feeds and
         hashes.json, and the private files when `private`.
 
+    Raises:
+        ValueError: a document holds fields no manifest declares, so nothing is published.
+
     """
     from nemik.apischema import unmanifested
     from nemik.withheld import apply, load

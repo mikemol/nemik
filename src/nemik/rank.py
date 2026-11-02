@@ -125,6 +125,10 @@ def load_composition(text: str | None = None) -> Composition:
     Returns:
         The tiers of objectives, the scalarize weights and the weight model.
 
+    Raises:
+        ValueError: the [order] table names an objective nemik does not know, or a weight model
+            outside WEIGHT_MODELS.
+
     """
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
