@@ -356,6 +356,63 @@ def event_graph(occs: list[Occurrence], queues: Graph) -> Graph:
     return g
 
 
+def _export(
+    days: int, helper: Path, cols: dict[str, str], cals: dict[str, Calendar]
+) -> tuple[list[Occurrence], dict[str, tuple[int, int]]]:
+    """Export the next `days` days of the opted-in calendars with each filter's counts.
+
+    Returns:
+        (the occurrences by start, {label: (matched, seen)} for each filtered calendar).
+
+    Raises:
+        SystemExit: with code 2, when the calendar reader is missing or the Akonadi export fails.
+
+    """
+    try:
+        stats: dict[str, tuple[int, int]] = {}
+        occs = occurrences(
+            cols,
+            start=today().isoformat(),
+            window=f"{days}d",
+            helper=helper,
+            includes={label: c.include for label, c in cals.items() if c.include},
+            stats=stats,
+        )
+    except FileNotFoundError as e:
+        say(f"ERROR: {e}")
+        raise SystemExit(2) from e
+    except subprocess.CalledProcessError as e:
+        # The helper refuses (nemik:W193) when Akonadi is not running; say what it said, not a
+        # traceback.
+        why = _said(e.stdout) or _said(e.stderr) or f"exit {e.returncode}"
+        say(f"ERROR: the calendar export failed: {why.splitlines()[-1]}")
+        raise SystemExit(2) from e
+    return occs, stats
+
+
+def _with_waiters(occs: list[Occurrence], eg: Graph) -> list[Occurrence]:
+    """Each occurrence with the cards waiting on it, as sorted refs under "waiting".
+
+    Returns:
+        The occurrences in order, each carrying its "waiting" list.
+
+    """
+    rows: list[Occurrence] = []
+    for o in occs:
+        ev = f"urn:nemik:cal:{o['label']}/{o['uid']}/{o['recurrence_id'] or o['start']}"
+        rows.append(
+            {
+                **o,
+                "waiting": sorted(
+                    ref(n)
+                    for n, _, t in eg.triples((None, NEMIK.waitsFor, None))
+                    if str(t) == ev
+                ),
+            }
+        )
+    return rows
+
+
 def days_main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     """nemik-days: the next N days of the operator's opted-in calendars, each with its waiters.
 
@@ -363,8 +420,7 @@ def days_main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     for its Tools panel, so anything nemik-operator can reach is on the served path. This module is
     reachable from no served module (tests/test_calendar_boundary.py).
 
-    Raises:
-        SystemExit: with code 2, when the calendar reader is missing or the Akonadi export fails.
+    A missing calendar reader or a failed Akonadi export exits with code 2 (_export raises it).
 
     """
 
@@ -411,39 +467,8 @@ def days_main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         for _, qg, _ in survey(args.root):
             if qg is not None:
                 g += qg
-    try:
-        stats: dict[str, tuple[int, int]] = {}
-        occs = occurrences(
-            cols,
-            start=today().isoformat(),
-            window=f"{args.days}d",
-            helper=args.helper,
-            includes={label: c.include for label, c in cals.items() if c.include},
-            stats=stats,
-        )
-    except FileNotFoundError as e:
-        say(f"ERROR: {e}")
-        raise SystemExit(2) from e
-    except subprocess.CalledProcessError as e:
-        # The helper refuses (nemik:W193) when Akonadi is not running; say what it said, not a
-        # traceback.
-        why = _said(e.stdout) or _said(e.stderr) or f"exit {e.returncode}"
-        say(f"ERROR: the calendar export failed: {why.splitlines()[-1]}")
-        raise SystemExit(2) from e
-    eg = event_graph(occs, g)
-    rows: list[Occurrence] = []
-    for o in occs:
-        ev = f"urn:nemik:cal:{o['label']}/{o['uid']}/{o['recurrence_id'] or o['start']}"
-        rows.append(
-            {
-                **o,
-                "waiting": sorted(
-                    ref(n)
-                    for n, _, t in eg.triples((None, NEMIK.waitsFor, None))
-                    if str(t) == ev
-                ),
-            }
-        )
+    occs, stats = _export(args.days, args.helper, cols, cals)
+    rows = _with_waiters(occs, event_graph(occs, g))
     if not args.no_dedupe:
         rows = dedupe(rows)
     # nemik:W190: a filtered calendar reports what its filter kept. "0 of N matched" says the filter

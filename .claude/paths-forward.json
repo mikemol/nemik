@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1511,
+  "counter": 1512,
   "waypoints": [
     {
       "symbol": "W1",
@@ -35770,7 +35770,6 @@
       ],
       "blocked_on": [
         "W1497",
-        "W1498",
         "W1499",
         "W1500",
         "W1501",
@@ -35790,7 +35789,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1383",
       "last_worked": "2026-11-02T20:27:56Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 0,
       "completed": null
     },
     {
@@ -35844,29 +35843,6 @@
     {
       "symbol": "W1497",
       "title": "critical.main: split the modes, so C901, PLR0912 and PLR0914 clear (src/nemik/critical.py)",
-      "status": "ready",
-      "enables": [
-        "W1494"
-      ],
-      "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "Split main into one function per mode; hookcheck; tests/test_critical*.py.",
-      "evidence": "",
-      "issued_at": "2026-11-02T20:27:56Z",
-      "minted_during": "interrupt",
-      "caused_by": "W1494",
-      "last_worked": "2026-11-02T20:28:30Z",
-      "ticks_blocked": 0,
-      "manifest": [
-        "src/nemik/critical.py",
-        "ruff-baseline.json"
-      ],
-      "size_class": "small"
-    },
-    {
-      "symbol": "W1498",
-      "title": "calendars.load_calendars and days_main: split validation from reading, so two C901 clear (src/nemik/calendars.py)",
       "status": "working",
       "enables": [
         "W1494"
@@ -35874,19 +35850,43 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Split validation from reading in load_calendars and days_main; tests/test_calendars.py.",
-      "evidence": "2026-11-02: 2026-11-02T21:38:30Z (read by stampnote): G0 precommit: advances W1498 (calendars.load_calendars C901), staged behind stack 875. Pace stamp 2026-11-02T21:24:53Z, baseline ruff-baseline.json behind. N=1 site, K=1 verified by probe: load_calendars 12 over 10 clears and no new finding appears, once the Raises section moves to prose to avoid a DOC502. Actuator: codemod w1498_calendars.py real, moving the loop body verbatim into _calendar_entry. Sensor: house ruff on calendars.py loses one finding, house mypy stays at 1 misc, test_calendars passes, hookcheck rc 0. Expected: ruff 315 to 314, mypy flat, codon flat.",
+      "next_bounded_step": "Split main into one function per mode; hookcheck; tests/test_critical*.py.",
+      "evidence": "2026-11-02: 2026-11-02T22:31:25Z (read by stampnote): G0 precommit: advances W1497 (critical.main C901, PLR0912, PLR0914), staged behind stack 878. Pace stamp 2026-11-02T22:24:56Z, ruff-baseline.json behind. N=3 findings on main, K=3 verified by probe: main splits into _parse, _scope, _report_fires, _report_what_if, _report_cycles and _report_path; the probe first showed D401 and two FBT001 as follow-on findings, removed by an imperative docstring and by passing Options instead of a bool; final probe 3 findings against the file's 6, all three left being the pre-existing function-local imports, mypy 3 misc equal. Actuator: codemod w1497_main.py real. Sensor: house ruff on critical.py loses three findings, nemik-critical output byte-equal against a worktree of the parent commit in default, --json, --fires, --card and --assume-done modes, test_critical and guards pass, hookcheck rc 0 since check imports critical. Expected: ruff 312 to 309, mypy flat, codon flat.",
       "issued_at": "2026-11-02T20:27:56Z",
       "minted_during": "interrupt",
       "caused_by": "W1494",
-      "last_worked": "2026-11-02T21:38:47Z",
+      "last_worked": "2026-11-02T22:31:36Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/critical.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "small",
+      "completed": null
+    },
+    {
+      "symbol": "W1498",
+      "title": "calendars.load_calendars and days_main: split validation from reading, so two C901 clear (src/nemik/calendars.py)",
+      "status": "done",
+      "enables": [
+        "W1494"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-02: 2026-11-02T21:38:30Z (read by stampnote): G0 precommit: advances W1498 (calendars.load_calendars C901), staged behind stack 875. Pace stamp 2026-11-02T21:24:53Z, baseline ruff-baseline.json behind. N=1 site, K=1 verified by probe: load_calendars 12 over 10 clears and no new finding appears, once the Raises section moves to prose to avoid a DOC502. Actuator: codemod w1498_calendars.py real, moving the loop body verbatim into _calendar_entry. Sensor: house ruff on calendars.py loses one finding, house mypy stays at 1 misc, test_calendars passes, hookcheck rc 0. Expected: ruff 315 to 314, mypy flat, codon flat. | 2026-11-02: Landed e18e8526 (git log subject is W1498's), ruff 315 to 314.",
+      "issued_at": "2026-11-02T20:27:56Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1494",
+      "last_worked": "2026-11-02T22:20:51Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/calendars.py",
         "ruff-baseline.json"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261102T222051Z"
     },
     {
       "symbol": "W1499",
@@ -36194,6 +36194,30 @@
         "uv.lock"
       ],
       "size_class": "medium"
+    },
+    {
+      "symbol": "W1512",
+      "title": "calendars.days_main takes its export and its waiter join from two helpers, so C901 clears",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:ruff-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Run codemod w1497_days.py real, then pycheck, hookcheck, test_calendars, ratchet write, stack.",
+      "evidence": "2026-11-02: 2026-11-02T22:22:16Z (read by stampnote): G0 precommit: advances W1512 (calendars.days_main C901), staged behind stack 877. Pace stamp 2026-11-02T21:54:54Z, ruff-baseline.json behind. N=1 site, K=1 verified by probe: days_main 13 over 10 clears, and the two follow-on findings the probe first showed (D401 on the new helper, DOC502 on days_main) are removed in the codemod, final probe 4 findings against the file's 5, mypy 1 misc equal. Actuator: codemod w1497_days.py real, moving the export try block into _export and the rows loop into _with_waiters, verbatim. Sensor: house ruff on calendars.py loses one finding, test_calendars and guards pass, hookcheck rc 0. Expected: ruff 313 to 312, mypy flat, codon flat.",
+      "issued_at": "2026-11-02T22:22:08Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1494",
+      "last_worked": "2026-11-02T22:22:23Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/calendars.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "small",
+      "completed": null
     }
   ],
   "residue": [

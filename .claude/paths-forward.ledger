@@ -4163,3 +4163,7 @@
 2026-11-02T22:04:03Z  tick  W1396 advanced  unblock   "W1396 revendor dry run to mtools 11d5b4d: ten vendored dists move, procrun not listed, so the repin has two halves; stacks 876 inflight and 877 queued [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T22:05:26Z  interrupt W1510 minted    -         "Revendor the ten vendored mtools wheels to 11d5b4d (mikemol-repin --revendor), second entry behind a ruff-lowering first entry"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1396
 2026-11-02T22:05:26Z  interrupt W1511 minted    -         "Vendor mikemol-procrun in pyproject.toml, MODULE.bazel and the venv srcs, and convert one subprocess caller, with the codon census row read before and after"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1396
+2026-11-02T22:20:51Z  status W1498 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T22:22:08Z  interrupt W1512 minted    -         "calendars.days_main takes its export and its waiter join from two helpers, so C901 clears"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1494
+2026-11-02T22:22:23Z  status W1512 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T22:31:36Z  status W1497 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
