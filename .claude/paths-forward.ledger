@@ -4053,3 +4053,7 @@
 2026-11-02T11:39:55Z  status W1464 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T11:40:02Z  interrupt W1466 minted    -         "src/nemik/blocks.py and check.py name the own-enabler floor, the needs-you word floor and the umbrella prerequisite count they compare with, so ruff falls by three"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
 2026-11-02T11:40:14Z  status W1466 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T12:03:08Z  status W1465 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T12:03:13Z  tick  W1467 minted    -         "src/nemik/churn.py types its queue documents as QueueDoc, so mypy falls by nine"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1282
+2026-11-02T12:03:27Z  status W1467 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T12:05:09Z  tick  W1467 advanced  sweep     "stack 855 landed aceca896, 856 inflight and 857 queued with the first mypy lead since 843 [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

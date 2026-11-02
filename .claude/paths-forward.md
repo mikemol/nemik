@@ -3,12 +3,12 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1465 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:1275ab08f3ddafc7`
+counter 1467 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:8e246a5fb34e7d93`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1464 | working |
-| 2 | W1465 | working |
+| 1 | W1466 | working |
+| 2 | W1467 | working |
 | 3 | W1075 | ready |
 | 4 | W1139 | ready |
 | 5 | W1279 | ready |
@@ -1444,17 +1444,18 @@ counter 1465 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:127
 | 1435 | W1461 | done |
 | 1436 | W1462 | done |
 | 1437 | W1463 | done |
+| 1438 | W1464 | done |
+| 1439 | W1465 | done |
 
 ## waypoints
 
-1. **W1464** (working) tests/test_published_valid.py, test_pieces_corpus.py, test_rank_apply.py, test_static.py and
-   test_work.py name the checked floor, the case floor and the exit codes they compare with, so ruff falls by five
-   - next: Edit the five files, run tests and guards, mikemol-pycheck --ratchet --write, write stack854.json, submit
-     behind 853.
-2. **W1465** (working) src/nemik/health.py, overlaps.py, vtodo.py and critical.py name the red level, the sharing floor,
-   the stamp digits and the planned-list cap they compare with, so ruff falls by five
-   - next: Write w1465_src.py, run it, run the four hook commands and the guards, mikemol-pycheck --ratchet --write,
-     write stack855.json, submit behind 854.
+1. **W1466** (working) src/nemik/blocks.py and check.py name the own-enabler floor, the needs-you word floor and the
+   umbrella prerequisite count they compare with, so ruff falls by three
+   - next: Run w1466_src.py, the four hook commands with exit codes, the guards, mikemol-pycheck --ratchet --write,
+     write stack856.json, submit behind 855.
+2. **W1467** (working) src/nemik/churn.py types its queue documents as QueueDoc, so mypy falls by nine
+   - next: Run w1467_churn.py real, the four hook commands, tests, mikemol-pycheck --ratchet --write, write
+     stack857.json, submit behind 856.
 3. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 4. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -4722,6 +4723,10 @@ counter 1465 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:127
 1437. **W1463** (done) tests/test_flow_reference.py, test_guarantees.py, test_no_waivers.py, test_operator_rate.py and
    test_overlap_claims.py name the front share, the unscored count, the source floor, the open asks and the held count
    they compare with, so ruff falls by five
+1438. **W1464** (done) tests/test_published_valid.py, test_pieces_corpus.py, test_rank_apply.py, test_static.py and
+   test_work.py name the checked floor, the case floor and the exit codes they compare with, so ruff falls by five
+1439. **W1465** (done) src/nemik/health.py, overlaps.py, vtodo.py and critical.py name the red level, the sharing floor,
+   the stamp digits and the planned-list cap they compare with, so ruff falls by five
 
 ## residue
 
@@ -6549,3 +6554,26 @@ counter 1465 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:127
   on W846, R100 on W910, R101 and R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288, R114 on
   W1395, R116 on W1383, R119 and R135 on W1396, R134 on W1282, R138 on W1288 (twelve in a row), R142 on W1451, R143 on
   W1246; two UNCLAIMED mtools:W2099 letters; codon owed with no stack.; 1 finding(s)
+- **nemik:R145** (-) round 147: stacks 852 (W1462) b0807ca4 = 11:16:10Z and 853 (W1463) e1418363 = 11:27:10Z landed;
+  stack 854 (W1464, ruff 380 to 375) inflight, key 1793618339509929028; stack 855 (W1465, the first src PLR2004 stack:
+  health, overlaps, vtodo, critical, ruff 375 to 370) queued: root NO NEW FINDINGS, OPEN FINDINGS CARRIED WITH OWNERS
+  AND DUE DATES (not a fixpoint declaration). Verified from source (TZ=UTC reflog): 3db03f81 main@{06:04:25 -0500} =
+  11:04:25Z, b0807ca4 06:16:10 = 11:16:10Z (stack 852), e1418363 06:27:10 = 11:27:10Z (stack 853); --in-gate lists W1464
+  inflight (began_ns 1793618835194873118) and W1465 queued; `mikemol-pycheck --ratchet` prints ruff 370/370 and mypy
+  1092/1092 (380 - 5 - 5 = 370, the two stacks live in the tree). Standing-6 spot check I ran for the 855 edits (four
+  hook-imported modules by way of metrics, rank, serve and check): nemik-stale against the two directories prints no
+  STALE row, and nemik-rank --help, nemik-check --help and nemik-inbound --help each print their usage, so the session's
+  reading of the usage output is confirmed as sound even though the G1 did not capture the exit codes as the rule asks
+  (it says so itself). Gate walls by the began_ns of successive stacks: 852 to 853 about 11 min 01 s and 853 to 854
+  about 11 min 01 s, 0 s of empty gate at both landings (the invariant now fourteen in a row). The G1 is straight about
+  what is open: the standing-11 three-stamp table for 844 to 855 on W1288 is unwritten, 843's wall has its loadavg only
+  from a later read (on W1246), the exit codes of the four hook commands for 855 were not written on the card, and the
+  wrapper design for subprocess is not built though the probe is recorded on W1175 (24 S603 and S607 sites in 15 src
+  modules, 7 hook-imported), which answers the first half of R146. Edit-gate events (the constant split from its use,
+  then I001) are met with codemods after the ratchet reads clean, the same way as before. Remaining PLR2004 after 855:
+  blocks 2, check 1, test_layout 14 and 2 singles. Carried open findings, status on 2026-11-02 11:38Z: R146 on W1175
+  (probe recorded; wrapper design and K to write), R145 on W1458 (the table for 844 to 855 still owed; due today), R95
+  second finding on W1349, R95 third, R97 first, R98, R111 first, R102, R127 and R128 on W1219, R94 on W1348, R93 on
+  W1347, R92 on W1346, R91 on W1345, R72 on W846, R100 on W910, R101 and R105 on W1288, R85 on W613, R106 on W1376, R108
+  on W1382, R112 on W1288, R114 on W1395, R116 on W1383, R119 and R135 on W1396, R134 on W1282, R138 on W1288, R142 on
+  W1451, R143 on W1246; two UNCLAIMED mtools:W2099 letters; codon owed with no stack.; 0 finding(s)

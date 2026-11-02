@@ -15,8 +15,7 @@
   "misc": 2
  },
  "src/nemik/churn.py": {
-  "misc": 10,
-  "type-arg": 2
+  "misc": 3
  },
  "src/nemik/critical.py": {
   "misc": 3

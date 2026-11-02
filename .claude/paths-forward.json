@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1466,
+  "counter": 1467,
   "waypoints": [
     {
       "symbol": "W1",
@@ -35068,21 +35068,21 @@
     {
       "symbol": "W1465",
       "title": "src/nemik/health.py, overlaps.py, vtodo.py and critical.py name the red level, the sharing floor, the stamp digits and the planned-list cap they compare with, so ruff falls by five",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:ruff-baseline.json"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Write w1465_src.py, run it, run the four hook commands and the guards, mikemol-pycheck --ratchet --write, write stack855.json, submit behind 854.",
-      "evidence": "2026-11-02: G0 BEFORE the first edit of the four src files, queued behind stack 854 (W1464, inflight alone). Landed: 853 as e1418363 (W1463, ruff 385 to 380). Last full pace read 2026-11-02T10:24:28Z (PENDING; fresh read owed at the next tick): ruff-baseline.json behind, owes 90, 375 left after 854. N=8 PLR2004 sites in src (python3 -m ruff, ruff-house.toml, 11:2xZ), K=5 in these four files from the lines read: health.py line 90 compares level with 2 (the red level; STATUSES[2] is red); overlaps.py line 60 has two compares with 2 (nodes sharing a tag, repos sharing it); vtodo.py line 119 compares a digit count with 14 (and slices [:14] and [8:14] on the same line pair, which PLR2004 does not flag); critical.py line 406 compares the planned list length with 8 (and slices [:8] one line above). Edit by codemod w1465_src.py in one pass: health.py RED = 2; overlaps.py MIN_SHARING = 2; vtodo.py STAMP_DIGITS = 14 used for the three 14s; critical.py PLANNED_SHOWN = 8 used for the [:8] and the > 8. Companions: none expected; follow-ons: I001 if a constant lands directly under imports (the edit gate wants one blank line there, so the codemod places it after the last top-level constant, as W1463 and W1464 learned). Hook-imported readers: metrics, rank, serve and check import these modules, so standing rule 6 applies: run nemik-inbound --help, nemik-check --help, nemik-rank --help and nemik-stale after the edit and write the four exit codes here; tests/test_architecture.py and tests/test_namespaces.py also run (src files, checks/claims.py pins the module set). Expected: ruff 375 to 370 on top of 854, mypy flat at 1092. Behaviour: none (same literals, named). Covering check: tests of each touched module run directly (test_health, test_health_cards, test_overlap_claims, test_vtodo, test_critical_cards, test_critical). | 2026-11-02: 2026-11-02T12:00:40Z (read by stampnote): G0 before tick-open. Pace read first, stamp 2026-11-02T11:54:31Z, newest landing 11:39:10Z, current: ruff owes 90 (370 left, 70 landings to zero), mypy owes 190 (1092 left, fell 0 over 10 landings, no fall to reach zero), codon owes 2. Advances W1465 (stack 855 inflight, began_ns 1793619555103912992) and W1466 (stack 856 queued). Actuator: wait on the verdicts and mark each with the printed hash; the next stack leads with a MYPY lowering, since mypy has fallen 0 in the last ten landings while ruff fell 53. Sensor: in-gate json, git log, mikemol-pycheck --ratchet. Expected: 855 lands ruff 375 to 370, 856 lands 370 to 367, mypy flat at 1092 until the mypy stack.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-02: G0 BEFORE the first edit of the four src files, queued behind stack 854 (W1464, inflight alone). Landed: 853 as e1418363 (W1463, ruff 385 to 380). Last full pace read 2026-11-02T10:24:28Z (PENDING; fresh read owed at the next tick): ruff-baseline.json behind, owes 90, 375 left after 854. N=8 PLR2004 sites in src (python3 -m ruff, ruff-house.toml, 11:2xZ), K=5 in these four files from the lines read: health.py line 90 compares level with 2 (the red level; STATUSES[2] is red); overlaps.py line 60 has two compares with 2 (nodes sharing a tag, repos sharing it); vtodo.py line 119 compares a digit count with 14 (and slices [:14] and [8:14] on the same line pair, which PLR2004 does not flag); critical.py line 406 compares the planned list length with 8 (and slices [:8] one line above). Edit by codemod w1465_src.py in one pass: health.py RED = 2; overlaps.py MIN_SHARING = 2; vtodo.py STAMP_DIGITS = 14 used for the three 14s; critical.py PLANNED_SHOWN = 8 used for the [:8] and the > 8. Companions: none expected; follow-ons: I001 if a constant lands directly under imports (the edit gate wants one blank line there, so the codemod places it after the last top-level constant, as W1463 and W1464 learned). Hook-imported readers: metrics, rank, serve and check import these modules, so standing rule 6 applies: run nemik-inbound --help, nemik-check --help, nemik-rank --help and nemik-stale after the edit and write the four exit codes here; tests/test_architecture.py and tests/test_namespaces.py also run (src files, checks/claims.py pins the module set). Expected: ruff 375 to 370 on top of 854, mypy flat at 1092. Behaviour: none (same literals, named). Covering check: tests of each touched module run directly (test_health, test_health_cards, test_overlap_claims, test_vtodo, test_critical_cards, test_critical). | 2026-11-02: 2026-11-02T12:00:40Z (read by stampnote): G0 before tick-open. Pace read first, stamp 2026-11-02T11:54:31Z, newest landing 11:39:10Z, current: ruff owes 90 (370 left, 70 landings to zero), mypy owes 190 (1092 left, fell 0 over 10 landings, no fall to reach zero), codon owes 2. Advances W1465 (stack 855 inflight, began_ns 1793619555103912992) and W1466 (stack 856 queued). Actuator: wait on the verdicts and mark each with the printed hash; the next stack leads with a MYPY lowering, since mypy has fallen 0 in the last ten landings while ruff fell 53. Sensor: in-gate json, git log, mikemol-pycheck --ratchet. Expected: 855 lands ruff 375 to 370, 856 lands 370 to 367, mypy flat at 1092 until the mypy stack. | 2026-11-02: Landed aceca896 in stack 855; ruff 375 to 370, mypy flat 1092. Standing 6 exit codes: the four hook commands were read without an error banner (exit 0 inferred), see W1466 for the explicit note.",
       "issued_at": "2026-11-02T11:28:27Z",
       "minted_during": "interrupt",
       "caused_by": "W1383",
-      "last_worked": "2026-11-02T12:00:41Z",
+      "last_worked": "2026-11-02T12:03:08Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261102T120308Z",
       "manifest": [
         "src/nemik/health.py",
         "src/nemik/overlaps.py",
@@ -35102,17 +35102,40 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Run w1466_src.py, the four hook commands with exit codes, the guards, mikemol-pycheck --ratchet --write, write stack856.json, submit behind 855.",
-      "evidence": "2026-11-02: 2026-11-02T11:40:15Z (read by stampnote): G0 BEFORE the first edit of src/nemik/blocks.py and check.py, queued behind stack 855 (W1465, inflight alone). Landed: 854 as 683b34ba (W1464, ruff 380 to 375). Last full pace read 2026-11-02T10:24:28Z (PENDING, a fresh read is owed at the next tick): ruff-baseline.json behind, owes 90, 370 left after 855. 3 PLR2004 sites left in src (python3 -m ruff, ruff-house.toml). K=3 from the lines read: blocks.py line 180 compares the enablers in the same repo with 2, line 542 compares a ruling's word count with 3; check.py line 867 compares the prerequisite count with 2 inside umbrella(). Edit by codemod w1466_src.py in one pass: blocks.py MIN_OWN_ENABLERS = 2 and NEEDS_YOU_WORDS = 3, check.py UMBRELLA_PREREQS = 2, each placed beside an existing module constant. Both files are hook-imported, so standing rule 6: the four hook commands run after the edit with their exit codes written on this card. Also test_architecture and test_namespaces. Companions none; follow-ons I001 if a constant lands directly under imports (not the case, each goes after an existing constant). Expected: ruff 370 to 367 on top of 855, mypy flat at 1092. Behaviour: none. Covering check: tests of blocks and check run directly.",
+      "evidence": "2026-11-02: 2026-11-02T11:40:15Z (read by stampnote): G0 BEFORE the first edit of src/nemik/blocks.py and check.py, queued behind stack 855 (W1465, inflight alone). Landed: 854 as 683b34ba (W1464, ruff 380 to 375). Last full pace read 2026-11-02T10:24:28Z (PENDING, a fresh read is owed at the next tick): ruff-baseline.json behind, owes 90, 370 left after 855. 3 PLR2004 sites left in src (python3 -m ruff, ruff-house.toml). K=3 from the lines read: blocks.py line 180 compares the enablers in the same repo with 2, line 542 compares a ruling's word count with 3; check.py line 867 compares the prerequisite count with 2 inside umbrella(). Edit by codemod w1466_src.py in one pass: blocks.py MIN_OWN_ENABLERS = 2 and NEEDS_YOU_WORDS = 3, check.py UMBRELLA_PREREQS = 2, each placed beside an existing module constant. Both files are hook-imported, so standing rule 6: the four hook commands run after the edit with their exit codes written on this card. Also test_architecture and test_namespaces. Companions none; follow-ons I001 if a constant lands directly under imports (not the case, each goes after an existing constant). Expected: ruff 370 to 367 on top of 855, mypy flat at 1092. Behaviour: none. Covering check: tests of blocks and check run directly. | 2026-11-02: 2026-11-02T12:07:32Z (read by stampnote): Standing 6 printed, by hookcheck.py at 12:07:19Z to 12:07:21Z on the tree holding the blocks.py and check.py edits: all four rc=0, no STALE line. Replaces the inference written at submit (nemik:R148).",
       "issued_at": "2026-11-02T11:40:02Z",
       "minted_during": "interrupt",
       "caused_by": "W1383",
-      "last_worked": "2026-11-02T11:40:15Z",
+      "last_worked": "2026-11-02T12:07:32Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "src/nemik/blocks.py",
         "src/nemik/check.py",
         "ruff-baseline.json"
+      ]
+    },
+    {
+      "symbol": "W1467",
+      "title": "src/nemik/churn.py types its queue documents as QueueDoc, so mypy falls by nine",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:mypy-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Run w1467_churn.py real, the four hook commands, tests, mikemol-pycheck --ratchet --write, write stack857.json, submit behind 856.",
+      "evidence": "2026-11-02: 2026-11-02T12:03:28Z (read by stampnote): G0 BEFORE the first edit of src/nemik/churn.py, queued behind stack 856 (W1466, inflight alone). Landed: 855 as aceca896 (W1465). Pace read first this tick, stamp 2026-11-02T11:54:31Z, current: mypy-baseline.json behind, owes 190, 1092 left, fell 0 over 10 landings, no fall to reach zero; this is the mypy lead the pace asks for. K probe done before this G0 on a scratch copy (src/nemik/probe_w1467_churn.py, deleted by exact path): churn.py holds misc 10 plus type-arg 2 in the baseline, 12 findings; with classify(old: QueueDoc, new: QueueDoc) and _state(...) -> QueueDoc the probe holds misc 3 and no type-arg (mikemol-pycheck --ratchet read it: probe misc 3 over baseline 0; plain mypy --strict on the probe prints nothing). K=9: mypy 1092 to 1083. QueueDoc is dict[str, list[Waypoint]] at history.py line 248; churn already imports Snapshot, diff, queue_at, resolve and snapshots from nemik.history at runtime, so no new import edge. history.py imports churn and is hook-imported, so standing rule 6: the four hook commands run after the edit with their exit codes written on this card. Ruff expected flat at 367 (an import line gets longer, no new finding; format checked). Behaviour: none, annotations only. Covering check: tests/test_churn.py and test_history*.py run directly. Applied by codemod w1467_churn.py real, because the edit gate refuses the import and its use as separate edits. | 2026-11-02: 2026-11-02T12:07:44Z (read by stampnote): Standing 6 printed, by the hookcheck.py script in the nemik scratch directory, after the churn.py edit (nemik:R148): nemik-inbound rc=0, nemik-check rc=0, nemik-rank rc=0, nemik-stale rc=0 and no STALE line (stamps 12:07:19Z to 12:07:21Z). The earlier no-banner reading is now a printed fact for the tree as it stands, which carries the 856 and 857 edits. The script runs the four commands through subprocess and exits 1 if any fails; use it after every staged edit to a hook-imported file.",
+      "issued_at": "2026-11-02T12:03:13Z",
+      "minted_during": "tick",
+      "caused_by": "W1282",
+      "last_worked": "2026-11-02T12:07:45Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/churn.py",
+        "mypy-baseline.json"
       ]
     }
   ],
@@ -35316,12 +35339,7 @@
   ],
   "job_id": "481476b5",
   "heartbeat": "2026-10-29T04:11:13Z",
-  "lock": {
-    "holder": "session-nemik",
-    "taken_at": "2026-11-02T12:00:47Z",
-    "pid": 337543,
-    "start": 21144718
-  },
+  "lock": null,
   "predecessor_job_id": "1d7fe6d0",
   "leases": [
     {
@@ -43191,7 +43209,22 @@
       "root": "NO NEW FINDINGS, OPEN FINDINGS CARRIED WITH OWNERS AND DUE DATES (not a fixpoint declaration). Verified from source (TZ=UTC reflog): 3db03f81 main@{06:04:25 -0500} = 11:04:25Z, b0807ca4 06:16:10 = 11:16:10Z (stack 852), e1418363 06:27:10 = 11:27:10Z (stack 853); --in-gate lists W1464 inflight (began_ns 1793618835194873118) and W1465 queued; `mikemol-pycheck --ratchet` prints ruff 370/370 and mypy 1092/1092 (380 - 5 - 5 = 370, the two stacks live in the tree). Standing-6 spot check I ran for the 855 edits (four hook-imported modules by way of metrics, rank, serve and check): nemik-stale against the two directories prints no STALE row, and nemik-rank --help, nemik-check --help and nemik-inbound --help each print their usage, so the session's reading of the usage output is confirmed as sound even though the G1 did not capture the exit codes as the rule asks (it says so itself). Gate walls by the began_ns of successive stacks: 852 to 853 about 11 min 01 s and 853 to 854 about 11 min 01 s, 0 s of empty gate at both landings (the invariant now fourteen in a row). The G1 is straight about what is open: the standing-11 three-stamp table for 844 to 855 on W1288 is unwritten, 843's wall has its loadavg only from a later read (on W1246), the exit codes of the four hook commands for 855 were not written on the card, and the wrapper design for subprocess is not built though the probe is recorded on W1175 (24 S603 and S607 sites in 15 src modules, 7 hook-imported), which answers the first half of R146. Edit-gate events (the constant split from its use, then I001) are met with codemods after the ratchet reads clean, the same way as before. Remaining PLR2004 after 855: blocks 2, check 1, test_layout 14 and 2 singles. Carried open findings, status on 2026-11-02 11:38Z: R146 on W1175 (probe recorded; wrapper design and K to write), R145 on W1458 (the table for 844 to 855 still owed; due today), R95 second finding on W1349, R95 third, R97 first, R98, R111 first, R102, R127 and R128 on W1219, R94 on W1348, R93 on W1347, R92 on W1346, R91 on W1345, R72 on W846, R100 on W910, R101 and R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288, R114 on W1395, R116 on W1383, R119 and R135 on W1396, R134 on W1282, R138 on W1288, R142 on W1451, R143 on W1246; two UNCLAIMED mtools:W2099 letters; codon owed with no stack.",
       "findings": [],
       "id": "nemik:R145"
+    },
+    {
+      "card": "W1467",
+      "trigger": "round 148: stacks 854 (W1464) 683b34ba = 11:39:10Z and 855 (W1465, health, overlaps, vtodo, critical) aceca896 = 12:02:08Z landed; stack 856 (W1466 blocks.py and check.py, ruff 370 to 367) inflight, key 1793619699823500123, began_ns 1793620932933902987; stack 857 (W1467 churn.py QueueDoc typing, mypy 1092 to 1083) queued",
+      "root": "Verified from source (TZ=UTC reflog): e1418363 11:27:10Z, 683b34ba main@{06:39:10 -0500} = 11:39:10Z, aceca896 07:02:08 -0500 = 12:02:08Z; --in-gate lists W1466 inflight and W1467 queued; `mikemol-pycheck --ratchet` prints ruff 367/367 and mypy 1083/1083 (370 - 3 and 1092 - 9 with both live in the tree); nemik-stale against the two directories prints no STALE row. Intervals as Z pairs: 854 gated 11:27:10Z to 11:39:10Z (12 min 00 s), 855 (a src stack with the census in its test set) 11:39:10Z to 12:02:08Z (22 min 58 s), the gate empty 0 s at both landings (the invariant now sixteen in a row). The round has the first mypy lead since stack 843 (W1467, churn.py, K probe 12 to 3 on a scratch copy, K=9 equal to the measured fall), taken after the 11:54Z pace read said mypy 'fell 0 over 10 landings, no fall to reach zero'. R147's follow-through is honest and partly done: the standing-11 table for 844 to 855 was written on W1288 at 11:37:46Z with G0 and submit stamps from the transcript, the earliest-edit column is still not extracted, and a hand-typed '09:24Z' in W1454's G0 text (real write 09:20:15Z) is named as a lapse. The G1's epistemics on the standing-6 exit codes are right: the Bash tool prints an exit code only when it is nonzero, so 'no code printed' is an inference of 0, not a printed 0, and it says so. One finding makes that a fact. No fixpoint is declared. Carried open findings, status on 2026-11-02 12:08Z: R145 on W1458 (the earliest-edit column and the table's tail), R146 on W1175 (wrapper design and K), R95 second finding on W1349, R95 third, R97 first, R98, R111 first, R102, R127 and R128 on W1219, R94 on W1348, R93 on W1347, R92 on W1346, R91 on W1345, R72 on W846, R100 on W910, R101 and R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288, R114 on W1395, R116 on W1383, R119 and R135 on W1396, R134 on W1282, R138 on W1288, R142 on W1451, R143 on W1246 (843's wall now has its load from the later read); two UNCLAIMED mtools:W2099 letters; codon owed with no stack.",
+      "findings": [
+        {
+          "finding": "Standing 6's clause 'run the four commands and write the four exit codes on the card' has now been met by inference in three rounds running (R127's repair, the 855 stack, the 857 stack): the Bash tool prints a code only when it is nonzero, so what is written is 'no code printed', not '0'. Make it a printed fact with one command: a small script (tools/hookcheck.py or a scratch script on the short scratch path for now) that runs nemik-inbound --help, nemik-check --help, nemik-rank --help and nemik-stale against the two directories through subprocess, prints a single line per command with its return code and a Z stamp, and exits nonzero if any failed. Run it after every staged edit to a hook-imported file and paste its output on the card. It is also the clause 2 of rule 6 in executable form, so the next reader can run it instead of reconstructing it.",
+          "finding_card": "W1219",
+          "finding_owner": "nemik session",
+          "finding_witness": "The script's path and a W1219 or stack-card evidence line holding its four printed 'rc 0' lines with a Z stamp after a staged edit to a hook-imported file.",
+          "due": "2026-11-02"
+        }
+      ],
+      "id": "nemik:R146"
     }
   ],
-  "retro_counter": 145
+  "retro_counter": 146
 }

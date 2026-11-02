@@ -22,7 +22,7 @@ from dataclasses import asdict, dataclass
 from datetime import UTC, datetime, timedelta
 from typing import TYPE_CHECKING
 
-from nemik.history import Snapshot, diff, queue_at, resolve, snapshots
+from nemik.history import QueueDoc, Snapshot, diff, queue_at, resolve, snapshots
 from nemik.say import say
 
 if TYPE_CHECKING:
@@ -33,7 +33,7 @@ CLASSES = ("identical", "attribute", "state", "structural")
 STEPS = (60, 300, 3600)  # seconds: the poll, five of them, an hour
 
 
-def classify(old: dict, new: dict) -> str:
+def classify(old: QueueDoc, new: QueueDoc) -> str:
     """How the drawn graph must change to follow `old` -> `new`, two parsed queues.
 
     structural: a card minted, closed (done leaves the default view) or dropped, or an edge added or
@@ -94,7 +94,7 @@ def _times(snaps: list[Snapshot]) -> list[datetime]:
     return [at for at, _ in snaps]
 
 
-def _state(snaps: list[Snapshot], when: datetime) -> dict:
+def _state(snaps: list[Snapshot], when: datetime) -> QueueDoc:
     """Give the queue as it stood at `when`: the last commit at or before it.
 
     Returns:
