@@ -193,8 +193,7 @@ def test_repo_toggles_and_salience_order(server: str, tmp_path: Path) -> None:
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
-        errors: list[str] = []
-        page.on("pageerror", lambda e: errors.append(str(e)))
+        errors = webpage.page_errors(page)
         webpage.watch(page)
         page.goto(server)
         webpage.until(
@@ -989,8 +988,7 @@ def test_the_page_script_runs_without_errors(server: str) -> None:
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
-        errors: list[str] = []
-        page.on("pageerror", lambda err: errors.append(str(err)))
+        errors = webpage.page_errors(page)
         webpage.watch(page)
         page.goto(server)
         webpage.until(
@@ -1450,8 +1448,7 @@ def test_rank_forest_view(server: str, tmp_path: Path) -> None:
         page = browser.new_page(
             viewport={"width": 1700, "height": 1250}, color_scheme="dark"
         )
-        errors: list[str] = []
-        page.on("pageerror", lambda e: errors.append(str(e)))
+        errors = webpage.page_errors(page)
         webpage.watch(page)
         page.goto(server)
         webpage.until(
@@ -1529,8 +1526,7 @@ def test_treemap_view_draws(server: str, tmp_path: Path) -> None:
         page = browser.new_page(
             viewport={"width": 1700, "height": 1250}, color_scheme="dark"
         )
-        errors: list[str] = []
-        page.on("pageerror", lambda e: errors.append(str(e)))
+        errors = webpage.page_errors(page)
         webpage.watch(page)
         page.goto(server)
         webpage.until(

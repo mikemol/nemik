@@ -3,7 +3,9 @@
 """nemik:W715: a test that waits on a page with no clock still ends when the page breaks."""
 
 import os
+from collections.abc import Callable
 from pathlib import Path
+from typing import cast
 from urllib.parse import quote
 
 import pytest
@@ -171,3 +173,35 @@ def test_a_script_lost_once_is_loaded_again_by_the_wait() -> None:
 def test_an_unwatched_page_rests_on_its_predicate_alone() -> None:
     """With no error record the wait still ends when the page is ready, and returns no error."""
     assert _serve(READIES, expecting=True, watched=False) is None
+
+
+class _EventedPage:
+    """A page that only keeps the handlers registered on it and fires them on demand."""
+
+    def __init__(self) -> None:
+        self.main_frame = object()
+        self.handlers: dict[str, list[Callable[[object], None]]] = {}
+
+    def on(self, event: str, handler: Callable[[object], None]) -> None:
+        """Register a handler for an event."""
+        self.handlers.setdefault(event, []).append(handler)
+
+    def fire(self, event: str, argument: object) -> None:
+        """Call each handler registered for the event, in order."""
+        for handler in self.handlers.get(event, []):
+            handler(argument)
+
+
+def test_the_errors_of_an_abandoned_load_are_forgotten_and_a_later_one_stays() -> None:
+    """nemik:W846: the load `until` tried again leaves no error behind; one after it stays."""
+    page = _EventedPage()
+    errors = webpage.page_errors(cast("Page", page))
+    page.fire("framenavigated", page.main_frame)
+    page.fire("pageerror", ReferenceError("popLater is not defined"))
+    assert errors == ["popLater is not defined"]
+    page.fire("framenavigated", object())  # a subframe loading starts nothing over
+    assert errors == ["popLater is not defined"]
+    page.fire("framenavigated", page.main_frame)  # the load tried again
+    assert errors == []
+    page.fire("pageerror", ReferenceError("a real one"))
+    assert errors == ["a real one"]

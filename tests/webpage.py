@@ -117,6 +117,35 @@ def until(page: Waitable, expr: str) -> None:
         return
 
 
+def page_errors(page: LaunchedPage) -> list[str]:
+    """Collect the page's uncaught errors, forgetting those of a load that `until` abandoned.
+
+    `until` loads a page again when a network change cost it its scripts (W846), and the first
+    load's ReferenceError would otherwise stay in a test's own list and fail an `errors == []`
+    assertion the second, clean load had already satisfied. A navigation of the main frame starts
+    the list over; an error raised after the last navigation stays.
+
+    Args:
+        page: The Playwright page, before it navigates.
+
+    Returns:
+        The live list, one message per uncaught error of the page's latest load.
+
+    """
+    errors: list[str] = []
+
+    def note(error: object) -> None:
+        errors.append(str(error))
+
+    def forget(frame: object) -> None:
+        if frame == page.main_frame:
+            errors.clear()
+
+    page.on("pageerror", note)
+    page.on("framenavigated", forget)
+    return errors
+
+
 class Seen(Protocol):
     """What the page's request and response events give that W1060 reads."""
 
