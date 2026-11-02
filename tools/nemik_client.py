@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 import time
 import urllib.request
 
@@ -80,7 +81,7 @@ def main(argv: list[str] | None = None) -> int:
     client = Client(args.base)
     while True:
         for path in client.refresh():
-            print(path)
+            sys.stdout.write(f"{path}\n")
         if not args.watch:
             return 0
         time.sleep(args.watch)
