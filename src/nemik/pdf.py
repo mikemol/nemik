@@ -24,13 +24,24 @@ import tempfile
 from pathlib import Path
 
 from mikemol.webpage.page import PageBrokenError, load, until
-from playwright.sync_api import Page, Request, Response, ViewportSize, sync_playwright
+from playwright.sync_api import (
+    Browser,
+    Page,
+    Request,
+    Response,
+    ViewportSize,
+    sync_playwright,
+)
 
 from nemik import pdfviews
 
 HOST_URL = "http://127.0.0.1:8765/"
 # nemik:W846: a response at or past this status is recorded as a failed request
 HTTP_ERROR = 400
+# nemik:W846: Chromium aborts every request in flight when the host's network configuration
+# changes, whatever the server did; a load that lost only to that is tried again
+NETWORK_CHANGED = "net::ERR_NETWORK_CHANGED"
+LOAD_TRIES = 3
 # the page has drawn its graph
 CY_READY = "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 1"
 # two animation frames have passed, so a changed control has redrawn
@@ -81,6 +92,23 @@ def apply(page: Page, view: str, repo: str) -> None:
     until(page, REDRAWN)
 
 
+class NetworkChangedError(PageBrokenError):
+    """The page broke and every request it made died of a network change (nemik:W846)."""
+
+
+def lost_to_a_network_change(refused: list[str]) -> bool:
+    """Say whether the load failed only because the host's network configuration changed.
+
+    Args:
+        refused: The requests the page listed as failed or refused.
+
+    Returns:
+        True when there are some and every one of them died of net::ERR_NETWORK_CHANGED.
+
+    """
+    return bool(refused) and all(NETWORK_CHANGED in line for line in refused)
+
+
 def load_naming_failures(page: Page, url: str) -> None:
     """Open `url` and wait for the graph, naming the requests that failed if the page breaks.
 
@@ -92,6 +120,8 @@ def load_naming_failures(page: Page, url: str) -> None:
         url: A running nemik-serve.
 
     Raises:
+        NetworkChangedError: the page broke and every failed request died of a network
+            change.
         PageBrokenError: the page broke while loading; the message lists the requests that
             failed or got an error status.
 
@@ -99,7 +129,7 @@ def load_naming_failures(page: Page, url: str) -> None:
     refused: list[str] = []
 
     def note_failed(request: Request) -> None:
-        refused.append(f"failed {request.url}")
+        refused.append(f"failed {request.url} ({request.failure})")
 
     def note_status(response: Response) -> None:
         if response.status >= HTTP_ERROR:
@@ -111,7 +141,37 @@ def load_naming_failures(page: Page, url: str) -> None:
         load(page, url, CY_READY)
     except PageBrokenError as e:
         message = f"{e}; requests refused or failed: {refused}"
+        if lost_to_a_network_change(refused):
+            raise NetworkChangedError(message) from e
         raise PageBrokenError(message) from e
+
+
+def loaded_page(browser: Browser, url: str) -> Page:
+    """Open `url` in a new page, again on a fresh page when the network changed under the load.
+
+    Args:
+        browser: A launched browser.
+        url: A running nemik-serve.
+
+    Returns:
+        The first page whose graph drew.
+
+    Raises:
+        NetworkChangedError: every try lost all its requests to a network change.
+
+    """
+    tries = 0
+    while True:
+        tries += 1
+        page = browser.new_page(viewport=VIEWPORT)
+        try:
+            load_naming_failures(page, url)
+        except NetworkChangedError:
+            page.close()
+            if tries >= LOAD_TRIES:
+                raise
+        else:
+            return page
 
 
 def svg_to_pdf(svg: str, out: Path) -> None:
@@ -174,8 +234,7 @@ def render(url: str, view: str, repo: str, out: Path) -> None:
             executable_path=str(Path(exe).absolute()) if exe else None
         )
         try:
-            page = browser.new_page(viewport=VIEWPORT)
-            load_naming_failures(page, url)
+            page = loaded_page(browser, url)
             apply(page, view, repo)
             page.add_script_tag(path=str(SVG_EXPORT))
             drawing: object = page.evaluate(GRAPH_SVG)
