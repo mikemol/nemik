@@ -346,6 +346,10 @@ def days_main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     A separate command, not a flag on nemik-operator (nemik:W161): nemik-serve runs nemik-operator
     for its Tools panel, so anything nemik-operator can reach is on the served path. This module is
     reachable from no served module (tests/test_calendar_boundary.py).
+
+    Raises:
+        SystemExit: with code 2, when the calendar reader is missing or the Akonadi export fails.
+
     """
 
     class Options(argparse.Namespace):

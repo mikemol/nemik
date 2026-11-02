@@ -4085,3 +4085,10 @@
 2026-11-02T14:31:44Z  status W1473 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T14:33:05Z  interrupt W1475 minted    -         "src/nemik/wake.py dumps its two JSON payloads through one typed helper, so mypy falls by two"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1282
 2026-11-02T14:33:14Z  status W1475 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T14:56:26Z  status W1474 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T14:57:04Z  tick  W1476 minted    -         "Declare HELP and TYPE rows at the source for seven relayed families (nemik_cards_completed_24h, nemik_cards_reopened_24h, nemik_commits_24h, nemik_net_inflow_per_day, nemik_arrival_pressure, nemik_umbrella_forecast_days, nemik_unforecastable_cards, and the OTLP twin nemik.cards.completed.24h), so luthen's census stops listing them undeclared"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W1918
+2026-11-02T14:58:30Z  status W1476 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T14:58:45Z  tick  W1477 minted    -         "src/nemik/calendars.py and vtodo.py document the SystemExit their main functions raise, so ruff falls by two"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
+2026-11-02T14:58:53Z  status W1477 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T15:00:13Z  tick  W1474 advanced  sweep     "stack 863 and 864 landed; 865 inflight and 866 queued; peer luthen-observability:W1918 probed and answered [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T15:02:12Z  status W1476 blocked>done writer    "blocked -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

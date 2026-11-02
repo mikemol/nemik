@@ -285,9 +285,7 @@ def grouped(todos: list[list[str]]) -> list[list[str]]:
             f"CATEGORIES:nemik,{escape(repo)}",
         ]
         if dues:  # earliest by the date-time digits, whatever the value form
-            parent.append(
-                min(dues, key=_due_digits)
-            )
+            parent.append(min(dues, key=_due_digits))
         out.append([*parent, "END:VTODO"])
         out += [
             [*k[:-1], f"RELATED-TO;RELTYPE=PARENT:nemik:repo:{repo}", k[-1]]
@@ -348,6 +346,10 @@ def tasks_main(argv: list[str] | None = None) -> None:
     it on stdin. Its stdout (CREATE/UPDATE/COMPLETE/DONE-CLAIM lines) passes through, and its exit
     code is returned: 0 ok, 1 some writes failed, 2 no unique list or Akonadi unreachable. A missing
     helper or a failed feed is also 2.
+
+    Raises:
+        SystemExit: always, with the exit code described above.
+
     """
 
     class Options(argparse.Namespace):
