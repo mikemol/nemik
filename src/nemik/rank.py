@@ -673,7 +673,12 @@ def fruit(
 
 
 def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
-    """nemik-rank REPO: REPO's ready waypoints ordered by cross-repo downstream weight."""
+    """nemik-rank REPO: REPO's ready waypoints ordered by cross-repo downstream weight.
+
+    Raises:
+        SystemExit: with the exit code of the mode it ran, for the modes that report a verdict.
+
+    """
     from nemik.check import default_root, survey
 
     ap = argparse.ArgumentParser(
@@ -988,6 +993,10 @@ def _apply(state: str, rows: list[dict]) -> None:
 
     It is the one installed beside this interpreter; nemik never writes a queue itself. Exits with
     its status.
+
+    Raises:
+        SystemExit: always, with the writer's exit status.
+
     """
     pf = Path(sys.executable).parent / "mikemol-paths-forward"
     with tempfile.NamedTemporaryFile(
