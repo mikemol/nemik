@@ -13,7 +13,7 @@ import tempfile
 from collections.abc import Callable, Generator
 from contextlib import contextmanager
 from pathlib import Path
-from typing import Any, Protocol
+from typing import Protocol, cast
 
 import installed
 import pytest
@@ -31,10 +31,10 @@ from playwright.sync_api import Page as LaunchedPage
 from playwright.sync_api import Playwright as Launcher
 from playwright.sync_api import Request as LaunchedRequest
 from playwright.sync_api import Response as LaunchedResponse
+from playwright.sync_api import sync_playwright
 
 from nemik.tracker import BOOL, INT, Tree, parse_tree
 
-sync_api = pytest.importorskip("playwright.sync_api")
 __all__ = [
     "CY_READY",
     "FLEET",
@@ -275,12 +275,11 @@ def opened_page(
 
 def open_page(
     p: Playwright, url: str, wait: str = CY_READY, block: tuple[str, ...] = ()
-) -> tuple[Any, Any]:
+) -> tuple[Browser, Pager]:
     """Open the page as opened_page does, for the tests that drive it with Playwright's own API.
 
     Returns:
-        The browser and the page, untyped: a test moves to opened_page (typed by the Protocols
-        above) as it is converted (nemik:W1177).
+        The browser and the page, typed by the Protocols above like opened_page's (nemik:W1177).
 
     """
     return opened_page(p, url, wait, block)
@@ -384,8 +383,9 @@ def session(block: tuple[str, ...] = ()) -> Generator[Pager]:
         The page, once its predicate holds.
 
     """
-    with served() as url, sync_api.sync_playwright() as p:
-        yield opened_page(p, url, block=block)[1]
+    with served() as url, sync_playwright() as p:
+        # the real Playwright has the .chromium.launch(executable_path=...) the Protocol reads
+        yield opened_page(cast("Playwright", p), url, block=block)[1]
 
 
 class Evaluator(Protocol):
