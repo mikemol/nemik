@@ -25,6 +25,7 @@ from rdflib.namespace import PROV
 from nemik.adapter import NEMIK, OSLC_CM
 from nemik.flow import Flow, solve
 from nemik.rank import _open, _repo, downstream_weight, ref_of, successors
+from nemik.tomlview import table
 
 if TYPE_CHECKING:
     from collections.abc import Generator
@@ -366,8 +367,9 @@ def table_weights(name: str, text: str | None = None) -> dict[str, Fraction]:
     """
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
-    table: dict[str, object] = tomllib.loads(text).get(name, {})
-    return {str(gate): Fraction(str(w)) for gate, w in table.items()}
+    parsed: object = tomllib.loads(text)
+    entries = table(table(parsed).get(name))
+    return {str(gate): Fraction(str(w)) for gate, w in entries.items()}
 
 
 def load_gate_weights(text: str | None = None) -> dict[str, Fraction]:

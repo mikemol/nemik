@@ -3912,3 +3912,8 @@
 2026-11-02T01:30:25Z  interrupt W1427 minted    -         "calendars.py reads its TOML and entries through the tomlview helpers instead of chained Any gets, so mypy falls by four and the stack lowers an owed ratchet"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
 2026-11-02T01:30:29Z  status W1427 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T01:31:45Z  status W1425 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T01:36:17Z  tick  W1427 advanced  sweep     "stack 818 gating (W1427 mypy 1274 to 1270 leads, W1425 ruff 484 to 475); stacks 817 landed as 90e9b15a and ff5dbe1c and pushed [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T01:46:49Z  status W1427 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T01:46:53Z  status W1425 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T02:01:05Z  interrupt W1428 minted    -         "salience.table_weights reads rank-weights.toml through the tomlview table helper instead of a chained Any get, so mypy falls by one"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
+2026-11-02T02:02:42Z  status W1428 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
