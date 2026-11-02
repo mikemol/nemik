@@ -26,6 +26,9 @@ if TYPE_CHECKING:
 
     from nemik.check import Finding
 
+POKE_BUDGET_SECONDS = 0.5  # a poke while a rebuild is in flight returns at once
+REBUILDS_AFTER_RELEASE = 2  # the first rebuild, then the one the second poke queued
+
 
 def write_queue(root: Path, repo: str) -> None:
     """Write an empty queue for `repo` under `root`."""
@@ -98,11 +101,11 @@ def test_poke_serves_stale_while_rebuilding(tmp_path: Path) -> None:
         t0 = time.monotonic()
         model.poke()
         model.poke()  # a second request while the rebuild is in flight starts nothing new
-        assert time.monotonic() - t0 < 0.5
+        assert time.monotonic() - t0 < POKE_BUDGET_SECONDS
         assert model.rebuilds == 1
         released.set()
         for _ in range(100):
-            if model.rebuilds == 2:
+            if model.rebuilds == REBUILDS_AFTER_RELEASE:
                 break
             time.sleep(0.02)
-    assert model.rebuilds == 2
+    assert model.rebuilds == REBUILDS_AFTER_RELEASE

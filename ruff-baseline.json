@@ -434,9 +434,6 @@
   "PLR0913": 1,
   "PLR0917": 1
  },
- "tests/test_serve_model.py": {
-  "PLR2004": 3
- },
  "tests/test_shaclcache_threads.py": {
   "PLR2004": 2
  },
