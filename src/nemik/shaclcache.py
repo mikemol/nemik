@@ -26,7 +26,7 @@ from __future__ import annotations
 
 import threading
 from contextlib import contextmanager
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, NamedTuple
 
 from rdflib.plugins.sparql import processor
 
@@ -36,11 +36,10 @@ if TYPE_CHECKING:
     from collections.abc import Generator
 
 
-class _Text:
+class _Text(NamedTuple):
     """A query whose parse is deferred until it is translated."""
 
-    def __init__(self, text: str) -> None:
-        self.text = text
+    text: str
 
 
 @contextmanager
