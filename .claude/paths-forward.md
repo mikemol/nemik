@@ -3,7 +3,7 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1479 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:c5b5ad136793dc6c`
+counter 1480 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:14da110fff08ae2f`
 
 | # | symbol | status |
 |---|---|---|
@@ -1458,6 +1458,7 @@ counter 1479 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:c5b
 | 1449 | W1477 | done |
 | 1450 | W1478 | done |
 | 1451 | W1479 | done |
+| 1452 | W1480 | done |
 
 ## waypoints
 
@@ -2527,7 +2528,7 @@ counter 1479 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:c5b
 215. **W1175** (blocked) Ruff in larger steps, after the Any-boundary moves: D103 (423 in tests) and D205 (68) by
    mechanization, PLC0415 (271) as hoists with an importdag cycle refusal turned into atomize cards, T201 (124 in src)
    into one output module
-   - blocked on: nemik:W1396
+   - blocked on: nemik:W1396, mtools:W2231, mtools:W2230
    - next: When the repin W1396 lands mikemol.procrun in the venv: convert one covered caller (overlaps.py), run the
      codon census with the cached compiler and compare its entry before and after; then convert the other 12 covered
      calls.
@@ -4753,6 +4754,8 @@ counter 1479 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:c5b
 1450. **W1478** (done) src/nemik/rank.py documents the SystemExit its main and its apply helper raise, so ruff falls by
    two
 1451. **W1479** (done) src/nemik/shaclcache.py holds its deferred query as a NamedTuple, so ruff falls by one
+1452. **W1480** (done) src/nemik/rank.py types the rows of rank() as a RankRow TypedDict on the producer side, so mypy
+   falls by about 150 in rank.py (the W1282 first step)
 
 ## residue
 
@@ -6765,3 +6768,25 @@ counter 1479 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:c5b
   R119 and R135 on W1396, R138 on W1288 (the 5 min 18 s is the first failure after twenty-four holds), R142 on W1451,
   R143 on W1246, R153 on W1242 (recorded: 88 columns in the edit hook and pycheck --format, 100 in the house lint, the
   gate does not check format); codon owed with no stack.; 1 finding(s)
+- **nemik:R153** (-) round 155: stacks 867 (W1478) b6ce1d14 = 16:09:39Z and 868 (W1479, B903 in shaclcache.py) 00dfaddd
+  = 16:34:02Z landed; --in-gate prints [] at 16:37:23Z; nothing queued and nothing staged; ruff 340, mypy 1069: root
+  Verified from source (TZ=UTC reflog): 8690f2cb 15:44:09Z, b6ce1d14 main@{11:09:39 -0500} = 16:09:39Z, 00dfaddd
+  11:34:02 -0500 = 16:34:02Z; `--in-gate --json` prints [] at 16:37:23Z, so the gate has been empty 3 min 21 s since the
+  868 landing and is still empty; `mikemol-pycheck --ratchet` prints ruff 340/340 and mypy 1069/1069. The G1 reports its
+  gate-empty intervals in two Z stamps each, including the one still open (15:44:09Z to 15:49:27Z, 5 min 18 s; 16:09:39Z
+  to 16:13:45Z, 4 min 6 s; 16:34:02Z onward), which is the format standing 13 asks for, and the reasons given are
+  accurate: 867 and 868 were each the last stack in the queue and no ready entry lowered an owed baseline. The
+  single-site backlog is down to six findings of the E501, PERF401, FBT003, ANN202 and T201 kind (each measured as
+  needing either a mypy-neutral rewrite or a typing choice), the line-length plan was measured and dropped (two
+  f-strings in rank.py cleared two ruff findings but raised mypy by four, so the write was refused and the edits were
+  reverted and re-measured to 341 and 1069), and the only lever left on mypy (1069, fell 14 over 10 landings) is W1282's
+  typed rows. So the loop has reached the end of the cheap work: the gate is empty because the next work is design work.
+  The revendor dry run is the other useful fact: the ten vendored dists (hooks pathsforward fence icsstruct rulerseq
+  frontier atomicwrite cvdcore ratchet transcriptstruct) do not include mikemol.procrun, so a pin move alone does not
+  make the wrapper installable. Two findings. No fixpoint is declared. Carried open findings, status on 2026-11-02
+  16:40Z: R134 on W1282 (now unavoidable), R154 on W1175 (answered: ask withdrawn, blocked on W1396 as an agent block;
+  the second blocker below), R146 on W1175, R145 on W1458, R100 on W910, R95 second finding on W1349, R95 third, R97
+  first, R98, R111 first, R102, R127 and R128 on W1219, R94 on W1348, R93 on W1347, R92 on W1346, R91 on W1345, R72 on
+  W846, R101 and R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288, R114 on W1395, R116 on W1383,
+  R119 and R135 on W1396, R138 on W1288 (two empty intervals of 5 min 18 s and 4 min 6 s, and one open), R142 on W1451,
+  R143 on W1246, R153 on W1242; two UNCLAIMED mtools:W2099 letters; codon owed with no stack.; 2 finding(s)

@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING, TypedDict, cast
 
 from mikemol.rulerseq import morse_motif
 
-from nemik.serve import Model, ruler_table
+from nemik.serve import EdgeRow, Model, ruler_table
 
 if TYPE_CHECKING:
     from nemik.blocks import AskRow
@@ -30,9 +30,10 @@ class _Doc(TypedDict):
 
 def test_the_table_is_mtools_generator_and_decodes_by_length() -> None:
     """The table is mtools generator and decodes by length."""
-    edges = [{"source": f"s{i}", "target": "t", "kind": "waits"} for i in range(5)] + [
-        {"source": "x", "target": "t", "kind": "enables"}
+    edges: list[EdgeRow] = [
+        {"source": f"s{i}", "target": "t", "kind": "waits"} for i in range(5)
     ]
+    edges.append({"source": "x", "target": "t", "kind": "enables"})
     asks: list[AskRow] = [{"category": "needs-you", "ref": "r:W1"}] * 7
     table = ruler_table(edges, asks)
     assert table["motif"] == [morse_motif(k) for k in range(4)]

@@ -40,10 +40,9 @@
   "type-arg": 2
  },
  "src/nemik/serve.py": {
-  "explicit-any": 5,
-  "misc": 248,
-  "operator": 1,
-  "type-arg": 8
+  "explicit-any": 2,
+  "misc": 112,
+  "type-arg": 7
  },
  "src/nemik/shaclcache.py": {
   "explicit-any": 2,

@@ -33,7 +33,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from importlib.metadata import PackageNotFoundError, version
 from importlib.resources import files
 from pathlib import Path
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, TypedDict
 
 from rdflib import RDF, Graph, URIRef
 from rdflib.namespace import DCTERMS, PROV
@@ -817,6 +817,56 @@ def without(g: Graph, refs: frozenset[str]) -> Graph:
     return out
 
 
+# nemik:W1282: one card of graph.json, and one edge. `for` is a keyword, so the node row is the
+# functional form; _to_json adds keys in place after the literal, hence total=False.
+NodeRow = TypedDict(
+    "NodeRow",
+    {
+        "id": str,
+        "repo": str,
+        "symbol": str,
+        "title": str,
+        "state": str,
+        "blocked_on": list[str],
+        "blocked_kind": str,
+        "suppliers": list[str],
+        "want": str,
+        "effort": dict[str, int],
+        "last_activity": str,
+        "last_worked": str,
+        "issued": str,
+        "stage": str,
+        "minted_during": str,
+        "caused_by": str,
+        "weather": str,
+        "cite": str,
+        "for": str,
+        "open_blockers": int,
+        "rank_pos": int,
+        "band": str,
+        "salience": float,
+        "slack": int,
+        "on_path": bool,
+        "path_count": int,
+        "on_path_repo": bool,
+        "behind_open": bool,
+        "needs_manifest": bool,
+        "warnings": list[dict[str, str]],
+    },
+    total=False,
+)
+
+
+class EdgeRow(TypedDict, total=False):
+    """One edge of graph.json."""
+
+    source: str
+    target: str
+    kind: str
+    satisfied: bool
+    current: float
+
+
 def to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
     """Build the view's document.
 
@@ -857,8 +907,8 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
         for wp in g.objects(act, PROV.used):
             effort[str(wp)][cls] += 1
             last[str(wp)] = max(last.get(str(wp), ""), stamp)
-    nodes: list[dict[str, Any]] = []
-    edges: list[dict[str, Any]] = []
+    nodes: list[NodeRow] = []
+    edges: list[EdgeRow] = []
     for kind, cls in (("waypoint", OSLC_CM.ChangeRequest), ("dropped", NEMIK.Dropped)):
         for n in g.subjects(RDF.type, cls):
             state = (
@@ -944,7 +994,7 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
     # not.
     asks = [a for a in with_salience(gn, operator_asks(g)) if a["category"] != "errand"]
     for a in asks:
-        lane_edge: dict[str, Any] = {
+        lane_edge: EdgeRow = {
             "source": f"{BASE}{a['ref'].replace(':', '/', 1)}",
             "target": f"operator:{a['category']}",
             "kind": "waits",
@@ -1010,7 +1060,18 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
 
     marks = node_flags(g, findings)
     for item in nodes:
-        item.update(marks.get(item["id"], {}))
+        flags = marks.get(item["id"], {})
+        if "behind_open" in flags:
+            item["behind_open"] = bool(flags["behind_open"])
+        if "needs_manifest" in flags:
+            item["needs_manifest"] = bool(flags["needs_manifest"])
+        warned = flags.get("warnings")
+        if isinstance(warned, list):
+            item["warnings"] = [
+                {str(k): str(v) for k, v in w.items()}
+                for w in warned
+                if isinstance(w, dict)
+            ]
     # nemik:W264: the demand that crossed each dependency, summed over the ready repos' solves, as
     # the width the page draws the edge with. A `waits` edge runs waiter -> blocker, an `enables`
     # edge prerequisite -> dependent; the flow names a dependency (needing card, prerequisite).
@@ -1078,7 +1139,7 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
     }
 
 
-def ruler_table(edges: list[dict], asks: list[AskRow]) -> dict[str, list[str]]:
+def ruler_table(edges: list[EdgeRow], asks: list[AskRow]) -> dict[str, list[str]]:
     """nemik:W418: the ruler patterns the page draws, from mtools' generator (mtools:W1048).
 
     `motif[k]` is the order-k motif (one per halo scope, orders 0..3). `f[n]` is F(n), the pattern
