@@ -478,11 +478,14 @@ def umbrellas(g: Graph, repo: str) -> list[Node]:
 
     """
     ws = workstream_uri(repo)
-    return [
-        n
-        for n in g.subjects(NEMIK.workstream, ws)
-        if (n, OSLC_CM.state, NEMIK.Ready) in g and is_umbrella(g, n)
-    ]
+    return sorted(
+        (
+            n
+            for n in g.subjects(NEMIK.workstream, ws)
+            if (n, OSLC_CM.state, NEMIK.Ready) in g and is_umbrella(g, n)
+        ),
+        key=str,
+    )
 
 
 def _rows(
@@ -512,15 +515,18 @@ def _rows(
 
     """
     ws = workstream_uri(repo)
-    ready = [
-        n
-        for n in g.subjects(NEMIK.workstream, ws)
-        if (
-            (n, OSLC_CM.state, NEMIK.Ready) in g
-            or (with_working and (n, OSLC_CM.state, NEMIK.Working) in g)
-        )
-        and not is_umbrella(g, n)
-    ]
+    ready = sorted(
+        (
+            n
+            for n in g.subjects(NEMIK.workstream, ws)
+            if (
+                (n, OSLC_CM.state, NEMIK.Ready) in g
+                or (with_working and (n, OSLC_CM.state, NEMIK.Working) in g)
+            )
+            and not is_umbrella(g, n)
+        ),
+        key=str,
+    )
     from nemik.salience import salience_of
 
     bands = load_bands().watching(frozenset(behind_files(repo)))
