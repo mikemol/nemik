@@ -30,6 +30,7 @@ from nemik.adapter import NEMIK, OSLC_CM
 from nemik.blocks import ref
 from nemik.check import default_root, survey
 from nemik.say import say, warn
+from nemik.tomlview import table
 from nemik.vtodo import DEFAULT_HELPER
 
 DEFAULT_CONFIG = Path.home() / ".config" / "nemik" / "calendars.toml"
@@ -80,27 +81,29 @@ def load_calendars(path: Path = DEFAULT_CONFIG) -> dict[str, Calendar]:
     """
     if not path.exists():
         return {}
-    cals: object = tomllib.loads(path.read_text(encoding="utf-8")).get("calendars", {})
+    parsed: object = tomllib.loads(path.read_text(encoding="utf-8"))
+    cals: object = table(parsed).get("calendars", {})
     if not isinstance(cals, dict):
         msg = f'{path}: [calendars] must be a table of label = "collection name"'
         raise TypeError(msg)
     out: dict[str, Calendar] = {}
-    for label, spec in cals.items():
+    for label, spec in table(cals).items():
         bad = f"{path}: bad entry {label!r}: "
         if not _LABEL.fullmatch(label):
             raise ValueError(bad + "labels are [a-z][a-z0-9-]*")
         if isinstance(spec, str):
             spec = {"name": spec}
         allowed = {"name", "include", "write", "mirror"}
-        if not isinstance(spec, dict) or set(spec) - allowed:
+        if not isinstance(spec, dict) or set(table(spec)) - allowed:
             raise ValueError(
                 bad + "a name string, or a table with only `name`, `include`, "
                 "`write` and `mirror`"
             )
-        name = spec.get("name")
-        include: object = spec.get("include", [])
-        write = spec.get("write", False)
-        mirror: object = spec.get("mirror", [])
+        fields = table(spec)
+        name = fields.get("name")
+        include: object = fields.get("include", [])
+        write = fields.get("write", False)
+        mirror: object = fields.get("mirror", [])
         if not isinstance(name, str) or not name:
             raise ValueError(bad + "`name` must be a non-empty string")
         if not isinstance(include, list) or not all(

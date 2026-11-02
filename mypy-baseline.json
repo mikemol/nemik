@@ -10,7 +10,7 @@
   "misc": 4
  },
  "src/nemik/calendars.py": {
-  "misc": 16
+  "misc": 12
  },
  "src/nemik/check.py": {
   "call-overload": 2,
