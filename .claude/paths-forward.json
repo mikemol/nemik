@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1436,
+  "counter": 1437,
   "waypoints": [
     {
       "symbol": "W1",
@@ -34372,23 +34372,46 @@
     {
       "symbol": "W1436",
       "title": "tools/gen_pieces_corpus.py builds its GraphDoc literals directly instead of through cast, so mypy falls by about twenty-three",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:mypy-baseline.json"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-11-02: 2026-11-02T04:55:31Z (read by stampnote): G0, BEFORE the first edit of the real tools/gen_pieces_corpus.py. The gate has been EMPTY since stack 826 landed at 2026-11-02T04:53:51Z (reflog 23:53:51 -0500), and no successor was staged behind 826: that is a miss of R129/R130's invariant after seven holds, and the cause is that the W1396 repin stack I planned needs a mypy lead entry first (nemik:R135) and I had built no lead. Pace of 2026-11-02T04:34:16Z (the tick-open hook line; the newest landing then was 04:18:54Z): mypy fell 107 over 10 landings owes 190, 1134 left; ruff ok 475; codon owes 2. K PROBE DONE (scratch copy tools/probe_w1436_pieces.py written by w1436_pieces.py probe, deleted by exact path): mypy 24 findings to 1, K=23; ruff clean. The cause of the findings: cast('GraphDoc', {...}) over dict literals holding empty list and dict values reads as list[Any] and dict[Any, Any], and nodes and edges were typed list[dict[str, str]] where GraphDoc wants list[Row]. Changes: _node and _edge return pieces.Row, _doc takes list[Row], and both documents are built as typed GraphDoc literals instead of cast. Behaviour: none; I will prove the corpus unchanged by running the HEAD file's cases() and the new file's cases() and comparing them. gen_pieces_corpus is a tool script, not hook-imported, and imports nemik.serve.Model. Actuator: w1436_pieces.py real. Sensor: mikemol-pycheck --ratchet. Expected: mypy 1134 to 1111, ruff flat at 475.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-02: 2026-11-02T04:55:31Z (read by stampnote): G0, BEFORE the first edit of the real tools/gen_pieces_corpus.py. The gate has been EMPTY since stack 826 landed at 2026-11-02T04:53:51Z (reflog 23:53:51 -0500), and no successor was staged behind 826: that is a miss of R129/R130's invariant after seven holds, and the cause is that the W1396 repin stack I planned needs a mypy lead entry first (nemik:R135) and I had built no lead. Pace of 2026-11-02T04:34:16Z (the tick-open hook line; the newest landing then was 04:18:54Z): mypy fell 107 over 10 landings owes 190, 1134 left; ruff ok 475; codon owes 2. K PROBE DONE (scratch copy tools/probe_w1436_pieces.py written by w1436_pieces.py probe, deleted by exact path): mypy 24 findings to 1, K=23; ruff clean. The cause of the findings: cast('GraphDoc', {...}) over dict literals holding empty list and dict values reads as list[Any] and dict[Any, Any], and nodes and edges were typed list[dict[str, str]] where GraphDoc wants list[Row]. Changes: _node and _edge return pieces.Row, _doc takes list[Row], and both documents are built as typed GraphDoc literals instead of cast. Behaviour: none; I will prove the corpus unchanged by running the HEAD file's cases() and the new file's cases() and comparing them. gen_pieces_corpus is a tool script, not hook-imported, and imports nemik.serve.Model. Actuator: w1436_pieces.py real. Sensor: mikemol-pycheck --ratchet. Expected: mypy 1134 to 1111, ruff flat at 475. | 2026-11-02: landed as 5f0e8c44 (git log printed it, subject W1436), pushed; mypy 1134 to 1111",
       "issued_at": "2026-11-02T04:55:20Z",
       "minted_during": "interrupt",
       "caused_by": "W1178",
-      "last_worked": "2026-11-02T04:57:08Z",
+      "last_worked": "2026-11-02T05:07:48Z",
       "ticks_blocked": 0,
       "manifest": [
         "tools/gen_pieces_corpus.py",
         "mypy-baseline.json"
+      ],
+      "completed": "20261102T050748Z"
+    },
+    {
+      "symbol": "W1437",
+      "title": "critical.py, cards.py and witnesses.py move their function-local imports to module scope, so ruff falls by five",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:ruff-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-11-02: 2026-11-02T05:09:14Z (read by stampnote): G0, BEFORE the first edit of the real src/nemik/critical.py, cards.py and witnesses.py. The gate has been EMPTY since stack 827 landed at 2026-11-02T05:04:47Z (reflog 00:04:47 -0500), a second miss in a row after the 04:53:51Z one, because no successor was staged behind 827. Pace of 2026-11-02T04:54:17Z, the tick's first command (newest landing then 04:53:51Z): mypy fell 144 over 10 landings owes 190, 1134 left (1111 after 827); RUFF IS BEHIND AGAIN: fell 14 over 10 landings, owes 90, 475 left, 340 landings to zero (it was ok until the mypy-only campaign stopped lowering it); codon owes 2. So a ruff entry is a valid lead now. N=57 PLC0415 sites in the tree; 3 in checks/claims.py (E402 after sys.path.insert), 26 in serve.py and 2 in metrics.py (hub claim pins their import sets), 6 in rank.py, 2 in adapter.py, 3 in history.py, 3 in check.py (hook-imported), 3 in salience.py (the codemod skips: a name is bound in a module-level block), 1 in shaclinc.py (its hoist fails the claim shacl-is-the-one-validator in test_architecture, found on the probe tree) , 3 in critical.py, 1 in cards.py, 1 in witnesses.py. K = 5: the codemod (hoist_run.py, src/nemik) probed critical (3), cards (1) and witnesses (1) with ruff PLC0415 clean on the probes, and test_architecture and test_namespaces on the probe tree 6 passed after the shaclinc probe was dropped. Probes deleted by exact path. Companions: I001 and F401 are fixed by ruff --fix in the driver. Risk: critical is imported by check.py (hook-imported), so after the edit I run nemik-inbound --help, nemik-check --help, nemik-rank --help and nemik-stale; a hoisted import can create a cycle or move a Codon failure, so I also run test_import_closure and test_codon_census. Actuator: hoist_run.py real critical.py cards.py witnesses.py with HOIST_DIR=src/nemik. Sensor: mikemol-pycheck --ratchet. Expected: ruff 475 to 470, mypy flat at 1111.",
+      "issued_at": "2026-11-02T05:09:02Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1383",
+      "last_worked": "2026-11-02T05:11:30Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/cards.py",
+        "ruff-baseline.json"
       ],
       "completed": null
     }

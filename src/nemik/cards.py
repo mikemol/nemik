@@ -18,6 +18,7 @@ from rdflib.namespace import DCTERMS
 
 from nemik.adapter import NEMIK, OSLC_CM
 from nemik.blocks import ref
+from nemik.index import index
 
 if TYPE_CHECKING:
     from rdflib import Graph
@@ -62,8 +63,6 @@ def cards(g: Graph) -> dict[str, Card]:
         The cards by cite; inside a scope, a copy of the shared read.
 
     """
-    from nemik.index import index
-
     ix = index(g)
     if ix is None:
         return _read(g)

@@ -41,9 +41,6 @@
   "S404": 1,
   "S603": 1
  },
- "src/nemik/cards.py": {
-  "PLC0415": 1
- },
  "src/nemik/check.py": {
   "C901": 1,
   "PLC0415": 3,

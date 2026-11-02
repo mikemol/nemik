@@ -3947,3 +3947,6 @@
 2026-11-02T04:54:38Z  status W1435 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T04:55:20Z  interrupt W1436 minted    -         "tools/gen_pieces_corpus.py builds its GraphDoc literals directly instead of through cast, so mypy falls by about twenty-three"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
 2026-11-02T04:57:08Z  status W1436 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T05:07:48Z  status W1436 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T05:09:02Z  interrupt W1437 minted    -         "critical.py, cards.py and witnesses.py move their function-local imports to module scope, so ruff falls by five"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
+2026-11-02T05:11:30Z  status W1437 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
