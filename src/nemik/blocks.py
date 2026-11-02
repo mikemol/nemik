@@ -28,6 +28,7 @@ from rdflib.namespace import DCTERMS, PROV
 from nemik.adapter import BASE, NEMIK, OPERATOR, OSLC_CM
 from nemik.index import index
 from nemik.salience import audit
+from nemik.tomlview import strings, table
 
 if TYPE_CHECKING:
     from rdflib.term import Node
@@ -500,7 +501,9 @@ def errand_repos(text: str | None = None) -> frozenset[str]:
     """
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
-    return frozenset(tomllib.loads(text).get("errand", {}).get("repos", []))
+    parsed: object = tomllib.loads(text)
+    errand = table(table(parsed).get("errand"))
+    return frozenset(strings(errand.get("repos")))
 
 
 def operator_category(text: str) -> str:

@@ -3,9 +3,8 @@
   "misc": 9
  },
  "src/nemik/blocks.py": {
-  "call-overload": 1,
   "explicit-any": 1,
-  "misc": 20
+  "misc": 17
  },
  "src/nemik/cachestore.py": {
   "misc": 4
