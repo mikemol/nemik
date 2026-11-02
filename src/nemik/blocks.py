@@ -19,7 +19,7 @@ import operator
 import re
 import tomllib
 from importlib.resources import files
-from typing import TYPE_CHECKING, Any, TypedDict
+from typing import TYPE_CHECKING, TypedDict
 
 from mikemol.frontier.walk import frontier as walk
 from rdflib import RDF, Graph, Literal, URIRef
@@ -31,6 +31,8 @@ from nemik.salience import audit
 from nemik.tomlview import strings, table
 
 if TYPE_CHECKING:
+    from fractions import Fraction
+
     from rdflib.term import Node
 
 CAL_BLOCK = re.compile(
@@ -755,9 +757,11 @@ def _operator_asks(g: Graph) -> list[AskRow]:
     for a in out:
         a["same_ask"] = same_ask[a["ref"]]
     order = {c: i for i, c in enumerate(CATEGORIES)}
-    return sorted(
-        out, key=lambda a: (order[a["category"]], -a["ticks_blocked"], a["ref"])
-    )
+
+    def by_wait(a: AskRow) -> tuple[int, int, str]:
+        return (order[a["category"]], -a["ticks_blocked"], a["ref"])
+
+    return sorted(out, key=by_wait)
 
 
 def with_salience(g: Graph, asks: list[AskRow]) -> list[AskRow]:
@@ -778,19 +782,15 @@ def with_salience(g: Graph, asks: list[AskRow]) -> list[AskRow]:
         ticks blocked, then ref.
 
     """
-    solved: dict[str, dict[str, Any]] = {}
+    solved: dict[str, dict[str, Fraction]] = {}
     for ask in asks:
         repo = str(ask["ref"]).partition(":")[0]
         if repo not in solved:
             solved[repo] = audit(g, repo).flow.salience
         ask["salience"] = round(float(solved[repo].get(ask["ref"], 0)), 2)
     order = {c: i for i, c in enumerate(CATEGORIES)}
-    return sorted(
-        asks,
-        key=lambda a: (
-            order[a["category"]],
-            -a["salience"],
-            -a["ticks_blocked"],
-            a["ref"],
-        ),
-    )
+
+    def by_salience(a: AskRow) -> tuple[int, float, int, str]:
+        return (order[a["category"]], -a["salience"], -a["ticks_blocked"], a["ref"])
+
+    return sorted(asks, key=by_salience)

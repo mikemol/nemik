@@ -3,12 +3,12 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1430 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:4e2e0417aba615c5`
+counter 1431 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:6db4e1058f5e4ea1`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1429 | working |
-| 2 | W1430 | working |
+| 1 | W1430 | working |
+| 2 | W1431 | working |
 | 3 | W1075 | ready |
 | 4 | W1139 | ready |
 | 5 | W1279 | ready |
@@ -1409,13 +1409,14 @@ counter 1430 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:4e2
 | 1400 | W1426 | done |
 | 1401 | W1427 | done |
 | 1402 | W1428 | done |
+| 1403 | W1429 | done |
 
 ## waypoints
 
-1. **W1429** (working) history.Opts declares the repos, all, start, to, toil and churn options main reads, so reading
-   them adds no Any and mypy falls by about thirty
-2. **W1430** (working) check.py types its prerequisite map and reads the declared integers and commit.json through
+1. **W1430** (working) check.py types its prerequisite map and reads the declared integers and commit.json through
    tomlview, so mypy falls by about twenty-four
+2. **W1431** (working) blocks.py types the ask sort keys as nested functions and the solved salience map as Fractions,
+   so mypy falls by about fifteen
 3. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 4. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -2539,7 +2540,7 @@ counter 1430 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:4e2
      tick-close) is wanted.
 226. **W1399** (blocked) baselinetop and ratchetseries read a mypy-baseline.d directory through baselinedir.read when
    one exists, once mtools W2191 lands the per-module writer
-   - blocked on: mtools:W2191
+   - blocked on: W1396
    - next: After mtools:W2191 lands and the venv is rebuilt: make baselinetop.py and ratchetseries.py take the merged
      text from baselinedir.read(Path('mypy-baseline.d')) when that directory exists, with a test for each.
 227. **W1400** (blocked) Codon paydown: pick the failing baseline entries one fix from compiling, using scratchpad
@@ -4615,6 +4616,8 @@ counter 1430 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:4e2
    so mypy falls by four and the stack lowers an owed ratchet
 1402. **W1428** (done) salience.table_weights reads rank-weights.toml through the tomlview table helper instead of a
    chained Any get, so mypy falls by one
+1403. **W1429** (done) history.Opts declares the repos, all, start, to, toil and churn options main reads, so reading
+   them adds no Any and mypy falls by about thirty
 
 ## residue
 
@@ -6099,3 +6102,24 @@ counter 1430 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:4e2
   W1382, R112 on W1288, R114 on W1395, R116 on W1383, R119 on W1396, R127 and R128 on W1219, R129 first on W1288 (the
   staged successor, failed again; due 2026-11-02) and second on W1424 (answered on the card; closes on read-back); codon
   W1414 argparse probe and W1325 census not done; two UNCLAIMED mtools:W2099 letters.; 1 finding(s)
+- **nemik:R129** (-) round 131: nemik-114, stack 819 (W1428) landed 4a4af6a4 = 02:19:01Z; stack 820 (W1429 history.Opts,
+  mypy 1269 to 1238) inflight, key 1793585612761176054, started on the landing; stack 821 (W1430 check.py, mypy 1238 to
+  \1214) QUEUED behind it, key 1793586861737774407: root Verified from source (TZ=UTC reflog): 1f63ebfc 01:46:07Z,
+  4a4af6a4 02:19:01Z (21:19:01 -0500); --in-gate lists W1429 inflight (began_ns set) and W1430 queued (began_ns null);
+  `mikemol-pycheck --ratchet` prints ruff 475/475 and mypy 1214/1214 (so 1269 - 31 - 24 = 1214, the live tree carrying
+  both staged stacks). The round answers R129 and R130 well: stack 820 was submitted while 819 gated and began on the
+  landing, so there was no empty gate (819 gated 02:02:44Z to 02:19:01Z, 16 min 17 s wall, and 820's began_ns follows
+  it), and 821 is queued behind 820 although both carry mypy-baseline.json and the queue files. That corrects a belief
+  held for most of the segment: the stacks 805 to 818 were submitted only after their predecessor landed 'because both
+  carry the baseline file', and the queue evidently accepts a successor behind a gating stack (the key shows queued,
+  began_ns null); the empty-gate intervals of 1 to 3 minutes and the 13 to 20 minute ones were avoidable by queueing at
+  staging time. The K probes were done and equal the results (history 55 to 23, K=32, result -31; check.py 26 to 2,
+  K=24, expected equal), and the larger candidates were chosen (R130's finding is met on K: 32 and 24, two entries of at
+  least ten). One candidate was ruled out by reading (shaclcache: an rdflib monkeypatch on Any). The hooks check after
+  the edit is the four commands, no error and no STALE row (rule 6 applied). Two small items. No fixpoint is declared.
+  Carried open findings, status on 2026-11-02 02:41Z: R95 second finding on W1349, R95 third, R97 first, R98, R111
+  first, R102, R127 and R128 on W1219, R94 on W1348, R93 on W1347, R92 on W1346 and W1288, R91 on W1345, R72 on W846,
+  R100 on W910, R101 on W1288, R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288, R114 on W1395,
+  R115 on W1398 (scratch path: the slip recurred, below), R116 on W1383, R119 on W1396, R129 first on W1288 and R130 on
+  W1288 (met once, to be shown on three landings; due 2026-11-02), two UNCLAIMED mtools:W2099 letters; codon W1414
+  argparse probe and W1325 census not done.; 2 finding(s)

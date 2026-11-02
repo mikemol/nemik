@@ -3,8 +3,7 @@
   "misc": 9
  },
  "src/nemik/blocks.py": {
-  "explicit-any": 1,
-  "misc": 17
+  "misc": 3
  },
  "src/nemik/cachestore.py": {
   "misc": 4
