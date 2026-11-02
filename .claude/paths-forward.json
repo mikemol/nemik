@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1431,
+  "counter": 1432,
   "waypoints": [
     {
       "symbol": "W1",
@@ -34232,25 +34232,25 @@
     {
       "symbol": "W1430",
       "title": "check.py types its prerequisite map and reads the declared integers and commit.json through tomlview, so mypy falls by about twenty-four",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:mypy-baseline.json"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-11-02: 2026-11-02T02:32:41Z (read by stampnote): G0, BEFORE the first edit of the real src/nemik/check.py, and BEFORE --tick-open of nemik-114. Staged successor behind stack 820 (W1429, gating since 02:19:05Z): nemik:R129 finding 1 and R130 finding 1 (probe the large file). Pace of 2026-11-02T02:24:13Z, the tick's first command: mypy fell 88 owes 190, 1269 left (1238 after 820); ruff ok 475; codon owes 2. K PROBE DONE (scratch copy src/nemik/probe_w1430_check.py written by scratchpad/w1430_check.py probe, deleted by exact path): mypy on check.py 26 findings to 2, K=24, no new non-misc finding; ruff clean on the probe; tests/test_architecture.py and test_namespaces.py on the probe tree: 6 passed in 2.75 s wall. Changes: prereqs: dict[Node, set[Node]] (14 findings at 857-885), a new _declared_int(text, section, key, default) reading the two rank-weights integers through tomlview.table (8 findings at 772 and 804), and commit.json read through table (3 findings at 948-950). Candidates ruled out by probe: shaclcache.py (22, an rdflib monkeypatch built on Any, needs casts), blocks.py second cluster (not probed, Fraction typing). Behaviour: a wrong-typed declared integer reads as its default (cap 10, sla 48) where int() raised or coerced; a commit.json that is not an object reads as KeyError, still caught. Actuator: scratchpad/w1430_check.py real (check.py is hook-imported, standing 6: after the edit run nemik-inbound --help, nemik-check --help, nemik-rank --help and nemik-stale and write the four codes). Sensor: mikemol-pycheck --ratchet. Expected: mypy 1238 to 1214, ruff flat at 475.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-02: 2026-11-02T02:32:41Z (read by stampnote): G0, BEFORE the first edit of the real src/nemik/check.py, and BEFORE --tick-open of nemik-114. Staged successor behind stack 820 (W1429, gating since 02:19:05Z): nemik:R129 finding 1 and R130 finding 1 (probe the large file). Pace of 2026-11-02T02:24:13Z, the tick's first command: mypy fell 88 owes 190, 1269 left (1238 after 820); ruff ok 475; codon owes 2. K PROBE DONE (scratch copy src/nemik/probe_w1430_check.py written by scratchpad/w1430_check.py probe, deleted by exact path): mypy on check.py 26 findings to 2, K=24, no new non-misc finding; ruff clean on the probe; tests/test_architecture.py and test_namespaces.py on the probe tree: 6 passed in 2.75 s wall. Changes: prereqs: dict[Node, set[Node]] (14 findings at 857-885), a new _declared_int(text, section, key, default) reading the two rank-weights integers through tomlview.table (8 findings at 772 and 804), and commit.json read through table (3 findings at 948-950). Candidates ruled out by probe: shaclcache.py (22, an rdflib monkeypatch built on Any, needs casts), blocks.py second cluster (not probed, Fraction typing). Behaviour: a wrong-typed declared integer reads as its default (cap 10, sla 48) where int() raised or coerced; a commit.json that is not an object reads as KeyError, still caught. Actuator: scratchpad/w1430_check.py real (check.py is hook-imported, standing 6: after the edit run nemik-inbound --help, nemik-check --help, nemik-rank --help and nemik-stale and write the four codes). Sensor: mikemol-pycheck --ratchet. Expected: mypy 1238 to 1214, ruff flat at 475. | 2026-11-02: landed as aa989984 (git log printed it, subject W1430), pushed; mypy 1238 to 1214",
       "issued_at": "2026-11-02T02:32:28Z",
       "minted_during": "interrupt",
       "caused_by": "W1178",
-      "last_worked": "2026-11-02T02:34:19Z",
+      "last_worked": "2026-11-02T03:08:26Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/check.py",
         "mypy-baseline.json"
       ],
-      "completed": null
+      "completed": "20261102T030826Z"
     },
     {
       "symbol": "W1431",
@@ -34271,6 +34271,30 @@
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/blocks.py",
+        "mypy-baseline.json"
+      ],
+      "completed": null
+    },
+    {
+      "symbol": "W1432",
+      "title": "calendars.py and critical.py type their sort keys as functions and calendars reads CalledProcessError output through one helper, so mypy falls by about fifteen",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:mypy-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-11-02: 2026-11-02T03:11:30Z (read by stampnote): G0, BEFORE the first edit of the real src/nemik/calendars.py and critical.py, and BEFORE the next --tick-open. Staged successor behind stack 822 (W1431, gating since 03:07:44Z). Pace of 2026-11-02T03:04:15Z (the tick-open hook line; the tick's first command read 02:54:14Z, the next tick re-reads): mypy owes 190, 1199 left after 822; ruff ok 475; codon owes 2. K PROBE DONE (two scratch copies written by w1432_sortkeys.py probe, deleted by exact path): mypy 19 findings to 4 across the two files, K=15 (calendars 12 to 1, critical 7 to 3); ruff clean on both; test_architecture and test_namespaces on the probe tree 6 passed in 1.63 s wall. Changes: three sort-key lambdas (calendars.py:253, critical.py:154 and :286) become typed functions, and calendars.py reads CalledProcessError stdout and stderr through a new _said(raw: object) -> str (calendars.py:395-399). Behaviour: none for the sorts; _said reads a non-bytes output as empty where the old code would have raised on a str. critical is imported by check.py, so after the edit I run nemik-inbound --help, nemik-check --help, nemik-rank --help and nemik-stale. Actuator: w1432_sortkeys.py real. Sensor: mikemol-pycheck --ratchet. Expected: mypy 1199 to 1184, ruff flat at 475.",
+      "issued_at": "2026-11-02T03:11:21Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1178",
+      "last_worked": "2026-11-02T03:12:49Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/calendars.py",
+        "src/nemik/critical.py",
         "mypy-baseline.json"
       ],
       "completed": null
@@ -42146,7 +42170,14 @@
         }
       ],
       "id": "nemik:R129"
+    },
+    {
+      "card": "W1431",
+      "trigger": "round 132: nemik-115, stacks 820 (W1429 history.Opts) landed 1d3afef2 = 02:45:09Z and 821 (W1430 check.py) landed aa989984 = 03:07:41Z; stack 822 (W1431 blocks.py, mypy 1214 to 1199) inflight, key 1793588613850005282, began on the 821 landing",
+      "root": "NO NEW FINDINGS, OPEN FINDINGS CARRIED WITH OWNERS AND DUE DATES (not a fixpoint declaration). Verified from source (TZ=UTC reflog): 4a4af6a4 02:19:01Z, 1d3afef2 02:45:09Z (21:45:09 -0500), aa989984 03:07:41Z (22:07:41 -0500); --in-gate lists W1431 inflight with began_ns set; `mikemol-pycheck --ratchet` prints ruff 475/475 and mypy 1199/1199 (1214 - 15 = 1199, the K the probe gave). I checked the claim the G1 cites about mtools: git log f3281135 in the mtools repo prints 'W2191 (on W2186 ...): mikemol-pycheck --ratchet --write lowers a per-module mypy baseline part by part', so the block on mtools:W2191 was wrong and W1399 is correctly re-pointed (its blocked_on reads W1396, our pin bump); W1399's evidence carries both stampnote lines. The new writer also lets two stacks lower different modules without both rewriting one file, which will relieve the shared-baseline wait for good once W1396 lands the pin. CLOSED here: R129 first finding and R130 finding on W1288 (the staged successor and the large-K choice). Their witness (three consecutive landings, each followed by a submit within five minutes, the successor's work done before the previous landing) is met: 4a4af6a4 02:19:01Z with stack 820 beginning on it (its began_ns follows), 1d3afef2 02:45:09Z with 821 beginning on it, aa989984 03:07:41Z with 822 beginning on it, all with zero empty gate, and the entries are K=32, 24 and 15. Intervals as Z pairs: 820 gated 02:19:05Z to 02:45:09Z (26 min 04 s), 821 gated 02:45:09Z to 03:07:41Z (22 min 32 s). The G1 states the remaining gap honestly (nothing staged behind 822 at the send) and catches its own draft error (821 shown inflight; re-read before sending). R131's two findings are answered on cards (the symlink for the scratchpad, the W2191 escalation). Carried open findings, status on 2026-11-02 03:12Z: R95 second finding on W1349 (durable stamp script), R95 third, R97 first, R98, R111 first, R102, R127 and R128 on W1219, R94 on W1348, R93 on W1347, R92 on W1346, R91 on W1345, R72 on W846, R100 on W910, R101 on W1288, R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288, R114 on W1395, R116 on W1383, R119 on W1396 (the pin bump now gates W1399 as well), R131 on W1398 and W1399 (answered; read-back); two UNCLAIMED mtools:W2099 letters; codon W1414 argparse probe and W1325 census not done.",
+      "findings": [],
+      "id": "nemik:R130"
     }
   ],
-  "retro_counter": 129
+  "retro_counter": 130
 }

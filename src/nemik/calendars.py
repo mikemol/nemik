@@ -250,9 +250,17 @@ def occurrences(
             if stats is not None:
                 stats[label] = (matched, total)
             f.unlink()
-        return sorted(out, key=lambda r: (r["start"] or "", r["label"], r["uid"] or ""))
+        return sorted(out, key=_by_start)
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
+
+
+def _by_start(r: Occurrence) -> tuple[str, str, str]:
+    return (r["start"] or "", r["label"], r["uid"] or "")
+
+
+def _said(raw: object) -> str:
+    return raw.decode(errors="replace").strip() if isinstance(raw, bytes) else ""
 
 
 def dedupe(rows: list[Occurrence]) -> list[Occurrence]:
@@ -391,11 +399,7 @@ def days_main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     except subprocess.CalledProcessError as e:
         # The helper refuses (nemik:W193) when Akonadi is not running; say what it said, not a
         # traceback.
-        why = (
-            (e.stdout or b"").decode(errors="replace").strip()
-            or (e.stderr or b"").decode(errors="replace").strip()
-            or f"exit {e.returncode}"
-        )
+        why = _said(e.stdout) or _said(e.stderr) or f"exit {e.returncode}"
         say(f"ERROR: the calendar export failed: {why.splitlines()[-1]}")
         raise SystemExit(2) from e
     eg = event_graph(occs, g)

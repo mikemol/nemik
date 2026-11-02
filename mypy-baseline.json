@@ -9,7 +9,7 @@
   "misc": 4
  },
  "src/nemik/calendars.py": {
-  "misc": 12
+  "misc": 1
  },
  "src/nemik/check.py": {
   "misc": 2
@@ -19,7 +19,7 @@
   "type-arg": 2
  },
  "src/nemik/critical.py": {
-  "misc": 7
+  "misc": 3
  },
  "src/nemik/health.py": {
   "misc": 1

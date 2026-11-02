@@ -147,11 +147,15 @@ def critical_cards(by_cite: dict[str, Card], scope: set[str] | None = None) -> C
     ]
     found = CHAINS(order, deps)
     through = {n: found.up[n] + found.down[n] - 1 for n in nodes}
+
     # nemik:W344: the dependency order is a poset, so tied longest chains are alternatives, not a
     # ranking: the critical object is EVERY card on some longest chain (zero slack), graded by its
     # rank (`up`), and by how many longest chains run through it (ways in x ways out). Nothing here
     # depends on sort order except the order the list is displayed in: (rank, cite).
-    chain = sorted(found.paths, key=lambda n: (found.up[n], _key(n)))
+    def by_rank(n: str) -> tuple[int, str]:
+        return (found.up[n], _key(n))
+
+    chain = sorted(found.paths, key=by_rank)
     return Critical(
         found.length,
         chain,
@@ -283,7 +287,11 @@ def fires(g: Graph, scope: set[str] | None = None) -> list[Fire]:
             continue
         delay = base - critical(assume_done(g, [ref(n)]), scope).length
         out.append(Fire(ref(n), planned, delay))
-    return sorted(out, key=lambda f: (-f.delay, -len(f.planned), f.cite))
+
+    def by_cost(f: Fire) -> tuple[int, int, str]:
+        return (-f.delay, -len(f.planned), f.cite)
+
+    return sorted(out, key=by_cost)
 
 
 def what_if(before: Critical, after: Critical, cites: list[str]) -> str:
