@@ -3967,3 +3967,6 @@
 2026-11-02T06:31:15Z  interrupt W1442 minted    -         "tests/test_staticserve.py compares HTTP statuses with http.HTTPStatus members, so ruff falls by five"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
 2026-11-02T06:33:03Z  status W1442 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T06:38:19Z  tick  W1442 advanced  sweep     "stack 831 (W1441 history.toil imports, ruff 471 to 468) gating, stack 832 (W1442 test_staticserve HTTPStatus, ruff 468 to 463) queued behind it; stack 830 landed 96f8a0d0 (ruff 474 to 471); gate stayed full [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T06:44:32Z  status W1441 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T06:45:36Z  interrupt W1443 minted    -         "tests/test_witwait.py names its unknown exit code and its sleep count instead of comparing with 2, so ruff falls by five"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
+2026-11-02T06:46:34Z  status W1443 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

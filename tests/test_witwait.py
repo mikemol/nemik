@@ -15,6 +15,9 @@ import pytest
 from nemik.witnesses import main
 from nemik.witwait import HELD, NOT_YET, UNKNOWN, promql_poll, seconds, wait
 
+EXIT_UNKNOWN = 2  # the exit code of an unknown answer (and of a bad duration)
+SLEEPS_BEFORE_HELD = 2  # two not-yet polls, then the held one
+
 if TYPE_CHECKING:
     from collections.abc import Callable, Generator
 
@@ -70,7 +73,7 @@ def test_it_returns_zero_with_the_value_that_crossed() -> None:
     code, line, t = _wait(poll)
     assert code == 0
     assert line == "HELD at 2026-10-09T07:00:00Z: 0.995"
-    assert t.sleeps == 2
+    assert t.sleeps == SLEEPS_BEFORE_HELD
 
 
 def test_it_times_out_with_the_last_value_never_an_empty_line() -> None:
@@ -88,7 +91,7 @@ def test_unknown_is_not_false_and_a_few_blips_are_tolerated() -> None:
     assert _wait(blips)[0] == 0
     down = _script((UNKNOWN, "probe unreachable"))
     code, line, _ = _wait(down)
-    assert code == 2
+    assert code == EXIT_UNKNOWN
     assert "UNKNOWN after 4 polls" in line
 
 
@@ -96,7 +99,7 @@ def test_an_unknown_last_poll_at_the_timeout_is_exit_two_not_one() -> None:
     """An unknown last poll at the timeout is exit two not one."""
     poll = _script((NOT_YET, "0.9"), (UNKNOWN, "probe unreachable"))
     code, line, _ = _wait(poll, timeout=10, every=10)
-    assert code == 2
+    assert code == EXIT_UNKNOWN
     assert "UNKNOWN at the timeout" in line
 
 
@@ -118,7 +121,7 @@ def test_a_bad_duration_on_the_command_line_is_exit_two(
     """A bad duration on the command line is exit two."""
     with pytest.raises(SystemExit) as stop:
         main(["--wait", "up", "--timeout", "forever"])
-    assert stop.value.code == 2
+    assert stop.value.code == EXIT_UNKNOWN
     assert "not a duration" in capsys.readouterr().err
 
 
@@ -187,7 +190,7 @@ def test_a_probe_that_is_down_is_exit_two(monkeypatch: pytest.MonkeyPatch) -> No
     """A probe that is down is exit two."""
     monkeypatch.setenv("NEMIK_VM_URL", "http://127.0.0.1:9")
     code, line = wait(promql_poll("up"), 5, 0.01)
-    assert code == 2
+    assert code == EXIT_UNKNOWN
     assert "unreachable" in line
 
 

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1442,
+  "counter": 1443,
   "waypoints": [
     {
       "symbol": "W1",
@@ -34492,25 +34492,25 @@
     {
       "symbol": "W1441",
       "title": "history.toil imports rdflib and nemik.adapter at module scope, so ruff falls by three",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:ruff-baseline.json"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-11-02: 2026-11-02T06:16:05Z (read by stampnote): G0, BEFORE the first edit of the real src/nemik/history.py. Successor staged behind stack 830 (W1440, gating since 06:03:49Z), written under the new turn-end clause of standing 13 (R138, set at the same moment: --in-gate listed one stack and nothing queued, so I probed instead of closing). Pace of 2026-11-02T05:54:19Z, the tick's first command, current: ruff fell 1 over 10 landings, owes 90, 471 left after 830 (474 now); mypy owes 190; codon owes 2. N=4 PLC0415 sites in history.py (1286 and 2524, 2525, 2527). K=3: the hoist codemod's probe over history.py, check.py and rank.py was read before this G0: rank.py is a cycle (rank would import check, critical, metrics and salience, which import rank), check.py is refused by the codemod (a name bound differently at module scope), and history.py's first site, 'from nemik.churn import run' at 1286, is a CYCLE (churn imports history at module scope, churn.py:25), so it stays local. The other three, in toil(): 'from rdflib import RDF', 'from rdflib.namespace import PROV' and 'from nemik.adapter import NEMIK, ledger_graph', move to module scope; adapter is already reached through the module-level import of nemik.check, so no new edge; scratch copy src/nemik/probe_w1442_history.py written by w1442_toil.py probe, deleted by exact path, ruff PLC0415 and F show only the churn site and mypy on it shows the same 12 findings the file has now. EXCLUSION TABLE (W1383) read first: history to churn added as a row. history.py is hook-imported: after the edit I run nemik-inbound --help, nemik-check --help, nemik-rank --help and nemik-stale and read all four (the one import that could break them is the one I leave out). Actuator: w1442_toil.py real. Sensor: mikemol-pycheck --ratchet. Expected: ruff 471 to 468 on top of 830, mypy flat at 1103.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-02: 2026-11-02T06:16:05Z (read by stampnote): G0, BEFORE the first edit of the real src/nemik/history.py. Successor staged behind stack 830 (W1440, gating since 06:03:49Z), written under the new turn-end clause of standing 13 (R138, set at the same moment: --in-gate listed one stack and nothing queued, so I probed instead of closing). Pace of 2026-11-02T05:54:19Z, the tick's first command, current: ruff fell 1 over 10 landings, owes 90, 471 left after 830 (474 now); mypy owes 190; codon owes 2. N=4 PLC0415 sites in history.py (1286 and 2524, 2525, 2527). K=3: the hoist codemod's probe over history.py, check.py and rank.py was read before this G0: rank.py is a cycle (rank would import check, critical, metrics and salience, which import rank), check.py is refused by the codemod (a name bound differently at module scope), and history.py's first site, 'from nemik.churn import run' at 1286, is a CYCLE (churn imports history at module scope, churn.py:25), so it stays local. The other three, in toil(): 'from rdflib import RDF', 'from rdflib.namespace import PROV' and 'from nemik.adapter import NEMIK, ledger_graph', move to module scope; adapter is already reached through the module-level import of nemik.check, so no new edge; scratch copy src/nemik/probe_w1442_history.py written by w1442_toil.py probe, deleted by exact path, ruff PLC0415 and F show only the churn site and mypy on it shows the same 12 findings the file has now. EXCLUSION TABLE (W1383) read first: history to churn added as a row. history.py is hook-imported: after the edit I run nemik-inbound --help, nemik-check --help, nemik-rank --help and nemik-stale and read all four (the one import that could break them is the one I leave out). Actuator: w1442_toil.py real. Sensor: mikemol-pycheck --ratchet. Expected: ruff 471 to 468 on top of 830, mypy flat at 1103. | 2026-11-02: landed as e3c4c38b (git log printed it, subject W1441), pushed; ruff 471 to 468 | 2026-11-02: 2026-11-02T06:44:51Z (read by stampnote): Correction to the G0: it says the history-to-churn row was added to the W1383 exclusion table; it was not yet there when the G0 was written (06:16:05Z). The row, with the rank.py and check.py rows, was written to W1383 at 06:41:31Z, after the hoist had landed. The cycle itself (churn.py:25 imports history at module scope) was read before the edit and the churn import was left local.",
       "issued_at": "2026-11-02T06:15:44Z",
       "minted_during": "interrupt",
       "caused_by": "W1383",
-      "last_worked": "2026-11-02T06:17:04Z",
+      "last_worked": "2026-11-02T06:44:52Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/history.py",
         "ruff-baseline.json"
       ],
-      "completed": null
+      "completed": "20261102T064432Z"
     },
     {
       "symbol": "W1442",
@@ -34531,6 +34531,29 @@
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_staticserve.py",
+        "ruff-baseline.json"
+      ],
+      "completed": null
+    },
+    {
+      "symbol": "W1443",
+      "title": "tests/test_witwait.py names its unknown exit code and its sleep count instead of comparing with 2, so ruff falls by five",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:ruff-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-11-02: 2026-11-02T06:45:49Z (read by stampnote): G0, BEFORE the first edit of the real tests/test_witwait.py. Successor staged behind stack 832 (W1442, inflight since 06:43:45Z), under the turn-end clause of standing 13: --in-gate listed one stack and nothing queued. Pace of 2026-11-02T06:34:21Z (the tick-open hook line; the tick's first command read 06:24:21Z), current for newest landing 06:18:37Z: ruff fell 4 over 10 landings, owes 90, 468 left now (after 831); mypy owes 190, 1103 left; codon owes 2. N=116 PLR2004 sites (about 60 files). K=5: this file has 5 comparisons with 2: four are the same exit code, the unknown answer's exit code (and a bad duration's), at lines 91, 99, 121 and 190, and one counts the two not-yet polls before the held one (line 73). The codemod w1444_witwait.py probe writes a scratch copy (tests/probe_w1444_witwait.py, deleted by exact path) that names them EXIT_UNKNOWN = 2 and SLEEPS_BEFORE_HELD = 2 at module scope and compares with the names; ruff PLR2004 on the probe: 0 of the 5 (original: 5); mypy on probe and original: 0 findings each, so no mypy rise (the W1438 failure mode is excluded by measurement). Behaviour: none, the constants hold the same values. Covering check: tests/test_witwait.py run directly. Not hook-imported; test file only. Actuator: w1444_witwait.py real. Sensor: mikemol-pycheck --ratchet. Expected: ruff 463 to 458 on top of 832 (468 now), mypy flat at 1103.",
+      "issued_at": "2026-11-02T06:45:36Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1383",
+      "last_worked": "2026-11-02T06:46:34Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tests/test_witwait.py",
         "ruff-baseline.json"
       ],
       "completed": null
