@@ -42,6 +42,16 @@ FLEET = Path(__file__).parent / "fixtures" / "fleet"
 PATHKEY_DRAWN = "() => document.querySelector('#pathkey line') !== null"
 SECTIONS_DRAWN = "() => document.querySelector('details.sec') !== null"
 REPO_CHIPS_DRAWN = "() => document.querySelector('#repos button[data-repo]') !== null"
+PATHKEY_SPANS = 4  # one span in the path key per kind of path
+PATH_DASH_PATTERNS = 4  # one distinct dash pattern per kind of path
+WCAG_TEXT_CONTRAST = 4.5  # WCAG 1.4.3 AA for normal text
+WCAG_NON_TEXT_CONTRAST = 3  # WCAG 1.4.11 against the page
+MIN_LABEL_PX = 8  # the smallest label that still reads
+MIN_TARGET_PX = 12  # the smallest pointer target
+MIN_ADMITTED_CASES = 5
+MIN_CONTRAST_ROLES = 5
+MIN_ROWS = 2
+HTTP_NOT_FOUND = http.HTTPStatus.NOT_FOUND
 
 
 def _launch(playwright: "Playwright") -> "Browser":
@@ -224,7 +234,7 @@ def test_repo_toggles_and_salience_order(server: str, tmp_path: Path) -> None:
         )
         assert (
             page.evaluate("() => document.querySelectorAll('#pathkey span').length")
-            == 4
+            == PATHKEY_SPANS
         )
         ringed = page.evaluate("() => cy.nodes('[nrings > 0]')[0].id()")
         page.evaluate(f"() => cy.getElementById('{ringed}').emit('tap')")
@@ -368,7 +378,7 @@ def test_scope_rings_carry_distinct_ruler_motifs_pinned_to_paperkits(
     # len(F(n)) == n, so each shipped pattern decodes to its index
     assert lengths == list(range(len(lengths)))
     assert not generates  # the page renders the patterns; it no longer generates them
-    assert len(set(dashes)) == 4 and all(dashes)
+    assert len(set(dashes)) == PATH_DASH_PATTERNS and all(dashes)
     assert legend == dashes
 
 
@@ -455,7 +465,7 @@ def test_every_card_label_meets_four_and_a_half_to_one(
         browser.close()
     assert pairs
     assert {s for s, _ in pairs} >= {"ready", "blocked", "done"}
-    low = sorted({(s, r) for s, r in pairs if r < 4.5})
+    low = sorted({(s, r) for s, r in pairs if r < WCAG_TEXT_CONTRAST})
     assert low == [], low
 
 
@@ -539,8 +549,8 @@ def test_the_default_view_is_legible(server: str, scheme: Scheme) -> None:
         for h, text in chips
     )
     assert m["in_view"] > 0
-    assert m["label_px"] >= 8, m
-    assert m["min_target_px"] >= 12, m
+    assert m["label_px"] >= MIN_LABEL_PX, m
+    assert m["min_target_px"] >= MIN_TARGET_PX, m
     assert not note or "readable size" in note
     assert controls_in_status == 0
 
@@ -725,7 +735,7 @@ def test_every_meaning_the_view_colours_has_a_second_channel(
     out = subprocess.run(cmd, capture_output=True, text=True, check=True)
     verdict = json.loads(out.stdout)["result"][0]["expressions"][0]["value"]
     assert verdict["deny"] == [], verdict["deny"]
-    assert len(verdict["admitted"]) == len(measured["cases"]) >= 5
+    assert len(verdict["admitted"]) == len(measured["cases"]) >= MIN_ADMITTED_CASES
 
 
 def test_a_static_build_refetches_only_the_pieces_whose_hash_moved(
@@ -1031,7 +1041,7 @@ def test_the_card_list_is_one_tab_stop_walked_by_arrows(server: str) -> None:
             "() => !document.getElementById('cardlist').contains(document.activeElement)"
         )
         browser.close()
-    assert len(rows) > 2
+    assert len(rows) > MIN_ROWS
     assert stops == 1
     assert second == rows[2] and last == rows[-1]
     assert selected == [rows[1]]
@@ -1236,8 +1246,8 @@ def test_treemap_labels_meet_the_floor_or_are_hidden_and_counted(server: str) ->
         zoomed = page.evaluate(TILE_LABELS)
         browser.close()
     assert fit["tiles"] > 0
-    assert fit["smallest"] >= 8, fit
-    assert zoomed["smallest"] >= 8, zoomed
+    assert fit["smallest"] >= MIN_LABEL_PX, fit
+    assert zoomed["smallest"] >= MIN_LABEL_PX, zoomed
     if fit["hidden"]:
         assert f"{fit['hidden']} tiles too small" in fit["note"], fit
         assert zoomed["hidden"] < fit["hidden"], (fit, zoomed)
@@ -1279,8 +1289,8 @@ def test_meaningful_strokes_reach_three_to_one(server: str, scheme: Scheme) -> N
         webpage.until(page, PATHKEY_DRAWN)
         ratios = page.evaluate(NON_TEXT_CONTRAST)
         browser.close()
-    low = {k: round(v, 2) for k, v in ratios.items() if v < 3}
-    assert len(ratios) >= 5
+    low = {k: round(v, 2) for k, v in ratios.items() if v < WCAG_NON_TEXT_CONTRAST}
+    assert len(ratios) >= MIN_CONTRAST_ROLES
     assert not low, f"{scheme}: under 3:1 against the page: {low}"
 
 
@@ -1345,7 +1355,7 @@ def test_no_command_route_or_tools_panel_remains(server: str) -> None:
         status = 200
     except urllib.error.HTTPError as e:
         status = e.code
-    assert status == 404
+    assert status == HTTP_NOT_FOUND
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page()
@@ -1393,7 +1403,7 @@ def test_one_picked_repo_restored_from_the_last_visit_is_legible_too(
         _settle(page)
         m = page.evaluate(LEGIBILITY)
         browser.close()
-    assert m["label_px"] >= 8, m
+    assert m["label_px"] >= MIN_LABEL_PX, m
 
 
 def test_picked_repos_show_their_blockers_blockers_as_context(server: str) -> None:

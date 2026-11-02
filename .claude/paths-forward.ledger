@@ -4072,3 +4072,6 @@
 2026-11-02T13:18:15Z  interrupt W1471 minted    -         "tests/test_rank_flow.py names the on-path card count, the paths through W4 and the operator weight it compares with, so ruff falls by three"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
 2026-11-02T13:18:25Z  status W1471 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T13:36:57Z  tick  W1470 advanced  sweep     "stacks 858 and 859 landed, 860 inflight and 861 queued; the sort-key mypy vein is spent [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T13:41:51Z  status W1470 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T13:42:23Z  interrupt W1472 minted    -         "tests/test_layout.py names the thirteen thresholds and counts it compares with, so ruff falls by thirteen"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
+2026-11-02T13:42:33Z  status W1472 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

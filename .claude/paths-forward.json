@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1471,
+  "counter": 1472,
   "waypoints": [
     {
       "symbol": "W1",
@@ -35188,21 +35188,21 @@
     {
       "symbol": "W1470",
       "title": "src/nemik/pieces.py and vtodo.py sort and take minima with typed key functions instead of lambdas over Any, so mypy falls by four",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:mypy-baseline.json"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Wait on the gate verdict of the queued stack, then mark this card done with the hash the commit printed.",
-      "evidence": "2026-11-02: 2026-11-02T12:51:38Z (read by stampnote): G0 BEFORE the first edit of src/nemik/pieces.py and vtodo.py, queued behind stacks 858 (W1468, inflight) and 859 (W1469). Landed: 857 as 31554fc9 (W1467, mypy 1092 to 1083, the K=9 predicted). Pace read this tick at 11:54:31Z (a newer read is owed at the next tick): mypy-baseline.json behind, owes 190, 1075 left after 859. K probe on scratch copies before this G0 (probe_w1470_pieces.py and probe_w1470_vtodo.py in src/nemik, deleted by exact path), measured with the house config mypy-house.ini: pieces.py line 84 sorted lambda held 2 findings, the probe holds 0; vtodo.py line 281 min lambda held 2 of its 5, the probe holds 3 (lines 158 and 400 are other roots, left alone). K=4: mypy 1075 to 1071. House ruff on the probes shows only the three findings vtodo.py already has. Edit: _node_id(node: Row) -> str and _due_digits(line: str) -> str, the sort-key shape of W1431, W1432, W1468 and W1469, by codemod w1470_keys.py real; same ordering and same minimum. Neither module is on the hook-imported list; hookcheck still runs after. Behaviour: none. Covering check: test_pieces, test_pieces_corpus, test_piece_fetch_once, test_vtodo, test_vtodo_timezone, test_ask_priority run directly. Expected: mypy 1075 to 1071, ruff flat at 367. | 2026-11-02: 2026-11-02T13:30:24Z (read by stampnote): G0 before tick-open. Pace read first, stamp 2026-11-02T13:24:38Z, newest landing 13:16:18Z, current: mypy owes 190 (1075 left, fell 17 over 10 landings, 633 landings to zero), ruff owes 90 (367 left, fell 39, 95 landings to zero), codon owes 2 (138, no fall). Advances W1470 (stack 860, mypy 1075 to 1071, inflight began_ns 1793625383024852576) and W1471 (stack 861 queued, ruff 367 to 364). Actuator: wait on the verdicts, mark each card with the printed hash. The next lead cannot be another sort-key lambda (the vein is spent); it is either rank.py typed rows (W1282 design) or the subprocess wrapper (W1175), both needing a design first. Sensor: in-gate json, git log, pycheck ratchet. Expected: 860 lands mypy 1075 to 1071 and 861 lands ruff 367 to 364.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-02: 2026-11-02T12:51:38Z (read by stampnote): G0 BEFORE the first edit of src/nemik/pieces.py and vtodo.py, queued behind stacks 858 (W1468, inflight) and 859 (W1469). Landed: 857 as 31554fc9 (W1467, mypy 1092 to 1083, the K=9 predicted). Pace read this tick at 11:54:31Z (a newer read is owed at the next tick): mypy-baseline.json behind, owes 190, 1075 left after 859. K probe on scratch copies before this G0 (probe_w1470_pieces.py and probe_w1470_vtodo.py in src/nemik, deleted by exact path), measured with the house config mypy-house.ini: pieces.py line 84 sorted lambda held 2 findings, the probe holds 0; vtodo.py line 281 min lambda held 2 of its 5, the probe holds 3 (lines 158 and 400 are other roots, left alone). K=4: mypy 1075 to 1071. House ruff on the probes shows only the three findings vtodo.py already has. Edit: _node_id(node: Row) -> str and _due_digits(line: str) -> str, the sort-key shape of W1431, W1432, W1468 and W1469, by codemod w1470_keys.py real; same ordering and same minimum. Neither module is on the hook-imported list; hookcheck still runs after. Behaviour: none. Covering check: test_pieces, test_pieces_corpus, test_piece_fetch_once, test_vtodo, test_vtodo_timezone, test_ask_priority run directly. Expected: mypy 1075 to 1071, ruff flat at 367. | 2026-11-02: 2026-11-02T13:30:24Z (read by stampnote): G0 before tick-open. Pace read first, stamp 2026-11-02T13:24:38Z, newest landing 13:16:18Z, current: mypy owes 190 (1075 left, fell 17 over 10 landings, 633 landings to zero), ruff owes 90 (367 left, fell 39, 95 landings to zero), codon owes 2 (138, no fall). Advances W1470 (stack 860, mypy 1075 to 1071, inflight began_ns 1793625383024852576) and W1471 (stack 861 queued, ruff 367 to 364). Actuator: wait on the verdicts, mark each card with the printed hash. The next lead cannot be another sort-key lambda (the vein is spent); it is either rank.py typed rows (W1282 design) or the subprocess wrapper (W1175), both needing a design first. Sensor: in-gate json, git log, pycheck ratchet. Expected: 860 lands mypy 1075 to 1071 and 861 lands ruff 367 to 364. | 2026-11-02: Landed d7a1e865 in stack 860; mypy 1075 to 1071 as K=4 predicted, ruff flat 367.",
       "issued_at": "2026-11-02T12:51:29Z",
       "minted_during": "interrupt",
       "caused_by": "W1282",
-      "last_worked": "2026-11-02T13:39:09Z",
+      "last_worked": "2026-11-02T13:41:51Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261102T134151Z",
       "manifest": [
         "src/nemik/pieces.py",
         "src/nemik/vtodo.py",
@@ -35229,6 +35229,29 @@
       "completed": null,
       "manifest": [
         "tests/test_rank_flow.py",
+        "ruff-baseline.json"
+      ]
+    },
+    {
+      "symbol": "W1472",
+      "title": "tests/test_layout.py names the thirteen thresholds and counts it compares with, so ruff falls by thirteen",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:ruff-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Run the codemod for this card, collect the browser tests, run mikemol-pycheck --ratchet --write, write the stack json, submit behind the queued stack.",
+      "evidence": "2026-11-02: 2026-11-02T13:42:35Z (read by stampnote): G0 BEFORE the first edit of tests/test_layout.py, queued behind stack 861 (W1471, inflight alone). Landed: 860 as d7a1e865 (W1470, mypy 1075 to 1071). Pace stamp 2026-11-02T13:24:38Z: ruff owes 90, 364 left after 861. 13 PLR2004 sites in this file (python3 -m ruff, ruff-house.toml), K=13 from the lines and their context read: the path-key span count 4, the distinct dash patterns 4, the WCAG normal-text contrast 4.5, the label pixel floor 8 (four sites: two m label_px, fit smallest and zoomed smallest), the target pixel floor 12, the admitted-case floor 5, the row floor 2, the WCAG non-text contrast 3, the contrast-role floor 5 and the HTTP status 404. Edit by codemod w1472_layout.py: eleven module constants after REPO_CHIPS_DRAWN, HTTP_NOT_FOUND being http.HTTPStatus.NOT_FOUND (http.server is already imported). Companions none; follow-ons I001 not expected (no import change; constants after an existing constant). Expected: ruff 364 to 351 on top of 861, mypy flat at 1071. Behaviour: none, the same numbers. Covering check: the browser tests cannot run here (they need the gate's chromium), so pytest --collect-only plus the standing guards run directly, and the gate's test_layout shards are the witness; a miss would be a typo, not logic. Not hook-imported.",
+      "issued_at": "2026-11-02T13:42:23Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1383",
+      "last_worked": "2026-11-02T13:42:35Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "tests/test_layout.py",
         "ruff-baseline.json"
       ]
     }
