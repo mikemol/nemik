@@ -3990,3 +3990,8 @@
 2026-11-02T07:41:15Z  interrupt W1449 minted    -         "tests/test_check_committed.py names nemik-check's exit code for an uncommitted queue, so ruff falls by three"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
 2026-11-02T07:42:54Z  status W1447 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T07:43:04Z  status W1449 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T07:55:12Z  status W1448 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T07:56:02Z  interrupt W1450 minted    -         "tests/test_alarm.py names the durations and the alarm count it compares with, so ruff falls by four"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
+2026-11-02T07:57:01Z  status W1450 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T08:02:34Z  interrupt W1451 minted    -         "tests/webpage.py imports sync_playwright directly and types open_page like opened_page, so the 29 test files that import it each lose three mypy findings"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
+2026-11-02T08:05:11Z  status W1451 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

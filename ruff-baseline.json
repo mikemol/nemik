@@ -194,9 +194,6 @@
   "S404": 1,
   "S603": 1
  },
- "tests/test_alarm.py": {
-  "PLR2004": 4
- },
  "tests/test_alarm_delivery.py": {
   "PLR2004": 1
  },

@@ -14,12 +14,17 @@ from nemik.vtodo import vtodos
 if TYPE_CHECKING:
     from nemik.blocks import AskRow
 
+FIFTEEN_MINUTES_BEFORE = -900  # -PT15M, in seconds
+ONE_DAY_TWO_HOURS = 93600  # P1DT2H, in seconds
+DAYS_IN_A_WEEK = 7  # +P1W
+ALARMS_PER_TODO = 2  # the relative trigger and the absolute one
+
 
 def test_duration_reads_every_rfc5545_part() -> None:
     """Duration reads every rfc5545 part."""
-    assert duration("-PT15M").total_seconds() == -900
-    assert duration("P1DT2H").total_seconds() == 93600
-    assert duration("+P1W").days == 7
+    assert duration("-PT15M").total_seconds() == FIFTEEN_MINUTES_BEFORE
+    assert duration("P1DT2H").total_seconds() == ONE_DAY_TWO_HOURS
+    assert duration("+P1W").days == DAYS_IN_A_WEEK
 
 
 def test_relative_triggers_count_from_their_anchor() -> None:
@@ -58,7 +63,7 @@ def test_vtodo_carries_each_alarm_as_a_display_valarm() -> None:
     (todo,) = vtodos([ask], {"life"})
     assert "TRIGGER;RELATED=END:-PT2H" in todo
     assert "TRIGGER;VALUE=DATE-TIME:20261001T190000Z" in todo
-    assert todo.count("BEGIN:VALARM") == 2
+    assert todo.count("BEGIN:VALARM") == ALARMS_PER_TODO
     assert "ACTION:DISPLAY" in todo
 
 
