@@ -23,6 +23,8 @@ QUEUE: dict[str, object] = {
     "waypoints": [],
 }
 
+EXIT_UNCOMMITTED = 4  # --committed: a queue read from an uncommitted or untracked file
+
 
 def _repo(root: Path, name: str, *, dirty: bool) -> None:
     repo = root / name
@@ -56,6 +58,6 @@ def test_committed_passes_only_when_every_named_queue_is_at_its_last_commit(
     _repo(tmp_path, "clean", dirty=False)
     _repo(tmp_path, "edited", dirty=True)
     assert _exit(tmp_path, "clean") == 0
-    assert _exit(tmp_path, "edited") == 4
-    assert _exit(tmp_path, "clean", "edited") == 4
-    assert _exit(tmp_path) == 4  # no names: every repo
+    assert _exit(tmp_path, "edited") == EXIT_UNCOMMITTED
+    assert _exit(tmp_path, "clean", "edited") == EXIT_UNCOMMITTED
+    assert _exit(tmp_path) == EXIT_UNCOMMITTED  # no names: every repo

@@ -238,7 +238,6 @@
   "S603": 1
  },
  "tests/test_check_committed.py": {
-  "PLR2004": 3,
   "S404": 1,
   "S603": 1,
   "S607": 1

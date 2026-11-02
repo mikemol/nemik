@@ -34630,25 +34630,25 @@
     {
       "symbol": "W1447",
       "title": "tests/test_starved.py names the declared and the default starvation days, so ruff falls by three",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:ruff-baseline.json"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-11-02: 2026-11-02T07:22:48Z (read by stampnote): G0, BEFORE the first edit of the real tests/test_starved.py. Successor staged behind stack 836 (W1446, inflight since 07:21:41Z) under the turn-end clause of standing 13: --in-gate listed one stack and nothing queued. Last pace read 2026-11-02T06:54:22Z (PENDING): ruff fell 12 over 10 landings owes 90, 445 left after 836; mypy owes 190, 1103 left; codon owes 2. N=116 PLR2004 sites, 3 in this file. K=3: line 32 compares days_limit of a TOML that declares days = 3 with 3, line 33 compares days_limit of an empty TOML with 14 (the default) and line 59 compares waited_days with 14. The codemod w1449_starved.py probe writes a scratch copy (tests/probe_w1449_starved.py, deleted by exact path) with two module-level constants after NOW: DECLARED_DAYS = 3 and DEFAULT_DAYS = 14, and compares with them; the 14 passed as the age limit to starved() on the line before the third compare is left as written. Ruff PLR2004, F and I clean on the probe (original: 3 PLR2004); mypy on probe and original: 0 findings each. Behaviour: none. Covering check: tests/test_starved.py run directly. Not hook-imported; test file only. Actuator: w1449_starved.py real. Sensor: mikemol-pycheck --ratchet. Expected: ruff 445 to 442 on top of 836 (449 now), mypy flat at 1103.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-02: 2026-11-02T07:22:48Z (read by stampnote): G0, BEFORE the first edit of the real tests/test_starved.py. Successor staged behind stack 836 (W1446, inflight since 07:21:41Z) under the turn-end clause of standing 13: --in-gate listed one stack and nothing queued. Last pace read 2026-11-02T06:54:22Z (PENDING): ruff fell 12 over 10 landings owes 90, 445 left after 836; mypy owes 190, 1103 left; codon owes 2. N=116 PLR2004 sites, 3 in this file. K=3: line 32 compares days_limit of a TOML that declares days = 3 with 3, line 33 compares days_limit of an empty TOML with 14 (the default) and line 59 compares waited_days with 14. The codemod w1449_starved.py probe writes a scratch copy (tests/probe_w1449_starved.py, deleted by exact path) with two module-level constants after NOW: DECLARED_DAYS = 3 and DEFAULT_DAYS = 14, and compares with them; the 14 passed as the age limit to starved() on the line before the third compare is left as written. Ruff PLR2004, F and I clean on the probe (original: 3 PLR2004); mypy on probe and original: 0 findings each. Behaviour: none. Covering check: tests/test_starved.py run directly. Not hook-imported; test file only. Actuator: w1449_starved.py real. Sensor: mikemol-pycheck --ratchet. Expected: ruff 445 to 442 on top of 836 (449 now), mypy flat at 1103. | 2026-11-02: landed as b66891aa (git log printed it, subject W1447), pushed; ruff 445 to 442",
       "issued_at": "2026-11-02T07:22:24Z",
       "minted_during": "interrupt",
       "caused_by": "W1383",
-      "last_worked": "2026-11-02T07:23:37Z",
+      "last_worked": "2026-11-02T07:42:54Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_starved.py",
         "ruff-baseline.json"
       ],
-      "completed": null
+      "completed": "20261102T074254Z"
     },
     {
       "symbol": "W1448",
@@ -34676,7 +34676,7 @@
     {
       "symbol": "W1449",
       "title": "tests/test_check_committed.py names nemik-check's exit code for an uncommitted queue, so ruff falls by three",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [
         "file:ruff-baseline.json"
@@ -34688,12 +34688,13 @@
       "issued_at": "2026-11-02T07:41:15Z",
       "minted_during": "interrupt",
       "caused_by": "W1383",
-      "last_worked": "2026-11-02T07:41:29Z",
+      "last_worked": "2026-11-02T07:43:04Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_check_committed.py",
         "ruff-baseline.json"
-      ]
+      ],
+      "completed": null
     }
   ],
   "residue": [

@@ -3988,3 +3988,5 @@
 2026-11-02T07:33:03Z  status W1448 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T07:36:53Z  tick  W1448 advanced  sweep     "stack 837 (W1447 test_starved, ruff 445 to 442) gating, 838 (W1448 test_serve_model, 442 to 439) queued behind it; stacks 834/835/836 landed 94f46924, dc9f711e, e7f83c04 (ruff 458 to 445); gate stayed full [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T07:41:15Z  interrupt W1449 minted    -         "tests/test_check_committed.py names nemik-check's exit code for an uncommitted queue, so ruff falls by three"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
+2026-11-02T07:42:54Z  status W1447 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T07:43:04Z  status W1449 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
