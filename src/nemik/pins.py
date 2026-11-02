@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import NamedTuple
 
 from nemik.check import default_root
+from nemik.say import say
 from nemik.tomlview import table, tables
 
 _PIN = re.compile(
@@ -206,9 +207,9 @@ def main(argv: list[str] | None = None) -> int:
                 check=False,
             ).stdout.strip()
             shown = "unknown" if n is None else n
-            print(f"host installs nemik@{sha[:12]}: behind {shown}")
+            say(f"host installs nemik@{sha[:12]}: behind {shown}")
             if n:
-                print(
+                say(
                     f"  level it: uv tool install --force "
                     f"'nemik @ git+file://{args.root / 'nemik'}@{head}'"
                 )
@@ -217,28 +218,26 @@ def main(argv: list[str] | None = None) -> int:
         live = deployed() if args.cluster else None
         if args.cluster:
             if live is None:
-                print(
+                say(
                     "cluster deploys nemik@unknown (kubectl or the Deployment unreadable)"
                 )
             else:
                 n = behind(args.root, Pin("cluster", "nemik", live))
                 shown = "unknown" if n is None else n
-                print(f"cluster deploys nemik@{live[:12]}: behind {shown}")
+                say(f"cluster deploys nemik@{live[:12]}: behind {shown}")
                 if n and n > args.stuck_after:
-                    print(
+                    say(
                         "  the ship is stuck: a stuck ship goes to luthen-observability"
                     )
                 elif n:
-                    print(
-                        "  in flight: the newest pushes are still building or rolling"
-                    )
+                    say("  in flight: the newest pushes are still building or rolling")
                 worst = max(worst, n or 0)
     for pin in pins(args.root):
         if args.repos and pin.repo not in args.repos:
             continue
         n = behind(args.root, pin)
         shown = "unknown (peer not cloned, or commit not in it)" if n is None else n
-        print(f"{pin.repo} pins {pin.peer}@{pin.sha[:12]}: behind {shown}")
+        say(f"{pin.repo} pins {pin.peer}@{pin.sha[:12]}: behind {shown}")
         worst = max(worst, n or 0)
     over = args.max_behind is not None and worst > args.max_behind
     return 6 if over else 0

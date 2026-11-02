@@ -39,6 +39,7 @@ from nemik.blocks import inbound, operator_asks, with_salience
 from nemik.check import default_root, survey
 from nemik.luthenseries import load
 from nemik.pacecli import EXPORT_TREE
+from nemik.say import say
 
 if TYPE_CHECKING:
     from rdflib.term import Node
@@ -636,7 +637,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
             fired = undelivered(fired, seen)
             _write_seen(args.nudges_state, seen)
         if args.json:
-            print(
+            say(
                 json.dumps(
                     {
                         "liveness": source,
@@ -648,17 +649,17 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
                 )
             )
             return
-        print(
+        say(
             f"alarms fired {since.isoformat()} .. {until.isoformat()} (liveness: {source})"
         )
         for a in fired:
             occ = f" [{a['recurrence_id']}]" if a["recurrence_id"] else ""
             what = f"ERROR {a['error']}" if a.get("error") else a["title"][:60]
-            print(
+            say(
                 f"  {a['at'] or '-':20} {a['state']:7} {a['ref']:28}{occ} {a['trigger']:22} {what}"
             )
             if a.get("message"):
-                print(f"      send: {a['message'].splitlines()[0]}")
+                say(f"      send: {a['message'].splitlines()[0]}")
         return
 
     end = datetime.now(UTC)
@@ -674,16 +675,16 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         rows = due_nudges(rows, seen)
         _write_seen(args.nudges_state, seen)
     if args.json:
-        print(
+        say(
             json.dumps(
                 {"liveness": source, "roster": rows, "operator": operator_row(g)},
                 indent=2,
             )
         )
         return
-    print(f"liveness: {source}")
+    say(f"liveness: {source}")
     for r in rows:
-        print(
+        say(
             f"\n{r['state'].upper():7} {r['repo']}  "
             f"({len(r['waiting'])} waiting; last tick {r['last_tick'] or 'none'})"
         )
@@ -692,9 +693,9 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
                 ", ".join(w["claimed_by"])
                 or f"waiting on {r['repo']}: claim with --enables {w['blocked']}"
             )
-            print(f"          {w['blocked']:28} {claim:22} {w['title'][:60]}")
+            say(f"          {w['blocked']:28} {claim:22} {w['title'][:60]}")
     op = operator_row(g)
-    print(f"\nYOU     operator  ({len(op['waiting'])} need you: nemik-operator)")
+    say(f"\nYOU     operator  ({len(op['waiting'])} need you: nemik-operator)")
     # nemik:W298: the five heaviest, with the demand waiting behind each
     for w in op["waiting"][:5]:
-        print(f"  {w['salience']:6.1f} {w['blocked']:28} {w['title'][:60]}")
+        say(f"  {w['salience']:6.1f} {w['blocked']:28} {w['title'][:60]}")

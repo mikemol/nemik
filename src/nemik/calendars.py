@@ -29,6 +29,7 @@ from rdflib.namespace import DCTERMS, RDF
 from nemik.adapter import NEMIK, OSLC_CM
 from nemik.blocks import ref
 from nemik.check import default_root, survey
+from nemik.say import say, warn
 from nemik.vtodo import DEFAULT_HELPER
 
 DEFAULT_CONFIG = Path.home() / ".config" / "nemik" / "calendars.toml"
@@ -364,7 +365,7 @@ def days_main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     cals = load_calendars(args.calendars)
     cols = {label: c.name for label, c in cals.items()}
     if not cols:
-        print(f"no calendar opted in ({args.calendars})")
+        say(f"no calendar opted in ({args.calendars})")
         return
     if g is None:
         g = Graph()
@@ -382,7 +383,7 @@ def days_main(argv: list[str] | None = None, g: Graph | None = None) -> None:
             stats=stats,
         )
     except FileNotFoundError as e:
-        print(f"ERROR: {e}")
+        say(f"ERROR: {e}")
         raise SystemExit(2) from e
     except subprocess.CalledProcessError as e:
         # The helper refuses (nemik:W193) when Akonadi is not running; say what it said, not a
@@ -392,7 +393,7 @@ def days_main(argv: list[str] | None = None, g: Graph | None = None) -> None:
             or (e.stderr or b"").decode(errors="replace").strip()
             or f"exit {e.returncode}"
         )
-        print(f"ERROR: the calendar export failed: {why.splitlines()[-1]}")
+        say(f"ERROR: the calendar export failed: {why.splitlines()[-1]}")
         raise SystemExit(2) from e
     eg = event_graph(occs, g)
     rows: list[Occurrence] = []
@@ -423,19 +424,17 @@ def days_main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         if c.include and label in stats
     ]
     if args.json:
-        print(
-            json.dumps(rows, indent=2)
-        )  # the row list, unchanged for existing readers
+        say(json.dumps(rows, indent=2))  # the row list, unchanged for existing readers
         for line in report:
-            print(line, file=sys.stderr)
+            warn(line)
         return
-    print(f"next {args.days} days ({len(rows)})")
+    say(f"next {args.days} days ({len(rows)})")
     for d in rows:
         waits = f"  <- {', '.join(d['waiting'])}" if d["waiting"] else ""
         also = f"  [also: {', '.join(d['also'])}]" if d.get("also") else ""
-        print(
+        say(
             f"  {(d['start'] or '')[:16]:16} {d['label']:10} "
             f"{(d['summary'] or '')[:60]}{also}{waits}"
         )
     for line in report:
-        print(f"  {line}")
+        say(f"  {line}")

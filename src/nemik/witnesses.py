@@ -34,6 +34,7 @@ from nemik import edgeletters
 from nemik.check import QUEUE, default_root, workstream_files
 from nemik.delivery import owed, stamp
 from nemik.hostapply import fact, load
+from nemik.say import say, warn
 from nemik.work import run_writer
 from nemik.workrows import edges_of
 
@@ -607,10 +608,10 @@ def main(argv: list[str] | None = None) -> None:
         try:
             limit, step = seconds(args.timeout), seconds(args.every)
         except ValueError as err:
-            print(f"nemik-witnesses: {err}", file=sys.stderr)
+            warn(f"nemik-witnesses: {err}")
             raise SystemExit(2) from err
         code, line = wait(poller(args.wait, args.lang), limit, step)
-        print(line)
+        say(line)
         raise SystemExit(code)
     # nemik:W97: the queue's one writer is the installed mikemol-paths-forward, beside this
     # interpreter in the same .venv (host, or bazel's //:.venv). Missing is a failure, reported,
@@ -622,13 +623,12 @@ def main(argv: list[str] | None = None) -> None:
         # nemik:W539: a witness with no declared language is sniffed; say so, so the count can fall
         # to 0
         sniffed = "  language sniffed (no witness_lang)" if not lang else ""
-        print(f"WITNESS {repo}:{sym} {verdict}{note}{sniffed}")
+        say(f"WITNESS {repo}:{sym} {verdict}{note}{sniffed}")
         if args.apply and verdict == "true":
             observed = {k: v for k, v in doc.items() if k != "now"}
             if not pf.exists():
-                print(
+                warn(
                     f"APPLY FAILED {repo}:{sym} ({pf} is not installed)",
-                    file=sys.stderr,
                 )
                 continue
             code, said = run_writer(
@@ -645,11 +645,10 @@ def main(argv: list[str] | None = None) -> None:
             )
             if code:
                 # the writer's own refusal line, so a loop that fails every five minutes says why
-                print(
+                warn(
                     f"APPLY FAILED {repo}:{sym} (mikemol-paths-forward exit {code}): "
                     f"{(said.splitlines() or ['no output'])[-1]}",
-                    file=sys.stderr,
                 )
                 continue
             for letter in wake(args.root, repo, sym, query, str(doc["now"])):
-                print(f"WOKE {letter}")
+                say(f"WOKE {letter}")

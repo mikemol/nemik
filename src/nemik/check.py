@@ -61,6 +61,7 @@ from nemik.idle import findings as idle_findings
 from nemik.letters import report
 from nemik.rank import successors
 from nemik.rolls import idle_run, stalled
+from nemik.say import say
 from nemik.shaclinc import findings as shacl_findings
 from nemik.work import in_gate
 from nemik.workrows import NO_BOUND, ready_stamps, small_done_stamps, upper_quantile
@@ -1003,23 +1004,23 @@ def _realizability(root: Path) -> int:
     version = policy_version()
     # nemik:W236: the clock is the policy's input, so the verdicts below are a function of it;
     # say which.
-    print(f"as_of {now}  policy {version[:12]}")
+    say(f"as_of {now}  policy {version[:12]}")
     for repo, path in workstream_files(root, QUEUE):
         try:
             found = verdicts(repo, path, root, now)
         except (OpaUnavailableError, UnreadableStateError) as exc:
-            print(f"NOT JUDGED {repo}: {exc}")
+            say(f"NOT JUDGED {repo}: {exc}")
             unjudged += 1
             continue
         # nemik:W234: the writer's persisted marks are read, not re-derived; a stale one is named.
         marks, unreadable = read(path.parent / MARKS)
-        print(f"{repo}: {len(found)} waypoint(s), {unreadable} unreadable mark line(s)")
+        say(f"{repo}: {len(found)} waypoint(s), {unreadable} unreadable mark line(s)")
         for verdict in found:
             residue += not runtime_valid(verdict)
             symbol = str(verdict.get("ref")).rsplit(":", 1)[-1]
             source = provenance(marks.get(symbol), now, version)
             for line in rows(verdict, source):
-                print(f"  {line}")
+                say(f"  {line}")
     return 2 if unjudged else int(residue > 0)
 
 
@@ -1274,7 +1275,7 @@ def run_survey(
     if since:
         lines = unseen(lines, Path(since))
     for line in lines:
-        print(line)
+        say(line)
     sys.stdout.write(summary_line(found, failed) + "\n")
     return failed
 
@@ -1423,7 +1424,7 @@ def main(argv: list[str] | None = None) -> None:
             older_than=args.older_than,
             apply=args.apply,
         )
-        print("\n".join(said))
+        say("\n".join(said))
         sys.exit(code)
     if args.committed is not None:
         sys.exit(committed_verdict(args.root, set(args.committed)))

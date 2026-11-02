@@ -29,6 +29,7 @@ from rdflib.namespace import DCTERMS, RDF
 from nemik.adapter import BASE, NEMIK, OSLC_CM
 from nemik.calendars import DEFAULT_CONFIG, load_calendars
 from nemik.check import default_root, survey
+from nemik.say import say, say_raw
 from nemik.vtodo import DEFAULT_HELPER, time_property, timezones
 
 if TYPE_CHECKING:
@@ -310,12 +311,12 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> int:
         label: c for label, c in load_calendars(args.calendars).items() if c.write
     }
     if not targets:
-        print(
+        say(
             f"no calendar opted in for writing ({args.calendars}: write = true, mirror = [repos])"
         )
         return 0
     if not args.helper.exists():
-        print(f"ERROR: {args.helper} is missing; build it with ./setup.sh")
+        say(f"ERROR: {args.helper} is missing; build it with ./setup.sh")
         return 2
     if g is None:
         g = Graph()
@@ -327,10 +328,10 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> int:
         code, out = _write(
             args.helper, cal.name, feed(g, cal.mirror, label), apply=args.apply
         )
-        print(
+        say(
             f"== {label}: {len(events(g, cal.mirror, label))} dated waypoints of "
             f"{', '.join(cal.mirror)}"
         )
-        print(out, end="")
+        say_raw(out)
         worst = max(worst, code)
     return worst

@@ -22,6 +22,7 @@ from nemik.adapter import BASE, NEMIK, OSLC_CM
 from nemik.blocks import bare_wait_edges, ref
 from nemik.core.chains import longest_chains
 from nemik.rank import successors
+from nemik.say import say
 
 if TYPE_CHECKING:
     from rdflib.term import Node
@@ -387,11 +388,11 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     if args.fires:
         found_fires = fires(g, scope)
         if args.json:
-            print(json.dumps([f._asdict() for f in found_fires], indent=1))
+            say(json.dumps([f._asdict() for f in found_fires], indent=1))
             return
-        print(f"fires holding up planned work: {len(found_fires)}")
+        say(f"fires holding up planned work: {len(found_fires)}")
         for f in found_fires:
-            print(
+            say(
                 f"  {f.cite}  delays the path {f.delay}, holds up {len(f.planned)} planned: "
                 + ", ".join(f.planned[:8])
                 + (" ..." if len(f.planned) > 8 else "")
@@ -403,22 +404,22 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         g = assume_done(g, args.assume_done)
         after = critical(g, scope)
         if args.json:
-            print(json.dumps({"before": before._asdict(), "after": after._asdict()}))
+            say(json.dumps({"before": before._asdict(), "after": after._asdict()}))
             return
-        print(what_if(before, after, args.assume_done))
+        say(what_if(before, after, args.assume_done))
         return
     if args.json:
-        print(json.dumps(critical_doc(g, scope), indent=1))
+        say(json.dumps(critical_doc(g, scope), indent=1))
         return
     found = critical(g, scope)
     loops = cycles(g)
-    print(f"critical path: {found.length} open cards deep")
+    say(f"critical path: {found.length} open cards deep")
     # nemik:W344: one line per rank; cards sharing a rank are tied alternatives (an antichain),
     # joined by |
     levels: dict[int, list[str]] = {}
     for card in found.chain:
         levels.setdefault(found.rank[card], []).append(card)
-    print(
+    say(
         "  "
         + " -> ".join(
             "|".join(cards) + (f" (x{len(cards)} tied)" if len(cards) > 1 else "")
@@ -426,10 +427,10 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         )
     )
     loose = sum(1 for s in found.slack.values() if s > 0)
-    print(f"  {len(found.slack) - loose} cards at zero slack, {loose} with slack")
+    say(f"  {len(found.slack) - loose} cards at zero slack, {loose} with slack")
     # nemik:W324: a cycle never clears; a cross-repo one spans workstreams that cannot see it alone.
     deadlocks = [c for c, human in loops if not human]
-    print(
+    say(
         f"dependency cycles: {len(loops)}, "
         f"{len(deadlocks)} true deadlocks, {len(loops) - len(deadlocks)} the operator can break"
     )
@@ -437,4 +438,4 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         repos = {c.partition(":")[0] for c in cards}
         mark = " [cross-repo]" if len(repos) > 1 else ""
         kind = "operator can break" if human else "DEADLOCK"
-        print(f"  {kind}: {', '.join(cards)}{mark}")
+        say(f"  {kind}: {', '.join(cards)}{mark}")

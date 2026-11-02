@@ -38,6 +38,7 @@ from nemik.climate import (
 from nemik.forecastshingle import HORIZONS, issue_blocked, issue_in_line, shingle_rows
 from nemik.histdocs import encode, file_name
 from nemik.netforecast import replay_row, sweep_alerts, sweep_report, trailing_alerts
+from nemik.say import say, warn
 from nemik.verify import lead_report, score_shingle, shingle_pairs
 from nemik.wake import read_liveness
 from nemik.where import matches, parse
@@ -1275,7 +1276,7 @@ def main(argv: list[str] | None = None) -> int:
         ap.error("name the repos (or --all) and a --from")
     for name in names:
         if name not in dirs:
-            print(f"ERROR: no workstream {name} under {args.root}", file=sys.stderr)
+            warn(f"ERROR: no workstream {name} under {args.root}")
             return 2
     if args.churn:
         from nemik.churn import run
@@ -1294,9 +1295,9 @@ def main(argv: list[str] | None = None) -> int:
         new = queue_at(repo, resolve(repo, args.to))
         out[name] = diff(old, new)
     if args.json:
-        print(json.dumps({r: asdict(d) for r, d in out.items()}, indent=1))
+        say(json.dumps({r: asdict(d) for r, d in out.items()}, indent=1))
     else:
-        print("\n".join(starmap(render, out.items())))
+        say("\n".join(starmap(render, out.items())))
     return 0
 
 
@@ -2474,20 +2475,20 @@ def _baseline(args: argparse.Namespace, names: list[str], dirs: dict[str, Path])
             "shape": shape_drift(base, now),
         }
     if args.json:
-        print(json.dumps(out, indent=1))
+        say(json.dumps(out, indent=1))
         return 0
     for name, v in out.items():
         if v["baseline"] is None:
-            print(f"{name}: no baseline (give one, or declare it in {BASELINE_PATH})")
+            say(f"{name}: no baseline (give one, or declare it in {BASELINE_PATH})")
             continue
         added = ", ".join(f"{len(s)} {k}" for k, s in sorted(v["added"].items()))
-        print(
+        say(
             f"{name} since {v['baseline']}: planned {v['planned']}, closed {len(v['closed'])}, "
             f"dropped {len(v['dropped'])}, still open {len(v['still_open'])} "
             f"(done share {v['done_share']}); added since: {added or 'none'}"
         )
         sh = v["shape"]
-        print(
+        say(
             f"  shape: +{sh['edges_added']}/-{sh['edges_removed']} edges, "
             f"{len(sh['retitled'])} planned retitled, {len(sh['rewired'])} re-wired "
             f"(touched share {sh['touched_share']})"
@@ -2544,17 +2545,17 @@ def _toil(args: argparse.Namespace, names: list[str], dirs: dict[str, Path]) -> 
     """
     doc = {n: toil(n, dirs[n] / ".claude" / LEDGER) for n in names}
     if args.json:
-        print(json.dumps(doc, indent=1))
+        say(json.dumps(doc, indent=1))
         return 0
     for name, rows in doc.items():
-        print(name)
+        say(name)
         for row in rows:
             value = row["toil_share"]
             share = f"{value:.0%}" if isinstance(value, float) else "-"
             counts = "  ".join(
                 f"{k} {v}" for k, v in row.items() if k not in {"week", "toil_share"}
             )
-            print(f"  {row['week']}  interrupt share {share:>4}  {counts}")
+            say(f"  {row['week']}  interrupt share {share:>4}  {counts}")
     return 0
 
 
@@ -2596,12 +2597,12 @@ def _series(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
         }
     if args.json:
         doc = rolled if args.weekly else spent
-        print(json.dumps(doc, indent=1))
+        say(json.dumps(doc, indent=1))
         return 0
     for name in names:
-        print(name)
+        say(name)
         for row in rolled.get(name, []):
-            print(
+            say(
                 f"  {row['week']}  opened {row['opened']:3}  closed {row['closed']:3}"
                 f"  open {row['open']:3}  blocked {row['blocked_share']:.0%}"
                 f"  oldest block {row['oldest_blocked'] or '-'}"
@@ -2611,7 +2612,7 @@ def _series(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
             )
         for symbol, (state, per) in spent.get(name, {}).items():
             held = "  ".join(f"{k} {_days(v)}" for k, v in per.items())
-            print(f"  {symbol} now {state}: {held}")
+            say(f"  {symbol} now {state}: {held}")
     return 0
 
 

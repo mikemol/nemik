@@ -31,6 +31,7 @@ from nemik.adapter import BASE, NEMIK, OSLC_CM, workstream_uri
 from nemik.index import index
 from nemik.pacecli import behind_files, pace_exit, pace_process
 from nemik.roundcli import NO_LANDINGS, show_round, write_round_file
+from nemik.say import say
 from nemik.score import band, load_bands, load_guarantees, tagged_band
 from nemik.stackable import manifest
 
@@ -790,7 +791,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         args.band
     ):  # nemik:W152 (el-openglo:W176): check a vector's band before the item closes
         b, why = band(args.band, load_bands())
-        print(f"{b}  ({why})")
+        say(f"{b}  ({why})")
         raise SystemExit(1 if why.startswith("invalid") else 0)
     if g is None:
         g = Graph()
@@ -815,11 +816,11 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     if args.all:
         fleet = rank_fleet(g, weights)
         if args.json:
-            print(json.dumps(fleet, indent=2))
+            say(json.dumps(fleet, indent=2))
             return
         for entry in fleet:
             head = f"{entry['weight']:4} {entry['cite']:32} {entry['band_name']:9}"
-            print(
+            say(
                 f"{head} op={entry['operator']} down={entry['downstream']:<4} "
                 f"{str(entry['title'])[:60]}"
             )
@@ -828,14 +829,14 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         repo_, _, sym = args.item.partition(":")
         n = URIRef(f"{BASE}{repo_}/{sym}")
         if (n, NEMIK.symbol, None) not in g:
-            print(f"rank: {args.item} is not a waypoint in any workstream")
+            say(f"rank: {args.item} is not a waypoint in any workstream")
             raise SystemExit(2)
         vec = str(g.value(n, NEMIK.vector) or "") or None
         b, why = band(vec, load_bands())
         state = (
             str(g.value(n, OSLC_CM.state) or "").rsplit("/", 1)[-1].rsplit("#", 1)[-1]
         )
-        print(f"{args.item}  {state}  {b}  ({why})  {vec or 'no vector'}")
+        say(f"{args.item}  {state}  {b}  ({why})  {vec or 'no vector'}")
         return
     if args.check:
         failed = False
@@ -843,7 +844,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
             # nemik:W112: DECOMPOSE puts the DIRECT open children in blocked_on; the frontier is the
             # transitive leaves beneath them (paperkit read the leaves as children and found 2 of 5
             # "wrong": W59 <- W60 <- W132, W78 listed W132, W78, not W60).
-            print(
+            say(
                 f"rank: UMBRELLA {ref_of(u)} is ready with open work under it: "
                 f"children {', '.join(sorted(ref_of(x) for x in children(g, u)))}; "
                 f"leaves {', '.join(sorted(ref_of(x) for x in frontier(g, u)[0]))}"
@@ -852,7 +853,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         rows = rank(g, args.repo, weights)
         if d := drift(g, args.repo, weights, rows):
             nxt, top = d
-            print(
+            say(
                 f"rank: DRIFT {args.repo}: next is {nxt['symbol']} ({nxt['weight']}) "
                 f"but {top['symbol']} carries {top['weight']}"
             )
@@ -863,32 +864,32 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         guar = load_guarantees(bands=bands)
         if inv := inversion(g, args.repo, rows, bands, guar):
             nxt, top = inv
-            print(
+            say(
                 f"rank: INVERSION {args.repo}: next is {nxt['symbol']} ({nxt['band_name']}) "
                 f"while {top['symbol']} is ready at {top['band_name']} (floor {guar.floor})"
             )
             failed = True
         for dep, blocker, cls, surfaces in policy_blocks(g, args.repo, guar):
-            print(
+            say(
                 f"rank: POLICY {args.repo}: {dep} is ready while {cls} {blocker} is open "
                 f"on {', '.join(surfaces)}"
             )
             failed = True
         # A census, not a verdict (the letter's "count the unscored ones"): exit is unchanged.
-        print(f"rank: UNSCORED {args.repo} {unscored(g, args.repo)}")
+        say(f"rank: UNSCORED {args.repo} {unscored(g, args.repo)}")
         if not failed:
-            print(
+            say(
                 f"rank: OK {args.repo}: next ready item carries the top cross-repo weight"
             )
         raise SystemExit(1 if failed else 0)
     if args.goals:
         gs = goals(g, args.repo, weights)
         if args.json:
-            print(json.dumps(gs, indent=2))
+            say(json.dumps(gs, indent=2))
             return
         for r in gs:
             path = "clear" if r["clear"] else "waits on " + ", ".join(r["outside"])
-            print(
+            say(
                 f"{r['goal']:6} {r['weight']:4}  on deck {r['on_deck'] or '-'}; path {path}  {r['title'][:60]}"
             )
         return
@@ -901,19 +902,19 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         try:
             effect = ask_effect(g, args.repo, args.ask)
         except ValueError as err:
-            print(f"rank: {err}")
+            say(f"rank: {err}")
             raise SystemExit(2) from err
-        print(f"ask {effect.ref} in {args.repo}'s ranking")
+        say(f"ask {effect.ref} in {args.repo}'s ranking")
         if effect.stranded:
-            print("  needs: nothing on the ready frontier (stranded demand)")
+            say("  needs: nothing on the ready frontier (stranded demand)")
         for card, current in effect.needs:
-            print(f"  needs {card:28} carries {show(current)}")
+            say(f"  needs {card:28} carries {show(current)}")
         for card, without, with_ in effect.displaced:
-            print(
+            say(
                 f"  overrides {card}: position {without} without the ask, {with_} with it"
             )
         if not effect.displaced:
-            print("  overrides: no ready card of this repo sits lower because of it")
+            say("  overrides: no ready card of this repo sits lower because of it")
         return
     if args.flow:
         # nemik:W240: the old downstream weight beside the flow model's salience (exact; shown
@@ -937,27 +938,27 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         )
         old_pos = {c: i + 1 for i, c in enumerate(result.old_order())}
         new_pos = {c: i + 1 for i, c in enumerate(result.new_order())}
-        print(
+        say(
             f"flow {args.repo}: {len(result.rows)} ready, {result.sources} sources, "
             f"{len(result.flow.stranded)} stranded"
         )
         for row in sorted(result.rows, key=lambda r: new_pos[r.ref]):
-            print(
+            say(
                 f"{row.ref:28} old={row.old:<5} flow={show(row.new):>10}  "
                 f"old#{old_pos[row.ref]:<4} flow#{new_pos[row.ref]}"
             )
         pairs = result.disagreements()
-        print(f"flow {args.repo}: {len(pairs)} pair(s) ordered differently")
+        say(f"flow {args.repo}: {len(pairs)} pair(s) ordered differently")
         for above, below in pairs:
-            print(f"  old puts {above} above {below}; flow puts {below} above {above}")
+            say(f"  old puts {above} above {below}; flow puts {below} above {above}")
         # Why: the old weight counts a shared source in full for each card; the flow splits it.
         # Each card that the old arm put above another and the flow did not is explained by the
         # sources it shares with other ready cards.
         for card in sorted({above for above, _ in pairs}):
             shared = result.contested(card)
-            print(f"  {card}: {len(shared)} contested source(s)")
+            say(f"  {card}: {len(shared)} contested source(s)")
             for source, demand, part, others in shared[:8]:
-                print(
+                say(
                     f"    {source}: demand {show(demand)}, {card} absorbs {show(part)}, "
                     f"shared with {', '.join(others[:4])}"
                 )
@@ -970,10 +971,10 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         _apply(args.apply, rows)
         return
     if args.json:
-        print(json.dumps(rows, indent=2))
+        say(json.dumps(rows, indent=2))
         return
     for r in rows:
-        print(
+        say(
             f"{r['symbol']:6} {r['band_name']:9} op={r['operator']} down={r['downstream']:<4} {r['title'][:70]}"
         )
 

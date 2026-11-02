@@ -37,6 +37,7 @@ from rdflib import Graph
 from nemik.adapter import ledger_graph
 from nemik.blocks import EXPLICIT, operator_asks, with_salience
 from nemik.check import LEDGER, default_root, survey, workstream_files
+from nemik.say import say, say_raw
 from nemik.tomlview import strings, table
 
 if TYPE_CHECKING:
@@ -411,12 +412,12 @@ def tasks_main(argv: list[str] | None = None) -> None:
     )
     args = ap.parse_args(argv, namespace=Options())
     if not args.helper.exists():
-        print(f"ERROR: {args.helper} is missing; build it with ./setup.sh", flush=True)
+        say(f"ERROR: {args.helper} is missing; build it with ./setup.sh")
         raise SystemExit(2)
     try:
         text = feed(args.root, args.opt_in, args.link, group=not args.flat)
     except Exception as e:
-        print(f"ERROR: feed: {e}", flush=True)
+        say(f"ERROR: feed: {e}")
         raise SystemExit(2) from e
     cmd = [str(args.helper), "--list", args.tasks_list]
     cmd += ["--create-list"] * args.create_list + ["--apply"] * args.apply
@@ -440,10 +441,9 @@ def tasks_main(argv: list[str] | None = None) -> None:
             or attempt == tries - 1
         ):
             break
-        print(
+        say(
             f"RETRY {attempt + 1}: parents are not on Google yet; "
             f"waiting {args.retry_wait}s for the resource to sync",
-            flush=True,
         )
         time.sleep(args.retry_wait)
     raise SystemExit(run.returncode)
@@ -482,7 +482,7 @@ def main(argv: list[str] | None = None) -> None:
 
     text = feed(args.root, args.opt_in, args.link)
     if args.out is None:
-        print(text, end="")
+        say_raw(text)
         return
     tmp = args.out.with_suffix(args.out.suffix + ".tmp")
     tmp.write_text(text, newline="")

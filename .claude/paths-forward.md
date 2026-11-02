@@ -3,11 +3,11 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1423 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:7c93a4b20ac9ce31`
+counter 1424 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:d7f8e54fcae1ac86`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1421 | working |
+| 1 | W1422 | working |
 | 2 | W1075 | ready |
 | 3 | W1139 | ready |
 | 4 | W1279 | ready |
@@ -99,8 +99,8 @@ counter 1423 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:7c9
 | 90 | W1390 | ready |
 | 91 | W1395 | ready |
 | 92 | W1418 | ready |
-| 93 | W1422 | ready |
-| 94 | W1423 | ready |
+| 93 | W1423 | ready |
+| 94 | W1424 | ready |
 | 95 | W986 | blocked |
 | 96 | W1007 | blocked |
 | 97 | W1008 | blocked |
@@ -1402,11 +1402,12 @@ counter 1423 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:7c9
 | 1393 | W1417 | done |
 | 1394 | W1419 | done |
 | 1395 | W1420 | done |
+| 1396 | W1421 | done |
 
 ## waypoints
 
-1. **W1421** (working) blocks_cli writes its output through the new nemik.say module instead of bare print calls, so
-   ruff falls by six and the output contract has one home
+1. **W1422** (working) Seven small commands write through nemik.say instead of bare print calls, so ruff falls by
+   fifteen
 2. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 3. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -1813,9 +1814,10 @@ counter 1423 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:7c9
      mtools has the answer.
 92. **W1418** (ready) Answer the three mtools letters that say W2088 and W2099 are done: read W1246 and W1229, lift the
    waits they name or say why not
-93. **W1422** (ready) Seven small commands write through nemik.say instead of bare print calls, so ruff falls by fifteen
-94. **W1423** (ready) Ten larger commands write through nemik.say instead of bare print calls (the plan converts 97), so
+93. **W1423** (ready) Ten larger commands write through nemik.say instead of bare print calls (the plan converts 97), so
    ruff falls by about ninety-seven
+94. **W1424** (ready) serve.py and metrics.py write through nemik.say, with the hub-module claim's declared sets gaining
+   say, so ruff falls by five
 95. **W986** (blocked) A ratchet paydown rate requirement with teeth: a repo is behind when a ratchet's fall over a
    trailing window of landed commits is below a requirement that only rises
    - blocked on: W994, W1002
@@ -4594,6 +4596,8 @@ counter 1423 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:7c9
    TYPE_CHECKING and inside two functions, so ruff falls by two
 1395. **W1420** (done) serve.build_static and _build_static take private and exports keyword-only with their one
    positional call fixed, so ruff falls by four
+1396. **W1421** (done) blocks_cli writes its output through the new nemik.say module instead of bare print calls, so
+   ruff falls by six and the output contract has one home
 
 ## residue
 
@@ -5972,3 +5976,25 @@ counter 1423 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:7c9
   W1288, R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288, R114 on W1395 (no mtools reply in the
   inbox), R116 on W1383 (left: blocks.py:419 FBT003), R119 on W1396 (pin bump) (all 2026-11-02); codon: W1414's argparse
   probe not run, W1325 census not done.; 2 finding(s)
+- **nemik:R124** (-) round 126: nemik-109, stack 811 (W1419, W1420) landed 13ed2930 = 23:29:22Z; stack 812 (W1421: new
+  say.py, tests/test_say.py, blocks_cli.py 6 prints) inflight since 23:30:59Z, key 1793575858851994363; stacks 813
+  (W1422, 15 prints in seven modules) and 814 (W1423, 97 prints in ten modules including check.py and rank.py) staged;
+  the print campaign: root Verified from source (TZ=UTC reflog): b8503692 23:05:53Z, 13ed2930 23:29:22Z (18:29:22
+  -0500); --in-gate lists W1421 inflight; `mikemol-pycheck --ratchet` prints ruff 489/601 and mypy 1278/1278 (the live
+  489 is 607 - 6 - 15 - 97, the three stacks staged on the tree; stack 812's baseline is 601). I read src/nemik/say.py:
+  three functions say, say_raw, warn over sys.stdout.write and sys.stderr.write, stdlib only, no boolean or keyword-only
+  parameter (the bare-star lesson from W1400 applied), which does what print did to those streams. Intervals as Z pairs:
+  811 submitted 23:06:51Z, landed 23:29:22Z (gate 22 min 31 s); gate empty 23:29:22Z to the 812 submit 23:30:59Z (1 min
+  37 s, a watchdog restart inside it). The R125 answers are real work: W1384's probe and decision came before any print
+  edit (123 prints in 24 modules), the two letters in W1418 were tested against the pin and not asked (mtools:W2088 and
+  W2099 are not in the vendored e6dc759 pin; the bump is mikemol-repin --revendor), and the stray '--next' tokens were
+  traced to the session's own stamp-script calls and redacted (scan-literal 0 hits). The printsay.py codemod classifies
+  each print and reports what it skips (97 converted, 0 skipped), the first form of W1422 was refused by the ratchet for
+  a multi-line print the one-line pattern missed and fixed, and the campaign's ruff fall (-118 of 607 left) is the
+  largest of the segment. One finding, because this campaign wires a new module into live readers. No fixpoint is
+  declared. Carried open findings, status on 2026-11-01: R95 second finding on W1349 (durable stamp script), R95 third,
+  R97 first, R98, R111 first and R102 on W1219, R94 on W1348, R93 on W1347, R92 on W1346 and W1288, R91 on W1345, R72 on
+  W846, R100 on W910, R101 on W1288, R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288 (tick-open
+  start not cleanly read this tick), R114 on W1395, R116 on W1383 (left: blocks.py:419), R119 on W1396 (the pin bump:
+  par or latest) (all 2026-11-02); codon: W1414's argparse probe not run, W1325 census not done; serve.py 4 and
+  metrics.py 1 prints wait on the hub-claim change.; 1 finding(s)
