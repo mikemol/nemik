@@ -9,6 +9,7 @@ import subprocess
 import sys
 import threading
 from collections.abc import Iterator
+from http import HTTPStatus
 from http.server import ThreadingHTTPServer
 from pathlib import Path
 
@@ -85,7 +86,7 @@ def test_a_matching_validator_is_answered_without_a_body(
     tag = _get(port, "/graph/r.json")[1]["etag"]
     status, _, body = _get(port, "/graph/r.json", {"If-None-Match": tag})
     assert (status, body) == (304, b"")
-    assert _get(port, "/graph/r.json", {"If-None-Match": '"other"'})[0] == 200
+    assert _get(port, "/graph/r.json", {"If-None-Match": '"other"'})[0] == HTTPStatus.OK
     assert _get(port, "/graph/r.json", method="HEAD")[2] == b""
 
 
@@ -101,7 +102,7 @@ def test_a_path_cannot_leave_the_snapshot(served: tuple[Path, int]) -> None:
         "/graph/../../secret.txt",
         "/link",
     ):
-        assert _get(port, path)[0] == 404, path
+        assert _get(port, path)[0] == HTTPStatus.NOT_FOUND, path
     assert resolve(root, "/graph/%00x") is None
 
 
@@ -110,8 +111,8 @@ def test_readiness_waits_for_a_snapshot_and_liveness_does_not(
 ) -> None:
     """Readiness waits for a snapshot and liveness does not."""
     root, port = served
-    assert _get(port, "/healthz")[0] == 200
-    assert _get(port, "/metrics")[0] == 503
+    assert _get(port, "/healthz")[0] == HTTPStatus.OK
+    assert _get(port, "/metrics")[0] == HTTPStatus.SERVICE_UNAVAILABLE
     (root / "metrics").write_text("nemik_graph_nodes 3\n")
     status, head, body = _get(port, "/metrics")
     assert (status, body) == (200, b"nemik_graph_nodes 3\n")
@@ -149,7 +150,7 @@ def test_the_live_servers_extensionless_paths_still_answer(
     assert _get(port, "/inbound")[2] == b"[1]"
     assert _get(port, "/inbound/r")[2] == b"[2]"
     assert _get(port, "/goals/r")[2] == b"[3]"
-    assert _get(port, "/inbound/none")[0] == 404
+    assert _get(port, "/inbound/none")[0] == HTTPStatus.NOT_FOUND
 
 
 def test_the_server_never_imports_rdflib() -> None:

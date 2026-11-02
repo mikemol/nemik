@@ -461,7 +461,6 @@
   "SLF001": 1
  },
  "tests/test_staticserve.py": {
-  "PLR2004": 5,
   "S404": 1,
   "S603": 1
  },
