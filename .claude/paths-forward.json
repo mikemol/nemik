@@ -35864,7 +35864,7 @@
     {
       "symbol": "W1498",
       "title": "calendars.load_calendars and days_main: split validation from reading, so two C901 clear (src/nemik/calendars.py)",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W1494"
       ],
@@ -35872,17 +35872,18 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Split validation from reading in load_calendars and days_main; tests/test_calendars.py.",
-      "evidence": "",
+      "evidence": "2026-11-02: 2026-11-02T21:38:30Z (read by stampnote): G0 precommit: advances W1498 (calendars.load_calendars C901), staged behind stack 875. Pace stamp 2026-11-02T21:24:53Z, baseline ruff-baseline.json behind. N=1 site, K=1 verified by probe: load_calendars 12 over 10 clears and no new finding appears, once the Raises section moves to prose to avoid a DOC502. Actuator: codemod w1498_calendars.py real, moving the loop body verbatim into _calendar_entry. Sensor: house ruff on calendars.py loses one finding, house mypy stays at 1 misc, test_calendars passes, hookcheck rc 0. Expected: ruff 315 to 314, mypy flat, codon flat.",
       "issued_at": "2026-11-02T20:27:56Z",
       "minted_during": "interrupt",
       "caused_by": "W1494",
-      "last_worked": "2026-11-02T20:28:31Z",
+      "last_worked": "2026-11-02T21:38:47Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/calendars.py",
         "ruff-baseline.json"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "completed": null
     },
     {
       "symbol": "W1499",
@@ -36342,12 +36343,7 @@
   ],
   "job_id": "481476b5",
   "heartbeat": "2026-10-29T04:11:13Z",
-  "lock": {
-    "holder": "session-nemik",
-    "taken_at": "2026-11-02T21:15:20Z",
-    "pid": 337543,
-    "start": 21144718
-  },
+  "lock": null,
   "predecessor_job_id": "1d7fe6d0",
   "leases": [
     {
@@ -44372,7 +44368,29 @@
         }
       ],
       "id": "nemik:R156"
+    },
+    {
+      "card": "W1496",
+      "trigger": "round 159: stacks 873 (W1486, W1484) 2d581ca1 = 20:03:05Z and 874 (W1495) ca3e6039 = 20:57:51Z landed; stack 875 (W1496 critical.cycles C901, ruff 316 to 315) inflight since 21:37:15Z, key 1793655433798831273; stack 876 (W1498 calendars.load_calendars C901, ruff 315 to 314) queued",
+      "root": "Verified from source (TZ=UTC reflog and the transcript): 2c278bb0 19:21:46Z, 2d581ca1 main@{15:03:05 -0500} = 20:03:05Z, ca3e6039 15:57:51 -0500 = 20:57:51Z; --in-gate lists W1496 inflight and W1498 queued at 21:42:08Z; `mikemol-pycheck --ratchet` prints ruff 314/314 and mypy 728/728. Submits by the transcript: 873 at 19:46:00.1Z, 874 at 20:41:30.9Z, 875 at 21:37:13.2Z and 876 at 21:40:24.3Z. So the gate worked 19:46:00Z to 20:03:05Z (17 min 05 s), 20:41:30.9Z to 20:57:51Z (16 min 21 s) and from 21:37:13Z, and it was EMPTY 20:03:05Z to 20:41:30.9Z (38 min 26 s) and 20:57:51Z to 21:37:13.2Z (39 min 22 s). The G1 reports the second interval (39 min 24 s) and not the first; standing 13 asks every interval, and the pair together is 77 min 48 s of empty gate in the 94 min 08 s from 20:03:05Z to 21:37:13Z, 83 percent of it. The causes given are honest for the second (the 8-mode nemik-rank differential, started about 21:06Z and stopped after about 45 min wall under load, then trimmed to four modes; the tick-open also ran slowly) and the first is the same shape: the hunt for a ruff first entry (C901 now). The disclosure of the false 'since 21:17Z' in stack 876's frozen body (the true begin was 21:37:15Z) is correct and enough. The work itself is sound (K probes v1 and v2 for each C901 helper split, helpers moved verbatim, the differential on nemik-critical equal in three modes and nemik-check differing only in its provenance line, hookcheck rc=0 x4, G0 stamps from stampnote before the edits). Two findings. No fixpoint is declared. Carried open findings, status on 2026-11-02 21:45Z: R134 on W1282 (serve.py about 121 left, test_layout 266; each landing needs a ruff or codon first entry), R158 on W1414 (argparse probe: the first-entry supply), R146 on W1175 (mtools W2230 and W2231 landed, a112bf6d and 9b0c3f7a), R145 on W1458, R100 on W910, R95 second finding on W1349, R95 third, R97 first, R98, R111 first, R102, R127 and R128 on W1219, R94 on W1348, R93 on W1347, R92 on W1346, R91 on W1345, R72 on W846, R101 and R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288, R114 on W1395, R116 on W1383, R119 and R135 on W1396, R138 on W1288 (two empty intervals of 38 and 39 minutes in one span), R142 on W1451, R143 on W1246, R153 on W1242; codon owed with no stack.",
+      "findings": [
+        {
+          "finding": "The gate was empty 83 percent of the 94 minutes from 20:03:05Z to 21:37:13Z, and the cause in both gaps is the same: heavy verification (the hunt for a first entry, then an 8-mode differential that ran about 45 minutes under load) was done while nothing was in the gate. The gate is the parallel resource: every minute it works is free for the session to verify the next stack. Order the work the other way. As soon as a stack is submitted, probe and build the successor; run the long differential on the successor while the predecessor gates; and when the supply of first entries is short, submit the cheapest lowering entry that is ready now (a one-site ruff fix with a K probe, 5 minutes) to keep the gate working, instead of holding the submit for a better one. Also size the differential to the change: critical.cycles needed nemik-critical's three modes (they were equal), not eight nemik-rank modes. Record both intervals of this span and the new order of work on W1496.",
+          "finding_card": "W1496",
+          "finding_owner": "nemik session",
+          "finding_witness": "A W1496 evidence line with the two empty intervals (20:03:05Z to 20:41:30.9Z and 20:57:51Z to 21:37:13.2Z), and the next three landings each with a successor already submitted or queued at the previous landing.",
+          "due": "2026-11-03"
+        },
+        {
+          "finding": "The repin is now unblocked on mtools' side (W2231 landed as 9b0c3f7a and W2230 as a112bf6d) and the G1 still records it as owing a lowering entry, but the entry exists in the queue every hour: stack 875 and 876 are ruff-lowering entries. Compose the next stack as [a one-site ruff or C901 first entry, W1396 the revendor] (the dry run is already recorded and the sha is known), measure mikemol-pycheck --ratchet from the rebuilt venv before the submit (a tool change can move the counts), run hookcheck and the byte differential for the entry that touches a hook-imported file, and then start the procrun migration on W1175 (13 covered calls, 5 uncovered, now that capture gains stdin and bytes modes), which is the largest remaining ruff class (S603, S404, S607: 110 findings).",
+          "finding_card": "W1396",
+          "finding_owner": "nemik session",
+          "finding_witness": "A stack in --in-gate or landed whose first entry lowers ruff and whose second entry is the W1396 revendor, with the pycheck totals from the rebuilt venv written on W1396.",
+          "due": "2026-11-03"
+        }
+      ],
+      "id": "nemik:R157"
     }
   ],
-  "retro_counter": 156
+  "retro_counter": 157
 }

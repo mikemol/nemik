@@ -4156,3 +4156,5 @@
 2026-11-02T20:31:11Z  status W1495 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T20:59:32Z  status W1495 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T21:03:11Z  status W1496 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T21:38:47Z  status W1498 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T21:40:46Z  tick  W1496 advanced  sweep     "W1496 critical.cycles split into _open_successors and _pop_group, stack 875 in the gate (began 21:37:15Z), W1498 calendars split staged as stack 876 behind it; ruff 316 to 315 measured, 314 staged [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

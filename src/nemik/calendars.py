@@ -60,6 +60,61 @@ class Calendar(NamedTuple):
     mirror: tuple[str, ...] = ()
 
 
+def _calendar_entry(path: Path, label: str, raw: object) -> Calendar:
+    """One [calendars] entry, checked: a label, and a name or a table of known keys.
+
+    Returns:
+        The entry as a Calendar.
+
+    Raises:
+        TypeError: an entry's `write` is not true or false.
+        ValueError: the entry has a bad label, an unknown key, or a bad `name`, `include` or
+            `mirror`, or `write` and `mirror` do not come together.
+
+    """
+    bad = f"{path}: bad entry {label!r}: "
+    if not _LABEL.fullmatch(label):
+        raise ValueError(bad + "labels are [a-z][a-z0-9-]*")
+    spec = {"name": raw} if isinstance(raw, str) else raw
+    allowed = {"name", "include", "write", "mirror"}
+    if not isinstance(spec, dict) or set(table(spec)) - allowed:
+        raise ValueError(
+            bad + "a name string, or a table with only `name`, `include`, "
+            "`write` and `mirror`"
+        )
+    fields = table(spec)
+    name = fields.get("name")
+    include: object = fields.get("include", [])
+    write = fields.get("write", False)
+    mirror: object = fields.get("mirror", [])
+    if not isinstance(name, str) or not name:
+        raise ValueError(bad + "`name` must be a non-empty string")
+    if not isinstance(include, list) or not all(
+        isinstance(x, str) and x for x in include
+    ):
+        raise ValueError(bad + "`include` must be a list of non-empty strings")
+    if not isinstance(write, bool):
+        raise TypeError(bad + "`write` must be true or false")
+    if not isinstance(mirror, list) or not all(
+        isinstance(x, str) and _REPO.fullmatch(x) for x in mirror
+    ):
+        raise ValueError(bad + "`mirror` must be a list of repo names")
+    # Writing is opt-in twice over and never implicit: the calendar says
+    # `write = true` AND names which repos land on it. Either alone is a
+    # half-configured entry, refused rather than guessed at.
+    if write and not mirror:
+        raise ValueError(
+            bad + "`write = true` needs `mirror = [repos]`: nothing is "
+            "mirrored implicitly"
+        )
+    if mirror and not write:
+        raise ValueError(
+            bad + "`mirror` needs `write = true`: a calendar is read-only "
+            "unless it says so"
+        )
+    return Calendar(name, tuple(include), write, tuple(mirror))
+
+
 def load_calendars(path: Path = DEFAULT_CONFIG) -> dict[str, Calendar]:
     """nemik:W158/W190: which calendars nemik may read, as {label: Calendar}.
 
@@ -79,9 +134,10 @@ def load_calendars(path: Path = DEFAULT_CONFIG) -> dict[str, Calendar]:
         The calendars by label, in sorted order.
 
     Raises:
-        TypeError: [calendars] is not a table, or an entry's `write` is not true or false.
-        ValueError: an entry has a bad label, an unknown key, or a bad `name`, `include` or
-            `mirror`, or `write` and `mirror` do not come together.
+        TypeError: [calendars] is not a table.
+
+    An entry that is bad fails in _calendar_entry, which raises ValueError, or TypeError for a
+    `write` that is not true or false.
 
     """
     if not path.exists():
@@ -93,47 +149,7 @@ def load_calendars(path: Path = DEFAULT_CONFIG) -> dict[str, Calendar]:
         raise TypeError(msg)
     out: dict[str, Calendar] = {}
     for label, raw in table(cals).items():
-        bad = f"{path}: bad entry {label!r}: "
-        if not _LABEL.fullmatch(label):
-            raise ValueError(bad + "labels are [a-z][a-z0-9-]*")
-        spec = {"name": raw} if isinstance(raw, str) else raw
-        allowed = {"name", "include", "write", "mirror"}
-        if not isinstance(spec, dict) or set(table(spec)) - allowed:
-            raise ValueError(
-                bad + "a name string, or a table with only `name`, `include`, "
-                "`write` and `mirror`"
-            )
-        fields = table(spec)
-        name = fields.get("name")
-        include: object = fields.get("include", [])
-        write = fields.get("write", False)
-        mirror: object = fields.get("mirror", [])
-        if not isinstance(name, str) or not name:
-            raise ValueError(bad + "`name` must be a non-empty string")
-        if not isinstance(include, list) or not all(
-            isinstance(x, str) and x for x in include
-        ):
-            raise ValueError(bad + "`include` must be a list of non-empty strings")
-        if not isinstance(write, bool):
-            raise TypeError(bad + "`write` must be true or false")
-        if not isinstance(mirror, list) or not all(
-            isinstance(x, str) and _REPO.fullmatch(x) for x in mirror
-        ):
-            raise ValueError(bad + "`mirror` must be a list of repo names")
-        # Writing is opt-in twice over and never implicit: the calendar says
-        # `write = true` AND names which repos land on it. Either alone is a
-        # half-configured entry, refused rather than guessed at.
-        if write and not mirror:
-            raise ValueError(
-                bad + "`write = true` needs `mirror = [repos]`: nothing is "
-                "mirrored implicitly"
-            )
-        if mirror and not write:
-            raise ValueError(
-                bad + "`mirror` needs `write = true`: a calendar is read-only "
-                "unless it says so"
-            )
-        out[label] = Calendar(name, tuple(include), write, tuple(mirror))
+        out[label] = _calendar_entry(path, label, raw)
     return dict(sorted(out.items()))
 
 
