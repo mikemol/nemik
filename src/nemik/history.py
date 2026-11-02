@@ -1678,6 +1678,12 @@ def _forecast(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
 class Opts(argparse.Namespace):
     """The options the modes that publish read, typed so reading them adds no Any (nemik:W854)."""
 
+    repos: list[str]
+    all: bool
+    start: str | None
+    to: str | None
+    toil: bool
+    churn: bool
     json: bool
     publish: Path | None
     where: str

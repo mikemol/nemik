@@ -3917,3 +3917,6 @@
 2026-11-02T01:46:53Z  status W1425 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T02:01:05Z  interrupt W1428 minted    -         "salience.table_weights reads rank-weights.toml through the tomlview table helper instead of a chained Any get, so mypy falls by one"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
 2026-11-02T02:02:42Z  status W1428 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T02:07:35Z  tick  W1428 advanced  sweep     "stack 819 gating (W1428 salience mypy 1270 to 1269, submitted 02:02:44Z); stack 818 landed 31058177 and 1f63ebfc earlier [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T02:11:57Z  interrupt W1429 minted    -         "history.Opts declares the repos, all, start, to, toil and churn options main reads, so reading them adds no Any and mypy falls by about thirty"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
+2026-11-02T02:13:31Z  status W1429 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
