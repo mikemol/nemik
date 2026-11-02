@@ -79,27 +79,25 @@ def _cone(
     return sorted(seen)
 
 
-def _grounded(
+Links = dict[str, dict[str, Fraction]]
+Step = tuple[str, Fraction, dict[str, Fraction]]
+
+
+def _assemble(
     edges: list[tuple[str, str, Fraction]],
     front: Collection[str],
     nodes: list[str],
     source: str,
     amount: Fraction,
-) -> tuple[dict[str, Fraction], dict[str, Fraction]]:
-    """Inject `amount` at `source` and read the current into each ready card.
-
-    Eliminates the unknown nodes one at a time, lowest degree first (ties by name), keeping each
-    node's pivot and neighbours for the back substitution.
+) -> tuple[dict[str, Fraction], Links, dict[str, Fraction]]:
+    """Build the unknown nodes' diagonal, their links and the injection at `source`.
 
     Returns:
-        (current into each ready card, the potential at every unknown node; a ready card is 0).
-
-    Raises:
-        ZeroDivisionError: when a component has no ground (the pivot of its last node is zero).
+        (the diagonal, the links between unknown nodes, the right-hand side).
 
     """
     diag: dict[str, Fraction] = {n: ZERO for n in nodes if n not in front}
-    link: dict[str, dict[str, Fraction]] = {n: {} for n in diag}
+    link: Links = {n: {} for n in diag}
     for u, v, w in edges:
         for a, b in ((u, v), (v, u)):
             if a in diag:
@@ -107,7 +105,25 @@ def _grounded(
                 if b in diag:
                     link[a][b] = link[a].get(b, ZERO) + w
     rhs = {n: (amount if n == source else ZERO) for n in diag}
-    steps: list[tuple[str, Fraction, dict[str, Fraction]]] = []
+    return diag, link, rhs
+
+
+def _eliminate(
+    diag: dict[str, Fraction], link: Links, rhs: dict[str, Fraction]
+) -> list[Step]:
+    """Eliminate the unknown nodes one at a time, lowest degree first (ties by name).
+
+    Keeps each node's pivot and neighbours for the back substitution; `diag`, `link` and `rhs`
+    are updated in place.
+
+    Returns:
+        The elimination steps, in the order taken.
+
+    Raises:
+        ZeroDivisionError: when a component has no ground (the pivot of its last node is zero).
+
+    """
+    steps: list[Step] = []
     # nemik:W404: the lowest-degree node (ties by name) from a heap with lazy invalidation, the same
     # elimination order the old full scan chose, at a fraction of its cost: the scan ran once per
     # elimination over every remaining node (20 M key calls in one fleet rebuild). An entry whose
@@ -133,11 +149,44 @@ def _grounded(
                     link[i][j] = link[i].get(j, ZERO) + g_i * g_j / pivot
             heapq.heappush(heap, (len(link[i]), i))
         steps.append((k, pivot, around))
+    return steps
+
+
+def _back_substitute(
+    steps: list[Step], rhs: dict[str, Fraction]
+) -> dict[str, Fraction]:
+    """Solve the potentials from the elimination steps, last step first.
+
+    Returns:
+        The potential at every unknown node.
+
+    """
     potential: dict[str, Fraction] = {}
     for k, pivot, around in reversed(steps):
         potential[k] = (
             rhs[k] + sum((g * potential[j] for j, g in around.items()), ZERO)
         ) / pivot
+    return potential
+
+
+def _grounded(
+    edges: list[tuple[str, str, Fraction]],
+    front: Collection[str],
+    nodes: list[str],
+    source: str,
+    amount: Fraction,
+) -> tuple[dict[str, Fraction], dict[str, Fraction]]:
+    """Inject `amount` at `source` and read the current into each ready card.
+
+    The unknown nodes are eliminated lowest degree first (_eliminate), which raises
+    ZeroDivisionError for a component with no ground, then solved back (_back_substitute).
+
+    Returns:
+        (current into each ready card, the potential at every unknown node; a ready card is 0).
+
+    """
+    diag, link, rhs = _assemble(edges, front, nodes, source, amount)
+    potential = _back_substitute(_eliminate(diag, link, rhs), rhs)
     into: dict[str, Fraction] = {}
     for u, v, w in edges:
         for a, b in ((u, v), (v, u)):
