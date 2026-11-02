@@ -3,11 +3,11 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1424 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:d7f8e54fcae1ac86`
+counter 1425 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:c2e40cfb0e52345c`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1422 | working |
+| 1 | W1423 | working |
 | 2 | W1075 | ready |
 | 3 | W1139 | ready |
 | 4 | W1279 | ready |
@@ -99,8 +99,8 @@ counter 1424 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:d7f
 | 90 | W1390 | ready |
 | 91 | W1395 | ready |
 | 92 | W1418 | ready |
-| 93 | W1423 | ready |
-| 94 | W1424 | ready |
+| 93 | W1424 | ready |
+| 94 | W1425 | ready |
 | 95 | W986 | blocked |
 | 96 | W1007 | blocked |
 | 97 | W1008 | blocked |
@@ -1403,11 +1403,12 @@ counter 1424 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:d7f
 | 1394 | W1419 | done |
 | 1395 | W1420 | done |
 | 1396 | W1421 | done |
+| 1397 | W1422 | done |
 
 ## waypoints
 
-1. **W1422** (working) Seven small commands write through nemik.say instead of bare print calls, so ruff falls by
-   fifteen
+1. **W1423** (working) Ten larger commands write through nemik.say instead of bare print calls (the plan converts 97),
+   so ruff falls by about ninety-seven
 2. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 3. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -1814,10 +1815,9 @@ counter 1424 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:d7f
      mtools has the answer.
 92. **W1418** (ready) Answer the three mtools letters that say W2088 and W2099 are done: read W1246 and W1229, lift the
    waits they name or say why not
-93. **W1423** (ready) Ten larger commands write through nemik.say instead of bare print calls (the plan converts 97), so
-   ruff falls by about ninety-seven
-94. **W1424** (ready) serve.py and metrics.py write through nemik.say, with the hub-module claim's declared sets gaining
+93. **W1424** (ready) serve.py and metrics.py write through nemik.say, with the hub-module claim's declared sets gaining
    say, so ruff falls by five
+94. **W1425** (ready) tests/test_layout.py moves its nine function-local imports to module scope, so ruff falls by nine
 95. **W986** (blocked) A ratchet paydown rate requirement with teeth: a repo is behind when a ratchet's fall over a
    trailing window of landed commits is below a requirement that only rises
    - blocked on: W994, W1002
@@ -4598,6 +4598,8 @@ counter 1424 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:d7f
    positional call fixed, so ruff falls by four
 1396. **W1421** (done) blocks_cli writes its output through the new nemik.say module instead of bare print calls, so
    ruff falls by six and the output contract has one home
+1397. **W1422** (done) Seven small commands write through nemik.say instead of bare print calls, so ruff falls by
+   fifteen
 
 ## residue
 
@@ -5998,3 +6000,26 @@ counter 1424 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:d7f
   start not cleanly read this tick), R114 on W1395, R116 on W1383 (left: blocks.py:419), R119 on W1396 (the pin bump:
   par or latest) (all 2026-11-02); codon: W1414's argparse probe not run, W1325 census not done; serve.py 4 and
   metrics.py 1 prints wait on the hub-claim change.; 1 finding(s)
+- **nemik:R125** (-) round 127: nemik-110, stack 812 (W1421, new say.py) landed cb3ba721 = 23:53:13Z; stack 813 (W1422,
+  15 prints) inflight since 23:54:24Z, key 1793577263584654386; stacks 814 (W1423, 97 prints) and 815 (W1424, serve.py,
+  metrics.py, checks/claims.py, ruff 489 to 484) staged; the R126 break found and repaired: root Verified from source
+  (TZ=UTC reflog): 13ed2930 23:29:22Z, cb3ba721 23:53:13Z (18:53:13 -0500); --in-gate lists W1422 inflight;
+  `mikemol-pycheck --ratchet` prints ruff 484/586 and mypy 1278/1278 (the live 484 is 586 less W1423's 97 and W1424's 5
+  staged on top of stack 813's baseline 586; 601 - 15 = 586). Intervals as Z pairs: 812 submitted 23:30:59Z, landed
+  23:53:13Z (gate 22 min 14 s); gate empty 23:53:13Z to the 813 submit 23:54:24Z (1 min 11 s). R126's warning was borne
+  out, and the session says so plainly: the hook venv's nemik files are symlinks into the working tree's src/nemik made
+  at the last //:.venv build, a NEW src file has no link until the venv is rebuilt, nemik-stale printed 'STALE say.py'
+  (exit 1) at the nemik-109 tick-open and was read as noise, and after the rank.py wiring edit nemik-rank, nemik-inbound
+  and anything importing rank failed with 'No module named nemik.say' from about 23:35Z until the rebuild at about
+  23:45Z. That is an incident of roughly eleven minutes, found and repaired by the session itself, with the exit codes
+  written on W1423. The remaining weakness is structural and is the finding. A second honest gap: the printsay.py plan
+  checks argument and keyword shapes, not argument types (serve.py's say(Path) and say(Path|str) were caught by the
+  ratchet, mypy arg-type 2), recorded on W1424 with the fix to the plan. The tick-open start was again not read cleanly
+  (R112's measurement is now unusable two ticks running; the fix, read the clock in the call immediately before
+  --tick-open, is stated). Coverage arithmetic: 6 + 15 + 97 + 5 = 123 of the 124 T201 findings in src and tools at 613,
+  so one print outside src remains to find. No fixpoint is declared. Carried open findings, status on 2026-11-02 00:06Z:
+  R95 second finding on W1349, R95 third, R97 first, R98, R111 first and R102 on W1219, R94 on W1348, R93 on W1347, R92
+  on W1346 and W1288, R91 on W1345, R72 on W846, R100 on W910, R101 on W1288, R105 on W1288, R85 on W613, R106 on W1376,
+  R108 on W1382, R112 on W1288, R114 on W1395, R116 on W1383 (left: blocks.py:419), R119 on W1396, R126 on W1423 (met by
+  the repair and the codes written; closes on read-back) (all dated 2026-11-02 or earlier, so now due or past on this
+  clock); codon: W1414 argparse probe, W1325 census not done.; 1 finding(s)

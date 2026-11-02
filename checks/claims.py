@@ -255,9 +255,10 @@ def hub_modules_depend_on_everything_below() -> None:
     # residue.by_card (a pure function of the judged verdicts, so it compiles under Codon).
     # nemik:W1323: and counts each repo's stackable ready cards for the nemik_stackable gauge,
     # through stackable.stackable_count (the function nemik-stackable's report uses).
+    # nemik:W1384: and both write their command output through say, a leaf that imports only sys.
     expected = {
         "metrics": lower
-        | {"realize", "residue", "runlogs", "workrows", "rank", "stackable"},
+        | {"realize", "residue", "runlogs", "workrows", "rank", "stackable", "say"},
         "serve": lower
         | {
             "outbox",
@@ -284,6 +285,7 @@ def hub_modules_depend_on_everything_below() -> None:
             "buildcost",
             "cardseries",
             "stackable",
+            "say",
         },
     }
     for hub, want in expected.items():

@@ -82,6 +82,7 @@ from nemik.roundcli import bindings_of
 from nemik.roundfile import ROUND_FILE
 from nemik.roundgauges import round_board
 from nemik.runlogs import runs_graph
+from nemik.say import say, warn
 from nemik.stackable import manifest
 from nemik.starved import days_limit, starved_fleet
 from nemik.wake import operator_row, read_liveness, roster
@@ -1875,20 +1876,20 @@ def main(argv: list[str] | None = None) -> None:
         try:
             snap = publish(args.root, args.publish, args.withheld, exports=args.exports)
         except ValueError as e:
-            print(f"ERROR: {e}", file=sys.stderr)
+            warn(f"ERROR: {e}")
             raise SystemExit(2) from e
-        print(snap or "unchanged")
+        say(str(snap) if snap else "unchanged")
         return
     if args.static:
         try:
             for path in build_static(
                 args.root, args.static, args.withheld, exports=args.exports
             ):
-                print(path)
+                say(str(path))
         except (
             ValueError
         ) as e:  # WithheldError, an unmanifested field, missing page markers
-            print(f"ERROR: {e}", file=sys.stderr)
+            warn(f"ERROR: {e}")
             raise SystemExit(2) from e
         return
     model = Model(

@@ -81,6 +81,7 @@ from nemik.rank import TIERS, load_weights, rank
 from nemik.realize import verdicts
 from nemik.residue import by_card
 from nemik.runlogs import unmigrated_at_source
+from nemik.say import say
 from nemik.stackable import stackable_count
 from nemik.wake import read_liveness, roster
 from nemik.workrows import open_leaf_stamps, tick_kinds, working_rows
@@ -1110,7 +1111,7 @@ def main(argv: list[str] | None = None) -> None:
     # salience audit made since (15, 27 s of a profiled warm run), for the real root only.
     if args.root.resolve() == default_root().resolve():
         cachestore.persist_user()
-    print(render(out, args.family))
+    say(render(out, args.family))
 
 
 if __name__ == "__main__":

@@ -96,8 +96,7 @@
  },
  "src/nemik/metrics.py": {
   "PLC0415": 4,
-  "PTH111": 1,
-  "T201": 1
+  "PTH111": 1
  },
  "src/nemik/mspdi.py": {
   "S314": 1,
@@ -146,8 +145,7 @@
   "PLC0415": 26,
   "PLR0912": 2,
   "PLR0914": 1,
-  "PLR0915": 1,
-  "T201": 4
+  "PLR0915": 1
  },
  "src/nemik/shaclcache.py": {
   "ANN401": 4,
