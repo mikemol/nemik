@@ -473,7 +473,6 @@
   "SLF001": 1
  },
  "tools/nemik_client.py": {
-  "ANN401": 1,
   "S310": 1,
   "T201": 1
  }

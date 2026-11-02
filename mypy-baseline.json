@@ -167,10 +167,6 @@
   "explicit-any": 2,
   "misc": 11
  },
- "tests/webpage.py": {
-  "explicit-any": 1,
-  "misc": 3
- },
  "tools/check_run_rows.py": {
   "misc": 4
  },
@@ -178,7 +174,6 @@
   "misc": 1
  },
  "tools/nemik_client.py": {
-  "explicit-any": 2,
-  "misc": 7
+  "misc": 2
  }
 }

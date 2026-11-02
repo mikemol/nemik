@@ -17,7 +17,6 @@ import argparse
 import json
 import time
 import urllib.request
-from typing import Any
 
 
 class Client:
@@ -26,10 +25,10 @@ class Client:
     def __init__(self, base: str) -> None:
         """Remember `base` with a trailing slash and start with no documents fetched."""
         self.base = base.rstrip("/") + "/"
-        self.docs: dict[str, Any] = {}
+        self.docs: dict[str, object] = {}
         self.seen: dict[str, str] = {}
 
-    def _get(self, path: str) -> Any:
+    def _get(self, path: str) -> object:
         # JSON documents decode; anything else (the TRS feeds are Turtle, W449) is kept as text
         with urllib.request.urlopen(self.base + path, timeout=30) as r:
             return json.load(r) if path.endswith(".json") else r.read().decode()
@@ -41,7 +40,10 @@ class Client:
             The paths fetched, in sorted order.
 
         """
-        hashes: dict[str, str] = self._get("hashes.json")
+        raw = self._get("hashes.json")
+        hashes = (
+            {str(p): str(h) for p, h in raw.items()} if isinstance(raw, dict) else {}
+        )
         moved = [
             p
             for p, h in sorted(hashes.items())
@@ -51,6 +53,13 @@ class Client:
             self.docs[path] = self._get(path)
             self.seen[path] = hashes[path]
         return moved
+
+
+class Options(argparse.Namespace):
+    """The parsed command line, typed so reading it adds no Any."""
+
+    base: str
+    watch: float | None
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -67,7 +76,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument(
         "--watch", type=float, metavar="SECONDS", help="poll and print what changed"
     )
-    args = ap.parse_args(argv)
+    args = ap.parse_args(argv, namespace=Options())
     client = Client(args.base)
     while True:
         for path in client.refresh():

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1451,
+  "counter": 1453,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 802
+      "ticks_blocked": 803
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-18T21:49:48Z",
-      "ticks_blocked": 622,
+      "ticks_blocked": 623,
       "weight": 1
     },
     {
@@ -3520,7 +3520,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 478,
+      "ticks_blocked": 479,
       "weight": 2,
       "completed": null
     },
@@ -4278,7 +4278,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 651,
+      "ticks_blocked": 652,
       "weight": 2,
       "completed": null,
       "warrants": [
@@ -5405,7 +5405,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 628,
+      "ticks_blocked": 629,
       "completed": null
     },
     {
@@ -5426,7 +5426,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 643,
+      "ticks_blocked": 644,
       "completed": null
     },
     {
@@ -5485,7 +5485,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 643,
+      "ticks_blocked": 644,
       "completed": null
     },
     {
@@ -5506,7 +5506,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 643,
+      "ticks_blocked": 644,
       "completed": null
     },
     {
@@ -5546,7 +5546,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 643,
+      "ticks_blocked": 644,
       "completed": null
     },
     {
@@ -5605,7 +5605,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 643,
+      "ticks_blocked": 644,
       "completed": null
     },
     {
@@ -5645,7 +5645,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 643,
+      "ticks_blocked": 644,
       "completed": null
     },
     {
@@ -5666,7 +5666,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 643,
+      "ticks_blocked": 644,
       "completed": null
     },
     {
@@ -5706,7 +5706,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 643,
+      "ticks_blocked": 644,
       "completed": null
     },
     {
@@ -6650,7 +6650,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 443,
+      "ticks_blocked": 444,
       "completed": null
     },
     {
@@ -6789,7 +6789,7 @@
       "minted_during": "interrupt",
       "caused_by": "W346",
       "last_worked": "2026-10-19T18:16:23Z",
-      "ticks_blocked": 336,
+      "ticks_blocked": 337,
       "weight": 9,
       "completed": null,
       "manifest": [
@@ -6818,7 +6818,7 @@
       "minted_during": "interrupt",
       "caused_by": "W346",
       "last_worked": "2026-10-19T18:16:25Z",
-      "ticks_blocked": 336,
+      "ticks_blocked": 337,
       "weight": 9,
       "completed": null,
       "manifest": [
@@ -7082,7 +7082,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 556,
+      "ticks_blocked": 557,
       "completed": null
     },
     {
@@ -7195,7 +7195,7 @@
       "minted_during": "interrupt",
       "caused_by": "W364",
       "last_worked": "2026-10-24T12:37:36Z",
-      "ticks_blocked": 281,
+      "ticks_blocked": 282,
       "manifest": [
         "src/nemik/mirror.py",
         "tests/test_mirror.py"
@@ -7224,7 +7224,7 @@
       "minted_during": "interrupt",
       "caused_by": "W364",
       "last_worked": "2026-10-24T13:19:24Z",
-      "ticks_blocked": 279,
+      "ticks_blocked": 280,
       "manifest": [
         "src/nemik/pollevents.py",
         "tests/test_pollevents.py",
@@ -8340,7 +8340,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 542,
+      "ticks_blocked": 543,
       "completed": null
     },
     {
@@ -8361,7 +8361,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-16T01:35:27Z",
-      "ticks_blocked": 506,
+      "ticks_blocked": 507,
       "completed": null
     },
     {
@@ -8382,7 +8382,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 575,
+      "ticks_blocked": 576,
       "completed": null
     },
     {
@@ -9024,7 +9024,7 @@
       "minted_during": "tick",
       "caused_by": "W458",
       "last_worked": "2026-10-13T19:10:34Z",
-      "ticks_blocked": 540,
+      "ticks_blocked": 541,
       "completed": null
     },
     {
@@ -9062,7 +9062,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W943",
       "last_worked": "2026-10-20T18:05:40Z",
-      "ticks_blocked": 383,
+      "ticks_blocked": 384,
       "weight": 1,
       "manifest": [
         "src/nemik/adapter.py",
@@ -9602,7 +9602,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-19T10:16:00Z",
-      "ticks_blocked": 443,
+      "ticks_blocked": 444,
       "completed": null,
       "warrants": [
         {
@@ -9714,7 +9714,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-16T01:54:02Z",
-      "ticks_blocked": 507,
+      "ticks_blocked": 508,
       "weight": 1,
       "completed": null
     },
@@ -9734,7 +9734,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-16T01:54:03Z",
-      "ticks_blocked": 507,
+      "ticks_blocked": 508,
       "weight": 1,
       "completed": null
     },
@@ -9895,7 +9895,7 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W1051",
       "last_worked": "2026-10-18T21:49:01Z",
-      "ticks_blocked": 443,
+      "ticks_blocked": 444,
       "completed": null,
       "weight": 6,
       "warrants": [
@@ -10072,7 +10072,7 @@
       "minted_during": "tick",
       "caused_by": "W500",
       "last_worked": "2026-10-15T11:53:53Z",
-      "ticks_blocked": 443,
+      "ticks_blocked": 444,
       "completed": null
     },
     {
@@ -10117,7 +10117,7 @@
       "minted_during": "tick",
       "caused_by": "W506",
       "last_worked": "2026-10-24T16:41:28Z",
-      "ticks_blocked": 271,
+      "ticks_blocked": 272,
       "weight": 11,
       "completed": null,
       "manifest": [
@@ -10189,7 +10189,7 @@
       "minted_during": "tick",
       "caused_by": "W506",
       "last_worked": "2026-10-18T03:08:04Z",
-      "ticks_blocked": 443,
+      "ticks_blocked": 444,
       "weight": 2,
       "completed": null
     },
@@ -10213,7 +10213,7 @@
       "minted_during": "tick",
       "caused_by": "github:W35",
       "last_worked": "2026-10-15T12:00:59Z",
-      "ticks_blocked": 536,
+      "ticks_blocked": 537,
       "completed": null
     },
     {
@@ -10298,7 +10298,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T12:40:08Z",
-      "ticks_blocked": 161,
+      "ticks_blocked": 162,
       "weight": 11,
       "manifest": [
         "src/nemik/withheld.py"
@@ -10326,7 +10326,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-18T19:15:01Z",
-      "ticks_blocked": 299,
+      "ticks_blocked": 300,
       "completed": null
     },
     {
@@ -10707,7 +10707,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-16T01:53:12Z",
-      "ticks_blocked": 507,
+      "ticks_blocked": 508,
       "weight": 13,
       "completed": null
     },
@@ -11330,7 +11330,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-17T10:50:53Z",
-      "ticks_blocked": 443,
+      "ticks_blocked": 444,
       "completed": null
     },
     {
@@ -11376,7 +11376,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-27T06:32:37Z",
-      "ticks_blocked": 160,
+      "ticks_blocked": 161,
       "completed": null,
       "warrants": [
         {
@@ -11428,7 +11428,7 @@
       "minted_during": "tick",
       "caused_by": "W560",
       "last_worked": "2026-10-16T02:51:43Z",
-      "ticks_blocked": 505,
+      "ticks_blocked": 506,
       "completed": null
     },
     {
@@ -11501,7 +11501,7 @@
       "minted_during": "tick",
       "caused_by": "W566",
       "last_worked": "2026-10-16T05:23:44Z",
-      "ticks_blocked": 500,
+      "ticks_blocked": 501,
       "completed": null
     },
     {
@@ -11526,7 +11526,7 @@
       "minted_during": "tick",
       "caused_by": "W566",
       "last_worked": "2026-10-23T19:25:35Z",
-      "ticks_blocked": 500,
+      "ticks_blocked": 501,
       "completed": null
     },
     {
@@ -11550,7 +11550,7 @@
       "minted_during": "tick",
       "caused_by": "W566",
       "last_worked": "2026-10-29T02:48:39Z",
-      "ticks_blocked": 501,
+      "ticks_blocked": 502,
       "completed": null
     },
     {
@@ -11572,7 +11572,7 @@
       "minted_during": "tick",
       "caused_by": "W541",
       "last_worked": "2026-10-23T17:58:15Z",
-      "ticks_blocked": 498,
+      "ticks_blocked": 499,
       "completed": null
     },
     {
@@ -11594,7 +11594,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-23T12:09:48Z",
-      "ticks_blocked": 330,
+      "ticks_blocked": 331,
       "completed": null,
       "manifest": [
         "Containerfile",
@@ -11692,7 +11692,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-17T08:09:46Z",
-      "ticks_blocked": 489,
+      "ticks_blocked": 490,
       "completed": null
     },
     {
@@ -11756,7 +11756,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-16T15:08:10Z",
-      "ticks_blocked": 428,
+      "ticks_blocked": 429,
       "completed": null
     },
     {
@@ -11781,7 +11781,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-22T07:10:08Z",
-      "ticks_blocked": 333,
+      "ticks_blocked": 334,
       "completed": null
     },
     {
@@ -11805,7 +11805,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-17T15:38:53Z",
-      "ticks_blocked": 443,
+      "ticks_blocked": 444,
       "completed": null
     },
     {
@@ -11829,7 +11829,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-19T02:01:21Z",
-      "ticks_blocked": 412,
+      "ticks_blocked": 413,
       "completed": null,
       "manifest": [
         "src/nemik/salience.py",
@@ -12551,7 +12551,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-11-01T03:11:01Z",
-      "ticks_blocked": 67,
+      "ticks_blocked": 68,
       "completed": null
     },
     {
@@ -13211,7 +13211,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-25T02:12:38Z",
-      "ticks_blocked": 252,
+      "ticks_blocked": 253,
       "manifest": [
         "src/nemik/stackable.py",
         "src/nemik/cones.py",
@@ -14013,7 +14013,7 @@
       "minted_during": "interrupt",
       "caused_by": "W510",
       "last_worked": "2026-10-18T16:06:47Z",
-      "ticks_blocked": 443,
+      "ticks_blocked": 444,
       "manifest": [
         "src/nemik/web/index.html",
         "tests/test_sources_trs.py"
@@ -14039,7 +14039,7 @@
       "minted_during": "interrupt",
       "caused_by": "W510",
       "last_worked": "2026-10-18T14:33:41Z",
-      "ticks_blocked": 443,
+      "ticks_blocked": 444,
       "completed": null,
       "manifest": [
         "src/nemik/web/index.html",
@@ -14117,7 +14117,7 @@
       "minted_during": "interrupt",
       "caused_by": "W674",
       "last_worked": "2026-10-18T16:13:01Z",
-      "ticks_blocked": 443,
+      "ticks_blocked": 444,
       "manifest": [
         "src/nemik/serve.py",
         "src/nemik/web/vendor/n3.min.js",
@@ -14433,7 +14433,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-18T19:40:28Z",
-      "ticks_blocked": 443,
+      "ticks_blocked": 444,
       "warrants": [
         {
           "@context": {
@@ -14620,7 +14620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W691",
       "last_worked": "2026-10-19T01:14:55Z",
-      "ticks_blocked": 443,
+      "ticks_blocked": 444,
       "completed": null,
       "manifest": [
         "src/nemik/serve.py",
@@ -14693,7 +14693,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-11-02T04:40:12Z",
-      "ticks_blocked": 23,
+      "ticks_blocked": 24,
       "completed": null
     },
     {
@@ -14819,7 +14819,7 @@
       "minted_during": "interrupt",
       "caused_by": "W581",
       "last_worked": "2026-10-18T23:03:49Z",
-      "ticks_blocked": 443,
+      "ticks_blocked": 444,
       "completed": null
     },
     {
@@ -15034,7 +15034,7 @@
       "minted_during": "interrupt",
       "caused_by": "el-openglo:W702",
       "last_worked": "2026-10-19T00:15:45Z",
-      "ticks_blocked": 443,
+      "ticks_blocked": 444,
       "completed": null
     },
     {
@@ -15061,7 +15061,7 @@
       "minted_during": "interrupt",
       "caused_by": "W693",
       "last_worked": "2026-10-24T15:22:53Z",
-      "ticks_blocked": 275,
+      "ticks_blocked": 276,
       "manifest": [
         "src/nemik/blocks.py",
         "src/nemik/serve.py",
@@ -15750,7 +15750,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W728",
       "last_worked": "2026-10-19T15:12:10Z",
-      "ticks_blocked": 434,
+      "ticks_blocked": 435,
       "completed": null
     },
     {
@@ -15954,7 +15954,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-23T19:25:28Z",
-      "ticks_blocked": 390,
+      "ticks_blocked": 391,
       "warrants": [
         {
           "@context": {
@@ -16196,7 +16196,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W743",
       "last_worked": "2026-10-24T14:11:42Z",
-      "ticks_blocked": 277,
+      "ticks_blocked": 278,
       "completed": null,
       "manifest": [
         "docs/forecast-features.md"
@@ -16251,7 +16251,7 @@
       "minted_during": "tick",
       "caused_by": "mtools:W1731",
       "last_worked": "2026-10-24T18:42:00Z",
-      "ticks_blocked": 131,
+      "ticks_blocked": 132,
       "completed": null,
       "manifest": [
         "src/nemik/landings.py",
@@ -16611,7 +16611,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-25T02:38:48Z",
-      "ticks_blocked": 250,
+      "ticks_blocked": 251,
       "manifest": [
         "deploy/deployment.yaml",
         "tests/test_deploy_manifest.py"
@@ -16726,7 +16726,7 @@
       "minted_during": "tick",
       "caused_by": "W762",
       "last_worked": "2026-10-28T14:21:12Z",
-      "ticks_blocked": 131,
+      "ticks_blocked": 132,
       "manifest": [
         "tools/codon_census.py",
         "tests/test_codon_census.py",
@@ -17065,7 +17065,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-20T22:31:27Z",
-      "ticks_blocked": 336,
+      "ticks_blocked": 337,
       "warrants": [
         {
           "@context": {
@@ -17276,7 +17276,7 @@
       "minted_during": "tick",
       "caused_by": "W781",
       "last_worked": "2026-10-23T17:58:17Z",
-      "ticks_blocked": 382,
+      "ticks_blocked": 383,
       "completed": null
     },
     {
@@ -17302,7 +17302,7 @@
       "minted_during": "tick",
       "caused_by": "W461",
       "last_worked": "2026-10-25T02:38:49Z",
-      "ticks_blocked": 250,
+      "ticks_blocked": 251,
       "manifest": [
         "src/nemik/web/index.html",
         "src/nemik/serve.py",
@@ -17888,7 +17888,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-25T03:12:35Z",
-      "ticks_blocked": 249,
+      "ticks_blocked": 250,
       "completed": null
     },
     {
@@ -18503,7 +18503,7 @@
       "minted_during": "tick",
       "caused_by": "W579",
       "last_worked": "2026-10-23T19:25:16Z",
-      "ticks_blocked": 316,
+      "ticks_blocked": 317,
       "completed": null
     },
     {
@@ -18738,11 +18738,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Route test_viewstate's page fixture through the recording harness; then, on the next popLater occurrence, read its 'requests refused or failed' list; the proof is the interleaving witness plus a fix, not the diagnostic",
-      "evidence": "2026-10-22: 2026-10-22: not reproduced: //:test_modes x15 concurrent runs all pass (bazel --runs_per_test=15). The server is threaded and reads each file whole, popLater is a hoisted declaration in cards.js, so a missing definition means cards.js did not load (a silent script-load failure). The first failure's log was overwritten by the passing rerun. Add a requestfailed and response-status listener to the vendored webpage helper (W717) so the next occurrence names the file | 2026-10-23: 2026-10-23 second occurrence: the commit gate for W873 failed //:test_sources_resolve with 'Uncaught ReferenceError: popLater is not defined' at page load, all four tests of the module at once (they share one module-scoped page); popLater is defined in cards.js, so cards.js had not run when the inline script did. Same error as the first (test_modes, 2026-10-22). Neither change under test touches the page. Reproduction attempt: bazel test //:test_sources_resolve --runs_per_test=40 --local_test_jobs=40 | 2026-10-23: 2026-10-23: not reproduced: //:test_sources_resolve x40 with --local_test_jobs=40 all pass, so load alone does not trigger it. Both occurrences were inside the commit gate (stack320, stack343) on its shared staged worktree; the repro ran in the real checkout. Next: capture the failed request when it recurs (a requestfailed and response-status listener in the page helper), or run the repro inside the gate worktree | 2026-10-27: 2026-10-27 eleventh instance, in the stack557 gate (W1152/W1150, which touch no web file): tests/test_wcag_render.py::test_tab_visits_the_pages_controls_in_reading_order, 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined', 81 s, one of 433 targets, 432 passed. It adds no fact: this test opened its page by hand (new_page, watch, goto, until) and so bypassed the harness (tests/webpage.py opened_page) that appends the requests that failed or got an error status, which W1060 relies on to prove or refute the pick-then-bind argument. So this recurrence neither supports nor refutes efb924c. Fix, first entry of the next stack: _page_rows goes through webpage.evaluated, i.e. session/opened_page, so the next occurrence names the asset. The flake rule applies: no resubmit on this refusal. | 2026-10-27: c4f0e23 landed: test_wcag_render opens its page through webpage.evaluated, so the next popLater occurrence names the failed asset. W846 stays open until one does. Read the next occurrence's 'requests refused or failed' list: cards.js or a late script confirms W1060's argument, none refutes it. | 2026-10-28: 2026-10-28 twelfth and thirteenth instances, ONE gate (stack595: W1199, docstring rewraps in importer, issues and health, no web file): //:test_svgexport (test_the_svg_keeps_the_canvas_cards_edges_dashes_and_contrast, 21 s) and //:test_viewstate shard 2 of 3 (1 of 3 runs failed, 81 s) both 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined'; 441 of 443 passed. Read from the logs: test_svgexport waits through mikemol.webpage.page.load -> until, not through tests/webpage.py's recording opened_page, so its PageBrokenError carries NO requests-failed list; test_viewstate likewise. So again the asset is unnamed and W1060's argument is neither supported nor refuted. Two pages failing in one gate points at the shared server or host (a server that stops answering mid-load), not at a test. The flake rule applies: stack595 is NOT resubmitted unchanged | 2026-10-28: 2026-10-28 fix built: tests/webpage.py launched_page now records requestfailed and status>=400 responses and re-raises a PageBrokenError from load with 'requests refused or failed: [...]'; test_svgexport opens its page through it. Queued as stack598 entry 1 (with W1199, W1200, W1197, W1201 after it). Also: stack596 (W1200+W1197 alone) is in the gate and will be refused by the ratchet (its baseline 2513 lacks W1199's source), a failure predicted in advance but not withdrawable (inflight, leads a joined stack); stack597 was withdrawn. test_viewstate still waits without the failed-request list | 2026-10-28: diagnostic landed 0686c21 (pushed, gate green) in stack598: launched_page names the requests that failed; test_svgexport opens its page through it. The same gate ran 444 targets, 441 fresh, and no popLater failure. W846 STAYS OPEN: closes only on a proof (a forced-interleaving witness and a fix) or a traced occurrence; test_viewstate still waits without the failed-request list | 2026-10-28: landed fefe37c (pushed, gate green) in stack599: tests/webpage.py watch and until record the resources a page failed to load and name them in the PageBrokenError, for every browser test that uses them; witness in test_webpage_hangs (a refused script is named). That gate: 441 fresh of 444, sent=True, no popLater failure. W846 stays OPEN: a diagnostic, not a proof | 2026-10-28: 2026-10-28 fourteenth instance, stack617 gate (W1213, docstrings only, no web file): //:test_pdf shard 3, test_a_view_prints_a_pdf[rank], 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined', 1 of 3 runs, 449 targets, 448 passed. nemik.pdf.render opened its page with the library's load directly, so the error carried no failed-request list (the same gap as test_viewstate and test_svgexport before). Fix: nemik/pdf.py load_naming_failures records requestfailed and status>=400 responses and re-raises with 'requests refused or failed: [...]', so a pdf failure now names the asset. Stack617 is not resubmitted unchanged; its docstring entries ride in the next stack after this one. A diagnostic, not a proof: W846 stays open. | 2026-10-28: 2026-10-28 DECISION on loop prompt line 27 (R2-F5, recorded so it is auditable): I take the NARROW reading, not a waiver. The rule's 'open feature cards' that a popLater failure can put at risk are the ones whose change touches the page or its browser tests. Measured with --block-matching on each web file tag: only file:src/nemik/web/index.html!w matches an open card (W751); cards.js and the other web files match none. W751 is now blocked on W846 (BLOCKED W751 on W846). The block lifts when W846 closes: a forced-interleaving witness plus a fix, or a traced occurrence now that load_naming_failures (stack619) and tests/webpage.py name the asset. It does not lift on a diagnostic. Not blocked: ratchet paydowns and cards that touch no page file; an unrelated stack refused by this flake is a refusal of the gate, not of the card (stack617 was a docstring stack). My earlier 'too broad' was a judgment against the rule with no record; this replaces it. | 2026-10-28: 2026-10-28 R3-F6 witness: popLater is defined in src/nemik/web/cards.js (line 115), so the web-file net was right for where it lives; the failing PATH in stack617 was //:test_pdf shard 3 through nemik.pdf.render, so the pdf net was run too. block-matching 'file:src/nemik/pdf.py!w' on W846: 'REFUSED: no open card carries the touches tag' = none. scan-literal 'pdf' finds W904 (manifest holds pdf files) and closed cards; W904 is already blocked on an operator decision, so it is not ready work. Block set stays W751 alone. | 2026-10-28: 2026-10-28: landed 6a5bb9d (pushed, gate green) in stack619: nemik.pdf.load_naming_failures. That gate ran 449 targets, 446 fresh, no popLater failure. W846 STAYS OPEN: a diagnostic, not a proof. W751 stays blocked on it. | 2026-10-29: 2026-10-29 stack 681 REFUSED by the popLater flake class (rule: a flake is a blocker, never a resubmit): the gate ran 455 targets (452 fresh, 454 pass) and //:test_keymap FAILED in 1 of 3 shards, shard_1_of_3, 64.8 s (runs 59.1 to 64.8 s), tests/test_keymap.py::test_every_key_in_the_table_has_a_handler_and_a_help_row: 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined', raised from webpage.load -> until in _viewer (tests/test_keymap.py:44). Read from the shard log. The stack touched no web file (alarm-free docstrings, two typed parameters, three docstring files): HEAD is still ecf7694. This occurrence names NO asset: test_keymap._viewer opens the page by hand (browser.new_page, webpage.load), not through tests/webpage.py launched_page, so it has no failed-request list, the same gap as test_wcag_render (fixed c4f0e23) and test_svgexport (fixed 0686c21). G0 (written before the first edit): N=1 test opening the page without the recording harness (test_keymap.py _viewer, four tests share it), K=1 verified by reading: launched_page(p, url) returns (browser, page) with the same default viewport (1700, 1250), skips without a browser, and names the failed or >=400 requests in the PageBrokenError; test_svgexport.py:124 is the precedent. Fix: _viewer opens through webpage.launched_page; the now-unused imports (os, Path, PlaywrightError, pytest) leave in the same write. Expected: no change in what the tests assert, the next popLater occurrence in this module names the asset. Does NOT close W846 (a diagnostic, not a proof). | 2026-10-29: landed 54e441b (printed by mikemol-commit, subject matches, [PUSHED]) in stack 683 at 2026-10-29 19:36:46 -0400 (23:36:46Z) from reflog; submitted 23:17:18Z (date), gate began_ns 1793315838454775239 = 23:17:18Z, 19 min 28 s wall; READ BACK git ls-remote origin refs/heads/main = 9c0dbb62d0dbe53cc440d1f9b4a759eddab0dc9b (the stack's last commit). test_keymap now opens through launched_page. This landing had NO popLater failure (455 targets). W846 stays OPEN: a diagnostic, not a proof; the next occurrence in test_keymap names the asset. Instance count for this card: the 681 refusal (test_keymap shard 1 of 3, 22:56Z to 23:1xZ) is the next after the fourteenth (2026-10-28, stack617) and later ones recorded above. | 2026-10-29: 2026-10-29 R48-F1 grep result (command: grep -rln 'new_page(\\|chromium.launch(' tests, then grep -L 'launched_page\\|opened_page\\|open_page' on each): 17 test files open a page by hand and use NO recording helper, so none names the failed request when popLater breaks: test_file_url, test_modes, test_sources_fetch, test_sources_resolve, test_sources_setting, test_page_landings, test_layout, test_cardtree, test_page_chains, test_warning_badge, test_list_order_opens_cards, test_zoom_step, test_sources_incremental, test_page_queue, test_viewstate, test_viewer_settings, test_series_board (tests/webpage.py itself and test_webpage_hangs excluded by design). Already converted: test_wcag_render, test_svgexport, test_keymap, test_web_render, test_incremental_redraw, test_static_view, test_piece_fetch_once. Plan: convert each file's page open to webpage.launched_page in slices of 3 to 4 files per stack (test_layout last: it has 42 raw waits already on webpage.until and is the largest); each slice is a tests-only stack that lowers ruff by the imports it drops; the hook refuses an import and its use split, so each file is a Write or a scratch codemod. Not started. | 2026-10-30: G0 2026-10-30 (hand-opened pages, slice A, written after the tick-open started and before the first edit): N=17 test files open a page by hand (grep, listed above), K=4 read in full and judged convertible: test_zoom_step.py, test_warning_badge.py, test_series_board.py, test_viewer_settings.py, each moving its launch/new_page/watch/goto/until to webpage.launched_page(p, url[, wait]) (same 1700x1250 viewport, the same skip without a browser, and it now honours $NEMIK_CHROMIUM where test_zoom_step ignored it), with the unused imports (os, Path where unused, pytest, PlaywrightError) and the _absolute helpers leaving in the same write. test_file_url.py is read and NOT convertible this way: it opens a file: URL and waits for the page's own text, not the graph, and attaches a pageerror listener, so launched_page's CY_READY wait does not fit; it stays a named exception (a launched_page variant with a custom URL would be a design call). Expected ruff down by the dropped imports and helpers (about 8 to 12), mypy unchanged or lower. Tests only: no census owed. Pace: the tick-open hook prints it. | 2026-10-30: Slice A converted (four files): measured ruff 1721 and mypy 3888 UNCHANGED by it alone, so it travels behind a mypy fall (W1187 wake.py nudges state, mypy 3888 to 3875) in stack 685. 13 files left on the grep list (test_file_url is a named exception): test_modes, test_sources_fetch, test_sources_resolve, test_sources_setting, test_page_landings, test_layout, test_cardtree, test_page_chains, test_list_order_opens_cards, test_sources_incremental, test_page_queue, test_viewstate, plus test_file_url. | 2026-10-30: slice A landed cca1454 (printed by mikemol-commit, subject matches, [PUSHED]) in stack 685 at 2026-10-30 00:36:47Z (20:36:47 -0400 on 10-29) from reflog; submitted 00:23:14Z, gate began_ns 1793319794534887983 = 00:23:14Z, 13 min 33 s wall; READ BACK git ls-remote origin refs/heads/main = b83340759ac196ae9d221a82e472f0777adde3a1 (the stack's last commit). test_zoom_step, test_warning_badge, test_series_board and test_viewer_settings now open through launched_page. No popLater failure in that gate. 13 hand-opened files left (test_file_url a named exception). Residue after landing: git status shows only the queue files. | 2026-10-30: 2026-10-30 R50-F4 second grep, done (command: grep -c 'sync_playwright\\|.goto(\\|new_page(' over the 13 remaining files, and grep -rln sync_playwright tests): every one of the 13 remaining files matches (test_layout 106, test_viewstate 12, test_sources_setting 8, test_sources_fetch 6, test_page_queue 5, test_page_landings 5, test_page_chains 5, test_sources_incremental 4, test_sources_resolve 4, test_file_url 4, test_list_order_opens_cards 4, test_modes 3, test_cardtree 3), so the list is not an artifact of the first patterns; the 25 files that import sync_playwright are those 13, the 7 already converted (test_keymap, test_zoom_step, test_warning_badge, test_series_board, test_viewer_settings, test_svgexport, test_static_view and test_incremental_redraw, test_piece_fetch_once, test_web_render share the launched_page route), tests/webpage.py itself, test_webpage_hangs (by design) and none other. No page-opening route outside the 13 was found; a wrapper that hides sync_playwright in another module was not searched for. | 2026-10-30: Correction to the line above: 'the 7 already converted' is wrong, the count is the list after it: test_keymap, test_zoom_step, test_warning_badge, test_series_board, test_viewer_settings, test_svgexport, test_static_view, test_incremental_redraw, test_piece_fetch_once, test_web_render = 10 files on the launched_page route (test_wcag_render goes through webpage.evaluated, another recording route). 13 + 10 + tests/webpage.py + test_webpage_hangs = 25 files that import sync_playwright. | 2026-10-30: 2026-10-30 stack 687 REFUSED by the popLater class (flake rule: no resubmit unchanged): W1187 wake.py typing, no web file. The gate ran 455 targets, //:test_layout FAILED in 1 of 8 shards (shard_1_of_8, 60.5 to 126.2 s), tests/test_layout.py::test_every_meaning_the_view_colours_has_a_second_channel[dark], raised from webpage.until at line 644. FIRST occurrence whose error NAMES the assets, because test_layout waits through webpage.watch and until: resources that failed to load = queue.js, viewstate.js, panels.js, cards.js and wasm.js, all five at once, on one page at 127.0.0.1. That is not one lost file: five scripts of one page failed together, so the server (or the link to it) went away for a moment, not a test and not cards.js alone. popLater lives in cards.js, so the page's inline wiring ran with cards.js absent, as W1060 argues. What it does NOT say is why the five failed: the error event carries no status, and the server's own state at that moment is unrecorded. Diagnostic built (G0 written AFTER the two edits, a miss): tests/webpage.py served() catches a PageBrokenError raised in its block and re-raises it with whether nemik-serve was still alive and the last 2000 bytes of its stderr; witness test_a_broken_page_under_served_says_whether_the_server_still_ran in tests/test_webpage_hangs.py (6 passed run under the venv python); DOC501 for the new raise fixed in the docstring; ruff 1721 and mypy 3795 measured equal to baseline. Not a fix: the next occurrence will say alive or dead and what the server wrote. Stack 688 = 687 plus these two files. test_layout was NOT converted to launched_page: it already records through watch and until, so a conversion adds nothing here. | 2026-10-30: 2026-10-30 landed 6fb9e2e (printed by mikemol-commit, subject matches, [PUSHED]) in stack 688 at 2026-10-29 22:06:38 -0400 (02:06:38Z) from reflog; submitted 01:44:30Z (date), gate 22 min 8 s wall from submit to landing stamp; 455 targets, 452 fresh, green, NO popLater failure; READ BACK git ls-remote origin refs/heads/main = 33a386a5a12dc416dd7d6bde4457d98867476da2 (the stack's last commit). git status after: only the queue files. The served() diagnostic is now on main. W846 stays OPEN (a diagnostic, not a cause): it closes only when a failure's server-alive flag and stderr tail are read and the cause is named and witnessed. W751 stays blocked on it. If a popLater failure recurs, quote the alive flag and the stderr tail here. | 2026-10-30: 2026-10-30 TRACED OCCURRENCE with the served() diagnostic (stack 701 REFUSED at 07:37Z, nothing landed, HEAD still 445bf88; the stack touched no web file: test docstrings, two CLIs on typed namespaces): the gate ran 458 targets, 455 fresh, and 2 FAILED: //:test_list_order_opens_cards (63.6 s) and //:test_viewer_settings shard_1_of_3 (1 of 3 runs, 52.3 s), tests/test_viewer_settings.py::test_without_following_focus_the_selection_stays_put: 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined; requests refused or failed: [failed http://127.0.0.1:36729/viewstate.js, failed .../panels.js, failed .../cards.js, failed .../wasm.js]; nemik-serve alive: True; its stderr: ' (EMPTY). FACTS the new diagnostic adds: (1) the server process was ALIVE; (2) it wrote NOTHING to stderr (no handler traceback, no crash); (3) FOUR scripts failed on one page (queue.js was not among them this time, earlier occurrences named five); (4) two tests in two files failed in one gate again (the class the earlier entries record). So the server did not die and did not log an error, yet requests to it failed: client-side or connection-level (reset, refused, timed out), not a server fault we can see. WHAT IS STILL UNKNOWN: why each request failed; the diagnostic prints 'failed <url>' without Playwright's errorText (Request.failure, e.g. net::ERR_CONNECTION_RESET). NOT claimed: a cause, and not the listen-backlog theory (tcp_abort_on_overflow is 0 here, so a full accept queue would make clients wait and retry, not fail at once; somaxconn 4096; http.server's backlog is 5): no proof either way. FLAKE RULE: stack 701 is not resubmitted unchanged. G0 2026-10-30 (written before the edit; nothing is queued; the card is NOT marked working until the stack is submitted): next step, tests/webpage.py launched_page's requestfailed note appends request.failure (the error text), with a witness test in tests/test_webpage_hangs.py (a page whose script points at a closed port: the PageBrokenError names net::ERR_CONNECTION_REFUSED). N = 1 line of code, 1 test. Figures EXPECTED: ruff and mypy unchanged or lower (typed property); MEASURED after the build. Stack 702 = this entry first, then the 701 entries unchanged (W1288 slice 2 and W1187's two CLIs), resubmitted on top of the diagnostic as the loop prompt line 27 says. | 2026-10-30: 2026-10-30 Built (G0 above): launched_page's requestfailed note now appends request.failure; MEASURED ruff 1458 and mypy 3529, both unchanged; 7 tests of test_webpage_hangs pass; the witness test caught my own wrong guess the first time: I expected net::ERR_CONNECTION_REFUSED for a script on port 1 and the real text is net::ERR_UNSAFE_PORT (Chromium refuses port 1 outright), so the test matches any net::ERR_ text, which is what it is meant to prove. Load average at the submit: 24.36 29.29 37.01. Stack 702 = this entry, then W1288 slice 2 and W1187's two CLIs (the 701 entries, unchanged but for the corrected 89), submitted 07:57:47Z (date), accepted first try, key 1793347068103157097, began_ns 1793347069642684511 = 07:57:49Z. Gap 701's refusal (read at about 07:50Z) to this submit: under 8 minutes. Cards W846, W1288 and W1187 marked working in EARLIER calls than the submit. 702 names mypy-baseline.json (W1187) with a measured fall of 19; it does not fall codon. | 2026-10-30: 2026-10-30 CAUSE NAMED by the request.failure text from 025a743, first occurrence after it landed (stack 703, refused ~08:47Z, //:test_warning_badge, a test outside the stack, culprit unattributed): all five requests of one page (queue.js, viewstate.js, panels.js, cards.js, wasm.js) failed with net::ERR_NETWORK_CHANGED, nemik-serve alive: True, stderr empty. Chromium aborts every in-flight request when its NetworkChangeNotifier sees the host's network configuration change (an interface or address event on a busy host); the server is not at fault, and the earlier listen-backlog theory is refuted by this text. Not yet done: a fix witnessed by a test. Options to weigh: launch Chromium with the network-change notification disabled, or retry a page load whose requests all failed with ERR_NETWORK_CHANGED. Loadavg at the verdict 40.00 53.94 53.50. 703 gated 865.6 s and was refused; HEAD still 732029d. | 2026-10-30: 2026-10-30 G0 for stack 704 (MEASURED unless marked): launched_page retries a load whose failed requests all ended in net::ERR_NETWORK_CHANGED, at most 3 tries on a fresh page; two witness tests; 9 tests of test_webpage_hangs and test_warning_badge pass (11 together); ruff 1458 flat. Whole-stack Codon census 7 passed in 397.47 s after the last src edit. Stack = W1289 (codon-baseline, EXPECTED 146 to 145), W846, W1290 (mypy 3529 to 3467 MEASURED, baseline written once with nothing queued). Pace of 08:25:12Z current for landing 08:21:06Z. Limits: the second witness replaces the first load's result because Playwright cannot produce ERR_NETWORK_CHANGED; opened_page and hand-opened pages get no retry. Loadavg at submit 33.44 33.67 41.34. | 2026-10-30: 2026-10-30 Citation for the named cause: the failure text net::ERR_NETWORK_CHANGED (five requests, one page) comes from the refusal of stack 703, invocation key 1793349169461753502, began_ns 1793349171451357119 (08:32:51Z), refused after a 865.6 s bazel run (about 08:47Z), failing test //:test_warning_badge, text printed by 025a743's request.failure append. The cause counts as NAMED, not as cured: the two tests of stack 704 are construction; the witness of the cure is the next gate run that passes the page tests after a network change, which nothing yet shows. Stack 704 (key 1793350917452346802) is in the gate, submitted 09:01:56Z. | 2026-10-30: 2026-10-30 Stack 704 (key 1793350917452346802, submitted 09:01:56Z, gated 786.7 s) REFUSED by the same flake class: //:test_layout shard 3 of 8, test_every_repo_chip_names_its_health_in_words, five scripts (queue.js viewstate.js panels.js cards.js wasm.js) failed on one page; culprit attributed to entry 2/3 (W846) because that entry touches tests/webpage.py, but the failing page is opened by hand and reports only the failed resources, not their error text, so it is not covered by launched_page's retry nor named by request.failure. HEAD still 732029d. Loadavg at the verdict 23.32 45.80 49.35. Card states set ready BEFORE this line. Conclusion: the retry cannot cure what it cannot see; the hand-opened pages (the conversion list, test_layout the largest) must move to launched_page, or the retry must sit where every page opens. | 2026-10-30: 2026-10-30 Stack 704 REFUSED (see above); G0 for 705 = 704 plus the retry in webpage.until (MEASURED): test_webpage_hangs 10 pass (new witness: routed script aborted once then served, asked for twice); the test_layout repo-chip test that failed in 704 passes; ruff 1458 and mypy 3467 equal the baselines. The Codon census (397.47 s) ran before these test-only edits, which touch no src module. SERIES FINDING (the W2171 problem, observed): the 09:25:13Z pace reads codon ok, 144 left, though NOTHING has landed since 08:21:06Z; its samples are my refused gates 703 and 704 (each emitted codon 145 or 144 from the staged tree). So the pace now shows codon paid while the committed codon-baseline.json still has 146 entries (HEAD). I do not count this as a fall; it is carried to mtools:W2171 and luthen-observability:W1823. Loadavg at submit 32.75 35.79 41.96. | 2026-10-30: 2026-10-30 R67 findings read. (1) Retry hides nothing real: tests/test_webpage_hangs.py::test_a_script_that_did_not_load_is_named_when_the_page_breaks loads a page whose script fails every time (port 1) and asserts the wait still raises with the error naming usesLost and lost.js; it goes through webpage.until, so it passes only after the three tries all fail (MEASURED: 10 of 10 tests of the file pass on this tree). A non-network failure (404, JS error) is not separately witnessed; that remains owed. (2) Network events at 08:40Z to 08:50Z: journalctl for NetworkManager and systemd-networkd printed nothing (the units may not exist here or the journal is not readable by this user); that is an absence of output, not an absence of events, so the cause of the host's network change is NOT found. Not yet read: ip monitor, kube and VPN interfaces, 09:15Z window. (3) Flake count over 40 stacks and the cure's witness window are still owed (due 2026-11-01). retro-r67.json written. | 2026-11-01: 2026-11-01 CLASSIFIED by W1339 (reviewer R85, nemik:R83 on W613): umbrella. Commit a1faa213 (2026-10-30T05:25:56-04:00): 'W846: a page that lost its scripts is loaded again by the wait, up to three tries, so a ne'. Reason, read from this card's own title and next step: the popLater flake: the retry, the failure listing and the server-state report landed; the cure is unwitnessed (no gate has passed the page tests after a network change). Scan criterion: the last 1500 commit subjects of the form W<n>:, number below 1200, status not done or landed. Read from titles and next steps, not from the code.",
+      "evidence": "2026-10-22: 2026-10-22: not reproduced: //:test_modes x15 concurrent runs all pass (bazel --runs_per_test=15). The server is threaded and reads each file whole, popLater is a hoisted declaration in cards.js, so a missing definition means cards.js did not load (a silent script-load failure). The first failure's log was overwritten by the passing rerun. Add a requestfailed and response-status listener to the vendored webpage helper (W717) so the next occurrence names the file | 2026-10-23: 2026-10-23 second occurrence: the commit gate for W873 failed //:test_sources_resolve with 'Uncaught ReferenceError: popLater is not defined' at page load, all four tests of the module at once (they share one module-scoped page); popLater is defined in cards.js, so cards.js had not run when the inline script did. Same error as the first (test_modes, 2026-10-22). Neither change under test touches the page. Reproduction attempt: bazel test //:test_sources_resolve --runs_per_test=40 --local_test_jobs=40 | 2026-10-23: 2026-10-23: not reproduced: //:test_sources_resolve x40 with --local_test_jobs=40 all pass, so load alone does not trigger it. Both occurrences were inside the commit gate (stack320, stack343) on its shared staged worktree; the repro ran in the real checkout. Next: capture the failed request when it recurs (a requestfailed and response-status listener in the page helper), or run the repro inside the gate worktree | 2026-10-27: 2026-10-27 eleventh instance, in the stack557 gate (W1152/W1150, which touch no web file): tests/test_wcag_render.py::test_tab_visits_the_pages_controls_in_reading_order, 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined', 81 s, one of 433 targets, 432 passed. It adds no fact: this test opened its page by hand (new_page, watch, goto, until) and so bypassed the harness (tests/webpage.py opened_page) that appends the requests that failed or got an error status, which W1060 relies on to prove or refute the pick-then-bind argument. So this recurrence neither supports nor refutes efb924c. Fix, first entry of the next stack: _page_rows goes through webpage.evaluated, i.e. session/opened_page, so the next occurrence names the asset. The flake rule applies: no resubmit on this refusal. | 2026-10-27: c4f0e23 landed: test_wcag_render opens its page through webpage.evaluated, so the next popLater occurrence names the failed asset. W846 stays open until one does. Read the next occurrence's 'requests refused or failed' list: cards.js or a late script confirms W1060's argument, none refutes it. | 2026-10-28: 2026-10-28 twelfth and thirteenth instances, ONE gate (stack595: W1199, docstring rewraps in importer, issues and health, no web file): //:test_svgexport (test_the_svg_keeps_the_canvas_cards_edges_dashes_and_contrast, 21 s) and //:test_viewstate shard 2 of 3 (1 of 3 runs failed, 81 s) both 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined'; 441 of 443 passed. Read from the logs: test_svgexport waits through mikemol.webpage.page.load -> until, not through tests/webpage.py's recording opened_page, so its PageBrokenError carries NO requests-failed list; test_viewstate likewise. So again the asset is unnamed and W1060's argument is neither supported nor refuted. Two pages failing in one gate points at the shared server or host (a server that stops answering mid-load), not at a test. The flake rule applies: stack595 is NOT resubmitted unchanged | 2026-10-28: 2026-10-28 fix built: tests/webpage.py launched_page now records requestfailed and status>=400 responses and re-raises a PageBrokenError from load with 'requests refused or failed: [...]'; test_svgexport opens its page through it. Queued as stack598 entry 1 (with W1199, W1200, W1197, W1201 after it). Also: stack596 (W1200+W1197 alone) is in the gate and will be refused by the ratchet (its baseline 2513 lacks W1199's source), a failure predicted in advance but not withdrawable (inflight, leads a joined stack); stack597 was withdrawn. test_viewstate still waits without the failed-request list | 2026-10-28: diagnostic landed 0686c21 (pushed, gate green) in stack598: launched_page names the requests that failed; test_svgexport opens its page through it. The same gate ran 444 targets, 441 fresh, and no popLater failure. W846 STAYS OPEN: closes only on a proof (a forced-interleaving witness and a fix) or a traced occurrence; test_viewstate still waits without the failed-request list | 2026-10-28: landed fefe37c (pushed, gate green) in stack599: tests/webpage.py watch and until record the resources a page failed to load and name them in the PageBrokenError, for every browser test that uses them; witness in test_webpage_hangs (a refused script is named). That gate: 441 fresh of 444, sent=True, no popLater failure. W846 stays OPEN: a diagnostic, not a proof | 2026-10-28: 2026-10-28 fourteenth instance, stack617 gate (W1213, docstrings only, no web file): //:test_pdf shard 3, test_a_view_prints_a_pdf[rank], 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined', 1 of 3 runs, 449 targets, 448 passed. nemik.pdf.render opened its page with the library's load directly, so the error carried no failed-request list (the same gap as test_viewstate and test_svgexport before). Fix: nemik/pdf.py load_naming_failures records requestfailed and status>=400 responses and re-raises with 'requests refused or failed: [...]', so a pdf failure now names the asset. Stack617 is not resubmitted unchanged; its docstring entries ride in the next stack after this one. A diagnostic, not a proof: W846 stays open. | 2026-10-28: 2026-10-28 DECISION on loop prompt line 27 (R2-F5, recorded so it is auditable): I take the NARROW reading, not a waiver. The rule's 'open feature cards' that a popLater failure can put at risk are the ones whose change touches the page or its browser tests. Measured with --block-matching on each web file tag: only file:src/nemik/web/index.html!w matches an open card (W751); cards.js and the other web files match none. W751 is now blocked on W846 (BLOCKED W751 on W846). The block lifts when W846 closes: a forced-interleaving witness plus a fix, or a traced occurrence now that load_naming_failures (stack619) and tests/webpage.py name the asset. It does not lift on a diagnostic. Not blocked: ratchet paydowns and cards that touch no page file; an unrelated stack refused by this flake is a refusal of the gate, not of the card (stack617 was a docstring stack). My earlier 'too broad' was a judgment against the rule with no record; this replaces it. | 2026-10-28: 2026-10-28 R3-F6 witness: popLater is defined in src/nemik/web/cards.js (line 115), so the web-file net was right for where it lives; the failing PATH in stack617 was //:test_pdf shard 3 through nemik.pdf.render, so the pdf net was run too. block-matching 'file:src/nemik/pdf.py!w' on W846: 'REFUSED: no open card carries the touches tag' = none. scan-literal 'pdf' finds W904 (manifest holds pdf files) and closed cards; W904 is already blocked on an operator decision, so it is not ready work. Block set stays W751 alone. | 2026-10-28: 2026-10-28: landed 6a5bb9d (pushed, gate green) in stack619: nemik.pdf.load_naming_failures. That gate ran 449 targets, 446 fresh, no popLater failure. W846 STAYS OPEN: a diagnostic, not a proof. W751 stays blocked on it. | 2026-10-29: 2026-10-29 stack 681 REFUSED by the popLater flake class (rule: a flake is a blocker, never a resubmit): the gate ran 455 targets (452 fresh, 454 pass) and //:test_keymap FAILED in 1 of 3 shards, shard_1_of_3, 64.8 s (runs 59.1 to 64.8 s), tests/test_keymap.py::test_every_key_in_the_table_has_a_handler_and_a_help_row: 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined', raised from webpage.load -> until in _viewer (tests/test_keymap.py:44). Read from the shard log. The stack touched no web file (alarm-free docstrings, two typed parameters, three docstring files): HEAD is still ecf7694. This occurrence names NO asset: test_keymap._viewer opens the page by hand (browser.new_page, webpage.load), not through tests/webpage.py launched_page, so it has no failed-request list, the same gap as test_wcag_render (fixed c4f0e23) and test_svgexport (fixed 0686c21). G0 (written before the first edit): N=1 test opening the page without the recording harness (test_keymap.py _viewer, four tests share it), K=1 verified by reading: launched_page(p, url) returns (browser, page) with the same default viewport (1700, 1250), skips without a browser, and names the failed or >=400 requests in the PageBrokenError; test_svgexport.py:124 is the precedent. Fix: _viewer opens through webpage.launched_page; the now-unused imports (os, Path, PlaywrightError, pytest) leave in the same write. Expected: no change in what the tests assert, the next popLater occurrence in this module names the asset. Does NOT close W846 (a diagnostic, not a proof). | 2026-10-29: landed 54e441b (printed by mikemol-commit, subject matches, [PUSHED]) in stack 683 at 2026-10-29 19:36:46 -0400 (23:36:46Z) from reflog; submitted 23:17:18Z (date), gate began_ns 1793315838454775239 = 23:17:18Z, 19 min 28 s wall; READ BACK git ls-remote origin refs/heads/main = 9c0dbb62d0dbe53cc440d1f9b4a759eddab0dc9b (the stack's last commit). test_keymap now opens through launched_page. This landing had NO popLater failure (455 targets). W846 stays OPEN: a diagnostic, not a proof; the next occurrence in test_keymap names the asset. Instance count for this card: the 681 refusal (test_keymap shard 1 of 3, 22:56Z to 23:1xZ) is the next after the fourteenth (2026-10-28, stack617) and later ones recorded above. | 2026-10-29: 2026-10-29 R48-F1 grep result (command: grep -rln 'new_page(\\|chromium.launch(' tests, then grep -L 'launched_page\\|opened_page\\|open_page' on each): 17 test files open a page by hand and use NO recording helper, so none names the failed request when popLater breaks: test_file_url, test_modes, test_sources_fetch, test_sources_resolve, test_sources_setting, test_page_landings, test_layout, test_cardtree, test_page_chains, test_warning_badge, test_list_order_opens_cards, test_zoom_step, test_sources_incremental, test_page_queue, test_viewstate, test_viewer_settings, test_series_board (tests/webpage.py itself and test_webpage_hangs excluded by design). Already converted: test_wcag_render, test_svgexport, test_keymap, test_web_render, test_incremental_redraw, test_static_view, test_piece_fetch_once. Plan: convert each file's page open to webpage.launched_page in slices of 3 to 4 files per stack (test_layout last: it has 42 raw waits already on webpage.until and is the largest); each slice is a tests-only stack that lowers ruff by the imports it drops; the hook refuses an import and its use split, so each file is a Write or a scratch codemod. Not started. | 2026-10-30: G0 2026-10-30 (hand-opened pages, slice A, written after the tick-open started and before the first edit): N=17 test files open a page by hand (grep, listed above), K=4 read in full and judged convertible: test_zoom_step.py, test_warning_badge.py, test_series_board.py, test_viewer_settings.py, each moving its launch/new_page/watch/goto/until to webpage.launched_page(p, url[, wait]) (same 1700x1250 viewport, the same skip without a browser, and it now honours $NEMIK_CHROMIUM where test_zoom_step ignored it), with the unused imports (os, Path where unused, pytest, PlaywrightError) and the _absolute helpers leaving in the same write. test_file_url.py is read and NOT convertible this way: it opens a file: URL and waits for the page's own text, not the graph, and attaches a pageerror listener, so launched_page's CY_READY wait does not fit; it stays a named exception (a launched_page variant with a custom URL would be a design call). Expected ruff down by the dropped imports and helpers (about 8 to 12), mypy unchanged or lower. Tests only: no census owed. Pace: the tick-open hook prints it. | 2026-10-30: Slice A converted (four files): measured ruff 1721 and mypy 3888 UNCHANGED by it alone, so it travels behind a mypy fall (W1187 wake.py nudges state, mypy 3888 to 3875) in stack 685. 13 files left on the grep list (test_file_url is a named exception): test_modes, test_sources_fetch, test_sources_resolve, test_sources_setting, test_page_landings, test_layout, test_cardtree, test_page_chains, test_list_order_opens_cards, test_sources_incremental, test_page_queue, test_viewstate, plus test_file_url. | 2026-10-30: slice A landed cca1454 (printed by mikemol-commit, subject matches, [PUSHED]) in stack 685 at 2026-10-30 00:36:47Z (20:36:47 -0400 on 10-29) from reflog; submitted 00:23:14Z, gate began_ns 1793319794534887983 = 00:23:14Z, 13 min 33 s wall; READ BACK git ls-remote origin refs/heads/main = b83340759ac196ae9d221a82e472f0777adde3a1 (the stack's last commit). test_zoom_step, test_warning_badge, test_series_board and test_viewer_settings now open through launched_page. No popLater failure in that gate. 13 hand-opened files left (test_file_url a named exception). Residue after landing: git status shows only the queue files. | 2026-10-30: 2026-10-30 R50-F4 second grep, done (command: grep -c 'sync_playwright\\|.goto(\\|new_page(' over the 13 remaining files, and grep -rln sync_playwright tests): every one of the 13 remaining files matches (test_layout 106, test_viewstate 12, test_sources_setting 8, test_sources_fetch 6, test_page_queue 5, test_page_landings 5, test_page_chains 5, test_sources_incremental 4, test_sources_resolve 4, test_file_url 4, test_list_order_opens_cards 4, test_modes 3, test_cardtree 3), so the list is not an artifact of the first patterns; the 25 files that import sync_playwright are those 13, the 7 already converted (test_keymap, test_zoom_step, test_warning_badge, test_series_board, test_viewer_settings, test_svgexport, test_static_view and test_incremental_redraw, test_piece_fetch_once, test_web_render share the launched_page route), tests/webpage.py itself, test_webpage_hangs (by design) and none other. No page-opening route outside the 13 was found; a wrapper that hides sync_playwright in another module was not searched for. | 2026-10-30: Correction to the line above: 'the 7 already converted' is wrong, the count is the list after it: test_keymap, test_zoom_step, test_warning_badge, test_series_board, test_viewer_settings, test_svgexport, test_static_view, test_incremental_redraw, test_piece_fetch_once, test_web_render = 10 files on the launched_page route (test_wcag_render goes through webpage.evaluated, another recording route). 13 + 10 + tests/webpage.py + test_webpage_hangs = 25 files that import sync_playwright. | 2026-10-30: 2026-10-30 stack 687 REFUSED by the popLater class (flake rule: no resubmit unchanged): W1187 wake.py typing, no web file. The gate ran 455 targets, //:test_layout FAILED in 1 of 8 shards (shard_1_of_8, 60.5 to 126.2 s), tests/test_layout.py::test_every_meaning_the_view_colours_has_a_second_channel[dark], raised from webpage.until at line 644. FIRST occurrence whose error NAMES the assets, because test_layout waits through webpage.watch and until: resources that failed to load = queue.js, viewstate.js, panels.js, cards.js and wasm.js, all five at once, on one page at 127.0.0.1. That is not one lost file: five scripts of one page failed together, so the server (or the link to it) went away for a moment, not a test and not cards.js alone. popLater lives in cards.js, so the page's inline wiring ran with cards.js absent, as W1060 argues. What it does NOT say is why the five failed: the error event carries no status, and the server's own state at that moment is unrecorded. Diagnostic built (G0 written AFTER the two edits, a miss): tests/webpage.py served() catches a PageBrokenError raised in its block and re-raises it with whether nemik-serve was still alive and the last 2000 bytes of its stderr; witness test_a_broken_page_under_served_says_whether_the_server_still_ran in tests/test_webpage_hangs.py (6 passed run under the venv python); DOC501 for the new raise fixed in the docstring; ruff 1721 and mypy 3795 measured equal to baseline. Not a fix: the next occurrence will say alive or dead and what the server wrote. Stack 688 = 687 plus these two files. test_layout was NOT converted to launched_page: it already records through watch and until, so a conversion adds nothing here. | 2026-10-30: 2026-10-30 landed 6fb9e2e (printed by mikemol-commit, subject matches, [PUSHED]) in stack 688 at 2026-10-29 22:06:38 -0400 (02:06:38Z) from reflog; submitted 01:44:30Z (date), gate 22 min 8 s wall from submit to landing stamp; 455 targets, 452 fresh, green, NO popLater failure; READ BACK git ls-remote origin refs/heads/main = 33a386a5a12dc416dd7d6bde4457d98867476da2 (the stack's last commit). git status after: only the queue files. The served() diagnostic is now on main. W846 stays OPEN (a diagnostic, not a cause): it closes only when a failure's server-alive flag and stderr tail are read and the cause is named and witnessed. W751 stays blocked on it. If a popLater failure recurs, quote the alive flag and the stderr tail here. | 2026-10-30: 2026-10-30 TRACED OCCURRENCE with the served() diagnostic (stack 701 REFUSED at 07:37Z, nothing landed, HEAD still 445bf88; the stack touched no web file: test docstrings, two CLIs on typed namespaces): the gate ran 458 targets, 455 fresh, and 2 FAILED: //:test_list_order_opens_cards (63.6 s) and //:test_viewer_settings shard_1_of_3 (1 of 3 runs, 52.3 s), tests/test_viewer_settings.py::test_without_following_focus_the_selection_stays_put: 'the page broke while the test waited on it: Uncaught ReferenceError: popLater is not defined; requests refused or failed: [failed http://127.0.0.1:36729/viewstate.js, failed .../panels.js, failed .../cards.js, failed .../wasm.js]; nemik-serve alive: True; its stderr: ' (EMPTY). FACTS the new diagnostic adds: (1) the server process was ALIVE; (2) it wrote NOTHING to stderr (no handler traceback, no crash); (3) FOUR scripts failed on one page (queue.js was not among them this time, earlier occurrences named five); (4) two tests in two files failed in one gate again (the class the earlier entries record). So the server did not die and did not log an error, yet requests to it failed: client-side or connection-level (reset, refused, timed out), not a server fault we can see. WHAT IS STILL UNKNOWN: why each request failed; the diagnostic prints 'failed <url>' without Playwright's errorText (Request.failure, e.g. net::ERR_CONNECTION_RESET). NOT claimed: a cause, and not the listen-backlog theory (tcp_abort_on_overflow is 0 here, so a full accept queue would make clients wait and retry, not fail at once; somaxconn 4096; http.server's backlog is 5): no proof either way. FLAKE RULE: stack 701 is not resubmitted unchanged. G0 2026-10-30 (written before the edit; nothing is queued; the card is NOT marked working until the stack is submitted): next step, tests/webpage.py launched_page's requestfailed note appends request.failure (the error text), with a witness test in tests/test_webpage_hangs.py (a page whose script points at a closed port: the PageBrokenError names net::ERR_CONNECTION_REFUSED). N = 1 line of code, 1 test. Figures EXPECTED: ruff and mypy unchanged or lower (typed property); MEASURED after the build. Stack 702 = this entry first, then the 701 entries unchanged (W1288 slice 2 and W1187's two CLIs), resubmitted on top of the diagnostic as the loop prompt line 27 says. | 2026-10-30: 2026-10-30 Built (G0 above): launched_page's requestfailed note now appends request.failure; MEASURED ruff 1458 and mypy 3529, both unchanged; 7 tests of test_webpage_hangs pass; the witness test caught my own wrong guess the first time: I expected net::ERR_CONNECTION_REFUSED for a script on port 1 and the real text is net::ERR_UNSAFE_PORT (Chromium refuses port 1 outright), so the test matches any net::ERR_ text, which is what it is meant to prove. Load average at the submit: 24.36 29.29 37.01. Stack 702 = this entry, then W1288 slice 2 and W1187's two CLIs (the 701 entries, unchanged but for the corrected 89), submitted 07:57:47Z (date), accepted first try, key 1793347068103157097, began_ns 1793347069642684511 = 07:57:49Z. Gap 701's refusal (read at about 07:50Z) to this submit: under 8 minutes. Cards W846, W1288 and W1187 marked working in EARLIER calls than the submit. 702 names mypy-baseline.json (W1187) with a measured fall of 19; it does not fall codon. | 2026-10-30: 2026-10-30 CAUSE NAMED by the request.failure text from 025a743, first occurrence after it landed (stack 703, refused ~08:47Z, //:test_warning_badge, a test outside the stack, culprit unattributed): all five requests of one page (queue.js, viewstate.js, panels.js, cards.js, wasm.js) failed with net::ERR_NETWORK_CHANGED, nemik-serve alive: True, stderr empty. Chromium aborts every in-flight request when its NetworkChangeNotifier sees the host's network configuration change (an interface or address event on a busy host); the server is not at fault, and the earlier listen-backlog theory is refuted by this text. Not yet done: a fix witnessed by a test. Options to weigh: launch Chromium with the network-change notification disabled, or retry a page load whose requests all failed with ERR_NETWORK_CHANGED. Loadavg at the verdict 40.00 53.94 53.50. 703 gated 865.6 s and was refused; HEAD still 732029d. | 2026-10-30: 2026-10-30 G0 for stack 704 (MEASURED unless marked): launched_page retries a load whose failed requests all ended in net::ERR_NETWORK_CHANGED, at most 3 tries on a fresh page; two witness tests; 9 tests of test_webpage_hangs and test_warning_badge pass (11 together); ruff 1458 flat. Whole-stack Codon census 7 passed in 397.47 s after the last src edit. Stack = W1289 (codon-baseline, EXPECTED 146 to 145), W846, W1290 (mypy 3529 to 3467 MEASURED, baseline written once with nothing queued). Pace of 08:25:12Z current for landing 08:21:06Z. Limits: the second witness replaces the first load's result because Playwright cannot produce ERR_NETWORK_CHANGED; opened_page and hand-opened pages get no retry. Loadavg at submit 33.44 33.67 41.34. | 2026-10-30: 2026-10-30 Citation for the named cause: the failure text net::ERR_NETWORK_CHANGED (five requests, one page) comes from the refusal of stack 703, invocation key 1793349169461753502, began_ns 1793349171451357119 (08:32:51Z), refused after a 865.6 s bazel run (about 08:47Z), failing test //:test_warning_badge, text printed by 025a743's request.failure append. The cause counts as NAMED, not as cured: the two tests of stack 704 are construction; the witness of the cure is the next gate run that passes the page tests after a network change, which nothing yet shows. Stack 704 (key 1793350917452346802) is in the gate, submitted 09:01:56Z. | 2026-10-30: 2026-10-30 Stack 704 (key 1793350917452346802, submitted 09:01:56Z, gated 786.7 s) REFUSED by the same flake class: //:test_layout shard 3 of 8, test_every_repo_chip_names_its_health_in_words, five scripts (queue.js viewstate.js panels.js cards.js wasm.js) failed on one page; culprit attributed to entry 2/3 (W846) because that entry touches tests/webpage.py, but the failing page is opened by hand and reports only the failed resources, not their error text, so it is not covered by launched_page's retry nor named by request.failure. HEAD still 732029d. Loadavg at the verdict 23.32 45.80 49.35. Card states set ready BEFORE this line. Conclusion: the retry cannot cure what it cannot see; the hand-opened pages (the conversion list, test_layout the largest) must move to launched_page, or the retry must sit where every page opens. | 2026-10-30: 2026-10-30 Stack 704 REFUSED (see above); G0 for 705 = 704 plus the retry in webpage.until (MEASURED): test_webpage_hangs 10 pass (new witness: routed script aborted once then served, asked for twice); the test_layout repo-chip test that failed in 704 passes; ruff 1458 and mypy 3467 equal the baselines. The Codon census (397.47 s) ran before these test-only edits, which touch no src module. SERIES FINDING (the W2171 problem, observed): the 09:25:13Z pace reads codon ok, 144 left, though NOTHING has landed since 08:21:06Z; its samples are my refused gates 703 and 704 (each emitted codon 145 or 144 from the staged tree). So the pace now shows codon paid while the committed codon-baseline.json still has 146 entries (HEAD). I do not count this as a fall; it is carried to mtools:W2171 and luthen-observability:W1823. Loadavg at submit 32.75 35.79 41.96. | 2026-10-30: 2026-10-30 R67 findings read. (1) Retry hides nothing real: tests/test_webpage_hangs.py::test_a_script_that_did_not_load_is_named_when_the_page_breaks loads a page whose script fails every time (port 1) and asserts the wait still raises with the error naming usesLost and lost.js; it goes through webpage.until, so it passes only after the three tries all fail (MEASURED: 10 of 10 tests of the file pass on this tree). A non-network failure (404, JS error) is not separately witnessed; that remains owed. (2) Network events at 08:40Z to 08:50Z: journalctl for NetworkManager and systemd-networkd printed nothing (the units may not exist here or the journal is not readable by this user); that is an absence of output, not an absence of events, so the cause of the host's network change is NOT found. Not yet read: ip monitor, kube and VPN interfaces, 09:15Z window. (3) Flake count over 40 stacks and the cure's witness window are still owed (due 2026-11-01). retro-r67.json written. | 2026-11-01: 2026-11-01 CLASSIFIED by W1339 (reviewer R85, nemik:R83 on W613): umbrella. Commit a1faa213 (2026-10-30T05:25:56-04:00): 'W846: a page that lost its scripts is loaded again by the wait, up to three tries, so a ne'. Reason, read from this card's own title and next step: the popLater flake: the retry, the failure listing and the server-state report landed; the cure is unwitnessed (no gate has passed the page tests after a network change). Scan criterion: the last 1500 commit subjects of the form W<n>:, number below 1200, status not done or landed. Read from titles and next steps, not from the code. | 2026-11-02: 2026-11-02T09:02:53Z (read by stampnote): 2026-11-02 stack 841 REFUSED by the popLater class (flake rule: no resubmit unchanged). Entry W1451 (tests/webpage.py typing, no page behaviour) in a train with 840 (W1450) and 842 (W1452); the gate ran 460 targets, 457 fresh, 903.5 s of bazel, and //:test_pdf shard 3 of 3 FAILED (1 of 3 runs, 77.4 s): tests/test_pdf.py::test_a_view_prints_a_pdf[treemap], raised in nemik.pdf.load_naming_failures: 'Uncaught ReferenceError: popLater is not defined; requests refused or failed: [failed .../style.css, .../viewstate.js, .../panels.js, .../cards.js, .../wasm.js]; nemik-serve alive: True; its stderr: (empty)'. FIVE assets of one page at once, the server alive and silent: the same signature as the 2026-10-30 occurrences whose request.failure text named net::ERR_NETWORK_CHANGED. Loadavg: 16.95 34.56 41.87 at about 09:00Z, the gate itself 51 min 35 s for 840 and heavy host load around it. THE GAP THIS INSTANCE SHOWS (read, not guessed): launched_page (tests/webpage.py:321, 369) records request.failure and retries a load whose failed requests ALL ended in net::ERR_NETWORK_CHANGED, up to LOAD_TRIES; nemik/pdf.py load_naming_failures (the 14th instance's fix) names the URL but NOT the failure text, and does no retry, so a pdf page that loses its scripts to a network change fails the gate where a launched_page test would reload. So this is not a new cause; it is the cure missing from the one path that opens its page by hand in src. FIX (built next, first entry of the next stack): nemik.pdf records the failure text, raises NetworkChangedError (a PageBrokenError) when every failed request died of ERR_NETWORK_CHANGED, and a new loaded_page(browser, url) opens a fresh page up to LOAD_TRIES times on that error; witness tests with fake browser and page objects (first load lost, second ok; three lost; another failure is not retried). Stack 841 is NOT resubmitted unchanged: its entry W1451 rides behind the cure. This closes the pdf gap, not W846: the cure's witness is still a gate that survives a network change.",
       "issued_at": "2026-10-22T14:53:40Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W703",
-      "last_worked": "2026-11-01T03:05:53Z",
+      "last_worked": "2026-11-02T09:02:54Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/webpage.py",
@@ -18919,7 +18919,7 @@
       "minted_during": "interrupt",
       "caused_by": "nemik:W703",
       "last_worked": "2026-10-22T20:45:21Z",
-      "ticks_blocked": 336,
+      "ticks_blocked": 337,
       "completed": null
     },
     {
@@ -19630,7 +19630,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T07:32:14Z",
-      "ticks_blocked": 336,
+      "ticks_blocked": 337,
       "completed": null
     },
     {
@@ -19666,7 +19666,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T07:32:19Z",
-      "ticks_blocked": 336,
+      "ticks_blocked": 337,
       "completed": null
     },
     {
@@ -19702,7 +19702,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T07:32:23Z",
-      "ticks_blocked": 336,
+      "ticks_blocked": 337,
       "completed": null
     },
     {
@@ -20224,7 +20224,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T16:12:14Z",
-      "ticks_blocked": 320,
+      "ticks_blocked": 321,
       "completed": null
     },
     {
@@ -20400,7 +20400,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-24T17:33:15Z",
-      "ticks_blocked": 316,
+      "ticks_blocked": 317,
       "warrants": [
         {
           "@context": {
@@ -20552,7 +20552,7 @@
       "minted_during": "tick",
       "caused_by": "W905",
       "last_worked": "2026-10-23T18:12:28Z",
-      "ticks_blocked": 318,
+      "ticks_blocked": 319,
       "manifest": [
         "docs/evidence-standards.md"
       ],
@@ -20605,7 +20605,7 @@
       "minted_during": "tick",
       "caused_by": "W905",
       "last_worked": "2026-10-23T19:34:39Z",
-      "ticks_blocked": 316,
+      "ticks_blocked": 317,
       "completed": null,
       "manifest": [
         "docs/evidence-recommendations.md"
@@ -20777,7 +20777,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-27T02:41:06Z",
-      "ticks_blocked": 316,
+      "ticks_blocked": 317,
       "completed": null,
       "manifest": [
         "src/nemik/witnesses.py",
@@ -20968,7 +20968,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T20:45:05Z",
-      "ticks_blocked": 313,
+      "ticks_blocked": 314,
       "manifest": [
         "tests/test_modes.py",
         "tests/test_metrics_gating.py"
@@ -20994,7 +20994,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T20:57:46Z",
-      "ticks_blocked": 313,
+      "ticks_blocked": 314,
       "completed": null
     },
     {
@@ -21017,7 +21017,7 @@
       "minted_during": "tick",
       "caused_by": "W923",
       "last_worked": "2026-10-25T11:09:55Z",
-      "ticks_blocked": 232,
+      "ticks_blocked": 233,
       "completed": null,
       "manifest": [
         "tools/gen_test_targets.py",
@@ -21044,7 +21044,7 @@
       "minted_during": "tick",
       "caused_by": "W923",
       "last_worked": "2026-10-23T20:57:51Z",
-      "ticks_blocked": 313,
+      "ticks_blocked": 314,
       "completed": null
     },
     {
@@ -21065,7 +21065,7 @@
       "minted_during": "tick",
       "caused_by": "W923",
       "last_worked": "2026-10-23T20:57:53Z",
-      "ticks_blocked": 313,
+      "ticks_blocked": 314,
       "completed": null,
       "manifest": [
         "tests/test_shard_declared.py"
@@ -21251,7 +21251,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T21:21:43Z",
-      "ticks_blocked": 281,
+      "ticks_blocked": 282,
       "completed": null
     },
     {
@@ -21346,7 +21346,7 @@
       "minted_during": "tick",
       "caused_by": "W934",
       "last_worked": "2026-10-24T12:59:53Z",
-      "ticks_blocked": 280,
+      "ticks_blocked": 281,
       "completed": null,
       "manifest": [
         "src/nemik/web/views.js",
@@ -21415,7 +21415,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W918",
       "last_worked": "2026-10-24T12:59:54Z",
-      "ticks_blocked": 280,
+      "ticks_blocked": 281,
       "completed": null
     },
     {
@@ -21983,7 +21983,7 @@
       "minted_during": "interrupt",
       "caused_by": "nemik:W959",
       "last_worked": "2026-10-24T12:59:55Z",
-      "ticks_blocked": 280,
+      "ticks_blocked": 281,
       "completed": null,
       "manifest": [
         "src/nemik/mirrorsend.py",
@@ -22007,7 +22007,7 @@
       "minted_during": "interrupt",
       "caused_by": "nemik:W938",
       "last_worked": "2026-10-24T12:59:52Z",
-      "ticks_blocked": 280,
+      "ticks_blocked": 281,
       "completed": null,
       "size_class": "small"
     },
@@ -22087,7 +22087,7 @@
       "minted_during": "tick",
       "caused_by": "W749",
       "last_worked": "2026-10-24T14:12:01Z",
-      "ticks_blocked": 277,
+      "ticks_blocked": 278,
       "completed": null,
       "manifest": [
         "src/nemik/forecastshingle.py",
@@ -22166,7 +22166,7 @@
       "minted_during": "interrupt",
       "caused_by": "W709",
       "last_worked": "2026-10-24T15:23:12Z",
-      "ticks_blocked": 275,
+      "ticks_blocked": 276,
       "completed": null,
       "manifest": [
         "src/nemik/web/panels.js",
@@ -22390,7 +22390,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-24T16:47:53Z",
-      "ticks_blocked": 272,
+      "ticks_blocked": 273,
       "completed": null
     },
     {
@@ -22504,7 +22504,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-24T17:33:12Z",
-      "ticks_blocked": 271,
+      "ticks_blocked": 272,
       "completed": null,
       "manifest": [
         "src/nemik/retrostub.py",
@@ -22528,7 +22528,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-24T17:33:14Z",
-      "ticks_blocked": 271,
+      "ticks_blocked": 272,
       "completed": null,
       "manifest": [
         "src/nemik/retrolayers.py",
@@ -22555,7 +22555,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W42",
       "last_worked": "2026-10-24T23:08:23Z",
-      "ticks_blocked": 188,
+      "ticks_blocked": 189,
       "completed": null,
       "warrants": [
         {
@@ -23122,7 +23122,7 @@
       "minted_during": "interrupt",
       "caused_by": "inbox/2026-10-26-nemik-edge-mtools-W2048-enables-W1007.md",
       "last_worked": "2026-10-26T19:39:34Z",
-      "ticks_blocked": 183,
+      "ticks_blocked": 184,
       "warrants": [
         {
           "@context": {
@@ -23178,7 +23178,7 @@
       "minted_during": "interrupt",
       "caused_by": "inbox/2026-10-26-nemik-edge-mtools-W2048-enables-W1008.md",
       "last_worked": "2026-10-26T19:39:37Z",
-      "ticks_blocked": 183,
+      "ticks_blocked": 184,
       "warrants": [
         {
           "@context": {
@@ -23290,7 +23290,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W44",
       "last_worked": "2026-10-24T23:43:28Z",
-      "ticks_blocked": 258,
+      "ticks_blocked": 259,
       "warrants": [
         {
           "@context": {
@@ -23584,7 +23584,7 @@
       "minted_during": "tick",
       "caused_by": "W643",
       "last_worked": "2026-10-25T02:12:46Z",
-      "ticks_blocked": 252,
+      "ticks_blocked": 253,
       "completed": null,
       "manifest": [
         "src/nemik/stackable.py",
@@ -23610,7 +23610,7 @@
       "minted_during": "tick",
       "caused_by": "W643",
       "last_worked": "2026-10-25T02:12:47Z",
-      "ticks_blocked": 252,
+      "ticks_blocked": 253,
       "completed": null,
       "manifest": [
         "src/nemik/cones.py",
@@ -23677,7 +23677,7 @@
       "minted_during": "tick",
       "caused_by": "W764",
       "last_worked": "2026-10-25T02:39:00Z",
-      "ticks_blocked": 250,
+      "ticks_blocked": 251,
       "completed": null,
       "manifest": [
         "deploy/deployment.yaml",
@@ -23728,7 +23728,7 @@
       "minted_during": "tick",
       "caused_by": "W789",
       "last_worked": "2026-10-25T02:39:02Z",
-      "ticks_blocked": 250,
+      "ticks_blocked": 251,
       "completed": null,
       "manifest": [
         "src/nemik/web/index.html",
@@ -23986,7 +23986,7 @@
       "minted_during": "tick",
       "caused_by": "W997",
       "last_worked": "2026-10-25T07:39:20Z",
-      "ticks_blocked": 240,
+      "ticks_blocked": 241,
       "manifest": [
         "src/nemik/pacerun.py",
         "src/nemik/hostroot_cli.py",
@@ -24117,7 +24117,7 @@
       "minted_during": "tick",
       "caused_by": "W925",
       "last_worked": "2026-10-26T00:43:08Z",
-      "ticks_blocked": 208,
+      "ticks_blocked": 209,
       "manifest": [
         "docs/per-test-targets.md"
       ],
@@ -24142,7 +24142,7 @@
       "minted_during": "tick",
       "caused_by": "W925",
       "last_worked": "2026-10-25T18:42:04Z",
-      "ticks_blocked": 232,
+      "ticks_blocked": 233,
       "completed": null,
       "manifest": [
         "tools/gen_test_targets.py",
@@ -24168,7 +24168,7 @@
       "minted_during": "tick",
       "caused_by": "W925",
       "last_worked": "2026-10-25T11:10:13Z",
-      "ticks_blocked": 232,
+      "ticks_blocked": 233,
       "completed": null,
       "manifest": [
         "tests/venv_pytest.sh"
@@ -24317,7 +24317,7 @@
       "minted_during": "tick",
       "caused_by": "github:W48",
       "last_worked": "2026-10-29T08:59:07Z",
-      "ticks_blocked": 110,
+      "ticks_blocked": 111,
       "completed": null,
       "manifest": [
         "src/nemik/landings.py",
@@ -24466,7 +24466,7 @@
       "minted_during": "tick",
       "caused_by": "W728",
       "last_worked": "2026-10-25T14:28:23Z",
-      "ticks_blocked": 154,
+      "ticks_blocked": 155,
       "warrants": [
         {
           "@context": {
@@ -24566,7 +24566,7 @@
       "minted_during": "tick",
       "caused_by": "W1047",
       "last_worked": "2026-10-27T07:42:42Z",
-      "ticks_blocked": 154,
+      "ticks_blocked": 155,
       "completed": null
     },
     {
@@ -24708,7 +24708,7 @@
       "minted_during": "tick",
       "caused_by": "github:W50",
       "last_worked": "2026-10-26T23:05:10Z",
-      "ticks_blocked": 222,
+      "ticks_blocked": 223,
       "warrants": [
         {
           "@context": {
@@ -24786,7 +24786,7 @@
       "minted_during": "tick",
       "caused_by": "W1055",
       "last_worked": "2026-10-29T23:48:39Z",
-      "ticks_blocked": 93,
+      "ticks_blocked": 94,
       "manifest": [
         "src/nemik/landcost.py",
         "tests/test_landcost.py"
@@ -24815,7 +24815,7 @@
       "minted_during": "tick",
       "caused_by": "W1055",
       "last_worked": "2026-10-25T17:06:49Z",
-      "ticks_blocked": 222,
+      "ticks_blocked": 223,
       "completed": null,
       "manifest": [
         "src/nemik/rank.py",
@@ -24844,7 +24844,7 @@
       "minted_during": "tick",
       "caused_by": "W1055",
       "last_worked": "2026-10-25T17:11:59Z",
-      "ticks_blocked": 222,
+      "ticks_blocked": 223,
       "completed": null,
       "manifest": [
         "tests/test_orderrank.py"
@@ -25251,7 +25251,7 @@
       "minted_during": "tick",
       "caused_by": "W1071",
       "last_worked": "2026-10-25T23:18:55Z",
-      "ticks_blocked": 211,
+      "ticks_blocked": 212,
       "completed": null
     },
     {
@@ -25273,7 +25273,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W1644",
       "last_worked": "2026-10-26T11:56:26Z",
-      "ticks_blocked": 199,
+      "ticks_blocked": 200,
       "completed": null
     },
     {
@@ -25370,7 +25370,7 @@
       "minted_during": "tick",
       "caused_by": "github:W50",
       "last_worked": "2026-10-26T01:03:02Z",
-      "ticks_blocked": 206,
+      "ticks_blocked": 207,
       "warrants": [
         {
           "@context": {
@@ -25721,7 +25721,7 @@
       "minted_during": "tick",
       "caused_by": "W1082",
       "last_worked": "2026-10-26T22:09:25Z",
-      "ticks_blocked": 149,
+      "ticks_blocked": 150,
       "manifest": [
         "src/nemik/roundof.py",
         "src/nemik/roundgauges.py",
@@ -25809,7 +25809,7 @@
       "minted_during": "tick",
       "caused_by": "W1073",
       "last_worked": "2026-10-26T11:58:00Z",
-      "ticks_blocked": 197,
+      "ticks_blocked": 198,
       "manifest": [
         "src/nemik/adapter.py",
         "src/nemik/blocks.py",
@@ -26241,7 +26241,7 @@
       "minted_during": "tick",
       "caused_by": "inbox/2026-10-27-nemik-edge-github-W63-enables-W1113.md",
       "last_worked": "2026-10-27T00:42:25Z",
-      "ticks_blocked": 175,
+      "ticks_blocked": 176,
       "completed": null,
       "warrants": [
         {
@@ -26867,7 +26867,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1092",
       "last_worked": "2026-10-29T13:11:57Z",
-      "ticks_blocked": 103,
+      "ticks_blocked": 104,
       "manifest": [
         "src/nemik/roundof.py",
         "tests/test_roundof.py"
@@ -27891,7 +27891,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1047",
       "last_worked": "2026-10-27T13:02:58Z",
-      "ticks_blocked": 149,
+      "ticks_blocked": 150,
       "completed": null
     },
     {
@@ -27938,7 +27938,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1014",
       "last_worked": "2026-11-01T13:56:52Z",
-      "ticks_blocked": 33,
+      "ticks_blocked": 34,
       "size_class": "medium",
       "completed": null
     },
@@ -28605,7 +28605,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1196",
       "last_worked": "2026-10-28T03:10:08Z",
-      "ticks_blocked": 132,
+      "ticks_blocked": 133,
       "completed": null
     },
     {
@@ -29148,7 +29148,7 @@
       "minted_during": "interrupt",
       "caused_by": "W733",
       "last_worked": "2026-11-02T00:42:25Z",
-      "ticks_blocked": 127,
+      "ticks_blocked": 128,
       "completed": null
     },
     {
@@ -29167,7 +29167,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1213",
       "last_worked": "2026-10-29T04:37:24Z",
-      "ticks_blocked": 127,
+      "ticks_blocked": 128,
       "completed": null
     },
     {
@@ -29266,7 +29266,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1215",
       "last_worked": "2026-10-29T04:37:26Z",
-      "ticks_blocked": 127,
+      "ticks_blocked": 128,
       "completed": null
     },
     {
@@ -29289,7 +29289,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1196",
       "last_worked": "2026-10-29T00:01:22Z",
-      "ticks_blocked": 110,
+      "ticks_blocked": 111,
       "completed": null,
       "manifest": [
         "tools/liftdoc.py",
@@ -29415,7 +29415,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1228",
       "last_worked": "2026-11-01T23:13:19Z",
-      "ticks_blocked": 17,
+      "ticks_blocked": 18,
       "completed": null,
       "warrants": [
         {
@@ -29928,7 +29928,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1244",
       "last_worked": "2026-10-29T09:19:21Z",
-      "ticks_blocked": 112,
+      "ticks_blocked": 113,
       "completed": null,
       "manifest": [
         "tests/test_page_queue.py",
@@ -29980,12 +29980,12 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "Watch the next three tick-open outputs for the gate line; then decide whether a second hook (a gap figure at tick-close) is wanted.",
-      "evidence": "2026-10-29: 2026-10-29: cause found by the reviewer (R22): the validator checks only a top-level findings list, and nemik's retros were stored as a flat list under retros, so nothing was validated. R22 is the first record in the validated shape and the writer accepted it. Peer request sent to mtools-ad (message id 55428125-bc18-4a11-93f8-4c43a50962f2) to refuse a retro with no findings list or an unknown top-level key and render each finding. The 20 stored records are not edited. | 2026-10-29: 2026-10-29 mtools-ad (peer): taken on mtools:W2088, extended, no new card: it will refuse a retro with no findings list or an unknown top-level key and render each finding's id, card, due and witness. Not built yet. Related, built but unstacked: W2091 --migrate-retros (cause to root). | 2026-10-29: 2026-10-29 R32-F1: the empty-gate hook is stored with --tick-hooks-set (3 commands: nemik-inbound, nemik-stale, and mikemol-commit REPO --in-gate --json); it prints the commit gate's queue at every tick-open, so a tick that opens with the gate empty reads '[]' at once. It does NOT start a G0 or build a stack: that part of the finding stays a practice, and the gap-at-tick-close figure is not printed either. The writer refused the first list because it dropped the stored 'nemik-inbound nemik' (it asks for '# replaces:' or '# retires:' lines): the stored form is the bare name. | 2026-10-29: 2026-10-29 R33-F2: the late G0 of W1265 (ledger 08:45:10Z) was caused by backticks in the ledger text, which the shell hook reads as command substitution (SC2006) and refuses. Backtick-safe route: write the G0 text with no backticks (plain quotes or none), and write it BEFORE the first edit; if a hook refuses it, rewrite the text and retry before touching a file, never edit first. Recorded as practice here; a standing-rule line is the reviewer's due 2026-11-01 and I have not added one. R33-F3: nemik-rank nemik --apply ran at this tick (weights set: 70, up from 69): the next tick-open reads UNSCORED (206 now); the 3 nudges due at the last open were not identified (the open prints no per-card nudge line), so their disposition is: the peer messages sent this session (mtools nudge c099e6b0, github-42, luthen-observability) are the only nudges I sent. | 2026-10-29: 2026-10-29 R44-F1 the working-ahead method, as practised for slice 9 (gap 9 min 27 s, the first under 10 min): (1) while stack N gates, edit and measure slice N+1 on files that stack N does not carry (read stack N's paths first); (2) measure with mikemol-pycheck --ratchet WITHOUT --write, because stack N carries ruff-baseline.json and a queued stack's files are never edited; (3) when the measure passes, run the Codon census once; (4) when N lands, write the baseline with --write, record N's landing, record the census verdict, submit N+1. If slice N+1 shares a file with N, it waits for N to land (loop prompt line 40). The next two gaps under 10 min are to be quoted from date stamps here. | 2026-10-30: 2026-10-30 R58-F2 G0 template: every figure in a G0 is labelled MEASURED (a tool printed it, say which) or EXPECTED (a reasoned prediction not yet run). The PT018 G0 wrote 'mypy unchanged 3548' as a plain claim; it was an EXPECTED figure and the measure showed mypy +36. From the next G0 on, the line reads for example 'ruff 1690 to 1677 EXPECTED, mypy unchanged EXPECTED (docstrings only)' and the build line gives the MEASURED figures beside them. | 2026-10-30: 2026-10-30 R59-F2 G0 template line added: while a queued stack carries a baseline file, MEASURE with mikemol-pycheck --ratchet and WITHOUT --write, and write the baseline after that stack lands; read a baseline by key (ruff-baseline.json is 400 lines, never print it whole). Instance that prompted it: the 05:00Z ruff --write while 694 gated (no effect, checked, said out loud). Whether mtools should refuse --write while a gate holds the file is NOT asked yet; the ask goes to mtools with this instance, due 2026-11-02. | 2026-10-30: 2026-10-30 R60-F3 SENT to mtools: the ask that pycheck --ratchet --write refuse while a gate stack carries the baseline file, with the one observed case (04:55Z, 694, ruff-baseline.json 1677 to 1669, no effect, checked by reading HEAD after landing). Read-back owed: their reply or card number; due 2026-11-02. | 2026-10-30: 2026-10-30 R60-F3 read-back: mtools replied with mtools:W2172 (pycheck --write refuses while an --in-gate stack's paths name the baseline file, naming the stack key). Minted only; mtools has not yet confirmed that mikemol-pycheck is its own tool. Open step: none for nemik beyond citing mtools:W2172. | 2026-10-30: 2026-10-30 R61-F3 read from mtools' own queue (read-only --show): mtools:W2172 is a real card there, status ready, caused by nemik:W1246, next step 'confirm mikemol-pycheck is mtools'; then in --write read mikemol-commit --in-gate stacks' paths and refuse naming the stack key when one carries the baseline file'; evidence empty, last_worked null, so it is a ticket the peer holds but has not started. Also read mtools:W2171: status working, its next step is the ratchetseries.py dedupe read that I did and sent them (the dedupe is by sample time only). | 2026-10-30: 2026-10-30 R63-F1 gate-time hypothesis, data so far (the result is written when 699 lands): load average read at 06:53:35Z, two minutes into 699's gate with nothing of mine running beside it: 44.47 52.68 55.50 (1, 5 and 15 minute) over 32 runnable of 6555 tasks. So the host carries a 1-minute load of 44 to 55 BY ITSELF (the cluster, the build farm and the other sessions), which my censuses add to but do not create: the hypothesis that my censuses slow the gate may be small against that baseline. The expected finish stays about 07:08Z if the hypothesis holds and 07:15Z or later if not; with a baseline load of 44 I now expect the second. | 2026-10-30: 2026-10-30 R63-F1 RESULT of the gate-time hypothesis, read: stack 699 gated 20 min 42 s wall (submit 06:51:37Z to the landing stamp 07:12:19Z) with NOTHING heavy of mine beside it (no census, no long test run; only card writes and short reads). Stated before: about 07:08Z (16 to 17 min) if my censuses were the cause, 07:15Z or later (23 min or more) if not. Observed: 07:12:19Z, 20 min 42 s, between the two. The earlier gates: 13 to 17 min (684 to 690 at 13 min 6 s, 18 min 40 s, 15 min 15 s, 17 min 0 s), then 22 min 8 s (688), 24 min 12 s (695), 24 min 48 s (696), 25 min 15 s (697), 27 min 20 s (698) while a census of 6 to 9 min ran beside each. LOAD AVERAGE: 44.47 52.68 55.50 at 06:53:35Z (2 min into 699) and 43.01 62.03 61.64 at 07:12:xxZ at its verdict, with nothing of mine running: the host baseline is 43 to 62 (1 min) on its own. READING: removing my census shaved about 4 to 7 minutes off (27 min to 20 min), so it accounts for part of the lengthening, not all of it; the host's own load (cluster, other sessions, builds) accounts for the rest, and the gate was 13 to 17 min when that load was lower. DECISION for the working-ahead rule: keep building the next stack during a gate (the gap to the next submit is what the rule is for), but run the CODON CENSUS LAST: start it only when the gate is within 5 minutes of its expected verdict, or run it right after the previous landing and before the submit, not through the middle of a gate; the census is owed once per stack and its 6 to 9 minutes can sit between landing and submit when the gate is empty. What it gives up: a stack waits an extra 6 to 9 minutes before submit when its census has not finished, in return for a gate that finishes a few minutes sooner; I judge the trade even, so the rule is a preference not a requirement. | 2026-10-30: 2026-10-30 R64-F4 gate wall time and load, as far as I recorded them (submit to landing stamp; load average read only at 699): 694 15 min 2 s (load not read), 695 24 min 12 s (not read), 696 24 min 48 s (not read), 697 25 min 15 s (not read), 698 27 min 20 s (not read), 699 20 min 42 s (44.47 52.68 55.50 at 06:53:35Z, 43.01 62.03 61.64 at the verdict). Five of six have NO load reading: I cannot read the lengthening against load for them, and said so. From stack 700 on, the load average is read (cat /proc/loadavg) at the submit and at the verdict and written in the landing line, so six gates will have both.",
+      "evidence": "2026-10-29: 2026-10-29: cause found by the reviewer (R22): the validator checks only a top-level findings list, and nemik's retros were stored as a flat list under retros, so nothing was validated. R22 is the first record in the validated shape and the writer accepted it. Peer request sent to mtools-ad (message id 55428125-bc18-4a11-93f8-4c43a50962f2) to refuse a retro with no findings list or an unknown top-level key and render each finding. The 20 stored records are not edited. | 2026-10-29: 2026-10-29 mtools-ad (peer): taken on mtools:W2088, extended, no new card: it will refuse a retro with no findings list or an unknown top-level key and render each finding's id, card, due and witness. Not built yet. Related, built but unstacked: W2091 --migrate-retros (cause to root). | 2026-10-29: 2026-10-29 R32-F1: the empty-gate hook is stored with --tick-hooks-set (3 commands: nemik-inbound, nemik-stale, and mikemol-commit REPO --in-gate --json); it prints the commit gate's queue at every tick-open, so a tick that opens with the gate empty reads '[]' at once. It does NOT start a G0 or build a stack: that part of the finding stays a practice, and the gap-at-tick-close figure is not printed either. The writer refused the first list because it dropped the stored 'nemik-inbound nemik' (it asks for '# replaces:' or '# retires:' lines): the stored form is the bare name. | 2026-10-29: 2026-10-29 R33-F2: the late G0 of W1265 (ledger 08:45:10Z) was caused by backticks in the ledger text, which the shell hook reads as command substitution (SC2006) and refuses. Backtick-safe route: write the G0 text with no backticks (plain quotes or none), and write it BEFORE the first edit; if a hook refuses it, rewrite the text and retry before touching a file, never edit first. Recorded as practice here; a standing-rule line is the reviewer's due 2026-11-01 and I have not added one. R33-F3: nemik-rank nemik --apply ran at this tick (weights set: 70, up from 69): the next tick-open reads UNSCORED (206 now); the 3 nudges due at the last open were not identified (the open prints no per-card nudge line), so their disposition is: the peer messages sent this session (mtools nudge c099e6b0, github-42, luthen-observability) are the only nudges I sent. | 2026-10-29: 2026-10-29 R44-F1 the working-ahead method, as practised for slice 9 (gap 9 min 27 s, the first under 10 min): (1) while stack N gates, edit and measure slice N+1 on files that stack N does not carry (read stack N's paths first); (2) measure with mikemol-pycheck --ratchet WITHOUT --write, because stack N carries ruff-baseline.json and a queued stack's files are never edited; (3) when the measure passes, run the Codon census once; (4) when N lands, write the baseline with --write, record N's landing, record the census verdict, submit N+1. If slice N+1 shares a file with N, it waits for N to land (loop prompt line 40). The next two gaps under 10 min are to be quoted from date stamps here. | 2026-10-30: 2026-10-30 R58-F2 G0 template: every figure in a G0 is labelled MEASURED (a tool printed it, say which) or EXPECTED (a reasoned prediction not yet run). The PT018 G0 wrote 'mypy unchanged 3548' as a plain claim; it was an EXPECTED figure and the measure showed mypy +36. From the next G0 on, the line reads for example 'ruff 1690 to 1677 EXPECTED, mypy unchanged EXPECTED (docstrings only)' and the build line gives the MEASURED figures beside them. | 2026-10-30: 2026-10-30 R59-F2 G0 template line added: while a queued stack carries a baseline file, MEASURE with mikemol-pycheck --ratchet and WITHOUT --write, and write the baseline after that stack lands; read a baseline by key (ruff-baseline.json is 400 lines, never print it whole). Instance that prompted it: the 05:00Z ruff --write while 694 gated (no effect, checked, said out loud). Whether mtools should refuse --write while a gate holds the file is NOT asked yet; the ask goes to mtools with this instance, due 2026-11-02. | 2026-10-30: 2026-10-30 R60-F3 SENT to mtools: the ask that pycheck --ratchet --write refuse while a gate stack carries the baseline file, with the one observed case (04:55Z, 694, ruff-baseline.json 1677 to 1669, no effect, checked by reading HEAD after landing). Read-back owed: their reply or card number; due 2026-11-02. | 2026-10-30: 2026-10-30 R60-F3 read-back: mtools replied with mtools:W2172 (pycheck --write refuses while an --in-gate stack's paths name the baseline file, naming the stack key). Minted only; mtools has not yet confirmed that mikemol-pycheck is its own tool. Open step: none for nemik beyond citing mtools:W2172. | 2026-10-30: 2026-10-30 R61-F3 read from mtools' own queue (read-only --show): mtools:W2172 is a real card there, status ready, caused by nemik:W1246, next step 'confirm mikemol-pycheck is mtools'; then in --write read mikemol-commit --in-gate stacks' paths and refuse naming the stack key when one carries the baseline file'; evidence empty, last_worked null, so it is a ticket the peer holds but has not started. Also read mtools:W2171: status working, its next step is the ratchetseries.py dedupe read that I did and sent them (the dedupe is by sample time only). | 2026-10-30: 2026-10-30 R63-F1 gate-time hypothesis, data so far (the result is written when 699 lands): load average read at 06:53:35Z, two minutes into 699's gate with nothing of mine running beside it: 44.47 52.68 55.50 (1, 5 and 15 minute) over 32 runnable of 6555 tasks. So the host carries a 1-minute load of 44 to 55 BY ITSELF (the cluster, the build farm and the other sessions), which my censuses add to but do not create: the hypothesis that my censuses slow the gate may be small against that baseline. The expected finish stays about 07:08Z if the hypothesis holds and 07:15Z or later if not; with a baseline load of 44 I now expect the second. | 2026-10-30: 2026-10-30 R63-F1 RESULT of the gate-time hypothesis, read: stack 699 gated 20 min 42 s wall (submit 06:51:37Z to the landing stamp 07:12:19Z) with NOTHING heavy of mine beside it (no census, no long test run; only card writes and short reads). Stated before: about 07:08Z (16 to 17 min) if my censuses were the cause, 07:15Z or later (23 min or more) if not. Observed: 07:12:19Z, 20 min 42 s, between the two. The earlier gates: 13 to 17 min (684 to 690 at 13 min 6 s, 18 min 40 s, 15 min 15 s, 17 min 0 s), then 22 min 8 s (688), 24 min 12 s (695), 24 min 48 s (696), 25 min 15 s (697), 27 min 20 s (698) while a census of 6 to 9 min ran beside each. LOAD AVERAGE: 44.47 52.68 55.50 at 06:53:35Z (2 min into 699) and 43.01 62.03 61.64 at 07:12:xxZ at its verdict, with nothing of mine running: the host baseline is 43 to 62 (1 min) on its own. READING: removing my census shaved about 4 to 7 minutes off (27 min to 20 min), so it accounts for part of the lengthening, not all of it; the host's own load (cluster, other sessions, builds) accounts for the rest, and the gate was 13 to 17 min when that load was lower. DECISION for the working-ahead rule: keep building the next stack during a gate (the gap to the next submit is what the rule is for), but run the CODON CENSUS LAST: start it only when the gate is within 5 minutes of its expected verdict, or run it right after the previous landing and before the submit, not through the middle of a gate; the census is owed once per stack and its 6 to 9 minutes can sit between landing and submit when the gate is empty. What it gives up: a stack waits an extra 6 to 9 minutes before submit when its census has not finished, in return for a gate that finishes a few minutes sooner; I judge the trade even, so the rule is a preference not a requirement. | 2026-10-30: 2026-10-30 R64-F4 gate wall time and load, as far as I recorded them (submit to landing stamp; load average read only at 699): 694 15 min 2 s (load not read), 695 24 min 12 s (not read), 696 24 min 48 s (not read), 697 25 min 15 s (not read), 698 27 min 20 s (not read), 699 20 min 42 s (44.47 52.68 55.50 at 06:53:35Z, 43.01 62.03 61.64 at the verdict). Five of six have NO load reading: I cannot read the lengthening against load for them, and said so. From stack 700 on, the load average is read (cat /proc/loadavg) at the submit and at the verdict and written in the landing line, so six gates will have both. | 2026-11-02: 2026-11-02T08:39:58Z (read by stampnote): nemik:R143 finding 1 (retro-r143.json): GATE WALL TABLE started, because gate wall time is a property of host load as much as of the stack, and standing 13's expected remaining time reads off it. Columns: stack, card, submit (began) Z, landing Z, wall, loadavg at landing. Rows read from the reflog (TZ=UTC git reflog show --date=iso main) and --in-gate began_ns, 2026-11-02: 830 W1440 06:03:49 to 06:18:37, 14 min 48 s; 831 W1441 06:18:41 to 06:43:41, 25 min 00 s; 832 W1442 06:43:45 to 06:54:36, 10 min 51 s; 833 W1443 06:54:40 to 07:05:42, 11 min 02 s; 834 W1444 and 835 W1445 (one train) 07:05:45 to 07:17:53, 12 min 08 s; 836 W1446 07:21:41 to 07:29:48, 8 min 07 s; 837 W1447 07:29:52 to 07:42:00, 12 min 08 s; 838 W1448 07:42:04 to 07:54:16, 12 min 12 s; 839 W1449 07:54:20 to 08:07:36, 13 min 16 s; 840 W1450 08:07:41 to NOT LANDED at 08:38Z (30 min 39 s and running; the mikemol-commit process is alive under membudget and the fence guard, its output file is written at the end). LOAD: /proc/loadavg read 28.76 34.60 40.93 at 08:38:20Z (reviewer's read) and 23.99 32.03 39.58 at about 08:41Z (mine), a heavily shared host, so the long gate is read as load, not as a fault of the stack. The loadavg AT EACH LANDING above was not captured, so the column is empty for these ten rows: I did not read it at the time, which is the gap this finding names. FROM NOW ON each G1 gives the loadavg with its stamp beside each gate wall, and a gate running past twice the median wall (the median of the nine landed rows is 12 min 08 s, so 24 min) gets a look at the running command's children and the load before I wait on it. I still need to build the table as a durable file with the loadavg column filled, W1246. | 2026-11-02: 2026-11-02T08:58:59Z (read by stampnote): Look at the long gate, per R143 (2026-11-02, watchdog wake): stack 840 (W1450) began 08:07:41Z and was still inflight at about 08:48Z, 40 min, against a median of 12 min 08 s. /proc/loadavg read 23.54 41.14 44.49 at the look. ps shows its mikemol-commit (pid 2059273) alive under mikemol-membudget and the fence guard_cli, with stack 841 (pid 2043600) and 842 (pid 2248790) waiting behind it as separate mikemol-commit processes; the CPU list at that moment is led by codon builds of the census test (test_no_module_is_further_from, several at 100 to 137 percent CPU each, an inference that they are this repo's gate's test since the path is a pytest temp directory), and the host is also running an mtools gate (stack-pycodemod-git), two luthen-observability gates (W1909, W1910 with freeze-from) and a vmalert-tool run. So: the stack is not stuck, the host is crowded by other repos' gates plus the codon census test, and the wall is load, not the change. Nothing to do but wait; no process was touched. I still need to capture the loadavg at each landing so the table can show it, W1246.",
       "issued_at": "2026-10-28T23:04:15Z",
       "minted_during": "interrupt",
       "caused_by": "W1215",
-      "last_worked": "2026-11-01T23:13:18Z",
-      "ticks_blocked": 17,
+      "last_worked": "2026-11-02T08:58:59Z",
+      "ticks_blocked": 18,
       "completed": null
     },
     {
@@ -30694,7 +30694,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-42",
       "last_worked": "2026-10-29T18:57:42Z",
-      "ticks_blocked": 97,
+      "ticks_blocked": 98,
       "completed": null,
       "manifest": [
         "docs/pace-producer.md"
@@ -30779,7 +30779,7 @@
       "minted_during": "tick",
       "caused_by": "github-42",
       "last_worked": "2026-10-30T01:47:29Z",
-      "ticks_blocked": 91,
+      "ticks_blocked": 92,
       "completed": null,
       "weight": 20,
       "manifest": [
@@ -33534,7 +33534,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1395",
       "last_worked": "2026-11-02T02:46:05Z",
-      "ticks_blocked": 11,
+      "ticks_blocked": 12,
       "completed": null
     },
     {
@@ -33557,7 +33557,7 @@
       "minted_during": "interrupt",
       "caused_by": "W561",
       "last_worked": "2026-11-01T21:35:59Z",
-      "ticks_blocked": 20,
+      "ticks_blocked": 21,
       "completed": null
     },
     {
@@ -34433,7 +34433,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1383",
       "last_worked": "2026-11-02T05:32:17Z",
-      "ticks_blocked": 6,
+      "ticks_blocked": 7,
       "manifest": [
         "tests/test_frontier.py",
         "tests/test_fruit.py",
@@ -34676,48 +34676,48 @@
     {
       "symbol": "W1449",
       "title": "tests/test_check_committed.py names nemik-check's exit code for an uncommitted queue, so ruff falls by three",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:ruff-baseline.json"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-11-02: 2026-11-02T07:41:28Z (read by stampnote): G0, BEFORE the first edit of the real tests/test_check_committed.py. Staged behind stack 838 (W1448, queued) and 837 (W1447, inflight since 07:29:52Z), by R141's reading of the turn-end clause: the test is what is queued after the LAST stack of the train, not whether the train has a second member. Last pace read 2026-11-02T07:34:23Z (the tick-open hook line, current for the newest landing 07:29:48Z): ruff fell 26 over 10 landings, owes 90, 439 left after 838; mypy owes 190, 1103 left; codon owes 2. N=116 PLR2004 sites, 3 in this file. K=3: three compares of _exit(...) with 4 (lines 59, 60 and 61), the exit code nemik-check --committed gives for a queue read from an uncommitted or untracked file (its --help: 'exit 4 when any named repo ... is read from an uncommitted or untracked queue'). The codemod w1451_committed.py probe writes a scratch copy (tests/probe_w1451_committed.py, deleted by exact path) with one module-level constant before _repo: EXIT_UNCOMMITTED = 4. Ruff PLR2004, F and I clean on the probe (original: 3 PLR2004); mypy on probe and original: 0 findings each. Behaviour: none. Covering check: tests/test_check_committed.py run directly. Not hook-imported; test file only. Actuator: w1451_committed.py real. Sensor: mikemol-pycheck --ratchet. Expected: ruff 439 to 436 on top of 838, mypy flat at 1103.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-02: 2026-11-02T07:41:28Z (read by stampnote): G0, BEFORE the first edit of the real tests/test_check_committed.py. Staged behind stack 838 (W1448, queued) and 837 (W1447, inflight since 07:29:52Z), by R141's reading of the turn-end clause: the test is what is queued after the LAST stack of the train, not whether the train has a second member. Last pace read 2026-11-02T07:34:23Z (the tick-open hook line, current for the newest landing 07:29:48Z): ruff fell 26 over 10 landings, owes 90, 439 left after 838; mypy owes 190, 1103 left; codon owes 2. N=116 PLR2004 sites, 3 in this file. K=3: three compares of _exit(...) with 4 (lines 59, 60 and 61), the exit code nemik-check --committed gives for a queue read from an uncommitted or untracked file (its --help: 'exit 4 when any named repo ... is read from an uncommitted or untracked queue'). The codemod w1451_committed.py probe writes a scratch copy (tests/probe_w1451_committed.py, deleted by exact path) with one module-level constant before _repo: EXIT_UNCOMMITTED = 4. Ruff PLR2004, F and I clean on the probe (original: 3 PLR2004); mypy on probe and original: 0 findings each. Behaviour: none. Covering check: tests/test_check_committed.py run directly. Not hook-imported; test file only. Actuator: w1451_committed.py real. Sensor: mikemol-pycheck --ratchet. Expected: ruff 439 to 436 on top of 838, mypy flat at 1103. | 2026-11-02: landed as bbcfe305 (git log printed it, subject W1449), pushed; ruff 439 to 436",
       "issued_at": "2026-11-02T07:41:15Z",
       "minted_during": "interrupt",
       "caused_by": "W1383",
-      "last_worked": "2026-11-02T07:43:04Z",
+      "last_worked": "2026-11-02T08:10:15Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_check_committed.py",
         "ruff-baseline.json"
       ],
-      "completed": null
+      "completed": "20261102T081015Z"
     },
     {
       "symbol": "W1450",
       "title": "tests/test_alarm.py names the durations and the alarm count it compares with, so ruff falls by four",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:ruff-baseline.json"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-11-02: 2026-11-02T07:56:13Z (read by stampnote): G0, BEFORE the first edit of the real tests/test_alarm.py. Staged behind stack 839 (W1449, inflight since 07:54:20Z), the last in the queue, so the gate keeps a successor after it. Last pace read 2026-11-02T07:34:23Z (the tick-open hook line, current for the newest landing 07:29:48Z): ruff fell 26 over 10 landings, owes 90, 436 left after 839; mypy owes 190, 1103 left; codon owes 2. N=116 PLR2004 sites, 4 in this file. K=4: lines 20 and 21 compare total_seconds with -900 (the -PT15M duration) and 93600 (P1DT2H), line 22 compares days with 7 (+P1W) and line 61 compares the VALARM count with 2 (the relative trigger and the absolute one). The codemod w1452_alarm.py probe writes a scratch copy (tests/probe_w1452_alarm.py, deleted by exact path) with four module-level constants before the first test: FIFTEEN_MINUTES_BEFORE = -900, ONE_DAY_TWO_HOURS = 93600, DAYS_IN_A_WEEK = 7 and ALARMS_PER_TODO = 2. Ruff PLR2004, F and I clean on the probe (original: 4 PLR2004); mypy on probe and original: 0 findings each. Behaviour: none. Covering check: tests/test_alarm.py run directly. Not hook-imported; test file only. Actuator: w1452_alarm.py real. Sensor: mikemol-pycheck --ratchet. Expected: ruff 436 to 432 on top of 839, mypy flat at 1103.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-02: 2026-11-02T07:56:13Z (read by stampnote): G0, BEFORE the first edit of the real tests/test_alarm.py. Staged behind stack 839 (W1449, inflight since 07:54:20Z), the last in the queue, so the gate keeps a successor after it. Last pace read 2026-11-02T07:34:23Z (the tick-open hook line, current for the newest landing 07:29:48Z): ruff fell 26 over 10 landings, owes 90, 436 left after 839; mypy owes 190, 1103 left; codon owes 2. N=116 PLR2004 sites, 4 in this file. K=4: lines 20 and 21 compare total_seconds with -900 (the -PT15M duration) and 93600 (P1DT2H), line 22 compares days with 7 (+P1W) and line 61 compares the VALARM count with 2 (the relative trigger and the absolute one). The codemod w1452_alarm.py probe writes a scratch copy (tests/probe_w1452_alarm.py, deleted by exact path) with four module-level constants before the first test: FIFTEEN_MINUTES_BEFORE = -900, ONE_DAY_TWO_HOURS = 93600, DAYS_IN_A_WEEK = 7 and ALARMS_PER_TODO = 2. Ruff PLR2004, F and I clean on the probe (original: 4 PLR2004); mypy on probe and original: 0 findings each. Behaviour: none. Covering check: tests/test_alarm.py run directly. Not hook-imported; test file only. Actuator: w1452_alarm.py real. Sensor: mikemol-pycheck --ratchet. Expected: ruff 436 to 432 on top of 839, mypy flat at 1103. | 2026-11-02: Landed a9f049d8 (stack 840, 08:59:16Z, 51 min 35 s under host loadavg 24-44); ruff 436 to 432 as expected. Closed late: stack 843's submit was refused because W1450 was still working.",
       "issued_at": "2026-11-02T07:56:02Z",
       "minted_during": "interrupt",
       "caused_by": "W1383",
-      "last_worked": "2026-11-02T07:57:01Z",
+      "last_worked": "2026-11-02T09:10:42Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_alarm.py",
         "ruff-baseline.json"
       ],
-      "completed": null
+      "completed": "20261102T091042Z"
     },
     {
       "symbol": "W1451",
@@ -34730,15 +34730,61 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-11-02: 2026-11-02T08:02:52Z (read by stampnote): G0, BEFORE the first edit of the real tests/webpage.py. Staged behind stack 839 (W1449, inflight since 07:54:20Z) and 840 (W1450, queued). Pace of 2026-11-02T07:54:24Z, the tick's first command, current (newest landing 07:54:16Z): MYPY HAS STALLED: fell 8 over 10 landings, owes 190, 1103 left, 1379 landings to zero (the ruff series moved ruff, fell 36, owes 90, 439 left, 122 to zero, and mypy stood still); codon owes 2. So the lead is a mypy entry. WHERE THE K IS: the ratchet counts findings per file, and mypy reports the findings of an IMPORTED helper in every file that imports it. mypy on the small test files that import tests/webpage.py (test_zoom_step.py, test_keymap.py, and 27 others, 29 files listed by grep) reports exactly four findings each, all in tests/webpage.py: line 37 (sync_api = pytest.importorskip(...), an Any module alias), 276 (open_page returning tuple[Any, Any], explicit-any) and 387 and 388 (sync_api.sync_playwright() and the opened_page call on its Any result). So four findings in one helper are counted in each of 29 files plus the helper itself. K PROBE (scratch copy tests/probe_w1453_webpage.py written by w1453_webpage.py probe, deleted by exact path, twice): replacing the alias with 'from playwright.sync_api import sync_playwright' (webpage.py already imports other playwright.sync_api names at module scope, lines 28 to 33, so a missing playwright fails at import either way; the importorskip alias skipped nothing), and typing open_page as tuple[Browser, Pager] like opened_page (nothing outside webpage.py and one docs line calls open_page), takes webpage.py from 4 findings to 1. The one left is the arg-type of the real Playwright against this module's own Playwright Protocol (BrowserType.launch against the Chromium Protocol); a first probe also tried a read-only property for chromium, which did not fix it, so the codemod does not carry it. Expected: 3 findings fewer in webpage.py and in each of the files that count it. How many of the 29 count it in the baseline is what the ratchet will say; I will read it per file and write the K from that, not from this estimate. Behaviour: none at runtime. The browser tests that use webpage.py run in the gate; I run test_zoom_step collect-only and the import closure locally. Not hook-imported; test helper only. Actuator: w1453_webpage.py real. Sensor: mikemol-pycheck --ratchet. Expected: mypy fall between 3 and about 90, ruff flat (a possible F401 on Any is fixed by ruff --fix).",
+      "evidence": "2026-11-02: 2026-11-02T08:02:52Z (read by stampnote): G0, BEFORE the first edit of the real tests/webpage.py. Staged behind stack 839 (W1449, inflight since 07:54:20Z) and 840 (W1450, queued). Pace of 2026-11-02T07:54:24Z, the tick's first command, current (newest landing 07:54:16Z): MYPY HAS STALLED: fell 8 over 10 landings, owes 190, 1103 left, 1379 landings to zero (the ruff series moved ruff, fell 36, owes 90, 439 left, 122 to zero, and mypy stood still); codon owes 2. So the lead is a mypy entry. WHERE THE K IS: the ratchet counts findings per file, and mypy reports the findings of an IMPORTED helper in every file that imports it. mypy on the small test files that import tests/webpage.py (test_zoom_step.py, test_keymap.py, and 27 others, 29 files listed by grep) reports exactly four findings each, all in tests/webpage.py: line 37 (sync_api = pytest.importorskip(...), an Any module alias), 276 (open_page returning tuple[Any, Any], explicit-any) and 387 and 388 (sync_api.sync_playwright() and the opened_page call on its Any result). So four findings in one helper are counted in each of 29 files plus the helper itself. K PROBE (scratch copy tests/probe_w1453_webpage.py written by w1453_webpage.py probe, deleted by exact path, twice): replacing the alias with 'from playwright.sync_api import sync_playwright' (webpage.py already imports other playwright.sync_api names at module scope, lines 28 to 33, so a missing playwright fails at import either way; the importorskip alias skipped nothing), and typing open_page as tuple[Browser, Pager] like opened_page (nothing outside webpage.py and one docs line calls open_page), takes webpage.py from 4 findings to 1. The one left is the arg-type of the real Playwright against this module's own Playwright Protocol (BrowserType.launch against the Chromium Protocol); a first probe also tried a read-only property for chromium, which did not fix it, so the codemod does not carry it. Expected: 3 findings fewer in webpage.py and in each of the files that count it. How many of the 29 count it in the baseline is what the ratchet will say; I will read it per file and write the K from that, not from this estimate. Behaviour: none at runtime. The browser tests that use webpage.py run in the gate; I run test_zoom_step collect-only and the import closure locally. Not hook-imported; test helper only. Actuator: w1453_webpage.py real. Sensor: mikemol-pycheck --ratchet. Expected: mypy fall between 3 and about 90, ruff flat (a possible F401 on Any is fixed by ruff --fix). | 2026-11-02: 2026-11-02T08:13:44Z (read by stampnote): nemik:R142 finding 1 (retro-r142.json): the cast('Playwright', p) in webpage.launched_page covers a real mismatch that the code does not write down. WHAT MYPY SAID for the uncast call (two probes, scratch copies deleted by exact path): arg-type 'Argument 1 to opened_page has incompatible type playwright.sync_api._generated.Playwright; expected webpage.Playwright'; 'Following member(s) of Playwright have conflicts: chromium: expected Chromium, got BrowserType'; and in the first probe also 'Protocol member Playwright.chromium expected settable variable, got read-only attribute', which a read-only property in the Protocol fixed; the BrowserType-against-Chromium conflict stayed. MY READING OF WHY (an inference from the signatures, not a mypy message, so it is open to check): the Protocol Chromium.launch(*, executable_path: str | None = None) -> Browser returns the Protocol Browser, whose new_page(*, viewport: dict[str, int]) -> Pager takes a plain dict and returns the Protocol Pager, while the real BrowserType.launch returns playwright's Browser whose new_page takes viewport: ViewportSize | None (a TypedDict, so a dict[str, int] is not accepted where the Protocol promises it) and returns playwright's Page, whose on(event, handler) is overloaded by event name where Pager.on takes any str. So the Protocol OVERSTATES three things the real library does not have: a launch that returns the Protocol Browser, a new_page that takes dict[str, int], and an on() over any str event. The cast is sound at runtime for the two calls the code makes (p.chromium.launch(executable_path=...) and browser.new_page(viewport={'width': 1700, 'height': 1250}), both of which the real objects accept), but it hides that the Protocols are wider than the library. The stack (841) is already frozen with the cast and a one-line comment, so the Protocol change is a follow-up. I still need to loosen the Protocols to what the code uses (ViewportSize for new_page's viewport, and the on() events the code subscribes to, request-failed and response) and drop the cast, W1451, then re-measure with the ratchet.",
       "issued_at": "2026-11-02T08:02:34Z",
       "minted_during": "interrupt",
       "caused_by": "W1178",
-      "last_worked": "2026-11-02T08:05:11Z",
+      "last_worked": "2026-11-02T09:07:12Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/webpage.py",
         "mypy-baseline.json"
+      ],
+      "completed": null
+    },
+    {
+      "symbol": "W1452",
+      "title": "tools/nemik_client.py types its documents as object, its options as a Namespace class and reads the hash index without Any, so mypy falls by about seven",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:mypy-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-11-02: 2026-11-02T08:31:53Z (read by stampnote): G0, BEFORE the first edit of the real tools/nemik_client.py. Staged behind stack 840 (W1450, inflight since 08:07:41Z) and 841 (W1451, queued), the last in the queue. Pace of 2026-11-02T08:24:24Z, the tick's first command, current (newest landing 08:07:36Z): MYPY fell 4 over 10 landings, owes 190, 1099 left, 2748 landings to zero (the sharpest in the series); ruff fell 42 owes 90, 432 left, 103 to zero; codon owes 2. So a second mypy lead is right, W1451 being the first. N=9 mypy findings in the file. K=7: the codemod w1454_client.py probe writes a scratch copy (tools/probe_w1454_client.py, deleted by exact path) in which the explicit Any goes (docs: dict[str, object], _get answers object), the hash index is read as raw = self._get('hashes.json') then {str(p): str(h) for p, h in raw.items()} if isinstance(raw, dict) else {} (the same narrowing nemik.tomlview.table does, written inline because the file's docstring says it is standard library only and the example another app copies, so it must not import nemik), and the argparse result is an Options(argparse.Namespace) class (base: str, watch: float | None). mypy on the probe: 9 to 2, K=7, both left being misc over urllib's untyped response (json.load and read().decode()); NO non-misc finding on the probe, so the ratchet's per-code rule (W1451) cannot refuse it; ruff clean. Behaviour: a hashes.json that is not an object reads as an empty index where the old code would have raised on .items(); the client then fetches nothing, and test_read_api (which names nemik_client) is the covering check. Not hook-imported; a tool script. Actuator: w1454_client.py real. Sensor: mikemol-pycheck --ratchet. Expected: mypy 1099 to 1092 on top of 841 (and ruff flat at 432).",
+      "issued_at": "2026-11-02T08:31:38Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1178",
+      "last_worked": "2026-11-02T08:33:20Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tools/nemik_client.py",
+        "mypy-baseline.json"
+      ],
+      "completed": null
+    },
+    {
+      "symbol": "W1453",
+      "title": "nemik.pdf opens its page again when every failed request died of a network change, and names the failure text, with witness tests (the W846 cure on the one src path that lacked it)",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:src/nemik/pdf.py"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-11-02: 2026-11-02T09:03:42Z (read by stampnote): G0, BEFORE the first edit of src/nemik/pdf.py and the new tests/test_pdf_load_retry.py. Why: stack 841 was refused at about 08:59Z by //:test_pdf shard 3 (popLater, five assets of one page, server alive and silent), the W846 class, recorded on W846 at 09:02:53Z with the reading that nemik.pdf.load_naming_failures names the URL but not the failure text and does not retry, while tests/webpage.py launched_page does both (webpage.py:321 and :369). The flake rule: no resubmit unchanged; the cure is the next stack's first entry. N=1 path (nemik.pdf.render) that opens a page by hand in src. K=1: the change is read in full before this G0: pdf.py gains NETWORK_CHANGED = 'net::ERR_NETWORK_CHANGED', LOAD_TRIES = 3, class NetworkChangedError(PageBrokenError), lost_to_a_network_change(refused) (True when there are some and every one carries the network-changed text), load_naming_failures appends 'failed URL (FAILURE)' and raises NetworkChangedError when lost_to_a_network_change else PageBrokenError, and loaded_page(browser, url) opens a fresh page up to LOAD_TRIES times on NetworkChangedError (closing the lost page) and returns the first that loads; render calls loaded_page. WITNESS (construction, not a rerun): tests/test_pdf_load_retry.py with fake browser, page and request objects and a scripted nemik.pdf.load: (1) first load lost to ERR_NETWORK_CHANGED, second ok: the second page is returned and the first closed; (2) three lost: NetworkChangedError after exactly LOAD_TRIES pages; (3) a different failure (ERR_CONNECTION_REFUSED) is not retried: PageBrokenError, one page. Playwright cannot produce ERR_NETWORK_CHANGED, so the fakes carry the text, the same limit W846's own witness has. Companions: I001 for the new import, PLR2004 on any literal compare in the test (constants), DOC501 for raises. Behaviour change in src: a pdf load that loses all requests to a network change is tried again, at most twice more; any other failure is as before. Codon: pdf.py is not Codon-compiled (playwright import) so the census does not apply; tests/ is outside the census. Not hook-imported. This entry LEADS the next stack; W1451 and W1452 ride behind it as one mypy entry (their baselines are already 1092/431 in the tree). Actuator: a codemod for pdf.py and a Write for the test. Sensor: the three witness tests, then mikemol-pycheck --ratchet. Expected: ruff and mypy flat on the cure alone (new test file clean at zero).",
+      "issued_at": "2026-11-02T09:03:18Z",
+      "minted_during": "interrupt",
+      "caused_by": "W846",
+      "last_worked": "2026-11-02T09:07:10Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/pdf.py",
+        "tests/test_pdf_load_retry.py"
       ],
       "completed": null
     }
@@ -34943,12 +34989,7 @@
   ],
   "job_id": "481476b5",
   "heartbeat": "2026-10-29T04:11:13Z",
-  "lock": {
-    "holder": "nemik-125",
-    "taken_at": "2026-11-02T08:05:35Z",
-    "pid": 337543,
-    "start": 21144718
-  },
+  "lock": null,
   "predecessor_job_id": "1d7fe6d0",
   "leases": [
     {
@@ -42736,7 +42777,37 @@
       "root": "NO NEW FINDINGS, OPEN FINDINGS CARRIED WITH OWNERS AND DUE DATES (not a fixpoint declaration). Verified from source (TZ=UTC reflog and git log): ebda7498 07:05:42Z (02:05:42 -0500, W1443), dc9f711e 07:17:53Z (02:17:53 -0500; git log shows 94f46924 W1444 and dc9f711e W1445 as consecutive commits of one train, so they land at one moment), e7f83c04 07:29:48Z (02:29:48 -0500, W1446); --in-gate lists W1447 inflight (began_ns 1793604592176020261, on the 836 landing) and W1448 queued; `mikemol-pycheck --ratchet` prints ruff 439/439 and mypy 1103/1103 (449 - 4 - 3 - 3 = 439 with the two staged stacks live, 463 - 5 - 5 - 4 - 4 - 3 - 3 = 439 from the start of this series). Intervals as Z pairs: 833 gated 06:54:40Z to 07:05:42Z (11 min 02 s), 834 and 835 gated to 07:17:53Z (12 min 08 s), 836 gated 07:21:41Z to 07:29:48Z (8 min 07 s). One short empty interval is reported with its cause: 07:17:53Z to the 836 submit at about 07:21:36Z = about 3 min 43 s, because the 834/835 train landed back to back and the turn ended at 07:11Z with only 835 queued behind 834 (so the turn-end clause's 'nothing queued behind' test passed on 835, but both landed together); the staged-successor rule is better stated by what is queued AFTER the last stack of a train, which the session should read. The pace line is read correctly: stack 836 landed 07:29:48Z, after the 07:24:23Z pace, so all three print PENDING and the tick-open hook pace (07:34:23Z, current) agrees; ruff fell 26 over 10 landings owes 90 (the PLR2004 series is moving it), mypy fell 68 owes 190. R134's serve.py half is answered on W1282 at 07:09:44Z with a measured negative result (a GraphDoc/Row first step tried and discarded on a scratch copy, because Row's object values break about 40 reads; the right unit is typed NodeRow and EdgeRow rows); tests/test_layout.py is the one still unprobed. The G0's own garbled sentence (the 445 now / 442 after 837) is named and corrected in the G1 with the numbers that hold, which is the right handling. Carried open findings, status on 2026-11-02 07:40Z: R95 second finding on W1349, R95 third, R97 first, R98, R111 first, R102, R127 and R128 on W1219, R94 on W1348, R93 on W1347, R92 on W1346, R91 on W1345, R72 on W846, R100 on W910, R101 on W1288, R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288, R114 on W1395, R116 on W1383, R119 and R135 on W1396 (repin entry unbuilt), R134 on W1282 (layout unprobed; due today), R138 on W1288 (to show on three landings: now a short failure at the train boundary); two UNCLAIMED mtools:W2099 letters; codon owed with no stack.",
       "findings": [],
       "id": "nemik:R139"
+    },
+    {
+      "card": "W1451",
+      "trigger": "round 142: nemik-125, stacks 837 (W1447), 838 (W1448) and 839 (W1449) landed (b66891aa = 07:42:00Z, 18dbff69 = 07:54:16Z, bbcfe305 = 08:07:36Z); stack 840 (W1450 test_alarm.py) inflight since 08:07:36Z, key 1793606223463910025; stack 841 (W1451 tests/webpage.py typing, mypy 1103 to 1099) queued behind it, key 1793606714071470760",
+      "root": "Verified from source (TZ=UTC reflog): e7f83c04 07:29:48Z, b66891aa 07:42:00Z (02:42:00 -0500), 18dbff69 07:54:16Z (02:54:16 -0500), bbcfe305 08:07:36Z (03:07:36 -0500); --in-gate lists W1450 inflight (began_ns 1793606861539189693, on the 839 landing) and W1451 queued; `mikemol-pycheck --ratchet` prints ruff 432/432 and mypy 1099/1099 (439 - 4 - 3 = 432, 1103 - 4 = 1099 with both staged). Intervals as Z pairs: 837 gated 07:29:52Z to 07:42:00Z (12 min 08 s), 838 gated 07:42:04Z to 07:54:16Z (12 min 12 s), 839 gated 07:54:20Z to 08:07:36Z (13 min 16 s); the gate was empty 0 s at all three landings, so the invariant holds on every landing since the train boundary (a streak of seven). The mypy pace read is the sharpest in the segment (fell 8 over 10 landings, owes 190, 1379 landings to zero: the PLR2004 series moved only ruff), and the session turned to the mypy lead at once. Two honest corrections stand in the G1: W1451's G0 estimated 'between 3 and about 90' on the premise that the ratchet counts an imported helper's findings in every importer, and the measurement (mypy on test_zoom_step.py and test_keymap.py, then the ratchet at --write) showed it attributes each finding to the file it lives in, K=4; and the first write was refused by the ratchet (tests/webpage.py arg-type 1) and fixed with a cast, which the G1 calls a cast of a runtime-true structural fact. R134's layout half is answered on W1282 with a measured picture (one non-misc finding in webpage.py:276; the 266 misc findings cascade from about 40 tests driving Playwright's untyped Page; per-test narrowing, not one codemod), so W1282 now holds all three probes with no landed first step. One finding on the cast. No fixpoint is declared. Carried open findings, status on 2026-11-02 08:13Z: R95 second finding on W1349, R95 third, R97 first, R98, R111 first, R102, R127 and R128 on W1219, R94 on W1348, R93 on W1347, R92 on W1346, R91 on W1345, R72 on W846, R100 on W910, R101 on W1288, R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288, R114 on W1395, R116 on W1383, R119 and R135 on W1396 (repin entry unbuilt), R134 on W1282 (all three probed; a first step to land), R138 on W1288 (held on every landing in this series); two UNCLAIMED mtools:W2099 letters; codon owed with no stack.",
+      "findings": [
+        {
+          "finding": "The cast that got W1451 past the ratchet, cast('Playwright', p), covers a real mismatch: the module's own Playwright Protocol is not satisfied by the real sync_playwright object (the G1 names it as BrowserType against the Chromium Protocol), a read-only property did not fix it in a second probe, and the cast was kept. The cast is allowed (it is not a type: ignore), and a runtime-true structural fact is a fair reason, but the mismatch itself is not written down, so the Protocol keeps claiming a shape the library does not have and the next reader cannot tell which member differs. Write on W1451 the exact member and types that differ (the mypy message for the uncast call), and either loosen the Protocol to what the code uses or state in the comment next to the cast what member the Protocol overstates and why the cast is sound for the calls the module makes.",
+          "finding_card": "W1451",
+          "finding_owner": "nemik session",
+          "finding_witness": "A W1451 evidence line with the mypy message for the uncast call (the differing member and both types), and the cast's comment in tests/webpage.py naming it, or a loosened Protocol with the cast removed.",
+          "due": "2026-11-02"
+        }
+      ],
+      "id": "nemik:R140"
+    },
+    {
+      "card": "W1452",
+      "trigger": "round 143: nemik-126, stack 840 (W1450) inflight since 08:07:41Z with no landing, 30 min 39 s at 08:38:20Z, key 1793606223463910025; stacks 841 (W1451 tests/webpage.py) and 842 (W1452 tools/nemik_client.py, mypy 1099 to 1092, ruff 432 to 431) queued behind it; newest landing bbcfe305 08:07:36Z",
+      "root": "Verified from source (TZ=UTC reflog and /proc): bbcfe305 08:07:36Z (03:07:36 -0500) is still the newest landing at 08:38:20Z; --in-gate lists W1450 inflight (began_ns 1793606861539189693 = 08:07:41Z) with W1451 and W1452 queued; `mikemol-pycheck --ratchet` prints ruff 431/431 and mypy 1092/1092 (432 - 1 and 1099 - 7 on top of the two queued stacks); /proc/loadavg reads 28.76 34.60 40.93 at 08:38:20Z; the stack840 mikemol-commit process is running under mikemol-membudget and the fence guard (its output file is still 0 bytes, as it is written at the end). Stack 840 has now run 30 min 39 s against 12 to 13 minutes for each of 837, 838 and 839 and 25 minutes for the two previous long gates (831 and 824). The G1 records the observation honestly ('I have not looked at why') and the fair reading is host load: a fifteen-minute load average of 41 with five-minute 34.6 means other repos' gates and builds are sharing the machine, and the series' own long gates (the 25 min ones) also sat in heavy load (earlier notes put bazel gates at 40 to 60 load). The gate's wall time is therefore not a property of the stack, which matters for every estimate of 'expected remaining time' in standing 13, and the per-gate load table R66 asked for on W1246 is the instrument that would have said so. The stacks and the queue are in good order otherwise: G0 08:31:53Z before the edit, K probe 9 to 2 with the narrowing written inline because the file's contract is standard library only, the ratchet's finding that the stack also lowered ruff by 1 (the unused Any import) stated so both baselines ride, the tick-open output read whole, and R142's finding recorded on W1451 with the exact mypy messages and the inference labelled as an inference. One finding. No fixpoint is declared. Carried open findings, status on 2026-11-02 08:40Z: R95 second finding on W1349, R95 third, R97 first, R98, R111 first, R102, R127 and R128 on W1219, R94 on W1348, R93 on W1347, R92 on W1346, R91 on W1345, R72 on W846, R100 on W910, R101 on W1288, R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288, R114 on W1395, R116 on W1383, R119 and R135 on W1396, R134 on W1282 (a first step to land), R138 on W1288, R142 on W1451 (recorded; the Protocol loosening and cast removal follow 841's landing); two UNCLAIMED mtools:W2099 letters; codon owed with no stack.",
+      "findings": [
+        {
+          "finding": "Stack 840's gate has run 30 min 39 s (08:07:41Z to 08:38:20Z, still going) against 12 to 13 minutes for its three predecessors, and the G1 files it as an open observation without a cause. A cause is cheap to state: /proc/loadavg is 28.76 34.60 40.93 at 08:38:20Z, so the machine is heavily shared. Every 'expected remaining time' in standing 13 and every gate-wall in the G1s is read as if it were the stack's, and it is not. Add the loadavg (1, 5 and 15 minute, with its stamp) beside each gate wall in the G1, start the per-gate load table on W1246 (R66 asked for it), and when a gate runs past twice the median look at the running command's children and the load before waiting (the process list shows the stack840 mikemol-commit under membudget and the fence guard, still working).",
+          "finding_card": "W1246",
+          "finding_owner": "nemik session",
+          "finding_witness": "A W1246 evidence line with a table of the last ten gate walls (submit and landing Z stamps, wall, loadavg read at each landing) including 840's, and the next G1 quoting loadavg beside its gate walls.",
+          "due": "2026-11-02"
+        }
+      ],
+      "id": "nemik:R141"
     }
   ],
-  "retro_counter": 139
+  "retro_counter": 141
 }
