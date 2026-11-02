@@ -25,6 +25,11 @@ from nemik.letters import (
 if TYPE_CHECKING:
     from pathlib import Path
 
+ADDRESSED = 4
+FOLDS_FOR_NEMIK = 2
+MOVES = 2
+EXIT_LETTERS_PENDING = 5
+
 
 def _letter(root: Path, inbox: str, name: str, first: str) -> None:
     path = root / inbox / "inbox" / name
@@ -40,7 +45,7 @@ def test_a_letter_must_sit_in_the_inbox_it_names(tmp_path: Path) -> None:
     _letter(tmp_path, "nemik", "ghost.md", "nemik → nowhere: no such workstream")
     _letter(tmp_path, "nemik", "plain.md", "# a title with no addressee")
     addressed, unaddressed = headers(tmp_path)
-    assert len(addressed) == 4
+    assert len(addressed) == ADDRESSED
     assert unaddressed == [("nemik", "plain.md")]
     found = misdelivered(addressed, {"nemik", "paperkit", "gcalculus", "life"})
     assert found == [
@@ -115,7 +120,7 @@ def test_an_old_dated_orphan_is_stale_and_the_scope_is_one_repo(tmp_path: Path) 
     assert "2026-08-01-old.md" in move
     assert "life/inbox" not in move
     # without a cutoff nothing is stale, and every letter is live
-    assert len(fold_commands(tmp_path, repo="nemik", today=today)) == 2
+    assert len(fold_commands(tmp_path, repo="nemik", today=today)) == FOLDS_FOR_NEMIK
 
 
 def test_an_alert_pair_needs_no_card_but_an_unresolved_opened_does(
@@ -139,7 +144,7 @@ def test_an_alert_pair_needs_no_card_but_an_unresolved_opened_does(
     (card,) = fold_commands(tmp_path, repo="substrate")
     assert "stalled-opened-bbbb1111" in card  # no RESOLVED twin: still a card
     moves = archive_commands(tmp_path, repo="substrate")
-    assert len(moves) == 2
+    assert len(moves) == MOVES
     assert all("a02e6095" in m for m in moves)
 
 
@@ -189,7 +194,7 @@ def test_a_misdelivered_letter_is_copied_to_its_recipient_and_then_counts_as_del
 
     spaces = {"gcalculus", "linux-sources"}
     said, code = report(tmp_path, spaces, fold=True, repo="linux-sources")
-    assert code == 5
+    assert code == EXIT_LETTERS_PENDING
     assert any(line.startswith("cp ") for line in said)
     said, code = report(
         tmp_path, spaces, fold=True, repo="linux-sources", older_than=None, apply=True
@@ -240,7 +245,7 @@ def test_the_command_exits_5_only_when_a_letter_is_misdelivered(
     _letter(tmp_path, "gcalculus", "lost.md", "life → nemik: wrong inbox")
     with pytest.raises(SystemExit) as stop:
         main(["--root", str(tmp_path), "--letters"])
-    assert stop.value.code == 5
+    assert stop.value.code == EXIT_LETTERS_PENDING
     assert "MISDELIVERED gcalculus/inbox/lost.md" in capsys.readouterr().out
 
 

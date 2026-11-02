@@ -325,7 +325,6 @@
   "S603": 1
  },
  "tests/test_letters.py": {
-  "PLR2004": 5,
   "SLF001": 1
  },
  "tests/test_manifest.py": {
