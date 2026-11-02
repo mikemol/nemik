@@ -39,6 +39,16 @@ class GraphDoc(TypedDict, total=False):
     repos: list[str]
 
 
+def _node_id(node: Row) -> str:
+    """Order graph nodes by id.
+
+    Returns:
+        The node's id as text.
+
+    """
+    return str(node["id"])
+
+
 def _owner(node: Row) -> str:
     return str(node["repo"]) if str(node["id"]).startswith(BASE) else FLEET
 
@@ -81,7 +91,7 @@ def assemble(pieces: dict[str, GraphDoc]) -> GraphDoc:
     """
     fleet = pieces[FLEET]
     parts = [pieces[r] for r in fleet["repos"]] + [fleet]
-    nodes = sorted((n for p in parts for n in p["nodes"]), key=lambda n: str(n["id"]))
+    nodes = sorted((n for p in parts for n in p["nodes"]), key=_node_id)
     edges = sorted(
         (e for p in parts for e in p["edges"]),
         key=operator.itemgetter("source", "target", "kind"),

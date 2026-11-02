@@ -107,6 +107,16 @@ def timezones(lines: list[str]) -> list[str]:
     return out
 
 
+def _due_digits(line: str) -> str:
+    """Order DUE and DTSTART lines by their date-time digits, whatever the value form.
+
+    Returns:
+        The line's value reduced to digits, padded to a full date-time.
+
+    """
+    return re.sub(r"[^0-9]", "", line.rpartition(":")[2]).ljust(15, "0")
+
+
 def _stamp(iso: str) -> str:
     """Convert an ISO-8601 UTC ledger stamp to iCalendar DATE-TIME, the epoch when there is none.
 
@@ -276,12 +286,7 @@ def grouped(todos: list[list[str]]) -> list[list[str]]:
         ]
         if dues:  # earliest by the date-time digits, whatever the value form
             parent.append(
-                min(
-                    dues,
-                    key=lambda d: re.sub(r"[^0-9]", "", d.rpartition(":")[2]).ljust(
-                        15, "0"
-                    ),
-                )
+                min(dues, key=_due_digits)
             )
         out.append([*parent, "END:VTODO"])
         out += [

@@ -35,9 +35,6 @@
  "src/nemik/metrics.py": {
   "misc": 10
  },
- "src/nemik/pieces.py": {
-  "misc": 2
- },
  "src/nemik/rank.py": {
   "misc": 232,
   "type-arg": 17
@@ -59,7 +56,7 @@
   "misc": 5
  },
  "src/nemik/vtodo.py": {
-  "misc": 5
+  "misc": 3
  },
  "src/nemik/wake.py": {
   "misc": 2
