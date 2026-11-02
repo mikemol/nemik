@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1459,
+  "counter": 1460,
   "waypoints": [
     {
       "symbol": "W1",
@@ -34885,21 +34885,21 @@
     {
       "symbol": "W1458",
       "title": "tests/test_ruler_table.py, test_shaclcache_threads.py and test_parse_cache.py name the table size, the row count and the parse counts they compare with, so ruff falls by seven",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:ruff-baseline.json"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Edit the three files, run tests and guards, mikemol-pycheck --ratchet --write, write stack848.json, submit behind 847.",
-      "evidence": "2026-11-02: G0 BEFORE the first edit of the three test files, queued behind stack 847 (W1457, inflight alone). Landed: 846 as 7ad5130e (W1456, ruff 423 to 418). Pace stamps 2026-11-02T09:04:26Z and 09:14:26Z: ruff-baseline.json behind, owes 90, 413 left after 847. N=80 PLR2004 sites at 09:18Z (python3 -m ruff, ruff-house.toml). K=7 by the files read: test_ruler_table.py lines 37 and 41 compare the table length with 8; test_shaclcache_threads.py lines 63 and 64 compare the row count with 20; test_parse_cache.py lines 52 and 69 compare the parse count with 2 and line 57 with 3. Edit: module constants RULER_ENTRIES = 8, ROWS = 20, TWO_PARSES = 2, THREE_PARSES = 3. Companions none; follow-ons none (no import change). Expected: ruff 413 to 406 on top of 847, mypy flat at 1092. Behaviour: none. Covering check: the three tests run directly. Not hook-imported. | 2026-11-02: 2026-11-02T10:30:06Z G0 before tick-open: advances W1458 (stack 848 inflight since 1793614782992002610) and W1459 (stack 849 queued behind it). Actuator: wait on the verdicts, mark each card with the printed hash, record loadavg beside each wall on W1246, and stage the next PLR2004 cluster behind 849 (47 sites left in tests/ before 849, 41 after). Sensor: --in-gate --json and git log. Expected: 848 lands ruff 413 to 406 and 849 lands 406 to 400, mypy flat at 1092; a refusal is read from its output and not resubmitted unchanged.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-02: G0 BEFORE the first edit of the three test files, queued behind stack 847 (W1457, inflight alone). Landed: 846 as 7ad5130e (W1456, ruff 423 to 418). Pace stamps 2026-11-02T09:04:26Z and 09:14:26Z: ruff-baseline.json behind, owes 90, 413 left after 847. N=80 PLR2004 sites at 09:18Z (python3 -m ruff, ruff-house.toml). K=7 by the files read: test_ruler_table.py lines 37 and 41 compare the table length with 8; test_shaclcache_threads.py lines 63 and 64 compare the row count with 20; test_parse_cache.py lines 52 and 69 compare the parse count with 2 and line 57 with 3. Edit: module constants RULER_ENTRIES = 8, ROWS = 20, TWO_PARSES = 2, THREE_PARSES = 3. Companions none; follow-ons none (no import change). Expected: ruff 413 to 406 on top of 847, mypy flat at 1092. Behaviour: none. Covering check: the three tests run directly. Not hook-imported. | 2026-11-02: 2026-11-02T10:30:06Z G0 before tick-open: advances W1458 (stack 848 inflight since 1793614782992002610) and W1459 (stack 849 queued behind it). Actuator: wait on the verdicts, mark each card with the printed hash, record loadavg beside each wall on W1246, and stage the next PLR2004 cluster behind 849 (47 sites left in tests/ before 849, 41 after). Sensor: --in-gate --json and git log. Expected: 848 lands ruff 413 to 406 and 849 lands 406 to 400, mypy flat at 1092; a refusal is read from its output and not resubmitted unchanged. | 2026-11-02: Landed a2810df1 in stack 848; ruff 413 to 406, mypy flat 1092.",
       "issued_at": "2026-11-02T10:09:50Z",
       "minted_during": "interrupt",
       "caused_by": "W1383",
-      "last_worked": "2026-11-02T10:30:11Z",
+      "last_worked": "2026-11-02T10:31:25Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261102T103125Z",
       "manifest": [
         "tests/test_ruler_table.py",
         "tests/test_shaclcache_threads.py",
@@ -34929,6 +34929,31 @@
         "tests/test_calendars.py",
         "tests/test_calendar_write.py",
         "tests/test_calwrite.py",
+        "ruff-baseline.json"
+      ]
+    },
+    {
+      "symbol": "W1460",
+      "title": "tests/test_pins.py, test_marks.py and test_akonadi_guard.py name the commits behind, the unreadable count, the digest length and the exit codes they compare with, so ruff falls by five",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:ruff-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Edit the three files, run tests and guards, mikemol-pycheck --ratchet --write, write stack850.json, submit behind 849.",
+      "evidence": "2026-11-02: G0 BEFORE the first edit of the three test files, queued behind stack 849 (W1459, inflight alone). Landed: 848 as a2810df1 (W1458, ruff 413 to 406). Pace stamps 2026-11-02T09:04:26Z and 09:14:26Z (older; a fresh pace read is owed at the next tick): ruff-baseline.json behind, owes 90, 400 left after 849. 41 PLR2004 sites left in tests/ after 849. K=5 by the lines read: test_pins.py line 63 compares commits behind with 2 and line 96 an exit code with 6; test_marks.py line 61 compares unreadable with 2 and line 71 the policy digest length with 64; test_akonadi_guard.py line 35 compares a return code with 2. Edit: module constants COMMITS_BEHIND = 2, EXIT_TOO_FAR_BEHIND = 6 in test_pins; UNREADABLE = 2, DIGEST_LENGTH = 64 in test_marks; EXIT_REFUSED = 2 in test_akonadi_guard. Companions none; follow-ons none (no import change). Expected: ruff 400 to 395 on top of 849, mypy flat at 1092. Behaviour: none. Covering check: the three tests run directly. Not hook-imported.",
+      "issued_at": "2026-11-02T10:31:42Z",
+      "minted_during": "tick",
+      "caused_by": "W1383",
+      "last_worked": "2026-11-02T10:31:48Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "tests/test_pins.py",
+        "tests/test_marks.py",
+        "tests/test_akonadi_guard.py",
         "ruff-baseline.json"
       ]
     }
@@ -35133,12 +35158,7 @@
   ],
   "job_id": "481476b5",
   "heartbeat": "2026-10-29T04:11:13Z",
-  "lock": {
-    "holder": "session-nemik",
-    "taken_at": "2026-11-02T10:30:14Z",
-    "pid": 337543,
-    "start": 21144718
-  },
+  "lock": null,
   "predecessor_job_id": "1d7fe6d0",
   "leases": [
     {
@@ -42971,7 +42991,22 @@
         }
       ],
       "id": "nemik:R142"
+    },
+    {
+      "card": "W1458",
+      "trigger": "round 145: stack 843 (W1453, W1451, W1452) landed 6dd5077b = 09:34:58Z; stacks 844 to 848 (W1454 to W1458, PLR2004 clusters) landed 684033eb 09:46:28Z, 5530822d 09:57:56Z, 7ad5130e 10:08:51Z, f6ea5c46 10:19:39Z, a2810df1 10:30:43Z; stack 849 (W1459) inflight, key 1793614913513013722; 850 (W1460) queued",
+      "root": "Verified from source (TZ=UTC reflog): 6dd5077b main@{04:34:58 -0500} = 09:34:58Z, 684033eb 04:46:28 = 09:46:28Z, 5530822d 04:57:56 = 09:57:56Z, 7ad5130e 05:08:51 = 10:08:51Z, f6ea5c46 05:19:39 = 10:19:39Z, a2810df1 05:30:43 = 10:30:43Z; --in-gate lists W1459 inflight (began_ns 1793615447032460955) and W1460 queued; `mikemol-pycheck --ratchet` prints ruff 395/395 and mypy 1092/1092 (413 - 7 - 6 - 5 = 395 from the G1's 413 before 848, so 849 and 850 are live in the tree on top of it). Gate walls from the landing stamps: 843 submitted 09:11:58Z to 09:34:58Z (23 min 0 s), then 11 min 30 s, 11 min 28 s, 10 min 55 s, 10 min 48 s and 11 min 04 s for 844 to 848, with the gate empty 0 s at every one of the six landings (each successor queued before its predecessor landed). That is the invariant at its best and the PLR2004 series is working: ruff 431 to 406 in six stacks, from the site list `python3 -m ruff` gave (R144 followed through, as the G1 says). The G1 admits two lapses honestly. (1) Ticks 09:17Z to 10:30Z, 73 minutes, were skipped across several turns while only landings were handled; no tick-open, no tick-close and so no ledger lines for the stacks that landed in between. (2) The G0 stamps on the cards W1454 to W1460 are minute-resolution and not stampnote's full stamps (standing 11 asks full stamps for the G0, the earliest edit and the submit, and the loadavg beside 843's wall was read later). The mypy ratchet has barely moved (fell 11 over 10 landings, owes 190, 1092 left) because the whole run was ruff, and the three big files are the only mypy left. One finding. No fixpoint is declared. Carried open findings, status on 2026-11-02 10:36Z: R95 second finding on W1349 (the minute-resolution stamps are the same lapse), R95 third, R97 first, R98, R111 first, R102, R127 and R128 on W1219, R94 on W1348, R93 on W1347, R92 on W1346, R91 on W1345, R72 on W846 (the W1453 cure landed in 843), R100 on W910, R101 and R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288, R114 on W1395, R116 on W1383, R119 and R135 on W1396, R134 on W1282, R138 on W1288 (the invariant held on all six), R142 on W1451 (landed in 843; Protocol loosening to do), R143 on W1246 (the load table, 843's wall to complete); two UNCLAIMED mtools:W2099 letters; codon owed with no stack.",
+      "findings": [
+        {
+          "finding": "The 73 minutes without a tick left holes in three records, and the G1's two stated lapses are the visible ones. (1) The ledger has no tick lines for the landings of stacks 844 to 847 (684033eb, 5530822d, 7ad5130e, f6ea5c46), so the ledger and the card marks no longer agree about what advanced when; backfill one ledger line each with its hash and the reflog Z stamp (--ledger SYMBOL OUTCOME MECHANISM NOTE) now. (2) Standing 11's G1 pairing (the G0, the earliest edit and the submit, as three full stamps per stack) was not given for any of 844 to 849, and the cards' G0 stamps are to the minute. Write the table for the seven stacks on W1288 from the transcript calls (G0 update, first edit or codemod run, submit), so the series has one auditable record, and use stampnote for every dated line from here on. (3) Both lapses have the same cause: the tick routine was dropped while the work went well; the cheap guard is that the turn-end read of --in-gate (R138) is followed by the tick-close, never by the end of the turn alone.",
+          "finding_card": "W1458",
+          "finding_owner": "nemik session",
+          "finding_witness": "Four ledger lines for the 844 to 847 landings dated by their reflog stamps, and a W1288 evidence line with the G0, first-edit and submit Z stamps for stacks 844 to 849 taken from the transcript.",
+          "due": "2026-11-02"
+        }
+      ],
+      "id": "nemik:R143"
     }
   ],
-  "retro_counter": 142
+  "retro_counter": 143
 }

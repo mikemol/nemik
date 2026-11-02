@@ -189,7 +189,6 @@
   "S603": 2
  },
  "tests/test_akonadi_guard.py": {
-  "PLR2004": 1,
   "PT018": 1,
   "S404": 1,
   "S603": 1
@@ -323,9 +322,6 @@
   "ANN202": 1,
   "S105": 1
  },
- "tests/test_marks.py": {
-  "PLR2004": 2
- },
  "tests/test_memo_audits.py": {
   "PLC2701": 1
  },
@@ -358,7 +354,6 @@
   "PLR2004": 1
  },
  "tests/test_pins.py": {
-  "PLR2004": 2,
   "S404": 1,
   "S603": 1,
   "S607": 1

@@ -14,6 +14,8 @@ if TYPE_CHECKING:
 
 NOW = "2026-10-08T12:00:00Z"
 VERSION = "v1"
+UNREADABLE = 2
+DIGEST_LENGTH = 64
 
 
 def _mark(as_of: str, version: str = VERSION) -> dict[str, object]:
@@ -58,7 +60,7 @@ def test_the_latest_mark_per_symbol_wins_and_bad_lines_are_counted(
     )
     marks, unreadable = read(path)
     assert marks["W1"] == newer
-    assert unreadable == 2
+    assert unreadable == UNREADABLE
 
 
 def test_an_absent_marks_file_reads_empty(tmp_path: Path) -> None:
@@ -68,4 +70,4 @@ def test_an_absent_marks_file_reads_empty(tmp_path: Path) -> None:
 
 def test_the_policy_version_is_a_sha256_of_the_shipped_policy() -> None:
     """The policy version is a sha256 of the shipped policy."""
-    assert len(policy_version()) == 64
+    assert len(policy_version()) == DIGEST_LENGTH

@@ -14,6 +14,8 @@ import pytest
 
 from nemik.vtodo import DEFAULT_HELPER
 
+EXIT_REFUSED = 2
+
 
 @pytest.mark.skipif(
     not DEFAULT_HELPER.exists(), reason="the Akonadi helper is a host build"
@@ -32,4 +34,4 @@ def test_helper_refuses_without_a_session_bus() -> None:
         timeout=30,
         check=False,
     )
-    assert r.returncode == 2 and b"refusing to start it" in r.stdout, r
+    assert r.returncode == EXIT_REFUSED and b"refusing to start it" in r.stdout, r

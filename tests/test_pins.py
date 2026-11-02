@@ -14,6 +14,9 @@ if TYPE_CHECKING:
 
     import pytest
 
+COMMITS_BEHIND = 2
+EXIT_TOO_FAR_BEHIND = 6
+
 ENV = {
     "GIT_AUTHOR_NAME": "t",
     "GIT_AUTHOR_EMAIL": "t@example.com",
@@ -60,7 +63,7 @@ def test_a_pin_is_as_far_behind_as_the_peer_has_commits_since(tmp_path: Path) ->
     )
     found = pins(tmp_path)
     assert Pin("app", "peer", shas[0]) in found
-    assert behind(tmp_path, Pin("app", "peer", shas[0])) == 2
+    assert behind(tmp_path, Pin("app", "peer", shas[0])) == COMMITS_BEHIND
     assert behind(tmp_path, Pin("app", "peer", shas[2])) == 0
     assert behind(tmp_path, Pin("app", "ghost", "a" * 40)) is None  # not cloned here
 
@@ -93,4 +96,4 @@ def test_the_command_exits_6_only_past_the_threshold(
     assert main(["--root", str(tmp_path)]) == 0
     assert "app pins peer@" in capsys.readouterr().out
     assert main(["--root", str(tmp_path), "--max-behind", "2"]) == 0
-    assert main(["--root", str(tmp_path), "--max-behind", "1"]) == 6
+    assert main(["--root", str(tmp_path), "--max-behind", "1"]) == EXIT_TOO_FAR_BEHIND
