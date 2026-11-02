@@ -16,6 +16,7 @@ from rdflib.plugins.sparql import processor
 from nemik.shaclcache import cached_sparql_parse
 
 QUERY = "SELECT ?o WHERE { ?s <urn:p> ?o }"
+ROWS = 20
 
 
 def _graph() -> Graph:
@@ -60,6 +61,6 @@ def test_a_nested_block_still_answers_and_restores() -> None:
     g = _graph()
     with cached_sparql_parse():
         with cached_sparql_parse():
-            assert len(list(g.query(QUERY))) == 20
-        assert len(list(g.query(QUERY))) == 20
+            assert len(list(g.query(QUERY))) == ROWS
+        assert len(list(g.query(QUERY))) == ROWS
     assert processor.parseQuery is parse

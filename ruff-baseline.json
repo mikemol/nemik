@@ -359,8 +359,7 @@
   "PLR2004": 1
  },
  "tests/test_parse_cache.py": {
-  "ARG001": 1,
-  "PLR2004": 3
+  "ARG001": 1
  },
  "tests/test_pieces_corpus.py": {
   "PLR2004": 1
@@ -403,9 +402,6 @@
   "S404": 1,
   "S603": 1
  },
- "tests/test_ruler_table.py": {
-  "PLR2004": 2
- },
  "tests/test_salience.py": {
   "S404": 1,
   "S603": 1
@@ -415,9 +411,6 @@
   "N803": 6,
   "PLR0913": 1,
   "PLR0917": 1
- },
- "tests/test_shaclcache_threads.py": {
-  "PLR2004": 2
  },
  "tests/test_shaclinc.py": {
   "PLC2701": 1

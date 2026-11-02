@@ -16,6 +16,9 @@ if TYPE_CHECKING:
 
     import pytest
 
+TWO_PARSES = 2
+THREE_PARSES = 3
+
 
 def _counting(monkeypatch: pytest.MonkeyPatch) -> dict[str, int]:
     calls = {"n": 0}
@@ -49,12 +52,12 @@ def test_an_unchanged_file_is_parsed_once(
     for _ in range(3):
         adapter.queue_graph("a", a, known)
         adapter.queue_graph("b", b, known)
-    assert calls["n"] == 2
+    assert calls["n"] == TWO_PARSES
     a.write_text("22")
     os.utime(a, ns=(1, 1))
     adapter.queue_graph("a", a, known)
     adapter.queue_graph("b", b, known)
-    assert calls["n"] == 3
+    assert calls["n"] == THREE_PARSES
 
 
 def test_a_new_repo_invalidates_every_queue(
@@ -66,7 +69,7 @@ def test_a_new_repo_invalidates_every_queue(
     a.write_text("1")
     adapter.queue_graph("a", a, frozenset({"a"}))
     adapter.queue_graph("a", a, frozenset({"a", "c"}))
-    assert calls["n"] == 2
+    assert calls["n"] == TWO_PARSES
 
 
 def test_a_mutated_answer_does_not_reach_the_cache(

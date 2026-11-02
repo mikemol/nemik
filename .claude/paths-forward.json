@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1457,
+  "counter": 1458,
   "waypoints": [
     {
       "symbol": "W1",
@@ -34838,21 +34838,21 @@
     {
       "symbol": "W1456",
       "title": "tests/test_letters.py names the addressed count, the fold and move counts and nemik-check's exit code for letters pending, so ruff falls by five",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:ruff-baseline.json"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Edit the file, run the test and guards, mikemol-pycheck --ratchet --write, write stack846.json, submit behind 845.",
-      "evidence": "2026-11-02: G0 BEFORE the first edit of tests/test_letters.py, queued behind stack 845 (W1455, inflight alone). Landed: 844 as 684033eb (W1454, ruff 431 to 427). Pace stamps 2026-11-02T09:04:26Z and 09:14:26Z: ruff-baseline.json behind, owes 90, 423 left after 845. N=80 PLR2004 sites at 09:18Z (python3 -m ruff, ruff-house.toml). K=5 of 5 in this file by the file read: line 43 compares the addressed count with 4, line 118 the fold count with 2, line 142 the moves with 2, lines 192 and 243 an exit code with 5. Edit: module constants ADDRESSED = 4, FOLDS_FOR_NEMIK = 2, MOVES = 2, EXIT_LETTERS_PENDING = 5 after the TYPE_CHECKING block. Companions none; follow-ons none (no import change). Expected: ruff 423 to 418 on top of 845, mypy flat at 1092. Behaviour: none. Covering check: tests/test_letters.py run directly. Not hook-imported.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-02: G0 BEFORE the first edit of tests/test_letters.py, queued behind stack 845 (W1455, inflight alone). Landed: 844 as 684033eb (W1454, ruff 431 to 427). Pace stamps 2026-11-02T09:04:26Z and 09:14:26Z: ruff-baseline.json behind, owes 90, 423 left after 845. N=80 PLR2004 sites at 09:18Z (python3 -m ruff, ruff-house.toml). K=5 of 5 in this file by the file read: line 43 compares the addressed count with 4, line 118 the fold count with 2, line 142 the moves with 2, lines 192 and 243 an exit code with 5. Edit: module constants ADDRESSED = 4, FOLDS_FOR_NEMIK = 2, MOVES = 2, EXIT_LETTERS_PENDING = 5 after the TYPE_CHECKING block. Companions none; follow-ons none (no import change). Expected: ruff 423 to 418 on top of 845, mypy flat at 1092. Behaviour: none. Covering check: tests/test_letters.py run directly. Not hook-imported. | 2026-11-02: Landed 7ad5130e in stack 846; ruff 423 to 418, mypy flat 1092.",
       "issued_at": "2026-11-02T09:47:39Z",
       "minted_during": "interrupt",
       "caused_by": "W1383",
-      "last_worked": "2026-11-02T09:47:45Z",
+      "last_worked": "2026-11-02T10:09:33Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261102T100933Z",
       "manifest": [
         "tests/test_letters.py",
         "ruff-baseline.json"
@@ -34879,6 +34879,31 @@
       "manifest": [
         "tests/test_fruit.py",
         "tests/test_pacing.py",
+        "ruff-baseline.json"
+      ]
+    },
+    {
+      "symbol": "W1458",
+      "title": "tests/test_ruler_table.py, test_shaclcache_threads.py and test_parse_cache.py name the table size, the row count and the parse counts they compare with, so ruff falls by seven",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:ruff-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Edit the three files, run tests and guards, mikemol-pycheck --ratchet --write, write stack848.json, submit behind 847.",
+      "evidence": "2026-11-02: G0 BEFORE the first edit of the three test files, queued behind stack 847 (W1457, inflight alone). Landed: 846 as 7ad5130e (W1456, ruff 423 to 418). Pace stamps 2026-11-02T09:04:26Z and 09:14:26Z: ruff-baseline.json behind, owes 90, 413 left after 847. N=80 PLR2004 sites at 09:18Z (python3 -m ruff, ruff-house.toml). K=7 by the files read: test_ruler_table.py lines 37 and 41 compare the table length with 8; test_shaclcache_threads.py lines 63 and 64 compare the row count with 20; test_parse_cache.py lines 52 and 69 compare the parse count with 2 and line 57 with 3. Edit: module constants RULER_ENTRIES = 8, ROWS = 20, TWO_PARSES = 2, THREE_PARSES = 3. Companions none; follow-ons none (no import change). Expected: ruff 413 to 406 on top of 847, mypy flat at 1092. Behaviour: none. Covering check: the three tests run directly. Not hook-imported.",
+      "issued_at": "2026-11-02T10:09:50Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1383",
+      "last_worked": "2026-11-02T10:09:58Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "tests/test_ruler_table.py",
+        "tests/test_shaclcache_threads.py",
+        "tests/test_parse_cache.py",
         "ruff-baseline.json"
       ]
     }

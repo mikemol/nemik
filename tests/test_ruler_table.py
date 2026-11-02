@@ -12,6 +12,8 @@ from nemik.serve import Model, ruler_table
 if TYPE_CHECKING:
     from nemik.blocks import AskRow
 
+RULER_ENTRIES = 8
+
 
 class _Ruler(TypedDict):
     """The ruler part of the served graph."""
@@ -34,11 +36,13 @@ def test_the_table_is_mtools_generator_and_decodes_by_length() -> None:
     asks: list[AskRow] = [{"category": "needs-you", "ref": "r:W1"}] * 7
     table = ruler_table(edges, asks)
     assert table["motif"] == [morse_motif(k) for k in range(4)]
-    assert len(table["f"]) == 8  # the 7 asks in one chip outnumber the 5 lines into t
+    assert (
+        len(table["f"]) == RULER_ENTRIES
+    )  # the 7 asks in one chip outnumber the 5 lines into t
     assert [len(p) for p in table["f"]] == list(
         range(8)
     )  # F(n) has length n: it decodes
-    assert len(set(table["f"])) == 8  # injective
+    assert len(set(table["f"])) == RULER_ENTRIES  # injective
 
 
 def test_the_fixture_graph_covers_every_line_it_draws() -> None:
