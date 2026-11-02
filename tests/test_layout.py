@@ -10,10 +10,16 @@ host: the pytest tmp dir), so a layout change is compared by reading two files, 
 a harness.
 """
 
+import functools
+import http.server
 import json
 import os
+import shutil
 import subprocess
+import threading
 import time
+import urllib.error
+import urllib.request
 from pathlib import Path
 from typing import TYPE_CHECKING, Literal
 
@@ -21,6 +27,8 @@ import pytest
 import webpage
 from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import sync_playwright
+
+from nemik.serve import build_static
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
@@ -695,8 +703,6 @@ def test_every_meaning_the_view_colours_has_a_second_channel(
     """
     # nemik:W429/W431: the measurement above, evaluated with el-openglo's pinned requirement
     # (W430, policy/use_of_colour.rego) by the pinned opa: no denial, and something admitted.
-    import json
-    import shutil
 
     rego = os.environ.get("NEMIK_USE_OF_COLOUR_REGO")
     opa = shutil.which(os.environ.get("NEMIK_OPA", "opa"))
@@ -731,12 +737,6 @@ def test_a_static_build_refetches_only_the_pieces_whose_hash_moved(
     """
     # nemik:W416: the page reads graph.json's pieces by hashes.json, draws the same graph, and on a
     # refresh fetches only the piece whose hash changed.
-    import functools
-    import http.server
-    import json
-    import threading
-
-    from nemik.serve import build_static
 
     withheld = tmp_path / "withheld.json"
     payload: dict[str, object] = {"version": 1, "as_of": "x", "items": []}
@@ -1339,8 +1339,6 @@ def test_no_command_route_or_tools_panel_remains(server: str) -> None:
     # nemik:W397: the Tools drop-down ran CLIs through /cmd; it is retired, and every capability it
     # offered is either native to the view or CLI-only. Neither the route nor the panel may come
     # back.
-    import urllib.error
-    import urllib.request
 
     try:
         urllib.request.urlopen(server + "cmd/rank?repo=a", timeout=30)

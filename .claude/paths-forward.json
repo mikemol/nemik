@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1426,
+  "counter": 1427,
   "waypoints": [
     {
       "symbol": "W1",
@@ -34089,19 +34089,19 @@
     {
       "symbol": "W1424",
       "title": "serve.py and metrics.py write through nemik.say, with the hub-module claim's declared sets gaining say, so ruff falls by five",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:ruff-baseline.json"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-11-02: 2026-11-02T00:00:57Z (read by stampnote): G0, BEFORE the first edit of src/nemik/serve.py, metrics.py and checks/claims.py, and BEFORE --tick-open of nemik-110. Stack 815, after 813 (W1422, in the gate since 23:54:24Z) and 814 (W1423, staged); the last five T201 prints in src. Pace: nemik-rank nemik --pace first command of tick nemik-110 at 2026-11-02T00:00:06Z, pace of 2026-11-01T23:54:08Z (5 min 58 s old, current): ruff fell 21 over 10 landings owes 90 (furthest behind), mypy fell 118 owes 190, codon fell 0 owes 2. DRY RUN FIRST (the K probe): scratchpad/printsay.py plan over serve.py and metrics.py: serve 4 convertible (say, warn), metrics 1 (say), 0 skipped; with 6 + 15 + 97 already moved that is all 123 T201 prints in src. THE HUB CLAIM: checks/claims.py hub_modules_depend_on_everything_below pins the exact direct nemik import set of metrics and serve, and every earlier addition carries a comment naming its card and why (the W1323 stackable one is the last). Importing say adds one name to each set, so the claim gets say added to both expected sets plus one comment in the same style: nemik:W1384 writes its output through say, a leaf that imports only sys. This is the documented way to extend the pin, not a waiver of it: the claim still fails on any other new edge. Companions: none (say.py is a leaf, so import_graph_is_acyclic and the registry are unaffected). N=5, K=5, expected -5: ruff 489 (stack 814's value, 586 for 813 alone) to 484 on top of 814, mypy flat at 1278. serve and metrics are failing entries in codon-baseline.json. Actuator: two Edit calls on claims.py, then scratchpad/printsay.py real on serve.py and metrics.py, then ruff --select I,F401,D202 --fix and ruff format. Waits on stacks 813 and 814 for say.py use and ruff-baseline.json. | 2026-11-02: 2026-11-02T00:03:25Z (read by stampnote): Result and one gap. mikemol-pycheck --ratchet after the edits: ruff 484 findings baseline 586 (K=5 on top of stack 814's 489), mypy 1278 flat, AFTER one repair: the first form had mypy arg-type 2 in serve.py (lines 1881 and 1888: say was given a Path and a Path-or-str; print accepts anything and says str, say takes a str). The gated Edit refused each single fix because the other error was still there, so both went in one script (scratchpad/w1424_str.py): say(str(snap) if snap else 'unchanged') and say(str(path)). GAP in scratchpad/printsay.py: its plan classifies argument and keyword SHAPES and does not look at the argument TYPES, so a print of a non-str passes the plan and fails mypy; fix for the next use: have plan print the first argument's source and flag any that is not an f-string, a literal or a call to json.dumps, join, format or str. The hub claim edit (say in both expected sets and one comment) passed tests/test_architecture.py. Guards and the static-build tests: 30 passed in 38.7 s wall.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-02: 2026-11-02T00:00:57Z (read by stampnote): G0, BEFORE the first edit of src/nemik/serve.py, metrics.py and checks/claims.py, and BEFORE --tick-open of nemik-110. Stack 815, after 813 (W1422, in the gate since 23:54:24Z) and 814 (W1423, staged); the last five T201 prints in src. Pace: nemik-rank nemik --pace first command of tick nemik-110 at 2026-11-02T00:00:06Z, pace of 2026-11-01T23:54:08Z (5 min 58 s old, current): ruff fell 21 over 10 landings owes 90 (furthest behind), mypy fell 118 owes 190, codon fell 0 owes 2. DRY RUN FIRST (the K probe): scratchpad/printsay.py plan over serve.py and metrics.py: serve 4 convertible (say, warn), metrics 1 (say), 0 skipped; with 6 + 15 + 97 already moved that is all 123 T201 prints in src. THE HUB CLAIM: checks/claims.py hub_modules_depend_on_everything_below pins the exact direct nemik import set of metrics and serve, and every earlier addition carries a comment naming its card and why (the W1323 stackable one is the last). Importing say adds one name to each set, so the claim gets say added to both expected sets plus one comment in the same style: nemik:W1384 writes its output through say, a leaf that imports only sys. This is the documented way to extend the pin, not a waiver of it: the claim still fails on any other new edge. Companions: none (say.py is a leaf, so import_graph_is_acyclic and the registry are unaffected). N=5, K=5, expected -5: ruff 489 (stack 814's value, 586 for 813 alone) to 484 on top of 814, mypy flat at 1278. serve and metrics are failing entries in codon-baseline.json. Actuator: two Edit calls on claims.py, then scratchpad/printsay.py real on serve.py and metrics.py, then ruff --select I,F401,D202 --fix and ruff format. Waits on stacks 813 and 814 for say.py use and ruff-baseline.json. | 2026-11-02: 2026-11-02T00:03:25Z (read by stampnote): Result and one gap. mikemol-pycheck --ratchet after the edits: ruff 484 findings baseline 586 (K=5 on top of stack 814's 489), mypy 1278 flat, AFTER one repair: the first form had mypy arg-type 2 in serve.py (lines 1881 and 1888: say was given a Path and a Path-or-str; print accepts anything and says str, say takes a str). The gated Edit refused each single fix because the other error was still there, so both went in one script (scratchpad/w1424_str.py): say(str(snap) if snap else 'unchanged') and say(str(path)). GAP in scratchpad/printsay.py: its plan classifies argument and keyword SHAPES and does not look at the argument TYPES, so a print of a non-str passes the plan and fails mypy; fix for the next use: have plan print the first argument's source and flag any that is not an f-string, a literal or a call to json.dumps, join, format or str. The hub claim edit (say in both expected sets and one comment) passed tests/test_architecture.py. Guards and the static-build tests: 30 passed in 38.7 s wall. | 2026-11-02: landed as ff5dbe1c (git log printed it, subject W1424), pushed to origin/main; ruff 489 to 484",
       "issued_at": "2026-11-02T00:00:46Z",
       "minted_during": "interrupt",
       "caused_by": "W1384",
-      "last_worked": "2026-11-02T00:52:49Z",
+      "last_worked": "2026-11-02T01:30:17Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/serve.py",
@@ -34110,12 +34110,12 @@
         "ruff-baseline.json"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261102T013017Z"
     },
     {
       "symbol": "W1425",
       "title": "tests/test_layout.py moves its nine function-local imports to module scope, so ruff falls by nine",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [
         "file:ruff-baseline.json"
@@ -34127,17 +34127,42 @@
       "issued_at": "2026-11-02T00:30:44Z",
       "minted_during": "interrupt",
       "caused_by": "W1390",
-      "last_worked": "2026-11-02T00:30:57Z",
+      "last_worked": "2026-11-02T01:31:45Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_layout.py",
         "ruff-baseline.json"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "completed": null
     },
     {
       "symbol": "W1426",
       "title": "blocks.py reads the errand repos through the tomlview helpers instead of chained Any gets, so mypy falls by four and the stack lowers an owed ratchet",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "file:mypy-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-02: 2026-11-02T00:49:46Z (read by stampnote): G0, BEFORE the first edit of src/nemik/blocks.py, and the reason a lead entry exists: stack 815 (W1424, ruff only) was REFUSED at submit at about 00:48Z with 'nemik is behind its ratchet paydown and this stack lowers none of the ratchets it owes (codon-baseline.json: required fall 2, observed 0; mypy-baseline.json: required fall 190, observed 118)': the 2026-11-02T00:44:10Z pace marks ruff ok (489 left, 40 landings to zero) after stack 814's -97, and I had chosen the stack from the 00:24:08Z pace without re-reading the pace after the 00:46:42Z landing, a miss against standing 15's spirit (the pace is read first each TICK; a landing mid-tick can flip it). The gate cost 1 min. So this entry LEADS stacks 815 and 816 with a mypy paydown: the two baselines are separate files, so entry 1 (W1426) carries mypy-baseline.json and the ruff entries carry ruff-baseline.json. COMPLETE K PROBE BEFORE THIS G0: scratchpad/w1426_blocks.py probe wrote src/nemik/probe_w1426_blocks.py (deleted by exact path); mypy on blocks.py reports 22 findings with four at line 503 (dict[str, Any], Any or dict[Never, Never], a call-overload on get, and an Any expression: errand_repos' frozenset(tomllib.loads(text).get('errand', {}).get('repos', []))), mypy on the probe copy reports 18: K=4. Fix: parsed: object = tomllib.loads(text), then table(table(parsed).get('errand')) and frozenset(strings(errand.get('repos'))), importing strings and table from nemik.tomlview (a pure leaf; tomlview.py:14 and :34). Behaviour: an [errand] repos that is not a list of strings reads as the strings it holds, and a wrong-typed [errand] reads as empty (it raised or answered garbage before); blocks is a failing entry in codon-baseline.json. N=4, K=4, expected -4: mypy 1278 to 1274, ruff flat (484 with 815's -5 on this tree, before 816). Actuator: scratchpad/w1426_blocks.py real. blocks.py is hook-imported (blocks_cli imports it): standing 6 applies, the four hook commands are run and their codes written after the edit. | 2026-11-02: landed as 90e9b15a (git log printed it, subject W1426), pushed to origin/main at ff5dbe1c; mypy 1278 to 1274",
+      "issued_at": "2026-11-02T00:49:30Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1178",
+      "last_worked": "2026-11-02T01:30:14Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/blocks.py",
+        "mypy-baseline.json"
+      ],
+      "size_class": "small",
+      "completed": "20261102T013014Z"
+    },
+    {
+      "symbol": "W1427",
+      "title": "calendars.py reads its TOML and entries through the tomlview helpers instead of chained Any gets, so mypy falls by four and the stack lowers an owed ratchet",
       "status": "working",
       "enables": [],
       "touches": [
@@ -34146,18 +34171,17 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-11-02: 2026-11-02T00:49:46Z (read by stampnote): G0, BEFORE the first edit of src/nemik/blocks.py, and the reason a lead entry exists: stack 815 (W1424, ruff only) was REFUSED at submit at about 00:48Z with 'nemik is behind its ratchet paydown and this stack lowers none of the ratchets it owes (codon-baseline.json: required fall 2, observed 0; mypy-baseline.json: required fall 190, observed 118)': the 2026-11-02T00:44:10Z pace marks ruff ok (489 left, 40 landings to zero) after stack 814's -97, and I had chosen the stack from the 00:24:08Z pace without re-reading the pace after the 00:46:42Z landing, a miss against standing 15's spirit (the pace is read first each TICK; a landing mid-tick can flip it). The gate cost 1 min. So this entry LEADS stacks 815 and 816 with a mypy paydown: the two baselines are separate files, so entry 1 (W1426) carries mypy-baseline.json and the ruff entries carry ruff-baseline.json. COMPLETE K PROBE BEFORE THIS G0: scratchpad/w1426_blocks.py probe wrote src/nemik/probe_w1426_blocks.py (deleted by exact path); mypy on blocks.py reports 22 findings with four at line 503 (dict[str, Any], Any or dict[Never, Never], a call-overload on get, and an Any expression: errand_repos' frozenset(tomllib.loads(text).get('errand', {}).get('repos', []))), mypy on the probe copy reports 18: K=4. Fix: parsed: object = tomllib.loads(text), then table(table(parsed).get('errand')) and frozenset(strings(errand.get('repos'))), importing strings and table from nemik.tomlview (a pure leaf; tomlview.py:14 and :34). Behaviour: an [errand] repos that is not a list of strings reads as the strings it holds, and a wrong-typed [errand] reads as empty (it raised or answered garbage before); blocks is a failing entry in codon-baseline.json. N=4, K=4, expected -4: mypy 1278 to 1274, ruff flat (484 with 815's -5 on this tree, before 816). Actuator: scratchpad/w1426_blocks.py real. blocks.py is hook-imported (blocks_cli imports it): standing 6 applies, the four hook commands are run and their codes written after the edit.",
-      "issued_at": "2026-11-02T00:49:30Z",
+      "evidence": "2026-11-02: 2026-11-02T01:30:34Z (read by stampnote): G0, BEFORE the first edit of src/nemik/calendars.py and BEFORE --tick-open of nemik-112. Pace read first this tick (pace of 01:24:12Z): ruff ok, mypy fell 99 owes 190, codon owes 2. K probe done on a scratch copy (deleted by exact path): mypy on calendars.py 16 findings, on the probe 12, K=4. Actuator: scratchpad/w1427_calendars.py real (parsed: object = tomllib.loads, table() over the calendars mapping and each spec). Sensor: mikemol-pycheck --ratchet. Expected: mypy 1274 to 1270, ruff flat. Leads a two-entry stack with W1425 (ruff 484 to 475) second.",
+      "issued_at": "2026-11-02T01:30:25Z",
       "minted_during": "interrupt",
       "caused_by": "W1178",
-      "last_worked": "2026-11-02T00:52:31Z",
+      "last_worked": "2026-11-02T01:30:34Z",
       "ticks_blocked": 0,
+      "completed": null,
       "manifest": [
-        "src/nemik/blocks.py",
+        "src/nemik/calendars.py",
         "mypy-baseline.json"
-      ],
-      "size_class": "small",
-      "completed": null
+      ]
     }
   ],
   "residue": [
