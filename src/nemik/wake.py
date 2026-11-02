@@ -50,6 +50,7 @@ if TYPE_CHECKING:
 REWAKE_S = rewake.REWAKE_S
 
 AWAKE = {"ok": "awake", "dormant": "asleep"}
+ROSTER_ORDER = {"asleep": 0, "idle": 1, "unknown": 2, "awake": 3}
 
 
 class LivenessRecord(TypedDict, total=False):
@@ -164,6 +165,16 @@ def should_nudge(
     return rewake.should_nudge(last_nudged, now or datetime.now(UTC), rewake_s)
 
 
+def _roster_key(row: WakeRow) -> tuple[int, int, str]:
+    """Order roster rows: sleepers first, then the most waiters, then by repo.
+
+    Returns:
+        The sort key of one row.
+
+    """
+    return (ROSTER_ORDER[row["state"]], -len(row["waiting"]), row["repo"])
+
+
 def roster(
     g: Graph,
     liveness: Liveness,
@@ -230,10 +241,7 @@ def roster(
                 "title": b["title"],
             }
         )
-    order = {"asleep": 0, "idle": 1, "unknown": 2, "awake": 3}
-    return sorted(
-        rows.values(), key=lambda r: (order[r["state"]], -len(r["waiting"]), r["repo"])
-    )
+    return sorted(rows.values(), key=_roster_key)
 
 
 def fired_alarms(

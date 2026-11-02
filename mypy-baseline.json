@@ -62,7 +62,7 @@
   "misc": 5
  },
  "src/nemik/wake.py": {
-  "misc": 5
+  "misc": 2
  },
  "src/nemik/withheld.py": {
   "explicit-any": 1
