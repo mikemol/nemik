@@ -78,7 +78,7 @@
   "misc": 1
  },
  "tests/fixtures/make_fleet.py": {
-  "misc": 30
+  "misc": 2
  },
  "tests/test_cachestore.py": {
   "misc": 1,

@@ -17,6 +17,8 @@ import shutil
 import sys
 from pathlib import Path
 
+from nemik.tomlview import strings, table, tables
+
 KEEP = {"symbol", "status", "enables", "blocked_on", "blocked_kind", "minted_during"}
 REF = re.compile(r"^(?:[\w.-]+:)?W\d+$")
 
@@ -45,14 +47,16 @@ def main(root: Path, out: Path) -> None:
     shutil.rmtree(out, ignore_errors=True)
     for q in sorted(root.glob("*/.claude/paths-forward.json")):
         repo = q.parent.parent.name
-        d = json.loads(q.read_text())
-        wps = []
-        for w in d.get("waypoints", []):
+        parsed: object = json.loads(q.read_text())
+        d = table(parsed)
+        wps: list[dict[str, object]] = []
+        for w in tables(d.get("waypoints")):
             x = {k: v for k, v in w.items() if k in KEEP}
             x["title"] = f"{repo} {w.get('symbol')}"
-            x["blocked_on"] = [scrub_block(b) for b in (w.get("blocked_on") or [])]
-            if w.get("caused_by"):
-                x["caused_by"] = scrub_block(w["caused_by"])
+            x["blocked_on"] = [scrub_block(b) for b in strings(w.get("blocked_on"))]
+            cause = w.get("caused_by")
+            if cause:
+                x["caused_by"] = scrub_block(str(cause))
             wps.append(x)
         res = [
             {
@@ -62,7 +66,7 @@ def main(root: Path, out: Path) -> None:
                 "dropped_at": "2026-09-28T00:00:00Z",
                 "recoverable": True,
             }
-            for r in d.get("residue", [])
+            for r in tables(d.get("residue"))
         ]
         (out / repo).mkdir(parents=True)
         (out / repo / "paths-forward.json").write_text(

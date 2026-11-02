@@ -3,12 +3,12 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1434 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:a358f1332ab10a6c`
+counter 1435 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:10ddf3de85311193`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1433 | working |
-| 2 | W1434 | working |
+| 1 | W1434 | working |
+| 2 | W1435 | working |
 | 3 | W1075 | ready |
 | 4 | W1139 | ready |
 | 5 | W1279 | ready |
@@ -1413,12 +1413,14 @@ counter 1434 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:a35
 | 1404 | W1430 | done |
 | 1405 | W1431 | done |
 | 1406 | W1432 | done |
+| 1407 | W1433 | done |
 
 ## waypoints
 
-1. **W1433** (working) salience.py and history.py type their sort keys as functions, so mypy falls by about thirteen
-2. **W1434** (working) history.Opts declares weekly, score and append_to and the baseline and toil modes take Opts, so
+1. **W1434** (working) history.Opts declares weekly, score and append_to and the baseline and toil modes take Opts, so
    mypy falls by about eight
+2. **W1435** (working) tests/fixtures/make_fleet.py reads each queue through nemik.tomlview, so mypy falls by about
+   twenty-eight
 3. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 4. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -4626,6 +4628,7 @@ counter 1434 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:a35
    so mypy falls by about fifteen
 1406. **W1432** (done) calendars.py and critical.py type their sort keys as functions and calendars reads
    CalledProcessError output through one helper, so mypy falls by about fifteen
+1407. **W1433** (done) salience.py and history.py type their sort keys as functions, so mypy falls by about thirteen
 
 ## residue
 
@@ -6174,3 +6177,19 @@ counter 1434 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:a35
   W910, R101 on W1288, R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288, R114 on W1395, R116 on
   W1383, R119 on W1396 (the pin bump, which also gates W1399); two UNCLAIMED mtools:W2099 letters; codon W1414 argparse
   probe and W1325 census not done, and codon still owed with no stack.; 0 finding(s)
+- **nemik:R132** (-) round 134: nemik-117, stack 823 (W1432) landed 419894c8 = 03:53:39Z; stack 824 (W1433) inflight
+  since 03:53:43Z, key 1793590485556153835; stack 825 (W1434 history.py, mypy 1171 to 1162) queued behind it, key
+  1793592135209436509: root Verified from source (TZ=UTC reflog): d732238b 03:29:04Z, 419894c8 03:53:39Z (22:53:39
+  -0500); --in-gate lists W1433 inflight (began_ns 1793591623655770484, on the landing) and W1434 queued;
+  `mikemol-pycheck --ratchet` prints ruff 475/475 and mypy 1162/1162 (1171 - 9). Intervals as Z pairs: 823 gated
+  03:29:08Z to 03:53:39Z (24 min 31 s wall); the gate was empty 0 s (824 began on the landing; 825 queued behind 824).
+  The invariant has now held on five landings running. The G1 reports its own details straight: the K probe caught an
+  arg-type finding (Path(args.score)) and was re-run before the G0, the real fall was -9 against K=8 (one extra finding
+  cleared in history.py, the only file changed, so the ratchet's per-file figure is the attribution), the refused
+  chained --tick-open call ran nothing and was re-run plainly with the clock read in the call before, and the remaining
+  history findings (11) are named with their sources. One strategic finding, from reading the mypy baseline. No fixpoint
+  is declared. Carried open findings, status on 2026-11-02 04:09Z: R95 second finding on W1349, R95 third, R97 first,
+  R98, R111 first, R102, R127 and R128 on W1219, R94 on W1348, R93 on W1347, R92 on W1346, R91 on W1345, R72 on W846,
+  R100 on W910, R101 on W1288, R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288, R114 on W1395,
+  R116 on W1383, R119 on W1396; two UNCLAIMED mtools:W2099 letters; codon W1414 argparse probe and W1325 census not
+  done, codon owed with no stack.; 1 finding(s)
