@@ -3,13 +3,13 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1452 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:1ddfbe80cf92e952`
+counter 1453 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:9959aff2d1837c36`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1450 | working |
-| 2 | W1451 | working |
-| 3 | W1452 | working |
+| 1 | W1451 | working |
+| 2 | W1452 | working |
+| 3 | W1453 | working |
 | 4 | W1075 | ready |
 | 5 | W1139 | ready |
 | 6 | W1279 | ready |
@@ -1431,15 +1431,16 @@ counter 1452 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:1dd
 | 1422 | W1447 | done |
 | 1423 | W1448 | done |
 | 1424 | W1449 | done |
+| 1425 | W1450 | done |
 
 ## waypoints
 
-1. **W1450** (working) tests/test_alarm.py names the durations and the alarm count it compares with, so ruff falls by
-   four
-2. **W1451** (working) tests/webpage.py imports sync_playwright directly and types open_page like opened_page, so the 29
+1. **W1451** (working) tests/webpage.py imports sync_playwright directly and types open_page like opened_page, so the 29
    test files that import it each lose three mypy findings
-3. **W1452** (working) tools/nemik_client.py types its documents as object, its options as a Namespace class and reads
+2. **W1452** (working) tools/nemik_client.py types its documents as object, its options as a Namespace class and reads
    the hash index without Any, so mypy falls by about seven
+3. **W1453** (working) nemik.pdf opens its page again when every failed request died of a network change, and names the
+   failure text, with witness tests (the W846 cure on the one src path that lacked it)
 4. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 5. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -4676,6 +4677,8 @@ counter 1452 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:1dd
 1423. **W1448** (done) tests/test_serve_model.py names its poke budget and its rebuild count, so ruff falls by three
 1424. **W1449** (done) tests/test_check_committed.py names nemik-check's exit code for an uncommitted queue, so ruff
    falls by three
+1425. **W1450** (done) tests/test_alarm.py names the durations and the alarm count it compares with, so ruff falls by
+   four
 
 ## residue
 
@@ -6411,3 +6414,26 @@ counter 1452 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:1dd
   W1395, R116 on W1383, R119 and R135 on W1396 (repin entry unbuilt), R134 on W1282 (all three probed; a first step to
   land), R138 on W1288 (held on every landing in this series); two UNCLAIMED mtools:W2099 letters; codon owed with no
   stack.; 1 finding(s)
+- **nemik:R141** (-) round 143: nemik-126, stack 840 (W1450) inflight since 08:07:41Z with no landing, 30 min 39 s at
+  08:38:20Z, key 1793606223463910025; stacks 841 (W1451 tests/webpage.py) and 842 (W1452 tools/nemik_client.py, mypy
+  1099 to 1092, ruff 432 to 431) queued behind it; newest landing bbcfe305 08:07:36Z: root Verified from source (TZ=UTC
+  reflog and /proc): bbcfe305 08:07:36Z (03:07:36 -0500) is still the newest landing at 08:38:20Z; --in-gate lists W1450
+  inflight (began_ns 1793606861539189693 = 08:07:41Z) with W1451 and W1452 queued; `mikemol-pycheck --ratchet` prints
+  ruff 431/431 and mypy 1092/1092 (432 - 1 and 1099 - 7 on top of the two queued stacks); /proc/loadavg reads 28.76
+  34.60 40.93 at 08:38:20Z; the stack840 mikemol-commit process is running under mikemol-membudget and the fence guard
+  (its output file is still 0 bytes, as it is written at the end). Stack 840 has now run 30 min 39 s against 12 to 13
+  minutes for each of 837, 838 and 839 and 25 minutes for the two previous long gates (831 and 824). The G1 records the
+  observation honestly ('I have not looked at why') and the fair reading is host load: a fifteen-minute load average of
+  41 with five-minute 34.6 means other repos' gates and builds are sharing the machine, and the series' own long gates
+  (the 25 min ones) also sat in heavy load (earlier notes put bazel gates at 40 to 60 load). The gate's wall time is
+  therefore not a property of the stack, which matters for every estimate of 'expected remaining time' in standing 13,
+  and the per-gate load table R66 asked for on W1246 is the instrument that would have said so. The stacks and the queue
+  are in good order otherwise: G0 08:31:53Z before the edit, K probe 9 to 2 with the narrowing written inline because
+  the file's contract is standard library only, the ratchet's finding that the stack also lowered ruff by 1 (the unused
+  Any import) stated so both baselines ride, the tick-open output read whole, and R142's finding recorded on W1451 with
+  the exact mypy messages and the inference labelled as an inference. One finding. No fixpoint is declared. Carried open
+  findings, status on 2026-11-02 08:40Z: R95 second finding on W1349, R95 third, R97 first, R98, R111 first, R102, R127
+  and R128 on W1219, R94 on W1348, R93 on W1347, R92 on W1346, R91 on W1345, R72 on W846, R100 on W910, R101 on W1288,
+  R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288, R114 on W1395, R116 on W1383, R119 and R135
+  on W1396, R134 on W1282 (a first step to land), R138 on W1288, R142 on W1451 (recorded; the Protocol loosening and
+  cast removal follow 841's landing); two UNCLAIMED mtools:W2099 letters; codon owed with no stack.; 1 finding(s)

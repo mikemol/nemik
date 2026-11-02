@@ -5,6 +5,11 @@
 from nemik.cards import Card
 from nemik.critical import critical_cards
 
+CHAIN_LENGTH = 3
+TWO_PATHS_FROM_W1 = 2
+THREE_CARD_SCOPE = 3
+TWO_CARD_SCOPE = 2
+
 
 def _card(
     cite: str,
@@ -27,10 +32,10 @@ def test_a_chain_and_a_tie_from_cards_alone() -> None:
         "r:W5": _card("r:W5", "done", enabled_by=("r:W4",)),
     }
     found = critical_cards(cards)
-    assert found.length == 3
+    assert found.length == CHAIN_LENGTH
     assert found.chain == ["r:W1", "r:W2", "r:W3", "r:W4"]
     assert found.rank == {"r:W1": 1, "r:W2": 2, "r:W3": 2, "r:W4": 3}
-    assert found.paths["r:W1"] == 2
+    assert found.paths["r:W1"] == TWO_PATHS_FROM_W1
     assert found.paths["r:W2"] == 1
     assert "r:W5" not in found.slack
 
@@ -42,5 +47,5 @@ def test_a_scope_counts_only_its_cards() -> None:
         "a:W2": _card("a:W2", enabled_by=("a:W1",)),
         "b:W1": _card("b:W1", waits=("a:W2",)),
     }
-    assert critical_cards(cards).length == 3
-    assert critical_cards(cards, {"a:W1", "a:W2"}).length == 2
+    assert critical_cards(cards).length == THREE_CARD_SCOPE
+    assert critical_cards(cards, {"a:W1", "a:W2"}).length == TWO_CARD_SCOPE

@@ -247,9 +247,6 @@
  "tests/test_churn.py": {
   "PLR2004": 1
  },
- "tests/test_critical_cards.py": {
-  "PLR2004": 4
- },
  "tests/test_deterministic.py": {
   "S404": 1,
   "S603": 1,
