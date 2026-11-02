@@ -332,7 +332,6 @@
   "SLF001": 2
  },
  "tests/test_rank_flow.py": {
-  "PLR2004": 3,
   "S404": 1,
   "S603": 1
  },

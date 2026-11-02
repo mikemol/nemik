@@ -19,6 +19,9 @@ if TYPE_CHECKING:
     from pathlib import Path
 
 TIERS = '[order]\ntiers = [["weight"]]\n'
+ON_PATH_CARDS = 8
+W4_PATHS = 2
+OPERATOR_WEIGHT = 15
 
 
 class _Row(TypedDict, total=False):
@@ -264,9 +267,9 @@ def test_the_view_marks_the_critical_path_and_ships_slack(tmp_path: Path) -> Non
     # nemik:W344: every chain of two ties (W1,W2 -> W4-W6; W3 -> W7,W8), so all eight cards are on
     # some
     # longest chain, and a card with two ways in (W4 over W1 and W2) has two chains through it.
-    assert len(on_path) == 8
+    assert len(on_path) == ON_PATH_CARDS
     assert all(n["slack"] == 0 and n["path_count"] >= 1 for n in on_path)
-    assert {n["symbol"]: n["path_count"] for n in on_path}["W4"] == 2
+    assert {n["symbol"]: n["path_count"] for n in on_path}["W4"] == W4_PATHS
     # nemik:W334: each repo also marks its own longest chain.
     assert all(isinstance(n["on_path_repo"], bool) for n in nodes)
     assert {n["repo"] for n in nodes if n["on_path_repo"]} == {n["repo"] for n in nodes}
@@ -384,4 +387,4 @@ def test_a_withheld_waiter_shapes_no_published_number(tmp_path: Path) -> None:
 
 def test_the_packaged_operator_weight_is_declared() -> None:
     """The packaged operator weight is declared."""
-    assert load_weights().operator == 15
+    assert load_weights().operator == OPERATOR_WEIGHT

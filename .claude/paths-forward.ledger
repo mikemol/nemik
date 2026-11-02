@@ -4067,3 +4067,8 @@
 2026-11-02T12:51:29Z  interrupt W1470 minted    -         "src/nemik/pieces.py and vtodo.py sort and take minima with typed key functions instead of lambdas over Any, so mypy falls by four"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1282
 2026-11-02T12:51:37Z  status W1470 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T13:04:51Z  tick  W1468 advanced  sweep     "stack 857 landed 31554fc9; 858, 859 and 860 gating, three mypy sort-key leads [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T13:17:45Z  status W1468 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T13:17:46Z  status W1469 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T13:18:15Z  interrupt W1471 minted    -         "tests/test_rank_flow.py names the on-path card count, the paths through W4 and the operator weight it compares with, so ruff falls by three"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
+2026-11-02T13:18:25Z  status W1471 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T13:36:57Z  tick  W1470 advanced  sweep     "stacks 858 and 859 landed, 860 inflight and 861 queued; the sort-key mypy vein is spent [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
