@@ -15,6 +15,9 @@ if TYPE_CHECKING:
     import pytest
 
 
+EXIT_REFUSED = 2
+
+
 def _queue(tmp_path: Path) -> Path:
     state = tmp_path / "q.json"
     payload2: dict[str, object] = {
@@ -51,7 +54,7 @@ def test_a_card_with_open_blockers_is_refused_and_a_landed_one_goes_through(
 ) -> None:
     """A card with open blockers is refused and a landed one goes through."""
     state = _queue(tmp_path)
-    assert main(["W4", "--state", str(state), "--dry-run"]) == 2
+    assert main(["W4", "--state", str(state), "--dry-run"]) == EXIT_REFUSED
     assert "blocked on W2, other:W7" in capsys.readouterr().err
     assert main(["W4", "--state", str(state), "--dry-run", "--force"]) == 0
     assert main(["W5", "--state", str(state), "--dry-run"]) == 0

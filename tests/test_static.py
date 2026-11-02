@@ -19,6 +19,8 @@ from nemik.serve import (
     write_static,
 )
 
+EXIT_REFUSED = 2
+
 
 def test_page_and_vendor_written_with_relative_links(tmp_path: Path) -> None:
     """Page and vendor written with relative links."""
@@ -74,7 +76,7 @@ def test_static_build_end_to_end(tmp_path: Path) -> None:
                 str(tmp_path / "missing.json"),
             ]
         )
-    assert e.value.code == 2
+    assert e.value.code == EXIT_REFUSED
     assert not out.exists()
     wl = tmp_path / "withheld.json"
     payload: dict[str, object] = {"version": 1, "as_of": "x", "items": []}

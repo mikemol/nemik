@@ -319,9 +319,6 @@
  "tests/test_parse_cache.py": {
   "ARG001": 1
  },
- "tests/test_pieces_corpus.py": {
-  "PLR2004": 1
- },
  "tests/test_pins.py": {
   "S404": 1,
   "S603": 1,
@@ -336,13 +333,9 @@
   "S603": 2,
   "SLF001": 2
  },
- "tests/test_published_valid.py": {
-  "PLR2004": 1
- },
  "tests/test_rank_apply.py": {
   "ARG001": 1,
   "ARG005": 1,
-  "PLR2004": 1,
   "S404": 1,
   "SLF001": 2
  },
@@ -372,9 +365,6 @@
  "tests/test_shaclinc.py": {
   "PLC2701": 1
  },
- "tests/test_static.py": {
-  "PLR2004": 1
- },
  "tests/test_static_view.py": {
   "S404": 1,
   "S603": 1,
@@ -399,9 +389,6 @@
  },
  "tests/test_witwait.py": {
   "PLR6301": 1
- },
- "tests/test_work.py": {
-  "PLR2004": 1
  },
  "tests/webpage.py": {
   "S404": 1,

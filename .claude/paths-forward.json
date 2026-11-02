@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1463,
+  "counter": 1464,
   "waypoints": [
     {
       "symbol": "W1",
@@ -27933,11 +27933,11 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "CORRECTED 2026-10-27 (the user): the line in the previous note that gabion has no tool that clusters is WRONG; gabion is itself the tool (an architectural linter that finds recurring parameter bundles and guides their reification into dataclass Protocols): see W1189, which runs it on nemik. The rest stands: PLC0415 as split candidates not a hoist codemod; the census (158 function-local imports in src across 24 modules: serve 27, rank 24, check 15, vtodo 13, calendars 11, witnesses 10, wake 9, mspdi 9 in one function, blocks 6, salience 6); gabion's WS-5 ledger as an example of ceilings (LOC, import count) and a forbid-the-old-import rule after a split; start with mspdi.py and check.py; splits wait on mtools:W2045 or land only into zero-finding files. D103 423 and D205 68 by mechanization, T201 124 in src into one output module, after the Any-boundary moves",
-      "evidence": "",
+      "evidence": "2026-11-02: 2026-11-02 probe for nemik:R144 (R146) finding: python3 -m ruff with ruff-house.toml over src, tests, tools and checks counts S603 53, S404 43, S607 14 (110 sites). In src alone S603 and S607 are 24 sites in 15 modules: calendars 2, calwrite 1, check 2 (937 and 938), endpoint 1, history 2 (377 and 378), hostapply 1, letters 1, overlaps 1, pins 6 (74, 75, 126, 127, 203, 204), rank 1, vtodo 1, wake 1, witnesses 3 (157, 158, 325), work 1. So 7 of the 15 are hook-imported (check, history, rank, wake, plus vtodo and work reaching them), which means standing rule 6 applies to each routed caller. The remaining S603 (about 29) and S404 (43) are in tests and tools. Design not yet written: one wrapper module with run() holding the single import and the single S603 and S607 site, executable resolved to a full path once; a new src/nemik module must pass test_codon_census and the hub claim and be linked in the BUILD registry, and it breaks live readers until bazel build //:.venv (memory new-module-breaks-live-readers). Next bounded step: classify the 24 src sites by what they run (git, bazel, the writer, ruff) and whether arguments are literal, K probe on a scratch module, then G0 with K.",
       "issued_at": "2026-10-27T13:51:49Z",
       "minted_during": "interrupt",
       "caused_by": "W1014",
-      "last_worked": "2026-11-01T13:56:52Z",
+      "last_worked": "2026-11-02T11:17:09Z",
       "ticks_blocked": 37,
       "size_class": "medium",
       "completed": null
@@ -34987,21 +34987,21 @@
     {
       "symbol": "W1462",
       "title": "tests/test_build_scope.py, test_cachestore.py, test_check_realizability.py, test_flow_cache.py and test_frontier_walker.py name the published floor, the stamp length, the exit code, the recompute count and the goal floor they compare with, so ruff falls by five",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:ruff-baseline.json"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Edit the five files, run tests and guards, mikemol-pycheck --ratchet --write, write stack852.json, submit behind 851.",
-      "evidence": "2026-11-02: G0 BEFORE the first edit of the five test files, queued behind stack 851 (W1461, inflight alone). Landed: 850 as aad08551 (W1460, ruff 400 to 395). Pace 2026-11-02T10:24:28Z (PENDING; a fresh read is owed at the next tick): ruff-baseline.json behind, owes 90, 390 left after 851. 39 PLR2004 sites left (python3 -m ruff, ruff-house.toml, src tests tools checks) before 851, 34 after. K=5 by the lines read, one per file: test_build_scope.py line 45 published floor 20; test_cachestore.py line 96 stamp length 64; test_check_realizability.py line 62 return code 2; test_flow_cache.py line 61 recompute count 2; test_frontier_walker.py line 67 goal floor 10. Edit: one module constant each (MIN_PUBLISHED, STAMP_LENGTH, EXIT_UNJUDGED, RECOMPUTES, MIN_GOALS) after the FLEET, OPA or TYPE_CHECKING anchor. Companions none; follow-ons none. Expected: ruff 390 to 385 on top of 851, mypy flat at 1092. Behaviour: none. Covering check: the five tests run directly (test_check_realizability may skip without opa). Not hook-imported.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-02: G0 BEFORE the first edit of the five test files, queued behind stack 851 (W1461, inflight alone). Landed: 850 as aad08551 (W1460, ruff 400 to 395). Pace 2026-11-02T10:24:28Z (PENDING; a fresh read is owed at the next tick): ruff-baseline.json behind, owes 90, 390 left after 851. 39 PLR2004 sites left (python3 -m ruff, ruff-house.toml, src tests tools checks) before 851, 34 after. K=5 by the lines read, one per file: test_build_scope.py line 45 published floor 20; test_cachestore.py line 96 stamp length 64; test_check_realizability.py line 62 return code 2; test_flow_cache.py line 61 recompute count 2; test_frontier_walker.py line 67 goal floor 10. Edit: one module constant each (MIN_PUBLISHED, STAMP_LENGTH, EXIT_UNJUDGED, RECOMPUTES, MIN_GOALS) after the FLEET, OPA or TYPE_CHECKING anchor. Companions none; follow-ons none. Expected: ruff 390 to 385 on top of 851, mypy flat at 1092. Behaviour: none. Covering check: the five tests run directly (test_check_realizability may skip without opa). Not hook-imported. | 2026-11-02: Landed b0807ca4 in stack 852; ruff 390 to 385, mypy flat 1092.",
       "issued_at": "2026-11-02T10:53:41Z",
       "minted_during": "interrupt",
       "caused_by": "W1383",
-      "last_worked": "2026-11-02T10:53:49Z",
+      "last_worked": "2026-11-02T11:16:52Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261102T111652Z",
       "manifest": [
         "tests/test_build_scope.py",
         "tests/test_cachestore.py",
@@ -35035,6 +35035,33 @@
         "tests/test_no_waivers.py",
         "tests/test_operator_rate.py",
         "tests/test_overlap_claims.py",
+        "ruff-baseline.json"
+      ]
+    },
+    {
+      "symbol": "W1464",
+      "title": "tests/test_published_valid.py, test_pieces_corpus.py, test_rank_apply.py, test_static.py and test_work.py name the checked floor, the case floor and the exit codes they compare with, so ruff falls by five",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:ruff-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Edit the five files, run tests and guards, mikemol-pycheck --ratchet --write, write stack854.json, submit behind 853.",
+      "evidence": "2026-11-02: G0 BEFORE the first edit of the five test files, queued behind stack 853 (W1463, inflight alone). Landed: 852 as b0807ca4 (W1462, ruff 390 to 385). Last full pace read 2026-11-02T10:24:28Z (PENDING; a fresh read is owed at the next tick): ruff-baseline.json behind, owes 90, 380 left after 853. 29 PLR2004 sites left before this stack, 24 after. K=5, one per file by the lines read: test_published_valid.py line 72 checked floor 4; test_pieces_corpus.py line 96 case floor 5; test_rank_apply.py line 44 exit code 2; test_static.py line 77 exit code 2; test_work.py line 54 exit code 2. Edit: MIN_CHECKED = 4, MIN_CASES = 5, EXIT_REFUSED = 2 (in the three exit-code files). Companions none; follow-ons none. Expected: ruff 380 to 375 on top of 853, mypy flat at 1092. Behaviour: none. Covering check: the five tests run directly. Not hook-imported. After this stack the remaining PLR2004 is test_layout (14) plus 8 hook-imported src sites plus 2 singles; the next campaign is subprocess on W1175 (probe recorded).",
+      "issued_at": "2026-11-02T11:17:28Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1383",
+      "last_worked": "2026-11-02T11:17:35Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "tests/test_published_valid.py",
+        "tests/test_pieces_corpus.py",
+        "tests/test_rank_apply.py",
+        "tests/test_static.py",
+        "tests/test_work.py",
         "ruff-baseline.json"
       ]
     }

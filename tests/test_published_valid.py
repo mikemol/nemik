@@ -11,6 +11,7 @@ from jsonschema import Draft202012Validator
 from nemik.serve import build_static
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
+MIN_CHECKED = 4
 
 
 @pytest.fixture(scope="module")
@@ -69,4 +70,4 @@ def test_every_contracted_document_validates(built: Path) -> None:
             f"{'/'.join(map(str, e.absolute_path))}: {e.message}" for e in errors[:5]
         )
         checked += 1
-    assert checked >= 4
+    assert checked >= MIN_CHECKED

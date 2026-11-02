@@ -11,6 +11,8 @@ import pytest
 
 from nemik import rank
 
+EXIT_REFUSED = 2
+
 
 def test_apply_calls_the_queue_writer_with_the_rows(
     monkeypatch: pytest.MonkeyPatch,
@@ -41,4 +43,4 @@ def test_a_refusing_writer_fails_the_command(monkeypatch: pytest.MonkeyPatch) ->
     )
     with pytest.raises(SystemExit) as e:
         rank._apply("/q/paths-forward.json", [])
-    assert e.value.code == 2
+    assert e.value.code == EXIT_REFUSED

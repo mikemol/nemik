@@ -16,6 +16,7 @@ from nemik.pieces import GraphDoc, assemble, split
 
 CORPUS = Path(__file__).parent / "corpus" / "pieces"
 CASES = sorted(CORPUS.glob("*.json"))
+MIN_CASES = 5
 
 
 class _Node(TypedDict):
@@ -93,7 +94,7 @@ def _diff(path: str, want: object, got: object) -> list[str]:
 
 def test_the_corpus_is_there() -> None:
     """The corpus is there."""
-    assert len(CASES) >= 5
+    assert len(CASES) >= MIN_CASES
 
 
 @pytest.mark.parametrize("case", CASES, ids=[p.stem for p in CASES])
