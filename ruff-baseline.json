@@ -234,7 +234,6 @@
  },
  "tests/test_flow_reference.py": {
   "C901": 1,
-  "PLR2004": 1,
   "S311": 1
  },
  "tests/test_frontier.py": {
@@ -252,8 +251,7 @@
  },
  "tests/test_guarantees.py": {
   "PLR0913": 1,
-  "PLR0917": 1,
-  "PLR2004": 1
+  "PLR0917": 1
  },
  "tests/test_history.py": {
   "S404": 1,
@@ -317,15 +315,6 @@
  "tests/test_mspdi.py": {
   "S314": 2,
   "S405": 1
- },
- "tests/test_no_waivers.py": {
-  "PLR2004": 1
- },
- "tests/test_operator_rate.py": {
-  "PLR2004": 1
- },
- "tests/test_overlap_claims.py": {
-  "PLR2004": 1
  },
  "tests/test_parse_cache.py": {
   "ARG001": 1

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1462,
+  "counter": 1463,
   "waypoints": [
     {
       "symbol": "W1",
@@ -34960,21 +34960,21 @@
     {
       "symbol": "W1461",
       "title": "tests/test_alarm_delivery.py, test_ask_priority.py, test_baseline.py, test_churn.py and test_floorasks.py name the undelivered count, the top priority, the planned count, the polls and the floor asks they compare with, so ruff falls by five",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:ruff-baseline.json"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Edit the five files, run tests and guards, mikemol-pycheck --ratchet --write, write stack851.json, submit behind 850.",
-      "evidence": "2026-11-02: G0 BEFORE the first edit of the five test files, queued behind stack 850 (W1460, inflight alone). Landed: 849 as 529b8fa4 (W1459, ruff 406 to 400). Pace 2026-11-02T10:24:28Z (PENDING for the 10:30:43Z landing): ruff-baseline.json behind, owes 90, 395 left after 850. 36 PLR2004 sites left in tests/ after 850 (41 minus these five is 36 after 851). K=5 by the lines read, one per file: test_alarm_delivery.py line 29 undelivered count 3; test_ask_priority.py line 26 priority 9; test_baseline.py line 45 planned 2; test_churn.py line 57 polls 4; test_floorasks.py line 43 floor asks 5. Edit: one module constant each (UNDELIVERED = 3, TOP_PRIORITY = 9, PLANNED = 2, POLLS = 4, FLOOR_ASKS = 5) after the imports or the TYPE_CHECKING block. Companions none; follow-ons none. Expected: ruff 395 to 390 on top of 850, mypy flat at 1092. Behaviour: none. Covering check: the five tests run directly. Not hook-imported. | 2026-11-02: 2026-11-02T11:00:07Z G0 before tick-open: advances W1461 (stack 851 inflight, began_ns 1793616760172414664) and W1462 (stack 852 queued). Actuator: wait on the verdicts, mark each card with the printed hash, then stage the next successor. The 34 sites left after 852 are test_layout (14, browser, per-test), src hook-imported files (8) and singles; the next stack takes singles (flow_reference 0.3, guarantees, no_waivers, operator_rate, overlap_claims, pieces_corpus, published_valid, rank_apply, static, work). Sensor: --in-gate --json and git log. Expected: 851 lands ruff 395 to 390, 852 lands 390 to 385, mypy flat at 1092.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-02: G0 BEFORE the first edit of the five test files, queued behind stack 850 (W1460, inflight alone). Landed: 849 as 529b8fa4 (W1459, ruff 406 to 400). Pace 2026-11-02T10:24:28Z (PENDING for the 10:30:43Z landing): ruff-baseline.json behind, owes 90, 395 left after 850. 36 PLR2004 sites left in tests/ after 850 (41 minus these five is 36 after 851). K=5 by the lines read, one per file: test_alarm_delivery.py line 29 undelivered count 3; test_ask_priority.py line 26 priority 9; test_baseline.py line 45 planned 2; test_churn.py line 57 polls 4; test_floorasks.py line 43 floor asks 5. Edit: one module constant each (UNDELIVERED = 3, TOP_PRIORITY = 9, PLANNED = 2, POLLS = 4, FLOOR_ASKS = 5) after the imports or the TYPE_CHECKING block. Companions none; follow-ons none. Expected: ruff 395 to 390 on top of 850, mypy flat at 1092. Behaviour: none. Covering check: the five tests run directly. Not hook-imported. | 2026-11-02: 2026-11-02T11:00:07Z G0 before tick-open: advances W1461 (stack 851 inflight, began_ns 1793616760172414664) and W1462 (stack 852 queued). Actuator: wait on the verdicts, mark each card with the printed hash, then stage the next successor. The 34 sites left after 852 are test_layout (14, browser, per-test), src hook-imported files (8) and singles; the next stack takes singles (flow_reference 0.3, guarantees, no_waivers, operator_rate, overlap_claims, pieces_corpus, published_valid, rank_apply, static, work). Sensor: --in-gate --json and git log. Expected: 851 lands ruff 395 to 390, 852 lands 390 to 385, mypy flat at 1092. | 2026-11-02: Landed 3db03f81 in stack 851; ruff 395 to 390, mypy flat 1092.",
       "issued_at": "2026-11-02T10:42:39Z",
       "minted_during": "interrupt",
       "caused_by": "W1383",
-      "last_worked": "2026-11-02T11:00:13Z",
+      "last_worked": "2026-11-02T11:05:50Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261102T110550Z",
       "manifest": [
         "tests/test_alarm_delivery.py",
         "tests/test_ask_priority.py",
@@ -35008,6 +35008,33 @@
         "tests/test_check_realizability.py",
         "tests/test_flow_cache.py",
         "tests/test_frontier_walker.py",
+        "ruff-baseline.json"
+      ]
+    },
+    {
+      "symbol": "W1463",
+      "title": "tests/test_flow_reference.py, test_guarantees.py, test_no_waivers.py, test_operator_rate.py and test_overlap_claims.py name the front share, the unscored count, the source floor, the open asks and the held count they compare with, so ruff falls by five",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:ruff-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Edit the five files, run tests and guards, mikemol-pycheck --ratchet --write, write stack853.json, submit behind 852.",
+      "evidence": "2026-11-02: G0 BEFORE the first edit of the five test files, queued behind stack 852 (W1462, inflight alone). Landed: 851 as 3db03f81 (W1461, ruff 395 to 390). Pace 2026-11-02T10:24:28Z (the tick-open of 11:00Z printed a fresher hook line, quoted in the G1): ruff-baseline.json behind, owes 90, 385 left after 852. 34 PLR2004 sites left after 852. K=5, one per file by the lines read: test_flow_reference.py line 71 random share 0.3; test_guarantees.py line 116 unscored 2; test_no_waivers.py line 46 source floor 100; test_operator_rate.py line 37 open asks 2; test_overlap_claims.py line 26 held 2. Edit: FRONT_SHARE = 0.3, UNSCORED = 2, MIN_SOURCES = 100, OPEN_ASKS = 2, HELD = 2. Companions none; follow-ons none. Expected: ruff 385 to 380 on top of 852, mypy flat at 1092. Behaviour: none (the 0.3 draw is the same value). Covering check: the five tests run directly. test_no_waivers is a standing guard and also runs in the gate. Not hook-imported.",
+      "issued_at": "2026-11-02T11:05:59Z",
+      "minted_during": "tick",
+      "caused_by": "W1383",
+      "last_worked": "2026-11-02T11:06:08Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "tests/test_flow_reference.py",
+        "tests/test_guarantees.py",
+        "tests/test_no_waivers.py",
+        "tests/test_operator_rate.py",
+        "tests/test_overlap_claims.py",
         "ruff-baseline.json"
       ]
     }
@@ -35212,12 +35239,7 @@
   ],
   "job_id": "481476b5",
   "heartbeat": "2026-10-29T04:11:13Z",
-  "lock": {
-    "holder": "session-nemik",
-    "taken_at": "2026-11-02T11:00:20Z",
-    "pid": 337543,
-    "start": 21144718
-  },
+  "lock": null,
   "predecessor_job_id": "1d7fe6d0",
   "leases": [
     {
@@ -43065,7 +43087,22 @@
         }
       ],
       "id": "nemik:R143"
+    },
+    {
+      "card": "W1461",
+      "trigger": "round 146: stacks 849 (W1459) 529b8fa4 = 10:41:39Z, 850 (W1460) aad08551 = 10:52:36Z and 851 (W1461) 3db03f81 = 11:04:25Z landed; stack 852 (W1462) inflight, key 1793617011877252343, began_ns 1793617469213007039; 853 (W1463, ruff 385 to 380) queued; PLR2004 down to 29 sites",
+      "root": "Verified from source (TZ=UTC reflog): 529b8fa4 main@{05:41:39 -0500} = 10:41:39Z, aad08551 05:52:36 = 10:52:36Z, 3db03f81 06:04:25 = 11:04:25Z; --in-gate lists W1462 inflight and W1463 queued; `mikemol-pycheck --ratchet` prints ruff 380/380 and mypy 1092/1092 (395 - 5 - 5 - 5 = 380 with 852 and 853 live in the tree); my own `python3 -m ruff ... --select PLR2004` prints 29 sites, matching the G1's 29 (test_layout 14, hook-imported src 8, singles). Gate walls from the landings: 849 to 850 10 min 57 s, 850 to 851 10 min 53 s, 851 to 852 about 11 min 49 s, and 0 s of empty gate at every landing (the invariant has now held on twelve landings in a row). The G1 is straight about its lapses: the standing-11 three-stamp table for 844 to 853 is NOT written (it says so and does not claim it), the four backfill ledger lines were written at 10:36Z (R145's first half met), the G0 stamps of W1461 to W1463 are minute-resolution again with no stampnote call, and the Edit hook's two-part refusal (constant and its use) was met with a codemod after the ratchet read clean. No new findings on the stacks themselves; the finding is forward-looking. I computed the ruff mass that is left at 380 (python3 -m ruff --statistics over src, tests, tools and checks): S603 53, PLC0415 50, S404 43, PT018 37, PLR2004 29, SLF001 19, C901 17, S607 14, PLR0913 13, DOC501 10, PLR0912 10, and a tail; so the subprocess class (S603, S404, S607) is 110 findings, 29 percent of what is left, and it is the next campaign-sized class after the 123 T201 prints the say module absorbed. No fixpoint is declared. Carried open findings, status on 2026-11-02 11:15Z: R145 on W1458 (table of the three stamps for 844 to 853 still owed; ledger backfill done), R95 second finding on W1349 (stamps), R95 third, R97 first, R98, R111 first, R102, R127 and R128 on W1219, R94 on W1348, R93 on W1347, R92 on W1346, R91 on W1345, R72 on W846, R100 on W910, R101 and R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288, R114 on W1395, R116 on W1383, R119 and R135 on W1396, R134 on W1282, R138 on W1288 (twelve in a row), R142 on W1451, R143 on W1246; two UNCLAIMED mtools:W2099 letters; codon owed with no stack.",
+      "findings": [
+        {
+          "finding": "The single-file PLR2004 series is nearly spent (29 left, 14 of them browser-bound in test_layout.py, 8 in hook-imported src files) and the next class is not planned. Subprocess is 110 of the 380 ruff findings left: S603 53 (subprocess call without a literal-argument check), S404 43 (import subprocess in 43 modules) and S607 14 (partial executable paths). The T201 campaign showed the shape that works for a class like this: one probe of all the sites by module (stdout contract against diagnostics, then the codon status), one small module that holds the thing (say.py), and a codemod that routes the callers (97 + 15 + 6 + 5 = 123 prints moved with no gate refusals). Do the same here before the singles run out: classify the 53 S603 sites by module (what they run: git, bazel, writer, ruff; whether the arguments are literal), design one wrapper module (a nemik.sh with run() over subprocess.run, holding the single S404 import and the single S603/S607 site, with the executable resolved to a full path once), check the hub claim, the BUILD.bazel registry and the codon census for the new module as say.py did, and write the K (about 100) on W1175 or a child.",
+          "finding_card": "W1175",
+          "finding_owner": "nemik session",
+          "finding_witness": "A W1175 evidence line (or a new child card) with the S603, S404 and S607 sites classified by module, the wrapper design and the first stack's K, written before the PLR2004 singles run out.",
+          "due": "2026-11-02"
+        }
+      ],
+      "id": "nemik:R144"
     }
   ],
-  "retro_counter": 143
+  "retro_counter": 144
 }

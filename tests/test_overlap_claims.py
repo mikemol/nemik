@@ -11,6 +11,7 @@ from nemik.overlaps import Holder, parse_claims, read_claims, row
 if TYPE_CHECKING:
     from pathlib import Path
 
+HELD = 2
 CLAIMS = (
     "claim:label:touch:mtools:nemik owner=69232:142119 id=a658761a3fca age=22s\n"
     "claim:label:touch:mtools:locks owner=69232:142119 id=b1 age=22s\n"
@@ -23,7 +24,7 @@ def test_claims_are_read_by_repo_and_tag() -> None:
     held = parse_claims(CLAIMS)
     assert held["mtools", "nemik"] == Holder("69232:142119", "22s")
     assert ("mtools", "locks") in held
-    assert len(held) == 2
+    assert len(held) == HELD
 
 
 def test_an_overlap_row_names_the_holder_when_there_is_one() -> None:

@@ -4039,3 +4039,7 @@
 2026-11-02T10:53:18Z  status W1460 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T10:53:41Z  interrupt W1462 minted    -         "tests/test_build_scope.py, test_cachestore.py, test_check_realizability.py, test_flow_cache.py and test_frontier_walker.py name the published floor, the stamp length, the exit code, the recompute count and the goal floor they compare with, so ruff falls by five"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
 2026-11-02T10:53:49Z  status W1462 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T11:05:50Z  status W1461 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T11:05:59Z  tick  W1463 minted    -         "tests/test_flow_reference.py, test_guarantees.py, test_no_waivers.py, test_operator_rate.py and test_overlap_claims.py name the front share, the unscored count, the source floor, the open asks and the held count they compare with, so ruff falls by five"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
+2026-11-02T11:06:08Z  status W1463 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T11:10:46Z  tick  W1463 advanced  sweep     "stack 851 landed 3db03f81, 852 inflight and 853 queued [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

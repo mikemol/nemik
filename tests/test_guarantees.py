@@ -13,6 +13,7 @@ from nemik.rank import Weights, inversion, main, policy_blocks, rank, unscored
 from nemik.score import load_bands, load_guarantees
 
 W = Weights(local=1, peer=2, peer_blocked=8)
+UNSCORED = 2
 B = load_bands()
 # I:L, not N: since luthen's W137 calibration a host-reach boundary crossing is critical only with
 # some impact, and these tests mean "critical" by R:H S:C.
@@ -113,7 +114,7 @@ def test_unscored_counts_open_waypoints_without_a_vector() -> None:
     _wp(g, "W2", "blocked")
     _wp(g, "W3", "done")
     _wp(g, "W4", vector=V.format(R="L", S="U"))
-    assert unscored(g, "a") == 2
+    assert unscored(g, "a") == UNSCORED
 
 
 def test_check_names_rule_and_pair_and_exits_one(

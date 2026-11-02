@@ -15,6 +15,7 @@ from pathlib import Path
 import nemik
 
 ROOT = Path(__file__).resolve().parents[1]
+MIN_SOURCES = 100
 FORBIDDEN = [
     "no" + "qa",
     r"type:\s*ig" + "nore",
@@ -43,7 +44,7 @@ def _sources() -> list[Path]:
 def test_no_python_file_waives_a_check() -> None:
     """No python file waives a check."""
     sources = _sources()
-    assert len(sources) > 100, "the scan found almost no files"
+    assert len(sources) > MIN_SOURCES, "the scan found almost no files"
     found = [
         f"{path.name}:{n}: {line.strip()[:90]}"
         for path in sources

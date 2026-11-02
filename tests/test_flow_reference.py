@@ -11,6 +11,8 @@ import pytest
 
 from nemik.flow import solve
 
+FRONT_SHARE = 0.3
+
 
 def _dense(
     cone: list[str], front: set[str], edges: list[tuple[str, str]], source: str
@@ -68,7 +70,7 @@ def test_the_sparse_elimination_equals_the_dense_solve_on_random_graphs(
     """The sparse elimination equals the dense solve on random graphs."""
     rng = random.Random(seed)
     cards = [f"c{i}" for i in range(18)]
-    front = {c for c in cards if rng.random() < 0.3}
+    front = {c for c in cards if rng.random() < FRONT_SHARE}
     # Edges point from a later card to an earlier one, plus a few back edges (cycles).
     needs: dict[str, list[str]] = {}
     for i, c in enumerate(cards):

@@ -15,6 +15,9 @@ if TYPE_CHECKING:
     from nemik.history import QueueDoc, Waypoint
 
 
+OPEN_ASKS = 2
+
+
 def _q(on_operator: list[str], other: list[str]) -> QueueDoc:
     cards = [
         {"symbol": s, "status": "blocked", "blocked_kind": "human"} for s in on_operator
@@ -34,7 +37,7 @@ def test_asks_entering_and_leaving_the_operator_are_counted_per_week() -> None:
     ]
     (row,) = weekly(snaps)
     assert (row["operator_asked"], row["operator_answered"]) == (3, 1)
-    assert row["operator_open"] == 2
+    assert row["operator_open"] == OPEN_ASKS
     assert row["operator_wait_days"] == pytest.approx(
         14.0, rel=0, abs=0
     )  # 2 open over 1 answered a week
