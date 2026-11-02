@@ -3981,3 +3981,5 @@
 2026-11-02T07:19:25Z  status W1445 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T07:20:17Z  interrupt W1446 minted    -         "tests/test_vtodo.py names the fold limit, the ask count and the missing-helper exit code, so ruff falls by four"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
 2026-11-02T07:21:38Z  status W1446 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T07:22:24Z  interrupt W1447 minted    -         "tests/test_starved.py names the declared and the default starvation days, so ruff falls by three"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
+2026-11-02T07:23:37Z  status W1447 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

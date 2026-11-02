@@ -443,9 +443,6 @@
  "tests/test_shaclinc.py": {
   "PLC2701": 1
  },
- "tests/test_starved.py": {
-  "PLR2004": 3
- },
  "tests/test_static.py": {
   "PLR2004": 1
  },
