@@ -378,14 +378,17 @@ class Options(argparse.Namespace):
     fires: bool
 
 
-def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
-    """nemik-critical: the longest chain of open work across the fleet, and what has slack."""
-    from nemik.check import default_root, survey
+def _parse(argv: list[str] | None, root: Path) -> Options:
+    """Parse nemik-critical's command line, `root` being the default of --root.
 
+    Returns:
+        The parsed options.
+
+    """
     ap = argparse.ArgumentParser(
         prog="nemik-critical", description=(main.__doc__ or "").splitlines()[0]
     )
-    ap.add_argument("--root", type=Path, default=default_root(), help="~/github")
+    ap.add_argument("--root", type=Path, default=root, help="~/github")
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--repo", help="the longest chain within this repo only (W333)")
     ap.add_argument(
@@ -404,44 +407,67 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         help="each open interrupt card that holds up planned (tick-minted) work, and how much "
         "longer the critical path is while it stays open (W347)",
     )
-    args = ap.parse_args(argv, namespace=Options())
-    if g is None:
-        g = Graph()
-        for _, qg, _ in survey(args.root):
-            if qg is not None:
-                g += qg
+    return ap.parse_args(argv, namespace=Options())
+
+
+def _scope(g: Graph, args: Options) -> set[str] | None:
+    """Return the cards --repo and --card confine the answer to, or None for the whole graph.
+
+    Returns:
+        The repo's cards, the card's cone, or their intersection when both are given.
+
+    """
     scope: set[str] | None = None
     if args.repo:
         scope = repo_scope(g, args.repo)
     if args.card:
         around = cone(g, args.card)
         scope = around if scope is None else scope & around
-    if args.fires:
-        found_fires = fires(g, scope)
-        if args.json:
-            say(json.dumps([f._asdict() for f in found_fires], indent=1))
-            return
-        say(f"fires holding up planned work: {len(found_fires)}")
-        for f in found_fires:
-            say(
-                f"  {f.cite}  delays the path {f.delay}, holds up {len(f.planned)} planned: "
-                + ", ".join(f.planned[:PLANNED_SHOWN])
-                + (" ..." if len(f.planned) > PLANNED_SHOWN else "")
-            )
-        return
-    if args.assume_done:
-        # nemik:W351: what-if. The same scope, on a copy where the named cards are closed.
-        before = critical(g, scope)
-        g = assume_done(g, args.assume_done)
-        after = critical(g, scope)
-        if args.json:
-            say(json.dumps({"before": before._asdict(), "after": after._asdict()}))
-            return
-        say(what_if(before, after, args.assume_done))
-        return
+    return scope
+
+
+def _report_fires(found_fires: list[Fire], args: Options) -> None:
+    """Print the interrupt cards that hold up planned work, as JSON or one line each."""
     if args.json:
-        say(json.dumps(critical_doc(g, scope), indent=1))
+        say(json.dumps([f._asdict() for f in found_fires], indent=1))
         return
+    say(f"fires holding up planned work: {len(found_fires)}")
+    for f in found_fires:
+        say(
+            f"  {f.cite}  delays the path {f.delay}, holds up {len(f.planned)} planned: "
+            + ", ".join(f.planned[:PLANNED_SHOWN])
+            + (" ..." if len(f.planned) > PLANNED_SHOWN else "")
+        )
+
+
+def _report_what_if(g: Graph, scope: set[str] | None, args: Options) -> None:
+    """Print the path and slack as if --assume-done's cards were closed, against today's."""
+    # nemik:W351: what-if. The same scope, on a copy where the named cards are closed.
+    before = critical(g, scope)
+    after = critical(assume_done(g, args.assume_done), scope)
+    if args.json:
+        say(json.dumps({"before": before._asdict(), "after": after._asdict()}))
+        return
+    say(what_if(before, after, args.assume_done))
+
+
+def _report_cycles(loops: list[tuple[list[str], bool]]) -> None:
+    """Print the dependency cycles, how many are true deadlocks, and each one's cards."""
+    # nemik:W324: a cycle never clears; a cross-repo one spans workstreams that cannot see it alone.
+    deadlocks = [c for c, human in loops if not human]
+    say(
+        f"dependency cycles: {len(loops)}, "
+        f"{len(deadlocks)} true deadlocks, {len(loops) - len(deadlocks)} the operator can break"
+    )
+    for cards, human in loops:
+        repos = {c.partition(":")[0] for c in cards}
+        mark = " [cross-repo]" if len(repos) > 1 else ""
+        kind = "operator can break" if human else "DEADLOCK"
+        say(f"  {kind}: {', '.join(cards)}{mark}")
+
+
+def _report_path(g: Graph, scope: set[str] | None) -> None:
+    """Print the critical path, one line per rank, then the slack count and the cycles."""
     found = critical(g, scope)
     loops = cycles(g)
     say(f"critical path: {found.length} open cards deep")
@@ -459,14 +485,27 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     )
     loose = sum(1 for s in found.slack.values() if s > 0)
     say(f"  {len(found.slack) - loose} cards at zero slack, {loose} with slack")
-    # nemik:W324: a cycle never clears; a cross-repo one spans workstreams that cannot see it alone.
-    deadlocks = [c for c, human in loops if not human]
-    say(
-        f"dependency cycles: {len(loops)}, "
-        f"{len(deadlocks)} true deadlocks, {len(loops) - len(deadlocks)} the operator can break"
-    )
-    for cards, human in loops:
-        repos = {c.partition(":")[0] for c in cards}
-        mark = " [cross-repo]" if len(repos) > 1 else ""
-        kind = "operator can break" if human else "DEADLOCK"
-        say(f"  {kind}: {', '.join(cards)}{mark}")
+    _report_cycles(loops)
+
+
+def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
+    """nemik-critical: the longest chain of open work across the fleet, and what has slack."""
+    from nemik.check import default_root, survey
+
+    args = _parse(argv, default_root())
+    if g is None:
+        g = Graph()
+        for _, qg, _ in survey(args.root):
+            if qg is not None:
+                g += qg
+    scope = _scope(g, args)
+    if args.fires:
+        _report_fires(fires(g, scope), args)
+        return
+    if args.assume_done:
+        _report_what_if(g, scope, args)
+        return
+    if args.json:
+        say(json.dumps(critical_doc(g, scope), indent=1))
+        return
+    _report_path(g, scope)

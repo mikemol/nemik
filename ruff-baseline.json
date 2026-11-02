@@ -16,11 +16,6 @@
   "PLR0913": 1,
   "S101": 2
  },
- "src/nemik/blocks.py": {
-  "C901": 1,
-  "PLR0912": 1,
-  "PLR0914": 1
- },
  "src/nemik/cachestore.py": {
   "S301": 1,
   "S403": 1
@@ -47,10 +42,7 @@
   "S607": 1
  },
  "src/nemik/critical.py": {
-  "C901": 1,
-  "PLC0415": 3,
-  "PLR0912": 1,
-  "PLR0914": 1
+  "PLC0415": 3
  },
  "src/nemik/endpoint.py": {
   "S404": 1,
