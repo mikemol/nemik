@@ -23,7 +23,7 @@ from typing import TYPE_CHECKING, TypedDict
 
 from mikemol.frontier.walk import frontier as walk
 from rdflib import RDF, Graph, Literal, URIRef
-from rdflib.namespace import DCTERMS, PROV
+from rdflib.namespace import DCTERMS, PROV, XSD
 
 from nemik.adapter import BASE, NEMIK, OPERATOR, OSLC_CM
 from nemik.index import index
@@ -420,7 +420,9 @@ def annotate(g: Graph) -> None:
         ]
         # nemik:W529: the per-blocker finding is a SPARQL constraint (LandedBlockerShape).
         if landed and len(landed) == len(set(g.objects(node, NEMIK.blockedOn))):
-            g.add((node, NEMIK.allBlockersLanded, Literal(True)))
+            g.add(
+                (node, NEMIK.allBlockersLanded, Literal("true", datatype=XSD.boolean))
+            )
 
     # nemik:W529: a blocked_on entry that is a symbol with prose run on (nemik:W110) is the
     # MalformedBlockerShape SPARQL constraint, not a marker.
